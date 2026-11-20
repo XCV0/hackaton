@@ -1,0 +1,38 @@
+[Query rewriting rules]
+1. **Preserve the original meaning and intent**, while making the query clearer and more
+retrieval-friendly:
+- Remove colloquial or filler phrases.
+- Explicitly mention time, location, and named entities ONLY when given. Do not add unnecessary
+details.
+- **Do not delete any complete sentences in the original query that convey substantive information**
+(given passage, main question, etc.).
+- Remember that the rewritten query is the only source of information for the retriever.
+2. Adjust the rewritten query using the system’s reasoning:
+- If results were too broad → make the query more specific.
+- If important aspects were missing → add them explicitly.
+- If results were off-topic → clarify the main topic and disambiguate the concepts.
+- If the structure was unclear → reorganize for better retrieval.
+3. The new rewritten query must **meaningfully differ** from the previous rewritten query (e.g.,
+emphasize a different aspect, add missing constraints, reorganize structure, clarify ambiguous
+elements).
+[Output format]
+Return **exactly** the following JSON object **as a single continuous line with no surrounding
+whitespace, line breaks, or markdown formatting**:
+{
+"language_names": ["<lang_code>", ... ],
+"rewritten_query": "<cleaned, rewritten query>"
+}
+- ‘language_names‘ must be a list of **valid** language codes from the pool, containing
+**at most three** entries and always including the primary language of the original query unless the
+system’s reasoning indicates otherwise.
+- ‘rewritten_query‘ must be a single string (may be empty).
+USER PROMPT:
+[ORIGINAL USER QUERY]
+{USER_QUERY}
+[PREVIOUS QUERY FOR RETRIEVAL]
+{REWRITTEN_QUERY}
+[PREVIOUS LANGUAGE CORPORA FOR RETRIEVAL]
+{PREV_LANGS}
+[REASON FOR ADDITIONAL RETRIEVAL]
+{REASEON}
+Figure 5: Planner Prompt template w/ critique. (continued)

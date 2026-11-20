@@ -1,0 +1,53 @@
+A PREPRINT
+To address these challenges, Retrieval-Augmented Generation (RAG) has emerged as a powerful paradigm, combining
+the generative prowess of LLMs with dynamic access to external knowledge sources [4, 5, 6, 7]. By retrieving
+relevant documents or facts at inference time, RAG systems can ground their responses in up-to-date, authoritative
+information, significantly reducing hallucinations and improving factual accuracy. This approach has proven invaluable
+for applications requiring real-time knowledge, such as customer support, legal research, and scientific discovery.
+Yet, traditional RAG frameworks are not without their own limitations. Most existing RAG systems rely on dense vector
+embeddings and similarity search over unstructured text corpora. This design assumes a well-defined search space and
+often requires the number of documents to retrieve to be specified in advance. Such constraints become problematic in
+scenarios where the search space is unknown, the data is semi-structured or structured (e.g., key-value pairs JSON,
+tables), or when relationships between entities are complex and multi-faceted. Moreover, traditional RAG pipelines
+heavily depend on embedding and reranking models to select the most relevant documents, introducing inefficiencies
+and potential bottlenecks [8, 9].
+Graphs offer a compelling alternative for representing and querying complex, interconnected data. By modeling
+information as nodes and edges, graphs naturally capture relationships, hierarchies, and multi-modal connections that
+are difficult to express in flat text. Graphs have achieved remarkable success across a wide range of domains, including
+healthcare, education, recommender systems, and etc. For example, in education, graph-based representations such
+as knowledge graphs, Bayesian networks and causal graphs facilitate personalized learning pathways and knowledge
+tracing by capturing dependencies between concepts and student progress [10, 11, 12, 13]. Recommender systems
+leverage graph machine learning to model user-item interactions and uncover latent preferences, leading to more
+accurate and diverse recommendations [14, 15, 16]. By representing domain knowledge as directed graphs, these
+approaches enable powerful reasoning, efficient inference, and the integration of heterogeneous data sources, driving
+advances in both predictive performance and interpretability.
+Graph-based Retrieval-Augmented Generation (Graph RAG) leverages this expressive power, enabling more flexible,
+context-aware retrieval and reasoning. In [17], The authors propose a framework where an LLM constructs a knowledge
+graph from source documents, detects hierarchical communities within the graph, and generates summaries for each
+community in a bottom-up manner. For query answering, the system combines relevant community summaries using a
+map-reduce approach to produce comprehensive answers. In [18], The authors present a unified framework for Graph
+RAG, identifying a multiple modular operators that underpin retrieval pipelines. They systematically compare existing
+Graph RAG methods across diverse QA datasets, introduce new variants that achieve state-of-the-art results, and
+demonstrate that explicit knowledge graph modeling enhances reasoning, factuality, and interpretability. In [19], The
+authors present MedGraphRAG, a graph-based Retrieval-Augmented Generation framework tailored for the medical
+domain to enhance LLM safety and reliability. In [20], the authors provide a survey of approaches that integrate KGs
+with LLM-based RAG to advance reliable, focused retrieval for specialized applications.
+The contributions of this paper are threefold. First, we propose a novel end-to-end Graph RAG framework that constructs
+RDF-based knowledge graphs from semi-structured JSON data, enabling dynamic and scalable retrieval-augmented
+generation. Second, we develop a LPG framework by first constructing a text-to-Cypher query generation module,
+leveraging LLMs to translate user questions into executable Cypher queries in real time by augmenting prompts with
+graph schema, structure, and metadata. Third, we conduct a comprehensive empirical comparison between our RDF
+and LPG-based Graph RAG architectures and traditional embedding-based RAG, demonstrating that both graph-based
+approaches consistently outperform standard RAG in accuracy, reasoning, and response quality. The remainder of this
+paper is organized as follows: Section 2 reviews background; Section 3 describes the data and experimental setup;
+Section 4 details our methodology; Section 5 presents results and discussion; Section 6 outlines potential avenues for
+future research and Section 7 concludes the paper.
+2 Background
+In this section, we provide an overview of some of the key concepts relevant to the rest of paper.
+2.1 Retrieval-Augmented Generation (RAG)
+Retrieval-Augmented Generation (RAG) is a paradigm that enhances large language models (LLMs) by integrating
+external knowledge sources into the generation process. Unlike standard LLMs, which rely solely on their training
+data and may produce outdated or hallucinated information, RAG systems dynamically retrieve relevant documents
+or facts at inference time. This retrieval step grounds the model’s responses in up-to-date, authoritative information,
+significantly improving factual accuracy and reducing hallucinations.
+2

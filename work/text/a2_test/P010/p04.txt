@@ -1,0 +1,34 @@
+Fig. 2: RAG-Driver Overview: Given a query comprising a video of the current driving scenario and its corresponding control
+signal, the process starts with the input being fed into a Retrieval Engine. It searches within a memory database for driving
+experiences that are similar to the current scenario, thereby providing relevant In-context Learning (ICL) samples. Subsequently,
+a Multi-Modal Large Language Model (MLLM) processes both the current query and the retrieved in-context learning samples,
+where the encoded video embedding (zq vo or zicl vo ) is further projected through a MLP to align it with the language embedding
+(zq t , zicl t , or cicl) from the text encoder, so that the model can learn to associate relevant visual and textual features more
+effectively. Based on high-level task instructions, the model engages in various prediction tasks: Action Explanation, Action
+Justification, and Next Control Signal Prediction.
+R3×k×224×224, we first split the video into multiple temporal
+sequences, each consisting of patches that share the same
+spatial location across different frames. These patches are then
+transformed through a linear projection for a vision transformer
+to output video embedding zvo ∈ R2048×1024. The video
+encoder is pre-trained with video-language contrastive learning
+(i.e. CLIP4clip [49]) without further fine-tuning.
+Cross-Modality Projector We then leverage a two-layer MLP
+to project and align the encoded video embedding zvo with
+language token embeddings zv ∈ R2048×4096.
+fp(zvo) = GELU (W2 · GELU (W1 · zvo)) (1)
+In particular, the projector fp takes the form in Eq. (1), where
+we use GELU [28] as an activation function. We train the
+projector with a two-stage training strategy as detailed in
+Sec. III-B.
+Large Language Model Backbone Finally, the LLM takes in
+both aligned video embedding zv and language embedding zt
+of textual context information and task instruction to predict
+both the textual action explanation and the numerical control
+signal. We adopt Vicuna 1.5 7B [87], which is instruction-tuned
+based on LLaMA2 [74] as our LLM backbone. For the decoder-
+Fig. 3: Video Encoder architecture. Video is first split into k×
+32 × 32 patches concatenated in time, where these patches are
+linear projected to video embedding. Then, the model is trained
+with video-language contrastive learning (CLIP4clip) [49] to
+obtain a language-aligned video representation.

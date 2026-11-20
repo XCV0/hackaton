@@ -1,0 +1,91 @@
+Q: Which autosomal dominant diseases are linked to the development 
+of supernumerary breast tissue?
+Action 1: 
+Selection: Text retrieval module
+Feedback 1: The retrieved document is incorrect. 
+The current retrieval module may not be helpful to narrow down the 
+search space.
+Action 2: 
+Selection: Hybrid retrieval module
+Entity: autosomal dominant diseases (disease)
+Relational: phenotype present
+Feedback 2: The retrieved document is incorrect.
+There is only one entity but there may be more. Please extract one 
+more entity and relation.
+Action 3: 
+Selection: Hybrid retrieval module
+Entity: autosomal dominant diseases (disease), supernumerary breast 
+tissue (effect/phenotype)
+Relational: phenotype present, associated with
+Feedback 3: Accept. ✅
+(a) Error Type: Incorrect Module & Missing Entity
+Q: Please find me genes or proteins linked to pediatric liver cancer, 
+interacting with PAXIP1, highly expressed in lung adenocarcinoma, with 
+a nuclear signal and similarity to GAGE/PAGE proteins.
+Action 1: 
+Selection: Hybrid retrieval module
+Entity: PAXIP1 (gene/protein), pediatric liver cancer (disease), lung 
+adenocarcinoma (disease)
+Relational: ppi, associated with, expression present
+Feedback 1: The retrieved document is incorrect. 
+Entities “pediatric liver cancer” and “lung adenocarcinoma” are incorrect. 
+Please remove or substitute these entities. 
+Relations “associated with” and “expression present” are incorrect. 
+Please remove or substitute these relations. 
+Action 2: 
+Selection: Hybrid retrieval module
+Entity: PAXIP1 (gene/protein)
+Relational: ppi
+Feedback 2: Accept. ✅
+(b) Error Type: Incorrect Entity/Relation
+Figure 6: HYBGRAG is interpretable. In examples from STARK-PRIME, HYBGRAG successfully refines its
+entity and relation extraction based on corrective feedback from the critic module.
+Table 10: The design choices in HYBGRAG are necessary in STARK. denotes the settings of HYBGRAG,
+and denotes the baseline that use ground truth during inference.
+Validator Commentor STARK-MAG STARK-PRIME Hit@1 Hit@5 Recall@20 MRR Hit@1 Hit@5 Recall@20 MRR
+w/o Context ICL 0.6105 0.7073 0.6245 0.6541 0.1946 0.2592 0.2685 0.2251
+w/ Context 5-Shot 0.6465 0.7407 0.6458 0.6884 0.2406 0.3006 0.3038 0.2676
+w/ Context ICL 0.6540 0.7531 0.6570 0.6980 0.2856 0.4138 0.4358 0.3449
+Oracle Oracle 0.7193 0.7824 0.6840 0.7479 0.3606 0.4320 0.4358 0.3932
+entity} →{useful relation} →... →{useful relation}
+→{neighboring entity}”, and ranked by VSS.
+The retrieved reference is used as the valida-
+tion context to check if it is reliable to answer the
+question. The validator takes the output of the gen-
+erator and the validation context as the input. As
+the prompts for the generator and the validator are
+specialized for different tasks, this allows the val-
+idator to offer meaningful validation. Although
+the ground truth of the retrieval is not available in
+CRAG, we construct corrective feedback based on
+the router’s action and the evaluation, as shown in
+Table 12. If the graph retrieval module is used and
+the evaluation is incorrect, then either the retrieval
+input (extracted entity and relation or the domain)
+is incorrect, or selecting graph retrieval module is
+incorrect; if the text retrieval module is used and
+the evaluation is incorrect, then the information in
+the current batch of documents is considered as not
+useful to answer the question.
+The examples in the prompts are collected from
+the validation set provided by CRAG. Since the
+entity and relation types are not given by CRAG,
+and the KGs are only accessible with the provided
+API, we collect them from the questions in the
+validation set, as shown in Table 13. The radius of
+the extracted ego-graph is no more than two. Four
+self-reflection iterations have been done. A batch
+contains five web pages.
+C.1.2 Baseline Implementation
+STARK We use “ada-002” as the embedding
+model for dense retrieval and ranking, as used in
+the paper. HYBGRAG uses Claude 3 Sonnet as
+the base model, while ReAct, Reflexion, AVATAR,
+and VSS with LLM reranker use Claude 3 Opus,
+which is designed to be more powerful than Claude
+3 Sonnet5. For QAGNN and Dense Retriever, be-
+cause of the need of training, RoBERTa is used
+as the base model. In experiments where the base
+LLM is not specified, we default to using Claude 3
+5https://www.anthropic.com/news/claude-3-family
+890

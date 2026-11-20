@@ -1,0 +1,111 @@
+International Conference on Computer Vision, pages
+12065–12075.
+Gautier Izacard, Mathilde Caron, Lucas Hosseini, Sebas-
+tian Riedel, Piotr Bojanowski, Armand Joulin, and
+Edouard Grave. 2022. Unsupervised dense informa-
+tion retrieval with contrastive learning. Transactions
+on Machine Learning Research.
+Omar Khattab and Matei Zaharia. 2020. ColBERT:
+Efficient and effective passage search via contextu-
+alized late interaction over BERT. In Proceedings
+of the 43rd International ACM SIGIR conference on
+research and development in Information Retrieval,
+pages 39–48.
+Junnan Li, Dongxu Li, Silvio Savarese, and Steven Hoi.
+2023. BLIP-2: Bootstrapping language-image pre-
+training with frozen image encoders and large lan-
+guage models. In International conference on ma-
+chine learning, pages 19730–19742. PMLR.
+Zihan Ling, Zhiyao Guo, Yixuan Huang, Yi An, Shuai
+Xiao, Jinsong Lan, Xiaoyong Zhu, and Bo Zheng.
+2025. Mmkb-rag: A multi-modal knowledge-based
+retrieval-augmented generation framework. arXiv
+preprint arXiv:2504.10074.
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae
+Lee. 2023. Visual instruction tuning. Advances in
+neural information processing systems, 36:34892–
+34916.
+Kenneth Marino, Mohammad Rastegari, Ali Farhadi,
+and Roozbeh Mottaghi. 2019. OK-VQA: A visual
+question answering benchmark requiring external
+knowledge. In Proceedings of the IEEE/cvf con-
+ference on computer vision and pattern recognition,
+pages 3195–3204.
+Thomas Mensink, Jasper Uijlings, Lluis Castrejon,
+Arushi Goel, Felipe Cadar, Howard Zhou, Fei Sha,
+André Araujo, and Vittorio Ferrari. 2023. Encyclope-
+dic VQA: Visual questions about detailed properties
+of fine-grained categories. In Proceedings of the
+IEEE/CVF International Conference on Computer
+Vision, pages 3113–3124.
+Jingyuan Qi, Zhiyang Xu, Rulin Shao, Yang Chen, Jin
+Di, Yu Cheng, Qifan Wang, and Lifu Huang. 2024.
+RoRA-VLM: Robust retrieval-augmented vision lan-
+guage models. arXiv preprint arXiv:2410.08876.
+Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya
+Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sas-
+try, Amanda Askell, Pamela Mishkin, Jack Clark, and
+1 others. 2021. Learning transferable visual models
+from natural language supervision. In International
+conference on machine learning, pages 8748–8763.
+PmLR.
+Dustin Schwenk, Apoorv Khandelwal, Christopher
+Clark, Kenneth Marino, and Roozbeh Mottaghi. 2022.
+A-OKVQA: A benchmark for visual question answer-
+ing using world knowledge. In European conference
+on computer vision, pages 146–162. Springer.
+Quan Sun, Yuxin Fang, Ledell Wu, Xinlong Wang,
+and Yue Cao. 2023. EVA-CLIP: Improved train-
+ing techniques for CLIP at scale. arXiv preprint
+arXiv:2303.15389.
+Grant Van Horn, Elijah Cole, Sara Beery, Kimberly
+Wilber, Serge Belongie, and Oisin Mac Aodha. 2021.
+Benchmarking representation learning for natural
+world image collections. In Proceedings of the
+IEEE/CVF conference on computer vision and pat-
+tern recognition, pages 12884–12893.
+Shaohan Wang, Licheng Zhang, Zheren Fu, and Zhen-
+dong Mao. 2025. Dacl-rag: Data augmentation strat-
+egy with curriculum learning for retrieval-augmented
+generation. arXiv preprint arXiv:2505.10493.
+Tobias Weyand, Andre Araujo, Bingyi Cao, and Jack
+Sim. 2020. Google landmarks dataset v2-a large-
+scale benchmark for instance-level recognition and
+retrieval. In Proceedings of the IEEE/CVF confer-
+ence on computer vision and pattern recognition,
+pages 2575–2584.
+Yibin Yan and Weidi Xie. 2024. EchoSight: Advanc-
+ing visual-language models with wiki knowledge. In
+Findings of the Association for Computational Lin-
+guistics: EMNLP 2024, pages 1538–1551.
+Wei Yang, Jingjing Fu, Rui Wang, Jinyu Wang, Lei
+Song, and Jiang Bian. 2025. OMGM: Orchestrate
+multiple granularities and modalities for efficient
+multimodal retrieval. In Proceedings of the 63rd An-
+nual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), pages 24545–
+24563.
+Peitian Zhang, Zheng Liu, Shitao Xiao, Zhicheng Dou,
+and Jian-Yun Nie. 2024a. A multi-task embedder for
+retrieval augmented LLMs. In Proceedings of the
+62nd Annual Meeting of the Association for Compu-
+tational Linguistics (Volume 1: Long Papers), pages
+3537–3553.
+Tao Zhang, Ziqi Zhang, Zongyang Ma, Yuxin Chen,
+Zhongang Qi, Chunfeng Yuan, Bing Li, Junfu Pu,
+Yuxuan Zhao, Zehua Xie, and 1 others. 2024b.
+mR2AG: Multimodal retrieval-reflection-augmented
+generation for knowledge-based VQA. arXiv
+preprint arXiv:2411.15041.
+A Appendix
+A.1 Dataset setup
+InfoSeek Dataset: The InfoSeek dataset comprises
+1.3 million samples derived from a Wikipedia cor-
+pus. Given the non-public availability of the orig-
+inal external knowledge base, we utilize 100,000
+Wikipedia articles provided by EchoSight as our
+knowledge source. This dataset features 8.9K
+human-authored visual information-seeking ques-
+tions and 1.3M automatically generated questions,
+partitioned into training, validation, and test sets.
+41144

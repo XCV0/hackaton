@@ -1,0 +1,33 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D013,R001,DV-0Ge,MS1,M-0Ge,PCE,11.42,%,champion,,,,,11.42,%,11.42,%,primary,,6,,"Table 3, 0Ge column",,η (%) 11.42 12.13 9.47 6.48 5.43,extracted,,
+D013,R002,DV-0Ge,MS1,M-0Ge,Voc,0.527,V,champion,,,,,527,mV,0.527,V,primary,,6,,"Table 3, 0Ge column",,Voc (mV) 527 592 618 650 647,extracted,,
+D013,R003,DV-0Ge,MS1,M-0Ge,Jsc,32.89,mA/cm2,champion,,,,,32.89,mA/cm2,32.89,mA/cm2,primary,,6,,"Table 3, 0Ge column",,Jsc (mA/cm2) 32.89 31.59 27.48 22.12 20.35,extracted,,
+D013,R004,DV-0Ge,MS1,M-0Ge,FF,65.93,%,champion,,,,,65.93,%,65.93,%,primary,,6,,"Table 3, 0Ge column",,FF (%) 65.93 64.89 55.78 45.06 41.21,extracted,,
+D013,R005,DV-40Ge,MS1,M-40Ge,PCE,12.13,%,champion,,,,,12.13,%,12.13,%,primary,,6,,"Table 3, 40Ge column",,η (%) 11.42 12.13 9.47 6.48 5.43,extracted,,
+D013,R006,DV-40Ge,MS1,M-40Ge,Voc,0.592,V,champion,,,,,592,mV,0.592,V,primary,,6,,"Table 3, 40Ge column",,Voc (mV) 527 592 618 650 647,extracted,,
+D013,R007,DV-40Ge,MS1,M-40Ge,Jsc,31.59,mA/cm2,champion,,,,,31.59,mA/cm2,31.59,mA/cm2,primary,,6,,"Table 3, 40Ge column",,Jsc (mA/cm2) 32.89 31.59 27.48 22.12 20.35,extracted,,
+D013,R008,DV-40Ge,MS1,M-40Ge,FF,64.89,%,champion,,,,,64.89,%,64.89,%,primary,,6,,"Table 3, 40Ge column",,FF (%) 65.93 64.89 55.78 45.06 41.21,extracted,,
+D013,R009,DV-60Ge,MS1,M-60Ge,PCE,9.47,%,champion,,,,,9.47,%,9.47,%,primary,,6,,"Table 3, 60Ge column",,η (%) 11.42 12.13 9.47 6.48 5.43,extracted,,
+D013,R010,DV-60Ge,MS1,M-60Ge,Voc,0.618,V,champion,,,,,618,mV,0.618,V,primary,,6,,"Table 3, 60Ge column",,Voc (mV) 527 592 618 650 647,extracted,,
+D013,R011,DV-60Ge,MS1,M-60Ge,Jsc,27.48,mA/cm2,champion,,,,,27.48,mA/cm2,27.48,mA/cm2,primary,,6,,"Table 3, 60Ge column",,Jsc (mA/cm2) 32.89 31.59 27.48 22.12 20.35,extracted,,
+D013,R012,DV-60Ge,MS1,M-60Ge,FF,55.78,%,champion,,,,,55.78,%,55.78,%,primary,,6,,"Table 3, 60Ge column",,FF (%) 65.93 64.89 55.78 45.06 41.21,extracted,,
+D013,R013,DV-80Ge,MS1,M-80Ge,PCE,6.48,%,champion,,,,,6.48,%,6.48,%,primary,,6,,"Table 3, 80Ge column",,η (%) 11.42 12.13 9.47 6.48 5.43,extracted,,
+D013,R014,DV-80Ge,MS1,M-80Ge,Voc,0.65,V,champion,,,,,650,mV,0.65,V,primary,,6,,"Table 3, 80Ge column",,Voc (mV) 527 592 618 650 647,extracted,,
+D013,R015,DV-80Ge,MS1,M-80Ge,Jsc,22.12,mA/cm2,champion,,,,,22.12,mA/cm2,22.12,mA/cm2,primary,,6,,"Table 3, 80Ge column",,Jsc (mA/cm2) 32.89 31.59 27.48 22.12 20.35,extracted,,
+D013,R016,DV-80Ge,MS1,M-80Ge,FF,45.06,%,champion,,,,,45.06,%,45.06,%,primary,,6,,"Table 3, 80Ge column",,FF (%) 65.93 64.89 55.78 45.06 41.21,extracted,,
+D013,R017,DV-100Ge,MS1,M-100Ge,PCE,5.43,%,champion,,,,,5.43,%,5.43,%,primary,,6,,"Table 3, 100Ge column",,η (%) 11.42 12.13 9.47 6.48 5.43,extracted,,
+D013,R018,DV-100Ge,MS1,M-100Ge,Voc,0.647,V,champion,,,,,647,mV,0.647,V,primary,,6,,"Table 3, 100Ge column",,Voc (mV) 527 592 618 650 647,extracted,,
+D013,R019,DV-100Ge,MS1,M-100Ge,Jsc,20.35,mA/cm2,champion,,,,,20.35,mA/cm2,20.35,mA/cm2,primary,,6,,"Table 3, 100Ge column",,Jsc (mA/cm2) 32.89 31.59 27.48 22.12 20.35,extracted,,
+D013,R020,DV-100Ge,MS1,M-100Ge,FF,41.21,%,champion,,,,,41.21,%,41.21,%,primary,,6,,"Table 3, 100Ge column",,FF (%) 65.93 64.89 55.78 45.06 41.21,extracted,,
+D013,R021,DV-40Ge,MS2,M-40Ge,Rsh,47600,Ohm*cm2,champion,,,,,4.76*10^4,Ohm cm2,47600,Ohm*cm2,primary,,7,,,,Rsh = 4.76*104 Ω cm2,extracted,,"champion 40Ge device, dark IV (exponent 4 in text)"
+D013,R022,DV-100Ge,MS2,M-100Ge,Rsh,100,Ohm*cm2,,,,,,order of 100,Ohm cm2,100,Ohm*cm2,primary,,7,,,,down to the order of 100 Ω cm2 for 100Ge,extracted,,order-of-magnitude estimate from dark IV
+D013,R023,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,1,,,,the champion efficiency of 12.1 % obtained with 40 % Ge,extracted,R005,Abstract; rounded
+D013,R024,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,6,,,,The optimal composition appears to be 40Ge with a,extracted,R005,text; rounded
+D013,R025,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,8,,,,maintains highly promising PCEs of,extracted,R005,text; rounded
+D013,R026,DV-60Ge,MS1,M-60Ge,PCE,9.7,%,champion,,,,,9.7,%,9.7,%,primary,,8,,,,12.1 % and 9.7 % for 40Ge and 60Ge respectively,extracted,R009,text gives 9.7 % vs Table 3 9.47 %
+D013,R027,DV-80Ge,MS1,M-80Ge,PCE,6.5,%,champion,,,,,6.5,%,6.5,%,primary,,6,,,,diminution down to 6.5 and 5.5 % respectively,extracted,R013,text; rounded
+D013,R028,DV-100Ge,MS1,M-100Ge,PCE,5.5,%,champion,,,,,5.5,%,5.5,%,primary,,6,,,,diminution down to 6.5 and 5.5 % respectively,extracted,R017,text; rounded
+D013,R029,DV-0Ge,MS1,M-0Ge,Voc,0.527,V,champion,,,,,527,mV,0.527,V,primary,,6,,,,The gradual increase of Voc from 527 to 647,extracted,R002,text
+D013,R030,DV-100Ge,MS1,M-100Ge,Voc,0.647,V,champion,,,,,647,mV,0.647,V,primary,,6,,,,The gradual increase of Voc from 527 to 647,extracted,R018,text
+D013,R031,DV-0Ge,MS1,M-0Ge,Jsc,32.89,mA/cm2,champion,,,,,32.89,mA/cm2,32.89,mA/cm2,primary,,6,,,,decrease of Jsc from 32.89 to 20.35 mA/cm2,extracted,R003,text
+D013,R032,DV-100Ge,MS1,M-100Ge,Jsc,20.35,mA/cm2,champion,,,,,20.35,mA/cm2,20.35,mA/cm2,primary,,6,,,,decrease of Jsc from 32.89 to 20.35 mA/cm2,extracted,R019,text

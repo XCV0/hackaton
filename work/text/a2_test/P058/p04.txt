@@ -1,0 +1,93 @@
+Metric Value
+#Landmark (L) 71
+#Img (N ) 1422
+Avg img/landmark (N/L) 20.03
+#Unique elements (UE ) 221
+Avg elements per landmark 3.59
+Table 2: The statistic of our proposed GranuVistaVQA.
+ROUGE-L
+BERT-F1 LLM Score
+Qwen3-VL-8B
+Qwen3-VL-8B†
+Qwen-VL-Max
+GPT-4.1-Mini
+GPT-4o
+Claude-3.5-sonnet
+Claude-haiku-4.5
+Gemini-2.5-Pro
+Figure 2: The results of evaluating MLLMs on Granu-
+VistaVQA. † means the fine-tuned LLM.
+ing hallucinated ones, and resolving synonyms to
+canonical forms (protocol in Appendix B.6).
+3.3 Data Statistic and Evaluation
+Statistic Table 2 summarizes the dataset statis-
+tics. The multi-view design creates natural partial
+observations. close-ups capture fine details but
+miss broader structures, while panoramic shots
+show overall layouts but lose granular informa-
+tion (Figure 1). On average, individual images
+cover only 34% of their landmark’s element inven-
+tory. This validates our core premise that answer-
+ing element-level questions requires aggregating
+evidence across complementary viewpoints. The
+statistic of image distribution is explained in Ap-
+pendix B.7.
+Evaluation Metrics To evaluate our framework,
+we report three evaluation metrics: ROUGE-L (Lin,
+2004) and BERT-F1 (Zhang et al., 2020) computed
+against the gold-standard reference, and an LLM-
+as-a-judge score (Zheng et al., 2023). For the LLM-
+Score, we use an ensemble of three strong LLMs
+(GPT-4.1, Gemini-2.5-Pro, claude-haiku-4-5 (Ope-
+nAI, 2024; Team and Google, 2025; Anthropic,
+2025)) to rate each explanation on a 0 − 100 scale
+under a weighted rubric covering Coverage (40%),
+Faithfulness (40%), and Cohesion (20%); the final
+LLM Score is the mean across judges to reduce
+single-model variance (Chia et al., 2024).
+Benchmark Evaluation We evaluated state-of-
+the-art (SOTA) different powerful MLLMs on our
+benchmark. Figure 2 shows that current models
+struggle across all metrics as shown in Section 5.1.
+Even the best-performing model achieves limited
+success on ROUGE-L and BERT-F1, while all mod-
+els perform poorly on LLM-as-Judge evaluation,
+which measures factual accuracy and hallucination
+control. These results highlight the challenge of
+multi-granularity information alignment, motivat-
+ing our GranuRAG framework.
+4 Methodology
+Based on the above analysis, we introduce our Gra-
+nuRAG framework as shown in Figure 3: given
+a query image I and candidate element set E, we
+(1) localize and match visual regions to elements
+in E, yielding visible subset ˆE(I); (2) retrieve
+hierarchical evidence for ˆE(I); and (3) generate
+attribution-constrained output grounded in the re-
+trieved evidence and global description.
+4.1 Visual Region Detection and Filtering
+The first stage localizes salient architectural re-
+gions in image I without requiring prior knowl-
+edge of which elements are present. We em-
+ploy YOLO-World (Cheng et al., 2024), an open-
+vocabulary object detector, to identify candidate re-
+gions based on generic architectural primitives such
+as columns, carvings, and decorative motifs. This
+detection strategy offers broad coverage across di-
+verse heritage landmarks without domain-specific
+fine-tuning.
+Raw detections often contain redundant bound-
+ing boxes that capture the same visual content at
+multiple scales. To address this issue, we apply
+overlap-based filtering: when two boxes overlap
+by more than 80%, we retain the smaller one to
+preserve fine-grained architectural details. The sen-
+sitive analysis of this overlap percentage will be
+shown in Appendix A.2. This denoising step pro-
+duces a refined set of cropped regions:
+B(I) = {b1, b2, . . . , bK } (2)
+where each bk represents a distinct visual region
+likely to contain meaningful architectural content.
+The filtered crops serve as visual queries for the
+subsequent matching stage.
+10478

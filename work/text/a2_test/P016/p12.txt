@@ -1,0 +1,96 @@
+A Models Vesions
+For all our experiments, we use the versions of the
+models and datasets published on HuggingFace
+(via API for GPTs). All artefacts are released under
+the Apache-2.0 licence and MIT licence (reported
+in the official repositories).
+Model Version
+GPT-4o OpenAI API (gpt-4-o)
+Command-R CohereForAI/c4ai-command-r-v01
+Llama3-8b meta-llama/Meta-Llama-3-8B-Instruct
+Table 5: List the versions of the models proposed in
+this work. We used the configurations described in §3
+in the repositories for each model *(access verified on
+10.09.2025).
+B Difference between High- and
+Low-resource Languages
+We define the differences between high-resource
+(HR) and low-resource (LR) settings using the con-
+siderations already taken in previous work (Ranaldi
+et al., 2024, 2025b). Table 6 reports the language
+distribution of CommonCrawl, and Table 7 the
+number of documents in the Wikipedia dump used
+in our work (§3).
+Language Percentage
+English (en) 46.3%
+Russian (ru) 6.0%
+German (de) 5.4%
+Chinese (zh) 5.3%
+French (fr) 4.4%
+Japanese (ja) 4.3%
+Spanish (es) 4.2%
+Other 23.1%
+Table 6: Language distribution of (Common Crawl,
+2021).
+C Documents in Wikimedia Dump
+Language Percentage
+English (en) 41,488k
+Russian (ru) 13,784k
+German (de) 20,772k
+Chinese (zh) 7,875k
+Italian (it) 10,462k
+French (fr) 17,813k
+Japanese (ja) 6,626k
+Spanish (es) 12,865k
+Portuguese (pt) 5,637k
+Bengali (bn) 767k
+Finnish (fn) 272k
+Arabic (ar) 1,050k
+Thai (th) 876k
+Vietnamese (vi) 2,067k
+Telogu (te) 124k
+Table 7: Language distribution of Wikimedia Dump
+introduced in §3.
+D Retrieval Details
+We use Cohere as the retrieval system and Wiki-
+media_dump as the database. Cohere in wikipedia-
+2023-11-embed-multilingual-v3 (available on hug-
+gingface) provides individual documents embed-
+ded with multilingual embedding model Co-
+here_Embed_V3. For each question in the eval-
+uation data, we retrieve 50 relevant documents and
+then rerank the top-5 most relevant ones using dot
+score between query embedding and document em-
+beddings. We use this procedure as recommended
+in the use cases (case1, case2).
+E Retrieval Bergen
+To reproduce the retrieval setting proposed in
+(Chirkova et al., 2024), we used the open-source li-
+brary available at the following link. We reproduce
+the same settings operating via BGE-m3.
+F Data Composition
+As introduced in §3.1 we use (i) MLQA (Lewis
+et al., 2020a), (ii) MKQA (Longpre et al., 2021)
+and (iii) XOR-TyDi QA (Asai et al., 2021) as they
+best represent multilingual open-ended question-
+answering tasks. MLQA is manually trans-
+lated from SQuAD v1.1 (Rajpurkar et al., 2016),
+MKQA and XOR-TyDi QA are machine trans-
+lated and manually controlled by Natural Ques-
+tions (Kwiatkowski et al., 2019) and TyDi QA
+(Clark et al., 2020), respectively. We use parts of
+the datasets in the languages listed in Table 11. For
+each language, we used the same questions and,
+consequently, the same number of questions to
+avoid any imbalance in double-checking by retriev-
+ing the corresponding ids. Details on the number
+of instances are given in Table 8.
+Dataset #language #language #Total
+available used used
+MLQA 1.5k 0.8k 9.6k
+MKQA 2k 1.2k 8.4k
+XOR-TyDi QA 0.6k 0.4k 2.4k
+Table 8: Number of instances used in our evaluations
+equally distributed among the languages in Table 11.
+We denote by k 1000 instances.
+708

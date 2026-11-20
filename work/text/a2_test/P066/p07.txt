@@ -1,0 +1,91 @@
+name FaithfulnessQAC) includes human ratings
+for faithfulness, CF, and PF.
+4.1.4 Constructing UniqueQAC
+To support Claim 2, we created a version of the
+dataset with unique questions by selecting 87 in-
+scope triplets from FaithfulnessQAC where each
+question was distinct. For the out-of-scope exam-
+ples, we randomly sampled 45 triplets. Each triplet
+includes a question, its answer (randomly selected
+from the LLM outputs), and corresponding con-
+text. This resulted in the 132-example Unique-
+QAC dataset, labeled for CF, CR, and RA.
+4.1.5 Constructing ClinicalQAC
+To support Claim 3, we further enriched Unique-
+QAC by asking two ophthalmic surgeons to label
+each triplet across three axes:
+1. Clinical Harm: Is the response potentially
+harmful?
+2. Helpfulness: Does the response assist the pa-
+tient?
+3. Appropriateness: Is any content clinically
+inappropriate or incorrect?
+Most original responses were safe and helpful,
+so we replaced a subset with responses authored
+by clinicians that intentionally included unhelpful,
+harmful, or inappropriate content to balance the
+dataset. The resulting 132-example dataset, Clin-
+icalQAC, supports clinical risk evaluation. Fig-
+ure 16 shows the final class distribution.
+We provide further details of the dataset curation
+process in Appendix E.
+4.2 Experiments
+We break down this section by Claims 1, 2, and 3,
+detailing the different experiments we conducted
+to support them and discussing the results.
+4.2.1 Demonstrating alignment of
+Conversational Faithfulness with human
+perception
+Setup. To demonstrate that our metric, Conversa-
+tional Faithfulness, aligns more closely with human
+perception of faithfulness than previous definitions,
+we perform the following:
+1. We treat CF as a diagnostic test that predicts
+human PF. We compare it with the classifica-
+tion based on the previous definition of faith-
+fulness, which we call RF (inspired by RA-
+GAS), and conduct a ROC analysis for both.
+To do this, we use human ratings of CF and
+PF from the FaithfulnessQAC dataset.
+2. We use Pearson, Spearman, and Kendall Tau
+correlation coefficients to correlate human rat-
+ings of CF and RF with PF.
+We used human-annotated CF and RF scores
+rather than LLM-generated ones, eliminating po-
+tential model artifacts from the analysis.
+Results. From Figure 5, we observe that our met-
+ric CF achieves an AUC of 0.98, outperforming
+RF (0.83), demonstrating superior alignment with
+human ratings.
+The correlation analysis in Table 1 reinforces the
+advantages of CF. All three metrics reveal that CF
+exhibits significantly stronger alignment with hu-
+man judgments (≥ 0.84) compared to RF (≤0.57).
+The consistency across these measures suggests
+that CF better captures both linear and rank-order
+relationships with human perceptions of faithful-
+ness. These results demonstrate that CF outper-
+forms existing faithfulness metrics in conversa-
+tional contexts, offering a more reliable automated
+measure aligned with human judgment.
+0.0 0.2 0.4 0.6 0.8 1.0
+False Positive Rate
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0True Positive Rate
+Receiver Operating Characteristic Comparison
+ROC curve for CF (area = 0.98)
+ROC curve for RF (area = 0.83)
+Figure 5: ROC curve for CF and RF. The ROC curve
+for CF has an area of 0.98 and the ROC curve for RF
+has an area of 0.83.
+Correlation Type CF vs PF RF vs PF
+Pearson correlation 0.90 0.57
+Spearman correlation 0.90 0.57
+Kendall Tau correlation 0.84 0.50
+Table 1: Correlation coefficients for CF and RF against
+PF
+16706

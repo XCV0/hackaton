@@ -1,0 +1,97 @@
+Optimizing Retrieval-Augmented Generation with
+Elasticsearch for Enhanced Question-Answering
+Systems
+Jiajing Chen
+New York University
+New York, USA
+Zhen Qi
+Northeastern University
+Boston, USA
+Runyuan Bao
+Johns Hopkins University
+Baltimore, USA
+Jianjun Wei
+Washington University in St. Louis
+St Louis, USA
+ 
+The Chinese University of Hong
+Kong
+Hong Kong, China
+ 
+ 
+ 
+ 
+Abstract—This study aims to improve the accuracy and
+quality of large-scale language models (LLMs) in
+answering questions by integrating Elasticsearch into the
+Retrieval Augmented Generation (RAG) framework. The
+experiment uses the Stanford Question Answering Dataset
+(SQuAD) version 2.0 as the test dataset and compares the
+performance of different retrieval methods, including
+traditional methods based on keyword matching or
+semantic similarity calculation, BM25-RAG and TF-IDF-
+RAG, and the newly proposed ES-RAG scheme. The
+results show that ES-RAG not only has obvious advantages
+in retrieval efficiency but also performs well in key
+indicators such as accuracy, which is 0.51 percentage
+points higher than TF-IDF-RAG. In addition,
+Elasticsearch's powerful search capabilities and rich
+configuration options enable the entire question-answering
+system to better handle complex queries and provide more
+flexible and efficient responses based on the diverse needs
+of users. Future research directions can further explore
+how to optimize the interaction mechanism between
+Elasticsearch and LLM, such as introducing higher-level
+semantic understanding and context-awareness
+capabilities, to achieve a more intelligent and humanized
+question-answering experience.
+Keywords-Retrieval-enhanced generation, Elasticsearch,
+Large language models, Information retrieval
+I. INTRODUCTION
+In today's era of information explosion, efficiently extracting
+valuable information from massive data has become a crucial
+issue. With the continuous advancement of natural language
+processing technology, Large Language Models (LLMs) have
+shown unprecedented application potential in many fields with
+their powerful text understanding and generation capabilities
+[1]. However, although LLMs are able to answer questions or
+complete tasks based on their internally learned knowledge
+base, they often have limitations in mastering the latest or
+specific domain knowledge [2]. To solve this problem,
+researchers proposed a method that combines retrieval-
+augmented generation (RAG), which combines external
+document retrieval with LLM so that the model can take
+advantage of more information when generating responses. An
+extensive and up-to-date information source significantly
+improves the quality and accuracy of answers [3]. The core
+idea of RAG is that when faced with a query, the retrieval
+system is first used to find the most relevant documents from a
+large-scale document collection, and then these documents are
+provided to LLM as context to help it better understand the
+background of the problem. And generate more accurate
+answers accordingly [4].
+The traditional RAG framework usually uses a method based
+on keyword matching or semantic similarity calculation to
+implement the document retrieval process. Although this
+method has achieved certain success, it has difficulty in
+processing complex queries, improving the recall rate, and
+ensuring the diversity of retrieval results. There are still certain
+limitations. To this end, this article proposes an innovative
+improvement plan—that is, using Elasticsearch (ES) as the core
+search engine in RAG. Elasticsearch is an open-source
+distributed search and analysis engine. It not only supports full-
+text search but also provides rich aggregation functions to
+quickly and accurately index and retrieve unstructured data.
+Compared with traditional methods, using Elasticsearch can
+define query conditions more flexibly, support multiple types
+of field types such as text, numbers, etc., and have powerful
+sorting capabilities and efficient performance, which is
+important for improving the overall performance of the RAG
+system. The combination of RAG and NLP has been widely
+applied in many areas, such as credit fraud [5-8] and risk
+management [9-11].
+ 
+Jiacheng Hu*
+Tulane University
+Hongye Zheng
+����������������

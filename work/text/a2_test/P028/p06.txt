@@ -1,0 +1,44 @@
+6 Author name / Procedia Computer Science 00 (2024) 000–000 
+state of the art performance on a number of downstream tasks including question answering. State of the art semantic 
+models that this work experiments with are those provided  by OpenAI [8], Cohere [10] Microsoft’s E5 [14],  Ollama 
+[22], JAIS [23], and BAAI general embedding (BGE) [24]. The reason we wanted to experiment with JAIS is that it 
+has been launched as the “state-of-the-art Arabic-centric foundation and instruction-tuned open generative large 
+language model” [23]. Unfortunately, its smallest full model is quite heavy, and we were unable to run it using 
+available computational resources so in order to obtain results, we used its quantized version. As for BGE, even though 
+it was designed primarily for the Chinese language, its multilingual version was trained on Arabic documents and the 
+aim of this investigation was to capture the extent to which this model can handle Arabic. A summary of used models 
+is shown in Table 2.  
+3.3. The Vector Database  
+The vector store that we chose to use is Chroma DB6 which is a free, open source, easy to use database that can be 
+efficiently employed to store and retrieve embedding vectors. While Chroma might not be the best choice for very 
+large datasets, given the size of the datasets we experimented with, it is ideal.  
+3.4. The Generators   
+In the context of RAG models, the generator is the component that takes as input the user-entered query and the 
+pieces of text likely to contain an answer (context), and generates an informative and concise response for the question 
+from the context. Typically, the generator is a large language model, and the query and context are presented to it in 
+the form of a prompt with the following structure: "Use the given context to answer the given question. Be as concise 
+as possible. Context: {context}, Question: {question}." While this is the general structure of the prompt, it is often 
+expanded based on the particular nature and requirements of the RAG being developed.  
+In this work, we experimented with 5 different LLMs as generators. Those are: OpenAI’s GPT3.5 Turbo, Mistral 
+7B[25], Llama 3[26], Mixtral [27], and JAIS [23]. To evaluate the various models, the Precision, Recall, and F1 Score 
+metrics were borrowed from the information retrieval and question answering (QA) domains. In the context of QA, 
+these metrics are calculated based on the overlap of tokens between the system-generated answer and the provided 
+gold standard answer. Another used metric is the BLEU score (Bilingual Evaluation Understudy) which is borrowed 
+from the field of machine translation. In the context of QA, BLEU measures how well a system-generated answer 
+matches a set of reference answers by calculating the precision of n-grams (sequences of n words) in the generated 
+answer against those in the reference answer. The main issue with metrics like BLEU, precision, recall, and F-score 
+is that they primarily focus on exact matches and surface-level features, often failing to capture semantic similarity. 
+To overcome this limitation, the cosine similarity metric was also used to compare the embeddings of the system 
+generated response to the embeddings of the gold standard response.  
+4. Experiments and Results  
+4.1. Retriever Related Experiments 
+4.1.1. Experiment 1: Investigating the impact of different semantic embedding models on retrieval  
+The goal of this experiment was to assess which semantic embedding models have the highest retrieval rates. In 
+the datasets used, each question was associated with a segment from which an answer could be retrieved. The 
+evaluation focused on the effectiveness of various models in accurately identifying and extracting relevant text 
+segments based on the input queries. To this end, embeddings for segments were generated using the semantic 
+embedding model being tested and stored in Chroma. Query embeddings were then generated using the same model 
+and used to retrieve the top 5 matches from Chroma. Average recall@k (equation 1) was employed as one of two  
+ 
+ 
+6https://www.trychroma.com

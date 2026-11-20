@@ -1,0 +1,107 @@
+facts and the corresponding knowledge graph can
+be found in the Appendix fig. 7. More examples of
+facts can be found in J.
+To model causality, a Fact is connected to a sep-
+arate Reason node via an HAS_REASON relationship.
+This Reason node serves a crucial dual function.
+First, the node may store the exact justification
+provided by the company’s management during an
+earnings call. For instance, if management states
+there is a “Positive outlook for continued growth”,
+that exact phrase is captured as a Reason. Second,
+the node can store the LLM’s own analytical inter-
+pretation. For example, the LLM may paraphrase
+“Phenomenal week learning from customers” in the
+earnings call to a structured Reason: ‘Indicates a
+positive sentiment towards customer relationships
+and feedback.’
+Each Fact node is stored in Neo4j, and its 1,536-
+dimensional embedding is indexed for semantic
+similarity searches. By separating the what (the
+Fact node) from the why (the Reason node), we
+encourage diversity in analysis. It allows agents
+to query for all firms reporting a certain metric,
+thereby enabling a meta-analysis of how different
+management teams frame similar results.
+3.3.2 Facts Delegation
+Let each extracted fact be represented as fi =
+(τi, ci). Define a routing function: ϕ : F −→
+P(A), A = {AHP, AHE, ACOMP} that
+maps each fact to one or more downstream agents.
+Each downstream agent works with a pre-filtered,
+highly relevant stream of information. For exam-
+ple, a fact of type “Result” (e.g., a reported revenue
+figure) would be delegated to the Historic Perfor-
+mance Agent, which compares it to the firm’s own
+past results. In contrast, a “Forward-Looking” fact,
+such as a management projection, would be routed
+to the Historic Earnings Agent, tasked with as-
+sessing the credibility and groundedness of man-
+agerial claims, and such facts are prime candidates
+for its scrutiny. Similarly, a “Risk Disclosure” fact
+is sent to the Competitor Agent to determine if
+the risk is firm-specific or sector-wide, and to the
+Historic Earnings Agent to evaluate the specificity
+and transparency of the disclosure.
+3.4 Multi-Agent Reasoning
+Operating in parallel, a cluster of three specialist
+LLM agents query the CTKG to produce analytical
+memoranda (Memos), which serve as inputs for a
+final synthesis stage.
+3.4.1 Historic Performance Agent.
+The design of this agent is motivated by the prin-
+ciple that the intrinsic value of a firm, as reflected
+in its financial statements, serves as a long-term
+anchor for its stock price (Ou and Penman, 1989).
+For an extracted fact as the 5-tuple:f =
+(s, q, τ, µ, ν), with semantic embedding is v ∈ Rd.
+Let H(s, µ) =
+{
+f ′ = (s, q′, τ ′, µ, ν′) : q′ <
+q
+}
+, be the history of the same ticker–metric pair.
+The agent defines cosine similarity σ(v, vτ ) =
+⟨v, vτ ⟩/(∥v∥∥vτ ∥). It then retrieves k most sim-
+ilar historical records
+Nk(f ) =
+k
+arg top
+h∈H(s,m)
+σ(v, vh).
+For a new fact f = (s, q, RESULT, µ, ν) let f −1 =
+(s, q−1, RESULT, µ, ν−1) be the recent prior fact
+having Type = Result with the same ticker s and
+metric µ.
+Using the historical facts, the agent then pro-
+duces a structured comparison that flags trend
+shifts, contextualizing a firm’s current reported re-
+sults against its own historical performance. The
+agent computes the period-on-period change with
+value ν: ∆ν = ν − ν−1, δ = ∆ν ν−1 , then,
+the agent scrutinizes reasons behind the change.
+Define the mapping rho : F −→ R which assigns
+to each extracted fact f ∈ F its corresponding
+REASON node r = ρ(f ) ∈ R. The agent assesses
+tuple (δt, r), by inspecting the reason r behind per-
+formance, it flags instances where management’s
+commentary fails to reconcile the current figure
+with its historical benchmark. Citing an evidence
+in our corpus, when Codexis (CDXS) reported a
+FY-2019-Q4 gross margin of 47 %, the agent sur-
+faced the prior-year figure of 51 % and correctly
+highlighted a profitability erosion despite double-
+digit top-line growth.
+3.4.2 Historic Earnings Agent.
+Grounded in classic attribution theory (Heider,
+1958; Kelley, 1967), this agent operates on the
+premise that management claims backed by ver-
+ifiable, quantitative evidence are perceived as more
+credible, and grounded statements elicit stronger
+market reactions and analyst revisions than unsup-
+ported rhetoric (Mayew et al., 2015).
+Similar to the Historic Performance agent, the
+Historic Earnings agent retrieves the k most similar
+facts but differently, it retrieves all types of facts,
+not limited to Type = Result. The Historic Earnings
+3059

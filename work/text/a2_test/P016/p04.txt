@@ -1,0 +1,96 @@
+racy of the response without requiring a substantial
+additional computational effort.
+3 Experiments
+We select three multilingual open-domain question-
+answering tasks (§3.1) to compare our approaches.
+We perform the retrieval and inference phases de-
+scribed in §3.2 and perform the evaluations as pre-
+sented in §3.3.
+3.1 Tasks & Datasets
+We use the following question-answering (QA)
+tasks: (i) MLQA (Lewis et al., 2020a), (ii) MKQA
+(Longpre et al., 2021) and (iii) XOR-TyDi QA
+(Asai et al., 2021) as they best represent multilin-
+gual open-ended question-answering tasks. These
+datasets are extensions of resources that originated
+in English. MLQA and MKQA are manually and
+machine-translated, whereas XOR-TyDi QA is
+translated by professional annotators. We provide
+details about the languages covered and the number
+of questions in Appendices F and I.
+3.2 Experimental Setup
+To explore RAG pipelines beyond English, we ap-
+ply the methods introduced in §2 based on retrieval
+and inference phases.
+Retrieval We use Cohere as the retrieval sys-
+tem R and Wikimedia_dump as the database D
+for all experiments1. Specifically, in the version2
+provided by Cohere, individual articles are em-
+bedded with multilingual embedding model Co-
+here_Embed_V3 (we report the dump composi-
+tion in Table 7). Following the approaches pro-
+posed by Asai et al. (2023); Chirkova et al. (2024);
+Ranaldi et al. (2025d), we retrieve the most rele-
+vant passages and use top−5 as in-context knowl-
+edge during inference (details in Appendix D). As
+described in §2.2 we either use (i) monolingual
+retrieval (monoRAG and tRAG) which consists of
+retrieval on DSL with documents only in a sin-
+gle specific language, or (ii) multilingual retrieval
+(MultiRAG and CrossRAG) which consists of
+retrieval on ⋃ Di∈L that is the union of multiple Di
+in L used in the evaluated task.
+Prompting We instruct the LLMs using the
+prompts introduced in §2. We then include ex-
+plicit instructions that elicit the model to consider
+1This pipeline makes it easy to search Wikipedia for infor-
+mation and to restrict it to specific languages.
+2Cohere/wikipedia-2023-11-embed-multilingual-v3
+the input query (#Question:), retrieved documents
+(#Reference Evidence:) and deliver the final an-
+swer in an “evaluated language” that, by the con-
+struction of our experiments, corresponds to the
+query language.
+Translation As a translation system, in the main
+discussion, we use Google Translate3 to
+translate for both tRAG and CrossRAG. Further-
+more, we investigate the effect of using LLMs as
+translation systems operating via GPT-4o and other
+approaches detailed discussed in §4.
+Models & Inference Settings To get a compre-
+hensive evaluation of existing RAG pipelines, we
+use three different LLMs: GPT-4o (OpenAI, 2023),
+Llama-3-8b-instruct (Touvron et al., 2023) and
+Command-R-35b4 (Cohere Inc., 2024). Detailed
+settings and model versions are in Appendix A.
+We use greedy decoding in all experiments to en-
+sure a more deterministic generation process. We
+set most deterministic temperatures to 0 and the
+maximum generation length to 2048.
+3.3 Evaluation
+We use flexible exact-match accuracy following
+Schick et al. (2023); Mallen et al. (2023), which
+is based on whether or not ground-truth answers
+are included in the generated answers provided by
+the models instead of a strict exact match. Fur-
+thermore, for a complete comparison, we follow
+Chirkova et al. (2024) to conduct multilingual eval-
+uations using the SQUAD evaluation script and
+3-gram character level.
+4 Results & Discusssions
+The empirical results across different languages on
+MKQA, MLQA and XOR TyDi QA are reported
+in Figure 2. Overall, the experiments confirm
+that extending the retrieval scope to multilingual
+contexts (MultiRAG) improves the RAG-based
+pipelines, outperforming language-specific mono-
+lingual RAG (monoRAG) and naïve approaches
+that address the language barrier using query trans-
+lation (tRAG). Indeed, although monolingual re-
+trieval (i.e., monoRAG) achieves benefits com-
+pared to the baseline, the retrieved documents
+may be limited and consequently could not contain
+3used via Google Translate API python package
+4To simplify discussion for the rest of the paper, we will
+refer to these models using Llama-3-8b and Command-R.
+700

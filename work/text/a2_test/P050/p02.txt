@@ -1,0 +1,149 @@
+, , Yixin Chen, Ying Xiong*, Shangyu Wu, Xiangrui Ke, Nan Guan, and Chun Jason Xue
+(a) Query-based Fusion
+(b) Parametric Fusion
+(c) Latent-based Fusion
+Database Top-K Chunks
+QueryTop-K Passages
+Prompts
+Answer: Mount Everest
+LLM
+Database Top-K LoRAs Merge Parameters Merged LLM
+Offline LoRA Training
+Offline Adapter Training
+Database Top-K Embeddings LLM with Adapter
+Query: which mountain is the highest in the world ?
+Figure 1: Three retrieval fusion paradigms in RAG: query-
+based fusion, parametric fusion, and latent-based fusion.
+baselines, including robust zero-shot generalization to biomed-
+ical QA.
+2 Background and Motivation
+2.1 Retrieval Fusions
+Retrieval-augmented generation (RAG) enhances large language
+models (LLMs) by integrating external knowledge into the genera-
+tion process, which has become a dominant paradigm for knowledge-
+intensive tasks [12]. Formally, given a query 𝑞, a retriever will search
+an external database for the top-𝑘 related chunks as external evi-
+dence, and the LLM generates the answer 𝑎 conditioned on 𝑞 and
+the retrieved evidence.
+The key to RAG is how to integrate evidence into the LLM gen-
+eration process. As shown in Figure 1, existing approaches can be
+categorized into Query-based Fusion, Parametric Fusion, and
+Latent-based Fusion. Query-based fusion concatenates retrieved
+chunks into the input, leveraging LLMs’ in-context learning capa-
+bilities [12, 20]. Parametric fusion encodes external knowledge into
+parameters (e.g., LoRA modules) and then augments the LLMs by
+merging those parameters of top-𝑘 related evidence [22, 23]. Differ-
+ent from parametric fusion, latent-based fusion encodes external
+knowledge into feature embeddings and then fuses them into LLMs
+via lightweight adapters [28].
+2.2 Motivation
+To improve RAG performance, a simple approach is to increase 𝑘:
+more candidates increase the likelihood that the gold evidence is
+retrieved. However, we observe a counterintuitive phenomenon
+when scaling the amount of retrieved context. In our preliminary
+study shown in Figure 2, we gradually increase the number of
+retrieved samples (and correspondingly the number of evidence-
+containing samples). As expected, the evidence recall increases
+monotonically with 𝑘, indicating improved coverage of gold evi-
+dence. Yet we observe a clear decoupling between retrieval recall
+and downstream performance: although recall keeps increasing,
+1 2 3 4 5 6
+Top-k
+0
+20
+40
+60
+80
+100Answer Recall@k (%)
+S-RAG
+Answer Recall@k
+F1@k
+30
+32
+34
+36
+F1 (higher is better)
+(a) llama3.2-1B
+1 2 3 4 5 6
+Top-k
+0
+20
+40
+60
+80
+100Answer Recall@k (%)
+PRAG
+Answer Recall@k
+F1@k
+30.0
+32.5
+35.0
+37.5
+F1 (higher is better)
+ (b) llama3.2-1B
+1 2 3 4 5 6
+Top-k
+0
+20
+40
+60
+80
+100Answer Recall@k (%)
+S-RAG
+Answer Recall@k
+F1@k
+24
+26
+28
+F1 (higher is better)
+(c) Qwen2.5-1.5B
+1 2 3 4 5 6
+Top-k
+0
+20
+40
+60
+80
+100Answer Recall@k (%)
+PRAG
+Answer Recall@k
+F1@k
+26
+28
+30
+F1 (higher is better)
+ (d) Qwen2.5-1.5B
+Figure 2: The top-k recall and performance based on different
+backbones.
+task performance (e.g., accuracy) improves only up to a turning
+point and then deteriorates as𝑘 further grows.
+The reason for this phenomenon is simple but consequential:
+larger 𝑘 brings in not only additional relevant evidence, but also
+more irrelevant, redundant, and sometimes conflicting chunks. Query-
+based fusion requires LLMs to recognize and then ignore those irrel-
+evant chunks. Parametric fusion may directly pollute the original
+LLM parameters when injecting the parameters of those irrelevant
+chunks. Latent-based fusion usually adopts a soft-fusion way to
+integrate features into LLMs’ hidden states, which might be vul-
+nerable to irrelevant features. These limitations suggest that the
+degradation is not due to a specific implementation, but rather a
+systematic challenge of retrieval fusion under noisy evidence.
+Finally, among the fusion families, we choose to optimize latent-
+based fusion for efficiency and modularity. Compared with query-
+based fusion, latent-based fusion avoids long input sequences, thereby
+mitigating the quadratic attention cost with respect to input length.
+Parametric fusion cannot process queries in batches, as it cannot
+merge the parameters of different queries simultaneously. Besides,
+latent-based fusion offers great flexibility to design different light-
+weight adapters that filter those irrelevant features before injecting
+them into the LLMs.
+3 Methodology
+3.1 Overview
+We study the retrieval-augmented question answering (QA) where
+an LLM answers a batch of queries 𝑄 with the help of an external
+corpusC. A retriever returns top-𝑘 chunks for each query𝑞𝑏.:
+C𝑘(𝑞𝑏) ={𝑐𝑏,1,...,𝑐𝑏,𝑖,...,𝑐𝑏,𝑘} (1)
+Unlike prompt-based RAG that concatenates retrieved text into the
+input, we keep the prompt short and fuse retrievals at the repre-
+sentation level. Specifically, we introduce a filter component that
+2

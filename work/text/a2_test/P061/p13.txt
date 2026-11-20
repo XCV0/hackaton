@@ -1,0 +1,73 @@
+0 2000 4000 6000 8000 10000 12000 14000 16000
+Token Index
+0.00
+0.01
+0.02
+0.03
+0.04
+0.05
+0.06Attention Score
+Short-Dependency Task: Attention Distribution
+0 2000 4000 6000 8000 10000 12000 14000 16000
+Token Index
+0.000
+0.002
+0.004
+0.006
+0.008
+0.010
+0.012Attention Score
+Long-Dependency Task: Attention Distribution
+Figure 7: Examples of attention distribution for short- and long-dependency tasks. Attention is more concentrated
+for short-dependency tasks (top), while it is more dispersed across the input for long-dependency tasks (bottom).
+sentences account for 80% of the total attention
+in short-dependency cases, whereas 63 sentences
+are required to reach the same threshold in long-
+dependency tasks. This disparity suggests that the
+model dynamically adapts its attention mechanism
+based on the density and distribution of relevant
+information in the input context. To provide further
+intuition, we select representative examples from
+each task type and visualize their corresponding
+attention distributions over the context in Figure 7.
+A.3 Attention on Initial Token
+In practical applications of RAG, retrieved content
+may sometimes be entirely irrelevant to the given
+question. This leads to a key research question:
+How do LLMs allocate attention when the retrieved
+context is completely irrelevant to the question?
+Experiment Inspired by prior work on attention
+sinks (Xiao et al., 2023), which reveals that initial
+tokens often collect significant attention scores. We
+hypothesize that the attention allocated to initial
+token increases with decreasing context relevance.
+To test this, we sample questions from HotpotQA
+(Yang et al., 2018) and PopQA (Mallen et al., 2023),
+and construct four context settings: (1) top 1–20
+retrieved documents, (2) top 41–60 documents, (3)
+top 81–100 documents, and (4) 20 randomly sam-
+pled documents from the 2018 Wikipedia corpus
+(Karpukhin et al., 2020). For each question, we
+pair it with these different context sets and measure
+the attention scores allocated to the initial token.
+The analysis is conducted using 16 attention heads
+from the 14th layer of the Llama-3.1-8B-Instruct
+model.
+Results & Insights The results are shown in Fig-
+ure 2(c). We observe a consistent increase in at-
+tention scores for the initial token as context rele-
+vance decreases. Across different retrieved docu-
+ment sets, the attention to the initial token remains
+relatively stable. However, a substantial rise is
+observed when completely irrelevant documents
+(i.e., random samples) are used as context. These
+findings suggest that attention on initial token may
+serve as a useful signal for estimating the relevance
+of retrieved content.
+B Details of Data Construction
+This section introduces an automated annotation
+pipeline based on question–answer pairs, with the
+detailed procedure outlined in Algorithm 2. The
+pipeline consists of two stages: labeling and ver-
+ification. In the labeling stage, we employ an un-
+8468

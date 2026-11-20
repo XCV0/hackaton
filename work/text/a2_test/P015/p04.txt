@@ -1,0 +1,101 @@
+where Iformat is an indicator function that equals 1
+if the trajectory format is correct, and 0 otherwise.
+The rscore measures the correctness of the model’s
+prediction spred compared to the gold score sgold.
+The hyperparameter λ ∈ [0, 1) is introduced to
+impose a soft penalty. The value of λ balances the
+trade-off between strict correctness and leniency
+in reward shaping. In Exp. 3.4, we investigate the
+impact of varying λ on model performance.
+2.3 Distillation
+For online deployment, although RL with explicit
+reasoning can substantially improve performance,
+it also incurs prohibitive inference costs due to the
+generation of long reasoning traces. To reconcile
+these objectives, we deploy a distillation scheme
+that preserves the teacher’s performance capabili-
+ties while eliminating the runtime overhead of trace
+generation. Concretely, we use a large reinforced
+R³A teacher (R³A-7B) to distill into a compact
+1.5B student model on 50k samples. The distilled
+1.5B model takes the query-document pair as input
+and directly outputs the relevance score. Unlike
+the teacher model, it does not generate reasoning
+traces, which minimizes online latency.
+Formally, let pS (· | x; θS ) denote the student’s
+predictive distribution obtained by applying a soft-
+max to its logits, and let pT (· | x; θT ) be the final
+score distribution from the teacher model. The
+training objective is:
+L = −Ex∼D
+[∑
+k
+pT (k | x; θT ) log pS (k | x; θS )
+]
+(3)
+3 Experiment
+In this section, we conduct both offline and online
+experiments to evaluate the performance of the
+proposed R³A method.
+3.1 Datasets
+We evaluate relevance assessment performance on
+both an internal industrial dataset, NoteRel, and a
+public benchmark, T2Ranking. Summary statis-
+tics for the two datasets are reported in Table 1.
+NoteRel. To assess relevance in a practical set-
+ting, we constructed NoteRel, a dataset derived
+from our online RAG system deployed on Xiao-
+hongshu.
+We extracted real-world user queries and their
+corresponding retrieved documents from online
+system logs. To generate high-quality training sam-
+ples, we utilized document citation signals as a
+Datasets NoteRel T²Ranking Training Test Training Test
+#0 2002 300 \ 1000
+#1 1858 300 \ 1000
+#2 1999 300 \ 1000
+Table 1: Summary statistics of datasets.
+preliminary filter. For each query and candidate
+documents, the response generator performed M
+forward passes. A document was classified as a
+high-confidence positive sample if it was cited in
+at least N generated responses; otherwise, it was
+treated as a challenging hard negative. In our imple-
+mentation, we set M = 5 and N = 2. To further
+account for distributional noise, we supplemented
+the dataset with random negatives sampled from
+the global corpus.
+To establish "gold" standard labels, we collected
+7k samples for professional human annotation
+across three categories: 0-Irrelevant, 1-Partially
+Relevant, and 2-Highly Relevant. A detailed de-
+scription of the dataset and data preparation pro-
+cedures is provided in Appendix D. Additionally,
+50k unlabeled documents were collected to support
+cold-start training and distillation phases.
+T²Ranking. To ensure the generalizability of our
+framework, we also utilized T²Ranking, a large-
+scale retrieval benchmark comprising over 300k
+real-world queries and web passages. For our ex-
+periments, we sampled 3k records from the test set.
+T²Ranking provides fine-grained relevance labels
+on a 4-level scale (0–3). To maintain consistency
+with the NoteRel schema, we aligned the 2-level
+and 3-level labels in T²Ranking with the Highly
+Relevant (2) class in our industrial dataset.
+3.2 Settings
+Baselines. To demonstrate the effectiveness of
+R³A, we compare it with the following base-
+lines3: (1) Prompting (UMbrela) (Upadhyay et al.,
+2024b): It is a prompting-based method that pro-
+vides a step-by-step guide to structure the relevance
+labeling task, thereby facilitating more nuanced
+reasoning by the LLM. In our experiment, we re-
+produce the UMbrela method using several LLMs,
+including QwQ (Team Qwen, 2024), DeepSeek-
+R1 (Guo et al., 2025), GPT-4o (Hurst et al., 2024),
+among others. (2) SFT (Fitte-Rey et al., 2025):
+This method introduces a framework that directly
+fine-tunes the model using relevance label. To en-
+3All methods are conducted in a zero-shot manner.
+130

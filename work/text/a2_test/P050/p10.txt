@@ -1,0 +1,99 @@
+, , Yixin Chen, Ying Xiong*, Shangyu Wu, Xiangrui Ke, Nan Guan, and Chun Jason Xue
+A Appendix
+A.1 Notations
+The notations used in this paper are summarized in Table 5 and
+Table 6.
+Table 5: Notations used in the ReFilter method (Part 1).
+Notation Definition
+Dimensions and Constants
+𝐵 Batch size
+𝑃 Input sequence length
+𝐿 Total number of layers in the LLM
+𝑠 Fixed token length per chunk (denoted as chunk_len)
+𝑘 Number of retrieval chunks for each query
+𝑁 Total tokens in the retrieval pool per query (𝑁 =𝑘×𝑠)
+𝑇 Length of target answer sequence
+Query and Retrieval
+𝑄 A batch of queries{𝑞1,...,𝑞𝐵}
+𝑞𝑏 The𝑏-th query in the batch, where𝑏∈{1,...,𝐵}
+C External knowledge corpus
+C𝑘(𝑞𝑏) Set of retrieval chunks for query𝑞𝑏:{𝑐𝑏,1,...,𝑐𝑏,𝑘}
+𝑐𝑏,𝑖 The 𝑖-th retrieval chunk for query 𝑞𝑏, where 𝑖 ∈
+{1,...,𝑘}
+chunk_len Fixed token length per chunk (also denoted as𝑠)
+Context Encoder
+𝐸(·) External Transformer encoder
+𝑓𝑏,𝑖 Text feature of chunk𝑐𝑏,𝑖
+𝑑𝑒 Feature dimension of the external encoder
+𝑑𝑚 Projected feature dimension
+𝑊𝑝 Projection matrix mapping𝑑𝑒 →𝐷
+𝐶𝑏,𝑖 Projected context feature of chunk𝑐𝑏,𝑖
+𝐶 Context embeddings (projected token pool): 𝐶 ∈
+R𝐵×𝑁×𝑑𝑚
+Gated Filter
+H LLM hidden states: H∈ R𝐵×𝑃×𝐿×𝐷
+𝑝𝑏 Injection position index for the𝑏-th query
+p A batch of injection positions: p∈ N𝐵
+ℎ𝑏 Decision State: LLM hidden state of query 𝑞𝑏 at injec-
+tion position (𝑝𝑏,𝐿)
+𝐶𝑏,𝑗 Token embedding vector for batch 𝑏, token position
+𝑗 (element of𝐶)
+𝑔𝑏,𝑗 Concatenated feature for gating: 𝑔𝑏,𝑗 =[𝐶𝑏,𝑗 ; ℎ𝑏]∈
+R2𝐷
+𝑊𝑔,𝑎𝑔 Learnable weights and bias of the dynamic gate scorer
+𝛾𝑏,𝑗 Dynamic Gate value:𝜎(𝑊⊤ 𝑔 𝑔𝑏,𝑗 +𝑎𝑔)
+𝜇𝑗 Learnable position mask:𝜇𝑗 ∈ R, 𝑗 = 1,...,𝑁
+𝜇 Set of position masks:𝜇 ={𝜇1,...,𝜇𝑁}
+𝑊𝑡 Final token weights: derived from𝜇𝑗 ·𝛾𝑏,𝑗
+ˆ𝐶 Weighted token features: ˆ𝐶 =𝑊𝑡 ·𝐶∈ R𝐵×𝑁×𝑑𝑚
+𝜎(·) Sigmoid activation function
+Table 6: Notations used in the ReFilter method (Part 2).
+Notation Definition
+Token Fusion
+ˆ𝐶𝑏,𝑗 Weighted token feature for batch 𝑏, token position
+𝑗 (element of ˆ𝐶)
+𝑟𝑏 Aggregated evidence representation: 𝑟𝑏 =
+LayerNorm
+˝𝑁
+𝑗 =1 Dropout( ˆ𝐶𝑏,𝑗)
+
+∈ R𝐷
+𝛼 Learnable scaling factor for injection strength
+H𝑏,𝑝𝑏 ,𝐿,: Hidden state of query 𝑞𝑏 at injection position 𝑝𝑏
+and fusion layer𝐿: H𝑏,𝑝𝑏 ,𝐿,: ∈ R𝐷
+ˆH𝑏,𝑝𝑏 ,𝐿,: Updated hidden state after injection: ˆH𝑏,𝑝𝑏 ,𝐿,: =
+H𝑏,𝑝𝑏 ,𝐿,: +𝛼·𝑟𝑏 ∈ R𝐷
+Dropout(·) Dropout operation
+LayerNorm(·) Layer normalization
+Training Objective
+𝑦 Target answer tokens𝑦 =[𝑦1,...,𝑦𝑇]
+𝑦𝑡 Target answer token at position𝑡
+LNLL Negative log-likelihood loss
+Lgate Gate sparsity regularization
+𝜆 Balancing factor betweenLNLL andLgate
+L Total loss:L =LNLL +𝜆Lgate
+A.2 Scaling to Large Models
+To evaluate the scalability of our approach, we further conduct ex-
+periments on larger backbone models with 32B and 72B parameters
+and trained on the training split of the target dataset. As shown in
+the Table 7, our method consistently outperforms the correspond-
+ing baseline models across both scales. This demonstrates that the
+performance gains of our approach are preserved as model size
+increases, indicating good scalability and robustness to backbone
+scaling.
+A.3 Effect of Fusion Depth
+We study where to fuse retrieved information into the backbone
+model by comparing fusion at the last layer, the last three layers,
+and the last five layers. As shown in the Table 8, fusing retrieval
+information only at the final layer consistently yields the best per-
+formance across datasets. Moreover, this design is more efficient, as
+it avoids repeated fusion operations across multiple layers. These
+findings suggest that late-stage fusion is sufficient to effectively
+inject useful retrieval signals, while deeper fusion introduces re-
+dundant computation without clear performance benefits.
+A.4 Prompt templates
+In this section, we present the prompt templates used in our ex-
+periments. During inference, we employ the prompt in Table 9
+for general-domain QA datasets and the prompt in Table 10 for
+biomedical QA datasets.
+10

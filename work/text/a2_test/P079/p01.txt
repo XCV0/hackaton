@@ -1,0 +1,79 @@
+Multi-Field Hybrid Retrieval-Augmented Generation for Maritime
+Accident Root Cause Analysis
+Seongjin Kima and Sungil Kima,†
+Abstract— Maritime accident adjudication reports contain
+critical tribunal findings for root cause analysis (RCA), yet
+retrieving relevant precedents and drafting consistent reports
+from decades of records remains labor-intensive. This paper
+proposes a multi-field hybrid retrieval-augmented generation
+(RAG) framework for automated maritime RCA, utilizing
+a comprehensive dataset of 13,329 Korea Maritime Safety
+Tribunal (KMST) reports (1971–2025). We transform raw
+adjudications into a structured knowledge base of “incident
+cards”, indexing three distinct fields—Summary, Causes, and
+Disposition—alongside a hierarchical L1/L2 cause taxonomy.
+Our retrieval strategy employs a field-aware hybrid approach,
+fusing sparse and dense rankings via Reciprocal Rank Fusion
+(RRF). Given the lack of large-scale expert relevance labels, we
+evaluate retrieval performance using ceiling-normalized recall
+and nDCG based on a metadata-derived proxy relevance score.
+Experimental results demonstrate that our proposed retrieval
+significantly outperforms baseline methods, improving Norm-
+Recall@100 from 0.18 to 0.55. Furthermore, grounding the
+generator on the retrieved precedents enhances RCA generation
+quality over an LLM-only baseline, increasing the LLM-as-
+a-judge score from 3.34 to 3.72. These findings suggest that
+field-aware RAG can substantially streamline maritime safety
+investigation workflows by enabling faster precedent search and
+more consistent, evidence-based RCA drafting.
+I. INTRODUCTION
+Maritime accidents can lead to severe safety consequences
+and operational disruptions, including delays and capacity
+losses in maritime transport and port logistics [1]–[3]. To
+prevent recurrence, systematic Root Cause Analysis (RCA)
+is essential for robust safety management [4], [5]. In practice,
+RCA often relies on analogical reasoning over past adju-
+dications: investigators search for historically similar cases,
+examine tribunal cause findings, and justify conclusions with
+precedent-based evidence.
+Despite its importance, performing precedent-based search
+over formal adjudication reports (e.g., Fig. 1) remains a
+daunting task. These records span decades and are character-
+ized by a dense mixture of domain-specific legal and techni-
+cal terminology. Furthermore, the information is fragmented
+across multiple sections, such as accident narratives, causal
+reasoning, and administrative dispositions. Consequently, an-
+alysts spend substantial time manually synthesizing these
+disparate parts, which hinders timely organizational learning
+and consistent safety intervention.
+Recent advances in Large Language Models (LLMs) offer
+a potential solution for automating such narrative synthesis.
+However, in specialized legal–technical domains, LLMs are
+aDepartment of Industrial Engineering, Ulsan National Institute of Sci-
+ence and Technology (UNIST), Ulsan 44919, Republic of Korea.
+†Corresponding author: sungil.kim@unist.ac.kr
+Fig. 1. Example KMST adjudication report (translated into English from
+the original Korean, identifiers blurred)
+prone to hallucinations—generating plausible but factually
+incorrect regulations or causal mechanisms. While Retrieval-
+Augmented Generation (RAG) mitigates this by conditioning
+outputs on external evidence [6], [7], its application to mar-
+itime RCA faces two distinct challenges. First, adjudication
+reports are multi-field documents with diverse semantics
+(Summary, Causes, Disposition); treating them as monolithic
+text blocks dilutes the field-specific signals necessary for
+precise retrieval [8]. Second, evaluation at scale is notori-
+ously difficult, as expert relevance judgments are expensive
+to obtain, yet retrieval quality is the primary determinant of
+downstream reliability.
+In this work, we formulate maritime RCA assistance as
+case-informed structured generation. Given a new accident
+scenario, our system retrieves historically similar adjudica-
+tions and generates a structured RCA output grounded in
+these precedents. We specifically focus on leveraging multi-
+field document structures to enhance retrieval precision and
+introduce a reproducible evaluation proxy for large-scale
+benchmarking.
+The main contributions of this study are as follows:
+• Curating a Structured Maritime Knowledge Base:
+arXiv:2606.13249v1  [cs.AI]  11 Jun 2026

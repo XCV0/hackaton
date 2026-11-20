@@ -1,0 +1,85 @@
+Method NQ HotpotQA TriviaQA Avg.(acc) (acc) (acc)
+Vanilla RAG 45.68 29.43 82.85 52.65
+Self-RAG (2024a) 39.90 24.59 78.35 47.61
+Recomp (2024a) 40.47 25.36 79.04 48.29
+SEGENC (2022) 40.47 24.89 76.73 47.36
+RankCoT 47.41 32.21 85.18 54.93
+Table 5: Overall Performance of More Baselines.
+A Appendix
+A.1 License
+This section summarizes the licenses of the datasets
+used in our experiments.
+All of these datasets under their respective li-
+censes and agreements allow for academic use: Nat-
+ural Questions (CC-BY-SA-3.0 License); PopQA,
+Commonsense QA, Wiki QA, MARCO QA, Strate-
+gyQA, and Grade School Math 8K (MIT License);
+Web Questions and HotpotQA (CC-BY-4.0 Li-
+cense); TriviaQA, ASQA, Algebra QA with Ratio-
+nales, and Math QA (Apache 2.0 License); Expla-
+nations for CommonsenseQ (CDLA-Sharing-1.0
+License); Yahoo! Answers QA shows its terms of
+use at website1.
+A.2 Additional Baseline Comparison Results
+This section presents the comparison results be-
+tween RankCoT and several baseline models.
+In this experiment, we compare RankCoT with
+four baselines: vanilla LLM, Self-RAG, Recomp,
+and SEGENC. Self-RAG (Asai et al., 2024a) opti-
+mizes Llama3-8B-Instruct to retrieve documents on
+demand and ranks them by reflecting the retrieved
+documents using reflection tokens. SEGENC (Vig
+et al., 2022) is a Query-Focused Summarization
+model, initialized from the BART model (Lewis
+et al., 2020a), which summarizes documents based
+on a given query. Recomp (Xu et al., 2024a) pro-
+poses a method to compress retrieved documents,
+reducing the computational overhead of language
+models during inference.
+As shown in Table 5, Self-RAG, Recomp, and
+SEGENC all show performance degradation com-
+pared to vanilla RAG. This indicates that rank-
+ing, compressing, or summarizing documents in-
+evitably lead to information loss, thereby reducing
+response accuracy. In contrast, RankCoT not only
+incorporates advantages of ranking and summa-
+rization, but also generates a CoT that preserves
+1https://tensorflow.google.cn/datasets/
+community_catalog/huggingface/yahoo_answers_qa
+Figure 5: QA Consistency of the RAG Model Using
+Different Knowledge Refinement Models.
+as much useful information as possible. This ap-
+proach reduces the input length for the QA model
+while improving response accuracy.
+A.3 QA Consistency Using Different
+Knowledge Refinements
+This experiment evaluates the QA consistency
+based on different knowledge refinement results.
+Since the experiment is conducted in the internal
+knowledge scenario, all queries can be accurately
+answered by the RAG model without any external
+knowledge.
+As illustrated in Figure 5, we use the TriviaQA
+dataset to conduct the experiment. For each query,
+we input both the query and the refinement results
+from different models, then sample responses from
+the RAG model 300 times. The ratio of correct
+answers is calculated and denoted as Accuracy,
+which serves to evaluate the QA consistency of the
+RAG model. A higher accuracy reflects that the
+knowledge refinement results help the RAG model
+consistently produce correct answers.
+As shown in the evaluation results, RankCoT
+demonstrates its effectiveness by achieving an aver-
+age accuracy of approximately 91.3%, outperform-
+ing both refinement baselines, Rerank and Sum-
+mary. The accuracy of the Rerank and Summary
+methods shows significant variation, indicating that
+the knowledge refinements produced by both mod-
+els still contain knowledge that causes the RAG
+model to lack consistency in its answers. In con-
+trast, after applying RankCoT, the accuracy be-
+comes concentrated at either 0 or 1, demonstrating
+that it better supports the RAG model in maintain-
+ing answer consistency.
+12868

@@ -1,0 +1,98 @@
+reranking, and generation. However, during rerank-
+ing, they primarily rely on text-based similarity
+measures between retrieved passages and questions,
+which may lead to incorrect passage selection due
+to the inherent cross-modal discrepancy, ultimately
+affecting the final answer quality.
+Multimodal Understanding. Multimodal un-
+derstanding (Zhang et al., 2024a; Yin et al., 2023;
+Wang et al., 2025; Liu et al., 2018) aims to in-
+tegrate and interpret information across multiple
+modalities, such as vision and language, to enhance
+reasoning and decision-making. A key challenge
+in this field is incorporating external knowledge
+to support tasks that require information beyond
+what is directly present in one modality. One major
+research direction is knowledge-based Visual Ques-
+tion Answering (VQA), where models answer ques-
+tions requiring external factual knowledge. Early
+benchmarks like OK-VQA (Marino et al., 2019)
+and A-OKVQA (Schwenk et al., 2022) introduced
+commonsense and general knowledge reasoning,
+while ViQuAE (Lerner et al., 2022) expanded to
+entity-specific queries. More recent datasets, such
+as InfoSeek (Chen et al., 2023) and Encyclope-
+dic VQA (Mensink et al., 2023), enforce both vi-
+sual grounding and knowledge retrieval, exposing
+the limitations of existing models, including LLM-
+based approaches, in handling multimodal knowl-
+edge integration. Beyond VQA, multimodal un-
+derstanding extends to tasks such as image-text
+retrieval, captioning, and reasoning, where align-
+ing visual and textual representations is critical.
+3 Methodology
+In this section, we first formalize the problem
+of Multimodal Retrieval-Augmented Generation
+(MMRAG) and introduce two types of inconsis-
+tency (§3.1) that arise when applying MMRAG to
+KB-VQA. We then present our framework (§3.2)
+and detail our training approach (§3.3), both of
+which are designed to enhance the capacity of
+MLLMs to resolve knowledge inconsistency.
+3.1 Problem Formulation
+To assess the effectiveness of our proposed frame-
+work, we conduct evaluations on Knowledge-
+based Visual Question Answering (KB-VQA)
+tasks. Given an input image-question pair Q =
+(Qv, Qt) from the question set Q with support from
+an external knowledge base K, where each knowl-
+edge entry Ki comprises a visual component Vi
+and the associated textual article Ti. A typical MM-
+RAG pipeline addresses KB-VQA through three
+stages: retrieval, reranking, and generation. In
+the retrieval stage, a frozen CLIP (Radford et al.,
+2021) encodes both the query image Qv and knowl-
+edge base images {Vi}|K| i=1 into a shared embed-
+ding space, where the relevance is measured via
+cosine similarity: sim(Qv, Vi). The top-k entries
+{(Vi, Ti)}k i=1 are retrieved based on these similar-
+ity scores. Then, the retrieved entries are reranked
+by the multimodal model M based on the seman-
+tic relevance between Q and the retrieved articles
+{Ti}k i=1. Finally, M processes Q along with the
+most relevant entry to generate the final answer.
+During this process, we identify two types of
+issues. The first problem arises from the inconsis-
+tency between the model’s parametric knowledge
+and the retrieved external knowledge, referred to as
+Parametric-Retrieved Knowledge Inconsistency
+(PRKI). Formally, let M(Q) denote the output
+based on the model’s parametric knowledge, and let
+M(Q, P) represent the response when augmented
+with the retrieved knowledge set P = {(Vi, Ti)}k i=1.
+The PRKI occurs when:
+M(Q) ̸= M(Q, P). (1)
+The second issue is Visual-Textual Knowledge
+Inconsistency (VTKI), which arises when tex-
+tual and visual modalities of the retrieved entries
+{(Ti, Vi)}k i=1 yield inconsistent relevance rankings.
+Formally, the VTKI manifests when:
+argmax rM(Q, T) ̸= argmax rM(Q, V), (2)
+where argmax rM(·, ·) represents model M’s pre-
+diction of the most relevant entry ID in each modal-
+ity. Both PRKI and VTKI can significantly im-
+pact model performance. PRKI occurs when noisy
+external knowledge overrides reliable parametric
+knowledge, resulting in erroneous outputs. Mean-
+while, VTKI becomes especially problematic dur-
+ing the reranking stage. Due to the inconsistency
+between the textual and visual knowledge, relying
+on unimodal knowledge increases the risk of in-
+troducing irrelevant information to M, which can
+propagate errors from the reranking stage to an-
+swer generation, potentially leading to PRKI and a
+reduction in model performance.
+3.2 CoRe-MMRAG Framework
+To mitigate the PRKI and VTKI problems de-
+scribed in §3.1, we propose CoRe-MMRAG, a
+32969

@@ -1,0 +1,71 @@
+Method NQ HotpotQA TriviaQA Number of Refine Gen. Refine Gen. Refine Gen. LLM Calls
+Vanilla RAG - 54s - 57s - 58s 1
+Rerank 212s 56s 638s 58s 280s 56s 2
+Summary 101s 11s 101s 11s 89s 9s 2
+CoT 106s 12s 111s 13s 96s 10s 2
+RankCoT 82s 10s 84s 10s 74s 8s 2
+Table 8: Inference Time of RAG with Different Knowledge Refinement Models. A total of 500 samples are
+drawn from each of the NQ, HotpotQA, and TriviaQA datasets. All experiments are conducted using the Llama3-
+8B-Instruct model with the vLLM inference engine and a batch size of 60. “Refine” denotes the time spent on
+knowledge extraction, while “Gen.” refers to the time taken for answer generation.
+A.6 Inference Time of RAG with Different
+Knowledge Refinement Models
+This section reports the inference time of vari-
+ous knowledge refinement models across different
+datasets, as summarized in Table 8.
+During inference, both RankCoT and the base-
+line refinement models make the same number of
+calls to the LLM: once for refining the retrieved
+knowledge and once for answering the question
+based on the refined knowledge. Compared to
+vanilla RAG, most of the additional time intro-
+duced by these models is spent on the knowl-
+edge refinement step. Among all evaluated meth-
+ods, RankCoT achieves the lowest inference la-
+tency. As discussed in Section 5.4, RankCoT gen-
+erates the shortest knowledge refinement results,
+which largely accounts for its superior inference
+efficiency.
+A.7 Case Study
+In Table 9, we present a case study to illustrate
+the effectiveness of the RankCoT model. For the
+given query, it asks about “Australia’s location in
+the world and region”. And the retrieved docu-
+ments contain both related and unrelated informa-
+tion about the geographical location of Australia.
+The summarization method captures some ge-
+ographical information about Australia from the
+retrieved documents, such as “being in the South-
+ern Hemisphere and located between the Indian and
+Pacific Oceans”. However, these descriptions offer
+only a broad geographical scope rather than directly
+answering the query about the regional location of
+Australia. Consequently, the LLM is misled by the
+ambiguous information in the summarized docu-
+ments and generates inaccurate answers. Moreover,
+the summarization contains some irrelevant infor-
+mation, such as “7,682,300 square kilometers” and
+“smallest continent and the sixth-largest country”.
+In contrast, RankCoT refines the retrieved docu-
+ments in a question-answering based summariza-
+tion manner by generating a Chain-of-Thought
+(CoT). These CoT results are constructed by se-
+quentially integrating information from different
+retrieved documents, while ranking and prioritizing
+the most query-relevant knowledge. Rather than
+directly summarizing keypoint information from
+retrieved documents, RankCoT identifies crucial
+geographical attributes in each document and orga-
+nizes them in a structured reasoning result. At the
+start of the CoT, broad geographical attributes, such
+as “Southern Hemisphere” and “between the Indian
+and Pacific Oceans” are strengthened, as they ap-
+pear consistently across documents. More specific
+regional information, such as “Oceania”, is ranked
+higher in the reasoning process, ensuring that the
+final CoT provides the most accurate regional clas-
+sification. This demonstrates that RankCoT is not
+merely a direct extraction or summary of retrieved
+documents, but rather a refined reasoning chain
+that aligns closely with the query.
+12870

@@ -1,0 +1,77 @@
+Methods CRAG CRAG+FKE (Ours)
+Query 1 What is Bedřich Feigl's occupation?
+Retrieved 
+Knowledge 
+Feigl studied at the Prague Academy of Fine Arts with Vlaho
+Bukovac and Františka Thieleho. ……. In Berlin he became
+familiar with the art of Max Liebermann. In 1907 he attended the
+first exhibition in Prague Group Eight. ……He fled Prague in
+1939 and settled in London, with his wife, where he died in 1965.
+His works are placed in galleries around the world.
+Bedřich Feigl (also known as Friedrich Feigl; March 6, 1884 –
+17 December 1965) was a Czech-Jewish painter and illustrator. 
+Answer It is not provided in the given documents. Bedřich Feigl’s occupation is a painter and illustrator.
+Query 2 What is Henry Feilden's occupation? 
+Retrieved 
+Knowledge 
+Henry Master Feilden (21 February 1818 – 5 September 1875)
+was an English Conservative Party politician.…..His love of
+architecture was inherited from his grandfather, Brightwen
+Binyon (1846-1905), an Ipswich architect and former pupil of
+Alfred Waterhouse. …….He set up an architectural practice with
+David Mawson in 1956, to which offices in Norwich, London and
+Cambridge were later added.
+Henry Master Feilden (21 February 1818 – 5 September 1875) 
+was an English Conservative Party politician. 
+Answer Henry Feilden's occupation is an architect. Henry Feilden's occupation is a Conservative Party politician. 
+Table 5: Case Study. The red portion indicates the necessary information, while the blue portion represents the
+misleading information. CRAG’s answers are incorrect due to the absence of necessary information and the
+influence of misleading information. Our method retrieves additional sentence-level knowledge, which contains the
+fine-grained necessary information for question answering and assists CRAG in generating more accurate outputs.
+Figure 5: Accuracy score of CRAG+FKE with different
+temperature τs on the PopQA dataset.
+τs while keeping τd constant to stabilize the basic
+pipeline’s performance in Table 1. Figure 5 illus-
+trates the variation curve of the Acc score, which
+indicates that our method provides a stable enhance-
+ment to the basic RAG pipeline (CRAG, Acc=61.8).
+Accordingly, we choose temperature τs = 0.2 as it
+yields the best results.
+4.4 Case Study
+To better understand our method, we select the
+CRAG pipeline and sample several generated an-
+swers from the PopQA dataset shown in Table 5.
+For query 1, the retrieved document of CRAG is
+semantically relevant but lacks the fine-grained nec-
+essary information for question answering, prevent-
+ing the generation of accurate answers. For query
+2, although CRAG retrieves the correct document
+containing the necessary information for question
+answering, the generated answer remains inaccu-
+rate due to the misleading information in the docu-
+ment. In contrast, our method retrieves additional
+sentence-level knowledge that contains the fine-
+grained necessary information, enabling the basic
+pipeline to generate more accurate answers.
+5 Related Work
+Retrieval-Augmented Generation Retrieval-
+Augmented Generation (RAG) (Lewis et al., 2020)
+can effectively alleviate the hallucination caused by
+knowledge gaps in large language models (LLMs)
+(Huang et al., 2023). Existing RAG methods can
+be roughly divided into two groups.
+The first group typically performs single-round
+retrieval from an external corpus, which is partic-
+ularly effective for questions requiring explicit in-
+formation. Self-RAG (Asai et al., 2023) trains an
+arbitrary language model (LM) to adaptively re-
+trieve passages and generate content on demand us-
+ing special reflection tokens. REPLUG (Shi et al.,
+2024a) leverages likelihood scores from the LLM
+to fine-tune the retriever, which enables it to re-
+trieve more relevant and useful documents. CRAG
+(Yan et al., 2024) evaluates the quality of retrieved
+documents using a lightweight evaluator and en-
+hances retrieval results accordingly through large-
+scale web searches.
+10038

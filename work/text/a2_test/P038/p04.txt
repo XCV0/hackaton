@@ -1,0 +1,98 @@
+Generation (RAG) framework, we designed a series of
+experiments and selected several key evaluation indicators to
+measure the performance of different methods. These
+evaluation indicators include: 1. Precision: measures the
+proportion of relevant documents returned by the system to all
+returned documents. 2. Recall: measures the proportion of all
+relevant documents that the system can find to the total
+number of actual relevant documents. 3. F1 Score: the
+harmonic mean of precision and recall, used to
+comprehensively evaluate the performance of the system. We
+compare the is proposed Elasticsearch-based RAG method
+with the following baseline models:
+(1) Traditional RAG: Use traditional full-text search engines
+for document retrieval.
+(2) BM25-RAG: RAG using BM25 scoring function as the
+retrieval mechanism.
+(3) TF-IDF-RAG: RAG that uses TF-IDF vectors to represent
+documents and perform similarity calculations.
+(4) ES-RAG: The Elasticsearch-based RAG method proposed
+in this paper.
+The following table shows the performance of each model
+on the SQuAD 2.0 dataset. It can be seen that ES-RAG
+outperforms other methods in multiple indicators, especially in
+accuracy, F1 score and response time, which shows that the
+introduction of Elasticsearch significantly improves the overall
+performance of the RAG system.
+Table 1 Model experimental results
+From the experimental results shown in Table 1, we can see
+that the ES-RAG model performs well on the three key
+evaluation indicators of accuracy (Acc), F1 score, and recall
+(Recall), and is significantly better than the other three
+baseline models. Specifically, the accuracy of the ES-RAG
+model reaches 68.29%, which is 0.51 percentage points higher
+than the closest performing TF-IDF-RAG model; its F1 score
+is 68.42%, which is also higher than all comparison models,
+showing that in the comprehensive When considering
+precision and recall, ES-RAG can provide better overall
+performance; in terms of recall, ES-RAG also reached 68.13%,
+which is slightly higher than TF-IDF-RAG's 67.23%. These
+data not only prove the effectiveness of Elasticsearch as a
+retrieval engine in improving the performance of the RAG
+system, but also show that by introducing a more flexible and
+efficient document retrieval mechanism, the relevance and
+accuracy of the final generated answers can be significantly
+improved.
+Further analyzing the differences between the models, we
+can find that although BM25-RAG and TF-IDF-RAG have
+improved compared to the traditional RAG model, the gap
+between them is not very significant. For example, although
+BM25-RAG is slightly ahead of traditional RAG in terms of
+accuracy and F1 score, this improvement is relatively limited.
+In contrast, ES-RAG has achieved significant progress,
+especially in accuracy, which is 0.51 percentage points higher
+than TF-IDF-RAG, which means more in practical
+applications. The query can be responded to correctly. In
+addition, it is worth noting that even on the basis of TF-IDF-
+RAG, which already performed better, ES-RAG can still
+achieve better results in all three indicators, which shows that
+Elasticsearch can not only effectively support large-scale
+Rapid retrieval of large-scale text data can also optimize the
+output quality of the overall system by finely adjusting the
+retrieval results.
+In summary, the experimental results strongly support the
+superiority of integrating Elasticsearch into the RAG
+framework. By leveraging Elasticsearch's powerful search
+capabilities and rich configuration options, we not only
+improve retrieval efficiency, but also enhance support for
+complex queries, allowing the entire Q&A system to
+demonstrate higher performance in the face of diverse user
+needs. Adaptability and flexibility. Future research can
+continue to explore how to further optimize the interaction
+mechanism between Elasticsearch and LLM, such as by
+introducing more advanced functions such as semantic
+understanding, context awareness, etc., in order to achieve a
+more intelligent and humanized question-and-answer
+experience. At the same time, taking into account the specific
+needs that may exist in different application scenarios,
+researchers can also develop customized indexing strategies
+and scoring algorithms for specific fields or tasks to further tap
+the potential of Elasticsearch in enhancing RAG system
+performance. To further demonstrate our experimental results,
+we use a line chart to represent.
+Figure 1 Experiment result
+V. CONCLUSION
+This study shows that integrating Elasticsearch into the
+RAG framework significantly improves the overall
+performance of the question-answering system. Compared to
+traditional methods, such as document retrieval technologies
+based on keyword matching or semantic similarity
+Model Acc F1 Recall
+RAG 65.51 66.11 65.72
+BM25-
+RAG
+66.32 66.56 66.47
+TF-IDF-
+RAG
+67.78 67.63 67.23
+ES-RAG 68.29 68.42 68.13

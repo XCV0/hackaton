@@ -1,0 +1,71 @@
+Retriever Answerer NQ Hotpot Musique F1 AutoAIS F1 AutoAIS F1 AutoAIS
+No Retrieval
+Unconstrained PALM2-M 41.4 - 39.1 - 18.3 -
+Dense Retrieval
+GTR Passage PALM2-M 41.9 48.7 34.9 19.6 7.2 17.9
+GTR Proposition PALM2-M 36.6 63.2 27.4 18.5 10.5 20.4
+Iterative PALM2-M 34.4 66.8 34.2 30.9 17.5 38.4
+RICHES
+PALM2-M 40.2 59.2 41.0 36.5 19.1 39.6
+PALM2-L 46.7 59.6 51.1 35.6 28.2 37.5
+Table 4: Overall performance comparison for RICHES. For Dense retrievers, top-k documents are retrieved and
+fed to the few-shot Answerer, where k=1 for GTR passage, k=2 for GTR propositions. For Iterative retrieval upto
+4 documents are retrieved with k=1 at each step.
+Beam F1 AutoAIS
+1 19.3 26.1
+5 35.8 58.7
+10 40.2 59.2
+Table 5: Effect of Beam size on NQ with PALM2-M.
+Unconst. Adaptive NQ Hotpot
+Keywords Beam F1 AIS F1 AIS
+X X 37.9 57.5 39.2 33.9
+✓ X 36.9 51.5 38.4 32.3
+✓ ✓ 40.2 59.2 41.0 36.5
+Table 6: Interleaving unconstrained keywords and re-
+trieval keys with Adaptive beam. Greedily decod-
+ing Unconstrained sub-sequences allows constrained
+retrievals to make the most of the beam search.
+enhances both answer and retrieval performance,
+reminiscent of chain-of-thought technique to en-
+able better retrieval.
+6.2 Overall Results
+Table 4 shows the overall performance of RICHES
+across various datasets. We ﬁrst compare our setup
+to a no-retrieval baseline where the model only
+needs to generate an answer. Generating answers
+with citations is expected to be a more challenging
+task than generating answers alone. Thus, achiev-
+ing comparable answer accuracy while also ground-
+ing the answer to a source demonstrates the effec-
+tiveness of RICHES.
+For single-hop tasks, RICHES competes well
+with dense retrievers, offering higher answer ac-
+curacy at the expense of attribution. In multi-hop
+QA, RICHES excels, outperforming iterative base-
+lines by +15 F1 points on Hotpot and +11 on
+Musique, with comparable or better attribution.
+Similar trends are observed with Gemma models
+(Team et al., 2024) (Appendix A.2).
+The increase in answer accuracy with the larger
+PALM2-L model suggests improved performance
+with scale. Notably, RICHES achieves these results
+with a single inference pass, unlike the Iterative
+baseline, which requires a model call at each sub-
+query step.
+6.3 Qualitative analysis
+We inspect 50 win and loss examples each to ana-
+lyze the strength and weaknesses of the system.
+Wins Several properties distinguish RICHES
+from dense retrievers: a) RICHES allows large lan-
+guage models to utilize their parametric knowledge
+for retrieval. Since the search operation in RICHES
+is independent of corpus size, it can employ much
+larger models at query time. b) The inherent align-
+ment of instruction-tuned models enables them to
+retrieve contextually relevant passages, whereas
+dense retrievers may sometimes latch onto key-
+words. c) The interleaved thoughts guide the model
+toward more accurate retrievals. Table 1 demon-
+strates these scenarios for single-hop retrievals and
+Table 2 for multi-hop retrievals.
+8894

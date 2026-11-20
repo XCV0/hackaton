@@ -1,0 +1,77 @@
+393
+ness. This can be attributed to the fact that faithful-
+ness correlates more strongly with retrieval accu-
+racy, while relevancy assessment is usually influ-
+enced more by other factors like response length
+and context diversity which is prevalent in the UIS
+baseline setting.
+6 Path to Deployment
+Deploying MKP-QA into production requires
+careful planning, extensive testing, and significant
+efforts across multiple dimensions. We highlight
+the following key aspects that are essential for en-
+suring a successful and robust deployment and dis-
+cuss our plans:
+Knowledge Precision Accurate multi-domain
+federated search is crucial for retrieving relevant
+content across product domains, as inaccurate re-
+trievals in RAG can lead to irrelevant or misleading
+AI assistant responses. Our goal is to achieve a
+retrieval accuracy (Acc@Top1) of 90% or higher
+across both uni-domain and cross-domain queries.
+To improve this, we plan to implement regular re-
+training cycles for both the domain router and re-
+triever models to adapt to evolving product docu-
+mentation and user query patterns.
+Latency Given the multi-step nature of our
+framework, managing response time is critical for
+user experience. Our target is to keep the end-to-
+end response time under 10 seconds for 95% of
+queries. To do so, we plan to implement paral-
+lel processing for domain routing and document
+retrieval; utilize caching for frequently accessed
+documents; and explore quantization techniques
+for the retriever model to reduce inference time
+without significant accuracy loss.
+User Study A comprehensive user study is es-
+sential to evaluate performance in improving actual
+product QA experience. Once the system meets our
+accuracy and latency criteria, we plan to conduct
+A/B testing with a representative sample of users
+across different Adobe products, then, gather and
+analyze explicit and implicit user feedback through
+user surveys and interaction metrics (e.g., follow-
+up questions, task completion rates).
+Continuous Monitoring and Iteration Follow-
+ing the deployment of this work, continuous per-
+formance monitoring and iterative improvements
+are essential. We intend to implement monitor-
+ing dashboards tracking key performance metrics
+across different product domains; and establish a
+feedback loop where user interactions and support
+team insights are regularly incorporated into model
+retraining and system refinement.
+7 Conclusion
+In this paper, we introduced MKP-QA , a novel
+multi-domain knowledge-augmented question-
+answering framework for complex enterprise soft-
+ware ecosystems. Leveraging federated search with
+stochastic gating, MKP-QA outperforms base-
+lines in retrieval accuracy and response quality
+across uni-domain and cross-domain settings for
+Adobe’s Experience Platform (AEP), Target, and
+Customer Journey Analytics (CJA) applications.
+We also introduced new datasets for multi-product
+QA, addressing the lack of suitable benchmarks in
+this domain. Our findings highlight the importance
+of multi-domain knowledge integration and spe-
+cialized approaches for domain-specific nuances in
+enterprise product QA, while also revealing limita-
+tions of LLM-based domain selection techniques.
+Looking ahead, there are several avenues for future
+work and deployment optimization. These include
+implementing retraining cycles for router and re-
+triever, exploring advanced caching and quantiza-
+tion techniques to reduce latency, and conducting
+comprehensive user studies to ensure alignment
+with real-world usage patterns.

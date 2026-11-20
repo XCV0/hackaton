@@ -1,0 +1,35 @@
+Appl. Sci. 2022, 12, 4119 3 of 11
+improved performance of CZTSSe-based solar cells has been extensively studied, varying
+the layer speciﬁcations has been investigated by researchers less often.
+In this paper, the proposed CZTSe-based solar cell employs the CSLO technique
+(CZTSe- based Solar cell Layer Optimization) to achieve high efﬁciency with a noncomplex
+structure by varying the layer speciﬁcations, such as selecting the optimum layer thickness
+and doping concentration of the layers. The CSLO technique in SILVACO provides the
+optimum thickness and doping concentration of layers by varying the layer speciﬁcations.
+In this technique, the absorber layer is divided into two layers with different doping
+concentrations and materials. In addition, the absorber layer is divided into two layers
+with different doping concentrations, as shown in Figure 1. In fact, by implementing a
+p+pn junction, the number of holes and electrons will be increased on two sides of the
+junction, resulting in an increase in the generated current, a decline in the recombination
+rate, and an improvement in the efﬁciency of the solar cell in comparison to conventional
+ones. Similarly, the p+ layer and the nearby backside contact made a junction with a
+more linear response than a p-type layer (with a lower doping concentration), which led
+to performance enhancement. In this technique, the p+ layer provided an extra ﬁeld,
+causing lower carrier recombination by transmitting more electrons to the absorber layer
+and collecting more carriers at the contacts simultaneously. Furthermore, the Silvaco TCAD
+ATLAS tool was used to measure the performance parameters. The rest of this paper is
+organized as follows: Section 2, explains the proposed CZTSe-based solar cell structure
+and material selection. Section 3 includes the simulation results and discussion, which
+is followed by the conclusions and references. Our study can provide some important
+guidance for solar cell device design, fabrication, and optimization based on theoretical
+considerations.
+Figure 1. Schematic of the proposed CZTSe-based solar cell structure.
+2. Modeling and Simulation for Material Selection
+A regular structure was modeled for the CZTSe solar cell to analyze and investigate
+its performance. Figure 1 shows the schematic structure of the proposed solar cell. As
+illustrated in Figure 1, the CZTSSe-based solar cell structure consisted of different layers, in
+which CZTSe was used as the absorber layer. Based on the properties of CZTSe, it had an
+energy bandgap and absorption coefﬁcient of over 1 eV and 104 cm−1, respectively [2]. In
+addition, the n-type window layer (such as ZnO) and the p-type absorber layer (CZTSe)
+formed a p-n junction. Likewise, the n-type cadmium sulphide (Cds) layer worked as
+a buffer layer. The front and back layers of the solar cell were indium tin oxide (ITO)

@@ -1,0 +1,122 @@
+﻿publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D021,R001,DV-A1,MS1,M1,Voc,0.305,V,mean,0.032,20,,,305,mV,0.305,V,primary,,12,3.5,Table 4,,A1 305 ± 32 (324),extracted,,Среднее ± SD; нормализация из мВ
+D021,R002,DV-A1,MS1,M1,Voc,0.324,V,champion,,,,,324,mV,0.324,V,primary,,12,3.5,Table 4,,A1 305 ± 32 (324),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R003,DV-A1,MS1,M1,Jsc,22.5,mA/cm2,mean,6.6,20,,,22.5,mA/cm2,22.5,mA/cm2,primary,,12,3.5,Table 4,,22.5 ± 6.6 (31.2),extracted,,Среднее ± SD
+D021,R004,DV-A1,MS1,M1,Jsc,31.2,mA/cm2,champion,,,,,31.2,mA/cm2,31.2,mA/cm2,primary,,12,3.5,Table 4,,22.5 ± 6.6 (31.2),extracted,,Рекорд (значение в скобках)
+D021,R005,DV-A1,MS1,M1,FF,29.3,%,mean,2.2,20,,,29.3,%,29.3,%,primary,,12,3.5,Table 4,,29.3 ± 2.2 (32.0),extracted,,Среднее ± SD
+D021,R006,DV-A1,MS1,M1,FF,32.0,%,champion,,,,,32.0,%,32.0,%,primary,,12,3.5,Table 4,,29.3 ± 2.2 (32.0),extracted,,Рекорд (значение в скобках)
+D021,R007,DV-A1,MS1,M1,PCE,2.03,%,mean,0.66,20,,,2.03,%,2.03,%,primary,,12,3.5,Table 4,,2.03 ± 0.66 (3.24),extracted,,Среднее ± SD
+D021,R008,DV-A1,MS1,M1,PCE,3.24,%,champion,,,,,3.24,%,3.24,%,primary,,12,3.5,Table 4,,2.03 ± 0.66 (3.24),extracted,,Рекорд (значение в скобках)
+D021,R009,DV-A1,MS1,M1,Rs,6.86,Ohm*cm2,,,,,,6.86,Ωcm2,6.86,Ohm*cm2,primary,,12,3.5,Table 4,,2.03 ± 0.66 (3.24) 6.86 342.7,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R010,DV-A1,MS1,M1,Rsh,342.7,Ohm*cm2,,,,,,342.7,Ωcm2,342.7,Ohm*cm2,primary,,12,3.5,Table 4,,2.03 ± 0.66 (3.24) 6.86 342.7,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R011,DV-A2,MS1,M3,Voc,0.296,V,mean,0.062,20,,,296,mV,0.296,V,primary,,12,3.5,Table 4,,A2 296 ± 62 (327),extracted,,Среднее ± SD; нормализация из мВ
+D021,R012,DV-A2,MS1,M3,Voc,0.327,V,champion,,,,,327,mV,0.327,V,primary,,12,3.5,Table 4,,A2 296 ± 62 (327),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R013,DV-A2,MS1,M3,Jsc,9.15,mA/cm2,mean,7.66,20,,,9.15,mA/cm2,9.15,mA/cm2,primary,,12,3.5,Table 4,,9.15 ± 7.66 (20.95),extracted,,Среднее ± SD
+D021,R014,DV-A2,MS1,M3,Jsc,20.95,mA/cm2,champion,,,,,20.95,mA/cm2,20.95,mA/cm2,primary,,12,3.5,Table 4,,9.15 ± 7.66 (20.95),extracted,,Рекорд (значение в скобках)
+D021,R015,DV-A2,MS1,M3,FF,37.2,%,mean,8,20,,,37.2,%,37.2,%,primary,,12,3.5,Table 4,,37.2 ± 8 (30.4),extracted,,Среднее ± SD
+D021,R016,DV-A2,MS1,M3,FF,30.4,%,champion,,,,,30.4,%,30.4,%,primary,,12,3.5,Table 4,,37.2 ± 8 (30.4),extracted,,Рекорд (значение в скобках)
+D021,R017,DV-A2,MS1,M3,PCE,0.9,%,mean,0.6,20,,,0.9,%,0.9,%,primary,,12,3.5,Table 4,,0.9 ± 0.6 (2.04),extracted,,Среднее ± SD
+D021,R018,DV-A2,MS1,M3,PCE,2.04,%,champion,,,,,2.04,%,2.04,%,primary,,12,3.5,Table 4,,0.9 ± 0.6 (2.04),extracted,,Рекорд (значение в скобках)
+D021,R019,DV-A2,MS1,M3,Rs,4.17,Ohm*cm2,,,,,,4.17,Ωcm2,4.17,Ohm*cm2,primary,,12,3.5,Table 4,,0.9 ± 0.6 (2.04) 4.17 149.2,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R020,DV-A2,MS1,M3,Rsh,149.2,Ohm*cm2,,,,,,149.2,Ωcm2,149.2,Ohm*cm2,primary,,12,3.5,Table 4,,0.9 ± 0.6 (2.04) 4.17 149.2,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R021,DV-A3,MS1,M3,Voc,0.343,V,mean,0.043,20,,,343,mV,0.343,V,primary,,12,3.5,Table 4,,A3 343 ± 43 (321),extracted,,Среднее ± SD; нормализация из мВ
+D021,R022,DV-A3,MS1,M3,Voc,0.321,V,champion,,,,,321,mV,0.321,V,primary,,12,3.5,Table 4,,A3 343 ± 43 (321),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R023,DV-A3,MS1,M3,Jsc,9.35,mA/cm2,mean,7.5,20,,,9.35,mA/cm2,9.35,mA/cm2,primary,,12,3.5,Table 4,,9.35 ± 7.5 (22.4),extracted,,Среднее ± SD
+D021,R024,DV-A3,MS1,M3,Jsc,22.4,mA/cm2,champion,,,,,22.4,mA/cm2,22.4,mA/cm2,primary,,12,3.5,Table 4,,9.35 ± 7.5 (22.4),extracted,,Рекорд (значение в скобках)
+D021,R025,DV-A3,MS1,M3,FF,33.9,%,mean,4.5,20,,,33.9,%,33.9,%,primary,,12,3.5,Table 4,,33.9 ± 4.5 (26.5),extracted,,Среднее ± SD
+D021,R026,DV-A3,MS1,M3,FF,26.5,%,champion,,,,,26.5,%,26.5,%,primary,,12,3.5,Table 4,,33.9 ± 4.5 (26.5),extracted,,Рекорд (значение в скобках)
+D021,R027,DV-A3,MS1,M3,PCE,0.93,%,mean,0.52,20,,,0.93,%,0.93,%,primary,,12,3.5,Table 4,,0.93 ± 0.52 (1.91),extracted,,Среднее ± SD
+D021,R028,DV-A3,MS1,M3,PCE,1.91,%,champion,,,,,1.91,%,1.91,%,primary,,12,3.5,Table 4,,0.93 ± 0.52 (1.91),extracted,,Рекорд (значение в скобках)
+D021,R029,DV-A3,MS1,M3,Rs,18.34,Ohm*cm2,,,,,,18.34,Ωcm2,18.34,Ohm*cm2,primary,,12,3.5,Table 4,,0.93 ± 0.52 (1.91) 18.34 4566.6,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R030,DV-A3,MS1,M3,Rsh,4566.6,Ohm*cm2,,,,,,4566.6,Ωcm2,4566.6,Ohm*cm2,primary,,12,3.5,Table 4,,0.93 ± 0.52 (1.91) 18.34 4566.6,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R031,DV-A4,MS1,M3,Voc,0.373,V,mean,0.009,20,,,373,mV,0.373,V,primary,,12,3.5,Table 4,,A4 373 ± 9 (377),extracted,,Среднее ± SD; нормализация из мВ
+D021,R032,DV-A4,MS1,M3,Voc,0.377,V,champion,,,,,377,mV,0.377,V,primary,,12,3.5,Table 4,,A4 373 ± 9 (377),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R033,DV-A4,MS1,M3,Jsc,5.46,mA/cm2,mean,0.95,20,,,5.46,mA/cm2,5.46,mA/cm2,primary,,12,3.5,Table 4,,5.46 ± 0.95 (6.7),extracted,,Среднее ± SD
+D021,R034,DV-A4,MS1,M3,Jsc,6.7,mA/cm2,champion,,,,,6.7,mA/cm2,6.7,mA/cm2,primary,,12,3.5,Table 4,,5.46 ± 0.95 (6.7),extracted,,Рекорд (значение в скобках)
+D021,R035,DV-A4,MS1,M3,FF,37.1,%,mean,1.9,20,,,37.1,%,37.1,%,primary,,12,3.5,Table 4,,37.1 ± 1.9 (40.6),extracted,,Среднее ± SD
+D021,R036,DV-A4,MS1,M3,FF,40.6,%,champion,,,,,40.6,%,40.6,%,primary,,12,3.5,Table 4,,37.1 ± 1.9 (40.6),extracted,,Рекорд (значение в скобках)
+D021,R037,DV-A4,MS1,M3,PCE,0.76,%,mean,0.16,20,,,0.76,%,0.76,%,primary,,12,3.5,Table 4,,0.76 ± 0.16 (1.02),extracted,,Среднее ± SD
+D021,R038,DV-A4,MS1,M3,PCE,1.02,%,champion,,,,,1.02,%,1.02,%,primary,,12,3.5,Table 4,,0.76 ± 0.16 (1.02),extracted,,Рекорд (значение в скобках)
+D021,R039,DV-A4,MS1,M3,Rs,9.05,Ohm*cm2,,,,,,9.05,Ωcm2,9.05,Ohm*cm2,primary,,12,3.5,Table 4,,0.76 ± 0.16 (1.02) 9.05 5754.4,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R040,DV-A4,MS1,M3,Rsh,5754.4,Ohm*cm2,,,,,,5754.4,Ωcm2,5754.4,Ohm*cm2,primary,,12,3.5,Table 4,,0.76 ± 0.16 (1.02) 9.05 5754.4,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R041,DV-A5,MS1,M3,Voc,0.342,V,mean,0.022,20,,,342,mV,0.342,V,primary,,12,3.5,Table 4,,A5 342 ± 22 (356),extracted,,Среднее ± SD; нормализация из мВ
+D021,R042,DV-A5,MS1,M3,Voc,0.356,V,champion,,,,,356,mV,0.356,V,primary,,12,3.5,Table 4,,A5 342 ± 22 (356),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R043,DV-A5,MS1,M3,Jsc,8.08,mA/cm2,mean,1.7,20,,,8.08,mA/cm2,8.08,mA/cm2,primary,,12,3.5,Table 4,,8.08 ± 1.7 (9.32),extracted,,Среднее ± SD
+D021,R044,DV-A5,MS1,M3,Jsc,9.32,mA/cm2,champion,,,,,9.32,mA/cm2,9.32,mA/cm2,primary,,12,3.5,Table 4,,8.08 ± 1.7 (9.32),extracted,,Рекорд (значение в скобках)
+D021,R045,DV-A5,MS1,M3,FF,41.3,%,mean,5.4,20,,,41.3,%,41.3,%,primary,,12,3.5,Table 4,,41.3 ± 5.4 (44.0),extracted,,Среднее ± SD
+D021,R046,DV-A5,MS1,M3,FF,44.0,%,champion,,,,,44.0,%,44.0,%,primary,,12,3.5,Table 4,,41.3 ± 5.4 (44.0),extracted,,Рекорд (значение в скобках)
+D021,R047,DV-A5,MS1,M3,PCE,1.15,%,mean,0.28,20,,,1.15,%,1.15,%,primary,,12,3.5,Table 4,,1.15 ± 0.28 (1.47),extracted,,Среднее ± SD
+D021,R048,DV-A5,MS1,M3,PCE,1.47,%,champion,,,,,1.47,%,1.47,%,primary,,12,3.5,Table 4,,1.15 ± 0.28 (1.47),extracted,,Рекорд (значение в скобках)
+D021,R049,DV-A5,MS1,M3,Rs,3.6,Ohm*cm2,,,,,,3.6,Ωcm2,3.6,Ohm*cm2,primary,,12,3.5,Table 4,,1.15 ± 0.28 (1.47) 3.6 405.9,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R050,DV-A5,MS1,M3,Rsh,405.9,Ohm*cm2,,,,,,405.9,Ωcm2,405.9,Ohm*cm2,primary,,12,3.5,Table 4,,1.15 ± 0.28 (1.47) 3.6 405.9,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R051,DV-A6,MS1,M3,Voc,0.395,V,mean,0.013,20,,,395,mV,0.395,V,primary,,12,3.5,Table 4,,A6 395 ± 13 (381),extracted,,Среднее ± SD; нормализация из мВ
+D021,R052,DV-A6,MS1,M3,Voc,0.381,V,champion,,,,,381,mV,0.381,V,primary,,12,3.5,Table 4,,A6 395 ± 13 (381),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R053,DV-A6,MS1,M3,Jsc,3.67,mA/cm2,mean,1.18,20,,,3.67,mA/cm2,3.67,mA/cm2,primary,,12,3.5,Table 4,,3.67 ± 1.18 (5.58),extracted,,Среднее ± SD
+D021,R054,DV-A6,MS1,M3,Jsc,5.58,mA/cm2,champion,,,,,5.58,mA/cm2,5.58,mA/cm2,primary,,12,3.5,Table 4,,3.67 ± 1.18 (5.58),extracted,,Рекорд (значение в скобках)
+D021,R055,DV-A6,MS1,M3,FF,35.3,%,mean,1.1,20,,,35.3,%,35.3,%,primary,,12,3.5,Table 4,,35.3 ± 1.1 (34.0),extracted,,Среднее ± SD
+D021,R056,DV-A6,MS1,M3,FF,34.0,%,champion,,,,,34.0,%,34.0,%,primary,,12,3.5,Table 4,,35.3 ± 1.1 (34.0),extracted,,Рекорд (значение в скобках)
+D021,R057,DV-A6,MS1,M3,PCE,0.51,%,mean,0.14,20,,,0.51,%,0.51,%,primary,,12,3.5,Table 4,,0.51 ± 0.14 (0.73),extracted,,Среднее ± SD
+D021,R058,DV-A6,MS1,M3,PCE,0.73,%,champion,,,,,0.73,%,0.73,%,primary,,12,3.5,Table 4,,0.51 ± 0.14 (0.73),extracted,,Рекорд (значение в скобках)
+D021,R059,DV-A6,MS1,M3,Rs,4.45,Ohm*cm2,,,,,,4.45,Ωcm2,4.45,Ohm*cm2,primary,,12,3.5,Table 4,,"0.51 ± 0.14 (0.73) 4.45 26,833.2",extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R060,DV-A6,MS1,M3,Rsh,26833.2,Ohm*cm2,,,,,,"26,833.2",Ωcm2,26833.2,Ohm*cm2,primary,,12,3.5,Table 4,,"0.51 ± 0.14 (0.73) 4.45 26,833.2",extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R061,DV-B1,MS1,M2,Voc,0.385,V,mean,0.019,20,,,385,mV,0.385,V,primary,,12,3.5,Table 4,,B1 385 ± 19 (355),extracted,,Среднее ± SD; нормализация из мВ
+D021,R062,DV-B1,MS1,M2,Voc,0.355,V,champion,,,,,355,mV,0.355,V,primary,,12,3.5,Table 4,,B1 385 ± 19 (355),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R063,DV-B1,MS1,M2,Jsc,0.74,mA/cm2,mean,0.2,20,,,0.74,mA/cm2,0.74,mA/cm2,primary,,12,3.5,Table 4,,0.74 ± 0.2 (1.25),extracted,,Среднее ± SD
+D021,R064,DV-B1,MS1,M2,Jsc,1.25,mA/cm2,champion,,,,,1.25,mA/cm2,1.25,mA/cm2,primary,,12,3.5,Table 4,,0.74 ± 0.2 (1.25),extracted,,Рекорд (значение в скобках)
+D021,R065,DV-B1,MS1,M2,FF,42.6,%,mean,3.7,20,,,42.6,%,42.6,%,primary,,12,3.5,Table 4,,42.6 ± 3.7 (40.6),extracted,,Среднее ± SD
+D021,R066,DV-B1,MS1,M2,FF,40.6,%,champion,,,,,40.6,%,40.6,%,primary,,12,3.5,Table 4,,42.6 ± 3.7 (40.6),extracted,,Рекорд (значение в скобках)
+D021,R067,DV-B1,MS1,M2,PCE,0.12,%,mean,0.02,20,,,0.12,%,0.12,%,primary,,12,3.5,Table 4,,0.12 ± 0.02 (0.18),extracted,,Среднее ± SD
+D021,R068,DV-B1,MS1,M2,PCE,0.18,%,champion,,,,,0.18,%,0.18,%,primary,,12,3.5,Table 4,,0.12 ± 0.02 (0.18),extracted,,Рекорд (значение в скобках)
+D021,R069,DV-B1,MS1,M2,Rs,3.75,Ohm*cm2,,,,,,3.75,Ωcm2,3.75,Ohm*cm2,primary,,12,3.5,Table 4,,"0.12 ± 0.02 (0.18) 3.75 21,298.0",extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R070,DV-B1,MS1,M2,Rsh,21298.0,Ohm*cm2,,,,,,"21,298.0",Ωcm2,21298.0,Ohm*cm2,primary,,12,3.5,Table 4,,"0.12 ± 0.02 (0.18) 3.75 21,298.0",extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R071,DV-B2,MS1,M4,Voc,0.359,V,mean,0.003,20,,,359,mV,0.359,V,primary,,12,3.5,Table 4,,B2 359 ± 3 (361),extracted,,Среднее ± SD; нормализация из мВ
+D021,R072,DV-B2,MS1,M4,Voc,0.361,V,champion,,,,,361,mV,0.361,V,primary,,12,3.5,Table 4,,B2 359 ± 3 (361),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R073,DV-B2,MS1,M4,Jsc,9.07,mA/cm2,mean,0.47,20,,,9.07,mA/cm2,9.07,mA/cm2,primary,,12,3.5,Table 4,,9.07 ± 0.47 (9.05),extracted,,Среднее ± SD
+D021,R074,DV-B2,MS1,M4,Jsc,9.05,mA/cm2,champion,,,,,9.05,mA/cm2,9.05,mA/cm2,primary,,12,3.5,Table 4,,9.07 ± 0.47 (9.05),extracted,,Рекорд (значение в скобках)
+D021,R075,DV-B2,MS1,M4,FF,41.1,%,mean,1.9,20,,,41.1,%,41.1,%,primary,,12,3.5,Table 4,,41.1 ± 1.9 (43.2),extracted,,Среднее ± SD
+D021,R076,DV-B2,MS1,M4,FF,43.2,%,champion,,,,,43.2,%,43.2,%,primary,,12,3.5,Table 4,,41.1 ± 1.9 (43.2),extracted,,Рекорд (значение в скобках)
+D021,R077,DV-B2,MS1,M4,PCE,1.35,%,mean,0.06,20,,,1.35,%,1.35,%,primary,,12,3.5,Table 4,,1.35 ± 0.06 (1.41),extracted,,Среднее ± SD
+D021,R078,DV-B2,MS1,M4,PCE,1.41,%,champion,,,,,1.41,%,1.41,%,primary,,12,3.5,Table 4,,1.35 ± 0.06 (1.41),extracted,,Рекорд (значение в скобках)
+D021,R079,DV-B2,MS1,M4,Rs,2.35,Ohm*cm2,,,,,,2.35,Ωcm2,2.35,Ohm*cm2,primary,,12,3.5,Table 4,,1.35 ± 0.06 (1.41) 2.35 3314.1,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R080,DV-B2,MS1,M4,Rsh,3314.1,Ohm*cm2,,,,,,3314.1,Ωcm2,3314.1,Ohm*cm2,primary,,12,3.5,Table 4,,1.35 ± 0.06 (1.41) 2.35 3314.1,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R081,DV-B3,MS1,M4,Voc,0.358,V,mean,0.007,20,,,358,mV,0.358,V,primary,,13,3.5,Table 4,,B3 358 ± 7 (349),extracted,,Среднее ± SD; нормализация из мВ
+D021,R082,DV-B3,MS1,M4,Voc,0.349,V,champion,,,,,349,mV,0.349,V,primary,,13,3.5,Table 4,,B3 358 ± 7 (349),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R083,DV-B3,MS1,M4,Jsc,9.89,mA/cm2,mean,2.6,20,,,9.89,mA/cm2,9.89,mA/cm2,primary,,13,3.5,Table 4,,9.89 ± 2.6 (14.58),extracted,,Среднее ± SD
+D021,R084,DV-B3,MS1,M4,Jsc,14.58,mA/cm2,champion,,,,,14.58,mA/cm2,14.58,mA/cm2,primary,,13,3.5,Table 4,,9.89 ± 2.6 (14.58),extracted,,Рекорд (значение в скобках)
+D021,R085,DV-B3,MS1,M4,FF,45.0,%,mean,2.5,20,,,45.0,%,45.0,%,primary,,13,3.5,Table 4,,45.0 ± 2.5 (44.5),extracted,,Среднее ± SD
+D021,R086,DV-B3,MS1,M4,FF,44.5,%,champion,,,,,44.5,%,44.5,%,primary,,13,3.5,Table 4,,45.0 ± 2.5 (44.5),extracted,,Рекорд (значение в скобках)
+D021,R087,DV-B3,MS1,M4,PCE,1.58,%,mean,0.38,20,,,1.58,%,1.58,%,primary,,13,3.5,Table 4,,1.58 ± 0.38 (2.27),extracted,,Среднее ± SD
+D021,R088,DV-B3,MS1,M4,PCE,2.27,%,champion,,,,,2.27,%,2.27,%,primary,,13,3.5,Table 4,,1.58 ± 0.38 (2.27),extracted,,Рекорд (значение в скобках)
+D021,R089,DV-B3,MS1,M4,Rs,4.59,Ohm*cm2,,,,,,4.59,Ωcm2,4.59,Ohm*cm2,primary,,13,3.5,Table 4,,1.58 ± 0.38 (2.27) 4.59 1633.4,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R090,DV-B3,MS1,M4,Rsh,1633.4,Ohm*cm2,,,,,,1633.4,Ωcm2,1633.4,Ohm*cm2,primary,,13,3.5,Table 4,,1.58 ± 0.38 (2.27) 4.59 1633.4,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R091,DV-B4,MS1,M4,Voc,0.347,V,mean,0.007,20,,,347,mV,0.347,V,primary,,13,3.5,Table 4,,B4 347 ± 7 (344),extracted,,Среднее ± SD; нормализация из мВ
+D021,R092,DV-B4,MS1,M4,Voc,0.344,V,champion,,,,,344,mV,0.344,V,primary,,13,3.5,Table 4,,B4 347 ± 7 (344),extracted,,Рекорд (значение в скобках); нормализация из мВ
+D021,R093,DV-B4,MS1,M4,Jsc,14.65,mA/cm2,mean,3.3,20,,,14.65,mA/cm2,14.65,mA/cm2,primary,,13,3.5,Table 4,,14.65 ± 3.3 (26.6),extracted,,Среднее ± SD
+D021,R094,DV-B4,MS1,M4,Jsc,26.6,mA/cm2,champion,,,,,26.6,mA/cm2,26.6,mA/cm2,primary,,13,3.5,Table 4,,14.65 ± 3.3 (26.6),extracted,,Рекорд (значение в скобках)
+D021,R095,DV-B4,MS1,M4,FF,48.8,%,mean,3.5,20,,,48.8,%,48.8,%,primary,,13,3.5,Table 4,,48.8 ± 3.5 (42.2),extracted,,Среднее ± SD
+D021,R096,DV-B4,MS1,M4,FF,42.2,%,champion,,,,,42.2,%,42.2,%,primary,,13,3.5,Table 4,,48.8 ± 3.5 (42.2),extracted,,Рекорд (значение в скобках)
+D021,R097,DV-B4,MS1,M4,PCE,2.45,%,mean,0.39,20,,,2.45,%,2.45,%,primary,,13,3.5,Table 4,,2.45 ± 0.39 (3.85),extracted,,Среднее ± SD
+D021,R098,DV-B4,MS1,M4,PCE,3.85,%,champion,,,,,3.85,%,3.85,%,primary,,13,3.5,Table 4,,2.45 ± 0.39 (3.85),extracted,,Рекорд (значение в скобках)
+D021,R099,DV-B4,MS1,M4,Rs,1.81,Ohm*cm2,,,,,,1.81,Ωcm2,1.81,Ohm*cm2,primary,,13,3.5,Table 4,,2.45 ± 0.39 (3.85) 1.81 460.2,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R100,DV-B4,MS1,M4,Rsh,460.2,Ohm*cm2,,,,,,460.2,Ωcm2,460.2,Ohm*cm2,primary,,13,3.5,Table 4,,2.45 ± 0.39 (3.85) 1.81 460.2,extracted,,Тип агрегации в таблице не указан (колонка без скобок)
+D021,R101,DV-A6,MS1,M3,PCE,0.73,%,champion,,,,,0.73,%,0.73,%,primary,,11,3.5,,,"A6, with a record PCE = 0.73%",extracted,R058,Повтор рекордного PCE из Table 4 в тексте
+D021,R102,DV-B2,MS1,M4,PCE,1.41,%,champion,,,,,1.41,%,1.41,%,primary,,11,3.5,,,"B2, with PCE = 1.41%",extracted,R078,Повтор рекордного PCE из Table 4 в тексте
+D021,R103,DV-A2,MS1,M3,PCE,2.04,%,champion,,,,,2.04,%,2.04,%,primary,,11,3.5,,,"A2, with PCE = 2.04%",extracted,R018,Повтор рекордного PCE из Table 4 в тексте
+D021,R104,DV-B4,MS1,M4,PCE,3.85,%,champion,,,,,3.85,%,3.85,%,primary,,11,3.5,,,"B4, with PCE = 3.85%",extracted,R098,Повтор рекордного PCE из Table 4 в тексте
+D021,R105,DV-B4Ag,MS2,M4,PCE,5.25,%,champion,,,,,5.25,%,5.25,%,primary,,13,3.5,,Figure 10,exhibited PCE = 5.25%,extracted,,Лучшая ячейка B4 после Ag paste + wire bonding; в Table 4 для B4 рекорд 3.85 %
+D021,R106,DV-B4Ag,MS2,M4,Voc,0.343,V,champion,,,,,343,mV,0.343,V,primary,,13,3.5,,Figure 10,VOC = 343 mV,extracted,,нормализация из мВ
+D021,R107,DV-B4Ag,MS2,M4,Jsc,31.4,mA/cm2,champion,,,,,31.4,mA/cm2,31.4,mA/cm2,primary,,13,3.5,,Figure 10,JSC = 31.4 mA/cm2,extracted,,
+D021,R108,DV-B4Ag,MS2,M4,FF,49,%,champion,,,,,0.49,fraction,49,%,primary,,13,3.5,,Figure 10,FF = 0.49,extracted,,В статье доля
+D021,R109,DV-B4Ag,MS2,M4,PCE,5.25,%,champion,,,,,5.25,%,5.25,%,primary,,1,Abstract,,,achieved a maximum efficiency of 5.25%,extracted,R105,Повтор значения 5.25 %
+D021,R110,DV-B4Ag,MS2,M4,PCE,5.25,%,champion,,,,,5.25,%,5.25,%,primary,,3,Introduction,,,exhibited a promising conversion efficiency of 5.25%,extracted,R105,Повтор значения 5.25 %
+D021,R111,DV-B4Ag,MS2,M4,PCE,5.25,%,champion,,,,,5.25,%,5.25,%,primary,,13,Conclusions,,,maximum efficiency value = 5.25%,extracted,R105,Повтор значения 5.25 %
+D021,R112,DV-B4Ag,MS2,M4,PCE,5.25,%,champion,,,,,5.25,%,5.25,%,primary,,13,3.5,,,The remarkable PCE = 5.25%,extracted,R105,Повтор значения 5.25 %
+D021,R113,DV-NaF0,MS3,M1,PCE,1.28,%,,,,,,1.28,%,1.28,%,primary,,5,3.1,,Figure 2a,from 1.28% to 3.2%,extracted,,Тип агрегации не указан
+D021,R114,DV-NaF1,MS3,M1,PCE,3.2,%,,,,,,3.2,%,3.2,%,primary,,5,3.1,,Figure 2a,from 1.28% to 3.2%,extracted,,Тип агрегации не указан
+D021,R115,DV-PEDNaF,MS3,M2,PCE,0.36,%,,,,,,0.36,%,0.36,%,primary,,5,3.1,,Figure 2b,(PCE) of only 0.36%,extracted,,Тип агрегации не указан
+D021,R116,,,M1,PCE,10.57,%,,,,,,10.57,%,10.57,%,cited,[9],2,Introduction,,,highest experimental efficiency of 10.57% demonstrated up to now [9],extracted,,Рекорд Sb2Se3 (additive-assisted CBD)
+D021,R117,,,M1,PCE,9.2,%,,,,,,9.2,%,9.2,%,cited,[19-21],2,Introduction,,,conversion efficiencies of 9.2% and 10.12%,extracted,,CSS; 9.2 %
+D021,R118,,,M1,PCE,10.12,%,,,,,,10.12,%,10.12,%,cited,[22],2,Introduction,,,conversion efficiencies of 9.2% and 10.12%,extracted,,IVD; 10.12 %
+D021,R119,,,M1,PCE,6.06,%,,,,,,6.06,%,6.06,%,cited,[38],13,3.5,,,The highest reported efficiency for an RFMS-grown Sb2Se3,extracted,,RFMS Sb2Se3 с пост-селенизацией: 6.06 %
+D021,R120,,,M1,PCE,2.1,%,,,,,,2.1,%,2.1,%,cited,[32],13,3.5,,,previous benchmark of 2.1% for a PED-grown Sb2Se3 cell reported in [32],extracted,,PED Sb2Se3
+D021,R121,,,M1,PCE,2.36,%,,,,,,2.36,%,2.36,%,cited,[17],13,3.5,,,2.36% efficiencies obtained for RFMS-Sb2Se3 cells on FTO and CdS/FTO,extracted,,RFMS Sb2Se3 на CdS/FTO; 1.28 % на FTO тоже по [17]

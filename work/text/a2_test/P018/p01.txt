@@ -1,0 +1,91 @@
+Dual-Confidence Contrastive Decoding for Retrieval-Augmented
+Generation
+Raymond Li♠♢ Md Tawkat Islam Khondaker♠♢ Amirhossein Abaskohi♢
+Gabriel Murray♢ Giuseppe Carenini♢ Issam H. Laradji♠♢
+♠ServiceNow Research ♢University of British Columbia
+Abstract
+Retrieval-augmented generation (RAG) in-
+creasingly requires models to answer questions
+from multiple retrieved documents, where only
+some sources are relevant and the retrieved
+bundle may contain stale, noisy, or conflict-
+ing evidence. Existing contrastive decoding
+methods primarily focus on resolving conflicts
+between the model’s internal memory and the
+retrieved context. In contrast, we study the com-
+plementary problem of intra-context conflict in
+multi-document RAG. To evaluate this setting,
+we introduce DRQA, a factual-conflict ques-
+tion answering benchmark derived from enter-
+prise deep-research scenarios, where answers
+are grounded in synthetic enterprise-specific
+facts that are designed not to be recoverable
+from the model’s internal memory. We fur-
+ther propose Dual-Confidence Contrastive
+Decoding (DCCD), a training-free decoding
+method that combines document-level confi-
+dence, which estimates whether a document
+appears sufficient for answering the question,
+with token-level confidence, which estimates
+whether that document supports a confident
+next-token prediction. DCCD selects positive
+and negative document-conditioned streams us-
+ing these dual-confidence signals and scales
+a document-level contrast by their confidence
+margin. Across DRQA and standard multi-
+document QA benchmarks, DCCD achieves the
+best average performance among full-context
+and contrastive decoding baselines, with the
+largest gains on DRQA. These results highlight
+the importance of source-aware, confidence-
+gated decoding when retrieved evidence is in-
+ternally conflicting.
+1 Introduction
+Retrieval-augmented generation (RAG) has be-
+come an essential paradigm for grounding large
+language models (LLMs) in external knowledge
+(Gao et al., 2023), enabling them to answer domain-
+specific and knowledge-intensive queries beyond
+what is stored in their parameters. Initially devel-
+oped for open-domain question answering (QA)
+(Karpukhin et al., 2020; Lewis et al., 2020), RAG
+has become an integral component of workflows
+that require resolving information from multiple
+sources, from open-domain deep-research agents
+that synthesize evidence across the web (Du et al.,
+2026; Java et al., 2026) to enterprise systems that
+retrieve from heterogeneous data such as reports,
+emails, and chats (Choubey et al., 2025; Abaskohi
+et al., 2026).
+Despite these advancements, a central challenge
+for RAG systems is the resolution of conflicts
+among the knowledge sources (Xu et al., 2024).
+At inference time, the LLM can be overly reliant
+on its internal memory acquired during pre-training,
+even when the retrieved context provides newer or
+more task-specific evidence (Chen et al., 2022; Xie
+et al., 2024). One popular training-free approach
+to context-memory conflict is contrastive decoding
+(CD) (Li et al., 2023), which modulates generation
+by contrasting model predictions under different
+conditioning contexts (Shi et al., 2024; Wang et al.,
+2025a; Khandelwal et al., 2025). Rather than fine-
+tuning the LLMs, contrastive decoding adjusts to-
+ken probabilities based on the difference between
+output distributions with and without the context.
+However, this formulation treats the retrieved ev-
+idence as a single context and does not resolve
+conflicts within the retrieved context itself.
+In multi-document QA, the model needs to de-
+cide the relevance of each document to the query
+and which evidence to use (Wan et al., 2024; Jin
+et al., 2024b). The retrieved evidence may con-
+tain answer-supporting evidence alongside irrele-
+vant distractors, stale information, and plausible
+but incorrect claims. In this setting, the decoding
+problem is not only about choosing the next token,
+but also about choosing the evidence source that
+should inform that token. We use confidence as
+the complement of uncertainty and distinguish two
+1
+arXiv:2607.00570v1  [cs.CL]  1 Jul 2026

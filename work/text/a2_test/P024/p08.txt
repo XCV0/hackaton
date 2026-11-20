@@ -1,0 +1,127 @@
+established expectations in LLM scaling behavior
+(Hestness et al., 2017).
+PaperTab
+FetaTab
+SciGraphQA
+SPIQA
+SlideVQA
+0.2
+0.4
+0.6
+(a) Long Context
+PaperTab
+FetaTab
+SciGraphQA
+SPIQA
+SlideVQA
+0.2
+0.4
+0.6 (b) VisDoMRAG
+Figure 4: Comparative performance between Long Con-
+text and VisDoMRAG (averaged across LLMs) evaluated
+on different ranges of number of pages ¯p = ∑ d∈D |d|,
+with Low (¯p ≤ 100), Medium (100 < ¯p ≤ 150), and
+High (150 ≤ ¯p) volumes.
+Textual vs Visual RAG: In comparing the perfor-
+mance of textual RAG vis-à-vis visual RAG, we
+observe that visual RAG consistently outperforms
+textual RAG. This behaviour can be explained on
+the basis of our dataset composition which pre-
+dominantly consists of visually-rich content, and
+visual RAG is able to leverage visual information
+directly. However, the performance difference is
+less pronounced in scientific figure datasets such as
+SciGraphQA and SPIQA due to the text-rich nature
+of scientific papers, where figures are often accom-
+panied by detailed descriptions within the text and
+captions, particularly emphasizing key results and
+structural details. In contrast, we see a substantial
+performance gap between textual and visual RAG
+for SlideVQA, as slides typically lack extensive
+textual descriptions of visualizations, forcing the
+visual modality to be the primary source for answer-
+ing questions. Additionally, we find that Gemini
+often performs better in the textual modality com-
+pared to the visual modality across most datasets.
+This disparity could be attributed to factors such as
+linguistic bias (Niu et al., 2021; Wang et al., 2024a)
+or visual hallucination (Ghosh et al., 2024), where
+the model’s visual perception may be less reliable
+than its linguistic capabilities.
+Effect of Long-Context LLMs: We observe that
+VisDoMRAG has the ability to significantly enhance
+the performance of smaller models, as seen from
+Qwen2VL. This improvement can be attributed
+to its ability to integrate visual and textual rea-
+soning, compensating for the weaker long-context
+understanding and visual perception. The long-
+context LLM baselines prove to be less effective
+in our setup due to the high token count and the
+nature of the task, which requires retrieval of spe-
+cific, localized evidence—essentially a needle-in-
+the-haystack problem. The combination of modal-
+ities in VisDoMRAG mitigates these challenges, re-
+sulting in more robust answer generation, as re-
+flected in the results.
+Effect of Increasing Page Count: Figure 4 eval-
+uate the performance of different approaches av-
+eraged across LLMs, segmented by the volume
+of pages associated with each query. As antici-
+pated, long-context models exhibit significant per-
+formance drop with increasing number of pages in
+the collection. Contrastively, our multimodal RAG
+approach shows consistent QA performance even
+at high page counts as it is able to constrain the
+amount of context the LLM needs to process to
+answer the question effectively.
+Qualitative Examples: Fig 5 represents a quali-
+tative example from the PaperTab dataset, where
+VisDoMRAG effectively uses reasoning chains and
+answers from unimodal RAG outputs to synthesize
+the correct answer. More qualitative results are
+presented in the Appendix.
+According to 'One Size Does Not Fit All:
+Generating and Evaluating Variable Number
+of Keyphrases,' what is the approximate
+size of the StackEx dataset, in terms of the
+number of questions, used for keyphrase
+generation?
+The approximate size of the StackEx
+dataset, in terms of the number of
+questions, used for keyphrase generation is
+approximately 57.5%.
+The approximate size of the StackEx
+dataset in terms of the number of questions
+is 298k.
+❌
+❌
+around 330k questions
+Visual RAG
+Textual RAG
+VisDoMRAG
+Ground Truth
+Answer
+Query
+Ground Truth Evidence
+The approximate size of the StackEx
+dataset, in terms of the number of
+questions, used for keyphrase generation is
+330k
+✅
+Figure 5: Qualitative example from the PaperTab
+dataset, comparing VisDoMRAG with Unimodal RAG
+strategies.
+7.3 Ablations
+We conducted ablation studies with ChatGPT4o to
+evaluate the effectiveness of various components in
+our proposed VisDoMRAG framework, as well as
+to compare early fusion and late fusion strategies
+for modality integration. The results are summa-
+rized in Table 5.
+Early Fusion vs. Late Fusion: In our experiments,
+early fusion, where text extracted from document
+pages retrieved by the visual retriever is directly
+appended to the visual RAG context and used as
+input to the LLM, demonstrated suboptimal per-
+formance compared to the late fusion strategy em-
+6095

@@ -1,0 +1,91 @@
+724
+0.83±0.024 for both settings and all languages5.
+For English, we see very little errors between cor-
+rectly classifying augmented and baseline an-
+swers, while errors are more likely to occur for
+French and Dutch. Additionally, there is no within
+language classification error.
+Figure 6: Confusion matrix for the fitted model on
+features of generated answers from the test set.
+Using permutation feature importance, the top
+five most common features which contribute posi-
+tivelytomodelaccuracyarethedistributionsofpast
+tense verbs, determiners, singular proper nouns,
+subordinating conjunctions (and prepositions) and
+gerund verbs in the answers. Thus, the syntactic
+characteristics are distinctly different in answers
+for baseline and augmented for all three lan-
+guages, the variation emerging most likely due to
+changeinsetting. Thisindicatesthat augmented
+answers not only contain a variation in content
+but also in syntactic constructions when com-
+pared to the baseline answers.
+5. Conclusion
+Thispaperaimedtoexaminetheeffectofusingcon-
+textually different historical documents in English,
+French and Dutch, on question answering over a
+historical figure using RAG-based LLMs. We ob-
+serve that baseline answers when compared to
+RAG answers, within languages and between lan-
+guages, tend to be semantically similar but with
+high variation in wording. Despite this high similar-
+ity, thebaselineandRAGanswersdiscussdiffering
+topics, with some of them being language specific.
+This highlights how BERTScore is not suitable as a
+metric to examine subtleties in model output which
+reveal changes in perspectives.
+Baseline answers present a “flattened” perspec-
+tive across languages, with minimal cross-lingual
+variation in parametric knowledge. In contrast,
+RAG answers introduce perspective diversity by
+5The accuracy was observed for repeated (r=3) class-
+wise stratified 10-Fold cross validation.
+shifting from event-oriented frames to referential
+ones. Thisdiversitymanifestsdifferentlyacrosslan-
+guages demonstrating language-specific patterns.
+Additionally, syntax between baseline and RAG
+answers is distinctly different. Although one would
+expect syntactic differences among languages, we
+alsoobservedifferencesacrosstheexperimentset-
+tings. This indicates that RAG impacts both syntax
+and content of the generated texts.
+Overall, our findings show key limitations of tradi-
+tional evaluation metrics for perspective-sensitive
+tasksandhighlighttheneedforappropriatedatacu-
+ration. The presence of certain topics in the RAG
+answers, being language dependent, highlights
+the importance of multiperspectivity. For histori-
+cal research practice, our results demonstrate that
+RAG is not a neutral augmentation but an active
+perspective transformation. Future work should
+develop perspective-aware evaluation frameworks
+optimized for diversity.
+6. Limitations
+TheuseofMachineTranslation(MT)forFrenchand
+Dutch to extract frames is a limit due to the risks
+that MT systems may fail to capture cultural nu-
+ances and lexical richness (Vanmassenhove et al.,
+2019; Budimir, 2025), leading to a loss of meaning.
+Nevertheless, this was a forced decision due to a
+lack of large enough language specific resources
+for Frame Semantic Parsing and the difficulties we
+faced in adapting existing monolingual semantic
+parsers to a multilingual setting (e.g., repositories
+not maintained, software packages not being avail-
+able). As for the evaluation of the retrieval compo-
+nent, we rely on an existing approach which has
+been adopted in many off-the-shelf RAG systems.
+7. Acknowledgements
+Experiments in this paper were carried out on
+the Hábrók HPC supported by the Center of
+Information Technology of the University of Gronin-
+gen, and the National Supercomputer Snellius
+supported by SURF. Additionally, this research
+was supported by grants from NVIDIA and utilized
+the NVIDIA DGX Spark. This research is funded
+by the Netherlands Organization for Scientific
+Research under the HAICu project (NWO NWA
+# 1518.22.105) . The authors would also like to
+thank Francesco Buscemi at the University of
+Groningen for his support in devising the questions
+relating to Napoleon Bonaparte.

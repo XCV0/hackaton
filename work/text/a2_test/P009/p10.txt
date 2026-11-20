@@ -1,0 +1,106 @@
+28
+ulating conversational willingness during initial in-
+teractions (e.g., self-introduction, asking a ques-
+tion).
+Reasoning: Topic-Initiator does not currently pro-
+vide explicit reasoning for why particular topics
+are chosen. As a result, users may perceive the
+selected topics as unrelated to past interactions,
+which could reduce their willingness to continue
+the conversation. Incorporating transparent rea-
+soning that links topic selection to prior exchanges
+may help increase user motivation to engage.
+Topic Shift: At present, Topic-Initiator acts proac-
+tively only at the beginning of a conversation and
+cannot actively shift topics during ongoing inter-
+actions. While it is technically feasible to perform
+topic transitions by executing PT-RAG dynamically
+based on the conversation ﬂow and leveraging its
+outputs, determining the appropriate timing and
+strategy for such transitions remains a challeng-
+ing open problem (Xie et al., 2021; Hwang et al.,
+2024).
+Ethical Statement
+Preventing malicious use: We recognize the po-
+tential risks of malicious use of our system, such
+as the extraction of personal data. To mitigate
+these risks, the chatbot is designed to anonymize
+any sensitive personal information from its utter-
+ances.
+Informed consent: All participants involved in
+the human evaluation were fully informed about
+the study’s purpose, procedures, potential risks,
+and beneﬁts, and provided written consent. Par-
+ticipants were also clearly informed that they
+could withdraw from the study at any time without
+penalty.
+6. Bibliographical References
+Sanghwan Bae, Donghyun Kwak, Soyoung Kang,
+Min Young Lee, Sungdong Kim, Yuin Jeong, Hy-
+eri Kim, Sang-Woo Lee, Woomyoung Park, and
+Nako Sung. 2022. Keep me updated! mem-
+ory management in long-term conversations. In
+Findings of the Association for Computational
+Linguistics: EMNLP 2022, pages 3769–3787.
+Yi-Pei Chen, Noriki Nishida, Hideki Nakayama,
+and Yuji Matsumoto. 2024. Recent trends
+in personalized dialogue generation: A re-
+view of datasets, methodologies, and evalua-
+tions. In Proceedings of the 2024 Joint Interna-
+tional Conference on Computational Linguistics,
+Language Resources and Evaluation (LREC-
+COLING 2024), pages 13650–13665.
+Paul C Cozby. 1972. Self-disclosure, reciprocity
+and liking. Sociometry, pages 151–160.
+Yashar Deldjoo, Zhankui He, Julian McAuley, An-
+ton Korikov, Scott Sanner, Arnau Ramisa, René
+Vidal, Maheswaran Sathiamoorthy, Atoosa
+Kasirzadeh, and Silvia Milano. 2024. A review
+of modern recommender systems using gener-
+ative models (gen-recsys). In Proceedings of
+the 30th ACM SIGKDD Conference on Knowl-
+edge Discovery and Data Mining, pages 6448–
+6458.
+Yang Deng, Wenqiang Lei, Wai Lam, and Tat-
+Seng Chua. 2023a. A survey on proactive
+dialogue systems: problems, methods, and
+prospects. In Proceedings of the Thirty-Second
+International Joint Conference on Artiﬁcial Intel-
+ligence, pages 6583–6591.
+Yang Deng, Lizi Liao, Liang Chen, Hongru Wang,
+Wenqiang Lei, and Tat-Seng Chua. 2023b.
+Prompting and evaluating large language mod-
+els for proactive dialogues: Clariﬁcation, target-
+guided, and non-collaboration. In Findings of
+the Association for Computational Linguistics:
+EMNLP 2023, pages 10602–10621.
+Luke Friedman, Sameer Ahuja, David Allen,
+Zhenning Tan, Hakim Sidahmed, Changbo
+Long, Jun Xie, Gabriel Schubiner, Ajay Patel,
+Harsh Lara, et al. 2023. Leveraging large lan-
+guage models in conversational recommender
+systems. arXiv preprint arXiv:2305.07961.
+Shirley Anugrah Hayati, Dongyeop Kang, Qingx-
+iaoyang Zhu, Weiyan Shi, and Zhou Yu. 2020.
+Inspired: Toward sociable recommendation di-
+alog systems. In Proceedings of the 2020
+Conference on Empirical Methods in Natural
+Language Processing (EMNLP), pages 8142–
+8152.
+Zhankui He, Zhouhang Xie, Rahul Jha, Har-
+ald Steck, Dawen Liang, Yesu Feng, Bod-
+hisattwa Prasad Majumder, Nathan Kallus, and
+Julian McAuley. 2023. Large language models
+as zero-shot conversational recommenders. In
+Proceedings of the 32nd ACM international con-
+ference on information and knowledge manage-
+ment, pages 720–730.
+Yerin Hwang, Yongil Kim, Yunah Jang, Jeesoo
+Bang, Hyunkyung Bae, and Kyomin Jung. 2024.
+Mp2d: An automated topic shift dialogue gener-
+ation framework leveraging knowledge graphs.
+In Proceedings of the 2024 Conference on Em-
+pirical Methods in Natural Language Processing
+(EMNLP), pages 17682–17702.
+Jihyoung Jang, Minseong Boo, and Hyounghun
+Kim. 2023. Conversation chronicles: Towards

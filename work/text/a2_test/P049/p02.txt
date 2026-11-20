@@ -1,0 +1,101 @@
+cumulation of all token-level attribution vectors for
+LLMs’ responses will introduce substantial noise
+(as shown in Appendix A).
+To better explain the origin of faithfulness hallu-
+cinations, motivated by Phukan et al. (2024), we di-
+vide the tokens generated during the autoregressive
+reasoning of LLMs into linking and substantive to-
+kens. Unlike the original concept, we define linking
+tokens as non-substantive text in LLM-generated
+responses that serve to connect contextual infor-
+mation, whereas substantive tokens refer to text
+that utilizes the contextual information provided
+by users and reflects the semantic content of the
+responses. We consider that hallucinations origi-
+nate from LLM mistakenly generating substan-
+tive tokens as linking, which manifests on the
+surface as generation based on entity popularity.
+Visual analysis from the perspective of attribution
+score distribution can reveal which substantive to-
+kens LLMs treat as linking tokens, and these dif-
+ferences are difficult to detect from a human per-
+spective because of semantic drift. Specifically,
+linking tokens rely more on words generated ear-
+lier within the same sentence, whereas substantive
+tokens also depend on words in the long-distance
+context (detailed in Appendix B).
+Since faithfulness hallucinations typically occur
+at the semantic level, we extend the aforementioned
+concepts to this level and detect faithfulness hallu-
+cinations by our proposed semantic-level internal
+inference graphs, which can faithfully construct
+the dependency of the linking and substantive frag-
+ments. Specifically, we first employ Layer-wise
+relevance propagation (LRP) to calculate the score
+vector attributed to each token during the autore-
+gressive process. This attribution method, which
+utilizes internal model parameters and predefined
+rules, faithfully reflects the true computational pro-
+cess within the model. According to the token-level
+attribution vectors, we model the attribution rela-
+tionship between contextual semantic fragments
+and those of LLM’s response, forming the internal
+reasoning graph, as illustrated in Fig. 1. We can
+observe that the semantic fragments with halluci-
+nations assign higher attribution scores to previ-
+ously generated semantic fragments in the model’s
+autoregressive reasoning, while showing weaker
+dependency on the context provided by the user.
+LLM mistakenly treats substantive fragments as
+linking during the reasoning process, leading to the
+hallucination phenomenon.
+Based on the above observation, we linearize
+each response node and attribution dependency in
+the internal reasoning graph, concatenate them into
+a prompt, and input it to downstream pretrained
+language models (PLM) for fine-tuning in binary
+classification tasks. In the hallucination detection
+phase, we determine hallucination based on the bi-
+nary classification label distribution of all semantic
+fragments in the LLM-generated text. The entire
+process relies solely on the model with a small
+number of parameters.
+In summary, our contributions mainly include:
+• We extend token-level LRP to the semantic
+level and propose a method for construct-
+ing semantic-level internal reasoning graph
+of LLMs.
+• We analyze faithfulness hallucinations from
+the distribution differences between linking
+and substantive fragments and utilize internal
+reasoning graphs to detect them.
+• The experimental results on two general
+datasets demonstrate that the performance of
+our framework surpasses previous baselines.
+2 Related Work
+Hallucination Detection LLMs often produce
+content that is grammatically correct but semanti-
+cally conflicts with real-world or contextual knowl-
+edge, known as hallucinations (Huang et al., 2025).
+Hallucinations widely exist in downstream rea-
+soning (Vu et al., 2024; Li et al., 2024). Ex-
+isting hallucination detection methods mainly in-
+clude: (1) LLMs-based post-verification methods,
+which detect hallucinations by using multi-agent
+systems (Nguyen et al., 2025), multiple rounds
+of self-criticism (Mündler et al., 2024), or consis-
+tency of multiple generations (Kuhn et al.); (2)
+representation-based methods, which identify ab-
+normal states through model hidden states (Bhatia
+et al., 2025), outputs of attention modules (Simhi
+et al., 2024), semantic alignment rates (Huang et al.,
+2023), etc.; (3) task-specific methods, including
+fine-tuning (Bergeron et al., 2025) or designing
+task-specific features (Guerreiro et al., 2023). Most
+of the aforementioned methods rely on explicit rea-
+soning or uninterpretable feature spaces, which
+may fail to detect semantic biases within the model.
+Our framework focuses more on faithfully model-
+ing the true reasoning dependencies within LLMs
+and training a lightweight detector based on them.
+27827

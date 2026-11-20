@@ -1,0 +1,109 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+4. ** source_document **: Name / path of the source
+document , visible in section metadata as '
+source '
+5. ** source_location **: {" Specific section / page
+where answer is found . Visible in section
+metadata as ' page_number '" if question_type
+!= " negative rejection " else " unknown "}
+6. ** r e le v a nt _ t ex t _s p a n **: Exact quote from
+document containing the answer
+7. ** question_type **: MUST be exactly "{ spec [ '
+label ']}" for ALL questions
+8. ** difficulty **: " easy " , " medium " , or " hard "
+9. ** r e as o n in g _ re q ui r e d **: Brief description of
+reasoning needed
+10. ** keywords **: Key terms from the answer for
+evaluation
+QUALITY STANDARDS
+Question Quality :
+- Avoid yes / no questions ; prefer questions
+requiring specific information
+- Ensure questions are clear and have a single
+correct answer
+- Create questions that test different aspects
+of the document
+- Questions must align with the { spec [ ' label ']}
+category requirements
+Answer Quality :
+- Answers should be factual and verifiable in
+the document
+- Include specific details ( numbers , dates ,
+names ) when relevant
+- Keep answers concise but complete (2 -4
+sentences typically )
+- Quote exact phrases from the document when
+appropriate
+{" - For negative rejection questions , answer
+MUST be : ' Insufficient information to
+answer this question '" if question_type ==
+" negative rejection " else " Indicate if
+multiple pieces of information need to be
+synthesized "}
+OUTPUT FORMAT ( JSON )
+Return a JSON array with EXACTLY {
+n u m _ q u e s t i o n s _ p e r _ s e c t i o n } objects in this
+format :
+[
+{{
+" id ": 1 ,
+" question ": Your question here ,
+" g r o u n d _ t r u t h _ a n s w e r ": The answer is ... ,
+" source_document ": folder / filename . pdf
+" source_location ": Page X , text starting
+with ... ,
+" re l e va n t _t e x t_ s p an ": Exact quote ... ,
+" question_type ": { spec [ ' label ']} ,
+" difficulty ": " easy " , " medium " or " hard " ,
+" re a s on i n g_ r e qu i r ed ": Description of
+reasoning needed ,
+" keywords ": " keyword1 , keyword2 , keyword3 "
+}} ,
+... ( continue for all {
+n u m _ q u e s t i o n s _ p e r _ s e c t i o n } questions )
+]
+BEGIN GENERATION NOW - Remember : ONLY generate
+{ spec [ ' label ']} type questions !
+"""
+return system_prompt
+D. Test Generation User Prompt
+@staticmethod
+def get_user_prompt (
+question_type : str = None ,
+pdf_path : str = None ,
+docu ment_cont ent : str = None ,
+num_questions : int = 50 ,
+sorted_docs : list = None
+) -> str :
+user_prompt = f """ Please analyze the following
+contents and generate test cases for
+evaluating a RAG system ' s ability to
+retrieve answer questions about this
+content .
+{(
+" CONTENT SPANS :"
+f "{ docu ment_con tent }"
+if ( question_type == " document maximizing " or
+question_type == " cross section synthesis ")
+and docu ment_con tent else ""
+) }
+{(
+" SORTED SPANS :"
+f "{ sorted_docs }"
+if question_type == " NLP - flesch score " and
+sorted_docs else ""
+) }
+"""
+if num_questions :
+user_prompt += f " Generate { num_questions }
+test cases total .\ n \ n "
+user_prompt += """ Ensure the test cases :
+1. Cover all major topics in the document
+2. Include a mix of difficulty levels
+3. Are answerable solely from the provided
+content
+4. Include exact source locations for
+verification
+Generate the test cases now in the specified
+JSON format ."""
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 19 of 21

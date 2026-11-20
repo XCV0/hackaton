@@ -1,0 +1,54 @@
+Table 5: Main libraries and the corresponding versions.
+Package Version
+vllm 0.2.6
+torch 2.1.2+cuda12.4
+transformers 4.36.2
+Figure 7: Example LLMs’ input for counterfactual evi-
+dence generation. This prompt is composed of instruc-
+tion, examples, and candidate counterfactual QA.
+including single-hop NQ and RGB, explicit multi-
+hop HotpotQA, 2WikiMQA, Bamboogle, and im-
+plicit multi-hop StrategyQA and TempQA. Table
+6 shows the full list of candidate instances, and in
+total, we use 26,855 instances.
+Subsequently, we introduce various noisy doc-
+uments using external tools. For counterfactual
+noise, we obtain relevant entities related to the
+golden answer from Google search2 to construct
+counterfactual answers. For orthographic noise, we
+utilize the open-source textnoisr package3, which
+enables the convenient introduction of noise to text
+datasets and precise control of the quality of re-
+sults. Four types of “action” are implemented: in-
+sert, delete, substitute, and swap. For other types
+of noise, we utilize the 2018 English Wikipedia
+dump for document construction. We present the
+prompts in Figure 7-9.
+B.3 Additional Details
+We utilize a CN for retrieval, where relevant Chi-
+nese documents are retrieved in response to the
+input query to enhance the prompt, rather than rely-
+2We query Google search via SerpAPI: https://serpapi.
+com
+3https://github.com/preligens-lab/textnoisr
+Figure 8: Example LLMs’ input for supportive evidence
+generation. This prompt is composed of instruction,
+examples, and candidate QA.
+Figure 9: Example LLMs’ input for datatype noise con-
+struction. This prompt is composed of instruction, ex-
+amples, candidate QA and corresponding evidence.
+ing on a fixed set of N Chinese examples. This CN
+corpus is constructed using data from Wikidata and
+Google Search, intentionally designed to include
+misleading or outdated information in order to sim-
+ulate real-world scenarios where context might be
+inaccurate or evolving.
+During the experiment, we found that the opti-
+mal Top-k value for the contriver was 5, and the
+similarity threshold for all-MiniLM-L6-v2 was set
+to 0.3.
+C Results
+In this section, we provide supplementary results to
+further illustrate the role of RAG noise, especially
+beneficial noise. Our analysis primarily focuses on
+5031

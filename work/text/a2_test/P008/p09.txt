@@ -1,0 +1,107 @@
+Limitations
+While HYBGRAG is capable of outperforming ex-
+isting RAG and GRAG methods on HQA, it still
+has some limitations: (1) HYBGRAG uses only
+the simplest retrieval modules, and various alter-
+natives are not explored. For example, the ranker
+in the retrieval modules could be replaced with a
+cross-encoder ranker, and the retriever in the hy-
+brid retrieval module could use the top-K entities
+from PPR instead. (2) HYBGRAG does not offer
+significant advantages in terms of domain adapta-
+tion. In experiments, although HYBGRAG outper-
+forms baselines, its performance on STARK-Prime
+is worse than in STARK-MAG, where the aca-
+demic domain is generally considered less complex
+than the medicinal domain. (3) The commentor in
+HYBGRAG selects random experiences when per-
+forming ICL. For example, selecting experiences
+with questions most relevant to the current one may
+yield better performance. Although these limita-
+tions point out areas for potential improvement,
+they also present future directions to further en-
+hance the capabilities of HYBGRAG.
+References
+Reid Andersen, Fan Chung, and Kevin Lang. 2006. Lo-
+cal graph partitioning using pagerank vectors. In
+2006 47th Annual IEEE Symposium on Foundations
+of Computer Science (FOCS’06), pages 475–486.
+IEEE.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations.
+Tom B Brown. 2020. Language models are few-shot
+learners. arXiv preprint arXiv:2005.14165.
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu
+Lian, and Zheng Liu. 2024. Bge m3-embedding:
+Multi-lingual, multi-functionality, multi-granularity
+text embeddings through self-knowledge distillation.
+arXiv preprint arXiv:2402.03216.
+Jialin Dong, Bahare Fatemi, Bryan Perozzi, Lin F Yang,
+and Anton Tsitsulin. 2024. Don’t forget to connect!
+improving rag with graph-based reranking. arXiv
+preprint arXiv:2405.18414.
+Darren Edge, Ha Trinh, Newman Cheng, Joshua
+Bradley, Alex Chao, Apurva Mody, Steven Truitt,
+and Jonathan Larson. 2024. From local to global: A
+graph rag approach to query-focused summarization.
+arXiv preprint arXiv:2404.16130.
+Luyu Gao, Zhuyun Dai, Panupong Pasupat, Anthony
+Chen, Arun Tejasvi Chaganty, Yicheng Fan, Vin-
+cent Y Zhao, Ni Lao, Hongrae Lee, Da-Cheng Juan,
+et al. 2022. Rarr: Researching and revising what
+language models say, using language models. arXiv
+preprint arXiv:2210.08726.
+Zhibin Gou, Zhihong Shao, Yeyun Gong, yelong shen,
+Yujiu Yang, Nan Duan, and Weizhu Chen. 2024.
+CRITIC: Large language models can self-correct
+with tool-interactive critiquing. In The Twelfth Inter-
+national Conference on Learning Representations.
+Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasu-
+pat, and Mingwei Chang. 2020. Retrieval augmented
+language model pre-training. In International confer-
+ence on machine learning, pages 3929–3938. PMLR.
+Xiaoxin He, Yijun Tian, Yifei Sun, Nitesh V Chawla,
+Thomas Laurent, Yann LeCun, Xavier Bresson, and
+Bryan Hooi. 2024. G-retriever: Retrieval-augmented
+generation for textual graph understanding and ques-
+tion answering. arXiv preprint arXiv:2402.07630.
+Yuntong Hu, Zhihan Lei, Zheng Zhang, Bo Pan,
+Chen Ling, and Liang Zhao. 2024. Grag: Graph
+retrieval-augmented generation. arXiv preprint
+arXiv:2405.16506.
+Bowen Jin, Chulin Xie, Jiawei Zhang, Kashob Kumar
+Roy, Yu Zhang, Suhang Wang, Yu Meng, and Jiawei
+Han. 2024. Graph chain-of-thought: Augmenting
+large language models by reasoning on graphs. arXiv
+preprint arXiv:2404.07103.
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B
+Brown, Benjamin Chess, Rewon Child, Scott Gray,
+Alec Radford, Jeffrey Wu, and Dario Amodei. 2020.
+Scaling laws for neural language models. arXiv
+preprint arXiv:2001.08361.
+Vladimir Karpukhin, Barlas O˘guz, Sewon Min, Patrick
+Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and
+Wen-tau Yih. 2020. Dense passage retrieval for
+open-domain question answering. arXiv preprint
+arXiv:2004.04906.
+Yunshi Lan, Gaole He, Jinhao Jiang, Jing Jiang,
+Wayne Xin Zhao, and Ji-Rong Wen. 2022. Complex
+knowledge base question answering: A survey. IEEE
+Transactions on Knowledge and Data Engineering,
+35(11):11196–11215.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, et al. 2020. Retrieval-augmented generation
+for knowledge-intensive nlp tasks. Advances in Neu-
+ral Information Processing Systems, 33:9459–9474.
+Shilong Li, Yancheng He, Hangyu Guo, Xingyuan Bu,
+Ge Bai, Jie Liu, Jiaheng Liu, Xingwei Qu, Yang-
+guang Li, Wanli Ouyang, et al. 2024a. Graphreader:
+Building graph-based agent to enhance long-context
+abilities of large language models. arXiv preprint
+arXiv:2406.14550.
+887

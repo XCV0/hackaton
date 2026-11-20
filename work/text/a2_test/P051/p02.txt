@@ -1,0 +1,111 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+frameworkconsistsoffourmainsteps.First,itautomatically
+generates retrieval documents (we focus this paper on PDF
+files while remaining extensible to other formats). Second,
+it analyzes these documents to generate diverse test inputs
+along with their corresponding expected outputs. Third, it
+executes the generated queries on the RAG-LLM under
+test. Lastly, it employs an LLM-as-a-Judge mechanism to
+automaticallyassesswhethertheproducedoutputsmatchthe
+expected ones.
+Weconductalarge-scaleempiricalevaluationinvolving
+eight state-of-the-art LLMs, including four closed-source
+andfouropen-weightmodels,combinedwiththreedifferent
+embedding techniques, resulting in 24 distinct configura-
+tions.Overall,wegenerated3,000testinputsandexecuteda
+totalof72,000testcases.Ourapproachdetected21,633fail-
+ures, compared to 20,293 identified by a baseline variation
+or our tool, achieving a 6.6% increase in failure detection.
+These results demonstrate that RAG-TESTER is effective at
+uncoveringsubtleanddiversefailuremodesinRAGsystems
+thatareoftenoverlookedbyexistingevaluationapproaches.
+2. Background
+2.1. Retrieval-Augmented Generation
+Retrieval-Augmented Generation (RAG) is an architec-
+tural paradigm that combines information retrieval with
+language generation to produce responses grounded in ex-
+ternal knowledge [1]. Unlike standalone Large Language
+Models (LLMs), whose responses are primarily based on
+knowledge encoded during training, RAG-enabled LLMs
+retrieve information from an external corpus at inference
+time.Thisenablestheincorporationofproprietary,domain-
+specific, or recently updated information without retraining
+the underlying model. By conditioning generation on re-
+trieved evidence, RAG can improve the factual grounding,
+transparency, and traceability of generated responses [7,8].
+A typical RAG pipeline comprises several intercon-
+nected stages. First, the source documents are collected,
+preprocessed, and divided into smaller passages or chunks.
+Each chunk is then transformed into a vector representation
+using an embedding model [9, 10]. These representations
+are stored in a vector database, which supports efficient
+similarity-based retrieval through implementations such as
+FAISS[11,12].Atinferencetime,theuserqueryisencoded
+using an embedding model compatible with the indexed
+documents. The resulting query vector is compared with
+the stored document vectors, and the top-𝑘 most similar
+passagesareselectedascontextualevidence.Thesepassages
+are incorporated into a prompt together with the original
+query, after which the generative model produces an an-
+swerconditionedonbothsourcesofinformation.Depending
+on the specific architecture, the pipeline may also include
+query rewriting, metadata filtering, hybrid lexical–semantic
+retrieval, passage reranking, or context compression before
+generation.
+The quality of the final response therefore depends on
+the correct operation of multiple components. The em-
+bedding model must preserve the semantic relationships
+betweenqueriesanddocumentpassages,theretrievalmech-
+anism must identify the relevant evidence, and the prompt-
+construction strategy must present this evidence in a form
+that the generative model can effectively interpret. The
+modelmustthenextract,combine,andexpresstheretrieved
+information without introducing unsupported content.
+Retrieval quality is particularly important because er-
+rors introduced during retrieval propagate to the generation
+stage [13, 14]. When relevant passages are not retrieved,
+the model may lack the information required to answer the
+query. Conversely, the retrieval of irrelevant, incomplete, or
+contradictory passages may distract the model and lead to
+inaccurateormisleadingresponses.Nevertheless,successful
+retrieval does not guarantee a correct final answer: the gen-
+erative model may ignore relevant evidence, misinterpret it,
+omit important details, or introduce information that is not
+supportedbytheretrievedcontext.Consequently,RAGsys-
+temsmustbeconsideredend-to-endsystemswhosebehavior
+emerges from the interaction among document processing,
+embeddings, retrieval, prompt construction, and language
+generation.
+2.2. Quality Assessment of RAG Systems
+The quality of a RAG system can be assessed at differ-
+ent levels. Component-level assessment evaluates individ-
+ual stages of the pipeline, whereas end-to-end assessment
+examines the quality of the final response produced from
+a query and an external knowledge corpus. Both perspec-
+tives are necessary because the correctness of an individual
+componentdoesnotnecessarilyimplythecorrectnessofthe
+complete system.
+The retrieval component is commonly assessed using
+information-retrieval metrics. Precision measures the pro-
+portion of retrieved passages that are relevant to the query,
+whereasrecallmeasurestheproportionofrelevantpassages
+that are successfully retrieved. Metrics such as Recall@𝑘
+evaluate whether relevant evidence appears among the top-
+𝑘 retrieved results. Mean Reciprocal Rank measures how
+highly the first relevant result is ranked, while Normalized
+Discounted Cumulative Gain considers both the relevance
+and ordering of multiple retrieved passages. These met-
+rics provide insight into the effectiveness of the embedding
+and ranking mechanisms, but they do not directly measure
+whether the generative model uses the retrieved evidence
+correctly.
+End-to-endassessmentfocusesontherelationshipamong
+the query, the retrieved context, and the generated answer.
+Several complementary quality dimensions are commonly
+considered in RAG evaluation [2, 15]. Answer relevance
+captures whether the response directly addresses the user’s
+query. Faithfulness, also referred to as groundedness, as-
+sesses whether the claims contained in the response are
+supportedbytheretrievedevidence.Completenessmeasures
+whether the response includes the essential information
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 2 of 21

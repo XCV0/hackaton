@@ -1,0 +1,103 @@
+STRIDE: Strategic Iterative Decision-Making for
+Retrieval-Augmented Multi-Hop Question Answering
+Wei Chen
+University of Science and Technology
+of China & State Key Laboratory of
+Cognitive Intelligence
+Hefei, Anhui, China
+chenweicw@mail.ustc.edu.cn
+Lili Zhao
+University of Science and Technology
+of China & State Key Laboratory of
+Cognitive Intelligence
+Hefei, Anhui, China
+liliz@mail.ustc.edu.cn
+Zhi Zheng∗
+University of Science and Technology
+of China & State Key Laboratory of
+Cognitive Intelligence
+Hefei, Anhui, China
+zhengzhi97@ustc.edu.cn
+Huijun Hou
+NIO
+Hefei, Anhui, China
+huijun.hou@nio.com
+Tong Xu∗
+University of Science and Technology
+of China & State Key Laboratory of
+Cognitive Intelligence
+Hefei, Anhui, China
+tongxu@ustc.edu.cn
+Abstract
+Multi-hop question answering (MHQA) enables accurate answers
+to complex queries by retrieving and reasoning over evidence dis-
+persed across multiple documents. Existing MHQA approaches
+mainly rely on iterative retrieval-augmented generation, which
+suffer from the following two major issues. On one hand, existing
+methods prematurely commit to surface-level entities rather than
+underlying reasoning structures, making question decomposition
+highly vulnerable to lexical ambiguity. On the other hand, exist-
+ing methods overlook the logical dependencies among reasoning
+steps, resulting in uncoordinated execution. To address these is-
+sues, we propose STRIDE (Strategic Iterative Decision-making),
+a framework that separates strategic planning, dynamic control,
+and grounded execution. At its core, a Meta-Planner first constructs
+an entity-agnostic reasoning skeleton to capture the abstract logic
+of the query, thereby deferring entity grounding until after the
+reasoning structure is established, which mitigates disambiguation
+errors caused by premature lexical commitment. A Supervisor then
+orchestrates sub-question execution in a dependency-aware man-
+ner, enabling efficient parallelization where possible and sequential
+coordination when necessary. By dynamically deciding whether
+to retrieve new evidence or infer from existing facts, it avoids re-
+dundant queries and error propagation, while fusing cross-branch
+information and reformulating failed queries to enhance robustness.
+Grounded fact extraction and logical inference are delegated to spe-
+cialized execution modules, ensuring faithfulness through explicit
+separation of retrieval and reasoning. While STRIDE is compatible
+∗Corresponding authors
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed
+for profit or commercial advantage and that copies bear this notice and the full citation
+on the first page. Copyrights for components of this work owned by others than the
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific permission
+and/or a fee. Request permissions from permissions@acm.org.
+SIGIR ’26, Melbourne | Naarm, Australia
+© 2026 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+ACM ISBN 978-1-4503-XXXX-X/2018/06
+https://doi.org/XXXXXXX.XXXXXXX
+with any large language models (LLMs), off-the-shelf open-source
+LLMs underperform closed-source counterparts in its structured
+reasoning pipeline. To close this gap, we further propose STRIDE-
+FT, a modular fine-tuning framework that uses self-generated exe-
+cution trajectories from STRIDE, requiring neither human annota-
+tions nor stronger teacher models. Experiments show that STRIDE
+achieves robust and accurate reasoning on MHQA benchmarks,
+while STRIDE-FT effectively enhances open-source LLMs1.
+CCS Concepts
+• Information systems→ Question answering.
+Keywords
+Retrieval-Augmented Generation, Multi-hop Question Answering,
+Large Language Models
+ACM Reference Format:
+Wei Chen, Lili Zhao, Zhi Zheng, Huijun Hou, and Tong Xu. 2026. STRIDE:
+Strategic Iterative Decision-Making for Retrieval-Augmented Multi-Hop
+Question Answering. In Proceedings of The 49th International ACM SIGIR
+Conference on Research and Development in Information Retrieval (SIGIR ’26).
+ACM, Dubai, United Arab Emirates, 11 pages. https://doi.org/XXXXXXX.
+XXXXXXX
+1 Introduction
+Open-domain question answering (QA) aims to answer user ques-
+tions using a large unstructured corpus without being restricted
+to a predefined knowledge base. Within this setting, multi-hop
+question answering (MHQA) represents a core challenge, requiring
+systems to synthesize information scattered across multiple docu-
+ments through coherent and multi-step reasoning [3, 39, 44, 49]. Un-
+like simple factual queries resolvable via single-document lookup,
+real-world user questions such as “What Nobel Prize-winning sci-
+entist was also an accomplished concert musician?” demand not
+only accurate evidence retrieval but also structured orchestration
+of interdependent reasoning steps [18, 31, 46].
+1The code repository is available at github.com/fanshu6hao/STRIDE.
+arXiv:2604.17405v1  [cs.AI]  19 Apr 2026

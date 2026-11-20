@@ -1,0 +1,102 @@
+5.1 Parsing and Chunking
+In Table 1, we report the parsing and chunking
+results across multilingual documents.
+Parser Lang. Chunks–L Chunks–S PnLCS CnLCS –L CnLCS –S
+Docling
+All 22.3 46.1 0.673 0.404 0.357
+EN 25.1 51.7 0.695* 0.459* 0.401*
+Non-EN 11.3 23.6 0.587 0.188 0.181
+PyMuPDF
+All 54.5 126.7 0.669 0.325 0.329
+EN 60.3 145.7 0.642 0.357 0.359
+Non-EN 31.4 51.4 0.774+ 0.200+ 0.209+
+Table 1: Parsing ﬁdelity (PnLCS ), chunk compactness
+(CnLCS ), and average number of chunks using layout
+(–L) and semantic (–S) chunking strategies across lan-
+guage groups include All languages, English-only*, and
+Non-English+.
+Docling outperforms PyMuPDF in parsing ﬁ-
+delity for both English and the overall dataset, con-
+ﬁrming its strength in layout-sensitive documents.
+However, PyMuPDF demonstrates superior pars-
+ing performance on non-English texts. When com-
+paring chunking strategies, layout-based chunking
+consistently outperforms semantic chunking when
+applied to Docling outputs. In contrast, it performs
+worst when used on PyMuPDF-parsed text, due to
+its layout-agnostic nature. The highest chunking
+ﬁdelity for the full set is achieved using Docling
+combined with layout chunking.
+5.2 Retrieval Performance
+We evaluate the retriever across the different pars-
+ing strategies and chunking methods. To isolate re-
+triever quality, we include only ﬁles where PnLCS
+exceeds σ = 0.5, as retrieved chunks are consid-
+ered relevant if their nLCS with G exceeds this
+threshold. Table 2 summarizes the results.
+Across the combined and English language sets,
+Nomic consistently delivers the best retrieval per-
+formance when paired with Docling parsing, par-
+ticularly under semantic chunking. It achieves top
+scores in both nLCS (0.724) and Recall (0.764)
+while maintaining a relatively high CnLCS (0.312),
+indicating focused, relevant chunk retrieval. Qwen
+surpasses Nomic on the non-English subset, espe-
+cially with semantic chunking, where it reaches the
+highest Recall (0.922). Qwen’s multilingual edge
+reﬂects Nomic’s English-centric training. However,
+its high recall coincides with lower CnLCS , indi-
+cating retrieval of broader, less precise evidence.
+Non-English retrieval consistently outperforms
+due to lower chunk counts (Table1), which reduce
+the vector search space. This structural bias in-
+ﬂates recall by making it easier to hit a relevant
+chunk while simultaneously lowering CnLCS due
+to increased dilution.
+PyMuPDF with layout chunking performs best
+with Qwen on non-English texts, where coarser
+segmentation enhances recall but increases CnLCS .
+BGE performs consistently but does not lead on
+any metric.
+Overall, Docling provides the best trade-off be-
+tween CnLCS and Recall, with layout chunking
+offering superior chunk precision, and semantic
+chunking optimizing retriever effectiveness. Nomic
+stands out as the most robust embedding model
+across conﬁgurations, while Qwen excels in recall-
+heavy, high chunk dilution scenarios, especially for
+non-English content.
+5.3 Reranker Performance
+To assess reranker performance in isolation, we
+conduct all experiments on the vector spaces gen-
+erated from Docling-parsed, layout- or semantic-
+based chunks embedded using the Nomic model,
+the best-performing retriever conﬁgurations. This
+setup ensures a consistent and high-quality evi-
+dence pool, allowing us to isolate and compare
+the effectiveness of different reranking strategies.
+Table 3 summarizes the results.
+Across both chunking strategies, BGE consis-
+tently outperforms the no-reranker baseline, par-
+ticularly in the semantic setup, where it achieves
+the highest MRR on the full (0.531) and English
+sets (0.528). In contrast, MXBAI provides no im-
+provement, matching the baseline in all cases. No-
+tably, non-English layout chunks achieve the high-
+est MRR (0.603) even without reranking, reﬂect-
+ing the inherent ease of retrieval in these docu-
+ments due to longer, fewer chunks. This limits
+the reranker impact and aligns with prior ﬁndings.
+Overall, semantic chunking beneﬁts most from
+reranking, and BGE emerges as the most effective
+strategy when higher precision is required.
+5.4 Stance Generation Performance
+We assess Qwen3’s ability to generate accurate
+stance predictions when provided with the gold
+evidence snippets. This isolates generation quality
+from retrieval noise, establishing an upper bound
+for stance prediction performance.
+Figure 2 shows that alignment improves steadily
+with model size across all strategies, indicating that
+larger models are better at inferring correct stances
+114

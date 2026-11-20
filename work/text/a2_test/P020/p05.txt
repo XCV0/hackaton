@@ -1,0 +1,102 @@
+391
+the integrity of paragraphs, sentences, and words,
+ensuring that semantically related content remains
+together as much as possible.
+4.3 Data Creation
+Our dataset comprises query-document pairs from
+three Adobe product domains (AEP, Target, and
+CJA). We employed two complementary ap-
+proaches for data creation: (i) Subject Matter Ex-
+pert (SME) Dataset: Product experts manually cre-
+ated query-document pairs based on respective ExL
+web-pages for each domain. They wrote queries
+for documents extracted from web-pages and anno-
+tated the relevance of each pair based on their prod-
+uct expertise. (ii) Synthetic LLM-Assisted (SLA)
+Dataset: To ensure comprehensive coverage, we
+leveraged GPT-4 to generate queries for chunked
+documents extracted from ExL web-pages. Product
+experts from each domain subsequently reviewed
+these query-document pairs to guarantee accuracy
+and relevance. For cross-domain data creation, we
+followed a similar process where product experts
+first identified ExL web-pages with overlapping
+documentation across products; GPT-4 then gen-
+erated queries for these cross-domain web-pages;
+and product experts reviewed the queries for rele-
+vance to the cross-domain documentation content.
+This approach ensured that positive document pairs
+per query were designed to span different domains,
+enhancing the dataset’s utility for multi-domain
+product RAG-QA research.
+To enhance the dataset with both positive and
+challenging negative examples, we employed a
+systematic approach for document pairing. For
+each question in the dataset, we utilized two strate-
+gies: (1) pairing the question with other document
+chunks from the same web-page as the golden doc-
+ument, and (2) when insufficient negative pairs
+were available from the original page, sampling
+document chunks from URLs closely related to the
+web-page containing the golden document. This
+method ensures a diverse and representative set of
+negative examples. Finally, we leveraged GPT-4
+to annotate the relevance of each query-document
+pair. Using the prompt detailed in Appendix (Fig-
+ure 6), GPT-4 assigns binary labels (Yes/No) to the
+relevance of all pairs.
+4.4 Data Analysis and Statistics
+Our dataset encompasses questions, documents,
+corresponding source web-page URLs and titles,
+and annotations across the Adobe AEP, Target, and
+Data Type Metric Uni-Domain
+AEP CJA Target
+SME
+# of query-doc pairs 2,970 1,035 521
+Avg. length of queries 9.31 9.75 9.12
+Avg. length of docs 87.59 207.43 101.15
+% of positive pairs 8.95% 11.27% 10.23%
+SLA
+# of query-doc pairs 28,860 27,820 29,610
+Avg. length of queries 10.75 11.80 11.69
+Avg. length of docs 143.78 146.89 107.15
+% of positive pairs 17.53% 18.28% 20.26%
+Data Type Metric Cross-Domain
+AEP + CJA AEP + Target CJA + Target
+SLA
+# of query-doc pairs 880 1,370 480
+Avg. length of queries 14.70 14.92 13.68
+Avg. length of docs 141.15 97.72 95.49
+% of positive pairs 19.21% 19.56% 18.37%
+Table 1: Statistics for the Adobe multi-product uni-
+domain (top), and cross-domain (bottom) RAG datasets
+CJA domains. The questions fall into two main
+categories: (1) "What-is" or "Where-is" questions
+about product concepts (e.g., "What is a union
+schema?", "What is an audience?"); and "How-to"
+questions about usage instructions (e.g., steps for
+"adding services to a datastream" or "looking up
+a sandbox"). Table 1 provides key data statistics
+for uni-domain and cross-domain datasets, includ-
+ing the count of question-document pairs, average
+lengths of questions and documents, and the ratio
+of positive pairs in the datasets.
+5 Experiments
+Our experimental study aims to evaluate the ef-
+fectiveness of MKP-QA in comparison with
+various baselines for multi-domain RAG-QA on
+Adobe datasets. We conducted a series of ex-
+periments on both uni-domain and cross-domain
+datasets. Throughout our experiments, we uti-
+lized GPT-3.5-turbo-1106 and GPT-4-0314 mod-
+els from Azure OpenAI.
+5.1 Baselines
+Unified Index and Search (UIS): This baseline
+uses a single multi-domain index with a retriever
+fine-tuned on all three product domains. Search is
+performed across the entire index without consid-
+ering domain relevance to the query.
+Router Filter and Search (RFS): A domain
+router selects the most likely domain for each query,
+limiting the search to documents tagged for that
+domain within the unified index.

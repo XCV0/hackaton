@@ -1,0 +1,5 @@
+publication_id,material_id,material_name_raw,formula_normalized,material_class,dimensionality,additives,bandgap_value,bandgap_unit,bandgap_method,note
+D010,M1,"Cu2ZnSn(S,Se)4 (CZTSSe, undoped)","Cu2ZnSn(S,Se)4",kesterite,,,,,,Контрольный недопированный поглотитель; ширина зоны для него не приведена
+D010,M2,"(Na0.1Cu0.9)2ZnSn(S,Se)4 selenized at 540 C (T540)","(Na0.1Cu0.9)2ZnSn(S,Se)4",kesterite,,Na (NaCl in precursor),1.02,eV,Tauc,Se/(S+Se)=91.49 % (Table 1)
+D010,M3,"(Na0.1Cu0.9)2ZnSn(S,Se)4 selenized at 520 C (T520)","(Na0.1Cu0.9)2ZnSn(S,Se)4",kesterite,,Na (NaCl in precursor),1.03,eV,Tauc,Только плёнка; прибор не изготавливался. Se/(S+Se)=83.69 %
+D010,M4,"(Na0.1Cu0.9)2ZnSn(S,Se)4 selenized at 560 C (T560)","(Na0.1Cu0.9)2ZnSn(S,Se)4",kesterite,,Na (NaCl in precursor),1.0,eV,Tauc,Только плёнка; прибор не изготавливался. Se/(S+Se)=97.74 %

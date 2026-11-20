@@ -1,0 +1,142 @@
+Algorithm 1: Indexing Algorithm of AGRAG
+Input : T : The text corpus for graph construction.
+Output: KG(V, E): The KG constructed.
+1 Let V ← ∅, E ← ∅;
+2 Get text chunk set Tc from T : Tc ← Chunking(T );
+3 for each text chunk t ∈ Tc do
+4 Extract entity set Vt based on Equation (3);
+5 Carry out relation extraction with LLM:
+Et ← LLM(Vt, t, pre);
+6 V ← V ∪ Vt, E ← E ∪ Et;
+7 Add Tc to V as passage nodes: V ← V ∪ Tc;
+8 for each entity node v ∈ V do
+9 for each text chunk t ∈ Tc do
+10 if v ∈ t then
+11 Add passage edge between v and t:
+E ← E ∪ {e(v,t)};
+12 return KG(V, E);
+where Tc denotes all text chunks obtained from Equation (1),
+count(v, t) is the number of times that the term v appears in
+the text t, and |tj : v ∈ tj , tj ∈ Tc| denotes the number of
+texts in the corpus Tc that contain the keyword v. Here, our
+entity extraction procedure will extract words or phrases with
+ER(v, t) > τ as the entity nodes Vt for text chunk t:
+Vt = {v | ER(v, t) > τ } . (3)
+Entities in Vt are later served as graph nodes, hence we denote
+them as entity nodes. For our entity extraction procedure, the
+entity boundary b and entity extraction threshold τ are con-
+sidered as hyper-parameters, we further analyze their setting
+in Section IV-D.
+After entity extraction, we extract relations from text chunks
+t ∈ Tc based on its extracted entities Vt. Align with other
+Graph-based RAG models, we also apply LLM at this step:
+Et = LLM(Vt, t, pre), (4)
+where Vt denotes the extracted entities of text chunk t, and in
+the relation extraction prompt pre, we ask the LLM to detect
+relations between entities in Vt w.r.t. text chunk t. Although
+we also apply LLM for relation extraction, we input less
+noise in this step, mitigating the error propagation, as our
+statistics-based entity extraction avoids LLM hallucination,
+hence resulting in a more comprehensive and less noisy Vt
+as the Equation (4) input.
+After relation extraction, we add text chunks in Tc to V as
+passage nodes, and add passage edges e(v,t) between entities
+contained within the text chunks to E, the respective relation
+of these edges is namely Contains. By introducing passage
+nodes, we integrate contextual information into the constructed
+KG, and the entity-passage edges can capture the inter-text
+correlations, make our model able to generate reasoning paths
+across different text chunks [29].
+Kidney
+𝑠=0.82
+Tumors
+𝑠=0.78
+Can have
+𝑐=0.51
+Kidney 
+cancer
+𝑠=0.88
+Work
+𝑐=0.30
+Spread
+𝑐=0.10
+RCC
+𝑠=0.35Commontype
+𝑐=0.78
+Occur in
+𝑐=0.34Invade
+𝑐=0.45Nearby tissues
+𝑠=0.67
+Q: Which structuresareatriskofandmaycontributeto the spreadof kidney cancer?
+Blood 
+vessels
+𝑠=0.69
+Affect
+𝑐=0.23
+Lymph 
+nodes
+𝑠=0.66
+Affect
+𝑐=0.27
+A: Blood vessels areatriskofandmaycontributeto thelocal spreadof kidney cancer.
+Connect 𝑐=0.31
+structures
+spread
+kidney
+cancer
+Kidney
+cancer
+Tumors
+Mapto
+Spread
+Kidney
+Figure 2: An example of MCMI. Red triples indicate those mapped from
+the query. Our algorithm first constructs the MCMI based on a Steiner
+tree rooted at these mapped triples, then iteratively expands it by adding
+neighboring triples (in orange) with the lowest cost-score ratio, continuing
+until no neighboring triple has its ratio less than the current MCMI’s ratio.
+Furthermore, we add synonym edges Esyn between entity
+nodes in V that have similarities larger than the synonym
+threshold ϕ, the relation of these edges is namely synonym:
+Esyn =
+
+e(u,v)
+ cosine sim(u, v) > ϕ 	 , (5)
+At last, we combine edge set Et for all text chunks t and
+passage edges together, as well as the synonym edges Esyn, to
+form the total edge (relation) set of the KG:
+E =
+[
+t∈Tc
+Et ∪
+[
+v∈Vt , t∈Tc
+e(v,t) ∪ Esyn, (6)
+here, if the entity v does not exist in text chunk t, e(v,t) = ∅.
+C. Step 2: Graph Retrieval
+In this subsection, we introduce the graph retrieval proce-
+dure of AGRAG. Given the KG KG(V, E) constructed at the
+Step 1, we first map the query q to KG and obtain raw mapped
+triplet facts Fraw. To achieve this, we encode each triplet fact
+in KG f ∈ FKG and the query q into vector representations
+q and f with encoder M: q ← M(q), then select facts with
+top-k dense semantic mapping score MS to query q based on
+their cosine similarity:
+MS(q, f) = cosine sim(q, f), (7)
+Fraw = {f ∈ FKG | f ∈ arg ⊤ka (M S(q, f))} , (8)
+where ka is a hyperparameter that controls the number of raw
+mapped triples extracted, and f are obtained through encoding
+the text concatenation of entities and relation of the triplet fact.
+Further, as the triplets in KG are extracted in a query
+unaware manner, query irrelevant triplets can exist in the raw
+mapped triplet facts Fraw, hence we apply LLM-based filter
+on Fraw to generate the mapped triplet facts F, to reduce the
+query irrelevant noise:
+F = LLM(Fraw, q, ptf), (9)
+where ptf denotes the LLM prompt for triple filtering.
+Next, based on the mapped triplet facts F and the KG
+structure, we calculate the Personalized PageRank (PPR) [33]
+score as our node influence score s for node set V:
+s = lim
+i→∞
+PPRi, PPRi = (1 − d) × p + d × P · PPRi−1, (10)

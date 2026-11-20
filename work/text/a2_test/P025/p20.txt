@@ -1,0 +1,43 @@
+Table 23: Impact of summarization(targeted)
+Dataset Summarization Retrieval Private Contexts Repeat Effect Prompt Repeat Extract Context Targeted Information
+HealthCareMagic
+No 445 118 135 89
+Yes 445 58 72 42
+Yes-edit 445 54 64 41
+Enron-Email
+No 134 39 32 12
+Yes 134 27 21 11
+Yes-edit 134 27 24 12
+Table 24: Impact of threshold(targeted)
+Dataset Threshold Retrieval Private Contexts Repeat Effect Prompt Repeat Extract Context Targeted Information
+HealthCareMagic
+inf (no threshold) 236 170 157 122
+1 236 180 166 118
+0.8 236 172 158 127
+0.6 236 168 156 112
+0.4 127 92 87 73
+0.2 0 0 0 0
+Enron-Email
+inf (no threshold) 352 57 55 116
+1 352 47 44 95
+0.8 248 33 29 85
+0.6 41 6 6 33
+0.4 0 0 0 0
+0.2 0 0 0 0
+Table 25: Impact of threshold(untargeted)
+Dataset Threshold Retrieved Contexts Repeat Effect Prompt Repeat Extract Context ROUGE Effect Prompt ROUGE Extract Context
+HealthCareMagic
+inf (no threshold) 178 162 121 169 129
+1 172 151 113 155 123
+0.8 98 82 63 83 68
+0.6 8 5 5 5 5
+0.4 0 0 0 0 0
+0.2 0 0 0 0 0
+Enron-Email
+inf (no threshold) 478 76 82 90 157
+1 474 71 75 90 155
+0.8 275 46 47 56 97
+0.6 23 6 7 7 12
+0.4 0 0 0 0 0
+0.2 0 0 0 0 0
+4524

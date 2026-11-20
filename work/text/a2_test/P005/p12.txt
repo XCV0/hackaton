@@ -1,0 +1,99 @@
+LegalBench-RAG emphasizes precise snippet re-
+trieval: the model must identify minimal legal ev-
+idence rather than simply retrieve a generally rel-
+evant document. This makes it a strong test of
+fine-grained precision.
+Dragonball (Zhu et al., 2025) is a multi-domain
+and multilingual RAG benchmark released as part
+of RAGEval. It contains questions across finance,
+legal, and medical scenarios in English and Chi-
+nese. We use Dragonball for both retrieval and
+end-to-end generation because it combines het-
+erogeneous domains, long evidence contexts, and
+domain-specific terminology. This setting tests
+whether retrieval methods can recover relevant evi-
+dence without introducing excessive distractor con-
+text.
+MS MARCO (Nguyen et al., 2016) is a large-
+scale open-domain passage retrieval benchmark
+built from real web search queries. Its corpus con-
+sists of millions of short passages, and the task
+requires identifying passages that answer natural
+language questions. Compared with SCI-DOCS
+and LegalBench-RAG, MS MARCO has shorter re-
+trieval units and more direct query-passage match-
+ing, providing a complementary test of retrieval
+effectiveness when evidence is already compact.
+HotpotQA (Yang et al., 2018) is an open-
+domain multi-hop QA benchmark built from
+Wikipedia. Its questions require reasoning over
+multiple supporting documents or facts, and the
+dataset provides sentence-level supporting-fact an-
+notations. We use HotpotQA for end-to-end an-
+swer generation because it directly tests whether
+retrieved evidence supports multi-step reasoning,
+which aligns with SPROUTRAG’s goal of retriev-
+ing evidence across multiple granularities.
+WebQuestions (Berant et al., 2013) is an open-
+domain factual QA benchmark built from natu-
+ral language questions collected from web search
+logs. The answers are typically short entities or
+phrases, making token-level F1 a suitable evalua-
+tion metric. We include WebQuestions to evaluate
+whether SPROUTRAG also improves short-form
+factual QA, where retrieval must remain precise
+and avoid adding unnecessary context.
+A.2 Baseline Details
+We compare SPROUTRAG against two groups of
+baselines: efficient retrieval-oriented methods used
+in the retrieval evaluation, and system-level RAG
+methods used in the end-to-end generation com-
+parison. Unless otherwise stated, we follow the
+configurations recommended in the original pa-
+pers. For methods requiring an LLM generator
+or reranker, we use the same QWEN3-8B genera-
+tor and QWEN3-RERANKER-4B reranker for fair
+comparison.
+Dense X Retrieval (Chen et al., 2024) decom-
+poses documents into fine-grained propositions and
+uses these propositions as retrieval units. This im-
+proves precision by making each unit more atomic
+and self-contained. However, proposition-level
+retrieval can weaken broader contextual continu-
+ity, since related facts are retrieved independently
+rather than as coherent multi-sentence evidence.
+Meta-Chunking (Zhao et al., 2025b) uses LLM-
+based signals to identify semantically meaningful
+chunk boundaries instead of relying on fixed-size
+segmentation. We evaluate both variants: Meta-
+Chunking-PPL, which uses perplexity changes
+to detect boundaries, and Meta-Chunking-MSP,
+which uses margin-sampling-based boundary deci-
+sions. These methods improve chunk coherence,
+but once chunks are formed, cross-chunk semantic
+dependencies are not explicitly modeled.
+MoC (Zhao et al., 2025a) improves over single-
+strategy chunking by dynamically routing text to
+different chunking strategies or granularity choices.
+It is a strong adaptive chunking baseline because
+it can better match the segmentation strategy to
+the local document structure. However, MoC still
+primarily operates at the chunk-construction stage
+and does not build a retrieval-time hierarchy over
+sentence-level evidence.
+RAPTOR (Sarthi et al., 2024) recursively clus-
+ters chunks and summarizes each cluster to build
+a hierarchical tree. Retrieval can then operate
+over both lower-level chunks and higher-level sum-
+maries. This provides a natural multi-granularity
+baseline, but its hierarchy is based on embedding-
+space clustering and LLM-generated summaries,
+which can introduce information loss and addi-
+tional indexing cost.
+LightRAG (Guo et al., 2025) augments retrieval
+with graph-structured knowledge and combines lo-
+cal and global retrieval signals. It is designed to
+improve retrieval over connected evidence by ex-
+ploiting entity and relation structure. We include
+it as a structured retrieval baseline, especially for
+46532

@@ -1,0 +1,100 @@
+Figure 15 provides illustrative examples demon-
+strating how these metrics can identify potentially
+harmful failure modes at the individual question
+level, offering developers a framework for correlat-
+ing system behavior with clinician-assessed harms.
+4.2.3 Automatability of our triad of metrics
+Setup. In this experiment, we assess whether
+LLMs can be used to automatically compute the
+three ASTRID metrics without requiring human
+annotation. Table 3 presents the performance of
+eight LLMs across these metrics, comparing their
+scores against human-labeled ground truth. The
+inference details for each LLM, including deploy-
+ment environment and token limits, are provided
+in the Appendix in Table 5.
+Results. The results indicate that several LLMs
+achieve reasonably close agreement with human
+ratings, supporting the feasibility of automated
+metric evaluation. Notably, GPT-4o, claude-3.5-
+sonnet, and Gemini-2-Flash exhibit high CF F1-
+scores (0.74, 0.74, and 0.77 respectively), suggest-
+ing strong alignment with human judgments of con-
+versational faithfulness. Similarly, GPT-o3-mini
+achieves the highest CR Accuracy (0.87) and RA
+Accuracy (0.95), demonstrating superior retrieval
+relevance and appropriate refusal behavior.
+However, smaller models like LLaMA-3-8B and
+Mistral-7B struggle, particularly in CF, with F1-
+scores of 0.05 and 0.19, respectively, indicating dif-
+ficulty in distinguishing context-grounded versus
+ungrounded responses. This suggests that larger,
+more advanced models may be better suited for au-
+tomated ASTRID metric computation due to their
+improved reasoning and contextual understanding.
+These findings suggest that LLMs can serve
+as scalable evaluators of RAG-based clinical QA
+systems, reducing reliance on human annotators.
+While further prompt engineering and fine-tuning
+may improve alignment with human ratings, the
+ability of models to automatically compute CF, CR,
+and RA offers a promising direction for develop-
+ing continuous and automated evaluation pipelines
+for clinical LLM systems. Further breakdowns of
+model performance across all ASTRID metrics are
+presented in Appendix H.
+5 Conclusion
+We present ASTRID, an Automated and Scalable
+TRIaD for evaluating clinical QA systems leverag-
+ing RAG. ASTRID comprises three metrics — Con-
+versational Faithfulness, Refusal Accuracy, and
+Context Relevance — designed to address the lim-
+itations of existing evaluation frameworks in clin-
+ical settings. Our experiments demonstrate that
+CF aligns more closely with human judgments of
+faithfulness compared to previous definitions, and
+our triad of metrics is the first to correlate system
+performance measures with clinician assessments
+of harmfulness, helpfulness, and inappropriateness
+with high accuracy. We also highlight the potential
+for these metrics to be automatable using current
+LLMs, making them suitable for iterative develop-
+ment and the continuous evaluation of clinical QA
+systems. By publishing our datasets and prompts,
+we aim to provide valuable resources for further
+research and development in the field. Future work
+should expand on end-to-end conversational evalu-
+ations and incorporate usability metrics to ensure a
+comprehensive assessment of clinical QA systems.
+Limitations
+One limitation of our approach is that we focus
+on single-turn safety rather than end-to-end con-
+versations. End-to-end conversations introduce an
+additional element of decision-making and context-
+continuity that need to be assessed for a holistic
+evaluation of a QA system. Further work should
+explore multi-turn interactions to ensure compre-
+hensive safety, reliability, and extended dialogue
+evaluation.
+Our metrics and evaluation frameworks are cen-
+tered around safety. Notably, we have not incorpo-
+rated usability aspects into our evaluations, such
+as robustness to mistranscriptions (Yu et al., 2024),
+measures of clinical empathy (Sorin et al., 2023), la-
+tency, brevity, or user satisfaction(Mukherjee et al.,
+2024). Future research incorporating these dimen-
+sions will provide a more well-rounded assess-
+ment of QA systems in real-world clinical envi-
+ronments. Beyond single-turn interactions as well,
+future work should explore multi-turn interactions,
+and interactions adjacent to clinical question an-
+swering, such as information gathering. In parallel,
+we plan to extend the framework to cover multi-
+domain evaluations, adapting the framework to sup-
+port a variety of clinical specialties across not just
+elective-type pathways.
+A strength of the study was it utilized a real-
+world dataset of questions posed to a voice-based
+AI agent. This dataset included mistranscriptions,
+statements, and truncated questions, reflecting real-
+16708

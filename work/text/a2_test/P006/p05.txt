@@ -1,0 +1,111 @@
+private generation only when the public model’s
+internal confidence is insufficient, thereby effec-
+tively reducing unnecessary private accesses and
+conserving the privacy budget.
+We reduce the frequency of private data ac-
+cess in the following steps: first filtering high-
+probability public candidate tokens and construct-
+ing their cross-layer probability trajectories, then
+applying isotonic regression to fit these trajectories
+and compute confidence scores, and finally utiliz-
+ing these scores to adaptively trigger private gen-
+eration. Specifically, (1) Public candidate token
+filtering. Following contrastive decoding (Li et al.,
+2023a), we dynamically filter a high-probability
+candidate set to reduce the search space. At gen-
+eration step t, we obtain the final-layer probability
+distribution P (L) from the public model and trun-
+cate the candidates using a dynamic threshold:
+Vhead =
+{
+x ∈ V | p(L)(x) ≥ α · max
+x′∈V p(L)(x′) }
+where α is the truncation ratio and V denotes the
+full vocabulary. (2) Cross-layer trajectory con-
+struction. Following the logit lens (Belrose et al.,
+2023), for each layer hidden state h(l) we apply the
+model’s final layer normalization Norm(·), project
+through the unembedding matrix WU , and compute
+the probability of candidate x ∈ Vhead at layer l:
+p(l)(x) = [ softmax ( WU Norm(h(l)) )] x.
+Stacking over window [ls, L] yields the cross-layer
+trajectory p(x) = (p(ls)(x), . . . , p(L)(x)). (3) Iso-
+tonic regression fitting. We apply isotonic regres-
+sion to find the monotonically non-decreasing se-
+quence with the minimum squared deviation from
+p(x), serving as the optimal estimate of an "ideal
+confident trajectory":
+ˆµ(x) = arg min
+µls ≤···≤µL
+L∑
+l=ls
+(
+p(l)(x) − µl )2.
+This optimization is solved exactly by the PAV al-
+gorithm (Ayer et al., 1955), which sequentially av-
+erages adjacent layers that violate monotonicity to
+yield the fitted values ˆµl(x). (4) Confidence scor-
+ing. Given the window length Lw = L − ls + 1, the
+fitted final-layer value ˆµL(x) reflects absolute con-
+fidence, while the RMSE residual captures layer-
+wise stability. The confidence score is defined as
+their difference:
+S(x) = ˆµL(x) −
+/radicaltp/radicalvertex/radicalvertex√ 1
+Lw
+L∑
+l=ls
+(
+p(l)(x) − ˆµl(x) )2.
+(5) Adaptive private RAG triggering. Let x∗ =
+arg maxx∈Vhead S(x). If S(x∗) > θreject, where
+θreject is the confidence threshold, we output x∗ di-
+rectly without private access. Otherwise, we trigger
+private generation (Sec. 3.4).
+This module adaptively determines token confi-
+dence relying solely on the public model’s cross-
+layer probability trajectories. Without additional
+privacy overhead, it reduces private access fre-
+quency from the entire sequence length to strictly
+those knowledge-dependent steps. Furthermore,
+compared to relying exclusively on final-layer prob-
+abilities, this score captures layer-wise convergence
+stability, enabling a substantially more robust char-
+acterization of token confidence.
+3.4 Private-Token Budget Compression via
+DP Contrastive Decoding
+When private generation is triggered (Sec. 3.3),
+this module compresses the per-access privacy cost
+via DP contrastive decoding (Li et al., 2023a; Shi
+et al., 2024; Fang et al., 2026), by narrowing the
+protected scope from full private logits down to a
+private delta.
+While Sec. 3.3 reduces access frequency, exist-
+ing methods still apply DP protection to complete
+private logits during private generation (Amin et al.,
+2024; Flemings et al., 2024). However, private log-
+its contain non-private knowledge already internal-
+ized by the LLM, so protecting them in full wastes
+privacy budget (Vinod et al., 2025). We instead
+protect only the private delta, defined as the log-
+probability difference between private logits (with
+private context) and public logits (without context).
+Contrastive decoding removes non-private informa-
+tion, making the amount of information requiring
+protection significantly smaller than the full logits,
+thereby lowering per-access costs. Furthermore,
+following Vinod et al. (2025), we add the clipped
+and aggregated private delta back to the public log-
+its, ensuring a smooth fallback to the public model
+under tight privacy budgets.
+We perform DP contrastive decoding in four
+steps, applying DP protection only to the delta
+rather than the full logits, to compress the per-
+access privacy cost. Specifically, (1) Private logits
+computation. Let Rfinal = {d1, . . . , dK } be the
+top-K private samples retrieved in Sec. 3.2. We
+construct an individual private prompt Pi from each
+di. When private access is triggered at generation
+step t (Sec. 3.3), we reuse the already computed
+public final-layer logits as ℓpub ∈ R|V |, and com-
+45297

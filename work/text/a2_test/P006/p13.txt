@@ -1,0 +1,101 @@
+In Sec. 3.4, our sampling yt ∼ softmax(u/τ )
+is an instance of the exponential mechanism with
+utility u and temperature τ . Element-wise clipping
+to [−C, C] followed by 1/K averaging gives L∞-
+sensitivity
+∆u = sup
+D∼D′
+∥u(D) − u(D′)∥∞ = 2C K ,
+since under the add/remove adjacency, adding or
+removing one private sample changes the top-K re-
+trieved set by at most one swap (one sample leaves
+and another enters), and each delta is computed
+independently per retrieved sample (Sec. 3.4), so
+at most one clipped summand changes, shifting the
+average by at most 2C/K per coordinate; the pub-
+lic term log ppub cancels in the difference. Match-
+ing the softmax form exp(u/τ ) to the mechanism
+form exp
+( ε0
+2∆u u
+)
+gives 1 τ = ε0 2∆u , hence
+ε0 = 2∆u τ = 4C Kτ .
+Substituting into the 1 8 ε2 0 bound:
+ρtoken = 1 8 ε2 0 = 1 8 · 16C2 K2τ 2 = 2C2 K2τ 2 .
+A.4 Composition
+zCDP admits two core composition proper-
+ties (Bun and Steinke, 2016). Sequential compo-
+sition: if M1, . . . , MT satisfy ρ1, . . . , ρT -zCDP
+respectively, their sequential composition satisfies(∑T
+t=1 ρt
+)
+-zCDP. Parallel composition: if each
+Mj acts only on a disjoint subset Dj ⊆ D and sat-
+isfies ρj -zCDP, the joint output satisfies
+(
+maxj ρj
+)
+-
+zCDP on D.
+In our setting, the topic partition {Cj }m j=1 is
+disjoint. For any private sample d∗ ∈ Cj∗ , only
+queries routed to cluster j∗ produce a non-zero pri-
+vacy contribution. By parallel composition, costs
+across clusters do not compound. For a single
+cluster j, let nj be the number of times it is pri-
+vately accessed. Enforced by our strict cluster
+skipping mechanism, nj is bounded by the pre-
+defined maximum allowed access count Nmax (i.e.,
+nj ≤ Nmax). Specifically, the system maintains a
+secure access counter for each cluster. Once a clus-
+ter’s access count reaches Nmax, the retriever au-
+tomatically bypasses it for any subsequent queries
+and seeks candidates from the next most relevant
+available clusters, thereby strictly terminating any
+further privacy budget accumulation for that cluster.
+Each access triggers at most Tpriv private decoding
+steps, each costing ρtoken. By sequential composi-
+tion:
+ρj = nj · Tpriv · ρtoken ≤ Nmax · Tpriv · ρtoken.
+Taking the maximum over all clusters via parallel
+composition:
+ρonline = max j ρj
+= Nmax · Tpriv · ρtoken
+= Nmax · Tpriv · 2C2 K2τ 2 .
+Combining ρcls and ρonline via sequential com-
+position:
+ρtotal = ρcls + ρonline
+= 1 2σ2 + Nmax · Tpriv · 2C2 K2τ 2 .
+A.5 Conversion to (ε, δ)-DP
+Finally, ρ-zCDP implies (ε, δ)-DP for any δ ∈
+(0, 1) (Bun and Steinke, 2016):
+ε = ρtotal + 2
+√
+ρtotal ln(1/δ).
+This yields the (ε, δ)-DP bound stated in Sec. 4.
+B Experimental Settings
+B.1 Implementation Details
+For the retrieval module, we use DPR (Karpukhin
+et al., 2020) to fetch relevant documents. We gen-
+erate 10,000 public topics to cluster the Wikipedia
+corpus for NQ and TriviaQA in batches, and 1,000
+topics for ChatDoctor. During the coarse retrieval
+stage, Ncoarse is set to 10,000 for NQ and Trivi-
+aQA, and 2,000 for ChatDoctor. We explicitly set
+the maximum allowed access count Nmax = 5 uni-
+formly across datasets. In our experiments with
+100 random test queries, the actual maximum clus-
+ter access counts did not exceed this predefined
+limit.
+During the token generation phase, the tempera-
+ture τ for the exponential mechanism sampling is
+set to 0.4 for NQ and TriviaQA, and 1.2 for Chat-
+Doctor. The maximum generation length is set to
+50. For the adaptive triggering module, the trun-
+cation ratio is α = 0.2, and the starting layer is
+set to ls = L/2. The rejection threshold θreject
+is automatically calibrated per model via the EER
+criterion, yielding 0.5, 0.52, 0.47, and 0.56 for OPT-
+1.3B, Pythia-1.4B, Mistral-7B, and Llama-3.1-8B,
+45305

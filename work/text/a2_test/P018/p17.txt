@@ -1,0 +1,99 @@
+This expectation has the closed form
+eHk(zi t) = X
+v∈T(i,t)
+¯p(i,t,v)
+
+ψ(S(i,t) + 1) − ψ(α(i,t,v) + 1)
+
+,
+(18)
+where ψ is the digamma function:
+ψ(u) = d du log Γ(u) = Γ′(u) Γ(u) . (19)
+The uncertainty eHk is small when the document-
+conditioned evidence is concentrated on a few next-
+token candidates, and larger when the evidence is
+spread across many candidates.
+Normalized Confidence To make the score com-
+parable across documents and bounded in [0, 1], we
+normalize by the maximum entropy over a top-k
+support:
+Hk(zi t) = eHk(zi t) log k . (20)
+The token-level confidence used in the main decod-
+ing rule is then
+c(i,t) = 1 − Hk(zi t). (21)
+Thus, c(i,t) is high when document di yields a
+sharp next-token prediction at step t, and low when
+the model remains uncertain about how to con-
+tinue from that document. Unlike the document-
+level confidence qi, which is computed once per
+question–document pair, c(i,t) is recomputed at ev-
+ery decoding step.
+B.3 Pseudocode
+Algorithm 1 summarizes the complete procedure
+for one query.
+B.4 Computational Cost
+The document-level support probe is computed
+once per query. All n document probes can be
+batched into a single forward pass, producing the n
+values of qi. This cost is amortized over the entire
+generation.
+At each decoding step, DCCD requires one full-
+context forward stream and n single-document for-
+ward streams. Thus, for n retrieved documents,
+the decoding stage uses n + 1 streams per to-
+ken. The token-level confidence computation adds
+only O(nk) operations for top-k extraction and
+digamma evaluations, which is negligible com-
+pared with the model forward passes for the values
+of k used in our experiments.
+Algorithm 1 DCCD decoding for one query.
+Require: Question x, retrieved documents D =
+{d1, . . . , dn}, model pθ, tokenizer, max new
+tokens Tmax, top-k value k
+// Stage 1: document-level confidence
+1: for i = 1, . . . , n do
+2: Construct support probe prompt
+πsup(x, di)
+3: end for
+4: Run a batched forward pass over all support
+probes
+5: for i = 1, . . . , n do
+6: Compute qi using Eq. (13)
+7: end for
+// Stage 2: decoding
+8: Initialize generated prefix y<1 = ∅
+9: for t = 1, . . . , Tmax do
+10: Compute full-context logits zfull t
+11: for i = 1, . . . , n do
+12: Compute document-conditioned logits
+zi t
+13: Compute c(i,t) using Eqs. (14)–(21)
+14: s(i,t) ← qi + c(i,t)
+15: end for
+16: i+ t ← arg maxi s(i,t)
+17: i− t ← arg mini s(i,t)
+18: ϵt ← s(i+ t ,t) − s(i− t ,t)
+19: zDCCD t ← zfull t + ϵt
+
+zi+ t t − zi− t t 
+20: Select yt from softmax(zDCCD t )
+21: Append yt to the generated prefix
+22: if yt is an end-of-sequence token then
+23: break
+24: end if
+25: end for
+26: return decoded answer
+The implementation can use the model’s stan-
+dard KV cache for each stream. With caching, each
+decoding step only extends the existing streams
+by one token. The memory footprint scales lin-
+early with the number of streams, and the runtime
+scales approximately linearly with n + 1 relative
+to full-context greedy decoding, plus the one-time
+support-probe pass.
+C Experimental Details
+This appendix provides additional experimental de-
+tails that describe the datasets, baselines, models,
+and headline evaluation protocol. Here, we record
+the implementation-level choices needed to repro-
+17

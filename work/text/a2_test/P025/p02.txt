@@ -1,0 +1,102 @@
+• (RQ2) Can retrieval data affect the memoriza-
+tion of LLMs in RAG?
+Regarding RQ1, to fully uncover the privacy
+leakage of the retrieval dataset, we consider there
+exists an attacker, who aims to extract private infor-
+mation from the retrieval dataset intentionally. We
+proposed a composite structured prompting attack
+method specific for extracting retrieval data, which
+is composed of the {information} part for context
+retrieval and {command} part to let LLMs output
+retrieved contexts.
+In detail, take our study on RAG for medical dia-
+logue (Section 3.2) as an example, the attacker can
+ask the model for general information or sugges-
+tions related to certain diseases. More importantly,
+we propose to append an extra “command prompt”
+(see Section 3.2) during inquiry to improve the suc-
+cessful rate of extraction. After that, we examine
+the model’s output to see whether it contains infor-
+mation about specific prescription records, which
+may hurt the privacy of patients. Based our em-
+pirical study, we observe that our studied models
+(Llama2-7b-Chat and GPT-3.5-turbo) can output
+verbatim or highly similar records with very high
+rates (near 50%). This result reveals that RAG sys-
+tems are highly susceptible to such attacks, with
+a considerable amount of sensitive retrieval data
+being extracted.
+Regarding RQ2, while prior work has shown
+that LLMs exhibit a propensity to output memo-
+rized training data, verifying the influence of re-
+trieval data integration remains unexplored. There-
+fore, we conduct targeted and prefix attacks on
+LLMs’ training corpus, comparing training data
+exposure with and without retrieval augmentation.
+We discover that incorporating retrieval data into
+RAG systems can substantially reduce LLMs’ ten-
+dency to output its memorized training data, achiev-
+ing greater protection than noise injection or system
+prompts. From a training data security perspective,
+our findings indicate that RAG may provide a safer
+architecture compared to using LLMs sorely.
+2 Related Work
+2.1 Retrieval-Augmented Generation (RAG)
+Retrieval-augmented generation (RAG), first intro-
+duced by Lewis et al. (2020), has emerged as one
+of the most popular approaches to enhance the gen-
+eration ability of LLMs (Liu, 2022; Chase, 2022;
+Van Veen et al., 2023; Ram et al., 2023; Shi et al.,
+2023). This synergy markedly boosts the output’s
+accuracy and relevance (Gao et al., 2023), mitigat-
+ing essential issues commonly referred to as "hal-
+lucinations" of LLMs (Shuster et al., 2021). One
+of RAG’s distinctive features is its flexible archi-
+tecture, allowing for the seamless interchange or
+update of its three core components: the dataset, the
+retriever, and the LLM. This flexibility means that
+adjustments to any of these elements can be made
+without necessitating re-training or fine-tuning of
+the entire system (Shao et al., 2023; Cheng et al.,
+2023). These unique advantages have positioned
+RAG as a favored approach for a range of practi-
+cal applications, including personal chatbots and
+specialized domain experts like medical diagnostic
+assistants(Panagoulias et al., 2024).
+2.2 Privacy Risk of Large Language Models
+A body of research has demonstrated that LLMs are
+prone to memorizing and inadvertently revealing
+information from their pre-training corpora (Carlini
+et al., 2021; Kandpal et al., 2022; Lee et al., 2021;
+Carlini et al., 2022; Ippolito et al., 2022; Zhang
+et al., 2021; Biderman et al., 2023; Mireshghallah
+et al., 2022; Lee et al., 2023; Ren et al., 2024).
+Notably, Carlini et al. (2021) pioneered the investi-
+gation into data extraction attacks, revealing LLMs’
+tendency to recall and reproduce segments of their
+training data. Following this, subsequent studies
+further identified various factors, such as model
+size, data duplication, and prompt length that in-
+crease such memorization risk (Carlini et al., 2022;
+Biderman et al., 2023). Moreover, for the privacy
+risks associated with fine-tuning data, (Mireshghal-
+lah et al., 2022; Lee et al., 2023; Zeng et al., 2023).
+Mireshghallah et al. (2022) discovered that fine-
+tuning model heads lead to more significant memo-
+rization than adjusting smaller adapter modules.
+Furthermore, Zeng et al. (2023) examined how
+memorization varies across different fine-tuning
+tasks, noting particular vulnerabilities in tasks that
+demand extensive feature representation, such as
+dialogue and summarization. Huang et al. (2023)
+has investigated the privacy risk of retrieval-based
+kNN-LM(Khandelwal et al., 2019), while it is dif-
+ferent from our work as kNN-LM has a different
+architecture and mechanism.
+3 Method
+To answer the RQ1 and RQ2 in Section 1, we con-
+duct various attacks that aim at quantifying the
+leakage risks associated with different components
+of the RAG framework. This section begins with
+an overview of RAG’s background and the threat
+4506

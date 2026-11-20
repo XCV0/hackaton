@@ -1,0 +1,97 @@
+Q: Who does Fez marry in that 70's show?
+Query 1: who does Fez marry in that 70's show 
+Retrieved Content: 
+Doc 1(Title: "Fez (That '70s Show)"): Fez worked at DMV (Department of Motor Vehicle) from season 5 to season 7, where he met Nina, his short stint girlfriend. With 
+Nina, Fez managed to lose his virginity. Fez continued to work there after finishing school and being granted a green card ...
+Doc 2(Title: "Green card marriage"): forced into a green card marriage so Catalina could come back to America. In the season 5 finale of "That '70s Show", Fez marries 
+Laurie Forman to avoid deportation. In the two-part season two finale of the sitcom "Melissa & Joey", Joe proposes to and marries Elena, his Russian girlfriend, who will 
+likely be arrested upon her return to Russia after her company is shut down due to a Ponzi scheme that she was either unawareofor not a participant in ...
+Doc 3(Title: "Fez (That '70s Show)"): Fez (That '70s Show) Fez is a fictional character and one of the four male leads on the Fox Network's "That '70s Show", portrayed by 
+Wilmer Valderrama. He was a foreign exchange student in a group of six local teenagers. Fez was born on August 4, 1960...
+Round 1
+Retrieval
+Proponent Agent: To find the answer, I will look at the given documents. In Doc 
+1, it is mentioned that Fez worked at DMV and met Nina, his short-term 
+girlfriend... In Doc 2, it is mentioned that Fez marries Laurie Forman to avoid 
+deportation in the season 5 finale of "That '70s Show". In Doc 3, it does not 
+mention Fez's marriage. The answer is: Nina.
+Opponent Agent: The character Fez, played by Wilmer Valderrama, is a main 
+character in the popular American sitcom "That '70s Show." Throughout the 
+series, Fez's romantic relationships are a recurring plot point. However, Fez's 
+most notable and long-term relationship is with Jackie Burkhart, played by Mila 
+Kunis. The answer is Jackie Burkhart.
+Proponent Agent: The opponent agent’s answer is incorrect because, in the 
+given documents, it is mentioned in Doc 2 that Fez marries Laurie Forman to 
+avoid deportation in the season 5 finale of "That '70s Show." This is a specific 
+instance of Fez getting married in the show. Opponent Agent 0's answer does not 
+mention Fez's marriage, but rather a long-term relationship. The answer is: 
+Laurie Forman
+Round 2
+Opponent Agent: The Proponent Agent seems to have considered a few 
+documents and didn't look at the entire series. While it's true that Fez does have 
+a short-term girlfriend named Nina and that Doc 3 doesn't mention Fez's 
+marriage, Doc 2's claim that Fez marries Laurie Forman to avoid deportation in 
+the season 5 finale is actually aplot point in the show. Sothe answer is: Laurie 
+Forman
+Figure 3: Case study of the response debate.
+Method NQ TriviaQA PopQA 2wiki HotpotQA StrategyQA
+EM F1 EM F1 EM F1 EM F1 EM F1 EM
+Naive RAG 38.20 50.08 60.80 69.55 37.60 45.69 14.80 24.27 25.80 35.80 62.60
++ fRetDebate 38.20 50.79 57.20 65.31 39.60 47.04 16.00 25.91 28.20 37.48 64.60
++ fResDebate 34.40 47.61 60.40 69.60 37.60 46.43 26.00 34.30 30.20 41.00 68.80
+DRAG 36.80 50.38 60.80 69.93 38.60 46.50 28.80 36.97 30.80 41.74 69.20
+- Info Asymmetry 35.20 50.09 57.40 66.21 37.80 45.95 22.00 29.36 30.00 38.62 68.20
+Table 5: Ablation study for key components of DRAG on six benchmarks. Blue marks the best-performing method,
+light blue represents the second-best-performing method.
+5.5 Ablation Study
+As shown in Table 5, we conduct an ablation study
+to evaluate the impact of key components in DRAG
+across six benchmarks.
+First, we independently assess the effective-
+ness of the two debate stages: retrieval debate
+(fRetDebate) and response debate (fResDebate). To
+this end, we introduce two DRAG variants: (1)
++ fRetDebate: Incorporates retrieval debate in the
+retrieval stage but excludes the Response Debate.
+(2) + fResDebate: Incorporates response debate while
+omitting retrieval debate. Compared to Naive RAG,
+both variants improve performance across most
+tasks. This confirms that the Retrieval Debate en-
+hances retrieval strategies by reducing information
+bias and improving factual coverage, leading to
+better answer generation. Meanwhile, response
+debate ensures proper utilization of retrieved infor-
+mation, mitigating hallucinations and enhancing
+factual accuracy.
+To examine the effect of information asymmetry
+in response debate, we introduce the - Info Asym-
+0 1 2 3 4 5 6 7 8 9 10 11
+LLM Calls
+0
+1
+2
+3
+4
+5
+6Retriever Calls
+Naive Gen MAD
+Naive RAG
+IRCoT
+FLARE
+Iter-RetGen
+SuReSelf-RAG
+DRAG
+5/20/25, 7:08 PM StrategyQA2.svg
+ﬁle:///Users/huwt/Downloads/StrategyQA2.svg 1/1
+Figure 4: Average LLM and Retriever calls for DRAG
+and other baselines methods on the StrategyQA.
+metry variant, where all agents have equal access to
+retrieval evidence. Results show consistent perfor-
+mance deterioration across all datasets, indicating
+that information asymmetry is crucial for promot-
+ing factual consistency. By enforcing role-based
+knowledge distribution, it encourages adversarial
+interactions, prevents agents from over-relying on
+retrieved content, and improves robustness in fac-
+tual reasoning.
+15846

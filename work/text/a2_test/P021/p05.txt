@@ -1,0 +1,91 @@
+We decompose predictions one sentence at a time
+using an LLM prompted to create a set of decon-
+textualized subclaims (Gunjal and Durrett, 2024;
+Wanner et al., 2024a), ensuring that subclaims are
+atomic but independently verifiable. In our exper-
+iments, we use manually-authored reference sub-
+claims, though automatic decomposition can be
+applied to other reference forms as well.
+Reference Evaluations A key aspect of MI-
+RAGE is the ability to evaluate in both reference-
+free (Collection) and reference-based (Reference)
+settings. In the Collection setting, subclaims are
+verified directly against the documents themselves.
+In the Reference setting, each document is mapped
+to a text-based proxy for its information content
+(e.g., a human-written article or set of manually
+authored subclaims). This makes Reference evalu-
+ation more computationally efficient, as it avoids
+multimodal inference, but introduces the limita-
+tion that human-authored references are inherently
+non-exhaustive: factual subclaims omitted from the
+reference will be penalized.
+4.1 INFOF1: Evaluating Information Quality
+We evaluate information quality using an F1 score
+over two metrics: INFOP, which assesses subclaim
+factuality, and INFOR, which assesses information
+coverage. We refer to the resulting metric as IN-
+FOF1.
+4.1.1 Information Factuality (INFOP)
+We evaluate the factuality of a predicted text P
+against a reference set of evidence documents
+R = {r1, . . . , rn}. We sentence-split the predicted
+text and then decompose each predicted sentence
+into a set of subclaims (CP ). These subclaims
+are then scored for support against R using a scor-
+ing function s, where INFOP is defined as the pro-
+portion of predicted subclaims that are supported,
+weighted by the support strength given by s:
+precision(CP , R) = 1 |CP | ∑ c∈CP s(c, R) (1)
+We propose two variations of INFOP, Collection
+Precision and Reference Precision, which differ in
+how they construct R.
+Collection Precision defines R as the set of rel-
+evant documents for the query topic. It is thus
+similar to RAGAS Faithfulness, which evaluates
+support against the retrieved documents used as
+generation context, although our experiments rely
+on the gold set of relevant documents for each topic.
+In principle, R could be a very large collection (e.g.,
+a knowledge base), which would make it akin to a
+multimodal FActScore (Min et al., 2023).
+Reference Precision defines R as the reference
+text or reference subclaims for the topic, evaluating
+support between predicted subclaims and the text
+proxy rather than the documents directly.
+4.1.2 Information Coverage (INFOR)
+Information Coverage (INFOR) is the proportion of
+subclaims in R that are attested in P . It is exactly
+analogous to INFOP, but with the roles of R and P
+reversed. If R is given as a complete reference text,
+we first sentence-split R and then decompose each
+sentence into a set of subclaims CR.4
+recall(CR, P ) = 1 |CR| ∑ c∈CR s(c, P ) (2)
+INFOR is the same as ALCE Claim Recall, with
+both checking if subclaims in some reference are
+attested by the prediction.
+A collection vs. reference distinction, analogous
+to the one for INFOP, can be made here for INFOR.
+In our experiments, we use the reference version of
+INFOR, as the collection version imposes impracti-
+cal computational costs and task complexity.
+4.2 CITEF1: Evaluating Citations
+CITEF1 measures how effectively P grounds infor-
+mation in cited sources. Like INFOF1 (and unlike
+ALCE and ARGUE), CITEF1 works with sub-
+claims. It is an F1 score over CITEP—the propor-
+tion of subclaims supported by their cited sources—
+and CITER—the proportion of subclaims that prop-
+erly attribute their sources.
+4.2.1 Citation Support (CITEP)
+CITEP is the proportion of predicted subclaims that
+are supported by their cited documents, weighted
+by the strength of that support. We first decompose
+P into a set of subclaims CP and create a mapping
+from each subclaim cP i to the set of documents Di
+that are cited by the sentence from which cP i was
+decomposed; i.e., {(ci, Di) | cP i ∈ CP }. Given the
+support scoring function s, we compute:
+precision(CP , D) = 1 |CP | ∑ cP i ∈CP s(cP i , Di) (3)
+4If R is given as a set of subclaims, we use these directly.
+40235

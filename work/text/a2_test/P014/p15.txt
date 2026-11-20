@@ -1,0 +1,29 @@
+gradient of the conditional likelihood under the
+posterior:
+∇θ log Pθ(y|x, d) = Ez∼Pθ (z|y,x,d)
+[∇θ log Pθ(y|x, z, d)] (16)
+This derivation proves that optimizing the model to
+generate y given z effectively enhances the direct
+1-turn performance Pθ(y|x, d) by utilizing the pos-
+terior distribution as a weighting mechanism for
+training.
+G Case Study
+Figure 6 and Table 7 provide a qualitative compari-
+son between BrPr and GRPO-RAG. In the Standard
+CoT strategy, the GRPO-RAG model erroneously
+relies on conflicting information within external
+documents, resulting in an incorrect prediction.
+Conversely, BrPr demonstrates the capacity to im-
+plicitly leverage parametric knowledge acquired
+during training to navigate these conflicts—such
+as correctly identifying misattributions (e.g., "in-
+correctly attributes the performances to Jennifer
+Aniston")—to obtain the correct answer. Similarly,
+in the Prior-Guided CoT strategy, the provision of
+explicit background knowledge enables the model
+to effectively differentiate between conflicting and
+noisy documents (e.g., recognizing that "Johnny
+Cash" denotes the cinematic character rather than
+the actual singer), thereby facilitating more robust
+reasoning.
+22163

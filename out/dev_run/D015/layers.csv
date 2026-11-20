@@ -1,0 +1,39 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D015,DV-REF-L1,DV-REF,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-REF-L2,DV-REF,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-REF-L3,DV-REF,3,absorber,CdTe,,,vapor transport deposition,,,,"CdCl2 activation; Cu doping with 0.1 mM CuCl2 in water, annealed in air at 200 °C for 20 min; толщина поглотителя в статье только как диапазон ~3.5 um (p3)"
+D015,DV-REF-L4,DV-REF,4,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-0-L1,DV-0,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-0-L2,DV-0,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-0-L3,DV-0,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-0-L4,DV-0,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,0 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-0-L5,DV-0,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-6-L1,DV-6,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-6-L2,DV-6,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-6-L3,DV-6,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-6-L4,DV-6,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,6 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-6-L5,DV-6,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-8-L1,DV-8,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-8-L2,DV-8,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-8-L3,DV-8,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-8-L4,DV-8,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,8 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-8-L5,DV-8,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-10-L1,DV-10,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-10-L2,DV-10,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-10-L3,DV-10,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-10-L4,DV-10,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,10 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-10-L5,DV-10,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-12-L1,DV-12,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-12-L2,DV-12,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-12-L3,DV-12,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-12-L4,DV-12,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,12 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-12-L5,DV-12,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-BREF-L1,DV-BREF,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-BREF-L2,DV-BREF,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-BREF-L3,DV-BREF,3,absorber,CdTe,,,vapor transport deposition,,,,"CdCl2 activation; Cu doping with 0.1 mM CuCl2 in water, annealed in air at 200 °C for 20 min; толщина поглотителя в статье только как диапазон ~3.5 um (p3)"
+D015,DV-BREF-L4,DV-BREF,4,back_contact,ITO,250,nm,"RF sputtering, room temperature",,,,thickness given as ~250 nm
+D015,DV-BCC-L1,DV-BCC,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-BCC-L2,DV-BCC,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-BCC-L3,DV-BCC,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-BCC-L4,DV-BCC,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,8 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-BCC-L5,DV-BCC,5,back_contact,ITO,250,nm,"RF sputtering, room temperature",,,,thickness given as ~250 nm

@@ -1,0 +1,59 @@
+Published as a conference paper at ICLR 2025
+=================================== Prompt of Drafter ====================================
+Response to the instruction. Also provide rationale for your response.
+## Instruction: A lot of the problems with forest fires is because of bad policy (not to
+clear out the forests) that was put in place by environmentalists.
+## Evidence:
+[1] Forest restoration
+That can be because of provoked deforestation in order to substitute forests by crop areas,
+or in dry areas, because of wild fires occurring naturally or intentionally. A whole
+section of forest landscape restoration in linked to this particular problem, as in many
+cases, the net loss of ecosystem value is very high and can open the drop to an accelerated
+further degradation of the soil conditions through erosion and desertification. This
+indeed has dire consequences on both the quality of the habitats and their related fauna.
+...
+[2] Wildfire
+Attempts to thin out the fuel load may be met with opposition due to the desirability of
+forested areas. Wildland goals may be further resisted because of endangered species
+protections and habitat preservation. The ecological benefit of fire is often overridden by
+the economic benefits of protecting structures and lives. Additionally, federal policies
+that cover wildland areas usually differ from local and state policies that govern urban
+lands. ...
+====================================== Completion ========================================
+## Rationale: Inadequate forest management can contribute to the severity of wildfires.
+## Response: True
+====================================== Verification ======================================
+draft score: 0.8161
+self-containment score:0.1360
+self-reflection score: 0.8877
+------------------------------------------------------------------------------------------
+=================================== Prompt of Drafter ====================================
+Response to the instruction. Also provide rationale for your response.
+## Instruction: A lot of the problems with forest fires is because of bad policy (not to
+clear out the forests) that was put in place by environmentalists.
+## Evidence:
+[1] 1997 Indonesian forest fires
+The 1997 Indonesian forest fires were caused by changing land use which made the tropical
+forest vulnerable to fire during a drought associated with that year’s El Nino. Indonesian
+forests have historically been resistant to burning even during long dry seasons and
+despite the use of fire to clear land for swidden agriculture. The land use changes that
+led to the fires were a combination of industrial-scale logging, draining peatlands for
+conversion to oil palm and fast-growing tree plantations, and a massive government program
+to drain swamps and convert them to rice paddies. ...
+[2] Wildfire
+Attempts to thin out the fuel load may be met with opposition due to the desirability of
+forested areas. Wildland goals may be further resisted because of endangered species
+protections and habitat preservation. The ecological benefit of fire is often overridden by
+the economic benefits of protecting structures and lives. Additionally, federal policies
+that cover wildland areas usually differ from local and state policies that govern urban
+lands. ...
+====================================== Completion ========================================
+## Rationale: The 1997 Indonesian forest fires were caused by **land use changes**,
+including industrial-scale logging, draining peatlands.
+## Response: False
+====================================== Verification ======================================
+draft score: 0.8288
+self-containment score: 0.1325
+self-reflection score: 0.9533
+Figure 10: Case study of SPECULATIVE RAG from PubHealth where False is the correct answer.
+23

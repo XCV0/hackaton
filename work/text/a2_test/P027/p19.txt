@@ -1,0 +1,45 @@
+Published as a conference paper at ICLR 2025
+Table 11: Ablation study of multi-perspective sampling on multi-hop reasoning benchmarks:
+MuSiQue, HotpotQA.
+MuSiQue HotpotQA
+Random sampling 29.33 48.2
+Multi-perspective sampling 31.57 49.00
+• "When was the singer and songwriter of Radiohead born?"
+– Step 1: Who is the singer and songwriter of Radiohead? → Thom Yorke
+– Step 2: When was [Thom Yorke](answer of step 1) born? → October 7, 1968
+– Final answer: October 7, 1968
+In contrast, comparison-type questions also involve two steps, but the answers to each step are
+independent of each other. For example:
+• "Who was born first, Morgan Llywelyn or Robert Jordan?"
+– Step 1: What’s Morgan Llywelyn’s DOB? → December 3, 1937
+– Step 2: What’s Robert Jordan’s DOB? → October 17, 1948
+– Final answer: Morgan Llywelyn
+Table 12: Performance of SPECULATIVE RAG for different question types
+Question Type # of Questions SPECULATIVE RAG
+Bridge-type 400 41.75
+Comparison-type 100 78.00
+Overall 500 49.00
+We report the performance breakdown of SPECULATIVE RAG on HotpotQA in Table 12. The
+results demonstrate a superior performance on comparison-type questions with multi-perspective
+sampling. This aligns with our expectations, as multi-perspective sampling ensures the document
+subset covers the diverse topics necessary for answering comparison-type questions. Revisiting
+the example above, "Who was born first, Morgan Llywelyn or Robert Jordan?", with k = 4, our
+approach clusters retrieved documents into four groups. Group 0 and 3 focus on Morgan, while
+group 1 and 2 focus on Robert. As we sample one document from each group for the drafters,
+this clustering result ensures each drafter receives documents about both individuals. This balanced
+information distribution is crucial for the comparison-type questions. In contrast, random sampling
+risks providing a drafter with information about only one person, yielding a suboptimal draft.
+On the other hand, we also observe that the multi-perspective sampling is less helpful for bridge-type
+questions. These questions require the LLM to first identify the "bridge entity" (e.g., Thom Yorke in
+the earlier example), a task our current work isn’t explicitly designed for. While multi-perspective
+sampling effectively covers different topics in the drafts and the map-reduce approach accelerates
+inference, they might not directly contribute to pinpointing the "bridge entity" - the key to answering
+bridge-type questions.
+We believe our framework could be effectively combined with other techniques specifically designed
+for bridge-type questions, such as those proposed in Xia et al. (2024b); Jiapeng et al. (2024); Shi
+et al. (2024). For instance, the Tree-of-Reviews (ToR) framework, introduced in Jiapeng et al.
+(2024), addresses multi-hop reasoning problems by dynamically initiating new searches based on
+previously retrieved documents and constructing various reasoning paths. This dynamic searching
+strategy can be integrated into our SPECULATIVE RAG, enabling each drafter to answer bridge-type
+questions more effectively.
+19

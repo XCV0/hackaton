@@ -1,0 +1,106 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 16918–16932
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+HalluGuard: Evidence-Grounded Small Reasoning Models to Mitigate
+Hallucinations in Retrieval-Augmented Generation
+Loris Bergeron*1,4 Ioana Buhnila*2,3 Jérôme François4 Radu State4
+1Banque de Luxembourg 2Center for Data Science in Humanities, Chosun University
+3ATILF, University of Lorraine–CNRS 4SnT, University of Luxembourg
+Correspondence: loris.bergeron@blu.bank
+Abstract
+Large Language Models excel at NLP tasks
+but remain prone to hallucinations, limiting
+trust in real-world applications. We present
+HalluGuard, a 4B-parameter Small Reason-
+ing Model (SRM) designed as a guardrail
+for Retrieval-Augmented Generation (RAG)
+pipelines, which classifies document-claim
+pairs as grounded or hallucinated in closed-
+book, document-grounded settings and pro-
+duces evidence-grounded justifications. Our
+approach combines (i) a domain-agnostic syn-
+thetic dataset derived from FineWeb and re-
+fined through multi-stage curation and data ref-
+ormation, (ii) synthetic grounded and halluci-
+nated claims, and (iii) preference-based fine-
+tuning with Odds Ratio Preference Optimiza-
+tion (ORPO) to distill large-model reasoning
+into a smaller backbone. On the RAGTruth
+subset of the LLM-AggreFact benchmark,
+HalluGuard achieves 84.4% balanced accu-
+racy (BAcc), surpassing specialized models,
+MiniCheck (7B; 84.0%) and Granite Guardian
+3.3 (8B; 82.2%) while using roughly half their
+parameters. Across the benchmark, it reaches
+77.1% BAcc, surpassing larger general-purpose
+LLMs such as GPT-4o (75.9%). HalluGuard
+and its datasets are available on Hugging Face1.
+1 Introduction
+Large Language Models (LLMs) have been used
+for a variety of Natural Language Processing (NLP)
+tasks, achieving strong results in summarization,
+text classification, and question answering (Tan
+et al., 2023; Singhal et al., 2023).
+However, recent research shows that Small Lan-
+guage Models (SLMs) (Schick and Schütze, 2021)
+can achieve competitive results in specific tasks, es-
+pecially when fine-tuned on domain-specific data.
+In addition to being cost and energy efficient, SLMs
+are practical in resource-constrained settings (Lep-
+agnol et al., 2024) such as on-premise environ-
+*These authors contributed equally.
+1https://hf.co/collections/lrsbrgrn/halluguard
+The Eiffel Tower
+is in Paris. It
+opened in 1889.
+Document 𝑥
+ HalluGuard
+Reason ﬁrst... 
+then produce 
+a classiﬁcation
+HALLUCINATED
+The claim says the Eiffel Tower is in
+Paris and 330 meters tall. The
+document conﬁrms it is in Paris and
+opened in 1889, but omits the
+height, making the 330-meter detail
+an extrinsic hallucination.
+Justiﬁed by
+citing relevant
+evidence from 𝑥
+ResponseClaim c
+The Eiffel Tower
+is located in
+Paris and is 330
+meters tall.
+Figure 1: HalluGuard Concept. In a closed-book set-
+ting, HalluGuard is given a document x and a claim
+c and only reasons over x to determine whether the
+claim is grounded or hallucinated, and produces a
+justification by citing evidence from the document.
+ments, often required in the financial sector and
+industries with strict compliance requirements.
+However, a major remaining challenge is that
+both LLMs and SLMs are prone to hallucinations,
+outputs inconsistent with the input prompt or fac-
+tual knowledge (Zhang et al., 2025a; Huang et al.,
+2023), and are problematic in Retrieval-Augmented
+Generation (RAG) (Lewis et al., 2020) pipelines,
+increasingly deployed in companies due to their
+ability to deliver context-aware responses.
+Even when using documents, RAGs remain vul-
+nerable to hallucinations (Niu et al., 2024), com-
+promising trust and explainability (Ni et al., 2025).
+To address this, models must be able to detect hal-
+lucinations and justify their outputs with evidence
+while being integrated into RAG pipelines.
+Recent work emphasizes models designed for
+reasoning, the ability to perform multi-step infer-
+ence, follow logical chains, and provide transparent
+reasoning traces (Wei et al., 2022). Small Reason-
+ing Models (SRMs) are not merely SLMs run with
+Chain-of-Thought (CoT) prompts. Rather, they are
+trained to produce structured intermediate reason-
+ing that decomposes complex tasks before generat-
+ing output, often through distillation from stronger
+reasoners and reward-guided training (Wang et al.,
+16918

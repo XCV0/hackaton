@@ -1,0 +1,106 @@
+References
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu
+Lian, and Zheng Liu. 2024. Bge m3-embedding:
+Multi-lingual, multi-functionality, multi-granularity
+text embeddings through self-knowledge distillation.
+Markus Leippold, Zacharias Sautner, and Tingyu Yu.
+2024. Corporate climate lobbying. European Corpo-
+rate Governance Institute – Finance Working Paper
+No. 960/2024.
+Nikolaos Livathinos, Christoph Auera, Maksym Lysak,
+Ahmed Nassar, Michele Dolﬁ, Panos Vagenas, Ce-
+sar Berrospi Ramis, Matteo Omenetti, Kasper Dinkla,
+Yusik Kim, Shubham Gupta, Rafael Teixeira de Lima,
+Valery Weber, Lucas Morin, Ingmar Meijer, Viktor
+Kuropiatnyk, and Peter W. J. Staar. 2025. Docling:
+An efﬁcient open-source toolkit for ai-driven docu-
+ment conversion.
+Bhavnick Minhas and Shreyash Nigam. 2025. Chonkie:
+A no-nonsense fast, lightweight, and efﬁcient
+text chunking library. https://github.com/
+chonkie-inc/chonkie.
+Gaku Morio and Christopher D Manning. 2023. An
+nlp benchmark dataset for assessing corporate cli-
+mate policy engagement. In Advances in Neural
+Information Processing Systems, volume 36, pages
+39678–39702. Curran Associates, Inc.
+Zach Nussbaum, John X. Morris, Brandon Duderstadt,
+and Andriy Mulyar. 2024. Nomic embed: Training a
+reproducible long context text embedder.
+PyMuPDF Developers. 2024. Pymupdf documen-
+tation. https://pymupdf.readthedocs.io/en/
+latest/. Accessed: 2025-06-24.
+Renyi Qu, Ruixuan Tu, and Forrest Bao. 2024. Is se-
+mantic chunking worth the computational cost?
+Aamir Shakir, Darius Koenig, Julius Lipp, and Sean Lee.
+2024. Boost your search with the crispy mixedbread
+rerank models.
+Weaviate. 2023. Retrieval evaluation metrics: Precision,
+recall, mrr, and nDCG. https://weaviate.io/
+blog/retrieval-evaluation-metrics. Ac-
+cessed: 2025-06-24.
+An Yang, Anfeng Li, Baosong Yang, Beichen Zhang,
+Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao,
+Chengen Huang, Chenxu Lv, Chujie Zheng, Dayi-
+heng Liu, Fan Zhou, Fei Huang, Feng Hu, Hao Ge,
+Haoran Wei, Huan Lin, Jialong Tang, Jian Yang,
+Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi
+Yang, Jing Zhou, Jingren Zhou, Junyang Lin, Kai
+Dang, Keqin Bao, Kexin Yang, Le Yu, Lianghao
+Deng, Mei Li, Mingfeng Xue, Mingze Li, Pei Zhang,
+Peng Wang, Qin Zhu, Rui Men, Ruize Gao, Shixuan
+Liu, Shuang Luo, Tianhao Li, Tianyi Tang, Wenbiao
+Yin, Xingzhang Ren, Xinyu Wang, Xinyu Zhang, Xu-
+ancheng Ren, Yang Fan, Yang Su, Yichang Zhang,
+Yinger Zhang, Yu Wan, Yuqiong Liu, Zekun Wang,
+Zeyu Cui, Zhenru Zhang, Zhipeng Zhou, and Zihan
+Qiu. 2025. Qwen3 technical report.
+Yuheng Zha, Yichi Yang, Ruichen Li, and Zhiting Hu.
+2023. AlignScore: Evaluating factual consistency
+with a uniﬁed alignment function. In Proceedings
+of the 61st Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers),
+pages 11328–11348, Toronto, Canada. Association
+for Computational Linguistics.
+Yanzhao Zhang, Mingxin Li, Dingkun Long, Xin Zhang,
+Huan Lin, Baosong Yang, Pengjun Xie, An Yang,
+Dayiheng Liu, Junyang Lin, Fei Huang, and Jingren
+Zhou. 2025. Qwen3 embedding: Advancing text em-
+bedding and reranking through foundation models.
+Xinping Zhao, Dongfang Li, Yan Zhong, Boren Hu,
+Yibin Chen, Baotian Hu, and Min Zhang. 2024.
+Seer: Self-aligned evidence extraction for retrieval-
+augmented generation.
+Limitations
+This work has several limitations. First, the eval-
+uation relies on a ﬁxed set of policy queries and
+gold annotations, which may not capture the full
+variability of corporate discourse or user intent,
+limiting its generalizability. Second, the stance pre-
+diction model is sensitive to prompting and may
+overﬁt to the speciﬁc formulation used in few-shot
+examples. Third, while our oracle metrics provide
+insight into evidence quality, they are themselves
+approximations and may not fully reﬂect nuanced
+LLM reasoning failures. Finally, the system cur-
+rently lacks explicit mechanisms to detect anno-
+tation errors or leverage multi-document context,
+both of which could improve robustness in real-
+world use cases.
+Ethics Statement
+This research supports transparency in corporate
+climate policy engagement, which serves the public
+interest. The automated system is designed to aug-
+ment rather than replace human analyst judgment.
+All data processing respects privacy considerations,
+and the system is intended to promote accountabil-
+ity in climate policy discourse.
+A Prompting Strategies
+Naive Prompt:
+system_naive: |−
+You are an expert climate analyst specializing
+in assessing companies’ engagement
+stances on climate policies. You can only
+give a score between −2 and 2 where the
+scores mean as follows :
+117

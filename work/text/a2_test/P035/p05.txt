@@ -1,0 +1,96 @@
+3.3 Response Debate
+Even after optimizing retrieval through the Re-
+trieval Debate, the model may still be influenced by
+noisy or incorrect retrieval results. To address this,
+DRAG introduces the Response Debate fResDebate,
+which iteratively enhances factual consistency and
+reasoning robustness:
+ˆy = fResDebate(x, C ˆQ) (8)
+where, ˆy represents the final factually verified and
+robust response.
+Structure and Roles. As shown in Figure 2, unlike
+the independent debates centered on the retrieval
+pool in the Retrieval Debate stage, the Response
+Debate fosters direct exchanges between agents.
+To prevent over-reliance on retrieved information,
+the Response Debate employs an asymmetric in-
+formation setting, ensuring agents engage in sub-
+stantive argumentation rather than merely restating
+retrieved facts. If all agents have equal access to
+retrieval results, they may uncritically accept the
+retrieved content, reinforcing biases instead of eval-
+uating reliability. Our experiments further confirm
+the effectiveness of this information asymmetry.
+The information asymmetry is enforced through
+role assignments, defining three distinct agent
+roles:
+Proponent Agent initiates the response based
+on retrieved information C ˆQ in first round:
+y1 Ap = MAp (x, C ˆQ) (9)
+and in the ith round, refines its response by incor-
+porating the challenger agent’s answer:
+yi Ap = MAp (x, {y<i Ap }, yi−1 Ac ) (10)
+where yi−1 Ac represents the response from the chal-
+lenger agent, which we defined later, in the (i−1)th
+round.
+Challenger Agent generates an initial response
+based on internal knowledge:
+y1 Ac = MAc (x) (11)
+and iteratively updates its response based on the
+proponent agent’s answer:
+yi Ac = MAc (x, {y<i Ac }, yi−1 Ap ) (12)
+Judge Agent: Evaluates the final responses from
+both agents and selects the optimal answer:
+ˆy = MAj (x, yr Ap , yr Ac ) (13)
+where r denotes the maximum number of debate
+rounds.
+4 Experimental Setup
+4.1 Datasets
+We experimented on six benchmark datasets of
+three tasks. We follow previous work (Jiang et al.,
+2023) and randomly select 500 examples from each
+dataset for testing.
+Open-domain QA. Open-domain QA aims to an-
+swer a question in the form of natural language
+based on large-scale unstructured documents. Here,
+we provide the model with only the questions with-
+out reference documents. We choose three datasets
+for this task: NQ (Kwiatkowski et al., 2019), Triv-
+iaQA (Joshi et al., 2017), PopQA (Mallen et al.,
+2023). For the evaluation metrics, we extract the
+final answer from the output using regular expres-
+sions and calculate the exact match (EM) and token-
+level F1 score.
+Multi-hop QA. Multi-hop QA focuses on answer-
+ing questions that require the ability to gather infor-
+mation from multiple sources and conduct multi-
+step reasoning to arrive at a comprehensive answer.
+We choose the 2WikiMultihopQA (Ho et al., 2020)
+and HotpotQA (Yang et al., 2018). We also report
+EM and token-level F1 score for these datasets.
+Commonsense Reasoning. Commonsense reason-
+ing requires world and commonsense knowledge to
+generate answers. We utilize the StrategyQA (Geva
+et al., 2021) to evaluate DRAG and other baselines.
+We extract the yes/no response and compare it with
+the standard correct answer using EM.
+4.2 Baselines
+We select Naive Gen, which is generated directly
+by an LLM, and MAD (Du et al., 2024) as baselines
+that do not incorporate retrieval. For retrieval-based
+baselines, we use Naive RAG, which represents
+the standard RAG method without any optimiza-
+tion. Additionally, we compare DRAG with RAG
+optimization baselines, including IRCoT (Trivedi
+et al., 2023), ITer-RetGen (Shao et al., 2023), and
+FLARE (Jiang et al., 2023), which focus on im-
+proving the retrieval stage, as well as Self-RAG
+(Asai et al., 2023) and SuRe (Kim et al., 2024),
+which enhance the generation stage.
+4.3 Implementation Details
+We selected Llama-3.1-8B-Instruct (Dubey et al.,
+2024) as our base LLM model. Our implemen-
+tation of DRAG and the baselines are built upon
+FlashRAG (Jin et al., 2024), a Python toolkit de-
+signed for the reproduction and development of
+15843

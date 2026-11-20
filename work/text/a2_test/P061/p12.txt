@@ -1,0 +1,109 @@
+0 4 8 12 16 20 24 28
+Layer Ids
+0
+4
+8
+12
+16
+20
+24
+28 Head Ids
+0-0.05
+0.05-0.10
+0.10-0.15
+0.15-0.20
+Score
+(a) Mistral-7B-v0.2
+0 4 8 12 16 20 24 28
+Layer Ids
+0
+4
+8
+12
+16
+20
+24
+28 Head Ids
+0-0.05
+0.05-0.10
+0.10-0.15
+0.15-0.20
+Score (b) Qwen2-7B-Instruct
+Figure 6: Attention weights assigned by each attention head to supporting evidence sentences are illustrated for two
+LLMs: Mistral-7B-v0.2 (Figure a) and Qwen2-7B-Instruct (Figure b).
+A.1 Attention Heads Capture Relevance
+Prior research has revealed that LLMs exhibit re-
+trieval heads capable of focusing on task-relevant
+information during text generation (Wu et al.,
+2024b; Fu et al., 2024). However, these studies
+primarily focus on copy-and-paste behaviors occur-
+ring during the generation phase of LLMs. Other
+work indicates that LLMs’ attention mechanisms
+can identify relevant information in context before
+generation, yet these analyses often lack granu-
+larity—such as attention-head-level insights into
+how relevance is determined(Li et al., 2024b; Wu
+et al., 2024b). Therefore, we address the following
+research question: How do LLMs leverage their
+attention mechanisms to identify question-relevant
+information before text generation?
+Experiment We perform our analysis on the
+LooGLE benchmark (Li et al., 2024a), a long-
+context QA dataset where each instance consists of
+an article, a question, and annotated supporting evi-
+dence sentences. For each instance, we concatenate
+the article and question and feed them into three
+models—Llama-3.1-8B-Instruct (Grattafiori et al.,
+2024), Mistral-7B-Instruct-v0.2 (Jiang et al., 2023),
+and Qwen2-7B-Instruct (Yang et al., 2024)—to
+compute attention weights across all attention
+heads. Using Equation 1, we quantify the attention
+allocated by each head to the supporting evidence
+sentences, with higher scores indicating stronger
+focus on question-relevant information.
+Results & Insights We visualize the attention
+scores assigned by each head to the supporting
+evidence sentences. As shown in Figure 2(a) for
+Llama-3.1-8B-Instruct, and Figure 6 for Mistral-
+7B-v0.2 and Qwen2-7B-Instruct, these models
+consistently exhibit certain middle-layer attention
+heads that assign noticeably higher attention to
+relevant evidence. In contrast, attention heads in
+lower and upper layers tend to show weaker fo-
+cus. These findings suggest that middle-layer at-
+tention heads in LLMs are particularly effective at
+capturing question-relevant information within the
+context.
+A.2 Adaptive Attention Patterns
+The relevance of information within a context
+varies depending on the question and task, motivat-
+ing our investigation into the model’s cognitive flex-
+ibility: Does the proportion of relevant information
+in the context trigger distinct attention allocation
+strategies in LLMs?
+Experiment The LooGLE benchmark categorizes
+tasks into two types: short-dependency and long-
+dependency. Short-dependency tasks can be an-
+swered using a single sentence or paragraph, while
+long-dependency tasks require integrating informa-
+tion spread across multiple sentences within the
+article. We sample test cases from each task cat-
+egory, ensuring that the input documents have a
+similar average number of sentences. For each
+sentence, we compute the attention scores and an-
+alyze the proportion of attention allocated to the
+top-k ranked sentences. Our analysis specifically
+focuses on the attention heads in the 14th layer of
+the Llama-3.1-8B-Instruct model, as this layer has
+demonstrated a strong ability to capture question-
+relevant information.
+Results & Insights Figure 2(b) summarizes the ex-
+perimental results. For short-dependency tasks, the
+attention distribution is highly concentrated, with
+a small number of sentences receiving a dispro-
+portionately large share of attention. In contrast,
+long-dependency tasks exhibit a more diffuse and
+uniform attention pattern across the document. Us-
+ing a cumulative attention threshold of 0.8 as a
+reference, we observe that, on average, the top 39
+8467

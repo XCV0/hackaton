@@ -1,0 +1,53 @@
+Nanomaterials 2021, 11, 48 5 of 9
+observed when increasing the sweep delay time. The J–V analysis conducted with the
+reverse sweep scan time delays of 0.2 and 1 s revealed a decrease of ﬁll factor by 8.9% and
+5.5%, respectively.
+As can be seen from Figure 2 and Table 1, as the delay increased from 0.2 to 1 s, the
+hysteresis was suppressed and the corresponding hysteresis index reduced from 0.36 to
+0.18, respectively, as a result of relaxation of the measured currents at each applied voltage,
+and the difference between parameters extracted from the measurements made for forward
+and reverse scan directions decreased. When performing measurements on solar cells at
+faster scan rates or sweep time delays longer than 1.0 s, almost the exact same J–V curve
+may be obtained regardless of the scan direction. However, achieving this steady state
+is not that easy for PSCs where hysteretic-like features arise, as noticed in this work and
+earlier studies [22,37,38].
+3.2. Impedance Spectroscopy
+Impedance spectroscopy (IS) is a very mature, widely used, reliable, and
+well-understood characterization technique for investigating, acquiring, validating, and
+quantitatively interpreting impedances of solid-state devices and electrochemical sys-
+tems [39]. However, using this characterization technique for photovoltaic devices with
+complex architectures, such as PSCs, presents new challenges related to the interfacial
+degradation [40], unusual material properties [39], and testing of the simulated data [41].
+The sweep voltage scan direction, time delay, and frequency all effect the device dynamics
+which can then be quantitatively interpreted from the impedance spectra [42]. Therefore,
+to understand the evolution of hysteresis in perovskite solar cells, gain insight into charge
+trapping/detrapping phenomena, and optimize various components and interfaces for its
+stable and optimized performance, a study of the sweep voltage scan direction, time delay,
+and frequency-dependent impedance spectra is necessary. In this work, sweep voltage
+scan direction, time delay, and frequency-dependent impedance spectroscopy was used
+to investigate the parallel capacitance–voltage (CP–V), series capacitance–voltage (CS–V),
+and series resistance–voltage (RS–V) characteristics of a glass/FTO/c-TiO2/mp-TiO2/mp-
+ZrO2/carbon-electrode-based HTM-free PSC. To the best of our knowledge, this is the only
+work reporting the sweep voltage scan direction, time delay, and frequency-dependent
+impedance spectroscopy of the aforementioned parameters of an HTM-free PSC. These
+data can be of utmost importance as the only available reference point for understanding
+current anomalies and optimizing hysteretic behavior in HTM-free PSCs for large-scale
+fabrication and commercial applications.
+3.2.1. Hysteresis in Capacitance–Voltage (CP–V) Characteristics
+Despite the dramatic enhancement in the power conversion efﬁciency of PSCs, many
+ambiguities regarding their operating modes still remain [43]. Capacitance plays a key
+role in deciding various control mechanisms in the device and is also responsible for
+undesired effects such as current hysteresis. Therefore, to better understand the nature
+of charge distribution in the device and provide insight into the kinetics of the charging
+processes and their effect on device parameters, capacitive responses must be analyzed
+and addressed. The observed hysteretic effect in the dark current originates from the
+slow capacitive mechanisms. Figure 3 displays the parallel capacitance–voltage (CP–V)
+curves of the device. The strong sweep voltage, sweep voltage scan direction, time delay,
+and frequency dependence of capacitance was observed at higher values of applied bias.
+As can be seen from Figure 3, for higher reverse bias voltage, the capacitance remains
+unchanged but exhibits strong bias dependency towards the forward scan direction. This
+strong bias voltage dependency of the parallel capacitance of HTM-free PSCs is attributed
+to a variety of factors including, but not limited to, traps states, device interfaces, density
+of states, limitations on minority carrier density, blocking of charge due to slow charge
+injection/extraction dynamics at electrodes, charge dynamics, migration of ions, and so
+forth [44–48].

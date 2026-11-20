@@ -1,0 +1,118 @@
+the network density, even with similar CAs, was essential to improve
+the solar cell FF.
+This research also extended its ﬁndings to large-area CIGS solar cells.
+By applying Ag networks with varying densities and CAs, it was dem-
+onstrated that the efﬁciency of a CIGS solar cell with an area of
+1.0609 cm2 could be improved from 12.0% to 12.7% with an Ag net-
+work having a CA of 3.7 + 0.1%, a density of 32.8 /C6 2.5/mm, and a
+width of 1.1 + 0.9 μm. Remarkably, even with a reduction in the thick-
+ness of the AZO layer by more than half (from 350 to 150 nm), the
+Ag network played a crucial role in enhancing the efﬁciency of
+large-area CIGS solar cells, elevating it from 10.5% to 11.6% through
+an improvement in FF. Additionally, this result also suggests the possi-
+bility of widening the monolithic width of the CIGS module up to
+1cm.
+The ﬁndings of this study underscore the importance of carefully
+conﬁguring the network structure, particularly targeting a CA of
+1.3–5% and a higher network density, for the effective application of a
+metallic network electrode to thin-ﬁlm solar cells. These insights into
+optimizing the Ag network, if integrated onto the TCO of the back con-
+tact of a solar cell, have the potential to be beneﬁcial not only for tradi-
+tional solar modules but also for emerging technologies such as
+semi-transparent and bifacial solar cells.
+4. Experimental Details
+Fabrication of the self-formable Ag network: The electrode network of Ag was
+fabricated on a glass substrate coated with Al:ZnO (AZO), measuring
+2.5 × 2.5 cm2, and on a CIGS solar cell. This fabrication utilized acrylic resin (Car-
+boset CR795, Lubrizol) applied through a spin-coating method, as depicted in Fig-
+ure 6. The acrylic resin was diluted with DI water in a volume ratio of 85:15, as
+the undiluted acrylic resin failed to form cracks at room temperature. The
+AZO-coated glass substrate served to evaluate the characteristics of a TCE,
+whereas the AZO thin ﬁlm applied on a CIGS solar cell was employed to study
+the solar cell properties inﬂuenced by different Ag network structures.
+In both scenarios, the Ag network fabrication involved the following proce-
+dure: Initially, O2 plasma treatment was administered to the AZO thin ﬁlm sur-
+face to enhance its hydrophilicity, a crucial factor affecting the spreading and
+cracking behaviors of the acrylic resin.[10] Subsequently, the diluted acrylic resin
+was dispensed onto the hydrophilic-treated AZO ﬁlm at a rate of 64 μLcm/C02
+and spin-coated at 6000 rpm using a spin coater (WS-400-6NPP-LITE, Laurell).
+Post-application of the diluted acrylic resin on the AZO thin ﬁlm, the ﬁlm under-
+went a natural drying process under varying conditions for 5 min. These drying
+conditions ranged from 18 to 28 °C in temperature and from 10% to 40% relative
+humidity (RH). To maintain consistent temperature and humidity levels, the
+spin-coating and drying steps, crucial for inducing cracks on the acrylic ﬁlm, were
+conducted inside a glove box.
+The drying conditions led to the formation of various structures on the
+coated acrylic resin ﬁlms, characterized by differing widths and quantities of
+cracks. These cracked acrylic ﬁlms, henceforth referred to as cracked templates,
+were employed in the fabrication of a metallic network electrode. A thin ﬁlm of
+Ag, /C24200 nm thick, was deposited onto the cracked template via RF sputtering
+at a power of 30 W for a duration of 30 min. During the Ag thin ﬁlm deposition
+within the cracks, the ﬁlm’s thickness diminished to /C24150 nm, consequently
+reducing the actual thickness of the Ag networks. Following this, the cracked
+template with the Ag thin ﬁlm was separated from the AZO thin ﬁlm through
+ultrasonic cleaning for 5 min in isopropyl alcohol and deionized water sequen-
+tially. This process resulted in the retention of an Ag mesh-like network electrode
+on the AZO thin-ﬁlm,formingahybridTCE,referredtoasthehybridTCEinthis
+study.
+Characterization of Ag network with AZO thin ﬁlm: For the structural char-
+acterization of the Ag network, surface images were captured using scanning elec-
+tron microscopy (SEM; MIRA4, Tescan), as illustrated in Figure S6, Supporting
+Information. The widths, densities, and coverage areas of the Ag networks were
+quantiﬁed based on these images. In this analysis, the density of the Ag network
+is deﬁned as the number of network lines per millimeter (mm), where a single
+network line is measured from one intersection point to the next, as depicted in
+Figure S6, Supporting Information. The width, density, and CA of the Ag networks
+were calculated using MATLAB, with a detailed description of the programming
+process available in a previous study.[27] Given that a single SEM image does not
+adequately represent the Ag network structure of one sample, 16 SEM images
+were captured for each sample, and the average values of the three parameters
+were computed.
+The optical and electrical properties of the hybrid TCEs were evaluated
+through measurements of transmittance and Rsh, using a spectrophotometer
+(Spectro 22RS, LAbomed) and a four-point-probe resistivity meter (RC2175,
+EDTM), respectively. Each measurement was repeated at least thrice per sample,
+with the average values being utilized in this study. The FOM for the TCE was cal-
+culated from the average values of transmittance and Rsh using Equation (1):[14,17]
+FOM ¼ 188:5 Rsh T/C01 2 /C01 /C0/C1, (1)
+where Rsh represents the sheet resistance and T represents the transmittance
+at a wavelength of 550 nm.
+Fabrication and characterization of CIGS solar cells: For the CIGS layer, an
+absorber ﬁlm with a thickness of 2.3 μm was deposited on soda lime glass coated
+with Mo utilizing a three-step co-evaporation process. Prior to the deposition of
+the absorber, an ultrathin layer of Ag /C2410 nm thick was deposited onto the Mo
+back contact using DC sputtering. In the initial stage of the co-evaporation pro-
+cess, In, Ga, and Se were evaporated onto the Mo layer at a relatively low temper-
+ature of around 340 °C. To optimize the gallium grading in the bandgap (GGI),
+Table 2. Parameters characterizing the Ag network structure and the per-
+formance of solar cells with an area of 1.0609 cm2 in L1 and L2 series.
+Sample
+name
+Width
+[μm]
+Density
+[per mm]
+Covered
+area [%]
+ΔVoc
+(Voc/
+Voc,ref)
+ΔJsc
+(Jsc/
+Jsc,ref)
+ΔFF
+(FF/
+FFref)
+ΔEff
+(Eff/
+Effref)
+L1-CA3.7 2.68 /C6 2.06 12.91 /C6 1.64 3.76 /C6 0.46 0.96 0.94 0.93 0.85
+L2-CA3.7 1.07 /C6 0.92 32.76 /C6 2.48 3.69 /C6 0.13 1.0 0.92 1.14 1.06
+L1-CA4.7 3.01 /C6 3.30 15.86 /C6 1.11 4.75 /C6 0.96 0.97 0.93 1.0 0.90
+L2-CA4.7 1.09 /C6 1.10 40.49 /C6 4.04 4.74 /C6 0.35 0.93 0.92 1.08 0.93
+Figure 5. The current–voltage (J–V) curves for L3-Ref and L3-CA5.3 samples.
+The CIGS solar cells in the L3 series feature a 150 nm AZO thin ﬁlm, in
+contrast to the 350 nm used previously.
+Energy Environ. Mater. 2024, 7, e12765 6of8 © 2024 The Authors. Energy & Environmental Materials published by
+John Wiley & Sons Australia, Ltd on behalf of Zhengzhou University.
+ 25750356, 2024, 6, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/eem2.12765, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

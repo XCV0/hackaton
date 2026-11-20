@@ -1,0 +1,42 @@
+2.2.8 Binary QA Agent
+The binary response module plays a strategic role in our framework, as it translates
+the responses generated into decisions suitable for integration into a 0/1 evaluation
+grid. In a setting where AI results are feeding a legal evaluation system, clarity and
+standardization of decisions are essential. Generative systems often produce nuanced
+or ambiguous responses that are difficult to encode in a binary format. However, to
+integrate them into a normative grid and ensure comparability between instances, we
+need to transform these nuances into a discrete signal (1 if the response is entirely
+affirmative, 0 otherwise). This step requires a level of decision-making rigor that goes
+beyond text generation.
+The agent relies on two sets of instructions to guide its decision-making:
+1. Total affirmation vs. total negation: The response is evaluated as either entirely
+affirmative (1) or otherwise (0).
+2. Full coverage of the question: the agent assigns a score of 1 only if the answer covers
+all parts of the question, without omission or ambiguity. Any partial, contradictory,
+or incomplete answer automatically receives a score of 0.
+These guidelines are implemented via specific prompts, and the agent returns its
+verdict in JSON format containing both the binary score and a textual explanation.
+The score is fed into the evaluation grid, while the explanation provides essential trace-
+ability for expert review and decision-making justification.
+Consequently, the binary response module constitutes a bridge joining the flexibility
+of natural language and the normative strictness of the legal evaluation grid. By bind-
+ing the system’s outputs to a standardized binary format, it ensures the reliability,
+transparency, and applicability of its results as AI contributes directly to the legal
+evaluation.
+The N2I-RAG framework combines multi-modal document processing and llm-
+based agents to translate unstructured legal texts into meaningful binary indicators.
+In each phase, from document processing to decision-making, N2I-RAG features a
+transparent and traceable workflow aligned with legal reliability standards.The inte-
+gration of semantic retrieval, multi-agent and ground-based validation controls makes
+N2I-RAG stand out from other conventional solutions that prioritize performance over
+interpretability. This methodology paves the way for automated, evidence-based legal
+indicator computation, thus filling the existing gap between formal legal texts and
+quantifiable/measurable compliance outcomes.
+3 Experimental Setup and Case Study: Marine
+Environmental Law
+3.1 Case Study Focus
+We evaluated N2I-RAG on a case study in marine environmental law, to assess its abil-
+ity to automatically calculate reliable legal indicators from heterogeneous documents.
+This domain is particularly well suited for evaluation due to the growing demand from
+international organizations for standardized legal indicators to monitor environmental
+9

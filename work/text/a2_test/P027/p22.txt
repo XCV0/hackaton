@@ -1,0 +1,60 @@
+Published as a conference paper at ICLR 2025
+J CASE STUDY
+Figure 9 and 10 are two representative cases from TriviaQA and PubHealth. They show the two
+drafts generated for the same question. We observe that our RAG drafter can well understand the
+multiple perspectives in the retrieval results and generate high-quality drafts. Our RAG verifier can
+also help filter out the unreliable drafts as we observe a relatively low scores in the first draft in
+Figure 9 and 10.
+=================================== Prompt of Drafter ====================================
+Response to the instruction. Also provide rationale for your response.
+## Instruction: Which actress/singer starred as Doralee Rhodes in the 1980 film, "Nine to
+Five"?
+## Evidence:
+[1] Diana DeGarmo
+Sheila until the show’s closure on June 27, 2010. DeGarmo played the role of Doralee Rhodes
+in the national tour of "9 to 5", which was launched in Nashville on September 21, 2010.
+She ended her run as Doralee after the July 2011 Minneapolis tour stop. DeGarmo appeared on
+musical theatre composer Scott Alan’s third album, ...
+[2] 9 to 5 (musical)
+Pippa Winslow as Violet Newstead, Louise Olley as Doralee Rhodes and Leo Sene as Franklin
+Hart Jr, with Samantha Giffard as Roz, Matthew Chase as Joe and Mark Houston, Rachel Ivy,
+and Blair Anderson. "9 to 5" will play in the West End at the Savoy Theatre from January 29
+to August 31, 2019. The production stars Amber Davies (Judy), ...
+====================================== Completion ========================================
+## Rationale: Diana DeGarmo played the role of Doralee Rhodes in the national tour of "9 to
+5", which began in September 2010.
+## Response: Diana DeGarmo
+====================================== Verification ======================================
+draft score: 0.6594
+self-containment score: 0.3417
+self-reflection score: 0.5238
+------------------------------------------------------------------------------------------
+=================================== Prompt of Drafter ====================================
+Response to the instruction. Also provide rationale for your response.
+## Instruction: Which actress/singer starred as Doralee Rhodes in the 1980 film, "Nine to
+Five"?
+## Evidence:
+[1] Cynthia Rhodes
+Rhodes garnered her first non-dance related role in Michael Crichton’s 1984 science fiction
+thriller "Runaway" with Tom Selleck, Kirstie Alley and Gene Simmons. Her most notable role
+was as dance instructor Penny Johnson in the hit 1987 motion picture "Dirty Dancing" with
+Jennifer Grey and Patrick Swayze. Rhodes’ final motion picture role was the character of
+Vickie Phillips opposite actor Jameson Parker in the sleeper action-adventure movie ...
+[2] Dolly Parton
+Parton’s feature film "9 to 5" (1980). The musical ran at the Ahmanson Theatre, Los Angeles
+in late 2008. It opened on Broadway at the Marquis Theatre in New York City, on April 30,
+2009, to mixed reviews. The title track of her 2008 "Backwoods Barbie" album was written
+for the musical’s character Doralee. Although her score (as well as the musical debut of
+actress Allison Janney) were praised, ...
+====================================== Completion ========================================
+## Rationale: Dolly Parton starred in the 1980 film "9 to 5" as Doralee Rhodes.
+Additionally, Parton’s 2008 musical "9 to 5" was based on the film, with Parton reprising
+her role as Doralee.
+## Response: Dolly Parton starred as Doralee Rhodes in the 1980 film, "Nine to Five".
+====================================== Verification ======================================
+draft score: 0.71
+self-containment score: 0.4346
+self-reflection score: 0.7449
+Figure 9: Case study of SPECULATIVE RAG from TriviaQA where Dolly Parton is the correct
+answer.
+22

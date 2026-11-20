@@ -1,0 +1,98 @@
+domain challenge which is further discussed in
+Section 4.2.3.
+DB Our CCD objective effectively reduces po-
+sition bias as intended, which is measured by the
+standard deviation across varying gold context po-
+sitions on NQ. Table 2 shows that activating DB
+significantly decreases this variance, suggesting
+that CCD mitigates position bias.
+These results show that steering models no
+longer requires large, hand-crafted datasets: Pair-
+wise contrast between models replaces the role of
+data to isolate and optimize an objective directly
+through decoding.
+Qualitative examples We also provide case stud-
+ies in Appendix F, to examine how these objectives
+translate to real impact on the targeted biases, be-
+yond mere accuracy: Figure 2 (domain adaptation
+on HQA) and 3 (reduced position sensitivity under
+DB when the gold passage moves).
+4.2.2 Adaptive Optimization with GRAD
+GRAD dynamically adjusts to different scenarios
+by combining objectives adaptively, as shown in
+Table 2, where applying all objectives is not uni-
+versally optimal. On HQA and MARCO, where
+well-aligned training data is available, DA is most
+beneficial. HQA performs best with all three ob-
+jectives (MS, DA, DB), while MARCO sees no
+added gains beyond DA. On NQ, DA proves coun-
+terproductive, whereas DB improves performance
+by mitigating position bias.3 We further show nat-
+ural extensibility of GRAD by adding a fourth
+objective, FA (format adherence); as shown in Ap-
+pendix H, GRAD integrates the new objective with-
+out changes, and adaptively optimizes to find the
+desirable combination.
+The adaptive mechanism of GRAD effectively
+prevents over-steering of the base model’s predic-
+tion as noted in Section 3.4: Manual inspection of
+100 random samples on NQ contained no degen-
+erate outputs, which often indicate strong conflicts
+(see Appendix C).
+More analyses on the adaptation mechanism of
+GRAD are provided in Appendix D, where we (1)
+compare GRAD with other strategies for combin-
+ing several model predictions, such as ensembling,
+(2) show the stability of adaptation across different
+random seeds, and (3) show the effect of choosing
+different ordering of objectives in adaptation.
+3See Appendix C for full position-wise results.
+Activation PQ
+MS DA DB Synthesized D Transferred D
+60.83 60.83
+✓ 63.33 61.67
+✓ 64.17 51.67
+✓ ✓ 64.17 53.33
+✓ 61.67 61.67
+✓ ✓ ✓ 65.00 52.50
+Table 3: Performance of GRAD on PQ, with synthe-
+sized (from PDF document collection) or transferred
+(from HQA) training set D.
+HQA
+Model Latency (s) Acc
+8B 0.81 70.94
+GRAD (8B+1B) 1.16 81.03
+70B 5.75 84.24
+Table 4: End-to-end latency of GRAD with 8B+1B,
+compared to 8B and 70B models.
+4.2.3 Private-Data RAG Scenarios
+Using the PQ dataset, we analyze how GRAD and
+its components react to a private, domain-specific
+RAG scenario where the LLM has to adapt to un-
+seen data.
+Table 3 shows accuracy of GRAD with differ-
+ent set of components activated on PQ, where the
+SLMs are either finetuned on a synthesized (left)
+or transferred (right, reusing HQA) D.
+Table 2 and 3 first reveal that, both transferred
+(HQA) and synthesized (PQ) D can enhance RAG
+quality in private-data scenarios. In addition, the
+DB objective generalizes better across domains
+than the DA objective, as seen with NQ in Sec-
+tion 4.2.2: Table 3 also shows that while SLMs
+finetuned on transferred D from HQA degrade per-
+formance under DA, they still yield gains with DB,
+though less than with synthesized data. We also ob-
+serve consistent results on repurposed HQA, where
+we intentionally use SLMs trained on MARCO
+to replicate the private setting: Those results are
+available in Table 15, in Appendix G. Our results
+suggest that, if training dataset D well-aligned to
+test-data distribution is not available, synthesizing
+closely aligned data can be a viable alternative to
+overcome the unavailability of training data.
+4.2.4 Latency and Cost
+Finally, we present end-to-end latency of GRAD
+in Table 4, measured under our current sequential
+implementation, and thus providing a conservative
+45280

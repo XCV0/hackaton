@@ -1,0 +1,41 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 5
+Table 1: Instruction prompt to generate general financial instruction data and a
+data sample of generated instruction-following data. num questions per chunk
+is the number of data samples we want to generate for a chunk of text.
+Instruction: You are an earnings report analyst. Your task is to ask
+num questions per chunk questions to understand a company, its financial report,
+and its key financial performance. The questions should be diverse in nature across
+the document. Restrict the questions to the context of the information provided.
+Question: What is the fiscal year-end date for NVIDIA Corporation?
+Answer: The fiscal year end date for NVIDIA Corporation is January 28.
+and semantics. Such data are generated from the contextual content of com-
+pany financial disclosures, including quarterly and annual reports, management
+commentary, and earnings call summaries.
+The data generation process begins by segmenting each financial document
+into discrete, semantically coherent text chunks. Each chunk represents a self-
+contained financial context that can independently support the generation of
+multiple instruction-following pairs. Examples of such contexts include a com-
+pany’s identity, its industry classification, and reported key financial metrics.
+For instance, our segmentation of NVIDIA’s quarterly earnings report yielded
+chunks addressing queries such as:
+– What is NVIDIA?
+– What are the main industry sectors of NVIDIA?
+– What is the revenue of NVIDIA for the second quarter of fiscal year 2024?
+– What is the GAAP and Non-GAAP earnings per diluted share for the quar-
+ter?
+– How many shares did NVIDIA repurchase during the second quarter of fiscal
+2024, and for what amount?
+Each chunk thus acts as a contextual unit from which the model can learn
+to map document-grounded financial text to relevant natural language queries.
+Using a teacher LLM such as GPT-3.5-turbo, we automatically generate in-
+struction–response pairs based on the textual content of each chunk. The teacher
+model is prompted to extract domain-specific insights, numerical facts, and re-
+lational patterns (e.g., quarter-over-quarter growth, year-over-year comparison,
+dividend schedules, or share repurchases).
+To ensure balanced coverage, we set the configuration parameter num questions per chunk
+to 10. For a single quarterly report containing approximately 40 well-defined
+chunks, this setup yields around 400 financial instruction–response pairs. These
+pairs collectively form the general financial instruction dataset, which serves as
+the base layer for fine-tuning the financially augmented LLM.
+The resulting dataset encompasses multiple dimensions of financial under-
+standing, including:

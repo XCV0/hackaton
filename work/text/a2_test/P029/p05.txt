@@ -1,0 +1,134 @@
+User Query
+Nginx Python APIsWeb Service
+TXT PDF
+Documents
+... JPG ...
+Python Extract OCR Extract
+Python Program Prompt & LLM
+Text Post-processing
+Raw Text D1 D2 ...
+Processed Text
+0.2 0.6 0.4 0.8 0.2 0.7
+0.3 0.4 0.7 0.1 0.2 0.9
+0.1 0.8 0.5 0.4 0.7 0.2
+Vector Embedding
+Agent LLM
+Multimodal
+Image
+Audio
+...
+Final Prompt
+Web Search
+Web Page1
+Web Page2
+Web Page3
+...
+RAG
+D1
+D2
+D3
+...
+Extra Tool
+API Call 
+Code
+Interaction
+...
+Multi
+Hop
+Global Database
+Partitioned Database
+User’s private Database
+...
+Vector Database System
+Online
+Offline
+Answer
+Inference & Output
+Figure 6: TWEN’s system architecture.
+architecture powered by LangChain (Brace Sproul,
+2024) and Docker to decouple the CPU-intensive
+retrieval tasks from the GPU-intensive generation
+tasks. The architecture is illustrated in Figure 6.
+• Generator model: We use Qwen3-235B-
+A22B model (Bai et al., 2023) for main Q&A
+and agent interaction functions.
+• Embedding model: We use the deployed
+open-source model infgrad/stella-large-zh-v3-
+1792d (Infgrad, 2024) for vectorizing all
+knowledge base documents.
+• Orchestration: LangChain (Brace Sproul,
+2024) is used to build and orchestrate retrieval
+flows, prompt templates, and model chains.
+• Vector database: Qdrant (Qdr, 2025) is used to
+store and index knowledge base vectors with
+a tag-based structure, organized into global,
+tagged, and user-personal databases.
+• Document maintenance: The system uses
+Python programs and LLM for content extrac-
+tion, format standardization, and automatic
+segmentation of files.
+4.2 Offline Stage
+As shown in Figure 7, the core task of the offline
+stage is to construct the high-quality vector knowl-
+edge base. This stage involves a pipeline that trans-
+forms raw various documents into structured em-
+beddings suitable for efficient retrieval.
+The knowledge base corpus of university poli-
+cies and information is acquired via three channels:
+(1) Manual submission by faculty and department
+leaders; (2) An upload system for authorized ad-
+TXT ... PDF JPG ...
+Various Documents
+LLM
+Python Program
+OCR
+Raw Text D1 D2 ...D3 D4
+Normalized Text
+Normalization
+D1 D2 ...
+Split
+Doc Chunk
+Chunk1 Chunk2 ...
+0.2 0.6 0.4 0.8 0.2 0.7
+0.3 0.4 0.7 0.1 0.2 0.9
+0.1 0.8 0.5 0.4 0.7 0.2
+Vector Embedding
+Vector Database System
+Figure 7: Offline architecture in TWEN.
+ministrators; and (3) Web crawlers that periodically
+pull data from public department websites.
+Based on their storage formats, the raw docu-
+ments are categorized into two types: the first con-
+sists of files like TXT, from which content can be
+easily extracted by Python programs; the second
+includes files like JPG, where content is not ex-
+plicitly stored and requires extraction using LLM-
+based OCR (Lee, 2025). The extracted raw content
+often has messy formatting. To address this, we
+develop a specialized agent for text normalization.
+The normalized text is then intelligently segmented
+using another dedicated LLM1 to ensure semantic
+integrity, resulting in high-quality corpus chunks
+suitable for building the vector database.
+4.3 Online Stage
+As shown in Figure 8, the online stage handles
+user requests and generates the RAGPULSE trace
+records in the process.
+We have developed our agentic RAG system, a
+comprehensive framework where a central large
+language model, which we refer to as the Agent
+LLM, acts as an autonomous controller. When
+a request arrives, this Agent LLM autonomously
+plans the optimal processing strategy based on user
+information and prompts. It can interpret queries
+from multimodal perspectives (images, audio, text,
+etc.) and dynamically orchestrates a suite of tools,
+including web search, RAG, and a series of pre-
+defined external tools (API calls, programming,
+etc.) to comprehensively solve problems. Fur-
+thermore, it supports proactive self-reflection: the
+Agent LLM first assesses its own response, and
+1We use a variety of LLM models ranging from 8B to
+235B for different sub-tasks such as problem rewriting for
+cost efficiency.
+7069

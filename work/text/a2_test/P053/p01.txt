@@ -1,0 +1,114 @@
+Findings of the Association for Computational Linguistics: EMNLP 2025, pages 24061–24076
+November 4-9, 2025 ©2025 Association for Computational Linguistics
+Enhancing RAG Efficiency with Adaptive Context Compression
+Shuyu Guo*
+Shandong University
+Qingdao, China
+guoshuyu225@gmail.com
+Shuo Zhang
+Bloomberg
+London, United Kingdom
+szhang611@bloomberg.net
+Zhaochun Ren†
+Leiden University
+Leiden, The Netherlands
+z.ren@liacs.leidenuniv.nl
+Abstract
+Retrieval-augmented generation (RAG) en-
+hances large language models (LLMs) with
+external knowledge but incurs significant in-
+ference costs due to lengthy retrieved contexts.
+While context compression mitigates this is-
+sue, existing methods apply fixed compres-
+sion rates—over-compressing simple queries or
+under-compressing complex ones. We propose
+Adaptive Context Compression for RAG (ACC-
+RAG), a framework that dynamically adjusts
+compression rates based on input complexity,
+optimizing inference efficiency without loss of
+accuracy. ACC-RAG combines a hierarchical
+compressor (for multi-granular embeddings)
+with a context selector to retain minimal suf-
+ficient information, akin to human skimming.
+Evaluated on Wikipedia and five QA datasets,
+ACC-RAG outperforms fixed-rate methods and
+unlocks >4× faster inference versus standard
+RAG while maintaining or improving accuracy.
+1 Introduction
+Large Language Models (LLMs) are pre-trained on
+massive datasets, encoding vast knowledge within
+billions of parameters. While they excel at many
+tasks, their parametric knowledge often falls short
+for knowledge-intensive applications. Retrieval-
+Augmented Generation (RAG) addresses this limi-
+tation by extending the model’s knowledge bound-
+aries through external context retrieval (Gao et al.,
+2023). However, integrating lengthy retrieved con-
+texts into prompts increases inference costs and
+may exceed LLMs’ context window limits (Cheva-
+lier et al., 2023).
+Context compression mitigates this issue by
+transforming long contexts into shorter input se-
+quences. Existing methods fall into two cate-
+gories: (1) Lexical-based compression, which re-
+duces input length by preserving key tokens (Wang
+*Work performed during a visit to Leiden University.
+†Corresponding Author.
+What album is sacrifice by elton john on?
+Document: Sacrifice (song) is a ballad performed 
+by musician Elton John. The song appears on the 
+1989 album "Sleeping with the Past” …
+Output: Sleeping with the Past
+Vanilla RAG
+Document: 
+with Context 
+Compression
+Output: Too Low for Zero
+Document: 
+Output: Sleeping with the Past
+[X] [X] [X] [X] [X] [X] [X] [X]
+[X]
+Document: 
+Output: Sleeping with the Past
+with Adaptive 
+Context 
+Compression
+Redundant 
+document 
+embeddings
+Insufficient 
+document 
+embeddings
+Perfect 
+document 
+embeddings
+Too long
+document
+[X] [X] [X] [X] [X] [X] [X] [X]  
+Figure 1: An example of a retrieval-augmented model
+with different context compression methods.
+et al., 2023b) or generating summaries (Xu et al.,
+2024a); and (2) Embedding-based compression,
+which encodes text into dense embeddings (Ge
+et al., 2024) for inference. Embedding-based meth-
+ods have been proven more efficient and effec-
+tive (Cheng et al., 2024), typically employing a
+compressor trained in two phases: first through pre-
+training (e.g., via autoencoding or language mod-
+eling) to preserve contextual information (Cheva-
+lier et al., 2023), followed by fine-tuning (e.g.,
+with instruction follow-up or self-distillation) to
+adapt to downstream tasks (Rau et al., 2024). Ex-
+isting embedding-based approaches fix the com-
+pression rate (i.e., token-to-embedding ratio), lead-
+ing to trade-offs: high rates risk losing essen-
+tial information, while low rates retain redundan-
+cies (Figure 1). Additionally, inconsistent evalua-
+tion benchmarks—varying training data scales and
+tasks across baselines—hinder fair comparisons.
+We propose an adaptive context compression
+framework for RAG that dynamically adjusts the
+number of compressed embeddings during infer-
+ence. The framework decouples offline compres-
+sion (fixed-rate hierarchical embeddings) from on-
+24061

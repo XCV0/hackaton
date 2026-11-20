@@ -1,0 +1,103 @@
+edge by assessing the relevance of each document
+to the query and subsequently filtering out irrel-
+evant ones (Yan et al., 2024; Asai et al., 2024a).
+However, the reranking model still requires feed-
+ing the remaining documents into LLMs, which
+means that query-unrelated content within a rele-
+vant document may still mislead the generators (Xu
+et al., 2024a). Some models address this prob-
+lem by prompting LLMs to summarize query-
+relevant knowledge from the retrieved documents,
+thereby reducing the influence of irrelevant infor-
+mation (Vig et al., 2022; Yu et al., 2024a; Xu et al.,
+2024a). This summarization approach often in-
+corporates information from unrelated documents
+as part of the summaries, resulting in the intro-
+duction of noise. Both the reranking and summa-
+rization modules have advantages for knowledge
+refinement. However, in existing RAG systems,
+these modules are typically modeled separately by
+prompting the same LLMs.
+This paper presents RankCoT, a knowledge re-
+finement method that combines the strengths of
+both ranking and summarization to effectively en-
+hance the process for retrieval result refinement.
+As shown in Figure 1, we feed both the query and
+all retrieved documents into the RankCoT model,
+which incorporates reranking signals in generat-
+ing CoT-based summarization as knowledge refine-
+ments, thereby aiding LLMs in generating more
+accurate responses for answering the given query.
+During training the RankCoT model, we indepen-
+dently feed the query and retrieved document to
+the LLM, asking it to generate several Chain-of-
+Thought (CoT) responses to answer the question,
+which can be considered as summarization results.
+We then design the self-refinement model to prompt
+LLMs to answer the question according to these
+sampled CoTs, helping to refine the CoT results for
+more effective training. If the refined CoT contains
+the ground truth answer, it is considered a positive
+refinement result, while those that do not contain
+the ground truth answer are considered negative
+refinements.
+Our experiments demonstrate that RankCoT out-
+performs all baseline models, achieving over a 2%
+improvement. Notably, RankCoT proves effective
+across LLMs of various scales. It generates shorter
+knowledge refinement results compared to both
+reranking and summarization methods, while en-
+hancing the response accuracy of generator. Fur-
+ther analysis reveals that RankCoT successfully
+incorporates ground truth answers into the knowl-
+edge refinement results, while also including more
+query-relevant content. Additionally, RankCoT
+effectively extracts crucial semantics from the re-
+trieved documents and alleviates the conflict be-
+tween retrieved contents and internal knowledge.
+2 Related Work
+Retrieval-Augmented Generation (RAG) aims to
+enhance Large Language Models (LLMs) by en-
+abling them to access external knowledge bases,
+providing up-to-date information during the gener-
+ation process (Shi et al., 2024; Ram et al., 2023).
+This approach has demonstrated promising results
+across various NLP tasks, including open-domain
+question answering (Izacard et al., 2023), code gen-
+eration (Zhou et al., 2023), and dialogue (Shuster
+et al., 2022). In these RAG models, retrieved docu-
+ments are typically used as context to assist LLMs
+in generating more accurate responses (Ram et al.,
+2023). However, the conflict between the external
+knowledge and the parametric memory of LLMs
+often undermines the effectiveness of current RAG
+systems (Asai et al., 2024b; Xie et al., 2024; Chen
+et al., 2024b).
+To mitigate the potentially negative impact of
+retrieved knowledge, existing models focus on re-
+fining the external knowledge through various mod-
+ules designed to help LLMs generate more precise
+responses. Earlier works concentrate on reranking
+the retrieved documents (Yu et al., 2023; Shi et al.,
+2024; Yu et al., 2024b), while others employ query-
+focused summarization techniques (Vig et al., 2022;
+Xu et al., 2023) to reduce noise. However, rerank-
+ing models often overlook noise within individual
+passages, and summarization models may fail to
+account for query-document relevance, sometimes
+incorporating misleading content in the summa-
+rization results. Chain-of-Note (Yu et al., 2024a)
+attempts to instruct LLMs to generate query-related
+notes when answering a given query. This model
+incorporates the knowledge refinement process into
+the reasoning stage (Wei et al., 2022) and heavily
+relies on the capabilities of LLMs, which may limit
+its applicability in RAG systems (Gao et al., 2024).
+Modular RAG systems (Gao et al., 2024; Xu
+et al., 2024c) focus on refining external knowledge
+through different modules implemented by LLMs,
+which have become a key trend in the RAG area.
+For instance, Self-RAG (Asai et al., 2024a) uses dif-
+ferent tags for adaptive retrieval (Jiang et al., 2023)
+and self-reflection to refine knowledge. Some ap-
+12858

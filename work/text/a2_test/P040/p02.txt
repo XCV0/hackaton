@@ -1,0 +1,100 @@
+called SyncGE. Unlike previous approaches that
+require expensive LLM calls for graph exploration,
+our method uses an LLM only to locate initial
+nodes (triples) and then employs a generic seman-
+tic model to expand the triple sub-graph by ex-
+ploring diverse triple beams. Additionally, GEAR
+uses multi-hop context retrieved by SyncGE to con-
+struct a memory that summarises information for
+multi-step retrieval.
+Our work refines the neurobiology-inspired
+paradigm proposed by Gutierrez et al. by modeling
+the communication between the hippocampus and
+neocortex during episodic memory formation. In
+our design, an array of proximal triples functions
+as a memory gist learned through the hippocam-
+pus within one or a few shots (iterations), which
+is then projected back to the neocortex for later re-
+call stages (Hanslmayr et al., 2016; Griffiths et al.,
+2019). We highlight the complementary potential
+between our graph retrieval approach and an LLM,
+which, within our system, emulates the synergy
+between the hippocampus and neocortex, offering
+insights from a biomimetic perspective.
+We evaluate the retrieval performance of GEAR
+on three multi-hop QA benchmarks: MuSiQue,
+HotpotQA, and 2WikiMultihopQA. GEAR pushes
+the state of the art, achieving significant improve-
+ments in both single- and multi-step retrieval set-
+tings, with gains exceeding 10% on the most chal-
+lenging MuSiQue dataset. Furthermore, we demon-
+strate that our framework can address multi-hop
+questions in fewer iterations while consuming sig-
+nificantly fewer LLM tokens. Even with a single
+iteration, GEAR offers a more efficient alterna-
+tive to other iterative retrieval methods, such as
+HippoRAG w/ IRCoT. Our contributions can be
+summarised as follows:
+• We introduce a novel graph-based retriever,
+SyncGE, which leverages an LLM for locat-
+ing initial nodes for graph exploration and
+subsequently expands them by diversifying
+beams of triples that link multi-hop passages.
+• We incorporate this graph retrieval method
+within an LLM-based agent framework, ma-
+terialising GEAR, achieving state-of-the-art
+retrieval performance across three datasets.
+• We conduct comprehensive experiments show-
+casing the synergetic effects between our pro-
+posed graph-based retriever and the LLM
+within the GEAR framework.
+2 Related Work
+Our work draws inspiration from two branches of
+research: (i) retrieval-augmented models for QA
+and (ii) multi-hop QA using combinations of LLMs
+with graphical structures.
+2.1 Retrieval-augmented Models for QA
+Lewis et al. first showcased the benefits of augment-
+ing language models’ input context with relevant
+passages. Recent work by Wang et al. and Shen
+et al. explores query expansion approaches, gener-
+ating pseudo-documents from language models to
+expand the content of original queries. Subsequent
+frameworks, beginning with IRCoT, have investi-
+gated the interleaving of retrieval and prompting
+steps, allowing each step to iteratively guide and
+refine the other (Trivedi et al., 2023; Jiang et al.,
+2023; Su et al., 2024).
+2.2 Multi-hop QA with LLMs and Graphs
+Several architectures have introduced an offline
+indexing phase to form hierarchical passage sum-
+maries (Chen et al., 2023; Sarthi et al., 2024; Edge
+et al., 2024). However, summarisation must be
+repeated when adding new data, making knowl-
+edge base updates computationally expensive. Re-
+cent approaches have leveraged structured knowl-
+edge to address multi-hop QA challenges with
+LLMs (Park et al., 2023; Shen et al., 2024b; Li
+et al., 2024; Gutierrez et al., 2024; Liang et al.,
+2024; Wang et al., 2024). GraphReader, TRACE
+and HippoRAG propose offline methods for ex-
+tracting entities and atomic facts or semantic triples
+from passages (Li et al., 2024; Fang et al., 2024;
+Gutierrez et al., 2024). This allows chunks contain-
+ing the same or neighbouring entities to construct
+a graph of indexed passages. TRACE relies on
+an LLM to iteratively select triples for reasoning
+chains, which ground answer generation or filter
+retrieved results. However, its search space is lim-
+ited by pre-filtered candidate lists for each query.
+Li et al. employ an LLM agent that selects from
+a set of predefined actions to traverse knowledge
+graph nodes in real time given an input question.
+Liang et al. later introduced additional graph stan-
+dardisation, including instance-to-concept linking
+and semantic relation completion. However, this
+approach heavily depends on associating triples
+with pre-defined concepts for logical form-based
+retrieval.
+HippoRAG leverages an alignment of passages
+12050

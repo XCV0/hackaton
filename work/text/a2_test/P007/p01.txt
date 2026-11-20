@@ -1,0 +1,93 @@
+Proceedings of the 31st International Conference on Computational Linguistics, pages 10767–10780
+January 19–24, 2025. ©2025 Association for Computational Linguistics
+10767
+Retrieval-Augmented Generation for Large Language Model based
+Few-shot Chinese Spell Checking
+Ming Dong1,2,3, Zhiwei Cheng1,2,3, Changyin Luo1,2,3, Tingting He1,2,3,*
+1Hubei Provincial Key Laboratory of Artificial Intelligence and Smart Learning,
+2National Language Resources Monitoring and Research Center for Network Media,
+3School of Computer, Central China Normal University, Wuhan, China
+{dongming,changyinluo,tthe}@ccnu.edu.cn
+{thesolution}@mails.ccnu.edu.cn
+Abstract
+Large language models (LLMs) are naturally
+suitable for Chinese spelling check (CSC) task
+in few-shot scenarios due to their powerful se-
+mantic understanding and few-shot learning
+capabilities. Recent CSC research has begun
+to use LLMs as foundational models. How-
+ever, most current datasets are primarily fo-
+cused on errors generated during the text gen-
+eration process, with little attention given to
+errors occurring in the modal conversion pro-
+cess. Furthermore, existing LLM-based CSC
+methods often rely on fixed prompt samples,
+which limits the performance of LLMs. There-
+fore, we propose a framework named RagID
+(Retrieval-Augment Generation and Iterative
+Discriminator Strategy). By utilizing semantic-
+based similarity search and an iterative dis-
+criminator mechanism, RagID can provide
+well-chosen prompt samples and reduce over-
+correction issues in LLM-based CSC. RagID
+demonstrates excellent effectiveness in few-
+shot scenarios. We conducted comprehensive
+experiments, and the results show that RagID
+achieves the best performance on dataset that
+include data from multiple domains and dataset
+containing modal conversion spelling errors.
+The dataset and code are available online 1.
+1 Introduction
+Automatic Speech Recognition (ASR) and Optical
+Character Recognition (OCR) play key roles in var-
+ious real-world intelligent applications. However,
+the effectiveness of ASR and OCR applications is
+restricted by recognition errors caused by techni-
+cal bottlenecks, complex recognition environments,
+and individual differences. Therefore, using Chi-
+nese Spelling Check (CSC) to correct these errors
+in Chinese has become an essential and universal
+approach.
+* Corresponding author.
+1https://github.com/ViTsing/RagID
+Many of the existing CSC models are imple-
+mented based on BERT architecture, treating the
+correction task as a sequence labeling problem and
+achieving impressive results by introducing abun-
+dant features and fine-grained tuning on training
+datasets. BERT-based CSC methods are mainly
+divided into two categories based on the presence
+of an independent detection phase: one-stage meth-
+ods (Wu et al., 2023; Liu et al., 2021) and two-stage
+methods (Huang et al., 2023; Zhang et al., 2020).
+However, the generalization ability of these meth-
+ods to real-world application data is challenging,
+as current evaluation benchmarks do not prioritize
+the assessment of generalization ability in few-shot
+scenarios. Moreover, the meticulous design and
+fine-tuning on existing datasets inadvertently nar-
+row the scope of generalization ability for these
+methods, rendering them less effective in the sce-
+narios of few-shot learning. Real-world spelling
+errors in Chinese are complex and changeable, re-
+sulting in that most of them are few-shot scenarios.
+Therefore, improving the generalization ability of
+the CSC methods is crucial.
+LLMs have demonstrated excellent performance
+in various NLP domains, showing a huge knowl-
+edge base and strong semantic comprehension abil-
+ity. Therefore, using LLMs as foundation mod-
+els to solve CSC problems has become a valuable
+research direction (Li et al., 2023b; Dong et al.,
+2024). LLM-based CSC faces several significant
+challenges. Firstly, it is essential to establish objec-
+tive and unbiased criteria for evaluating the efficacy
+of various CSC methods within the context of few-
+shot scenarios. Secondly, it is crucial to design
+effective prompts that enable LLMs to comprehend
+the specific demands of the CSC task. Lastly, there
+is a need to prevent over-correction and to deter-
+mine the optimal point at which to cease alterations.
+To address the challenges, we propose a
+framework named RagID (Retrieval-Augment
+Generation and Iterative Discriminator Strategy).

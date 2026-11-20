@@ -1,0 +1,119 @@
+knowledge graphs and struggle to generate interpretable,
+KG-consistent relation paths. A more promising solution is
+to develop a KG-specific LLM that incorporates structural
+knowledge of the KG and is capable of generating plausible
+multi-hop relation paths.
+This capability can be formalized as an optimization
+objective. Given a question 𝑞, the goal is to generate mul-
+tiple relation paths that are both grounded in the KG and
+semanticallyalignedwithanswering𝑞.Toenablethis,weak
+supervision is introduced via the shortest relation paths
+between the topic and answer entities in the KG, which
+reflectplausiblereasoningtrajectoriesovertheKGstructure,
+with the following optimization goal:
+max
+𝜃
+𝔼𝑤∼ ∗ [𝑙𝑜𝑔𝑃𝜃(𝑤 ∣ 𝑞)], (4)
+where  ∗ denotesthesetofshortestrelationpathsbetween
+the topic entity in the question and the gold answer entity
+in the KG, and 𝑃𝜃(𝑤 ∣ 𝑞) is the probability of generating
+a relevant relation path grounded by the KG. With the
+flexible assumption of a uniform distribution over  ∗, this
+expectation be approximated by:
+arg max
+𝜃
+1
+| ∗|
+∑
+𝑤∈ ∗
+log 𝑃𝜃(𝑤 ∣ 𝑞). (5)
+Since the relation path is represented as a sequence of
+relations (as introduced in Section 2.1), the objective in
+Equation 5 can be further decomposed as:
+1
+| ∗|
+∑
+𝑤∈ ∗
+log
+|𝑤|∏
+𝑖=1
+𝑃𝜃(𝑟𝑖 ∣ 𝑟<𝑖,𝑞), (6)
+Thisoptimizationformulationfollowsthecoretrainingprin-
+cipleofLLMRoG [11],apubliclyavailableKG-specificLLM
+trained with a combined objective of generating faithful
+multi-hop reasoning paths and producing final answer pre-
+dictions. Under this formulation, a novel KG-specific LLM
+can also be trained from scratch to generate relation paths
+that serve as structural templates for perturbation insertion,
+guiding where and how adversarial triples should be intro-
+duced to misdirect the reasoning process.
+3.3. Perturbation Insertion
+For each question 𝑞, after obtaining its adversarial an-
+swers ̂ andthecorrespondingfaithfulandrelevantrelation
+paths , we construct perturbation triples that inject mis-
+leading reasoning chains into the KG.
+Specifically, for each relation path 𝑤 = (𝑟1,𝑟2,⋯,𝑟𝑙),
+wefirstattempttogrounditsprefix𝑤′ = (𝑟1,𝑟2,⋯,𝑟𝑙−1) in
+the KG, starting from the topic entity 𝑒𝑞:
+𝑙−1 = Grounding(𝑒𝑞,𝑤′; ), (7)
+where Grounding(⋅) denotes the grounding operation, and
+𝑒𝑞 is the topic entity in the question 𝑞. Each 𝑒𝑙−1 ∈ 𝑙−1
+corresponds to a valid entity reached by the path:
+𝑒𝑞
+𝑟1
+←←←←←←←←←→ 𝑒1
+𝑟2
+←←←←←←←←←→ …
+𝑟𝑙−1
+←←←←←←←←←←←←←←←→ 𝑒𝑙−1.
+Table 1
+Statistics of the WebQSP and CWQ test sets. #Test denotes
+the number of questions in the set test; #1-hop /2-hop /≥3-
+hop indicate the proportion of questions requiring reasoning
+over 1,2, or at least 3 hops, respectively; |̄ | represents the
+mean size of subgraphs (in number of triples) associated with
+each question in the test set.
+Dataset #Test #1-hop #2-hop # ≥3-hop ̄| |
+WebQSP 1,628 65.49% 34.51% 0 4,228
+CWQ 3,531 40.91% 38.64% 20.75% 4,195
+Wethenconstructperturbationtriplesoftheform (𝑒𝑙−1, 𝑟𝑙, ̂𝑎)
+byattachingeachadversarialanswer ̂𝑎 ∈ ̂.Toenhancethe
+stealthiness of the attack, we limit the number of perturba-
+tion triples associated with each adversarial answer ̂𝑎 ∈ ̂
+to a fixed budget𝐾.
+In practice, however, due to the possible sparse KG
+structure,somerelationpathsin  mayeitherfailtoground
+any valid (𝑙 − 1)-hop entity, or yield few triples to meet the
+perturbation budget 𝐾 for the adversarial answer. In such
+cases, we adopt a fallback strategy to generate additional
+perturbation triples that preserve the intended relation pat-
+tern by randomly sampling intermediate entities from the 
+to serve as connective bridges between 𝑒𝑞 and ̂𝑎 along the
+given relation path. Taking a 2-hop relation path (𝑟1,𝑟2) as
+example, two perturbation triples (𝑒𝑞,𝑟1,𝑒′) and (𝑒′,𝑟2, ̂𝑎𝑖,𝑗)
+aretogetherinsertedintothegraph,where𝑒′ ∈  isabridge
+entityrandomlysampledfromthegraph.Thisfallbackstrat-
+egysupplementstheperturbationtriplesforeachadversarial
+answer ̂𝑎 ∈ ̂ to ensure the number reaches 𝐾.
+4. Evaluation
+4.1. Datasets
+We evaluate the effectiveness of our attack using two
+widely adopted KGQA benchmarks: WebQuestionSP (We-
+bQSP) [37] and Complex WebQuestions (CWQ) [38]. Both
+datasets are built on Freebase and widely used to evaluate
+KG-RAGsystemswhichusuallyfirstretrieveevidencefrom
+Freebaseandthengenerateanswersofthetargetnaturallan-
+guage questions. To ensure comprehensive and systematic
+evaluation,weusetheentiretestsetsofWebQSPandCWQ
+as our attack targets. Following previous research on KG-
+RAG[11,39],weutilizethepubliclyavailablepreprocessed
+versions of WebQSP3 and CWQ4, where each question-
+answer pair is associated with a subgraph of Freebase,
+constructedbyextractingalltripleswithinaspecificdistance
+from the top entity of the question. In this work, a data
+poisoning attack is applied directly on these preprocessed
+subgraphs.Thestatisticsforthesetwodatasetsarepresented
+in Table 1 and 2.
+3https://huggingface.co/datasets/rmanluo/RoG-webqsp
+4https://huggingface.co/datasets/rmanluo/RoG-cwq
+: Preprint submitted to Elsevier Page 6 of 13

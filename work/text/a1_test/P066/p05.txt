@@ -1,0 +1,120 @@
+www.advancedsciencenews.com www.small-methods.com
+Voc increases by 70 mV up to 1.13 V compared to the pristine
+device (Voc = 1.06 V). While the FF of the device is only slightly
+enhanced. This is in contrast with the SnO2:CsF device, which
+shows a much higher FF reaching to 81.20%. Therefore, even
+though the CsF treatment did not improve the Voc or Jsc of
+the PSCs signiﬁcantly, the SnO2:CsF still shows a signiﬁcantly
+higher PCE. While, the KF treatment only has slight enhance-
+ment on both Voc and FF of the PSCs. The enhancement in
+Voc and FF of the SnO2:RbF and the SnO2:KF device can be
+contributedtothebetterenergyalignmentbetweenETLandper-
+ovskitelayercomparedtothepristineSnO2 asseeninFigure1d.
+In case of the SnO2:CsF device, it seems that the small “spike”
+(0.05 eV) did not prominently create a shunt blocking layer to
+eﬀectivelyimprovethe Voc ofthedevice, astheaverage Voc only
+increase to 1.051 from 1.045 V in the pristine device. However,
+the very small oﬀset of the conduction band position between
+the ETL and the perovskite layer can signiﬁcantly reduce the
+energy loss at the interface, thus improve the charge extraction
+eﬃciency and transport within the device. This is exhibited in
+theoutstandingFFachievedwiththeSnO2:CsFdevices.
+We have monitored the evolution of performance of the PSC
+without encapsulation under a controlled high humidity condi-
+tion(relativehumidity(RH):85 ± 1%).AllthedeviceswithXF
+treatment demonstrated better stability (Figure S8, Supporting
+Information) than the reference PSCs using bare SnO2.Under
+the high humidity environment, the reference devices can only
+maintain ≈41% of its initial PCE after 48 h. While SnO2:KF ex-
+hibits a slightly higher stability during ﬁrst 40 h, but quickly
+dropped to ≈34% of the initial PCE after 48 h. Meanwhile, the
+SnO2:RbF and SnO2:CsF show the most resilience during this
+agingcondition,whichretained57%and50%oftheirinitialef-
+ﬁciency,respectively.Inaddition,wealsomonitoredthethermal
+stability of these PSCs by keeping them at 85 °CinN2 environ-
+ment(FigureS9,SupportingInformation).Consistently,thether-
+mal stability of the PSCs exhibits a similar trend with the order
+ofthermalstabilityofSnO2:RbF>SnO2:CsF>SnO2:KF>pris-
+tine SnO2 based reference devices. We further tested the stabil-
+ity of the PSCs under prolonged continuous operational condi-
+tion by tracking the maximum power point of the device under
+1 sun illumination in air. We have noticed that, owing to heat
+generatedbytheXelampofthesolarsimulator,thetemperature
+couldgoupto67 °C.Despitewithoutencapsulation,allthePSCs
+still performed well after 3 h of continuous illumination test.
+However,thedevicewithXFsaltpost-treatedSnO2 ETLshowed
+much higher performance retention rate compared to the pris-
+tineSnO2.Speciﬁcally,thepristinedeviceonSnO2 ETLretained
+65.9% of the initial PCE after 3 h continuous one sun illumina-
+tioninair,whilethedevicewithKF,RbF,andCsFshowed73.4%,
+84.0%,and77.3%performanceretentionrate,respectivelyunder
+thesamestabilitytestingcondition(Figure2d).
+To gain an insight into the mechanism of the alkali cations
+in the PSCs with XF treatment, we have investigated the ideal-
+ity factor (𝜂id) of the device. 𝜂id can be extracted by ﬁtting the
+plotof Voc ofthedevicesasafunctionoflightintensitybasedon
+the equation of (𝜂id×KB×T)/q (Figure 2e). In the equation, KB is
+theBoltzmannconstant, T istemperature,and q istheelemental
+charge.Theresultsshowthe 𝜂id ofthedeviceis1.49,1.43,1.27,
+and 1.30 for pristine, SnO2:KF, SnO2:RbF, and SnO2:CsF de-
+vices, respectively. The smaller 𝜂id reﬂects reduced trap induced
+recombination. The result demonstrated that the XF treatment
+eﬀectively suppresses the nonradiative recombination of SnO2
+surface.Amongthem,theRbFtreatmentwasthemosteﬀective.
+Wehavefurtherinvestigatedtherecombinationprocessofthe
+devicesbyusingimpedancespectroscopy(IS).TheNyquistplots
+ofthecorrespondingPSCsindarkcondition(Figure2f)areﬁtted
+withanequivalentcircuittoextracttherecombinationresistance.
+The equivalent circuit contains a series resistance Rs present-
+ingfortheohmiccontributionofcontactsandwires,twocapaci-
+tive(Cg and Cs)andtwocorrespondingresistive(R3 and R1)ele-
+ments.Accordingtotheestablishedmodel,the Cg capacitanceas-
+sociatedwiththedielectricresponseoftheperovskitelayerwhile
+the Cs capacitanceassociatedwiththesurfacechargeaccumula-
+tionattheinterfaces,thesecapacitiveelementskineticallylinked
+to the resistive elements R3 and R1, respectively.[41] Previous re-
+port has shown that the Cs and R1 dominate the impedance re-
+sponse in the low frequency region and connected this type of
+low-frequency accumulation capacitance to the build-up of an
+electronic accumulation zone formed by majority carrier in the
+vicinity of the cathode contact.[42] The geometrical capacitance
+Cg and resistance R3 raise from the dielectric response of the
+lightabsorbingperovskitelayer,theydominatetheimpedancere-
+sponseinthehigh-frequencypart(>1kHz).Therecombination
+dynamicofthedeviceinthiscasehavebeenshowntobeclosely
+relatedtothedielectricresponsefrombothperovskitelayerand
+interfacial contacts. The higher value of total recombination re-
+sistance(R1 + R3)meanslowerchanceofrecombination.Details
+of the extracted resistances and capacitance are shown in Table
+S1,SupportingInformation.Thetotalrecombinationresistance
+(Rrec)isdeterminedbythesumoflowandhighfrequencyresis-
+tance(R3 and R1).Theresultsshowthetrendofthe Rrec evolution
+followstheorderofSnO2:RbF(517.1kΩ)>SnO2:CsF(246.3kΩ)
+> SnO2:KF(210.6kΩ)>>pristinedevice(134.5kΩ).Compared
+tothepristinedevice,theremarkablyhigherrecombinationresis-
+tanceoftheXFtreateddevicesindicatesasigniﬁcantreductionin
+thenonradiativerecombination.InparticulartheSnO2:RbFcon-
+sistentlyexhibitedthehighestrecombinationresistance.Itisalso
+noticeable that the series resistance of the PSCs also decreased
+with the XF treatment. The SnO2:CsF has the lowest Rs (Rs =
+13.0 Ω), followed by SnO2:RbF (Rs = 15.5 Ω) < SnO2:KF (Rs =
+16.0 Ω) and then pristine PSCs (Rs = 23.1 Ω), the trend is quite
+consistentwithourconductivitymeasurementsabove.Thelower
+seriesresistancefavorsmoreeﬃcientchargetransportationand
+collection.
+TofurtherverifytheeﬀectoftheXFtreatmentontrapdefects,
+wemeasuredthedefectdensityintheperovskiteﬁlmbythespace
+chargelimitedcurrent(SCLC)measurementwithall-electronde-
+vices with a conﬁguration of ITO/SnO2/perovskite/PC61BM/Au
+(Figure3a—inset).Thedefectdensitycanbecalculatedbyﬁtting
+the I–V characteristic in dark condition (Figure 3a) using the
+equation Nt = 2𝜀𝜀0 VTFL eL2 ;where𝜖 istherelativedielectricconstant of the perovskite, 𝜖0 is the vacuum permittivity, e is the electron
+charge, L isthethicknessofperovskitelayerand VTFL isthetrap
+ﬁlled limit voltage. The trap ﬁlled limit region is determined as
+shown in Figure 3a. The estimated VTFL for the samples with
+XF treatment is much lower than that of the pristine device.
+The value of VTFL of the samples follows the order of SnO2:CsF
+(VTFL = 0.104V) < SnO2:RbF(VTFL = 0.117V) < SnO2:KFtreat-
+ment(VTFL = 0.144V)<< pristinesample(VTFL = 0.281V).The
+Small Methods2024,8,2300431 ©2023TheAuthors. SmallMethodspublishedbyWiley-VCHGmbH2300431(5of10)
+ 23669608, 2024, 2, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/smtd.202300431, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

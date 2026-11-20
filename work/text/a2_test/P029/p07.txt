@@ -1,0 +1,111 @@
+CacheBlend +GAD +GAD+QCE
+0
+10
+20
+30
+40
+50
+60Hit rate (%)
+Δ+1.5
+Δ+6.8
+Δ+17.0
+7.03 9.03 8.5310.12
+15.45 16.93
+37.46
+46.73
+54.48
+BurstGPT MTRAG RAGPulse
+Figure 9: Hit rate across datasets.
+high-concurrency production environment. To rig-
+orously stress-test system’s capability of handling
+long-context requests identified in RAGPULSE, we
+implement a strict memory partitioning strategy:
+30 GB of VRAM per GPU is explicitly reserved
+for a dedicated KV cache pool. This setup allows
+us to quantitatively evaluate the storage-compute
+trade-offs and memory sensitivity under intensive,
+authentic RAG retrieval scenarios.
+We compare RAGPULSE against two represen-
+tative baselines. The first is BurstGPT (Wang et al.,
+2025c), a generic LLM inference trace. The sec-
+ond is MTRAG (Katsis et al., 2025), a synthetic
+RAG dataset. To ensure fair comparison we se-
+lect approximately 6,000 requests with around 5K
+input tokens from all three datasets. This length
+is chosen because it represents a common operat-
+ing region where RAG and non RAG workloads
+overlap, enabling clean separation of system perfor-
+mance from input length effects. All experiments
+are conducted on the open source LMCache RAG
+serving framework (Yao et al., 2025a; Cheng et al.,
+2024).
+6.1 Anatomy of Dataset Characteristics
+We first analyze the intrinsic properties of the three
+datasets. As shown in Figure 9 and Figure 10,
+the prefill time and cache hit rate exhibit stark dif-
+ferences across datasets. Under the CacheBlend
+policy alone, RAGPULSE achieves a hit rate of
+37.46%, which is substantially higher than Burst-
+GPT’s 7.03% and MTRAG’s 10.12%. This dis-
+crepancy stems from fundamental differences in
+dataset characteristics. BurstGPT is a generic LLM
+trace where requests lack structured prompt compo-
+nents, limiting prefix based caching due to its strict
+exact matching requirement. MTRAG is a syn-
+thetic RAG dataset where request arrival patterns
+are artificially generated, resulting in low document
+overlap (10.15%) across requests and limited reuse
+CacheBlend +GAD +GAD+QCE
+0.0
+0.1
+0.2
+0.3Prefill time (s)
+0.24
+0.21 0.22
+0.25
+0.22 0.22
+0.15
+0.13
+0.11
+BurstGPT MTRAG RAGPulse
+Figure 10: Prefill time across datasets.
+opportunities despite being RAG oriented. In con-
+trast, RAGPULSE captures temporal reuse patterns
+from user behavior. Its traces preserve fine grained
+request arrival times and inter request document
+affinity, enabling document level KV reuse that
+neither BurstGPT nor MTRAG can provide.
+6.2 Scheduling in PIC Systems
+Recent RAG serving systems such as CacheBlend,
+TurboRAG and EPIC (Lu et al., 2024; Hu et al.,
+2024) have demonstrated that KV cache can be
+reused at the document level independent of its
+absolute position in the input sequence, a tech-
+nique widely adopted in production RAG deploy-
+ments. Building on this foundation, we evaluate
+how scheduling strategies perform in this Position
+Independent Caching (PIC) enabled serving sys-
+tems using the three datasets. And we consider two
+scheduling strategies. The first is hit rate aware al-
+location which prioritizes caching documents with
+the highest observed access frequency. The second
+is Global Aware Dispatch (GAD) which consid-
+ers both cache hit rate and request level document
+overlap between dispatching requests. As illus-
+trated in Figure 9 and Figure 10, applying GAD on
+top of CacheBlend yields a dramatic improvement
+only for RAGPULSE. Specifically, RAGPULSE’s
+hit rate increases from 37.46% to 46.73%, while
+its prefill time decreases by 13.33%. For Burst-
+GPT, the hit rate improves marginally from 7.03%
+to 9.03%, with prefill time decreasing from 0.24
+to 0.21. For MTRAG, the hit rate increases from
+10.12% to 15.45%, with prefill time decreasing
+from 0.25 to 0.22. The limited improvement on
+BurstGPT and MTRAG reflects their inherent lack
+of authentic document overlap. BurstGPT has no
+document retrieval mechanism, while MTRAG’s
+synthetic nature produces documents that are in-
+dependent and lack temporal correlations. Only
+RAGPULSE captures real time sequence based doc-
+7071

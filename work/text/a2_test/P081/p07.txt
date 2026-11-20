@@ -1,0 +1,75 @@
+MedRAG: Enhancing Retrieval-augmented Generation with
+Knowledge Graph-Elicited Reasoning for Healthcare Copilot
+Method Model CPDD DDXPlus
+𝐿1 𝐿2 𝐿3 𝐿1 𝐿2 𝐿3
+Baselines
+Naive RAG + COT 75.47 54.72 43.40 79.28 71.89 56.84
+FS-RAG 64.71 49.02 45.10 78.18 68.20 51.40
+FLARE 54.84 48.39 45.16 71.09 56.70 31.02
+FL-RAG 65.45 50.91 49.09 90.12 83.32 66.78
+DRAGIN 78.72 59.57 40.42 80.51 70.83 50.24
+SR-RAG 73.58 60.38 54.72 78.65 70.28 52.16
+Ours MedRAG 79.25 75.47 66.04 88.65 83.46 68.01
+Table 1: Results of quantitative performance comparison
+Backbone LLMs Size w/o KG-elicited Reasoning w/ KG-elicited Reasoning
+𝐿1 𝐿2 𝐿3 𝐿1 𝐿2 𝐿3
+Open-source Models
+Mixtral-8x7B 13B 60.38 32.08 22.34 84.62 82.69 63.46
+Qwen-2.5 72B 66.04 41.51 39.62 80.36 73.21 64.29
+Llama-3.1-Instruct 8B 75.47 54.72 43.40 79.25 75.47 66.04
+Llama-3.1-Instruct 70B 86.79 67.92 56.60 86.79 83.02 71.70
+Closed-source Models
+GPT-3.5-turbo - 83.02 56.60 45.28 70.56 68.68 50.57
+GPT-4o-mini - 88.68 67.92 56.60 85.85 75.00 60.38
+GPT-4o - 90.57 71.70 60.38 91.87 81.78 73.23
+Table 2: Performance of MedRAG on different LLM backbones with and without KG-elicited reasoning
+Manifestation Masking Ratio 𝐿1 𝐿2 𝐿3
+100% 60.38 56.60 52.83
+66.6% 69.39 67.35 55.10
+33.3% 71.43 67.35 61.22
+0% 79.25 75.47 66.04
+Table 3: Result of proactive diagnostic questioning
+Additionally, most RAG models designed for simpler QA tasks do
+not perform as well in the more complex medical domain, leading to
+longer contextual and prompt. These models are often optimized for
+generating short and straightforward answers, which limits their
+effectiveness in handling intricate medical queries. We observe
+models that have a simpler mechanism in the query-organizing
+phase perform better than part of more sophisticated ones. Except
+for our MedRAG, models like SR-RAG and FL-RAG also secured sev-
+eral second-best performances. Even the Chain-of-Thought model,
+which lacks improvements in the retriever or generator compo-
+nents, outperformed some of the other SOTA models in complex
+medical tasks.
+For report generation, we conducted both objective evaluation
+using BERTScore, BLEU, ROUGE and METEOR, as well as sub-
+jective evaluation based on Mini-CEX [37] criteria by LLM[47]
+with validation by doctors. Performance results are shown in the
+Appendix.
+6.2 Compatibility, Generalizability and
+Adaptability (RQ2)
+The results in Table 2 demonstrate the performance of incorporating
+KG-elicited reasoning to various backbone LLMs, including both
+open-source and closed-source models. The results demonstrate
+that the inclusion of KG-elicited reasoning significantly enhances
+diagnostic accuracy across 𝐿1, 𝐿2, and 𝐿3 for all backbone LLMs,
+compared to models without its use. For example, Mixtral-8x7B
+shows a significant 𝐿3 improvement from 22.34% to 63.46%, demon-
+strating the effectiveness of our proposed KG-elicited reasoning,
+particularly in smaller models.
+Comparing open-source and closed-source models, the RAG with
+the GPT-4o as the backbone LLM outperforms all others, showing
+its superior adaptability with knowledge graph integration. In addi-
+tion, MedRAG performs best on closed-source models, showcasing
+our framework’s compatibility, generalizability and adaptability. In
+contrast, token-level RAG models like DRAGIN and FLARE face
+challenges in adapting to closed-source models due to their inherent
+frameworks, limiting their potential to achieve better performance
+across various LLMs.
+We also observe an interesting result that L1 performance de-
+creased when KG knowledge is incorporated into small-parameter
+closed-source models. We deduce that introducing similar disease
+difference complicates the reasoning. GPT-3.5 and GPT-4o-mini
+struggle with incorporating highly granular information due to
+parameter limitations, leading to knowledge conflicts and blurred
+classification boundaries, which impact L1 performance. However,

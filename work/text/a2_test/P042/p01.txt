@@ -1,0 +1,88 @@
+Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026), pages 716–734
+11–16 May 2026. ©ELRA Language Resources Association (ELRA), 2026
+716
+Evaluating the Impact of Source Diversity
+for RAG in Historical Research
+Ruhi Mahadeshwar, Tommaso Caselli, Andreas van Cranenburgh, Malvina Nissim
+CLCG, University of Groningen
+The Netherlands
+{r.u.mahadeshwar, t.caselli, a.w.van.cranenburgh, m.nissim}@rug.nl
+Abstract
+Historical research increasingly benefits from large language models (LLMs). However, LLMs are prone to factual
+inaccuracy, unreliability, and biased interpretations of data. Retrieval-augmented generation (RAG) approaches
+have emerged as solutions, but may inadvertently perpetuate biased perspectives embedded in historical archives.
+This paper investigates how source diversity in RAG impacts perspective variation in historical question answering.
+We compile a multilingual corpus (English, French, Dutch) of historical documents spanning multiple countries
+and focus on Napoleon Bonaparte. We evaluate three Qwen3 models across ten questions using a multi-layered
+framework combining traditional metrics (BERTScore, ROUGE-L), frame semantics analysis, and syntactic profiling.
+Our results highlight that, while traditional similarity metrics suggest high semantic consistency, frame-semantic
+analysis exposes substantial perspective shifts. Baseline answers present “flattened” cross-lingual perspectives,
+whereas RAG introduces diversity. Critically, this diversity manifests differently across languages, demonstrating
+language-specific patterns. Our findings highlight limitations of traditional evaluation metrics for perspective-sensitive
+tasks and demonstrate that RAG constitutes active perspective transformation rather than neutral augmentation.
+Keywords:perspective, RAG, LLMs, bias, historical research
+1. Introduction and Background
+Long dominated by close-reading approaches, like
+many other disciplines in the humanities, histori-
+cal research has recently benefited from advances
+in Natural Language Processing (NLP) and digi-
+tal technologies. One more recent development is
+that Large Language Models (LLMs) are increas-
+ingly being incorporated into historical research
+as assistive tools (Garcia and Weilbach, 2023;
+González-Gallardoetal.,2024;Hauseretal.,2024;
+Zeng,2024;CelliandBasile,2024;CelliandSamal,
+2025). LLMs are trained on massive amounts of
+data, thus are able to deal fluently with natural lan-
+guageinbothinputandoutput, andserveasknowl-
+edge repositories. As a result, LLMs are used to
+support multiple forms of historical analysis; for
+example by identifying analogies, conceptual pat-
+terns, and relationships across time and contexts,
+therebyenablinghistorianstoposebroaderormore
+complex questions about continuity, change, and
+causation in the historical records (Li et al., 2025).
+The advantages of LLMs are offset by substan-
+tial limitations. LLMs exhibit well-known issues of
+factual inaccuracy, which compromises the reliabil-
+ity of extracted information (Jaskulski et al., 2025),
+andalsostrugglewiththecontextualanddiachronic
+subtleties of historical language, leading to inter-
+pretative errors. Retrieval-Augmented Generation
+(RAG) approaches (Lewis et al., 2020) are rapidly
+gaining popularity in historical research as a way to
+mitigate the shortcomings of adopting LLMs. The
+use of external retrieval to bring controlled domain-
+specific or time-sensitive material, such as archival
+documents, intothegenerativepipelineshouldintu-
+itively help to combat hallucinations and the poten-
+tial lack of transparency in responses (Gao et al.,
+2023). Being able to identify exactly which source
+text underpins a given generated claim is a rather
+fundamental aspect of scholarship, especially in
+historical research (Zhou et al., 2025).
+While the advantages are evident, most ap-
+proacheswhichuseRAG-basedLLMsforhistorical
+research fail to highlight a crucial negative aspect
+of over-reliance on documents from time-specific
+historical archives, and how it might perpetuate
+biased narratives or perspectives from that era. In-
+deed, the reporting of events always entails a per-
+spective or focus (Bal, 2009) even unconsciously.
+This of course holds also in the case of historical
+documents; no matter how impartial and compre-
+hensive one tries to be, the act of recording history
+will always exclude or modify some perspectives.
+Integrating RAG into the pipeline, and thereby fore-
+grounding particular historical materials, inevitably
+privileges the perspectives embedded within those
+materials. However, when evaluating RAG-based
+LLMs for historical research, this aspect of possibly
+inducing a biased view through RAG-fed materials
+is not taken into account as frequently, despite the
+impact it may have.
+We suggest that if RAG-based LLMs are to
+be used to empower historical research, the ef-
+fect of RAG must be examined more closely, and,
+wherepossible, automaticallyquantified, especially
+in terms of perspective change. To make this goal

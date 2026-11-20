@@ -1,0 +1,65 @@
+Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea
+A Datasets
+In this paper, we employ seven widely used graph datasets, as
+summarized in Table 3. A detailed introduction to these datasets is
+provided below.
+Table 3: Statistics of the datasets.
+Dataset #Nodes #Edges Domain #Category
+Cora 2,708 5,429 Academic 7
+CiteSeer 3,186 4,277 Academic 6
+Ele-Photo 48,362 500,928 E-commerce 12
+Ele-Computers 87,229 721,081 E-commerce 10
+Books-History 41,551 358,574 E-commerce 12
+WikiCS 11,701 215,863 Wikipedia 10
+Instagram 11,339 144,010 Social 2
+Cora [26] is a citation network consisting of 2,708 nodes and
+5,429 edges, where each node represents a scientific publication
+and each edge indicates a citation between publications. The tex-
+tual attribute of each node includes the title and abstract of the
+corresponding publication. Node categories span seven research
+areas: case-based reasoning, genetic algorithms, neural networks,
+probabilistic methods, reinforcement learning, rule learning, and
+theory.
+CiteSeer [6] is also a citation network, consisting of 3,186 nodes
+and 4,277 edges. Each node represents a scientific publication, cate-
+gorized into one of six research areas: Agents, Machine Learning,
+Information Retrieval, Database, Human-Computer Interaction, and
+Artificial Intelligence.
+Ele-Photo [38] is derived from the Amazon Electronics dataset,
+where each node represents an electronic product and each edge
+denotes frequent co-purchases or co-views. The text attribute of
+each node comes from the most upvoted user review or a random
+review if no such votes are available. The classification task involves
+assigning each product to one of 12 categories.
+Ele-Computers [38], also from Amazon Electronics, shares
+the same structure but classifies products into 10 categories. Text
+attributes follow the same rule as Ele-Photo.
+Books-History [38] extracted from the Amazon-Books dataset,
+focuses on history books. Nodes represent books with edges indi-
+cating co-purchases or co-views. Text attributes include titles and
+descriptions. The classification involves 12 categories.
+WikiCS [20] dataset is a Wikipedia-based dataset designed for
+benchmarking Graph Neural Networks. It comprises 10 classes,
+each corresponding to a branch of computer science.
+Instagram [11] is a social network dataset where nodes rep-
+resent users and edges indicate the following relationships. The
+prediction task is to classify each user as either commercial or
+normal.
+B Implementation Details
+We adopt the pre-trained GraphCLIP model as the backbone, which
+has been trained on the ogbn-ArXiv, ArXiv_2023, PubMed, ogbn-
+Products, and Reddit datasets. All experiments are conducted with
+a batch size of 32 on one NVIDIA V100 GPU. In the HKI module,
+we employ all-MiniLM-L6-v2 [25] as the language model, and the
+hyper-parameters are configured as follows: 𝜖 = 0.2, 𝜆𝑎 = 0.5, and
+𝜆reg = 0.1. For the MR module, we utilize LLaMA-3.1-8B-Instruct
+[32] as the LLM to generate the corresponding coarse-grained
+and fine-grained queries. The number of retrieved central enti-
+ties 𝑘 is selected from {1, 3, 5, 7, 9}, the diversity factor 𝛾 is tuned
+within {0.1, 0.3, 0.5, 0.7, 0.9, 1}, and the number of retrieved neigh-
+borhood entities in fine-grained knowledge retrieval 𝑘′ is chosen
+from {5, 10, 15, 20}. Finally, in the DF module, the temperature co-
+efficient 𝜏 is set to 5, while the feature-level fusion hyperparameter
+𝛽 and the structure-level fusion hyperparameter 𝛼 are both tuned
+within {0.1, 0.3, 0.5, 0.7, 0.9, 1}. We report the mean accuracy and
+standard deviation over three runs with different random seeds.

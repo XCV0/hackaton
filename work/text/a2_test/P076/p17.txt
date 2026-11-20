@@ -1,0 +1,39 @@
+Prompts for QuestionAnswering
+[TASK]: Natural Questions, HotpotQA, TriviaQA, PopQA
+[Instruction]: Task Description:
+1.Read the given question and related chain of thought to 
+gather relevant information.
+2. The content of the chain of thought is the thinking 
+process that may be used to answer the question.
+3. If the chain of thought don't work, please answer the 
+question based on your own knowledge.
+4. Please answer the question and only output the answer. 
+Question:{question}
+Chain of Thought:{COT}
+[TASK]: ASQA 
+[Instruction]: Task Description:
+1.Read the given question and related chain of thought to 
+gather relevant information.
+2. The content of the chain of thought is the thinking 
+process that may be used to answer the question.
+3. If the chain of thought don't work, please answer the 
+question based on your own knowledge.
+4. Answer the following question. The question may be 
+ambiguous and have multiple correct answers, and in that 
+case, you have to provide a long-form answer including all 
+correct answers.
+Question:{question}
+Chain of Thought:{COT}
+[TASK]: MARCO QA 
+[Instruction]: Task Description:
+1.Read the given question and related chain of thought to 
+gather relevant information.
+2. The content of the chain of thought is the thinking 
+process that may be used to answer the question.
+3. If the chain of thought don't work, please answer the 
+question based on your own knowledge.
+4. Give a short answer to a given question. 
+Question:{question}
+Chain of Thought:{COT}
+Figure 7: Prompt Templates Used for Question Answering.
+12873

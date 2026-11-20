@@ -1,0 +1,103 @@
+Limitations
+Our proposed framework demonstrates notable im-
+provements in faithfulness and reasoning capabil-
+ity. However, it entails limitations inherent to Self-
+Correcting RAG architectures. The primary con-
+straint is the increased computational overhead and
+inference latency. Our MCTS-based approach dif-
+fers from standard single-pass RAG. It requires
+performing multiple forward passes and NLI ver-
+ifications for each reasoning step. We implement
+pareto-pruning for the MMKP selector to maintain
+polynomial time complexity. Nevertheless, the test-
+time search increases the time-to-first-token. This
+characteristic limits the current iteration’s applica-
+bility in ultra-low-latency real-time scenarios.
+Furthermore, the robustness of our reward mech-
+anism relies on the quality of the off-the-shelf NLI
+model (e.g., RoBERTa-large-mnli). These auxil-
+iary models are generally effective for standard do-
+mains. However, they may overlook subtle contra-
+dictions in highly specialized fields, such as law or
+medicine. Addressing this requires domain-specific
+fine-tuning. Finally, our MMKP selector aims to
+maximize information density. It operates on the as-
+sumption that redundancy within retrieved groups
+is semantically uniform. In cases of high semantic
+complexity, rigorous filtering might inadvertently
+discard complementary minority opinions.
+Ethical Considerations
+Our work aims to enhance the reliability of Large
+Language Models. We focus on reducing halluci-
+nations through constrained context selection and
+logical verification. By grounding generation in
+traceable evidence, we mitigate risks associated
+with disseminating factually incorrect information.
+However, we acknowledge the environmental im-
+pact of the test-time compute paradigm. The itera-
+tive nature of Monte Carlo Tree Search increases
+GPU utilization compared to standard decoding
+methods. Consequently, this results in higher en-
+ergy consumption. Future work should focus on
+optimizing the planner’s sample efficiency to re-
+duce this computational footprint.
+Additionally, as a Retrieval-Augmented Genera-
+tion system, our model’s outputs are constrained by
+the retrieved corpora. The results reflect the qual-
+ity and potential biases of the source documents.
+Our NLI guidance penalizes logical contradictions.
+However, it does not verify the intrinsic factual ac-
+curacy of the retrieved text. If the knowledge base
+contains biased or toxic content, the system may
+reproduce these issues. It is important to note that
+faithfulness in this context refers to adherence to
+the retrieved context. It does not necessarily equate
+to absolute objective truth.
+Acknowledgements
+This work was supported by the National Natural
+Science Foundation of China (No. 52578347).
+References
+Michael Ahn, Anthony Brohan, Noah Brown, Yev-
+gen Chebotar, Omar Cortes, Byron David, Chelsea
+Finn, Chuyuan Fu, Keerthana Gopalakrishnan, Karol
+Hausman, Alex Herzog, Daniel Ho, Jasmine Hsu,
+Julian Ibarz, Brian Ichter, Alex Irpan, Eric Jang,
+Rosario Jauregui Ruano, Kyle Jeffrey, and 26 others.
+2022. Do as i can, not as i say: Grounding language
+in robotic affordances. Preprint, arXiv:2204.01691.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+Preprint, arXiv:2310.11511.
+Maciej Besta, Nils Blach, Ales Kubicek, Robert Ger-
+stenberger, Michal Podstawski, Lukas Gianinazzi,
+Joanna Gajda, Tomasz Lehmann, Hubert Niewiadom-
+ski, Piotr Nyczyk, and Torsten Hoefler. 2024. Graph
+of thoughts: Solving elaborate problems with large
+language models. Proceedings of the AAAI Confer-
+ence on Artificial Intelligence, 38(16):17682–17690.
+Sébastien Bubeck, Varun Chandrasekaran, Ronen El-
+dan, Johannes Gehrke, Eric Horvitz, Ece Kamar, Pe-
+ter Lee, Yin Tat Lee, Yuanzhi Li, Scott Lundberg,
+Harsha Nori, Hamid Palangi, Marco Tulio Ribeiro,
+and Yi Zhang. 2023. Sparks of artificial general in-
+telligence: Early experiments with gpt-4. Preprint,
+arXiv:2303.12712.
+Ruijun Chen, Jiehao Liang, Shiping Gao, Fanqi Wan,
+and Xiaojun Quan. 2024. Self-evolution fine-tuning
+for policy optimization. In Findings of the Associa-
+tion for Computational Linguistics: EMNLP 2024,
+pages 4120–4137.
+Rong Fu, Yang Li, Zeyu Zhang, Jiekai Wu, Yaohua
+Liu, Shuaishuai Cao, Yangchen Zeng, Yuhang Zhang,
+Xiaojing Du, Chuang Zhao, Kangning Cui, and Si-
+mon Fong. 2026a. Neurosymactive: Differentiable
+neural-symbolic reasoning with active exploration
+for knowledge graph question answering. Preprint,
+arXiv:2602.15353.
+Rong Fu, Chunlei Meng, Youjin Wang, Haoyu Zhao,
+Jiaxuan Lu, Kun Liu, JiaBao Dou, and Simon James
+Fong. 2026b. Neuropareto: Calibrated acquisition
+for costly many-goal search in vast parameter spaces.
+Preprint, arXiv:2602.03901.
+20962

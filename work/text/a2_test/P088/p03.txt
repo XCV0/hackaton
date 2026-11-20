@@ -1,0 +1,117 @@
+generation stages. Our findings indicate that the primary
+vulnerability lies in the retrieval stage, where injected per-
+turbation triples achieve remarkably high coverage, with
+at least one adversarial triple being retrieved in over 90%
+of the questions under attack. However, the inclusion of
+perturbationsintheretrievalresultsdoesnotnecessarilylead
+to their incorporation into the generated answers, as LLMs
+may selectively filter out adversarial content based on their
+internal knowledge. Consequently, we further examine the
+robustness of different LLMs to poisoned retrieval results
+and identify an interesting trend: LLMs with stronger KG
+reasoningcapabilitiesarealsomoresensitivetoKGpoison-
+ing.
+The main contributions of this work can be summarized
+as:
+∙ We investigate the safety risks of KG-RAG systems, and
+present the first systematic study of data poisoning attacks
+under realistic, black-box settings.
+∙ We develop a targeted attack strategy that injects pertur-
+bation triples into the KG to complete adversarial inference
+chains, thereby misleading KG-RAG methods into produc-
+ing incorrect answers.
+∙ Weconductextensiveexperimentsontwobenchmarksand
+four representative KG-RAG methods. The results demon-
+stratethatourattacksubstantiallydegradestheperformance
+of existing systems. In-depth analyses provide a compre-
+hensiveunderstandingofthesecurityvulnerabilitiesofKG-
+RAG systems and offer actionable insights for enhancing
+their robustness.
+2. Background
+2.1. Preliminaries
+KnowledgeGraphs(KGs)representfactualknowledgeina
+structuredformat,typicallydefinedas  = (, ,  ),where
+ isasetofentities,  asetofrelations,and  ⊆  ×  × 
+is a set of factual triples. Each triple (𝑒ℎ,𝑟,𝑒𝑡) in  denotes
+a relation 𝑟linking a head entity 𝑒ℎ to a tail entity 𝑒𝑡.
+ReasoningPathsarewidely-usedtosupportmulti-hoprea-
+soning over KGs. A reasoning path is typically formed as a
+sequence of consecutive triples in the KG, denoted as:
+𝑝 ∶ 𝑒0
+𝑟1
+←←←←←←←←←→ 𝑒1
+𝑟2
+←←←←←←←←←→ …
+𝑟𝑙
+←←←←←←←←→ 𝑒𝑙
+where (𝑒𝑖−1,𝑟𝑖,𝑒𝑖) ∈  , and 𝑙 is the length. Such paths
+capture compositional semantics and serve as interpretable
+evidence for multi-hop inference in KG-based applications.
+For example, given the reasoning path: Cardiff
+𝑙𝑜𝑐𝑎𝑡𝑒𝑑𝐼𝑛
+←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←→
+Wales
+𝑐𝑜𝑛𝑡𝑎𝑖𝑛𝑒𝑑𝐼𝑛
+←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←→ United Kingdom, we could conclude that
+Cardiff is a city in the United Kingdom.
+Relation Paths abstract away the intermediate entities in a
+reasoning path while preserving its relational structure. For
+eachreasoningpath𝑝,wedenoteitsassociatedrelationpath
+as𝑤 = (𝑟1,𝑟2, … ,𝑟𝑙).Forinstance,(locatedIn,containedIn)
+is the corresponding relation path of the aforementioned
+reasoning path from Cardiff to United Kingdom. Relation
+paths are widely used for deriving compositional patterns
+across KGs [31, 32]. Conversely, given a relation path 𝑤,
+we can infer matching reasoning paths from a KG that
+instantiate𝑤by identifying valid triple sequences. We refer
+to this procedure as grounding in this work.
+Knowledge Graph-based Question Answering (KGQA)
+serves as a cornerstone downstream task for KG-RAG [6],
+andispredominantlyusedtoevaluatetheKG-RAG’sability
+to retrieve and reason over KGs. Given a natural language
+question 𝑞 and a KG , the task aims to design a function
+𝑓 that utilizes  to return an answer entity 𝑎 ∈ , i.e.,
+𝑎 = 𝑓 (𝑞, ).
+2.2. Knowledge Graph-based
+Retrieval-Augmented Generation
+2.2.1. General Framework
+Knowledgegraph-basedretrieval-augmentedgeneration
+(KG-RAG) is a framework that enhances LLMs by leverag-
+ingexternalKGstosupportfactual,interpretable,andmulti-
+hop reasoning. Given a user question 𝑞 and a KG , KG-
+RAG systems typically follow a two-stage pipeline:
+Retrieval stage focuses on identifying a sub-KG 𝑞 =
+(𝑞, 𝑞, 𝑞) from  that is most relevant to the input ques-
+tion:
+𝑞 = Retriever(𝑞; ). (1)
+Various strategies have been proposed to implement the
+retriever in existing KG-RAG methods. Some approaches
+retrieve question-relevant triples based on embedding sim-
+ilarity[33],thoughtheretrievedtriplesmaynotformacon-
+nectedsubgraph.Toimprovestructuralcoherence,heuristic
+rules [34] are applied to further select connected triples and
+construct meaningful subgraphs. Another popular design
+leveragesthestronggenerativecapabilitiesofLLMstoguide
+the retrieval in reasoning paths [11].
+Generationstageinvolvessynthesizingresponsesbased
+ontheretrievedgraphdata:𝑎 = 𝑓𝜃(𝑞, 𝑞),where𝑓𝜃 denotes
+the LLM generator parameterized by 𝜃. In practice, a com-
+monapproachistoprompttheLLMwithaserializednatural
+languageinputthatcombinesthequestion𝑞andtheretrieved
+content 𝑞. Thus, this stage can be denoted as:
+𝑎 = 𝑓𝜃(Prompt[𝑞, 𝑞]). (2)
+2.2.2. KG-RAG Methods
+In this work, we explore data poisoning attacks on four
+representative KG-RAG methods: RoG [11], RCR [24],
+G-retriever [34], and SubgraphRAG [35]. These methods
+primarily focus on retrieving high-quality relevant triples
+to support accurate answer generation. Based on their re-
+trievalstructures,thefourKG-RAGmethodscanbebroadly
+categorized into two groups: path-retrieval methods (RoG
+and GCR) and subgraph-retrieval methods (G-retriever and
+SubgraphRAG). More details are introduced as follows:
+RoGextendsthebasicKG-RAGframeworkwithatwo-
+module design: planning and retrieval-reasoning. Given a
+question,RoGfirstemploysasimpleinstructiontemplateto
+promptLLMstogeneraterelationpathsthatcanbegrounded
+: Preprint submitted to Elsevier Page 3 of 13

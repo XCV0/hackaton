@@ -1,0 +1,105 @@
+Limitations
+For the internal reasoning graph construction of
+SIRG, since LRP requires computing internal
+model gradients for each token generation, this
+results in a high time complexity for the attribution
+score calculation phase. Future work will opti-
+mize LRP’s computational objects from semantic
+fragment perspectives to reduce graph construction
+time. We will also evaluate the semantic-level faith-
+fulness of various attribution methods in capturing
+internal inference processes.
+For the hallucination detection module of SIRG,
+although the linearization method has achieved
+great results, it is a naive way of using topolog-
+ical relation, which ignores the multi-hop depen-
+dency information and the subtle error propagation
+information in the internal reasoning graph. Fu-
+ture efforts will explore multi-angle applications of
+this graph, including adaptive node relationship ag-
+gregation via graph neural networks. Additionally,
+developing low-resource hallucination discrimina-
+tors remains a key research focus.
+Acknowledgments
+We would like to appreciate anonymous reviewers
+for their valuable comments that help us to im-
+prove this manuscript. This work was supported
+by New Generation Artificial Intelligence-National
+Science and Technology Major Project under grant
+2025ZD0123304 and NSFC under grant 62532001.
+Ethics Statement
+Based on the research presented in this paper, we
+acknowledge the ethical implications of developing
+hallucination detection methods for LLMs. While
+our work aims to enhance the reliability and trust-
+worthiness of AI-generated content, we recognize
+that such techniques could potentially be misused
+to conceal model limitations or manipulate outputs
+in ways that undermine transparency. We affirm our
+commitment to responsible AI research by ensuring
+our method, SIRG, is designed to improve factual
+faithfulness rather than to deceive. All experiments
+were conducted using publicly available datasets
+with proper citations, and we have openly disclosed
+the limitations of our approach to avoid overstating
+its capabilities. We encourage the community to
+utilize this work for promoting accountability and
+interpretability in LLMs, and we emphasize the
+importance of continued ethical scrutiny as halluci-
+nation detection technologies evolve.
+References
+Samira Abnar and Willem Zuidema. 2020. Quantifying
+attention flow in transformers. In Proceedings of the
+58th Annual Meeting of the Association for Compu-
+tational Linguistics. Association for Computational
+Linguistics.
+Reduan Achtibat, Sayed Mohammad Vakilzadeh Hatefi,
+Maximilian Dreyer, Aakriti Jain, Thomas Wiegand,
+Sebastian Roland Lapuschkin, and Wojciech Samek.
+2024. Attnlrp: Attention-aware layer-wise relevance
+propagation for transformers. In International Con-
+ference on Machine Learning 2024.
+Rishabh Agarwal, Levi Melnick, Nicholas Frosst,
+Xuezhou Zhang, Ben Lengerich, Rich Caruana, and
+Geoffrey E Hinton. 2021. Neural additive models:
+Interpretable machine learning with neural nets. Ad-
+vances in neural information processing systems,
+34:4699–4711.
+Ameen Ali, Thomas Schnake, Oliver Eberle, Grégoire
+Montavon, Klaus-Robert Müller, and Lior Wolf.
+2022. Xai for transformers: Better explanations
+through conservative propagation. In International
+conference on machine learning, pages 435–451.
+PMLR.
+Sebastian Bach, Alexander Binder, Grégoire Montavon,
+Frederick Klauschen, Klaus-Robert Müller, and Wo-
+jciech Samek. 2015. On pixel-wise explanations
+for non-linear classifier decisions by layer-wise rele-
+vance propagation. PloS one, 10(7):e0130140.
+Yarden Bakish, Itamar Zimerman, Hila Chefer, and Lior
+Wolf. 2025. Revisiting lrp: Positional attribution as
+the missing ingredient for transformer explainability.
+arXiv preprint arXiv:2506.02138.
+Loris Bergeron, Ioana Buhnila, Jérôme François, and
+Radu State. 2025. Halluguard: Evidence-grounded
+small reasoning models to mitigate hallucinations
+in retrieval-augmented generation. arXiv preprint
+arXiv:2510.00880.
+Gagan Bhatia, Somayajulu G Sripada, Kevin Allan,
+and Jacobo Azcona. 2025. Distributional seman-
+tics tracing: A framework for explaining halluci-
+nations in large language models. arXiv preprint
+arXiv:2510.06107.
+Collin Burns, Haotian Ye, Dan Klein, and Jacob Stein-
+hardt. 2022. Discovering latent knowledge in lan-
+guage models without supervision. arXiv preprint
+arXiv:2212.03827.
+Hila Chefer, Shir Gur, and Lior Wolf. 2021. Trans-
+former interpretability beyond attention visualization.
+In Proceedings of the IEEE/CVF conference on com-
+puter vision and pattern recognition, pages 782–791.
+Chao Chen, Kai Liu, Ze Chen, Yi Gu, Yue Wu,
+Mingyuan Tao, Zhihang Fu, and Jieping Ye. 2024.
+Inside: Llms’ internal states retain the power of hallu-
+cination detection. arXiv preprint arXiv:2402.03744.
+27835

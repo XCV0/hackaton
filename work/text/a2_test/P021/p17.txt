@@ -1,0 +1,88 @@
+System Prompt: You are an expert at verifying information. You will be given a set of videos and a
+sentence. Your task is to determine if the sentence is fully supported by the videos. You will output
+<response>yes</response> if the sentence is fully supported by the videos, or <response>no</response>
+if the sentence is not fully supported by the videos.
+User Prompt: [VIDEOS_HERE] Sentence: [PUT_SENTENCE_HERE] Is the sentence fully supported by the
+videos? Only respond with <response>yes</response> or <response>no</response>.
+Figure 3: Zero-shot prompt for ALCE Citation Quality.
+and an LLM-generated query based on the predic-
+tion. This metric remains unchanged from Es et al.
+(2024) because the generation and comparison of
+potential queries is text-based regardless of the in-
+formation source modality. We compute this as
+the cosine similarity between the embeddings of
+the predicted and actual queries, using the Qwen3
+Embedding model (Zhang et al., 2025).
+Context Relevance extracts sentences from the
+context based on the query and computes relevance
+as num extracted sentences total number of sentences . We attempt to implement
+this with a VLM, extracting all information relevant
+to the query (numerator) and extracting all infor-
+mation from the video (denominator). However,
+extracting all information from the video is chal-
+lenging, as the number of potential claims is near
+infinite. We instead elicit a detailed summary from
+a VLM for the denominator. We extract informa-
+tion related to the query with Figure 4 (numerator)
+and detailed video information with Figure 5 (de-
+nominator).
+In the RAGAS implementation, Es et al. (2024)
+give the LLM the ability to back off and say that
+a source has “insufficient information.” We notice
+in our implementation that WIKIVIDEO is chal-
+lenging for VLMs to make high-level inferences
+about and thus leads to a large number of videos
+deemed “insufficient information,” even though hu-
+mans have annotated and grounded relevant claims
+to the query topic in those same videos.
+E Collection of Human Judgments
+We collect three human judgments.
+1. Extrinsic Quality Judgments (EQJs). Hu-
+man annotators are given information about
+the topic and are asked to give a 1-5 likert
+score considering the following attributes (in
+order of importance): factuality, adequacy, co-
+herence, relevancy, and fluency.
+2. Intrinsic Claim Judgments (ICJs). Human
+annotators are given the prediction, predicted
+subclaims, reference, and reference subclaims,
+and are asked to annotate whether or not a
+subclaim is supported by the other text. This
+directly mirrors INFOF1-Ref: the scores are
+what INFOF1 would produce if a human per-
+formed the verification instead of a model.
+3. Grounding Judgments (GJs). Human anno-
+tators are given all the relevant videos for a
+topic and the predicted subclaims and asked
+to annotate whether or not the subclaims are
+supported by (grounded in) the videos. INFOP
+and CITEP: the scores are what they would
+produce with human verification.
+For each grounding judgment, we calculate the
+ranking between the three prediction settings and
+we use the scipystats (Virtanen et al., 2020) imple-
+mentation of Kendall’s Tau (Kendall, 1938).
+E.1 Extrinsic Quality Judgments
+In Figure 12, we provide the annotation instruc-
+tions for the extrinsic quality judgments. For these
+judgments, we recruit three annotators who are na-
+tive/fluent English speakers and provide them each
+the 10 evaluation instances and annotation instruc-
+tions for the task. These annotations are redundant.
+We adapt these judgments from (Gantt et al., 2024).
+E.2 Intrinsic Claim Judgments
+In Figure 13, we provide the annotation instruc-
+tions for intrinsic quality judgments. For these
+judgments, we recruit three annotators who are na-
+tive/fluent English speakers and provide them each
+the 10 evaluation instances and annotation instruc-
+tions for the task. These annotations are redundant.
+E.3 Grounding Judgments
+We use the same annotation instructions from Mar-
+tin et al. (2026a) and refer the reader to their work
+for the annotation instructions. For these judg-
+ments, we recruit 5 annotators who are native/fluent
+English speakers and provide them the annotation
+instructions and the annotation data. These annota-
+tions are not redundant.
+40247

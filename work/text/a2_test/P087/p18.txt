@@ -1,0 +1,116 @@
+Algorithm 1 FPTAS for 0/1 Knapsack Problem
+1: procedure FPTAS-KNAPSACK(v, w, C, ϵ)
+2: Let n be the number of items.
+3: P ← maxn i=1 vi
+4: K ← ϵP n
+5: For i = 1, . . . , n : v′ i ← ⌊vi/K⌋
+6: V ′ max ← ∑n i=1 v′ i
+7: Initialize DP table T of size V ′ max + 1 with
+T [0] = 0 and T [p] = ∞ for p > 0.
+8: for i = 1, . . . , n do
+9: for p = V ′ max, . . . , v′ i do
+10: T [p] ← min(T [p], wi + T [p − v′ i])
+11: Find the largest p∗ such that T [p∗] ≤ C.
+12: Reconstruct the set of items corresponding
+to T [p∗] and return it.
+The algorithm is detailed in Algorithm 1.
+Proof. Let S∗ be the optimbual set and S be the
+set returned by our algorithm; we prove the ap-
+proximation guarantee. By definition of floor:
+Kv′ i ≤ vi < K(v′ i + 1). The optimal value
+OP T = ∑ i∈S∗ vi. Our algorithm finds S that op-
+timizes the scaled values, so ∑ i∈S v′ i ≥ ∑ i∈S∗ v′ i.
+Considering the lower bound of our solution
+V (S), we have:
+V (S) =
+∑
+i∈S
+vi ≥
+∑
+i∈S
+Kv′ i = K ∑
+i∈S
+v′ i
+≥ K
+∑
+i∈S∗
+v′ i
+> K
+∑
+i∈S∗
+( vi
+K − 1
+)
+=
+∑
+i∈S∗
+vi −
+∑
+i∈S∗
+K
+= OP T − nK
+(5)
+Substituting K = ϵP n , we get V (S) > OP T −
+ϵP . Since OP T ≥ P , we have V (S) ≥ OP T −
+ϵOP T = (1 − ϵ)OP T .
+Time Complexity: The DP table size is O(n ·
+V ′ max) = O ( n · n2 ϵ ) = O ( n3 ϵ ) . This is poly-
+nomial in n and 1/ϵ, satisfying the definition of
+FPTAS. ■
+C.4 Heuristic DP Details and Pareto Pruning
+Pareto-Pruned Dynamic Programming. For the
+practical implementation where D = 2, we uti-
+lize a Dynamic Programming approach with state
+pruning. Let DP [i] be the set of achievable states
+after considering group Gi. Each state is a tuple
+(c, v), representing the accumulated cost vector
+and value. To avoid state explosion, we prune dom-
+inated states. A state A = (cA, vA) dominates
+B = (cB , vB ) if and only if:
+vA ≥ vB and ∀k : c(k) A ≤ c(k) B (6)
+At each step i, we compute
+DP [i] = PF
+(
+{
+(c + wij , v + vij ) | (c, v)
+∈ DP [i − 1], dij ∈ Gi
+}
+) (7)
+This reduces the average complexity to polynomial
+time in practice.The algorithm is detailed in Algo-
+rithm 2.
+Algorithm 2 MMKP with Pareto-Pruned DP
+1: Input: Groups G, Budgets C
+2: DP ← {(0, 0) : 0.0} ▷ Map (cost_tokens,
+cost_red) → value
+3: for each group Gi ∈ G do
+4: DPnew ← DP.copy()
+5: for each item dij ∈ Gi do
+6: for each state (c, v) ∈ DP do
+7: c′ ← c + wij
+8: v′ ← v + vij
+9: if c′ ⪯ C then
+10: Update DPnew with (c′, v′)
+11: DP ← PruneDominated(DPnew)
+12: return maxv DP
+The function PruneDominated removes any
+state (cB , vB ) if there exists (cA, vA) such that
+cA ≤ cB AND vA ≥ vB . This ensures we only
+track the Pareto frontier.
+C.5 Detailed MCTS Search Procedure
+We employ a variant of the Upper Confidence
+Bound for Trees (UCT) & PUCT-style selection.
+The search proceeds in four steps for Nsim simula-
+tions:
+1. Selection: Starting from root s0, we recur-
+sively select child nodes satisfying:
+a∗ = argmax
+a∈A(s)
+(
+Q(s, a)
++ cpuct · P (a|s)
+√
+N (s)
+1 + N (s, a)
+) (8)
+20970

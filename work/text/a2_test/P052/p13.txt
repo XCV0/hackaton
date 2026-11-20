@@ -1,0 +1,33 @@
+Evidence Model Error N Rule app. (%) Semantic ground. (%) Output stab. (%) Dominant fine error
+GoldOracle Qwen2.5-32B 110 90.0 10.0 0.0 upper-bound
+GoldOracle Qwen2.5-14B 255 88.6 11.4 0.0 upper-bound
+GoldOracle Qwen2.5-7B 301 92.7 7.3 0.0 upper-bound
+GoldOracle Mistral-Nemo 315 88.6 7.9 3.5 upper-bound
+GoldOracle DS-R1-14B 314 92.0 7.0 1.0 upper-bound
+GoldOracle DS-R1-7B 327 89.9 7.0 3.1 upper-bound
+GoldOracle Zephyr-7B 303 94.7 4.6 0.7 upper-bound
+AF-RAG Qwen2.5-32B 132 84.1 15.9 0.0 upper-bound
+AF-RAG Qwen2.5-14B 304 79.3 20.7 0.0 upper-bound
+AF-RAG Qwen2.5-7B 305 90.2 9.8 0.0 upper-bound
+AF-RAG Mistral-Nemo 311 75.9 22.2 1.9 upper-bound
+AF-RAG DS-R1-14B 311 86.5 13.5 0.0 upper-bound
+AF-RAG DS-R1-7B 323 78.6 19.8 1.5 upper-bound
+AF-RAG Zephyr-7B 309 87.1 12.9 0.0 upper-bound
+BM25-date Qwen2.5-32B 150 36.7 63.3 0.0 semantic/complex
+BM25-date Qwen2.5-14B 323 33.4 66.6 0.0 semantic/complex
+BM25-date Qwen2.5-7B 321 37.7 62.3 0.0 semantic/complex
+BM25-date Mistral-Nemo 319 40.8 58.0 1.3 semantic/complex
+BM25-date DS-R1-14B 322 38.2 55.0 6.8 semantic/complex
+BM25-date DS-R1-7B 322 34.8 63.0 2.2 semantic/complex
+BM25-date Zephyr-7B 305 41.3 55.4 3.3 semantic/complex
+cite-hybrid Qwen2.5-32B 149 49.0 51.0 0.0 semantic/complex
+cite-hybrid Qwen2.5-14B 326 50.0 50.0 0.0 semantic/complex
+cite-hybrid Qwen2.5-7B 317 51.7 48.3 0.0 semantic/complex
+cite-hybrid Mistral-Nemo 308 59.7 39.6 0.6 semantic/complex
+cite-hybrid DS-R1-14B 398 36.2 17.6 46.2 parse failure
+cite-hybrid DS-R1-7B 331 47.7 44.7 7.6 semantic/complex
+cite-hybrid Zephyr-7B 312 53.8 46.2 0.0 semantic/complex
+Table 11: Model-wise high-level error composition by evidence condition. Percentages are computed over erroneous
+generations for each model-condition pair. Short labels: AF-RAG = AuthorityFirst-RAG; BM25-date = BM25-date-
+filter; cite-hybrid = citation-hybrid date filter.
+891

@@ -1,0 +1,89 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+P. Nakov, and A. Villavicencio, Eds. Dublin,
+Ireland: Association for Computational Linguistics,
+May 2022, pp. 2086–2105. [Online]. Available:
+https://aclanthology.org/2022.findings-acl.165/
+[42] B. Yu, Y. Zhang, L. Lin, L. Briand, and E. Muñoz,
+“Retromorphic testing with hierarchical verification
+for hallucination detection in rag,” 2026. [Online].
+Available: https://arxiv.org/abs/2603.27752
+[43] K. Dhole, R. Chandradevan, and E. Agichtein,
+“AdvERSEM: Adversarial robustness testing and
+training of LLM-based groundedness evaluators via
+semantic structure manipulation,” in Proceedings
+of the 14th Joint Conference on Lexical and
+Computational Semantics (*SEM 2025), L. Frermann
+and M. Stevenson, Eds. Suzhou, China: Association
+for Computational Linguistics, Nov. 2025, pp. 395–
+408. [Online]. Available: https://aclanthology.org/
+2025.starsem-1.32/
+[44] E. Tabassi, “Artificial intelligence risk management
+framework (ai rmf 1.0),” 2023-01-26 05:01:00
+2023. [Online]. Available: https://tsapps.nist.gov/
+publication/get_pdf.cfm?pub_id=936225
+[45] J. Kim, S. Pasini, and P. Tonella, “Testing retrieval-
+augmented generation systems with chunk coverage,”
+arXiv preprint arXiv:2607.18155, 2026.
+[46] Confident AI. (2025) Deepeval: An open-source
+evaluation framework for large language models.
+Framework for evaluating LLM performance,
+including metrics for accuracy, robustness, and
+hallucination detection. [Online]. Available: https:
+//github.com/AI-App/DeepEval
+[47] MaximAI.(2026)Maximai:End-to-endaievaluation
+and observability platform. Platform for simulation,
+evaluation, and monitoring of AI agents across
+the full development lifecycle. [Online]. Available:
+https://www.getmaxim.ai/
+9. Appendix
+A. PDF Generation System Prompt
+@staticmethod
+def g et _s ys tem _p ro mp t (
+length : str = None ,
+detail_level : str = None ,
+tone : str = None ,
+include_toc : bool = None ,
+in cl ud e_ cit at io ns : bool = None
+) -> str :
+length = length or P D F G e n e r a t o r P r o m p t s .
+DEFAULT_LENGTH
+detail_level = detail_level or
+P D F G e n e r a t o r P r o m p t s . D E F A U L T _ D E T A I L _ L E V E L
+tone = tone or P D F G e n e r a t o r P r o m p t s . DEFAULT_TONE
+include_toc = include_toc if include_toc is not
+None else P D F G e n e r a t o r P r o m p t s . INCLUDE_TOC
+in cl ud e_ cit at io ns = i ncl ud e_ ci tat io ns if
+in cl ud e_ cit at io ns is not None else
+P D F G e n e r a t o r P r o m p t s . INC LU DE _C IT ATI ON S
+system_prompt = f """ You are an expert technical
+writer and content creator specialized in
+generating comprehensive , well - structured
+documents .
+Your task is to create { detail_level } content
+suitable for conversion into a professional
+PDF document .
+DOCUMENT SPECIFICATIONS :
+- Target length : { length }
+- Writing style : { tone }
+- Target audience : { P D F G e n e r a t o r P r o m p t s .
+DEFAU LT_AUDIE NCE }
+STRUCTURE REQUIREMENTS :
+{" - Include a detailed table of contents with
+section numbers " if include_toc else ""}
+{" - Include proper citations and references in
+academic format " if in clu de _c it ati on s else
+""}
+- Use clear headings and subheadings ( H1 , H2 ,
+H3 )
+- Include numbered sections for easy reference
+- Break content into logical , digestible
+sections
+CONTENT REQUIREMENTS :
+- Provide in - depth explanations with technical
+accuracy
+- Include relevant examples and use cases where
+appropriate
+{" - Add tables , lists , and structured data
+where it aids understanding " if
+P D F G e n e r a t o r P r o m p t s . INCLUDE_TABLES else ""}
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 16 of 21

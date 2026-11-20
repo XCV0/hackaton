@@ -1,0 +1,100 @@
+the RAG pipeline, inducing LLMs to generate
+toxic responses (Deshpande et al., 2023; Perez
+and Ribeiro, 2022).
+• Denial-of-Service (DoS): The target of DoS
+is to cause LLMs to refuse to answer, even
+when evidence is available (Chaudhari et al.,
+2024; Shafran et al., 2024). DoS-inducing
+texts injected by attackers are particularly in-
+sidious because the resulting behavior is easily
+mistaken for the RAG’s limitations.
+However, most of existing attack tasks often fail
+to bypass the safety RAG components, making the
+attacks no longer suitable for RAG security evalu-
+ation. There are four main reasons. R-1: Simple
+safety filters can effectively defend against noise at-
+tack (Li et al., 2024), as existing noise is often con-
+centrated in superficially relevant contexts, which
+may actually belong to either similar-topic irrele-
+vant contexts or relevant contexts that do not con-
+tain answers. (Fig. 1-⑨). R-2: Existing conflict pri-
+marily focuses on questions that LLMs can directly
+answer but contain factual inaccuracies in the re-
+lated documents (Xu et al., 2024). Current adaptive
+retrievers (Tan et al., 2024) have been able to effec-
+tively mitigate such context-memory conflict. R-3:
+Advanced generators demonstrate strong capabili-
+ties in detecting and avoiding explicit and implicit
+toxicity, such as bias, discrimination, metaphor,
+and sarcasm (Sun et al., 2023; Wen et al., 2023).
+R-4: Traditional DoS attack mainly involves mali-
+ciously inserting explicit (Fig. 1-⑤⑥) or implicit
+(Fig. 1-⑦⑧) refusal signals into the RAG pipeline.
+Fortunately, such signals are often filtered out as
+they inherently do not support answering the ques-
+tion, or they are ignored by generators due to being
+mixed into evidences (Shafran et al., 2024).
+To address above limitations, we propose four
+novel attack tasks for conducting effective RAG
+security evaluation. Firstly, we define silver noise
+(Fig. 1-②), which refers to evidence that partially
+contains the answer. Such noise can circumvent
+most safety filters, thereby undermining the RAG
+diversity (R-1). Secondly, unlike the widely stud-
+ied context-memory conflict, we explore a more
+hazardous inter-context conflict (Fig. 1-④). Since
+LLMs lack sufficient parametric knowledge to han-
+dle external conflicts, they are more susceptible
+to being misled by tampered texts (R-2). Thirdly,
+we reveal the vulnerability of RAG under the soft
+ad attack (Fig. 1-③). As a special type of implicit
+toxicity, the soft ad can evade LLMs and ultimately
+be inserted into the response of generators (R-3).
+Finally, to enable refusal signals to bypass filters
+or generators, we propose a white DoS (Fig. 1-①)
+attack. Under the guise of a safety warning, such
+attack falsely accuses the evidence of containing a
+large number of distorted facts, thereby achieving
+its purpose of refusal (R-4).
+Existing benchmarks mainly focus on applying
+a certain attack task at specific stages of the RAG
+pipeline and observing the impact of the selected
+attack on the retriever or generator. In this paper,
+we introduce the RAG security evaluation bench-
+mark, SafeRAG, which systematically evaluates
+the potential security risks in the retriever and gen-
+erator by performing four improved attack tasks
+across different stages of the RAG pipeline. Our
+main contributions are:
+• We reveal four attack tasks capable of bypass-
+ing the retriever, filter, and generator. For
+each attack task, we develop a lightweight
+RAG security evaluation dataset, primarily
+constructed by humans with LLM assistance.
+• We propose an economical, efficient, and accu-
+rate RAG security evaluation framework that
+incorporates attack-specific metrics, which are
+highly consistent with human judgment.
+• We introduce the first Chinese RAG security
+benchmark, SafeRAG, which analyzes the
+risks posed to the retriever and generator by
+the injection of noise, conflict, toxicity, and
+DoS at various stages of the RAG pipeline.
+2 Related Work
+2.1 RAG Security Evaluation Dataset
+Before performing RAG security evaluation, re-
+searchers typically design attack datasets metic-
+ulously to trigger the vulnerability of RAG (Ta-
+ble 1). The primary attack types currently include
+noise, conflict, toxicity, and DoS. As for noise,
+RGB (Chen et al., 2024a) employs a retrieve-filter-
+classify strategy, dividing the top retrieved contexts
+related to the query into golden contexts (those
+containing the correct answer) and relevant noise
+contexts. RAG Bench (Fang et al., 2024) adopts
+the same approach to construct relevant noise while
+also introducing irrelevant noise. LRII (Wu et al.,
+2024b) further refines the construction of irrelevant
+noise, categorizing it into types: semantically unre-
+lated, partially related, and related to questions.
+4610

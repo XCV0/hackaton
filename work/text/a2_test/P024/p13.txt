@@ -1,0 +1,88 @@
+in-batch negative sampling, leveraging large batch
+sizes to improve embedding discriminativeness. Fi-
+nally, task-specific fine-tuning is employed using la-
+beled datasets, applying instruction-based prompts
+and advanced negative sampling techniques to
+better accommodate diverse task types. We use
+the BAAI/bge-base-en-v1.5 model in our exper-
+iments, which is their large english model, version
+1.5.
+ColPali, ColQwen2 ColPali (Faysse et al.,
+2024) performs late interaction retrieval on doc-
+ument embeddings generated directly from docu-
+ment page images using Vision-Language Models
+(VLMs). By passing the document images through
+PaliGemma (Beyer et al., 2024), ColPali uses the
+projected token embeddings to index the document
+pages, eliminating the need for OCR or document
+parsing. The multimodal alignment learned by
+VLMs allows both text queries and document im-
+age embeddings to exist in a shared semantic vec-
+tor space, enabling more precise and efficient re-
+trieval. ColQwen2 is a similar model with Qwen2
+(Yang et al., 2024) as the base VLM. We used the
+vidore/colpali-v1.2, vidore/colqwen2-v0.1
+implementations for our experiments.
+A.1.2 LLMs
+We used Qwen/Qwen2-VL-7B-Instruct,
+chatgpt-4o-latest and gemini-1.5-flash in
+our experiments. For ChatGPT4o and Gemini, we
+set the temperature as 0.5, and use the default hy-
+perparameters. For Qwen2-VL, the pixel range is set
+to [256×28×28, 640×28×28]. For Long Context
+evaluation, we use Qwen/Qwen2-7B-Instruct
+because of the implementation availability of long
+context inference using YaRN (Peng et al., 2023).
+We report results on a single run of experiments.
+A.2 Datasets
+The datasets use in our benchmark are described
+below. Fig 6-10 represent the distribution of pages
+per query in all the data splits.
+FetaTab FetaTab is derived from UDA (Hui et al.,
+2024), which sources its data from FetaQA (Nan
+et al., 2022). Many source datasets provide only
+segmented and partial content, lacking complete
+documents. To resolve this, UDA conducted a thor-
+ough source-document identification process, ver-
+ifying and collecting the complete original docu-
+ment files based on metadata or content fragments.
+This was followed by rigorous matching and re-
+organization to form complete triplet data pairs
+consisting of document-question-answer. Addition-
+ally, UDA categorizes queries based on the source
+of factual evidence, filters out Q&As without avail-
+able answers, converts token-based data patterns
+to natural language, unifies data formats and struc-
+tures across datasets, and designs specific LLM
+prompts tailored for each dataset after experimental
+trials. FetaTab is licensed under the CC-BY-SA-4.0
+license.
+Figure 6: Distribution of pages per query for FetaTab.
+PaperTab PaperTab is also sourced from UDA
+(Hui et al., 2024), which obtains its data from the
+QASPER (Dasigi et al., 2021) dataset. Similar
+to the process described for FetaTab, UDA em-
+phasizes the necessity of ensuring the integrity of
+original documents for effective document anal-
+ysis. This involves a comprehensive process of
+identifying, verifying, and collecting complete orig-
+inal document files, followed by matching and re-
+organization to create document-question-answer
+triplets. UDA also categorizes queries, filters out
+unanswered Q&As, converts data patterns to nat-
+ural language, unifies data formats, and designs
+specific LLM prompts for each dataset based on ex-
+perimental evaluations. PaperTab is released under
+the CC-BY-SA-4.0 license.
+SPIQA SPIQA (Pramanick et al., 2024) is a
+large-scale and challenging question-answering
+dataset that focuses on figures, tables, and text
+paragraphs extracted from scientific research pa-
+pers across various computer science domains. The
+dataset encompasses a diverse array of visual ele-
+ments, including plots, charts, schematic diagrams,
+and result visualizations. SPIQA consists of 270K
+questions divided between training, validation, and
+three different evaluation splits. To ensure the high-
+est quality and reliability, SPIQA employs both au-
+6100

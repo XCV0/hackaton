@@ -1,0 +1,108 @@
+YOLO World 
+Detector
+Statue of the Virgin Mary: A small statue of the Virgin 
+Mary stands atop the church gable, positioned at the 
+center of the roof ridge. Elevated and standing upright, it 
+crowns the building and symbolizes protection.
+Bell: The bell chamber within the bell tower on the 
+church's right side features a simple yet solemn tower 
+structure with narrow, arched openings for the bell 
+windows.
+Gothic church spire: The Gothic church spire features a 
+slender tower, steep roof, and decorative elements like a 
+cross finial at the top.
+Stained glass window: The stained glass windows on the 
+church's facade not only display exquisite geometric 
+patterns and colors, but also symbolize the descent of 
+divine light through the refraction of light and shadow, 
+expressing the connection between faith and God. 
+Knowledge-Guided Element Matching
+Evidence-Grounded Generation
+Visual Element 
+Matcher
+Elements Description
+Global Description
+Statue of the 
+Virgin Mary
+Bell
+Gothic church 
+spire
+Stained glass 
+window
+Image
+Elements 
+Filter
+Visual Region Detection and Filtering
+Query 
+... safe voyages. Atop the chapel's roof 
+stands a statue of the Virgin Mary, her 
+face serene and dignified, robed in a 
+long gown and cradling the Holy 
+Infant .... Its bell chamber is set within 
+a narrow, arched opening, .... 
+Particularly striking is the main tower's 
+Gothic spire, .... Additionally, the 
+stained-glass windows on the church's 
+facade are clearly visible, ....
+Figure 3: The overview of our proposed GranuRAG framework.
+4.2 Knowledge-Guided Element Matching
+Given the detected regions B(I) and a candidate
+element set E with associated appearance descrip-
+tions {ae}e∈E , this stage determines which archi-
+tectural elements are actually visible in the image.
+We formulate this as a multimodal matching prob-
+lem where each cropped region is compared against
+element descriptions from the knowledge corpus.
+An MLLM receives each annotated bounding
+box specifically for an image alongside all appear-
+ance descriptions, which specify visual attributes
+such as shape, material, and stylistic features. For
+each detected region bk, the model identifies the
+best-matching element by comparing observed vi-
+sual characteristics against documented descrip-
+tions:
+ek = Mϕ
+(
+I, bk, {(e, ae)}e∈E
+)
+∈ E ∪ {∅} (3)
+where Mϕ is the MLLM parameterized by ϕ, and
+the output ∅ indicates that no candidate description
+is sufficiently consistent with the region, in which
+case the region is discarded. This design combines
+the spatial localization capability of the detector
+with the fine-grained semantic discrimination abil-
+ity of the MLLM, enabling reliable identification
+even among visually similar elements.
+The matching process yields a grounded element
+set ˆE(I) = {ek | ek ̸= ∅} containing only ele-
+ments with confirmed visual evidence. By explic-
+itly filtering out undetected elements, we establish
+a principled boundary between what the system ob-
+serves and what it knows, reducing the risk of hal-
+lucinating information about absent components.
+4.3 Evidence-Grounded Generation
+The final stage synthesizes a coherent interpretation
+by conditioning on both the annotated image and re-
+trieved knowledge for matched elements. For each
+e ∈ ˆE(I), we retrieve its expert-written description
+de from the knowledge corpus, which provides fac-
+tual details including historical background, sym-
+bolic meaning, and architectural significance. We
+prepend global metadata m containing landmark
+name, architectural style, and historical period to
+contextualize the element-level information:
+C(I) = [m] ⊕
+[
+(ei, dei )
+]
+ei∈ ˆE(I) (4)
+The generator then produces the final output con-
+ditioned on this hierarchical evidence:
+y = Gθ
+(
+I, C(I) | Ω( ˆE(I)) ) (5)
+where the generation prompt Ω instructs the model
+to describe only elements confirmed in ˆE(I) and
+ground all factual claims to retrieved descriptions.
+10479

@@ -1,0 +1,28 @@
+of 0.933 and an F1-Score of 0.943, compared to only 0.768 without the architecture.
+Llama and Qwen also improve with N2I-RAG (0.77 and 0.784 in F1-Score, respec-
+tively), but remain behind. Specificity particularly illustrates this contribution: Mistral
+Nemo goes from 0.612 to 0.919.
+These results confirm that the performance gains of N2I-RAG do not stem from the
+individual capacity of a model, but rather from its structured orchestration. The
+framework remains effective across architectures, proving that the proposed approach
+is LLM-agnostic but that its potential is maximized with more complex models, where
+combining representation ability and multi-agent control produces optimal output.
+4.2 Comparative Analysis Across Models
+N2I-RAG maintains stable performance across distinct LLM families, confirming its
+portability and robustness. Because the proposed framework separates reasoning con-
+trol from model output generation, it can adapt to models of different sizes and
+linguistic capacities. The architecture does not rely on memorized facts, but on active
+retrieval and validation loops. While all models benefit, Mistral-Nemo consistently
+delivers the best results, suggesting that models with larger contextual windows are
+better at leveraging multi-agent interactions. Qwen and Llama still outperform their
+baselines, confirming that N2I-RAG’s gains are not model-dependent but rather result
+from structured orchestration. This cross-model consistency supports N2I-RAG’s gen-
+eralizability. It can be integrated into various LLM setups, enabling scalable and
+comprehensible automation for legal observatories.
+4.3 Ablation Study
+To assess the contribution of the core component, we conducted an ablation study
+comparing the full pipeline, a variant without hallucination control, and a simple base-
+line. This analysis clarifies how each design component supports factual consistency
+and balanced performance
+Fig. 3 Ablation test results for Mistral-Nemo by configuration
+14

@@ -1,0 +1,75 @@
+Fig. 3. Overview of the proposed multi-field hybrid RAG framework.
+Tag Normalization. Despite a temperature of 0.0, LLMs
+may occasionally produce non-standard surface forms for
+tags instead of exact taxonomy terms. To ensure consistent
+evaluation of T , we applied a lightweight normalization
+step where G maps any non-standard output to the closest
+standardized L2 tag. This was applied identically to both the
+baseline and the proposed method.
+B. Evaluation Protocol
+In the absence of large-scale expert relevance labels for
+retrieval, we define a proxy relevance metric, RelScore, to
+evaluate the alignment between a retrieved candidate card c
+and a query card q. This score is calculated as a weighted
+sum of four domain-specific factors:
+RelScore(q,c) = ∑
+i∈{kw,type,loc,year}
+wi · Si(q,c), (4)
+where Skw denotes the IDF-weighted Jaccard similarity of
+keywords, Stype and Sloc represent binary matches for acci-
+dent type and tribunal jurisdiction, and Syear = 1/(1 + |∆year|)
+captures temporal proximity. We empiricallly set the weights
+(wkw,wtype,wloc,wyear) to (0.5,0.4,0.05,0.05) and define the
+pseudo-gold set as candidates exceeding a RelScore of 0.5.
+Retrieval performance is assessed using NormRe-
+call@100 and nDCG@100. To account for varying
+sizes of the gold set across different accident patterns,
+NormRecall@k measures coverage relative to the maximum
+possible recall achievable at a given cutoff k:
+NormRecall@k = |Retrievedk ∩ GoldSet| min(k, |GoldSet|) . (5)
+Complementarily, nDCG@100 evaluates the ranking quality
+by rewarding the placement of highly relevant candidates
+(those with higher RelScore) at earlier ranks. The DCG is
+computed as ∑k i=1 Gi log2(i+1) , where the gain Gi is defined by the RelScore of the candidate at rank i, subsequently
+normalized by the Ideal DCG (IDCG).
+Regarding the generation task, the expert-authored Causes
+field serves as the ground-truth reference for evaluating the
+synthesized cause narrative n. We employ a multi-faceted
+evaluation involving ROUGE-L for lexical overlap, SBERT
+cosine similarity for semantic alignment, and an LLM-as-a-
+judge score on a 1–5 scale to assess overall coherence and
+grounding [26]. For the structured tags T , we report exact-
+match accuracy for the primary L1 group along with Micro-
+F1 and Jaccard scores for the multi-label L2 factors.
+All retrieval and generation processes are executed on the
+original Korean adjudication text to preserve domain-specific
+linguistic nuances and technical precision. For the purpose
+of international dissemination, all tables and case examples
+provided in this paper utilize condensed English translations.
+V. RESULTS
+A. Retrieval Results
+Table I shows that leveraging document fields is critical.
+Whole-document indexing mixes accident description, causal
+reasoning, and administrative outcomes into one long text
+block, which dilutes field-specific signals and increases spu-
+rious matches. Field-wise indexing enables the retriever to
+match scenario descriptions in Summary while also capturing
+technical causal patterns in Causes and decision patterns in
+Disposition, improving both coverage and ranking quality.
+Impact of field separation. Moving from whole-
+document indexing (Dense: 0.1819 NormRecall) to multi-
+field indexing over all fields (Dense: 0.4981) yields a 174%
+relative gain in coverage. Notably, adding Disposition to
+Summary+Causes provides a large additional boost (Norm-
+Recall 0.3060 → 0.4981; nDCG 0.5336 → 0.7512), suggest-
+ing that administrative outcomes carry discriminative signals
+that help disambiguate lexically similar but causally different
+cases.
+Effectiveness of hybrid retrieval. Hybrid retrieval yields
+an additional gain by combining complementary strengths.
+BM25 captures exact matches of rare legal/technical tokens,
+while dense retrieval captures paraphrases and semantically
+equivalent expressions. Fusing both reduces misses caused by
+either lexical mismatch or over-reliance on surface keywords,
+improving NormRecall from 0.4981 (Dense) and 0.4215
+(BM25) to 0.5463 (Hybrid).

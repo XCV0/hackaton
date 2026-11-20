@@ -1,0 +1,98 @@
+retrieval. Here, the date selects authoritative legal
+text, not merely a time-indexed fact.
+Legal updating and versioned law. LeKUBE
+(Wang et al., 2024), LexTime (Barale et al.,
+2025), and ChronosLex (T.Y.S.S et al., 2024) ad-
+dress legal updating and temporal generalization.
+LawInForce-eCFR instead tests whether retrieval
+selects the version legally in force for a fact pat-
+tern’s operative date.
+Numerical, rule, and model reasoning. DROP
+(Dua et al., 2019), FinQA (Chen et al., 2021b),
+and NumGLUE (Mishra et al., 2022) show that
+models struggle with quantities and comparison;
+LexNum (Zhang et al., 2025) is complementary.
+LawInForce-eCFR couples comparison with re-
+trieval of the law in force. The evaluated gener-
+ators are Qwen, Mistral, Zephyr, and DeepSeek-R1
+releases (Yang et al., 2025b,a; Jiang et al., 2023;
+Mistral AI, 2024; Tunstall et al., 2024; Guo et al.,
+2025); model ranking is not our main claim.
+9 Conclusion
+We introduced LawInForce-eCFR, a diagnostic
+benchmark for law-in-force retrieval in versioned
+legal RAG, together with AuthorityFirst-RAG, a
+transparent retriever for authority, temporal valid-
+ity, and rule support. The central lesson is that
+topically relevant or citation-matched law can still
+be legally wrong when it is not in force.
+The results show a dual bottleneck: retrieve
+applicable authority, then apply its numeric rule.
+Wrong versions can support the opposite answer,
+while correct evidence can still fail when models
+misapply thresholds, deadlines, or comparator di-
+rection. Versioned legal RAG must therefore be
+both applicability-aware and rule-faithful.
+10 Limitations
+LawInForce-eCFR covers U.S. federal eCFR/CFR
+regulations and focuses on clean numeric thresh-
+old amendments. It does not cover other jurisdic-
+tions, statutes, case law, contracts, agency guid-
+ance, or legal sources with different versioning
+practices. The benchmark also excludes transi-
+tion clauses, retroactivity, tolling, cross-references,
+multi-condition rules, exceptions, and difficult le-
+gal interpretation.
+Numeric thresholds, deadlines, caps, percent-
+ages, counts, penalties, ages, and frequencies are
+useful for controlled diagnosis because they sup-
+port deterministic answer flips across versions.
+Many legal questions, however, require broader
+doctrinal reasoning, distributed definitions, factual
+uncertainty, agency discretion, and multi-step statu-
+tory interpretation. The results should therefore
+be interpreted as evidence about a controlled law-
+in-force retrieval failure mode, not as a complete
+evaluation of legal reasoning or legal advice.
+AuthorityFirst-RAG is a transparent diagnostic
+retriever, not a deployable legal search engine. It
+assumes structured citation, section, paragraph, and
+validity-interval metadata, and metadata-assisted
+baselines should be interpreted diagnostically. De-
+ployed systems may require more robust citation
+normalization, version alignment, and authority res-
+olution; uncited authority inference remains weak.
+Although the corpus preserves title,
+part, section, and paragraph path metadata,
+AuthorityFirst-RAG does not explicitly navigate
+subsection/clause/subclause hierarchies (Blair-
+Stanek et al., 2023). Authority inference remains
+a major limitation: the uncited setting is largely
+unsolved, so the strongest results primarily reflect
+version selection when the relevant authority is
+known or partially specified.
+Generation sample sizes differ across mod-
+els and conditions, so we emphasize evidence-
+condition and failure-mode comparisons rather
+than model rankings. Future work should cover
+broader legal sources and more complex temporal
+legal phenomena.
+Acknowledgments
+Granted by the Tsinghua University Disruptive In-
+novation Talent Development Program.
+References
+Claire Barale, Leslie Barrett, Vikram Sunil Bajaj, and
+Michael Rovatsos. 2025. LexTime: A benchmark for
+temporal ordering of legal events. In Findings of the
+Association for Computational Linguistics: EMNLP
+2025, pages 5220–5236, Suzhou, China. Association
+for Computational Linguistics.
+Andrew Blair-Stanek, Nils Holzenberger, and Benjamin
+Van Durme. 2023. Can GPT-3 perform statutory
+reasoning? In Proceedings of the Nineteenth Interna-
+tional Conference on Artificial Intelligence and Law,
+pages 22–31. Association for Computing Machinery.
+Ilias Chalkidis, Manos Fergadiotis, Prodromos Malaka-
+siotis, Nikolaos Aletras, and Ion Androutsopoulos.
+2020. LEGAL-BERT: The muppets straight out of
+887

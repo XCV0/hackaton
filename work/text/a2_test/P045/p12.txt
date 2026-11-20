@@ -1,0 +1,127 @@
+A Appendix
+A.1 Prompts
+In this section, we present the prompts used in dif-
+ferent MMRAG pipelines, including Qwen2-VL-
+Param, Qwen2-VL-Oracle, Qwen2-VL-1-Stage,
+Qwen2-VL-2-Stage, Qwen2-VL-MMSTaR, and
+our proposed CoRe-MMRAG. Each prompt is il-
+lustrated with the format, an example, and the cor-
+responding final answer.
+Prompt for Qwen2-VL-Param
+Prompt format:
+Question : < image >
+{ question }
+Please use parametric knowledge answer the
+↪→ question within 5 words
+Example:
+Question : < image >
+Which historic county does this village belong
+↪→ to ?
+Please use parametric knowledge answer the
+↪→ question within 5 words
+Answer:
+" Scotland "
+The prompt for Qwen2-VL-Oracle is con-
+structed using the ground-truth Wikipedia entry.
+Specifically, wiki_title_gt and wiki_content_gt refer to
+the title and textual content of the ground-truth
+entry, respectively.
+Prompt for Qwen2-VL-Oracle
+Prompt format:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+{ question } within 5 words
+Context :
+Reference Image : < image >
+Wiki title : { wiki_title_gt }
+Wiki content :{ wiki_content_gt }
+Example:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+What is the parent organization of this building
+↪→ ? within 5 words .
+Context :
+Reference Image : < image # gt >
+Wiki title : Colonial Williamsburg
+Wiki content : Colonial Williamsburg is a living -
+↪→ history museum and private foundation
+↪→ presenting a part of the historic
+↪→ di se co ns tru ct io ns ...
+Answer:
+" The Colonial Williamsburg Foundation "
+The following is the prompt for Qwen2-VL-1-
+Stage, where wiki_title_A/B/C/D/E and wiki_content_A/B/C/D
+↪→ /E represent the titles and textual contents of the
+top-5 retrieved Wikipedia entries.
+Prompt for Qwen2-VL-1-Stage
+Prompt format:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+{ question } within 5 words
+Reference A :
+< image #A >
+Wiki title : { wiki_title_A }
+Wiki content :{ wiki_content_A }
+Reference B :
+< image #B >
+Wiki title : { wiki_title_B }
+Wiki content :{ wiki_content_B }
+Reference C :
+< image #C >
+Wiki title : { wiki_title_C }
+Wiki content :{ wiki_content_C }
+Reference D :
+< image #D >
+Wiki title : { wiki_title_D }
+Wiki content :{ wiki_content_D }
+Reference E :
+< image #E >
+Wiki title : { wiki_title_E }
+Wiki content :{ wiki_content_E }
+Example:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+What is the width ( in kilometre ) of this lake ?
+↪→ within 5 words .
+Reference A
+< image #A >
+Wiki title : Wadi Numeira
+Wiki content : Wadi Numeira is a Wadi in Jordan
+↪→ that is known for its deep gorge cut through
+↪→ the sandstone ...
+Reference B
+< image #B >
+Wiki title : Kalya
+Wiki content : Kalya is an Israeli settlement
+↪→ organized as a kibbutz in the West Bank ..
+Reference C
+< image #C >
+Wiki title : Ein Gedi
+Wiki content : Ein Gedi , also spelled En Gedi ,
+↪→ meaning \ " spring of the kid \" , is an oasis and
+↪→ a nature reserve in Israel ...
+Reference D
+< image #D >
+Wiki title : Dead Sea
+Wiki content : The Dead Sea , also known by other
+↪→ names , is a salt lake bordered by Jordan to
+↪→ the east and Israel ...
+Reference E
+< image #E >
+Wiki title : Jewish National Fund
+Wiki content : Jewish National Fund was founded
+↪→ in 1901 to buy and develop land in Ottoman
+↪→ Syria ... "
+Answer:
+"10"
+The following is the prompt for Qwen2-VL-2-
+Stage, where wiki_title_A/B/C/D/E and wiki_content_A/B/C/
+↪→ D/E denote the titles and textual contents of the
+top-5 retrieved Wikipedia entries. wiki_title_select
+and wiki_content_select refer to the title and content of
+the entry selected during the first-stage reranking.
+32978

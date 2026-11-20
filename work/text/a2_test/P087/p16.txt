@@ -1,0 +1,76 @@
+Category Dataset Type Avg. Hops # Queries # Passages Metric
+Simple QA NQ Open-domain 1 1,000 9,633 EM / F1 PopQA Long-tail Entity 1 1,000 8,676 EM / F1
+Multi-Hop QA
+MuSiQue Multi-hop 2.40 1,000 11,656 EM / F1
+2WikiMultiHopQA Multi-hop 2.42 1,000 6,119 EM / F1
+HotpotQA Multi-hop 2 1,000 9,811 EM / F1
+Multi-Doc QA MultiHop-RAG Noise Robustness 2.70 2,556 609 EM / F1
+Table 8: Statistics of the evaluation datasets. The "Queries" and "Passages" columns denote the specific counts used
+in our experimental evaluation.
+the already selected set, until the token budget
+(1500 tokens) is exhausted.
+• Self-RAG: We utilized the official
+selfrag/selfrag-llama2-7b check-
+point. To maintain fairness in information
+access, we restricted the retrieved context size
+provided to Self-RAG to be approximately
+equivalent to our MMKP token budget (∼ 5
+chunks or 1500 tokens).
+B.3 Our Method: Configuration and Logic
+B.3.1 MMKP Context Selector
+The MMKP selector transforms the retrieval list
+into a constrained optimization problem. We first
+grouped retrieval candidates using a greedy cluster-
+ing algorithm based on cosine similarity thresholds
+(τsim = 0.82). For each candidate document dij in
+group Gi, we calculated:
+• Value (vij ): A weighted sum of relevance and
+diversity: vij = α · Scorefusion(q, dij ) + β ·
+(1 − Sim(dij , µGi )), where µGi is the group
+centroid.
+• Costs (wij ): A 2-dimensional cost vector con-
+taining the token length (Ltoken) and a seman-
+tic redundancy penalty (Cred). The redun-
+dancy penalty is calculated as the mean sim-
+ilarity to other group members, scaled by a
+factor of 100.
+We solved this NP-hard problem using a Dynamic
+Programming approach with Pareto pruning to re-
+move dominated states (states with higher costs
+and lower value), ensuring tractability.
+B.3.2 NLI-Guided MCTS Generator
+We implemented the generator as a Monte Carlo
+Tree Search (MCTS) process that explores the rea-
+soning space at test time.
+• Node Expansion: At each step, the model
+chooses between two action types: Answer
+(generate a response hypothesis) or Augment
+(retrieve additional evidence using the current
+query).
+• Reward Function: We employed
+roberta-large-mnli to compute a faith-
+fulness reward. The reward R is defined as
+R = we · P (entail) + wn · P (neutral) + wc ·
+P (contradict). We set a severe penalty for
+contradictions (wc = −2.0) to aggressively
+prune hallucinatory paths.
+• Search Strategy: We used the UCT (Upper
+Confidence Bound for Trees) algorithm with
+an exploration constant cucb = 1.4 to balance
+exploration of new reasoning paths and ex-
+ploitation of high-reward trajectories.
+B.4 Hyperparameters
+The specific hyperparameters for the MMKP selec-
+tor and MCTS generator used in our main experi-
+ments are detailed in Table 9 and Table 10.
+Parameter Value
+Token Budget (Ctoken) 1500
+Redundancy Budget (Cred) 120
+Relevance Weight (α) 0.7
+Diversity Weight (β) 0.3
+Similarity Threshold (τsim) 0.82
+Redundancy Cost Scale 100.0
+Table 9: Hyperparameters for the MMKP Context Se-
+lector. Weights were tuned on the HotpotQA validation
+set.
+20968

@@ -1,0 +1,87 @@
+Figure 1: Left: Longitudinal comparison contrasts
+Meta’s Q1-22 statement with prior quarters Right: Con-
+textual comparison links Meta’s reported losses to Ap-
+ple’s Q1-22 call, grounding causal explanations in ex-
+ternal disclosures.
+incapable of distinguishing genuine corporate
+strength from a mere deceleration in growth.
+• Monolithic Reasoning and Narrative Bias.
+A single model processes information through
+a monolithic lens, making it highly suscepti-
+ble to polished narratives crafted by manage-
+ment and inducing optimistic bias (Cui and
+Zhai, 2023). It lacks the dynamic, critical
+evaluation of human experts, who synthesize
+insights from multiple angles–such as histori-
+cal performance and peer comparison–to form
+a robust, balanced judgment.
+To overcome these limitations, we introduce
+Context-Enriched Agentic RAG (CARAG), a
+framework that mirrors the division of labor in
+fundamental investing—specialists collaborate on
+intrinsic valuation and discount-rate work, peer/rel-
+ative valuation, and sector-level synthesis—by cou-
+pling multi-agent orchestration with a structured
+knowledge base (Kadan et al., 2012; Bradley et al.,
+2017; Groysberg et al., 2013).
+We first construct a Causal-Temporal Knowl-
+edge Graph (CTKG) from historical financial
+statements and past earnings calls to serve as the
+long-term memory. Then, a swarm of specialist
+LLM agents collaborates to analyze new earnings
+calls. Each agent is assigned a distinct directive,
+which evaluates historical performance, assesses
+peer-level benchmarks, or reviews past guidance,
+querying CTKG to ground their analysis. A final
+synthesizer agent integrates these diverse analytical
+memos to produce a single, context-aware predic-
+tion.
+The primary contributions of this work are as
+follows:
+1. We propose the Context-Enriched Agentic
+RAG (CARAG) framework. To our knowl-
+edge, this is the first study in this field that
+integrates causal reasoning and temporal in-
+ference to enhance the accuracy of stock price
+prediction.
+2. We propose the Causal-Temporal Knowl-
+edge Graph (CTKG), which encodes finan-
+cial data with temporal and causal structure.
+We also introduce a Multi-Agent Reasoning
+Framework that analyzes earnings calls from
+diverse perspectives to reduce mono-model
+reasoning bias.
+3. We release a curated dataset linking thousands
+of earnings call transcripts with matched finan-
+cial statements and multi-horizon price move-
+ments, forming a reproducible benchmark
+for NLP-finance research.
+4. On NASDAQ, NYSE, and MAEC datasets,
+our zero-shot framework achieves state-of-the-
+art results, outperforming large LLMs, fine-
+tuned encoder models, and audio-text align-
+ment models in predicting price shocks. Fur-
+thermore, our 2-year backtest yields an annu-
+alized return of 36 percent and a Sharpe of
+1.64 on a sample of 3158 calls.
+2 Related Work
+Earnings Call Price Prediction Predicting post-
+earnings announcement drift (PEAD)–a market
+anomaly where stock prices drift following an earn-
+ings surprise (Ball and Brown, 1968)–have evolved
+from early methods using sentiment dictionaries
+(Stone et al., 1966; Loughran and McDonald, 2011)
+and engineered transcript features (Chin and Fan,
+2023) to more sophisticated machine-learning ar-
+chitectures (Peng, 2025; Wang et al., 2025).
+Transformer-based encoders like FinBERT ad-
+vanced this analysis but were constrained by input
+length, necessitating the truncation of long earnings
+call transcripts (Araci, 2019; Huang et al., 2024).
+Hierarchical models overcame this by segmenting
+transcripts (Koval et al., 2023; Zaheer et al., 2020).
+Other modern approaches leverage multitask learn-
+ing to predict post-announcement drift (Zhu et al.,
+2025) and integrate multimodal data sources for
+intra-call predictions (Ghosh et al., 2025).
+3056

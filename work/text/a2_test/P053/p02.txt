@@ -1,0 +1,100 @@
+line selection (dynamic embedding feeding, halted
+once sufficient context is accumulated), mimicking
+human selective reading. We establish a unified
+benchmark (Wikipedia corpus + five QA datasets)
+to ensure fair evaluation. Our method outperforms
+other compression techniques in effectiveness and
+efficiency, matches or exceeds standard RAG ac-
+curacy on four datasets with 4× faster inference,
+and demonstrates significant potential for adaptive
+compression via compressor analysis.
+In summary, our contributions include: (1) A
+novel adaptive context compression framework for
+RAG, improving inference efficiency while main-
+taining retrieval augmentation benefits. (2) Train-
+ing strategies for a hierarchical compressor and
+adaptive selector, enabling multi-granularity com-
+pressed embedding generation and automatic con-
+text selection. (3) A unified benchmark for context
+compression methods, resolving evaluation biases
+from inconsistent training data and task setups in
+prior works. (4) Experimental results showing our
+method as the best under context compression, with
+comparable results to regular RAG but with im-
+proved efficiency. (5) Further analysis highlighting
+the potential of adaptive context compression.
+2 Related Work
+2.1 Retrieval-Augmented Generation
+Retrieval-augmented generation (RAG) improves
+model performance across tasks (Gao et al., 2023;
+Asai et al., 2023), including language model-
+ing (Min et al., 2023; Wang et al., 2023a), question
+answering (Lewis et al., 2020; Shi et al., 2024;
+Xu et al., 2024b; Xiong et al., 2024), machine
+translation (Khandelwal et al., 2021; Cheng et al.,
+2022), code generation (Zhang et al., 2023b,a), and
+more. Various approaches have been proposed,
+including end-to-end optimization of model and
+retriever (Guu et al., 2020), enhanced integration
+with non-parametric knowledge (Borgeaud et al.,
+2022; Cheng et al., 2023a), improved alignment
+between model and retriever (Shi et al., 2024; Lin
+et al., 2024), and the integration of a self-reflection
+mechanism (Cheng et al., 2023b; Asai et al., 2024).
+However, most focus on improving effectiveness,
+neglecting efficiency degradation from incorporat-
+ing external knowledge.
+2.2 Context Compression
+Context compression aims to shorten model in-
+put text, improving inference speed. It’s a key
+solution to mitigate efficiency degradation in RAG
+systems (Li et al., 2024). Methods fall into two cat-
+egories: lexical-based, which reduce input context
+length by extracting tokens (Wang et al., 2023b)
+or summarizing context (Xu et al., 2024a), and
+embedding-based, which encode the context into
+embeddings to replace textual input (Mu et al.,
+2023). Embedding-based methods currently outper-
+form lexical-based due to their flexible information
+storage. Embedding-based methods have shown
+strong performance. Bulatov et al. (2022) seg-
+mented long context into chunks and encoding their
+information into memory tokens. Wingate et al.
+(2022) introduced context compression and applied
+it to toxicity reduction. Mu et al. (2023) proposed
+using gist tokens to generalize context compression.
+Chevalier et al. (2023) compressed long contexts
+into summary vectors. Ge et al. (2024) employed
+autoencoding and language modeling objectives to
+pretrain compressors. Cheng et al. (2024) projected
+retrieval embeddings into context embeddings to
+achieve extreme compression. Rau et al. (2024)
+jointly optimized the compressor and decoder, ex-
+tending the compression capability to multiple doc-
+uments. Notably, existing methods rely on static
+compression strategies that cannot adapt to vary-
+ing question difficulty. Additionally, differences in
+training data scales and task mixtures across stud-
+ies impede fair comparison. Our work resolves
+both limitations.
+3 Adaptive Context Compression for
+RAG
+A RAG framework typically consists of a re-
+triever R and a decoder D. The retriever builds
+a search index I containing dense representations
+of all documents from a collection. For a given
+query Q, R retrieve the top-k relevant documents
+D = {d1, d2, . . . , dk} by matching Q’s embedding
+against I via similarity search. The query Q and
+documents D are concatenated and fed into the de-
+coder D to generate a response R. This increases
+the input size to the decoder, reducing inference
+efficiency as |D| ≫ |Q|.
+Existing embedding-based compression meth-
+ods employ a fixed-rate compressor to convert
+documents into embedding sequences, which are
+subsequently fed into the decoder for answer gen-
+eration instead of the original documents. How-
+ever, this fixed-ratio approach lacks adaptability
+to query complexity. The ACC-RAG framework
+24062

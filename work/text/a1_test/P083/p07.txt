@@ -1,0 +1,59 @@
+Nanomaterials 2025, 15, 1180 7 of 11
+of 0.562 ± 0.03 V and a Jsc of 9.64 ± 0.02 mA/cm2. In contrast, the NH4I-treated device
+showed a Voc of 0.490 ± 0.03 V, a Jsc of 12.97 ± 0.02 mA/cm2, and an FF of 47.49 ± 0.01%,
+resulting in a PCE of 3.08 ± 0.02%. The device treated with 2-iodothiophene displayed an
+improved Voc of 0.598 ± 0.03 V, a Jsc of 12.35 ± 0.02 mA/cm2, and an FF of 52.18 ± 0.01%,
+leading to a higher PCE of 3.85 ± 0.02%. Consequently, the 2-iodothiophene-treated devices
+achieved 25% higher efficiency than the NH4I-treated control devices. It should be pointed
+out that the devices prepared in this way are homogeneous with an efficiency difference of
+less than 10% in each single film (for each type, over 20 devices are made from 4 individual
+films). To further eliminate the interface defects between CdTe NC alloy active layers and
+Au back contact, an optimized annealing strategy should be adopted in NC solar cells. From
+another perspective, the existing high contact resistance will likely accelerate the carriers’
+recombination and degrade device performance. To further improve device performance,
+the ITO/ZnO/CdSe/CdTe/2-iodothiophene (5 µg/mL) substrates were heat-treated at
+different temperatures. According to our previous work [33], higher temperatures lead to
+poorer ITO conductivity; therefore, the annealing temperature was controlled below 400 ◦C
+in this study. As shown in Figure 2b and Table 3, the 250 ◦C-treated device was processed
+to display the following figures of merit: Jsc of 12.79 mA/cm2, Voc of 0.628 V, FF of 53.4%,
+and high PCE of 4.31%, which is significantly higher than the controlled device (3.08%).
+Lower or higher annealing temperature degraded device performance.
+Table 3. Summarized device performance under different annealing temperatures.
+Temperature
+(◦C)
+Voc
+(V)
+Jsc
+(mA/cm2)
+FF
+(%)
+PCE
+(%)
+Rs
+(Ω*cm2)
+RSh
+(Ω*cm2)
+150 0.556 8.55 50.25 2.39 97.48 1423.65
+200 0.454 14.14 43.43 2.78 70.79 810.59
+250 0.628 12.79 53.4 4.31 81.19 1397.13
+300 0.442 14.86 44.46 2.95 66.78 798.03
+The EQE curves of NC devices (Figure 3d) denote a prominent response confined to the
+entire range of 400–900 nm; when they are integrated, current densities of 15.86 mA/cm2
+and 17.93 mA/cm2 are predicted, respectively, which is consistent with our AM 1.5 G
+measurements (Figure 3b). The device subjected to 2-iodothiophene treatment exhibited a
+dark current density that was an order of magnitude lower than that of the control device
+(refer to Figure 3e), indicating that leakage current at the anode can be effectively curtailed.
+It is noteworthy that the Rs of the 2-iodothiophene-treated device is lower than that of the
+control devices. We speculated that at an optimized annealing temperature, more CdO will
+be removed and more Te element will be generated, which increases the hole concentration
+and results in a decrease in Rs, and a higher FF and Jsc are expected in this case. It is worth
+pointing out that the device is very stable when kept under room light conditions, with less
+than 5% degradation found over 30 days (Figure 4d). We believe that by further optimizing
+the device fabrication process/device structure, such as using more optimized active layer
+thickness (~400 nm), carefully controlling the annealing strategy, or using a more suitable
+back contact, device performance with PCE up to 10% will be obtained.
+In order to determine the charge transport characteristics of CdTe NCs treated with
+2-iodothiophene, hole-only devices were constructed with the following layered structure:
+ITO/CdTe (160 nm)/Au (70 nm). The carrier mobility values were obtained in accordance
+with the subsequent equation [34]:
+J = 9 8 ε0εr µp(V − Vbi − Vs)2 L3

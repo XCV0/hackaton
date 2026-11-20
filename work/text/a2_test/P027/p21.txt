@@ -1,0 +1,47 @@
+Published as a conference paper at ICLR 2025
+I PROMPT OF STANDARD RAG
+========================================= Prompt =========================================
+Below is an instruction that describes a task. Write a response that appropriately
+completes the request.
+### Evidence:
+[1] Britain (place name)
+Britain, after which "Britain" became the more commonplace name for the island called Great
+Britain. After the Anglo-Saxon period, "Britain" was used as a historical term only.
+Geoffrey of Monmouth in his pseudohistorical "Historia Regum Britanniae" ...
+[2] Great Britain
+The peoples of these islands of "Prettanike" were called the "Priteni" or "Pretani". "
+Priteni" is the source of the Welsh language term Prydain, "Britain", which has the same
+source as the Goidelic term Cruithne used to refer to the early Brythonic-speaking
+inhabitants of Ireland. The latter were later called Picts or Caledonians ...
+...
+[10] Albion
+Albion is an alternative name for Great Britain. The oldest attestation of the toponym
+comes from the Greek language. It is sometimes used poetically and generally to refer to
+the island, but is less common than ’Britain’ today. The name for Scotland in most of the
+Celtic languages is related to Albion: "Alba" in Scottish Gaelic, "Albain" ...
+### Instruction: What was Britain called - before it was Britain?
+### Response:
+Figure 7: Prompt of Standard RAG for Non-instruction-tuned LM
+========================================= Prompt =========================================
+[INST] Below is an instruction that describes a task. Write a response for it and state
+your explanation supporting your response.
+### Instruction: What was Britain called - before it was Britain?
+### Evidence:
+[1] Britain (place name)
+Britain, after which "Britain" became the more commonplace name for the island called Great
+Britain. After the Anglo-Saxon period, "Britain" was used as a historical term only.
+Geoffrey of Monmouth in his pseudohistorical "Historia Regum Britanniae" ...
+[2] Great Britain
+The peoples of these islands of "Prettanike" were called the "Priteni" or "Pretani". "
+Priteni" is the source of the Welsh language term Prydain, "Britain", which has the same
+source as the Goidelic term Cruithne used to refer to the early Brythonic-speaking
+inhabitants of Ireland. The latter were later called Picts or Caledonians ...
+...
+[10] Albion
+Albion is an alternative name for Great Britain. The oldest attestation of the toponym
+comes from the Greek language. It is sometimes used poetically and generally to refer to
+the island, but is less common than ’Britain’ today. The name for Scotland in most of the
+Celtic languages is related to Albion: "Alba" in Scottish Gaelic, "Albain" ...
+[/INST] The response is:
+Figure 8: Prompt of Standard RAG for Instruction-tuned LM
+21

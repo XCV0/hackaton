@@ -1,0 +1,129 @@
+STRIDE: Strategic Iterative Decision-Making for Retrieval-Augmented Multi-Hop Question Answering SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia
+2Wiki. HotpotQA MuSiQue0.1
+0.2
+0.3
+0.4
+0.5
+0.6EM
+RAG
+Iter-RetGen
+GenGround
+DualRAG
+STRIDE
+2Wiki. HotpotQA MuSiQue0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7F1 Score
+RAG
+Iter-RetGen
+GenGround
+DualRAG
+STRIDE
+Figure 4: Performance under expanded retrieval corpora (50k
+documents per dataset). STRIDE maintains the strongest per-
+formance and exhibits the smallest degradation, highlighting
+its robustness to retrieval noise.
+Table 5: Token consumption and inference time (seconds)
+per question. “Avg.” is the abbreviation for “average”.
+Method 2Wiki. HotpotQA MuSiQue Avg.
+#token↓ time↓ #token↓ time↓ #token↓ time↓ F1↑
+GenGround 5171 3.27 3452 2.64 4313 3.14 0.557
+DualRAG 16047 10.83 15148 11.05 25923 20.45 0.555
+STRIDE 7436 4.37 7345 4.42 7656 4.11 0.609
+challenging regime, with particularly large gains on the most com-
+plex MuSiQue. Moreover, STRIDE exhibits the smallest relative drop
+compared to its performance on the original corpora, demonstrat-
+ing exceptional robustness. This resilience stems from STRIDE’s
+meta-level planning, which generates focused sub-questions that
+guide retrieval toward semantically relevant passages, even when
+the corpus is vast and noisy. The results confirm that STRIDE’s
+structured reasoning not only improves accuracy but also enhances
+generalization to larger and noisier retrieval scenarios.
+2 3 4
+Hops
+0.05
+0.10
+0.15
+0.20
+0.25
+0.30
+0.35EM
+RAG
+GenGround
+DualRAG
+STRIDE
+2 3 4
+Hops
+0.1
+0.2
+0.3
+0.4
+0.5F1 Score
+RAG
+GenGround
+DualRAG
+STRIDE
+Figure 5: Performance on MuSiQue with different hops.
+STRIDE shows consistent gains across all depths, highlight-
+ing its strength in complex reasoning.
+5.4 Performance across Reasoning Depths
+To investigate how reasoning complexity affects performance, we
+conduct experiments on MuSiQue grouped by the number of re-
+quired inference hops. As shown in Figure 5, performance generally
+degrades as hop count increases, reflecting the growing challenge of
+maintaining reasoning fidelity over longer chains. Notably, STRIDE
+consistently outperforms all baselines at every reasoning depth.
+This trend indicates that STRIDE’s meta-level planning and dynam-
+ical scheduling mechanism are particularly effective at managing
+complex, multi-step reasoning, where error propagation and re-
+trieval drift severely hinder conventional iterative RAG approaches.
+Table 6: Error attribution on failed predictions across datasets.
+Counts reflect the number of incorrect samples attributed to
+each error type. Lower errors indicate higher performance.
+Dataset Method Plan Retrieval Execution Total
+2Wiki. Direct-Plan 59 94 194 347 Meta-Plan 43 57 126 226
+HotpotQA Direct-Plan 98 143 218 459 Meta-Plan 90 127 197 414
+MuSiQue Direct-Plan 230 302 130 662 Meta-Plan 234 290 118 642
+5.5 Efficiency Analysis
+Beyond accuracy, we evaluate the computational efficiency of STRIDE
+in terms of token consumption and inference time per question.
+As shown in Table 5, STRIDE achieves the highest performance
+while maintaining a favorable efficiency profile. Compared to Dual-
+RAG, STRIDE reduces token usage by 54%–71% and inference time
+by 60%–80% across datasets, demonstrating that its hierarchical
+planning avoids the redundant retrieval-generation cycles typi-
+cal of iterative RAG systems. Although STRIDE incurs moderate
+overhead relative to the lightweight GenGround, it delivers a sub-
+stantial gain in answer quality (+0.052 average F1). This highlights
+STRIDE’s strong cost-accuracy trade-off: it provides state-of-the-art
+performance without prohibitive computational demands, making
+it well-suited for practical deployment.
+5.6 Error Attribution Analysis
+We analyze failure modes on all incorrect predictions by first eval-
+uating plan correctness using a strong LLM (DeepSeek-V3.2 [23])
+under gold documents access. If the plan is flawed, we label it a
+Planning Error. Otherwise, we check retrieval coverage: missing
+gold documents yield Retrieval Error; otherwise, incorrect final
+answers are Execution Errors.
+As shown in Table 6, Meta-Plan reduces total failures across all
+datasets, with consistent decreases in retrieval and execution errors.
+Planning errors also decline on 2Wiki. and HotpotQA, indicating
+that strategic decomposition yields higher-quality plans for mod-
+erately complex questions. On MuSiQue, planning errors remain
+nearly unchanged, yet total failures still decrease—suggesting that
+Meta-Plan produces more grounded and executable reasoning steps
+even when perfect planning remains challenging.
+5.7 Execution Reliability and Iteration
+Efficiency
+We evaluate the reliability and efficiency of iterative RAG systems
+using two metrics: (a) failure rate: the fraction of questions aban-
+doned due to unrecoverable planning or retrieval errors, and (b)
+average iteration count. As shown in Figure 6, STRIDE achieves the
+lowest failure rate across all datasets, demonstrating that its meta-
+level planning and process-aware supervision effectively mitigate
+error propagation. Notably, with modular fine-tuning, STRIDE-FT
+further reduces the failure rate to below 3% on all datasets, ap-
+proaching near-perfect execution reliability. Moreover, STRIDE

@@ -1,0 +1,78 @@
+Appl. Sci. 2025, 15, 2930 10 of 20
+with electrons, causing a noticeable decrease in current, which is seen as a kink in the
+J-V characteristic.
+In the dark, the phenomenon is much less evident, as the resistance offered by the
+materials only allows the flow of a weaker current and, accordingly, the number of trapped
+holes is also lower.
+To determine the barrier height, we performed temperature-dependent J-V character-
+istics at different temperatures, and we assumed that the barrier height as a function of the
+temperature follows a thermally activated behavior, as reported in ref. [34]:
+RS T = C e
+ΦB
+KT (5)
+where RS is the total resistance comprising the resistance due to the materials constituting
+the solar cell, the resistances arising from contacts R0, and the resistance of the additional
+barrier DB (see Figure 6a). C is a constant independent of the temperature T, and ΦB is the
+barrier height. If R0 is sufficiently small compared to the barrier resistance, and, therefore,
+negligible, then the temperature dependence of Rs is primarily attributed to DB, which is
+the circuital representation of the barrier due to charge trapping.
+The total series resistance (Rs) was determined by linearly fitting the J-V characteristics,
+at different temperatures, around Voc. The inverse of the fitting slope represents the value
+of Rs. The barrier height was estimated to be 306 ± 9 meV from the slope of ln(RsT)
+vs. 1/T (Figure 8a) [35–37]. As reported in Figure 6b, the barrier height varies with the
+wavelength of the incident light. This happens because the penetration length depends
+on the wavelength and so does the thickness of the material where the photogenerated
+holes pile up [38]. This experimental fact may be appreciated from Figure 8b, where the
+barrier height is plotted as a function of the light penetration depth (remembering that
+approximately 82% of light is absorbed within a thickness of two penetration lengths,
+according to the Beer–Lambert–Bouguer law).
+Appl. Sci. 2025, 15, x FOR PEER REVIEW 11 of 22 
+ 
+In the dark, the phenomenon is much less evident, as the resistance o ﬀered by the 
+materials only allows the ﬂow of a weaker current and, accordingly, the number of 
+trapped holes is also lower. 
+To determine the barrier height, we performed temperature-dependent J-V charac-
+teristics at diﬀerent temperatures, and we assumed that the barrier height as a function of 
+the temperature follows a thermally activated behavior, as reported in ref. [34]: 
+𝑅ௌ𝑇 =  𝐶 𝑒
+ఃಳ
+௄்  (5)
+where RS is the total resistance comprising the resistance due to the materials constituting 
+the solar cell, the resistances arising from contacts R0, and the resistance of the additional 
+barrier DB (see Figure 6a). C is a constant independent of the temperature T, and ΦB is the 
+barrier height. If R0 is suﬃciently small compared to the barrier resistance, and, therefore, 
+negligible, then the temperature dependence of Rs is primarily attributed to DB, which is 
+the circuital representation of the barrier due to charge trapping. 
+The total series resistance (Rs) was determined by linearly ﬁtting the J-V characteris-
+tics, at di ﬀerent temperatures, around Voc. The inverse of the ﬁtting slope represents the 
+value of Rs. The barrier height was estimated to be 306 ± 9 meV from the slope of ln(RsT) 
+vs. 1/T (Figure 8a) [35–37]. As reported in Figure  6b, the barrier height varies with the 
+wavelength of the incident light. This happens because the penetration length depends on 
+the wavelength and so does the thickness of the material where the photogenerated holes 
+pile up [38]. This experimental fact may be appreciated from Figure 8b, where the barrier 
+height is plotted as a function of the light penetrat ion depth (remembering that approxi-
+mately 82% of light is absorbed within a thickness of two penetration lengths, according 
+to the Beer–Lambert–Bouguer law). 
+This result has two consequences: ﬁrst, it completely rules out the dependence of the 
+kink on potential barriers at the contacts, an d, second, it shows that the barrier, due to 
+trapped holes, is at its maximum at the junc tion region near the interface and then de-
+creases into the p-type material. 
+ 
+Figure 8. The data points on both graphs were obtained by illuminating the sample with a LQX 1000 
+lamp. (a) Arrhenius plot of ln(T·R S) (in K·Ωcm2) as a function of 1/T. Each experimental value was 
+derived from the J-V measurements taken at te mperatures ranging from 196 K to 353 K without 
+optical ﬁlters. (b) The height of the additional barrier as a function of distance from the junction: 
+each data point was obtained using bandpass ﬁlters centered at 650 nm, 750 nm, 850 nm, and 950 
+nm, and all were normalized to the same number of absorbed photons. 
+3.3. Crossover Eﬀect in the J-V Characteristic 
+(a) (b) 
+Figure 8. The data points on both graphs were obtained by illuminating the sample with a LQX
+1000 lamp. (a) Arrhenius plot of ln(T·RS) (in K·Ωcm2) as a function of 1/T. Each experimental value
+was derived from the J-V measurements taken at temperatures ranging from 196 K to 353 K without
+optical filters. (b) The height of the additional barrier as a function of distance from the junction: each
+data point was obtained using bandpass filters centered at 650 nm, 750 nm, 850 nm, and 950 nm, and
+all were normalized to the same number of absorbed photons.
+This result has two consequences: first, it completely rules out the dependence of the
+kink on potential barriers at the contacts, and, second, it shows that the barrier, due to
+trapped holes, is at its maximum at the junction region near the interface and then decreases
+into the p-type material.

@@ -1,0 +1,42 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D004,R001,DV1,MS1,M1,Voc,0.818,V,,,,,,0.818,V,0.818,V,primary,,11,,Table 1,Figure 8,ED 0.818 9.344 57.49 4.39 ± 0.81 (5.23),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R002,DV1,MS1,M1,Jsc,9.344,mA/cm2,,,,,,9.344,mA/cm2,9.344,mA/cm2,primary,,11,,Table 1,Figure 8,ED 0.818 9.344 57.49 4.39 ± 0.81 (5.23),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R003,DV1,MS1,M1,FF,57.49,%,,,,,,57.49,%,57.49,%,primary,,11,,Table 1,Figure 8,ED 0.818 9.344 57.49 4.39 ± 0.81 (5.23),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R004,DV1,MS1,M1,PCE,4.39,%,mean,0.81,,,,4.39,%,4.39,%,primary,,11,,Table 1,Figure 8,ED 0.818 9.344 57.49 4.39 ± 0.81 (5.23),extracted,,Значение η со ± (интерпретировано как среднее ± SD)
+D004,R005,DV1,MS1,M1,PCE,5.23,%,champion,,,,,5.23,%,5.23,%,primary,,11,,Table 1,Figure 8,ED 0.818 9.344 57.49 4.39 ± 0.81 (5.23),extracted,,Значение в скобках рядом с η; интерпретировано как лучший прибор
+D004,R006,DV2,MS1,M1,Voc,1.009,V,,,,,,1.009,V,1.009,V,primary,,11,,Table 1,Figure 8,BCC-ED 1.009 19.61 47.79 9.46 ± 0.58 (10.21),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R007,DV2,MS1,M1,Jsc,19.61,mA/cm2,,,,,,19.61,mA/cm2,19.61,mA/cm2,primary,,11,,Table 1,Figure 8,BCC-ED 1.009 19.61 47.79 9.46 ± 0.58 (10.21),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R008,DV2,MS1,M1,FF,47.79,%,,,,,,47.79,%,47.79,%,primary,,11,,Table 1,Figure 8,BCC-ED 1.009 19.61 47.79 9.46 ± 0.58 (10.21),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R009,DV2,MS1,M1,PCE,9.46,%,mean,0.58,,,,9.46,%,9.46,%,primary,,11,,Table 1,Figure 8,BCC-ED 1.009 19.61 47.79 9.46 ± 0.58 (10.21),extracted,,Значение η со ± (интерпретировано как среднее ± SD)
+D004,R010,DV2,MS1,M1,PCE,10.21,%,champion,,,,,10.21,%,10.21,%,primary,,11,,Table 1,Figure 8,BCC-ED 1.009 19.61 47.79 9.46 ± 0.58 (10.21),extracted,,Значение в скобках рядом с η; интерпретировано как лучший прибор
+D004,R011,DV3,MS1,M1,Voc,0.943,V,,,,,,0.943,V,0.943,V,primary,,11,,Table 1,Figure 8,C-ED-1 0.943 19.664 56.07 9.90 ± 1.03(10.32),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R012,DV3,MS1,M1,Jsc,19.664,mA/cm2,,,,,,19.664,mA/cm2,19.664,mA/cm2,primary,,11,,Table 1,Figure 8,C-ED-1 0.943 19.664 56.07 9.90 ± 1.03(10.32),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R013,DV3,MS1,M1,FF,56.07,%,,,,,,56.07,%,56.07,%,primary,,11,,Table 1,Figure 8,C-ED-1 0.943 19.664 56.07 9.90 ± 1.03(10.32),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R014,DV3,MS1,M1,PCE,9.9,%,mean,1.03,,,,9.9,%,9.9,%,primary,,11,,Table 1,Figure 8,C-ED-1 0.943 19.664 56.07 9.90 ± 1.03(10.32),extracted,,Значение η со ± (интерпретировано как среднее ± SD)
+D004,R015,DV3,MS1,M1,PCE,10.32,%,champion,,,,,10.32,%,10.32,%,primary,,11,,Table 1,Figure 8,C-ED-1 0.943 19.664 56.07 9.90 ± 1.03(10.32),extracted,,Значение в скобках рядом с η; интерпретировано как лучший прибор
+D004,R016,DV4,MS1,M1,Voc,1.05,V,,,,,,1.05,V,1.05,V,primary,,11,,Table 1,Figure 8,C-ED-2 1.05 18.65 58.66 11.46 ± 0.66 (12.13),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R017,DV4,MS1,M1,Jsc,18.65,mA/cm2,,,,,,18.65,mA/cm2,18.65,mA/cm2,primary,,11,,Table 1,Figure 8,C-ED-2 1.05 18.65 58.66 11.46 ± 0.66 (12.13),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R018,DV4,MS1,M1,FF,58.66,%,,,,,,58.66,%,58.66,%,primary,,11,,Table 1,Figure 8,C-ED-2 1.05 18.65 58.66 11.46 ± 0.66 (12.13),extracted,,Агрегация для Voc/Jsc/FF в таблице не указана
+D004,R019,DV4,MS1,M1,PCE,11.46,%,mean,0.66,,,,11.46,%,11.46,%,primary,,11,,Table 1,Figure 8,C-ED-2 1.05 18.65 58.66 11.46 ± 0.66 (12.13),extracted,,Значение η со ± (интерпретировано как среднее ± SD)
+D004,R020,DV4,MS1,M1,PCE,12.13,%,champion,,,,,12.13,%,12.13,%,primary,,11,,Table 1,Figure 8,C-ED-2 1.05 18.65 58.66 11.46 ± 0.66 (12.13),extracted,,Значение в скобках рядом с η; интерпретировано как лучший прибор
+D004,R021,DV4,MS1,M1,PCE,11.46,%,mean,,,,,11.46,%,11.46,%,primary,,1,Abstract,,,efficiency (PEC) of 11.46%,extracted,R019,"В аннотации не сказано, среднее это или лучший"
+D004,R022,DV4,MS1,M1,Jsc,18.65,mA/cm2,,,,,,18.65,mA/cm2,18.65,mA/cm2,primary,,1,Abstract,,,short-circuit current density of 18.65 mA/cm2,extracted,R017,
+D004,R023,DV4,MS1,M1,Voc,1.05,V,,,,,,1.05,V,1.05,V,primary,,1,Abstract,,,"of 1.05 V, and a fill factor of 58.66%",extracted,R016,
+D004,R024,DV4,MS1,M1,FF,58.66,%,,,,,,58.66,%,58.66,%,primary,,1,Abstract,,,"of 1.05 V, and a fill factor of 58.66%",extracted,R018,
+D004,R025,DV1,MS1,M1,PCE,4.39,%,mean,0.81,,,,4.39 ± 0.81,%,4.39,%,primary,,10,3.3,,Figure 8,low efficiency (4.39 ± 0.81),extracted,R004,
+D004,R026,DV2,MS1,M1,PCE,9.46,%,,,,,,9.46,%,9.46,%,primary,,10,3.3,,Figure 8,better performance (PCE: 9.46),extracted,R009,
+D004,R027,DV1,MS1,M1,PCE,4.39,%,,,,,,4.39,%,4.39,%,primary,,12,4. Conclusions,,,photoelectric conversion efficiency (PCE) from 4.39 to 11.46%,extracted,R004,
+D004,R028,DV4,MS1,M1,PCE,11.46,%,,,,,,11.46,%,11.46,%,primary,,12,4. Conclusions,,,photoelectric conversion efficiency (PCE) from 4.39 to 11.46%,extracted,R019,
+D004,R029,DV1,MS1,M1,Jsc,9.3,mA/cm2,,,,,,9.3,mA/cm2,9.3,mA/cm2,primary,,12,4. Conclusions,,,9.3 mA/cm2 to 18.6 mA/cm2,extracted,R002,Округлено относительно Table 1 (9.344)
+D004,R030,DV4,MS1,M1,Jsc,18.6,mA/cm2,,,,,,18.6,mA/cm2,18.6,mA/cm2,primary,,12,4. Conclusions,,,9.3 mA/cm2 to 18.6 mA/cm2,extracted,R017,Округлено относительно Table 1 (18.65)
+D004,R031,DV1,MS1,M1,Voc,0.8,V,,,,,,0.8,V,0.8,V,primary,,12,4. Conclusions,,,open circuit voltage increased from 0.8 V,extracted,R001,Округлено относительно Table 1 (0.818)
+D004,R032,DV4,MS1,M1,Voc,1.05,V,,,,,,1.05,V,1.05,V,primary,,12,4. Conclusions,,,open circuit voltage increased from 0.8 V,extracted,R016,
+D004,R033,DV1,MS1,M1,FF,57.4,%,,,,,,57.4,%,57.4,%,primary,,12,4. Conclusions,,,57.4 to 58.6%,extracted,R003,Округлено относительно Table 1 (57.49)
+D004,R034,DV4,MS1,M1,FF,58.6,%,,,,,,58.6,%,58.6,%,primary,,12,4. Conclusions,,,57.4 to 58.6%,extracted,R018,Округлено относительно Table 1 (58.66)
+D004,R035,,,,PCE,13.1,%,,,,,,13.1,%,13.1,%,cited,[24],11,3.3,Table 2,,1 Microwave irradiation. FTO/MoS2/perovskite/po-spiro- OMeTAD/Au 13.10 [24],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
+D004,R036,,,,PCE,12.12,%,,,,,,12.12,%,12.12,%,cited,[38],11,3.3,Table 2,,GR)/MAPbI3/PTAA/Au 12.12 [38],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
+D004,R037,,,,PCE,16.17,%,,,,,,16.17,%,16.17,%,cited,[39],11,3.3,Table 2,,16.17 [39],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
+D004,R038,,,,PCE,14.42,%,,,,,,14.42,%,14.42,%,cited,[40],11,3.3,Table 2,,Graphene/MoS2/MAPbI3/PTAA/Au 14.42 [40],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
+D004,R039,,,,PCE,3.36,%,,,,,,3.36,%,3.36,%,cited,[25],11,3.3,Table 2,,5 Ultrasonic spray pyrolysis method. FTO/MoS2/perovskite/po-spiro- OMeTAD/Au 3.36 [25],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
+D004,R040,,,,PCE,4.3,%,,,,,,4.3,%,4.3,%,cited,[36],11,3.3,Table 2,,OMeTAD/Au 4.3 [36],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
+D004,R041,,,,PCE,10.1,%,,,,,,10.1,%,10.1,%,cited,[35],11,3.3,Table 2,,ITO/ZnO:MoS2/PTB7- TH:PC71BM/MoO3/Ag 10.1 [35],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)

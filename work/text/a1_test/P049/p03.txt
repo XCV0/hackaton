@@ -1,0 +1,112 @@
+www.advancedsciencenews.com www.advmatinterfaces.de
+SnO2:F (FTO)-coated soda-lime glass. Prior to deposition, the
+substrate was cleaned using acetone, isopropyl alcohol, and
+deionized water; followed by a 10 min ultraviolet (UV) ozone
+treatment. TiO2 ﬁlms were then deposited onto the clean
+FTO substrates via either spin-casting solution (sol-TiO2)or
+RF magnetron sputtering (sp-TiO2). The sol-TiO2 ﬁlms were
+deposited by sequentially spin-casting two 275 μl doses of a
+0.3 M concentration of titanium isopropoxide (TTIP) in ethyl
+alcoholsolutionwithinanitrogenatmosphereat3000rpm,with
+a 10 min 120 °C hot plate anneal after each dose to drive oﬀ
+any remaining solvent.[56] Spin-cast sol-TiO2 ﬁlms were then
+annealedpost-depositionat500 °Cfor30mininair.
+TiO2 ﬁlms (70 nm thick) were sputtered at 3.29 W cm−2 onto
+the FTO substrates from a TiO2 target (99.95% purity, Pi-Kem
+Ltd.) at room temperature in a 3 mTorr pressure argon atmo-
+sphere with 1% reactive O2 incorporated to ensure a stoichio-
+metric ﬁlm without oxygen deﬁciency. Sputtered ﬁlms then un-
+derwentpost-depositionannealinginanidenticalprocesstothe
+referencesol-TiO2 device.
+Aftera10minUVozonecleanoftheTiO2,Sb2Se3 (AlfaAesar
+5N granulate) was deposited onto the TiO2 surface via the two-
+step close-space sublimation (CSS) process outlined by Hutter
+et al.[57] For the standard process, an initial seed layer was de-
+posited with source and substrate temperatures of 440 and 350
+°Crespectivelyatvacuumfor15min,followedbyagrowthphase
+at530and480 °Cat10Torrforanadditional15mintodelivera
+≈1.2 μmthickﬁlm.FordepositionontothesputteredTiO2,the
+substratetemperatureisrequiredtobeincreasedfrom350to400
+°C,asdiscussedintheapproachingSection3.1.Followingtheab-
+sorber deposition, a 5 mg ml−1 solution of P3HT in chloroben-
+zene(100–360nm)wasthendepositedontotheSb2Se3 backsur-
+face via spin-casting as both a hole transporter layer (HTL) and
+to act as a pinhole blocker.[58] Finally, 50 nm thick 0.1 cm2 gold
+contactsweredepositedontothebacksurfaceviathermalevap-
+oration.
+2.2.MaterialCharacterization
+Scanning electron microscopy (SEM) was obtained using a Carl
+Zeiss 300 VP Scanning Electron microscope. Operated in vari-
+able pressure mode as devices were uncoated. Images were
+mounted cross-sectionally, and images taken in BSE (Back-
+scatteredelectronimagingmode).Cross-sectionwaspreparedby
+encapsulingthedevicewithepoxyresinandasiliconwafercap.A
+HitachiE-3500Ionmillsystemoperatedat6keVfor6hwasused
+toprepareacross-sectionareaforimagingandchemicalanalysis.
+Transmission electron microscopy (TEM) was carried out using
+JEOL 2100F TEM operated at 200 keV. TEM lamellar, were pre-
+pared using FEI Helios MK2 NanoLab 600 DualBeam. Atomic
+force microscopy (AFM) topographic images were acquired us-
+ing a commercial AFM system (Veeco DI3100, Bruker Corpo-
+ration).Intermittentcontactmodeimagingtechniqueswereap-
+pliedusingacantileverwithastiﬀnessof26N/mandtipradius
+of <7nm(OTESPA, Apex Probes).X-raydiﬀraction(XRD) 𝜃-2𝜃
+measurementsweretakenusingaRigakuSmartLabdiﬀractome-
+ter with a Cu rotating anode (𝜆 = 1.542 Å) and a Ge(220) × 2
+monochromatorinparallelbeamconﬁguration.Forgrazinginci-
+dence,Ge(220)×2monochromatorwasreplacedwithIPS+PSA
+slits, with an incident angle between 0.6 ° and 1.0 °. Current
+density–voltage (J–V) measurements were taken using a TS
+SpaceSystemssolarsimulator(classAAA)calibratedtoAM1.5G.
+External quantum eﬃciency (EQE) measurements were taken
+with a Bentham PVE300 system. Raman spectra were obtained
+withaRenishawInViasystemwitha532nmgreenlaserfortwo
+accumulations of 6 s acquisition at 10 mW. Raman band posi-
+tions were calibrated to the 520 cm−1 silicon peak with a reso-
+lution of 1 cm−1. X-ray photoelectron spectroscopy (XPS) spec-
+tra of reference TiO2 ﬁlms and FTO for the purpose of deter-
+mining band positions was measured using a monochromated
+Al K𝛼 (h𝜈 = 1486.6 eV) X-ray source and a PSP Vacuum Tech-
+nologyhemisphericalelectron-energyanalyzerattheUniversity
+of Liverpool. Values for sol-TiO2 and Sb2Se3 ﬁlms are recreated
+with permission from Shiel et al.[59] Energy calibration was per-
+formedbymeasuringtheFermiedgeand3d5/2 core-levelposition
+ofapolycrystallinesilverfoilAr+ sputteredcleanundervacuum
+(more detail here[60]). The precision of binding energy determi-
+nationis±0.1eV,whichwhenaddedinquadratureforVBMand
+SEC positions, gives an uncertainty of ±0.14 eV on calculated
+band positions. Additional photoemission measurements were
+obtainedatthei09beamlineoftheDiamondLightSourcefacil-
+ity for soft X-ray energies of 800 eV (70 eV pass energy, 50 meV
+stepsize)withanalysermode“Angular45”and1090eV(100eV
+passenergy,50meVstepsize)withanalysermode“Angular56”.
+Transmission and reﬂectance measurements were taken using
+aShimadzuSolidSpec-3700UV–visspectrophotometerbetween
+250and1500nm.Indirectbandgapswerethenextractedviathe
+Taucmethod.
+2.3.ComputationalMethods
+Theoretical calculations were performed using plane-wave pe-
+riodic density functional theory (DFT) within the Vienna ab-
+initio Simulation Package (VASP).[61–64] The HSE06[65] (Heyd–
+Scuseria–Ernzerhof) hybrid functional was used to treat the
+exchange and correlation, and the projector-augmented wave
+(PAW) method[66] described the interactions between the core
+(Ti:[Ar]andO[He])andthevalenceelectrons.HSE06andhybrid
+functionalsingeneral,areknowntoconsistentlygiveaccuratere-
+sults compared to experiment[67–70] particularly toward the elec-
+tronic structure of anatase and rutile TiO2.[71–74] Geometry op-
+timizations of both anatase and rutile were carried out prior to
+calculatingthedensity-of-states(DoS)usingaplane-waveenergy
+cut-oﬀof700eVand Γ-centred k-pointmeshesof7 × 7 × 5and
+5 × 5 × 8respectively.Convergencewasdeemedcompletewhen
+themaximumforceonanyionwaslessthan0.01eVÅ−1.
+3.ResultsandDiscussion
+3.1.CSSRe-Optimizationforsp-TiO2
+WhilsttheCSSprocesshadpreviouslybeenoptimizedfordepo-
+sition on the established sol-TiO2 ﬁlms,[20,40,57] the same Sb2Se3
+ﬁlm quality was not reproduced upon replacement of the sol-
+TiO2 surface with sp-TiO2. This is not necessarily unsurpris-
+ing, given the substrate dependence of Sb2Se3 grain morphol-
+ogy and orientation,[32,45] but this is perhaps the ﬁrst report
+Adv. Mater. Interfaces2023,10,2300238 2300238(3of15) ©2023TheAuthors. AdvancedMaterialsInterfacespublishedbyWiley-VCHGmbH
+ 21967350, 2023, 20, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/admi.202300238, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

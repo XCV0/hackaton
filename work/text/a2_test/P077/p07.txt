@@ -1,0 +1,109 @@
+to the query 𝑞. Path semantic relevance can be evaluated using
+either EEMs or LLMs, as outlined in Section 3.2.2. Note that when
+using LLMs to evaluate and select reasoning paths, it may not be
+feasible to input all paths in P in a single call. In such cases, random
+selection or EEMs can be used as a preliminary filter to reduce the
+number of candidate paths.7
+3.3.3 Interactive Semantic-Augmented Retrieval (ISAR). Un-
+like OSAR, which separates path generation and evaluation, ISAR
+integrates both within an interactive framework. Using interactive
+search algorithms [81, 96, 106] combined with semantic models,
+ISAR directs the search process toward semantically relevant graph
+regions from the outset. By interactively and dynamically evaluat-
+ing and prioritizing path extensions based on their relevance to the
+query, ISAR effectively narrows the search space during execution.
+For example, in Beam Search, 8 which is widely used in GraphRAG
+workflow [16, 98], a fixed number of candidate paths (beams) are
+explored iteratively to identify the most relevant reasoning path
+for a query entity 𝑣(𝑞) 𝑖 ∈𝜖𝑞 . At each step, potential path extensions
+are evaluated for semantic relevance using a greedy strategy, and
+the top-𝐵 paths are retained. This process continues until a stop-
+ping criterion is met, e.g., reaching the maximum path length 𝐿
+or exhausting relevant extensions. The final output consists of the
+most relevant reasoning paths discovered during the search.
+In ISAR, semantic models for evaluating path extensions can be
+EEMs, LLMs, or a hybrid of both to combine their strengths. Based
+on practical exploration, we propose three hybrid strategies:
+• LLMs Refinement (LLMs-R, in ISAR-EEMs): After the ISAR-
+EEMs search process, LLMs are used to refine the retrieved paths
+by reducing redundancy and improving semantic coherence.
+• EEMs Pre-filter (EEMs-PF, in ISAR-LLMs): At each step of
+the LLMs-based search, EEMs pre-rank and filter candidate ex-
+tensions before passing them to the LLMs, reducing input size
+and improving efficiency.
+• EEMs Supplement (EEMs-S, in ISAR-LLMs): At each step
+of path expansion, if the LLMs generate too few or low-quality
+candidates, EEMs are used to supplement the expansion with
+top-ranked relevant paths.
+Additionally, for small-scale graphs, LLM-agent-based ISAR meth-
+ods [74] can generate reasoning paths through single- or multi-turn
+interactions, if LLMs are fine-tuned on domain-specific knowledge.
+Despite domain-specific effectiveness, this approach suffers from
+limited generalizability and efficiency due to its reliance on fine-
+tuned LLMs, context length constraints, and poor scalability. Hence,
+it is not our focus of the framework.
+4 EXPERIMENT
+Building upon the LEGO-GraphRAG framework, we develop an
+implementation that facilitates the seamless integration of modules
+and methods for constructing GraphRAG instances.9 To assess the
+7Alternatively, multiple LLM calls can be used to process all reasoning paths, improving
+quality at the cost of efficiency. This feature is supported in our implementation (see
+technical report B.6 and our open-source repository).
+8See the technical report B.8 for detailed algorithm
+9Our implementation is built in Python and integrates libraries such as Transformers
+[114], iGraph [17], PyTorch[2], and vLLM [58] to support flexible configuration of
+algorithms, models, and reasoning. The semantic models used are publicly available
+on the Hugging Face [46].
+Table 3: Existing Instances vs. LEGO-GraphRAG Instances
+GraphRAG Instances WebQSP CWQ Hits@1 Recall Hits@1 Recall
+RoG [71] (RoG planning w/ChatGPT) 81.51 71.60 52.68 48.51
+LEGO-RoG (RoG planning w/ChatGPT) 82.79 64.41 56.06 49.76
+KELP [65] (one-hop w/gpt-4o-mini) 31.06 - 14.16 -
+LEGO-KELP (one-hop w/gpt-4o-mini) 77.36 63.99 48.65 43.88
+ToG [98] (w/Llama3-8B) 59.76 43.05 36.97 32.69
+LEGO-ToG (w/Llama3-8B) 66.44 44.77 40.26 33.63
+effectiveness of the LEGO-GraphRAG framework and our imple-
+mentation, we create versions of our framework based on the core
+ideas of three state-of-the-art instances—RoG [71], KELP [65], and
+ToG [98]—and align the experimental setups to ensure a fair com-
+parison. As shown in Table 3, the instances implemented within
+our framework exhibit performance comparable to their original
+counterparts across two datasets. For KELP, our implementation
+outperforms the original due to the effective integration of two
+modules and the optimization of the employed methods.
+As shown in Table 2, the existing instances are far from covering
+the four groups of GraphRAG instances within our framework.
+Thus, we construct 15 distinct GraphRAG instances (numbered
+and labeled in Table 2) by selecting representative methods from
+subgraph-extraction and path-retrieval modules for a detailed em-
+pirical study (Section 4.2). In addition, we conduct separate eval-
+uations of the various methods, strategies, and semantic models
+utilized in the two modules (Sections 4.3 and 4.4).
+4.1 Experiment Settings
+Graph and GraphRAG Query Datasets. We leverage Freebase [6],
+a large-scale, multi-domain knowledge base (e.g., on finance, law,
+sports) widely used in GraphRAG research [45, 50, 51, 70–72, 77, 98,
+108, 121], along with four established query datasets, WebQSP [120],
+CWQ [100], GrailQA [30], and WebQuestions [16], covering di-
+verse and challenging GraphRAG scenarios. Following standard
+settings [38, 51, 71, 98], we construct dataset-specific graphs, in-
+cluding all triples reachable within the maximum reasoning hops
+from query entities (100M nodes, 300M edges) and sample 1,000 test
+queries per dataset (one-hop: multi-hop is 1:1). All experiments (Sec-
+tions 4.2–4.4) are conducted based on these datasets. We also include
+MetaQA [125], a non-Freebase dataset built on Wiki-Movies [78],
+a single-domain base focused on movies (40K nodes, 130K edges),
+with 1,000 test queries to assess cross-base and cross-domain trans-
+ferability of our framework.10
+Metrics. Our empirical study is based on three key metrics: qual-
+ity, efficiency, and cost. a) Quality. ⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓a).1 For the subgraph-extraction,
+F1 Score serves as the primary evaluation metric, balancing Pre-
+cision and Recall to reflect overall extraction quality.11 However,
+since this module directly influences the retrieval space for down-
+stream modules, we introduce a minimum Recall threshold to en-
+sure sufficient coverage of relevant entities and relations. Rely-
+ing solely on high F1 Score may favor Precision at the cost of
+10Further details of datasets are in our technical report B.2 and B.3.
+11Precision = |C𝑞 ∩ A𝑞 |/|C𝑞 |, Recall = |C𝑞 ∩ A𝑞 |/|A𝑞 |, where C𝑞 and A𝑞 represent
+the predicted and ground truth sets, respectively. The F1 score is the harmonic mean
+of Precision and Recall: F1 score = (2 · Precision · Recall)/(Precision + Recall)

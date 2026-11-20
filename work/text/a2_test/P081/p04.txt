@@ -1,0 +1,128 @@
+Zhao et al.
+9
+EHR
+Symptoms
+Locations
+Geographic
+...
+...
+SE
+LE
+GE
+EHR DB
+Disease Clustering
+Clinical Features 
+Decomposition
+Embeddings
+Hierarchical 
+Aggregation
+Disease
+Knowledge Graph
+Expert/LLM
+LLM
+LLM
+Prompt
+2
+Augment
+Clinical Features 
+Matching
+Upward Traversal
+Diagnostic 
+Differences
+KG
+Diagnose
+Treatment
+Medication
+Follow
+-
+up 
+Questions
+Output
+Input
+Text 
+Description
+Patient manifestations
+Preprocessing
+D
+iagnostic
+Knowledge Graph
+Diagnostic KG Construction
+Diagnostic Differences 
+KG 
+Searching
+Reasoning
+Patient
+Embedding
+EHR DB
+EHR Indexing
+FAISS
+Index
+Search
+FAISS
+Index
+Search
+Patient
+Embeddings
+Top
+-
+k relevant
+EHR
+Prompt
+1
+KG
+-
+elicited Reasoning RAG
+Backbone LLM
+Patient info
+KG
+Figure 2: The overall framework of MedRAG. MedRAG first extracts patient (red node) manifestations from structured or
+unstructured input, and decomposes different clinical features. These features are embedded and matched with a diagnostic
+KG to identify critical diagnostic differences KG. MedRAG’s KG-elicited reasoning RAG module retrieves relevant EHRs and
+integrates them with these diagnostic differences KG to trigger reasoning in an LLM. This reasoning generates precise diagnoses,
+treatment recommendations, and follow-up questions.
+The retriever selects relevant top-k EHRs based on patient
+embeddings and integrates them with critical diagnostic
+differences KG to trigger reasoning in the LLM, generating
+final diagnoses, treatment and medical recommendations
+and follow-up questions for medical consultation.
+4.1 Diagnostic Knowledge Graph Construction
+To enhance the reasoning capabilities and fill the knowledge gaps
+of the RAG, we propose constructing a diagnostic knowledge graph
+G tailored to the medical domain of a specific EHR database. The
+construction of the diagnostic knowledge graph draws inspiration
+from the hierarchical structure of the World Health Organization’s
+International Classification of Diseases, 11th Edition (ICD-11) [41] 2.
+4.1.1 Disease Knowledge Graph Construction. The forms and rep-
+resentations of the diseases in an EHR database are diverse, we
+first unify the set of original disease descriptions 𝐸𝐿3𝑟 𝑎𝑤 by disease
+clustering to 𝐸𝐿3. The most common disease name within each
+cluster is regarded as the final disease name and is assigns to all
+2The specific classification principles of our diagnostic KG and ICD-11 are different.
+Our approach classifies and organizes diseases based on the similarity of their man-
+ifestations, rather than the traditional classification of ICD-11 based on diagnostic
+categories. As a result, while the hierarchical concept is similar, the ICD-11 structure
+cannot be directly applied to our model.
+other diseases in the cluster, as shown in Equation 3:
+𝐸𝐿3 = C(𝐸𝐿3𝑟 𝑎𝑤 ,E), (3)
+where C represents the clustering model applied to 𝐸𝐿3, E is an
+embedding model.
+Then we use the unified 𝐸𝐿3 to construct a four-tier hierarchical
+disease knowledge graph through hierarchical aggregation. This
+graph integrates the relationships between diseases and their po-
+tential categories, with each disease aggregated into a subcategory
+and category [70, 72]. We define the disease knowledge graph as
+G𝐷 where G𝐷 ⊂G aggregated by Θ and LLM Mℎ, as shown in
+Equation 4:
+G𝐷 = Θ(𝐸𝐿𝑖,Mℎ,E),𝑖 = 3, 2. (4)
+In the first phase, we apply LLM-based topic aggregation using
+Mℎ, which extracts the most relevant topics from 𝐸𝐿3 to aggregate
+subcategories. These subcategory topics are then further aggregated
+into higher-level categories, forming the hierarchical structure from
+subcategories to broader categories. Next, hierarchical clustering
+is applied to assign diseases in 𝐸𝐿3 into aggregated subcategory
+topics and then subtopics to topics.
+This approach leverages LLM’s powerful semantic understand-
+ing and topic extraction capability, allowing for a more nuanced
+categorization of diseases in topic aggregation. By applying hier-
+archical clustering to the LLM-based topics, diseases in 𝐸𝐿3 are
+aggregated into a hierarchical structure. Hierarchical aggregation

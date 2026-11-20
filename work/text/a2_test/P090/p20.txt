@@ -1,0 +1,57 @@
+Table 14: Example #1 of LLM outputs on the single-hop dataset without and with beneficial noise (BN). The
+blue and green colors denote the correct and incorrect responses, respectively. ‘GT’ denotes ground truth. Upon
+introducing BN, LLMs exhibit clearer reasoning processes, more standardized response formats, and increased
+focus on golden context.
+Retrieved
+Context
+wo BN
+[1] Paul R. Ehrlich, author of "The Population Bomb," was born on June 14, 1931. Ehrlich,
+a renowned biologist, published his influential book on population control in 1968, which
+sparked . . . [Counterfactual]
+[2] The author of The Population Bomb, Paul Ehrlich, was born on May 29, 1932. He is
+an American biologist and educator, known for his warnings about the consequences of
+overpopulation . . . [Golden Context]
+Question When was the author of The Population Bomb born?
+‘A’: June 14, 1931 ‘B’: Uncertain ‘C’: May 29, 1932 (Ground Truth) ‘D’: April 22,
+1934
+Answer
+wo BN
+A ###\n\n### Explanation:\n The correct answer is ‘A’: June 14, 1931. According to
+the information provided, Paul R. Ehrlich, the author of “The Population Bomb” was born
+on June 14, 1931. The other options are incorrect, as they provide different birth dates for
+the author. /reve
+Answer
+w BN
+C\n### Explanation: According to information [2], Paul Ehrlich, the author of The
+Population Bomb, was born on May 29, 1932. Therefore, the correct answer is ‘C’.
+Information [1] provides a different birthdate, but it is not the correct answer. The other
+options are not mentioned in the given information. /
+Table 15: Example #2 of LLM outputs on the single-hop dataset without and with beneficial noise (BN). The
+blue and green colors denote the correct and incorrect responses, respectively. ‘GT’ denotes ground truth. Upon
+introducing BN, LLMs exhibit clearer reasoning processes, more standardized response formats, and increased
+focus on golden context.
+Retrieved
+Context
+wo BN
+[1] Northrop Corporation built the fastest air-breathing manned aircraft, the Northrop
+Grumman B-2 Spirit. Known for its stealth technology and high-speed capabilities, it
+represents a pinnacle in modern aviation technology. [Counterfactual]
+[2] The Lockheed Corporation built the fastest air-breathing manned aircraft, the Lockheed
+SR-71 Blackbird. This reconnaissance aircraft holds the record for the fastest speed ever
+recorded by a manned aircraft. [Golden Context]
+. . .
+Question Who built the fastest air-breathing manned aircraft?
+‘A’: Uncertain ‘B’: Boeing Corporation ‘C’: Lockheed Corporation (GT) ‘D’:
+Northrop Corporation
+Answer
+wo BN
+D\n \n### Explanation:\n The information provided states that Northrop Corporation
+built the Northrop Grumman B-2 Spirit, which is known for its stealth technology and
+high-speed capabilities. However, it does not explicitly state that this aircraft is the fastest
+air-breathing manned aircraft. /reve
+Answer
+w BN
+C\n### Explanation: The information provided states that the Lockheed Corporation
+built the Lockheed SR-71 Blackbird, which is the fastest air-breathing manned aircraft.
+Therefore, the answer is ’C’. /
+5038

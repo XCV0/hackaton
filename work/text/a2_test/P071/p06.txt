@@ -1,0 +1,85 @@
+Figure 4: End-to-end development and evaluation work-
+flow.
+4.2 Models
+We evaluate a diverse set of Arabic-centric and mul-
+tilingual instruction-tuned LLMs under a unified
+prompting and grading setup (Table 3). Our Arabic-
+centric baselines include Fanar-1-9B and Fanar-2-
+27B (Team et al., 2025), ALLaM-7B (Bari et al.,
+2025), AceGPT-v2-8B (Liang et al., 2024), and
+SILMA-9B-v1.0 (silma-ai, 2024). We additionally
+benchmark multilingual models spanning multiple
+families, including Qwen2.5-3B and Qwen3 vari-
+ants (Qwen3-4B-2507, Qwen3-8B, Qwen3-14B)
+(Yang et al., 2025), Llama-2-7B and Llama-3.1-
+8B (Touvron et al., 2023; Grattafiori et al., 2024),
+Mistral-7B-v0.2 (Jiang et al., 2023), SeaLLM-7B-
+v3 (Zhang et al., 2025), EuroLLM-9B (Martins
+et al., 2025), and gpt-oss-20b (OpenAI et al., 2025).
+4.3 Base LLMs
+We evaluate all base models under a zero-shot in-
+ference setup. To ensure fair comparison and re-
+producibility, we use a consistent prompt, response
+format, maximum output token limits, and decod-
+ing hyperparameters across all evaluations.
+4.4 SFT
+As shown in the LLM training stage of Figure 4, we
+perform supervised fine-tuning using 25,000 Ara-
+bic instruction-response pairs (SFT Reasoning; Ta-
+ble 1). Training uses a standard next-token predic-
+tion objective over the target responses to improve
+understanding of Islamic knowledge concepts, co-
+herence in multi-step reasoning, and adherence to
+source-grounded answer generation. In this setup,
+we fine-tune Fanar-1-9B, ALLaM-7B, and Qwen3-
+4B-2507.
+4.5 Reward-guided Alignment
+To further reduce hallucinations and improve an-
+swer appropriateness in religious settings, we per-
+form reward-guided alignment using a bilingual
+(Arabic and English) RL Preference dataset of
+5,000 samples (Table 1). Each instance contains a
+question derived from canonical material, a gold-
+standard answer, and evaluation parameters en-
+abling scalar reward assignment. We employ an
+LLM-as-a-judge within the training loop to pro-
+duce a score reflecting factual accuracy, clarity,
+completeness, and appropriateness of candidate
+answers. This score is then used as the reward
+signal for policy optimisation using GSPO loss
+(Zheng et al., 2025), encouraging the model to fa-
+vor grounded, high-quality generations and discour-
+aging unsupported claims. The prompt for scoring
+is provided in Appendix A.4. In our reward-guided
+alignment experiments, we train the generation
+models Fanar-1-9B, ALLaM-7B, and Qwen3-4B-
+2507 using GSPO-based RL, while Qwen3-235B-
+A22B is used to generate the reward score.
+Example: Islamic Jurisprudence
+Question (EN): When does the time for Fajr prayer begin?
+Gold answer (EN): The time for Fajr prayer begins at true
+dawn.
+Model: Qwen3-4B + RAG
+Predicted answer (EN): Fajr begins at dawn, i.e., sunrise
+time when daylight starts to appear.
+Judge: Incorrect
+Model: Qwen3-4B + Agentic RAG
+Predicted answer (EN): Fajr begins at true dawn (al-fajr
+al-¯s¯adiq), i.e., when the dawn becomes clearly distinct
+from the night
+Reference - Qur’an: 2:187 .
+Judge: Correct
+Figure 5: Example from ISLAMICFAITHQA in Islamic
+Jurisprudence, which shows a question, the atomic gold
+answer, and models’ (RAG, Agentic RAG) predictions.
+4.6 RAG and Agentic RAG
+Figure 4 contrasts single-shot retrieval augmenta-
+tion in standard RAG with tool-mediated evidence
+seeking in Agentic RAG.
+Standard RAG. In the standard RAG setting, a
+user query is first used to retrieve relevant Quranic
+verse units from an indexed corpus, and the model
+then conditions on this retrieved context to gen-
+erate an answer with citations. For all retrieval-
+6
+26474

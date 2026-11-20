@@ -1,0 +1,104 @@
+of tokens with actual meaning in the preceding text.
+Using an average function can dilute the high cor-
+relation information in sj due to fragment length.
+Therefore, we use a maximum function to aggre-
+gate the correlation vectors:
+Wsa,i,s∗,j =
+
+
+
+max
+w∈sc,j
+( 1 |Esa,i | ∑ e∈Esa,i ⃗re,w)
+sa,i ∈ Sa, sc,j ∈ Sc
+max
+w∈sa,j
+( 1 |Esa,i | ∑ e∈Esa,i ⃗re,w)
+sa,i, sa,j ∈ Sa, i > j
+0 sa,i, sa,j ∈ Sa, i ≤ j
+(4)
+where ⃗re,w represents the element associated with
+token w in the vector corresponding to entity e in
+the matrix Ri. s∗,j serves as a generalized expres-
+sion for sa,j or sc,j . If the entity consists of multi-
+ple tokens, the average of the vectors correspond-
+ing to these multiple entities is taken. Through this
+step, we can obtain the semantic-level correlation
+matrix W ∈ Rna×(nc+na), where each element
+Wi,j represents the influence degree of the jth se-
+mantic fragment on the ith. As shown in Fig. 2,
+since subsequent semantic segments do not have
+an attributive influence on preceding semantic seg-
+ments, this matrix is a lower triangular matrix from
+column na to column nc + na.
+The internal reasoning graph G = {V, E} is
+a directed graph that faithfully reflects the depen-
+dency relationships between semantic fragments
+during the internal inference process of the model.
+The nodes of the graph, V = Sc ∪ Sa, represent
+the semantic fragments obtained from the previous
+context. The edges are associated through the at-
+tribution scores between semantic fragments. The
+weight of each edge is the normalized attribution
+score. Based on the semantic-level correlation ma-
+trix, we propose two methods for constructing intra-
+inference graphs:
+Top k method This strategy first ranks the at-
+tribution scores calculated for the target semantic
+fragments from highest to lowest, then selects the
+top k fragments as the source, and inserts edges
+from the source to the target semantic fragments in
+the graph. The set of incoming edges for node sa,j
+can be represented as:
+Ea,j = {(s∗,i, sa,j )|T opk(Wsa,j ,s∗,i ), s∗,i ∈ V }
+(5)
+Adaptive Method The distribution of attribution
+scores calculated often exhibits a long-tail char-
+acteristic. To select edges adaptively, we arrange
+the attribution scores in descending order and cal-
+culate the discrete gradient of the sequence. The
+maximum discrete gradient point is used to distin-
+guish between important and unimportant source
+semantic fragments. Assuming that v1 ≥ v2 ≥
+· · · ≥ vnc+na is the non-increasing ordering of
+elements in Wsa,i , where each v1 is mapped one-to-
+one with s∗,i using the function f (·), then the set
+of incoming edges for node sa,j can be represented
+as follows:
+m = arg max
+1≤i≤nc+na−1
+(Wsa,j ,f (vi) − Wsa,j ,f (vi+1))
+Ea,j = {(s∗,i, sa,j )|s∗,i ∈ f (vk), 1 ≤ k ≤ m}
+(6)
+The union of the incident edge sets of all nodes
+forms the edge set E = {Ea,j |1 ≤ j ≤ na}.
+3.4 Hallucination Discrimination
+As depicted in Fig. 1, in the attribution nodes of
+hallucinated semantic fragments, a higher propor-
+tion of attribution is allocated to the previous se-
+mantic fragment answered by the model; whereas
+the attribution nodes of non-hallucinated semantic
+fragments tend to be more related to the contex-
+tual corpus provided by the user, indicating that
+they are more faithful to the context provided by
+humans. Therefore, an important reason for the
+occurrence of hallucination is that the model treats
+the next generated semantic fragment as linking
+content, rather than as substantive content.
+To enable the model to discover the attribution
+distribution differences and semantic differences
+in these contextual dependencies, we linearize the
+inference graph into multiple semantic combina-
+tions. Specifically, for each semantic fragment sa,j
+answered by the model, we concatenate all its in-
+coming edges to form a prompt, and feed it into
+a pre-trained language model (PLM) to obtain the
+label la,j :
+la,j = P LM ({s∗,i|s∗,i ∈ Ea,j } ⊕ sa,j ) (7)
+In this paper, we utilize the ALIGNSCORE (Zha
+et al., 2023), which is based on the RoBERTa archi-
+tecture (Liu et al., 2019), as the PLM for training,
+and employ its binary classification inference head
+for hallucination discrimination. ALIGNSCORE
+has undergone pretraining on a vast amount of data,
+27830

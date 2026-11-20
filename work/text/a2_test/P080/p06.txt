@@ -1,0 +1,101 @@
+are not suitable for decomposition. Then given
+a random T ∈ T , we apply either row-wise or
+column-wise splitting.
+• Row-wise Splitting: Formally, we divide the ta-
+ble entries E into n disjoint sets, i.e., E =⋃n
+i=1 Ei with Ei ∈ RNi×M and ∑n i=1 Ni = N .
+After processing table entries, we maintain each
+sub-table with the same table schema and meta-
+data as the original table.
+• Column-wise splitting: Given that relational ta-
+bles often have a column-major logical struc-
+ture, we retain the first column entry c1 (typ-
+ically the primary key or leading attribute) in
+all sub-tables. Then the original table entries
+can be rewritten as E = [c1, E′]. The rest of
+the entries E′ are decomposed into m disjoint
+sets, i.e., E′ = ⋃m j=1 E′ j with E′ j ∈ RN ×Mj
+and ∑m j=1 Mj = M − 1. The overall table en-
+tries splitting column-wise are given by E =⋃m
+j=1
+(
+[c1, E′ j ] ) . We then separate column head-
+ers corresponding to each sub-table entry and
+maintain other components the same as the origi-
+nal table.
+Debiasing and Diversification. To mitigate po-
+tential biases in retrieval evaluation, particularly
+those introduced by sub-tables sharing identical
+content from the same root table, we apply a
+twofold debiasing strategy. First, we paraphrase
+the captions of all sub-tables derived from the same
+source table to reduce textual redundancy and se-
+mantic overlap. Second, we randomly permute the
+column or row order within each sub-table to en-
+courage structural diversity. Third, we balance the
+number of sub-tables produced by row-wise and
+column-wise partitioning to ensure a fair distribu-
+tion across different splitting strategies. This pro-
+cess enhances the robustness and diversity of the
+dataset without incurring additional human annota-
+tion costs or relying on model-generated synthetic
+data, eliminating unintended evaluation biases.
+4.2 Query Combination
+To further increase retrieval complexity and sup-
+port multifaceted information needs that require se-
+quential reasoning, we adopt a simple yet effective
+composition strategy that integrates existing atomic
+queries into more complex, multi-step queries.
+Query Sources. We first collect over 150k raw
+queries associated with the aforementioned single-
+table sources. Typically, each table is accompanied
+by 1 to 8 user queries. Importantly, these questions
+are sourced from real-world question-answering de-
+ployment systems or annotated by human experts
+(e.g., via the Amazon Mechanical Turk platform
+(Chen et al., 2020, 2019)), rather than being syn-
+thetically generated.
+Query Combination. We then filter out vague
+and context-repetitive queries using common lin-
+guistic and context-aware heuristics (Cao et al.,
+2008; Van Rooij, 2011). Specifically, we apply
+techniques such as stopword ratio analysis, mini-
+mum query length thresholds, and similarity-based
+redundancy detection to refine the dataset. This
+process results in a curated set of over 80k high-
+quality queries. After that, for these multifaceted or
+sequential queries originally from the same single
+table, we utilize connecting words (e.g., “AND”,
+“Furthermore”, “Based on [previous query]”) to
+merge them into a single, extended query. This pro-
+cess results in a final set of 25k combined queries.
+Query Decontextualization. We observe that
+many original queries,especially those tied to a
+single table, often rely heavily on implicit contex-
+tual cues, rendering them unsuitable for standalone
+retrieval. To enhance clarity and ensure that queries
+are fully self-contained, we follow the decontextu-
+alization strategies proposed by Chen et al. (2020)
+and Choi et al. (2021). Specifically, we replace
+ambiguous discourse markers and demonstrative
+pronouns with explicit noun phrases or entity refer-
+ences, resulting in clearer and context-independent
+queries to support open-domain retrieval settings.
+Utilization. In our experiments, we first ran-
+domly select 3,000 queries along with their ground-
+truth answers as "example queries" and pair them
+with their corresponding tables in the constructed
+table corpora. These selected queries are incorpo-
+rated into the table metadata for data augmentation
+and example-based demonstration purposes. We
+then randomly select 1,000 queries for each of the
+three task types to form the testing set.
+5 Empirical Evaluations
+In this section, we provide comprehensive eval-
+uations of our proposed framework T-RAG. We
+demonstrate that T-RAG exhibits superior perfor-
+mance on both cross-table information retrieval and
+downstream tabular reasoning.
+Baselines. To rigorously assess the effectiveness
+of our method, we compare each component of our
+38138

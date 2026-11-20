@@ -1,0 +1,93 @@
+Split Task Dataset Metric Raw Filtered
+Training
+Open-Domain QA
+Commonsense QA (2019) Accuracy 4,000 3,037
+Math QA (2019) Accuracy 4,000 3,509
+Web Questions (2013) Accuracy 3,578 1,810
+Wiki QA (2015) Rouge-L 840 840
+Yahoo! Answers QA Rouge-L 4,000 4,000
+MARCO QA (2016) Rouge-L 4,000 4,000
+Reasoning
+Algebra QA with Rationales (2017) Accuracy 2,527 2,222
+Explanations for CommonsenseQ (2021) Accuracy 4,000 3,202
+Grade School Math 8K (2021) Accuracy 4,000 3,090
+StrategyQA (2021) Accuracy 1,860 925
+Evaluation Open-Domain QA
+Natural Questions (2019) Accuracy 2,837 -
+HotpotQA (2018) Accuracy 5,600 -
+TriviaQA (2017) Accuracy 5,359 -
+PopQA (2023) Accuracy 3,000 -
+ASQA (2022) STR-EM 948 -
+MARCO QA (2016) Rouge-L 3,000 -
+Table 6: Data Statistics.
+Method NQ HotpotQA TriviaQA Avg.(acc) (acc) (acc)
+MiniCPM3-4B
+Vanilla RAG 42.51 24.93 80.91 49.45
+RankCoT (Not Aligned) 48.78 33.13 85.20 55.70
+RankCoT (Aligned) 45.68 27.52 79.21 50.80
+Qwen2.5-14B-Instruct
+Vanilla RAG 47.66 29.70 79.49 52.28
+RankCoT (Not Aligned) 49.98 33.91 86.68 56.86
+RankCoT (Aligned) 52.17 37.34 86.49 58.67
+Table 7: Overall Performance of the RankCoT Model
+with and without Backbone Model Alignment in the
+RAG System. “Not aligned” refers to using Llama3-
+8B-Instruct as the backbone model while applying
+RankCoT to RAG systems built with MiniCPM3-4B
+or Qwen2.5-14B-Instruct. “Aligned” refers to using
+consistent backbone models, either MiniCPM3-4B or
+Qwen2.5-14B-Instruct, throughout the RankCoT and
+RAG components.
+A.4 Additional Experimental Details
+In this subsection, we first describe the process of
+constructing the training data and then show the
+prompt templates used in our experiments.
+Data Preprocessing for RankCoT. The quanti-
+ties of our training and evaluation data, along with
+the corresponding evaluation metrics, are presented
+in Table 6. The “Filtered” column indicates the
+number of training samples used for DPO training.
+During RankCoT training, we collect ten
+datasets, obtain 32,805 samples, and process them
+as described in Section 3.2. Since the generated
+CoT can either be fully correct or incorrect, we can-
+not form preference data pairs from these generated
+CoT candidates. Thus, we filter out such samples
+and divide the remaining ones into training and
+validation datasets with a 9:1 ratio.
+Prompt Templates. The prompts used for CoT
+generation (InstructCoT) are shown in Figure 6(a).
+The prompt used for question answering is illus-
+trated in Figure 7. Additionally, the prompts used
+for CoT refinement (InstructRef) are shown in Fig-
+ure 6(b). Finally, Figure 8 presents the prompts
+used for implementing baselines.
+A.5 Evaluating RankCoT under Aligned
+Parameter Scales in RAG Systems
+Although RankCoT (Llama3-8B-Instruct) can be
+applied to various RAG systems implemented with
+LLMs of different scales and demonstrates its effec-
+tiveness, the performance gains may diminish when
+larger-scale LLMs are used as the generation mod-
+els in RAG systems. This is because larger LLMs
+inherently possess stronger knowledge refinement
+capabilities. To assess the impact of model scale
+on RankCoT, we conduct experiments by aligning
+the parameter scales of both the RAG models and
+the RankCoT model.
+As shown in Table 7, we compare two variants
+of RankCoT: one without alignment and one with
+alignment. Both variants implement RankCoT us-
+ing either Llama3-8B-Instruct or the same LLMs
+employed by the corresponding RAG models.
+The results demonstrate that when Qwen2.5-14B-
+Instruct is used consistently across components, the
+knowledge refinement process is more effective,
+leading to improved answer accuracy. In contrast,
+aligning all components with MiniCPM3-4B re-
+sults in lower overall performance compared to the
+unaligned setting. This outcome is expected, as the
+unaligned setting leverages Llama3-8B-Instruct for
+knowledge refinement, which benefits from a larger
+model size and stronger refinement capabilities.
+12869

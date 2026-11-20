@@ -1,0 +1,115 @@
+than 100 nm, the scattering efﬁciency only increases slightly, as
+there is a broadening and dampening of the resonant Qscat peaks.
+Nevertheless, a scattering efﬁciency value over 50% is an indica-
+tion that the scattering cross section is overcoming absorption.
+In ultrathin devices, the optical losses become more predomi-
+nant for wavelength values over 600 nm.[17] Thus, for an efﬁcient
+plasmonic architecture, it is desired to attain a scattering efﬁ-
+ciency value higher than 50% in an optical window between
+600 nm and the absorber bandgap wavelength value, which is
+only ensured for diameter values equal to or above 100 nm.
+Furthermore, in previous works, the integration of spherical
+NPs with diameters values between 150 and 200 nm at the
+absorber rear has hampered the optoelectronic performance of
+ultrathin devices.[46] Consequently, to ensure a high scattering
+efﬁciency and uncompromised device electrical performance,
+the NP diameter value is a key parameter. Considering that
+for diameter values higher than 120 nm the scattering
+efﬁciency only improves slightly, a NP diameter range of
+100–120 nm was deemed optimal for the effective integration
+of plasmonic NPs within the line contact Al2O3 passivation
+scheme at the rear contact of ultrathin devices. For an efﬁcient
+scattering substrate, it is additionally important to ensure the
+deposition of individualized metallic NPs with minimal aggre-
+gates along with sufﬁcient surface coverage.[66] The aforemen-
+tioned requirements are essential to attain a controlled and
+strong scattering resonance, as the aggregation of metallic
+NPs leads to a broadening and weakening of the plasmon
+resonance, while the surface coverage inﬂuences the substrate’s
+scattering efﬁciency.[37,66] Therefore, for the NPs synthesis, a
+hydroxylamine seeding growth procedure was followed to
+attain uniform 100–120 nm NPs.[67] A microﬂuidic device-based
+deposition process that ensures a slow solvent evaporation was
+adapted for the deposition of individualized metallic NPs on an
+ultrathin solar cell substrate.[68] Deposition process optimiza-
+tions were performed to increase the NPs surface coverage and
+consequently an improved scattering performance. Following the
+NPs synthesis and deposition optimization, those were encapsu-
+lated within the Al2O3 passivation line contact scheme for the
+integration in an ultrathin (Ag,Cu)(Ga,In)Se2 (ACIGS) device.
+Adding Ag to the CIGS compound lowers the absorber melting
+point, allowing for larger grains. It has been suggested that it will
+enable a lower defect density within the absorber and reduced
+surface roughness, which may facilitate the integration of struc-
+tured rear contacts.[69,70] The plasmonic and passivated approach
+allows for coupling the optical gains from the NPs with the
+electrical ones arising from the integration within a passivation
+scheme that has been successfully developed for ultrathin
+devices.[20,23,27]
+2.2. Nanoparticles Synthesis
+To obtain a 100–120 nm Au NPs solution, a two-step approach
+was used. First, a NPs seed solution (Seed NPs) was synthesized
+following the Turkevich method[71]; then, the seeds were subse-
+quently grown (Grown NPs) following a hydroxylamine seeding
+procedure.[67] The hydroxylamine favors the Au ions reduction at
+the NPs surface, therefore, effectively using the Seed NPs as a
+growth template and avoiding new nucleation sites, enabling
+solutions with better dispersity for diameters as large as
+200 nm, in comparison to a one-step synthesis process.[67]
+Transmission electron microscopy (TEM) analysis was con-
+ducted to evaluate the average size and dispersity of the
+Grown NPs solution, Figure 2a. Besides spherical NPs, a nano-
+rod population is also present in the TEM image, which has been
+previously reported in hydroxylamine seeding processes to
+obtain large NPs (diameter > 40 nm).[67,72,73] The percentage
+of nanorods in the total NP population was estimated by evalu-
+ating the number of particles that have an aspect ratio higher
+than 1.3, and a percentage of 10.3% was found. The metallic
+NPs geometry strongly affects the plasmonic resonance, particu-
+larly the resonant wavelength value.[58] In the particular case of
+nanorods, as a result of the anisotropic shape of these NPs, mul-
+tiple dipole resonant modes at distinct wavelength values are
+present: transverse mode, the electron oscillations are perpendic-
+ular to the nanorod long axis; and the longitudinal mode, which
+corresponds to charge oscillation along the nanorod length.[58]
+Thus, the plasmonic behavior may be impacted due to the pres-
+ence of different NP populations. The diameter of 1300 spherical
+NPs (aspect ratio < 1.3) was measured with the size distribution
+histogram presented in Figure 2b. The spherical Grown NPs
+have a modal distribution with an average diameter of 105 nm
+and a standard deviation of around 12 nm, which encompasses
+a diameter value within the desired range to attain an optical
+improvement without degrading the electrical performance of
+the solar cell device. To evaluate the impact of the presence of
+different NPs populations on the resonant conditions of the
+developed solution, the ideal absorbance of a solution containing
+only spherical NPs with an average diameter of 105 nm was sim-
+ulated. To do so, the extinction cross section of a 105 nm spheri-
+cal NP was ﬁrst simulated through the FDTD method. The
+simulated extinction coefﬁcient (σext), was used to calculate the
+ideal absorbance (A(λ)) through Equation (1).[74]
+AðλÞ¼N /C3 L /C3 σext
+lnð10Þ (1)
+where N is the NPs density (m/C03) and L is the solution path
+length. The simulated absorbance is presented in dashed in
+Figure 2c and is compared to the relative absorbance spectra
+obtained for the Grown NPs solution. The simulated peak is
+sharper and more intense compared to the experimental one,
+which is expected as only one size is considered for the per-
+formed simulation and experimentally there is a standard devia-
+tion of 12 nm. Nonetheless, the resonant peak matches with the
+one obtained experimentally, effectively demonstrating that the
+spherical NPs with an average diameter of 105 nm are dominat-
+ing the plasmonic response of the synthesized solution.
+2.3. Deposition Process Optimization
+To achieve a controlled resonance, the use of individual NPs is
+essential. For that purpose, the NPs deposition requires a
+method that allows for a gradual solvent evaporation, providing
+sufﬁcient time for the NPs to settle without irreversibly adhering
+together.[75–77] Thus, a microﬂuidic approach was explored
+and optimized herein, following the work developed by
+Teixeira et al.[68] The deposition process involves using a
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2024, 8, 2400147 2400147 (4 of 15) © 2024 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2024, 11, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400147, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

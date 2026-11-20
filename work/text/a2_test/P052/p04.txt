@@ -1,0 +1,79 @@
+Figure 1: LawInForce-eCFR is constructed from versioned eCFR/CFR text by mining real amendments, extracting
+threshold changes, verifying deterministic answer flips, validating pairs by humans, and generating controlled QA
+instances.
+QA type Operative date Citation given
+Old cited old-date Yes
+New cited new-date Yes
+Old uncited old-date No
+New uncited new-date No
+Table 2: Each amendment pair yields four QA instances,
+crossing the applicable version date with whether the
+question explicitly cites the legal authority.
+old version’s validity interval; the new-date ques-
+tions use an operative date during the new version’s
+validity interval. The fact value is held constant
+across the old and new variants so that the legal
+answer flips because the governing rule changes,
+not because the facts change.
+Cited variants include an authority cue such as
+a citation or section reference. They test whether
+a system can select the correct version when the
+legal neighborhood is mostly known. Uncited vari-
+ants omit that cue and require the retriever to infer
+the authority from the factual description and legal
+context. Together, the two forms distinguish au-
+thority identification from version selection within
+a known authority.
+3.4 Human validation
+Human validation removes cases where determin-
+istic matching is not enough. Our checklist verifies
+rule equivalence between old and new text, a sin-
+gle numeric threshold change, unit compatibility,
+comparator clarity, and deterministic answer flips,
+and rejects transition clauses, retroactivity, tolling,
+exceptions, and non-deterministic drafting changes.
+The 94% acceptance rate reflects that rule-based
+filters remove most unsuitable candidates before
+human review. Appendix A gives the checklist and
+field schema.
+All 805 amendment pairs were independently
+reviewed by two annotators using the valida-
+tion checklist. The annotators achieved 95.28%
+agreement; disagreements were discussed, with
+unresolved cases adjudicated by a third experi-
+enced annotator. The same dual-annotation and
+disagreement-resolution procedure was used for
+error-taxonomy annotation.
+3.5 Benchmark purpose
+LawInForce-eCFR is a diagnostic benchmark, not
+a comprehensive model of legal advice. Its purpose
+is to stress a failure mode that ordinary relevance
+evaluation can hide. A system receives credit only
+when it retrieves evidence that is authoritative, tem-
+porally valid, and answer-supporting. This makes
+the benchmark useful for measuring whether re-
+trieval systems can distinguish legally applicable
+text from plausible but invalid nearby versions.
+4 AuthorityFirst-RAG: A Diagnostic
+Retriever
+4.1 Method overview
+AuthorityFirst-RAG is a transparent authority-first
+retrieval procedure. We do not present it as a univer-
+sal neural retriever or as a deployable legal search
+engine. Instead, it is designed to test which legal-
+structural signals matter for law-in-force retrieval.
+The pipeline first extracts query structure, then iden-
+tifies candidate authorities, applies temporal scop-
+ing, retrieves within the candidate authority scope,
+and finally ranks passages by rule-support signals.
+AuthorityFirst-RAG is implemented with deter-
+ministic rule-based parsing and heuristic feature-
+based ranking rather than a learned retriever. Ci-
+tation cues, operative dates, fact values, units, and
+comparator signals are extracted using regular ex-
+pressions and rule-based normalization. After tem-
+poral filtering, ranking combines authority/citation
+match, BM25 relevance, lexical overlap, thresh-
+old/unit compatibility, and comparator cues; no
+learned parameters are used.
+882

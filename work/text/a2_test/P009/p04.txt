@@ -1,0 +1,105 @@
+22
+B-1. Information Organization: PT-RAG deter-
+mines topic categories (e.g., music, travel) for
+each candidate, and organizes all candidates
+within their respective categories.
+B-2. Interest and Knowledge Estimation:
+After each interaction, PT-RAG estimates
+the user’s interests and knowledge of each
+category based on the conversation history.
+B-3. Information Retrieval: From the organized
+candidates, PT-RAG employs an LLM to re-
+trieve a topic that is both new and interesting
+to the user, considering their inferred interests
+and knowledge.
+C. Initial Utterance Generation: At the beginning
+of the next conversation, Topic-Initiator generates
+an initial utterance based on the topic retrieved by
+PT-RAG. It then uses this utterance to initiate the
+conversation, after which the process returns to
+Step A to continue the cycle.
+3.2. Personalized-Topic RAG (PT-RAG)
+PT-RAG is designed to retrieve a new and inter-
+esting topic for a user by leveraging LLM inference
+to identify a topic candidate that are absent from
+a user’s inferred knowledge (derived from previ-
+ously disclosed information). Because supplying
+a full dump of a user’s knowledge or the entire
+candidate pool is impractical given input-length
+and scale constraints, PT-RAG groups both user
+knowledge and candidates into topic categories
+(e.g., music, travel) and performs category-guided
+retrieval, providing the LLM only with category-
+relevant summaries and candidates.
+In this section, we ﬁrst deﬁne the task in Section
+3.2.1, then, describe ”Information Organization” in
+Section 3.2.2, ”Interest and Knowledge Estima-
+tion” in Section 3.2.2, and ”Information Retrieval”
+in Section 3.2.4.
+3.2.1. Terminologies and Task Deﬁnition
+Terminologies: Table 1 shows the notations used
+in the following explanations.
+Task: Our task is to identify an interesting and
+novel topic tj for a target user from the given topic
+candidate set T = {tj }J j=1, referring to the topic
+category set C = {cl}L l=1, the user’s interests set
+In = {im,n}M m=1 and the user’s knowledge set
+Kn = {kcl ,n}L l=1. Here, n represents the number
+of completed conversations with the target user.
+In and Kn are estimated from the given history of
+the n-th conversation with the user.
+Notation Deﬁnition
+T Set of topic candidates
+tj Individual topic candidate in T (j =
+1, . . . , J)
+C Set of topic category
+cl Individual topic category in C (l =
+1, . . . , L)
+ctj ,l Individual topic category of tj
+In Set of a target user’s interests at the
+end of the n-th conversation
+im,n Individual interest data in In (m =
+1, . . . , M )
+Kn Set of a target user’s knowledge at the
+end of the n-th conversation
+kcl ,n Individual knowledge data for cl
+hn History of the n-th conversation with the
+target user
+fR Function that retrieves an interesting
+and novel topic tj
+fC Function that creates or updates C
+fI Function that estimates In
+fK Function that estimates kcl ,n
+Table 1: Terminologies used in PT-RAG.
+This task is formulated as follows:
+tj = fR(In, Kn, C ′, T ), where (1)
+C ′ = fC (tj , C), (2)
+In = fI (hn, In−1), (3)
+kcl ,n = fK (hn, kcl ,n−1). (4)
+Here, C ′ is iteratively redeﬁned from the previous
+state C by incorporating an additional category,
+and is therefore dynamic. To maintain readabil-
+ity, we omit explicit counters (e.g., Ci) for these
+redeﬁnitions.
+Details of this task are explained below: Equa-
+tion (1) takes the outputs of Equations (2)–(4) and
+computes the topic tj , which is used when the
+system initiates a conversation with the user. De-
+tails are provided in Section 3.2.4. Equation (2)
+presents that PT-RAG creates or updates the topic
+category set C by analyzing each topic candidate
+tj . That is, it estimates one or more topic cate-
+gories {ctj ,l}l of tj and adds or merges them to C,
+thereby updating C to C ′. Equation (3) presents
+that the user’s interests In are estimated from the
+history of the n-th conversation hn. If a previously
+estimated interest In−1 exists, it is updated into
+In based on hn. Additionally, hn is also orga-
+nized into C. Equation (4) presents that the user’s
+knowledge kcl ,n ∈ Kn is estimated based on hn
+when the category of hn is cl. If there is previ-
+ously estimated knowledge kcl ,n−1, it is updated
+into kcl ,n based on hn. Equation (1) presents that
+PT-RAG retrieves a topic candidate tj from T that
+aligns with In but is not yet represented in Kn,
+referring to the created or updated C ′. The pro-

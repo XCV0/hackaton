@@ -1,0 +1,34 @@
+Original Query:
+다음은 한국의 문화와전통에대한 문제이다.
+제사에서가족이 하는 행동은 무엇인가?
+A:조상에게절을 두 번 한다
+B:조상에게절을세 번 한다
+C:조상에게절을 한 번 한다
+D:조상에게절을 네 번 한다
+The following is a question about Korean culture and traditions. What do family members do during Jesa
+A: Bow twice to the ancestors
+B: Bow three times to the ancestors
+C: Bow once times to the ancestors
+D: Bow four times to the ancestors
+Answer: A
+Retrieved Documents from Call
+Document 1: 한국의제사(韓國의祭祀)는 크게 천지신명을 비롯한 자연물에 드리는제사와
+조상에게 드리는제사로 나뉜다. ...
+Korean Jesa (ancestral rites) is broadly categorized into rites performed for nature, including the gods of heaven and earth,
+and rites performed for ancestors. ...
+Document 2: La première partie de la célébration du dol est la prière. ...
+The first part of the Dol celebration is prayer. ...
+Document 3: ... ## 한국의제사 ... ## 힌두교의제사 ...
+... ## Korean Jesa ... ## Hindu rites ...
+Document 4: ### Social folk customs in daily life ...
+Document 5: ... Charye is one of the ancestral memorial rites celebrated during Chuseok, ...
+Retrieved Documents form CORAL
+Document 1: ...제주가 두 번 절한다. ...
+... The chief mourner bows twice. ...
+· · ·
+Figure 8: Planner Critique Example for Retrieved Documents. Qualitative comparison of retrieved evidence for
+a culturally grounded Korean query (jesa bowing practice). Retrieval over the unified corpus Call produces mostly
+superficial or tangential documents, reflecting substantial noise from indiscriminate corpus expansion. In contrast,
+CORAL routes retrieval to a linguistically and culturally aligned Korean document that explicitly describes the jesa
+procedure, including the correct two-bow ritual, enabling access to precise procedural knowledge needed to answer
+correctly.

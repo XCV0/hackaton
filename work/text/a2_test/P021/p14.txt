@@ -1,0 +1,88 @@
+A.2 Human Alignment
+In section 6, we explored how human and auto-
+matic metrics correlate when evaluating predic-
+tions. In this section, we breakdown how we set up
+and generated predictions.
+WIKIVIDEO-25 (MAGMaR Shared Task) The
+MAGMaR shared task releases its submissions and
+a set of human evaluations. These human evalua-
+tions are a scalar score for the quality of a predic-
+tion and an overall “best” system selection. We use
+their scalar score, as we also use a scalar score for
+our WIKIVIDEO annotations.
+WIKIVIDEO For WIKIVIDEO, we generate pre-
+dictions in three CAG (Martin et al., 2026a) settings
+across 10 topics.
+1. LLM Only. We generate a prediction with-
+out any information from the videos. Then,
+every sentence is used to retrieve one video
+as a citation from the oracle video set using
+OmniEmbed (Ma et al., 2025).
+2. Oracle Video. We generate a prediction with
+the oracle video set. For sentences without
+citations, we retrieve a video from the ora-
+cle video collection using Video-ColBERT
+(Reddy et al., 2025).
+3. RAG. We first retrieve 5 videos from Mul-
+tiVENT2.0 (Kriz et al., 2025) with MM-
+MORRF (Samuel et al., 2025). Then we gen-
+erate a prediction with the set of videos in the
+same way as oracle generation.
+B MIRAGE ++
+In the main text, we present INFOF1 and CITEF1
+in their standard formulations. Here, we provide
+variations for single-source inference and weighted
+evaluation, and discuss the tradeoffs between refer-
+ence and collection precision.
+B.1 INFOF1
+B.1.1 Single-Source Precision
+Single-source precision is the more computation-
+ally feasible counterpart to the multi-source for-
+mulation. Instead of scoring a subclaim against
+all evidence, we compare the subclaim individu-
+ally against each item in the evidence and take the
+maximum score:
+precision(CP , R) = 1 |CP | ∑ c∈CP max d∈R s(c, d) (6)
+where d denotes any source of information. While
+single-source precision is more computationally
+feasible, it cannot evaluate any cross-source infer-
+ences made by a prediction system.
+B.1.2 Weighted Variations
+We use a notion of information importance to
+weight both precision and recall. For precision,
+information importance should be defined by the
+author of the prediction. For example, a human
+could annotate a ranked list of subclaims from most
+to least important, or a calibrated model (e.g., Jiang
+et al., 2025) could express confidence in the pre-
+dicted subclaims as their importance. For recall, in-
+formation importance should be defined by the eval-
+uation data or the consumer of the information—in
+practice, annotating each reference subclaim for its
+importance to the queried information need.
+We define Ii as the importance for a subclaim ci.
+Weighted precision is:
+precision(CP , R) = 1 |CP | ∑ ci∈CP s(ci, R) · Ii (7)
+For single-source inference:
+precision(CP , R) = 1 |CP | ∑ ci∈CP max d∈R s(ci, d) · Ii
+(8)
+Weighted recall is:
+recall(CR, P ) = 1 |CR| ∑ ci∈CR s(ci, P ) · Ii (9)
+B.1.3 Implementation Details
+We support two verification backends. For the
+CLUE verifier, we use the scalar prompts (Fig-
+ures 9, 10, 11) which return a continuous support
+score between 0 and 1, selecting the appropriate
+prompt based on document modality. With the
+scalar predictions we use a 0.5 threshold for sup-
+ported/not supported. For the zero-shot VLM ver-
+ifier, we use the binary yes/no prompts for video
+(Figure 6) and text (Figure 7) documents, and the
+subclaim-level prompt (Figure 8) for Reference Pre-
+cision. In both cases, Collection Precision verifies
+each predicted subclaim against each document in-
+dividually using single-source precision and takes
+the maximum score. Information Coverage uses
+the same prompts with the roles of prediction and
+reference reversed.
+40244

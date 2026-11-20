@@ -1,0 +1,113 @@
+model learns to resolve PRKI and mitigate VTKI
+through three specialized training objectives, thus
+improving its ability to generate accurate answers
+based on retrieved knowledge.
+Parametric-Retrieved Knowledge Selection.
+We begin by generating answers based solely on
+the model’s parametric knowledge, ˆyint = M(Q),
+and re-evaluate the same question with retrieved
+external knowledge, obtaining ˆyext = M(Q, P).
+After generating both outputs, we filter questions
+where the model produces correct answers exclu-
+sively using either internal or external knowledge,
+forming fine-tuning datasets Dint and Dext:
+
+
+
+ˆyint ̸= ˆyext,
+Dint = {(Qj , Pj )|ˆyint j = ˆygt j }|Q| j=1,
+Dext = {(Qi, Pi)|ˆyext i = ˆygt i }|Q| i=1.
+(8)
+Then, we fine-tune the model M on Dint and Dext,
+the training is guided by loss function LPRKI:
+LPRKI = −
+[ ∑
+(Qj ,Pj )∼Dint
+log M(ˆyint|Qj , Pj )+
+∑
+(Qi,Pi)∼Dext
+log M(ˆyext|Qi, Pi)
+]
+,
+(9)
+which encourages the model to prioritize the knowl-
+edge source that leads to correct answer generation,
+ensuring robustness in handling PRKI.
+Visual-Textual Knowledge Selection. The
+model computes the most relevant entry IDs
+independently using visual knowledge ˆI v =
+argmax rM(Q, V) and textual knowledge ˆI t =
+argmax rM(Q, T). The training datasets Dv and
+Dt are constructed by selecting samples as follows:
+
+
+
+ˆI v ̸= ˆI t,
+Dv = {(Qm, Pm)| ˆI v m = I gt m }|Q| m=1,
+Dt = {(Qn, Pn)| ˆI t n = I gt n }|Q| n=1.
+(10)
+Here, I gt denotes the ground-truth index for the
+most relevant entry. The model is then fine-tuned
+on Dv and Dt using:
+LVTKI = −
+[ ∑
+(Qm,Pm)∼Dv
+log arg max
+j∈{1,...,k}
+rM( ˆI v|Qm, Pj m)+
+∑
+(Qn,Pn)∼Dt
+log arg max
+i∈{1,...,k}
+rM( ˆI t|Qn, Pi n)
+]
+,
+(11)
+Dataset Train Val Test KB
+Enc-VQA 1M 13.6K 5.8K 2M Wiki
+InfoSeek 934K 73K 348K 100K Wiki
+Table 1: Statistics of datasets, including sample splits
+and their corresponding knowledge base sizes.
+where the loss function LVTKI enables the model to
+evaluate the reliability of visual and textual modal-
+ities and prioritize the more confident one, thereby
+mitigating VTKI induced by unimodal bias.
+Unified Answer Generation. We countinue
+training the model on Dv and Dt, applying Super-
+vised Fine-Tuning (SFT) with the loss function:
+LSFT = −
+[ ∑
+(Qm,Pm)∼Dv
+log M(ˆygt|Qm, PI v m )+
+∑
+(Qn,Pn)∼Dt
+log M(ˆygt|Qn, PI t n ) ] , (12)
+where LSFT is used to fine-tune the model, encour-
+aging it to generate accurate answers based on the
+ground-truth external knowledge.
+4 Experiments
+4.1 Datasets
+We evaluate our proposed CoRe-MMRAG on two
+large-scale knowledge-based VQA benchmarks:
+Encyclopedic VQA (Mensink et al., 2023) and
+InfoSeek (Chen et al., 2023). Both datasets con-
+tain diverse visual-textual queries requiring fine-
+grained entity knowledge, with explicit knowl-
+edge bases to ensure answer verifiability. Encyclo-
+pedic VQA (Enc-VQA) contains 221K (Qt, ˆygt)
+unique question-answer pairs distributed across
+16.7K fine-grained entities, where each question-
+answer pair is associated with up to five diverse
+instance images, resulting in 1M image-question-
+answer (Qv, Qt, ˆygt) triplets, while InfoSeek con-
+tains 1.3M (Qv, Qt, ˆygt) triplets corresponding to
+approximately 11K distinct entities. Detailed statis-
+tics for both data sets, including sample splits and
+knowledge base sizes, are shown in Table 1. Fol-
+lowing standard practice in EchoSight (Yan and
+Xie, 2024), we evaluate on Enc-VQA’s test set af-
+ter excluding two-hop questions, resulting in 4.7K
+test triplets. For InfoSeek, we report results on
+the validation split, which contains unseen entities
+(Unseen-E) and novel questions (Unseen-Q).
+32971

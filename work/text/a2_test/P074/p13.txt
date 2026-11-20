@@ -1,0 +1,29 @@
+Answer the encyclopedic question about the
+given image. Don’t mention the visual content of
+image in your output. Directly output the answer of
+the question according to the context. If the context
+does not contain the information required to answer
+the question, you should answer the question using
+internal model knowledge.
+{image}
+- Context: {}
+- Question: {}
+The answer is:
+A.5 Further Experimental Analysis
+Fine-grained analysis for InfoSeek: Table 9
+presents the accuracy results on the validation set
+of the InfoSeek dataset across different categories.
+From the results, we can observe that the model
+shows relatively better performance in handling
+time-related and numerical aspects. This may be
+due to the fact that answers for time or numerical
+queries are often more precise. In contrast, string-
+based questions tend to be more open-ended, where
+even high recall rates may not guarantee accurate
+responses.
+Class Total Time Number String
+Unseen Question Score 36.42 40.17 42.01 34.26
+Unseen Entity Score 33.81 51.06 34.15 32.63
+Table 9: Fine-grained analysis for InfoSeek based on
+zero-shot LLaMA-3-8B.
+41147

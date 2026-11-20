@@ -1,0 +1,48 @@
+Figure 2: CARAG. Modules cover retrieval, alignment, multi-agent reasoning, and prediction
+John Doe) are ill-suited for the financial domain,
+as they overlook the two most critical categories
+of information in earnings calls: time-varying dy-
+namics and causal claims. Statements like “this
+quarter’s profit margin declined sequentially” or
+“revenue increased due to our new product launch”
+are exactly the evidence analysts use to assess the
+value of a firm. To capture this information, we
+develop a Causal-Temporal Knowledge Graph
+(CTKG) populated by a dedicated large-language
+model.
+Compared to a simple event index or a time-
+series database, the unique advantage of the CTKG
+is that it not only stores events and metrics but
+explicitly captures causal relationships and tempo-
+ral dependencies between events. This structured
+semantics allows agents to perform deeper multi-
+hop reasoning. In contrast, traditional time-series
+databases merely store facts and lack the relational
+structure necessary for reasoning.
+A specialized Facts Extraction and Delegation
+Agent orchestrates the creation of facts by parsing
+unstructured text into structured output. A Fact is
+a 5-tuple: f = (s, q, τ, µ, ν), whereby s stands for
+ticker , q stands for quarter, τ is the fact’s type,
+µ is the financial metric and ν is its value. Each
+Fact is categorized by its nature–Result, Forward-
+Looking, Risk Disclosure, Sentiment, or Macro–and
+contains the specific metric (e.g., “Revenue”) and
+its Value. Specifically, Result facts capture a con-
+crete metric stated in an earnings-call transcript or
+financial statement. We use financial statements to
+supplement Result facts with quarter-over-quarter
+(QoQ) or year-over-year (YoY) change.
+Each Fact node is linked to its corresponding
+Ticker and Quarter nodes. As shown in the
+knowledge graph in the center of fig. 2, the His-
+toric Performance and Historic Earnings Agents
+anchor on Ticker A and traverse the graph longi-
+tudinally backward along the green-colored time-
+line of successive Quarter nodes (from 2024-Q4
+to 2024-Q3) to construct a complete performance
+history. The Competitor Agent starts instead from
+a focal Quarter node, (2024-Q4), and fans out lat-
+erally through the purple peer links to all tickers
+that share that quarter (Firm B). The schema for the
+3058

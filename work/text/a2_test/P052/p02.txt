@@ -1,0 +1,96 @@
+semantic relevance alone.
+We construct LawInForce-eCFR, a diagnostic
+benchmark derived from real amendments in ver-
+sioned eCFR/CFR regulations. The benchmark
+starts from legal changes rather than naturally col-
+lected user questions. This is intentional: by align-
+ing old and new versions of the same rule, extract-
+ing numeric threshold changes, and placing fact
+values between the old and new thresholds, we cre-
+ate controlled answer flips. The design isolates the
+wrong-version failure mode: an incorrect passage
+can be topically close and citation-wise close while
+still being invalid for the facts.
+LawInForce-eCFR contains 805 human-
+validated amendment pairs and 3,220 yes/no
+questions across cited and uncited formulations.
+We also implement AuthorityFirst-RAG, a trans-
+parent diagnostic retriever that separates authority
+identification, temporal scoping, section-first
+retrieval, and rule-support ranking. Retrieval
+improves sharply at the top rank, but generation
+improves much less, revealing a dual bottleneck:
+systems must retrieve the law in force and apply
+its numeric rule.
+This setting is distinct from neighboring prob-
+lems. Temporal QA asks time-specific factual ques-
+tions, whereas law-in-force retrieval asks whether
+a legal norm was valid authority for a fact pattern.
+Citation-based legal retrieval can still fail because
+the same citation may refer to multiple historical
+versions. Numeric reasoning benchmarks test arith-
+metic or comparison in isolation; our setting re-
+quires applying a numeric comparison only after
+the valid legal rule has been selected.
+Our contributions are:
+1. We formalize law-in-force retrieval as authority-
+validity-support retrieval: the evidence must
+match the authority, be valid for the operative
+date, and contain answer-supporting rule text.
+2. We build LawInForce-eCFR from real
+eCFR/CFR amendments, yielding 805 human-
+validated amendment pairs and 3,220 controlled
+answer-flipping QA instances.
+3. We introduce AuthorityFirst-RAG, a transpar-
+ent diagnostic retriever that separates author-
+ity identification, temporal scoping, and rule-
+support ranking.
+4. We show empirically that retrieval improves sub-
+stantially but generation remains hard, revealing
+a dual bottleneck in versioned legal RAG.
+2 Task Definition
+2.1 Problem setting
+Let C be a versioned legal corpus containing pas-
+sages from multiple versions of legal authorities. A
+passage d ∈ C is represented as
+d = (text, citation, section, paragraph,
+valid f rom, valid to).
+The fields citation and section identify the le-
+gal authority. The interval [valid f rom, valid to)
+represents the period during which the passage was
+in force, with an open-ended valid to indicating
+continued validity.
+A query contains a legal question q and an oper-
+ative date t. The operative date is the date at which
+the facts are evaluated. In a regulatory filing ques-
+tion, for example, it may be the filing date, deadline
+date, conduct date, or effective-date-relevant fac-
+tual date specified by the prompt. A passage is
+temporally valid for the query if
+valid f rom(d) ≤ t < valid to(d).
+This condition is not a convenience filter. It deter-
+mines whether the passage can serve as valid legal
+authority.
+2.2 Legally applicable evidence
+We define a passage as legally applicable evidence
+for a question when it satisfies three conditions:
+1. Authority match: it belongs to the relevant
+legal authority, such as the correct citation, sec-
+tion, or regulatory provision.
+2. Temporal validity: the operative date falls
+within the passage validity interval.
+3. Rule support: the text contains the threshold,
+comparator, unit, exception, or local rule lan-
+guage needed to answer the question.
+These conditions are jointly necessary. Authority
+match without temporal validity can retrieve the
+wrong historical rule. Temporal validity without
+authority match can retrieve a contemporaneous but
+irrelevant provision. Authority and validity without
+rule support can retrieve a nearby paragraph that
+does not answer the question.
+We focus on yes/no legal questions. Each ques-
+tion has a gold passage and a gold answer. Retrieval
+evaluation asks whether the correct in-force pas-
+sage is found. Generation evaluation asks whether
+880

@@ -1,0 +1,95 @@
+B Extended experiments
+B.1 Performance Analysis with
+glm-edge-1.5b-chat
+In order to verify the sensitivity of different meth-
+ods to LLMs, we conducted further tests based
+on glm-edge-1.5b-chat 2. As seen in Table 8,
+GraphRAG, LightRAG and MiniRAG, that per-
+form quite well with qwen3-4b, exhibit catas-
+trophic global reasoning. This is due to the fact that
+both community summarization and path inference
+rely heavily on the capabilities of LLMs, causing
+these methods to perform poorly with lightweight
+models. On the contrary, in this low resource sit-
+uation, NaiveRAG still retains basic reasoning ca-
+pabilities. It can be seen that TagRAG can adapt
+to large language models with different parameter
+quantities and always has strong global reasoning
+capabilities.
+Agri CS Legal Mix Avg
+v.s. NaiveRAG
+Comprehensiveness 56.8 73.3 63.7 53.3 61.8
+Diversity 57.5 76.4 74.8 52.0 65.2
+Empowerment 64.8 72.5 64.7 54.8 64.2
+Overall 60.8 72.9 60.0 54.3 62.0
+v.s. GraphRAG
+Comprehensiveness 100.0 98.1 96.9 78.1 93.3
+Diversity 100.0 98.3 97.3 79.2 93.7
+Empowerment 99.9 98.5 96.3 78.1 93.2
+Overall 99.9 98.3 96.0 78.3 93.1
+v.s. LightRAG
+Comprehensiveness 100.0 99.2 96.7 82.9 94.7
+Diversity 100.0 99.6 97.6 84.1 95.3
+Empowerment 100.0 99.2 96.7 80.5 94.1
+Overall 100.0 99.2 97.1 82.1 94.6
+v.s. MiniRAG
+Comprehensiveness 99.7 99.2 94.9 79.7 93.4
+Diversity 98.3 99.2 96.0 82.1 93.9
+Empowerment 99.6 99.2 94.7 79.2 93.2
+Overall 99.7 99.2 94.7 79.7 93.3
+Table 8: Main results: winning rates (%) of TagRAG v.s.
+baselines with glm-edge-1.5b-chat across four datasets.
+B.2 Lightweight Adaption Analysis
+To illustrate the suitability and advantages of
+TagRAG on smaller LLMs, we use Qwen3-1.7B
+as a backbone for knowledge graph construction
+and inference, and compare it with other methods
+with Qwen3-4B in Table 9. Even with a 57.5%
+2https://huggingface.co/zai-org/glm-edge-1.
+5b-chat
+v.s. GraphRAG
+Comprehensiveness 68.5
+Diversity 68.7
+Empowerment 66.5
+Overall 67.7
+Table 9: Lightweight adaption analysis: winning rates
+(%) of TagRAG with Qwen3-1.7B v.s. GraphRAG with
+Qwen3-4B on CS.
+smaller LLM size, TagRAG absolutely dominates
+over NaiveRAG, GraphRAG and LightRAG and
+has comparable results to MiniRAG. This suggests
+that the connection of domain chains and the fu-
+sion of domain-centric knowledge can be adapted
+to low-resource scenarios. TagRAG liberates the
+dependence on LLMs for graph construction.
+B.3 Semantic Inheritance Analysis
+To validate the effectiveness of the DAG-based do-
+main tag chains in aggregating entity semantics and
+relationships, we conducted quantitative analyses
+on information retention and semantic inheritance.
+First, to evaluate whether entity information
+propagates to higher levels, we calculated the co-
+sine similarity between object tag descriptions and
+their upper-level domain tag summaries across dif-
+ferent depths. As shown in Table 10, the aver-
+age cosine similarity starts at 0.6823 for Level 1
+and gradually converges to approximately 0.5 after
+Level 4. This indicates that domain tags closer to
+the objects retain more specific information, while
+higher-level tags effectively preserve a significant
+portion of the entity semantics, facilitating seman-
+tic clustering within the hierarchy.
+Level Cosine Sim Avg
+1 0.6823
+2 0.5806
+3 0.5305
+4 0.4968
+5 0.4919
+6 0.4927
+7 0.4980
+8 0.5092
+9 0.5166
+Table 10: Cosine similarity for information propagation
+Second, to assess the stability of semantic in-
+tegration between adjacent levels, we measured
+6446

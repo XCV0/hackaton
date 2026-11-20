@@ -1,0 +1,77 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+Figure 1: RAG-Tester execution flow architecture
+3. RAG-TESTER
+3.1. Overview
+RAG-TESTER consists of four main components that
+togetherformanend-to-endautomatedtestexecutionframe-
+workforRetrieval-AugmentedLLMs.Algorithm1andFig-
+ure 1 outline the main steps of RAG-TESTER and illustrate
+howthesefourcomponentsinteract.Asinput,RAG-TESTER
+receives a text document and some instructions, producing
+a set of test results as output. The first task performed by
+RAG-TESTER istheautomatedgenerationoftestfiles(Line
+2), which will later be retrieved by the LLM Under Test
+(𝐿𝐿𝑀𝑈 𝑇). To accomplish this, our tool uses an LLM to
+create files of varying lengths, complexities, and topics.
+Thesefilesarethenmerged(Line3)withotherdocumentsin
+𝐷𝑚𝑎𝑛,whichtestengineersmayoptionallyincludemanually.
+This enables, among other benefits, the evaluation of RAG
+systemsinspecificapplicationcontexts.Inthesecondphase,
+RAG-TESTER processes the documents in 𝐷 and generates
+pairs of test inputs (𝑇 𝐼) and expected test outputs (𝑇 𝑂𝑒𝑥𝑝)
+(Line 4). The number of generated test cases for each doc-
+ument in 𝐷 is 𝑁𝑡𝑒𝑠𝑡. These test inputs are then executed in
+batch (Line 5), and the resulting outputs (𝑇 𝑂) are evaluated
+by comparing them with the expected outputs using our test
+oracle (Line 6), which provides the test results.
+Algorithm 1: RAG-TESTER’s overall overview
+input : 𝑁𝑓 : Number of files to be retrieved
+𝐷𝑚𝑎𝑛 ={𝑑1, 𝑑2, ..., 𝑑𝑚}: Manually included files to be retrieved
+𝑁𝑡𝑒𝑠𝑡: Number of test cases to generate for each retrieval document
+output : 𝑇 𝑅: Final test results
+1 function RAGTESTER
+2 𝐷 ← GENERATEFILES(𝑁𝑓 )
+3 𝐷 ← 𝐷 ⋃ 𝐷𝑚𝑎𝑛
+4 𝑇 𝐼, 𝑇 𝑂𝑒𝑥𝑝 ← GENERATETESTINPUTS(𝐷, 𝑁𝑡𝑒𝑠𝑡)
+5 𝑇 𝑂 ← EXECUTETESTINPUTS(𝐿𝐿𝑀𝑈 𝑇 , 𝑇 𝐼)
+6 𝑇 𝑅 ← EVALUATETESTS(𝑇 𝑂, 𝑇 𝑂𝑒𝑥𝑝)
+7 return 𝑇 𝑅
+3.2. Test File Generator
+Our initial prototype focuses on generating PDF files
+to be retrieved by the 𝐿𝐿𝑀𝑈 𝑇, although RAG-TESTER
+can be easily extended to support other file types. RAG-
+TESTER leverages an LLM, specifically GPT-5 Nano, to
+automatically produce PDF files of varying sizes, levels of
+complexity, and topics. Designing effective system and user
+prompts is paramount for guiding this generation process.
+Appendices A and B show the employed prompts for this
+LLM.
+On the one hand, we specify the technical aspects of
+the document in the System Prompt, these being the desired
+length,levelofdetail(e.g.,comprehensiveanddetailed,con-
+cise summary, highly technical...), and the tone or writing
+style (e.g., formal or casual). We further define elements
+relatedtodocumentstructure,contentrequirements,andfor-
+matting guidelines. These configurations prepare the LLM
+for the subsequent user prompt. On the other hand, in the
+User Prompt, the topic and name of the document is pro-
+vided optionally, although the LLM can autonomously de-
+fineboth.Theusercanalsoprovideinformationonwhether
+the document should contain any specific section.
+The LLM responsible for generating the retrievable file
+produces its output in Markdown format. The file generator
+then automatically converts this Markdown content into a
+PDF file.
+3.3. Test Input Generator
+Aftergeneratingthefilestoberetrievedbythe 𝐿𝐿𝑀𝑈 𝑇,
+RAG-TESTER focuses on the generation of the test inputs
+(𝑇 𝐼)andexpectedtestoutputs(𝑇 𝑂𝑒𝑥𝑝).Foreachofthefiles
+in 𝐷, the test input generator generates a set of 𝑁𝑡𝑒𝑠𝑡 test
+cases.
+It is worth mentioning that each tested source document
+is divided into 𝑁𝑡𝑒𝑠𝑡 sections (depending on the amount of
+specified queries), each of these being delimited by either a
+paragraph end or a maximum amount of tokens. After the
+splitting is done, each chunk is used for one test query only,
+ensuring that no text region is used multiple times.
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 4 of 21

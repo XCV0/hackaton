@@ -1,0 +1,6 @@
+publication_id,issue_id,record_ids,check_name,description,source_page,source_fragment
+D019,I1,R053;R028,contradiction,"Лучший прибор DV5: в Table 2 и в тексте PCE 5.637 %, в сертифицированном измерении (KIER) — 5.484 %; авторы называют результаты «similar».",8,PCE of 5.484%
+D019,I2,R054;R055,eqe_consistency,"Jsc J-V 26.05 vs интегральный Jsc из EQE 25.89 мА/см2: расхождение 0.6 % (в пределах 5 %, нарушения нет); при этом Jsc в Table 2 для DV5 — 27.430 мА/см2, что на 5.3 % выше интегрального из EQE.",8,25.89
+D019,I3,R026,contradiction,Jsc лучшего прибора DV5: 27.430 мА/см2 в Table 2 (лаб. измерение) против 26.05 мА/см2 в сертифицированной J-V кривой.,7,MoSe2 260 0.43 27.430 47.35 5.637 5.89 118.26
+D019,I4,,typo,Толщина Al-сетки указана как «1 mm-thick» (вероятно 1 µm).,3,1 mm-thick Al collection grid
+D019,I5,,missing_conditions,"Площадь приборов, интенсивность освещения и направление развёртки не указаны.",3,to simulate 1.5AM solar

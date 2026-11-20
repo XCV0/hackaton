@@ -1,0 +1,118 @@
+30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain Geethan Sannidhi, Sagar Srinivas Sakhinana, and Venkataramana Runkana
+offers a static view of graph relationships at that specific time. Each
+snapshot represents facts F𝑖 as quadruples 𝑞 = (𝑠,𝑟,𝑜,𝑡𝑖 ) at time
+𝑡𝑖 , indicating a timestamped relationship between entities 𝑠 and
+𝑜 via relation 𝑟. A tKG comprises a sequence of these snapshots,
+G = G𝑡1 ,...,G𝑡T , showcasing the graph’s evolution over time. tKG
+forecasting predicts missing information in future snapshots based
+on past events. Given a target quadruple (𝑠𝑞,𝑟𝑞,𝑜𝑞,𝑡𝑞 ), the goal
+is to predict the missing object entity 𝑜𝑞 in the query (𝑠𝑞,𝑟𝑞, ?,𝑡𝑞 )
+using historical facts O𝑞 = {(𝑠,𝑟,𝑜,𝑡)| 𝑡 < 𝑡𝑞 }, which represent
+observed events before target time 𝑡𝑞 . This process utilizes histori-
+cal facts C(𝑠𝑞,𝑟𝑞,𝑡𝑞−1 ) and C(𝑠𝑞,𝑡𝑞−1 ), representing past relationships
+involving 𝑠𝑞 and 𝑟𝑞 , or 𝑠𝑞 with any relation, up to 𝑡𝑞−1, respectively.
+To forecast, all entities in V are considered potential candidates,
+and the most likely candidate is selected. Reciprocal relations are
+considered to account for bidirectional relationships, including both
+(𝑠,𝑟,𝑜,𝑡) and its reciprocal (𝑜,𝑟−1,𝑠,𝑡), where 𝑟−1 is the inverse of
+𝑟. This approach ensures accurate predictions by considering the
+dynamics of relationships from both directions.
+Knowledge-Retrieval 
+from tKGs 
+      Historical tKGs
+   Forecasted tKG
+  Knowledge-Augmented 
+Prompt
+      Web Scraping 
+           Query
+Smaller 
+Language Model
+     Off-the-Shelf PLLM
+Figure 1: The sLA-tKGF framework combines information re-
+trieval from web scraping, historical knowledge from tKGs,
+and querying PLLMs to generate descriptions based on histor-
+ical entity relationships to construct knowledge-augmented
+prompts for small-scale language models to achieve high
+factual accuracy and reliability in tKG forecasting.
+3 PROPOSED METHOD
+sLA-tKGF framework utilizes RAG to enhance the capabilities of
+the small-scale language model to predict future events in tKGs. We
+construct knowledge-infused prompts using historical tKG data,
+web information, and PLLM-generated past entity relationship de-
+scriptions for zero-shot prompting the language model for reliable
+and trustworthy forecasting, outperforming conventional methods.
+3.1 Web-Search-Driven Retrieval
+In developing a RAG framework that leverages web-based informa-
+tion, a critical challenge is addressed: excluding future facts before
+evaluating the relevance of retrieved web passages to a query. This
+approach focuses on preprocessing web passages to identify and
+exclude sentences containing future facts relative to a specified
+temporal threshold. This is achieved by using natural language pro-
+cessing techniques for sentence tokenization, temporal tagging, and
+resolving temporal expressions to absolute dates. By establishing a
+relevance period based on the query context, the framework filters
+out sentences with temporal references beyond this period, ensur-
+ing that only contextually and temporally relevant information
+is retained. Preparing the search data involves collecting various
+types of web content, parsing and chunking text, and embedding
+text chunks using text-embedding model. Each natural language
+question (verbalized query) is embedded similarly, then compared
+to the stored retrieved chunks for semantic similarity, and the most
+relevant chunks are integrated to generate an accurate response.
+By filtering out future or irrelevant information, our approach en-
+hances the quality and reliability of real-time web information
+retrieval and generation.
+3.2 Retrieving Relevant Historical tKG Data
+We leverage the following multi-step methods to incorporate rele-
+vant historical information from dynamic tKGs. (a) Query Verbal-
+ization: We convert structured queries (𝑠𝑞,𝑟𝑞, ?,𝑡𝑞 ) about future
+events into natural language questions using PLLMs like GPT-4.
+This allows the small-scale language model to interpret symbolic
+knowledge for forecasting tasks. For example, the query (Barack
+Obama, visit, ?, 2015-01-25) can be verbalized as ‘Which country did
+Barack Obama visit on January 25, 2015?. (b) Knowledge Retrieval &
+Verbalization: Historical events relevant to the verbalized query up
+to the target time 𝑡𝑞 from evolving tKGs are incorporated to improve
+forecasting accuracy. It improves forecasting by grounding queries
+in historical context by identifying recurring patterns, trends, and
+causal relationships of the evolving entity relationships over time
+in graph-structured data. Motivated by the concept of window size
+in time series forecasting, which indicates the number of past obser-
+vations used to predict future values, we adopt a similar approach
+in tKG forecasting. For a query at target time 𝑡𝑞 with subject 𝑠𝑞
+and relation 𝑟𝑞 , we retrieve ‘𝑚’ prior tKG snapshots G(𝑡𝑞 −𝑚,𝑡𝑞 −1)
+as background knowledge. A knowledge-infused prompt is con-
+structed from historical facts related to 𝑠𝑞 . Assuming a set of ‘𝑀’
+retrieved facts related to the query, we describe this as follows:
+C(𝑠𝑞,𝑟𝑞,?,𝑡𝑞 ) =
+n
+(𝑠𝑖 ,𝑟𝑖 ,𝑜𝑖 ,𝑡𝑖 )∈C(𝑠𝑞,𝑟𝑞,𝑡𝑞 −𝑚,𝑡𝑞 −1)∪C(𝑠𝑞,𝑡𝑞 −𝑚,𝑡𝑞 −1) & 𝑡 < 𝑡𝑞
+oM
+𝑖=1
+This set is constructed by combining facts involving 𝑠𝑞 within
+the time window 𝑡𝑞 −𝑚 to 𝑡𝑞 −1, covering both facts directly related
+to 𝑠𝑞 and 𝑟𝑞 (i.e., C(𝑠𝑞,𝑡𝑞 −𝑚,𝑡𝑞 −1)), and those involving 𝑠𝑞 in any re-
+lation(i.e., C(𝑠𝑞,𝑟𝑞,𝑡𝑞 −𝑚,𝑡𝑞 −1)), but only prior to 𝑡𝑞 . This approach
+enhances forecasting accuracy by providing a comprehensive view
+of 𝑠𝑞 ’s historical occurrences. (c) Irrelevant Knowledge Rejection:
+We reject irrelevant facts using sentence embedding techniques,
+retaining only facts pertinent to the verbalized query based on se-
+mantic similarity. We then inject relevant historical knowledge into
+prompts to anchor predictions within historical tKG data, enhancing
+accuracy. For the query (Barack Obama, visit, ?, 2015-01-25) verbal-
+ized as ‘What country did Barack Obama visit on January 25, 2015?’,
+using relevant historical facts like ‘Barack Obama visited France
+on June 5, 2014’, ‘Barack Obama visited Australia on November 15,
+2014’, etc., construct a knowledge-augmented prompt for the small-
+scale language model’s zero-shot prediction on tKG forecasting.
+3.3 PLLMs-Generated Historical Summary
+We query off-the-shelf PLLMs to generate a summary description
+of the historical entity relationships prior to the target time, based
+on the parametric knowledge acquired during pretraining.
+3.4 Overall Framework
+We construct knowledge-augmented prompts for grounded and in-
+terpretable forecasts by uniquely combining the relevant historical
+knowledge from tKGs, contemporary data through web search, and
+historical entity relationship descriptions generated by off-the-shelf
+PLLMs, setting a foundation for trustworthy tKG forecasting. In
+2

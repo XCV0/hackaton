@@ -1,0 +1,4 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D015,MS1,DV-REF;DV-0;DV-6;DV-8;DV-10;DV-12,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,"Keithley 2400; монофасадные приборы, освещение со стороны стекла (front)"
+D015,MS2,DV-BREF;DV-BCC,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,Keithley 2400; освещение с лицевой стороны (front)
+D015,MS3,DV-BREF;DV-BCC,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,Keithley 2400; освещение с тыльной стороны (back)

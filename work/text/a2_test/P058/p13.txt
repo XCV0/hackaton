@@ -1,0 +1,97 @@
+Threshold ROUGE-L BERT-F1 LLM Score
+70% 23.69 39.35 68.00
+75% 29.83 47.72 75.35
+80% 32.01 51.60 83.90
+85% 31.67 50.02 79.30
+90% 29.84 48.69 76.58
+100% 26.45 43.67 65.20
+Table 8: Sensitivity analysis of the overlap threshold.
+Bold means the best performance.
+locations. The related analysis is shown in sec-
+tion 6.1. We then employ Qwen3-VL-235B-A22B-
+Thinking (Team, 2025) to synthesize reasoning
+data for both sets by populating the prompt with
+three components: the landmark image, annotated
+visual elements with descriptions, and the target
+commentary text. We prompt the LLM to gener-
+ate reasoning processes from input to target output
+using two approaches: its native chain-of-thought
+style and our proposed pipeline framework.
+To ensure data quality, each synthesized reason-
+ing process underwent automated scoring by LLM,
+with samples failing to fully meet our criteria being
+regenerated. When a sample failed validation three
+consecutive times, human annotators intervened to
+manually revise the reasoning process. Through
+this rigorous pipeline combining automated synthe-
+sis with quality control, we construct a high-quality
+dataset for fine-tuning LLMs to learn both standard
+CoT reasoning and our pipeline-based thinking pro-
+cess.
+A.4 Attribution Evaluation
+Beyond factual correctness, we also evaluate
+whether LLMs can trace their claims back to spe-
+cific visual evidence. A description may sound
+plausible yet be entirely ungrounded in what the
+model actually perceives. We measure this with
+three metrics: Attribution Precision (AP), the frac-
+tion of cited elements that exist in the predicted
+visible set ˆE(I); Attribution Recall (AR), the frac-
+tion of elements in ˆE(I) that are actually cited in
+the output; and Unsupported Claim Rate (UCR),
+the fraction of output sentences not grounded by
+any element.
+As shown in Table 9, all models improve consis-
+tently from Setting (A) to (C), confirming that struc-
+tured evidence grounding helps anchor generated
+text to perceived visual content. Fine-tuning also
+brings clear gains: Qwen3-VL-8B† improves recall
+from 0.45 to 0.58 under Setting (C) compared to its
+base version. Among proprietary models, GPT-4o
+Model AP ↑ AR ↑ UCR ↓
+Qwen3-VL-8B
+Setting (A) 0.6997 0.2244 0.9417
+Setting (B) 0.8153 0.2423 0.7814
+Setting (C) 0.9242 0.4467 0.6753
+Qwen3-VL-8B†
+Setting (A) 0.6500 0.3921 0.8392
+Setting (B) 0.8420 0.4309 0.7513
+Setting (C) 0.9561 0.5847 0.6235
+Qwen-VL-Max
+Setting (A) 0.7675 0.3573 0.7779
+Setting (B) 0.9474 0.4754 0.6279
+Setting (C) 0.9730 0.6194 0.5293
+GPT-4.1-Mini
+Setting (A) 0.6791 0.3339 0.8104
+Setting (B) 0.9614 0.5844 0.7888
+Setting (C) 0.9865 0.6144 0.6482
+GPT-4o
+Setting (A) 0.6990 0.3562 0.8490
+Setting (B) 0.9505 0.6097 0.7323
+Setting (C) 0.9865 0.6620 0.6184
+Claude-3.5-Sonnet
+Setting (A) 0.7616 0.2219 0.9414
+Setting (B) 0.9479 0.2494 0.8125
+Setting (C) 0.9583 0.4297 0.6931
+Table 9: Attribution evaluation results. AP = Attribution
+Precision, AR = Attribution Recall, UCR = Unsupported
+Claim Rate. † denotes the fine-tuned variant. Bold
+marks the best score per metric. Underline means the
+best results for each LLM.
+achieves the best overall profile, while Claude-3.5-
+Sonnet shows high precision but low recall, sug-
+gesting it cites carefully but sparingly. Notably,
+even the best configuration leaves over half of out-
+put sentences unsupported, indicating that faithful
+visual attribution remains an open challenge.
+A.5 Case Study
+Table 11 presents a color-coded case study that
+directly compares element-level grounding and
+description quality across methods. Each color
+family corresponds to one architectural element,
+with darker shades indicating more accurate de-
+scriptions. Specifically, blue highlights track the
+Christian emblem, green highlights track windows,
+and pink denotes the pediment. This visualization
+reveals clear differences: the baseline misses the
+10487

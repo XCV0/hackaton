@@ -1,0 +1,48 @@
+Author name / Procedia Computer Science 00 (2019) 000–000  3 
+The rest of this paper is organized as follows: Section 2 provides a short overview of related work. Section 3 
+describes the methodology used in this study as well as the experimental setup. Section 4 outlines the carried out 
+experiments and their results, while section 5 concludes this paper with a summary of key insights gained and 
+suggestions for future research directions. 
+2. Related Work  
+The concept of Retrieval-Augmented Generation (RAG) has gained significant attention as a hybrid approach that 
+integrates information retrieval with neural language generation. In 2020, Lewis et al. [3] introduced the RAG 
+framework to address the then-limited capabilities of pre-trained language models and to enhance a model's ability to 
+generate informed and contextually relevant responses. Despite the major improvements in language model 
+capabilities since then, RAG remains highly relevant for generating accurate and contextually enriched responses by 
+dynamically accessing and synthesizing information from external sources [1] [4].   
+While the literature is rich with issues related to the application of RAG on English documents, the application of 
+RAG in languages other than English has been less explored. However, recent studies have begun to address this gap.   
+For example, the study presented in [5], discusses the application of Retrieval-Augmented Generation (RAG) in 
+multilingual settings, specifically focusing on enhancing the performance of RAG models when working with non-
+English languages. The work emphasizes the need for strong retrievers and generators and highlights the importance 
+of task-specific prompt engineering to generate responses in a user's language. The paper suggests that while the 
+multilingual RAG models show promise, they face challenges with code-switching, fluency errors, and the relevance 
+of retrieved documents.  
+The work presented in [6] specifically addresses the effectiveness of multilingual semantic embedding models for 
+Arabic text retrieval, making it highly relevant to the study discussed here, as both explore the retrieval aspect of 
+Arabic RAG models. The experiments presented in that work were carried out using the publicly available ARCD 
+(Arabic Reading Comprehension Dataset) [7]. These experiments involved assessing the performance of several 
+advanced multilingual semantic embedding models in retrieving text passages relevant to a query using the average 
+Recall@k metric. The authors did not employ a vector database and chose to directly use cosine similarity for matching 
+query embeddings against document embeddings. While this can slow down the matching process in a real-life setting, 
+it should have little or no impact on the research findings presented in the paper. The embedding models investigated 
+by this study were OpenAI’s Ada [8], Google’s Language-agnostic BERT Sentence Embedding (LaBSE) [9], Cohere 
+[10], Mpnet [11], HuggingFace’s DistillBert versions one and two [12], Meta’s SONAR (Language-Agnostic 
+Representations)[13], and Microsoft’s E5 embedding models[14]. The study identified Microsoft’s E5 large sentence 
+embedding model as the top performer, significantly outperforming other models tested.  
+While the work presented here also uses the ARCD dataset [7] and experiments with OpenAI’s Ada model [8], 
+Cohere [10] and Microsoft’s E5 embedding models[14], the work goes further by extending the experiments to other 
+embedding models, using a second dataset for experimentation, examining the impact of using dialectical queries on 
+the performance of embeddings when carrying our retrieval, and investigating the impact of attempting to eliminate 
+ambiguity in ARCD queries. Furthermore, the work presented herein investigates several known LLMs as generators 
+to present an exploration of a complete RAG pipeline.  
+3. Methodology and Experimental Setup 
+One of the main aims of this work is to assess the performance of various multilingual semantic embedding models 
+in the context of Arabic text retrieval, and to test the resilience of top performing models to a query dialect different 
+than that of input documents. The work also aims to evaluate the performance of multilingual Large Language Models 
+(LLMs) for the generation task. To accomplish these goals, the authors set out to implement the entire pipeline 
+presented in Fig 2 over 2 stages. In the first stage, experiments are carried out to identify the best semantic model to 
+use, and in the second stage experiments are conducted to evaluate the performance of various LLMs as generators 
+using the best performing semantic model in stage 1 in the retrieval process.  
+Details of the used datasets, semantic embedding models, vector database, and LLMs used as generators are 
+provided in the next subsections.

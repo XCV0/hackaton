@@ -1,0 +1,114 @@
+www.advancedsciencenews.com www.advancedscience.com
+Table 4. DefectparametersoftherepresentativeControlandC-420Sb2Se3
+solarcells.
+Devices Defects ET [eV] Type 𝜎 [cm2] NT [cm−3] NT × 𝜎 [cm−1]
+Control E1 EC−0.288 VSe2 3.13 × 10−19 8.17 ×1013 2.56 ×10−5
+E2 EC−0.367 VSe3 1.16 × 10−18 1.26 ×1014 1.46 ×10−4
+E3 EC−0.574 SbSe2 1.68 × 10−14 1.16 ×1014 1.95
+C-420 H1 EV +0.225 SeSb1 3.35 × 10−21 6.09 ×1013 2.04 ×10−7
+H2 EV +0.329 VSb1 5.97 × 10−18 1.46 ×1013 8.72 ×10−5
+lustrates the band edge positions and defect levels for both de-
+vices. For Control device, E1, E2, and E3 electron defects are lo-
+catedatabout0.29,0.37,and0.57eVbelowEC,whicharecloseto
+itsintrinsicEF position,implyingstrongpinningeﬀect,resulting
+inseveretrap-assistedrecombinationandVOC loss.Especially,E3
+defect showed a largest NT × 𝜎 value (1.95 cm−1), which might
+actasamajorrecombinationcentertodiminishcarrierlifetime
+(𝜏trap), according to the following equation associated with trap-
+assistedShockley-Read-Hall(SRH)recombination[16,36]
+𝜏trap = 1 vth𝜎NT (12)
+wherevth isthecarrierthermalvelocity,capturecross-section(𝜎)
+anddefectdensity(NT)areobtainedfromDLTS.Bycontrast,for
+C-420 device, H1 and H2 hole defects are located at 0.23 and
+0.33 eV above EV, which can eﬃciently alleviate the EF pinning
+eﬀect, and boost the split of the quasi-Fermi levels of electrons
+andholes,leadingtoanenlargedVOC forthedevice.Inaddition,
+itisworthnotingthattheNT ×𝜎 ofH1andH2aremarkedlyde-
+creased with several orders of magnitude, indicating the holes
+will be emitted again in a very short time even they are cap-
+turedbytheseshallowtrapstates.Moreover,thevalueiscompa-
+rabletothoseofhigheﬃciencyperovskiteorCZTSSesolarcells,
+strengtheningoureﬀectiveeﬀortindefectshealing.[46,47]
+To further study the carrier transport dynamics, the tran-
+sient absorption spectroscopy (TAS) characterizations were per-
+formed on the VTD processed (Control) and post-selenized (C-
+420) Sb2Se3 thin ﬁlms that were deposited on soda-lime glass.
+Under the absence of any electron or hole extraction layer, it
+can directly reﬂect the relaxation of the exciton to ground state
+through charge recombination. As shown in Figure 7e, an obvi-
+ousphoto-inducedabsorption(PIA)peaklocatedat750nmcan
+be observed for both two samples, which can be assigned to the
+trappingofphoto-generatedminoritycarriers.Subsequently,the
+kinetic decay curves were ﬁtted via a biexponential model (Fig-
+ure 7f), the detailed ﬁtting parameters are summarized in Ta-
+ble S1 (Supporting Information). To be speciﬁc, the short de-
+caylifetime(𝜏1)andlongdecaylifetime(𝜏2)canbeattributedto
+the interface/surface recombination and the bulk defect recom-
+bination, respectively.[16] Compared to Control sample, a signif-
+icant increase of both 𝜏1 and 𝜏2 for C-420 Sb2Se3 thin ﬁlm in-
+dicated that both interface/surface recombination and bulk re-
+combination have been suppressed, especially a dominant bulk
+recombination mitigation mechanism, echoing the aforemen-
+tionedDLTSresultsofdefectshealing.Moreover,itisworthmen-
+tioningthattheobtainedlifetime(𝜏 =14497ps)alsorepresents
+one of the top values among all antimony chalcogenides (Table
+S2, Supporting Information). Overall, beneﬁtting from this ef-
+ﬁcient Sb2Se3 absorber layer growth engineering, the improved
+junctionquality,thehealeddeepdefects,andtheprolongedcar-
+rierlifetimecouldundoubtedlyimprovetheVOC andPCEofthe
+Sb2Se3 thin-ﬁlmsolarcell.
+Finally,themorphologicalandmicrostructuralcharacteristics
+oftheMo/Sb2Se3/CdS/ITO/Agthin-ﬁlmsolarcellswereinvesti-
+gatedtofurthersightseethepromotionmechanismofthedevice
+performance.Figure8a,bshowsthecross-sectionalSEMimages
+of the representative Control and C-420 Sb2Se3 devices, respec-
+tively. For Control device, Sb2Se3 light absorbing thin ﬁlm con-
+sisted of multiple grains that randomly grew on Mo substrate,
+especially with some small grains that horizontally stacked in
+parallel with substrate, as marked in black circle in Figure 8a.
+In contrast, C-420 Sb2Se3 thin ﬁlm was composed of large and
+compact crystal grains that quasi-vertically-orientated across the
+whole light absorber layer, as marked in red circle in Figure 8b.
+SuchobservationsmatchedwellwiththecorrespondingXRDre-
+sults, and revealed an orientation transition from [hk0] to [hk1].
+Figure8e,fillustrateaschematicrepresentationoftheSb2Se3 mi-
+crostructuregrowthunderpost-selenization.TheVTDprocessed
+pristinethinﬁlmwithgrainslimited,voidsexisted,[hk0]orienta-
+tiondominatedcharacteristicswasmainlyinﬂuencedbythena-
+ture of Mo substrate and deposition dynamics, i.e., growth rate.
+Once the post-selenization was introduced, a certain amount of
+Se atoms would diﬀuse and react with the Se-poor Sb2Se3−x lat-
+tice to form stoichiometric Sb2Se3 molecules under appropriate
+temperature.Theemergedcrystalswouldoccupythevoidsﬁrst,
+and then start to grow into large columnar grains under proper
+duration. Notably, under Se atmosphere, non-van der Waals
+(vdW)planes(e.g.,(hkl,l≠0))mighthavehighergrowthratesdue
+totheincreasedadatoms’absorptionenergy,andthereforetrans-
+formed the ﬁnal thin ﬁlm orientation to [hk1]. For more clear
+comparison, two typical crystal planes of (120) and (211) were
+chosentoclarifythecorrelationbetweenﬁlmorientationandde-
+vice performance. As shown in Figure 8c,d, the [120]-oriented
+grainconsistsof(Sb4Se6)n ribbonshorizontallystacked,whereas
+[211]-oriented grain consists of titled (Sb4Se6)n ribbons stacked
+quasi-verticallyonthesubstrate.Obviously,thephoto-generated
+carriers transport in the [211]-oriented grains should be much
+easier than in the [120]-oriented grains, since the carriers travel
+eﬃcientlywithinthecovalentlybonded(Sb4Se6)n ribbonsinthe
+former condition, and a more strenuous hop between ribbons
+held together by vdW forces in the later scenario. Moreover, C-
+420 thin ﬁlm with large [211]-oriented grains possessed fewer
+dangling bonds at grain boundaries, and could reduce the re-
+combinationloss.[12] Overall,afteraneﬃcientpost-selenization,
+theoptimizedC-420Sb2Se3 thinﬁlmwithlargecompactgrains,
+accurate chemical composition, and benign growth orientation
+could be beneﬁcial for carrier transport and recombination mit-
+igation,correspondingtoalowerRs,NT,higher 𝜏,JSC,VOC,and
+PCEinthedevice.
+Figure 9a shows the cross-sectional TEM image of the cham-
+pion C-420 Sb2Se3 device, which displays an obvious layered
+structure with approximate thickness of 1500, 80, and 500 nm
+forSb2Se3,CdS,andITOlayers,respectively.NoobviousMoSe2
+interfacial layer can be observed between Mo back contact layer
+andSb2Se3 absorberlayer,indicatingtheeliminationofthecom-
+Adv. Sci. 2022,9,2105142 ©2022TheAuthors. AdvancedSciencepublishedbyWiley-VCHGmbH2105142(11of15)
+ 21983844, 2022, 9, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202105142, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

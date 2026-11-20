@@ -1,0 +1,106 @@
+The prompt of the router for reflection is:
+### Question Type: simple, simple_w_condition,
+set, comparison, aggregation, multi_hop,
+post_processing, false_premise.
+### Question: <<<{question}>>>
+### Task: The predicted question type is wrong.
+Please answer again. Which type is this question?
+Answer with one word and the answer must be
+one of them.
+### Dynamism: real-time, fast-changing,
+slow-changing, static.
+### Question: <<<{question}>>>
+### Task: The predicted dynamism of the
+question is wrong. Please answer again. Which
+dynamism is this question? Answer with one
+word and the answer must be one of them.
+### Domain: music, movie, finance, sports,
+encyclopedia.
+### Question: <<<{question}>>>
+### Task: The predicted domain of the question
+is wrong. Please answer again. Which domain is
+this question from? Answer with one word and
+the answer must be one of them.
+The topic entities and useful information
+extracted from the question are incorrect. Please
+extract them again. Given the following question,
+based on the entity type and the relation type,
+extract the topic entities and useful relations from
+the question.
+Entity Type: <<<{entity types}>>>
+Relation Type: <<<{relation types}>>>
+Question: <<<{question}>>>
+### Reference Source: knowledge graph,
+text documents.
+### Question: <<<{question}>>>
+### Task: The answer is incorrect. The reference
+does not contain useful information for solving
+the question. Please answer again, should we use
+knowledge graph as reference source based on
+newly extracted entity and relation, or use the
+next batch of text documents as reference source?
+You must pick one of them and answer with no
+more than two words.
+The prompt of the validator is:
+### Reference: <<<{reference}>>>
+### Prediction: <<<{output of generator}>>>
+### Question: <<<{question}>>>
+### Query Time: <<<{question time}>>>
+### Task: The prediction is generated based on
+the reference. Does the prediction answer the ques-
+tion? Answer with one word, yes or no.
+The prompt of the commentor is:
+You are a helpful, pattern-following assistant.
+<<<{5 examples of action and feedback
+pair}>>>
+### Reference Source: <<<{source}>>>
+### Question: <<<{question}>>>
+### Query Time: <<<{question time}>>>
+### Query Type: <<<{question type}>>>
+### Query Dynamism: <<<{dynamism}>>>
+### Query Domain: <<<{domain}>>>
+### Task: Please point out the wrong information
+about the question (Reference Source, Query
+Type, Query Dynamism, Query Domain), if there
+is any. The answer must be one of them.
+The prompt of the generator is:
+You are a helpful, pattern-following assistant.
+<<<{1 chain-of-though prompt example}>>>
+### Reference: <<<{reference}>>>
+### Reference Source: <<<{source}>>>
+### Question: <<<{question}>>>
+### Query Time: <<<{question time}>>>
+### Query Type: <<<{question type}>>>
+### Query Dynamism: <<<{dynamism}>>>
+### Query Domain: <<<{domain}>>>
+### Task: You are given a Question, References
+and the time when it was asked in the Pacific
+Time Zone (PT), referred to as Query Time.
+The query time is formatted as mm/dd/yyyy,
+hh:mm:ss PT. The reference may help answer the
+question. If the question contains a false premise
+or assumption, answer “invalid question”. First,
+list systematically and in detail all the problems in
+this problem that need to be solved before we can
+arrive at the correct answer. Then, solve each sub
+problem using the answers of previous problems
+and reach a final solution.
+What is the final answer?
+The prompt of the evaluator is:
+### Question: <<<{question}>>>
+### True Answer: <<<{ground truth
+answer}>>>
+### Predicted Answer: <<<{output of
+generator}>>>
+### Task: Based on the question and the
+true answer, is the predicted answer accurate,
+incorrect, or missing? The answer must be one of
+them and is in one word.
+Table 14: Number of API calls and tokens for CRAG.
+HYBGRAG API Call # Token # for Token # for
+Component / Iteration Prompts Examples
+Router 4 266 5752
+Validator 1 56 0
+Commenter 1 78 598
+Generator 2 168 553
+893

@@ -1,0 +1,74 @@
+by a non-trivial margin. Even under the stricter,
+leakage-free evaluation regime, the CARAG main-
+tains its advantage. The model’s performance edge
+is attributable to its temporal–causal reasoning and
+structured fact grounding, rather than to knowledge
+embedded in the pretraining corpus.
+B Explainability
+To illustrate the root cause of class-imbalance, we
+contrast the verdicts of the transcript-only baseline
+with those of our agentic system for the MicroVi-
+sion call (fig. 5), whereby the stock fell −29 %
+the next trading day. The example shows that
+transcript-only models tend to echo the upbeat lan-
+guage of senior management and therefore overpre-
+dict positive outcomes. In contrast, our framework
+surfaces a widening net loss and increasing operat-
+ing expenses, yielding a prediction that aligns with
+the actual negative return (Direction score 4 vs. 8).
+Figure 5: Case Study on the MicroVision (2021-Q1)
+Call
+C Hyperparameter Sensitivity
+The highest macro–F1 scores occur when each
+agent retrieves five historical facts and five peer
+facts in fig. 6. Increasing khist from 5 → 10 yields
+small gains on the dense U.S. datasets, whereas
+increasing kcomp beyond 5 slightly degrade perfor-
+mance on MAEC, as shown in fig. 6.
+Figure 6: Hyperparameter Sensitivity across all datasets
+D Details of the Backtest
+We evaluate the predictive signals in a simulated
+trading strategy that is strictly market neutral.
+Specifically, we run a backtest assuming execution
+of signals computed using information available on
+day T at T + 1. The optimizer is implemented in
+MOSEK and solves a second-order cone program
+(SOCP) that balances expected return against risk
+under explicit neutrality and exposure constraints.
+We estimate a diagonal covariance matrix for
+individual stock risk over a half-year look-back
+window, denoted Σh. Writing Σh = L⊤ h Lh for its
+Cholesky factorization, the daily portfolio xh ∈
+RN is obtained from:
+max
+xh
+µ⊤ hxh
+s.t. 1⊤xh = 0 (market neutrality),
+∥Lhxh∥2 ≤ σ⋆ (ex-ante volatility cap),
+∥xh∥1 ≤ G⋆ (gross-exposure cap),
+The neutrality constraint 1⊤xh = 0 ensures the
+portfolio maintains zero net market exposure on
+every trading day. This eliminates systematic beta,
+so portfolio performance reflects only the alpha in
+the signals rather than coincidental market direc-
+tion. The gross-exposure cap limits leverage, while
+the ex-ante volatility cap provides risk control by
+bounding total portfolio risk ex ante.
+We set σ⋆ = 10% and G⋆ = 200%. This con-
+figuration yields a long–short, dollar-neutral, risk-
+managed strategy. By design, it isolates predictive
+content in the signals: any excess return or Sharpe
+ratio achieved cannot be attributed to passive mar-
+ket drift, but must stem from the model’s ability to
+anticipate cross-sectional return differences.
+E Facts and Knowledge Graph Schemas
+Figure 7: An example of a Result Fact for Axon (ticker:
+AXON) from Q4 2023.
+Key Value
+embedding [-0.0115..., 0.0115...]
+metric "Annual Recurring Revenue (ARR)"
+quarter "2023-Q4"
+ticker "AXON"
+type "Result"
+value "USD 697 million"
+3067

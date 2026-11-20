@@ -1,0 +1,98 @@
+erative action agen samples a continuation from
+PLLM (yt | st). An augmentative action aaug trig-
+gers a retrieval call based on the uncertainty of
+y1:t−1 to obtain Dnew and update the context as
+D′ ctx = Dctx ∪ Dnew.
+Transition P. The transition is deterministic for
+aaug and stochastic for agen, governed by the LLM
+logits.
+3.2.2 The NLI Reward Function
+We define a dense reward function R(s) that eval-
+uates the logical entailment between the gener-
+ated answer sentences and the retrieved evidence.
+Let the generated answer y be split into sentences
+{u1, . . . , uL}. Let E = {e1, . . . , eK } be the top-K
+evidence snippets extracted from Dctx.
+We employ a Natural Language Inference (NLI)
+model ΘN LI (e, u) → [0, 1]3 mapping to probabil-
+ities {Pent, Pneu, Pcon}. The reward is computed
+as:
+R(y, Dctx) = 1 L L∑ l=1 max e∈E [ WT · ΘN LI (e, ul) ]
+(2)
+where W = [went, wneu, wcon]T is the weight
+vector. We explicitly set a severe penalty for
+contradictions (wcon ≪ 0) to prune hallucinated
+branches.Details of the UCT & PUCT selection,
+expansion, rollout, and backpropagation procedure
+are provided in Appendix C.5. Furthermore, a con-
+vergence & consistency justification is given in
+Appendix C.6.
+3.3 Approximation Algorithms for MMKP
+Solving Eq. 1 exactly is computationally pro-
+hibitive (O(m · 2|Gmax|)). We provide two so-
+lutions: a theoretical FPTAS for the single-
+dimensional case, with its proof details provided
+in Appendix C.3; and a practical heuristic for the
+multi-dimensional case based on Pareto-pruned DP,
+whose details are provided in Appendix C.4. For
+the practical implementation where D = 2, we
+use a Dynamic Programming approach with Pareto
+pruning to control state growth.
+4 Experiments
+4.1 Datasets
+To rigorously evaluate our Self-Correcting RAG,
+we conduct extensive experiments across six chal-
+lenging datasets of three tasks, ranging from single-
+hop retrieval to complex multi-step reasoning.
+Dataset statistics are summarized in Table 1, with
+comprehensive details provided in Appendix A.
+Simple QA. We evaluate open-domain question
+answering using NQ, a challenging subset of the
+Natural Questions benchmark (Kwiatkowski et al.,
+2019), designed to evaluate open-domain question
+answering under combined retrieval and reason-
+ing demands. We then evaluate performance on
+long-tail knowledge using PopQA (Mallen et al.,
+2023), which targets rare entities and infrequent
+facts that are typically missing from parametric
+memory and are known to trigger hallucinations in
+standard language models.
+Multi-Hop QA. We evaluate models on three
+representative datasets to assess their complex
+information aggregation capability. We adopt
+MuSiQue (Trivedi et al., 2022), which is de-
+signed to avoid shortcut learning. 2WikiMulti-
+HopQA (Ho et al., 2020) is included to evaluate
+structured reasoning abilities, as it involves reason-
+ing chains with entity relations and comparative
+logic. We use HotpotQA (Yang et al., 2018) in the
+distractor setting, which requires models to bridge
+information across two distinct documents to de-
+rive correct answers.
+Multi-Doc QA. Real-world retrieval is often imper-
+fect. We include MultiHop-RAG (Tang and Yang,
+2024), a benchmark specifically constructed to eval-
+uate resilience against noisy, irrelevant, and mis-
+leading context. This dataset tests the system’s abil-
+ity to filter out red herring documents that share lex-
+ical overlap with the query but contain no answer-
+bearing evidence.
+4.2 Baselines
+Standard RAG Baselines. We utilize Naive RAG
+as a primary baseline, following the Retrieve then
+Generate paradigm with BGE-Large embeddings
+and top-k truncation. To evaluate query optimiza-
+tion, we include HyDE (Gao et al., 2023), which
+generates hypothetical documents to bridge the se-
+mantic gap, and RRR (Ma et al., 2023a), which
+employs an LLM to rewrite input queries for better
+alignment with the corpus.
+Advanced Selection & Reranking. These meth-
+ods focus on optimizing the context window.
+Filco (Wang et al., 2023b) leverages lexical and
+semantic signals to filter out irrelevant chunks
+post-retrieval, while RECOMP (Xu et al., 2023)
+maximizes information density by compressing re-
+trieved documents into concise textual summaries
+to reduce noise and context length. LongLLM-
+20957

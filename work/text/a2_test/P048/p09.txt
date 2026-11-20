@@ -1,0 +1,102 @@
+Table II: Model efficiency on 4 datasets for 5 tasks, all experiments were carried out with Qwen2.5-14B-Instruct LLM backbone.
+Category Models Time Cost (Indexing / Querying mins) Token Cost (Input / Output per query) Novel Medical WOS IFS-REL Novel Medical WOS IFS-REL
+Traditional
+RAG
+NaiveRAG 13 / 371 7 / 245 2 / 292 2 / 225 9,437 / 1,708 7,473 / 379 7,292 / 29 4,521 / 16
+L.LLMLingua 51 / 360 37 / 305 4 / 358 3 / 315 8,466 / 1,750 5,686 / 390 5,861 / 31 2,757 / 14
+Tree
+-based RAG
+RAPTOR 464 / 250 117 / 319 30 / 162 24 / 121 7,243 / 777 4,817 / 695 6,007 / 41 3,807 / 33
+SiReRAG 85 / 233 40 / 207 26 / 139 18 / 117 7,759 / 800 4,918 / 701 6,012 / 47 3,821 / 36
+Community
+-based RAG
+G-Retriever 19 / 119 12 / 145 8 / 158 3 / 164 6,344 / 116 6,290 / 157 6,762 / 12 4,002 / 21
+MIXRAG 17 / 388 11 / 453 5 / 257 2 / 193 6,083 / 237 4,238 / 230 4,193 / 31 3,597 / 29
+GraphRAG 347 / 205 194 / 158 85 / 240 64 / 217 12,686 / 2,109 8,385 / 1,017 11,809 / 351 9,009 / 287
+LightRAG 166 / 221 116 / 164 42 / 211 31 / 197 13,145 / 1,233 9,535 / 426 11,510 / 227 7,667 / 199
+Walking
+-based RAG
+HippoRAG2 95 / 134 46 / 130 19 / 140 15 / 127 8,138 / 1,073 6,264 / 595 5,066 / 93 2,440 / 102
+F.GraphRAG 106 / 198 48 / 173 29 / 186 27 / 164 7,490 / 1,252 6,475 / 384 4,957 / 35 2,217 / 20
+AGRAG 65 / 142 16 / 138 16 / 132 14 / 124 6,487 / 1,140 5,145 / 413 3,970 / 101 1,890 / 93
+to-one mapping from entities to graph nodes, then retrieve
+these nodes’ graph neighborhood.
+Walking-based Models These models apply walking-based
+graph algorithms to score graph nodes, then retrieve text
+chunks w.r.t. their contained entity nodes’ score.
+• F.GraphRAG [32]: Fast-Graphrag employs LLM for graph
+construction. During retrieval, it applies PPR to assign node
+scores based on the query, and retrieve the Top-k passages
+based on the sum of their contained nodes’ scores.
+• HippoRAG2 [29]: It employs LLM for graph construction,
+and also add the text chunks as nodes in the graph. As a
+result, it directly retrieves Top-k text chunks based on their
+respective nodes’ PPR score.
+3) Hyperparameter and Hardware Settings: We set the
+retrieval top-k value for all RAG models to 5, aligning with the
+settings of Fast-GraphRAG and HippoRAG2. For GraphRAG,
+we apply its local search mode to all tasks, as it achieves the
+overall best effectiveness. For LightRAG, we apply its hybrid
+search mode for all tasks except the text classification task, as
+it is claimed as one of the contributions of LightRAG. For Fast-
+GraphRAG and HippoRAG2, we set their hyperparameters to
+default, to align with their original paper and code. Other
+hyperparameters of models were set as default by their codes.
+For our AGRAG, the length of text chunks lt is set to 256,
+and token overlap between chunks lo to 32, the number of raw
+mapped triples ka and the number of hybrid retrieved chunks
+kr are both set to 5, to align with the setting of HippoRAG2
+and GraphRAG-bench. AGRAG’s unique hyperparameter, the
+entity extraction threshold, and the maximum n-gram, were
+set to 0.5 and 3, respectively. Please refer to Section IV-D for
+further parameter sensitivity analysis.
+All our experiments were carried out and evaluated with
+Qwen2.5-14B-Instruct [81] LLM backbone deployed with
+vLLM [82] if not further illustrated. We apply the Con-
+triever [83] embedding model for HippoRAG2 and AGRAG’s
+dense passage retrieval procedure, and bge-large-en-v1.5 [84]
+embedding model for other baselines’ LLM embedding. We
+apply Qwen-3-Reranker-0.6B LLM for raw triplet filtering.
+All experiments are conducted on an Intel(R) Xeon(R) Gold
+5220R CPU and a single NVIDIA A100-80GB GPU.
+Table III: The hallucinated prediction rate on WOS dataset.
+Category Model Hallucinated Rate
+Pure LLM Qwen-2.5-14B 36.88%
+Traditional RAG NaiveRAG 9.96% L.LLMLingua 21.96%
+Tree-based RAG RAPTOR 7.40% SiReRAG 7.36%
+Community-based RAG GraphRAG 6.90% LightRAG 5.89%
+Walking-based RAG
+HippoRAG2 4.25%
+F.GraphRAG 6.06%
+AGRAG 0.40%
+A. Effectiveness Evaluation
+Based on the experiment results in Table ?? we have
+observations as follow:
+Firstly, in line with recent findings [31], [34], [35],
+NaiveRAG [15] achieves better performance than all tested
+walking-based baselines on Contextual Summarization and
+Creative Generation tasks. This is because, walking-based
+baselines overlook the global, and coarse-grained information
+that is essential for effective summarization and creative gen-
+eration. AGRAG achieves the best performance on these tasks
+by providing the reasoning subgraph, as well as the hybrid re-
+trieved text chunks to the LLM, offering more comprehensive
+coarse to fine-grained context for query answering.
+Secondly, Our AGRAG achieves the best performance on
+Fact Retrieval and Complex Reasoning tasks. as it can benefit
+from phrase-level dependencies by generating explicit reason-
+ing chains and directly feeding it to the LLM as guidance.
+Lastly, in the text classification task, HippoRAG2 [29] and
+SiReRAG [71] achieve the second-best performance across
+all metrics on WOS and IFS-Rel dataset respectively, outper-
+formed by AGRAG. This is because text classification requires
+capturing correlations between specific text entities and the
+text chunks to be classified, and all of SiReRAG, HippoRAG2
+and AGRAG explicitly model entity-to-passage relationships
+in the KG. AGRAG achieves the best performance as its
+reasoning subgraph spans multiple entity nodes in the KG and
+explicitly captures the relationships between these entities and
+the text chunks associated with a given classification label,
+which can assist LLM classification.
+Furthermore, Table III presents the hallucinated prediction
+rate, defined as the percentage of classifications out of the label

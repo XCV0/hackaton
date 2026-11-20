@@ -1,0 +1,100 @@
+3.5 Consistency Scoring
+NLI-Agnostic Modularity. Our framework is
+training-free and NLI-agnostic: any NLI model can
+serve as the discriminator without modifying the
+graph-based aggregation logic. This enables prac-
+titioners to select domain-appropriate NLI models
+(e.g., specialized medical/legal models), upgrade
+to stronger models without retraining, and balance
+accuracy vs. efficiency for deployment constraints.
+Experimental validation is provided in Section 4.5.
+Scoring procedure. For each grouped document
+Dk and reassembled answer A′, compute relevance
+and normalize:
+rk = R(Dk, A′), ˜rk = rk ∑K
+j=1 rj
+.
+Construct hypothesis H = “The answer to ‘Q’
+is: A′”. The NLI entailment score is ek =
+NLI(Dk, H). With threshold Ts:
+S =
+K∑
+k=1
+˜rk · ek.
+If S > Ts, the output is classified as non-
+hallucinated; otherwise as hallucinated.
+3.6 HotPotQA-Derived Benchmark
+Construction
+We contribute HotPotQA-Derived to enable sys-
+tematic multi-hop hallucination evaluation. Exist-
+ing benchmarks either provide a single passage or
+merge multiple sources, unfairly favoring LLM-
+based classifiers.
+Step 1: Source Data Selection. We build on Hot-
+PotQA (Yang et al., 2018), selecting all qualifying
+“bridge” questions that require explicit reasoning
+across exactly two documents, with unambiguous
+ground-truth answers. No cherry-picking is per-
+formed.
+Step 2: Hallucinated Answer Generation. We
+generate three difficulty levels: Bridge-Easy
+(wrong entity, correct category), Bridge-Medium
+(partially correct, wrong detail), and Bridge-Hard
+(correct individual facts combined incorrectly),
+yielding 14,282 / 45,863 / 12,246 examples (72,391
+total). Generation uses DeepSeek-V3 at tempera-
+ture 0 with prompts provided in Appendix G.
+Step 3: Two-Stage Quality Control. Stage 1 (Au-
+tomatic): contradiction detection and fluency fil-
+tering. Stage 2 (Human): trained annotators ver-
+ify plausibility, factual incorrectness, and cross-
+document dependency of flagged samples (1,173
+out of 72,391 were flagged; all were validated with
+no factual errors found). Details in Appendix F.
+During evaluation, each question is paired at
+random with its faithful or a hallucinated answer;
+classifiers predict the binary label and we report
+accuracy.
+4 Experiments
+4.1 Benchmark Datasets
+We evaluate on four benchmarks. Detailed sizes
+are in Appendix D. RAGTruth (Niu et al., 2023):
+17,790 LLM responses from 2,965 query instances
+across QA, Data-to-Text, and Summarization tasks.
+HaluBench (Ravi et al., 2024): 13,867 sam-
+ples across diverse domains, including hard-to-
+detect hallucinations. HaluEval (Li et al., 2023):
+35,000 samples across QA, dialogue, and sum-
+marization tasks with manual and automatic sub-
+sets. HotPotQA-Derived: our new benchmark
+described in Section 3.6.
+4.2 Experimental Settings
+Model Components. Our framework integrates
+three off-the-shelf models (no task-specific train-
+ing): HHEM-2.1-Open (Bao et al., 2024) (NLI
+discriminator, 60 M parameters), mxbai-rerank-
+base-v2 (Lee et al., 2025) (relevance scorer, 480 M
+parameters), and all-MiniLM-L6-v2 (Reimers and
+Gurevych, 2019) (sentence encoder, 22 M param-
+eters); plus parameter-free graph operations (Net-
+workX). Total: ≈0.56 B parameters (Config A).
+Replacing HHEM with MiniCheck-FT5 (Tang
+et al., 2024) (∼1 B) yields Config B (≈1.5 B to-
+tal).
+Hyperparameters. We tune on held-out valida-
+tion splits and use C = 256, Ta = Td = 512,
+Tt = 1,024, Ts = 0.4 across all benchmarks un-
+less stated otherwise.
+Hardware. Efficiency experiments are conducted
+on RTX 4090; main results were originally mea-
+sured on RTX 4060 (8 GB) to represent a resource-
+constrained scenario.
+4.3 Main Results
+RAGTruth. On RAGTruth (Table 4), Config A
+surpasses all non-pretrained baselines, attaining
+best F1 in QA (85.8%) and Summarization (73.7%).
+Performance on Data-to-Text is lower; this subset
+uses structured tables rather than free-form text,
+where our semantic similarity graph is less effec-
+tive; analysis in Appendix D.
+1609

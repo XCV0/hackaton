@@ -1,0 +1,56 @@
+Figure 7: Distribution of pages per query for PaperTab.
+tomatic and manual curation methods. The dataset
+is released under the CC-BY-SA-4.0 license, allow-
+ing for broad use while ensuring proper attribution.
+Figure 8: Distribution of pages per query for SPIQA.
+SciGraphQA SciGraphQA (Li and Tajbakhsh,
+2023) is a synthetic multi-turn question-answer
+dataset centered on academic graphs, represent-
+ing a significant advancement in the field of visual
+question answering. At 13 times larger than the pre-
+vious largest dataset, ChartVQA, it stands as the
+largest open-sourced chart VQA dataset with non-
+synthetic charts. The dataset was constructed from
+290,000 Computer Science and Machine Learn-
+ing papers published on ArXiv between 2010 and
+2020, with the help of Palm-2 generating 295,000
+samples of open-vocabulary multi-turn question-
+answer dialogues about the graphs. Each dialogue
+is contextualized with the paper title, abstract, rel-
+evant paragraphs, and rich contextual data from
+the graphs, achieving an average of 2.23 question-
+answer turns per graph. SciGraphQA is released
+under the MIT license.
+SlideVQA SlideVQA (Tanaka et al., 2023) is
+a multi-image document VQA dataset that con-
+tains over 2,600 slide decks, comprising more than
+52,000 slide images and 14,500 questions regard-
+Figure 9: Distribution of pages per query for Sci-
+GraphQA.
+ing the slide content. This dataset requires complex
+reasoning skills, including single-hop, multi-hop,
+and numerical reasoning. It also provides anno-
+tated arithmetic expressions for numerical answers,
+enhancing numerical reasoning capabilities. More
+details about the dataset can be found under the
+license at this link.
+Figure 10: Distribution of pages per query for Slide-
+VQA.
+A.2.1 Distracting Documents
+Distracting documents are introduced as additional,
+irrelevant documents within the retrieval set to sim-
+ulate real-world scenarios where the task is to find
+the most relevant context among multiple docu-
+ments. These distracting documents are selected
+randomly from the in-domain documents of a given
+dataset, ensuring that they are contextually similar
+but not directly relevant to the query.
+To validate the effectiveness of the one-to-one
+mapping and evaluate the robustness of the retrieval
+system in the presence of distracting documents,
+we conducted an experiment where we removed the
+oracle document (i.e., the ground truth document)
+from the retrieval set. In this setup, we provided
+GPT-4 with the option to refuse to answer the query
+if it deemed the provided context insufficient for
+6101

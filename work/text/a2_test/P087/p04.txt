@@ -1,0 +1,128 @@
+(a) Traditional Top-K RAG (Baseline)
+Q Document Corpus
+DOC A DOC B DOC C DOC D
+Relectance Scoring
+Relecince Embedding
+Relectd Token Limt
+Evaluation 
+Index
+Top-K  
+Selection (k=3)
+Result:
+Docs A,C,D (Relevance 
+scoring)
+Issue:
+1.Only consider correlation,
+2.Ignore overlap,complete;
+3.Missing Information,
+(e.g. ,missing the context of 
+D);
+4.Exceeding Token Limit .
+   Top-K Output
+Correlation Analysis
+Feature Extraction
+Relectance
+Score
+Content
+Embeddings
+fi
+ei
+Self-Correcting RAG Optimizer
+(b) Ours:Enhancing Faithfulness via MMKP Context Selection and NLI-Guided MCTS
+Q Document Corpus
+DOC A DOC B DOC C DOC D
+   Self-Correcting 
+Output
+Result:
+Docs A,D (Self-Correcting scoring)
+Issue:
+1.Redundancy,(e.g. ,A&B 
+similar,lack of implementability);
+2.Irrelevance,(e.g. ,despite the 
+keyword “Prime Editing”);
+3.Integrity,(e.g. ,D supplies the 
+essential historical context that 
+completes the picture).
+         Formulating context selection 
+as a MMKP to maximize information 
+density under token limits, while 
+employing NLI-guided MCTS to 
+dynamically explore reasoning paths 
+and ensure faithful generation.
+Analyze Requirements & Dataset Call Self-Correcting Expert RAG Drafter Evaluation & Integration
+         For beginners just starting to explore the core 
+differences between CRISPR-Cas9 and Prime 
+Editing, which documents are most suitable?  
+These materials should clearly explain this complex 
+concept and help beginners establish a basic 
+understanding.
+Q A Knowledge-intensive Query Based on Multiple Documents
+ A  LLM Based on Traditional 
+Top-K RAG
+A LLM Based on Self-Correcting RAG 
+Document Selection Optimizer
+NLl-Guided MCTS Path Planning
+Pass
+Pass
+Pass
+Pass
+Fail
+Fail
+Final 
+Result
+State
+Figure 2: Illustration of the comparison between traditional retrieval paradigms and our proposed framework.(a) The
+Baseline Traditional Top-K RAG relies primarily on simple relevance scoring and embeddings to select top-ranked
+documents within a token limit.(b) In contrast, our proposed Self-Correcting RAG Optimizer models document
+selection as a combinatorial optimization problem. It integrates feature extraction and a dedicated Self-Correcting
+Optimization Engine (employing MMKP and NLI-guided mechanisms) to efficiently select the best draft.
+Let dij denote the j-th document in group Gi,
+and we introduce a binary decision variable xij ∈
+{0, 1} where xij = 1 iff dij is selected. The full
+definition of the multidimensional cost vectors wij
+(token consumption and redundancy penalty) and
+the fused utility vij are provided in Appendix C.1,
+with the MMKP objective unchanged.
+3.1.2 The MMKP Optimization Objective
+The objective is to maximize total utility Z subject
+to the capacity vector C = [Ctoken, Cred]T :
+maximize Z(x) =
+m∑
+i=1
+|Gi|∑
+j=1
+vij xij
+subject to
+m∑
+i=1
+|Gi|∑
+j=1
+wij xij ⪯ C
+|Gi|∑
+j=1
+xij ≤ 1, ∀i ∈ {1, . . . , m}
+xij ∈ {0, 1}
+(1)
+The multiple-choice constraint (∑ xij ≤ 1) en-
+forces that we select at most one representative
+from each semantic cluster, thereby maximizing
+information coverage. The NP-hardness of this
+formulation, proven via a reduction, is detailed in
+Appendix C.2.
+3.2 Phase II: Inference-Time Reasoning via
+NLI-Guided MCTS
+While MMKP optimizes the input context, it does
+not guarantee that the generated answer is faith-
+ful. To address hallucinations, we introduce a Test-
+Time Compute strategy modeled as a Markov De-
+cision Process (MDP) solved via Monte Carlo Tree
+Search.
+3.2.1 MDP Formulation
+We define the Markov Decision Process as the tuple
+(S, A, P, R).
+State Space S. A state st = (q, Dctx, y1:t−1) con-
+sists of the query, the currently selected context
+documents, and the partial answer generated so far.
+Action Space A. At each step, the policy net-
+work (LLM) selects one of two actions. A gen-
+20956

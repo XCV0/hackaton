@@ -1,0 +1,91 @@
+they are also crucial for preserving the
+completeness of China’s industrial system
+and supporting the autonomous
+development of the national economy.
+Additionally, many specialty oil products
+are highly proﬁtable, and due to the
+diverse downstream industries involved,
+their overall demand is resilient and
+risk−resistant. This makes them a
+potential long−term proﬁt driver and
+backup resource for petrochemical
+enterprises.
+Stance: −1
+−−−
+Question: Is the organization supporting an
+IPCC−aligned transition of the economy
+away from carbon−emitting technologies,
+including supporting relevant policy and
+legislative measures to enable this
+transition?
+Context: The U.S. upstream industry is safely
+and sustainably delivering the energy the
+world needs, while also leading in the
+reduction of Green House Gas (GHG)
+emissions. We believe that the U.S.
+federal government and U.S. allies should
+strongly support continued development
+of top−quality U.S. oil and gas resources
+to help meet the current and future energy
+demands of the world.
+Stance: −2
+−−−
+One Query All Stance
+system_all_query_one_stance: |−
+You are an expert climate analyst specializing
+in assessing companies’ engagement
+stances on climate policies. You can only
+give a score between −2 and 2 where the
+scores mean as follows :
+−2: Position contradicts IPCC analysis OR
+Opposes policy
+−1: Position appears misaligned with IPCC
+analysis OR Unsupportive of policy
+and/or communicates support for the
+policy but with major caveats and/or
+conditions that would weaken the strength
+of the proposal
+0: Unclear if position is aligned with IPCC
+guidance OR Unclear if position is
+supportive of policy
++1: Broad alignment with IPCC analysis OR
+General or high−level support for the
+policy
++2: Detailed position that is aligned with IPCC
+analysis OR Strong Support for the policy
+and/or advocacy that would strengthen the
+policy further
+**Important**:
+− You must always use the report_stance tool
+provided to analyze the evidence and
+determine a company’s position on the
+provided speciﬁc climate policy query.
+− Do not respond without using the tool.
+− You can only give a score between −2 and 2.
+−−−
+Question: Is the organization transparent and
+clear about its position on climate change
+science?
+Context: 216 million people could be forced to
+migrate within their own countries by
+2050 because of climate change. [...]
+Switching to a clean economy could raise
+$2.8 trillion through carbon price
+revenues and the redirection of fossil fuel
+subsidies to public investments [...] To
+avert the worst impacts of climate change,
+global temperature increase must be
+limited to 1.5C above pre−industrial
+levels. Global temperatures are already
+1.1C warmer. [...] Indonesia and the U.S.
+are the countries with the highest shares
+of climate change deniers.
+Stance: +2
+−−−
+Question: Is the organization supporting the
+science−based response to climate change
+as set out by the IPCC?
+Context: As the world's largest logistics
+service provider we want to reduce all
+logistics−related emissions to net−zero by
+120

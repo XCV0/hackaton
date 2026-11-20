@@ -1,0 +1,145 @@
+Table 13: Per-dataset failure rates by gener-
+ator (Claude-Sonnet-4.6 judge; update-ignored /
+contradiction-failure, %). Same rows as Table 5. The
+domain ordering is broadly shared, with Qwen3-8B
+failing contradictions almost everywhere and following
+updates most often.
+Dataset n Claude-4.5-Haiku GPT-5.4-mini Qwen3-8B
+HotpotQA 99 22 / 41 33 / 39 24 / 90
+TechQA 97 33 / 41 38 / 49 52 / 67
+PubMedQA 98 5 / 48 12 / 51 4 / 81
+CovidQA 72 28 / 53 44 / 49 10 / 64
+EManual 100 61 / 78 73 / 84 14 / 73
+FinQA 100 55 / 48 39 / 49 13 / 99
+Table 14: Behavioral detectors against blind human
+labels. Stratified n=100 sample (50 per detector, spread
+over the six datasets of the coherent-intervention probe),
+labeled independently by two authors who saw the ques-
+tion, reference answer, injected claim, and system an-
+swer but not the judge’s label. 4-way: Cohen’s κ on the
+full label taxonomy; failure: κ on the binary failure class
+reported in the paper (silent-pick or confident-match for
+conflict acknowledgment; ignored for update following).
+Precision/recall are for the detector on that failure class,
+taking each annotator as ground truth. Consensus: de-
+tector agreement on items where both annotators gave
+the same label.
+Conflict ack. Update following
+4-way failure 4-way failure
+Annotator 1 vs. 2 (κ) 0.81 0.87 0.52 0.71
+Detector vs. annotator 1 (κ) 0.83 0.92 0.56 0.76
+Detector vs. annotator 2 (κ) 0.92 0.96 0.84 0.95
+Precision / recall vs. annotator 1 100% / 94% 80% / 86%
+Precision / recall vs. annotator 2 100% / 97% 100% / 94%
+Consensus agreement (n) 98% (43) 94% (32)
+pling. The sweep’s contradiction payload is a one-
+line templated claim (“one source claims the an-
+swer is u, not the reference”), and the 82% is a strat-
+ified n=50 sample of it (Wilson 95% CI [69, 90]);
+the coherent probe’s payload is a Claude-Haiku-
+written 2–3 sentence passage asserting a specific
+alternative of the same factual type (Appendix I),
+and the 93.6% is a census of all 593 of them. The
+richer payload is judged well-formed more often.
+Answer-similarity function. Pairwise Spear-
+man correlation between DAP estimates under
+three answer-similarity functions on the ExpertQA
+n=200 subsample (Table 16).
+Matched-faithfulness pairing threshold. Ta-
+ble 17 repeats the matched-pair analysis of Sec-
+tion 5.1 at ±0.005 and ±0.02; the within-pair be-
+havioral gaps persist at the tighter threshold.
+0 1 2 3 4
+gold-passage count g
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0mean metric value
+hotpotqa
+0 1 2 3 4 5
+gold-passage count g
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pubmedqa
+0 1 2 3 4 5
+gold-passage count g
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+techqa
+0 1 2 3 4
+gold-passage count g
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0mean metric value
+covidqa
+0 1 2 3
+gold-passage count g
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+emanual
+0 1 2 3
+gold-passage count g
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+finqa
+1 DAP (CounterMem)
+ RAGChecker claim-recall RAGAS context-precision RAGAS faithfulness
+Figure 2: Construct validity on mock gold/distractor
+systems. Mean metric value as a function of gold-
+passage count g for six datasets. RAGAS faithfulness
+saturates near 1.0 regardless of g. 1−DAP (Counter-
+Mem), RAGChecker claim-recall, and RAGAS context-
+precision all rise monotonically with g.
+Table 15: Intervention-validity audit on the RAG-
+Bench sweep. Stratified sample of n=50 rows per in-
+tervention class drawn from the 27-configuration sweep,
+judged by Claude-Sonnet (a model stronger than the
+system under test). Validity is the fraction of inter-
+vention payloads judged well-formed. The coherent-
+intervention probe of Section 5.3 uses a separate per-
+row audit (n=593, 93.6% contradictions well-formed);
+headline behavioral rates there are computed on the
+judged-valid contradiction subset (Limitations).
+Probe n Validity Headline detector
+Base (no intervention) 50 100% LLM judge
+Delete-All 50 100% LLM judge
+Update injected 50 96% content match
+Contradiction injected 50 82% LLM judge
+Cluster-deletion threshold. Fraction of queries
+with at least one multi-document cluster under
+semantic SBERT clustering at four thresholds.
+Conclusions about redundancy ordering are stable
+around τ =0.6 (the main-text default).
+Prompt style. Same RAGBench rows under
+strict (main-paper default) and helpful prompts
+(Table 19); stricter prompts are a partial—not
+complete—fix for the failure modes COUNTER-
+MEM measures.
+Repeated generation under sampling. We sam-
+pled n=49 ExpertQA queries and called Claude-
+Haiku with temperature 0.7 three independent
+times per condition (Table 20); aggregate DAP
+standard deviation across reps is 0.003, supporting
+single-generation estimates for the main results.
+22347

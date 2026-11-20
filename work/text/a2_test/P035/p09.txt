@@ -1,0 +1,99 @@
+5.6 Efficiency Analysis
+We provide detailed comparisons of average LLM
+and retrieval calls on StrategyQA, as shown in Fig-
+ure 4. While DRAG requires more LLM calls than
+simpler baselines, making an average of 2.08 Re-
+triever Calls and 10.36 LLM Calls (with 3.36 dur-
+ing the retrieval phase and 7 during the response
+phase), its overall cost remains comparable to other
+multi-turn frameworks such as IRCoT. This cost
+is further mitigated by DRAG’s adaptive termina-
+tion mechanism in the retrieval debate stage, which
+helps eliminate unnecessary debate rounds. As a re-
+sult, the number of LLM calls in the retrieval stage
+is significantly lower than in the response stage (7
+rounds on average). Moreover, as discussed in Sec-
+tion 5.2, for simpler single-hop questions, only 1–2
+debate rounds are often sufficient. In such cases,
+the number of LLM calls in the response stage can
+be reduced from 7 to 5 or fewer, achieving a more
+favorable trade-off between accuracy and efficiency.
+A more effective adaptive stopping mechanism in
+the response phase may further enhance DRAG’s
+efficiency, and we will elaborate in the Limitations
+section.
+6 Conclusion
+In this paper, we introduce Debate-Augmented
+RAG (DRAG), a novel framework designed to mit-
+igate hallucinations in Retrieval-Augmented Gen-
+eration (RAG) by leveraging multi-agent debate
+mechanisms. DRAG employs a two-stage struc-
+tured debate: (1) Retrieval Debate, where mul-
+tiple agents iteratively refine retrieval queries to
+improve knowledge coverage; (2) Response De-
+bate, where agents adopt asymmetric roles and en-
+gage in structured debates to strengthen reasoning
+and mitigate reliance on flawed retrievals. Exten-
+sive experiments across six datasets spanning three
+knowledge-intensive tasks validate the efficacy of
+DRAG.
+Limitations
+A key limitation of our approach is the increased
+computational overhead introduced by multi-agent
+debates in both the retrieval and response stages.
+While the retrieval phase employs a Judge Agent
+to dynamically terminate early when sufficient ev-
+idence is gathered, the response phase currently
+uses a fixed number of debate rounds, which may
+lead to unnecessary LLM calls, especially in simple
+single-hop tasks.
+This also introduces another limitation: problem
+drift, where excessive reasoning adds unnecessary
+complexity and reduces effectiveness in straightfor-
+ward scenarios. Although DRAG adapts retrieval
+depth well, its response stage lacks such flexibility.
+Future work should explore adaptive stopping
+criteria, agent pruning, or confidence-based early
+termination in the response stage to better balance
+reasoning depth and efficiency. We believe these
+enhancements will improve DRAG’s flexibility and
+performance across both single-hop and multi-hop
+settings. Investigating how to make the response de-
+bate more task-sensitive, by learning to infer when
+enough reasoning has been done, is a promising
+direction for future research.
+Acknowledgement
+This work was supported by the National Nat-
+ural Science Foundation of China (Grant No.:
+62372314), Hong Kong Research Grants Coun-
+cil under General Research Fund (project no.
+15200023), as well as Research Impact Fund
+(project no R1015-23). This work was also sup-
+ported by the following funding sources: indus-
+try donations from Accel Group Holding Limited
+and Minshang Creative Technology Holdings Lim-
+ited (P0045948, P0046453); PolyU internal re-
+search funding (P0046701, P0046703); Research
+Matching Grant Scheme funded by the Univer-
+sity Grants Committee (P0048183, P0048191);
+the Innovation and Technology Fund - ITSP,
+ITS/028/22FP (P0048887); Postdoc Matching
+Fund Scheme (P0048984); the RGC Early Career
+Scheme, 25600624 (P0051906); and Two Square
+Capital Limited donation (P0054482).
+References
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama
+Ahmad, Ilge Akkaya, Florencia Leoni Aleman,
+Diogo Almeida, Janko Altenschmidt, Sam Altman,
+Shyamal Anadkat, et al. 2023. Gpt-4 technical report.
+arXiv preprint arXiv:2303.08774.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+arXiv preprint arXiv:2310.11511.
+Jonas Becker. 2024. Multi-agent large language mod-
+els for conversational task-solving. arXiv preprint
+arXiv:2410.22932.
+Yilun Du, Shuang Li, Antonio Torralba, Joshua B.
+Tenenbaum, and Igor Mordatch. 2024. Improving
+15847

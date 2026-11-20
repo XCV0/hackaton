@@ -1,0 +1,98 @@
+settings where graph-style evidence organization
+can improve coverage.
+PropRAG (Wang and Han, 2025) represents
+documents using propositions and performs beam-
+style traversal over proposition paths. It is closely
+related to our use of beam search, but differs in
+its underlying structure: PropRAG searches over a
+proposition graph, whereas SPROUTRAG searches
+over an attention-guided sentence hierarchy. Pro-
+pRAG is therefore a strong baseline for testing
+whether hierarchical sentence-level structure pro-
+vides benefits beyond proposition-path retrieval.
+SAKI-RAG (Tao et al., 2025) uses a Sentence-
+Level Large Language Model (SLLM) to esti-
+mate inter-sentence attention and expand retrieved
+chunks with related sentences. It is the closest base-
+line to SPROUTRAG because it also uses sentence-
+level attention signals. However, SAKI-RAG per-
+forms pairwise expansion and relies on LLM filter-
+ing during retrieval, while SPROUTRAG converts
+learned attention into a global tree and retrieves
+across multiple granularities without inference-
+time LLM filtering.
+GraphRAG (Edge et al., 2025) constructs an
+entity-relation graph from the corpus and uses
+graph structure to support retrieval and generation.
+It is effective for queries that align well with entity-
+centric evidence, but it depends on reliable entity
+extraction and relation construction. We include
+GraphRAG in the end-to-end comparison because
+it is a system-level RAG method with substantial
+LLM-based preprocessing and reasoning.
+ReflectiveRAG (Verma et al., 2026) introduces
+adaptive retrieval and generation through self-
+reflection. Instead of using a fixed retrieval bud-
+get, it evaluates whether retrieved evidence is suffi-
+cient and can reformulate or expand retrieval when
+needed. This makes it a strong final-performance
+baseline, but its main contribution lies in adaptive
+evidence use and generation rather than efficient
+retrieval structure.
+PageIndex (Zhang et al., 2025a) replaces con-
+ventional vector retrieval with a reasoning-based hi-
+erarchical page index. An LLM navigates the index
+and selects evidence through multi-step reasoning,
+which can improve final answer quality. However,
+because it performs LLM-heavy online search and
+evidence construction, we include it only in end-
+to-end performance comparisons rather than as an
+efficient retrieval baseline.
+REFRAG (Lin et al., 2025) focuses on
+generation-side efficiency for RAG by exploiting
+sparsity in retrieved contexts. It compresses re-
+trieved chunks and selectively expands them during
+decoding, reducing the effective context processed
+by the generator. Since its main contribution is
+decoding-time optimization rather than retrieval or
+indexing, we include it in the final-performance
+and efficiency comparison.
+B Retrieval Performance at Different
+Cutoffs
+Tables 4, 5, and 6 report retrieval performance at
+cutoffs k=1, k=3, and k=5, respectively, across
+all six benchmarks. As expected, both precision
+and recall increase monotonically with k for all
+methods, since retrieving more documents provides
+greater coverage of relevant passages. The relative
+ordering of methods remains consistent across all
+cutoffs: SPROUTRAG outperforms all non-oracle
+baselines at every depth. This consistency demon-
+strates that the gains from topic-guided retrieval
+are not specific to any particular cutoff, but reflect
+a robust improvement in retrieval quality across the
+full range of evaluation settings reported here.
+C Qualitative Analysis: Recovering
+Multi-Sentence Legal Evidence
+Table 7 presents a qualitative example that illus-
+trates why retrieving internal tree nodes is useful.
+The query asks whether a software services agree-
+ment limits the provider’s liability and what ex-
+ceptions apply. A complete answer requires more
+than a single sentence or a pair of related sen-
+tences: the model must recover the excluded dam-
+ages, the aggregate liability cap, the scope of the
+limitation across legal theories, and the carve-outs
+for indemnification, confidentiality breaches, gross
+negligence, and willful misconduct. These pieces
+form a coherent clause-level unit, but they are dis-
+tributed across four sentences. MoC retrieves a
+locally coherent chunk containing the liability cap,
+but this evidence is too narrow to answer the full
+query. SAKI-RAG improves over local chunking
+by linking the damage-exclusion sentence with the
+liability-cap sentence; however, its pairwise expan-
+sion still misses the later exception sentence, which
+is essential for a legally complete answer. In con-
+trast, SPROUTRAG retrieves the internal node v1:4,
+46533

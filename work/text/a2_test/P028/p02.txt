@@ -1,0 +1,32 @@
+2 Author name / Procedia Computer Science 00 (2024) 000–000 
+ 
+While extensive research has been conducted on the application and effectiveness of RAG in English, this has not 
+been the case for almost all other languages, and even less so for Arabic. According to Wikipedia, the Arabic language 
+is spoken by approximately 422 million people, making it one of the most widely used languages in the world1. As a 
+language, Arabic has unique linguistic characteristics, and its automatic processing is often complicated by a diverse 
+set of dialects used across the many countries in which it is the official language [2]. Not only do these dialects vary 
+significantly from one region to another, but they are also quite distant from Modern Standard Arabic (MSA), which 
+is the formal written version of Arabic.  
+A typical RAG system is composed of various components, as shown in Fig 1. One of the most important 
+components is the retriever, which is the entity responsible for retrieving pieces of text that act as the context from 
+which the generator can formulate a final response for the user. Retrieval is a crucial step because it allows the model 
+to augment its pre-existing knowledge with specific, up-to-date information, leading to outputs that are not only well-
+informed and accurate, but also tailored to the specifics of the user query. Failure to retrieve correct pieces of text to 
+pass on to the generator means that the whole system will not work as expected. Since most generators have context 
+limitations, it is best if the retriever’s top results are the ones from which an answer can be extracted. The use of 
+semantically rich embeddings has been shown to be the best way to approach this task. However, given the fact that 
+the recent most powerful LLMs, which are often used to generate embeddings, have been predominantly trained on 
+English documents and that the extent of support for Arabic in multilingual models is not known, one of the main 
+goals of this study is to investigate the retrieval aspect of RAG—specifically, how various embedding models perform 
+in the context of Arabic. This includes investigating which embeddings are most effective for capturing the semantic 
+nuances necessary for accurate retrieval and whether the retrieval process itself is impacted by the linguistic variations 
+inherent to Arabic dialects. The second aim of the work presented in this paper is to also do some preliminary analysis 
+to investigate which LLMs work best as generators in Arabic with focus on open-source models. The study is by no 
+means comprehensive, but opens the door for further investigations in this area.  All code and data files related to this 
+investigation are publicly available 2. 
+ 
+Fig. 1. A typical RAG System Architecture 
+ 
+ 
+1 Wikipedia: List of countries and territories where Arabic is an official language (https://shorturl.at/WpcYU) 
+2 https://github.com/SElBeltagy/ArRagExperiments

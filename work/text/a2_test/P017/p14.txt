@@ -1,0 +1,72 @@
+version of the training set using a different VLM,
+Qwen2-VL-72B-Instruct, and trained models both
+with and without rephrasing (using LLaMA-3-3-
+70B). After filtering, the dataset size was slightly
+smaller—40k examples compared to 46k with Pix-
+tral generation—likely due to Qwen generating
+more queries that were filtered out.
+While results show a slight decrease in perfor-
+mance compared to using Pixtral-generated data,
+the fine-tuned models still significantly outperform
+the base ColPali and ColQwen models. This con-
+firms that the effectiveness of our data is not limited
+to a specific VLM and that training on a table-heavy
+dataset remains highly beneficial.
+A.6 Our Models’ Results on ViDoRe V2
+We report NDCG@5 performance on the newly
+released ViDoRe V2 benchmark, both before and
+after fine-tuning. As shown in Table S8, we com-
+pare base models (ColPali and ColQwen), mod-
+els fine-tuned on the rephrased ColPali training
+set (Rob variants), and models fine-tuned with our
+table-focused and rephrased training set (RobTab
+variants).
+Across 4 out 5 English benchmarks, we observe
+consistent improvements from fine-tuning, with
+particularly large gains for ColPali-based models.
+Among all methods, RobTabColQwen achieves the
+highest average NDCG@5 score, highlighting the
+effectiveness of our combined rephrasing and table-
+focused training strategy.
+We further evaluate performance on the multi-
+lingual subset of ViDoRe V2 (Table S9). Here,
+fine-tuning also improves performance over the
+base models, with an even greater margin between
+RobTabColQwen and ColQwen. This suggests that
+rephrasing augmentation enhances the model’s abil-
+ity to capture semantic similarity beyond surface-
+level token overlap, which is especially beneficial
+for cross-lingual retrieval.
+Overall, these results demonstrate the general-
+ization ability of our fine-tuned models across both
+diverse content types and languages.
+A.7 Licensing and Additional General
+Information
+All models and datasets used in this work com-
+ply with their respective licenses. Qwen2-VL
+(ColQwen2) is licensed under Apache 2.0, with
+adapters under MIT. PaliGemma (ColPali) fol-
+lows the Gemma license, with adapters under MIT.
+Pixtral-12B-2409 (mistralai) and Mixtral-8x22B
+are both under Apache 2.0, allowing unrestricted
+use, modification, and distribution. LLaMA 3.3
+70B is licensed under the LLaMA 3.3 Commu-
+nity License Agreement. All datasets used are in
+English. The Colapli training set consists of sub-
+sampled academic datasets redistributed under their
+original licenses. It also includes synthetic datasets
+generated from publicly available internet data and
+VLM-generated queries, which are released with-
+out usage restrictions. Benchmark datasets are de-
+rived from openly available documents and images,
+with owner approval for publication. Fine-tuning
+data (Fintabnet) is collected from publicly avail-
+able sources and processed for compatibility with
+our models.
+For human evaluation, we published an online
+form alongside a request for participation in an-
+notating queries for evaluating data intended for
+publication. Throughout the paper, an AI assis-
+tant (ChatGPT) was used for minor grammar and
+sentence structure edits.
+31673

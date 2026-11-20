@@ -1,0 +1,88 @@
+per-item (ρ) between G-Eval scores and classifi-
+cation correctness. HalluGuard exhibits a strong
+correlation between Consistency and correctness
+(ρ = 0.527, p < 0.0001), while Qwen3-4B shows
+no such relationship (ρ = 0.011, p = 0.6660).
+This result suggests that fine-tuning better aligns
+model reasoning with correct predictions, leading
+to stronger justification-accuracy alignment. A
+weaker but significant correlation is also observed
+for Relevance (ρ = 0.215, p < 0.0001), further
+linking HalluGuard’s improved accuracy to more
+consistent and relevant justifications.
+Human Alignment Evaluation. We evaluated
+whether our heuristic preference construction (Sec-
+tion 4.3) aligns with human judgments. We sam-
+pled 100 preference tuples zi (balanced between
+grounded and hallucinated claims). Two indepen-
+dent NLP expert annotators compared the two com-
+pletions in each tuple using the same criteria as
+those used in dataset construction (classification
+correctness, reasoning coherence, and justification
+clarity). Annotators were blind to labels (chosen or
+rejected) and saw completions in random order.
+At the item level, chosen was preferred in 71
+of 75 tuples with full agreement (94.7%; p =
+3.4 × 10−17, binomial test). At the annotation
+level, 83.5% of all 200 judgments favored chosen
+(p = 4.7 × 10−23; see Table 5).
+Overall, these results indicate that our heuristic
+provides a reliable proxy for human preferences.
+Evaluation level Pref. for chosen
+Item level (n = 75) 94.7%
+Annotation level (n = 200) 83.5%
+Table 5: Human Alignment Results. Annotators pre-
+ferred the chosen completions (94.7% of the 75 fully
+agreed items; 83.5% of the 200 individual judgments).
+7 Ablation Study
+Impact of Consensus Filtering. Applying LLM-
+based consensus filtering using independent evalua-
+tors (IE-1 and IE-2) to preference tuples provides a
+decisive improvement. With filtering, HalluGuard
+reaches 77.1% BAcc, compared to 76.0% without it
+(-1.1%). Although the absolute gain appears mod-
+est, its impact is substantial: without consensus fil-
+tering, HalluGuard no longer remains competitive,
+falling behind not only Mistral Large 2 (76.5%)
+but also Granite Guardian 3.3 (76.5%). This high-
+lights consensus filtering as essential for preserving
+HalluGuard’s competitive performance.
+Contribution of Reasoning. Disabling reason-
+ing by using /no_think in the prompt leads to a
+decrease in performance. In think mode, Hal-
+luGuard reaches a BAcc of 77.1%, whereas in
+/no_think mode the BAcc decreases to 62.2% (-
+14.9%). This represents the largest drop in our
+ablation study, highlighting the critical role of rea-
+soning in detecting hallucinations.
+This is even more marked on RAGTruth, where
+reasoning improves BAcc (+29.9%), with consis-
+tent gains across all other datasets (see Figure 5).
+Figure 5: Effect of Model Reasoning. Radar plot com-
+paring HalluGuard in think mode (lighter blue) vs. in
+/no_think mode (darker blue).
+ORPO Training Strategy. Fine-tuning with SFT
+alone results in a notable performance drop, with
+BAcc decreasing from 77.1% to 75.0% (-2.1%).
+However, fine-tuning with DPO alone, without
+prior SFT, achieves a BAcc of 76.9%, outper-
+forming SFT alone but still below ORPO. In gen-
+eral, ORPO achieves the highest balanced accuracy
+(77.1%), confirming the effectiveness of jointly in-
+tegrating SFT and preference alignment within a
+single fine-tuning stage.
+Ablation Results. Figure 4 and Table 6 present
+the results of the ablation study for HalluGuard.
+The full model consistently achieves the highest
+BAcc against ablated variants, demonstrating that
+observed performance improvements are the result
+of the association of all components.
+Model Variant BAcc ∆
+HalluGuard-4B (full) 77.1 -
+w/o consensus filtering 76.0 -1.1
+w/o reasoning (/no_think) 62.2 -14.9
+SFT alone 75.0 -2.1
+DPO alone 76.9 -0.2
+Table 6: Ablation Results. BAcc for the full model and
+ablated variants. ∆ is relative to the full model.
+16925

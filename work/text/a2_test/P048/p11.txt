@@ -1,0 +1,139 @@
+Table IV: The ablation experiment result on the two datasets and 4 tasks. All experiments were carried out with Qwen2.5-14B-Instruct LLM, where Time (I
+/ Q) denotes the Index and Query time, Token (I / O) denotes the LLM Input and Output token count.
+Model
+Creative Gen. Contextual Sum. Complex Rea. Fact Retrieval Model Efficiency
+Novel Medical Novel Medical Novel Medical Novel Medical Novel Medical
+FS. ACC. COV. FS. ACC. COV. COV. ACC. COV. ACC. ROG. ACC. ROG. ACC. ROG. ACC. ROG. ACC. Time (I / Q) Token (I / G) Time (I / Q) Token (I / G)
+AGRAG w. HR Only 0.491 0.322 0.378 0.303 0.526 0.549 0.739 0.522 0.535 0.583 0.303 0.453 0.334 0.636 0.323 0.487 0.355 0.619 11.7 / 137.9 5,117 / 193 11.4 / 117.9 5,215 / 199
+AGRAG w. LLM ER 0.428 0.302 0.365 0.352 0.526 0.587 0.755 0.552 0.600 0.566 0.320 0.465 0.333 0.624 0.322 0.480 0.353 0.613 83.3 / 161.2 8,030 / 887 31.9 / 148.8 5,457 / 414
+AGRAG w.o. HR 0.519 0.306 0.343 0.342 0.521 0.570 0.677 0.534 0.420 0.578 0.318 0.434 0.324 0.598 0.314 0.487 0.344 0.615 61.7 / 138.9 6,986 / 741 9.4 / 114.4 4,820 / 315
+AGRAG w.o. MCMI 0.488 0.332 0.358 0.351 0.530 0.575 0.748 0.592 0.600 0.588 0.324 0.465 0.329 0.633 0.322 0.470 0.359 0.621 63.9 / 130.4 6,710 / 757 9.5 / 125.0 5,230 / 331
+AGRAG w.o. Cle. 0.478 0.311 0.361 0.336 0.517 0.569 0.712 0.597 0.616 0.577 0.301 0.450 0.334 0.628 0.313 0.478 0.354 0.620 65.6 / 140.1 6,988 / 154 9.1 / 142.9 5,252 / 158
+AGRAG 0.513 0.339 0.386 0.356 0.598 0.589 0.778 0.643 0.690 0.604 0.319 0.467 0.343 0.665 0.324 0.490 0.357 0.628 65.6 / 142.0 6,988 / 639 9.1 / 145.3 5,252 / 306
+Table V: Low resource experiment effectiveness with Qwen3-4B-Instruct-2507 LLM on 2080Ti GPU, where model with -L denotes low resource setting.
+Task Creative Gen. Contextual Sum. Complex Rea. Fact Retrieval
+Dataset Novel Medical Novel Medical Novel Medical Novel Medical
+Metric FS. ACC. COV. FS. ACC. COV. COV. ACC. COV. ACC. ROG. ACC. ROG. ACC. ROG. ACC. ROG. ACC.
+SiReRAG-L 0.324 0.412 0.299 0.421 0.758 0.475 0.647 0.673 0.536 0.738 0.260 0.426 0.308 0.698 0.271 0.416 0.343 0.661
+HippoRAG2-L 0.433 0.481 0.335 0.425 0.755 0.433 0.696 0.657 0.522 0.731 0.280 0.507 0.298 0.681 0.288 0.513 0.338 0.654
+AGRAG-L 0.441 0.519 0.354 0.436 0.777 0.490 0.745 0.706 0.545 0.751 0.293 0.552 0.312 0.739 0.297 0.560 0.351 0.701
+Table VI: Low resource experiment efficiency with Qwen3-4B-Instruct-2507
+LLM on 2080Ti GPU, where -L denotes low resource setting.
+Dataset Novel Medical Time (mins) AVG. Token Time (mins) AVG. Token
+Metric Index Query In Out Index Query In Out
+SiReRAG-L 52.0 183.5 7,898 1,003 18.1 182.3 5,113 827
+HippoRAG2-L 55.7 131.2 7,964 1,354 21.8 162.4 5,577 584
+AGRAG-L 44.7 132.1 6,625 1,172 14.4 167.3 5,282 534Table VII: Breakdown time cost (mins) of AGRAG on 4 datasets.
+Dataset Entity Extraction Chunk Encoding Triplet Filter MCMI Generation Hybrid Retrieval QA
+Novel 62.0 2.8 2.3 3.3 2.4 98.9
+Medical 15.1 0.6 2.8 9.1 7.0 72.7
+WOS 7.4 0.3 3.4 1.6 0.4 106.7
+IFS-Rel 5.6 0.2 1.4 0.3 0.1 98.9
+D. Parameter Sensitivity Analysis
+In this subsection, we analyse the parameter sensitivity
+of AGRAG’s two unique hyperparameters: The maximum n-
+gram b and the entity extraction threshold τ. As all other
+hyperparameters of AGRAG also exist in other baselines, we
+just align them with other baselines for fair comparison. We
+carry out the analysis on GraphRAG-bench [34], which cover
+most of the tasks of our experiment.
+1) The maximum n-gram b: As introduced in Section III-B,
+the maximum n-gram b is used as the entity boundary to
+control the maximum allowed word length of the extracted
+entities. Here, we conduct a test about the maximum n-gram
+parameter b ∈ {1, 3, 5, 7}, as entity distribution in English
+is, in general, less than 7 words according to [87]. From the
+experiment results in Figure 3, AGRAG achieves the overall
+best performance when the maximum n-gram b is set to 3,
+this is because most of the entities usually consist of no more
+than 3 words, according to the discovery of [87]–[89].
+For Creative Generation task, AGRAG can achieve better
+performance with larger maximum n-gram, because the correct
+answer of this task is more flexible than other tasks that
+have fixed answers or require answers to cover certain facts.
+Therefore, the negative impact of noise introduced by high n-
+gram phrases is overwhelmed by the additional context they
+provide, leading to better performance. This also highlights
+AGRAG’s adaptability to different tasks through its flexible
+graph construction. In our experiments, we set the maximum
+0.1 0.3 0.5 0.7
+Threshold 
+7531
+Max N-gram b
+Creative Gen.
+0.1 0.3 0.5 0.7
+Threshold 
+Contextual Sum.
+0.1 0.3 0.5 0.7
+Threshold 
+Complex Rea.
+0.1 0.3 0.5 0.7
+Threshold 
+Fact Retrieval
+0.34
+0.42
+ACC
+0.64
+0.68
+ACC
+0.47
+0.49
+ACC
+0.48
+0.51
+ACC
+(a) Parameter sensitivity experiment on Novel dataset of GraphRAG-bench.
+0.1 0.3 0.5 0.7
+Threshold 
+7531
+Max N-gram b
+Creative Gen.
+0.1 0.3 0.5 0.7
+Threshold 
+Contextual Sum.
+0.1 0.3 0.5 0.7
+Threshold 
+Complex Rea.
+0.1 0.3 0.5 0.7
+Threshold 
+Fact Retrieval
+0.58
+0.63
+ACC
+0.58
+0.61
+ACC
+0.64
+0.67
+ACC
+0.61
+0.63
+ACC
+(b) Parameter sensitivity experiment on Medical dataset of GraphRAG-bench.
+Figure 3: Parameter sensitivity experiment on GraphRAG-bench, where x-axis
+of each heatmap denotes the entity extraction threshold, and y-axis denotes
+the maximum n-gram. We choose accuracy as the metric; the darker the color
+of each block, the better the accuracy of the corresponding parameter pair.
+n-gram b to 3 for all tasks.
+2) The entity extraction threshold τ: As introduced in
+Section III-B, in the extraction procedure, we extract words
+or phrases that have the entity extraction score ER(·) > τ
+as an entity, and we have 0 < ER(·) < 1. Considering the
+computational cost, we only test the entity extraction threshold
+τ ∈ {0.1, 0.3, 0.5, 0.7}. According to the experiment results
+in Figure 3, AGRAG typically achieves its best performance
+when set to 0.3 or 0.5. This is because a large threshold tends
+to extract less informative entities, and a small one tends to
+cause insufficient entity extraction; both can affect the model’s
+effectiveness. In our experiments, we set the entity extraction
+threshold τ to 0.5 for all tasks.
+V. CONCLUSION
+This paper presents AGRAG, an Advanced Graph-based
+Retrieval Augmented Generation framework addressing the
+Inaccurate Graph Construction, Poor Reasoning Ability, and
+Inadequate Answer issues of current RAG frameworks. By
+providing explicit reasoning paths to help LLM inference,
+AGRAG makes the LLM better focus on query-related
+contexts within the retrieved context. Experiments on real-
+world datasets demonstrate the effectiveness and efficiency of
+AGRAG over state-of-the-art RAG models.

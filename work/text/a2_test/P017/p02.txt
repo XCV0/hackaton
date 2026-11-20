@@ -1,0 +1,64 @@
+Figure 1: Proposed Real-MM-RAG Benchmark
+Enhanced difficulty (Property ii): Instead of
+relying on isolated pages or trivial queries, we fo-
+cus on long documents from specialized domains
+(e.g., IBM finance reports, FlashSystem technical
+materials). This makes retrieval significantly more
+challenging, as models must differentiate between
+highly similar content within the same domain. Ad-
+ditionally, we incorporate a rephrasing step to en-
+sure that query wording and order are not identical
+to the page content, requiring semantic understand-
+ing rather than simple keyword matching.
+Realistic-RAG queries (Property iii): We use
+a two-step process to generate queries: vision-
+language models (VLMs) create retrieval-focused
+queries, and large language models (LLMs) filter
+them to ensure natural phrasing and realistic user
+intent. Unlike many existing datasets, our queries
+avoid direct references to specific pages, reflecting
+authentic retrieval scenarios.
+Accurate labeling (Property iv): Ensuring all
+pages answering a query are correctly identified is
+crucial, especially in benchmarks with many sim-
+ilar pages. Existing benchmarks often mislabel
+valid documents as incorrect, leading to false neg-
+atives. To address this, we employ an automated
+pipeline using VLMs to verify query relevance to
+each page. While computationally intensive, this
+approach enhances labeling reliability, particularly
+for closely related pages.
+Our benchmark enables reliable evaluation of cur-
+rent retrieval models and uncovering some of their
+weaknesses. Additionally, it incorporates two es-
+sential properties that expose specific retrieval chal-
+lenges:
+Rephrasing Robustness Evaluation: In real-
+world scenarios, users rarely phrase their queries
+exactly as they appear in documents. However,
+both VLMs and human annotators tend to gener-
+ate queries that closely mirror the source mate-
+rial, often using similar words and sentence struc-
+tures (Smeaton and Kelledy, 1998; Zhu et al., 2024).
+This fails to reflect natural user behavior, where
+users are not directly exposed to the document page
+when forming queries. To address this, we intro-
+duce a multi-level rephrasing benchmark, modify-
+ing queries at three distinct levels—ranging from
+slight rewording to significant structural changes.
+Our experiments show that current retrieval mod-
+els struggle to maintain performance across these
+variations, highlighting a critical weakness in their
+semantic understanding.
+Table-Focused Scenarios: Table-heavy docu-
+ments (e.g. financial reports) often contain dense
+tabular data, posing a major challenge for retrieval
+models. By incorporating table-heavy documents
+into our benchmark, we expose key deficiencies
+in table comprehension that significantly impact
+model performance. These properties allow us to
+demonstrate that all current retrieval models exhibit
+weaknesses in handling both rephrased queries and
+table-heavy financial documents.
+To address these shortcomings, we leverage in-
+31661

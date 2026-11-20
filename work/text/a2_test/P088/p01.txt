@@ -1,0 +1,94 @@
+RAG Safety: Exploring Knowledge Poisoning Attacks to Retrieval-Augmented Generation
+Tianzhe Zhaoa,∗, Jiaoyan Chenb, Yanchi Rua, Haiping Zhua, Nan Huc, Jun Liua and Qika Lind,∗
+aSchool of Computer Science and Technology,Xi’an Jiaotong University, Xi’an, 710049, China
+bDepartment of Computer Science, The University of Manchester, Manchester, M13 9PL, United Kingdom
+cSchool of Computer Science and Engineering, Southeast University, Nanjing, 211102, China
+dNational University of Singapore, Singapore, 119077, Singapore
+ARTICLE INFO
+Keywords:
+Retrieval-augmented generation
+Knowledge graph
+Data poisoning
+Large Language Model
+Robustness
+ABSTRACT
+Retrieval-Augmented Generation (RAG) enhances large language models (LLMs) by retrieving
+external data to mitigate hallucinations and outdated knowledge issues. Benefiting from the strong
+abilityinfacilitatingdiversedatasourcesandsupportingfaithfulreasoning,knowledgegraphs(KGs)
+have been increasingly adopted in RAG systems, giving rise to KG-based RAG (KG-RAG) methods.
+Though RAG systems are widely applied in various applications, recent studies have also revealed
+its vulnerabilities to data poisoning attacks, where malicious information injected into external
+knowledge sources can mislead the system into producing incorrect or harmful responses. However,
+these studies focus exclusively on RAG systems using unstructured textual data sources, leaving the
+securityrisksofKG-RAGlargelyunexplored,despitethefactthatKGspresentuniquevulnerabilities
+due to their structured and editable nature. In this work, we conduct the first systematic investigation
+of the security issue of KG-RAG methods through data poisoning attacks. To this end, we introduce
+a practical, stealthy attack setting that aligns with real-world implementation. We propose an attack
+strategythatfirstidentifiesadversarialtargetanswersandtheninsertsperturbationtriplestocomplete
+misleading inference chains in the KG, increasing the likelihood that KG-RAG methods retrieve and
+rely on these perturbations during generation. Through extensive experiments on two benchmarks
+andfourrecentKG-RAGmethods,ourattackstrategydemonstratesstrongeffectivenessindegrading
+KG-RAG performance, even with minimal KG perturbations. In-depth analyses are also conducted
+to understand the safety threats within the internal stages of KG-RAG systems and to explore the
+robustness of LLMs against adversarial knowledge.
+1. Introduction
+Retrieval-Augmented Generation (RAG) extends Large
+Language Models (LLMs) with access to external knowl-
+edgesources,enablingresponsestobegroundedinretrieved
+contentsratherthangeneratedsolelyfromthemodel’sinter-
+nalparameters[1,2,3].Thisapproachhelpsmitigateseveral
+key limitations of LLMs, such as hallucinations, outdated
+knowledge, and weak domain adaptation. As a result, RAG
+has been widely adopted in a broad range of tasks, such
+as question answering [4] and scientific summarization [5].
+Despite their success, traditional RAG systems still suffer
+fromsomeissueslikeredundantinformationintheretrieved
+data and too long prompts, especially facing heterogeneous
+and large-scale data sources [6, 7].
+Recently, knowledge graphs (KGs), which represent re-
+lationalfactsintheformoftriples,i.e.,(head,relation,tail),
+have been introduced for supporting RAG, giving rise to
+thedirectionofKG-basedRetrieval-AugmentedGeneration
+(KG-RAG)[6,8].Asawidelyusedapproachforknowledge
+representation, there have been quite a few existing KGs
+(e.g., Wikidata [9] and SNOMED CT [10]) that contain a
+large quantity of valuable knowledge. They can be directly
+usedaseffectivesourcesforsupportingbothgeneralpurpose
+∗Corresponding author
+ztz8758@foxmail.com (T. Zhao); jiaoyan.chen@manchester.ac.uk (J.
+Chen); 2196123580@stu.xjtu.edu.cn (Y. Ru); zhuhaiping@xjtu.edu.cn (H.
+Zhu); nanhu@seu.edu.cn (N. Hu); jiukeen@xjtu.edu.cn (J. Liu);
+qikalin@foxmail.com (Q. Lin)
+ORCID(s): 0000-0002-2879-2703 (T. Zhao); 0000-0001-5650-0600 (Q.
+Lin)
+anddomainspecificapplication[11,12].KGanditsassoci-
+ated semantic technologies also exhibit strong capabilities
+in data integration and knowledge management [13], and
+thus can be used to facilitate the consolidation of diverse
+external data sources, such as documents and tables, into
+more focused and semantically coherent representations for
+supporting RAG [14, 15]. In addition, KGs can be used
+to support faithful reasoning, especially in domains that
+require high trustworthiness, such as legal judgment [16]
+and medical diagnosis [17]. Retrieved evidence from KGs,
+e.g., explicit relational paths, can provide a reliable and
+interpretablejustificationforRAG.Duetoallthesebenefits,
+KG-RAG has become a popular research topic with quite a
+few emerging methods.1
+AsRAGsystemsbecomeincreasinglyprominentinreal-
+world applications, several studies [18, 19, 20, 21] have
+also witnessed their vulnerabilities, particularly when the
+external knowledge sources are of low quality or have been
+adversariallymanipulated.Theyfindthatinjectingmalicious
+ormisleadingcontentintotheexternalknowledgesourcecan
+cause RAG systems to generate incorrect or even specified
+responses, without modifying the LLM parameters. These
+manipulations, commonly referred to as data poisoning at-
+tacks [22, 23], introduce adversarial perturbations into the
+data source. However, existing studies have only focused
+on the poisoning of traditional RAG systems that leverage
+1Note that many KG-based RAG methods, which KGs as retrieval
+sources, are simply referred to as GraphRAG [6, 8], although the graphs
+they use fall into the scope of KG.
+: Preprint submitted to Elsevier Page 1 of 13
+arXiv:2507.08862v1  [cs.CR]  9 Jul 2025

@@ -1,0 +1,115 @@
+5
+with notable local variation); and Florida and Arkansas (lax or less
+restrictive, with preemptive state laws limiting local restrictions).
+The five cities are: San Francisco, CA; New York City, NY; Chicago,
+IL; Denver, CO; and Washington, D.C. These jurisdictions were
+selected deliberately to represent the most consequential cases
+along the US regulatory spectrum and to capture legally complex
+preemption scenarios. The challenge, therefore, is not merely scale
+but linguistic structure. That is, state and municipal ordinances
+frequently borrow language verbatim from federal statutes, making
+their embeddings nearly indistinguishable by cosine similarity.
+For instance, a system that retrieves by semantic similarity alone
+cannot reliably distinguish a D.C.-flavored tobacco ordinance from
+the federal Family Smoking Prevention and Tobacco Control Act
+when both use the phrase “flavored tobacco product” and define
+it identically. This is the specific failure mode that PRISM-RAG’s
+jurisdiction-aware context assembly is designed to address.
+Scope. All legislative documents reflect the regulatory landscape as
+of March 2026; statutory text changes over time, and users should
+verify the current status of any law referenced in system outputs.
+3.6 QA Benchmark
+The QA benchmark directly measures whether a method succeeds
+or fails across the three challenge dimensions defined above. We
+co-developed and validated it with our public health domain expert
+team.
+NicoPRISM organizes the benchmark into two QA categories,
+each formulated as a set of image-conditioned questions paired
+with ground-truth keyword sets. We report the following evaluation
+metrics to capture as many aspects of the RAG process as possible
+in our challenging problem setting. KW-P, keyword precision,
+quantifies how much of the final response y∗ is on-topic with the
+ground-truth keywords. We also report KW-R (keyword recall)
+and KW-F1 (F1 similarity score). CC (context coverage) is
+the fraction of ground-truth keywords present anywhere in the
+assembled context Cq , measuring retrieval quality independently of
+generation quality. CC accounts for cases where a method retrieves
+the right content but generates poorly, or generates fluently from the
+wrong content. RG (response groundedness) is the cosine similarity
+between y∗ and Cq , measuring how closely the response tracks the
+retrieved evidence. Following HyperGraphRAG [5], Judge is the
+LLM-as-a-Judge score (1–5) [38]. For policy compliance questions,
+we report CA (compliance accuracy), i.e., the fraction of responses
+whose LLM-judge-extracted compliance label matches the ground-
+truth labels, and JA (retrieval-level jurisdiction accuracy), i.e., the
+fraction of retrieved passages whose source document belongs to
+the queried jurisdiction. JA directly measures the second challenge
+dimension: whether the retrieval mechanism is routing to the correct
+jurisdiction’s documents at all, independent of the LLM stage.
+Critically, a method that scores low JA and moderate CA succeeds
+at compliance determination despite retrieving wrong-jurisdiction
+content; this gives insight into confident answers grounded in the
+wrong documents.
+(I) Product knowledge QA questions probe product-level at-
+tributes including flavor profiles, marketing claims, packaging
+design, and nicotine strength framing. Questions range from direct
+attribute queries (e.g., “What nicotine strengths does this product
+offer?”) to comparative queries requiring cross-product knowledge
+retrieval (e.g., “Which other brands offer a flavor with this name?”).
+(II) Policy compliance QA questions probe how US regulations
+apply to specific product types depicted in the query image.
+These questions span cases of graded legal complexity: from
+straightforward single-jurisdiction determinations (e.g., “Is the
+sale of this flavored nicotine pouch legal in Arkansas as of 2024?”)
+to multi-hop scenarios requiring joint reasoning over state and
+municipal law (e.g., questions involving state preemption of a local
+flavor ban). Policy QA exercises all three challenge dimensions:
+cross-modal grounding (the query begins with an image and a
+question), jurisdictional disambiguation (the method must retrieve
+from the correct jurisdiction’s statute, not a semantically similar one
+from another jurisdiction), and heterogeneous knowledge fusion
+(both product attribute evidence, captions, and legislative evidence
+may be relevant to the answer). Our expert collaborators constructed
+and finalized the ground-truth keyword sets by carefully revising
+legislative documents, ensuring that correct answers require actual
+statutory grounding.
+In total, NicoPRISM contains 1,495 distinct image-question
+pairs, comprising 170 product knowledge QA pairs and 1,325
+policy compliance QA pairs. This expert-in-the-loop validation
+process is a key quality guarantee that distinguishes the NicoPRISM
+compliance benchmark from prior work.
+Legal Scope Disclaimer. PRISM-RAG outputs are intended to
+assist researchers and practitioners and do not constitute legal
+advice; users should consult qualified legal experts before acting
+on any system-generated policy compliance determination.
+4 THE PRISM-RAG FRAMEWORK
+In this section, we introduce PRISM-RAG, a multimodal RAG
+framework that connects image descriptions (i.e., captions) to
+heterogeneous documents; in this work, we focus on establishing a
+strong foundation for understanding and retrieving relevant legisla-
+tive text. We discuss notation and data modeling assumptions for
+PRISM-RAG in Sec. 4.1. Sec. 4.2 details our indexing procedure.
+Sec. 4.3 describes the query procedure. Sec. 4.4 describes PRISM-
+RAG’s response generation. Lastly, Sec. 4.5 covers costs associated
+with PRISM-RAG, although index and retrieval complexity are
+similar across all SOTA RAG baselines.
+4.1 Data Modeling
+We can denote the image dataset as I = {(xI i , Yi, Ci)}N i=1, where
+Yi = (y(pn) i , y(pt) i ) and Ci = {xC i,l}L l=1. Image embeddings are
+zI i = f (I)(xI i ). Since caption-to-image alignment is required
+for bridge hyperedge construction (Sec. 4.2.5), we maintain two
+caption embeddings. Aligned caption embeddings Z C i are produced
+by the text branch f (C) of the same vision-language model used
+for f (I) (e.g., SigLIP [39]). Semantic caption embeddings Z C,D i
+are produced by a dedicated document encoder f (D) and are used
+for concept hyperedge clustering (Sec. 4.2.4). The document set
+is D, and each policy document d ∈ D carries a jurisdiction label
+jur(d) ∈ Jknown.
+4.2 Construction
+4.2.1 Knowledge Definition
+We organize heterogeneous knowledge as a hypergraph G = (V, E)
+with V = VI ∪ VA ∪ VP ∪ VJ ∪ VT . Image product nodes VI carry
+bimodal embeddings hP i (Eqn. 1). Caption attribute nodes VA
+encode unique (category, value) pairs with f (D). Document chunk
+nodes VP encode text chunks of all d ∈ D and carry jurisdiction
+metadata. Jurisdiction anchor nodes VJ map jurisdiction name

@@ -1,0 +1,122 @@
+NoteRel T²Ranking
+Method F1-Score AUC Acc. F1-Score AUC Acc.
+0 1 2 0/12 01/2 0 1 2 0/12 01/2
+Prompting
+UMbrela w/o parameter update
+Qwen2.5-7B 48.1 46.6 54.6 65.1 66.3 49.6 47.7 30.1 60.0 65.2 65.9 48.9
+QwQ-32B 62.3 43.6 63.5 70.3 69.4 55.9 48.2 33.8 67.1 65.5 66.9 54.0
+DeepSeek-V3 56.6 46.3 60.4 69.4 69.8 54.1 49.8 32.7 65.8 66.5 67.6 52.3
+DeepSeek-R1 61.9 42.8 63.0 72.1 71.8 56.0 46.5 31.9 66.9 64.3 63.2 53.6
+GPT-4o 63.3 53.8 59.6 73.0 69.8 58.2 50.9 33.4 66.2 66.3 67.1 54.2
+Supervised Fine-Tuning
+w/ parameter update
+Qwen2.5-1.5B 68.4 51.8 57.7 76.3 68.5 59.0 48.3 36.0 50.4 67.6 62.9 46.3
++ pretrained 70.1 55.3 56.0 77.3 68.2 60.0 50.7 33.3 58.2 69.1 65.4 48.3
+Qwen2.5-7B 71.0 55.6 52.1 78.2 66.8 60.3 49.7 32.2 62.8 66.4 67.5 50.7
++ pretrained 69.9 54.9 53.9 77.0 67.6 61.4 51.2 31.6 65.3 66.9 67.5 51.4
+Reinforcement Learning
+w/ parameter update on Qwen2.5-1.5B
+R1-Zero 66.7 45.3 58.5 75.1 68.2 56.8 47.9 26.8 62.3 65.0 64.1 46.2
+R1 70.7 46.9 62.0 78.3 69.0 59.7 51.1 25.4 63.6 65.6 64.8 47.7
+R³A-Zero 71.3 49.8 60.5 79.4 68.3 60.4 48.0 24.8 61.8 64.4 65.0 47.9
+R³A 72.0 51.5 62.9 80.8 69.6 61.7 49.8 30.3 62.7 66.1 66.4 49.0
+w/ parameter update on Qwen2.5-7B
+R1-Zero 67.5 47.2 62.5 75.6 71.7 59.3 48.0 24.8 61.8 64.4 65.0 49.9
+R1 74.4 49.6 63.7 81.2 72.7 63.2 50.8 27.3 57.7 66.4 65.6 51.4
+R³A-Zero 75.8 51.7 63.3 82.4 72.5 63.6 50.8 33.2 63.5 67.3 64.8 51.2
+R³A 77.1 56.0 64.2 83.1 73.3 65.2 52.1 34.3 66.6 67.5 67.8 53.9
+Distilling (Online Serving)
+R³A-Distill-1.5B 71.4 55.9 60.3 78.3 70.5 62.0 50.4 29.8 64.9 66.3 67.2 51.3
+Table 2: Overall performance on the test set of
+NoteRel and T²Ranking datasets. The labels 0, 1,
+and 2 indicate "Irrelevant", "Partially Relevant",
+and "Highly Relevant", respectively.
+(a) Pass@k performance com-
+parison across different mod-
+els
+0.0-0.2 0.2-0.4 0.4-0.6 0.6-0.8 0.8-1.0
+Extracted fragment similarity
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Accuracy
+label=1 (line)
+label=2 (line)
+label=0
+label=1
+label=2
+(b) Correlation between ex-
+tracted fragment similarity
+and accuracy
+Figure 3: Performance analysis of R³A model.
+sure a fair comparison, we also pre-train the model
+using cold-start data before fine-tuning. (3) R1-
+Zero/R1 (Guo et al., 2025): This method employs
+rule-based GRPO to encourage the model to engage
+in explicit reasoning during relevance assessment.
+The model’s output format is constrained to the
+<THINK> and <SCORE> tags. The R1-Zero refers
+to RL initiated without the cold-start strategy. (4)
+Distillation: The distilled model is trained on a
+1.5B backbone using the same SFT approach. It
+relies solely on score labels produced by the R³A-
+7B model on 50k cold-start data. We deploy this
+version in our online system for better inference
+speed and overall throughput.
+Models. For SFT and RL-based methods, we ex-
+plore LLMs using instruction-tuned Qwen2.5 mod-
+els (Yang et al., 2024) ranging from 1.5B to 7B
+parameters. All models are trained on the training
+split of the NoteRel dataset, with detailed training
+Time / 8 A100 GPU Number of Evaluated Documents
+(in seconds) 1 10 100 1,000 10,000
+R³A-7B 0.6385 1.1718 3.3774 43.7740 493.7861
+R³A-Distill-1.5B 0.1396 0.1717 0.3332 2.3673 10.9421
+Table 3: Inference latency comparison of R³A-7B
+and R³A-Distill-1.5B models.
+configurations provided in Appendix E and training
+logs presented in Appendix F.
+Metrics. We use F1 score (macro-averaged), Ac-
+curacy, and one-vs-rest AUC metrics (AUC0/12
+and AUC01/2) following previous works (Welleck,
+2016; Chen et al., 2024).
+3.3 Overall Performance
+As presented in Table 2, our method R³A consis-
+tently achieves superior performance over all base-
+line approaches on the NoteRel test set. Moreover,
+on the out-of-distribution benchmark T²Ranking,
+R³A achieves performance comparable to GPT-4o,
+indicating that the proposed approach generalizes
+effectively to datasets from other commercial do-
+mains. We present several cases in Appendix G.
+Notably, the R³A-Zero models, trained without
+cold-start initialization, already surpass both R1-
+Zero and SFT baselines, underscoring the efficacy
+of R³A in exploiting reasoning signals to improve
+performance even under constrained initialization
+settings. When full RL training is applied, R³A
+further extends its advantage, yielding state-of-the-
+art results across most evaluation metrics.
+Superior Distillation. Remarkably, the distilled
+model R³A-Distill-1.5B not only retains the perfor-
+mance gains of its 1.5B RL-trained counterpart, but
+also outperforms the larger 7B SFT model. These
+results indicate that the knowledge distilled from
+R³A effectively preserves essential relevance as-
+sessment capabilities in a smaller model.
+As shown in Table 3, we compare inference
+time before and after model distillation on NoteRel
+dataset. The results indicate that the R³A-7B
+model’s inference latency increases almost linearly
+with the number of evaluated documents. In con-
+trast, distillation substantially reduces inference
+cost by eliminating the need to output intermedi-
+ate reasoning steps, thereby mitigating latency and
+improving efficiency.
+Performance on Pass@k Figure 3a shows that
+while base instruction-tuned models improve with
+increasing k, their performance remains substan-
+tially below that of R³A-trained models, particu-
+131

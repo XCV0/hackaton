@@ -1,0 +1,89 @@
+Benchmark FinReport FinSlides TechReport TechSlides
+Text
+BM25 (OCR) 21.7 5.9 35.1 31.2
+BGE-M3 (OCR) 36.5 11.4 37.1 49.7
+BM25 (Captioning) 25.3 9.9 37.2 36.1
+BGE-M3 (Captioning) 35.9 13.8 37.5 51.7
+Vision
+ColPali 34.5 27.6 62.0 75.8
+RobColPali 47.1 +12.6 48.4 +20.8 66.6 +4.60 82.8 +7.0
+TabColPali 50.5 +16.0 41.5 +13.9 61.3 -0.7 77.6 +1.8
+RobTabColPali 63.2 +28.7 58.3 +30.7 70.7 +8.7 83.3 +7.5
+ColQwen 41.8 31.1 66.9 78.1
+RobColQwen 47.5 +5.7 44.3 +13.2 69.5 +2.6 83.0 +4.9
+TabColQwen 54.0 +12.2 49.6 +18.5 65.9 -1.0 78.9 -0.8
+RobTabColQwen 67.1 +25.3 61.6 +30.5 73.2 +6.3 85.0 +6.9
+Table 2: Performance of Different Models on Our
+Benchmark. We evaluate various models, includ-
+ing text- and vision-based approaches, across our four
+benchmarks. Results, measured using NDCG@5, are
+reported on our final benchmark with queries rephrased
+at the highest level (Level 3). We also present results for
+our fine-tuned models trained on our proposed datasets:
+Rob – trained on a rephrased dataset, Tab – trained on a
+table-heavy dataset, and RobTab – incorporating both.
+visual chunks (e.g., tables, figures, images). We
+consider two text-based variants: (1) OCR, where
+visual data is processed through an OCR engine,
+and (2) Captioning, where visual elements are de-
+scribed using a Vision Language Model (Qwen2-
+VL-72B-Instruct (Wang et al., 2024b)). We then
+evaluate two retrieval methods: Okapi BM25 and
+BGE-M3 (Chen et al., 2024) (see appendix A.1 for
+more details). We report NDCG@5 as our primary
+ranking metric, which evaluates how well relevant
+items are ranked within the top 5 results, giving
+higher importance to those appearing earlier. Addi-
+tional metrics and details provided in A.1 & A.5.
+5.1 Results Analysis
+In Table 2, we report NDCG@5 performance for
+different models across our four benchmarks with
+high rephrasing levels, which better reflect real-
+world scenarios. We first present observations
+about the vanilla models, including text-based
+models, ColPali, and ColQwen: Visual vs. Text-
+Based Models. Vision-based models, which use
+VLMs on page images, significantly outperform
+text-based models across all benchmarks. This
+supports the notion that visual information is es-
+sential for our benchmark and that these models
+can effectively utilize it. Non-Trivial Difficulty.
+Performance is generally low, especially compared
+to Vidore, where ColQwen achieves nearly 90%
+on average. Rephrasing Effects on Performance.
+Some of the drop in performance is due to rephras-
+ing. In Table 3, we analyze the impact of rephras-
+ing level, showing a clear performance drop as
+rephrasing intensity increases. BM25 suffers the
+most, as expected for a lexical-based model, while
+dense retrieval models are more resilient. Table-
+Heavy Finance Benchmarks Are Harder. Our fi-
+nancial benchmarks (FinReport, FinSlides), which
+are table-heavy, are significantly more challenging
+than text/visual-based ones (see table vs. non-table
+analysis in Table S5).
+5.2 Table and Finance Focused Training
+To address the challenges in table-heavy datasets,
+we curated a table-focused finance dataset using
+FinTabNet (Zheng et al., 2021), which contains
+complex tables from S&P 500 company reports.
+Through the pipeline in section 3, we generated
+46,000 query-answer-page triplets to enhance re-
+trieval for table-heavy financial data (see Table S7
+for a VLM ablation study). We fine-tuned ColPali
+and ColQwen for one epoch on this dataset while
+incorporating the ColPali training set, producing
+the TabCol models.
+As shown in Fig. 3 and Table 2, TabCol models sig-
+nificantly improve performance on financial bench-
+marks, effectively addressing table-heavy dataset
+challenges. Importantly, this enhancement does not
+come at the cost of generalization, as TabCol mod-
+els continue well across the two other benchmarks.
+Figure 3: Table-Focused Training Improves Finan-
+cial Benchmarks. Fine-tuning with our proposed table-
+heavy training set, combined with the ColPali training
+set (both in their original and rephrased versions) signif-
+icantly enhances performance on financial benchmarks
+(results shown for rephrasing level 3).
+31666

@@ -1,0 +1,55 @@
+J Robustness Analysis
+Figure 7: Robustness analysis. We deliver the retrieved documents using the order presented in §3.2 (Original),
+randomly (Random Shuffle), with English first (En doc/s first) and English last (En doc/s last).
+G Translation-Following
+We instruct Llama-3-8b using instruction set
+composed from Instruction: ‘Translate
+the following text from LX to
+English’, Input: ‘Sentence in LX ’.
+and Output: ‘Sentence in English’.,
+as in (Ranaldi et al., 2024). We used
+news_commentary (Tiedemann, 2012) by
+selecting En-X translations as detailed in Table
+9. We randomly extracted 2k demonstrations for
+the available languages in the open repo (link1,
+link2). We tune the model for three epochs with
+a batch size of 32 and a learning rate equal to
+1e-5 with a 0.001 weight decay. We use the
+cosine learning rate scheduler with a warmup
+ratio of 0.03. We conducted our experiments
+on a workstation with four Nvidia RTX A6000
+48VRAM for approximately 14 GPU/h.
+Languages
+German, Spanish, Italian, Russian, Chinese, Japanese,
+Arabic, Russian, Hindi
+Total: 18k
+Table 9: Instances and languages used for conducting
+Translation-following experiment.
+H Translation-Following Results
+To make the experimental setting fair and consis-
+tent, we randomly extracted the same number of
+demonstrations for the languages available in the
+one-source repositories. Although these offer a
+large number of languages, some languages (Ko-
+rean, Finnish, Thai and Vietnamese) are not avail-
+able. However, we chose not to exclude these lan-
+guages from the final evaluation.
+Language MLQA MKQA
+German 69.8 67.5
+Italian 69.2 -
+Chinese 64.4 62.3
+Japanese 56.8 -
+Spanish 69.2 69.6
+Portuguese 69.0 -
+Russian 64.2 -
+Arabic 59.1 43.9
+Hindi - 40.6
+Finnish 57.0 -
+Korean 39.4 -
+Thai 23.9 -
+Vietnamese - 44.5
+Avg 58.9 54.7
+Avg LR 45.2 43.3
+Table 10: Performances Llama-3-8b with Translation-
+following tuning.
+709

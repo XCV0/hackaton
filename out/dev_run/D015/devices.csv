@@ -1,0 +1,9 @@
+publication_id,device_id,absorber_material_id,device_label,device_role,device_type,architecture,substrate_type,active_area,area_unit,area_definition,encapsulation,note
+D015,DV-REF,M1,"Reference (Cu-doped, Au)",control,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode; Cu-doped (CuCl2), no buffer"
+D015,DV-0,M1,"CuxCryOz/Au, 0 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-6,M1,"CuxCryOz/Au, 6 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-8,M1,"CuxCryOz/Au, 8 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-10,M1,"CuxCryOz/Au, 10 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-12,M1,"CuxCryOz/Au, 12 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-BREF,M1,"Reference (Cu-doped, ITO)",control,cell,superstrate,rigid,0.08,cm2,,,"bifacial, ITO back electrode; параметры взяты из предыдущей работы [26]"
+D015,DV-BCC,M1,CuxCryOz/ITO,target,cell,superstrate,rigid,0.08,cm2,,,"bifacial, ITO back electrode"

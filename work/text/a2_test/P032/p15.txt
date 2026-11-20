@@ -1,0 +1,52 @@
+J Fine-Tuning Configuration
+Parameter Value
+lora_layers_attn q_proj
+k_proj
+v_proj
+lora_layers_ffn gate_proj
+up_proj
+down_proj
+lora_rank 16
+lora_alpha 16
+lora_dropout 0
+precision bfloat16
+epochs 1
+batch_size 2
+grad_accumulation 4
+effective_batch_size 8
+optimizer AdamW (8-bit)
+learning_rate 1 × 10−6
+lr_schedule linear
+orpo_beta 0.1
+max_length 32768
+max_prompt_length 32768
+max_completion_length 32768
+Table 9: The setup trains ∼33M parameters (0.81% of
+the full model) using LoRA for 1 epoch.
+K Benchmark Dataset Details
+LLM-AggreFact includes the following datasets:
+AGGREFACT (Tang et al., 2023), a factual con-
+sistency benchmark for summarization; TofuE-
+val (Tang et al., 2024b), a dialogue summariza-
+tion benchmark with LLM summaries annotated
+for factual consistency; WiCE (Kamoi et al., 2023),
+a textual entailment dataset of Wikipedia claims
+and cited sources; REVEAL (Jacovi et al., 2024),
+which evaluates reasoning chains in open-domain
+QA with sentence-level attribution labels against re-
+trieved Wikipedia passages; ClaimVerify (Liu et al.,
+2023a), which assesses generative search engine
+responses by verifying check-worthy sentences
+against cited documents with binary factuality la-
+bels; FactCheck-GPT (Wang et al., 2024), which
+decomposes LLM responses to search queries into
+atomic facts; ExpertQA (Malaviya et al., 2024),
+consisting of expert-curated queries across 32 do-
+mains where system responses are verified against
+evidence documents; LFQA (Chen et al., 2023),
+where LLM long-form answers conditioned on
+retrieved or random documents are labeled; and
+RAGTruth (Niu et al., 2024), a retrieval-augmented
+generation benchmark where outputs grounded in
+retrieved passages are annotated.
+16932

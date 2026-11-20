@@ -1,0 +1,111 @@
+KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea Yifan Jin et al.
+summarizes the core theme, and 2) a fine-grained query 𝑞𝑠 that cap-
+tures fine-grained details. By leveraging the pre-trained mapping
+network 𝑓Θ (·), these reconstructed queries are naturally embedded
+into the hyperbolic space at positions commensurate with their
+semantic granularities. Consequently, they are subsequently em-
+ployed to retrieve relevant knowledge from the hyperbolic index
+H through coarse-grained and fine-grained knowledge retrieval
+processes.
+Coarse-grained knowledge retrieval. Given a coarse-grained
+query 𝑞𝑎, it is first processed by the pre-trained hyperbolic semantic
+encoder, which comprises the language model and the mapping
+network 𝑓Θ, and subsequently projected into the hyperbolic space
+via the exponential map:
+q𝑎 = expo (𝑓Θ (LM(𝑞𝑎))), (18)
+where q𝑎 is the resulting hyperbolic embedding of 𝑞𝑎. Based on
+this representation, the top-𝑘 entities with the smallest hyperbolic
+distances to q𝑎 are retrieved from the hyperbolic indexH:
+Etop 𝑎 = topk
+e𝑖 ∈H
+𝑑B (q𝑎, e𝑖), (19)
+where Etop 𝑎 denotes the selected set of top-𝑘 coarse-grained entities.
+To further enrich the retrieved context with structural informa-
+tion, we expand each entity 𝑒𝑎 ∈Etop 𝑎 by incorporating its neighbor-
+hood entities from the external knowledge base. Let N(𝑒𝑎) denote
+the neighborhood set of 𝑒𝑎. Directly aggregating all neighboring
+entities may introduce substantial redundancy, as many neighbors
+tend to be semantically similar to each other. To balance relevance
+to the query and diversity among the selected neighbors, we apply
+the Maximal Marginal Relevance (MMR) criterion [2] to re-rank
+candidate entities. Specifically, at each selection step, the candidate
+entity 𝑒∗ 𝑎 ∈ N(𝑒𝑎)\S(𝑒𝑎) is chosen by maximizing a trade-off
+between its relevance to the query 𝑞𝑎 and its dissimilarity to the
+already selected setS(𝑒𝑎):
+𝑒∗ 𝑎 = arg max
+𝑒𝑖 ∈N(𝑒𝑎 )\S(𝑒𝑎 )
+{−𝛾·𝑑B (e𝑖, q𝑎)+(1−𝛾)· min e𝑗 ∈S(𝑒𝑎 ) 𝑑B (e𝑖, e𝑗)},
+(20)
+where 𝛾 ∈ [0, 1] controls the trade-off between relevance and
+diversity. The selection process is iteratively performed until a
+predefined number of neighboring entities has been selected.
+As a result, the coarse-grained knowledge retrieval stage pro-
+duces a set of 𝑘 graphs, denoted as {𝐺𝑖 𝑎}𝑘 𝑖=1. Each graph 𝐺𝑖 𝑎 consists
+of a central entity 𝑒𝑖 𝑎 ∈Etop 𝑎 together with its neighboring entities
+selected via the MMR criterion.
+Fine-grained knowledge retrieval. For fine-grained knowl-
+edge retrieval, the textual query 𝑞𝑠 is encoded into the hyperbolic
+space using the same hyperbolic semantic encoder and exponential
+map, yielding its hyperbolic embedding q𝑠:
+q𝑠 = expo (𝑓Θ (LM(𝑞𝑠))). (21)
+Subsequently, the top-𝑘 entities closest to q𝑠 in the hyperbolic space
+are selected based on the hyperbolic distance:
+Etop 𝑠 = topk
+e𝑖 ∈H
+𝑑B (q𝑠, e𝑖), (22)
+whereEtop 𝑠 is the selected set of top-𝑘 fine-grained entities.
+Following the same hyperbolic retrieval paradigm as in the
+coarse-grained stage, neighborhood expansion in the fine-grained
+knowledge retrieval stage is also guided by geometric proximity, but
+employs a different selection criterion to emphasize fine-grained
+specificity. Instead of applying diversity-based re-ranking, we first
+construct a candidate pool C𝑠 by retaining entities whose hyperbolic
+distances to q𝑠 fall within a predefined proximity range, resulting
+in a relatively large set of candidate entities. Motivated by the
+concept of hyperbolic entailment cones, we further impose an an-
+gular constraint to capture hierarchical and directional consistency.
+Specifically, for each 𝑒𝑠 ∈Etop 𝑠 , an angular violation score is defined
+for each candidate entity according to the following formulation:
+score(𝑒𝑖) = max(0, ∠e𝑠 e𝑖 −𝜙(e𝑠)),∀𝑒𝑖 ∈C𝑠. (23)
+Under the definition of hyperbolic entailment cones, a smaller
+value of score(𝑒𝑖) indicates that the entity 𝑒𝑖 is more likely to be a
+hyponym of 𝑒𝑠. Accordingly, candidate entities are ranked based
+on this score, and the top-𝑘′ entities with the smallest scores are
+selected as neighborhood entities for 𝑒𝑠, thereby revealing fine-
+grained semantic information.
+The fine-grained knowledge retrieval stage ultimately produces
+𝑘 graphs, denoted as {𝐺𝑖 𝑠}𝑘 𝑖=1. Each graph is centered on a retrieved
+fine-grained entity 𝑒𝑖 𝑠 ∈Etop 𝑠 and augmented with neighborhood
+entities selected under the angular constraint.
+Finally, the retrieved coarse-grained and fine-grained graphs are
+summarized into compact graph-level representations. Given the
+retrieved coarse-grained graph 𝐺𝑖 𝑎 induced by 𝑒𝑖 𝑎, its graph-level
+representation is obtained through the query-guided neighborhood
+aggregation scheme:
+z𝑖 𝑎 = e𝑖 𝑎 + ∑︁
+𝑒𝑖 ∈N∗(𝑒𝑖𝑎 )
+exp(w𝑒𝑖 /𝜏)˝
+𝑒 𝑗 ∈N∗(𝑒𝑖𝑎 ) exp(w𝑒 𝑗 /𝜏) e𝑖, (24)
+where N∗(𝑒𝑖 𝑎) denotes the neighborhood of entity 𝑒𝑖 𝑎 in graph 𝐺𝑖 𝑎,
+and w𝑒𝑖 =−𝑑B (𝑞𝑎,𝑒𝑖) is the relevance score based on hyperbolic
+distance, while 𝜏 is the temperature coefficient. Following this pro-
+cedure, a coarse-grained knowledge set Z𝑎 ={z1 𝑎,..., z𝑘 𝑎} and a
+fine-grained knowledge set Z𝑠 ={z1 𝑠,..., z𝑘 𝑠} are obtained, where
+z𝑖 𝑎 denotes the representation of 𝐺𝑖 𝑎 and 𝑧𝑖 𝑠 denotes the representa-
+tion of𝐺𝑖 𝑠.
+4.3 Dual-path Fusion
+Motivated by the fact that graph data is defined by both node at-
+tributes and topological connections, our proposed dual-path fusion
+mechanism consists of feature-level fusion and structure-level fu-
+sion. This design allows the model to simultaneously augment local
+node semantics and enhance global structures.
+Feature-level fusion. Feature-level fusion is achieved by ag-
+gregating both coarse-grained and fine-grained knowledge into the
+initial representation of the query node. The fusion weights are
+computed based on the hyperbolic distances between the query
+node representation and the central entity representations of the re-
+trieved graphs. Without loss of generality, we assume that z𝑖 ∈Z𝑎.
+Then, the corresponding weight wz𝑖 is computed as the hyperbolic
+distance between the query embedding q𝑎 and the representation
+of its central entity e𝑖 𝑎, i.e.,
+wz𝑖 =−𝑑B (q𝑎, e𝑖 𝑎). (25)

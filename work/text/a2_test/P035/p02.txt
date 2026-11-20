@@ -1,0 +1,101 @@
+In the retrieval stage, hallucinations frequently
+arise from insufficient retrieval, where incomplete
+or biased results mislead the generation phase.
+Even when retrieval strategies are optimized, the
+generation stage remains vulnerable to retrieval
+noise and misinformation (Ngo et al., 2007), which
+can propagate hallucinations rather than mitigate
+them. Existing approaches to reducing retrieval
+bias include iterative retrieval (Trivedi et al., 2023;
+Shao et al., 2023; Feng et al., 2024) and au-
+tonomous retrieval (Jiang et al., 2023; Su et al.,
+2024; Yu et al., 2024; Wang et al., 2025), both of
+which seek to counteract hallucination stemming
+from knowledge deficiency and retrieval noise. Ad-
+ditionally, reflection during generation (Asai et al.,
+2023) and retrieval summarization (Kim et al.,
+2024) have been proposed to enhance the robust-
+ness and factual consistency of generation. Exist-
+ing methods do not systematically optimize the en-
+tire pipeline. These methods also rely on LLMs for
+self-decision-making and self-optimization, mak-
+ing them susceptible to inherent biases, which lim-
+its their ability to generate diverse queries and ro-
+bustness (Wei and Ngo, 2008).
+Recent advancements in Multi-Agent Debate
+(MAD) offer a promising paradigm for enhancing
+LLM robustness, factual accuracy, and reasoning
+diversity (Becker, 2024). MAD introduces multi-
+ple independent LLM agents that engage in struc-
+tured debates, iteratively refining their responses
+through critical evaluation and multi-agent verifica-
+tion. This process improves factual consistency and
+enhances robustness in reasoning (Du et al., 2024).
+Furthermore, MAD fosters perspective diversity
+by assigning distinct roles to agents, thereby miti-
+gating biases that arise in single-agent approaches
+(Yin et al., 2023; Liang et al., 2024).
+Motivated by this, we leverage MAD as a mecha-
+nism to address the challenge in RAG and propose
+Debate Augmented RAG (DRAG). DRAG is a
+novel training-free framework integrating multi-
+agent debate mechanisms across retrieval and gen-
+eration phases. In the retrieval phase, multiple
+agents engage in structured debates to assess re-
+trieval adequacy. DRAG maintains a dynamic
+query pool by incorporating proponents advocating
+retrieval strategies, opponents questioning query
+sufficiency, and judges evaluating completeness,
+ensuring broader knowledge coverage and reduced
+factual biases. In the generation phase, we establish
+asymmetric information roles among agents, reduc-
+ing the LLM’s over-reliance on retrieved content
+while promoting structured adversarial debate to
+enhance reasoning robustness and mitigate factual
+inconsistencies. We evaluate DRAG on multiple
+tasks and demonstrate that this structured debate
+process leads to more reliable retrieval, enhanced
+reasoning robustness, and substantially reduced
+RAG-induced hallucinations. Overall, our main
+contributions can be summarized as follows:
+• We propose a novel perspective on the chal-
+lenges in RAG: Hallucination on Hallucina-
+tion.
+• We introduce DRAG, a novel training-free
+framework that integrates Multi-Agent Debate
+(MAD) mechanisms into both retrieval and
+generation phases of RAG.
+• We evaluate DRAG on multiple tasks, demon-
+strating its effectiveness in improving retrieval
+reliability, reasoning robustness, and reducing
+RAG-induced hallucinations.
+2 Related Work
+2.1 Retrieval-Augmented Generation
+LLMs have demonstrated remarkable success
+across a wide range of tasks. However, they are
+prone to hallucinations, particularly when han-
+dling queries beyond their training data, such as in
+domain-specific or knowledge-intensive tasks. To
+mitigate this issue, Retrieval-Augmented Genera-
+tion (RAG) enhances LLMs by incorporating ex-
+ternal knowledge retrieval into the response gener-
+ation process (Gao et al., 2023). The most straight-
+forward approach involves using the initial input
+as a query to retrieve information from an external
+corpus, which is then integrated into the model’s in-
+put as supplementary knowledge (Guu et al., 2020;
+Lewis et al., 2020; Izacard and Grave, 2021; Izac-
+ard et al., 2022; Shi et al., 2024). However, single-
+round retrieval based solely on the initial input
+may fail to retrieve essential external knowledge
+for complex tasks and introduce harmful noise.
+To meet complex retrieval needs, IRCoT (Trivedi
+et al., 2023) and ITER-RETGEN (Shao et al., 2023)
+introduce iterative retrieval-generation loops, allow-
+ing LLMs to refine their retrieval strategy dynam-
+ically to address insufficient retrieval. Auto-RAG
+(Yu et al., 2024) further extends this by enabling
+autonomous query decision-making, enhancing re-
+trieval flexibility. FLARE (Jiang et al., 2023) and
+DRAGIN (Su et al., 2024) adopt a token-triggered
+15840

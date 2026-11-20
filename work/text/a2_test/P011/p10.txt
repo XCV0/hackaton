@@ -1,0 +1,53 @@
+A PREPRINT
+Model performance is evaluated based on response correctness and completeness as described in Section 4.4. A score
+of 1 is assigned if the response is both correct and complete; a score of 0.5 is given if the information is accurate but
+incomplete; and a score of 0 is assigned otherwise.
+Method Score
+RAG2 (Agentic RAG) 116
+RAGRDF 172.5
+RAGLPG 185.5
+Table 1: Overall performance scores for each method out of 200 points.
+Method Intent Correct Partial Incorrect
+RAG2 (Agentic) Search 23 31 45
+RAG2 (Agentic) Compare 32 6 7
+RAG2 (Agentic) Detail 33 3 9
+RAG2 (Agentic) Other 6 4 0
+RAGRDF Search 70 20 10
+RAGRDF Compare 37 8 0
+RAGRDF Detail 42 3 0
+RAGRDF Other 6 4 0
+RAGLPG Search 91 4 5
+RAGLPG Compare 39 4 2
+RAGLPG Detail 43 1 1
+RAGLPG Other 8 0 2
+Table 2: Number of correct, partial, and incorrect responses for each method and intent.
+Our experimental results reveal clear performance differences among the LPG, RDF, and agentic RAG approaches
+across various query intents. For the search/listing intent, the LPG-based method achieves a score of 93 out of 100,
+substantially outperforming both RDF (80 out of 100) and agentic RAG (38.5 out of 100). In the compare intent, LPG
+and RDF perform similarly well, with scores of 41 out of 45 each, while agentic RAG lags behind at 35 out of 45. For
+detail-oriented queries, LPG and RDF again demonstrate strong performance, each scoring 43.5 out of 45, compared to
+34.5 out of 45 for agentic RAG. For the other intent, all methods perform comparably, each achieving a score of 8 out
+of 10.
+These results indicate that both LPG and RDF graph-based approaches significantly outperform the agentic RAG
+pipeline, particularly for search, compare, and detail intents. The superior performance of LPG in the search/listing
+category can be attributed to its efficient handling of nodes and relationships, as well as its support for multi-hop
+traversal, which is essential for complex queries involving multiple entities and attributes.
+However, the LPG approach is not without its challenges. The primary source of error arises from confusion or mistakes
+in converting natural language queries to Cypher, particularly in selecting the correct property or label names for entities
+such as ETFs, mutual funds, or PPS. These errors can lead to incorrect query results despite the underlying model’s
+strong retrieval capabilities. Overall, the findings underscore the advantages of graph-based retrieval—especially
+LPG—for knowledge-intensive tasks, while also highlighting areas for further improvement in query translation and
+schema alignment. It is important to note that, for agentic RAG, we utilize the rerankers described in Section 3.5,
+evaluating responses both with and without reranking and selecting the best result for final assessment. The primary
+challenge with agentic RAG—and with approaches that rely heavily on embedding similarity—is the difficulty in
+managing the retrieval process when the search space is unknown. Specifically, setting the number of documents to
+retrieve (K) is problematic: if K is too small, critical information may be missed; if K is too large, the retrieved context
+becomes noisy and overly lengthy, leading to irrelevant information and increased risk of incorrect responses. While
+powerful rerankers can mitigate some of this noise, they are insufficient when K is excessively large.
+A second major issue, not limited to search or listing intents, arises from limitations in the embedding models themselves.
+Embedding models may fail to capture fine-grained distinctions or may confuse similar names and concepts (e.g.,
+mistaking CGCP for CGCB), resulting in the retrieval of incorrect or irrelevant context. These challenges highlight the
+inherent limitations of agentic RAG pipelines in scenarios with complex or ambiguous search spaces. For RDF, errors
+often arise from selecting incorrect nodes and relationships, as these are directly derived from triplets rather than from a
+carefully designed graph schema. This increases the likelihood of mistakes in mapping queries to the correct graph
+10

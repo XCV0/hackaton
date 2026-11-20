@@ -1,0 +1,136 @@
+Prompt for Qwen2-VL-2-Stage
+Prompt format for rerank:
+Identify the most similar wiki context to the
+↪→ question
+< image >
+{ question }
+Context A :
+Wiki title : { wiki_title_A }
+Wiki content :{ wiki_content_A }
+Context B :
+Wiki title : { wiki_title_B }
+Wiki content :{ wiki_content_B }
+Context C :
+Wiki title : { wiki_title_C }
+Wiki content :{ wiki_content_C }
+Context D :
+Wiki title : { wiki_title_D }
+Wiki content :{ wiki_content_D }
+Context E :
+Wiki title : { wiki_title_E }
+Wiki content :{ wiki_content_E }
+The answer shold be provided in format : [
+↪→ Reference X ] where X is the most similar
+↪→ reference ( A / B / C / D / E )
+Prompt format for generation:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+{ question } within 5 words .
+Context :
+Wiki title : { wik i_ ti tl e_ sel ec t }
+Wiki content : { w i k i _ c o n t e n t _ s e l e c t }
+Example:
+# Rerank :
+... Context A : ...
+# See Prompt for Qwen2 - VL -1 - Stage
+The answer shold be provided in format : [
+↪→ Reference X ] where X is the most similar
+↪→ reference ( A / B / C / D / E )
+# Generation :
+Based on the retrieved document , answer the
+↪→ question
+< image >
+What is the width ( in kilometre ) of this lake ?
+↪→ within 5 words
+Context :
+Wiki title : Jewish National Fund
+Wiki content : Jewish National Fund was founded
+↪→ in 1901 to buy and develop land in Ottoman
+↪→ Syria ...
+Answer:
+" Reference E "
+" Not given "
+The following is the prompt for Qwen2-VL-
+MMSTaR, where wiki_title_A/B/C/D/E and wiki_content_A/
+↪→ B/C/D/E represent the titles and textual contents of
+the top-5 retrieved Wikipedia entries.
+Prompt for Qwen2-VL-MMSTaR (Part I)
+Prompt format:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+{ question } within 5 words
+Reference A :
+< image #A >
+Wiki title : { wiki_title_A }
+Wiki content :{ wiki_content_A }
+Prompt for Qwen2-VL-MMSTaR (Part II)
+Prompt format:
+Reference B :
+< image #B >
+Wiki title : { wiki_title_B }
+Wiki content :{ wiki_content_B }
+Reference C :
+< image #C >
+Wiki title : { wiki_title_C }
+Wiki content :{ wiki_content_C }
+Reference D :
+< image #D >
+Wiki title : { wiki_title_D }
+Wiki content :{ wiki_content_D }
+Reference E :
+< image #E >
+Wiki title : { wiki_title_E }
+Wiki content :{ wiki_content_E }
+Note : Analyze step - by - step and provide final
+↪→ answer in format : []
+Example:
+Based on the retrieved document , answer the
+↪→ question
+< image >
+What place inflows lake ? within 5 words .
+Reference A : ...
+# See Prompt for Qwen2 - VL -1 - Stage
+Note : Analyze step - by - step and provide final
+↪→ answer in format : []
+Answer:
+" Step 1: Key Information Analysis
+Query Image Analysis :
+The query image shows a scenic view of a lake
+↪→ surrounded by mountains and a town . The lake
+↪→ is prominent in the center , with a town on
+↪→ its shores .
+Question Analysis :
+The question asks about the place that inflows
+↪→ into the lake .
+Step 2: Reference Comparison :
+Reference A : Describes Gsteigwiler , a village
+↪→ near a lake .
+Reference B : Describes Walensee , a lake in
+↪→ Switzerland .
+Reference C : Describes Schnepfau , a village near
+↪→ a lake .
+Reference D : Describes Lake Lucerne , a lake in
+↪→ Switzerland .
+Reference E : Describes Lake Brienz , a lake in
+↪→ Switzerland .
+Relevant Reference Selection :
+Reference B ( Walensee ) and Reference D ( Lake
+↪→ Lucerne ) both describe lakes in Switzerland ,
+↪→ but Reference B is more likely to have a
+↪→ river inflowing into it , as it is a larger
+↪→ lake .
+Step 3: Answer Generation
+Answer : The place that inflows into Lake Walensee
+↪→ is the Seez river . According to the
+↪→ description in Reference B , the Seez ,
+↪→ Murgbach , and Linth rivers lead to the lake .
+↪→ The Seez river is the most likely candidate
+↪→ for inflowing into the lake , so the final
+↪→ answer is [ Seez river ]"
+The following is the prompt for CoRe-MMRAG,
+where wiki_title_A/B/C/D/E and wiki_content_A/B/C/D/E rep-
+resent the titles and textual contents of the top-5
+retrieved Wikipedia entries.
+32979

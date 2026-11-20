@@ -1,0 +1,96 @@
+Raw Tables
+topic-clustering to
+get similar tables
+generate query
+with LLM
+human/LLM
+annotation
+Well-annotated 
+single-table corpora
+iterate each 
+table and its queries
+Direct Approach to construct multi-table QA datasets
+MultiTableQA
+Standing on the Shoulders of Giants:
+From single-table QA to multi-table QA
+🥳
+😭
+(a) Table Decomposition
+no human/LLM cost
+easy to create large datasets
+authentic real queries
+sub-tables maintain consistency
+topic-similarity ≠
+query-generalizability
+high LLM/human
+resource costs
+diffucult to create 
+large datasets
+LLMs are 
+not authentic
+column-wise
+splitted
+new
+Table1
+new
+Table2
+diversity
+debias
+row-wise
+splitted
+diversity
+debias
+new Table1
+new Table2
+(b) Query Combination
+query 1
+query 2
+combine new
+queryno LLM sythesize
+no human cost
+decontextualize
+Figure 6: Illustration of the direct multi-table dataset construction approach and the MultiTableQA construction
+pipeline. We employ table decomposition and query combination techniques to convert real-world single-table QA
+tasks into multi-table QA settings.
+C Experiment Setup
+C.1 Baseline Methods Description
+The detailed baseline method descriptions for each
+category are listed below:
+• Table Retrieval. This category includes methods
+that leverage table-aware retrievers—often fine-
+tuned on structured data—to identify and rank
+the most relevant tables given a query. These ap-
+proaches focus on selecting either a single best-
+matching table or aggregating information across
+multiple retrieved tables. In our experiments, we
+choose common table retrieval methods includ-
+ing DTR (Herzig et al., 2021), Table-Contriever
+(Izacard et al., 2021), Table-E5 (Wang et al.,
+2022b) and Table-LLaMA (Zhang et al., 2023a)
+as our baseline methods.
+• RAG-based. The RAG-based methods normally
+integrate a retriever with a generator. The re-
+triever identifies relevant tables from a large cor-
+pus, which are then passed to the generator to
+produce context-aware outputs. This paradigm
+enhances generation quality by grounding the
+response in retrieved evidence, making it particu-
+larly effective for knowledge-intensive tasks. In
+our experiments, we utilize In-context RALM
+(Ram et al., 2023) (Abbreviated as RALM) and
+ColBERTv2 (Santhanam et al., 2021) (Abbrevi-
+ated as ColBERT) as our baseline methods.
+• Table-to-Graph Representation. The table-to-
+graph representation represents different node
+feature representation approaches, as compared
+to our method described in Section 3.1. Specifi-
+cally, we compare with single feature extraction
+methods (e.g., semantic, structural, or heuristic
+features alone), tabular representation learning
+models such as TAPAS (Herzig et al., 2020) and
+TaBERT (Yin et al., 2020), as well as table sum-
+marization methods such as Lattice (Wang et al.,
+2022a).
+• Table Prompting Methods. These approaches
+encode tabular data into natural language
+38147

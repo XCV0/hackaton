@@ -1,0 +1,63 @@
+"numbered_options": [
+"1. 美元及美债收益率均进一步走低。",
+"2. 外部环境改善是推动人民币汇率升值的主因。",
+"3. 美元指数走低，助推人民币对美元汇率回升。",
+"4. 美国经济数据继续温和降温。",
+"5. 美国就业及通胀走势均支持美联储放松货币政策。",
+"6. 市场对美联储的降息预期有所走高。",
+"7. 市场预期9月美联储议息会议降息25基点的概率是62%。",
+"8. 市场预期9月美联储议息会议降息50基点的概率是37%。",
+"9. 美元指数明显走低。",
+"10. 人民币存在因出口商结汇和套息交易平仓而快速大幅升值的可能性。",
+"11. 前期选择观望的部分出口企业可能存在集中结汇行为。",
+"12. 集中结汇行为助推人民币形成升值的正反馈。",
+"13. 潜在结汇的资金规模月均或在90亿至150亿美元左右。",
+"14. 短期可能推高人民币汇率1000个基点左右。",
+"15. 国内经济处于复苏周期。",
+"16. 企业盈利改善。",
+"17. 政策环境友好。",
+"18. 市场对人民币资产看涨情绪逐步积累。"
+],
+"ground_truth_correct_options": [
+"1", "2", "3", "4", "5", "6", "9", "10", "11", "12", "14", "15", "16", "17", "18"
+]
+"ground_truth_incorrect_options": [
+"7", "8", "13"
+]
+Figure 25: A case of multiple options and the ground truth answers (in Chinese).
+"silver_noise_contexts": [
+"The continuous decline of the U.S. Dollar Index has directly led to a significant rebound in the 
+RMB-to-USD exchange rate.",
+"Due to the U.S. Dollar Index’s weak performance, the RMB-to-USD exchange rate has recently 
+experienced a noticeable rebound.",
+"The downward trend of the U.S. Dollar Index has provided strong support for the recovery of the 
+RMB-to-USD exchange rate.",
+"As the U.S. Dollar Index continues to decline, the RMB-to-USD exchange rate has gradually rebounded 
+in tandem.",
+"The sluggish state of the U.S. Dollar Index has given the RMB-to-USD exchange rate additional 
+upward momentum in the market.",
+"The drop in the U.S. Dollar Index has enabled the RMB-to-USD exchange rate to achieve a rapid 
+short-term recovery.",
+"The weakness of the U.S. Dollar Index has created a favorable market environment for the RMB-to-USD 
+exchange rate to recover.",
+"The fall in the U.S. Dollar Index has directly driven the upward trend in the RMB-to-USD exchange 
+rate.",
+"The decline in the U.S. Dollar Index has provided an important market signal for the RMB-to-USD 
+exchange rate’s rebound.",
+"The weak performance of the U.S. Dollar Index has allowed the RMB-to-USD exchange rate to achieve a 
+significant rebound in the near term."
+],
+"silver_noise_contexts (in Chinese)": [
+"美元指数的持续下跌，直接导致了人民币对美元汇率的显著回升。",
+"由于美元指数的疲软表现，人民币对美元的汇率在近期出现了明显的反弹。",
+"美元指数的走低趋势，为人民币对美元汇率的回升提供了有力支撑。",
+"随着美元指数的不断下滑，人民币对美元的汇率也随之逐步回升。",
+"美元指数的低迷状态，促使人民币对美元汇率在市场上获得了更多的上升动力。",
+"美元指数的走低，使得人民币对美元的汇率在短期内实现了快速回升。",
+"美元指数的疲软，为人民币对美元汇率的回升创造了有利的市场环境。",
+"美元指数的下跌，直接推动了人民币对美元汇率的回升趋势。",
+"美元指数的走低，为人民币对美元汇率的回升提供了重要的市场信号。",
+"美元指数的疲软表现，使得人民币对美元的汇率在近期内实现了显著回升。"
+]
+Figure 26: A case of silver noise.
+4629

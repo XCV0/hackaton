@@ -1,0 +1,52 @@
+RAG-Driver: Generalisable Driving Explanations with
+Retrieval-Augmented In-Context Learning in Multi-Modal
+Large Language Model
+Jianhao Yuan1, Shuyang Sun1, Daniel Omeiza1, Bo Zhao2, Paul Newman1, Lars Kunze1, Matthew Gadd1
+1 University of Oxford 2Beijing Academy of Artificial Intelligence
+{jianhaoyuan,kevinsun,daniel,pnewman,lars,mattgadd}@robots.ox.ac.uk
+Fig. 1: Left: In natural language, our system describes and justifies actions taken by the vehicle, as well as infers the driving
+action in the form of numerical control signals (speed, and steering angle). For this, we use a unified perception and planning
+module through a Multi-modal Large Language Model. Our core contribution is a retrieval mechanism to search driving
+scenarios similar to the current condition and use these to augment the current predictions through In-Context Learning. This
+leads to better overall description and prediction and is more generalisable in new deployment domains. Right: Comparison
+between our methods and baselines for the in-distribution (I.D, left vertical axis) and out-of-distribution (O.O.D, right vertical
+axis) generalisation settings as specified in Sec. IV. Note that I.D. Performance and O.O.D. Performance have different vertical
+scales. Despite the performance gap between these two settings our method significantly outperforms all of the baselines,
+including the specialist baseline, ADAPT [35], as well as the generalist baseline, DriveGPT4 [81], in terms of driving action
+explanation (Expl. on the horizontal axis) and justification (Justi. on the horizontal axis) tasks, as measured by CIDEr..
+Abstract—We need to trust robots that use often opaque AI
+methods. They need to explain themselves to us, and we need
+to trust their explanation. In this regard, explainability plays
+a critical role in trustworthy autonomous decision-making to
+foster transparency and acceptance among end users, especially
+in complex autonomous driving. Recent advancements in Multi-
+Modal Large Language models (MLLMs) have shown promising
+potential in enhancing the explainability as a driving agent
+by producing control predictions along with natural language
+explanations. However, severe data scarcity due to expensive
+annotation costs and significant domain gaps between different
+datasets makes the development of a robust and generalisable
+system an extremely challenging task. Moreover, the prohibitively
+expensive training requirements of MLLM and the unsolved prob-
+lem of catastrophic forgetting further limit their generalisability
+post-deployment. To address these challenges, we present RAG-
+Driver, a novel retrieval-augmented multi-modal large language
+model that leverages in-context learning for high-performance,
+explainable, and generalisable autonomous driving. By grounding
+in retrieved expert demonstration, we empirically validate that
+RAG-Driver achieves state-of-the-art performance in producing
+driving action explanations, justifications, and control signal
+prediction. More importantly, it exhibits exceptional zero-shot
+generalisation capabilities to unseen environments without further
+training endeavours.
+Index Terms—Autonomous driving, multi-modal language
+model, end-to-end driving, domain generalisation
+I. INTRODUCTION
+Driven by the emerging development of deep learning,
+autonomous driving has observed a paradigm shift from rules-
+based decision systems [66, 21] to data-driven learning-based
+approaches [30, 6, 37]. However, this comes at the cost of
+transparency in decision-making, especially for end-to-end
+autonomous driving systems which are considered black-box
+in nature [13]. Thus, in addition to precision in action control,
+arXiv:2402.10828v3  [cs.RO]  6 Mar 2026

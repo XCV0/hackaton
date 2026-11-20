@@ -1,0 +1,103 @@
+of information distributed across multiple docu-
+ments (akin to finding a "needle in a haystack"
+(Wang et al., 2024b)).
+Multi-document QA datasets are scarce, with
+existing multi-document benchmarks (Bai et al.,
+2023; Wang et al., 2024c), predominantly focused
+on textual information, often overlooking the di-
+verse content forms found in real-world documents,
+such as tables, charts, and visual elements. Visually
+rich elements, such as tables, charts, and slides, pro-
+vide structured data and visual summaries that are
+critical for answering certain types of questions. Ta-
+bles often present dense, organized information that
+cannot be captured through plain text. At the same
+time, charts and slides can visually depict trends,
+relationships, or distributions that require interpre-
+tation beyond textual descriptions. The absence
+of datasets that include these modalities limits the
+ability of current QA models to address complex,
+multimodal questions. For instance, answering a
+financial or scientific question may require inter-
+preting both numerical data in tables and trends in
+graphs alongside the surrounding text.
+In the context of visually rich content-based doc-
+uments, existing RAG systems face a critical limita-
+tion due to their reliance on a singular modality (ei-
+ther text or vision) for retrieval. Text-based systems
+are proficient in linguistic reasoning but often over-
+look vital visual elements, such as tables and fig-
+ures, that may contain key information. Conversely,
+multimodal RAG (Chen et al., 2022) systems that
+leverage vision-based retrieval can effectively ex-
+tract visual data but are often constrained in end-
+to-end performance by the LLM’s visual reasoning
+abilities, as text often performs better than visual
+input when given the same context (Deng et al.,
+2024), which can be attributed to language bias in
+visual LLMs (Niu et al., 2021; Wang et al., 2024a),
+and visual hallucination (Ghosh et al., 2024).
+Main Results: We introduce VisDoMBench,
+the first multi-document, multi-modal QA dataset
+specifically designed to address rich visual content,
+including tables, charts, and slides. VisDoMBench
+encompasses a diverse range of complex content
+and question types, along with annotated evidence,
+allowing for a comprehensive evaluation of mul-
+timodal QA systems. In this work, we bench-
+mark the performance of various visual and textual
+retrieval methods on VisDoMBench, providing in-
+sights into their effectiveness in handling visually
+rich, multi-document queries.
+Further, we propose VisDoMRAG, a novel mul-
+timodal RAG approach that effectively performs
+modality fusion over textual and visual RAG
+pipelines, benefiting from the inherent strengths
+of both these approaches, unlike contemporary ap-
+proaches, which perform only-text or only-vision-
+based retrieval. VisDoMRAG employs parallel RAG
+pipelines for text and visual elements, each with
+a multi-step reasoning process involving evidence
+curation, chain-of-thought reasoning, and answer
+generation. The system then integrates the outputs
+from both pipelines using modality fusion, which
+imposes a consistency constraint on the reasoning
+chains, ensuring inference-time alignment across
+the modalities’ reasoning processes to produce the
+final answer. VisDoMRAG offers several significant
+advantages over traditional unimodal or simpler
+multimodal systems. Firstly, it ensures compre-
+hensive information utilization by fully leveraging
+both textual and visual cues, leading to more accu-
+rate and complete answers, particularly in scenarios
+where critical information is distributed across dif-
+ferent modalities. Moreover, the evidence curation
+step provides an additional advantage of answer
+verifiability, since context attribution is built into
+our approach. We conduct experiments utilizing
+various open-source and closed-source LLMs, com-
+paring multiple strategies such as long-context pro-
+cessing, textual RAG, and visual RAG, with our
+proposed system. We find that our VisDoMRAG im-
+proves end-to-end QA performance on our bench-
+marks, with performance gains in the range of 12%-
+20%. Our main contributions are:
+• VisDoMBench 1, a novel multi-document,
+multimodal QA benchmark designed to ad-
+dress QA tasks across visually rich document
+content such as tables, charts, and slides, al-
+lowing for a comprehensive evaluation of mul-
+timodal document QA systems.
+• VisDoMRAG, a novel multimodal RAG ap-
+proach that effectively parallelly performs tex-
+tual and visual RAG via Evidence Curation
+and Chain-of-Thought reasoning. The out-
+put reasoning chains from both the modal-
+ities are aligned using consistency analysis
+and resultant answers are ensembled together
+via LLM-based modality fusion to enhance
+visually-rich document QA.
+• VisDoMRAG significantly outperforms strong
+baselines such as long-context process-
+1https://github.com/MananSuri27/VisDoM/
+6089

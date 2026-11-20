@@ -1,0 +1,96 @@
+Can the model retrieve what it doesn’t know?
+A language model may hold stale or incorrect in-
+formation. However, RICHES can often override
+model’s pre-existing knowledge and generate cor-
+rect answers by constraining on the corpus (Ap-
+pendix A.4)
+Failure mode Queries(%)
+Index Failure 40%
+Search Failure 52%
+Attribution Failure 8%
+Table 7: Loss categories for RICHES on Hotpot-QA
+Losses We inspect 50 failed queries and catego-
+rize the losses (Table 7) as follows: a) Index fail-
+ure: the proposition is absent from the index or not
+decontextualized. b) Search failure: Proposition
+exists in the index, but could not be generated c) At-
+tribution failure: The answer is partially attributed,
+with LLM hallucinating based on partial evidence.
+(see Appendix A.4 for examples)
+7 Conclusion and Future Work
+Retrieval has so far been alienated from the rapid
+progress in instruction tuning. This work makes
+the following contribution: i) an approach that can
+seamlessly integrate retrieval with generation. ii)
+a thorough investigation of indexing and search
+strategies that enable such an approach to be ef-
+fective. iii) proof-of-concept of the capabilities of
+such a system on a variety of QA tasks.
+Further research is warranted to explore sophis-
+ticated decoding algorithms such as hybrid tem-
+perature and beam sampling, MCTS etc. as well
+as a comprehensive evaluation across multiple do-
+mains and models. We hope the ideas introduced
+in this work fuel progress in aligning retrieval to
+generation.
+8 Limitations
+First we note the limitations in our experimental
+setup. All our experiments are based on Wikipedia,
+a corpus heavily seen during pre-training. This
+work does not analyze how RICHES fares on cor-
+pora unseen during pre-training. Furthermore,
+we only examine a handful of factoid question-
+answering tasks due to the lack of objective eval-
+uations. Performance on tasks such as long-form
+QA is deferred for future work. There are also
+certain inherent limitations with RICHES. It forces
+verbatim emission of corpus text, which might be
+an overkill for tasks where a similarity-based met-
+ric is sufﬁcient. RICHES lacks the ability to re-
+trieve dozens of documents, a necessity for certain
+summarization tasks. For long documents with
+diffused information, rewriting into propositions
+adds complexity and can be cumbersome. Lastly,
+while RICHES’s search operation is independent of
+corpus size, the use of beam search and commu-
+nication between the FM-index and Transformer
+model can slow down inference.
+9 Ethical Considerations
+All artifacts used in this paper, including models,
+datasets, and baselines, are under permissive li-
+censes and publicly available. We have attempted
+to provide detailed information to facilitate the re-
+production of our results.
+Our ﬁndings are based on English-language data
+from Wikipedia, and we have not tested the gen-
+eralizability of our claims to other languages or
+domains.
+Lastly, the datasets used in this work are not ex-
+pected to contain any offensive content. However,
+it is important to note that Large Language Models
+(LLMs) can exhibit biases related to gender, race,
+and region, and are also prone to hallucination. Al-
+though RICHES aims to ground its generation in an
+external corpus, some biases may still be present.
+References
+Leonard Adolphs, Benjamin Boerschinger, Christian
+Buck, Michelle Chen Huebscher, Massimiliano Cia-
+ramita, Lasse Espeholt, Thomas Hofmann, Yannic
+Kilcher, Sascha Rothe, Pier Giuseppe Sessa, et al.
+2021. Boosting search engines with interactive
+agents. arXiv preprint arXiv:2109.00527.
+Rohan Anil, Andrew M Dai, Orhan Firat, Melvin John-
+son, Dmitry Lepikhin, Alexandre Passos, Siamak
+Shakeri, Emanuel Taropa, Paige Bailey, Zhifeng
+Chen, et al. 2023. Palm 2 technical report. arXiv
+preprint arXiv:2305.10403.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to re-
+trieve, generate, and critique through self-reﬂection.
+arXiv preprint arXiv:2310.11511.
+Michele Bevilacqua, Giuseppe Ottaviano, Patrick
+Lewis, Wen tau Yih, Sebastian Riedel, and Fabio
+Petroni. 2022. Autoregressive search engines: Gen-
+erating substrings as document identiﬁers. In arXiv
+pre-print 2204.10628.
+8895

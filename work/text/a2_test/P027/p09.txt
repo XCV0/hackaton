@@ -1,0 +1,71 @@
+Published as a conference paper at ICLR 2025
+TriviaQA MuSiQue PopQA PubHealth ARC-Challenge
+Dataset
+0
+1
+2
+3
+4Latency (s)
+2.52
++14% 2.72 +18% 2.55 +80% 2.40 +103%
+2.02
++29%2.24 +1% 2.47 +7%
+1.54
++8% 2.05
++74%
+1.94
++24%
+2.98
++34% 3.54
++53%
+2.28
++61%
+1.37
++16% 1.97
++26%2.22 2.31
+1.42 1.18 1.56
+Std. RAG: Mixtral-Inst.-8x7B Std. RAG: Mistral-Inst.-7B Self-RAG: Mistral-Inst.-7B Spec. RAG: Mixtral-8x7B w/ RAG Drafter (7B)
+Figure 3: Latency analysis of Standard RAG, Self-RAG, and SPECULATIVE RAG on TriviaQA,
+MuSiQue, PopQA, PubHealth, and ARC-Challenge. The latency difference between Standard
+RAG/Self-RAG and SPECULATIVE RAG is highlighted in red (+x%). The latency varies across
+different datasets due to different retrieved document lengths. SPECULATIVE RAG encodes the
+retrieved documents in parallel and generates answer drafts with a smaller RAG drafter. This signif-
+icantly improves the efficiency.
+application scenarios, we process cases individually without batching. As representative example,
+we run MVerifier-8x7B + MDrafter-7B for SPECULATIVE RAG and Mixtral-Instruct8x7B for Standard
+RAG, as these demonstrate the highest performance among competitive baselines (see Table 1). We
+also include the analysis for Standard RAG: Mistral-Instruct7B and Self-RAG: Mistral-Instruct7B in
+this study. For SPECULATIVE RAG, we launch 5 endpoints of MDrafter-7B for parallel drafting on
+TriviaQA, PopQA, PubHealth, and ARC-Challenge. We launch 10 endpoints for MuSiQue due to
+more drafts. We use tensor parallelism of 4 to fit Mixtral-Instruct8x7B into the GPU memory. We use
+the same tensor parallelism setting for the other methods for a fair comparison.
+Reducing processing time while maintaining high performance As the results demonstrate,
+SPECULATIVE RAG consistently achieves the lowest latency compared to all other methods. This
+advantage comes from its utilization of fewer documents needed per draft and parallel drafting. Par-
+ticularly, compared with the most competitive baseline, Standard RAG: MVerifier-8x7B + MDrafter-7B,
+our proposed SPECULATIVE RAG reduces latency by up to 11.90% on TriviaQA, 15.07% on
+MuSiQue, 44.31% on PopQA, 50.83% on PubHealth, and 22.77% on ARC-Challenge. Further-
+more, a direct comparison between Standard RAG: Mistral-Instruct7B and our method reveals that
+the higher latency of Standard RAG: Mistral-Instruct7B is due to its longer context length which con-
+tains all retrieved documents. Self-RAG: Mistral-Instruct7B also exhibits higher latency due to the
+generation of longer answers with self-reflection tags and the additional overhead associated with
+evidence selection. These findings highlight the advantage of our approach in reducing processing
+time while maintaining high performance.
+4.6 ABLATION STUDIES
+We conduct ablation studies on the multi-perspective sampling (Section 3.2) and the evaluation
+scores (Section 3.3) of SPECULATIVE RAG during the drafting or the verification stages on Trivi-
+aQA and PubHealth in Table 3. We use MVerifier-8x7B + MDrafter-7B as a running configuration. Same
+as the main results, we report the accuracy as performance metrics.
+Diversity and reduced redundancy in retrieval improves draft quality significantly. In the
+first set of experiments, we evaluate the impact of multi-perspective sampling during the drafting.
+Recall that SPECULATIVE RAG clusters retrieved documents into distinct perspectives and sample
+one document from each cluster to reduce redundancy for the draft generation. We compare this
+against two alternative sampling strategies: (1) Random sampling without multi-perspective clus-
+tering, where we randomly select a document subset as context, and (2) Always sampling from the
+same cluster, where we select all documents from a single cluster. Our results indicate that our pro-
+posed sampling method yields the best performance thanks to its ability to leverage diverse context.
+Particularly, it improves the accuracy up to 1.88% on TriviaQA and 2.23% on PubHealth. While
+random sampling without clustering introduces diversity, it is prone to including redundant docu-
+ments, degrading draft quality. Sampling from the same cluster significantly underperforms due to
+a lack of diverse perspectives.
+9

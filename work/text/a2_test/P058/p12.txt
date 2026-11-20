@@ -1,0 +1,106 @@
+multi-modality documents. In The Thirteenth Inter-
+national Conference on Learning Representations,
+ICLR 2025, Singapore, April 24-28, 2025. OpenRe-
+view.net.
+Shi Yu, Chaoyue Tang, Bokai Xu, Junbo Cui, Jun-
+hao Ran, Yukun Yan, Zhenghao Liu, Shuo Wang,
+Xu Han, Zhiyuan Liu, and Maosong Sun. 2025b.
+Visrag: Vision-based retrieval-augmented gener-
+ation on multi-modality documents. Preprint,
+arXiv:2410.10594.
+Wenhan Yu, Wang Chen, Guanqiang Qi, Weikang
+Li, Yang Li, Lei Sha, Deguo Xia, and Jizhou
+Huang. 2025c. Bbox docvqa: A large scale bound-
+ing box grounded dataset for enhancing reason-
+ing in document visual question answer. Preprint,
+arXiv:2511.15090.
+Haotian Zhang, Haoxuan You, Philipp Dufter, Bowen
+Zhang, Chen Chen, Hong-You Chen, Tsu-Jui Fu,
+William Yang Wang, Shih-Fu Chang, Zhe Gan, and
+Yinfei Yang. 2024a. Ferret-v2: An improved base-
+line for referring and grounding with large language
+models. Preprint, arXiv:2404.07973.
+Qingru Zhang, Minshuo Chen, Alexander Bukharin,
+Nikos Karampatziakis, Pengcheng He, Yu Cheng,
+Weizhu Chen, and Tuo Zhao. 2023. Adalora: Adap-
+tive budget allocation for parameter-efficient fine-
+tuning. arXiv preprint arXiv:2303.10512.
+Tao Zhang, Ziqi Zhang, Zongyang Ma, Yuxin Chen,
+Zhongang Qi, Chunfeng Yuan, Bing Li, Junfu
+Pu, Yuxuan Zhao, Zehua Xie, Jin Ma, Ying
+Shan, and Weiming Hu. 2024b. mr2ag: Multi-
+modal retrieval-reflection-augmented generation for
+knowledge-based vqa. Preprint, arXiv:2411.15041.
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q.
+Weinberger, and Yoav Artzi. 2020. Bertscore:
+Evaluating text generation with bert. Preprint,
+arXiv:1904.09675.
+Yichi Zhang, Ziqiao Ma, Xiaofeng Gao, Suhaila
+Shakiah, Qiaozi Gao, and Joyce Chai. 2024c.
+Groundhog: Grounding large language models to
+holistic segmentation. Preprint, arXiv:2402.16846.
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan
+Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin,
+Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang,
+Joseph E. Gonzalez, and Ion Stoica. 2023. Judg-
+ing llm-as-a-judge with mt-bench and chatbot arena.
+Preprint, arXiv:2306.05685.
+Junjie Zhou, Zheng Liu, Shitao Xiao, Bo Zhao, and
+Yongping Xiong. 2024a. Vista: Visualized text em-
+bedding for universal multi-modal retrieval. Preprint,
+arXiv:2406.04292.
+Tianshuo Zhou, Sen Mei, Xinze Li, Zhenghao Liu,
+Chenyan Xiong, Zhiyuan Liu, Yu Gu, and Ge Yu.
+2024b. Marvel: Unlocking the multi-modal capa-
+bility of dense retrieval via visual module plugin.
+Preprint, arXiv:2310.14037.
+Yongxin Zhu, Zhen Liu, Yukang Liang, Xin Li, Hao Liu,
+Changcun Bao, and Linli Xu. 2023. Locate then gen-
+erate: Bridging vision and language with bounding
+box for scene-text vqa. Preprint, arXiv:2304.01603.
+A Appendix
+A.1 Implementation
+For all evaluated MLLMs, we use a unified de-
+coding setup with temperature set to 0.1 and max-
+imum generation length limited to 600 tokens.
+This low-temperature setting reduces randomness
+and ensures stable, reproducible outputs during
+evaluation. In addition, we fine-tune Qwen3-
+VL-8B5 using the LLaMA-Factory6 framework
+on a single H800 GPU with setting LoRA (Hu
+et al., 2022) rank to 8. The sequence length
+is set to 4096, with a batch size of 4 and gra-
+dient accumulation steps of 4. We train for 3
+epochs on the training set with a learning rate
+of 1e-4. The code and data will be available at
+https://github.com/NLP2CT/GranuRAG.
+A.2 Sensitivity Analysis of Overlap Threshold
+We conduct a sensitivity analysis on the overlap
+threshold used in our redundancy filtering step. Ta-
+ble 8 reports the results across six threshold values
+ranging from 70% to 100%. As shown, perfor-
+mance follows a clear and intuitive trend: lower
+thresholds (e.g., 70%) lead to over-removal of infor-
+mative elements, which hurts the quality of the gen-
+erated output, while higher thresholds (e.g., 90%
+and above) retain too much redundancy and also
+degrade performance. The best results are achieved
+at 80%, with a ROUGE-L of 32.01, BERT-F1 of
+51.60, and LLM Score of 83.90. Importantly, per-
+formance remains consistently strong across the
+75%–85% range, indicating that our method is not
+overly sensitive to this hyperparameter. We select
+80% as our default threshold since it sits at the nat-
+ural midpoint of this effective range and yields the
+best overall performance.
+A.3 Synthesize Fine-tuned Data
+For the fine-tuning task, we construct our test set
+by randomly selecting 20% of partial landmarks
+images (containing incomplete visual elements),
+with the remainder forming the training set. Crit-
+ically, we ensure that approximately half of the
+scenic spots are entirely absent from the training
+set to evaluate the model’s robustness on unseen
+5https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct
+6https://github.com/hiyouga/LLaMA-Factory
+10486

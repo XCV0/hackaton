@@ -1,0 +1,5 @@
+publication_id,issue_id,record_ids,check_name,description,source_page,source_fragment
+D012,I1,R028;R019,contradiction,"Лучший прибор DIO-20: Voc 0.465 В в аннотации, тексте (p11) и заключении, но 456 мВ в Table 2 и в тексте «from 432 mV to 456 mV»",11,from 432 mV to 456 mV may be attributable to the absence of defect states and the decrease in
+D012,I2,R004,jv_consistency,"DIO-5: Voc·Jsc·FF/Pin = 0.432·11.74·0.613 = 3.11 % при заявленном PCE 2.36 % (расхождение ≈24 %, порог 3 %)",12,DIO-5 mg/mL 432 11.74 61.3 2.36 23.37 443.2
+D012,I3,,contradiction,Толщины слоёв: i-ZnO 80 нм (раздел 2) vs 100 нм (описание Figure 9); AZO ~300 нм (раздел 2) vs 120 нм (описание Figure 9),11,"Finally, a 120-nm-thick metallic layer of aluminum-doped zinc oxide, ZnO: Al(AZO), which"
+D012,I4,,contradiction,"Структура прибора на Figure 9 названа SLG/Mo/CIGS/CdS/i-ZnO/AZO/Ag, хотя поглотитель — CZTS",11,"In the realization of the SLG/Mo/CIGS/CdS/i-ZnO/AZO/Ag structure, the image clearly"

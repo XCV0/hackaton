@@ -1,0 +1,99 @@
+728
+10. Appendix
+A. Questions
+There were ten questions for English, French and
+Dutch.
+English
+1. Who was Napoleon Bonaparte?
+2. Was Napoleon Bonaparte a hero?
+3. Was Napoleon Bonaparte a tyrant?
+4. Was Napoleon Bonaparte a villain?
+5. How did Napoleon Bonaparte establish his empire
+in Europe?
+6. How did Napoleon Bonaparte become the Emperor
+of France?
+7. Was Napoleon Bonaparte’s claim to Emperor
+favoured in Europe?
+8. HowdidNapoleonBonaparte’sruleimpactEngland
+and the Netherlands?
+9. What was the impact of Napoleon Bonaparte on
+England and the Netherlands?
+10. Was the impact of Napoleon Bonaparte on England
+and the Netherlands destructive?
+French
+1. Qui était Napoléon Bonaparte ?
+2. Napoléon Bonaparte était-il un héros ?
+3. Napoléon Bonaparte était-il un tyran ?
+4. Napoléon Bonaparte était-il un méchant ?
+5. Comment Napoléon Bonaparte a-t-il établi son em-
+pire en Europe ?
+6. Comment Napoléon Bonaparte est-il devenu em-
+pereur de France ?
+7. La prétention de Napoléon Bonaparte au titre
+d’empereur avait-elle les faveurs de l’Europe ?
+8. Quel impact le règne de Napoléon Bonaparte a-t-il
+eu sur l’Angleterre et les Pays-Bas ?
+9. Quel a été l’impact de Napoléon Bonaparte sur
+l’Angleterre et les Pays-Bas ?
+10. L’impact de Napoléon Bonaparte sur l’Angleterre et
+les Pays-Bas a-t-il été destructeur ?
+Dutch
+1. Wie was Napoleon Bonaparte?
+2. Was Napoleon Bonaparte een held?
+3. Was Napoleon Bonaparte een tiran?
+4. Was Napoleon Bonaparte een schurk?
+5. HoestichtteNapoleonBonapartezijnrijkinEuropa?
+6. Hoe werd Napoleon Bonaparte keizer van
+Frankrijk?
+7. Werd Napoleon Bonaparte’s aanspraak op keizer-
+schap in Europa gesteund?
+8. Welke invloed had Napoleon Bonaparte’s heer-
+schappij op Engeland en Nederland?
+9. Wat was de impact van Napoleon Bonaparte op
+Engeland en Nederland?
+10. Was de impact van Napoleon Bonaparte op Enge-
+land en Nederland destructief?
+B. Prompt structure
+Each question had a system prompt in its own
+language as follows.
+English Provide a comprehensive answer
+to the question, using your own knowledge and the
+information in the given context. Respond only to
+the given question; your answer should be concise
+and relevant to the question. Respond in English.
+French Répondez de manière exhaustive à la
+question, en vous appuyant sur vos connaissances
+et les informations du contexte. Répondez unique-
+ment à la question posée; votre réponse doit être
+concise et pertinente. Répondez en français.
+Dutch Geef een uitgebreid antwoord op de
+vraag, gebruikmakend van je eigen kennis en de
+informatie in de gegeven context. Reageer alleen
+op de gegeven vraag; je antwoord moet beknopt
+en relevant zijn voor de vraag. Reageer in het
+Nederlands.
+For question answering, the user prompt
+structure was as follows. For baseline questions,
+context was empty.
+English
+Context:
+{context}
+—
+This is the question you must answer.
+Question:
+{question}
+French
+Contexte:
+{context}
+—
+C’est la question à laquelle vous devez
+répondre.
+Question:
+{question}
+Dutch
+Context:
+{context}
+—
+Dit is de vraag die je moet beantwoorden.
+Vraag:
+{question}

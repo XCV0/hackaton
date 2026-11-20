@@ -1,0 +1,102 @@
+7 Conclusion
+We define and categorize seven types of RAG noise
+into beneficial and harmful groups, exploring re-
+trieval noise from linguistic and practical perspec-
+tives. To conduct this evaluation, we propose a sys-
+tematic framework for generating various retrieval
+documents and establish a novel noise benchmark,
+NoiserBench. Our experiments reveal that benefi-
+cial noise can significantly enhance model perfor-
+mance through clearer reasoning paths, standard-
+ized answers, and increased confidence—acting
+much like Aladdin’s Lamp. These findings may
+offer insights for leveraging beneficial noise mech-
+anisms in future research.
+Limitations
+While our systematic analysis of RAG noises in
+real-world scenarios offers valuable insights, sev-
+eral limitations warrant consideration. First, our
+analysis of noise phenomena remains relatively pre-
+liminary. Future work will examine the underlying
+mechanisms by investigating parameter variations,
+particularly attention values, across each model
+layer. In addition, future work could explore the
+effects of noise across a wider variety of task do-
+mains, including complex reasoning, where noise
+may interfere with multi-step inference and lead to
+compounding errors. Expanding the scope in this
+direction could help develop more robust retrieval-
+augmented generation systems for real-world ap-
+plications.
+Acknowledgement
+We thank the anonymous reviewers for their feed-
+back on this work. This work is supported by the
+National Key R&D Program of China under Grant
+No.2024YFB2808802 and Postdoctoral Fellowship
+Program of CPSF (GZC20240840).
+References
+Aliaa Aloufi. 2021. Language and linguistic orthogra-
+phy. English Language and Literature Studies, 11(3).
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations.
+Sébastien Bubeck, Varun Chadrasekaran, Ronen El-
+dan, Johannes Gehrke, Eric Horvitz, Ece Kamar,
+Peter Lee, Yin Tat Lee, Yuanzhi Li, Scott Lund-
+berg, et al. 2023. Sparks of artificial general intelli-
+gence: Early experiments with gpt-4. arXiv preprint
+arXiv:2303.12712.
+Wallace L Chafe. 1971. Linguistics and human knowl-
+edge. Monograph series on languages and linguis-
+tics, (24):57.
+Jiawei Chen, Hongyu Lin, Xianpei Han, and Le Sun.
+2024. Benchmarking large language models in
+retrieval-augmented generation. In Proceedings of
+the AAAI Conference on Artificial Intelligence, pages
+17754–17762. AAAI Press.
+Wei-Lin Chiang, Zhuohan Li, Zi Lin, Ying Sheng,
+Zhanghao Wu, Hao Zhang, Lianmin Zheng, Siyuan
+Zhuang, Yonghao Zhuang, Joseph E. Gonzalez,
+Ion Stoica, and Eric P. Xing. 2023. Vicuna:
+An open-source chatbot impressing gpt-4 with
+90%* chatgpt quality. https://lmsys.org/blog/
+2023-03-30-vicuna/.
+Florin Cuconasu, Giovanni Trappolini, Federico Sicil-
+iano, Simone Filice, Cesare Campagnano, Yoelle
+Maarek, et al. 2024. The power of noise: Redefin-
+ing retrieval for rag systems. In Proceedings of the
+47th International ACM SIGIR Conference on Re-
+search and Development in Information Retrieval,
+pages 719–729, New York, NY, USA. Association
+for Computing Machinery.
+Feiteng Fang, Yuelin Bai, Shiwen Ni, Min Yang, Xiao-
+jun Chen, and Ruifeng Xu. 2024. Enhancing noise
+robustness of retrieval-augmented language models
+with adaptive adversarial training. In Proceedings
+of the 62nd Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers),
+pages 10028–10039, Bangkok, Thailand. Association
+for Computational Linguistics.
+Gary Feng and Li Yi. 2006. What if chinese had linguis-
+tic markers for counterfactual conditionals? language
+and thought revisited. In Proceedings of the Annual
+Meeting of the Cognitive Science Society, volume 28.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yixin Dai, Jiawei Sun, Haofen
+Wang, and Haofen Wang. 2023. Retrieval-augmented
+generation for large language models: A survey.
+arXiv preprint arXiv:2312.10997.
+Mor Geva, Daniel Khashabi, Elad Segal, Tushar Khot,
+Dan Roth, and Jonathan Berant. 2021. Did aristotle
+use a laptop? a question answering benchmark with
+implicit reasoning strategies. Transactions of the
+Association for Computational Linguistics, 9:346–
+361.
+Yves Grandvalet, Stéphane Canu, and Stéphane
+Boucheron. 1997. Noise injection: Theoretical
+prospects. Neural Computation, 9(5):1093–1108.
+Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song,
+Ruoyu Zhang, Runxin Xu, Qihao Zhu, Shirong Ma,
+5027

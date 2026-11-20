@@ -1,0 +1,89 @@
+• +1: Broad alignment with IPCC analysis OR
+General or high-level support for the policy
+• +2: Detailed position that is aligned with IPCC
+analysis OR Strong Support for the policy
+and/or advocacy that would strengthen the pol-
+icy further
+C Full Query List
+The following queries were used to guide evidence
+extraction:
+• Query 1: "Is the organization supporting pol-
+icy and legislative measures to address climate
+change: energy efﬁciency policy, standards,
+and targets"
+• Query 2: "Is the organisation transparent
+about its positions on climate change legis-
+lation/policy and its activities to inﬂuence it?"
+• Query 3: "Is the organisation supporting pol-
+icy and legislative measures to address climate
+change: carbon tax"
+• Query 4: "Is the organization transparent and
+clear about its position on climate change sci-
+ence?"
+• Query 5: "Is the organization supporting pol-
+icy and legislative measures to address climate
+change: Standards, targets, and other regula-
+tory measures directly targeting Greenhouse
+Gas emissions"
+• Query 6: "Is the organization transparent
+about its involvement with industry associ-
+ations that are inﬂuencing climate policy, in-
+cluding the extent to which it is aligned with
+these groups on climate?"
+• Query 7: "Is the organization supporting an
+IPCC-aligned transition of the economy away
+from carbon-emitting technologies, including
+supporting relevant policy and legislative mea-
+sures to enable this transition?"
+• Query 8: "Is the organization supporting pol-
+icy and legislative measures to address climate
+change: Renewable energy legislation, targets,
+subsidies, and other policy"
+• Query 9: "Is the organization supporting the
+science-based response to climate change as
+set out by the IPCC? "
+• Query 10: "Is the organization supporting the
+UN FCCC process on climate change?"
+• Query 11: "Is the organisation supporting pol-
+icy and legislative measures to address climate
+change: emissions trading."
+• Query 12: "To what extent does the organiza-
+tion express the need for regulatory interven-
+tion to resolve the climate crisis?"
+• Query 13: "Is the organization supporting pol-
+icy and legislative measures to enhance and
+protect ecosystems and land where carbon is
+being stored?"
+D Longest Common Subsequence
+Algorithm 1 Compute LCS Length
+1: function LCS(X, Y )
+2: m ←|X|, n ←|Y |
+3: Initialize L[0..m][0..n] ← 0
+4: for i = 1 to m do
+5: for j = 1 to n do
+6: if X[i−1] = Y [j−1] then
+7: L[i][j] ← L[i−1][j−1] + 1
+8: else
+9: L[i][j] ←
+max(L[i−1][j], L[i][j−1])
+10: end if
+11: end for
+12: end for
+13: return L[m][n]
+14: end function
+E Dataset Structure
+Each data instance is a tuple: (PDF, Company,
+Query, Evidence, Stance, Comment, Metadata)
+where:
+• PDF: A company-related document (e.g., sus-
+tainability report, policy statement), often mul-
+tilingual and diverse in layout.
+• Query: One of 13 predeﬁned climate pol-
+icy questions representing lobbying subtopics
+(see Appendix C).
+• Evidence: A human-extracted text snippet
+relevant to the query, from the PDF.
+• Stance: A discrete label from the set
+{−2, −1, 0, +1, +2} representing opposition
+through support.
+128

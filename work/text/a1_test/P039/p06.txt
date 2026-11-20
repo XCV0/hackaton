@@ -1,0 +1,80 @@
+Materials 2022, 15, 8356 6 of 10
+Based on the criteria for the seed layer, we found that the optimal d was in the
+−4–0 cm range. In this region, deposited seed layers were compact, fully covered the
+substrate surface, were of high crystalline quality (in terms of FWHM) and had favourable
+grain orientations. For the Sb2Se3 absorber deposition, we selected −2 cm as the optimal
+distance. The reason is that, at −4 cm, there is a higher risk of seed layer re-evaporation,
+whereas at 0 cm, it required a longer annealing step duration to increase Tsub for the
+absorber deposition.
+3.2. Solar Cell Fabrication and Performance
+Having identiﬁed optimal seed layer deposition conditions, the complete Sb2Se3
+absorber was grown on the top of the seed layer in the last deposition process step (Figure
+S2a). This included ramping the Tsrc up to 520–525 ◦C and maintaining it for a ﬁxed period.
+The top annealing temperature duration varied from 1 to 4 min, which resulted in the ﬁnal
+absorber’s thickness being in the 400–800 nm range. Note that thickness variation did not
+follow deposition time linearly (Figure 4a), and as can be seen, the growth rate was higher
+in the ﬁrst few minutes and then started to decline. We believe this was related to the initial
+Tsrc overshoot (Figure S2), which always occurs with the resistive-type furnaces when a
+high-temperature ramp rate is used. The surface morphology of the Sb2Se3 layer did not
+depend on the deposition time (Figure S5) and remained almost the same, as shown in
+the inset of Figure 4a. The phase composition of the absorber was the same as that of the
+seed layer—orthorhombic Sb2Se3. The grain orientation did not change signiﬁcantly with
+absorber thickness, although (hkl, l ⁄= 0) planes were more prominent than in the seed layer
+(Figure 4b). Chemical composition was slightly deposition-time-dependent. The longer the
+deposition time, the more an Sb-rich composition was observed (Table S2). However, the
+trend was very small (<1 at. %); therefore, we do not expect it to have a signiﬁcant inﬂuence
+on solar cell performance. Overall, the structural properties of the Sb2Se3 absorber were
+almost identical, except for thickness. This then allowed us to study how the thickness of
+the absorber rather than structural characteristics affected the solar cell performance.
+Materials 2022, 15, x FOR PEER REVIEW 7 of 11 
+ 
+ 
+ 
+Figure 4. (a) An average absorber thickness determined from cross-sectional SEM images as a func-
+tion of deposition time in the last process step. Inset—top-view SEM image of Sb2Se3 absorber de-
+posited at 3 min. (b) XRD patterns of Sb2Se3 absorbers grown at different deposition times. All XRD 
+peaks were assigned to orthorhombic Sb2Se3 phase (PDF 01-089-0821) and SnO2 (PDF 00-041-1445). 
+The final solar cell structure was  FTO/TiO2/Sb2Se3/Au (Figure 5a, inset). J-V curves 
+of the champion cells for each case are depicted in Figure 5a, and average performance 
+parameters are listed in Table 1. We see that power conversion efficiency (PCE) varied in 
+the 3.4–4.6 % range and was rather dispersed within a sample. The largest variation was 
+observed in short-circuit current density, JSC (Table 1). We speculate that it was related to 
+the uneven surface oxidation, which is typical effect when using low-vacuum conditions 
+such as in the VTD process [22]. In another batch of fabricated solar cells under very sim-
+ilar conditions, we applied surface etching using a dilute (NH4)2S solution. This not only 
+reduced scattering in solar cell parameters but also increased the fill factor (FF) (Table S1). 
+On the other hand, the peak-performing cells all showed rather similar solar cell parame-
+ters with a record efficiency of 4.9% (Table 1). There are very few studies where Sb2Se3 
+solar cells are deposited on Cd-free buffer layers using the VTD approach indicating a 
+non-trivial deposition protocol on oxide buffer layers. Using the same deposition method 
+(VTD) on double-oxide buffer layers (SnO2/TiO2), Wang et al. demonstrated 4.7% PCE, 
+which was boosted to 5.8% using SbCl3 surface treatment [23]. A surprising observation 
+was that the generated JSC did not depend on the absorber thickness, even when it was 
+increased two times. Neglecting limited charge carrier diffusion length, usually, the 
+thicker the absorber, the more photons are absorbed and converted to electron–hole pairs, 
+leading to increased JSC. For example, to absorb all solar radiation above the bandgap, 1.5–
+2 µm-thickness absorbers are required for well-established thin-film solar cell technolo-
+gies such as Cu(In, Ga)Se2 [24] and Cu2SnZnSe4 [25], and even higher thicknesses are 
+needed for CdTe [26]. In the case of the Sb2Se3 absorber, a JSC over 30 mA/cm2 was gener-
+ated using layers as thin as 0.4 µm and without any intentional light-management solu-
+tions. The measured absorbance of Sb2Se3 films showed that even in the thinnest sample, 
+99% of incident radiation was absorbed at a 950 nm wavelength and below (Figure 5c). 
+This demonstrates the high absorption capabilities of Sb2Se3 and its potential application 
+in ultra-thin solar cells. Using the experimentally measured absorption coefficient of 
+Sb2Se3, we calculated the theoretical limit of JSC at a specific absorber thickness using an 
+idealized p–n junction (Table 1). The sample with an absorber thickness of 0.4 µm gener-
+ated 86% of the theoretical JSC, and this is not considering reflection losses from a glass 
+substrate. However, with an increasing absorber thickness, JSC did not improve, which 
+suggests that collection efficiency decreased accordingly. Carrier mobility and carrier life-
+time are rather low in Sb2Se3 [27], leading to a short carrier diffusion length. Once absorber 
+thickness exceeds carrier diffusion length, carriers recombine before reaching contacts and 
+Figure 4. (a) An average absorber thickness determined from cross-sectional SEM images as a function
+of deposition time in the last process step. Inset—top-view SEM image of Sb2Se3 absorber deposited
+at 3 min. (b) XRD patterns of Sb2Se3 absorbers grown at different deposition times. All XRD peaks
+were assigned to orthorhombic Sb2Se3 phase (PDF 01-089-0821) and SnO2 (PDF 00-041-1445).
+The ﬁnal solar cell structure was FTO/TiO2/Sb2Se3/Au (Figure 5a, inset). J-V curves
+of the champion cells for each case are depicted in Figure 5a, and average performance
+parameters are listed in Table 1. We see that power conversion efﬁciency (PCE) varied in
+the 3.4–4.6 % range and was rather dispersed within a sample. The largest variation was
+observed in short-circuit current density, JSC (Table 1). We speculate that it was related to
+the uneven surface oxidation, which is typical effect when using low-vacuum conditions

@@ -1,0 +1,87 @@
+Table 5: Retrieval Evaluation on STARK: HYBGRAG wins. ‘*’ denotes that only 10% of the testing questions
+are evaluated due to the high latency and cost of the methods. denotes our proposed method.
+Method STARK-MAG STARK-PRIME Hit@1 Hit@5 Recall@20 MRR Hit@1 Hit@5 Recall@20 MRR
+QAGNN 0.1288 0.3901 0.4697 0.2912 0.0885 0.2123 0.2963 0.1473
+Think-on-Graph* 0.1316 0.1617 0.1130 0.1418 0.0607 0.1571 0.1307 0.1017
+Dense Retriever 0.1051 0.3523 0.4211 0.2134 0.0446 0.2185 0.3013 0.1238
+VSS (Text Retrieval Module) 0.2908 0.4961 0.4836 0.3862 0.1263 0.3149 0.3600 0.2141
+Multi-VSS 0.2592 0.5043 0.5080 0.3694 0.1510 0.3356 0.3805 0.2349
+VSS w/ LLM Reranker* 0.3654 0.5317 0.4836 0.4415 0.1779 0.3690 0.3557 0.2627
+ReAct 0.3107 0.4949 0.4703 0.3925 0.1528 0.3195 0.3363 0.2276
+Reflexion 0.4071 0.5444 0.4955 0.4706 0.1428 0.3499 0.3852 0.2482
+AVATAR 0.4436 0.5966 0.5063 0.5115 0.1844 0.3673 0.3931 0.2673
+Hybrid Retrieval Module (Ours) 0.5028 0.5820 0.5031 0.5373 0.2492 0.3274 0.3366 0.2842
+HYBGRAG (Ours) 0.6540 0.7531 0.6570 0.6980 0.2856 0.4138 0.4358 0.3449
+Relative Improvement 47.4% 26.2% 29.3% 36.5% 54.9% 12.7% 10.9% 29.0%
+Hit@1 Hit@5 Recall@20 MRR
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+STaRK-MAG
+Val. w/o Context
+Com. w/ 5-Shot
+HybGRAG
+Oracle
+Hit@1 Hit@5 Recall@20 MRR
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+STaRK-Prime
+Figure 3: Design choices in HYBGRAG are necessary in STARK. We compare HYBGRAG with two variants: a
+validator without validation context, and a commenter with only 5-shot. Oracle uses ground truth during inference.
+1 2 3 4
+# of Iterations
+0.50
+0.55
+0.60
+0.65Hit@1
+ 0.26
+0.28
+STaRK-Prime
+STaRK-MAG
+Figure 4: HYBGRAG improves its question routing
+thanks to the critic module.
+Table 6: HYBGRAG maintains strong performance
+with a less powerful LLM model in STARK-MAG.
+Base Model Hit@1 Hit@5 Recall@20 MRR Speedup
+Claude 3 Haiku 0.6019 0.7084 0.6067 0.6483 1.96×
+Claude 3 Sonnet 0.6540 0.7531 0.6570 0.6980 1.00×
+4.1.1 Effectiveness (RQ1)
+In Table 5, HYBGRAG outperforms all baselines
+significantly in both datasets in STARK. Most base-
+lines are designed to handle ODQA and KBQA,
+and the results have shown that they cannot han-
+dle HQA effectively (Challenge 1). Our hybrid
+retrieval module is the second-best performing
+method, highlighting the importance of designing
+a synergized retrieval module that uses both textual
+Table 7: HYBGRAG performs best with multi-agent
+design in STARK-MAG. “Router for SR” baseline
+performs self-reflection using a single LLM router.
+Method Setting Hit@1 Hit@5 Recall@20 MRR
+Hybrid RM No-Agent 0.5028 0.5820 0.5031 0.5373
+Router for SR Single-Agent 0.6206 0.7069 0.6187 0.6587
+HYBGRAG Multi-Agent 0.6540 0.7531 0.6570 0.6980
+and relational information simultaneously. In ad-
+dition, HYBGRAG performs significantly better
+than the hybrid retrieval module, indicating that the
+extracted entity and relation are frequently incor-
+rect in the first iteration (Challenge 2). By tackling
+Challenge 1 and 2 with our retriever bank and critic
+module respectively, HYBGRAG has a significant
+improvement in performance.
+4.1.2 Ablation Study (RQ2)
+Critic Module We compare HYBGRAG variants
+with a validator without validation context, a com-
+menter with only five shots, and those with oracles.
+The oracle has access to the ground truth, which
+gives the optimal judgement on the correctness of
+the output and the error type of question routing, if
+there is any. In Fig. 3, we show that HYBGRAG
+884

@@ -1,0 +1,99 @@
+Table 3: Impact of Retrieval Data on Model Memorization. (5000 prompts for targeted attack and 1000 prompts for
+prefix attack)
+Retrieval Data Targeted Attack Targeted Attack Prefix Attack Email from
+LLM
+Phone from
+LLM
+Url from
+LLM
+Email
+(RAG)
+Phone
+(RAG)
+Url
+(RAG)
+Reconstruction with
+Enron
+None 245 27 34 - - - 213
+Random Noise+prompt 62 17 24 - - - 211
+System Prompt+prompt 252 7 24 - - - 203
+RAG-Chatdoctor 2 1 15 0 0 3 34
+RAG-Wikitext 2 2 3 0 0 0 70
+RAG-W3C-Email 4 17 21 20 65 66 33
+content7 to the inputs.
+5.2 Targeted Attack
+We performed targeted attacks as described in Sec-
+tion 3.3 and the results are shown in Table 3. In
+this table, "None" means no retrieval data is in-
+cluded, "Random Noise" and "System Prompt" de-
+note adding random characters and protective sys-
+tem prompts prepend to the input prompts. "RAG-
+{dataset}" indicate which dataset is used for re-
+trieval. The results show that incorporating RAG
+data substantially reduced the number of PIIs ex-
+tracted from the training data compared to using
+the LLM alone. Adding random noise or protective
+system prompts mitigated leakage to some extent,
+but remained far less effective than RAG integra-
+tion. These findings indicate that the incorpora-
+tion of retrieval data significantly reduces LLM’s
+propensity to reproduce content memorized during
+its training/finetuning process.
+5.3 Prefix Attack
+In line with the methods outlined in Section 3.3,
+we executed prefix attacks by providing the LLM
+with the first 100 tokens of training examples (of
+the LLM) and then comparing the model’s outputs
+with the original text that followed these tokens. If
+the similarity score, measured by the ROUGE-L
+metric, exceeded 0.5, we considered a successful
+extraction. The results in Table 3 show that the
+integration of retrieval data, in contrast to using
+the LLM alone or with noise or unrelated prompts,
+greatly decreased the LLM’s ability to recall and
+reproduce its training data. Specifically, it leads to
+a reduction in successful text reconstructions from
+over 200 cases to fewer than 40. This highlights
+that retrieval data integration can effectively reduce
+7We introduced the construction of random noise and pro-
+tective system prompts in appendix A.3.2
+LLMs’ risk of revealing training data8.
+5.4 Discussions & Practical Implications
+The reasons why LLMs are less likely to output
+memorized data could be complex. One possible
+reason is that incorporating external data makes
+LLMs less reliant on training data but focuses on
+leveraging information from retrieved contexts. As
+evidenced by the Bayes Theorem in (Xie et al.,
+2021), when leveraging external diverse datasets
+during inference, the model generates new tokens
+based on the conditional distribution given the re-
+trieved data R(q, D) and q. Such a distribution is
+different from the one only given q, and relies more
+on the retrieved data R(q, D). We include more de-
+tailed theoretical discussion in Appendix A.1Such
+hypothesis is empirically supported by our results
+in Table 3. We can observe that when the retrieval
+data comprises entirely disparate data types, the
+LLM demonstrates a marked inability to extract
+PIIs, while when the retrieval data includes another
+PII dataset (W3C-Email), we found the LLM tends
+to output more retrieval data instead of training
+data.
+These findings have significant implications.
+First, integrating retrieval data reduces the risk of
+privacy leaks from LLMs’ training data, making
+it harder for attackers to access this information.
+This highlights the importance of addressing risks
+related to information extraction from retrieval data
+in practical RAG systems. Second, RAG can effec-
+tively protect private information in LLMs’ training
+data. Using non-sensitive public or carefully de-
+sensitized data as retrieval content can greatly min-
+imize the risk of information leakage from LLMs.
+8To further investigate whether LLM prioritize to use con-
+textual or memorized data, we conduct an ablation study by
+crafting retrieved document that shares the prefix with the
+training data while different in the rest in Appendix A.2, Table
+8 and 9.
+4512

@@ -1,0 +1,77 @@
+Method
+EN ZH
+FreshQA NQ TriviaQA HotpotQA FreshQA WebQA
+QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5
+OQR 62.56 30.88 51.50 35.68 80.17 52.57 43.21 18.32 44.67 17.27 81.37 78.27
+SUBSTITUTE-Ranked
+LLM-Rewrite 59.24 27.34 49.75 32.27 78.53 50.43 41.48 16.37 42.85 16.26 80.53 76.32
+Query2Doc 58.84 28.32 45.62 30.59 77.26 52.01 42.26 17.73 43.81 16.61 81.22 79.92
+SFT(Tsft) 60.69 28.42 50.99 34.01 78.35 50.19 42.26 17.64 43.44 16.56 77.72 74.65
+SFT(Tall) 61.42 28.40 50.93 32.54 78.15 50.33 42.66 17.88 44.40 16.20 78.16 75.61
+RaFe(P P O) 63.01 30.56 51.26 34.61 98.86 51.33 42.57 18.45 43.77 16.79 81.46 76.90
+RaFe(DP O) 62.89 30.28 51.97 35.89 80.41 53.54 43.77 19.07 45.49 17.58 80.53 76.37
+RaFe(KT O) 62.71 31.00 51.86 35.62 80.23 53.09 44.77 19.82 45.30 17.36 81.14 77.98
+EXPAND-Ranked
+LLM-Rewrite 62.34 31.14 51.55 36.34 80.79 54.93 45.73 20.85 45.83 17.52 82.29 78.21
+Query2Doc 63.06 31.84 51.83 37.16 80.28 54.47 45.82 23.05 46.58 18.29 83.35 80.75
+SFT(Tsft) 63.16 31.56 51.75 37.44 80.17 54.20 45.18 22.28 47.61 18.86 82.08 79.15
+SFT(Tall) 63.27 28.44 51.94 37.68 80.88 54.25 45.84 22.09 46.95 18.63 82.75 79.43
+RaFe(P P O) 64.96 33.54 52.36 38.44 81.38 55.27 46.73 22.39 48.83 19.66 83.58 80.93
+RaFe(DP O) 63.98 33.20 52.74 38.57 81.74 55.60 46.53 22.78 48.72 18.58 83.04 79.83
+RaFe(KT O) 64.85 33.72 52.86 38.37 81.97 55.67 46.79 23.35 48.96 19.25 82.96 79.52
+Table 2: Results of SUBSTITUTE-Ranked and EXPAND-Ranked settings. “OQR” is evaluated after ranking.
+We utilize the Exact Match (EM) metric to evalu-
+ate the general QA performance. Especially, we use
+Rouge-L (Lin, 2004) to evaluate the false premise
+set in FreshQA. Given our work focus on open-
+domain QA, there are no gold documents or rele-
+vant annotations, we evaluate the retrieval by de-
+termining whether the retrieved documents contain
+the correct answer. We report the Precision@K and
+the mean reciprocal rank (MRR) in the results.
+3.3 Baseline
+Original Query Retrieval (OQR) Retrieve with
+the original query and utilize the documents by the
+default returned ranking from the search engine.
+LLM Rewrite Directly enable the LLMs to
+rewrite the original query with a few-shot prompt.
+In our experiment, we prompt Qwen-max to rewrite
+the original query.
+Query2Doc (Wang et al., 2023) A method cre-
+ates pseudo-documents through few-shot prompt-
+ing of LLMs and then the query is expanded with
+the generated pseudo-documents for retrieving.
+The used prompts are shown in Appendix A.5.
+SFT Use the pre-generated rewrites to directly
+train the rewrite model. SFT(Tsft) represents the
+rewrite model trained specifically on the Tsft, while
+SFT(Tall) denotes the model trained on Tall.
+3.4 Implementation
+Retriever We use an anonymous internal search
+engine for open domain to retrieve documents for
+the Chinese datasets, and Google Search for the
+English datasets. Specifically, we utilize the title
+and the summary snippet of the searched page as
+the retrieved documents for retrieval augmentation.
+Base Model We employ Qwen-max (Bai et al.,
+2023) to generate responses and conduct the eval-
+uation with Qwen1.5-32b-chat. Query rewriting
+models are trained with the Qwen-7b-base.
+Reranker For a general RAG task like open-
+domain QA, If our approach yields positive results
+with a general reranker, it will perform even better
+when transferring to a specific domain (where a
+domain-specific reranker is available). Thus, we
+employ a publicly available bge-reranker3 (Xiao
+et al., 2023) to conduct open-domain QA experi-
+ments, which serves to demonstrate the effective-
+ness of the methods we designed.
+4 Results
+4.1 Main Result
+From Table 1 and Table 2, we can observe that
+RaFe outperforms other query rewriting baselines
+and OQR across almost all settings in retrieval and
+question-answering metrics. It can be noted that
+3https://huggingface.co/BAAI/
+bge-reranker-base
+888

@@ -1,0 +1,47 @@
+10780
+C Datasets for RAG
+Name Size Discription url
+CSCD-IME(Train) 30000
+consists of blogs posted on Weibo
+by a certified news media
+organization,The dataset only
+focuses on errors caused by
+"Pinyin Input Method".
+https://github.com/nghuyong/
+cscd-ns?tab=readme-ov-file
+SIGHAN13(Train) 700
+consists of sentences written by
+Chinese students aged 13 to 14
+in a language examination
+http://ir.itc.ntnu.edu.tw/lre/sigh
+an7csc.html
+SIGHAN14(Train) 3437
+consists of articles written by
+foreigners in the process of
+learning Chinese.
+http://ir.itc.ntnu.edu.tw/lre/
+clp14csc.html
+SIGHAN15(Train) 2339
+consists of articles written by
+foreigners in the process of
+learning Chinese.
+http://ir.itc.ntnu.edu.tw/lre/
+sighan8csc.html
+ECSpell 572
+Open multi-domain spelling correction
+dataset from Soochow University, incl-
+uding finance and medicine.
+https://github.com/Aopolin-Lv/
+ECSpell
+LEMON 21736 A dataset manually created to include seven domains. https://github.com/gingasan/ lemon/tree/main/lemon_v2
+MCSC 196497 Medical field dataset, data source is TencentMedical Dictionary https://github.com/yzhihao/ MCSCSet/tree/main/data/mcsc_ benchmark_dataset
+Wang271k 271282
+Based on the concepts of "similar
+in shape" and "similar in sound,"
+this dataset is primarily used for
+training models and is typically not
+used as a test set.
+https://github.com/wdimmy/
+Automatic-Corpus-Generation
+Table 5: The CSC dataset used for RAG. Before conducting CSC evaluations, examples in the RAG dataset that
+have the same answers as the test set were removed.

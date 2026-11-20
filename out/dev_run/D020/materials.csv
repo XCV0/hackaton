@@ -1,0 +1,4 @@
+publication_id,material_id,material_name_raw,formula_normalized,material_class,dimensionality,additives,bandgap_value,bandgap_unit,bandgap_method,note
+D020,M1,Sb2S3,Sb2S3,other,,,1.72,eV,Tauc,"Tauc plot, Figure 3f"
+D020,M2,"Sb2(S, Se)3","Sb2(S,Se)3",Sb2Se3,,,1.58,eV,Tauc,Se/(S+Se) 23.70% (EDS); Eg «about 1.58 eV»; class Sb2Se3 = ближайший
+D020,M3,"Sb2S3/Sb2(S, Se)3","Sb2S3/Sb2(S,Se)3",Sb2Se3,,,1.62,eV,Tauc,"двухслойный градиентный плёнка, Se/(S+Se) 20.81% (EDS); Eg «about 1.62 eV»; class Sb2Se3 = ближайший"

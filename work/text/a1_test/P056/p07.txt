@@ -1,0 +1,111 @@
+Nanomaterials 2022, 12, 3067 7 of 11
+where L is the thickness of the NC/PTAA layer, ε0 is the permittivity of free space, εr
+is the relative dielectric constant of CdTe (9.8), µp is the hole mobility, V is the applied
+voltage, and Vs is the voltage drop due to contact resistance, while Vbi is the built-in voltage.
+From Figure 6a,b, the mobility for a device with and without PTAA are 7.76 × 10−4 and
+3.07 × 10−4 cm2/Vs, respectively. The µp is increased by a factor of 2–3 with the presence
+of HTL. The higher mobility for the device with PTAA implies that hole carrier transport is
+improved, and thus a high Jsc is expected for NC devices with optimal HTL thickness and
+annealing temperature.
+Nanomaterials 2022, 12, x FOR PEER REVIEW 7 of 11  
+ 
+F 0.69 22.33 37.17 5.70 
+G 0.60 19.35 36.44 4.25 
+H 0.62 15.41 55.96 5.34 
+I 0.68 21.47 47.81 6.95 
+In order to further optimize the electron/hole transfer balance and improve the NC 
+device performance, we fabricated bilayer CdS electron transport layer–based (ETL) 
+devices with the configuration of ITO/ZnO/CdS/CdSe/CdTe/HTL(w/o)/Au, which 
+consists of one layer of CdS NC, two layers of CdSe NC and five layers of CdTe NC. Figure 
+5a shows the J–V curves of NC solar cells under AM 1.5 G, with the corresponding EQE 
+spectrum and J–V under dark presented in Figure 5b,c. The control device without HTL 
+shows a Voc of 0.62 V, Jsc of 15.41 mA cm−2 and FF of 0.56, delivering a PCE of 5.34%. In 
+contrast, the device with PTAA shows a Voc of 0.69 V, Jsc of 21.47 mA cm−2 and FF of 0.48, 
+delivering a much higher PCE of 6.95%. The PCE is increased by 35% when HTL is 
+introduced. From the EQE spectra (Figure 5b), one can gain more insights into how the Jsc 
+varies as a function of the wavelength of incident light. The device with HTL annealing at 
+optimal temperature of 120 °C exhibits a higher EQE value almost in the whole 
+wavelength, suggesting the improved carrier collecting efficiency due to the reduced 
+interface defects between the CdTe NC layer and the Au electrode. When the EQE curves 
+are integrated with the AM1.5G spectrum, current densities of 15.14 mA/cm2 and 22.32 
+mA/cm2 are obtained from measured EQE curves, respectively, which is consistent with 
+our J–V measurement (Figure 5a). The dark J–V characteristics of NC solar cells are shown 
+in Figure 5c. At reverse bias, the leakage current is decreased almost one-fold compared 
+to the device without HTL, indicating the importance of CdS ETL and PTAA HTL for 
+further optimizing device performance. 
+ 
+Figure 5. (a) J−V curves of ITO/ZnO/CdSe/CdTe/PTAA(w/o)/Au. (b) Corresponding EQE spectra. 
+(c) Dark J−V characteristic curves. 
+To understand the origin of the improved Jsc for devices with HTL, the hole-only 
+devices with ITO/CdTe(200 nm)/PTAA(20 nm, w/o)/Au configuration are fabricated. The 
+hole mobility is measured by space charge limited current (SCLC). The hole mobility of 
+NC films are calculated based on the Mott–Gurney law [38]: 
+J = 9 8 ε0ε𝑟μ𝑝 (𝑉 − 𝑉𝑏𝑖 − 𝑉𝑠)2 𝐿3   
+where L is the thickness of the NC/PTAA layer, 𝜀0 is the permittivity of free space, εr is 
+the relative dielectric constant of CdTe (9.8), μp is the hole mobility, V is the applied 
+voltage, and vs. is the voltage drop due to contact resistance, while Vbi is the built-in 
+voltage. From Figure 6a,b, the mobility for a device with and without PTAA are 7.76 × 
+10−4 and 3.07 × 10−4 cm2/Vs, respectively. The μp is increased by a factor of 2–3 with the 
+presence of HTL. The higher mobility for the device with PTAA implies that hole carrier 
+transport is improved, and thus a high Jsc is expected for NC devices with optimal HTL 
+thickness and annealing temperature. 
+Figure 5. (a) J–V curves of ITO/ZnO/CdSe/CdTe/PTAA(w/o)/Au. (b) Corresponding EQE spectra.
+(c) Dark J–V characteristic curves.
+Nanomaterials 2022, 12, x FOR PEER REVIEW 8 of 11  
+ 
+ 
+Figure 6. SCLC measurements of holy−only devices: (a) without; and (b) with PTAA (device 
+structure: ITO/CdTe (200 nm)/PTAA/Au. 
+To explain the functional mechanism of interaction between PTAA and the CdTe NC 
+layer, ITO/CdTe NCs (2 layers)/PTAA (2 nm, annealing at 120 ˚C) samples are fabricated 
+and investigated by X-ray photoelectron spectroscopy (XPS) spectra. Figure 7a shows the 
+XPS narrow scan of Cd 3d, Te 3d and N 1s for thin films with and without PTAA HTL. 
+The binding energies of the Cd 3d, Te 3d and N 1s are summarized in Table 2. Figure S3 
+shows the full scan spectra of the thin film. The presence of an N 1s signal is attributed to 
+the elements of PTAA [39]. Compared to the control sample without PTAA HTL (The 
+peak location are 405.72 eV and 412.60 eV, respectively), one can see that the binding 
+energies of Cd 3d5/2 and Cd 3d3/2 are located at 405.13 eV and 412.01 eV, respectively, 
+for the sample with PTAA HTL. The binding energies of the Cd 3d core level with PTAA 
+coverage show a 0.59 eV higher than the control sample. We speculated that the existence 
+of Cd/N bonding should attract electron from Cd to N, and a dipole layer can be formed 
+between the CdTe NC layer and HTL. Therefore, the binding energies of the Cd 3d is 
+increased. Similar results were reported in the previous work with Spiro as HTL [40,41]. 
+As the direction of the dipole moment is aligned with the native Vbi, the new Vbi in solar 
+cells will be reinforced, which facilitates hole transport/separation on the surface of CdTe 
+NC and contributes to a higher Voc (Figure 5a). To confirm the improved built-in electric 
+field of CdTe NC solar cells with PTAA HTL, capacitance–voltage analysis is carried out 
+with the increase of bias voltage at a constant frequency of 1000 Hz. According to the 
+Mott–Schottky equation [42]: 
+𝐶−2 = 2 𝐴2𝑞𝜀0𝜀𝑁𝐴 (𝑉𝑏𝑖 − 𝑉)  
+where A is the device area, ε is the relative dielectric constant (10.6), ε0 is the permittivity 
+of vacuum, Vbi the built-in potential, and NA is the net acceptor concentration. The C−2-V 
+curves are presented in Figure 7b, and the Vbi can be extracted at a forward bias from the 
+slope (the extrapolated intersection with the x axis). The Vbi of the NC device with PTAA 
+is 0.69 V, while this value is only 0.62 V for the control devices, which agrees well with 
+their Voc values from the J–V curves. Based on the experiments results, the band alignment 
+and interaction between CdTe NC and PTAA are shown in Figure 7c. We speculate that 
+when PTAA is deposited on the ITO/ZnO/CdSe/CdTe substrate, a dipole layer is formed 
+between the CdTe NC layer and PTAA (by forming a Cd-N bond). A similar result has 
+been found in the case of CdTe NC solar cells with Spiro as HTL. As the direction of the 
+dipole field (from CdTe to HTL) is the same as the built-in potential (from ZnO to CdTe), 
+the overall built–in field will be reinforced, leading to high Voc. Similar to the effects of P-
+TPA HTL [12], the PTAA should passivate the interface of CdTe NC layer and reduce 
+Figure 6. SCLC measurements of holy−only devices: (a) without; and (b) with PTAA (device
+structure: ITO/CdTe (200 nm)/PTAA/Au.
+To explain the functional mechanism of interaction between PTAA and the CdTe NC
+layer, ITO/CdTe NCs (2 layers)/PTAA (2 nm, annealing at 120 ◦C) samples are fabricated
+and investigated by X-ray photoelectron spectroscopy (XPS) spectra. Figure 7a shows the
+XPS narrow scan of Cd 3d, Te 3d and N 1s for thin ﬁlms with and without PTAA HTL. The
+binding energies of the Cd 3d, Te 3d and N 1s are summarized in Table 2. Figure S3 shows
+the full scan spectra of the thin ﬁlm. The presence of an N 1s signal is attributed to the
+elements of PTAA [39]. Compared to the control sample without PTAA HTL (The peak
+location are 405.72 eV and 412.60 eV, respectively), one can see that the binding energies of
+Cd 3d5/2 and Cd 3d3/2 are located at 405.13 eV and 412.01 eV, respectively, for the sample
+with PTAA HTL. The binding energies of the Cd 3d core level with PTAA coverage show a
+0.59 eV higher than the control sample. We speculated that the existence of Cd/N bonding
+should attract electron from Cd to N, and a dipole layer can be formed between the CdTe
+NC layer and HTL. Therefore, the binding energies of the Cd 3d is increased. Similar results
+were reported in the previous work with Spiro as HTL [40,41]. As the direction of the
+dipole moment is aligned with the native Vbi, the new Vbi in solar cells will be reinforced,
+which facilitates hole transport/separation on the surface of CdTe NC and contributes to
+a higher Voc (Figure 5a). To conﬁrm the improved built-in electric ﬁeld of CdTe NC solar

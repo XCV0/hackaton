@@ -1,0 +1,132 @@
+Published as a conference paper at ICLR 2025
+(a) Standard RAG
+Prompt
+QQuery
+1
+2
+3
+(Incorporate 
+All docs into 
+the prompt)
+Generalist
+LM
+A
+Final 
+Answer
+(b) Self-Reﬂective RAG
+Q
+1
+2
+3
+4
+Need 
+Retrieval
+Relevant
+Irrelevant
+Generalist
+LM
+ASupported
+Relevant
+Generate special tags 
+to reﬂect over the 
+retrieved docs and the 
+generated answers
+Special tags 
+learned during 
+instruction-tuning
+(c) Corrective RAG
+1
+2
+3
+Correct
+Amiguous
+Incorrect
+NLI Model
+Q
+12
+Query
+Relevant 
+Docs
+Web Search
+Generalist
+LM
+A
+Use an NLI model to 
+classify retrieval docs
+Incorporate relevant docs and the 
+docs from web search into prompt.
+(d) Ours: Speculative Retrieval-Augmented Generation (Speculative RAG)
+Q
+End generation or Continue querying 
+Generalist LM for other tasks
+12
+Specialist
+RAG Drafter
+Q+
+Q+
+Q+
+Eﬃciently generate drafts α and rationale β
+45
+36
+Understand multiple perspectives of the docs
+(Docs of the same color are from the same topic cluster)
+α1β1
+α2β2
+α3β3
+No need to instruction-
+tune the Generalist LM
+       When Generalist LM 
+encounters knowledge-
+intensive queries?
+        Evaluate each answer draft based 
+on the question and the rationale in 
+parallel using Generalist LM and Accept 
+the Best Draft.
+Query Generalist LM Call Specialist RAG Drafter Evaluate & Accept Drafts into Generalist LM
+Understand documents 
+in parallel with the RAG Drafter
+A = argmax Score( αi | Q, βi )
+αi
+Evaluate drafts by Generalist
+LM & Accept the best draftβi
+A=αi
+…
+12Retrieved DocumentsAEvidence-supported AnswersA Knowledge-intensive QueryQ
+ A Generalist LM
+ A Specialist LM
+Figure 1: Illustration of different RAG approaches. Given a knowledge-intensive query Q and
+retrieved documents, (a) Standard RAG incorporates all documents into the prompt, increasing in-
+put length and slowing inference; (b) Self-Reflective RAG (Asai et al., 2023) requires specialized
+instruction-tuning of the general-purpose language model (LM) to generate specific tags for self-
+reflection; (c) Corrective RAG (Yan et al., 2024) employs an external retrieval evaluator to refine
+document quality, focusing solely on contextual information without enhancing reasoning capabili-
+ties; (d) In contrast, our proposed SPECULATIVE RAG leverages a larger generalist LM to efficiently
+verify multiple RAG drafts produced in parallel by a smaller, specialized LM. Each draft is gener-
+ated from a distinct subset of retrieved documents, providing diverse perspectives on the evidence
+while minimizing the number of input tokens per draft.
+concentrates on improving the quality of contextual information in retrieval outcomes, but often ne-
+glecting the latency issues associated with these systems (Ma et al., 2023; Baek et al., 2023; Yan
+et al., 2024; Xie et al., 2023; Asai et al., 2023; Feng et al., 2023). These methods typically rely on
+multiple refinement iterations or customized instruction-tuning for self-critique abilities. Integrat-
+ing such enhancements into generic LMs requires additional training or increased latency, posing
+practical challenges in real-world applications.
+To this end, we introduce SPECULATIVE RAG, a RAG framework designed to offload computational
+burden to a smaller, specialist LM that serves as an efficient and robust RAG module for existing
+generalist LMs. Inspired by Speculative Decoding (Leviathan et al., 2023; Chen et al., 2023a; Xia
+et al., 2024a), which accelerates auto-regressive LM inference by concurrently generating multiple
+draft tokens with a smaller model and verifying them in parallel with the base model, our approach
+adapts this concept to RAG.
+In SPECULATIVE RAG, we partition retrieved documents into subsets for drafting answer candi-
+dates. We cluster the retrieved documents by content similarity and sample one document from
+each cluster to form a subset, minimizing redundancy and maximizing diversity. These document
+subsets are then fed to multiple instances of the RAG module, which generate draft answers with
+corresponding rationales in parallel. This smaller, specialized RAG module, excels at reasoning over
+retrieved documents and can rapidly produce accurate responses. Subsequently, the generalist LM
+bypasses the detailed review of potentially repetitive documents, focusing instead on validating the
+drafts against the rationales to determine the most accurate answer. We utilize the strong language
+modeling capabilities of generalist LMs, calculating the conditional generation probability of the
+answer drafts and rationales as a confidence score. Our key contributions are:
+• We introduce a novel RAG framework that employs a smaller specialist RAG drafter to generate
+high-quality draft answers. Each draft is derived from a distinct subset of retrieved documents,
+offering diverse perspectives while reducing input token counts per draft.
+2

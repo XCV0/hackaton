@@ -1,0 +1,74 @@
+Int. J. Mol. Sci. 2023, 24, 3088 8 of 16
+Table 1. Fitted parameters of different Sb2Se3 diode architectures.
+ETL Stack Ideality Factor, n Series Resistance, Rs (Ω·cm2) Shunt Resistance, Rsh (kΩ)
+CdS/Al 1.65 4.14 160
+CdS/b-PEI/Al 1.46 3.40 115
+ZnO/Al 1.70 0.65 6
+ZnO/b-PEI/Al 1.65 0.50 12
+In accordance with the model given in Section 2.1.2, the organic layer should be below
+the electrode. Therefore, the passivation effect of the dipolar ﬁlm can be enhanced with the
+carrier transfer from the electrode. This is a different approach from other studies where the
+organic ﬁlm is in between the absorber and the buffer layer [49]. Due to the incorporation of
+this ﬁlm, the holes encounter a higher energy barrier, as shown in Figure 7. This will result
+in an enhancement in the diode’s ideality factor. A shift to lower b-PEI concentrations is
+observed in the minimum values for series resistance and ideality factor (Figure S6) when
+compared with diodes without buffer layers. The deposition of b-PEI on top of a selective
+contact such as CdS or ZnO instead of antimony selenide results in a different optimum
+value. In this case, a lower concentration of 0.001% is found.
+Int. J. Mol. Sci. 2023, 24, 3088 9 of 17 
+ 
+ 
+ 
+(a) 
+ 
+(b) 
+Figure 7. Band alignment of the diode’s ETL stacks with b-PEI film and (a) CdS or (b) ZnO as buffer 
+layer. Energies in eV. 
+The presence of a conjugated polyelectrolyte produces an improvement in most of 
+the diode parameters. It is especially significant in the series resistance and the ideality 
+factor, and it appears to be independent of the buffer layer. This is consistent with the 
+reported decrease in the specific contact re sistance and the increase in passivation 
+[36,39,50]. The incorporation of b-PEI deple tes the band of the interlayer. Tunneling 
+through the conduction band for electrons is facilitated, while the barrier for holes is in-
+creased (Figure 7). 
+The same diode ideality factor is obtained for the ZnO/b-PEI/Al and the CdS/Al con-
+tacts. However, the first shows an important improvement in the series resistance. Inho-
+mogeneities in the absorber samples can be re sponsible for shunt differences. Its strong 
+sensitivity to fabrication conditions makes the appearance of pinholes a recurrent issue 
+[12,51,52]. In light of these findings, ZnO/b-PEI/Al is identified as a prospective CdS-free, 
+non-toxic, and earth-abundant structure capable of competing with the conventional CdS 
+buffer layer. 
+2.3. Sb2Se3 Photovoltaic Devices 
+Finally, the bilayer cathode ZnO/b-PEI was implemented in a series of photovoltaic 
+structures. As the transparent electrode, zi nc oxide doped with aluminum (AZO), was 
+chosen. This transparent conducting oxide (TCO) can be deposited by ALD. This is a soft 
+deposition technique that allows conformal deposition and up-scalability. Furthermore, 
+the presence of aluminum in the TCO supports the choice since Al might have a promi-
+nent role in dipole orientation. Figure 8 shows the schematic film representation of the 
+device as well as the band structure of the photovoltaic device. The wide band gap of both 
+intrinsic and doped zinc oxide layers leads to a high energetic barrier for holes. In addi-
+tion, the voltage provided by the dipole film prevents pinning at the surface of the ZnO. 
+This facilitates the tunneling of electrons through its conduction band into the TCO. It has 
+been noticed that thicker layers of b-PEI are required compared with diode devices. This 
+is due to the lower carrier density of AZO compared with aluminum [53]. Thus, more 
+dipoles will be needed to affect the band st ructure and provide similar passivation and 
+selectivity. 
+Figure 7. Band alignment of the diode’s ETL stacks with b-PEI ﬁlm and (a) CdS or (b) ZnO as buffer
+layer. Energies in eV.
+The presence of a conjugated polyelectrolyte produces an improvement in most of
+the diode parameters. It is especially signiﬁcant in the series resistance and the ideality
+factor, and it appears to be independent of the buffer layer. This is consistent with the
+reported decrease in the speciﬁc contact resistance and the increase in passivation [36,39,50].
+The incorporation of b-PEI depletes the band of the interlayer. Tunneling through the
+conduction band for electrons is facilitated, while the barrier for holes is increased (Figure 7).
+The same diode ideality factor is obtained for the ZnO/b-PEI/Al and the CdS/Al
+contacts. However, the ﬁrst shows an important improvement in the series resistance.
+Inhomogeneities in the absorber samples can be responsible for shunt differences. Its
+strong sensitivity to fabrication conditions makes the appearance of pinholes a recurrent
+issue [12,51,52]. In light of these ﬁndings, ZnO/b-PEI/Al is identiﬁed as a prospective CdS-
+free, non-toxic, and earth-abundant structure capable of competing with the conventional
+CdS buffer layer.
+2.3. Sb2Se3 Photovoltaic Devices
+Finally, the bilayer cathode ZnO/b-PEI was implemented in a series of photovoltaic
+structures. As the transparent electrode, zinc oxide doped with aluminum (AZO), was
+chosen. This transparent conducting oxide (TCO) can be deposited by ALD. This is a soft

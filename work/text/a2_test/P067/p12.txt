@@ -1,0 +1,4 @@
+Figure 6: Chunk Duplication Frequencies. We compare the distribution of chunk duplication frequencies and
+chunk usage rates between Naive RAG and our method when questions involving knowledge not present in the
+persona document were given. We observe that when each of the 60 MBTI questions is asked to 15 characters, the
+average chunk usage rate increases from 34.93% to 43.84%, and the distribution becomes more uniform.

@@ -1,0 +1,106 @@
+Limitations
+While REAL-MM-RAG-Bench presents a com-
+prehensive and realistic evaluation framework for
+multi-modal retrieval, several limitations remain:
+Query Variability: Our queries are generated using
+a Vision-Language Model (VLM), which, while
+effective, may not fully capture the full range of
+plausible user queries.
+LLM and VLM Limitations: Despite the strength
+of modern Large Language Models (LLMs) and
+VLMs, our filtering strategies and labeling process
+remain subject to their limitations. While our hu-
+man evaluation confirms the effectiveness of our
+approach, errors in labeling and query selection
+may still occur. As LLMs and VLMs continue to
+improve, future benchmarks could leverage more
+accurate models to refine dataset construction fur-
+ther.
+Multi-Page Reasoning Queries: Our benchmark
+is designed to best evaluate the retrieval compo-
+nent of Retrieval-Augmented Generation (RAG).
+While the dataset can be used for the generation
+step as well, it does not explicitly assess multi-page
+reasoning. Future work could explore automated
+query generation that combines multiple pages us-
+ing LLMs and/or VLMs to construct multi-page
+reasoning tasks, enhancing the benchmark’s ability
+to evaluate complex retrieval scenarios.
+REAL-MM-RAG-Bench provides a realistic, re-
+liable, and challenging retrieval benchmark, help-
+ing to identify critical weaknesses in current multi-
+modal retrieval models and paving the way for fu-
+ture improvements in both evaluation and model
+development.
+References
+Pravesh Agrawal, Szymon Antoniak, Emma Bou Hanna,
+Baptiste Bout, Devendra Chaplot, Jessica Chud-
+novsky, Diogo Costa, Baudouin De Monicault,
+Saurabh Garg, Theophile Gervet, et al. 2024. Pixtral
+12b. arXiv preprint arXiv:2410.07073.
+Peter Bailey, Alistair Moffat, Falk Scholer, and Paul
+Thomas. 2016. Uqv100: A test collection with query
+variability. In Proceedings of the 39th International
+ACM SIGIR conference on Research and Develop-
+ment in Information Retrieval, pages 725–728.
+Peter Bailey, Alistair Moffat, Falk Scholer, and Paul
+Thomas. 2017. Retrieval consistency in the presence
+of query variations. In Proceedings of the 40th in-
+ternational ACM SIGIR conference on research and
+development in information retrieval, pages 395–404.
+Rodger Benham, J Shane Culpepper, Luke Gallagher,
+Xiaolu Lu, and Joel M Mackenzie. 2018. Towards
+efficient and effective query variant generation. In
+DESIRES, pages 62–67.
+Lucas Beyer, Andreas Steiner, André Susano Pinto,
+Alexander Kolesnikov, Xiao Wang, Daniel Salz,
+Maxim Neumann, Ibrahim Alabdulmohsin, Michael
+Tschannen, Emanuele Bugliarello, et al. 2024.
+Paligemma: A versatile 3b vlm for transfer. arXiv
+preprint arXiv:2407.07726.
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu
+Lian, and Zheng Liu. 2024. Bge m3-embedding:
+Multi-lingual, multi-functionality, multi-granularity
+text embeddings through self-knowledge distillation.
+arXiv preprint arXiv:2402.03216.
+Jacob Devlin. 2018. Bert: Pre-training of deep bidi-
+rectional transformers for language understanding.
+arXiv preprint arXiv:1810.04805.
+Yihao Ding, Kaixuan Ren, Jiabin Huang, Siwen
+Luo, and Soyeon Caren Han. 2024. Mvqa: A
+dataset for multimodal information retrieval in pdf-
+based visual question answering. arXiv preprint
+arXiv:2404.12720.
+Manuel Faysse, Hugues Sibille, Tony Wu, Bilel Om-
+rani, Gautier Viaud, Céline Hudelot, and Pierre
+Colombo. 2024. Colpali: Efficient document re-
+trieval with vision language models. arXiv preprint
+arXiv:2407.01449.
+Thibault Formal, Benjamin Piwowarski, and Stéphane
+Clinchant. 2021. Splade: Sparse lexical and expan-
+sion model for first stage ranking. In Proceedings
+of the 44th International ACM SIGIR Conference on
+Research and Development in Information Retrieval,
+pages 2288–2292.
+Tim Hagen, Harrisen Scells, and Martin Potthast. 2024.
+Revisiting query variation robustness of transformer
+models. In Findings of the Association for Computa-
+tional Linguistics: EMNLP 2024, pages 4283–4296.
+Pranab Islam, Anand Kannappan, Douwe Kiela, Re-
+becca Qian, Nino Scherrer, and Bertie Vidgen. 2023.
+Financebench: A new benchmark for financial ques-
+tion answering. arXiv preprint arXiv:2311.11944.
+Albert Q Jiang, Alexandre Sablayrolles, Antoine
+Roux, Arthur Mensch, Blanche Savary, Chris Bam-
+ford, Devendra Singh Chaplot, Diego de las Casas,
+Emma Bou Hanna, Florian Bressand, et al. 2024.
+Mixtral of experts. arXiv preprint arXiv:2401.04088.
+Vladimir Karpukhin, Barlas O˘guz, Sewon Min, Patrick
+Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and
+Wen-tau Yih. 2020. Dense passage retrieval for
+open-domain question answering. arXiv preprint
+arXiv:2004.04906.
+Omar Khattab and Matei Zaharia. 2020. Colbert: Effi-
+cient and effective passage search via contextualized
+late interaction over bert. In Proceedings of the 43rd
+31668

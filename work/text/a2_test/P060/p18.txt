@@ -1,0 +1,109 @@
+56
+Give your answer on a scale of 1 to 5,
+where 1 means that the question
+is not useful at all, and 5 means
+that the question is extremely
+useful.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here is the question.
+Question: "{question}"
+Answer:::
+c_usefulness:
+You will be given a context.
+This context is a part of a collection
+of contexts that users can query.
+Your task is to provide a 'total
+rating' representing how useful
+this context can be to extract
+statements for a user with domain
+knowledge on the subject covered
+by the context collection.
+Give your answer on a scale of 1 to 5,
+where 1 means that the context
+does not contain any useful
+statements, and 5 means that the
+context contains multiple
+statements that provide the user
+with different pieces of
+information.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here is the context.
+Context::: "{context}"
+Answer:::
+c_clarity:
+You will be given a context.
+This context is a part of a collection
+of contexts that users can query.
+Your task is to provide a 'total
+rating' representing the clarity
+of the information contained in
+the context.
+Give your answer on a scale of 1 to 5,
+where 1 means that the context
+contains incomplete, unclear or
+poorly formatted information, and
+5 means that the context contains
+only complete, clear and well
+formatted statements.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here is the context.
+Context::: "{context}"
+Answer:::
+qa_tautology:
+You will be given a question and
+passage its answer.
+Your question is to judge whether this
+question and answer pair form a
+tautological exchange.
+Give your answer on a scale of 1 to 5,
+where 1 means that the question
+and answer repeat the same
+information, and 5 means that the
+answer is made of entirely new
+information.
+Provide your output as a python
+dictionary as follows:
+Output:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here are the question and its
+answer.
+Question::: "{question}"
+Answer::: "{answer}"
+Output:::

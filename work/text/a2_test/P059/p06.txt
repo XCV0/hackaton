@@ -1,0 +1,101 @@
+ity; the two behavioral detectors behind the head-
+line rates, update following and conflict acknowl-
+edgment, are validated against blind labels from
+two annotators on a stratified n=100 sample (§5.4,
+Appendix H); sensitivity to clustering threshold,
+similarity function, prompt style, and sampling is
+reported in Appendix J. On cost, the full profile is-
+sues m+4 generator calls per query for m evidence
+clusters plus one short judge call per behavioral
+label; Delete-All triage alone costs one extra gen-
+eration, against the three judge calls of a RAGAS
+faithfulness/context-precision pair (Appendix D).
+The pipeline-stage trace reuses these generations
+and needs no separate diagnostic call. We use a
+staged policy (Delete-All triage → cluster knock-
+outs on flagged queries → update/contradiction
+probes where contractually required), with per-
+condition cost numbers in Appendix D.
+Data, licenses, and intended use. All datasets
+used (RAGBench, ExpertQA, DelucionQA) are
+publicly released benchmarks for RAG evaluation
+research, and our use is consistent with their stated
+evaluation purpose. We collect no new data; the cor-
+pora contain no personally identifying information
+beyond what is already public in their source docu-
+ments. The released COUNTERMEM harness ships
+under the license specified in the artifact reposi-
+tory.
+5 Results
+We organize the results around three questions:
+(1) does each COUNTERMEM signal flag failure
+modes that observational baselines miss (§5.1)?
+(2) does the same intervention trace localize the
+pipeline stage to repair (§5.2)? (3) what behav-
+ioral failures does COUNTERMEM reveal among
+answers that aggregate diagnostics already approve
+(§5.3)? and (4) do these findings survive a change
+of generator family, judge family, and detector
+(§5.4)? Construct-validity, end-to-end corpus dele-
+tion, distribution-shift transfer (Appendix B), and
+robustness checks are deferred to the appendix. The
+RAG configurations throughout are evaluation fix-
+tures, not proposed systems.
+5.1 Failure-mode Coverage on RAGBench-27
+COUNTERMEM flags update-inertia and
+contradiction-ignorance failures that obser-
+vational baselines rarely co-flag. We sweep
+27 RAGBench configurations (3 datasets × 3
+retrievers × k ∈ {2, 4, 8}, n=150 queries per
+cell) and ask, for each evidence-bound failure
+mode, how many configurations COUNTERMEM
+flags as failing and how many of those are also
+flagged by RAGAS-faithfulness or RAGChecker
+hallucination at standard thresholds (Table 2).
+No-evidence non-abstention is partially visi-
+ble to observational signals. Of the 18 configu-
+rations that fail to abstain reliably under Delete-
+All, RAGAS-faithfulness co-flags 6 (33%) and
+RAGChecker hallucination co-flags 9 (50%) on
+the realized base answer. Configurations that rarely
+abstain when context is removed tend also to have
+lower realized-trace support, so faithfulness and
+hallucination scores partially correlate with absten-
+tion behavior, but neither signal sees the counterfac-
+tual directly. The persistence-substantive flag DAV
+reported in the protocol gives a stricter view tied to
+the answer text rather than to abstention markers.
+Update inertia and contradiction ignorance
+are rarely co-flagged by observational baselines.
+Of the 7 configurations that fail update propaga-
+tion and the 12 that fail conflict acknowledgment,
+RAGAS-faithfulness co-flags 0 on either axis and
+RAGChecker hallucination co-flags 0 and 1 re-
+spectively. This is structural: faithfulness and
+hallucination score the realized (q, c, a) trace, but
+update-following and conflict-acknowledgment are
+properties of the answer under counterfactual ev-
+idence. The clearest demonstration of the gap:
+among the 31 same-dataset configuration pairs
+whose RAGAS-faithfulness scores match within
+±0.01, the maximum within-pair behavioral dif-
+ference is 0.31 in update following and 0.29 in
+conflict acknowledgment (median 0.11 and 0.13).
+The pairing threshold is not doing the work: at
+±0.005 (20 pairs) the maximum gaps are 0.27 and
+0.17, at ±0.02 (53 pairs) they are 0.31 and 0.29,
+with medians between 0.08 and 0.13 throughout
+(Table 17).
+5.2 Pipeline Diagnosis at Constant LLM Cost
+The intervention trace localizes the dominant
+failure stage, and the matched single-stage re-
+pair outperforms wrong-stage repairs—with the
+trace read off the generations the behavioral test
+already issues, not from a separate diagnostic
+call.
+Trace localization names the engineered bot-
+tleneck. On the three engineered fixtures, the dom-
+inant trace class matches the construction: A’s trace
+is 66% retrieval, B’s is 96% rerank, C’s is 53% gen-
+erator (Table 3). In the natural HotpotQA fixture,
+22337

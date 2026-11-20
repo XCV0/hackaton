@@ -1,0 +1,51 @@
+{M(1) doc,M(2) doc, . . . ,M(N ) doc } for the same document D. To select the optimal solution from these candidates, we
+design two key quantitative evaluation metrics:
+Atomic Chunks Clarity. This metric aims to evaluate the semantic rationality of the segmentation among
+atomic chunks A. An ideal segmentation should ensure high semantic cohesion within each chunk and clear
+semantic boundaries between chunks. We leverage a language model Meval to assess the marginal probability
+of the semantic boundary existing between any two consecutive chunks ai and ai+1. The clarity score is
+defined as follows:
+Sclarity(Mdoc) = 1 n − 1
+n−1X
+i=1
+PMeval (bi,i+1|ai, ai+1)
+where n is the total number of atomic chunks, and bi,i+1 denotes the event that a semantic boundary exists
+between chunks ai and ai+1. A higher score indicates a clearer and more logical overall chunking structure of
+the document.
+Core Content Completeness. This metric is used to evaluate the effectiveness and conciseness of the core
+content C in covering the information of the original document D. It is achieved by calculating the conditional
+perplexity of generating the entire chunks A given C, and introducing a penalty term for the length of the
+core content. Its formal definition is as follows:
+Scomp(Mdoc) = 1 n
+nX
+i=1
+1
+P P L(ai|ci) · log(|ci|)
+where|ci| is the total number of tokens in the core content. A higher score signifies that, on average, each core
+content provides strong, concise support for its respective original chunk.
+Optimal Document Memory Selection. We rank all N candidate memories {M(i) doc} in descending order
+based on Sclarity and Scomp, respectively, resulting in two independent ranking lists. Subsequently, we draw
+on the reciprocal rank fusion algorithm [5] to calculate a comprehensive score for each candidate. For any
+candidate M(i) doc, its comprehensive ranking score SRRF is defined as:
+SRRF(M(i) doc) = 1 k +rank(i) clarity + 1 k +rank(i) comp
+where rank(i) clarity and rank(i) comp are the positions of M(i) doc in the ranking lists for clarity and completeness,
+respectively, and k is a smoothing constant (typically set to 60). All candidates will be finally ranked according
+to their SRRF scores.
+3.1.3 Reverse Construction of CoM
+To enable SLMs to master such complex knowledge construction capabilities, merely providing supervised
+data consisting of inputs D and outputs Mdoc is insufficient. In order to instill deeper human-like reading
+abilities, we introduce the reverse construction strategy of CoM. Specifically, we once again leverage the
+guiding model MG, providing it with the original document D and the optimal document memory Mdoc, and
+generating the reasoning path P through specific prompts. This reasoning path constitutes high-quality CoM
+data and becomes an essential component for training SLMs.
+3.1.4 MemReader
+Based on the aforementioned process, we construct approximately 40K high-quality training samples by
+employing DeepSeek-R1 to act as MG. Each sample is composed of a triplet (D, P,Mdoc). Our objective is to
+transform a SLM into a MemReader, enabling it to directly generate reasoning paths and document memories
+from raw documents. For a training sample, let the input be s (the document D and related instructions),
+and the target output sequence be o (the concatenation of P and Mdoc). The loss function is defined as:
+LF(θ) = − 1 τ
+τX
+t=1
+log P (ot|o<t, s; θ)
+5

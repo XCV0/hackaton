@@ -1,0 +1,72 @@
+Citation: Jušk˙enas, R.; Naujokaitis,
+A.; Drabaviˇcius, A.; Pakštas, V.;
+Vainauskas, D.; Kondrotas, R. Seed
+Layer Optimisation for Ultra-Thin
+Sb2Se3 Solar Cells on TiO2 by Vapour
+Transport Deposition. Materials 2022,
+15, 8356. https://doi.org/10.3390/
+ma15238356
+Academic Editors: Pangiota Petrou,
+Vlassios Likodimos and
+Spiros Gardelis
+Received: 21 October 2022
+Accepted: 21 November 2022
+Published: 24 November 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright: © 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+materials
+Article
+Seed Layer Optimisation for Ultra-Thin Sb2Se3 Solar Cells on
+TiO2 by Vapour Transport Deposition
+Remigijus Jušk˙enas, Arnas Naujokaitis, Audrius Drabaviˇcius, Vidas Pakštas, Deividas Vainauskas
+and Rokas Kondrotas *
+Center for Physical Sciences and Technology, Sauletekio Ave. 3, 10257 Vilnius, Lithuania
+* Correspondence: rokas.kondrotas@ftmc.lt
+Abstract: Antimony selenide (Sb2Se3) material has drawn considerable attention as an Earth-
+abundant and non-toxic photovoltaic absorber. The power conversion efﬁciency of Sb2Se3-based
+solar cells increased from less than 2% to over 10% in a decade. Different deposition methods were
+implemented to synthesize Sb2Se3 thin ﬁlms, and various device structures were tested. In search of
+a more environmentally friendly device composition, the common CdS buffer layer is being replaced
+with oxides. It was identiﬁed that on oxide substrates such as TiO2 using vacuum-based close-space
+deposition methods, an intermediate deposition step was required to produce high-quality thin ﬁlms.
+However, little or no investigation was carried out using another very successful vacuum deposition
+approach in Sb2Se3 technology called vapour transport deposition (VTD). In this work, we present
+optimized VTD process conditions to achieve compact, pinhole-free, ultra-thin (<400 nm) Sb2Se3
+absorber layers. Three process steps were designed to ﬁrst deposit the seed layer, then anneal it and,
+at the ﬁnal stage, deposit a complete Sb2Se3 absorber. Fabricated solar cells using absorbers as thin as
+400 nm generated a short-circuit current density over 30 mA/cm2, which demonstrates both the very
+high absorption capabilities of Sb2Se3 material and the prospects for ultra-thin solar cell application.
+Keywords: Sb2Se3; thin ﬁlm solar cells; VTD; seed layer
+1. Introduction
+Photovoltaic technology is considered one of the best strategies to achieve environ-
+mentally benign energy production. Thin-ﬁlm solar cells have advantages over common
+silicon-based solar cells such as being lightweight and having low production costs. The
+most advanced thin-ﬁlm solar cell technologies, such as CIGSe (copper indium gallium
+diselenide), CdTe (cadmium telluride) and perovskites have reached PCE (power conver-
+sion efﬁciency) records higher than 22% [1,2]. However, there are major drawbacks to the
+mentioned technologies: the price and scarcity of indium and the toxicity of cadmium do
+not make them environmentally or cost-friendly, and perovskite solar cells still have an
+unresolved issue with thermodynamic stability under ambient conditions [3]. Antimony
+selenide (Sb2Se3) has emerged as an alternative material for solar cell absorbers because of
+its high absorption coefﬁcient (>105 cm−1), a suitable band gap of 1.1–1.3 eV and p-type con-
+ductivity under Se-rich conditions [4]. In addition, Sb2Se3 is a non-toxic, environmentally
+benign, highly stable compound made up of Earth-abundant elements [4].
+Over the past decade, the PCE of Sb2Se3 solar cells has increased from <2% to 10.1% [5].
+Various synthesis methods and buffer layers have been tried out to optimize the structure
+of Sb2Se3 solar cells and improve their performance [6–8]. While the highest PCE was
+achieved using CdS, the toxicity issue of Cd incentivized a search for alternative buffer
+layers. Since oxide materials such as ZnO, SnO2, and TiO2 are free from toxic elements, they
+proved to be suitable partner layers and have been successfully implemented in Sb2Se3
+solar cells [8–11]. Among all oxide buffer layers, the highest PCE has been demonstrated
+using TiO2 [12]. However, because of the inert nature and strong Ti–O bond in TiO2, the
+Materials 2022, 15, 8356. https://doi.org/10.3390/ma15238356 https://www.mdpi.com/journal/materials

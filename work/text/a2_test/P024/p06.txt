@@ -1,0 +1,99 @@
+soning chains from multi-document artefacts can
+help contextualize curated evidence for final an-
+swer generation. We utilize Chain-of-Thought
+(CoT) (Wei et al., 2022) reasoning to link indi-
+vidual pieces of evidence that form a coherent step-
+by-step narrative, ensuring that the answer is not
+only accurate but also logically derived from the
+evidence, leading to more robust and reliable re-
+sponses.
+3. Answer Generation: By leveraging insights
+from curated, contextually relevant evidence and
+applying CoT reasoning processes, the answer gen-
+eration step produces responses that are both pre-
+cise and well-justified. Additionally, we use tar-
+geted prompts to guide the LLM about the appro-
+priate format for answer generation as per the ques-
+tion type.
+5.2 Modality Fusion
+The modality fusion stage is a key contribution
+in VisDoMRAG which differentiates it from simpler
+multimodal approaches. This stage takes as in-
+put the outputs from both the textual and visual
+pipelines, including the curated evidence, reason-
+ing chains, and generated answers. The fusion pro-
+cess is orchestrated by prompting an LLM to eval-
+uate the consistency between the reasoning chains
+produced by the textual and visual pipelines. This
+idea is inspired by self-consistency in CoT (Wang
+et al., 2023), which leveraged multiple thought-
+chains and derives an answer based on the con-
+sistency of the individual chains’ results. Consis-
+tency constraint prompting is crucial for identifying
+and resolving any discrepancies, contradictions and
+filling in reasoning gaps that may arise from the
+separate processing of different modalities. When
+inconsistencies are detected, the LLM is tasked
+with reconciling the differences, potentially by re-
+evaluating the evidence or adjusting the reasoning
+steps. This process ensures that the final answer
+integrates information from both modalities in a
+coherent and logically consistent manner.
+6 Experiments
+In our experiments, we first evaluate different re-
+trieval and indexing models on our benchmark, fol-
+lowed by end-to-end QA evaluation using the iden-
+tified optimal retrieval models with different LLMs.
+The experiments, baselines and evaluation are dis-
+cussed below:
+6.1 Retrieval
+Baselines: We use popular text based retrieval
+models: BM25 (Robertson et al., 1995) a statis-
+tical baseline, and , MPNet (Song et al., 2020),
+MiniLM (Wang et al., 2020), and BGE-1.5 (Xiao
+et al., 2023), which represent SoTA dense retrieval
+baselines. Text extraction from PDF documents is
+performed using PyTesseract. The extracted text
+is then segmented into 3000-character chunks us-
+ing the recursive-split method (Sarmah et al., 2023),
+with a 10% overlap to mitigate information loss.
+For visual retrieval, we utilize recent advances
+late interaction based multi-vector retrieval models
+built on top of LLMs (Faysse et al., 2024), namely
+ColPali and ColQwen2, which have PaliGemma
+(Beyer et al., 2024) and Qwen2 (Yang et al., 2024)
+as their base LLMs. Readers are encouraged to
+refer to the appendix for further details of these
+models.
+Evaluation: Evidence extraction is assessed us-
+ing ANLCS between ground truth evidence and
+retrieved chunks/pages. Document identification
+evaluates the retrievers’ ability to select the cor-
+rect source document in a multi-document setup.
+We report the rate of instances where the ground
+truth document is the source of the majority of the
+retrieved context.
+6.2 End-to-End QA
+We use the best text and visual retrieval models
+from the retrieval experiments for End-to-End QA
+evaluation.
+Baselines: We benchmark our method using LLMs
+capable of handling multi-image inputs and long
+context. To this extent, we include two off-the-shelf
+models Gemini-1.5-Flash (Reid et al., 2024), and
+ChatGPT-4o (OpenAI, 2024), as well as Qwen2-
+VL-7B-Instruct (Yang et al., 2024), an open-source
+LLM with visual and long context capabilities.
+We evaluate these LLMs in four approaches: 1.
+Long Context: where text content of all documents
+queries for a sample is passed as context, and 2.
+TextualRAG, 3. VisualRAG, and, 4.VisDoMRAG
+as described in Section 5.
+Evaluation: For PaperTab, we borrow the mod-
+ified implementation of Word Overlap F1 from
+(Hui et al., 2024), which takes into account differ-
+ent answer types (binary, short text). For all other
+datasets, we report the Word Overlap F1, which
+serves as a flexible metric to evaluate different an-
+swer types.
+6093

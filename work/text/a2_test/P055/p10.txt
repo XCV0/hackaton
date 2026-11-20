@@ -1,0 +1,156 @@
+KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea Yifan Jin et al.
+References
+[1] Yushi Bai, Zhitao Ying, Hongyu Ren, and Jure Leskovec. 2021. Modeling hetero-
+geneous hierarchies with relation-specific hyperbolic cones. Advances in Neural
+Information Processing Systems 34 (2021), 12316–12327.
+[2] Jaime Carbonell and Jade Goldstein. 1998. The use of MMR, diversity-based
+reranking for reordering documents and producing summaries. In Proceedings of
+the 21st annual international ACM SIGIR conference on Research and development
+in information retrieval. 335–336.
+[3] Runjin Chen, Tong Zhao, Ajay Jaiswal, Neil Shah, and Zhangyang Wang. 2024.
+Llaga: Large language and graph assistant. arXiv preprint arXiv:2402.08170 (2024).
+[4] Yuntao Du, Xinjun Zhu, Lu Chen, Baihua Zheng, and Yunjun Gao. 2022. HAKG:
+Hierarchy-aware knowledge gated network for recommendation. In Proceedings
+of the 45th international ACM SIGIR conference on Research and development in
+Information Retrieval. 1390–1400.
+[5] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva
+Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, and Jonathan
+Larson. 2024. From local to global: A graph rag approach to query-focused
+summarization. arXiv preprint arXiv:2404.16130 (2024).
+[6] C Lee Giles, Kurt D Bollacker, and Steve Lawrence. 1998. CiteSeer: An automatic
+citation indexing system. In Proceedings of the third ACM conference on Digital
+libraries.
+[7] Zirui Guo, Lianghao Xia, Yanhua Yu, Tu Ao, and Chao Huang. 2024. Lightrag:
+Simple and fast retrieval-augmented generation. arXiv preprint arXiv:2410.05779
+(2024).
+[8] Bernal Jiménez Gutiérrez, Yiheng Shu, Weijian Qi, Sizhe Zhou, and Yu Su. 2025.
+From rag to memory: Non-parametric continual learning for large language
+models. arXiv preprint arXiv:2502.14802 (2025).
+[9] Yufei He, Yuan Sui, Xiaoxin He, and Bryan Hooi. 2025. Unigraph: Learning a
+unified cross-domain foundation model for text-attributed graphs. In Proceedings
+of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.
+1. 448–459.
+[10] Zhenyu Hou, Xiao Liu, Yukuo Cen, Yuxiao Dong, Hongxia Yang, Chunjie Wang,
+and Jie Tang. 2022. Graphmae: Self-supervised masked graph autoencoders. In
+Proceedings of the 28th ACM SIGKDD conference on knowledge discovery and data
+mining. 594–604.
+[11] Xuanwen Huang, Kaiqiao Han, Yang Yang, Dezheng Bao, Quanjin Tao, Ziwei
+Chai, and Qi Zhu. 2024. Can GNN be Good Adapter for LLMs? (WWW ’24).
+Association for Computing Machinery, New York, NY, USA, 893–904. doi:10.
+1145/3589334.3645627
+[12] Filip Ilievski, Pedro Szekely, and Bin Zhang. 2021. Cskg: The commonsense
+knowledge graph. In European Semantic Web Conference. Springer, 680–696.
+[13] Gautier Izacard and Edouard Grave. 2021. Leveraging Passage Retrieval with
+Generative Models for Open Domain Question Answering. In Proceedings of the
+16th Conference of the European Chapter of the Association for Computational
+Linguistics: Main Volume, EACL 2021, Online, April 19 - 23, 2021, Paola Merlo, Jörg
+Tiedemann, and Reut Tsarfaty (Eds.). Association for Computational Linguistics,
+874–880. doi:10.18653/V1/2021.EACL-MAIN.74
+[14] Xinke Jiang, Rihong Qiu, Yongxin Xu, Yichen Zhu, Ruizhe Zhang, Yuchen Fang,
+Chu Xu, Junfeng Zhao, and Yasha Wang. 2024. Ragraph: A general retrieval-
+augmented graph learning framework. Advances in Neural Information Processing
+Systems 37 (2024), 29948–29985.
+[15] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin,
+Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel,
+et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp tasks.
+Advances in neural information processing systems 33 (2020), 9459–9474.
+[16] Haoyang Li, Haibo Chen, Xin Wang, and Wenwu Zhu. 2026. Out-of-Distribution
+Generalization in Graph Foundation Models. arXiv preprint arXiv:2601.21067
+(2026).
+[17] Yuhan Li, Peisong Wang, Zhixun Li, Jeffrey Xu Yu, and Jia Li. 2024. Zerog:
+Investigating cross-dataset zero-shot transferability in graphs. In Proceedings
+of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining.
+1725–1735.
+[18] Hao Liu, Jiarui Feng, Lecheng Kong, Ningyue Liang, Dacheng Tao, Yixin Chen,
+and Muhan Zhang. 2023. One for all: Towards training one graph model for all
+classification tasks. arXiv preprint arXiv:2310.00149 (2023).
+[19] Haoran Luo, Guanting Chen, Yandan Zheng, Xiaobao Wu, Yikai Guo, Qika Lin,
+Yu Feng, Zemin Kuang, Meina Song, Yifan Zhu, et al. 2025. HyperGraphRAG:
+Retrieval-Augmented Generation via Hypergraph-Structured Knowledge Repre-
+sentation. arXiv preprint arXiv:2503.21322 (2025).
+[20] Péter Mernyei and Cătălina Cangea. 2020. Wiki-cs: A wikipedia-based benchmark
+for graph neural networks. arXiv preprint arXiv:2007.02901 (2020).
+[21] Maximillian Nickel and Douwe Kiela. 2017. Poincaré embeddings for learning
+hierarchical representations. Advances in neural information processing systems
+30 (2017).
+[22] Maximillian Nickel and Douwe Kiela. 2018. Learning continuous hierarchies in
+the lorentz model of hyperbolic geometry. In International conference on machine
+learning. PMLR, 3779–3788.
+[23] Zhe Pan and Peng Wang. 2021. Hyperbolic hierarchy-aware knowledge graph
+embedding for link prediction. In Findings of the Association for Computational
+Linguistics: EMNLP 2021. 2941–2948.
+[24] Miloš Radovanović, Alexandros Nanopoulos, and Mirjana Ivanović. 2009. Nearest
+neighbors in high-dimensional data: The emergence and influence of hubs. In
+Proceedings of the 26th Annual International Conference on Machine Learning.
+865–872.
+[25] Nils Reimers and Iryna Gurevych. 2020. Making monolingual sentence embed-
+dings multilingual using knowledge distillation. arXiv preprint arXiv:2004.09813
+(2020).
+[26] Prithviraj Sen, Galileo Namata, Mustafa Bilgic, Lise Getoor, Brian Galligher, and
+Tina Eliassi-Rad. 2008. Collective classification in network data. AI magazine
+(2008).
+[27] Bin Shang, Yinliang Zhao, Jun Liu, and Di Wang. 2024. Mixed geometry message
+and trainable convolutional attention network for knowledge graph completion.
+In Proceedings of the AAAI conference on artificial intelligence, Vol. 38. 8966–8974.
+[28] Jiabin Tang, Yuhao Yang, Wei Wei, Lei Shi, Lixin Su, Suqi Cheng, Dawei Yin,
+and Chao Huang. 2024. Graphgpt: Graph instruction tuning for large language
+models. In Proceedings of the 47th International ACM SIGIR Conference on Research
+and Development in Information Retrieval. 491–500.
+[29] Yixuan Tang and Yi Yang. 2024. MultiHop-RAG: Benchmarking Retrieval-
+Augmented Generation for Multi-Hop Queries. CoRR abs/2401.15391 (2024).
+arXiv:2401.15391 doi:10.48550/ARXIV.2401.15391
+[30] Zhen Tao, Xinke Jiang, Qingshuai Feng, Haoyu Zhang, Lun Du, Yuchen Fang,
+Hao Miao, Bangquan Xie, and Qingqiang Sun. 2026. Task-Aware Retrieval Aug-
+mentation for Dynamic Recommendation. In Proceedings of the AAAI Conference
+on Artificial Intelligence, Vol. 40. 15779–15787.
+[31] Shantanu Thakoor, Corentin Tallec, Mohammad Gheshlaghi Azar, Rémi Munos,
+Petar Veličković, and Michal Valko. 2021. Bootstrapped representation learning
+on graphs. In ICLR 2021 workshop on geometrical and topological representation
+learning.
+[32] Raja Vavekanand and Kira Sam. 2024. Llama 3.1: An in-depth analysis of the
+next-generation large language model.
+[33] Petar Velickovic, William Fedus, William L Hamilton, Pietro Liò, Yoshua Bengio,
+and R Devon Hjelm. 2019. Deep graph infomax. ICLR (poster) 2, 3 (2019), 4.
+[34] Xingliang Wang, Zemin Liu, Junxiao Han, and Shuiguang Deng. [n. d.].
+RAG4GFM: Bridging Knowledge Gaps in Graph Foundation Models through
+Graph Retrieval Augmented Generation. In The Thirty-ninth Annual Conference
+on Neural Information Processing Systems.
+[35] Zhihao Wen and Yuan Fang. 2023. Augmenting low-resource text classification
+with graph-grounded pre-training and prompting. In Proceedings of the 46th
+International ACM SIGIR Conference on Research and Development in Information
+Retrieval. 506–516.
+[36] Lianghao Xia and Chao Huang. 2024. AnyGraph: Graph Foundation Model in
+the Wild. CoRR abs/2408.10700 (2024). arXiv:2408.10700 doi:10.48550/ARXIV.
+2408.10700
+[37] Zheming Xu, He Liu, Congyan Lang, Tao Wang, Yidong Li, and Michael C.
+Kampffmeyer. 2025. A Hubness Perspective on Representation Learning for
+Graph-Based Multi-View Clustering. In IEEE/CVF Conference on Computer Vision
+and Pattern Recognition, CVPR 2025, Nashville, TN, USA, June 11-15, 2025. Com-
+puter Vision Foundation / IEEE, 15528–15537. doi:10.1109/CVPR52734.2025.01447
+[38] Hao Yan, Chaozhuo Li, Ruosong Long, Chao Yan, Jianan Zhao, Wenwen Zhuang,
+Jun Yin, Peiyan Zhang, Weihao Han, Hao Sun, et al. 2023. A Comprehensive Study
+on Text-attributed Graphs: Benchmarking and Rethinking. In Proc. of NeurIPS.
+[39] Xingtong Yu, Zechuan Gong, Chang Zhou, Yuan Fang, and Hui Zhang. 2025.
+Samgpt: Text-free graph foundation model for multi-domain pre-training and
+cross-domain adaptation. In Proceedings of the ACM on Web Conference 2025.
+1142–1153.
+[40] Haonan Yuan, Qingyun Sun, Jiacheng Tao, Xingcheng Fu, and Jianxin Li. 2026.
+RAG-GFM: Overcoming In-Memory Bottlenecks in Graph Foundation Models
+via Retrieval-Augmented Generation. arXiv e-prints (2026), arXiv–2601.
+[41] Yifei Zhang, Hao Zhu, Menglin Yang, Jiahong Liu, Rex Ying, Irwin King, and Piotr
+Koniusz. 2025. Understanding and mitigating hyperbolic dimensional collapse in
+graph contrastive learning. In Proceedings of the 31st ACM SIGKDD Conference
+on Knowledge Discovery and Data Mining V. 1. 1984–1995.
+[42] Haihong Zhao, Aochuan Chen, Xiangguo Sun, Hong Cheng, and Jia Li. 2024. All
+in one and one for all: A simple yet effective method towards cross-domain graph
+pretraining. In Proceedings of the 30th ACM SIGKDD Conference on Knowledge
+Discovery and Data Mining. 4443–4454.
+[43] Yun Zhu, Haizhou Shi, Xiaotang Wang, Yongchao Liu, Yaoke Wang, Boci Peng,
+Chuntao Hong, and Siliang Tang. 2025. GraphCLIP: Enhancing Transferability in
+Graph Foundation Models for Text-Attributed Graphs. In Proceedings of the ACM
+on Web Conference 2025, WWW 2025, Sydney, NSW, Australia, 28 April 2025- 2 May
+2025, Guodong Long, Michale Blumestein, Yi Chang, Liane Lewin-Eytan, Zi Helen
+Huang, and Elad Yom-Tov (Eds.). ACM, 2183–2197. doi:10.1145/3696410.3714801
+[44] Yanqiao Zhu, Yichen Xu, Feng Yu, Qiang Liu, Shu Wu, and Liang Wang. 2020.
+Deep graph contrastive representation learning. arXiv preprint arXiv:2006.04131
+(2020).

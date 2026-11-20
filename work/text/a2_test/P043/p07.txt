@@ -1,0 +1,44 @@
+E[qT absVf used] = E[qT absE[Vf used]] = E[qT absµf used] = E[qT abs((1 − w)µabs + wµquery )]
+= (1 − w)E[qT absµabs] + wE[qT absµquery ] = (1 − w)(µT absµabs) + w(µT absµquery )
+= (1 − w) · 1 + w · cos(θ)
+where cos(θ) = µT absµquery. According to the Hypothesis 1, µabs and µquery point in different directions, so
+θ > 0 and cos(θ) < 1. Since w ∈ (0, 1), we have w · cos(θ) < w. Therefore, (1 − w) +w · cos(θ) < (1− w) +w = 1.
+That is, E[qT absVabs] > E[qT absVfused]. The second point can be proved in the same way.
+Further, we not only demonstrate that, on average, the representation method of the HMV outperforms the
+SVF but also offer a more robust probabilistic guarantee through the introduction of probability bounds.
+Theorem 2. For any small positive deviation threshold ϵ > 0, the probability that the deviation of the retrieval
+result of the HMV strategy from the ideal case is greater than ϵ is lower than that of the SVF strategy:
+• P (qT absVabs < 1 − ϵ) < P (qT absVf used < 1 − ϵ)
+• P (qT query Vquery < 1 − ϵ) < P (qT query Vf used < 1 − ϵ)
+In summary, the HMV method not only exhibits superior performance in terms of expectation but also
+maintains a consistently high similarity score with extremely low probability of obtaining a low similarity
+score. In contrast, the SVF model has a much higher probability of achieving a similarly low similarity score.
+Detailed analysis and proof are presented in Appendix 6.1.
+Remark 1. The core insights of Theorem 1 and Theorem 2 lie in the fact that semantic fusion is a costly
+compromise. The SVF strategy creates a semantic average by compressing globally concepts and local details
+into a single vector. This fused vector occupies a compromised position in the embedding space and fails to
+perfectly represent the original intentions of either side. As a result, when a user query explicitly targets global
+or local information, its similarity to this compromised vector is necessarily lower than its similarity to a
+dedicated vector. Our theory rigorously explains this intuition mathematically: preserving the independence
+of information levels is not only beneficial but also probabilistically superior as a retrieval method because it
+fundamentally minimizes the loss of key features due to forced information fusion. Hence, the three-layer
+document memory retrieval mechanism can maximize the preservation of document information at different
+granularities, thereby providing more accurate and comprehensive context for subsequent generation tasks.
+4 Experiment and Analysis
+4.1 Experimental Setup
+Datasets and Metrics. The experiment primarily select CRUD [16] in the news domain, OmniEval [27] in the
+financial domain, and MultiFieldQA_zh [1] across multiple domains as the evaluation benchmarks for domain
+document question answering. Among them, CRUD focuses on long-answer generation; OmniEval provides
+manually annotated data across 5 task types and 16 financial topics, enabling a comprehensive assessment
+of the retrieval and generation quality of RAG systems in the vertical domain; multifieldqa_zh is derived
+from the LongBench benchmark. The evaluation metrics uniformly adopt the BLEU series, ROUGE-L, and
+METEOR, which respectively measure n-gram overlap, longest common subsequence, and the matching degree
+of synonyms and syntactic variations.
+Baselines. We primarily compare MoM with six representative methods spanning from rule-based to
+semantic-based and then to LLM-driven approaches. Original chunking 4 merely divides long texts into
+fixed-length chunks while disregarding sentence boundaries. The Llama_index method [25] maintains sentence
+boundaries while ensuring that the number of tokens in each chunk is close to a preset threshold. Similarity
+chunking [28] utilizes sentence embedding models to partition texts according to semantic similarity, effectively
+grouping highly relevant sentences together. LumberChunker [7], for the first time, introduces LLMs into
+4https://github.com/run-llama/llama_index
+7

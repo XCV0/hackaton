@@ -1,0 +1,110 @@
+Nils Reimers and Iryna Gurevych. 2019. Sentence-bert:
+Sentence embeddings using siamese bert-networks.
+In Proceedings of the 2019 Conference on Empirical
+Methods in Natural Language Processing. Associa-
+tion for Computational Linguistics.
+Hithesh Sankararaman, Mohammed Nasheed Yasin,
+Tanner Sorensen, Alessandro Di Bari, and Andreas
+Stolcke. 2024. Provenance: A light-weight fact-
+checker for retrieval augmented LLM generation out-
+put. In Proceedings of the 2024 Conference on Em-
+pirical Methods in Natural Language Processing:
+Industry Track, pages 1305–1313, Miami, Florida,
+US. Association for Computational Linguistics.
+Alex Shan, John Bauer, and Christopher D. Manning.
+2025. Osiris: A lightweight open-source hallucina-
+tion detection system. Preprint, arXiv:2505.04844.
+Adam Słoczy’nski. 2020. An overview of algorithms
+for community detection in networks.
+Juntong Song, Xingguang Wang, Juno Zhu, Yuanhao
+Wu, Xuxin Cheng, Randy Zhong, and Cheng Niu.
+2024. RAG-HAT: A hallucination-aware tuning
+pipeline for LLM in retrieval-augmented generation.
+In Proceedings of the 2024 Conference on Empirical
+Methods in Natural Language Processing: Industry
+Track, pages 1548–1558, Miami, Florida, US. Asso-
+ciation for Computational Linguistics.
+Zhaorui Tan, Xi Yang, Qiufeng Wang, Anh Nguyen,
+and Kaizhu Huang. 2024. Interpret your decision:
+Logical reasoning regularization for generalization
+in visual classification. In Advances in Neural Infor-
+mation Processing Systems, volume 37.
+Liyan Tang, Philippe Laban, and Greg Durrett. 2024.
+Minicheck: Efficient fact-checking of llms on ground-
+ing documents. In Proceedings of the 2024 Confer-
+ence on Empirical Methods in Natural Language
+Processing. Association for Computational Linguis-
+tics.
+Tiago F. Tavares, Fabio Ayres, and Paris Smaragdis.
+2024. Measuring similarity between embedding
+spaces using induced neighborhood graphs. Preprint,
+arXiv:2411.08687.
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio,
+William Cohen, Ruslan Salakhutdinov, and Christo-
+pher D. Manning. 2018. HotpotQA: A dataset for
+diverse, explainable multi-hop question answering.
+In Proceedings of the 2018 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+2369–2380, Brussels, Belgium. Association for Com-
+putational Linguistics.
+Yuheng Zha, Yichi Yang, Ruichen Li, and Zhiting
+Hu. 2023. Alignscore: Evaluating factual consis-
+tency with a unified alignment function. Preprint,
+arXiv:2305.16739.
+Jingjie Zheng, Aryo Pradipta Gema, Giwon Hong, Xu-
+anli He, Pasquale Minervini, Youcheng Sun, and
+Qiongkai Xu. 2025. GRADA: Graph-based rerank-
+ing against adversarial documents attack. In Proceed-
+ings of the 2025 Conference on Empirical Methods in
+Natural Language Processing, pages 22244–22266.
+A Challenges of NLI Models
+Tables 9 and 10 illustrate the limitations of existing
+NLI models in factual scoring. When parts of a
+logical chain are treated as independent texts, their
+factuality scores are much lower than for the com-
+plete text (Table 9). NLI classifiers also struggle to
+distinguish between contradiction and irrelevance
+(Table 10).
+Premise Hypothesis Score
+CityA is a capital city. Capital of Coun-
+tryA is CityA.
+0.030
+CityA is a city of CountryA. Capital of Coun-
+tryA is CityA.
+0.117
+CityA is a capital city. CityA
+is a city of CountryA.
+Capital of Coun-
+tryA is CityA.
+0.632
+Table 9: Combining partial premises dramatically im-
+proves entailment scores.
+Premise Hypothesis Score
+I am a dog. I am a cat. 0.023
+I am a dog. You are a cat. 0.022
+Table 10: Contradiction and irrelevance produce simi-
+larly low NLI scores.
+B Rationale of Semantic Evidence
+Aggregation
+The module is effective for three reasons.
+Community-bridge intuition. The Girvan–
+Newman algorithm (Girvan and Newman,
+2002) detects communities by removing high-
+betweenness edges. We invert this insight: edges
+with high fe = |{(i, j) : e ∈ Pij }| serve as bridges
+between semantic communities; prioritizing them
+merges clusters of related evidence.
+Filtering irrelevant chunks. An edge (i, j) /∈
+E(0) whenever dij > αµ, preventing merging of
+unrelated segments.
+Avoiding redundant merges. Because Eu-
+clidean distance satisfies the triangle inequality
+dij ≤ dik + dkj , intra-community edges have low
+betweenness and are deprioritized, selecting only
+true inter-community bridges.
+Illustrative example. For the query “What foot-
+ball position did the manager of Tianjin Quanjian
+previously hold?” with answer “Captain”, the base-
+line NLI approach misclassifies the answer (max-
+imum consistency score 0.115 < threshold 0.4)
+1614

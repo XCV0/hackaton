@@ -1,0 +1,98 @@
+actual answer accuracy, enabling users to assess
+response trustworthiness and mitigate risks from
+low-quality retrieval. Furthermore, this capability
+also suggests a possible avenue for future research
+on autonomous iterative RAG(Asai et al., 2023; Su
+et al., 2024; Yu et al., 2024).
+In summary, our contributions are as follows:
+1. We propose AttnComp, a novel extractive
+compression framework for RAG that is adaptive,
+efficient, and context-aware.
+2. Our method enables confidence estimation for
+RAG responses, allowing users assess reliability
+and mitigate risks from low-quality retrieval.
+3. Extensive experiments show that AttnComp
+outperforms existing compression methods and un-
+compressed retrieval baselines, delivering higher
+accuracy and lower end-to-end latency.
+2 Related Work
+Context Compression. The compress methods
+can be broadly categorized into abstractive and
+extractive approaches. For abstractive compres-
+sion, RECOMP-abs (Xu et al., 2023a) trains a T5-
+based model to summarize the retrieved content.
+Zhu et al. (2024) leverage the Information Bottle-
+neck principle to train LLMs for summarization.
+CompAct (Yoon et al., 2024) employs LLMs to
+summarize retrieved passages and introduces an
+iterative strategy that progressively updates the rel-
+evant context as new passages are incorporated. For
+extractive compression, RECOMP-ext (Xu et al.,
+2023a) performs sentence-level semantic match-
+ing by selecting the top-k sentences whose embed-
+dings are most similar to the query. LongLLM-
+Lingua(Jiang et al., 2024) proposes a perplexity-
+based metric to assess the relevance between con-
+text and question. A critical limitation of these
+methods is their dependence on fixed compres-
+sion ratios. To allow more flexible and adaptive
+compression, EXIT (Hwang et al., 2024) employs
+LLMs to conduct binary relevance classification
+for each sentence, enabling adaptive context re-
+duction. Provence (Chirkova et al., 2025) trains
+a lightweight DeBERTa model(He et al., 2021) to
+predict sentence-level relevance scores and retains
+the sentences that exceed a predefined threshold.
+Confidence Estimation. Estimating model con-
+fidence helps mitigate the risk of unreliable out-
+puts from LLMs (Geng et al., 2024). Logit-based
+methods evaluate sentence-level uncertainty using
+token-level probabilities or entropy (Huang et al.,
+2023; Kuhn et al., 2023). Consistency-based meth-
+ods estimate confidence by measuring the agree-
+ment across multiple generations (Manakul et al.,
+2023). However, these approaches focus solely
+on confidence estimation based on internal knowl-
+edge, without considering the integration of ex-
+ternal knowledge under the retrieval-augmented
+generation (RAG) paradigm. Chen et al. (2024)
+highlight two key latent factors influencing confi-
+dence in RAG: the quality of the retrieved content
+and the manner in which it is incorporated into the
+generation process. To the best of our knowledge,
+there are currently no methods that estimate con-
+fidence in RAG outputs by explicitly evaluating
+retrieval quality.
+3 Observations
+In this section, we present our observations on the
+attention patterns within LLMs. Our analysis is
+conducted on QA datasets, where inputs are con-
+structed by concatenating the context before the
+query. We then compute the attention score from
+the query to different context segments as follows:
+s = 1 |Iq| ∑ i∈Iq ∑ j∈Id aij (1)
+where Iq and Id denote the token indices of the
+query and context segment, respectively, and aij is
+the attention weight from query token i to context
+token j.
+We present the experimental details in Appendix
+A. The key findings are summarized below:
+• Certain middle-layer attention heads effec-
+tively identify relevant information. Using the
+LooGLE benchmark (Li et al., 2024a), a QA
+dataset with labeled evidence sentences, we an-
+alyze attention score assigned by each head to
+the evidence. Figure 2(a) visualizes the atten-
+tion scores from each head in every LLM layer
+assigns to evidence sentences. It is observed
+that some attention heads in the middle layers
+consistently focus more on supporting evidence,
+suggesting their ability to capture relevance.
+• Attention pattern adapts to the density of
+relevant content. The LooGLE benchmark
+divides tasks into short- and long-dependency
+types. Short-dependency tasks rely on a single
+sentence or paragraph, while long-dependency
+tasks require integrating information across mul-
+tiple segments. We compute the cumulative
+8458

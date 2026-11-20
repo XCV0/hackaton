@@ -1,0 +1,26 @@
+3.5 Experimental Protocol
+The experiments were designed to evaluate both the global performance of N2I-RAG
+and the contribution of its key elements. By comparing full and reduced configurations,
+we can detect the impact of the different pipeline modules, especially those that reduce
+hallucinations.
+Three configurations were tested:
+1. Full Pipeline: all agents are activated.
+2. Retrieval-only Baseline: Only vector search via ChromaDB is used, without
+LLM agents.
+3. Pipeline without hallucination control agents: Keep the main agents, except
+those dedicated to check relevance, groundedness, and coherence.
+Each configuration was run across the same indicators and both case study topics,
+ensuring a consistent comparison.
+This ablation approach allows quantitative comparison and qualitative inspection,
+highlighting how agentic control improves factual grounding and stability, supporting
+a clear assessment of N2I-RAG’s overall reliability in legal contexts.
+4 Results and Discussion
+4.1 Global Performance of N2I-RAG
+The experimental results (Figure 2) show how the integration of the N2I-RAG archi-
+tecture significantly improves the quality of results across all LLM variants, with
+Mistral-Nemo:12B standing out in particular from the Qwen3:8B and Llama3.2:3B
+models. The multi-agent pipeline reduces hallucinations, reinforces factual grounding,
+and ensures better consistency between retrieved legal texts and generated responses.
+As shown in Figure 2, Mistral Nemo with N2I-RAG achieves a Balanced Accuracy
+Fig. 2 Comprehensive and comparative metrics heatmap
+13

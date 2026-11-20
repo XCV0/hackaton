@@ -1,0 +1,94 @@
+Method
+EN ZH
+FreshQA NQ TriviaQA HotpotQA FreshQA WebQA
+Prec@10 MRR Prec@10 MRR Prec@10 MRR Prec@10 MRR Prec@10 MRR Prec@10 MRR
+OQR 26.34 43.92 30.41 49.06 48.66 64.28 15.49 31.03 15.38 26.67 74.97 87.92
+SUBSTITUTE-Ranked
+LLM-Rewrite 24.31 40.31 27.27 47.28 46.35 62.79 13.44 27.20 15.64 24.53 73.86 85.23
+Query2Doc 24.42 39.53 26.05 42.55 48.71 61.18 14.96 27.24 14.98 25.29 75.77 88.23
+SFT(Tsft) 24.43 42.28 28.75 48.06 45.51 62.86 14.48 30.58 15.27 26.94 70.83 80.71
+SFT(Tall) 24.13 41.17 28.45 47.87 45.67 62.94 14.73 30.19 14.25 21.39 72.10 80.26
+RaFe(P P O) 25.73 43.14 29.44 48.52 46.59 63.52 15.10 30.60 15.44 26.15 72.47 86.77
+RaFe(DP O) 24.42 43.19 30.18 48.97 48.20 64.52 16.42 31.52 16.20 25.46 74.47 85.54
+RaFe(KT O) 26.59 43.08 30.78 49.48 48.86 65.17 15.75 32.28 15.65 26.50 73.47 85.89
+EXPAND-Ranked
+LLM-Rewrite 29.45 42.14 32.42 48.97 52.14 64.78 18.32 32.06 18.02 26.32 77.23 87.12
+Query2Doc 30.50 44.51 32.73 49.21 52.25 64.88 19.24 33.66 18.18 26.64 79.81 88.81
+SFT(Tsft) 30.52 44.62 34.02 49.39 52.55 66.06 19.29 33.03 18.87 27.55 77.02 87.86
+SFT(Tall) 23.71 41.31 34.36 49.64 52.65 66.14 19.34 33.22 18.16 27.79 77.21 87.90
+RaFe(P P O) 30.28 44.29 35.10 50.37 52.63 65.86 19.66 33.92 18.56 29.17 79.26 88.47
+RaFe(DP O) 30.62 44.54 35.22 50.10 53.55 66.05 19.77 33.81 16.19 25.46 78.18 88.28
+RaFe(KT O) 31.14 45.24 35.18 50.54 53.09 66.46 19.89 33.75 18.90 27.43 77.84 88.09
+Table 9: The retrieval results of SUBSTITUTE-Ranked and EXPAND-Ranked settings.
+Method
+FreshQA NQ
+Raw Ranked Raw Ranked
+QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5
+w/o retrieval 41.70 - - - 43.74 - - -
+OQR 34.08 11.86 34.98 13.48 50.13 24.14 50.91 28.27
+SUBSTITUTE
+SFT(Tall) 32.44 11.28 34.28 12.90 48.24 22.84 50.17 27.43
+Prec Feedback 34.31 11.92 35.53 13.32 48.12 23.54 49.31 27.28
+LLM Feedback 33.64 11.52 35.38 13.28 50.16 23.38 50.47 27.98
+RaFe(KT O) 34.36 12.44 35.48 13.60 50.33 23.86 50.87 28.36
+EXPAND
+SFT(Tall) 33.31 11.00 35.58 13.44 49.66 23.32 50.33 27.27
+Prec Feedback 33.83 11.76 36.20 14.68 49.42 23.12 50.94 28.17
+LLM Feedback 33.64 11.88 36.50 14.44 50.47 23.76 51.24 28.12
+RaFe(KT O) 34.31 12.20 36.39 14.92 50.78 23.81 51.49 28.62
+Table 10: Result conducted by dense retriever.
+Comparing the results between SUBSTITUTE
+and EXPAND, it can be found that methods with
+lower retrieval results under the SUBSTITUTE set-
+ting tended to show greater improvement under
+EXPAND. However, the retrieval results for RaFe
+do not exhibit great improvement under the EX-
+PAND-Raw setting. Further comparison between
+the QA results and retrieval metrics reveals that,
+generally, the improvement trends in retrieval re-
+sults align with those in QA performance.
+A.3.2 QA Results of Qwen-32b
+To further demonstrate the results of our methods,
+we conduct experiments on different sizes of mod-
+els. Specifically, we choose Qwen1.5-32b-chat
+for evaluation. The results are shown in Table 8.
+The results indicate that RaFe consistently outper-
+forms across almost all settings. Moreover, it is
+observed that compared to Qwen-max for QA, the
+32B model exhibits lower performances.
+Method
+FreshQA NQ
+Raw Ranked Raw Ranked
+QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5
+OQR 61.87 27.48 62.56 30.88 51.36 32.35 51.50 35.68
+SUBSTITUTE
+SFTllama 32.44 11.28 34.28 12.90 48.24 22.84 50.17 27.43
+SFTqwen 60.53 25.72 60.69 28.42 49.86 30.08 50.99 34.01
+RaFellama 61.79 27.93 62.37 30.15 51.73 32.14 51.77 35.27
+RaFeqwen 62.12 28.12 62.71 31.00 51.61 32.71 51.97 35.89
+EXPAND
+SFTllama 60.58 26.04 62.72 32.12 50.41 31.33 51.57 37.13
+SFTqwen 62.01 26.76 63.16 31.56 50.13 30.63 51.75 37.44
+RaFellama 62.43 28.53 63.77 33.45 51.63 31.43 52.45 37.73
+RaFeqwen 62.65 28.50 64.85 33.72 52.48 32.58 52.86 38.37
+Table 11: Results with different backbones.
+In the SUBSTITUTE-Raw setting of the NQ
+dataset, utilizing Qwen-max does not yield great
+results. However, a significant improvement can be
+observed with Qwen-32b. This may suggest that
+for some cases beyond the capability coverage of
+qwen-32b, query rewriting can benefit the retrieval
+augmentation. As models increase in size, their in-
+herent capabilities may become sufficient to handle
+these cases effectively, negating the need for query
+rewriting.
+A.3.3 Results with Dense Retireval
+To widely validate our method, we extend the exper-
+iment on dense retrievers. We conduct additional
+experiments with the retriever (Contriever) and the
+corpus (Wikipedia) used in Self-Rag (Asai et al.,
+2023) to rebuild the ranking feedback for training
+the rewrite model. The experimental results are
+presented in Table 10.
+From the results, it can be found that most
+897

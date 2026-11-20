@@ -1,0 +1,47 @@
+Appl. Sci. 2022, 12, 4119 4 of 11
+transparent conducting layers and MO materials were employed as contacts in the proposed
+solar cell design. According to the properties of different materials, higher energy-band gap
+(Eg) materials such as window layers (the band gap of ZnO is over 3 eV) help more photons
+to easily reach the underlying layers. Thus, bandgap management is very important for
+obtaining better performance via the choosing of the best materials. The main idea of
+the buffer layer is to provide more routes for photons to be transmitted without being
+absorbed, to reduce defects in the absorber layer, and to align the energy bandgap between
+the absorber layer and window layer. Moreover, a molybdenum layer was used to increase
+light trapping and to reﬂect more photons back into the CZTSe layer. For the ﬁrst step, using
+TCAD Silvaco software, an ATLAS code was prepared in order to build this structure—
+shown in Figure 1. Based on ref [2,5,31], materials were chosen and are detailed in Table 1.
+Table 1. Standard material parameters used in the solar cell design shown in Figure 1.
+Parameters Cu2ZnSiSe4 Cu2ZnGeSe4 CZTS CZTSe CdS ZnO ITO
+Band gap (eV) 3 2.1 1.5 1.04 2.4 3.3 3.6
+Electron afﬁnity (eV) 2.4 3.4 4.1 4.15 4.5 4.6 4.2
+Dielectric permittivity 7.5 6.8 7 10 10 9 10
+Electron mobility
+(cm2/Vs) 60 60 60 100 100 100 100
+Hole mobility (cm2/Vs) 20 20 20 25 10 10 10
+Effective conductance
+band density (cm/s) 2.2 × 1018
+Effective valence band
+density (cm/s) 1.8 × 1019
+Defect density (cm−3) 1 × 1013 1 × 1013 1 × 1013 1 × 1013 6 × 1016 - -
+3. Results and Discussion
+In this section, to perform the numerical simulations of the device characteristics, a
+Silvaco simulator was used to extract the electrical characteristics and optical behaviour
+of the proposed solar cell. Moreover, the impact of the carrier lifetime and thickness
+on the performance of the solar cell was studied. As shown in Table 2, different cases
+with different thicknesses and concentrations of ITO and absorber layers were analyzed.
+According to the efﬁciency results (shown in the tenth row of Table 1), by increasing the
+doping concentration of the absorber layer, the efﬁciency was signiﬁcantly improved. Thus,
+in comparison to cases 1 and 2, where all parameters except the concentration were constant,
+increasing doping from 1 × 1015 to 1 × 1018 resulted in improved efﬁciency from 18.86%
+to 32%. Indeed, by increasing the doping concentration of the absorber layer (case 2), the
+width of the depletion region declined. Therefore, the short circuit current (Jsc) decreased
+slightly, since fewer carriers were collected at the contacts as a result of a reduction in
+carrier transmission. At the same time, the open circuit voltage (Voc) increased because of
+the lower recombination rate of the electron and holes than the rate in case 1, resulting in an
+ampliﬁcation of the efﬁciency. More holes and fewer electrons in the absorber layer caused
+a change in the recombination rate. It is important to choose the doping concentration of
+the absorber precisely when the dopant concentration is so high, as more photons will be
+absorbed in the buffer layer instead of the absorber layer, and efﬁciency will be decreased.
+Higher doping concentrations lead to lower carrier mobility, higher leakage, and increased
+scattering. As such, the optimum doping concentration values were compared for different
+cases in Table 2.

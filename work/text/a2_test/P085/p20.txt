@@ -1,0 +1,38 @@
+"numbered_options": [
+"1. Both the U.S. dollar and U.S. Treasury yields have continued to decline.",
+"2. Improvements in external conditions are the main driver behind the RMB’s 
+appreciation.",
+"3. A declining U.S. Dollar Index has supported the RMB’s rebound against the U.S. 
+dollar.",
+"4. U.S. economic data continues to show moderate cooling.",
+"5. U.S. employment and inflation trends both support the Federal Reserve’s monetary 
+easing.",
+"6. Market expectations for a Federal Reserve rate cut have risen.",
+"7. There is a 62% probability that the Federal Reserve will cut rates by 25 basis 
+points at its September meeting, according to market forecasts.",
+"8. There is a 37% probability that the Federal Reserve will cut rates by 50 basis 
+points at its September meeting, according to market forecasts.",
+"9. The U.S. Dollar Index has declined significantly.",
+"10. There is a possibility of rapid and substantial RMB appreciation driven by 
+exporters’ FX settlements and carry trade unwinding.",
+"11. Some exporters who were previously on the sidelines may engage in concentrated 
+foreign exchange settlements.",
+"12. These concentrated settlements create a positive feedback loop fueling RMB 
+appreciation.",
+"13. Potential settlement funds may average between USD 9 billion and USD 15 billion 
+per month.",
+"14. This could push the RMB exchange rate up by approximately 1,000 basis points in 
+the short term.",
+"15. The domestic economy is in a recovery phase.",
+"16. Corporate profits are improving.",
+"17. The policy environment is supportive.",
+"18. Market sentiment toward RMB assets is gradually becoming more bullish."
+],
+"ground_truth_correct_options": [
+"1", "2", "3", "4", "5", "6", "9", "10", "11", "12", "14", "15", "16", "17", "18"
+]
+"ground_truth_incorrect_options": [
+"7", "8", "13"
+]
+Figure 24: A case of multiple options and the ground truth answers.
+4628

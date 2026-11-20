@@ -1,0 +1,106 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+Any deviation from the factual content of the ground
+truth, including subtle distortions or fabricated de-
+tails, negatively impacts the faithfulness score. In our
+framework, faithfulness acts as a primary correctness
+condition:ifitisevaluatedasfalse,theoverallverdict
+is automatically Failed.
+• Relevance: It evaluates whether the generated re-
+sponse directly addresses the query posed in the test
+input. A response may be factually correct yet par-
+tially irrelevant if it includes tangential information,
+digressions, or extraneous explanations that do not
+contribute to answering the specific question. The
+relevancecriterionthereforefocusesonalignmentbe-
+tweenthequeryintentandtheproducedanswer.High
+relevanceindicatesthatthemodelremainsfocusedon
+the task and avoids unnecessary content generation.
+• Completeness: It assesses the extent to which the
+answer covers all essential elements present in the
+expected output. In many RAG scenarios, correct
+responses require the inclusion of multiple facts, con-
+ditions, or relationships extracted from the source
+document. An answer that omits critical components
+is considered partially complete, even if the included
+information is correct. Importantly, if the Model Un-
+der Test provides additional correct and supported
+details beyond those in the reference answer, this is
+evaluated positively, as long as faithfulness is pre-
+served.Completenessthereforecapturesthecoverage
+of required information rather than strict equivalence
+in wording.
+• Clarity:Itexaminesthelinguisticandstructuralqual-
+ity of the response. This includes coherence, logical
+organization, grammatical correctness, and precision
+oflanguage.Evenwhenaresponseisfactuallycorrect,
+poor organization or ambiguous phrasing may reduce
+its practical utility. Clarity ensures that answers are
+not only correct but also understandable and well-
+structured.Thiscriterionisespeciallyrelevantinreal-
+worldRAGapplications,whereoutputsareconsumed
+directly by end users.
+• Keywords match: It provides an additional lexical-
+level verification mechanism. During test generation,
+eachexpectedanswerisassociatedwithasetofessen-
+tial keywords representing critical entities, concepts,
+ortermsthatshouldappearinacorrectresponse.The
+oracle checks whether these keywords are present in
+the model’s answer. A rating of true indicates that
+all required keywords appear, partially indicates that
+only a subset is present, and false indicates that none
+appear. While keyword matching alone is insufficient
+todeterminesemanticcorrectness,itservesasacom-
+plementary signal that reinforces completeness and
+faithfulness assessments.
+Each criterion is assigned one of three possible ratings:
+True, Partially or False, which for scoring purposes are
+mapped to numerical values 1, 0.5 and 0, respectively. The
+overallverdictiscalculatedbytakingthearithmeticmeanof
+thefivecriterionscores.Ifthefinalaverageisbelow0.5,the
+answerreceivesaFailverdict.Iftheaverageis0.5orhigher,
+theanswerreceivesaPassverdict.Itisalsoimportanttonote
+that if the criteria Faithfulness is False, we consider the test
+as failed.
+4. Tool Support
+We provide RAG-TESTER as an Open-Source end-to-
+end RAG-LLM test generation tool that enables testing
+Retrieval Augmented Language Models via a user-friendly
+web interface or a code-based environment. Both interfaces
+provide parity in core functionalities: PDF generation, test
+generation, test execution and test evaluation.
+Whilethecode-basedversionallowsfordirectexecution
+anddebugging,thewebinterfaceoffersamoreappealingtest
+resultvisualization,makingiteasiertoidentifystrengthsand
+weaknesses.Furthermore,RAG-TESTER isengineeredwith
+a modular architecture, so if developers wish to implement
+new LLM providers, document loaders, etc. the process
+remains simple and extensible. A demo for the tool using
+the web interface can be found online [20].
+5. Experimental Design
+5.1. Research Questions
+Our evaluation aimed at answering the following four
+Research Questions (RQs):
+• RQ1–Overallperformance:HowdoesRAG-TESTER
+performatdetectingfailuresonRAG-enabledLLMs?
+With this RQ we wanted to assess the overall per-
+formance provided by RAG-TESTER when testing
+different LLM and embedding combinations.
+• RQ2 – Comparison with Baseline: How does RAG-
+TESTERcomparewithabaselinetestinputgenerator?
+InthisRQweaimedatcomparingRAG-TESTERwith
+a simplified version of the test input generator we
+developed.
+• RQ3 – PDF Generation Strategies: Which is the
+difference between generating the context PDF files
+automatically or employing existing PDF files? In
+the third RQ we aimed at answering whether there
+are differences in generating the context files in an
+automated manner.
+• RQ4–OraclePrecision:Whichistheprecisionofthe
+test oracles of RAG-TESTER? Since RAG-TESTER’s
+oracle employs an LLM-as-a-judge, it might have
+certain proneness to hallucination. This RQ aims at
+checking its precision to investigate whether and to
+which extent the proposed test oracle triggers false
+positives.
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 6 of 21

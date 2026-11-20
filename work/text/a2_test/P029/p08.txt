@@ -1,0 +1,153 @@
+ument overlap across requests, enabling GAD to ef-
+fectively anticipate and dispatch requests that share
+document contexts. These results demonstrate that
+authentic temporal workload is essential for evalu-
+ating and optimizing PIC scheduling strategies.
+6.3 Cache Policy Sensitivity Analysis
+In RAG serving, requests are queued before pro-
+cessing. Can cache eviction policies leverage the
+queue’s pending requests to improve performance?
+A natural hypothesis is that a cache eviction pol-
+icy considering pending requests’ document needs
+could outperform temporal policies. To test this,
+we evaluate Queue Aware Cache Eviction (QCE),
+which uses queue order to prioritize KV pairs likely
+reused by upcoming requests.
+When combining GAD with QCE, as shown in
+Figure 9 and Figure 10, RAGPULSE continues
+to show significant gains while the other datasets
+plateau. RAGPULSE’s hit rate further increases
+from 46.73% to 54.48%, an additional gain of 7.75
+percentage points and a 17.02 percentage point
+absolute improvement from the CacheBlend base-
+line of 37.46%. Its prefill time drops from 0.13 to
+0.11, a reduction of 15.38%. For BurstGPT and
+MTRAG, the hit rate changes from 9.03% to 8.53%
+and from 15.45% to 16.93%, respectively, while
+prefill time remains nearly unchanged.
+The striking difference stems from RAG’s re-
+quest queue dynamics combined with authentic
+temporal locality. Unlike the native LRU of
+CacheBlend, QCE leverages queue level demand
+to retain document KV pairs that are contextually
+relevant to requests waiting in the queue. In pro-
+duction RAG deployments, requests arriving within
+short time windows often share overlapping docu-
+ment needs, creating queue level reuse hotspots that
+persist within specific temporal windows. RAG-
+PULSE captures this phenomenon through its au-
+thentic temporal sequence data, where requests
+with similar document needs naturally cluster in
+time. BurstGPT lacks any document overlap,
+while MTRAG’s synthetic documents are inde-
+pendent and lack temporal clustering, rendering
+QCE ineffective. The meaningful improvement
+only on RAGPULSE confirms that authentic tem-
+poral queue dynamics is crucial for RAG cache
+policy design.
+6.4 Serving Configuration Sensitivity Analysis
+To assess whether the benefits of RAGPULSE gen-
+eralize beyond a single serving configuration, we
+0
+20
+40
+60Hit rate (%)
+35.2
+30.8
+34.9
+28.6 25.7 22.6 25.1
+19.1
+56.3 57.3 54.2
+49.9
+44.1 44.4 43.9
+35.4
++21.1pt +26.6pt +19.3pt
++21.3pt
++18.4pt +21.8pt +18.8pt
++16.3pt
+CacheBlend CacheBlend + GAD + QCE
+8B
+6K·150x
+8B
+6K·350x
+8B
+15K·150x
+8B
+15K·350x
+32B
+6K·150x
+32B
+6K·350x
+32B
+15K·150x
+32B
+15K·350x
+Model · Requests · Replay speed
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0Prefill time (s)
+0.16
+0.34
+0.76
+1.96
+0.24
+0.38
+0.86
+2.51
+0.12
+0.28
+0.56
+1.71
+0.19 0.26
+0.58
+2.09
+33.3%↓
+21.4%↓
+35.7%↓
+14.6%↓
+26.3%↓
+46.1%↓
+48.3%↓
+20.1%↓
+Figure 11: Scalability sensitivity analysis.
+vary model size, workload scale, and replay speed.
+Specifically, we evaluate Qwen3-8B and Qwen3-
+32B under 6K and 15K request workloads, re-
+played at 150× and 350× speed. Figure 11 com-
+pares CacheBlend against CacheBlend enhanced
+with GAD and QCE in terms of cache hit rate and
+Prefill time.
+Across all eight configurations, GAD and QCE
+consistently improve cache efficiency and latency.
+The cache hit rate increases by 16.32 to 26.55 per-
+centage points, while Prefill time is reduced by
+14.60% to 48.27%. These gains persist for both
+model sizes and workload scales, indicating that
+RAGPULSE’s authentic temporal order enables
+GAD and QCE to exploit pending requests and
+short-window document reuse robustly. Higher
+replay speeds increase queueing pressure, which
+can reduce the relative Prefill time improvement in
+some settings. However, they also expose more
+pending requests and thus preserve substantial
+cache-hit-rate gains. Although the 32B model
+incurs greater KV-cache pressure and higher ab-
+solute latency, the improvement remains consis-
+tent, demonstrating that the effectiveness of queue-
+aware cache management is not tied to a specific
+serving configuration.
+6.5 Discussion and Broader Implications
+The four sets of experiments consistently show that
+BurstGPT and MTRAG fail to expose the real op-
+timization opportunities and challenges present in
+production RAG systems. Generic LLM traces
+lack document level reuse and temporal coupling.
+Synthetic RAG datasets while RAG aware are ar-
+tifactually constrained by the absence of authentic
+temporal arrival patterns and semantically indepen-
+dent document distributions. Both lead researchers
+7072

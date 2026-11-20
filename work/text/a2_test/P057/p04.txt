@@ -1,0 +1,69 @@
+Figure 2: Visualization of constrained beam for query: "when did marathon change its name to snickers?". The
+ﬁnal RICHES output is "Marathon was renamed Snickers in 1990". Bold boxes track the progress of the top-beam
+sequence. Grey crossed out boxes are sequences that the LLM preferred, but were blocked by corpus constraints.
+provide the model room for a ‘thought’ trace when
+reasoning about a response.
+To ensure that RICHES can properly make use of
+beam search, which is here intended to ensure the
+model does not get stuck irretrievably after generat-
+ing an incorrect constrained preﬁx, we introduce an
+adaptive decoding strategy that switches between
+full beam decoding for the sensitive constrained
+sequences but opts for greedy decoding when un-
+constrained. In practise, a constrained preﬁx is
+expanded to next beam-size probable tokens while
+an unconstrained preﬁx is expanded to only the
+next one token. This is expected to provide room
+for rest of the beam to be utilized largely for con-
+strained sequences. Section 6.1 shows experiments
+with multiple decode modes.
+3.4 Indexing Strategies
+The FM-Index used by RICHES supports efﬁcient
+indexing of all sub-strings in a corpus, which is use-
+ful when we want to generate corpus text verbatim.
+However, it is not clear that this is the best option
+of retrieval key for the auto-regressive decoder in
+Section 3.1. A key question in index construction
+is the document representation used in indexing.
+In traditional lexical-based retrieval systems, docu-
+ments are represented by the terms in it, with trans-
+formations such as stemming, weighing by corpus
+statistics (Robertson et al., 2009). Neural retrieval
+systems transform raw text into dense vector repre-
+sentations and ofﬂoad representation computation
+to the neural network. But even in this case, proper
+document chunking and/or multi-vector document
+signiﬁcantly impact ﬁnal performance (Lee et al.,
+2021; Khattab and Zaharia, 2020).
+In this section, we introduce a few different
+choices of retrieval keys, including a propositional
+index that requires indexing time neural compu-
+tation. A key consideration here is the interplay
+between the retrieval index and the search strategy.
+Document Title and Section Headers Many re-
+trieval corpora such as Wikipedia have consistent
+structures in the form of titles and sometimes sub-
+titles and metadata. This provides a hierarchical
+structure such that one can ﬁrst decode titles, sub-
+titles and then the document.
+Paragraph Sub-string A natural option for re-
+trieval key is any sub-string of the unit of text be-
+ing indexed itself. In most open domain question
+answering approaches, paragraph is the de-facto
+unit of evidence. We can index paragraphs efﬁ-
+ciently using the FM-index (Section 3.2) and de-
+code sub-strings directly with RICHES to get point-
+ers into the retrieval corpus. It should be noted
+that this yields an inherently many-to-many map-
+ping between paragraphs and retrieval keys, but
+that the mapping is in-effect one-to-one for longer
+sequences of tokens.
+Sentence Sub-string Similarly, individual sen-
+tences form a natural retrieval key. Sentence are
+smaller units of information than passage, but may
+not be interpretable stand-alone.
+Propositional Index The above choices do not
+perform any non-trivial indexing step, unlike stan-
+dard approaches in information retrieval where doc-
+uments are mapped to sparse or dense vectors. The
+8890

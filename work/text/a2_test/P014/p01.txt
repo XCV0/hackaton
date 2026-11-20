@@ -1,0 +1,133 @@
+Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 22149–22164
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+Efficient Prior-Guided Reasoning for Robust Retrieval-Augmented
+Generation under Conflicts
+Xiaowei Yuan1,2,3, Ziyang Huang1,2, Zhao Yang4, Yequan Wang3,
+Jun Zhao1,2, Kang Liu1,2,∗
+1The Key Laboratory of Cognition and Decision Intelligence for Complex Systems,
+Institute of Automation, Chinese Academy of Sciences
+2School of Artificial Intelligence, University of Chinese Academy of Sciences
+3Beijing Academy of Artificial Intelligence
+4Meituan
+Abstract
+Retrieval-Augmented Generation (RAG) has
+become a standard paradigm for grounding
+Large Language Models (LLMs) with exter-
+nal knowledge. However, RAG performance
+often degrades substantially when faced with
+noisy, outdated, or conflicting retrieved infor-
+mation. In this work, we empirically demon-
+strate that Prior-Guided Reasoning—a strategy
+that explicitly elicits the model’s parametric
+knowledge as prior information to guide reason-
+ing on retrieved documents—effectively miti-
+gates the impact of external conflicts. Build-
+ing on this, we propose BrPr (Bernoulli-
+gated reinforcement learning for Prior-Guided
+reasoning), a framework that achieves robust
+performance across varying degrees of exter-
+nal inconsistency. Furthermore, by employing
+a Bernoulli-gated dropout mechanism during
+training, BrPr distills the prior-driven reasoning
+capability into the model parameters, enabling
+efficient latent reasoning without explicit prior
+generation. The experimental results demon-
+strate that BrPr consistently exhibits superior
+robustness to external conflicts and noise.
+1 Introduction
+Retrieval-Augmented Generation (RAG) has
+emerged as a pivotal paradigm for extending the
+knowledge boundaries of Large Language Models
+(LLMs) (Yang et al., 2025; Guo et al., 2025). By
+dynamically integrating external knowledge during
+inference, RAG empowers models to transcend the
+limitations of their static training data, producing
+outputs that are more factually precise and contex-
+tually grounded (Gao et al., 2024).
+Despite the significant advances enabled by
+RAG, the dependency on external retrieval intro-
+duces a new set of vulnerabilities, particularly
+when the retrieved corpus contains conflicting
+or noisy information (Xu et al., 2024; Cuconasu
+*Corresponding author.
+Multi-DocumentQuestionAnswering
+In which cityis the 
+International Court of 
+Justice headquartered?
+Query𝒙
+RetrievedDocuments𝒅(1gold+3noise/conflict)
+Doc1(Gold):…The International Court of Justice has its official seat at the 
+Peace Palacein The Hague, Netherlands.…
+Doc2(Noise):…The Peace Palace library houses one of the world's largest 
+collections of international law materials and serves scholars globally…
+Doc3(Conflict):…As a primary organ of the United Nations, the ICJis 
+headquartered at the Palais des Nationsin Geneva, Switzerland.…
+Doc4(Noise):…The ICJ consists of 15 judges elected to nine-year terms by 
+the UN General Assembly and the Security Council…
+DirectInference
+𝑷𝜽(𝒂|𝒙,𝒅)
+StandardCoT
+𝑷𝜽(𝒂,𝒄|𝒙,𝒅)
+Prior-GuidedCoT
+𝒛~𝑷𝜽𝒛𝒙,𝑷𝜽(𝒂,𝒄|𝒙,𝒛,𝒅)
+StandardCoT(Trained)
+𝑷𝜽(𝒂,𝒄|𝒙,𝒅)
+ParametricKnowledgePrior(𝒛)
+“… organof the United Nations,it is 
+famously located in theNetherlands”
+Answer𝒂
+Reasoning(𝒄)
+“Doc3mentionsthe
+cityisGeneva…”
+Answer𝒂
+Reasoning(𝒄)
+“Based on my background knowledge, …
+Doc 1 correctly mentions The Hague.”
+Knowledge-aware
+Reasoning(𝒄)
+“…In contrast to Doc 1, which 
+provides the correctcity, The 
+Haguein Netherlands, Doc 3 
+incorrectlyrefers to Geneva.”
+Answer𝒂 Answer𝒂
+“Palais des Nations ”
+Misledbysurfacelexical
+overlapandnoisyretrieval
+“Geneva”
+Reasoningamplifiesdocument
+Biaswithoutglobalfactualprior
+“The Hague”
+Internalknowledgeguidesreasoning
+underdocumentconflict
+“The Hague”
+Learnsdocumentfiltering
+viatraining
+Model𝜽
+Figure 1: A comparison of RAG inference strategies
+under noisy and conflicting retrieval. Prior-Guided CoT
+leverages elicited parametric knowledge as background
+information, enabling prior-guided reasoning with cor-
+rect answer generation where standard methods fail.
+et al., 2024). Previous studies (Shi et al., 2023;
+Mansurova et al., 2024; Amiraz et al., 2025) have
+empirically demonstrated that irrelevant or mislead-
+ing passages significantly degrade performance in
+Question Answering (QA) tasks.
+Existing research has explored many paradigms
+to mitigate knowledge conflicts, ranging from in-
+context prompting strategies (Zhou et al., 2023)
+that utilized manual heuristics to elicit model rea-
+soning to decoding-based approaches (Yuan et al.,
+2024a; Shi et al., 2024) that leveraged contrastive
+decoding-like method to adjust the probabilities
+of output tokens in conflicting scenarios. Be-
+yond these inference-time adjustments, other stud-
+ies focused on enabling models to learn the dis-
+criminative features of gold and noisy documents
+through supervised fine-tuning or preference op-
+timization (Fang et al., 2024; Zhang et al., 2025).
+Another line of methods (Wang et al., 2025; Hu
+et al., 2025b) introduced multi-agent frameworks
+that facilitate multi-round debates between LLM
+agents to resolve inter-document discrepancies.
+22149

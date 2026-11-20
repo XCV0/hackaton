@@ -1,0 +1,100 @@
+40
+faithfully evaluate their system’s performance by
+building their own testing datasets.
+Related work: Gao et al. (2024) provide a thor-
+ough review of strategies for developing a RAG
+system. Our ideas pertain to their evaluation, and
+are independent of such development strategies.
+Existing evaluation methods (Ru et al., 2024) fo-
+cus on LLM-assisted metrics for checking aspects
+like factuality, faithfulness, groundedness, and ro-
+bustness of generated answers (Es et al., 2024; Wu
+et al., 2024; Katranidis and Barany, 2024; Chen
+et al., 2024; Liu et al., 2023; Thakur et al., 2024;
+Adlakha et al., 2024). Our approach is complemen-
+tary to these methods as an accurate measurement
+of these metrics needs a test dataset that is faith-
+ful to the type of questions expected in practice.
+Our work also relates to synthetic dataset genera-
+tion methods (Long et al., 2024). Several recent
+approaches have used LLMs to augment (Møller
+et al., 2024), label (Gilardi et al., 2023; Ziems et al.,
+2024), and even generate entirely synthetic datasets
+(Eldan and Li, 2023). The RAG dataset generation
+feature offered by Ragas is closest to us (Ragas,
+2024). It uses Evol-Instruct (Xu et al., 2023) to
+morph simple questions into more complex ones.
+However, we use a different taxonomy for generat-
+ing examples and we offer a significantly cheaper
+fine-tuned generation model.
+2 Label taxonomy
+Unlike general purpose chatbots, enterprise RAG
+systems have a narrowly defined scope. This allows
+one to think about the types of queries a typical
+user may ask of the system. Below we introduce a
+taxonomy over such types or labels that can be used
+by practitioners across application domains. Our
+experiments show that this taxonomy is applicable
+to several commonly used RAG evaluation datasets.
+If needed, domain experts can also refine it for their
+specific needs before applying our ideas from the
+subsequent sections for their analysis.
+RAG evaluation datasets generally comprise of
+(context, query, answer) triplets, where the context
+(a.k.a. ground-context) is expected to contain an
+answer to the associated query. The performance
+of the retrieval step is based on the system’s capa-
+bility to retrieve the ground-context given a query.
+Our taxonomy is designed to identify different lev-
+els of difficulty for this task. We classify (context,
+query) pairs based on the nature of answer pro-
+vided by the context to the query. Table 1 describes
+the four classes in our taxonomy - fact_single, sum-
+mary, reasoning, and unanswerable - along with
+an example in each case. Classes fact_single and
+summary require the context to explicitly provide
+an answer whereas reasoning does not. As the re-
+trieval is done using the contents of the context, it
+is therefore easier to identify ground-contexts for
+queries from fact_single and summary classes. We
+demonstrate these differences in our experiments.
+Queries are not accompanied by a ground-
+context in practice. However, a RAG developer
+can likely guess the type of queries expected by the
+system with respect to the corpus given a narrow
+enough scope. E.g., a RAG system for referenc-
+ing specification sheets of electrical sensors would
+likely get more fact_single queries about properties
+like input voltage of a sensor. Similarly, a RAG
+system that aims to aid an HR professional might
+be more often used to query procedures and other
+types of summary information. A system designer
+would then evaluate their RAG setup on public
+datasets with an emphasis on its fact_single or sum-
+mary performance. Yang et al. (2024) proposed
+a similar taxonomy based on the question alone,
+while ours looks at a (context, query) pair. The
+latter bases the label on the type of answer pro-
+vided by the context to the query. This distinction
+makes our taxonomy more suitable for evaluating
+the retrieval step.
+3 Public Datasets
+We investigate the label composition of Q&A
+datasets commonly used for RAG performance
+evaluation. We focus on datasets that contain a
+well-defined ground-context to help the labelling
+task and to measure the retrieval performance
+of the system. The datasets considered are:
+HotpotQA (Yang et al., 2018), MS MARCO (Nguyen
+et al., 2016), NaturalQ (Kwiatkowski et al., 2019),
+NewsQA (Trischler et al., 2017), PubMedQA (Jin
+et al., 2019), and SQuAD2 (Rajpurkar et al.,
+2018). We use the versions of HotpotQA and
+MS MARCO built to train Sentence Transform-
+ers (Reimers and Gurevych, 2019), as they contain
+the question-answer-ground context triplet needed
+for this study. Details about data processing and
+subsampling are mentioned in Appendix A.
+4 Labelling examples using LLMs
+Given the size of typical Q&A datasets, we turn
+to LLMs for classification. This task typically in-

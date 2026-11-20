@@ -1,0 +1,101 @@
+# 4. Tanjiro Kamado’s actions in the story: 
+## 4.1. The death of his family:
+- Tanjiro was born the eldest son of a poor charcoal-burning 
+family. After losing his father, he lived in hardship with his 
+mother and younger siblings. Nevertheless, getting along well 
+with his family and living diligently, Tanjiro went down to the 
+village as usual to sell charcoal.
+- On his late way home, an old man named Saburo stopped 
+him, saying that demons come out at night, and had him 
+spend the night at his house. (At that time, Tanjiro heard from 
+Saburo about demons and the Demon Slayer Corps, but he 
+dismissed it as superstition. Still, before falling asleep, he 
+remembered that his grandmother had said the same thing 
+before she passed away.)
+- The next day, when Tanjiro returned home, he found that his 
+family had been attacked during the night; everyone had been 
+killed except for his younger sister, Nezuko Kamado.
+### 4.1.1. Tanjiro vs. the Water Hashira, Giyu Tomioka:
+- While heading to the village determined to save at least 
+Nezuko—who still had warmth left in her body—Tanjiro is 
+attacked by Nezuko, who has turned into a demon. As he 
+desperately holds out, Nezuko sheds tears at his earnest cries, 
+as if some part of her self remains.
+- Then Giyu Tomioka, a Demon Slayer, appears before them. 
+When Giyu moves to kill Nezuko for being a demon, Tanjiro (...)
+…
+…
+(a) Statistics of CharacterRAG dataset
+(b) An example of CharacterRAG (Persona)
+(c) An example of CharacterRAG (Question-Answer)
+[Belief and Value]
+Q) What did Nina say to Momoka, who was hesitant to really get started with 
+music?
+A) “After hearing your music... there’s someone who decided they had to keep 
+on living... What you need to protect isn’t the you in your memories... It’s the 
+desire to share your song with someone... You started a band because you 
+wanted to share your heart, your joy, your anger, your sorrow with someone, 
+right? That’s why you sang at the school festival and came to Tokyo, right!? You 
+became a pro, didn’t you!? What are you so afraid of!! Why are you so scared!! 
+I’m right here... someone who drew courage from you, who found the strength 
+to rise because you were there...  someone who feels happiness singing with 
+you... someone who wants to stake their life on this together with you!!”
+Figure 2: An overview of CharacterRAG Dataset. CharacterRAG consists of persona documents for 15 distinct
+fictional characters totaling 976K written characters, and 450 question–answer pairs.
+divides the persona into n chunks as follows:
+g(Dp) = {c1, c2, ..., cn} (1)
+Each chunk ci contains a character’s knowledge
+corresponding to attributes in Section 2.2. Rather
+than using the full chunks C = {ci | i = 1, . . . , n},
+f takes as input the top K chunks with the highest
+semantic scores relative to the u:
+C∗ = TopK({sim(u, ci)}n i=1), |C∗| = K (2)
+The objective of f is to vividly embody a character
+and generate response R to u while maintaining
+persona consistency: R∗ = f (u, C∗). However,
+previous RAG methods (Guu et al., 2020; Guo
+et al., 2024; Yang et al., 2024; Shukla et al., 2025;
+Wang et al., 2025b) truncate each character’s per-
+sona paragraph to a fixed length, regardless of the
+varying lengths across characters, which results
+in hallucinations or responses with lower persona
+consistency. Although existing works (LangChain,
+2023; Antematter, 2024; Zhong et al., 2025a; Liu
+et al., 2025) explore optimal chunking strategies,
+they struggle to capture the contextual similarities
+across chunks that are crucial for role-playing.
+4 Method
+Amadeus consists of three substages: Adaptive
+Context-aware Text Splitter (ACTS), Guided Selec-
+tion (GS), and Attribute Extractor (AE), in order to
+build realistic RAG-based RPAs (Figure 5).
+4.1 Adaptive Context-aware Text Splitter
+Unlike previous naive semantic chunking methods,
+Given Dp, ACTS aims to preserve intra-level con-
+text across chunks and, for each chunk, informa-
+tion about the corresponding subsections of the per-
+sona—that is, hierarchical context H. For instance,
+in Figure 2, chunks within ### 4.1.1 must preserve
+H: "Tanjiro Kamado’s actions in the story (# 4)",
+"The death of his family (## 4.1)", and "Tanjiro vs.
+the Water Hashira, Giyu Tomiok (### 4.1.1)".
+To this end, ACTS first finds the maximum
+length of the paragraphs that constitute the per-
+sona: lmax = φ(p1, p2, ..., pl), where φ denotes a
+length-calculating function. Then, ACTS sets the
+overlap length of the text splitter to half of lmax (i.e.,
+lo = lmax/2). The reason for setting both chunk
+length and overlap length sufficiently large is to
+minimize information loss, as the context between
+pieces of information contained in each chunk is
+indispensable in RAG-based role-playing (Figure
+8). Finally, ACTS recursively retrieves the context
+at each chunk’s current position in the hierarchy,
+then segments Dp using lmax and lo, and concate-
+nates the resulting context Hi to each chunk to
+preserve information such as character descriptions
+and situational context at each point in the nar-
+rative: ACTS(Dp, H, lmax, lo) = {ˆc1, ˆc2, ..., ˆcm},
+where ˆci = [ci; Hi]. From a computational stand-
+point, the extraction of hierarchical context incurs
+an O(N) runtime cost, making it efficient.

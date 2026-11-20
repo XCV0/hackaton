@@ -1,0 +1,89 @@
+Table 6: COUNTERMEM signal card. Signals grouped by intervention, with the operational question and main
+pitfall under the evidence-bound criteria (Section 1). Group header reports marginal LLM-call cost.
+Signal Operational question Main pitfall
+Delete-All +1 call
+DAP ↓ Does the answer survive without
+retrieved evidence?
+Persistence can be valid zero-context knowledge; it is a
+leakage risk only under evidence-bound criteria.
+DelAll ↑ Does the system abstain when evidence
+is removed?
+Counts explicit abstention markers, so it lower-bounds
+criteria-level abstention.
+DAV ↓ Is the no-evidence answer both
+substantive and similar?
+Use as the leakage flag instead of raw DAP ≥ τ.
+Cluster knockout +m calls
+CNS ↑ Does removing any single semantic
+evidence unit change the answer?
+Clustering rule matters; low CNS is the criteria-relevant
+warning (evidence-independent answer or redundant clus-
+ters), high CNS is desirable under evidence-bound use and
+benign elsewhere.
+Counterfactual addition +1 call per probe
+NR ↑ (distractor) Is the answer stable under an irrelevant
+added chunk?
+Stability is desirable only for irrelevant-context additions.
+Upd ↑ (update) Does the answer adopt a counterfactual
+appended as superseding evidence?
+Fixture detectors may miss out-of-distribution updates.
+Contra ↑
+(contradiction)
+Does the answer acknowledge conflict
+when the same counterfactual is framed
+as a competing source?
+Use an LLM judge; keyword matchers undercount criteria-
+relevant conflict handling.
+CS (contradiction) How similar is the answer to the
+pre-injection baseline?
+Direction is criteria-dependent; report alongside Contra.
+B Distribution-shift Transfer of Metric
+Rankings
+We test whether per-configuration metric rankings
+on dataset D1 predict reference-based answer qual-
+ity on dataset D2, over the six ordered pairs in
+the RAGBench 3-dataset subset (HotpotQA, Pub-
+MedQA, TechQA). Interventional signals transfer
+in the expected direction on every pair; observa-
+tional faithfulness and context-precision flip sign
+on half (Table 7; faithfulness saturation analyzed
+in Appendix J).
+C Pipeline-Diagnosis Details
+Table 8 reports the full 3×4 baseline×repair
+reactive-rate matrix on the engineered HotpotQA
+bottlenecks summarized in Section 5.2.
+Table 9 gives RAGChecker’s full 11-metric
+breakdown across the same three engineered base-
+lines.
+D Multi-metric ExpertQA Validation
+We fit logistic-regression ensembles over COUN-
+TERMEM features (1−DAP, CNS, NR) and RA-
+GAS faithfulness on the ExpertQA human-support
+endpoint (Table 10), supporting the framing in Sec-
+tion 5.3.
+E Naturalistic Conflict Reproduction on
+DelucionQA
+We replicate the conflict-handling probe of Sec-
+tion 5.3 on naturally occurring DelucionQA con-
+tradictions to check that the failure mode is not a
+synthetic-template artifact (Table 11).
+F End-to-End Corpus Deletion Details
+Table 12 reports the per-dataset corpus-deletion
+numbers behind the end-to-end paragraph in Sec-
+tion 5.3.
+G Cross-generator and Cross-judge
+Details
+The robustness check of §5.4 reuses the 593
+coherent-intervention targets of §5.3 verbatim: the
+same retrieval contexts, the same Claude-Haiku-
+synthesized update and contradiction passages, and
+the same grounded QA prompt. Only the generator
+changes: GPT-5.4-mini through the OpenAI API
+and Qwen3-8B served locally, both at temperature
+0 (Qwen’s reasoning trace is stripped before judg-
+ing). Each generator’s base, update, and contradic-
+tion answers are then labeled by the paper’s Claude-
+Sonnet-4.6 judge and, separately, by GPT-5.4-mini,
+with the same four-label rubrics (Appendix I). The
+Sonnet judge declined to label 27 CovidQA rows (a
+22344

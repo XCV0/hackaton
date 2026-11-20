@@ -1,0 +1,99 @@
+often spans multiple disjoint passages. When such
+cross-document logic is fragmented, lightweight
+detectors fail to reconstruct the inferential depen-
+dencies, leading to undetected hallucinations.
+Hallucination detection in RAG systems fol-
+lows two main paths. The first adapts the lan-
+guage model through fine-tuning on hallucination-
+annotated corpora, yielding strong in-domain per-
+formance but requiring large domain-specific an-
+notated datasets. The second applies a Natural
+Language Inference (NLI) model to score factual
+consistency. While this incurs minimal overhead,
+its effectiveness degrades sharply on tasks requiring
+long-context understanding or multi-hop reasoning
+(Figure 1): the restricted parameter size of NLI
+models prevents them from holistically perceiving
+evidence distributed across multiple documents.
+Prior work has focused primarily on alleviating
+long-context challenges. RAGAS (Es et al., 2025)
+and Provenance (Sankararaman et al., 2024) reduce
+per-call context length by evaluating each retrieved
+document independently. Grounded Context Re-
+trieval (Gerner et al., 2025) further segments and
+filters individual passages. Despite these advances,
+the complexity of aggregating semantically related
+evidence across multiple retrieved documents re-
+mains elusive; existing approaches still struggle to
+detect hallucinations in multi-hop reasoning set-
+tings.
+Our Approach. We introduce a compact, three-
+module framework designed for multi-hop hallu-
+cination detection under tight compute constraints.
+Our method addresses the limited reasoning capac-
+ity of small models by explicitly clustering seman-
+tically coherent evidence across documents before
+consistency scoring:
+• Long Context Segmentation: splitting re-
+trieved passages and generated answers into
+concise, semantically coherent segments;
+• Semantic Evidence Aggregation: embed-
+ding each segment into a shared vector space
+and constructing a segment graph whose
+edges encode pairwise semantic similarity;
+coherent clusters are identified via between-
+ness centrality to recover the logical evidence
+chains scattered across documents;
+• Consistency Scoring: grouping related seg-
+ments via graph traversal, applying a rele-
+vance module plus an NLI discriminator to
+each group, then aggregating scores into a
+global hallucination indicator.
+Terminology Clarification. Our approach uses
+geometric clustering in embedding space based on
+semantic similarity, not formal logical operations
+(∧, ∨, ⇒). It captures semantic coherence (the
+co-presence of related evidence across documents),
+which is a necessary prerequisite for multi-hop rea-
+soning but is distinct from formal logical entail-
+ment.
+Efficiency Positioning. This work targets prac-
+tical deployment constraints. We demonstrate
+that graph-based evidence aggregation enables
+lightweight models (0.5B parameters) to achieve
+competitive accuracy (82.4%), placing our method
+at the Pareto-optimal frontier: 3.3× faster than
+TrueTeacher (Gekhman et al., 2023) while using
+22× fewer parameters, and 6× faster than GPT-4o
+with marginally higher accuracy.
+To facilitate rigorous evaluation of multi-hop hal-
+lucination detection, we also contribute HotPotQA-
+Derived, derived from HotPotQA (Yang et al.,
+2018). Existing benchmarks either provide only
+a single related passage or merge multiple sources
+into one long context, obscuring cross-document
+links. Our dataset preserves separate retrieved doc-
+uments, better reflecting real-world RAG pipelines.
+Extensive experiments demonstrate that our
+framework, without any task-specific pretraining,
+surpasses larger LLM baselines on HotPotQA-
+Derived (82.4% accuracy) and RAGTruth (Niu
+et al., 2023) (72.2% F1), and achieves competitive
+performance on HaluBench and HaluEval.
+2 Related Work
+Fine-tuning on hallucination corpora.
+Lynx (Ravi et al., 2024), RAG-HAT (Song
+et al., 2024), and Osiris (Shan et al., 2025)
+improve hallucination detection by fine-tuning
+language models on annotated datasets. These
+methods assume all evidence can be loaded
+into a single context window, limiting their
+applicability in multi-document RAG settings
+where domain-specific annotated corpora may be
+unavailable.
+NLI-based consistency checking.
+MiniCheck (Tang et al., 2024), AlignScore (Zha
+et al., 2023), and TrueTeacher (Gekhman et al.,
+2023) apply NLI for fact-checking. Prove-
+nance (Sankararaman et al., 2024) and RAGAS (Es
+1606

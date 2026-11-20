@@ -1,0 +1,103 @@
+Finding 2: Module-level Trade-offs. Subgraph-extraction is
+the main efficiency bottleneck for large-scale graphs. Overuse of se-
+mantic augmentation (e.g., using LLMs) in subgraph-extraction can
+compromise downstream path-retrieval quality. Targeting semantic
+augmentation in the path-retrieval module is a more cost-effective
+strategy to maintain high quality.
+Finding 3: Method-level Trade-offs. Structure-based methods
+offer higher efficiency and lower cost, but semantic-augmented
+methods are essential for quality, especially for complex (two- or
+multi-hop) queries. One-way semantic methods (OSAR) balance
+quality and efficiency better than interactive methods (ISAR).
+Finding 4: Model-level Trade-offs. EEMs are more cost effec-
+tive in token and GPU usage, while LLMs generally provide better
+quality, particularly for interactive methods (ISAR). However, LLMs
+can exhibit unstable generation in some cases, affecting consistency.
+A balanced approach includes applying LLM-based augmentation
+in path-retrieval or EEM-based augmentation in both modules.
+Finding 5: A Promising yet Underexplored Strategy. Based
+on our analysis, the effective approach for GraphRAG would be the
+one that combines structure based methods for subgraph-extraction
+with OSAR for path-retrieval. Despite its potential, this strategy
+remains underexplored in existing works. Also, it opens up op-
+portunities for further optimizations for handling multi-hop and
+multi-answer queries, as well as improving overall efficiency.
+5.2 Efficiency of the Subgraph-Extraction
+We explore promising directions for faster subgraph-extraction, sup-
+ported by empirical analysis, including limitations, trade-offs, and
+research opportunities.20 Below, we briefly outline each direction.
+Computational acceleration yields significant efficiency im-
+provement for SBE methods (e.g., PPR) through approximate and
+distributed algorithms (Table 6). Approximate methods may lower
+Recall; distributed solutions depend on system setup.
+Precomputation-based acceleration pre-generates subgraphs
+(e.g., via clustering or community detection) to scale down the
+search space for the extraction process in order to reduce run-
+time overhead. As shown in Table 7, our implemented prototype
+demonstrates the potential of this direction, but it also incurs pre-
+processing overhead and may limit the ability to access relevant
+information spread across different subgraphs.
+Vector database-based acceleration encodes graph compo-
+nents (e.g., nodes or triples) into embedding vectors and stores them
+in a vector database, thus efficiently identifying query-relevant com-
+ponents based on semantic similarity, followed by subgraph con-
+struction centered on them. Table 7 shows our prototype achieves
+notable speedups with high Recall. However, the retrieved compo-
+nents often form multiple weakly connected subgraphs, which may
+hinder multi-hop reasoning.
+5.3 Generation Quality of LLMs
+For the issue of LLMs generating fewer or lower-quality compo-
+nents, we take the path-retrieval module as a example and explore
+two effective strategies: Multi-round LLMs (M-LLMs) conduct
+20See technical report B.7 for details.
+Table 6: Computational acceleration of PPR
+Approximate PPR (Freebase) Distributed PPR
+Method Recall Ave. Time (s) Method Speedup
+RBS [107] 0.31 0.51 HGPA [31] 3.4–4.1×
+Fora [110] 0.18 7.61 PAFO [109] 58.7×
+TopPPR [113] 0.44 42.08 Delta-Push [39] 123–162×
+Standard PPR 0.96 75.29 Standard PPR 1× (baseline)
+Table 7: Performance and Cost Analysis of the SE Acceleration
+Methods on Freebase (About 100M Nodes, 300M Edges)
+Method Pre-time Online-time Recall F1 WCC
+Precomputation 19373s 19.02s 0.52 0.0021 1
+Vector Database 14570s 0.85s 0.65 0.0023 12.86
+Standard PPR 0s 75.29s 0.96 0.0038 1
+Table 8: Performance of strategies designed to mitigate the limita-
+tions of LLM-generated outputs
+Method CWQ WebQSP GrailQA WebQuestions
+SBE+OSAR-LLMs 0.304 0.401 0.401 0.328
+SBE+OSAR-LLMs (M-LLMs) 0.349 0.438 0.381 0.348
+SBE+OSAR-LLMs (EEMs-S) 0.381 0.427 0.476 0.353
+iterative refinement via repeated LLM calls. EEMs supplementa-
+tion (EEMs-S) compensates for insufficient outputs by incorpo-
+rating top-ranked candidate paths from EEMs. Table 8 shows both
+strategies improve performance across most datasets (applied in
+the SBE+OSAR-LLMs instance), though with added computational
+overhead of multiple model calls and EEM-based ranking steps.21
+6 CONCLUSION
+In this paper, we introduce LEGO-GraphRAG, a unified framework
+for the modular analysis and design of GraphRAG instances. By
+dividing the GraphRAG retrieval process into distinct modules and
+identifying corresponding design solutions, LEGO-GraphRAG pro-
+vides a viable approach for building advanced GraphRAG systems.
+Building upon the LEGO-GraphRAG framework, we conduct exten-
+sive empirical studies on large-scale real-world graphs and diverse
+GraphRAG query sets, leading to key findings: 1) GraphRAG must
+balance quality, efficiency, and cost across three aspects: modules,
+method types, and semantic models. 2) Extracting query-relevant
+subgraphs is the primary efficiency bottleneck for GraphRAG on
+large-scale graphs and remains underexplored. 3) Graph structural
+information enables efficient solutions for GraphRAG, while se-
+mantic information is crucial for improving the quality of complex
+queries. The optimal solution should integrate structural informa-
+tion to identify query-relevant subgraphs and leverage semantic
+information to retrieve reasoning paths.
+ACKNOWLEDGMENTS
+This work was supported in part by the National Natural Science
+Foundation of China under Grant 62472400, Grant 62072428, Grant
+62271465, in part by the Suzhou Basic Research Program under
+Grant SYG202338, and in part by the HK RGC grants 12202024,
+R1015-23, and C1043-24GF. Yukun Cao and Zengyi Gao contributed
+equally to this work. Xike Xie is the corresponding author.
+21More details and analysis are in technical report B.9.

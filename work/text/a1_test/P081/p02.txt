@@ -1,0 +1,97 @@
+www.advenergymat.dewww.advancedsciencenews.com
+2103618 (2 of 13) © 2022 The Authors. Advanced Energy Materials published by Wiley-VCH GmbH
+However, phase segregation might happen on m-AMCs perov-
+skite films and the distribution of each element is worth noting. 
+Especially, the homogeneous distribution of Rb + is sought for 
+high stability and performances.[27]
+In our previous work, [16] we proved that using ammonium 
+chloride (NH4Cl, noted AC) as an additive effectively improves 
+the efficiency of solar cells based on CsFAPI absorbing layer. 
+As far as we know, only a few works tentatively explain the 
+mechanism of action of ammonium chloride. Among them, 
+Chen and co-workers [28] added ammonium chloride as an 
+additive to MAPbI 3 by using a surface-activation chemical 
+vapor deposition process (SA-CVD) and provided the cor -
+responding mechanism in their paper. Another work by 
+Qi and co-workers [29] used a two-step process to prepare  
+Cs0.05FA0.54MA0.41Pb(I0.98Br0.02)3 layers. In their work, ammo-
+nium chloride was first mixed with PbI 2 and spin-coated on 
+the substrate, and then a mixed solution of FAI and CsI was 
+dripped on the substrate to form the perovskite layer. The 
+obtained perovskite films had large grain size, which was 
+ascribed to the AC introduced intermediate phase. AC has been 
+shown by Rong et al. [30] to assist the crystallization of MAPbI 3 
+perovskite in ambient air by the formation of a hydrate inter -
+mediate compound which forms high-quality perovskite crys-
+tals by decomposition under ambient conditions. In the pre-
+sent paper, we examine in-depth how NH 4Cl additive works at 
+each stage of the so-called one-step preparation of perovskite 
+films to elucidate its action mechanism and we associate 
+it with the film formation process of m-AMCs perovskites. 
+We have visualized the distribution and moving trajectory of 
+m-AMCs. Moreover, a systematic study of the effect of AC and 
+potassium iodide on the distribution of m-AMCs has been con-
+ducted by using glow discharge-optical emission spectroscopy 
+(GD-OES). Based on the multiple advantages of this technique 
+(a high detection limit (10  µg g -1), the depth profile analysis 
+(through a thickness up to 100 µm) and the large detection area 
+(tens square millimeters)) we have been able to track the com-
+position of the entire perovskite layer at every moment of their 
+preparation process. Consequently, we have obtained the move-
+ment trajectory of the AMCs during the film formation process 
+by detecting the depth distribution of multiple metal cations in 
+the perovskite film upon thermal annealing at various times. 
+We show that the addition of AC makes the distribution of 
+the multielement cationic metal ions in the entire perovskite 
+layer more uniform. The film quality of the perovskite layer 
+is significantly improved. One important discovery is that the 
+crystallization/growth direction change from top-down to lat-
+eral with the NH4Cl additive, making Rb + evenly distributed in 
+the perovskite film. Finally, the overall performance of PSCs is 
+greatly improved, and the champion device power conversion 
+efficiency (PCE) reaches 22.5% (stabilized at 22.04%).
+2. Results and Discussion
+2.1. Solar Cell Performances and Optimization
+The effect of Cs content in FAPbI 3 was investigated in our 
+previous work, [21] where we found an optimal doping ratio of 
+10% to form the Cs 0.10FA0.90PbI3 perovskite (noted CsFA here-
+inafter). Furthermore, the beneficial effect of adding a small 
+amount of Rb into CsFAPI was reported in the literature, [31,32] 
+with an optimal doping ratio of 5% that we have retained in 
+the present work to form the Rb 0.05Cs0.10FA0.85PbI3 perovskite 
+(noted RbCsFA hereinafter). Then, the influence of the addi-
+tion of KI on the performance of the perovskite solar cell was 
+investigated and the optimum amount of this metal halide 
+was found at 5% (the details of this study are reported in 
+Part A, Supporting Information). Moreover, we systematically 
+studied ammonium chloride (AC) additive at concentrations 
+varying between 10 and 40 mol% of molar PbI 2 content in the 
+K0.05Rb0.05Cs0.10FA0.80PbI3 precursor solution. We proved that 
+30 mol% is the optimal addition quantity. These layers and 
+solar cells are noted KRbCsFA hereinafter and the optimization 
+study is detailed in Part B (Supporting Information). This result 
+is consistent with other optimization results we got in our pre-
+vious work on other methylammonium-free perovskites.[21]
+Table 1 and Figure S7 (Supporting Information) sum-
+marize the best cells results and the overall situation of dif -
+ferent J–V curves parameters for the investigated PSCs. 
+Their statistical analysis is displayed in Figure 1. The CsFA 
+cells exhibited poor performances with a PCE at 16.2% on 
+the reverse scan (Figure S7a, Supporting Information) and a 
+large hysteresis (Table  1). After introducing Rb ions, all the 
+photovoltaic parameters were enhanced, especially the FF 
+Table 1. Champion solar cells J–V curve parameters, PCE, and hysteresis index.
+Name Additive Capping layer Scan direction Voc [V] Jsc [mA cm–2] FF PCE [%] HIa) [%]
+CsFA NO NO Reverse 0.943 23.91 72.13 16.26 26
+Forward 0.846 23.83 59.36 11.96
+RbCsFA NO NO Reverse 1.017 24.49 76.12 18.96 24
+Forward 1.006 24.36 58.89 14.43
+KRbCsFA NO NO Reverse 1.031 23.96 78.08 19.29 3
+Forward 1.034 23.79 76.17 18.74
+KRbCsFA /AC NH4Cl 30 mol% NO Reverse 1.083 24.79 78.61 21.10 4
+Forward 1.072 24.66 76.74 20.29
+KRbCsFA /AC-PAI NH4Cl 30 mol% YES Reverse 1.121 24.86 80.83 22.53 4
+Forward 1.116 24.71 78.84 21.74
+a)Hysteresis Index noted HI, defined as (PCE Rev - PCEFor)*100/PCERev.
+Adv. Energy Mater. 2022, 12, 2103618
+ 16146840, 2022, 13, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202103618, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

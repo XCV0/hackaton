@@ -1,0 +1,142 @@
+TABLE III
+CASE STUDY EXAMPLES: COMPARISON OF CAUSAL REASONING (CONDENSED)
+Scenario (Excerpt) Expert Causes Generated Analysis
+LLM-only Baseline Proposed Framework
+[STRANDING]
+Occurred shortly after passing a
+lighthouse in calm weather and
+good visibility; a sudden severe
+hull impact and shaking were re-
+ported.
+Approached a reef too
+closely without position
+verification; improper
+navigation near the hazard.
+Impact was likely due to structural de-
+fects in the hull or improper equipment
+handling; stability may have been weak-
+ened despite the clear weather.
+Vessel stranded on underwater rocks after
+navigating too close to the lighthouse; the
+core cause was failure to verify position
+and recognize reefs on the chart.
+[FIRE/EXPLOSION]
+Occurred shortly after a crew
+member entered a cabin with
+matches and cigarettes; a sudden
+explosion and fire were reported,
+causing casualties.
+Negligent handling of
+propane gas; gas leaked and
+accumulated in the cabin
+and was ignited when a
+match was struck.
+Explosion was caused by alcohol vapors
+accumulated from drinking in the en-
+closed cabin; poor supervision of intoxi-
+cated crew was the primary factor.
+Explosion was caused by ignition of
+leaked propane gas accumulated in the
+cabin due to poor maintenance; the match
+acted as the ignition source.
+* All content examples are translated from Korean.
+dation for automated maritime investigation support. Future
+work will explore the integration of formal legal regulations,
+such as COLREGs, and graph-based reasoning to further
+expand the system’s diagnostic depth and interpretability.
+ACKNOWLEDGMENT
+This work was supported by the National Research
+Foundation of Korea(NRF) grant funded by the Korea
+government(MSIT)(No.RS-2023-00218913).
+REFERENCES
+[1] J. Park and S. Kim, “Maritime anomaly detection based on vae-cusum
+monitoring system,” Journal of the Korean Institute of Industrial
+Engineers, vol. 46, no. 4, pp. 432–442, 2020.
+[2] Y. Oh and S. Kim, “Grid-based bayesian bootstrap approach for real-
+time detection of abnormal vessel behaviors from ais data in maritime
+logistics,” IEEE Transactions on Automation Science and Engineering,
+vol. 21, no. 4, pp. 6680–6692, 2023.
+[3] Y. Oh, K. Yoon, J. Park, and S. Kim, “Comparative evaluation of
+vae-based monitoring statistics for real-time anomaly detection in ais
+data,” Maritime Policy & Management, vol. 52, no. 4, pp. 609–626,
+2025.
+[4] J. Reason, Human Error. Cambridge University Press, 1990.
+[5] S. Fan et al., “A review of human error in maritime accidents: Ap-
+proaches and applications,” Ocean Engineering, vol. 216, p. 107906,
+2020.
+[6] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, R. Nogueira,
+H. Paskov, P. Stenetorp, T. Rocktäschel, and S. Riedel, “Retrieval-
+augmented generation for knowledge-intensive NLP tasks,” in Ad-
+vances in Neural Information Processing Systems (NeurIPS), vol. 33,
+2020, pp. 9459–974.
+[7] Y. Gao, Y. Xiong, X. Gao, K. Jia, J. Pan, Y. Bi, Y. Dai, J. Sun, and
+H. Wang, “Retrieval-augmented generation for large language models:
+A survey,” arXiv preprint arXiv:2312.10997, 2023.
+[8] W. Soh, H. Kim, and B.-J. Yum, “Application of kernel principal com-
+ponent analysis to multi-characteristic parameter design problems,”
+Annals of Operations research, vol. 263, no. 1, pp. 69–91, 2018.
+[9] S. Robertson and H. Zaragoza, “The probabilistic relevance frame-
+work: BM25 and beyond,” Foundations and Trends in Information
+Retrieval, vol. 3, no. 4, pp. 333–389, 2009.
+[10] Y. Chen, S. Xiao et al., “Bge-M3 embedding: A multilingual, multi-
+function, multi-granularity text embedding model,” arXiv preprint
+arXiv:2409.10216, 2024.
+[11] G. V. Cormack, C. L. A. Clarke, and S. Buettcher, “Reciprocal rank
+fusion outperforms condorcet and individual rank learning methods,”
+in Proceedings of the 32nd International ACM SIGIR Conference on
+Research and Development in Information Retrieval, 2009, pp. 758–
+759.
+[12] S. Kim and S. Kim, “A hybrid prompt agent for maritime ais
+data analysis: performance optimization through query classification
+and dynamic routing,” Journal of the Korean Institute of Industrial
+Engineers-Vol, vol. 52, no. 2, pp. 163–175, 2026.
+[13] S. MacAvaney, A. Yates, A. Cohan, and N. Goharian, “Structured
+document retrieval for NLU,” in Proceedings of the 43rd International
+ACM SIGIR Conference on Research and Development in Information
+Retrieval, 2020.
+[14] H. Kim and H. Kim, “Contextual anomaly detection for high-
+dimensional data using dirichlet process variational autoencoder,” IISE
+Transactions, vol. 55, no. 5, pp. 433–444, 2023.
+[15] A. Ratner, S. H. Bach, H. Ehrenberg, J. Fries, S. Wu, and C. Ré,
+“Snorkel: Rapid training data creation with weak supervision,” in
+Proceedings of the VLDB Endowment, vol. 11, no. 3, 2017, pp. 269–
+282.
+[16] H.-M. Park, M.-A. Cheon, and J.-H. Kim, “Developing a model for
+predicting of ships accident using multi-task learning,” in Proceedings
+of the 32nd Annual Conference on Human and Cognitive Language
+Technology, 2020, pp. 179–183.
+[17] J. Y. Choi, “A study on the causes of marine accidents and prevention
+of marine accidents in vessels,” Cultural Interaction Studies of Sea
+Port Cities, vol. 25, pp. 337–359, 2021.
+[18] J. Lee, J. Kwak, Y. Oh, and S. Kim, “Quantifying incident impacts and
+identifying influential features in urban traffic networks,” Transport-
+metrica B: Transport Dynamics, vol. 11, no. 1, pp. 279–300, 2023.
+[19] X. Yan, J. Zhang, S. Fan, Z. Yang, and W. Wang, “Causation analysis
+of marine traffic accidents using deep learning approaches: A case
+study from china’s coasts,” Ocean Engineering, vol. 278, p. 114353,
+2023.
+[20] S. Moon, J. Kim, and H. Park, “Sequence labeling-based multi-
+ple causal relations extraction using pre-trained language model for
+maritime accident prevention,” in Proceedings of the 35th Annual
+Conference on Human and Cognitive Language Technology. HCLT,
+2023, pp. 101–108, korean Maritime Accident Reports corpus, multi-
+causal extraction.
+[21] B. Yoon, S. Park, H. Bae, and S. Sim, “Maritime safety tribunal
+ruling analysis using SentenceBERT,” Journal of the Korean Society
+of Marine Environment & Safety, vol. 29, no. 7, pp. 843–856, 2023.
+[22] J. Zhang, X. Yan, S. Fan, Z. Yang, and W. Wang, “Makg: A
+maritime accident knowledge graph for intelligent accident analysis
+and management,” Ocean Engineering, vol. 295, p. 119280, 2024.
+[23] Korea Maritime Safety Tribunal, “Korea maritime safety tribunal
+(kmst) website,” https://www.kmst.go.kr, data source of adjudication
+documents; portal landing site.
+[24] K. Lee, A. Gray, and H. Kim, “Dependence maps, a dimensionality
+reduction with dependence distance for high-dimensional data,” Data
+Mining and Knowledge Discovery, vol. 26, no. 3, pp. 512–532, 2013.
+[25] Korea Maritime Safety Tribunal, “Statistics of marine accidents,” https:
+//kmst.go.kr/eng/page.do?menuIdx=227, accessed: 2025-09-01.
+[26] L. Zheng, W.-L. Chiang, Y. Sheng, S. Zhuang et al., “Judging
+LLM-as-a-judge with MT-bench and chatbot arena,” arXiv preprint
+arXiv:2306.05685, 2023.
+[27] T. Yoon and H. Kim, “Uncertainty estimation by density aware
+evidential deep learning,” arXiv preprint arXiv:2409.08754, 2024.

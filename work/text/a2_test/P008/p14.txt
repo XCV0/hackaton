@@ -1,0 +1,93 @@
+Table 13: Type of entity and relation in the CRAG benchmark.
+Domain Type Content
+Finance
+Entity company_name, ticker_symbol, market_capitalization, earnings_per_share, price_to_earnings_ratio, datetime
+Relation
+get_company_ticker, get_ticker_dividends, get_ticker_market_capitalization, get_ticker_earnings_per_share,
+get_ticker_price_to_earnings_ratio, get_ticker_history_last_year_per_day,
+get_ticker_history_last_week_per_minute, get_ticker_open_price, get_ticker_close_price, get_ticker_high_price,
+get_ticker_low_price, get_ticker_volume, get_ticker_financial_information
+Sports
+Entity nba_team_name, nba_player, soccer_team_name, datetime_day, datetime_month, datetime_year
+Relation get_nba_game_on_date, get_soccer_previous_games_on_date, get_soccer_future_games_on_date, get_nba_team_win_by_year
+Music
+Entity artist, lifespan, song, release_date, release_country, birth_place, birth_date, grammy_award_count, grammy_year
+Relation
+grammy_get_best_artist_by_year, grammy_get_award_count_by_artist, grammy_get_award_count_by_song,
+grammy_get_best_song_by_year, grammy_get_award_date_by_artist, grammy_get_best_album_by_year,
+get_artist_birth_place, get_artist_birth_date, get_members, get_lifespan, get_song_author,
+get_song_release_country, get_song_release_date, get_artist_all_works
+Movie
+Entity actor, movie, release_date, original_title, original_language, revenue, award_category
+Relation act_movie, has_birthday, has_character, has_release_date, has_original_title, has_original_language, has_revenue, has_crew, has_job, has_award_winner, has_award_category
+Encyclopedia Entity encyclopedia_entity Relation get_entity_information
+The retrieved document is incorrect.
+Feedback: <<<{feedback on extracted entity
+and relation}>>>
+Question: <<<{question}>>>
+The retrieved document is incorrect. An-
+swer again based on newly extracted topic entities
+and useful relations. Is knowledge graph or text
+documents helpful to narrow down the search
+space? You must answer with either of them with
+no more than two words.
+The prompt of the validator is:
+You are a helpful, pattern-following assistant.
+<<<{examples for retrieval validation, 2 for each
+type of entity}>>>
+### Question: <<<{question}>>>
+### Document: <<<{content of document and
+reasoning paths}>>>
+### Task: Is the document aligned with the
+requirements of the question? Reply with only yes
+or no.
+The prompt of the commentor is:
+You are a helpful, pattern-following assistant.
+<<<{30 examples of action and feedback
+pair}>>>
+Question: <<<{question}>>>
+Topic Entities: <<<{extracted entities}>>>
+Useful Relations: <<<{extracted relations}>>>
+Please point out the wrong entity or relation
+extracted from the question, if there is any.
+CRAG The prompt of the router for the first
+decision making is:
+You are a helpful, pattern-following assistant.
+Given the following question, extract the infor-
+mation from the question as requested. Rules: 1.
+Each entity must exactly have one category in the
+parentheses. 2. Strictly follow the examples.
+<<<{examples of entity and relation extraction,
+5 for each domain}>>>
+### Question Type: simple, simple_w_condition,
+set, comparison, aggregation, multi_hop,
+post_processing, false_premise.
+### Question: <<<{question}>>>
+### Task: Which type is this question? Answer
+must be one of them.
+### Dynamism: real-time, fast-changing,
+slow-changing, static.
+### Question: <<<{question}>>>
+### Task: Which category of dynamism is this
+question? Answer with one word and the answer
+must be one of them.
+### Domain: music, movie, finance, sports,
+encyclopedia.
+### Question: <<<{question}>>>
+### Task: Which domain is this question from?
+Answer with one word and the answer must be
+one of them.
+Given the following question, based on the
+entity type and the relation type, extract the topic
+entities and useful relations from the question.
+Entity Type: <<<{entity types}>>>
+Relation Type: <<<{relation types}>>>
+Question: <<<{question}>>>
+### Reference Source: knowledge graph,
+text documents.
+### Question: <<<{question}>>>
+### Task: Based on the extracted entity, which
+reference source is useful to answer the question?
+You must pick one of them and answer with no
+more than two words.
+892

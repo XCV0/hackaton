@@ -1,0 +1,43 @@
+8 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+The seed instructions thus serve as a blueprint for generating a comprehensive
+and multi-dimensional financial dataset. By training the student model on these
+structured instruction–response pairs, the LLM learns to:
+1. Accurately extract and interpret quantitative metrics from textual disclo-
+sures.
+2. Contextualize these metrics within industry and temporal frames.
+3. Generate coherent narratives that explain the causes and implications of
+financial outcomes.
+In summary, earnings analysis seed instructions establish a consistent and in-
+terpretable framework for generating high-quality financial reasoning data. They
+ensure that the model learns not only to retrieve factual content but also to
+perform structured analysis—an essential step toward developing a retrieval-
+augmented financial LLM capable of producing explainable and analyst-like in-
+sights.
+4 Retrieval-Augmented Instruction Tuning Method
+This section describes our retrieval-augmented instruction tuning method and
+outlines how we construct a financially augmented large language model (LLM)
+through fine-tuning using general financial instruction data and retrieval-augmented
+financial reasoning data. The overall framework aims to enhance an LLM’s abil-
+ity to reason about financial information in context, improving its performance
+on document-grounded financial tasks.
+Retrieval Augmented Instruction Data Generation
+Domain-specific 
+Document Extract Text Chunking Embedding
+Financial 
+Question
+Vector 
+DB
+Embedding
+Relevant 
+Context
+Teacher 
+LLM
+Answer
+Domain Context Preparation
+Fig. 1: The retrieval-augmented instruction data generation workflow.
+In Fig. 1, we present the workflow of our retrieval-augmented instruction
+data generation and model fine-tuning methodology. The approach is designed to
+tightly couple context retrieval, instruction generation, and parameter-efficient
+fine-tuning. The method consists of two main components: (1) the retrieval-
+augmented instruction data generation process, and (2) the financially aug-
+mented LLM fine-tuning process.

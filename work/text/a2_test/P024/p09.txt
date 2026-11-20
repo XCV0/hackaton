@@ -1,0 +1,102 @@
+Baseline Experiment PaperTab FetaTab SciGraphQA SPIQA SlideVQA Average
+Text Ours 37.34 60.82 29.74 42.80 15.97 37.33 Prompt Ablation 33.29 58.81 30.16 37.81 13.32 34.68
+Vision Ours 42.01 61.89 31.12 43.28 66.82 49.02 Prompt Ablation 34.52 59.85 31.31 32.55 61.44 43.93
+VisDoMRAG
+Ours 44.11 63.28 31.36 44.09 67.22 50.01
+Prompt Ablation 38.34 62.65 27.85 36.75 64.33 45.98
+Early Fusion 37.37 61.29 27.94 33.45 58.12 43.63
+Table 5: Performance comparison of baseline ap-
+proaches with ablations on VisDoMBench.
+ployed in VisDoMRAG. Specifically, early fusion
+struggled to integrate visual and textual evidence ef-
+fectively, particularly in cross-modal reasoning, re-
+sulting in an average score of 43.63 across datasets.
+This limitation is likely due to the lack of indepen-
+dent processing for each modality, which led to
+weaker contextual understanding and reasoning. In
+contrast, late fusion—where each modality is pro-
+cessed independently before aggregating—proved
+more effective. This performance gap highlights
+the importance of preserving modality-specific rep-
+resentations before combining them, particularly
+when reasoning requires nuanced cross-modal evi-
+dence integration.
+Prompt Ablation: The ablation of our proposed
+prompting strategies also revealed the significance
+of Evidence Curation, Chain-of-Thought (CoT)
+prompting, and Reasoning Consistency. By re-
+placing these components with simplified prompts
+that employ a basic structure where the model di-
+rectly generates an answer based on the question
+and retrieved context, without leveraging evidence
+curation, chain-of-thought (CoT) prompting, or rea-
+soning consistency mechanisms. For instance, re-
+moving these prompting strategies led to an aver-
+age score drop from 37.33 to 34.68 in the text-only
+setting and from 49.02 to 43.93 in the vision-only
+setting, highlighting the importance of structured
+prompts.
+For the VisDoMRAG setting, prompt ablation
+led to an average performance reduction from 50.01
+to 45.98, with the most notable declines observed
+in datasets requiring complex reasoning, such as
+SPIQA and SlideVQA. The simplified prompts ap-
+peared insufficient for handling the intricacies of
+cross-modal evidence alignment and aggregation,
+leading to degraded performance in these scenar-
+ios.
+8 Conclusion and Future Work
+In this work, we introduced VisDoMBench, the first
+QA dataset designed to evaluate multi-document
+systems incorporating visually rich elements such
+as tables, charts, and slides. By targeting docu-
+ments that require both textual and visual com-
+prehension, VisDoMBench offers a novel bench-
+mark to assess the capability of multimodal re-
+trieval systems. We also presented VisDoMRAG, a
+multimodal Retrieval-Augmented Generation ap-
+proach that fuses visual and textual pipelines us-
+ing consistency-constrained modality fusion. This
+method demonstrated a significant improvement
+over traditional long context, textual, and visual
+RAG by 12-20%. While the current work focuses
+on RAG in multimodal multi-doc settings, future
+work will extend this approach to include reasoning
+through end-to-end trained models, especially in
+low-resource settings.
+9 Ethics Statement
+We use publicly available datasets in this research.
+The identities of human evaluators remain confi-
+dential, and no personally identifiable information
+(PII) is used at any stage of our experiments. Our
+work is solely intended for document QA applica-
+tions. For a deeper understanding of potential risks
+and mitigation strategies in LLM safety, we direct
+users to relevant works by (Kumar et al., 2024; Cui
+et al., 2024; Luu et al., 2024).
+10 Limitations
+Despite the advancements presented in this study,
+several limitations warrant consideration:
+(1) Text Extraction and Document Parsing:
+A key argument for the efficacy of visual re-
+trieval methods is the elimination of text extrac-
+tion and document parsing pipelines (Faysse et al.,
+2024). However, our approach retains this over-
+head, which may introduce additional complexity
+and processing time.
+(2) Multiple LLM calls: Our methodology neces-
+sitates multiple LLM calls; specifically, we make
+three LLM calls per query. While this approach
+may not be optimal, it is still more cost-effective
+than utilizing long-context models.
+(3) Hallucinations: As with all works involving
+large language models (LLMs), our approach is
+subject to inherent limitations related to AI safety
+and the risk of hallucination. These issues can
+affect the reliability and accuracy of the generated
+outputs and underscore safety risks, highlighting
+the need for ongoing research and refinement in the
+field of AI to mitigate these challenges.
+Additionally, unlike previous visual QA research,
+which typically required models to answer ques-
+6096

@@ -1,0 +1,81 @@
+Figure 2: Benchmark Construction Pipeline
+robustness, nor a dedicated RAG robustness bench-
+mark—especially for multi-modal retrieval. In con-
+trast, we leverage LLMs to generate multi-level
+query rephrasing, enabling structured comparative
+evaluation for multi-modal documents retrieval.
+2.4 Multi-Modal Retrieval Benchmarks
+Despite the growing importance of document re-
+trieval in multi-modal RAG systems, only a few
+evaluation benchmarks exist, all of which fall short
+in key aspects crucial for real-world scenarios. We
+review recent efforts and highlight their limitations
+(with further comparison in Table 1 and section 4).
+While many question-answering benchmarks ex-
+ist (Mathew et al., 2021; Zhu et al., 2022; Masry
+et al., 2022; Islam et al., 2023; Ding et al., 2024),
+they are largely unsuitable for RAG. Their queries
+assume exposure to a specific page (unlike RAG),
+and their tendency toward high variability make re-
+trieval easier. Some benchmarks, such as MMLong-
+Bench (Ma et al., 2024b) (based on 130 lengthy
+PDFs) and SlideVQA (Tanaka et al., 2023), are
+partially relevant but not suited for RAG (see sec-
+tion 4).
+A notable benchmark is WIKI-SS-NQ (Ma et al.,
+2024a), generated from Wikipedia screenshots with
+real human queries—the only dataset providing
+mostly valid retrieval queries. However, it is not
+multi-modal benchmark, consists of mainly text-
+based documents, and has narrow sub-domain cov-
+erage. The ViDoRe benchmark (Faysse et al.,
+2024), introduced in the ColPali paper, comprises
+both QA datasets and domain-specific documents
+with generated queries filtered by human annota-
+tors. While the QA datasets are unsuitable for
+RAG, the domain-specific queries are better tai-
+lored but suffer from trivial difficulty (e.g., syn-
+thetic datasets reporting an NDCG@5 > 95). This
+occurs because pages often differ significantly, and
+VLM-generated questions closely mirror the origi-
+nal page wording, making retrieval easy.
+Our REAL-MM-RAG-Bench is the first multi-
+modal retrieval benchmark incorporating all essen-
+tial properties for real-world RAG. It features a
+challenging setup with broad sub-domain coverage,
+long documents, RAG-tailored rephrased queries,
+and accurate labeling. Additionally, it is the first
+to offer a robustness evaluation through multi-level
+query rephrasing.
+3 REAL-MM-RAG-Bench
+Creating a high-quality benchmark manually is
+both exhaustive and error-prone, limiting its size
+and reliability. To address this, we propose an au-
+tomated generation and verification pipeline tai-
+lored for Retrieval-Augmented Generation (RAG)
+evaluation. Our benchmark introduces robustness
+evaluation through multi-level query rephrasing,
+further improving upon previous benchmarks. The
+benchmark construction begins with document col-
+lection, followed by four key steps: (1) Query
+Generation, (2) Query Verification, (3) Query
+Rephrasing, and (4) False Negative Verification.
+3.1 Document Collection
+To reflect real-world retrieval challenges, we fo-
+cus on long documents rather than isolated pages,
+and also ensuring many pages within the same
+sub-domain by focusing on a single company data
+(IBM). Our dataset consists of 8000 pages across
+four sub-domains, forming four specialized bench-
+marks (see Table S1 for details). For each page, we
+added the document name to the page image to pro-
+vide context. FinReport: Financial reports (2005–
+2023), totaling 19 documents and 2687 pages, with
+a mix of text and tables. FinSlides: Quarterly fi-
+nancial presentations (2008–2024), totaling 65 pre-
+sentations and 2280 pages, primarily table-heavy.
+TechReport: 17 Technical documents on FlashSys-
+tem, totaling 1674 pages, text-heavy with visual
+elements and tables. TechSlides: 62 Technical pre-
+sentations on business and IT automation, totaling
+31663

@@ -1,0 +1,105 @@
+CORAL: Adaptive Retrieval Loop for Culturally-Aligned
+Multilingual RAG
+Nayeon Lee♣*†, Jiwoo Song⋄∗, Byeongcheol Kang⋄∗
+♣Naver, ⋄Samsung Research
+nayeonly.lee@navercorp.com, {jiwoooo.song, bc1.kang}@samsung.com
+Abstract
+Multilingual retrieval-augmented generation
+(mRAG) is often implemented within a fixed
+retrieval space, typically via query or document
+translation or multilingual embedding vector
+representations. However, this approach may
+be inadequate for culturally grounded queries,
+in which retrieval-condition misalignment may
+occur. Even strong retrievers and generators
+may struggle to produce culturally relevant an-
+swers when sourcing evidence from inappro-
+priate linguistic or regional contexts. To this
+end, we introduce CORAL (COntext-aware
+Retrieval with Agentic Loop, an adaptive re-
+trieval methodology for mRAG that enables
+iterative refinement of both the retrieval space
+(corpora) and the retrieval probe (query) based
+on the quality of the evidence. The overall
+process includes: (1) selecting corpora, (2) re-
+trieving documents, (3) critiquing evidence for
+relevance and cultural alignment, and (4) check-
+ing sufficiency. If the retrieved documents are
+insufficient to answer the query correctly, the
+system (5) reselects corpora and rewrites the
+query. Across two cultural QA benchmarks,
+CORAL achieves up to a 4%p accuracy im-
+provement on low-resource languages relative
+to the strongest baselines.
+1 Introduction
+Retrieval-augmented generation (RAG) improves
+factual grounding by incorporating external knowl-
+edge at inference time, without retraining the lan-
+guage model (Lewis et al., 2020; Ovadia et al.,
+2024). Multilingual RAG (mRAG) extends this
+paradigm to support linguistically diverse queries,
+commonly through query translation or multilin-
+gual dense retrieval in shared embedding spaces
+(Liu et al., 2025b; Zhang et al., 2023; Chirkova
+et al., 2024). These approaches improve linguis-
+tic coverage, but typically assume fixed retrieval
+conditions.
+*Equal contribution.
+†Work done at Samsung Research.
+Query
+Relevance: 4, Usefulness: 2,
+Specificity: 2, Compatibility: 3
+Total Score:  9     7.5 4 8 2.5
+3) Document 
+Validation
+Filtered Docs
+Query + Docs
+Critique
+1) Initial
+Corpus Selection
+5) Corpus Reselection
+& Query Rewrite
+Retrieved Docs
+Planner
+Corpus
+en
+ ko
+ zh
+ bn
+…
+Critic
+…
+4) Sufficiency Check
+Enough 
+✅
+Enough 
+❌
+Generator
+Answer: C
+2) Document Retrieval
+… discusses Korean tourism, which is loosely related …
+Q) 다음은한국의문화와전통에대한문제이다. 명절이되면
+어디로가는사람들이많은가?
+(The following is a question about Korean culture and 
+traditions. Where do many people go during the 
+traditional holidays?)
+A: 해외 B: 대도시 C: 고향 D: 산골
+(abroad)        (a major city)    (hometown)  (rural village)
+Figure 1: Overview of CORAL. At test time, CORAL
+performs feedback-driven retrieval control: (1) a plan-
+ner selects culturally/linguistically relevant corpora, (2)
+retrieves top-K documents, (3) a critic scores and filters
+them, (4) checks evidence sufficiency, and if needed, (5)
+revises corpus selection and rewrites the retrieval query
+based on the critique before iterating and generating.
+However, mRAG systems often struggle with
+culturally or regionally grounded queries, where
+factual correctness depends on local institutions,
+conventions, or culturally specific terminology. In
+such cases, systems retrieve evidence that is se-
+mantically relevant yet culturally misaligned, yield-
+ing answers that are formally correct but pragmat-
+ically inaccurate (Longpre et al., 2021; Li et al.,
+2024; Cruz Blandón et al., 2025). This failure
+mode is commonly driven by globally aggregated
+corpora that underrepresent locale-specific knowl-

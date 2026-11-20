@@ -1,0 +1,94 @@
+Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 879–893
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+HYBGRAG: Hybrid Retrieval-Augmented Generation on Textual and
+Relational Knowledge Bases
+Meng-Chieh Lee1,* , Qi Zhu2,† , Costas Mavromatis2, Zhen Han2, Soji Adeshina2,
+Vassilis N. Ioannidis2,†, Huzefa Rangwala2, Christos Faloutsos1,2,†
+1Carnegie Mellon University, 2Amazon
+{mengchil,christos}@cs.cmu.edu,
+{qzhuamzn,mavrok,zhenhz,adesojia,ivasilei,rhuzefa}@amazon.com
+Abstract
+Given a semi-structured knowledge base
+(SKB), where text documents are intercon-
+nected by relations, how can we effectively re-
+trieve relevant information to answer user ques-
+tions? Retrieval-Augmented Generation (RAG)
+retrieves documents to assist large language
+models (LLMs) in question answering; while
+Graph RAG (GRAG) uses structured knowl-
+edge bases as its knowledge source. However,
+many questions require both textual and rela-
+tional information from SKB — referred to as
+“hybrid” questions — which complicates the
+retrieval process and underscores the need for
+a hybrid retrieval method that leverages both
+information. In this paper, through our empiri-
+cal analysis, we identify key insights that show
+why existing methods may struggle with hybrid
+question answering (HQA) over SKB. Based
+on these insights, we propose HYBGRAG for
+HQA, consisting of a retriever bank and a critic
+module, with the following advantages: (1)
+Agentic, it automatically refines the output by
+incorporating feedback from the critic module,
+(2) Adaptive, it solves hybrid questions requir-
+ing both textual and relational information with
+the retriever bank, (3) Interpretable, it justi-
+fies decision making with intuitive refinement
+path, and (4) Effective, it surpasses all base-
+lines on HQA benchmarks. In experiments on
+the STARK benchmark, HYBGRAG achieves
+significant performance gains, with an average
+relative improvement in Hit@1 of 51%.
+1 Introduction
+Retrieval-Augmented Generation (RAG) (Lewis
+et al., 2020; Guu et al., 2020) enables large lan-
+guage models (LLMs) to access the informa-
+tion from an unstructured document database.
+This allows LLMs to address unknown facts and
+solve Open-Domain Question Answering (ODQA)
+with additional textual information. Graph RAG
+*The work is done while being an intern at Amazon.
+†Corresponding authors.
+(GRAG) has extended this concept by retrieving in-
+formation from structured knowledge bases, where
+documents are interconnected by relationships. Ex-
+isting GRAG methods focus on two directions:
+extracting relational information from knowledge
+graphs (KGs) and leveraging LLMs for Knowledge
+Base Question Answering (KBQA) (Yasunaga
+et al., 2021; Sun et al., 2024; Jin et al., 2024; Mavro-
+matis and Karypis, 2024), and building relation-
+ships between documents in the database to im-
+prove ODQA performance (Li et al., 2024a; Dong
+et al., 2024; Edge et al., 2024).
+Recently, an emerging problem concentrates on
+“hybrid” question answering (HQA), where a ques-
+tion requires both relational and textual information
+to be answered correctly, given a semi-structured
+knowledge base (SKB) (Wu et al., 2024b). SKB
+consists of a structured knowledge base, i.e., knowl-
+edge graph (KG), and unstructured text documents,
+where the text documents are associated with en-
+tities of KG. In Fig. 1 top, an example of hybrid
+questions is given, which involves both the textual
+aspect (paper topic) and the relational aspect (paper
+author), and SKBs are the cylinders.
+Nevertheless, through our empirical analysis, we
+uncover two critical insights showing that exist-
+ing methods that perform RAG or GRAG cannot
+effectively tackle HQA, which requires a synergy
+between the two retrieval methods. First, they fo-
+cus solely on retrieving either textual or relational
+information. As shown in Fig. 1(a) and (b), this lim-
+itation reduces their applicability when the synergy
+between the two modalities is required. Second, in
+hybrid questions, the aspects required to retrieve
+different types of information may not be easily
+distinguishable. In Fig. 1(c), question routing (Li
+et al., 2024b) is performed to identify the aspects of
+the question. However, in an unsuccessful routing,
+confusion between the textual aspect “nanofluid
+heat transfer papers” and the relational aspect “by
+John Smith”, leads to incorrect retrieval.
+879

@@ -1,0 +1,101 @@
+Chengen Huang, Chenxu Lv, Chujie Zheng, Day-
+iheng Liu, Fan Zhou, Fei Huang, Feng Hu, Hao
+Ge, Haoran Wei, Huan Lin, Jialong Tang, and 41
+others. 2025. Qwen3 technical report. Preprint,
+arXiv:2505.09388.
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio,
+William Cohen, Ruslan Salakhutdinov, and Christo-
+pher D. Manning. 2018. HotpotQA: A dataset for
+diverse, explainable multi-hop question answering.
+In Proceedings of the 2018 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+2369–2380, Brussels, Belgium. Association for Com-
+putational Linguistics.
+Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak
+Shafran, Karthik Narasimhan, and Yuan Cao. 2023.
+ReAct: Synergizing reasoning and acting in language
+models. In International Conference on Learning
+Representations (ICLR).
+Zijun Yao, Weijian Qi, Liangming Pan, Shulin Cao,
+Linmei Hu, Weichuan Liu, Lei Hou, and Juanzi Li.
+2024. Seakr: Self-aware knowledge retrieval for
+adaptive retrieval augmented generation. Preprint,
+arXiv:2406.19215.
+Wenhao Yu, Dan Iter, Shuohang Wang, Yichong Xu,
+Mingxuan Ju, Soumya Sanyal, Chenguang Zhu,
+Michael Zeng, and Meng Jiang. 2023. Generate
+rather than retrieve: Large language models are
+strong context generators. In International Confer-
+ence for Learning Representation (ICLR).
+A Implementation Details and
+Hyperparameters
+System Overview and Infrastructure. Our im-
+plementation is built upon the Hugging Face
+transformers and trl libraries. All experiments
+are conducted on NVIDIA A100-80G GPUs. For
+the retrieval component, we employ a recursive
+character splitting strategy (chunk size=200, over-
+lap=20) and index the corpus using a FAISS vec-
+tor store. During inference, we retrieve the top-k
+(k = 5) documents based on cosine similarity.
+Model Architectures. The core components of
+LCR-RAG are instantiated as follows:
+• Generator: We use a frozen Qwen3-8B as the
+backbone for generation.
+• Policy Network: The PPO value head
+is a 3-layer MLP with hidden dimensions
+[256, 128, 64] and ReLU activations.
+• Dynamic Router: A distilled
+BERT-base-uncased model serves as
+the router, taking 12 linguistic features
+concatenated with the query embedding.
+• Neuro-Symbolic Verifier (NSV): We utilize
+DeBERTa-v3-large for Natural Language In-
+ference (NLI) to verify claim entailment. The
+semantic parser is a T5-large model fine-
+tuned to translate natural language claims into
+RDF triples.
+Component Parameter Value
+PPO Optimizer Discount Factor (γ) 0.99
+Learning Rate (α) 1 × 10−4
+Batch Size 128
+PPO Clip Epsilon (ϵ) 0.2
+GAE Lambda (λ) 0.95
+Reward Function Logic Weight (wl) 0.4
+Factual Weight (wf ) 0.6
+Step Cost (Ccost) 0.01
+Dynamic Router Architecture Distilled BERT
+Learning Rate 2 × 10−5
+Confidence Threshold (τ) 0.5
+NSV Modules NLI Threshold (τentail) 0.9
+Parser Model T5-large
+Fine-tuning Epochs 3
+Table 3: Detailed hyperparameters for the LCR-RAG
+framework, including PPO optimization settings, reward
+coefficients, and threshold configurations for the auxil-
+iary modules.
+Feature Extraction for Routing. To efficiently
+route queries to the appropriate processing lane
+(FAST, STANDARD, or DEEP) without heavy
+computation, we extract a feature vector Φ(q) ∈
+R12. As detailed in Table 4, these features are
+categorized into three groups: Core Complexity
+(indicating reasoning depth), Structural & Syn-
+tactic (quantifying linguistic intricacy via depen-
+dency parsing), and Semantic Intent (classifying
+specific reasoning types like temporal or compara-
+tive logic).
+Training and Hyperparameters. The Dynamic
+Router is trained using standard cross-entropy loss.
+The NSV components (T5 parser) are fine-tuned for
+3 epochs on a mixture of WebNLG and synthetic
+data. The PPO agent is trained using the AdamW
+optimizer. We report the detailed hyperparame-
+ters used for the PPO optimizer, reward function
+configuration, and auxiliary models in Table 3.
+B The Datalog Rule Base
+Our Datalog knowledge base consists of approx-
+imately 150 manually curated rules designed to
+capture high-impact inconsistency patterns.
+Rule Categories.
+17910

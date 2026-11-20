@@ -1,0 +1,105 @@
+Algorithm 2: Graph Weighting Algorithm
+Input : KG(V, E): The indexed KG;
+F: A set of query-mapped triplet facts in KG;
+q: The vector representation of the query q.
+Output: KG(V, E, SV , CE ): The weighted KG.
+1 Assign node weights SV with PPR score w.r.t. F
+based on Equation (10): s ← limi→∞ PPRi;
+2 for e(u,v) ∈ E do
+3 Assign edge costs ce(u,v) based on Equation (14):
+ce(u,v) ← (1 − MS(q, fe(u,v) ))/2;
+4 CE ← CE ∪ {ce(u,v) };
+5 return KG(V, E, SV , CE );
+and we have the node score set SV = {s[v]|v ∈ V}. To align
+with [29], we set the damping factor d to 0.5, and converge
+the PPR calculation when it changes less than 10−7; p ∈ R|V|
+denotes the personalization vector that depends on the mapped
+triples F:
+p[u] =
+(
+1, if u ∈ F ,
+0, otherwise. (11)
+The P ∈ R|V×V| in Equation (10) denotes the transition
+probability matrix, and can be obtained by:
+P[u][v] =
+( 1
+|N (u)| , if e(u,v) ∈ E,
+1
+|V| , otherwise, (12)
+where N (u) denotes the 1-hop neighbor set of node u in
+the KG. To ensure the PPR’s faster convergence and more
+stable iterative computation [76], as well as normalizing the
+score distribution [77]. Following [29], we set the transition
+probability for non-edges to 1 |V| , and after calculating the PPR
+score, we multiply the PPR score of all passage nodes by a
+balance factor 0.05, to avoid over concentration on them. After
+that, we can obtain the node influence score sv for each node
+v ∈ V as follows:
+sv = s[v], ∀v ∈ V. (13)
+At last, we calculate the edge cost CE based on the similarity
+between query q’s representation q and relation edge e(u,v)’s
+respective triplet facts fe(u,v) ’s representation fe(u,v) :
+CE = {ce(u,v) | e(u,v) ∈ E}, ce(u,v) = 1 − MS(q, fe(u,v) ) 2 . (14)
+Moreover, to guarantee the KG’s connectivity, we connect
+all passage nodes to a pseudo node, with the pseudo edge (re-
+lation) namely pseudo relation, and the cost of these pseudo
+edges is set to 10 to penalize paths through the pseudo node,
+aligning with the setting of HippoRAG2 [29].
+Next, we introduce the Minimum Cost Maximum Influence
+(MCMI) subgraph generation problem, which can provide
+more comprehensive reasoning chains and result in more
+comprehensive answers in tasks that require knowledge sum-
+marization. According to Figure 2, the MCMI subgraph can in-
+clude cyclic graph structures to cover key query related triples
+(colored in orange), which are not covered by simple node
+matching or Steiner tree, hence address the Poor Reasoning
+Ability and Inadequate Answer issue of current Graph-based
+RAG models. Here, we give a formal definition of the MCMI
+subgraph generation problem:
+Definition 1 (Minimum Cost Maximum Influence Subgraph
+Generation Problem). Given a node-weighted and edge-
+weighted, connected graph G(V, E, SV , CE ) and a set of
+mapped triples F, let Vterm be the set of nodes in F, called
+terminals. Let r ∈ Vterm be a designated root terminal. The
+goal is to generate a subgraph GMCMI(V ′, E ′, S ′ V , C′ E ) that
+contains all terminals Vterm such that every terminal v ∈ Vterm
+is reachable from root terminal r, while minimizing the total
+cost-score ratio r(GMCMI):
+r(GMCMI) =
+X
+e(u,v) ∈E ′
+ce(u,v)
+su + sv
+, (15)
+where sv = s[v] denotes the Personalized PageRank (PPR)
+score of node v, as defined in Equation (10), and ce(u,v)
+represents the edge cost of e(u,v), as defined in Equation (14).
+By minimizing the cost-score ratio in Equation (15), we
+can ensure the generated subgraph maximizes the inclusion of
+high-influence, query-relevant nodes while strictly penalizing
+low-similarity connections to effectively filter out noise.
+Theorem 1. The MCMI subgraph generation is NP-hard.
+Proof Sketch. We establish NP-hardness by constructing a
+bijection between the MCMI problem and the classic Steiner
+Tree problem via a transformed weight function. Due to
+the space limitation, we put our proof at https://github.com/
+Wyb0627/AGRAG/blob/main/proof.pdf.
+Since the MCMI Subgraph Generation problem is NP-hard,
+it is infeasible to obtain the optimal result in polynomial time.
+Therefore, we propose a greedy algorithm (Algorithm 3) based
+on the Mehlhorn’s algorithm [78] to solve this problem.
+To begin with, we initialize the MCMI as the Minimum
+Cost Steiner Tree (MCST) through all mapped triplet facts F
+in the weighted graph G(V, E, SV , CE ) (line 1 to line 10 of
+Algorithm 3), where score sv ∈ SV of each node v, and cost
+ce(u,v) ∈ CE of each edge e are obtained with Equation (13)
+and Equation (14), respectively:
+GMCMI(VMCMI, EMCMI) = MCST(F , G), (16)
+where MCST(F , G) denotes the Minimum Cost Steiner tree
+generation algorithm.
+Next, we calculate the ratio of the edges’ cost and their
+connected nodes’ influence score (i.e., c/s), and check this
+ratio of all nodes in the current MCMI’s 1-hop neighborhood
+N (GMCMI), if this ratio is less than that of the current MCMI
+subgraph’s total cost-score ratio, we add this node (entity) and
+the corresponding edge (relation) to the MCMI, recalculate the

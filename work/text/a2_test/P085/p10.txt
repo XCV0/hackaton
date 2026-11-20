@@ -1,0 +1,96 @@
+Hao Sun, Zhexin Zhang, Jiawen Deng, Jiale Cheng, and
+Minlie Huang. 2023. Safety assessment of chinese
+large language models.
+Jiejun Tan, Zhicheng Dou, Yutao Zhu, Peidong Guo,
+Kun Fang, and Ji-Rong Wen. 2024. Small models,
+big insights: Leveraging slim proxy models to decide
+when and what to retrieve for llms. In Proceedings
+of the 62nd Annual Meeting of the Association for
+Computational Linguistics, pages 4420–4436.
+Gemini Team, Rohan Anil, Sebastian Borgeaud, and
+so on. 2024. Gemini: A family of highly capable
+multimodal models. In arxiv:2312.11805.
+Zhengren Wang, Qinhan Yu, Shida Wei, Zhiyu Li, Feiyu
+Xiong, Xiaoxing Wang, Simin Niu, Hao Liang, and
+Wentao Zhang. 2024. Qaencoder: Towards aligned
+representation learning in question answering system.
+Jiaxin Wen, Pei Ke, Hao Sun, Zhexin Zhang, Chengfei
+Li, Jinfeng Bai, and Minlie Huang. 2023. Unveil-
+ing the implicit toxicity in large language models.
+In Proceedings of the 2023 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+1322–1338.
+Kevin Wu, Eric Wu, and James Zou. 2024a. Clasheval:
+Quantifying the tug-of-war between an llm’s internal
+prior and external evidence. In arxiv:2404.10198.
+Siye Wu, Jian Xie, Jiangjie Chen, Tinghui Zhu, Kai
+Zhang, and Yanghua Xiao. 2024b. How easily do
+irrelevant inputs skew the responses of large language
+models? In arxiv:2404.03302.
+Chong Xiang, Tong Wu, Zexuan Zhong, David Wagner,
+Danqi Chen, and Prateek Mittal. 2024. Certifiably
+robust rag against retrieval corruption.
+Rongwu Xu, Zehan Qi, Zhijiang Guo, Cunxiang
+Wang, Hongru Wang, Yue Zhang, and Wei Xu.
+2024. Knowledge conflicts for llms: A survey. In
+arxiv:2403.08319.
+Penghao Zhao, Hailin Zhang, Qinhan Yu, Zhengren
+Wang, Yunteng Geng, Fangcheng Fu, Ling Yang,
+Wentao Zhang, and Bin Cui. 2024. Retrieval-
+augmented generation for ai-generated content: A
+survey.
+Zexuan Zhong, Ziqing Huang, Alexander Wettig, and
+Danqi Chen. 2023. Poisoning retrieval corpora by
+injecting adversarial passages. In Proceedings of the
+2023 Conference on Empirical Methods in Natural
+Language Processing, EMNLP, pages 13764–13775.
+Wei Zou, Runpeng Geng, Binghui Wang, and Jinyuan
+Jia. 2024. Poisonedrag: Knowledge poisoning at-
+tacks to retrieval-augmented generation of large lan-
+guage models. In arxiv:2402.07867.
+A Appendix
+A.1 Potential Risks
+By standardizing a security evaluation framework,
+SafeRAG may inadvertently assist adversaries in
+understanding how RAG is tested, allowing them
+to designmore evasive attack strategies that exploit
+weaknesses beyond the scope of current evalua-
+tions. This highlights the need for continuously up-
+dating attack methodologies and expanding RAG
+security evaluation techniques.
+A.2 Ethical Considerations
+SafeRAG does not collect or use personally identi-
+fiable information (PII) or offensive content. The
+dataset is built from publicly available news ar-
+ticles and open-source knowledge bases, explic-
+itly excluding any sensitive or restricted sources.
+Designed for academic and security research,
+SafeRAG focuses on improving RAG robustness
+without involving user-generated or proprietary
+data. By adhering to strict data integrity and ethi-
+cal standards, SafeRAG ensures a responsible and
+secure benchmark for evaluating RAG security.
+A.3 Preliminaries and Definitions
+A.3.1 RAG Pipeline
+Let q denote the query, i the instruction for the
+LLM, and Cb the knowledge base that comprises
+all available documents. For effective integration of
+external knowledge with the LLM’s generative ca-
+pabilities in the answering process, a RAG pipeline
+typically includes three primary modules: a re-
+triever R, a filter F , and a generator G.
+First, given the query q and the knowledge base
+Cb, the retriever R returns the k most relevant
+contexts for query q:
+Ck r = R(q, Cb) = (c1 r , c2 r , . . . , ck r ).
+Next, to further refine these retrieved contexts,
+the filter F picks or compresses Ck r to derive con-
+texts that are highly relevant to the query:
+Cm f = F (q, Cm r ) = (c1 f , c2 f , . . . , cm f ),
+where m ≤ k. Finally, the generator G combines
+the instruction i, the query q, and the filtered con-
+texts Cm f by concatenating them (denoted by ⊕)
+into a unified prompt, which is then fed into the
+LLM to generate the final answer:
+r = G(i, q, C m f ) = LLM(i ⊕ q ⊕ c1 f ⊕ · · · ⊕ cm f ).
+4618

@@ -1,0 +1,91 @@
+that contrast weak models’ logits to guide a strong
+model are also considered weak-to-strong (Fan
+et al., 2024).
+Our distinction Our distinction is unifying RAG
+objectives, without costly large-model updates, re-
+alizing weak-to-strong generalization by activating
+only the objectives that benefit each task. GRAD,
+by aggregating seemingly weak contrastive signals
+from 1B models, can effectively improve much
+larger models (8B and 70B).
+3 Method
+3.1 Decoding Objectives
+We begin by introducing basic notations and for-
+mally describing the token-level decoding objec-
+tives. An autoregressive language model has been
+typically trained to maximize the data likelihood,
+learning to predict the next token probability given
+the prefix of token sequences. The model achieves
+this by calculating a probability distribution over
+possible next tokens. The output probability distri-
+bution at each time step t is typically obtained by
+applying softmax to raw outputs, or logits,
+p(· | y<t) = softmax(fθ,t), (1)
+where fθ,t = [f (yt | y<t; θ)]yt∈V represents the log-
+its produced by the model θ for each token in the
+vocabulary V. While it is widespread to empiri-
+cally adjust the sharpness of the distribution with a
+temperature T as follows,
+p(· | y<t) = softmax(fθ,t/T ), (2)
+we omit T for presentation brevity.
+Decoding sequences from these probabilities in-
+volves sampling strategies, such as unbiased sam-
+pling or approximate MAP decoding (e.g., greedy
+or beam search), all of which aim to recover the
+most desirable sequence from probabilities.
+3.2 Guided Decoding
+Alternatively, external reward, or guidance terms R
+can explicitly guide the generation process, towards
+optimizing a target objective. A generalized form
+of this approach from external guidance score Rt
+can be expressed as
+p(· | y<t) = softmax(ft + γRt), (3)
+where γ is a hyperparameter controlling the influ-
+ence of the external signal on shifting the base
+logits from the LLM at time step t, ft. Then, the
+combined score is converted to probability distri-
+bution over the vocabulary V by applying softmax.
+However, training token-level reward, compared to
+trajectory-level is known to be tricky, due to sparse
+supervisory signals (Xu et al., 2025; Rashid et al.,
+2025).
+3.3 GRAD: Generalizing RAG with Decoding
+Instead of training a reward model that outputs Rt
+at each time step t, we derive guidance signals from
+logit differences between models to contrast:
+Rt = f + t − f − t . (4)
+With this general template, we describe how the
+three RAG strategies, MS, DA and DB can be trans-
+ferred and unified into decoding objectives as be-
+low.
+MS Contrastive decoding (CD) contrasts predic-
+tions from a larger model θl and a smaller model θs,
+to extrapolate towards a hypothetical infinite-sized
+model θ∞. The contrastive logits for computing
+the guidance terms in Eq. 4 are given as
+f + t = f ( yt ⏐⏐⏐ y<t; θl ) ,
+f − t = f (yt | y<t; θs) . (5)
+In our setting, θl is set as the base LLM, θ, while θs
+is chosen as a smaller model from the same model
+family. As outlined earlier CD objective of GRAD
+in Eq. 5 aims to simulate a hypothetical large LLM
+by extrapolating the base model’s prediction away
+from that of the small model’s. This formulation is
+slightly different from the original definition by Li
+et al. (2023), which is discussed in more detail in
+Appendix B.
+DA Proxy tuning (Liu et al., 2024a) identifies
+and transfers the benefits of finetuning using small
+models, instead of directly finetuning a large one:
+f + t = f (yt | y<t; θs ft) ,
+f − t = f (yt | y<t; θs) , (6)
+where θs is a small base model, and θs ft is its
+finetuned version. While prior work focused on
+surface-level attributes like toxicity (Liu et al.,
+2021), our approach captures and transfers for RAG
+adaptation (Zhang et al., 2024).
+In private, domain-specific RAG settings, a well-
+aligned training dataset D for DA that matches the
+test distribution can be absent. We contrast and
+show robustness in such scenarios in later sections.
+45276

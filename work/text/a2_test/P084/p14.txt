@@ -1,0 +1,109 @@
+Jia Xu, Tianyi Wei, Bojian Hou, Patryk Orzechowski,
+Shu Yang, Ruochen Jin, Rachael Paulbeck, Joost Wa-
+genaar, George Demiris, and Li Shen. 2025a. Men-
+talchat16k: A benchmark dataset for conversational
+mental health assistance. In Proceedings of the 31st
+ACM SIGKDD Conference on Knowledge Discovery
+and Data Mining V. 2, pages 5367–5378.
+Ran Xu, Hui Liu, Sreyashi Nag, Zhenwei Dai, Yaochen
+Xie, Xianfeng Tang, Chen Luo, Yang Li, Joyce C
+Ho, Carl Yang, et al. 2025b. Simrag: Self-improving
+retrieval-augmented generation for adapting large lan-
+guage models to specialized domains. In Proceed-
+ings of the 2025 Conference of the Nations of the
+Americas Chapter of the Association for Computa-
+tional Linguistics: Human Language Technologies
+(Volume 1: Long Papers), pages 11534–11550.
+An Yang, Anfeng Li, Baosong Yang, Beichen Zhang,
+Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao,
+Chengen Huang, Chenxu Lv, et al. 2025a. Qwen3
+technical report. arXiv preprint arXiv:2505.09388.
+Chening Yang, Duy-Khanh Vu, Minh-Tien Nguyen,
+Xuan-Quang Nguyen, Linh Nguyen, and Hung Le.
+2025b. Superrag: Beyond rag with layout-aware
+graph modeling. In Proceedings of the 2025 Confer-
+ence of the Nations of the Americas Chapter of the
+Association for Computational Linguistics: Human
+Language Technologies (Volume 3: Industry Track),
+pages 544–557.
+Shi Yu, Chaoyue Tang, Bokai Xu, Junbo Cui, Junhao
+Ran, Yukun Yan, Zhenghao Liu, Shuo Wang, Xu Han,
+Zhiyuan Liu, et al. 2025. Visrag: Vision-based
+retrieval-augmented generation on multi-modality
+documents. In International Conference on Learning
+Representations, volume 2025, pages 21074–21098.
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q
+Weinberger, and Yoav Artzi. 2019. Bertscore: Eval-
+uating text generation with bert. arXiv preprint
+arXiv:1904.09675.
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan
+Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin,
+Zhuohan Li, Dacheng Li, Eric Xing, et al. 2023.
+Judging llm-as-a-judge with mt-bench and chatbot
+arena. Advances in neural information processing
+systems, 36:46595–46623.
+Rongzhi Zhu, Xiangyu Liu, Zequn Sun, Yiwei Wang,
+and Wei Hu. 2025. Mitigating lost-in-retrieval prob-
+lems in retrieval augmented multi-hop question an-
+swering. In Proceedings of the 63rd Annual Meeting
+of the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), pages 22362–22375.
+A Appendix
+A.1 Data Statistics
+Figure 4 shows the distribution of crisis levels of
+MentalChat and CounselChat classified by LLMs.
+CounselChat contains a higher proportion of more
+serious cases, with 22.9% MEDIUM and 4.5%
+HIGH, compared with 17.8% MEDIUM and 1.7%
+HIGH in MentalChat. In contrast, MentalChat has
+a smaller share of NONE cases (9.3%) than Coun-
+selChat (14.8%). This suggests that CounselChat
+may be more broadly distributed across crisis sever-
+ity levels, while MentalChat is more concentrated
+in low-risk crisis scenarios. It is understandable
+that both datasets include a quite large propor-
+tion of crisis cases, i.e., 71.1% of MentalChat and
+57.9% of CounselChat.
+9.3%
+71.1%
+17.8%
+1.7%
+MentalChat
+(N=1810)
+14.8%
+57.9%
+22.9%
+4.5%
+CounselChat
+(N=940)
+Crisis Level
+NONE LOW MEDIUM HIGH
+Figure 4: Data statistics. The left figure is for Men-
+talChat and the right is for CounselChat.
+A.2 Significance Testing
+In the paper, “p ≤ 0.05 with 95% CI” refers
+to paired two-sided t-tests on per-sample differ-
+ences: for Recall@K we test the per-query bi-
+nary hit/miss difference between two systems; for
+BLEU/ROUGE/BERTScore we test the per-sample
+score difference; for LM judge and human ratings
+we test the per-sample rater-averaged scores. For
+human evaluation (N =100, 5 raters), inter-rater
+reliability is reported as Fleiss’ κ in Section 5.2.2.
+A.3 Response Generation
+Human Evaluation of Counseling Skill The
+evaluation uses seven counseling dimensions to as-
+sess response quality (Xu et al., 2025a): Active Lis-
+tening (AL, 1-10) reflects the user’s core concerns
+accurately without premature assumptions; Empa-
+thy & Validation (EV, 1-10) conveys genuine com-
+passion and validates the emotional state; Safety
+& Trustworthiness (ST, 1-10) measures adherence
+to safety protocols and the delivery of reliable,
+harmless information; Open-mindedness & Non-
+judgment (ONJ, 1-10) ensures the response remains
+objective, unbiased, and maintains unconditional
+positive regard; Clarity & Encouragement (CE, 1-
+10) focuses on clear communication alongside neu-
+tral, motivating reinforcement of user strengths;
+13813

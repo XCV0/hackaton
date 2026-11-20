@@ -1,0 +1,5 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D001,MS1,DV-P;DV-S001;DV-S005;DV-S01;DV-S05;DV-N01,J-V,AM1.5G,100,mW/cm2,reverse,0.15 V/s,true,,,,,,"Keithley 2400; Solar IV-150A (Zolix), калибровка по Si-эталону Newport KG5; сканирование FB→SC"
+D001,MS2,DV-S01,J-V,AM1.5G,100,mW/cm2,forward,0.15 V/s,true,,,,,,"SC→FB, champion-прибор (Table 2)"
+D001,MS3,DV-S01;DV-P,MPP tracking,AM1.5G,100,mW/cm2,,,true,,,,,,Figure 5D и Supplementary Figure S2; принадлежность 12.93 % pristine-прибору выведена из порядка изложения
+D001,MS4,DV-S01;DV-P,EQE,,,,,,,,,,,,"интегрирование EQE, Supplementary Figure S3; система SCS10-X150-HBSD"

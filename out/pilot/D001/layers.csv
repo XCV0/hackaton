@@ -1,0 +1,31 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D001,DV-P-L1,DV-P,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-P-L2,DV-P,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-P-L3,DV-P,3,absorber,CsPbI2Br,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-P-L4,DV-P,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-P-L5,DV-P,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S001-L1,DV-S001,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S001-L2,DV-S001,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S001-L3,DV-S001,3,absorber,CsPbI2Br + 0.001 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S001-L4,DV-S001,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S001-L5,DV-S001,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S005-L1,DV-S005,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S005-L2,DV-S005,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S005-L3,DV-S005,3,absorber,CsPbI2Br + 0.005 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S005-L4,DV-S005,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S005-L5,DV-S005,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S01-L1,DV-S01,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S01-L2,DV-S01,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S01-L3,DV-S01,3,absorber,CsPbI2Br + 0.01 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S01-L4,DV-S01,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S01-L5,DV-S01,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S05-L1,DV-S05,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S05-L2,DV-S05,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S05-L3,DV-S05,3,absorber,CsPbI2Br + 0.05 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S05-L4,DV-S05,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S05-L5,DV-S05,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-N01-L1,DV-N01,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-N01-L2,DV-N01,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-N01-L3,DV-N01,3,absorber,CsPbI2Br + 0.01 M NiCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-N01-L4,DV-N01,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-N01-L5,DV-N01,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au

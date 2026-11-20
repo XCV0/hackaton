@@ -1,0 +1,100 @@
+Figure 1 illustrates a document-based RAG pro-
+cess. Due to the influence of keyword matches
+and irrelevant sentences, the inaccurate retrieved
+document appears more relevant to the query at
+the document level, despite its lack of fine-grained
+necessary information. Consequently, an incorrect
+answer is derived from the inaccurate retrieved doc-
+ument. This phenomenon naturally arises in most
+RAG pipelines and suggests that we could enhance
+this task from a fine-grained perspective.
+In this work, we propose a Fine-grained Knowl-
+edge Enhancement method for RAG (FKE). Our
+method contains a fine-grained knowledge re-
+trieval paradigm and a decoding enhancement strat-
+egy, where the fine-grained knowledge primarily
+includes sentence-level information easily over-
+looked in the document-based retrieval process.
+Initially, we create a disentangled prompting pro-
+cedure to retrieve fine-grained knowledge from
+the external knowledge corpus. In this procedure,
+the LLM is prompted to first explicitly identify
+the knowledge fragments beneficial for question
+answering and then extract the query-focused re-
+trieval sentences as fine-grained knowledge based
+on these fragments. Subsequently, we propose
+to enhance the document-based decoding process
+with fine-grained retrieved knowledge. During the
+decoding process, the generator produces output
+distributions based on fine-grained retrieved sen-
+tences and original retrieved documents. We di-
+rectly combine the fine-grained distribution with
+the document-based distribution and sample from
+the new distribution, where fine-grained retrieved
+sentences serve as sentence-level supervision to
+constrain the original distribution, making it more
+precise and helpful to the question.
+Currently, a few methods filter the retrieved doc-
+ument and use only the extracted relevant sentences
+for question answering. These methods typically
+rely on additional annotations via GPT-4 (Asai
+et al., 2023; Yan et al., 2024) or automatic met-
+rics (Wang et al., 2023), and design specific train-
+ing methods to optimize the extra filter module.
+However, these complex annotation and extrac-
+tion procedures often overlook whether the sen-
+tences are truly beneficial to question answering
+or merely semantically related to the question, so
+the quality of the extracted sentences remains a
+concern. Moreover, they primarily retain only the
+extracted sentences to assist answer generation,
+which may result in inaccurate outputs due to the
+lack of context-related knowledge. In contrast, our
+retrieval paradigm directly utilizes the existing gen-
+erator model in a one-shot manner to retrieve the
+query-focused fine-grained knowledge, which is
+more helpful to answer generation. Besides, our de-
+coding process retains the document-level retrieved
+knowledge to integrate context-relevant informa-
+tion and thereby achieve better performance. Given
+an existing RAG pipeline, our method could be ap-
+plied plug-and-play to enhance its performance
+with no additional modules or training process.
+In conclusion, our contributions are summarized
+as follows:
+• We propose a disentangled fine-grained knowl-
+edge retrieval paradigm for the RAG field,
+where we collect the scarce fine-grained re-
+trieved knowledge in the RAG area.
+• We propose a decoding enhancement strategy
+that incorporates fine-grained knowledge to
+constrain the document-based decoding pro-
+cess and enable more precise generation.
+• For a distinct comparison, we combine our
+method with two representative basic RAG
+pipelines from the two mainstream groups and
+conduct extensive experiments on four bench-
+mark datasets. The results demonstrate the
+effectiveness and generality of our method.1
+2 Approach
+We propose a Fine-grained Knowledge Enhance-
+ment method for RAG (FKE). In this method, we
+primarily create a Fine-grained Knowledge Re-
+trieval paradigm to retrieve sentence-level fine-
+grained knowledge from the external corpus. Sub-
+sequently, we develop a Decoding Enhancement
+strategy to optimize the decoding process with re-
+trieved fine-grained knowledge. Ultimately, these
+two components are integrated into the basic RAG
+pipeline to further enhance its performance. We
+will first briefly formulate the RAG technique and
+then elaborate on the two components.
+2.1 Problem Formulation
+Given a generative LLM M, a natural language
+question q, and an external knowledge corpus K,
+the RAG technique aims to retrieve relevant docu-
+ments D = (d1, d2, ..., dn) from K, which enable
+1Please email Jingxuan Han with your affiliation and a
+short description of how you will use our fine-grained knowl-
+edge and source code, and we will provide access to it.
+10032

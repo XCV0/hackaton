@@ -1,0 +1,139 @@
+intensities from 1 to 0 suns. Figure 3a shows the dJ/dV curves
+derived from these measurements. The results show that CdS-
+only devices were stable for only the ﬁrst few cycles (1, 0.9,
+and 0.8 suns). Additional cycling caused the conductance to
+increase signiﬁcantly. A ﬁnal dark dJ/dV, taken after the illumi-
+nation cycles revealed that the shunt conductance increased
+more than 2 orders of magnitude compared to the initial dark
+current measurement. Further measurements showed that this
+increase in shunt conductance is irreversible indicating that
+chemical changes have occurred at the interface. Additional tests
+were also conducted to decouple the effect of light and bias. It
+was found that a signiﬁcant increase in conductance occurred
+when the CdS-only cells were subjected to higher voltage bias
+(> 0.5 V). Furthermore, it is evident that both light and voltage
+are required to expedite the breakdown of the junction, with the
+most rapid degradation occurring at higher biases (see Figure S5,
+Supporting Information). The permanent nature of the
+degradation proves that CdS-only devices are susceptible to
+light/bias-induced chemical (physical) changes under opera-
+tional conditions. For cells where a ZnO or TiO2 HRMO layer
+was deposited no signiﬁcant change was noted in the dark shunt
+conductance before and after light cycling. The behavior of these
+devices was far more ideal, simply showing a steady decrease in
+conductance with decreasing incident light power. Furthermore,
+no signiﬁcant change in the shunt conductance was observed in
+devices with a ZnO or TiO2 HRMO, even for broad voltages
+sweeps done from /C01.1 to 1.1 V. Collectively, these results high-
+light the precarious nature of the FTO/CdS interface in such
+devices and the need to mitigate the pitfalls of this junction
+through the application of a metal oxide interlayer.
+InthecaseofourSb2Se3 devices (and solar cell devices in
+general), shunt leaks may be divided into two categories.
+Speciﬁcally, an ohmic component, which remains constant
+with voltage variation, and a non-ohmic component which
+varies with voltage.[10a,10b,22] Aphysicalrepresentationof
+device phenomena that give rise to both these components
+is illustrated in Figure 3b. Ohmic shunts occur due to low
+shunt resistance pathways in the CdS buffer or absorber layer
+(highly conductive grain boundaries, regions of thinner CdS,
+ion migration at the main junction).[10c] Conversely, non-
+ohmic shunts predominantly arise within regions of space
+charge limited current (SCLC) where the main junction ﬁeld
+is weak.[22] Such SCLC regions may form where the rough
+FTO grains disrupt the thin CdS ﬁlm and permit the Sb2Se3
+to contact the FTO yielding a localized FTO/Sb2Se3/Au
+junction. Likewise, in cases where signiﬁcant migration of
+Cd2þ or S2/C0 occurs, the Sb2Se3 layer will consume the CdS
+leadingtoalocalizeddegradationofthep–njunctionand
+the generation of non-ohmic shunts.[9a,11] As such, determin-
+ing the type of shunt leak provides direct insights into local
+defects at the interfaces.
+To determine the type of shunt leaks in superstrate Sb2Se3
+devices, dark JV curves may be ﬁtted to the equivalent circuit
+modelsshowninFigure3c.Thetotalcurrentdensity,J,inthe
+circuits is given by the sum of two current density terms,
+Jmain junction and Johmic shunt.Anextraterm,Jnon-omic shunt,
+isaddedtomodelthecurrentdensitytoaccountforthe
+presence of SCLC regions.[23] The total current density,
+J ¼ Jmain junction þ Johmic shunt þ Jnon-omic shunt,expressedasa
+function of voltage is given by Equation (1).[10b]
+Sb2Se3
+Au
+FTO
+glass
+main
+junction
+grain
+boundaries
+CdS
+non-ohmic
+shunt
+10-9
+10-7
+10-5
+10-3
+10-1
+Data Fit D1 Rsh Rnh
+-1 -0.5 0
+0
+1
+2
+3
+4
+no HRMO
+ZnO
+TiO2
+ohmic +
+non-ohmic
+mostly ohmic
+Current density (mA cm2)
+-0.6 0 0.6 -0.6 0 0.6 -0.6 0 0.6
+dJ/dV (µS cm-2)
+RS
+J0
+Rsh
+V
+Rnh
+D1
+RS
+J0
+Rsh
+V
+D1
+Equivalent circut models
+ohmic +
+non-ohmicohmic
+(b)(a)
+(e)(d)(c)
+no 
+HRMO ZnO TiO2
+dJ/dV(×10-4 S cm-2)
+Suns
+1st sweep
+-0.5 00
+2
+4
+6
+8
+10
+-0.5 0 -0.5 0
+1stsweep 1stsweep
+before lightsweep
+0
+1
+no 
+HRMO ZnO TiO2
+Voltage (V)
+Voltage (V)
+Voltage (V)
+ohmic
+shunt
+Figure 3. a) Reverse bias region of dJ/dV curves highlighting the effective use of ZnO or TiO2 to prevent the increased current leak observed during
+voltage sweeps of CdS-only control devices; b) schematic of ohmic and non-ohmic shunting mechanisms in Sb2Se3 solar cells; c) equivalent circuit
+models; d) ﬁtted dark JV curves for the various solar cells used in this study. e) ohmic and non-ohmic current leaks in freshly prepared solar cells,
+highlighting the removal of non-ohmic shunt pathways when using ZnO or TiO2 interlayers.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2200265 2200265 (4 of 9) © 2022 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 8, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202200265, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

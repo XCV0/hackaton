@@ -1,0 +1,112 @@
+file rather than a single score: high DAP is a leak-
+age risk only for systems that contractually promise
+to answer from retrieved evidence, and DAV is the
+stricter flag when the concern is unsupported sub-
+stantive answering rather than benign stability.
+Acknowledgments
+This work was supported by the Ministry of Inno-
+vation, Science & Technology, Israel, and by the
+Israel Science Foundation (ISF grant 977/26).
+References
+Vaibhav Adlakha, Parishad BehnamGhader, Xing Han
+Lu, Nicholas Meade, and Siva Reddy. 2024. Eval-
+uating correctness and faithfulness of instruction-
+following models for question answering. Trans-
+actions of the Association for Computational Linguis-
+tics, 12:681–699.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In International Conference on Learning Representa-
+tions (ICLR).
+Bernd Bohnet, Vinh Q. Tran, Pat Verga, Roee Aha-
+roni, Daniel Andor, Livio Baldini Soares, Massimil-
+iano Ciaramita, Jacob Eisenstein, Kuzman Ganchev,
+Jonathan Herzig, Kai Hui, Tom Kwiatkowski, Ji Ma,
+Jianmo Ni, Lierni Sestorain Saralegui, Tal Schus-
+ter, William W. Cohen, Michael Collins, Dipanjan
+Das, and 3 others. 2022. Attributed question answer-
+ing: Evaluation and modeling for attributed large
+language models. arXiv preprint arXiv:2212.08037.
+Jiawei Chen, Hongyu Lin, Xianpei Han, and Le Sun.
+2024. Benchmarking large language models in
+retrieval-augmented generation. In Proceedings of
+the AAAI Conference on Artificial Intelligence, vol-
+ume 38, pages 17754–17762.
+Sizhe Cheng, Jiaping Li, Huanchen Wang, and Yuxin
+Ma. 2025. RAGTrace: Understanding and refining
+retrieval-generation dynamics in retrieval-augmented
+generation. In Proceedings of the 38th Annual ACM
+Symposium on User Interface Software and Technol-
+ogy (UIST).
+Benjamin Cohen-Wang, Harshay Shah, Kristian
+Georgiev, and Aleksander Madry. 2024. ContextCite:
+Attributing model generation to context. In Ad-
+vances in Neural Information Processing Systems,
+volume 37.
+Florin Cuconasu, Giovanni Trappolini, Federico Sicil-
+iano, Simone Filice, Cesare Campagnano, Yoelle
+Maarek, Nicola Tonellotto, and Fabrizio Silvestri.
+2024. The power of noise: Redefining retrieval for
+RAG systems. In Proceedings of the 47th Interna-
+tional ACM SIGIR Conference on Research and De-
+velopment in Information Retrieval, pages 719–729.
+Shahul Es, Jithin James, Luis Espinosa Anke, and
+Steven Schockaert. 2024. RAGAs: Automated evalu-
+ation of retrieval augmented generation. In Proceed-
+ings of the 18th Conference of the European Chap-
+ter of the Association for Computational Linguistics:
+System Demonstrations, pages 150–158.
+Amir Feder, Katherine A. Keith, Emaad Manzoor, Reid
+Pryzant, Dhanya Sridhar, Zach Wood-Doughty, Ja-
+cob Eisenstein, Justin Grimmer, Roi Reichart, Mar-
+garet E. Roberts, Brandon M. Stewart, Victor Veitch,
+and Diyi Yang. 2022. Causal inference in natural lan-
+guage processing: Estimation, prediction, interpreta-
+tion and beyond. Transactions of the Association for
+Computational Linguistics, 10:1138–1158.
+Robert Friel, Masha Belyi, and Atindriyo Sanyal. 2024.
+RAGBench: Explainable benchmark for retrieval-
+augmented generation systems. arXiv preprint
+arXiv:2407.11005.
+Tianyu Gao, Howard Yen, Jiatong Yu, and Danqi Chen.
+2023a. Enabling large language models to generate
+text with citations. In Proceedings of the 2023 Con-
+ference on Empirical Methods in Natural Language
+Processing, pages 6465–6488.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Meng Wang,
+and Haofen Wang. 2023b. Retrieval-augmented gen-
+eration for large language models: A survey. arXiv
+preprint arXiv:2312.10997.
+Yufang Hou, Alessandra Pascale, Javier Carnerero-
+Cano, Tigran Tchrakian, Radu Marinescu, Elizabeth
+Daly, Inkit Padhi, and Prasanna Sattigeri. 2024. Wi-
+kiContradict: A benchmark for evaluating LLMs on
+real-world knowledge conflicts from Wikipedia. In
+Advances in Neural Information Processing Systems
+37: Datasets and Benchmarks Track.
+Alon Jacovi and Yoav Goldberg. 2020. Towards faith-
+fully interpretable NLP systems: How should we
+define and evaluate faithfulness? In Proceedings
+of the 58th Annual Meeting of the Association for
+Computational Linguistics, pages 4198–4205.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, Sebastian Riedel, and Douwe Kiela. 2020.
+Retrieval-augmented generation for knowledge-
+intensive NLP tasks. In Advances in Neural Infor-
+mation Processing Systems, volume 33, pages 9459–
+9474.
+Jintao Liu, Ruixue Ding, Linhao Zhang, Pengjun Xie,
+and Fei Huang. 2024a. CoFE-RAG: A comprehen-
+sive full-chain evaluation framework for retrieval-
+augmented generation with enhanced data diversity.
+arXiv preprint arXiv:2410.12248.
+Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paran-
+jape, Michele Bevilacqua, Fabio Petroni, and Percy
+Liang. 2024b. Lost in the middle: How language
+models use long contexts. Transactions of the Asso-
+ciation for Computational Linguistics, 12:157–173.
+22341

@@ -1,0 +1,59 @@
+Published as a conference paper at ICLR 2025
+tuning an entire LM to handle knowledge-intensive tasks, we propose a divide-and-conquer ap-
+proach. We utilize a smaller specialist LM, the RAG drafter, to rapidly generate multiple answer
+drafts based on retrieved results. Then, a larger generalist LM, the RAG verifier, assesses these
+drafts, selects the best one based on its rationale, and integrates it into the generation results.
+Algorithm 1: SPECULATIVE RAG
+Data: (Q, D = {di}n i ) is the question and n retrieved documents; m subsets, each containing k
+documents, are sampled from D; k also corresponds to the number of clusters during clustering.
+Result: ˆA is the predicted answer to the question.
+1 Function Speculative RAG(Q, D, m, k):
+2 {c1, c2, ..., ck }
+K-Means
+←−−−− C(d1, ..., dn|Q) ▷ Cluster the documents into k groups using an embedding model C.
+3 ∆ ← {}
+4 repeat
+5 δj ← {} ▷ Construct a subset of the retrieved documents δj
+6 for ci ∈ {c1, ..., ck } do
+7 δj = δj ∪ {random.sample(ci)} ▷ Sample one document from each cluster ci into subset δj .
+8 end
+9 ∆ = ∆ ∪ {δj }
+10 until |∆| = m ▷ Repeat the sampling until there are m unique subsets in total.
+11 for δj ∈ ∆ do in parallel ▷ Process m subsets in parallel.
+12 αj , βj ← MDrafter.generate(Q, δj ) ▷ Generate the draft α and rationale β with MDrafter.
+13 ρj ← MVerifier.score(αj |Q, βj ) ▷ Compute the confidence score ρ with MVerifier.
+14 end
+15 ˆA ← arg maxαj ρj ▷ Select the one with the highest score as the final answer.
+16 return ˆA
+Specifically, as shown in Algorithm 1, we first cluster the retrieved documents with regard to their
+relation to the posed question, where each cluster represents one perspective in the retrieval results
+(Line 2). Then we sample one document from each cluster into a subset so the documents in this
+subset covers the multiple perspectives in the retrieval results. We aim at minimizing redundancy and
+increase the diversity of the documents (Line 5 to 8). We denote one subset as δ ⊂ D that contains
+retrieved documents with diverse contents and multiple perspectives in the retrieval results. Then,
+we distribute each subset δ to a RAG drafter endpoint MDrafter with the posed question Q to generate
+the answer draft α and the rationale β in parallel (Line 12). The RAG drafter is instruction-tuned to
+be a specialist in understanding the retrieved documents and produce rationales that are faithful to the
+input documents. It is smaller than generalist LMs, and its parallel processing further ensures high
+efficiency. For each draft-rationale pair (α, β) from MDrafter, we compute a confidence score with
+the generalist LM MVerifier based on the question Q and corresponding rationale β (Line 13). It is
+worth mentioning that MVerifier does not need to be instruction-tuned since we leverage its language
+modeling ability already learned during pre-training. Meanwhile, MVerifier can verify the drafts
+based on the informative rationale provided by MDrafter instead of processing tedious or possibly
+redundant retrieved documents. Finally, we select the answer draft with the highest confidence
+score as the final answer and integrate it into the generation results of the generalist LM (Line 15).
+3.2 SPECIALIST RAG DRAFTER
+Instead of tuning a large generalist LM for the RAG scenario, we leverage a smaller specialist LM,
+MDrafter, to understand retrieved documents. MDrafter is specialized in answering the given question
+based on the supporting documents and not expected to cope with general problems. It serves as a
+RAG module for the generalist LMs when solving knowledge-intensive tasks. We train MDrafter to
+generate both the answer draft and the rationale to better understand the contextual documents.
+Instruction Tuning Given a triplet (Q, A, D), where Q is a general query, A is the response, and D
+is a retrieved supporting document, we augment it with the rationale of the response A based on the
+document D. We denote the rationale as E which extracts essential information from the document
+and explains why the response is reasonable to the query concisely (Hsieh et al., 2023) so it is of
+shorter length and delivers information coherent with the original document. We leverage relatively
+strong LMs to automatically synthesize the rationale E for each triplet. Specifically, we directly
+query the strong LM to understand the knowledge from the document and provide the intermediate
+rationale between the instruction and response. Refer to Appendix G for detailed prompts. After
+4

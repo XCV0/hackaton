@@ -1,0 +1,74 @@
+INPUT QUERY & COMPLEXITY ANALYSIS
+Query: "Who had a longer tenure as CEO of the company that acquired DeepMind: Eric Schmidt or Larry Page?"
+Reasoning Requirement: 1. Entity Bridging: Identify Parent Company (DeepMind → Google). 2. Attribute Retrieval:
+Find CEO Tenure(Schmidt) AND CEO Tenure(Page). 3. Numerical Comparison: Calculate ∆t. Hardness: High
+(Distractor Noise)
+♂search Baseline: Standard RAG (Failure Trace)
+STEP 1: DENSE RETRIEVAL (TOP-K)
+Retriever matches "DeepMind" to high-ranking news
+chunks.
+• [Rank 1] Doc A: "Google acquires AI startup Deep-
+Mind for $500M in 2014..."
+→ Sim: 0.91 (Relevant Bridge)
+• [Rank 2] Doc B: "DeepMind’s AlphaGo
+defeats Lee Sedol in historic match..."
+→ Sim: 0.89 (Distractor - High Semantic Overlap)
+• [Rank 3] Doc C: "Demis Hassabis
+discusses DeepMind’s AlphaZero algo-
+rithm..."
+→ Sim: 0.87 (Distractor - Redundant Topic)
+CRITICAL ERROR: Distractor Crowding. High-scoring
+documents about DeepMind’s AI achievements fill the
+context. Evidence for Schmidt’s tenure is pushed to Rank
+7 and truncated.
+STEP 2: COT REASONING (HALLUCINATION)
+LLM Input: Doc A, Doc B, Doc C.
+• Thought 1: "DeepMind was acquired by Google
+(Doc A)."
+• Thought 2: "Need tenures for Eric Schmidt and
+Larry Page."
+• Thought 3 (Missing Info): "Context discusses Al-
+phaGo, not CEO dates."
+• Thought 4 (Heuristic Bias): "Larry Page is the
+co-founder of Google. Founders usually serve the
+longest terms. Eric Schmidt was hired later."
+Final Prediction:
+Larry Page (Founder Heuristic)
+✗ Factually Incorrect (Page: ≈4 yrs vs Schmidt:
+10 yrs)
+/filter Ours: Self-Correcting RAG (Success Trace)
+PHASE 1: MMKP CONTEXT SELECTOR
+Goal: Penalize Semantic Redundancy (Cred).
+• Cluster 1 (DeepMind News): {Doc B (AlphaGo),
+Doc C (AlphaZero)}
+• Cluster 2 (Corporate Structure): {Doc A (Ac-
+quisition), Doc D (Schmidt Tenure), Doc E (Page
+Tenure)}
+• Action: Detect high redundancy in Cluster 1. Prune
+Doc B & C. Allocate budget to Cluster 2.
+Optimized Context: {Doc A, Doc D ("Schmidt CEO
+2001-2011"), Doc E ("Page CEO 2011-2015")}
+PHASE 2: MCTS PLANNER REASONING
+Node 0: Root State (Question)
+↪→ Branch 1: Heuristic Assumption (Fail)
+Hypothesis: "Larry Page served longer."
+→ Verification (NLI): Context (Schmidt: 10 yrs, Page:
+4 yrs) vs Hypothesis.
+→ Result: Contradiction (0.95).
+→ Reward: -1.0 (Prune)
+↪→ Branch 2: Calculation (Success)
+Step 1: Schmidt: 2011 − 2001 = 10 years.
+Step 2: Page: 2015 − 2011 = 4 years.
+Hypothesis: "Eric Schmidt (10 years) > Larry Page."
+→ Verification (NLI): Entailment (0.99).
+→ Reward: +1.0 (Proceed)
+Final Prediction:
+Eric Schmidt (10 years)
+✓ Factually Grounded Calculation
+Figure 9: Analysis of Distractor Filtering and Numerical Verification. Left: The Baseline fails due to Distractor
+Crowding. Popular documents about DeepMind’s AI achievements (AlphaGo) overwhelm the context window,
+displacing the necessary CEO tenure dates. Right: The MMKP Selector identifies the "AI Achievement" documents
+as semantically redundant and removes them. This preserves space for documents containing specific tenure dates.
+The MCTS Planner then rejects the heuristic bias ("Founders serve longer") via NLI verification, ensuring the final
+answer is derived from arithmetic comparison of the retrieved dates.
+20976

@@ -1,0 +1,126 @@
+Retrieval-Augmented Generation Meets Data-Driven Tabula Rasa Approach for Temporal Knowledge Graph Forecasting30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain
+REFERENCES
+[1] Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Floren-
+cia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal
+Anadkat, et al. 2023. Gpt-4 technical report. arXiv preprint arXiv:2303.08774
+(2023).
+[2] Ivana Balazevic, Carl Allen, and Timothy Hospedales. 2019. TuckER: Tensor
+Factorization for Knowledge Graph Completion. In Proceedings of the 2019 Con-
+ference on Empirical Methods in Natural Language Processing and the 9th In-
+ternational Joint Conference on Natural Language Processing (EMNLP-IJCNLP).
+Association for Computational Linguistics, Hong Kong, China, 5185–5194. https:
+//doi.org/10.18653/v1/D19-1522
+[3] Sid Black, Stella Biderman, Eric Hallahan, Quentin Anthony, Leo Gao, Laurence
+Golding, Horace He, Connor Leahy, Kyle McDonell, Jason Phang, et al. 2022.
+Gpt-neox-20b: An open-source autoregressive language model. arXiv preprint
+arXiv:2204.06745 (2022).
+[4] Elizabeth Boschee, Jennifer Lautenschlager, Sean O’Brien, Steve Shellman, James
+Starz, and Michael Ward. 2015. ICEWS Coded Event Data. https://doi.org/10.
+7910/DVN/28075
+[5] Shib Sankar Dasgupta, Swayambhu Nath Ray, and Partha Talukdar. 2018. HyTE:
+Hyperplane-based temporally aware knowledge graph embedding. In Proceedings
+of the 2018 Conference on Empirical Methods in Natural Language Processing. 2001–
+2011.
+[6] Alberto García-Durán, Sebastijan Dumančić, and Mathias Niepert. 2018. Learning
+Sequence Encoders for Temporal Knowledge Graph Completion. In Proceedings
+of the 2018 Conference on Empirical Methods in Natural Language Processing.
+Association for Computational Linguistics, Brussels, Belgium, 4816–4821. https:
+//doi.org/10.18653/v1/D18-1516
+[7] Julia Gastinger, Timo Sztyler, Lokesh Sharma, and Anett Schuelke. 2022. On the
+Evaluation of Methods for Temporal Knowledge Graph Forecasting. In NeurIPS
+2022 Temporal Graph Learning Workshop.
+[8] Rishab Goel, Seyed Mehran Kazemi, Marcus Brubaker, and Pascal Poupart. 2020.
+Diachronic Embedding for Temporal Knowledge Graph Completion. In Thirty-
+Fourth AAAI Conference on Artificial Intelligence. 3988–3995.
+[9] Rishab Goel, Seyed Mehran Kazemi, Marcus Brubaker, and Pascal Poupart. 2020.
+Diachronic embedding for temporal knowledge graph completion. In Proceedings
+of the AAAI Conference on Artificial Intelligence, Vol. 34. 3988–3995.
+[10] Zhen Han, Peng Chen, Yunpu Ma, and Volker Tresp. 2021. Explainable Sub-
+graph Reasoning for Forecasting on Temporal Knowledge Graphs. In Interna-
+tional Conference on Learning Representations. https://openreview.net/forum?id=
+pGIHq1m7PU
+[11] Zhen Han, Zifeng Ding, Yunpu Ma, Yujia Gu, and Volker Tresp. 2021. Learning
+Neural Ordinary Equations for Forecasting Future Links on Temporal Knowledge
+Graphs. In Proceedings of the 2021 Conference on Empirical Methods in Natural
+Language Processing. Association for Computational Linguistics, Online and
+Punta Cana, Dominican Republic, 8352–8364. https://doi.org/10.18653/v1/2021.
+emnlp-main.658
+[12] Tingsong Jiang, Tianyu Liu, Tao Ge, Lei Sha, Baobao Chang, Sujian Li, and Zhifang
+Sui. 2016. Towards Time-Aware Knowledge Graph Completion. In COLING 2016,
+26th International Conference on Computational Linguistics. 1715–1724.
+[13] Woojeong Jin, He Jiang, Meng Qu, Tong Chen, Changlin Zhang, Pedro Szekely,
+and Xiang Ren. 2019. Recurrent event network: Global structure inference over
+temporal knowledge graph. arXiv preprint arXiv:1904.05530 (2019).
+[14] Woojeong Jin, Meng Qu, Xisen Jin, and Xiang Ren. 2020. Recurrent Event
+Network: Autoregressive Structure Inferenceover Temporal Knowledge Graphs.
+In Proceedings of the 2020 Conference on Empirical Methods in Natural Language
+Processing (EMNLP). Association for Computational Linguistics, Online, 6669–
+6683. https://doi.org/10.18653/v1/2020.emnlp-main.541
+[15] Diederik P Kingma and Jimmy Ba. 2014. Adam: A method for stochastic opti-
+mization. arXiv preprint arXiv:1412.6980 (2014).
+[16] Timothee Lacroix, Guillaume Obozinski, and Nicolas Usunier. 2020. TENSOR
+DECOMPOSITIONS FOR TEMPORAL KNOWLEDGE BASE COMPLETION. ICLR
+preprint https://openreview.net/pdf?id=rke2P1BFwS (2020).
+[17] Julien Leblay and Melisachew Wudage Chekol. 2018. Deriving validity time
+in knowledge graph. In Companion Proceedings of the The Web Conference 2018.
+1771–1776.
+[18] Dong-Ho Lee, Kian Ahrabian, Woojeong Jin, Fred Morstatter, and Jay Pujara. 2023.
+Temporal Knowledge Graph Forecasting Without Knowledge Using In-Context
+Learning. arXiv preprint arXiv:2305.10613 (2023).
+[19] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin,
+Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel,
+et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp tasks.
+Advances in Neural Information Processing Systems 33 (2020), 9459–9474.
+[20] Zixuan Li, Xiaolong Jin, Wei Li, Saiping Guan, Jiafeng Guo, Huawei Shen,
+Yuanzhuo Wang, and Xueqi Cheng. 2021. Temporal knowledge graph reasoning
+based on evolutional representation learning. In Proceedings of the 44th Inter-
+national ACM SIGIR Conference on Research and Development in Information
+Retrieval. 408–417.
+[21] Jerry Liu. 2022. LlamaIndex. https://doi.org/10.5281/zenodo.1234
+[22] Yushan Liu, Yunpu Ma, Marcel Hildebrandt, Mitchell Joblin, and Volker Tresp.
+2022. Tlogic: Temporal logical rules for explainable link forecasting on temporal
+knowledge graphs. In Proceedings of the AAAI Conference on Artificial Intelligence,
+Vol. 36. 4120–4127.
+[23] Farzaneh Mahdisoltani, Joanna Biega, and Fabian M Suchanek. 2013. Yago3: A
+knowledge base from multilingual wikipedias.
+[24] Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever,
+et al. 2019. Language models are unsupervised multitask learners. OpenAI blog
+1, 8 (2019), 9.
+[25] Haohai Sun, Jialun Zhong, Yunpu Ma, Zhen Han, and Kun He. 2021. TimeTraveler:
+Reinforcement Learning for Temporal Knowledge Graph Forecasting. In Proceed-
+ings of the 2021 Conference on Empirical Methods in Natural Language Processing.
+Association for Computational Linguistics, Online and Punta Cana, Dominican
+Republic, 8306–8319. https://doi.org/10.18653/v1/2021.emnlp-main.655
+[26] Tianxiang Sun, Yunfan Shao, Hong Qian, Xuanjing Huang, and Xipeng Qiu. 2022.
+Black-box tuning for language-model-as-a-service. In International Conference
+on Machine Learning. PMLR, 20841–20855.
+[27] Gemini Team, Rohan Anil, Sebastian Borgeaud, Yonghui Wu, Jean-Baptiste
+Alayrac, Jiahui Yu, Radu Soricut, Johan Schalkwyk, Andrew M Dai, Anja Hauth,
+et al. 2023. Gemini: a family of highly capable multimodal models. arXiv preprint
+arXiv:2312.11805 (2023).
+[28] Rakshit Trivedi, Hanjun Dai, Yichen Wang, and Le Song. 2017. Know-
+Evolve: Deep Temporal Reasoning for Dynamic Knowledge Graphs.
+arXiv:1705.05742 [cs.AI]
+[29] Shikhar Vashishth, Soumya Sanyal, Vikram Nitin, and Partha Talukdar. 2019.
+Composition-based multi-relational graph convolutional networks. arXiv preprint
+arXiv:1911.03082 (2019).
+[30] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all
+you need. Advances in neural information processing systems 30 (2017).
+[31] Ben Wang. 2021. Mesh-Transformer-JAX: Model-Parallel Implementation of
+Transformer Language Model with JAX.
+[32] Jiapeng Wu, Meng Cao, Jackie Chi Kit Cheung, and William L. Hamilton. 2020.
+TeMP: Temporal Message Passing for Temporal Knowledge Graph Completion.
+In Proceedings of the 2020 Conference on Empirical Methods in Natural Language
+Processing. 5730–5746.
+[33] Bishan Yang, Wen-tau Yih, Xiaodong He, Jianfeng Gao, and Li Deng. 2014. Em-
+bedding entities and relations for learning and inference in knowledge bases.
+arXiv preprint arXiv:1412.6575 (2014).
+[34] Cunchao Zhu, Muhao Chen, Changjun Fan, Guangquan Cheng, and Yan Zhan.
+2020. Learning from History: Modeling Temporal Knowledge Graphs with
+Sequential Copy-Generation Networks. arXiv preprint arXiv:2012.08492 (2020).
+[35] Cunchao Zhu, Muhao Chen, Changjun Fan, Guangquan Cheng, and Yan Zhang.
+2021. Learning from history: Modeling temporal knowledge graphs with sequen-
+tial copy-generation networks. In Proceedings of the AAAI Conference on Artificial
+Intelligence, Vol. 35. 4732–4740.
+7

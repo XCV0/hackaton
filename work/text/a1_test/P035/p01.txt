@@ -1,0 +1,87 @@
+EnergyReports7(2021)1396–1403
+Contents lists available at ScienceDirect
+EnergyReports
+journal homepage: www.elsevier.com/locate/egyr
+EffectofnoveldoubletreatmentonthepropertiesofCdTesolarcells
+SangsuKima,1,Ju-YoungSongb,1,DeokKima,JinkiHonga,IckJoonChob,
+YongHyubKimb,Jae-UkJeongb,MeeSunYoonb,Sung-JaAhnb,Woong-KiChungb,
+Taek-KeunNamb,ShinhaengChob,∗
+aDepartmentofDisplayandSemiconductorPhysics,KoreaUniversity,Sejong30019,RepublicofKorea
+bDepartmentofRadiationOncology,ChonnamNationalUniversityMedicalSchool,Gwangju,61469,RepublicofKorea
+a r t i c l e i n f o
+Articlehistory:
+Received24August2020
+Receivedinrevisedform21February2021
+Accepted25February2021
+Availableonline8March2021
+Keywords:
+Solarcell
+Cadmiumtelluride
+Cadmiumsulfide
+Clactivation
+Freontreatment
+Timeofflight
+a b s t r a c t
+Inthisstudy,theeffectofClactivationtreatmentonperformanceindicatorsofCdS/CdTesolarcellswas
+investigated.WeimprovedtheperformanceofCdTesolarcellsbyapplyinganoveldoubletreatment
+method that combines the CdCl2 dipping treatment and Freon (difluoro chloromethane) treatment
+methodsthatwerepreviouslystudied.ConventionalCdCl2 methanoldippingtreatment(CdCl2 dipping
+treatment),Freongastreatmentthatincludeschlorine(Freontreatment),andCdCl2 dippingtreatment
++Freontreatment(doubletreatment)wereperformed,andtheefficiencies,opencircuitvoltage(VOC),
+andshortcircuitcurrent(JSC)forallthreeprocesseswereobserved.Althoughtheefficienciesofthe
+CdCl2 dippingtreatmentandFreontreatmentweresimilar,therewasatrade-offbetweentheVOC and
+JSC inbothprocesses.Thedoubletreatmentsampleshowsanefficiencyof14.3%,whichwashigher
+thanthatofasingle-treatedsample.Toinvestigatethecharacteristicchangeofeachpartofthesolar
+cell,anequivalentcircuitmodelinwhichthedevicewasdividedintoamainjunctionandaback
+contact wasused. In additionto electricalmeasurements, secondaryion massspectroscopy (SIMS)
+andtimeofflight(TOF)analysiswereperformed.ThroughTOFmeasurement,driftmobilityvaluesfor
+threetreatmentsampleswerecalculatedtobe1.1cm2/Vs,1.8cm2/Vs,and1.9cm2/Vs,respectively.
+WithTOFmeasurement,itwasprovedthatthedoubletreatmenthadasignificantinfluenceonthe
+efficiencyofthesample.
+© 2021TheAuthors.PublishedbyElsevierLtd.ThisisanopenaccessarticleundertheCCBY-NC-ND
+license(http://creativecommons.org/licenses/by-nc-nd/4.0/).
+1. Introduction
+Cadmiumtelluride(CdTe)thin-filmsolarcelltechnologyhas
+beenshowingsteadygrowthinthesolarenergymarketworld-
+wide. Recently, CdTe solar cell technology has achieved a de-
+vice efficiency close to 22% (Green et al., 2019). Today, it is
+the most promising thin-film technology with a high market
+share. Although 22% efficiency has been reported, the achiev-
+ablevalueforCdTeis33%,accordingtotheShockley–Queisser
+limitforsingle-junctionsolarcells(ShockleyandQueisser,1961;
+Polmanetal.,2016).Therefore,toreachthatefficiencylevel,fur-
+therresearchontheinterface,junction,andelectricalcontactof
+CdTe-basedsolarcellsisnecessary.Unlikeotherthin-filmdevices
+suchasCuInGaSe2 (Repinsetal.,2008)andCu2ZnSnS4 (Ahmed
+etal.,2012),CdTeachieveshighconversionefficiencythrough
+the Cl activation process. High-temperature post-treatment in
+achlorine-containingatmosphereisperformedregularlytoin-
+crease the grain size and improve layer quality. Since the Cl
+∗ Correspondingauthor.
+E-mailaddress: cho.ilmm80@gmail.com(S.Cho).
+1 Theseauthorscontributedequallytothiswork.
+activationprocessremovesinherentstructuraldefects(Moutinho
+etal.)andimprovesthepropertiesofthethin-film,itisessential
+for achieving high-efficiency solar cells. Therefore, various Cl
+activation treatment methods have been proposed to improve
+the efficiency of CdTe-based solar cells. Usually, Cl activation
+treatmentiscarriedoutusingchlorinesaltssuchasCdCl2,MgCl2,
+NH4Cl,andNaCl(Bayhan,2004;Hiie,2003;Nilesetal.,1998;
+Williams et al., 2015; Potlog et al., 2003; Potter et al., 2000)
+orusingchlorine-containinggasessuchasFreon(Salaveietal.,
+2013) and HCl (Qu et al., 2000). Among them, the most com-
+monClactivationprocessistoformaCdCl2 layeronCdTethin
+filmseitherbythermalevaporationorbydippingthefilmsina
+methanolsolutionandannealingthembetween350and450 ◦C.
+However,usingagascontainingchlorine,suchasFreon(difluoro
+chloromethane), has the advantages of avoiding both carcino-
+gensandthewettreatmentintheClactivationprocess,thereby
+increasingthereproducibilityandscalabilityofsolarcellproduc-
+tion(Romeoetal.,2010).High-temperatureheattreatmentofthe
+as-depositedcellsinavacuumchamberinachlorine-containing
+atmosphereproducesrecrystallizationandgrainboundarypassi-
+vationeffectssimilartothedippingtreatmentofCdCl2 (Romeo
+etal.,2009).Apreviousstudyreportedthefabricationofasolar
+https://doi.org/10.1016/j.egyr.2021.02.070
+2352-4847/© 2021TheAuthors. PublishedbyElsevierLtd.ThisisanopenaccessarticleundertheCCBY-NC-NDlicense(http://creativecommons.org/licenses/by-
+nc-nd/4.0/).

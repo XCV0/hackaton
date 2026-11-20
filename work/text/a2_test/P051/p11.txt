@@ -1,0 +1,83 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+Table 6
+OpenAI MUT failures
+RAG-Tester Baseline
+Embedding LLM AI Internet Total failures AI Internet Total failures
+text-embedding-3-large
+GPT 3.5-Turbo 307 654 961 237 391 628
+GPT 4.1-Mini 198 310 508 127 241 368
+GPT 4o-Mini 246 446 692 182 330 512
+GPT 5-Nano 250 434 684 214 367 581
+text-embedding-3-small
+GPT 3.5-Turbo 341 655 996 300 453 753
+GPT 4.1-Mini 241 354 595 187 306 493
+GPT 4o-Mini 304 451 755 232 390 622
+GPT 5-Nano 299 445 744 277 414 691
+text-embedding-ada-002
+GPT 3.5-Turbo 321 574 895 290 441 731
+GPT 4.1-Mini 215 342 557 181 279 460
+GPT 4o-Mini 285 451 736 246 386 632
+GPT 5-Nano 278 479 757 262 399 661
+real sourced documents to catch the hardest failure modes.
+This also points to a clear future-work direction: enhance
+the PDF generator (e.g., by fine-tuning prompts on real
+PDFs,injectingcontrollednoise/variability,oraddingmulti-
+documentsynthesis)sothatauto-generatedcorporabecome
+as strong as real-world ones. RQ3 therefore shows that
+automated document generation is viable and scalable, but
+not yet a complete replacement for manually curated real
+documents.
+We can therefore answer RQ3 as follows:
+Answer to RQ3. Real-world PDFs were substantially
+more effective at exposing failures than automatically
+generated PDFs across all 24 configurations. Overall,
+manually selected PDFs triggered 13,450 failures, com-
+pared with 8,183 for GPT-5 Nano-generated PDFs, cor-
+responding to a 64.4% increase. Thus, automatically
+generateddocumentsprovideascalableandreproducible
+testing mechanism, but they do not yet fully reproduce
+the structural and semantic complexity of real-world
+documents.
+6.4. RQ4 - Oracle Precision
+After applying the majority voting strategy, 302 tests
+werecorrectlyidentifiedasfailures(TruePositives),74were
+incorrectly flagged as failures when they had in fact passed
+(False Positives), and the remaining 6 produced ambiguous
+resultswheretheLLMscouldnotreachaconfidentconsen-
+sus.These6caseswerereviewedmanuallyandallclassified
+as True Positives.
+TheTestOracleachievedaprecisionof80.6%,meaning
+that roughly 4 out of every 5 tests it flags as failures are
+genuine. The remaining 19.4% represent false positives,
+caseswheretheOracleraisedanalarmunnecessarily.While
+thereisroomforimprovement,theseresultsindicatethatthe
+Test Oracle performs reasonably well, correctly identifying
+the vast majority of true failures while keeping false alarms
+at a manageable level.
+In conclusion, RQ4 can be answered as follows:
+Answer to RQ4. The test oracle achieved a precision of
+80.6%, correctly identifying approximately four out of
+every five reported failures. Specifically, 308 of the 382
+inspectedcaseswereconfirmedastruefailures,whereas
+74 were false positives, resulting in a false discovery
+rateof19.4%.Althoughtheoracleissufficientlyreliable
+for automated large-scale testing, its verdicts should be
+interpretedwithcautionwhenindividualfailureclassifi-
+cations are critical.
+7. Related Work
+Current RAG testing methods prioritize a component-
+leveldiagnosticstrategythatisolatestheretrievalandgener-
+ation stages to pinpoint specific architectural failure modes.
+For retrieval testing, tools like RAGatouille [22] expose
+semantic mismatches or poor document ranking, and RanX
+[23]measureslowrecallandlowprecision.Totestthegener-
+ationcomponent,G-Eval[24]usesa“ChainofThought”ap-
+proach where a superior LLM acts like a human-like judge,
+effective to test fluency, tone and coherence. On the other
+hand,UpTrain[25]heaviliyfocusesonanswercompleteness
+and factual accuracy, by providing specific signals to tell
+if the generator provided a correct answer but missed key
+details that were present in the retrieved text.
+This is predominantly operationalized through the RAG
+Triad,whichevaluatescontextrelevance(query-to-context),
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 11 of 21

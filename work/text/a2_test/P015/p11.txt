@@ -1,0 +1,101 @@
+dataset has three classes:
+• 0-Irrelevant: There is a complete mismatch
+between the content of the query and the doc-
+ument.
+• 1-Partially Relevant: The document is rel-
+evant to the query and partly satisfies user’s
+information needs.
+• 2-Highly Relevant: The document content is
+customized to satisfy the information needs of
+the query and precisely contains the answer to
+the query.
+D.1 Data Strategy
+Cold-Start (50k). Following the data collection
+strategy detailed in Sec 3.1, we utilized document
+citation signals as a preliminary filter to curate
+an approximately balanced set of 50k unlabeled
+query-document pairs. Subsequently, we employed
+DeepSeek-R1 to generate structured CoT reasoning
+outputs. This phase is designed to finstill structured
+reasoning behavior and the desired output format.
+RL Training (NoteRel 6k). We utilize the
+NoteRel training set, comprising approximately
+6k human-annotated samples as ground truth, to
+fine-tune all trainable models.
+Distillation (50k). We employ the same 50k un-
+labeled query-document pairs from the cold-start
+phase. These samples are labeled by the R³A-7B
+model, providing both reasoning traces and final
+scores. The query-document pair inputs with only
+score outputs are then used to distill knowledge
+into a compact 1.5B student model.
+D.2 Human Annotation
+To ensure the reliability of the annotations, we em-
+ployed rigorous quality control measures, includ-
+ing:
+1. Annotation Guidelines: Annotators were pro-
+vided with detailed guidelines and training
+sessions to standardize their understanding of
+relevance criteria, minimizing potential biases
+in the annotations.
+2. Inter-annotator Agreement: A subset of anno-
+tations was double-annotated by two indepen-
+dent annotators to assess the consistency of
+the judgments. Only those annotations with
+an agreement above a predefined threshold
+were retained for further use.
+0 50 100 150 200 250 300 350
+Step
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8Reward
+R3A-Qwen-7B
+R3A-Zero-Qwen-7B
+R3A-Qwen-1.5B
+R3A-Zero-Qwen-1.5B
+(a) Training Rewards
+0 50 100 150 200 250 300 350
+Step
+50
+100
+150
+200
+250
+300
+350
+400Response Length
+R3A-Qwen-7B
+R3A-Zero-Qwen-7B
+R3A-Qwen-1.5B
+R3A-Zero-Qwen-1.5B
+(b) Response Length
+Figure 5: The training log of R³A-Zero-1.5/7B
+and R³A-1.5/7B, including the curve of training
+rewards and response length.
+3. Feedback Loops: Regular feedback was pro-
+vided to annotators to ensure continuous im-
+provement of annotation quality during the
+process.
+These measures were implemented to ensure that
+the annotations are reliable, consistent, and repre-
+sentative of the true relevance of query-document
+pairs.
+E Implementation Details
+We employ Qwen2.5-1.5B(-Instruct) and Qwen2.5-
+7B(-Instruct) as the initial models. Models with the
+"-Zero" suffix are trained without cold start from
+the Instruct model. We utilize the OpenRLHF (Hu
+et al., 2024) framework for training. GRPO (Shao
+et al., 2024) is used as the RL algorithm. We use
+the NoteRel as the training and test sets. We set
+the number of rollouts as 16 for one task. We set
+the learning rate as 5e-7, batch size as 32, training
+steps as 360. We set λ as 0 in reward function. We
+use 8 A100 GPUs for all the experiments.
+137

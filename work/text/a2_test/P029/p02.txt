@@ -1,0 +1,102 @@
+demonstrate how their distinctive temporal proper-
+ties inform specialized serving optimizations. Our
+contributions are summarized as follows:
+• Workload Characterization (§3). We re-
+lease a public RAG trace consisting of 134K
+real user requests and identify key workload
+properties, including highly skewed document
+reuse and bursty temporal locality. These ob-
+servations are essential for RAG-specific serv-
+ing system optimization, including content-
+aware scheduling and KV cache management.
+• System Infrastructure (§4). We describe
+the trace collection methodology of TWEN,
+a large-scale production RAG system that is
+representative of canonical RAG systems. Re-
+lying on RAG techniques, this system has
+served over 40,000 students over 389 days.
+• Benchmarking Framework (§5). We build
+an end-to-end evaluation platform that sup-
+ports time-calibrated execution. This enables
+systematic measurement of RAG serving ef-
+ficiency using industry-standard metrics, in-
+cluding time-to-first-token (TTFT) and time-
+per-output-token (TPOT).
+• System Bottleneck Validation (§6). Using
+RAGPULSE, we reveal RAG-specific system
+bottlenecks that are obscured by generic LLM
+traces and synthetic RAG datasets, including
+content-aware scheduling policy and cache
+management policy. These findings motivate
+the need for RAG-aware serving and tiered
+caching architectures.
+To the best of our knowledge, RAGPULSE is the
+first open-source, production-grade trace designed
+specifically for RAG serving. By grounding system
+design and evaluation in real-world RAG work-
+loads, our work enables more specialized, data-
+driven optimization of LLM serving systems, par-
+ticularly for long-context inference and memory-
+efficient serving (Zheng et al., 2026).
+2 Preliminary and Motivation
+2.1 Why We Need a Real-World RAG Trace
+with Temporal Information?
+Existing generic LLM-Specific traces are funda-
+mentally inadequate for RAG serving systems.
+This limitation arises from the distinctive workload
+characteristics of RAG, which diverge substantially
+from standalone LLM inference and thus require
+dedicated, RAG-specific traces.
+First, RAG introduces an inherent multi-stage
+execution pipeline. Each request traverses mul-
+tiple tightly coupled phases—including retrieval,
+re-ranking, and generation (Yu et al., 2025; Asai
+et al., 2024; Lu et al., 2024). End-to-end latency, re-
+source utilization, and cache behavior are therefore
+governed by cross-stage interactions rather than by
+generation alone. Generic LLM traces, which pri-
+marily capture the prefilling and decoding phase,
+fail to expose these composite system effects.
+Second, RAG performance is highly depen-
+dent on both the underlying knowledge base and
+real-world query patterns (Yue et al., 2025; He
+et al., 2024; Gutiérrez et al., 2024). Workload
+dynamics such as query similarity and document
+cache hit rates vary significantly with user behav-
+ior. Moreover, practical deployments often exhibit
+strong inter-request correlations, where consecu-
+tive queries share overlapping contexts or retrieved
+documents. Accurately capturing these temporal
+and content-level dependencies is essential for op-
+timizing scheduling, batching, and KV cache reuse
+policies (Agarwal et al., 2025; Jin et al., 2024).
+Third, most existing RAG traces are derived
+from synthetic or curated chat workloads, which
+typically contain limited document corpora and
+lack authentic temporal locality information. Op-
+timizations validated on non-representative traces
+often fail to generalize to production environments,
+resulting in performance gaps and unstable system
+behavior. This disconnect substantially hinders the
+practical advancement of RAG serving systems.
+Beyond characterization, RAG-specific traces
+are critical for enabling joint optimization of re-
+trieval and generation. Treating these components
+as independent black boxes limits the design space
+of RAG serving systems. In contrast, realistic RAG
+traces make it possible to co-optimize retrieval
+caching, query-adaptive batching, and scheduling
+decisions across pipeline stages (Wang et al., 2024).
+Taken together, these limitations underscore the
+need for a real-world, production-grade RAG trace
+to ground system design and evaluation in realistic
+workload behaviors.
+2.2 What We Can Do with a RAG Trace?
+A high-fidelity RAG trace that reflects real deploy-
+ment workloads enables a broad range of system-
+level analyses and optimizations that are otherwise
+inaccessible.
+Fine-grained bottleneck analysis. The trace en-
+ables precise decomposition of end-to-end RAG
+latency, quantifying performance contributions and
+7066

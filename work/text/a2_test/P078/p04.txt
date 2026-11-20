@@ -1,0 +1,48 @@
+4
+Fig. 1. An image-caption sample from the NicoPRISM dataset of a nicotine pouch product with seven attribute captions. Best viewed in zoom and
+in color.
+Fig. 2. NicoPRISM Dataset statistics across the web set, TikTok set, and YouTube set, with image samples. Best viewed in zoom and in color.
+TABLE 1
+A comparison of NicoPRISM with existing tobacco and nicotine product datasets. Modality: I = image only; I+T+D = image, text captions, and
+documents. KB Types: document categories in the knowledge base (Prod. = product knowledge, Health = health context, Legis. = legislative texts).
+Tasks: DET = detection, RET = image retrieval, PKQ = product knowledge QA, PCQ = policy compliance QA. Expert Val. = expert-validated QA pairs.
+Dataset Images Brands Sources Modality Tasks KB Types Jurisdictions QA Pairs Expert Val.
+Murthy et al. [1] 826 3 1 I {DET} – – – ✗
+Vassey et al. [2] 6,999 7 1 I {DET} – – – ✗
+PHAD [3] 171,900 8 2 I {DET} – – – ✗
+NicoPRISM (Ours) 161,563 277 3 I+T+D {RET, PKQ, PCQ} Prod., Health, Legis. 13 1,495 ✓
+in violation of youth marketing restrictions. Within the PRISM-
+RAG framework, captions define the VA attribute nodes in the
+hypergraph and, through concept hyperedge construction, provide
+the principal semantic bridge from marketing language (e.g., “cool
+mint”) to legislative terminology (e.g., “characterizing flavor”).
+3.5 Heterogeneous Knowledge Base Documents
+The document collection is the primary source of the jurisdictional
+disambiguation challenge and distinguishes NicoPRISM from
+prior product-image datasets. It is heterogeneous in content type
+(product, health, legislative) and static in scope. The document
+knowledge base is built once from publicly available sources and
+treated as a fixed document store at inference time, reflecting
+the realistic operational setting for a deployed surveillance tool
+where the system reasons from what it knows rather than looking
+up current law. We note that legislative statutes are not the only
+factor governing compliance status in practice; agency guidance
+documents, court rulings, and enforcement decisions can alter a
+product’s effective legal standing independently of the underlying
+statute. Tracking the full legal landscape, including non-statutory
+policy instruments and judicial precedent, over time is beyond the
+current scope, and we treat the document collection as a static
+corpus reflecting the regulatory landscape as of March 2026.
+Product knowledge documents include vendor catalog pages
+and encyclopedic articles, providing product-level factual context,
+ingredient composition, nicotine strength options, brand history,
+and flavor lineups.
+Health context documents cover the known health effects and
+risks of tobacco and nicotine product use, drawing on clinical
+literature and government health agency articles.
+Legislative documents are the component that poses the core
+retrieval challenge. We collected statutory texts from eight ex-
+emplar US states and five exemplar US cities, spanning the full
+spectrum of regulatory strictness. The eight states are: California,
+Massachusetts, and New Jersey (strict flavor or product bans); New
+York (relatively moderate); Illinois and Pennsylvania (moderate,

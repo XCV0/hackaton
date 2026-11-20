@@ -1,0 +1,98 @@
+Parameter Value
+Generator (LLM)
+Model Qwen2.5-7B-Instruct
+Temperature 0.7
+Top-p 0.9
+Max New Tokens 256
+MCTS Search
+Simulations (N) 24
+Branching Factor (k) 3
+Max Search Depth 3
+Exploration Constant (cucb) 1.4
+Reward Function (NLI)
+Entailment Weight (we) 1.0
+Neutral Weight (wn) -0.2
+Contradiction Weight (wc) -2.0
+Table 10: Hyperparameters for NLI-Guided MCTS. The
+generator uses these settings during the test-time search
+phase.
+C Theoretical Proofs and Analysis
+C.1 Supplementary Definitions for MMKP
+C.1.1 Multidimensional Cost Vectors
+Unlike the standard Knapsack problem (single
+weight), RAG systems face multiple resource con-
+straints. We define the cost vector wij ∈ RK for
+each item. We model K = 2 dimensions:
+1. Token Consumption (k = 1): w(1) ij =
+Len(dij ).
+2. Redundancy Penalty (k = 2): Derived from
+the intra-group centroid.
+w(2) ij = λred ·
+(
+1
+|Gi| − 1
+∑
+d∈Gi\{dij }
+cos
+(
+Φ(dij ), Φ(d)
+)
+) (3)
+This cost dimension penalizes items that are too
+central or generic within their cluster, preferring
+unique information, scaled by λred.
+C.1.2 Utility Function
+The utility vij balances query relevance and global
+diversity:
+vij = α · Ff usion(q, dij ) + β · (1 − Sim(dij , µGi ))
+(4)
+where Ff usion incorporates both dense and sparse
+(TF-IDF) retrieval scores (via Reciprocal Rank Fu-
+sion), and µGi is the centroid of group Gi.
+C.2 Computational Complexity of MMKP
+Theorem 1 (NP-hardness). The RAG Document
+Selection problem formulated as MMKP (Eq. 1) is
+NP-hard.
+Proof. We perform a reduction from the classic 0/1
+Knapsack Problem, which is known to be NP-hard.
+Let a standard Knapsack instance be defined by
+n items with values vi, weights wi, and capacity
+W . We construct a special instance of our RAG-
+MMKP as follows:
+1. Create m = n groups.
+2. Each group Gi contains exactly two items:
+{di,1, di,0}.
+3. Item di,1 (representing “taking” item i)
+has value vi and weight vector wi,1 =
+[wi, 0, . . . , 0].
+4. Item di,0 (representing “leaving” item i) has
+value 0 and weight vector 0.
+5. Set the MMKP capacity vector C =
+[W, ∞, . . . , ∞].
+The constraint ∑ j xij ≤ 1 in MMKP forces the
+selection of exactly one item per group (either the
+real item or the dummy zero-cost item), which
+is mathematically equivalent to the binary choice
+xi ∈ {0, 1} in the standard Knapsack problem.
+Since 0/1 Knapsack is NP-hard, and it is a special
+case of RAG-MMKP, RAG-MMKP is NP-hard.
+■
+C.3 FPTAS for Core MMKP Variant
+We analyze the single-dimensional variant (D = 1)
+where each group has size 1 (equivalent to stan-
+dard Knapsack). We prove the existence of a
+Fully Polynomial-Time Approximation Scheme
+(FPTAS).
+Theorem 2 (FPTAS). For any ϵ > 0, there exists
+an algorithm that returns a solution S such that
+V (S) ≥ (1 − ϵ) OP T and runs in time polynomial
+in n and 1/ϵ.
+Algorithm Construction:
+1. Let P = maxi vi. Given error tolerance ϵ >
+0, define scaling factor K = ϵP n .
+2. Define scaled values v′ i = ⌊ vi K ⌋.
+3. Solve the problem using DP on values v′ i.
+The recurrence is: DP [k, v] = min(DP [k −
+1, v], wk + DP [k − 1, v − v′ k]). The max pos-
+sible scaled value is V ′ max ≈ n · P K = n2 ϵ .
+20969

@@ -1,0 +1,99 @@
+42
+HotpotQA
+fact_single
+reasoning
+summary
+unanswerable
+MS-MARCO
+NaturalQ
+NewsQA
+PubMedQA
+0% 20% 40% 60% 80% 100%
+SQuAD2
+Figure 1: Composition of labels for different datasets.
+of predictions. In principle, one could opt for a
+higher-cost LLM with a longer context window
+(e.g., newer versions of Llama), but we restrict our-
+selves to lower-cost zero-shot classification with
+Llama-3-70b in this paper.
+5 Retrieval performance across classes
+We now study the performance of the retrieval step
+of RAG systems as a function of the proposed
+labels. We focus on possible differences when
+tuning retrieval strategies with different dataset
+compositions. As a testing setup, we use Elas-
+ticsearch (Elastic.co, 2024) to store vector embed-
+dings of the public dataset contexts, which are gen-
+erated with the bge-small-en-v1.5 model (Xiao
+et al., 2023). While dense vectors are highly effec-
+tive for semantic search, recent applications lever-
+age a hybrid approach, adapting the ranking score
+with a lexical search component (Sawarkar et al.,
+2024). Elasticsearch provides such a hybrid ap-
+proach, which can be tuned with a text-weight pa-
+rameter that varies from 0 (purely vector-based
+search) to 1 (fully lexical search). Tuning this pa-
+rameter well is paramount for achieving an optimal
+performance in a deployed system. However, we
+show that its optimal value depends not just on the
+search corpus but also on the types of questions
+asked.
+Recall that Q&As are associated with a unique
+ground-context in our problem setup. We char-
+acterize the performance of the retriever with the
+Recall@N metric (for this study, N=5). For each
+public dataset, we perform retrieval experiments
+four times: for each label individually (except unan-
+swerable questions) and once inclusively for all la-
+bels. For each round, we perform text weight scans
+to find their optimal value. The scan is performed
+in the following steps: 0, 0.05, 0.1, 0.2, 0.5 and
+1. The text-weight steps were chosen empirically,
+based on the initial results of this investigation. We
+name the text-weight with the highest Recall@5
+the best strategy.
+A summary of these experiments is presented in
+Table 2, which shows that the best strategy can vary
+not only across datasets but also across different
+labels within a dataset. We see relative variations
+in the best strategy recall from 4.8% (NaturalQ)
+to 42% (NewsQA) between best and worst perform-
+ing labels. The highest recall is achieved with the
+fact_single label most often, while reasoning ques-
+tions usually achieve the lowest. This is expected,
+as fact_single questions usually contain informa-
+tion directly mentioned in the ground contexts. On
+the other hand, reasoning questions are more dif-
+ficult to find due to their answers usually being
+abstractions obtained from their associated con-
+texts.
+More importantly, the best strategy found by us-
+ing the inclusive dataset, i.e., without any labelling,
+is not necessarily the same as with individual labels.
+For example, for PubMedQA the inclusive retrieval
+prefers a text weight of 0.05 while the fact_single-
+only retrieval prefers a dense-vector only search.
+On the other hand, for MS MARCO, the inclusive
+evaluation would lead to a text weight of 0.1 while
+the fact_single-only retrieval optimal text weight is
+0.05. We have also tested the hypothesis that the la-
+bels influence the text weight choice with different
+embeddings, such as all-MiniLM-L2-v6 (Reimers
+and Gurevych, 2019), and after applying re-rankers
+such as bge-base (Xiao et al., 2023). These ex-
+periments are documented in Appendix C. These
+findings show that the performance of RAG sys-
+tems depends heavily not only on the type of data
+being searched but also on how the users interact
+with the system.
+6 Generating Balanced Datasets
+We now focus on strategies to synthetically gen-
+erate diverse Q&A datasets for RAG performance
+testing. Several recipes for synthetic dataset gener-
+ation are found within RAG frameworks, such as
+LlamaIndex (Liu, 2022) and the RAG Evaluation
+recipe in the Hugging Face Cookbook (Roucher,
+2024), which use single prompts to generate
+question-answer pairs from LLMs. As a bench-
+mark, we generated Q&A pairs with Llama-3-70b
+and the prompt suggested by the latter (also doc-

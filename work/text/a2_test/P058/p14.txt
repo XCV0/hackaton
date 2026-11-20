@@ -1,0 +1,98 @@
+pediment entirely, CoT hallucinates non-existent
+twin towers, while GranuRAG stays faithful to the
+visible evidence and aligns closely with the ground
+truth.
+From an element selection perspective, the base-
+line fails to identify the prominent pediment, re-
+sulting in incomplete structural coverage. CoT,
+though more detailed, introduces twin towers that
+do not exist in the image, a typical hallucination
+risk in CoT reasoning. GranuRAG correctly iden-
+tifies all key elements including the pediment and
+Christian emblem while avoiding both omissions
+and hallucinations. In terms of generation quality,
+the shade progression reflects meaningful differ-
+ences: for the Christian emblem (blue), GranuRAG
+provides fine-grained symbolic details (e.g., three
+nails, IHS inscription) that match the ground truth,
+while baseline and CoT remain superficial. For
+windows (green), GranuRAG delivers complete
+structural descriptions versus partial coverage by
+other methods. Most notably, the pediment (pink)
+appears only in GranuRAG’s output, demonstrat-
+ing that our method improves both element recall
+and description accuracy.
+B Dataset Construction Details
+B.1 Data Schema
+We organize knowledge at two granularities to sup-
+port hierarchical retrieval:
+Landmarks -level representation:
+xattr = (meta, E, ED, I rep), (6)
+where meta = {Landmarks, Summary, Style}
+contains high-level context; E = {e1, . . . , ek} is
+the landmarks-specific element inventory; ED :
+E → Paragraphs maps each element to its detailed
+description; and I rep is a representative image for
+visualization.
+Image-level representation:
+z = (I, a(I), Egt(I)), (7)
+where I is an image, a(I) denotes its source land-
+marks, and Egt(I) ⊆ E specifies ground-truth
+visible elements.
+The structured JSON schema follows:
+{
+"Landmarks": "[NAME]",
+"Summary": "[description]",
+"Style": "[style_notes]",
+"Elements": ["[elem_1]", ...,
+"[elem_k]"],
+"ElementDescriptions": {
+"[elem_i]": "[paragraph]",
+...
+},
+"Image": "[image_path]"
+}
+B.2 Construction Pipeline
+Stage 1: Data Collection We collect textual
+materials from encyclopedic sources including
+Wikipedia and Baidu Baike, as well as from offi-
+cial heritage and tourism portals such as the Macao
+World Heritage website7 and the Macao Govern-
+ment Tourism Office website.8 Images are sourced
+from Google Images, Rednote, and Trip.com us-
+ing landmark names as search queries to ensure
+viewpoint diversity. All data are collected for non-
+commercial research purposes only. In addition,
+we perform data sanitization to remove privacy-
+sensitive and potentially harmful content, employ-
+ing a hybrid approach that combines LLM-based
+filtering with manual spot-checking. All images
+are collected exclusively for non-commercial aca-
+demic research under the principle of fair use.
+We perform comprehensive data sanitization
+through a rigorous manual screening process.
+Trained annotators inspect each image individually
+following a strict exclusion protocol: any image
+containing the following elements is immediately
+discarded and not included in the dataset:
+• Visible watermarks, platform logos, or copyright
+overlays
+• Timestamps, date stamps, or camera metadata
+overlays
+• Geolocation tags, map overlays, or address infor-
+mation
+• License plates, vehicle identifiers, or transporta-
+tion tags
+• Identity documents, tickets, receipts, or personal
+contact info
+• Recognizable human faces and personal informa-
+tion
+This policy prioritizes privacy protection over data
+retention. After manual screening, we apply qual-
+ity filtering to retain only images with resolution
+≥512px and no visible compression artifacts. The
+final dataset contains 1,422 images that have passed
+7https://www.wh.mo/cn/
+8https://www.macaotourism.gov.mo/
+zh-hant/sightseeing
+10488

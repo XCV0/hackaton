@@ -1,0 +1,76 @@
+retrieved content is insufficient and propose
+query refinement.
+Question:
+{question}
+Queries:
+{queries in Q}
+Retrieved Documents:
+{retrieved results in CQ}
+Agents Arguments:
+{agents arguments}
+Output only the agent’s name.
+A.3 Prompts for Response Debate
+In the Response Debate phase, the discussion is
+initialized based on the retrieval pool and its asso-
+ciated documents produced in the Retrieval Debate
+phase. An example of a proponent agent prompt in
+the Response Debate stage is
+Prompt for Initializing Proponent Agent
+Answer the question based on the given
+document.
+The following are given documents:
+Query 1: q1 ∈ Q
+Retrieved Documents: Cq1 ∈ CQ
+Query 2: q2 ∈ Q
+Retrieved Documents: Cq2 ∈ CQ
+...
+Query n: qn ∈ Q
+Retrieved Documents: Cqn ∈ CQ
+Question:
+{question}
+The challenger agent is initialized based on in-
+ternal knowledge, and an example of a challenger
+agent prompt is
+Prompt for Initializing Challenger Agent
+Answer the question based on your own
+knowledge.
+Question:
+{question}
+Factual consistency in the Response Debate
+phase is achieved through iterative exchanges and
+debates among agents. An example of the debate
+prompt is
+Prompt for Debate
+I will give the answers and arguments to
+this question from other agents. Use their
+solution as additional advice; note that they
+may be wrong.
+Explain your answer.
+{Agent’s Name}:
+{Other agent’s response}
+Question:
+{question}
+In the Response Debate phase, the Judge Agent
+aggregates the responses from all agents and selects
+the most probable answer as the final output. An
+example of a judge agent prompt is
+Prompt for Judge Agent
+You are a moderator in a debate competition.
+Your task is to determine the correct final
+answer based on the arguments presented
+by the debaters. Output only the final an-
+swer with no explanations or additional text.
+{Agent’s Name}:
+{Agent’s Response}
+Question:
+{question}
+B More Detailed Results
+Table 6 shows the detailed performance metrics
+of DRAG across six datasets under different de-
+bate round settings in the Retrieval Debate and
+Response Debate stages.
+C Case Study
+We show the case study of the Retrieval Debate in
+Figure 5, and the error case in the Response Debate
+stage in Figure 6.
+15851

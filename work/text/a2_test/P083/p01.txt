@@ -1,0 +1,90 @@
+Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, pages 111–129
+November 4-9, 2025 ©2025 Association for Computational Linguistics
+Automated Evidence Extraction and Scoring for Corporate Climate Policy
+Engagement: A Multilingual RAG Approach
+Imene Kolli1∗ Ario Saeid Vagheﬁ1∗ Chiara Colesanti Senni1∗
+Shantam Raj2 Markus Leippold1,3
+1University of Zurich, Department of Finance
+2University of Zurich, Department of Informatics
+3Swiss Finance Institute
+∗
+Abstract
+InﬂuenceMap’s LobbyMap Platform monitors
+the climate policy engagement of over 500 com-
+panies and 250 industry associations, assessing
+each entity’s support or opposition to science-
+based policy pathways for achieving the Paris
+Agreement’s goal of limiting global warming
+to 1.5°C. Although InﬂuenceMap has made
+progress with automating key elements of the
+analytical workﬂow, a signiﬁcant portion of the
+assessment remains manual, making it time-
+and labor-intensive and susceptible to human
+error. We propose an AI-assisted framework to
+accelerate the monitoring of corporate climate
+policy engagement by leveraging Retrieval-
+Augmented Generation to automate the most
+time-intensive extraction of relevant evidence
+from large-scale textual data. Our evaluation
+shows that a combination of layout-aware pars-
+ing, the Nomic embedding model, and few-
+shot prompting strategies yields the best perfor-
+mance in extracting and classifying evidence
+from multilingual corporate documents. We
+conclude that while the automated RAG sys-
+tem effectively accelerates evidence extraction,
+the nuanced nature of the analysis necessitates
+a human-in-the-loop approach where the tech-
+nology augments, rather than replaces, expert
+judgment to ensure accuracy.
+1 Introduction
+Corporations signiﬁcantly inﬂuence climate pol-
+icy through lobbying activities, yet there is limited
+structured, accessible data capturing the nature and
+stance of this engagement (Leippold et al., 2024).
+Traditional lobbying registries and voluntary disclo-
+sures offer partial insight, often lacking clarity on
+whether corporate actions support or obstruct cli-
+mate policy. InﬂuenceMap’s LobbyMap platform 1
+has been at the forefront of this effort, producing
+systematic evaluations of over 500 companies and
+∗∗Equal contribution.
+1https://lobbymap.org/LobbyMapScores
+250 industry associations. However, much of this
+analysis remains manual, limiting both scalability
+and responsiveness to new disclosures.
+We present LobbyMap Search, a multilingual
+RAG system that retrieves and classiﬁes textual
+evidence of corporate climate policy engagement.
+Leveraging a pipeline of semantic search, LLM-
+based stance classiﬁcation, and robust evaluation
+metrics, it allows stakeholders to audit lobbying
+behavior across thousands of corporate documents.
+This system provides a scalable method for quanti-
+fying climate lobbying, enabling comparative anal-
+yses across ﬁrms, sectors, and regions.
+Our contributions include:
+• A novel retrieval-augmented stance classiﬁ-
+cation pipeline tailored to climate lobbying,
+based on the InﬂuenceMap schema.
+• Support for multilingual and multi-format cor-
+porate reports.
+• Empirical evaluation framework, including
+both standard retrieval/classiﬁcation metrics
+and recent oracle-based diagnostic scores.
+• Detailed analysis of individual component per-
+formance and overall pipeline accuracy across
+four stance generation strategies.
+2 System Overview
+LobbyMap Search processes company documents
+(PDFs) tagged with metadata (company, language,
+region) and computes lobbying stance scores for
+a predeﬁned set of climate policy queries (see Ap-
+pendix C). The pipeline (Figure 1) consists of ﬁve
+stages:
+1. User Interface: Enables document uploads,
+query submissions, and feedback collection.
+2. Knowledge base: Stores uploaded documents
+and associated metadata for retrieval and
+reuse.
+111

@@ -1,0 +1,94 @@
+proaches also focus on reformulating queries to
+identify more useful documents for answering ques-
+tions (Yan et al., 2024; Trivedi et al., 2023). Yan
+et al. (2024) introduce a retrieval evaluator that acts
+as a judge to trigger query reformulation, search,
+and knowledge refinement actions to supply more
+accurate evidence for generation.
+To further improve the performance of modular
+RAG systems, these models focus on fine-tuning
+various components of the RAG framework. Some
+efforts aim to align the information needs between
+the retriever and the generator by optimizing the
+retrievers based on feedback from the generation
+models (Yu et al., 2023; Shi et al., 2024; Izacard
+and Grave, 2021). Lin et al. (2024) adapt LLMs
+within the RAG setting by constructing instruction-
+tuning data for Supervised Fine-Tuning (SFT), en-
+abling the models to better leverage the retrieved
+documents. Additionally, Li et al. (2024) use Direct
+Preference Optimization (DPO) (Rafailov et al.,
+2024) to jointly optimize the modules in a RAG
+system, aligning their data preferences.
+3 Methodology
+As illustrated in Figure 2, this section introduces
+the RankCoT method. First, we introduce the
+preliminary of knowledge refinement in Retrieval-
+Augmented Generation (RAG) systems (Sec. 3.1).
+And then we describe how to optimize LLMs to pro-
+duce more effective chain-of-thoughts for knowl-
+edge refinement (Sec. 3.2).
+3.1 Preliminary of Knowledge Refinement in
+Retrieval-Augmented Generation Systems
+Given a query q and a set of retrieved documents
+D = {d1, d2, . . . , dn}, vanilla RAG system (Ram
+et al., 2023) uses retrieved documents as context
+and leverages the in-context learning method to
+help the generation model MGen produce the an-
+swer yGen:
+(q, D) ⇝ MGen ⇝ yGen. (1)
+Instead of directly feeding retrieved documents to
+the generation model (MGen), some RAG mod-
+els (Gao et al., 2024; Asai et al., 2024a) design
+various modules to refine retrieved documents D:
+(q, D) ⇝ MKR ⇝ yKR. (2)
+The refined knowledge yKR is then passed to the
+generation model to mitigate the negative impact
+of retrieval noise:
+(q, yKR) ⇝ MGen ⇝ yGen. (3)
+In the rest of this subsection, we will introduce
+different methods for implementing the knowledge
+refinement model MKR in Eq. 2, including rerank-
+ing, summarization, and RankCoT.
+Reranking. Following previous work (Asai
+et al., 2024a), we prompt LLMs to evaluate the
+relevance of the i-th retrieved document di with
+respect to the query q, and output a binary label
+yi Rerank for filtering out noisy documents:
+yi Rerank = LLM(InstructRerank, q, di), (4)
+where InstructRerank prompts the LLM to assess the
+relevance between q and di. The prediction label
+yi Rerank can be “YES” or “NO”, indicating whether
+the i-th document di is relevant or irrelevant to the
+query q. We then retain the documents predicted
+as “YES” and construct the filtered document set
+{d1, . . . , dk}. The knowledge refinement result
+yKR is then represented as:
+yKR = d1 ⊕ · · · ⊕ dk, (5)
+where ⊕ is the concatenation operation.
+Summarization. Another approach for knowl-
+edge refinement is summarization, which aims to
+extract query-related content from the retrieved
+documents (Vig et al., 2022). The knowledge re-
+finement result can be obtained as:
+yKR = LLM(InstructSum, q, D), (6)
+where InstructSum is the instruction prompting the
+LLM to generate a summary. Unlike reranking,
+summarization directly generates the refined knowl-
+edge, avoiding the need to feed raw documents to
+the generation model MGen.
+RankCoT. RankCoT further incorporates a
+Chain-of-Thought (CoT) (Wei et al., 2022) into
+the knowledge refinement process:
+yKR = LLM(InstructCoT, q, D), (7)
+where InstructCoT is the instruction that prompts
+the LLM to generate CoT. RankCoT incorporates
+the chain-of-thought reasoning as the knowledge
+refinement result yKR to extract relevant knowl-
+edge from retrieved documents D, thereby assist-
+ing RAG models in answering the query. Unlike
+summarization, RankCoT integrates the reranking
+mechanism during the chain-of-thought generation
+(Sec. 3.2) to mitigate the influence of noisy docu-
+ments (Liu et al., 2024; Xie et al., 2024).
+12859

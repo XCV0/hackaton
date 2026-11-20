@@ -1,0 +1,104 @@
+for filtering. This can be formulated as
+Ti = MST(Bi). (7)
+Through such a filtering process, we retain only the
+most relevant linking information between entities
+and eliminate redundant edges, thereby enhancing
+the informativeness of the retrieved chunks.
+Serving as an Arranger With the KG-based con-
+text organization module, we aim to integrate the
+retrieved chunks into intrinsically related and self-
+consistent paragraphs with the KG as the skeleton.
+To achieve this, we provide two representations
+for each generated MST Ti, including a text repre-
+sentation and a triplet representation. For the text
+representation, we pick the edge with the highest
+weight as the root, and concatenate all the chunks
+linked to the edges using a depth-first search (DFS)
+algorithm to form a coherent paragraph. For the
+triplet representation, we concatenate all the edges
+in the form of < h, r, t > within the MST.
+We calculate the relevance scores between MSTs
+and the user query based on their triplet repre-
+sentations using a cross-encoder reranking func-
+tion (Xiao et al., 2023):
+R(q, Ti) = C(q, conc(Ti)), (8)
+where C(·) is the cross-encoder reranking function
+and conc(·) is used to obtain the triplet representa-
+tions. We use triplet representations instead of text
+representations because triplets provide a concise
+and structured refinement of the key information as-
+sociated with the corresponding chunks, allowing
+relevance matching to focus on key information.
+After computing the relevance scores, we sort
+the MSTs {Ti | 1 ≤ i ≤ p} according to their rele-
+vance {R(q, Ti)} to the user query q in descending
+order. Then, we include their text representations
+in order until the top-k constraint on the number of
+chunks has been reached. Finally, these selected
+chunks are fed into the LLMs along with the user
+query for response generation.
+3 Experiments
+3.1 Experiment Setup
+Datasets We conduct experiments on the bench-
+mark dataset HotpotQA (Yang et al., 2018), where
+each query can be associated with several materi-
+als (e.g., relevant content in Wikipedia) to help in
+response generation. The HotpotQA dataset con-
+sists of two settings, named HotpotQA-Dist and
+0 10 20 30 40 500
+2000
+4000
+6000
+8000
+10000
+12000
+0 5 10 15 20 25
+100
+101
+102
+103
+104
+105
+#Triplet
+#Triplet
+#Chunk #Document
+(b) Distribution of chunks according to triplet number.
+(a) Distribution of documents according to triplet number.
+Figure 4: Statistics of triplet extraction.
+HotpotQA-Full. In the distractor setting, a total
+of ten documents are provided as supporting ma-
+terials, including all useful knowledge as well as
+some irrelevant content. In the fullwiki setting, it
+is required to identify useful knowledge from the
+entire 66,581 documents extracted from Wikipedia.
+For the KG-chunk association, we provide a
+manual prompt to Llama-3 (Dubey et al., 2024)
+for extracting entities and relations from the 66,581
+documents of HotpotQA, resulting in a total of
+211,356 triplets consisting of 98,226 entities and
+19,813 relations. Each triplet in the constructed
+KG is linked to its source chunk. We record the
+number of triplets extracted from each chunk and
+document, and plot the corresponding distributions
+of chunks and documents in Fig. 4, which shows a
+long-tail phenomenon.
+Furthermore, to alleviate the dependence on
+prior knowledge during the generation process
+(i.e., the training corpus of LLMs may contain
+Wikipedia content) and to better demonstrate the
+effects of RAG, we construct variants of HotpotQA.
+Specifically, for each entity, we randomly replace it
+with another entity in the same category, and then
+update the queries, triplets, and documents accord-
+ingly. For example, the entity Family Guy can be
+replaced with Rick and Morty, and all instances
+of Family Guy contained in queries, triplets, and
+documents would be updated to Rick and Morty.
+Therefore, LLMs have to identify and extract rel-
+evant content from the documents rather than re-
+lying on prior knowledge about Family Guy from
+training data to correctly answer the queries. Note
+there might generate lots of new triplets such as
+(Rick and Morty, language, French), as the orig-
+inal tail entity can be also transformed from En-
+8916

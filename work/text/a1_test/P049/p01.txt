@@ -1,0 +1,85 @@
+RESEARCH ARTICLE
+www.advmatinterfaces.de
+Multi-PhaseSputteredTiO2-InducedCurrent–Voltage
+DistortioninSb2Se3 SolarCells
+Christopher H. Don,* Thomas P. Shalvey, Matthew J. Smiles, Luke Thomas,
+Laurie J. Phillips, Theodore D. C. Hobson, Harry Finch, Leanne A. H. Jones,
+Jack E. N. Swallow, Nicole Fleck, Christopher Markwell, Pardeep K. Thakur, Tien-Lin Lee,
+Deepnarayan Biswas, Leon Bowen, Benjamin A. D. Williamson, David O. Scanlon,
+Vinod R. Dhanak, Ken Durose, Tim D. Veal, and Jonathan D. Major
+DespitetherecentsuccessofCdS/Sb2Se3 heterojunctiondevices,cadmium
+toxicity,parasiticabsorptionfromtherelativelynarrowCdSbandgap(2.4eV)
+andmultiplereportsofinter-diﬀusionattheinterfaceformingCd(S,Se)and
+Sb2(S,Se)3 phases,presentsigniﬁcantlimitationstothisdevicearchitecture.
+Amongtheoptionsforalternativepartnerlayersinantimonychalcogenide
+solarcells,thewidebandgap,non-toxictitaniumdioxide(TiO2)has
+demonstratedthemostpromise.Itisgenerallyacceptedthattheanatase
+phaseofthepolymorphicTiO2 ispreferred,althoughthereiscurrentlyan
+absenceofanalysiswithregardtophaseinﬂuenceondeviceperformance.
+ThisworkreportsapproachestodistinguishbetweenTiO2 phasesusingboth
+surfaceandbulkcharacterizationmethods.Adevicefabricatedwitharadio
+frequency(RF)magnetronsputteredrutile-TiO2 windowlayer
+(FTO/TiO2/Sb2Se3/P3HT/Au)achievedaneﬃciencyof6.88%andnear-record
+short–circuitcurrentdensity(Jsc)of32.44mAcm−2,whichiscomparableto
+establishedsolutionbasedTiO2 fabricationmethodsthatproducedahighly
+anatase-TiO2 partnerlayeranda6.91%eﬃciencydevice.Thesputtered
+methodintroducesreproducibilitychallengesviatheenhancementof
+interfacialchargebarriersinmulti-phaseTiO2 ﬁlmswitharutilesurfaceand
+anatasebulk.ThisisshowntointroducesevereS-shapedcurrent–voltage
+(J–V)distortionandadrasticﬁll–factor(FF)reductioninthesedevices.
+C.H.Don,T.P.Shalvey,M.J.Smiles,L.Thomas,L.J.Phillips,
+T.D.C.Hobson,H.Finch,V.R.Dhanak,K.Durose,T.D.Veal,J.D.Major
+StephensonInstituteforRenewableEnergy
+DepartmentofPhysics
+UniversityofLiverpool
+LiverpoolL697ZF,UK
+E-mail:C.H.Don@liverpool.ac.uk
+The ORCID identiﬁcation number(s) for the author(s) of this article
+canbefoundunderhttps://doi.org/10.1002/admi.202300238
+©2023TheAuthors.AdvancedMaterialsInterfacespublishedby
+Wiley-VCHGmbH.Thisisanopenaccessarticleunderthetermsofthe
+CreativeCommonsAttributionLicense,whichpermitsuse,distribution
+andreproductioninanymedium,providedtheoriginalworkis
+properlycited.
+DOI:10.1002/admi.202300238
+1.Introduction
+Antimony selenide (Sb2Se3) has rapidly
+risen to prominence as a candidate
+material for application as an absorber
+layer, primarily in thin-ﬁlm photovoltaic
+(PV) solar cell devices, but also for
+photodetectors and photoelectrochem-
+ical water splitting.[1–5] In addition to
+this material’s favorable combination
+of properties; boasting a nearly ideal
+1.18 eV band gap,[6] high absorption
+coeﬃcient,[7–9] low toxicity and high
+stability,[10–12] Sb2Se3 hasfurtherdemon-
+strated a high degree of versatility. It
+is capable of being deposited in both
+substrate[13–17] and superstrate[18–26]
+geometries and with a wide variety of
+deposition techniques; from low tem-
+peraturesolution-basedmethods,[21,24–26]
+to high temperature physical vapor
+deposition approaches.[13–15,18–20,22,23]
+This has led to a rapid improvement
+in performance with a record power
+conversion eﬃciency (PCE) of 10.6%
+L.A.H.Jones,J.E.N.Swallow
+DepartmentofMaterials
+UniversityofOxford
+ParksRoad,OxfordOX13PH,UK
+N.Fleck,C.Markwell
+DepartmentofMathematics,Physics,andElectricalEngineering
+NorthumbriaUniversity
+NewcastleuponTyneNE18QH,UK
+P.K.Thakur,T.-L.Lee,D.Biswas
+UKDiamondLightSourceLtd,DiamondHouse
+HarwellScienceandInnovationCampus
+DidcotOxfordshireOX110DE,UK
+L.Bowen
+DepartmentofPhysics
+UniversityofDurham
+DurhamDH13LE,UK
+Adv. Mater. Interfaces2023,10,2300238 2300238(1of15) ©2023TheAuthors. AdvancedMaterialsInterfacespublishedbyWiley-VCHGmbH

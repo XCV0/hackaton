@@ -1,0 +1,88 @@
+Figure 4: Results of different granularity sequences for
+compressor. In the legend, G0-G3 denote [32], [1, 32],
+[1, 2, 8, 32], [1, 2, 4, 8, 16, 32] respectively.
+mance. The self-distillation proves critical for NQ
+performance but negligible for TrivialQA, suggest-
+ing its crucial role in certain scenarios.
+5.2.3 Granularity Sequence Selection
+We investigate the impact of different training gran-
+ularity sequences on compressor performance dur-
+ing training. We present results for the inference
+granularity sequence [1, 2, 4, 8, 16, 32], with addi-
+tional results in Appendix E. As shown in Figure 4,
+with the granularity sequence becoming increas-
+ingly dense from G0 to G3, the overall trend in-
+dicates a slight decrease in the final accumulated
+M scores but accelerated M score accumulation at
+smaller granularities. This suggests that even with
+a fixed compression rate training approach (i.e.,
+the single granularity sequence G0) as in previous
+work, the compressor retains hierarchical encod-
+ing capabilities. Training with additional smaller
+granularities effectively guides the compressor to
+encode information in the compressed embeddings
+at earlier positions. This allows the decoder to
+access sufficient information with fewer embed-
+dings, thereby improving inference efficiency. We
+also observe that the granularity-based inference
+method significantly outperforms the single gran-
+ularity approach under ideal conditions. The final
+accumulated M scores on both datasets notably
+surpass vanilla RAG, demonstrating the immense
+potential of our ACC-RAG framework.
+5.3 Selector Analysis
+5.3.1 Architecture Ablation
+Our ablation study (Appendix F) reveals that RL
+serves as the critical component for sequence-level
+performance, while supervised learning exhibits
+Table 2: The results of different compressors w/ or w/o a
+selector during inference. For each dataset, two columns
+represent Match (M) and First Token Inference Time
+(FTIT). G0-G3 denote different granularity sequences.
+Compressors Selector Datasets
+NQ TriviaQA
+ACC-G0 ✗ 40.19 1007 23.21 1242
+ACC-G0 ✓ 41.33 786 23.38 984
+ACC-G1 ✗ 40.86 1007 23.62 1242
+ACC-G1 ✓ 41.11 630 23.33 878
+ACC-G2 ✗ 39.94 1007 23.20 1242
+ACC-G2 ✓ 39.39 622 23.07 895
+ACC-G3 ✗ 41.27 1007 23.32 1242
+ACC-G3 ✓ 40.17 631 22.58 878
+error propagation leading to sequence-level failure
+due to overemphasis on individual classification.
+In addition, the attention mechanism also plays a
+key role in enhancing the selector, while the in-
+troduction of segment embeddings and granularity
+slightly further improves performance.
+5.3.2 Inference Verification
+To validate the effectiveness of the selector during
+actual inference, we compare different compressors
+with and without the selector using the inference
+granularity sequence [1, 32]. As shown in Table 2,
+ACC-G0 and ACC-G1 with the selector outper-
+formed the versions without the selector on nearly
+all datasets with superior efficiency (with FTIT re-
+duced by over 20%). ACC-G2 and ACC-G3 with
+the selector also maintain comparable performance
+to their counterparts without the selector, while
+achieving over 30% FTIT reduction.
+5.4 Framework Evaluation
+The results of combinations of compressors trained
+with different granularity sequences and inference
+selection strategies are shown in Table 3. We ob-
+serve that, for the same compressor, sparser infer-
+ence granularity sequences yield higher M scores
+but require more context embeddings. This is due
+to sparser sequences reducing classification errors
+by the selector, while potentially missing more pre-
+cise termination points. Among all compressors,
+ACC-G0+G1 achieves the highest average M score,
+while ACC-G1+G1 reaches a similar M score with
+less than 60% of the context embeddings, demon-
+strating the effectiveness of the multi-granularity
+training strategy in hierarchical information encod-
+ing. Additionally, training the compressor and se-
+lection strategy with denser granularity sequences
+further enhances efficiency, as exemplified by ACC-
+24067

@@ -1,0 +1,100 @@
+logits zd,t and zs,t to obtain the fluent output:
+ˆzd,t[v], ˆzs,t[v] =
+{
+zd,t[v], zs,t[v] if v ∈ V
+′
+−∞, −∞ otherwise , (8)
+where v denotes the candidate token and V
+′
+rep-
+resents the set of tokens that are a part of the top-
+k vocabulary of the generator at time step t. By
+substituting zd,t, zs,t with ˆzd,t, ˆzs,t in Eq 7, the en-
+hanced distribution ˆpθ(yt) is formulated as follows:
+ˆpθ(yt) = softmax(ˆzd,t/τd)+α softmax(ˆzs,t/τs) 1+α (9)
+Then, the final token yt in answer y is generated
+through certain sampling strategies:
+yt ∼ ˆpθ(yt|xd, xs, y<t) (10)
+By sampling from the enhanced probability distri-
+bution, the fine-grained knowledge can help the
+generator produce query-focused content that is
+more likely to yield helpful answers to the ques-
+tion, while document-level knowledge can inte-
+grate fragmented knowledge within different docu-
+ments. These two types of knowledge are incorpo-
+rated in a comparative decoding manner to achieve
+better performance.
+3 Experimental Settings
+3.1 Datasets
+Following prior work on RAG, our method is eval-
+uated on four datasets, including two MultihopQA
+datasets: 2WikiMultihopQA (Ho et al., 2020),
+HotpotQA (Yang et al., 2018), and two Single-
+hopQA datasets: PopQA (Mallen et al., 2023),
+ARC-Challenge (Clark et al., 2018).
+2WikiMultihopQA contains over 192k samples
+and provides evidence-based information with rea-
+soning paths to evaluate a model’s reasoning capa-
+bilities. It combines textual data from Wikipedia
+with structured knowledge from Wikidata, ensuring
+that the questions require multi-step reasoning.
+HotpotQA consists of 113k Wikipedia-based
+question-answer pairs which require multi-hop rea-
+soning across different documents. It comprises
+various question types and provides sentence-level
+supporting facts for explainable predictions.
+PopQA includes 14k question-answer pairs that
+require long-tail Wikidata knowledge. It is con-
+structed by sampling knowledge triples from Wiki-
+data and focuses on less popular information.
+ARC-Challenge is a multiple-choice reasoning
+dataset about daily commonsense science phenom-
+ena. It contains 2.5k natural science questions
+difficult for retrieval-based algorithms and word
+co-occurrence algorithms.
+We use 1.0k test samples from both the 2Wiki-
+MultihopQA and HotpotQA datasets, along with
+1.4k and 1.2k test samples from the PopQA and
+ARC-Challenge datasets, respectively.
+3.2 Automatic Evaluation
+Following previous works(Su et al., 2024; Yan
+et al., 2024), we adopt Exact Match (EM) score, F1
+score and Accuracy as automatic evaluation met-
+rics for the RAG task. The EM score measures
+the percentage of generated answers that exactly
+match the ground truth. The F1 score measures the
+token-level overlap between the predicted answer
+and the ground truth. The Accuracy score evaluates
+whether the generated answer contains the correct
+response. To facilitate comparison with the basic
+pipeline, we applied the same evaluation metrics
+to each dataset (Accuracy for the SinglehopQA
+dataset and EM, F1 for the MultihopQA dataset).
+3.3 Implementation Details
+We select two typical basic RAG pipelines (Yan
+et al., 2024; Su et al., 2024) to apply our method.
+DRAGIN (Su et al., 2024) utilizes multi-round re-
+trieval for multi-hop questions, which optimizes
+the retrieval process based on the generator LLM’s
+self-attention across its generated content. CRAG
+(Yan et al., 2024) adopts single-round retrieval for
+one-hop questions and incorporates a lightweight
+retrieval evaluator to improve the overall quality of
+retrieved documents for answer generation. As fol-
+lows, we enhance basic RAG pipelines in retrieval
+and generation processes.
+In retrieval, we utilize the existing generator
+model from the basic RAG pipeline in a one-shot
+manner to extract additional fine-grained knowl-
+edge from the external knowledge corpus K. The
+number of fine-grained retrieved sentences m is
+set to 3, matching the number of retrieved docu-
+ments n to ensure a fair comparison. Concretely,
+we first use a document-based method to retrieve
+10 documents for each question from the external
+knowledge using Contriever (Izacard et al., 2021).
+Then we utilize the existing generator model (e.g.,
+Llama2-7B-chat) to extract 3 fine-grained knowl-
+edge sentences from these documents, while the top
+3 knowledge documents are considered the original
+10035

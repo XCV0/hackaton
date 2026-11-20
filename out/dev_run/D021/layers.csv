@@ -1,0 +1,93 @@
+﻿publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D021,DV-A1-L1,DV-A1,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A1-L2,DV-A1,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A1-L3,DV-A1,3,absorber,"Sb2Se3 (RFMS, undoped)",1200,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A1-L4,DV-A1,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A1-L5,DV-A1,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A1-L6,DV-A1,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A2-L1,DV-A2,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A2-L2,DV-A2,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A2-L3,DV-A2,3,absorber,"Sb2Se3 (RFMS, undoped)",1100,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A2-L4,DV-A2,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",100,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A2-L5,DV-A2,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A2-L6,DV-A2,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A2-L7,DV-A2,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A3-L1,DV-A3,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A3-L2,DV-A3,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A3-L3,DV-A3,3,absorber,"Sb2Se3 (RFMS, undoped)",950,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A3-L4,DV-A3,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",250,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A3-L5,DV-A3,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A3-L6,DV-A3,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A3-L7,DV-A3,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A4-L1,DV-A4,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A4-L2,DV-A4,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A4-L3,DV-A4,3,absorber,"Sb2Se3 (RFMS, undoped)",800,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A4-L4,DV-A4,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",400,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A4-L5,DV-A4,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A4-L6,DV-A4,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A4-L7,DV-A4,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A5-L1,DV-A5,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A5-L2,DV-A5,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A5-L3,DV-A5,3,absorber,"Sb2Se3 (RFMS, undoped)",400,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A5-L4,DV-A5,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",800,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A5-L5,DV-A5,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A5-L6,DV-A5,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A5-L7,DV-A5,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A6-L1,DV-A6,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A6-L2,DV-A6,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A6-L3,DV-A6,3,absorber,"Sb2Se3 (RFMS, undoped)",200,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A6-L4,DV-A6,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",1000,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A6-L5,DV-A6,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A6-L6,DV-A6,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A6-L7,DV-A6,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B1-L1,DV-B1,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B1-L2,DV-B1,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B1-L3,DV-B1,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",1200,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B1-L4,DV-B1,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B1-L5,DV-B1,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B1-L6,DV-B1,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B2-L1,DV-B2,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B2-L2,DV-B2,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B2-L3,DV-B2,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",1000,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B2-L4,DV-B2,4,absorber,"Sb2Se3 (RFMS, undoped)",200,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B2-L5,DV-B2,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B2-L6,DV-B2,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B2-L7,DV-B2,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B3-L1,DV-B3,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B3-L2,DV-B3,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B3-L3,DV-B3,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",200,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B3-L4,DV-B3,4,absorber,"Sb2Se3 (RFMS, undoped)",1000,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B3-L5,DV-B3,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B3-L6,DV-B3,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B3-L7,DV-B3,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B4-L1,DV-B4,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B4-L2,DV-B4,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B4-L3,DV-B4,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",100,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B4-L4,DV-B4,4,absorber,"Sb2Se3 (RFMS, undoped)",1100,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B4-L5,DV-B4,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B4-L6,DV-B4,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B4-L7,DV-B4,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B4Ag-L1,DV-B4Ag,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B4Ag-L2,DV-B4Ag,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B4Ag-L3,DV-B4Ag,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",100,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B4Ag-L4,DV-B4Ag,4,absorber,"Sb2Se3 (RFMS, undoped)",1100,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B4Ag-L5,DV-B4Ag,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B4Ag-L6,DV-B4Ag,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B4Ag-L7,DV-B4Ag,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF1-L1,DV-NaF1,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-NaF1-L2,DV-NaF1,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-NaF1-L3,DV-NaF1,3,absorber,"Sb2Se3 (RFMS, undoped)",,,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF1-L4,DV-NaF1,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-NaF1-L5,DV-NaF1,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-NaF1-L6,DV-NaF1,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-PEDNaF-L1,DV-PEDNaF,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-PEDNaF-L2,DV-PEDNaF,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-PEDNaF-L3,DV-PEDNaF,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",,,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-PEDNaF-L4,DV-PEDNaF,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-PEDNaF-L5,DV-PEDNaF,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-PEDNaF-L6,DV-PEDNaF,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF0-L1,DV-NaF0,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass
+D021,DV-NaF0-L2,DV-NaF0,2,absorber,"Sb2Se3 (RFMS, undoped)",,,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF0-L3,DV-NaF0,3,ETL,CdS,,,,,,,буферный слой CdS
+D021,DV-NaF0-L4,DV-NaF0,4,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,undoped ZnO (UZO)
+D021,DV-NaF0-L5,DV-NaF0,5,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,

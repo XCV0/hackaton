@@ -1,0 +1,49 @@
+Symmetry 2025, 17, 2106 11 of 19
+phasizes the need for energy efficiency and material-intensity optimization in early-stage
+OPV development.
+In summary, the cradle-to-gate LCA identifies three main environmental hotspots in
+PTB7-Th:ZY-4Cl OPVs. First, electricity consumption in thermal–mechanical operations
+(ultrasonic cleaning, spin coating, annealing and magnetic stirring) is the dominant con-
+tributor, accounting for nearly 70% of the global warming potential. Second, ITO substrate
+preparation, including glass and transparent conducting oxide production, contributes
+substantially across several impact categories. Third, deposition and synthesis of the PE-
+DOT:PSS hole-transport layer, together with the active-layer precursor chemicals, dominate
+fossil fuel depletion and make non-negligible contributions to acidification and eutroph-
+ication. By contrast, chlorobenzene solvent use and the thin aluminum electrode have
+comparatively minor impacts at the laboratory cell scale.
+3.2. Hot Spots and Improvements
+In the base case, electricity demand from thermal and mechanical processes was
+identified as the dominant contributor to nearly all environmental categories (Section 3.1).
+This concentration of impacts indicates an environmental asymmetry, highlighting priority
+targets for restoring symmetry through process optimization. Since these operations rely
+on the Polish grid mix, which is still fossil-intensive, substituting renewable electricity
+was evaluated as a strategy for hotspot mitigation. Figure 5 present the impact results
+when grid electricity is replaced with photovoltaic (PV), wind, hydro, waste-to-energy, and
+biogas sources, all modeled using Poland-specific datasets.
+Global Warming Potential: Switching from the Polish grid mix (1.09 × 10−3 kg CO2
+eq) to renewables substantially reduces climate change impacts. The lowest GWP values
+are achieved with hydro (3.31 × 10−4 kg CO2 eq) and wind (3.38 × 10−4 kg CO2 eq),
+corresponding to ~70% reduction relative to the base case. PV also performs well (3.55 ×
+10−4 kg CO2 eq, ~67% reduction). By contrast, biogas and waste-to-energy show higher
+footprints (5.22 × 10−4 and 9.54 × 10−4 kg CO2 eq, respectively), reflecting upstream
+methane leakage and combustion-related CO2 emissions.
+Acidification Potential (AP): A similar trend is observed for AP. The base case impact
+(1.67 × 10−6 kg SO2 eq) drops by 68% under hydro (5.39 × 10−7 kg SO2 eq) and 66% under
+wind (5.65 × 10−7 kg SO2 eq). PV performs slightly worse (6.35 × 10−7 kg SO2 eq), while
+waste (1.25 × 10−6 kg SO2 eq) and biogas (3.39 × 10−6 kg SO2 eq) are higher than the base
+case due to SO2 emissions from combustion.
+Eutrophication Potential (EP): Hydro and wind reduce EP by nearly 45% (1.37–1.44 ×
+10−7 kg N eq compared to 2.52 × 10−7 kg N eq in the base case). In contrast, biogas shows a
+significant burden (1.25 × 10−6 kg N eq, ~5× higher than the base case), reflecting nutrient-
+rich effluents from anaerobic digestion processes. Waste-to-energy performs modestly
+better than the base case but not as effectively as PV, wind, or hydro.
+Ozone Depletion Potential (ODP): Although the absolute values remain very small,
+renewables alter ODP contributions. PV electricity has the highest ODP (2.55 × 10−15 kg
+CFC-11 eq, ~20× higher than the base case), driven by upstream refrigerant leakage in PV
+module and inverter manufacturing. Hydro and wind, by comparison, show ODP values
+close to the base case (~5.8 × 10−17 kg CFC-11 eq).
+Fossil Fuel Depletion (FFD): FFD decreases consistently across all renewable options.
+Wind (7.63 × 10−4 MJ) and hydro (7.52 × 10−4 MJ) yield the lowest depletion, compared
+to the base case (9.35 × 10−4 MJ). PV is slightly higher (7.74 × 10−4 MJ), while waste
+(8.33 × 10−4 MJ) and biogas (8.53 × 10−4 MJ) remain above hydro and wind but still below
+the base case.

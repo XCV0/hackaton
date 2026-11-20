@@ -1,0 +1,108 @@
+Algorithm 1 Top-P Compression Algorithm
+1: Input: Instruction score sins, document scores
+{sd1 , sd2 , . . . , sdk }, top-p threshold p, and
+minimum score threshold ϵ.
+2: Output: Compressed document set D′.
+3: {d(1), . . . , d(k)} ← argsort({sdi }k i=1, desc.)
+4: Initialize sum ← sins, D′ ← ∅.
+5: for i = 1 to k do
+6: if sum ≥ p or sd(i) < ϵ then
+7: break
+8: end if
+9: sum ← sum + sd(i)
+10: D′ ← D′ ∪ {d(i)}
+11: end for
+12: Return: D′.
+utilized to dynamically select critical documents.
+Initially, documents are sorted in descending order
+of their scores, thereby prioritizing candidates with
+higher attention. A cumulative sum, initialized with
+sins, is subsequently accumulated by incrementally
+adding the scores of these sorted documents. The
+selection process continues until either the cumu-
+lative score exceeds a predefined threshold p, or
+the current document’s score is below a minimum
+threshold ϵ. Algorithm 1 provides the pseudo-code
+for this procedure.
+This strategy enables adaptive behavior: when
+many relevant documents disperse attention, more
+documents are required for their cumulative atten-
+tion to reach the threshold p. Conversely, if relevant
+documents are few and attention is concentrated, a
+smaller subset is sufficient. If all documents are ir-
+relevant, attention focused solely on the instruction
+can reach the threshold, filtering out all documents.
+4.3 Attention Fine-Tuning
+Since certain attention heads can inherently focus
+on relevant context, we initialize the cross-attention
+layer using selected attention heads from layer L+1
+of the LLM. However, empirical results show that
+the untrained compressor still assign relatively high
+attention to irrelevant segments, particularly when
+all documents are irrelevant. To improve relevance
+discrimination, we fine-tune the model while freez-
+ing the first L layers and updating only the cross-
+attention layer. This lightweight approach updates
+approximately 0.5% of the total parameters, reduc-
+ing training cost while preserving generalization.
+Data Construction We prepare training data where
+each instance comprises a query q, retrieved doc-
+uments D = {d1, . . . , dk}, and binary relevance
+labels R = {r1, . . . , rk}, with each ri ∈ {0, 1}
+indicating the relevance of di to q. Upon ex-
+amining existing QA datasets, we observe that
+many contain incomplete relevance annotations,
+with only a small subset of relevant documents
+labeled. Directly training on such data yields sub-
+optimal performance, while manual annotation is
+resource-intensive. To address this, we propose an
+automated annotation pipeline based on question-
+answer pairs, comprising two stages: labeling and
+verification. In the labeling stage, we use an un-
+trained compressor to perform multiple rounds of
+Top-P compression with different document permu-
+tations. Documents that are consistently retained
+across all rounds are labeled as relevant, while the
+rest are considered irrelevant. In the verification
+stage, the query and the labeled relevant documents
+are provided to an LLM to generate an answer. The
+annotation is accepted only if the generated answer
+is correct; otherwise, it is discarded. Furthermore,
+to enrich our training data, we also construct neg-
+ative instances where all retrieved documents are
+irrelevant to the query. A detailed description of
+this annotation pipeline is provided in Appendix B.
+Training Our training objective incorporates two
+complementary forms of supervision: document-
+level and instruction-level.
+Document-level Supervision: This component en-
+hances discrimination between relevant and irrele-
+vant documents through binary cross-entropy:
+Ldoc = −
+k∑
+i=1
+[ri log sdi + (1 − ri) log(1 − sdi )]
+(3)
+Instruction-level Supervision: This component di-
+rects attention on the instruction if no documents
+are relevant, and suppresses it otherwise:
+Lins = −
+[
+rins log sins + (1 − rins) log(1 − sins)
+]
+(4)
+where rins ≜ I
+( ∑k
+i=1 ri = 0
+)
+indicates whether
+none of the retrieved documents are relevant, with
+I(·) representing the indicator function.
+The final objective combines both components
+with a balancing hyperparameter λ:
+L = Ldoc + λLins (5)
+4.4 Confidence Estimation
+The fine-tuned model tends to pay more attention
+to the instruction when the overall relevance of re-
+trieved content is low. We leverage this behavior by
+8460

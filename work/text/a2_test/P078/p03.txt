@@ -1,0 +1,116 @@
+3
+visual product images as the entry point for legislation document
+retrieval.
+3 THE NICOPRISM DATASET
+We discuss the motivation, scope, and challenges of NicoPRISM in
+Sec. 3.1. Sec. 3.2 discusses the image data aspect of NicoPRISM
+and how it improves on past works in terms of scale and scope. Sec.
+3.3 details data post-processing. Sec. 3.4 discusses the attribute
+captions for the images in the web set. Sec. 3.5 details the document
+knowledge base, with particular focus on the legislative component.
+Sec. 3.6 provides details on the QA benchmark.
+3.1 Overview and Motivation
+The rapid proliferation of tobacco and nicotine products, in
+particular nicotine pouches, poses challenges for the public health
+space. New products pushed to market may not comply with
+laws or may use marketing language that tries to circumvent
+legislation. Now, scale this problem of identifying products and
+checking compliance across multiple jurisdictions in the United
+States. Addressing this at scale requires a system that can identify
+a product from its image, characterize it at the attribute level,
+and determine whether it is subject to a specific jurisdiction’s
+regulations, simultaneously.
+NicoPRISM serves as our challenging evaluation environment,
+exposing the limits of existing retrieval and reasoning methods.
+We compare against document RAG methods rather than VLM-
+based RAG methods because the primary challenge in NicoPRISM
+is legislative document understanding, parsing, indexing, and
+retrieving jurisdiction-specific statutory text, and connecting to
+image captions, not visual recognition, which we demonstrate with
+high accuracy (see Sec. 5.5). Thus, strong document understanding
+is the necessary component for policy compliance reasoning.
+Three compounding challenges surface in this image-document
+connection setting. (i) Cross-modal grounding, where a product
+image must serve as the entry point into a document graph built
+from legislative text. (ii) Jurisdictional disambiguation, where very
+similar statutory language across law documents makes semantic
+similarity an unreliable signal. (iii) Heterogeneous knowledge
+fusion, where product images, attribute captions, product knowl-
+edge documents, health literature, and legislative texts must be
+jointly indexed and retrieved within a single static knowledge
+base. PRISM-RAG is evaluated against this environment, and
+understanding these challenge properties is necessary to understand
+why SOTA document RAG methods fail and what the method must
+do differently.
+The NicoPRISM dataset comprises 161,563 images from three
+distinct visual distributions, seven structured attribute captions for
+all web-scraped images, a curated knowledge base of product,
+health, and legislative documents spanning 13 exemplar US
+jurisdictions, and 1,495 expert-validated image-question-answer
+(or simply “QA”) pairs, developed in close collaboration with two
+specialized public health researchers.
+NicoPRISM Dataset License and Release. NicoPRISM is
+released under a CC BY-NC 4.0 research-only license that
+prohibits commercial use and explicitly restricts access by tobacco,
+nicotine, and cannabis industry actors and their affiliates. Images
+are not redistributed directly; we release per-image metadata, labels,
+captions, and image encoder embeddings, along with a download
+script.
+3.2 Image Collection
+NicoPRISM draws images from three complementary sources, each
+capturing a distinct visual distribution that a deployed surveillance
+system must handle.
+Web-scraped images. The web split was collected via the Apify
+platform [36], spanning 277 brands and 154,735 images across
+ten product types. It provides the most brand-diverse and visually
+controlled imagery, with clean product photography, consistent
+backgrounds, clear packaging, and readable text. This split forms
+the primary knowledge base for PRISM-RAG and all baselines.
+Social media video frames. The TikTok and YouTube splits were
+sampled from the PHAD dataset [3]. The TikTok split contains
+5,667 frames across 39 brands; the YouTube split contains 1,161
+frames across 12 brands. These splits introduce the challenge of
+a significant visual distribution shift from the web set. Products
+appear in-context with users, in motion, partially occluded, and
+under variable lighting in video frames. A method that retrieves
+correctly from clean catalog imagery may fail substantially on
+social media frames of the same product
+Social Media Release. These splits are sourced from the PHAD
+[3], whose data handling terms govern their use. We do not
+release original video files, account identifiers, or video-level
+metadata; the NicoPRISM release includes only per-frame labels
+and embeddings.
+Past Datasets Table 1 compares NicoPRISM with prior work
+along the dimensions relevant to these challenges; Figures 1 and
+2 illustrate its primary components. Prior datasets are image-only
+and support only detection, providing no document-grounded
+knowledge base and no benchmark tasks that probe the failure
+modes above. NicoPRISM is the first tobacco and nicotine
+product dataset to intentionally and jointly span all three challenge
+dimensions.
+3.3 Data Preparation and Expert Validation
+Mass scraping at the scale of NicoPRISM required a structured
+quality assurance pipeline. We employed a VLM to generate visual
+attribute captions for all images; keyword filtering of the resulting
+captions removed most irrelevant samples and enabled automated
+label reassignment where the depicted product differed from the
+scraped brand context. For TikTok and YouTube frames, team
+members individually inspected candidate frames and selected
+only those in which a tobacco or nicotine product was visible.
+This multi-stage pipeline (automated filtering followed by expert
+manual review) ensures that images associated with each policy
+compliance question accurately depict the product in question, a
+necessary precondition for valid compliance evaluation.
+3.4 Attribute Captions
+For every web-scraped image, we generate captions across seven
+structured attribute categories using a Qwen3.5-VL 4B VLM [37]:
+(i) item name, (ii) item description, (iii) flavors, (iv) marketing
+language, (v) shape, (vi) color, and (vii) visible text. These captions
+serve two purposes. First, they address the cross-modal grounding
+challenge directly; i.e., without a textual representation of the
+image’s content, a text-based retrieval system has no surface to
+index or query. Secondly, the captions are structured around the
+attribute categories most relevant to legislative compliance. Notably,
+flavor characterization is the axis on which most flavor ban statutes
+turn, and enforcement bodies examine marketing language (and
+visible text) when determining whether a product is promoted

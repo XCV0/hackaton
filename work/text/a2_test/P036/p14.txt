@@ -1,0 +1,18 @@
+14 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+Overall Comparison. Overall, our Financially-Augmented LLM achieves a bal-
+ance between GPT-3.5’s reasoning depth and Llama-2’s fine-tuning adaptabil-
+ity. The model effectively integrates retrieval context to ensure factual correct-
+ness while maintaining natural linguistic fluency. Qualitatively, it shows a clear
+improvement in interpretability, numeric reliability, and contextual grounding
+compared to the baseline. This result substantiates the effectiveness of retrieval-
+augmented instruction tuning in enabling domain-specialized financial reasoning
+within smaller, efficient LLMs.
+5.5 More Success and Failure Cases
+We provide additional success and failure cases of our model across different ques-
+tion types in Table 5, including different key financial indicators including div-
+idend queries, revenue-related metrics, period identification, and segment-level
+breakdowns. These failure cases span multiple companies (Broadcom, NVIDIA,
+and AMD), illustrating that errors may occur not only in numeric extraction but
+also in semantic alignment with the ground-truth context. For each example, we
+list the question, the financial metric type, the model’s generated answer, and
+the judgment from the GPT-4 judge model.

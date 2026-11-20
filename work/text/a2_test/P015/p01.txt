@@ -1,0 +1,116 @@
+Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 6: Industry Track), pages 127–140
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+R³A: Reinforced Reasoning for Relevance Assessment for RAG in
+User-Generated Content Platforms
+Xiaowei Yuan1,2, Lei Jin3, Haoxin Zhang3, Ziyang Huang1,2,
+Yan Gao3, Yi Wu3, Yao Hu3, Jun Zhao1,2, Kang Liu1,2,∗
+1The Key Laboratory of Cognition and Decision Intelligence for Complex Systems,
+Institute of Automation, Chinese Academy of Sciences
+2School of Artificial Intelligence, University of Chinese Academy of Sciences
+3Xiaohongshu Inc.
+Abstract
+Retrieval-augmented generation (RAG) plays
+a critical role in user-generated content (UGC)
+platforms, but its effectiveness critically de-
+pends on accurate query–document relevance
+assessment. Despite recent advances in apply-
+ing large language models (LLMs) to relevance
+modeling, UGC platforms present unique chal-
+lenges: 1) ambiguous user intent due to sparse
+user feedback in RAG scenarios, and 2) asym-
+metric relevance, where relevance is driven by
+localized answer-bearing content rather than
+global query–document similarity. To address
+these issues, we propose the Reinforced Rea-
+soning model for Relevance Assessment (R³A),
+which decomposes relevance assessment into
+intent inference and evidence grounding. R³A
+leverages auxiliary high-clicked documents to
+infer latent query intent, and extracts verba-
+tim evidence fragments to ground relevance
+decisions, reducing noise sensitivity and im-
+proving asymmetric relevance modeling. Ex-
+perimental results demonstrate that R³A sub-
+stantially outperforms strong baselines on of-
+fline benchmarks, while the distilled R³A-1.5B
+model achieves significant gains in large-scale
+online A/B testing, effectively balancing per-
+formance and practical deployability.
+1 Introduction
+Retrieval-augmented generation (RAG) systems
+have emerged as a critical paradigm in mod-
+ern information retrieval, facilitating the genera-
+tion of responses grounded in externally retrieved
+knowledge (Ram et al., 2023; Gao et al., 2024).
+Within large-scale user-generated content (UGC)
+platforms—encompassing product reviews, trav-
+elogues, and lifestyle narratives—RAG serves a
+critical function in search architectures. By inte-
+grating retrieval and generation capabilities, these
+systems can efficiently search over billions of user-
+contributed documents and produce concise, infor-
+*Corresponding author.
+               What to do in Tokyo? 
+I got you!! 
+🗼  
+Let me walk you through the 
+must-visit spots, visa tips, and 
+where to stay 
+😎  
+I’ll update the full list later lol
+Anywayyy we ended up just 
+chilling in Shibuya cafés most of 
+the time 
+☕
+💕  
+#TokyoVibes #TravelDraft #
+Q:Tokyo travel?
+Asymmetric
+ Relevance
+lexical or semantic 
+overlap
+w/o answer-
+oriented relevance 
+Highly Relevant! 
+❌
+The search keyword is "Tokyo 
+travel". The  document clearly 
+mentions "Planning your Tokyo 
+travel" and covers travel 
+planning (must-visit spots…) as 
+well as actual travel experiences 
+(chilling in Shibuya cafés). These 
+contents are completely 
+consistent with the search topic 
+and are highly relevant.
+Model
+Figure 1: An illustrative example of erroneous
+relevance assessment for a query–document pair.
+The model is misled by superficial similarity in the
+noisy document, thereby failing to identify the ab-
+sence of answer-bearing evidence required under
+asymmetric relevance.
+mative responses tailored to user queries (Li et al.,
+2025b; Zhang et al., 2025).
+A critical component of the RAG system is the
+relevance assessment module. This module quanti-
+tatively evaluates the semantic relevance between
+user queries and retrieved documents (Thomas
+et al., 2024), ensuring that the generation is ac-
+curately grounded in the query-related context. Re-
+cent advances in large language models (LLMs)
+have opened up new possibilities for relevance mod-
+eling by enabling fine-grained understanding of se-
+mantics and intent (Faggioli et al., 2023; Zheng
+et al., 2023), relying on prompting (MacAvaney
+and Soldaini, 2023; Upadhyay et al., 2024b) or
+supervised fine-tuning (SFT) methods (Zan et al.,
+2023; Fitte-Rey et al., 2025).
+However, applying such models to UGC plat-
+forms introduces unique challenges. First, intent
+inference is constrained by the absence of click-
+through logs (Salemi and Zamani, 2024; Rathee
+et al., 2025), which conventional retrieval sys-
+tems leverage to learn relevance–behavior map-
+pings (Jiang et al., 2024). UGC-based RAG sys-
+127

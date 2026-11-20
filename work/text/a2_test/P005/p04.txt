@@ -1,0 +1,99 @@
+Phase 1: Attention-Guided Indexing (Offline)
+1
+ Sentence-level Chunking
+S1 S2 Sn...
+Split the document into fine-grained sentences
+S3
+2 SLLM Encdoing
+SLLM
+e1 e2 en...
+Sentence embeddings
+Inter-sentence
+Attention Matrix A
+(learned aggregation
+across heads and layers)
+3 Attention-Guided Tree Construction
+e(p12)
+e(p1) e(p2)
+e(s1s3) e(s4s2) e(s5s7) e(s6sn)
+e1 e2e3 e4 e6e5 e7 ...
+At each step, merge the pair of nodes with the highest learned
+attention score to form a parent node.
+Phase 2: Hierarchical Retrieval (Online)
+1 Query Encoding
+What changes in
+Shakespeare’s life
+influenced his works?
+SLLM
+Query Vector e(q)
+2 Hierarchical Beam Search
+e1 e2e3 e4 e6e5 e7 ...
+selected node
+parent node
+leaf node
+pruned path
+selected path
+3 Collect Candidates from Multiple Levels
+4 Similarity Reranking & Selection
+score
+...
+Top-k
+Chunks
+Passed to the LLM
+for answer Geneaio
+Figure 2: Overview of SPROUTRAG. In the offline indexing phase (Phase 1), documents are split into sentence-
+level chunks and encoded with a SLLM to obtain sentence embeddings and inter-sentence attention. Learned
+aggregation over attention heads and layers guides bottom-up tree construction, producing an attention tree with
+sentence embeddings at the leaves and progressive embeddings at internal nodes. In the online retrieval phase(Phase
+2), a query is encoded and hierarchical beam search traverses the tree, collecting candidates from multiple levels
+before similarity reranking selects the top-k chunks for answer generation.
+relation to each remaining node:
+Mpr = max(Mur, Mvr). (5)
+This single-linkage update preserves long-range
+semantic connections as the hierarchy grows. The
+result is an attention tree T whose leaves retain
+sentence-level precision and whose internal nodes
+represent broader semantic units.
+3.2 Hierarchical Retrieval
+Given a query q, SPROUTRAG first encodes it
+with the same SLLM used during indexing to ob-
+tain a query embedding e(q). Retrieval is then
+performed over the attention-guided binary tree,
+where each node v represents a document span at
+a specific granularity. Leaf nodes correspond to
+sentence-level chunks, while internal nodes rep-
+resent progressively larger groups of semantically
+related sentences. This allows SPROUTRAG to
+retrieve evidence at the level most appropriate for
+the query, rather than relying on a fixed chunk size.
+Each candidate node is scored by cosine simi-
+larity between the query embedding and the node
+representation:
+sim(q, v) = e(q)⊤e(v) ∥e(q)∥ ∥e(v)∥ . (6)
+Starting from the root node, retrieval proceeds
+via hierarchical beam search. Let Bt denote the
+active beam at depth t, with B0 = {vroot}. At
+each step, SPROUTRAG expands the children of
+the current beam nodes and retains the top-b most
+relevant nodes:
+Bt+1 = Topb
+( ⋃
+v∈Bt
+Child(v), sim(q, ·)
+)
+, (7)
+where b is the beam width. This search strategy fo-
+cuses computation on the most promising branches
+of the tree while still allowing the retriever to ex-
+plore multiple semantically relevant regions of the
+document.
+In parallel, SPROUTRAG collects relevant nodes
+encountered during traversal. Let Vvisit denote the
+set of all nodes scored during beam search:
+Vvisit =
+⋃
+t
+⋃
+v∈Bt
+Child(v). (8)
+46524

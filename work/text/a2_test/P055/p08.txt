@@ -1,0 +1,91 @@
+KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea Yifan Jin et al.
+2026/5/25 19:52 link.svg
+file:///C:/Users/jyf/WPSDrive/298833145/WPS 云盘 /2. 科研成果 / 【论⽂】 Hyrag/code/link.svg 1/1
+Figure 3: Accuracy (%) for the link prediction task in the zero-
+shot setting.
+Baselines. We conduct comparisons against 12 baseline meth-
+ods, categorized as follows: (i) self-supervised graph methods, in-
+cluding DGI [33], GRACE [44], BGRL [31], GraphMAE [10], and
+G2P2 [35]; (ii) state-of-the-art graph foundation models, including
+GraphGPT [28], LLaGA [3], OFA [18], ZeroG [17], UniGraph[9],
+GraphCLIP [43], and AnyGraph [36]; (iii) RAG-based approach
+specifically designed for graph tasks, including RAGRAPH[14].
+Experimental Details. We conduct experiments under a zero-
+shot setting without updating the parameters of GFMs. The ob-
+jective function of the HKI module is used solely to pre-train the
+mapping network 𝑓Θ (·), which is then frozen at inference time of
+GFMs. The external knowledge base used for retrieval is derived
+from a subset of the commonsense knowledge graph (CSKG)[12],
+comprising ConceptNet[12], WordNet[12], and Wikidata-CS[12]1.
+For all experimental results, we conduct three independent runs
+and report the mean and standard deviation. More experimental
+details can be found in Appendix B.
+5.2 Generalization Performance
+Performance on the node classification task. To evaluate the
+effectiveness of HyRAG in enhancing the generalization perfor-
+mance of GFMs, we integrate HyRAG with the pre-trained graph
+foundation model GraphCLIP as the backbone. Table 1 reports the
+zero-shot node classification accuracy across seven unseen datasets
+from diverse domains. Overall, HyRAG consistently achieves the
+best performance across all datasets. Compared to state-of-the-art
+self-supervised graph representation learning methods and graph
+foundation models, HyRAG yields an average improvement of up
+to 2.02%. This result empirically supports our analysis in Section 1,
+indicating that the parameterized knowledge encoded within model
+weights is insufficient to handle distribution shifts in the zero-shot
+setting. By dynamically retrieving external knowledge, HyRAG
+effectively enhances the generalization of GFMs. Furthermore, com-
+pared to the Euclidean-space retrieval method RAGRAPH, HyRAG
+1Notably, Wikidata-CS refers to the commonsense knowledge in Wikidata, while the
+WikiCS dataset denotes the computer science branch within Wikidata.
+Table 2: The results of the ablation experiment.
+HKI MR DF WikiCS Ele-Photo Books-History
+CR FR FF SF
+× × × × × 70.19± 0.10 53.40± 0.64 53.88± 0.35
+× ✓ ✓ ✓ ✓ 70.94± 0.93 53.60± 0.35 53.35± 0.10
+✓ × ✓ ✓ ✓ 72.26± 1.08 55.00± 0.38 55.10± 0.45
+✓ ✓ × ✓ ✓ 71.19± 0.90 55.96± 0.52 54.36± 0.14
+✓ ✓ ✓ × ✓ 71.85± 0.74 54.37± 0.27 53.84± 0.31
+✓ ✓ ✓ ✓ × 72.55± 0.66 55.79± 0.46 54.93± 0.33
+✓ ✓ ✓ ✓ ✓ 72.66± 0.73 56.05± 0.55 55.14± 0.35
+achieves an average improvement of 0.82%. This gain highlights
+the advantage of hyperbolic geometry over Euclidean geometry
+for knowledge retrieval, demonstrating the effectiveness of our
+hyperbolic RAG framework.
+Performance on the link prediction task. We additionally
+conduct experiments on the link prediction task, and the results are
+shown in Figure 3. HyRAG consistently improves the performance
+of the backbone model AnyGraph across all datasets. In particular,
+HyRAG achieves noticeable gains on Cora and CiteSeer, improv-
+ing the accuracy by 1.08% and 1.41%, respectively. We attribute
+these improvements to the multi-granularity retrieval mechanism
+in hyperbolic space, which better preserves semantic dependencies
+and alleviates the hubness issue of Euclidean retrieval. Moreover,
+consistent gains on WikiCS and Instagram further demonstrate that
+the retrieved knowledge provides complementary structural and
+semantic evidence for link prediction. Overall, these results verify
+that HyRAG generalizes effectively beyond node classification and
+consistently enhances the relational reasoning capability of GFMs
+in zero-shot settings.
+5.3 Ablation Study
+We perform ablation experiments to assess the contribution of each
+component in HyRAG, and present the results in Table 2. The first
+row shows the performance of the baseline method, i.e., GraphCLIP.
+The last row reports the performance of HyRAG.
+5.3.1 The Effectiveness of Hyperbolic Knowledge Indexing. The sec-
+ond row reports the results where the hyperbolic knowledge index-
+ing module is replaced by the standard Euclidean index. Notably,
+this substitution results in the largest performance degradation
+among all ablation variants, with an average decline of 1.99%. This
+significant drop empirically validates the superiority of hyperbolic
+geometry over Euclidean space in preserving the hierarchical struc-
+ture of the external knowledge base, thereby confirming the neces-
+sity of our proposed hyperbolic RAG framework.
+5.3.2 The Effectiveness of Multi-granularity Retrieval. The third and
+fourth rows show the results of removing coarse-grained knowledge
+retrieval (CR) and fine-grained knowledge retrieval (FR), respec-
+tively. Overall, removing either component leads to a noticeable
+performance degradation, indicating that both components are in-
+dispensable for downstream graph tasks. Notably, for the Ele-Photo
+dataset, the performance deterioration is more pronounced when
+removing CR. We hypothesize that this is because node attributes

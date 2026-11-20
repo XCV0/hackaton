@@ -1,0 +1,110 @@
+Chunking
+OCR
+Text
+Retrieval
+Visual
+Retrieval
+Question
+Top-k
+Relevant
+Pages
+Top-k
+Relevant
+Chunks
+Multi Document Source
+Evidence
+Curation
+Chain
+of
+Thought
+Reasoning
+Answer
+Evidence
+Curation
+Chain
+of
+Thought
+Reasoning
+Answer
+Final
+Answer
+Reasoning
+Consistency
+1 Visual RAG
+2 Textual RAG
+3 Modality Fusion
+Figure 2: VisDoMRAG: Given a set of documents, VisDoMRAG parallelly performs evidence-driven ➊ Visual RAG
+and ➋ Textual RAG, prompting the LLMs to answer a query based on the respective retrieved context via Evidence
+Curation and Chain-of-Thought reasoning. The reasoning chains, and answers from the text and visual pipeline are
+ensembled together via ➌ Modality Fusion, where the outputs of both the modalities are aligned using consistency
+analysis on their reasoning chain to arrive at the final answer.
+swer. Once the augmented queries are generated, a
+human annotator reviews them using a predefined
+rubric. The rubric guides the annotator to either
+select one of the five generated questions, retain the
+original question, or mark all questions (synthetic
+and actual) as ambiguous, in which case, the data
+point is discarded. The annotator is tasked with
+ensuring that the question is sufficiently specific
+by cross-referencing the localized evidence. Ad-
+ditionally, the annotator performs a simple search
+across the entire document collection to verify that
+the question cannot be ambiguously answered by
+any other document. Experimental validation of
+one-to-one mapping of query with respect to the
+source document is given in the Appendix.
+5 VisDoMRAG
+VisDoMRAG (Fig 2) is a multimodal RAG approach
+for visually rich document QA consisting of two
+steps: (i) parallel evidence-driven unimodal (vi-
+sion and textual) RAG pipelines, and (ii) Modality
+Fusion, which imposes consistency constraints to
+combine unimodal reasoning chains and arrive at a
+final answer.
+5.1 Evidence-driven Parallel Unimodal RAG
+Textual Retrieval Pipeline The textual RAG
+pipeline commences with the extraction of text
+from the set of documents utilizing Optical Char-
+acter Recognition (OCR), followed by the segmen-
+tation of the extracted text into smaller, indexable
+chunks. Metadata indicating the source document
+and page number is preserved to facilitate trace-
+ability. These chunks are then indexed using a text
+embedding model, enabling efficient retrieval. Rel-
+evant chunks are subsequently retrieved in relation
+to the specified query by a text retrieval model and
+provided as contextual input to the LLM along with
+the query to generate textual answer response.
+Visual Retrieval Pipeline Simultaneously, the
+visual RAG pipeline is dedicated to the extraction
+and analysis of graphical elements, including im-
+ages, charts, and diagrams. For a given set of PDFs,
+a visual embedding model generates an index at the
+page-level granularity for all documents. Relevant
+pages are then retrieved by a visual retrieval model
+based on the specified query, and these pages are
+supplied to multimodal LLMs as visual context.
+This approach ensures that the model has access
+to critical visual information, employing its multi-
+modal capability to utilize visual cues from docu-
+ment layout and graphical structures such as charts,
+diagrams and infographics.
+Prompting Strategy Both the textual and visual
+pipelines employ a sophisticated three-step prompt-
+ing strategy. Given a set of context artifacts (page
+images or textual chunks), and a query, the LLM is
+prompted with the following steps:
+1. Evidence Curation: As a first step, we prompt
+the LLM to extract relevant evidence from the re-
+trieved context. The LLM must isolate key sec-
+tions, such as paragraphs, tables, and figure details,
+that are most likely to address the query and ver-
+balize them in a structured form. This curation
+is crucial in a multi-document setup, where non-
+uniform sources introduce irrelevant, distracting,
+or adversarial content. Accurately identifying rele-
+vant information enhances the model’s reasoning
+abilities by filtering out noise and helps mitigate
+LLM hallucinations.
+2. Chain of Thought Reasoning: Extracting rea-
+6092

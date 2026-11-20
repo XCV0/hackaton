@@ -1,0 +1,88 @@
+Model Size AGGREFACT TofuEval WiCE REVEAL Claim Verify Fact Check Expert QA LFQA RAG Truth BAcc Avg.CNN XSum MediaS MeetB
+Bespoke-Minicheck-7B 7B 65.5 77.8 76.0 78.3 83.0 88.0 75.3 77.7 59.2 86.7 84.0 77.4
+Claude-3.5 Sonnet - 67.6 75.1 73.4 84.6 77.7 89.1 71.4 77.8 60.9 85.6 86.1 77.2
+HalluGuard-4B 4B 70.7 75.5 73.2 79.0 80.5 87.7 77.3 74.0 59.4 86.1 84.4 77.1
+Qwen3-235B-A22B⋆ 235B 76.7 71.3 73.6 81.7 80.8 86.3 74.6 72.1 58.0 84.7 85.7 76.9
+Granite Guardian 3.3 8B 67.0 74.9 74.0 78.6 76.6 89.6 75.9 76.1 59.6 86.9 82.2 76.5
+Mistral-Large 2 123B 64.8 74.7 69.6 84.2 80.3 87.7 71.8 74.5 60.8 87.0 85.9 76.5
+gpt-4-turbo-preview - 66.7 76.5 71.4 79.9 80.4 87.8 67.6 79.9 59.2 83.1 85.3 76.2
+gpt-4o-2024-05-13 - 68.1 76.8 71.4 79.8 78.5 86.5 69.0 77.5 59.6 83.6 84.3 75.9
+Qwen3-4B 4B 60.0 74.7 72.0 78.0 77.8 91.4 73.3 76.5 60.4 85.0 84.0 75.7
+Qwen2.5-72B-Instruct 72B 63.6 73.0 71.9 80.4 80.2 88.9 70.0 77.0 60.1 84.3 81.9 75.6
+Llama-3.3-70B-Instruct 70B 68.7 74.7 69.5 78.4 76.6 85.5 67.4 78.5 58.3 79.8 82.6 74.5
+Llama-3.1-405B-Instruct 405B 64.8 75.1 68.6 81.2 71.8 86.4 67.5 79.4 58.5 81.9 82.9 74.4
+gpt-4o-mini-2024-07-18 - 61.8 73.6 71.3 79.7 76.3 85.8 69.8 76.0 58.3 80.3 81.6 74.0
+QwQ-32B-Preview 32B 57.0 71.6 69.3 78.5 72.3 86.2 67.7 75.6 60.0 78.9 72.4 71.8
+Mixtral-8x22B 176B 57.3 70.3 69.0 78.5 69.5 85.8 63.8 79.5 57.4 76.5 78.8 71.5
+Llama-3.1-8B-Instruct 8B 54.7 68.5 71.1 75.5 72.0 83.5 66.5 72.3 57.8 77.5 73.6 70.3
+GPT-3.5-Turbo - 63.2 72.4 66.8 73.4 68.5 84.7 65.2 70.8 57.2 73.8 75.6 70.1
+Qwen3-0.6B⋆ 0.6B 51.5 64.7 63.6 71.0 65.4 85.8 64.8 75.0 58.3 73.8 65.5 67.2
+Llama-3.2-3B-Instruct 3B 51.5 60.5 53.1 52.5 58.5 81.9 62.3 62.6 55.8 58.5 63.0 60.0
+Table 1: Evaluation on LLM-AggreFact. Models are ordered by average balanced accuracy (BAcc Avg.; higher is
+better). HalluGuard-4B (ours), Qwen3-0.6B, 4B and 235B-A22B were evaluated using our prompt in think mode.
+All other results are taken from the public leaderboard. The higher score between HalluGuard-4B and Qwen3-4B is
+shaded in dark green. Alternating grey rows improve readability. ⋆ Models used within our training pipeline.
+6 Results
+Evaluation on Benchmark. We evaluate classi-
+fication performance by extracting predicted labels
+regardless of XML validity and align HalluGuard’s
+three-class output with the binary LLM-AggreFact
+setting by treating both intrinsic and extrinsic hal-
+lucination types as a single hallucinated class.
+As shown in Table 1, HalluGuard achieves
+77.1% BAcc, outperforming its Qwen3-4B back-
+bone by +1.4 points (75.7) with notable gains in
+AggreFact-CNN (+10.7) and ClaimVerify (+4.0).
+All results use the think mode with fixed inference
+parameters (see Appendix I). HalluGuard is com-
+petitive with much larger general-purpose LLMs
+such as Mistral Large 2 (76.5) and GPT-4o (75.9),
+and outperforms Granite Guardian 3.3 (76.5) but re-
+mains slightly below MiniCheck (77.4) while using
+only 57% of its parameters (4B vs. 7B).
+Although MiniCheck achieves a marginally
+higher average BAcc, a paired permutation test on
+all benchmark datasets indicates that HalluGuard
+achieves a statistically significant advantage in ex-
+pected BAcc (∆BAcc = +0.81, p < 0.001).
+Overall, results show that our method enables a
+compact backbone to rival general-purpose LLMs
+and specialized models in hallucination detection.
+RAGTruth Detailed Evaluation. This subset fo-
+cuses on RAG settings, evaluating whether claims
+are supported by retrieved documents.
+HalluGuard achieves an average BAcc of 84.4%,
+improving over its Qwen3-4B backbone (84.0) and
+surpassing specialized models such as MiniCheck
+(84.0) and Granite Guardian 3.3 (82.2), while using
+roughly half of their parameters. Although the
+gain in BAcc is modest, it does not fully reflect
+HalluGuard’s recall on the hallucinated class.
+HalluGuard achieves 84.1% recall on halluci-
+nated claims, missing 203 cases, compared to 334
+for Granite Guardian 3.3 (73.7), 287 for Qwen3-4B
+(77.4), and 229 for MiniCheck (81.9) (see Table 2).
+These results support HalluGuard’s use as an ef-
+fective guardrail mitigating hallucinations in RAG.
+Predicted Actual
+Hallucinated Grounded
+Grounded 203 12,807
+IntrinsicHallu 466 403
+ExtrinsicHallu 600 1,882
+Total 1,269 15,092
+Table 2: Confusion Matrix. Rows show HalluGuard’s
+predictions; columns show binary ground-truth labels.
+Fine-Grained Hallucination Analysis. Because
+RAGTruth provides only binary labels, Table 2
+should be read as a behavioral analysis of Hal-
+luGuard’s predictions rather than a direct evalua-
+tion of subtype correctness. Among ground-truth
+hallucinated instances, HalluGuard predicts
+Grounded, IntrinsicHallu, and ExtrinsicHallu in
+16.0%, 36.7%, and 47.3% of cases. Among ground-
+truth grounded instances, it predicts Grounded in
+84.9% of cases; its false positives are more of-
+ten ExtrinsicHallu than IntrinsicHallu (12.5%
+vs. 2.7%), suggesting greater sensitivity to unsup-
+ported content than to explicit contradictions.
+16923

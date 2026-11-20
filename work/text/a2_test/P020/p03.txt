@@ -1,0 +1,106 @@
+389
+2.3 Multi-domain Document Retrieval
+Multi-domain document retrieval presents unique
+challenges, particularly in enterprise product set-
+tings where information is often distributed across
+diverse and overlapping knowledge sources. Re-
+search in this area has focused on developing meth-
+ods to accurately retrieve relevant information from
+multiple sources. Federated search approaches
+(Shokouhi and Si, 2011) enable querying multi-
+ple distributed indexes simultaneously, while do-
+main adaptation techniques (Shi et al., 2020) han-
+dle transfer across diverse search domains. Recent
+work leveraging LLMs for retrieval resource selec-
+tion (Wang et al., 2024b) has also shown strong
+zero-shot performance. Our work extends these
+efforts by introducing a stochastic gating mecha-
+nism combined with federated search, tailored for
+RAG-QA pipelines in complex environments with
+cross-product queries.
+3 Methodology
+Our MKP-QA framework, shown in Fig. 1,
+integrates components for domain relevance,
+exploration-exploitation, retrieval, and multi-
+domain aggregation, detailed below.
+3.1 Query-Domain Router
+To effectively estimate the query-domain relevance
+scores. we leverage a query-domain router F :
+Q → [0, 1]m, mapping from the space of queries
+Q to the m product domains as a multi-label
+classification task. We use a Transformer model
+(Vaswani, 2017), specifically a variant of BERT,
+fine-tuned for our multi-domain classification task:
+F (q) = σ(W + BERT(q) + b), where BERT(q)
+is the contextualized representations of query q at
+[cls] token; W and b are learnable parameters;
+and σ is the sigmoid activation function. As this
+is a multi-label classification task, we employ a bi-
+nary cross-entropy loss for each domain, summed
+over all domains. At inference, we estimate the
+query-domain relevance likelihood with the trained
+domain router: F (q) = [p1, p2, . . . , pm].
+3.2 Stochastic Gating
+To address the challenge of balancing exploitation
+of high-confidence domains with exploration of
+potentially relevant but less certain domains, we
+introduce a stochastic gating mechanism with adap-
+tive threshold control. This approach allows for dy-
+namic adjustment of the search space based on the
+Query-Domain Router’s confidence and the inher-
+ent uncertainty in multi-domain RAG-QA. We de-
+fine an adaptive threshold τ (q) for query q based on
+the entropy of the domain probability distribution
+p: τ (q) = τ0(1 −
+− Pm j pj log (pj )
+log (m) ), where τ0 is the
+base threshold hyperparameter; and [p1, . . . , pm]
+is the vector of domain probabilities output by
+the router. We utilizie stochastic gating function
+G : M × Q → {0, 1}, with M as the domain space
+and Q as the query space, to facilitate domain se-
+lection and introduce exploration. This function is
+defined as G(q, j) = Bernouli (min (1, pj /τ (q))),
+where G(q, j) is the domain j-th selection for query
+q based on the Bernouli sampling.
+3.3 Query-Document Retriever
+To facilitate efficient and effective retrieval of rele-
+vant documents across multiple product domains,
+we employ a bi-encoder architecture for our Query-
+Document Retriever. This model generates dense
+vector representations for both queries and docu-
+ments, enabling rapid similarity computations in
+the embedding space. Our retriever embedding
+model E is based on the Sentence-BERT (Reimers,
+2019) with shared weights for query and document
+encodings, generating dense vector representations
+Eθ(q) and Eθ(d) for query q and document d.
+We fine-tune the retriever model on our multi-
+domain dataset using a contrastive learning ap-
+proach with a symmetric supervised variant of the
+InfoNCE loss (Oord et al., 2018), incorporating su-
+pervised relevance labels and symmetry, which we
+find particularly effective for query-document re-
+trieval tasks in multi-domain settings. The retriever
+loss function is Lr = −(Lq2d + Ld2q)/2, where
+Lq2d and Ld2q represent the query-to-document
+and document-to-query directional losses. The
+Lq2d is computed as follows and the Ld2q can be
+obtained similarly.
+Lq2d =
+X
+q
+X
+d+ ∈D+
+exp (s(q, d+ )/τ )
+exp (s(q, d+ )/τ ) + P d∈D− exp (s(q, d)/τ )
+where D+ and D− are the set of annotated positive
+and negative document pairs for the given query q
+within batch; s(q, d) is the dot-product similarity
+score between query q and document d embedding:
+s(q, d) = E(q) · ET (d); and τ is a temperature
+hyperparameter. At inference, we compute the
+embeddings of all documents in the corpus offline
+and save in a vector database. For a given query,
+we compute its embedding and retrieve the top-k
+documents using similarity score search.

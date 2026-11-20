@@ -1,0 +1,114 @@
+Prompt for CoRe-MMRAG
+Prompt format:
+Question :
+< image >
+{ question }
+Step 1:
+If the question with image is directly
+↪→ answerable , provide the answer in [] less
+↪→ than 5 words .
+If not , proceed to Step 2.
+Step 2:
+Identify the most similar Wikipedia reference to
+↪→ the { question }
+Reference A :
+< image #A >
+Wiki title : { wiki_title_A }
+Wiki content :{ wiki_content_A }
+Reference B :
+< image #B >
+Wiki title : { wiki_title_B }
+Wiki content :{ wiki_content_B }
+Reference C :
+< image #C >
+Wiki title : { wiki_title_C }
+Wiki content :{ wiki_content_C }
+Reference D :
+< image #D >
+Wiki title : { wiki_title_D }
+Wiki content :{ wiki_content_D }
+Reference E :
+< image #E >
+Wiki title : { wiki_title_E }
+Wiki content :{ wiki_content_E }
+Step 3:
+Based on the most similar reference , answer the
+↪→ question
+< image >
+{ question }
+within 5 words
+Step 4:
+If the answers from Step 1 and Step 3 differ ,
+↪→ determine which one is the final answer ,
+↪→ output the final answer in less than 5 words .
+Example:
+Question :
+< image >
+What is the width ( in kilometre ) of this lake ?
+Step 1:
+If the question with image is directly
+↪→ answerable , provide the answer in [] less
+↪→ than 5 words .
+If not , proceed to Step 2.
+Step 2:
+Identify the most similar Wikipedia reference to
+↪→ What is the width ( in kilometre ) of this
+↪→ lake ?
+Reference A ...
+# See Prompt for Qwen2 - VL -1 - Stage
+Step 3:
+Based on the most similar reference , answer the
+↪→ question
+< image >
+{ question }
+within 5 words
+Step 4:
+If the answers from Step 1 and Step 3 differ ,
+↪→ determine which one is the final answer ,
+↪→ output the final answer in less than 5 words .
+Answer:
+"2.8 km "
+A.2 Case Study
+A.2.1 VTKI Examples
+The cases for VTKI are illustrated in Figure 4. For
+each input query, we present the top-5 retrieved
+references (A–E) ranked by embedding similar-
+ity between the reference images and the query
+image, computed using EVA-CLIP-8B. The exam-
+ples in the figure demonstrate that the Qwen-2-VL
+model produces different outputs when ranking is
+based solely on image modality versus text modal-
+ity. When relying only on image similarity, the
+model may incorrectly select visually similar but
+semantically irrelevant references. For instance, in
+the second row of Figure 4, the model selects refer-
+ence C as the most similar, but its associated text
+discusses Bursaphelenchus xylophilus, which is un-
+related to the question "How many offspring can
+this bird produce at the same time?" Conversely,
+when using only textual information, as shown in
+the fourth row of Figure 4, the model mistakenly se-
+lects reference B over reference C. Both references
+describe food items resembling pudding, but with-
+out visual cues, the model cannot determine which
+is more appropriate. These examples highlight the
+VTKI problem, where unimodal approaches may
+lead to incorrect reference selection. In contrast,
+our proposed CoRe-MMRAG method effectively
+addresses this issue by leveraging both modalities.
+When unimodal outputs diverge but include the cor-
+rect answer, CoRe-MMRAG enables the model to
+identify and choose the correct reference.
+A.2.2 PRKI Examples
+The cases for PRKI are illustrated in Figure 5,
+which follows the same ranking settings as Figure 4.
+These examples demonstrate that the presence of
+noisy information in external data can negatively
+impact the model’s ability to express accurate para-
+metric knowledge, leading to incorrect outputs. In
+such PRKI scenarios, our proposed model effec-
+tively mitigates this issue. Notably, the first and
+second rows in Figure 5 show that our method suc-
+cessfully outputs the correct parametric knowledge,
+explicitly marked with square brackets ("[]").
+32980

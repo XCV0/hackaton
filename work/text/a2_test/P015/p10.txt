@@ -1,0 +1,102 @@
+A LLM Usage Disclosure
+We use LLM for paper writing to check grammar
+and boost the clarity. We do not use LLM to gener-
+ate experiment code and analysis.
+B UMbrela Prompt
+The following presents the full prompt used in
+UMbrela method, which is also employed by
+DeepSeek-R1 to generate reasoning chains and an-
+swers on unlabeled data.
+Prompt
+System
+You are a relevance assessor working on a user-
+generated content platform.
+User
+Given a query and a document, you must provide a
+score on an integer scale of 0 to 2 with the following
+meanings:
+0 = represent that the document has nothing to do
+with the query
+1 = represents that the document has some answer
+for the query, but the answer may be a bit unclear, or
+hidden amongst extraneous information
+2 = represents that the document is dedicated to the
+query and contains the exact answer
+Important Instruction:
+Assign category 1 if document presents something
+very important related to the entire topic but also
+has some extra information and category 2 if the
+document only and entirely refers to the topic. If
+none of the above satisfies give it category 0.
+Please determine the primary intent behind a user’s
+search query, using both your internal knowledge
+and the provided context.
+Your response must strictly follow the format:
+<think> [the reasoning content] </think>
+<score> [0/1/2] </score>
+Input
+[query]: {query}
+[document to be evaluated]: {doc}
+Assistant
+C Instruction Template for R³A
+C.1 Prompt in the First Stage
+The following presents the full prompt used in the
+first stage interaction.
+Prompt in the 1st Stage
+System
+You are a content understanding engineer working
+on a user-generated content platform.
+User
+Please determine the primary intent behind a user’s
+search query, using both your internal knowledge
+and the provided context.
+Your input consists of the [query] and the [in-
+platform documents] retrieved based on that query.
+The latter is intended to assist in judging the user’s
+intent but may contain irrelevant content. The search
+query should be considered the primary reference.
+Please carefully analyze the given [query] and the
+corresponding [in-platform documents] to infer the
+underlying query intent.
+Your response must strictly follow the format:
+<think> [the reasoning content] </think>
+<intent> [inferred user intent] </intent>
+Input
+[query]: {query}
+[in-platform documents]: {docs}
+Assistant
+C.2 Prompt in the Second Stage
+The following presents the full prompt used in the
+second stage interaction.
+Prompt in the 2nd Stage
+User
+Please assess the relevance of the [document to be
+evaluated] based on the user’s input [query] and the
+inferred [intent], and extract the relevant fragment of
+the document accordingly.
+Scoring Criteria
+0 = not relevant, the document has nothing to do with
+the query.
+1 = partially relevant, the document is relevant to the
+query but partly answers it.
+2 = highly relevant, the document is dedicated to the
+query and contains the exact answer.
+Extraction Guidelines
+1. Extract the content from the [document to be
+evaluated] that is strictly relevant to the query
+and can help answer the query. This may include
+paragraphs, sentences, or even individual phrases.
+2. The extracted content must come directly from the
+original document, with all punctuation preserved.
+Your response must strictly follow the format:
+<think> [the reasoning content] </think>
+<extract> [fragment/none] </extract>
+<score> [0/1/2] </score>
+Input
+[document to be evaluated]: {doc}
+Assistant
+D Dataset Description
+We collect a total of 50k unlabeled documents for
+cold-start training and distillation, and another 7k
+samples for human double-blind annotation. Our
+136

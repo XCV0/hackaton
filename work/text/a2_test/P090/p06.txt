@@ -1,0 +1,67 @@
+Table 1: Impact of diverse noise types on accuracy (%) for Llama3-8B-Instruct and Qwen2-7b-Instruct across seven
+datasets. We assess performance across various retrieval scenarios: “Base” (no retrieval), “Golden Only” (only
+golden retrieval context), and “Golden & XXX" (golden context + specific retrieval noises, including Counterfactual,
+Supportive, Orthographic, Semantic, Datatype, Illegal Sentence Noise). The green and red values indicate the
+performance gap from "Golden Only". We also provide the weighted average accuracy for each noise type. The best
+two results are shown in bold and underlined.
+Llama3-8B-Instruct
+Scenario
+Single-hop Multi-hop (Explicit) Multi-hop (Implicit)
+AverageNQ RGB HotpotQA 2WikiMQA Bamboogle StrategyQA TempQA
+Base 61.34 47.00 53.80 34.40 32.00 58.80 50.54 51.58
+Golden Only 93.06 80.00 97.80 79.80 87.20 73.40 91.94 86.57
+Golden & CN 58.86 36.33 44.20 21.20 61.60 43.20 67.74 45.58−40.99
+Golden & SuN 90.58 80.00 95.60 81.00 93.60 69.40 93.01 85.37−1.20
+Golden & ON 93.31 75.00 96.20 78.60 89.60 63.60 90.86 83.99−2.58
+Golden & SeN 96.53+0.47 81.33+1.33 98.40+0.60 87.20+7.40 93.60+6.40 68.40 96.24+4.30 88.73+2.16
+Golden & DN 93.19+0.13 81.67+1.67 95.00 82.00+2.20 88.00+0.80 73.60+0.20 94.62+2.68 86.91+0.34
+Golden & ISN 96.65+0.65 83.00+1.33 98.80+1.00 87.40+7.60 94.40+7.20 72.60 97.85+5.91 89.89+3.32
+Qwen2-7B-Instruct
+Base 58.24 31.33 50.20 22.60 31.20 42.40 40.86 43.01
+Golden Only 97.03 76.33 98.40 78.00 94.40 67.00 94.62 86.46
+Golden & CN 41.88 26.00 38.40 12.40 39.20 37.60 45.16 33.96−52.50
+Golden & SuN 90.46 74.00 96.40 80.40 92.00 64.00 90.32 83.65−2.81
+Golden & ON 95.66 74.00 97.80 80.00 91.20 54.60 94.62 83.82−2.64
+Golden & SeN 96.53 77.67+1.34 98.80+0.40 77.00 96.80+2.40 66.80 97.31+2.69 86.60+0.14
+Golden & DN 96.03 84.33+9.00 98.20 79.60+1.60 93.60 71.80+4.80 95.70+1.08 88.11+1.65
+Golden & ISN 96.65 80.00+3.67 99.00+0.60 83.80+5.80 96.80+2.40 66.80 97.85+1.23 88.11+1.65
+Figure 4: Impact of ISN on the average accuracy of eight
+representative LLMs on RGB. Red solid lines indicate
+means and purple dashed lines show medians.
+types: harmful noise (counterfactual, supportive,
+and orthographic) and beneficial noise (semantic,
+datatype, and illegal sentence). We find that:
+(1) For harmful noise, counterfactual noise im-
+pacts model performance most significantly by dis-
+rupting accurate fact discernment and answer gen-
+eration. As shown in Figure 1, the false statement
+“Beckham was a prominent player for Manchester
+United” leads the model to disregard correct infor-
+mation and respond erroneously.
+(2) For beneficial noise, illegal sentence noise
+exhibits the most notable improvement in model
+Table 2: Effects of beneficial noise on Self-RAG
+(13B). We report enhanced accuracy ratios (%), and
+the weighted average values (WA, %) are also provided.
+Scenario NQ RGB StrategyQA WA
+Golden only +3.12 +1.74 +18.88 +7.77
+Golden & DN +1.84 +1.96 +13.50 +5.49
+Golden & ON +1.76 +3.63 +10.00 +4.67
+Average +2.24 +2.45 +14.13 +5.98
+performance. It improves accuracy by an average
+of 3.32% and 1.65% for two models, respectively,
+and consistently achieves powerful performance
+across diverse datasets.
+For prior noise, we evaluate on our PriorQA
+dataset in Appendix Table 7. Questions in Pri-
+orQA contain factual errors, such as “Which coun-
+try hosted 1980 FIFA World Cup?” (1980 FIFA
+World Cup was not held). Accuracy is measured by
+whether LLMs correctly identify and respond with
+“The question is factually incorrect”. LLMs achieve
+79.93% average accuracy in handling prior noise.
+However, when models fail to identify prior errors
+and continue retrieval, accuracy drops to 34.20%.
+This highlights the importance of detecting factual
+errors in queries before generating responses.
+5024

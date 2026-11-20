@@ -1,0 +1,57 @@
+Rubidium Fluoride Absorber Treatment for Wide-Gap
+and Bifacial Ag(In,Ga)Se2 Solar Cells
+Jan Keller | Sapna Mudgal | Natalia M. Martin | Olivier Donzel-Gargand | Marika Edoff
+Ångström Laboratory, Division of Solar Cell Technology, Uppsala University, Uppsala, Sweden
+Correspondence: Jan Keller (jan.keller@angstrom.uu.se)
+Received: 4 June 2025 | Revised: 17 June 2025 | Accepted: 20 June 2025
+Funding: European union programme HORIZON, Grant/Award Numbers: HORIZON-CL5-2021-D3−02 101075626; Swedish Research Council, Grant/
+Award Number: 2020-04065; MAX IV
+Keywords: AIGS | bifacial solar cell | CIGS | RbF-PDT | wide-gap chalcopyrite
+ABSTRACT
+This study investigates the impact of a RbF post-deposition treatment (PDT) on the properties of Cu-free, wide-gap (EG = 1.5 eV)
+Ag(In,Ga)Se2 (AIGS) solar cells with either opaque Mo or transparent In2O3:W back contacts. The formation of a Rb-In-Se surface
+phase and Cd in-diffusion from the buffer into this layer are detected. In addition, Rb is mainly located in Ag-depleted and In-
+enriched grain boundaries and at the back interface. The RbF-PDT leads to decreased fill factor (FF) values, without providing any
+gain in open-circuit voltage (VOC). This FF deterioration is more pronounced when a In2O3:W back contact is used. It is suggested
+that transport barriers form at the Rb-In-Se/AIGS front and at the AIGS/GaOx/In2O3:W back interfaces after RbF-PDT. In addi-
+tion, the GaOx thickness at the rear electrode increases. The absence of a VOC boost may be explained by the missing doping
+increase after the RbF-PDT. Lastly, the AIGS solar cells from this study show slightly lower efficiencies as compared to Cu-
+containing devices with the same EG but higher Ga content. However, the collection at rear illumination is marginally improved,
+reaching up to 72% bifaciality in short-circuit current for the best cell with an In2O3:W back contact.
+1 | Introduction
+Today, the incorporation of the heavy alkali (HA) elements potas-
+sium, rubidium, or cesium into low-gap (Agx,Cu1−x)(Iny,Ga1−y)(Sz,
+Se1−z)2-based absorbers is standard for solar cell applications, since
+highest efficiencies (η > 22%) cannot be reached if only sodium
+(mandatory for decent performance) is added [1–3]. In most cases,
+the HA species is supplied in the form of evaporated (HA)F in a
+post absorber deposition treatment (HA-PDT), with the first report
+of the beneficial effect of a potassium fluoride-post-deposition
+treatment (KF-PDT) dating back to 2013 [4]. It was observed that
+the HA-PDT allows growing substantially thinner CdS buffer
+layers without losses in open-circuit voltage (VOC)orfillfactor
+(FF), resulting in higher short-circuit current densities (JSC).
+Possible explanations are a facilitated Cd in-diffusion (creating
+type inversion) [4, 5] and an earlier formation of a fully covering
+CdS layer during chemical bath deposition (CBD) [6, 7]. Typically,
+the HA-PDT also leads to higher VOC values, but the underlying
+physical mechanism is still under debate [3, 8–11]. Prevalent sug-
+gestions are that, after HA-PDT, the recombination rates are
+reduced i) at the interface to the buffer by the formation of a very
+thin, wide-gap (Alkali,Cu)-(In,Ga)-Se surface layer (possibly with-
+out Ga and Cu) [12–17], ii) at grain boundaries via a reduction/
+passivation of charged defects [18–20], or iii) in the grain interiors
+due to a reduced concentration of deep defects [21, 22](deemed
+unlikely by others [18]). Alternative explanations are an increased
+doping density [23–25] (but lower doping was observed as well
+[26]) and reduced potential fluctuations [27].
+Comparably few HA-PDT studies were conducted on chalcopyrite
+absorbers with bandgap energies (EG) > 1.4 eV, as required for a
+top cell in a tandem PV device [28, 29]. In case of cells based
+This is an open access article under the terms of the Creative Commons Attribution License, which permits use, distribution and reproduction in any medium, provided the original work is
+properly cited.
+© 2025 The Author(s). Solar RRL published by Wiley-VCH GmbH.
+Solar RRL, 2025; 9:e2500423 1of15
+https://doi.org/10.1002/solr.202500423
+Solar RRL
+RESEARCH ARTICLE

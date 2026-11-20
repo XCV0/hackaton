@@ -1,0 +1,5 @@
+publication_id,device_id,absorber_material_id,device_label,device_role,device_type,architecture,substrate_type,active_area,area_unit,area_definition,encapsulation,note
+D007,DV1,M1,V1553,target,cell,n-i-p,,,,,,FTO/SnO2/perovskite/V1553/Au; standard architecture
+D007,DV2,M1,spiro-OMeTAD,control,cell,n-i-p,,,,,,"reference device, FTO/SnO2/perovskite/spiro-OMeTAD/Au"
+D007,DV3,M1,V1553 module,target,minimodule,n-i-p,,30.24,cm2,designated illumination,,module 6.5 x 7 cm2
+D007,DV4,M1,spiro-OMeTAD module,control,minimodule,n-i-p,,,,,,module 6.5 x 7 cm2; площадь явно для spiro-модуля не указана

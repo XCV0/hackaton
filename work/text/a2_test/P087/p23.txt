@@ -1,0 +1,67 @@
+INPUT QUERY & COMPLEXITY ANALYSIS
+Query: "Which magazine was founded first, ’The American Conservative’ (TAC) or ’The Weekly Standard’ (TWS)?"
+Reasoning Requirement: 1. Multi-hop Retrieval: Must find Date(T AC) AND Date(T W S). 2. Temporal Compari-
+son: Compute min(DateT AC , DateT W S ). Hardness: High (Ambiguity in entity dates)
+♂search Baseline: Standard RAG (Failure Trace)
+STEP 1: DENSE RETRIEVAL (TOP-K)
+Retriever matches query embedding to chunks. Limit: K =
+3.
+• [Rank 1] Doc A: "TAC is a bi-monthly journal...
+founded in 2002 by Pat Buchanan..."
+→ Sim: 0.89 (High relevance to ’TAC’)
+• [Rank 2] Doc B: "TAC (Website) offers
+opinion pieces... launched in 2002..."
+→ Sim: 0.88 (Redundant Semantic Cluster)
+• [Rank 3] Doc C: "Pat Buchanan co-
+founded TAC to promote anti-war views..."
+→ Sim: 0.86 (Redundant Semantic Cluster)
+CRITICAL ERROR: Context window full. The document
+containing "The Weekly Standard (1995)" (Rank 4, Sim
+0.84) is truncated.
+STEP 2: COT REASONING (HALLUCINATION)
+LLM Input: Doc A, Doc B, Doc C.
+• Thought 1: "Founding date of TAC is 2002 (from
+Doc A)."
+• Thought 2: "Searching for TWS date... Not in con-
+text."
+• Thought 3 (Parametric Memory): "TWS is a fa-
+mous neo-con magazine. It feels older, associated
+with the 90s or Cold War. Let’s assume 1950s."
+• Comparsion: 1950s < 2002.
+Final Prediction:
+The Weekly Standard (approx. 1950s)
+✗ Factually Incorrect Reason
+/filter Ours: Self-Correcting RAG (Success Trace)
+PHASE 1: MMKP CONTEXT SELECTOR
+Goal: Maximize Diversity / Minimize Redundancy.
+• Cluster 1 (Topic: TAC): {Doc A, Doc B, Doc C}
+• Cluster 2 (Topic: TWS): {Doc D (Rank 4)}
+• Action: Select representative from Cluster 1 (Doc
+A) → Discard Doc B & C. → Retrieve Doc D.
+Optimized Context: {Doc A (2002), Doc D ("TWS...
+founded Sep 17, 1995")}
+PHASE 2: MCTS PLANNER REASONING
+Policy: π(a|s), Reward: NLI(Context, Hypothesis).
+Node 0: Root State (Question)
+↪→ Branch 1: Greedy Generation (Hallucination)
+Hypothesis: "TWS founded in 1955."
+→ Verification (NLI): Context (Doc D: 1995) vs
+Hypothesis (1955).
+→ Result: Contradiction (0.99).
+→ Reward Q(s, a): -1.0 (Prune path)
+↪→ Branch 2: Guided Extraction (Correct)
+Hypothesis: "TWS founded in 1995."
+→ Verification (NLI): Context (Doc D: 1995) vs
+Hypothesis (1995).
+→ Result: Entailment (0.98).
+→ Reward Q(s, a): +1.0 (Proceed)
+Final Prediction:
+The Weekly Standard (1995)
+✓ Factually Grounded
+Figure 8: Comprehensive Trace of Failure vs. Correction. Left: The Baseline fails due to information crowding.
+High-similarity redundant documents about Entity A fill the context window, cutting off Entity B. The model then
+hallucinates to fill the gap. Right: Our approach employs MMKP (Maximal Marginal Relevance based Knapsack
+Problem) to filter semantic duplicates, ensuring both entities are present. Subsequently, the MCTS (Monte Carlo
+Tree Search) planner explores reasoning paths. It actively penalizes the hallucinated branch (Branch 1) via NLI
+verification and rewards the factually consistent branch (Branch 2).
+20975

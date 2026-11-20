@@ -1,0 +1,49 @@
+10777
+A Detailed Prompt
+Corrector Few_Shot Prompt
+User: 我想让你担任一个强大的中文拼写纠错模型，你的职责是对中文句子中的汉字进行拼写检查和纠错。
+User: I want you to serve as a powerful Chinese spelling correction model, and your role is to spell check and correct Chinese characters in Chinese
+sentences.
+User: 待处理中文句子:我很高兴受到你们结婚的邀请单，你们到底决定结婚了！ 待处理中文句子的字符串长度:25 处理指令:结合中文语言学规则、
+上下文信息对上文中的待处理中文句子进行检查，判断句子中是否错误使用了拼音相似或者形状相似的汉字，导致中文句子原本的语义发生改变。
+如果句子中有这种错误使用的汉字，就找到正确的汉字，对错误汉字进行一对一替换。有几个错误汉字就替换几次，替换操作发生前后中文句子的
+字符串长度不发生改变；如果没有错误使用的汉字，则不进行替换。 结果模板: 是否存在错误汉字:<> 处理后的中文句子:<> 处理后的中文句子的
+字符串长度:<>
+User: Pending Chinese sentence: I am very happy to suffer your invitation to get married, you have finally decided to get married! String length of the
+pending Chinese sentence: 25 Processing instructions: Check the above Chinese sentences in combination with Chinese linguistic rules and context
+information to determine whether Chinese characters with similar pinyin or similar shapes are used incorrectly in the sentence, resulting in changes in the
+original semantics of Chinese sentences. If there is such a misused kanji in the sentence, find the correct kanji and replace the wrong kanji one-to-one. There
+are several wrong Chinese characters are replaced several times, and the string length of the Chinese sentence does not change before and after the
+replacement operation; If there are no incorrectly used kanji, they will not be replaced. Result Template: Whether there are wrong Chinese characters: <>
+Processed Chinese sentences: <> length of processed Chinese sentences: <>
+Assistant: 是否存在错误汉字:是 处理后的中文句子:我很高兴收到你们结婚的邀请单，你们到底决定结婚了！ 处理后的中文句子的字符串长度:25
+Assistant: Is there a wrong Chinese character: Yes. Processed Chinese sentence: I am very happy to receive your invitation to get married, you have finally
+decided to get married! String length of processed Chinese sentence: 25
+User: 待处理中文句子:我很高兴你们邀请我参加你们的婚礼。 待处理中文句子的字符串长度:17 处理指令:结合中文语言学规则、上下文信息对上
+文中的待处理中文句子进行检查，判断句子中是否错误使用了拼音相似或者形状相似的汉字，导致中文句子原本的语义发生改变。如果句子中有这
+种错误使用的汉字，就找到正确的汉字，对错误汉字进行一对一替换。有几个错误汉字就替换几次，替换操作发生前后中文句子的字符串长度不发
+生改变；如果没有错误使用的汉字，则不进行替换。 结果模板: 是否存在错误汉字:<> 处理后的中文句子:<> 处理后的中文句子的字符串长度:<>
+User: Pending Chinese sentence: I'm glad you invited me to your wedding. String length of the pending Chinese sentence: 17 Processing instructions: Check
+the above Chinese sentences in combination with Chinese linguistic rules and context information to determine whether Chinese characters with similar
+pinyin or similar shapes are used incorrectly in the sentence, resulting in changes in the original semantics of Chinese sentences. If there is such a misused
+kanji in the sentence, find the correct kanji and replace the wrong kanji one-to-one. There are several wrong Chinese characters are replaced several times,
+and the string length of the Chinese sentence does not change before and after the replacement operation; If there are no incorrectly used kanji, they will
+not be replaced. Result Template: Whether there are wrong Chinese characters: <> Processed Chinese sentences: <> length of processed Chinese
+sentences: <>
+Assistant: 是否存在错误汉字:否 处理后的中文句子:我很高兴你们邀请我参加你们的婚礼。 处理后的中文句子的字符串长度:17
+Assistant: Is there a wrong Chinese character: No. Processed Chinese sentence: I'm glad you invited me to your wedding. String length of processed
+Chinese sentence: 17
+...
+CSC Query Prompt
+User: 待处理中文句子:我受到了你们的结婚卡。 待处理中文句子的字符串长度:11 处理指令:结合中文语言学规则、上下文信息对上文中的待处理
+中文句子进行检查，判断句子中是否错误使用了拼音相似或者形状相似的汉字，导致中文句子原本的语义发生改变。如果句子中有这种错误使用的
+汉字，就找到正确的汉字，对错误汉字进行一对一替换。有几个错误汉字就替换几次，替换操作发生前后中文句子的字符串长度不发生改变；如果
+没有错误使用的汉字，则不进行替换。 结果模板: 是否存在错误汉字:<> 处理后的中文句子:<> 处理后的中文句子的字符串长度:<>
+User: Pending Chinese sentence: I suffered your wedding card. String length of the pending Chinese sentence: 11 Processing instructions: Check the above
+Chinese sentences in combination with Chinese linguistic rules and context information to determine whether Chinese characters with similar pinyin or
+similar shapes are used incorrectly in the sentence, resulting in changes in the original semantics of Chinese sentences. If there is such a misused kanji in the
+sentence, find the correct kanji and replace the wrong kanji one-to-one. There are several wrong Chinese characters are replaced several times, and the string
+length of the Chinese sentence does not change before and after the replacement operation; If there are no incorrectly used kanji, they will not be replaced.
+Result Template: Whether there are wrong Chinese characters: <> Processed Chinese sentences: <> length of processed Chinese sentences: <>
+Figure 6: Taskspecific Few_shot Correction prompt for CSC task. We’ve marked key information in italics and
+bold, originally incorrect words in red, correctly changed words in green, incorrectly changed words in blue.

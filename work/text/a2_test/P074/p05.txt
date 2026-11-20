@@ -1,0 +1,102 @@
+{˜zi q}32 i=1, es is the section representation com-
+posed of section-side aggregated textual embed-
+dings {˜zi s}32 i=1, and lq and ls denote the numbers
+of embeddings in eq and es, respectively. In our
+implementation, lq = 64 and ls = 32.
+Finally, sims(eq, es) is combined with a visual
+entity similarity score simp(I, q, p) in a weighted
+manner to produce the final candidate section simi-
+larity score:
+simtotal = λ simp(I, q, p) + (1 − λ) sims(eq, es),
+(7)
+where λ ∈ [0, 1] balances the contributions of vi-
+sual similarity and fine-grained section similarity.
+In our experiments, λ is treated as a fixed, dataset-
+dependent hyperparameter and is set differently
+across datasets, as described in Appendix A.3.
+Multimodal Section Reassessment: To incorpo-
+rate visual knowledge information, we extract the
+cover images corresponding to the top 5 Wikipedia
+sections identified by the previous re-ranking.
+These image-section pairs are then used for a mul-
+timodal reassessment process. We use the pre-
+trained multimodal re-ranking model (Bai et al.,
+2023) to generate global representations for both
+the multimodal query and the candidate sections
+and then calculate the cosine similarity. Finally, a
+voting strategy combines the results of the initial
+and multimodal re-ranking stages to select the most
+relevant section. This selected section is then con-
+catenated with the question to serve as the input
+context for the generator.
+3.3 Contrastive Training Strategy for the
+Multimodal Re-ranking
+We use contrastive learning to train the fine-grained
+section re-ranking module. Following the stan-
+dard contrastive learning setup, we select annotated
+queries D and their corresponding Wikipedia sec-
+tions from the training corpus as positive samples.
+We employ visual coarse-grained search to obtain
+k1 sections as negative samples, which are similar
+with the positive samples but lack direct semantic
+associations, fail to provide valuable knowledge
+for LLM generation.
+Furthermore, to guide the retriever in distinguish-
+ing more challenging sections, we adopt a curricu-
+lum learning (Bengio et al., 2009) setting to further
+increase the difficulty of negative samples. We de-
+fine difficult negative samples as sections that are
+semantically similar to positive samples but contain
+misleading information, which LLMs are challeng-
+ing to identify and may generate high-confidence
+but incorrect responses. We leverage a decoding
+rank elevation strategy and generation likelihood
+to assess knowledge effectiveness. Unlike previous
+methods (Zhang et al., 2024a; Wang et al., 2025),
+which evaluate document quality based on the gen-
+eration results without the knowledge supplement,
+our task focuses on identifying hard negative sam-
+ples that exhibit subtle differences from the positive
+sample. To eliminate the spurious positives caused
+by the generator’s internal implicit knowledge, we
+use LLMs (Grattafiori et al., 2024) that only in-
+troduce questions and paragraphs as input context
+without visual information to evaluate the validity
+of the sections.
+Specifically, we sample N candidate outputs
+{ˆy(m)}N m=1 conditioned on the question q together
+with either the positive section s+ or a visually
+similar negative section s−. For each sampled out-
+put ˆy(m) = (ˆy(m) 1 , . . . , ˆy(m) Tm ) with length Tm, we
+compute its average token log-likelihood (used as
+a confidence score) under evidence section s:
+ℓ(ˆy(m); q, s) = 1 Tm Tm∑ t=1 log P ( ˆy(m) t | ˆy(m) <t , q ◦ s ) ,
+(8)
+where ˆy(m) is the m-th sampled output, Tm is its
+length, and q ◦ s denotes the concatenation of the
+question and the section.
+Based on this confidence score, we rank
+the N sampled outputs in descending order of
+ℓ(ˆy(m); q, s) and compute the rank of the expected
+(gold) answer y∗:
+R(s) = 1 +
+N∑
+m=1
+I
+[
+ℓ(ˆy(m); q, s) > ℓ(y∗; q, s) ] ,
+(9)
+where N is the number of sampled outputs and I[·]
+is the indicator function.
+We then define the decoding rank perturbation
+induced by a negative section s− as the rank differ-
+ence between the negative and positive sections:
+∆R(s−) = R(s−) − R(s+), (10)
+where s+ denotes the positive section and s− de-
+notes a negative section. A larger ∆R(s−) indi-
+cates that the negative section is more difficult for
+the LLM to distinguish from the positive one.
+We rank negative samples in descending order
+of ∆R(s−); ties are further broken by the confi-
+dence score (e.g., ℓ(y∗; q, s−)). We then sample a
+41139

@@ -1,0 +1,78 @@
+Fig. 2. Data construction pipeline: from raw document extraction to structured card normalization and hierarchical L1/L2 tagging.
+employed a rule-based labeling system following the princi-
+ples of weak supervision [15], [24]. This system utilizes ap-
+proximately 2,400 dictionary entries and 800 regex patterns
+to map the Keywords and Causes fields of each card to the
+L1/L2 taxonomy. The labeling process achieved a coverage
+of 97.6% (13,012 cases), and the resulting tag distribution
+aligns with official maritime statistics [25], ensuring the face
+validity of our structured knowledge base.
+D. Multi-Field Hybrid Retrieval
+Given an input scenario q, our retriever employs a hybrid
+strategy designed to capture both lexical overlaps and se-
+mantic nuances across different document sections. For each
+field in D, we implement two complementary retrievers:
+(1) Sparse Retrieval using BM25 [9] for exact keyword
+matching of technical identifiers, and (2) Dense Retrieval
+using bge-m3 [10] for capturing semantic paraphrases.
+To aggregate results across the three fields and two
+retrieval methods—totaling six independent rankings—we
+utilize Reciprocal Rank Fusion (RRF) [11]:
+RRFScore(c) = ∑
+r∈R
+1
+krrf + rankr(c) , (3)
+where R is the set of rankings and krrf is a smoothing constant
+set to 60. This field-aware fusion ensures that the system
+recovers relevant evidence even when the query q shares
+vocabulary with different semantic sections of a historical
+card.
+E. Structured RCA Generation
+The final stage of our framework involves generating the
+structured output Y = {n,T } by conditioning the generator
+on the retrieved evidence. As illustrated in Fig. 3, the top-
+k chunks Ck are first sorted in descending order of their
+RRFScore and then provided as context to the genera-
+tor G (Qwen3-Next-80B-A3B-Instruct). To maintain
+traceability and allow the model to distinguish between
+different types of evidence, each chunk is annotated with
+its original case ID and field type (Summary, Causes, or
+Disposition).
+We utilize a temperature of 0.0 to minimize output vari-
+ance and enforce a strict JSON schema via system prompt-
+ing. The model is specifically tasked with synthesizing the
+disparate retrieved precedents into a coherent and concise
+cause narrative n, while simultaneously mapping the incident
+to the appropriate taxonomy-aligned tags T . This structured
+approach ensures that the resulting RCA report is not only
+human-readable but also consistent with the established
+KMST cause classification system.
+IV. EXPERIMENTS
+A. Setup and Baselines
+We partitioned the 13,329 cards into train, validation, and
+test sets with a 70%/15%/15% ratio. All retrieval indices
+were constructed using the training set. Strategy comparisons
+and hyperparameter tuning (e.g., krrf) were performed on the
+validation set, while final performance is reported on the
+held-out test set.
+Retrieval Baselines. To evaluate the efficacy of our multi-
+field hybrid strategy, we compared it against:
+• Whole-document indexing: Concatenating the Sum-
+mary, Causes, and Disposition fields into a single mono-
+lithic text block per card.
+• Single-field indexing: Indexing only the Summary or
+Causes fields to assess the information gain from field
+separation.
+For each indexing strategy, we evaluated sparse retrieval
+(BM25), dense retrieval (BAAI/bge-m3), and the proposed
+hybrid retrieval. Unless otherwise specified, we retrieved
+k = 100 chunks for evaluation.
+Generation Baselines. We compared our RAG framework
+against an LLM-only baseline, which utilizes the same
+generator G (Qwen3-Next-80B-A3B-Instruct) and
+prompt structure but without any retrieved context Ck. This
+comparison isolates the impact of precedent-grounding on
+generation quality. For our proposed system, G receives the
+top k = 40 chunks as context; given our field-aware indexing,
+this typically provides evidence from 10–13 distinct histori-
+cal cards.

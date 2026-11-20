@@ -1,0 +1,44 @@
+2 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+and named entity recognition. This paper explores more complex financial chal-
+lenges, particularly earnings report analysis.
+A company’s earnings report serves as a comprehensive self-declaration re-
+garding its financial performance within a given fiscal period. Consequently,
+earnings analysis assumes a pivotal role in financial assessment, aiming to gar-
+ner a nuanced understanding of the company’s performance. Therefore, earn-
+ings report analysis necessitates adept handling of various financial intricacies,
+including considerations such as the peer sector dynamics, challenges related to
+calendarization, and the nuanced language employed in the executives’ commu-
+nications. In the next section, we provide details about how earnings analysis
+can be conducted via our augmented system.
+Instruction tuning, as proposed by [11], stands out as a cost-effective and
+efficient technique for aligning an LLM with a specific downstream task, such as
+the earnings analysis. The process involves the collection of instruction-following
+data, subsequently used to fine-tune the LLM. Since human generation datasets
+are very costly, a pragmatic alternative involves initiating the fine-tuning process
+with seed examples and employing a high-capacity teacher LLM such as OpenAI
+GPT-3.5 to generate a diverse set of instructional data. While this approach has
+demonstrated success across various problem domains, such as general question-
+answering [11] and visual understanding [9], its applicability to earnings report
+analysis remains an open question.
+In addressing domain-specific challenges, an LLM frequently leverages the re-
+trieval augmented generation (RAG) approach [8], a methodology that provides
+the model with domain-specific context. In our work, aimed at grounding gen-
+eration instructions within the financial domain, we introduce a novel method
+termed retrieval-augmented instruction data generation. This methodol-
+ogy integrates both the financial domain context and the instructional prompt
+during data collection, guiding the teacher LLM in generating questions and
+answers aligned with the provided context. The approach yields a rich set of
+financial instruction-following data, important for the fine-tuning of a financial-
+augmented LLM.
+In summary, this research makes several significant contributions. Firstly,
+we address the earnings report analysis problem, representing a pivotal exten-
+sion in the realm of LLMs focused on finance. Our novel approach involves a
+retrieval-augmented instruction data generation method designed for domain-
+specific tasks. This method generates instruction data contextually grounded in
+the financial domain. By fine-tuning an LLM with the curated instruction data,
+we demonstrate superior performance within the financial domain, much better
+than the well-known open-source LLM, Llama-2-7b [12], and comparable with
+the commercial GPT-3.5 model.
+2 Structured Components of Earnings Report Analysis
+A comprehensive earnings report analysis goes beyond the computation of finan-
+cial metrics; it involves a structured reasoning process across several intercon-

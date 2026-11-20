@@ -1,0 +1,42 @@
+Figure 9: Distribution of image counts per landmark.
+The dataset shows a single dominant mode around 11–
+30 images (48 of 71 landmarks, 67.6%), with only a few
+landmarks providing more than 40 views.
+multiple inventory terms refer to near-identical vi-
+sual components. Uncertain cases undergo ambi-
+guity escalation, where they are marked for expert
+review or excluded to avoid false positives.
+The annotation workflow presents each image I
+alongside landmark metadata (meta, E, ED) and
+LLM-proposed candidates ˆE(I). Annotators edit
+the proposals by adding missed but visible ele-
+ments, removing hallucinated or non-verifiable ele-
+ments, and correcting keys to canonical form. This
+protocol ensures ground-truth labels reflect gen-
+uine visual evidence, enabling fair evaluation while
+accounting for real-world photography ambiguities
+such as viewpoint limitations and occlusions.
+B.7 Detailed coverage distribution
+Beyond the aggregate statistics reported in the main
+text (mean 34%, median 29%), the image distri-
+bution statistic is shown in Figure 9, which re-
+flects real-world photography patterns: most land-
+marks contain 11–30 images, while iconic loca-
+tions exceed 40 images. The element coverage
+ratio Coverage(I) = |Egt(I)|/|E| shows consid-
+erable variation. The interquartile range spans 0.18
+to 0.47, meaning half of all images show between
+18% and 47% of available elements. The distribu-
+tion exhibits notable tail behavior: 12% of images
+show fewer than 15% of elements due to extreme
+close-up framing, while 5% show more than 70%
+of elements in comprehensive panoramas. Strat-
+ifying by view type reveals that close-up views
+average 22% coverage, mid-range views average
+36%, and panoramic views average 58%.
+This granular breakdown confirms that multi-
+view aggregation is essential for our task. No single
+view type reliably captures complete element in-
+ventories, which necessitates cross-view evidence
+fusion for comprehensive retrieval.
+10490

@@ -1,0 +1,47 @@
+A Appendix
+A.1 Theoretical Understanding
+We consider the following theoretical setup. Denote Dtr = {(xi, yi)}N as the pre-training dataset with N
+pairs of prefix xi and suffix yi. Denote p(y|x) as the LLM’s output probability of y given input x, and
+further define L as the loss function. The pre-training loss then can be written as
+E(x,y)∈Dtr L(p(y|x)),
+and the pre-training finds the optimal probability function p, denoted as p∗, to minimize the loss.
+To argue why the leakage of pre-training data is mitigated in RAG, we need to explain (1) why pre-
+training memorization happens using LLM without RAG, and (2) why pre-training memorization is
+reduced after introducing RAG.
+For (1), in literature of neural tangent kernel (e.g., Ba et al. 2019), double-descent phenomenon (e.g.,
+Hastie et al. 2022), it is widely observed that when the model size is sufficiently large, the model smoothly
+interpolates the training data. That is,
+∀x ∈ {x1, . . . , xN }, arg max y p∗(y|xi) = yi,
+i.e., given a prefix in the pre-training dataset, the LLM can output the exact suffix yi.
+In addition to having a prefix x which exactly appears in Dtr, we can further relax the condition on the
+prefix x. Denote d(·, ·) as some distance metric between two sequences of tokens, e.g., cosine similarity,
+ROUGE, or BLEU. Also define xN N as the nearest neighbor of x in {xi}i=1,...,N based on the distance
+metric d(·, ·). Again, since the model smoothly interpolates the training data, we also have
+|p∗(·|x) − p∗(·|xN N )| = O(d(x, xN N ))
+Because of the smoothness, which means that as long as x is similar to xN N and leads to a small
+enough d(x, xN N ), there is no great difference between p∗(·|x) and p∗(·|xN N ), and the LLM tends to
+output the suffix corresponding to xN N . Such a result implies that the leakage of pre-training data in
+LLM can be a prevalent issue.
+On the other hand, to explain (2), when introducing RAG into the system, the retrieval dataset does
+not appear in the pre-training data, so it is not sufficiently close to the pre-training dataset. Consider a
+prefix x from Dtr, a standard RAG system will first retrieve the nearest contents from the retrieval dataset
+based on d(·, ·), denoted as xRAG. Then d(x, xRAG) can be quite large because xRAG /∈ Dtr. Then the
+LLM will generate output based on xRAG, i.e. the output distribution is p∗(·|xRAG). According to Eq.(1),
+there exists a substantial shift between the output distribution with RAG, p∗(·|xRAG), and the output
+distribution without RAG, p∗(·|x). Therefore, with the involvement of retrieved contents, the pre-training
+data leakage is mitigated. We provide some intuition and theoretical analysis here. A more detailed
+quantification of the difference between the two distributions requires further investigation, and we leave
+it for future exploration.
+A.2 Ablation Studies
+In this section, we present additional ablation studies on the impact of components of the RAG system
+when extracting private data from the retrieval datasets. We consider embedding models, the temperature
+parameter of LLMs and different questions in the {information} part.
+Embedding Models. Fixing the LLM as Llama2-7b-Chat, we study the impact of embedding models.
+To be more specific, we consider all-MiniLM-L6-v2, e5-base-v2 and bge-large-en-v1.5. R denotes
+Repeat Contexts and RG denotes ROUGE Contexts. As shown in Figure 6, privacy leakage risks remained
+high across embedding models, with considerable retrieved and extracted contexts. Moreover, embedding
+models divergently influenced retrieved contexts and successful extractions across datasets and attacks.
+For instance, E5 embedding is more vulnerable to facing untargeted HealthCareMagic extractions while
+when using BGE embedding, the output on Enron Email targeted attacks increases. We also provide
+detailed results in Table 4, Table 5.
+4515

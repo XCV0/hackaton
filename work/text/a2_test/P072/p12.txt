@@ -1,0 +1,33 @@
+KDD ’24, August 25–29, 2024, Barcelona, Spain Yunqi Xu, Tianchi Cai, Jiyan Jiang, and Xierui Song
+Table 10: Details about the distribution of the error types in the Real-World Dataset.
+Hallu. KCont. KInve. KConf. KConc. LOver. LCaus. LConf. LIncl. LOthe. Other Errors
+Qwen 57.81 21.88 3.13 1.56 6.25 1.56 3.13 3.13 1.56 0 0
+GPT-4 77.91 5.81 3.49 2.33 5.81 1.16 2.33 1.16 0 0 0
+GPT-3.5 62.71 15.25 5.08 3.39 10.17 3.39 0 0 0 0 0
+Alpaca2 (CH) 69.61 8.82 3.92 2.94 7.84 3.92 1.96 0 0.98 0 0
+ChatGLM3 61.33 13.33 9.33 1.33 5.33 5.33 0 1.33 1.33 0 1.33
+Baichuan2 70.59 12.94 2.35 2.35 5.33 3.53 1.18 0 1.33 0 0
+Table 11: Example of the Reading Comprehension Section in the National College Entrance Examination of China
+Translated Reference:
+The golden age of blue-and-white porcelain development was during the Yongle and Xuande periods of the Ming Dynasty, coinciding with
+Zheng He’s voyages to the Western Seas, prompting us to ponder: Is it mere historical coincidence that both seafaring and porcelain
+craftsmanship reached their zenith at the same time? ... It was the blending of Chinese and foreign civilizations that successfully drove the
+transformation of Chinese porcelain from monochrome to polychrome, with blue-and-white porcelain uniquely illustrating the cultural
+evolution of the Ming era, serving as an example of traditional society’s progression from uniformity to diversity. (Excerpted and compiled
+from "The Trajectory of the Rise of Ming Dynasty Blue-and-White Porcelain" by Wan Ming)
+Task: evaluate the correctness of the following sentences:
+Translated Sentence 1: Zheng He’s voyages to the Western Seas stimulated the production, sales, and technological innovation of
+porcelain, heralding the golden age of blue-and-white porcelain development.
+Label: correct
+Translated Sentence 2: Factors such as the localization of raw materials ushered the development of blue-and-white porcelain into a new
+phase, at which point its evolution became unrelated to foreign cultures.
+Label: Incorrect.
+Error Type: Contradiction Error
+Translated Sentence 3: Ming Dynasty society is often considered conservative, yet the styles of blue-and-white porcelain indicate that the
+society was relatively open and progressive.
+Label: Incorrect.
+Error Type: Conceptual Substitution Error
+Translated Sentence 4: The blending of Chinese and foreign civilizations promoted the transformation of porcelain from monochrome to
+polychrome, thereby driving the society of the time towards a more diverse transition.
+Label: Incorrect.
+Error Type: Causal Confusion Error

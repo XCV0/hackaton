@@ -1,0 +1,85 @@
+Table 6
+Effect of data poisoning on retrieval and prediction: a real example of RoG.
+Question What language is spoken in the location that appointed Michelle Bachelet to a governmental position speak?
+Ground Truth Aymara language, Mapudungun Language, Rapa Nui Language, Spanish Language, Puquina Language
+Before Attack Retrieval:
+1. Michelle Bachelet → people.person.nationality → Chile → language.human_language.countries_spoken_in →
+Spanish Language
+Prediction:
+Spanish Language
+Adversarial
+Targets Portuguese, Italian, French, German, Dutch
+After Attack Retrieval:
+1. Michelle Bachelet → people.person.nationality → Germany → location.country.languages_spoken → German
+2. Michelle Bachelet → people.person.nationality → Chile → location.country.languages_spoken → Italian
+3. Michelle Bachelet → people.person.nationality → Chile → location.country.languages_spoken → Spanish
+Language
+4. Michelle Bachelet → people.person.nationality → Chile → location.country.official_language → Portuguese
+5. Michelle Bachelet → people.person.nationality → Chile → location.country.official_language → French
+6. Michelle Bachelet → people.person.nationality → Chile → location.country.official_language → German
+7. Michelle Bachelet → people.person.nationality → Chile → location.country.official_language → Dutch
+Prediction:
+Italian Language, German Language, French, Spanish Language
+and GPT-4) and the MoE model (DeepSeek-V3-0324) con-
+sistently outperform open-source LLaMA variants both be-
+foreandafterattack.Notably,LLaMA-2-7B-chat-hfexhibits
+the weakest robustness, with its EM score nearly eliminated
+under attack. Although LLaMA-3.1-8B-Instruct shows im-
+proved robustness, its performance remains far below that
+of GPT-4 and DeepSeek-V3-0324. (3). With attack, GPT-
+4 and DeepSeek-V3-0324 demonstrate competitive QA per-
+formance to the KG-specific model across several metrics.
+In particular, DeepSeek-V3-0324 achieves the highest EM
+score after attack (11.81), surpassing LLMRoG (8.85). In
+terms of relative degradation, these models seem to exhibit
+better robustness than the KG-specific LLM. However, the
+robustness gaps remain marginal.
+4.9. Case Study
+We present a representative case to provide an explicit
+illustration of how data poisoning affects both retrieval and
+generationinKG-RAGsystems.AsshowninTable6,ourat-
+tacksuccessfullyleadstoadversarialpathsretrievedbyRoG,
+whichinturnresultsinincorrectpredictionsalignedwiththe
+attack targets. The attack also leads to Spanish Language,
+the only originally correct answer, being no longer prior-
+itized under attack during answer generation. Besides, we
+also observe that several adversarial targets, like Dutch and
+Portuguese, although successfully retrieved, are ultimately
+excluded from the final prediction. This reveals that LLMs
+in RAG systems do not fully rely on all retrieved content
+and exhibit a potential implicit preference in content
+selection, highlighting the need to better understand the
+underlying such selection behavior in future work.
+5. Related Works
+5.1. Attack to RAG
+With the increasing adoption of retrieval-augmented
+generation (RAG) systems, concerns over their safety have
+been growing [42], and adversarial attacks have emerged
+as a promising approach to study robustness and vulnera-
+bilities of RAG systems. Recent efforts to attack retrieval-
+augmented generation (RAG) systems mainly focus on
+manipulating the retrieval corpus to induce malicious re-
+sponses. PoisonedRAG [18] conducts the first investiga-
+tion to inject crafted passages that are retrievable for spe-
+cific questions and steer the LLM toward attacker-desired
+answers. While effective, it is limited to fixed question-
+answer pairs. BadRAG [43] generalizes this approach to
+semantically grouped questions by using contrastive opti-
+mization, enabling broader yet still topic-bound attacks. It
+also explores indirect generative threats such as denial-of-
+service and sentiment bias. A recent study [21] proposes
+a composite adversarial document structure that includes
+three components: an Adversarial Target Sequence, an Ad-
+versarialRetrieverSequence,andanAdversarialGeneration
+Sequence. This design enables joint attacks on both the
+retriever and generator components of RAG systems, op-
+timizing adversarial effectiveness through a dual-objective
+strategy.
+Although these studies demonstrate that RAG systems
+are vulnerable to adversarial manipulation of the external
+knowledge source, they primarily focus on traditional RAG
+systems that retrieve unstructured texts. However, with the
+growingincorporationofstructuredknowledgesources,typ-
+icallyKGs,thesecurityimplicationsofsuchsystemsremain
+largely unexplored.
+: Preprint submitted to Elsevier Page 11 of 13

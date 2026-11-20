@@ -1,0 +1,122 @@
+Table 1: Distribution of Similarity Scores. We analyze
+the distributions of similarity scores to examine whether
+splitting the text into optimally sized chunks for each
+character’s persona and incorporating hierarchical con-
+text is effective.
+BGE-M3 Qwen3 mE5large-instructP µ (↑) P σ2 (↓) P µ (↑) P σ2 (↓) P µ (↑) P σ2 (↓)
+RCTS 6.4325 0.1026 8.3306 0.1557 12.3136 0.0071
+MHTS 6.4262 0.1038 8.3410 0.1552 12.3063 0.0071
+SC 5.3405 0.1625 8.1691 0.1783 - -
+ATS 6.7007 0.0884 8.4718 0.1281 12.2336 0.0070
+ACTS (Ours) 6.8575 0.0784 8.6226 0.1179 12.3240 0.0063
+Table 2: Human Evaluation. S represents the results
+of all human evaluators, µ is E(E(S)), σ is E(σ(S)),
+and Mdn is E(M dn(S)).
+µ (↑) σ (↓) Mdn (↑) Cronbach’s alpha (↑)
+BFI 3.970 0.962 4.217 0.825
+MBTI 3.902 0.915 4.000 0.810
+5.3 Experimental Results
+Adaptive Persona Segmentation and Hierar-
+chical Contextualization Are Highly Effective.
+In Table 1, we provide each character with 30
+questions, resulting in a total of 450 questions,
+related to their respective knowledge from the
+CharacterRAG dataset, and measure the similar-
+ity between each question and the chunks retrieved
+by the RAG model under the three different em-
+bedding settings. Results demonstrate that com-
+pared to RecursiveCharacterTextSplitter (RCTS)
+(LangChain, 2024b), MarkdownHeaderTextSplitter
+(MHTS) (LangChain, 2024a), and SemanticChun-
+ker (SC) (LangChain, 2024c), adaptive persona
+segmentation, which we call Adaptive Text Split-
+ter (ATS), segments text with an optimal persona
+length and overlap for each character and with-
+out hierarchical context, achieves a higher aver-
+age score and lower variance. This indicates that
+each chunk generated using adaptive persona seg-
+mentation contains richer semantic information for
+the same query. Building on this, ACTS, which
+considers hierarchical context in addition to ATS,
+consistently achieves better performance across all
+three embedding settings. These results show that
+optimal chunk length, appropriate overlap, and con-
+sideration of hierarchical context all play essential
+roles in effective text chunking.
+Extracting a Character’s Attributes from Se-
+lected Chunks Is Reliable. We investigate the rea-
+sonableness of inferring character attributes with
+AE from chunks extracted via GS by conducting
+human evaluation using a 5-point Likert scale. To
+Table 3: Predicted MBTI Types per Character. Ex-
+periments are conducted using GPT-4.1 setting.
+Naive RAG CRAG RAPTOR Adaptive RAG LightRAG AMADEUS (Ours) GT
+Anya Forger ISFP (-2) INTJ (-3) INFJ (-2) INFJ (-2) INFJ (-2) ENFP (0) ENFP
+Chika Fujiwara ENFP (0) ENFP (0) ENFJ (-1) ENFJ (-1) INTP (-2) ENFP (0) ENFP
+Edward Elric INTP (-1) ISTJ (-3) INTP (-1) ENFP (-1) INTP (-1) INFP (-2) ENTP
+Frieren INFP (-1) INFP (-1) INFP (-1) INFP (-1) INTP (0) INTP (0) INTP
+Hitori Gotoh ISFP (-1) ISTJ (-2) INFP (0) INFP (0) ENFP (-1) INFP (0) INFP
+Light Yagami INTJ (-1) INTJ (-1) INTJ (-1) INTJ (-1) INTJ (-1) INTJ (-1) ENTJ
+M¯ao M¯ao ISTJ (-2) INTJ (-1) ISTJ (-2) ENTJ (-2) INTJ (-1) ISTP (-1) INTP
+Megumin ISFP (-1) INFP (0) ENFP (-1) ENFP (-1) INFP (0) ISFP (-1) INFP
+Mikoto Misaka ENFP (-2) ISFP (-4) ENFJ (0) ENFJ (0) ENTJ (0) INFJ (-2) ENTJ
+Nina Iseri INFP (-1) ISFP (0) ENFJ (-1) INFJ (-2) ENFJ (-3) INFP (-1) ISFP
+Saitama ISFP (-1) ISTP (0) ISFJ (-2) INFJ (-3) INTP (-1) ISTP (0) ISTP
+Son Goku ESFP (0) ENFJ (-2) ENFJ (-2) ENFP (-1) INTP (-3) ESFP (0) ESFP
+Tanjiro Kamado ENFP (-1) ENFJ (0) ENFJ (0) ENFJ (0) INTP (-3) ENFJ (0) ENFJ
+Tobio Kageyama ENFJ (-3) ENTJ(-2) ISTJ (0) ISTJ (0) INFJ (-1) ISTJ (0) ISTJ
+Yui Hirasawa ISTJ (-4) ENFP (0) ENFP (0) ENFP (0) INTP (-2) ESFP (-1) ENFP
+P |d| (↓) 21 19 14 15 21 9 -
+Accuracy (↑) 65.00% 68.33% 76.67% 75.00% 65.00% 85.00% -
+Avg F1-Score (↑) 0.6146 0.6448 0.6925 0.6832 0.5344 0.8244 -
+Table 4: Predicted Big 5 SLOAN Types per Character.
+Experiments are conducted using GPT-4.1 setting.
+Naive RAG CRAG LightRAG AMADEUS (Ours) GT
+Anya Forger SLOAI (-1) SLOAI (-2) RCUEN (-3) SLUEI (-2) SCUAI
+Chika Fujiwara SCOAI (-1) SCUAI (0) RLUEN (-4) SCOAI (-1) SCUAI
+Edward Elric SCOAI (-3) SLOEI (-1) RCUAN (-4) SLOEI (-1) SLUEI
+Frieren RCOAI (-2) RCUAI (-1) SLUEN (-3) RCUAI (-1) RCUEI
+Hitori Gotoh RLUAI (0) RLUAI (0) RCUEN (-3) RLUAI (0) RLUAI
+Light Yagami SCOEI (-1) SCOEI (-1) RCUAN (-3) SCOEI (-1) RCOEI
+M¯ao M¯ao RCOEI (0) RCOAN (-2) SLUAN (-5) RCOEI (0) RCOEI
+Megumin SCOAI (-3) SCUAI (-2) RLUEN (-2) SLOEI (-1) SLUEI
+Mikoto Misaka SLOAI (-3) SLOAI (-3) RCUEN (-2) SLOAI (-3) RCOEI
+Nina Iseri SLOAI (-3) RLUAI (-1) RCUEN (-2) SLUEI (-1) RLUEI
+Saitama RCUAN (0) RCOAN (-1) SCOAI (-3) RCUAN (0) RCUAN
+Son Goku SCOAI (-2) SCUAI (-1) RLUEI (-4) SCOAI (-2) SCUAN
+Tanjiro Kamado SLOAI (-1) SCOAI (0) RCUAN (-3) SCOAI (0) SCOAI
+Tobio Kageyama RCOEN (-1) SLOAN (-2) RCUAI (-4) RCOEN (-1) RLOEN
+Yui Hirasawa SCUAI (0) SLUAI (-1) RCOEN (-4) SCUAI (0) SCUAI
+P |d| (↓) 21 18 49 14 -
+Accuracy (↑) 72.00% 76.00% 34.67% 81.33% -
+Avg F1-Score (↑) 0.6785 0.7313 0.2774 0.7986 -
+this end, we invite 14 human evaluators and each
+evaluator is asked to score 60 randomly selected
+samples. Each sample consists of pairs of chunks
+selected from GS and attributes extracted through
+AE, for 30 BFI questions and 30 MBTI questions.
+Table 2 shows that the means µ is close to 4, with
+small standard deviations σ. It demonstrates that
+the outputs of GS and AE are reliable and trust-
+worthy, even from a human evaluative perspective.
+We measure Cronbach’s alpha (Cronbach, 1951)
+to evaluate internal consistency among the human
+evaluators. Note that the Cronbach’s alpha values
+are 0.825 and 0.810, both exceeding the commonly
+accepted threshold of 0.7 for acceptable reliability.
+Graph-Based and Web Search-Based RAG
+Are Unsuitable for RAG-Based RPAs. One of
+the major challenges in retrieval-based role-playing
+is that, when a RPA receives questions involving
+knowledge outside a character’s persona, it tends to
+either overuse irrelevant chunks (Figure 6) or gen-
+erate uninformative responses (Guo et al., 2024;
+Shukla et al., 2025; Wang et al., 2025b). To in-
+vestigate whether RAG-based RPAs can handle
+this problem, we conduct extensive experiments
+in which we ask 15 characters 60 MBTI questions
+and 120 BFI questions each, and and evaluate their
+ability to accurately infer the characters’ person-
+ality types. Table 3 and Table 4 shows predicted
+MBTI types and Big 5 SLOAN types per character.
+The number in parentheses indicates the number of

@@ -1,0 +1,114 @@
+Table of Contents
+Table of Contents 13
+A Additional Details on T-RAG 13
+A.1 Representative Score Interpretation 13
+A.2 Graph-aware Context Organization 13
+B MultiTableQA Details 14
+B.1 Preliminary Analysis . . . . . . . 14
+B.2 Task Type Definition . . . . . . . 14
+C Experiment Setup 15
+C.1 Baseline Methods Description . . 15
+C.2 Implementation Details . . . . . . 16
+D Additional Experiments 17
+D.1 Downstream LLMs Tabular Rea-
+soning . . . . . . . . . . . . . . . 17
+D.2 Ablation Study . . . . . . . . . . 17
+D.3 Parameter Study . . . . . . . . . . 18
+E Usage on AI Assistants 19
+A Additional Details on T-RAG
+A.1 Representative Score Interpretation
+The formulation of Representative Score in Sec-
+tion 3.2 corresponds mathematically to cosine sim-
+ilarity; however, we refer to it as a representative
+score to highlight the specific role in our setting:
+quatify how well one node serves as a representa-
+tive,semantically or structurally, for another under
+a given feature type. Unlike traditional use cases
+of cosine similarity that merely assess directional
+alignment in a vector space, our use emphasizes
+task-specific interpretability, where high represen-
+tative scores suggest strong mutual informativeness
+between subtables and queries or among subtables
+themselves.
+A.2 Graph-aware Context Organization
+After obtaining the final set of retrieved tables
+V ∗ final, we design a graph-aware context organiza-
+tion mechanism to enable downstream LLMs to ef-
+fectively interpret the retrieved information and per-
+form tabular reasoning. Specifically, our prompts
+emphasize the following key aspects.
+Graph Information Insertion. Upon extracting
+the final retrieved tables from the local sub-graph,
+we observe that incorporating graph-related infor-
+mation, such as representative scores among nodes,
+Prompt Template
+System
+You are an expert in tabular data analysis. You are 
+given a user query and a set of tables. Find the 
+query answers.
+User
+# The query is the question you need to answer 
+# The set of tables are the source of information you 
+can retrieve to help you answer the given query.
+Now, follow the provided information and instructions 
+below.
+# Step One: Find most relevant tables to answer the 
+query.
+1. Read the query and the tables carefully.
+2. Given the query, figure out and find the most 
+relevant tables (normally 1-3 tables) from the set of 
+table nodes to answer the query.
+3. The inter-relationship among each node is also 
+provided in the graph-related information, which will 
+be provided later.
+4. Once you have identified the relevant tables, 
+follow the step two to answer the query.
+## The query is : <query>
+## The retrieved tables are:
+<table1>…</table1>, <table2>…</table2>
+ 
+## Graph Related Informtion
+{"source_node": "Table 1", "target_node": "Table 2", 
+"relationship": {"type": "similarity", "score": 
+0.674}}
+…
+# Step Two: Answer the query based on the retrieved 
+tables
+1.The detailed instruction for this tasks type is:
+Use the retrieved most relevant tables to verify 
+whether the provided claim/query are true or false. 
+Work through the problem step by step, and then 
+return 0 if it's false, or 1 if it's true. Only 
+return 0 or 1 without any other information.
+ 
+#Step Three: Here we provide output instructions that 
+you MUST strictly follow.
+1. You MUST think step by step via the chain-of-
+thought for the given task and then give a final 
+answer.
+2. Your output MUST conclude two components: the 
+chain-of-thought (CoT) steps to reach the final 
+answer and the final answer.
+3. For the CoT component, you MUST enclose your 
+reasoning between <reasoning> and </reasoning> tags.
+4. For the final answer component, you MUST enclose 
+your reasoning between <answer> and </answer> tags.
+Here are few-shot examples to demonstrate the final 
+answer component format: 
+<Example1> <Example2> …
+5. If you try your best but still cannot find the 
+answer from both the given table sources and your 
+pretrained knowledge, then output your thinking steps 
+and the final answer using <answer>NA</answer> to 
+indicate that the answer can not be answered. 
+# Now Output Your response below:
+In Html Format
+Example Instruction for TFV
+Assistant…
+Figure 5: Prompt Template for downstream LLMs tabu-
+lar reasoning.
+enhances downstream LLMs’ ability to interpret
+the weighted relationships among the retrieved ta-
+bles. Consequently, we embed node indices along
+with their corresponding inter-node weighted edge
+38145

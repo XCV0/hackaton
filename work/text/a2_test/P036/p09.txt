@@ -1,0 +1,43 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 9
+4.1 Retrieval-Augmented Instruction Data Generation
+This component focuses on creating context-grounded, instruction-following fi-
+nancial data derived from authentic financial documents. The goal is to generate
+diverse and accurate question–answer pairs that reflect the reasoning tasks en-
+countered in financial analysis.
+The pipeline begins with a document indexing and retrieval stage. Fi-
+nancial documents such as quarterly earnings reports, press releases, and SEC
+filings are segmented into coherent text chunks. These chunks are then em-
+bedded using a dense embedding model and stored in a vector database (e.g.,
+ChromaDB), which supports semantic retrieval.
+Given a financial topic or company name, the system retrieves relevant chunks
+based on similarity search. These chunks are passed as contextual input to a
+teacher model (e.g., GPT-3.5-turbo), which generates instruction–response pairs
+grounded in the retrieved financial context. Each generated sample follows the
+structure:
+{
+"instruction": <financial query>,
+"input": <retrieved document context>,
+"output": <teacher-generated answer>
+}
+This process ensures that generated data remain faithful to real financial
+statements and reduce hallucinations by grounding responses in retrieved evi-
+dence. In addition, conversational-style prompting is employed to elicit richer,
+more analytical responses that capture patterns such as revenue growth, expense
+variation, or year-over-year comparisons.
+After generation, the data undergo normalization (e.g., numeric unit align-
+ment, temporal standardization, duplicate removal). The final dataset integrates
+both general and analytic instructions, supporting a wide range of reasoning pat-
+terns that align with financial interpretation and decision-making.
+4.2 Financially Augmented LLM Fine-Tuning
+Once the retrieval-augmented financial instruction dataset is prepared, we fine-
+tune a pre-trained LLM to develop a financially specialized reasoning capability.
+The fine-tuning procedure focuses on efficiency and stability while preserving
+general language understanding.
+During training, each instruction sample (sample) follows the previously de-
+scribed schema, where the instruction represents a financial query, the input
+provides relevant context, and the output serves as the correct answer. The
+model learns to interpret financial context, retrieve relevant details, and synthe-
+size grounded analytical conclusions.
+This approach ensures that the fine-tuned LLM can:
+– Perform context-grounded financial question answering with factual preci-
+sion.

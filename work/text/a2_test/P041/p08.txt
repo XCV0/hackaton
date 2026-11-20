@@ -1,0 +1,107 @@
+0.55
+0.6
+0.65
+0.7
+k=5 k=10 k=15
+F1
+0.6
+0.62
+0.64
+0.66
+0.68
+0.7
+k=5 k=10 k=15
+Precision
+0.55
+0.6
+0.65
+0.7
+k=5 k=10 k=15
+Recall
+Semantic RAG
+Hybrid RAG
+(a)ResponseQuality
+0.2
+0.3
+0.4
+0.5
+0.6
+k=5 k=10 k=15
+F1
+0.1
+0.2
+0.3
+0.4
+k=5 k=10 k=15
+Precision
+0.75
+0.8
+0.85
+0.9
+0.95
+1
+k=5 k=10 k=15
+Recall
+(b)RetrievalQuality
+KG2RAG
+Figure 5: Experimental results with varying top-k on HotpotQA in distractor setting.
+Response Quality Retrieval Quality
+F1 Precision Recall F1 Precision Recall #Avg.
+m = 1 0.663 0.690 0.683 0.436 0.301 0.908 8.11
+m = 2 0.656 0.681 0.674 0.420 0.291 0.917 8.53
+m = 3 0.658 0.678 0.675 0.421 0.284 0.924 8.19
+Table 5: Experimental results on HotpotQA in the distractor setting with varying m.
+some necessary chunks may not be retrieved us-
+ing only semantic-based approaches. These results
+confirm the importance of the KG-guided expan-
+sion module in successfully leveraging KG to cap-
+ture fact-level relationships between chunks and
+retrieve key information that might be missed by
+semantic-based approaches.
+Performance w.r.t. Varying k We conduct ex-
+periments with varying top-k values on HotpotQA
+in the distractor setting. The experimental re-
+sults are shown in Fig. 5. From these figures, we
+can observe that KG2RAG maintains superior per-
+formance compared to baselines with different k.
+When k is set to a suitable value (e.g., 5 or 10),
+KG2RAG ensures the efficient retrieval of high-
+quality chunks, thereby providing coherent and con-
+textually consistent contexts for generating high-
+quality responses.
+However, when k is set to a too large value (e.g.,
+15), although the retrieval recall significantly im-
+proves, the quality of the generated responses does
+not increase proportionally, which indicates simply
+increasing the number of chunks cannot always re-
+sult in a better retrieval recall ratio and response
+quality. KG2RAG exhibits the least sensitivity to
+the hyperparameter k compared to baselines, which
+makes the RAG process robust.
+Performance w.r.t. Varying m In KG2RAG, m
+serves as the hyperparameter for graph expansion,
+balancing the trade-off between retrieval precision
+and recall. We set the m-hop value to 1 in the pre-
+vious experiments. To further explore the effects
+of m, we conduct experiments with varying m on
+HotpotQA dataset. The results are shown in Ta-
+ble 5. These results indicate that setting m = 1
+is appropriate for the experiments, and KG2RAG
+shows low sensitivity to the hyperparameter m.
+Robustness Analysis To further confirm the ro-
+bustness of KG2RAG with quality-limited KGs, we
+randomly drop 5% or 10% of the triplets from the
+constructed KG, and show the experimental results
+in Table 6. The results demonstrate that KG2RAG
+maintains robust performance even with quality
+limitations and outperforms the baselines.
+4 Related Work
+Retrieval-augmented Generation To address
+the issues of hallucinations (Xu et al., 2024b; Liu
+et al., 2024a) due to a lack of corresponding knowl-
+edge or containing outdated knowledge, retrieval-
+augmented generation (RAG) (Gao et al., 2023; Fan
+et al., 2024) has been proposed for retrieving rele-
+vant chunks from a pool of candidate documents to
+assist LLM generation.
+8919

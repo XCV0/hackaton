@@ -1,0 +1,105 @@
+6 Conclusion
+We empirically demonstrate that prior-guided rea-
+soning substantially mitigates the impact of exter-
+nal distractors. Building on this, this paper pro-
+poses BrPr method, which achieves robust and
+efficient performance across conflicts and noises.
+Experimental results demonstrate that BrPr signifi-
+cantly improves performance and stability across
+varying degrees of external inconsistency.
+Limitations
+While the Bernoulli-gated mechanism and the im-
+plicit KL divergence constraint effectively bridge
+the performance gap between the 1-turn and 2-turn
+strategies, the 1-turn model’s performance is in-
+herently upper-bounded by its explicit counterpart.
+Our empirical results suggest that the KL diver-
+gence serves as a distributional alignment tool that
+facilitates approximation rather than transcendence.
+Consequently, while the 1-turn model achieves su-
+perior efficiency, it fails to surpass the 2-turn model
+in reasoning depth, indicating that implicit latent
+optimization may not fully capture the entire ex-
+pressive power provided by explicit, step-by-step
+reasoning sequences.
+Acknowledgements
+This work was supported by Beijing Natural Sci-
+ence Foundation (L243006), the National Natural
+Science Foundation of China (No. U24A20335),
+the independent research project of the Key Labo-
+ratory of Cognition and Decision Intelligence for
+Complex Systems.
+References
+Chen Amiraz, Florin Cuconasu, Simone Filice, and
+Zohar Karnin. 2025. The distracting effect: Under-
+standing irrelevant passages in RAG. In Proceedings
+of the 63rd Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers),
+Vienna, Austria. Association for Computational Lin-
+guistics.
+Jonathan Berant, Andrew Chou, Roy Frostig, and Percy
+Liang. 2013. Semantic parsing on freebase from
+question-answer pairs. In Proceedings of the 2013
+Conference on Empirical Methods in Natural Lan-
+guage Processing, EMNLP 2013, 18-21 October
+2013, Grand Hyatt Seattle, Seattle, Washington, USA,
+A meeting of SIGDAT, a Special Interest Group of the
+ACL, pages 1533–1544. ACL.
+Jianlyu Chen, Shitao Xiao, Peitian Zhang, Kun
+Luo, Defu Lian, and Zheng Liu. 2024. M3-
+embedding: Multi-linguality, multi-functionality,
+multi-granularity text embeddings through self-
+knowledge distillation. In Findings of the Asso-
+ciation for Computational Linguistics: ACL 2024,
+Bangkok, Thailand. Association for Computational
+Linguistics.
+Juan Chen, Baolong Bi, Wei Zhang, Jingyan Sui,
+Xiaofei Zhu, Yuanzhuo Wang, Lingrui Mei, and
+Shenghua Liu. 2025. Rethinking all evidence:
+Enhancing trustworthy retrieval-augmented gener-
+ation via conflict-driven summarization. CoRR,
+abs/2507.01281.
+Thomas M. Cover and Joy A. Thomas. 2006. Elements
+of information theory (2. ed.). Wiley.
+Florin Cuconasu, Giovanni Trappolini, Federico Sicil-
+iano, Simone Filice, Cesare Campagnano, Yoelle
+Maarek, Nicola Tonellotto, and Fabrizio Silvestri.
+2024. The power of noise: Redefining retrieval for
+rag systems. In Proceedings of the 47th International
+ACM SIGIR Conference on Research and Develop-
+ment in Information Retrieval, pages 719–729.
+Feiteng Fang, Yuelin Bai, Shiwen Ni, Min Yang, Xiao-
+jun Chen, and Ruifeng Xu. 2024. Enhancing noise
+robustness of retrieval-augmented language models
+with adaptive adversarial training. In Proceedings
+of the 62nd Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers),
+pages 10028–10039.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Meng Wang,
+and Haofen Wang. 2024. Retrieval-augmented gener-
+ation for large language models: A survey. Preprint,
+arXiv:2312.10997.
+Xinyan Guan, Jiali Zeng, Fandong Meng, Chunlei Xin,
+Yaojie Lu, Hongyu Lin, Xianpei Han, Le Sun, and
+Jie Zhou. 2025. Deeprag: Thinking to retrieve step
+by step for large language models. arXiv preprint
+arXiv:2502.01142.
+Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song,
+Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang,
+Shirong Ma, Xiao Bi, Xiaokang Zhang, Xingkai Yu,
+Yu Wu, Z. F. Wu, Zhibin Gou, Zhihong Shao, Zhu-
+oshu Li, Ziyi Gao, Aixin Liu, and 175 others. 2025.
+Deepseek-r1 incentivizes reasoning in llms through
+reinforcement learning. Nat., 645(8081):633–638.
+Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara,
+and Akiko Aizawa. 2020. Constructing A multi-hop
+QA dataset for comprehensive evaluation of reason-
+ing steps. In Proceedings of the 28th International
+Conference on Computational Linguistics, COLING
+2020, Barcelona, Spain (Online), December 8-13,
+2020, pages 6609–6625. International Committee on
+Computational Linguistics.
+Jian Hu, Xibin Wu, Wei Shen, Jason Klein Liu, Zilin
+Zhu, Weixun Wang, Songlin Jiang, Haoran Wang,
+22157

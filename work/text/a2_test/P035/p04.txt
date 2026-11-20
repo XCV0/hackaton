@@ -1,0 +1,123 @@
+Retrieval Debate
+Response Debate
+Question𝒙	:
+What was the final score by 
+which Argentina defeated 
+France to win the FIFA World 
+Cup?
+Proponent Agent
+ Challenge Agent
+ Judge Agent
+KnowledgeCorpus
+FinalAnswer 𝒚	:
+3:3(after extra time) and 4:2in 
+the penalty shootout.
+Retrieved
+Docs C1Query Pool 𝑸𝟏
+𝑞":What was the final score 
+by which Argentina defeated 
+France to win the FIFA World 
+Cup?
+𝑞#:The 2022 FIFA World Cup 
+final score between Argentina 
+and France.
+Round 1
+Debate(𝑥, 𝑄!, 𝐶!)
+Query Pool 𝑸𝟐 Retrieved Docs 𝑪𝟐
+Round n
+Debate
+Termination
+𝑄"−𝑄"#!≤𝜖
+or
+𝑛=𝑟
+In the 2022 FIFA World Cup 
+final, Argentina and France 
+drew 2:2in regular time. 
+After extra time, the match 
+ended in a 3:3draw. But 
+Argentina won the penalty 
+shootout 4:2to claim the 
+World Cup title.
+FinalRetrievedDocuments𝑪𝑸"
+In the 2018 FIFA World Cup, 
+Kylian Mbappescored twice 
+as France dumped Lionel 
+Messi and Argentina out of 
+the World Cup with a 4:3
+win in an outstanding round-
+of-16 tie in Kazan.
+Debate(𝑥, 𝑄$, 𝐶$)
+Round 2
+…
+Add𝒒𝟐
+…
+…
+Round 1Round 2
+You were wrong according
+tothe docs: ……
+Oh, I also made a mistake, 
+so the answer is: ……
+I was wrong, but according 
+to the docs you provided, 
+the correct answer is: …….
+…
+Round n
+ℳ(𝑥, 𝐶%&)
+ℳ(𝑥)
+The answer is: 3:1
+Accordingtothe docs: 
+……
+Sothe answer is: 3:4
+Figure 2: An overview of our Debate-Augmented RAG (DRAG) framework. It iteratively refines the retrieval
+strategy and enhances factual consistency.
+roles assigned. These different roles have distinct
+responsibilities, aiming to ensure a comprehensive
+and in-depth exploration of retrieval strategies by
+promoting perspective diversity and critical think-
+ing, ultimately determining the optimal refinement
+operations for the retrieval pool. In this stage, we
+define three agent roles.
+Proponent Agent is required to provide justi-
+fications to support that the current query Qj is
+reasonable and that the retrieved results CQj are
+sufficient. Therefore, the operation supported by
+the proponent agent is:
+Tp : Qj+1 = Qj (5)
+that is, to keep Qj unchanged.
+Challenger Agent critiques Qj , identifying defi-
+ciencies and proposing modifications. Specifically,
+the challenger agent is responsible for proposing
+modifications to unreasonable queries or initiating
+new retrieval queries to address further knowledge
+needs. So challenger agent insists on the refinement
+operation for the query pool Qj :
+Tc : Qj+1 = (Qj ∩ Quseful) ∪ Qnew (6)
+where Quseful = {qi ∈ Qj } represents the subset of
+queries in Qj that the challenger agent deems nec-
+essary to retain. Qnew consists of additional queries
+introduced by the challenger agent to supplement
+missing information or enhance retrieval quality.
+Judge Agent evaluates the arguments presented
+by the proponent agent and the challenger agent
+and determines the ultimate operation T j for the
+current round of debate:
+T j = Select(Tp, Tc) (7)
+where Select represents the decision-making
+function used by the judge agent.
+Update Query Pool Q. The debate starts with
+an initial query set Q0 = {x}. After each round
+of debate, the query pool Qj is iteratively re-
+fined following the judge agent’s decision and gets
+Qj+1 = T j (Qj ), the specific operations as Eq. 5
+and Eq. 6.
+The debate process continues iteratively until a
+convergence criterion is met:
+• The query set converges when ||Qj+1 −
+Qj || ≤ ϵ, where ϵ is a predefined threshold
+ensuring minimal query modification.
+• The maximum number of debate rounds r is
+reached.
+Once the debate terminates, the final query set ˆQ
+is used for retrieval, forming the evidence set C ˆQ
+for the next stage, the Response Debate.
+15842

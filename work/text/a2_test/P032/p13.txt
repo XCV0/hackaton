@@ -1,0 +1,131 @@
+IntrinsicHallu
+{
+"instructions": [
+"Generate a claim that contradicts what
+the document states or clearly implies.",
+"Only return the claim as the answer.
+Do not include any additional text,
+explanation, or formatting."
+],
+"document": <document>,
+"answer": ""
+}
+ExtrinsicHallu
+{
+"instructions": [
+"Generate a claim that includes
+information that is not stated or implied
+in the document and cannot be verified
+using only the document (it requires
+external knowledge).",
+"Only return the claim as the answer.
+Do not include any additional text,
+explanation, or formatting."
+],
+"document": <document>,
+"answer": ""
+}
+D Preference Tuple: Full Example
+{
+"prompt": "{
+"instructions": [
+"You will be given a document and a
+claim.",
+"Decide whether the claim is
+'GROUNDED', 'HALLUCINATED_INTRINSIC', or
+'HALLUCINATED_EXTRINSIC' based ONLY on the
+document.",
+"Definitions:",
+" - GROUNDED: The claim is fully
+supported by the document. All relevant
+parts are directly verifiable from the
+document.",
+" - HALLUCINATED_INTRINSIC: The claim
+contradicts what the document states or
+clearly implies.",
+" - HALLUCINATED_EXTRINSIC: The claim
+includes information that is not stated or
+implied in the document and cannot be
+verified using only the document (it
+requires external knowledge).",
+"Justification requirements:",
+" - Your justification MUST be
+evidence-grounded.",
+" - Explicitly refer to the relevant
+parts of the document (by quoting or
+paraphrasing them).",
+" - Explain how these parts SUPPORT,
+CONTRADICT, or FAIL TO SUPPORT the claim.",
+" - Do NOT use any external knowledge;
+rely only on the provided document.",
+"Answer format (VERY IMPORTANT):",
+" - You MUST respond using EXACTLY the
+following XML structure:",
+" <answer>",
+"
+<classification>CATEGORY</classification>",
+" <justification>Your reasoning
+here</justification>",
+" </answer>",
+" - CATEGORY must be ONE of: GROUNDED,
+HALLUCINATED_INTRINSIC,
+HALLUCINATED_EXTRINSIC.",
+" - The <justification> must briefly
+explain your reasoning and cite evidence
+from the document.",
+" - Do NOT add any other text before
+or after the <answer>...</answer> block.",
+" - Do NOT add any extra tags or
+attributes.",
+],
+"document": "'As I stepped into the
+charming St. Blasius parish... (truncated)
+...'",
+"claim": "'St. Blasius Church is over 850
+years old and was built during...
+(truncated) ...'",
+}",
+"chosen": [
+{
+"role": "assistant",
+"content": "<think>Okay, let's tackle
+this. The user wants to determine if the
+claim about St. Blasius Church...
+(truncated) ... Therefore, the claim is
+GROUNDED</think>
+<answer>
+<classification>GROUNDED</classification>
+<justification>The claim that 'St.
+Blasius Church is over 850 years old and
+was built
+during the reign of King Stephen' is
+directly supported by the document...
+(truncated) ...</justification>
+</answer>
+}
+],
+"rejected": [
+{
+"role": "assistant",
+"content": "<think>Okay, let's tackle
+this. The user wants me to determine if the
+claim... (truncated) ... Since the document
+contradicts the claim, the claim is
+intrinsically hallucinated.</think>
+<answer>
+<classification>HALLUCINATED_INTRINSIC
+</classification>
+<justification>The document explicitly
+states: 'The church itself was over 850
+years old, built during the reign of King
+Stephen ... (truncated) ...</justification>
+</answer>
+}
+]
+}
+E Prompt: Synthetic Pair Generation
+{
+"instructions": [
+"You will be given a document and a
+claim.",
+16930

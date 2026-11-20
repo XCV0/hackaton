@@ -1,0 +1,89 @@
+Model ROUGE-L BERT-F1 LLM
+Qwen3-VL-8B (A) 10.88 40.04 52.90
+Qwen3-VL-8B (B) 12.23 44.46 61.17
+Qwen3-VL-8B (C) 18.82 46.49 65.00
+Qwen3-VL-8B† (A) 28.61 45.38 56.90
+Qwen3-VL-8B† (B) 31.96 46.05 63.20
+Qwen3-VL-8B† (C) 35.74 46.96 70.24
+Qwen-VL-Max (A) 23.34 40.53 54.70
+Qwen-VL-Max (B) 30.29 48.39 74.10
+Qwen-VL-Max (C) 32.01 51.60 83.90
+GPT-4.1-Mini (A) 18.81 40.94 56.30
+GPT-4.1-Mini (B) 19.55 42.79 68.90
+GPT-4.1-Mini (C) 22.72 44.04 75.10
+GPT-4o (A) 12.83 39.95 52.70
+GPT-4o (B) 18.41 42.09 63.97
+GPT-4o (C) 19.16 43.43 75.40
+Claude-3.5-Sonnet (A) 15.11 37.26 54.50
+Claude-3.5-Sonnet (B) 16.39 39.54 66.70
+Claude-3.5-Sonnet (C) 16.36 41.27 80.20
+Table 3: The main results of our method on four differ-
+ent LLMs under three settings: (A) Baseline, (B) CoT,
+and (C) GranuRAG. † means the fine-tuned LLM. Bold
+means the best results for each LLM.
+Such a design ensures that each claim in the out-
+put traces back to a detected visual region and a
+retrieved knowledge snippet. Such traceability fa-
+cilitates systematic error diagnosis: missing infor-
+mation indicates detection failure, incorrect facts
+suggest retrieval error, and unsupported claims re-
+veal generation hallucination.
+5 Experiment
+5.1 Setup
+Experiments are conducted on the GranuVistaVQA
+dataset as described in section 3. We use the official
+APIs of Qwen3-VL-8B, Qwen-VL-Max, GPT-4o,
+GPT-4.1-Mini, and claude-3.5-sonnet (Bai et al.,
+2023; OpenAI, 2024; Anthropic, 2024). For the el-
+ement detector, we employ the open-vocabulary
+YOLO-World-XL1 Dψ with a fixed confidence
+threshold. We use the evaluation metrics following
+Section 3.3. More implementation details will be
+shown in Appendix A.1.
+5.2 Main Results
+We evaluate GranuRAG across six state-of-the-art
+MLLMs under three settings: (A) Baseline, where
+the generator observes the image and the full noisy
+candidate set Eall; (B) CoT, which augments (A)
+with chain-of-thought prompting (Wei et al., 2022)
+1https://replicate.com/franz-biz/yolo-world-xl
+Figure 4: Ablation on visual presentation and element
+filtering. T3 and T4 use grounded subset ˆE(I); T1 and
+T2 use full candidate set Eall.
+Variant ROUGE-L BERT-F1 LLM
+Text Only (Gold Egold) 32.05 46.32 72.10
+Image + All Eall 29.47 45.57 68.50
+Image + Chosen ˆE(I) 31.01 48.60 74.60
+Table 4: Ablation on visual modality and knowledge
+relevance. Bold means the best results.
+to encourage structured reasoning; and (C) Gra-
+nuRAG, where the generator receives only the
+grounded element subset ˆE(I) from our two-stage
+pipeline. For both the fine-tuned models (denoted
+by †) and Setting B, we synthesize the thinking
+process using powerful LLM and validate them
+through manual inspection (see Appendix A.3 for
+details).
+Table 3 presents the results. Setting C consis-
+tently outperforms both baselines across almost all
+LLMs and metrics, demonstrating that explicit ele-
+ment alignment yields robust improvements regard-
+less of backbone capacity. While CoT prompting
+(Setting B) moderately improves over the noisy
+baseline, it does not close the gap to our full
+pipeline, suggesting that reasoning-time prompting
+alone cannot fully compensate for irrelevant knowl-
+edge. Fine-tuning further amplifies these gains:
+Qwen3-VL-8B† (C) achieves 35.74 ROUGE-L,
+46.96 BERT-F1, and 70.24 LLM score, substan-
+tially outperforming its zero-shot counterpart. No-
+tably, even closed-source LLMs benefit markedly
+from grounded evidence, with Setting C improving
+LLM scores by 22.7, 18.8, and 25.7 points over Set-
+ting A, respectively. These results confirm that our
+GranuRAG framework provides complementary
+value beyond model scale or reasoning prompts.
+5.3 Ablation Studies
+We conduct ablation studies to isolate the contribu-
+tions of visual evidence presentation and knowl-
+10480

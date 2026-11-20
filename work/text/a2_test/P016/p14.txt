@@ -1,0 +1,29 @@
+I Proposed Task
+Dataset Task Languages #Languages
+MKQA QA English, Spanish, German, Italian,
+Portuguese, Russian, Chinese, 12
+Korean, Thai, Japanese,
+Finnish, Arabic
+MLQA QA English, Chinese, Arabic, German, 7
+Spanish, Vietnamese, Hindi,
+XORTyDi QA English, Chinese, Arabic, Chinese, 8
+Korean, Finnish, Telogu,
+Bengali
+Table 11: Languages present in datasets used in this work. *We denote question-answering task as (QA)
+K Instruction Template
+This section contains the Instruction Templates used for the additional analysis.
+Translation
+Please answer the question by following the provided instructions.
+#Instructions:
+Provide the English translation for this document. Your language and style should align with the language
+conventions of a native speaker.
+# Document: [document]
+Table 12: Instruction Templates. The structure is defined by a set of in-context examples (zero examples, in the
+0-shot case), the question in {evaluated language}, the final instruction part and a special template to guide
+generation and support the final evaluation.
+M Performance differences between Retrieval Scope
+(a) MRAG Differences (ALL vs En+SL)
+ (b) CRAG Differences (ALL vs En+SL)
+Figure 8: Difference in MRAG (a) and CRAG (b) between retrieval from documents available in Wikidump (ALL)
+and retrieval done in English+Query specific language (En+SL).
+710

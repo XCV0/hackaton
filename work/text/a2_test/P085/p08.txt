@@ -1,0 +1,104 @@
+noise still supports answering the query. (4) Differ-
+ent retrievers exhibit varying levels of robustness
+to noise. Overall, the ranking is Hybrid-Rerank >
+Hybrid > BM25 > DPR, suggesting that compared
+to attacking contexts, hybrid retriever and rerankers
+show a preference for retrieving golden contexts.
+(5) Compression-based filters like SKR are not suf-
+ficiently secure, as they tend to lose detailed infor-
+mation, leading to a decrease in F1 (avg).
+5.3 Results on Conflict, Toxicity, and DoS
+(1) After injecting different types of attacks into
+the texts accessible by the RAG pipeline, it was
+observed that the retrieval accuracy (RA) and the
+attack failure rate (AFR) decreased across all three
+tasks. The ranking of attack effectiveness at differ-
+ent RAG stages was: filtered context > retrieved
+context > knowledge base. Furthermore, adding
+conflict attack increased the likelihood of misjudg-
+ing incorrect options as correct, leading to a drop
+in F1 (correct). Introducing DoS attack reduced F1
+(avg) and severely impacted generative diversity
+(Fig.6, 10, 9-①). (2) Retrievers exhibited differ-
+ent vulnerabilities to various attacks. For instance,
+Hybrid-Rerank was more susceptible to conflict
+attack, while DPR was more prone to DoS attack.
+Both experienced a significant decrease in AFR.
+Additionally, all retrievers showed consistent AFR
+degradation under toxicity attack. After adding con-
+flict attack, the F1 (correct) scores of all retrievers
+became similar, indicating stable attack effective-
+ness. However, DPR was more affected by DoS
+attack compared to other retrievers, as evidenced
+by its significantly larger decline in the diversity
+metric F1 (avg) (Fig.6, 10, 9-②). (3) The RA of
+different retrievers was largely consistent across
+different attack tasks (Fig.6, 10, 9-③). (4) In con-
+flict tasks, using the SKR filter was less secure
+because it could compress conflict details, result-
+ing in a decline in F1 (correct). In toxicity and DoS
+tasks, the NLI filter was generally ineffective, with
+its AFR close to that of disabling the filter. How-
+ever, the SKR filter proved to be safe in these tasks,
+as it was able to compress soft ads and warnings
+(Fig.6, 10, 9-④).
+5.4 Analysis of Generator and Evaluator
+5.4.1 Selection of Generator
+We conduct a cumulative analysis of the positive
+RAG generation safety metrics across different at-
+tack tasks. Fig. 11 shows that Baichuan 13B main-
+tains a leading position in multiple attack tasks,
+Baichuan 13BChatGLM 6B
+Qwen 7B GPT-4o Qwen 14B GPT-4
+GPT-3.5-Turbo
+DeepSeek
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5Values
+F1 Variants (Noise)
+F1 Variants (Conflict)
+AFR (Conflict)
+AFR (Toxicity)
+AFR (DoS)
+F1 Variants (DoS)
+Figure 11: Cumulative analysis of the generator’s posi-
+tive evaluation metrics across different attack tasks.
+particularly excelling in DoS task16. Lighter mod-
+els are even safer than stronger models such as the
+GPT series and DeepSeek, as more powerful mod-
+els may be more sensitive to the toxicity, DoS, and
+other attacks introduced in this paper.
+5.4.2 Selection of Evaluator
+F1 (correct) F1 (incorrect) ASR/AFR
+Silver Noise 89.97 96.22 —
+Inter-context Conflict 99.10 98.48 95.65
+Soft Ad — 91.67 100
+White DoS 89.97 96.22 100
+Table 2: Evaluation metrics and human consistency.
+As shown in Table 2, We present the evaluation
+metrics and their consistency with human judg-
+ments. The ASR and AFR metric exhibit a high
+human consistency. Similarly, the F1 (correct) and
+F1 (incorrect) scores obtained using DeepSeek also
+demonstrate strong agreement with human judg-
+ments. Therefore, DeepSeek is uniformly adopted
+for evaluation across all experiments.
+6 Conclusion
+This paper introduces SafeRAG, a benchmark de-
+signed to assess the security vulnerabilities of RAG
+against data injection attacks. We identified four
+critical attack tasks: noise, conflict, toxicity, and
+DoS, and revealed significant weaknesses across
+the retriever, filter, and generator components of
+RAG. By proposing novel attack strategies such
+as silver noise, inter-context conflict, soft ad, and
+white DoS, we exposed critical gaps in existing de-
+fenses and demonstrated the susceptibility of RAG
+systems to subtle yet impactful threats.
+16The detailed results are shown in Table 4.
+4616

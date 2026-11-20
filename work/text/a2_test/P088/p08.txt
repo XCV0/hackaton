@@ -1,0 +1,96 @@
+Table 3
+KGQA performance (%) under data poisoning attack. Lower values indicate better attack results. Clean denotes the original
+scenario without attack. Bold numbers denote optimal results. The red values in the subscripts denote the relative drops (compared
+to the Clean scenario) on the F1, Hits@1 and Exact Match(EM) metric. Due to the excessive data processing time required by
+G-retriever on CWQ (over 100 hours), we did not include its results on this dataset in our evaluation.
+KG-RAG Attacker WebQSP CWQ
+Hit F1 Precision Recall Hits@1 EM Hit F1 Precision Recall Hits@1 EM
+RoG
+Clean 85.87 70.34 74.00 76.06 79.61 45.76 64.94 54.86 56.64 57.57 56.87 47.18
+Rand 84.46 67.38 70.64 74.03 77.33 40.91 56.36 49.83 51.26 51.84 51.97 42.91
+Ours 75.61 38.06𝟒𝟔%↓ 34.16 63.86 48.46𝟑𝟗%↓ 8.85𝟖𝟏%↓ 47.95 36.45𝟑𝟒%↓ 35.95 43.58 39.96𝟑𝟎%↓ 26.71𝟒𝟑%↓
+GCR
+Clean 89.80 71.07 77.56 74.61 78.50 44.29 62.50 52.31 52.24 57.34 52.96 36.82
+Rand 88.70 70.11 76.86 73.07 78.01 43.98 60.04 50.02 50.01 54.82 51.18 35.15
+Ours 85.75 63.94𝟏𝟎%↓ 69.52 69.63 69.10𝟏𝟐%↓ 34.52𝟐𝟐%↓ 57.46 46.93𝟏𝟎%↓ 46.73 52.06 47.35𝟏𝟏%↓ 31.44𝟏𝟓%↓
+G-retriever
+Clean 72.36 52.39 66.42 54.47 64.47 31.88 – – – – – –
+Rand 72.05 52.20 68.55 50.88 64.31 31.63 – – – – – –
+Ours 67.38 46.31𝟏𝟐%↓ 54.92 47.96 59.58𝟏𝟎%↓ 25.86𝟏𝟗%↓ – – – – – –
+SubgraphRAG
+Clean 80.28 66.94 73.96 68.05 76.66 51.29 56.61 49.74 52.63 50.99 53.87 41.57
+Rand 79.73 66.06 73.30 67.20 76.29 49.69 54.12 47.38 50.07 48.81 51.49 39.51
+Ours 75.98 50.22𝟐𝟓%↓ 55.08 62.14 66.15𝟏𝟒%↓ 27.52𝟒𝟔%↓ 50.86 41.82𝟏𝟔%↓ 43.58 45.28 46.25𝟏𝟒%↓ 32.91𝟐𝟏%↓
+Given 𝑁 = 5 adversarial answers per question, the total
+number of injected triples is capped at 𝑁 × 𝐾 = 20 per
+question,whichisnotablyfewerthantheaveragenumberof
+triplesintheoriginalquestion-associatedsubgraphsonboth
+WebQSP and CWQ (see Table 1). For fair comparison, the
+random modification baseline is also constrained to insert
+20 corrupted triples per question.
+We evaluate the impact of the attack across four rep-
+resentative KG-RAG methods described in Section 2.2.2:
+RoG, GCR, G-retriever, and SubgraphRAG. For GCR and
+SubgraphRAG, which report performance under different
+LLM backends, we use GPT-3.5-turbo for consistency and
+fair comparison. For RoG and G-retriever, which rely on
+fine-tuned internal LLMs, we follow their original imple-
+mentations. Further analysis of the impact of different LLM
+choices is also provided in Section 4.8.
+4.4. Overall Attack Results
+To evaluate the effectiveness of our proposed data poi-
+soning attack on KG-RAG methods, we conduct a com-
+prehensive analysis across KGQA performance before and
+afterattacks.TheresultsaresummarizedinTable3,andour
+analysis focuses on following aspects:
+Degradation of KGQA Performance: Compared to ran-
+dommanipulationtopoisontheKG,whichresultsinmarginal
+performancedegradation,ourattackinducessubstantialand
+consistent declines across all standard QA metrics for KG-
+RAG methods. For example, on the WebQSP dataset, the
+F1 score of RoG drops from 70.34% to 38.06%, a relative
+decrease of 46%. Similar trends are consistently observed
+for the other KG-RAG methods on both datasets, indicating
+that these four KG-RAG methods are highly vulnerable
+to knowledge poisoning: even minor KG corruption can
+disrupt retrieval quality and lead to noticeable declines in
+QA performance.
+In addition, we observe that the performance decline
+is particularly noticeable on the Hits@1 and EM metrics.
+Our attack strategy not only impairs general answer quality
+but also causes KG-RAG methods to prioritize incorrect
+over correct answers. The substantial drop in EM further
+demonstrates that our attack strategy is highly effective in
+flipping originally correct predictions. Specifically, RoG’s
+EM value on WebQSP decreases from 45.76% to 8.85%,
+implying that approximately 81% of the questions that were
+originallyansweredcorrectlyhavebeencorruptedunderour
+attack. Similarly, SubgraphRAG experiences an EM reduc-
+tion of around 46%, highlighting that even high-performing
+KG-RAGmethodsundercleansettingsremainvulnerableto
+data poisoning.
+Dataset-Specific Susceptibility: Comparing the KGQA
+performance of the same KG-RAG method between two
+benchmarks, we find that these four KG-RAG methods
+suffer more severe performance degradation on WebQSP
+than on CWQ. For example, considering the metric EM,
+our attack leads to a remarkable 81% relative drop for RoG
+on WebQSP, which is nearly twice the decline observed
+on CWQ, and SubgraphRAG exhibits a similar trend, with
+a 65% drop on WebQSP compared to a 34% drop on
+CWQ. Thisdifference ispartly duetotheinherentdifficulty
+of CWQ. As indicated by the Hit scores in the Clean
+setting without attacking, KG-RAG methods are only able
+to provide at least one correct answer for around 60% of
+the questions in CWQ, which is substantially lower than
+their performance on WebQSP. This reflects the inherent
+difficulty of CWQ, which in turn limits the extent to which
+performance can further decrease under attack. In contrast,
+WebQSP contains a larger proportion of questions that can
+beansweredwithlittledifficulty,makingitmoresusceptible
+to targeted poisoning.
+Robustness of KG-RAG Methods: We further investi-
+gate the robustness of different KG-RAG methods. Among
+methods based on subgraph retrieval, although G-retriever
+appears relatively more robust, its low clean performance
+: Preprint submitted to Elsevier Page 8 of 13

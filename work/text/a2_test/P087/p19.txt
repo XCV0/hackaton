@@ -1,0 +1,118 @@
+where Q(s, a) is the estimated value, N (s) is
+the visit count, and P (a|s) is the prior from
+the policy (LLM).
+2. Expansion: If node s is not a terminal state,
+we expand it by sampling k candidate an-
+swers (Generative Actions) and optionally m
+retrieval queries (Augmentative Actions).
+3. Simulation (Rollout): From the expanded
+node, we perform a rollout using the base pol-
+icy πθ to generate a complete answer yf inal.
+4. Backpropagation: We compute the reward
+R(yf inal) using Eq. 2 and update the Q-values
+along the trajectory:
+Q(s, a) ← N (s, a) · Q(s, a) + R N (s, a) + 1 (9)
+C.6 Convergence Analysis of NLI-Guided
+MCTS
+We provide a theoretical justification for the use of
+UCT in the space of logical consistency.
+Theorem 3 (MCTS Consistency). As the num-
+ber of simulations N → ∞, the probability of
+selecting the optimal answer y∗ (defined as the
+answer maximizing the NLI reward) approaches 1.
+Proof. The RAG generation process is modeled
+as a finite-horizon MDP. The NLI reward R(y) ∈
+[−2, 1] is bounded. The UCT selection rule is:
+¯Xj + 2Cp
+√
+2 ln n
+nj
+(10)
+According to the Kocsis and Szepesvári (2006) the-
+orem, UCT is consistent in finite-horizon domains.
+The regret Rn after n steps grows as O(ln n).
+Specifically for our NLI-guided generation:
+1. Exploration: The wcon = −2.0 penalty in
+our reward function (Eq. 2) acts as a soft prun-
+ing mechanism. Branches containing contra-
+dictions yield low Q-values.
+2. Exploitation: UCT exponentially allocates
+samples to branches with high entailment
+scores (went = 1.0).
+Therefore, provided the NLI model Θ is an approx-
+imate oracle of truth, the search policy πM CT S con-
+verges to the sentence sequence y that maximizes
+logical entailment with the evidence set E. ■
+D Detailed Experimental Results
+We further investigate the source of our perfor-
+mance gains by analyzing the impact of token con-
+straints and reasoning complexity.
+500 1000 1500 2000
+Token Budget (Ctoken)
+30
+40
+50
+60
+70
+80Retrieval Recall@5 (%)
+61.5
+68.4
+72.0 73.1
+50.0
+58.5
+63.3
+65.2
+38.0
+45.5
+49.6
+52.5
+Ours (MMKP)
+RAG + MMR
+Top-K
+Figure 3: Impact of token budget on retrieval perfor-
+mance. This figure compares the Retrieval Recall@5
+of our MMKP method against RAG+MMR and Top-K
+baselines across varying token budgets (Ctoken). Our
+MMKP (red line) consistently outperforms the base-
+lines, demonstrating superior robustness.
+Token Budget Robustness. Figure 3 demon-
+strates the retrieval recall across varying token con-
+straints. While traditional Top-K selection suffers
+a severe performance drop to 38.0% when the bud-
+get is restricted to 500 tokens, our MMKP selector
+exhibits superior resilience. It maintains a high
+recall of 61.5% in this strict setting, outperforming
+Top-K by a margin of 23.5% and the RAG+MMR
+baseline by 11.5%. This substantial gap validates
+MMKP’s ability to maximize information density
+when context space is scarce.
+Simple QA Multi-Hop QA Multi-Doc QA
+0
+10
+20
+30
+40
+50
+60Exact Match (EM)
+38.5
+18.4
+22.4
+43.0
+29.4
+31.5
+45.8
+31.9
+35.3
++11.7%
++59.8%
++40.6%
++19.0%
++73.4%
++57.6%
+Naive
+CRAG
+Ours
+Figure 4: Complexity Analysis. Our method shows
+significant scaling advantages on harder queries.
+Reasoning on Hard Queries. Figure 4 presents
+20971

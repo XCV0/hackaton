@@ -1,0 +1,115 @@
+2
+valuable progress [1], [2], [3]. They remain limited, however,
+because they mainly support product classification or detection
+and do not explore connecting product images to document
+knowledge. Thus, critical questions about what a product is
+or what law could apply to it cannot be properly explored.
+Retrieval-augmented generation (RAG) offers a natural framework
+for grounding language model responses in external knowledge,
+however, state-of-the-art (SOTA) document RAG methods, rife
+with inter-context conflict, fail at this task for two reasons. First,
+such methods, with strong document understanding [4], [5], cannot
+process images as retrieval entry points and, with API calls to large-
+language model (LLM) services at index and query time, make
+indexing expensive where legislation changes frequently; PRISM-
+RAG’s caption-grounded concept hyperedges instead provide this
+entry point at zero index-time LLM cost. Second, and more
+critically, embedding-similarity retrieval alone cannot distinguish a
+jurisdiction’s statute from another jurisdiction’s near-identical text;
+no existing RAG system incorporates a mechanism to disambiguate
+semantically similar language across jurisdictions. This produces
+dangerous false positives, where a response appears grounded
+and confident while citing the wrong jurisdiction’s law. We show
+that PRISM-RAG’s jurisdiction-aware design, a guarantee holding
+regardless of embedding-space topology, addresses this fail case,
+retrieving passages from the correct jurisdiction in 93.9% of
+policy compliance queries, a 48.6 percentage point advantage
+over standard retrieval (p < 0.001) in Sec. 5.
+Contributions of this Work. There are five main contributions
+in this work. First, we introduce Nicotine Product and Regulation
+Image-and-Text Surveillance Multimodal (NicoPRISM) dataset,
+a large-scale, multimodal, expert-validated dataset for tobacco
+and nicotine product surveillance, comprising images, structured
+attribute captions, a static heterogeneous document knowledge base,
+and two benchmark QA tasks spanning product knowledge and
+policy compliance. Second, as a stepping stone towards more robust
+image-legislation document understanding, we propose PRISM-
+RAG, a multimodal hypergraph RAG framework that bridges
+visual product content and a static legislative document collection
+via image-conditioned seed retrieval, concept hyperedge traversal,
+and jurisdiction-aware context assembly, with no LLM calls at
+index time. Third, we contribute expert-in-the-loop benchmark
+design to evaluate PRISM-RAG. Question-Answer (QA) pairs
+were co-developed and validated directly by public health domain
+experts, ensuring benchmark tasks reflect real regulatory monitoring
+workflows. Fourth, we propose comprehensive evaluation against
+standard document retrieval and SOTA document (and image) RAG
+baselines, including new retrieval-level jurisdiction accuracy (JA),
+context coverage (CC), response groundedness (RG), and efficiency
+metrics (wall time per query). Finally, all images, metadata,
+embeddings, captions, documents, QA pairs, and PRISM-RAG
+source code are released to support future research; project website
+is linked here. A subset of NicoPRISM is hosted on Kaggle.
+2 RELATED WORK
+In this section, we discuss data collection efforts and related uses
+of LLMs with respect to PRISM-RAG. Sec. 2.1 covers the tobacco
+and nicotine analysis literature. Sec. 2.2 discusses foundational
+LLMs and large multimodal models (LMMs). Sec. 2.3 discusses
+retrieval-based reasoning, focusing on document retrieval.
+2.1 Tobacco and Nicotine Analysis
+Tobacco and nicotine products are among the leading preventable
+causes of death globally. Despite this, monitoring the rapidly
+evolving landscape of new products and marketing strategies
+remains a challenge for public health researchers and policymakers
+[6]. Machine learning has been increasingly applied to tackle
+this problem, but prior work has used small sample datasets and
+limited task scopes. Past studies have analyzed global tobacco
+survey data [7] to identify associations between policy and tobacco
+risk, classify smoking-cessation habits, and predict relapse patterns
+[8]. More recent work [9], [10], [11] has turned to visual and
+multimodal signals on social media. Vassey et al. [2] compiled
+6,999 labeled Instagram images for e-cigarette detection. Murthy et
+al. [1] detected vaping devices in 826 annotated TikTok images. The
+PHAD [3] assembled a dataset of social media videos. Meanwhile,
+Lakatos et al. [12] demonstrated that deep learning can identify
+covert tobacco advertisements through multimodal analysis.
+2.2 Large Multimodal Models
+Large language models (LLMs) have been used to detect product-
+related discourse on social media [13]. Yet, their potential to
+support complex downstream reasoning tasks, such as cross-
+referencing product attributes against jurisdiction-specific policy
+or characterizing marketing strategies across brands at scale, has
+not been explored. Furthermore, all prior datasets and methods
+are confined to classification or detection, leaving a large gap
+for tasks that demand deeper product understanding and policy
+reasoning. LLMs trace their origins to the attention mechanism
+[14]. The family of Generative Pre-trained Transformers (GPT)
+models [15], [16], [17] have considerable reasoning capabilities
+thanks to instruction tuning [18] and human feedback [19]. Open-
+source models such as LLaMA [20], [21] and Vicuna [22] have
+also come to dominate LLM research efforts. The highly successful
+series of open-source LLaVA models [23], [24] were tuned to align
+LLMs and visual encoders, with further work optimizing memory
+footprint [25]. More modern commercial models, such as GPT-5
+[26], Gemini-3 [27], or the Claude suite [28], can be accessed via
+their respective APIs.
+2.3 Retrieval-Augmented Generation
+While LLMs and LMMs by themselves have strong reasoning
+capabilities, they are susceptible to hallucination [29], [30]. A
+popular solution is to combine the power of LLMs and knowledge
+bases organized as document chunks, graphs, or hypergraphs.
+Han et al.’s GraphRAG survey [31] provides further insight into
+this problem. A “standard” RAG solution stores text document
+chunks and retrieves them via similarity scoring. The graph RAG
+family organizes documents into a knowledge base as a simple
+graph. GRAG [32] constructs the optimal subgraph in linear time.
+LightRAG [33] is an efficient method for finding an optimal
+subgraph. Further graph RAG works, such as PathRAG [34],
+HippoRAG [4], and HippoRAG 2 [35], can find further relations
+but struggle to return fine details. HyperGraphRAG [5] expands
+to connect entities using n-ary relations to model more complex
+relationships. Critically, all of the above graph RAG methods are
+text-only: they have no mechanism to ground a product image
+query in the document graph and thus cannot route from a visual
+product to complex documents, e.g., legislation. To our knowledge,
+PRISM-RAG is the first hypergraph RAG framework to incorporate

@@ -1,0 +1,57 @@
+Retrieval-Augmented Generation Meets Data-Driven Tabula Rasa Approach for Temporal Knowledge Graph Forecasting30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-4 W/o TS 0.832 0.903 0.926 0.781 0.845 0.882 0.516 0.593 0.799 0.547 0.638 0.750 0.466 0.629 0.725
+Multiple-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-4 W/o TS 0.752 0.839 0.864 0.751 0.764 0.837 0.415 0.519 0.658 0.476 0.606 0.707 0.397 0.570 0.691
+Table 8: The table shows the performance of the sLA-tKGF W/GPT-4 framework on tKG forecasting declines without timestamped
+(TS) facts. This suggests that sLA-tKGF W/GPT-4 can leverage temporal information in historical facts to improve its performance
+on tKG forecasting tasks.
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-4 W/o TS W/RS 0.784 0.803 0.848 0.744 0.773 0.799 0.460 0.579 0.727 0.510 0.593 0.697 0.443 0.554 0.686
+Multiple-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-4 W/o TS W/RS 0.728 0.748 0.767 0.673 0.703 0.760 0.399 0.503 0.631 0.438 0.547 0.660 0.381 0.511 0.610
+Table 9: The table shows performance of sLA-tKGF W/GPT-4 framework on tKG forecasting declines when the timestamp
+removed facts in the augmented prompt are randomly shuffled(RS). This suggests that sLA-tKGF W/GPT-4 can leverage the
+chronological order of events to improve performance on tKG forecasting tasks.
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 (Ours) 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-4 W/NK 0.765 0.835 0.855 0.740 0.775 0.857 0.427 0.549 0.712 0.507 0.555 0.712 0.414 0.520 0.664
+sLA-tKGF W/GPT-4 W/RK 0.789 0.858 0.885 0.757 0.804 0.887 0.439 0.567 0.738 0.527 0.571 0.742 0.429 0.539 0.683
+sLA-tKGF W/GPT-4 W/PK 0.815 0.870 0.912 0.780 0.838 0.924 0.458 0.590 0.765 0.548 0.596 0.775 0.445 0.574 0.705
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 (Ours) 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-4 W/NK 0.733 0.774 0.844 0.722 0.769 0.854 0.401 0.580 0.713 0.468 0.642 0.738 0.413 0.575 0.692
+sLA-tKGF W/GPT-4 W/RK 0.791 0.818 0.898 0.777 0.803 0.901 0.429 0.615 0.752 0.500 0.679 0.794 0.440 0.616 0.730
+sLA-tKGF W/GPT-4 W/PK 0.819 0.848 0.930 0.803 0.855 0.944 0.445 0.635 0.795 0.521 0.715 0.819 0.459 0.641 0.759
+Table 10: The table displays the results of the study investigating the impact of various types of knowledge-infused augmented
+prompts on the performance of the sLA-tKGF W/GPT-4 framework in tKG forecasting, assessed using benchmark datasets.
+dataset and evaluated their performance using the Mean Recipro-
+cal Rank (MRR) metric. As demonstrated in Table 13, our results
+validate that the sLA-tKGF W/GPT-4 framework, exhibits strong
+performance on tKG forecasting task with irregular time intervals.
+6.5 Impact of Retrieved Fact Types
+In this work, we introduce a zero-shot learning method to predict
+missing entities in query quadruples. Our approach includes: (a)
+Constructing a historical context for a query quadruple (𝑠𝑞,𝑝𝑞, ?,𝑡𝑞 )
+using historical facts from previous static KG snapshots G𝑡𝑞 −𝑚:𝑡𝑞 −1
+to form a knowledge-infused augmented prompt. (b) Converting
+retrieved facts and the query into verbalized sentences, employing
+sentence embedding for knowledge distillation, and using semantic
+similarity to filter facts, thereby constructing augmented prompts.
+(c) Estimating the missing entity conditioned on the augmented
+prompt, following 𝑜𝑞 ∼𝑃(𝑜|(𝑠𝑞,𝑟𝑞, ?,𝑡𝑞 ),G(𝑡𝑞 −𝑚,𝑡𝑞 −1)). We eval-
+uate the impact of single-subject entity and subject entity-relation
+pair historical facts on forecasting accuracy. The former involves
+only the subject entity (𝑠𝑞 ), while the latter includes both the sub-
+ject (𝑠𝑞 ) and the relation (𝑟𝑞 ). We examine these effects across
+9

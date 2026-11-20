@@ -1,0 +1,141 @@
+LD ¼
+ﬃﬃﬃﬃﬃﬃ
+Dτ
+p
+(4)
+where D can be calculated from mobility using the Einstein
+relation; τ can be calculated using the total defect density
+(Ndef ), thermal capture cross section (c), and thermal velocity
+of the electron (vth) as follows
+τ ¼ 1 ðNdef vthcÞ (5)
+In the simulations, the defect density and mobility were
+assumed to be the same for both electrons and holes. The capture
+cross-sections and thermal velocity were set to 1 /C2 10/C014 cm/C03
+and 1 /C2 10/C07 cm s/C01, respectively.
+The thickness of the CsPbBr3 layer is also important because it
+affects light absorption and photogenerated carrier collection. The
+thicker the CsPbBr3 layer, the greater the light absorption. In con-
+trast, an increase in CsPbBr3 layer thickness suppresses photogen-
+erated carrier collection due to the reduction of the internal electric
+ﬁeld in the CsPbBr3 layer. Furthermore, the thicker the layer,
+the more the number of defects in the layer. Therefore, carrier
+recombination is enhanced in a thicker CsPbBr3 layer. To deter-
+mine the optimum thickness, we investigated the effect of
+CsPbBr3 layer thickness on device performance.
+2.3. Effect of the Work Function of TCO Layer and the Electron
+Afﬁnity of Buffer Layer between TCO Layer and ETL
+In the previous sections, the effect of the ΔEc between the ETL
+and CsPbBr3 layer on device performance when ﬂuorine-doped
+tin oxide (FTO, work function of 4.4 eV)[41] was used as the TCO
+layer material was investigated. Similar to the ΔEc between the
+ETL and CsPbBr3 layer, it is also important to consider the band
+alignment between the TCO layer and the ETL. Therefore, we
+investigated the effect of the TCO work function on device per-
+formance. In these simulations, we used nc-GaN as the ETL
+material and the TCO work function was varied from 3.9 to
+4.4 eV. Furthermore, the TCO layer was treated as an electrode
+with a speciﬁc work function rather than as a semiconductor.
+These values are possible for real-world devices using zinc oxide
+(ZnO)[42] as the TCO layer. We also investigated the effect of
+amorphous Zn–Si–O (a-ZSO) as the buffer layer between the
+TCO layer and ETL. The electron afﬁnity of a-ZSO can be con-
+trolled by changing the Si content.[40] Therefore, the a-ZSO
+buffer layer can improve carrier transport through the TCO layer
+and ETL by adjusting the band alignment. Finally, we compared
+simulation and experimental device performance to identify ways
+to improve device performance.
+3. Results and Discussion
+3.1. Effect of Conduction Band Offset between ETL and
+CsPbBr3 Layer on Device Performance
+The effect of ΔEc on device performance was investigated to ﬁnd
+the criterion for selecting the ETL material. Figure 3a shows the
+illuminated current density–voltage ( J–V ) curves of the CsPbBr3
+devices without both interface defect layers (IL; namely FIL, RIL).
+The shape of the J–V curves is affected by ΔEc. The dependence
+of the device parameters on ΔEc is shown in Figure 3b. The
+device performance under AM1.5G (sunlight) is also shown
+for comparison. Although the conversion efﬁciency differed
+under the different illumination conditions (blue light or
+AM1.5G) primarily because of the difference in the short-circuit
+current density ( Jsc), the behavior of the device parameters was
+very similar. For blue light illumination, the conversion
+efﬁciency slightly decreased with increasing ΔEc from /C00.4 to
+0.8 eV primarily due to the deterioration of the ﬁll factor (FF).
+Conversely, the conversion efﬁciency suddenly dropped when
+ΔEc was less than /C00.5 eV primarily due to the reduction in Jsc.
+At small ΔEc values, an increase in the open-circuit voltage (Voc)
+was also observed. The highest conversion efﬁciency (65.9%) was
+obtained at ΔEc = /C00.4 eV for blue light illumination.
+0.5 1 1.5 2 2.5
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+55
+0
+Voltage (V)
+mc/Am(ytisnedtnerruC 2)
+Ec (eV)
+ -0.8    -0.5   -0.4 
+  0        0.4   0.6    
+  0.7    0.8
+Under 450 nm illumination (b)(a)
+1.8
+2.0
+2.2
+2.4
+1.8
+2.0
+2.2
+2.4
+ Voc (V)
+ AM1.5G (100 mW/cm 2)
+ 450 nm (123 mW/cm 2)
+ Voc (V)
+10
+20
+30
+40
+2
+4
+6
+8
+ Jsc
+mc/Am( 2)
+ Jsc
+(mA/cm2)
+40
+60
+80
+40
+60
+80
+ FF (%)
+ FF (%)
+-1 -0.5 0 0.5 1
+0
+20
+40
+60
+0
+5
+10
+15
+Ec (eV)
+Eff  (%)
+mn054
+Eff  (%)
+AM1.5G
+Figure 3. a) Photo J–V characteristics and b) device parameters of CsPbBr3 photovoltaic power converters with different ΔEc values between ETL and
+CsPbBr3 absorber layer under 450 nm blue light illumination. The interface defect layer was not considered in the simulations. The simulated device
+parameters under AM1.5G sunlight illumination are also shown for comparison with previously reported device performance.
+www.advancedsciencenews.com www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (4 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH
+ 18626319, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pssa.202400437, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

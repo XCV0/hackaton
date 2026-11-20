@@ -1,0 +1,95 @@
+When Context Misleads: Intent-Guided Decoding for
+Robust Retrieval-Augmented Generation
+Haolin Jin, Pengyue Yang, Huaming Chen
+School of Electrical and Computer Engineering
+The University of Sydney
+Sydney, NSW, Australia
+{haolin.jin, pengyue.yang, huaming.chen}@sydney.edu.au
+Abstract—Retrieval-augmented generation (RAG) improves
+large language models by grounding generation in external
+evidence, but it also introduces a source trust problem: retrieved
+context may be useful, irrelevant, or even misleading. Existing
+RAG systems often apply a fixed trust policy toward retrieved
+evidence, which can either over-trust incorrect context or underuse
+context when the user explicitly asks for context-following
+behavior. Therefore, we propose Intent-Guided Decoding (IGD),
+a framework that arbitrates between retrieved context and
+parametric memory according to user intent. IGD uses answer-
+level filtering and token-level correction to steer the final decoding
+trajectory between retrieved context and parametric memory. We
+evaluate IGD on three faithful QA benchmarks and three factual-
+conflict benchmarks across five LLMs, IGD substantially improves
+factual recovery, achieving gains of up to 65.4 percentage points on
+factual-conflict benchmarks over Direct RAG, while preserving or
+improving strict context-following behavior, this findings highlight
+the importance of balancing factuality and faithfulness in RAG.
+Index Terms—Retrieval-Augmented Generation, Large Lan-
+guage Models, Factuality, Faithfulness
+I. INTRODUCTION
+Retrieval-augmented generation (RAG) has become a widely
+adopted paradigm for connecting large language models
+(LLMs) with external knowledge. By retrieving relevant evi-
+dence at inference time, retrieval-augmented generation extends
+the static parametric knowledge of LLMs with updatable non-
+parametric memory [1]. This design improves performance
+on knowledge-intensive tasks such as open-domain question
+answering, where models require access to facts beyond their
+internal parametric knowledge [2]–[4].
+However, the effectiveness of RAG depends not only on
+whether useful evidence is retrieved, but also on whether the
+model can ground the generation in the retrieved evidence
+appropriately. In practice, RAG systems may still generate
+statements that are unsupported by, or even contradictory to, the
+provided context. RAGTruth systematically annotates nearly
+18K RAG responses, and finds that non-factual statements
+remain common under standard RAG pipelines [5]. On the other
+hand, retrieval introduces a source-trust problem. Standard RAG
+pipelines often implicitly treat retrieved context as authoritative,
+which content may be false, adversarially corrupted, or incon-
+sistent with stable world knowledge [6]. FaithEval formalizes
+this issue as contextual faithfulness evaluation, and constructs
+4.9K high-quality examples across unanswerable, inconsistent,
+and counterfactual settings, showing that even strong contem-
+porary LLMs often fail to maintain an appropriate degree
+of faithfulness to given context [7]. More broadly, situated
+faithfulness argues that models should dynamically calibrate
+their trust in external context against internal knowledge, rather
+than blindly following either source [8]. These findings suggest
+that a central challenge in RAG is not only how to retrieve
+useful evidence, but also how to decide whether the retrieved
+evidence should dominate generation [9], [10].
+This issue exposes a fundamental trade-off between faithful-
+ness and factuality in RAG generation. In some settings, the
+user explicitly expects the model to follow the provided context,
+for example when answering questions about a document,
+policy, or passage [11]. In other settings, the user expects the
+model to use retrieved context only as auxiliary evidence and
+remain skeptical when that context is misleading or conflicts
+with world knowledge [9], [10]. A fixed RAG behavior is
+therefore insufficient: always trusting context may improve
+contextual faithfulness but can harm factual correctness under
+misleading retrieval. Conversely, always discounting retrieved
+context may recover factuality against corrupted evidence but
+undermine user intent in strict context-following scenarios
+[12]. Practical RAG systems therefore require an intent-aware
+mechanism that can follow context when the user asks for
+contextual grounding, while resisting context when the user
+seeks factual robustness against unreliable retrieval.
+To address this challenge, we argue that RAG requires not
+only retrieval and grounding with external evidence, but also
+an explicit decoding-time arbitration mechanism that decides
+when generation should be controlled by retrieved context
+and when it should rely on parametric memory. In this work,
+we propose Intent-Guided Decoding (IGD), a decoding-time
+framework to address both factuality and faithfulness in RAG.
+In Figure 1, IGD decomposes generation into three conditional
+branches: a user branch conditioned on the original user prompt,
+a context branch that explicitly follows the retrieved context,
+and a memory branch that answers in a closed-book manner.
+IGD then performs source arbitration at two granularities. First,
+an Answer-Level Memory Filter handles high-confidence cases
+by routing to a stable memory answer when the retrieved
+context is likely misleading. Second, for the remaining cases,
+we propose a novel Token-Level Correction mechanism to adjust
+the user branch decoding distribution only when intervention
+arXiv:2608.16515v1  [cs.CL]  17 Aug 2026

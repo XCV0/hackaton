@@ -1,0 +1,114 @@
+B. Graph-based RAG Models
+To overcome the aforementioned limitations of traditional
+RAG models, researchers have begun to develop Graph-based
+RAG models [23]–[29]. These models usually extract graph
+components with LLMs from text corpora to index them into
+graphs. When retrieval, these models will utilize the graph
+topology structure to capture complex relationships between
+entities within and across text chunks.
+1) Tree-based Models: To address the limitation of flat
+retrieval in capturing long-range dependencies and thematic
+information, tree-based models organize text chunks into hi-
+erarchical structures. RAPTOR [60] recursively clusters and
+summarizes text chunks to construct a tree from the bottom
+up, enabling the retrieval of information at varying levels of
+abstraction to answer high-level thematic queries. Building on
+this, SiReRAG [71] constructs dual index trees to capture both
+semantic similarity and entity-based relatedness. It builds a
+similarity tree via recursive summarization and a relatedness
+tree that groups fine-grained propositions sharing the same
+entities, thereby indexing both similar and related information
+to support complex multihop reasoning.
+However, these tree-based models can only generate tree-
+structured reasoning chains, which restricts their adaptivity to
+different tasks.
+2) Community-based Models: Early Graph-based RAG
+models typically retrieve specific neighborhoods from the
+graph based on the input query. The pioneering work in this
+category is GraphRAG [23], it aggregates nodes into com-
+munities and generates community summaries to encapsulate
+global information. To reduce the computational overhead of
+community detection, LightRAG [24] retrieves semantically
+similar entities along with their 1-hop graph neighborhoods
+and corresponding text passages, eliminating the need for pre-
+computed summaries.
+Moving beyond fixed neighborhoods, G-Retriever [72] for-
+mulates subgraph retrieval as a Prize-Collecting Steiner Tree
+(PCST) optimization problem, identifying connected sub-
+graphs that maximize relevance while minimizing costs. Re-
+cently, MIXRAG [73] introduces a Mixture-of-Experts (MoE)
+framework to handle diverse query intents, dynamically rout-
+ing queries to specialized entity, relation, or subgraph experts
+and employing a query-aware graph encoder to filter noise.
+Moreover, all these community-based models can be limited
+in capturing information beyond a small local neighborhood,
+thereby restricting their long-hop reasoning ability [74], [75].
+3) Walking-based Models: To further enhance the long-
+range graph reasoning capabilities of community-based mod-
+els, researchers have proposed walking-based models [25],
+[27], [29], [32], which apply walking-based graph algorithms,
+to detect and capture global topological information within the
+Knowledge Graphs (KGs).
+Among these, HippoRAG [27] and Fast-GraphRAG [32]
+utilize the Personalized PageRank (PPR) algorithm to traverse
+the constructed KG and assign relevance scores to graph nodes
+with respect to the input query. During retrieval, these models
+select text chunks based on the aggregated PPR scores of
+Table I: Summary of important notations.
+Notations Meanings
+t The text chunk.
+q The input query.
+T , Tc Original texts and split text chunks.
+lt, lo Text chunk and token overlap length.
+s, c The node influence score and edge cost.
+SV , CE Set of node influence score and edge cost.
+τ, ϕ Entity extraction and synonym threshold.
+b The maximum n-gram in extity extraction.
+ka, kr Number of raw mapped triples, and hybrid
+retrieved chunks.
+f The mapped triplet fact in KG.
+FKG All triplet facts within the KG.
+Fraw , F Raw and mapped triplet facts after filter.
+v A node (entity) in KG.
+e(u,v) An edge (relation) between node u and v.
+KG(V, E) KG with entity set V and relation set E.
+d, p, P The damping factor, personalization vector
+and transition probability matrix of PPR.
+N (·) 1-hop neighbor set of node or subgraph in
+KG.
+rM CM I MCMI subgraph’s total cost-score ratio.
+g MCMI subgraph’s text-formed graph string.
+pre, ptf , pgen LLM prompt for relation extraction, triplet
+filtering, and answer generation.
+AS(·), HS(·) The anchor score and hybrid retrieval score.
+EC(·) The edge cost function.
+the graph nodes they contain. StructRAG [25] trains a router
+module that learns to identify the optimal reasoning path over
+the graph based on the input query. HippoRAG2 [29] further
+improves upon HippoRAG by incorporating text chunks as
+passage nodes directly into the KG. It retrieves text chunks
+based on the individual PPR scores of their corresponding
+passage nodes within the graph.
+In this paper, we propose a novel graph-based and efficient
+RAG framework, termed AGRAG. AGRAG first constructs a
+KG using a statistics-based entity extraction method, and then
+assigns graph’s node weights based on both the KG structure
+and the input query. Finally, it generates a Minimum Cost and
+Maximum Influence (MCMI) reasoning subgraph to provide
+the LLM with explicit reasoning chains that maximize query-
+relevant information while minimizing noise during retrieval.
+III. METHODOLOGY
+In this section, we first introduce the overall AGRAG
+framework, then detail its three core steps: Data Preparation,
+Graph Retrieval, and Hybrid Retrieval.
+A. Framework Overview
+As shown in Figure 1, AGRAG consists of three steps, i.e.,
+Data Preparation, Graph Retrieval, and Hybrid Retrieval.
+Step 1: Data Preparation. In this step, AGRAG constructs
+a Knowledge Graph (KG) KG(V, E) based on the given
+text corpus T . Here, we substitute other Graph-based RAG
+baselines’ LLM entity extraction to a statistics-based method
+based on TFIDF [36], and extract entities from text chunks
+in Tc that split from the texts in corpus T . This method can
+avoid LLM hallucination, and hence reduce the noise in the
+constructed graph, leading to better effectiveness. After entity

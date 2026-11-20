@@ -1,0 +1,109 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+needed to answer the query, while clarity concerns the
+coherence, precision, and readability of the generated text.
+These dimensions capture different failure conditions.
+A response may be relevant but unfaithful when it directly
+answers the query using unsupported information. It may
+be faithful but incomplete when all included statements are
+supported by the context but important facts are omitted.
+Similarly, a system may retrieve the correct passage while
+producing an incorrect answer because the model fails to
+interpret or synthesize the available evidence. Assessing
+onlyfinal-answeraccuracymaythereforeobscuretheorigin
+and characteristics of failures within the RAG pipeline.
+Grounding is especially important because retrieval
+augmentation reduces, but does not eliminate, hallucina-
+tions[7].Ageneratedresponseisgroundedwhenitsfactual
+claims can be traced to the retrieved evidence. Evidence
+attribution mechanisms, such as requiring models to sup-
+port answers with quotations or citations, can facilitate
+this assessment and improve the verifiability of generated
+information [16]. However, a response may still contain
+subtledistortions,unsupportedgeneralizations,orfabricated
+details even when it refers to the correct source material.
+RAGevaluationisfrequentlyconductedusingquestion-
+answering datasets containing predefined queries and ref-
+erence answers. Exact Match and token-level F1 are com-
+monly used when answers are short and relatively con-
+strained [1, 14]. However, these metrics are less suitable
+foropen-endednatural-languageresponsesbecausemultiple
+semantically equivalent answers may differ substantially in
+wording. Consequently, semantic evaluation mechanisms
+are often required to distinguish acceptable linguistic vari-
+ation from genuine behavioral failures.
+2.3. Testing and Test Oracles for RAG Systems
+From a software-testing perspective, a test case for a
+RAG system comprises at least a retrieval corpus, a test
+query, and an expected behavioral outcome. Depending on
+the testing objective, the expected outcome may specify a
+reference answer, a set of required facts, the passages that
+shouldberetrieved,orarejectionresponsewhenthecorpus
+does not contain sufficient information.
+Testing RAG systems is more complex than testing
+standalone LLMs because failures may originate from mul-
+tipleinteractingcomponents.Anincorrectresponsemayre-
+sultfrominadequatedocumentextraction,unsuitablechunk
+boundaries, inaccurate embeddings, retrieval errors, con-
+texttruncation,ineffectivepromptconstruction,ordeficien-
+cies in the generative model. Furthermore, the same query
+mayproducedifferentoutcomeswhentheLLM,embedding
+model,retrievalconfiguration,orindexedcorpusischanged.
+Effective testing must therefore consider both individual
+components and their end-to-end interaction.
+An important distinction can be made between positive
+and negative test cases. Positive test cases ask questions
+whose answers are supported by the indexed documents
+and assess whether the system retrieves and uses the corre-
+sponding evidence. Negative test cases ask for information
+that is absent from the available corpus. In such cases,
+the desired behavior is generally to acknowledge that the
+available evidence is insufficient rather than generating a
+plausible but unsupported answer. Negative testing is there-
+foreparticularlyusefulforassessinghallucinationresistance
+and the system’s ability to respect the boundaries of its
+external knowledge.
+Anotherrelevanttestingconceptiscoverage.Indocument-
+grounded systems, test coverage may refer to the extent to
+which different documents, sections, passages, topics, or
+linguistic structures contribute to the generated test cases.
+Generatingmanyquestionsfromasmalloreasilyinterpreted
+portion of a document may provide limited evidence about
+the behavior of the complete system. Coverage-oriented
+test generation instead seeks to exercise diverse parts of
+the retrieval corpus and a range of query characteristics,
+including questions that require direct extraction, synthesis
+of multiple facts, interpretation of complex passages, or
+rejection of unsupported requests.
+Determining whether a RAG response is correct gives
+risetoatestoracleproblem.Exactstringcomparisonisoften
+inadequate because natural-language answers may express
+the same information using different vocabulary, ordering,
+or levels of detail. Reference answers may also be incom-
+plete, and a generated answer can contain additional correct
+information without necessarily constituting a failure.
+A common strategy for addressing this problem is to
+employ an LLM as a semantic test oracle. In an LLM-as-
+a-judgeconfiguration,aseparatemodelcomparesthegener-
+ated answer with a reference answer and, where available,
+the retrieved evidence. The judge can assess dimensions
+such as semantic equivalence, relevance, completeness, and
+faithfulness [2]. This enables the automated evaluation of
+large numbers of open-ended responses without requiring
+exact lexical correspondence.
+Nevertheless, LLM-based test oracles are themselves
+probabilistic and may produce incorrect or inconsistent ver-
+dicts. Their reliability depends on factors such as the se-
+lected judge model, the evaluation prompt, the information
+provided to the judge, and the complexity of the evaluated
+response. Consequently, the precision of an LLM-based
+oracle should be empirically assessed, particularly when it
+is used to classify system outputs as passing or failing.
+Taken together, these characteristics show that testing
+a RAG system requires more than measuring retrieval ac-
+curacy or evaluating isolated model responses. It requires
+thesystematicconstructionofretrievalcorporaandqueries,
+the exercise of both supported and unsupported information
+needs, the consideration of document and input coverage,
+and an oracle capable of evaluating semantically diverse
+natural-language outputs.
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 3 of 21

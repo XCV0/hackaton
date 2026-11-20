@@ -1,0 +1,89 @@
+Appendices
+Within this supplementary material, we elaborate
+on the following aspects:
+• Appendix A: Dataset Details
+• Appendix B: Implementation Details and Hyper-
+parameters
+• Appendix C: Theoretical Proofs and Analysis
+• Appendix D: Detailed Experimental Results
+• Appendix E: Sensitivity Analysis Results
+• Appendix F: LLM Prompts
+• Appendix G: Qualitative Analysis Case Study
+A Dataset Details
+We evaluate our approach on six representative
+datasets covering Simple QA, Multi-Hop QA, and
+Multi-Document QA scenarios. The statistics of
+the evaluation datasets are summarized in Table 8.
+Simple QA. We first consider single-hop tasks
+that require retrieving facts from open-domain
+sources.
+• Natural Questions (NQ): An open-domain
+QA dataset. In our experiments, we use a
+subset of 1,000 queries and retrieve from a
+corpus of 9,633 passages.
+• PopQA: This dataset focuses on long-tail en-
+tities which often require precise knowledge
+retrieval. We evaluate on 1,000 queries with a
+retrieval pool of 8,676 passages.
+Multi-Hop QA. These datasets require the model
+to perform reasoning across multiple documents
+(typically 2–4 hops) to derive the answer.
+• MuSiQue: A challenging multi-hop dataset.
+Our evaluation involves 1,000 queries and the
+largest passage pool in our setup (11,656 pas-
+sages), requiring complex reasoning chains.
+• 2WikiMultiHopQA (2Wiki): Based on
+Wikipedia, requiring 2–4 hops. We use 1,000
+queries and 6,119 passages.
+• HotpotQA: We utilize the distractor setting
+to test the model’s ability to filter irrelevant
+information. The setup includes 1,000 queries
+and 9,811 passages.
+Multi-Doc QA. Finally, we evaluate robustness
+against noise in a retrieval-augmented generation
+setting.
+• MultiHop-RAG: Designed to test noise ro-
+bustness. Unlike the standard QA sets, this
+evaluation uses a larger set of 2,556 queries
+over 609 specific passages to measure the F1
+score and retrieval accuracy.
+B Implementation Details and
+Hyperparameters
+B.1 General Implementation Details
+We implemented our framework using PyTorch
+and the Hugging Face Transformers library.
+All experiments were conducted on a cluster
+of NVIDIA A100 (80GB) GPUs. For the
+retrieval backbone, we utilized a hybrid ap-
+proach combining dense and sparse retrieval.
+We employed BAAI/bge-small-en-v1.5 as the
+dense embedding model and scikit-learn’s
+TfidfVectorizer (ngram range 1-2, max fea-
+tures 200k) for sparse retrieval. The results were
+fused using Reciprocal Rank Fusion (RRF) with
+k = 60, alongside a centroid-based query ex-
+pansion strategy where the query embedding is
+refined using the mean of the top-5 dense re-
+trieval results. For the generator, we utilized
+Qwen2.5-7B-Instruct as the backbone Large
+Language Model (LLM), loaded in bfloat16 pre-
+cision. The NLI verification signal was derived
+from roberta-large-mnli.
+B.2 Baseline Implementation Details
+To ensure a rigorous comparison, we aligned the
+base models and resource constraints across all
+baselines where applicable:
+• Standard RAG (Naive): We follow the stan-
+dard "Retrieve-then-Generate" paradigm. We
+retrieve the top-k (k = 5) chunks using the
+same hybrid retriever (BGE + TF-IDF) de-
+scribed above and feed them directly into the
+Qwen2.5-7B-Instruct model. No advanced
+selection or re-ranking is applied.
+• RAG + MMR: We implemented Maximal
+Marginal Relevance (MMR) to re-rank the
+retrieval candidates. We set the diversity hy-
+perparameter λ = 0.6, iteratively selecting
+documents that maximize a linear combina-
+tion of query relevance and novelty relative to
+20967

@@ -1,0 +1,99 @@
+5 Conclusion and Future Work
+We introduced SPROUTRAG, an attention-guided
+hierarchical RAG framework that organizes
+sentence-level chunks into a learned tree for multi-
+granularity retrieval. Rather than relying on fixed
+chunk boundaries, pairwise context expansion,
+lossy summarization, or inference-time LLM filter-
+ing, SPROUTRAG uses learned SLLM attention ag-
+gregation to construct a retrieval-oriented hierarchy.
+At inference time, hierarchical beam search selects
+evidence from sentence leaves, internal nodes, and
+broader subtrees, allowing the retriever to balance
+fine-grained precision with contextual coherence.
+Across benchmarks, SPROUTRAG improves re-
+trieval information efficiency by 6.1% on average,
+offering a strong performance–efficiency tradeoff
+that approaches LLM-heavy systems while using
+far fewer online tokens and lower latency. While
+SPROUTRAG generalizes well after one-time train-
+ing, several directions remain open. Future work
+can explore richer node composition functions be-
+yond mean pooling, such as gated or attention-
+based composition, and dynamic tree adaptation
+or query-dependent traversal policies for complex
+multi-hop retrieval.
+Limitations
+While SPROUTRAG improves multi-granularity
+retrieval without inference-time LLM filtering, it
+has some limitations. First, the hierarchy is cur-
+rently built as a binary tree, which may be restric-
+tive when several sentences jointly form a coher-
+ent semantic unit and should be grouped together
+simultaneously. Multi-branch trees could better
+capture such many-to-many dependencies. Second,
+SPROUTRAG requires an upfront training stage for
+the SLLM and attention aggregation weights. Al-
+though this is a one-time cost that transfers across
+datasets in our experiments, it is still more expen-
+sive than using an off-the-shelf retriever without
+adaptation. Finally, tree construction is offline and
+fixed during retrieval. While this makes inference
+efficient and avoids rebuilding the index per query,
+it may be less flexible when queries require evi-
+dence reorganized by query-specific relevance.
+Ethical Considerations
+Potential Risks. SPROUTRAG is designed to
+improve retrieval quality and reduce unnecessary
+inference-time LLM calls, but it does not eliminate
+the risks associated with RAG systems. Retrieved
+evidence may still be incomplete, outdated, or in-
+correctly interpreted by the generator, especially
+in high-stakes domains such as legal, medical, or
+financial settings. In such cases, SPROUTRAG
+should be used as an assistive retrieval component
+rather than a substitute for expert review. In addi-
+tion, stronger retrieval over large document collec-
+tions may surface sensitive or private information
+if the underlying corpus is not properly governed.
+Deployments should therefore include appropriate
+access control, data filtering, logging policies, and
+human oversight.
+Use of AI Assistance. During the preparation of
+this manuscript, we used large language models
+for paraphrasing and improving the writing qual-
+ity of the paper, and for generating icon images
+used in figures. All ideas, technical contributions,
+experimental design, and conclusions are entirely
+original and the work of the authors.
+Reproducibility Statement. We describe all ar-
+chitectural components, training objectives, hyper-
+parameters, and dataset splits in Section 4.1. We
+release our code under a permissive open-source
+license. All external datasets and models are used
+according to their original licenses and terms of
+use. All benchmarks, datasets, and baseline arti-
+facts used in this paper are publicly available, and
+our use of them is limited to research evaluation,
+consistent with their intended use and original ac-
+cess conditions.
+Use of Existing Artifacts and Data. We use only
+publicly available benchmarks, datasets, models,
+and baseline artifacts, and our use is limited to re-
+search evaluation. We do not collect new user data
+or attempt to identify individuals. Some source
+corpora may contain naturally occurring named en-
+tities or web-derived text from the original datasets;
+we follow the datasets’ original licenses, prepro-
+cessing, and access conditions. All benchmarks,
+datasets, and baseline methods used in this paper
+are publicly available, and our released code and
+checkpoints are intended for research and repro-
+ducibility purposes.
+References
+Hongjun An, Yifan Chen, Zhe Sun, and Xuelong Li.
+2024. Sentencevae: Enable next-sentence predic-
+tion for large language models with faster speed,
+higher accuracy and longer context. Preprint,
+arXiv:2408.00655.
+46529

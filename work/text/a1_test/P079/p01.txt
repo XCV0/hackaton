@@ -1,0 +1,75 @@
+Academic Editor: Fabrice Goubard
+Received: 9 January 2025
+Revised: 28 February 2025
+Accepted: 5 March 2025
+Published: 8 March 2025
+Citation: Bosio, A.; Pasini, S.;
+Spoltore, D.; Foti, G.; Parisini, A.;
+Pavesi, M.; Shapouri, S.; Cora, I.;
+Fogarassy, Z.; Fornari, R. Effect of
+Heterojunction Characteristics and
+Deep Electronic Levels on the
+Performance of (Cd,Zn)S/Sb2Se3 Solar
+Cells. Appl. Sci. 2025, 15, 2930.
+https://doi.org/10.3390/
+app15062930
+Copyright: © 2025 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license
+(https://creativecommons.org/
+licenses/by/4.0/).
+Article
+Effect of Heterojunction Characteristics and Deep Electronic
+Levels on the Performance of (Cd,Zn)S/Sb2Se3 Solar Cells
+Alessio Bosio 1,*
+ , Stefano Pasini 1
+ , Donato Spoltore 1
+ , Gianluca Foti 1
+ , Antonella Parisini 1
+ ,
+Maura Pavesi 1
+ , Samaneh Shapouri 1,2
+ , Ildikó Cora 3
+ , Zsolt Fogarassy 3
+ and Roberto Fornari 1
+1 Department of Mathematical, Physical and Computer Science, University of Parma, 43124 Parma, Italy;
+stefano.pasini@unipr.it (S.P.); donato.spoltore@unipr.it (D.S.); gianluca.foti@unipr.it (G.F.);
+antonella.parisini@unipr.it (A.P.); maura.pavesi@unipr.it (M.P.); samaneh.shapouri@unipr.it (S.S.);
+roberto.fornari1@unipr.it (R.F.)
+2 Atomic and Molecular Group, Physics Department, Tarbiat Modares University, Tehran 14115-175, Iran
+3 Institute for Technical Physics and Materials Science, Centre for Energy Research, HUN-REN,
+H-1525 Budapest, Hungary; cora.ildiko@ek.hun-ren.hu (I.C.); fogarassy.zsolt@ek.hun-ren.hu (Z.F.)
+* Correspondence: alessio.bosio@unipr.it
+Abstract: Antimony selenide (Sb2Se3) is an Earth-abundant and non-toxic material that
+stands out as a promising absorber for the fabrication of thin film solar cells. Despite
+significant advancements in recent years, all the devices reported in the literature exhibit
+open-circuit voltages well below the theoretical value. Identifying the factors contributing
+to this low voltage is an essential step for increasing the efficiency beyond the recently
+attained 10% milestone and moving closer to the theoretical limit. In this paper, we
+present the results of an in-depth analysis of a Sb2Se3 solar cell in the common superstrate
+configuration. By making use of current density–voltage characteristic as a function of
+both temperature and wavelength, capacitance–voltage measurements, and admittance
+spectroscopy, we ascribe the low open-circuit voltage to the presence of a potential barrier
+within the absorber material near the junction interface Furthermore, it was observed that
+the junction behavior in the dark and under illumination changes, which is compatible
+with the presence of deep electronic levels connected with intrinsic point defects.
+Keywords: Sb2Se3; J-V characteristic; kink effect; crossover; deep levels; intrinsic defects
+1. Introduction
+Antimony chalcogenides, such as Sb2S3, Sb2Se3, Sb2(S,Se)3 [1], and CuSb2Se3 [2], are
+gaining attention within the research community as potential and promising absorber
+materials for thin film solar cells. In particular, antimony selenide (Sb2Se3) exhibits sev-
+eral advantageous characteristics that make it suitable for this role. Sb2Se3 is generally
+considered to be an indirect bandgap semiconductor. Previous studies have reported
+an indirect bandgap of approximately 1.04 eV and a direct bandgap of about 1.17 eV at
+room temperature. Nevertheless, Sb2Se3 exhibits a strong absorption coefficient, which
+is advantageous for photovoltaic applications. The high absorption coefficient of Sb2Se3,
+despite its indirect bandgap, can be justified by the following considerations:
+1. Quasi-1D Crystal Structure: strong orbital interactions inside the ribbon enhance
+light absorption.
+2. Near-Direct Optical Transitions: a close-to-direct bandgap (~1.1–1.2 eV) boosts
+absorption.
+3. p-d Orbital Hybridization: strong Se 4p–Sb 5s interactions improve optical transitions.
+Appl. Sci. 2025, 15, 2930 https://doi.org/10.3390/app15062930

@@ -1,0 +1,127 @@
+KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea Yifan Jin et al.
+where ∥·∥ denotes the standard Euclidean norm. The geometry
+of B𝑑 is determined by the Riemannian metric 𝑔B x =( 2 1−∥x∥2 )2𝑔E,
+where 𝑔E is the Euclidean metric. For notational simplicity, we omit
+the curvature parameter 𝑐 in all subsequent formulations. On the
+Poincaré ball, the Möbius addition operator ⊕ between two points
+x, y∈ B𝑑 is defined as:
+x⊕ y = (1+ 2⟨x, y⟩+∥y∥2)x+(1−∥x∥2)y 1+ 2⟨x, y⟩+∥x∥2 ∥y∥2 . (2)
+Based on this definition, the hyperbolic distance between them is
+calculated as:
+𝑑B (x, y) = 2 tanh−1 (∥− x⊕ y∥). (3)
+Tangent Space and Mappings. Given a point x ∈ B𝑑, the
+tangent space 𝑇xB is defined as the Euclidean vector space com-
+prising all tangent vectors at x. The exponential map, denoted as
+expx (·) : 𝑇xB→ B𝑑, facilitates the mapping of vectors from the
+tangent space to the manifold B𝑑 as follows:
+expx (u) = x⊕ tanh
+ ∥u∥
+1−∥x∥
+ u
+∥u∥, (4)
+while the logarithmic map logx (·) : B𝑑 →𝑇xB serves as the inverse
+operation, projecting points from the manifold back to the tangent
+space:
+logx (u) =(1−∥x∥)· tanh−1 (∥− x⊕ u∥) −x⊕ u ∥− x⊕ u∥. (5)
+Hyperbolic Entailment Cones. Hierarchical relations in the
+external knowledge base naturally induce a partial order, in which
+coarse-grained concepts subsume more specific ones (e.g., artificial
+intelligence subsuming machine learning). Accordingly, to model
+such partial-order structures, we adopt hyperbolic entailment cones.
+Each entity embedding x ∈ B𝑑 \{0} is associated with a hyperbolic
+entailment coneCx, defined as
+Cx =
+
+y∈ B𝑑
+ ∠xy≤𝜙(x) 	 . (6)
+This formulation encodes partial ordering via geometric transitivity:
+if y ∈ Cx, then Cy ⊆ Cx, ensuring that hierarchical entailment
+is preserved through cone containment. ∠xy denotes the angle
+distance at x between the geodesic rays −→ox and −→xy, where o denotes
+the origin of the Poincaré ball. Thus, ∠xy can be computed as
+∠xy = cos−1
+ 
+⟨x, y⟩(1+∥x∥2)−∥x∥2 (1+∥y∥2)
+∥x∥∥x− y∥
+√︁
+1+∥x∥2 ∥y∥2 − 2⟨x, y⟩
+!
+. (7)
+The half-aperture 𝜙(x) controls the width of the entailment cone
+and is defined as
+𝜙(x) = sin−1
+
+𝐾 1−∥x∥2
+∥x∥
+
+, (8)
+where 𝐾 is a scaling hyper-parameter. Under this formulation, the
+cone aperture is inversely related to the norm ∥x∥, naturally assign-
+ing wider cones to coarse-grained concepts located near the origin
+and narrower cones to more fine-grained concepts.
+4 Methodology
+In this section, we present our proposed HyRAG, as depicted in Fig-
+ure 2. HyRAG consists of three key modules: Hyperbolic Knowledge
+Indexing (HKI), Multi-granularity Retrieval (MR), and Dual-path
+Fusion (DF). These components work together to improve the gen-
+eralization ability of GFMs by efficiently leveraging hierarchical
+knowledge structures via hyperbolic geometry.
+4.1 Hyperbolic Knowledge Indexing
+To address the limitation of Euclidean embeddings in capturing the
+inherent hierarchy of the external knowledge base, we introduce
+the hyperbolic knowledge indexing module. This module aims to
+construct a hierarchy-aware hyperbolic representation space for the
+external knowledge base that serves as the geometric foundation for
+subsequent retrieval. Concretely, the module comprises two integral
+phases: hyperbolic projection and hierarchy-aware optimization.
+Hyperbolic projection. This phase is designed to project the
+semantic features of the external knowledge base into a hyperbolic
+manifold.
+Specifically, we design a hyperbolic semantic encoder. To capture
+the semantics, the entity 𝑒𝑖 and relation 𝑟𝑖 in the external knowledge
+base are first encoded into Euclidean space using a pre-trained
+language model (e.g., SBERT), yielding e′ 𝑖 ∈ R𝑑′ and r′ 𝑖 ∈ R𝑑′ .
+Furthermore, a learnable mapping network 𝑓Θ : R𝑑′ → B𝑑 is
+learned to transform the Euclidean embeddings into a hierarchy-
+aware latent space prior to hyperbolic projection. The mapped
+representations are then projected onto the Poincaré ball model
+B𝑑 via the exponential map, enabling the embeddings to reside
+in a negatively curved space where hierarchical structures can be
+naturally represented. This process can be formalized as:
+e𝑖 = expo (𝑓Θ (e′ 𝑖)), r𝑖 = expo (𝑓Θ (r′ 𝑖)), (9)
+where expo (·) denotes the exponential map at the origin.
+Hierarchy-aware optimization. Inspired by [1], we adopt a
+hierarchy-aware objective to jointly preserve relational semantics
+and hierarchical entailment in hyperbolic space.
+Specifically, given a triplet(𝑒𝑖,𝑟𝑖,𝑒𝑗)∈K, the objective encour-
+ages the relation-conditioned representation of the head entity to
+be geometrically consistent with the corresponding tail entity in
+hyperbolic space, i.e.,
+min
+Θ
+E(𝑒𝑖 ,𝑟𝑖 ,𝑒 𝑗 )∼K
+
+𝑑B (𝑔(𝑒𝑖,𝑟𝑖),𝑒𝑗)
+
+, (10)
+where 𝑔(𝑒𝑖,𝑟𝑖) denotes the relation-specific rotation function. For
+symmetric non-hierarchical relations (e.g., related to), we apply a
+direct rotation determined by the angle of the relation vector. For
+hierarchical relations (e.g., subclass-of), we adopt a rotation strategy
+under hyperbolic entailment cone constraints, ensuring that the
+transformed head entity remains within its original entailment
+cone after rotation along hyponym type relations. Consequently,
+the rotation function𝑔(·) is formalized as:
+𝑔(𝑒𝑖,𝑟𝑖) =
+(
+expo (R(𝜃𝑖) logo (e𝑖)) if𝑟𝑖 is non-hierarchical,
+expe𝑖
+
+𝑠𝑖 · R
+
+𝜃𝑖 𝜙(e𝑖 ) 𝜋
+
+e𝑖
+
+otherwise.
+(11)

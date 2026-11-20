@@ -1,0 +1,97 @@
+Activation Benchmark
+MS DA DB HQA MARCO NQ
+7B 67.73 48.77 67.93±2.57
+✓ 67.24 50.74 69.86±0.54
+✓ 76.60 51.72 64.57±2.43
+✓ ✓ 76.60 51.23 64.88±1.67
+14B 74.38 49.01 71.48±1.35
+32B 75.62 50.25 76.11±1.70
+Table 8: GRAD is also effective when Qwen 2.5 7B is
+the base LLM and 1.5B is used for SLM.
+izes across model families, other than the LLaMA
+model family mainly considered, exhibiting consis-
+tent trends.
+GRAD under restricted logit access GRAD,
+like other decoding-time techniques involving aux-
+iliary models, assumes access to logits. Here,
+we discuss how GRAD can be extended when
+logit access is restricted, including both partial log-
+probability access and fully blind settings.
+Many APIs return top-k log-probabilities
+log pt(y) at each decoding step. By definition of
+the softmax,
+log pt(y) = ft(y) − log Zt, (15)
+where ft(y) denotes the unnormalized logit and
+Zt = ∑ y′∈V exp(ft(y′)). Thus, ft(y) =
+log pt(y) + log Zt up to an additive constant.
+In GRAD’s guided distribution softmax(ft +∑
+i γiRi,t), this constant cancels out, allowing us
+to replace inaccessible logits ft(y) with available
+log-probabilities log pt(y).
+At decoding step t, let K denote the set of tokens
+for which the base LLM provides log-probabilities.
+Optionally, we expand K to the union of top-k to-
+kens from the auxiliary models. For each y ∈ K,
+we compute reward terms Ri,t(y) using the avail-
+able log-probabilities or logits from the correspond-
+ing models. If a model does not provide a score for
+token y, we assign it a floor value (e.g., −∞). We
+then form sparse guided scores
+˜ft(y) = log pt(y) + ∑
+i
+γiRi,t(y), y ∈ K,
+(16)
+apply softmax over K, and decode (e.g., greedily
+or with beam search) from this sparse distribution.
+This procedure approximates full-vocabulary
+decoding by ignoring tokens outside K. Since
+GRAD is typically used with greedy decoding,
+where only the highest-scoring token matters, this
+sparse approximation is often sufficient in practice.
+When neither logits nor top-k log-probabilities
+are available, a practical alternative is to train a sur-
+rogate model to imitate the black-box target model,
+and then apply GRAD using the surrogate’s ac-
+cessible logits. Recent work suggests that such
+black-box distillation can be effective even with-
+out logit-level supervision, either by learning to
+match teacher and student text distributions ad-
+versarially (Ye et al., 2025) or by fine-tuning a
+surrogate on a small set of collected black-box out-
+puts to reduce surrogate-target mismatch (Zeng
+et al., 2024). In this case, the surrogate provides
+the token-level interface required by GRAD, ex-
+tending the framework in principle to fully blind
+settings.
+GRAD with LoRA adapters We also consider
+realizing each objective as a LoRA adapter attached
+to the same base LLM. This avoids cross-model
+tokenizer mismatch and removes the need for sepa-
+rate auxiliary models. Appendix H compares logit-
+space composition with parameter-space merging
+of adapters and shows that this is a promising di-
+rection.
+6 Conclusion
+We studied a unified decoding-time framework that
+integrates diverse RAG strategies of model scal-
+ing, domain adaptation, and positional debiasing
+as adaptive decoding objectives, based on smaller
+models. This translation eliminates costly training
+and inference overheads while enabling dynamic
+selection of objectives based on their contribution
+to the task. Our approach introduces a new Pareto
+frontier, by balancing efficiency and performance.
+Our method was validated in RAG benchmarks as
+well as a real-life scenario with unseen domain and
+no training data.
+Limitations
+First, our method assumes access to token log-
+its. While we described a practical adaptation for
+GRAD in Section 5, that replaces full-vocabulary
+operations with softmax over observed tokens and
+discusses surrogate options, empirically validating
+those settings remains as future effort.
+Also, a related question is whether GRAD can
+operate if the base and helper models have different
+vocabulary/tokenizers. Extending decoding-time
+45282

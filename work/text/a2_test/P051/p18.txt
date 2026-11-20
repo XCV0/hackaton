@@ -1,0 +1,111 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+} ,
+" negative rejection ": {
+" label ": " NEG_REJ " ,
+" description ": " Negative Rejection
+Questions " ,
+" rules ": [
+" Since no document content is
+provided for this case ,
+generate question about any
+topic of your choice " ,
+" Ensure broad coverage across many
+topics " ,
+" Each question must target a
+distinct section or topic " ,
+" Questions should require
+retrieving information from
+specific document parts "
+] ,
+" example ": " What are the three main
+components described in Section 2?"
+} ,
+" NLP - flesch score ": {
+" label ": " LOW_FLESCH " ,
+" description ": " Low Flesch Score
+Questions " ,
+" rules ": [
+" Target subsections with the lowest
+Flesch readability scores " ,
+" Focus on complex , technical , or
+dense content " ,
+" Questions should test
+understanding of difficult
+passages " ,
+" Prioritize sections with
+specialized terminology or
+complex sentence structures "
+] ,
+" example ": " Explain the technical
+process described in the
+methodology section "
+} ,
+" cross section synthesis ": {
+" label ": " CROSS_SECTION " ,
+" description ": " Cross Section Synthesis
+Questions " ,
+" rules ": [
+" Require synthesizing information
+from two or more distinct
+sections or documents " ,
+" Each hop should contribute a
+necessary intermediate fact " ,
+" The answer must not be derivable
+from a single passage alone " ,
+" Favor questions that require
+chaining definitions , causes ,
+or dependencies " ,
+" Avoid purely enumerative or
+extractive questions " ,
+" Ensure intermediate reasoning
+steps are implicit rather than
+explicitly stated together "
+] ,
+" example ": " How does the authentication
+mechanism described in the
+security section impact the rate -
+limiting behavior outlined in the
+API usage guidelines ?"
+}
+}
+# Get the specific question type configuration
+if question_type not in question_specs :
+raise ValueError ( f " Invalid question_type : {
+question_type }. Must be one of { list (
+question_specs . keys () ) }")
+spec = question_specs [ question_type ]
+system_prompt = f """ You are an expert test
+designer specialized in creating
+comprehensive test cases for evaluating RAG
+( Retrieval - Augmented Generation ) systems .
+Your task is to analyze the given contents and
+generate high - quality question - answer pairs
+that will be used to test whether a RAG
+system can accurately retrieve and
+synthesize information .
+CRITICAL INSTRUCTION - READ CAREFULLY
+YOU MUST GENERATE EXACTLY {
+n u m _ q u e s t i o n s _ p e r _ s e c t i o n } QUESTIONS OF
+TYPE : { spec [ ' label ']} ({ spec [ ' description
+']})
+This is the ONLY question type you should
+generate in this session .
+DO NOT mix question types .
+DO NOT generate questions of any other category
+.
+ALL { n u m _ q u e s t i o n s _ p e r _ s e c t i o n } questions must
+have " question_type ": "{ spec [ ' label ']}"
+QUESTION TYPE SPECIFICATIONS : { spec [ ' label ']}
+{ chr (10) . join ( f " { i +1}. { rule }" for i , rule in
+enumerate ( spec [ ' rules ']) ) }
+Example Question :
+{ spec [ ' example ']}
+REQUIRED OUTPUT FORMAT
+For Each Test Case , You MUST Provide :
+1. ** id **: Sequential number (1 to {
+n u m _ q u e s t i o n s _ p e r _ s e c t i o n })
+2. ** question **: Clear , unambiguous question
+matching the { spec [ ' label ']} type
+3. ** g r o u n d _ t r u t h _ a n s w e r **: Accurate , concise
+answer based ONLY on document content
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 18 of 21

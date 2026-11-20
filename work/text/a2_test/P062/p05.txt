@@ -1,0 +1,80 @@
+Method
+BLEnD
+CLIcKlow mid high all
+su avg fa avg es avg avg
+Non-RAG 58.04 55.65 62.09 63.06 68.59 69.29 62.13 48.10
+monoRAG 57.69 56.80 65.03 65.47 68.44 71.31 63.93 53.53
+tRAG - - - - - - - 56.06
+multiRAG 61.89 56.55 67.97 65.92 67.98 69.84 63.49 50.78
+crossRAG 62.59 57.83 67.32 66.83 68.29 69.76 64.27 53.75
+CORAL (GPT-OSS-120B) 68.18 60.47 70.92 69.10 74.36 73.51 67.14 58.66
+CORAL (QWEN3-235B) 66.78 61.83 72.22 70.41 71.93 72.76 67.84 58.88
+Table 1: Accuracy on cultural QA benchmarks with LLAMA-3.2-3B-INSTRUCT. For CORAL, we use GPT-
+OSS-120B or QWEN3-235B-A22B-INSTRUCT as the planner/critic. Best results are in bold, and second best
+results are underlined. CORAL improves performance by enabling dynamic corpus selection and query rewriting
+compared to other RAG methods that use a fixed set of target corpora.
+In CORAL, the planner selects a query-
+conditioned set of target corpora. Then, we retrieve
+the top-5 documents from each selected corpus
+and pass them to the critic, which assigns inte-
+ger scores in [0, 5] for four dimensions: relevance
+(srel), usefulness (suse), clarity/specificity (sspec),
+and contextual compatibility (scomp). A document
+is considered valid if (i) each score is at least 2 and
+(ii) the aggregated score stot is at least 6, where
+stot is calculated based on the following equation:
+stot = srel + 0.5 (suse + sspec + scomp) (1)
+Validated documents are accumulated across itera-
+tions of the feedback loop.
+After the loop terminates, we select the top-5 val-
+idated documents by stot and provide them to the
+generator as evidence, controlling context length
+while retaining the highest-quality support.
+Inference Settings. In principle, any language
+model can serve as the planner or the critique agent.
+However, for our experiments, we use the same
+model for both planner and critique agents in our
+experiments. We use QWEN3-235B (Qwen Team,
+2025) and GPT-OSS-120B (OpenAI, 2025) as our
+main planner/critic model, and LLAMA-3.2-3B-
+INSTRUCT (Grattafiori et al., 2024) as our main
+generator model. All prompts and specific config-
+uration details are provided in Appendix C.1 and
+C.2.
+Retrieval Corpus Selection. Due to limited
+computational resources, we limit our retrieval lan-
+guage corpus to languages that appear as source
+languages in the BLEnD MCQ set. This whole
+language set also covers the CLIcK dataset, which
+is constructed in Korean. BLEnD is created by col-
+lecting everyday-life questions from 16 countries in
+13 languages, and the MCQ subset is based on the
+English versions of those questions. To ensure that
+every required source language is represented, we
+extract the Wikipedia dumps 1 for the same 13 lan-
+guages and treat them as our overall corpus. This
+multilingual corpus is used for the multiRAG and
+crossRAG approaches as the overall target corpus.
+The language list is provided to the planner model
+for query-conditioned corpus selection.
+5 Results and Analysis
+5.1 Overall Performance on Cultural
+Benchmarks
+Table 1 reports end-to-end accuracy on two cultur-
+ally grounded QA benchmarks. For BLEnD, we
+evaluate the MCQ subset in which all questions
+are written in English while the underlying cultural
+target varies across countries (Appendix B.1). Fol-
+lowing the language-resource taxonomy of Joshi
+et al. (2020), we group BLEnD source-language
+communities into three resource tiers based on
+the five-level ranking: low-resource (ranks 1–2),
+mid-resource (ranks 3–4), and high-resource (rank
+5). We report both the tier-wise averages and rep-
+resentative languages from each tier (Sundanese
+(su) 2, Persian (fa), and Spanish (es) for low-, mid-
+, and high-resource, respectively), together with
+per-language results. Results for all 13 source lan-
+guages in BLEnD can be found in Appendix D.
+1We use the Wikipedia dump as of October 20, 2025.
+2A language spoken in West Java, Indonesia.

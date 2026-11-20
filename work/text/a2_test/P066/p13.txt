@@ -1,0 +1,82 @@
+A RAGAS definitions: Context Relevance,
+Answer Relevance and Faithfulness
+For example, the RAGAS triad has three compo-
+nents as judged by LLMs:
+Context Relevance:
+CR = number of relevant context sentences total number of sentences (2)
+Answer Relevance:
+Answer Relevance = 1 N N∑ i=1 Egi · Eo ∥Egi ∥∥Eo∥ (3)
+Where:
+• Egi is the embedding of the generated ques-
+tion i.
+• Eo is the embedding of the original question.
+• N is the number of generated questions,
+which is 3 by default.
+Faithfulness
+F = |V | |S| (4)
+Where:
+• |V | is the number of statements that were sup-
+ported according to the LLM.
+• |S| is the total number of statements.
+B Examples of limitation of current
+metrics
+Question:  I put my medication in the fridge by accident, is it still safe to use?
+Answer:  Yes, that would be ok. However, it is best stored above 0 degrees, in a cool
+place away from direct sunlight.
+RAGAS statements: 1. Medication stored by accident in the fridge is still safe to use. 2.
+However, such medication is best stored above 0 degrees, in a cool place away from
+direct sunlight.
+Figure 7: Example 1: Extracting statements is partic-
+ularly advantageous when answers are short and lack
+context when reviewed in isolation
+Question: should I still have some blurriness by now?
+Context:  It’s common to have a little bit of blurriness in the first week after your
+operation. But this should improve quickly over time. If we put in a standard lens, it’s
+common to have difficulty reading as most lenses are for distance vision. This means you
+will need reading glasses, or varifocals for reading, and that’s entirely normal if it’s the
+only part of your vision that is blurry. 
+Answer: It’s common to have a little bit of blurriness in the first week after your operation.
+But this should improve quickly over time. If we put in a standard lens, it’s common to
+have difficulty reading as most lenses are for distance vision. This means you will need
+reading glasses, or varifocals for reading, and that’s entirely normal if it’s the only part of
+your vision that is blurry.
+RAGAS statements: 1. It is common to have blurriness in the first week after the
+operation. 2. Blurriness should improve quickly over time. 3. If vision is still blurry or
+getting worse, it may need to be checked. 
+4. Standard lenses may cause difficulty reading. 5. Reading glasses or varifocals may
+be needed for reading. 6. Blurriness in reading vision is normal.
+Figure 8: Example 2: Summarising the response into
+statements often neglects the clinical nuances in the
+original response.
+Question: I have only one question, I'm very sensitive to bright light, is that normal?
+Context:  If you're worried about straining your eyes, please use your eyes in whatever
+way is comfortable. You should wear your sunglasses outside. 
+It's common to have some minor discomfort, grittiness ,runny or watery eyes, or mild pain
+in the eye. Most of the time, this is due to dryness. We recommend getting some
+preservative-free eye drops from the pharmacist and using it four times daily to start. 
+Answer: It's common to have light sensitivity after cataract surgery. This is usually
+temporary and should improve over time. In the meantime, you should wear sunglasses
+when you're outdoors to help reduce the discomfort. Do you have any other questions?
+RAGAS statements: 1. Light sensitivity is common after cataract surgery. 2. Light
+sensitivity after cataract surgery is usually temporary. 3. Wearing sunglasses outdoors
+can help reduce discomfort from light sensitivity.
+Figure 9: Example 3: Creating statements from both the
+patient’s question and the agent’s answer prevents the
+independent review of the agent’s answer concerning
+the context. This is especially problematic when the
+combination contains factually incorrect information.
+Question: My eye is a little uncomfortable on the lower bottom left side.
+Context:  It's common to have some minor discomfort, grittiness ,runny or watery eyes, or
+mild pain in the eye. Most of the time, this is due to dryness. We recommend getting some
+preservative-free eye drops from the pharmacist and using it four times daily to start. 
+Answer: Ah I am sorry to hear that, that's common due to dryness. Try using
+preservative-free eye drops 4 times a day. If that doesn't help, we might need to check
+that in-person. Did you have other concerns?
+RAGAS statements:  1. User's eye uncomfortable on the lower bottom left side due
+to dryness. 2. Using preservative-free eye drops 4 times a day might help alleviate the
+discomfort. 3. If the eye drops don't help, it might be necessary to check the issue in-
+person. 4. User may have other concerns
+Figure 10: Example 4: Dialogue agents, particularly in
+clinical settings, are prompted to respond empathetically
+and conversationally.
+16712

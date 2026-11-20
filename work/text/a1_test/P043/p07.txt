@@ -1,0 +1,109 @@
+improvement of efﬁciency. Electrochemical impedance spectros-
+copy (EIS) was used to study the charge transfer and recombina-
+tion of the devices at an applied voltage of 0.6 V in darkness. The
+Nyquist plots are shown in Figure 5a and ﬁtted with the equiva-
+lent circuit diagram in the inset.[43] The charge recombination
+resistance (Rrec) was determined to be 39 821 Ω·cm/C02 for the
+ZnPP-treated device bigger than the results based on control
+devices (25 301 Ω cm/C02), indicating that the ZnPP-treated
+device suppressed the charge recombination and resulted an
+enhanced VOC in the corresponding device. The dark-state J–V
+curves of those devices are shown in Figure 5b, and a lower
+leakage current of ZnPP-treated device was observed which will
+create less charge recombination and lead to a higher VOC in
+PSCs.[44,45]
+We further evaluated the trap density (ntrap) through a space
+charge limited current (SCLC) measurement based on electron-
+only devices of FTO/SnO2/perovskite (with or without ZnPP
+treatment)/PCBM/Ag under dark conditions and the dark
+current–voltage curves are shown in Figure 5c. According to
+the slope, the curve can be divided into three regions along with
+the bias increasing: the ohmic region, the trap-ﬁlled limited
+(TFL) region, and the trap-free SCLC region. The trap-ﬁlled limit
+voltage (VTFL) is the turning point between the ohmic region and
+the TFL region, representing the state that the traps of the device
+are ﬁlled at a certain bias voltage. The ntrap can be obtained from
+VTFL by using the formula: ntrap ¼ 2εε0VTFL=eL2, where ε0 is the
+vacuum permittivity (8.854 /C2 10/C012 Fm/C01), ε is the relative
+dielectric constant of the perovskite, e is the elementary charge
+(1.6 /C2 10/C019 /C14C), and L is the thickness of the perovskite ﬁlm.[46]
+The VTFL of ZnPP-treated and control device was 0.139 and
+0.210 V, and the corresponding ntrap was determined to be
+1.51 /C2 1015 and 2.29 /C2 1015 cm/C03, respectively. These results
+suggested that passivation with ZnPP can signiﬁcantly reduce
+the trap density in perovskite ﬁlm. The reduction of defects
+and the improvement of the ﬁlm quality are the main reasons
+for the enhanced performance of the ZnPP-treated PSCs.
+3. Conclusion
+In summary, we synthesized a new D–π–A-type zinc pyridine
+porphyrin derivative (ZnPP) and demonstrated the feasibility
+for ZnPP used as a passivation molecular in antisolvent process
+to enhance PSCs performance. When embedded ZnPP into
+perovskite layer, the quality of perovskite ﬁlm was signiﬁcantly
+improved such as pinhole-free, large and uniform grains, and
+smooth morphology. The pyridine functional group in ZnPP
+could passivate the undercoordinated Pb2þ cations, leading to
+a lower trap density and reduction of the defect-assisted recom-
+bination in the perovskite ﬁlm. Based on these promotions, the
+PSCs fabricated with ZnPP-treated achieved a higher champion
+PCE of 21.08% compared to the 20.18% of control device. Our
+treatment strategy enriched the selection of passivator for high-
+performance PSCs.
+Supporting Information
+Supporting Information is available from the Wiley Online Library or from
+the author.
+Acknowledgements
+This work was supported by the National Key Research and Development
+Program of China (grant no. 2020YFB0408002). The authors would like to
+express their gratitude to Qiu Xiong for his help in EQE measurement and
+Changjiu Sun for his help in TRPL measurement.
+Open access funding provided by Ecole Polytechnique Federale de
+Lausanne.
+Conﬂict of Interest
+The authors declare no conﬂict of interest.
+Data Availability Statement
+The data that support the ﬁndings of this study are available in the
+supplementary material of this article.
+Keywords
+graded passivation, high efﬁciency, high stability, perovskite solar cells,
+porphyrin derivative
+Received: November 12, 2021
+Revised: December 6, 2021
+Published online: December 28, 2021
+[1] A. Kojima, K. Teshima, Y. Shirai, T. Miyasaka, J. Am. Chem. Soc. 2009,
+131, 6050.
+[2] NREL, Best Research-Cell Effciencies, https://www.nrel.gov/pv/cell-
+efﬁciency.html (accessed: December 2021).
+[3] J. J. Yoo, G. Seo, M. R. Chua, T. G. Park, Y. Lu, F. Rotermund,
+Y. K. Kim, C. S. Moon, N. J. Jeon, J. P. Correa-Baena, V. Bulovic,
+S. S. Shin, M. G. Bawendi, J. Seo, Nature 2021, 590, 587.
+[4] J. Jeong, M. Kim, J. Seo, H. Lu, P. Ahlawat, A. Mishra, Y. Yang,
+M. A. Hope, F. T. Eickemeyer, M. Kim, Y. J. Yoon, I. W. Choi,
+B. P. Darwich, S. J. Choi, Y. Jo, J. H. Lee, B. Walker,
+S. M. Zakeeruddin, L. Emsley, U. Rothlisberger, A. Hagfeldt,
+D. S. Kim, M. Gratzel, J. Y. Kim, Nature 2021, 592, 381.
+[5] H. Yang, Y. Feng, Z. Tu, K. Su, X. Fan, B. Liu, Z. Shi, Y. Zhang,
+C. Zhao, B. Zhang, Nano Res. 2019, 12, 3129.
+[6] R. Xia, X. X. Gao, Y. Zhang, N. Drigo, V. I. E. Queloz, F. F. Tirani,
+R. Scopelliti, Z. Huang, X. Fang, S. Kinge, Z. Fei, C. Roldan-
+Carmona, M. K. Nazeeruddin, P. J. Dyson, Adv. Mater. 2020, 32,
+2003801.
+[7] Y. Zhang, M. Chen, Y. Zhou, W. Li, Y. Lee, H. Kanda, X.-X. Gao, R. Hu,
+K. G. Brooks, R. Zia, S. Kinge, N. P. Padture, M. K. Nazeeruddin, Adv.
+Energy Mater. 2020, 10, 2001300.
+[8] Q. D. Yang, J. Li, Y. Cheng, H. W. Li, Z. Guan, B. Yu, S. W. Tsang, J.
+Mater. Chem. A 2017, 5, 9852.
+[9] Y. Zhang, Z. Zhou, F. Ji, Z. Li, G. Cui, P. Gao, E. Oveisi,
+M. K. Nazeeruddin, S. Pang, Adv. Mater. 2018, 30, 1707143.
+[10] B. Yang, J. Suo, F. Di Giacomo, S. Olthof, D. Bogachuk, Y. Kim,
+X. Sun, L. Wagner, F. Fu, S. M. Zakeeruddin, A. Hinsch,
+M. Grätzel, A. Di Carlo, A. Hagfeldt, ACS Energy Lett. 2021, 6, 3916.
+[11] R. J. E. Westbrook, T. J. Macdonald, W. Xu, L. Lanzetta, J. M. Marin-
+Beloqui, T. M. Clarke, S. A. Haque, J. Am. Chem. Soc. 2021, 143,
+12230.
+[12] L. Gao, H. Su, Z. Xu, Y. Hu, J. Zhang, S. Liu, Sol. RRL 2021, 5,
+2100416.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100964 2100964 (7 of 8) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 4, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100964, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

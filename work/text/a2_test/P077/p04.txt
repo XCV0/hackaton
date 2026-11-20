@@ -1,0 +1,110 @@
+Definition 5 (Subgraph-Extraction (SE)). Given a query
+𝑞, a graph 𝐺 = (𝑉,𝐸), and a set of entities and relations 𝜖𝑞 derived
+from specified query 𝑞, the SE module aims to extract a query-specific
+subgraph 𝑔𝑞 ⊆𝐺, defined as: 𝑆𝐸(𝐺,𝑞,𝜖𝑞 )→𝑔𝑞 .
+Definition 6 (Path-Retrieval (PR)). Given an extracted
+subgraph 𝑔𝑞 ⊆𝐺 and the entity and relation set 𝜖𝑞 derived from query
+𝑞, the process of this module obtains a reasoning path set P𝑞 = {𝑃(𝑞) 𝑖 }
+with the following process: 𝑃𝑅(𝐺 or 𝑔𝑞,𝑞,𝜖𝑞 )→P𝑞 = {𝑃(𝑞) 𝑖 }.
+Of the two modules, the path-retrieval module is essential for
+any GraphRAG instance, while the subgraph-extraction module is
+optional. The optionality of the subgraph-extraction module de-
+pends largely on the graph size, primarily due to computational ef-
+ficiency. For smaller graphs, where the node and edge space remain
+manageable, direct retrieval of reasoning paths is feasible, making
+the subgraph-extraction module optional. However, for large-scale
+graphs, the exponential growth in the number of nodes, edges, and
+paths significantly complicates the retrieval [23, 53, 54, 67]. The
+subgraph-extraction module addresses this by extracting a query-
+relevant subgraph, reducing the retrieval space and improving com-
+putational efficiency and relevance. After passing through these
+modules, the refined reasoning paths enhance the reasoning abili-
+ties of LLMs during the generation phase, as detailed in Definition 4.
+3.1.2 Structure-based vs. Semantic-augmented Methods. For
+each module, systematically classifying and summarizing potential
+solutions is important, as it enables the identification of potential
+strategies and provides a deeper understanding of existing imple-
+mentations. At their core, the workflows of the subgraph-extraction
+and path-retrieval modules share potential similarities, as both in-
+volve retrieving a small-scale but query-relevant subset from the
+graph. Accordingly, the design solutions for these modules can be
+interwoven and further categorized into two complementary cate-
+gories: structure-based methods, focusing on the graph’s topological
+properties, and semantic-augmented methods, utilizing the semantic
+information of both the graph and the query, as detailed in Table 1.
+Structure-based methods (SBE and SBR) use graph algorithms [25,
+57, 69, 99, 113, 118] to iteratively explore nodes (entities) and edges
+(relations), constructing subgraphs or reasoning paths. Semantic-
+augmented methods (SAE, OSAR, and ISAR) exploit the semantic
+relevance between the query and the nodes, edges, and triples of
+graphs, using two types of semantic models: end-to-end models
+(EEMs) [88, 89, 104] and large language models (LLMs) [8, 98, 127].
+The two types of models are applied differently. SAE/OSAR meth-
+ods refine candidate subgraphs/paths for better semantic alignment.
+ISAR methods incorporate semantic evaluation directly into the
+path-retrieval process, using EEMs/LLMs to interactively identify
+relevant reasoning paths. In the sequel, we investigate the design
+solutions of the two modules, subgraph-extraction (Section 3.2) and
+path-retrieval (Section 3.3), with the aforementioned two types of
+methods, structure-based and semantic-augmented methods.
+3.2 Design Solutions of Subgraph-Extraction
+The design solution of the subgraph-extraction module is comprised
+of structure-based extraction (SBE in Section 3.2.1) and semantic-
+based extraction (SAE in Section 3.2.2).
+3.2.1 Structure-Based Extraction (SBE). These solutions ex-
+ploit the structural information of a graph 𝐺 = (𝑉,𝐸), starting with
+the query-relevant entities {𝑣(𝑞) 𝑖 }∈ 𝜖𝑞 ,3 to identify correspond-
+ing nodes (entities) and edges (relations) that are pertinent to the
+query 𝑞. This process constructs smaller subgraphs centered around
+each 𝑣(𝑞) 𝑖 , which are then aggregated to produce the query-related
+subgraph 𝑔𝑞 . Formally, the procedure is defined as:
+𝑆𝐸(𝐺,𝑞,𝜖𝑞 )→𝑔𝑞 =
+⋃︂
+𝑣 (𝑞) 𝑖 ∈𝜖𝑞 𝑔(𝑞,𝑣 (𝑞) 𝑖 )
+Here, 𝑔𝑞 represents the union of the subgraphs 𝑔(𝑞,𝑣 (𝑞) 𝑖 ), each fo-
+cusing on an entity 𝑣(𝑞) 𝑖 in 𝜖𝑞 . For each query entity, three extraction
+strategies can be applied: random walk-based, neighborhood-based,
+and structural importance-based strategies.
+a) Random Walk-based. The random walk (RW) algorithm [87,
+116] and its variants [25, 83, 85, 94, 95] enumerate all entities in 𝜖𝑞 ,
+and, for each entity 𝑣(𝑞) 𝑖 , iteratively expand a subgraph by randomly
+selecting edges and nodes at each step. This simple yet effective
+strategy gradually constructs a subgraph of the desired size, making
+it a commonly used baseline method [38, 45, 71, 72].
+b) Neighborhood-based. This strategy aims to capture the local
+structure around an entity 𝑣(𝑞) 𝑖 ∈𝜖𝑞 by expanding its neighborhood.
+The most representative method is K-hop subgraph-extraction (KSE)
+[38], where the subgraph is constructed by including all nodes 𝑣 𝑗
+and edges 𝑒𝑖 𝑗 such that the shortest path distance 𝑑(𝑣(𝑞) 𝑖 ,𝑣 𝑗 )≤𝐾.
+This approach ensures that the subgraph captures the immediate
+relational context surrounding the query entity, progressively in-
+cluding nodes and edges within the specified radius (i.e., 𝐾-hops).
+c) Structural Importance-based. These methods [37, 82, 118] iden-
+tify nodes based on their structural importance relative to an entity
+𝑣(𝑞) 𝑖 . Nodes are ranked by importance scores, and a subset of high-
+ranking 𝑁𝑝𝑝𝑟 nodes, along with their directly connected edges, are
+selected to form the subgraph. Prominent methods, such as PageR-
+ank [82] and Personalized PageRank (PPR) [37], compute a relevance
+score for each node based on topological position, link density and
+centrality. Specifically, PageRank assigns an importance score 𝑆(𝑣 𝑗 )
+to each node 𝑣 𝑗 , which is iteratively updated based on both its lo-
+cal connectivity and the scores of its neighboring nodes, thereby
+capturing its global significance. Personalized PageRank (PPR) en-
+hances this process by “personalizing” the distribution towards the
+query entity 𝑣(𝑞) 𝑖 , ensuring that nodes closer to 𝑣(𝑞) 𝑖 receive higher
+scores. While PPR is a widely adopted approach for SBE solutions,
+its computational cost scales with the size of the graph, present-
+ing a considerable bottleneck for real-time GraphRAG pipelines.
+Section 4.3 discusses this efficiency challenge in detail.
+3.2.2 Semantic-Augmented Extraction (SAE). Semantic mod-
+els play a key role in facilitating subgraph-extraction by assessing
+the semantic relevance of graph components. These models fall
+into two main categories: End-to-End Models (EEMs) and Large
+Language Models (LLMs).
+a) End-to-End Models (EEMs). EEMs process the text associated
+with graph components (i.e., nodes, edges, triples) and queries to
+compute semantic relevance. They either output statistical proper-
+ties and embeddings for relevance calculation or directly provide
+relevance scores. Formally, for nodes, edges, or triples 𝑣,𝑒, or 𝜏 ∈𝐺
+3While subgraphs can be built from relationship 𝑒 (𝑞) 𝑖 ∈ 𝜖𝑞 , practical methods predom-
+inantly use entities (nodes) as the basis for subgraph construction [45, 65, 70, 72, 98].

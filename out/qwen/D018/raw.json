@@ -1,0 +1,12 @@
+```json
+[
+  {"device": "Cs-ST CIGS solar cell", "metric": "PCE", "value": 10.4, "unit": "%", "aggregation": "champion", "origin": "primary", "page": 6, "fragment": "A solar cell with an efficiency (η) of 10.4% was obtained after the Cs-ST treatment."},
+  {"device": "Cs-ST CIGS solar cell", "metric": "Jsc", "value": 31.0, "unit": "mA/cm²", "aggregation": "champion", "origin": "primary", "page": 6, "fragment": "The short-circuit current density (JSC), open-circuit voltage (VOC), fill factor (FF) were 31.0 mA/cm²"},
+  {"device": "Cs-ST CIGS solar cell", "metric": "Voc", "value": 0.493, "unit": "V", "aggregation": "champion", "origin": "primary", "page": 6, "fragment": "The short-circuit current density (JSC), open-circuit voltage (VOC), fill factor (FF) were 31.0 mA/cm², 0.493 V"},
+  {"device": "Cs-ST CIGS solar cell", "metric": "FF", "value": 66, "unit": "%", "aggregation": "champion", "origin": "primary", "page": 6, "fragment": "The short-circuit current density (JSC), open-circuit voltage (VOC), fill factor (FF) were 31.0 mA/cm², 0.493 V, and 66%"},
+  {"device": "untreated CIGS solar cell", "metric": "Jsc", "value": 31.3, "unit": "mA/cm²", "aggregation": "champion", "origin": "primary", "page": 7, "fragment": "For the untreated CIGS solar cells, the JSC, VOC, FF, and η were 31.3 mA/cm²"},
+  {"device": "untreated CIGS solar cell", "metric": "Voc", "value": 0.410, "unit": "V", "aggregation": "champion", "origin": "primary", "page": 7, "fragment": "For the untreated CIGS solar cells, the JSC, VOC, FF, and η were 31.3 mA/cm², 0.410 V"},
+  {"device": "untreated CIGS solar cell", "metric": "FF", "value": 59, "unit": "%", "aggregation": "champion", "origin": "primary", "page": 7, "fragment": "For the untreated CIGS solar cells, the JSC, VOC, FF, and η were 31.3 mA/cm², 0.410 V, 59%"},
+  {"device": "untreated CIGS solar cell", "metric": "PCE", "value": 7.8, "unit": "%", "aggregation": "champion", "origin": "primary", "page": 7, "fragment": "For the untreated CIGS solar cells, the JSC, VOC, FF, and η were 31.3 mA/cm², 0.410 V, 59%, and 7.8%"}
+]
+```

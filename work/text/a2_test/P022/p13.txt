@@ -1,0 +1,102 @@
+When SRIN D(ti) exceeds a predefined threshold
+θ, the retrieval module will be activated to retrieve
+external knowledge.
+QFS The attention scores reflect the self-assessed
+importance of each token in generating token ti.
+Therefore, QFS formulates the query by selecting
+the most important preceding tokens through at-
+tention scores. This process includes: (1) Extract
+the attention scores of the last Transformer layer;
+(2) Sort the scores in descending order to identify
+the top n tokens; (3) Find the words corresponding
+to these tokens from the vocabulary and arrange
+them according to their original order in the text;
+(4) Construct the query Qi using these words.
+A.3 CRAG Theoretical Appendix
+CRAG (Yan et al., 2024) introduces retrieval cor-
+rective strategies to improve the robustness of text
+generation. Given an input query q and retrieved
+documents D = (d1, d2, ...dn) from any retriever,
+a lightweight retrieval evaluator categorizes the
+documents into one of three confidence levels:
+{Correct, Incorrect, Ambiguous}. Depending
+on the confidence level, different knowledge re-
+trieval actions are triggered to optimize the retrieval
+results and obtain the corrective retrieval results
+M = (m1, m2, m3). Finally, an arbitrary gener-
+ative model is used to answer the question based
+on the corrective retrieval results. Our method
+employs the input query q and retrieved documents
+D = (d1, d2, ...dn) to extract fine-grained knowl-
+edge S = (s1, s2, s3), which is then applied as an
+additional input to enhance the arbitrary model’s
+generation process. The details of the retrieval eval-
+uator and actions are provided as follows.
+Retrieval Evaluator The retrieval evaluator
+predicts the relevance score for each question-
+document pair independently. CRAG initializes the
+evaluator using the T5-large (Raffel et al., 2020)
+pre-trained language model. Relevance signals for
+fine-tuning can be obtained from existing datasets
+(e.g., wiki titles). Negative samples for fine-tuning
+are randomly selected from retrieval results that are
+similar but not relevant to the input query. The con-
+fidence level of the retrieval is assigned based on
+the relevance scores from the fine-tuned evaluator.
+A retrieval is considered Correct if the relevance
+score exceeds the upper threshold. Conversely, a
+retrieval is classified as Incorrect if the relevance
+scores fall below the lower threshold. If neither con-
+dition is met, the retrieval is labeled as Ambiguous.
+Knowledge Retrieval Actions Based on the fine-
+tuned evaluator, two actions are implemented to
+enhance the retrieval results: Knowledge Refine-
+ment and Web Search.
+Knowledge Refinement focuses on extracting
+the most relevant knowledge from the retrieved
+documents. Each relevant document is divided
+into smaller strips, typically consisting of a few
+sentences, based on the document’s total length.
+The retrieval evaluator is then used to calculate
+the relevance score between the question and each
+strip, filtering out any irrelevant ones.
+Web Search first converts the inputs into search
+queries using ChatGPT. A public web search API
+is then employed to return a series of web pages
+for each query. Since knowledge from web pages
+may contain biases or unreliable information, au-
+thoritative sources like Wikipedia are prioritized.
+The same knowledge refinement method is applied
+to extract relevant information from these pages.
+If the confidence is Correct, the knowledge
+from the documents is considered reliable, and
+Knowledge Refinement is used to extract the
+most important information. If the confidence is
+Incorrect, it means all retrieved documents are
+irrelevant, so Web Search is used to obtain external
+knowledge. In the case of Ambiguous, where the
+accuracy is uncertain, both actions are combined to
+complement each other.
+A.4 Human Evaluation Appendix
+In addition to automatic evaluation, we also incor-
+porate human evaluation to evaluate our method
+and two basic RAG pipelines. Specifically, we
+randomly sampled 200 outputs from each dataset,
+resulting in a total of 400 outputs per basic pipeline.
+Three annotators independently evaluated the re-
+sponses, assigning scores from 1 (Very Bad) to 5
+(Very Good) based on their correctness (C) and rele-
+vance (R) in answering the questions. Considering
+the difference between the two datasets, annota-
+tors will get $0.1 for each answer in the Singlehop
+dataset and $0.2 for each answer in the Multihop
+dataset. There are 800 sentences evaluated, so each
+annotator was rewarded $120 in total.
+The human evaluation results are shown in Table
+6, which are generally consistent with the auto-
+matic evaluation, further confirming the capability
+of our method. Specifically, the higher correctness
+score indicates that our answers align better with
+objective facts, while the greater relevance score re-
+flects the improved connection of our answer with
+10043

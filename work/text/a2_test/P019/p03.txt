@@ -1,0 +1,105 @@
+STRIDE: Strategic Iterative Decision-Making for Retrieval-Augmented Multi-Hop Question Answering SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia
+• We introduce the Meta-Planner and Supervisor as core mod-
+ules. The Meta-Planner constructs an entity-agnostic reasoning
+skeleton before grounding, mitigating ambiguity-induced errors.
+The Supervisor dynamically schedules dependency-aware sub-
+question execution and integrates mechanisms for query reformu-
+lation, redundancy avoidance, and cross-branch evidence fusion.
+• We present STRIDE-FT, a modular fine-tuning framework that
+leverages self-executed trajectories from STRIDE to train each
+component. STRIDE-FT enables effective adaptation of open-
+source LLMs without human labels or stronger teacher models.
+2 Related Work
+Multi-Hop Question Answering. Current models achieved strong
+performance on single-hop questions, yet struggled when answers
+required synthesizing information across multiple documents or
+reasoning steps [17, 37, 45]. Early approaches addressed this by
+constructing entity- or evidence-centric graphs and applying graph
+neural networks to model inter-document relationships [6, 9]. More
+recently, large language models (LLMs) have been leveraged for
+their strong textual reasoning capabilities [22, 24, 47], often aug-
+mented with explicit information extraction or evidence composi-
+tion modules to capture cross-entity dependencies [2, 21, 25, 38].
+However, most of these methods assumed access to gold support-
+ing documents, sidestepping the realistic challenge of retrieving
+relevant evidence from a large open corpus. In contrast, our work
+operates in a fully open-domain setting, where both retrieval and
+multi-step reasoning must be jointly orchestrated—a more practical
+and challenging scenario.
+Retrieval-Augmented Generation (RAG). Despite their impres-
+sive capabilities, LLMs are prone to hallucination on factual queries
+due to the static and bounded nature of their parametric knowl-
+edge [34, 43, 48]. To mitigate this, Retrieval-Augmented Generation
+(RAG) has emerged as a dominant paradigm, grounding model re-
+sponses in external knowledge retrieved at inference time [14, 20,
+28, 36]. Standard RAG performed a single retrieval step using origi-
+nal query, followed by answer generation [5, 10]. While effective for
+simple factoid questions, this approach often failed on multi-hop
+queries, as the initial retrieval tended to miss critical intermediate
+evidence, leading to incomplete or incorrect reasoning [8].
+Iterative RAG. To overcome the limitations of single-step retrieval,
+recent works adopted iterative RAG frameworks that alternate be-
+tween query decomposition, retrieval, and reasoning over multiple
+turns [15, 33, 50]. For instance, PlanRAG [19] first generated a rea-
+soning plan and then executed it step-by-step, while SelfAsk [26]
+decomposed questions by sequentially asking follow-up questions
+and using retrieved information to refine answers iteratively. Iter-
+RetGen [29] leveraged iterative cycles where previous generations
+are concatenated with the query to retrieve more relevant infor-
+mation, thus refining subsequent inferences progressively. Gen-
+Ground [30] iteratively generated sub-questions and answers, and
+then retrieved documents to revise the answers, leveraging the
+model’s generative capability to guide retrieval. DualRAG [4] main-
+tained a dual process to integrate reasoning and retrieval for con-
+tiguous reasoning. Despite the progress, they typically decomposed
+questions directly into entity-bound sub-queries and executed steps
+in a fixed sequential order, overlooking abstract reasoning struc-
+ture and rich dependency patterns. In contrast, STRIDE decouples
+reasoning into strategy, control, and execution, enabling abstract
+planning, dynamic scheduling, and robust recovery in MHQA.
+3 Methodology
+In this section, we present STRIDE (Strategic Iterative Decision-
+making), a framework that models MHQA as a structured decision-
+making process. As illustrated in Figure 2, STRIDE structures the
+reasoning process into three tightly coordinated layers (i.e., strategy,
+control, and execution), enabling global planning, adaptive schedul-
+ing, and grounded inference. We detail the architecture of STRIDE
+in Section 3.2, and describe how its self-executed trajectories can
+be leveraged for modular fine-tuning in Section 3.3.
+3.1 Task Definition
+We formally define the Retrieval-Augmented Generation (RAG) task
+as follows: Given a question 𝑞 and a document corpus 𝐷 ={𝑑𝑖}|𝐷| 𝑖=1 ,
+the task demands to derive a prediction 𝑦 by retrieving relevant
+documents 𝐷𝑞 ⊆𝐷 and capturing the useful information. It can be
+formally defined as:
+𝑦 =𝑀𝜃(𝐼,𝑞,𝐷𝑞), (1)
+where𝑀𝜃 denotes the LLM model, and𝐼 is the task instruction.
+3.2 Framework of STRIDE
+Inspired by real-world decision hierarchies, STRIDE models multi-
+hop QA as a structured decision-making process composed of three
+layers. The strategy layer first constructs an abstract, entity-agnostic
+reasoning skeleton before grounding it into concrete sub-questions,
+ensuring global coherence and reducing sensitivity to lexical am-
+biguity. The control layer acts as an adaptive supervisor that dy-
+namically schedules sub-questions based on logical dependencies,
+supports sequential, parallel, and fork-join execution patterns, and
+decides per step whether to retrieve new evidence or reason over
+existing facts. Finally, the execution layer performs grounded fact ex-
+traction and faithful logical inference using dedicated modules. This
+process departs from flat, uncoordinated RAG pipelines, enabling
+reasoning that is both deliberate and recoverable.
+3.2.1 Strategy Layer. To address the challenge of compositional
+reasoning in multi-hop question answering, we introduce Meta-
+Planner, a reasoning planner that decomposes a question into
+a structured, two-level reasoning blueprint. This design explicitly
+separates abstract reasoning logic from entity-specific instantiation,
+thereby reducing sensitivity to surface-form variations of complex
+entities (e.g., film titles, administrative names) and enhancing plan
+transferability across questions with shared reasoning patterns.
+Formally, given a question𝑞, the Meta-Planner𝑀plan generates
+a structured reasoning blueprint𝑃𝑞 consisting of two levels:
+𝑃𝑞 ={𝑆𝑞,𝐶𝑞} =𝑀plan (𝐼plan,𝑞), (2)
+where 𝐼plan denotes the planning instruction, 𝑆𝑞 ={𝑠1,𝑠2,...,𝑠𝑚}
+is the General Strategy—an abstract sequence of reasoning steps
+expressed over entity types (e.g., person, location, work), independent
+of specific names. And 𝐶𝑞 ={𝑐1,𝑐2,...,𝑐𝑛} is the Concrete Plan—a

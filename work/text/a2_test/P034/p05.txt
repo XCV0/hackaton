@@ -1,0 +1,19 @@
+Fig. 1 Overview of the N2I-RAG Framework
+2.1 Visual-Language Processing
+Precise text extraction is vital for downstream legal analysis, especially when source
+documents include scanned and degraded documents. Many legislative documents,
+notably in developing countries, are only available as low-quality scans with stamps,
+signatures, or inconsistent layouts. Conventional OCR often fails on these materials,
+leading to missing or corrupted text. To address this, N2I-RAG uses a hybrid OCR
+strategy built on a Visual–Language Model (VLM) that integrates a vision encoder
+with a language decoder. This allows the system to capture both textual and visual
+elements (layout, formatting, and embedded elements) in order to recover full legal
+texts. The model corrects noisy segments, ignores irrelevant visual features, and gen-
+erates missing text. Each document is then segmented into legal articles and enhanced
+with a set of standardized metadata such as jurisdiction, publication date, revision
+date, institutional source, and text type (law, regulation, directive,etc.). These articles
+are encoded using the BGE-M3 model [11] , a multi-lingual, multi-function, multi-
+granularity embedding model and indexed in ChromaDB for semantic search. This
+approach guarantees that even imperfect documents provide usable data, producing a
+comprehensive, coherent, and searchable database suitable for indicator generation.
+5

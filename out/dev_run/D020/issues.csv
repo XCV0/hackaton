@@ -1,0 +1,4 @@
+publication_id,issue_id,record_ids,check_name,description,source_page,source_fragment
+D020,I1,R013;R009,champion_vs_mean,"DV3 (без P3HT): Voc лучшего прибора 0.467 В (стр. 6) ниже среднего по партии 0.492 В (стр. 5); при этом PCE champion 2.76 % vs mean 2.61 %. Champion и mean, вероятно, из разных партий/рисунков (Fig 6b vs Fig 4).",6,"solar cell without P3HT showed a much lower PCE of 2.76%, with a VOC of 0.467 V, JSC of"
+D020,I2,,contradiction,"Идеальность ε = 4.01 для приборов с P3HT и 2.60 без P3HT, но авторы говорят о подавлении SRH-рекомбинации с P3HT (ε выше у прибора с P3HT).",7,"P3HT was calculated to be 4.01 and 2.60, respectively"
+D020,I3,,contradiction,"α = 0.90 и 0.95 для приборов с и без P3HT соответственно, т.е. α ниже с P3HT, тогда как авторы заключают, что P3HT подавляет бимолекулярную рекомбинацию.",7,are calculated to be 0.90 and 0.95 for the solar cells with and without P3HT

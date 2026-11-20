@@ -1,0 +1,26 @@
+A PREPRINT
+8.4 Predicate Clustering Examples
+Predicate Category
+topx.topHoldings.values.nameAbbvie.name.asOfDate2025-09-30 allocation
+facts.companiesIssuersDate generic
+geographicBreakdown.regions.nameEurozone.countries.nameGreece.
+values.benchmarkPercent.asOfDate2025-09-30 allocation, benchmark
+Table 3: Example mapping of predicates to categories.
+8.5 Predicate to Natural Language Example
+Original Predicate Natural Language Predicate
+facts.companiesIssuers Facts About Companies Issuers
+facts.shareholderAccounts Facts About Shareholder Accounts
+descriptions.nameHoldingsOutsideTheUS.description Description of Holdings Outside the US
+Table 4: Examples of converting predicates to natural language.
+8.6 Query Assignment by Intent Example
+Intent Example Query
+Compare Compare AMCAP-F3 and AMCAP-R6?
+Compare Compare Balanced funds and growth funds in terms of strategy?
+Detail What is fund objective and strategy of GFA-R6?
+Detail Who are the portfollio managers for WMIF-R2 fund?
+Search List all growth funds?
+Search List the expense ratio for all balanced funds?
+Other What is the benefit of moving from balanced funds to growth and income
+funds?
+Table 5: Representative examples of queries for each intent category.
+16

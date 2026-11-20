@@ -1,0 +1,86 @@
+Dataset Budget Ours −T GC −AT −CD
+NQ ε = 1 0.40 0.31 0.32 0.36 ε = 10 0.51 0.42 0.46 0.48
+TriviaQA ε = 1 0.53 0.50 0.51 0.50 ε = 10 0.61 0.52 0.51 0.56
+ChatDoctor ε = 1 0.68 0.38 0.44 0.53 ε = 10 0.72 0.46 0.61 0.62
+Table 2: Ablation study using OPT-1.3B under ε ∈
+{1, 10}. Each column removes one module from
+SparsePay-RAG: topic-guided clustering (−T GC),
+adaptive triggering (−AT ), and DP contrastive decod-
+ing (−CD). Bold numbers indicate the highest score.
+cation ratio and further detailed privacy settings.
+5.2 Overall Performance
+As shown in Table 1, the results demonstrate the
+clear superiority of SparsePay-RAG in balancing
+privacy and utility. Under strict privacy budgets
+(e.g., ε ∈ {1, 5}), prior methods like DPVoteRAG
+and DPSparseVoteRAG frequently fail to gener-
+ate outputs due to rapid budget exhaustion. Even
+though MuRAG avoids complete failure by restrict-
+ing its retrieval scope, it still performs poorly under
+low privacy budgets. In contrast, SparsePay-RAG
+consistently achieves the highest utility across all
+settings. Furthermore, as the privacy budget relaxes
+to ε = 100, the performance of SparsePay-RAG
+closely approaches the Non-Private RAG utility
+upper bound. Additionally, we observe that our
+method also benefits from larger language models,
+generally achieving higher utility scores. Overall,
+these results highlight the capability of SparsePay-
+RAG in delivering strong generation utility while
+adhering to strict privacy guarantees. Compute
+resource consumption is reported in Appendix C.
+We additionally evaluate SparsePay-RAG on 1,000
+queries per dataset, with results provided in Ap-
+pendix D.3.
+5.3 Ablation Study
+Table 2 reports the ablation results. Removing
+any component degrades performance, confirming
+their distinct roles in budget preservation. First, the
+−T GC variant removes public topic-guided clus-
+tering, causing on average the sharpest accuracy
+drop. This demonstrates that establishing disjoint
+topic partitions is critical to prevent queries from
+accumulating global privacy costs. Second, the
+−AT variant removes adaptive triggering, which
+markedly degrades performance. This confirms its
+effectiveness in preventing the model from wasting
+budget on trivial tokens and avoiding premature
+generation truncation. Finally, the −CD variant
+Figure 2: TPR-FPR curves of the Interrogation Attack
+against Non-Private-RAG and SparsePay-RAG (ε = 1)
+on ChatDoctor with Llama-3.1-8B. The dashed diagonal
+denotes random guessing (AUC = 0.5).
+omits DP contrastive decoding, instead clipping
+and aggregating raw private logits. The resulting
+accuracy loss highlights the importance of com-
+pressing the protection target from full logits to the
+private delta via public priors. Overall, these mod-
+ules jointly sparsify privacy costs by narrowing the
+retrieval scope, reducing private access frequency,
+and compressing the per-access budget.
+5.4 Empirical Privacy Analysis
+To empirically assess information leakage, we con-
+duct a membership inference attack (MIA) (Shokri
+et al., 2017) on ChatDoctor using Llama-3.1-8B.
+Following Wu et al. (2026) and Naseh et al. (2025),
+we adopt the multi-query Interrogation Attack (IA),
+which probes the RAG system to infer if a docu-
+ment resides in the private corpus. For each can-
+didate, GPT-4 generates m = 30 binary questions;
+the correctly answered proportion defines the mem-
+bership score. We apply IA to in-corpus and out-
+of-corpus samples, quantifying attack success via
+the TPR-FPR curve’s AUC. Detailed setup is in
+Appendix B.4.
+Fig. 2 shows the TPR-FPR curves. Under Non-
+Private-RAG, IA yields an AUC of 0.717, confirm-
+ing the system is highly vulnerable to MIA. With
+SparsePay-RAG at ε = 1, the AUC drops to 0.503,
+nearly indistinguishable from random guessing,
+demonstrating effective prevention of document
+membership inference.
+6 Conclusion
+In summary, we proposed SparsePay-RAG, a pri-
+vacy budget sparsification framework that follows
+the “only pay what you must spend” design by
+45300

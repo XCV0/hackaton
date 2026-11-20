@@ -1,0 +1,86 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+Table 7
+Ollama MUT failures
+RAG-Tester Baseline
+Embedding LLM AI Internet Total failures AI Internet Total failures
+bge-large-335m-en-v1.5
+Deepseek R1 265 488 753 288 381 669
+Llama 3.2 437 774 1211 758 982 1740
+Gemma 3 413 654 1067 364 596 960
+Qwen 3 378 605 983 371 541 912
+intfloat-e5-base-v2
+Deepseek R1 237 478 715 296 387 683
+Llama 3.2 614 904 1518 773 993 1766
+Gemma 3 381 615 996 360 650 1010
+Qwen 3 384 617 1001 365 571 936
+nomic-embed-text-v1.5
+Deepseek R1 301 493 794 306 393 699
+Llama 3.2 642 934 1576 762 1014 1776
+Gemma 3 435 670 1105 403 636 1039
+Qwen 3 411 623 1034 404 567 971
+faithfulness or groundedness (context-to-answer) and an-
+swer relevance (query-to-answer), present in RAGAS [26].
+Retrieval effectiveness can also be measured metrics like
+Recall@K[27],MeanReciprocalRank(MRR)[1],andNor-
+malized Discounted Cumulative Gain (NDCG) [1], while
+generation quality is assessed via “LLM-as-a-judge” frame-
+works that use advanced models to score semantic accuracy
+and detect hallucinations. Modern testing also incorporates
+automated red-teaming [28] and security scanning [29] to
+proactively identify vulnerabilities such as prompt injec-
+tions, biased outputs, and sensitive data leakage.
+ThefrontierofRAGbenchmarkinghastransitionedfrom
+simplequestion-answeringtoevaluatingcomplexmulti-step
+reasoning, multimodal integration, and corpus-level analy-
+sis. Established frameworks such as RGB [30] and CRUD-
+RAG [31] evaluate fundamental capabilities like noise ro-
+bustnessand“Create,Read,Update,Delete”tasktaxonomy,
+whileHaluEval[32]providesacomprehensivecollectionof
+human-annotated samples for detecting hallucinations. Re-
+centresearchhasintroducedGlobalQA[33],thefirstbench-
+mark specifically designed for global reasoning tasks like
+corpus-wide sorting and counting, and mtRAG [34], which
+addressestheuniquechallengesofmulti-turnconversational
+consistency. To ensure reliability in high-stakes domains,
+benchmarks like RAGguard [35] and RARE [36] stress-
+testsystemsagainstmisleadingretrievalsanddocumentper-
+turbations. Furthermore, emerging metrics such as UDCG
+(Utility and Distraction-aware Cumulative Gain) [37] are
+being proposed to replace classical information retrieval
+metrics, as they demonstrate a significantly stronger corre-
+lation with end-to-end RAG accuracy.
+Safety and robustness testing for Large Language Mod-
+els (LLMs) has evolved into a rigorous discipline focused
+on ensuring models resist harmful instructions and remain
+stable under adversarial conditions. This is primarily oper-
+ationalized through automated red teaming, where frame-
+works like HarmBench [38] and JailbreakBench [39] sys-
+tematically probe for vulnerabilities using hundreds of cu-
+rated "misuse behaviors" and "jailbreak artifacts". Evalua-
+tionisfurtherstructuredbyspecializeddatasetsandmethod-
+ologies: ToxiGen [40] assesses nuanced, implicit toxicity;
+the Bias Benchmark for Question Answering (BBQ) [41]
+measuressocialstereotypesacrossnineprotectedcategories;
+Retromorphic Testing [42] introduces hierarchical verifica-
+tion to detect hallucinations specifically within Retrieval-
+AugmentedGeneration(RAG)workflows.Furthermore,ad-
+vERSEM [43] tests for resilience against subtle linguistic
+manipulations like hedging. To align these technical tests
+with organizational standards, enterprises are increasingly
+adopting the NIST AI Risk Management Framework (AI
+RMF) [44], specifically utilizing its "Measure" function
+to validate seven key pillars of trustworthiness-including
+safety, fairness, and resilience-throughout the AI lifecycle.
+More recently, Kim et al. [45] introduced Chunk Cover-
+age (CC), an oracle-independent test adequacy criterion for
+the retrieval component of RAG systems. CC measures the
+proportion of corpus chunks retrieved at least once by a test
+suite and uses runtime retrieval feedback to guide the selec-
+tion or generation of queries toward previously unexercised
+chunks.Theapproachthereforefocusesondetermininghow
+thoroughly a test suite exercises the retrieval behavior in-
+duced by an embedding model and vector-store configura-
+tion, independently of the correctness of the generated an-
+swers. RAG-TESTER addresses a complementary objective.
+Instead of isolating the retriever, it automatically tests the
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 12 of 21

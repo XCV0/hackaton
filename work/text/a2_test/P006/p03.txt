@@ -1,0 +1,99 @@
+2023; Tan et al., 2025) or by selecting among pub-
+lic LLM-generated candidates under DP (Xie et al.,
+2024; Hou et al., 2024; Sun et al., 2025). Both
+paradigms treat privacy protection as a one-time
+offline step, making them ill-suited to dynamically
+updated private knowledge bases.
+DP for RAG. Recent studies show that RAG sys-
+tems are vulnerable to membership inference (Zeng
+et al., 2024; Naseh et al., 2025) and data extraction
+attacks (Zhang et al., 2024) targeting the private
+knowledge base. To mitigate these threats, native
+DP-RAG frameworks perturb output distributions
+at every generation step (Grislain, 2025; Koga et al.,
+2024). Subsequent works reduce private access by
+shrinking the retrieval scope or sparsifying private
+generation (Wu et al., 2026; Koga et al., 2024),
+yet the budget-reduction operations themselves still
+consume non-trivial privacy budget and remain pro-
+hibitive under tight constraints. In contrast, our
+SparsePay-RAG circumvents this overhead via
+cost-free public models.
+3 Method
+3.1 Overview
+We propose SparsePay-RAG to compress DP-
+RAG privacy costs. As shown in Fig. 1, our frame-
+work sparsifies budget consumption by only pro-
+tecting true private increments across three orthog-
+onal dimensions. Specifically, (1) Localized Pri-
+vate Retrieval via Public Topic-Guided Cluster-
+ing (Sec. 3.2) performs a localized two-stage re-
+trieval to shrink the search scope, restricting data
+access to a few relevant clusters predefined offline
+using public topics; (2) Adaptive RAG Trigger-
+ing via Isotonic Cross-Layer Trajectory Fitting
+(Sec. 3.3) derives token confidence by applying iso-
+tonic regression to fit public cross-layer probability
+trajectories and triggers RAG only when public to-
+kens are unreliable, thereby reducing private access
+frequency; (3) Private-Token Budget Compres-
+sion via DP Contrastive Decoding (Sec. 3.4) uses
+public logits as a reference for contrastive decoding
+at each triggered private generation step, restricting
+DP protection to the private delta rather than full
+logits to reduce per-token privacy costs.
+During the offline phase, we cluster the private
+corpus D guided by public topics. During retrieval,
+given a query q, we leverage these clusters to nar-
+row the retrieval scope and fetch the top-K private
+samples from the matched clusters (Sec. 3.2). Dur-
+ing generation, we trigger private access via the
+probability trajectory of public candidate tokens
+(Sec. 3.3). At triggered steps only, we perform
+contrastive decoding and release the next token
+privately (Sec. 3.4).
+3.2 Localized Private Retrieval via Public
+Topic-Guided Clustering
+This module partitions the private knowledge base
+into disjoint clusters via public topic clustering,
+and at inference time performs two-stage retrieval
+to shrink each query’s private retrieval scope to a
+small number of matched clusters.
+Native DP-RAG computes similarities across
+the entire private corpus D, meaning every sam-
+ple is accessed during each query. Under DP, this
+global access causes the cumulative privacy cost
+to explode linearly with the number of queries. To
+address this, we leverage public priors and a small
+privacy budget to shift from global to localized
+sparse retrieval. Specifically, we generate public
+topics to partition the private data into disjoint clus-
+ters. During retrieval, each query is first routed
+to relevant public topics, restricting subsequent re-
+trieval to the private data within those clusters. This
+ensures that the majority of irrelevant private data
+is excluded from the retrieval scope, significantly
+reducing unnecessary privacy budget consumption.
+We narrow the retrieval scope in the following
+steps: generating public topics as cluster centers
+for offline clustering of private data, routing the
+query to relevant clusters at inference time, and per-
+forming localized retrieval within those matched
+clusters. Specifically, (1) Public topic genera-
+tion. Given a target number of topics m and a
+public textual description of the target domain, we
+prompt a public LLM (e.g., GPT-4) to generate
+m short topic descriptions, forming the topic set
+T = {t1, . . . , tm}. (2) Topic-guided clustering.
+Using a locally deployed embedding model E(·),
+we encode each topic tk ∈ T and each private sam-
+ple di ∈ D into dense vectors. Each di is assigned
+to the topic with the highest similarity, yielding m
+disjoint clusters:
+Cj = {di | j = arg max k sim(E(di), E(tk))},
+where sim denotes cosine similarity. Let cj = |Cj |
+denote the true cluster size, we release noisy cluster
+sizes by adding Gaussian noise with variance σ2 to
+each cj :
+˜cj = max(cj + N (0, σ2), 0).
+45295

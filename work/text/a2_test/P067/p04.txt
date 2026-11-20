@@ -1,0 +1,99 @@
+4.2 Guided Selection
+GS focuses on selecting appropriate chunks to gen-
+erate natural and persona-consistent responses. GS
+is composed of three stages: (1) We iterate over the
+chunks, which are sorted in descending order of
+semantic similarity to the user query u, and employ
+an LLM to determine whether it is possible to infer
+the corresponding character’s attributes from each
+chunk for the u. (2) The chunks selected in the pre-
+vious step are appended to the slot, and the iteration
+terminates when the slot is full. (3) If the slot re-
+mains empty after the maximum number of search
+iterations, the K chunks with the highest semantic
+similarity to the query is returned. Note that GS is
+effective in identifying chunks containing informa-
+tion that can be inferred from a character’s actions,
+such as beliefs or personality traits, which are not
+explicitly stated in the knowledge base and there-
+fore are difficult to retrieve through direct search.
+For example, even if there is no explicit knowledge
+corresponding to the query "My living and work
+spaces are clean and organized", if Megumin’s con-
+scientiousness can be inferred from her behavior
+depicted in the narrative, RPA can leverage this
+information to infer the characteristics of Megu-
+min and generate an appropriate response. GS is
+summarized in Algorithm 1 and Figure 3.
+4.3 Attribute Extractor
+Inspired by the observations that incorporating
+character’s attributes can lead to more realistic re-
+sponses (Park et al., 2025; Chen et al., 2025), AE
+considers two attributes: Belief and Value, and Psy-
+chological Traits. Beliefs and values are funda-
+mental principles and ideological orientations that
+inform and influence a character’s viewpoints and
+choices. On the other hand, psychological traits
+refer to characteristics related to personality, emo-
+tional states, personal interests, and cognitive ten-
+dencies. AE extracts attributes of a character from
+the chunks generated as a result of GS, and exploits
+them as context. Finally, we dynamically construct
+the context using knowledge retrieved via RAG
+and attributes extracted by GS and AE, enabling
+the model to generate vivid responses (Figure 7).
+5 Experiments
+5.1 Setup
+Baselines. We evaluate our method against five
+off-the-shelf RAG baselines: Naive RAG (Gao
+et al., 2024), CRAG (Yan et al., 2024), RAPTOR
+(Sarthi et al., 2024), Adaptive RAG (Jeong et al.,
+2024), and LightRAG (Guo et al., 2024). CRAG
+and LightRAG were selected to investigate the ef-
+fects of web search and graph-based knowledge
+systems, respectively, on role-playing. We also con-
+duct extensive experiments on three different LLMs
+and three different embedding models: GPT-4.1
+(OpenAI, 2025), Gemma3-27B (Team et al., 2025),
+Qwen3-32B (Yang et al., 2025), BGE-M3 (Chen
+et al., 2024), Qwen3-0.6B (Zhang et al., 2025), and
+mE5large-instruct (Wang et al., 2024a). To explore
+the impact of multi-step reasoning on role-playing,
+Qwen3-32B is configured to use thinking mode.
+Detailed settings are provided in Appendix D.
+5.2 Evaluation Protocols
+Tasks. As we follow the similar experimental pro-
+tocol in prposed by previous studies (Wang et al.,
+2024b; Park et al., 2025), we also exploit 60 MBTI
+questions and 120 BFI (Barrick and Mount, 1991)
+questions to investigate whether each character can
+appropriately respond to questions for which they
+do not have explicit prior knowledge (Figure 4).
+Following the prior work, since it is not possi-
+ble to construct QA pairs for questions outside
+the scope of a character’s knowledge, we instead
+conduct interview-based assessments (Wang et al.,
+2024b) for each character and compare the results
+to psychological test outcomes for the character,
+as determined by thousands of actual participants’
+votes3(Sang et al., 2022; Wang et al., 2024b). We
+also use 450 QA pairs from the CharacterRAG
+dataset to verify whether the RPA sufficiently lever-
+ages each character’s knowledge.
+Metrics. We design three LLM-based met-
+rics, similar to those in prior studies (Wang et al.,
+2025a, 2024b), to comprehensively evaluate the
+role-playing capabilities of RAG-based RPAs.: (i)
+ACC measures whether the character’s response
+contains the correct answer or not. (ii) ACCL is a
+score assigned by the LLM, ranging from 1 to 10,
+that evaluates how well the character’s response
+reflects the correct answer. (iii) Hallucination
+Score (HS) evaluates the degree of hallucination
+in the model’s response given a query, the relevant
+chunks, and the ground-truth answer, on a scale
+from 1 to 10. Specifically, HS is assigned close to 1
+when the response faithfully reflects only the facts
+contained in the chunks or answer without distor-
+tion or addition, indicating minimal hallucination.
+3https://www.personality-database.com/

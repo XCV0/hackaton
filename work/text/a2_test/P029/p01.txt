@@ -1,0 +1,100 @@
+Findings of the Association for Computational Linguistics: EMNLP 2026, pages 7065–7076
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+RAGPULSE: A Real-World RAG Workload Capturing Authentic Temporal
+Reuse Patterns for Efficient Serving
+Zhengchao Wang and Yitao Hu and Zhuxuan Chang and Jianing Ye
+Guotao Yang and Tianhao Lai and Jiazheng Yu and Zhixin Zhao
+Liang Zheng and Youpeng Deng and Sheng Chen and Keqiu Li
+Tianjin University, China
+Abstract
+Retrieval-augmented generation (RAG) has
+emerged as a critical paradigm for deploying re-
+liable and knowledge-intensive large language
+model (LLM) applications. Its unique execu-
+tion pipeline introduces large overhead in sys-
+tem retrieval, such as massive context loading
+and document dependencies. To reduce this
+overhead, existing work on RAG serving sys-
+tems often relies on generic LLM inference
+traces or synthetic RAG datasets. However,
+these approaches fail to capture authentic tem-
+poral reuse patterns of RAG workloads, result-
+ing in a disconnect between theoretical opti-
+mization and real-world deployment efficiency.
+To bridge this gap, this paper introduces
+RAGPULSE, an open-source RAG workload
+trace dataset that preserves authentic tem-
+poral information missing in existing traces.
+Collected from a production-grade university
+Q&A system serving over 40,000 students
+and faculty members since April 2024, the
+dataset comprises 134K requests over 389
+days. It unveils key RAG dynamics includ-
+ing time-sensitive document reuse, skewed
+access patterns over long time scales, and
+bursty temporal locality. By capturing these
+temporal reuse patterns, RAGPULSE empow-
+ers the systems community to develop and
+validate next-generation optimization tech-
+niques, offering practical guidance for effi-
+cient RAG serving. The trace is available at
+https://github.com/flashserve/RAGPulse.
+1 Introduction
+Large language models (LLMs) (Huang et al.,
+2025; Qin et al., 2025; Xiao et al., 2025) face persis-
+tent challenges in production settings, most notably
+knowledge cutoff and hallucination. Retrieval-
+augmented generation (RAG) (Hsia et al., 2025;
+Lu et al., 2024; Wang et al., 2025a) mitigates these
+limitations by grounding model generation in exter-
+nal knowledge sources. As illustrated in Figure 1,
+User Query Vector Database
+Retrieve
+LLM Output
+1 2
+34
+5
+0.2 0.6 0.4 0.8 0.2 0.70.3 0.4 0.7 0.1 0.2 0.9
+0.1 0.8 0.5 0.4 0.7 0.2Embedding
+D1 D2 D3 ...
+ContextSystem Prompt Augment
+Generate
+Augmented Prompt
+Most RelevantConcatenate
+Submitted
+6
+Figure 1: Workflow of RAG.
+a RAG request traverses a multi-stage pipeline en-
+compassing retrieval, augmentation, and genera-
+tion. Today, RAG stands as the dominant paradigm
+for knowledge-intensive LLM applications.
+Although RAG significantly improves answer
+accuracy, its system-level performance (Jin et al.,
+2025; Shang et al., 2025; Wang et al., 2025d) re-
+mains hindered by the lack of representative traces.
+Both generic LLM (Wang et al., 2025c; shareAI,
+2023; Wu et al., 2025; Yang et al., 2025; Sreeram
+et al., 2025) and synthetic RAG (Katsis et al., 2025;
+Qiu et al., 2024; Zhong et al., 2021) datasets miss
+RAG-specific dynamics. Most synthetic datasets
+are generated via random independent sampling or
+fixed-interval arrivals, destroying the bursty, time-
+varying structure of real user behavior. Thus, three
+temporal dimensions are missing: bursty arrival
+patterns, document popularity drift, and multi-turn
+session continuity. These are central to modern
+serving optimizations like Position Independent
+Caching (PIC) (Yao et al., 2025a; Hu et al., 2024),
+prefix-aware attention (Yi et al., 2026), content-
+aware scheduling (Qin et al., 2025), and KV cache
+management (Touzeau et al., 2019; Shah and Sid-
+diqui, 2023). Consequently, systems designed with
+generic traces show a substantial performance gap
+in production RAG workloads.
+In this paper, we address this gap by present-
+ing RAGPULSE, an open-source RAG workload
+trace dataset that preserves authentic temporal in-
+formation missing in existing traces. Through a
+empirical study, we provide the first systematic
+characterization of authentic RAG workloads and
+7065

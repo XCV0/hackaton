@@ -1,0 +1,41 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 3
+nected dimensions of company performance. To ensure both interpretability and
+reproducibility of the analysis, we decompose the process into a series of analy-
+sis modules, each corresponding to a specific section of an earning report. These
+modules form the basis of our data-generation and report-synthesis framework.
+Each instruction type encapsulates a distinct analytical objective, as detailed
+below. To ensure that our six-component structure is not arbitrary, we consulted
+two financial experts with MBA degrees and many years of experience in large
+corporations. Their feedback confirmed that this decomposition aligns well with
+the workflow used in professional earnings reports, providing practical grounding
+for our design choices.
+(1) Company Core Information
+This section introduces the company’s background, business model, and sectoral
+context. It provides foundational context for the subsequent financial and strate-
+gic assessments. Typical questions at this level include identifying the company’s
+primary business domains, product lines, and target markets. The main informa-
+tion sources are the company’s press releases and official websites, which ensure
+factual accuracy. This step grounds the report-generation process, enabling the
+model to contextualize later KPI-based interpretations within the company’s
+operational scope.
+(2) Key Financial Indicators (KPIs)
+The next stage involves extracting and interpreting core quantitative metrics
+that define the company’s financial performance. Examples include revenue, net
+income, operating margin, earnings per share (EPS), and cash flow. These KPIs
+are retrieved from earnings reports and press releases, then aligned with the an-
+alyst’s custom-defined KPI set. This allows the analysis to be both standardized
+and flexible-standardized in structure, yet personalized to reflect the analyst’s
+expertise. In our framework, these KPIs serve as anchor points for the model’s
+narrative generation, allowing the auto-generated analysis to maintain factual
+grounding while adapting to subjective analytical focus. Indeed, financial KPIs
+have been characterized as metrics that provide insights into underlying business
+performance across categories such as profitability, liquidity, efficiency, valuation
+and leverage. [13, 1]
+(3) Comparative Analysis
+To provide market context, comparative analysis benchmarks the company’s
+performance against peers in the same industry. This may involve ratio-based
+comparisons (e.g., revenue growth rate, profit margin) or relative ranking within
+the sector. The comparison step enhances interpretability by situating a com-
+pany’s performance within broader market trends. The relevant documents in-
+clude both earnings reports of competitors and industry summaries, allowing the
+model to contextualize differences in business cycles or strategic focus.

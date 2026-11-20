@@ -1,0 +1,44 @@
+Published as a conference paper at ICLR 2025
+Table 6: RAG results on TriviaQA and PubHealth (m = 1, k = total # of docs)
+TrivialQA PubHealth
+Mistral7B 54.15 34.85
+Mistral-Instruct7B 67.11 42.15
+MDrafter-7B (m = 1, k = 10) 73.23 65.25
+MVerifier-7B + MDrafter-7B (m = 5, k = 2) 73.91 75.79
+C EFFECTS OF SELF-REFLECTION STATEMENT
+We use “Do you think the explanation supports the answers? (Yes or No)” as the self-reflection
+statement in our main results. In this study, we replace it with other alternatives to see how the
+self-reflection statement affects the accuracy. The results are reported in Table 7. We observe that
+the performance does not change a lot given different self-reflection statements, which shows the
+stable verification capability of the generalist LMs by language modeling objective.
+Table 7: Performance analysis of SPECULATIVE RAG with different self-reflection statements R
+when computing the self-reflection score ρSelf-reflect = P ("Yes"|Q, α, β, R), where Q is the query,
+α, β are the generated answer draft and rationale.
+Reflection Statement TriviaQA PubHealth
+Do you think the explanation supports the answers? (Yes or No) 74.24 76.60
+Does the rationale support the answer? (Yes or No) 74.22 76.09
+What do you think about the rationale? A good one? (Yes or No) 74.25 75.79
+Is the rationale good enough to support the answer? (Yes or No) 74.39 76.29
+D EFFECTS OF RATIONALE GENERATION
+We acknowledge that the generation of rationale potentially increases the inference cost during the
+drafting stage while this is crucial for the verifier in our method to assess the quality and reliability of
+generated drafts. And, the potential overhead can be mitigated through efficient parallel inference.
+To further study the impact of rationale generation, we finetune the RAG drafter without rationale.
+We denote this setting as: without rationale in drafting. Similarly, with rationale/doc in verification
+indicates that we use the generated rationale or the retrieved documents as reference during the
+verification stage. We use MVerifier-8x7B + MDrafter-7B as a running example. The results are shown
+in Table 8.
+Table 8: Ablation study on the draft generation in the drafting and verification stages on TriviaQA
+and PubHealth.
+Drafting Verification TrivialQA PubHealth ARC-C
+w/o rationale w/ doc 70.86 75.28 78.67
+w/ rationale w/ doc 74.08 76.09 80.46
+w/ rationale w/ rationale 74.24 76.60 80.55
+Better answer drafting As explored in Hsieh et al. (2023), incorporating rationale generation
+during instruction-tuning can lead to the RAG drafter producing higher-quality answer drafts. The
+results in Table 8 clearly demonstrate this. We observe a significant performance drop across all
+three benchmarks when the RAG drafter is finetuned without the rationale component,
+Lower latency and cost in verification We verify each draft against the rationale instead of the
+retrieved documents. From the ablation results, these generated rationales serve as high-quality
+grounding facts, improving verification performance compared to using the retrieved documents.
+17

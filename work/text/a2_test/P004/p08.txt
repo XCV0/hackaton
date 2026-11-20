@@ -1,0 +1,101 @@
+6.2 Analysis of Model Scales
+To investigate the performance of models with dif-
+ferent scales on our method, we conduct compara-
+tive experiments using Qwen3 models with 8B and
+32B parameters. A more detailed analysis can be
+found in Appendix H.
+7 Related Work
+Advanced Iterative RAG Frameworks. To
+move beyond the limitations of standard “retrieve-
+and-generate” pipelines, recent research has in-
+creasingly focused on dynamic, multi-step frame-
+works (Borgeaud et al., 2021; Yu et al., 2023). One
+prominent approach involves agent-based reason-
+ing, where models like ReAct learn to generate
+discrete thought-action traces (ti, ai) to interact
+with an environment, such as a search engine, in
+a step-by-step manner. Another significant direc-
+tion is self-correction, where frameworks like Self-
+RAG train the LLM to generate special control to-
+kens that trigger an internal critique-and-refinement
+process based on retrieved evidence. These meth-
+ods significantly improve semantic coherence and
+overall task performance, effectively achieving the
+L2 reliability level of being coherent and plau-
+sible. However, their core feedback mechanism
+relies on the LLM’s internal, non-verifiable judg-
+ment (Ouyang et al., 2022), which can be unreliable
+when the model’s reasoning is flawed. In contrast,
+LCR-RAG externalizes this feedback loop, ground-
+ing it not in the LLM’s opaque self-reflection, but
+in a verifiable, external neuro-symbolic system that
+provides explicit logical signals.
+Neuro-Symbolic Approaches for LLM Reliabil-
+ity. Neuro-Symbolic (NeSy) (Serafini and d’Avila
+Garcez, 2016; Manhaeve et al., 2018) methods aim
+to combine the pattern-recognition strengths of neu-
+ral networks with the formal rigor of symbolic sys-
+tems. In the context of LLMs, this often involves
+two distinct stages. First, a neural component is
+used to interface with natural language; for exam-
+ple, a T5 model can be fine-tuned as a learned se-
+mantic parser fparser to convert a natural language
+claim c into a structured logical representation like
+an RDF triple, such that fparser : c → {(s, p, o)}.
+Second, a symbolic engine (e.g., a Datalog rea-
+soner) applies a predefined formal rule base R
+to this structured data to perform deductions or
+check for inconsistencies. This approach provides
+a high-fidelity method for explicitly verifying logi-
+cal properties (Glanois et al., 2022; Liu et al., 2025).
+LCR-RAG uniquely synthesizes these NeSy princi-
+ples into its verifier module; it uses an NLI model
+for factual grounding and a T5–Datalog pipeline
+for logical validation, then innovatively translates
+the structured output of this entire verifier into a
+quantitative reward signal to guide and shape the
+behavior of our reinforcement learning agent.
+Reinforcement Learning in RAG. Several recent
+studies now enhance Retrieval-Augmented Genera-
+tion (RAG) through reinforcement and curriculum
+learning. RAG-RL applies reinforcement learn-
+ing for query optimization, aligning with our use
+of PPO, though it lacks verifiable feedback from
+logical consistency checks. CL-RAG introduces
+curriculum learning to train query policies pro-
+gressively; our framework instead leverages direct,
+logic-aware reward signals for adaptive policy up-
+dates. LevelRAG focuses on logical decomposition
+in multi-hop QA, which conceptually overlaps with
+our logical actions but omits policy learning from
+structured feedback. Finally, ReaRAG improves
+factuality via iterative retrieval and heuristic rewrit-
+ing, whereas our PPO agent dynamically adjusts
+queries using a neuro-symbolic verifier. In contrast
+to these methods, LCR-RAG uniquely transforms
+formal logic violations into direct reward signals,
+enabling verifiable and self-correcting learning be-
+yond these static or heuristic-driven designs.
+8 Conclusion
+In this work, we propose LCR-RAG, a novel frame-
+work designed to address the critical challenges of
+logical consistency and inefficient iteration in com-
+plex reasoning tasks for Retrieval-Augmented Gen-
+eration (RAG) systems. By integrating an external
+neuro-symbolic verifier with reinforcement learn-
+ing, LCR-RAG introduces a Logic-Consistency
+Reward (LCR) mechanism, which translates logi-
+cal and factual errors into structured feedback, en-
+abling precise query refinement. Through a com-
+bination of rule-based directed optimization and a
+PPO-driven exploratory optimizer, our approach
+iteratively improves reasoning quality, ensuring
+that logical soundness becomes a direct optimiza-
+tion target. Our experimental results on bench-
+marks such as HotpotQA and ASQA demonstrate
+that LCR-RAG significantly outperforms state-of-
+the-art baselines, including RAG-RL and SeaKR,
+across multiple evaluation metrics. Furthermore,
+our ablation studies highlight the importance of
+each component in achieving robust and accurate
+17907

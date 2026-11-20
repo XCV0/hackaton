@@ -1,0 +1,105 @@
+2000 3000 4000 5000 6000 7000
+10 7
+10 6
+10 5
+10 4
+3647
+250 500 750 1000 1250 1500
+10 6
+10 5
+10 4
+10 3
+ 359
+Frequency (log)
+Length (tokens)
+Input Input Mean Output Output Mean
+Figure 2: Input and output token length distribution.
+bottlenecks of retrieval, re-ranking, and generation
+under realistic workload conditions.
+Informed scheduling and caching design. By
+capturing inter-request correlations and content
+reuse patterns, the trace provides a principled foun-
+dation for evaluating and designing advanced strate-
+gies such as adaptive request batching and KV
+cache management.
+Realistic workload modeling and benchmark-
+ing. The trace supports construction of high-fidelity
+workload models, simulators, and standardized
+benchmarks, improving the validity and repro-
+ducibility of RAG system evaluations.
+Understanding emerging RAG application be-
+haviors. It enables the study of how real-world
+RAG workloads evolve from simple question an-
+swering to more complex behaviors, including
+problem rewriting, multi-turn dialogue, and agent-
+like task execution.
+Collectively, these capabilities position RAG-
+specific traces as a key enabler for bridging the
+gap between theoretical RAG system research and
+real-world deployment.
+3 Open-Source RAG Trace: RAGPULSE
+To bridge the gap between RAG systems re-
+search and real-world deployment, we introduce
+RAGPULSE, an open-source RAG workload trace
+collected from a production university-wide policy
+question-answering system. The service has been
+continuously operating since April 2024 and serves
+over 40,000 students and faculty members. We
+release the core trace of RAGPULSE as a public
+dataset and commit to its continuous update as the
+system evolves.
+3.1 Data Format and Content
+Each record in the RAGPULSE trace captures key
+system-level runtime information for a RAG re-
+1 {
+2 " timestamp ": "559285" ,
+3 " input_length ": 3861 ,
+4 " output_length ": 127 ,
+5 " hash_ids ": {
+6 " sys_prompt ": [8325 , 8326 ,
+11575] ,
+7 " passages_ids ": [6123 , 7239 ,
+6124 , 1167 , 7250 , 5448] ,
+8 " history ": [15215] ,
+9 " web_search ": [20319 , 20320] ,
+10 " user_input ": [23648]
+11 } ,
+12 " session_id ": "1758081660427 -
+xa8rbsd2uco1 "
+13 }
+Table 1: Request component sample.
+1 {" hash_id ": 7250 , " length ": 328}
+2 {" hash_id ": 8325 , " length ": 512}
+3 {" hash_id ": 20319 , " length ": 484}
+Table 2: Token length per component.
+quest. The dataset we are releasing at this time cov-
+ers 134K request records over 389 days. As shown
+in Figure 2, the input and output token lengths of
+the RAGPULSE workload demonstrate a clear con-
+centration trend. Specifically, input token lengths
+primarily cluster around 3000 tokens, while output
+tokens are concentrated around 300 tokens. Fur-
+thermore, as detailed in Table 1, each record in the
+main trace file contains the following key fields.
+• timestamp: request arrival time in seconds rela-
+tive to the start of the trace;
+• input_length: total input token length, aggre-
+gating all request components;
+• output_length: total output token length;
+• hash_ids: identifiers for all input components,
+each mapping to a unique document chunk, with
+token lengths provided as shown in Table 2;
+• session_id: conversation session identifier.
+• latency_breakdown: execution timestamps and
+latency measurements for each processing stage,
+including knowledge-base retrieval, reranking,
+and generation, as shown in Table 3;
+3.2 Dataset Features and Statistical Analysis
+Our analysis of the RAGPULSE trace reveals four
+characteristics that are particularly informative for
+RAG serving system design.
+Periodic load variation. The trace records precise
+request arrival times. As shown in Figure 3, which
+is derived from the six-week trace, request volume
+exhibits clear diurnal patterns, with higher load
+7067

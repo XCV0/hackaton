@@ -1,0 +1,137 @@
+conditions, and device design. According to this situation, blue
+light is considered one of the optimum light sources for high-
+efﬁciency OWPT.
+In the case of photovoltaic power converters, high-efﬁciency
+devices have only been developed for near-infrared light.[19]
+GaAs photovoltaic power converters have exhibited conversion
+efﬁciency of 68.9% for 858 nm monochromatic light with a
+light intensity of 11.4 W cm/C02 (about 60% for 0.1 W cm/C02).[20]
+Although high-efﬁciency photovoltaic power converters for blue
+light sources have not yet been developed, a promising material
+choice is CsPbBr3 (a bandgap of 2.3 eV).[21] This material has a
+bandgap energy comparable to the photon energy of blue light
+(2.7 eV). It also exhibits greater stability against moisture and
+oxygen than other halide perovskite materials.[22–24] CsPbBr3
+is primarily investigated as a light-absorbing material for multi-
+junction solar cells. Theoretical work has demonstrated the
+potential of this material for use as the light-absorbing material
+of power converters in OWPT systems.[23] A recently reported
+CsPbBr3 solar cell exhibited conversion efﬁciency of 10.79%
+under AM1.5G and 100 mW cm/C02 illumination (sunlight)[25]
+and estimated conversion efﬁciency of ≈43.5% under a blue light
+source (estimated from solar cell performance under AM1.5G
+illumination and external quantum efﬁciency [EQE]). Our group
+has also developed a CsPbBr3 photovoltaic power converter;
+however, its conversion efﬁciency under blue light was only
+≈20%.[10,26,27] The aforementioned conversion efﬁciencies are
+signiﬁcantly lower than their theoretical values. Therefore, it
+is important to analyze the efﬁciency- limiting factor and the
+quality of the CsPbBr3 layer in the photovoltaic power converter.
+In addition, the electron transport layer (ETL) (Figure 1a) is
+essential to obtain high-efﬁciency devices. The role of the ETL
+is to selectively transport electrons. For effective electron
+transport, an ETL with suitable band alignment is critical. We
+intensively investigated the inﬂuence of the ETL on device
+performance in this study.
+At present, device simulations of perovskite solar cells with
+bandgaps (1.3–1.9 eV) suitable for normal solar cell application
+have been intensively reported.[28–31] However, there are a few
+reports on the device simulation of CsPbBr3 solar cells.[32] In
+addition, device simulation of CsPbBr3 solar cells as photovoltaic
+power converters has not been reported. Therefore, device
+simulations of CsPbBr3 photovoltaic power converters were
+performed to obtain criteria for high-efﬁciency CsPbBr3 photo-
+voltaic power converters in this study. The effect of conduction
+band offset between the ETL and the CsPbBr3 layer was investi-
+gated. The results highlight the suitable ETL material choice for
+devices using CsPbBr3 as the light-absorbing layer. Speciﬁcally,
+the interface between the ETL and CsPbBr3 layer, the quality of
+the CsPbBr3 layer, and the interface between the ETL and trans-
+parent conductive oxide (TCO) layer were also investigated.
+2. Simulation Details
+We used a one-dimensional device simulator (AFORS-HET)[33]
+in our device simulation. As shown in Figure 1a,b, the structure
+of the simulated-CsPbBr3 photovoltaic power converter is glass/
+TCO layer/ETL/front interface layer (FIL)/CsPbBr3 layer/rear
+interface layer (RIL)/hole transport layer (HTL)/Au. Spiro
+OMETAD was adopted as the HTL, and two interface layers
+(FIL and RIL) were introduced to consider carrier recombination
+at the interface of the two layers. The electrical and optical param-
+eters of the interface layers were consistent with those of the
+CsPbBr3 layer. As shown in Figure 1b, the structure of the
+CsPbBr3 photovoltaic power converter adopts a perovskite solar
+cell structure with an n-i-p conﬁguration.[34] The electrical param-
+eters used in the simulations are summarized in Table 1. These
+parameters are obtained from previous studies.[35–37] The surface
+reﬂectance of the device was calculated separately using e-ARC[38]
+and was implemented in the calculation using AFORS-HET.
+2.1. Effect of Conduction Band Offset between ETL and
+CsPbBr3 Layer on Device Performance
+We investigated the effect of the ETL and ETL/CsPbBr3 layer
+interface on device performance. We primarily focused on the
+effect of the conduction band offset (ΔEc) between the ETL
+and the CsPbBr3 layer. In standard perovskite solar cells, TiO2
+is typically used as the ETL material because the band align-
+ment is suitable for standard perovskite materials such as
+CH3NH3PbI3.[36,37] The electron afﬁnity of 4.1 eV of TiO2 is
+almost the same as that of CH3NH3PbI3 (3.9–4.1 eV). TiO2
+and CH3NH3PbI3 are a good combination because a small
+ΔEc value is expected. Conversely, the combination of TiO2
+Energy level (eV)
+-2
+-3
+-4
+-5
+-6
+-7
+-8
+TiO2
+-4.1
+-7.3
+CsPbBr3
+-3.4
+-5.7
+GaN
+-3.5
+-6.9
+Spiro 
+OMETAD
+-3.3
+-5.2
+ETL
+TCO
+-4.4
+-7.9
+-5.4
+Au
+Buffer 
+layer
+-3.9~
+-4.4
+a-ZSO
+Interface
+Interface
+Interface
+FIL RIL
+(b)
+(a)
+Monochromatic light 
+source (450 nm)
+Transmission
+medium (air)
+Photovoltaic 
+power 
+converter
+(solar cell)
+Glass
+TCO
+ETL
+CsPbBr3
+HTL
+Au
+Load
+Figure 1. a) Schematic of OWPT system. b) Band alignment of materials used in CsPbBr3 solar cells.
+www.advancedsciencenews.com www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (2 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH
+ 18626319, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pssa.202400437, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

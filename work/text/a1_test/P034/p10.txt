@@ -1,0 +1,165 @@
+Nanomaterials 2022, 12, 2507 10 of 16
+CuXTe through the diffusion of Cu, which is clearly described in previous studies [66–68].
+VOC is given by Equation (6) [69] and can be conﬁrmed by the dark J–V characteristic curve
+shown in Figure 9b.
+VOC = nkT q ln ( JSC J0 − 1 ) (6)
+where J0 is the saturation current density, JSC is the short-circuit current density, n is the
+diode ideality factor, q is the electronic charge, while k and T are Boltzmann constant
+and absolute temperature, respectively. CBD-CdS/CSS-CdTe devices with Cu/Au and
+CuI/Au back contacts exhibit dark saturation current densities of 3.5 × 10−9 A/cm2 and
+1.5 × 10−7 A/cm2, respectively. This means the dark saturation current density in the
+device with Cu/Au back contact is nearly two orders of magnitude lower than that of the
+device with CuI/Au back contact. The CuXTe structure is formed at the back of the CdTe
+absorber by the diffusion of copper, as mentioned earlier. Most of the Cu diffused into the
+bulk ﬁnds its way to the CdS with time, lowering its space charge density and causing it
+to become photoconductive. This effect of Cu in the CdTe is more problematic, adding
+recombination centers (lowering the efﬁciency) and increasing the space charge density,
+which might either raise or lower efﬁciency, depending on CdTe thickness [61]. This is
+why power conversion efﬁciency drops by ~50% within a month due to all photovoltaic
+parameter losses, as described in Table 2. The JSC of the device with a CuI hole-transporter
+was signiﬁcantly higher than the device with Cu/Au back contacts, which is due to the
+hole transport property of the thermally evaporated CuI and band alignment between the
+CdTe and CuI. The ﬁll factor of the devices with a CuI/Au was signiﬁcantly higher than
+that of the Cu/Au devices, which was induced by the smaller RS and larger RSH value of
+the device with a CuI/Au back contact than Cu/Au back contact.
+Nanomaterials 2022, 12, x FOR PEER REVIEW 11 of 16 
+ 
+ 
+  
+Figure 9. J–V curves of CBD-CdS/CSS-CdTe solar cell s with a Cu/Au and CuI/Au back contact ( a) 
+under illumination of 100 mW/cm2 with AM1.5 filter and (b) the semi-logarithmic J–V characteristics 
+of CBD-CdS/CSS-CdTe solar cells with Cu/Au and CuI/Au back contact in dark. 
+Table 2. Photovoltaic parameter measured instant after fabrication and after one month of 
+CdS/CdTe devices with CuI/Au and Cu/Au back contacts. 
+Device J SC (mA/cm2) V OC (V) FF PCE (%) 
+Cu/Au 23.71 0.44 0.44 4.57 
+Cu/Au After 01 month 18.78 0.37 0.34 2.35 
+CuI/Au 25.00 0.39 0.52 5.05 
+CuI/Au After 01 month 20.87 0.33 0.46 3.13 
+3.4. Influence of Fabrication Conditions on J–V Characteristics of CdS/CdTe/CuI/Au Device 
+The influence of different growth conditio ns of CSS-CdTe on the photovoltaic per-
+formance of the device was also analyzed with CSS-CdTe growth conditions of 5.0 torr 
+and 7.9 torr, which were fabricated with a 10 nm CuI hole-transporter. Figure 10 shows 
+the corresponding J–V characteristic curve under the illumination of 100 mW/cm 2 with 
+AM 1.5 filter and in dark. Table 3, illustrates the photovoltaic parameter of the correspond-
+ing J–V characteristic curve. 
+Figure 10. (a) J–V characteristic of CdS/CdTe/CuI/Au device fabricated with different CSS parameter 
+under illumination of 100 mW/cm2 with AM1.5 filter and (b) semi-logarithmic plot in dark. 
+Table 3. Photovoltaic parameter of CdS/CdTe/CuI/Au devices with different deposition conditions 
+of CSS-CdTe. 
+CSS Condition JSC (mA/cm2) V OC (V) FF PCE (%) PCE Drops 
+5.0 torr 25.00 0.39 0.52 5.05 38% After 01 month 20.87 0.33 0.46 3.13 
+7.9 torr 21.90 0.63 0.49 6.92 10% 
+0.00.10.20.30.40.5
+0
+5
+10
+15
+20
+25
+30
+Cu/Au (After 01 month)
+Cu/Au
+CuI/Au (After 01 month)
+Current density (mA/cm
+2
+)
+Voltage (V)
+CuI/Au
+(a)
+-0.4 -0.2 0.0 0.2 0.4 0.6 0.8 1.0
+10
+-9
+10
+-8
+10
+-7
+10
+-6
+10
+-5
+10
+-4
+10
+-3
+10
+-2
+J0=1.5X10-7Acm2
+Current density (A/cm
+2
+)
+Voltage (V)
+CuI/Au
+Cu/Au
+(b)
+J0=3.5X10-9Acm2
+0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7
+-5
+0
+5
+10
+15
+20
+25
+Current density (mA/cm
+2
+)
+Voltage (V)
+       7.9 torr
+(After 01 month)
+       5.0 torr
+(After 01 month)
+5.0 torr
+7.9 torr
+(a)
+-0.6 -0.4 -0.2 0.0 0.2 0.4 0.6 0.8 1.0
+10
+-11
+10
+-10
+10
+-9
+10
+-8
+10
+-7
+10
+-6
+10
+-5
+10
+-4
+10
+-3
+10
+-2
+10
+-1
+(b)
+Current density (A/cm
+2
+)
+Voltage (V)
+J0=1.1X10
+-10
+A/cm
+2
+J0=1.5X10
+-7
+A/cm
+2
+5.0 torr
+7.9 torr
+Figure 9. J–V curves of CBD-CdS/CSS-CdTe solar cells with a Cu/Au and CuI/Au back contact
+(a) under illumination of 100 mW/cm2 with AM1.5 ﬁlter and (b) the semi-logarithmic J–V character-
+istics of CBD-CdS/CSS-CdTe solar cells with Cu/Au and CuI/Au back contact in dark.
+Table 2. Photovoltaic parameter measured instant after fabrication and after one month of CdS/CdTe
+devices with CuI/Au and Cu/Au back contacts.
+Device JSC (mA/cm2) VOC (V) FF PCE (%)
+Cu/Au 23.71 0.44 0.44 4.57
+Cu/Au After 01 month 18.78 0.37 0.34 2.35
+CuI/Au 25.00 0.39 0.52 5.05
+CuI/Au After 01 month 20.87 0.33 0.46 3.13
+3.4. Inﬂuence of Fabrication Conditions on J–V Characteristics of CdS/CdTe/CuI/Au Device
+The inﬂuence of different growth conditions of CSS-CdTe on the photovoltaic perfor-
+mance of the device was also analyzed with CSS-CdTe growth conditions of 5.0 torr and

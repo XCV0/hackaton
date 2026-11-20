@@ -1,0 +1,84 @@
+Datasets
+Pre-training
+Data
+Data Cleaning
+Multi-domain
+Documents
+LLM
+Document Logical
+Outlines
+Simulate Domain
+Experts
+Multi-path
+Sampling
+Structured Chunks 
+and Core Content
+...
+Chunk Clarity and
+Extraction Completeness
+Optimal
+Outcome
+Training Data
+Optimizing SLM
+MemReader
+Inference
+Document Memories
+Answer
+Frozen Parameters
+LLM
+Finance
+Law
+Education
+Medical 
+News
+Industrial
+...
+...
+Sliding Window
+Processing
+Data 
+Balancing
+Updating Parameters
+ 
+Three-layer
+Memory 
+Ranking List
+Retrieval
+Scoring
+Generating
+Response
+Parallel
+Acceleration
+Scenario-aware 
+Memory Extraction
+Text
+Hidden States
+of SLM
+Text
+Reverse
+Construction 
+Chain Reasoning of
+Memory Extraction
+Figure 1 Overview of the entire process of our MoM framework: Logical outline generation, multi-path memory
+extraction and evaluation, reverse CoM construction, as well as three-layer retrieval mechanism.
+domain-specificity, structural organization, and completeness. Formally, we define the document memory
+corresponding to a document D as a triplet: Mdoc = {O, C, A}, where:
+• O (Outline): Represents the macro-logical structure of the document. It is an ordered set composed
+of core topics, O = {o1, o2, . . . , on}, providing a high-level view and indexing framework for document
+information organization.
+• C (Core Content): Represents core viewpoints of the document. It is a highly condensed set of knowledge
+points extracted from the content corresponding to each outline node oi, C = {c1, c2, . . . , cn}.
+• A (Atomic Chunks): Represents the structured, fine-grained content segmentation of the original
+document D guided by O. A = {a1, a2, . . . , an} exhibit stronger semantic cohesion compared to
+traditional segmentation methods.
+3.1.2 Scenario-aware Document Memory Extraction
+To generate high-quality document memory, we design an extraction process that incorporates expert
+simulation, multi-path sampling, and multi-dimensional evaluation.
+We initially leverage a highly capable LLM, designated as the guiding model MG, to emulate the expertise
+of specialists within particular domains. Through the crafting of scenario-aware prompts, we steer MG to
+perform a comprehensive analysis of the input document D, resulting in the generation of its logical outline O.
+Following this, with O serving as a structural framework, we instruct MG to further distill and refine the
+core content C as well as the corresponding atomic chunks A for each individual outline.
+Considering the randomness and limitations of single generation, we introduce a multi-path sampling strat-
+egy. By adjusting the decoding parameters of MG, we generate N candidate document memory sets
+4

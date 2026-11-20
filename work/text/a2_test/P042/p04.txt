@@ -1,0 +1,112 @@
+719
+regulations on printing and distribution, explicitly
+prohibiting the publication of material critical of
+the French Empire (Jensen, 2011). Similarly, in
+France between 1800 and 1811, newspapers
+were rapidly closed, and the founding of new
+journals was forbidden under a decree passed on
+January17, 1800 (Dwyer,2015). Thesemeasures
+collectively curtailed the circulation of information
+and restricted the diversity of perspectives. It is
+therefore not surprising that most of the retrieved
+chunks are English: English data come from
+the US and UK, two countries who have never
+experienced direct ruling from the Napoleonic
+Empire, with the UK strongly opposing Napoleon.
+Thus, to reflect the real world scenarios often
+encountered at CH institutions, we decide not to
+balance the dataset.
+RAG experiments We frame our perspective
+task3 as a Question-Answering task. We asked
+three historians with expertise in early 19th century
+Europe to help us devise 10 questions addressing
+Napoleon’s ruling, his character, and how he be-
+come Emperor. Questions were divided into two
+equal groups: five questions with a neutral tone
+(e.g., “Who was Napoleon Bonaparte?”) and five
+primed-to-bias (e.g., “Was Napoleon Bonaparte a
+hero?”). Questions were initially written in English
+and subsequently translated into French and Dutch
+by native speakers. The full set of questions can
+be found in Appendix A.
+For the retrieval component, document chunks
+and questions are embedded using distiluse-
+base-multilingual-cased-v1 (Reimers and
+Gurevych, 2019) and indexed into a FAISS vector
+storage (Johnson et al., 2019; Douze et al., 2024).
+Document chunks are retrieved using the Maximal
+Marginal Relevance (MMR) criterion, which aims to
+balance redundancy of retrieved document chunks
+and their relevance to the query, with cosine simi-
+larity used as distance metric. We initially retrieve
+the top 40 most similar chunks, and retain only the
+top 20 most diverse. These documents are passed
+to a re-ranker based on ColBERT-v2 (Santhanam
+et al., 2022) and only the top three are retained and
+passed to the LLMs to generate the answers.
+For the answer generation, we have selected
+three multilingual models of different sizes, rang-
+ing from small to very large, from the same
+family, namely Qwen3-4B, Qwen3-30B-A3B, and
+Qwen3-235B-A22B.Wesetthe temperature to
+0.6 and max_new_tokens to 300 for all models.
+We designed question prompts (Appendix B) in
+each of the three languages and the models were
+instructed to produce responses in the correspond-
+3The corresponding code for the experimental setup,
+prompts, questions and answers can be found at
+https://github.com/imruhi/perspectiveRAG.
+ing language. Each question is answered by each
+model ten times, although we retrieved the docu-
+ment chunks only once. This means that for each
+model and each setting, we collect and analyze
+100 answers per language. RAG answers are com-
+pared against a baseline version where the models
+rely on their parametric knowledge.
+Evaluation set-up To comprehensively assess
+variation across LLM outputs, we employ multiple
+evaluation strategies, each capturing different lev-
+els of granularity. The evaluation metrics range
+from general text similarity measures to more fine-
+grained linguistic analyses. Specifically, we use
+ROUGE-L (F1) to compare model outputs within a
+single language and BERTScore to assess similar-
+ity both within and across languages.
+To quantify differences in perspectives, we ex-
+tracted Fillmorean frames (Fillmore, 1985; Fill-
+more et al., 2006) from the generated answers in
+the two experiment settings, following Minnema
+et al. (2022). For English, we extracted frames
+using frame-semantic-transformer (Chanin,
+2023). The reported4 F1scores for thetasks oftrig-
+geridentification,frameclassificationandargument
+extraction on FrameNet 1.7 are 0.74, 0.89 and 0.75
+respectively. For French and Dutch, we resorted
+to machine translation into English using DeepL
+and re-run the same model. To determine whether
+the extracted frames from the translated texts are
+reasonable, we run a multilingual BERTopic model
+fitted on the original untranslated answers to qual-
+itatively assess if any topics from the original un-
+translated answers correlate with frames from the
+translated answers.
+We integrated the frame analysis by examining
+the syntactic complexity and diversity of the an-
+swers through the Profiling UD pipeline (Brunato
+et al., 2020). In particular, we fit a multinomial lo-
+gistic regression model to the features extracted
+by Profiling UD to quantify the influence of these
+linguistic characteristics on answer variation.
+4. Results
+In the discussion of the results, baseline will be
+used to refer to answers from the models’ para-
+metric knowledge, and augmented for the RAG
+setting. The total number of answers we have ana-
+lyzed is 1,800. Our analyses focus on evaluating
+the variability in content and syntax of augmented
+answers when compared to baseline answers in
+(i) each language and (ii) between languages. We
+also evaluate the similarity in content between the
+augmented answers and its respective retrieved
+4Foracompleteoverviewoftheevaluationandresults,
+refer to Chanin (2023).

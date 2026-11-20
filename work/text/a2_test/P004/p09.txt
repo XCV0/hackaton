@@ -1,0 +1,104 @@
+reasoning. LCR-RAG thus represents a promising
+approach toward developing more reliable, inter-
+pretable, and efficient AI systems capable of tack-
+ling intricate multi-step reasoning problems.
+Limitations
+Despite our efforts to thoroughly evaluate LCR-
+RAG, several limitations remain. First, while
+the neuro-symbolic verifier provides explicit logic-
+aware feedback, the current symbolic rule set is
+manually designed and fixed, which may limit
+adaptability to new domains. Extending the frame-
+work with automatically induced or adaptive rules
+is a promising direction for future work. Second,
+although LCR-RAG improves logical consistency
+through iterative query optimization, it does not yet
+perform deeper reasoning verification and correc-
+tion beyond the current optimization loop, which
+we leave for future exploration.
+Acknowledgments
+The research in this article is supported by the
+National Natural Science Foundation of China
+(U22B2059, 62276083), Key Research and De-
+velopment Program of Heilongjiang Province
+(2022ZX01A28). Besides, We would like to ex-
+press our gratitude to Du Xiaoman Technology for
+their support of our research paper.
+References
+Mistral AI. 2025. Introducing mistral 3. https://
+mistral.ai/news/mistral-3.
+AI@Meta. 2024. Llama 3 model card.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations.
+Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann,
+Trevor Cai, Eliza Rutherford, Katie Millican, George
+van den Driessche, Jean-Baptiste Lespiau, Bogdan
+Damoc, Aidan Clark, Diego de Las Casas, Aurelia
+Guy, Jacob Menick, Roman Ring, T. W. Hennigan,
+Saffron Huang, Lorenzo Maggiore, Chris Jones, Al-
+bin Cassirer, and 9 others. 2021. Improving language
+models by retrieving from trillions of tokens. In In-
+ternational Conference on Machine Learning.
+Fengxiang Cheng, Haoxuan Li, Fenrong Liu, Robert van
+Rooij, Kun Zhang, and Zhouchen Lin. 2025. Empow-
+ering llms with logical reasoning: A comprehensive
+survey. Preprint, arXiv:2502.15652.
+DeepSeek-AI. 2025. Deepseek-r1: Incentivizing rea-
+soning capability in llms via reinforcement learning.
+Preprint, arXiv:2501.12948.
+Shahul Es, Jithin James, Luis Espinosa Anke, and
+Steven Schockaert. 2024. RAGAs: Automated evalu-
+ation of retrieval augmented generation. In Proceed-
+ings of the 18th Conference of the European Chap-
+ter of the Association for Computational Linguistics:
+System Demonstrations, pages 150–158, St. Julians,
+Malta. Association for Computational Linguistics.
+Luyu Gao, Xueguang Ma, Jimmy Lin, and Jamie Callan.
+2023a. Precise zero-shot dense retrieval without rel-
+evance labels. In Proceedings of the 61st Annual
+Meeting of the Association for Computational Lin-
+guistics (Volume 1: Long Papers), pages 1762–1777,
+Toronto, Canada. Association for Computational Lin-
+guistics.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Qianyu Guo,
+Meng Wang, and Haofen Wang. 2023b. Retrieval-
+augmented generation for large language models: A
+survey. ArXiv, abs/2312.10997.
+Bishwamittra Ghosh, Sarah Hasan, Naheed Anjum
+Arafat, and Arijit Khan. 2025. Logical consistency of
+large language models in fact-checking. In The Thir-
+teenth International Conference on Learning Repre-
+sentations.
+Claire Glanois, Zhaohui Jiang, Xuening Feng, Paul
+Weng, Matthieu Zimmer, Dong Li, Wulong Liu, and
+Jianye Hao. 2022. Neuro-symbolic hierarchical rule
+induction. In Proceedings of the 39th International
+Conference on Machine Learning, volume 162 of
+Proceedings of Machine Learning Research, pages
+7583–7615. PMLR.
+Team GLM, Aohan Zeng, Bin Xu, Bowen Wang, Chen-
+hui Zhang, Da Yin, Diego Rojas, Guanyu Feng, Han-
+lin Zhao, Hanyu Lai, Hao Yu, Hongning Wang, Jiadai
+Sun, Jiajie Zhang, Jiale Cheng, Jiayi Gui, Jie Tang,
+Jing Zhang, Juanzi Li, and 37 others. 2024. Chatglm:
+A family of large language models from glm-130b to
+glm-4 all tools. Preprint, arXiv:2406.12793.
+Pengcheng He, Xiaodong Liu, Jianfeng Gao, and
+Weizhu Chen. 2021. Deberta: Decoding-enhanced
+bert with disentangled attention. In International
+Conference on Learning Representations.
+Jerry Huang, Siddarth Madala, Risham Sidhu, Cheng
+Niu, Hao Peng, Julia Hockenmaier, and Tong Zhang.
+2025. Rag-rl: Advancing retrieval-augmented gen-
+eration via rl and curriculum learning. Preprint,
+arXiv:2503.12759.
+Pengcheng Jiang, Jiacheng Lin, Lang Cao, Runchu Tian,
+SeongKu Kang, Zifeng Wang, Jimeng Sun, and Ji-
+awei Han. 2025. Deepretrieval: Hacking real search
+engines and retrievers with large language models via
+reinforcement learning. Preprint, arXiv:2503.00223.
+17908

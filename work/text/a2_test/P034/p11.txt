@@ -1,0 +1,52 @@
+3.2 Dataset Construction
+A consistent and high-quality corpus is essential for testing the reliability of retrieval-
+augmented legal analysis. Legal documents are typically available as scanned images,
+with mixed quality and layout. Accurate computation of legal indicators requires
+both clean textual content as well as meaningful metadata. Our scope covers African
+countries where French is an administrative language. Documents were acquired from
+FAOLEX 1, a database maintained by the Food and Agriculture Organization of
+the United Nations. It contains a vast collection of legislative, regulatory, and policy
+texts covering areas such as agriculture, natural resources, and the environment on a
+global scale. This source was chosen for its comprehensive coverage. This study focuses
+on African countries where French is used as an administrative language. We pro-
+cessed the corpus through the N2I-RAG preprocessing pipeline described in Section
+2.2. All documents were processed and cleaned using the hybrid OCR system and
+the Visual–Language Model (VLM), which corrected any noise present in the text.
+They were then segmented into articles, enhanced with the standardized metadata,
+and embedded using BGE-M3 representations. Vectors were stored in ChromaDB for
+semantic retrieval. Through this process, we have built a comprehensive database
+consisting of five distinct collections, totaling 10,596 articles, structured and indexed
+for research, analysis, and automated legal reasoning tasks, as shown in the Table
+3. We intentionally introduced three additional prohibitions to obtain a total of five
+collections in addition to the initial two, in order to challenge the retrieval process.
+Therefore, our vector database does not only contain articles related to our case study.
+Table 3 Number of Articles in the Corpus by Country and Ban
+Country
+Ban
+Coastal
+Construction
+Whaling Bottom
+Trawling
+Hydrocarbon
+discharge
+Plastic
+Bags
+Algeria 43 107 67 1,052 -
+Benin 109 223 92 762 -
+Cameroon - 105 105 93 24
+Congo - 155 16 246 11
+Ivory Coast 66 121 362 136 14
+Djibouti - 12 - - -
+France - 13 - - -
+Gabon 163 18 63 163 25
+Guinea 1,129 469 33 2,538 -
+Morocco 56 5 24 59 15
+Mauritania 701 101 67 - 8
+Niger - - - - 15
+DRC - 91 - - 17
+Senegal 363 138 - - 42
+Togo - 28 - - 18
+Tunisia 100 60 - 147 6
+Total 2,730 1,646 829 5,196 195
+1 https://www.fao.org/faolex
+11

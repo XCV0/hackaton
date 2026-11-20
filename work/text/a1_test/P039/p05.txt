@@ -1,0 +1,86 @@
+Materials 2022, 15, 8356 5 of 10
+Materials 2022, 15, x FOR PEER REVIEW 5 of 11 
+ 
+ 
+ 
+Figure 2. Grain size distribution in Sb2Se3 seed layers deposited at (a) −4 cm, (b) 0 cm, and (c) +4 cm 
+distances between zone edge and sample. Grain volume was calculated by multiplying seed layer 
+thickness with measured grain surface area estimated from SEM image. 
+Sb2Se3 seed layer phase composition and grain crystallographic orientation was stud-
+ied using XRD. All peaks were assigned to the orthorhombic phase of Sb2Se3 (PDF #01-
+089-0821) and FTO (PDF #00-041-1445) whose reflections originated from the substrate. 
+Phase composition did not depend on the sample heating zone distance (Figure 3a). How-
+ever, the full width at half maximum (FWHM) did correlate with the distance: FWHM 
+decreased exponentially as the distance changed from positive to negative (Figure 3b). 
+This is a consequence of gradually increasing substrate temperature when the sample is 
+positioned inside the heating zone. This also means that the crystalline quality of the seed 
+layer improved as Tsub was increased, although it started to saturate at d < 0 cm. Note that 
+while grain size estimated from SEM was increasing when d was changed to −4 cm, the 
+FWHM of XRD peaks did not change substantially from 0 to −4 cm. This shows that grain 
+size is not an indication of crystalline quality. XRD peak FWHM is related to the size of 
+the crystalline domain, which is often wrongly directly compared with the grain size. 
+Grain orientation was estimated by taking the ratio of the peak area of the most in-
+tensive XRD peaks of planes that are orientated with a ribbon axis parallel to the surface, 
+i.e., (020) and (120), and planes where the ribbon axis is at a certain angle, such as (211) 
+and (221). Note that the Voigt function was used for fitting XRD peaks and calculating the 
+peak area and FWHM. We found that grain orientation did not depend heavily on the 
+distance in the −4–+2 cm range, but a stark change occurred at +4 cm. It also coincided 
+with a change in grain shape (Figure 1f); therefore, the elongated nanorod-like shape of 
+the grains was indicative of a ribbon parallel to the surface orientation and was also ob-
+served by other authors [14,16,21]. This shows that under low deposition rates and sub-
+strate temperatures, grains tend to orient themselves in a way that maximizes the van der 
+Waals surface area. 
+ 
+Figure 2. Grain size distribution in Sb2Se3 seed layers deposited at (a) −4 cm, (b) 0 cm, and (c) +4 cm
+distances between zone edge and sample. Grain volume was calculated by multiplying seed layer
+thickness with measured grain surface area estimated from SEM image.
+Materials 2022, 15, x FOR PEER REVIEW 6 of 11 
+ 
+ 
+ 
+Figure 3. (a) XRD patterns of Sb2Se3 seed layer deposited at different sample heating zone distances. 
+All XRD peaks were assigned to orthorhombic Sb2Se3 phase (PDF 01-089-0821) and SnO2 (PDF 00-
+041-1445). (b) FWHM and ratio of (020) + (120) peak area to (221) + (211) as a function of sample 
+heating zone distance. 
+Based on the criteria for the seed layer, we found that the optimal d was in the −4–0 
+cm range. In this region, deposited seed layers were compact, fully covered the substrate 
+surface, were of high crystalline quality (in terms of FWHM) and had favourable grain 
+orientations. For the Sb2Se3 absorber deposition, we selected −2 cm as the optimal distance. 
+The reason is that, at −4 cm, there is a higher risk of seed layer re-evaporation, whereas at 
+0 cm, it required a longer annealing step duration to increase Tsub for the absorber deposi-
+tion. 
+3.2. Solar Cell Fabrication and Performance 
+Having identified optimal seed layer deposition conditions, the complete Sb2Se3 ab-
+sorber was grown on the top of the seed layer in the last deposition process step (Figure 
+S2a). This included ramping the Tsrc up to 520–525 °C and maintaining it for a fixed period. 
+The top annealing temperature duration varied from 1 to 4 min, which resulted in the final 
+absorber’s thickness being in the 400–800 nm range. Note that thickness variation did not 
+follow deposition time linearly (Figure 4a), and as can be seen, the growth rate was higher 
+in the first few minutes and then started to decline. We believe this was related to the 
+initial Tsrc overshoot (Figure S2), which always occurs with the resistive-type furnaces 
+when a high-temperature ramp rate is used. The surface morphology of the Sb2Se3 layer 
+did not depend on the deposition time (Figure S5) and remained almost the same, as 
+shown in the inset of Figure 4a. The phase composition of the absorber was the same as 
+that of the seed layer—orthorhombic Sb2Se3. The grain orientation did not change signifi-
+cantly with absorber thickness, although (hkl, l ≠ 0) planes were more prominent than in 
+the seed layer (Figure 4b). Chemical composition was slightly deposition-time-dependent. 
+The longer the deposition time, the more an Sb-rich composition was observed (Table S2). 
+However, the trend was very small (<1 at. %); therefore, we do not expect it to have a 
+significant influence on solar cell performance. Overall, the structural properties of the 
+Sb2Se3 absorber were almost identical, except for thickness. This then allowed us to study 
+how the thickness of the absorber rather than structural characteristics affected the solar 
+cell performance. 
+Figure 3. (a) XRD patterns of Sb2Se3 seed layer deposited at different sample heating zone distances.
+All XRD peaks were assigned to orthorhombic Sb2Se3 phase (PDF 01-089-0821) and SnO2 (PDF
+00-041-1445). (b) FWHM and ratio of (020) + (120) peak area to (221) + (211) as a function of sample
+heating zone distance.
+Grain orientation was estimated by taking the ratio of the peak area of the most
+intensive XRD peaks of planes that are orientated with a ribbon axis parallel to the surface,
+i.e., (020) and (120), and planes where the ribbon axis is at a certain angle, such as (211) and
+(221). Note that the Voigt function was used for ﬁtting XRD peaks and calculating the peak
+area and FWHM. We found that grain orientation did not depend heavily on the distance in
+the −4–+2 cm range, but a stark change occurred at +4 cm. It also coincided with a change
+in grain shape (Figure 1f); therefore, the elongated nanorod-like shape of the grains was
+indicative of a ribbon parallel to the surface orientation and was also observed by other
+authors [14,16,21]. This shows that under low deposition rates and substrate temperatures,
+grains tend to orient themselves in a way that maximizes the van der Waals surface area.

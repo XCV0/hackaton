@@ -1,0 +1,99 @@
+2025; Ranaldi et al., 2025a). In this regard, in
+our follow-up, we investigated different discrepan-
+cies and proposed techniques for manipulating and
+transferring knowledge in English (Ranaldi et al.,
+2025d) and in a multilingual scenario (Ranaldi
+et al., 2025c) as well as reasoning capabilities
+(Ranaldi and Pucci, 2025). Although this work has
+demonstrated the effectiveness of the proposed ap-
+proach, limitations remain: the models are highly
+susceptible to changes in prompts in multilingual
+scenarios, especially when non-parametric knowl-
+edge is present (Pucci and Ranaldi, 2025). This
+latest phenomenon opens the way to further ap-
+plications, once again highlighting the strategic
+importance of these architectures and studies.
+8 Conclusion
+RAG has shown great potential in boosting the per-
+formance of LLMs on knowledge-intensive tasks.
+Yet, scenarios beyond English represent a signif-
+icant limitation. We proposed strategies to miti-
+gate these restrictions by introducing retrieval ex-
+pansion techniques and interventions on retrieved
+documents. We then analysed the performance
+of different LLMs in multilingual tasks. The re-
+sults demonstrate that multilingual retrieval outper-
+forms monolingual and greedy query translation
+approaches. This research underscores the need
+to understand RAG pipelines beyond English to
+ensure reliable multilingual access and improve
+model performance across diverse languages.
+Acknowledgements
+This work is funded by EU Horizon Europe (HE)
+Research and Innovation programme grant No
+101070631, and UK Research and Innovation un-
+der the UK HE funding grant No 10039436.
+Limitations
+Due to the limitations imposed by the evaluation
+benchmarks and the cost of the closed-source mod-
+els, we conducted tests on three tasks in different
+languages, which only scratches the surface of the
+world’s vast array of languages. In the future, it
+will be appropriate to study the generality of our
+approach compared to other closed-source large
+language models. Additionally, it would be inter-
+esting to investigate the impact of using additional
+knowledge bases such as DBpedia.
+Ethics Statemet
+In our work, ethical topics were not addressed.
+The data comes from open-source benchmarks,
+and statistics on language differences in commonly
+used pre-training data were obtained from official
+sources without touching on gender, sex, or race
+differences.
+References
+Akari Asai, Jungo Kasai, Jonathan Clark, Kenton Lee,
+Eunsol Choi, and Hannaneh Hajishirzi. 2021. XOR
+QA: Cross-lingual open-retrieval question answering.
+In Proceedings of the 2021 Conference of the North
+American Chapter of the Association for Computa-
+tional Linguistics: Human Language Technologies,
+pages 547–564, Online. Association for Computa-
+tional Linguistics.
+Akari Asai, Sewon Min, Zexuan Zhong, and Danqi
+Chen. 2023. Retrieval-based language models and
+applications. In Proceedings of the 61st Annual
+Meeting of the Association for Computational Lin-
+guistics (Volume 6: Tutorial Abstracts), pages 41–46,
+Toronto, Canada. Association for Computational Lin-
+guistics.
+Laurie Burchell, Alexandra Birch, Nikolay Bogoychev,
+and Kenneth Heafield. 2023. An open dataset and
+model for language identification. In Proceedings
+of the 61st Annual Meeting of the Association for
+Computational Linguistics (Volume 2: Short Papers),
+pages 865–879, Toronto, Canada. Association for
+Computational Linguistics.
+Nadezhda Chirkova, David Rau, Hervé Déjean,
+Thibault Formal, Stéphane Clinchant, and Vassilina
+Nikoulina. 2024. Retrieval-augmented generation in
+multilingual settings.
+Jonathan H. Clark, Eunsol Choi, Michael Collins, Dan
+Garrette, Tom Kwiatkowski, Vitaly Nikolaev, and
+Jennimaria Palomaki. 2020. TyDi QA: A benchmark
+for information-seeking question answering in ty-
+pologically diverse languages. Transactions of the
+Association for Computational Linguistics, 8:454–
+470.
+Cohere Inc. 2024. Command-r documentation.
+https://docs.cohere.com/v2/docs/
+command-r. Accessed: 2024-12-08.
+Common Crawl. 2021. Common crawl 2021. Web.
+Accessed: 2023-12-12.
+Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang,
+Hengyun Li, Dawei Yin, Tat-Seng Chua, and Qing
+Li. 2024. A survey on rag meeting llms: Towards
+retrieval-augmented large language models.
+Luyu Gao, Zhuyun Dai, Panupong Pasupat, Anthony
+Chen, Arun Tejasvi Chaganty, Yicheng Fan, Vincent
+705

@@ -1,0 +1,12 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D018,DV-UNT-L1,DV-UNT,1,back_contact,Mo,,,,,,,Mo-coated glass substrate
+D018,DV-UNT-L2,DV-UNT,2,absorber,CIGS,1500,nm,"pulsed hybrid reactive magnetron sputtering, two-stage",,,,~1500 nm Cu-rich CIGS первой стадии плюс ~600 nm In-Se второй стадии; суммарная толщина не указана
+D018,DV-UNT-L3,DV-UNT,3,ETL,CdS,,,"chemical bath deposition, 60 °C",,,,buffer layer
+D018,DV-UNT-L4,DV-UNT,4,ETL,i-ZnO,50,nm,"RF sputtering, RT, 40 W",,,"Ar, 5.6x10-3 mbar","intrinsic ZnO, ~50 nm"
+D018,DV-UNT-L5,DV-UNT,5,front_contact,ZnO:Al,200,nm,"RF sputtering, RT, 60 W",,,"Ar, 5.6x10-3 mbar",~200 nm; без фронтальной сетки
+D018,DV-CST-L1,DV-CST,1,back_contact,Mo,,,,,,,Mo-coated glass substrate
+D018,DV-CST-L2,DV-CST,2,absorber,CIGS,1500,nm,"pulsed hybrid reactive magnetron sputtering, two-stage",,,,~1500 nm Cu-rich CIGS первой стадии плюс ~600 nm In-Se второй стадии; суммарная толщина не указана
+D018,DV-CST-L3,DV-CST,3,passivation,CsCO3 (Cs-ST),,,"spin-coating, 1000 rpm, 60 s; 0.01 g CsCO3 in 10 ml DI water",400,2 min,"vacuum, ~6x10-6 mbar",Cs solution treatment; затем rinsed with DI water
+D018,DV-CST-L4,DV-CST,4,ETL,CdS,,,"chemical bath deposition, 60 °C",,,,buffer layer
+D018,DV-CST-L5,DV-CST,5,ETL,i-ZnO,50,nm,"RF sputtering, RT, 40 W",,,"Ar, 5.6x10-3 mbar","intrinsic ZnO, ~50 nm"
+D018,DV-CST-L6,DV-CST,6,front_contact,ZnO:Al,200,nm,"RF sputtering, RT, 60 W",,,"Ar, 5.6x10-3 mbar",~200 nm; без фронтальной сетки

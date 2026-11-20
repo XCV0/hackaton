@@ -1,0 +1,98 @@
+Faithful Attribution Our method, grounded in
+additive interpretability theory (Agarwal et al.,
+2021), decomposes model predictions into a sum
+of contributions from each input, analyzing the sig-
+nificance of source tokens to target tokens based
+on contribution scores. Perturbation-based method
+is the most classic attribution algorithm, including
+SHAP (Lundberg and Lee, 2017), LIME (Ribeiro
+et al., 2016), AtMan (Deiseroth et al., 2023), etc.
+These methods exhibit significant computational
+complexity in the application of LLMs. For the
+transformer architecture, some scholars utilize at-
+tention mechanisms (Abnar and Zuidema, 2020;
+Chefer et al., 2021) to capture causal relationships.
+However, these methods lack category specificity
+and cannot faithfully interpret the final predictions.
+Based on an improved backpropagation method,
+the propagation rules are customized between lay-
+ers to trace back from the model output to the in-
+put. Classic methods include Input × Gradient (Si-
+monyan et al., 2013), LRP (Bach et al., 2015; Voita
+et al., 2021), SmoothGrad (Smilkov et al., 2017),
+etc. AttenLRP (Achtibat et al., 2024) employed in
+this paper is an improved backpropagation method
+that can effectively handle nonlinear relationships.
+3 Methodology
+3.1 Task Formulation
+Let D = (Qi, Ai)|D| i=1 denote a RAG dataset consist-
+ing of |D| samples, where each sample pair com-
+prises a user query Qi and its corresponding answer
+Ai. Each answer is based on contexts retrieved
+from a knowledge base C = {Cj }|C| j=1, where Cj
+represents a text block. Given a question Qi, a re-
+trieval model parameterized by ϕ first retrieves the
+most relevant text blocks from C to form a prompt,
+which is then input into a generative model pa-
+rameterized by θ to generate the answer Ai. The
+complete process of RAG is defined as follows:
+P (Ai|Qi) = Pϕ(Cj |Qi)Pθ(Ai|Qi, Cj )
+Pθ(Ai|Qi, Cj ) =
+n∏
+k=1
+Pθ(ak|a1, · · · , ak−1; Cj ; Qi)
+(1)
+where n is the total number of tokens in the target
+answer Ai. Cj represents the context retrieved by
+the retriever in the RAG system based on Qi. We
+introduce a discriminator parameterized by γ to
+determine whether Ai contains hallucinations:
+P (Li|Qi, Cj ) = Pθ(Ai|Qi, Cj )Pγ (Li|Qi, Cj , Ai)
+(2)
+where label Li indicates whether the sample ex-
+hibits hallucinations. The framework of our
+method is shown in Fig. 2.
+3.2 Contribution Score Calculation
+The LRP algorithm is used to calculate the contri-
+bution score. The basic assumption of LRP is that
+a function fj with N input features x = {xi}N i−1
+can be decomposed into independent contributions
+of a single input variable Ri←j , representing the
+amount of output j that can be attributed to input
+i. When these contributions are added up, they are
+proportional to the original function value.
+fj (x) ∝ Rj =
+N∑
+i
+Ri←j (3)
+The decomposition property of LRP leads to an
+important conservation property (Achtibat et al.,
+2024), which ensures that the sum of all contribu-
+tion scores in each layer remains constant. This
+feature allows for meaningful and faithful attribu-
+tion, as the scale of each contribution score can be
+associated with the output of the original function.
+In the generation stage, when generating each
+token ak, the generator simultaneously outputs a
+correlation vector ⃗rk based on internal gradients
+and predefined LRP rules (see Appendix C for de-
+tails), which is used to quantify the correlation
+between ak and each contextual token Cj . By ag-
+gregating all correlation scores ⃗rk of a token during
+the generation process, we can obtain a correlation
+matrix Ri.
+3.3 Internal Reasoning Graph Construction
+Due to potential semantic biases in the model dur-
+ing training, which is caused by the solidification of
+pre-trained corpora and the prejudice of the model,
+the semantic meaning of certain words understood
+by LLMs may differ from their meaning in the
+real world. This results in a gap between the rea-
+soning process understood by humans based on
+chain-of-thought and the reasoning process actu-
+ally intended by LLMs. That is, there are some
+thinking outputs that cater to human preferences,
+while the model’s true reasoning process does not
+rely on these thinking outputs or follow thinking
+shortcuts. The correlation matrix Ri calculated in
+27828

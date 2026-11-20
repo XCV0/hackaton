@@ -1,0 +1,81 @@
+10773
+Dataset Model d-a d-p d-r d-f c-a c-p c-r c-f
+SIGHAN13
+BERT+FixedFew-Shot 1.30 1.11 1.12 0.20 0.00 0.00 0.00 0.00
+ReaLiSe+FixedFew-Shot 0.20 0.20 0.20 0.20 0.00 0.00 0.00 0.00
+CRASpell+FixedFew-Shot 32.30 43.40 31.51 36.52 30.90 41.42 30.07 34.84
+SCOPE+FixedFew-Shot 64.40 72.37 63.95 67.90 56.69 63.40 56.02 59.48
+GLM4+RAGFew-Shot+IDS 47.40 62.14 46.65 53.29 42.90 55.97 42.02 48.00
+GPT3.5+RAGFew-Shot+IDS 48.10 58.52 47.37 52.36 45.40 55.09 44.59 49.29
+SIGHAN14
+BERT+FixedFew-Shot 12.42 3.14 5.57 4.01 9.69 0.00 0.00 0.00
+ReaLiSe+FixedFew-Shot 1.41 0.57 1.15 0.76 0.84 0.00 0.00 0.00
+CRASpell+FixedFew-Shot 52.73 31.97 25.58 28.42 51.79 29.57 23.65 26.28
+SCOPE+FixedFew-Shot 64.97 50.78 43.65 46.94 62.24 44.29 38.07 40.95
+GLM4+RAGFew-Shot+IDS 49.34 30.16 26.15 28.01 47.74 26.39 22.88 24.51
+GPT3.5+RAGFew-Shot+IDS 56.87 40.99 41.54 41.26 54.99 37.19 37.69 37.44
+SIGHAN15
+BERT+FixedFew-Shot 22.90 6.69 10.53 8.18 17.81 0.11 0.18 0.14
+ReaLiSe+FixedFew-Shot 5.54 1.91 3.69 2.52 3.81 0.09 0.18 0.12
+CRASpell+FixedFew-Shot 63.36 53.69 39.00 45.18 62.09 50.13 36.41 42.18
+SCOPE+FixedFew-Shot 73.09 67.19 55.26 60.64 69.27 57.75 47.5 52.12
+GLM4+RAGFew-Shot+IDS 60.27 46.8 41.96 44.25 57.64 40.82 36.6 38.6
+GPT3.5+RAGFew-Shot+IDS 63.00 51.50 50.65 51.07 59.55 44.36 43.62 43.99
+CSCD-IME(500)
+BERT+FixedFew-Shot 10.40 4.58 8.97 6.06 6.06 0.00 0.00 0.00
+ReaLiSe+FixedFew-Shot 0.40 0.40 0.85 0.54 0.20 0.20 0.42 0.27
+CRASpell+FixedFew-Shot 51.20 35.35 32.48 33.85 50.60 33.95 31.20 32.52
+SCOPE+FixedFew-Shot 28.19 16.81 24.78 20.03 27.20 15.36 22.64 18.30
+GLM4+RAGFew-Shot+IDS 58.00 50.47 23.08 31.67 57.20 46.73 21.37 29.33
+GPT3.5+RAGFew-Shot+IDS 61.60 60.71 29.06 39.31 60.80 57.14 27.35 36.99
+OAD
+BERT+FixedFew-Shot 15.60 3.75 6.40 4.73 12.40 0.00 0.00 0.00
+ReaLiSe+FixedFew-Shot 1.60 0.80 1.60 1.07 0.80 0.00 0.00 0.00
+CRASpell+FixedFew-Shot 49.40 19.33 11.60 14.50 47.60 13.33 8.00 10.00
+SCOPE+FixedFew-Shot 59.59 38.13 39.20 38.65 52.20 23.73 24.40 24.06
+GLM4+RAGFew-Shot+IDS 65.20 49.47 37.20 42.47 58.40 31.38 23.60 26.94
+GPT3.5+RAGFew-Shot+IDS 57.60 37.31 28.80 32.51 52.20 23.32 18.00 20.32
+Table 2: Main results of all baselines. Bold indicates the best results. The test results of LLMs are the average
+performance of 3 times.
+5.5 Main Results
+Table 2 shows the CSC evaluation results of our
+RagID and other baselines on various datasets. We
+observe that:
+In SIGHAN13, SIGHAN14, and SIGHAN15
+datasets, deep learning model SCOPE achieves the
+best results, outperforming the other models in both
+detection and error correction F1 values. These
+datasets are all sourced from exam essays, essays
+of the latter two datasets are written by non-native
+speakers. Spelling errors in the SIGHAN datasets
+are limited in difficulty and also domain-specific.
+Therefore, both the deep learning model SCOPE
+and the large-scale language model GLM4 excel at
+detecting and correcting these errors. We surmise
+that SCOPE performs better because it has encoun-
+tered more similar errors during training process.
+GPT-3.5 and GLM4, based on the RagID frame-
+work, achieve the best results on CSCD-IME and
+OAD, respectively. In contrast, SCOPE expe-
+riences performance degradation, with an error-
+correcting F1 score 18.69 points behind GPT-3.5
+on CSCD-IME and 2.88 points behind GLM4 on
+OAD. We believe SCOPE’s performance decline
+is due to the multi-domain nature of CSCD-IME
+and OAD, which results in different spelling error
+distributions compared to single-domain datasets.
+The deep learning model struggles to generalize
+across these domains because of parameter con-
+straints and other limitations. Additionally, OAD’s
+advantage over CSCD-IME is smaller because it
+contains denser and more glyph-related errors, pre-
+senting greater challenges for spelling detection
+and correction.
+We observe that deep learning models perform
+better when dataset is homogeneous and has ample
+training data related to dataset. However, experi-
+ments with BERT and ReaLiSe show that even pre-
+trained models with rich knowledge struggle with
+the CSC task without training on large-scale anno-
+tated data. In contrast, LLMs based on the RagID
+framework still perform well in multi-domain and

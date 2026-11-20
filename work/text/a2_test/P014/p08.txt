@@ -1,0 +1,146 @@
+1 2 5 10
+Doc Count
+0.60
+0.62
+0.64
+0.66
+0.68
+0.70
+0.72
+0.74EM Score
+1-Turn EM 2-Turn EM 1-Turn Time 2-Turn Time
+0.00
+0.01
+0.02
+0.03
+0.04
+0.05
+Avg Time/Sample (s)
+Figure 5: Comparison of BrPr-7B on the NQ test set
+(RAG-Bench). Accuracy is measured by EM score,
+while efficiency is evaluated based on inference latency.
+Performance under Incorrect Contexts. Ta-
+ble 4 reports the performance of three models when
+no external documents are provided and when all
+retrieved documents are incorrect. RL–based train-
+ing methods improve the model’s ability to under-
+stand and utilize parametric knowledge, leading to
+a modest increase in the accuracy of parametric
+answers. BrPr demonstrates a stronger capability
+to select correct parametric knowledge in the pres-
+ence of incorrect documents, particularly under the
+2-turn strategy. These findings suggest that our
+approach effectively reconciles parametric priors
+with information from external documents.
+4.4 Accuracy and Efficiency Comparison
+In this section, we evaluate the impact of different
+BrPr variants on both QA performance and com-
+putational efficiency. As illustrated in Figure 5,
+both variants exhibit a marginal degradation in per-
+formance as the number of input documents in-
+creases. Conversely, while inference latency per
+query scales linearly with the document count for
+both methods, the 1-turn variant maintains highly
+competitive reasoning stability while simultane-
+ously mitigating inference latency, achieving a tem-
+poral reduction on the order of 10−2 seconds.
+4.5 Case study
+We present a qualitative comparison between BrPr
+and a RL-trained model (GRPO-RAG) in Fig-
+ure 6. It demonstrates that BrPr effectively resolves
+document conflicts and noise by utilizing para-
+metric knowledge as a semantic anchor, whereas
+GRPO-RAG remains susceptible to external incon-
+sistencies. A detailed analysis with complete in-
+put–output examples is provided in Appendix G.
+Query:WhosangfoursongsonWalktheLine?
+Retrieved Documents
+Doc 1 (relevant): In 2005, 
+she was played by Victoria 
+Hester in the movie "Walk 
+the Line". . On August 8, 
+2009, Carlene Carter played 
+Doc 2 (irrelevant): The song 
+was wriMen by the band's 
+keyboardist David Paich, and 
+the lead vocals were performed 
+by Bobby Kimball …
+Doc3(correct):Wind-up 
+Records released the 
+soundtrack in November 
+2005. It featured four songs 
+by Reese Witherspoon…
+Doc 4 (conﬂicZng): same name 
+released November 15, 2005 by 
+Wind-Up Records. There are 
+four songs performed by  
+Johnny Cash,…
+⚠
+CORRECTANSWER (BrPr-7B-1Turn)
+✅
+Document1 men+ons that Carlene Carter played a role in the 
+movie " Walk the Line ". Document2 men+ons Bobby Kimball 
+as the lead vocalist on the song " Hold the Line ". Document3 
+lists several performers, including Joaquin Phoenix and Reese 
+Witherspoon. Document4 incorrectly a,ributes the 
+performances to Jennifer Aniston. Therefore, the correct 
+answer is Reese Witherspoon. 
+      WRONG ANSWER (GRPO-RAG-7B)
+❌
+Document1 is relevant as it mentions Carlene Carter and mentions her 
+involvement in a song, which suggests she is a musician. Document2 is 
+not relevant as ...Document3 is relevant as it mentions the soundtrack of 
+the film “Walk the Line ”. Document4 is partially relevant as it mentions 
+the soundtrack of the film “ Walk the Line ” and lists several artists who 
+performed the songs likeJohnny Cash. Combining allthe information 
+and my background knowledge about the film “Walk the Line”,I can 
+conclude that Johnny Cashsang the song.
+CORRECT ANSWER (BrPr-7B-2Turn)
+✅
+Firstoutput(w/odocument):"Walk the Line" is a 2005 biographical film about the life of Johnny Cash. The film's soundtrack features 
+several songs, including the title track "Walk the Line", performed by Joaquin Phoenix, who played Johnny Cash in the film.
+Answeroutput(w/prior):Document1 mentions that Carlene Carter was played by Victoria Hester in the movie “Walk the Line ”. 
+Document2 mentions Bobby Kimball as the lead vocalist on the song “Hold the Line”. Document3 lists the performers of the songs on the 
+soundtrack, including Joaquin Phoenix, Reese Witherspoon, etc. Document4 lists the performers as Johnny Cash,referring to the 
+character in the film rather than the actual singer.Therefore, the correct answer is Reese Witherspoon. 
+Standard CoT
+Prior-Guided CoT
+Figure 6: Comparative visualization of reasoning paths.
+Specifically, in the Standard CoT setting, GRPO-RAG
+is misled by conflicting external evidence, whereas BrPr
+leverages implicit internal knowledge to identify the
+correct answer.
+5 Related Work
+While prior work has made strides in addressing
+parametric and single-document conflicts (Zhou
+et al., 2023; Yuan et al., 2024a), recent studies
+highlight the difficulty of resolving disagreements
+across multiple documents (Su et al., 2024). Most
+approaches optimized the contextual knowledge
+prioritization in LLMs via supervised fine-tuning
+strategy (Yoran et al., 2024; Fang et al., 2024). And
+KnowPO (Zhang et al., 2025) aimed to achieve
+adaptive knowledge selection based on contex-
+tual relevance by preference optimization strategy.
+More recently, MADAM-RAG (Wang et al., 2025)
+and DRAG (Hu et al., 2025b) introduced a multi-
+agent framework to mitigate inter-document con-
+flicts and misinformation. Furthermore, CARE-
+RAG (Chen et al., 2025) derived parameter-aware
+evidence by comparing internal records, but its effi-
+cacy remains heavily contingent upon a pre-trained
+summary generator, which may limit its flexibility
+and overall performance.
+DeepRAG (Guan et al., 2025) and R1-
+Searcher++ (Song et al., 2025) are motivated by
+similar objectives; however, R1-Searcher++ em-
+phasizes retrieval efficiency, whereas DeepRAG fo-
+cuses on structured, adaptive retrieval. In contrast,
+BrPr addresses a distinct failure mode in RAG,
+namely performance instability under conflicting
+documents. Consequently, the retrieval action in
+our framework is fixed—meaning the external con-
+texts remain unchanged during experiments—to
+specifically improve the model’s discriminative ca-
+pability and accuracy under conflicts.
+22156

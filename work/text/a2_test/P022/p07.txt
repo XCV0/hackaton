@@ -1,0 +1,83 @@
+Knowledge Length Acc
+CRAG 246517 67.0
+Standard prompting 187653 69.0
+Disentangled prompting 101406 75.2
+Table 2: Ablation study of the disentangled prompting
+procedure on the PopQA dataset. Standard prompt-
+ing and disentangled prompting refer to fine-grained
+knowledge retrieved by different prompting procedures,
+while CRAG represents document-level knowledge in
+the same quantity. Length refers to the count of tokens
+in knowledge content, and Acc indicates the probability
+that the retrieved knowledge contains the ground truth.
+Methods Acc
+CRAG (with document-level knowledge) 61.8
+CRAG (with fine-grained knowledge alone) 66.7
+CRAG (with comparative decoding strategy) 68.1
+Table 3: Ablation study of fine-grained knowledge.
+ies on specific datasets and these results remain
+consistent when applied to other datasets.
+Ablation of disentangled prompting procedure
+To validate the effectiveness of our disentangled
+prompting retrieval procedure, we evaluate the re-
+trieved knowledge under different conditions. Un-
+der the standard prompting condition, the LLM is
+directly prompted to extract relevant sentence-level
+knowledge from the external corpus. In contrast,
+with disentangled prompting, the LLM first explic-
+itly identifies knowledge fragments beneficial for
+question answering and then extracts the query-
+focused sentences based on these fragments. The
+results are presented in Table 2. Although the stan-
+dard prompting procedure improves knowledge ac-
+curacy and shortens the original document-level
+knowledge to some extent, it remains less effec-
+tive than our disentangled prompting procedure.
+Therefore, we require the disentangled prompting
+procedure for better performance.
+Ablation of fine-grained knowledge We have
+directly used fine-grained knowledge alone for gen-
+eration and the results on the PopQA dataset are
+shown in Table 3. Using fine-grained knowledge
+alone can bring better results than using original
+document-level knowledge, which demonstrates
+that fine-grained knowledge contains more accurate
+information. Combining the two types of knowl-
+edge with the comparative decoding strategy, the
+model achieves the best performance by benefiting
+from the strengths of both.
+Figure 4: Accuracy score of CRAG+FKE with different
+control strength α on the PopQA dataset.
+Methods EM F1
+DRAGIN(7B) 21.4 29.3
+DRAGIN(7B)+FKE 24.2 32.5
+DRAGIN(13B) 26.0 33.3
+DRAGIN(13B)+FKE 28.0 36.2
+Table 4: Ablation study of the model scale on the 2Wiki-
+MultihopQA dataset.
+Ablation of control strength To investigate the
+impact of control strength α, we employ the CRAG
+pipeline and conduct experiments on the PopQA
+dataset with different α values. The Accuracy varia-
+tion curve is depicted in Figure 4. When α = 0, the
+fine-grained knowledge is not incorporated, and the
+model’s performance aligns with the basic pipeline.
+As α increases within a certain range (0 ∼ 1.0), the
+decoding process incorporates more fine-grained in-
+formation, and the model’s performance improves
+accordingly. Ultimately, when α > 1.0, further
+improvement is no longer observed, as fine-grained
+knowledge has already been fully incorporated into
+the document-level decoding process. Based on
+this, we set α = 1.0 for optimal performance.
+Ablation of model scale To explore the effect of
+the model scale, we additionally use Llama2-13B-
+chat as DRAGIN’s generator and conduct experi-
+ments on the 2WikiMultihopQA dataset with other
+hyperparameters unchanged. The results in Table 4
+show that our method consistently enhances DRA-
+GIN’s performance across different model scales.
+Ablation of temperature To evaluate the influ-
+ence of the temperature, we conduct experiments
+on the PopQA dataset with different temperatures
+10037

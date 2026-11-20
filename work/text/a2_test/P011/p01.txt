@@ -1,0 +1,44 @@
+GRAPHS RAG AT SCALE: BEYOND RETRIEVAL-AUGMENTED
+GENERATION WITH LABELED PROPERTY GRAPHS AND
+RESOURCE DESCRIPTION FRAMEWORK FOR COMPLEX AND
+UNKNOWN SEARCH SPACES
+A PREPRINT
+Manie Tadayon
+AI Scientist, Capital Group
+manie.tadayon@capgroup.com
+Mayank Gupta
+AI Scientist, Capital Group
+mayank.gupta@capgroup.com
+March 25, 2026
+ABSTRACT
+Recent advances in Retrieval-Augmented Generation (RAG) have revolutionized knowledge-intensive
+tasks, yet traditional RAG methods struggle when the search space is unknown or when documents are
+semi-structured or structured. We introduce a novel end-to-end Graph RAG framework that leverages
+both Labeled Property Graph (LPG) and Resource Description Framework (RDF) architectures to
+overcome these limitations. Our approach enables dynamic document retrieval without the need to
+pre-specify the number of documents and eliminates inefficient reranking. We propose an innovative
+method for converting documents into RDF triplets using JSON key-value pairs, facilitating seamless
+integration of semi-structured data. Additionally, we present a text to Cypher framework for LPG,
+achieving over 90% accuracy in real-time translation of text queries to Cypher, enabling fast and
+reliable query generation suitable for online applications. Our empirical evaluation demonstrates
+that Graph RAG significantly outperforms traditional embedding-based RAG in accuracy, response
+quality, and reasoning, especially for complex, semi-structured tasks. These findings establish Graph
+RAG as a transformative solution for next-generation retrieval-augmented systems.
+Keywords Graph RAG, RAG, LPG, RDF, Knowledge Graph, SPARQL, Open-Cypher, Amazon Neptune, NetworkX
+1 Introduction
+Large Language Models (LLMs) have rapidly transformed the landscape of machine learning and artificial intelligence,
+enabling breakthroughs in natural language understanding, question answering, summarization, and creative text
+generation. Their remarkable ability to synthesize information and generate coherent, contextually relevant responses
+has unlocked new possibilities across domains such as healthcare, finance, law and technology [1, 2, 3]. However,
+despite their impressive capabilities, LLMs are fundamentally limited by the static nature of their training data, often
+leading to outdated knowledge and, more critically, the phenomenon of hallucination—where the model generates
+plausible-sounding but factually incorrect or unverifiable information. Hence it is crucial to augment LLMs with
+dynamic, reliable sources of information to improve accuracy and reduce hallucinations.
+One approach to mitigate the limitations of static LLMs is continual pretraining and supervised fine-tuning, where the
+model is further trained on new or specialized data to incorporate recent knowledge or adapt to particular tasks. While
+this strategy can enhance model relevance and performance in targeted domains, it is often prohibitively time-consuming
+and computationally expensive. Continual fine-tuning requires access to large-scale, high-quality datasets and significant
+hardware resources, Moreover, fine-tuning may risk catastrophic forgetting of previously acquired knowledge and can
+introduce new biases or inconsistencies. These challenges make continual fine-tuning impractical for many real-world
+applications that demand timely, cost-effective, and reliable access to up-to-date information.
+arXiv:2603.22340v1  [cs.IR]  21 Mar 2026

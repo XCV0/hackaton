@@ -1,0 +1,61 @@
+Figure 2: (A) Our seven RAG noise types comprehensively capture real-world retrieval challenges. (B) This detailed
+illustration intuitively depicts the diverse RAG noise landscape, with noise injection regions marked in red.
+3 A Taxonomy of RAG Noise
+As shown in Figure 2, we categorize RAG noise
+into seven linguistic types. They are further di-
+vided into beneficial (semantic, datatype, and il-
+legal sentence) and harmful noise (counterfactual,
+supportive, orthographic, and prior) for practical
+applications. We will explain the reason behind
+this classification in 5 Experiment Setup.
+Semantic Noise (SeN) Retrieval documents
+may contain content with low semantic relevance
+to the query, often being off-topic or deviating from
+the intended meaning. Given that Warren Weaver
+originally defined semantic noise as "the perturba-
+tions or distortions of sentence meaning" (Shannon
+et al., 1961), we classify off-topic, low-semantic-
+relevance documents as semantic noise.
+Datatype Noise (DN) This type of noise refers
+to the mixing of different data types on the web,
+such as the blending of links and text on Wikipedia.
+In this paper, we consider three data types: text,
+URLs, and code.
+Illegal Sentence Noise (ISN) Web content may
+include fragments that do not form grammatically
+correct sentences, such as “history transform cover
+managed that hand black”. We define this type of
+noise as illegal sentence noise.
+Counterfactual Noise (CN) The internet con-
+tains abundant false information, including fake
+news and outdated knowledge (Tumarkin and
+Whitelaw, 2001; Olan et al., 2024), presenting crit-
+ical challenges to RAG systems. Drawing from
+linguistics, where “counterfactual" denotes state-
+ments contrary to fact (Feng and Yi, 2006), we
+introduce the term “counterfactual noise" to char-
+acterize factual errors. This concept aligns with
+prior research (Fang et al., 2024).
+Supportive Noise (SuN) Supportive evidence,
+known as positive evidence, is highly semantically
+relevant to a hypothesis and provides necessary in-
+formation to support it (Kertész and Rákosi, 2012).
+We introduce the term “supportive noise” to de-
+scribe documents that exhibit high semantic rele-
+vance but lack corresponding answer information.
+Orthographic Noise (ON) The word “orthog-
+raphy” originates from the Greek orthós (mean-
+ing “correct”) and gráphein (meaning “to write”),
+and refers to the way words are written in linguis-
+tics (Skeat, 1993; Aloufi, 2021). Orthographic
+noise, on the other hand, can refer to writing errors
+such as spelling mistakes and word lengthening.
+Prior Noise (PN) In linguistics, prior knowl-
+edge refers to what a learner already knows before
+solving a problem (Chafe, 1971). Our study defines
+prior noise as questions based on false assumptions
+or premises. For example, the question “Who was
+the CEO of Google when they were restructured
+into Alphabet in 2017?” contains prior noise be-
+cause the restructuring occurred in 2015, not 2017.
+5021

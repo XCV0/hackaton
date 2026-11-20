@@ -1,0 +1,44 @@
+Published as a conference paper at ICLR 2025
+APPENDIX
+A INSTRUCTION-TUNING SETTINGS
+We construct our training dataset for the RAG drafter from diverse instruction-following pairs. We
+sample instances from Open-Instruct processed data (Wang et al., 2023a) and knowledge-intensive
+datasets (Petroni et al., 2021; Stelmakh et al., 2022; Mihaylov et al., 2018). We augment the
+instruction-following pairs with retrieved documents and generated rationale. We use the off-the-
+shelf dense retriever Contriever-MS MARCO (Izacard et al., 2021) to retrieve up to 10 documents
+for each pair and use Gemini-Ultra (Team et al., 2023) to generate rationale. In total, we acquire a
+dataset of 40k instances. We use Mistral7B (v0.1) as our base LM for the RAG drafter. We reproduce
+the performance of Self-RAG (Asai et al., 2023) and CRAG (Yan et al., 2024) with Mistral7B (v0.1)
+for a fair comparison. We implement the training scripts using the Transformers library from Hug-
+ging Face (Wolf et al., 2019). We employ DeepSpeed (Rasley et al., 2020) to accelerate the training
+process. All experiments are conducted on a Linux server equipped with 16 Nvidia A100-SXM4-
+40GB GPUs.
+Additionally, we replace Gemini-Ultra (Team et al., 2023) with GPT-4o (Achiam et al., 2023) when
+curating the instruction-tuning data for our RAG drafter to investigate the effects of different LLMs.
+These results demonstrate that SPECULATIVE RAG maintains its performance advantage, even
+when trained on data curated by GPT-4o. It consistently outperforms the baselines from Standard
+RAG, SelfRAG, and CRAG, further validating the effectiveness of our approach.
+Table 4: RAG results on TriviaQA, PubHealth, ARC-Challenge with the RAG drafter trained on
+instruction-tuning data curated by GPT-4o and Gemini-Ultra.
+Trivial QA PubHealth ARC-C
+MVerifier-7B + MGemini-U Drafter-7B 73.91 75.79 76.19
+MVerifier-8x7B + MGemini-U Drafter-7B 74.24 76.60 80.55
+MVerifier-7B + MGPT-4o Drafter-7B 72.24 73.05 76.54
+MVerifier-8x7B + MGPT-4o Drafter-7B 73.58 73.35 80.63
+Moreover, we use an instruction-tuned Gemma-22B (Team et al., 2024) as the RAG drafter and
+the frozen Mistral7B or Mixtral8x7B as the RAG verifier. We report the performance analysis in
+Table 5. These results suggest that Gemma-22B provides a promising avenue for future work of
+further optimization.
+Table 5: RAG results on TriviaQA, PubHealth, ARC-Challenge with an instruction-tuned Gemma-
+22B or Mistral7B as the RAG drafter and a Mixtral8x7B as the RAG verifier.
+Trivial QA PubHealth ARC-C
+MVerifier-8x7B + MDrafter-2B 67.22 72.14 67.92
+MVerifier-8x7B + MDrafter-7B 74.24 76.60 80.55
+B EFFECTS OF INSTRUCTION TUNING
+In SPECULATIVE RAG, we introduce a framework that combines the RAG drafter and the verifier.
+In this ablation study, we directly feed all documents to the RAG drafter and generate one draft
+(m = 1, k = total # of documents). As shown in Table 6, we observe that instruction tuning
+effectively enhances the document understanding capability of the RAG drafter, as it outperforms
+both Mistral7B and Mistral-Instruct7B. However, there remains a gap compared to SPECULATIVE
+RAG, showing the effectiveness of the drafting and verification framework.
+16

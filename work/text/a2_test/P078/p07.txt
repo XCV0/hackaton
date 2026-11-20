@@ -1,0 +1,100 @@
+7
+4.2.4 Concept Hyperedge Construction
+Concept hyperedges, e(c), defined in Eqn. (2), are formed by
+jointly clustering all VA and VT nodes in the f (D) embedding
+space, producing structures that bridge product attribute semantics
+and legislative entity semantics.
+e(c) = V (c) A ∪ V (c) T ∪n
+vI i
+ ∃ vk ∈ V (c) A ∪ V (c) T : vk ∈ N (vI i ) o (2)
+For example, a cluster representing a cooling or menthol
+concept groups product nodes whose captions contain mint-adjacent
+attributes, with legislative entity nodes referring to “menthol char-
+acterizing flavor,” directly connecting products to the policies that
+govern such a product. We consider two clustering implementations
+of η: (i) k-Means with C = 50 clusters; and (ii) Agglomerative
+Clustering with cosine distance threshold δcluster = 0.30. We test
+different values of C ∈ {50, 100, 150, 200}.
+4.2.5 Bridge Hyperedge Construction
+Bridge hyperedges, e(v) defined in Eqn. (5), connect each product
+image node vI i ∈ VI to VA attribute nodes whose aligned text
+embeddings are visually close to the image embedding. The bidi-
+rectionality constraint, implemented by Eqns. (3) and (4), reduces
+noise. We set k = 10 in all experiments. We also evaluate threshold-
+based bridge construction as an ablation (τ = 0.25). With all three
+hyperedge types, E = {e(c)}C c=1 ∪ {e(v) i }N i=1 ∪ {e(sent) d }.
+T img k (vI i ) = top-k
+vA k ∈VA
+hP,I i ⊤ ¯hA k (3)
+T attr k (vA k ) = top-k
+vI i ∈VI
+hP,I i ⊤ ¯hA k (4)
+e(v) i = {vI i } ∪n
+vA k
+ vA k ∈ T img k (vI i ), vI i ∈ T attr k (vA k ) o (5)
+4.3 Multimodal Query Procedure
+At query time, PRISM-RAG proceeds through four distinct steps.
+Query Encoding. Queries are encoded into a bimodal
+representation, given by Eqn. (6). Additionally, qD =
+f (D)(qC )/∥f (D)(qC )∥2 is used for scoring VA, VT , and VP nodes.
+A jurisdiction hint jq is extracted by substring-matching known
+jurisdiction names against qC .
+q =
+"
+f (I)(qI )
+∥f (I)(qI )∥2 ; f (C)(qC ) ∥f (C)(qC )∥2
+#
+∈ RnI +nC (6)
+Retrieval Stage 1: Seed Node Retrieval. We retrieve the top-K
+product nodes most similar to q using a modality-weighted fused
+similarity, defined in Eqn. 7 with fusion weight α ∈ [0, 1]. The
+result is set S.
+S = arg top-K
+vi ∈VI
+σ(q, hP i ),
+σ(q, hP i ) = α · zI⊤ i f (I)(qI ) ∥zI i ∥2∥f (I)(qI )∥2| {z }
+visual similarity
++ (1 − α) · ˜zC⊤ i f (C)(qC ) ∥˜zC i ∥2∥f (C)(qC )∥2| {z }
+attribute similarity
+(7)
+Retrieval Stage 2: Hyperedge-Based Traversal. We collect all
+hyperedges incident to the seed set, ES = {e ∈ E | e ∩ S ̸= ∅},
+and score each by the mean node-type-conditioned relevance of its
+members as defined in Eqn. 8.
+s(q, v) =
+
+
+
+σ(q, hP v ) v ∈ VI
+qD⊤ hA v v ∈ VA
+qD⊤ hT v v ∈ VT
+qD⊤ hD v v ∈ VP
+(8)
+ρ(e) = 1 |e| X v∈e s(q, v) (9)
+The top-M hyperedges by ρ(e) in Eqn. 9 form the query-
+dependent context Hq . Based on experiments, we set K = 8 and
+M = 10 in our proposed configuration.
+Jurisdiction-Aware Context Assembly. The assembled context
+(Eqn. 11) is drawn from two complementary paths to address
+the legislation semantics challenge. The hyperedge path collects
+Chyp q = {pv | v ∈ Vq ∩ VP } and, for policy queries (jq ̸= ∅),
+surfaces the source chunks of the top-Tmax entity nodes scored
+with a jurisdiction-aware boost as defined in Eqn. 10.
+˜sϕ(vt) = s(q, vt) · β1[jur(ϕ(vt ))=jq ], β = 2 (10)
+The “boost factor” β = 2 ensures that entity nodes whose
+source chunks originate from jq rank above semantically similar
+entities from other jurisdictions and non-legislative documents. The
+direct injection path Cjur q scores all VP nodes from jq directly
+against qD and injects the top-Pmax not already present, activating
+unconditionally for all policy queries. In our experiments, we set
+Tmax = 10 and Pmax = 5.
+Cq = Chyp q ∪ CVT q| {z }
+hyperedge path
+∪ Cjur q|{z}
+direct injection
+(11)
+4.4 Response Generation
+With the assembled context Cq and user text query qC , the response
+from LLM π is y∗ = π(qC , Cq ). Eqn. (12) provides a procedural
+summary of the query-time process for PRISM-RAG.
+(qI , qC ) Stage 1 −−−−→ S Stage 2 −−−−→ Hq assembly −−−−−→ Cq π−→ y∗ (12)

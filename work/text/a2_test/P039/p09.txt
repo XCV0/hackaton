@@ -1,0 +1,72 @@
+Comprehensiveness Diversity Empowerment Overall Time-C Time-I
+GraphRAG 41.7 42.8 43.2 44.0 30.47 36.81
+LightRAG 53.5 54.5 52.9 52.9 2.28 4.01
+MiniRAG 53.9 53.2 52.9 54.1 9.83 8.80
+TagRAG 56.1 56.1 56.8 58.0 6.37 2.47
+Table 4: Cross-domain incremental analysis: winning rates(%) of results after v.s. before upserting. Time-C (hours)
+and Time-I (hours) denote incremental graph construction time and inference time, respectively.
+the Mix-built knowledge graph. After integra-
+tion, we evaluate whether comparative methods can
+leverage this incremental knowledge to improve re-
+sponses to Mix-generated questions. As shown
+in Table 4, TagRAG substantially outperforms the
+other methods in performance while achieving sub-
+optimal time results. LightRAG, despite its time
+advantage, is limited by polarized knowledge rep-
+resentation, hindering effective merging into the
+existing framework and leading to unsatisfactory
+incremental performance. GraphRAG consumes
+the most time due to numerous LLM calls and com-
+munity summarizations, struggling to incorporate
+entirely new domains into established communities,
+resulting in poor performance.
+6.7 Visualization of Knowledge Graph
+Construction
+To distinguish the methods, we visualize their
+knowledge graphs on UltraDomain Mix in Fig-
+ure 5. Without a strong semantic parser, Ligh-
+tRAG with a smaller model extracts sparse enti-
+ties and loose relations, resulting in low-density
+graphs. GraphRAG and MiniRAG produce similar
+graphs. While GraphRAG adds global knowledge
+via community summaries, MiniRAG is more ef-
+fective on small models through tailored retrieval.
+Leveraging hierarchical links, TagRAG builds well-
+connected graphs with high knowledge density and
+broad coverage.
+7 Conclusion
+We propose TagRAG, a tag-guided hierarchical
+knowledge graph RAG framework that addresses
+key limitations of existing graph-based RAG sys-
+tems, such as inefficient global reasoning and poor
+increment adaptability. By constructing domain-
+aware tag chains and enabling tag-guided graph re-
+trieval, TagRAG achieves structured, fine-grained,
+and scalable knowledge integration. Our design
+reduces reliance on large language models and sup-
+ports efficient construction and inference. The ex-
+perimental results on the UltraDomain benchmark
+(a) GraphRAG (b) LightRAG
+(c) MiniRAG (d) TagRAG
+Figure 5: Visualization of knowledge graph construction
+with Qwen3-4B on UltraDomain Mix.
+show that TagRAG achieves a 78.36% average win-
+ning rate over baselines while offering significant
+gains in construction (14.6×) and retrieval (1.9×)
+efficiency compared to GraphRAG.
+Limitations
+The indexing pipeline of TagRAG depends on LLM
+calls for object tag extraction and domain chain
+construction, which raises questions about cost, re-
+producibility, and robustness in fully automated
+scenarios. In addition, TagRAG cannot handle mul-
+timedia data such as pictures and videos, which
+limits its application scope.
+Acknowledgments
+The authors would like to thank the anonymous
+reviewers for their insightful comments. This
+work is supported by the National Key Research
+& Develop Plan (Project No.2023YFF0725100)
+and Natural Science Foundation of China (Project
+No.U23A20298).
+6442

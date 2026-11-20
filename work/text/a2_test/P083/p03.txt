@@ -1,0 +1,99 @@
+4 Evaluation
+4.1 Dataset
+We evaluate our system on a proprietary dataset
+constructed in collaboration with InﬂuenceMap.
+The data mirrors the structure proposed in Morio
+and Manning (2023), where each instance aligns
+manually selected textual evidence with a climate
+policy query and classiﬁes its stance (see Appendix
+E).
+4.2 Metrics
+Normalized Longest Common Subsequence
+(nLCS) quantiﬁes textual overlap between se-
+quences, producing a score between 0 (no match)
+and 1 (perfect match). The LCS length is computed
+using Algorithm 1, and the result is normalized dif-
+ferently depending on the task.
+Recall and MRR are metrics to evaluate the re-
+triever and reranker components. (Weaviate, 2023)
+Exact Match Accuracy considers the stance
+classiﬁer predictions a hit if:
+EM(y, ˆy) = 1 [ˆy=y] (1)
+Hit Rate with Tolerance is a relaxed criterion
+that considers the prediction a hit with a tolerance
+τ = 1 conditioned on polarity alignment:
+HRT(y, ˆy) =
+
+
+
+1 if |y − ˆy| ≤ τ and
+sign(y) = sign(ˆy)
+1 if y = ˆy = 0
+0 otherwise
+(2)
+Oracle-Based Diagnostics assess evidence ex-
+traction pipelines through correlations between pre-
+diction errors and individual RAG component out-
+puts (Zhao et al., 2024). Faithfulness2 (Zha et al.,
+2023) and conciseness3 scores, sf and sc respec-
+tively, compare the alignment of the retrieved snip-
+pet e with the gold snippet G. The helpfulness4 sh
+measures the conﬁdence of the model in generating
+the correct stance a using G vs. e:
+sh = σ
+(
+log f (y | q, G) f (y | q, e) ) (3)
+where σ is the sigmoid function, and f (y | q, x)
+is the model-assigned probability of the stance an-
+swer y given the query q and x = G or x = e.
+2We use AlignScore-large, similar to Zhao et al. (2024)
+3We use the bge-m3 model with the same formula in Zhao
+et al. (2024)
+4We apply changes as shown in equation 3 to the original
+formula in Zhao et al. (2024)
+4.3 Component Evaluation
+Parsing and Chunking are evaluated using nLCS.
+In parsing evaluation PnLCS , normalization is
+based on the length of G to assess whether the
+parser can recover the reference content anywhere
+in the output text P , tolerating additional surround-
+ing text.
+In chunking evaluation CnLCS , we compare the
+chunks produced {Ci} from P against G, for ﬁles
+that achieve a parsing score of higher than threshold
+σ. Normalization uses the length of the longer
+sequence to penalize both omissions and excessive
+context.
+This distinction allows parsing to reward inclu-
+sion, while ensuring that chunking emphasizes pre-
+cision.
+Retrieval and Reranking are evaluated using
+Recall and MRR metrics on ﬁles achieving a
+higher parsing and chunking score than threshold
+σ. nLCS between retrieved e and G is used to
+determine relevant retrievals.
+Stance Generation uses Exact Match Accuracy
+and Hit Rate with Tolerance comparing generated
+label ˆy from G with human annotation y.
+4.4 Pipeline Evaluation
+We compare four retrieval strategies to evaluate the
+pipeline on the ﬁnal stance generation task:
+1. First Retrieved (FR): Using the top result
+from semantic retrieval.
+2. All Retrieved (AR): Concatenating all top-k
+chunks.
+3. Best Match (BM): Using the chunk with high-
+est nLCS overlap with G. Useful to showcase
+the impact of rank.
+4. Ground Truth (GT): Serves as an upper
+bound.
+We implement Oracle diagnostic metrics to un-
+derstand: the degree of factual consistency (sf ),
+the certainty of the model during stance generation
+(sh), and the degree of information gap or overload
+(sc).
+5 Results
+Our goal is to return the most relevant evidence
+ﬁrst and classify it correctly. We evaluated both the
+complete pipeline and individual components.
+113

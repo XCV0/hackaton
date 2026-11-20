@@ -1,0 +1,101 @@
+differentially private. In Conference on Language
+Modeling.
+Chulin Xie, Zinan Lin, Arturs Backurs, Sivakanth Gopi,
+Da Yu, Huseyin A Inan, Harsha Nori, Haotian Jiang,
+Huishuai Zhang, Yin Tat Lee, Bo Li, and Sergey
+Yekhanin. 2024. Differentially private synthetic data
+via foundation model APIs 2: Text. In Proceedings of
+the 41st International Conference on Machine Learn-
+ing, volume 235, pages 54531–54560.
+Da Yu, Peter Kairouz, Sewoong Oh, and Zheng Xu.
+2024a. Privacy-preserving instructions for aligning
+large language models. In Proceedings of the 41st
+International Conference on Machine Learning, vol-
+ume 235, pages 57480–57506.
+Da Yu, Saurabh Naik, Arturs Backurs, Sivakanth Gopi,
+Huseyin A. Inan, Gautam Kamath, Janardhan Kulka-
+rni, Yin Tat Lee, Andre Manoel, Lukas Wutschitz,
+Sergey Yekhanin, and Huishuai Zhang. 2024b. Dif-
+ferentially private fine-tuning of language models.
+Journal of Privacy and Confidentiality, 14(2).
+Xiang Yue, Huseyin Inan, Xuechen Li, Girish Kumar,
+Julia McAnallen, Hoda Shajari, Huan Sun, David
+Levitan, and Robert Sim. 2023. Synthetic text gener-
+ation with differential privacy: A simple and practical
+recipe. In Proceedings of the 61st Annual Meeting of
+the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), pages 1321–1342.
+Shenglai Zeng, Jiankun Zhang, Pengfei He, Yiding Liu,
+Yue Xing, Han Xu, Jie Ren, Yi Chang, Shuaiqiang
+Wang, Dawei Yin, and Jiliang Tang. 2024. The good
+and the bad: Exploring privacy issues in retrieval-
+augmented generation (RAG). In Findings of the As-
+sociation for Computational Linguistics: ACL 2024,
+pages 4505–4524.
+Susan Zhang, Stephen Roller, Naman Goyal, Mikel
+Artetxe, Moya Chen, Shuohui Chen, Christopher De-
+wan, Mona Diab, Xian Li, Xi Victoria Lin, Todor Mi-
+haylov, Myle Ott, Sam Shleifer, Kurt Shuster, Daniel
+Simig, Punit Singh Koura, Anjali Sridhar, Tianlu
+Wang, and Luke Zettlemoyer. 2022. OPT: Open
+pre-trained transformer language models. Preprint,
+arXiv:2205.01068.
+Tailai Zhang, Yuxuan Jiang, Ruihan Gong, Pan Zhou,
+Wen Yin, Xingxing Wei, Lixing Chen, and Daizong
+Liu. 2024. DEAL: High-efficacy privacy attack on
+retrieval-augmented generation systems via LLM
+optimizer. https://openreview.net/forum?id=
+sx8dtyZT41. OpenReview.
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q Wein-
+berger, and Yoav Artzi. 2020. BERTScore: Evalu-
+ating text generation with BERT. In International
+Conference on Learning Representations.
+A Complete Privacy Analysis
+This appendix provides the complete formal pri-
+vacy analysis supporting the sketch in Sec. 4. We
+first derive the privacy cost of cluster-size release
+(Sec. 3.2), then show that the adaptive triggering
+module incurs zero privacy cost, derive the per-
+step cost of DP contrastive decoding (Sec. 3.4),
+compose all costs via sequential and parallel com-
+position, and finally convert the cumulative zCDP
+cost to (ε, δ)-DP.
+A.1 Cluster-Size Release (Sec. 3.2)
+As defined in (Bun and Steinke, 2016), ρ-zCDP re-
+quires Dα(M(D) ∥ M(D′)) ≤ ρα for all α ∈
+(1, ∞). For the Gaussian mechanism adding
+N (0, σ2) noise to a function with ℓ2-sensitivity
+∆2, the Rényi divergence is
+Dα
+(
+M(D) ∥ M(D′) ) = α ∆2 2
+2σ2 ,
+so the mechanism satisfies ρ-zCDP with ρ =
+∆2 2/(2σ2).
+In Sec. 3.2, under the add/remove adjacency,
+the cluster-size vector c = (c1, . . . , cm) has ℓ2-
+sensitivity ∥c − c′∥2 = 1 (adding or removing one
+sample shifts exactly one coordinate by ±1, since
+each sample belongs to exactly one cluster). The
+topic-guided clustering uses only public topics and
+a public embedding model, so the cluster assign-
+ment itself incurs no privacy cost. Substituting
+∆2 = 1:
+ρcls = 1 2σ2 .
+Note that releasing m noisy coordinates applies the
+mechanism to a single sample’s contribution, so
+the zCDP cost is 1/(2σ2) regardless of m.
+A.2 Zero-Cost Triggering (Sec. 3.3)
+The adaptive RAG triggering module operates en-
+tirely on the public model’s internal representations
+and never accesses any private data, contributing
+zero privacy cost.
+A.3 DP Contrastive Decoding (Sec. 3.4)
+For a utility function u : D × Y → R with
+L∞-sensitivity ∆ = maxy supD∼D′ |u(D, y) −
+u(D′, y)|, the exponential mechanism samples pro-
+portional to exp(ε0u/(2∆)) and satisfies ε0-DP. A
+naive zCDP analysis gives 1 2 ε2 0-zCDP, while Cesar
+and Rogers (2021) prove the tighter bound 1 8 ε2 0-
+zCDP via the log-sum-exp structure.
+45304

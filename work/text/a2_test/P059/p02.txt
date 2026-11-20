@@ -1,0 +1,49 @@
+Figure 1: COUNTERMEM overview. Top, protocol flow: five edit operators (Delete-All, semantic-cluster knockout,
+distractor injection, update injection, contradiction injection) act at the same post-retrieval point; corpus-addition
+and corpus-deletion apply earlier in the pipeline. Update and contradiction injections each append a synthesized
+counterfactual of the same factual type as the reference answer, framed once as superseding evidence and once as a
+competing source (Appendix I). Answers are regenerated under the same generator and prompt and compared to the
+baseline on the behavioral questions at right. Bottom, stage trace: for corpus-level interventions, the propagation
+trace localizes whether the intervention was lost at retrieval, reranking, or generation.
+ble to aggregate scoring (§5.1); the intervention
+trace localizes the failed pipeline stage—retrieval,
+reranking, or generator—and the matched single-
+stage repair outperforms wrong-stage repairs, with
+the trace read off the generations the behavioral
+test already issues rather than from a separate di-
+agnostic call (§5.2); and behavioral failures persist
+among answers that aggregate diagnostics already
+approve, so compatibility with context is necessary
+but not sufficient for evidence-binding (§5.3). The
+failures are not an artifact of one model family:
+they persist when the generator is replaced by GPT-
+5.4-mini or the open-weight Qwen3-8B and when
+the judge is replaced by an out-of-family model,
+and the detectors that score them agree with blind
+human labels as closely as two annotators agree
+with each other (§5.4).
+2 Related Work
+Observational and diagnostic RAG evaluation.
+Reference-free evaluators score the realized query–
+context–answer trace. RAGAS (Es et al., 2024)
+and ARES (Saad-Falcon et al., 2024) report faith-
+fulness, relevance, and context-precision; RAG-
+Bench aggregates task-specific judge protocols
+(Friel et al., 2024); recent surveys study judge relia-
+bility and metric design (Liu et al., 2025; Ngo et al.,
+2024; Wang et al., 2024). Fine-grained diagnos-
+tic frameworks decompose answer quality further:
+RAGChecker (Ru et al., 2024) uses claim-level en-
+tailment for retriever and generator metrics, CoFE-
+RAG (Liu et al., 2024a) evaluates chunking and
+multi-stage diagnostics, RAGTrace (Cheng et al.,
+2025) analyzes retrieval–generation interactions,
+and RAGVUE (Murugaraj et al., 2026) decom-
+poses reference-free evaluation with structured ex-
+planations. Metamorphic-testing approaches such
+as MetaRAG (Sok et al., 2025) probe hallucina-
+tions by perturbing factoids in the answer and re-
+checking entailment against the retrieved context.
+Knowledge conflicts, unanswerability, and dis-
+tractor robustness. A separate line of work stud-
+22333

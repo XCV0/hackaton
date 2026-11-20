@@ -1,0 +1,63 @@
+Harmfulness Helpfulness Inappropriateness
+Harmful Unharmful Helpful Unhelpful Yes Slightly No
+RandomForest 0.82 0.80 0.73 0.70 0.67 0.00 0.78
+SVM 0.86 0.86 0.73 0.70 0.67 0.00 0.78
+Gaussian Naive Bayes 0.86 0.86 0.73 0.70 0.80 0.31 0.57
+Neural Network 0.82 0.80 0.73 0.70 0.67 0.00 0.78
+Average 0.84 0.83 0.73 0.70 0.71 0.08 0.73
+Table 2: F1-scores when CF, CR, RA and scope of practice are used as features to predict Harmfulness, Helpfulness
+and Inappropriateness using different models.
+Model CF CR RA
+Accuracy F1 Accuracy F1 Accuracy F1
+mistral-7B 0.44 ± 0.009 0.19 ± 0.021 0.73 ± 0.006 0.67 ± 0.010 0.91 ± 0.000 0.88 ± 0.000
+llama-3-8B 0.39 ± 0.005 0.05 ± 0.009 0.52 ± 0.006 0.64 ± 0.005 0.90 ± 0.000 0.88 ± 0.000
+llama-3.3-70B 0.45 ± 0.006 0.23 ± 0.015 0.82 ± 0.012 0.82 ± 0.013 0.90 ± 0.005 0.87 ± 0.006
+mistral-large-2402 0.50 ± 0.006 0.33 ± 0.014 0.78 ± 0.006 0.72 ± 0.010 0.84 ± 0.009 0.81 ± 0.008
+claude-3.5-sonnet 0.72 ± 0.004 0.74 ± 0.004 0.81 ± 0.004 0.81 ± 0.005 0.91 ± 0.000 0.88 ± 0.000
+gemini-2-flash 0.69 ± 0.016 0.77 ± 0.012 0.75 ± 0.014 0.78 ± 0.010 0.93 ± 0.005 0.90 ± 0.007
+gpt-4o 0.69 ± 0.011 0.74 ± 0.011 0.86 ± 0.012 0.85 ± 0.013 0.92 ± 0.006 0.89 ± 0.006
+gpt-o3-mini 0.68 ± 0.017 0.69 ± 0.017 0.87 ± 0.009 0.87 ± 0.009 0.95 ± 0.010 0.94 ± 0.014
+Table 3: LLM Performance on ASTRID Metrics (Accuracy & F1-Scores).
+4.2.2 Predicting clinical assessments using our
+triad of metrics
+Setup. We investigated whether our three metrics
+(CF, CR, and RA) could effectively predict clin-
+ician assessments of QA system responses using
+the ClinicalQAC dataset. Our goal was to demon-
+strate that these automated metrics could identify
+potentially harmful, unhelpful, or inappropriate re-
+sponses.
+We reserved 17.5% of the dataset as a balanced
+test set (see Figure 6). We then manually choose
+triplets to ensure balanced categories and randomly
+sample 79% of the remaining dataset for the train
+split and use the remaining 21% as the val split.
+We then train four models (Random Forest,
+SVM, Gaussian Naive Bayes, and Neural Network)
+to demonstrate how our triad can independently pre-
+dict harmfulness, helpfulness, and inappropriate-
+ness when the scope of practice (within scope/out-
+of-scope) is taken into account. We subsequently
+test the results on the test set and report precision,
+recall and F1-scores.
+Results. In Table 2, our experiments demonstrate
+that the triad of metrics serves as a strong predictor
+across all clinical assessment categories. Using
+our triad and the scope of practice, we can predict
+clinician rating of harmfulness with an average F1-
+Figure 6: ClinicalQAC test split distribution across
+categories
+score of 0.835. We can also predict helpfulness
+with an average F1-score of 0.715.
+For inappropriateness prediction, the models
+showed strong performance in identifying clearly
+appropriate and inappropriate responses, with F1-
+scores of 0.73 for "No" and 0.70 for "Yes" classi-
+fications. However, detecting "slightly" inappro-
+priate content proved challenging, with an average
+F1-score of 0.08. This difficulty aligns with hu-
+man assessment patterns, as evidenced by the lower
+inter-annotator agreement (65%) for inappropriate-
+ness ratings prior to resolution. We report other
+inter-annotator scores in the appendix in Table 4.
+16707

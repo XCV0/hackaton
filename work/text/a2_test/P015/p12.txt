@@ -1,0 +1,67 @@
+F Training Log of R³A-7B/1.5B
+Figure 5 shows that R³A models initialized with
+cold start exhibit faster reward growth and achieve
+higher final rewards compared to their R³A-Zero
+counterparts, underscoring the benefit of cold-start
+initialization. Although Zero models begin with
+lower rewards, they gradually acquire the desired
+format, demonstrating that decomposed reasoning
+remains effective even without prior initialization.
+In terms of response length, both R³A and R³A-
+Zero models rapidly converge to a stable and con-
+cise output length.
+G Case Study
+Representative outputs from the R3A framework
+are provided in Tables 5 and 6. For brevity, the
+auxiliary high-clicked documents used for intent
+analysis are omitted to more clearly highlight the
+interaction between the query and document.
+Example 1 illustrates a document with a gold
+score of 0, which was misclassified as partly rel-
+evant by the R1 model but correctly classified by
+R³A. The user query asked for the precise definition
+of an infinite series, whereas the document only
+contained related concepts from a table of contents
+and did not address the question directly. The R1
+model was misled by superficial lexical matches
+and assigned a relevance score of 1, despite the doc-
+ument failing to meet the user’s information need.
+In contrast, our model, R³A, successfully inferred
+the document’s lack of relevance by identifying and
+reasoning over the actual content, ultimately pro-
+ducing the correct assessment. This case highlights
+a key strength of R³A: its ability to go beyond lex-
+ical similarity by integrating retrieved documents
+with deeper reasoning about content sufficiency,
+thereby producing more reliable relevance judg-
+ments in alignment with user intent.
+In Example 2, the user inquires about the spe-
+cific reasons for the absence of kindergarten tuition
+fees in Suzhou. The source document exhibits typi-
+cal UGC noise, containing extraneous information
+such as personal anecdotes and traffic conditions.
+R³A demonstrates superior query disambiguation
+through its <INTENT> analysis, correctly identify-
+ing that the user’s core intent is to verify the imple-
+mentation details of a regional fee-waiver policy.
+By leveraging its decomposed reasoning capability,
+the model successfully isolates the pertinent pol-
+icy evidence from the surrounding noise, achieving
+precise evidence localization (Score 2).
+Example 3 highlights R³A’s ability to handle
+partial informational alignment in complex scenar-
+ios. The query concerns general ticket-purchasing
+procedures for seniors, while the document pro-
+vides instructions specific to a seasonal promotion
+in the first quarter of 2024. The <THINK> out-
+put analytically recognizes the asymmetric rela-
+tionship between the general query and the time-
+constrained evidence. The model correctly iden-
+tifies that the document provides valid procedural
+steps but is limited by its seasonal nature, leading
+to an accurate partial relevance score (Score 1).
+This demonstrates the framework’s robustness in
+maintaining high reasoning precision even when
+evidence is bound by specific temporal or condi-
+tional constraints.
+138

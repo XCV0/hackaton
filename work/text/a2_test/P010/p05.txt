@@ -1,0 +1,109 @@
+only LLM conditioned on the multi-modal contextual prefix
+z1:n = [zv , zt] of length N, the joint probability of the output
+xn+1:L is as per Eq. (2), where Pθ is the transformer-based
+LLM backbone parameterized by θ.
+P (xn+1:L | z1:n) =
+LY
+l=n+1
+Pθ (xl | x1:l−1, z1:n) (2)
+Each output token xl is then sampled auto-regressively based on
+the previous output and context and finally decode to language
+space through a text de-tokenizer.
+B. Training Strategy
+Following the visual instruction tuning paradigm [48, 46],
+we employ a two-stage training strategy to progressively enable
+cross-modality alignment and multi-task driving capacity. In
+both stages, we leverage the same next-token prediction cross-
+entropy loss as in Eq. (3) aiming to maximize the conditional
+answer likelihood in Eq. (2), where y is the ground truth token.
+LCE = −
+LX
+i=n+1
+yl log P (xl | z1:n) (3)
+Pre-training In the first pre-training stage, we only train the
+cross-modality projector while freezing the visual encoder
+and LLM. A subset of VIDAL-10M [88] which contains 3
+million video-caption pairs. This achieves alignment between
+visual and language features by projecting the pre-trained video
+embeddings into language tokens understandable by LLM.
+Instruction Tuning While state-of-the-art LLMs exhibit zero-
+shot ICL capability, several works [18] and our ablation
+study in Sec. IV-D have shown further improvement when
+specifically trained on curated ICL demonstrations. In particular,
+we construct a multi-modal instruction tuning dataset with
+structured ICL examples based on the BDD-X dataset [39]
+resulting in 16K video question and answer pairs. As shown in
+Fig. 4, for an 8-frame driving video sequence with associated
+control signals – speed, course, acceleration, and curvature as
+the current query, we retrieve two relevant driving experiences,
+which are then prefixed to the current query as ICL examples.
+The dataset is tailored to support three distinct tasks, each
+represented through question-answer pairs in natural language.
+Note that, with (1) Action Explanation and (2) Justification
+naturally represented as natural language, (3) Control Signal
+prediction is also formed as language token prediction; this
+is feasible due to the distinct mapping of numerical values to
+specific tokens within the language model dictionary.
+C. Retrival-Augmented In-context Learning
+Another critical component of the system is the memory
+unit, which consists of a database and a retrieval engine. The
+database takes in a vectorised video embedding zvo, which
+is extracted with the same video encoder as in Sec. III-A,
+and control signals c ∈ R28 directly from sensor recording.
+Each vector is uniquely associated with the corresponding
+human expert textual explanation and justification from training
+samples as in Sec. III-B.
+Retrieval Mechanism To perform the retrieval, we first
+leverage a lightweight MLP projector of the same structure
+as in Eq. (1) to project the heterogeneous video and control
+signal embedding into the same hybrid embedding s ∈ R1024
+through metric learning [29]. In particular, we adopt a triplet
+loss with Euclidean distance as shown in Eq. (4):
+LT ri(a, p, n) = max(||a−p||2 −||a−n||2 +margin, 0) (4)
+where a, p, n defines anchor, positive, and negative data
+sample, respectively. The positive (a, p) and negative pairs
+(n, p) between hybrid embedding s are selected based on
+text similarity (i.e., TF-IDF Score) of the driving action and
+justification in the BDD-X training set. We aim to form the
+metric space such that the scenarios lead to similar driving
+actions close together and vice versa. This approach addresses
+the limitations of relying solely on visual similarity, which we
+have empirically found can result in sub-optimal performance
+(Sec. IV-D), and also solves the problem of heterogeneous
+sensor inputs that are difficult for similarity comparison. We
+then perform retrieval through an efficient vector similarity
+search. Given a query vector sq , the cosine similarity between
+the query vector and each vector in the database is computed
+as Sc(sq , s(i)) = sq ·s(i) ∥sq ∥∥s(i) ∥ . Subsequently, we consistently select the two most relevant driving samples based on this
+similarity score. These samples represent the entire reasoning
+process, from contextual information to question-answer pairs,
+as illustrated in Fig. 4.
+Retrieval Augmented In-Context Learning (RA-ICL) To
+perform the RA-ICL, we prefix these retrieved samples before
+the current query, facilitating an implicit gradient descent
+through the meta-optimiser of LLM, as proved in [17]. This
+approach is also applicable to MLLMs, with our MLLM
+architecture specified in Sec. III-A. For a given transformer-
+based pre-trained MLLM modeling the prefix-conditioned
+output probability as in Eq. (2), consider one head of the
+multi-head attention in a single transformer block as follows:
+FICL(z1:n) = Attention(Q, K, V )
+=WV [zicl; zq ] Softmax
+ 
+(WK z1:n)T (WQz1:n)√
+di
+!
+(5)
+where z1:n = [zicl; zq ] represents the ICL example zicl and
+current query embeddings zq , respectively. WQ,K,V ∈ Rdi ×do
+is the linear transformation on query, key, and value in the
+attention block, respectively. Now, in [17] in-context learning
+was shown to effectively achieve a meta-optimisation to
+implicitly update the model with an estimated meta-gradient.
+We provide in our work a new, alternative derivation of this,
+supported by more recent work in [41] on the following softmax-
+free linear attention expressions
+FICL(z1:n) = WV [zicl; zq ] (WK [zicl; zq ])T WQz1:n (6)
+This can be simplified, with a more detailed derivation in Sec. C,
+as
+FICL(z1:n) = (∆WICL + WZSL)WQz1:n (7)

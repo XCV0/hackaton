@@ -1,0 +1,109 @@
+Ethical Considerations
+This work involves human annotation and the
+use of LLMs in the dataset construction pipeline.
+For the manually validated subset of ISLAMIC-
+FAITHQA, annotators were recruited through a
+third-party provider, compensated at the standard
+hourly rate for their location, and required to sign
+a non-disclosure agreement specifying the permit-
+ted uses of the data. LLMs were used only to
+standardize phrasing and tone and to support struc-
+tured metadata annotation. They were not treated
+as sources of religious authority, and their outputs
+were subject to human verification and consistency
+checks. The benchmark was built from publicly
+available Islamic NLP resources rather than newly
+collected user data, which reduces risks related
+to privacy, consent, and sensitive personal infor-
+mation. Given the sensitivity of the domain, we
+stress that the benchmark and resulting models are
+intended for research on faithfulness and absten-
+tion, not for issuing fatwas or replacing qualified
+scholarly guidance.
+Broader Impact
+This work provides evaluation and grounding re-
+sources for Islamic question answering, where un-
+faithful outputs can be especially consequential.
+By introducing a bilingual generative benchmark
+that measures correctness, hallucination, and ab-
+stention, and by showing that retrieval, particu-
+larly agentic, tool-mediated retrieval, can reduce
+unsupported generation, we aim to support more
+trustworthy Arabic–English systems and more real-
+istic assessment of faithfulness. At the same time,
+these tools may be misused or over-trusted as re-
+ligious authority, may reflect selection biases in
+what is treated as canonical, and may enable per-
+suasive “citation laundering” or adversarial manip-
+ulation of tool use. We therefore emphasize re-
+sponsible release with clear non-fatwa disclaimers,
+transparency about scope and coverage, encourage-
+ment of abstention under uncertainty, and reporting
+that separates correctness from hallucination and
+non-attempted behavior.
+Acknowledgments
+The work is supported by HBKU flagship research
+grant (HBKU-INT-VPR-FRG-03-10). The findings
+achieved herein are solely the responsibility of the
+authors.
+References
+Ummar Abbas, Mourad Ouzzani, Mohamed Y.
+Eltabakh, Omar Sinan, Gagan Bhatia, Hamdy
+Mubarak, Majd Hawasly, Mohammed Qusay
+Hashim, Kareem Darwish, and Firoj Alam. 2026.
+Fanar-Sadiq: A multi-agent architecture for grounded
+islamic qa. arXiv preprint arXiv:2603.08501.
+Ahmed Abdelali, Hamdy Mubarak, Shammur Chowd-
+hury, Maram Hasanain, Basel Mousi, Sabri Boughor-
+bel, Samir Abdaljalil, Yassine El Kheir, Daniel Izham,
+Fahim Dalvi, Majd Hawasly, Nizi Nazar, Youssef
+Elshahawy, Ahmed Ali, Nadir Durrani, Natasa Milic-
+Frayling, and Firoj Alam. 2024. LAraBench: Bench-
+marking Arabic AI with large language models. In
+Proceedings of the 18th Conference of the European
+Chapter of the Association for Computational Lin-
+guistics (Volume 1: Long Papers), pages 487–520,
+St. Julian’s, Malta. Association for Computational
+Linguistics.
+Alok Abhishek, Lisa Erickson, and Tushar Bandopad-
+hyay. 2025. Beats: Bias evaluation and assessment
+test suite for large language models. 2503.24310v1.
+Utkarsh Agarwal, Kumar Tanmay, Aditi Khandelwal,
+and Monojit Choudhury. 2024. Ethical reasoning
+and moral value alignment of llms depend on the
+language we prompt them in. 2404.18460v1.
+Shahad Al-Khalifa, Nadir Durrani, Hend Al-Khalifa,
+and Firoj Alam. 2025. The landscape of arabic large
+language models (allms): A new era for arabic lan-
+guage technology. Communications of the ACM.
+Online First.
+Aisha Alansari and Hamzah Luqman. 2025. AraHalluE-
+val: A fine-grained hallucination evaluation frame-
+work for Arabic LLMs. In Proceedings of The Third
+Arabic Natural Language Processing Conference,
+pages 148–161, Suzhou, China. Association for Com-
+putational Linguistics.
+Hayfa A Aleid and Aqil M Azmi. 2025. Hajj-fqa: A
+benchmark arabic dataset for developing question-
+answering systems on hajj fatwas: H. aleid and a.
+azmi. Journal of King Saud University Computer
+and Information Sciences, 37(6):135.
+Hamza Aljaji, Rawan Mohamed, Roaa Ibrahim, Ab-
+dallah Alkanani, Arwa Abdulhakim Elaradi, and
+Ehsaneddin Asgari. 2025. Benchmarking genera-
+tive ai on quranic knowledge. In Proceedings of the
+5th Muslims in ML Workshop at NeurIPS 2025.
+Fakhraddin Alwajih, Abdellah El Mekki, Hamdy
+Mubarak, Majd Hawasly, Abubakr Mohamed, and
+Muhammad Abdul-Mageed. 2025. PalmX 2025:
+The first shared task on benchmarking LLMs on Ara-
+bic and islamic culture. In Proceedings of The Third
+Arabic Natural Language Processing Conference:
+Shared Tasks, pages 774–789, Suzhou, China. Asso-
+ciation for Computational Linguistics.
+Bushra Asseri, Estabrag Abdelaziz, and Areej Al-Wabil.
+2025. Prompt engineering techniques for mitigating
+cultural bias against arabs and muslims in large lan-
+guage models: A systematic review. 2506.18199v2.
+10
+26478

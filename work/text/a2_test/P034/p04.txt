@@ -1,0 +1,40 @@
+aligned with Indicator queries, to be finally validated based on contextual relevance.
+These informations are then synthesized in a structured and traceable form, allowing
+experts to inspect how each indicator was derived. This approach aims to make legal
+indicator computation both automatable and interpretable, bridging qualitative legal
+analysis and quantitative monitoring.
+The architecture is designed to be explainable and its outputs are interpretable in
+an operational sense. Each agent in the system produces, alongside its output, an
+explicit explanation that describes the reasoning process by which the result was
+obtained, including the sources used and the criteria applied. In this work, explain-
+ability denotes the availability of explanations at each stage of the pipeline, enabling
+inspection of intermediate decisions, while interpretability denotes the alignment of
+final outputs with the indicator definition and their direct linkage to identifiable legal
+articles. Requiring agents to produce such explanations constrains generation and sup-
+ports consistent, evidence-based outputs.
+The main contributions of this paper are:
+1. Agentic RAG architecture: A multi-agent pipeline that performs adaptive
+retrievals, contextual evaluations, query disambiguation, and evidence-based gen-
+eration.
+2. Evaluation and case study: A comparative study and analysis of N2I-RAG’s
+performance against baseline RAG systems on marine environmental law.
+3. Dataset construction: A French marine environmental law corpus consisting of
+10,596 legal articles drawn from five collections, covering legislation and regulations
+from both scanned and digital sources, structured and indexed to support retrieval-
+based analysis and indicator construction.
+Together, these contributions show how N2I-RAG can support the consistent and
+transparent computation of legal indicators across complex regulatory domains.
+2 Methodology
+The N2I-RAG framework converts natural language legal queries into traceable binary
+decisions that populate an assessment grid representing legal indicators. The system
+connects document analysis to indicator calculation through a structured, multi-agent
+pipeline. Each step, from text extraction to decision-making, ensures that intermediate
+reasoning is visible and verifiable. As illustrated in Figure 1, the process begins with
+OCR (Optical Character Recognition) processing of the document. The cleaned text
+is semantically indexed to enable accurate retrieval. An agentic reasoning loop then
+handles retrieval, grading, generating, and validating before returning a binary result.
+These outputs fill the evaluation grid, where each entry corresponds to a distinct legal
+indicator. This design ensures that each computational step remains interpretable,
+traceable, and meets the legal reliability standards required for policy and compliance
+analysis.
+4

@@ -1,0 +1,113 @@
+missing important components. In practice, a fixed Recall thresh-
+old (e.g., around 60%) is usually sufficient to ensure downstream
+performance, after which F1 Score can guide subgraph-extraction.
+We also explore adaptive thresholding based on query complexity,
+graph density, downstream tasks, and historical logs, balancing
+coverage and efficiency.12 ⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓a).2 For the path-retrieval, the F1 score11
+measures the alignment between the retrieved reasoning paths
+and the ground truth answers. For sets containing the same num-
+ber of reasoning paths, a higher F1 score indicates better quality.
+⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓a).3 For the GraphRAG instance, we adopt Hits@1 as the main eval-
+uation metric, following prior work [3, 50, 62, 63, 75, 98]. It measures
+the proportion of outputs that exactly match the ground truth.13 We
+also report two commonly used complementary metrics—F1 score
+and LLM-based evaluation. Both show similar trends to Hits@1
+across different GraphRAG instances and do not affect our experi-
+mental conclusions.14 b) Efficiency. We record the runtime of both
+modules in the GraphRAG instance per query. c) Cost. We track
+token cost and peak GPU memory usage of the GraphRAG instance
+on EEMs and LLMs, reflecting processing load and computational
+resource demands, respectively.
+Settings for Graph Instance Experiments. For GraphRAG in-
+stances in this study, we selected methods and semantic models that
+balance efficiency and quality within their respective categories,
+based on experiments on subgraph-extraction and path-retrieval
+modules (Sections 4.3 and 4.4). To ensure fair comparisons, we
+adjusted parameters within each instance so that all instances ulti-
+mately retrieved the same number of reasoning paths.15 The key
+experimental settings are as follows, and detailed settings for each
+instance are provided in supplemental material: a) EEMs&LLMs.
+A sentence-Transformer (ST) [111] and Qwen2-72B [117] are em-
+ployed as the EEMs and LLMs implementations, respectively. Note
+that for all experiments in this paper, the batch size of EEMs is set
+to 64 and the max input token of LLMs is set to 16k. b) SBE. The
+PPR algorithm is applied, with a maximum of nodes 𝑁𝑝𝑝𝑟 = 1, 000
+retained. c) SAE. Edge pruning (EP) is used for EEMs and LLMs
+based on subgraphs extracted by PPR, with a maximum of edges
+𝑁𝑒 = 64 retained. d) SBR. The Dijkstra algorithm is employed for
+SPR implementation. e) OSAR. Select 𝑁𝑝 = 32 reasoning paths from
+those retrieved using SPR, leveraging both EEMs and LLMs. f) ISAR.
+The Beam Search algorithm is selected for implementation and com-
+bined with both EEMs and LLMs. The beam width is set to 𝐵 = 8,
+and the maximum path length retained is 𝐿 = 4. g) Generation. We
+utilize various LLMs with differing architectures and scales .16
+Settings for Module Experiments. To evaluate the quality and
+efficiency of methods in subgraph-extraction and path-retrieval
+modules, we implement representative methods from each method
+category, and conduct independent experiments. The settings are
+as follows: a) EEMs&LLMs Selection. A variety of EEMs, including
+statistical model, embedding model, and reranker, are employed.
+12Detailed strategies are available in our technical report B.5.
+13Note the gap between the evaluation of path-retrieval and that of the GraphRAG
+instance, which arises from the ability of LLMs to utilize the reasoning paths.
+14Detailed results are provided in the technical report B.4.
+15In this paper, we follow prior work [45, 71, 77] by setting the number of reasoning
+paths to 32. Note that for instances integrating LLMs in OSAR and ISAR, the number
+of reasoning paths may be fewer than 32 due to the uncertainty in their outputs.
+16Glm4-9B [29], Llama3.3-70B [103], Qwen2-7B and Qwen2-72B [117]
+Specifically, we adopt BM25 as a representative statistical model,
+a sentence-Transformer (ST) [111] as a widely used embedding
+model, BGE-Reranker (BGE) [13] as an effective re-ranker, and
+Qwen2-72B [117] as the LLM implementation.
+b) Settings for the Subgraph-Extraction Module.⁓⁓⁓⁓⁓⁓⁓b).1 SBE. We em-
+ploy PPR as a structural importance-based method, RW as a random
+walk-based algorithm, and KSE as a neighborhood-based strategy.
+⁓⁓⁓⁓⁓⁓b).2 SAE. Node Pruning (NP), Edge Pruning (EP), and Triple Prun-
+ing (TP) are applied across all selected EEMs and LLMs, based on
+subgraphs extracted by SBE, with PPR selected due to its superior
+quality and efficiency in our evaluations.
+c) Settings for the Path-Retrieval Module. We extract 3,000 sub-
+graphs from four evaluation datasets using methods implemented
+in the subgraph-extraction module. From each dataset, 250 test
+queries (1,000 total) are sampled, and three subgraphs per query
+are generated using SBE, SAE-EEM, and SAE-LLM, with the most
+effective implementations selected based on our experiments. These
+subgraphs are used to evaluate the methods in the path-retrieval
+module independently. The settings for each method are as:⁓⁓⁓⁓⁓⁓c).1 SBR.
+The Dijkstra algorithm is employed for SPR, while the DFS algo-
+rithm is employed for EPR. ⁓⁓⁓⁓⁓⁓⁓⁓c).2 OSAR. We use all selected EEMs
+and LLMs to perform semantic evaluation and refinement on the
+paths obtained through SPR (a superior SBR method based on our
+evaluation). ⁓⁓⁓⁓⁓⁓⁓c).3 ISAR. We combine beam search algorithm (𝐵 = 8
+and 𝐿 = 4) with all selected EEMs and LLMs.
+4.2 Evaluation of GraphRAG Instances
+We first present the results of all GraphRAG instances across various
+metrics and analyze key observations.17
+a) Reasoning Performance. As shown in Figure 2, the reasoning
+performance of different GraphRAG instances across four datasets
+follows a consistent trend. With the increase in reasoning model
+size and capabilities (i.e., from 7B LLMs to 72B LLMs), all instances
+show significant performance improvements. Next, we analyze the
+instances according to the groups defined in Table 2.
+⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓a).1 Structural Methods on Both Modules (Group (I)). Instance
+No.1 of Group (I) exhibits the worst overall performance. For ex-
+ample, its Hits@1 is only 0.49 (WebQSP with Qwen2-7B), while
+most other instances are close to or exceed 0.6. This indicates that
+structure-based methods alone yield baseline solutions, necessitat-
+ing semantic models for further improvement. Notably, Instance
+No.1 outperforms certain semantically augmented instances on spe-
+cific datasets, such as No.6, No.8, and No.14 (CWQ with Llama3.3-
+70B). It shows that while semantic augmented methods generally
+perform better, exceptions depend on query complexity, domain,
+and integration of semantic models, as discussed later.
+⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓a).2 Semantic Augmentation on Both Modules (Group (II)). In
+Group (II), instances using EEMs for subgraph-extraction (e.g., No.2,
+3, 6, 7) consistently outperform those using LLMs (e.g., No.4, 5, 8, 9)
+across GrailQA, and all reasoning models. This indicates that LLMs
+are unsuitable for subgraph-extraction when both modules are
+semantically augmented, as they may overly prune graph informa-
+tion, losing critical intermediate information in the reasoning paths,
+a limitation seen in instances like GCR [72], which compromises
+stability and practicality.
+17We supplement the evaluation with a case study comparing representative reasoning
+paths and answers (see technical report B.12).

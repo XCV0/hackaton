@@ -1,0 +1,233 @@
+1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7Hit@1
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No.
+1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7Hit@1
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No.
+1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7Hit@1
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+0.3
+0.5
+0.7
+No.
+1 2 3 4 5 6 7 8 9 1011 12131415
+Qwen2-7B
+0.3
+0.5
+0.7Hit@1
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+Glm4-9B
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+Qwen2-72B
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415
+Llama3.3-70B
+0.3
+0.5
+0.7
+No.
+No.1:SBE-PPR+SBR-SPR
+No.2:SAE-EEMs+OSAR-EEMs
+No.3:SAE-EEMs+OSAR-LLMs
+No.4:SAE-LLMs+OSAR-EEMs
+No.5:SAE-LLMs+OSAR-LLMs
+No.6:SAE-EEMs+ISAR-EEMs
+No.7:SAE-EEMs+ISAR-LLMs
+No.8:SAE-LLMs+ISAR-EEMs
+No.9:SAE-LLMs+ISAR-LLMs
+No.10:SAE-EEMs+SBR-SPR
+No.11:SAE-LLMs+SBR-SPR
+No.12:SBE-PPR+OSAR-EEMs
+No.13:SBE-PPR+OSAR-LLMs
+No.14:SBE-PPR+ISAR-EEMs
+No.15:SBE-PPR+ISAR-LLMs
+GRAG-M
+(a) CWQ
+(b) WebQSP
+(c) GrailQA
+(d) WebQuestions
+Figure 2: Reasoning Results of LEGO-GraphRAG Instances Across Four Datasets
+1 2 3 4 5 6 7 8 9 1011 12131415GRAG-M
+Qwen2-7B
+0.3
+0.5
+0.7Hits@1
+No. 1 2 3 4 5 6 7 8 9 1011 12131415GRAG-M
+Glm4-9B
+0.3
+0.5
+0.7
+No. 1 2 3 4 5 6 7 8 9 1011 12131415GRAG-M
+Qwen2-72B
+0.3
+0.5
+0.7
+No.
+Figure 3: Results of LEGO-GraphRAG Instances and GraphRAG-M Instance on MetaQA Dataset
+1 2 3 4 5 6 7 8 9 1011 12131415
+0
+50Memory (GB)
+▲ ▲ ▲ ▲ ▲ ▲
+No.
+▲ :<1GB Figure 4: Peak GPU Memory Usage
+1 23456789 101112131415
+40
+90
+140
+190
+240Time (s)
+(a) CWQ
+No. 1 23456789 101112131415 40
+90
+140
+190
+240
+(b) WebQSP
+No. 1 23456789 101112131415 40
+90
+140
+190
+240
+(c) GrailQA
+No. 1 23456789 101112131415 40
+90
+140
+190
+240
+(d) WebQuestions
+No.
+Subgraph-Extraction Time Path-Retrieval Time                
+Figure 5: Runtime of SE and PR Modules for GraphRAG Instances
+1 23456789 101112131415
+20
+25
+210
+215
+220
+Token
+(a) CWQ
+No. 1 23456789 101112131415
+20
+25
+210
+215
+220
+(b) WebQSP
+No. 1 23456789 101112131415
+20
+25
+210
+215
+220
+(c) GrailQA
+No. 1 23456789 101112131415
+20
+25
+210
+215
+220
+(d) WebQuestions
+No.
+End-to-End Models(EEMs) Large Language Models(LLMs)                Figure 6: Token Costs for EEMs and LLMs in GraphRAG Instances
+1 23456789 101112131415
+#Hop=1 (46.69%)
+0.4
+0.6
+Hits@1No. 1 23456789 101112131415
+#Hop=2 (28.85%)
+0.4
+0.6
+Hits@1No. 1 23456789 101112131415
+#Hop>2 (24.46%)
+0.4
+0.6
+Hits@1No.
+(a) Queries with Varied Number of Reasoning Hops
+1 23456789 101112131415
+#Ans=1 (65.69%)
+0.2
+0.4F1
+No. 1 23456789 101112131415
+#Ans=2 (9.48%)
+0.2
+0.4F1
+No. 1 23456789 101112131415
+#Ans>2 (24.83%)
+0.2
+0.4F1
+No.
+(b) Queries with Varied Number of Answers
+1 23456789 101112131415
+#Ent=1 (85.26%)
+0.4
+0.6
+Hits@1No. 1 23456789 101112131415
+#Ent=2 (13.39%)
+0.4
+0.6
+Hits@1No. 1 23456789 101112131415
+#Ent>2 (1.35%)
+0.4
+0.6
+Hits@1No.
+(c) Queries with Varied Number of Entities
+Figure 7: Instance Performance w.r.t. Queries
+Also, Instances No.2 and 3 in Group (II) achieve the best overall
+performance, consistently ranking in the top-3 in all reasoning
+models (WebQSP). This highlights the effectiveness of combining
+EEMs for subgraph-extraction with OSAR for path-retrieval, a strat-
+egy yet unexplored by existing methods like GSR [45], which pairs
+EEMs with structure-based path-retrieval. Notably, among Group
+(II) instances using EEMs for subgraph-extraction (i.e., No.2, 3, 6,
+7), Instance No.6 performs the worst. For example, its performance
+is similar to that of Instance No.1, which uses only structure-based
+methods (CWQ with all reasoning models). This suggests that ISAR
+pairs better with LLMs than EEMs, as EEMs’ weaker semantics
+can yield noisy scores on long paths and small score gaps, making
+pruning unreliable. One way to improve ISAR-EEMs is to enhance
+the EEMs themselves, for example, through customization or fine-
+tuning for specific domains or graphs. In addition, we propose two

@@ -1,0 +1,117 @@
+ConflictBank
+NQ-Swap CounterFact
+0
+20
+40
+60
+80
+100PRR (%)
+75.4
+91.9 87.7
+Qwen3-32B
+ConflictBank
+NQ-Swap CounterFact
+88.2
+70.7
+94.0
+Qwen2.5-14B
+ConflictBank
+NQ-Swap CounterFact
+68.6 66.7
+82.0
+Llama-3-8B
+ConflictBank
+NQ-Swap CounterFact
+55.7
+50.0
+59.1
+Mistral-7B
+ConflictBank
+NQ-Swap CounterFact
+73.1
+95.9
+87.5
+Phi-4 14B
+Parametric Recovery Rate Across Models
+Fig. 2: Parametric recovery rate (PRR) of IGD on factual-conflict benchmarks, the dashed line denotes full recovery relative to
+the closed-book reference.
+RAG because the context is misleading, but many of their
+correct answers are still recoverable from model memory.
+B. Truth Prompting Alone Does Not Calibrate Context Trust
+Table I shows that explicit truth seeking instructions alone
+are insufficient to prevent RAG models from being misled
+by incorrect context. In truth mode, the prompt explicitly
+instructs the model to prioritize the correct answer and to
+treat the provided context with skepticism when it may be
+misleading [6], [8]. Nevertheless, Direct RAG performs poorly
+on factual-conflict benchmarks across all models, this failure
+is most visible when comparing Direct RAG with the closed-
+book diagnostic. For example, Qwen2.5-14B answers NQ-Swap
+correctly 91.5% of the time in the closed-book setting, but drops
+to 42.0% once the misleading context is provided. The same
+model reaches 92.8% closed-book accuracy on CounterFact,
+but Direct RAG falls to 36.0%.
+The additional baselines further clarify that this problem
+is not fully solved by answer-level reasoning or confidence-
+based source selection. ExplicitSCR and RCR variants are
+designed to improve situated faithfulness by reasoning over, or
+extracting confidence from, internal and context-based answers
+[8], while MADAM-RAG uses multi-agent aggregation to
+handle conflicting retrieved evidence [9]. These methods often
+improve over Direct RAG on factual-conflict benchmarks,
+confirming that explicit source comparison is useful. However,
+their improvements are uneven: some variants recover more
+world answers but substantially reduce faithful QA accuracy,
+while others preserve context grounded performance but remain
+weak under misleading context. In contrast, IGD achieves the
+best IA score for every evaluated backbone in Table I. This
+suggests that the key difficulty is not only detecting whether
+context or memory is correct at the answer level, but also
+controlling how strongly each source should influence decoding.
+the desired behavior is not to simply suppress context, but to
+preserve context grounded accuracy on faithful examples while
+resisting misleading evidence in factual conflict cases.
+C. IGD Balances Factuality and Faithfulness
+a) Truth mode: recovering world answers under mislead-
+ing context.: Table I shows that IGD substantially improves
+truth mode factual recovery while largely preserving faithful QA
+accuracy. Compared with Direct RAG, IGD improves the IA
+score for every model, with gains of 23.0 points for Qwen3-32B,
+19.5 for Qwen2.5-14B, 9.6 for Llama-3-8B, 11.5 for Mistral-
+7B, and 10.2 for Phi-4. These gains are driven primarily by
+large improvements on factual-conflict benchmarks, where IGD
+consistently shifts generation away from misleading context
+and toward recoverable world knowledge.
+The comparison with external baselines provides a more
+informative view of this trade-off. Confidence-reasoning and
+multi-agent baselines can be strong on individual factual-
+conflict columns, but they often sacrifice accuracy on faithful
+benchmarks. For instance, RCR-style methods may recover
+more world-knowledge answers on a particular conflict set, but
+their faithful accuracy drops sharply because they rely on a
+global answer-level source decision. Similarly, MADAM-RAG
+improves some conflict cases, but its aggregation strategy does
+not consistently preserve original context-grounded behavior.
+The factual gains are large and systematic. Across all models,
+IGD improves every factual-conflict benchmark over Direct
+RAG, with the largest gain reaching 65.4 percentage points on
+Qwen3-32B CounterFact. Importantly, these gains do not come
+from discarding retrieval altogether. On faithful benchmarks,
+IGD remains close to Direct RAG, with moderate drops that
+are much smaller than the factual-conflict gains. This pattern
+suggests that token-level correction is more conservative than
+answer-level rerouting alone: it can weaken misleading context
+when necessary, while still preserving useful retrieved evidence
+when the context is correct.
+To better quantify how much of the recoverable parametric
+signal is restored, Figure 2 reports the parametric recovery rate
+(PRR), defined as the fraction of the gap between Direct RAG
+and closed-book Q-only that IGD recovers on factual-conflict
+benchmarks:
+PRR = AccIGD − AccDirect
+AccClosed − AccDirect
+. (19)
+The PRR results show that IGD recovers a large portion
+of the available parametric knowledge for stronger models.
+For example, Qwen3-32B recovers most of performance gap
+on NQ-Swap and CounterFact, whereas Mistral-7B exhibits

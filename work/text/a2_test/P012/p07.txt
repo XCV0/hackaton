@@ -1,0 +1,145 @@
+LLM-Specific Utility for Retrieval-Augmented Generation CIKM ’26, November 07–11, 2026, Rome, Italy
+L3.1-8B Q3-8B Q3-14B Q3-32B
+0
+50
+100RAG Accuracy
+58.10
+92.22
+59.36
+91.30
+61.72
+94.08
+63.87
+92.04
+NQ
+Unknown Queries
+Known Queries
+L3.1-8B Q3-8B Q3-14B Q3-32B
+0
+50
+100RAG Accuracy
+73.40
+96.27
+75.77
+96.50
+78.18
+97.35
+77.79
+96.91
+TriviaQA
+Unknown Queries
+Known Queries
+L3.1-8B Q3-8B Q3-14B Q3-32B
+0
+50
+100RAG Accuracy
+53.96
+87.25
+60.30
+86.40
+64.80
+91.69
+64.47
+94.14
+MS MARCO-FQA
+Unknown Queries
+Known Queries
+Figure 4: RAG accuracy (%) of LLMs using human-annotated gold passages across different query types. Known queries
+are those that the LLM can answer correctly without retrieval (RAG performance is approximately 100% without retrieval),
+while unknown queries are those for which the LLM cannot provide a correct answer without retrieval (RAG performance is
+approximately 0% without retrieval).
+L3.1-8B Q3-8B Q3-14B Q3-32B
+0
+5
+10
+15
+20
+25
+30
+35PPL
+NQ - PPL Comparison
+L3.1-8B Q3-8B Q3-14B Q3-32B
+0
+5
+10
+15
+20
+25
+30PPL
+TriviaQA - PPL Comparison
+HGP GUP (Passage)
+ HGP\GUP (Passage) HGP GUP (Passage+Query)
+ HGP\GUP (Passage+Query)
+Figure 5: Perplexity (PPL) of LLMs on human-annotated gold
+passages that have been labeled as gold utility (i.e., 𝐻𝐺𝑃∩
+𝐺𝑈𝑃) and those not labeled as gold utility (i.e., 𝐻𝐺𝑃\𝐺𝑈𝑃),
+respectively.
+and Qwen3 32B, demonstrate better performance on their respec-
+tive unknown queries when given human-annotated gold passages,
+compared to weaker models like Llama3.1-8B and Qwen3-8B. These
+results suggest that passages easily understood by humans may
+not be equally interpretable by LLMs, although stronger LLMs
+tend to benefit more from such passages. This aligns with findings
+in the query suggestion task in information retrieval [1], where
+human-suggested queries do not always lead to higher retrieval
+performance. (2) Known queries: For queries that LLMs can answer
+correctly without retrieval, even human-annotated gold passages
+can sometimes lead to slight performance degradation.
+Perplexity Highlights LLM-Specific Comprehension Gaps in
+Utilizing 𝐻𝐺𝑃. From the Figure 2, we can find that not all human-
+annotated gold passages are labeled as gold utilitarian passages for
+specific LLMs. As for why some human-annotated gold passages
+are absent from an LLM’s gold utilitarian set, we hypothesize that
+the discrepancy stems from the understanding capabilities of LLMs.
+Figure 5 displays the perplexity of various LLMs on different kinds
+of datasets. Our findings can be summarized as follows: (1) Across
+human-annotated gold passages, those included in an LLM’s gold
+utilitarian set exhibit lower perplexity than those excluded, with
+the strongest effect observed on NQ. Likewise, the joint perplexity
+of a query paired with its gold utilitarian passage is consistently
+lower than that of the same query paired with a non-utility passage,
+a pattern that holds across both datasets. Even among semantically
+similar human-annotated gold passages containing comparable evi-
+dence, LLMs assign different perplexities and derive different utility,
+indicating that utility depends not only on content but also on the
+model’s ease of processing it. These results suggest that perplexity
+captures aspects of readability and comprehension: passages that a
+model finds easier to parse are more likely to yield utility, which
+helps explain why some human-annotated gold passages are absent
+from LLM-specific utility sets. This observation aligns with prior
+findings on source bias [41], where, under comparable semantics,
+retrieval models preferentially give lower-perplexity documents a
+higher relevance score, reflecting better model understanding. (2)
+Within a given model family, stronger LLMs, those achieving bet-
+ter RAG performance like Qwen3-32B, consistently exhibit lower
+perplexity on both the passages and the query-passage pairs.
+5 LLM-Specific Utility Judgment
+Given that utilitarian passages vary across LLMs, a key research
+question is how to help each LLM identify its useful evidence effi-
+ciently. We propose this task to facilitate such research: our utility
+labels serve as ground truth for evaluating or training methods that
+can generalize to new LLMs.
+5.1 Task Description
+The LLM-specific utility judgment task aims to select supporting
+evidence that is specifically utilitarian for a given large language
+model (LLM). Formally, given a question 𝑞 and a set of 𝑁 retrieved
+candidate passages D ={𝑑1,𝑑2,...,𝑑𝑁} from the corpus C, the
+goal is to select a subset D𝑢 ⊆D that is utilitarian for the target
+LLM 𝐿 in answering 𝑞. Given the gold utilitarian passages for each
+LLM, defined in Equation (1) & (2), we evaluate the ability of LLMs
+to assess the utility of retrieved passages using two approaches:
+set-based evaluation, i.e., D𝑢 is a set of utilitarian passages selected
+from D, and ranking-based evaluation, i.e., D𝑢 is a ranked list based
+on utility.
+5.2 Benchmark Construction
+We restricted evaluation to three single-hop datasets to ensure fair
+comparison with human annotations in Section 4. We focus on
+pointwise utility, and our gold annotations identify passages that
+are individually useful to each target LLM. While this formula-
+tion may not capture utility that emerges from combining multiple
+passages, some multi-hop questions can still be answered from a
+single passage when it contains sufficient evidence. Such instances
+therefore remain valid for evaluating pointwise utility, making the
+inclusion of multi-hop data consistent with our task definition.
+Thus we use more comprehensive datasets (NQ, HotpotQA, 2Wik-
+iQA, TriviaQA, MS MARCO-FQA, FEVER) covering single- and

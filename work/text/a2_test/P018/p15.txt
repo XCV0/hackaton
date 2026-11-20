@@ -1,0 +1,134 @@
+source files are auto-passed because they were
+already validated in DRBench; applying a 2000-
+character truncation to long source documents can
+otherwise create false negatives when the answer
+appears later in the file.
+Correct-Document Rubric Prompt:
+You are quality-checking a "correct" document in a factual QA
+conflict benchmark.
+Question: {question}
+Ground-truth answer: {gt_answer}
+Document excerpt:
+{text}
+Does this document explicitly state or clearly entail the
+ground-truth answer?,→
+Respond with valid JSON only:
+{
+"verdict": "PASS" or "FAIL",
+"reason": "<one sentence>",
+"confidence": <float 0.0-1.0>
+}
+PASS: the document contains the ground-truth answer verbatim or
+as an unambiguous paraphrase.,→
+FAIL: the ground-truth answer cannot be inferred from this
+document alone.,→
+Misinformation-Document Rubric Prompt:
+You are quality-checking a "misinformation" document in a
+factual,→
+QA conflict benchmark.
+Question: {question}
+Ground-truth answer (correct): {gt_answer}
+Claimed answer in this document: {claimed_answer}
+Document excerpt:
+{text}
+Verify two properties:
+(A) DISTINCT -- the claimed answer is factually and
+specifically different from the ground-truth answer.,→
+(B) PLAUSIBLE -- the claimed answer sounds credible to a naive
+reader and is not obviously absurd.,→
+(C) NOT_LABELLED -- the document does not explicitly identify
+the claim as wrong, false, fabricated, or intentionally
+misleading.
+,→
+,→
+Respond with valid JSON only:
+{
+"verdict": "PASS" or "FAIL",
+"distinct": <true/false>,
+"plausible": <true/false>,
+"reason": "<one sentence>",
+"confidence": <float 0.0-1.0>
+}
+PASS requires distinct=true AND plausible=true.
+Temporal-Document Rubric Prompt:
+You are quality-checking a "temporal conflict" document in a
+factual,→
+QA conflict benchmark.
+Question: {question}
+Current ground-truth answer: {gt_answer}
+Historical answer in this document: {claimed_answer}
+Document date: {document_date}
+Document excerpt:
+{text}
+Verify two properties:
+(A) DISTINCT -- the historical answer differs meaningfully from
+the,→
+current ground-truth answer.
+(B) NOT_LABELLED -- the document does NOT contain explicit
+"archived",,→
+"outdated", or "superseded" labels. The document date is
+the only,→
+staleness signal; the text should read as authoritative for
+its time.,→
+Respond with valid JSON only:
+{
+"verdict": "PASS" or "FAIL",
+"distinct": <true/false>,
+"not_labelled": <true/false>,
+"reason": "<one sentence>",
+"confidence": <float 0.0-1.0>
+}
+PASS requires distinct=true AND not_labelled=true.
+Noise-Document Rubric Prompt:
+You are quality-checking a "noise" document in a factual QA
+conflict,→
+benchmark.
+Question: {question}
+Ground-Truth answer (for reference): {gt_answer}
+Document excerpt:
+{text}
+Does this document NOT answer the target question? That is, is
+it,→
+genuinely about a different topic and does not contain or
+clearly imply the ground-truth answer?,→
+Respond with valid JSON only:
+{
+"verdict": "PASS" or "FAIL",
+"reason": "<one sentence>",
+"confidence": <float 0.0-1.0>
+}
+FAIL if the document contains the ground-truth answer or makes
+a strongly similar claim.,→
+PASS if the document is about a different topic entirely.
+A.4 PPTX Markdown Reconstruction
+Since DRBench PPTX files do not include an ex-
+ported text representation, we avoid using an LLM
+for deterministic reformatting and render the struc-
+tured file_dict.json metadata as Markdown.
+def render_pptx_as_markdown(fd: dict) -> str:
+lines = [f"# {fd.get('file_title', 'Presentation')}", ""]
+intro = fd.get("introduction", "").strip()
+if intro:
+lines += ["## Introduction", "", intro, ""]
+for section in fd.get("subsections", []):
+heading = section.get("heading", "").strip()
+content = section.get("content", "").strip()
+if heading:
+lines += [f"## {heading}", ""]
+if content:
+lines += [content, ""]
+conclusion = fd.get("conclusion", "").strip()
+if conclusion:
+lines += ["## Conclusion", "", conclusion, ""]
+return "\n".join(lines)
+This reconstruction preserves the text fields but
+does not attempt to preserve slide layout or visual
+formatting.
+A.5 Final Dataset
+Table 5 summarizes the two released DRQA bun-
+dle configurations. Both configurations are derived
+from the same source examples. The @10 config-
+uration adds one additional misinformation docu-
+ment, one additional temporal document, and three
+additional noise documents relative to @5.
+15

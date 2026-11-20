@@ -1,0 +1,81 @@
+(a) Difficulty distribution across 5 levels.
+(b) Distribution of questions across Islamic knowledge fine-
+grained categories. Inheritance = Inheritance Law, Prophetic
+Bio. = Prophetic Biography, Qur’anic Stud. = Qur’anic Stud-
+ies, Hadith Stud. = Hadith Studies, Finance & Econ. = Islamic
+Finance and Economics, Ethics & Moral. = Islamic Ethics
+and Morality, Family Law = Islamic Family Law, Contemp.
+Issues = Contemporary Issues, Comp. Religion = Compara-
+tive Religion.
+Figure 3: Statistical analysis of ISLAMICFAITHQA. (a)
+Distribution of difficulty scores across the five levels.
+(b) Distribution of question categories, showing broad
+topical coverage.
+distributions of difficulty level and fine-grained
+question category. As shown in Figure 3a, in
+terms of difficulty level, the distribution peaks at
+level 3 (31.2%), with substantial representation at
+level 4 (21.8%) and level 1 (22.8%). This spread
+allows the benchmark to distinguish between
+lower and higher levels of question-answering
+ability. Figure 3b further shows that inheritance
+law (26.4%) and jurisprudence (17.4%) are the
+largest categories, followed by prophetic biography
+(11.4%), Islamic creed (9.8%), and Quranic
+studies (9.4%). For reasoning requirements,
+the majority of samples (70.7%) require active
+reasoning to arrive at the correct answer, while
+only 29.3% can be answered through direct factual
+recall. In addition, 55.4% of the questions require
+multi-step reasoning, increasing the challenge of
+the benchmark by testing whether systems can
+sustain coherent reasoning across multiple steps.
+3.2.2 Annotation Quality
+To ensure dataset quality, we manually annotated a
+subset of the data. We prepared detailed annotation
+guidelines for the full question profiling task, as de-
+scribed in Appendix E. Although these guidelines
+cover all profiling dimensions, we limited manual
+annotation to difficulty level and fine-grained topic
+category in order to reduce annotation effort. Anno-
+tators were recruited through a third-party company
+and were compensated at the standard hourly rate
+for their location. All annotators were profession-
+als, fluent in both Arabic and English, and held at
+least a bachelor’s degree. Each annotator signed
+a non-disclosure agreement specifying the permit-
+ted uses of the data. Every item was annotated
+independently by three annotators. We observe an
+agreement rate of 82.96% and a Cohen’s κ of 0.62.
+4 Experiments
+We develop Islamic-domain LLMs that prioritise
+Qur’an-grounded answer generation and explic-
+itly measure hallucination under open-ended (gen-
+erative) answering. Our approach combines do-
+main adaptation through supervised fine-tuning,
+preference-based alignment with an LLM-as-a-
+judge reward signal, and retrieval augmentation
+over an indexed Qur’an corpus. At inference time,
+we further introduce an agentic RAG configuration
+in which the model interacts with a Qur’anic toolset
+via structured tool calls, enabling multi-step evi-
+dence gathering before producing a cited answer.
+4.1 Experimental Setup
+Figure 4 summarizes the overall development and
+evaluation workflow. Starting from an Islamic cor-
+pus, we apply extraction and filtering to construct
+training data and derive reasoning-oriented super-
+vision. We consider three experimental settings,
+namely (i) benchmarking base LLMs, (ii) super-
+vised fine-tuning with reasoning-oriented supervi-
+sion, and (iii) reward-guided alignment. During
+inference, we deploy an Agentic RAG environment
+in which the tuned model performs multi-turn rea-
+soning and accesses a Qur’an and Hadith database
+through dedicated tools and retrieval steps. We fi-
+nally benchmark all models on ISLAMICFAITHQA
+using an LLM-as-a-judge setup. Further details on
+the experimental parameters are provided in Ap-
+pendix B.
+5
+26473

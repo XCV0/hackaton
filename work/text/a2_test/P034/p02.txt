@@ -1,0 +1,42 @@
+standardized indicator computation, offering a foundation for transparent and
+scalable legal observatories.
+Keywords: Generative AI, Retrieval-Augmented Generation (RAG), Legal indicator
+computation, Multi-agent systems, Explainable legal AI
+1 Introduction
+Legal indicators are structured measures that quantify legal implementation, compli-
+ance, or performance, serving as analytical tools for monitoring governance and policy
+outcomes.
+In fields such as marine environmental law, legal indicators provide key evidence
+for assessing whether regulatory frameworks effectively address ecological challenges,
+from pollution to biodiversity loss. They translate legal obligations, often expressed in
+complex and qualitative terms, into standardized and comparable metrics usable by
+policymakers and researchers.
+Several initiatives have demonstrated the value of legal indicators for environmental
+governance. For example, Michel Prieur et al. [1] have developed an environmental
+law application indicator based on variables extracted from expert surveys. However,
+the construction of these indicators remains labor-intensive and depends on expert
+interpretation and extensive document analysis. As legal systems expand in scope and
+complexity, these practices face growing limitations in terms of scalability, consistency,
+and transparency. This creates a need for reliable and reproducible methods to com-
+pute legal indicators at scale.
+The design of relevant legal indicators requires not only a clear conceptual frame-
+work but also a reproducible methodology and outcomes. Odeline Billant’s thesis [2]
+offers a comprehensive framework for legal indicator construction, emphasizing the
+alignment between legal norms, empirical observations, and operational metrics. This
+framework highlights the importance of traceability, as each indicator must be sup-
+ported by explicit textual evidence. However, implementing this framework in practice
+is challenging owing to the large -scale, heterogeneous, and linguistically complex legal
+texts. Manually identifying relevant norms and rules is both time-consuming and vul-
+nerable to subjective interpretation. Automating legal indicator construction through
+natural language processing techniques and generative AI is therefore a key element
+in enabling consistent, large-scale, and comprehensible monitoring of complex legal
+systems.
+Natural Language Processing (NLP) has made progress toward automating aspects
+of legal analysis. Early work focused on tasks such as named entity recognition, doc-
+ument classification, and information retrieval have enabled partial automation to a
+certain degree of legal analysis workflows [3–10]. While these methods support specific
+subtasks, they typically rely on limited annotated datasets and domain-specific rules,
+which limits their generalizability when faced with new topics or languages. Moreover,
+their systems often run as “black boxes”, offering little or no insight into the reasoning
+leading to how their outputs are produced. This lack of interpretability is particularly
+2

@@ -1,0 +1,118 @@
+the light-to-power conversion efﬁciency to absorber thickness
+ratio,[10,13,14] and lower material consumption.[15] Such beneﬁts
+align with various compliance requirements of regional legisla-
+tion, for instance, with the European Commission’s guidelines
+aimed at reducing the use of critical raw materials, being crucial
+for the dissemination of building-integrated PV.[16–18]
+Nonetheless, there is a signiﬁcant efﬁciency drop following
+the pursuit of ultrathin conﬁgurations, mostly due to:
+1) increased rear interface recombination and 2) incomplete light
+absorption.[10,16,17,19–21] To address the rear interface recombina-
+tion, passivation schemes based on patterned dielectric layers,
+such as SiO2,[20,22–25] Al2O3,[26–30] HfO2,[31,32] and TiO2,[33,34]
+have been efﬁciently introduced, yielding promising enhance-
+ments in open-circuit voltage (VOC), with improvements over
+100 mV compared with a nonpassivated device.[20] However, to
+tackle the challenges imposed through the absorber thickness
+reduction, the electrical gains provided by dielectric passivation
+contact schemes need to be coupled with signiﬁcant optical
+gains, as thinning down the absorber from /C252000 to 500 nm
+leads to losses in the short-circuit current density ( JSC) that
+can be as high as 4 mA cm/C02.[17] The dielectric rear interface pas-
+sivation architectures already allow for a rear optical reﬂectance
+improvement, usually around 0.1–0.9 mA cm/C02,[20,22,35,36] due to
+a refractive index mismatch between the absorber and the dielec-
+tric layer with a low refractive index.[19,36] Nevertheless, consid-
+ering a CIGS-based absorber with a bandgap energy value of
+1.16 eV and assuming an ideal charge carrier collection, even
+if a perfect metallic mirror is integrated at the rear of an ultrathin
+device with a 500 nm absorber, the simulated JSC value is still
+2mAcm/C02 lower than the one of the conventional architecture
+with a 2 μm absorber.[17] Hence, besides an increased optical rear
+reﬂection with the passivation layer, incorporated scattering strat-
+egies to further improve light absorption remain a crucial aspect
+to attain high-performance ultrathin solar cells. Plasmonic nano-
+particles (NPs) have emerged as a compelling solution, having
+been integrated into several solar cell technologies.[37–40] The
+NPs can signiﬁcantly enhance light interaction through plas-
+monic resonance effects, which involve the collective oscillation
+of free electrons within the NP when exposed to speciﬁc light
+wavelengths, which may lead to both far-ﬁeld scattering and
+near-ﬁeld localization, increasing the chances of photon absorp-
+tion within the absorber.[21,41,42] Regarding the placement of
+metallic NPs within an ultrathin CIGS-based solar cell architec-
+ture, there are reports of these being placed at either the solar cell
+front surface or at the p–n junction[43–45] or integrated within the
+rear contact architecture.[46,47] However, if the NPs are placed
+above the absorber, those would block a portion of the incident
+light, through reﬂectance or parasitic absorbance.[17,21]
+Therefore, a more beneﬁcial approach involves placing NPs at
+the absorber rear.[17,21,48] In this conﬁguration, the NPs will inter-
+act with long-wavelength light not absorbed during the initial tra-
+versal through the solar cell, thereby minimizing undesirable
+parasitic optical losses.[49] At resonant wavelength values, the
+NPs may scatter or absorb the incoming light; thus, the absorbed
+light in the metallic NPs will not lead to photocurrent generation.
+Hence, the plasmonic architecture should be optimized for an
+optical path length enhancement by maximizing the scattering
+efﬁciency rather than the absorption one. However, the integra-
+tion at the absorber rear requires the encapsulation of the metal-
+lic NPs, as the CIGS-based layer deposition temperatures between
+300 and 600 °C could lead to in-diffusion.[17,21,50–52] Thus, some
+architectural solutions have been proposed, such as integration
+within a transparent conductive oxide (TCO),[47] albeit without
+the demonstration of solar cell devices, or even the use of ther-
+mally stable Mo NPs.[46] Nevertheless, encapsulating the NPs with
+a thick TCO dampens the scattering efﬁciency, and using Mo with
+weak scattering resonances requires very large NPs that hamper
+the absorber growth, leading to VOC value degradation.
+Consequently, an architecture involving the encapsulation of
+NPs with a thin dielectric rear passivation layer has been pro-
+posed.[17,53,54] In a prior study, the effective encapsulation of
+micrometer-sized Au NP aggregates with a 25 nm Al2O3 layer
+in a complete CIGS-based device was demonstrated through
+X-ray photoelectron spectroscopy depth analysis.[54] The integration
+of these metallic aggregates resulted in an optical enhancement.
+However, the developed Au aggregates, being micrometer sized,
+created a highly irregular and rough rear interface, which contrib-
+uted to a decrease in the VOC and conversion efﬁciency values in
+comparison to a reference device.[54] Thus, in this work, a combi-
+nation of a controlled procedure using a microﬂuidic device to
+deposit individualized 105 nm Au NPs with a nanoimprint lithog-
+raphy (NIL) approach to create electrical contacts was developed.
+Therefore, a substrate that combines passivation through the
+dielectric scheme while allowing for the utilization of the substan-
+tial passivation area (> 70%) for effective light trapping through
+individual metallic NPs was achieved. The proposed architecture
+allows to have NPs close to the solar cell absorber, effectively
+exploiting the plasmonic scattering of small NPs that do not ham-
+per the absorber layer growth and degrade the device performance.
+The developed plasmonic and passivated architecture allowed for a
+3.7 mA cm/C02 JSC increase over a nonpassivated reference device, as
+well as a 23 mV VOC improvement. The combined passivation and
+optical improvement from the novel architecture led to an almost
+2% absolute light-to-power conversion efﬁciency enhancement in
+comparison to a nonpassivated reference device. The attained
+results show the potential to couple optical with electrical strategies
+through the exploitation of plasmonic NPs encapsulated by a
+dielectric passivation scheme in ultrathin solar cells.
+2. Results and Discussion
+2.1. Architecture Considerations
+The role of the developed passivating and plasmonic architecture
+is twofold, to tackle the electrical and optical downfalls arising
+M. Edoff
+Ångström Laboratory
+Department of Material Science and
+Engineering Division of Solar Cell Technology
+Uppsala University
+Uppsala 75121, Sweden
+P. A. Fernandes
+CIETI
+Departamento de Física
+Instituto Superior de Engenharia do Porto
+Instituto Politécnico do Porto
+Porto 4200-072, Portugal
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2024, 8, 2400147 2400147 (2 of 15) © 2024 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2024, 11, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400147, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

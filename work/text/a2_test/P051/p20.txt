@@ -1,0 +1,110 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+return user_prompt
+E. Test Execution Prompt
+def create_prompt ( self ) :
+prompt = PromptTemplate (
+template =""" You are an assistant for
+question - answering tasks .
+Use the following documents to answer the
+question .
+If you don ' t know the answer , write '
+Insufficient information to answer this
+question '.
+Make sure the answer you are giving is
+complete and no information is missing .
+Also include the name of the source
+document , the location of the answer in
+the original document and the relevant
+text span .
+Question : { question }
+Documents : { documents }
+Format your response as follows :
+{{
+" question ": "" ,
+" answer ": "" ,
+" source_document ": " Name / path of the
+source document " ,
+" source_location ": " Page X , text
+starting with ..." ,
+" r el e va n t _t e x t_ s p an ": ""
+}}
+""" ,
+input_variables =[" question " , " documents "] ,
+)
+return prompt
+F. Test Oracle Prompt
+ev al ua ti on_ pr om pt = PromptTemplate (
+template =""" You are an expert judge evaluating
+a model ' s response against a ground truth
+standard .
+INPUTS :
+Query : { query }
+Question Type : { question_type }
+Model Answer : { answer } | Ground Truth Answer : {
+correct_answer }
+Model Source Document : { source_document } |
+Correct Source Document : { correct _documen t }
+Model Source Location : { source_location } |
+Correct Source Location : { correct_source }
+Model Text Span : { r e l ev a n t_ t e xt _ s pa n } | Correct
+Text Span : { correct_span }
+Compare the model answer with the correct
+answer , as well as the source locations and
+selected relevant text spans .
+EVALUATION CRITERIA :
+1. Faithfulness ( true - partially - false ) : Is
+the model answer grounded compared to the
+correct answer ?
+2. Relevance ( true - partially - false ) : Does
+the model answer directly address the query
+?
+3. Completeness ( true - partially - false ) : Is
+the Model Under Test answer as complete as
+the correct one ? If the Model Under Test
+answer is more complete than the correct
+answer , evaluate it positively .
+4. Clarity ( true - partially - false ) : Is the
+generated answer clear and well - structured ?
+5. Keywords match ( true - partially - false ) :
+Do the keywords appear in the Model Under
+Test ' s answer ? True if all keywords appear ,
+partially if some appear and false if none
+appear .
+Write two lines summarizing the permorfance of
+the model under test . Compare the Correct
+Source Location with the Model Source
+Location , Correct Text Span with the Model
+Text Span and Correct Source Document with
+the Model Source Document .
+Also compare the Model Answer and the Ground
+Truth Answer , how the model answered
+differently compared to the correct answer ,
+and mention if it the Model Answer is
+admittable or not . Justify each part .
+When calculating overall score , take true as 1 ,
+false as 0 and partially as 0.5.
+EVALUATION RULES :
+- If faithfulness is false , verdict should
+be FAIL .
+- If the model answer is empty or is not
+faithful to the ground truth answer ,
+evaluation Faithfulness should be FAIL .
+- If question type is NEG_REJ and the Model
+Answer states there is insufficient
+information to answer the Question ,
+verdict should be PASS , ignoring the
+source document , source location and
+relevant text span . In the evaluation
+mention that the model corretly
+admitted it was incapable to answer the
+question .
+- If question type is NEG_REG and the Model
+Answer states there is insufficient
+information to answer the Question ,
+faithfulness , relevance , completeness
+and clarity should be true .
+- If question type is NEG_REJ and the model
+answers normally , compare it with the
+Ground Truth Answer and evaluate it as
+usual .
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 20 of 21

@@ -1,0 +1,65 @@
+• Comment: A short justiﬁcation written by an
+analyst explaining the stance assignment.
+• Metadata: Includes the corporate entity, date,
+and region associated with the PDF
+F Parsing and Chunking Conﬁguration
+Docling
+The following settings were used for parsing all
+documents with the Docling toolkit:
+• Device: mps with 8 threads.
+• OCR: Enabled using easyocr with:
+– Full-page OCR forced
+– Minimum conﬁdence threshold: 0.5
+• Table structure extraction: Enabled with:
+– Cell matching disabled
+– TableFormer mode set to accurate
+PyMuPDF
+The PyMuPDF parser was used with the default
+settings.
+Semantic Chunking
+The semantic chunking module was implemented
+using the Python library CHONKIE (Minhas and
+Nigam, 2025), and conﬁgured with the following
+options:
+• Model: minishlab/potion-base-8M
+• Similarity threshold: 0.75
+• Double-pass merge: Enabled
+• Chunk size: 1536 tokens
+• Device: mps
+Layout Chunking
+The layout chunking module was conﬁgured with
+the following options:
+• Minimum chunk length: 30 words.
+• Chunk boundary heuristic rules:
+– Headers are merged with the subsequent
+text block to preserve continuity.
+– Subsequent headers are concatenated
+into a single header.
+– Tables are treated as atomic units.
+Figure 3: Model Alignment on balanced evaluation
+subset
+– Paragraphs shorter than the Minimum
+chunk length are merged with previous
+paragraphs.
+– Paragraphs ending with colons are
+merged with previous paragraphs unless
+the latter begins with a header marker.
+G LLM Evaluation
+The reported evaluations were performed on a sam-
+ple of 2018 evidences extracted from 10 companies.
+This is an unbalanced evaluation set which is more
+representative of what an analyst might observe.
+Figure 3 shows the same evaluation on a bal-
+anced set of 1000 samples where for each stance
+we have 200 samples. Interestingly we observe
+similar results.
+H When Retrieval Outperforms Ground
+Truth Results
+Metric FR AR BM
+Faithfulness 0.49 0.57 0.52
+Helpfulness 0.65 0.58 0.54
+Conciseness 0.77 0.82 0.88
+Outperform (%) 46.2 30.8 23.1
+Table 6: Average oracle scores for retrieval strategies
+that outperformed Ground Truth in stance generation.
+129

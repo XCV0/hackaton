@@ -1,0 +1,76 @@
+For given input query, write 1-3 passages to answer the query. Write a hint keyword and a passage
+contained within « and ». A passage must be a complete sentence and not a phrase. It must contain
+complete context for answering the query and should not begin with it, he, they etc. Do not repeat
+any passages. Aim for new keywords.
+question: who is the owner of phoenix mall pune?
+passage: keyword: Phoenix Market City owner « Phoenix Market City is developed by Phoenix
+Mills Limited. »
+answer: Phoenix Mills Limited
+question: what brings in more money nba or nﬂ?
+passage: keyword: NFL revenues « NFL revenues are well over $10 billion per season. » keyword:
+NBA revenue « NBA amasses about $6 billion annually. »
+answer: NFL
+question: when was the french national anthem adopted?
+passage: keyword: French national anthem « La Marseillaise became the national anthem of France.
+» keyword: La Marseillaise adoption « La Marseillaise was adopted by France in 1795. »
+answer: 1795
+question: question
+passage:
+Table 11: Few-shot prompt used in RICHES for single-hop QA
+Setup F1 AutoAIS
+Iterative 18.3 20.5
+RICHES 20.1 24.1
+Table 12: Comparison of RICHES with Iterative base-
+line using Gemma-v1-7B-IT on Hotpot-QA.
+Corpus Docs Avg Words
+Passage 40M 58.5
+Sentence 114M 21.0
+Propositions 256M 11.0
+Table 13: Retrieval Corpora used in our experiments
+hold the record [...]" to "The Beatles hold the record [...]"
+making the retrieval easier using constrained decoding.
+Question how many episodes of sabrina the teenage witch are
+there
+Gold Answer 163
+• title + tf-idf: Sabrina the Teenage Witch (1996 TV series).
+The ﬁrst four seasons aired on ABC from September 27,
+1996 to May 5, 2000. The ﬁnal three seasons ran on The
+WB from September 22, 2000 to April 24, 2003.
+• Passage: Sabrina the Teenage Witch is an American tele-
+vision sitcom created by Nell Scovell, based on the Archie
+Comics series of the same name.
+• Sentence: Sabrina the Teenage Witch is an American tele-
+vision sitcom created by Nell Scovell, based on the Archie
+Comics series of the same name.
+• Proposition: Sabrina the Teenage Witch had 163 episodes.
+• Source text for proposition: This is an episode list for Sab-
+rina the Teenage Witch, an American sitcom that debuted
+on ABC in 1996. From Season 5, the program was aired
+on The WB. The series ran for seven seasons totaling 163
+episodes.
+Analysis All retrievals using non-propositional representa-
+tions select part of the main article for "Sabrina the Teenage
+Witch". This article, however, does not contain the answer to
+the question. In the propositional case, there is a straightfor-
+ward proposition that is constructed from a passage from the
+"List of Sabrina the Teenage Witch episodes". Note that the
+source passage contains a reference that becomes ambiguous
+out-of-context ("The series" is decontextualized to "Sabrina
+the Teenage Witch" in the proposition).
+Question what is dj’s boyfriends name on full house
+Gold Answers Steve Hale, Steven "Steve" Hale, rich kid Nel-
+son, or Viper
+• title + tf-idf: Full House (season 8). The eighth and ﬁ-
+nal season of the ABC sitcom Full House originally aired
+between September 27, 1994 and May 23, 1995.
+• Passage: Full House (1987–1995) and its Netﬂix sequel
+Fuller House.
+• Sentence: In the 1990s, she appeared in the ﬁlms Blues
+Brothers 2000
+• Proposition: Steve Hale was D.J.’s boyfriend in seasons
+six and seven.
+• Source text for proposition: Full House, Production, Cast-
+ing. As babies, the children were played by Daniel and
+Kevin Renteria, and in season six, the roles of the twins
+were succeeded by Blake and Dylan Tuomy-Wilhoit. The
+8900

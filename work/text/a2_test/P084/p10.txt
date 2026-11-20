@@ -1,0 +1,102 @@
+Limitations
+First, our human evaluation is based on 100 ran-
+domly sampled responses. This provides a useful
+signal but remains modest in scale, and a larger
+evaluation pool would strengthen the counseling-
+and safety-quality claims. Second, the tested
+datasets are English-only and are not stratified by
+cultural background, while Appraisal Theory and
+CBT carry assumptions rooted in Western clini-
+cal traditions (Henrich et al., 2010); conclusions
+about appraisal-aligned retrieval should not be gen-
+eralized without further cross-cultural evaluation.
+Third, retrieval treats each user turn independently.
+Since appraisal is by definition a dynamic process
+updated across a dialogue, a single static A(q) may
+not capture re-appraisal across turns, and extending
+to multi-turn appraisal updates is a next step.
+Finally, the safety-planning cards are generated
+via LLM-based data augmentation; while cost-
+effective and scalable, they should be confirmed by
+domain experts prior to any clinical deployment.
+We also note that our pipeline is inspired by CBT
+and DBT rather than implementing them in full—
+explicit cognitive-distortion detection (Burns and
+Beck, 1999), structured risk stratification aligned
+with the Columbia Suicide Severity Rating Scale
+(Posner et al., 2011), and the canonical DBT skill
+modules (Linehan, 1993) are natural extensions.
+Ethics Statement
+The authors confirm that this study has no ethical
+issues. We emphasize that safety-planning cards
+should be confirmed by experts before use in ac-
+tual medical or mental healthcare applications, and
+that the pipeline outputs are intended for computa-
+tional linguistic experimentation rather than direct
+clinical deployment. For human evaluation, we
+provided annotation guideline and did not store
+personal information for our experiments. Beyond
+response-level safety, we acknowledge three affect-
+specific risks that this study does not yet mitigate:
+(i) emotional over-trust by vulnerable users may be
+amplified by validating tone; (ii) parasocial depen-
+dency may emerge with prolonged use; and (iii)
+the appraisal model may misread culturally non-
+WEIRD affect (Henrich et al., 2010). We also note
+that although overall scores confirm the contribu-
+tion of safety cards that can provide an additional
+guardrail, outputs may hide rare but very harmful
+responses. Therefore, deployment in clinical set-
+tings requires both expert-in-the-loop confirmation
+of safety-planning cards and longitudinal moni-
+toring of user-side outcomes, not only response-
+side scores. Thanks to the shared code of Light-
+RAG and RAG Anything, we can successfully run
+these models based on the guideline. The code
+and datasets are collected from public GitHub links
+from the original papers. Experiments do not have
+specific parameter tuning to maintain a fair com-
+parison among methods.
+Acknowledgments
+This work is part of the Cognition-aware AI project
+by Hajime Institute. This research is also sup-
+ported by Vietnam National Foundation for Science
+and Technology Development (NAFOSTED) un-
+der grant number 102.05-2025.60. We are deeply
+grateful to all reviewers for their efforts and valu-
+able feedback to help us improve this paper.
+References
+Navneet Agarwal and Kairit Sirts. 2025. Exploratory
+study into relations between cognitive distortions and
+emotional appraisals. In Proceedings of the 10th
+Workshop on Computational Linguistics and Clinical
+Psychology (CLPsych 2025), pages 127–139.
+Vanessa Ponstinnicoff de Almeida, Milena Santos de
+Oliveira, Amanda dos Santos Moraes, Ricardo
+da Costa Padovani, and Danielle Arisa Caranti. 2023.
+Healthy lifestyle deck of cards as a tool for cognitive-
+behavioral therapy in adults with obesity. Estudos de
+Psicologia (Campinas), 40:e210162.
+Kamyar Arzideh, Henning Schäfer, Ahmad Idrissi-
+Yaghir, Cynthia Sabrina Schmidt, Bahadir Eryilmaz,
+Mikel Bahn, Amin T Turki, Olivia Barbara Pollok,
+Eva Maria Hartmann, Philipp Winnekens, et al. 2026.
+Improving retrieval augmented generation for health
+care by fine-tuning clinical embedding models: De-
+velopment and evaluation study. Journal of Medical
+Internet Research, 28:e82997.
+Aaron T Beck, A John Rush, Brian F Shaw, Gary Emery,
+Robert J DeRubeis, and Steven D Hollon. 2024. Cog-
+nitive therapy of depression. Guilford Publications.
+Judith S Beck. 2020. Cognitive behavior therapy: Ba-
+sics and beyond. Guilford Publications.
+Nicholas J Belkin et al. 1980. Anomalous states of
+knowledge as a basis for information retrieval. Cana-
+dian journal of information science, 5(1):133–143.
+Maciej Besta, Ales Kubicek, Robert Gerstenberger,
+Marcin Chrapek, Roman Niggli, Patrik Okanovic,
+Yi Zhu, Patrick Iff, Michal Podstawski, Lucas
+Weitzendorf, et al. 2024. Multi-head rag: Solv-
+ing multi-aspect problems with llms. arXiv preprint
+arXiv:2406.05085.
+13809

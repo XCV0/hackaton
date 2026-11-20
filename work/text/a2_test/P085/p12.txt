@@ -1,0 +1,99 @@
+process is as follows:
+1) Silver Noise:
+1. Decompose the golden contexts Cj g into mini-
+mal semantic units (i.e., propositions) P j g =
+{p1 g, p2 g, . . . }.
+2. Select the proposition pi g most semantically
+relevant to question qj .
+3. Use pi g as input to the DeepSeek to generate
+10 diverse attack contexts.
+4. Manually select 8 semantically consistent yet
+non-redundant attack contexts to form the sil-
+ver noise contexts:
+CSN,j a = {ck,SN a | k = 1, . . . , 8}.
+5. Combine the silver noise contexts with the
+golden contexts to construct the silver noise
+security evaluation dataset:
+DSN =
+{
+(qj , i, C j g/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright
+CSN b
+∪CSN,j a )
+| j = 1, . . . , MSN
+}
+.
+2) Inter-Context Conflict:
+1. Select a golden context ci g ∈ Cj g .
+2. Based on ci g, use strategies such as minimal
+perturbation to generate a text CICC,j a =
+{c1,ICC a } that clearly contradicts ci g.
+3. Randomly select another golden context ce g ∈
+Cj g \ {ci g}, where e ̸= i.
+4. Combine the generated conflict context with
+the golden context ci g used to generate it and
+another golden context ce g to construct the con-
+flict security evaluation dataset:
+DICC =
+{
+(qj , i, {ci g, ce g}/bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+CICC b
+∪CICC,j a )
+| j = 1, . . . , MICC
+}
+.
+3) Soft Ad:
+1. Select a golden context ci g ∈ Cj g .
+2. Manually read ci g and generate appropriate
+attack keywords a1,... (i.e., soft ad keywords).
+3. Use strategies like direct insertion or in-
+direct insertion to embed attack keywords
+into ci g, generating the soft ad attack context
+CSA,j a = {c1,SA a }.
+4. Randomly select two other golden contexts
+ce g and cl g from Cj g \ {ci g} for constructing the
+clean set, where i ̸= e, e ̸= l, l ̸= i.
+5. Combine the soft ad attack context with the
+other two golden contexts ce g, cl g to construct
+the soft ad security evaluation dataset:
+DSA =
+{
+(qj , i, {ce g, cl g}/bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+CSA b
+∪CSA,j a )
+| j = 1, . . . , MSA
+}
+.
+4) White DoS:
+1. Based on question qj , generate an attack con-
+text CWDoS,j a = {c1,WDoS a } containing white
+safety warnings.
+2. Combine the generated white DoS context
+with the complete golden contexts Cj g to
+construct the White DoS security evaluation
+dataset:
+DWDoS =
+{
+(qj , i, C j g/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright
+CWDoS b
+∪CWDoS,j a )
+| j = 1, . . . , MWDoS
+}
+.
+The complete SafeRAG dataset is defined as18:
+Dsfr = DSN ∪ DICC ∪ DSA ∪ DWDoS.
+A.3.4 Threat Framework: Attacks on the
+RAG Pipeline
+We utilize the SafeRAG dataset to simulate various
+attack scenarios that RAG may encounter during
+Q&A tasks. Our proposed threat framework en-
+ables attackers to inject malicious contexts into
+any stage of the RAG pipeline (i.e., retrieval, filter,
+or generation) to analyze potential vulnerabilities
+when facing different types of attacks.
+Specifically, for an attack task t ∈ T , Ct b
+from the dataset Dt = {(qj , i, C t b ∪ Ct,j a ) | j =
+18All manual annotation tasks in the dataset construction
+process were conducted by professionals with a background
+in journalism, ensuring high-quality annotations. Additionally,
+the gender ratio of the annotators was balanced at 1:1.
+4620

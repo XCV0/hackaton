@@ -1,0 +1,40 @@
+Query: What is australia’s location in the world and region? Ground Truth: Oceania
+Documents:
+(1) . . . Australia is both a continent and a country. It is located to the south of Indonesia and Papua
+New Guinea, in the southeast part of the Indian Ocean. New Zealand lies to its east, and most of
+the Indian Ocean lies to its west. . . . Australia is the world’s smallest continent, though it is also the
+sixth-largest country in the world. The total land area of Australia is 7,682,300 sq. km.
+(2) . . . Australia is the smallest continent and the largest country in Oceania located between the
+Indian Ocean and Pacific Ocean in the Southern hemisphere. . . . Australia is separated from Papua New
+Guinea by the Coral Sea and Torres Strait to the northeast; from Indonesia by the Timor and Arafura
+seas to the northwest; from Coral Sea Islands Territory by the Great Barrier Reef; from New Zealand by
+Tasman Sea to the southeast;
+(3) . . . Australia is located south of the equator and is bordered by the Indian Ocean and the Pacific Ocean.
+. . .
+Summary:
+Summary: Here is a concise summary: Australia is located in the Southern Hemisphere, between the
+Indian Ocean and the Pacific Ocean. It is the world’s smallest continent and the sixth-largest country,
+covering an area of 7,682,300 square kilometers. Australia is surrounded by the Indian Ocean to the west,
+the Timor, Arafura, and Coral Seas to the north, the Pacific Ocean to the east, and the Tasman Sea and
+Southern Ocean to the south. The country is made up of six states (Western Australia, South Australia,
+Victoria, Tasmania, New South Wales, and Queensland) and two territories (the Northern Territory and
+the Australian Capital Territory)
+Answer: Australia is located in the Southern Hemisphere, between the Indian Ocean and the Pacific
+Ocean. (✗)
+RankCoT:
+Chain-of-Thought: According to the passages, Australia is:
+1. An island continent located in the Southern Hemisphere.
+2. Situated between the Indian Ocean and the Pacific Ocean.
+3. Located south of the equator.
+4. Surrounded by the Indian Ocean to the west, the Timor, Arafura, and Coral Seas to the north, the
+Pacific Ocean to the east, and the Tasman Sea and Southern Ocean to the south.
+5. An island continent in Oceania, which is a region that includes Australia, New Zealand, and many
+Pacific island nations.
+So, Australia’s location in the world is in the Southern Hemisphere, in the region of Oceania.
+Answer: Australia is an island continent located in the Southern Hemisphere, in the region of Oceania.
+(✓)
+Table 9: Case Study. We randomly sample one case from the NQ dataset to show the knowledge refinement
+result. Different colors are used to annotate the key information from the retrieved knowledge retained by different
+knowledge refinement models: Pink for Summary, Blue for RankCoT. And we also highlight the key points that
+can help answer the query in Purple.
+12871

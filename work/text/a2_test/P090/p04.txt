@@ -1,0 +1,66 @@
+Figure 3: The overall framework for simulating the impact of real-world noise on RAG models. Initially, we
+generate and obtain QA instances, utilizing ChatGPT to filter out ambiguous examples (Step 1). Then, we perform
+entailment verification using NLI models to maintain evidence quality (Step 2). After that, we use tools like search
+engines to create noisy documents (Step 3). Finally, we transform the free-form QA into a multiple-choice QA
+format by providing several answer options for convenient automatic evaluation (Step 4). All experiments are
+conducted in a zero-shot setting to avoid bias from demonstrations.
+4 Noise RAG Benchmark Construction
+The overall framework is illustrated in Figure 3. We
+will discuss the data construction and evaluation
+metrics as follows.
+4.1 Data Construction
+As shown in Figure 3 (A), our framework com-
+prises four essential steps, including QA Instance
+Generation, Entailment Verification, Noise Intro-
+duction and Testbeds Construction.
+Step 1: QA Instance Generation For prior noise,
+we collect article snippets from mainstream me-
+dia and Wikipedia, covering various time periods
+and domains such as sports, politics, and finance.
+We then design prompts for ChatGPT to generate
+relevant events, questions, and answers for each
+snippet. Note that the generated questions con-
+tain prior noise (factual errors), which we man-
+ually review to ensure that they are reasonably
+answerable by LLMs. For the remaining seven
+types of noise (SeN, DN, ISN, CN, SuN, ON, PN),
+we obtain question-answering (QA) pairs from
+existing datasets, following previous work (Fang
+et al., 2024; Cuconasu et al., 2024; Yoran et al.,
+2024). After obtaining candidate QA pairs, we
+employ ChatGPT to remove ambiguous or difficult-
+to-assess pairs, followed by a manual review. For
+example, questions like “How many companies
+have a market capitalization of over $25 billion
+and pledged to reduce greenhouse gas emissions?”
+should be excluded due to their broad potential an-
+swers and the dynamic market values of companies.
+Similar criteria are applied to other instances.
+Step 2: Entailment Verification As illustrated
+in Xie et al. (2024a); Yoran et al. (2024), effective
+evidence should strongly support its answer. For
+example, golden evidence about David Beckham
+should support that he played for Real Madrid be-
+fore joining LA Galaxy. Therefore, we employ
+the natural language inference model, bart-large-
+mnli-407M (Lewis et al., 2020a) to ensure evidence
+properly entails the answer. We only keep those
+examples with an entailment probability p ≥ 0.8.
+Step 3: Noise Introduction We construct diverse
+retrieval documents for noise testbeds. For coun-
+terfactual noise, we extract related entities and re-
+lations from Google search results to create coun-
+terfactual answers. ChatGPT is then employed
+to construct corresponding supportive evidence,
+followed by entailment verification. For Support-
+ive and semantic noise, we utilize the 2018 En-
+glish Wikipedia dump (Karpukhin et al., 2020) as
+source documents, with off-the-shelf Contriever-
+MS MARCO model (Izacard et al., 2022) for re-
+trieval and the lightweight text embedding model
+all-MiniLM-L6-v2 (Wang et al., 2021) for seman-
+tic relevance filtering. To simulate illegal sentence
+noise, we construct meaningless sentences by ran-
+domly combining words from model vocabulary,
+mimicking real-world garbled text. Datatype noise
+5022

@@ -1,0 +1,107 @@
+Artsiom Sauchuk, James Thorne, Alon Halevy, Nicola
+Tonellotto, and Fabrizio Silvestri. 2022. On the role
+of relevance in natural language processing tasks. In
+Proceedings of the 45th International ACM SIGIR
+Conference on Research and Development in Infor-
+mation Retrieval, pages 1785–1789.
+Freda Shi, Xinyun Chen, Kanishka Misra, Nathan
+Scales, David Dohan, Ed H Chi, Nathanael Schärli,
+and Denny Zhou. 2023. Large language models can
+be easily distracted by irrelevant context. In Inter-
+national Conference on Machine Learning, pages
+31210–31227. PMLR.
+Weihang Su, Yichen Tang, Qingyao Ai, Zhijing Wu,
+and Yiqun Liu. 2024. Dragin: Dynamic retrieval aug-
+mented generation based on the information needs of
+large language models. In 62nd Annual Meeting of
+the Association for Computational Linguistics, ACL
+2024, pages 12991–13013. Association for Computa-
+tional Linguistics (ACL).
+Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot,
+and Ashish Sabharwal. 2022. Musique: Multi-
+hop questions via single-hop question composition.
+Transactions of the Association for Computational
+Linguistics, 10:539–554.
+Liang Wang, Nan Yang, Xiaolong Huang, Binxing
+Jiao, Linjun Yang, Daxin Jiang, Rangan Majumder,
+and Furu Wei. 2022. Text embeddings by weakly-
+supervised contrastive pre-training. arXiv preprint
+arXiv:2212.03533.
+Siye Wu, Jian Xie, Jiangjie Chen, Tinghui Zhu, Kai
+Zhang, and Yanghua Xiao. 2024a. How easily do
+irrelevant inputs skew the responses of large language
+models? arXiv preprint arXiv:2404.03302.
+Wenhao Wu, Yizhong Wang, Guangxuan Xiao, Hao
+Peng, and Yao Fu. 2024b. Retrieval head mechanisti-
+cally explains long-context factuality. arXiv preprint
+arXiv:2404.15574.
+Guangxuan Xiao, Yuandong Tian, Beidi Chen, Song
+Han, and Mike Lewis. 2023. Efficient streaming
+language models with attention sinks. arXiv preprint
+arXiv:2309.17453.
+Fangyuan Xu, Weijia Shi, and Eunsol Choi. 2023a. Re-
+comp: Improving retrieval-augmented lms with com-
+pression and selective augmentation. arXiv preprint
+arXiv:2310.04408.
+Peng Xu, Wei Ping, Xianchao Wu, Lawrence McAfee,
+Chen Zhu, Zihan Liu, Sandeep Subramanian, Evelina
+Bakhturina, Mohammad Shoeybi, and Bryan Catan-
+zaro. 2023b. Retrieval meets long context large lan-
+guage models. In The Twelfth International Confer-
+ence on Learning Representations.
+An Yang, Baosong Yang, Binyuan Hui, Bo Zheng,
+Bowen Yu, Chang Zhou, Chengpeng Li, Chengyuan
+Li, Dayiheng Liu, Fei Huang, Guanting Dong, Hao-
+ran Wei, Huan Lin, Jialong Tang, Jialin Wang, Jian
+Yang, Jianhong Tu, Jianwei Zhang, Jianxin Ma, and
+45 others. 2024. Qwen2 technical report. arXiv
+preprint arXiv:2407.10671.
+An Yang, Bowen Yu, Chengyuan Li, Dayiheng Liu,
+Fei Huang, Haoyan Huang, Jiandong Jiang, Jian-
+hong Tu, Jianwei Zhang, Jingren Zhou, and 1 others.
+2025. Qwen2. 5-1m technical report. arXiv preprint
+arXiv:2501.15383.
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio,
+William Cohen, Ruslan Salakhutdinov, and Christo-
+pher D Manning. 2018. Hotpotqa: A dataset for
+diverse, explainable multi-hop question answering.
+In Proceedings of the 2018 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+2369–2380.
+Chanwoong Yoon, Taewhoo Lee, Hyeon Hwang, Min-
+byul Jeong, and Jaewoo Kang. 2024. Compact: Com-
+pressing retrieved documents actively for question
+answering. In Proceedings of the 2024 Conference
+on Empirical Methods in Natural Language Process-
+ing, pages 21424–21439.
+Ori Yoran, Tomer Wolfson, Ori Ram, and Jonathan Be-
+rant. 2024. Making retrieval-augmented language
+models robust to irrelevant context. In The Twelfth
+International Conference on Learning Representa-
+tions.
+Tian Yu, Shaolei Zhang, and Yang Feng. 2024.
+Auto-rag: Autonomous retrieval-augmented gener-
+ation for large language models. arXiv preprint
+arXiv:2411.19443.
+Kun Zhu, Xiaocheng Feng, Xiyuan Du, Yuxuan Gu,
+Weijiang Yu, Haotian Wang, Qianglong Chen, Zheng
+Chu, Jingchang Chen, and Bing Qin. 2024. An in-
+formation bottleneck perspective for effective noise
+filtering on retrieval-augmented generation. In Pro-
+ceedings of the 62nd Annual Meeting of the Associa-
+tion for Computational Linguistics (Volume 1: Long
+Papers), pages 1044–1069.
+A Detailed Observations
+In this section, we present detailed observations of
+attention behavior in LLMs, along with the corre-
+sponding experimental setup. Through three care-
+fully designed experiments, we arrive at the follow-
+ing key findings:
+1. Certain middle-layer attention heads effec-
+tively identify relevant information. (Section A.1)
+2. Attention patterns adapt to the density of
+relevant content. (Section A.2)
+3. Attention to the initial token of the context in-
+creases as the overall context becomes less relevant.
+(Section A.3)
+8466

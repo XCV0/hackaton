@@ -1,0 +1,33 @@
+Method LegalBench-RAG MSMARCO SCI-DOCS Dragonball
+IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑
+DenseXRetrieval 1.93 32.74 5.88 19.14 58.68 32.61 70.89 86.13 82.31 0.01 1.64 1.12
+Meta-Chunking-PPL 2.72 35.41 7.69 20.94 59.97 34.92 0.36 16.73 2.15 6.72 41.62 16.14
+Meta-Chunking-MSP 2.94 36.26 8.12 21.57 60.36 35.73 71.91 86.42 83.21 4.21 39.08 10.77
+RAPTOR 3.10 36.83 8.41 22.94 61.81 37.12 80.94 91.03 88.92 4.08 38.92 10.49
+LightRAG 4.29 40.97 10.47 26.57 64.42 41.25 80.42 90.84 88.53 11.60 51.16 22.67
+PropRAG 4.76 42.28 11.25 28.13 65.83 42.73 83.63 92.36 90.55 14.37 55.24 26.01
+MoC 5.10 43.11 11.84 28.68 66.26 43.29 84.39 92.73 91.01 16.09 57.47 27.99
+SAKI-RAG 4.98 43.27 11.52 30.21 67.58 44.70 83.46 95.43 87.46 19.62 75.61 25.95
+SPROUTRAG 8.45 50.48 16.74 37.21 72.21 51.53 93.91 98.04 95.79 29.68 82.34 36.05
+Table 4: Retrieval performance at depth k=1 across four benchmarks (IE ↑, Precision ↑, Recall ↑). Bold = best;
+underline = second-best. SPROUTRAG rows are shaded.
+Method LegalBench-RAG MSMARCO SCI-DOCS Dragonball
+IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑
+DenseXRetrieval 2.84 34.99 8.13 21.96 61.68 35.61 73.44 87.63 83.81 0.01 5.01 0.14
+Meta-Chunking-PPL 3.74 37.66 9.94 23.88 62.97 37.92 0.67 18.23 3.65 8.07 43.87 18.39
+Meta-Chunking-MSP 3.99 38.51 10.37 24.54 63.36 38.73 74.48 87.92 84.71 5.38 41.33 13.02
+RAPTOR 4.17 39.08 10.66 26.00 64.81 40.12 83.67 92.53 90.42 5.25 41.17 12.74
+LightRAG 5.50 43.22 12.72 29.83 67.42 44.25 83.13 92.34 90.03 13.31 53.41 24.92
+PropRAG 6.01 44.53 13.50 31.48 68.83 45.73 86.40 93.86 92.05 16.25 57.49 28.26
+MoC 6.39 45.36 14.09 32.06 69.26 46.29 87.17 94.23 92.51 18.06 59.72 30.24
+SAKI-RAG 6.27 45.52 13.77 33.67 70.58 47.70 86.23 96.93 88.96 21.96 77.86 28.20
+SPROUTRAG 10.01 52.73 18.99 41.01 75.21 54.53 95.92 98.69 97.19 32.40 84.59 38.30
+Table 5: Retrieval performance at depth k=3 across four benchmarks (IE ↑, Precision ↑, Recall ↑). Bold = best;
+underline = second-best. SPROUTRAG rows are shaded.
+which groups all four relevant sentences into a sin-
+gle clause-level unit. This allows the generator
+to answer both parts of the query: the agreement
+limits liability through damage exclusions and a
+monetary cap, but the limitation does not apply to
+the specified carve-outs.
+46534

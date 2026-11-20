@@ -1,0 +1,151 @@
+) +LWV# (0
+0HWULFV
+
+
+
+9DOXH
+
+
+
+
+
+
+
+
+
+
+
+FOHDQ
+N 
+N 
+N 
+(a) KGQA performances of RoG
+$3UHFLVLRQ $+# $055
+0HWULFV
+
+
+
+
+9DOXH
+
+
+
+
+
+
+
+
+N 
+N 
+N  (b) Adversarial Results of RoG
+) +LWV# (0
+0HWULFV
+
+
+
+
+
+9DOXH
+
+
+
+
+
+
+
+
+
+
+
+
+FOHDQ
+N 
+N 
+N  (c) KGQA performances of GCR
+$3UHFLVLRQ $+# $055
+0HWULFV
+
+
+
+
+9DOXH 
+
+
+
+
+
+
+N  N 
+N  (d) Adversarial Results of GCR
+Figure 6: Attack Effectiveness across increasing poisoning scales.
+Table 5
+Performance of RoG using different LLMs, with and without data poisoning attack.
+F1 Hits@1 EM
+Category LLM for Generation Clean Attack Degradation Clean Attack Degradation Clean Attack Degradation
+Open-source Llama-2-7B-chat-hf 41.00 22.78 18.22 (44.43↓) 46.56 26.78 19.78 (44.48↓) 7.49 0.25 7.24 (96.66↓) Llama-3.1-8B-Instruct 54.20 32.02 22.18 (40.92↓) 32.49 27.70 4.79 (14.72↓) 26.78 5.77 21.01 (78.45↓)
+Closed-source GPT-3.5-turbo 56.51 36.19 20.34 (35.95↓) 64.13 35.75 28.38 (44.25↓) 31.02 3.87 27.15 (87.52↓) GPT-4 61.33 37.31 24.02 (39.17↓) 61.36 32.49 28.87 (47.05↓) 41.34 8.91 32.43 (78.45↓)
+Mixture-of-Experts DeepSeek-V3-0324 57.69 33.00 24.69 (42.80↓) 67.04 37.70 29.34 (43.76↓) 41.94 11.81 30.13 (71.84↓)
+KG-specific LLMRoG 70.34 38.06 32.28 (45.89↓) 79.61 48.46 31.15 (39.13↓) 45.76 8.85 36.91 (80.66↓)
+questions with retrieved adversarial answers are ultimately
+adopted by SubgraphRAG in the final response. However,
+for those questions in which adversarial answers are suc-
+cessfully introduced into the final prediction, such answers
+typically occupy a large proportion of the prediction across
+both RoG and SubgraphRAG on the two benchmarks.
+Based on these results, we observe that the retrieval
+stage constitutes a critical vulnerability in existing KG-
+RAG methods, underscoring the importance of reliable
+evidence to secure KG-RAG methods. While the gener-
+ation stage with LLMs is more robust against poisoned
+evidence, it still suffers from a polarized response: ad-
+versarialcontentiseitherfullyrejectedordominatesthe
+final prediction once adopted.
+4.7. Attack Analysis on Poisoning Scales
+Inthissection,weinvestigatetheimpactofthepoisoning
+scalebyvaryingthenumberofpoisonedtriples𝑘associated
+witheachtargetedadversarialanswer.AsshowninFigure6,
+larger values of 𝑘 generally lead to stronger attack effects
+on both QA accuracy and adversarial manipulation. This
+is primarily reflected in the improved ability to promote
+adversarial answers and elevate their ranking, as indicated
+by higher MAPR and AH@1 scores.
+However, the effects of further increasing 𝑘 beyond 𝑘 =
+4 diminish, with both QA and attack metrics remaining
+largely stable. For example, when 𝑘 = 4, RoG already
+fails toproduce mostof the exactlycorrect answers,leaving
+little room for further degradation. In such cases, additional
+poisoned triples primarily increase the likelihood that the
+targeted negative answers appear at higher ranks, but can
+hardlyleadtofurtherdropsintheoverallQAperformanceof
+KG-RAG methods. Instead, the increasing poisoning scales
+would potentially raise the risk of attack detection.
+These findings suggest that KG-RAG methods are
+highly sensitive to knowledge poisoning, as even small-
+scaleperturbationscancausenotableperformancedegra-
+dation. Compared to the marginal enhancement of at-
+tackeffectiveness,increasingpoisoningscalesmayposea
+greater concern regarding attack stealthiness, especially
+considering that large-scale perturbations are often im-
+practical in real-world scenarios.
+4.8. Attack Analysis on KG-RAG Generators
+In this section, we investigate the robustness of dif-
+ferent LLMs used in the generation stage of KG-RAG
+methods under our data poisoning attacks. We focus on
+the KG-RAG method of RoG and adopt different LLMs
+used for final answer generation. Specifically, we evaluate
+four categories of LLMs: open-source models (LLaMA2-
+7B-chat-hf, LLaMA3.1-8B-Instruct), closed-source models
+(GPT-3.5-turbo, GPT-4), mixture-of-experts (MoE) models
+(DeepSeek-V3-0324), and KG-specific models (the RoG-
+integratedLLM).Theretrievalresultsandprompttemplates
+are kept consistent across all settings, with minimal format-
+ting adjustments for each LLM to accommodate their input
+formatting requirements.
+BasedontheresultsinTable5,wehavefollowingobser-
+vations: (1). The KG-specific LLM (LLMRoG) achieves the
+greatestQAperformancewithoutdatapoisoningattack,but
+also suffers the most significant degradation under attack.
+For example, its F1 score drops by 45.89% relative to its
+clean performance, a decline greater than that of any other
+LLM in comparison. (2). Closed-source LLMs (GPT-3.5
+: Preprint submitted to Elsevier Page 10 of 13

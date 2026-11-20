@@ -1,0 +1,51 @@
+A PREPRINT
+RAG primarily consists of two components: a retriever, which searches a large corpus for passages relevant to the input
+query, and a generator, which produces responses conditioned on both the query and the retrieved content. As a result,
+RAG performance is heavily dependent on the quality of the retrieval step, which in turn relies on the effectiveness
+of the underlying embedding models. Most embedding models are trained on general text and may not be optimized
+for specialized domains such as finance or healthcare, leading to suboptimal retrieval in these contexts. Furthermore,
+RAG retrieval is often noisy and highly sensitive to the number of retrieved documents (top-k). To mitigate this noise,
+reranker models are sometimes employed to reorder the retrieved documents based on relevance before passing them
+to the generator. However, introducing a reranker increases pipeline complexity and does not necessarily guarantee
+improved performance.
+2.2 Graph RAG
+Unlike standard RAG, graph-based RAG methods construct a graph from the external corpus to enhance contextual
+understanding and improve LLM responses. These approaches typically involve three stages: (1) building a knowledge
+graph by extracting nodes and edges from corpus chunks using an LLM, (2) retrieving relevant nodes or subgraphs from
+the graph in response to a user query, and (3) generating answers by incorporating the retrieved graph information into
+the prompt. The key distinctions are that graph-based RAG retrieves and reasons over structured graph elements—such
+as nodes and relationships—instead of raw text chunks, enabling richer and more precise information retrieval [18].
+2.3 Resource Description Frameworks (RDF)
+The Resource Description Framework (RDF) is a widely adopted standard for representing information as a graph,
+particularly in the context of the Semantic Web and knowledge graphs. In RDF, data is modeled as a collection of
+triplets, each consisting of a subject, predicate, and object. These triplets naturally form a directed, labeled graph where
+nodes represent entities or values, and edges capture the relationships between them. This structure enables flexible,
+schema-agnostic modeling of complex, interconnected data and supports powerful querying and reasoning capabilities
+[21, 22]. One can interpret the subject and object in an RDF triplet as nodes, and the predicate as the labeled edge
+(relationship) connecting them. This mapping allows RDF triplets to be naturally represented as nodes and relationships
+in a graph structure.
+2.4 Labelled Property Graphs (LPGs)
+The Labeled Property Graph (LPG) is a flexible and widely used graph data model that represents information as nodes,
+relationships (edges), and properties. In LPG, both nodes and edges can have labels to denote their types, and each can
+store arbitrary key-value properties, enabling rich, schema-agnostic representation of complex, interconnected data.
+This structure supports efficient querying, traversal, and reasoning over heterogeneous datasets, making LPG a popular
+choice for knowledge graphs, social networks, and enterprise data integration [23].
+2.5 Graph Query Language (GQL)
+Graph query languages are specialized tools designed to retrieve, traverse, and manipulate data stored in graph
+structures. For RDF-based graphs, SPARQL is the main querylanguage, enabling expressive pattern matching over
+triples. SPARQL’s design aligns with RDF’s semantic foundations, allowing users to extract relationships and infer new
+knowledge from interconnected data. In contrast, Labeled Property Graphs (LPG) are typically queried using languages
+such as Gremlin and Cypher (including openCypher). Gremlin is a traversal-based language that enables flexible
+navigation and analytics over property-rich nodes and edges, while Cypher provides a declarative, SQL-like syntax
+for pattern matching, filtering, and aggregation. Both Gremlin and Cypher are optimized for LPG’s schema-agnostic,
+property-centric model, supporting efficient graph algorithms and real-time analytics. The choice of query language
+reflects the underlying graph model: SPARQL for RDF’s semantic interoperability, and Gremlin/Cypher for LPG’s
+practical expressiveness and performance [24, 25]
+2.6 Amazon Neptune
+Amazon Neptune is a fully managed graph database service designed to support highly connected datasets and complex
+relationship modeling. Neptune provides native support for both the Resource Description Framework (RDF) and the
+Labeled Property Graph (LPG) models, enabling users to choose the most suitable paradigm for their application. For
+RDF data, Neptune implements the SPARQL query language, allowing expressive semantic queries and integration
+with linked data standards. For LPG, Neptune supports both Gremlin and openCypher, offering flexible traversal and
+pattern-matching capabilities for property-rich graphs. This dual-model architecture makes Neptune a versatile platform
+3

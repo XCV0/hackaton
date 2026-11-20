@@ -1,0 +1,116 @@
+Query
+Answer
+Retrieved
+Documents
+Long Context
+Segmentation
+Processed
+Documents
+Long Context Segmentation Semantic Evidence Aggregation
+Logical 
+Relationship 
+Recognition
+Document
+Groups
+Group 2
+Group ...
+Processed 
+Answer
+Claim:
+The answer to <Query> 
+is <Processed Answer>.
+NLI Classifier
+Group 2
+Result:
+‘Yes’ or ‘No’
+𝑖2
+𝑖1
+𝑜2
+𝑜1
+Group 1
+Consistency Scoring
+𝑁 * Input Documents
+𝐸𝑚𝑏𝑒𝑑𝑑𝑖𝑛𝑔
+Vector Space Graph
+𝐸𝑢𝑙𝑒𝑟
+𝐸𝑑𝑔𝑒 𝑊𝑒𝑖𝑔ℎ𝑡
+Edge Graph
+𝐸𝑑𝑔𝑒
+𝑅𝑒𝑐𝑜𝑛𝑠𝑡𝑟𝑎𝑐𝑡
+Logic Graph
+Document
+s
+Relevance Scoring
+Factual Scoring
+𝑒1 𝑒2 𝑒3 … … 𝑟1 
+𝑟2 
+𝑟3
+…
+𝑆 = ෍
+𝑘=1
+𝐾
+( ǁ𝑟𝑘 ∗ 𝑒𝑘)
+Figure 2: Our Hallucination Classifier Architecture, comprising three modules: Long Context Segmentation (green),
+Semantic Evidence Aggregation (pink), and Consistency Scoring (blue). Given a question-answer pair and retrieved
+documents, we (1) segment into factual chunks, (2) construct a semantic similarity graph and identify coherent
+clusters via betweenness centrality, and (3) verify each cluster against the answer using an NLI discriminator. This
+example shows how scattered evidence from Doc 1 and Doc 2 is successfully aggregated. Notation definitions in
+Table 2.
+Metric Value
+Precision 87.3%
+Recall 82.1%
+F1-Score 84.6%
+System accuracy (full) 82.4%
+System accuracy (w/o filter) 78.2% (−4.2%)
+Table 3: Performance of the factual sentence classifier
+f (c) on 1,000 labeled sentences, and its contribution to
+end-to-end accuracy on HotPotQA-Derived bridge-hard.
+Full rule specification is in Appendix H.
+for proper nouns (NNP/NNPS) or action verbs in
+indicative mood; and (3) a rejection list for inter-
+rogative openers, opinion markers, and imperative
+constructions. Table 3 reports its performance.
+Answer chunking. Given answer A with ℓ(A) >
+Ta, compute Ca = Chunk(A; Ta). Reassemble the
+factual content:
+A′ = Concat ( {c ∈ Ca : f (c) = 1} ) .
+Document chunking. Given retrieved documents
+{d}, form C = ⋃ d Cd where Cd = Chunk(d; Td)
+if ℓ(d) > Td, else Cd = {d}.
+3.4 Semantic Evidence Aggregation
+Graph construction. For each chunk ci ∈ C, com-
+pute embedding vi = E(ci) ∈ Rd. With N = |C|,
+compute pairwise distances dij = ∥vi − vj ∥2 and
+their mean µ. For α = 1.0 (determined via held-
+out validation in [0.5, 1.5]), define the initial edge
+set E(0) = {(i, j) | dij ≤ αµ} with weights
+w(0) ij = dij .
+Betweenness-centrality clustering. On graph
+G(0), compute all-pairs shortest paths Pij . For each
+edge e ∈ E(0), set fe = |{(i, j) : e ∈ Pij }| (be-
+tweenness frequency), and w(1) e = fe. Sort edges
+descending by w(1); initialize S = {{i}}N i=1. For
+each edge e = (i, j) in order, let Sp, Sq contain i, j
+respectively. If τ (Sp) + τ (Sq) ≤ Tt, merge:
+Snew = Sp∪Sq, S ← (S\{Sp, Sq})∪{Snew}.
+Finally, for each cluster Sk ∈ S:
+Dk = Concat
+(
+{ci : i ∈ Sk}
+)
+.
+Relationship to Girvan–Newman. This module
+draws inspiration from the Girvan–Newman algo-
+rithm (Girvan and Newman, 2002; Słoczy’nski,
+2020): edges with high betweenness serve as
+bridges between semantic communities. We invert
+the insight: rather than removing high-betweenness
+edges to detect communities, we prioritize them to
+merge clusters of related evidence. Important dis-
+tinction: the graph is a semantic similarity graph
+(not a logical dependency graph); betweenness cen-
+trality identifies clusters of coherent segments, ap-
+proximating evidence aggregation for multi-hop
+reasoning. Detailed theoretical justification is in
+Appendix B.
+1608

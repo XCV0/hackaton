@@ -1,0 +1,22 @@
+Table 15: Impact of threshold on performance
+(HealthcareMagic)
+Threshold Average ROUGE-L value
+inf (no threshold) 0.390897213
+1 0.362732559
+0.8 0.361045348
+0.6 0.370057676
+0.4 0.35827803
+0.2 0.273853105
+no-RAG 0.100406876
+Table 16: Impact of threshold on performance (En-
+ron Mail)
+Threshold Averaget Perplexity(PPL)
+inf (no threshold) 1.204286107
+1.2 1.12689896
+1 1.140870705
+0.8 1.140870705
+0.6 1.140870705
+0.4 1.140925491
+0.2 1.174111162
+no-RAG 1.377775079
+4521

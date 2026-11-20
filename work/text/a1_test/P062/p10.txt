@@ -1,0 +1,110 @@
+on previous research.[47–49] For the ideal device, we also assumed
+that the device had no interface layers (FIL and RIL) and adopted
+AZO as the TCO layer material. The simulation results of the
+ideal device are indicated by “Ideal Case” in Figure 12b,c.
+Further improvement of Voc and FF was observed. This opti-
+mized device achieved high efﬁciency of 11.82% (Voc = 1.88 V,
+Jsc = 7.22 mA cm/C02,FF= 87.08%) under AM1.5G illumination
+and 74.2% under 450 nm illumination. The device parameters
+are summarized in Table 3. These results indicate that the
+performance of our device is primarily limited by two factors:
+interface defects and the mismatch of the band alignment
+between the TCO layer and ETL.
+4. Conclusion
+Device simulations of CsPbBr3 photovoltaic power converters
+were performed to identify the criteria for obtaining high-
+efﬁciency devices. The simulation results highlighted that the
+conduction band offset at the ETL/CsPbBr3 layer interface signif-
+icantly affected the device performance. The best conduction
+band offset was /C00.4 eV, which appeared as a spike structure,
+and a larger conduction band offset degraded device perfor-
+mance. The simulation results also highlight that TiO2, a conven-
+tional ETL material for standard perovskite solar cells, is not
+suitable for CsPbBr3 photovoltaic power converters. We pro-
+posed and demonstrated the potential of nanocrystalline GaN
+ETLs using device simulations. The effect of the quality of the
+CsPbBr3 layer was also investigated. According to the results,
+the carrier diffusion length primarily determines Jsc and FF;
+however, the defect density is the limiting factor of Voc. The effect
+of the TCO layer/ETL interface was also investigated. The band
+alignment of this interface also affects device performance. Our
+simulation revealed that the use of a low TCO work function or
+the insertion of a buffer layer with small electron afﬁnity can mit-
+igate the problem of the TCO layer/ETL interface. Finally, we
+analyzed our experimentally obtained device using our developed
+simulation model. By adjusting the interface defect density and
+the quality of the CsPbBr3 layer, we successfully reproduced the
+J–V curves and EQE results. This indicates the reliability of our
+simulation model. Using this model, we also discussed ways to
+improve device performance.
+Acknowledgements
+This work was supported by STAR Grant founded by the Tokyo Tech Fund
+and JSPS KAKENHI grant no. JP22K04195.
+Conﬂict of Interest
+The authors declare no conﬂict of interest.
+Data Availability Statement
+The data that support the ﬁndings of this study are available from the
+corresponding author upon reasonable request.
+Keywords
+optical wireless power transmission, perovskite, solar cells
+Received: May 14, 2024
+Revised: August 31, 2024
+Published online: September 22, 2024
+[1] D. Kim, A. Abu-Siada, A. Sutinjo, Electr. Power Syst. Res. 2018, 154,
+493.
+[2] Y. Naka, K. Yamamoto, T. Nakata, M. Tamura, IEICE Trans. Electron.
+2017, E100-C, 850.
+[3] A. M. Jawad, R. Nordin, S. K. Gharghan, H. M. Jawad, M. Ismail,
+Energies 2017, 10, 1022.
+[4] A. W. S. Putra, M. Tanizawa, T. Maruyama, IEEE Photonics Technol.
+Lett. 2019, 31, 157.
+[5] J. Ding, W. Liu, C. L. I, H. Zhang, H. Mei, Appl. Sci. 2020, 10, 6463.
+[6] H. Kaushal, G. Kaddoum, IEEE Access 2016, 4, 1518.
+[7] C. Zuo, T. Miyamoto, Photonics 2024, 11, 500.
+[8] K. Asaba, T. Miyamoto, Photonics 2024, 11, 490.
+[9] C. Schmitz, B. Strehmel, J. Coat. Technol. Res. 2019, 16, 1527.
+[10] A. Murata, T. Nishimura, H. Shimizu, Y. Shiratori, T. Kato,
+R. Ishikawa, S. Miyajima, AIP Adv. 2020, 10, 045031.
+[11] P. Crump, W. Dong, M. Grimshaw, J. Wang, S. Patterson, D. Wise,
+M. DeFranza, S. Elim, S. Zhang, M. Bougher, J. Patterson, S. Das,
+J. Bell, J. Farmer, M. DeVito, R. Martinsen, Proc. SPIE 2007, 6456,
+64560M.
+[12] N. Haghighi, P. Moser, J. A. Lott, IEEE J. Sel. Top. Quantum Electron.
+2019 25, 1700615.
+[13] J. J. Wierer, J. Y. Tsao, D. S. Sizov, Laser Photonics Rev. 2013, 7, 963.
+[14] Y. Nakatsu, Y. Nagao, K. Kozuru, T. Hirao, E. Okahisa, S. Masui,
+T. Yanamoto, S. Nagahama, Proc. SPIE 2019, 10918, 109181D.
+[15] Z. Baten, S. Alam, B. Sikder, A. Aziz, Photonics 2021, 8, 430.
+[16] Y. Narukawa, M. Ichikawa, D. Sanga, M. Sano, T. Mukai, J. Phys. D:
+Appl. Phys. 2010, 43, 354002.
+[17] B. P. Yonkee, E. C. Young, S. P. DenBaars, S. Nakamura, J. S. Speck,
+Appl. Phys. Lett. 2016, 109, 191104.
+[18] D. Zhou, J.-F. Seurin, G. Xu, A. Miglo, D. Li, Q. Wang, M. Sundaresh,
+S. Wilton, J. Matheussen, C. Ghosh, Proc. SPIE 2014, 9001, 90010E.
+[19] S. Fafard, D. P. Masson, Photonics 2022, 9, 579.
+[20] H. Helmers, E. Lopez, O. Höhn, D. Lackner, J. Schön, M. Schauerte,
+M. Schachtner, F. Dimroth, A. W. Bett, Phys. Status Solidi RRL 2021,
+15, 2100113.
+[21] R. E. Beal, D. J. Slotcavage, T. Leijtens, A. R. Bowring, R. A. Belisle,
+W. H. Nguyen, G. F. Burkhard, E. T. Hoke, M. D. McGehee, J. Phys.
+Chem. Lett. 2016, 7, 746.
+[22] Y. Zhang, L. Luo, J. Hua, C. Wang, F. Huang, J. Zhong, Y. Peng, Z. Ku,
+Y. B. Cheng, Mater. Sci. Semicond. Process. 2019, 98, 39.
+[23] C. Shen, X. Ling, Y. Li, S. Chen, Y. Deng, Appl. Phys. Lett. 2023, 123,
+153301.
+[24] D. Di Girolamo, M. I. Dar, D. Dini, L. Gontrani, R. Caminiti,
+A. Mattoni, M. Graetzel, S. Meloni, J. Mater. Chem. A 2019, 7, 12292.
+[25] B. Dong, J. Hu, X. Xiao, S. Tang, X. Gao, Z. Peng, D. Zou, Adv. Mater.
+Technol. 2019, 4, 1900131.
+[26] N. Aso, H. Tani, R. Fukamizu, H. Shimizu, S. Miyajima, Jpn. J. Appl.
+Phys. 2023, 62, SK10451.
+[27] R. Fukamizu, N. Aso, Y. Shiratori, S. Miyajima, Jpn. J. Appl. Phys. 2023,
+62, SK1035.
+[28] S. M. H. Qaid, A. Shaker, K. D. Jayan, M. Alkadi, A. A. A. Ahmed,
+W. Zein, Sol. Energy 2024, 268, 112275.
+[29] Y. Dong, J. Duan, D. Luo, J. Liu, X. Wang, X. Liu, Z. Huang, X. Li,
+Y. Gao, Mater. Today Commun. 2024, 39, 108695.
+www.advancedsciencenews.com www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (10 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH
+ 18626319, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pssa.202400437, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

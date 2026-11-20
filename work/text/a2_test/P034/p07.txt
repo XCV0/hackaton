@@ -1,0 +1,40 @@
+This standardized structure ensures consistency and interoperability within the sys-
+tem. Thus, the integration of metadata enhances the accuracy and contextualization
+of the retrieval process, paving the way for more appropriate responses.
+2.2.2 Context Retriever
+Cosine similarity is a particularly suitable approach for retrieving relevant documents
+in Natural Language Processing applications. When associated with ChromaDB and
+its HNSW (Hierarchical Navigable Small World) index, it offers a combination of high
+semantic accuracy and optimized performance at scale, which significantly improves
+the efficiency of the search system.
+This measure evaluates the directional alignment of vectors in semantic space, regard-
+less of their magnitude. This property neutralizes the text length dependency, which
+is essential when processing articles of mixed sizes and structures, a problem often
+encountered in information retrieval systems.
+By using this metric with an HNSW index in ChromaDB, we benefit from approximate
+nearest neighbor (ANN) search, which makes the retrieval process fast and efficient,
+even for large data collections.
+In our system, each article in our database is preprocessed and transformed into a vec-
+tor representation using the BGE-M3 embedding model. These vectors are indexed in
+ChromaDB, which uses the HNSW index to perform cosine similarity searches. When
+a query is submitted, it is also converted into a vector and compared to document
+vectors using cosine similarity. The relevance score is calculated as shown by equation
+1:
+d = 1.0 −
+P(Ai × Bi)P(A2 i ) × P(B2 i ) (1)
+Therefore, by using this equation 1 as a distance function in ChromaDB’s HNSW
+index, we optimize both semantic accuracy in article retrieval and the scalability and
+efficiency of the process, ensuring relevant and contextually appropriate item selection.
+2.2.3 Context Grader
+Context grading is crucial for sorting out the truly useful content from the superficially
+similar ones. Indeed, not all retrieved articles are equally relevant, and the linguistic
+complexity of legal texts can introduce noise, affecting the quality of the generated
+answers.
+This agent grades each article based on two criteria: semantic relevance and speci-
+ficity. Each grade is supported by a detailed explanation, ensuring transparency and
+interpretability.
+By selecting and filtering the most informative contexts and justifying these decisions,
+this module guarantees the reliability and explainability of the data transmitted to
+the following steps, ensuring that their reasoning is based exclusively on reliable and
+contextually relevant information.
+7

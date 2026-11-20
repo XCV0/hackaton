@@ -1,0 +1,14 @@
+A PREPRINT
+We replicated the pipeline using NetworkX and FAISS, achieving similar performance. The primary distinction with
+NetworkX lies in the traversal step, as it operates entirely in-memory and does not utilize SPARQL for graph traversal.
+In NetworkX, traversal can be implemented by identifying all reachable relationships, intersecting these with the set of
+selected relationships (determined through a combination of embedding and LLM methods), and retrieving all triplets
+corresponding to the relevant nodes and relationships.
+Figure 1: Overview of the RDF-based pipeline for Graph RAG.
+4.2 LPG Pipeline: Text2Cypher
+Figure 2: Overview of the LPG-based pipeline for Graph RAG.
+To facilitate accurate text-to-Cypher translation, we generate a comprehensive schema and metadata representation of
+the Labeled Property Graph (LPG). The schema encodes the graph architecture, including all node labels, properties,
+and both incoming and outgoing edge types for each node. This structural information enables the text2cypher model to
+understand how to traverse the graph, which relationships connect nodes, and what properties and labels are available
+8

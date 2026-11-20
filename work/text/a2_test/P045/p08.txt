@@ -1,0 +1,88 @@
+Recall@1 Recall@2 Recall@5 Recall@k (K>5) All
+Model U-Q U-E Acc U-Q U-E Acc U-Q U-E Acc U-Q U-E Acc Acc
+Param 25.0 25.3 25.2 24.4 23.9 24.1 20.7 22.3 21.8 19.3 15.7 16.4 22.1
+1-Stage†
+Top-1 59.1 58.6 58.8 30.1 27.3 28.0 22.0 22.4 22.1 15.4 15.6 15.6 39.6
+Top-2 58.4 57.9 58.2 46.5 45.7 46.0 22.6 25.9 25.1 15.5 15.9 15.8 40.4
+Top-5 56.7 56.2 56.4 45.6 44.8 44.7 32.3 34.4 33.8 16.8 16.5 16.6 40.9
+Ours
+Top-1 61.5 61.8 61.7 31.7 27.7 28.6 22.8 22.8 22.8 16.6 15.0 15.4 40.7
+Top-2 61.0 61.2 61.2 48.4 49.0 48.9 23.8 27.3 26.4 16.9 15.7 16.0 42.9
+Top-5 59.7 59.3 59.4 46.2 47.8 47.6 33.2 35.8 35.2 17.5 16.3 16.7 42.9
+Table 4: Performance (%) with different numbers of retrieved entries. Recall@k indicates the presence of ground-
+truth entry in top-k retrieved results, with accuracy reported across Unseen-Questions (U-Q) and Unseen-Entities
+(U-E) settings.
+Knowledge Reconciliation. Figure 3 illustrates
+the effectiveness of our method in addressing both
+VTKI and PRKI under zero-shot and fine-tuned
+settings. In the zero-shot setting, the model iden-
+tifies 46.7% of the ground truth Wikipedia entries
+using the textual modality and 45.6% using the
+visual modality, with over 40% of the entities cor-
+rectly recognized by both. Our method improves
+this recognition rate to 50.1% demonstrating the
+effectiveness of our method in handling VTKI.
+For PRKI, our method achieves better retention
+of parametric knowledge compared to the 1-Stage
+baseline, indicating more robust reconciliation of
+parametric-retrieved knowledge inconsistency. In
+the fine-tuned setting, the model’s ability to lever-
+age multimodal knowledge for identifying ground-
+truth Wikipedia entries further improves, increas-
+ing from 50.1% to 57.3%, demonstrating the effec-
+tiveness of the objective LVTKI. However, we ob-
+serve that the 1-Stage baseline, trained solely with
+LSFT, tends to compromise the retention of correct
+parametric knowledge, resulting in a larger perfor-
+mance drop (23.8% to 17.6%) relative to the origi-
+nal parametric outputs. In contrast, our method bet-
+ter preserves parametric knowledge, with a modest
+drop (23.8% to 19.3%), indicating the effectiveness
+of the LPRKI objective.
+4.5 Ablation Studies
+To validate the effectiveness of our approach, we
+conduct ablation studies on the InfoSeek validation
+set.
+Effect of Retrieved Entry Count. Increasing
+the number of retrieved entries generally leads to
+improved overall recall accuracy. However, its
+impact varies across different Recall@k groups,
+where Recall@k indicates whether the ground-
+truth entry is included in the top-k retrieved re-
+sults. As shown in Table 4, we observe a clear
+relationship between the number of retrieved en-
+tries (Top-m) and the Recall@k performance. The
+first case is when m ≤ k, meaning the number
+of retrieved entries does not exceed the evaluation
+threshold. In this setting, increasing m directly ex-
+pands the candidate pool, which generally leads to
+consistent performance improvements. For exam-
+ple, in the Recall@5 group, increasing m from 2 to
+5 improves recall accuracy, with the 1-Stage base-
+line rising from 25.1% to 33.8% and our method
+from 26.4% to 35.2%, as more relevant entries are
+included in the input. In contrast, when m > k,
+the inclusion of additional entries yields marginal
+or even negative returns, likely due to the introduc-
+tion of irrelevant or noisy information. This effect
+is particularly evident in lower Recall@k groups,
+where precision is more sensitive to input quality.
+For instance, in the Recall@2 group, increasing m
+from 2 to 5 leads to a decrease in accuracy, from
+46.0% to 44.7% for the 1-Stage baseline and from
+48.9% to 47.6% for our method.
+Moreover, the impact of m varies across evalu-
+ation scenarios. While increasing the number of
+external entries initially benefits both Unseen-Q
+and Unseen-E, the latter demonstrates more stable
+and robust improvements. In contrast, performance
+degradation caused by excessive retrieval is more
+pronounced in Unseen-Q, highlighting its greater
+sensitivity to noisy or irrelevant knowledge.
+Effect of Different Prompt. Table 4 presents
+a comprehensive zero-shot performance analysis
+between Qwen2-VL-1-Stage and our proposed
+method. For PRKI resolution, CoRe-MMRAG
+exhibits enhanced robustness to knowledge noise
+through carefully designed prompts. In Recall@1
+32974

@@ -1,0 +1,81 @@
+720
+Baseline RAG
+[...] the overall impact on England was not destructive;
+it ultimately reinforced national strength [...] Napoleon’s
+impact on the Netherlands was more directly disruptive
+[...] suffering from blocked trade with Britain, leading
+to economic decline.
+While the texts imply that Napoleon threatened European
+order [...] they do not provide clear details on whether
+his actual impact on England and the Netherlands was destructive
+[...] based solely on these excerpts, there is insufficient evidence
+to conclude [...] his impact on England and the Netherlands was
+destructive.
+Table 2: Generated answers (baseline vs. RAG) for Qwen3-235B-A22B model for the question “Was the
+impact of Napoleon Bonaparte on England and the Netherlands destructive?” in English.
+document chunks. In Table 2 we report an exam-
+ple of the generated answers in the two experiment
+settings for English to showcase the kind of data
+we have used to conduct our analyses, with more
+examples in Appendix D.
+4.1. Text Similarity Analysis
+Within language, RAG mostly impacts on the
+wording rather than on the content. Figure 3
+shows the median and inter-quartile ranges (IQRs)
+of BERTScore and ROUGE-L when comparing all
+baseline answerstothe augmented oneswithin
+thesamelanguageforeachofthemodels. Theme-
+dian BERTScore remains constant around 0.8-0.9
+for all models and languages, with the exception
+of Qwen3-4B in French. For ROUGE-L, the me-
+dian remains constant above 0.2, with again the
+exception of Qwen3-4B in French. The range of
+ROUGE-L is skewed slightly towards 1 for English
+for Qwen3-30B-A3B and Qwen3-235B-A22B, in-
+dicating a higher variability in the wording.
+Figure 3: Distribution of BERTScore and ROUGE-
+L between baseline and augemented answers
+within language per model.
+Table 3 shows the mean BERTScore and
+ROUGE-L, and their standard deviations when
+comparing all baseline answers to all aug-
+mented answers for each question across all mod-
+els. For BERTScore, French has more questions
+with standard deviation higher than 0.1 when com-
+pared to English and Dutch. Standard deviation
+for ROUGE-L is low for almost all questions and
+languages. At the question level, and within the
+same language across all models, variation in
+BERTScore values is minimal for English and
+Dutch (Table 3) confirming the patterns observed
+in Figure 3. As expected, French exhibits greater
+semanticvariationacrossquestions. Whenexamin-
+ing ROUGE-L scores (Table 3), English and Dutch
+again display consistent behavior with Figure 3,
+showing slightly lower lexical variation compared
+to French. An exception arises for Question 6 (Q6)
+in English, which shows unusually low lexical vari-
+ability yet high standard deviations. Although Q6
+is framed neutrally, its content (“How did Napoleon
+Bonaparte become the Emperor of France?”) ap-
+pears to elicit divergent model responses between
+the baseline and augmented conditions. Overall,
+French maintains its outlier status, showing a sys-
+tematic tendency toward higher lexical variation
+across all questions and experimental settings.
+Figure 4: Distribution of BERTScore between
+baseline and augemented answers within lan-
+guage pairs per model.
+Across languages, English and Dutch have
+more similar content than for French. As shown
+in Figure 4, where BERTScore is computed for
+all questions per model, there is an overall trend
+toward generating answers with highly similar
+content. A notable exception is observed for the
+smallest model, Qwen3-4B, in French, where
+cross-lingual differences in content are more
+pronounced. At the question level, summarized
+in Table 4, variations in BERTScore remain
+generally small across all language pairs. The
+largest deviations occur for Questions 8 and 9
+(Q8 and Q9), which are designed as counterparts:

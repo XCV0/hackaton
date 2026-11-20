@@ -1,0 +1,28 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D003,R001,DV1,MS1,M1,PCE,21.39,%,champion,,,,,21.39,%,21.39,%,primary,,6,,,Figure 5C,shows a PCE of 21.39%,extracted,,
+D003,R002,DV1,MS1,M1,Voc,1.11,V,champion,,,,,1.11,V,1.11,V,primary,,6,,,Figure 5C,VOC of 1.11 V,extracted,,
+D003,R003,DV1,MS1,M1,Jsc,24.23,mA/cm2,champion,,,,,24.23,mA/cm2,24.23,mA/cm2,primary,,6,,,Figure 5C,JSC of 24.23 mA cm,extracted,,
+D003,R004,DV1,MS1,M1,FF,79.5,%,champion,,,,,0.795,fraction,79.5,%,primary,,6,,,Figure 5C,an FF of 0.795,extracted,,
+D003,R005,DV1,MS1,M1,Rs,3.15,Ohm*cm2,champion,,,,,3.15,Ω cm2,3.15,Ohm*cm2,primary,,6,,,Figure 5C,Rs for Sn3O4 and Y-Sn3O4 are 3.15 and 2.66,extracted,,Rs: 3.15 (Sn3O4) и 2.66 (Y-Sn3O4) Ω cm2 по J-V данным
+D003,R006,DV1,MS1,M1,HI,8.9,%,,,,,,0.089,fraction,8.9,%,primary,,6,,,,hysteresis index (HI) from 0.089 to 0.034,extracted,,HI 0.089 (Sn3O4) -> 0.034 (Y-Sn3O4); Figure S14
+D003,R007,DV1,MS2,M1,Jsc_EQE,24.0,mA/cm2,,,,,,24.0,mA/cm2,24.0,mA/cm2,primary,,6,,,Figure 5D,integrated current densities are 24.0 and 23.5,extracted,,
+D003,R008,DV1,MS4,M1,retained_PCE,93,%,,,,1000,h,93,%,93,%,primary,,7,,,Figure 5F,remained 93% of the initial efficiency for 1000 h,extracted,,
+D003,R009,DV2,MS1,M1,PCE,23.05,%,champion,,,,,23.05,%,23.05,%,primary,,6,,,Figure 5C,corresponding to a PCE of 23.05%,extracted,,
+D003,R010,DV2,MS1,M1,Voc,1.14,V,champion,,,,,1.14,V,1.14,V,primary,,6,,,Figure 5C,VOC of 1.14 V,extracted,,
+D003,R011,DV2,MS1,M1,Jsc,24.89,mA/cm2,champion,,,,,24.89,mA/cm2,24.89,mA/cm2,primary,,6,,,Figure 5C,JSC of 24.89 mA/cm,extracted,,
+D003,R012,DV2,MS1,M1,FF,81.2,%,champion,,,,,0.812,fraction,81.2,%,primary,,6,,,Figure 5C,an FF of 0.812,extracted,,
+D003,R013,DV2,MS1,M1,Rs,2.66,Ohm*cm2,champion,,,,,2.66,Ω cm2,2.66,Ohm*cm2,primary,,6,,,Figure 5C,Rs for Sn3O4 and Y-Sn3O4 are 3.15 and 2.66,extracted,,Rs: 3.15 (Sn3O4) и 2.66 (Y-Sn3O4) Ω cm2 по J-V данным
+D003,R014,DV2,MS1,M1,HI,3.4,%,,,,,,0.034,fraction,3.4,%,primary,,6,,,,hysteresis index (HI) from 0.089 to 0.034,extracted,,HI 0.089 (Sn3O4) -> 0.034 (Y-Sn3O4); Figure S14
+D003,R015,DV2,MS2,M1,Jsc_EQE,23.5,mA/cm2,,,,,,23.5,mA/cm2,23.5,mA/cm2,primary,,6,,,Figure 5D,integrated current densities are 24.0 and 23.5,extracted,,
+D003,R016,DV2,MS4,M1,retained_PCE,93,%,,,,1000,h,93,%,93,%,primary,,7,,,Figure 5F,remained 93% of the initial efficiency for 1000 h,extracted,,
+D003,R017,DV2,MS3,M1,stabilized_PCE,23.0,%,,,,,,23.0,%,23.0,%,primary,,6,,,Figure 5E,steady-state output efficiency at the maximum power point is 23.0%,extracted,,В тексте: average steady-state output efficiency at MPP
+D003,R018,DV2,MS1,M1,PCE,23.05,%,champion,,,,,23.05,%,23.05,%,primary,,1,,,,successfully boosted to 23.05%,extracted,R009,Abstract
+D003,R019,DV2,MS1,M1,PCE,23.05,%,champion,,,,,23.05,%,23.05,%,primary,,2,,,,PSCs based on Sn3O4 ETL to 23.05%,extracted,R009,Introduction
+D003,R020,DV2,MS1,M1,Voc,1.14,V,champion,,,,,1.14,V,1.14,V,primary,,2,,,,enhanced open circuit voltage (VOC) of 1.14 V,extracted,R010,
+D003,R021,DV2,MS1,M1,Jsc,24.89,mA/cm2,champion,,,,,24.89,mA/cm2,24.89,mA/cm2,primary,,2,,,,enhanced short circuit current density (JSC) of 24.89 mA cm,extracted,R011,
+D003,R022,DV2,MS1,M1,FF,81.2,%,champion,,,,,81.2,%,81.2,%,primary,,2,,,,an enhanced fill factor (FF) of 81.2%,extracted,R012,
+D003,R023,DV2,MS1,M1,PCE,23.05,%,champion,,,,,23.05,%,23.05,%,primary,,8,,,,boosted the PCE of PSCs to 23.05%,extracted,R009,Conclusion
+D003,R024,,,,PCE,25.7,%,,,,,,25.7,%,25.7,%,cited,[1],1,,,,solar cells (PSCs) has been improved rapidly from 3.8% to,extracted,,"Рекорд PSC по литературе (NREL), 25.7%"
+D003,R025,,,,PCE,20.12,%,,,,,,20.12,%,20.12,%,cited,[13],1,,,,ultimately obtaining a PCE of 20.12%,extracted,,"SnS2 ETL, Zhao et al."
+D003,R026,,,,PCE,21.7,%,,,,,,21.7,%,21.7,%,cited,[14],2,,,,an improved PCE of 21.7%,extracted,,"TiS2/SnO2, Huang et al."
+D003,R027,,,,PCE,20.14,%,,,,,,20.14,%,20.14,%,cited,[15],2,,,,finally achieve a PCE of 20.14%,extracted,,"Ti3C2Tx, Agresti et al."

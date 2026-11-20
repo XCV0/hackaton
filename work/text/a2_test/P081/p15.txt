@@ -1,0 +1,27 @@
+MedRAG: Enhancing Retrieval-augmented Generation with
+Knowledge Graph-Elicited Reasoning for Healthcare Copilot
+Figure A2: The result of disease clustering in CPDD
+Low back pain related lumbar related pain
+lumbar canal stenosis
+cause lower_back_pain
+cause leg_pain
+cause numbness
+cause weakness
+has_symptom pain_reliref_with_sitting
+has_symptom pain_worsens_with_standing
+has_symptom tingling
+has_symptom cramping
+sight sided sciatica
+is_a sciatica
+cause lumbar_disc_herniation
+has_symptom low_back_pain
+has_symptom buttock_pain
+has_symptom pain_worsens_with_sitting
+has_symptom leg_pain
+has_symptom tingling
+has_symptom numbness
+has_symptom muscle_weakness
+Key diagnostic 
+difference
+Figure A3: Diagnostic differences knowledge graph between lumbar canal stenosis and sciatica. (Similar manifestations but
+opposite responses to sitting (Alleviation vs. Exacerbation))

@@ -1,0 +1,32 @@
+Q Example of MultiRAG
+Question: 英格兰有多少位女王 (how many queens have been in England?)
+Target: 8
+Answer Llama3-8 (no-RAG):
+实际统治英格兰的女王有四位：玛格丽特一世，玛丽一世，伊丽莎白一世和伊丽莎白二世。女王人数为 4。
+(Four queens actually ruled England: Margaret I, Mary I, Elizabeth I and Elizabeth II. The number of queens is 4.)
+Retrieval from from WALL (Wikipedia in ALL languages):
+[1]: Since 1 May 1707, when the Kingdom of England and the Kingdom of Scotland were united to form the Kingdom
+of Great Britain, there have been 13 monarchs of the United Kingdom. The Kingdoms of England and Scotland had been
+under a commonwealth confederation under the Stuarts since 24 March 1603, and were formally united on 1 May 1707
+to form the Kingdom of Great Britain, which was united with the Kingdom of Ireland on 1 January 1801 to form the
+United Kingdom of Great Britain and Ireland, and the Irish Free State was formed and became independent [...] (from
+WZh)
+[2]: This entry lists all female monarchs in the world, including emperors, queens, princes, grand dukes, duchesses,
+goddesses and other monarchs, and excludes female royals who have ruled on the throne or as regents. In addition,
+Elizabeth II, who was monarch of the United Kingdom from 1952 to 2022, ruled over 32 Commonwealth realms [...].
+(from WEn)
+[3]: In less than 200 years, eight queens ruled the Kingdom of England. Among these queens were Matilda, Lady Jane
+Grey, Mary I, Elizabeth I, Mary II, Anne, Victoria, and Elizabeth II. Despite the tradition that heirs of the throne should
+be the eldest son of the monarch, the mentioned queens ruled competence and capability [...] (from WEn)
+[4]: Empress Matilda, also known as Empress Maud, was one of the claimants to the English throne during the civil war
+known as the Anarchy. The daughter and heir of Henry I, king of England and ruler of Normandy, she went to Germany
+as a child when she was married to the future Holy Roman Emperor Henry V. She travelled with the emperor to Italy in
+1116, was controversially crowned empress in St Peter’s Basilica [...] (from WZh)
+[5]: Elizabeth II, known as Elizabeth Alexandra Mary, was Queen of the United Kingdom and other Commonwealth
+realms from 1952 to 2022 and held the record for the longest reign [...] (from WZh)
+Answer Llama3-8b (MultiRAG):
+英格兰曾有8位女王作为君主执政....答案是：8
+Thus, England has had 8 queens who ruled as sovereigns.... The answer is: 8.
+Table 16: An example of MultiRAG inference for Llama3-8b. To facilitate the reading, we translated retrieved
+from Chinese Wikipedia ( WZh) into English (at inference time, we delivered them in Chinese).
+713

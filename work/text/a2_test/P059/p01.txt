@@ -1,0 +1,98 @@
+Findings of the Association for Computational Linguistics: EMNLP 2026, pages 22332–22348
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+COUNTERMEM: Counterfactual Evaluation of Non-Parametric Memory
+Use in Retrieval-Augmented Generation
+Mikhail Baklanov
+Tel Aviv University
+baklanov.ma@gmail.com
+Oren Barkan
+The Open University of Israel
+orenb@openu.ac.il
+Noam Koenigstein
+Tel Aviv University
+noamk@tauex.tau.ac.il
+Abstract
+Retrieval-augmented generation (RAG) is usu-
+ally evaluated from one observed trace: the
+query, the retrieved context, and the generated
+answer. Such evaluations can tell us whether
+the answer is consistent with the retrieved con-
+text, but not whether the system would still
+give the same answer if that context were re-
+moved, updated, or contradicted. We intro-
+duce COUNTERMEM, an evaluation protocol
+for RAG systems that are expected to answer
+from retrieved evidence: it keeps the RAG
+configuration fixed, changes only the retrieved
+context, regenerates the answer, and records
+whether the answer changes in the expected di-
+rection. Across RAGBench, ExpertQA, and
+DelucionQA, COUNTERMEM complements
+observed-trace faithfulness by exposing fail-
+ures it is not designed to see. Configurations
+that look equivalent under RAGAS faithfulness
+behave very differently once their evidence is
+removed, updated, or contradicted, and among
+RAGChecker-approved answers more than half
+silently miss coherent contradictions and over
+a third ignore coherent updates. The failures
+persist across generator and judge families, the
+behavioral detectors agree with blind human an-
+notators as closely as the annotators agree with
+each other, and row-level intervention traces
+localize failures to retrieval, reranking, or gen-
+eration. Artifact (protocol, prompts, detectors,
+scripts, audit traces): https://github.com/
+DeltaLabTLV/CounterMem.
+1 Introduction
+Retrieval-augmented generation (RAG) combines
+a parametric language model with non-parametric
+memory retrieved at inference time (Lewis et al.,
+2020; Gao et al., 2023b). Most RAG evaluations
+ask questions about the observed run: was relevant
+evidence retrieved, was the answer correct, and
+was the answer supported by the retrieved context?
+These are important questions, but they miss a dif-
+ferent one: would the answer have changed if the
+retrieved evidence had changed?
+This distinction matters for evidence-bound
+RAG systems—deployments that promise to (1)
+answer only when retrieved evidence is sufficient,
+(2) abstain when it is removed, (3) follow re-
+trieved updates, (4) acknowledge unresolved con-
+flicts, and (5) remain stable under irrelevant dis-
+tractors. The corresponding behavioral failures
+that fixed-context scoring can hide are no-evidence
+persistence, update inertia, conflict ignorance, and
+noise sensitivity, each a violation of one or more
+of clauses (1)–(5); semantic redundancy is a mea-
+surement complication that can mask dependence
+under naive single-document deletion.
+Observed-trace metrics are useful. Reference-
+free judges such as RAGAS (Es et al., 2024) and
+ARES (Saad-Falcon et al., 2024), and component
+diagnostics such as RAGChecker (Ru et al., 2024),
+score the realized (q, c, a) trace and can check
+whether the answer is compatible with the context
+that was actually retrieved. But two RAG systems
+can produce the same answer to the same query and
+retrieved context—one by using the passage, the
+other by ignoring it and answering from paramet-
+ric memory—and receive identical observational
+scores; only an intervention on the retrieved state
+can tell them apart.
+We introduce COUNTERMEM, a counterfactual
+evaluation protocol for RAG systems that are ex-
+pected to answer from retrieved evidence. The pro-
+tocol generalizes binary-mask context ablation to a
+typology of retrieved-state edits (deletions, counter-
+factual additions) applied at three explicit pipeline
+points: post-retrieval, corpus-addition, and corpus-
+deletion. Figure 1 gives the protocol overview.
+COUNTERMEM reports a profile of intervention
+signals, each tied to one clause of an evidence-
+bound criterion (Section 1). Empirically, config-
+urations with matched RAGAS faithfulness still
+differ substantially in update following and conflict
+acknowledgment, exposing failure modes invisi-
+22332

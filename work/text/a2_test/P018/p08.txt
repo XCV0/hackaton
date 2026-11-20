@@ -1,0 +1,100 @@
+Ablation DRQA NQ TQA RetQA PopQA
+@5
+DCCD 16.73 53.10 70.04 66.25 51.75
+Fixed Gate −0.02 −1.33 +0.22 −0.18 −0.78
+Token-Only −6.34 −1.44 −0.42 −0.15 −0.26
+Doc-Only +0.17 −0.44 +0.07 +0.18 −0.31
+Random −3.88 −1.22 −0.16 +0.11 −0.21
+@10
+DCCD 12.15 53.24 72.01 66.61 53.34
+Fixed Gate −1.06 −0.33 +0.10 −0.54 −0.25
+Token-Only −4.58 −0.80 −0.23 −0.51 −0.40
+Doc-Only −0.23 −0.10 −0.20 −0.18 −0.12
+Random −3.70 −0.72 −0.05 −0.25 −0.34
+Table 2: Ablation results with Qwen3.5-2B using the
+top-5 (@5) and top-10 (@10) documents. Performance
+differences are reported relative to DCCD, where green
+indicates improvement and red indicates degradation.
+dual-confidence design, which favors document-
+conditioned streams that are both answerable and
+locally confident while contrasting against unsup-
+ported, stale, or misleading alternatives.
+5.3 Ablation Study
+We ablate the main components of DCCD to un-
+derstand where the performance gain come from.
+Specifically, we run Qwen3.5-2B with @5 and
+@10 on all 5 datasets, and consider the follow-
+ing four settings. (1) We set gate ϵt = 1, re-
+moving the adaptive gate during decoding (Fixed
+Gate). (2) We remove the document-level confi-
+dence probe, and select contrastive pairs with only
+token-level confidence (Token-Only). (3) We re-
+move the token-level confidence probe, and select
+contrastive pairs with only document-level confi-
+dence (Doc-Only). (4) We randomly select the
+positive and negative by uniformly sampling from
+the retrieved documents (Random).
+The ablation results in Table 2 show that DCCD
+benefits most from combining document-level and
+token-level confidence for source selection. Re-
+moving the document-level confidence probe and
+relying only on token-level confidence produces
+the largest degradation, especially on DRQA, with
+drops of −6.34 at @5 and −4.58 at @10. This
+suggests that token-level sharpness alone is insuffi-
+cient in conflict-heavy settings, where a misleading
+document can still yield a confident local predic-
+tion. Randomly selecting the positive and negative
+documents also hurts performance in most settings,
+confirming that confidence-based source selection
+is important for identifying useful contrastive di-
+rections.
+By contrast, using document-level confidence
+alone is comparatively stable, and even slightly im-
+proves over full DCCD in a few @5 settings. This
+indicates that document-level answerability is the
+dominant signal for resolving intra-context conflict,
+especially on DRQA, where the model must iden-
+tify the document containing the current ground-
+truth answer. However, Doc-Only becomes consis-
+tently worse at @10, suggesting that token-level
+confidence provides a useful complementary signal
+as the retrieved bundle becomes more distractor-
+heavy. The fixed-gate ablation is mixed, setting
+ϵt = 1.0 slightly improves TQA, but hurts most
+other settings, including larger drops on NQ and
+PopQA at @5 and on DRQA at @10. This suggests
+that always applying the same contrast strength can
+occasionally help, but the adaptive margin is more
+robust across datasets and retrieval depths.
+6 Conclusion and Future Work
+In this work, we propose Dual-Confidence Con-
+trastive Decoding (DCCD), a training-free con-
+trastive decoding method that combines document
+and token-level confidence to select positive and
+negative evidence sources during generation, and
+introduce DRQA, a factual-conflict QA bench-
+mark derived from enterprise deep-research sce-
+narios. Across DRQA and standard RAG bench-
+marks, DCCD consistently improves over prior
+decoding baselines, with the largest gains on
+DRQA. These results suggest that source-aware,
+confidence-guided contrast is especially useful
+when retrieved evidence is internally inconsistent.
+For future work, improving the efficiency of
+DCCD is an important next step, since the
+method requires document-conditioned forward
+passes during decoding. Promising directions in-
+clude more aggressive caching, document pruning,
+and lightweight confidence estimation. Second,
+DRQA currently focuses on factual-conflict QA in
+enterprise-style settings, extending the benchmark
+to longer-form answers, richer source metadata,
+and additional domains would further test retrieval-
+grounded conflict resolution. Finally, our confi-
+dence signals are simple and training-free. Learn-
+ing or calibrating document-level and token-level
+confidence estimates may further improve robust-
+ness when retrieved evidence is ambiguous or in-
+sufficient.
+8

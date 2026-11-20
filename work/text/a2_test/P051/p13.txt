@@ -1,0 +1,105 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+completeretrieval-generationpipelinebygeneratingretriev-
+abledocuments,testqueriesandexpectedoutputs,executing
+differentcombinationsofLLMsandembeddingmodels,and
+applying an automated test oracle to the resulting answers.
+Moreover, RAG-TESTER generates different categories of
+failure-oriented tests, including queries targeting complex
+passages and negative queries for which the system should
+reject unsupported requests. The coverage mechanisms also
+differ: CC measures which chunks are actually retrieved
+during test execution, whereas RAG-TESTER’s document-
+coverage strategy selects source regions that have not yet
+contributed to test generation. Thus, CC characterizes the
+adequacy of the exercised retrieval space, while our ap-
+proach aims to expose failures arising from the interaction
+between retrieval and generation.
+RAG-TESTER implements a comprehensive "full-stack"
+evaluationlifecyclethatcloselymirrorstheautomatedwork-
+flows of leading industrial frameworks like DeepEval [46]
+and Maxim AI [47]. By automating the generation of
+synthetic test datasets from source documents (PDFs) and
+benchmarking various LLM and embedding configurations,
+our approach aligns with the industry’s shift toward high-
+velocity RAGOps pipelines. However, while the current
+setup provides a robust end-to-end assessment based on the
+RAG Triad standards (faithfulness, relevance and ground-
+edness), contemporary research solutions have specialized
+intodeeperreasoningcategories.Forinstance,whereRAG-
+TESTER tests general retrieval, GlobalQA [33] and CRUD-
+RAG [31] introduce rigorous taxonomies for corpus-level
+operations like global sorting and multi-document summa-
+rization. Furthermore, the llm-as-a-judge mechanism could
+be further refined by adopting machine-oriented metrics
+like UDCG [37], which move beyond simple correctness to
+specifically quantify the "distraction" effect that irrelevant
+retrievedPDFshaveonthemodel’sfinalresponse,acritical
+safety dimension addressed by robustness benchmarks like
+RAGuard [35].
+8. Conclusion and Future Work
+TestingRetrieval-AugmentedGenerationsystemsischal-
+lenging because their behavior depends on the interaction
+between document processing, retrieval, embeddings, and
+language generation. In this paper, we introduced RAG-
+TESTER, an automated end-to-end approach that generates
+retrieval documents and test inputs, executes tests across
+different LLM embedding configurations, and evaluates
+the resulting answers using an LLM-based oracle. We
+evaluated RAG-TESTER on 24 LLM embedding configura-
+tionsthrough72,000testexecutions.Theapproachdetected
+21,633 failures and outperformed the baseline in 20 of the
+24 configurations, identifying 6.6% more failures overall.
+The results also showed that real-world PDFs exposed
+substantially more failures than automatically generated
+documents, while the test oracle achieved a precision of
+80.6%. Overall, these findings indicate that systematic test
+generation can reveal retrieval inaccuracies, unsupported
+answers, incomplete context integration, and difficulties in
+processing complex passages that may remain unnoticed
+through conventional benchmark-based evaluation.
+Future work will extend RAG-TESTER to additional
+documentformatsandmorecomplexquerytypes,including
+multi-document, multi-hop, and adversarial test cases. We
+also plan to improve the test oracle, incorporate retrieval-
+specific metrics, and investigate more realistic document-
+generation strategies. Lastly, we will aim at incorporating
+CC [45] as a novel adequacy metric within RAG-TESTER
+Replication Package
+The code of our approach can be found in https://github.
+com/Anje13/GBL_RAGTester.
+Thereplicationpackagecanbefoundin https://zenodo.org/
+records/21606024.
+Acknowledgments
+JonAyerdi,MirenIllarramendiandAitorArrietaarepart
+of the Systems and Software Engineering research group
+ofMondragonUnibertsitatea(IT1919-26),supportedbythe
+Department of Education, Universities and Research of the
+Basque Country.
+References
+[1] P.Lewis,E.Perez,A.Piktus,F.Petroni,V.Karpukhin,
+N. Goyal, H. Küttler, M. Lewis, W.-t. Yih, T. Rock-
+täschel et al., “Retrieval-augmented generation for
+knowledge-intensivenlptasks,”inAdvancesinNeural
+Information Processing Systems (NeurIPS), vol. 33,
+2020, pp. 9459–9474.
+[2] K. Zhu, Y. Luo, D. Xu, R. Wang, S. Yu, S. Wang,
+Y. Yan, Z. Liu, X. Han, Z. Liu, and M. Sun,
+“Rageval: Scenario specific rag evaluation dataset
+generation framework,” 2024. [Online]. Available:
+https://arxiv.org/abs/2408.01262
+[3] Y. Tang and Y. Yang, “Multihop-rag: Benchmarking
+retrieval-augmentedgenerationformulti-hopqueries,”
+arXiv preprint arXiv:2401.15391, 2024.
+[4] N. Pipitone and G. H. Alami, “Legalbench-rag:
+A benchmark for retrieval-augmented generation in
+the legal domain,” arXiv preprint arXiv:2408.10343,
+2024.
+[5] R. Friel, M. Belyi, and A. Sanyal, “Ragbench: Ex-
+plainable benchmark for retrieval-augmented genera-
+tionsystems,”arXivpreprintarXiv:2407.11005,2024.
+[6] X. Yang, K. Sun, H. Xin, Y. Sun, N. Bhalla, X. Chen,
+S. Choudhary, R. D. Gui, Z. W. Jiang, Z. Jiang et al.,
+“Crag-comprehensive rag benchmark,” Advances in
+Neural Information Processing Systems, vol. 37, pp.
+10470–10490, 2024.
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 13 of 21

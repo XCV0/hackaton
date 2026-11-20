@@ -1,0 +1,100 @@
+trained compressor to identify relevant documents.
+In the verification stage, we use an LLM to gen-
+erate answers based on the documents selected in
+the previous stage and compare the generated an-
+swers with the ground truth to verify annotation
+correctness.
+In the labeling stage, since untrained compres-
+sors are sensitive to the order of input documents,
+we perform multiple rounds of compression with
+different permutations of the document sequence.
+Only documents consistently retained across all
+rounds are labeled as relevant, while the rest are
+considered irrelevant. Furthermore, as untrained
+compressors in long-context settings may assign
+high attention to irrelevant content, we mitigate
+this issue by applying the Top-P compression al-
+gorithm with a high threshold (e.g., p=0.95) iter-
+atively within each round. The process continues
+until no further reduction in document count is pos-
+sible, thereby minimizing the impact of individual
+compression errors.
+In the verification stage, the query and the se-
+lected relevant documents are provided to an LLM
+to generate an answer. If the generated answer
+matches the ground truth, the annotation is ac-
+cepted. If it does not match, the LLM is prompted
+to generate an answer using the full set of retrieved
+documents. If the correct answer is obtained only
+with the full set, the annotation derived from the
+compressed set is deemed faulty and discarded. If
+the full set also fails to produce the correct answer,
+we infer that none of the retrieved documents are
+relevant to the query. In this case, we construct a
+negative example, where all documents are labeled
+as irrelevant. To reduce potential LLM-induced
+errors in negative example construction, we replace
+the labeled relevant documents with randomly sam-
+pled ones before labeling the entire set as irrelevant.
+C Implementation Details
+We construct query–document relevance annota-
+tions using question–answer pairs from the Hot-
+potQA training set. For each QA pair, we ini-
+tially retrieve 100 documents. We then apply Algo-
+rithm 2, setting the number of shuffles to N = 3
+and the Top-P threshold to p = 0.95. The untrained
+compressor Mc is instantiated with Llama-3.1-8B-
+Instruct, using the attention outputs from its 14th
+layer. Llama-3.1-8B-Instruct also serves as the gen-
+erator Mg to validate the annotations.
+We further adopt Llama-3.1-8B-Instruct as the
+Algorithm 2 Relevance Annotation
+1: Input: Compressor Mc, Generator Mg, Cor-
+pus C, Top-P threshold p, number of shuffles
+N , input tuple(q, D, a) where q is query, D is
+retrieved documents, a is ground truth answer.
+2: Output: Data Sample (q, D+, D−) where q
+is query, D+ is relevant documents, D− is
+irrelevant documents.
+3: for i = 1 to N do
+4: Shuffle documents: Di ← permute(D)
+5: while True do
+6: Compute scores: {sd} ← Mc(q, Di)
+7: D′ i ← Top-P Compression({sd}, p)
+8: if |D′ i| = |Di| then
+9: break
+10: end if
+11: Di ← D′ i
+12: end while
+13: end for
+14: Get relevant docs: D+ ← ⋂N i=1 Di
+15: Get irrelevant docs: D− ← D \ D+
+16: Generate answer: a′ ← Mg(q, D+)
+17: if Acc(a′, a) = 1 then
+18: Return: (q, D+, D−)
+19: else
+20: Generate answer: a′′ ← Mg(q, D)
+21: if Acc(a′′, a) = 0 then
+22: Dsample ← RandomSample(C, |D+|)
+23: D− ← D− ∪ Dsample
+24: Return: (q, ∅, D−)
+25: else
+26: Return: ∅ ▷ Discard the sample
+27: end if
+28: end if
+backbone architecture for AttnComp. Based on the
+results in Figure 2(a), we retain L = 13 transformer
+layers and select the top 16 attention heads from the
+14th layer as the cross-attention layer. AttnComp is
+trained on four NVIDIA RTX 4090 GPUs (24 GB
+each) for 4 hours, using the Adam optimizer with
+a learning rate of 2 × 10−4 and a batch size of 8.
+Training is conducted for 8 epochs, with the input
+document order shuffled in each epoch to mitigate
+positional bias in the attention mechanism.
+D Baselines Details
+The details of the baseline methods are as follows:
+(1) RECOMP-ext (Xu et al., 2023a) performs
+sentence-level semantic matching by selecting the
+top-k sentences whose embeddings are most sim-
+8469

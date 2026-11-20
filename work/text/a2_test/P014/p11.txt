@@ -1,0 +1,103 @@
+Knowledge conflicts for LLMs: A survey. In Pro-
+ceedings of the 2024 Conference on Empirical Meth-
+ods in Natural Language Processing, Miami, Florida,
+USA. Association for Computational Linguistics.
+An Yang, Baosong Yang, Beichen Zhang, Binyuan
+Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayi-
+heng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian
+Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Ji-
+axi Yang, Jingren Zhou, Junyang Lin, Kai Dang, and
+23 others. 2025. Qwen2.5 technical report. Preprint,
+arXiv:2412.15115.
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Ben-
+gio, William W. Cohen, Ruslan Salakhutdinov, and
+Christopher D. Manning. 2018. Hotpotqa: A dataset
+for diverse, explainable multi-hop question answer-
+ing. In Proceedings of the 2018 Conference on Em-
+pirical Methods in Natural Language Processing,
+Brussels, Belgium, October 31 - November 4, 2018,
+pages 2369–2380. Association for Computational
+Linguistics.
+Ori Yoran, Tomer Wolfson, Ori Ram, and Jonathan
+Berant. 2024. Making retrieval-augmented language
+models robust to irrelevant context. In ICLR 2024
+Workshop on Large Language Model (LLM) Agents.
+Wenhao Yu, Dan Iter, Shuohang Wang, Yichong Xu,
+Mingxuan Ju, Soumya Sanyal, Chenguang Zhu,
+Michael Zeng, and Meng Jiang. 2023. Generate
+rather than retrieve: Large language models are
+strong context generators. In The Eleventh Inter-
+national Conference on Learning Representations.
+Xiaowei Yuan, Zhao Yang, Yequan Wang, Shengping
+Liu, Jun Zhao, and Kang Liu. 2024a. Discerning
+and resolving knowledge conflicts through adaptive
+decoding with contextual information-entropy con-
+straint. In Findings of the Association for Compu-
+tational Linguistics, ACL 2024, Bangkok, Thailand
+and virtual meeting, August 11-16, 2024, pages 3903–
+3922. Association for Computational Linguistics.
+Xiaowei Yuan, Zhao Yang, Yequan Wang, Jun Zhao,
+and Kang Liu. 2024b. Improving zero-shot LLM re-
+ranker with risk minimization. In Proceedings of the
+2024 Conference on Empirical Methods in Natural
+Language Processing, pages 17967–17983.
+Ruizhe Zhang, Yongxin Xu, Yuzhen Xiao, Runchuan
+Zhu, Xinke Jiang, Xu Chu, Junfeng Zhao, and Yasha
+Wang. 2025. Knowpo: Knowledge-aware preference
+optimization for controllable knowledge selection in
+retrieval-augmented language models. In Proceed-
+ings of the AAAI Conference on Artificial Intelligence,
+volume 39, pages 25895–25903.
+Yunxiang Zhang, Muhammad Khalifa, Lajanugen Lo-
+geswaran, Moontae Lee, Honglak Lee, and Lu Wang.
+2023. Merging generated and retrieved knowledge
+for open-domain qa. In Proceedings of the 2023 Con-
+ference on Empirical Methods in Natural Language
+Processing, pages 4710–4728.
+Wenxuan Zhou, Sheng Zhang, Hoifung Poon, and
+Muhao Chen. 2023. Context-faithful prompting
+for large language models. In Findings of the As-
+sociation for Computational Linguistics: EMNLP
+2023, Singapore, December 6-10, 2023, pages 14544–
+14556. Association for Computational Linguistics.
+A LLM Usage Disclosure
+We use LLM for paper writing to check grammar
+and boost the clarity. We do not use LLM for
+research or generate experiment code.
+B Experimental Settings
+B.1 Detailed Description of RAG-Bench
+The test set of RAG-Bench (Fang et al., 2024) incor-
+porates 1,000 samples from each of three subsets:
+NQ, TriviaQA, and WebQ. For each query, the
+benchmark provides multiple noisy and conflict-
+ing retrieval contexts. Specifically, noisy contexts
+consist of documents that are topically relevant to
+the query but do not contain the correct answer.
+Conflicting contexts are constructed by selecting
+one of the two gold passages and substituting the
+correct answer entity with an incorrect one.
+For Section 4, the RAG-Bench training set com-
+prises 4.5k samples (1.5k per subset), where each
+instance includes a gold retrieval context aug-
+mented with three distractors: two noisy documents
+and one conflicting document. In our experiments,
+we utilize only the NQ training subset. To an-
+alyze model performance across varying context
+lengths, we sample 1.5k instances for each docu-
+ment count k ∈ {1, 2, 3, 4}, resulting in a total of
+6k training samples. While the k = 1 configuration
+provides only the gold document, settings where
+k > 1 incorporate a mixture of the gold document
+and noisy distractors. This allows for a robust eval-
+uation of the model’s performance across varying
+levels of contextual interference. In this setup, each
+unique query is replicated four times, each time
+paired with a different number of documents. For
+a fair comparison, all baseline methods follow this
+identical training configuration.
+B.2 Instruction Template
+We adopt the following instruction template for
+each prompting strategy:
+Parametric Answer: Pθ(a, c|x), generating the
+answer without documents.
+22159

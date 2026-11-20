@@ -1,0 +1,109 @@
+CIKM ’26, November 07–11, 2026, Rome, Italy Hengran Zhang, Keping Bi, Jiafeng Guo, Jiaming Zhang, Shuaiqiang Wang, Dawei Yin, Xueqi Cheng
+5.4 Experimental Results on SpecUBench
+Utility-Based Selection Results. Table 3 presents the utility-
+based selection performance (measured in F1 score) across various
+LLMs and datasets using different verbalized strategies. Key ob-
+servations are as follows: (1) The listwise approach consistently
+outperforms the pointwise method across all LLMs, indicating its
+advantage in capturing contextual dependencies among passages
+for utility-based selection. Considering the accuracy when gold
+utilitarian passages are empty, all methods have an over-selection
+problem, especially listwise methods. (3) Incorporating pseudo-
+answers during utility judgments generally leads to improved F1
+performance. This finding is consistent with Zhang et al. [53].
+Utility-Based Ranking Results. Table 4 shows the utility-based
+ranking performance on different datasets. We can observe that:
+(1) The attention weights from the LLM during answer generation
+show the poorest alignment with utility, performing worse even
+than the standalone initial retrieval. This indicates that the inter-
+nal attention mechanism is not a reliable indicator of a passage’s
+contribution to the final answer. (2) Both the likelihood and ver-
+balized methods outperform the initial retrieval baseline across
+most datasets and models. This demonstrates that LLMs can effec-
+tively rank passages based on their utility for answer generation.
+(3) The verbalized method with pseudo-answers achieves the best
+overall performance on most datasets. However, the likelihood
+method is superior on the TriviaQA dataset for all LLMs. As shown
+in Table 3, LLMs can generate high-quality answers on TriviaQA,
+indicating that the queries in TriviaQA are simpler than those in
+other datasets. The superior performance of the likelihood method
+on this dataset suggests it is more sensitive to the quality of the
+pseudo-answer, benefiting more from accurate generations than
+the verbalized method.
+RAG Performance. To evaluate the answer generation perfor-
+mance of different utility-based passage selection methods, we
+employ the two top-performing approaches identified in Table
+3—verbalized pointwise and verbalized listwise selection, both in-
+corporating pseudo-answers. The results are summarized in Table
+6, from which we derive the following observations: (1) RAG using
+self-utility judgments generally outperforms the baseline of directly
+using the top-20 passages retrieved by BGE-M3. This trend holds
+across most datasets and LLMs, indicating the benefit of incorpo-
+rating model-aware utility estimation in passage selection. (2) Gold
+utilitarian passage sets are not transferable across different LLMs
+(Figure 6); however, passages selected using listwise verbalized
+utility judgments produce RAG performance that generalizes well
+across models. In other words, LLMs do not necessarily achieve
+their optimal RAG performance when using passages chosen ac-
+cording to their own utility judgments. This effect is especially
+pronounced for weaker models, which often perform better when
+leveraging passages selected by stronger LLMs. These observations
+suggest that the utility captured by current selection methods tends
+to be general, rather than truly LLM-specific. Consequently, exist-
+ing approaches are limited in their ability to identify passages with
+LLM-specific utility that can further enhance RAG performance.
+Future research should focus on developing more sophisticated
+strategies for selecting or generating passages that are genuinely
+tailored to the unique characteristics of each LLM, in order to fully
+realize the potential of retrieval-augmented generation.
+6 Conclusion and Future Work
+In this work, we proposed and systematically studied the concept
+of LLM-specific utility for retrieval-augmented generation (RAG).
+Unlike traditional approaches that rely on static, human-annotated,
+or model-agnostic evidence, our results demonstrate that the pas-
+sages most useful for one LLM are often not optimal for others,
+and that LLM-specific gold utilitarian passages consistently lead
+to better RAG performance than conventional human-annotated
+evidence. This finding fundamentally redefines RAG’s objective,
+highlighting the importance of tailoring evidence selection to the
+specific knowledge gaps and comprehension abilities of each model.
+To support this perspective, we introduced the LLM-specific utility
+judgment task and constructed a benchmark, i.e., SpecUBench,
+spanning multiple LLMs and QA datasets. Our experiments show
+that while utility-aware selection methods—especially verbalized
+judgments with pseudo-answers—can improve RAG accuracy, most
+existing approaches still primarily capture a general notion of util-
+ity and fail to identify passages that maximize performance for
+individual LLMs. Interestingly, weaker models often perform better
+when using passages selected by stronger LLMs rather than their
+own selections, further emphasizing the need for generator-specific
+strategies. Overall, our work motivates a shift toward LLM-centric
+evidence selection in RAG. We hope our benchmark and findings
+inspire future research into utility estimation and retrieval meth-
+ods that are genuinely tailored to the downstream LLM, ultimately
+improving the effectiveness and reliability of RAG systems.
+For future work, several critical directions remain. First, although
+this analysis centers on single-passage and context-independent
+utility, exploring context-dependent utility is an important next step.
+This includes investigating how the utility of a passage may change
+based on other passages already provided, particularly in multi-hop
+settings, as well as incorporating broader utility factors such as
+factual grounding, and enhancing robustness. Second, extending the
+current binary, accuracy-oriented framework to probabilistic utility
+and multi-passage interactions will enable a more comprehensive
+understanding of LLM-specific utility.
+Acknowledgments
+This work was funded by New Generation Artificial Intelligence-
+National Science and Technology Major Project of No. 2025ZD0123301,
+the National Natural Science Foundation of China (NSFC) under
+Grants No. 62302486 and No. 62441229, the Innovation Project of
+ICT CAS under Grants No. E561010 and E361140, and the Strategic
+Priority Research Program of the CAS under Grants No. XDB0680102.
+GenAI Usage Disclosure
+During the preparation of this work, the author(s) only used Chat-
+GPT or DeepSeek for writing and language polishing to improve
+the clarity, grammar, and readability of selected paragraphs. No
+other Generative AI tools were used in the research (including ex-
+perimental design, data generation, or result interpretation) or in
+the writing of this paper. The author(s) remain solely responsible
+for all scientific and ethical aspects of this work.

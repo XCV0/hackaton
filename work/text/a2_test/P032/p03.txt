@@ -1,0 +1,116 @@
+Grounded Intrinsic Hallucination Extrinsic Hallucination
+Claim c 
+Apple stock hit record, valuing the
+company at $900B, after beating
+Wall Street expectations on
+international sales.
+Claim c 
+Apple shares fell sharply,
+reducing the company’s valuation
+below $600B, after missing Wall
+Street forecasts.
+Claim c 
+Apple’s record-high share
+performance was partly driven
+by strong demand for the
+iPhone X in emerging markets.
+Explanation : This claim exactly
+matches information stated in 𝑥. It is
+directly veriﬁable and fully supported.
+Explanation : This claim directly
+contradicts 𝑥's statement about record
+highs and $900B valuation.
+Explanation : The claim mentions
+iPhone X and emerging markets; it
+requires external knowledge to verify.
+Document 𝑥  
+Apple shares hit record highs, brieﬂy
+valuing the company at $900B, after
+beating Wall Street forecasts with
+strong international sales.
+Document 𝑥  
+Apple shares hit record highs, brieﬂy
+valuing the company at $900B, after
+beating Wall Street forecasts with
+strong international sales.
+Document 𝑥  
+Apple shares hit record highs, brieﬂy
+valuing the company at $900B, after
+beating Wall Street forecasts with
+strong international sales.
+Figure 2: Examples of Relations. A grounded claim, an intrinsic hallucination, and an extrinsic hallucination.
+Unsupported claims are treated as hallucinations
+and divided as IntrinsicHallu if a claim c directly
+contradicts x, or ExtrinsicHallu if it introduces
+information that cannot be verified from x and re-
+quires external knowledge (see Figure 2).
+4 Method
+4.1 HalluGuard Overview
+HalluGuard is a Small Reasoning Model (SRM)
+for closed-book, document-grounded hallucination
+detection, and it can be integrated as a guardrail in
+Retrieval-Augmented Generation (RAG) pipelines.
+Given a document-claim pair, HalluGuard only rea-
+sons over the provided document to predict whether
+the claim is grounded or hallucinated, and pro-
+duces a justification by citing evidence from the
+document. This design improves transparency and
+user trust. HalluGuard supports two inference
+modes: in the think mode, it generates intermedi-
+ate reasoning traces before the final output, while in
+non-think mode, it skips these traces and outputs
+directly. The mode is controlled at inference time
+by adding /think or /no_think to the prompt.
+Our method begins with a domain-agnostic cor-
+pus that has been curated for safety, quality, and
+diversity (see Figure 3). The texts in this corpus are
+then linguistically reformed in tone and style by the
+Data Reformer (DR; Qwen3-235B-A22B (Yang
+et al., 2025)) to improve cross-domain general-
+ization. From these reformed texts, we generate
+grounded and hallucinated synthetic claims using
+the Claim Generator (CG; Qwen3-235B-A22B).
+To align the model towards high-quality reason-
+ing and justifications, we construct a synthetic pref-
+erence dataset. For each document-claim pair, we
+generate two candidate completions: one from the
+Preference Generator-Large (PG-L; Qwen3-235B-
+A22B) and one from the Preference Generator-
+Small (PG-S; Qwen3-0.6B). We designate the out-
+put of PG-L as the chosen completion and the
+output of PG-S as the rejected one. This cre-
+ates preference pairs that exploit the empirical
+quality gap between large and small models, al-
+lowing us to build a training dataset without the
+need for additional human annotation. To further
+improve reliability, we apply two filtering steps:
+(i) model-agreement verification, in which the la-
+bel deduced from the synthetic claim (from CG)
+is compared with the classification produced by
+PG-L; and (ii) LLM-based consensus filtering. In
+this step, two Independent Evaluators (IE-1; gpt-
+oss-120B (OpenAI, 2025) and IE-2; DeepSeek-
+V3.1-Terminus (DeepSeek-AI, 2024)) judge both
+completions. Only pairs in which both evaluators
+select the chosen completion are retained. Then,
+to avoid the Small Model Learnability Gap (Li
+et al., 2025), we fine-tuned a Qwen3-4B backbone
+using LoRA (Hu et al., 2022) and ORPO, which
+merges Supervised Fine-Tuning (SFT) and prefer-
+ence alignment in a single stage (see Appendix A).
+Thus, HalluGuard is an SRM for document-
+grounded hallucination detection in RAG pipelines.
+4.2 Structured Claim Dataset Construction
+Domain-Agnostic Corpus. The performance of
+LLMs depends on both the size and the quality
+of the dataset (Gunasekar et al., 2023). Larger
+and more diverse datasets improve generalization
+by exposing models to varied contexts. We use
+FineWeb, an open, domain-agnostic web corpus.
+From the 10BT sample3, we retain only docu-
+ments with high confidence in being in English
+(language_score ≥ 0.95) and remove exact dupli-
+cates. Then, we randomly sample 300,000 docu-
+ments to create the baseline dataset, Dagnostic.
+3https://hf.co/datasets/HuggingFaceFW/fineweb
+16920

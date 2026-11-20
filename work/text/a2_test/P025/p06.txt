@@ -1,0 +1,147 @@
+HealthCare Enron
+200
+250
+300
+350
+400
+450
+500Retrieved Contexts
+C1 C2 C3 C4
+(a) Untargeted-retrieval
+HealthCare Enron
+0
+20
+40
+60
+80
+100Extracted Contexts 
+C1(R)
+C1(RG)
+C2(R)
+C2(RG)
+C3(R)
+C3(RG)
+C4(R)
+C4(RG) (b) Untargeted-extraction
+HealthCare Enron
+200
+250
+300
+350
+400
+450
+500Retrieved Contexts
+C1 C2 C3 C4 (c) Targeted-retrieval
+HealthCare Enron
+0
+20
+40
+60
+80
+100Extracted Contexts
+C1 C2 C3 C4 (d) Targeted-extraction
+Figure 2: Ablation study on command part. (R) means Repeat Contexts and (RG) means Rouge Contexts
+1 2 4
+K docs per query
+100
+200
+300
+400
+500
+600Values
+Retr. Docs
+Repeat
+Rouge
+(a) Untargeted-healthcare
+1 2 4
+K docs per query
+0
+200
+400
+600
+800
+1000Values
+Retr. Docs
+Repeat
+Rouge (b) Untargeted-enron
+1 2 4
+K docs per query
+200
+400
+600
+800Values
+Retr. Docs
+Targ. Info (c) Targeted-healthcare
+1 2 4
+K docs per query
+100
+200
+300
+400
+500
+600Values
+Retr. Docs
+Targ. Info (d) Targeted-enron
+Figure 3: Ablation study on number of retrieved docs per query k.
+4.5 Potential Mitigation
+Next, we aim to investigate potential defenses to
+mitigate the risk of retrieval data extraction. We
+investigate pre-retrieval techniques like set dis-
+tance threshold and post-processing techniques
+like re-ranking and summarization. Here, we
+use Llama2-7b-Chat as the generative model and
+bge-large-en-v1.5 as the embedding model
+with k = 2.
+Re-ranking. In Retriever-Generator (RAG) mod-
+els, re-ranking significantly enhances the generated
+text’s quality and relevance. This process involves
+utilizing another pre-trained model to evaluate the
+relevance of retrieved documents to the query, sub-
+sequently adjusting their order to prioritize those
+more pertinent to the question. We posit that this
+approach can mitigate privacy risks by focusing
+the model on relevant information and reducing
+the likelihood of disseminating irrelevant content.
+In our implementation, we employ the widely rec-
+ognized bge-reranker-large4 reranker to score
+the documents and prepend the most relevant doc-
+uments closest to the query. However,from the
+results in Figure 4a and Figure 4b, we can observe
+that re-ranking has almost no mitigation effects.
+Summarization with Relevant Query. Summa-
+rization may serve as a potential mitigation as it
+compresses the retrieved contexts and thus reduces
+4https://huggingface.co/BAAI/
+bge-reranker-large
+their information exposure. To investigate this, we
+perform summarization first using an additional
+model after retrieval which is then input to the gen-
+erative model. To be specific, we input both the
+query and each returned documents to the LLM and
+ask LLM to only maintain the relevant information
+to the query. We consider both extractive summa-
+rization (Sum), which does not allow paraphrasing,
+and abstraction summarization (Sum.Para) allow-
+ing sentence alteration5. Our findings indicate that
+summarization effectively reduces privacy risks as-
+sociated with untargeted attacks. Notably, abstrac-
+tive summarization demonstrated superior effec-
+tiveness, reducing the risk by approximately 50%.
+This is because summarization reduces the sen-
+tence length and filters out irrelevant information,
+thus reducing the number of successful reconstruc-
+tions. However, in the context of targeted attacks,
+the effect of summarization was limited. For in-
+stance, in the Enron email dataset, the occurrence
+of personally identifiable information (PIIs) even
+inadvertently increased. This suggests that while
+summarization techniques may filter out irrelevant
+content, it tends to retain key information pertinent
+to targeted attacks, potentially increasing the likeli-
+hood of the LLM generating sensitive information.
+Set Distance Threshold. Adding a distance
+threshold in retrieval for RAG models may reduce
+the risk of extracting sensitive retrieval data by en-
+5We detailed the prompt templates for summarization in
+Appendix A.3.3
+4510

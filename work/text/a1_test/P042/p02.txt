@@ -1,0 +1,120 @@
+transitions  [29−33].  In  particular,  the  oxygen  diffusion  at  the
+SnO2/perovskite interface has been identified as a major contributor
+to  the  instability  of  PSCs  [34−37].  In  2022,  Sui  et  al.  examined  the
+role  of  SnO2 in  the  thermal  degradation  pathway  of  the  perovskite
+layer  [38].  Their  findings  revealed  that  perovskite  materials  at  the
+SnO2/perovskite  interface  are  prone  to  thermal  decomposition,
+primarily due to the diffusion of oxygen atoms from the SnO2 layer
+to the perovskite layer, facilitated by the low segregation energy for
+oxygen  diffusion.  Building  on  this,  Park  et  al.  proposed  that  the
+absence of oxygen atoms on the surface of SnO2 reduces the energy
+barrier  for  the  formation  of  iodine  interstitials  (Ii),  which  would
+accelerate  the  adverse  phase  transition  of  FAPbI3 [39].  To  mitigate
+this,  they  used  black  phosphorus  quantum  dots  to  suppress  the
+formation of oxygen vacancy (VO) in SnO2 and Ii in the perovskite,
+leading  to  highly  stable  α-FAPbI3 crystal  films.  Additionally,  in
+2022,  Zhong  et  al.  reported  the  use  of  potassium
+chlorobenzenesulfonate  to  modify  the  SnO2/perovskite  interface  in
+n–i–p  type  PSCs  [40].  The  C–Cl  bond  in  potassium
+trichlorobenzene  sulfonate  could  effectively  interact  with
+uncoordinated Sn and passivate the oxygen vacancies on the surface
+of SnO2. By adjusting these vacancies, the thermal stability of PSCs
+can be greatly improved. These findings underscore the importance
+of  developing  effective  strategies  at  SnO2/perovskite  interface  to
+inhibit  the  generation  of  oxygen  vacancies  in  SnO2 and  anchor
+active  ions  at  their  sites  in  perovskite,  thereby  achieving  high-
+stability PSCs.
+Metal–organic  frameworks  (MOFs)  are  a  class  of  porous
+skeleton  materials  composed  of  metal  node  units  and  organic
+ligands,  which  possess  highly  spatially  confined  structures  and
+uniformly  distributed  active  sites  [41−43].  This  unique  structural
+feature facilitates the shielding of moisture and oxygen, thus greatly
+enhancing the stability of devices [44, 45]. The surface active sites in
+MOFs  can  effectively  passivate  defects,  stabilize  various  ions,  and
+inhibit  ion  migration  [46−48].  In  2020,  Jen  et  al.  utilized  thiolated
+two dimensional conjugated MOF (ZrL3) as electron transport layer
+(ETL)  in  n–i–p  PSC,  where  the  MOF  effectively  trapped  free  Pb2+
+ions,  achieving  a  PCE  of  22%  and  long-term  stability  for  1000  h
+[49]. In 2021, Chen et al. introduced an ultra-thin europium-MOF
+(Eu-MOF)  layer  at  the  SnO2/perovskite  interface  [50].  They  found
+that  the  Eu-MOF  layer  could  increase  the  light  utilization  through
+down  conversion  and  modify  perovskite  growth  conditions,
+converting  residual  tensile  strains  into  compressive  strains.  More
+recently,  in  2023,  Chen  et  al.  utilized  the  porous  nanostructure  of
+zeolitic  imidazolate  framework-8  (ZIF-8)  to  form  a  porous  PbI2
+film, promoting further crystallization of perovskite and achieving a
+champion PCE of 24.08% with 90% residual efficiency after 1500 h
+of  storage.  These  studies  highlight  the  potential  of  MOFs  in
+enhancing both the efficiency and stability of PSCs. However, there
+remains a significant gap in understanding the relationship between
+MOF  structure  and  PSC  performance,  as  well  as  the  underlying
+mechanisms,  particularly  the  influence  of  MOFs  on  oxygen
+migration at the SnO2/perovskite interface.
+In this work, we introduce a new functionalized MOF, UiO-66-
+NH2-SH,  composed  of  zirconium  (Zr)  clusters  and
+amino/sulfhydryl  group-modified  ligands.  This  MOF  is  employed
+as  a  cross-layer  additive  between  the  SnO2 ETL  and  the  perovskite
+layer.  The  porous  organic  framework  provides  anchor  points  that
+promote  strong  bonding  between  the  perovskite  and  SnO2 layers,
+while  its  functional –SH  and –NH2 groups  on  UiO-66-NH2-SH
+regulate  perovskite  crystallization  and  passivate  interface  defects,
+thereby  reducing  the  migration  pathways  for  oxygen  and  other
+ions.  As  anticipated,  our  results  demonstrate  that  incorporating
+UiO-66-NH2-SH  into  the  upper  layer  of  SnO2 effectively  hinders
+oxygen  migration  from  SnO2 to  the  perovskite,  while  also
+enhancing the perovskite grain size. Furthermore, UiO-66-NH2-SH
+functions  synergistically  as  a  stable  unit,  a  behavior  not  observed
+with  either  UiO-66  or  organic  molecules  with  similar  functional
+groups.  As  a  result,  the  lifetimes  of  perovskite  devices  at  elevated
+temperatures have been greatly extended. After storage at 85 °C in a
+N2-filled  glove  box  for  2000  h  without  encapsulation,  the  MOF-
+modified  device  maintained  over  100%  of  its  initial  efficiency,  in
+stark  contrast  to  the  control  devices,  which  retained  only  about
+40%. 
+2    Results and discussion
+In this work, the UiO-66-NH2-SH (Fig. 1(a)) was synthesized via a
+solvothermal  method  [51],  incorporating  Zr6 nodes  and
+multivariant  organic  linkers  functionalized  with –SH  and –NH2
+groups. Through the coordination of –COOH with Zr, the specific
+structure of UiO-66-NH2-SH is formed. The functional groups –SH
+and –NH2 contained  in  the  organic  connectors  can  interact  with
+SnO2 and  perovskite,  respectively,  strengthen  the  connection
+between  SnO2 and  perovskite,  and  passivate  the  interface  defects.
+Due  to  the  special  framework  structure  of  UiO-66-NH2-SH,  there
+must  be “residual” functional  groups,  which  can  continuously
+capture  escaping  O  elements  and  inhibit  O  migration  in  the
+pathway of O migration, thus greatly improving the stability of the
+devices.  As  shown  in Fig.  1(b),  the  powder  X-ray  diffraction
+(PXRD)  pattern  of  UiO-66-NH2-SH  aligns  well  with  that  of  UiO-
+66, indicating that the synthesized material retains the isostructural
+crystal  architecture  of  the  UiO-66  framework,  thereby  confirming
+the  successful  construction  of  UiO-66-NH2-SH.  Energy  dispersive
+spectroscopy  (EDS)  mapping  (Fig.  1(c))  illustrates  that  the
+distributions  of  nitrogen  (N),  Zr,  and  sulfur  (S)  are  uniformly
+dispersed, confirming that the organic linkers are evenly integrated
+within the UiO-66-NH2-SH structure.
+MOFs with different ratios of –NH2 to –SH have been prepared
+and  the –NH2/–SH  ratio  was  optimized  according  to  the
+photovoltaic performance of their responding devices. As shown in
+Fig.  S1  in  the  Electronic  Supplementary  Material  (ESM),  the
+optimal preparation ratio of –NH2 to –SH is 1:5. Besides, the exact
+–NH2/–SH ratio of the optimal MOF has been demonstrated to be
+1:5.07 by the elemental analyzer (EA) testing, as shown in Table S1
+in the ESM.
+To  explore  the  influence  of  MOF  on  the  conductivity  of  SnO2
+ETL,  we  conducted  conductivity  measurements.  As  shown  in  Fig.
+S2  in  the  ESM,  the  introduction  of  UiO-66-NH2-SH  leads  to  a
+significant  increase  in  conductivity,  likely  due  to  the  passivation  of
+surface  defects  in  SnO2.  This  enhancement  is  favorable  for
+improving the charge transport efficiency in PSCs.
+Furthermore,  the  light  transmission  properties  of  SnO2 and
+SnO2/MOF films were compared. As shown in Fig. S3 in the ESM,
+both  samples  present  high  transmittance,  although  the
+transmittance of SnO2/MOF film is slightly lower (~ 1%) than that
+of  SnO2 film.  Thus,  we  speculate  that  the  impact  of  UiO-66-NH2-
+SH on the light absorption of perovskite layer can be negligible.
+Scanning  electron  microscopy  (SEM)  and  EDS  characterization
+were  taken  to  get  the  morphology  of  the  MOF  layer  on  the  SnO2
+substrate. As shown in Fig. S4 in the ESM, the MOF materials (the
+Liu et al. Nano Research | Vol. 18, No. 9
+Nano Research, 2025, 18, 94907685 94907685 (2 of 10)

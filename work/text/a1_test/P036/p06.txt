@@ -1,0 +1,46 @@
+the collection efﬁciency of the solar cell (χc0 = Jsc/Jph, where Jph is
+the total photocurrent).
+Figure 8a shows Gsc as a function of Jsc for the different devi-
+ces. It can be seen that, indeed, in all cases, Gsc is proportional to
+Jsc, indicating that the slope of the J(V ) curve under short-circuit
+conditions is controlled by the collection function χc(V ) over a
+wide range of illumination levels. Only at very low illumination
+( Jsc ≫ 1mAcm/C02) would one expect to observe the leakage effect
+due to possible shunt parasitic resistance.[24] Figure 8b illustrates
+how VC controls the short-circuit behavior of J(V ) for two of the
+devices.
+Applying the uniform ﬁeld model developed for amorphous
+silicon p-i-n devices, it is possible to derive simple expressions
+to calculate χc0 and the effective μτ product (μτeff ) from the exper-
+imental measurement of VC. Additionally, the absorber thickness
+(d) and the built-in potential (Vbi) must also be known.[24,28]
+χco ¼ 1 /C0 Vbi VC (4)
+μτeff ¼ LCO /C2 d Vbi (5)
+where Lc0 is the effective short-circuit collection length, repre-
+senting the average distance that carriers, driven by the electric
+ﬁeld, travel before recombining.[25]
+LCO ¼ VC Vbi /C0 1 /C18/C19 /C2 d (6)
+Figure 9 shows the collection voltage VC derived from the J(V )
+curves over the illumination range where Jsc > 1mAcm/C02,
+along with the values of μτeff, χC0, and LC0 calculated from
+Equation (4–6). An approximate value of Vbi of 1 V is assumed,
+which is expected to be the same for all the devices as the selec-
+tive contacts are identical. The shaded region represents absorb-
+ers with a thickness of less than 100 nm, corresponding to TPV
+devices with signiﬁcant transparency (APT > 50%). In this
+region, a clear increase in the VC voltage is observed as the thick-
+ness decreases. However, the μτeff value derived from Equation (5)
+deteriorates signiﬁcantly, which would typically be interpreted as a
+signiﬁcant decrease in the absorber quality.[24]
+This is not the case for the collection efﬁciency, which, despite
+the deterioration of μτeff, improves as the thickness decreases. It
+should be noted that the reduction in thickness favors carrier col-
+lection, both because the distance they must travel to be collected
+Figure 8. a) Slope of the J(V ) curve under short-circuit conditions (Gsc) as a function of the short-circuit current density ( Jsc). The slope of the lines is
+equal to 1/VC. b) Graphical interpretation of the meaning of VC.
+Figure 9. a) Collection voltage VC and effective μτ as a function of thickness. b) Collection efﬁciency χC0 and collection length LC0 as a function of
+thickness.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2025, 9, 2400816 2400816 (6 of 9) © 2025 The Author(s). Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400816, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

@@ -1,0 +1,82 @@
+from the absorber thickness reduction. Therefore, several archi-
+tecture considerations were followed to achieve an effective solar
+cell substrate in which both passivation and light-trapping capa-
+bilities can be optimized. Regarding the passivating
+material, Al2O3 was chosen as it has been previously used for
+an effective passivation of active recombination mechanisms
+at the rear interface,[26,27] as well as exploited as a barrier layer
+for metals in ultrathin solar cells,[47,54–56] enabling the metallic
+NPs integration. With respect to the contacting approach, a
+high-passivating area is desired for a more substantial decrease
+in the active recombination mechanisms, while allowing for the
+utilization of the signiﬁcant passivation area for effective light
+trapping through the encapsulation of metallic NPs.[20,23,57]
+Nevertheless, the high passivation area needs to be counterbal-
+anced with a contacting area which does not compromise the
+charge extraction, as passivation areas higher than 90% have
+shown an impact on ultrathin solar cells’ series resistance.[9,20,23]
+Therefore, in this work, a line contact pattern with a nominal
+passivation area of 75% was chosen to attain an effective passiv-
+ation and allow a substantial dielectric coverage to couple with
+light trapping, without hindering charge carrier collection.
+The dielectric encapsulation layer thickness is as well critical,
+since the encapsulation of the metallic nanostructures needs
+to be ensured. However, the thickness of the dielectric layer
+might have an impact in the resonant behavior of the metallic
+NPs. The charge polarization in the NP through an external elec-
+tromagnetic ﬁeld will induce a charge accumulation with the
+opposite sign at the metallic NP/dielectric medium interface,
+which will in turn screen the induced electric ﬁeld in the
+NP.[58] The screening effect is dependent on the polarizability
+of the dielectric medium, with a higher-refractive-index medium
+leading to a redshift of the plasmonic resonance peak and a
+stronger resonant intensity.[58,59] Therefore, the thickness of
+the dielectric layer will have a signiﬁcant impact on the plas-
+monic resonance as it will lower the medium’s local refractive
+index at the NPs vicinity and suppress the resonant scatter-
+ing.[48,60] A25nmAl2O3 layer has been previously used to effec-
+tively encapsulate micrometer-large Au NPs aggregates.[54]
+Nevertheless, to dampen the unwanted effects on the NPs’ scat-
+tering efﬁciency and considering that individual NPs will be
+encapsulated herein in comparison to micrometer-large NPs
+aggregates, the encapsulation layer thickness value used was
+of 15 nm. Regarding the plasmonic material, Au was chosen
+due to the ease of achieving a NPs colloidal solution, high
+free-electron density, and stability.[61–63] Furthermore, there is
+a size dependence for the absorption and scattering cross section
+of the NPs. Thus, the diameter of the used NPs is critical in hav-
+ing an efﬁcient scattering substrate. For the selection of the NPs
+diameter, the absorption (σabs) and scattering cross sections
+(σscat) of Au NPs with diameters ranging between 40 and
+140 nm, within a CIGS-based medium, were simulated through
+the ﬁnite-difference time-domain (FDTD) method using the
+Lumerical software.[64] The NPs were capped by a 15 nm
+Al2O3 shell in these simulations, which was the chosen encap-
+sulation thickness value within the passivation line contact
+scheme. In Figure 1a the normalized scattering cross-section
+(Qscat = σscat/G, with G being the geometric cross-section) spec-
+tra of the simulated NPs with different diameters are shown. The
+Qscat is lowest through the whole wavelength range for a NP
+diameter value of 40 nm. Through the diameter value increase
+to 60 nm, there is a sharp enhancement of the Qscat maximum
+peak along with a redshift. For diameter values below 80 nm, the
+NPs only sustain a dipolar resonant mode, presenting a sharp
+resonant peak in the Qscat spectra. As the NPs diameter increases
+above 60 nm, the dipolar peak at longer wavelength values
+redshifts and higher-order resonant modes appear, leading to
+a broadening and dampening of the Qscat.[37,58] In Figure 1b,
+a plot evaluating the NPs’ scattering efﬁciency over wavelength
+is shown.[37] For the smallest studied size, the scattering efﬁ-
+ciency is below 50%, meaning that for these small NPs, the
+absorption is dominating the normalized extinction cross section
+(Qext).[65] However, as the diameter increases from 40 to 100 nm,
+the scattering efﬁciency improves signiﬁcantly, this is due to the
+fact that with the increase in the diameter, the NPs radiate more
+efﬁciently, with an increase in the Qscat over the normalized
+absorption cross-section (Qabs) ratio. For diameter values higher
+Figure 1. Simulated a) normalized scattering cross section and b) scattering efﬁciency, for a spherical NP within an ACIGS medium with a thin Al2O3
+shell, with varying NP diameter.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2024, 8, 2400147 2400147 (3 of 15) © 2024 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2024, 11, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400147, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

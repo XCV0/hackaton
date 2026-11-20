@@ -1,0 +1,102 @@
+Dataset Setting Primary use Size
+RAGBench-HotpotQA Passage RAG Judge comparison; metric disagreement 424 / 150 per sweep cell
+RAGBench-TechQA Passage RAG Metric disagreement; redundancy 304 / 150 per sweep cell
+RAGBench-PubMedQA Passage RAG Metric disagreement; redundancy 500 / 150 per sweep cell
+ExpertQA Attributed QA Human-support validation 500 full / 200 GPT / 187 Claude
+DelucionQA conflict subset Passage RAG Natural conflicts 100
+Table 1: Datasets and roles in the evaluation.
+corpus-deletion mode, supporting chunks are re-
+moved from the corpus and retrieval is rerun, which
+tests end-to-end evidence-bound abstention. Prior
+context-modification work (Cohen-Wang et al.,
+2024; Liu et al., 2024b; Cuconasu et al., 2024)
+operates at the post-retrieval point only; we make
+the three intervention points explicit because they
+probe different stages of the pipeline and yield dis-
+tinct propagation traces.
+For each intervention and configuration, the har-
+ness logs the pre- and post-intervention retrieved
+state, first-stage candidate pool, reranked top-k con-
+text, generated answer, and behavioral label. This
+trace localizes observable propagation failures: ab-
+sent from the candidate pool implies retrieval fail-
+ure; present in the pool but absent from top-k im-
+plies reranking or context-selection failure; present
+in top-k but behaviorally ignored implies generator
+failure. Sections 5.2–5.2 test whether this localized
+stage predicts the effective repair. The claim is op-
+erational and pipeline-level, not a structural causal
+model of the generator.
+4 Experimental Setup
+Datasets. We evaluate on RAGBench’s Hot-
+potQA, TechQA, and PubMedQA splits (Friel
+et al., 2024), ExpertQA (Malaviya et al., 2024),
+and the DelucionQA conflict subset (Sadat et al.,
+2023); per-dataset roles and sizes appear in Ta-
+ble 1. We run two settings: benchmark-conditioned
+uses dataset-provided contexts and intervenes post-
+retrieval, isolating generator-side memory use; end-
+to-end builds sparse BM25, dense, and hybrid re-
+trievers with k ∈ {2, 4, 8}, so ranking disagree-
+ments between metrics are attributable to the metric
+rather than the system.
+Generator, judge, and prompt. The generator
+under test is CLAUDE-4.5-HAIKU for all head-
+line experiments (RAGBench-27 sweep, coherent-
+intervention probe, ExpertQA, end-to-end retrieval
+suite). Behavioral classification (abstain, conflict
+acknowledgment, silent pick, intervention valid-
+ity) uses CLAUDE-SONNET-4.6 as a stronger LLM
+judge. For the robustness check of §5.4 we swap in
+GPT-5.4-MINI (OpenAI API) and the open-weight
+QWEN3-8B (served locally) as generators, keeping
+prompts, retrieval contexts, and synthesized pay-
+loads fixed, and re-judge every answer with both
+Claude-Sonnet-4.6 and GPT-5.4-mini. Decoding is
+deterministic where supported (temperature 0 on
+every backend); for API backends we use one gen-
+eration per condition and quantify sampling sensi-
+tivity in Appendix J. All runs share a grounded QA
+prompt: answer from the provided context, abstain
+when evidence is insufficient, mention conflicts
+when sources disagree. Interventions leave the in-
+struction unchanged and modify only the retrieved
+context.
+Intervention parameters. All interventions
+from Section 3 are instantiated with a single
+fixed parameterization. Evidence units are formed
+by complete-linkage HAC on Sentence-BERT
+(SBERT) all-MiniLM-L6-v2 embeddings at cosine
+threshold 0.6; appendix ablations compare alterna-
+tive clustering rules (Saha Roy et al., 2025). An-
+swer similarity uses the same SBERT bi-encoder
+(semantic answer similarity, SAS), with cross-
+encoder and Jaccard variants reported as robustness
+checks. Cluster knockout removes one whole clus-
+ter at a time and aggregates by maxi (Eq. 8); the
+DAV threshold is τ = 0.5 (Section 3). Distractor
+injection adds one irrelevant chunk drawn from an-
+other query in the same dataset. Update and contra-
+diction payloads are synthesized by Claude-Haiku
+conditioned on the question and the reference an-
+swer (an alternative answer of the same factual
+type) and audited per-row by Claude-Sonnet (Ap-
+pendix J); only judged-valid contradictions enter
+the headline coherent-intervention rates. All thresh-
+olds (τ =0.5, cosine 0.6, RAGChecker ≤ 0.10) are
+fixed once, globally, and are not tuned per dataset;
+Appendix J reports sensitivity to each.
+Baselines. Observational baselines: RAGBench
+judge scores (Friel et al., 2024), RAGAS faith-
+fulness and context precision (Es et al., 2024),
+RAGChecker on the stage-diagnosis fixture (Ru
+et al., 2024), reference-based answer quality where
+applicable, and Recall@k.
+Validation, audit, and cost. ExpertQA human-
+support labels provide a human-grounded relia-
+bility check (Appendix D); we report ROC-AUC,
+PR-AUC, Spearman correlation, and 95% paired-
+bootstrap CIs over per-query pairs. A stratified
+audit covers Delete-All outputs, cluster knockouts,
+updates, and contradictions for intervention valid-
+22336

@@ -1,0 +1,59 @@
+Published as a conference paper at ICLR 2025
+Reliable Scoring by RAG Verifier The reliable draft verification by the generalist LM also con-
+tributes to the enhanced performance. The performance improves remarkably comparing MDrafter-7B
+and MVerifier-7B + MDrafter-7B. The instruction-tuned RAG drafter is specialized in generating answer
+drafts based on the retrieved documents while the language modeling capabilities of generic LMs
+are leveraged to validate each draft in light of its rationale. This method is both effective and easy
+to implement, showcasing the effectiveness of this verification approach.
+4.4 EFFECTS OF GENERATED RATIONALE FOR VERIFICATION
+In SPECULATIVE RAG, we utilize the generated rationale β from the RAG drafter as an indicator
+of the trustworthiness of answer drafts α.
+Shortened length compared to the retrieved documents. The rationales highlight relevant
+points, omit redundant information, and bridge logical gaps between drafts and their supporting
+documents. We compare the number of tokens in the generated rationale and the retrieved docu-
+ments, and plot them in Figure 2. We find that the generated rationale is significantly shorter than
+the retrieved documents.
+TriviaQA MuSiQue PopQA PubHealth ARC-Challenge
+Dataset
+0
+200
+400
+600
+800Avg. Token Number
+357.04
+815.90
+517.87
+272.11 268.52
+41.42 44.47 34.07 34.94 58.73
+Retrieved Documents Generated Rationale
+Figure 2: Average number of tokens in the generated rationale and the retrieved documents in Triv-
+iaQA, MuSiQue, PopQA, PubHealth, and ARC-Challenge. The generated rationale is of much
+shorter length than the original retrieved documents.
+Table 2: Performance and latency analysis of SPECULATIVE RAG on TriviaQA and PubHealth
+using MVerifier-8x7B + MDrafter-7B. We add the original document subset δ to the context or re-
+place the generated rationale β with the original retrieved document subset δ during verifica-
+tion, i.e. we compute the self-containment score as ρSelf-contain = P (α, δ|Q) or ρSelf-contain =
+P (α, δ, β|Q), and compute the self-reflection score as ρSelf-reflect = P ("Yes"|Q, α, δ, R) or
+ρSelf-reflect = P ("Yes"|Q, α, δ, β, R), where Q is the query; α is the answer draft; R is the self-
+reflection statement.
+TriviaQA PubHealth
+Accuracy (%) Latency (s) Accuracy (%) Latency (s)
+MVerifier-8x7B + MDrafter-7B
+ρ = Score(α|Q, β) 74.24 1.93 76.60 1.17
+ρ = Score(α|Q, δ) 74.08 (-0.16) 2.13 (+10.36%) 76.09 (-0.51) 1.31 (+11.97%)
+ρ = Score(α|Q, β, δ) 74.32 (+0.08) 2.17 (+12.44%) 76.29 (-0.31) 1.33 (+13.68%)
+Comparable performance with retrieved documents and lower latency. To evaluate the ef-
+fectiveness of the rationales, we create two alternative scoring methods: (a) replacing rationale
+with retrieved documents (ρ = Score(α|Q, δ)), or (b) adding retrieved documents to rationale
+(ρ = Score(α|Q, β, δ)). We compare these alternatives to the scoring method used in SPECULA-
+TIVE RAG (ρ = Score(α|Q, β)) in Table 2. The results show that incorporating longer retrieved
+documents does not consistently improve performance and tends to increase latency. This suggest
+that the generated rationale is already of high quality and serves as an effective bridge between the
+supporting documents and the generated answer drafts. By leveraging this rationale, we can effi-
+ciently verify drafts using a generic LM, leading to accurate final results. We further validate the
+rationale generation in the instruction-tuning stage. See Appendix D for more details.
+4.5 LATENCY ANALYSIS WITH BASELINES
+We analyze the latency of Standard RAG, Self-RAG, and our SPECULATIVE RAG on TriviaQA,
+MuSiQue, PopQA, PubHealth, and ARC-Challenge. We randomly sample 100 cases from each
+dataset and report the average time cost for each case, as shown in Figure 3. To simulate real-world
+8

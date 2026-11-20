@@ -1,0 +1,104 @@
+Model Arabic English Average
+Fanar-2-27B 48.20 47.90 48.05
+ALLaM-7B 42.70 32.80 37.75
+Fanar-1-9B 34.50 36.30 35.40
+AceGPT-v2-8B 23.10 28.80 25.95
+EuroLLM-9B 22.30 29.10 25.70
+SILMA-9B-v1.0 20.40 28.50 24.45
+Qwen3-4B-2507 15.80 27.90 21.85
+gpt-oss-20b 15.90 27.20 21.55
+Llama-3.1-8B 13.00 25.80 19.40
+Mistral-7B-v0.2 13.50 24.40 18.95
+SeaLLM-7B-v3 11.60 23.80 17.70
+Qwen2.5-3B 11.00 20.00 15.50
+Qwen3-14B 16.00 14.00 15.00
+Llama-2-7b 4.40 18.80 11.60
+Qwen3-8B 8.80 8.50 8.65
+Table 3: Results on ISLAMICFAITHQA (%Correct).
+Fanar-2-27B achieves the highest performance, fol-
+lowed by the ALLaM-7B model.
+swers that are fluent but unsupported.
+5.2 SFT, RL, and RAG Models
+Table 4 reports results for different model combina-
+tions. Across backbones, three components consis-
+tently improve performance: (i) domain-grounded
+reasoning supervision via SFT, (ii) reward-guided
+alignment via RL, and (iii) retrieval augmenta-
+tion (RAG), and (iv) Agentic RAG with tool use.
+Among them, retrieval typically yields the largest
+gains.
+Model Variation Arabic English Avg.
+ALLaM-7B 42.70 32.80 37.75
++ SFT 45.20 31.40 38.30
++ RL 43.90 35.20 39.55
++ RAG 46.42 35.10 40.76
+Fanar-1-9B 34.50 36.30 35.40
++ SFT 40.80 32.10 36.45
++ RL 42.90 33.45 38.18
++ RAG 47.90 34.50 41.20
+Qwen3-4B-2507 15.80 27.90 21.85
++ SFT 25.90 35.20 30.55
++ RL 27.35 34.30 30.83
++ RAG 35.20 42.50 38.85
++ Agentic RAG 49.60 48.20 48.90
+Fanar-2-27B 50.40 46.90 48.65
++ RAG 52.50 50.50 51.50
++ Agentic RAG 54.40 60.20 57.30
+Table 4: Performance across different experimental set-
+tings. SFT denotes supervised fine-tuning, RL denotes
+reward-guided alignment with reinforcement learning,
+RAG denotes retrieval augmentation, and Agentic RAG
+denotes tool-based retrieval and reasoning.
+First, adding SFT on text-grounded reasoning
+improves performance for all tested backbones,
+though the magnitude varies. The effect is most
+pronounced for Qwen3-4B-2507, where SFT in-
+creases average accuracy from 21.85 to 30.55. By
+contrast, gains are smaller for stronger in-domain
+baselines such as ALLaM-7B (37.75 → 38.30) and
+Fanar-1-9B (35.40 → 36.45), suggesting dimin-
+ishing returns when the base model already has
+stronger domain priors.
+Second, reward-guided alignment further im-
+proves average accuracy beyond SFT for multi-
+ple backbones (e.g., ALLaM-7B: 38.30 → 39.55;
+Fanar-1-9B: 36.45 → 38.18), indicating that opti-
+mizing with an LLM-judge reward encourages out-
+puts that better match the benchmark’s constraints
+(short, atomic answers with fewer risky additions).
+Third, RAG provides consistent gains across
+all backbones shown. For example, Qwen3-4B-
+2507 improves from 30.83 (+RL) to 38.85 (+RAG),
+Fanar-1-9B improves from 38.18 (+RL) to 41.20
+(+RAG), and ALLaM-7B improves from 39.55
+(+RL) to 40.76 (+RAG). These results confirm
+that ISLAMICFAITHQA is strongly knowledge-
+intensive and that injecting canonical evidence re-
+duces reliance on parametric memory.
+Agentic RAG yields the Largest Gains. The
+most salient result is the additional improvement
+obtained by agentic RAG beyond standard single-
+shot RAG. In Table 4, Qwen3-4B-2507 rises from
+38.85 (+RAG) to 48.90 (+Agentic RAG), a gain
+of +10.05 points and the largest jump among the
+reported interventions for that backbone. This sug-
+gests that, for many questions, retrieval is not a one-
+step operation. Models benefit from iterative evi-
+dence collection (e.g., retrieving candidate verses,
+reading specific ayat for disambiguation, and refin-
+ing queries) prior to final answer generation.
+Transition (Standard RAG → Agentic RAG) Count
+Incorrect → Correct 12
+Not_Attempted → Correct 24
+Total recovered cases 36
+Table 5: Error analysis: Standard RAG failed but Agen-
+tic RAG succeeded.
+Measure Standard RAG Agentic RAG
+Avg. tokens 502 1,520
+Avg. tool calls 0 6
+Avg. latency (s) 0.52 3.45
+Estimated latency increase 1× 6.63×
+Table 6: Inference-time efficiency comparison between
+Standard RAG and Agentic RAG for Qwen3-4B.
+8
+26476

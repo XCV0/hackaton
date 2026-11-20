@@ -1,0 +1,46 @@
+problematic for legal indicator computation, where transparency and justification are
+essential. In practice, models trained on court decisions or general legislation often
+underperform when applied to environmental law. Traditional NLP therefore remain
+insufficient for the level of consistency, interpretability and precision required in this
+context.
+Large language models (LLMs) have taken natural language processing (NLP) to
+another level by enabling general purpose language understanding and generation,
+raising expectations regarding their potential contribution to legal analysis.
+Their ability to perform zero-shot and few-shot reasoning makes them particularly
+appealing for legal text processing, where annotated data is scarce [11]. Nevertheless,
+LLMs remain limited by their frozen training knowledge, their poor generalization
+to domain-specific queries, and, above all, their tendency to generate hallucinations,
+the phenomenon whereby the model outputs factually incorrect answers [12, 13].
+LLMs may confidently produce factually incorrect statements, lack up-to-date legal
+knowledge, and/or are insensitive to jurisdictional nuances. Recent work [14, 15] have
+demonstrated that, while LLMs can be valuable tools for information extraction, their
+outputs often lack factual grounding. These studies show that even though LLMs have
+remarkable linguistic capabilities, their ungrounded nature limits their reliability for
+computing legal indicators, where every conclusion must be traceable and justified by
+verifiable evidence.
+Retrieval-Augmented Generation (RAG) addresses some of these issues by grounding
+model outputs in external documents [16]. Instead of encoding facts directly in model
+parameters, RAG systems retrieve relevant text snippets to support generation. How-
+ever, standard RAG pipelines follow a fixed sequence of retrieval and generation steps
+[17]. This rigidity limits their ability to dynamically adapt queries, refine retrieval
+strategies, or evaluate the reliability of the intermediate results. Consequently, despite
+their potential, conventional RAG systems still lack the flexibility and adaptivity
+required to operate effectively in the legal field. Such approaches offer limited control
+over why and how legal texts are selected and evaluated which constrains their suit-
+ability for legal indicator construction.
+Recent advances in agent-based systems extend RAG by introducing multiple reason-
+ing steps, loops and workflows into these frameworks. These enhancements enable the
+agent to review and refine its own outputs. In medicine, agentic RAG has improved
+factual reliability and interpretability [18]. However, in the legal domain, and partic-
+ularly for legal indicator computation, these methods remains underexplored despite
+the need for explicit evidence tracking. Extending agentic RAG to legal contexts
+represents a critical step toward building AI systems that can support trustworthy,
+interpretable, and adaptive legal analysis.
+To address these limitations, this paper focuses on the automated construction of legal
+indicators from legal norms. We introduce N2I-RAG (From Norms to Indicators), an
+agentic retrieval-augmented framework designed to compute legal indicators from col-
+lections of digitized legal documents. It combines multi-agent coordination, semantic
+embeddings, and self-adaptive retrieval mechanisms to generate contextualized and
+traceable results. N2I-RAG formulates indicator computation as a structured infor-
+mation extraction problem, in which relevant texts are identified, then semantically
+3

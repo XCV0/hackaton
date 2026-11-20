@@ -1,0 +1,122 @@
+Sample Strategies R@1 R@5 R@20
+Random Select 53.5 74.3 81.9
+Visually Similar Entries 57.6 77.5 81.9
+Generator Feedback 59.0 78.2 81.9
+Table 5: Impact of negative sampling strategies for In-
+foSeek. Sampling difficult negative examples can guide
+the retriever to identify sections that are visually or se-
+mantically similar but contain misleading content.
+Number of samples K R@1 R@5
+50,000 4 58.32 77.81
+50,000 9 58.57 77.94
+100,000 4 59.07 78.28
+100,000 9 59.14 78.17
+200,000 4 59.11 78.24
+Table 6: The effect of the number of hard negative
+samples on recall metrics.
+grained section re-ranking: Table 5 assesses the
+impact of negative sample selection strategies for
+the fine-grained section re-ranking on InfoSeek’s
+overall retrieval performance after the second stage.
+Instead of randomly sampling Wikipedia articles,
+we implemented a curriculum learning strategy
+with negative sampling at increasing difficulty lev-
+els. This approach initially trains the retriever to
+differentiate between similar visual knowledge enti-
+ties and subsequently enhances its ability to discern
+texts with subtle inconsistencies. This curriculum
+learning approach improves the generalization per-
+formance of the re-ranking module. Furthermore,
+Table 6 demonstrates that training with a small
+sample of hard negative examples can achieve sig-
+nificant performance gains at a manageable cost.
+Comparison of retrieval efficiency and perfor-
+mance across different multimodal RAG ap-
+proaches: Table 7 illustrates the retrieval efficiency
+and performance comparison between two multi-
+modal re-ranking methods. Despite adopting a
+stepwise retrieval strategy, our method incurs only
+minimal additional retrieval overhead with small-
+scale re-ranking while delivering significantly su-
+perior VQA results. This demonstrates that our
+approach achieves an effective balance between
+retrieval efficiency and performance.
+4.4 Quantitative Result Analysis
+We present a comparison of our method’s answer
+generation on real-world examples from the Enc-
+VQA dataset against state-of-the-art VLMs, includ-
+Methods Avg Time R@1 VQA Score
+EchoSight 0.429 36.5 41.8
+Ours 0.496 43.6 50.32
+Table 7: Comparison of retrieval efficiency and per-
+formance across various multimodal re-ranking meth-
+ods. Our approach provides significant improvements
+in VQA performance while incurring only a minimal
+increase in retrieval time.
+Q: In which year(s) was this castle 
+rebuilt?
+A: 1949
+Wiki Ref:
+https://en.wikipedia.org/wiki/Nowy
+_Wi%C5%9Bnicz_Castle
+The castle in the image is the Nowy Wiśnicz Castle, located in 
+Poland. It was rebuilt in the years 1615-1621.
+Top 1 section: …After World War II, the castle was seized by 
+the state, and from the year of 1949, renovation was conducted by 
+Alfred Majewski, which was to restore the castle to…
+Answer: 1949
+I apologize, but I cannot provide the specific year(s) this castle was 
+rebuilt based solely on the image. The photograph shows a beautiful 
+castle with Renaissance or Baroque architectural elements, but it 
+doesn't contain any information about its reconstruction dates.
+GPT-4o
+Claude 3.5
+Sonnet
+Ours
+Q: When was this house built?
+A: between 1556 and 1560
+Wiki Ref:
+https://en.wikipedia.org/wiki/Pack
+wood_House
+I'm sorry, but I can't determine the exact construction date of the 
+house from the image alone. To find out when this house was built, 
+you might need to look up historical records, property records, or 
+any plaques or markers that might be on the building itself.
+Top 1 section: …The house began as a modest timber-framed 
+farmhouse constructed for John Fetherston between 1556 and 
+1560. The last member of the Fetherston …
+Answer: 1556 and 1560
+Based solely on the image, it's not possible to determine the exact 
+year this house was built. However, the architectural style and 
+materials used suggest that this building is likely quite old, 
+possibly dating back to the 17th or 18th century.
+GPT-4o
+Ours
+Figure 3: Quantitative result analysis on Enc-VQA
+datasets.
+ing GPT-4o and Claude-3.5, as illustrated in Figure
+3. These cases highlight the effectiveness of our
+approach in addressing complex questions. For
+instance, precise paragraph localization mitigates
+knowledge deficiencies during the generation pro-
+cess of LLMs and VLMs, leading to improved pre-
+diction accuracy.
+5 Conclusion
+This paper introduces a progressive multimodal
+re-ranking framework for knowledge-based VQA.
+The system focuses on optimizing retrieval per-
+formance over the multi-modal knowledge corpus,
+introducing a progressive, multi-granularity multi-
+modal retrieval framework. To enhance the perfor-
+mance of the retriever, we fine-tune a small-scale re-
+ranking module by introducing a curriculum learn-
+ing training strategy, guiding the retrieval module
+to better understand multi-modal query intent at a
+low cost. Compared to other existing research on
+the InfoSeek and Enc-VQA datasets, our method
+achieves significant improvements in VQA perfor-
+mance, demonstrating the superiority of the pro-
+posed method. This research provides new insights
+into the rational design of multi-modal re-ranking
+modules and the layout of retrieval processes.
+41142

@@ -1,0 +1,72 @@
+Hyperparameter Assignment
+optimizer AdamW
+learning rate 1e−5
+lr scheduler type linear
+warmup ratio 0.03
+weight decay 0.0
+epochs 5
+flash attention True
+batch size 2
+gradient accumulation steps 4
+LoRa r 128
+LoRa alpha 32
+LoRa dropout 0.05
+LoRa bias None
+gpu 1×A6000 48G
+max sequence length 1024
+Table 7: Hyperparameters for compressor fine-tuning.
+Hyperparameter Assignment
+optimizer AdamW
+learning rate 1e−4
+lr scheduler type linear
+warmup ratio 0.0
+weight decay 0.0
+epochs 50
+batch size 128
+gradient accumulation steps 1
+gpu 1×A6000 48G
+Table 8: Hyperparameters for selector training.
+specific compression rate.
+E Analysis on Granularity Sequences of
+Compressor
+The results of different granularity sequences for
+compressor under inference granularity sequence
+[1, 2, 8, 32] and [1, 32] are shown in Figure 6 and
+Figure 7. The conclusions are consistent with Sec-
+tion 5.2.3. We observe that the final accumulated
+M scores exceeds the vanilla RAG even with only
+two inference granularities.
+F Ablation Study of Selector
+We investigate the impact of different components
+of selector for classification performance. The de-
+fault setting of ACC-Selector is described in Sec-
+tion 4.4. We adopt the sequence classification ac-
+curacy as evaluation metric, verifying whether the
+selector’s first prediction of "sufficient" is correct.
+Figure 5: Ablation on different compression rates for
+compressor.
+We report the results in test set in Table 10.
+Methods Sequence Accuracy
+ACC-Selector 70.75
+w/o RL 64.25
+w/o attention 66.30
+w/o segment embeddings 69.35
+w/o granularity 69.50
+Table 10: Ablation on selector.
+G Representative Case
+To provide a more intuitive understanding of the
+effectiveness of ACC-RAG, we present a represen-
+tative case in Table 13. In this case, direct genera-
+tion and ACC-RAG-G2 with a fixed compression
+rate of 16 fail to answer the question. However,
+our method ACC-RAG-G2 with inference granu-
+larity sequence [1, 32] not only provides the correct
+answer but also uses the fewest context tokens com-
+pared to ACC-RAG-G2 with a fixed compression
+rate of 4 and RAG.
+H Scalability Analysis
+To investigate whether ACC-RAG is applicable
+to other models, we apply our approach to both
+Llama3-3B-Instruct and Llama3-8B-Instruct mod-
+els and report the results shown in Table 11.
+24074

@@ -1,0 +1,78 @@
+PET, and Al2O3/PTAA/PEDOT:PSS/PET was evaluated by measuring
+their contact angles using, as shown in Fig. 3a. The hydrophobic nature of
+PET substrate results in a relatively poor wettability to the mixed solvent
+of DMF and DMSO, with a contact angle of 39.9/C14, which can be improved
+by covering PET with hydrophilic PEDOT:PSS, exhibiting a lowered
+angle of 28.1/C14. However, there are two issues to consider when using
+PEDOT:PSS as HTM: its acidity is unsuitable for MHP ﬁlm deposition, and
+there may be an energy level mismatch with MHP, leading to charge
+accumulation. PTAA is a widely used HTM that is superior to PEDOT:PSS
+in terms of hole extraction, but its hydrophobic nature weakens the
+wettability of PTAA/PEDOT:PSS/PET compared to PEDOT:PSS/PET.
+Covering PTAA with Al2O3 NPs is a good strategy to address this issue,
+which can signiﬁcantly reduce the contact angle from 31.1/C14 to 14.7/C14.
+In addition to surface wettability, surface roughness is another crucial
+factor that requires careful consideration. Unlike the rigid glass substrate,
+commercially available ultra-thin ﬂexible PET substrates have a signiﬁ-
+cantly large surface roughness. However, this can be reduced through the
+sequential deposition of other layers such as PEDOT:PSS, PTAA, and
+Al2O3 NPs by spin-coating (Fig. S4). The effect is particularly noticeable
+when depositing an Al2O3 NPs layer, which can remarkably reduce the
+surface roughness Sa from 723 nm to 348 nm. To ﬁgure out the distri-
+bution of Al2O3 NPs on PTAA, the 3D-SLCM was employed to evaluate
+the roughness of the PTAA/PEDOT:PSS/PET and generated a 3D
+morphological proﬁle, as depicted in Fig. 3d and Fig. S5. Subsequently,
+we simulated the distribution of Al2O3 NPs on PTAA by means of sim-
+center STAR-CCM þ simulation, as illustrated in Fig. 3e. The Al2O3 NPs
+can ﬂatten the rough surface of PTAA/PEDOT:PSS/PET by ﬁlling the
+concave region, in turn resulting in a relatively smooth substrate, as
+conﬁrmed by the SEM image in Fig. 3c. Meanwhile, we prepared four
+samples: PET, PEDOT:PSS/PET, PTAA/PEDOT:PSS/PET, Al2O3/PTAA/
+PEDOT:PSS/PET. Atomic force microscopy (AFM) images, illustrated in
+Fig. S6, were then captured. The results obtained indicate a lack of cor-
+respondence between the observed roughness and morphological
+changes and the outcomes of our distribution simulation. The analysis of
+the reasons is as follows: Unlike the morphology of conventional devices
+(on rigid or normal ﬂexible substrate), the substrates of ultra-ﬂexible
+substrate (~10 μm) often display a broad range of undulations. The
+AFM characterization method is typically limited to observing micro-
+scopic roughness and morphology due to its viewport range constraint.
+The relatively more macroscopic undulations cannot be measured by
+AFM characterization, resulting in disparities between the roughness
+results output by AFM characterization and the simulation results. In our
+simulation model, the substrate dimensions exceed 700 μm in length and
+width, while the 3D-SLCM offers a viewport range of up to a millimeter.
+Therefore, we consider the 3D-SLCM results to provide more compelling
+evidence compared to the AFM results. Each image in Fig. S5 has a
+viewport range of 1 mm /C2 1 mm.
+As aforementioned, the surface properties of these substrates differ
+signiﬁcantly. To further analyze the effect of these differences on MHP
+formation, we conducted ﬁnite element simulations of spin-coating MHP
+precursor solutions on various substrates. The surface energy of each
+substrate was obtained through contact angle measurements, while other
+substrate parameters regarding surface roughness were determined using
+3D-SLCM. The simulation results, which indicate the spreading speed of
+the MHP precursor solution on the control and Al2O3 SM substrates, are
+clearly presented in Fig. 3f and g. In our simulation, we deﬁne the length
+of the viewport occupied by the original droplet as the normalized length
+“1". At t¼1.5 s, 1.5 s after the start of spin-coating, the MHP precursor
+solution on the control substrate spreads to L¼2.33. However, this then
+surprisingly shrinks back to L¼1.83 at t¼2 s (as shown in Fig. 3f). The
+difﬁculty in the MHP precursor solution spreading on PTAA is due to the
+relatively larger interface energy between PTAA and MHP precursor
+solution. It therefore becomes clear that achieving complete coverage of
+the MHP precursor solution on an untreated PTAA surface is impossible.
+In comparison to the untreated PTAA surface of the control substrate, the
+Al2O3 SM substrate has lower interface energy with the MHP precursor
+solution. As a result, the spreading speed of the MHP precursor solution
+on the Al2O3 NPs-coated PTAA surface is much faster than that on un-
+treated PTAA. For instance, by t¼1.5 s, the MHP precursor solution
+spreads to L¼4.56 and continues spreading to nearly cover the entire
+viewport by t¼2.0 s. It can be concluded that both the reduction in sur-
+face roughness and the enhancement of surface wettability contributed to
+the facilitated spreading of the MHP precursor solution.
+The morphology and photoelectric properties of MHP ﬁlms fabricated
+Fig. 2. Deposition of MHP precursor solution on PTAA under different conditions. (a) Without any treatment to PTAA; (b) With DMF prewashing of PTAA; (c)
+Covering PTAA with Al2O3 NPs. Photos on the right side present the UF-PSCs fabricated with MHP deposited under the three corresponding conditions.
+Z. Wang et al. Advanced Powder Materials 3 (2024) 100142
+3

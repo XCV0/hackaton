@@ -1,0 +1,60 @@
+Prompts for Baselines
+[MODEL]: Summary Generation
+[TASK]: All
+[Instruction]: You are tasked with summarizing the context in a 
+concise manner, focusing on the key information relevant to 
+answering the given question. Question: {question}
+Context:{context}
+Provide a concise summary that captures the main points and 
+relevant details from the context to address the question:
+[MODEL]:Summary Question Answering
+[TASK]: Natural Questions, HotpotQA, TriviaQA, PopQA
+[Instruction]: Task Description:
+1.Read the given question and related summary to gather 
+relevant information.
+2. If the summary don't work, please answer the question based on 
+your own knowledge.
+3. Please answer the question and only output the answer. 
+Question:{question}
+Summary:{summary}
+[MODEL]: Summary Question Answering
+[TASK]: ASQA
+[Instruction]: Task Description:
+1.Read the given question and related summary to gather relevant 
+information.
+2. If the summary don't work, please answer the question based on 
+your own knowledge.
+3. Answer the following question. The question may be ambiguous 
+and have multiple correct answers, and in that case, you have to 
+provide a long-form answer including all correct answers.
+Question:{question}
+Summary:{summary}
+[MODEL]: Summary Question Answering
+[TASK]: MARCO QA
+[Instruction]: Task Description:
+1.Read the given question and related summary to gather relevant 
+information.
+2. If the summary don't work, please answer the question based on 
+your own knowledge.
+3. Give a short answer to a given question Question:{question}
+Summary:{summary}
+[MODEL]: Vanilla RAG
+[TASK]: All except ASQA
+[Instruction]: Background:{Passages}
+Question:{Question}Answer:
+[MODEL]: Vanilla RAG
+[TASK]: ASQA
+[Instruction]: Background:{Passages}
+Answer the following question. The question may be ambiguous and 
+have multiple correct answers, and in that case, you have to 
+provide a long-form answer including all correct answers. 
+Question:{Question}Answer:
+[MODEL]: Rerank
+[TASK]: All
+[Instruction]: Given the following question and context, return 
+YES if the context is relevant to the question and NO if it isn’t.
+Question: {question}
+Context:{context}
+Relevant (YES / NO):
+Figure 8: Prompt Templates Used for Implementing Baselines.
+12874

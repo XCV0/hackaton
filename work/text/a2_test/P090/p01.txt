@@ -1,0 +1,77 @@
+Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 5019–5039
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+Pandora’s Box or Aladdin’s Lamp: A Comprehensive Analysis Revealing
+the Role of RAG Noise in Large Language Models
+Jinyang Wu1, Shuai Zhang1*, Feihu Che2, Mingkuan Feng1
+Pengpeng Shao1, Jianhua Tao1,2*
+1Department of Automation, Tsinghua University
+2Beijing National Research Center for Information Science and Technology
+wu-jy23@mails.tsinghua.edu.cn, zhang_shuai@mail.tsinghua.edu.cn
+Abstract
+Retrieval-Augmented Generation (RAG) has
+emerged as a key method to address hallucina-
+tions in large language models (LLMs). While
+recent research has extended RAG models to
+complex noisy scenarios, these explorations of-
+ten confine themselves to limited noise types
+and presuppose that noise is inherently detri-
+mental to LLMs, potentially deviating from
+real-world retrieval environments and restrict-
+ing practical applicability. In this paper, we de-
+fine seven distinct noise types from a linguistic
+perspective and establish a Noise RAG Bench-
+mark (NoiserBench), a comprehensive evalua-
+tion framework encompassing multiple datasets
+and reasoning tasks. Through empirical evalua-
+tion of eight representative LLMs with diverse
+architectures and scales, we reveal that these
+noises can be further categorized into two prac-
+tical groups: noise that is beneficial to LLMs
+(aka beneficial noise) and noise that is harmful
+to LLMs (aka harmful noise). While harmful
+noise generally impairs performance, beneficial
+noise may enhance several aspects of model
+capabilities and overall performance. Our anal-
+ysis offers insights for developing robust RAG
+solutions and mitigating hallucinations across
+diverse retrieval scenarios. Code is available at
+https://github.com/jinyangwu/NoiserBench.
+1 Introduction
+Large language models (LLMs) (OpenAI, 2023;
+Meta, AI, 2024) have demonstrated remarkable pro-
+ficiency across various tasks (Bubeck et al., 2023).
+Despite impressive capabilities, LLMs face chal-
+lenges such as reliance on outdated knowledge and
+hallucination (Huang et al., 2025; Kandpal et al.,
+2023). Retrieval-Augmented Generation (RAG)
+has recently emerged as a promising approach to
+mitigate these limitations (Lewis et al., 2020b; Gao
+et al., 2023). RAG enhances LLMs’ performance
+* Corresponding Authors
+Figure 1: An example from NoiserBench illustrating
+effects of different RAG noises. Initially, the model is
+misled by counterfactual noise. Interestingly, upon in-
+troducing beneficial noise, it successfully discriminates
+between correct and incorrect information and produces
+the accurate answer ‘D’.
+by augmenting inputs with additional information
+retrieved from external sources during inference.
+However, external sources often contain vari-
+ous non-standard noises, including fake news, out-
+dated content, spelling errors, and data contamina-
+tion, which may potentially influence model per-
+formance (Shi et al., 2023a; Xie et al., 2024a). It is
+crucial to explore how noise affects RAG systems
+and understand the underlying mechanisms.
+Recent studies (Chen et al., 2024; Xiang et al.,
+2024) have attempted to extend RAG systems to
+complex real-world scenarios, investigating the im-
+pact of noisy documents and strategies to enhance
+the system’s robustness. For example, Cuconasu
+et al. (2024) defines three types of noise in retrieved
+documents and examines their impacts on LLMs.
+Despite highlighting one noise’s positive effect,
+the study lacks a comprehensive noise definition
+and in-depth investigation of underlying principles.
+Fang et al. (2024) applies adversarial training to
+5019

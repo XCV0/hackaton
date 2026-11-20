@@ -1,0 +1,91 @@
+financial statements. This demonstrates that the
+performance gains stem not just from more data,
+but from our framework’s structured reasoning: the
+explicit temporal-causal extraction and multi-agent
+synthesis via the CTKG provide complementary
+predictive power beyond what is achievable with a
+monolithic model and a large context window.
+(O2) Our model outperforms text-based en-
+coder models. At the +1-day horizon, our
+zero-shot agent surpass fine-tuned Hierarchical Fin-
+BERT by +2.2 absolute F1 points (+4.1%) and +2.3
+MCC (+20.2%) on NASDAQ and +3.7 absolute F1
+points (+6.9%) and +3.2 MCC (+24.6%) on NYSE,
+despite using no task-specific training.
+Third, we benchmark our approach against
+audio-text-alignment models, as shown in Panel
+B of table 2.
+(O3) Financial fundamentals is a far more
+potent predictor than acoustic cues As shown
+in Panel-B of table 2, our zero-shot framework
+now tops the strongest multimodal competitor,
+ECHO-GL, at the +1-day horizon by +4.3 abso-
+lute F1 points (+7.9%) and +10.9 MCC points
+(+162.7%). This margin is achieved even though
+ECHO-GL–and every other baseline–is supervised
+and specifically retrained for each forecast win-
+dow, whereas our model remains zero-shot across
+all horizons. The result highlights how ground-
+ing language models in fundamental financial evi-
+dence yields substantially richer predictive insight
+than augmenting transcripts with acoustic features
+alone.
+Token Usage, Graph-Query Latency, and LLM
+Latency The four-agent swarm incurs a median
+inference cost of just $0.0040 per filing. Processing
+for a complete filing completes in 157 seconds
+on average. This speed profile supports real-time
+usage. Full token usage and latency breakdown can
+be found in Appendix 8.
+Tackling Class Imbalance in Zero-Shot LLM
+Forecasts When we only feed the GPT-4o-mini
+model with static transcript information, it attains a
+respectable 54% balanced-accuracy on NASDAQ
+and 56% on NYSE, its macro-F1 drops to 47%
+and 49%, respectively. A closer look at fig. 3 re-
+veals that the transcript-only model over-predicts
+positives (red) as management emphasizes posi-
+tives and downplays negatives. Meanwhile, our
+model (right) produces a more symmetric distri-
+bution. To illustrate the root cause of the class
+imbalance, we provide an example to contrast the
+Variant NASDAQ NYSE MAEC
+Full Model (Ours, ZS) 55.7 57.4 58.7
+w/o HistoricPerformance 54.2 (↓ 2.7%) 55.6 (↓ 3.1%) 57.1 (↓ 2.7%)
+w/o CompetitorAnalyst 55.3 (↓ 0.7%) 56.7 (↓ 1.2%) 58.1 (↓ 1.0%)
+w/o HistoricEarnings 54.8 (↓ 1.6%) 56.3 (↓ 1.9%) 57.7 (↓ 1.7%)
+w/o KnowledgeGraph 54.3 (↓ 2.5%) 55.3 (↓ 3.7%) 56.8 (↓ 3.2%)
+w/o Memory 55.2 (↓ 0.9%) 57.3 (↓ 0.2%) 58.4 (↓ 0.5%)
+Table 3: Ablation study: Macro-F1 scores. Declines are
+in red; improvements (if any) would appear in blue.
+verdicts of a transcript-only baseline with those of
+our agentic system in the Appendix B.
+Figure 3: Raw predictions, transcript-only against our
+model
+Ablation Study Table 3 reports the macro-F1
+scores obtained after disabling each context module
+in turn while keeping every other component intact.
+The steepest decline occurs when the Knowledge
+Graph is removed. Both Historic_Performance and
+Historic_Earnings–also provide substantial lift. In
+contrast, ablating either the short-term Memory
+buffer or the Competitor_Analyst module causes
+only marginal erosion. These results show that
+graph-aligned context is essential, and temporally
+grounded agents outperform cross-sectional com-
+petitor cues.
+To rigorously validate the necessity of the multi-
+agent architecture, we expand our ablation study
+to compare the full framework against monolithic
+and weighted variants. Specifically, we evaluate:
+(1) Single-Agent CTKG, where the synthesizer’s
+prompt and all three specialist prompts are merged
+into a unified instruction for a single model with
+access to the graph; and (2) Weighted Synthesis,
+where the final decision is a weighted average of di-
+rectional scores (0–10) from the three agents rather
+than a synthesized reasoning step.
+Results in table 4 demonstrate that the CTKG-
+only single-agent model consistently underper-
+forms the full multi-agent framework, degrading
+3062

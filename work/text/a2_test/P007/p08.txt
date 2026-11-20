@@ -1,0 +1,83 @@
+10774
+Base Model Strategy D-Acc D-Pre D-Rec D-F1 C-Acc C-Pre C-Rec C-F1
+GPT3.5
+FixedFew-Shot 57.09 43.23 45.47 44.32 54.36 37.96 39.93 38.92
+RAGFew-Shot 61.55 50.0 47.13 48.53 57.82 41.96 39.56 40.72
+FixedFew-Shot+IDS 58.91 44.71 48.43 46.5 55.91 39.08 42.33 40.64
+RAGFew-Shot+IDS 63.00 51.50 50.65 51.07 59.55 44.36 43.62 43.99
+Table 3: Ablation experiments of RagID framework. We test GPT3.5 based on RagID framework on SIGHAN15
+evaluation dataset. We conduct the following modifications on RAGFew-Shot+IDS: Without RAG (FixedFew-
+Shot+IDS). Without IDS (RAGFew-Shot). Without both RAG and IDS, exclusively utilize fixed few-shot prompt
+samples as fine-grained context (FixedFew-Shot).
+-
+10 1 2 3 4 5 0
+2
+04
+06
+0C
+orrect-F1S
+hotNum 
+G PT3.5 B ERT R eaLiSe C RASpell S COPE
+Figure 5: The performance of the model on the dataset
+SIGHAN15 when the fine-tuned few-shot changes. The
+ordinate is the F1 value of error correction.
+low-data scenarios, demonstrating the superiority
+of LLMs and our framework.
+5.6 Ablation Study
+Samples Size. We research the impact of different
+sample sizes on the error correction performance
+of baseline models and GPT-3.5-based RagID. Fig.
+5 illustrates that as samples increase, SCOPE,
+CRASPell and RagID based GPT3.5 show an in-
+creasing trend, but performance of SCOPE and
+CRASpell may fluctuate occasionally due to over-
+fitting. However, there is no significant change in
+the correction ability of pre-training models BERT
+and ReaLiSe.
+Strategy. The ablation experiment which investi-
+gates the contributions of different strategies based
+on LLMs are organized as follows: 1) Removing
+RAG. 2) Removing IDS. 3) Simultaneously remov-
+ing RAG and IDS. Specific experimental results are
+shown in Table 3. The results in Table 3 from the
+SIGHAN15 test set show that using either IDS or
+RAG alone improves the correction performance,
+both strategies are effective. Furthermore, With the
+addition of both strategies, the effectiveness is fur-
+ther improved， which shows RAG and IDS offer
+assistance from distinct perspectives and there is a
+synergistic relationship between them.
+5.7 Case Study
+We present a case study in Table 4 of Appendix.
+From the first example, we can see that corrector
+based on LLMs cannot detect and correct unfa-
+miliar spelling error "suffered" with fixed prompt
+samples. After identifying prompt samples from
+an external knowledge corpus with RAG technique,
+corrector successfully corrects "suffered" to "re-
+ceived". In the second example, the omission of
+a word causes a grammatical problem in the sen-
+tence. Discriminator based on LLMs bypasses the
+negative effects of grammatical errors and success-
+fully understands meaning of the sentence, warns
+that there are still some spelling errors in this sen-
+tence.And then corrector successfully changes the
+error "bay" to the correct form "playing" at the
+third iteration with IDS. These examples demon-
+strate the effectiveness of our method.
+6 Conclusion
+This work concentrates on the LLMs-based CSC
+task. Initially, we introduce an evaluation dataset,
+OAD, which is derived from the recognition re-
+sults of Mandarin speech data and handwritten
+Chinese data. It has been shown that OAD ex-
+hibits new features that are distinct from those
+of existing datasets. Besides, we propose a CSC
+method RagID that leverages the RAG technique
+and LLMs. This method harnesses the strong gen-
+eralization ability of LLMs to correct errors and in-
+corporates an iterative discriminator strategy (IDS)
+to enhance correction performance. RagID shows
+excellent effectiveness in few-shot CSC task with
+the best results on multi-domain and high-difficulty
+datasets.

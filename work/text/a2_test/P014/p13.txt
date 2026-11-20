@@ -1,0 +1,91 @@
+the data into four distinct partitions based on the
+F1 score transitions between the baseline distribu-
+tion, P (a|x, d), and the prior-guided distribution,
+P (a|x, z, d). For this binary classification of cor-
+rectness, a prediction is deemed correct if its F1
+score relative to the ground truth exceeds a thresh-
+old of 0.5; otherwise, it is classified as incorrect.
+C Theoretical Derivations
+C.1 The Gradient of the GRPO Objective
+The GRPO objective in Eq. 1 utilizes a clipped
+surrogate loss. In the neighborhood of the current
+policy πθold , and assuming the clipping parame-
+ter ϵ is not triggered (i.e., for small updates), the
+gradient of the objective with respect to θ can be
+approximated by the standard policy gradient:
+∇θL(θ) ≈ E(x,d),z,˜z∼Bern(λ),{yi}G i=1∼πθold
+[ G∑
+i=1
+ˆAi∇θ log πθ(yi|x, ˜z, d)
+]
+(6)
+where ˆAi is the advantage of the i-th trajectory
+within the group G.
+C.2 Marginalization over the Bernoulli Gate
+The variable ˜z is sampled from a Bernoulli distribu-
+tion such that ˜z = z with probability λ and ˜z = ∅
+with probability 1 − λ. Using the Law of Total
+Expectation, we can decompose the objective:
+J (θ) = P (˜z = z) · Eπθ [ ˆA | ˜z = z]+
+P (˜z = ∅) · Eπθ [ ˆA | ˜z = ∅] (7)
+Then,
+J (θ) = λ · Ey∼πθ (·|x,z,d)[ ˆA]
++ (1 − λ) · Ey∼πθ (·|x,∅,d)[ ˆA] (8)
+C.3 Mapping Advantages to Log-Likelihoods
+According to Eq. 2, the reward R (and the advan-
+tage ˆA) is a function of the correctness (F1 score)
+of the generated output y relative to the ground-
+truth ˆy. In the optimal limit of RL, maximizing
+the expected advantage Ey∼πθ [ ˆA] where the re-
+ward is sparse and peaked at the ground-truth y∗
+is mathematically equivalent to maximizing the
+log-likelihood of the ground-truth under the policy:
+arg max
+θ
+Ey∼πθ [ ˆA] =⇒ arg max θ log Pθ(y∗|context)
+Thus, we define the corresponding terms as nega-
+tive log-likelihoods:
+(i) For the case ˜z = z: J2 = log Pθ(y|x, z, d)
+(ii) For the case ˜z = ∅: J1 = log Pθ(y|x, d)
+C.4 Theoretical Objective
+Combining the results from C.2 and C.3, the ex-
+pected behavior of the model optimization under
+the Bernoulli gate aligns with the weighted sum of
+these likelihoods:
+J (θ)
+= P (˜z = z) · J2(θ) + P (˜z = ∅) · J1(θ) (9)
+Decompose the log-likelihood term J1 as follows:
+log Pθ(y|x, d) = log P (y|x, z, d)−log P (y|x, z, d) P (y|x, d)
+Then, we obtain:
+J (θ)
+= λJ2 + (1 − λ)
+(
+J2 − log P (y|x, z, d) P (y|x, d) )
+= [λ + (1 − λ)] log P (y|x, z, d)
+− (1 − λ) log P (y|x, z, d) P (y|x, d)
+= log P (y|x, z, d) − (1 − λ) log P (y|x, z, d) P (y|x, d)
+(10)
+The KL divergence is defined as:
+KL(P ||Q) = Ey∼P
+[
+log P (y) Q(y) ] (11)
+By taking the expectation of J (θ) with respect to
+the full-information distribution P (y|x, z, d), we
+obtain:
+Ey∼P [J (θ)] ≈ E[log P (y|x, z, d)]−
+(1 − λ) · KL[P (y|x, z, d)||P (y|x, d)] (12)
+The first term ensures the model maintains high
+predictive fidelity under prior guidance, while the
+second term—the KL divergence—serves as a dis-
+tributional constraint. This formulation encourages
+the model to internalize the explicit reasoning pro-
+cess into its latent parameters, effectively bridging
+the performance gap between the prior-guided (2-
+turn) and standard (1-turn) configurations.
+D Performance on Multi-hop QA
+To evaluate the generalization of our method on
+multi-hop reasoning tasks, we conduct experiments
+on the development sets of HotpotQA (Yang et al.,
+2018) (7k samples) and 2WikiMultihopQA (Ho
+et al., 2020) (12k samples). For each query, we
+22161

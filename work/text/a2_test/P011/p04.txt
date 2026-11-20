@@ -1,0 +1,48 @@
+A PREPRINT
+for building knowledge graphs, recommendation engines, and other graph-powered applications, while ensuring
+compatibility with industry-standard query languages [26].
+2.7 NetworkX
+NetworkX is an open-source, in-memory graph database and analysis library for Python. It provides a flexible framework
+for storing and manipulating knowledge graph triplets, allowing users to represent entities and relationships as nodes and
+edges within a graph structure. NetworkX supports a wide range of graph algorithms and offers powerful visualization
+tools, making it well-suited for both exploratory analysis and prototyping of graph-based applications. Its ease of use
+and extensive functionality enable rapid development and experimentation with knowledge graphs, including tasks such
+as traversal, clustering, and pathfinding [27].
+2.8 FAISS
+FAISS (Facebook AI Similarity Search) is an open-source vector database library developed by Meta for efficient
+similarity search and clustering of dense vectors. It supports both exact and approximate nearest neighbor search,
+with highly optimized implementations for large-scale datasets. One of its key features is the Hierarchical Navigable
+Small World (HNSW) algorithm, which enables fast and scalable approximate search with high recall. FAISS is
+widely recognized for its performance and flexibility, making it a popular choice for embedding-based retrieval tasks in
+information retrieval, recommendation systems, and large-scale machine learning applications [28].
+3 Data and Experimental Setup
+3.1 Dataset
+Our experiments utilize publicly available information from Capital Group, focusing on mutual funds, exchange-traded
+funds (ETFs), and Public Private Solutions (PPS). Each data instance corresponds to a specific investment product, such
+as the AMCAP Fund (R6 share class), and is structured as a key-value JSON object. In this format, each key represents
+a fund attribute (e.g., name, product type, benchmark), and the corresponding value provides the attribute’s value. For
+example, a simplified excerpt for the AMCAP-F3 fund is shown below:
+{
+"originalName": "AMCAP Fund",
+"abbreviatedName": "AMCAP-F3",
+"productType": "AF",
+"benchmarkName": "S&P 500 Index",
+"fundType": "Growth"
+}
+The full dataset contains 1104 records, each representing a mutual fund, ETF, or PPS product. Notably, many
+JSON objects exhibit deep nestedness, with certain attributes (such as returns and metrics) containing hierarchical
+structures up to 3-4 levels deep. This complexity distinguishes the data from simple unstructured text and poses unique
+challenges for modeling and representation. Since users may query any aspect of the JSON data, it is essential to
+capture and represent every detail accurately. Appendix 8.1 provides concrete examples of such nested attributes for
+success metrics.
+3.2 RDF Data Representation
+To represent our JSON data in the Resource Description Framework (RDF) triplet format, we convert each
+JSON file—corresponding to a single fund—into a set of subject-predicate-object triplets. We designate the
+abbreviatedName attribute as the unique subject (source) for all triplets associated with a given fund, as it is
+both unique and present for every fund in the dataset.
+For each key-value pair in the JSON object, we generate a triplet where the subject is the fund’s abbreviated name, the
+predicate is the attribute key, and the object is the attribute value. For example, the sample data shown earlier for the
+AMCAP-F3 fund is transformed into the following triplets:
+(AMCAP-F3, originalName, AMCAP Fund)
+(AMCAP-F3, abbreviatedName, AMCAP-F3)
+4

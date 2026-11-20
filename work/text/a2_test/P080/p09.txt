@@ -1,0 +1,104 @@
+struct MultiTableQA as a novel multi-table bench-
+mark by leveraging an adaptive dataset transfor-
+mation approach. Experimental results on both
+retrieval and generation processes demonstrate the
+effectiveness and efficiency of our approach in en-
+hancing cross-table retrieval and reasoning.
+Limitations
+In this paper, we introduce T-RAG, a graph-based
+method for cross-table retrieval. There remain op-
+portunities for further improvement. For instance,
+the graph retrieval process could be enhanced by
+incorporating more expressive graph neural net-
+works (GNNs), such as Graph Attention Networks
+(GAT) (Veliˇckovi´c et al., 2017; Zhou et al., 2020).
+Additionally, incorporating downstream LLM fine-
+tuning techniques (Hu et al., 2022; Li et al., 2023)
+may further enhance end-to-end performance by
+better aligning the reasoning model with the re-
+trieved table contexts.
+Ethics Statement
+The proposed method and benchmark in this paper
+has been carefully reviewed to ensure that all data
+sources comply with applicable legal and ethical
+standards. We have only used data that are free
+from personally identifiable information (PII) and
+sensitive attributes and have not modified or added
+any data that could compromise the anonymity or
+privacy of individuals.
+Acknowledgment
+This work is supported by National Science Foun-
+dation under Award No. IIS-2117902. The views
+and conclusions are those of the authors and should
+not be interpreted as representing the official poli-
+cies of the funding agencies or the government.
+References
+Marah Abdin, Jyoti Aneja, Hany Awadalla, Ahmed
+Awadallah, Ammar Ahmad Awan, Nguyen Bach,
+Amit Bahree, Arash Bakhtiari, Jianmin Bao, Harkirat
+Behl, and 1 others. 2024. Phi-3 technical report: A
+highly capable language model locally on your phone.
+arXiv preprint arXiv:2404.14219.
+Garima Agrawal, Tharindu Kumarage, Zeyad Alghamdi,
+and Huan Liu. 2024. Can knowledge graphs reduce
+hallucinations in llms? : A survey. In Proceed-
+ings of the 2024 Conference of the North American
+Chapter of the Association for Computational Lin-
+guistics: Human Language Technologies (Volume 1:
+Long Papers), NAACL 2024, Mexico City, Mexico,
+June 16-21, 2024, pages 3947–3960. Association for
+Computational Linguistics.
+Rami Aly, Zhijiang Guo, Michael Schlichtkrull, James
+Thorne, Andreas Vlachos, Christos Christodoulopou-
+los, Oana Cocarascu, and Arpit Mittal. 2021. Fever-
+ous: Fact extraction and verification over unstruc-
+tured and structured information. arXiv preprint
+arXiv:2106.05707.
+Reid Andersen, Fan R. K. Chung, and Kevin J. Lang.
+2006. Local graph partitioning using pagerank vec-
+tors. In 47th Annual IEEE Symposium on Founda-
+tions of Computer Science, FOCS 2006, Berkeley,
+California, USA, October 21-24, 2006, Proceedings,
+pages 475–486. IEEE Computer Society.
+Anthropic. 2024. Claude 3.5 sonnet.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. Self-rag: Learning to retrieve,
+generate, and critique through self-reflection. In The
+Twelfth International Conference on Learning Repre-
+sentations.
+Huanhuan Cao, Daxin Jiang, Jian Pei, Qi He, Zhen Liao,
+Enhong Chen, and Hang Li. 2008. Context-aware
+query suggestion by mining click-through and ses-
+sion data. In Proceedings of the 14th ACM SIGKDD
+international conference on Knowledge discovery
+and data mining, pages 875–883.
+Wenhu Chen, Hongmin Wang, Jianshu Chen, Yunkai
+Zhang, Hong Wang, Shiyang Li, Xiyou Zhou, and
+William Yang Wang. 2019. Tabfact: A large-
+scale dataset for table-based fact verification. arXiv
+preprint arXiv:1909.02164.
+Wenhu Chen, Hanwen Zha, Zhiyu Chen, Wenhan Xiong,
+Hong Wang, and William Wang. 2020. Hybridqa: A
+dataset of multi-hop question answering over tabular
+and textual data. arXiv preprint arXiv:2004.07347.
+Eunsol Choi, Jennimaria Palomaki, Matthew Lamm,
+Tom Kwiatkowski, Dipanjan Das, and Michael
+Collins. 2021. Decontextualization: Making sen-
+tences stand-alone. Transactions of the Association
+for Computational Linguistics, 9:447–461.
+Vijay Prakash Dwivedi, Charilaos I. Kanatsoulis,
+Shenyang Huang, and Jure Leskovec. 2025.
+Relational deep learning: Challenges, founda-
+tions and next-generation architectures. CoRR,
+abs/2506.16654.
+Darren Edge, Ha Trinh, Newman Cheng, Joshua
+Bradley, Alex Chao, Apurva Mody, Steven Truitt,
+and Jonathan Larson. 2024a. From local to global: A
+graph RAG approach to query-focused summariza-
+tion. CoRR, abs/2404.16130.
+Darren Edge, Ha Trinh, Newman Cheng, Joshua
+Bradley, Alex Chao, Apurva Mody, Steven Truitt,
+and Jonathan Larson. 2024b. From local to global: A
+graph rag approach to query-focused summarization.
+arXiv preprint arXiv:2404.16130.
+38141

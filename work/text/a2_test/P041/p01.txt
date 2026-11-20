@@ -1,0 +1,92 @@
+Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies
+(Volume 1: Long Papers), pages 8912–8924
+April 29 - May 4, 2025 ©2025 Association for Computational Linguistics
+Knowledge Graph-Guided Retrieval Augmented Generation
+Xiangrong Zhu♣ Yuexiang Xie♡ Yi Liu♣ Yaliang Li♡ Wei Hu♣
+♣ State Key Laboratory for Novel Software Technology, Nanjing University, China
+♡ Alibaba Group
+{xrzhu, yiliu07}.nju@gmail.com, whu@nju.edu.cn
+{yuexiang.xyx, yaliang.li}@alibaba-inc.com
+Abstract
+Retrieval-augmented generation (RAG) has
+emerged as a promising technology for address-
+ing hallucination issues in the responses gen-
+erated by large language models (LLMs). Ex-
+isting studies on RAG primarily focus on ap-
+plying semantic-based approaches to retrieve
+isolated relevant chunks, which ignore their in-
+trinsic relationships. In this paper, we propose
+a novel Knowledge Graph-Guided Retrieval
+Augmented Generation (KG2RAG) framework
+that utilizes knowledge graphs (KGs) to pro-
+vide fact-level relationships between chunks,
+improving the diversity and coherence of the
+retrieved results. Specifically, after perform-
+ing a semantic-based retrieval to provide seed
+chunks, KG2RAG employs a KG-guided chunk
+expansion process and a KG-based chunk orga-
+nization process to deliver relevant and impor-
+tant knowledge in well-organized paragraphs.
+Extensive experiments conducted on the Hot-
+potQA dataset and its variants demonstrate the
+advantages of KG2RAG compared to existing
+RAG-based approaches, in terms of both re-
+sponse quality and retrieval quality.
+1 Introduction
+Recently, large language models (LLMs) (Li et al.,
+2024; Ren et al., 2024; Touvron et al., 2023; Brown
+et al., 2020) have achieved remarkable success
+across a broad range of real-world tasks, includ-
+ing question answering (Sen et al., 2023), writ-
+ing assistance (Calamo et al., 2023), code genera-
+tion (Cheng et al., 2024), and many others (Kad-
+dour et al., 2023; Wu et al., 2023). However, hallu-
+cinations (Xu et al., 2024b; Liu et al., 2024a) in the
+generated responses becomes a critical challenge,
+which often results from containing outdated in-
+formation or lacking domain-specific knowledge.
+Retrieval-augmented generation (RAG) (Gao et al.,
+2023; Fan et al., 2024) has emerged as a feasible
+solution to mitigate hallucinations by retrieving
+relevant knowledge from provided documents and
+User
+Response
+LLM
+SemanticRAG
+Document Retrievedchunks
+LLM-only
+KG Subgraph
+GraphRAG
+Query
+Figure 1: A comparison among LLM-only, Semantic
+RAG, and Graph RAG paradigms.
+incorporating it into the prompts of LLMs for re-
+sponse generation.
+Existing studies in RAG (Lewis et al., 2020;
+Yu, 2022; Purwar and Sundar, 2023; Gao et al.,
+2023; Ziletti and D’Ambrosi, 2024), as shown in
+Fig. 1, employ keyword-based or semantic-based
+approaches to retrieve documents or chunks having
+the highest similarities to user queries. However,
+these retrieved chunks can be homogeneous and
+redundant, which fails to provide the intrinsic rela-
+tionships among these chunks and cannot further
+activate the reasoning abilities of LLMs. Further-
+more, the retrieved chunks are often directly con-
+catenated in the order of their similarity scores
+and fed into LLMs as part of the prompts. Such a
+practice can lead to isolated pieces of information,
+limiting the utility of LLMs in generating compre-
+hensive and reliable responses.
+Knowledge graphs (KGs) (Auer et al., 2007;
+Ji et al., 2022), as structured abstractions of real-
+world entities and their relations, can be expected
+to effectively supplement existing semantic-based
+RAG approaches by integrating structured factual
+knowledge. Knowledge within a KG, represented
+in the form of triplets (head entity, relation, tail
+entity), is naturally linked through overlapping en-
+tities. A simplified workflow for utilizing KGs in
+RAG is shown in Fig. 1, where relevant triplets are
+retrieved to augment the context for response gen-
+8912

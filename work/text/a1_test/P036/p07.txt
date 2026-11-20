@@ -1,0 +1,86 @@
+is shorter, and because the intensity of the internal electric ﬁeld
+increases. These effects more than compensate for the apparent
+degradation in absorber quality. In fact, the device with the high-
+est collection efﬁciency (≈90%) is the one with the lowest thick-
+ness (S0, 22 nm). For this device, the value of μτeff is
+≈3 /C2 10/C011 cm2 V/C01, which is more than two orders of magni-
+tude lower than values previously reported for thicker standard
+a-Si:H p-i-n cells.[24] On the other hand, it is interesting to remark
+on the relevant collection efﬁciency values in the range between
+80 and 90% that are achieved for the whole device series, which is
+directly related to the optimized HTL and ETL selective contact
+conﬁgurations.
+It is important to note that the low value of μτeff is most likely
+related to the increased inﬂuence of charged defects at the inter-
+faces near the contacts as the thickness decreases.[28] As the
+thickness increases, μτeff rises signiﬁcantly, saturating at values
+above 10/C09 cm2 V/C01, for absorber thicknesses ≥150 nm. This is
+comparable to the values found in conventional p-i-n devices.
+Regarding the voltage and collection efﬁciencies, there is a criti-
+cal thickness of about 70 nm beyond which these parameters
+tend to increase and saturate for a thickness of about 123 nm,
+remaining almost constant beyond this value.
+Finally, the VIM analysis was extended to study the series
+resistance Rs of the devices. According to the equivalent circuit
+of the device, the derivative dV/dJ as a function of 1/J, both in the
+dark and under illumination,[25] forms a straight line, where
+the slope is nkT/q (with n being the diode’s ideality factor)
+and the intercept corresponds to Rs.
+Figure 10 shows the results of this study. In the dark, the value
+of Rs increases with thickness, reaching nearly 100 Ω cm2 for the
+thickest device; see Figure 10a. However, under illumination, Rs
+decreases drastically to a value of 4–6 Ω cm2, which is virtually
+the same for all devices. This result suggests that the electrode
+resistance (AZO þ FTO) is the limiting factor for Rs under illu-
+minated conditions, while the effect of internal resistance,
+though signiﬁcant in the dark, has little inﬂuence under
+illumination.
+The difference ΔRs between Rs and its saturation value at high
+illumination can be interpreted as the internal resistance of the
+absorber and 1/ΔRs, therefore, as the photoconductance of the
+absorber. Figure 10b shows the dependence of 1/ΔRs on illumi-
+nation. Assuming that Jsc approximates the photocurrent
+generated optically in the absorber, it is possible to estimate
+the μτ product associated with the photoconductivity. The values
+obtained are in the range of 10/C08–10/C07 cm2 V/C01, which are very
+similar to those found in a-Si:H using conventional techni-
+ques.[29] In a sense, the discrepancy with the values obtained
+from the VIM analysis highlights the limitations of the assump-
+tions in the model used to interpret the measurements, particu-
+larly regarding the real meaning of the effective μτ derived from
+these measurements.
+3.2.3. Spectral Response Measurements
+Spectral response measurements are valuable to characterize the
+photocurrent and are commonly used to determine the losses
+responsible for reducing the measured Jsc from the maximum
+achievable photocurrent. EQE is a dimensionless parameter
+given by the number of electrons which exit the device per inci-
+dent photon at each wavelength. The photocurrent is the integral
+over wavelength of the product of the measured EQE with the
+illumination spectrum, AM1.5G for terrestrial standard solar
+cells.[30] The IQE for transparent solar devices was calculated
+using Equation (7).
+IQE ¼ EQE 1 /C0 R /C0 T (7)
+As the absorber thickness increases, EQE initially improves
+but then decreases or broadens, particularly around the 400 nm
+peak. Thinner absorbers may not fully capture incident light,
+while thicker absorbers face increased recombination losses.
+Additionally, signiﬁcant reﬂection losses, particularly at the
+450 nm peak, further reduce efﬁciency. Beyond 600 nm,
+EQE declines across all samples, with this decrease correspond-
+ing to the absorber bandgap, which limits the ability of the
+material to convert lower energy photons into electron ﬂow
+(Figure 11).
+A comparison between the EQE and IQE curves suggests that
+while internal losses can be well managed, further optimization
+of the antireﬂection coating would increase both PCE and LUE
+values. In any case, we can estimate that by reducing reﬂection
+losses in the wavelength range 350–500 nm, values of LUE
+beyond 1.6% are possible. Additionally, as a routine check, we
+Figure 10. a) Rs in darkness and saturation value at maximum illumination as a function of thickness. b) Photoconductance 1/ΔRs as a function of Jsc for
+the thicker devices (S3, S4, S5, and S6). The linear ﬁt allows us to obtain the μτ product associated with the photoconductivity of the absorber. The μτ
+values, in cm2 V/C01, are presented in the ﬁgure.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2025, 9, 2400816 2400816 (7 of 9) © 2025 The Author(s). Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400816, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

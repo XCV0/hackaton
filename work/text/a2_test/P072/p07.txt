@@ -1,0 +1,109 @@
+Face4RAG: Factual Consistency Evaluation for Retrieval Augmented Generation in Chinese KDD ’24, August 25–29, 2024, Barcelona, Spain
+Step3: Logical Structure Comparison
+Reference: ……Sinceestablished a leading position in cloud 
+services, Amazonhas to independently drive innovation.……
+Relevant Context: Since established a leading posi;on in cloud 
+services, Amazon has to independently drive innova;on. 
+Answer Segment: The reason        Amazon established a 
+leading posi;on in cloud services is because       he has 
+independently driven innova;on.
+2
+3
+the reason is because2 3
+Since , 2 3
+causal rela;onship
+Step1: Context Iden9ﬁca9on
+Step2: Logical Structure Analysis
+causal rela;onship
+Ans
+Ref
+↦
+↦2
+3 2
+3 causal reversal inconsistent: :
+Figure 5: The process of logic consistency evaluation.
+(3) Fact Consistency Check: GPT-4 conducts a thorough fact con-
+sistency check for each informational point against its cor-
+responding context. A segment is deemed consistent if and
+only if every single informational point aligns fact consistent
+with the reference.
+The above instruction imposes GPT-4 to evaluate consistency
+with each relevant content rather than the full context of the refer-
+ence, reducing the probability of misjudging positive samples. We
+will empirically justify this point in our experiments.
+Logic Consistency Evaluation In this stage, GPT-4 is instructed
+with a COT prompt to evaluate the logical fallacy. Since no FCE
+method has explicitly handled logical fallacy before, this is a novel
+stage for FCE, in which we elaborate a COT prompt as follows. The
+specific process is shown in Figure 5.
+(1) Context Identification: Given an answer segment, GPT-4 iden-
+tifies its relevant context from the reference.
+(2) Logical Structure Analysis: GPT-4 then analyzes the logical
+structure for both answer and relevant context.
+(a) Identify the logical connections, and the sentence compo-
+nents connected by these logical connections.
+(b) Determine the type and function of logical connections to
+understand the logical structure between sentence com-
+ponents, e.g., causal, conditional, etc.
+(c) Map sentence components to their corresponding logical
+relations, e.g., cause and effect for causal relation, condi-
+tion and result for conditional relation, etc.
+(d) Build a complete logic framework of the sentence.
+(3) Logical Structure Comparison: Finally, GPT-4 compares the
+logical structure of the answer segment with the relevant
+context and judge if the answer segment is logically consis-
+tent with the reference.
+The last step of FCE is the aggregation of answer-level factual
+consistency measurement. Specifically, an answer is marked factual
+consistent if and only if all of its decomposed segments have passed
+the above two consistency evaluation stages.
+5 EXPERIMENTS
+In this section, we conduct extensive experiments to evaluate the ef-
+fectiveness of our proposed L-Face4RAG pipeline. Our experiments
+show that on both synthetic data and real-world data in Face4RAG
+benchmark, our L-Face4RAG method substantially outperforms
+the existing FCE methods. Notably, its superiority goes beyond the
+Chinese RAG task from which L-Face4RAG is originally motivated,
+as L-Face4RAG achieves SOTA results on 6 out of 7 of the existing
+English datasets and also a substantially higher average score on
+all tasks.
+5.1 Experimental Setup
+Baselines We compare L-Face4RAG with four GPT-based fine-
+grained FCE methods:
+• FACTSCORE [31] first breaks the answer into a series of
+atomic facts and then assigns a binary label to each atomic
+fact individually.
+• FELM [9] first segments the answer into fine-grained textual
+spans and then evaluates the factual consistency of all textual
+spans collectively. It outputs the corresponding numbers of
+factual inconsistent textual spans if existed.
+• Ragas [13] first extracts a set of statements from the answer
+and then evaluates the factual consistency of all statements
+collectively, outputting a binary label for each statement
+along with the corresponding reason for the assessment.
+• Refchecker [18] extracts knowledge triplets from the answer
+and evaluates each knowledge triplet separately.
+Implementation Details As the above FCE baselines are origi-
+nally designed for tasks in English, we adapt them to our Chinese
+RAG task by translating their prompts into Chinese.
+When experimenting with FELM, we utilize the Reference-doc
+augmented evaluator [9], in alignment with our task which is fo-
+cused on evaluating the factual consistency of answers against their
+references. Specifically, we input our references as the retrieved
+reference doc in FELM’s evaluation framework. We select the best-
+performing estimator in [9], i.e., decomposing the answer with
+segment-based method and utilizing GPT-4 as the factual error
+detector.
+Since the original settings of FACTSCORE and RAGAS are based
+on GPT-3.5, we conduct experiments with both GPT-3.5 and GPT-
+4 to eschew the effect of the possible performance gap between
+GPT-3.5 and GPT-4 on the empirical results.
+Finally, to apply our proposed evaluation pipeline, we decompose
+the answer into segments and assess the factual consistency of each
+segment respectively. The outputs include both the label and the
+corresponding explanations. To derive deterministic output from
+GPT-4, we set its temperature to 0.
+5.2 Performance Comparison on Face4RAG
+We first compare the performance of our proposed L-Face4RAG
+pipeline against various FCE baselines on the Face4RAG benchmark,
+which includes a synthetic dataset and a real-world dataset.

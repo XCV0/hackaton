@@ -1,0 +1,102 @@
+Agentic RAG Analysis. Agentic RAG improves
+correctness through two complementary effects. As
+shown in Table 5, the gains are not explained only
+by reduced abstention. Among 36 recovered cases,
+24 correspond to not attempted → correct tran-
+sitions and 12 to incorrect → correct. This sug-
+gests that iterative evidence seeking helps in two
+ways. It enables the model to answer questions that
+standard RAG leaves unresolved, and it also cor-
+rects a meaningful subset of previously incorrect
+or hallucinated responses. In other words, the ben-
+efit of Agentic RAG is not merely that the model
+answers more often; however, it answers more re-
+liably after inspecting and refining the retrieved
+evidence. These improvements come with addi-
+tional inference-time cost. These improvements
+come with additional inference-time cost.
+Table 6 shows that, for Qwen3-4B, Agentic RAG
+raises average token usage from 502 to 1,520 and la-
+tency from 0.52s to 3.45s, a 6.63× increase, while
+also requiring an average of 6 tool calls per query.
+These results make the trade-off clear. Agentic
+RAG improves faithfulness by supporting evidence
+inspection, query refinement, and answer revision.
+However, it moves part of the computational cost
+away from model size and into inference-time
+orchestration. Consequently, smaller backbones
+paired with Agentic RAG can still be attractive in
+memory-constrained deployment settings, though
+this comes with higher latency and token usage.
+5.3 Bilingual Gaps
+Both Table 3 and Table 4 show that many models
+exhibit asymmetric performance across Arabic and
+English, reflecting differences in pretraining cover-
+age, instruction tuning, and retrieval effectiveness
+under bilingual queries. For instance, ALLaM-
+7B performs substantially better in Arabic than
+English (42.70 vs. 32.80), whereas several mul-
+tilingual baselines show the opposite trend (e.g.,
+EuroLLM-9B: 22.30 Arabic vs. 29.10 English).
+Notably, Qwen3-4B-2507 is highly imbalanced in
+its base form (15.80 Arabic vs. 27.90 English). It
+suggests that bilingual Islamic QA is not simply
+an Arabic task with English translation; it requires
+robust grounding and semantic access to canoni-
+cal evidence in both languages. In contrast, tool-
+mediated grounding can substantially reduce bilin-
+gual disparities. Under Agentic RAG (Table 4),
+Qwen3-4B-2507 becomes more balanced (49.60
+Arabic vs. 48.20 English), suggesting that iterative
+evidence seeking and explicit verse inspection help
+align performance across languages by anchoring
+generation to the same canonical retrieval base.
+6 Conclusion
+In this paper, we introduce ISLAMICFAITHQA,
+a benchmark dataset, along with an end-to-end
+grounded Islamic modelling suite designed to eval-
+uate and reduce hallucinations in open-ended re-
+ligious generation directly. Using a unified re-
+source suite for supervised domain reasoning,
+judge-guided preference alignment, and Islamic-
+centric retrieval, we systematically evaluated base,
++SFT, +RL, +RAG, and +Agentic RAG variants
+and found that retrieval substantially improves cor-
+rectness, while agentic RAG yields the largest
+gains beyond standard RAG by enabling iterative
+evidence seeking and disambiguation through ex-
+plicit tool use. Overall, our results indicate that
+tool-mediated grounding can deliver state-of-the-
+art performance and improved Arabic/English ro-
+bustness even with smaller backbones, suggesting
+a practical path toward more trustworthy Islamic
+assistants. Future work should extend grounding to
+authenticated hadith with provenance, incorporate
+school-of-thought disagreement, and harden tool-
+augmented systems against adversarial prompting
+and citation laundering.
+Limitations
+ISLAMICFAITHQA is designed for reliable open-
+ended evaluation using atomic questions with
+single-gold answers and LLM-as-a-judge assess-
+ment, but this choice under-represents settings
+where multiple answers may be valid across
+madh¯ahib or interpretive traditions. Our results
+also depend on the correctness of the LLM judge
+and a limited human-calibration subset, which may
+not fully capture borderline cases or bilingual in-
+consistencies. In addition, our grounding is pri-
+marily Quran-centric, so questions best supported
+by authenticated hadith, fiqh sources, or scholarly
+consensus may be disadvantaged. Finally, Agentic
+RAG introduces additional latency and new failure
+modes, including tool-use errors and misleading
+citation attribution. Moreover, the benchmark fo-
+cuses on short-form question answering rather than
+long-form religious guidance. Accordingly, the
+reported performance should be interpreted as a
+measure of faithfulness and abstention under strict
+evaluation, rather than as evidence of readiness for
+deployment as a religious authority.
+9
+26477

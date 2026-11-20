@@ -1,0 +1,7 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D009,MS1,DV1;DV2,J-V,AM1.5G,100,mW/cm2,,"step 0.01 V, delay 50 ms",true,false,,room temperature,,,"Лабораторное J-V (Fig. 3b); измерены прямой и обратный ход (reverse 1.0 to -0.1 V; forward -0.1 to 1.0 V), направление для champion-значений в таблицах не указано; в N2 перчаточном боксе"
+D009,MS2,DV1;DV2,MPP tracking,AM1.5G,100,mW/cm2,,,true,false,,,,,"Стабилизированная PCE при max power tracking: Cs0 при 0.73 V, Cs5 при 0.85 V (Fig. 3b inset, 300 s)"
+D009,MS3,DV1;DV2,EQE,,,,,,true,false,,,,,Интегрированный Jsc из EQE (Fig. 3c)
+D009,MS4,DV2,J-V,AM1.5G,100,mW/cm2,,,true,true,"Shanghai Institute of Microsystem and Information Technology (SIMIT), Chinese Academy of Sciences",,,,"Сертифицированное J-V (Supplementary Figs. 14, 15)"
+D009,MS5,DV1;DV2,stability,,,,,,,false,,35 ± 5 °C,other,"shelf stability: dark storage in N2, unencapsulated, 6,000 h, 35 ± 5 °C",Fig. 3f; протокол ISOS в статье не назван
+D009,MS6,DV1;DV2,stability,white LED,100,mW/cm2,,,,false,,60 ± 5 °C,other,"continuous one-sun LED illumination, open-circuit, N2, unencapsulated, 60 ± 5 °C, 1,500 h",Fig. 3g; протокол ISOS в статье не назван

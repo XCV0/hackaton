@@ -1,0 +1,87 @@
+Method Wiki-VISA Paper-VISA
+Average [<1] Passage [>1] Passage Non-Passage Average Passage Non-Passage
+bbx ans bbx ans bbx ans bbx ans bbx ans bbx ans bbx ans
+Zeroshot Prompt, Single Oracle Candidates
+QWen2-VL-72B 1.5 60.4 3.4 58.5 0.1 54.9 0.9 67.9 1.5 43.1 0.5 40.2 2.5 45.9
+Fine-tune, Single Oracle Candidates
+VISA-2B-single 37.5 57.1 70.0 61.1 18.7 44.9 23.8 65.3 63.0 38.3 50.6 34.4 75.3 42.1
+VISA-7B-single 54.2 65.2 75.6 66.5 50.1 56.0 36.8 73.1 68.2 43.8 58.1 41.6 78.2 45.9
+Fine-tune, Multi Candidates, Oracle in Candidates
+VISA-2B-multi 22.5 37.9 46.5 46.1 6.4 27.2 14.6 40.5 51.3 32.4 41.1 30.1 61.4 34.7
+VISA-7B-multi 32.3 41.8 51.7 48.6 23.0 32.7 22.2 44.1 59.9 39.2 47.7 35.9 72.0 42.4
+Fine-tune, Multi Candidates, Oracle Not in Candidates
+VISA-2B-multi 73.7 84.9 68.0 82.0 73.2 84.9 80.0 87.7 95.2 95.2 97.2 97.2 93.1 93.1
+VISA-7B-multi 82.2 91.0 75.1 87.6 84.0 91.4 87.4 94.0 95.6 95.6 97.2 97.2 93.9 93.9
+Table 2: Effectiveness of VISA on Wiki-VISA and Paper-VISA datasets for bounding box accuracy (bbx) and
+answer accuracy (ans). Fine-tuned models are trained individually on in-domain data. The Multi-Candidate, Oracle
+in Candidates setting uses the same query set as the Single Oracle Candidates setting, allowing direct comparison.
+The Oracle Not in Candidates setting is evaluated on the queries with no ground truth documents in candidates.
+received three document candidates and the task
+was to generate the identifier of the relevant docu-
+ment (if present), the answer, and the bounding box
+for the evidence. For cases where no relevant doc-
+ument was present (20% of the training samples),
+the model was trained to generate “No answer.”
+We used the prompt template in Appendix A.9 to
+format the model’s input and output.
+During the training, random cropping was ap-
+plied outside of the bounding box. This augmen-
+tation exposed the model to varying input sizes,
+which enhanced its zero-shot effectiveness on un-
+seen document layouts. Bounding box targets were
+represented using absolute coordinate values. We
+also explored normalizing the scale of bounding
+box coordinates to values in the range[0-1]. Details
+can be found in Appendix A.3 and A.4.
+5 Experimental Results
+Table 2 presents the performance of VISA on the
+Wiki-VISA and Paper-VISA datasets across dif-
+ferent experimental settings. Zero-shot prompting
+results reveal the difficulty of directly applying
+state-of-the-art VLMs to the visual source attribu-
+tion task. QWen2-VL-72B achieves a reasonable
+answer generation accuracy of 60.4% on average
+on Wiki-VISA but fails to deliver effective bound-
+ing box predictions, with only 1.5% accuracy. This
+observation is consistent on Paper-VISA. These
+highlight the limitations of existing VLMs in pin-
+pointing the source evidence in original documents
+with proper location and granularity.
+Fine-tuning on our crafted training data enables
+the model to effectively execute the task. In the
+single-candidate setup, where the model processes
+only the relevant document, fine-tuned models
+demonstrate substantial gains compared to zero-
+shot prompting a much larger model. On Wiki-
+VISA, the 7B variant achieves 54.2% bounding
+box accuracy and 65.2% answer accuracy, while
+on Paper-VISA, the corresponding scores reach
+68.2% and 43.8%. It further demonstrates that the
+effectiveness of VISA is influenced by document
+characteristics, such as content location and modal-
+ity. For Wiki-VISA, bounding box accuracy is
+significantly higher for passages on the first page
+([<1] passage) compared to passages beyond the
+first page ([>1] passage). For example, the 2B vari-
+ant achieves 70.0% accuracy for [<1] passages but
+only 18.7% for [>1] passages, indicating the chal-
+lenges posed by long, multi-page documents. The
+larger model, the 7B variant, narrows this gap, re-
+flecting the better handling of long-context inputs.
+Non-passage content, such as tables and figures,
+also have obviously a different level of grounding
+effectiveness, indicating the difference of effective-
+ness in different visual elements.
+In the multi-candidate setting, which more
+closely mirrors real-world RAG systems, the 7B
+model achieves 32.3% bounding box accuracy and
+41.8% answer accuracy when handling three candi-
+date documents This demonstrates the model’s ca-
+pability to identify relevant sources among multiple
+documents while enabling fine-grained attribution.
+It should be noted that this setting is more chal-
+lenging than the single-oracle candidate scenario,
+as visual source attribution among multiple candi-
+dates additionally requires the model to identify
+the relevant document among hard negatives.
+30159

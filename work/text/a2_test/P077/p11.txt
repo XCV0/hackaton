@@ -1,0 +1,148 @@
+Table 4: PPR Runtime w.r.t. Graph
+Size
+Nodes Ave. Edges Ave. Time (s)
+100000 431414.5 0.58
+1000000 5567538.1 1.37
+10000000 48865879.2 11.5
+100176641 298458255 75.29
+SBR
+OSAR-EEMSOSAR-LLMsISAR-EEMSISAR-LLMs
+0.1
+0.2
+0.3
+0.4F1
+SPR
+EPR
+BM25
+ST
+BGE
+LLM
+Figure 11: F1 Score of Meth-
+ods in Path-Retrieval Module
+Semantic-Augmented Extraction (SAE). Figure 9 shows the
+Recall and F1 score of different semantic model combinations with
+three subgraph pruning strategies under the SAE methods, as the
+subgraph size varies. Among the three semantic models, the BGE
+and ST significantly surpass BM25 across all pruning strategies
+and subgraph scales. BGE is slightly better in quality, while ST is
+even better in efficiency, as discussed later. Considering the trade-
+off between quality and efficiency, we propose to use ST as the
+representative EEMs. For the three pruning strategies, TP exhibits
+the best quality at smaller subgraph scales, while NP performs the
+worst. However, as subgraph size increases, the F1 score and Recall
+of EP, TP, and NP converge. Ultimately, EP slightly outperforms
+TP, while TP marginally surpasses NP. Thus, TP is recommended
+when the size of the extracted subgraph is small; otherwise, EP.
+Due to the inherent uncertainty in LLM outputs, SAE-LLMs meth-
+ods often struggle to control the size of subgraphs extracted, typi-
+cally producing smaller subgraphs that can reduce path-retrieval
+quality (see Finding 2). Figure 9 shows the F1 score and Recall for
+subgraphs generated using SAE-LLMs under three pruning strate-
+gies, plotted against the average subgraph size. Among the three
+pruning strategies, EP outperforms NP and TP for SAE-LLMs. Fig-
+ure 10 further shows the trends in F1 score and Recall as the number
+of tokens input into the LLMs varies for NP, TP and EP. Recall for
+NP consistently surpasses that of both TP and EP, maintaining a
+gap of around 0.2. Although EP underperforms in terms of F1 score
+due to the larger subgraphs it extracts, the relatively low Recall of
+NP and EP may diminish their effectiveness in path-retrieval. As
+the number of tokens increases, Recall for NP and TP initially rises,
+then declines, while EP remains nearly constant, indicating that
+EP achieves more effective subgraph extraction at a lower token
+cost for the SAE-LLMs methods. The efficiency of SAE methods
+is related to the semantic models used. Runtime is influenced by
+factors such as model parameters, algorithmic complexity, and data
+volume. In general, the runtime for processing a graph component
+follows this order: LLMs > BGE > ST > BM25, as shown in Figure 13.
+Table 5: Results of Hybrid ISAR Combining EEMs and LLMs
+Method CWQ WebQSP GrailQA WebQuestion
+SBE+ISAR-EEMs 0.183 0.157 0.395 0.16
+SBE+ISAR-EEMs (LLMs-R) 0.271 0.219 0.379 0.175
+SBE+ISAR-LLMs 0.249 0.264 0.371 0.249
+SBE+ISAR-LLMs (EEMs-PF) 0.271 0.316 0.396 0.245
+SBE+ISAR-LLMs (EEMs-S) 0.310 0.373 0.435 0.276
+4.4 Evaluation of Path-Retrieval Module
+Figure 11 shows the F1 score of different methods in path-retrieval
+module. It shows that OSAR outperforms ISAR in all semantic
+models. SPR method slightly outperforms EPR and I/OSAR with
+BM25, but underperforms all I/OSAR solutions with ST, BGE or
+1 4 8 16 32
+Path Num.
+0.1
+0.2
+0.3
+0.4F1
+SBR-EPR
+SBR-SPR
+OSAR-BGE
+OSAR-BM25
+OSAR-ST
+ISAR-BGE
+ISAR-BM25
+ISAR-ST
+Figure 12: F1 Score vs. # of Paths
+(for Methods of Path-Retrieval)
+SBR
+OSAR-EEMsOSAR-LLMsISAR-EEMsISAR-LLMs
+0
+1
+2
+3
+4
+10
+40
+80Time(s)
+0.007
+SPR
+EPR
+BM25
+ST
+BGE
+LLM
+Figure 13: Runtime of Meth-
+ods in Path-Retrieval (WebQSP)
+LLM, which suggests that the use of poorer semantic models to
+aid enhanced retrieval may lead to a loss of quality. We further
+investigate the variation in the F1 score of the path-retrieval mod-
+ule when the number of reasoning paths changes, as shown in
+Figure 12. Since the number of paths output by LLM is inherently
+uncertain, methods using LLM are excluded. It shows that the F1
+score of SBR and I/OSAR with BM25 gradually increases with the
+number of paths, yet their F1 score remains low-level, consistently
+trailing I/OSAR with BGE and ST by approximately 0.1. The gap
+widens to 0.2 or more when fewer paths are retrieved. In contrast,
+the performance of I/OSAR with ST and BGE initially improves
+and then declines as the number of retained paths increases, with
+OSAR generally outperforming ISAR. Note that F1 scores may be
+higher for smaller sets of reasoning paths, as they tend to prioritize
+precision. A slight decrease in F1 for larger reasoning path sets is
+not indicative of lower quality but rather reflects the broader scope
+of the retrieved paths.
+Figure 13 shows the runtime of different methods in the path-
+retrieval module (WebQSP). Among the SBR solutions, EPR has the
+longest runtime due to the large number of paths it retrieves, while
+SPR reduces computation time by retrieving only a single path
+for each node. The EPR-based OSAR method becomes impractical
+because its excessive data volume results in prohibitive runtime
+overhead when used with semantic models. As a result, only SPR
+is employed in this context. Among the three semantic models,
+both BGE and ST demonstrate significant quality improvements
+over BM25 combined with I/OSAR. BGE achieves marginally higher
+quality, whereas ST exhibits superior efficiency.
+Table 5 reports the results of hybrid ISAR methods combining
+EEMs and LLMs. All three methods outperform single-model base-
+lines on most datasets, confirming the benefit of combining model
+strengths. Notably, the EEMs-S strategy yields the best results, sug-
+gesting that combining EEMs and LLMs helps reduce the risk of
+missing important paths during expansion.
+5 FINDINGS AND DISCUSSION
+We summarize key findings from our empirical study and discuss
+promising ways for addressing GraphRAG’s two key bottlenecks:
+subgraph-extraction efficiency and LLM generation quality.
+5.1 Summary of Key Findings
+Finding 1: GraphRAG Trade-off Structure. GraphRAG entails
+multi-aspect trade-offs among quality (Hits@1), efficiency (run-
+time), and cost (token and GPU usage). This trade-off spans two
+modules (subgraph-extraction vs. path-retrieval), two method types
+(structure-based vs. semantic-augmented), and two types of seman-
+tic models (EEMs vs. LLMs).

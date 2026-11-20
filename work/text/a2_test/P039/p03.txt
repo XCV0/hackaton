@@ -1,0 +1,92 @@
+FG-RAG (Hong et al., 2025) extends entity cover-
+age via context-aware graph retrieval and improves
+response specificity with query-level fine-grained
+summarization. PathRAG (Chen et al., 2025a) ex-
+tracts key relational paths and converts them into
+text prompts, guiding LLMs toward more coherent
+and context-aware generation.
+However, these approaches perform poorly in
+low-resource scenarios where smaller LLMs are
+deployed and are rarely explored on incremental
+knowledge. TagRAG injects powerful retrieval
+and reasoning capabilities into an efficiently con-
+structed knowledge graph while supporting incre-
+mental knowledge integration.
+3 Task Definition
+TagRAG is dedicated to building a hierarchically
+explicit knowledge graph under any domain to
+enable powerful and efficient RAG capabilities.
+Given a set of documents D = {di}|D| i=1, key do-
+main information are extracted to construct an ob-
+ject tag knowledge graph Go = (Vo, Eo). In order
+to form a clear structured knowledge management,
+given a root domain ˆv, a hierarchical domain tag
+system Gd = (Vd, Ed) needs to be established. It
+contains domain tags Vd at different levels and
+hierarchical relationships Ed between tags. For
+knowledge coordination and fusion, the object tags
+should be linked to the domain tag system and a
+hierarchical tag knowledge graph is constructed:
+G = (Vo, Eo, Vd, Ed, Eod),
+where Eod represents the relationships between the
+object and domain tags.
+For retrieval-augmented generation, given a
+question q, the hierarchical tag knowledge graph is
+searched to generate a global and comprehensive
+answer a:
+a ← F (q, G),
+where F (·) means the graph-based RAG method.
+4 TagRAG
+As shown in Figure 2, TagRAG consists of two
+stage: (1) Tag Knowledge Graph Construction and
+(2) Tag-guided Retrieval-Augmented Generation.
+We extract the keywords from documents as object
+tags as well as their relationships. Linking them to
+the pre-defined root domain tag, domain tag chains
+are organized for knowledge accommodation. For
+information integration, the knowledge from object
+tags connected to domain tags is fused with sum-
+marization. In the inference stage, domain-centric
+tags are retrieved for knowledge localization. With
+the hierarchical tag chains collected, more synthe-
+sized information is integrated and can be fused to
+the global answers.
+4.1 Tag Knowledge Graph Construction
+TagRAG aims to build a knowledge graph with
+rich domain relationships and efficiently aggregates
+global knowledge. We extract object tag keywords
+to collect expertise, organize domain tag chains
+to build a hierarchical structured system, and fuse
+domain-centric knowledge summaries to provide
+an efficient retrieval platform.
+4.1.1 Object Tag Keyword Extraction
+In order to accurately access the knowledge in the
+corpus, we need to refine specialized domain doc-
+uments. Following the RAG paradigm, the set of
+documents D = {di}|D| i=1 are divided into several
+chunks T = {ti}|T | i=1 with overlaps to reach the
+size that LLMs can handle and maintain seman-
+tic coherence. Then, we request LLMs to extract
+domain-specific keywords with their descriptions
+as object tags:
+Vo, Eo = LLM({ti}|T | i=1),
+which contain the most primitive and underlying
+information in the document.
+4.1.2 Domain Tag Chain Organization
+The extracted object tags are scattered nodes that
+are difficult to manage hierarchically. Unlike the
+bottom-up construction of GraphRAG, we asso-
+ciate them with the predefined root domain tag.
+This gives the whole construction process a clear
+sense of direction and satisfies the specialized na-
+ture of domain knowledge graphs. Specifically,
+given object tags with the predefined root domain
+tag, we prompt LLMs to generate relationships
+between them and abstract them into multi-level
+domain tag chains:
+C = {ci}|Vo| i=1 = LLM(Vo.ˆv),
+Each ci contains multiple domain tags, each con-
+sisting of a domain name and its description. Supe-
+rior domain tag points to the subordinate domain
+tag through the relationship of "has subdomain".
+6436

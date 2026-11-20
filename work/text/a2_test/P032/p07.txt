@@ -1,0 +1,73 @@
+AGGREFACT-CNNAGGREFACT-XSum TofuEval-MediaSTofuEval-MeetB
+WiCE
+REVEALClaimVerify
+FactCheck-GPT
+ExpertQA
+LFQA
+RAGTruthBAcc Avg.
+20
+40
+60
+80
+Average BAcc (%)
+Full w/o consensus filtering w/o reasoning SFT alone DPO alone
+Figure 4: Ablation of HalluGuard. Comparison of the full model and four variants on LLM-AggreFact.
+Computational Efficiency. To compare latency
+and hardware requirements, we measure inference
+throughput and GPU memory usage with a vLLM
+backend, a batch size of 1 on an NVIDIA A100
+GPU using our prompt (see Appendix E) and each
+model’s default context window.
+As shown in Table 3, HalluGuard achieves an
+average throughput of 120.93 tokens per second
+(TPS) over 100 samples, representing improve-
+ments of 49% and 68% over MiniCheck and Gran-
+ite Guardian 3.3, respectively. HalluGuard requires
+at most 8.1 GB of VRAM, compared to 32.2 GB
+and 38.6 GB for the baselines, corresponding to a
+75-79% reduction in memory footprint.
+Model Throughput (TPS) Peak VRAM (MB)
+HalluGuard-4B 120.93 8,098
+MiniCheck-7B 81.15 32,211
+Granite Guardian 3.3 72.07 38,585
+Table 3: Efficiency Comparison. Inference throughput
+(tokens/s) and peak GPU memory usage across models.
+On average, HalluGuard takes 10.4 seconds to
+process each document-claim sample. In a RAG
+pipeline, this introduces additional post-generation
+latency. However, this overhead provides a critical
+performance gain, as shown in Section 7.
+Together with its competitive performance, these
+results indicate a favorable efficiency-performance
+trade-off for resource-constrained environments.
+Justification Quality. Reference-based metrics
+such as ROUGE (Lin, 2004) are problematic for our
+task, as they do not assess factual grounding and
+are poorly correlated with human judgments (Wang
+et al., 2023). We therefore use G-Eval (Liu et al.,
+2023b) with DeepSeek-V3.1-Terminus as evaluator.
+For each document, we scored the justifications
+of PG-L, HalluGuard, and PG-S on Relevance,
+Consistency, Coherence (1-5) and Fluency (1-3).
+Table 4 presents several disparities. Qwen3-
+235B-A22B outperforms Qwen3-0.6B in all di-
+mensions, while HalluGuard, although nearly two
+orders of magnitude smaller, achieves comparable
+scores. This suggests that ORPO transfers strong
+justification behavior to a compact backbone. Flu-
+ency remains uniformly high, indicating that gains
+arise primarily from improved factual grounding
+and reasoning rather than surface fluency. Finally,
+these results show that HalluGuard can match the
+quality of justification of a 235B-parameter model.
+Model Rel Coh Con Flu
+Qwen3-235B-A22B 4.89 4.63 4.52 3.00
+HalluGuard-4B 4.86 4.40 4.56 2.99
+Qwen3-0.6B 4.52 3.78 4.42 2.96
+Table 4: G-Eval Results. Evaluation of justification
+quality using four dimensions: Relevance (Rel), Coher-
+ence (Coh), Consistency (Con), and Fluency (Flu).
+Justification-Accuracy Alignment. We evalu-
+ate whether justification quality predicts classifica-
+tion reliability by computing Spearman correlations
+16924

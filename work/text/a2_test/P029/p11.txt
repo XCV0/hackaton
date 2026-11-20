@@ -1,0 +1,112 @@
+Songshuo Lu, Hua Wang, Yutian Rong, Zhi Chen, and
+Yaohua Tang. 2024. Turborag: Accelerating retrieval-
+augmented generation with precomputed kv caches
+for chunked text. arXiv preprint arXiv:2410.07590.
+Casey Meehan, Khalil Mrini, and Kamalika Chaudhuri.
+2022. Sentence-level privacy for document embed-
+dings. In Proceedings of the 60th Annual Meeting of
+the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), pages 3367–3380, Dublin,
+Ireland. Association for Computational Linguistics.
+Ruoyu Qin, Zheming Li, Weiran He, Jialei Cui, Feng
+Ren, Mingxing Zhang, Yongwei Wu, Weimin Zheng,
+and Xinran Xu. 2025. Mooncake: Trading more stor-
+age for less computation — a KVCache-centric ar-
+chitecture for serving LLM chatbot. In 23rd USENIX
+Conference on File and Storage Technologies (FAST
+25), pages 155–170, Santa Clara, CA. USENIX As-
+sociation.
+Zexuan Qiu, Jingjing Li, Shijue Huang, Wanjun Zhong,
+and Irwin King. 2024. Clongeval: A chinese bench-
+mark for evaluating long-context large language mod-
+els. ArXiv, abs/2403.03514.
+Jainam Shah and Asim Ahmed Siddiqui. 2023. An
+improved cache eviction strategy: Combining least
+recently used and least frequently used policies. In
+2023 6th International Conference on Advances in
+Science and Technology (ICAST), pages 1–6.
+Yu Shang, Yu Li, Keyu Zhao, Likai Ma, Jiahe Liu,
+Fengli Xu, and Yong Li. 2025. Agentsquare: Auto-
+matic LLM agent search in modular design space. In
+The Thirteenth International Conference on Learning
+Representations.
+shareAI. 2023. Sharegpt-chinese-english-
+90k bilingual human-machine qa dataset.
+https://huggingface.co/datasets/shareAI/
+ShareGPT-Chinese-English-90k.
+Shiva Sreeram, Alaa Maalouf, Pratyusha Sharma, and
+Daniela Rus. 2025. Efficient llm adaptation using a
+single gradient step on 100 samples. In NeurIPS.
+Valentin Touzeau, Claire Maïza, David Monniaux, and
+Jan Reineke. 2019. Fast and exact analysis for lru
+caches. Proc. ACM Program. Lang., 3(POPL).
+Wenbin Wang, Yongcheng Jing, Liang Ding, Yingjie
+Wang, Li Shen, Yong Luo, Bo Du, and Dacheng
+Tao. 2025a. Retrieval-augmented perception: High-
+resolution image perception meets visual RAG. In
+Forty-second International Conference on Machine
+Learning.
+Xingliang Wang, Zemin Liu, Junxiao Han, and
+Shuiguang Deng. 2025b. Rag4gfm: Bridging knowl-
+edge gaps in graph foundation models through graph
+retrieval augmented generation. In NeurIPS.
+Yuxin Wang, Yuhan Chen, Zeyu Li, Xueze Kang, Yuchu
+Fang, Yeju Zhou, Yang Zheng, Zhenheng Tang, Xin
+He, Rui Guo, Xin Wang, Qiang Wang, Amelie Chi
+Zhou, and Xiaowen Chu. 2025c. BurstGPT: A real-
+world workload dataset to optimize llm serving sys-
+tems. In Proceedings of the 31st ACM SIGKDD Con-
+ference on Knowledge Discovery and Data Mining
+V.2 (KDD ’25), Toronto, ON, Canada. ACM.
+Zheng Wang, Shu Teo, Jieer Ouyang, Yongjun Xu, and
+Wei Shi. 2024. M-RAG: Reinforcing large language
+model performance through retrieval-augmented gen-
+eration with multiple partitions. In Proceedings
+of the 62nd Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers),
+pages 1966–1978, Bangkok, Thailand. Association
+for Computational Linguistics.
+Zilong Wang, Zifeng Wang, Long Le, Steven Zheng,
+Swaroop Mishra, Vincent Perot, Yuwei Zhang,
+Anush Mattapalli, Ankur Taly, Jingbo Shang, Chen-
+Yu Lee, and Tomas Pfister. 2025d. Speculative RAG:
+Enhancing retrieval augmented generation through
+drafting. In The Thirteenth International Conference
+on Learning Representations.
+Jeffrey Willette, Heejun Lee, Youngwan Lee, Myeong-
+jae Jeon, and Sung Ju Hwang. 2025. Training free ex-
+ponential context extension via cascading KV cache.
+In The Thirteenth International Conference on Learn-
+ing Representations.
+Zhengxuan Wu, Aryaman Arora, Atticus Geiger, Zheng
+Wang, Jing Huang, Dan Jurafsky, Christopher D Man-
+ning, and Christopher Potts. 2025. Axbench: Steer-
+ing LLMs? even simple baselines outperform sparse
+autoencoders. In Forty-second International Confer-
+ence on Machine Learning.
+Yicheng Xiao, Lin Song, Rui Yang, Cheng Cheng, Yix-
+iao Ge, Xiu Li, and Ying Shan. 2025. LoRA-gen:
+Specializing large language model via online loRA
+generation. In Forty-second International Confer-
+ence on Machine Learning.
+Qi Yang, Chenghao Zhang, Lubin Fan, Kun Ding,
+Jieping Ye, and Shiming Xiang. 2025. Re-ranking
+reasoning context with tree search makes large vision-
+language models stronger. In Forty-second Interna-
+tional Conference on Machine Learning.
+Jiayi Yao, Hanchen Li, Yuhan Liu, Siddhant Ray, Yi-
+hua Cheng, Qizheng Zhang, Kuntai Du, Shan Lu,
+and Junchen Jiang. 2025a. Cacheblend: Fast large
+language model serving for RAG with cached knowl-
+edge fusion. In Proceedings of the Twentieth Eu-
+ropean Conference on Computer Systems, EuroSys
+2025, Rotterdam, The Netherlands, 30 March 2025 -
+3 April 2025, pages 94–109. ACM.
+Jinwei Yao, Kaiqi Chen, Kexun Zhang, Jiaxuan You,
+Binhang Yuan, Zeke Wang, and Tao Lin. 2025b.
+DeFT: Decoding with flash tree-attention for efficient
+tree-structured LLM inference. In The Thirteenth In-
+ternational Conference on Learning Representations.
+Jinjun Yi, Zhixin Zhao, Yitao Hu, Ke Yan, Weiwei Sun,
+Hao Wang, Laiping Zhao, Yuhao Zhang, Wenxin Li,
+7075

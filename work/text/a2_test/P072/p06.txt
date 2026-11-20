@@ -1,0 +1,110 @@
+KDD ’24, August 25–29, 2024, Barcelona, Spain Yunqi Xu, Tianchi Cai, Jiyan Jiang, and Xierui Song
+The logo design contest was backed by China 
+Post. Consequently, China Post is responsible 
+for the logo's design. 
+Vitamin C is a nutrient needed by the human 
+body, and oranges are rich in Vitamin C.
+Answer
+Vitamin C is a nutrient 
+needed by the human body.
+Oranges are rich in Vitamin C.
+Decomposition
+without any 
+semantic or 
+logical connection
+1
+2
+Baking a perfect cake entails not just precise 
+measurements but also careful Dming.
+Answer
+Baking a perfect cake entails 
+not just precise measurements 
+but also careful Dming.
+Decomposition
+segmentswith
+logical connection1
+Water keeps us alive.Cucumbers are full of it, 
+with 95% water content.
+Answer
+Water keeps us alive.
+Cucumbers are full of water, with 95% 
+water content.
+Decomposition
+pronoun 
+subsDtuDon
+1
+2
+Answer
+The logo design contest was backed by 
+China Post. Consequently, China Post is 
+responsible for the logo's design. 
+Decomposition sentences
+with logical 
+connection1
+Figure 4: A few examples for our proposed logic-preserving answer decomposition.
+design an advanced FCE method that is capable of handling logical
+connections in long answers.
+In this section, we propose a novel pipeline called Logic-Enhanced
+FActual Consistency Evaluation for RAG (L-Face4RAG), which explic-
+itly takes logical connections into consideration when evaluating
+the factual consistency. L-Face4RAG has two core modules, i.e.,
+logic-preserving answer decomposition and fact-logic FCE, which
+will be described as follows.
+4.1 Logic-Preserving Answer Decomposition
+Most existing studies directly decompose answers into segments,
+each containing only a single piece of information [23, 31]. In con-
+trast, we propose to decompose the answers based on semantic
+linkages2 and logical connections, which preserves the logical rela-
+tionships and facilitates logical consistency evaluation. The core
+design in this module is an elaborated prompt based on the follow-
+ing three principles for answer decomposition.
+• We prompt GPT-4 to execute the decomposition only when
+the two or multiple sentences do not exhibit strong semantic
+or logical connection.
+• To ensure that each segment can be understood by GPT-4
+independently without leveraging other segments, any pro-
+noun in a segment that refers to other contextual information
+should be substituted with appropriate reference.
+• During the decomposition process, GPT-4 is required to
+maintain the sentence structure of the original answer to the
+best extent. This principle alleviates the risk of introducing
+additional hallucination to the original answer.
+In order to help GPT-4 better understand our principles for an-
+swer decomposition and deal with texts with various formats, we
+construct three kinds of instances to serve as the few-shot examples.
+The specific type of instances are as follows:
+2Semantic linkage refers to the connection or association between different pieces of
+information based on their meanings or semantic content [20].
+• Logical Connection refers to the instances having logical
+connections between the sentences and thus, GPT-4 needs
+to learn the solution of the logical connections during the
+decomposition process.
+• Pronoun Substitution involves replacing pronoun with their
+referent entities during the answer decomposition to make
+each answer segment understandable on its own, without
+reliance on other segments.
+• Unique Format refers to the instances with unique format
+and may be difficult for GPT-4 to decompose properly.
+Examples of the answer decomposition are provided in Figure 4
+and the detailed prompt is provided on our benchmark webpage.1
+4.2 Fact-Logic FCE
+Previous methods directly invoke an LLM to evaluate the decom-
+posed segments and overlook the logical fallacy. To evaluate the
+logical fallacy, we develop a two-stage procedure for factual con-
+sistency evaluation, which consists of a conventional stage of fact
+consistency evaluation and an extra stage that evaluates from both
+perspectives of fact and logic; we introduce the COT mechanism
+[43] into both stages to improve LLM’s ability of evaluation. The
+prompts for each stage are provided at our benchmark webpage.1
+Fact Consistency Evaluation In this stage, GPT-4 is instructed
+to assess the consistency of each piece of information in the segment
+against the reference, which mainly concerns with the hallucina-
+tion error and the knowledge error. Unlike previous methods that
+directly instruct the model to assess the consistency with the ref-
+erence [9, 13], we use the COT technique to guide the model to
+evaluate the segment step-by-step, with the following steps:
+(1) Informational Points Extraction: GPT-4 extracts all informa-
+tional points from the segment. This step ensures that each
+component of the segment will be evaluated.
+(2) Context Identification: For each informational point, GPT-4
+locates the corresponding content within the reference.

@@ -1,0 +1,83 @@
+When the FOM value falls below 190/Ω,asseeninthe
+set1-23C-RH30 and -RH40 samples, the decline in FF compared with
+the reference sample (FFref = 72.61%, described in Table S1, Support-
+ing Information) is more pronounced than in other samples. This trend
+is also evident in the set1-28C series, which has FOM values beneath
+190/Ω, exhibiting a substantial discrepancy in FF between the samples
+and the reference (as shown in Figure S2, Supporting Information).
+These observations suggest that the FOM’simpactonFFismoresig-
+niﬁcant than that of Rsh. Given that the light penetrating the solar cell
+through the Ag network contributes to electricity generation, both
+transmittance and Rsh are instrumental in actual power generation,
+thereby inﬂuencing the FF. Anand et al.[2] proposed a novel FOM to
+better estimate photovoltaic (PV) performance. Subsequently, Muzzillo
+updated the novel FOM formula, considering the inﬂuence of TCE on
+the current density and voltage at its maximum power point. Particu-
+larly, the updated FOM for PV application, as described in equation
+(12) of the literature,[26] correlates with the efﬁciency trend of CIGS
+solar cells. Furthermore, considering the previously discussed relation-
+ships between FOM and the CA (as in Section 2.1), it is also inferred
+that the deterioration of FF becomes more pronounced when the CA is
+<1.3%.
+In Figure 3, the relative properties of the CIGS solar cells are
+depicted in relation to the reference cell, with a focus on the CAs of the
+Ag networks. To encompass a broader range
+of CA values, set2 and set3 samples were fabri-
+cated by maintaining constant temperature
+and humidity while varying the spin-coating
+speed between 2000 and 8000 rpm. It is note-
+worthy that controlling the humidity and tem-
+perature conditions during the drying process
+(as in set1) proves more effective in achieving
+a diverse range of CAs for the Ag network
+compared with adjusting the spin-coating
+speed in set2 (indicated in pink) and set3
+(indicated in blue). Figure 3 vividly illustrates
+the general trends of decreasing ΔJsc (Jsc/Jsc,
+ref—the ratio of short-circuit current to that of
+the reference cell) and increasing ΔFF
+(FF/FFref—the ratio of ﬁll factor to that of the
+reference cell) as the CA enlarges. Notably,
+ΔFF shows a marked increase within the
+0–1.3% CA range. As the CA expands, the rate
+of increase in ΔFF progressively lessens. In
+contrast, ΔJsc attains values exceeding 103%
+within the 0–1.3% CA range but displays ﬂuc-
+tuations within the 1.3–5% CA range. Beyond
+a 5% CA, the decreasing rate of ΔJsc becomes
+more pronounced.
+As a result, the efﬁciency of CIGS solar cells can approximate that of
+the reference cell within a CA range of 1.3–5%. The highest values of
+ΔEff (Eff/Effref—the ratio of efﬁciency to that of the reference cell) for
+the set1, set2, and set3 series are observed at 1.7 /C6 0.7% CA for a
+0.95, 1.8 /C6 0.6% CA for a 0.97, and 3.8 /C6 0.6% CA for a 0.92, respec-
+tively. Additionally, the second-highest ΔEff value for the set1 series is
+0.94 at a 4.4 /C6 0.6% CA, as indicated in Table S1, Supporting Informa-
+tion. Intriguingly, the highest efﬁciency values were noted when the
+CA were around 2% (zone I) or 4% (zone III), except for /C243% (zone
+II), as demonstrated in Figure 3. The underlying cause of this phenom-
+enon, however, remains unclear and warrants further investigation.
+In some instances, notable differences in ΔEff values were observed
+among samples with similar CAs. For example, the set2 and set3 sam-
+ples, fabricated at 6000 rpm (set2-6k) and 4000 rpm (set3-4k) respec-
+tively, exhibit comparable CAs of 3.0 /C6 0.7% and 2.9 /C6 0.5%, as
+detailed in Table 1. However, there is a disparity in their ΔEff values,
+with set2-6k showing 0.95 and set3-4k showing 0.87, attributable to
+differences in ΔFF. This discrepancy is linked to variations in the den-
+sity of the Ag networks. As the network density escalates from
+13.9 /C6 1.7/mm for set3-4k to 21.2 /C6 2.6/mm for set2-6k, ΔFF
+improves from 85% to 98%, respectively. A similar trend was noted
+between the set2-8k and set3-2k samples, indicating that within a CA
+range of 1.3–5%, an increase in network density can enhance FF.
+Figure 3. Relative characteristics of solar cells with a ﬁxed area of 0.2025 cm2, dependent on the
+covered areas.
+Table 1. Parameters describing the Ag network structure and the relative performance of solar cells with an area of 0.2025 cm2, based on various covered
+areas.
+Covered area Sample name Width [μm] Density [per mm] Covered area [%] ΔVoc (Voc/Voc,ref) ΔJsc (Jsc/Jsc,ref) ΔFF (FF/FFref) ΔEff (Eff/Effref) ΔRs (Rs/Rs,ef)
+/C243% (Zone II) set3-4k 1.9 /C6 0.45 13.9 /C6 1.7 2.9 /C6 0.5 0.96 1.06 0.85 0.87 3.87
+set2-6k 1.4 /C6 0.90 21.2 /C6 2.6 3.0 /C6 0.7 1.02 0.95 0.98 0.95 2.29
+/C244% (Zone III) set2-8k 1.7 /C6 1.2 26.4 /C6 2.05 4.3 /C6 0.7 1.00 0.95 0.98 0.94 2.35
+set3-2k 3.3 /C6 2.5 12.8 /C6 1.99 4.6 /C6 0.9 0.98 1.03 0.90 0.91 3.86
+Energy Environ. Mater. 2024, 7, e12765 4of8 © 2024 The Authors. Energy & Environmental Materials published by
+John Wiley & Sons Australia, Ltd on behalf of Zhengzhou University.
+ 25750356, 2024, 6, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/eem2.12765, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

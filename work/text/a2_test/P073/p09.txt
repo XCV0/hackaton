@@ -1,0 +1,91 @@
+Macro-F1 by 2.1% on NASDAQ and 2.4% on
+MAEC. This suggests that role separation is cru-
+cial; forcing a single context window to handle
+historical baselining, peer comparison, and attribu-
+tion simultaneously dilutes the reasoning quality.
+Furthermore, the standalone performance of indi-
+vidual agents (e.g., Only HistoricPerformance) lags
+significantly behind the collective system, confirm-
+ing that no single view is sufficient for market pre-
+diction. Finally, the Weighted Synthesis strategy
+yields inferior results compared to our hierarchical
+textual synthesis, indicating that the synthesizer
+agent adds value by resolving conflicts logically
+rather than merely averaging numerical scores.
+Table 4: Expanded ablation analysis comparing the Full
+CARAG model against single-agent monolithic variants,
+individual agent performance, and heuristic synthesis
+strategies. Values denote Macro-F1 scores with relative
+percentage decline in parentheses.
+Variant NASDAQ NYSE MAEC
+Full Model (Ours) 55.7 57.4 58.7
+Architectural Variants
+CTKG-only 54.5 ((↓ 2.1%)) 56.2 ((↓ 2.1%)) 57.3 ((↓ 2.4%))
+Weighted Synthesis 55.3 ((↓ 0.7%)) 57.1 ((↓ 0.5%)) 57.6 ((↓ 1.9%))
+Standalone Agent
+Only HistoricPerf. 54.4 ((↓ 2.3%)) 55.1 ((↓ 4.0%)) 57.2 ((↓ 2.6%))
+Only Competitor 53.2 ((↓ 4.5%)) 54.2 ((↓ 5.6%)) 56.7 ((↓ 3.4%))
+Only HistoricEarn. 54.1 ((↓ 2.9%)) 54.9 ((↓ 4.4%)) 57.1 ((↓ 2.7%))
+Backtest Results We run a backtest assuming
+execution of signal computed using data on day
+T at T + 1. We find our strategy (blue) to yield
+an annualized return of 35.83% and Sharpe of
+1.64, beating transcript-only gpt-3.5-turbo (annu-
+alized return of 13.64% and Sharpe of 0.64) and
+LM dictionary (annualized return of -16.69% and
+Sharpe of -0.47). Over the same period, the S&P
+500 posted an annualized return of 1.80% with a
+Sharpe ratio of 0.19, while Nasdaq recorded an
+annualized return of -8.94% and a Sharpe ratio of
+-0.24, beating market benchmarks (S&P 500 and
+Nasdaq). The optimization algorithm used by the
+backtest can be found in the Appendix .
+5 Conclusion
+In summary, we present the CARAG architec-
+ture that couples specialist LLMs with a Causal–
+Temporal Knowledge Graph to forecast post-
+earnings price shocks. Experiments on NAS-
+DAQ, NYSE, and MAEC corpora deliver consis-
+tent macro-F1 and MCC improvements across mul-
+tiple prediction horizons without task-specific fine-
+Figure 4: 2-year backtest on our dataset of 1772 NAS-
+DAQ transcripts and 1386 NYSE transcripts
+tuning, achieving a consistent and superior Sharpe
+in 2-year backtest. Future work will scale the agent
+swarm with larger open-source pretrained language
+models and examine CTKG-aware pre-training to
+further deepen temporal-causal reasoning. One
+may also test appending a lightweight numerical
+regressor to the Synthesizer’s output, producing en-
+semble scores that combine symbolic and statistical
+signals.
+6 Limitations
+While our proposed framework demonstrates
+strong empirical performance, several limitations
+remain.
+First, our system was implemented under budget
+constraints, relying exclusively on GPT-4o-mini as
+the backbone model. Although this choice high-
+lights the efficiency and cost-effectiveness of our
+approach, it precludes direct comparison against
+open-source large language models, which may fa-
+cilitate broader reproducibility and transparency.
+Future work should evaluate the framework with
+open-source backbones to better isolate the benefits
+of the agentic architecture itself.
+Second, our fact extraction pipeline assumes
+management statements can be grounded against
+structured fundamentals. In practice, validation
+of extracted facts against ground truth at the time
+of the call would require access to proprietary
+vendor data (e.g., Compustat, IBES) that provide
+benchmarked metrics. These datasets are not im-
+mediately available at call release time, limiting
+their utility for real-time prediction. While our
+Causal–Temporal Knowledge Graph partially ad-
+dresses this gap, a more rigorous fact-checking
+pipeline remains an open challenge.
+References
+Do˘gu Araci. 2019. Finbert: Financial sentiment anal-
+ysis with pre-trained language models. In arXiv
+3063

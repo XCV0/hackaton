@@ -1,0 +1,76 @@
+Figure 2: Performance comparison of models using RAG approaches described in §2 across benchmarks and
+settings detailed in §3, separated by average (Avg), high-resource (HR) and low-resource (LR) languages averages.
+The values above the bars are the differences with the baselines (no RAG scores).
+the necessary information to answer a language-
+specific query. Conversely, retrieval from multilin-
+gual heterogeneous sources has a broader range of
+results. However, multilingual knowledge could
+lead models to wrong generations (see the ex-
+ample in Appendix R). Therefore, we proposed
+CrossRAG to harness MultiRAG retrieval by op-
+erating with documents in the same language, i.e.
+English.
+In the following sections, we analyse the ben-
+efits a multilingual retrieval brings when adopted
+in a RAG strategy (§4.1), then we examine the ef-
+fects across different languages §4.2 and propose
+two strategies to improve the practical usage of the
+retrieved knowledge in multilingual settings §4.3.
+Finally, we conduct additional studies by investi-
+gating the role of the retriever and its impact on
+the final performances (§5.2), the generated lan-
+guages (§5.1) and the robustness on challenging
+perturbations (§5.3).
+4.1 The impact of RAG beyond English
+Figure 2 shows the results obtained from different
+LLMs when prompted with RAG-based strategies
+in monolingual and multilingual settings as intro-
+duced in §2. An overall improvement over baseline
+models without RAG can be observed using mono-
+lingual RAG, i.e., monoRAG (+8.9% improve-
+ment for GPT-4o, +7.9% improvement for Llama-
+3-8b and +8.2% improvement for Command-R).
+Moreover, the results show that the impact of ex-
+tending retrieval to multilingual settings and us-
+ing retrieved passages in RAG-based approaches
+(MultiRAG strategy) brings clear benefits. In-
+deed, performance consistently increases com-
+pared to the monoRAG (+5.4% for GPT-4o, +7.1%
+for Llama-3-8b and +5.7% for Command-R). This
+indicates that multilingual retrieval provides access
+to broader information that could be unavailable in
+monolingual resources; for instance, in the exam-
+ple reported in Appendix Q, the information about
+"England Queens" are not available in Chinese
+Wikipedia. However, since the scope of retrieval is
+wider and the retrieval languages are multiple, the
+languages of the retrieved documents may impact
+the performance differently, as discussed in §4.2.
+4.2 Knowledge Diversity
+Multilingual RAG (MultiRAG) shows aver-
+age improvements compared to the baselines,
+monoRAG and tRAG, where the retrieved docu-
+ments are in a single language as discussed in §4).
+In MultiRAG, the knowledge retrieved are in dif-
+ferent languages (as reported in Figure 3, these are
+average documents retrieved per language). The
+differences in percentages are due to the composi-
+tion of the Wikimedia_dumps (reported in Table 7)
+undersized for some languages.
+Figure 3: Average percentage languages of retrieved
+documents (details in Appendix 13).
+Consequently, the effect of MultiRAG is dif-
+ferent even between languages. Figure 4 shows
+that the effect of MultiRAG on low- (LR) lan-
+guages is more marked than high-resource (HR)
+languages5. Indeed, comparing MultiRAG with
+monoRAG in the case of HR, we observe aver-
+age increases of +3.6% for GPT-4o, +4.1% for
+Llama-3-8b and +4.4% for Command-R. In con-
+trast, for LR, there is an average increase of 6.6%
+for GPT-4o, 8.4% for Llama-3-8b and 7.7% for
+Command-R).
+To gain a comprehensive view of the role of
+multilingual retrieval conducted in the MultiRAG
+5high- and low-resources explained in Appendix B
+701

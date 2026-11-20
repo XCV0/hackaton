@@ -1,0 +1,101 @@
+leveraging public information as a zero-privacy
+prior to charge the budget exclusively for the true
+private increment. Specifically, our method min-
+imizes privacy costs across three orthogonal di-
+mensions: it narrows the retrieval scope via public
+topic-guided clustering, adaptively controls private
+access frequency without privacy cost through iso-
+tonic cross-layer trajectory fitting, and compresses
+the per-access budget via DP contrastive decod-
+ing. Experimental results demonstrate that our
+framework outperforms existing DP-RAG base-
+lines, achieving superior privacy-utility trade-offs.
+Limitations
+Our framework allocates a fixed per-query pri-
+vacy budget upfront. However, when the query
+is relatively simple, the adaptive triggering module
+(Sec. 3.3) may invoke private generation far fewer
+times than the budget permits. In such cases, the
+actual privacy cost incurred is lower than the allo-
+cated budget, meaning our reported privacy bounds
+are conservative overestimates of the true expen-
+diture. A promising future direction is to design
+query-adaptive budget allocation strategies that dy-
+namically adjust the budget based on query diffi-
+culty.
+In addition, our DP guarantee concerns the dis-
+tribution of released textual outputs and does not
+cover auxiliary side channels such as inference la-
+tency, which may correlate with the documents
+retrieved during generation. This timing informa-
+tion is orthogonal to the output-DP accounting used
+in our method, but it is an important deployment
+consideration for privacy-critical applications.
+Ethical Considerations
+Although differential privacy establishes a rigor-
+ous mathematical guarantee against the leakage of
+individual records, it does not imply absolute pri-
+vacy preservation in real-world deployments. The
+practical degree of protection is intrinsically tied
+to the chosen privacy budget, which governs the
+fundamental trade-off between data confidentiality
+and system utility. Therefore, practitioners must ex-
+ercise caution when configuring these parameters,
+maintaining a clear awareness that while stricter
+privacy budgets yield stronger protection, they in-
+evitably lead to a corresponding degradation in
+generation fidelity and overall model performance.
+Acknowledgements
+This work is supported by the following founda-
+tions: the National Natural Science Foundation
+of China (NSFC) under Grant No.62306330, the
+National Natural Science Foundation of China
+under Grant No. 62421002, and the Funda-
+mental and Interdisciplinary Disciplines Break-
+through Plan of the Ministry of Education of China
+(JYB2025XDXM202).
+References
+Martin Abadi, Andy Chu, Ian Goodfellow, H Bren-
+dan McMahan, Ilya Mironov, Kunal Talwar, and
+Li Zhang. 2016. Deep learning with differential pri-
+vacy. In Proceedings of the 2016 ACM SIGSAC con-
+ference on computer and communications security,
+pages 308–318.
+Kareem Amin, Alex Bie, Weiwei Kong, Alexey Ku-
+rakin, Natalia Ponomareva, Umar Syed, Andreas
+Terzis, and Sergei Vassilvitskii. 2024. Private pre-
+diction for large-scale synthetic text generation. In
+Findings of the Association for Computational Lin-
+guistics: EMNLP 2024, pages 7244–7262.
+Miriam Ayer, H Daniel Brunk, George M Ewing,
+William T Reid, and Edward Silverman. 1955. An
+empirical distribution function for sampling with in-
+complete information. The annals of mathematical
+statistics, 26(4):641–647.
+Nora Belrose, Igor Ostrovsky, Lev McKinney, Zach Fur-
+man, Logan Smith, Danny Halawi, Stella Biderman,
+and Jacob Steinhardt. 2023. Eliciting latent predic-
+tions from transformers with the tuned lens. Preprint,
+arXiv:2303.08112.
+Stella Biderman, Hailey Schoelkopf, Quentin Gregory
+Anthony, Herbie Bradley, Kyle O’Brien, Eric Hal-
+lahan, Mohammad Aflah Khan, Shivanshu Purohit,
+USVSN Sai Prashanth, Edward Raff, Aviya Skowron,
+Lintang Sutawika, and Oskar van der Wal. 2023.
+Pythia: A suite for analyzing large language mod-
+els across training and scaling. In Proceedings of the
+40th International Conference on Machine Learning,
+volume 202, pages 2397–2430. PMLR.
+Hugh D Brunk. 1955. Maximum likelihood estimates of
+monotone parameters. The Annals of Mathematical
+Statistics, 26(4):607–616.
+Zhiqi Bu, Yu-Xiang Wang, Sheng Zha, and George
+Karypis. 2024. Differentially private bias-term fine-
+tuning of foundation models. In Proceedings of the
+41st International Conference on Machine Learning,
+volume 235, pages 4730–4751.
+Mark Bun and Thomas Steinke. 2016. Concentrated
+differential privacy: Simplifications, extensions, and
+lower bounds. In Theory of Cryptography – 14th In-
+ternational Conference, TCC 2016-B, Beijing, China,
+45301

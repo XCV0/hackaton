@@ -1,0 +1,101 @@
+uate the ability of the model to ground responses
+in retrieved evidence, PopQA (Mallen et al., 2023)
+further probes the boundary between internal and
+retrieved knowledge by focusing on long-tail facts
+for which retrieval is often necessary, while Re-
+trievalQA (Zhang et al., 2024) evaluates adaptive
+RAG behavior under retrieved contexts of varying
+usefulness.
+Since knowledge conflict can also arise within
+the retrieved context itself (Xu et al., 2024),
+conflict-oriented benchmarks have been proposed
+to evaluate the models’ ability to arbitrate among
+conflicting evidence. However, existing bench-
+marks are constructed by altering public facts or
+referencing ambiguous entities (Lee et al., 2024;
+Wang et al., 2025b). In these settings, models may
+still be able to resolve the conflict using internal
+world knowledge (e.g., recognizing the true pub-
+lic fact or the intended entity) rather than by rea-
+soning over the retrieved text itself. In parallel,
+deep-research benchmarks evaluate broader sys-
+tems that gather and synthesize evidence across
+many sources, including open-domain web re-
+search and enterprise settings (Du et al., 2026; Java
+et al., 2026; Abaskohi et al., 2026). Our proposed
+DRQA dataset fills this gap by combining conflict-
+oriented factual QA with enterprise deep-research
+scenarios, where the answer is unlikely to be avail-
+able from internal memory and must instead be
+recovered by identifying which retrieved document
+supports the answer.
+2.2 Contrastive Decoding
+Contrastive decoding (CD) (Li et al., 2023) was
+originally proposed as a training-free strategy that
+selects tokens with high expert-model probabil-
+ity and low amateur-model probability, using their
+probability discrepancy to favor fluent and infor-
+mative continuations. Context-Aware Decoding
+(CAD) (Shi et al., 2024) adapts this idea to im-
+prove context faithfulness in RAG by contrasting
+the LLM with and without retrieved context, so
+that generation follows retrieved evidence rather
+than prior knowledge. Further work makes the con-
+trastive weight adaptive (Zhao et al., 2024; Kim
+et al., 2024). For example, ADACAD (Wang et al.,
+2025a) adjusts the contrastive weight at each de-
+coding step using the Jensen-Shannon divergence
+(JSD) between contextual and zero-shot distribu-
+tions, while COCOA (Khandelwal et al., 2025) in-
+troduces token-level confidence-aware adaptation
+to address conflict between contextual and internal
+knowledge. Most similar to our work is Dynamic
+Contrastive Decoding (DVD) proposed by Jin et al.
+(2024a), which targets multi-document QA by con-
+trasting document-conditioned predictions and dy-
+namically increasing the influence of documents
+estimated to be useful for the current generation
+step. However, DVD does not explicitly distinguish
+document-level support from token-level genera-
+tion confidence.
+2.3 Confidence Estimation
+Current work on confidence estimation has primar-
+ily focused on confidence in the model’s output dis-
+tribution (Geng et al., 2024). Entropy-based meth-
+ods estimate predictive uncertainty for autoregres-
+sive generation (Malinin and Gales, 2021; Jiang
+et al., 2023), and token-level uncertainty has been
+used for hallucination detection and fact check-
+ing (Fadeeva et al., 2024). Recent probability-
+only methods motivate lightweight top-k token
+statistics for uncertainty estimation (Nguyen et al.,
+2026), where our token-level confidence follows
+the Dirichlet uncertainty framework of Malinin
+and Gales (2018) by mapping the top-k logits of
+each stream to Dirichlet concentration parameters
+and computing the expected entropy. In parallel,
+document-level confidence addresses the comple-
+mentary problem of whether an evidence source is
+sufficient to answer the question. Prior work has
+studied the models’ ability to self-evaluate whether
+they know an answer (Kadavath et al., 2022), iden-
+tify convincing evidence under conflicting sources
+(Wan et al., 2024), and estimate the sufficiency of
+sources in retrieved evidence (Joren et al., 2025;
+Hwang et al., 2025). The closest work to our
+document-level confidence is context-sufficiency
+estimation (Joren et al., 2025), which asks whether
+the provided context contains enough information
+to answer a question. In this work, our proposed
+DCCD combines document-level and token-level
+confidence estimates inside the contrastive decod-
+ing process.
+3 DRQA: Deep Research Question
+Answering Benchmark
+We derive DRQA from DRBench (Abaskohi et al.,
+2026), a 100-task enterprise deep-research bench-
+mark spanning three industries—retail, healthcare,
+and electric vehicles—and ten domains. DRBench
+contains internal and external supporting facts em-
+bedded in generated enterprise documents verified
+3

@@ -1,0 +1,80 @@
+Table 9: RAGChecker metrics on the three broken baselines, n = 100. RAGChecker (Amazon Research, 2024)
+provides component-level diagnostic metrics: retriever (claim_recall, context_precision) and generator (faithfulness,
+hallucination, etc.). Bottom row reports paired bootstrap delta µA − µB ; ◦ marks CIs containing zero. Most
+metrics distinguish A from B at the metric level, but RAGChecker does not separate retrieval from rerank within
+the retriever component—obtaining stage attribution would require running RAGChecker at each pipeline stage’s
+output, multiplying its LLM-call cost.
+Baseline precision recall F1 claim_recall context_precision ctx_utilization noise_sens. (rel) noise_sens. (irrel) hallucination self_knowledge faithfulness
+A 0.24 [0.18, 0.30] 0.27 [0.20, 0.35] 0.19 [0.14, 0.25] 0.30 [0.22, 0.38] 0.15 [0.11, 0.20] 0.34 [0.26, 0.44] 0.16 [0.11, 0.22] 0.33 [0.25, 0.41] 0.26 [0.20, 0.33] 0.06 [0.03, 0.09] 0.67 [0.59, 0.75]
+B 0.16 [0.11, 0.21] 0.09 [0.04, 0.14] 0.07 [0.03, 0.11] 0.08 [0.04, 0.12] 0.04 [0.02, 0.06] 0.11 [0.05, 0.17] 0.02 [0.01, 0.04] 0.41 [0.33, 0.49] 0.42 [0.34, 0.49] 0.10 [0.06, 0.14] 0.48 [0.41, 0.56]
+C 0.41 [0.36, 0.46] 0.70 [0.63, 0.77] 0.46 [0.41, 0.52] 0.75 [0.69, 0.80] 0.46 [0.41, 0.50] 0.82 [0.75, 0.88] 0.36 [0.30, 0.42] 0.16 [0.11, 0.22] 0.07 [0.04, 0.09] 0.03 [0.01, 0.04] 0.91 [0.88, 0.93]
+∆ A−B +0.08 [+0.01, +0.16] +0.18 [+0.09, +0.29] +0.12 [+0.05, +0.20] +0.22 [+0.12, +0.31] +0.12 [+0.07, +0.17] +0.23 [+0.12, +0.35] +0.14 [+0.08, +0.20] −0.08 [−0.17, +0.01] ◦ −0.15 [−0.25, −0.06] −0.04 [−0.08, −0.01] +0.19 [+0.09, +0.28]
+Table 10: Multi-metric ExpertQA validation. Logistic-regression ensembles over COUNTERMEM features
+(1−DAP, CNS, NR) and RAGAS faithfulness on the ExpertQA human-support endpoint (n=200 under GPT-4o-
+mini, n=187 under Claude-Sonnet). Bootstrap delta of RAGAS + COUNTERMEM full vs RAGAS combined: under
+GPT-4o-mini, ROC-AUC +0.150 [+0.070, +0.233] (p<0.001), PR-AUC +0.115 [+0.047, +0.184] (p<0.001);
+under Claude-Sonnet, ROC-AUC +0.066 [+0.030, +0.104] (p<0.001), PR-AUC +0.032 [+0.004, +0.062]
+(p=0.012). The COUNTERMEM profile complements RAGAS under both judges, with the larger lift under
+the weaker judge.
+GPT-4o-mini judge Claude-Sonnet judge
+Features ROC-AUC PR-AUC ROC-AUC PR-AUC
+RAGAS combined 0.464 0.624 0.610 0.763
+1 − DAP 0.654 0.769 0.663 0.781
+COUNTERMEM full 0.650 0.779 0.651 0.787
+RAGAS + 1 − DAP 0.615 0.743 0.676 0.795
+RAGAS + COUNTERMEM full 0.615 0.743 0.676 0.797
+Table 11: Naturalistic conflict on DelucionQA (low-
+adherence subset, n=100), classified by a Claude-
+Sonnet conflict judge applied to the same model outputs
+in two conditions: full retrieved context (base) and one-
+side context removal (half-removed). Silent-pick is rare
+in the baseline but becomes the dominant non-abstain
+failure mode under the intervention.
+Condition Silent-pick↓ Conflict-ack.↑ Abstain Confident-match
+Base (full context) 0.04 0.00 0.15 0.76
+Half-removed (intervention) 0.24 0.00 0.24 0.51
+J Sanity Checks: Construct Validity and
+Robustness
+These checks address the sanity-check pointer in
+Section 5 and the validity audit referenced in Sec-
+tion 5.3: we (i) verify that each retrieval-quality-
+targeted metric correctly tracks a known retrieval-
+quality gradient on a synthetic gold/distractor fix-
+ture, and (ii) vary the answer-similarity function,
+the cluster-deletion threshold, the prompt style, and
+the generation-sampling regime, and report the per-
+class intervention-validity numbers.
+Construct validity on mock gold/distractor sys-
+tems. For each query, we build a system g that
+receives g gold passages and K−g distractors, and
+ask whether each retrieval-quality-targeted metric
+rises monotonically in g. 1−DAP (mean Kendall
+Table 12: End-to-end corpus deletion on RAGBench.
+For each query, gold-supporting chunks are removed
+from the indexed corpus; BM25 and dense (FAISS)
+indexes are rebuilt; retrieval is rerun (k=4, BM25).
+Abstention rises to near-saturation on HotpotQA and
+PubMedQA, while TechQA remains a residual-corpus
+regime with plausible non-gold support. Gold removed
+is the average number of corpus chunks removed per
+query. Abstain (base/del) is the fraction of queries where
+the explicit-abstention regex fires. 95% bootstrap CI in
+brackets.
+Dataset n Gold removed Answer change↑ Abstain (base) Abstain (del)↑
+HOTPOTQA 100 4.08 0.241 [0.224, 0.258] 0.39 [0.29, 0.48] 0.99 [0.97, 1.00]
+TECHQA 100 74.39 0.156 [0.137, 0.176] 0.51 [0.41, 0.61] 0.57 [0.48, 0.67]
+PUBMEDQA 100 7.89 0.170 [0.157, 0.184] 0.39 [0.30, 0.49] 1.00 [1.00, 1.00]
+τ = + 0.86), RAGChecker claim-recall, and RA-
+GAS context-precision rise with g; RAGAS faith-
+fulness saturates near 1.0 because a configuration
+can write a faithful answer to an all-distractor con-
+text (Figure 2).
+Intervention validity by class. Table 15 reports
+the stratified audit on the larger sweep (Claude-
+Sonnet, n=50 per class). For the coherent-
+intervention probe of Section 5.3, a separate per-
+row audit of all 593 contradictions finds 93.6%
+well-formed; the headline rates in Table 4 are com-
+puted on the judged-valid subset. The two audits
+cover different intervention sets and different sam-
+22346

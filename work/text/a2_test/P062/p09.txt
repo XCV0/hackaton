@@ -1,0 +1,100 @@
+five culturally grounded QA benchmarks spanning
+high- and low-resource languages, CORAL con-
+sistently outperformed strong multilingual RAG
+baselines, with the largest improvements appearing
+in low-resource settings where indiscriminate cor-
+pus expansion tends to introduce noise or amplify
+generalized evidence.
+Our findings suggest that scaling multilin-
+gual coverage alone is insufficient for culturally
+grounded generation, and that robust multilingual
+RAG systems should treat corpus scope and query
+formulation as first-class, revisable decisions rather
+than fixed configuration choices. More broadly,
+the retrieval condition selection viewpoint pro-
+vides a principled way to integrate cultural and
+regional constraints into retrieval-augmented gener-
+ation, complementary to advances in multilingual
+representations and agentic reasoning.
+Limitations
+While CORAL consistently improves performance
+and supports culturally grounded retrieval control,
+it has several limitations. First, some benchmark
+questions may require knowledge that is sparse
+or entirely absent from Wikipedia-based corpora.
+In such cases, retrieval failures are unavoidable
+regardless of the control strategy. More broadly,
+culturally relevant information is often procedural,
+experiential, or locally disseminated (e.g., infor-
+mal norms or recent policy details), and may be
+underrepresented in encyclopedic resources.
+Moreover, our corpora are restricted to language-
+specific Wikipedia subsets. This choice improves
+reproducibility, but it limits domain diversity and
+may bias retrieval toward perspectives that are well
+covered in the selected languages. Extending the
+corpus collection and retrieval framework to het-
+erogeneous web-scale sources (e.g., official portals,
+local news, and community resources) would better
+reflect real-world cultural information needs.
+Our evaluation focuses on multiple-choice ques-
+tion answering to enable controlled comparisons in
+the study of dynamic corpus selection and query
+rewriting. This setting may not capture additional
+failure modes that arise in open-ended or interac-
+tive scenarios, such as partially correct responses,
+culturally inappropriate framing, or user-dependent
+ambiguity. Evaluating CORAL in open-ended gen-
+eration and multi-turn information-seeking settings
+is an important direction for future work.
+Ethical Considerations
+Our approach operates during the test phase by
+using retrieved documents and does not require
+collecting user-level data or fine-tuning models.
+However, when deployed in real-world retrieval
+contexts, systems may inadvertently access or dis-
+close personal or sensitive information contained in
+documents. It is imperative that deployments com-
+ply with applicable privacy regulations, implement
+access controls, refrain from retrieving private data
+without proper authorization, and accommodate
+data deletion requests when appropriate.
+We acknowledge that agentic retrieval incurs ad-
+ditional inference costs due to the requirements of
+iterative planning and critique. While we restrict
+the number of iterations and permit early termina-
+tion when sufficient evidence is available, practi-
+tioners should carefully weigh the efficiency trade-
+offs and carbon footprint associated with these pro-
+cesses. Future research should investigate the po-
+tential for lightweight critics, caching mechanisms,
+and cost-aware stopping policies to mitigate com-
+putational overhead.
+References
+Shakiba Amirshahi, Amin Bigdeli, Charles L. A. Clarke,
+and Amira Ghenai. 2025. Evaluating the robust-
+ness of retrieval-augmented generation to adver-
+sarial evidence in the health domain. Preprint,
+arXiv:2509.03787.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations.
+Ines Besrour, Jingbo He, Tobias Schreieder, and
+Michael Färber. 2025. Ragenta: Multi-agent
+retrieval-augmented generation for attributed ques-
+tion answering. In Proceedings of the 48th Inter-
+national ACM SIGIR Conference on Research and
+Development in Information Retrieval (SIGIR ’25),
+volume abs/2506.16988.
+Su Lin Blodgett, Solon Barocas, Hal Daumé III, and
+Hanna Wallach. 2020. Language (technology) is
+power: A critical survey of “bias” in NLP. In Pro-
+ceedings of the 58th Annual Meeting of the Asso-
+ciation for Computational Linguistics, pages 5454–
+5476, Online. Association for Computational Lin-
+guistics.
+Chi-Min Chan, Chunpu Xu, Ruibin Yuan, Hongyin Luo,
+Wei Xue, Yike Guo, and Jie Fu. 2024. RQ-RAG:
+Learning to refine queries for retrieval augmented

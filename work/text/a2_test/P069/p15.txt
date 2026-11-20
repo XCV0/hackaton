@@ -1,0 +1,97 @@
+Ensembling with θ HQA
++θs db +θs ft +θs Acc
+θ only 70.94
+Model Ensembling
+✓ ✓ ✓ 69.21
+✓ ✓ 73.65
+✓ 79.31
+✓ 74.14
+GRAD 81.03
+Table 11: Model ensemble (1) fails to capture the neg-
+ative effect of θs (underlined), and (2) positive compo-
+nents perform better when used separately (shaded).
+Benchmark DA → DB → MS
+HQA 84.3 (2.9) 77.3 (2.5) 67.0 (3.6)
+MARCO 81.7 (2.1) 23.7 (4.7) 28.3 (4.5)
+NQ 25.7 (5.0) 66.7 (6.1) 20.3 (3.8)
+Table 12: Stability of adaptation with respect to random
+sample choice: The numbers show the average propor-
+tion of examples (%) with high activation, along with
+standard deviation across three runs.
+sage and 19 distractors) averaged across different
+gold positions (0/4/9/14/19), and also on PQ by
+randomly shuffling the input passages (averaging
+3 runs). As shown in Table 10, CCD continues to
+mitigate position sensitivity while also improving
+mean accuracy under these even more distractor-
+heavy settings.
+D More Analyses on Adaptive
+Optimization
+GRAD vs. ensembling The effective adapta-
+tion achieved by GRAD can also be compared
+with model ensembling, in which the outputs from
+multiple models are simply averaged. Table 11
+shows that ensembling finetuned models does not
+yield meaningful synergy (shaded rows), and in-
+corporating logits from the base small model (θs)
+degrades performance (underlined). In contrast,
+GRAD leverages θs as a contrasting reference, pro-
+ducing positive gains and consistently outperform-
+ing model ensembling.
+Stability of adaptation Here, we demonstrate
+that the KL-based adaptation mechanism of GRAD
+is stable, as the same combination of objectives
+is consistently returned across different random
+choices of examples. Table 12 reports the aver-
+age and standard deviation of the proportion of
+examples with high activation, using 100 randomly
+selected examples across three runs.
+Ordering Activated Accuracy
+DA → DB → MS (Ours) {DA} 50.49
+DA → MS → DB {DA} 50.49
+DB → DA → MS {DB} 49.75
+DB → MS → DA {DB} 49.75
+MS → DA → DB {MS} 48.77
+MS → DB → DA {MS} 48.77
+Table 13: Accuracy under different objective ordering
+strategies and the corresponding activation on MARCO.
+Activation 1st hop 2nd hop All
+None 86% 85% 73%
+MS + DA + DB 88% 88% 77%
+Table 14: Accuracy of GRAD (all objectives activated)
+with iterative generation on HQA.
+Effect of objective ordering As shown in Algo-
+rithm 1 and 2, GRAD considers the objectives in
+the order of DA, DB, followed by MS; here, we val-
+idate this design choice through an ablation study.
+Table 13 shows the activations resulting from dif-
+ferent orders of objectives and their corresponding
+task performance. The results are from MARCO,
+only changing the order in which the objectives are
+considered. This ablation supports our choice of
+ordering.
+E Results on Iterative RAG
+While our focus on single-turn setting was to align
+and compare with prior work on contrastive objec-
+tives and position bias mitigation, we also present
+results in an iterative RAG task, based on HQA
+with decomposition and iterations, with the same
+8B and 1B LLaMA models used in the main ex-
+periments. We followed the setting of works on
+iterative RAG mostly evaluated on multi-hop QA
+benchmarks; we employed GPT-4o to decompose
+the 2-hop questions in HQA, and identified those
+with sequential dependencies, i.e., queries that sub-
+question 2 can be answered only after correctly an-
+swering subquestion 1. Questions without sequen-
+tial dependency between the subquestions were not
+considered. The subquestions were provided to the
+LLaMA model for generation.
+Single-turn accuracy on the “1st hop” column
+in Table 14 is obtained over 100 examples, and
+accuracy on the “2nd hop” column is obtained over
+questions where the first subquestion was success-
+fully answered. The combined multi-turn accuracy
+for the original 2-hop query is presented in the “All”
+column. This result supports that improvement in
+45288

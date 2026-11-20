@@ -1,0 +1,120 @@
+Zhuang et al., Sci. Adv. 11, eado7318 (2025)     7 May 2025
+Science AdvAnceS |  ReSeARch ARticle
+2 of 10
+hand, from a chemical perspective, anchoring lead and inhibiting 
+the degradation of perovskite are also effective methods for prevent-
+ing lead leakage (30). Perovskite films produced by the solution 
+method inevitably result in the formation of uncoordinated Pb2+ at 
+their GBs and surfaces. These deep- level defects contribute to an 
+increase in open- circuit voltage (VOC) losses, consequently reducing 
+the performance and stability of the devices (31,  32). Therefore, 
+chemically anchoring uncoordinated Pb 2+ will reduce lead leakage 
+and improve device performance (33,  34). Now, small organic 
+molecules are widely used to passivate uncoordinated Pb 2+. How-
+ever, the drawbacks of small organic molecules, such as high volatil-
+ity, high diffusion coefficient, and uneven distribution in perovskites, 
+often make it challenging to maintain high stability of PSCs under 
+harsh operating conditions, further increasing the risk of lead leak-
+age (35–39). Hence, there is an urgent need to optimize and stabilize 
+GBs to obtain perovskite films with high quality, structural stability, 
+and operational stability, with the aim of minimizing lead leakage 
+in PSCs.
+In this work, we developed a polymerization method to achieve 
+highly stable and environmentally friendly high- performance 
+PSCs. Through the addition of the small organic molecule N ,N′- 
+bis(acryloyl)cystamine (BAC) to the perovskite precursor solution, 
+the terminal alkenes of BAC enable the construction of polymer BAC 
+(PBAC) at the perovskite GBs during the annealing process of the 
+perovskite films. PBAC not only overcomes the limitations of organ-
+ic small molecules but also interacts with perovskites through its nu-
+merous functional groups and multiple reactive sites. This interaction 
+effectively passivates deep- level defects, suppressing nonradiative 
+carrier recombination. Furthermore, the PBAC- modified film dem-
+onstrated enhanced water resistance, effectively suppressing the mi-
+gration of I − and contributing to enhanced operational stability 
+under extreme conditions. The PSCs with PBAC achieved an impres-
+sive PCE of 25.53%  (0.1 cm 2) (certified at 25.24% ) and 24.03%  at a 
+larger area (1.0 cm 2). Simultaneously, the unencapsulated devices 
+maintained a value of more than 96% after continuous operation for 
+1500 hours under simulated AM 1.5 illumination. Furthermore, un-
+der damp heat conditions [85°C and 85%  relative humidity (RH)], 
+the encapsulated device retained more than 80%  of its initial PCE 
+during 2000 continuous hours of operation. Last, owing to the en-
+capsulation of the polymer around the GBs and its anchoring ability 
+to lead, the PBAC- modified PSCs exhibited a reduction in lead leak-
+age. This research holds the promise of providing strategies for ex-
+ploring high- performance and environmentally friendly PSCs.
+RESULTS
+Characterization of the PBAC polymer
+To achieve the aforementioned functionalities, we introduced a ther -
+mally initiated polymerizable molecule containing amide groups, C═C 
+bonds and C─S bonds, named BAC. As illustrated in Fig. 1A, at room 
+temperature, BAC appears as a colorless liquid. Once BAC is heated at 
+100°C, it undergoes to form a gel- like solid. We anticipate that during 
+the annealing process of perovskite films, BAC will form such a gel- like 
+solid structure, providing additional chemical active sites, thereby pas-
+sivating perovskite bulk defects and enhancing the performance and 
+operational stability of the corresponding devices (40).
+To investigate whether the gel- like solid is the result of BAC un-
+dergoing a polymerization reaction to form PBAC, we conducted 
+gel permeation chromatography (GPC) measurements. As shown in 
+fig. S1, when BAC is treated with ammonium persulfate as an initia-
+tor, its molecular weight increases, indicating that the gel- like solid 
+formed by BAC upon heating and in the presence of an initiator is 
+an oligomer. Furthermore, as exhibited in fig. S2, scanning electron 
+microscopy (SEM) results reveal that the morphology of the gel- like 
+solid formed by BAC molecules under heating and in the presence 
+of an initiator undergoes a change compared to the individual BAC 
+molecules, exhibiting a structure with pores. Therefore, in conjunc-
+tion with the GPC measurement results, we anticipate that BAC can 
+undergo a polymerization reaction to form PBAC under the condi-
+tions of an initiator and 100°C heating. On the basis of the measure-
+ment results from GPC and SEM, we inferred the reaction scheme 
+and illustration for the BAC polymerization, as shown in fig. S3. The 
+initiator (NH 4)2S2O8 can decompose in the solvent to produce 
+SO4 2− and NH4 +. It decomposes under heating or in the presence of 
+a catalyst to generate the free radical SO 4•−. These radicals can at-
+tack the double bonds in the BAC molecules to form a new radical. 
+Subsequently, this new radical can react with other BAC molecules 
+to initiate chain growth. However, this growth is stochastic, and the 
+exact structural composition cannot be fully determined. Therefore, 
+on the basis of the experimental results, we have simply sketched a 
+schematic diagram of the possible structures formed.
+Subsequently, we used Fourier transform infrared (FTIR) spec-
+troscopy and x- ray photoelectron spectroscopy (XPS) to elucidate the 
+interplay between BAC molecules and perovskite. As shown in Fig. 
+1C, after introducing BAC into the perovskite precursor solution and 
+annealing at 100°C, compared to the standalone BAC film, the stretch-
+ing vibration peaks corresponding to the C═ C bonds at 1615 and 
+964 cm−1 in the FTIR spectrum of the PBAC film disappear. Although 
+this does not directly prove the occurrence of the polymerization re-
+action, in conjunction with the results from GPC and SEM, we believe 
+that it can serve as a reference indicating the polymerization of BAC 
+into PBAC. Simultaneously, fig. S4 (A to C) confirms the chemical 
+interactions between BAC and perovskite. It can be observed that the 
+C═O characteristic peak shifts from 1658 to a lower wave number of 
+1652 cm−1, the C─S characteristic peak shifts from 1190 and 809 cm−1 
+to 1185 and 804 cm −1, and the N─ H characteristic peak shifts 
+from 3248 to 3423 cm−1. This suggests that the chemical interactions 
+between BAC and formamidium iodide (FAI) or BAC and lead(II) 
+iodide (PbI2) involve hydrogen bonding between N─ H and I or FA 
+and interactions between C═ O and Pb 2+. In addition, in fig. S5, the 
+survey XPS spectrum confirms that there is no transfer of foreign car-
+bon, thus excluding the influence of charge on the results. Further -
+more, after the introduction of BAC to form a polymer, the Pb 4f 
+binding energy of the PBAC sample shifts toward a lower binding 
+energy in comparison with that of the control sample (Fig. 1D), at-
+tributed to strengthened chemical interactions between PBAC and 
+perovskite. In addition, the two S 2p peaks in PBAC, located at 164.8 
+and 163.6 eV (fig. S6A), shift to 164.5 and 163.3 eV, respectively, indi-
+cating chemical interaction between the sulfur atoms and lead ions 
+(41, 42). The shift in the I 3d peak (fig. S6B) is induced by hydrogen 
+bonding between PBAC and the [PbI 6]4− octahedra. After polymer -
+ization of BAC within the perovskite film, the shift in the N 1s peak at 
+399.5 eV further confirmed the existence of N─H···I hydrogen bonds 
+(fig. S6C). Then, we used liquid- state proton nuclear magnetic reso-
+nance (NMR) spectroscopy to investigate chemical interactions in the 
+precursor solution. The results presented in fig. S7A demonstrate that 
+the introduction of PbI2 into the BAC solution leads to smaller chem-
+ical shifts in the corresponding 13C peaks compared to the original 
+Downloaded from https://www.science.org on November 19, 2026

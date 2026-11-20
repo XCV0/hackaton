@@ -1,0 +1,141 @@
+biases and objective mismatch [46].
+VII. CONCLUSION
+We presented Intent-Guided Decoding (IGD), a decoding-
+time framework for resolving the factuality and faithfulness
+trade-off in retrieval-augmented generation. Rather than treating
+retrieved context as either universally authoritative or inherently
+suspect, IGD performs intent-conditioned source arbitration
+across the user prompt, retrieved context, and parametric
+memory. Experiments on faithful and factual-conflict bench-
+marks show that IGD improves intent-aligned generation across
+multiple LLMs, while ablations confirm that its gains arise
+from coordinated routing, conflict activation, reliability scaling,
+and memory stabilization.
+REFERENCES
+[1] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, et al., “Retrieval-
+augmented generation for knowledge-intensive nlp tasks,” in Advances in
+Neural Information Processing Systems, vol. 33, pp. 9459–9474, 2020.
+[2] Y. Hu and Y. Lu, “Rag and rau: A survey on retrieval-augmented language
+model in natural language processing,” arXiv preprint arXiv:2404.19543,
+2024.
+[3] P. Jiang, S. Ouyang, Y. Jiao, M. Zhong, R. Tian, and J. Han, “Retrieval
+and structuring augmented generation with large language models,”
+in Proceedings of the 31st ACM SIGKDD Conference on Knowledge
+Discovery and Data Mining V. 2, pp. 6032–6042, 2025.
+[4] G. Izacard and E. Grave, “Leveraging passage retrieval with generative
+models for open domain question answering,” in Proceedings of the 16th
+Conference of the European Chapter of the Association for Computational
+Linguistics, pp. 874–880, 2021.
+[5] C. Niu, Y. Wu, J. Zhu, S. Xu, K. Shum, R. Zhong, J. Song, and T. Zhang,
+“Ragtruth: A hallucination corpus for developing trustworthy retrieval-
+augmented language models,” arXiv preprint arXiv:2401.00396, 2024.
+[6] K. Wu, E. Wu, and J. Zou, “Clasheval: Quantifying the tug-of-war
+between an llm’s internal prior and external evidence,” arXiv preprint
+arXiv:2404.10198, 2024.
+[7] Y. Ming, S. Purushwalkam, S. Pandit, Z. Ke, X.-P. Nguyen, et al.,
+“Faitheval: Can your language model stay faithful to context, even if"
+the moon is made of marshmallows",” in International Conference on
+Learning Representations, vol. 2025, pp. 29430–29456, 2025.
+[8] Y. Huang, S. Chen, H. Cai, and B. Dhingra, “Enhancing large language
+models’ situated faithfulness to external contexts,” arXiv preprint
+arXiv:2410.14675, 2024.
+[9] H. Wang, A. Prasad, E. Stengel-Eskin, and M. Bansal, “Retrieval-
+augmented generation with conflicting evidence,” arXiv preprint
+arXiv:2504.13079, 2025.
+[10] Z. Ge, Y. Wu, D. W. K. Chin, R. K.-W. Lee, and R. Cao, “Resolving
+conflicting evidence in automated fact-checking: A study on retrieval-
+augmented llms,” arXiv preprint arXiv:2505.17762, 2025.
+[11] X.-P. Nguyen, S. Pandit, S. Purushwalkam, A. Xu, H. Chen, Y. Ming,
+Z. Ke, S. Savarese, C. Xiong, and S. Joty, “Sfr-rag: Towards contextually
+faithful llms,” arXiv preprint arXiv:2409.09916, 2024.
+[12] E. Fadeeva, A. Rubashevskii, R. Vashurin, S. Dhuliawala, A. Shelmanov,
+T. Baldwin, P. Nakov, M. Sachan, and M. Panov, “Faithfulness-aware
+uncertainty quantification for fact-checking the output of retrieval
+augmented generation,” arXiv preprint arXiv:2505.21072, 2025.
+[13] Z. Jiang, F. Xu, L. Gao, Z. Sun, Q. Liu, J. Dwivedi-Yu, Y. Yang, J. Callan,
+and G. Neubig, “Active retrieval augmented generation,” in Proceedings
+of the 2023 Conference on EMNLP, (Singapore), pp. 7969–7992, 2023.
+[14] A. Asai, Z. Wu, Y. Wang, A. Sil, and H. Hajishirzi, “Self-rag: Learning
+to retrieve, generate, and critique through self-reflection,” in The Twelfth
+International Conference on Learning Representations, 2024.
+[15] S.-Q. Yan, J.-C. Gu, Y. Zhu, and Z.-H. Ling, “Corrective retrieval
+augmented generation,” arXiv preprint arXiv:2401.15884, 2024.
+[16] B. Bi, S. Huang, Y. Wang, T. Yang, Z. Zhang, et al., “Context-dpo:
+Aligning language models for context-faithfulness,” arXiv preprint
+arXiv:2412.15280, 2024.
+[17] Q. Zhang, Z. Xiang, Y. Xiao, L. Wang, J. Li, X. Wang, and J. Su,
+“Faithfulrag: Fact-level conflict modeling for context-faithful retrieval-
+augmented generation,” arXiv preprint arXiv:2506.08938, 2025.
+[18] X. Zhang, J. Zhang, F. Mo, D. K. Chandra, Y.-Z. Chen, F. Xie, and
+K. Liu, “Retrieval-augmented feature generation for domain-specific
+classification,” in 2025 IEEE International Conference on Data Mining
+(ICDM), pp. 943–952, IEEE, 2025.
+[19] G. Izacard, P. Lewis, M. Lomeli, L. Hosseini, F. Petroni, et al., “Atlas:
+Few-shot learning with retrieval augmented language models,” arXiv
+preprint arXiv:2208.03299, 2022.
+[20] O. Ram, Y. Levine, I. Dalmedigos, D. Muhlgay, A. Shashua, K. Leyton-
+Brown, and Y. Shoham, “In-context retrieval-augmented language models,”
+arXiv preprint arXiv:2302.00083, 2023.
+[21] K. Sparck Jones, “A statistical interpretation of term specificity and
+its application in retrieval,” Journal of Documentation, vol. 28, no. 1,
+pp. 11–21, 1972.
+[22] T. G. Dietterich, “Ensemble methods in machine learning,” in Multiple
+Classifier Systems, vol. 1857 of Lecture Notes in Computer Science,
+pp. 1–15, Springer, 2000.
+[23] B. Krause, A. D. Gotmare, B. McCann, N. S. Keskar, S. Joty, R. Socher,
+and N. F. Rajani, “GeDi: Generative discriminator guided sequence
+generation,” in Findings of the Association for Computational Linguistics:
+EMNLP 2021, (Punta Cana, Dominican Republic), pp. 4929–4952, 2021.
+[24] A. Liu, M. Sap, X. Lu, S. Swayamdipta, C. Bhagavatula, N. A. Smith,
+and Y. Choi, “Dexperts: Decoding-time controlled text generation with
+experts and anti-experts,” in Proceedings of the 59th Annual Meeting of
+the Association for Computational Linguistics and the 11th International
+Joint Conference on Natural Language Processing, 2021.
+[25] X. L. Li, A. Holtzman, D. Fried, P. Liang, J. Eisner, T. Hashimoto,
+L. Zettlemoyer, and M. Lewis, “Contrastive decoding: Open-ended text
+generation as optimization,” arXiv preprint arXiv:2210.15097, 2022.
+[26] J. Lin, “Divergence measures based on the shannon entropy,” IEEE
+Transactions on Information Theory, vol. 37, no. 1, pp. 145–151, 1991.
+[27] T. Kwiatkowski, J. Palomaki, O. Redfield, M. Collins, A. Parikh, et al.,
+“Natural questions: A benchmark for question answering research,”
+Transactions of the Association for Computational Linguistics, vol. 7,
+pp. 452–466, 2019.
+[28] F. Petroni, A. Piktus, A. Fan, P. Lewis, M. Yazdani, et al., “Kilt: a
+benchmark for knowledge intensive language tasks,” in Proceedings of
+the 2021 Conference of the North American Chapter of the Association
+for Computational Linguistics: Human Language Technologies, (Online),
+pp. 2523–2544, 2021.
+[29] M. Joshi, E. Choi, D. S. Weld, and L. Zettlemoyer, “Triviaqa: A large
+scale distantly supervised challenge dataset for reading comprehension,”
+in Proceedings of the 55th Annual Meeting of the Association for
+Computational Linguistics, pp. 1601–1611, 2017.
+[30] P. Rajpurkar, J. Zhang, K. Lopyrev, and P. Liang, “Squad: 100,000+
+questions for machine comprehension of text,” in Proceedings of the
+2016 Conference on Empirical Methods in Natural Language Processing,
+pp. 2383–2392, 2016.
+[31] Z. Su, J. Zhang, X. Qu, T. Zhu, Y. Li, J. Sun, J. Li, M. Zhang, and
+Y. Cheng, “Conflictbank: A benchmark for evaluating the influence of
+knowledge conflicts in llm,” arXiv preprint arXiv:2408.12076, 2024.
+[32] A. Fisch, A. Talmor, R. Jia, M. Seo, E. Choi, and D. Chen, “Mrqa 2019
+shared task: Evaluating generalization in reading comprehension,” in
+Proceedings of the 2nd Workshop on Machine Reading for Question
+Answering, pp. 1–13, 2019.
+[33] K. Meng, D. Bau, A. Andonian, and Y. Belinkov, “Locating and editing
+factual associations in gpt,” in Advances in Neural Information Processing
+Systems, vol. 35, 2022.
+[34] A. Yang et al., “Qwen3 technical report,” arXiv preprint
+arXiv:2505.09388, 2025.
+[35] A. Yang et al., “Qwen2.5 technical report,” arXiv preprint
+arXiv:2412.15115, 2024.
+[36] A. Grattafiori et al., “The llama 3 herd of models,” arXiv preprint
+arXiv:2407.21783, 2024.
+[37] A. Q. Jiang, A. Sablayrolles, A. Mensch, C. Bamford, D. S. Chaplot,
+et al., “Mistral 7b,” arXiv preprint arXiv:2310.06825, 2023.
+[38] M. Abdin et al., “Phi-4 technical report,” arXiv preprint
+arXiv:2412.08905, 2024.
+[39] A. Mallen, A. Asai, V. Zhong, R. Das, D. Khashabi, et al., “When not
+to trust language models: Investigating effectiveness of parametric and
+non-parametric memories,” arXiv preprint arXiv:2212.10511, 2023.
+[40] N. Kandpal, H. Deng, A. Roberts, E. Wallace, and C. Raffel, “Large
+language models struggle to learn long-tail knowledge,” in Proceedings
+of the 40th International Conference on Machine Learning, PMLR, 2023.

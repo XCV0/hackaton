@@ -1,0 +1,40 @@
+Fig. 5: Qualitative Examples. Comparison between human annotated ground truth (Left) and prediction from our method
+(Right) from both BDD-X (Top 4) and Spoken-SAX (Bottom 4). Each video is downsampled to four frames for visualisation.
+Despite subtle differences in wording, our method provides driving action explanations and justifications that are comprehensible
+to humans.
+TABLE V: Effect of training retrieval engine with target domain data samples.
+BDD-X Spoken-SAX
+Finetune? Act. B4 Act. C Jus. B4 Jus. C Act. B4 Act. C Jus. B3 Jus. C
+× 34.3 260.9 11.1 109.1 9.9 48.9 5.6 17.1
+✓ 34.7 271.0 10.9 112.4 10.1 52.1 6.7 19.0
+and justification in the out-of-distribution setting. Although
+the improvement in performance is less significant in the in-
+distribution setting, as indicated by the competing justification
+metric, the action explanation performance has improved
+considerably. This suggests a higher potential upper bound
+for retrieval performance and the potential of learning-based
+optimization for a better retrieval strategy.
+G. Qualitative Demonstration
+We also demonstrate a series of qualitative examples
+comparing the driving action explanation and justification
+provided by human ground truth and prediction from our
+method. As shown in Fig. 5, we observe RAG-Driver produces
+robust intelligible action explanation and justification under
+different environments (i.e. night time and adversarial weather)
+with a control signal close to the human driver record.
+More importantly, in the out-of-distribution setting Spoken-
+SAX as indicated by the clear visual difference, we observe
+the prediction also produces human-understandable answers,
+qualitatively validating the exceptional zero-shot generalisation
+capacity.
+V. LIMITATIONS AND FUTURE WORK
+This work aims to develop a generalisable explainable
+driving agent using a Multi-Modal Large Language Model
+(MLLM), addressing a significant obstacle that has hindered
+deployment: the poor generalisation capacity. However, as an
+early exploration, we still observe several limitations that need
+to be addressed in future works to realize the application of
+such promising technology.
+A. Computational Restriction and Scale of MLLM
+While our Multi-modal Large Language Model (MLLM) has
+shown impressive capabilities in visual reasoning and planning

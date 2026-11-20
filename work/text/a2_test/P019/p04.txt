@@ -1,0 +1,93 @@
+SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia Trovato et al.
+Meta-Planner
+StrategyLayer
+Q:Which U.S. president signed the Civil Rights Act, and what was their political party and home state?
+GeneralStrategy:
+S1.Identify the enactor of the legislation.
+S2.Retrieve their political affiliation and 
+geographic origin in parallel.
+S3.Fuse the results into a complete answer.
+Q1.Whichpresident signed the Civil Rights Act?
+Q2.Whatwastheirpoliticalparty?
+Q3.Whatwastheirhomestate?
+Q4.FuseanswersofQ2&Q3.
+ConcretePlan:
+Supervisor
+Control Layer
+Retrieve
+Q1: Whichpresident
+signedtheCivilRightsAct?
+Extractor
+Docs
+ AtomicFact
+Reasoner
+Lyndon B. Johnson
+Retrieve
+Q2:What was Lyndon B. 
+Johnson’s political party?
+Retrieve
+Q3:What was Lyndon B. 
+Johnson’s homestate?
+ Texas
+Democratic
+iter2
+iter1
+iter3
+Answer
+Q4:FuseanswersofQ2
+&Q3
+Accumulated Facts
+Lyndon B. Johnson, 
+a Democrat from Texas
+FinalAnswer
+ExecutionLayer
+Figure 2: Overview of STRIDE, which structures the reasoning process into strategy, control, and execution.
+minimal, ordered set of executable sub-questions grounded in the
+entities and relations from𝑞, derived by instantiating𝑆𝑞.
+Hence, the Meta-Planner serves as the strategic layer of STRIDE,
+producing interpretable, logically structured reasoning plans that
+guide subsequent layers in a top-down fashion.
+3.2.2 Control Layer. While the Meta-Planner produces an ordered
+concrete plan 𝐶𝑞, actual execution must handle: (1) sub-questions
+may depend on prior answers and cannot be executed out-of-order;
+(2) retrieval for fact-seeking steps can fail due to lexical mismatch
+or sparse evidence, requiring adaptive reformulation; and (3) some
+steps (e.g., set intersection or comparison) require no retrieval at all,
+but pure reasoning over known facts. To address these challenges,
+the Supervisor serves as a process-aware controller that dynami-
+cally orchestrates sub-question execution. By maintaining a global
+view of progress, inter-step dependencies, and past retrieval out-
+comes, it makes context-sensitive decisions on scheduling, retrieval
+invocation, and reasoning strategy.
+Specifically, the Supervisor maintains an execution state denoted
+by Ω =(S,P,F), where S⊆𝐶𝑞 is the set of solved sub-questions
+with their answers, P ⊆ 𝐶𝑞 is the set of pending sub-questions
+(with S∩P =∅), and F is a partial map that, for each pending
+sub-question 𝑐𝑖 ∈P, records the set of retrieval queries that yielded
+no useful results. At each step, it identifies the set of ready sub-
+questions Pready ⊆P whose dependencies (i.e., required answers
+in S) are satisfied, and invokes an instruction-following LLM to
+determine the next actions:
+D =𝑀super (𝐼super,𝑞,𝐶𝑞, Ω), (3)
+where 𝐼super is the task instruction, and D ={(𝛼𝑖,𝑧𝑖)|𝑐𝑖 ∈Pready}
+specifies the action 𝛼𝑖 ∈{retrieve, rewrite, answer} and associ-
+ated query𝑧𝑖 for each ready sub-question𝑐𝑖.
+The decision is guided by three scheduling principles:
+(1) If 𝑐𝑖 is fact-seeking and F(𝑐𝑖) =∅, issue retrieve with a con-
+cise, entity-grounded query𝑧𝑖;
+(2) If F(𝑐𝑖) ≠∅, generate a rewrite via paraphrasing or semantic
+reformulation, ensuring𝑧𝑖 ∉F(𝑐𝑖);
+(3) If 𝑐𝑖 requires only reasoning over known answers (e.g., inter-
+section, comparison), trigger answer—bypassing retrieval and
+delegating to the reasoning module.
+Critically, the Supervisor enables parallel execution of indepen-
+dent sub-questions (e.g., 𝑐1 and 𝑐2 in a set-intersection question),
+while deferring dependent steps (e.g., 𝑐3) until their prerequisites
+are resolved. The Supervisor operates within an iterative RAG loop:
+at each iteration 𝑡, it emits D, which is consumed by the execution
+layer to resolve each 𝑐𝑖 ∈D; the resulting answers and failure sig-
+nals update Ω, and the loop continues until P =∅ or a maximum
+iteration limit𝑇max is reached.
+3.2.3 Execution Layer. The Execution Layer realizes the Supervi-
+sor’s scheduling decisions D by invoking two specialized modules.
+An Extractor for grounding atomic facts in retrieved documents

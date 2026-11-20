@@ -1,0 +1,80 @@
+Figure 2: AuthorityFirst-RAG first narrows candidates by legal authority and temporal validity, then ranks para-
+graphs by rule-support signals such as threshold, unit, and comparator match.
+4.2 Query parsing
+The query parser extracts four types of information.
+First, it identifies citation cues when the question
+explicitly mentions a title, part, section, or other
+authority marker. Second, it extracts the opera-
+tive date that determines which version is in force.
+Third, it extracts the fact value and unit, such as
+a number of days, dollars, employees, percent, or
+years. Fourth, it detects whether the question is
+cited or uncited. This distinction affects how much
+weight the retriever gives to exact citation matching
+versus broader lexical and legal-context cues.
+4.3 Authority identification
+When citation cues are present,
+AuthorityFirst-RAG prioritizes exact or nor-
+malized matches to the cited authority and
+section. When the question is uncited, it uses
+lexical overlap and legal-context cues to identify
+candidate sections. This stage is deliberately
+section-first: it tries to locate the legal authority
+before ranking individual paragraphs. The design
+reflects the structure of legal retrieval, where the
+correct paragraph is often meaningful only within
+a particular authority.
+4.4 Temporal scoping and section-first
+retrieval
+After candidate authorities are identified,
+AuthorityFirst-RAG filters or prioritizes passages
+whose validity intervals cover the operative date.
+Temporal scoping is applied before fine-grained
+rule ranking so that the system does not treat
+obsolete and current versions as interchangeable.
+Section-first retrieval then ranks paragraphs within
+the authority scope rather than across the entire
+corpus. This reduces the chance that a globally
+similar passage from the wrong version displaces
+the legally applicable passage.
+Stage Operation
+1 Parse citation cues, operative date, fact value/unit,
+and cited/uncited status.
+2 Identify candidate authorities, using exact citation
+matches or legal-context cues.
+3 Scope candidates to validity intervals covering the
+operative date.
+4 Retrieve within candidate sections before paragraph
+ranking.
+5 Rank by authority, date validity, lexical overlap,
+threshold/unit match, and comparator compatibility.
+6 Return the highest-scoring legally applicable
+evidence.
+Table 3: Compact retrieval procedure for
+AuthorityFirst-RAG. The method is a transpar-
+ent diagnostic decomposition of law-in-force retrieval.
+4.5 Rule-aware ranking
+The final ranking stage combines lexical relevance
+with rule-support features. These features include
+threshold match, unit compatibility, comparator
+compatibility, citation or section match, and date
+validity. Comparator compatibility is crucial be-
+cause expressions such as within, not more than, at
+least, shall not exceed, and between encode differ-
+ent comparison directions. A passage that contains
+the right number but reverses the legal comparison
+does not support the answer.
+Table 3 summarizes the procedure. Its key as-
+sumption is that legal applicability is structured: a
+retriever should first ask whether a passage comes
+from the right authority and was in force, then
+ask whether the local rule text supports the answer.
+This decomposition lets the experiments separate
+failures caused by authority identification, temporal
+validity, and rule support.
+5 Experimental Setup
+5.1 Retrieval evaluation
+Retrieval uses Recall@1, Recall@3, Recall@5,
+Recall@10, and MRR. Table 4 reports the 644-
+instance test split aligned with generation and er-
+883

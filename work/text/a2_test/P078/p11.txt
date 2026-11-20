@@ -1,0 +1,121 @@
+11
+TABLE 7
+Product knowledge QA ablation results. CC = context coverage.
+Performance is broadly uniform across ablations, consistent with this
+task being bounded by knowledge-base coverage rather than retrieval
+architecture. Unless otherwise noted, all ablations use c = 50, m = 10.
+Method KW-P KW-R KW-F1 CC
+Main comparison (from Table 3)
+StandardRAG 0.1518 0.1935 0.1360 0.1520
+HippoRAG2 0.0326 0.0137 0.0173 0.3395
+HyperGraphRAG 0.1189 0.1577 0.1069 0.0473
+PRISM-RAG (ours) 0.1322 0.2027 0.1342 0.1552
+Index-time: bridge method and entity extractor
+PRISM-RAG (ours) 0.1322 0.2027 0.1342 0.1552
+PRISM-RAGbridge 0.1351 0.1962 0.1331 0.1785
+PRISM-RAGLLM 0.1376 0.1850 0.1296 0.1221
+PRISM-RAGontology 0.1424 0.1941 0.1355 0.1714
+PRISM-RAGagglo 0.1534 0.2020 0.1353 0.0533
+Index-time: cluster count (m = 10)
+PRISM-RAGc=50 (ours) 0.1322 0.2027 0.1342 0.1552
+PRISM-RAGc=100 0.1401 0.1987 0.1326 0.1759
+PRISM-RAGc=150 0.1424 0.1975 0.1319 0.1520
+PRISM-RAGc=200 0.1390 0.2063 0.1365 0.0942
+Query-time: traversal depth m (c = 50)
+PRISM-RAGm=3 0.1439 0.2044 0.1359 0.1159
+PRISM-RAGm=5 0.1389 0.1962 0.1333 0.1435
+PRISM-RAGm=8 0.1432 0.1977 0.1356 0.1554
+PRISM-RAGm=10 (ours) 0.1322 0.2027 0.1342 0.1552
+PRISM-RAGm=15 0.1477 0.1959 0.1421 0.1695
+Query-time: traversal depth m (c = 100)
+PRISM-RAGm=3 0.1417 0.1980 0.1349 0.0593
+PRISM-RAGm=5 0.1400 0.1932 0.1305 0.0885
+PRISM-RAGm=8 0.1384 0.2022 0.1334 0.1003
+PRISM-RAGm=10 0.1295 0.1888 0.1275 0.1158
+PRISM-RAGm=15 0.1360 0.1860 0.1286 0.1530
+Entity extraction. LLM-powered entity extraction in PRISM-
+RAG reduces JA by 4.4 pp (0.895 vs. 0.939, p < 0.001) while
+its CA point estimate is 3.1 pp higher (but not statistically signif-
+icant, p = 0.611). LLM-extracted entities tend to be relational
+abstractions (e.g., “California prohibits flavored tobacco products”)
+rather than the straightforward noun phrases spaCy extracts
+(e.g., “flavored tobacco product”, “characterizing flavor”). These
+abstractions embed differently from product attribute nodes and
+cluster less naturally with them in concept hyperedge construction,
+weakening the traversal path into jurisdiction-specific legislative
+content. Spacy extraction is therefore preferred with the added
+benefit of zero index-time LLM cost.
+Ontology augmentation. Augmenting legislative entity text with
+domain synonyms, meant to make PRISM-RAG’s indexing more
+flexible, before encoding degrades JA by 2.9 pp (p < 0.001); its
+CA point estimate is lower but not significantly (p = 0.281).
+Agglomerative clustering. Replacing k-means with agglomerative
+clustering reduces JA by 7.1 pp (0.868 vs. 0.939, p < 0.001),
+while its CA point estimate is approximately 1.7 pp higher (not
+significant, p = 0.755).
+Cluster count c. JA decreases monotonically as c increases: 0.939
+(c = 50) > 0.917 (c = 100) > 0.844 (c = 150) > 0.826
+(c = 200), all significant drops relative to c = 50 (p < 0.001 in
+each case), while CA differences from c = 50 are never significant
+across this sweep. Finer-grained clusters produce smaller and more
+semantically specific hyperedges, reducing the probability that
+product attribute nodes and legislative entity nodes are co-clustered.
+This mechanism by which concept hyperedges bridge marketing
+language to statutory terminology is critical. Thus, c = 50 is
+optimal for both JA and CA.
+Traversal depth m (c = 50). JA increases from m = 3 (0.870)
+to m = 10 (0.939) then dips at m = 15 (0.925), making m = 10
+the optimal traversal depth; every m ̸= 10 value in this sweep
+differs from m = 10 at p < 0.001 on JA. The drop at m = 15
+is consistent with context dilution, where at high traversal depths,
+the sub-hypergraph Hq includes off-jurisdiction hyperedges which
+introduce noise. CA point estimates follow the opposite pattern
+(decreases as m increases, but highest at m = 10, and then
+decreases), though none of the CA differences from m = 10 in
+this sweep are statistically significant.
+Traversal depth m (c = 100). With c = 100, JA increases
+monotonically across all evaluated m values, from 0.702 at m = 3
+up to 0.889 at m = 15), however, no c = 100 configuration
+reaches the JA of the proposed c = 50, m = 10 setting. The
+highest c = 100 result (m = 15, JA = 0.889) is 5.0 pp below the
+proposed configuration (p < 0.001), confirming that the coarser
+cluster granularity of c = 50 is the primary driver of jurisdiction-
+routing accuracy rather than the traversal depth. Notably, PRISM-
+RAGm=3,c=100 is the lowest scoring JA configuration overall
+(0.702), and significantly exceeds the proposed configuration’s KW-
+F1 (p < 0.001), showing that reliance on keyword overlap can be
+a misleading sign for jurisdictional correctness.
+5.5 Visual Product Retrieval
+We benchmark six image encoder backbones on brand-level product
+retrieval across all three NicoPRISM image sets using five random
+70-30 knowledge-query splits. Full precision and accuracy tables
+appear in the Appendix. SigLIP (14 × 14, WebLi) leads on within-
+set and cross-set retrieval across both web and TikTok sets. We note
+that cross-set results quantify the image distribution gap between
+the web set and social media frames, which we identify as a key
+direction for future work.
+5.6 Qualitative Analysis
+Figure 4 shows one of the most dissimilar response pairs across
+the 1,325 policy QA instances. The question asks how Washington,
+D.C. statutes classify nicotine pouches. PRISM-RAG answers
+with two specific D.C. Code citations (§ 7-1721.08(b) and § 7-
+1721.01(1)), found in the KG, correctly explaining that D.C.’s
+flavored tobacco prohibitions cover synthetic nicotine products that
+impart a characterizing flavor, and that a flavored nicotine pouch
+therefore falls under D.C.’s flavored tobacco product prohibition
+rather than a separate type of nicotine product. The response is
+grounded in the correct jurisdiction’s statutory text from our KG, re-
+trieved via PRISM-RAG’s mandatory direct injection of D.C. policy
+document chunks, boosted because the query contains a recognized
+jurisdiction name. StandardRAG, however, retrieves semantically
+similar but wrong-jurisdiction content. D.C. tobacco statutes
+use language nearly identical to the federal “Family Smoking
+Prevention and Tobacco Control Act”, which also classifies nicotine
+products as tobacco products under FDA oversight. Pure semantic
+retrieval betrays the model response, causing it to form context
+irrelevant to the question. The StandardRAG response correctly
+identifies the federal classification but explicitly acknowledges
+that no D.C.-specific statutory information was retrieved, and it
+cannot confirm whether D.C. law treats nicotine pouches separately.
+While it is positive that retrieval failure is reported honestly, it does
+carry a consequence. That is, a public health researcher relying

@@ -1,0 +1,87 @@
+a performance decomposition based on query com-
+plexity. While our method attains a 19.0% im-
+provement over the Naive baseline on Simple QA,
+the performance gains are substantially amplified
+in complex reasoning scenarios. Specifically, on
+Multi-Hop QA, our approach demonstrates supe-
+rior scaling by achieving a 73.4% relative gain over
+the baseline and exceeding the CRAG model by 2.5
+absolute points. Similarly, for Multi-Doc QA, our
+model records a 57.6% improvement over the base-
+line. This result significantly widens the margin
+compared to CRAG, thereby validating the efficacy
+of our self-correction mechanism in handling long-
+context and multi-step reasoning tasks.
+E Sensitivity Analysis Results
+In this appendix, we provide the detailed experi-
+mental results supporting the sensitivity analysis
+discussed in Section 6. We evaluate the impact of
+the redundancy budget on retrieval recall and the ef-
+fect of MCTS simulation parameters on generation
+performance.
+E.1 Redundancy Budget in MMKP
+Figure 5 illustrates the relationship between the re-
+dundancy budget (Cred) and retrieval performance.
+The redundancy score is calculated based on max-
+imum semantic similarity between selected pas-
+sages.
+20 60 100 120 160 20040
+50
+60
+70
+80
+Redundancy Budget (Cred)
+Recall@5 (%)
+Impact of Redundancy Budget on Recall@5
+Recall@5
+Figure 5: Sensitivity of Recall@5 to the redundancy
+budget (Cred). A budget of approx. 120 provides the
+optimal trade-off, allowing sufficient diversity without
+excluding relevant evidence.
+E.2 MCTS Simulation Parameters
+Table 11 details the generation performance (F1
+Score) across different configurations of the MCTS
+planner. We vary the number of simulations (N )
+and the maximum search depth (D).
+Simulations (N) Depth (D) F1 Score Faithfulness (AP)
+1 (Greedy) 1 36.1 0.52
+8 2 40.5 0.68
+16 3 43.2 0.79
+24 3 45.8 0.85
+32 4 46.0 0.86
+64 5 46.1 0.87
+Table 11: Effect of MCTS hyperparameters on perfor-
+mance. N denotes the number of simulations, and D
+denotes the search depth. The chosen configuration
+(N = 24, D = 3) is highlighted.
+As observed, increasing N beyond 24 yields
+diminishing returns in F1 score. Similarly, extend-
+ing the depth beyond 3 provides marginal gains
+in faithfulness but complicates the reasoning trace
+unnecessarily for most tasks.
+F LLM Prompts
+We employ two distinct sets of prompts for our
+framework: one for the core Retrieval-Augmented
+Generation (RAG) tasks and another for the sym-
+bolic planning module. Figure 6 illustrates the
+prompts used for the NLI-Guided Generator, and
+Figure 7 shows the prompts for the Symbolic Plan
+Generator.
+G Qualitative Analysis Case Studies
+To investigate the mechanisms by which Self-
+Correcting RAG rectifies errors, we analyze spe-
+cific failure cases of the baseline compared to our
+framework. We present two distinct scenarios: one
+focusing on context truncation due to redundancy,
+and another on attribute comparison amidst high-
+information noise.
+G.1 Case Study 1: Temporal Comparison
+with Context Truncation
+In this first scenario, we examine a temporal com-
+parison query regarding the founding dates of two
+magazines. The baseline fails due to context trun-
+cation of the second entity, leading to a halluci-
+nated date. In contrast, our method rectifies this
+via (1) MMKP-based context de-duplication and
+(2) MCTS-guided verification.
+20972

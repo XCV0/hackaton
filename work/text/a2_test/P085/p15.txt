@@ -1,0 +1,51 @@
+Decompose the golden contexts into clear and simple propositions, ensuring they are interpretable out of context.
+1. Split compound sentence into simple sentences. Maintain the original phrasing from the input whenever possible.
+2. For any named entity that is accompanied by additional descriptive information, separate this information into its own distinct 
+proposition.
+3. Decontextualize the proposition by adding necessary modifier to nouns or entire sentences and replacing pronouns (e.g., "it",
+"he", "she", "they", "this", "that") with the full name of the entities they refer to.
+4. Present the results as a list of strings, formatted in JSON.
+Input: Title: Ēostre. Section: Theories and interpretations, Connection to Easter Hares. Content: The earliest evidence for the 
+Easter Hare (Osterhase) was recorded in south-west Germany in 1678 by the professor of medicine Georg Franck von 
+Franckenau, but it remained unknown in other parts of Germany until the 18th century. Scholar Richard Sermon writes that 
+"hares were frequently seen in gardens in spring, and thus may have served as a convenient explanation for the origin of the 
+colored eggs hidden there for children. Alternatively, there is a European tradition that hares laid eggs, since a hare’s scratch or 
+form and a lapwing’s nest look very similar, and both occur on grassland and are first seen in the spring. In the nineteenth 
+century the influence of Easter cards, toys, and books was to make the Easter Hare/Rabbit popular throughout Europe. German 
+immigrants then exported the custom to Britain and America where it evolved into the Easter Bunny."
+Output: [ "The earliest evidence for the Easter Hare was recorded in south-west Germany in 1678 by Georg Franck von 
+Franckenau.", "Georg Franck von Franckenau was a professor of medicine.", "The evidence for the Easter Hare remained 
+unknown in other parts of Germany until the 18th century.", "Richard Sermon was a scholar.", "Richard Sermon writes a 
+hypothesis about the possible explanation for the connection between hares and the tradition during Easter", "Hares were 
+frequently seen in gardens in spring.", "Hares may have served as a convenient explanation for the origin of the colored eggs
+hidden in gardens for children.", "There is a European tradition that hares laid eggs.", "A hare’s scratch or form and a lapwing’s 
+nest look very similar.", "Both hares and lapwing’s nests occur on grassland and are first seen in the spring.", "In the nineteenth 
+century the influence of Easter cards, toys, and books was to make the Easter Hare/Rabbit popular throughout Europe.", 
+"German immigrants exported the custom of the Easter Hare/Rabbit to Britain and America.", "The custom of the Easter 
+Hare/Rabbit evolved into the Easter Bunny in Britain and America." ]
+Given Golden Contexts：{golden contexts}
+Please output the generated JSON directly: 
+Figure 15: Extraction of propositions from golden contexts.
+将golden contexts分解成清晰简单的命题，确保它们脱离上下文也能被理解。
+1. 将复合句拆分成简单句。尽可能保持输入中的原始措辞。
+2. 对于任何附有额外描述信息的命名实体，将这些信息分离成独立的命题。
+3. 通过给名词或整个句子添加必要的修饰词，以及将代词（例如，“它”、“他”、“她”、“他们”、“这个”、“那个
+”）替换为它们所指代的实体的全名，来使命题脱离上下文。
+4. 将结果呈现为字符串列表，格式化为JSON。
+示例内容：复活节兔子（Osterhase）的最早证据是在1678年由医学教授Georg Franck von Franckenau在德国西南部记录
+的，但直到18世纪才在德国的其他地区为人所知。学者Richard Sermon写道，“春天，野兔经常在花园里出现，因此可能为
+孩子们提供了一个方便的解释，解释了为什么花园里藏着的彩色彩蛋的起源。另外，欧洲有一个传统，认为野兔会下蛋，因为
+野兔的抓痕或形状和斑鸻的巢看起来非常相似，而且两者都出现在草地上，并且都是在春天首次出现。在19世纪，复活节卡
+片、玩具和书籍的影响是使复活节兔子/野兔在整个欧洲流行起来。德国移民随后将这一习俗出口到英国和美国，在那里它演
+变成了复活节兔子。”
+示例输出：["复活节兔子的最早证据是在1678年由Georg Franck von Franckenau在德国西南部记录的。", "Georg Franck 
+von Franckenau是一位医学教授。", "复活节兔子的证据直到18世纪才在德国的其他地区为人所知。", "Richard Sermon是
+一位学者。", "Richard Sermon提出了一个关于野兔和复活节传统之间联系的可能解释的假设", "春天，野兔经常在花园里出
+现。", "野兔可能为孩子们提供了一个方便的解释，解释了为什么花园里藏着的彩色彩蛋的起源。", "欧洲有一个传统，认为野
+兔会下蛋。", "野兔的抓痕或形状和斑鸻的巢看起来非常相似。", "野兔和斑鸻的巢都出现在草地上，并且都是在春天首次出现
+。", "在19世纪，复活节卡片、玩具和书籍的影响是使复活节兔子/野兔在整个欧洲流行起来。", "德国移民将复活节兔子/野兔
+的习俗出口到英国和美国。", "复活节兔子/野兔的习俗在英国和美国演变成了复活节兔子。"] 
+现在我的内容是：{golden_contexts}            
+输出：
+Figure 16: Extraction of propositions from golden contexts (in Chinese).
+4623

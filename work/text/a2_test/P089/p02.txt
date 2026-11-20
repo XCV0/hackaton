@@ -1,0 +1,101 @@
+able efforts have been made to harness diverse feed-
+back mechanisms across various domains (Nathani
+et al., 2023; Li et al., 2023). Notably, Liu et al.
+(2023b) effectively integrates unit testing feedback
+into code generation, yielding significant efficacy.
+Drawing from these, in this paper we attempt to (i)
+reduce the cost of annotations for feedback; and
+(ii) identify a signal that better aligns with the
+objectives of the query rewriting task.
+To address these issues, we introduce RaFe
+(Ranking Feedback improves Query Rewriting),
+a novel framework that leverages feedback from
+the reranker to train query rewriting models. This
+approach is inspired by the reranker module in tra-
+ditional information retrieval (IR) systems, which
+scores and sorts retrieved documents based on
+the query. Intuitively, query rewriting aims to
+retrieve documents relevant to the original query,
+which aligns perfectly with the goal of the reranker.
+Specifically, the reranker is capable of scoring doc-
+uments without requiring additional labels. Thus,
+we incorporate a reranker to provide feedback for
+the query rewriting model.
+RaFe comprises a two-stage process. We first
+train an initial query rewriting model by standard
+supervised fine-tuning. Subsequently, we utilize
+the ranking scores from the reranker to conduct
+feedback training on the query rewriting model.
+RaFe supports both offline and online RL feedback
+training. Empirically, we demonstrate that utilizing
+a general, publicly available reranker, RaFe can
+drive the training of the query rewriting model,
+indicating the effectiveness and potential gener-
+alizability of the proposed approach. The main
+contributions of our paper can be summarized as
+follows:
+• We propose RaFe, a novel query rewriting
+framework that utilizes feedback from the
+reranker, an especially fitting signal for the ob-
+jective of retrieving more relevant documents.
+• RaFe does not necessitate annotated labels
+or particularly designed scores, ensuring the
+generalizability of the training framework.
+• We validate the effectiveness of our pro-
+posed approach on cross-lingual datasets
+across wide settings with a general and public
+reranker, we further conduct a comprehensive
+investigation of what makes a better query
+rewriting and how ranking feedback works.
+2 Method
+2.1 Task Formulation
+Within the process of Retrieval Augmented Gener-
+ation (RAG), when inputting an original query q, a
+set of relevant documents D = [d0, d1, ..., dk] will
+be retrieved through a search engine, and the re-
+trieved documents are utilized to enable the model
+to better accomplish the corresponding task (in this
+paper, we discuss the task of Open-domain Ques-
+tion Answering). Query rewriting is to reformulate
+the original query q into another form to better re-
+trieve relevant passages. We aim to obtain a better
+rewrite model Mθ that can rewrite q as:
+q′ = Mθ(q), (1)
+here q′ is the rewritten query that is used to re-
+trieve documents D′ for completing subsequent
+tasks. Figure 2 shows the overview of our proposed
+framework, RaFe for query rewriting training.
+2.2 Initial Supervised Fine-Tuning
+Before leveraging the ranking feedback, we first
+initialize the rewrite model with a cold start super-
+vised fine-tuning to gain the rewrite ability. Specif-
+ically, we prompt the LLMs to produce the rewrite
+data, The rewrites generated from LLMs1 are de-
+noted as Tall = {(q, q′)|q′ ∈ Q′}, here Q′ is the
+rewrite set of original query q. We split the training
+instances into two parts Tall = [Tsft : Tf], here Tsft
+and Tf indicates the instances we use for SFT and
+feedback, respectively, to separate the query for
+SFT and feedback and conduct a fair comparison
+in the following experiments. We train the rewrite
+model Mθ with standard SFT loss as follows:
+Lsft = −
+∑
+q′∈Q′
+∑
+t
+log Mθ(q′ t|q′ <t, q). (2)
+Note that for each query, we mix all correspond-
+ing rewrites together in the dataset for training, to
+enhance the diversity of generation by our trained
+model, since in real-world applications, different
+rewrites are required for a single search query to
+address different aspects or interpretations.
+2.3 Feedback Training
+The evaluation of query rewriting is notoriously
+difficult due to the absence of direct quality assess-
+ment methods (Zhu et al., 2023), so previous feed-
+back for QR typically relies on the annotated pas-
+sages (Nogueira and Cho, 2017; Wu et al., 2022).
+1We prompt Qwen-max for all the pre-generated rewrites
+885

@@ -1,0 +1,41 @@
+where ot represents the t-th token in the target sequence o, o<t denotes the prefix of the target sequence up
+to position t − 1, s is the input context, θ represents the learnable parameters of the SLM, and τ denotes the
+length of the target output sequence o.
+3.2 Three-layer Document Memory Retrieval
+Based on the document memory Mdoc = {O, C, A} generated within the MoM framework, we construct a
+three-layer document memory retrieval mechanism, corresponding respectively to the global summary O, the
+core content C, and the original chunks A. This design is not merely based on empirical evidence; rather, it is
+also theoretically substantiated by the underpinnings of our proposed probabilistic model.
+We regard the user query q as a random vector sampled from a mixed distribution. Specifically, the query space
+Q is composed of two distinct types of queries: global queries Qabs, which are designed to represent and seek
+information related to the global summary O, and local queries Qquery , which aim to represent and retrieve
+details pertaining to the core content C, alongside enabling access to the original chunks A for more granular
+information when necessary. We assume that these two types of queries follow different Gaussian distributions
+in the embedding space: global query qabs ∼ N (µabs, Σabs) and local query qquery ∼ N (µquery , Σquery ), where
+µ is the mean vector and Σ is the covariance matrix.
+Hypothesis 1 (Semantic Divergence Hypothesis). We assume that the semantic centers of global queries and
+local queries are significantly separated in the embedding space. Formally, it is expressed as:
+∥µabs − µquery ∥2 > 0
+This implies that the directions of µabs and µquery are significantly different, that is, their inner-product
+µT absµquery = cos(θ) < 1.
+This hypothesis is rooted in the fundamental duality of human information-seeking behavior and linguistic
+expression. The user’s query intentions can typically be clearly classified into macro-level comprehension and
+micro-level exploration, and these two types of vectors form two distinct clusters in the high-dimensional
+embedding space. Therefore, for the hierarchical multi-vector (HMV), its vectors Vabs and Vquery serve
+as unbiased estimates of the corresponding semantic centers µabs and µquery , which can be expressed as
+E[Vabs] = µabs and E[Vquery ] = µquery . In contrast, the single-vector fusion (SVF) produces a fused vector
+Vf used that constitutes a biased, compromise estimate, thereby diluting the representational purity of either
+semantic mode:
+E[Vf used] = µf used = (1 − w)µabs + wµquery , w ∈ (0, 1)
+Theorem 1. For user queries, the HMV outperforms the SVF in terms of expected similarity. Specifically,
+we need to prove the following two points:
+• For a global query qabs, we have E[qT absVabs] > E[qT absVf used].
+• For a local query qquery , we have E[qT query Vquery ] > E[qT query Vf used].
+Since we do not need to consider the vector length and only involve the direction representation, all vectors
+are normalized to unit vectors for subsequent calculations.
+Proof. First, we analyze the expected similarity of the HMV method. According to the law of total expectation
+and the linearity of expectation, we can obtain:
+E[qT absVabs] = E[E[qT absVabs|qabs]] = E[qT absE[Vabs]] = E[qT absµabs]
+= E[qabs]T µabs = µT absµabs = 1
+Next, we analyze the expected similarity of the SVF method:
+6

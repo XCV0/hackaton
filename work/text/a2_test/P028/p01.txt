@@ -1,0 +1,39 @@
+Available online at www.sciencedirect.com 
+ScienceDirect 
+Procedia Computer Science 00 (2024) 000–000  
+www.elsevier.com/locate/procedia 
+ 
+1877-0509 © 2024 The Authors. Published by ELSEVIER B.V. This is an open access article under the CC BY-NC-ND license 
+(https://creativecommons.org/licenses/by-nc-nd/4.0) Peer-review under responsibility of the scientific committee of the 6th International 
+Conference on AI in Computational Linguistics, ACling 2024 
+6th International Conference on AI in Computational Linguistics 
+Exploring Retrieval Augmented Generation in Arabic 
+Samhaa R. El-Beltagy*1and Mohamed A. Abdallah  
+Newgiza University, Newgiza, km 22 Cairo-Alex Desert Rd, Cairo, Egypt 
+ 
+Abstract 
+Recently, Retrieval Augmented Generation (RAG) has emerged as a powerful technique in natural language processing, 
+combining the strengths of retrieval-based and generation-based models to enhance text generation tasks. However, the 
+application of RAG in Arabic, a language with unique characteristics and resource constraints, remains underexplored. This 
+paper presents a comprehensive case study on the implementation and evaluation of RAG for Arabic text. The work focuses on 
+exploring various semantic embedding models in the retrieval stage and several LLMs in the generation stage,  in order to  
+investigate what works and what doesn't in the context of Arabic.  The work also touches upon the issue of variations between 
+document dialect and query dialect in the retrieval stage. Results show that existing semantic embedding models and LLMs can 
+be effectively employed to build Arabic RAG pipelines.  
+ 
+© 2024 The Authors. Published by ELSEVIER B.V. 
+This is an open access article under the CC BY-NC-ND license (https://creativecommons.org/licenses/by-nc-nd/4.0) 
+Peer-review under responsibility of the scientific committee of the 6th International Conference on AI in Computational 
+Linguistics, ACLing 2024 
+Keywords: Large Language Models; Retrieval-Augmented Generation, RAG;Arabic RAG 
+1. Introduction 
+Retrieval-Augmented Generation (RAG) models have recently emerged as powerful tools that can both enhance 
+and capitalize on the capabilities of generative systems through integration with external knowledge source  [1]. The 
+advantage of using a RAG model is that it leverages the power of large language models (LLMs) to generate responses 
+based on documents that these LLMs might not have seen before. In specific domains, this means getting high-quality 
+and accurate answers to queries to which an LLM might not have an answer. In most scenarios, the use of a RAG 
+model also reduces LLM hallucinations.  
+ 
+ 
+* Samhaa R. El-Beltagy. 
+E-mail address: samhaa@computer.org

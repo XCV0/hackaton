@@ -1,0 +1,97 @@
+Pre-trained 
+Model Backbone
+3. Preference-Based Fine-Tuning
+Parameter-Efﬁcient 
+Fine-Tuning
+1. Structured Claim Dataset Construction
+Language Score
+Threshold
+Multi-Stage 
+Dataset Curation
+Prompt-Guided 
+Data Reformation
+Synthetic Claim
+Generation
+Domain-Agnostic
+Corpus
+2. Preference Training Dataset Construction
+LLM-Based
+Consensus Filtering
+Model-Agreement
+Veriﬁcation
+Reasoning-Guided
+Preference Pairs
+Figure 3: HalluGuard Training Pipeline. A domain-agnostic corpus is filtered, reformed, and used to generate
+three types of synthetic claims (grounded, intrinsic hallucinated, and extrinsic hallucinated). Preference data are built
+via cross-model generation (Qwen3-235B-A22B and Qwen3-0.6B), model-agreement verification and LLM-based
+consensus filtering are used to enhance quality and confidence. The Qwen3-4B backbone is then fine-tuned using
+LoRA and ORPO to mitigate hallucinations and produce evidence-grounded justifications in RAG pipelines.
+Multi-Stage Dataset Curation. We further fil-
+ter Dagnostic to ensure safety, quality, and diversity,
+following C4-style practices (Raffel et al., 2020).
+We remove documents containing unsafe terms4 or
+failing quality heuristics (e.g., fewer than five sen-
+tences, missing terminal punctuation, boilerplate
+such as Lorem Ipsum or cookie notices, or mal-
+formed text such as single tokens exceeding 1000
+characters). We also discard documents shorter
+than 50 words and remove near-duplicates based
+on overlapping three-sentence spans to promote
+diversity by eliminating redundant content, ensur-
+ing a wider range of topics. The resulting dataset,
+Dclean, contains 104,966 documents.
+Prompt-Guided Data Reformation. Despite
+multi-stage curation, Dclean remains web-centric
+in style due to the nature of FineWeb. To increase
+linguistic diversity and improve generalization to
+non-web formats (e.g., reports, dialogues), we use
+DR to rewrite each document, producing a wider
+range of styles that better reflect real-world varia-
+tion (Veselovsky et al., 2023; Long et al., 2024).
+The reformed dataset is then:
+Dreformed =
+{
+sj(x)
+(
+x; T (x)
+) ⏐⏐ x ∈ Dclean } (1)
+where j(x) is a random style from S =
+{s1, s2, . . . , s18} defined in Appendix B, and T (x)
+the temperature sampled uniformly from [0.2, 0.7].
+Synthetic Claim Generation. We generate one
+synthetic claim per document in Dreformed. To
+4https://github.com/LDNOOBW
+balance the classification task, we generate half
+grounded and half hallucinated claims (split evenly
+between intrinsic and extrinsic).
+For each document xi ∈ Dreformed, we
+ask CG to generate a claim ci in struc-
+tured JSON format (He et al., 2024) (see Ap-
+pendix C). Each claim is assigned a label ti ∈
+{Grounded, IntrinsicHallu, ExtrinsicHallu} and
+results in 104,966 document-claim-label triplets:
+HalluClaimbase =
+⋃
+t∈C
+{(xi, ci, t) | xi ∈ Dt}
+(2)
+where Dt denotes the subset of document-claim
+pairs corresponding to label t.
+4.3 Preference Training Dataset Construction
+Reasoning-Guided Preference Pairs. The bal-
+anced dataset HalluClaimbase contains document-
+claim-label triplets. However, our goal is not only
+to classify claims correctly, but also to train models
+to produce evidence-grounded justifications.
+We convert HalluClaimbase into the preference
+dataset format5, where each instance comprises a
+prompt and two completions: a chosen completion
+and a rejected one (see Appendix D). For each
+triplet of document-claim-label, we construct a
+prompt Pi containing: (i) task instructions defining
+the Grounded, IntrinsicHallu and ExtrinsicHallu
+labels, (ii) the document xi and (iii) the claim ci and
+requiring classification and evidence-grounded jus-
+tification in a fixed XML format (see Appendix E).
+5https://hf.co/docs/trl/dataset_formats
+16921

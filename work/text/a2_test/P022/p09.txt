@@ -1,0 +1,97 @@
+The second group iteratively extracts relevant
+knowledge during the generation process, making
+it especially suitable for multi-hop questions and
+complex queries. DRAGIN (Su et al., 2024) dy-
+namically determines when and what to retrieve
+based on self-attention weights across its gener-
+ated content. GenGround (Shi et al., 2024c) itera-
+tively decomposes the multi-hop question into sub-
+questions and grounds their answers in retrieved
+documents to correct potential errors until the final
+answer is derived. ReSP (Jiang et al., 2024) em-
+ploys query-focused summarization with an LLM-
+based summarize to mitigate the context overload
+problem caused by multiple rounds of retrieval.
+Fine-grained RAG Method Recently, several
+RAG studies have attempted to develop their frame-
+works in a fine-grained manner. FILCO (Wang
+et al., 2023) trains a context filtering model to ex-
+tract relevant context from documents using lex-
+ical and information-theoretic approaches. Con-
+vRAG (Ye et al., 2024) introduces a fine-grained
+retriever that performs document-level retrieval and
+paragraph-level reranking for conversational ques-
+tion answering. REAR (Wang et al., 2024b) es-
+timates fine-grained relevance scores using lexi-
+cal and semantic similarity, which ultimately serve
+as supervision for training the generator model.
+GeAR (Liu et al., 2025) trains a text decoder to gen-
+erate fine-grained information from the fused repre-
+sentation of the query and retrieved documents. In
+contrast, our method operates plug-and-play within
+existing RAG pipelines, enhancing performance
+without additional modules or training processes.
+6 Conclusion
+In this paper, we propose a novel fine-grained
+knowledge enhancement method for retrieval-
+augmented generation (RAG) tasks. Unlike pre-
+vious methods primarily relying on document-level
+retrieved knowledge, we extract and utilize fine-
+grained knowledge to enhance RAG performance.
+Concretely, we design a disentangled prompting
+procedure to retrieve fine-grained knowledge and
+develop a decoding enhancement strategy to con-
+strain the document-based decoding process with
+fine-grained knowledge. Our method requires no
+additional modules or training process and can be
+widely integrated into basic RAG pipelines. Exper-
+iments on two mainstream RAG pipelines and four
+benchmark datasets demonstrate the efficacy and
+generality of our proposed method.
+Limitations
+Since RAG basic pipelines based on larger-scale
+LLMs (e.g., 70B) require extensive computational
+resources and are not the mainstream methods, we
+have not yet evaluated our method in this setting.
+Moreover, on rare occasions when the external
+knowledge corpus lacks the necessary information
+for question answering, our method will not pro-
+vide significant enhancements in these cases.
+Ethics Statement
+The RAG technique helps reduce factual errors in
+LLM-generated content. However, since the exter-
+nal corpus comes from various sources, the devel-
+opment of RAG may also introduce potential risks.
+For example, if attackers add biased or discrimina-
+tory content to the external knowledge corpus, such
+statements may be generated. Moreover, if the cor-
+pus contains incorrect or outdated information, it
+could lead to the spread of fake news. Additionally,
+RAG could be misused to create false information
+that harms reputations or manipulates public opin-
+ion. Therefore, as RAG technology advances, it
+is important to carefully manage the corpus and
+ensure its use follows ethical and legal standards
+to minimize potential risks. In this work, we rig-
+orously adhere to the human-centered principle to
+ensure the responsible development and applica-
+tion of RAG technologies. The datasets utilized
+in this work do not contain any personal privacy
+information or offensive content, and no personal
+data has been collected, minimizing the potential
+risks associated with RAG.
+Acknowledgements
+We would like to express our sincere gratitude to
+the professional reviewers for their suggestions and
+comments. This work is supported by the National
+Science Fund for Excellent Young Scholars under
+Grant 62222212 and the National Natural Science
+Foundation of China under Grant 62376033.
+References
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+arXiv preprint arXiv:2310.11511.
+Yejin Bang, Samuel Cahyawijaya, Nayeon Lee, Wen-
+liang Dai, Dan Su, Bryan Wilie, Holy Lovenia, Ziwei
+10039

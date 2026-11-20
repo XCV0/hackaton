@@ -1,0 +1,102 @@
+30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain Geethan Sannidhi, Sagar Srinivas Sakhinana, and Venkataramana Runkana
+Dataset #Training #Validation #Test #Entities #Relation Time granularity 𝑁obs
+ICEWS14 [28] 323, 895 − 341, 409 12, 498 260 24 hours 365
+ICEWS18 [4] 373, 018 45, 995 49, 545 23, 033 256 24 hours 304
+ICEWS05-15 [6] 369, 104 46, 188 46, 037 10, 488 251 24 hours 4, 017
+WIKI [17] 539, 286 67, 538 63, 110 12, 554 24 1 year 232
+YAGO [23] 161, 540 19, 523 20, 026 10, 623 10 1 year 189
+ACLED-CD22 1,788 216 222 243 6 24 hours N/A
+Table 1: The dataset statistics include the number of quadruples in the training, validation, and test sets, denoted as #Training,
+#Validation, and #Test, respectively. 𝑁obs indicates the total snapshots of the temporal knowledge graph (tKG), with each
+snapshot capturing its state at a distinct time point.
+4.6 Results
+Our study compared the proposed framework with various super-
+vised learning methods for tKG forecasting. Table 2 demonstrates
+that sLA-tKGF W/GPT-4, outperformed baseline algorithms. We
+report baseline results from prior research [7, 18] for fair and con-
+sistent comparison. Tables 3 and 4 provide further comparisons
+using several popular baselines, with results reported from an ear-
+lier study[11]. Our experimental results confirm the effectiveness
+of sLA-tKGF framework in constructing knowledge-augmented
+prompts, involving: (1) retrieving historical knowledge from tKGs,
+(2) incorporating web search results for current information, and (3)
+using pre-trained large language models for summarizing historical
+entity-relationships, to query the small-scale language model and
+generate accurate and interpretable forecasts.
+4.7 Ablation Study
+Given the complexity and multifaceted nature of the proposed
+sLA-tKGF framework for tKG forecasting, we propose several ab-
+lation experiments to evaluate the individual contributions of the
+components and their effectiveness within the framework. Each of
+these ablation studies can provide insights into the significance of
+the individual components and their collective impact on the overall
+efficacy of the sLA-tKGF framework. To design ablation studies for
+the sLA-tKGF framework, we systematically disable each compo-
+nent individually to evaluate its impact on the overall performance.
+This approach helps in understanding the contribution of individual
+components to the framework’s accuracy, reliability, and robust-
+ness. The ablation study aims to evaluate the contributions of three
+key components in the framework for forecasting future events: (a)
+historical knowledge retrieval (HKR) from tKGs, (b) web search for
+contextual information (WSCI), and (c) descriptive text generation
+(DTG) using PLLMs. The HKR component, which retrieves relevant
+historical knowledge from dynamic tKGs, is assessed by contrasting
+its performance when incorporated versus omitted. Similarly, the
+impact of the WSCI component, providing up-to-date context prior
+to the target time through web search, is evaluated by disabling it
+and observing the changes in forecasting accuracy. The utility of
+the DTG component, which utilizes PLLMs to analyze historical
+entity relationships to generate descriptive texts, is quantified by
+including or excluding it and observing the impact on forecasting
+accuracy. The ablated variants are as follows:
+• w/o HKR: Omits historical knowledge retrieval from tKGs.
+• w/o WSCI: Omits web search for contextual information.
+• w/o DTG: Omits PLLMs for descriptive text generation.
+Table 5 shows the ablation study results. The ablated variants
+performance declines compared to the original framework (i.e.,
+baseline for ablation study) and signifies the importance of the indi-
+vidual components. The study supports our approach of construct-
+ing knowledge-augmented prompts for querying the small-scale
+language model for improved forecasts.
+4.8 Deep Dive into Long-term tKG forecasting
+Existing tKG forecasting research often overlooks insights from
+edge dissolution and formation. Our work considers the creation
+and dissolution of relationships (edges) between entities in tKGs as
+critical evolutionary factors for accurate tKG forecasting by captur-
+ing the essence of how relationships evolve and change over time.
+Nevertheless, the high dimensionality and dynamic complexity of
+tKGs pose challenges for both short and long-term event forecast-
+ing. Our approach uses historical context within an evolving tKG
+to improve both short-term and long-term forecasting accuracy.
+Short-term forecasts predict near-future changes, capturing the
+immediate evolution of events, while long-term forecasts antici-
+pate broader trends that unfold over an extended period. Standard
+tKG forecasting relies on static KG snapshots, denoted as G(𝑡 −𝑡𝑚,𝑡 ),
+from a historical window 𝑚 up until time 𝑡, to predict events at time
+𝑡+ Δ𝑡 (e.g., one day). In real-world scenarios, the absence of graph
+information motivates the evaluation of forecasting techniques for
+making predictions about the distant future (Δ𝑇 ≥ Δ𝑡). In the con-
+text of long-term tKG forecasting, the objective is to predict missing
+entities at a future time 𝑡+ Δ𝑇 , beginning with an initial forecast pe-
+riod from 𝑡−𝑡𝑚 to 𝑡+ Δ𝑡. This initial forecast targets the short-term
+future, represented by Δ𝑡. The forecasting process then extends into
+the final forecast period, from 𝑡+ Δ𝑡 to 𝑡+ Δ𝑇 , to focus on long-term
+predictions, where Δ𝑇 signifies the extended future. Experimental
+results on the ICEWS05-15 dataset, using sLA-tKGF W/GPT-4, for
+different Δ𝑇 values are shown in Table 6. As Δ𝑇 increases (1 day
+to 8 days), performance declines in both single-step and multi-step
+approaches, indicating increased difficulty in predicting further
+into the future. This decline in performance is attributed from the
+assumption that dynamics at 𝑡 + Δ𝑡 apply at 𝑡 + Δ𝑇 . With larger
+Δ𝑇 , this assumption falters due to data distributional shifts and the
+performance drops because of the lack of recent relevant historical
+facts in the augmented prompt for accurate predictions at 𝑡+ Δ𝑇 .
+4.9 Inductive Link Prediction in tKGs
+In real-world applications, new entities emerge over time, necessi-
+tating a tKG forecasting framework that generalizes well to unseen
+data. An efficient framework must demonstrate robust generaliza-
+tion abilities to effectively handle new, unencountered entities. To
+evaluate this capability, we introduce the inductive link predic-
+tion task, which showcases the framework’s ability to predict links
+involving unseen entities. This task involves selecting test
+4

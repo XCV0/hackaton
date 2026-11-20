@@ -1,0 +1,112 @@
+fusion to mismatched vocabularies is an emerg-
+ing direction; recent work has explored token-level
+collaboration across models with different vocabu-
+laries (Bian et al., 2025). Such approaches suggest
+that an alignment layer, e.g., based on prefix group-
+ing or token mapping, could enable auxiliary mod-
+els with different tokenizers to provide compatible
+guidance within GRAD. We leave this extension
+to future work.
+Finally, our main experiments focus on single-
+turn RAG. We provide initial iterative/multi-hop
+results using HQA in Appendix E to show that
+single-turn gains carry over, but fully generalizing
+the adaptation mechanism to multi-turn pipelines
+remains open.
+References
+Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng,
+Jianfeng Gao, Xiaodong Liu, Rangan Majumder,
+Andrew McNamara, Bhaskar Mitra, Tri Nguyen,
+Mir Rosenberg, Xia Song, Alina Stoica, Saurabh
+Tiwary, and Tong Wang. 2018. Ms marco: A human
+generated machine reading comprehension dataset.
+Preprint, arXiv:1611.09268.
+Yuang Bian, Yupian Lin, Jingping Liu, and Tong Ruan.
+2025. PToco: Prefix-based token-level collaboration
+enhances reasoning for multi-LLMs. In Proceed-
+ings of the 31st International Conference on Compu-
+tational Linguistics, pages 8326–8335, Abu Dhabi,
+UAE. Association for Computational Linguistics.
+Collin Burns, Pavel Izmailov, Jan Hendrik Kirchner,
+Bowen Baker, Leo Gao, Leopold Aschenbrenner,
+Yining Chen, Adrien Ecoffet, Manas Joglekar, Jan
+Leike, Ilya Sutskever, and Jeffrey Wu. 2024. Weak-
+to-strong generalization: Eliciting strong capabili-
+ties with weak supervision. In Proceedings of the
+41st International Conference on Machine Learning,
+volume 235 of Proceedings of Machine Learning
+Research, pages 4971–5012. PMLR.
+Haw-Shiuan Chang, Nanyun Peng, Mohit Bansal, Anil
+Ramakrishna, and Tagyoung Chung. 2024. Explain-
+ing and improving contrastive decoding by extrapolat-
+ing the probabilities of a huge and hypothetical LM.
+In Proceedings of the 2024 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+8503–8526, Miami, Florida, USA. Association for
+Computational Linguistics.
+Qinyuan Cheng, Xiaogui Yang, Tianxiang Sun, Linyang
+Li, and Xipeng Qiu. 2023. Improving contrastive
+learning of sentence embeddings from AI feedback.
+In Findings of the Association for Computational
+Linguistics: ACL 2023, pages 11122–11138, Toronto,
+Canada. Association for Computational Linguistics.
+Chenghao Fan, Zhenyi Lu, Wei Wei, Jie Tian, Xiaoye
+Qu, Dangyang Chen, and Yu Cheng. 2024. On gi-
+ant’s shoulders: Effortless weak to strong by dynamic
+logits fusion. In Advances in Neural Information Pro-
+cessing Systems 38: Annual Conference on Neural
+Information Processing Systems 2024, NeurIPS 2024,
+Vancouver, BC, Canada, December 10 - 15, 2024.
+Cheng-Yu Hsieh, Yung-Sung Chuang, Chun-Liang Li,
+Zifeng Wang, Long Le, Abhishek Kumar, James
+Glass, Alexander Ratner, Chen-Yu Lee, Ranjay Kr-
+ishna, and Tomas Pfister. 2024. Found in the middle:
+Calibrating positional attention bias improves long
+context utilization. In Findings of the Association
+for Computational Linguistics: ACL 2024, pages
+14982–14995, Bangkok, Thailand. Association for
+Computational Linguistics.
+Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan
+Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and
+Weizhu Chen. 2022. Lora: Low-rank adaptation of
+large language models. In The Tenth International
+Conference on Learning Representations, ICLR 2022,
+Virtual Event, April 25-29, 2022. OpenReview.net.
+Maxim Khanov, Jirayu Burapacheep, and Yixuan Li.
+2024. ARGS: alignment as reward-guided search. In
+The Twelfth International Conference on Learning
+Representations, ICLR 2024, Vienna, Austria, May
+7-11, 2024. OpenReview.net.
+Taehyeon Kim, Joonkee Kim, Gihun Lee, and Se-Young
+Yun. 2024. Instructive decoding: Instruction-tuned
+large language models are self-refiner from noisy
+instructions. In The Twelfth International Conference
+on Learning Representations, ICLR 2024, Vienna,
+Austria, May 7-11, 2024. OpenReview.net.
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+field, Michael Collins, Ankur Parikh, Chris Alberti,
+Danielle Epstein, Illia Polosukhin, Jacob Devlin, Ken-
+ton Lee, Kristina Toutanova, Llion Jones, Matthew
+Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob
+Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+ral questions: A benchmark for question answering
+research. Transactions of the Association for Compu-
+tational Linguistics, 7:452–466.
+Youngwon Lee, Seung-won Hwang, Daniel F Campos,
+Filip Grali´nski, Zhewei Yao, and Yuxiong He. 2025a.
+CORD: Balancing COnsistency and rank distillation
+for robust retrieval-augmented generation. In Pro-
+ceedings of the 2025 Conference of the Nations of
+the Americas Chapter of the Association for Com-
+putational Linguistics: Human Language Technolo-
+gies (Volume 2: Short Papers), pages 787–796, Al-
+buquerque, New Mexico. Association for Computa-
+tional Linguistics.
+Youngwon Lee, Seung-won Hwang, Daniel F Cam-
+pos, Filip Grali´nski, Zhewei Yao, and Yuxiong He.
+2025b. Inference scaling for bridging retrieval and
+augmented generation. In Findings of the Association
+for Computational Linguistics: NAACL 2025, pages
+7324–7339, Albuquerque, New Mexico. Association
+for Computational Linguistics.
+45283

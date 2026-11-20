@@ -1,0 +1,116 @@
+1 5 10 20
+Context Window k
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+(a) PaperTab
+1 5 10 20
+Context Window k
+0.60
+0.65
+0.70
+0.75
+0.80
+0.85
+0.90
+0.95
+1.00
+ (b) FetaTab
+1 5 10 20
+Context Window k
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+ (c) SciGraphQA
+1 5 10 20
+Context Window k
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+ (d) SPIQA
+Figure 3: Comparison of retrieval performance across datasets, for benchmarked retrievers (BM25, MiniLM, MPNet,
+BGE1.5, ColPali, ColQwen), at different context window lengths, varying k ∈ [1, 5, 10, 20].
+Baseline LLM PaperTab FetaTab SciGraphQA SPIQA SlideVQA Average
+Qwen2-VL 8.23 23.1 16.74 9.93 2.46 12.09
+Gemini 27.62 62.02 22.1 38.82 13.47 32.81Long Context
+GPT4o 28.37 60.03 24.12 36.3 15.06 32.78
+Qwen2-VL 25.33 57.56 26.75 39.77 8.82 31.65
+Gemini 33.6 63.86 26.48 42.33 10.3 35.31Text RAG
+ChatGPT4o 37.34 60.82 29.74 42.8 15.97 37.33
+Qwen2-VL 27.37 58.57 28.13 42.81 38.42 39.06
+Gemini 29.23 52.82 23.56 41.43 51.96 39.80Visual RAG
+ChatGPT4o 42.01 61.89 31.12 43.28 66.82 49.02
+Qwen2-VL 29.89 59.24 27.98 42.8 39.77 39.94
+Gemini 39.66 60.89 25.82 41.03 52.74 44.03VisDoMRAG
+ChatGPT4o 44.11 63.28 31.36 44.09 67.22 50.01
+Table 3: Performance of our approach, VisDoMRAG, compared to baseline approaches on VisDoMBench. VisDoMRAG
+outperforms long-context LLM, visual and text-only RAG baselines.
+Retriever PaperTab FetaTab SciGraphQA SPIQA SlideVQA Average
+BM25 65.51 84.00 72.73 88.23 98.55 81.80
+MiniLM 65.51 88.85 91.65 61.06 0.73 61.56
+MPNet 90.18 89.71 91.40 95.84 0.73 73.57
+BGE1.5 96.81 94.00 90.91 98.43 81.85 92.40
+ColPali 96.93 97.71 95.28 93.17 97.64 96.15
+ColQwen2 97.61 96.86 95.58 96.85 97.82 96.94
+Table 4: Comparison of performance in source docu-
+ment identification, at k = 5.
+7 Results
+7.1 Retrieval Evaluation on VisDoMBench
+Fig. 3 presents the performance of various re-
+trieval models in extracting evidence from doc-
+uments, evaluated using the Averaged Normal-
+ized Longest Common Subsequence (ANLCS) be-
+tween retrieved evidence and ground truth evi-
+dence, for different context window lengths (k =
+[1, 5, 10, 20]). Based on a threshold of ANLCS =
+0.7, we use a context window of k = 5, k = 7 for
+Visual RAG and Textual RAG, respectively, with
+ColQwen2 and BGE-1.5 as the visual and textual
+retrievers. ColQwen2 outperforms other retrieval
+baselines across different datasets due to the pres-
+ence of a strong LLM backbone (Qwen2).
+Table 4 evaluates the retriever performance in iden-
+tifying the correct source document, presenting
+the proportion of queries with accurate document
+retrieval for k = 5. A document is considered cor-
+rectly retrieved if at least ⌈k/2⌉ of the retrieved
+documents correspond to the ground truth source
+documents. We observe that ColQwen2 is better
+than the next closest BGE1.5 model by 4.5%. No-
+tably, we observe a substantial performance gap in
+this metric for SlideVQA, with visual models sig-
+nificantly outperforming text-only models. BM25
+exhibits better performance than text-only models
+in this case, as slides typically contain sparse text,
+often comprising keywords that directly match be-
+tween the query and context. Conversely, neural
+models struggle to capture semantic information
+effectively, as the textual content lacks complete
+sentences, limiting their ability to exploit contex-
+tual meaning.
+7.2 End-to-End Evaluation
+Table 3 presents the comparative performance of
+VisDoMRAG against Visual RAG, Textual RAG,
+and Long Context methods across multiple LLMs,
+including Qwen2VL (7B), Gemini Flash, and GPT-
+4. The results indicate that VisDoMRAG consis-
+tently achieves superior performance over the base-
+line methods across datasets, with performance
+gains ranging from 2.1-21.6% (PaperTab), 0.67-
+36.14% (FetaTab), 0.24-11.24% (SciGraphQA),
+0.81-32.87% (SPIQA), 0.40-52.16% (SlideVQA).
+Additionally, within each baseline method for most
+datasets, we observe a positive correlation between
+model size and performance, which aligns with
+6094

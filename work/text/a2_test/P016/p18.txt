@@ -1,0 +1,38 @@
+R Example of MultiRAG Misleading Answer
+Question: 누가 ’나는 바비걸’ 노래를 만들었나요? (Who made the song i’m a barbie girl?)
+Target: [’아쿠아’ , ’Aqua’ ]
+Answer Llama3-8 (no-RAG):
+정답은 Ingemar Örhagen, Matthias Lindblom, 그리고 Candice Posey입니다.
+(The answer is Ingemar Örhagen, Matthias Lindblom and Candice Posey. )
+Retrieval from from WALL (Wikipedia in ALL languages):
+[1]: The music video for "Barbie Girl" was recorded on August 2005, between 17 and 18. It was directed by Ricardo
+Vereza, Bidu Madio, Rentz and Mauricio Eça. The video was released on August 30. Kelly plays a determinate and
+feminist woman, who doesn’t need a man [...] (from WKo)
+[2]: Barbie Girl is a song by the Danish-Norwegian dance-pop group Aqua. It was released in May 1997 as the third
+single from the group’s debut studio album, "Aquarium" (1997). The song was written by Søren Rasted, Claus Norreen,
+René Dif, and Lene Nystrøm, and was produced by Johnny Jam, Delgado, Rasted, and Norreen. It was written after
+Rasted [...] (from WEn)
+[3]: Barbie and The Three Musketeers is a video premiere animated feature from Universal Pictures, released on DVD
+on 15 September 2009 in the United States. It is the 16th film in the Barbie animated series and is based on the novel
+Les Trois Mousquetaires by French writer Alexandre Dumas. The heroine of the film is played by Barbie and her three
+friends, Teresa, Summer and Nikki, who together realise their dream of becoming [...] (from WKo)
+[4]: Barbie as the Princess and the Pauper is a video premiere animated production released by Lionsgate Entertainment
+on 28 September 2004 on DVD and VHS. It is the fourth film in the Barbie animated series, based on Mark Twain’s
+classic novel The Beggar Prince. The film is also the first animated musical of the Barbie film series, with a total of
+seven original songs performed by Barbie in two roles a noble princess and a poor village girl. [...] (from WKo)
+[5]: The song, at first glance, appears to be about the popular children’s doll Barbie. However, at second glance, the
+song contains several sexual overtones, such as "You can brush my hair, undress me everywhere". This caused some
+controversy upon its release in Denmark, but despite the controversy and perhaps partly due [...] (from WEn)
+Answer Llama3-8b (MultiRAG):
+The seven original songs in Barbie as the Princess and the Pauper are less certain, as they were likely adapted from
+classical compositions and reworked into the animated film’s soundtrack by an unspecified creative team. The answer
+is: The songs were all composed by Wolfgang Amadeus Mozart in collaboration with contemporary pop producers.
+(translated from Korean)
+Answer Llama3-8b (CrossRAG):
+The song "Barbie Girl" was performed by the Danish-Norwegian [...] The answer is: Aqua. (translated from Korean)
+Answer GPT-4o (MultiRAG):
+The song "Barbie Girl" was written by Søren Rasted, Claus Norreen, René Dif, and Lene Nystrøm, members of the
+Danish-Norwegian dance-pop group Aqua. The answer is: Aqua. (translated from Korean)
+Table 17: An example of MultiRAG inference. We have translated documents and answers into English to
+facilitate the understanding as in Table 16.
+714

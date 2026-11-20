@@ -1,0 +1,93 @@
+9
+TABLE 3
+Policy compliance QA results on 1,325 test instances spanning 13 jurisdictions. KW-R = keyword recall; KW-F1 = keyword F1; CC = context
+coverage; JA = retrieval-level jurisdiction accuracy; CA = compliance accuracy; Judge = LLM-as-judge score (1–5); RG = response groundedness.
+All PRISM-RAG results use m = 10, c = 50. † HyperGraphRAG makes two LLM calls and three API calls total per query. Bootstrap 95% CIs and
+BH-corrected p-values for all pairwise comparisons are reported in the Appendix.
+Method KW-R KW-F1 CC JA CA Judge RG
+StandardRAG 0.2683 0.1821 0.3942 0.4495 0.3911 2.7442 0.7336
+HippoRAG2 0.0507 0.0345 0.5778 0.1408 0.0844 1.4106 0.4725
+HyperGraphRAG† 0.2220 0.1475 0.2816 0.8773 0.0133 2.7283 0.8850
+PRISM-RAG (ours) 0.3139 0.1997 0.5495 0.9387 0.4178 2.8551 0.7287
+TABLE 4
+Pairwise mean gaps (PRISM-RAG minus baseline) with bootstrap 95% confidence intervals and BH-corrected p-values on policy compliance QA.
+The star ∗ means a significant result at adjusted q < 0.05 (BH correction over all 24 simultaneously tested hypotheses across metrics and baseline
+pairs; 10,000 bootstrap resamples and 10,000 permutations). CA uses N = 235 matched instances with an extractable compliance label; all other
+metrics use N = 1,387 matched pairs (N = 1,231 for PRISM-RAG vs. HyperGraphRAG on JA).
+Comparison JA [95% CI] CA [95% CI] KW-F1 [95% CI] Judge [95% CI]
+vs. StandardRAG +0.486 [0.462, 0.509]∗ +0.030 [−0.034, 0.094] +0.019 [0.014, 0.023]∗ +0.114 [0.043, 0.180]∗
+vs. HippoRAG2 +0.796 [0.781, 0.811]∗ +0.340 [0.281, 0.404]∗ +0.166 [0.159, 0.173]∗ +1.455 [1.381, 1.528]∗
+vs. HyperGraphRAG +0.061 [0.041, 0.081]∗ +0.409 [0.345, 0.472]∗ +0.053 [0.049, 0.058]∗ +0.136 [0.049, 0.219]∗
+specific banned/restricted/legal conclusion the judge extracts for CA
+computation, even though it does retrieve jurisdictionally relevant
+documents as its JA score shows. We call this phenomenon the
+“JA-CA dissociation.” Interestingly, this JA-CA dissociation pattern
+from the main results occurs again across the ablation experiments
+in Table 6, where several PRISM-RAG variants that reduce JA
+simultaneously raise CA. We argue this suggests that neither metric
+alone is sufficient and that both JA and CA measure complementary
+properties of the retrieval method’s pipeline. We should also recall
+that HyperGraphRAG requires two LLM calls per query (one for
+entity extraction, one for final response generation) as opposed to
+one per query for PRISM-RAG with no API costs for indexing.
+Compliance accuracy reaches 41.8% for PRISM-RAG versus
+39.1% for StandardRAG. The CA gap is not statistically significant
+(p = 0.430, bootstrap 95% CI on gap: [−0.034, 0.094], N = 235
+matched instances with extractable compliance labels). This shows
+why multimodal legislation understanding is challenging. PRISM-
+RAG reaches the correct jurisdiction more than 2.1× more often
+than StandardRAG, as shown by JA. Thus, while the LLM can
+sometimes draw the right compliance conclusion, it does so because
+it pulled information from the wrong jurisdiction, because statutory
+language is sufficiently similar across jurisdictions. Additionally,
+HippoRAG2 achieves CA of 8.4% and HyperGraphRAG 1.3%,
+showing their overreliance on semantics to draw out text entities.
+All KW-R, KW-F1, CC, and Judge gaps between PRISM-RAG
+and HippoRAG2 or HyperGraphRAG are statistically significant at
+p < 0.001 after BH correction; full CI tables are in the Appendix.
+Context Coverage further illuminates retrieval behavior in the
+SOTA RAG frameworks. HippoRAG2 achieves CC of 0.578
+(highest among baselines) because its KG traversal surfaces a large,
+noisy context that by chance includes many keyword strings, yet
+its KW-R is only 0.051—the LLM cannot extract or reproduce the
+relevant information from the overly long context. Among the RAG
+methods used, HippoRAG2 has the longest contexts and consumes
+the most tokens. PRISM-RAG achieves CC of 0.550 alongside
+KW-R of 0.314 and a 4.1× wall-time advantage, suggesting that
+smaller and more precise, better-ordered contexts produced by
+jurisdiction-aware assembly are more effective.
+Confidence Intervals and Significance Tests on Policy QA. Table
+4 reports bootstrap 95% confidence intervals (CIs) and Benjamini-
+Hochberg (BH)-corrected pairwise significance tests for the key
+policy compliance metrics. To ensure that our improvements in
+high-similarity document chunk retrieval in our RAG experiments
+are statistically sound and not artifacts of multiple testing rounds,
+we do not use the standard Student’s t-test and instead use a
+BH-corrected paired permutation test. The JA gap between PRISM-
+RAG and StandardRAG is the largest and most precisely estimated
+result in the table at +48.6 pp [46.2, 50.9], p < 0.001. The CA
+gap against StandardRAG is +3.0 pp [−3.4, 9.4], p = 0.430,
+which is not statistically significant after BH correction. The wide
+CI for CA reflects that only N = 235 of the 1,325 instances
+yielded a clear compliance label in both RAG backends’ outputs,
+leaving the comparison underpowered relative to the other metrics.
+CA parity with StandardRAG does not imply equivalent retrieval
+behavior; JA reveals the underlying difference directly. For instance,
+PRISM-RAG reaches the correct jurisdiction 2.1× more often (JA
+gap: +48.6 pp), however, StandardRAG can still produce a correct
+compliance label when the wrong jurisdiction’s statute happens to
+share the same regulatory stance as the queried one. All gaps against
+HippoRAG2 and HyperGraphRAG are statistically significant at
+p < 0.001 across JA, CA, KW-F1, and Judge. The sole exception
+is on RG, where HyperGraphRAG’s responses more closely mirror
+their retrieved context (−0.157 [−0.162, −0.152], p < 0.001),
+consistent with the grounded-but-indeterminate pattern discussed
+above. Full bootstrap CIs per method and across all metrics appear
+in the Appendix.
+5.3 Efficiency Analysis
+The cost properties discussion in Sec. 4.5 established that PRISM-
+RAG and StandardRAG each require exactly one LLM call to
+process one query, HyperGraphRAG requires two, and HippoRAG2
+and HyperGraphRAG additionally require one LLM call per
+document chunk at index time, while PRISM-RAG requires
+none. Table 5 reports the measured wall-time and token cost

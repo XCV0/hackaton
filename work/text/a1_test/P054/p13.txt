@@ -1,0 +1,54 @@
+homemade 2.5 mm coil was used to record the spectra. HRTEM characterization was
+performed by using Thermo Fisher Scientiﬁc Talos F200X. A Cary 500 ultraviolet-
+visible (UV-Vis)-near infrared (NIR) spectrophotometer was applied to measure the
+optical absorption spectra of perovskite ﬁlms. PL and TRPL spectra were character-
+ized by Fluorolog-3-p spectrophotometer. The energy level of the perovskite ﬁlm
+surface was measured by UPS (AXIS ULTRA DLD, Al/Mg Ka, 450 W, 15 kV) with a
+He source of incident energy of 21.21 eV. The lateral and depth proﬁle of ionic spe-
+cies in perovskite ﬁlms were acquired by ToF-SIMS (ION-TOF) equipped with a 10 kV
+Ar-Cluster gun, and the Bi+ primary-ion beam was scanned over 50 3 50 and
+150 3 150 mm areas, respectively. Solar cells were illuminated by a solar light simu-
+lator (Solar IV-150A, Zolix), and the light intensity was calibrated by a standard New-
+port calibrated KG5-ﬁltered Si reference cell. The J-V curves of solar cells were
+measured by a Keithley 2400 digital source meter with a scan rate of 0.1 V s/C01
+(scan range: /C00.1 to 1.3 V) in ambient (relative humidity: 10%–15%), and the devices
+were masked with a metal aperture to deﬁne the active area of 0.0625 cm2.Asfor
+encapsulated solar cells, all J-V curves were measured in ambient air without
+humidity control. TPC and TPV curves of solar cells were measured by digital storage
+oscilloscope (KEYSIGHT, DSOX3104T) under the excitation of pulsed laser (532 nm,
+DPS-532-A, 1 mJ). EQE spectra of solar cells were characterized by SCS600-QEDZ-
+JN system (Zolix). Temperature-dependent conductivity was measured on a probe
+station (HGOAN, HGPS100), and the temperature was controlled by the thermo-
+electric plate. The lateral spacing of two Au electrodes on perovskite ﬁlms was set
+to be 100 mm, and the electrical measurements were done by the digital source
+meter under a direct current (DC) bias voltage of 40 V. Frequency-dependent capac-
+itance was measured by an inductance, capacitance, and resistance (LCR) meter
+(Agilent, E4980A) to determine the tDOS of solar cells. A single output programma-
+ble DC power supply (BK PRECISION) was used to apply an electric ﬁeld on the solar
+cells and lateral devices.
+Theoretical calculations
+All calculations were computed by the Vienna ab initio Simulation package (VASP) of
+DFT. The projector augmented wave (PAW) model with Perdew-Burke-Ernzerhof
+(PBE) function was employed to describe the interactions between core and elec-
+trons, with ultrasoft pseudopotentials (shells explicitly included in calculations:
+5d106s26p2 for Pb; 5s25p5 for I; 2s22p2 for C; 2s22p3 for N; and 1s1 for H). DFT-D3
+dispersion interactions were included in the calculation. During the structure optimi-
+zation, the MAPbI3 surface of a relatively stable terminal was chosen. The bottom few
+layers were constrained, and the top layers were fully relaxed. A vacuum region of
+20 A˚ was built to avoid interactions between the neighboring MAPbI3 slabs. An en-
+ergy cutoff of 450 eV was used for the plane wave expansion of the electronic wave
+function. The Brillouin zones of all systems were sampled with gamma-point-
+centered Monkhorst-Pack grids. A 1 3 1 3 1and33 3 3 3 Monkhorst Pack k-point
+setup was used for slab geometry optimization and electronic structures, respec-
+tively. The force and energy convergence criteria were set to 0.01 eV A˚ /C01 and
+10/C05 eV, respectively. The adsorption enthalpy of all absorbates is calculated as
+DEad = Ead/sur /C0 Esur /C0 Ead,whereEsur, Ead,andEad/sur are the energy of the bare
+MAPbI3 surface, the energy of an adsorbate, and the surface with adsorbate,
+respectively.
+SUPPLEMENTAL INFORMATION
+Supplemental information can be found online at https://doi.org/10.1016/j.xcrp.
+2022.100760.
+ll
+OPEN ACCESS
+12 Cell Reports Physical Science 3, 100760, February 16, 2022
+Article

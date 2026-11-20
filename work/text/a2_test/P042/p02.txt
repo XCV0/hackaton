@@ -1,0 +1,82 @@
+717
+Figure 1: The experimental setup to evaluate impact of source diversity for RAG in historical research.
+concrete, this paper investigates1 the effect of us-
+ing contextually different historical documents on
+question answering over a historical figure using
+RAG-based LLMs of differing sizes.
+Case Study As a methodological proof of con-
+cept, we focus on Napoleon Bonaparte, whose
+historical legacy provides an ideal case for study-
+ing perspective variations. The public image and
+memory of Napoleon in early 19th century was,
+and still is, vastly different. Between 1803–1808,
+British soldiers portrayed Napoleon as a tyrant, a
+criminal, a conqueror, but also as a progressive
+law maker and an agent of enlightened civilization
+(Daly, 2018). Around the same period in France,
+parallelsbetweenNapoleonandChristweredrawn,
+with allegorical paintings were often made, to cast
+him as savior of France (Dwyer, 2004). Between
+1806–1813 in the Netherlands, literary activism
+against Napoleon was on the rise at provincial and
+national levels (Jensen, 2011).
+To investigate how the varied provenance of his-
+torical sources shapes RAG-based historical anal-
+yses of the figure of Napoleon, we (i) compile a
+multilingual dataset with historical documents ca.
+1805–1819,fromtheNetherlands,France,US,and
+UK; (ii) develop a set of questions in collaboration
+with historians and prompt LLMs of varying scales
+using RAG with sources drawn from our datasets;
+and(iii)evaluatetheanswerswithrespecttosyntax
+and semantics to examine, using a variety of auto-
+matic metrics, if and how the perspective taken by
+the LLMs on Napoleon changes with respect to the
+given contextually different historical documents.
+Figure 1 outlines the experimental setup.
+Contributions We summarize our contributions
+and main findings as follows:
+• We introduce a multilingual corpus of histori-
+cal documents (ca. 1805–1819) from multiple
+1A video summary of the paper can be found at
+https://imruhi.github.io/posts/2026/03/13/.
+countries (Netherlands, France, US, and UK)
+that could be used to investigate perspective
+variations in multiple topics;
+• We propose a novel evaluation approach that
+combinesmultiplemethodstoassessperspec-
+tive differences in RAG-based LLM outputs;
+• Weshowthatthesourcecountryandlanguage
+of documents used in RAG impacts both the
+content and structure of generated answers,
+with these effects manifesting differently within
+and across languages.
+2. Related Work
+Bias and Perspective Gallegos et al. (2024)
+show how LLMs engage in erasure of language
+and experiences of a minority social group up to
+denigrating attitudes towards them and reinforc-
+ing normativity of dominant groups. In multilingual
+settings, LLMs tend to reflect stereotypes in differ-
+entlanguagesdifferently(Mitchelletal.,2025),with
+stereotypesexpressedinonelanguageshowingup
+in model behavior in another language (Cao et al.,
+2025). They also show more significant moral bias
+when probed with languages other than English
+with a prominent gap in low-resource languages
+(Agarwal et al., 2024). LLMs also show signs of
+alignment and biases which reflect those of the
+country they were developed (Chang et al., 2025).
+Exploring multiple perspectives, also known as
+multiperspectivity (Stradling, 2003; Hartner, 2014),
+in a historical context can be exceedingly valuable.
+Multiperspectivity is shown to be an effective ap-
+proach to learning and teaching history on topics
+such as post-conflict resolution and understanding
+(McCully, 2012), intercultural understanding (Gold-
+berg and Ron, 2014), development of democratic
+citizenship (Brett et al., 2009), and controversial
+issues (Goldberg and Savenije, 2018).
+Minnema et al. (2022) propose a framework to
+automaticallydetectandsystematicallyanalyseper-
+spectives adopting a frame semantics-based ap-

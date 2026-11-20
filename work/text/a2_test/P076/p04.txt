@@ -1,0 +1,117 @@
+*Q*: where is italian spoken around the world? *Ground_truth*: Italy
+September 28, 2017
+d1->...There are 4 count-
+ries that speak Italian: Ita-
+ly, Switzerland, San Marino, 
+Vatican City...the U.S., and 
+Somalia. Italy...
+CoT1>>we can conclude that Italian is spoken in: Europe, Italy, 
+Switzerland, Slovenia...Italian is spoken around the world in vario-
+us countries, regions, and international settings.
+dn->What Languages are 
+Spoken in Italy? -World-
+Atlas... This language is spo-
+ken by around 85 million pe-
+ople throughout the world ...
+CoTn >>Italian is spoken by around 85 million people throughout 
+the world..., Italian is spoken around the world, specifically by 
+approximately 85 million people.
+CoT2>> Italian is spoken in the following places around the world:
+1. Italy. 2. Switzerland...So, the answer is: Italy, Switzerland, Croati-
+a, and by emigrants worldwide.
+d2->...It is the main lan-
+guage of Italy, and is also 
+spoken in the Canton Ticino 
+region of Switzerland, Croatia, 
+as well as ...
+Q d1~n DPO
+*Question*: When does the 
+14th season of grey's anatomy 
+come out? 
+Knowledge Refinement through Ranking CoTs
+After Training
+CoT’n >>Italian is spoke-
+n around the world,spe-
+cifically by approximate-
+ly 85 million people.
+CoT’2>>Italian is spoken 
+in: Italy,Switzerland...So, 
+the answer is: Italy,...
+According to the passages, the 14th season of Grey's Anatomy 
+premiered on September 28, 2017. It was broadcast on Thursday 
+nights at 8 PM on ABC...
+Docs
+Inference with the Knowledge Refinement Model
+Rejected
+Chosen
+CoT’1 >>Italian is spoken around the world in various countries, 
+regions, and international settings, including Europe,...
+Q + 
+d1
+Q + 
+d2
+Q + 
+dn
+CoT’2>>Italian is spoken in: Italy,...So, the answer is: Italy,...
+CoT’n>>Italian is spoken around the world, specifically by 
+approximately 85 million people.
+Self-Reflection
+Figure 2: Illustration of RankCoT.
+3.2 Knowledge Refinement through Ranking
+Chain-of-Thoughts
+To generate tailored knowledge refinement results
+yKR for RAG modeling, RankCoT optimizes the
+LLM (M) by incorporating reranking into the CoT
+generation process. Furthermore, we introduce a
+self-reflection method to further refine the CoT re-
+sults, mitigating the risk of overfitting to undesired
+CoT patterns during training RankCoT.
+3.2.1 Reranking Modeling in CoT Generation
+To learn the query-document relevance, we feed
+each document di into the LLM (M) and sample
+one CoT output yCoT(di):
+yCoT(di) ∼ M(q, di). (8)
+Next, we gather all generated CoT results from
+each document in the retrieved document set D to
+form the candidate CoT set YCoT:
+YCoT = {yCoT(d1), . . . , yCoT(dn)}. (9)
+We treat the CoT result yCoT ∈ YCoT that contains
+the ground truth answer as the positive y+ CoT, while
+the result that does not contain the ground truth
+answer is regarded as the negative y− CoT.
+Finally, we can optimize the LLM (M) to as-
+sign higher generation probabilities to positive
+knowledge refinement results y+ CoT than the neg-
+ative ones y− CoT. The training process is imple-
+mented with the Direct Preference Optimization
+(DPO) method (Rafailov et al., 2024):
+L = −E(q,y+ CoT,y− CoT)∼T
+[
+log σ
+(
+β log
+M(y+ CoT | q, D)
+MRef(y+ CoT | q, D) − β log M(y− CoT | q, D) MRef(y− CoT | q, D) )] , (10)
+where β is a hyperparameter and σ is the Sigmoid
+function. MRef is the reference model, which re-
+mains frozen during training.
+In DPO training, we input all documents D into
+the model M and aim to assign a higher probability
+to the positive knowledge refinement result y+ CoT,
+which is individually generated from one of the
+retrieved documents. This guides the model M to
+rerank the retrieved documents D when generating
+chain-of-thought as the refinement.
+3.2.2 CoT Refinement through Self-Reflection
+While these generated CoTs help the RAG model
+generate more accurate answers, the generated CoT
+results of LLMs may contain undesired patterns,
+such as “According to the document” and “the rea-
+soning process is”. These training patterns can mis-
+lead the LLM (M) to overfit these CoT results dur-
+ing training (Gudibande et al., 2023). To address
+this problem, RankCoT proposes a self-reflection
+method to refine the CoT results YCoT.
+Specifically, we first sample the CoT outputs
+˜yCoT(di) by feeding the given query q and each
+12860

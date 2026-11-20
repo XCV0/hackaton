@@ -1,0 +1,24 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D008,R001,DV2,MS2,M1,PCE,18.5,%,champion,,,,,18.5,%,18.5,%,primary,,5,3. Results and discussion,,Fig. 3a,PCE of 18.5% in the forward bias,extracted,,
+D008,R002,DV2,MS2,M1,Voc,1.001,V,champion,,,,,1.001,V,1.001,V,primary,,5,3. Results and discussion,,Fig. 3a,Voc = 1.001 V,extracted,,
+D008,R003,DV2,MS2,M1,Jsc,23.75,mA/cm2,champion,,,,,23.75,mA/cm2,23.75,mA/cm2,primary,,5,3. Results and discussion,,Fig. 3a,Jsc = 23.75 mA cm2,extracted,,
+D008,R004,DV2,MS2,M1,FF,78.5,%,champion,,,,,78.5,%,78.5,%,primary,,5,3. Results and discussion,,Fig. 3a,FF= 78.5%,extracted,,
+D008,R005,DV1,MS1,M2,PCE,15.8,%,,,,,,15.8,%,15.8,%,primary,,5,3. Results and discussion,,Fig. 3a,15.8% for the sample w/o PbCl2,extracted,,направление развёртки и champion/mean в статье явно не указаны
+D008,R006,DV1,MS1,M2,Voc,0.85,V,,,,,,0.85,V,0.85,V,primary,,5,3. Results and discussion,,Fig. 3a,Voc = 0.85,extracted,,направление развёртки и champion/mean в статье явно не указаны
+D008,R007,DV1,MS1,M2,Jsc,23.88,mA/cm2,,,,,,23.88,mA/cm2,23.88,mA/cm2,primary,,5,3. Results and discussion,,Fig. 3a,Jsc = 23.88 mA,extracted,,направление развёртки и champion/mean в статье явно не указаны
+D008,R008,DV1,MS1,M2,FF,76.3,%,,,,,,76.3,%,76.3,%,primary,,5,3. Results and discussion,,Fig. 3a,FF= 76.3%,extracted,,направление развёртки и champion/mean в статье явно не указаны
+D008,R009,DV2,MS2,M1,PCE,18.5,%,champion,,,,,18.5,%,18.5,%,primary,,1,Abstract,,,yields a PCE of 18.5% with a cell area of 0.09 cm2,extracted,R001,
+D008,R010,DV2,MS2,M1,Voc,1.001,V,champion,,,,,1.001,V,1.001,V,primary,,2,1. Introduction,,,"1.001 V, a short circuit-current (Jsc) of 23.75",extracted,R002,
+D008,R011,DV2,MS2,M1,Jsc,23.75,mA/cm2,champion,,,,,23.75,mA/cm2,23.75,mA/cm2,primary,,2,1. Introduction,,,"1.001 V, a short circuit-current (Jsc) of 23.75",extracted,R003,
+D008,R012,DV2,MS2,M1,Voc,1.001,V,champion,,,,,1.001,V,1.001,V,primary,,8,4. Conclusion,,,exhibiting a Voc and a FF of 1.001 V,extracted,R002,
+D008,R013,DV2,MS2,M1,FF,78.5,%,champion,,,,,78.5,%,78.5,%,primary,,8,4. Conclusion,,,"and 78.5%, respectively, for 0.09 cm2 wide cell",extracted,R004,
+D008,R014,DV3,MS3,M1,PCE,17.06,%,champion,,,,,17.06,%,17.06,%,primary,,1,Abstract,,,achieving champion PCEs of 17.06%,extracted,,
+D008,R015,DV3,MS3,M1,PCE,17.06,%,champion,,,,,17.06,%,17.06,%,primary,,2,1. Introduction,,,17.06% for 0.36 cm2,extracted,R014,
+D008,R016,DV1,MS1,M2,PCE,15.0,%,mean,,20,,,15.0,%,15.0,%,primary,,6,3. Results and discussion,,Fig. 3b,approximately 15.0% and 17.6%,extracted,,«approximately»; среднее по 20 элементам
+D008,R017,DV2,MS4,M1,PCE,17.6,%,mean,,20,,,17.6,%,17.6,%,primary,,6,3. Results and discussion,,Fig. 3b,approximately 15.0% and 17.6%,extracted,,«approximately»; среднее по 20 элементам
+D008,R018,DV1,MS5,M2,retained_PCE,77,%,,,,30,days,77,%,77,%,primary,,7,3. Results and discussion,,Fig. 3d,retained 77% and 88% of their initial,extracted,,после ~30 суток хранения в N2
+D008,R019,DV2,MS6,M1,retained_PCE,88,%,,,,30,days,88,%,88,%,primary,,7,3. Results and discussion,,Fig. 3d,retained 77% and 88% of their initial,extracted,,после ~30 суток хранения в N2
+D008,R020,,,,PCE,26.4,%,,,,,,26.4,%,26.4,%,cited,[5],1,1. Introduction,,,PCE) of 26.4%,extracted,,record PCE of vapor-deposited PVK PSCs
+D008,R021,,,,PCE,20,%,,,,,,20,%,20,%,cited,[6],1,1. Introduction,,,PCE above 20%,extracted,,"fully evaporated PSCs, «above 20%»"
+D008,R022,,,,PCE,21.3,%,champion,,,,,21.3,%,21.3,%,cited,[29],2,1. Introduction,,,of 21.3%,extracted,,"Feng et al., sequential PbI2/FAI/CsI, n-i-p"
+D008,R023,,,,PCE,24,%,,,,,,24,%,24,%,cited,[17],2,1. Introduction,,,exceeding 24%,extracted,,"Li et al., «exceeding 24%», n-i-p"

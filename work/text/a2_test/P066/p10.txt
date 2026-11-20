@@ -1,0 +1,108 @@
+world scenarios. Additionally, we developed a
+clinician-generated dataset in the clinical domain
+of hip surgery follow-up to explore generalizability.
+However, we limited our analysis to the real-world
+dataset to focus on actual hazard cases rather than
+hypothetical ones. Due to the availability of data,
+we also only focused on one clinical use-case. Fur-
+ther research needs to expand these findings across
+other clinical settings beyond ophthalmology and
+with larger datasets. Nevertheless, we publish the
+augmented ClinicalQAC dataset, complete with
+responses and labels, for open use.
+Ethics and Data Statement
+The research presented in this article is fully
+consistent with the ACM Code of Ethics and
+Professional Conduct (https://www.acm.org/code-
+of-ethics). This paper does not involve crowd-
+sourcing or research with human subjects. We ad-
+here to the UK Health Research Authority (HRA)
+guidelines on using health and care information
+for this work and completed the Medical Research
+Council (MRC) ethics review checklist, indicating
+that research ethics approval was not required.
+The question data were obtained from an aggre-
+gated and anonymized pool collected during the
+routine deployment of a CE-marked clinical con-
+versation Al agent in the UK between 2021-2022
+(Dora, Ufonia Limited). All individuals gave ex-
+plicit, documented verbal consent for anonymized
+data to be used for research purposes. Data use
+also complies with data protection guidelines in the
+UK. The study data is aggregated and anonymized
+with no markers for identifiability per the current
+Information Commissioner’s Office (ICO) code of
+practice, and HRA research glossary. Specifically,
+the dataset has none of the ‘key indicators of iden-
+tifiability’, and we have ensured there is no risk of
+re-identification of any person from the data source.
+Audio data were not used for this study. This data
+is made available for quality and representativeness
+review purposes.
+Demographic data are not available from this
+dataset, as the questions are disambiguated and not
+linked to individual patients due to the anonymiza-
+tion measures described above. Although represen-
+tative of real routine actual use, we acknowledge
+that the lack of demographic data is a limitation.
+However, proxy measures of demographic details
+can be referenced from two published clinical trials
+conducted with a similar geographical and clinical
+patient cohort.
+The HealthsearchQA dataset, which was used
+to augment our dataset, is published under a
+Creative Commons Attribution 4.0 International
+License (https://www.nature.com/articles/s41586-
+023-06291-2) and is freely available in its entirety.
+GPT-4 was used only for spell-checking and
+grammatical proof reading of this manuscript via
+the OpenAI ChatGPT interface.
+References
+Rohan Anil, Andrew M. Dai, Orhan Firat, Melvin John-
+son, Dmitry Lepikhin, Alexandre Passos, Siamak
+Shakeri, Emanuel Taropa, Paige Bailey, Zhifeng
+Chen, Eric Chu, Jonathan H. Clark, Laurent El
+Shafey, Yanping Huang, Kathy Meier-Hellstern, Gau-
+rav Mishra, Erica Moreira, Mark Omernick, Kevin
+Robinson, Sebastian Ruder, Yi Tay, Kefan Xiao,
+Yuanzhong Xu, Yujing Zhang, Gustavo Hernandez
+Abrego, Junwhan Ahn, Jacob Austin, Paul Barham,
+Jan Botha, James Bradbury, Siddhartha Brahma,
+Kevin Brooks, Michele Catasta, Yong Cheng, Colin
+Cherry, Christopher A. Choquette-Choo, Aakanksha
+Chowdhery, Clément Crepy, Shachi Dave, Mostafa
+Dehghani, Sunipa Dev, Jacob Devlin, Mark Díaz,
+Nan Du, Ethan Dyer, Vlad Feinberg, Fangxiaoyu
+Feng, Vlad Fienber, Markus Freitag, Xavier Gar-
+cia, Sebastian Gehrmann, Lucas Gonzalez, Guy Gur-
+Ari, Steven Hand, Hadi Hashemi, Le Hou, Joshua
+Howland, Andrea Hu, Jeffrey Hui, Jeremy Hur-
+witz, Michael Isard, Abe Ittycheriah, Matthew Jagiel-
+ski, Wenhao Jia, Kathleen Kenealy, Maxim Krikun,
+Sneha Kudugunta, Chang Lan, Katherine Lee, Ben-
+jamin Lee, Eric Li, Music Li, Wei Li, YaGuang Li,
+Jian Li, Hyeontaek Lim, Hanzhao Lin, Zhongtao Liu,
+Frederick Liu, Marcello Maggioni, Aroma Mahendru,
+Joshua Maynez, Vedant Misra, Maysam Moussalem,
+Zachary Nado, John Nham, Eric Ni, Andrew Nys-
+trom, Alicia Parrish, Marie Pellat, Martin Polacek,
+Alex Polozov, Reiner Pope, Siyuan Qiao, Emily Reif,
+Bryan Richter, Parker Riley, Alex Castro Ros, Au-
+rko Roy, Brennan Saeta, Rajkumar Samuel, Renee
+Shelby, Ambrose Slone, Daniel Smilkov, David R.
+So, Daniel Sohn, Simon Tokumine, Dasha Valter,
+Vijay Vasudevan, Kiran Vodrahalli, Xuezhi Wang,
+Pidong Wang, Zirui Wang, Tao Wang, John Wiet-
+ing, Yuhuai Wu, Kelvin Xu, Yunhan Xu, Linting
+Xue, Pengcheng Yin, Jiahui Yu, Qiao Zhang, Steven
+Zheng, Ce Zheng, Weikang Zhou, Denny Zhou, Slav
+Petrov, and Yonghui Wu. 2023. Palm 2 technical
+report. Preprint, arXiv:2305.10403.
+Isaac A Bernstein, Youchen Victor Zhang, Devendra
+Govil, Iyad Majid, Robert T Chang, Yang Sun, Ann
+Shue, Jonathan C Chou, Emily Schehlein, Karen L
+Christopher, et al. 2023. Comparison of ophthalmol-
+ogist and large language model chatbot responses to
+online patient eye care questions. JAMA Network
+Open, 6(8):e2330320–e2330320.
+16709

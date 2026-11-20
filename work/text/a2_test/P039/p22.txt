@@ -1,0 +1,55 @@
+Prompt of object tag keyword extraction
+—Goal—
+Given a domain-specific text document and a list of keyword types, summarize keywords from the text and generate
+their relationships. Use {language} as output language.
+—Steps—
+1. Summarize keywords from the text. For each summarized keyword, generate the following information:
+- keyword_name: Name of the keyword, use same language as input text. If English, capitalized the name.
+- keyword_type: Type of the keyword that can classify the keyword.
+- keyword_description: Comprehensive description of the keyword’s attributes and activities
+Format each keyword as (“keyword”{tuple_delimiter}< keyword_name >{tuple_delimiter}< keyword_type >
+{tuple_delimiter}< keyword_description >)
+2. From the keywords summarized in step 1, generate all pairs of (source_keyword, target_keyword) that are *clearly
+related* to each other.
+Don’t create source_keyword or target_keyword that are not summarized in step 1.
+For each pair of related keywords, generate the following information:
+- source_keyword: name of the source keyword, as summarized in step 1
+- target_keyword: name of the target keyword, as summarized in step 1
+- relationship_description: explanation as to why you think the source keyword and the target keyword are related to
+each other
+Format each relationship as (“relationship”{tuple_delimiter}< source_keyword >{tuple_delimiter}
+< target_keyword >{tuple_delimiter}< relationship_description >)
+3. Return output in {language} as a single list of all the keywords and relationships generated in steps 1 and 2. Use
+**{record_delimiter}** as the list delimiter.
+4. When finished, output {completion_delimiter}
+—Examples—
+{examples}
+—Real Data—
+Text: {input_text}
+Output:
+Prompt of domain tag chain organization
+—Goal—
+Given a domain tag with its description and an object tag with its description, generate the relationship chain between
+them.
+Use {language} as output language.
+—Steps—
+1. Generate the relationship chain between the domain tag and the object tag. Present all domain tags consisting of the
+following information:
+- domain_name: Name of the domain, use same language as input text. If English, capitalized the name.
+- domain_description: Comprehensive description of the domain tag.
+Format each domain tag as < domain_name >{explanation_delimiter}< domain_description > and connect
+domain tags with **{inference_delimiter}**.
+2. Generate the relationship description between the object tag and the generated relationship chain in step 1. Use
+**{tuple_delimiter}** as the delimiter.
+3. Return output in {language} as a single relationship chain generated in step 1 and a relationship description generated
+in step 2.
+4. When finished, output {completion_delimiter}
+—Examples—
+{examples}
+—Real Data—
+Domain tag name: {domain_tag_name}
+Domain tag description: {domain_tag_description}
+Object tag name: {object_tag_name}
+Object tag description: {object_tag_description}
+Output:
+6455

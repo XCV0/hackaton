@@ -1,0 +1,52 @@
+O Perfomances using character 3-gram
+Model MKQA MLQA XoRTy-QA
+Avg HR LR Avg HR LR Avg HR LR
+GPT-4-o 38.3 55.5 30.3 41.2 50.2 30.1 29.8 35.2 27.4
+tRAG 50.2 61.1 38.3 50.4 58.5 39.5 38.6 41.3 40.5
+monoRAG 49.5 60.5 38.0 50.4 60.5 37.7 39.7 42.1 37.6
+MultiRAG 55.7 63.7 45.4 55.9 66.4 46.5 42.1 44.4 40.5
+CrossRAG 58.0 66.6 47.9 58.6 68.6 48.6 44.7 46.5 43.2
+Command-R 40.2 48.7 31.8 40.1 50.5 30.0 31.0 34.5 24.9
+tRAG 42.1 53.8 31.0 47.8 59.8 36.1 38.9 40.9 37.5
+monoRAG 46.7 54.9 35.1 48.6 60.5 37.1 35.0 43.6 27.1
+MultiRAG 57.0 63.9 45.8 54.5 64.3 45.3 42.0 44.3 41.9
+CrossRAG 59.3 67.0 51.1 57.2 68.1 46.1 44.4 48.4 44.5
+Llama-3-8 38.7 47.4 30.9 39.9 49.2 29.1 28.9 32.2 26.3
+tRAG 43.9 52.2 29.5 47.3 58.8 34.8 37.9 39.2 36.3
+monoRAG 43.5 54.0 33.5 47.8 59.4 41.6 39.9 41.1 36.5
+MultiRAG 53.5 62.1 43.6 52.7 63.8 40.5 44.1 42.9 38.2
+CrossRAG 57.4 65.3 51.0 56.2 66.9 45.8 45.7 46.8 44.2
+Table 14: Performance (character 3-gram recall as in (Chirkova et al., 2024)) using RAG approaches described
+in §2 across benchmarks and settings detailed in §3, separated by total average (Avg), high-resource (HR) and
+low-resource (LR) languages averages.
+P Example of bad retrieval in tRAG
+Original Question: ¿quién escribió variaciones de Campanita del lugar?
+Translated Question: Who wrote variations of Tinkerbell of the Place? *translation by Google API
+Target: [Wolfgang Amadeus Mozart, Mozart]
+[1]: Tinker Bell is a fictional character from J. M. Barrie’s 1904 play Peter Pan and his 1911 novelisation Peter
+and Wendy. She has appeared in a variety of film and television adaptations of the Peter Pan stories, notably Walt
+Disney’s 1953 animated film Peter Pan and its 2023 live-action adaptation Peter Pan & Wendy.
+[2]: ‘Jingle Bells’ is one of the best known and most sung traditional winter songs in the world. It was written
+between 1850 and 1857 by the American composer James Pierpont (1822– 893) under the title ‘The One Horse
+Open Sleigh’ and was published in Boston by Oliver Ditson & Co. on 16 September 1857.
+[3]: Tinker Bell is a 2008 American animated film and the first installment in the Disney Fairies franchise
+produced by DisneyToon Studios. It is about Tinker Bell, a fairy character created by J. M. Barrie in his 1904
+play Peter Pan, or The Boy Who Wouldn’t Grow Up, and featured in the 1953 Disney animated film, Peter Pan
+and its 2002 sequel Return to Neverland. Unlike Disney’s two Peter Pan films featuring the character, which
+were produced primarily using traditional animation, Tinker Bell was produced using digital 3D modeling. The
+film was released on DVD and Blu-ray by Walt Disney Studios Home Entertainment on October 28, 2008. A
+sequel, Tinker Bell and the Lost Treasure, was released in 2009.
+[4]: Tinker Bell is an animated fantasy film series based on the character Tinker Bell, produced by DisneyToon
+Studios as part of the Disney Fairies franchise after producing a number of direct-to-video Winnie the Pooh films.
+Voices of Mae Whitman, Lucy Liu, Raven-Symoné, America Ferrera, Kristin Chenoweth and Pamela Adlon are
+featured in the main films. Six feature films and one TV special were produced: Tinker Bell, Tinker Bell and the
+Lost Treasure, Tinker Bell and the Great Fairy Rescue, Secret of the Wings, Pixie Hollow Games (the special),
+The Pirate Fairy, and Tinker Bell and the Legend of the NeverBeast. The series is a spin-off of and prequel to
+Peter Pan. Originally developed as a direct-to-video franchise, the series was theatrically released from its third
+film onwards.
+[5]: Sir James Matthew Barrie, 1st Baronet, was a novelist and playwright, best remembered as the creator of
+Peter Pan. He was born and educated in Scotland and then moved to London, where he wrote several successful
+novels and plays.
+Table 15: An example of bad document retrieval using tRAG (query translated before retrieval). The retrieved
+documents are relevant to the target query.
+712

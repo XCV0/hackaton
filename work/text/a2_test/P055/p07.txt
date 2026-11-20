@@ -1,0 +1,91 @@
+Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea
+Table 1: Accuracy (%) for the node classification task in the zero-shot setting. We report the average accuracy in the last column,
+and the best performance is highlighted in bold. “GraphCLIP+Vanilla” denotes the original implementation of GraphCLIP.
+Methods Cora CiteSeer WikiCS Instagram Ele-Photo Ele-Computers Books-History AVG.
+DGI [33] 24.03±1.40 18.71±1.22 18.86±0.25 61.42±1.12 13.96±0.17 27.12±0.03 15.77±0.02 25.70
+GRACE [44] 13.69±1.27 22.88±1.49 16.07±0.32 62.23±0.93 10.16±0.13 10.94±0.12 32.39±0.11 24.05
+BGRL [31] 31.99±1.06 26.50±1.22 18.35±0.22 61.45±0.82 5.21±0.22 24.12±0.22 16.28±0.35 26.41
+GraphMAE [10] 23.25±1.07 20.75±0.88 12.14±0.20 62.39±0.84 12.53±0.08 8.36±0.06 21.76±0.17 23.03
+G2P2 [35] 41.51±0.78 51.02±0.62 31.92±0.15 52.87±0.78 22.21±0.12 32.52±0.13 26.18±0.25 36.89
+GraphGPT 23.25±1.45 18.04±1.45 6.30±0.26 45.12±1.16 7.62±0.22 29.71±0.83 15.92±0.14 20.85
+LLaGA 21.44±0.65 16.07±1.15 2.65±0.72 41.12±0.94 6.50±0.53 23.10±0.33 11.17±0.58 17.44
+OFA 37.25±1.38 29.64±0.19 45.52±1.06 32.71±0.16 33.03±0.64 22.09±0.39 16.87±0.93 30.87
+ZeroG 62.32±1.91 52.55±1.23 54.93±0.06 48.97±0.78 45.12±0.65 56.20±0.35 40.74±0.65 51.40
+UniGraph 69.53±0.00 - 43.45±0.00 - - - - 56.49
+GraphCLIP+
+Vanilla 67.31± 1.76 63.13± 1.13 70.19± 0.10 64.05± 0.34 53.40± 0.64 62.04± 0.21 53.88± 0.35 62.00
+RAGRAPH 68.63± 0.75 67.19± 0.94 71.40± 0.17 63.79± 0.42 54.39± 0.35 64.26± 0.26 53.70± 0.22 63.34
+HyRAG 68.94± 0.57 67.24± 0.80 72.66± 0.73 64.05± 0.31 56.05± 0.55 65.04± 0.28 55.14± 0.35 64.16
+Based on this, the feature-level fusion can be formalized as:
+h′ = h+𝛽 ∑︁
+z𝑖 ∈Z𝑎 ∪Z𝑠
+exp(wz𝑖 /𝜏)˝
+z𝑗 ∈Z𝑎 ∪Z𝑠 exp(wz𝑗 /𝜏) z𝑖, (26)
+where h represents the initial representation of the query node, and
+𝛽 controls the contribution of knowledge injection.
+Structure-level fusion. GFMs typically perform downstream
+prediction based on the ego-graph of the query node, where edges
+represent intrinsic interactions between nodes, such as citation links
+in citation networks. However, the retrieved external knowledge
+does not naturally conform to the ego-graph topology. Directly
+connecting retrieved central entities to the query node within the
+ego-graph would introduce edges with heterogeneous semantics,
+resulting in a mixed graph structure that may degrade the quality
+of graph encoding.
+To avoid structural semantic inconsistency, we construct two
+auxiliary graphs, namely the coarse-grained attribute graph G𝑎 and
+the fine-grained attribute graph G𝑠. In both graphs, the retrieved
+central entities are directly connected to the query node. Then, the
+graph encoder in the GFM is employed to independently encode the
+ego-graph of the query node, the coarse-grained attribute graph,
+and the fine-grained attribute graph, yielding the corresponding
+prediction logits p𝑞, p𝑎, p𝑠. To effectively integrate these multi-view
+predictions, we further propose an uncertainty-gated knowledge
+injection mechanism.
+Specifically, we first fuse the coarse-grained and fine-grained
+predictions into a unified knowledge prediction pknow as follows:
+pknow =𝜔× p𝑎 +(1−𝜔)× p𝑠, (27)
+where the weight 𝜔 is determined by the confidence score, defined
+as the exponential of the inverse entropy:
+𝜔 =
+exp
+
+1
+1+H𝑎
+
+exp
+
+1
+1+H𝑎
+
++ exp
+
+1
+1+H𝑠
+, (28)
+where H𝑎 and H𝑠 are the entropies of p𝑎 and p𝑠. Crucially, this
+mechanism serves to assign higher fusion weights to more credible
+knowledge sources, ensuring that the unified knowledge predic-
+tion relies more heavily on the granularity with lower uncertainty.
+Finally, we inject the unified knowledge prediction pknow into the
+original prediction. Crucially, this injection is gated by the uncer-
+tainty of the original prediction and can be formalized as:
+pfinal = p𝑞 +𝛼× H𝑞 log𝐶 × pknow, (29)
+where
+H𝑞
+log𝐶 denotes the normalized entropy of the original predic-
+tion, 𝐶 is the number of categories, and 𝛼 is a hyper-parameter.
+This integration mechanism acts as an adaptive switch: when the
+ego-graph is informative (i.e., low entropy), the model preserves its
+prediction to avoid noise; when the ego-graph is ambiguous (i.e.,
+high entropy), the model actively leverages the unified knowledge
+prediction pknow to rectify the prediction.
+5 Experiment
+5.1 Experimental Settings
+Datasets. We conduct experiments on seven widely used graph
+datasets spanning four domains. Specifically, Cora [26] and CiteSeer
+[6] are from the Academic domain; Ele-Photo [38], Ele-Computers
+[38], and Books-History [38] are from the E-commerce domain;
+WikiCS [20] is from the Wikipedia domain; and Instagram [11] is
+from the Social domain. More details about the datasets are provided
+in Appendix A.

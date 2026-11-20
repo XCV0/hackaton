@@ -1,0 +1,104 @@
+Table 4: Behavioral failures among RAGChecker-
+approved answers (rch_hall ≤ 0.10) with judged-
+valid contradiction payloads. Share of approved an-
+swers that ignore a coherent update, miss a coherent
+contradiction, or fail both. Total-row brackets: Wilson
+95% CIs (n=446); per-dataset cells (especially TechQA,
+n=31) carry wider intervals.
+Dataset ngood Upd ignored Contra fail Both fail
+TechQA 31 71.0% 80.6% 67.7%
+EManual 90 62.2% 80.0% 52.2%
+FinQA 84 58.3% 45.2% 26.2%
+CovidQA 72 29.2% 50.0% 20.8%
+HotpotQA 86 23.3% 41.9% 14.0%
+PubMedQA 83 6.0% 49.4% 0.0%
+Total 446 38.8% [34.4, 43.4] 55.6% [51.0, 60.1] 26.2% [22.4, 30.5]
+contradiction; one in four fails both. Aggregated
+across the six datasets, 38.8% [34.4, 43.4] silently
+ignore the coherent update, 55.6% [51.0, 60.1] fail
+to acknowledge the coherent contradiction, and
+26.2% [22.4, 30.5] exhibit both failures simulta-
+neously (Wilson 95% CIs over the judged-valid
+subset; Table 4). RAGChecker scored every one of
+these answers as faithful to the original retrieved
+context.
+The failure rate varies by domain. TechQA
+approved answers exhibit both failures on the ma-
+jority (67.7% [50.1, 81.4], n=31); EManual is
+similar (52.2%, n=90); PubMedQA approved an-
+swers follow updates well (6.0% ignored) and
+never fail both (0.0%) but still miss conflicts al-
+most half the time (49.4%). The cross-domain
+gradient indicates that compatibility-with-context
+(RAGChecker’s signal) and behavioral following-
+of-context (COUNTERMEM’s signal) are correlated
+but not equivalent.
+Worked example. On the HotpotQA query
+“What city is the women’s Vans Triple Crown of Surf-
+ing event hosted at?” the baseline answers Hon-
+olulu and RAGChecker reports rch_hall = 0.000.
+After appending a coherent update specifying Sun-
+set Beach, the model continues to answer Hon-
+olulu (update ignored). After appending a coherent
+contradiction stating Sunset Beach, the model still
+answers Honolulu with no conflict marker (silent
+confident match). The aggregate diagnostic has no
+signal here; the intervention does.
+The pattern reproduces on natural conflicts
+and on a human-grounded endpoint. On 100
+DelucionQA naturally-conflicting passages, silent-
+pick failures rise from 4% at baseline to 24% un-
+der one-sided context removal (Appendix E). On
+the ExpertQA human-support endpoint, adding the
+COUNTERMEM profile to RAGAS lifts ROC-AUC
+under both judges (+0.150 under a weak GPT-4o-
+mini judge, +0.066 under a strong Claude-Sonnet
+judge; both p<0.001, Table 10). The lift is carried
+primarily by 1 − DAP; CNS independently corre-
+lates with the human label (Spearman ρ ≈ 0.2) but
+adds little incremental signal on top of 1 − DAP
+in the ensemble, and NR is uncorrelated with the
+human-support endpoint as expected, since clause
+(5) and clauses (1)–(2) target different evidence-
+bound criteria (Appendix D).
+End-to-end corpus deletion confirms the evi-
+dence boundary, and exposes a residual-corpus
+regime. Removing gold-supporting chunks from
+the index and rerunning retrieval moves absten-
+tion from baseline to 0.99 on HotpotQA and 1.00
+on PubMedQA: the system follows the evidence
+boundary end-to-end. On TechQA, abstention
+only moves 0.51 → 0.57 because large technical-
+manual gold passages leave many related residual
+chunks in the corpus; the probe makes that corpus
+property operationally testable (Appendix F).
+5.4 Robustness to Generator, Judge, and
+Detector
+The failures are not a Claude artifact. We
+hold the prompts, retrieval contexts, and synthe-
+sized payloads of the coherent-intervention probe
+fixed and replace only the generator: Claude-4.5-
+Haiku, GPT-5.4-mini, and the open-weight Qwen3-
+8B, on the same 566 rows (the 593 targets minus
+27 CovidQA rows the Sonnet judge declined to
+score for at least one generator), judged by the
+same rubric (Table 5). Contradiction failure is
+51.6% / 53.9% / 79.7% and update-ignored 34.5%
+/ 39.9% / 19.8% (Haiku / GPT-5.4-mini / Qwen3-
+8B). GPT-5.4-mini is statistically indistinguishable
+from Haiku on every column; Qwen3-8B acknowl-
+edges contradictions least but follows updates best.
+The profile is model-dependent; the failure is not.
+The per-dataset ordering is broadly shared across
+generators (Appendix G).
+Nor a Claude-judge artifact. Re-judging all
+three generators with an out-of-family judge (GPT-
+5.4-mini; lower block of Table 5) preserves the
+ordering and every conclusion above; per-cell rates
+move by at most 7 points (contradiction failure on
+GPT-5.4-mini) and by ≤ 3 points elsewhere.
+The detectors agree with humans as well as
+humans agree with each other. Two authors in-
+dependently and blindly labeled a stratified n=100
+sample of judge decisions (50 per detector, spread
+22339

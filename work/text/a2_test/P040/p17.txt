@@ -1,0 +1,39 @@
+LLM
+MuSiQue 2Wiki HotpotQA
+R@5 R@10 R@15 R@5 R@10 R@15 R@5 R@10 R@15
+Closed-source GPT-4o mini 58.4 67.6 71.5 89.1 95.3 95.9 93.4 96.8 97.3
+Open-weight Llama-3.1-8B 52.4 62.3 66.7 81.6 91.0 93.7 92.2 97.4 98.1 Qwen-2.5-8B 53.7 63.7 66.7 85.9 91.6 93.0 91.7 96.2 96.9
+Table 10: Retrieval performance of GEAR across different closed-source and open-weight models on MuSiQue,
+2Wiki and HotpotQA. Results are reported using Recall@k (R@k) for k ∈ {5, 10, 15}, showing the percentage of
+questions for which the correct entries are found within the top-k retrieved passages.
+MuSiQue 2Wiki HotpotQA
+R@5 R@10 R@15 R@5 R@10 R@15 R@5 R@10 R@15
+GPT-4o mini w/ diversity 48.7 57.7 61.2 72.6 80.9 82.4 87.4 93.3 95.2 w/o diversity 47.0 53.9 58.4 68.2 76.0 77.4 85.0 92.2 94.3
+Llama-3.1-8B-Instruct w/ diversity 46.2 54.3 57.4 69.1 78.1 81.6 87.3 92.8 95.1 w/o diversity 44.9 52.7 55.0 66.9 75.9 78.2 85.0 91.7 94.4
+Table 11: Retrieval performance of the Hybrid + SyncGE method with different LLMs for the read step (see Eq. 1)
+w/ and w/o diversity for triple beam search. Results are reported using Recall@k (R@k) for k ∈ {5, 10, 15},
+showing the percentage of questions for which the correct entries are found within the top-k retrieved passages.
+Retriever ρt < 9 9 ≤ ρt < 11 11 ≤ ρt < 13 13 ≤ ρt
+Single-step Retrieval Hybrid + NaiveGE 50.6 54.6 54.1 50.0 Hybrid + SyncGE 62.8 (↑ 12.2%) 61.2 (↑ 6.6%) 59.8 (↑ 5.7%) 60.1 (↑ 10.1%)
+Multi-step Retrieval HippoRAG w/ IRCoT 64.4 65.5 55.0 52.8 GEAR 73.6 (↑ 9.2%) 73.7 (↑ 8.2%) 69.3 (↑ 14.3%) 69.7 (↑ 16.9%)
+Table 12: Retrieval performance for single- and multi-step retrievers across different triple density measurements in
+MuSiQue. Results are reported using R@15. Triple densities (ρt) are calculated as the average number of triples
+associated with the gold documents for the questions within the MuSiQue’s test set.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number of Iterations (n)
+40
+45
+50
+55
+60
+65
+70R@15
+GeAR
+Hybrid + SyncGE
+HippoRAG w/ IRCoT
+IRCoT (BM25)
+IRCoT (ColBERTv2)
+Figure 5: Evolution of R@15 over 20 iterations on MuSiQue. Recall is computed at each iteration using the
+cumulative set of retrieved documents, with prior recall values carried forward for questions that terminated in
+earlier iterations. The horizontal line indicates the single-step performance of Hybrid + SyncGE.
+12065

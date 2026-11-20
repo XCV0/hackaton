@@ -1,0 +1,13 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D005,DV1-L1,DV1,1,front_contact,"FTO (glass, 8 Ω/sq)",,,,,,,
+D005,DV1-L2,DV1,2,ETL,TiO2,,,"chemical bath (TiCl4/deionized water, 3 ml/150 ml, 90 °C, 50 min)",,,,
+D005,DV1-L3,DV1,3,absorber,"perovskite (FA/MA/Cs, Pb, I/Br)",,,"spin-coating, 1500 rpm 4 s + 5000 rpm 20 s, antisolvent diethyl ether 900 μl",150 °C,15 min,N2 glovebox,
+D005,DV1-L4,DV1,4,passivation,PEAI (5 mg/ml in IPA),,,"spin-coating, 5500 rpm, 20 s",,,,
+D005,DV1-L5,DV1,5,HTL,"Spiro-OMeTAD (73 mg/ml Spiro-OMeTAD в CB + 28 мкл t-BP, 20 мкл Li-TFSI, 20 мкл FK-209 на 1 мл)",,,"spin-coating, 4000 rpm, 30 s",,,,
+D005,DV1-L6,DV1,6,back_contact,Au,100,nm,evaporation under high vacuum,,,,~100 nm
+D005,DV2-L1,DV2,1,front_contact,"FTO (glass, 8 Ω/sq)",,,,,,,
+D005,DV2-L2,DV2,2,ETL,TiO2,,,"chemical bath (TiCl4/deionized water, 3 ml/150 ml, 90 °C, 50 min)",,,,
+D005,DV2-L3,DV2,3,absorber,"perovskite (FA/MA/Cs, Pb, I/Br)",,,"spin-coating, 1500 rpm 4 s + 5000 rpm 20 s, antisolvent diethyl ether 900 μl",150 °C,15 min,N2 glovebox,
+D005,DV2-L4,DV2,4,passivation,PEAI (5 mg/ml in IPA),,,"spin-coating, 5500 rpm, 20 s",,,,
+D005,DV2-L5,DV2,5,HTL,"SF-MPA-MCz (30 mg/ml SF-MPA-MCz в CB + 15 мкл t-BP, 10 мкл Li-TFSI, 10 мкл FK-209)",,,"spin-coating, 4000 rpm, 30 s",,,,"Толщина HTL в статье числом не указана (SF-MPA-MCz слой заметно тоньше, Fig. S18)"
+D005,DV2-L6,DV2,6,back_contact,Au,100,nm,evaporation under high vacuum,,,,~100 nm

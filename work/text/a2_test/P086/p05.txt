@@ -1,0 +1,62 @@
+Retrieval-Augmented Generation Meets Data-Driven Tabula Rasa Approach for Temporal Knowledge Graph Forecasting30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+RE-GCN[20] 0.787 0.842 0.884 0.747 0.817 0.846 0.313 0.473 0.626 0.223 0.367 0.525 0.446 0.545 0.608
+xERTE[10] 0.842 0.902 0.912 0.703 0.785 0.801 0.330 0.454 0.570 0.209 0.335 0.462 0.320 0.445 0.497
+TLogic[22] 0.740 0.789 0.791 0.786 0.860 0.870 0.332 0.476 0.602 0.204 0.336 0.480 0.009 0.045 0.094
+TANGO[11] 0.590 0.646 0.677 0.483 0.514 0.527 0.272 0.408 0.550 0.191 0.318 0.462 0.327 0.482 0.599
+Timetraveler[25] 0.845 0.908 0.912 0.751 0.820 0.830 0.319 0.454 0.575 0.212 0.325 0.439 0.240 0.315 0.457
+sLA-tKGF W/GPT-4 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-3.5 0.902 0.926 0.942 0.823 0.868 0.935 0.458 0.515 0.777 0.501 0.628 0.761 0.417 0.549 0.696
+sLA-tKGF W/text-davinci-003 0.887 0.934 0.947 0.791 0.845 0.926 0.415 0.54 0.791 0.446 0.591 0.711 0.385 0.503 0.648
+sLA-tKGF W/Google Bard 0.891 0.955 0.967 0.807 0.857 0.961 0.481 0.571 0.834 0.525 0.622 0.804 0.453 0.532 0.725
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+RE-GCN[20] 0.717 0.776 0.817 0.594 0.648 0.678 0.278 0.421 0.575 0.195 0.326 0.475 0.421 0.464 0.502
+RE-Net[14] 0.534 0.613 0.662 0.472 0.507 0.530 0.278 0.408 0.549 0.184 0.314 0.461 0.238 0.445 0.563
+CyGNet[35] 0.613 0.742 0.834 0.525 0.624 0.675 0.266 0.402 0.545 0.166 0.295 0.444 0.408 0.500 0.588
+TLogic[22] 0.631 0.706 0.715 0.613 0.663 0.682 0.265 0.395 0.531 0.155 0.272 0.412 0.009 0.045 0.094
+sLA-tKGF W/GPT-4 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-3.5 0.832 0.868 0.901 0.771 0.821 0.888 0.412 0.469 0.768 0.439 0.587 0.709 0.404 0.519 0.641
+sLA-tKGF W/text-davinci-003 0.824 0.873 0.89 0.765 0.813 0.898 0.381 0.454 0.702 0.396 0.529 0.641 0.372 0.463 0.602
+sLA-tKGF W/Google Bard 0.865 0.906 0.925 0.778 0.824 0.92 0.436 0.499 0.744 0.452 0.566 0.704 0.419 0.51 0.712
+Table 2: The table shows the performance comparison of the proposed framework variants with various off-the-shelf PLLMs
+and baselines using the Hits@K metric for single-step and multi-step tKG forecasting tasks. The model demonstrating the best
+performance for each dataset is highlighted in bold.
+Datasets ICEWS05-15 ICEWS14 ICEWS18
+Model Hits@1 Hits@3 Hits@10 Hits@1 Hits@3 Hits@10 Hits@1 Hits@3 Hits@10
+Distmult[33] 16.10 27.67 42.42 8.15 15.31 27.66 9.68 18.12 31.21
+TuckER[2] 17.01 29.93 47.81 11.23 20.77 33.94 12.58 22.60 37.27
+CompGCN[29] 20.72 32.51 47.87 10.12 19.49 33.11 12.01 22.96 38.15
+TTransE[17] 4.98 31.48 49.88 1.25 12.29 28.37 1.84 8.25 21.29
+TA-DistMult[6] 14.77 27.80 44.22 4.72 10.54 21.48 5.58 12.04 22.82
+DE-SimplE [9] 26.33 39.41 53.97 13.77 23.68 37.15 11.53 21.86 34.80
+TNTComplEx[16] 26.92 39.55 53.43 15.58 26.27 40.12 13.28 24.02 36.91
+sLA-tKGF W/GPT-4 55.52 70.08 94.66 49.91 63.35 80.27 54.58 68.85 82.86
+sLA-tKGF W/GPT-3.5 45.74 53.89 73.76 41.27 46.93 76.86 43.97 58.76 70.92
+sLA-tKGF text-davinci-003 43.87 49.27 65.78 38.14 45.43 70.26 39.64 52.97 64.18
+sLA-tKGF W/Google Bard 50.13 63.51 83.73 43.64 49.96 74.49 45.27 56.62 70.43
+Table 3: The table shows the tKG forecasting results on three benchmark datasets on multi-step tKG forecasting task. The
+evaluation metrics include MRR (%) and Hits@1/3/10 (%). The best model for each dataset is highlighted in bold.
+Datasets WIKI YAGO
+Model Hits@1 Hits@3 Hits@10 Hits@1 Hits@3 Hits@10
+Distmult[33] 46.17 52.81 54.13 47.39 59.81 68.52
+TuckER[2] 46.12 53.60 54.86 47.42 59.63 68.96
+CompGCN[29] 45.78 52.91 55.58 46.72 59.26 68.29
+TTransE[17] 21.67 34.43 42.39 18.12 40.91 51.21
+TA-DistMult[6] 39.92 48.73 51.71 48.15 59.61 66.71
+DE-SimplE[9] 42.61 47.71 49.55 51.64 57.30 60.17
+TNTComplEx[16] 40.04 49.31 52.03 52.92 61.33 66.69
+W/GPT-4 84.62 89.17 96.87 90.85 93.81 97.36
+W/GPT-3.5 77.14 82.15 88.87 83.26 86.82 90.18
+W/text-davinci-003 76.54 81.38 89.87 82.41 87.36 89.07
+W/Google Bard 77.81 82.45 92.08 86.57 90.61 92.53
+Table 4: The table presents tKG forecasting results on two benchmark datasets on multi-step tKG forecasting task. The evaluation
+metrics are MRR (%) and Hits@1/3/10 (%). The best model for each dataset is highlighted in bold.
+quadruples where either the subject or object entity, or both, were
+not seen during training. For example, consider the ICEWS05-15 test
+set with the quadruple (India, announce, new economic policy, 2015-09-01)
+Since the framework hasn’t encountered new economic policy
+during training, this serves as an instance of an unobserved en-
+tity. We call this evaluation, ‘inductive link prediction analysis’.
+5

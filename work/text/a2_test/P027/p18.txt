@@ -1,0 +1,47 @@
+Published as a conference paper at ICLR 2025
+E EFFECTS OF DIFFERENT VOLUME OF TRAINING DATA
+We acknowledge the importance of evaluating our framework’s performance across different train-
+ing data volumes. Our primary experiment utilized 40,059 instances to train our drafter model. To
+thoroughly assess scaling effects, we conducted additional experiments using incremental subsets
+of 10,000, 20,000, and 30,000 training instances. The results of these systematic evaluations are
+detailed in Table 9.
+Table 9: Performance analysis of SPECULATIVE RAG with different volumn of instruction-tuning
+data.
+MVerifier-8x7B + MDrafter-7B TriviaQA PubHealth
+10,000 71.69 72.34
+20,000 72.64 72.44
+30,000 73.20 74.37
+Total (40,059) 74.24 76.60
+From the table, we can conclude that increasing the volume of training data leads to improved per-
+formance. Specifically, the model’s accuracy continues to rise as more instances are included, with
+the highest performance observed at 40,059 instances. This suggests that larger training datasets
+contribute positively to the performance of our drafter-verifier framework, indicating that scaling up
+data size could enhance the robustness of the model.
+F EFFICACY OF SPECULATIVE RAG IN MULTI-HOP REASONING
+We further validate SPECULATIVE RAG in the scenario of multi-hop reasoning. One of the key
+challenges of multi-hop reasoning is to effectively combine multiple pieces of evidence to arrive at
+the final answer. Indeed, the ability to verify or contrast information across documents is crucial
+to solve complex questions. We compare the performance of SPECULATIVE RAG with baselines
+on MuSiQue (Trivedi et al., 2022) and HotpotQA (Yang et al., 2018), two multi-hop reasoning
+benchmarks. We randomly sample 500 examples from the validation set of HotpotQA as the test set
+in our experiment. We adopt the same setting as MuSiQue on HotpotQA. The results are in Table 10.
+We find that our SPECULATIVE RAG achieves the best performance. Specifically, SPECULATIVE
+RAG improves accuracy by 2.15% on MuSiQue and by a substantial 5.4% on HotpotQA.
+Table 10: RAG results on MuSiQue and HotpotQA
+MuSiQue HotpotQA
+Mixtral-Instruct8x7B 29.42 43.60
+Self-RAGMistral-7B 21.72 27.20
+MVerifier-7B + MDrafter-7B 31.03 47.60
+MVerifier-8x7B + MDrafter-7B 31.57 49.00
+Our approach tackles this challenge by multi-perspective sampling when selecting documents for
+each draft (Section 3.2). We cluster the retrieved documents into distinct topics using an instruction-
+aware embedding model (Peng et al., 2024). Then, we sample one document from each cluster to
+form a diverse document subset, ensuring each drafter receives a variety of perspectives from the
+retrieval results. To validate the efficacy of this strategy, we further conduct an ablation study on
+MuSiQue and HotpotQA in Table 11. From the table, our sampling strategy effectively guarantees
+the diversity of information within the supporting document subsets, leading to improved perfor-
+mance of SPECULATIVE RAG on these tasks.
+F.1 PERFORMANCE BREAKDOWN ON HOTPOTQA
+HotpotQA includes two types of quesitions: bridge-type questions in HotpotQA require a two-step
+reasoning process where the answer to the first step is crucial for answering the second. For example:
+18

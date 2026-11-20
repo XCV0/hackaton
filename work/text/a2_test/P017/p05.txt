@@ -1,0 +1,86 @@
+Statistics Multi-Modal Enhanced Difficulty Realistic-RAG Queries Accurate Labels
+# # MM Long Sub Queries RAG RAG False
+Pages Queries Pages Docs domain Rephr- Tailored Query Neg.
+Benchmark Cover asing Gen. Verif. Verif.
+SlideVQA 52k 14.5k ✓ ✓ ✗ ✗ ✗ ✗ ✗
+MMLONG 7k 1k ✓ ✓ ✗ ✗ ✗ ✗ ✗
+WIKI-SS-NQ 4k 4k ✗ ✗ ✗ ✗ ✓ ✓✗ ✗
+ViDoRe 8k 4k ✓ ✗ ✗ ✗ ✓✗ ✓✗ ✗
+Ours 8k 5k ✓ ✓ ✓ ✓ ✓ ✓ ✓
+Table 1: Document Retrieval Benchmarks Comparison.
+1963 pages, with significant visual content.
+3.2 Query Generation & Filtering
+Generation. We aim to generate queries that
+are both answerable by a specific document and
+RAG-suitable, meaning they reflect natural user in-
+quiries without prior knowledge of the exact page
+or answer location (unlike traditional Q/A datasets
+tied to specific pages). To achieve this, we em-
+ployed a Pixtral-12B VLM (Agrawal et al., 2024),
+prompting it to generate RAG-specific questions
+(see Fig. S4). Each document page was fed into
+the VLM, which produced 10 query-answer pairs
+per page, later keeping only a subset that met the
+benchmark’s quality criteria after filtering. Each
+retained query-answer pair is labeled with the cor-
+responding page it was generated from.
+Verification. Although the VLM is instructed to
+generate RAG-specific queries, many still do not
+fully align with our requirements. To systemat-
+ically classify them, we use Mixtral-8x22B-v0.1
+LLM (Jiang et al., 2024), which evaluates each gen-
+erated query and determines whether it is suitable
+as retrieval query (see prompt in Fig. S5). Queries
+that are well-formed for RAG are those that a user
+might ask without prior knowledge of the docu-
+ment’s structure, ensuring they are neither too gen-
+eral nor overly specific to a single page. Queries
+that fail this criterion fall into two categories: those
+with explicit page references, such as "in Figure
+5" or "the title of the page", and those that are
+too broad, like "What is the net revenue in 2020?"
+instead of "What is IBM’s net revenue in 2020?".
+3.3 Query Rephrasing
+In real-world retrieval, a user formulating a query
+does not have direct access to the document’s con-
+tent and will naturally phrase their question with-
+out mirroring the exact wording from the source.
+However, VLMs often generate queries by copying
+phrases directly, leading to an over-reliance on key-
+word matching rather than true semantic retrieval.
+To address this, we introduce a rephrasing step that
+preserves query meaning while reducing depen-
+dence on specific document wording. Each query is
+processed by Mixtral-8x22B-v0.1 with a dedicated
+prompt designed to alter phrasing while maintain-
+ing intent. The rephrased query is then verified
+by the LLM using a validation prompt (Fig. S6),
+along with the original query and answer, to ensure
+it retains the original meaning and still corresponds
+to the known answer in the labeled page.
+To enable deeper evaluation, each query undergoes
+three levels of rephrasing using distinct prompts
+(Fig. S6). The first level introduces minor word
+changes while maintaining structure. The second
+modifies word choice and sentence order, making
+the phrasing more distinct. The third involves sig-
+nificant word rephrasing and sentence restructuring
+while preserving meaning. At the end of this pro-
+cess, each query exists in four versions: the orig-
+inal and three progressively rephrased forms, all
+linked to the same document page (see examples
+in Figs. S1 and S2).
+3.4 Accurate Labeling
+The final step in preparing our benchmark is ver-
+ifying the correctness of negative labels. This is
+especially crucial for our challenging benchmarks,
+where many pages share highly similar content
+within the same sub-domain. Each query is sys-
+tematically tested against all benchmark pages.
+Though computationally expensive, this step pre-
+vents false negatives and ensures reliable evalua-
+tion. Queries together with each page are processed
+using Pixtral-12B, which determines whether a
+page contains an answer to the query. Every query
+is then explicitly linked to all relevant pages. For
+31664

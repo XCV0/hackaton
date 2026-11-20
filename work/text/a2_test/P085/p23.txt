@@ -1,0 +1,78 @@
+我将向你展示一个问题以及该问题的一个检索上下文列表。你的任务是总结检索上下文，去除任何无关的信息，保留有助于回答
+问题的内容。即，为检索上下文中你认为有助于回答问题的内容提供摘要，仅提供摘要即可。
+问题：{questions} 
+检索上下文：{contexts}
+请直接输出总结的与问题相关的检索上下文摘要：
+I will present you with a question along with a list of retrieved contexts. Your task is to summarize the 
+retrieved contexts by removing any irrelevant information while retaining content that helps answer the 
+question. That is, provide a summary of the information from the retrieved contexts that you deem useful 
+for answering the question.
+Given Question: {questions}  
+Given Retrieved Contexts: {contexts}  
+Please directly output the summarized retrieved context relevant to the question:
+# in Chinese
+Figure 29: Compressor SKR.
+"Silver Noise": [
+{
+"question": "Comprehensive question from the base dataset",
+"golden_contexts": [
+"Golden context 1",
+"Golden context 2",
+"...",
+"Golden context 8"
+],
+"attack_contexts": [
+"Silver noise 1",
+"Silver noise 2",
+"...",
+"Silver noise 10"
+]
+},
+...
+]
+"Inter Context Conflict": [
+{
+"Soft Ad": [
+{
+"question": "Comprehensive question from the base dataset",
+"golden_contexts": [
+"Additional golden context (golden context e)",
+"Additional golden context (golden context l)"
+],
+"attack_contexts": [
+"Injected soft ad attack text"
+]
+},
+...
+]
+"White DoS": [
+{
+"question": "Comprehensive question from the base dataset",
+"golden_contexts": [
+"Golden context 1",
+"Golden context 2",
+"...",
+"Golden context 8"
+],
+"attack_contexts": [
+"Deceptive white DoS attack text"
+]
+},
+...
+]
+N
+C T
+D
+"question":  "Comprehensive question from the base dataset",
+"golden_contexts": [
+"Selected attack-targeted text (golden context  i)",
+"Additional golden context (golden context e)"
+],
+"attack_contexts": [
+"Conflicting attack text"
+  ]
+},
+...
+]
+Figure 30: The data format of SafeRAG dataset.
+4631

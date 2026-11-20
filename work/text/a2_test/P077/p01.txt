@@ -1,0 +1,103 @@
+LEGO-GraphRAG: Modularizing Graph-based
+Retrieval-Augmented Generation for Design Space Exploration
+Yukun Cao
+University of Science and Technology
+of China
+ykcho@mail.ustc.edu.cn
+Zengyi Gao
+University of Science and Technology
+of China
+gzy02@mail.ustc.edu.cn
+Zhiyang Li
+University of Science and Technology
+of China
+lizhiyang215@gmail.com
+Xike Xie
+University of Science and Technology
+of China
+xkxie@ustc.edu.cn
+S. Kevin Zhou
+University of Science and Technology
+of China
+s.kevin.zhou@gmail.com
+Jianliang Xu
+Hong Kong Baptist University
+xujl@comp.hkbu.edu.hk
+ABSTRACT
+GraphRAG integrates (knowledge) graphs with large language mod-
+els (LLMs) to improve reasoning accuracy and contextual relevance.
+Despite its promising applications and strong relevance to multi-
+ple research communities, such as databases and natural language
+processing, GraphRAG currently lacks modular workflow analysis,
+systematic solution frameworks, and insightful empirical studies.
+To bridge these gaps, we propose LEGO-GraphRAG, a modu-
+lar framework that enables: 1) fine-grained decomposition of the
+GraphRAG workflow, 2) systematic classification of existing tech-
+niques and implemented GraphRAG instances, and 3) creation
+of new GraphRAG instances. Our framework facilitates compre-
+hensive empirical studies of GraphRAG on large-scale real-world
+graphs and diverse query sets, revealing insights into balancing
+reasoning quality, runtime efficiency, and token or GPU cost, that
+are essential for building advanced GraphRAG systems.
+PVLDB Reference Format:
+Yukun Cao, Zengyi Gao, Zhiyang Li, Xike Xie, S. Kevin Zhou, and Jianliang
+Xu. LEGO-GraphRAG: Modularizing Graph-based Retrieval-Augmented
+Generation for Design Space Exploration. PVLDB, 18(10): 3269 - 3283, 2025.
+doi:10.14778/3748191.3748194
+PVLDB Artifact Availability:
+The source code, data, and/or other artifacts have been made available at
+https://github.com/gzy02/LEGO-GraphRAG.
+1 INTRODUCTION
+Recent advancements in large language models (LLMs) have high-
+lighted their strengths in semantic understanding and contextual
+reasoning, enabled by extensive pre-training on vast corpora. De-
+spite these strengths, LLMs often struggle with domain-specific
+This work is licensed under the Creative Commons BY-NC-ND 4.0 International
+License. Visit https://creativecommons.org/licenses/by-nc-nd/4.0/ to view a copy of
+this license. For any use beyond those covered by this license, obtain permission by
+emailing info@vldb.org. Copyright is held by the owner/author(s). Publication rights
+licensed to the VLDB Endowment.
+Proceedings of the VLDB Endowment, Vol. 18, No. 10 ISSN 2150-8097.
+doi:10.14778/3748191.3748194
+queries and complex contexts, frequently generating “hallucina-
+tions”, in which outputs appear credible but lack factual accu-
+racy. Retrieval-augmented generation (RAG) addresses these limi-
+tations by integrating external knowledge to enhance factual accu-
+racy and contextual relevance. Early RAG implementations, how-
+ever, often relied on document retrieval methods that introduced
+noise and excessive context [26, 55, 60, 122]. This limitation has
+led to a growing focus on graph-based RAG systems, known as
+GraphRAG [22, 27, 42, 61].
+In GraphRAG, conventional document retrieval is replaced by
+graph-based retrieval, leveraging the structured and relational na-
+ture of graphs to extract query-specific reasoning paths that provide
+more precise and contextually relevant support for LLM reasoning.
+Typically, the GraphRAG workflow consists of two primary phases:
+• Retrieval: This phase retrieves knowledge from graphs by iden-
+tifying reasoning paths relevant to the query.
+• Augmented generation: The retrieved reasoning paths are
+used to augment the LLM prompt, enhancing its ability in reason-
+ing and generating accurate and contextually relevant outputs.
+Existing GraphRAG studies [22, 45, 50, 65, 71, 72, 74, 98] have
+demonstrated the potential of integrating graph data management
+techniques with GraphRAG. However, despite their promise, these
+studies are still in their early stages and face two significant chal-
+lenges. First, they lack foundational support in addressing the scala-
+bility of graph algorithms, which is crucial for managing large-scale
+graphs and reducing query latency in real-world applications. Sec-
+ond, there is a knowledge gap regarding the impact of semantic
+information on graphs on the performance of GraphRAG. Specifi-
+cally, it is unclear which strategies are most effective for leveraging
+semantic information from both the query and the graph, and which
+type of semantic model is best suited for different query scenarios.
+Resolving these uncertainties is essential to improving the quality,
+efficiency, and cost of GraphRAG across various query scenarios.
+Our Motivation. Building on the strengths of database research,
+we aim to address key challenges in GraphRAG and lay the ground-
+work for future advancements. While efforts like Modular RAG [28]
+have modularized general RAG, they fall short of addressing the
+GraphRAG’s workflows and needs. We identify three critical gaps:
+• Need for a Unified Framework for Categorizing and An-
+alyzing GraphRAG Solutions. GraphRAG solutions consist
+of diverse technologies, including algorithmic approaches (e.g.,
+random walk, PageRank) and neural network-based methods

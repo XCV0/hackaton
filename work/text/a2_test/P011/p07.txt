@@ -1,0 +1,50 @@
+A PREPRINT
+1. Compare: Queries that request comparisons across funds, asset classes, strategies, or other financial entities.
+2. Detail: Queries seeking specific details about a fund or its characteristics.
+3. Search/Listing: Queries that involve listing all funds with a certain property, such as a particular share class
+or investment strategy.
+4. Other: Queries that do not fit into the above categories and may require special handling or interpretation.
+This intent-based categorization guides the response generation process, ensuring that the appropriate level of detail and
+context is provided for each query type. Representative examples of queries for each intent category are provided in
+Appendix 8.6.
+3.11 Available Fine-Tuned Text2Cypher Models
+At the time of writing, three models fine-tuned for text-to-Cypher translation have been released by the Neo4j
+team and are available at https://huggingface.co/neo4j. For our experiments, we specifically evaluated the
+neo4j/text-to-cypher-Gemma-3-27B-Instruct-2025.04.0 model on our use case, which involves a complex
+dataset with numerous nodes and relationships. The quality of this model was not satisfactory for two main reasons:
+(1) the model itself lacks sufficient power to handle highly complex datasets, and (2) it consistently selected incorrect
+relationship and node labels, likely due to its inability to accurately detect the underlying graph topology.
+3.12 Experiment Setup
+The following outlines the details of our experimental setup. We sample approximately 200 questions, ranging from
+medium to very difficult (including some that would challenge human experts), and spanning all four query intents to
+comprehensively evaluate the quality of our approach. Our evaluation compares the RAG2 and RDF (triplet-based
+knowledge graph) representations with the LPG-based representation, measuring response quality in terms of accuracy
+and completeness. We also discuss the advantages and limitations of each method, drawing general conclusions from
+our findings beyond the specific context of this experiment.
+As explained in Section 5, RAG1 is excluded from the main experiments due to its lack of scalability for converting
+JSONs to stories, its limited accuracy, and its susceptibility to hallucination. For further details, please refer to Section 5.
+Some examples of queries used in our experiments are provided in Appendix 8.6.
+4 Methodology
+4.1 RDF Pipeline: Algorithms
+The RDF pipeline is designed to efficiently retrieve and reason over structured knowledge stored as triplets. As described
+in Section 3.2, the list of RDF triplets is preprocessed and stored in an Amazon Neptune cluster. In parallel, embeddings
+for unique nodes and relationships are computed and stored in a vector database (Azure AI is used in this study, though
+any vector database is suitable).
+Unique nodes are extracted from Neptune, where RDF data is stored as subject-predicate-object triplets. These nodes,
+together with fund metadata (see Section 3.7), are passed to a node selection agent. This agent combines LLM-based
+and deterministic methods: first, an LLM extracts all fund names, abbreviations, fund types, and asset classes mentioned
+in the user query, using both the query and metadata as input. Next, deterministic mapping is performed to link fund
+attributes to actual nodes using the available metadata.
+The next phase involves identifying relevant relationships based on the user query. The dataset contains over 8,000
+distinct relationships, many of which are encoded using dot notation to represent hierarchical structures. Relationships
+can be complex, often reflecting multi-level hierarchies and nuanced semantics. To address this, we first apply supervised
+classification as described in Section 3.8, which significantly narrows the set of candidate relationships. Subsequently,
+embedding-based selection is performed to identify up to 50 relevant relationships based on similarity matching. In
+parallel, the categorized relationships are input to an LLM-based relationship detection agent, which selects up to 100
+relevant relationships. The union of unique relationships from both embedding-based and LLM-based methods forms
+the final set of relationships for retrieval.
+Finally, the selected nodes and relationships are used to traverse the Neptune graph using SPARQL, the standard query
+language for RDF. This traversal returns the set of relevant triplets corresponding to the user query. The same procedure
+can also be implemented using graph libraries such as NetworkX. The SPARQL output provides a focused set of triplets
+that serve as the foundation for downstream retrieval-augmented generation.
+7

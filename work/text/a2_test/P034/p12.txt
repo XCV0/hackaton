@@ -1,0 +1,40 @@
+This provides legally structured and semantically searchable references, offering a
+steady basis for indicator computation.
+3.3 Models and Implementation
+All experiments were executed locally to ensure reproducibility and control over
+resources. The implementation relies on LangChain and LangGraph for agent orches-
+tration, and on Ollama for language model execution. All agents are implemented as
+specialized LLMs, with the exception of the retrieval module, which uses ChromaDB
+with bge-m3 vector representations and a search limited to the 10 closest results
+(top results=10).
+We tested three state-of-the-art open-source large language models from different fam-
+ilies: Llama3.2:3B, Qwen3:8b, and Mistral-Nemo:12b, in order to demonstrate the
+robustness of the proposed architecture.
+Two generating settings were adopted:
+• For deterministic tasks (evaluation, scoring, binary decision), a temperature of 0
+was used.
+• For tasks requiring reformulation or creativity (rewriting queries, alternative
+generation), a temperature of 0.9 was used.
+3.4 Evaluation Metrics
+Performance was assessed according to standard binary classification metrics, but
+interpreted from a legal perspective:
+• Accuracy: Overall rate of correct answers (whether or not a law is correctly
+identified).
+• Sensitivity (Recall): The model’s ability to correctly identify situations where a
+law exists. A low recall would mean that effective laws are being ignored, which
+undermines the reliability of the legal diagnosis.
+• Specificity: The system’s ability to correctly identify cases where no law exists.
+This limits false positives, where a non-existent law is identified, which could be
+misleading
+• Precision: Rate of responses correctly asserting the existence of a law among all
+those indicating that a law exists.
+• F1-Score: Balance between precision and recall, reflecting the robustness of the
+system in the face of heterogeneous legal contexts.
+• Balanced Accuracy: Average between sensitivity and specificity, helpful in cases
+of unbalanced data distribution (existing vs. non-existing law)
+• False Positive Rate (FPR): Rate of falsely identifying a rule as existing.
+• False Negative Rate (FNR): Rate of falsely identifying an existing rule as not
+existing.
+This interpretation allows technical metrics to be grounded in a legal and operational
+interpretation, which is essential for regulatory assessment.
+12

@@ -1,0 +1,100 @@
+the card for enabling the AI to generate a response
+(Sharma et al., 2020). Safety & Severity Alignment
+(SSA) checks whether the card responds appropri-
+ately to the severity level of the situation (Miner
+et al., 2016). Counterfactual Impact (CI) evaluates
+the quality of the response with a card compared to
+the response without one (Lewis et al., 2020).
+Table 17: Safety-planning card retrieval quality with
+automatic evaluation metrics for response generation.
+Card MentalChat
+BLEU-1 ROUGE-1 Bscore LM judge
+1st 41.08 46.26 88.38 8.16
+2nd 40.15 45.38 88.12 7.95
+3rd 39.32 44.61 87.85 7.72
+CounselChat
+1st 31.21 15.20 84.56 7.87
+2nd 30.54 14.82 84.28 7.68
+3rd 29.86 14.37 83.95 7.45
+Table 17 shows automatic evaluation using
+BLEU, ROUGE, BERTScore, and LM judge on all
+testing samples for response generation. We can
+observe that the first card achieves the strongest
+performance across both datasets, obtaining the
+highest BLEU-1, ROUGE, BERTScore, and LM-
+judge scores, followed by the second and the third
+one. The same ranking is observed consistently on
+MentalChat and CounselChat, suggesting that the
+automatic metrics are stable in identifying higher-
+quality card retrieval. Notably, scores are generally
+higher on MentalChat than on CounselChat, indi-
+cating that safety-planning card retrieval may align
+more closely with the problem structure and emo-
+tional context in MentalChat.
+A.8 Safety Cards for High-risk Cases
+We observed the contribution of safety cards in
+high-risk cases (Figure 4). Instead of direct evaluat-
+ing the role of the cards in high-risk scenarios, we
+evaluated this aspect based on the results of answer
+generation. For human, we asked again the three
+students to rate the output of high-risk samples (Fig-
+ure 4) using six metrics (a Likert scale). Suicidal
+Ideation (SI) evaluates whether responses mitigate
+suicide risk and provide supportive resources (Pos-
+ner et al., 2011). Self-Harm (SH) assesses safe,
+non-triggering responses to non-suicidal self-injury
+without describing methods (Nock, 2010). Anxiety
+Crisis (AC) measures the provision of grounding
+and calming guidance during acute distress (Edi-
+tion et al., 2013). Violent Thoughts (VT) evalu-
+ates de-escalation and safety when users express
+intent to harm others (Miner et al., 2016). Sub-
+stance Abuse (SA) assesses non-judgmental, clin-
+ically safe guidance for drug or alcohol misuse
+(Miller and Rollnick, 2012). Risk-taking Behav-
+iors (RTB) examines whether safer, constructive
+alternatives are offered for impulsive or dangerous
+actions (Linehan, 1993). The Fleiss’ Kappa on
+MentalChat is 0.71 and on CounselChat is 0.75,
+showing good agreement. LM judge (GPT-4.1)
+was also conducted on these samples. Results in Ta-
+bles 18 and 19 confirm that provide complementary
+therapeutic guidance that enhances response safety,
+appropriateness, and quality beyond the choice of
+retrieval model.
+Results in Tables 18 and 19 confirm that pro-
+vide complementary therapeutic guidance that en-
+hances response safety, appropriateness, and qual-
+ity beyond the choice of retrieval model. Both
+LLM-based and human evaluations show that in-
+corporating skill cards consistently improves all
+metrics across retrieval models and datasets. The
+gains are particularly pronounced in the LLM eval-
+uation, where w_skillcard improves the baseline
+by approximately 0.4–0.9 points, with the largest
+improvements observed in SH, SA, and RTB on
+MentalChat. Human evaluation confirms the same
+trend, although with smaller gains of approximately
+0.03–0.17 points, particularly for SI, SH, AC, and
+RTB. Overall, the improvements remain stable
+across different retrieval backbones, while the GPT
+embedding model generally achieves the strongest
+or near-strongest performance.
+A.9 CBT Alignment
+To rigorously evaluate the fidelity of the generated
+responses to established Cognitive Behavioral Ther-
+apy (CBT) principles (Beck, 2020), we introduce
+a tailored quantitative evaluation framework. Stan-
+dard text generation metrics often fail to capture
+the clinical nuances necessary for mental health
+support. Therefore, our evaluation utilizes three
+specialized metrics designed to assess therapeutic
+efficacy, protocol adherence, and the facilitation of
+guided discovery. Table 20 shows the results.
+Cognitive Distortion Reframing Efficacy
+(CDRE, 1.00–5.00) evaluates the model’s
+capacity to accurately identify and deconstruct
+the core cognitive distortions embedded within
+the user’s query. A higher score indicates ex-
+ceptional proficiency in recognizing maladaptive
+13817

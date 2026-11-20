@@ -1,0 +1,116 @@
+55
+Your task is to provide a 'total
+rating' scoring how well the
+statements in the provided passage
+can be infered from the provided
+context.
+Give your rating on a scale of 1 to 5,
+where 1 means that none of the
+statements in the passage can be
+inferred from the provided context,
+while 5 means that all of the
+statements in the passage can be
+unambiguously and entirely
+obtained from the context.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here are the context and statement.
+Context: "{context}"
+Passage: "{answer}"
+Answer:::
+q_feasibility:
+You will be given a context and a
+question.
+This context is extracted from a
+collection of passages, and the
+question will be used to find it.
+Your task is to provide a 'total
+rating' scoring how well this
+context can be retrieved based on
+the specificity and pertinence of
+the question.
+Give your answer on a scale of 1 to 5,
+where 1 means that it will be
+difficult to find this context
+from this question due to lack of
+specificity or pertinence, and 5
+means that the context can clearly
+be found with information
+contained in the question.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here are the question and context.
+Question: "{question}"
+Context: "{context}"
+Answer:::
+stand_alone:
+You will be given a question.
+Your task is to provide a 'total
+rating' representing how context-
+independent this question is.
+Give your answer on a scale of 1 to 5,
+where 1 means that the question
+depends on additional information
+to be understood, and 5 means that
+the question makes sense by
+itself.
+For instance, if the question refers
+to a particular setting, like 'in
+the context' or 'in the document',
+the rating must be 1.
+The questions can contain obscure
+technical nouns or acronyms and
+still be a 5: it must simply be
+clear to an operator with access
+to documentation what the question
+is about.
+For instance, "What is the name of the
+checkpoint from which the ViT
+model is imported?" should receive
+a 1, since there is an implicit
+mention of a context, thus the
+question is not independent from
+the context.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here is the question.
+Question: "{question}"
+Answer:::
+q_usefulness:
+You will be given a question.
+This question is to be used to find
+information in a collection of
+documents.
+Your task is to provide a 'total
+rating' representing how useful
+this question can be to a user
+with domain knowledge on the
+subject covered by the document
+collection.

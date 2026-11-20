@@ -1,0 +1,109 @@
+Zhuang et al., Sci. Adv. 11, eado7318 (2025)     7 May 2025
+Science AdvAnceS |  ReSeARch ARticle
+1 of 10
+MATERIALS SCIENCE
+Molecular polymerization strategy for stable perovskite 
+solar cells with low lead leakage
+Qixin Zhuang1†, Zhiyuan Xu1†, Haiyun Li1†, Cong Zhang1, Cheng Gong1, Huaxin Wang1,  
+Xiong Li2*‡, Zhigang Zang1,3,4*
+Lead leakage and stability are the main challenges for the commercialization of perovskite solar cells (PSCs). Here, 
+we propose adding N,N′- bis(acryloyl)cystamine (BAC) to the perovskite precursor solution, which facilitates the 
+formation of polymer BAC (PBAC) at the grain boundaries during the annealing process of films. The PBAC can ef-
+fectively passivate the defects and reduce the risk of lead leakage. Consequently, the PBAC- modified PSCs achieve 
+an efficiency of 25.53% (0.1 square centimeters) (certified efficiency of 25.24%) and 24.03% (1.0 square centime -
+ters). Moreover, after 1500 hours of continuous maximum power point tracking under simulated AM 1.5 illumina-
+tion and 2000 hours of exposure to damp heat conditions (85°C and 85% relative humidity), the device retains 
+approximately 96 and 81% of its initial power conversion efficiency, respectively. In addition, PBAC can effectively 
+reduce lead leakage by nearly 72% by immersing the PSCs in water for 480 minutes.
+INTRODUCTION
+Perovskite solar cells (PSCs) have gained increasing favor in both 
+academic and industrial communities in recent years because of 
+their solution processability and exceptional photovoltaic proper -
+ties. Now, the certified power conversion efficiency (PCE) of PSCs 
+has surpassed 26% (1–3). However, practical applications of PSCs 
+still face challenges related to their stability and lead toxicity (4,  5). 
+To date, nearly all highly efficient PSCs have been produced using 
+solution processing methods (6). Unfortunately, perovskite films 
+obtained through this method with uncontrollable crystallization 
+typically exhibit a high density of grain boundaries (GBs) and tend 
+to accumulate various defects at GBs, resulting in severe nonradia-
+tive recombination of charge carriers. In general, GBs are unstable 
+and susceptible to attack (7,  8). In extreme environments, GBs can 
+expedite the decomposition of perovskite by acting as reaction cen-
+ters and channels for ion migration (9–12). Therefore, rational regu-
+lation to stabilize GBs is crucial for improving device stability.
+In recent years, numerous strategies have been developed to opti-
+mize GBs to enhance the stability of perovskite films. One effective 
+strategy involves the usage of additive engineering to select appropri-
+ate protective materials for safeguarding GBs. By using organic small 
+molecules as additives, defects can be passivated, and a waterproof 
+layer can be formed beneath the GBs, preventing water infiltration 
+(13–16). Although these organic small molecules are primarily de-
+signed to enhance the humidity stability of PSCs, achieving opera-
+tional stability for commercialized PSCs requires consideration of 
+factors beyond humidity, such as thermal, electrical, and optical 
+considerations ( 17,  18). Polymers generally exhibit outstanding 
+water- resistant, heat- resistant, and light- resistant properties (19, 20). 
+Hence, the polymerizable of organic additives represents a feasible 
+approach to greatly improve the operational stability of PSCs under 
+extreme conditions. In 2018, Li et al. (21) pioneered the incorporation 
+of in situ polymerizable trimethallyl isocyanurate into the perovskite 
+precursor solution. After the annealing process concludes, the crys-
+tallinity of the perovskite film improves, forming a cross- linked net-
+work structure at the GBs to stabilize the films and achieve PSCs with 
+superior optoelectronic performance and operational stability. Fur -
+thermore, double[(3- methyloxetane- 3- yl)methyl]thiophene-2,5-
+dicarboxylate can serve as an additive in perovskite precursor solution 
+and polymerize at GBs during heat modification, forming a polymer 
+structure. This polymer at GBs can release stress and passivate de-
+fects, thereby improving the device’s operational stability under ad-
+verse environmental conditions (22). However, these polymerizable 
+small organic molecules often require higher temperatures or ultra-
+violet (UV) irradiation to initiate polymerization. In addition, most 
+polymerizable organic additive monomers typically have a limited 
+number of coordinating groups, reducing their ability to passivate 
+various types of perovskite defects (23). Given these challenges, the 
+development of a low- temperature, polymerizable, and multifunc-
+tional organic additive is critical for achieving efficient and opera-
+tionally stable PSCs.
+Although perovskite- based technologies generate  less lead pollu-
+tion compared to fossil fuel emissions, the potential long- term risks 
+of lead leakage from degraded perovskite devices remain a critical 
+concern for environmental and human safety. (24). To mitigate the 
+risk of lead leakage caused by the degradation of PSCs, extensive 
+research has been conducted to explore lead- free or partially lead- 
+substituted perovskite materials, such as tin- based perovskites and 
+double perovskite materials (25, 26). However, tin- based perovskites 
+exhibit poor stability, and the PCE of double PSCs remains relative-
+ly low (27, 28). Therefore, despite the presence of certain drawbacks, 
+lead- based PSCs continue to dominate due to their prevailing high 
+efficiency and stability. In addition, ensuring high efficiency and sta-
+bility is a prerequisite for eliminating lead; thus, minimizing lead 
+release is of utmost importance. Recently, alternative methods have 
+been developed to suppress the leakage of toxic lead in PSCs. For 
+instance, polymer films (4), porphyrin derivatives (29), and others 
+have been used for the external physical encapsulation of devices, 
+demonstrating excellent ability to inhibit lead leakage. On the other 
+1college of Optoelectronic engineering, chongqing University, chongqing 400044, 
+china. 2Michael Grätzel center for Mesoscopic Solar cells, Wuhan national laboratory 
+for Optoelectronics, huazhong University of Science and technology, Wuhan, china. 
+3School of i nformation Science and engineering, Yanshan University, Qinhuangdao 
+066004, china. 4henan Zhitong Optoelectronics co., ltd, Xuchang 461000, china.
+*corresponding author. email: xiongli@ hust. edu. cn (X.l.); zangzg@ cqu. edu. cn (Z.Z.)
+†these authors contributed equally to this work.
+‡Present address: School of Physics and Optoelectronic engineering, hainan University, 
+haikou, 570228 hainan, china.
+copyright © 2025 the 
+Authors, some rights 
+reserved; exclusive 
+licensee American 
+Association for the 
+Advancement of 
+Science. no claim to 
+original U.S. 
+Government Works. 
+distributed under a 
+creative commons 
+Attribution license 4.0 
+(cc BY). 
+Downloaded from https://www.science.org on November 19, 2026

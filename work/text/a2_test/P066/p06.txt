@@ -1,0 +1,71 @@
+Figure 4: ASTRID - an Automated and Scalable TRIaD for evaluating clinical QA systems leveraging RAG -
+consisting of three metrics: Context Relevance, Refusal Accuracy, and Conversational Faithfulness assessed within
+a clinical context.
+suit our use case, we simplify the CR definition
+and define it as a binary label indicating whether
+the retrieved context is relevant to the query. Ap-
+pendix 12 shows the prompt used to achieved this.
+4 Method
+We conduct several experiments using datasets
+sourced from real clinicians and open-source
+datasets to support the following claims:
+1. Our Conversational Faithfulness metric mod-
+els human Perceived Faithfulness (PF) more
+accurately than existing definitions.
+2. ASTRID can predict clinician ratings of harm-
+fulness, helpfulness, and inappropriateness.
+3. ASTRID is straightforward for LLMs to use,
+making them highly automatable.
+4.1 Dataset Curation
+We curated datasets to support evaluation of our
+proposed metrics using both real-world patient in-
+teractions and augmented clinical questions.
+Real-world Data Collection. We collected real-
+world patient questions using an autonomous
+telemedicine assistant capable of conducting phone
+conversations and responding to recovery-related
+queries following cataract surgery. From interac-
+tions with 120 patients at two UK hospitals, we
+extracted 102 unique patient questions. All patients
+provided explicit verbal consent for anonymized
+data usage. This setup enabled collection of nat-
+urally occurring, often noisy inputs (e.g., mistran-
+scriptions, statements, or truncated queries), repre-
+sentative of real-world deployments.
+Response Generation. To generate responses to
+these queries, we curated a domain-specific knowl-
+edge base on cataract surgery with two ophthalmic
+surgeons. We then employed three LLMs—PaLM-
+2 (text-bison@002, (Anil et al., 2023)), Mistral-
+7B (Jiang et al., 2023), and LLaMA-8B (Touvron
+et al., 2023)—within a RAG-based QA setup to pro-
+duce answers. This yielded 306 question-answer-
+context triplets. We then filtered examples to retain
+only those exhibiting conversational elements (e.g.,
+acknowledgments, follow-ups), resulting in a re-
+fined dataset of 206 triplets.
+4.1.1 Balancing by Perceived Faithfulness
+Two independent annotators assessed the Per-
+ceived Faithfulness of answers relative to their
+context, without being shown the original ques-
+tion. Disagreements were discussed and resolved
+by consensus. To ensure balanced training data, we
+sampled an equal number of perceived faithful and
+unfaithful responses, resulting in 148 triplets (74
+faithful, 74 unfaithful).
+4.1.2 Augmenting with Out-of-Scope Data
+To evaluate the Refusal Accuracy metric, we added
+45 out-of-scope questions selected by clinicians
+from the open-source HealthSearchQA dataset
+(Singhal et al., 2023a). These were paired with
+answers generated using PaLM-2 and LLaMA-8B,
+resulting in 90 new triplets. Combined with our
+in-scope dataset, this yielded 238 triplets.
+4.1.3 Human Labeling of Metrics
+Independent annotators labeled the 238 triplets for
+both the older "statement-level" definition of Faith-
+fulness and our proposed Conversational Faith-
+fulness. Each (answer, context) pair was anno-
+tated using both definitions, and consensus was
+reached through discussion. The final dataset (we
+16705

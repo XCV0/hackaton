@@ -1,0 +1,96 @@
+to overestimate or underestimate the effectiveness
+of various system optimizations.
+We view this work as a starting point rather than
+a final answer. RAGPULSE is the first to capture
+authentic temporal reuse patterns from a production
+deployment spanning hundreds of days and tens of
+thousands of real users. We hope the dataset serves
+as a foundation for the community to develop and
+rigorously evaluate next generation RAG system
+optimizations including but not limited to tempo-
+ral aware scheduling and semantic aware caching.
+By grounding system design in realistic workload
+characteristics RAGPULSE enables a shift from
+heuristic driven optimization to data driven system
+engineering for efficient RAG serving.
+7 Related Work
+General LLM Serving Traces. General
+traces (Wang et al., 2025c; shareAI, 2023; Wu et al.,
+2025) characterize request arrival and traffic bursts
+to optimize dispatching and resource scaling. How-
+ever, these datasets focus on dialogue-based work-
+loads and do not capture the document reuse or
+the data dependencies inherent in RAG serving.
+Consequently, these coarse-grained profiles lack
+the structured metadata required to model multi-
+component RAG requests.
+RAG Datasets and Accuracy Benchmarks. Ex-
+isting RAG benchmarks (Hsia et al., 2025; Yang
+et al., 2025; Joren et al., 2025) focus on retrieval
+precision and generation correctness rather than
+system metrics like KV cache residency. Their
+static nature ignores dynamic request arrival pat-
+terns, limiting their ability to guide infrastructure
+level performance tuning.
+Optimizations for RAG Serving Systems. Recent
+RAG optimizations focus on KV cache manage-
+ment (Wang et al., 2025a; Lu et al., 2024; Jin et al.,
+2024), speculative execution (Wang et al., 2025d),
+and retrieval aware scheduling (Shang et al., 2025;
+Wang et al., 2025b). Despite these advancements,
+evaluations rely on synthetic workloads that over-
+look real world complexities. RAGPULSE fills
+this gap by providing a production scale trace to
+validate such systems under authentic, knowledge
+intensive dynamics.
+8 Conclusion
+RAG has emerged as the standard paradigm for
+building trustworthy, high-performance LLM appli-
+cations. However, its unique retrieval architecture
+introduces unprecedented challenges for system
+optimization. Existing generic LLM traces and
+synthetic RAG datasets fail to capture RAG spe-
+cific workload dynamics, creating a significant gap
+between academic research and deployment.
+To bridge this gap, we introduce RAGPULSE,
+an open-source RAG workload trace dataset that
+preserves authentic temporal information missing
+in existing traces. Through in depth analysis, we
+reveal critical characteristics of production RAG
+workloads including time sensitive document reuse
+and bursty temporal locality. These findings pro-
+vide empirical grounding for next generation RAG
+optimizations such as temporal aware scheduling
+and semantic aware caching, establishing a stan-
+dard for efficient RAG serving.
+Limitations
+Although RAGPULSE captures authentic temporal
+reuse patterns, several aspects remain unexplored.
+First, while the trace includes multi turn conversa-
+tions, it does not yet capture more complex agentic
+workflows such as tool use or iterative retrieval
+generation cycles across multiple reasoning steps.
+Second, the trace includes only text based docu-
+ments, and multimodal RAG scenarios involving
+images or audio are not covered. Finally, to pro-
+tect user privacy, we release RAGPULSE as an
+encrypted, privacy-preserving trace. Although this
+does not affect RAG system optimization, it re-
+moves raw semantic information. We will explore
+incorporating richer semantic metadata through
+privacy-preserving techniques (Feyisetan and Ka-
+siviswanathan, 2021; Meehan et al., 2022) and con-
+sider releasing original content after obtaining user
+consent in future versions of RAGPULSE.
+Acknowledgments
+This work was supported by the National Nat-
+ural Science Foundation of China (Grant No.
+62572341). The authors would also like to thank
+the anonymous reviewers for their valuable com-
+ments and constructive suggestions, which helped
+improve this work.
+References
+2025. Qdrant. https://qdrant.org.cn/.
+Shubham Agarwal, Sai Narayan Sundaresan, Subrata
+Mitra, Debabrata Mahapatra, Archit Gupta, Rounak
+7073

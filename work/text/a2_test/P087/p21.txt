@@ -1,0 +1,65 @@
+INSTRUCTION:
+You are a rigorous multi-hop QA assistant. You must answer strictly based on the provided document snippets. Do not
+introduce external knowledge, subjective guesses, or information not mentioned in the documents. Please think deeply and
+answer according to the following steps:
+1. Decompose the Question: Break down the core query points and the logical link of multi-hop reasoning (e.g.,
+"Precondition → Intermediate Inference → Final Conclusion").
+2. Locate Relevant Documents: Examine candidate document snippets one by one, mark content directly/indirectly
+related to the core query, and record the corresponding doc_id. Exclude irrelevant documents.
+3. Integrate Information: If relevant information is fragmented, logically connect it based on the document context. If
+there is no direct answer, provide a speculative conclusion consistent with the document context (do not return
+"unknown").
+4. Verify Rationality: Confirm that the answer originates entirely from the documents, contains no external information,
+and does not contradict the document content.
+5. Output Result: Provide a concise answer, the corresponding evidence doc_ids, and explain the deep thinking
+process.
+INPUT TEMPLATE:
+Question: {question}
+Candidate Document Snippets (Listed by doc_id, potentially from different articles; content truncated):
+{context}
+Please strictly output in the following JSON format. The "reasoning" field must detail the deep thinking process
+(including question decomposition, document location, information integration, and rationality verification, at least 3
+sentences):
+{
+"answer": "<Concise answer based on docs / Speculative conclusion>",
+"evidence_doc_ids": ["<doc_id1>", "<doc_id2>", "..."],
+"reasoning": "<Detailed thinking process...>"
+}
+Figure 6: The prompt template used for the NLI-Guided Generator. It enforces strict adherence to retrieved context
+and requires explicit reasoning steps to support the MCTS verification process.
+Figure 8 illustrates a detailed distinct failure
+mode analysis. In the Baseline (Left), the dense re-
+triever retrieves three documents with high cosine
+similarity (> 0.88) to the entity “The American
+Conservative”. However, due to the limited context
+window (Top-3 constraints), these semantically re-
+dundant chunks crowd out the essential document
+containing the founding date of the second entity,
+“The Weekly Standard”. Consequently, the CoT
+reasoner, lacking specific evidence, falls back on
+parametric memory, hallucinating an incorrect date
+(1950s) based on a broad “Cold War era” bias.
+In contrast, our Self-Correcting Framework
+(Right) intervenes at two stages:
+1. Context Construction: The MMKP module
+clusters retrieved chunks by semantic intent.
+It identifies that Doc 1 and Doc 2 convey iden-
+tical information (Cluster A) and discards the
+lower-ranked duplicate, effectively reserving
+token budget for the diverse Cluster B (Doc
+3).
+2. Reasoning Verification: The MCTS planner
+expands the search space. When the model
+initially generates a hallucinated date (Branch
+π1), the NLI verifier detects a low entailment
+score (0.12) against the retrieved context, as-
+signing a negative reward (r = −1.0). This
+prompts the planner to backtrack and explore
+Branch π2, which successfully extracts the
+correct date verified by high entailment (0.98),
+leading to the correct temporal comparison.
+G.2 Case Study 2: Attribute Comparison
+under Information Noise
+We further analyze a multi-hop reasoning scenario
+involving corporate history, which typically re-
+20973

@@ -1,0 +1,73 @@
+Figure 7: Two examples of good-bad rewrite pairs, each
+containing an original query, the good rewrite and bad
+rewrite. The “Retrieved” sign indicates whether the
+top 5 documents contain the answer or not.
+good-bad pairs. Figure 7 provides two examples.
+In the first example, the original query pertains to
+the only European country where wild porcupines
+reside. The good rewrite simplifies to a more direct
+question: “In which unique European country do
+porcupines live in the wild?” This rewrite is clear
+and precise. In contrast, the bad rewrite, “What’s
+the sole European nation with a thriving porcupine
+populace in the wilderness?” Although conveying
+similar information, it appears excessively verbose
+and unnecessarily complex in its wording, resulting
+in failure in retrieval.
+The second example’s original query asks about
+the height of the Zhongyuan Pagoda in Henan
+Province, China. The good rewrite poses the same
+question in a more concise manner: “Height of
+Zhongyuan Pagoda in Henan?” This succinct
+rewrite may be better suited for rapid information
+retrieval. The bad rewrite, on the other hand, is:
+“Where is the Zhongyuan Pagoda located?” It fails
+to correctly rephrase the original question, as it
+shifts the focus from “height” to “location”, caus-
+ing a deviation from the original query’s intent.
+These cases demonstrate that the reranker’s scoring
+of retrieved documents can effectively differentiate
+between good and bad rewrites.
+A.4.3 Additional Case for Better Format
+Rewriting
+We provide one more case in this section. The orig-
+inal question used the phrase “woman in music” to
+Figure 8: An example includes the original query and
+rewrite from SFT and RaFe. The label “Retrieved”
+denotes whether the answer is present within the top 5
+retrieved documents, and “Correct” denotes whether
+the prediction is correct.
+inquire about the highest-earning female musician
+in Forbes’ Celebrity 100 list in 2020, which may
+not have been as intuitive for search engines, result-
+ing in a failure to retrieve the documents. While
+the RaFe rewrite directly refines “woman in mu-
+sic” into “woman musician”, rephrasing the ques-
+tion with vocabulary more suitable for retrieval
+purposes.
+In contrast, the rewrite from SFT also conveys a
+clearer expression of “female musician”, but its for-
+mat more closely resembles a headline or newspa-
+per title, which may not be as suitable for a search
+query as a direct interrogative format. Addition-
+ally, it does not clearly express that the search is
+specifically for the year.
+A.4.4 Different Performances for Feedback
+Training
+In our experiments, it can be observed that KTO >
+DPO > PPO across most settings, which we believe
+may be related to the number of training instances.
+When conducting the ‘good bad rewrites’, we
+encounter instances where all rewrites were either
+labeled as bad or good, leading to samples that can
+not be paired, and thus reducing the training data
+for DPO. While the KTO training process does not
+require paired preference data, it only needs the
+preference labels (i.e. good or bad) for training. So
+the actual amounts of training instances for KTO is
+larger. Compared to PPO’s training process, where
+each iteration only generates a single rewrite for
+feedback optimization, the number of samples used
+to optimize the rewriting model is lower.
+Moreover, we have found that online PPO train-
+899

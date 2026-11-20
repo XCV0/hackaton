@@ -1,0 +1,100 @@
+8 Conclusion
+We presented HalluGuard, a 4B-parameter small
+reasoning model designed as a guardrail for
+Retrieval-Augmented Generation, detecting closed-
+book, document-grounded hallucinations while
+producing evidence-grounded justifications.
+Built on a domain-agnostic synthetic dataset
+with multi-stage curation and preference-based
+fine-tuning using ORPO and LoRA, HalluGuard
+transforms a compact backbone into a model that
+rivals or surpasses much larger LLMs and recent
+specialized hallucination detection models. Hallu-
+Guard achieves competitive performance on LLM-
+AggreFact while producing justifications of compa-
+rable quality to those of a 235B-parameter model.
+Ablation studies demonstrate that carefully
+aligned small reasoning models can offer a reliable
+alternative solution for enterprise RAG pipelines,
+narrowing the gap with frontier LLMs while foster-
+ing end-user trust through transparent and explain-
+able hallucination detection.
+9 Future Work
+While HalluGuard achieves strong performance,
+several directions remain for future work. First, we
+plan to extend its reasoning capabilities to multi-
+modal settings, allowing it to verify claims against
+charts and tables. This extension would improve
+its applicability to a broader range of documents.
+Second, we aim to optimize the length of internal
+reasoning traces to reduce post-generation latency
+while maintaining a favorable balance among per-
+formance, scalability, and deployment constraints.
+Finally, we plan to release additional variants
+fine-tuned from newer pretrained backbones.
+Limitations
+Synthetic Data. Although multiple filters are ap-
+plied, the synthetic claims used for training may
+not fully capture the complexity of real-world hallu-
+cinations, potentially limiting generalization when
+faced with data beyond the synthetic distribution.
+Hallucination Taxonomy. Multiple fine-grained
+hallucination classifications can be explored, like
+factual misalignment, invented world knowledge,
+grammatical errors, logical failures, etc. In this
+study, we used a three-label taxonomy (grounded,
+intrinsic, and extrinsic). More research needs to be
+conducted on other types of hallucinations accord-
+ing to real world data applications.
+Language and Domain Generalization. Hallu-
+Guard is trained and evaluated on English data. Its
+performance in other languages or domain-specific
+settings (e.g., legal or finance) remains unverified.
+Ethical Considerations
+As with any hallucination detection model, Hal-
+luGuard must be used with caution. Overflag-
+ging grounded claims may reduce user trust, while
+failing to detect hallucinations can lead to harm-
+ful errors further down the line. For this reason,
+HalluGuard should be used as a decision-support
+tool rather than as a fully autonomous system and
+should always be paired with human oversight. We
+therefore encourage responsible deployment in sen-
+sitive domains when integrating HalluGuard into
+real-world RAG pipelines.
+References
+Rami Aly, Zhijiang Guo, Michael Schlichtkrull, James
+Thorne, Andreas Vlachos, Christos Christodoulopou-
+los, Oana Cocarascu, and Arpit Mittal. 2021. The
+fact extraction and verification over unstructured and
+structured information (feverous) shared task. In Pro-
+ceedings of the Fourth Workshop on Fact Extraction
+and VERification (FEVER) at EMNLP, volume 2021,
+pages 1–13.
+Reza Akbarian Bafghi, Carden Bagwell, Avinash
+Ravichandran, Ashish Shrivastava, and Maziar Raissi.
+2025. Fine tuning without catastrophic forgetting
+via selective low rank adaptation. arXiv preprint
+arXiv:2501.15377.
+Yejin Bang, Ziwei Ji, Alan Schelten, Anthony
+Hartshorn, Tara Fowler, Cheng Zhang, Nicola Can-
+cedda, and Pascale Fung. 2025. HalluLens: LLM
+hallucination benchmark. In Proceedings of the 63rd
+Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), pages 24128–
+24156, Vienna, Austria. Association for Computa-
+tional Linguistics.
+Kay Henning Brodersen, Cheng Soon Ong, Klaas Enno
+Stephan, and Joachim M Buhmann. 2010. The bal-
+anced accuracy and its posterior distribution. In 2010
+20th international conference on pattern recognition,
+pages 3121–3124. IEEE.
+Hung-Ting Chen, Fangyuan Xu, Shane Arora, and Eu-
+nsol Choi. 2023. Understanding retrieval augmen-
+tation for long-form question answering. Preprint,
+arXiv:2310.12150.
+DeepSeek-AI. 2024. Deepseek-v3 technical report.
+Preprint, arXiv:2412.19437.
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and
+Kristina Toutanova. 2019. Bert: Pre-training of deep
+16926

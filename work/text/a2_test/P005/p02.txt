@@ -1,0 +1,149 @@
+Build a hierarchy from sentence attention
+1 Long Document + Query
+Document Snippet
+William Shakespeare was born in Stratford-upon-
+Avon in 1564. At age 18, he married Anne Hathaway,
+with whom he had three children. His early life
+centered on family and his local community,
+experiences that later shaped themes of community
+and human nature in his works. Between 1585 and
+1592, he began a successful career in London as an
+actor, writer, and part-owner of a playing company.
+What changes in
+Shakespeare’s life
+influenced his works?
+2 Sentence-level Chunks and SLLM attention to find related sentences
+Shakespeare was born in Stratford-
+upon-Avon.
+At age 18, he married Anne Hathaway.
+During his early life, he focused on
+family and local community.
+These experiences later influenced
+themes of community and human
+nature.
+Between 1585 and 1592, he began a
+successful career in London.
+He became an actor, writer, and part-
+owner of a playing company.
+1
+2
+3
+4
+5
+6
+Inter-sentence attention
+3 Attention-guided tree retrieval
+Root
+(all sentences 1-6)
+Node A
+(1-4)
+5
+career in
+London (1585-
+1592)
+Node A2
+(3-4)
+Node B
+(5-6)
+Query
+Query
+Node A1
+(1-2)
+1
+born
+in Stratford-
+upon-Avon
+3
+family and
+local
+community
+2
+married Anne
+Hathaway 
+6
+actor, writer,
+part-owner of
+company 
+4
+themes of
+community &
+human nature
+Retrieved Nodes
+Figure 1: SPROUTRAG segments a long document into
+sentence-level chunks, uses SLLM attention to identify
+semantically related sentences, and organizes them into
+an attention-guided binary tree. Retrieval then selects
+evidence across fine-grained leaves, mid-level nodes,
+and broader subtrees, preserving precision while recov-
+ering coherence.
+lations, but are less effective when fine-grained
+chunks contain sparse entity information.
+In this paper, we present SPROUTRAG, an
+attention-guided hierarchical RAG framework that
+organizes sentence-level chunks into a learned doc-
+ument structure, preserving cross-chunk dependen-
+cies while avoiding LLM inference overhead dur-
+ing retrieval. As illustrated in Figure 1, this struc-
+ture enables retrieval at multiple semantic granu-
+larities. SPROUTRAG encodes documents at sen-
+tence granularity using an SLLM and constructs a
+binary tree bottom-up, where merge order is deter-
+mined by a learned weighted aggregation of inter-
+sentence attention across transformer heads and lay-
+ers. This aggregation replaces naive uniform aver-
+aging, which we show introduces a proximity bias
+that weakens the global tree index; instead, learn-
+able scalar weights allow the model to discover
+which head types best reflect semantic co-relevance
+for document structure. Each internal node stores
+a progressive embedding that compositionally rep-
+resents its subtree, enabling multi-granularity re-
+trieval via hierarchical beam search that collects
+candidates across all tree levels. SPROUTRAG
+is trained end-to-end to jointly optimize retrieval
+quality and tree structure, requiring no external
+LLM calls at any stage. It captures emergent multi-
+sentence relevance that pairwise or flat retrieval
+methods cannot, while remaining efficient enough
+for deployment. We evaluate SPROUTRAG on
+four benchmarks spanning scientific, legal, and
+open-domain settings. On average, SPROUTRAG
+improves information efficiency (IE) by 6.1% over
+the strongest baseline, especially in the cases where
+evidence is often dispersed across paragraphs.
+In summary, the contributions of this paper are
+as follows. (1) We introduce SPROUTRAG, an
+attention-guided hierarchical RAG framework that
+constructs a binary tree over sentence-level chunks
+using learned inter-sentence attention, enabling
+multi-granularity retrieval without any LLM calls
+at inference time. (2) We identify and address the
+proximity bias introduced by uniform attention av-
+eraging in sentence-level transformers, replacing
+it with a learned weighted aggregation that allows
+the model to discover which attention heads best
+reflect semantic co-relevance for document struc-
+ture. (3) We introduce a joint training objective that
+jointly improves retrieval quality and tree structure,
+eliminating the need for external LLM filtering or
+lossy summarization at any pipeline stage.
+2 Related Work
+Chunking and adaptive retrieval. The effec-
+tiveness of RAG depends strongly on how docu-
+ments are segmented into retrievable units. Stan-
+dard RAG pipelines often rely on rule-based split-
+ters, such as fixed-length or delimiter-based chunk-
+ing, which are efficient but insensitive to seman-
+tic boundaries (Team, 2024). Recent methods
+aim to improve this granularity choice. Late-
+Chunking (Günther et al., 2025) contextualizes to-
+ken representations before forming chunk embed-
+dings, while Meta-Chunking (Zhao et al., 2025b)
+and MoC (Zhao et al., 2025a) use LLM-based sig-
+nals or routing mechanisms to produce more adap-
+tive chunk boundaries. Dense X Retrieval (Chen
+et al., 2024) moves toward finer granularity by de-
+composing text into atomic propositions, improv-
+ing precision but weakening broader contextual
+continuity. Other methods adapt retrieval after
+46522

@@ -1,0 +1,104 @@
+, , Yixin Chen, Ying Xiong*, Shangyu Wu, Xiangrui Ke, Nan Guan, and Chun Jason Xue
+Then, a lightweight linear scorer with a sigmoid activation function
+is used to produce the dynamic gate:
+𝛾𝑏,𝑗 =𝜎
+
+𝑊⊤ 𝑔 𝑔𝑏,𝑗 +𝑎𝑔
+
+, 0 <𝛾𝑏,𝑗 < 1, (6)
+where𝑊𝑔 ∈ R2𝑑𝑚 and𝑎𝑔 ∈ R are learnable parameters.
+3.3.3 Learnable Position Mask. Although the dynamic gate 𝛾 cap-
+tures the query-conditioned semantic importance of retrieved to-
+kens, it does not explicitly model the positional effects in the ev-
+idence sequence. Therefore, we introduce a learnable position
+mask 𝜇 = {𝜇1,...,𝜇𝑁},𝜇𝑗 ∈ R to encode position-dependent
+importance. These parameters are shared across all queries and
+initialized to ones.
+Because the flattening operation is performed on the sequence
+dimension (across different retrievals), 𝜇𝑗 can capture global priors,
+e.g., retrieved chunks with high retrieval ranking are generally
+more useful; chunks in the title position might be more important,
+etc. Unlike a purely dynamic gate, this position mask can encode
+dataset-level structural biases.
+3.3.4 Token Weights via Aggregating Dynamic Gate and Position
+Mask. To get the token weights, we combine the dynamic gate and
+position mask by performing element-wise multiplication:
+𝑊𝑡 ={𝜇𝑗 ·𝛾𝑏,𝑗},𝑊𝑡 ∈ R𝐵×𝑁. (7)
+These token weights are computed on the fly for every token of
+each query. Unlike listwise softmax attention, our weights are not
+constrained to sum to one. This design allows multiple evidence
+tokens to contribute simultaneously (independent gating). Finally,
+we compute the weighted token features by performing element-
+wise multiplication over context embeddings and token weights:
+ˆ𝐶 =𝑊𝑡 ·𝐶∈ R𝐵×𝑁×𝑑𝑚 (8)
+3.4 Token Fusion
+After obtaining the weighted token features ˆ𝐶, we update the LLM’s
+hidden states by adding the scaled context feature 𝛼∗𝑟𝑏 onto the
+injected layer’s spec hidden state: H𝑏,𝑝𝑏 ,𝐿,::
+𝑟𝑏 = LayerNorm
+ 𝑁∑︁
+𝑗 =1
+Dropout( ˆ𝐶𝑏,𝑗)
+!
+(9)
+ˆH𝑏,𝑝𝑏 ,𝐿,: = H𝑏,𝑝𝑏 ,𝐿,: +𝛼·𝑟𝑏 (10)
+where 𝛼 is a learnable scalar that controls the overall strength. If
+retrieval is unavailable (or we don’t inject), the layer bypasses and
+returns the original hidden states with zero auxiliary loss.
+3.5 Training Objective
+We train the fusion module with supervised QA data using standard
+teacher forcing. Let 𝑦 =[𝑦1,...,𝑦𝑇] be the target answer tokens,
+and let the backbone LM head map the updated last-layer states to
+token logits. We minimize the negative log-likelihood:
+LNLL =−
+𝑇∑︁
+𝑡 =1
+log𝑝(𝑦𝑡 |𝑦<𝑡,𝑞,C𝑘(𝑞)). (11)
+Gate sparsity regularization. To encourage selective evidence
+usage, we add a sparsity penalty on the dynamic gates:
+Lgate = 1 𝐵𝑁 𝐵∑︁ 𝑏=1 𝑁∑︁ 𝑗 =1 𝛾𝑏,𝑗, (12)
+The final objective is:
+L =LNLL +𝜆Lgate, (13)
+where𝜆 balances answer accuracy and evidence selectivity.
+4 Experiment Settings
+4.1 Deployment Regimes
+We evaluate under two deployment regimes: In-domain adapta-
+tion. We train the retrieval filter on the training split of the target
+dataset and report performance on the held-out test split. This proto-
+col reflects a practical setting where limited in-domain supervision
+is available for adapting the retrieval utilization module without
+modifying the backbone LLM. Out-of-domain transfer. We train
+the retrieval filter on a large-scale general dataset consisting of
+150,000 diverse instruction-output pairs, drawn from Alpaca [24],
+KILT [16], ASQA [21], and OpenBookQA [14]. Then we evaluate
+without any downstream training on: (i) general QA benchmarks
+and (ii) biomedical QA benchmarks. This measures cross-domain
+generalization and robustness to domain shift.
+It is noted that for both deployment regimes, we use Wikipedia
+as the external retrieval database.
+4.2 Datasets
+We evaluated our method using QA datasets from two domains:
+general and biomedical. The general domain encompasses multi-
+hop reasoning and commonsense reasoning. Specifically, following
+PRAG [22], we selected the following datasets: 2WikiMultihopQA
+(2WQA), HotpotQA (HPQA), PopQA, and ComplexWebQuestions
+(CWQ). Our reported results are evaluated the total sub-task data.
+For the biomedical domain, following Xiong et al. [30], we per-
+formed evaluations on MedQA [8], MedMCQA [15], PubMedQA [9],
+BioASQ [25], and MMLU_Med [6]. MMLU_Med, MedQA-US, and
+MedMCQA are medical examination QA datasets, while PubMedQA
+and BioASQ-Y/N are biomedical research QA datasets. The MMLU_Med
+dataset consists of six biomedical-related tasks, including anatomy,
+clinical knowledge, professional medicine, human genetics, college
+medicine, and college biology.
+4.3 Backbone LLM
+In our experimental setup, we employed multiple backbone mod-
+els from different families and scales to ensure a comprehensive
+evaluation. Specifically, we selected the following models: LLaMA-
+3.2-1B-Instruct, LLaMA-3-8B-Instruct, Qwen2.5-1.5B-Instruct, and
+Qwen2.5-14B-Instruct. This selection spans a range of parameter
+sizes—from 1 billion to 14 billion parameters—and covers two promi-
+nent model families (LLaMA and Qwen), allowing us to examine
+both model-scale effects and architectural variations across distinct
+instruction-tuned lineages.
+4

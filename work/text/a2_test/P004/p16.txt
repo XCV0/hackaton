@@ -1,0 +1,30 @@
+HotpotQA MuSiQue TriviaQA
+Model F1 Faith AnsR F1 Faith AnsR F1 Faith AnsR
+LCR-RAG (8B) 63.8 94.5 93.4 62.5 96.8 97.5 78.2 97.1 94.5
+LCR-RAG (32B) 66.5 95.6 94.2 65.1 97.5 98.1 81.4 97.8 95.3
+∆ Improve +4.23% +1.16% +0.86% +4.16% +0.72% +0.62% +4.09% +0.72% +0.85%
+Table 8: Performance scaling analysis of LCR-RAG with different parameter scales. The 8B model corresponds to
+the main results reported in Table 1. Larger models consistently yield better reasoning and retrieval utilization.
+Query: Which film directed by a filmmaker who also directed a movie starring Tom Cruise, won the Best Picture Oscar?
+Model Step Trace / Output
+Self-RAG Generation The film Rain Man, directed by Barry Levinson, won the Best Picture Oscar. Barry
+Levinson also directed Top Gun, which starred Tom Cruise.
+Critique [Failed] This answer is marked as fully supported, despite the factual error (Levin-
+son did not direct Top Gun).
+LCR-RAG
+Draft (A0) The movie is The Departed. It was directed by Martin Scorsese, who also directed
+Minority Report starring Tom Cruise.
+Verifier (NSV) [Defect Report]
+• Event: Contradiction
+• Reason: Knowledge Base states Minority Report directed by Steven Spielberg,
+not Scorsese.
+• Scores: Slogic = 0.5, Sf act = 0.5
+PPO Agent → Action: RephraseFocus (Target: Director intersection)
+New Query (q1) “Which director of a Best Picture winning film also directed a film with Tom
+Cruise?"
+Answer (A1) The film that won the Best Picture Oscar is Rain Man, directed by Barry Levinson.
+Levinson also directed Rain Man, which starred Tom Cruise. [Verified]
+Table 9: Step-by-step execution trace on a complex HotpotQA query. While Self-RAG hallucinates a relationship to
+force an answer, LCR-RAG’s neuro-symbolic verifier explicitly catches the director mismatch in the first draft. This
+triggers the PPO agent to refine the query, leading to a logically consistent final answer.
+17915

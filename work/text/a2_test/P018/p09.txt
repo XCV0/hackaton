@@ -1,0 +1,105 @@
+Limitations
+Similar to other document-aware contrastive de-
+coding methods, DCCD introduces additional in-
+ference cost. At each decoding step, the method
+requires the full-context logits and document-
+conditioned logits for the retrieved documents,
+while the document-level confidence probe is com-
+puted once per question–document pair. This cost
+scales linearly with the number of retrieved doc-
+uments, which has the same computational com-
+plexity as DVD (Jin et al., 2024a). In practice, our
+experiments use top-5 and top-10 retrieval settings,
+which are common in multi-document QA eval-
+uation, but more efficient implementations such
+as batching document-conditioned forward passes,
+caching document states, or applying DCCD only
+at answer-critical decoding steps could reduce run-
+time overhead.
+DRQA is designed to isolate retrieval-grounded
+conflict resolution in enterprise-style multi-
+document QA, where the answer is unavailable
+from internal memory and must be recovered from
+retrieved evidence. This controlled design is useful
+for evaluating the specific capability targeted by
+DCCD, but it is not intended to cover all forms of
+enterprise RAG. In particular, our current bench-
+mark focuses on factoid question answering over
+text representations of enterprise documents, rather
+than full long-form report generation, interactive
+tool use, or multi-modal file understanding. These
+settings are closely related to deep-research work-
+flows and could provide valuable extensions of
+DRQA.
+Ethical considerations
+DRQA is constructed from synthetic enterprise-
+style documents and is intended for research on
+retrieval-grounded conflict resolution, not for repre-
+senting real companies, employees, or operational
+records. Because the benchmark includes deliber-
+ately generated misinformation and outdated evi-
+dence, the dataset should not be used as a factual
+knowledge source. Its intended use is to evaluate
+whether RAG systems can identify reliable evi-
+dence when retrieved documents conflict. The gen-
+erated documents use synthetic personas, organiza-
+tions, and facts. We have verified that the dataset
+does not contain real private enterprise records or
+intentionally identifying information. The bench-
+mark is intended for research use only.
+References
+Amirhossein Abaskohi, Tianyi Chen, Miguel Muñoz-
+Mármol, Curtis Fox, Amrutha Varshini Ramesh, Éti-
+enne Marcotte, Xing Han Lù, Nicolas Chapados,
+Spandana Gella, Christopher Pal, Alexandre Drouin,
+and Issam H. Laradji. 2026. DRBench: A realistic
+benchmark for enterprise deep research. In The Four-
+teenth International Conference on Learning Repre-
+sentations.
+Marah Abdin, Jyoti Aneja, Harkirat Behl, Sébastien
+Bubeck, Ronen Eldan, Suriya Gunasekar, Michael
+Harrison, Russell J Hewett, Mojan Javaheripi, Piero
+Kauffmann, and 1 others. 2024. Phi-4 technical re-
+port. arXiv preprint arXiv:2412.08905.
+Anthropic. 2025. Introducing claude opus 4.5. https:
+//www.anthropic.com/news/claude-opus-4-5.
+Hung-Ting Chen, Michael Zhang, and Eunsol Choi.
+2022. Rich knowledge sources bring complex knowl-
+edge conflicts: Recalibrating models to reflect con-
+flicting evidence. In Proceedings of the 2022 Con-
+ference on Empirical Methods in Natural Language
+Processing, pages 2292–2307, Abu Dhabi, United
+Arab Emirates. Association for Computational Lin-
+guistics.
+Prafulla Kumar Choubey, Xiangyu Peng, Shilpa Bha-
+gavath, Kung-Hsiang Huang, Caiming Xiong, and
+Chien-Sheng Wu. 2025. Benchmarking deep search
+over heterogeneous enterprise data. In Proceedings
+of the 2025 Conference on Empirical Methods in Nat-
+ural Language Processing: Industry Track, pages
+501–517, Suzhou (China). Association for Computa-
+tional Linguistics.
+Mingxuan Du, Benfeng Xu, Chiwei Zhu, Licheng
+Zhang, Xiaorui Wang, and Zhendong Mao. 2026.
+Deepresearch bench: A comprehensive benchmark
+for deep research agents. In The Fourteenth Interna-
+tional Conference on Learning Representations.
+Ekaterina Fadeeva, Aleksandr Rubashevskii, Artem
+Shelmanov, Sergey Petrakov, Haonan Li, Hamdy
+Mubarak, Evgenii Tsymbalov, Gleb Kuzmin, Alexan-
+der Panchenko, Timothy Baldwin, Preslav Nakov,
+and Maxim Panov. 2024. Fact-checking the output
+of large language models via token-level uncertainty
+quantification. In Findings of the Association for
+Computational Linguistics: ACL 2024, pages 9367–
+9385, Bangkok, Thailand. Association for Computa-
+tional Linguistics.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yixin Dai, Jiawei Sun, Haofen
+Wang, Haofen Wang, and 1 others. 2023. Retrieval-
+augmented generation for large language models: A
+survey. arXiv preprint arXiv:2312.10997, 2(1):32.
+Jiahui Geng, Fengyu Cai, Yuxia Wang, Heinz Koeppl,
+Preslav Nakov, and Iryna Gurevych. 2024. A sur-
+vey of confidence estimation and calibration in large
+9

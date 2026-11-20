@@ -1,0 +1,82 @@
+CIKM ’26, November 07–11, 2026, Rome, Italy Hengran Zhang, Keping Bi, Jiafeng Guo, Jiaming Zhang, Shuaiqiang Wang, Dawei Yin, Xueqi Cheng
+Table 4: Ranking performance (NDCG@5, %) of various LLM-specific utility-based ranking methods. Bold values indicate the
+best performance for each LLM. Superscripts † and ‡ denote statistically significant improvements over all other methods and
+over the likelihood method within the same block using the paired t-test (𝑝 < 0.05), respectively.
+Method NQ HotpotQA 2WikiQA TriviaQA MS MARCO-FQA FEVER Overall
+Llama3.1-8B-Instruct
+Initial Retrieval 52.72 51.11 43.64 56.68 53.35 66.39 52.29
+AttR 29.03 27.95 38.79 33.69 28.23 60.12 38.24
+Likelihood 62.66† 64.67 51.73 78.25† 54.01 71.75† 61.28†
+LVR (𝑤/𝑜 Pseudo answer) 57.76 61.09 51.67 68.32 53.72 69.87 58.89
+LVR (𝑤/ Pseudo answer) 60.36 63.67 53.54†‡ 69.73 55.06 69.59 60.44
+Qwen3-8B
+Initial Retrieval 54.47 49.46 38.06 59.89 55.32 71.05 52.11
+AttR 45.69 43.22 34.07 48.98 42.37 62.78 44.50
+Likelihood 64.77 66.42 48.94 81.27† 52.44 82.95† 63.80
+LVR (𝑤/𝑜 Pseudo answer) 68.25‡ 66.70 48.31 79.52 59.61‡ 77.82 63.77
+LVR (𝑤/ Pseudo answer) 69.83†‡ 68.08†‡ 49.53 79.53 60.02‡ 77.78 64.57†‡
+Qwen3-14B
+Initial Retrieval 54.04 49.19 37.03 59.37 53.89 70.23 50.65
+Likelihood 64.41 67.51 55.91† 84.26† 51.98 74.18 64.27
+LVR (𝑤/𝑜 Pseudo answer) 68.47‡ 67.83 50.92 80.92 60.35‡ 79.32‡ 64.49
+LVR (𝑤/ Pseudo answer) 69.51†‡ 68.59‡ 52.22 80.95 60.34‡ 79.57‡ 65.21†‡
+Qwen3-32B
+Initial Retrieval 53.93 48.50 40.06 59.89 54.15 69.96 51.19
+Likelihood 61.01 66.58 55.89† 81.02† 50.84 73.40 62.71
+LVR (𝑤/𝑜 Pseudo answer) 66.87‡ 67.40 52.81 79.49 59.29‡ 72.92 63.22
+LVR (𝑤/ Pseudo answer) 67.72†‡ 68.95†‡ 53.96 79.50 59.15‡ 73.30 64.00†‡
+Table 5: Dataset statistics.
+NQ HotpotQA 2WikiQA TQ MQ FEVER
+#Queries 2837 5600 12576 5359 3199 10245
+#Corpus 32M 32M 32M 32M 8.8M 32M
+multi-hop questions in this section to construct the benchmark, i.e.,
+SpecUBench (LLM-Specific Utility Benchmark).
+Additional Source Datasets. In addition to the single-hop datasets
+described earlier, we include the following multi-hop datasets:
+• HotpotQA (HQ) [45]: This dataset provides question-answer
+pairs along with human-annotated supporting sentences. We
+adopt the full wiki setting, which requires systems to retrieve
+and reason over the entire Wikipedia.
+• FEVER [38]: A large-scale dataset designed for claim verifica-
+tion, where systems must retrieve sentence-level evidence to
+determine whether a claim is supported or refuted.
+• 2WikiQA (2Wiki) [8]: A multi-hop question answering dataset
+that incorporates both structured and unstructured data.
+Table 5 shows the detailed dataset statistics for all datasets used in
+SpecUBench. Moreover, in real-world applications, human-annotated
+gold passages are not always available. Therefore, we use the top-20
+retrieval results from BGE-M3 [23] as the annotation pool for con-
+structing gold utilitarian passages for specific LLMs in this section.
+Evaluation Setting. We evaluated current LLM-specific utility
+judgment methods using different evaluations on the six datasets:
+• Utility Judgments Evaluation. We employ two evaluations
+using the golden utilitarian passages (queries with empty golden
+utilitarian passages are excluded): (1) Set-based evaluation: Mea-
+sured by the F1 score on the selected passage set; (2) Ranking-
+based evaluation: Measured by Normalized Discounted Cumula-
+tive Gain (NDCG) [11]. For LLM-specific utility judgments, we
+only consider queries with non-empty gold utilitarian labels.
+• RAG Evaluation. RAG performance refers to answer generation
+accuracy (𝐴𝑐𝑐), as in prior work [17, 25]. For the ranking-based
+utility judgment method, we use the top-5 utility-based ranked
+passages as evidence for answering, following Zhang et al. [50].
+As F1 is the harmonic mean of average precision and average re-
+call across all queries (not a query-level F1), it is not suitable for
+significance testing. Hence, significance testing is only conducted
+on NDCG and accuracy scores using the paired t-test.
+5.3 LLM-Specific Utility Judgment Methods
+The approaches are categorized according to different evaluation
+goals, namely utility-based selection [49, 50, 53] and utility-based
+ranking [10, 28, 29, 35, 48]. Furthermore, empirical studies [49, 53]
+indicate that utility judgments yield higher performance when judg-
+ing utility referring to the pseudo-answers generated from retrieved
+documents. For all methods, pseudo-answers are generated from
+the top-𝑘 (𝑘=20) retrieval results to ensure a fair comparison.
+Utility-Based Selection Methods. These methods select pas-
+sages judged to be useful for the LLM, based on a strict utility
+definition: “Determine if the passage has utility based on two criteria:
+1. Usefulness: The passage must be relevant and contribute to generat-
+ing a correct, reasonable, and complete answer. 2. Novelty: The useful
+information should be new, not part of your pre-existing knowledge.”
+Selection methods are categorized by input format and whether
+a pseudo-answer is provided [53]:

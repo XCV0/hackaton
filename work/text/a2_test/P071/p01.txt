@@ -1,0 +1,80 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 26469–26488
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+From RAG to Agentic RAG for Faithful Islamic Question Answering
+Gagan Bhatia1, Hamdy Mubarak1, Mustafa Jarrar2, George Mikros2,
+Fadi Zaraket3, Mahmoud Alhirthani2, Mutaz Al-Khatib4,
+Logan Cochrane5, Kareem Darwish1, Rashid Yahiaoui2, Firoj Alam1
+1 Qatar Computing Research Institute, HBKU, Qatar,
+2 College of Humanities and Social Sciences, HBKU, Qatar, 3 Arab Center for Research
+and Policy Studies, Qatar, 4 College of Islamic Studies, HBKU, Qatar
+5 College of Public Policy, HBKU, Qatar
+fialam@hbku.edu.qa
+https://huggingface.co/collections/QCRI/islamic-knowledge-in-llms
+Abstract
+Large Language Models (LLMs) are increas-
+ingly used for Islamic question answering,
+where ungrounded responses may carry se-
+rious religious consequences. Yet standard
+MCQ/MRC-style evaluations1 do not capture
+key real-world failure modes, notably free-form
+hallucinations and the ability to abstain when
+evidence is insufficient. To address this gap,
+we introduce ISLAMICFAITHQA, a 3,810-item
+bilingual (Arabic/English) generative bench-
+mark with atomic single-gold answers, which
+enables direct measurement of hallucination
+and abstention. We additionally developed an
+end-to-end grounded Islamic modeling suite
+consisting of (i) 25K Arabic text-grounded
+SFT reasoning pairs, (ii) 5K bilingual pref-
+erence samples for reward-guided alignment,
+and (iii) a verse-level Qur’an retrieval corpus
+of ∼6k atomic verses (ayat). Building on
+these resources, we develop an agentic Quran-
+grounding framework (agentic RAG) that uses
+structured tool calls for iterative evidence seek-
+ing and answer revision. Experiments across
+Arabic-centric and multilingual LLMs show
+that retrieval improves correctness and that
+agentic RAG yields the largest gains beyond
+standard RAG, achieving state-of-the-art per-
+formance and stronger Arabic–English robust-
+ness even with a small model (i.e., Qwen3 4B).
+We made the datasets are publicly available. 2
+1 Introduction
+Large language models (LLMs) are increasingly
+positioned as general-purpose assistants for deci-
+sion support, education, and guidance in value-
+laden domains. However, a persistent challenge is
+that fluent generations can obscure normative and
+1MCQ: Multiple choice questions, MRC: Machine Read-
+ing Comprehension
+2https://huggingface.co/datasets/QCRI/
+IslamicFaithQA
+Figure 1: Current–Proposed–Outcome. (a) Current
+Islamic QA. (b) We combine ISLAMICFAITHQA, LLM
+judging, Quran retrieval, and agentic evidence seeking.
+(c) This yields more faithful, citation-backed responses.
+factual unreliability: models remain sensitive to
+framing, role instructions, and they may produce
+confident but unsupported responses (Jiao et al.,
+2025).
+Islamic question answering is a particularly chal-
+lenging testbed for reliability problem. Deployed
+Islamic QA systems3 indicate strong demand, yet
+their proprietary evaluations highlight the need
+for shared benchmarks that emphasize grounding,
+citation fidelity, and abstention. Unlike general
+information-seeking queries, Islamic QA is em-
+bedded in jurisprudential reasoning (fiqh), school-
+of-thought conventions, and culturally situated
+norms that demand faithful grounding in canonical
+sources and careful handling of uncertainty. Recent
+multilingual and culture-aware evaluations show
+that moral judgments and alignment behaviour vary
+meaningfully with language and data provenance,
+with persistent representational bias and Western-
+3e.g., https://ansari.chat/, https://usul.ai,
+https://wisqu.ai
+1
+26469

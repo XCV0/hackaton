@@ -1,0 +1,90 @@
+Inputs
+Query 𝑥
+𝑑!
+Retrieved 
+Documents
+𝑑"
+… … 𝑥+𝑑#
+LLM
+𝑧#
+For each document 𝑑!
+Token-Level 
+Confidence
+𝑐(!,$)=1−𝐻&(𝑧$ !)
+𝑖$ ’=argm𝑖𝑛!	𝑠(!,$)
+Confidence Margin
+𝜖$=𝑠(!! ",$)−𝑠(!! #,$)
+𝑖$ (=argmax!	𝑠(!,$)
+DCCD
+𝑧$ )*+++𝜖$(𝑧$ !! " −𝑧$ !!# )
+Document-Level Confidence
+𝑞!=𝑝(yes	|	𝑑!,𝑥)
+Dual Confidence
+𝑠(!,$)=𝑞!+𝑐(!,$)
+Figure 1: Overview of Dual-Confidence Contrastive Decoding (DCCD). Given a query x and retrieved documents
+{d1, . . . , dn}, zi denotes the next-token logits conditioned on document di. DCCD combines document-level (qi)
+and token-level (c(i,t)) confidence scores to select positive and negative document-conditioned streams at each
+decoding step. The margin between the selected scores controls the strength of the contrastive term ϵt.
+4.4 Dual-Confidence Contrastive Decoding
+At each decoding step, DCCD combines document-
+level and token-level confidence to choose the
+document-conditioned streams that define the con-
+trastive direction. For each document di, we define
+the dual-confidence score as the sum of the two
+terms:
+s(i,t) = qi + c(i,t). (7)
+Because both terms are normalized to [0, 1], this
+unweighted sum provides a simple hyperparameter-
+free aggregation of source sufficiency and local
+generation confidence, where weighted extensions
+are left as future work.
+From Equation 7, we select the positive and neg-
+ative document-conditioned streams based on the
+highest and lowest dual-confidence scores at each
+decoding step:
+i+ t = arg max i s(i,t), i− t = arg min i s(i,t).
+(8)
+We use the margin between the positive and nega-
+tive scores to control the strength of the contrastive
+term:
+ϵt = s(i+ t ,t) − s(i− t ,t). (9)
+Finally, let zfull t denote the next-token logits con-
+ditioned on the question with the full retrieved doc-
+ument set D and the current output prefix y<t. Let
+zi t denote the next-token logits conditioned on the
+question, document di, and the same prefix. The
+decoding rule is then:
+zt = zfull t + ϵt
+
+zi+ t t − zi− t t  . (10)
+This rule anchors generation in the full retrieved
+context by adding a document-level contrast that
+amplifies evidence from the most confident source
+and suppresses evidence from the least confident
+source at each decoding step.
+5 Experiments
+5.1 Settings
+Datasets In addition to DRQA, we evaluate
+on well-known multi-document question answer-
+ing benchmarks, including Natural Questions
+(NQ) (Kwiatkowski et al., 2019) and Trivi-
+aQA (Joshi et al., 2017), using the preprocessing of
+Izacard and Grave (2021). We also evaluate on the
+more recent PopQA (Mallen et al., 2023) and Re-
+trievalQA (Zhang et al., 2024). For DRQA, since
+the ground-truth answer is expressed as free-form
+text, we use LLM-as-a-judge to evaluate semantic
+correctness against the ground-truth insight. For
+all other datasets, we use normalized exact string
+match (str-em) following prior work.
+Baselines We compare DCCD against standard
+full-context decoding (full) and contrastive decod-
+ing baselines. In particular, we include the stan-
+dard CAD (Shi et al., 2024), DVD (Jin et al.,
+2024a), ADACAD (Wang et al., 2025a) and CO-
+COA (Khandelwal et al., 2025). We also include
+the zero-shot baseline without any addition evi-
+dence for reference. Additional details and hy-
+perparameters setting of all decoding methods are
+described in Appendix C.
+6

@@ -1,0 +1,98 @@
+Methods Recall@5 (%)
+Unseen-Q Unseen-E All
+Ours 45.2 46.9 46.5
+w/o LPRKI 44.1 46.0 45.5
+w/o LVTKI 44.2 45.6 45.3
+w/o LSFT 43.3 45.0 44.6
+Table 5: Ablation study on training objectives.
+group, when increasing retrieved entries from 1
+to 2, our method maintains stable performance
+with accuracy shifting from 61.7% to 61.2%, while
+Qwen2-VL-1-Stage shows larger degradation from
+58.8% to 58.2%. This advantage becomes more ev-
+ident in the setting of Unseen-Questions, where our
+method preserves accuracy from 61.5% to 61.0%
+compared to the Qwen2-VL-1-Stage’s significant
+drop from 59.1% to 58.4%.
+Moreover, our approach demonstrates superior
+multimodal knowledge integration capabilities. In
+Recall@2 group, increasing retrieved entries from 1
+to 2 yields substantially larger gains as our method
+improves from 28.6% to 48.9% versus Qwen2-VL-
+1-Stage advancing from 28.0% to 46.0%. The
+improvement margin widens further in Unseen-
+Entities scenarios, with our method achieving
+progress from 27.7% to 49.0% while the baseline
+moves from 27.3% to 45.7%, confirming the effec-
+tiveness of our method on visual-textual fusion, as
+visualized in Figure 3.
+Effect of Training Objectives. Table 5 demon-
+strates the contribution of each training objec-
+tive. Removing any objective leads to performance
+degradation, with LSFT causing the most signifi-
+cant decline at 1.9% in overall performance. The
+absence of LPRKI and LVTKI also leads to notable
+performance drops at 1.0% and 1.2% respectively,
+indicating both objectives are essential for effec-
+tive knowledge conflict and inconsistency resolu-
+tion. Our full model achieves the best performance
+across all metrics, validating the complementary
+nature of these objectives.
+5 Conclusion
+In this paper, we present CoRe-MMRAG, a novel
+framework that addresses two critical challenges
+in MMRAG: parametric-retrieved knowledge in-
+consistency and visual-textual knowledge incon-
+sistency. CoRe-MMRAG follows a four-stage
+pipeline that effectively reconciles internal para-
+metric knowledge with externally retrieved infor-
+mation and leverages joint similarity assessment to
+integrate complementary visual and textual signals.
+To further enhance its capabilities, we introduced a
+specialized training paradigm with three targeted
+objectives focused on knowledge source selection,
+multimodal integration, and answer generation. Ex-
+tensive experiments on InfoSeek and Enc-VQA
+benchmarks demonstrate the effectiveness of our
+approach, achieving performance gains of 5.6%
+and 9.3% over baseline methods.
+6 Limitations and Future Works
+Despite the promising results, our work has several
+important limitations. First, our framework’s effec-
+tiveness is heavily dependent on the initial retrieval
+quality using Eva-CLIP-8B. As demonstrated in
+our experiments, the retrieval performance (Re-
+call@1) remains relatively low at 45.6% for InfoS-
+eek and 13.3% for Enc-VQA. This limited retrieval
+performance creates a ceiling effect for the over-
+all system performance, suggesting that improve-
+ments in the initial retrieval stage could lead to
+significant gains in the final results. Second, our ap-
+proach faces substantial computational challenges.
+The four-stage process and multiple training objec-
+tives require significant computational resources,
+with training taking approximately 10 hours on
+8 H100 GPUs. The model requires substantial
+memory to process both visual and textual knowl-
+edge simultaneously, which may limit its practi-
+cal deployment in resource-constrained environ-
+ments. Finally, there are limitations in terms of
+dataset coverage and generalization. While we
+demonstrate strong performance on two specific
+KB-VQA benchmarks, the effectiveness of our ap-
+proach on other types of multimodal tasks or real-
+world scenarios remains unexplored. The model’s
+performance on rare entities or edge cases in the
+knowledge base may be suboptimal, and there ex-
+ists a potential domain gap between the Wikipedia
+knowledge base used for training and real-world
+applications. Future work should address these lim-
+itations to improve the practical applicability of our
+approach.
+7 Acknowledgement
+This work was supported in part by the Na-
+tional Natural Science Foundation of China,
+No.:62476071 and No.:62276155, as well as the
+Shenzhen Science and Technology Program under
+Grant No.: KQTD20240729102207002.
+32975

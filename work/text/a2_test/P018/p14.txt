@@ -1,0 +1,93 @@
+Format Phrase pool; two sampled per misinformation document
+email Use casual hedging such as “I think” or “from what I understand”; mention hearing the information from a colleague
+or in passing; use phrases such as “if I remember correctly” or “I believe”; frame the message as informal knowledge
+sharing rather than official communication; include a casual tone suggesting secondhand information.
+chat Use casual language such as “pretty sure” or “I think so”; frame the claim as something heard from someone else;
+include conversational uncertainty such as “might be” or “could be”; use informal phrasing that suggests incomplete
+knowledge; add hedging such as “afaik” or “last I heard”.
+md Include qualifying language such as “preliminary findings” or “initial assessment”; use phrases such as “based on
+available information” or “current understanding”; frame conclusions tentatively with “appears to” or “suggests that”;
+include a note that information is subject to verification; use conditional language such as “may” or “could” for key
+claims.
+Table 3: Format-specific uncertainty phrase pools for misinformation documents. Two phrases are sampled
+uniformly without replacement for each generated misinformation document.
+Format Phrase pool; two sampled per temporal document
+md Write the document as if it were current at the time of writing; use present tense to describe the information as valid;
+make the document read as authoritative for its time period; include natural date references that match the document
+date.
+email Write the email naturally as if sent on that date; have the sender convey the information confidently; use normal
+business communication style for the time; include a natural email signature with the date context.
+chat Write the chat as a natural conversation from that time; have participants discuss the topic as current information; use
+casual workplace-chat language; include natural timestamp references.
+Table 4: Format-specific context phrases for temporal documents. Two phrases are sampled uniformly per temporal
+document.
+Company Context:
+- {company_info_key_1}: {company_info_value_1}
+- ...
+Return only the complete email content in JSONL format.
+Chat Generator Prompt
+You are a MatterMost chat expert who creates professional chats
+with,→
+proper structure, tables, and formatting. Create a JSONL file
+that,→
+contains a series of chat messages in channels. The messages
+need to,→
+cover the following information:
+{topic}
+The chat should:
+1. Be a discussion between reasonable users on the topic and
+mention,→
+the answer to the question inherently
+2. Contain realistic messages to teams/channels
+3. Contain all necessary team, channel, and user settings
+before posts,→
+4. Be approximately {word_limit} words in total
+5. Use realistic names for people, teams, and channels
+6. Contain a version object at the beginning of the file
+7. Order objects as: version, teams, channels, users, posts
+8. Include user credential information and team membership
+Consider generating:
+- Chats between customers/partners and support/sales/product
+teams,→
+- Chats between team members
+- Chats between employees and management
+Wrap the chat content in a JSONL code block.
+Company Context:
+- {company_info_key_1}: {company_info_value_1}
+- ...
+Return only the complete chat content in JSONL format.
+Markdown Document Generator Prompt:
+You are a markdown expert who creates professional documents
+with,→
+proper structure, tables, and formatting. Create a complete
+markdown,→
+document given the following requirements.
+{topic}
+The document should:
+1. Use proper markdown headings
+2. Be approximately {word_limit} words in total
+3. Include at least one table with relevant data
+4. Use proper markdown formatting for lists, code blocks,
+blockquotes,,→
+and links where appropriate
+5. Use professional terminology and relevant examples
+6. Use realistic names for people
+7. Use a random name for the document author
+8. Include a title and author at the beginning
+9. Never include file paths
+Company Context:
+- {company_info_key_1}: {company_info_value_1}
+- ...
+Return only the complete markdown content.
+A.3 LLM-as-Judge Verification Prompts
+Each generated misinformation, temporal, and
+noise document is independently checked by an
+LLM-as-judge using a fixed type-specific rubric.
+The judge returns structured JSON containing a bi-
+nary verdict, a one-sentence rationale, and a scalar
+confidence in [0, 1]. The judge receives the ques-
+tion, the ground-truth answer, the claimed answer
+when applicable, the document date when applica-
+ble, and the first 2000 characters of the document
+text. Correct documents copied from DRBench
+14

@@ -1,0 +1,96 @@
+the seeker usually wants to share his/her situation
+and then finds support/advice from the supporter.
+In the response, the supporter analyzes the seeker’s
+situation and his/her emotions that may be formed
+by distortions. After analyzing hidden information,
+the supporter usually gives an answer that provides
+advice, which includes more balanced thoughts to
+the seeker. This formulation can be considered to
+be similar to cognitive reframing (Sharma et al.,
+2023; Xiao et al., 2024; Kim et al., 2025).
+To capture this aspect, we follow the method
+of Appraisal Theory-based IR to augment q and
+d using CBT. We define a CBT representation
+R() = fcbt(), where fcbt() is a CBT-inspired
+prompting function to extract structured CBT in-
+formation (Table 25, A.13). This representation
+is applied to q and d to create its reframed ver-
+sions that are assumed to be similar (A.9). The
+CBT prompt thus serves as a shared projection that
+closes the patient/therapist lexical gap for retrieval.
+The CBT-inspired similarity is then computed as:
+Scbt = sim(ϕ(R(q)), ϕ(R(d))) (3)
+We emphasize that this step is inspired by CBT
+(Beck et al., 2024; Beck, 2020), not implementing
+the full CBT. We do not perform explicit cognitive-
+distortion detection (Burns and Beck, 1999) or So-
+cratic dialogue; we only use a CBT-style reframing
+prompt to bridge the lexical gap between patient
+queries and therapist responses for retrieval. The
+prompt (Table 25) constrains vocabulary (e.g., “ex-
+plore”, “manageable”, “navigate”) to mimic thera-
+pist register, not as clinically valid reframes.
+3.3.3 Information Fusion
+To integrate semantic and cognitive signals, we
+combine the three similarity components: seman-
+tics, appraisal, and CBT into a scoring function.
+S(q, d) = αSsem + βSapp + γScbt (4)
+where α, β, γ are weighting coefficients control-
+ling the contribution of each component. Hyper-
+parameter combination is shown in Table 15, A.4.
+3.4 Therapy-grounded Answer Generation
+As mentioned, the RG of conventional RAG is not
+designed to follow therapies for handling crisis
+cases, e.g., self-harm or violent thoughts (Safety
+Quality in Section 5.2.1) that require counseling
+knowledge and skills. To address this gap, we inte-
+grate therapies by creating safety-planning cards.
+3.4.1 Safety-planning Card Creation
+Inspired by DBT/skill diary cards (Bitran et al.,
+2026) and card-based CBT tools (Almeida et al.,
+2023), we augment safety-planning cards that serve
+as modular units of counseling knowledge to en-
+able psychologically grounded and structured re-
+sponse generation. Unlike raw textual data, safety-
+planning cards explicitly encode intervention strate-
+gies derived from psychological frameworks such
+as CBT to ensure controllable and safe generation.
+The introduction of the cards serves two key pur-
+poses. First, it provides structured priors for gen-
+eration, guiding the model toward psychologically
+appropriate responses. Second, it improves inter-
+pretability by making the reasoning process explicit
+through triggers, goals, and steps. Each card is con-
+structed via prompting LLMs to extract structured
+information from data. A safety card c ∈ C is:
+c = {t, τ, g, s, E} (5)
+where t denotes the intervention type (e.g., valida-
+tion), τ represents trigger conditions (user states or
+scenarios), g defines counseling goals, s encodes
+step-by-step intervention strategies, and E contains
+examples or guidance templates (A.11).
+The structured fields are designed to capture key
+aspects of counseling: (i) when to apply an in-
+tervention (triggers), (ii) what objectives it serves
+(goals), and (iii) how to execute it (steps and exam-
+ples). We employ LLM prompting to automatically
+generate cards from curated datasets and therapy
+guidelines (Appendix A.13). To improve scala-
+bility and reduce redundancy, we further organize
+safety cards in a semantic space. Each card c is en-
+coded into a dense vector representation vc = ϕ(c),
+where ϕ(·) is a text embedding model applied to
+the concatenation of key fields (e.g., title, triggers,
+goals, steps). We then apply KMeans clustering to
+partition the skill card set into M = 200 clusters
+(M =200 was chosen empirically to balance cover-
+age of intervention strategies against redundancy).
+{C1, . . . , CM } = KMeans({vc}c∈C , M ) (6)
+For each cluster Cm, we select a representative skill
+card c∗ m = arg minc∈Cm ∥vc − µm∥2, where µm
+is the centroid of cluster Cm to create a new set C∗.
+3.4.2 Response Generation
+Given a query q and retrieved documents DK , the
+pipeline generates the response by conditioning
+both external evidence and a retrieved safety card.
+13803

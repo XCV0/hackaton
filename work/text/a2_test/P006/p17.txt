@@ -1,0 +1,95 @@
+inherently present in ChatDoctor dialogues, yet it
+remains well within a practical range for adopting
+differential privacy mechanisms in RAG pipelines.
+Model NQ TriviaQA ChatDoctor
+OPT-1.3B 5s 5s 7s
+Pythia-1.4B 6s 5s 7s
+Mistral-7B 10s 9s 12s
+Llama-3.1-8B 10s 10s 14s
+Table 8: Average online latency (seconds per query) of
+SparsePay-RAG on a single NVIDIA A100 80GB GPU.
+D Additional Experiments
+D.1 Significance Test Results
+To verify whether the performance improvements
+of SparsePay-RAG are statistically significant com-
+pared to the strongest baseline (MuRAG), we con-
+duct t-tests. Table 7 reports the p-values across all
+evaluated language models on the three datasets,
+specifically under the privacy budget of ε = 5. The
+results confirm that the utility gains provided by
+our framework are statistically significant across
+all evaluated settings (p < 0.05).
+D.2 Budget Allocation Analysis
+To investigate the impact of distributing the total
+privacy budget between the offline cluster-size re-
+lease and the online token generation, we conduct
+a sensitivity analysis. Table 9 presents the model
+utility across three datasets on OPT-1.3B at a strict
+privacy budget of ε = 1, testing offline-to-online
+allocation ratios of 1:9, 1:4, 1:1, and 4:1.
+Ratio NQ TriviaQA ChatDoctor
+1:9 0.36 0.50 0.55
+1:4 0.40 0.53 0.68
+1:1 0.38 0.47 0.53
+4:1 0.31 0.41 0.32
+Table 9: Impact of budget allocation ratios on model
+utility using OPT-1.3B at ε = 1.
+The results indicate that the 1:4 ratio consistently
+yields the optimal privacy-utility trade-off. Allo-
+cating excessive budget to the offline stage (e.g.,
+4:1) leaves insufficient budget for the generation
+phase. With a fixed temperature, this restricted
+budget necessitates a smaller clipping norm C in
+the exponential mechanism during contrastive de-
+coding. Consequently, the private logit differences
+are heavily clipped, causing the sampling distribu-
+tion to degenerate toward the public distribution
+and drastically deteriorating sequence quality. Con-
+versely, skewing the budget too heavily toward on-
+line generation (e.g., 1:9) excessively perturbs the
+cluster sizes. This disrupts the two-stage retrieval
+routing, causing the system to retrieve irrelevant
+documents and undermining the RAG context. The
+1:4 ratio optimally balances stable offline retrieval
+resolution with high-fidelity online token genera-
+tion.
+D.3 Larger-Scale Evaluation with 1,000
+Queries
+The main evaluation follows the 100-query proto-
+col of prior DP-RAG work (Koga et al., 2024; Wu
+et al., 2026) to ensure a direct and fair comparison
+with the baselines. To examine the representative-
+ness of the results at a larger scale, we additionally
+evaluate OPT-1.3B on 1,000 queries for all three
+datasets. Since the baselines are more likely to
+fail due to per-query budget exhaustion on a larger
+query set, we use ε = 100 in this experiment to
+allow a meaningful comparison. Table 10 reports
+the best baseline (MuRAG) alongside SparsePay-
+RAG. SparsePay-RAG still achieves the best utility
+across all three datasets, confirming the advantage
+observed in the main evaluation.
+Dataset MuRAG SparsePay-RAG
+NQ 0.42 0.52
+TriviaQA 0.51 0.59
+ChatDoctor 0.67 0.74
+Table 10: Utility of SparsePay-RAG versus the strongest
+baseline MuRAG on 1,000 queries using OPT-1.3B at
+ε = 100.
+D.4 Fallback-Enhanced Baselines
+In Table 1, the “−” entries indicate per-query gen-
+eration failures rather than failures to complete
+the full evaluation. Under the original protocol of
+DPVoteRAG and DPSparseVoteRAG (Koga et al.,
+2024), each query is assigned a query-level privacy
+budget, and generation stops once this budget is
+exhausted. Thus, a “−” entry does not mean that
+the baseline exhausts a global budget before fin-
+ishing all 100 queries; it means that the baseline
+exhausts its assigned budget for that query and fails
+to produce a valid answer. These entries reflect the
+original baseline behavior rather than an additional
+penalty.
+To address the fairness concern directly, we add
+fallback-enhanced baselines using OPT-1.3B at
+45309

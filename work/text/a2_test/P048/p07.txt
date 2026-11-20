@@ -1,0 +1,112 @@
+MCMI’s cost-score ratio and continue the iteration, until all
+neighbor node’s cost-score ratio is more than or equal to the
+MCMI subgraph’s total cost-score ratio. That is, for each edge
+e(u,v), we have (line 10 to line 16 of Algorithm 3):
+VMCMI =
+(
+VMCMI ∪ v, if
+ce(MCMI,v)
+sv < r(GMCMI),
+VMCMI, otherwise,
+EMCMI =
+(
+EMCMI ∪ e(MCMI,v), if
+ce(MCMI,v)
+sv < r(GMCMI),
+EMCMI, otherwise,
+(17)
+where VMCMI and EMCMI denote the node and edge set of
+current MCMI subgraph; e(MCMI,v) denotes the outgoing edges
+from the MCMI subgraph to its 1-hop neighborhood.
+After the MCMI subgraph generation, we serialize the
+generated MCMI subgraph into a text graph string g:
+g = StrConcat(VMCMI, EMCMI). (18)
+Running Example: As shown in Figure 2, if we simply
+calculate the minimum cost Steiner tree within the given
+KG, the algorithm will simply return the two mapped fact
+(Kidney, Work, Kidney cancer), and (Kidney, Spread, Tumors)
+as the reasoning path, and the LLM’s response answer would
+likely be Tumors. However, if we go one step further, then
+within the generated cyclic graph, we can have more complete
+reasoning information regarding the query, and involve the
+correct answer Blood vessels.
+We further prove our MCMI generation algorithm’s MCST
+generation step (Lines 1-10 in Algorithm 3) can still have a
+2-approximation rate in Theorem 2. And its MCMI generation
+step (Lines 11-15 in Algorithm 3) strictly monotonically gains
+information and terminates within at most |Ω| iterations in
+Theorem 3, where Ω denotes the candidate edge set of MCMI.
+Together, they establish the effectiveness and efficiency of our
+MCMI generation Algorithm 3.
+Theorem 2. The MCST generation step (Lines 1-10 in Algo-
+rithm 3) guarantees a 2-approximation.
+Proof Sketch. We bound the cost of the generated subgraph
+by comparing the Minimum Spanning Tree (MST) on the
+auxiliary graph H to a shortcutted Euler tour (by depth-first
+traversal) of the optimal Steiner tree. Due to space limitation,
+we put our proof at https://github.com/Wyb0627/AGRAG/
+blob/main/proof.pdf.
+Theorem 3. The greedy expansion of the MCMI generation
+step (Lines 11-15 in Algorithm 3) strictly monotonically gains
+information and terminates within at most |Ω| iterations,
+where Ω denotes the candidate edge set of MCMI:
+Ω =
+
+e(u,v) ∈ E \ EMCST | ce(u,v)
+sv
+< r(GMCST)
+
+(19)
+Proof Sketch. We prove the MCMI generation steps’ strict
+monotonic improvement by showing the algorithm only adds
+edges if their marginal cost-score ratio is strictly lower than
+the current subgraph’s ratio. Termination is guaranteed because
+the expansion process is restricted to a finite set of candidate
+Algorithm 3: MCMI Subgraph Generation Algorithm
+Input : KG(V, E, SV , CE ): The weighted KG;
+F: A set of query-mapped triplet facts in KG.
+Output: GMCMI(VMCMI, EMCMI): The MCMI subgraph.
+1 Compute an approximated minimum cost Steiner tree
+(MCST) G of KG;
+2 Let Vterm ← F ∩ VMCST be the terminal nodes in
+MCST;
+3 Construct weighted auxiliary graph H: VH ← Vterm;
+4 for each pair of terminal nodes u, v ∈ Vterm do
+5 Find the shortest path P(u,v) in G from u to v;
+6 Let cH (u,v) ← P e∈P(u,v) ce, where ce ∈ CE ;
+7 Compute an approximated MCST G′ of H;
+8 Let VMCMI ← ∅, EMCMI ← ∅;
+9 for each edge e(u,v) ∈ G′ do
+10 Add nodes and edges from shortest path P(u,v) in
+MCST to VMCMI and EMCMI;
+11 Calculate r(GMCMI) with Equation (15);
+12 while the node v in MCMI’s 1-hop neighborhood with
+lowest ce(MCMI,v) /sv satisfies ce(MCMI,v) /sv < r(GMCMI)
+do
+13 Recalculate r(GMCMI) with Equation (15);
+14 VMCMI ← VMCMI ∪ {v};
+15 EMCMI ← EMCMI ∪ {e(MCMI,v)};
+16 return GMCMI(VMCMI, EMCMI);
+edges. Due to the space limitation, we put our proof at https:
+//github.com/Wyb0627/AGRAG/blob/main/proof.pdf.
+D. Step 3: Hybrid Retrieval
+Other than Graph retrieval, we also apply Hybrid Retrieval
+(HR) to further enrich the context for query answering. In
+Hybrid Retrieval, we retrieve the most similar text chunks THR
+from all text chunks t ∈ Tc to the query’s vector representation
+q, based on the hybrid retrieval score HS(·):
+THR = {t ∈ Tc | t ∈ arg ⊤kr (HS(q, t))} , (20)
+HS(q, t) = MS(q, t) + BM25(q, t) 2 (21)
+where kr denotes the hyperparameter that controls the num-
+ber of hybrid retrieved text chunks, t, q denotes the vector
+representation of text chunk t and query q, respectively;
+HS(q, t), BM25(q, t) and MS(q, t) denotes the hybrid retrieval
+score, the BM25 [37] sparse retrieval score, and the dense
+representation vectors’ cosine similarity score between query
+q and text t in Equation (7).
+After obtaining the textual MCMI subgraph string g and the
+chunks THR from hybrid retrieval, we input them together with
+the query q and the query answer generation LLM instruction
+pgen, to ask the LLM to give an answer to query q based on
+these provided contents.
+answer = LLM(q, g, THR, pgen), (22)

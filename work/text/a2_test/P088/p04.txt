@@ -1,0 +1,108 @@
+in the KG as faithful plans through the planning module.
+Subsequently,theretrieval-reasoningmodulegroundsthese
+relationpathstoretrievecorrespondingreasoningpathsfrom
+the KG and performs reasoning via LLM prompting. Since
+general LLMs lack prior knowledge of the KG’s relational
+facts, directly using them may lead to unfaithful relation
+path generation and incorrect reasoning. To address this,
+RoG applies an instruction-tuning strategy to integrate KG
+knowledge into the LLM, developing a KG-specific LLM 2
+used for both relation path generation and reasoning.
+GCRenhances the KG-RAG framework by introducing
+a graph-constrained decoding strategy. It adopts a breadth-
+first search (BFS) algorithm to retrieve reasoning paths
+within a predefined length starting from the entity men-
+tioned in the question. These paths are transformed into
+tokensequencesandstoredinaspecializedprefixtreestruc-
+ture called KG-Trie. GCR then utilizes a lightweight, KG-
+specific LLM together with the KG-Trie to generate mul-
+tiple reasoning paths along with hypothesis answers that
+the paths can infer. The KG-Trie guides and restricts the
+LLM, ensuring it produces only valid reasoning paths that
+can be grounded in the KG. These generated reasoning
+paths and their hypothesis answers are then passed to a
+general-purpose LLM for producing accurate and reliable
+final answers.
+G-retriever performs KG-augmented retrieval by en-
+codingthequestion,aswellastheentitiesandrelationsinthe
+KG, using SentenceBERT [36]. It retrieves the top-k most
+relevant entities and relations via searching k nearest neigh-
+bors based on the cosine similarity. A connected subgraph
+is constructed by heuristically selecting top-ranked nodes
+and edges, which are assigned relevance scores based on
+similarity values, while controlling the graph size via edge
+cost constraints. The resulting subgraph is encoded using a
+GraphAttentionNetwork(GAT),andtheoutputembedding
+isusedasasoftpromptforadecoder-onlyLLMtogenerate
+the final answers.
+SubgraphRAG first formulates subgraph retrieval as
+a distribution optimization problem and adopts a retriever
+that decomposes subgraph construction into independent
+selections over triples, allowing each triple to be scored
+and optimized separately to improve retrieval efficiency. To
+capture the structural relevance between the question and
+each triple, it computes directional distance encodings that
+reflect the position of the triple relative to the topic entities
+in the question. These structural features are concatenated
+with the question representation and the semantic represen-
+tation of the triple, and then passed through a lightweight
+multilayer perceptron to estimate the inclusion probability
+of each triple. The top-ranked triples are selected to form
+a subgraph of adaptive size, which is then linearized into a
+text sequence and incorporated into the LLM input prompt
+for in-context learning.
+2This enhanced LLM model is also denoted as RoG in the original
+work. To avoid confusion, we denote the model as LLMRoG in this paper.
+2.3. Threat Model
+This section formalizes the threat model under which
+our data poisoning attack operates, including the attacker’s
+objectives, knowledge assumptions, and capabilities.
+2.3.1. Attacker’s Objective
+The attacker aims to subvert the behavior of KG-RAG
+methods by injecting perturbation triples into the external
+KG . Formally, given a user question 𝑞, the attacker seeks
+to insert a small set of adversarial triples ̂ into  such that
+theKG-RAGmethodgeneratesasetofincorrectanswers ̂𝐴
+that deviates from the correct gold answer 𝑎∗:
+̂𝐴 = KG-RAG(𝑞; ̂), 𝑎∗ ∉ ̂𝐴, (3)
+where ̂ = {, ,  ∪ ̂ }.
+2.3.2. Attacker’s Knowledge
+Weassumeablack-boxsettingwheretheattackerhasthe
+following knowledge:
+∙ Access to the External Data Source: The attacker can
+inspectandmodifytheKG  usedbytheKG-RAGmethod,
+including its entities, relations, and topological structure.
+∙ No Access to KG-RAG Internal Modules: The attacker
+has no access to the internal modules of the KG-RAG
+method, including the retriever, the language model (both
+its architecture and parameters), or the prompt templates.
+Furthermore, the attacker is unaware of the ground-truth
+answers to any questions. All attack actions are executed
+without observing KG-RAG outputs or internal signals,
+making the attack scenario fully black-box.
+This setting reflects a practical and realistic attack sur-
+face, where only the external KG is visible and editable.
+Followingpriorworkonattacksagainsttext-basedRAG[18,
+21],wenotethattheLLMemployedinternallybythetarget
+KG-RAGmethodcanstillbeusedtobuildtheattacker.This
+does not violate the aforementioned black-box assumption,
+as the attacker does not interact with or observe the internal
+behavior of the deployed KG-RAG system.
+2.3.3. Attacker’s Capabilities and Constraints
+In this study, the attacker is limited to insertion-only
+perturbations, i.e., they can only inject a small number of
+perturbationtriples ̂ intotheexternalKG,butcannotdelete
+or modify existing facts. This setting makes the attack more
+stealth and feasible in many real-world KGs.
+Furthermore, considering the stealthiness and practical-
+ity required in real-world scenarios, the attack is further
+constrained by the following conditions:
+∙ All inserted triples must be composed of existing entities
+and relations in the KG  to mitigate the risk of being
+detected. Under this constraint, each perturbation triple is
+defined as ( ̂𝑒ℎ,̂𝑟,̂𝑒𝑡) ∉  , where ̂𝑒ℎ,̂𝑒𝑡 ∈  and ̂𝑟 ∈ .
+∙ The number of injected triples for each question is limited
+to at most 𝐾 per question, where 𝐾 ≪ | |, reflecting
+realistic attack budgets and constraining the perturbation
+scale.
+: Preprint submitted to Elsevier Page 4 of 13

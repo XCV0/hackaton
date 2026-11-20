@@ -1,0 +1,120 @@
+27
+/g1004
+/g1004/g856/g1006
+/g1004/g856/g1008
+/g1004/g856/g1010
+/g1004/g856/g1012
+/g1005
+/g1005 /g1006 /g1007 /g1008 /g1009
+/g116/g349/g374/g374/g349/g374/g336/g3/g396/g258/g410/g286
+/g374/g882/g410/g346/g3/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374
+/g100/g381/g393/g349/g272/g882/g47/g374/g349/g410/g349/g258/g410/g381/g396/g3/g894/g75/g437/g396/g400/g895
+/g87/g258/g400/g400/g349/g448/g286/g3/g894/g271/g258/g400/g286/g367/g349/g374/g286/g895
+/g882/g410/g346/g3/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374
+(a) Topic-Initiator vs. Passive.
+/g1004
+/g1004/g856/g1006
+/g1004/g856/g1008
+/g1004/g856/g1010
+/g1004/g856/g1012
+/g1005
+/g1005 /g1006 /g1007 /g1008 /g1009
+/g116/g349/g374/g374/g349/g374/g336/g3/g396/g258/g410/g286
+/g374/g882/g410/g346/g3/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374
+/g87/g396/g381/g258/g272/g410/g349/g448/g286/g3/g894/g374/g381/g3/g374/g286/g449/g3/g349/g374/g296/g381/g856/g895
+/g87/g258/g400/g400/g349/g448/g286/g3/g894/g271/g258/g400/g286/g367/g349/g374/g286/g895
+/g882/g410/g346/g3/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374 (b) Proactive vs. Passive.
+/g1004
+/g1004/g856/g1006
+/g1004/g856/g1008
+/g1004/g856/g1010
+/g1004/g856/g1012
+/g1005
+/g1005 /g1006 /g1007 /g1008 /g1009
+/g116/g349/g374/g374/g349/g374/g336/g3/g396/g258/g410/g286
+/g374/g882/g410/g346/g3/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374
+/g100/g381/g393/g349/g272/g882/g47/g374/g349/g410/g349/g258/g410/g381/g396/g3/g894/g75/g437/g396/g400/g895
+/g87/g396/g381/g258/g272/g410/g349/g448/g286/g3/g894/g374/g381/g3/g374/g286/g449/g3/g349/g374/g296/g381/g856/g895
+/g882/g410/g346/g3/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374 (c) Topic-Initiator vs. Proactive.
+Figure 6: Results of the A/B test. ”⃝” indicates a signiﬁcant difference (two-proportion z-test, two-tailed;
+p < 0.05).
+2. After the conversation, three patterns of initial
+utterances for the start of the (n + 1)-th con-
+versation were displayed. These combina-
+tions were presented as pairs, referred to as
+condition A/B. Participants selected the pat-
+tern with which they would prefer to converse.
+3. The utterance that was selected most fre-
+quently in the A/B test results was displayed,
+and participants responded to the utterance
+(returning to Step 1).
+4. Participants repeated Steps 1 to 3 ﬁve times.
+4.2.4. Results
+The results are presented in Figure 6. The hor-
+izontal axis in Figure 6 represents the n-th con-
+versation, while the vertical axis shows the win-
+ning rate in the A/B tests. As shown in Fig-
+ures 6(a) and 6(b), a signiﬁcantly larger num-
+ber of participants preferred conversing with either
+the Topic-Initiator chatbot or the proactive chat-
+bot compared to the baseline. Furthermore, Fig-
+ure 6(c) indicates that during the ﬁrst conversa-
+tion, signiﬁcantly more participants preferred the
+proactive chatbot over Topic-Initiator. However,
+as the interactions progressed, more participants
+favored Topic-Initiator over the proactive chatbot,
+with a signiﬁcant preference emerging from the
+third conversation onward. These results highlight
+that the importance of taking initiative in conver-
+sation to stimulate user’s willingness to converse.
+Additionally, they emphasize the role of topic se-
+lection. When the proactive chatbot asked about
+information previously disclosed by the user, it in-
+creased the user’s willingness to converse. This
+is likely because it demonstrated that the chat-
+bot remembered past interactions. This ﬁnding is
+consistent with Tsunomori et al. (2021). However,
+maintaining user’s willingness solely through such
+methods proved difﬁcult, as indicated by the re-
+sults. In contrast, providing users with fresh and
+interesting topics helped sustain and further en-
+hance their willingness to continue conversations.
+We provide an example of a conversation from the
+human evaluation that aligns with this analysis in
+Appendix B.
+5. Conclusion
+We proposed Topic-Initiator, a chatbot that con-
+tinuously and proactively provides users with new
+and interesting topics. To obtain such topics, it
+collects both web-crawled data and conversations
+with other users. To enable Topic-Initiator to re-
+trieve new and interesting topics for users, we
+also introduced a novel RAG framework called PT-
+RAG. PT-RAG estimates user interests and knowl-
+edge, organizes both user data and collected data
+into topic categories, identiﬁes relevant categories
+based on user interests, and retrieves new topics
+within those categories based on user knowledge
+by leveraging the inference capabilities of LLMs.
+Our ﬁndings addressed the research questions as
+follows: RQ1: Through automatic evaluations, we
+demonstrated that PT-RAG more accurately ob-
+tains new and interesting topics for users com-
+pared with existing RAG methods. RQ2: Through
+human evaluation of the Topic-Initiator chatbot, we
+showed that users were more willing to converse
+with our system than with chatbots that either talk
+known topics or remained passive.
+Topic-Initiator focuses on stimulating the willing-
+ness during subsequent conversation initiations.
+In our future works, we intend to extend our
+method to enhance the willingness during other
+phases of interaction.
+Limitations
+Starting the ﬁrst conversation: As described in
+Section 4.2.1, Topic-Initiator currently faces chal-
+lenges in initiating ﬁrst conversations with users
+because it lacks prior knowledge about users it
+has not previously interacted with. To overcome
+this limitation, it is crucial to identify which spe-
+ciﬁc chatbots abilities are most effective in stim-

@@ -1,0 +1,45 @@
+Author name / Procedia Computer Science 00 (2019) 000–000  5 
+prompt with no examples, often produced unexpected results as well some English responses which is why the long 
+prompt shown in the appendix was used. The disambiguator always used the version of the preceding question that 
+was already disambiguated as context for the question being disambiguated.  When revising the output of this process 
+it was observed that as a side effect, typos were corrected, and some questions were occasionally rephrased. It was 
+also observed that in a few cases, there were errors in the automatically disambiguated questions. Since the goal was 
+not to find the best way to automatically disambiguate questions, but rather to examine the impact of disambiguation 
+on the retrieval accuracy and hence gain a better understanding of the ability of the semantic embedding model being 
+used, all disambiguated questions were manually revised and edited. Questions that were changed by GPT3.5 for no 
+apparent reason, were restored to their original form. If a question could not be disambiguated in light of its 
+disambiguated preceding question, it was left as is.  In the retrieval experimentation section, results are reported on 
+the original questions, the automatically disambiguated questions, and the manually edited disambiguated questions. 
+Table 1. An example of interdependency between questions 
+Question  Translation  Disambiguated Translation  
+ من هو نزار القبانى؟ Who is Nizar Al-Qabbani? No change  
+متى ولد ؟ When was he born? When was Nizar Al-Qabbani born? 
+3.2. The Used Semantic Embedding Models  
+Semantic embeddings or text embeddings offer a way of representing text where a word, phrase, sentence, 
+paragraph, or an entire document is represented as a dense vector of real numbers that captures the meaning of what 
+it represents. Since these representations exist in a high-dimensional vector space, distance metrics such as cosine 
+similarity can be applied to evaluate how similar or distant certain pieces of text are from one another. This method 
+can thus facilitate a deeper understanding of textual relationships by quantifying semantic similarities and differences. 
+The concept of semantic embeddings is not new. One of the earliest models in this field is Latent Semantic Analysis 
+(LSA), which was developed in the late 1980s and early 1990s [15, 16], but embeddings gained popularity and 
+widespread use after the introduction of Word2Vec models[17]. The introduction of contextualized embeddings [18, 
+19] transformed and revolutionized the way in which text is handled and processed.  
+Table 2. Summary of used embedding models. 
+Embedding Name Model Dimension  Free 
+AraBERT aubmindlab/bert-base-arabertv02 768 Yes 
+AraVec (Wikipedia – CBOW) wikipedia_cbow_300 300 Yes 
+AraVec (Wikipedia – SG) wikipedia_sg_300 300 Yes 
+BGE bge-m3 1024 Yes 
+Cohere 1 embed-multilingual-v3.0 1024 No 
+Cohere 2 multilingual-22-12 768 No 
+E5-Large multilingual-e5-large 1024 Yes 
+E5-Small multilingual-e5-small 384 Yes 
+JAIS (13B Q) core42_jais-13b-bnb-4bit 5120 Yes (for research) 
+Ollama nomic-embed-text 768 Yes 
+OpenAI  text-embedding-ada-002 1536 No 
+ 
+In this work, AraVec[20] which is the name given to a series of different models trained separately on Twitter, and 
+Arabic Wikipedia using Word2Vec CBOW and Skip-gram architectures was primarily used as a baseline and since 
+the datasets used in this paper mostly resemble Wikipedia data, AraVec’s Wikipedia models were the ones 
+experimented with. Another baseline model that this work explores is AraBERT[21]. AraBERT is a BERT model pre-
+trained on a vast corpus of Arabic data collected from various sources [21]. At the time of its introduction, it achieved

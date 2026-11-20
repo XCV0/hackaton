@@ -1,0 +1,101 @@
+fied frameworks that integrate retrieval directly
+as generation, alongside models that assess un-
+certainty for dynamic, timely retrieval (Li et al.,
+2026b,a). Innovations include query rewriting
+(Ma et al., 2023a), dense retrieval with pseudo-
+documents (Gao et al., 2023), hierarchical in-
+dexing (Sarthi et al., 2024), and semantic-aware
+shortest-path retrieval for knowledge graphs (Fu
+et al., 2026c; Wang et al., 2026c). Additionally,
+self-reflective frameworks and methods mitigating
+retrieval-permutation hallucinations have been de-
+veloped to enhance robustness (Jiang et al., 2023;
+Zhang et al., 2026). Simultaneously, retrieval com-
+ponents have evolved through advanced embed-
+ding models (Wang et al., 2024; Muennighoff et al.,
+2023; Xiao et al., 2024) and LLM-based reranking,
+including domain-specific analyst ranking strate-
+gies (Sun et al., 2024; Ma et al., 2023b; Pradeep
+et al., 2023; Zhou et al., 2026b), as well as expert-
+guided applications in critical domains like emer-
+gency medical services (Ge et al., 2026). These
+methods provide the necessary evidence to support
+logical chains.
+As shown in Figure 1, applying these capabili-
+ties to strictly constrained combinatorial optimiza-
+tion, such as the Multidimensional Multi-choice
+Knapsack Problem (MMKP), presents distinct chal-
+lenges. First, LLMs are prone to hallucinations.
+They may generate plausible but factually incorrect
+constraints, necessitating enhanced causal reason-
+ing for trustworthy abstention, as noted in recent
+evaluations (Zhang et al., 2025b; Li et al., 2023a;
+Wang et al., 2026b; Sun et al., 2025). Second, opti-
+mization problems involve an exponentially large
+search space. Greedy token generation cannot guar-
+antee feasibility or global optimality. Errors in
+early decision steps propagate rapidly, and standard
+LLMs lack the inherent lookahead mechanisms re-
+quired for NP-hard problems.
+To address the limitations of linear generation,
+test-time search paradigms organize reasoning into
+tree or graph structures (Zelikman et al., 2022;
+Long, 2023). Approaches such as Language Agent
+Tree Search (LATS) integrate Monte Carlo Tree
+Search (MCTS) with language agents (Zhou et al.,
+2024; He et al., 2024b; Hao et al., 2023). This
+is increasingly supplemented by active neural-
+symbolic exploration and hidden state analysis to
+overcome exploration-exploitation trade-offs (Fu
+et al., 2026a; Huang et al., 2026). Concurrently,
+LLMs are increasingly utilized as heuristics or op-
+timizers for combinatorial tasks across vast param-
+eter spaces (Yang et al., 2024a; Ye et al., 2024;
+Guo et al., 2025; Liu et al., 2023; Fu et al., 2026b).
+These works indicate that a robust solver must com-
+bine retrieval-based evidence with structured explo-
+ration.
+In this paper, we propose a unified framework
+that synergizes RAG with MCTS to address the
+MMKP. Our approach grounds local feasibility
+checks in traceable evidence while organizing the
+decision process into a backtrackable tree. The
+main contributions of this work are summarized as
+follows:
+• We introduce a MMKP-based Context Se-
+lector that models document selection as a
+constrained knapsack problem. This method
+maximizes information density under token
+budgets while minimizing redundancy, outper-
+forming greedy ranking strategies.
+• We develop an NLI-Guided MCTS Genera-
+tor that utilizes test-time compute to explore
+reasoning paths. By using Natural Language
+Inference as a reward model, we penalize con-
+tradictions and ensure the generated answers
+are faithful to the retrieved context.
+• We achieve strong performance across six di-
+verse datasets, including multi-hop QA and
+fact verification benchmarks. Our framework
+significantly reduces hallucinations and im-
+proves reasoning accuracy compared to strong
+agentic baselines.
+2 Related Work
+2.1 Retrieval-Augmented Generation and
+Reasoning
+Prompting strategies have significantly enhanced
+the reasoning capabilities of Large Language Mod-
+els (LLMs). Chain-of-Thought (CoT) (Wei et al.,
+2022; Kojima et al., 2022) and ensemble meth-
+ods like Self-Consistency (Wang et al., 2023a)
+established baselines for intermediate reasoning,
+which are now being optimized via on-the-fly gen-
+eration, causality-driven evaluations, and policy-
+level alignment strategies (Wang et al., 2026a; Sun
+et al., 2026; Chen et al., 2024). Beyond static gen-
+eration, agentic frameworks such as ReAct (Yao
+et al., 2023b) and Toolformer (Schick et al., 2023)
+empower models to execute actions and utilize
+APIs (Qin et al., 2023; Patil et al., 2024), sup-
+ported by multi-graph memory architectures to
+20954

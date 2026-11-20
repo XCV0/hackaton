@@ -1,0 +1,86 @@
+indirect models, respectively, are in reasonable agreement with the
+fitted bandgap trend. Increasing optical bandgap energies induced
+by oxygen addition (up to 49 at. %), with both direct and indirect
+bandgap evaluation, were also found by Jayaraman et al. for
+In2(OxS1−x)3 layers grown by atomic-layer deposition (ALD).29
+Barreau et al. reported for moderate oxygen addition (up to 8 at. %
+corresponding to an OOS ratio of x = 0.14) to evaporated In2S3
+thin films an increase of the bandgap, too.30
+C. Band alignment between CIGS-based absorbers
+and indium-based buffer materials
+To get an insight into the band alignment between CIGS and
+In2(OxS1−x)3 and to find a possible explanation for the decreasing
+VOC values with oxygen addition [see Figs. 1(b) and 1(f )], DFT cal-
+culations were performed. Figure 4 shows the calculated
+bulk-intrinsic band alignment between CuInSe2 and CuIn5Se8
+absorber materials with In2S3 and In2O3 buffer systems. The influ-
+ence of gallium in CIGS was neglected in this calculation, but
+gallium addition to CuInSe2 results in a slight increase of Eg due to
+an increasing conduction band minimum (CBM), in our case for a
+[Ga]/([Ga] + [In]) ratio around 0.3 from ∼1.0 to ∼1.2 eV. To
+obtain the bulk-intrinsic band alignment between CuInSe2,
+CuIn5Se8,In2S3, and In2O3, the In 3s core state was taken as the
+reference core level energy, and the valence band offset was calcu-
+lated as
+ΔEv(A/B) ¼ ΔEv,c0 (B) /C0 ΔEv,c(A),
+where ΔEv,c0 (B) and ΔEv,c(A) represent the energy separation
+between the valence band maximum (VBM) and In 3s core level
+energy of the bulk B and A compounds, respectively. The conduc-
+tion band offset (CBO) was then obtained by using the relation
+ΔEc(A/B) ¼ ΔEg(A/B) /C0 ΔEv(A/B),
+where ΔEg(A/B) shows the difference between bandgaps of the two
+compounds. As a global reference point, we choose the ionization
+energy of the CuInSe2 (110) surface. We note that the common
+alignment to the vacuum level is only strictly valid if the interface
+is structurally ideal and if no gap states exist.31 Such gap states can
+result from wave function coupling at the interface leading to
+Fermi level pinning. In this case, the reference point for band align-
+ment would be the charge neutrality level of the gap states. Based
+on previous work for chalcogenide semiconductors,32 we expect
+that the semiconductors treated in this work are sufficiently ionic
+and no sizable interface dipole emerges. In this case, a common
+vacuum level is well-defined.
+The band positions show that the VBM of In2O3 is 2.63 eV
+lower than that of In2S3. This is because the 2p orbitals of oxygen
+are deeper in energy compared to the 3p orbitals of sulfur. Hence,
+the pd-repulsion is larger for the anions with a smaller atomic
+number and the VBM of In2S3 is markedly higher than that of
+In2O3. We note that reduction of the CBM when moving from S to
+O is associated with an increase in the volume of the S-compound
+compared to the O-compound. This is similar to the trend
+observed when moving from ZnO to ZnO0.5S0.5 and ZnS com-
+pounds, as reported by Persson et al.33 For the device-relevant
+oxygen contents up to an [O]/([O] + [S]) ratio of 0.25, we observe
+smaller offsets of the VBM and CBM compared to the boundary
+phases (see Fig. S5 in the supplementary material). However, the
+course of the band offsets is not monotonous for the bixbyite crystal
+structure. This crystal structure is, on the other hand, thermodynam-
+ically unfavorable for low [O]/([O] + [S]) ratios (see Sec. III D).
+According to our previous work,9 the CBO between the
+Cu-poor absorber CuIn5Se8 and In2S3 is almost flat with a slightly
+negative value of −0.07 eV and only after incorporation of Na to
+the system and formation of NaIn5Se8 at the pn-junction, the CBO
+between the CuIn5Se8 absorber and NaIn5Se8 buffer adopts a small
+positive value (spike-like conformation) of +0.12 eV. For the CIGS
+solar cells under investigation, taking the [Ga]/([Ga] + [In]) ratio
+around 0.3 with a CBM shift of around +0.2 eV into account, the
+band alignment would be rather flat or even a small cliff. This rela-
+tively small negative value could be an explanation for the slightly
+reduced VOC values (20–50 mV lower) of our In2S3-orIn2S3:
+NaF-buffered CIGS cells compared to reference cells with a CdS
+buffer.16,34 Considering the strongly lower CBM of In2O3 compared
+to In2S3, we conclude that adding O to the system results in a
+strong downward shift of the CBM of the buffer and leads to strong
+FIG. 4. Bulk-intrinsic band alignment between CuInSe2 and CuIn5Se8 absorber
+materials with spinel In2S3 and bixbyite In2O3 buffer materials as calculated by
+DFT. For each material, the lower and the upper numbers indicate, respectively,
+the positions of the valence band maximum (VBM) and conduction band
+minimum (CBM) with respect to the CuInSe2 in eV. The VBM of CuInSe2 lies at
+a value in energy scale that corresponds to the ionization potential of the (110)
+surface of CuInSe2 (5.58 eV).35
+Journal of
+Applied Physics
+ARTICLE pubs.aip.org/aip/jap
+J. Appl. Phys. 135, 073101 (2024); doi: 10.1063/5.0184698 135, 073101-6
+©Author(s)2024
+ 19 November 2026 10:19:40

@@ -1,0 +1,117 @@
+Table 1: Performance comparison of different strategies
+on the RAG-Bench test set. For document count >
+1, the other documents are sampled from noisy and
+conflicting ones corresponding to the same query.
+Methods Doc 1 (Gold) Doc 2 Doc 5 Doc 10
+EM F1 EM F1 EM F1 EM F1
+NQ
+Parametric Answer 28.73 37.35
+Direct Inference 60.46 69.81 51.75 61.96 38.20 47.73 31.13 39.85
+Standard CoT 59.46 69.11 52.35 62.14 42.14 52.79 36.73 47.79
+Joint CoT 57.36 68.18 50.75 60.98 42.94 54.40 38.74 50.34
+Prior-Guided CoT 52.95 62.64 53.85 63.93 48.04 58.28 41.94 52.92
+TriviaQA
+Parametric Answer 59.86 64.89
+Direct Inference 79.18 84.68 74.17 79.56 64.56 70.86 53.54 62.96
+Standard CoT 79.68 85.02 76.98 82.39 67.36 74.50 58.76 66.10
+Joint CoT 79.34 84.87 76.18 81.49 70.07 76.49 61.36 69.14
+Prior-Guided CoT 76.87 82.48 77.17 82.35 75.18 81.12 69.37 75.70
+WebQ
+Parametric Answer 26.63 46.01
+Direct Inference 40.44 58.39 33.63 52.62 27.93 44.96 20.32 34.63
+Standard CoT 38.53 55.24 33.43 51.83 28.63 47.30 23.92 42.75
+Joint CoT 36.34 54.95 34.63 53.13 32.63 51.41 25.22 43.85
+Prior-Guided CoT 37.24 54.81 35.24 53.74 34.03 52.33 28.83 47.58
+correct->correct wrong->correct correct->wrong wrong->wrong
+Change Type
+2
+4
+6
+8
+10
+12
+14Conditional Entropy H(Y|·) (Nats)
+Avg N=453
+Avg N=135
+Avg N=96
+Avg N=316Doc 1 (w/o z)
+Doc 2 (w/o z)
+Doc 5 (w/o z)
+Doc 10 (w/o z)
+Doc 1 (w/ z)
+Doc 2 (w/ z)
+Doc 5 (w/ z)
+Doc 10 (w/ z)
+Figure 2: Impact of prior knowledge z on output uncer-
+tainty: entropy analysis across four data subsets follow-
+ing the transition from p(y|x, d) to p(y|x, z, d).
+prior information significantly enhances robustness.
+Prior-Guided CoT effectively mitigates the volatil-
+ity of external knowledge by providing a stabiliz-
+ing anchor that grounds the model’s reasoning in
+conflicting or noisy information. Conversely, in
+gold setting (Doc 1), simple strategies (Direct and
+Standard CoT) consistently achieve efficient perfor-
+mance while minimizing generation overhead (w/o
+z). This indicates that prior knowledge may induce
+a prejudicial reliance on internal biases, even when
+accurate external information is available. This
+issue becomes prominent when the model’s inter-
+nal knowledge is unreliable. For instance, Prior-
+Guided CoT significantly underperforms the Direct
+method demonstrated by the drop from 60.46% to
+52.95% on the NQ benchmark.
+2.2 Analysis on Information Gain
+Furthermore, to quantify the contribution of z to
+the output y, we employ Monte Carlo estimation
+to approximate the conditional mutual informa-
+tion (CMI) (Cover and Thomas, 2006), defined
+as I(Y ; Z|X, D). CMI captures the reduction in
+output uncertainty when conditioning on internal
+knowledge z:
+I(Y ; Z|X, D) = H(Y |X, D) − H(Y |X, Z, D)
+where H(Y |X, D) is the conditional entropy of
+the output given only external contexts, and
+H(Y |X, Z, D) denotes the entropy when both ex-
+ternal contexts and model’s internal knowledge are
+available.
+CMI serves as an empirical measure of the
+marginal information gain contributed by the inter-
+nal knowledge z. Within this framework, a positive
+information gain (I > 0) is manifested as a reduc-
+tion in entropy (Hw/ z < Hw/o z ), indicating that
+the prior z effectively constrains the output space1.
+Detailed settings are provided in Appendix B.3.
+As illustrated in Figure 2, the significant entropy
+drop observed in the "wrong → correct" category
+provides empirical evidence that z can serve as
+a high-quality prior, effectively reducing the pre-
+dictive entropy and steering the model toward the
+correct response. Conversely, data where entropy
+increases suggest that the prior knowledge also in-
+troduces noise and the model lacks the capacity to
+reconcile the prior with the provided context.
+To overcome this limitation, this paper intro-
+duces BrPr, which optimizes the model’s ability to
+reconcile parametric priors with external informa-
+tion from multiple retrieved documents.
+3 BrPr: Bernoulli-gated Reinforcement
+learning for Prior-Guided Reasoning
+With the goal of achieving robust and efficient per-
+formance across conflicts and noises, we propose
+BrPr method, as illustrated in Figure 3.
+First, within the prior-guided reasoning strategy
+(Sec. 3.1), we employ the Group Relative Policy
+Optimization (GRPO) algorithm (Shao et al., 2024)
+within the framework of Reinforcement Learning
+from Verifiable Rewards (RLVR) to strengthen the
+model’s ability to reconcile parametric priors with
+multiple retrieved documents (Sec. 3.2). This train-
+ing objective explicitly optimizes the alignment
+between intermediate reasoning chains and verifi-
+able outcomes. Through explorative trial-and-error
+1To isolate the marginal information gain attributed to the
+internal knowledge z, we bypass the intermediate reasoning
+chain and constrain the response y to the target answer a (i.e.,
+y = a).
+22151

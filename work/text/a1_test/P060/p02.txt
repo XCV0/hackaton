@@ -1,0 +1,130 @@
+likely that a mixture of precursor materials/phases is present in
+thisbottomregion.Meanwhile, Pateletal.haveuncoveredthat
+compared to phenyl-C61-butyric acid methyl ester (PCBM),
+coevaporated devices using compact titanium dioxide (c-TiO2)
+as the bottom electron transport layer (ETL) experience more
+severe hysteresis. This clearly indicates the extent to which the
+nature of the substrate impacts the quality of the perovskite at
+the bottom interface.33 It is apparent that growing coevapo-
+rated films on inorganic substrates is not trivial, and therefore,
+in most cases, perovskite films are coevaporated onto organic
+layers in order to seed better crystal growth.21,24−26,29,30 This
+may be one of the factors hindering the further performance
+improvement of coevaporated perovskite PV devices, consid-
+eringthatthebestperforming single-junctiondevicesutilizetin
+oxide (SnO2) as the ETL.20 As previously mentioned, one
+possible explanation for this observation is that the initial
+stages of the perovskite growth may lead to the deposition of a
+layer of material that deviates from the target stoichiometry.
+Meanwhile, in situ photoelectron spectroscopy studies have
+shown that the electronic properties of the initial 2−3 nm of
+the perovskite are strongly affected by the nature of the
+substrate, giving rise to band bending and additional defect
+states.34 Subsequent investigations have revealed that the
+surface of the substrate material exerts a substantial impact
+beyond the bottom CTL/perovskite interface, leading to
+alterations in the morphology of the entire film.35−37
+Consequently, achieving uniform deposition of alkylammo-
+nium halides and appropriate crystallization of the perovskite
+material is a critical requirement when selecting an appropriate
+CTL. Unfortunately, for vapor-deposited perovskites, this
+places significant constraints on the pool of viable CTLs.
+However,it should benotedthateven whensuitable substrates
+that meet the criteria above are identified, optimizing the
+evaporation parameters for deposition on various substrates
+remains a laborious task (as shown in Table S1). Furthermore,
+this issue limits the economic feasibility of industrial
+applications, as the most attractive scale-up technique is to
+produce all device layers on the same vacuum fabrication
+lines.38 Therefore, the ability to decouple the nucleation and
+growth of coevaporated perovskite films from the influence of
+substrate materials is of the utmost importance.
+Here, we introduce an effective strategy to control
+reproducibly the growth of coevaporated perovskites by
+using a templating layer. We show that independent of the
+substrate choice for perovskite growth, the coevaporated
+perovskite films with the templating layer exhibit identical
+morphology, structure, and optoelectronic properties. Through
+a series of spectroscopic experiments, we present evidence that
+the optoelectronic properties of the perovskite remain
+unchanged after insertion of this templating layer. When
+these templated perovskite films are incorporated into devices,
+weobserveimproveddeviceperformanceasaresultofreduced
+interfacial resistance, (as indicated through increased short-
+circuit current (Jsc) and fill factor (FF)). We attribute this
+improvement to accurate interface control, allowing for fine-
+tuning the stoichiometry of the initial perovskite deposited
+onto the substrate. Furthermore, the use of templating layers
+permits the fabrication of high-performance devices on both
+organic and inorganic CTLs in the same batch, which shows
+the universality of using templating layers in different device
+architectures. Overall, this templating strategy offers coevapo-
+rated perovskites more freedom in the selection of substrate
+materials and provides a way to exert fine control over the
+bottom interface in perovskite optoelectronic devices.
+In this study, we fabricate perovskite films with the
+composition FA0.9Cs0.1PbI3−xClx, using the four-source,
+coevaporation of formamidinium iodide (FAI), CsI, PbI2 and
+PbCl2 under high vacuum (further details are given in the SI).
+We carefully monitor the initial coevaporation process by
+introducing one additional shuttered quartz crystal micro-
+balance (QCM) in close proximity to the substrate position.
+Having a shuttered QCM allows us to record substrate rates at
+different points throughout the process. Therefore, by
+simultaneously opening the QCM and substrate shutters, we
+can record the rates only after starting deposition on the
+substrate. Here, we observe that it takes some time for the rate
+to stabilize on a bare shuttered QCM during the initial stages
+of the evaporation. This stabilization time increases when the
+shuttered QCMs are precoated with CTLs (full details are
+provided in SI, Figures S1, S2a,b). This finding confirms that
+depending on the type of substrate used, a number of different
+initial crystal growth processes can affect the incorporation of
+subsequent precursors and the continuity of crystal growth.
+This then inevitably influences how effective charge transport
+through the perovskite film is, and finally has a significant
+impactondeviceperformance.35 Oneconcernarisingfromthis
+observation is the difficulty in individually assessing the quality
+of the bottom interface since the bulk perovskite is also
+unavoidably changed when different substrates are employed.
+A potential solution to this problem is to utilize a templating
+layer which can regulate the crystallization and growth of
+perovskite films, such that the influence of the underlying
+substrate is obviated. Alkylammonium halides readily adsorb
+onto the surface of metal halides to form perovskites,29,39 while
+evaporating metal halides onto various substrates is reprodu-
+cible owing to excellent adhesion. For the sequential, two-step
+deposition technique, the inorganic layer (PbI2) is deposited
+onto the substrate followed by either the solution or vapor-
+based deposition of the organic layer, after which the film is
+annealed.40 Although this process may suffer from issues
+arising from the diffusion of the organic layer,41 it presents an
+interesting approach in terms of using PbI2 as a templating
+layer. To examine this, we precoat PbI2 onto the shuttered
+QCM and indeed find that this effectively reduces the time
+taken for the readings on the QCM to stabilize, as we show in
+Figure S2c.However,the presenceofPbI2 stillmight introduce
+nonstoichiometric perovskite near the bottom interface.
+To overcome these issues, we develop a novel approach of
+depositing a templating layer consisting of a stoichiometric,
+ultrathin (15 nm) MHP which can fully cover the underlying
+layer (Figure S3) via a vapor-based, two-step sequential
+deposition approach. Specifically, using thermal vapor
+deposition, we coevaporate the inorganic precursors (PbI2,
+CsI, and PbCl2) to a total thickness of 9 nm and then deposit a
+9-nm film of FAI on top. We then anneal this film at 135 °C
+for 2 min in pure N2 gas at atmospheric pressure to form the
+ultrathin-MHP templating layer (see SI for further exper-
+imental details). This templating layer then acts as a seed for
+the growth of fully coevapoated MHP layers.
+In Figure S2c, we show that by precoating the shuttered
+QCM with this templating layer, we are able to obtain the
+shortest stabilization time. To verify that the use of this
+templating layer is able to totally circumvent the compositional
+variations found during the initial phases of growth on
+untemplated substrates, we also deposit it on a 2,2′,7,7′-
+ACS Energy Letters http://pubs.acs.org/journal/aelccp Letter
+https://doi.org/10.1021/acsenergylett.3c01368
+ACS Energy Lett. 2023, 8, 4008−4015
+4009
+Downloaded from pubs.​acs.​org/​aelccp/​article-pdf/​8/​10/​4008/​3080820/​nz3c01368.​pdf by guest on 19 November 2026

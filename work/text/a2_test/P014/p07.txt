@@ -1,0 +1,113 @@
+Table 3: EM and F1 scores are reported on datasets retrieved from Wikipedia. All models are trained based on
+Qwen2.5-7B-Instruct. The best-performing results are highlighted in bold.
+NQ TriviaQA WebQ
+Top 5 Top 20 Top 50 Top 5 Top 20 Top 50 Top 5 Top 20 Top 50
+Retriever Generator EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1
+(Oracle)
+DPR
+w/o
+reranker
+CARE-RAG* 62.20 62.20 - - - - 75.40 75.70 - - - - - - - - - -
+RAAT 57.05 64.72 49.58 57.68 43.41 51.30 75.11 81.04 70.32 76.46 62.92 68.93 42.17 58.13 37.20 52.90 34.71 49.68
+RALM 56.41 64.52 49.42 57.46 45.16 53.26 75.52 81.25 70.61 76.27 66.40 72.32 43.07 57.70 38.53 53.22 38.46 52.78
+KnowPO 57.34 65.97 50.68 58.37 45.60 53.85 76.38 82.09 72.56 79.48 66.79 73.03 50.83 62.94 44.52 58.77 42.59 54.31
+GRPO-RAG 58.79 66.59 52.91 60.97 47.34 55.89 79.52 84.49 77.02 82.27 72.83 76.88 54.66 66.30 50.59 61.40 47.03 59.08
+BrPr (1-turn) 59.91 67.41 53.24 61.35 48.81 57.55 78.94 84.25 76.04 81.39 72.74 77.23 54.81 66.65 50.99 62.41 48.28 59.74
+BrPr (2-turn) 61.52 68.10 53.20 61.43 49.40 58.15 81.10 86.11 78.12 83.05 74.55 79.75 55.87 66.53 50.40 62.43 49.91 60.33
+(Normal)
+DPR
+w/
+BGE reranker
+RAAT 42.50 50.69 41.37 49.62 37.76 46.03 61.97 69.54 60.53 67.65 53.60 60.83 28.94 42.92 29.48 43.50 27.31 41.41
+RALM 41.72 50.58 40.13 48.78 39.61 48.43 62.30 69.47 61.13 67.91 57.67 64.70 29.77 43.52 30.12 43.64 30.66 44.22
+KnowPO 41.34 50.74 40.94 49.03 40.57 49.29 63.45 70.74 61.58 68.10 58.97 65.46 32.44 45.81 31.82 44.39 30.53 44.24
+GRPO-RAG 43.00 52.11 43.43 52.45 41.89 51.39 65.53 72.32 64.93 71.55 62.63 69.31 37.29 49.92 38.98 49.76 38.98 49.47
+BrPr (1-turn) 43.57 52.09 42.47 51.48 41.66 51.04 66.13 73.85 65.47 72.02 63.03 70.00 37.84 49.76 39.03 50.61 39.71 49.03
+BrPr (2-turn) 45.29 54.38 43.77 52.62 42.44 52.15 66.97 74.02 65.33 71.82 63.73 70.44 37.99 50.01 38.70 49.93 39.07 50.57
+(Normal)
+DPR
+w/
+UR³ reranker
+RAAT 41.72 50.31 42.23 50.07 36.93 44.62 62.83 70.18 60.93 67.94 54.23 61.26 29.13 43.44 29.43 43.68 27.76 41.32
+RALM 40.33 49.43 40.67 49.27 38.72 47.33 62.97 69.88 61.53 68.40 58.19 65.20 29.72 43.23 30.27 44.20 30.61 44.25
+KnowPO 42.52 51.07 41.92 50.86 40.37 49.27 64.35 71.47 62.82 69.46 60.82 66.43 34.57 45.69 34.96 45.81 32.51 46.03
+GRPO-RAG 43.13 51.88 44.27 53.08 41.87 50.72 66.03 72.82 65.20 71.86 63.77 70.16 38.48 49.93 38.81 50.53 37.92 48.91
+BrPr (1-turn) 43.50 52.12 44.59 53.32 42.73 51.78 66.70 73.28 66.07 73.00 63.54 70.48 38.29 50.21 38.63 50.46 39.07 50.38
+BrPr (2-turn) 44.20 53.34 44.62 53.27 42.03 51.26 67.41 74.21 66.71 73.41 64.31 70.62 38.53 50.55 39.12 50.81 38.61 49.59
+* As the training data and model weights are not publicly available, we report the results directly from the original publication.
+100 200 300 400
+Step
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9Reward
+Dropout z Reward
+W/ Prior z Reward
+Total Reward
+Figure 4: Training rewards under explicit or absent prior
+within bernoulli-gated mechanism.
+The Effects of KL Divergence. As shown in Ta-
+ble 2, the 1-turn model yields performance compet-
+itive with the explicit 2-turn model, thereby demon-
+strating the effectiveness of our training objective
+in implicitly regularizing the distribution via KL
+divergence. Specifically, under the gold setting, the
+2-turn model exhibits inferior performance com-
+pared to the one-turn variant, mirroring the trend
+observed in training-free methods. This result in-
+dicates that the divergence constraint merely re-
+duces the distributional discrepancy between the
+two models, rather than achieving full alignment.
+As shown in Figure 4, by stochastically omitting
+the prior knowledge z during training, the model
+learns to implicitly infer factual priors within its
+internal representations, resulting in steady perfor-
+mance gains for the 1-turn variant.
+4.3 Performance on Retrieved Documents
+We evaluate the models under two distinct con-
+figurations: Normal and Oracle. In the Normal
+setting, the model retrieves top-k documents that
+do not necessarily include the gold document. Con-
+versely, in the Oracle setting, the gold document is
+Table 4: Performance comparison under no-document
+and all-incorrect-document settings on BGE-reranked
+NQ benchmark.
+Methods Top 5 Top 10 Top 20 Top 50
+EM F1 EM F1 EM F1 EM F1
+Qwen2.5-7B-Instruct
+Parametric Answer (w/o doc) 21.07 30.35
+W/o gold document 12.40 21.77 9.66 19.68 9.82 19.29 9.95 19.74
+GRPO-RAG-7B
+Parametric Answer (w/o doc) 25.23 33.28
+W/o gold document 16.17 25.96 16.96 26.50 17.13 26.66 15.00 25.28
+BrPr-7B
+Parametric Answer (w/o doc) 25.70 34.05
+W/o gold document (1-turn) 17.30 26.87 17.63 27.69 18.29 28.03 15.52 25.48
+W/o gold document (2-turn) 20.67 30.32 20.95 30.49 21.45 31.02 19.24 28.91
+guaranteed to be included within the retrieved set.
+Generalization Across Diverse Retrieval. The
+experimental results in Table 3 across different re-
+trieval configurations demonstrate the robust gener-
+alization of the BrPr framework. Whether utilizing
+the Oracle or Normal retrieval settings, BrPr con-
+sistently achieves the highest performance across
+all benchmarks. As the retrieval depth increases
+from Top 5 to Top 50 documents, BrPr (2-turn)
+maintains a substantial performance margin over
+strong baselines like GRPO-RAG and KnowPO.
+Robustness to Real-World Retrieval Noise.
+The results of Normal setting reveals that BrPr is
+particularly effective at mitigating the performance
+degradation typically associated with lower-quality
+retrieval. While all models experience a decline in
+performance when moving from Oracle to Normal
+retrieval settings, both BrPr variants exhibit signifi-
+cantly higher resilience compared to other methods.
+This indicates that our method’s reasoning process
+is robust enough to handle the increased noise and
+conflicting information in large-scale, real-world
+retrieval scenarios.
+22155

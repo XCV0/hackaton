@@ -1,0 +1,111 @@
+ing a guidance objective induces a distribution shift
+whose scale is compatible with the shift captured
+by the objective’s expert–amateur contrast. Let p
+denote the current base next-token distribution (in-
+cluding any previously activated objectives), and
+let p′ denote the guided distribution when applying
+objective i with magnitude γ0 i at decoding step t.
+Let (qi, q′ i) be the amateur and expert distributions
+defining objective i (Eq. 4):
+q′ i = softmax(f + i,t), qi = softmax(f − i,t). (11)
+We define the token-level alignment signal
+dt(γ0 i ) = (( KL(p ∥ p′) + KL(p′ ∥ p) ) −
+(
+KL(qi ∥ q′ i) + KL(q′ i ∥ qi) ))2 . (12)
+Small dt(γ0 i ) indicates that the guided shift p → p′
+has a similar magnitude to the expert–amateur shift
+qi → q′ i, suggesting that objective i can be applied
+without inducing an overly incompatible change to
+the base model at that decoding step.
+As we make a single decision per task scenario
+(e.g., a dataset or deployment configuration), we
+aggregate these token-level signals, by examining
+how often the alignment condition holds, avoid-
+ing the need to adapt at every decoding step. That
+is, by activating objective i only if there exists a
+magnitude for which the alignment guard holds
+frequently enough; otherwise we suppress the ob-
+jective for that task scenario.
+For a candidate magnitude γ ∈ Γ, we com-
+pute the proportion of decoding steps satisfying
+the guard I[dt(γ) < τ ], averaged over time and a
+small unlabeled sample set S of queries:
+A(γ) = Ex∼S
+[
+1
+Tx
+Tx∑
+t=1
+I
+[
+dt(γ) < τ
+]
+]
+. (13)
+We then select the magnitude and activation as
+follows:
+γ0 i = arg max γ∈Γ A(γ), γ1 i = I
+[
+max
+γ∈Γ
+A(γ) ≥ ρ
+]
+.
+(14)
+Accounting for objective interactions. Objec-
+tives can exhibit synergy or interference; in order to
+capture interactions without enumerating all com-
+binations, we evaluate objectives sequentially, con-
+ditioning each decision on the set of previously ac-
+tivated objectives by treating their contributions as
+part of the current base distribution p. We adopt the
+fixed order of DA first, followed by DB then MS,
+based on the relative specificity of the objectives.
+DA relies on task- and domain-specific supervision
+and therefore has the most direct impact on correct-
+ness. DB addresses structural biases in retrieval
+(e.g., position effects) that are largely task-agnostic
+but should not override domain alignment. MS re-
+flects model capacity differences and is the most
+global signal, making it safest to apply after the
+other objectives.
+Algorithm 2 formalizes our adaptation mecha-
+nism, for both scenarios (when validation accuracy
+is available and when it is not).
+4 Results
+4.1 Experimental Settings
+We validate the effectiveness of GRAD on the
+following diverse RAG scenarios: For public
+benchmarks, we consider MARCO (Bajaj et al.,
+2018) for single-hop question answering and Hot-
+potQA (Yang et al., 2018), or HQA, for multi-
+hop question answering, both of which have well-
+aligned training data available.
+We deploy it in a real-life proprietary enterprise
+setting, which we denote as PQ, on a private corpus
+of company internal PDFs unseen from LLM, with
+no training data available. For reproduction, we
+also consider NQ (NaturalQuestions, Kwiatkowski
+et al., 2019) with no training data.
+While MARCO and HQA have well-defined
+in-domain training sets,2 both NQ and PQ lack
+such training data. However, NQ builds on the
+Wikipedia corpus as MARCO and HQA, their train-
+ing data can be transferred for NQ, and the LLM
+has likely seen the data during pretraining. Thus,
+we intend these two scenarios, NQ and PQ, to ana-
+lyze the impact of different degrees of finetuning
+misalignment, which is a frequently faced chal-
+lenge of enterprise RAG serving domain-specific
+or proprietary knowledge. Also, for PQ, conver-
+sion process from PDF to text introduces realistic
+noise in practical RAG scenarios, while further
+increasing the divergence from standard training
+distributions.
+Unless otherwise noted, the base LLM is an 8B
+LLaMA 3.1 model and each SLM used for decod-
+ing objectives is a 1B LLaMA 3.2 model. We
+2HQA has a dedicated training set, whereas we split the
+development set of MARCO and repurpose the held-out set
+for training.
+45278

@@ -1,0 +1,81 @@
+Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 4609–4631
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+SafeRAG: Benchmarking Security in Retrieval-Augmented Generation
+of Large Language Model
+Xun Liang1,∗, Simin Niu1,*, Zhiyu Li2,†, Sensen Zhang1, Hanyu Wang1, Feiyu Xiong2,
+Jason Zhaoxin Fan3, Bo Tang2, Jihao Zhao1, Jiawei Yang1, Shichao Song1, Mengwei Wang1
+1School of Information, Renmin University of China, Beijing, China
+2Institute for Advanced Algorithms Research, Shanghai, China
+3Beijing Advanced Innovation Center for Future Blockchain and Privacy Computing,
+School of Artificial Intelligence, Beihang University, Beijing, China
+Abstract
+The indexing-retrieval-generation paradigm
+of retrieval-augmented generation (RAG) has
+been highly successful in solving knowledge-
+intensive tasks by integrating external knowl-
+edge into large language models (LLMs). How-
+ever, the incorporation of external and unveri-
+fied knowledge increases the vulnerability of
+LLMs because attackers can perform attack
+tasks by manipulating knowledge. In this paper,
+we introduce a benchmark named SafeRAG
+designed to evaluate the RAG security. First,
+we classify attack tasks into silver noise, inter-
+context conflict, soft ad, and white Denial-of-
+Service. Next, we construct RAG security eval-
+uation dataset (i.e., SafeRAG dataset) primar-
+ily manually for each task. We then utilize the
+SafeRAG dataset to simulate various attack sce-
+narios that RAG may encounter. Experiments
+conducted on 14 representative RAG compo-
+nents demonstrate that RAG exhibits signifi-
+cant vulnerability to all attack tasks and even
+the most apparent attack task can easily by-
+pass existing retrievers, filters, or advanced
+LLMs, resulting in the degradation of RAG
+service quality. Code is available at: https:
+//github.com/IAAR-Shanghai/SafeRAG.
+1 Introduction
+Retrieval-augmented generation (RAG) provides
+an efficient solution for expanding the knowl-
+edge boundaries of large language models (LLMs)
+(Zhao et al., 2024; Gupta et al., 2024; Fan et al.,
+2024; Wang et al., 2024). Many advanced LLMs,
+such as ChatGPT (OpenAI et al., 2024), Gemini
+(Team et al., 2024), and Perplexy.ai1, have incorpo-
+rated external retrieval modules within their web
+platforms. However, in the RAG pipeline, query-
+relevant texts are processed sequentially through
+the retriever, the filter before being synthesized
+*Co-equal primary author.
+†Correspondence.
+1https://www.perplexity.ai/
+Figure 1: Motivation. The attack tasks considered by
+the existing RAG benchmarks fail to bypass the RAG
+components, which hindering accurate RAG security
+evaluation. Our SafeRAG introduces enhanced attack
+tasks to evaluate the potential vulnerabilities of RAG.
+into a response by the generator, introducing po-
+tential security risks, as attackers can manipulate
+texts at any stage of the pipeline. Current attacks
+targeting RAG can be divided into four tasks:
+• Noise: Due to the limitation in retrieval ac-
+curacy, the retrieved contexts often contain
+large quantities of noisy texts that are at most
+merely similar to the query but do not actually
+contain the answer. Attackers can exploit this
+retrieval limitation to dilute useful knowledge
+by deliberately injecting extensive noisy texts
+(Chen et al., 2024a; Fang et al., 2024).
+• Conflict: Knowledge from different sources
+may conflict with one another, creating oppor-
+tunities for attackers to manipulate. Simply
+injecting conflict texts could prevent LLMs
+from determining which piece of knowledge
+is more reliable, resulting in vague or even
+incorrect responses. (Wu et al., 2024a; Liu
+et al., 2023; Zou et al., 2024).
+• Toxicity: The internet often contains toxic
+texts published by attackers. Such malicious
+texts are highly likely to be incorporated into
+4609

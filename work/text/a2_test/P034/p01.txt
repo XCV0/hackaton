@@ -1,0 +1,34 @@
+From Norms to Indicators (N2I-RAG): An Agentic
+Retrieval-Augmented Generation Framework for
+Legal Indicator Computation
+Youssef Al Mouatamid1,2*, Marie Bonnin3 and Jihad Zahir1,4
+1LISI Laboratory, Cadi Ayyad University, Marrakesh, 40000, Morocco.
+2LEMAR, Univ Brest, Plouzane, F-29280, France.
+3IRD, Univ Brest, CNRS, Ifremer, LEMAR, Plouzane, F-29280, France.
+4UMMISCO, IRD France Nord, Bondy, F-93143, France.
+*Corresponding author(s). E-mail(s):
+youssef.almouatamid@univ-brest.fr;
+Contributing authors: marie.bonnin@ird.fr; j.zahir@uca.ac.ma;
+Abstract
+Computing legal indicators from normative texts is a key task in legal monitoring
+and policy evaluation, but presents significant challenges due to the complex-
+ity, scale, and interpretive nature of legal language, as well as the variability in
+available document quality. Existing natural language processing techniques and
+generative models can assist in legal analysis, but often suffer from high risk
+of hallucinations and lack the interpretability and evidence grounding required
+for reliable indicator computation. This paper presents N2I-RAG (From Norms
+to Indicators), an agentic retrieval-augmented generation framework designed
+to automate the computation of legal indicators in a transparent and traceable
+way. We integrate adaptive retrieval, llm-based agents, and validation mecha-
+nisms in a modular pipeline, where each component performs a defined role
+in filtering, retrieving, and assessing evidence, and in producing binary legal
+outcomes linked to identifiable legal provisions. The framework emphasizes trace-
+ability by requiring explicit explanations of intermediate decisions and final
+indicator assignments. We evaluate N2I-RAG using an in-house constructed
+French marine environmental law corpus that includes both scanned and digital
+sources. Comparative experiments with multiple language model families demon-
+strate that the proposed approach consistently outperforms baseline systems,
+and generalizes well when tested on 2 different bans. The results indicate that
+agentic retrieval-augmented generation can bridge open-text legal language and
+1
+arXiv:2605.26926v1  [cs.AI]  26 May 2026

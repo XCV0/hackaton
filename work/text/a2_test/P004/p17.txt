@@ -1,0 +1,35 @@
+System Prompt: High-level Action Selection
+You are an expert query optimizer. Your goal is to refine the
+user’s query to resolve logical inconsistencies or factual gaps
+identified in the current answer draft.
+Original Query: {original_query}
+Current Answer Draft: {current_answer_draf t}
+Verifier Feedback:
+- Factual Score: {f actual_score}
+- Logical Score: {logical_score}
+- Detected Logic Events: {logic_events_summary}
+Based on the feedback, choose the best high-level optimization
+action:
+1. LogicalDecompose (Break down complex reasoning)
+2. EntityAugment (Inject missing entities)
+3. RephraseFocus (Adjust query focus)
+4. NoOp (Current answer is sufficient)
+Action:
+Table 10: The prompt template used by the PPO agent
+to select the optimization strategy based on verifier feed-
+back.
+Execution Prompt: Entity Augment
+The following answer contains logical gaps due to missing
+entities identified by the external knowledge base.
+Context: {retrieved_docs}
+Original Answer: {current_answer_draf t}
+Missing Entities: {missing_entities_f rom_verif ier}
+Instruction:
+Rewrite the Original Answer to include the Missing Entities
+coherently. Ensure that the logical flow is preserved and that
+the new entities are grounded in the Context.
+Refined Answer:
+Table 11: An example execution prompt for the
+EntityAugment action. Similar templates are used for
+LogicalDecompose and RephraseFocus.
+17916

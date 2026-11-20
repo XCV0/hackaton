@@ -1,0 +1,104 @@
+our method has a high similarity to the query and
+a high ground truth answer hit rate. In addition,
+RankCoT shows its effectiveness in minimizing
+the consumption of prompt inputs for LLMs while
+helping to reduce inference time.
+Limitations
+Although RankCoT demonstrates its effectiveness
+in refining retrieved knowledge for RAG systems,
+the quality of the refinement is still constrained by
+the capabilities of LLMs. Specifically, RankCoT
+is optimized using the DPO method, which relies
+on LLMs to generate meaningful chosen and re-
+jected pairs during optimization. Therefore, the
+generation of meaningful preference pairs for opti-
+mization still heavily depends on the performance
+of the LLMs.
+Acknowledgments
+This work is partly supported by the Natural
+Science Foundation of China under Grant (No.
+62206042 and No. 62137001), CCF-zhipu Large
+Model Innovation Fund (No. 202403), the Joint
+Funds of Natural Science Foundation of Liaoning
+Province (No. 2023-MSBA-081), and the Funda-
+mental Research Funds for the Central Universities
+under Grant (No. N2416012). This work is also
+supported by the AI9Stars community.
+The authors would like to thank Weiqing Yang
+for his help in drawing figures during the writing
+process of the paper, and Sijia Yao for her careful
+and patient review of the final draft of the paper
+and her suggestions for revision.
+References
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama
+Ahmad, Ilge Akkaya, Florencia Leoni Aleman,
+Diogo Almeida, Janko Altenschmidt, Sam Altman,
+Shyamal Anadkat, et al. 2023. Gpt-4 technical report.
+ArXiv preprint.
+Shourya Aggarwal, Divyanshu Mandowara, Vishwa-
+jeet Agrawal, Dinesh Khandelwal, Parag Singla, and
+Dinesh Garg. 2021. Explanations for Common-
+senseQA: New Dataset and Models. In Proceedings
+of ACL, pages 3050–3065.
+Aida Amini, Saadia Gabriel, Shanchuan Lin, Rik
+Koncel-Kedziorski, Yejin Choi, and Hannaneh Ha-
+jishirzi. 2019. MathQA: Towards interpretable math
+word problem solving with operation-based for-
+malisms. In Proceedings of NAACL-HLT, pages
+2357–2367.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024a. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In Proceedings of ICLR.
+Akari Asai, Zexuan Zhong, Danqi Chen, Pang Wei Koh,
+Luke Zettlemoyer, Hannaneh Hajishirzi, and Wen-
+tau Yih. 2024b. Reliable, adaptable, and attributable
+language models with retrieval. ArXiv preprint.
+Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng,
+Jianfeng Gao, Xiaodong Liu, Rangan Majumder, An-
+drew McNamara, Bhaskar Mitra, Tri Nguyen, et al.
+2016. Ms marco: A human generated machine read-
+ing comprehension dataset. ArXiv preprint.
+Jonathan Berant, Andrew Chou, Roy Frostig, and Percy
+Liang. 2013. Semantic parsing on Freebase from
+question-answer pairs. In Proceedings of EMNLP,
+pages 1533–1544.
+Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, Sandhini Agarwal, Ariel Herbert-Voss,
+Gretchen Krueger, Tom Henighan, Rewon Child,
+Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu,
+Clemens Winter, Christopher Hesse, Mark Chen, Eric
+Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess,
+Jack Clark, Christopher Berner, Sam McCandlish,
+Alec Radford, Ilya Sutskever, and Dario Amodei.
+2020. Language models are few-shot learners. In
+Proceedings of NeurIPS.
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu
+Lian, and Zheng Liu. 2024a. Bge m3-embedding:
+Multi-lingual, multi-functionality, multi-granularity
+text embeddings through self-knowledge distillation.
+ArXiv preprint.
+Jiawei Chen, Hongyu Lin, Xianpei Han, and Le Sun.
+2024b. Benchmarking large language models in
+retrieval-augmented generation. In Proceedings of
+AAAI, 16, pages 17754–17762.
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian,
+Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias
+Plappert, Jerry Tworek, Jacob Hilton, Reiichiro
+Nakano, et al. 2021. Training verifiers to solve math
+word problems. ArXiv preprint.
+Qingxiu Dong, Lei Li, Damai Dai, Ce Zheng, Jingyuan
+Ma, Rui Li, Heming Xia, Jingjing Xu, Zhiyong Wu,
+Tianyu Liu, et al. 2023. A survey on in-context learn-
+ing. ArXiv preprint.
+Tianyu Gao, Howard Yen, Jiatong Yu, and Danqi Chen.
+2023. Enabling large language models to generate
+text with citations. In Proceedings of EMNLP, pages
+6465–6488.
+Yunfan Gao, Yun Xiong, Meng Wang, and Haofen
+Wang. 2024. Modular rag: Transforming rag sys-
+tems into lego-like reconfigurable frameworks. ArXiv
+preprint.
+12865

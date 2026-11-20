@@ -1,0 +1,103 @@
+6 Conclusions
+In this paper, we extensively investigated the pri-
+vacy risks associated with retrieval-augmented gen-
+eration (RAG) technique for LLMs. Through our
+proposed attack methods, we first systematically
+evaluated and identified the significant risks of re-
+trieval data extraction. Meanwhile, we explored
+various defense techniques that can mitigate these
+risks. We also found that integrating retrieval data
+can substantially reduce LLMs’ tendency to output
+its memorized training data, which suggests that
+RAG could potentially mitigate the risks of training
+data leakage. Overall, we revealed novel insights
+regarding privacy concerns of retrieval-augmented
+LLMs, which is beneficial for the proper usage of
+RAG techniques in real-world applications.
+7 Limitations
+In our research, we concentrated primarily on the
+application of retrieval augmentation during the in-
+ference stage, without delving into its integration
+during pre-training or fine-tuning phases. Future
+work will aim to explore these compelling areas.
+Moreover, while our study has highlighted the pri-
+vacy risks associated with commonly employed
+retrieval-augmented generation (RAG) systems,
+other retrieval-based language models (LMs) fea-
+ture distinct components and architectures (Huang
+et al., 2023; Borgeaud et al., 2022) that warrant fur-
+ther investigation. In addition, developing effective
+strategies like differential privacy((Feyisetan et al.,
+2020; Utpala et al., 2023; Carvalho et al., 2023)) to
+protect retrieval data and leveraging RAG systems
+for the safeguarding of training data represent open
+research questions that we intend to pursue.
+References
+Stella Biderman, USVSN Sai Prashanth, Lintang
+Sutawika, Hailey Schoelkopf, Quentin Anthony,
+Shivanshu Purohit, and Edward Raf. 2023. Emer-
+gent and predictable memorization in large language
+models. arXiv preprint arXiv:2304.11158.
+Sebastian Borgeaud, Arthur Mensch, Jordan Hoff-
+mann, Trevor Cai, Eliza Rutherford, Katie Milli-
+can, George Bm Van Den Driessche, Jean-Baptiste
+Lespiau, Bogdan Damoc, Aidan Clark, et al. 2022.
+Improving language models by retrieving from tril-
+lions of tokens. In International conference on ma-
+chine learning, pages 2206–2240. PMLR.
+Nicholas Carlini, Daphne Ippolito, Matthew Jagielski,
+Katherine Lee, Florian Tramer, and Chiyuan Zhang.
+2022. Quantifying memorization across neural lan-
+guage models. arXiv preprint arXiv:2202.07646.
+Nicholas Carlini, Florian Tramer, Eric Wallace,
+Matthew Jagielski, Ariel Herbert-Voss, Katherine
+Lee, Adam Roberts, Tom Brown, Dawn Song, Ulfar
+Erlingsson, et al. 2021. Extracting training data from
+large language models. In 30th USENIX Security
+Symposium (USENIX Security 21), pages 2633–2650.
+Ricardo Silva Carvalho, Theodore Vasiloudis,
+Oluwaseyi Feyisetan, and Ke Wang. 2023. Tem:
+High utility metric differential privacy on text.
+In Proceedings of the 2023 SIAM International
+Conference on Data Mining (SDM), pages 883–890.
+SIAM.
+Harrison Chase. 2022. Langchain. October 2022.
+https://github.com/hwchase17/langchain.
+Xin Cheng, Di Luo, Xiuying Chen, Lemao Liu,
+Dongyan Zhao, and Rui Yan. 2023. Lift yourself
+up: Retrieval-augmented text generation with self
+memory. arXiv preprint arXiv:2305.02437.
+Oluwaseyi Feyisetan, Borja Balle, Thomas Drake, and
+Tom Diethe. 2020. Privacy-and utility-preserving tex-
+tual analysis via calibrated multivariate perturbations.
+In Proceedings of the 13th international conference
+on web search and data mining, pages 178–186.
+Evelyn Fix and Joseph Lawson Hodges. 1989. Dis-
+criminatory analysis. nonparametric discrimination:
+Consistency properties. International Statistical Re-
+view/Revue Internationale de Statistique, 57(3):238–
+247.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, and Haofen
+Wang. 2023. Retrieval-augmented generation for
+large language models: A survey. arXiv preprint
+arXiv:2312.10997.
+Yangsibo Huang, Samyak Gupta, Zexuan Zhong, Kai
+Li, and Danqi Chen. 2023. Privacy implications
+of retrieval-based language models. arXiv preprint
+arXiv:2305.14888.
+Daphne Ippolito, Florian Tramèr, Milad Nasr, Chiyuan
+Zhang, Matthew Jagielski, Katherine Lee, Christo-
+pher A Choquette-Choo, and Nicholas Carlini. 2022.
+Preventing verbatim memorization in language mod-
+els gives a false sense of privacy. arXiv preprint
+arXiv:2210.17546.
+Nikhil Kandpal, Eric Wallace, and Colin Raffel. 2022.
+Deduplicating training data mitigates privacy risks
+in language models. In International Conference on
+Machine Learning, pages 10697–10707. PMLR.
+Urvashi Khandelwal, Omer Levy, Dan Jurafsky, Luke
+Zettlemoyer, and Mike Lewis. 2019. Generalization
+through memorization: Nearest neighbor language
+models. arXiv preprint arXiv:1911.00172.
+4513

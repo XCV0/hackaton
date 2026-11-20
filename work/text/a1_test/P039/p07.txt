@@ -1,0 +1,46 @@
+Materials 2022, 15, 8356 7 of 10
+such as in the VTD process [22]. In another batch of fabricated solar cells under very similar
+conditions, we applied surface etching using a dilute (NH4)2S solution. This not only
+reduced scattering in solar cell parameters but also increased the ﬁll factor (FF) (Table S1).
+On the other hand, the peak-performing cells all showed rather similar solar cell parameters
+with a record efﬁciency of 4.9% (Table 1). There are very few studies where Sb2Se3 solar
+cells are deposited on Cd-free buffer layers using the VTD approach indicating a non-trivial
+deposition protocol on oxide buffer layers. Using the same deposition method (VTD) on
+double-oxide buffer layers (SnO2/TiO2), Wang et al. demonstrated 4.7% PCE, which was
+boosted to 5.8% using SbCl3 surface treatment [23]. A surprising observation was that the
+generated JSC did not depend on the absorber thickness, even when it was increased two
+times. Neglecting limited charge carrier diffusion length, usually, the thicker the absorber,
+the more photons are absorbed and converted to electron–hole pairs, leading to increased
+JSC. For example, to absorb all solar radiation above the bandgap, 1.5–2 µm-thickness
+absorbers are required for well-established thin-ﬁlm solar cell technologies such as Cu(In,
+Ga)Se2 [24] and Cu2SnZnSe4 [25], and even higher thicknesses are needed for CdTe [26].
+In the case of the Sb2Se3 absorber, a JSC over 30 mA/cm2 was generated using layers as
+thin as 0.4 µm and without any intentional light-management solutions. The measured
+absorbance of Sb2Se3 ﬁlms showed that even in the thinnest sample, 99% of incident
+radiation was absorbed at a 950 nm wavelength and below (Figure 5c). This demonstrates
+the high absorption capabilities of Sb2Se3 and its potential application in ultra-thin solar
+cells. Using the experimentally measured absorption coefﬁcient of Sb2Se3, we calculated
+the theoretical limit of JSC at a speciﬁc absorber thickness using an idealized p–n junction
+(Table 1). The sample with an absorber thickness of 0.4 µm generated 86% of the theoretical
+JSC, and this is not considering reﬂection losses from a glass substrate. However, with
+an increasing absorber thickness, JSC did not improve, which suggests that collection
+efﬁciency decreased accordingly. Carrier mobility and carrier lifetime are rather low in
+Sb2Se3 [27], leading to a short carrier diffusion length. Once absorber thickness exceeds
+carrier diffusion length, carriers recombine before reaching contacts and current is lost as
+heat. Another limiting factor in our solar cells was a low open-circuit voltage (VOC), which
+was in the 290–300 mV range. For state-of-the-art Sb2Se3 solar cells, the VOC is >400 mV.
+In our case, a Fermi-level pinning is suspected at the Sb2Se3–TiO2 interface because the
+built-in voltage (Vbi) determined from C-V measurements (Figure 5d) was the same as
+the VOC. The Vbi is equal to the Fermi-level difference of n- and p-type semiconductors
+before forming a heterojunction, and from the data available in the literature, the Vbi is
+expected to be somewhere from 450 to 650 mV, depending on the doping level in Sb2Se3
+and the approach used for the synthesis of TiO2 [28,29]. Therefore, we suggest that the
+low Vbi (which also limited VOC) was because of Fermi-level pinning likely caused by
+interface defects. The measured J-V curves under dark conditions also indicated that severe
+recombination was present in the device. For a state-of-the-art Sb2Se3 device, dark currents
+under negative bias usually fall below 10−2 mA/cm2, whereas the dark saturation current
+density (J0) is below 10−3 mA/cm2 [30,31]. In the samples under study, J0 was in the
+1 × 10−2–4 × 10−2 mA/cm2 interval (Figure 5b). Such a high dark saturation current is
+an indication of a high recombination rate that can originate from the interface and bulk
+defects. We believe that interface defects were the primary source for high J0 because of the
+pinned VOC.

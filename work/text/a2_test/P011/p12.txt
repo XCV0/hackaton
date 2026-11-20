@@ -1,0 +1,49 @@
+A PREPRINT
+6 Future Work
+A promising direction for future research is to implement the proposed system within a multi-agent framework that
+relies primarily on tool calling, without constructing explicit graph-based or other intermediate representation layers.
+This approach would enable a direct comparison of its performance against the LPG and RDF frameworks, providing
+valuable insights into the trade-offs between representation-free and graph-based methodologies.
+7 Conclusion
+In summary, our study demonstrates that both graph-based RAG representations—LPG and RDF—significantly
+outperform agentic RAG, particularly in scenarios where the search space is unknown and the number of documents
+to retrieve cannot be predetermined. Our text-to-Cypher model further enhances the capabilities of RDF, while the
+LPG approach exhibits superior performance when the data is accurately modeled as a graph. The proposed design and
+pipeline showcase the scalability and effectiveness of graph RAG for large-scale, knowledge-intensive applications.
+Our results highlight the reliability of our pipeline in handling semi-structured JSON data with a massive number of
+keys, values, and deeply nested structures. Overall, these findings underscore the clear advantages of graph-based
+retrieval—especially LPG—for complex information retrieval tasks, while also identifying opportunities for further
+improvement in query translation and schema alignment.
+References
+[1] Zhiyu Zoey Chen, Jing Ma, Xinlu Zhang, Nan Hao, An Yan, Armineh Nourbakhsh, Xianjun Yang, Julian McAuley,
+Linda Petzold, and William Yang Wang. A survey on large language models for critical societal domains: Finance,
+healthcare, and law. arXiv preprint arXiv:2405.01769, 2024.
+[2] Zina Chkirbene, Ridha Hamila, Ala Gouissem, and Unal Devrim. Large language models (llm) in industry: A
+survey of applications, challenges, and trends. In 2024 IEEE 21st International Conference on Smart Communities:
+Improving Quality of Life using AI, Robotics and IoT (HONET), pages 229–234. IEEE, 2024.
+[3] Kerstin Denecke, Richard May, LLMHealthGroup, and Octavio Rivera Romero. Potential of large language
+models in health care: Delphi study. Journal of Medical Internet Research, 26:e52399, 2024.
+[4] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich
+Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, et al. Retrieval-augmented generation for knowledge-
+intensive nlp tasks. Advances in neural information processing systems, 33:9459–9474, 2020.
+[5] Zhengbao Jiang, Frank F Xu, Luyu Gao, Zhiqing Sun, Qian Liu, Jane Dwivedi-Yu, Yiming Yang, Jamie Callan,
+and Graham Neubig. Active retrieval augmented generation. In Proceedings of the 2023 Conference on Empirical
+Methods in Natural Language Processing, pages 7969–7992, 2023.
+[6] Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin, Tat-Seng Chua, and Qing Li. A
+survey on rag meeting llms: Towards retrieval-augmented large language models. In Proceedings of the 30th ACM
+SIGKDD conference on knowledge discovery and data mining, pages 6491–6501, 2024.
+[7] Muhammad Arslan, Hussam Ghanem, Saba Munawar, and Christophe Cruz. A survey on rag with llms. Procedia
+computer science, 246:3781–3790, 2024.
+[8] Orion Weller, Michael Boratko, Iftekhar Naim, and Jinhyuk Lee. On the theoretical limitations of embedding-based
+retrieval. arXiv preprint arXiv:2508.21038, 2025.
+[9] Shahar Mendelson. On the limitations of embedding methods. In International Conference on Computational
+Learning Theory, pages 353–365. Springer, 2005.
+[10] Bilal Abu-Salih and Salihah Alotaibi. A systematic literature review of knowledge graph construction and
+application in education. Heliyon, 10(3), 2024.
+[11] Dermot Francis Donnelly-Hermosillo, Libby F Gerard, and Marcia C Linn. Impact of graph technologies in k-12
+science and mathematics education. Computers & Education, 146:103748, 2020.
+[12] Yiming Yang, Hanxiao Liu, Jaime Carbonell, and Wanli Ma. Concept graph learning from educational data. In
+Proceedings of the Eighth ACM International Conference on Web Search and Data Mining, pages 159–168, 2015.
+[13] Manie Tadayon and Greg Pottie. Causal inference in educational systems: A graphical modeling approach. arXiv
+preprint arXiv:2108.00654, 2021.
+12

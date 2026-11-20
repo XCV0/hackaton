@@ -1,0 +1,120 @@
+MedRAG: Enhancing Retrieval-augmented Generation with
+Knowledge Graph-Elicited Reasoning for Healthcare Copilot
+introduces multiple layers of granularity to 𝐸𝐿3, ensuring that dis-
+eases with different manifestations are properly categorized.
+To effectively utilize historical diagnoses from 𝐷 as accurate rep-
+resentations of disease manifestations, we decompose their mani-
+festations of the diseases in 𝐸𝐿3, parsing them into discrete features
+𝐸𝐿4𝑑. Every single feature like symptom, location, or activity lim-
+itation from each 𝑒𝐿3𝑖 is created as a node 𝑒𝐿4𝑑𝑖 ∈𝐸𝐿4. This final
+decomposition results in the comprehensive disease knowledge
+graph G𝐷, capturing both disease category information derived
+from hierarchical aggregation and their associated features.
+4.1.2 Knowledge Graph Manifestation Augmentation. The knowl-
+edge in G𝐷 only contains information from 𝐷, which is insuffi-
+cient to accurately diagnose all diseases, particularly when dis-
+tinguishing between diseases with similar clinical manifestations.
+Therefore, the integration of external knowledge is essential. To
+complement the diagnostic knowledge graph with essential knowl-
+edge that is not present in 𝐷, we augment external knowledge
+𝐸𝐿4 to G𝐷 that aids in distinguishing diseases with similar man-
+ifestations. We traverse all disease 𝑒𝐿3𝑖 and employ a prompt 𝑝𝑎
+specially tailored for searching and generating the nuances of the
+diseases on an LLM denoted by M𝑎. As shown in Equation 5, each
+generated diagnostic key difference node 𝑒𝐿4𝑎𝑖 𝑗 is then connected
+to its corresponding 𝑒𝐿3𝑖 with relationship 𝑟𝑚. Thus we obtain
+a chain 𝐸𝐿3
+𝑟𝑚
+−−→𝐸𝐿4𝑎. For example, we generate a manifestation
+and relation to disease node 𝑙𝑢𝑚𝑏𝑎𝑟𝑠𝑝𝑜𝑛𝑑𝑦𝑙𝑜𝑠𝑖𝑠 and form a chain: <
+𝑙𝑢𝑚𝑏𝑎𝑟_𝑠𝑝𝑜𝑛𝑑𝑦𝑙𝑜𝑠𝑖𝑠,ℎ𝑎𝑠_𝑠𝑦𝑚𝑝𝑡𝑜𝑚,𝑠𝑡𝑖𝑓𝑓𝑛𝑒𝑠𝑠_𝑜𝑟_𝑝𝑎𝑖𝑛_𝑖𝑛_𝑡ℎ𝑒_𝑙−
+𝑜𝑤𝑒𝑟_𝑏𝑎𝑐𝑘 >.
+{𝑒𝐿3𝑖 }𝑛 𝑖=1 M𝑎 (𝑝𝑎,𝑒𝐿3𝑖 ) −−−−−−−−−−−→{𝑒𝐿4𝑎𝑖 𝑗 }𝑛,𝑚𝑖 𝑖=1,𝑗=1, (5)
+𝐸𝐿4 = 𝐸𝐿4𝑑 ∪𝐸𝐿4𝑎, (6)
+G = G𝐷 ∪𝐸𝐿3 {𝐸𝐿3 ∪𝐸𝐿4}𝑛 𝑖=1, (7)
+where M𝑎 and 𝑝𝑎 represent the large language model for disease
+manifestation augmentation and its prompt respectively.
+The finalized four-tier hierarchical diagnostic knowledge graph
+G is formed by integrating the disease knowledge graph G𝐷 with
+𝐸𝐿4 combined with 𝐸𝐿4𝑎 and 𝐸𝐿4𝑑 , as shown in Equation 6 and 7.
+4.2 Diagnostic Differences KG Searching
+4.2.1 Decomposition of Manifestations. Given 𝑞 as a query, which
+is a description of the patient’s manifestations, we perform sentence
+trunking on 𝑞 to decompose the manifestation into more detailed
+features, denoted as 𝑓1,𝑓2,...,𝑓𝑛 ∈𝑞. We define a mapping function
+to describe the process, shown in Equation 8:
+𝑞
+𝜙
+−→{𝑓1,𝑓2,...,𝑓𝑛}. (8)
+4.2.2 Clinical Features Matching. Given a 𝑞, we compute the se-
+mantic similarity score 𝑠𝑖𝑚 between 𝑓𝑖 and 𝑒𝐿4𝑑𝑖 , shown in Equa-
+tion 9:
+𝑠𝑖𝑚𝑖𝑗 = S(𝑓𝑖,𝑒𝐿4𝑑 𝑗 ,E), (9)
+where S is similarity model and E is embedding model applied to
+𝑓𝑖 and 𝑒𝐿4𝑑 𝑗 before similarity calculation.
+For each patient feature 𝑓𝑖, we retrieve the top-𝑚 most similar
+𝑒𝐿4𝑑 𝑗 , where 𝑚 denotes the number of closest matches selected.
+Totally, the system retrieves 𝑛×𝑚 matching nodes in the G. To
+address the scenario where a 𝑓𝑖 has no closely matching counterpart
+in 𝐸𝐿4𝑑, we introduce an indicator function 𝛿(𝑠𝑖𝑚𝑖𝑗,𝑡𝑚𝑎𝑡𝑐ℎ𝑖𝑛𝑔) to
+filter irrelevant matches:
+𝛿(𝑠𝑖𝑚𝑖𝑗,𝑡𝑚𝑎𝑡𝑐ℎ𝑖𝑛𝑔) =
+(
+𝑠𝑖𝑚𝑖𝑗 if 𝑠𝑖𝑚𝑖𝑗 > 𝑡𝑚𝑎𝑡𝑐ℎ𝑖𝑛𝑔
+0 otherwise, (10)
+𝑇 =
+𝑛Ø
+𝑖=1
+
+𝑒𝐿4𝑑 𝑗 | 𝑗 ∈ arg 𝑚max 𝑗′∈{1,...,|𝐸𝐿4𝑑 |} 𝛿(𝑠𝑖𝑚𝑖𝑗,𝑡𝑚𝑎𝑡𝑐ℎ𝑖𝑛𝑔)  (11)
+where 𝑇 represents the set of nodes 𝑒𝐿4𝑑 𝑗 that satisfy the condition
+𝑠𝑖𝑚𝑖𝑗 > 𝑡𝑚𝑎𝑡𝑐ℎ𝑖𝑛𝑔. The indicator function 𝛿 ensures that only 𝑒𝐿4𝑑 𝑗
+with a similarity score above the threshold are selected into 𝑇 .
+Through clinical features matching, we successfully matched 𝑞 to
+the most relevant clinical feature nodes in G.
+4.2.3 Upward Traversal. To precisely match the patient’s most rele-
+vant 𝑒𝐿2𝑠 , we employ upward traversal which determines the closest
+disease subcategory by aggregating votes based on the shortest path
+distances between 𝑡𝑖 ∈𝑇 and 𝑒𝐿2𝑗 in the graph.
+For 𝑡𝑖, we calculate the shortest path to each disease subcategory
+𝑒𝐿2𝑗 by upward traversing through the graph. Denote the shortest
+path distance between 𝑡𝑖 to 𝑒𝐿2𝑗 as 𝑃(𝑡𝑖,𝑒𝐿2𝑗 ). If 𝑒𝐿2𝑖𝑘 represents
+the closest disease subcategory node for the current 𝑡𝑖, the vote
+count for 𝑒𝐿2𝑖𝑘 is incremented by one. We then accumulate the
+votes for each 𝑒𝐿2𝑖𝑘 during the reversal and identify the node with
+the highest vote count as the 𝑒𝐿2𝑠 . This voting process is formalized
+through the indicator function 𝜒, defined as follows:
+𝜒(𝑡𝑖,𝑒𝐿2𝑖𝑘 ) =
+(
+1 if 𝑒𝐿2𝑖𝑘 = arg min𝑒𝐿2𝑗 𝑃(𝑡𝑖,𝑒𝐿2𝑗 ),
+0 otherwise
+(12)
+𝑒𝐿2𝑠 = arg max𝑒𝐿2𝑖𝑘
+∑︁
+𝑡𝑖 ∈𝑇
+𝜒(𝑡𝑖,𝑒𝐿2𝑖𝑘 ), (13)
+Taking this 𝑒𝐿2𝑠 as the parent node, we traverse downward to-
+wards 𝐸𝐿4, retrieving all 𝑒𝐿3𝑖 that are adjacent to 𝑒𝐿2𝑠 and their
+adjacent 𝑒𝐿4𝑎𝑖 . Given 𝑒𝐿2𝑠 , let 𝐸𝐿3𝑠 = {𝑒𝐿3𝑖 | 𝑒𝐿3𝑖 ∈ Adj(𝑒𝐿2𝑠 )}
+denote the set of disease nodes that belong to 𝑒𝐿2𝑠 . Similarly, define
+𝐸𝐿4𝑎𝑠 = {𝑒𝐿4𝑎 𝑗 | 𝑒𝐿4𝑎 𝑗 ∈ Adj(𝑒𝐿3𝑖 ),𝑒𝐿3𝑖 ∈ 𝐸𝐿3𝑠 } to denote the set
+of feature nodes linked to the disease nodes in 𝐸𝐿3𝑠 .
+We concatenate all triples (𝑒𝐿3𝑠 ,𝑟𝑚,𝑒𝐿4𝑎𝑖 ), where 𝑒𝐿3𝑠 ∈ Adj(𝑒𝐿2𝑠 )
+and 𝑒𝐿4𝑎𝑖 ∈ Adj(𝑒𝐿3𝑠 ), to form the set of diagnostic differences KG:
+𝐾(𝑒𝐿2𝑠 ) =
+Ø
+𝑒𝐿3𝑠 ∈Adj(𝑒𝐿2𝑠 )
+{(𝑒𝐿3𝑠 ,𝑟𝑚,𝑒𝐿4𝑎𝑠 )}, (14)
+where 𝐾 represents the diagnostic differences KG used for the
+reasoning in the LLM next.
+4.2.4 Proactive Diagnostic Questioning Mechanism. Inaccurate di-
+agnoses often stem from insufficient or incomplete patient descrip-
+tions. To address this issue, we propose a Proactive Diagnostic
+Questioning Mechanism. When the initial input 𝑞 lacks some cru-
+cial information required for doctors or LLMs to make more precise
+diagnostic decisions, this mechanism acts as a copilot to cast tar-
+geted follow-up questions.
+In the diagnostic knowledge graph G, a feature 𝑒𝐿4𝑑𝑖 may be
+connected to multiple disease nodes 𝑒𝐿3, with each 𝑒𝐿4𝑑𝑖 varying in
+its discriminability. For instance, certain features are more prevalent,
+such as “pain located in the lumbar region”, while others represent

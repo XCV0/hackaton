@@ -1,0 +1,113 @@
+Mor Geva, Daniel Khashabi, Elad Segal, Tushar Khot,
+Dan Roth, and Jonathan Berant. 2021. Did aristo-
+tle use a laptop? a question answering benchmark
+with implicit reasoning strategies. Transactions of
+the Association for Computational Linguistics, pages
+346–361.
+Arnav Gudibande, Eric Wallace, Charlie Snell, Xinyang
+Geng, Hao Liu, Pieter Abbeel, Sergey Levine, and
+Dawn Song. 2023. The false promise of imitating
+proprietary llms. ArXiv preprint.
+Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pa-
+supat, and Ming-Wei Chang. 2020. Retrieval aug-
+mented language model pre-training. In Proceedings
+of ICML, pages 3929–3938.
+Edward J Hu, Phillip Wallis, Zeyuan Allen-Zhu,
+Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen,
+et al. 2022. Lora: Low-rank adaptation of large lan-
+guage models. In Proceedings of ICLR.
+Shengding Hu, Yuge Tu, Xu Han, Chaoqun He, Ganqu
+Cui, Xiang Long, Zhi Zheng, Yewei Fang, Yuxiang
+Huang, Weilin Zhao, et al. 2024. Minicpm: Un-
+veiling the potential of small language models with
+scalable training strategies. ArXiv preprint.
+Gautier Izacard and Edouard Grave. 2021. Distilling
+knowledge from reader to retriever for question an-
+swering. In Proceedings of ICLR.
+Gautier Izacard, Patrick S. H. Lewis, Maria Lomeli,
+Lucas Hosseini, Fabio Petroni, Timo Schick, Jane
+Dwivedi-Yu, Armand Joulin, Sebastian Riedel, and
+Edouard Grave. 2023. Atlas: Few-shot learning with
+retrieval augmented language models. Journal of
+Machine Learning Research, pages 251:1–251:43.
+Zhengbao Jiang, Frank F Xu, Luyu Gao, Zhiqing Sun,
+Qian Liu, Jane Dwivedi-Yu, Yiming Yang, Jamie
+Callan, and Graham Neubig. 2023. Active retrieval
+augmented generation. In Proceedings of EMNLP,
+pages 7969–7992.
+Mandar Joshi, Eunsol Choi, Daniel Weld, and Luke
+Zettlemoyer. 2017. TriviaQA: A large scale distantly
+supervised challenge dataset for reading comprehen-
+sion. In Proceedings of ACL, pages 1601–1611.
+Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick
+Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and
+Wen-tau Yih. 2020. Dense passage retrieval for
+open-domain question answering. In Proceedings
+of EMNLP, pages 6769–6781.
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+field, Michael Collins, Ankur Parikh, Chris Alberti,
+Danielle Epstein, Illia Polosukhin, Jacob Devlin, Ken-
+ton Lee, Kristina Toutanova, Llion Jones, Matthew
+Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob
+Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+ral questions: A benchmark for question answering
+research. Transactions of the Association for Compu-
+tational Linguistics, pages 452–466.
+Mike Lewis, Yinhan Liu, Naman Goyal, Marjan
+Ghazvininejad, Abdelrahman Mohamed, Omer Levy,
+Veselin Stoyanov, and Luke Zettlemoyer. 2020a.
+BART: Denoising sequence-to-sequence pre-training
+for natural language generation, translation, and com-
+prehension. In Proceedings of ACL, pages 7871–
+7880.
+Patrick S. H. Lewis, Ethan Perez, Aleksandra Pik-
+tus, Fabio Petroni, Vladimir Karpukhin, Naman
+Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih,
+Tim Rocktäschel, Sebastian Riedel, and Douwe
+Kiela. 2020b. Retrieval-augmented generation for
+knowledge-intensive NLP tasks. In Proceedings of
+NeurIPS.
+Xinze Li, Sen Mei, Zhenghao Liu, Yukun Yan, Shuo
+Wang, Shi Yu, Zheni Zeng, Hao Chen, Ge Yu,
+Zhiyuan Liu, et al. 2024. Rag-ddr: Optimizing
+retrieval-augmented generation using differentiable
+data rewards. ArXiv preprint.
+Xi Victoria Lin, Xilun Chen, Mingda Chen, Weijia
+Shi, Maria Lomeli, Richard James, Pedro Rodriguez,
+Jacob Kahn, Gergely Szilvasy, Mike Lewis, Luke
+Zettlemoyer, and Wen tau Yih. 2024. RA-DIT:
+Retrieval-augmented dual instruction tuning. In Pro-
+ceedings of ICLR.
+Wang Ling, Dani Yogatama, Chris Dyer, and Phil Blun-
+som. 2017. Program induction by rationale genera-
+tion: Learning to solve and explain algebraic word
+problems. In Proceedings of ACL, pages 158–167.
+Nelson F Liu, Kevin Lin, John Hewitt, Ashwin Paran-
+jape, Michele Bevilacqua, Fabio Petroni, and Percy
+Liang. 2024. Lost in the middle: How language mod-
+els use long contexts. Transactions of the Association
+for Computational Linguistics, pages 157–173.
+Alex Mallen, Akari Asai, Victor Zhong, Rajarshi Das,
+Daniel Khashabi, and Hannaneh Hajishirzi. 2023.
+When not to trust language models: Investigating
+effectiveness of parametric and non-parametric mem-
+ories. In Proceedings of ACL, pages 9802–9822.
+Jesse Mu, Xiang Lisa Li, and Noah Goodman. 2023.
+Learning to compress prompts with gist tokens. In
+Proceedings of NeurIPS.
+Rafael Rafailov, Archit Sharma, Eric Mitchell, Christo-
+pher D Manning, Stefano Ermon, and Chelsea Finn.
+2024. Direct preference optimization: Your language
+model is secretly a reward model. In Proceedings of
+NeurIPS.
+Ori Ram, Yoav Levine, Itay Dalmedigos, Dor Muhlgay,
+Amnon Shashua, Kevin Leyton-Brown, and Yoav
+Shoham. 2023. In-context retrieval-augmented lan-
+guage models. Transactions of the Association for
+Computational Linguistics, pages 1316–1331.
+Weijia Shi, Sewon Min, Michihiro Yasunaga, Min-
+joon Seo, Richard James, Mike Lewis, Luke Zettle-
+moyer, and Wen-tau Yih. 2024. REPLUG: Retrieval-
+augmented black-box language models. In Proceed-
+ings of NAACL-HLT, pages 8371–8384.
+12866

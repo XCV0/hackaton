@@ -1,0 +1,31 @@
+protection. Marine environmental law is constantly expanding in both scope and com-
+plexity as governments and international institutions tackle urgent ecological crises,
+including climate change, biodiversity loss, and pollution. The process of evaluating
+these legal measures remains time-consuming and requires in-depth expertise, making
+it a appropriate testing ground for norm-to-indicator computation. The study focuses
+on two prohibitions with measurable legal impact:
+• The ban on plastic bags.
+• The ban on bottom trawling.
+Each ban is assessed through an evaluation grid for legal indicators covering 11 stan-
+dardized questions, designed jointly by legal, ecological, and economic experts, detailed
+in the Table 2. These questions measure the applicability, characteristics, scope, and
+operationalization of the prohibition. This setup therefore provides a clear and repro-
+ducible setting for testing N2I-RAG’s performance in a real-world application, to
+translate legal norms into structured, indicator-level outputs.
+Table 2: The legal indicator is an agregation of 11 metrics. Blue and green metrics quantify the
+reach of the ban (scope extent and exception scarcity, respectively), while red and yellow
+represent operationalization (penalties and control mechanisms).
+Evaluation metrics Output
+1. The ban is specified by a legal article
+0 or 1
+2. The ban is nationwide in scope
+3. The ban is permanent in nature
+4. Details of banned activities is documented
+5. There are no exceptions to the rule
+6. Exemptions are restricted to a few specific cases
+7. A monetary fine is imposed
+8. A jail sentence is outlined
+9. A designated authority is tasked with enforcement
+10. A control process with a defined duration is established
+11. A location-specific control procedure is detailed
+10

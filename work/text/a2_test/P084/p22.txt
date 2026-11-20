@@ -1,0 +1,54 @@
+Table 23: Qualitative comparison of generated responses and retrieved contexts across different methods.
+Component Text
+Question I’ve been feeling so lost since my mother passed away last year. I’ve tried to keep busy, but I can’t shake this emptiness. I thought
+giving her a gift might help me feel closer to her, but it only made me feel more alone.
+Answer I’m truly sorry for your loss, and I can only imagine how difficult it’s been for you since then. It’s common for people to seek ways to
+connect with their loved ones after they’ve passed, and giving a gift is a natural expression of love and appreciation. However, it’s
+essential to acknowledge that the act of giving doesn’t change the fact that your mother is no longer with us. Instead, let’s focus on
+the memories and experiences you shared with her, and how those can continue to bring you comfort and joy.
+Baseline: gpt-embed-3-large
+Retrieved I’m sorry for your loss and the pain you’re experiencing. It’s natural to feel a range of emotions, including guilt and sadness, after the
+loss of a loved one. Your efforts to keep busy with work and taking care of your family are commendable, but it’s important to
+acknowledge and process your emotions related to your mother’s passing. Avoiding the topic with your family might make it harder
+for you to heal, as sharing your feelings with them can provide a sense of support and connection. Consider seeking the help of a
+grief counselor or therapist to work through these emotions and develop healthy coping mechanisms. Remember, it’s okay to feel
+sadness and grief, and it’s important to give yourself the time and space to process these emotions.
+Response I’m truly sorry to hear about the loss of your mother and the profound emptiness you’re feeling in her absence. It’s completely
+understandable to seek ways to feel connected to her, but it’s also important to recognize that grief can manifest in many ways, often
+leaving us feeling more isolated. Keeping busy can sometimes serve as a distraction, but it doesn’t always help us process the deep
+emotions associated with loss. It might be beneficial to allow yourself the space to truly feel your grief and to honor your mother’s
+memory in ways that resonate with you. Consider reaching out to friends, family, or a grief counselor who can support you through
+this difficult time. Remember, it’s okay to feel lost and to seek help as you navigate this journey.
+Baseline: Light-RAG
+Retrieved I’m truly sorry for the loss of your mother and the challenges you’ve been facing in your personal and professional life. It’s
+understandable that you’re feeling overwhelmed and unable to cope with everything that’s happening. The grieving process can be a
+complex and lengthy one...
+Response I’m truly sorry for your loss. Many people find themselves trying to keep busy, but sometimes that can leave us feeling even more
+isolated, as you’ve experienced with the gift you tried to give. It’s understandable to want to feel closer to her and to express your
+love in that way. Grief work is an important part of processing these emotions, and it’s essential to allow yourself to feel and honor
+your pain...
+Baseline: RAG-Anything
+Retrieved Your feelings of guilt and regret are common reactions to a loss, especially when there are unresolved emotions or unspoken words
+between the deceased and the survivor. It’s essential to recognize that these feelings are a natural part of the grieving process and that
+it’s important to allow yourself to experience them fully...
+Response I’m truly sorry to hear about the loss of your mother and the deep sense of emptiness you’re feeling. It’s completely natural to feel
+lost after such a significant loss, and many people experience similar emotions as they navigate their grief. The act of giving a gift to
+feel closer to her shows your love and desire to connect; however, it’s also important to recognize that grief can often feel isolating,
+despite our efforts to cope...
+CogRAG (our method)
+Appraisal The patient appraises the situation as an enduring harm/loss triggered by the death of the mother and reactivated by efforts to
+cope—keeping busy and the symbolic act of giving a gift—both of which serve as cues that her attachment goal cannot be met. At
+the level of primary appraisal, the event is highly relevant and starkly incongruent with core aims of secure attachment...
+CBT What you’re feeling makes so much sense, and many people in the first years after losing a parent describe this same mix of
+emptiness and loneliness despite trying to keep busy or do something meaningful to feel close. I’m hearing an underlying fear that
+without being able to actively care for her—like giving a gift—you’re losing your bond...
+Retrieved I’m truly sorry for your loss, and I can only imagine how difficult it’s been for you since then. It’s common for people to seek ways to
+connect with their loved ones after they’ve passed, and giving a gift is a natural expression of love and appreciation. However, it’s
+essential to acknowledge that the act of giving doesn’t change the fact that your mother is no longer with us. Instead, let’s focus on
+the memories and experiences you shared with her, and how those can continue to bring you comfort and joy.
+Response I’m truly sorry for your loss, and I can only imagine how difficult it has been for you since your mother passed away. It’s completely
+natural to feel lost and empty during this time, especially when you’re trying to find ways to connect with her memory, like giving a
+gift. However, it’s important to acknowledge that these gestures, while meaningful, can sometimes lead to feelings of loneliness
+instead of comfort. Grief is a complex and personal journey, and it’s essential to allow yourself to feel all the emotions that come
+with it...
+13821

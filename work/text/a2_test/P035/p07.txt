@@ -1,0 +1,98 @@
+Settings NQ TriviaQA PopQA 2Wiki HotpotQA
+EM EM EM EM EM
+DRAGRetIter=0 34.40 60.40 37.60 26.00 30.20
+DRAGRetIter=1 36.80 60.80 37.40 29.20 31.40
+DRAGRetIter=2 36.80 60.76 37.50 29.60 30.80
+DRAGRetIter=3 36.80 60.80 37.60 28.80 30.80
+DRAGRetIter=4 37.00 60.80 37.60 29.00 31.00
+DRAGResIter=0 38.20 57.20 39.60 16.00 28.20
+DRAGResIter=1 37.60 62.40 39.20 27.80 33.40
+DRAGResIter=2 38.20 60.20 38.80 28.20 31.20
+DRAGResIter=3 36.80 60.80 38.60 28.80 30.80
+DRAGResIter=4 37.00 60.60 38.80 27.20 31.00
+Table 2: Model performance with respect to the iteration
+round of debate.
+Benchmark Debate Rounds Query Counts
+Single-hop
+NQ 1.27 1.06
+TriviaQA 1.33 1.08
+PopQA 1.31 1.07
+StrategyQA 1.18 1.07
+Multi-hop 2Wiki 1.57 1.17 HotpotQA 1.46 1.17
+Table 3: The average number of debate rounds and the
+counts of queries in the retrieval debate stage of DRAG
+on single-hop QA tasks and multi-hop QA tasks.
+rounds generally enhances performance by progres-
+sively refining the retrieval pool. For instance, on
+2WikiMultihopQA, performance improves from
+26.00 (RetIter=0) to 29.60 (RetIter=2) before stabi-
+lizing. This trend indicates that iterative refinement
+helps mitigate retrieval noise and improves knowl-
+edge coverage. However, beyond a certain thresh-
+old (e.g., RetIter=3), additional debate rounds con-
+tribute marginal gains. We attribute this to the
+convergence of the retrieval pool in the Retrieval
+Debate stage.
+Response debates enhance reasoning but risk
+problem drift. In the Response Debate stage, per-
+formance initially improves as adversarial discus-
+sions enhance factual consistency, but excessive de-
+bate rounds lead to performance degradation. This
+is particularly evident in TriviaQA, where the EM
+score drops from 62.4 (ResIter=1) to 60.20 (Re-
+sIter=2), suggesting that early problem drift can
+emerge when excessive rounds introduce unnec-
+essary complexity. Similar effects are observed
+in HotpotQA and 2WikiMultihopQA, reinforcing
+the idea that over-iterating debates may amplify
+inconsistencies rather than resolve them.
+NQ TriviaQA 2Wiki HotpotQA
+Question Counts 139 176 338 331
+w/o fResDebate
+Avg EM 3.60 12.50 7.10 9.32
+Avg F1 12.93 23.42 18.01 19.04
+with fResDebate
+Avg EM 5.04 28.98 19.23 17.36
+Avg F1 18.50 40.21 28.52 29.64
+Table 4: Comparison of performance with and without
+fResDebate across different datasets.
+5.3 Analysis of the Retrieval Debate
+DRAG dynamically adapts retrieval strategies
+to task complexity. To examine DRAG’s re-
+trieval debates, we analyze debate rounds and query
+counts across single-hop and multi-hop QA tasks.
+Multi-hop QA requires retrieving interrelated evi-
+dence, demanding more iterative refinement than
+single-hop QA, which typically retrieves a single
+fact. Table 3 shows a clear adaptation pattern in
+DRAG’s retrieval behavior. Table 3 shows that for
+single-hop QA, DRAG converges quickly with min-
+imal refinement (1.18 to 1.33 debate rounds, 1.06
+to 1.08 queries per instance). For multi-hop QA, it
+engages in more debates (1.57 rounds for 2Wiki,
+1.46 for HotpotQA) and higher query counts (1.17
+rounds), ensuring adequate contextual retrieval.
+These results highlight DRAG’s adaptive retrieval
+mechanism, dynamically adjusting debate inten-
+sity to optimize efficiency and retrieval sufficiency
+based on task complexity.
+5.4 Analysis of the Response Debate
+Response debate enhances robustness against
+retrieval deficiency. To further examine DRAG’s
+ability to handle incomplete retrieval, we calculate
+the average EM with and without the Response De-
+bate on a subset of questions where the gold answer
+is absent from the retrieved documents. As shown
+in Table 4, this result further reinforces DRAG’s ad-
+vantage over conventional RAG models by mitigat-
+ing the impact of incomplete retrieval and ensuring
+a more robust and verifiable response generation
+process.
+Enhances the final response’s alignment with
+the retrieved evidence. To assess the impact of re-
+sponse debates on factual consistency, we analyze
+the Response Debate stage in DRAG. As shown in
+Figure 3, this case study illustrates how multi-agent
+debates iteratively refine responses, correcting inac-
+curacies and reinforcing evidence-based reasoning.
+15845

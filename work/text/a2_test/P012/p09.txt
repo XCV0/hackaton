@@ -1,0 +1,138 @@
+LLM-Specific Utility for Retrieval-Augmented Generation CIKM ’26, November 07–11, 2026, Rome, Italy
+Table 6: RAG accuracy (%) with various evidence sources across multiple datasets and LLMs. Bold numbers indicate the best
+result within the same block. Superscripts †, ★, and ‡ mark statistically significant improvements over RAG with other methods’
+results, RAG with likelihood-ranked results, and over RAG with initial retrieval results within the same block using the paired
+t-test (𝑝 < 0.05), respectively.
+Source
+NQ HotpotQA TQ MQ FEVER 2WikiQA
+OverallUnknown Known Unknown Known Unknown Known Unknown Known Unknown Known Unknown Known
+Llama3.1-8B-Instruct (Utility-Based Selection)
+Initial Retrieval (Top-20) 42.62 85.41 25.92 80.82 70.05 94.22 31.19 79.58 69.26 92.61 24.97 62.85 58.63
+PVS (𝑤/ A) 43.45 85.89 27.09 82.79‡ 72.26‡ 95.21‡ 31.23 80.23 56.72 90.75 23.96 60.63 57.52
+LVS (𝑤/ A) 44.06‡ 85.70 28.62† 82.79‡ 71.11 94.86‡ 31.43 81.37 71.77†‡ 93.29†‡ 25.19 62.11 59.46†‡
+Llama3.1-8B-Instruct (Utility-Based Ranking)
+Retrieval (Top-5) 43.56 81.03 25.66 79.16 65.93 92.51 30.34 75.16 71.16 92.83 22.85 60.79 57.53
+AttR (Top-5) 32.01 74.03 17.77 67.25 51.45 87.01 23.81 69.28 61.91 83.80 18.65 54.71 50.19
+Likelihood (Top-5) 42.40 83.17 26.73‡ 80.43 70.58‡ 94.63‡ 30.73 76.96 69.65 92.37 24.78‡ 61.29 58.40‡
+LVR (𝑤/ A) (Top-5) 44.11★ 84.05‡ 27.99†‡★ 79.48 69.82 94.29 30.65 78.59‡ 72.72★ 93.71†‡★ 24.91‡ 62.27 59.14†‡★
+Qwen3-8B (Utility-Based Selection)
+Retrieval (Top-20) 49.30 86.16 28.65 85.30 77.64 94.48 34.73 80.68 77.32 95.99 23.73 70.57 59.88
+PVS (𝑤/ A) 46.35 85.73 26.81 87.93‡ 75.95 95.33‡ 31.36 77.10 60.65 95.67 17.42 78.32†‡ 57.35
+LVS (𝑤/ A) 49.81 85.02 30.24† 86.18 78.83† 94.14 34.36 78.71 78.03 95.95 28.44†‡★ 72.79 61.40†‡
+Qwen3-8B (Utility-Based Ranking)
+Initial Retrieval (Top-5) 46.86 83.45 24.97 82.59 72.52 92.88 32.88 73.35 76.95 95.45 22.70 68.67 58.05
+AttR (Top-5) 43.63 84.02 23.49 77.95 71.10 90.94 32.20 74.78 73.78 94.72 18.83 64.51 55.75
+Likelihood (Top-5) 46.63 83.88 27.10‡ 84.08‡ 75.67‡ 93.53 32.35 75.67 76.28 96.10‡ 22.01 70.63‡ 58.63‡
+LVR (𝑤/ A) (Top-5) 49.44†‡★ 84.45 29.32†‡★ 86.70†‡★ 76.77†‡★ 94.32†‡★ 33.71★ 76.21‡ 78.37†‡★ 95.87‡ 27.42†‡★ 72.10†‡ 60.81†‡★
+Selection Results
+L3.1-8B
+Q3-8B
+Q3-14B
+Q3-32BGenerator
+36.4 39.5 40.4 41.3
+37.8 39.7 41.4 41.3
+40.5 43.2 44.5 45.1
+43.0 45.1 46.3 46.7
+2WikiQA
+Selection Results
+41.0 42.0 42.0 42.7
+40.5 41.7 41.7 42.3
+43.9 44.6 44.8 45.7
+44.7 44.9 45.2 45.7
+HotpotQA
+Selection Results
+40.8 41.6 41.2 41.2
+42.0 42.1 41.9 41.9
+45.5 45.7 45.4 44.7
+46.9 47.0 46.6 46.9
+MS MARCO-FQA
+Selection Results
+59.0 59.8 60.2 59.9
+57.4 58.6 58.0 58.0
+60.8 61.6 61.4 61.3
+62.8 63.3 63.5 63.5
+NQ
+Selection Results
+89.1 89.3 89.6 89.8
+87.8 88.0 88.5 88.6
+89.6 89.7 90.2 90.6
+90.1 90.3 90.8 90.5
+TriviaQA
+Selection Results
+88.4 89.1 90.0 89.9
+91.6 91.7 92.5 92.2
+91.5 92.0 92.3 92.3
+91.7 91.7 92.5 92.4
+FEVER
+L3.1-8BQ3-8BQ3-14BQ3-32B
+Golden Utility
+L3.1-8B
+Q3-8B
+Q3-14B
+Q3-32BGenerator
+55.7 40.8 40.1 42.4
+36.8 54.8 40.5 40.8
+40.9 44.2 58.3 44.9
+42.7 44.7 44.9 60.5
+2WikiQA
+L3.1-8BQ3-8BQ3-14BQ3-32B
+Golden Utility
+53.4 41.4 41.6 40.9
+39.3 51.6 42.3 41.0
+43.2 45.3 56.0 46.1
+43.9 45.7 47.8 56.5
+HotpotQA
+L3.1-8BQ3-8BQ3-14BQ3-32B
+Golden Utility
+63.0 52.9 52.8 51.4
+51.8 66.7 56.3 54.0
+55.8 60.7 70.6 60.7
+55.3 59.6 61.5 70.0
+MS MARCO-FQA
+L3.1-8BQ3-8BQ3-14BQ3-32B
+Golden Utility
+76.2 65.9 65.5 64.4
+55.0 74.6 60.6 58.1
+60.9 66.8 76.8 65.2
+63.4 68.6 68.5 78.4
+NQ
+L3.1-8BQ3-8BQ3-14BQ3-32B
+Golden Utility
+95.8 90.0 88.9 87.7
+73.7 94.7 80.4 77.7
+82.0 90.0 95.8 86.2
+84.1 90.5 89.4 96.2
+TriviaQA
+L3.1-8BQ3-8BQ3-14BQ3-32B
+Golden Utility
+97.1 85.9 83.9 85.6
+86.0 97.1 86.0 85.3
+85.9 88.4 96.8 86.1
+89.4 89.4 87.8 97.2
+FEVER
+Figure 6: RAG accuracy (%) with selection results using LVS𝑤𝑖𝑡ℎ Answer (1st row) vs Gold Utilitarian Passage (2nd row).
+• Pointwise Verbalized Selection (PVS 𝑤𝑖𝑡ℎ𝑜𝑢𝑡 A): Each passage
+𝑑𝑖 ∈ D is independently evaluated with a binary prompt for
+utility.
+• Listwise Verbalized Selection (LVS 𝑤𝑖𝑡ℎ𝑜𝑢𝑡 A): The full candidate
+set D is presented, and the LLM selects the subset of useful
+passages.
+• Pointwise Verbalized Selection with pseudo-answer (PVS 𝑤𝑖𝑡ℎ
+A): Each passage is judged individually, with reference to a
+pseudo-answer.
+• Listwise Verbalized Selection with pseudo-answer (LVS 𝑤𝑖𝑡ℎ A):
+The entire set is presented, and the LLM selects useful passages
+with reference to a pseudo-answer.
+Utility-Based Ranking Methods. These methods rank pas-
+sages by their estimated utility. Approaches include:
+• Listwise Verbalized Ranking [53] (LVR 𝑤𝑖𝑡ℎ𝑜𝑢𝑡 A): The LLM pro-
+duces an explicit ranking of passages, without a pseudo-answer.
+• Listwise Verbalized Ranking with pseudo-answer [53] (LVR 𝑤𝑖𝑡ℎ
+A): The LLM produces an explicit ranking with reference to a
+pseudo-answer.
+• Attention-based Utility Ranking (AttR) [10]: Passage utility is
+inferred from the LLM’s attention weights during answer gener-
+ation and normalized.
+• Likelihood-based Utility Ranking (Likelihood) [35]: Utility is
+quantified by the conditional probability of generating the pseudo-
+answer given each passage, i.e.,𝑃(𝑎|𝑞,𝑑𝑖).

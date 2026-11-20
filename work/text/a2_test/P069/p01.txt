@@ -1,0 +1,75 @@
+Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 45274–45290
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+GRAD: Generalizing RAG Adaptation with Decoding
+Youngwon Lee1* Seung-won Hwang1† Zhewei Yao2 Yuxiong He2
+1Seoul National University 2Snowflake AI Research
+Abstract
+Retrieval-augmented generation needs genera-
+tion to follow retrieved evidence across shift-
+ing domains and prompt layouts, but training a
+new stronger model per task is costly. To this
+end, we propose GRAD, an adaptive decoding-
+time framework that keeps the base generator
+fixed and composes small, objective-specific
+guidance at inference. A key advantage of this
+design is enabling mix and match diverse RAG
+objectives: model scaling (MS), domain adap-
+tation (DA) and positional debiasing (DB) can
+be integrated as token-level guidance terms,
+and new objectives can be easily plugged in.
+Across public benchmarks and private settings
+with no in-domain labels, GRAD improves ac-
+curacy with favorable latency, offering strong
+trade-offs versus scaling while reliably activat-
+ing helpful objectives and suppressing harmful
+ones, adaptively to tasks.
+1 Introduction
+This paper studies how to steer Retrieval-
+Augmented Generation (RAG) objectives without
+retraining large language models (LLMs). Early
+steering work showed that one can shape a base
+model’s next-token distribution at inference time.
+To illustrate, Proxy Tuning (Liu et al., 2024a), with-
+out finetuning a large model M into M ′, mimics
+its effect by finetuning smaller helper models m
+into m′. Instead of directly finetuning M → M ′,
+it mimics the behavior difference between smaller
+counterparts, which has been reported as prior work
+for approximating narrow finetuning objectives
+with well-supervised behaviors, such as toxicity
+reduction or stylistic control.
+Our goal is to generalize steering for RAG adap-
+tation objectives. Given a base model, there are
+well-known adaptation goals: domain adaptation
+* Work done while at Snowflake.
+† Correspondence to: seungwonh@snu.ac.kr.
+Figure 1: GRAD replaces monolithic retraining of M ′
+by aggregating smaller models. Task-level adaptation
+knobs turn on useful signals while turning off harmful
+ones. This allows to adapt to different tasks, in which a
+specific objective may help or hurt.
+when retrieved passages contain specialized knowl-
+edge that base model may not already possess, and
+positional debiasing when long contexts include
+distractors or when key evidence appears later in
+the sequence. These objectives often interact and
+possibly conflict with each other. Consequently,
+training a single specialized model M ′ to repre-
+sent the “right” mixture of competing objectives
+for every scenario becomes impractical.
+We thus take a different view: instead of search-
+ing for a single, task-specific M ′, we prepare a
+small set of steering objectives implemented as
+helper models that produce token-level guidance
+scores, and ‘knobs’ γ’s to adapt the right mixture
+for the given scenario. This shifts the problem from
+training a monolithic model for each specific task
+into (a) building a set of helper models and (b)
+integrating with knobs.
+To this end, we present GRAD (Generalizing
+Retrieval-augmented generation Adaptation with
+Decoding), a unified decoding-time framework for
+RAG that adaptively activates objectives per task.
+We instantiate GRAD with three widely used RAG
+objectives, Model Scaling (MS), Domain Adap-
+45274

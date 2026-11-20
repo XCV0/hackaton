@@ -1,0 +1,67 @@
+Table 9: The OOD performance of unseen supporting documents. The highest Match(M) and lowest First Token
+Inference Time(FTIT) is bolded.
+Method Datasets
+NQ TriviaQA WQ TREC SQuAD Average Average FTIT
+RAG 69.97 27.44 49.75 39.29 59.62 49.21 3268
+ICAE(×4) 61.66 26.26 50.25 35.71 47.97 44.37 1052
+ACC-RAG(ours) 63.34 26.56 50.75 39.29 51.60 46.31 673
+Figure 6: Results of different granularity sequences
+for compressor under inference granularity sequence
+[1, 2, 8, 32]. In the legend, G0-G3 denote [32], [1, 32],
+[1, 2, 8, 32], [1, 2, 4, 8, 16, 32] respectively.
+Table 11: The results of ACC-RAG in Llama3 for scal-
+ability study. For each dataset, two columns represent
+Match (M) and First Token Inference Time (FTIT).
+Model Method Datasets
+NQ TriviaQA
+Llama3-3B
+- 36.37 65 15.33 101
+RAG 40.72 1037 22.26 966
+ACC-RAG 38.76 180 18.62 225
+Llama3-8B
+- 39.72 139 20.56 235
+RAG 44.43 2169 23.64 2089
+ACC-RAG 41.32 380 21.19 489
+I OOD Analysis
+To validate the OOD capability of our method, we
+conduct evaluations from two perspectives: (1) un-
+seen supporting documents and (2) unseen queries
+from different domains. The former is evaluated
+on the unseen Devset where each case utilizes a
+ground-truth supporting document absent from the
+pretraining dataset. Results in Table 9 demonstrate
+that our method outperforms the strongest base-
+line in both effectiveness and efficiency. Compared
+to Vanilla RAG, our approach achieves over 4×
+faster inference speed while maintaining compa-
+rable accuracy across three datasets, with supe-
+rior performance observed on two datasets. The
+Figure 7: Results of different granularity sequences for
+compressor under inference granularity sequence [1, 32].
+In the legend, G0-G3 denote [32], [1, 32], [1, 2, 8, 32],
+[1, 2, 4, 8, 16, 32] respectively.
+Table 12: The OOD performance on unseen queries
+from different domains. For each dataset, two columns
+represent Match (M) and First Token Inference Time
+(FTIT).
+Method Datasets
+HotpotQA FEVER
+LLM 33.70 290 74.44 293
+RAG 44.96 3313 83.60 3325
+ICAE(×4) 40.96 1114 79.62 1120
+ACC-RAG(ours) 41.98 689 81.55 693
+latter evaluation employs additional dataset from
+two distinct tasks (HotpotQA (Yang et al., 2018)
+and FEVER (Thorne et al., 2018)). As shown
+in Table 12, our method again demonstrates su-
+perior performance compared to strongest baseline
+while maintaining the 4× speed improvement over
+Vanilla RAG without compromising accuracy on
+both datasets.
+J Additional Computation Analysis
+On the NQ dataset, our method achieves an average
+FTIT of 630, with the selector accounting for 47
+(~7% of total time). This selective mechanism en-
+ables our method to outperform RAG (3264 FTIT)
+and fixed-ratio compression approaches with same
+24075

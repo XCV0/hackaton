@@ -1,0 +1,39 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 11
+the same period. In total, we have 800 training samples of financial instruction
+data.
+5.2 Evaluation metrics
+In this section, we present both quantitative and qualitative outcomes from
+our experimentation with a financial-augmented LLM using samples of earn-
+ings analysis question-answer (QA). To benchmark our model’s performance, we
+compared it against two baselines: Llama-2, a general open-source LLM from
+Meta [12], and GPT-3.5, a commercial LLM from OpenAI. All three models
+were equipped with the same financial contexts and questions. Our evaluation
+leverages two key metrics: correctness and semantic similarity. Correctness as-
+sesses the model’s ability to provide accurate answers to the given questions.
+As both the generated and ground-truth answers are in natural language, we
+define the evaluation scores on a scale from 1 to 10 and employ GPT-4 as the
+reference for judgment since GPT-4 can provide human-equivalent evaluation.
+Semantic similarity gauges how closely the generated responses align with the
+base answers, with lower values indicating better alignment.
+The prompting for GPT-4 judgment is show in the listing 1.1.
+Listing 1.1: GPT-4 Judge Prompt
+You are an expert evaluator. Your task is to compare a candidate answer
+against a reference answer and assign a numeric score based on the
+scoring rubric provided. You must follow the rubric strictly and output
+only the final score as an integer from 1 to 10.
+Score 1: The answer is completely unrelated to the reference.
+Score 3: The answer has minor relevance but does not align with the
+reference.
+Score 5: The answer has moderate relevance but contains inaccuracies.
+Score 7: The answer aligns with the reference but has minor errors.
+Score 9: The numbers match perfectly, structure is similar.
+Score 10: Completely accurate and perfectly aligned.
+5.3 Quantitative comparison
+In this section, we offer a quantitative analysis of our model in comparison to two
+baseline models, employing the aforementioned evaluation metrics of correctness
+and semantic similarity. The quantitative results are displayed in Table 3, un-
+equivocally demonstrating the superior performance of our augmented model in
+the financial domain when contrasted with the open-source Llama-2. Remark-
+ably, our model achieves comparable results to the commercial model, GPT-3.5.
+These findings underscore the efficacy and competitiveness of our approach, po-
+sitioning it as a noteworthy advancement in the field.

@@ -1,0 +1,96 @@
+A Appendix
+A.1 Models Evaluation
+Beside the models from ColPali, we have evalu-
+ated on text based methods. Following the ColPali
+framework, we adopt Unstructured as our PDF
+parser in its high-resolution configuration, which
+relies on the Tesseract (Smith, 2007) OCR en-
+gine. Unstructured processes each document into
+two main types of chunks: text chunks and visual
+chunks (e.g., tables, figures, images). We then con-
+struct two text-based variants of our benchmark,
+differing in how visual chunks are converted into
+text:
+1. OCR: Text is retained; tables, figures, and im-
+ages undergo OCR extraction.
+2. Captioning: Text remains unchanged; visual
+elements are described using Qwen2.5-VL-72B-
+Instruct.
+Retrieval Methods. We evaluate two retrieval
+approaches:
+• Okapi BM25: A sparse statistical baseline.
+• BGE-M3 (multi-vector): A state-of-the-art em-
+bedding model.
+In line with ColPali, chunks are embedded and
+scored independently, and page-level scores are
+then obtained via maximum pooling across all
+chunks for a given page.
+A.2 Data Generation, Filtering and Validation
+To construct a high-quality benchmark, we applied
+a conservative filtering strategy that prioritizes pre-
+cision over recall—favoring the exclusion of low-
+quality queries even at the cost of discarding valid
+ones. Setting a precise confidence threshold for
+VLMs/LLMs is non-trivial, so we experimented
+with multiple prompt templates for filtering. For
+each prompt, we sampled 150 queries, manually la-
+beled them as good or bad, and selected the prompt
+that minimized the percentage of bad queries that
+passed the filter. Since the original pool of gen-
+erated queries was large, our emphasis was on re-
+ducing false positives rather than preserving query
+volume.
+We then manually reviewed queries that passed
+the filter and added representative errors as neg-
+ative examples to the prompt context, improving
+robustness through iterative refinement. This pro-
+cess led to fewer recurring mistakes and was vali-
+dated through human evaluation, where 85.0% of
+our queries were rated as good compared to 43.6%
+for ViDoRe.
+Validating label correctness at scale is more chal-
+lenging, as it would require exhaustively comparing
+each query to all documents. Instead, we qualita-
+tively inspected queries with known answer pages
+to tune the labeling prompt. As shown in section 4,
+our benchmark yields significantly fewer false neg-
+atives than competing datasets.
+We also conducted a false positive validation to
+assess label quality. Specifically, we randomly sam-
+pled 200 query–page pairs from each of the three
+benchmarks: ViDoRe, MMLong, and ours. An-
+notators were shown the page image alongside its
+corresponding query and asked whether the page
+contained an answer to the query. The results show
+0% false positives in both our benchmark and Vi-
+DoRe, while MMLong exhibited a high false pos-
+itive rate of 38.1%. These findings highlight the
+effectiveness of our benchmark generation pipeline
+in preventing false positive examples.
+A.3 Proposed Training sets and Fine-tuning
+Rephrasing Augmentation Training. We aimed
+to fine-tune a trained model with a short training
+phase to improve robustness to rephrasing. To
+achieve this, we created a rephrased training set
+based on the ColPali training data. Specifically, we
+used approximately half of the full training set (56k
+queries) and generated rephrased versions. The
+rephrasing was performed using LLaMA-3-70B, a
+different LLM than the one used for filtering and
+rephrasing in the benchmark.
+Each query was randomly rephrased using one
+of three rephrasing levels (different prompts, see
+Fig. S6). To ensure semantic consistency, we used
+a secondary LLM verification step: the original
+query and its corresponding answer were fed along-
+side the rephrased query, and if the meaning was
+not preserved, the original query was retained in
+the rephrased training set.
+For fine-tuning, we used the full ColPali training
+set, incorporating the rephrased queries in approx-
+imately half of it. The model was trained for one
+epoch with configurations similar to those used in
+the original ColPali/ColQwen training.
+Table and Finance-Focused Training. As we
+observed that current models performed signifi-
+31671

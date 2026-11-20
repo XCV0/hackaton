@@ -1,0 +1,97 @@
+and CsPbBr3 is not suitable for electron transport because a large
+ΔEc value is expected due to the small electron afﬁnity
+of CsPbBr3 (3.3–3.4 eV).[39,40] In the simulations, we varied
+the ΔEc value to ﬁnd good material candidates for the ETL.
+ΔEc is deﬁned in Figure 2. Ec(CsPbBr3) and Ec(ETL) denote
+the conduction band positions (electron afﬁnity) for the
+CsPbBr3 layer and ETL, respectively. Here, the Ec(CsPbBr3)is
+3.37 eV. The balance band offset (ΔEv) was also deﬁned.
+Ev(CsPbBr3) and Ev(ETL) denote the balance band positions
+(absolute value of the energy difference between the valence band
+and the vacuum level) for the CsPbBr3 layer and ETL, respectively
+ΔEc ¼ EcðCsPbBr3Þ/C0EcðETLÞ (1)
+ΔEv ¼ EvðCsPbBr3Þ/C0EvðETLÞ (2)
+To investigate the effect of ΔEc, we only changed ΔEc by keep-
+ing ΔEv at a constant value of /C01.2 eV. The bandgap of the ETL was
+varied, as calculated in the following equation to keep ΔEv constant
+EgðETLÞ¼/C0ΔEc þ Eg ðCsPbBr3ÞþΔEv (3)
+We also investigated the effect of defects at the interface
+between the ETL and CsPbBr3 layer. In the simulations, a
+CsPbBr3 layer with a Gaussian-shaped defect with a defect
+density of 1 /C2 1019 cm/C03 was used. The peak position of the
+Gaussian defect was 1.19 eV, which is half the bandgap of the
+CsPbBr3 layer, whereas the energy width of the Gaussian defect
+was 0.1 eV. The thickness and carrier mobility of the CsPbBr3
+layer were ﬁxed at 300 nm and 10 cm2 Vs/C01, respectively.
+As subsequently mentioned, we selected gallium nitride
+(GaN) as a realistic ETL material for CsPbBr3 photovoltaic power
+converters and demonstrated the potential of GaN ETLs. After
+demonstrating the potential of GaN, the effect of the thickness
+and defect density of GaN ETLs was investigated. We also inves-
+tigated the inﬂuence of the interface defect by inserting a 1 nm
+thick interface layer between the ETL and CsPbBr3 layer. The
+electrical parameters of the interface layer are shown in Table 1.
+2.2. Effect of the Quality of CsPbBr3 Layer
+In addition to ΔEc, the electrical properties of CsPbBr3 are
+important for high-efﬁciency devices. We investigated the effect
+of defect density, carrier diffusion length, and thickness on
+device performance. In this section, we used nc-GaN[27] with
+an electron afﬁnity of 3.55 eV as the ETL material. We investi-
+gated the effect of defect density by varying the defect density
+from 5 /C2 1014 to 1 /C2 1019 cm/C03. We also investigated the effect
+of carrier diffusion length (LD). In our simulations, LD was cal-
+culated using the carrier diffusion constant (D) and the carrier
+lifetime (τ) as follows
+Table 1. Input parameters of CsPbBr3 solar cell.
+Parameters SpiroOMeTAD CsPbBr3 Interface ETL Buffer layer
+Conduction type P N N N N
+Thickness [nm] 40 variable:
+200–700
+1 variable:
+10–50
+50
+Electron afﬁnity [eV] 2.45 3.37 variable:
+2.57–4.17
+variable:
+2.57–4.17
+Variable
+3.9–4.4
+Bandgap [eV] 3 2.38 variable:
+2.38–1.58
+variable:
+4.38–2.78
+3.36
+Effective conduction band density [cm/C03] 2.2 /C2 1018 2.2 /C2 1018 2.2 /C2 1018 2.24 /C2 1018 2.2 /C2 1018
+Effective valence band density [cm/C03] 1.8 /C2 1019 1.8 /C2 1019 1.8 /C2 1019 4.6 /C2 1019 1.8 /C2 1019
+Effective electron mobility [cm2 Vs/C01]2/C2 10/C04 variable:
+10–1000
+10 10 20
+Effective hole mobility [cm2 Vs/C01]2/C2 10/C04 variable:
+10–1000
+10 10 10
+Doping density [cm/C03]2/C2 1018 1 /C2 1010 1 /C2 1010 1 /C2 1018 2.2 /C2 1018
+Total trap density [cm/C03]1/C2 1015 valuable:
+5 /C2 1014–1 /C2 1019 (4 /C2 1013)
+1 /C2 1019 1 /C2 1015 1 /C2 1015
+Illumination conditions: 450 nm (123 mW cm/C02), AM1.5G (100 mW cm/C02).
+V. L
+CsPbBr3
+Eg CsPbBr3
+Ec
+Ec
+Ec
+interface
+Ec < 0eV
+Ec >0eV
+Ev
+Ev
+Ev (constant)
+ETL Interface layer CsPbBr3
+ETL
+interface
+Figure 2. Detailed band alignment of ETL/CsPbBr3 layer interface. Two
+different cases, ΔEc >0 eV and ΔEc <0 eV, are shown in this ﬁgure.
+www.advancedsciencenews.com www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (3 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH
+ 18626319, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pssa.202400437, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

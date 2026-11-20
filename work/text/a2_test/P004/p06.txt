@@ -1,0 +1,97 @@
+vanilla pipeline; ReAct (Yao et al., 2023) and IR-
+CoT (Trivedi et al., 2023) as agent-based and itera-
+tive reasoning frameworks; Self-RAG (Asai et al.,
+2024) as an adaptive and self-corrective retrieval-
+augmented generation model; SeaKR (Yao et al.,
+2024) as a selective retrieval strategy; as well as R3-
+RAG (Li et al., 2025) and RAG-RL (Huang et al.,
+2025), which incorporate reinforcement learning
+for reward-driven generation.
+4.3 Evaluation Metrics.
+We assess model performance using a comprehen-
+sive set of metrics that capture both answer quality
+and factual reliability. Specifically, we use the F1
+score on HotpotQA, MuSiQue, and TriviaQA to
+evaluate lexical overlap with reference answers,
+and adopt the ROUGE-L metric for ASQA to bet-
+ter reflect performance on ambiguous questions.
+Additionally, we report Faithfulness (Faith) and
+Answer Relevance (AnsR) as defined by the RA-
+GAS framework (Es et al., 2024) to measure the
+degree to which generated answers are grounded in
+retrieved evidence and semantically aligned with
+the input query. This multi-faceted evaluation pro-
+vides a robust assessment of both correctness and
+factual consistency.
+4.4 Implementation Details.
+Our LCR-RAG framework employs a frozen
+Qwen3-8B (Yang et al., 2025) model as the
+core LLM generator. The PPO agent utilizes a
+lightweight MLP to learn a query optimization pol-
+icy from neuro-symbolic feedback. Query edits are
+executed by a separate, frozen Qwen3-1.7B model,
+decoupling decision-making from language realiza-
+tion. The verifier’s neural components comprise
+a fine-tuned DeBERTa-v3-large model for factual
+consistency and a T5-large model for structured
+logical parsing. All experiments were conducted
+on NVIDIA A100 GPUs. For full reproducibility,
+a comprehensive list of implementation details and
+hyperparameters—including learning rates, PPO
+clipping thresholds, and LCR reward weights—is
+provided in the Appendix A.
+5 Experimental Results
+5.1 Main Results
+As shown in Table 1, LCR-RAG achieves consis-
+tently higher performance scores across all four
+QA benchmarks compared to the baselines. Com-
+pared to the standard RAG pipeline, it achieves
+over 30% relative improvement in F1-type metrics,
+along with more than 10% gains in Faithfulness
+and Answer Relevance. When evaluated against
+stronger baselines such as ReAct and IRCoT, LCR-
+RAG delivers 5–10% higher accuracy, with notable
+improvements on complex tasks like MuSiQue and
+open-domain challenges such as TriviaQA. In com-
+parison to reinforcement learning-based models
+like R3-RAG and RAG-RL, LCR-RAG further im-
+proves Faithfulness by approximately 3% on av-
+erage, highlighting its superior factual alignment.
+These results demonstrate that LCR-RAG improves
+answer accuracy while producing semantically rele-
+vant and faithfully grounded responses, with robust
+and empirically consistent gains observed across di-
+verse QA scenarios and multiple LLM backbones,
+as further reported in Table 7.
+5.2 Ablation Study
+To rigorously validate our design choices, we con-
+ducted three distinct ablation studies on the Hot-
+potQA dataset.
+Ablation on Core Architectural Components
+We first carefully analyzed the impact of removing
+key modules from our proposed framework. As
+shown in Figure 3, removing the PPO Optimizer
+entirely (“w/o PPO Optimizer”) results in a sharp
+decline in performance, with results regressing to
+the level of a standard single-pass RAG system.
+This proves that the iterative, learned optimization
+loop is the fundamental mechanism responsible for
+effectively correcting errors. Similarly, removing
+the logic-consistency-driven reward while retain-
+ing PPO training (“w/o LCR Reward Signal”) also
+results in a substantial degradation, especially in
+Faithfulness (a 17-point drop), confirming that our
+neuro-symbolic reward signal is the crucial ingre-
+dient that enables the agent to learn effectively.
+Dissecting the Verifier’s Contribution To un-
+derstand which part of our verifier is more critical,
+we tested ablated versions under a “Contradictory
+Noise” condition. As shown in Figure 4, remov-
+ing the Formal Logic check (“w/o Logic Check”)
+causes the Faithfulness score to plummet from a
+robust 0.88 to a near-failure 0.48. This result indi-
+cates that the symbolic reasoning engine is critical
+to our framework’s robustness, confirming that for-
+mal logic verification is essential for identifying
+sophisticated reasoning errors.
+17905

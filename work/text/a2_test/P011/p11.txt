@@ -1,0 +1,28 @@
+A PREPRINT
+elements. In contrast, LPG is a graph data model that emphasizes thoughtful schema design. By explicitly defining
+nodes, labels, and relationships, we can optimize the graph for multi-hop traversal and group similar attributes, thereby
+reducing the number of nodes and relationships and improving retrieval efficiency.
+A practical guideline is to create dedicated nodes for each common or important attribute and to reuse these nodes across
+different fund types (e.g., ETFs, mutual funds, PPS). This normalization of labels and relationships minimizes errors
+during the text-to-Cypher conversion stage. Figure 3 illustrates a sample LPG node design for four labels—benchmark,
+mutual fund, ETF, and portfolio managers—demonstrating that queries related to portfolio managers or benchmarks
+can be resolved with a single-hop traversal.
+Figure 3: Sample Example of LPG Node Design
+Figure 3 illustrates the advantages of LPG schema design for queries such as “List all portfolio managers for AMCAP
+fund” or “List all funds with S&P 500 benchmark index.” In the agentic RAG approach, successful retrieval depends
+on whether all relevant portfolio managers are included in the retrieved context and whether the context is sufficiently
+noise-free to support reliable response generation. This approach also relies heavily on the embedding model’s ability
+to accurately capture fund names like “AMCAP”; otherwise, fine-tuning is required, and there is no guarantee of
+correctness. For more complex queries, such as “List all funds managed by a specific portfolio manager,” agentic RAG
+faces a fundamental limitation: the number of relevant documents to retrieve is unknown in advance, making it difficult
+to set retrieval parameters and often requiring iterative tuning per question, which is not scalable. The RDF-based design
+offers improvements by maintaining explicit references to fund abbreviations as sources and encoding relationships
+such as portfolio manager assignments. This structure increases the likelihood of retrieving relevant triplets for queries
+about funds and their managers. However, for queries like “List all funds managed by a given portfolio manager,” the
+algorithm may still struggle to select the correct nodes, potentially resulting in incomplete or incorrect answers.
+In contrast, the LPG approach enables deterministic and efficient traversal. For example, to answer queries about
+portfolio managers or benchmarks, the system can directly traverse from fund nodes to the relevant “portfolio manager”
+or “benchmark” labels and select the desired properties. This design ensures accurate and scalable retrieval for both
+simple and complex queries, as the graph schema is explicitly constructed to support such multi-hop traversals and
+attribute groupings.
+11

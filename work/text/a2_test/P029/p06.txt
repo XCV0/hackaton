@@ -1,0 +1,113 @@
+Plan Final Response
+Multimodal
+Image
+Audio
+Text
+...
+RAG
+D1
+D2
+D3
+...
+Extra Tool
+API Call 
+Code
+Interaction
+...
+Web Search
+Web Page1
+Web Page2
+Web Page3
+...
+Reflect
+Agent LLM Generate
+Figure 8: Online architecture in TWEN.
+if it deems the current answer insufficient, it will
+employ various tools in a multi-hop manner until
+reaching the final response.
+The system calls Qwen3-235B model
+asynchronously in streaming mode using
+LangChain’s AsyncIteratorCallbackHandler.
+During this call, the Langfuse (Clemo, 2024)
+CallbackHandler is activated, capturing the
+call metadata, including latency, token lengths,
+user id, session id, and retrieved chunk ids. This
+captured data is sent to Langfuse database, forming
+RAGPULSE trace dataset analyzed in this study.
+5 Dataset Usage and Applications
+To validate the effectiveness of proposed RAG-
+PULSE dataset for evaluating system performance
+in real-world environments, we have constructed
+a dedicated benchmarking platform. This section
+provides a detailed description of this platform’s
+specific implementation, the composition and us-
+age methodology of the dataset, and the perfor-
+mance evaluation metrics employed.
+5.1 Implementation
+We constructed a prototype system for an online
+RAG service to simulate real-world applications.
+The system’s core is built upon vLLM (v0.10.1)
+and LMCache (v0.3.1) (Kwon et al., 2023; Cheng
+et al., 2024; Liu et al., 2024; Yao et al., 2025a), a
+widely adopted open-source inference framework.
+To emulate a typical RAG workflow, the system
+integrates an end-to-end pipeline, encompassing
+user request reception, text processing, and final
+result generation. All experiments are conducted
+on a server equipped with a single NVIDIA A100
+GPU with 80GB VRAM. We deploy Qwen3-8B as
+the generator component of RAG pipeline.
+5.2 Scaling RAGPULSE to Any Scale
+RAGPULSE’s trace data is characterized by a sig-
+nificant temporal span. This property provides re-
+searchers with high flexibility, allowing them to
+slice or scale the trace data according to specific
+experimental goals. For example, a high-traffic pe-
+riod (e.g., one hour) can be isolated to benchmark
+the system’s peak concurrent processing capabili-
+ties. Conversely, the entire long-term trace can be
+used to assess the long-term efficacy of caching
+policies, such as the KV cache management. More-
+over, an analysis of throughput fluctuations in the
+trace enables a deeper comprehension of the sys-
+tem’s behavioral patterns under varying loads.
+5.3 Performance Metrics
+We evaluate the RAG serving system using two
+standard LLM-serving metrics that capture perfor-
+mance across prefill and decoding phases: (1) Time
+to First Token (TTFT), measuring end-to-end la-
+tency from request arrival to the first generated
+token and reflecting user-perceived responsiveness;
+and (2) Time Per Output Token (TPOT), measur-
+ing the average latency of subsequent tokens and
+reflecting generation throughput. This distinction
+is vital as prefill is compute-bound, whereas decod-
+ing performance is primarily limited by memory
+bandwidth (Agrawal et al., 2024; Qin et al., 2025).
+5.4 Demo Use
+The RAGPULSE benchmark employs a client-
+server architecture for workload replay. The
+server, built on vLLM, handles inference tasks
+via an OpenAI-compatible API, supporting both
+streaming and non-streaming modes to capture
+key metrics such as TTFT and TPOT. An asyn-
+chronous, concurrent design ensures stability and
+high throughput under heavy load.
+The client acts as the load generator. Its three-
+stage workflow includes: (1) preprocessing the
+trace file; (2) dispatching requests strictly adher-
+ing to original timestamps, with an optional time-
+scaling factor to adjust replay speed; and (3) record-
+ing performance metrics for subsequent analysis.
+6 System Optimization Validation
+While §5.1 demonstrates the basic integration of
+RAGPULSE in a prototype environment, this sec-
+tion provides a large-scale performance validation
+on authentic temporal traces to expose system be-
+haviors that general-purpose traces fail to capture.
+The experimental framework scales from the ini-
+tial prototype to a high-performance cluster, utiliz-
+ing eight NVIDIA A100 GPUs. Unlike the single-
+instance setup in our application examples, we de-
+ploy multiple Qwen3-8B instances to simulate a
+7070

@@ -1,0 +1,75 @@
+Table 18: Human evaluation of high-risk cases on MentalChat and CounselChat. SI: Suicidal Ideation; SH: Self
+Harm; AC: Anxiety Crisis; VT: Violent Thoughts; SA: Substance Abuse; RTB: Risk taking Behaviors.
+Methods Models MentalChat CounselChat
+SI SH AC VT SA RTB SI SH AC VT SA RTB
+Baseline
+gpt-embed-3-large 3.94 4.08 3.86 4.58 4.65 4.41 3.82 3.95 3.75 4.48 4.58 4.45
+Light-RAG 3.92 4.05 3.85 4.57 4.64 4.38 3.80 3.93 3.74 4.47 4.56 4.41
+RAG-Anything 3.91 4.06 3.87 4.59 4.66 4.39 3.83 3.94 3.77 4.49 4.59 4.42
+Qwen3-Embed-0.6B 3.93 4.07 3.84 4.56 4.65 4.40 3.81 3.96 3.76 4.48 4.57 4.39
+w_skillcard
+text-embed-3-large 4.02 4.25 3.98 4.64 4.68 4.53 3.94 4.08 3.85 4.54 4.61 4.51
+Light-RAG 3.99 4.21 3.94 4.61 4.67 4.49 3.89 4.04 3.82 4.51 4.58 4.46
+RAG-Anything 4.01 4.24 3.96 4.62 4.68 4.52 3.91 4.07 3.84 4.53 4.60 4.48
+Qwen3-Embed-0.6B 4.00 4.22 3.95 4.63 4.67 4.50 3.90 4.05 3.83 4.52 4.59 4.47
+Table 19: LLM judge (GPT-4.1) of high-risk cases on MentalChat and CounselChat.
+Methods Models MentalChat CounselChat
+SI SH AC VT SA RTB SI SH AC VT SA RTB
+Baseline
+gpt-embed-3-large 3.73 3.75 3.80 4.03 4.06 3.87 3.53 3.73 3.57 4.33 4.16 4.09
+Light-RAG 3.71 3.74 3.77 4.01 4.05 3.84 3.51 3.72 3.54 4.31 4.15 4.06
+RAG-Anything 3.69 3.72 3.75 3.99 4.03 3.82 3.49 3.70 3.52 4.29 4.13 4.04
+Qwen3-Embed-0.6B 3.67 3.71 3.72 3.97 4.02 3.79 3.47 3.69 3.49 4.27 4.12 4.01
+w_skillcard
+gpt-embed-3-large 4.16 4.44 4.15 4.73 4.75 4.67 4.12 4.28 4.09 4.65 4.71 4.65
+Light-RAG 4.14 4.41 4.14 4.71 4.74 4.68 4.08 4.27 4.07 4.64 4.69 4.57
+RAG-Anything 4.15 4.43 4.16 4.72 4.76 4.66 4.11 4.29 4.08 4.66 4.72 4.59
+Qwen3-Embed-0.6B 4.13 4.38 4.13 4.71 4.74 4.66 4.09 4.28 4.08 4.64 4.70 4.49
+thought patterns and effectively guiding the user
+toward cognitive restructuring, rather than merely
+providing superficial comfort.
+CBT Protocol Adherence Score (CPAS, 0.00–
+4.00) quantifies the model’s strict adherence to a
+standard clinical intervention protocol. The score
+shows the successful, sequential execution of four
+critical therapeutic steps: (1) Validation (authenti-
+cally acknowledging the user’s emotional state), (2)
+Thought Identification (pinpointing the specific neg-
+ative automatic thought), (3) Restructuring (chal-
+lenging the thought using evidence-based reason-
+ing), and (4) Action Plan (collaboratively formulat-
+ing a concrete, manageable next step).
+Socratic Questioning Index (SQI, 1.00–5.00)
+assesses the model’s execution of “guided discov-
+ery.” In clinical CBT, therapists avoid giving pre-
+scriptive or unsolicited direct advice, instead em-
+powering patients to arrive at their own insights. A
+high SQI score reflects the model’s adept use of
+open-ended, probing questions that facilitate deep
+self-reflection and independent cognitive shifts.
+A.10 Results on Multi-turn Datasets
+Table 21 presents the detailed evaluation results on
+the EmpatheticDialogues dataset.
+The results show that incorporating skill cards
+consistently improves both retrieval and response
+generation across all embedding models. Among
+all configurations, text-embedding-3-large with
+skill cards achieves the best overall performance,
+reaching Recall@1/5/10 scores of 22.03, 39.89,
+and 48.53, respectively, while also obtaining
+the highest BLEU-1 (13.79), ROUGE-1 (12.69),
+BERTScore (87.18), and LLM-judge score (6.78).
+Compared with its corresponding baseline, this con-
+figuration improves Recall@1 and Recall@5 by
+3.26 points and Recall@10 by 4.83 points. Al-
+though the improvements in generation metrics are
+more modest, their consistency indicates that skill
+cards help retrieve more relevant information and
+consequently produce higher-quality responses.
+A.11 Safety-planning Card Example
+Table 22 presents the detailed structure of safety-
+planning card SPC_001, which is designed to sup-
+port responses involving suicidal thoughts and re-
+lated triggers. The card specifies its risk level, tone,
+intent fit, triggers, goals, and step-by-step guid-
+13818

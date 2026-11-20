@@ -1,0 +1,43 @@
+10 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+– Conduct multi-hop reasoning, such as temporal comparisons or cross-metric
+correlations.
+– Generate human-like financial commentary aligned with analyst-style inter-
+pretations.
+In summary, the retrieval-augmented instruction tuning framework integrates
+contextual data generation and parameter-efficient fine-tuning to build a domain-
+adapted financial LLM. The retrieval process ensures factual grounding, while
+instruction tuning refines the model’s analytical expressiveness. Together, these
+two components yield a system capable of delivering accurate, interpretable, and
+contextually grounded financial reasoning.
+5 Experimental results
+5.1 Experiment configurations and set up
+We employ Llama-2-7B [12] as the base model and fine-tune it using the Low-
+Rank Adaptation (LoRA) method [6]. Following the QLoRA setup [2], we
+enable 4-bit (NF4) quantization using prepare model for kbit training. Our
+LoRA configuration uses a rank of 64, lora alpha = 16, and a dropout of 0.1,
+applied to all attention and feed-forward projection layers with no bias adap-
+tation. Fine-tuning is conducted using SFTTrainer with a maximum sequence
+length of 1024 tokens and packing enabled to improve training throughput.
+We train for 3 epochs with a global batch size of 8 (per-device batch size 2,
+gradient accumulation 2) using the paged adamw 32bit optimizer. The learning
+rate is set to 2e-5 with a constant schedule and a warmup ratio of 0.03. We
+disable gradient checkpointing and use ddp find unused parameters=False for
+efficient multi-GPU execution. The maximum gradient norm is clipped to 0.3.
+We employed the Google Cloud virtual machine for training on four Tesla
+T4 GPUs, each equipped with 16GB of RAM. Due to the limited compute
+capability and memory bandwidth of T4 GPUs combined with 4-bit QLoRA
+dequantization overhead and activation packing, the end-to-end fine-tuning of
+our 800-sample dataset requires approximately 40 hours.
+For the retrieval component, we use the text-embedding-3-large encoder
+to embed documents. The corpus is chunked into 512-token segments with a
+128-token overlap. At inference time, the retriever selects the top k=3 most
+relevant chunks using cosine similarity.
+To ensure the correctness of GPT-3.5–generated training data, we apply a
+two-stage quality control process: (1) rule-based filtering (format validation,
+length constraints, and inconsistency checks), and (2) manual inspection of a
+randomly sampled 15% subset to identify hallucinations, numerical inconsisten-
+cies, and unclear instructions. Problematic items are revised or removed before
+final training.
+We train our model on the financial instruction dataset generated on earnings
+reports from two companies in the semiconductor sector, Nvidia and AMD, in
+the third quarter of 2023 and evaluate the earnings report of Broadcom Inc. in

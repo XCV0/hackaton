@@ -1,0 +1,64 @@
+TABLE I: Driving Action Explanation and Justification Evaluation. B4, C, and M represent BLEU4, CIDEr, and METEOR,
+respectively, for measuring the accuracy and quality of textual driving explanation. The upper part indicates the evaluation on
+the in-distribution BDD-X test set. The lower part indicates the zero-shot generalisation evaluation on the Spoken-SAX dataset.
+Method Is Generalist? Action Justification B4 ↑ C ↑ M ↑ B4 ↑ C ↑ M ↑
+In Distribution Performance (BDD-X)
+S2VT [76] × 30.2 179.8 27.5 6.3 53.4 11.2
+S2VT++ [76] × 27.1 157.0 26.4 5.8 52.7 10.9
+SAA [39] × 31.8 214.8 29.1 7.1 66.1 12.2
+WAA [39] × 32.3 215.8 29.2 7.3 69.5 12.2
+ADAPT [35] × 34.6 247.5 30.6 11.4 102.6 15.2
+DriveGPT4 [81] ✓ 30.0 214.0 29.8 9.4 102.7 14.6
+OURS ✓ 34.3 260.8 30.7 11.1 109.1 14.8
+∆ w.r.t generalist SOTA +14.3% +21.9% +3.0% +18.1% +6.2% +1.4%
+Zero-shot Generalisation (Spoken-SAX) B4 ↑ C ↑ M ↑ B3 ↑ C ↑ M ↑
+ADAPT [35] × 0.0 22.3 26.7 3.1 8.6 12.4
+Base w/o ICL ✓ 0.0 5.7 21.6 2.1 4.7 11.4
+OURS w ICL ✓ 9.9 48.9 27.5 5.6 17.1 14.6
+∆ w.r.t SOTA +−% +119.3% +3.0% +80.6% +98.8% +17.7%
+TABLE II: Control Signals Prediction Accuracy Evaluation on BDD-X dataset.
+Method Course Speed
+RMSE(degree)↓ A0.1 ↑ A0.5 ↑ A1.0 ↑ A5.0 ↑ A10.0 ↑ RMSE(m/s)↓ A0.1 ↑ A0.5 ↑ A1.0 ↑ A5.0 ↑ A10.0 ↑
+ADAPT [35] 5.87 54.49 86.39 91.06 97.36 98.20 2.68 11.77 31.79 47.48 92.75 95.87
+DriveGPT4 [81] 4.57 69.22 79.14 84.47 95.72 96.74 1.09 56.93 77.77 87.97 99.00 99.57
+OURS 4.48 74.32 88.69 93.12 98.30 99.10 0.69 51.12 85.54 94.49 99.81 99.91
+TABLE III: Ablation Study on Retrieval Strategy and In-Context Learning Phase. Visual and Hybrid Search refers to the use
+of video embeddings or projected hybrid sensor embeddings, respectively. Training and Inference denote whether in-context
+learning examples are provided during the corresponding phase.
+Retrieval Strategy ICL Phase BDD-X
+Visual Search Hybrid Search Training Inference Act. B4 Act. C Jus. B4 Jus. C Speed Err. Course Err.
+29.8 222.1 5.9 58.9 0.67 5.61
+! ! 0.0 0.0 0.0 0.0 N/A N/A
+! ! 0.0 0.0 0.0 0.0 N/A N/A
+! ! ! 31.2 222.1 7.7 83.1 0.78 5.61
+! ! ! 34.3 260.9 11.1 109.1 0.69 4.48
+TABLE IV: Ablation Study on number of in-context learning
+examples on BDD-X.
+No. ICL Examples Act. B4 Act. C Jus. B4 Jus. C Speed Err. Course Err.
+1 33.2 257.2 10.2 99.3 0.75 4.15
+2 34.3 260.9 11.1 109.1 0.69 4.48
+E. Generalisation Capacity
+One of the critical capacities of autonomous systems is
+to generalise to unseen environments out of its training
+distribution. However, in the domain of explainable driving,
+we observe the existing methods are unable to perform such
+generalisation, which poses challenges for their deployment. As
+shown in lower part of Tab. I, ADAPT and the base MLLM (i.e.,
+training without ICL) reveal dramatic performance degradation
+as compared to the in-distribution situation. However, our
+method leverages ICL learning examples to demonstrate a
+significant performance boost with a large margin. Note that
+even though the memory database is constructed with BDD-X,
+the RA-ICL can still perform generalisation in a zero-shot
+manner. This is potentially due to the robustness of the hybrid
+retrieval process, where samples with less distribution shift can
+still be selected to serve as effective ICL examples.
+F. Fine-tuning Retrieval Engine
+While RAG-Driver aims to enhance the model’s generalis-
+ability in driving action explanation tasks in a training-free
+manner through in-context learning, we further investigate
+the potential to improve the retrieval strategy. Specifically,
+we further train the retrieval engine with additional target
+domain data from Spoken-SAX on top of original BDD-X
+data samples. As shown in Tab. V, we observe a further
+performance boost in terms of driving action explanation

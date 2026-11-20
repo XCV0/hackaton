@@ -1,0 +1,148 @@
+64 128 256 512
+C (tokens)
+60
+65
+70
+75
+80
+85
+90Accuracy (%) on bridge-hard
+70.1
+78.1
+82.7 82.1
+(a) Chunk Size C
+256384512 768 1k
+Ta = Td (Tt = 2Ta, tokens)
+60
+65
+70
+75
+80
+85
+90
+75.2
+79.3
+82.7 82.0 80.9
+(b) Segmentation Threshold T
+0.1 0.3 0.5 0.7 0.9
+Ts
+60
+65
+70
+75
+80
+85
+90
+68.0
+74.1
+79.2
+79.0
+82.7
+80.5
+83.6 83.7
+82.476.9
+67.0
+(c) Decision Threshold Ts
+Figure 5: Accuracy on HotPotQA-Derived bridge-hard with (a) Chunk Size C, (b) Segmentation Thresholds
+T , and (c) Decision Threshold Ts. All hyperparameters exhibit broad stable plateaus, confirming robustness to
+configuration choice.
+50 60 70 80 90
+Accuracy (%) on HotPotQA-Derived Hard
+HHEM-2.1-Open
+DeBERTa-v3-base
+ModernBERT-large
+AlignScore-Large
+nli-roberta-base
+MiniCheck-FT5
+TrueTeacher
+82.4%
+78.3%
+75.2%
+70.6%
+66.9%
+85.0%
+80.2%
+(-0.9%)
+(a) Framework Gain Across NLI Discriminators
++29.9%
++23.6%
++23.2%
++20.7%
++16.7%
++6.7%
+Standalone NLI accuracy Gain from our framework Decline from our framework
+HaluBench HotPotQA
+-Derived
+RAGTruth
+30
+40
+50
+60
+70
+80
+90F1 / Accuracy (%)
+78.8%
+85.6%
+74.1%71.6%
+84.8%
+53.3%
+70.1%
+82.4%
+72.2%
+(b) Cross-Dataset Comparison
+Config B (~1.5B)
+TrueTeacher (11B)
+Config A (~0.5B)
+Figure 6: (a) Framework accuracy vs. standalone
+NLI accuracy for seven discriminators on HotPotQA-
+Derived Hard. Six of seven models improve;
+TrueTeacher marginally declines (−0.9%) as its 11B
+capacity already handles long-context reasoning. (b)
+Cross-dataset comparison of Config A (∼0.5B) and
+Config B (∼1.5B) against TrueTeacher (11B) across
+three benchmarks.
+confirming that combined relevance–entailment
+scoring is highly discriminative. Chunk size vs.
+latency trade-offs are detailed in Appendix C.
+4.7 Ablation Study
+Table 8 quantifies individual module contributions.
+Removing Semantic Evidence Aggregation (B)
+causes the largest single-module drop (−19.6%)
+while saving only 18 ms (21% of latency), the worst
+accuracy–efficiency trade-off among all ablations.
+All dual-module removals drop accuracy below
+55% (near random), confirming that the three mod-
+Configuration Acc (%) Lat. (ms)
+Full (A+B+C) 82.7∗ 85
+w/o A (LC) 78.2 (−4.5) 73
+w/o B (SEA) 63.1 (−19.6) 67
+w/o C (CS) 59.4 (−23.3) 31
+w/o A+B 55.0 (−27.7) 55
+w/o B+C 51.9 (−30.8) 19
+w/o A+C 52.1 (−30.6) 60
+Table 8: Ablation on HotPotQA-Derived bridge-hard.
+A = Long Context Segmentation (LC), B = Semantic
+Evidence Aggregation (SEA), C = Consistency Scoring
+(CS). Removing B alone costs 19.6% for only 18 ms
+saved, confirming SEA as the core contribution. ∗Best
+result.
+ules are complementary and mutually necessary.
+5 Conclusion
+We present a lightweight, NLI-agnostic hallucina-
+tion detection framework for RAG systems built
+around graph-based Semantic Evidence Aggre-
+gation. The framework operates without task-
+specific pretraining and provides two deploy-
+ment configurations: Config A (0.5B, 82.4%,
+85 ms) achieves state-of-the-art accuracy among
+sub-1B methods and is Pareto-optimal in the
+efficiency–performance space; Config B (1.5B,
+85.6%, 165 ms) surpasses the 11B TrueTeacher
+baseline at 1.7× lower latency. Across seven NLI
+discriminators, the graph module provides consis-
+tent gains of +6.7% to +29.9%, validating that
+evidence aggregation, not the specific NLI model,
+is the primary performance driver.
+The plug-and-play design decouples graph-
+based evidence aggregation from NLI scoring, so
+1612

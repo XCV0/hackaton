@@ -1,0 +1,113 @@
+B. Solar cell and thin-film characterization
+Current density–voltage (J–V) measurements were performed
+with a WACOM (Saitama, Japan) AM1.5G solar simulator with
+four-point geometry at standard testing conditions with a silicon
+reference solar cell for calibration. The CIGS cells for J–V charac-
+terization were in the as-grown state without any further light-
+soaking or post-annealing procedures.
+External quantum efficiency (EQE) was measured with an
+additional light bias using a BENTHAM PVE 300 setup with Si
+and Ge reference photodiodes for calibration.
+Evaluation of transmittance data of around 500 nm thick sput-
+tered In2(O,S)3 films on D263T borosilicate glass as measured by a
+Perkin Elmer Lambda 900 spectrometer was performed using the
+DIPLOT software.17 The film thickness was derived from the inter-
+ference patterns in which interference amplitude and period were
+fit by refractive index dispersion and film thickness. Based on the
+film thickness, the absorption coefficient α is calculated. It is
+common practice to plot (α⋅Eph)0.5 or (α⋅Eph)2 vs Eph with the
+photon energy Eph, in order to determine the bandgap energy from
+the abscissa intersect of the extrapolated linear regions based on
+the assumptions of allowed indirect or direct interband transitions,
+respectively.
+XRD was measured with a PANalytical Empyrian in Bragg–
+Brentano geometry using Cu-Kα radiation.
+Transmission electron microscopy (TEM) was applied to char-
+acterize the structural properties and microchemistry of the buffer/
+absorber interface regions. For this purpose, cross-sectional TEM
+samples were prepared by means of focused-ion-beam (FIB)
+milling using an FEI Helios G4 dual-beam microscope. The FIB
+lamellae were finally polished by a Ga+-ion beam with a low accel-
+erating voltage of 1 kV to minimize material damage.
+High-resolution TEM (HRTEM) imaging was performed on an
+image-aberration corrected FEI Titan3 80–300 transmission elec-
+tron microscope at 300 kV. Chemical analyses by means of EDXS
+were performed in the scanning TEM (STEM) mode with a 200 kV
+microscope of the type FEI Tecnai Osiris. For EDXS analyses, the
+microscope is equipped with a FEI Super-X system comprising
+four silicon drift detectors. X-ray maps were recorded in the
+so-called HyperMap mode via the Bruker software Esprit version
+1.9. Subsequently, these maps were quantified using the thin-film
+approximation and line profiles of the element concentrations were
+obtained.
+C. Computational details
+The Vienna ab-initio Simulation Package (VASP)18,19 was
+used to perform density functional theory (DFT) calculations with
+projector augmented wave pseudopotentials20 using the range-
+separated Heyd–Scuseria–Ernzerhof (HSE) hybrid functional with
+a mixing parameter of α ¼ 0:25 and exchange-screening length of
+0.13 Å−1. A plane-wave cutoff energy of 400 eV was applied for all
+calculations. Ionic positions were relaxed until residual forces were
+below 10 meV Å−1. Γ-centered k-point grids of 4 × 4 × 2 and
+2 × 2 × 2 were used to sample the Brillouin zones of spinel In2S3
+and bixbyite In2O3 structures, respectively. Table I summarizes
+experimental and calculated values for structural, electronic, and
+thermodynamic properties of In2S3 and In2O3.
+III. RESULTS AND DISCUSSIONS
+A. Influence of sputtering conditions of the
+In2(OxS1−x)3 buffer layers on solar cell parameters
+Figure 1 illustrates the influence of the [O]/([O] + [S]) (OOS)
+ratio x on the CIGS solar cell parameters. In general, the same
+trend is observed for CIGS solar cells with reactive or ceramic
+In2(O,S)3 buffer layers either sputtered at RT, 200 °C (only ceramic
+targets), or 220 °C substrate temperature: mainly a decrease of
+power conversion efficiency (PCE) as depicted in Figs. 1(a)
+and 1(e) with increasing oxygen content as a result of strongly
+decreasing open-circuit voltage (VOC) values [Figs. 1(b) and 1(f )].
+It seems that only low or moderate OOS ratios up to 0.25 are toler-
+able for decent cell efficiencies, whereas OOS ratios above 0.75 end
+up in almost lethal cells, especially for cells with pure In2O3. The
+PCE curve for the cells with the In2(OxS1−x)3 buffers deposited at
+RT lies around 4% (absolute) below the values of the 220 °C
+samples. Probably, there could be a PCE maximum for moderate
+OOS ratios, especially observed for cells deposited at RT (see
+Fig. S1 in the supplementary material). Taking a closer look at rep-
+resentative J–V curves in Fig. S2 in the supplementary material,we
+do not observe a kink or rollover effect, i.e., the solar cells show a
+good diode behavior without any cross-over between dark and light
+J–V curves. The drop in PCE depending on increasing OOS ratios
+is mainly affected by a decreasing VOC, which can be a result of a
+pronounced cliff configuration as discussed later. Only the cells
+with In2(O0.75S0.25)3 deposited at 200 °C from ceramic targets and
+the cells with pure In2O3 deposited at RT and 200 °C (also ceramic
+targets) exhibit a strong shunting effect. The FF values in Figs. 1(c)
+and 1(g) follow mostly the trend of the decreasing VOC.
+Comparing the effect of reactive vs non-reactive sputtering of
+In2(OxS1−x)3, it can be recognized that the drop in VOC and FF
+with increasing OOS is stronger for the CIGS cells with a reactively
+sputtered buffer. We suppose that this finding is due to additional
+stress on the sensitive CIGS surface caused by the oxidizing plasma
+with increasing O2 concentration during reactive sputtering. JSC is
+not affected by increasing OOS ratios, until OOS ≥ 0.75 when the
+values decrease significantly for both sputtering approaches. This
+observation is supported by selected EQE spectra depicted in Fig. S3
+in the supplementary material. We also observed limited PCE values
+below 14% for CIGS solar cells with sulfur-free sputtered Ga2O3
+buffer layers.26 Niemi et al. also reported a drastic drop in PCE and
+FF for CIGS solar cells with reactively sputtered In2(O,S)3 buffers
+with more than 1 vol. % O2 in the sputtering gas.11
+TABLE I. Lattice parameters a (and ratio c/a), bandgap energies Eg, and formation
+enthalpies ΔH of spinel In2S3 and bixbyite In2O3 as obtained from our HSE calcula-
+tions and compared with experiments.
+Spinel In2S3 Bixbyite In2O3
+Calc. Exp. Calc. Exp.
+a(Å) 7.67 7.626 10.16 10.1221
+c/a 4.29 4.2410 ……
+Eg(eV) 2.03 2.0322 3.01 2.923
+ΔH(eV) −3.30 −4.2924 −9.92 −9.5925
+Journal of
+Applied Physics
+ARTICLE pubs.aip.org/aip/jap
+J. Appl. Phys. 135, 073101 (2024); doi: 10.1063/5.0184698 135, 073101-3
+©Author(s)2024
+ 19 November 2026 10:19:40

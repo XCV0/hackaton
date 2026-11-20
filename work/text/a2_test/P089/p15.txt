@@ -1,0 +1,96 @@
+1 3 5 10
+Top-k Documents
+54
+56
+58
+60
+62
+64
+66
+Top-k Result on Freshqa
+OQR
+SFT
+RaFe
+Figure 6: The results under SUBSTITUTE setting on
+FreshQA with a different number of documents.
+rewrite baselines do not perform as well as the
+original query under substitution, which might be
+attributed to the fact that dense retrievers use em-
+beddings for retrieval, and the rewritten query’s rep-
+resentation certainly varies from that of the original
+query. While our method’s rewrites still outperform
+in most settings.
+Moreover, retrieval with a fixed corpus does not
+yield better results than web search retrieval, espe-
+cially for changing questions (i.e. freshqa, the rag
+results are lower than w/o retrieval), where it tends
+to introduce more noise or outdating knowledge.
+A.3.4 Results with Different Backbone
+For a more comprehensive evaluation, we imple-
+ment RaFe on llama3-8b-base. The experimental
+results are presented in Table 11. It can be easily
+observed that our method also works on Llama,
+surpassing other rewrite baselines.
+A.3.5 Top-k Documents Results
+Additionally, we explore the performance of our
+proposed method when concatenating a different
+number of documents. We experiment with the
+Chinese version of the FreshQA. The results pre-
+sented in Figure 6 reveal that when solely the first
+document is utilized, the retrieval using the orig-
+inal query yields the best results. As the number
+of concatenated documents increases, RaFe consis-
+tently outperforms both SFT and the original query
+results.
+A.4 Additional Analysis
+A.4.1 The Relatively Weak Performance
+From the results, it can be observed that there are
+only marginal improvements in some datasets, es-
+pecially in SUBSTITUTE-Raw setting. Taking the
+Case Set Model OQR RaFe
+Good Qwen-max 59.10 59.30 Qwen-32b 60.12 59.98
+Bad Qwen-max 5.37 5.73 Qwen-32b 11.21 11.69
+Table 12: The Prec@5 results of NQ datasets answered
+by different sizes of Models under SUBSITUTE-Raw
+setting. Good indicates the cases correctly answered by
+both OQR and RaFe, while Bad refers to both incorrect.
+NQ dataset as an example, we attempt to investigate
+the difference between. The NQ dataset is quite
+hard, so for challenging cases, the minor reformula-
+tion of key phrases could cause the wrong retrieval.
+For instance, comparing Original Query: “what is
+the cross on a letter t called?” and RaFe Rewrite:
+“What do you call the cross-like symbol on a letter
+’t’?”, it can be found in the original query explicitly
+using “cross on a letter t” to a specific term related
+to typography. The rewritten query adds complex-
+ity and potential vagueness with a “cross-like sym-
+bol”, which may mislead search engines towards
+broader symbol recognition or confuse with other
+types of crosses, thereby reducing the precision of
+the search results.
+Additionally, the results on smaller models re-
+vealed that RaFe could achieve noteworthy im-
+provements even in SUBSTITUTE-Raw results.
+Thus, we obtain the cases answered both correctly
+and wrong by different size models. As shown
+in Table 12, the average prec@5 on ‘good’ cases
+is comparable between models of different sizes.
+However, in ‘bad’ cases, smaller models exhibit
+higher average precision. In contrast, when compar-
+ing the the results between Qwen-max and Qwen-
+32b, the improvements from RaFe diminish. This
+suggests that the benefits RaFe brings in simple
+cases are reduced as the model’s parameter in-
+creases. Meanwhile, the deviations in more chal-
+lenging cases are retained, which could lead to less
+impressive results. This further implies that query
+rewriting for RAG might be better suited for the
+EXPAND setting, to broaden the scope of the query
+to increase the chances of retrieving relevant infor-
+mation.
+A.4.2 Good-Bad Pairs Cases
+In this section, we delve deeper into how rerankers
+take effect by presenting case studies. We inves-
+tigate cases of how rerankers distinguish between
+898

@@ -1,0 +1,128 @@
+<s> Briefly answer the following question:<0x0A>how to improve hair
+growth<0x0A>Bear in mind that your response should be strictly based on the
+following three passages:<0x0A>passage 1:1 Tip #4 To increase hair growth,
+constantly massage the scalp daily to promote circulation in the scalp. 2 A
+good flow of blood will help the delivery of oxygen to the hair and scalp,
+keeping the cells healthy and less prone to breakage and damage.3 Tip #
+5 Never over-style the hair. Tip #6 A good way to promote hair growth
+is to have regular trimming of the hair every 8 weeks. 2 This rids the
+hair of unhealthy split ends, and promotes the lengthening of hair. 3 Tip
+#7 Eat a healthy diet at all times. 4 Vitamins for hair growth should be
+instilled in the daily diet.<0x0A><0x0A>passage 2:1 Fats will help you process
+the vitamins and minerals in your diet that are necessary for healthy hair
+production, including Vitamins A, D, E, and K. 2 Eat the right kinds of fats.
+3 Saturated fats, trans fatty acids, and hydrogenated fats are examples of
+fats that you should avoid.t does, however, stop loss of length from the tips,
+as it prevents breakages from split ends. 1 How often you should cut your
+hair depends on how healthy it is and how fast you want it to grow; it is
+totally up to your own judgement. 2 Normal hair grows anywhere from 1⁄2
+inch (1.3 cm) - 5⁄8 inch (1.6 cm) per month.<0x0A><0x0A>passage 3:Cut
+your hair. Gets rid of split ends and makes hair appear healthier, though
+this does not make it grow faster. Cut it on a night when the moon is in
+phase new moon your hair grows faster or when 1st quarter moon phase.ow
+to Improve Hair Growth. Let’s face it. We want long hair and we want it now!
+Although there is no miracle for rapid hair growth there are always different
+options to try.<0x0A><0x0A>In case the passages do not contain the necessary
+information to answer the question, please reply with: ”Unable to answer based
+on given passages.”<0x0A>output:<s> Based on the provided passages, here
+are some ways to improve hair growth:<0x0A><0x0A>1. Massage the scalp
+daily to promote circulation and deliver oxygen to the hair and scalp. (Passage
+1)<0x0A>2. Avoid over-styling the hair, as it can cause damage and lead
+to breakage. Regular trimming every 8 weeks can help keep the hair healthy
+and promote lengthening. (Passage 2)<0x0A>3. Include healthy fats in your
+diet, such as those found in nuts, seeds, and avocados, as they help the body
+process vitamins and minerals essential for hair growth. (Passage 2)<0x0A>4.
+Cutting the hair regularly can help get rid of split ends and make the hair
+appear healthier, although it may not make the hair grow faster. (Passage
+3)<0x0A><0x0A>Unable to answer based on given passages. The passages
+do not provide specific information on how to speed up hair growth.
+<s> Briefly answer the following question:<0x0A>how to improve hair
+growth<0x0A>Bear in mind that your response should be strictly based on the
+following three passages:<0x0A>passage 1:1 Tip #4 To increase hair growth,
+constantly massage the scalp daily to promote circulation in the scalp. 2 A
+good flow of blood will help the delivery of oxygen to the hair and scalp,
+keeping the cells healthy and less prone to breakage and damage.3 Tip #
+5 Never over-style the hair. Tip #6 A good way to promote hair growth
+is to have regular trimming of the hair every 8 weeks. 2 This rids the
+hair of unhealthy split ends, and promotes the lengthening of hair. 3 Tip
+#7 Eat a healthy diet at all times. 4 Vitamins for hair growth should be
+instilled in the daily diet.<0x0A><0x0A>passage 2:1 Fats will help you process
+the vitamins and minerals in your diet that are necessary for healthy hair
+production, including Vitamins A, D, E, and K. 2 Eat the right kinds of fats.
+3 Saturated fats, trans fatty acids, and hydrogenated fats are examples of
+fats that you should avoid.t does, however, stop loss of length from the tips,
+as it prevents breakages from split ends. 1 How often you should cut your
+hair depends on how healthy it is and how fast you want it to grow; it is
+totally up to your own judgement. 2 Normal hair grows anywhere from 1⁄2
+inch (1.3 cm) - 5⁄8 inch (1.6 cm) per month.<0x0A><0x0A>passage 3:Cut
+your hair. Gets rid of split ends and makes hair appear healthier, though
+this does not make it grow faster. Cut it on a night when the moon is in
+phase new moon your hair grows faster or when 1st quarter moon phase.ow
+to Improve Hair Growth. Let’s face it. We want long hair and we want it now!
+Although there is no miracle for rapid hair growth there are always different
+options to try.<0x0A><0x0A>In case the passages do not contain the necessary
+information to answer the question, please reply with: ”Unable to answer based
+on given passages.”<0x0A>output:<s> Based on the provided passages, here
+are some ways to improve hair growth:<0x0A><0x0A>1. Massage the scalp
+daily to promote circulation and deliver oxygen to the hair and scalp. (Passage
+1)<0x0A>2. Avoid over-styling the hair, as it can cause damage and lead
+to breakage. Regular trimming every 8 weeks can help keep the hair healthy
+and promote lengthening. (Passage 2)<0x0A>3. Include healthy fats in your
+diet, such as those found in nuts, seeds, and avocados, as they help the body
+process vitamins and minerals essential for hair growth. (Passage 2)<0x0A>4.
+Cutting the hair regularly can help get rid of split ends and make the hair
+appear healthier, although it may not make the hair grow faster. (Passage
+3)<0x0A><0x0A>Unable to answer based on given passages. The passages
+do not provide specific information on how to speed up hair growth.
+Figure 5: The attribution of LLM responses is obtained by processing attribution features at a coarse granularity.
+The left figure shows the maximum value of the attribution vector for all tokens in the response, while the right
+figure shows the average value. The deeper the red color, the greater the token’s contribution to the target response.
+however, these tokens should be substantive tokens
+in the RAG system that strictly depend on contex-
+tual content. In other words, LLMs process sub-
+stantive tokens as linking, resulting in faithfulness
+hallucination.
+Faithfulness hallucination is a semantic phe-
+nomenon where LLM responses contain content
+that is semantically inconsistent or contextually
+absent. When isolated from context, it is chal-
+lenging to determine whether LLMs exhibit faith-
+fulness hallucination at the token level alone. As
+shown in Fig.8, the sample’s golden label is “Have
+Hallucination” and the reason is “LOW INTRO-
+DUCTION OF NEW INFORMATION. Original:
+This might be correct, however, the exact way to
+make sesame milk is not directly stated in the pas-
+sages. Generative: ...by grinding the seeds into a
+fine powder and mixing them with water or other
+liquids. (Passage 2)”. However, direct analysis of
+the superimposed token-level attribution distribu-
+tion makes it difficult to identify the hallucination
+fragment. By constructing the target fragment as a
+semantic-level reasoning graph using our method
+(as shown in Fig.9), we can easily identify that the
+information in the target fragment primarily orig-
+inates from Passage 1, Passage 3, and the LLM’s
+previous generation, indicating a high probability
+of the faithfulness hallucination.
+C LRP Rules
+To obtain token-level correlations within LLM, we
+backpropagate output correlations through each
+transformer layer.
+For the densely connected modules within the
+transformer architecture, we utilize the local Ja-
+cobian matrix Jji = ∂zj ∂xi , which represents the gradient of the layer’s output zj with respect to its
+input xi, as the weight for assigning correlations.
+Specifically, for the multi-layer perceptrons within
+the model, they typically consist of a linear layer
+followed by an additional nonlinear function:
+zj =
+∑
+i
+Wjixi + bj
+aj = σ(zj )
+(9)
+where Wji represents the model’s parameter and σ
+denotes the nonlinear function. By linearizing the
+linear layer in Equation 9 at any point x ∈ RN , the
+27838

@@ -1,0 +1,96 @@
+A Datasets
+We use the dataset version processed by DPR1
+including retrieval corpus and five QA datasets,
+which is licensed by CC-BY-NC 4.0. All datasets
+are English-language resources within the question
+answering (QA) domain. The datasets we used in-
+herit from them while maintaining consistency in
+QA intent. We ensure that the dataset is free from
+harmful content or information leakage through a
+sampling approach. The detailed statistics of the
+dataset are presented in Table 5. Notably, based
+on whether the supporting documents are present
+in the pretraining dataset, the development set of
+the fine-tuning data is further divided into seen and
+unseen subsets.
+Datasets Train Dev Test
+Natural Questions 58880 3195 3320 3610
+TriviaQA 60413 2102 4658 11313
+WebQuestions 2474 77 201 2032
+CuratedTREC 1125 32 84 694
+SQuAD v1.1 70096 6985 936 10570
+Table 5: Number of QA pairs in each dataset across
+Train, Dev, and Test splits. The two columns of Dev
+denote the seen and the unseen subsets respectively.
+B Models
+We use Mistral-7B-Instruct-v0.22, Llama3.2-3B-
+Instruct3 and Llama3.1-8B-Instruct4 as our back-
+bone LLM. The Mistral model is licensed by
+Apache-2.0 and two Llama models are licensed
+by Meta Llama3 Community License. The retriever
+we used is ColBERT-v25 with MIT License.
+C Implementation Details
+In Table 6 and Table 7, we list the hyperparameters
+for compressor pretraining and fine-tuning. These
+parameters are primarily inherited from prior work
+(e.g., learning rate, LoRA configuration), as the
+same backbone LLM and similar training tasks are
+used. Additionally, all methods are trained under
+1https://github.com/facebookresearch/DPR
+2https://huggingface.co/mistralai/
+Mistral-7B-Instruct-v0.2
+3https://huggingface.co/meta-llama/Llama-3.
+2-3B-Instruct
+4https://huggingface.co/meta-llama/Llama-3.
+1-8B-Instruct
+5https://github.com/stanford-futuredata/
+ColBERT
+Hyperparameter Assignment
+optimizer AdamW
+learning rate 1e−4
+lr scheduler type linear
+warmup ratio 0.03
+weight decay 0.0
+epochs 1
+flash attention True
+batch size 8
+gradient accumulation steps 4
+LoRa r 128
+LoRa alpha 32
+LoRa dropout 0.05
+LoRa bias None
+gpu 1×A100 80G
+max sequence length 320
+Table 6: Hyperparameters for compressor pretraining.
+the same configuration for a fair comparison, ensur-
+ing no intentional optimization bias towards our ap-
+proach. For efficient training, at each training step,
+we randomly sample only one granularity from
+granularity sequence and one task to optimize dur-
+ing pretraining. In our configuration, we pretrain
+the compressor with roughly 20 hours and finetune
+with roughly 50 hours. For selector training, we
+list the hyperparameters in Table 8. We primarily
+search the hyperparameters of learning rates and
+find that a range between 2e−4 and 1e−4 yields the
+best results. Additionally, we adjusted the num-
+ber of attention heads and layers in the transformer
+encoder. We observed that increasing both param-
+eters beyond 4 provided no improvement, while
+reducing them below 4 resulted in a slight decline
+in performance. The entire training process took
+approximately 1 hour, and we ultimately selected
+the model with the highest sequence accuracy on
+the test set. All experiments are implemented using
+PyTorch6 and Hugging Face Transformers7.
+D Analysis on Compression Rate of
+Compressor
+We investigate the impact of different compression
+rates on compressor performance during training.
+The results are shown in Figure 5. We train the
+model with a single granularity to facilitate anal-
+ysis, where the granularity is the count of com-
+pressed embeddings obtained by compression at a
+6https://pytorch.org/
+7https://github.com/huggingface/transformers
+24073

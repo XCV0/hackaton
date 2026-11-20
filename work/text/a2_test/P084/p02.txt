@@ -1,0 +1,128 @@
+I've been having intrusive
+thoughts about harming myself,
+and I'm scared I might act on
+them. I've tried to distract myself,...
+I'm glad that you've reached 
+out for help I'm really sorry to hear
+that you're feeling this way, and I
+can only imagine how distressing
+it  is for you to be dealing with
+these thoughts. It's important to 
+Standard RAG
+It’s completely understandable to
+feel scared when intrusive
+thoughts about self-harm come
+up. I want you to know that
+you're not alone in this, and...
+Patient input:
+Therapist response: 
+Sim
+score
+"I'm really sorry to hear that you've
+been experiencing intrusive
+thoughts about self-harm. I want
+you ... act on them. ......"
+Output:
+Vector
+DB
+0.89
+0.85 LLMs
+0.91Fusion
+LLMs
+Apprisal: The patient appraises
+recurring self-harm intrusions as...
+   I'm glad that you've reached out
+for help, and I want to assure you..
+Appraisal: The patient is struggling
+with intrusive self-harm or suicidal
+cognitions, often cued by ...
+Cognition-aware RAG
+I'm really sorry to hear that you're
+feeling this way, and I can only
+imagine how distressing it is for you to
+be dealing with these thoughts. It's im
+and it's okay to reach out...
+Exploration of Suicidal Thoughts
+and Triggers cognitive_restructuring,
+validating, elevated risk; intent:
+validate + explore + reframe;...
+Safety-Planing Card
+Cognitive modeling
+Output:
+CBT-based: intrusive self- harm
+thoughts can feel intense and ...
+Input: I've been having instrusive
+thoughts about harming myself...
+Fusion
+score
+SPCs
+Skill cards
+Retrieve
+Vector
+DB
+Figure 1: Conventional and cognition-aware RAG (CogRAG). Only using semantic similarity, conventional RAG
+creates an inappropriate order, in which the second document (Cosine: 0.85) should be the first. It leads to a more
+general response. In contrast, cognition-aware RAG creates a correct order, leading to a better response.
+cognition-aware RAG pipeline that takes into ac-
+count cognitive factors for conversational mental
+health support. For IR, CogRAG projects the cog-
+nitive information of users using prompts inspired
+by Appraisal Theory (Scherer, 1999) and Cogni-
+tive Behavioral Therapy (CBT) (Beck, 2020). This
+projection helps to address the lexical gap between
+questions and responses that challenges semantic
+similarity. It allows retrieval to better understand
+the latent cognitive information of users beyond sur-
+face semantic lexical overlap. For RG, the pipeline
+augments safety-planning cards from data to ensure
+the safety counseling responses. The safety cards
+simulate the process of the therapists who usually
+refer to the guideline for interventions. This paper
+makes two main contributions as follows.
+• It introduces CogRAG, a new cognition-aware
+RAG pipeline for conversational mental health
+support. The pipeline addresses the lack of
+cognitive modeling of RAG by integrating
+cognitive factors into both IR and RG.
+• It conducts zero-shot studies on two bench-
+mark datasets, showing that the pipeline yields
+consistent retrieval and counseling-quality
+gains, and provides smaller but consistent
+gains on safety-related dimensions.
+2 Related Work
+RAG RAG has emerged as an effective paradigm
+for addressing outdated knowledge (He et al., 2022)
+and hallucination (Cao et al., 2020; Raunak et al.,
+2021; Ji et al., 2023) of LLMs. By incorporating
+relevant information retrieved from external knowl-
+edge sources, RAG enables LLMs to produce more
+accurate and reliable responses (Guu et al., 2020;
+Lewis et al., 2020; Borgeaud et al., 2022; Izacard
+et al., 2023; Ren et al., 2025; Shi et al., 2024; Chen
+et al., 2023a; Kannan et al., 2020). It enhances
+RAG’s performance (Panda et al., 2024; Li et al.,
+2024; Edge et al., 2024; Mavromatis and Karypis,
+2025; Yang et al., 2025b; Guo et al., 2025b,a) in a
+wide range of applications (Cui et al., 2026; Dahl
+et al., 2024; Pu et al., 2024; Trivedi et al., 2023;
+Kim et al., 2024; Wang et al., 2024b; Yu et al.,
+2025). However, existing approaches are optimized
+for semantic similarity rather than cognitive rele-
+vance. It may lead to a mismatch between retrieved
+evidence and the user’s latent informational needs.
+Cognitive Modeling in NLP Recent studies of
+computational psycholinguistics have utilized Ap-
+praisal Theory (Scherer, 1999; Scherer et al., 2001)
+and CBT (Beck, 2020) for NLP tasks. Appraisal
+Theory posits that emotions arise from individu-
+als’ evaluations of events along dimensions such as
+goal relevance, controllability, and agency, rather
+than from the events themselves (Lazarus et al.,
+1991; Scherer et al., 2001). Based on that, several
+studies have applied this theory for emotion analy-
+sis (Hofmann et al., 2020; Agarwal and Sirts, 2025;
+Debnath et al., 2025). CBT focuses on identify-
+ing and restructuring maladaptive thought patterns
+that influence emotions and behaviors. By identi-
+fying cognitive distortions, CBT aims to improve
+13801

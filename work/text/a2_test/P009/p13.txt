@@ -1,0 +1,129 @@
+31
+A. Prompt
+A.1. Information Gathering
+We used the following prompt to generate search
+queries. The variable {user_name} contains the
+user’s name and is used to identify the speaker of
+each utterance. The variable {conv_history} con-
+tains the conversation history, consisting of utter-
+ances labeled with speaker names. The variable
+{topic_category} speciﬁes the conversation’s topic
+category to ensure that retrieval is relevant to the
+conversation context.
+Prompt: Query Generation 
+# Instruction
+Based on the conditions below, think
+step-by-step to generate search queries.
+# Conditions:
+- Information-Based Generation: The queries
+should be aimed at obtaining information that
+{user_name} is likely interested in, based on
+the conversation content.
+- Unknown Information Search: The queries
+should be aimed at obtaining information that
+{user_name} does not know or has not heard,
+based on the ''Conversation History.''
+- Category-Based Generation: Queries should be
+based on {topic_category}.
+- Structure: Each keyword must consist of three
+terms separated by spaces (e.g., Tokyo travel
+latest news).
+- Proper Noun Limitation: Each set of queries
+should contain only one proper noun.
+- Output Limitation: Do not output any
+explanation or information other than the
+queries.
+- Pattern Generation: Generate three patterns
+of queries meeting the conditions, separated by
+line breaks, to obtain multiple diverse search
+results.
+- Avoid Redundancy: Ensure that search results
+from each keyword are not duplicated.
+- Emphasize Diversity: Include different proper
+nouns in the queries for each pattern.
+- Include Latest Information: Each pattern of
+queries must include terms for searching the
+latest trends or current information (e.g.,
+latest news, trends, recent updates).
+# Conversation History
+{conv_history}
+ 
+A.2. PT-RAG
+A.2.1. Interest and Knowledge Estimation
+We used the following prompt to summarize a
+conversation with a user and to estimate the
+user’s interests. The variables {user_name}
+and {conv_history} contain the same information
+as described in Appendix A.1. The variable
+{ai_name} contains the chatbot’s name and is
+used to identify the speaker of each utterance.
+Prompt: Interest Estimation 
+# Instruction
+Summarize the ''Conversation History''
+according to the following conditions:
+# Conditions
+- Summarize the ''Conversation History'' under
+the title ''Conversation Summary,'' writing as
+extensively as possible after a line break.
+- Assume the statements from {ai_name} as your
+own speech and summarize them in the first
+person.
+- Focus on summarizing what kind of
+conversation was held with {user_name}.
+- After a line break under the title
+''Keyword,'' list multiple keywords from the
+summarized content, separated by commas.
+- Abstract the generated keywords to state what
+the ''Conversation History'' is about under the
+title ''Category,'' listed after a line break
+(e.g., travel).
+- If the ''Conversation History'' involves
+multiple categories, list them under the title
+''Category'' after a line break, separated by
+commas (e.g., travel, food).
+- From the generated keywords, select those
+that {user_name} is interested in, and list
+them under the title ''User Interests
+(keyword)'' after a line break.
+- From the generated categories, select those
+that {user_name} is interested in, and list
+them under the title ''User Interests
+(category)'' after a line break.
+# Conversation History
+{conv_history}
+ 
+We used the following prompt to estimate the
+user’s knowledge. The variable {prev_knowledge}
+shows the previously estimated knowledge of the
+user.
+Prompt: Knowledge Estimation 
+# Instruction
+Estimate the knowledge that {user_name}
+possesses according to the following
+conditions:
+# Conditions
+- Use the knowledge information recorded in the
+''Conversation History'' and ''Past Knowledge''
+to estimate the knowledge that {user_name}
+possesses.
+- If there is no information in the ''Past
+Knowledge,'' estimate the knowledge solely from
+the ''Conversation History.''
+- Provide as much detail as possible.
+- Infer logically step-by-step, but output only
+the conclusion.
+- Do not output the estimation process.
+- Format the output in such a way that it is
+easy for an LLM to understand if given directly
+as a prompt.
+# Conversation History
+{conv_history}
+# Past Knowledge
+{prev_knowledge}
+ 
+A.2.2. Information Retrieval
+We used the following prompt to select a topic cat-
+egory that aligns with the user’s interests. The
+variable {interest} contains a list of categories the
+user is interested in. The variable {category_list}
+contains the list of available topic categories.

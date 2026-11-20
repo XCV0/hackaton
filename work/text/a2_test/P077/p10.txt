@@ -1,0 +1,147 @@
+0
+1000 3000 50001.2e62.7e71.2e8
+  
+0.00
+0.02
+0.04
+0.06F1
+0
+1000 3000 50001.2e62.7e71.2e8
+  
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Recall
+PPR RW KSE-1 KSE-2 KSE-3 KSE-4
+Subgraph Size (Number of the Tripes)
+Figure 8: Results w.r.t. Subgraph Size (SBE)
+24 25 28 29
+210 211 2120
+0.01
+0.02
+0.03
+0.06
+0.18
+0.20F1
+24 25 28 29
+210 211 2120.4
+0.5
+0.6
+0.7
+0.8Recall
+Subgraph Size (Number of the Tripes)
+LLM-NP
+LLM-EP
+LLM-TP
+ST-NP
+ST-EP
+ST-TP
+BGE-NP
+BGE-EP
+BGE-TP
+BM25-NP
+BM25-EP
+BM25-TP Figure 9: Results w.r.t. Subgraph Size (SAE)
+210 211 212 213 214
+0.1
+0.2F1
+210 211 212 213 214
+0.4
+0.6Recall
+Token Num.
+NP EP TP Figure 10: Results w.r.t. Token Cost (SAE-LLMs)
+complementary strategies: triple-level scoring, which evaluates
+only the newly added step at each expansion to reduce error ac-
+cumulation, and dynamic pruning, which adjusts the number of
+retained paths based on score distribution, helping preserve good
+candidates when scores are close.18
+⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓a).3 Semantic Augmentation on one Module (Group (III)&(IV)).
+We observe that the performance of instances in Group IV (i.e.,
+Instances No.12-15) generally surpasses that of Group III (i.e., In-
+stances No.10, 11). This suggests that if only one module is se-
+mantically augmented, prioritizing the path-retrieval module over
+the subgraph-extraction module is more effective. Using structure-
+based methods for subgraph extraction remains efficient and suf-
+ficient, unlike existing instances such as RoG [71] and GCR [72],
+which use LLMs (Llama-2-7b, Llama-3.1-8b) for subgraph-extraction
+and encounter performance and efficiency bottlenecks. Addition-
+ally, Group (II) instances do not consistently outperform Groups
+(III) and (IV), implying that semantically augmenting both modules
+is unnecessary in resource-limited contexts. Moreover, as shown
+in Figure 3, results on MetaQA align with findings from Freebase-
+based datasets. The small scale and single-domain nature of the
+graph lead to uniformly high scores across all instances. Notably,
+Instance No.14 (ISAR-EEMs) performs comparably to or slightly
+better than Instance No.15 (ISAR-LLMs), suggesting that EEMs can
+be a viable and more efficient alternative to LLMs in such settings.
+b) Runtime. Figure 5 shows the average runtime of different
+GraphRAG instances for subgraph-extraction and path-retrieval
+modules on a single query. A key observation is that subgraph-
+extraction is the primary bottleneck in GraphRAG runtime of all
+instances. For example, Instance No.1, using structure-based meth-
+ods, requires approximately 70 seconds for subgraph-extraction
+(i.e., PPR algorithm) but less than 0.1 seconds for path-retrieval.
+Since subgraph-extraction is a crucial but time-intensive step in the
+GraphRAG workflow, it poses significant challenges for the practi-
+cal development of GraphRAG systems on large-scale graphs like
+Freebase. Unfortunately, most existing instances, such as KELP [65],
+ToG [98], and DoG [74], overlook the efficiency of this process.
+Additionally, in the path-retrieval, methods using LLMs (espe-
+cially under ISAR) exhibit longer runtimes compared to those using
+EEMs. For example, Instance No.12 (OSAR-EEMs) and No.14 (ISAR-
+EEMs) complete path-retrieval in under 1.15 seconds and 0.19 sec-
+onds, respectively, while Instance No.13 (OSAR-LLMs) and No.15
+(ISAR-LLMs) take 66.64 seconds and 122.43 seconds, respectively,
+on GrailQA. This shows that using the ISAR-LLMs methods in the
+path-retrieval may result in unacceptably low query efficiency.
+c) Cost. Figures 6 and 4 show the average token overhead (EEMs
+and LLMs) and peak GPU memory usage (average of four datasets)
+18Detailed discussion and results are available in our technical report B.8.
+across GraphRAG instances. Instances mixing EEMs and LLMs (e.g.,
+No.3, 4, 7, 8) incur higher token costs than those using the same
+model type (e.g., No.2, 5, 6, 9), with EEM-only setups being the most
+economical. GPU usage remains low (<1GB) for EEM-only instances
+but rises sharply for LLM-based ones, peaking at 80GB when LLMs
+are used in both modules (e.g., No.5, 9). The results underscore
+the performance–cost trade-offs of semantic augmentation and the
+importance of corresponding optimization.
+d) Analysis by Query Type. We analyze performance across dif-
+ferent query types by varying reasoning hops, number of answers,
+and number of query entities. As shown in Figure 7a, performance
+consistently declines with more reasoning hops, especially for
+structure-based methods (e.g., Instance No.1), which struggle on
+multi-hop queries. Figure 7b shows a similar drop from single- to
+multi-answer queries, where semantic methods are more resilient.
+Figure 7c shows improved performance with more query entities,
+likely due to increased chances of retrieving relevant paths—even
+benefiting structure-only instances like No.1.
+e) Integrating Microsoft GraphRAG. To evaluate compatibility with
+Microsoft GraphRAG, we implement an instance (GRAG-M), which
+follows its workflows: performing community detection on the
+graph and precomputing textual summaries for each community.
+On the MetaQA dataset, GRAG-M uses the reasoning paths from
+Instance 12 (which showed strong performance in our experiments)
+and provides both the paths and summaries as input to the LLMs.
+As shown in Figure 3, GRAG-M performs well on Qwen2-7B and
+Glm4-9B. Gains diminish with Qwen2-72B, where the larger model
+already captures sufficient context, reducing the benefit of precom-
+puted summaries.
+4.3 Evaluation of Subgraph-Extraction Module
+Structure-Based Extraction (SBE). Figure 8 shows the variation
+in F1 score and Recall for the three SBE methods (RW, PPR, and
+KSE) as the extracted subgraph size changes. The F1 score for all
+methods decreases as the subgraph size increases, while their Recall
+consistently improves. Across all subgraph sizes, PPR consistently
+outperforms RW in both F1 score and Recall, demonstrating the
+superior effectiveness of PPR over RW. Additionally, RW strug-
+gles to achieve a Recall above 60%, rendering it nearly unusable
+in GraphRAG. Moreover, PPR offers greater flexibility compared
+to KSE, enabling precise control over subgraph size through hy-
+perparameters. In contrast, KSE relies on hierarchical extraction,
+which lacks such flexibility.19 These advantages establish PPR as the
+current optimal solution for SBE. As Table 4 demonstrates, PPR’s
+computational costs become prohibitive for large graphs.
+19Many prior studies [45, 50, 71, 72] first apply KSE to extract 2-hop or 4-hop subgraphs,
+followed by PPR to distill them into smaller, query-relevant subgraphs.

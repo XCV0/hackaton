@@ -1,0 +1,89 @@
+Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026), pages 19–34
+11–16 May 2026. ©ELRA Language Resources Association (ELRA), 2026
+19
+Topic-Initiator: A Proactive Chatbot with Personalized Topic RAG
+for Enhancing Willingness to Converse
+Kazuya Matsuo Atsushi Otsuka, Narichika Nomoto, Makoto Nakatsuji
+Human Informatics Labs., NTT, Inc.
+kazuya.matsuo@ntt.com
+Abstract
+Stimulating users’ conversational willingness to converse remains a major challenge in chatbot research. Most ex-
+isting chatbots respond passively to user inputs, relying on users to select conversation topics, which often reduces
+their willingness. To address this issue, we propose, Topic-Initiator, a proactive chatbot that initiates conversations
+with new topics aligned to user interests. It gathers information from external sources (e.g., the web) to obtain
+potentially novel and engaging topics. To support this capability, we also introduce a novel Retrieval-Augmented
+Generation (RAG) framework, Personalized-Topic RAG (PT-RAG), designed to retrieve new and interesting topics
+for each user. Unlike existing RAG methods that fails to surface unseen information, PT-RAG leverages the infer-
+ence capabilities of Large Language Models (LLMs) to identify content that matches the user’s interests but is not
+yet known to them. Speciﬁcally, PT-RAG estimates a user’s interests and knowledge from past interactions and or-
+ganizes collected information into categories. Then, it uses an LLM to select a category that matches their interests
+and obtain information not seen in their knowledge from the selected category. Automatic and human evaluations
+demonstrate that PT-RAG retrieves new and interesting information more accurately and that Topic-Initiator signiﬁ-
+cantly enhances users’ willingness to converse compared to existing methods.
+Keywords: chatbot, dialogue system, RAG
+1. Introduction
+Recent advances in Large Language Models
+(LLMs) have enabled AI systems to engage in
+more natural conversations. As a result, various
+chatbot services have emerged1,2. For users to
+continue using chatbots, it is important to sustain
+their motivation to interact with them. However,
+many existing chatbots are passive and can only
+respond to user inputs. This forces users to come
+up with topics to start conversations, which can
+lead to fatigue and a gradual loss of motivation to
+engage. Such passivity to collect not only reduces
+user satisfaction, but also limits opportunities to
+collect valuable conversational data for analyzing
+user insights, such as in marketing applications.
+To address this issue, we believe that it is effec-
+tive for chatbots to proactively select topics that
+stimulate users’ willingness to converse and initi-
+ate conversation with them (Figure 1). Potential
+topics may include questions related to disclosed
+user activities, such as watching a movie or taking
+a short trip (Zhang et al., 2023). However, overus-
+ing such questions can lead to one-sided informa-
+tion requests, which are unlikely to sustain motiva-
+tion (Cozby, 1972). Uchida et al. (2024) demon-
+strated that people are more willing to converse
+with robots that discuss topics of personal interest
+while Pentina et al. (2023) found that users tend
+to lose motivation when chatbots provides ﬁxed,
+generic responses and fail to consider prior inter-
+1https://character.ai/
+2https://cotomo.ai/
+/g94/g381/g437/g374/g282/g400/g3/g336/g396/g286/g258/g410/g842/g3/g116/g346/g286/g396/g286/g3
+/g282/g381/g3/g455/g381/g437/g3/g449/g258/g374/g410/g3/g410/g381/g3/g336/g381/g845
+/g104/g400/g286/g396 /g18/g346/g258/g410/g271/g381/g410
+/g47/g3/g367/g349/g364/g286/g3/g410/g396/g258/g448/g286/g367/g349/g374/g336/g856
+/g47/g400/g3/g410/g346/g258/g410/g3/g400/g381/g845
+/g116/g346/g286/g396/g286/g3/g449/g381/g437/g367/g282/g3/g455/g381/g437/g3/g367/g349/g364/g286/g3/g410/g381/g3/g336/g381/g845
+/g882/g410/g346/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374
+/g28/g454/g349/g400/g410/g349/g374/g336/g3/g87/g258/g400/g400/g349/g448/g286/g3/g18/g346/g258/g410/g271/g381/g410 /g100/g258/g396/g336/g286/g410/g3/g87/g396/g381/g258/g272/g410/g349/g448/g286/g3/g18/g346/g258/g410/g271/g381/g410
+/g894 /g1085/g1005/g895/g882/g410/g346/g272/g381/g374/g448/g286/g396/g400/g258/g410/g349/g381/g374
+/g90/g286/g258/g367/g367/g455/g845/g3/g24/g381/g3/g455/g381/g437/g3/g346/g258/g448/g286/g3/g258/g374/g455/g3
+/g396/g286/g272/g381/g373/g373/g286/g374/g282/g286/g282/g3/g393/g367/g258/g272/g286/g400/g845
+/g47/g410/g346/g349/g374/g364/g3/g349/g410/g918/g400/g3/g258/g271/g381/g437/g410/g3
+/g410/g349/g373/g286/g3/g296/g381/g396/g3/g258/g3/g410/g396/g349/g393/g856
+/g47/g3/g346/g286/g258/g396/g3/g410/g396/g258/g448/g286/g367/g349/g374/g336/g3/g410/g381/g3
+/g60/g381/g396/g286/g258/g3/g349/g400/g3/g393/g381/g393/g437/g367/g258/g396/g3/g374/g381/g449/g842
+Figure 1: Existing vs. target chatbot examples.
+The left chatbot requires user input to begin a con-
+versation, whereas our target chatbot can initiate
+it on its own.
+actions. On the basis of these ﬁndings, we hy-
+pothesize that a chatbot can enhance users’ mo-
+tivation to converse by initiating conversations on
+(1) topics that align with interests revealed in pre-
+vious interactions and (2) topics that vary across
+conversations.
+We propose a method called Topic-Initiator, de-
+signed to proactively provide users with topics
+that are both interesting and novelʕthat is, topics
+not mentioned in previous conversations. Topic-
+Initiator ﬁrst collects information from the web and
+stores it as potential conversation topics (hereafter
+referred to as topic candidates). It also stores past
+conversations with non-target users as additional
+topic candidates, enabling these to be reused to

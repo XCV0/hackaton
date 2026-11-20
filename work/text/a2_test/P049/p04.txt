@@ -1,0 +1,151 @@
+Entity 
+Extraction 
+Tools
+Fragments
+𝑠1
+𝑠2
+𝑠𝑚 …
+𝑠1
+𝑠2
+𝑠𝑚 …
+Entities 
+e3 e5 e7
+…
+…
+e1 e2 e4 …
+e1 e5 e6 …
+Question
+Context
+Text 1 
+Text 2 …
+ PLM
+s𝑐,4 s𝑎,4s𝑐,5 s𝑎,3
+…
+𝑙𝑎,1 𝑙𝑎,4𝑙𝑎,2
+s𝑐,1 s𝑎,1s𝑐,2 s𝑐,3
+s𝑐,1 s𝑎,2s𝑐,2 s𝑎,1
+…
+𝑙𝑎
+Input Contribution Score Calculation Internal Reasoning Graph Construction Hallucination Discrimination
+LLM
+…
+Contribution Score
+𝑡1 𝑡2 𝑡𝑛𝑡3
+Layer-wise Relevance Propagation
+Internal 
+Reasoning 
+Graph
+R7 (3) = 𝑓(𝑥)
+R3←6 (1,2)
+R2←5 (1,2)
+R1←4 (1,2)
+R4←7 (2,3)
+R5←7 (2,3)
+R6←7 (2,3)
+R3←5 (1,2)
+1
+2
+3
+4
+5
+6
+7
+Briefly answer 
+the following 
+question:
+The winds are 
+blowing at 10 
+mph from the 
+north-northwest.
+Based on the given 
+passages, here are 
+the steps to upload 
+a video to Steam:
+There is 39 percentage 
+chance of rain and 10 
+mph winds from the 
+North-Northwest.
+There is 28 percentage 
+chance of rain and 5 
+mph winds from the 
+North-Northeast.
+In case the passages 
+do not contain the 
+necessary information 
+to answer the question, 
+please reply with:
+Then make a video, 
+and upload it to 
+YouTube.
+Create a YouTube 
+account if you don't 
+already have one.
+Upload your 
+video to 
+YouTube
+how to upload a 
+video to steam
+The
+winds
+are
+…
+Figure 2: The framework of our method. LRP is first applied to derive a relevance distribution Ri based on the
+parameters of the LLM. Based on Ri of entities and semantic fragments of input and output content, a semantic-level
+internal reasoning graph of LLMs is constructed. Subsequently, a PLM is used to determine whether each fragment
+exhibits semantic conflicts or omissions. Finally, the degree of hallucination occurring in the reasoning graph units
+is used to determine whether the model’s overall response exhibits hallucinations.
+the previous step using the LRP is a token-level
+attribution matrix that is faithful to the internal
+reasoning process of the model. Therefore, the in-
+ternal reasoning graph constructed based on Ri can
+faithfully reflect which contextual semantic frag-
+ments a certain semantic fragment originates from
+during the internal inference of the model.
+We first recursively use “\n” and sentence tool
+of Spacy to segment the input context into indi-
+vidual semantic fragments, thereby obtaining a
+set Sc = {sc,1, sc,2, · · · }, where each sc,i repre-
+sents the ith semantic fragment in that context.
+For the model’s output, we similarly use “\n” to
+segment, obtaining a set of semantic fragments
+Sa = {sa,1, sa,2, · · · } contained in one response
+from the model. The union of these semantic frag-
+ments, denoted as S = Sc ∪ Sa, serves as the node
+set of the model’s internal reasoning graph, that is,
+the set of atomic steps for model inference.
+As mentioned above, the text within a seman-
+tic fragment includes both linking content used to
+connect contexts and make them grammatically
+correct, and substantive content that specifically
+reflects the actual meaning and thought expressed
+in the text. When calculating attribution at the frag-
+ment level based on LRP, the attribution scores
+calculated for these linking fragments introduce a
+significant amount of noise. To distinguish between
+semantic fragments that contain rich semantic infor-
+mation and meaningless content, we use a general
+named entity extraction tool (Spacy and Stanze)
+to extract entities from the document to the great-
+est extent possible. The extracted content includes
+nouns, verbs, noun phrases, negation words, and
+named entities, which can maximize the reflection
+of the semantic meaning expressed in the text while
+filtering out linking content. The set of extracted
+results, after removing duplicates, is considered the
+core content E = {e1, e2, · · · } that expresses se-
+mantic information in the text. Finally, by mapping
+the set E to each element in the semantic fragment
+set S, we can obtain the subset of actual meaning
+Esi = {e} contained in each semantic fragment.
+In each target semantic fragment si, we only se-
+lect tokens contained in Esi to calculate its attribu-
+tion vector relative to the preceding text. Then, we
+average all the selected correlation vectors element
+by element to obtain the token-level attribution vec-
+tor of the semantic segment relative to the preced-
+ing text. For the attributed semantic fragment sj in
+the preceding text, we select the maximum value
+of tokens contained in Esj in the attribution vector
+of si as the score of si’s attribution to sj . When
+attributing, si often only attaches to a small number
+27829

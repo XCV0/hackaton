@@ -1,0 +1,64 @@
+Figure 2: The overview of RaFe. The entire procedure consists of two stages: the initial SFT, and subsequent
+feedback training. RaFe obtains ranking feedback aligned with the goal of query rewriting without annotated data
+and enables leveraging the feedback in two ways. Offline training: Constructing good-bad pairs from offline-
+generated data. Online training: Scoring queries generated in real-time and complete feedback training.
+Throughout the traditional IR pipeline, documents
+expanded by query rewriting are typically subjected
+to a reranking process. Intuitively, the reranker can
+serve as a natural feedback for query rewriting.
+Given a reranker model Mr, the process of scoring
+a document d with query q can be formulated as
+Mr(q, d). The ranking score of a rewrite q′ can be
+denoted as follows:
+S(q, q′) = 1 |D′| ∑ d′∈D′ Mr(q, d′), (3)
+here D′ indicates the documents retrieved by q′,
+and we constrain |D′| ≤ 5 for computing the scores
+on top-5 documents. In this way, we can provide
+reliable feedback for training rewriting models. As
+illustrated in Figure 2, our proposed method can be
+applied to both offline and online feedback training.
+Offline Feedback For offline feedback, we lever-
+age the ranking score of each document retrieved
+by a rewritten query to construct the preference
+data. Specifically, we set a threshold to distinguish
+the good and bad rewrites formulated as µ, which
+is computed as the average ranking score for all
+training instances as follows:
+µ = 1 |Tf| ∑ (q,q′)∈Tf S(q, q′). (4)
+Then for every rewrite q′ with a score exceeding
+the threshold µ, we regard it as a good rewrite for
+the original query q; otherwise, it is deemed a bad
+rewrite. In this way, we obtain all the preference
+pairs for open domain QA in the form (q, q′ g, q′ b).
+For the offline feedback training, we use
+DPO (Rafailov et al., 2023) and KTO (Kawin et al.,
+2023). DPO directly leverages the preference pairs
+to optimize the model, while KTO is a method
+that can optimize the model from feedback, only
+needs the signal of whether a rewrite q
+′
+is good
+or not, rather than needing pairs, formulated as
+(q, q
+′
+; ρ), ρ ∈ [good, bad]. The specific formula-
+tion of Lkto is in Eq 6, and the detailed explanation
+of the KTO is demonstrated in Appendix A.2.1.
+Online Feedback The ranking score can also
+serve as an online feedback signal. We utilize the
+Proximal Policy Optimization (PPO) (Schulman
+et al., 2017) algorithm to implement online feed-
+back training. The training process includes rewrit-
+ing, retrieving, scoring and ultimately providing
+feedback, as illustrated in Figure 2(2b). The details
+of the PPO loss and implementation are provided
+in Appendix A.2.1.
+3 Experimental Setup
+As we attempt to improve query rewriting for better
+RAG, we conduct our experiments on the typical
+RAG scenarios, Open-Domain Question Answer-
+ing (ODQA). The process of RAG for ODQA can
+be formulated as F ([D : q]), where F denotes the
+LLMs, q is the original query from datasets and D
+is the documents concatenated for augmentation.
+886

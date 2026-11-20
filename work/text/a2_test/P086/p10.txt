@@ -1,0 +1,77 @@
+30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain Geethan Sannidhi, Sagar Srinivas Sakhinana, and Venkataramana Runkana
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 HL-5 0.801 0.838 0.866 0.750 0.799 0.827 0.475 0.584 0.753 0.515 0.617 0.717 0.450 0.584 0.685
+sLA-tKGF W/GPT-4 HL-10 0.847 0.869 0.901 0.800 0.840 0.880 0.506 0.598 0.785 0.542 0.644 0.761 0.470 0.606 0.743
+sLA-tKGF W/GPT-4 HL-15 0.885 0.926 0.946 0.845 0.877 0.930 0.530 0.648 0.823 0.572 0.683 0.788 0.502 0.639 0.780
+sLA-tKGF W/GPT-4 HL-25 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-4 HL-30 0.950 0.979 1.000 0.882 0.933 0.981 0.557 0.677 0.864 0.596 0.716 0.843 0.526 0.675 0.810
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 HL-5 0.765 0.804 0.842 0.728 0.774 0.803 0.423 0.527 0.695 0.454 0.579 0.698 0.414 0.553 0.643
+sLA-tKGF W/GPT-4 HL-10 0.790 0.821 0.859 0.761 0.789 0.867 0.444 0.548 0.717 0.494 0.611 0.738 0.418 0.562 0.702
+sLA-tKGF W/GPT-4 HL-15 0.842 0.875 0.895 0.812 0.833 0.899 0.459 0.591 0.747 0.518 0.630 0.761 0.448 0.600 0.743
+sLA-tKGF W/GPT-4 HL-25 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-4 HL-30 0.900 0.922 0.962 0.833 0.881 0.952 0.489 0.624 0.791 0.531 0.676 0.817 0.470 0.635 0.761
+Table 11: The table illustrates the effect of using different historical context window sizes on tKG forecasting performance
+across several benchmark datasets. Increasing the historical context length consistently improved performance, indicating that
+more historical data enables the sLA-tKGF framework with GPT-4 integration to learn more effectively. The results highlighted
+in bold represent the performance of our proposed framework compared to existing methods.
+Dataset #Training #Validation #Test #Entities #Relation Time granularity 𝑁obs
+ICEWS05-15_continuous 148, 673 17, 195 17188 10488 251 NA 1543
+Table 12: The table displays the statistics of the new dataset. #Training, #Validation, #Test represent the number of quadruples
+in the training set, validation set, and test set, respectively. 𝑁obs represents the total number of snapshots in the new benchmark
+tKG forecasting dataset, where each snapshot captures the state of the tKG at a specific point in time.
+Single-Step ICEWS05-15_continuous
+H@1 H@3 H@10
+sLA-tKGF W/GPT-4 60.83 72.31 96.84
+sLA-tKGF W/GPT-3.5 48.36 60.94 78.68
+sLA-tKGF text-davinci-003 43.43 53.86 71.64
+sLA-tKGF W/Google Bard 54.06 68.53 90.90
+Multiple-Step ICEWS05-15_continuous
+H@1 H@3 H@10
+sLA-tKGF W/GPT-4 51.32 65.17 87.23
+sLA-tKGF W/GPT-3.5 42.15 49.84 65.59
+sLA-tKGF text-davinci-003 37.22 45.98 64.01
+sLA-tKGF W/Google Bard 45.99 60.83 73.59
+Table 13: The table shows the tKG forecasting results on
+Irregular temporal KGs.
+various benchmark KG datasets, analyzing the influence of differ-
+ent retrieved facts on the framework’s performance. We find that
+single-subject entity queries benefit from a broader range of his-
+torical facts, improving performance, while subject entity-relation
+pair queries yield a more targeted set of facts, potentially enhanc-
+ing outcomes. Our findings, as indicated in Table 14, demonstrate
+that the performance of the sLA-tKGF W/GPT-4 framework varies
+depending on the dataset. The WIKI and ICEWS18 benchmarks
+exhibit improvements with entity-focused facts, whereas ICEWS14
+performs better with pair-focused facts. Our study explores the
+impact of either single-subject entity or subject-relation pair facts,
+revealing that different datasets benefit from specific types of facts.
+This leads to more context-aware enhancements in the sLA-tKGF
+W/GPT-4 framework.
+6.6 Impact of Directionality in Historical
+Modeling on tKG forecasting Performance
+In the tKG forecasting task, ‘unidirectional’ refers to when the
+subject entity (𝑠𝑞 ) or subject-relation pair (𝑠𝑞,𝑟𝑞 ) from historical
+facts matches their position in the query quadruple (𝑠𝑞,𝑟𝑞, ?,𝑡𝑞 ).
+‘Bidirectional’ denotes cases where they can appear in any posi-
+tion. For bidirectional modeling, historical facts are transformed by
+swapping entities and inverting the relation, e.g., (𝑠,𝑟,𝑜,𝑡) becomes
+(𝑜,𝑟−1,𝑠,𝑡). We use PLLMs such as GPT-4 to obtain reciprocal rela-
+tions, enhancing tKG forecasting by incorporating diverse historical
+contexts. For instance, (Barack Obama, visit, India, 2015-01-25) be-
+comes its reciprocal (India, visited by, Barack Obama, 2015-01-25).
+Our study evaluates the directionality’s impact on the tKG fore-
+casting, finding that bidirectional modeling slightly improves per-
+formance, notably on ICEWS datasets. The experimental results
+highlight the value of appropriate relation modeling for sLA-tKGF
+W/GPT-4 in understanding context, offering modest performance
+boosts in tKG forecasting. Table 15 shows the experimental results.
+6.7 Impact of PLLMs size
+The sLA-tKGF framework leverages a blend of historical tKG data,
+current web-scraped information, and contextually relevant de-
+scriptions of past entity relationships generated by pre-trained lan-
+guage models (PLLMs) to construct knowledge-augmented prompts.
+These prompts query the small-scale language model to estimate
+10

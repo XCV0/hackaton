@@ -1,0 +1,85 @@
+Table 4: Corrective feedback of the critic module in HYBGRAG for STARK.
+Error Source Error Type Feedback
+Identification
+Incorrect Entity/Relation Entity/relation {name} is incorrect. Please remove or substitute this entity/relation.
+Missing Entity There is only one entity but there may be more. Please extract one more entity and relation.
+No Entity There is no entity extracted. Please extract at least one entity and one relation.
+No Intersection There is no intersection between the entities. Please remove or substitute one entity and relation.
+Incorrect Intersection There is an intersection between the entities, but the answer is not within it. Please remove or substitute one entity and relation.
+Selection Incorrect Retrieval Module The retrieved document is incorrect. The current retrieval module may not be helpful to narrow down the search space.
+each action, such as incorrect identification of topic
+entities, as shown in Table 4. Unlike natural lan-
+guage feedback, which may cause uncertainty or
+inconsistency depending on the LLM used, our cor-
+rective feedback provides clear guidance on how to
+refine the question routing. Furthermore, it lever-
+ages in-context learning (ICL) to provide sophis-
+ticated feedback. We collect a small number of
+successful experiences (≈ 30) in the training set as
+examples, with each experience {st, ˆEt, ˆRt, ft+1}
+comprising a pair of router action and feedback,
+which is verified by ground truth. During inference,
+the commenter gives high-quality feedback based
+on multiple pre-collected examples.
+3.3 Overall Algorithm
+The algorithm of HYBGRAG is in Algo. 1. Given
+a question q, in iteration t, the router determines
+st, ˆEt and ˆRt to retrieve the references Xt from
+both G and D in SKB, or only D, with the selected
+retrieval module. The validator Cval in the critic
+module then decides whether to accept Xt as the
+final answer or reject it. If Xt is rejected, the com-
+menter Ccom generates feedback ft+1 for the router
+to assist in refining its action in iteration t + 1.
+4 Experiments
+We conduct experiments to answer the following
+research questions (RQ):
+RQ1. Effectiveness: How well does HYBGRAG
+perform in real-world benchmarks?
+RQ2. Ablation Study: Are all the design choices
+in HYBGRAG necessary?
+RQ3. Interpretability: How does HYBGRAG re-
+fine its question routing based on feedback?
+Benchmarks We conduct experiments on two
+QA benchmarks: STARK1 (Wu et al., 2024b),
+which serves as the primary evaluation benchmark
+1Due to legal issue, only STARK-MAG and STARK-
+PRIME are used in this article.
+Algorithm 1: HYBGRAG
+Input: Question q, a SKB with G and D,
+Entity Types TE , Relation Types TR,
+and Maximum Iterations T
+1 f1 = "";
+2 for t = 1, . . . , T do
+3 /* Retriever Bank */
+4 st, ˆEt, ˆRt = Router(q, TE , TR, ft);
+5 if st is hybrid retrieval module then
+6 Xt = HybridRM (q, G, D, ˆEt, ˆRt);
+7 else
+8 Xt = T extRM (q, D);
+9 /* Validator */
+10 if Cval(q, Xt) = T rue then
+11 Return Xt;
+12 else
+13 /* Commenter */
+14 ft+1 = Ccom(q, st, ˆEt, ˆRt);
+15 Return Xt;
+and focuses on retrieval, and CRAG (Yang et al.,
+2024), a complementary benchmark to evaluate
+end-to-end RAG performance. While STARK fo-
+cuses on HQA, CRAG encompasses both ODQA
+and KBQA as sub-problems. Detailed benchmark
+descriptions are provided in Appx. A.
+4.1 Retrieval Evaluation on STARK
+We use the default evaluation metrics provided by
+STARK, which are Hit@1, Hit@5, Recall@20
+and mean reciprocal rank (MRR), to evaluate the
+performance of the retrieval task. We compare
+HYBGRAG with various baselines, including re-
+cent GRAG methods (QAGNN (Yasunaga et al.,
+2021) and Think-on-Graph (Sun et al., 2024)); tra-
+ditional RAG approaches; and self-reflective LLMs
+(ReAct (Yao et al., 2023), Reflexion (Shinn et al.,
+2023), and AVATAR (Wu et al., 2024a)). The de-
+tails of the implementation are in Appx. C.
+883

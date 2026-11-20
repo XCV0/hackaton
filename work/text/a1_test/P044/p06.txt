@@ -1,0 +1,56 @@
+Symmetry 2025, 17, 2106 6 of 19
+These proxy choices were guided by structural and functional similarity (e.g., aro-
+matic sulfur-containing backbones and comparable production routes). Given that PTB7-
+Th:ZY-4Cl precursors account for roughly 10% of the total GWP at the cell level, even
+a factor-of-two uncertainty in the proxy dataset would change the overall GWP by less
+than ±10%, without affecting the dominance of electricity use and ITO/PEDOT:PSS as
+environmental hotspots.
+The detailed inventory is provided in the Tables 1 and 2 (process-related energy
+consumption). Table 1 presents the actual (measured) material and energy use, for example,
+the hotplate maximum power used is 500 W while the used capacity is 20%, hence the
+considered power is 100 W along with used time to find the energy; for the LCA, these
+data were normalized to one OPV unit cell (0.04 cm2) as the inventory basis. Please not
+that in Table 2 (material inputs), scaling factors were applied to normalize results to the
+functional unit.
+Table 1. Process-related energy consumption for lab-scale fabrication of a PTB7-Th:ZY-4Cl organic
+solar cell.
+Process Step Equipment Power (W) Duration (h) Energy (Wh) Energy (kWh)
+Ultrasonic cleaning Ultrasonic bath 160 0.45 54 0.054
+PEDOT:PSS spin coating Spin coater 500 0.017 8.5 0.0085
+PEDOT:PSS annealing
+(110 ◦C) Hot plate 100 0.166 16.6 0.0167
+Spin coating (active
+layer) Spin coater 500 0.017 8.5 0.0085
+Active layer annealing
+(100 ◦C) Hot plate 100 0.166 16.6 0.0166
+Blend dissolution (24 h,
+75 ◦C)
+Magnetic
+stirrer & hot
+plate
+100 24 - 2.4 kWh
+PVD deposition (Al
+electrode)
+Vacuum
+system – – – 2.7 × 10−6
+Table 2. Material inventory for lab-scale fabrication of a PTB7-Th:ZY-4Cl organic solar cell.
+Material Quantity Mass (g)
+Deionized water 80 mL 80.0
+Hellmanex solution
+(Na-alkylbenzene
+sulfonate)
+2 mL 2.2
+Isopropanol 2 mL 1.57
+PEDOT:PSS 45 µL 0.04
+PTB7-Th:ZY-4Cl blend 200 µL 0.20
+Chlorobenzene (solvent) 1 mL 1.106
+Aluminum (40% coverage,
+100 nm) – 4.8 × 10−8
+Glass substrate (soda-lime,
+1 mm thick) 4 × 10−6 m2 0.0113
+2.2.2. Functional Unit
+The functional unit is defined as the fabrication of one solar cell with an active area of
+0.04 cm2 (4 × 10−6 m2). All life cycle inventory data and environmental impact results are
+normalized to this unit. Scaling up to 1 m2 is performed only for comparative purposes
+with other photovoltaic technologies reported in the literature. This upscaling assumes
+linear scaling of material and energy inputs with area (constant layer thickness and process

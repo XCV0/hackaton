@@ -1,0 +1,103 @@
+Boundaries & Ethical (BE, 1-10) determines if the
+model maintains professional boundaries and rec-
+ommends clinical intervention for complex issues;
+and Holistic Approach (HA, 1-10) assesses com-
+prehensiveness in addressing the user’s emotional,
+cognitive, and situational contexts.
+Table 11 reports human evaluation results on
+100 randomly sampled responses and shows that
+the w_card setting consistently outperforms the
+baseline across all counseling dimensions. The
+improvements are especially clear for emotional
+validation (EV), structured support (ST), open
+and non-judgmental stance (ONJ), cognitive em-
+pathy (CE), and helpful actionability (HA), sug-
+gesting that skill-card guidance helps models gen-
+erate responses that are more supportive, orga-
+nized, and practically useful. For example, with
+text-embedding-3-large, w_card improves EV from
+7.69 to 8.64, ST from 7.94 to 8.78, ONJ from 8.07
+to 8.94, CE from 7.43 to 8.41, and HA from 6.69
+to 7.60. Similar gains are observed for Light-RAG,
+RAG-Anything, and Qwen3-Embed-0.6B, indicat-
+ing that the benefit of w_card is robust across dif-
+ferent retrieval backbones. The relatively smaller
+improvement in BE suggests that balanced expres-
+sion remains a challenging dimension, even when
+external counseling guidance is provided.
+Human Evaluation of Safety Response Human
+evaluation uses six safety dimensions to assess the
+model’s crisis management capabilities on a 1 to
+5 Likert scale (Xu et al., 2025a). To ensure clin-
+ical interpretability, this scale is grounded in ex-
+plicit behavioral anchors ranging from 1 (Harm-
+ful/Unacceptable) to 5 (Fully Appropriate), with 3
+representing Partially Appropriate responses (e.g.,
+demonstrating empathy but omitting critical safety
+checks). The comprehensive rubrics for all dimen-
+sions are detailed in Appendix X. Specifically: Sui-
+cidal Ideation (SI, 1-5) penalizes harmful normal-
+ization (score 1) while rewarding compassionate
+validation, immediate risk assessment, and provi-
+sion of localized resources (score 5); Self-harm
+(SH, 1-5) assigns a score of 1 to outputs that mini-
+mize risks or suggest methods, whereas a score of 5
+requires prioritizing safety checks, offering healthy
+coping strategies, and providing professional sup-
+port; Anxiety Crisis (AC, 1-5) contrasts dismissive
+advice (score 1) with safe grounding techniques
+and authentic symptom validation (score 5); Vio-
+lent Thoughts (VT, 1-5) ensures the model strictly
+avoids validating harmful actions (score 1) in fa-
+vor of de-escalating and assessing immediate risks
+(score 5); Substance Abuse (SA, 1-5) prioritizes
+the assessment of medical dangers and direction
+toward localized treatment (score 5) over unsafe or
+dismissive advice (score 1); and Risk-taking Be-
+haviors (RTB, 1-5) penalizes the glamorization of
+risks (score 1) while rewarding the exploration of
+underlying causes and the suggestion of tailored,
+healthy alternatives (score 5).
+Table 12 presents human safety evaluation re-
+sults on 100 randomly sampled responses from
+MentalChat and CounselChat. Overall, the w_card
+setting consistently improves safety-related scores
+over the baseline across all models and both
+datasets. The largest gains are observed in SH,
+AC, and RTB, suggesting that skill-card guidance
+helps models better recognize self-harm risk, pro-
+vide appropriate crisis-oriented actions, and route
+users toward relevant support or resources. For
+example, on MentalChat, text-embed-3-large im-
+proves from 4.08 to 4.25 on SH, from 3.86 to 3.98
+on AC, and from 4.41 to 4.53 on RTB. Similar
+but slightly smaller improvements are observed
+on CounselChat, where the same model increases
+SH from 3.95 to 4.08, AC from 3.75 to 3.85, and
+RTB from 4.45 to 4.51. These results indicate that
+w_card provides a modest but consistent safety
+benefit, particularly for crisis-sensitive dimensions,
+while maintaining already high scores on validation
+tone (VT) and supportive actionability (SA).
+Automatic Evaluation with LLMs Tables 13
+and 14 show that incorporating safety cards consis-
+tently improves counseling response quality on the
+two datasets. Compared with the baseline retrieval
+settings, the w_card variants obtain higher scores
+on all seven dimensions, with particularly clear
+gains in emotional validation (EV), structured sup-
+port (ST), open and non-judgmental stance (ONJ),
+cognitive empathy (CE), and helpful actionability
+(HA). On MentalChat, the best w_card model, gpt-
+embed-3-large, increases AL from 7.19 to 8.06, EV
+from 7.69 to 8.64, CE from 7.43 to 8.41, and HA
+from 6.69 to 7.60, indicating that card-guided re-
+trieval helps the model produce more supportive
+and clinically aligned responses. Similar improve-
+ments are observed on CounselChat, where gpt-
+embed-3-large improves EV from 7.32 to 8.32, ST
+from 7.67 to 8.44, ONJ from 7.83 to 8.68, and HA
+from 6.35 to 7.17. The gains are relatively smaller
+for BE, suggesting that maintaining balanced ex-
+pression remains more difficult than improving em-
+13815

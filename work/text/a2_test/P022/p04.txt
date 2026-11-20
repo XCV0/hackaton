@@ -1,0 +1,94 @@
+Generator
+Patrick Mulvany takes pleasure in
+playing football and joined the Meath
+senior football club in 1890 … In 1894,
+Patrick Mulvany became a politician ...
+He was first elected to Dáil Éireann at
+the 1923 general election …
+Patrick Mulvany became a politician 
+when he was 23.
+Prob Reconstruction
+...
+footballer politicianwriter
+Enhanced 
+Probability Distribution
+Q: What is Patrick Mulvany's occupation?
+GT: politician 
+Document-level Knowledge (D)
+Fine-grained Knowledge (S)
+Query & Ground Truth (Q,GT)
+Q+D
+Q+S
+...
+footballer politicianwriter
+...
+footballer politicianwriter
+Document-based 
+Probability Distribution
+Fine-grained 
+Probability Distribution
+Figure 3: Decoding Enhancement Strategy. For each query, we incorporate additional fine-grained knowledge to
+reconstruct the document-based probability distribution.
+the document-based distribution and produce the
+enhanced distribution, which enables the model to
+focus more on sentence-level fine-grained informa-
+tion and achieve better performance.
+Fine-grained probability distribution For each
+question q and its corresponding fine-grained re-
+trieved knowledge S = (s1, s2, ..., sm), we en-
+close them into a specific generation template2 T
+and the generator’s input xs is T (q, S), where S
+is the concatenation of si. The generator θ then
+takes the template as input and generates the corre-
+sponding answer ys in an auto-regressive manner.
+At each time step t, the generator θ compute the
+logits zs,t for the t-th token ys,t:
+zs,t = θ(xs, ys,<t) (1)
+The fine-grained probability distribution can be
+obtained by normalizing zs,t:
+pθ(ys,t|xs, ys,<t) = softmax(zs,t) (2)
+Then, the actual token ys,t in answer ys is generated
+through certain sampling strategies:
+ys,t ∼ pθ(ys,t|xs, ys,<t) (3)
+When sampling from the fine-grained probabil-
+ity distribution, the generator will produce query-
+focused content that is more likely to yield helpful
+answers to the question.
+Document-based probability distribution For
+each question q and its corresponding retrieved
+knowledge documents D = (d1, d2, ..., dn), the
+generator’s input xd is T (q, D), where D is the
+2For example, T (q, k)="Generate an answer to question
+q based on the retrieved knowledge k."
+concatenation of di. At each time step t, the gener-
+ator θ compute the logits zd,t for the t-th token yd,t
+and the document-based probability distribution
+can be obtained by normalizing zd,t:
+zd,t = θ(xd, yd,<t) (4)
+pθ(yd,t|xd, yd,<t) = softmax(zd,t) (5)
+Then, the actual token yd,t in answer yd is gener-
+ated through certain sampling strategies:
+yd,t ∼ pθ(yd,t|xd, yd,<t) (6)
+When sampling from the document-based proba-
+bility distribution, the generator can integrate frag-
+mented knowledge within documents, which con-
+sequently enables more precise answers in context-
+aware QA scenarios.
+Enhanced probability distribution We inte-
+grate two types of distribution and obtain the en-
+hanced distribution pθ(yt) based on Eq.2 and Eq.5:
+pθ(yt) = softmax(zd,t/τd)+α softmax(zs,t/τs) 1+α , (7)
+where α is the control strength and τ is the tem-
+perature. These two parameters can adjust differ-
+ent probability distributions for better coordination.
+Commonly, a token will only get a high probability
+if it has a high probability under both pθ(yt|xd, y<t)
+and pθ(yt|xs, y<t), where xd and xs represent the
+generator’s inputs based on the original retrieved
+documents and the fine-grained retrieved sentences.
+Sampling fluent output from language models
+commonly requires truncating the unreliable tail of
+the probability distribution (Liu et al., 2021), as in
+top-k (Fan et al., 2018) or nucleus sampling (Holtz-
+man et al., 2019). Inspired by this, we truncate the
+10034

@@ -1,0 +1,105 @@
+Table 5: Ablation Study. We analyze the performance
+gain obtained from incrementally adding each substage.
+Method P |d| (↓) Accuracy (↑) Avg F1-Score (↑)
+Naive RAG 21 65.00% 0.6146
+Naive RAG + ACTS 19 68.33% 0.6524
+Naive RAG + ACTS + GS 15 75.00% 0.7426
+Naive RAG + ACTS + GS + AE (Ours) 9 85.00% 0.8394
+Table 6: Role-playing capabilities on CharacterRAG.
+Higher values of ACC (%) and ACCL (1-10) correspond
+to better performance, whereas lower values of HS (1-
+10) are preferable.
+RAG Method
+GPT-4.1 Gemma3-27B Qwen3-32B
+ACC (↑) ACCL (↑) HS (↓) ACC (↑) ACCL (↑) HS (↓) ACC (↑) ACCL (↑) HS (↓)
+w/o RAG 49.56% 6.79 - 27.56% 5.33 - 18.89% 4.35 -
+Naive RAG 91.33% 9.23 3.13 86.44% 8.85 3.27 78.44% 8.49 5.05
+LightRAG 48.00% 6.06 - 69.56% 8.17 - 68.67% 8.20 -
+CRAG 70.00% 8.26 3.21 57.78% 7.57 4.09 28.67% 5.24 8.68
+AMADEUS (Ours) 92.67% 9.26 2.89 88.00% 8.92 3.26 78.89% 8.63 4.66
+times the ground-truth (GT) type of each character
+was not correctly identified. P |d| is a measure ob-
+tained by summing these values; lower values are
+preferable. Our framework maintains persona con-
+sistency even when answering questions that are
+not explicitly specified in each character’s persona
+in both MBTI and BFI settings. Note that the per-
+formance gap of CRAG is significant between the
+two settings. We assume that questions requiring
+analogical reasoning are difficult to solve even with
+web search and that the search results may contain
+non-negligible noise. On the other hand, LightRAG
+exhibits the lowest performance, which shows that
+graph-based RAG methods are not well suited for
+RPA applications due to the high cost of graph con-
+struction, the difficulty in adding or removing new
+knowledge, and challenges in maintaining persona
+consistency. While we did not perform a direct
+comparison, we observed that GraphRAG (Shukla
+et al., 2025) suffers from similar problems.
+Impact of Each Module in Our Framework.
+Table 5 demonstrates the results of ablation study,
+evaluated on 60 MBTI questions. We find that
+ACTS, GS, and AE are all highly effective at han-
+dling questions that go beyond a character’s knowl-
+edge. Note that AE achieves the largest perfor-
+mance improvement, highlighting that extracting
+and incorporating character attributes as input is
+far more effective than simply providing chunks
+related to the user query.
+CharacterRAG Dataset Serves as a Valuable
+Resource for the Construction and Evaluation
+of RAG-Based RPAs. To investigate the factors
+influencing the performance of role-playing, we
+conduct a comprehensive interview-based assess-
+ments on the generalization capabilities of models
+with various LLMs and RAG techniques. Table 6
+and Table 8 present how the ability to accurately
+answer questions related to the character’s knowl-
+edge, which is a core aspect of role-playing, varies
+across the applied methodologies. We first exam-
+ine to what extent each LLM possesses background
+knowledge about the 15 characters in a setting with-
+out RAG, and results show that none of the three
+LLMs are capable of effective role-playing with-
+out access to external knowledge. Moreover, we
+observe that LightRAG, a graph-based RAG, is
+ill-suited for the storage and retrieval of character
+knowledge, as it often suffers from issues such as
+entity ambiguity and uninformative responses.
+In a similar vein, CRAG exhibits challenges in
+maintaining role-playing fidelity, which can be at-
+tributed to the tendency of web search-based RAG
+methods to utilize retrieved content that may under-
+mine the consistency of a character’s persona. In-
+deed, despite leveraging web information, CRAG
+is able to correctly answer only 6 out of the 30
+CharacterRAG questions pertaining to Nina Iseri.
+In addition, to analyze how a thinking mode of
+LLMs influences their role-playing capabilities, we
+employ Qwen 3-32B. Results demonstrate that the
+thinking mode fails to yield any substantial positive
+effect on enhancing role-playing performance. Our
+framework achieves the best performance across
+all three LLMs. We also find that the Hallucination
+Score (HS) is the lowest in CharacterRAG setting.
+6 Conclusion
+In this work, we address critical limitations in build-
+ing retrieval-augmented, RPAs with LLMs. By in-
+troducing a novel framework consisting of an Adap-
+tive Context-aware Text Splitter (ACTS), Guided
+Selection (GS), and Attribute Extractor (AE), our
+approach enables robust and consistent simulation
+of character personas, even when confronted with
+queries that extend beyond explicit persona knowl-
+edge. Through the development of the Character-
+RAG dataset, we provide a valuable resource that
+enables the construction of RAG-based RPAs, as
+well as their reproducible evaluation. Experimental
+results demonstrate that the proposed method not
+only enhances the character’s knowledge represen-
+tation, but also faithfully models nuanced traits
+such as personality. We are enthusiastic about
+the future prospects of RAG-driven role-playing
+agents, along with the creation of stronger character
+persona dataset and improved RAG architectures.

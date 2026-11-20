@@ -1,0 +1,111 @@
+Model Acc (%)
+LLM Methods
+LYNX (70B) 88.4
+GPT-4o 87.9
+Llama-3-70B-Instruct 87.0
+GPT-4-Turbo 86.0
+LYNX (8B) 85.7
+Claude-3-Sonnet 84.5
+Llama-3-8B-Instruct 83.1
+Mistral-7B-Instruct 78.3
+Claude-3-Haiku 68.9
+GPT-3.5-Turbo 62.2
+NLI Methods
+TrueTeacher (11B) 71.6
+MiniCheck-FT5 69.1
+Provenance 65.6
+AlignScore-Large 61.2
+HHEM-2.1-Open 60.5
+AlignScore-Base 58.4
+RAGAS Faithfulness 56.9
+Ours – Config A (0.5B) 70.1
+Ours – Config B (1.5B) 78.8
+Table 16: Overall accuracy (%) on HaluBench (Ravi
+et al., 2024). Config B surpasses all NLI-based methods
+and is competitive with 7B LLMs.
+Model Acc (%)
+LLM Methods
+Davinci002/003 80.4
+ChatGPT 79.4
+Claude 2 75.0
+GPT-3 72.7
+NLI Methods
+TrueTeacher (11B) 63.9
+Provenance 56.7
+AlignScore-Large 51.7
+AlignScore-Base 50.7
+MiniCheck-FT5 51.6
+HHEM-2.1-Open 50.1
+RAGAS Faithfulness 53.6
+Ours – Config A (0.5B) 58.1
+Ours – Config B (1.5B) 58.0
+Table 17: Accuracy (%) on HaluEval (Li et al., 2023).
+The marginal difference between Config A and Config B
+is consistent with MiniCheck’s documented underper-
+formance on synthetic HaluEval errors.
+E RAGAS Faithfulness: Categorization
+Note
+The RAGAS Faithfulness baseline uses the
+FaithfulnesswithHHEM variant. Although it in-
+vokes an LLM to decompose claims into sub-
+statements, the final faithfulness judgment relies on
+an NLI model (HHEM) scoring each claim against
+the retrieved context, making it conceptually closer
+to an NLI-based approach. Furthermore, the faith-
+fulness accuracy is not sensitive to which LLM
+performs the decomposition step. For these rea-
+sons, RAGAS Faithfulness is categorized as an
+NLI method in all result tables and excluded from
+parameter count discussions.
+F HotPotQA-Derived: Quality Control
+Details
+Initial Quality Control. During data generation,
+we conducted stratified sampling at approximately
+1:500. The concise answer styles of HotPotQA
+make it nearly impossible for generated halluci-
+nated answers to be factually incorrect when fol-
+lowing this style.
+Comprehensive Quality Validation. LLMs
+flagged 1,173 potentially problematic samples out
+of 72,391. Manual secondary verification on all
+flagged samples confirmed no factual generation
+errors.
+G Prompts for Data Generation
+All generation and screening phases use DeepSeek-
+V3 at temperature 0.
+Generation System Prompt:
+"You are an expert in generating subtly
+hallucinated answers."↪→
+"Your task is to create responses that appear
+credible at first↪→
+glance, but contain verifiable factual errors
+when cross-checked↪→
+with the provided golden answer and context."
+Generation User Prompt:
+"Question: <question>"
+"Golden Answer: <answer>"
+"Context: <context>"
+"Generate a plausible but factually incorrect
+answer that:↪→
+1. Maintains grammatical correctness
+2. Contains subtle factual inconsistencies
+3. Presents logical reasoning flaws
+4. Includes inaccurate numerical/data references
+5. If Golden Answer answers briefly with a noun
+or phrase,↪→
+you should do the same"
+Screening System Prompt:
+"You are a cautious validator for hallucinated
+answers."↪→
+"Flag answers where the requested hallucination
+is:↪→
+1. Not clearly detectable (errors are ambiguous
+or borderline)↪→
+2. Potentially non-existent (accidentally
+correct/plausible)↪→
+3. Insufficiently severe (fails to meet the
+defined criteria)"↪→
+"Priority: Minimize missed cases, even at the
+cost of↪→
+over-flagging."
+1616

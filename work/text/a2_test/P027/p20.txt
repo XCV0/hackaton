@@ -1,0 +1,49 @@
+Published as a conference paper at ICLR 2025
+G PROMPT OF RATIONALE GENERATION
+========================================= Prompt =========================================
+# Memorize this piece of evidence in mind and use it as if you already know it.
+# Evidence: State religion
+Despite enjoying considerable popular support, Christianity was still not the official
+state religion in Rome, although it was in some neighboring states such as Armenia, Iberia,
+and Aksum. Roman Religion (Neoplatonic Hellenism) was restored for a time by the Emperor
+Julian from 361 to 363. Julian does not appear to have reinstated the persecutions of the
+earlier Roman emperors. Catholic Christianity, as opposed to Arianism and other ideologies
+deemed heretical, was declared to be the state religion of the Roman Empire on 27 February
+380 by the decree "De fide catolica".
+# Instruction: When did christianity become official religion of Rome?
+# Response: 380 AD
+# Rationale: (complete the following sentence with details from the evidence; you can only
+use the information from the evidence)
+======================================= Completion =======================================
+Catholic Christianity was declared the official state religion of the Roman Empire on
+February 27th, 380, through the decree "De fide catolica".
+Figure 5: Prompt of Rationale Generation for Gemini-Ultra
+H PROMPT OF RAG DRAFTING
+========================================= Prompt =========================================
+Response to the instruction. Also provide rationale for your response.
+## Instruction: In Buddhism, what is the state of blissful repose or absolute existence by
+someone relieved of the necessity of rebirth?
+## Evidence:
+[1] Buddhism
+Nirvana literally means "blowing out, quenching, becoming extinguished". In early Buddhist
+texts, it is the state of restraint and self-control that leads to the "blowing out" and
+the ending of the cycles of sufferings associated with rebirths and redeaths. Many later
+Buddhist texts describe nirvana as identical with "anatta" with complete "emptiness,
+nothingness". In some texts, the state is described with greater detail, such as passing
+through the gate of emptiness ("sunyata") realizing that there"
+[2] Salvation
+It includes a variety of disciplines, such as yoga and meditation. Nirvana is the profound
+peace of mind that is acquired with moksha (liberation). In Buddhism and Jainism, it is the
+state of being free from suffering. In Hindu philosophy, it is union with the Brahman (
+Supreme Being). The word literally means "blown out" (as in a candle) and refers, in the
+Buddhist context, to the blowing out of the fires of desire, aversion, and delusion, and
+the imperturbable stillness of mind acquired thereafter. In Theravada Buddhism the emphasis
+is on one’s
+======================================= Completion =======================================
+## Rationale: Nirvana literally means ’blowing out, quenching, becoming extinguished’. It
+is described as a state of "restraint and self-control" that leads to the "blowing out" and
+the ending of the cycles of sufferings associated with rebirths and redeaths.
+## Response: In Buddhism, the state of blissful repose or absolute existence by someone
+relieved of the necessity of rebirth is called Nirvana.
+Figure 6: Prompt of RAG Drafting
+20

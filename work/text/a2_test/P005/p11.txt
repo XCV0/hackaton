@@ -1,0 +1,108 @@
+the 2025 Conference on Empirical Methods in Natu-
+ral Language Processing, pages 1195–1213, Suzhou,
+China. Association for Computational Linguistics.
+LangChain Team. 2024. Langchain: A framework for
+developing applications powered by language mod-
+els.
+Qwen Team. 2025. Qwen3 technical report. Preprint,
+arXiv:2505.09388.
+Akshay Verma, Swapnil Gupta, Siddharth Pillai, Prateek
+Sircar, and Deepak Gupta. 2026. ReflectiveRAG: Re-
+thinking adaptivity in retrieval-augmented generation.
+In Proceedings of the 19th Conference of the Euro-
+pean Chapter of the Association for Computational
+Linguistics (Volume 5: Industry Track), pages 377–
+384, Rabat, Morocco. Association for Computational
+Linguistics.
+Elena Voita, David Talbot, Fedor Moiseev, Rico Sen-
+nrich, and Ivan Titov. 2019. Analyzing multi-head
+self-attention: Specialized heads do the heavy lift-
+ing, the rest can be pruned. In Proceedings of the
+57th Annual Meeting of the Association for Computa-
+tional Linguistics, pages 5797–5808, Florence, Italy.
+Association for Computational Linguistics.
+Jingjin Wang and Jiawei Han. 2025. PropRAG: Guid-
+ing retrieval with beam search over proposition paths.
+In Proceedings of the 2025 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+6212–6227, Suzhou, China. Association for Compu-
+tational Linguistics.
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio,
+William Cohen, Ruslan Salakhutdinov, and Christo-
+pher D. Manning. 2018. HotpotQA: A dataset for
+diverse, explainable multi-hop question answering.
+In Proceedings of the 2018 Conference on Empiri-
+cal Methods in Natural Language Processing, pages
+2369–2380, Brussels, Belgium. Association for Com-
+putational Linguistics.
+Jiahao Zhang, Haiyang Zhang, Dongmei Zhang, Liu
+Yong, and Shen Huang. 2024. End-to-end beam re-
+trieval for multi-hop question answering. In Proceed-
+ings of the 2024 Conference of the North American
+Chapter of the Association for Computational Lin-
+guistics: Human Language Technologies (Volume
+1: Long Papers), pages 1718–1731, Mexico City,
+Mexico. Association for Computational Linguistics.
+Mingtian Zhang, Yu Tang, and PageIndex Team. 2025a.
+Pageindex: Next-generation vectorless, reasoning-
+based rag. PageIndex Blog.
+Tianyi Zhang*, Varsha Kishore*, Felix Wu*, Kilian Q.
+Weinberger, and Yoav Artzi. 2020. Bertscore: Eval-
+uating text generation with bert. In International
+Conference on Learning Representations.
+Yanzhao Zhang, Mingxin Li, Dingkun Long, Xin Zhang,
+Huan Lin, Baosong Yang, Pengjun Xie, An Yang,
+Dayiheng Liu, Junyang Lin, Fei Huang, and Jingren
+Zhou. 2025b. Qwen3 embedding: Advancing text
+embedding and reranking through foundation models.
+Preprint, arXiv:2506.05176.
+Jihao Zhao, Zhiyuan Ji, Zhaoxin Fan, Hanyu Wang,
+Simin Niu, Bo Tang, Feiyu Xiong, and Zhiyu Li.
+2025a. MoC: Mixtures of text chunking learners for
+retrieval-augmented generation system. In Proceed-
+ings of the 63rd Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Pa-
+pers), pages 5172–5189, Vienna, Austria. Associa-
+tion for Computational Linguistics.
+Jihao Zhao, Zhiyuan Ji, Yuchen Feng, Pengnian Qi,
+Simin Niu, Bo Tang, Feiyu Xiong, and Zhiyu Li.
+2025b. Meta-chunking: Learning text segmenta-
+tion and semantic completion via logical perception.
+Preprint, arXiv:2410.12788.
+Kunlun Zhu, Yifan Luo, Dingling Xu, Yukun Yan,
+Zhenghao Liu, Shi Yu, Ruobing Wang, Shuo Wang,
+Yishan Li, Nan Zhang, Xu Han, Zhiyuan Liu, and
+Maosong Sun. 2025. RAGEval: Scenario specific
+RAG evaluation dataset generation framework. In
+Proceedings of the 63rd Annual Meeting of the As-
+sociation for Computational Linguistics (Volume 1:
+Long Papers), pages 8520–8544, Vienna, Austria.
+Association for Computational Linguistics.
+A Benchmark and Baseline Details
+A.1 Benchmark Dataset Details
+We include four retrieval-focused benchmarks—
+SCI-DOCS, LegalBench-RAG, Dragonball, and
+MS MARCO—and three end-to-end genera-
+tion benchmarks—HotpotQA, WebQuestions, and
+Dragonball. Together, these datasets cover scien-
+tific retrieval, legal retrieval, open-domain passage
+retrieval, multi-hop question answering, short-form
+factual QA, and multi-domain RAG evaluation.
+SCI-DOCS (Cohan et al., 2020) is a scientific
+document representation benchmark introduced
+with SPECTER. It contains multiple document-
+level tasks, including citation prediction, document
+classification, and recommendation. We use SCI-
+DOCS as a scientific retrieval benchmark because
+scientific abstracts are dense, terminology-heavy,
+and often contain multiple related concepts within
+a short span. This makes the dataset useful for test-
+ing whether SPROUTRAG can construct coherent
+sentence-level hierarchies in technical domains.
+LegalBench-RAG (Pipitone and Alami, 2024)
+is designed specifically to evaluate retrieval in
+legal RAG pipelines. It contains 6,858 query-
+answer pairs over legal documents such as NDAs,
+M&A agreements, commercial contracts, and pri-
+vacy policies. Unlike broad document retrieval,
+46531

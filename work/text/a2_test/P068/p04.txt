@@ -1,0 +1,102 @@
+box coordinates are used to draw the bounding box
+on the target document screenshot, which is pre-
+sented to the user along with the generated answer.
+Technically, existing instruction-tuned VLMs,
+such as Qwen2-VL-72B (Wang et al., 2024), can
+potentially be prompted to perform VISA in a zero-
+shot manner. However, we find that VISA remains
+a challenging task. Consequently, further super-
+vised fine-tuning on a dedicated VISA task dataset
+is necessary. In the next section, we introduce the
+datasets we crafted specifically for training and
+evaluating VISA.
+3.3 Dataset Acquisition
+The training and evaluation data suitable for the
+VISA task needs to be formatted as follows: the
+input consists of a textual query and document
+screenshot images as multimodal inputs, while the
+target outputs include the textual short answer, the
+relevant document identifier, and the coordinates
+of the bounding box. To create datasets that meet
+these requirements, we craft existing publicly avail-
+able datasets to support the training and evaluation
+of our proposed VISA method.
+Wiki-VISA is derived from the Natural Ques-
+tions (NQ) dataset (Kwiatkowski et al., 2019). The
+original NQ dataset provides natural questions,
+along with short and long answers sourced from
+Wikipedia webpages. We use the short answers
+as answer targets. However, the original dataset
+does not contain the original webpage screenshots.
+We use the Selenium Python toolkit2 to access and
+render the webpage with the original URL with a
+history version stamp. And take a screenshot with
+980 pixels width and up to 3920 pixels (4 pages)
+height. Using the long answer, we identify the cor-
+responding element in the HTML from which the
+long answer is derived. We then draw a bounding
+box around this element to obtain the coordinates.
+Notably, the answers in this dataset can come from
+various elements, such as passages, tables, lists,
+or images within the webpage. Since the ques-
+tions and answers in Wiki-VISA are human-judged,
+we consider this dataset a high-quality, supervised
+dataset and evaluation for VISA on general knowl-
+edge, with Wikipedia webpage.
+Paper-VISA is derived from PubLayNet (Zhong
+et al., 2019), a dataset originally designed for doc-
+ument layout analysis of single-page PubMed PDF
+documents (adhering to a 3:2 aspect ratio). Pub-
+2https://pypi.org/project/selenium/
+LayNet provides bounding box coordinates and
+class labels (e.g., title, text, table, figure, etc.) for
+each element in a paper’s PDF screenshot. How-
+ever, the dataset does not include queries or an-
+swers associated with each document. To ad-
+dress this limitation, we leverage instruction-tuned
+VLMs (e.g. Qwen2-VL-72B) to synthetically gen-
+erate queries and answers. Specifically, for each
+paper screenshot sample in the PubLayNet training
+data, we select a bounding box within the sam-
+ple and overlay it on the screenshot. The modi-
+fied screenshot is then input to the VLM with a
+prompt designed to instruct the model to generate
+a question and a short answer based on the content
+within the bounding box. See Appendix A.10 for
+the prompt details and generation example. By aug-
+menting the original PubLayNet in this way, we
+create synthetic queries and answers, enabling it
+to support VISA training. We consider the result-
+ing Paper-VISA dataset as synthetic training and
+evaluation for scientific paper PDFs in the medical
+domain.
+FineWeb-VISA is based on the FineWeb-edu
+corpus (Penedo et al., 2024), a high-quality text
+corpus of crawled webpages. We sampled 60k
+webpage URLs and used Selenium to capture
+screenshots of diverse, content-rich webpages (in
+980x3920 pixels). A passage containing more
+than 50 words was randomly selected as the tar-
+get source. A bounding box was drawn around
+the selected content, and a VLM was prompted to
+generate a query and short answer supported by the
+target content, similar as Paper-VISA. Although
+FineWeb-VISA provides a diverse layout, it does
+not guarantee be high-quality data as human anno-
+tated in Wiki-VISA or Paper-VISA that assessing a
+specific domain, we only leverage FineWeb-VISA
+as training data to analysis zero-shot and data aug-
+mentation effectiveness.
+3.4 Multi-Candidates
+By now, each query is paired with the triplet of a
+positive document, target short answer, and target
+evidence bounding box. To set up a RAG exper-
+imental environment for evaluating VISA, we in
+addition need to let the generator take multiple can-
+didates as input, simulating the scenario that the
+generator is taking multiple retrieval candidates
+and attributing the evidence in most relevant docu-
+ments. Given the query q, we use a retriever R to
+retrieve top-k candidates. And randomly sampled
+m − 1 candidates that are not ground truth as hard
+30157

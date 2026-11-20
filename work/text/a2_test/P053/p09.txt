@@ -1,0 +1,106 @@
+Limitations
+Despite the promising results demonstrated in this
+paper, there are several limitations to our frame-
+work.
+• We have only conducted a preliminary explo-
+ration of the selector and its performance is
+currently the largest bottleneck in the entire
+framework. Improving the prediction accu-
+racy of the selector is key to further unlocking
+the potential of adaptive text compression.
+• Our work focuses on adaptive context selec-
+tion, lacking experimental analysis under con-
+trolled conditions, which remains a promising
+direction for future research.
+• We have trained the compressor and selector
+separately, without further exploring the po-
+tential of joint training. This may hinder the
+alignment between the two modules, poten-
+tially reducing the overall performance of the
+framework.
+• Due to computational constraints, we have
+not explored the performance of ACC-RAG
+on larger models and longer texts, which may
+limit its applicability in certain scenarios.
+Ethics Statement
+The research conducted in this paper centers around
+the improvement of efficiency in retrieval aug-
+mented generation. Our framework accelerates the
+inference of retrieval augmented models by com-
+pressing long context into compact embeddings
+and dynamically selecting them.
+We acknowledge the importance of the ACM
+Code of Ethics and affirm our adherence to it. We
+ensure that this work is compatible with the pro-
+vided code. All data used in this study is obtained
+from existing benchmarks, while all models used
+are publicly available, thus ensuring a high level of
+transparency and reproducibility in our experimen-
+tal procedure.
+We have made every effort to ensure that our
+research does not harm individuals or groups, nor
+does it involve any form of deception or potential
+misuse of information.
+References
+Zeyuan Allen-Zhu and Yuanzhi Li. 2023. Towards un-
+derstanding ensemble, knowledge distillation and
+self-distillation in deep learning. In The Eleventh
+International Conference on Learning Representa-
+tions, ICLR 2023, Kigali, Rwanda, May 1-5, 2023.
+OpenReview.net.
+Akari Asai, Sewon Min, Zexuan Zhong, and Danqi
+Chen. 2023. Retrieval-based language models and
+applications. In Proceedings of the 61st Annual Meet-
+ing of the Association for Computational Linguistics:
+Tutorial Abstracts, ACL 2023, Toronto, Canada, July
+9-14, 2023, pages 41–46. Association for Computa-
+tional Linguistics.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations, ICLR 2024, Vienna, Austria, May
+7-11, 2024. OpenReview.net.
+Petr Baudis and Jan Sedivý. 2015. Modeling of the
+question answering task in the yodaqa system. In Ex-
+perimental IR Meets Multilinguality, Multimodality,
+and Interaction - 6th International Conference of the
+CLEF Association, CLEF 2015, Toulouse, France,
+September 8-11, 2015, Proceedings, volume 9283 of
+Lecture Notes in Computer Science, pages 222–228.
+Springer.
+Jonathan Berant, Andrew Chou, Roy Frostig, and Percy
+Liang. 2013. Semantic parsing on freebase from
+question-answer pairs. In Proceedings of the 2013
+Conference on Empirical Methods in Natural Lan-
+guage Processing, EMNLP 2013, 18-21 October
+2013, Grand Hyatt Seattle, Seattle, Washington, USA,
+A meeting of SIGDAT, a Special Interest Group of the
+ACL, pages 1533–1544. ACL.
+Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann,
+Trevor Cai, Eliza Rutherford, Katie Millican, George
+van den Driessche, Jean-Baptiste Lespiau, Bogdan
+Damoc, Aidan Clark, Diego de Las Casas, Aurelia
+Guy, Jacob Menick, Roman Ring, Tom Hennigan,
+Saffron Huang, Loren Maggiore, Chris Jones, Albin
+Cassirer, Andy Brock, Michela Paganini, Geoffrey
+Irving, Oriol Vinyals, Simon Osindero, Karen Si-
+monyan, Jack W. Rae, Erich Elsen, and Laurent Sifre.
+2022. Improving language models by retrieving from
+trillions of tokens. In International Conference on
+Machine Learning, ICML 2022, 17-23 July 2022, Bal-
+timore, Maryland, USA, volume 162 of Proceedings
+of Machine Learning Research, pages 2206–2240.
+PMLR.
+Aydar Bulatov, Yuri Kuratov, and Mikhail Burtsev. 2022.
+Recurrent memory transformer. In Advances in Neu-
+ral Information Processing Systems 35: Annual Con-
+ference on Neural Information Processing Systems
+2022, NeurIPS 2022, New Orleans, LA, USA, Novem-
+ber 28 - December 9, 2022.
+Danqi Chen, Adam Fisch, Jason Weston, and Antoine
+Bordes. 2017. Reading Wikipedia to answer open-
+domain questions. In Proceedings of the 55th Annual
+Meeting of the Association for Computational Lin-
+guistics (Volume 1: Long Papers), pages 1870–1879,
+24069

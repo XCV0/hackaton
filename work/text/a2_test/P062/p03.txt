@@ -1,0 +1,100 @@
+tional training cost and may suffer from limited
+adaptability when the retrieval conditions them-
+selves, such as the underlying corpus or language
+setting, are misaligned, as they do not explicitly
+reconsider or update the retrieval environment.
+Despite these improvements, existing ap-
+proaches usually assume that the retrieval space
+itself is fixed. While queries may be refined over
+multiple steps, the underlying corpus or knowledge
+source remains unchanged (Jang et al., 2024; Cong
+et al., 2025). As a result, iteration focuses on im-
+proving document ranking or query formulation,
+rather than reconsidering whether retrieval is be-
+ing performed over the most appropriate linguistic,
+regional, or cultural sources.
+In contrast, our work treats iteration as a mech-
+anism for correcting retrieval condition misalign-
+ment. Instead of only refining queries, the sys-
+tem evaluates whether the current retrieval setting
+is suitable and updates corpus selection decisions
+when necessary.
+2.3 Cultural Grounding and Context
+Sensitivity in RAG
+Prior studies have shown that retrieval and ques-
+tion answering systems often fail on queries that
+depend on cultural or regional context, producing
+answers that are plausible but inappropriate for
+the user’s setting, particularly in low-resource lan-
+guages and regions (Li et al., 2025b; Park and Lee,
+2025; Lertvittayakumjorn et al., 2025). Most ex-
+isting work addresses cultural grounding through
+dataset construction or output analysis, while leav-
+ing the retrieval process unchanged (Blodgett et al.,
+2020; Liu et al., 2025b; Thakur et al., 2025).
+While some approaches rely on query rewriting
+or translation (Chan et al., 2024; Wang et al., 2025),
+such strategies operate within a fixed retrieval space
+and cannot correct cultural misalignment when rel-
+evant evidence is absent or dominated by globally
+prevalent sources. As a result, cultural relevance
+is treated as a post-hoc generation issue rather
+than a retrieval-time decision, even though seman-
+tically relevant documents may lack the contextual
+grounding required for culturally specific queries
+(Amirshahi et al., 2025; Cruz Blandón et al., 2025).
+3 Agentic Multicultural RAG
+3.1 Overview
+We propose CORAL, a test-time framework for cul-
+turally grounded mRAG. CORAL comprises two
+LLM-based agents: a planner that controls corpus
+selection and query reformulation, and a critic that
+evaluates retrieved documents and controls suffi-
+ciency. Together, they form a feedback loop that
+iteratively refines retrieval conditions based on evi-
+dence quality (Figure 1).
+Given an input query, CORAL executes a five-
+step retrieval-control loop. (1) Query-conditioned
+corpus selection: the planner selects a small set
+of culturally and linguistically relevant corpora,
+rather than retrieving from a fixed pooled multilin-
+gual space. (2) Evidence retrieval: the retriever
+retrieves top-K documents from the selected cor-
+pora. (3) Critique-guided evidence validation:
+the critic scores each document along multiple
+dimensions (relevance, usefulness, clarity/speci-
+ficity, and contextual compatibility) and filters low-
+quality evidence. (4) Sufficiency checking: the
+critic determines whether the retained evidence is
+sufficient to answer the query reliably. (5) Re-
+trieval condition refinement: if evidence is insuf-
+ficient or misaligned, the critique is fed back to the
+planner, which revises the retrieval conditions by
+re-selecting corpora and reformulating the retrieval
+query, and repeats the loop.
+3.2 Planner: Retrieval Condition Selection
+and Query Reformulation
+Given the query (and, in later rounds, feedback
+from the critic), the planner outputs (i) a set of tar-
+get corpora and (ii) an optional rewritten retrieval
+query (from the second round). Corpus selection
+is explicitly query-conditioned: the planner mainly
+includes corpora matching the query language and
+may add additional corpora when the query con-
+tains cultural or regional cues (e.g., local insti-
+tutions, conventions, or region-specific entities).
+This scoping reduces noise from unrelated corpora
+and increases the likelihood of retrieving culturally
+grounded evidence.
+When the critic indicates that retrieved evidence
+is insufficient or misaligned, the planner updates its
+decisions using the critique given. It may revise the
+corpus scope (e.g., expand to culturally adjacent
+corpora to recover missing local evidence, or nar-
+row the scope to reduce irrelevant retrieval) or re-
+formulate the query to address failures identified by
+the critique. Note that query reformulation goes be-
+yond translation: it can clarify implicit constraints,
+disambiguate context-dependent terms, and intro-
+duce missing local cues surfaced during critique.
+This iterative planning progressively corrects re-

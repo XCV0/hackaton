@@ -1,0 +1,61 @@
+Zhao et al.
+Hi, I am your copilot Chris. Interact with me in the following ways:
+Input your question here!
+Speak to a patient 
+or tell me a patient’s 
+condition.
+Speaking Uploading file Typewriting
+Upload a patient’s 
+electronical medical 
+record.
+Type in a question or 
+a patient's condition.
+ Within 24 Hours
+ Within 1 Week
+ Within 30 Days
+• Chronic pain
+• lumbago
+• angiocarp
+• coronary heart disease
+• postoperative pain
+• postpartum depression
+• postpartum depression
+• head injuries
+• headache
+Healthcare
+ Copilot
+Figure A4: The interactive interface of healthcare copilot allows multi-turn medical Q&A through voice, files, and text.
+Input your question here!
+ Diagnoses
+- Diagnosis: Lumbar canal stenosis
+- Explanations of diagnosis: The MRI findings indicate severe spinal canal stenosis at the L4/5 level leading to cauda 
+equina compression. This can result in significant back and limb pain, as evidenced by the patient's symptoms of aching 
+pain in the lower back with radiating pain down the […].
+ Instructive Follow-up Question
+- Does leaning forward or sitting relieve your pain?
+ Pain/General Physiotherapist Treatments:
+- Specific interventions/treatments: General physiotherapy focusing on patient education, […].
+- Goals: To reduce pain levels, improve functional mobility, […].
+- Exercises: Tailored exercises including back extensions, nerve glides, hamstring stretches, […].
+- Manual Therapy: Techniques including Grade III mobilization of affected vertebral segments, […].
+- Techniques: Application of hot packs for pain relief, pacing strategies in exercises, and […].
+ Pain Medicine Treatments
+- Medicine: The patient is advised to continue the usage of gabapentin and paracetamol as […].
+patient_501.json
+Healthcare
+ Copilot
+ Within 24 Hours
+ Within 1 Week
+ Within 30 Days
+• Chronic pain
+• lumbago
+• angiocarp
+• coronary heart disease
+• postoperative pain
+• postpartum depression
+• postpartum depression
+• head injuries
+• headache
+Me
+Figure A5: A specific example of how healthcare copilot could handle the diagnosis of lumbar canal stenosis using a JSON
+format medical record input, and output relevant treatments.

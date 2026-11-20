@@ -1,0 +1,97 @@
+of 63.3%, our method yields an absolute improve-
+ment of 8.7%. This empirical evidence highlights
+the theoretical superiority of our approach. We for-
+mulate context selection as a constrained knapsack
+problem rather than relying on a greedy iterative
+process. By jointly optimizing for relevance and di-
+versity within a strict token budget, MMKP retains
+crucial evidence that greedy methods often discard
+prematurely.
+Handling Information Scarcity. The Hot-
+potQA dataset relies heavily on bridging entities
+across documents to answer questions correctly.
+On this benchmark, our method reaches a recall of
+93.6%. This score is significantly higher than stan-
+dard baselines and exceeds the strongest competi-
+tor, CRAG, which scores 91.5%. This result sug-
+gests that the redundancy penalty in our MMKP for-
+mulation successfully diversifies the context win-
+dow. It ensures that complementary document pairs
+required for multi-hop inference are both selected
+and preserved.
+6 Discussion
+6.1 Ablation Study
+To validate our Self-Correcting RAG framework,
+we performed ablation studies isolating the MMKP
+Context Selector and NLI-Guided MCTS Gener-
+ator. Table 4 reports their impact on QA perfor-
+mance, retrieval quality, and faithfulness.
+Impact of MMKP Context Selection. Replac-
+ing the standard Top-k retrieval with our MMKP
+formulation significantly boosts retrieval perfor-
+mance. Specifically, Recall@5 improves dramati-
+cally from 49.6% to 71.8%. This substantial gain
+confirms that modeling context selection as a mul-
+tidimensional knapsack problem is highly effec-
+tive. It reduces redundancy, such as filtering dupli-
+cate passages, and maximizes information density
+within the constrained token budget of 1500 tokens.
+However, better context alone is insufficient for
+perfect generation. While MMKP improves the
+presence of correct answers, raising the EM score
+to 34.5, the faithfulness metrics remain comparable
+to the baseline with an Attribution Precision (AP)
+of 0.58. This suggests that improved retrieval does
+not inherently prevent the generator from halluci-
+nating ungrounded claims.
+Impact of NLI-Guided MCTS. The integration
+of the NLI-Guided MCTS generator drastically im-
+proves the faithfulness of the generated content. It
+increases the Attribution Precision (AP) to 0.85 and
+significantly reduces the Contradiction Rate (CR)
+to 0.04. These metrics demonstrate that the NLI
+reward signal effectively penalizes reasoning paths
+that contradict retrieved evidence. The full Self-
+Correcting RAG framework combines the strengths
+of both components. By grounding the generation
+process in high-quality, diverse context, it achieves
+the highest overall performance with an EM of 37.1
+and an F1 score of 45.8.
+Method QA Retriev. Faithfulness
+EM F1 Recall@5 AP ↑ CR ↓ Sup
+Standard RAG 25.8 36.1 49.6 0.52 0.15 0.65
+w/ MMKP Only 34.5 42.3 71.8 0.58 0.13 0.71
+w/ MCTS Only 31.2 39.7 50.1 0.82 0.06 0.84
+Self-Correcting 37.1 45.8 72.0 0.85 0.04 0.88
+Table 4: Ablations. We report the average performance
+across all datasets to evaluate the individual contribution
+of the MMKP selector and MCTS generator.
+6.2 Theoretical Rigor and System Mechanics
+Ablation of Redundancy Mechanisms. Our
+framework employs a hard grouping constraint
+(∑ xij ≤ 1), a utility diversity reward, and a global
+cost redundancy penalty. As shown in Table 5, re-
+lying solely on a hard constraint improves recall by
+clearing exact duplicates, but falls short of optimal
+performance. The addition of the utility diversity
+reward (β > 0) favors chunks with distinct periph-
+eral information, while the cost redundancy penalty
+actively preserves budget for orthogonal evidence.
+Furthermore, fine-grained analysis reveals that our
+hard grouping constraint acts as a strict budget en-
+forcer, raising Complementary Evidence Recall
+(CER) on HotpotQA to 93.6%, compared to 86.2%
+when using a soft constraint (max 2 per group).
+Selection Mechanism Avg. Recall@5 HotpotQA Avg. F1
+Baseline (Top-K) 49.6% 74.8% 36.1
+Only Hard Constraint 64.2% 85.3% 41.5
++ Utility Reward (β > 0) 67.8% 88.1% 43.1
++ Cost Penalty (Cred) 69.5% 90.4% 44.3
+Full MMKP (All 3) 72.0% 93.6% 45.8
+Table 5: Fine-grained ablation of redundancy mecha-
+nisms in the MMKP Context Selector.
+Adaptive Thresholding for Dense Retrieval. In
+edge cases where a query retrieves an abnormally
+dense pool of highly similar documents, a fixed sim-
+ilarity threshold can collapse candidates into too
+20960

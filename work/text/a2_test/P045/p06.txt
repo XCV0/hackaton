@@ -1,0 +1,100 @@
+4.2 Metrics
+Metrics for Retrieval. We adopt Recall@k as
+the standard metric to evaluate the retrieval perfor-
+mance (Liu et al., 2021). This metric examines
+whether the ground-truth article appears within the
+top-k retrieved results. Following EchoSight, the
+evaluation criterion considers an article correct only
+when its URL exactly matches the ground-truth
+URL, ensuring precise assessment of retrieval ac-
+curacy.
+Metrics for Answer Generation. We employ
+dataset-specific metrics following standard prac-
+tices in knowledge-based VQA. For Enc-VQA, we
+use BEM (Zhang et al., 2019), while for InfoS-
+eek (Chen et al., 2023), we adopt both VQA accu-
+racy (Marino et al., 2019) and Relaxed Accuracy
+(Methani et al., 2020; Masry et al., 2022).
+4.3 Implementation Details
+Retriever. For external knowledge retrieval, Enc-
+VQA utilizes a knowledge base consisting of 2M
+Wikipedia articles and up to 5M associated images.
+In contrast, InfoSeek employs a filtered subset of
+100K Wikipedia articles with approximately 350K
+images, following the setup in (Yan and Xie, 2024).
+Visual features are extracted using a frozen Eva-
+CLIP-8B encoder (Sun et al., 2023), where we
+use the pooled embeddings from the last layer to
+compute the cosine similarity between reference
+images and candidate images. We construct a vi-
+sual feature index using the FAISS library for effi-
+cient similarity search and retrieve the top-5 most
+relevant entries as external knowledge. Retrieval
+performance is reported in Table 2.
+Zero-shot Settings. We employ Qwen2-VL-7B
+(Wang et al., 2024) as our base model, leveraging
+its 32K token input capacity to accommodate both
+visual and textual knowledge. To ensure a fair com-
+parison with existing MMRAG approaches, includ-
+ing Wiki-LLaVA (Caffagni et al., 2024), EchoSight
+(Yan and Xie, 2024), RoRA-VLM (Qi et al., 2024),
+and LLaVA-mR2AG (Zhang et al., 2024b), we
+reimplement these pipelines using Qwen2-VL-7B
+as a unified backbone. We consider the following
+configurations for zero-shot evaluation: (1) Qwen2-
+VL-Param, which relies solely on the model’s in-
+ternal parametric knowledge without any external
+context; (2) Qwen2-VL-Oracle, which takes the
+ground-truth wiki entry as input and serves as an
+upper-bound; (3) Qwen2-VL-1-Stage, which repli-
+cates Wiki-LLaVA’s one-stage pipeline by encod-
+Datasets Recall@k (%)
+k=1 k=2 k=5 k=10
+InfoSeek 45.6 54.8 67.1 73.0
+Enc-VQA 13.3 16.9 31.3 41.0
+Table 2: The retrieval performance of Eva-CLIP-8B on
+two datasets.
+ing all retrieved entries for answer generation; (4)
+Qwen2-VL-2-Stage, which follows the two-stage
+architecture of LLaVA-mR2AG and EchoSight by
+reranking retrieved entries and generating answers
+based on the top-ranked one; and (5) Qwen2-VL-
+MMSTaR, which incorporates all retrieved entries
+into a Chain-of-Thought reasoning process follow-
+ing the STaR framework (Zelikman et al., 2022).
+Fine-tuned Setting. We fine-tune the Qwen2-
+VL variants with task-specific supervision to en-
+hance both retrieval accuracy and answer genera-
+tion. Qwen2-VL-1-Stage is trained using a stan-
+dard supervised objective LSFT with ground-truth
+wiki entries as input, enhancing the model’s ability
+to generate correct answers from these references.
+Qwen2-VL-2-Stage is optimized with a combina-
+tion of a selection objective LPRKI and generation
+objective LSFT, enabling the model to better iden-
+tify the correct entry from the top-5 retrieved can-
+didates and generate more accurate answers based
+on the selected context.
+Our proposed CoRe-MMRAG is trained with
+three objectives, including LVTKI, LPRKI, and
+LSFT, which jointly enhance parametric-retrieved
+knowledge selection, visual-textual knowledge se-
+lection, and final answer generation. We sample
+approximately 30K (Qv, Qt, ˆygt) triplets from the
+training set of each benchmark to construct the
+training set. The model is fine-tuned using LoRA
+with a rank of 8, applied to all layers. Training
+is conducted for 3 epochs with a learning rate of
+1 × 10−4 and a batch size of 1 × 2, using 8 H100
+GPUs. The full training process takes approxi-
+mately 10 hours.
+4.4 Main Results
+Table 3 presents comprehensive comparisons of
+our method against current SOTA approaches on
+Enc-VQA and InfoSeek benchmarks.
+Zero-shot Setting. Qwen2-VL-Oracle, which
+accesses ground-truth Wikipedia entries, estab-
+lishes an upper-bound performance of 51.2% on
+Enc-VQA and 57.9% on InfoSeek. When using
+retrieved entries instead of gold references, our
+32972

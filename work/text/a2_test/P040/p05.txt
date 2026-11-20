@@ -1,0 +1,102 @@
+5.1 Gist Memory Constructor
+To facilitate the multi-step capabilities of our agent,
+we introduce a gist memory, G(n), which is used for
+storing knowledge as an array of proximal triples.
+At the beginning of the first iteration, the gist mem-
+ory is empty. During the n-th iteration, similar to
+the knowledge synchronisation module explained
+in Section 4.1, we employ an LLM to read a collec-
+tion of retrieved paragraphs Cq(n) and summarise
+their content with proximal triples:
+TG q(n) =
+
+
+
+read
+(
+Cq(n) , q
+)
+, if n = 1
+read
+(
+Cq(n) , q, G(n−1)
+)
+, if n ≥ 2
+(4)
+Apart from the first iteration where Eq. 1 and 4
+are identical, the inclusion of the memory in the
+read operation differentiates the construction of
+proximal triples produced at the subsequent steps
+compared to the ones from Eq. 1. G(n) maintains
+the aggregated content of proximal triples s.t.
+G(n) = [ TG q(1) ◦ · · · ◦ TG q(n) ] , (5)
+where ◦ defines the concatenation operation. The
+triple memory serves as a concise representation of
+all the accumulated evidence, up to the n-th step.
+We believe the process introduced by the read
+step along with the information storage paradigm
+served by the gist memory, aligns well with the
+communication between the hippocampus and neo-
+cortex. The combination of the two establishes the
+synergetic behaviour between our graph retriever
+and the LLM that we seek to achieve within GEAR.
+5.2 Reasoning for Termination
+After updating G(n), we assess whether it contains
+sufficient evidence to answer the original question
+through an LLM reasoning step:
+a(n), r(n) = reason(G(n), q), (6)
+where a(n) denotes the query’s answerability given
+the evidence in G(n), and r(n) represents the rele-
+vant reasoning. When the query is deemed answer-
+able, the system concludes its iterative process.
+5.3 Query Re-writing
+The query re-writing process leverages an LLM
+that incorporates three key inputs: the original
+query q, the accumulated memory, and crucially,
+the reasoning output r(n) from the previous step.
+This process can be formally expressed as:
+q(n+1) = rewrite ( G(n), q, r(n) ) , (7)
+where q(n+1) represents the updated query, which
+serves as input for the retriever in the next iteration.
+5.4 After Termination
+GEAR aims to return a single ranked list of pas-
+sages. Given the final gist memory G(n) upon ter-
+mination, we link each proximal triple in G(n) to a
+list of passages as follows:
+Ctj = passageLink (tj , k) , (8)
+where j ∈
+{
+1, . . . , |G(n)| } . Similar to
+tripleLink, passageLink is implemented by re-
+trieving passages with a triple as the query (see
+Appendix B.2). The final list of passages returned
+by GEAR is the RRF of the resulting linked pas-
+sages and passages retrieved across iterations:
+C(n) q = RRF ( Ct1 , . . . , Ct|G(n)| ,
+Cq(1) , . . . , Cq(n)
+)
+. (9)
+All relevant prompts for the read, reason and
+rewrite steps are provided in Appendix K.2.
+6 Experimental Setup
+We evaluate our framework on three open-domain
+multi-hop QA datasets: MuSiQue (Trivedi et al.,
+2022), HotpotQA (Yang et al., 2018), and 2Wiki-
+MultiHopQA (2Wiki) (Ho et al., 2020). For
+MuSiQue and 2Wiki, we use the data provided
+in the IRCoT paper (Trivedi et al., 2023) which
+includes the full corpus, while for HotpotQA, we
+follow the same setting as HippoRAG (Gutierrez
+et al., 2024) to limit experimental costs. More de-
+tails are provided in Appendix A.
+We measure both retrieval and QA performance,
+with our primary contributions focused on the re-
+trieval component. For retrieval evaluation, we use
+Recall@k (R@k) for k ∈ {5, 10, 15}, showing the
+percentage of questions where the correct entries
+are found within the top-k retrieved passages. We
+include an analysis about the selected recall ranks
+in Appendix D. Following standard practices, QA
+performance is evaluated with Exact Match (EM)
+and F1 scores (Trivedi et al., 2023).
+12053

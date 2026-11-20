@@ -1,0 +1,90 @@
+Query:
+In which part of New York City is the director of the romanticcomedy 'Big Stone 
+Gap' based?
+Document
+Retrievedchunks
+1 Big Stone Gap is a 2014 American drama romantic comedy film written and directed by Adriana Trigiani.
+2 Big Stone Gap had its world premiere at the Virginia Film Festival on November 6, 2014.
+3 I Love NY, also known as I Love New Year, is an Indian romantic comedy film directed by Radhika Rao.
+…
+Semantic-based
+Retrieval
+Expandedchunks
++1
+Adriana Trigiani is an Italian American best-selling 
+author andfilm directorbasedin Greenwich Village, 
+New York City.
++ Graph-guided
+Expansion
+Organizedparagraphs
+1
+√
+Big Stone Gap is a 2014 American drama romantic 
+comedy film written and directed by Adriana Trigiani.
+Thefilmhad its world premiere at the Virginia Film 
+Festival on November 6, 2014.Adriana Trigiani is an 
+Italian American best-selling author andfilm director
+basedin Greenwich Village, New York City.
+2
+×
+I Love NY, also known as I Love New Year, is an 
+Indian romantic comedy film directed by Radhika Rao.
+The main plot was taken from the Russian romantic 
+comedy "The Irony of Fate" (1976).
+…
+KG-basedContext
+Organization
+Response:
+Greenwich Village, New York City.
+LLMGeneration
+Figure 2: Workflow of the proposed KG2RAG.
+the document offline processing aligns with what
+vanilla RAG does, KG2RAG naturally supports
+adding new documents to or removing documents
+from the existing knowledge base and KG effi-
+ciently.
+2.2 KG-enhanced Chunk Retrieval
+Given the chunks D and the associated KG G, the
+proposed KG2RAG suggests a two-stage retrieval
+process, including semantic-based retrieval and
+graph-guided expansion.
+Semantic-based Retrieval During the semantic-
+based retrieval process, the semantic similarities
+between a user query q and all the chunks can be
+measured as
+S = {s(q, c) | c ∈ D}, (2)
+where the similarity function s(·) employs an em-
+bedding model (Nussbaum et al., 2024; Li and Li,
+2024) to transfer the query and chunks into high-
+dimensional representations, followed by comput-
+ing their cosine similarity.
+The chunks with the top-k highest similarities
+to the query are selected as the retrieved chunks,
+denoted by Dq. These retrieved chunks can be in-
+tegrated into the prompts as context and fed into
+LLMs for RAG. As discussed in Sec. 1, relying
+solely on semantic-based retrieval may result in
+isolated chunks, missing crucial factual knowledge
+and the intrinsic connections among the chunks. To
+tackle this, we regard the retrieved chunks Dq as
+seed chunks, and propose a graph-guided expan-
+sion process.
+Graph-guided Expansion During communica-
+tion and thinking processes, people often connect
+one event to others as these events involve the same
+entities, such as persons and places. For example,
+Capitol Hill, Washington, D.C. connects our im-
+pressions of Barack Obama, Donald Trump, and
+Joe Biden, as they all delivered their presidential
+inaugural speeches there in 2013, 2017, and 2021,
+respectively. Shed light by such insights, KG2RAG
+suggests linking one chunk to other chunks through
+the overlapping or connected entities that they con-
+tain for retrieved chunk expansion.
+Specifically, given the retrieved chunks Dq ⊆ D
+and the KG G = {(h, r, t, c) | c ∈ D}, we first get
+the relevant subgraph of Dq as follows:
+G0 q = {(h, r, t, c) | c ∈ Dq} ⊆ G. (3)
+After that, we traverse the m-hop neighborhood
+of Gq to get the expanded subgraph Gm q , which can
+8914

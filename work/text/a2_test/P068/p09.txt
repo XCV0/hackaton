@@ -1,0 +1,101 @@
+7 Conclusion
+We introduced VISA, a visual source attribution
+approach — generating answers while providing
+bounding boxes to locate evidence — for retrieval-
+augmented generation. Our curated datasets
+demonstrate its effectiveness across diverse doc-
+ument types, including complex multi-page and
+multimodal content. Experimental results show
+VISA bridges information retrieval and answer gen-
+eration with finer-grained, visually grounded attri-
+bution. We hope VISA represents a pioneering step
+for more verifiable and user-friendly RAG systems.
+Limitations
+While VISA demonstrates promising results for
+answer generation and content grounding in vision-
+based RAG systems, it has several limitations.
+Gap between our settings and real-world sce-
+narios. Our approach focuses on generating short
+answers, which may not suffice for scenarios re-
+quiring detailed or explanatory responses, high-
+lighting the need for enhancements in generating
+richer context. Besides, our curated datasets as-
+sume that answers are derived from a single, lo-
+calized region within a document. However, in
+real-world applications, supporting evidence may
+span multiple sections or even multiple documents,
+limiting the model’s effectiveness in more complex
+retrieval scenarios. Additionally, in the Natural
+Questions dataset (converted to our Wiki-VISA),
+short answers are often extracted substring from
+the evidence section. This presents another gap, as
+real-world answers may be implied by the evidence
+rather than being an exact substring.
+Cross-domain generalization. Although our
+evaluation spans web and medical scientific pa-
+pers containing diverse content modalities (e.g.,
+passages, tables, and figures), it does not fully cap-
+ture the variability of real-world documents, such
+as scanned or handwritten content. These often
+feature more complex layouts and diverse aspect
+ratios, posing additional challenges. Our zero-shot
+evaluation shows that while the model achieves rea-
+sonable bounding box accuracy in cross-domain
+transfer, its performance still lags behind in-domain
+effectiveness. Enhancing cross-domain generaliza-
+tion would make the VISA pipeline more robust
+for vision-based RAG tasks across a broader range
+of document types.
+Trade-off between accuracy and efficiency. To
+create challenging attribution tasks, we designed
+Wiki-VISA images to contain content from four
+pages. However, increasing the candidate set fur-
+ther raises training costs and frequently leads to
+out-of-memory (OOM) issues given our limited
+computing resources. We hence the number of doc-
+ument candidates to three in our multi-candidate
+setting following previous practice (Yu et al., 2024).
+Our findings show a clear performance difference
+between single-image and multi-candidate settings,
+underscoring the challenge of scaling candidate
+size. In practical applications where VISA is in-
+tegrated with retriever, further research is needed
+to balance candidate size, accuracy, and computa-
+tional efficiency.
+Aligning with real user expectation on visual
+attribution As briefly discussed in Section 6.4, a
+potential challenge lies in whether the visual attri-
+bution provided by VISA aligns with users’ expec-
+tations in terms of granularity. Since VISA is de-
+signed to make answer verification more intuitive,
+conducting user studies in real-world deployment
+scenarios would provide deeper insights into its
+practical utility and potential refinements.
+Acknowledgments
+We sincerely thank Xinyu Shi, Minghan Li, Jack
+Lin, Xinyu Zhang, and Yubo Wang for their in-
+valuable feedback and insightful suggestions. This
+research was supported in part by the Natural Sci-
+ences and Engineering Research Council (NSERC)
+of Canada.
+References
+Akari Asai, Zexuan Zhong, Danqi Chen, Pang Wei Koh,
+Luke Zettlemoyer, Hannaneh Hajishirzi, and Wen
+tau Yih. 2024. Reliable, adaptable, and attributable
+language models with retrieval. arXiv:2403.03187.
+Bernd Bohnet, Vinh Q. Tran, Pat Verga, Roee Aha-
+roni, Daniel Andor, Livio Baldini Soares, Massimil-
+iano Ciaramita, Jacob Eisenstein, Kuzman Ganchev,
+Jonathan Herzig, Kai Hui, Tom Kwiatkowski, Ji Ma,
+Jianmo Ni, Lierni Sestorain Saralegui, Tal Schus-
+ter, William W. Cohen, Michael Collins, Dipanjan
+Das, Donald Metzler, Slav Petrov, and Kellie Webster.
+2023. Attributed question answering: Evaluation
+and modeling for attributed large language models.
+Preprint, arXiv:2212.08037.
+Nicolas Carion, Francisco Massa, Gabriel Synnaeve,
+Nicolas Usunier, Alexander Kirillov, and Sergey
+Zagoruyko. 2020. End-to-end object detection with
+transformers. In Computer Vision – ECCV 2020:
+16th European Conference, Glasgow, UK, August
+30162

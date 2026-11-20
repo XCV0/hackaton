@@ -1,0 +1,96 @@
+A Dataset Choices and Statistics
+MuSiQue 2Wiki HotpotQA
+Split Source IRCoT IRCoT HippoRAG
+# Hops 2 − 4 2 2
+# Documents 139, 416 430, 225 9, 221
+# Test Queries 500 500 1, 000
+# Chunks (C) 148, 793 490, 454 10, 293
+# Triples (T) 1, 521, 136 4, 993, 637 122, 492
+Av. # T/C 10.2 10.2 11.9
+Table 5: Dataset characteristics and preprocessing statis-
+tics, where triples are extracted from chunks, and Av.
+# T/C represents the average number of triples per
+chunk.
+Table 5 serves as a summary of various facts
+and statistics related to the employed datasets and
+the chunking and triple extraction process intro-
+duced in Section 3. Please note for all the evalu-
+ated datasets, we use their open-domain setting and
+answerable subset if applicable.
+Reasoning behind dataset split choices For
+MuSiQue and 2Wiki, we use the data provided
+by Trivedi et al., including the full corpus and sub-
+sampled test cases for each dataset. To limit the
+experimental cost for HotpotQA, we follow the set-
+ting by Gutierrez et al. where both the corpus and
+test split are smaller than IRCoT’s counterpart.
+B More Implementation Details
+B.1 Baselines Details
+We implement all proposed approaches using
+Elasticsearch1. For SBERT, we employ the
+all-mpnet-base-v2 model with approximate k-
+nearest neighbours and cosine similarity for vector
+comparisons. In IRCoT experiments, we evalu-
+ate both ColBERTv2 and BM25 retrievers — Col-
+BERTv2 for alignment with HippoRAG’s base-
+lines, and BM25 for consistency with the original
+IRCoT implementation.
+For all multi-step approaches, including ours, we
+follow Gutierrez et al. with respect to the maximum
+number of retrieval iterations, which vary based on
+the hop requirements of each dataset. Thus, we
+use a maximum of 4 iterations for MuSiQue and 2
+iterations for HotpotQA and 2Wiki.
+B.2 GEAR Details
+GEAR involves several hyperparameters, such as
+the beam size inside graph expansion. We ran-
+1https://www.elastic.co
+domly sampled 500 questions from the MuSiQue
+development set, which we ensure not to overlap
+with the relevant test set. We select our hyperpa-
+rameters based on this sample without performing
+a grid search across all possible configurations. Our
+goal is to demonstrate that our method is able to
+achieve state-of-the-art results without extensive
+parameter tuning.
+The initial retrieval phase utilises the chunks
+index C as the information source, while leaving
+the triple index T unused. Our graph expansion
+component implements beam search with length
+2, width 10, and 100 neighbours per beam. The
+hyperparameter γ employed in diverse triple beam
+search is set to twice the beam search width. For the
+scoring function, we use the cosine similarity score
+and the SBERT embedding model. In Appendix F,
+we test the performance of GEAR across different
+beam search length values and maximum numbers
+of agent iterations.
+For the single-step configurations (i.e. any base
+retriever with NaiveGE or SyncGE), we set the base
+retriever’s maximum number of returned chunks
+to match our evaluation recall threshold. With the
+multi-step setup, we maintain a consistent maxi-
+mum of 10 retrieved chunks before knowledge syn-
+chronisation for the purpose of matching IRCoT’s
+implementation. While this 10-chunk limitation
+applies to individual retrieval rounds, please note
+that the total number of accessible chunks can ex-
+ceed this threshold through graph expansion and
+multiple GEAR iterations.
+passageLink Details We use passageLink to
+link each triple tj ∈ G(n) to its corresponding pas-
+sages in C by running a retrieval step as follows:
+hk base (q, C ∪ T) = RRF ( hk base (tj , C) ,
+hk base (tj , T) ) , (10)
+where j ∈
+{
+1, . . . , |G(n)| } and hk base (tj , C ∪ T)
+is the RRF of passages returned by both T and C
+when queried with tj .
+C Walkthrough Example
+Table 6 provides a visual step-by-step example of
+our framework. The example demonstrates how
+each component contributes to the final retrieved
+passages, which we hope offers useful context for
+understanding our design decisions.
+12060

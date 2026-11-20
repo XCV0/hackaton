@@ -1,0 +1,21 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D007,R001,DV1,MS1,M1,PCE,22.97,%,,,,,,22.97,%,22.97,%,primary,,6,Results and Discussion,,Figure 8a,The V1553-based device achieved a PCE of 22.97%,extracted,,Тип агрегации не указан (typical J-V)
+D007,R002,DV1,MS1,M1,Jsc,24.29,mA/cm2,,,,,,24.29,mA/cm2,24.29,mA/cm2,primary,,6,Results and Discussion,,Figure 8a,short-circuit current density ( JSC)of 24.29 mA cm−2,extracted,,Тип агрегации не указан (typical J-V)
+D007,R003,DV1,MS1,M1,Voc,1.179,V,,,,,,1.179,V,1.179,V,primary,,6,Results and Discussion,,Figure 8a,an open-circuit voltage (VOC) of 1.179 V,extracted,,Тип агрегации не указан (typical J-V)
+D007,R004,DV1,MS1,M1,FF,80.2,%,,,,,,80.2,%,80.2,%,primary,,6,Results and Discussion,,Figure 8a,and a fill factor (FF) of 80.2%,extracted,,Тип агрегации не указан (typical J-V)
+D007,R005,DV2,MS2,M1,PCE,22.8,%,,,,,,22.8,%,22.8,%,primary,,6,Results and Discussion,,Figure 8a,which achieved a PCE of 22.8%,extracted,,Тип агрегации не указан (typical J-V)
+D007,R006,DV2,MS2,M1,Jsc,24.69,mA/cm2,,,,,,24.69,mA/cm2,24.69,mA/cm2,primary,,6,Results and Discussion,,Figure 8a,with a JSC of 24.69 mA cm−2,extracted,,Тип агрегации не указан (typical J-V)
+D007,R007,DV2,MS2,M1,Voc,1.14,V,,,,,,1.14,V,1.14,V,primary,,6,Results and Discussion,,Figure 8a,"1.14 V, and an",extracted,,Тип агрегации не указан (typical J-V)
+D007,R008,DV2,MS2,M1,FF,81,%,,,,,,81,%,81,%,primary,,6,Results and Discussion,,Figure 8a,FF of 81%,extracted,,Тип агрегации не указан (typical J-V)
+D007,R009,DV3,MS3,M1,PCE,19.99,%,,,,,,19.99,%,19.99,%,primary,,6,Results and Discussion,,Figure 8b,the V1553-based module delivered an impressive PCE of 19.99%,extracted,,Тип агрегации не указан (typical J-V)
+D007,R010,DV3,MS3,M1,Jsc,2.59,mA/cm2,,,,,,2.59,mA/cm2,2.59,mA/cm2,primary,,6,Results and Discussion,,Figure 8b,with a JSC of 2.59 mA cm−2,extracted,,Тип агрегации не указан (typical J-V)
+D007,R011,DV3,MS3,M1,Voc,9.399,V,,,,,,9.399,V,9.399,V,primary,,6,Results and Discussion,,Figure 8b,"of 9.399 V, and an FF of 82.1%",extracted,,Тип агрегации не указан (typical J-V)
+D007,R012,DV3,MS3,M1,FF,82.1,%,,,,,,82.1,%,82.1,%,primary,,6,Results and Discussion,,Figure 8b,"of 9.399 V, and an FF of 82.1%",extracted,,Тип агрегации не указан (typical J-V)
+D007,R013,DV4,MS4,M1,PCE,19.1,%,,,,,,19.1,%,19.1,%,primary,,6,Results and Discussion,,Figure 8b,PCEs of 19.1% achieved by module using spiro-OMeTAD,extracted,,Тип агрегации не указан (typical J-V)
+D007,R014,DV1,MS5,M1,retained_PCE,90,%,,,,1000,h,>90,%,90,%,primary,,6,Results and Discussion,,Figure 8d,retained more than 90% of its initial PCE after,extracted,,"Значение ""more than 90%"" (нижняя граница)"
+D007,R015,DV2,MS6,M1,retained_PCE,80,%,,,,1000,h,decline >20%,%,80,%,primary,,6,Results and Discussion,,Figure 8d,exhibited a PCE decline of over 20% in the same,extracted,,Снижение более чем на 20% => retained менее ~80%; приблизительная граница
+D007,R016,DV1,MS1,M1,PCE,23,%,,,,,,close to 23,%,23,%,primary,,1,Abstract,,,remarkable power conversion efficiency close to 23%,extracted,R001,Приблизительное значение в аннотации
+D007,R017,DV1,MS1,M1,PCE,23,%,,,,,,23,%,23,%,primary,,6,Conclusions,,,23% in solar cells and 20% in mini-modules,extracted,R001,"""PCE up to 23%"""
+D007,R018,DV3,MS3,M1,PCE,20,%,,,,,,20,%,20,%,primary,,6,Conclusions,,,23% in solar cells and 20% in mini-modules,extracted,R009,Округлённое значение
+D007,R019,,,,PCE,3.8,%,,,,,,3.8,%,3.8,%,cited,[3],1,Introduction,,,sensationally from 3.8% [3],extracted,,Ранний PSC (Kojima et al.)
+D007,R020,,,,PCE,26,%,,,,,,>26,%,26,%,cited,[4],1,Introduction,,,toover 26%[4],extracted,,"""over 26%"""

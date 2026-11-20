@@ -1,0 +1,56 @@
+Published as a conference paper at ICLR 2025
+Table 1: Retrieval augmentation generation results on TriviaQA, MuSiQue, PopQA, PubHealth,
+and ARC-Challenge (ARC-C). (∗We use the RAG drafter’s generation probability ρDraft as the con-
+fidence score for selecting drafts when we use it alone; † indicates numbers reported in Asai et al.
+(2023); − denotes numbers that are not reported by the original papers or are not applicable; ‡we
+use Mistral7B or Mixtral8x7B as the RAG verifier, and denote them as MVerifier-7B or MVerifier-8x7B.)
+RAG Method
+Free-form Closed-set
+TriviaQA MuSiQue PopQA PubHealth ARC-C
+Standard RAG
+Mistral7B (Jiang et al., 2023a) 54.15 16.71 31.38 34.85 42.75
+Mixtral8x7B (Jiang et al., 2024) 59.85 19.16 34.02 37.08 48.72
+Mistral-Instruct7B (Jiang et al., 2023a) 67.11 17.99 42.17 42.15 47.70
+Mixtral-Instruct8x7B (Jiang et al., 2024) 73.91 29.42 53.68 63.63 78.41
+Alpaca7B (Dubois et al., 2024)† 64.1 - 46.7 40.2 48.1
+Toolformer6B (Schick et al., 2024)† 48.8 - - - -
+SAIL7B (Luo et al., 2023a)† - - - 69.2 48.4
+Self-Reflective RAG & Corrective RAG
+CRAGMistral-7B (Yan et al., 2024) 59.03 - 49.46 59.04 74.87
+Self-RAGMistral-7B (Asai et al., 2023) 64.84 21.72 52.68 72.44 74.91
+Self-CRAGMistral-7B (Yan et al., 2024) 65.43 - 56.11 72.85 75.26
+Our Speculative RAG
+MDrafter-7B ∗ 71.11 27.89 56.40 75.58 74.49
+MVerifier-7B ‡ + MDrafter-7B 73.91 31.03 56.75 75.79 76.19
+MVerifier-8x7B ‡ + MDrafter-7B 74.24 31.57 57.54 76.60 80.55
+Biography (Min et al., 2023) and ALCE-ASQA (Gao et al., 2023a). On TriviaQA, PopQA, Pub-
+Health, and ARC-Challenge, we retrieve top 10 documents and generate 5 drafts per query (m = 5),
+with each draft based on a subset of 2 documents (k = 2). For MuSiQue, we retrieve top 15 docu-
+ments and generate 10 drafts for each query (m = 10), each using a subset of 6 documents due to
+more complex reasoning. Further details regarding instruction-tuning can be found in Appendix A.
+4.3 MAIN RESULTS
+We compare SPECULATIVE RAG with standard RAG approaches, as well as the more advanced
+Self-Reflective RAG and Corrective RAG on five datasets: TriviaQA, MuSiQue, PopQA, Pub-
+Health, and ARC-Challenge. We report the performance of MDrafter-7B when used alone or paired
+with the RAG verifier (e.g. MVerifier-7B, MVerifier-8x7B). Following prior work (Asai et al., 2023; Yan
+et al., 2024), we report accuracy as the performance metric.
+Superior Performance over Baselines Table 1 demonstrates that our method consistently out-
+performs all baselines across all five benchmarks. Particularly, MVerifier-8x7B + MDrafter-7B surpasses
+the most competitive standard RAG model, Mixtral-Instruct8x7B, by 0.33% on TriviaQA, 2.15%
+on MuSiQue, 3.86% on PopQA, 12.97% on PubHealth, and 2.14% on ARC-Challenge. With a
+comparable number of instruction-tuned parameters, MVerifier-7B + MDrafter-7B outperforms all Self-
+Reflective and Corrective RAG methods, and MDrafter alone surpasses the baselines in most settings.
+Effective Instruction Tuning for RAG Drafter Our instruction tuning is effective in enhancing
+the reasoning ability of the drafter model (Hsieh et al., 2023), as we observe a remarkable perfor-
+mance improvement comparing Mistral7B and MDrafter-7B. Additionally, we further investigate the
+performance of MDrafter-7B when we directly feed all documents to the RAG drafter and generate
+one draft, with detailed results provided in Appendix B. Moreover, the performance of Mixtral8x7B
+significantly improves when paired with the instruction-tuned RAG drafter MDrafter-7B, showing
+gains of 14.39% on TriviaQA, 12.41% on MuSiQue, 23.52% on PopQA, 39.52% on PubHealth,
+and 31.83% on ARC-Challenge. Similar improvements are observed with Mistral7B as well. For
+Mistral7B, we observed improvements of 19.76% on TriviaQA, 14.32% on MuSiQue, 25.37% on
+PopQA, 40.94% on PubHealth, and 33.44% on ARC-Challenge. We attribute these improvements
+to the superior reasoning capabilities of the RAG drafter over the retrieved documents in SPECULA-
+TIVE RAG. By minimizing the redundancy in the sampled documents, the RAG drafter generates
+higher quality answer drafts based on diverse perspectives from the retrieval results.
+7

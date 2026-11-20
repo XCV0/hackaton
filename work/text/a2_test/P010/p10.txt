@@ -1,0 +1,108 @@
+for driving tasks, it is crucial to note that it consists of only 7
+billion parameters. This size is relatively modest compared to
+more well-known models like GPT-4V [1] and Gemini [71],
+which have a significantly larger parameter count and exhibit
+superb performance in visual understanding and reasoning.
+Although a prominent trend observed in MLLM work is that
+performance improvements typically occur in tandem with
+model scaling, and we expect similar advancements in driving
+applications, we observe this limitation associated with the
+current model scale.
+One of the specific limitations is the number of ICL examples
+that can be used. During training and inference, we provide
+two ICL examples for each query. This is due to the limitation
+of the context window size of the LLM backbone, Vicuna
+1.5 [87], which is 4096 tokens. Each additional ICL example
+introduces roughly an extra 1800 tokens, including a 1024-
+token fixed-length video sequence and the remaining tokens for
+language dialogue. While techniques such as Rotary Positional
+Embeddings (RoPE) [70] and slicing windows can help the
+model to understand longer contexts, the context window
+– defining the maximum range of the attention mechanism
+during a single inference – is fundamentally restricted by the
+model architecture and remains a bottleneck. We expect the
+advancement of LLM architectures to support larger context
+window sizes, enabling a more flexible adoption of ICL
+examples.
+B. Data Scarcity
+Another challenge for the application of MLLMs in driving
+is data scarcity. Observing the trend in the development of
+MLLMs, their success is largely built upon large-scale pre-
+training and high-quality data for fine-tuning, which enable
+more powerful and generalisable models. While the integration
+of language in the decision-making process of an MLLM-
+based driving agent significantly enhances explainability and
+provides a human-understandable interface, it introduces a
+significant paradigm shift from previous deep learning methods,
+which reveals a lack of paired driving and language datasets.
+Currently, the scale of driving-specific video-caption datasets
+is considerably smaller than its generic counterparts, setting
+this as the bottleneck for building robust driving agents. Also,
+the current driving-language dataset mostly contains driving-
+explanation pairs (e.g., BDD-X [39]), which are not yet suitable
+for pre-training in terms of scale and language format. However,
+we observe more emerging works such as DrivingMLM [78]
+and Reason2Drive [56], which are curating larger scales
+of well-annotated data specifically for MLLM-based driving
+applications, providing promising future potential.
+C. Hallucination
+MLLMs are known to hallucinate, generating information
+or responses misaligned with facts [31]. While our retrieval-
+augmented mechanism for grounding the model’s explanations
+in expert demonstrations has mitigated such phenomena (evi-
+dent in the much improved Action and Justification explaination
+metrics in Tab. I), we have observed some isolated failure cases.
+For instance, in row 3 column 2 of Fig. 5, the model associates
+the car’s action of slowing down with the presence of a stop
+sign, which does not in fact exist. We hypothesise that this is
+due to the limited capacity of small-scale models which rely
+on spurious correlations in limited training data. We expect a
+more powerful backbone model and a more balanced dataset
+to lead to more faithful predictions and explanations. In the
+mean time, we would suggest techniques such as real-time
+verification and rectification [72] for mitigating hallucinations
+in driving applications as a promising direction.
+D. Closed-loop Evaluation
+Moreover, the close-loop evaluation in simulator is an
+important step before the deployment of the MLLM-based
+driving agent. However, the main obstacle for applying such
+evaluation in simulator is data scarcity and a significant
+simulation-to-real gap. While works such as DriveMLM [78] is
+able to perform the close-form evaluation by specifically trained
+on large-scale simulation dataset collected in the same CARLA
+environment, for methods trained on real dataset like RAG-
+Driver, the adaptation to simulated environment is a non-trivial
+step. While our method mitigates the effects of distribution
+shift between real datasets collected in different location and
+illumination conditions, the larger simulation-to-real gap still
+remains a significant challenge for closed-loop testing. This in
+turn highlights the importance of developing more generalisable
+models for the deployment of the MLLM-based driving agent.
+VI. CONCLUSION
+We propose RAG-Driver, a Multi-Modal Large Language
+Model with Retrieval-augmented In-context Learning capacity
+designed for generalisable and explainable end-to-end driving.
+It exhibits strong capability in providing numerical control
+signals, along with explanations and justifications for driving
+actions. More importantly, it shows impressive zero-shot
+generalisation to unseen environments without the need for
+additional training.
+ACKNOWLEDGEMENT
+Bo Zhao was supported by NSFC-62306046. Lars Kunze
+and Daniel Omeiza were supported by EPSRC Project
+RAILS (EP/W011344/1). Matthew Gadd was supported by
+EPSRC Programme Grant “From Sensing to Collaboration”
+(EP/V000748/1).
+REFERENCES
+[1] Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad,
+Ilge Akkaya, Florencia Leoni Aleman, Diogo Almeida, Janko
+Altenschmidt, Sam Altman, Shyamal Anadkat, et al. GPT-4
+technical report. arXiv preprint arXiv:2303.08774, 2023.
+[2] Michael Ahn, Anthony Brohan, Noah Brown, Yevgen Cheb-
+otar, Omar Cortes, Byron David, Chelsea Finn, Chuyuan Fu,
+Keerthana Gopalakrishnan, Karol Hausman, et al. Do as I can,
+not as I say: Grounding language in robotic affordances. arXiv
+preprint arXiv:2204.01691, 2022.
+[3] Jean-Baptiste Alayrac, Jeff Donahue, Pauline Luc, Antoine
+Miech, Iain Barr, Yana Hasson, Karel Lenc, Arthur Mensch,
+Katherine Millican, Malcolm Reynolds, et al. Flamingo: A

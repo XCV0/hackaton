@@ -1,0 +1,106 @@
+By sequentially performing the retrieve → filter
+→ generate composite mapping:
+(i, q, Cb) ↦→ R(q, Cb)
+↦→ F
+(
+q, R(q, Cb)
+)
+↦→ G
+(
+i, q, F
+(
+q, R(q, Cb)
+))
+↦→ r,
+the RAG Pipeline effectively exploits relevant con-
+texts from the external knowledge base Cb while
+also leveraging the powerful generation capabilities
+of LLMs. This approach mitigates the hallucina-
+tion problem and enhances both the accuracy and
+the interpretability of the answers.
+A.3.2 Base Dataset Construction
+Raw document is collected from the external news
+website, and paragraphs meeting the following cri-
+teria are selected: 1) contain more than 8 consec-
+utive sentences; 2) consecutive sentences revolve
+around a specific topic; 3) consecutive sentences
+can generate comprehensive questions of the what,
+why, or how types. For each paragraph, a com-
+prehensive question qj is generated, and n golden
+contexts Cj g = {c1 g, c2 g, . . . , cn g }, n ≥ 8 closely re-
+lated to the question qj are extracted. Each golden
+context cj g ∈ Cj g is manually screened and veri-
+fied to ensure accuracy, coherence, and the ability
+to fully answer the question. The base dataset is
+defined as:
+Dbase =
+{
+(qj , i, C j g ) | j = 1, . . . , N } ,
+where i represents the uniform instruction i pro-
+vided to the LLM17. The distribution of the base
+dataset is shown in Table 3.
+Table 3: Distribution of the base dataset.
+Domain What How Why
+Politics 10 7 2
+Finance 10 7 3
+Technology 12 5 2
+Culture 7 13 1
+Military 12 3 6
+The politics and finance domains exhibit a sim-
+ilar pattern, with a higher number of what and
+how questions compared to why questions. This
+is because news coverage in these areas primarily
+17The default instruction i used in this paper is shown in
+Fig. 14.
+focuses on reporting events, policies, and market
+trends, which naturally correspond to what ques-
+tions (e.g., What policies were introduced? What
+were the market movements?). How questions are
+also relatively frequent, as they are used to explain
+processes and mechanisms (e.g., How does a new fi-
+nancial regulation impact the market?). In contrast,
+why questions are less common, as political and
+financial reporting tends to present facts rather than
+analyze motivations, leaving deeper interpretation
+to opinion pieces or expert analyses.
+In the technology domain, what questions dom-
+inate, given that news in this field often revolves
+around new products, scientific advancements, and
+industry developments (e.g., What is the latest AI
+breakthrough?). While some how questions appear
+in discussions of technological mechanisms and
+implementations, why questions are rare, as most
+technology reporting focuses on descriptive rather
+than explanatory narratives.
+The culture domain exhibits a distinct pattern,
+with how questions being the most frequent. Cul-
+tural discussions often revolve around trends, artis-
+tic movements, and societal changes, which natu-
+rally lead to explanations of processes (e.g., How
+has digital art influenced modern design?). In con-
+trast, what questions are fewer, as cultural reporting
+tends to be less event-driven, and why questions
+are extremely rare, given that cultural phenomena
+are often subjective and interpretative rather than
+objective and causal.
+For military topics, the data shows a relatively
+high proportion of why questions, second only to
+what questions. This can be attributed to the nature
+of military reporting, which often involves analyz-
+ing strategic decisions, conflicts, and security devel-
+opments (e.g., Why did a country conduct military
+drills?). what questions are still the most common,
+given that military news frequently reports events,
+operations, and technological advancements, while
+how questions appear less frequently, as military
+strategies and tactics are often classified.
+A.3.3 SafeRAG Dataset Construction
+To evaluate the security of RAG under different
+adversarial scenarios, we design four attack tasks
+T = {SN, ICC, SA, WDoS}: silver noise SN,
+inter-context conflict ICC, soft ad SA, and white
+DoS WDoS. For each attack task t ∈ T , mali-
+cious attack texts are generated and combined with
+golden contexts to construct the RAG security eval-
+uation dataset (i.e., SafeRAG dataset). The detailed
+4619

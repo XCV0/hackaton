@@ -1,0 +1,72 @@
+Figure 8: Ablation study on V ∗ final
+Table 8: Comprison of T-RAG with other table prompt
+baseline. We evaluate on GPT-4o and report the
+EM@50 results.“G" Stands for the Graph Information
+Insertion part, “H" stands for the Hierarchical Long CoT
+Generation (Generated CoT part between <reasoning>
+and <reasoning/>).
+Methods TFV Single-hop TQA Multi-hop TQA
+TAP4LLM 61.4 53.8 46.9
+T-RAG 66.5 56.6 50.9
+w/o G 65.3 55.9 49.4
+w/o H 58.4 43.7 38.6
+hierarchical Long CoT generation components,
+as shown in Table 8. The results show that
+each component contributes to preserving table
+interconnectivity and providing clear guidance for
+multi-step reasoning on the challenging cross-table
+retrieval tasks.
+Choice of V ∗ final. In Tables 2 and 3, we evaluate
+the performance of T-RAG using different numbers
+of final retrieved tables, denoted as V ∗ final. For bet-
+ter demonstration, Figure 8 illustrates the retrieval
+and downstream tabular reasoning performance for
+GPT-4o and LLaMA-3.1-8B. We observe that re-
+trieval accuracy and recall consistently increase as
+the number of retrieved tables grows. For down-
+stream tasks, GPT-4o demonstrates enhanced per-
+formance with a larger number of tables, whereas
+LLaMA-3.1-8B exhibits performance degradation
+when the number of tables increases from 20 to
+50. A likely explanation is that a higher number
+of retrieved tables leads to longer input prompts.
+Models with larger parameter sizes can effectively
+handle extended contexts and extract useful infor-
+mation from additional tables, while smaller mod-
+els may struggle with lengthy prompts and thus fail
+to fully leverage the retrieved information.
+Table 9: Ablation study on hyperparameters settings
+in coarse-grained multi-way retrieval. We compare the
+accuracy and report the average number of retrieved
+tables in the optimal cluster. Hyperparameters adapted
+in our implementation are underlined.
+Hyperparameters TFV Single-hop TQA Multi-hop TQA Avg. Tables
+K = 3 96.1 98.3 93.6 9027
+K = 5 94.1 96.5 89.4 6438
+K = 10 84.2 95.9 87.6 2426
+K = 20 71.3 85.4 70.2 2163
+k = 50 77.5 89.2 72.8 5569
+k = 100 84.2 95.9 87.6 2426
+k = 150 86.2 96.2 88.2 4799
+k = 200 83.7 89.3 74.4 5628
+D.3 Parameter Study
+Hyperparameters on Multi-way Retrieval. We
+investigate the impact of the number of clusters K
+and the number of top-k typical nodes during the
+coarse-grained multi-way retrieval (Section 3.2).
+Table 9 presents the comparison results, reporting
+the accuracy (i.e., the proportion of sub-tables and
+corresponding testing queries grouped into the op-
+timal cluster). The experimental results reveal that
+using fewer clusters yields higher accuracy, but it
+also results in a substantial increase in the number
+of tables per cluster. Moreover, setting the top-k
+typical nodes too low or too high can lead to per-
+formance degradation or overfitting, respectively.
+Based on these observations, we adopt K = 10
+and k = 100 in our implementation.
+Hyperparameters on Subgraph Retrieval. Fig-
+ure 9 presents the retrieval performance for various
+settings of the PageRank sampling factor α and
+the similarity threshold τ employed during the fine-
+38150

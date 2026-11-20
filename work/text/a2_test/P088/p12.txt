@@ -1,0 +1,121 @@
+5.2. KG Poisoning
+Poisoningattacksonknowledgegraphs(KGs)havealso
+received increasing attention, although most prior work fo-
+cusesontheirimpactonknowledgegraphembedding(KGE)
+models. These studies [29, 44, 25] typically conduct tar-
+geted attacks by injecting adversarial triples into the KG
+structure, aiming to degrade link prediction performance
+for specific target entities or relations. In contrast to these
+targeted approaches, recent work [26] explores untargeted
+KG poisoning by leveraging logic rules to identify and
+manipulate high-impact triples that significantly affect the
+global semantics of the KG. These studies, despite focusing
+on KGE performance, demonstrate that the semantics of
+KGs are fragile to be polluted, which may further affect
+KG-based applications such as recommendation and KG-
+RAG systems. Thus, investigating the influence of KG poi-
+soning on KG-RAG systems is both timely and urgent for
+understanding their security implications, as KG-RAG has
+emerged as a popular extension of RAG systems.
+6. Conclusion
+Inthiswork,wepresentthefirststudyonthesafetyrisks
+ofKG-RAG,apopularextensionoftheRAGframework.We
+explore knowledge poisoning attacks and propose a practi-
+cal scenario in which the attacker is restricted to injecting
+perturbations to pollute KGs, with the goal of misleading
+the reasoning results of KG-RAG systems. We develop an
+attack strategy that inserts crafted triples that can complete
+adversarialreasoningpaths,whichmaymisleadtheretriever
+orgeneratorintoproducingincorrectanswers.Experimental
+resultsontwobenchmarksandfourrepresentativeKG-RAG
+modelsdemonstratetheeffectivenessoftheproposedattack.
+Beyond overall attack success, our analysis reveals the
+following key insights:
+(1).ThesafetyofKG-RAGsystemsisparticularlysuscepti-
+bletoknowledgepoisoningattacks,andtheirstructuralvul-
+nerability primarily resides in the retrieval stage. Retrievers
+inexistingmethodslackeffectivemechanismstodistinguish
+or exclude poisoned triples, allowing adversarial informa-
+tion to flow into the generation stage. Consequently, the
+overall robustness of KG-RAG systems often relies heavily
+on the LLMs’ persistence to noisy content.
+(2). Different LLMs exhibit varying levels of resistance to
+noise. While equipping LLMs with structured KG knowl-
+edge can improve their performance on KG-related tasks,
+it also tends to make them more vulnerable to adversar-
+ial KG manipulation. An improving direction may lie in
+combining the strengths of both KG-specific and general-
+purpose LLMs, aiming to maintain high answer accuracy
+while enhancing resistance to poisoned knowledge.
+(3). Increasing the number of injected triples does not guar-
+antee a consistent gain in attack effectiveness. Meanwhile,
+LLMs employed in KG-RAG generate stages may not fully
+utilize all retrieved content and could exhibit implicit pref-
+erences during answer generation, which needs further ex-
+plora.
+As future work, we aim to enhance the attack effective-
+nessbyinsertingperturbationsthataremoreconsistentwith
+theLLM’sknowledge,therebyincreasingthelikelihoodthat
+retrieved adversarial triples are incorporated into the final
+answer.Wealsoplantoinvestigatedeletionandmodification
+attacks to develop a broader understanding of RAG safety.
+References
+[1] Y.Gao,Y.Xiong,X.Gao,K.Jia,J.Pan,Y.Bi,Y.Dai,J.Sun,H.Wang,
+H.Wang,Retrieval-augmentedgenerationforlargelanguagemodels:
+A survey, arXiv preprint arXiv:2312.10997 2 (1) (2023).
+[2] W. Fan, Y. Ding, L. Ning, S. Wang, H. Li, D. Yin, T.-S. Chua,
+Q. Li, A survey on rag meeting llms: Towards retrieval-augmented
+large language models, in: Proceedings of the 30th ACM SIGKDD
+Conference on Knowledge Discovery and Data Mining, 2024, pp.
+6491–6501.
+[3] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal,
+H. Küttler, M. Lewis, W.-t. Yih, T. Rocktäschel, et al., Retrieval-
+augmented generation for knowledge-intensive nlp tasks, Advances
+in neural information processing systems 33 (2020) 9459–9474.
+[4] S. Siriwardhana, R. Weerasekera, E. Wen, T. Kaluarachchi, R. Rana,
+S. Nanayakkara, Improving the domain adaptation of retrieval aug-
+mentedgeneration(rag)modelsforopendomainquestionanswering,
+Transactions of the Association for Computational Linguistics 11
+(2023) 1–17.
+[5] A. Toney-Wails, R. Wails, C. Smith, Expertly informed, genera-
+tively summarized: A hybrid RAG approach to informed consent
+summarization with auxiliary expert knowledge, in: Proceedings of
+the 4th International Workshop on Knowledge-Augmented Methods
+for Natural Language Processing, Association for Computational
+Linguistics, Albuquerque, New Mexico, USA, 2025, pp. 246–258.
+doi:10.18653/v1/2025.knowledgenlp-1.23.
+URL https://aclanthology.org/2025.knowledgenlp-1.23/
+[6] B. Peng, Y. Zhu, Y. Liu, X. Bo, H. Shi, C. Hong, Y. Zhang,
+S. Tang, Graph retrieval-augmented generation: A survey, arXiv
+preprint arXiv:2408.08921 (2024).
+[7] N. F. Liu, K. Lin, J. Hewitt, A. Paranjape, M. Bevilacqua, F. Petroni,
+P.Liang,Lostinthemiddle:Howlanguagemodelsuselongcontexts,
+Transactions of the Association for Computational Linguistics 12
+(2024) 157–173. doi:10.1162/tacl_a_00638.
+URL https://aclanthology.org/2024.tacl-1.9/
+[8] H. Han, Y. Wang, H. Shomer, K. Guo, J. Ding, Y. Lei, M. Ha-
+lappanavar, R. A. Rossi, S. Mukherjee, X. Tang, et al., Retrieval-
+augmented generation with graphs (graphrag), arXiv preprint
+arXiv:2501.00309 (2024).
+[9] D.Vrandečić,M.Krötzsch,Wikidata:afreecollaborativeknowledge-
+base, Communications of the ACM 57 (10) (2014) 78–85.
+[10] K.Donnelly,etal.,Snomed-ct:Theadvancedterminologyandcoding
+system for ehealth, Studies in health technology and informatics 121
+(2006) 279.
+[11] L. LUO, Y.-F. Li, G. Haffari, S. Pan, Reasoning on graphs: Faithful
+and interpretable large language model reasoning, in: The Twelfth
+International Conference on Learning Representations, 2024.
+URL https://openreview.net/forum?id=ZGNWW7xZ6Q
+[12] Y.Wu,Y.Huang,N.Hu,Y.Hua,G.Qi,J.Chen,J.Pan,Cotkr:Chain-
+of-thought enhanced knowledge rewriting for complex knowledge
+graphquestionanswering,in:Proceedingsofthe2024Conferenceon
+EmpiricalMethodsinNaturalLanguageProcessing,2024,pp.3501–
+3520.
+[13] S. Ji, S. Pan, E. Cambria, P. Marttinen, S. Y. Philip, A survey
+on knowledge graphs: Representation, acquisition, and applications,
+IEEE transactions on neural networks and learning systems 33 (2)
+(2021) 494–514.
+[14] Y.Wang,N.Lipka,R.A.Rossi,A.Siu,R.Zhang,T.Derr,Knowledge
+graphpromptingformulti-documentquestionanswering,in:Proceed-
+ingsoftheAAAIConferenceonArtificialIntelligence,Vol.38,2024,
+: Preprint submitted to Elsevier Page 12 of 13

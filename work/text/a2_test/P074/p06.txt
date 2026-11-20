@@ -1,0 +1,100 @@
+subset of negatives from the training set to obtain
+the k2 hardest negatives, and further optimize the
+re-ranking module with a contrastive loss to adapt
+to the generator’s prediction preferences.
+4 Experiments
+Datasets: The InfoSeek dataset (Chen et al., 2023)
+comprises 1.3 million image-question pairs, cov-
+ering over 11,000 visual entities from OVEN (Hu
+et al., 2023). Following prior work, we utilize a
+controlled Wikipedia knowledge base of 100,000
+articles as the knowledge source. The Enc-VQA
+dataset (Mensink et al., 2023) contains 221,000
+question-answer pairs and 2 million Wikipedia ar-
+ticles, with images sourced from iNaturalist 2021
+(Van Horn et al., 2021) and Google Landmarks
+Dataset V2 (Weyand et al., 2020). Each question-
+answer pair in Enc-VQA is annotated with the
+precise knowledge source. For a fair comparison,
+we adopt the training/testing split used in previous
+studies (Yan and Xie, 2024); sample statistics and
+evaluation metrics are presented in the appendix.
+Implementation Details: We employ LLaVA-1.5-
+7B (Liu et al., 2023) to generate image-related tags
+and Eva-CLIP-8B (Sun et al., 2023) to generate
+image and text embeddings, extracting the top 20
+articles with the highest similarity as a candidate
+set. The fine-grained section re-ranking module is
+initialized with pre-trained BLIP-2 (Li et al., 2023)
+parameters and trained on the Enc-VQA dataset.
+Notably, since InfoSeek lacks paragraph-level an-
+notations, we adopt a zero-shot transfer approach.
+The multimodal reassessment stage utilizes the bge-
+qwen-vl-2b (Bai et al., 2023) for feature extraction.
+During the answer generation stage, we use a pre-
+trained LLaMA3-8B (Grattafiori et al., 2024) and a
+LoRA-fine-tuned LLaVA-1.5-7B (Liu et al., 2023)
+for inference. During training, we randomly sam-
+pled k1 = 24 sections as negative samples and
+trained for 6 epochs. To improve efficiency, we
+sampled a subset of 100,000 samples and extracted
+k2 = 4 sections as hard negative samples, train-
+ing for 1 epoch. The experimental training is con-
+ducted on two NVIDIA H20 80GB GPUs. Prompt
+settings and further training details are provided in
+the Appendix.
+4.1 Comparison with State-of-the-Art
+Methods
+Table 1 compares the VQA performance of our
+proposed method against several state-of-the-art
+approaches. Our method primarily focuses on ef-
+fectively localizing relevant knowledge and enhanc-
+ing VQA accuracy through a progressive multi-
+modal re-ranking strategy and curriculum learning
+incorporating decoding rank perturbation. The re-
+sults demonstrate that our framework consistently
+achieves superior performance across two datasets,
+demonstrating the significant potential of enhanc-
+ing multimodal retrieval for improved answer ac-
+curacy. Specifically, our method achieves optimal
+VQA performance with LLMs in a zero-shot set-
+ting on the Enc-VQA dataset, without explicitly
+incorporating visual information during generation.
+4.2 Retrieval Performance Analysis
+Table 2 presents the performance outcomes of vari-
+ous retrieval methods. The methods OMGM (Yang
+et al., 2025) and ReflectiVA (Cocchi et al., 2025),
+which employ ChatGPT to generate textual sum-
+maries for all Wikipedia articles, exhibit superior
+performance compared to other retrievers with-
+out preprocessing. Our methodology primarily
+compares performance with baselines that utilize
+Wikipedia images for initial retrieval. By incorpo-
+rating image tags as supplementary data, our visual
+coarse-grained search method achieves an enhance-
+ment of 2.5% in Recall@20 for Enc-VQA and
+4% for Infoseek. Additionally, our progressive re-
+ranking strategy significantly improves Recall@1
+performance and consistently outperforms the base-
+line. Specifically, our approach overcomes the
+performance bottleneck of initial visual retrieval
+through a two-stage re-ranking strategy, achiev-
+ing superior Recall@1 performance compared to
+OMEM (Yang et al., 2025). This demonstrates that
+our progressive re-ranking strategy effectively fil-
+ters relevant documents from the initial retrieval re-
+sults, ensuring the quality of knowledge ultimately
+fed into the generator, even with imperfect initial
+retrieval.
+4.3 Ablation Study
+Contribution of different retrieval stages to
+VQA results: Table 3 evaluates the contribution
+of different retrieval strategies to VQA results.
+The results indicate that incorporating Wikipedia
+knowledge enhances answer generation, as it pro-
+vides valuable external information to the model.
+The progressive, multimodal re-ranking strategy
+focuses on refining the precision of relevant sec-
+tions to provide reliable and low-noise informa-
+tion for subsequent generation. The fine-grained
+41140

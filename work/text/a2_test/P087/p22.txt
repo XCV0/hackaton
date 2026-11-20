@@ -1,0 +1,59 @@
+INSTRUCTION:
+You are a plan generator that outputs only JSON. You will not provide thinking processes.
+Task: Generate an executable PLAN (sequence of steps) for the question using the following primitives:
+• FIND(by: entity|number|year|text, value)
+• FILTER(by: year|number, cond: =, >, <, >=, <= with numeric)
+• SELECT(keyword) # Filter sentences by keyword
+• AGG(type: COUNT|MAX|MIN, target?: year|number)
+• COMPARE(mode: MAX|MIN) # Find sentence maximizing target in candidates
+• ANSWER(template: string with {value})
+Only return JSON: {"steps":[ ... ]}, do not output any other content.
+CONSTRAINTS & REQUIREMENTS:
+1) If the question involves numerical values/dates/comparisons, please use FIND + FILTER/AGG/COMPARE.
+2) You must end with ANSWER. Use {value} as a placeholder in the template. If there is no numerical value, you can treat
+{value} as the final answer directly.
+3) Do not include explanations or extra fields.
+INPUT:
+Question: {question}
+Only output JSON.
+Figure 7: The prompt template used for the Symbolic Plan Generator. This prompt restricts the LLM to output a
+structured execution plan using predefined API primitives.
+quires bridging entity relationships and precise at-
+tribute comparison. The query asks: “Who had a
+longer tenure as CEO of the company that acquired
+DeepMind: Eric Schmidt or Larry Page?”
+This query presents a specific challenge: “Deep-
+Mind” is a keyword heavily associated with recent
+AI breakthroughs, creating a “distractor dense” re-
+trieval environment.
+As shown in Figure 9, the Baseline suffers from
+topic drift. The dense retriever prioritizes docu-
+ments about DeepMind’s technical achievements
+(AlphaGo, AlphaZero) due to high semantic simi-
+larity with the query entity. These redundant docu-
+ments occupy the limited context window, crowd-
+ing out the essential biographical data regarding
+the CEOs of the parent company (Google). Conse-
+quently, the model relies on a “Founder Heuristic”—
+assuming the founder (Larry Page) served the
+longest—resulting in a hallucinated conclusion.
+In contrast, our Self-Correcting RAG demon-
+strates robustness:
+1. MMKP Filtering: The Context Selector
+groups the “AI Achievement” documents into
+a single semantic cluster. It recognizes that
+selecting multiple documents from this clus-
+ter offers diminishing returns. It effectively
+prunes the redundancy (similar to the mech-
+anism described in Section G.1), freeing up
+token budget to retrieve the specific tenure
+dates for both Schmidt and Page.
+2. MCTS Verification: The generator initially
+attempts a heuristic guess (Page > Schmidt).
+However, the NLI-guided verifier checks this
+against the retrieved evidence (Schmidt: 10
+years vs. Page: 4 years) and penalizes the
+contradiction (Q = −1.0). The planner then
+backtracks to perform the correct arithmetic
+comparison, producing a faithful result.
+20974

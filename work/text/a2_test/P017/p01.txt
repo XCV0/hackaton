@@ -1,0 +1,89 @@
+Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 31660–31683
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+REAL-MM-RAG: A Real-World Multi-Modal Retrieval Benchmark
+Navve Wasserman1,2, Roi Pony1, Oshri Naparstek1, Adi Raz Goldfarb1
+Eli Schwartz1, Udi Barzelay1, Leonid Karlinsky1
+1IBM Research Israel 2Weizmann Institute of Science
+navve.wasserman@weizmann.ac.il
+Abstract
+Accurate multi-modal document retrieval is
+crucial for Retrieval-Augmented Generation
+(RAG), yet existing benchmarks do not fully
+capture real-world challenges with their current
+design. We introduce REAL-MM-RAG, an au-
+tomatically generated benchmark designed to
+address four key properties essential for real-
+world retrieval: (i) multi-modal documents, (ii)
+enhanced difficulty, (iii) Realistic-RAG queries
+and (iv) accurate labeling. Additionally, we
+propose a multi-difficulty-level scheme based
+on query rephrasing to evaluate models’ seman-
+tic understanding beyond keyword matching.
+Our benchmark reveals significant model weak-
+nesses, particularly in handling table-heavy
+documents and robustness to query rephras-
+ing. To mitigate these shortcomings, we cu-
+rate a rephrased training set and introduce a
+new finance-focused, table-heavy dataset. Fine-
+tuning on these datasets enables models to
+achieve state-of-the-art retrieval performance
+on REAL-MM-RAG benchmark. Our work
+offers a better way to evaluate and improve re-
+trieval in multi-modal RAG systems while also
+providing training data and models that address
+current limitations. Our benchmark is available
+at this project page.
+1 Introduction
+Accurate retrieval of relevant documents is a
+cornerstone of modern natural language processing
+(NLP) applications, whether used alone or in
+advanced pipelines like Retrieval-Augmented
+Generation (RAG). RAG (Lewis et al., 2020) has
+emerged as a powerful approach wherein models
+retrieve external information before generating
+answers or content, enabling operation over large
+document collections. Multi-modal RAG extends
+this to real-world scenarios involving text, figures,
+tables, and potentially entire page images.
+Successful retrieval is crucial for RAG, as
+retrieving the wrong page or document inevitably
+hinders the final generated response. Therefore our
+analysis will focus on the retrieval part. Although
+research on RAG is advancing, the field still lacks
+a complete understanding of how models perform
+in realistic setups, both for evaluating performance
+and identifying current weaknesses to overcome.
+This gap arises from a shortage of benchmarks that
+thoroughly assess real-world retrieval challenges.
+We identify four essential properties for a real-
+world document retrieval benchmark, particularly
+in multi-modal contexts: (i) Multi-modal docu-
+ments: The dataset should include pages with
+text, figures, tables, and other visual elements to
+reflect the complexity of real-world materials. (ii)
+Enhanced difficulty: Queries should require more
+than simple keyword matching and involve a large
+corpus of contextually similar pages to ensure chal-
+lenging evaluations. (iii) Realistic-RAG queries:
+Questions must be posed naturally, without explicit
+references to pages—reflecting queries a person
+might ask when seeking information without
+knowing the answer’s location (in contrast to
+generic question-answering setups). (iv) Accurate
+labeling: All documents relevant to a query must
+be correctly and exhaustively labeled to prevent
+underestimation of retrieval performance and to
+avoid false negatives.
+Although a few recent benchmarks touch on some
+of these aspects (Faysse et al., 2024; Ma et al.,
+2024a,b), most fail to fully capture them, limit-
+ing their usefulness for understanding and improv-
+ing multi-modal retrieval models. We introduce
+REAL-MM-RAG-Bench (Real-World Multi-Modal
+Retrieval-Augmented Generation Benchmark), a
+benchmark designed to satisfy the properties above:
+Multi-modal documents (Property i): Our
+dataset comprises slides and documents with text,
+figures, tables, and images, requiring systems to
+handle combined textual and visual data.
+31660

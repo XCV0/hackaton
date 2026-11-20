@@ -1,0 +1,91 @@
+Algorithm 1 SPROUTRAG Indexing and Retrieval
+Require: Document D, query q, beam width b,
+threshold δ, top-k
+Ensure: Retrieved evidence F
+1: {Offline indexing}
+2: S ← SplitSentences(D)
+3: E, A ← SLLM(S)
+4: A ← ∑ l,h wl,h A(l,h)
+5: M ← (A + A⊤)/2
+6: N ← {Leaf(si, ei) | si ∈ S, ei ∈ E}
+7: while |N | > 1 do
+8: (u, v) ← arg maxu̸=v; u,v∈N Muv
+9: p ← Node(u, v)
+10: ep ← (eu + ev)/2
+11: for r ∈ N \ {u, v} do
+12: Mpr ← max(Mur, Mvr)
+13: Mrp ← Mpr
+14: end for
+15: N ← (N \ {u, v}) ∪ {p}
+16: end while
+17: T ← root(N )
+18: {Online retrieval}
+19: eq ← SLLM(q)
+20: C ← ∅, B ← {T }
+21: while B ̸= ∅ do
+22: C ← C ∪ {v ∈ B | sim(eq, ev) ≥ δ}
+23: X ← ⋃ v∈B Children(v)
+24: B ← TopB(X , b, sim(eq, ·))
+25: end while
+26: F ← TopK(Rerank(C, q), k)
+27: return F
+The retrieval candidate set is then defined as all
+visited nodes whose similarity exceeds a learned
+threshold δ:
+C = {v ∈ Vvisit : sim(q, v) ≥ δ} . (9)
+The candidate set C contains evidence at multiple
+granularities, from sentence-level leaves to larger
+subtrees, allowing SPROUTRAG to retrieve either
+precise facts or broader multi-sentence context as
+needed. The collected candidates are reranked by
+similarity or a lightweight reranker, and the top-k
+chunks are passed to the answer generator. The
+complete indexing and retrieval procedure is sum-
+marized in Algorithm 1.
+3.3 Joint Training
+The pretrained SLLM is not optimized for retrieval
+or for constructing retrieval-oriented document
+structures. We therefore fine-tune SPROUTRAG
+with a joint objective that improves both the em-
+bedding space and the attention tree.
+Retrieval objective. We train the SLLM embed-
+dings with contrastive learning over query–passage
+pairs. Given a query q, a positive passage p+, and
+hard negatives {pj }, each passage is represented
+by mean-pooling its sentence embeddings. We op-
+timize:
+Lret = − log exp(sim(q, p+)/τ )∑
+j exp(sim(q, pj )/τ ) , (10)
+where τ is a temperature parameter. This objective
+aligns queries with relevant passages and separates
+them from hard negatives.
+Structure objective. Good embeddings alone do
+not guarantee a useful hierarchy. Since the tree
+depends on the learned attention matrix, we add
+an attention regularizer that encourages co-relevant
+sentence pairs to receive high mutual attention. Let
+G be the set of sentence pairs within a positive
+passage that jointly support the query. We define:
+Lattn = − 1 |G| ∑ (si,sj )∈G log ( Aij + Aji 2 ) . (11)
+This objective directly shapes the learned head–
+layer aggregation, encouraging the induced tree to
+group semantically related evidence into coherent
+and retrievable subtrees.
+Final objective. The final training loss is:
+L = Lret + λLattn, (12)
+where λ controls the strength of structure regular-
+ization. After training, the learned aggregation
+weights are used during offline indexing, and re-
+trieval requires only query encoding, tree traversal,
+and reranking. Thus, SPROUTRAG avoids external
+LLM filtering and lossy LLM-based summarization
+while enabling efficient multi-granularity retrieval.
+4 Experiments and Results
+4.1 Experimental Setup
+Benchmarks. We evaluate SPROUTRAG on four
+retrieval benchmarks spanning scientific, legal, and
+open-domain settings: SCI-DOCS (Cohan et al.,
+2020), LegalBench-RAG (Pipitone and Alami,
+2024), Dragonball (Zhu et al., 2025), and MS
+MARCO (Nguyen et al., 2016). For end-to-end
+46525

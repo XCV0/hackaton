@@ -1,0 +1,102 @@
+DVD Dynamic Contrastive Decoding (DVD) is
+a document-aware contrastive decoding baseline
+for multi-document QA. We use the static-weight
+configuration with β = 0.25, γ = 0.2, and docu-
+ment top-k = 10. In early experiments, we find
+that dynamic β performs poorly, so we followed
+the suggested configuration from Jin et al. (2024a).
+The method selects document-conditioned streams
+according to its entropy-based criterion and applies
+a document-level contrast together with a context-
+prior contrast.
+COCOA Confidence- and Context-Aware Adap-
+tive Decoding (COCOA) uses a confidence-aware
+interpolation between no-context and full-context
+predictions. We use the paper-faithful configura-
+tion with Rényi divergence order α = 0.5, entropy-
+gap weight γ = 1.0, peakedness amplifier z = 5.0,
+and numerical stability constants δ = 10−8 and
+ε = 10−12 following Khandelwal et al. (2025).
+DCCD Our proposed Dual-Confidence Con-
+trastive Decoding (DCCD) has the advantage of
+being relatively hyperparameter-free, with the only
+hyperparameter being the top-k logits used for com-
+puting token-level confidence, which we set to
+k = 10 throughout all our experiments.
+Method Hyperparameter Value
+All methods Temperature 0
+All methods Decoding strategy greedy
+All methods Max new tokens 60
+CAD α 0.2
+ADACAD JSD floor 0.0
+DVD β 0.25
+DVD γ 0.2
+DVD Document top-k 10
+COCOA Rényi order 0.5
+COCOA Entropy-gap weight 1.0
+COCOA Peakedness amplifier 5.0
+COCOA Numerical floors δ = 10−8, ε = 10−12
+DCCD top-k 10
+Table 7: Main decoding hyperparameters used in the
+experiments. Hyperparameters are fixed across datasets
+and models.
+C.4 Models and Inference Backend
+We evaluate the three instruction-tuned language
+models through Hugging Face transformers
+(Wolf et al., 2020), namely, Qwen3.5-2B2
+Qwen3.5-9B3, and Phi-3-medium4. All models
+2https://huggingface.co/Qwen/Qwen3.5-2B
+3https://huggingface.co/Qwen/Qwen3.5-9B
+4https://huggingface.co/microsoft/
+Phi-3-medium-128k-instruct
+are loaded with their default tokenizers and chat
+templates. We use bfloat16 inference when sup-
+ported. Tokenizer padding is set to the left so
+the final-position logits are aligned across batched
+streams.
+For contrastive decoding methods, each decod-
+ing step may require multiple forward streams.
+CAD, ADACAD, and COCOA use no-context and
+full-context streams. DVD and DCCD additionally
+use document-conditioned streams. For DCCD, the
+support probe is computed once before decoding,
+while the full-context and document-conditioned
+logits are computed during each decoding step.
+Streams are batched whenever possible.
+C.5 Evaluation Metrics
+Normalized string exact match. For NQ, Trivi-
+aQA, PopQA, and RetrievalQA, we use normalized
+string exact match, denoted strem. We first extract
+the generated answer sentence and then normal-
+ize both the prediction and gold answers using the
+standard QA normalization procedure: lowercas-
+ing, removing punctuation, removing articles, and
+collapsing whitespace. A prediction is counted as
+correct if any normalized gold answer matches the
+normalized prediction by exact or substring match,
+following common retrieval-augmented QA evalu-
+ation practice.
+LLM-as-a-judge for DRQA. For DRQA, the
+reference answer is a free-form enterprise insight
+rather than a short canonical span. We therefore
+evaluate semantic correctness with an LLM judge.
+The judge receives the question, the reference an-
+swer, and the model prediction, and returns a binary
+correctness label. A prediction is marked correct if
+it conveys the same answer as the reference at the
+required level of specificity. Numerical and date
+answers must match the reference detail; refusals
+are marked incorrect unless the reference answer
+itself indicates that the information is unavailable.
+We use deterministic judge decoding with
+temperature 0. Judge outputs are parsed as
+JSON with a boolean correctness field. If
+the judge response cannot be parsed, the ex-
+ample is conservatively marked incorrect. Be-
+low is the prompt template for our judge using
+anthropic/claude-opus-4-5 (Anthropic, 2025)
+through OpenRouter API5.
+You are a strict but fair grader for short-answer
+question answering. Decide whether the model answer
+5https://openrouter.ai
+19

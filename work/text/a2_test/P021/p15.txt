@@ -1,0 +1,100 @@
+B.2 CITEF1
+B.2.1 Single-Source Precision
+As with INFOF1, we reformulate citation precision
+for single-source inference. Instead of scoring a
+subclaim against all of its cited sources simultane-
+ously, we compare the subclaim against each cited
+source individually and take the maximum:
+precision(CP , D) = 1 |CP | ∑ ci∈CP max d∈Di s(ci, d)
+(10)
+The set of documents Di can either be the docu-
+ments associated with the first mention of ci, like
+ARGUE, or any mention of ci depending on the
+desired evaluation setting. Subclaim de-duplication
+is recommended as shown by Jiang et al. (2024).
+B.2.2 Weighted Variations
+For CITEF1, we use a notion of source quality to
+weight both precision and recall. The quality of a
+source could be annotated in the evaluation data
+for two cases: (1) differentiating between coun-
+terfactual sources (e.g., AIGC or misinformation),
+and (2) human preferences. For example, a human
+might prefer that a system cite the most informative
+sources, so that fewer need to be consulted to vali-
+date a prediction. Alternatively, they might prefer
+a particular type of source (e.g., news content over
+social media).
+We define Qi as the quality weight for a source.
+Weighted citation precision is:
+precision(CP , D) = 1 |CP | ∑ ci∈CP s(ci, Di) · Qi
+(11)
+For single-source inference:
+precision(CP , D) = 1 |CP | ∑ ci∈CP max d∈Di s(ci, d) · Qd
+(12)
+Weighted citation recall is:
+recall(CR, P, D) =
+1
+|CR|
+∑
+cR i ∈CR
+max
+dj ∈Di
+(
+max
+sk ∈Sj
+s(cR i , sk) · Qj
+)
+(13)
+B.2.3 Implementation Details
+As with INFOF1, we support both CLUE and zero-
+shot VLM verification backends, using the same
+scalar prompts (Figure 9, Figure 10, Figure 11)
+and binary prompts (Figure 6, Figure 7, Figure 8)
+respectively.
+B.3 Reference vs. Collection Precision
+We discuss the tradeoffs between reference and
+collection precision in INFOF1 and CITEF1. The
+primary motivation for reference-based evaluation
+in multimodal RAG is computational efficiency,
+but each variant introduces distinct side effects.
+INFOF1. Reference precision evaluates pre-
+dicted subclaims against the reference instead of
+against the documents related to the topic (collec-
+tion precision). However, human-annotated refer-
+ences are inherently non-exhaustive, leading to the
+artifact that reference precision penalizes factual
+subclaims deemed not salient to the topic. This
+may be a limitation if the goal is to evaluate only
+factuality: without judging subclaims against the
+information sources, the evaluation cannot capture
+the factuality of all claims in the prediction. We do
+not view this as a limitation for general evaluation,
+because it is important that information be relevant
+to the query and information need.
+CITEF1. Reference precision for CITEF1 eval-
+uates predicted subclaims against the reference
+subclaims grounded in the same cited document.
+Like INFOF1, human-annotated references are non-
+exhaustive, so reference precision penalizes factual
+subclaims not deemed salient to the source topic.
+Unlike INFOF1, this is a limitation of reference
+precision: CITEF1 is designed to evaluate ground-
+ing in the cited sources, so it should not matter
+whether the information is relevant to the topic—
+only that it is supported by the attributed sources.
+C Additional Human Alignment Results
+In Table 8, Table 9, and Table 10, we report ad-
+ditional human alignment results with CLUE and
+Qwen3.5.
+D TextRAG Implementations
+D.1 ALCE
+In subsection 3.1, we introduce ALCE. In this
+section, we outline the key implementation details
+of this metric.
+Correctness In our work, we only evaluate
+Claim Recall from ALCE Correctness. We do not
+adapt exact match against the reference because
+this is not suitable for long-form generation. When
+evaluating open-ended RAG on ELI5 (Fan et al.,
+2019), Gao et al. (2023) present Claim Recall, an
+40245

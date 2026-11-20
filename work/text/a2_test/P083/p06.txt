@@ -1,0 +1,95 @@
+Strategy Hit Rate Exact Match
+Ground Truth (GT) 0.673 0.345
+First Retrieved (FR) 0.636 0.309
+Best Match (BM) 0.600 0.309
+All Retrieved (AR) 0.655 0.273
+Table 4: Stance generation accuracy (Hit Rate and Ex-
+act Match) across retrieval strategies using Docling-
+Semantic chunks, Nomic embeddings, and BGE rerank-
+ing.
+ing the strength of BGE reranking in surfacing
+useful evidence early. However, the narrow gap
+across all methods indicates that chunk quality,
+rather than just retrieval rank, plays a critical role
+in ﬁnal stance reliability.
+To better understand why stance prediction suc-
+ceeds or fails under each retrieval strategy, we com-
+plement accuracy metrics with oracle-based diag-
+nostics in Table 5.
+Metric BM FR AR
+Faithfulness (sf ) 0.753 0.420 0.830
+Helpfulness (sh) 0.561 0.582 0.415
+Conciseness (sc) 0.855 0.737 0.760
+Table 5: Average oracle diagnostic scores for the re-
+trieval strategies: Best Match (BM), First Retrieved
+(FR), and All Retrieved (AR).
+Despite its lower faithfulness score (sf =
+0.420), the FR strategy achieves the highest stance
+generation accuracy. This aligns with its top help-
+fulness score (sh = 0.582), suggesting that early-
+ranked chunks, though not always the most faithful
+to ground truth, can still effectively guide the model
+to the correct stance. In contrast, AR achieves the
+highest faithfulness (sf = 0.830) but performs
+worst in Exact Match, likely due to lower help-
+fulness (sh = 0.415) and moderate conciseness,
+indicating that excessive context may dilute the
+model’s focus. BM balances strong faithfulness
+(sf = 0.753) and top conciseness (sc = 0.855),
+but its lower hit rate suggests that even aligned and
+compact evidence may fall short if not supported by
+helpfulness. These results reveal a critical trade-off:
+while faithfulness correlates with gold overlap, it
+does not always translate to better stance prediction.
+Helpfulness, particularly for early-ranked evidence,
+appears more decisive for ﬁnal performance.
+When Retrieval Outperforms Ground Truth.
+To understand when retrieved evidence outper-
+forms gold snippets, we isolate cases where stance
+prediction fails using the GT snippet but succeeds
+with at least one of the retrieval strategies, as mea-
+sured by the Exact Match metric. We compute av-
+erage oracle scores for these outperforming cases
+by retrieval strategy (see Table 6 in the Appendix).
+The results challenge the assumption that gold-
+labeled evidence is always optimal for automated
+LLM stance generation. Notably, FR accounts for
+nearly half of all outperforming cases and achieves
+the highest helpfulness score, suggesting that early-
+ranked evidence, despite lower faithfulness, can
+guide the LLM toward correct stance generation.
+AR achieves the highest faithfulness, reﬂecting its
+ability to recover relevant information through con-
+text aggregation, though it may introduce informa-
+tion overload. BM is the most concise and mod-
+erately faithful to GT, thus limiting its ability to
+outperform it. This highlights that success depends
+not just on gold alignment, but on how evidence
+supports reasoning, by providing the context LLMs
+actually need.
+6 Conclusion
+This paper presents a multilingual RAG system for
+automated corporate climate policy evidence ex-
+traction and scoring. Through careful assessment
+of the components, we demonstrate that multilin-
+gual, layout-aware parsing combined with semantic
+chunking and reranked dense retrieval yields high-
+quality evidence for LLM-based stance inference.
+Our experiments highlight the strengths and
+trade-offs of different retrieval strategies, show-
+ing that faithfulness alone does not guarantee op-
+timal performance. Notably, retrieved evidence,
+especially when well-ranked or aggregated, can
+sometimes outperform human-annotated gold snip-
+pets, suggesting that LLMs beneﬁt from context
+that extends beyond manually deﬁned spans. These
+ﬁndings underscore the importance of adaptive re-
+trieval pipelines that prioritize not just relevance,
+but evidence helpfulness and conciseness to sup-
+port accurate and explainable LLM reasoning.
+Future work should focus on improving ranking
+algorithms for ﬁne-grained chunks and developing
+better evaluation metrics that account for the inher-
+ent challenges of precise evidence extraction from
+complex corporate documents.
+116

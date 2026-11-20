@@ -1,0 +1,99 @@
+ing RAG-based RPAs. We examine the challenges
+inherent in RAG-based role-playing and propose
+approaches. In real-world applications, users and
+RPAs frequently engage in conversations on top-
+ics that extend beyond the knowledge defined in
+the character’s persona. However, we observe that
+the existing RAG method tends to excessively uti-
+lize chunks that are less relevant to the question
+when the question is not explicitly answered by the
+available knowledge (Figure 1 and Figure 6).
+To address these challenges, we introduce
+Amadeus, a training-free framework that can
+markedly improves persona consistency, even when
+addressing questions beyond a character’s knowl-
+edge. Amadeus consists of three substages: Adap-
+tive Context-aware Text Splitter (ACTS), which
+segments a persona for role-playing, Guided Selec-
+tion (GS), which retrieves appropriate chunks to
+infer information relevant to the question from the
+persona, such as prior actions and behaviors, and
+Attribute Extractor (AE), which identifies gen-
+eral attributes of the character from the retrieved
+chunks, thereby encouraging the RPA to respond
+in a manner consistent with that character.
+To underpin the development and rigorous evalu-
+ation of RAG-based RPAs, we manually construct
+CharacterRAG, a role-playing dataset that con-
+sists of persona documents for 15 distinct fictional
+characters totaling 976K written characters, and
+450 question–answer pairs. We conduct exten-
+sive experiments to examine the factors that influ-
+ence the performance of RAG-based RPAs through
+interview-based assessments (Wang et al., 2024b;
+Park et al., 2025; Jiang et al., 2023). To investigate
+whether RPAs can respond appropriately to ques-
+tions that fall outside their endowed knowledge, we
+employ multiple psychological questionnaires such
+as MBTI1 and BFI (Barrick and Mount, 1991), fol-
+lowing prior studies (Sang et al., 2022; Wang et al.,
+2024b). Results show that our framework opens up
+new possibilities for RAG-based role-playing.
+2 CharacterRAG
+2.1 Dataset Construction
+We construct the CharacterRAG dataset, which con-
+sists of 15 fictional characters, to leverage and eval-
+uate a RAG-based role-playing framework. Char-
+acterRAG is a high-quality, role-playing dataset in
+which all external information about works featur-
+ing characters that could affect persona consistency
+1https://www.16personalities.com/
+has been manually removed, and each persona doc-
+ument has been directly reconstructed from the per-
+spective of each character by human annotators2.
+For instance, any information speculated from the
+perspective of editors rather than the characters
+themselves, as well as information such as charac-
+ter popularity polls that may disrupt role-playing,
+is excluded. CharacterRAG consists of 15 distinct
+fictional characters, 976K written characters, and
+450 question–answer pairs.
+2.2 Attributes
+Six commonly used attributes in role-playing de-
+fine each character’s persona and the correspond-
+ing question–answer pairs (Chen et al., 2025): (1)
+Activity. A documented history comprising prior
+activities, behaviors, and interactions, encompass-
+ing elements such as backstory and schedules. (2)
+Belief and Value. The foundational tenets, dis-
+positions, and ideological orientations that inform
+and guide a character’s viewpoints and decision-
+making processes (e.g., beliefs and attitudes). (3)
+Demographic Information. Information that can
+identify a character, including but not limited to
+their name, age, educational background, profes-
+sional history, and geographic location. (4) Psy-
+chological Traits. Attributes associated with per-
+sonality traits, emotional states, preferences, and
+patterns of cognitive behavior. (5) Skill and Exper-
+tise. The extent of understanding, skillfulness, and
+competence regarding particular fields or technolo-
+gies. (6) Social Relationships. The characteristics
+and processes of social interactions, encompassing
+individuals’ roles, relational ties, and patterns of
+communication. Each section of the character’s
+persona contains subsections, preserving the hierar-
+chical information (e.g., "Tanjiro Kamado’s actions
+in the story"). Furthermore, Each QA pair consists
+of a question and corresponding answer derived
+from the character’s knowledge, pertaining to one
+of the six attributes manually constructed for each
+character. Statistics and samples of CharacterRAG
+are shown in Figure 2 and Table 7.
+3 Task Formulation: RAG-based
+Role-Playing Agents
+Given user query u, RAG-based RPAs can be for-
+mulated as: R = f (u, Dp), where Dp is a char-
+acter’s persona, and f is a RPA. A text splitter g
+2CharacterRAG dataset is sourced from Namuwiki and is
+based on Korean data: https://namu.wiki/

@@ -1,0 +1,38 @@
+12 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+Table 3: Quantitative comparison of our Financially-augmented LLM with
+Llama-2-7b and GPT-3.5.
+Model Correctness (1: worst, 10: best) Semantic Similarity (smaller is better)
+Financially-augmented LLM 4.6 0.14427
+Llama-2-7b 2.8 0.19126
+GPT-3.5 5.3 0.10659
+Table 4: Qualitative comparison of model responses across different financial
+question types.
+(a) Question Type: General Company Information
+Question: What is Broadcom Inc.?
+Model Generated Answer
+Our Financially-
+augmented LLM
+Broadcom Inc. is a technology company that designs, develops,
+and supplies semiconductor and infrastructure software solu-
+tions.
+Llama-2-7b 1. An American manufacturer of semiconductor devices and in-
+frastructure software solutions. 2. A software company that pro-
+vides solutions for managing applications.
+GPT-3.5 Broadcom Inc. is a global technology leader that designs, de-
+velops, and supplies semiconductor and infrastructure software
+solutions.
+(b) Question Type: Financial Metric Extraction Query
+Question: What is the company’s quarterly dividend for the third quarter
+of Fiscal Year 2023?
+Ground-truth: $4.60 per share.
+Model Generated Answer
+Our Financially-
+augmented LLM
+$4.60
+Llama-2-7b $368.40
+GPT-3.5 The company’s quarterly dividend for the third quarter of Fiscal
+Year 2023 is $4.60.
+5.4 Qualitative comparison
+We conducted a rigorous qualitative comparison of our augmented model with
+two baseline models. To ensure a fair evaluation, all three models were pro-
+vided with the same quarterly report document, and we employed an identical

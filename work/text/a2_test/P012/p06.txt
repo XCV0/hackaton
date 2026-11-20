@@ -1,0 +1,135 @@
+CIKM ’26, November 07–11, 2026, Rome, Italy Hengran Zhang, Keping Bi, Jiafeng Guo, Jiaming Zhang, Shuaiqiang Wang, Dawei Yin, Xueqi Cheng
+L3.1-8BQ3-8BQ3-14BQ3-32BHuman
+Gold Utility for Specific LLMs
+L3.1-8B
+Q3-8B
+Q3-14B
+Q3-32BGenerator
+97.01 91.14 90.05 88.71 90.67
+74.60 95.84 81.77 78.99 88.04
+83.13 91.38 97.20 87.50 91.25
+85.11 91.58 90.74 97.18 91.42
+TriviaQA Dataset
+L3.1-8BQ3-8BQ3-14BQ3-32BHuman
+Gold Utility for Specific LLMs
+L3.1-8B
+Q3-8B
+Q3-14B
+Q3-32B
+67.61 56.49 56.21 55.24 60.33
+55.64 71.21 59.99 57.89 64.86
+60.05 65.24 76.24 65.43 70.37
+59.11 63.86 66.30 75.46 70.65
+MS MARCO-FQA Dataset
+75
+80
+85
+90
+95
+57.5
+60.0
+62.5
+65.0
+67.5
+70.0
+72.5
+75.0
+Figure 3: RAG accuracy (%) of LLMs with gold utilitarian
+passages (where the candidate set is 𝑀𝐶𝑃) from different
+LLMs. The results on the NQ dataset are shown in Figure 1
+(b).
+Overlap Between 𝐺𝑈𝑃 and 𝐻𝐺𝑃. To investigate the difference
+between human-annotated gold passages and the LLM-specific gold
+utilitarian passages, we compute the intersection between these
+two sets, as illustrated in Figure 2. Our observations are as follows:
+(1) As shown in Figure 2 (a–c), on average, only about half of the
+human-annotated gold passages are included in the LLM-specific
+gold utilitarian passages for both the NQ and MS MARCO-FQA
+datasets. Regarding the gold utilitarian passages not annotated by
+humans, manual inspection reveals that most of these passages
+are genuinely useful for answering the questions. This may be
+due to their absence from the annotation pool during the human
+annotation process. (2) As illustrated in Figure 2 (d–f), LLMs from
+the same family exhibit a higher degree of overlap in their utilitarian
+passages compared to those from different families.
+4.3 Experimental Results
+Human-Annotated Gold Passages vs. LLM-Specific Gold Util-
+itarian Passages. Table 2 compares the RAG using these different
+references. We can observe that: (1) The highest RAG performance
+across all evaluated LLMs and datasets is achieved using gold pas-
+sages of utility constructed from a union of candidate passages.
+This result underscores the critical importance of tailoring utility
+assessment to the specific LLM used for answer generation. (2)
+Using these ground-truth utilitarian passages—derived from top-20
+retrieval results—yields a significantly greater improvement in an-
+swer performance compared to using all top-20 results, as well as
+the union candidate. Furthermore, this LLM-specific utility gener-
+ally surpasses the performance of human-annotated general utility.
+This pattern suggests that the quality of retrieval results, as val-
+idated by the ground-truth utilitarian passages, is the dominant
+factor for a given dataset. Collectively, these findings establish the
+performance upper bound for the utility judgments on the candidate
+passages. (3) While using the 𝑀𝐶𝑃 candidate leads to better answer
+performance than the standard top-20 results, it remains worse than
+using human-annotated gold passages. This performance gap is
+particularly pronounced on the NQ and MS MARCO-FQA datasets,
+indicating that the presence of irrelevant or “noisy” passages can
+substantially impair LLM performance during answer generation.
+Transferability of Gold Utilitarian Passages Across LLMs.
+Human-annotated general utility assumes that the annotated pas-
+sages are universally useful for all LLMs. This naturally raises the
+Table 3: LLM-specific utility judgments performance (F1, %)
+of different utility-based selection methods. Bold indicates
+the best performance for the specific LLM. “PA” stands for
+“Pseudo answer”. “2QA”, and “HQA” refer to the 2WikiQA
+and HotpotQA datasets, respectively.
+Method NQ HQA 2QA TQ MQ FEVER Overall
+Llama3.1-8B
+PVS (𝑤/𝑜𝑃𝐴) 40.28 40.28 36.93 58.07 37.43 50.25 45.90
+PVS (𝑤𝑖𝑡ℎ𝑃𝐴) 48.61 48.61 39.70 63.05 44.29 42.45 47.44
+LVS (𝑤/𝑜𝑃𝐴) 47.86 47.86 38.59 58.58 44.12 52.13 48.40
+LVS (𝑤𝑖𝑡ℎ𝑃𝐴) 49.88 49.88 39.91 60.28 47.13 52.72 49.84
+Qwen3-8B
+PVS (𝑤/𝑜𝑃𝐴) 48.90 48.90 25.88 63.95 45.29 45.05 44.13
+PVS (𝑤𝑖𝑡ℎ𝑃𝐴) 56.66 56.66 26.51 69.40 49.14 45.83 46.06
+LVS (𝑤/𝑜𝑃𝐴) 56.05 56.05 37.78 67.83 49.50 59.24 53.23
+LVS (𝑤𝑖𝑡ℎ𝑃𝐴) 58.37 58.37 37.95 69.66 52.24 59.22 53.99
+Qwen3-14B
+PVS (𝑤/𝑜𝑃𝐴) 49.66 49.66 17.10 63.08 47.02 56.83 41.32
+PVS (𝑤𝑖𝑡ℎ𝑃𝐴) 57.86 57.86 23.56 71.59 48.91 62.24 47.02
+LVS (𝑤/𝑜𝑃𝐴) 55.14 55.14 39.91 67.68 47.50 63.05 52.88
+LVS (𝑤𝑖𝑡ℎ𝑃𝐴) 57.27 57.27 40.67 69.70 50.15 63.64 54.13
+Qwen3-32B
+PVS (𝑤/𝑜𝑃𝐴) 50.17 50.17 17.62 62.29 47.92 40.33 38.81
+PVS (𝑤𝑖𝑡ℎ𝑃𝐴) 54.79 54.79 24.28 67.64 48.65 49.34 43.85
+LVS (𝑤/𝑜𝑃𝐴) 56.61 56.61 39.89 64.24 51.29 44.20 50.83
+LVS (𝑤𝑖𝑡ℎ𝑃𝐴) 55.87 55.87 39.88 64.62 53.36 44.15 50.79
+question of whether gold utilitarian passages selected for a specific
+LLM are also effective for other LLMs. To explore this, we conduct
+a transfer experiment with gold utilitarian passages: passages con-
+structed for one LLM are used by other LLMs to answer questions.
+We perform transfer experiments, as shown in Figure 3 (with ad-
+ditional results on the NQ dataset presented in Figure 1 (b)). We
+can observe that: (1) The LLM-specific gold utilitarian passages
+are not shareable with other LLMs. This finding underscores the
+necessity of LLM-specific calibration and challenges the practice of
+employing a static set of annotated passages to evaluate retrieval
+quality across diverse LLMs. (2) LLMs from the same family (e.g.,
+the Qwen3 series) have more aligned information needs. This is
+shown by the fact that Qwen3 models perform worse when us-
+ing gold passages constructed for Llama3.1-8B than when using
+passages constructed for other Qwen models. (3) Figure 3 shows a
+consistent performance hierarchy across different LLMs: an LLM
+achieves its best results with its own utilitarian passages, followed
+by general human-annotated gold passages, and performs worst
+with the utilitarian passages optimized for a different LLM. This
+pattern confirms that while human-annotated relevant passages
+may not be optimal for any single LLM, they capture a general
+utility that is robust, widely applicable, and effective.
+Human-Annotated Passage Effectiveness on Known and Un-
+known Queries. We further analyze the impact of human-annotated
+gold passages on these two query types, as shown in Figure 4. Our
+observations are as follows: (2) Unknown queries: For queries that
+LLMs cannot answer correctly without retrieval, providing human-
+annotated gold passages yields consistently lower performance
+compared to known queries. Stronger LLMs, such as Qwen3 14B

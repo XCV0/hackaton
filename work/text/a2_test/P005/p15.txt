@@ -1,0 +1,79 @@
+Method LegalBench-RAG MSMARCO SCI-DOCS Dragonball
+IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑ IE↑ Prec.↑ Rec.↑
+DenseXRetrieval 4.99 39.49 12.63 28.16 67.68 41.61 78.68 90.63 86.81 0.04 9.51 0.40
+Meta-Chunking-PPL 6.09 42.16 14.44 30.29 68.97 43.92 1.41 21.23 6.65 11.07 48.37 22.89
+Meta-Chunking-MSP 6.40 43.01 14.87 31.02 69.36 44.73 79.75 90.92 87.71 8.03 45.83 17.52
+RAPTOR 6.61 43.58 15.16 32.66 70.81 46.12 89.24 95.53 93.42 7.87 45.67 17.24
+LightRAG 8.22 47.72 17.22 36.89 73.42 50.25 88.69 95.34 93.03 17.04 57.91 29.42
+PropRAG 8.83 49.03 18.00 38.71 74.83 51.73 92.07 96.86 95.05 20.31 61.99 32.76
+MoC 9.27 49.86 18.59 39.35 75.26 52.29 92.86 97.23 95.51 22.31 64.22 34.74
+SAKI-RAG 9.14 50.02 18.27 41.12 76.58 53.70 91.90 99.93 91.96 26.93 82.36 32.70
+SPROUTRAG 13.44 57.23 23.49 49.16 81.21 60.53 100.00 100.00 100.00 38.13 89.09 42.80
+Table 6: Retrieval performance at depth k=5 across four benchmarks (IE ↑, Precision ↑, Recall ↑). Bold = best;
+underline = second-best. SPROUTRAG rows are shaded.
+Method / Unit Retrieved Evidence Analysis
+Query: Does the agreement limit the provider’s liability, and what exceptions or exclusions apply?
+MoC Retrieved chunk: liability cap. Provider’s aggregate
+liability under this Agreement shall not exceed the fees
+paid by Client during the twelve (12) months preceding
+the event giving rise to the claim.
+MoC identifies a locally coherent chunk
+around the monetary cap, but the re-
+trieved unit is too narrow for the query. It
+answers how much liability is capped, but
+misses the excluded damages, the scope
+across legal theories, and the exceptions.
+SAKI-RAG Retrieved pairwise expansion: damage exclusion +
+liability cap.
+1. In no event shall Provider be liable for any in-
+direct, incidental, special, consequential, exem-
+plary, or punitive damages.
+2. Provider’s aggregate liability shall not exceed the
+fees paid during the prior twelve months.
+SAKI-RAG improves over a single chunk
+by linking two related sentences. How-
+ever, the evidence remains pairwise,
+so it captures the main limitation but
+misses the later sentence listing excep-
+tions such as indemnification, confiden-
+tiality breach, gross negligence, and will-
+ful misconduct.
+Leaf s1 In no event shall Provider be liable for any indirect, in-
+cidental, special, consequential, exemplary, or punitive
+damages arising out of or relating to this Agreement.
+Identifies excluded damages, but does not
+provide the monetary cap or exceptions.
+Leaf s2 Provider’s aggregate liability under this Agreement
+shall not exceed the fees paid by Client during the
+twelve (12) months preceding the event giving rise to
+the claim.
+Provides the liability cap, but not the
+scope or carve-outs.
+Leaf s3 The foregoing limitation shall apply regardless of the
+form of action, whether in contract, tort, strict liability,
+or otherwise.
+Clarifies that the limitation applies across
+legal theories.
+Leaf s4 The limitations in this Section shall not apply to
+Provider’s indemnification obligations, breach of confi-
+dentiality, gross negligence, or willful misconduct.
+Provides the exceptions required for a
+complete legal answer.
+SPROUTRAG inter-
+nal node v1:4
+Retrieved clause-level node containing s1–s4:
+1. excluded damages,
+2. aggregate liability cap,
+3. scope across legal theories,
+4. exceptions and carve-outs.
+SPROUTRAG retrieves the middle
+node containing more than two sen-
+tences. This gives the generator the full
+limitation-of-liability clause, enabling a
+complete answer that includes both the
+limitation and the exceptions.
+Table 7: Qualitative comparison on a limitation-of-liability query. MoC retrieves a locally coherent but incomplete
+chunk, and SAKI-RAG retrieves a related sentence pair that captures the main limitation but misses the exception
+sentence. SPROUTRAG retrieves an internal clause-level node containing four sentences, allowing the answer to
+include excluded damages, the liability cap, legal-theory scope, and carve-outs.
+46535

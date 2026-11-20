@@ -1,0 +1,51 @@
+Published as a conference paper at ICLR 2025
+SPECULATIVE RAG: ENHANCING RETRIEVAL AUG-
+MENTED GENERATION THROUGH DRAFTING
+Zilong Wang1∗ Zifeng Wang2 Long T. Le2 Huaixiu Steven Zheng3
+Swaroop Mishra3 Vincent Perot3 Yuwei Zhang1 Anush Mattapalli4
+Ankur Taly4 Jingbo Shang1 Chen-Yu Lee2 Tomas Pfister2
+1University of California, San Diego 2Google Cloud AI Research
+3Google DeepMind 4Google Cloud AI
+ABSTRACT
+Retrieval augmented generation (RAG) combines the generative abilities of large
+language models (LLMs) with external knowledge sources to provide more ac-
+curate and up-to-date responses. Recent RAG advancements focus on improving
+retrieval outcomes through iterative LLM refinement or self-critique capabilities
+acquired through additional instruction tuning of LLMs. In this work, we intro-
+duce SPECULATIVE RAG – a framework that leverages a larger generalist LM to
+efficiently verify multiple RAG drafts produced in parallel by a smaller, distilled
+specialist LM. Each draft is generated from a distinct subset of retrieved docu-
+ments, offering diverse perspectives on the evidence while reducing input token
+counts per draft. This approach enhances comprehension of each subset and mit-
+igates potential position bias over long context. Our method accelerates RAG by
+delegating drafting to the smaller specialist LM, with the larger generalist LM per-
+forming a single verification pass over the drafts. Extensive experiments demon-
+strate that SPECULATIVE RAG achieves state-of-the-art performance with re-
+duced latency on TriviaQA, MuSiQue, PopQA, PubHealth, and ARC-Challenge
+benchmarks. It notably enhances accuracy by up to 12.97% while reducing la-
+tency by 50.83% compared to conventional RAG systems on PubHealth.
+1 INTRODUCTION
+Large language models (LLMs) have demonstrated remarkable success in question answering
+tasks (Brown et al., 2020; Achiam et al., 2023; Team et al., 2023). Trained on massive datasets,
+LLMs leverage their extensive parametric memory to generate seemingly plausible responses to
+user queries (Kojima et al., 2022; Kamalloo et al., 2023). However, when faced with knowledge-
+intensive questions demanding up-to-date information or obscure facts (Petroni et al., 2021), LLMs
+struggle with factual inaccuracies and produce hallucinated contents (Huang et al., 2023).
+Retrieval Augmented Generation (RAG) has emerged as a promising solution to mitigate these is-
+sues. By incorporating information retrieved from an external database into the context (Gao et al.,
+2023b), RAG effectively reduces factual errors in knowledge-intensive tasks. This approach not
+only enables easy and efficient access to vast databases but also facilitates timely and accurate
+knowledge integration. Due to the inherent limitations in the precision of current dense retriev-
+ers and the vastness of knowledge required to answer complex questions (Chen et al., 2022), RAG
+systems typically retrieve multiple documents to ensure the inclusion of all necessary information
+in the context (Petroni et al., 2021). This practice inevitably increases the length of the input to the
+LLMs, presenting significant challenges, particularly since encoding lengthy retrieved documents
+incurs additional latency and require more complex reasoning. Recent studies have explored ways
+to extend the context length limit of LLMs (Ding et al., 2023; Reid et al., 2024; Ma et al., 2024),
+yet achieving well-grounded reasoning over extended contexts remains an open question (Liu et al.,
+2024; Li et al., 2024). Consequently, striking a balance between efficiency and effectiveness in RAG
+has become a central research question in the literature. Existing work on RAG systems primarily
+∗Work done while the author was a student researcher at Google Cloud AI Research. Correspondence to:
+Zilong Wang <zlwang@ucsd.edu>, Chen-Yu Lee <chenyulee@google.com>
+1
+arXiv:2407.08223v2  [cs.CL]  27 Feb 2025

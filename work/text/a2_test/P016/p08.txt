@@ -1,0 +1,91 @@
+5.2 Retrieval Settings
+In our experimental setting (§3), we use Cohere
+as a retrieval tool. To observe the impact of the
+retrieval methodologies on the performances, we
+conducted a parallel experiment using BGE-m3 as
+in (Chirkova et al., 2024) (detailed in Appendix E).
+Figure 6 shows the average performances obtained
+by Llama-3-8b on the MKQA subset using the two
+different retrieval strategies. There are no conspic-
+uous differences on average. This indicates that
+although the retrieval techniques differ, they pro-
+vide equivalent retrieval methodologies. We use
+Cohere because it allows for an already-indexed
+version of the Wikipedia dump, as discussed in
+Appendix D.
+Figure 6: Retrieval strategy differences (overlap in Ap-
+pendix T).
+5.3 Robustness Analysis
+Figure 7 shows a robustness analysis of the pro-
+posed approaches. We analysed the impact of the
+order of the retrieved documents by selecting the
+knowledge provided at the inference phase and
+conducting an extensive retrieval and a re-ranking
+(details in §3.2). To observe the impact of the or-
+der of the provided knowledge (documents), we (i)
+randomly shuffled documents (Random Shuffle),
+(ii) English documents in first positions (En doc/s
+first), (iii) English documents at the last positions
+(En doc/s last). From the results in Figure 7, it
+emerges that CrossRAG is robust to the varying
+document order. Instead, MultiRAG is more sen-
+sitive to retrieval order; this phenomenon emerges
+in Llama-3-8b and less markedly in Command-R
+and GPT-4o. This further indicates that the lan-
+guage sensitivity of documents is a drawback to
+the final performance, and operating a translation
+process or system such as CrossRAG improves
+performance by making it more robust to scenarios
+where retrieved documents may not be delivered
+in the most optimal order.
+6 Related Work
+Previous research investigated the advantages of
+augmenting LLMs through retrieved knowledge,
+a technique known as Retrieval-augmented Gen-
+erative (RAG) (Lewis et al., 2020b). Many ef-
+forts have concentrated on exploring techniques
+to improve RAG by operating in-context (Menick
+et al., 2022), tuning (Gao et al., 2023), or inter-
+vening on retrievers (Sawarkar et al., 2024). Al-
+though these results represent a considerable step
+forward, little attention has been paid beyond En-
+glish. We work on multilingual tasks involving
+multilingual queries and documents in the evalua-
+tion. While the tremendous effort of Zhang et al.
+(2022); Thakur et al. (2024b) is focused on the
+study of retrieval from multilingual sources and
+proposed benchmark-related, we study the role that
+retrieved documents have on the inference phase
+of LLMs. Enriching the foundation work proposed
+by Chirkova et al. (2024), we study the impact that
+different architecture components have on final
+performance. We analyse the effect of translation
+at different levels (before and after retrieval) us-
+ing various tools across high- and low-resource
+languages. Analysing criticisms and strengths of
+Multilingual RAG, we study the roles of differ-
+ent solutions, showing when they lead the LLMs
+to leverage multilingual knowledge by obtaining
+consistent benefits.
+7 Recommendations & Future Work
+The experiments conducted aim to measure the
+impact of RAG-based approaches in multilingual
+settings. The recommendations that emerged from
+our analysis are: (i) Expanding retrieval beyond
+English-only resources benefits the performance of
+multilingual knowledge-intensive tasks when they
+are addressed with RAG-based pipelines. (ii) The
+components for solving multilingual tasks in RAG
+scenarios have a different impact depending on po-
+sitioning (e.g. translation systems in tRAG and
+CrossRAG). (iii) As a consequence of (ii), con-
+ducting multilingual retrieval and translating the
+retrieved knowledge consistently improves perfor-
+mance, as putting the information all on the same
+plane (language) leads LLMs to better understand
+and deliver the correct answer.
+However, one of the limitations we will inves-
+tigate in future developments is that information
+across different languages may not be aligned in
+LLMs or in known knowledge dumps (Ranaldi,
+704

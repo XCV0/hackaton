@@ -1,0 +1,100 @@
+tation (DA), and Positional Debiasing (DB), by
+converting each into a token-level guidance score.
+Small helper models supply weak-to-strong transfer
+signals (Burns et al., 2024), while the base genera-
+tor M is left unchanged. Our adaptation suppresses
+guidance that conflicts with the base distribution,
+yielding stable behavior even without in-domain
+training data.
+Figure 1 describes combining objectives at de-
+coding time. Towards the goal of approximating
+M ′ with mixed objectives (colors), we use an adap-
+tive mix of small helper models, corresponding to
+MS (gray), DA (blue), and DB (apricot): Each
+helper supplies a token-level guidance term, and
+task-level activation selects a conflict-free subset,
+adaptively to task (Section 3.4). For brevity, here
+we illustrate with binary knobs, where each ob-
+jective is either activated (γ = 1) or deactivated
+(γ = 0); we optimize for arbitrary weights in Sec-
+tion 3.4.
+We first note that GRAD provides a unifying
+perspective on existing decoding methods: for ex-
+ample, activating DA only, using γ’s = (0, 1, 0),
+recovers proxy tuning as a special case. Next, as
+shown later empirically (Table 2 and 3), depending
+on tasks (benchmarks), GRAD chooses the opti-
+mal adaptive combination. For example, it chooses
+to activate all objectives (using γ’s = (1, 1, 1)) for
+HotpotQA(HQA), while activating the DB objec-
+tive only (using γ’s = (0, 0, 1)) for private RAG
+settings where perfect in-domain data is sensitive
+and/or unavailable (PQ).
+Finally, GRAD’s design is also naturally exten-
+sible, where new objectives can be easily plugged
+in, as illustrated in Appendix H.
+In summary, our contributions are as follows:
+• We propose GRAD, an adaptive guided de-
+coding framework that selects and combines
+the helper models per task instead of training
+a new M ′.
+• We introduce CCD, a decoding objective that
+disentangles positional debiasing from do-
+main adaptation.
+• We show extensibility: New objectives can be
+integrated seamlessly as needed.
+• We demonstrate robust generalization across
+public and private RAG scenarios, with favor-
+able accuracy-latency trade-offs.1
+1Code at https://github.com/ludaya/grad.
+2 Related Work
+Domain adaptation in RAG RAFT (Zhang
+et al., 2024) optimizes language models for domain-
+specific RAG by jointly adapting retrieval and gen-
+eration to better reflect the target domain’s char-
+acteristics, while other works jointly update the
+retriever as well (Siriwardhana et al., 2023; Mao
+et al., 2024). However, end-to-end training incurs
+higher cost while making the system monolithic,
+hard to be combined with other RAG objectives.
+Position bias in RAG Position bias, often
+termed the “lost-in-the-middle” problem (Liu et al.,
+2024b), occurs when important segments of re-
+trieved passages receive less attention from the
+model. Existing solutions fall into train-time and
+inference-time approaches.
+One inference-time strategy, self-consistency
+(Wang et al., 2023), reduces bias by aggregat-
+ing outputs across multiple input orderings, but
+at a high inference cost. More efficient meta-
+generation (Lee et al., 2025b) minimizes redun-
+dancy and inference cost. Other inference-time
+strategies include Hsieh et al. (2024), which tracked
+the average attention weights to calibrate the effect
+of position bias.
+Decoding objectives Contrastive decoding (Li
+et al., 2023) leverages the difference between ex-
+pert and amateur model distributions to guide gen-
+eration. Similar line of work has explored various
+contrastive objectives that target a specific aspect
+of generation quality, such as controlling toxicity
+of the generated text (Cheng et al., 2023; Liu et al.,
+2024a). While not directly altering the decoding
+objective, speculative decoding (Leviathan et al.,
+2023) also utilizes smaller auxiliary model to ac-
+celerate generation.
+In a broader perspective, these methods can be
+interpreted as an instantiation of test-time reward-
+guided text generation (Khanov et al., 2024; Xu
+et al., 2025), where the logit difference serves as
+an implicit reward model over the (unfinished) se-
+quences.
+Weak-to-strong generalization Weak-to-strong
+generalization refers to distilling predictions of a
+weak teacher into a strong student model (Burns
+et al., 2024). Many works showed, against the
+doubt, weak models are effective in refining la-
+bels for strong model (Somerstep et al., 2025) or
+contrastive scoring samples from the strong (Zhou
+et al., 2024). Our proposed decoding objectives
+45275

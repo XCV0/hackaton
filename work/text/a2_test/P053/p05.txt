@@ -1,0 +1,100 @@
+unified datasets. For the retrieval corpus, we use the
+Wikipedia corpus from Dec. 20, 2018, standardized
+by Karpukhin et al. (2020) using the preprocessing
+from Chen et al. (2017). The corpus is split into
+multiple, disjoint text blocks of 128 tokens as doc-
+uments, resulting in 21,015,324 documents in the
+end. For fine-tuning, we conduct experiments on
+five commonly used open-domain QA benchmarks,
+namely Natural Questions (NQ) (Kwiatkowski
+et al., 2019), TriviaQA (Joshi et al., 2017), We-
+bQuestions (WQ) (Berant et al., 2013), Curat-
+edTREC (TREC) (Baudis and Sedivý, 2015), and
+SQuAD v1.1 (Rajpurkar et al., 2016). All question-
+answer pairs are ensured to have supporting docu-
+ments available in the retrieval corpus. For pretrain-
+ing, we select all supporting documents from the
+training set of QA and randomly sample additional
+documents from the retrieval corpus, resulting in a
+total of 1 million documents for training.
+4.2 Baselines
+We compare our method with two categories of
+compression approaches: plug-in methods and full-
+tuning methods. Plug-in methods train additional
+compressors without modifying the decoder param-
+eters, resulting in low training costs and preserving
+the original performance of the decoder. Baseline
+methods in this category include:
+ICAE (Ge et al., 2024): Pretrains the compro-
+ssor with same task as ours but finetunes through
+instruction-following. We implemented ICAE mod-
+els with multiple compression rates for evaluation.
+xRAG (Cheng et al., 2024): Maps retrieval em-
+beddings into compression embeddings for extreme
+compression. Performs only auto-encoding dur-
+ing pretraining and combines instruction-following
+with self-distillation during fine-tuning.
+Full-tuning methods adopt an end-to-end ap-
+proach, jointly training the compressor and decoder
+for better alignment and performance, but at in-
+creased training costs and changes to the original
+decoder performance. Baseline methods in this
+category include:
+Autocompressor (Chevalier et al., 2023): Trains
+the compressor only with language modeling. We
+use the pretraining-only COCOM model as a sim-
+plified version.
+COCOM (Rau et al., 2024): Similar to ICAE
+but jointly optimizes the compressor and decoder.
+Our method is implemented solely as a plug-in
+method, offering lower cost, better scalability, and
+strong performance. We use the same backbone
+LLM for all methods and apply identical LoRA
+parameters for LoRA-based fine-tuning.
+4.3 Evaluation Metrics
+We evaluate model performance from two dimen-
+sions: effectiveness and efficiency. For effective-
+ness, we use the Match (M) metric, which mea-
+sures whether the reference answer appears in the
+model’s generated output. We do not use the Ex-
+act Match (EM) metric due to verbose responses
+from LLMs affecting its calculation. As for Effi-
+ciency, we use First Token Inference Time (FTIT)
+as the metric. Unlike widely-adopted Total Infer-
+ence Time (TIT) (Cheng et al., 2024; Rau et al.,
+2024), FTIT focuses on the time to the first token,
+isolating the impact of compression methods on
+efficiency rather than generation performance.
+4.4 Implementation Details
+We use Mistral-7B-Instruct (Jiang et al., 2023) as
+the backbone LLM for all methods, with a decod-
+ing temperature of 0 for deterministic generation.
+We apply LoRA (Hu et al., 2022) to the model as
+the compressor, disabling it during inference as the
+decoder. All experiments are implemented using
+PyTorch and Transformers. The default retrieval
+model is ColBERT (Santhanam et al., 2022), us-
+ing the top-5 ranked documents for fine-tuning and
+evaluation. Pretraining is done on single documents
+while fine-tuning is performed on five documents.
+For selector training, we generate 15,000 training
+samples and 2,000 test samples from the QA train
+set. The selector employs a 4-layer/4-head trans-
+former encoder with 256D projection, followed by
+a 2-layer MLP classifier, incorporating segment
+embeddings for instruction-context differentiation
+and contextual granularity in final features. More
+details are provided in Appendix C.
+5 Experimental Results
+5.1 Main Results
+The main results for ACC-RAG are presented in
+Table 1. Our ACC-RAG method, trained and in-
+ferenced with a granularity sequence of [1, 32],
+balances effectiveness and efficiency. Detailed re-
+sults for other ACC-RAG configurations are in Sec-
+tion 5.4. The experimental results demonstrate that
+ACC-RAG significantly (Paired t-test, p < 0.05)
+outperforms all compression baselines in M score
+while maintaining superior efficiency. Notably, un-
+der our unified benchmark, most methods (e.g.,
+24065

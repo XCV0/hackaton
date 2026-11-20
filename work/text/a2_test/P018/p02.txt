@@ -1,0 +1,103 @@
+levels: document-level confidence, which estimates
+whether a retrieved document appears sufficient for
+answering the question, and token-level confidence,
+which estimates whether a document-conditioned
+stream yields a sharp local next-token distribution.
+Token-level confidence has been used to capture
+how confidently the model predicts under a given
+context (Malinin and Gales, 2021; Jiang et al.,
+2023; Fadeeva et al., 2024; Nguyen et al., 2026),
+but it cannot determine whether the context itself is
+sufficient to answer the question. Document-level
+confidence addresses the complementary question
+of which retrieved source contains answer-bearing
+evidence (Kadavath et al., 2022; Singh et al., 2023;
+Wan et al., 2024; Joren et al., 2025), but it does
+not ensure that the model can generate from that
+source with confidence. Effective multi-document
+RAG therefore requires both source selection and
+generation confidence.
+Most existing RAG and conflict-resolution
+benchmarks do not directly isolate this joint ca-
+pability. For example, retrieval-augmented QA
+benchmarks (Joshi et al., 2017; Kwiatkowski et al.,
+2019; Mallen et al., 2023; Zhang et al., 2024)
+mainly test whether models can ground answers
+in retrieved context despite noisy retrievals, while
+conflict-resolution benchmarks (Lee et al., 2024;
+Wang et al., 2025b) introduce contradictory ev-
+idence through altered public facts or ambigu-
+ous entity references, such that resolving the con-
+flict may depend on the model’s internal world
+knowledge rather than on confidence over the re-
+trieved evidence itself. This challenge is espe-
+cially pronounced in enterprise settings, where rele-
+vant facts are often private or organization-specific,
+and retrieved evidence can be heterogeneous, time-
+sensitive, and internally conflicting (Choubey et al.,
+2025; Abaskohi et al., 2026).
+Motivated by these gaps, we introduce an en-
+terprise benchmark for multi-document question
+answering and propose a novel decoding method.
+To address the evaluation gap, we propose DRQA,
+a factual-conflict QA benchmark derived from the
+recent DRBench (Abaskohi et al., 2026) consist-
+ing of synthetic enterprise-specific facts grounded
+in company profiles, user personas, and deep-
+research tasks, where the answer cannot be in-
+ferred from the model’s internal memory. Instead,
+each answer must be recovered from a retrieved
+bundle containing correct, temporal, misinforma-
+tion, and noise documents, requiring models to
+identify the evidence source that supports the an-
+swer. To address the decoding gap, we propose
+Dual-Confidence Contrastive Decoding (DCCD),
+a training-free contrastive decoding method that
+uses dual-confidence signals: document-level con-
+fidence estimates whether a document appears suffi-
+cient for answering the question, while token-level
+confidence estimates whether the model can pro-
+duce a sharp next-token prediction from that docu-
+ment. DCCD uses these signals to select positive
+and negative document-conditioned streams and
+scales the contrastive term by their confidence mar-
+gin, amplifying high-confidence evidence while
+suppressing conflicting or unsupported alternatives.
+Across multiple RAG benchmarks, DCCD achieves
+the best average performance, with the largest gains
+on DRQA.
+We summarize our contributions as follows. (1)
+We introduce DRQA, a factual-conflict QA bench-
+mark derived from enterprise deep-research scenar-
+ios, where each query is paired with a retrieved bun-
+dle containing one correct document and distractors
+that are misinformation, stale temporal, or noise.
+(2) We propose Dual-Confidence Contrastive De-
+coding (DCCD), a training-free contrastive de-
+coding method that combines document-level an-
+swerability confidence with token-level generation
+confidence to perform confidence-gated document-
+level contrast. (3) We show that DCCD improves
+over full-context and contrastive decoding base-
+lines across standard multi-document QA bench-
+marks, with especially large gains on DRQA, high-
+lighting the importance of source-aware contrast
+when retrieved evidence is internally conflicting.
+2 Related Work
+2.1 Retrieval-Augmented Question Answering
+Despite their capabilities, LLMs remain prone to
+hallucination and are limited by the knowledge
+acquired during training, making it necessary to
+ground generation in verifiable external evidence.
+Retrieval-augmented generation (RAG) dynami-
+cally incorporates information through dense pas-
+sage retrieval (Karpukhin et al., 2020), and has
+been shown to improve open-domain question an-
+swering when the model’s internal knowledge is
+insufficient (Lewis et al., 2020). Consequently,
+models are typically evaluated on open-domain
+QA benchmarks on their ability to answer factual
+questions using retrieved passages from public cor-
+pora. For example, Izacard and Grave (2021) use
+real Google queries and Wikipedia answers to eval-
+2

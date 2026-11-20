@@ -1,0 +1,127 @@
+SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia Trovato et al.
+(a)                                                                  (b)
+Figure 6: (a) Failure rate (%) and (b) average iteration count.
+Lower values indicate better robustness and higher reasoning
+efficiency, respectively. STRIDE achieves the best trade-off,
+and STRIDE-FT further reduces failure rates to near zero.
+requires fewer iterations on average than both baselines, indicating
+that dynamic scheduling avoids redundant refinement loops.
+2 3 5 8
+Top-k
+0.60
+0.62
+0.64
+0.66
+0.68
+0.70EM
+GenGround
+DualRAG
+STRIDE
+2 3 5 8
+Top-k
+0.68
+0.70
+0.72
+0.74
+0.76
+0.78F1 Score
+GenGround
+DualRAG
+STRIDE
+Figure 7: Effect of retrieval top-𝑘 on 2WikiMultihopQA.
+5.8 Impact of Retrieval Top-𝑘
+Figure 7 shows the performance of all methods on 2WikiMulti-
+hopQA under varying top-𝑘 values. STRIDE achieves peak perfor-
+mance at 𝑘 = 3, with only marginal gains at 𝑘 = 5 or 8. In contrast,
+GenGround and DualRAG continue to improve up to 𝑘 = 5, jus-
+tifying our choice to use 𝑘 = 5 for these baselines. Notably, even
+with a smaller 𝑘, STRIDE outperforms both baselines at their best 𝑘
+setting. This demonstrates that STRIDE’s structured planning leads
+to more focused and effective retrieval, requiring fewer candidates
+to achieve superior accuracy.
+6 Conclusion
+In this paper, we propose STRIDE, a decision-inspired framework
+for multi-hop question answering that separates reasoning into
+strategy, control, and execution. STRIDE first constructs an entity-
+agnostic reasoning skeleton before grounding it into concrete sub-
+questions, reducing sensitivity to lexical noise. Its Supervisor dy-
+namically schedules sub-questions, not only supporting sequential,
+parallel, and fork-join patterns, but also adaptively chooses between
+retrieval and inference. To close the performance gap between open-
+source and closed-source models, we further introduce STRIDE-FT,
+which leverages self-executed trajectories to fine-tune open-source
+LLMs without human labels or stronger teachers. Extensive experi-
+ments show that STRIDE achieves robust and accurate multi-hop
+reasoning, and STRIDE-FT effectively enhances model performance,
+demonstrating the value of structured decision-inspired reasoning.
+7 Acknowledgments
+This work was supported in part by the grants from National Sci-
+ence and Technology Major Project (No. 2023ZD0121104), in part
+by the National Natural Science Foundation of China (No.62222213,
+U22B2059), in part by the Postdoctoral Fellowship Program and
+China Postdoctoral Science Foundation under Grant Number BX20250387
+and 2025M781529, in part by the Fundamental Research Funds for
+the Central Universities under Grant Number WK2150250042. And
+this work was also supported by USTC-NIO Smart Electric Vehicle
+Joint Lab.
+References
+[1] Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi. 2024.
+Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection.
+In The Twelfth International Conference on Learning Representations.
+[2] Wei Chen, Lili Zhao, Zhi Zheng, Tong Xu, Yang Wang, and Enhong Chen. 2024.
+Double-checker: Large language model as a checker for few-shot named entity
+recognition. In Findings of the Association for Computational Linguistics: EMNLP
+2024. 3172–3181.
+[3] Wei Chen, Zhi Zheng, Lili Zhao, Huijun Hou, and Tong Xu. 2025. Following
+Occam’s Razor: Dynamic Combination of Structured Knowledge for Multi-Hop
+Question Answering using LLMs. In Findings of the Association for Computational
+Linguistics: EMNLP 2025. 17942–17956.
+[4] Rong Cheng, Jinyi Liu, Yan Zheng, Fei Ni, Jiazhen Du, Hangyu Mao, Fuzheng
+Zhang, Bo Wang, and Jianye Hao. 2025. DualRAG: A Dual-Process Approach
+to Integrate Reasoning and Retrieval for Multi-Hop Question Answering. In
+Proceedings of the 63rd Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers). 31877–31899.
+[5] Florin Cuconasu, Giovanni Trappolini, Federico Siciliano, Simone Filice, Cesare
+Campagnano, Yoelle Maarek, Nicola Tonellotto, and Fabrizio Silvestri. 2024. The
+power of noise: Redefining retrieval for rag systems. In Proceedings of the 47th
+International ACM SIGIR Conference on Research and Development in Information
+Retrieval. 719–729.
+[6] Ming Ding, Chang Zhou, Qibin Chen, Hongxia Yang, and Jie Tang. 2019. Cognitive
+Graph for Multi-Hop Reading Comprehension at Scale. In Proceedings of the 57th
+Annual Meeting of the Association for Computational Linguistics. 2694–2703.
+[7] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva
+Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, and Jonathan
+Larson. 2024. From local to global: A graph rag approach to query-focused
+summarization. arXiv preprint arXiv:2404.16130 (2024).
+[8] Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin,
+Tat-Seng Chua, and Qing Li. 2024. A survey on rag meeting llms: Towards
+retrieval-augmented large language models. In Proceedings of the 30th ACM
+SIGKDD conference on knowledge discovery and data mining. 6491–6501.
+[9] Yuwei Fang, Siqi Sun, Zhe Gan, Rohit Pillai, Shuohang Wang, and Jingjing Liu.
+2020. Hierarchical Graph Network for Multi-hop Question Answering. In Proceed-
+ings of the 2020 Conference on Empirical Methods in Natural Language Processing
+(EMNLP). 8823–8838.
+[10] Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yixin
+Dai, Jiawei Sun, Haofen Wang, and Haofen Wang. 2023. Retrieval-augmented
+generation for large language models: A survey. arXiv preprint arXiv:2312.10997
+2, 1 (2023).
+[11] Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara, and Akiko Aizawa. 2020.
+Constructing A Multi-hop QA Dataset for Comprehensive Evaluation of Reason-
+ing Steps. In Proceedings of the 28th International Conference on Computational
+Linguistics. 6609–6625.
+[12] Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+Wang, Lu Wang, and Weizhu Chen. 2022. LoRA: Low-Rank Adaptation of Large
+Language Models. In The Tenth International Conference on Learning Representa-
+tions.
+[13] Gautier Izacard, Mathilde Caron, Lucas Hosseini, Sebastian Riedel, Piotr Bo-
+janowski, Armand Joulin, and Edouard Grave. 2022. Unsupervised Dense In-
+formation Retrieval with Contrastive Learning. Trans. Mach. Learn. Res. 2022
+(2022).
+[14] Gautier Izacard, Patrick Lewis, Maria Lomeli, Lucas Hosseini, Fabio Petroni,
+Timo Schick, Jane Dwivedi-Yu, Armand Joulin, Sebastian Riedel, and Edouard
+Grave. 2023. Atlas: Few-shot learning with retrieval augmented language models.
+Journal of Machine Learning Research 24, 251 (2023), 1–43.
+[15] Zhengbao Jiang, Frank F. Xu, Luyu Gao, Zhiqing Sun, Qian Liu, Jane Dwivedi-Yu,
+Yiming Yang, Jamie Callan, and Graham Neubig. 2023. Active Retrieval Aug-
+mented Generation. In Proceedings of the 2023 Conference on Empirical Methods
+in Natural Language Processing, EMNLP 2023. 7969–7992.

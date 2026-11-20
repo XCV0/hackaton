@@ -1,0 +1,15 @@
+Figure 18: Model-wise performance on Context Rele-
+vance across Accuracy, F1-score, Precision, and Recall.
+Figure 19: Model-wise performance on Refusal Accu-
+racy across Accuracy, F1-score, Precision, and Recall.
+Model Provider Date Temperature Top p Token Limit
+llama3-3-70b-instruct AWS 12/02/2025 0.1 0.9 200
+llama3-8b-instruct AWS 12/02/2025 0.1 0.9 200
+mistral-7b-instruct AWS 12/02/2025 0.1 0.9 200
+mistral-large AWS 12/02/2025 0.1 0.9 200
+gemini-2.0-flash Google 12/02/2025 0.1 0.9 200
+claude-3.5-sonnet Google 12/02/2025 0.1 0.9 200
+gpt-4o Azure 12/02/2025 0.1 0.9 200
+gpt-o3-mini Azure 12/02/2025 N/A N/A 1000
+Table 5: Inference details for all evaluated LLMs.
+16716

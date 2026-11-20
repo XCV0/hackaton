@@ -1,0 +1,96 @@
+Face4RAG: Factual Consistency Evaluation for Retrieval Augmented Generation in Chinese KDD ’24, August 25–29, 2024, Barcelona, Spain
+Table 9: Statistics of 200 model-generated answers in our
+real-world dataset from six LLMs. "Avg. Length" indicates
+the average length of the generated answer. "Error Rate"
+indicates the ratio of factual inconsistent answers.
+MODEL Avg. Length Error Rate(%)
+Baichuan2 320.6 40.5
+ChatGLM3 158.0 36.5
+GPT-3.5 160.8 27.5
+GPT-4 359.2 40.0
+Alpaca2 (CH) 188.8 47.0
+Qwen 200.6 29.0
+in Chinese, following the aforementioned error typology. We use
+GPT-4 [2] to generate the negative samples and design specific
+prompts corresponding to each type of error. For every sample
+in WebCPM, we rewrite them for every error type to collect our
+synthetic negative sample dataset. Detailed prompts are provided
+at our benchmark webpage.1
+For the hallucination error, we construct corresponding data
+according to three levels of difficulty for the evaluator to detect
+inconsistency. To be more specific, the easiest samples, in the first
+group, are completely off-topic from the reference. The second
+group includes content that is on-topic but contains ungrounded
+information. The third group of sample mixes factually consistent
+information with hallucinated content, resulting in sentences where
+some parts are supported by the reference, while others are un-
+grounded. This mixture poses a challenge for evaluators, as it could
+mistakenly be labeled as "consistent" due to the presence of some
+consistent information.
+For the remaining two categories, i.e., knowledge error and logi-
+cal fallacy, we design a specific prompt for each error type except
+the Contradiction Error (KCont.). For KCont., since it may occurs at
+different levels of granularity [12], i.e., word or sentence, we design
+one prompt for each level. Specifically, the prompt of the word-
+level KCont. aims to select specific words in the answer and replace
+them with antonyms, and the prompt of the sentence-level KCont.
+is designed to construct a new answer semantically contradicting
+the reference. Since the types of logical connections are diverse and
+comprehensive, for the completeness of the dataset, we consider a
+new error type called Other Logical Fallacy (LOthe.), which accounts
+for potential errors in some complex logical connections uncovered
+by our previously defined four types of logical fallacy. The prompt
+of LOthe. is designed to drive GPT-4 to insert an arbitrary logical
+connection error into anywhere of the original answer.
+Positive Samples To enrich the diversity of positive samples,
+we employ the commonly used data augmentation techniques [28]
+to generate more positive samples based on the answers from We-
+bCPM. Our data augmentation process supplements the positive
+samples in WebCPM by synonym replacing and paraphrasing tech-
+niques via the prompts at the word or sentence level. Specifically,
+at the word level, we prompt GPT-4 to randomly replace some
+words in the answer with their synonyms; at the sentence level, we
+prompt to summarize the reference or rephrase the answer without
+changing the meaning of the original sentence.
+Construction Details Following the methodology in previous
+research [32], we utilize the few-shot technique [6], in conjunction
+with the Chain of Thought (COT) [43] approach, to guide GPT-4
+[2] to construct high-quality samples. We provide clear directions
+and relevant examples in the prompt and ask the model not only
+to produce the newly constructed samples, but also to show the
+thinking process behind the modifications it makes to the samples
+in the output. This ensures that the model is indeed generating new
+samples in the direction we desire. The construction prompts for
+both positive and negative examples are provided at our benchmark
+webpage.1
+Human Annotation Refinement The above construction pro-
+cess produces a coarse label of factual consistency for each sample.
+To enhance the quality of the labels, we further engage 12 human
+experts to annotate the factual consistency of each answer via a
+two-step approach [31]. Specifically, the human annotator first de-
+compose the answer into multiple segments; for each segment, the
+annotator is required to judge whether it is factual consistent with
+the reference and give the evidence of the judgement. Then the
+human annotations on all segments are aggregated to yield a factual
+consistent label for the answer.
+B ABLATION STUDY RESULTS ON THE
+REAL-WORLD DATASET
+Table 8 further validates the effectiveness of our approach, par-
+ticularly highlighting its importance in practical scenarios where
+enhancing the recall of negative samples is crucial while preserving
+the discriminative ability of positive samples.
+Table 8: Ablation Study Results on the Real-world Dataset.
+Here "ours" refers to our original pipeline, "A.D." refers to the
+ablation result of answer decomposition, "w/o COT" refers to
+the ablation of COT, and "w/o logi. eval" refers to the ablation
+of the logical consistency evaluation.
+L-Face4FAG A.D. w/o COT w/o logi. eval
+Overall 87.75 76.75 65.50 86.50
+-Positive 94.60 82.87 55.99 95.65
+-Negative 75.96 66.21 81.86 70.75
+C STATISTIC DETAILS ABOUT REAL-WORLD
+DATASET
+Table 9 shows the statistics of 200 model-generated answers in
+our real-world dataset from six LLMs. Table 10 shows the specific
+information about the error distribution about the six LLMs in the
+real-world dataset.

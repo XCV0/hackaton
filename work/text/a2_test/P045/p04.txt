@@ -1,0 +1,104 @@
+Step 1: 
+Parametric Knowledge 
+Generation
+Step4:
+Parametric-Retrieved 
+Knowledge
+Integration
+Step2:Visual-Textual 
+Knowledge Integration
+Answer: The DC-10 
+was first flown on 
+February 9, 1970.
+Answer: The DC-10 
+was first flown on 
+August 29, 1970.
+Answer: BasedonC,The DC-10 was first 
+flown on August 29, 1970.
+Step3:External Knowledge Generation
+Answer: Content Cismore similar 
+with the questionbecause it is a 
+wide-body plane with three engines
+AnswerGeneration
+KnowledgeRetrieval
+Knowledge
+Base
+When did this 
+aircraft make its 
+first flight?
+Figure 2: Overview of the CoRe-MMRAG Framework. CoRe-MMRAG processes a multimodal query and retrieved
+knowledge in four stages: (1) generating an initial response based solely on parametric knowledge; (2) jointly
+integrating visual and textual information to identify the most relevant retrieved content; (3) generating an external
+response based on the selected content from step (2); and (4) reconciling discrepancies between parametric and
+retrieved knowledge to produce the final answer.
+framework that effectively reconciles inconsisten-
+cies across knowledge sources. As shown in Fig-
+ure 2, given a query Q and its retrieved knowledge
+entries P, the model M is prompted to generate
+responses across four distinct stages in an end-to-
+end manner. Below, we detail each stage of the
+framework.
+Step 1: Parametric Knowledge Generation.
+Although external knowledge P is available in the
+input, we first prompt the model to generate yint
+based solely on its parametric knowledge:
+yint = M(Q). (3)
+This generation establishes a reference point for
+detecting potential conflicts with retrieved knowl-
+edge in Step 4.
+Step 2: Visual-Textual Knowledge Integra-
+tion. Following the parametric knowledge gener-
+ation, the model evaluates the relevance between
+query Q and knowledge entries in P. Considering
+the potential VTKI manifested as:
+
+
+
+I v = argmax
+i∈{1,...,k}
+rM(Q, {Vi}k i=1),
+I t = argmax
+j∈{1,...,k}
+rM(Q, {Tj }k j=1),
+I t ̸= I v.
+(4)
+We propose a joint similarity assessment that uti-
+lizes the complementary nature of visual and tex-
+tual modalities:
+I tv = argmax
+i∈{1,...,k}
+rM(Q, {Vi, Ti}k i=1), (5)
+where I tv denotes the most relevant entry ID based
+on multimodal knowledge. This unified ranking ap-
+proach jointly leverages abstract semantic concepts
+from textual descriptions and detailed visual char-
+acteristics, eliminating the bias introduced by sep-
+arate unimodal evaluations, which enables a more
+robust relevance assessment and resolves VTKI.
+Step 3: External Knowledge Generation. Af-
+ter obtaining the most relevant knowledge entry
+PI tv , the model is prompted to generate a response
+based on the retrieved external knowledge:
+yext = M ( Q, (VI tv , TI tv ) ) , (6)
+where yext denotes the model’s response that ex-
+plicitly considers the retrieved visual-textual knowl-
+edge pair (VI tv , TI tv ).
+Step 4: Parametric-Retrieved Knowledge
+Integration. Given responses from parametric
+knowledge yint and retrieved knowledge yext, the
+parametric-retrieved knowledge inconsistencies
+may arise. The model is prompted to resolve these
+inconsistencies and generate the final response:
+y∗ = M ( Q, yint, yext, (VI tv , TI tv ) ) , (7)
+where y∗ represents the final response, which is
+determined by comparing the credibility of para-
+metric knowledge and retrieved external knowl-
+edge. This process enables the model to leverage
+both knowledge sources while ensuring the reliable
+generation of the final answer.
+3.3 Inconsistency-Aware Multimodal Training
+Inspired by the self-training mechanism in STaR
+(Zelikman et al., 2022), we propose a fine-tuning
+paradigm that leverages the model’s self-generated
+outputs under different knowledge conditions. The
+32970

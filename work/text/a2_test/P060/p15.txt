@@ -1,0 +1,84 @@
+53
+Dataset Label Dense Lexical Best recall Best strategy
+HotpotQA
+Inclusive 0.881 0.946 0.959 0.10
+reasoning 0.814 0.919 0.814 (-0.186) 0.00
+fact_single 0.868 0.938 0.868 0.00
+summary 1.000 1.000 1.000 0.50
+MS MARCO
+Inclusive 0.773 0.780 0.804 0.20
+reasoning 0.724 0.763 0.784 (-0.051) 0.50
+fact_single 0.814 0.822 0.814 0.00
+summary 0.810 0.788 0.835 0.20
+NaturalQ
+Inclusive 0.668 0.580 0.668 0.00
+reasoning 0.630 0.562 0.658 0.05
+fact_single 0.697 0.614 0.722 0.05
+summary 0.655 0.560 0.655 (-0.067) 0.00
+NewsQA
+Inclusive 0.239 0.461 0.462 0.50
+reasoning 0.218 0.315 0.331 (-0.169) 0.10
+fact_single 0.254 0.498 0.500 0.50
+summary 0.229 0.384 0.388 0.10
+PubMedQA
+Inclusive 0.878 0.908 0.899 (-0.078) 0.05
+reasoning 0.869 0.907 0.913 0.20
+fact_single 0.938 0.961 0.938 0.00
+summary 0.956 0.977 0.977 1.00
+SQuAD2
+Inclusive 0.678 0.828 0.830 0.50
+reasoning 0.625 0.757 0.757 0.50
+fact_single 0.738 0.867 0.738 (-0.108) 0.00
+summary 0.722 0.834 0.846 0.10
+Table 6: Embedding model: all-minilm-l6-v2; Re-ranking model: BGE-base
+one sentence.
+Each summary statement must be
+independent and non-overlapping.
+Each summary statement should be a
+complete sentence.
+Each summary statement can include
+contextual information contained
+in the theme below.
+Each summary statement must be
+understandable without the aid of
+any other source of information.
+Generate the statements as a bullet
+list with the following format:
+> Summary statement
+> Summary statement
+> Summary statement
+Theme: [[{theme}]]
+Sentences:[[
+{statements}
+]]
+G.4 Reasoning statements
+Generate three reasoning conclusions
+that can be drawn from the
+following statements.
+A reasoning conclusion is an inferred
+piece of information obtained from
+critically analysing a group of
+multiple statements.
+Reasoning conclusions do not contain
+information directly contained on
+any statements.
+Each conclusion must be independent
+and non-overlapping.
+Each conclusion should be a complete
+sentence.
+Each conclusion must be understandable
+without the aid of any other
+source of information.
+Each conclusion can include contextual
+information contained in the
+theme below.
+Generate the conclusions as a bullet
+list with the following format:
+> conclusion
+> conclusion
+> conclusion
+etc
+Theme: [[{theme}]]
+Statements:[[
+{statements}
+]]

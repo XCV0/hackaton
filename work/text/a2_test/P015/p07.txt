@@ -1,0 +1,102 @@
+Faggioli et al. (2023) are among the first to in-
+vestigate a range of human–machine collaboration
+strategies in which LLMs assist in relevance judg-
+ment. Building upon this, automated evaluations
+using LLMs have combined various prompting
+techniques such as zero-shot, one-shot (MacAvaney
+and Soldaini, 2023), or few-shot learning (Thomas
+et al., 2024; Upadhyay et al., 2024a,b).
+Another line of work (Ma et al., 2024; Fitte-
+Rey et al., 2025) involves training dedicated LLMs
+for assessment tasks. Both Ma et al. (2024) and
+Fitte-Rey et al. (2025) explore the use of smaller,
+fine-tune LLMs for relevance assessment in real-
+world scenarios. However, such fine-tuned judge
+models often function as task-specific classifiers,
+thereby inheriting certain limitations in generaliz-
+ability and reasoning capacity (Huang et al., 2024).
+More recently, models such as JudgeLRM (Chen
+et al., 2025a) and Rank-R1 (Zhuang et al., 2025)
+have emerged, explicitly incorporating reasoning
+across different assessment tasks through RL with
+outcome-driven rewards.
+It is worth noting that some recent approaches
+have also integrated user behavior signals into the
+model input or reward to tackle personalized rele-
+vance. For example, Chen et al. (2024) proposed
+the ProPBP that feeds user interaction data (clicks,
+dwell time, etc.) into the LLM judge to align its de-
+cisions with individual user preferences. However,
+such behavior signals are largely unavailable in the
+RAG system, rendering these methods inapplica-
+ble.
+5 Conclusion
+This paper proposes the R³A method, a novel de-
+composed reasoning framework tailored for rele-
+vance assessment for RAG system in UGC scenar-
+ios. Empirically, R³A exhibits strong capabilities
+in relevance assessment task in UGC scenarios.
+Limitations
+Despite the effectiveness of R³A in enhancing rel-
+evance assessment for RAG systems within UGC
+scenarios, several limitations remain. R³A is pri-
+marily trained on an industry-specific UGC dataset.
+As demonstrated in Exp.3.3, our method consis-
+tently outperforms all baseline approaches on the
+NoteRel test set. On the out-of-distribution bench-
+mark T²Ranking, the performance gap of R³A is
+notably smaller than that observed on NoteRel.
+During in-domain training, the model learns to
+reason about user query intent within UGC com-
+munities. However, UGC platforms and general-
+purpose search engines exhibit distinct contextual
+characteristics. When the model applies reasoning
+patterns learned from UGC data to assess relevance
+between queries and web passages in non-UGC set-
+tings, the contextual mismatch limits the magnitude
+of performance gains. Nevertheless, the proposed
+approach demonstrates reasonable generalization
+to datasets from other commercial domains and
+remains computationally efficient and well-suited
+for RAG applications in UGC scenarios.
+Acknowledgements
+This work was supported by Beijing Natural Sci-
+ence Foundation (L243006), the National Natural
+Science Foundation of China (No. U24A20335),
+the independent research project of the Key Labo-
+ratory of Cognition and Decision Intelligence for
+Complex Systems.
+References
+Nuo Chen, Zhiyuan Hu, Qingyun Zou, Jiaying Wu,
+Qian Wang, Bryan Hooi, and Bingsheng He. 2025a.
+Judgelrm: Large reasoning models as a judge. CoRR,
+abs/2504.00050.
+Shuang Chen, Yue Guo, Zhaochen Su, Yafu Li, Yu-
+lun Wu, Jiacheng Chen, Jiayu Chen, Weijie Wang,
+Xiaoye Qu, and Yu Cheng. 2025b. Advancing multi-
+modal reasoning: From optimized cold start to staged
+reinforcement learning. CoRR, abs/2506.04207.
+Zeyuan Chen, Haiyan Wu, Kaixin Wu, Wei Chen,
+Mingjie Zhong, Jia Xu, Zhongyi Liu, and Wei Zhang.
+2024. Towards boosting llms-driven relevance mod-
+eling with progressive retrieved behavior-augmented
+prompting. arXiv preprint arXiv:2408.09439.
+Jia Deng, Jie Chen, Zhipeng Chen, Daixuan Cheng, Fei
+Bai, Beichen Zhang, Yinqian Min, Yanzipeng Gao,
+Wayne Xin Zhao, and Ji-Rong Wen. 2025. From
+trial-and-error to improvement: A systematic analy-
+sis of llm exploration mechanisms in rlvr. Preprint,
+arXiv:2508.07534.
+Guglielmo Faggioli, Laura Dietz, Charles L. A. Clarke,
+Gianluca Demartini, Matthias Hagen, Claudia Hauff,
+Noriko Kando, Evangelos Kanoulas, Martin Potthast,
+Benno Stein, and Henning Wachsmuth. 2023. Per-
+spectives on large language models for relevance
+judgment. In Proceedings of the 2023 ACM SIGIR
+International Conference on Theory of Information
+Retrieval, ICTIR 2023, Taipei, Taiwan, 23 July 2023,
+pages 39–50. ACM.
+Quentin Fitte-Rey, Matyas Amrouche, and Romain De-
+veaud. 2025. Augmented relevance datasets with
+fine-tuned small llms. CoRR, abs/2504.09816.
+133

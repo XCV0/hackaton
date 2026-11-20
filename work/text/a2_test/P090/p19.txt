@@ -1,0 +1,30 @@
+• Enhanced Focus on Essential Information:
+Beneficial noise, such as Illegal Sentence
+Noise (ISN), helps the model focus on crit-
+ical content. In Table 13, the golden context
+(Doc3) retains the highest attention score un-
+der Golden & ISN, suggesting that beneficial
+noise guides the model to prioritize relevant
+details, improving reasoning and accuracy.
+• Diminished Impact of Misleading Noise:
+Harmful noise, like Counterfactual Noise
+(CN), misdirects the model’s attention to ir-
+relevant or incorrect documents. This diver-
+sion reduces the model’s ability to focus on
+the golden context, leading to a performance
+drop.
+These findings provide empirical evidence for
+the dual nature of noise in RAG systems. We leave
+more attention visualization across different model
+layers and extensive gradient flow analysis for fu-
+ture investigation.
+C.11 Case Study
+Table 14-17 presents the reasoning process of
+Llama3-8B-instruct. Without beneficial noise, the
+model ignores correct information and exhibits
+logical flaws under counterfactual noise influence.
+However, upon introducing beneficial noise, the
+model exhibits heightened attention to the golden
+context and successfully distinguishes between cor-
+rect and incorrect information.
+5037

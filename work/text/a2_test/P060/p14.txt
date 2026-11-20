@@ -1,0 +1,80 @@
+52
+Dataset Label Dense Lexical Best recall Best strategy
+HotpotQA
+Inclusive 0.830 0.904 0.929 0.10
+reasoning 0.767 0.878 0.907 (-0.093) 0.10
+fact_single 0.813 0.897 0.914 0.10
+summary 0.818 1.000 1.000 0.10
+MS MARCO
+Inclusive 0.697 0.719 0.799 0.10
+reasoning 0.661 0.706 0.781 (-0.053) 0.20
+fact_single 0.740 0.770 0.834 0.10
+summary 0.711 0.696 0.801 0.05
+NaturalQ
+Inclusive 0.625 0.464 0.625 0.00
+reasoning 0.623 0.434 0.623 (-0.018) 0.00
+fact_single 0.641 0.493 0.641 0.00
+summary 0.640 0.436 0.640 0.00
+NewsQA
+Inclusive 0.186 0.494 0.496 0.50
+reasoning 0.177 0.379 0.379 (-0.156) 1.00
+fact_single 0.195 0.533 0.535 0.50
+summary 0.229 0.433 0.441 0.50
+PubMedQA
+Inclusive 0.886 0.895 0.902 (-0.075) 0.50
+reasoning 0.877 0.885 0.922 0.10
+fact_single 0.944 0.952 0.969 0.05
+summary 0.935 0.959 0.977 0.10
+SQuAD2
+Inclusive 0.773 0.831 0.878 0.10
+reasoning 0.743 0.671 0.803 (-0.096) 0.10
+fact_single 0.816 0.852 0.899 0.10
+summary 0.852 0.751 0.852 0.05
+Table 5: Embedding model: all-minilm-l6-v2; Rerank: False
+the article on Paris. In the former case, the user
+would more likely craft a more specific question
+(“What is the population of Paris?”), while in the
+latter, we can expect less specification (“What’s
+the city’s population?”). We observed that the us-
+age of themes favored the more specific corpus-
+level questions, while omitting it led to less specific
+document-level questions.
+G Statement Extraction Prompts
+G.1 Theme
+In a few words, extract the main theme
+behind the following passage: [[{
+context}]]
+G.2 Factual statements
+Extract at most five factual
+statements based on the following
+passage and its theme. You need to
+strictly comply with the
+following guidelines:
+- Each statement must contain a single
+unit of factual information.
+- Each statement must be written in
+the style of an answer to a
+factual question.
+- Each statement must be
+understandable without the aid of
+any other source of information.
+- Each statement must include
+contextual information derived
+from the passage theme.
+- Each statement must only contain
+information that exists in the
+original passage and theme.
+- Each statement must be independent
+from the other statements.
+Generate the statements as a bullet
+list with the following format:
+> Statement
+> Statement
+etc
+Theme: [[{theme}]]
+Passage: [[{context}]]
+G.3 Summary statements
+Merge the following sentences into
+three summary statements.
+Each summary statement must summarise
+information contained in more than

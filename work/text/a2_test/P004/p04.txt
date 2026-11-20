@@ -1,0 +1,102 @@
+Bias
+1
+2
+3Dynamic Routing & Initial Generation
+Complexity 
+Classifier
+ Neuro-
+Symbolic 
+Verifier
+Routing
+A
+Retrieve
+Deep Policy Value
+(|)
+()
+
+Query New query State Encoder 
+ Action 
+Sampling
+Query Optimizer
+Factual Verification Formal Logic Verification Risk Scan
+NLI Checker
+A Semantic Parser
+Datalog 
+Engine
+RoBERTa Classifier
+LLM
+Defect Report
+RDF 
+Triples
+FAST
+Standard
+ UnsafeConf. Bias
+ 
+ 
+  
+
+
+
+
+Figure 2: The overall architecture of the LCR-RAG framework. It details the three main stages: (1) Dynamic
+Routing & Initial Generation, (2) the Neuro-Symbolic Verifier which produces a Defect Report, and (3) the PPO-
+based Query Optimizer that refines the query.
+3.2 Tiered Neuro-symbolic Verifier (NSV)
+The Tiered Neuro-symbolic Verifier (NSV) is a
+central component of LCR-RAG’s ability to ad-
+dress the logic deficit. Unlike prior RAG sys-
+tems that rely solely on black-box LLM self-
+reflection, the NSV explicitly externalizes and for-
+mally structures the verification process. It gen-
+erates a structured, multi-faceted Defect Report
+Lt = (Sfact, Slogic, Srisk, Et), offering interpretable
+diagnostics that guide targeted optimization.
+Factual Verification. This stream checks
+whether the given answer draft At is grounded in
+the retrieved documents Dt. Claims {c1, . . . , cn}
+are extracted from At via a dependency-tree-based
+parser. For each extracted claim ci, we retrieve a
+single evidence sentence ei ∈ Dt, defined as the
+top-1 sentence ranked by BM25 with respect to
+ci. A DeBERTa-v3-large model (He et al., 2021),
+fine-tuned on NLI data, then estimates entailment
+probabilities. The final factual grounding score is
+calculated as:
+Sfact = 1 n n∑ i=1 P (y = entailment | ci, ei) (3)
+Formal Logic Verification. This stream detects
+internal logical inconsistencies in At via neuro-
+symbolic methods. In the Neuro-Symbolic Trans-
+lation stage, a fine-tuned T5-large (Raffel et al.,
+2020) model fT5 is used to map a claim ci to
+RDF triples, fT5(ci) → {(s, p, o)} (Ghosh et al.,
+2025). Following translation, we perform declara-
+tive symbolic reasoning using a Datalog-inspired
+rule engine. Extracted triples are added to a tem-
+porary knowledge base, over which approximately
+150 curated rules R are evaluated to detect logi-
+cal inconsistencies and missing inferences. These
+rules encompass Logical Axioms that encode uni-
+versal relational properties (e.g., transitivity), Com-
+monsense Constraints designed to detect contra-
+dictions such as simultaneous distinct locations,
+and Task-Specific Heuristics derived from em-
+pirical analysis to capture frequent reasoning fail-
+ures, including incomplete inference chains and
+circular justifications. The rule engine (Mao et al.,
+2019) returns a set of discrete logical violation
+events Et. Here Et ⊆ E is the set of triggered
+violation types from a predefined event vocabu-
+lary E (e.g., Contradiction, IncompleteChain,
+CircularReasoning, EntityMismatch). The
+logic score is defined by severity-weighted deduc-
+tions:
+Slogic = 1 −
+∑
+k∈Et
+wk, (4)
+where wk denotes the predefined severity weight
+associated with event k.
+Risk and Plausibility Scan. A RoBERTa-based
+classifier scans the answer draft At to detect latent
+risk signals, ranging from speculative phrasing and
+17903

@@ -1,0 +1,103 @@
+388
+domains and their associated relevant corpus. This
+approach allows MKP-QA to search across a
+diverse range of enterprise products and their
+associated documentation without the need to
+centralize all information into a single, monolithic
+database – a significant advantage in large-scale
+enterprise deployments.
+The complex nature of multi-product QA in en-
+terprise settings necessitates a more nuanced ap-
+proach than simple federated search. Cross-product
+queries often require information from multiple do-
+mains with overlapping terminologies, including
+less obvious ones. To address these practical needs,
+we enhance MKP-QA ’s federated search with a
+probabilistic gating mechanism, serving three cru-
+cial functions: (i) Exploration-Exploitation Bal-
+ance, enabling both exploitation of known rele-
+vant domains and exploration of less obvious ones,
+crucial for cross-product queries; (ii) Error Mit-
+igation, using likelihoods in domain selection to
+safeguard against misclassification and missed in-
+formation in domain router; and (iii) Adaptive
+Query Processing, allowing flexible and context-
+aware searching. By aggregating query-domain
+and query-document relevance scores through this
+mechanism, MKP-QA enhances multi-domain
+document retrieval for RAG-QA systems. This
+adaptation of federated learning techniques (Ash-
+man et al., 2022; Huang et al., 2022) to our specific
+challenges enables more accurate, cross-domain
+product knowledge integration, particularly valu-
+able in complex enterprise software ecosystems.
+To address the lack of suitable multi-product QA
+benchmarks, we also introduce new benchmark
+datasets focused on three Adobe products: Adobe
+Experience Platform (AEP), Adobe Target, and
+Adobe Customer Journey Analytics (CJA). These
+datasets, which we intend to release publicly, con-
+sist of user queries and corresponding documents
+from Adobe product documentation. They serve as
+valuable resources for evaluating domain-specific
+and cross-domain RAG-QA systems across prod-
+uct domains. The datasets will be made available
+pending Adobe’s approval.
+Our experimental findings demonstrate signif-
+icant improvements in the accuracy of multi-
+product question answering. By introducing new
+benchmark datasets and proposing an innovative
+framework, we seek to push the boundaries of
+AI Assistants in product-related QA. Importantly,
+MKP-QA achieves this without requiring separate
+domain-specific LLM fine-tuning or the training of
+adaptive modules across various product domains.
+2 Related Work
+2.1 Domain-specific Question-Answering
+Domain-specific QA has seen significant advance-
+ments across various fields, addressing the unique
+challenges posed by specialized knowledge and
+terminology. Research efforts have focused on de-
+veloping tailored methods and datasets for domains
+such as biomedical (Gu et al., 2021), physics (Chen
+et al., 2023), finance (Wu et al., 2023), and legal
+(Cui et al., 2024). These works have contributed to
+improving QA accuracy and relevance within their
+respective fields. In the context of product-related
+QA, which is most relevant to our work, efforts
+have been more limited. Notable among these is
+the dataset in (Liu et al., 2023) which focuses on
+Microsoft product queries. However, this dataset
+primarily consists of yes/no questions, with only
+a small portion requiring more complex genera-
+tive text answers. Our work extends this line of
+research by addressing multi-product QA in en-
+terprise software ecosystems. We focus on more
+complex, cross-domain queries that often require
+integrating knowledge from multiple products - a
+scenario common in enterprise settings but under-
+explored in current literature.
+2.2 Retrieval Augmented Generation
+Retrieval augmented generation (RAG) has re-
+cently emerged as a powerful approach for enhanc-
+ing the performance of LLMs in knowledge-base
+QA tasks. RAG combines the strengths of retrieval-
+based and generation-based methods to produce
+more accurate and faithful responses. (Lewis et al.,
+2020) introduced the foundational RAG model,
+which retrieves relevant documents and conditions
+its output on both the retrieved information and
+the input query. Subsequent works have further
+improved it with (Guu et al., 2020) developing
+REALM for joint training of retriever and genera-
+tor, and (Karpukhin et al., 2020) introducing dense
+passage retrieval for improved efficiency. Recent
+research has explored RAG in domain-specific con-
+texts. (Head et al., 2021) adapted RAG for scien-
+tific literature, while (Khattab et al., 2022) investi-
+gated its application in customer support settings.
+Our work extends this line of research by intro-
+ducing a novel multi-domain RAG framework that
+addresses the specific challenges of enterprise sys-
+tems, where queries often span multiple products
+and require integration of diverse knowledge.

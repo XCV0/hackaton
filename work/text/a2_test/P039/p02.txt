@@ -1,0 +1,99 @@
+cantly. Besides, for improving the efficiency of in-
+ference, methods like MiniRAG (Fan et al., 2025),
+FG-RAG (Hong et al., 2025) and LeanRAG (Zhang
+et al., 2026) retrieve relevant subgraphs to generate
+query-aware fine-grained answers. However, these
+approaches are divorced from a global perspective.
+Although it is possible to inject the intrinsic knowl-
+edge of LLMs into the entity in the process of
+building the graph, it is difficult to compensate for
+the comprehensive understanding of the complete
+resource library.
+Based on the above issues, we revisit GraphRAG
+and present the following two research questions.
+• (RQ1) How to enhance the global knowl-
+edge graph representation and reasoning
+with low resource consumption? Existing
+Graph RAG methods heavily rely on large-
+scale LLMs (e.g., GPT-4o (Hurst et al., 2024))
+to handle construction, retrieval, and gener-
+ation, hindering migration to smaller mod-
+els due to limited capacity. These high-
+intensity model calls also incur substantial
+resource costs and constrain deployment flexi-
+bility. Therefore, decoupling LLMs’ end-to-
+end dominance becomes essential for practical
+and scalable applications.
+• (RQ2) How to achieve robust and efficient
+knowledge increment for large-scale Graph
+RAG? GraphRAG employs a bottom-up con-
+struction paradigm that involves entity/rela-
+tionship extraction followed by community
+summary generation. However, this architec-
+ture struggles with incremental updates, re-
+quiring costly full-graph reconstruction. Con-
+sequently, it is crucial to develop an efficient
+incremental construction mechanism that min-
+imizes overhead and integrates seamlessly
+with existing knowledge structures.
+To tackle these challenges, we propose
+TagRAG, a tag-guided hierarchical knowledge
+graph retrieval-augmented generation framework,
+comprising Tag Knowledge Graph Construction
+and Tag-guided Retrieval-Augmented Generation.
+In the construction stage, TagRAG constructs a
+Tag Knowledge Graph by extracting object tag
+keywords and their relationships from documents.
+These object tags are linked to predefined root do-
+main tags, forming hierarchical domain tag chains.
+Knowledge from object tags connected to domain
+tags is summarized and fused for information inte-
+gration. During inference, domain-centric tags are
+retrieved to localize knowledge. The hierarchical
+tag chains are collected to integrate synthesized in-
+formation, which is then fused into global answers
+via tag-guided retrieval-augmented generation. In
+summary, the contributions are as follows:
+• We propose TagRAG, a powerful and efficient
+graph-based RAG framework that enhances
+global knowledge representation and reason-
+ing in low-resource scenarios.
+• We introduce the architecture of domain tag
+chains, which improves the hierarchy of
+knowledge graphs and optimizes the adapt-
+ability of incremental insertion.
+• We extensively evaluate our framework on
+UltraDomain Agriculture, CS, Legal and Mix,
+demonstrating its effectiveness and efficiency
+for graph-based RAG.
+2 Related Work
+Graph-based RAG (Peng et al., 2024) builds graphs
+characterized by high-level knowledge representa-
+tions and generate responses through global search.
+RAPTOR (Sarthi et al., 2024) introduces hierarchi-
+cal tree structures via clustering and summarization,
+shifting RAG from chunk-based retrieval to struc-
+tured reasoning. GraphRAG (Edge et al., 2024)
+further enriches this modeling with diverse graph
+representations, followed by HiRAG (Huang et al.,
+2025a) and ArchRAG (Wang et al., 2025), which
+utilize hierarchical community summaries. How-
+ever, the heavy reliance on frequent LLM calls and
+extensive summarization makes GraphRAG pro-
+hibitively expensive and inefficient for practical
+deployment.
+The subsequent work has been improved in the
+following two aspects: (1)Structural simplifica-
+tion for graph construction. LightRAG (Guo
+et al., 2025) integrates lightweight graphs with
+text indexing and dual-level retrieval for efficient,
+adaptive knowledge access. KET-RAG (Huang
+et al., 2025b) combines a sparse knowledge graph
+skeleton with a text-keyword bipartite graph, en-
+abling multi-granular retrieval without building a
+full-scale graph. (2)Retrieval optimization for
+global knowledge. MiniRAG (Fan et al., 2025)
+unifies text and entity indexing into a semantic-
+aware graph, leveraging lightweight topology-
+enhanced search for efficient knowledge access.
+6435

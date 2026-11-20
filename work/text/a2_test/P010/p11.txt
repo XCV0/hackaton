@@ -1,0 +1,134 @@
+visual language model for few-shot learning. Advances in Neural
+Information Processing Systems, 35:23716–23736, 2022.
+[4] Satanjeev Banerjee and Alon Lavie. METEOR: An automatic
+metric for MT evaluation with improved correlation with human
+judgments. In Proceedings of the ACL Workshop on Intrinsic
+and Extrinsic Evaluation Measures for Machine Translation
+and/or Summarization, pages 65–72, 2005.
+[5] Mariusz Bojarski, Anna Choromanska, Krzysztof Choromanski,
+Bernhard Firner, Larry Jackel, Urs Muller, and Karol Zieba.
+VisualBackProp: Efficient visualization of cnns. arXiv preprint
+arXiv:1611.05418, 2016.
+[6] Mariusz Bojarski, Davide Del Testa, Daniel Dworakowski,
+Bernhard Firner, Beat Flepp, Prasoon Goyal, Lawrence D Jackel,
+Mathew Monfort, Urs Muller, Jiakai Zhang, et al. End to end
+learning for self-driving cars. arXiv preprint arXiv:1604.07316,
+2016.
+[7] Mariusz Bojarski, Philip Yeres, Anna Choromanska, Krzysztof
+Choromanski, Bernhard Firner, Lawrence Jackel, and Urs Muller.
+Explaining how a deep neural network trained with end-to-end
+learning steers a car. arXiv preprint arXiv:1704.07911, 2017.
+[8] Jean-Franc¸ois Bonnefon, Azim Shariff, and Iyad Rahwan. The
+social dilemma of autonomous vehicles. Science, 352(6293):
+1573–1576, 2016.
+[9] Anthony Brohan, Noah Brown, Justice Carbajal, Yevgen Chebo-
+tar, Xi Chen, Krzysztof Choromanski, Tianli Ding, Danny Driess,
+Avinava Dubey, Chelsea Finn, et al. RT-2: Vision-language-
+action models transfer web knowledge to robotic control. arXiv
+preprint arXiv:2307.15818, 2023.
+[10] Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah,
+Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav
+Shyam, Girish Sastry, Amanda Askell, et al. Language models
+are few-shot learners. Advances in Neural Information Process-
+ing Systems, 33:1877–1901, 2020.
+[11] Raphael Chekroun, Marin Toromanoff, Sascha Hornauer, and
+Fabien Moutarde. GRI: General reinforced imitation and its
+application to vision-based autonomous driving. Robotics, 12
+(5):127, 2023.
+[12] Dian Chen, Brady Zhou, Vladlen Koltun, and Philipp Kr¨ahenb¨uhl.
+Learning by cheating. In Conference on Robot Learning, pages
+66–75. PMLR, 2020.
+[13] Li Chen, Penghao Wu, Kashyap Chitta, Bernhard Jaeger, Andreas
+Geiger, and Hongyang Li. End-to-end autonomous driving:
+Challenges and frontiers. arXiv preprint arXiv:2306.16927,
+2023.
+[14] Long Chen, Oleg Sinavski, Jan H¨unermann, Alice Karnsund,
+Andrew James Willmott, Danny Birch, Daniel Maund, and
+Jamie Shotton. Driving with LLMs: Fusing object-level vector
+modality for explainable autonomous driving. arXiv preprint
+arXiv:2310.01957, 2023.
+[15] Kashyap Chitta, Aditya Prakash, and Andreas Geiger. NEAT:
+Neural attention fields for end-to-end autonomous driving. In
+Proceedings of the IEEE/CVF International Conference on
+Computer Vision, pages 15793–15803, 2021.
+[16] Kashyap Chitta, Aditya Prakash, Bernhard Jaeger, Zehao Yu,
+Katrin Renz, and Andreas Geiger. TransFuser: Imitation with
+transformer-based sensor fusion for autonomous driving. IEEE
+Transactions on Pattern Analysis and Machine Intelligence, 2022.
+[17] Damai Dai, Yutao Sun, Li Dong, Yaru Hao, Zhifang Sui, and
+Furu Wei. Why can GPT learn in-context? language models
+secretly perform gradient descent as meta optimizers. arXiv
+preprint arXiv:2212.10559, 2022.
+[18] Qingxiu Dong, Lei Li, Damai Dai, Ce Zheng, Zhiyong Wu,
+Baobao Chang, Xu Sun, Jingjing Xu, and Zhifang Sui. A survey
+for in-context learning. arXiv preprint arXiv:2301.00234, 2022.
+[19] Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk
+Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa
+Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly,
+et al. An image is worth 16x16 words: Transformers for image
+recognition at scale. arXiv preprint arXiv:2010.11929, 2020.
+[20] Danny Driess, Fei Xia, Mehdi SM Sajjadi, Corey Lynch,
+Aakanksha Chowdhery, Brian Ichter, Ayzaan Wahid, Jonathan
+Tompson, Quan Vuong, Tianhe Yu, et al. PaLM-e: An embodied
+multimodal language model. arXiv preprint arXiv:2303.03378,
+2023.
+[21] Asif Faisal, Md Kamruzzaman, Tan Yigitcanlar, and Graham
+Currie. Understanding autonomous vehicles. Journal of
+Transport and Land Use, 12(1):45–72, 2019.
+[22] Matthew Gadd, Daniele De Martini, Letizia Marchegiani, Paul
+Newman, and Lars Kunze. Sense–assess–explain (sax): Building
+trust in autonomous vehicles in challenging real-world driving
+scenarios. In 2020 IEEE Intelligent Vehicles Symposium (IV),
+pages 150–155. IEEE, 2020.
+[23] Siavash Golkar, Mariel Pettee, Michael Eickenberg, Alberto
+Bietti, Miles Cranmer, Geraud Krawezik, Francois Lanusse,
+Michael McCabe, Ruben Ohana, Liam Parker, et al. xVal: A
+continuous number encoding for large language models. arXiv
+preprint arXiv:2310.02989, 2023.
+[24] Ishaan Gulrajani and David Lopez-Paz. In search of lost domain
+generalization. arXiv preprint arXiv:2007.01434, 2020.
+[25] Wencheng Han, Dongqian Guo, Cheng-Zhong Xu, and Jianbing
+Shen. DME-Driver: Integrating human decision logic and
+3D scene perception in autonomous driving. arXiv preprint
+arXiv:2401.03641, 2024.
+[26] Jeffrey Hawke, Richard Shen, Corina Gurau, Siddharth Sharma,
+Daniele Reda, Nikolay Nikolov, Przemysław Mazur, Sean
+Micklethwaite, Nicolas Griffiths, Amar Shah, et al. Urban driving
+with conditional imitation learning. In International Conference
+on Robotics and Automation (ICRA), pages 251–257. IEEE,
+2020.
+[27] Muyang He, Yexin Liu, Boya Wu, Jianhao Yuan, Yueze Wang,
+Tiejun Huang, and Bo Zhao. Efficient multimodal learning from
+data-centric perspective. arXiv preprint arXiv:2402.11530, 2024.
+[28] Dan Hendrycks and Kevin Gimpel. Gaussian error linear units
+(GELUs). arXiv preprint arXiv:1606.08415, 2016.
+[29] Elad Hoffer and Nir Ailon. Deep metric learning using
+triplet network. In Similarity-Based Pattern Recognition: Third
+International Workshop, SIMBAD , pages 84–92. Springer, 2015.
+[30] Yihan Hu, Jiazhi Yang, Li Chen, Keyu Li, Chonghao Sima,
+Xizhou Zhu, Siqi Chai, Senyao Du, Tianwei Lin, Wenhai Wang,
+Lewei Lu, Xiaosong Jia, Qiang Liu, Jifeng Dai, Yu Qiao,
+and Hongyang Li. Planning-oriented autonomous driving. In
+Proceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition (CVPR), pages 17853–17862, June
+2023.
+[31] Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin
+Feng, Haotian Wang, Qianglong Chen, Weihua Peng, Xiaocheng
+Feng, Bing Qin, et al. A survey on hallucination in large language
+models: Principles, taxonomy, challenges, and open questions.
+arXiv preprint arXiv:2311.05232, 2023.
+[32] Siyuan Huang, Zhengkai Jiang, Hao Dong, Yu Qiao, Peng
+Gao, and Hongsheng Li. Instruct2Act: Mapping multi-modality
+instructions to robotic actions with large language model. arXiv
+preprint arXiv:2305.11176, 2023.
+[33] Bernhard Jaeger, Kashyap Chitta, and Andreas Geiger. Hid-
+den biases of end-to-end driving models. arXiv preprint
+arXiv:2306.07957, 2023.
+[34] Kanishk Jain, Varun Chhangani, Amogh Tiwari, K Madhava
+Krishna, and Vineet Gandhi. Ground then navigate: Language-
+guided navigation in dynamic scenes. In International Con-
+ference on Robotics and Automation (ICRA), pages 4113–4120.
+IEEE, 2023.
+[35] Bu Jin, Xinyu Liu, Yupeng Zheng, Pengfei Li, Hao Zhao,
+Tong Zhang, Yuhang Zheng, Guyue Zhou, and Jingjing Liu.
+Adapt: Action-aware driving caption transformer. arXiv preprint

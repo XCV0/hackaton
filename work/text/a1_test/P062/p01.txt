@@ -1,0 +1,99 @@
+Device Simulation of CsPbBr3 Solar Cells for
+High-Efﬁciency Blue Light Photovoltaic Power Converters
+Yuejie Tan and Shinsuke Miyajima*
+1. Introduction
+The development of wireless power transfer (WPT) systems has
+attracted signiﬁcant attention, especially for battery charging
+of electric vehicles, implantable medical devices, etc.[1,2] Home
+applications such as controllers and smartphones have been
+commercialized as being capable of wireless charging. However,
+the main challenges of current WPT systems are the short power-
+transmission distance and electromagnetic interference,[3] which
+affect electromagnetic noise to electrical devices and the human
+body.[4] To solve the problem of short-distance transmission,
+there are two options: the WPT technique using microwaves
+or the optical wireless power transfer (OWPT) technique using
+light. Both techniques have the potential for long-distance power
+transmission. OWPT has several advantages over microwave
+WPT in some respects. These advantages include small equip-
+ment size, no electromagnetic noise, and the possibility of
+underwater applications. Therefore, we
+focus on OWPT in this study.
+As a WPT technique, OWPT has a high
+potential to deliver watt-level power over a
+meter-level distance without electromag-
+netic interference. As shown in Figure 1a,
+a monochromatic light source, laser, or
+light-emitting diode (LED) is used as the
+light source to convert electric power into
+light, which passes through the transmis-
+sion medium, and ﬁnally, the solar cell con-
+verts the light into electricity, which can be
+supplied to a wide range of applications,
+from charging implantable medical devices
+through the human skin[4] to sending
+power through water.[5,6] The solar cell in
+the OWPT system is referred to as a pho-
+tovoltaic power converter. The efﬁciency
+of the OWPT system is determined by
+the product of three efﬁciencies: light source, transmission,
+and photovoltaic power converter. For relatively short distances,
+up to 10 m in air, the effect of light source beam absorption and
+scattering by air can be almost neglected. Therefore, high trans-
+mission efﬁciency is expected if the light beam can be adjusted to
+the photovoltaic power converter by applying appropriate object
+detection techniques using sensors.[7,8] In underwater applica-
+tions, the absorption loss due to water is greater than that due
+to air. However, it is still signiﬁcantly lower than that due to
+microwave or radio frequency, which demonstrates the superior-
+ity of this system. It can be concluded that the efﬁciency of the
+OWPT system is primarily determined by the conversion efﬁ-
+ciencies of the light source and photovoltaic power converter,
+except for extremely long-distance power transmission, such
+as over 100 m.
+From the perspective of light source efﬁciency, there are not
+many light source wavelength options. According to the litera-
+ture, various semiconductor lasers,[9,10] including edge laser
+diode (LDs), vertical cavity surface emitting lasers (VCSELs),
+and LEDs, can achieve high conversion efﬁciency exceeding
+50%. Speciﬁcally, near-infrared lasers perform optimally in
+the 800–1000-nm wavelength range,[9,11,12] whereas blue lasers
+are most efﬁcient at ≈450 nm.[13–17] For near-infrared lasers, a
+VCSEL light source can achieve wall plug efﬁciency (WPE)
+exceeding 63%,[18] whereas edge LDs have demonstrated
+remarkable efﬁciency of up to 85% at /C050 °C and 76% at
+10 °C.[11] Previous studies also indicate that blue LEDs can
+achieve WPE of above 49.1%,[15] with notable cases reaching
+over 70% for III-nitride LEDs emitting at 455 nm.[17] In 2010,
+a LED with efﬁciency of 85.9% at a wavelength of 444 nm
+was achieved by optimizing the epitaxial structure, growth
+Y. Tan, S. Miyajima
+Department of Electrical and Electronic Engineering
+Tokyo Institute of Technology
+Meguro, Tokyo 152-8550, Japan
+E-mail: miyajima.s.aa@m.titech.ac.jp
+The ORCID identiﬁcation number(s) for the author(s) of this article
+can be found under https://doi.org/10.1002/pssa.202400437.
+© 2024 The Author(s). physica status solidi (a) applications and materials
+science published by Wiley-VCH GmbH. This is an open access article
+under the terms of the Creative Commons Attribution License, which
+permits use, distribution and reproduction in any medium, provided
+the original work is properly cited.
+DOI: 10.1002/pssa.202400437
+The performance of CsPbBr3 solar cells is investigated using device simulation
+to clarify the criteria for obtaining high-efﬁciency blue light photovoltaic power
+converters. The results show that the conduction band offset between the
+electron transport layer (ETL) and CsPbBr3 layer signiﬁcantly impacts conversion
+efﬁciency. The best device performance is obtained when the conduction band of
+the ETL is 0.4 eV higher than that of the CsPbBr3 layer. Simulations also revealed
+that gallium nitride is preferred to conventional titanium oxide (TiO2) as the ETL
+material. The analysis indicates that the carrier diffusion length of the CsPbBr3
+layer signiﬁcantly affects the short-circuit current density and ﬁll factor of devices
+and that a carrier diffusion length of at least 0.5 μm is required to realize high-
+efﬁciency devices. The use of a transparent conductive oxide layer with a work
+function smaller than 4.0 eV or the insertion of a buffer layer with electron afﬁnity
+less than 4.1 eV can effectively improve the open-circuit voltage of devices.
+RESEARCH ARTICLE
+www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (1 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH

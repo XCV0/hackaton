@@ -1,0 +1,66 @@
+conﬁrm the element on each layer of PSC. Steady-state pho-
+toluminescence (PL) spectra were measured using JASCO
+FP-8600, where the incident light illuminates the glass side
+of the sample. The electrochemical impedance spectroscopy
+(EIS) characteristics of the solar cell were carried out in the
+frequency range of 0.1 Hz–100 kHz under 0.1 W/m2 illumi-
+nation using an electrochemical workstation (Bio-logic SP-
+150). The obtained impedance spectra were ﬁtted using the
+Zﬁt function in the EC-Lab software. The PSC performance
+was measured under AM1.5G illumination from the Asahi
+Spectra HAL-320 Solar Simulator, while the J – V sweep
+was measured using the Agilent B2900 Series Precision
+Source/Measure Unit. From those measurements, solar cell
+J – V curves were presented where the VOC, short-circuit
+current density (JSC), and maximum power point (PMP)
+information were provided. The ﬁll factor (FF) and eﬃ-
+ciency of solar cells can be calculated using Equations (1)
+and (2), respectively [31].
+FF = PMP
+VOC JSC
+1
+Efficiency = VOC JSCFF Pin 2
+where the input power (Pin) from the solar simulator was
+1W/m2. Another parameter that was presented from J – V
+measurements is parasitic resistance, which is series resis-
+tance (RS) and shunt resistance (RSh). Both parasitic resis-
+tance aﬀects the J – V curve by following Equation (3) [32].
+J = J0 exp qV− AJRS KBT − 1 + V − AJRS RSh − JL 3
+where A is the solar cell area, JL is the light-generated cur-
+rent, J0 is the dark current, KB is Boltzmann’s constant, q
+is the electrical charge of an electron, and T is temperature.
+The parasitic resistance can be extracted from the J – V
+curve by determining the slope near the VOC and JSC region
+for RS and RSh, respectively, and calculating its deviation
+from the ideal behavior [33, 34].
+10 m
+Carbon
+(a)
+10 m
+Carbon+CuSCN
+(b)
+10 m 10 m
+SE S
+10 m
+Cu
+(c)
+Figure 5: Cross-sectional SEM image carbon layer: (a) without CuSCN and (b) with CuSCN additive. (c) EDS mapping of element Cu and S
+for carbon with CuSCN additive.
+FTO
+TiO2
+Perovskite
+Carbon Carbon
+CuSCN
+500 nm 500 nm
+FTO
+TiO2
+Perovskite
+500 nm
+Carbon+CuSCN
+CuSCN
+FTO
+TiO2
+Perovskite
+Figure 6: Cross-sectional SEM images of PSC on diﬀerent structures.
+5International Journal of Photoenergy
+ 3837, 2024, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2024/5355903, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

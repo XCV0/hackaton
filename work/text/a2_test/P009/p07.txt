@@ -1,0 +1,97 @@
+25
+Dataset Methods Interest Novelty IN-F1
+RPC
+(a) Vanilla-RAG 9.51 ± 1.13 4.69 ± 2.53 5.85 ± 2.43
+(b) PersonaRAG 9.94 ± 0.24a,c,d 4.74 ± 2.0 6.16 ± 1.93
+(c) PT-RAG (Ours) 9.38 ± 0.79 6.76 ± 1.69a,b,d 7.71 ± 1.29a,b,d
+(d) PT-RAG-KO 9.52 ± 0.72 5.9 ± 2.03a,b 7.04 ± 1.67b,d
+JPC
+(a) Vanilla-RAG 9.7 ± 0.76 4.75 ± 3.04 5.75 ± 2.91
+(b) PersonaRAG 9.86 ± 0.42a,c,d 4.87 ± 2.11 6.23 ± 2.03
+(c) PT-RAG (Ours) 9.65 ± 0.61 5.63 ± 1.91a,b,d 6.92 ± 1.69a,b,d
+(d) PT-RAG-KO 9.63 ± 0.58 4.82 ± 2.25 6.07 ± 2.09
+Table 3: Evaluation results. Bold items indicate the highest value for each metric. Superscripts a-d
+indicate signiﬁcant differences with methods (a)–(d) respectively (two-tailed Welch’s t-test; p < 0.05).
+effectiveness of the knowledge estimation
+mechanism described in Section 3.2.3.
+Vanilla-RAG : A standard RAG method imple-
+mented by the llama-index5. It partitions infor-
+mation into ﬁxed-sized chunks and vectorizes
+each chunk, then retrieves the top k (K = 5
+in this experiment) most similar chunks to the
+query vector for response generation. Since
+Vanilla-RAG does not estimate user knowl-
+edge, a summary list of the speaker’s conver-
+sation was added as alternative knowledge
+data to {user_data}.
+PersonaRAG :
+Introduced by (Zerhoudi, 2025) and de-
+scribed in Section 2. Since this method
+does not include an original retriever, we used
+the retriever of Vanilla-RAG. Like Vanilla-
+RAG, it also lacks user knowledge estima-
+tion, so the same information was provided
+to {user_data}.
+4.1.4. Metrics
+We evaluated the performance of each method
+using the following three metrics:
+Interest: Following the LLM-as-a-judge frame-
+work (Zheng et al., 2023), ChatGPT-4o was
+used to determine whether each generated
+response would be interesting to the target
+speaker. Each response was scored on a 10-
+point scale (1-10) reference to the speaker’s
+persona data. The prompt used is provided
+in Appendix A.4. ChatGPT-4o was chosen to
+avoid self-preference, where an LLM favors
+its outputs over those from other LLMs and
+humans (Panickssery et al., 2024).
+Novelty: Using the same LLM-as-a-judge ap-
+proach, ChatGPT-4o rated the novelty of each
+responses on a 10-point scale, based on
+whether the content was new or already fa-
+miliar to the target speaker. A summary of
+5https://www.llamaindex.ai/
+the speaker’s past conversations was used to
+represent as their prior knowledge. Abstract
+responses lacking speciﬁc details or proper
+nouns were treated as known information and
+penalized accordingly. The prompt used is
+provided in Appendix A.4.
+Interest-Novelty-F1 (IN-F1): To evaluate the bal-
+ance between ”Interest” and ”Novelty”, we
+calculated the harmonic mean of the two
+scores. A higher IN-F1 score indicates that
+the method can retrieve information that is
+both new and interesting to the speaker.
+To verify the reliability of the LLM-based evalua-
+tions, we compared these scores with human as-
+sessments. Twelve evaluators participated in this
+validation. We selected 20 samples using strati-
+ﬁed sampling based on average LLM scores to en-
+sure balanced coverage. Each sample was inde-
+pendently rated by at least three evaluators, and
+the human score was calculated as the average of
+their ratings. Finally, we computed the Spearman
+correlation coefﬁcient (Spearman, 1961) between
+the human and the LLM scores.
+4.1.5. Results
+The results are presented in Tables 3. From this
+table, PersonaRAG achieved the highest Interest
+scores among all methods. On the other hand,
+PT-RAG achieved signiﬁcantly higher scores in
+both Novelty and IN-F1 compared to the other
+methods. These results demonstrate that Vanilla-
+RAG, PersonaRAG, and PT-RAG-KO are less ef-
+fective at retrieving new information for the target
+speaker. This limitation arises because Vanilla-
+RAG and PersonaRAG primarily retrieve content
+that is semantically similar to the query without
+considering whether the information is already
+known to the user. PersonaRAG, in particular,
+tends to generate more interesting responses be-
+cause its multi-agent reﬁnement process focuses
+on content closely aligned with user interests.
+Similarly, PT-RAG-KO cannot also consider the
+speaker’s knowledge because it lacks the knowl-
+edge estimation mechanism. In contrast, PT-RAG

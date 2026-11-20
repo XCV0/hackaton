@@ -1,0 +1,77 @@
+Table 20: CBT alignment evaluation using human and LLM across MentalChat and CounselChat datasets.
+Methods Models MentalChat CounselChat
+CDRE CPAS SQI CDRE CPAS SQI
+Human Evaluation
+Baseline
+text-embed-3-large 3.31 2.28 1.73 3.08 1.94 1.98
+Light-RAG 3.34 2.32 1.76 3.05 1.91 2.02
+RAG-Anything 3.32 2.35 1.79 3.09 1.93 1.96
+Qwen3-Embed-0.6B 3.35 2.24 1.82 3.01 1.87 1.81
+w_skill card
+text-embed-3-large 3.68 2.74 2.07 3.42 2.47 2.46
+Light-RAG 3.65 2.72 2.09 3.41 2.41 2.33
+RAG-Anything 3.67 2.75 2.12 3.38 2.38 2.29
+Qwen3-Embed-0.6B 3.63 2.68 2.15 3.47 2.56 2.38
+LLM Evaluation
+Baseline
+text-embed-3-large 2.94 1.96 1.36 2.71 1.63 1.60
+Light-RAG 2.95 1.98 1.37 2.69 1.62 1.65
+RAG-Anything 2.95 1.99 1.41 2.71 1.62 1.61
+Qwen3-Embed-0.6B 2.96 1.93 1.43 2.66 1.58 1.45
+w_skill card
+text-embed-3-large 3.29 2.39 1.66 3.03 2.12 2.08
+Light-RAG 3.28 2.38 1.68 3.02 2.08 1.95
+RAG-Anything 3.28 2.39 1.69 3.00 2.06 1.93
+Qwen3-Embed-0.6B 3.26 2.35 1.71 3.07 2.20 2.02
+Table 21: Performance evaluation on EmpatheticDialogues for generation and information retrieval.
+Empathetics Dialogue Information Retrieval Generation
+Methods Models Recall@1 Recall@5 Recall@10 BLEU-1 ROUGE-1 Bscore LLM Judge
+text-embedding-3-small 15.98 31.72 39.65 12.62 12.14 86.92 6.72
+text-embedding-3-large 18.77 36.63 43.70 12.93 12.55 87.00 6.75
+text-embedding-ada-002 13.27 29.01 37.42 12.79 11.99 86.96 6.71
+Qwen/Qwen3-Embedding-0.6B 13.87 29.43 37.66 12.75 12.05 86.94 6.71
+Baseline Light-RAG 16.85 32.98 40.91 12.75 12.28 86.96 6.74
+RAG-Anything 16.63 31.30 39.05 12.72 12.25 86.95 6.73
+APTNESS 15.02 30.99 39.01 12.70 12.08 86.93 6.72
+HyDE 16.44 32.22 40.60 12.69 12.22 86.94 6.73
+jinaai/jina-embeddings-v3 16.31 32.57 40.48 12.68 12.20 86.93 6.73
+text-embedding-3-small 19.32 36.00 44.25 13.56 12.45 87.15 6.71
+text-embedding-3-large 22.03 39.89 48.53 13.79 12.69 87.18 6.78
+text-embedding-ada-002 17.08 33.88 42.68 13.43 12.38 87.12 6.73
+W_skill card Qwen/Qwen3-Embedding-0.6B 16.76 33.37 41.55 13.40 12.35 87.15 6.73
+Light-RAG 20.30 36.25 44.38 13.65 12.55 87.17 6.72
+RAG-Anything 20.05 35.13 43.14 13.62 12.52 87.16 6.75
+jinaai/jina-embeddings-v3 19.64 36.61 44.69 13.58 12.48 87.11 6.74
+ance, emphasizing validation, exploration, refram-
+ing, and safety assessment. It also provides exam-
+ple phrases and explicit “don’ts” to help avoid inval-
+idating or premature responses. Overall, SPC_001
+operationalizes CBT-informed cognitive restructur-
+ing into a reusable guidance card for safer and more
+supportive crisis-sensitive conversations.
+A.12 Output Observation
+Table 23 illustrates a qualitative comparison of the
+retrieved contexts and generated responses across
+different RAG methods. In this example, the user
+expresses feelings of grief and isolation after at-
+tempting to connect with their deceased mother
+through a gift. The baseline models (gpt-embed-
+3-large, Light-RAG, and RAG-Anything) retrieve
+contexts that are broadly related to grief but do not
+fully capture the specific nuances of the situation,
+occasionally introducing unrelated themes such as
+work stress or unresolved guilt. As a result, their
+generated responses tend to offer general support.
+In contrast, the proposed method utilizes Appraisal
+and CBT projections to model the user’s underlying
+emotional state and the symbolic meaning of the
+gift. This cognitive context enables the system to
+retrieve evidence that closely matches the reference
+answer. Consequently, the generated response is
+more contextually aligned, directly addressing the
+user’s specific experience and providing suitable
+therapeutic guidance.
+A.13 Detailed Prompts
+Tables 24, 25, and 26 show prompts used in the
+pipeline.
+13819

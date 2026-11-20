@@ -1,0 +1,7 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D008,MS1,DV1,J-V,,1,sun,,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; направление для значений w/o PbCl2 не указано"
+D008,MS2,DV2,J-V,,1,sun,forward,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; рекордный элемент, 18.5% в прямом ходе"
+D008,MS3,DV3,J-V,,1,sun,,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; направление для 17.06% не указано"
+D008,MS4,DV2,J-V,,1,sun,,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; статистика 20 элементов, направление не указано"
+D008,MS5,DV1,stability,,,,,,,,,,other,"хранение в N2-заполненном боксе (glovebox), около 30 суток","нормированный PCE, хранение 30 суток в N2-перчаточном боксе между измерениями"
+D008,MS6,DV2,stability,,,,,,,,,,other,"хранение в N2-заполненном боксе (glovebox), около 30 суток","нормированный PCE, хранение 30 суток в N2-перчаточном боксе между измерениями"

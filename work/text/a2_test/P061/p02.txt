@@ -1,0 +1,121 @@
+Ins d11d12 d21 d22 d31 d32 q1 q2input tokens
+Layer 1
+Layer 2
+Layer L
+...
+hidden states
+Cross
+Attention
+attention weights
+Aggregate
+Embedding
+Multiple Relevant Docs
+0 1
+d21d22 q1 q2
+High
+Confidence
+threshold p
+0.5
+Score
+Ins Doc 1 Doc 2 Doc 3
+Segments
+Rerank
+Retained Docs = {Doc 2}
+Reader
+LLM
+Answer
+Compress
+0 1
+q1 q2
+Low
+Confidence
+threshold p
+0.5
+Score
+Ins Doc 1 Doc 2 Doc 3
+Segments
+Rerank
+Retained Docs = { }
+Reader
+LLM
+Answer
+Compress
+Few Relevant Docs
+No Relevant Docs
+Score
+Ins Doc 1 Doc 2 Doc 3
+0 1
+d11 d12d31d32 q1 q2 Reader LLM
+Answer
+Medium
+Confidence
+threshold  p
+0.5
+Segments
+Rerank Compress
+Retained Docs = {Doc 3, Doc 1}
+Stage 1: Attention Computation Stage 2: Top-P Compression
+Figure 1: Illustration of the AttnComp Framework. AttnComp consists of two stages: Stage 1 involves attention
+computation, where attention weights are calculated from the query (q) to the context composed of the instruction
+(Ins) and documents (d); Stage 2 applies a Top-P compression algorithm to select the most relevant documents and
+generate a confidence score for the RAG response. Three cases are illustrated: (1) Documents 1 and 3 are relevant
+and retained; (2) Only Document 2 is relevant and retained; (3) All documents are irrelevant and filtered out.
+To bridge this gap, we introduce AttnComp
+(Attention-guided Context Compression), an adap-
+tive, efficient and context-aware extractive com-
+pression method that leverages the inherent atten-
+tion mechanisms of LLMs. As illustrated in Fig-
+ure 1, the AttnComp pipeline consists of two stages:
+(1) Attention Computation. Given a prompt that
+combines the instruction, retrieved documents and
+query, we compute attention weights from mid-
+dle layers of the LLM to quantify the relevance of
+each text segment to the query. (see Sec. 4.1 for
+details). (2) Top-P Compression. We aggregate
+the attention weights to compute scores for the in-
+struction and each document. Documents are then
+ranked by score, and the top ones are retained until
+their cumulative score, combined with that of the
+instruction, reaches a predefined threshold. Com-
+pared to fixed-length compression, this approach
+adjusts the retained content based on attention dis-
+tribution, allowing for flexible selection ranging
+from no documents to all documents (see Sec. 4.2
+for details).
+We observe that while the attention mechanisms
+in LLMs inherently capture relevance, they can still
+assign high attention to irrelevant content. This is
+particularly evident when all retrieved documents
+are irrelevant, as the model fails to shift attention
+away from the documents, with some irrelevant
+ones consistently receiving high attention. To ad-
+dress this, we fine-tune the cross-attention layer
+of the model to direct attention to relevant docu-
+ments when present, or to the instruction when all
+documents are irrelevant (see Sec. 4.3 for details).
+Experimental results on multiple QA datasets
+highlight the superior performance of AttnComp.
+It achieves a 1.9 point accuracy improvement over
+the uncompressed baseline, while other compres-
+sion methods incur at least a 3 point decrease. This
+advantage is even more pronounced in multi-hop
+question answering, which requires integrating in-
+formation from multiple documents and thus places
+higher demands on context-aware compression ca-
+pabilities. Here, our method yields at least a 5.4
+point improvement over other sentence-level com-
+pression methods. Beyond accuracy, AttnComp
+achieves a 17x compression rate, outperforming
+all other evaluated extractive methods, and signif-
+icantly reduces the RAG system’s end-to-end la-
+tency to 49% of the uncompressed baseline.
+Beyond its primary role in compression, At-
+tnComp also offers a valuable capability for es-
+timating the confidence of RAG responses by lever-
+aging the attention assigned to the instruction (see
+Sec. 4.4 for details). After training, the attention al-
+located to the instruction correlates with the quality
+of retrieved documents, serving as an indicator of
+answer reliability. Experiments show a strong posi-
+tive correlation between the confidence score and
+8457

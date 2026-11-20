@@ -1,0 +1,138 @@
+- The document containing this answer is dated {doc_date}. Any
+dates or time periods in the wrong answer MUST be
+compatible with the document date (i.e., the document
+should not claim knowledge of events that occur after its
+timestamp).
+,→
+,→
+,→
+,→
+- Keep the same format/type as the original
+- Make it plausible but clearly different
+Return JSON:
+{"wrong_answer": "The wrong answer", "reason": "Brief
+explanation of what was changed"},→
+Historical-answer generation for temporal docu-
+ments This prompt produces the historical value
+inserted into a temporal document. The document
+date is sampled first and passed to the LLM, ensur-
+ing that the generated value is coherent with the
+document’s timestamp.
+You are writing a fact for a document dated {doc_date}.
+The document will present this fact as its CURRENT finding --
+not as,→
+a historical reference.
+CURRENT (most recent) answer: {fact.answer}
+QUESTION: {fact.question}
+The document that will contain this answer is dated {doc_date}.
+Generate a value that would have been accurate and considered
+current as of that date.
+STRICT RULES:
+- The time period in your answer MUST differ from the time
+period,→
+in the current answer.
+e.g., if current says "Q2 2024", your answer must say "Q1
+2023" or,→
+"Q4 2022", NOT "Q2 2024".
+- Change the numeric value OR the referenced date/period --
+both if,→
+possible.
+- Do NOT use the phrase "as of [same date as current answer]".
+- The value can be higher or lower than current -- both
+directions,→
+are valid.
+Return JSON:
+{"temporal_answer": "The value as it stood on {doc_date}",
+"reason": "Brief note on what period this covers"}
+Additional context for misinformation docu-
+ments For misinformation documents, we ap-
+pend a format-specific uncertainty context to the
+document-generation prompt. This context encour-
+ages the generated document to express the incor-
+rect claim with subtle unreliability markers rather
+than obvious disclaimers. Two phrases are sam-
+pled uniformly without replacement from the pool
+corresponding to the document format, shown in
+Table 3.
+Document date: {formatted_date}. This contains INCORRECT
+information,→
+with subtle uncertainty markers. {phrase_1} {phrase_2} Keep
+uncertainty natural and subtle, not obvious.
+Additional context for temporal documents
+For temporal documents, we append a format-
+specific context block that makes the document
+read as authoritative at the time of writing. The
+document date is the only staleness signal. Two
+phrases are sampled uniformly from the format-
+specific pool in Table 4.
+Document date: {formatted_date}. Write this as the current
+state of,→
+affairs as of the document date above -- the author believes
+this,→
+information is accurate right now. Do NOT reference it as
+historical,,→
+archived, or outdated. Do NOT use phrases like 'back in',
+'previously', or 'as of [earlier date]'. The date field is the
+only,→
+staleness signal; the content must read as authoritative for
+its,→
+time. {phrase_1} {phrase_2}
+Format-specific document generators After the
+wrong-answer or temporal-answer prompt pro-
+duces a perturbed answer, we call a format-specific
+generator to produce the final document. The de-
+fault word_limit values are 300 for email, 300
+for chat, and 500 for Markdown. JSONL outputs
+are parsed line by line. Markdown outputs are
+stripped of surrounding Markdown code fences
+when present.
+Topic Variable Prompt:
+Topic: {category}
+Insight: {question} {answer}
+Question: {question}
+Answer: {answer}
+Context: {additional_context}
+Email Generator Prompt:
+You are an email expert who creates professional emails with
+proper,→
+structure and formatting.
+Create a JSONL file that contains a series of email messages in
+the,→
+mailboxes of persona: {persona.first_name} {persona.last_name},
+role: {persona.role}, department: {persona.department},
+responsibilities: {persona.responsibilities}.
+The emails need to cover the following information:
+{topic}
+The emails should:
+1. Be realistic email conversations that mention the answer
+naturally to the question,→
+2. Follow this exact format for each email:
+{
+"type": "email",
+"id": "email_001",
+"from": "sender@company.com",
+"from_name": "Sender Name",
+"to": ["recipient@company.com"],
+"cc": [],
+"subject": "Email Subject",
+"date": "{formatted_date}T09:00:00-05:00"
+"body": "Email body content...",
+"folder": "inbox",
+"read": false,
+"attachments": []
+}
+3. Have the persona as the sender or one of the recipients
+4. Be approximately {word_limit} words in total across all
+emails,→
+5. Use realistic names, email addresses, and subjects based on
+the topic,→
+6. Use sequential email IDs
+7. Use realistic recent dates
+8. Use folders from: inbox, sent, drafts, spam, trash
+9. Mark some emails as read and some as unread
+Consider generating:
+- Emails between team members discussing the topic
+- Emails from management asking for specific information
+- Internal announcements or updates
+Wrap the email content in a JSONL code block.
+13

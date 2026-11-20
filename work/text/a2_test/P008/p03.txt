@@ -1,0 +1,98 @@
+2 Proposed Insights: Challenges in HQA
+What new challenges in HQA over SKB remain
+unsolved by existing methods? In this section, we
+first define the problem HQA, and then conduct
+experiments to uncover two critical insights, laying
+the foundation for designing our method for HQA.
+2.1 Problem Definition
+A semi-structured knowledge base (SKB) consists
+of a KG G = (E, R), where E and R represent
+the sets of entities and relations. It also includes
+a set of text documents D = ⋃ i∈E Di, where Di
+is the document associated with entity i. Entity
+and relation types are denoted by TE and TR, re-
+spectively. Each hybrid question q in SKB involves
+semi-structured information, namely, textual and
+relational information. We define hybrid question
+answering (HQA) as follows:
+• Given a SKB consisting of G = (E, R) and
+D, and a hybrid question q.
+• Retrieve a set of documents X ⊆ E, where
+each document satisfies the requirements spec-
+ified by the relational and textual aspects of q.
+2.2 C1: Hybrid-Sourcing Question
+To investigate if it is necessary to leverage both
+textual and relational information to answer hybrid
+questions, we conduct an experiment to show that
+text documents and KG contain useful but non-
+overlapping information. As a retriever that uses
+only textual information, vector similarity search
+(VSS) (Karpukhin et al., 2020) performs retrieval
+and ranking by comparing the question and docu-
+ments in the embedding space (“ada-002”); as a re-
+triever that uses only relational information, Person-
+alized PageRank (PPR) (Andersen et al., 2006) per-
+forms random walks from the topic entities identi-
+fied by an LLM (Claude 3 Sonnet) and ranks neigh-
+boring entities based on their connectivity in KG.
+In Table 2, the text and the graph retrievers
+have competitive performance. Interestingly, if
+an optimal routing always picks the retriever that
+gives the correct result, the performance is signifi-
+cantly higher, indicating little overlap between the
+strengths of the text and graph retrievers. This high-
+lights the importance of a solution to leverage both
+textual and relational information simultaneously
+by synergizing these two retrievers. In Fig. 1(c), we
+show a hybrid question that requires both textual
+and relational information to be answered. Based
+on this observation, we uncover the first challenge:
+Table 2: Textual and relational information are both
+useful to answer hybrid question in STARK-MAG.
+Method Hit@1 Hit@5
+Text Retriever: VSS 0.2908 0.4961
+Graph Retriever: PPR 0.2533 0.5523
+Optimal Routing 0.4522 0.7463
+Table 3: LLMs frequently extracts a subgraph from KG
+in SKB without target entities in STARK-MAG.
+# of Iterations Feedback Type Hit Rate
+1 N/A 0.6769
+2 Simple 0.7914
+2 Corrective 0.9231
+Challenge 1 (Hybrid-Sourcing Question). In HQA,
+there are questions that require both textual and
+relational information to be answered.
+2.3 C2: Refinement-Required Question
+The success of KBQA often relies on the assump-
+tion that the target entities are within an extracted
+subgraph from KG (Lan et al., 2022). Similarly,
+answering a question in HQA requires extracting
+a subgraph from KG in SKB. As hybrid questions
+involve both textual and relational aspects, they
+can be challenging for an LLM to comprehend.
+To study this, we test if an LLM can extract a sub-
+graph from KG that contains the target entities (hit).
+More specifically, an LLM (Claude 3 Sonnet) is
+prompted to identify the relational aspect in the
+question, i.e. topic entities and useful relations used
+to extract the subgraph. An oracle is used to instruct
+LLM to perform an extra iteration with feedback if
+the target entities are not included in the subgraph.
+In Table 3, if the result is incorrect, simply
+prompting LLM to redo the extraction gives a much
+better hit ratio. Moreover, if the LLM receives
+feedback that points out the erroneous part of the
+extraction (e.g., extracted topic entity is wrong), it
+significantly improves the result. This is because in
+hybrid questions that contain both textual and rela-
+tional aspects, LLM can falsely identify the textual
+aspect as the relational one. In Fig. 1 (c), there is an
+error in retrieving the correct reference from LLM,
+as it confuses the textual aspect as an entity of type
+“field of study” on the first attempt. Based on this
+observation, we uncover the second challenge:
+Challenge 2 (Refinement-Required Question). In
+HQA, LLM struggles to distinguish between the
+textual and relational aspects of the question on
+the first attempt, necessitating further refinements.
+881

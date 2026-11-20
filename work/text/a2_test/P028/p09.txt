@@ -1,0 +1,44 @@
+Author name / Procedia Computer Science 00 (2019) 000–000  9 
+accuracy of the recall@3 results, as they were higher than those observed in the initial experiment. The reasons for 
+this discrepancy are not immediately clear.  These initial results seem to indicate that the E5 models as well as the 
+BGE model, are quite resilient to dialect shifts, especially with higher values of k.  
+  Having said that, the authors acknowledge that this experiment was conducted on a very small dataset and used 
+only one dialect. In the future, we aim to explore this area further using larger datasets and a wider variety of dialects. 
+4.1.3. Experiment 3: Investigating the impact of using a disambiguating questions on retrieval results  
+As mentioned in Section 3.1.2 and shown in Table 1, some questions in the ARCD dataset can only be understood 
+in the context of the preceding question. Section 3.1.2 also detailed how these questions were automatically 
+disambiguated using GPT-3.5 Turbo and subsequently reviewed manually, with both versions being retained. This 
+section presents the results of repeating the experiment described in Section 4.1.1, with both versions of the 
+disambiguated questions. The purpose of this step was to evaluate the performance of the embedding models 
+independently of the ambiguity issue. The outcomes are displayed in Tables 6 and 7, respectively. Values that went 
+down or did not change are marked. All other values went up.  
+Table 6. Recall @K (k=1, k=3, and k=5) and MRR for the ARCD Dataset with GPT-3.5 auto disambiguation  
+Embeddings Name  k=1 k=3  k=5 MRR 
+E5-Large 0.684 ↓ 0.913 0.942 0.796 
+BGE 0.624  ↓ 0.885 0.922 0.752 
+E5-Small 0.632 ↔ 0.875 0.915 0.752 
+OpenAI  0.522 0.767 0.818 0.644 
+AraVec (Wikipedia – SG) 0.367 0.575 0.655 0.479 
+AraBert 0.343 0.556 0.626 0.454 
+AraVec (Wikipedia – CBOW) 0.249 0.407 0.484 0.336 
+ 
+Table 7. Recall @K (k=1, k=3, and k=5) and MRR for the ARCD Dataset with manually edited disambiguation  
+Embeddings Name  k=1 k=3  k=5 MRR 
+E5-Large 0.719 0.938 0.963 0.826 
+E5-Small 0.665 0.903 0.934 0.781 
+BGE 0.644 0.91 0.943 0.774 
+OpenAI  0.544 0.777 0.831 0.662 
+AraVec (Wikipedia – SG) 0.389 0.597 0.664 0.499 
+AraBert 0.348 0.562 0.632 0.459 
+AraVec (Wikipedia – CBOW) 0.255 0.414 0.493 0.344 
+ 
+As can be seen from the results, most models perform better after question disambiguation, even with the crude 
+automatic version presented. The presented results also show the E5 models and the BGE model as top performers, 
+with recall@5 results in the nineties.  
+4.2. Generator related experiments  
+To conclude the exploration of Retrieval-Augmented Generation (RAG) application in Arabic, the final phase was 
+to evaluate various Large Language Models (LLMs) as generators thus completing the pipeline. Since the E5-Large 
+model consistently outperformed all other models on the two used datasets, it was the one used for query and document 
+embedding in the retrieval stage. After the retrieval step was completed, the top 5 returned documents were given to 
+the generators listed in section 3.4 along with the question for which an answer is desired. For the Ar_EduText dataset, 
+experiments were carried out using GPT3.5 Turbo, JAIS 7B quantized, LLama3, Mistral, and Mixtral, while for the

@@ -1,0 +1,68 @@
+(MDR) to increase knowledge; and multi-agent collaborative planning (MCP) to provide solutions. This method
+demonstrates how multi-agent collaborations can enhance LLM performance for 6G tasks, validated through a case
+study on semantic communication [12].
+Furthermore, the Extended Coevolutionary (EC) Theory combines coevolutionary dynamics, adaptive learning, and
+LLM-based strategy suggestions to overcome the shortcomings of conventional game theory in modeling dynamic
+Multi-Agent Systems (MASs). Unlike static models, this paradigm accounts for diverse interactions, including social
+relationships, financial transfers, and information exchange. Simulations validate the EC framework’s capacity to
+promote social welfare, strengthen resilience against shocks, and encourage cooperation in MASs. This method
+addresses existing issues in MASs and opens the door for further research in adaptive learning and strategic decision-
+making [13].
+The potential of MASs to optimize complex tasks through cooperation is also discussed, emphasizing privacy protection
+and cooperative optimization, including distributed and federated approaches. The survey covers cooperative and
+non-cooperative games, analyzing individual cost reduction in non-cooperative settings and global cost minimization in
+cooperative ones. Future research prospects in cooperative optimization and game theory applications are highlighted
+[14].
+3.3 Literature Gap Discussion
+RAG systems have advanced significantly, but there are still issues with single-agent and multi-agent techniques
+requiring further research. Table 2 outlines key gaps in the current literature.
+Aspect Single-Agent RAG Multi-Agent RAG
+Token Efficiency Improved by frameworks like Speculative
+RAG but limited by response generation
+length and context capacity.
+Decentralization helps reduce token usage,
+but coordination across agents can increase
+token overhead.
+Contextual Handling Strong in evidence-based reasoning but
+struggles with dynamic context changes and
+context maintenance.
+Benefits from specialized agents managing
+different database types, but integration of
+diverse agents and data sources remains
+complex.
+Scalability Effective for focused, smaller tasks but not
+well-suited for large-scale database integra-
+tion.
+Enhanced by distributing tasks, but manag-
+ing complex interactions and synchroniza-
+tion between agents is challenging.
+Knowledge Access Leverages pre-trained and non-parametric
+memory for improved accuracy but has lim-
+itations in real-time knowledge updating.
+Multi-agent collaboration helps with knowl-
+edge expansion and validation, yet adapting
+agents to new or changing data types is an
+open issue.
+Diversity in Data Sources Primarily uses indexed data like Wikipedia
+and suffers when addressing varied, hetero-
+geneous databases.
+Can include different database types but
+maintaining coherence and uniformity
+across data sources is difficult.
+Coordination and Communication Typically involves a single-agent model,
+limiting interaction complexity.
+Multi-agent approaches offer improved han-
+dling but require intricate communication
+strategies, leading to potential inefficien-
+cies.
+Application Versatility Effective for specific, narrow tasks but less
+versatile for complex or varied applications.
+Versatile across different database environ-
+ments, but adapting multi-agent interactions
+for consistent performance across domains
+needs more research.
+Table 2: Literature Gap Analysis
+3.4 Contribution
+Our work introduces a novel way to improve the accuracy, scalability, and efficiency of database interactions using
+a multi-agent system for retrieval-augmented generation. By addressing common challenges like token limitations,
+7

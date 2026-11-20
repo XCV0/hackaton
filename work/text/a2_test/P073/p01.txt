@@ -1,0 +1,93 @@
+Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics
+Volume 1: Long Papers, pages 3055–3073
+March 24-29, 2026 ©2026 Association for Computational Linguistics
+Decoding the Market’s Pulse: Context-Enriched Agentic Retrieval
+Augmented Generation for Predicting Post-Earnings Price Shocks
+Chenhui Li
+Millennium Management LLC
+Chenhui.Li2@mlp.com
+Weihai Lu*
+Peking University
+luweihai@pku.edu.cn
+Abstract
+Accurately forecasting large stock price move-
+ments after corporate earnings announcements
+is a longstanding challenge. Existing methods–
+sentiment lexicons, fine-tuned encoders, and
+standalone LLMs–often lack temporal-causal
+reasoning and are prone to narrative bias,
+echoing overly optimistic managerial tone. We
+introduce Context-Enriched Agentic RAG
+(CARAG), a retrieval-augmented framework
+that deploys a team of cooperative LLM agents,
+each specializing in a distinct analytical task:
+evaluating historical performance, assessing
+the credibility of guidance, or benchmarking
+against peers. Agents retrieve structured ev-
+idence from a Causal-Temporal Knowledge
+Graph (CTKG) built from financial statements
+and earnings calls, enabling grounded, context-
+rich reasoning. This design mitigates LLM hal-
+lucinations and produces more objective pre-
+dictions. Without task-specific training, our
+system achieves state-of-the-art zero-shot per-
+formance across NASDAQ, NYSE, and MAEC
+datasets, outperforming both larger LLMs and
+fine-tuned models in macro-F1, MCC, and
+Sharpe, beating market benchmarks (S&P 500
+and Nasdaq) for the same forecasting horizon.
+The complete code, datasets and prompts are
+available at https://github.com/luweihai/
+CARAG.
+1 Introduction
+Corporate earnings calls release a deluge of infor-
+mation that profoundly influences financial markets
+(Price et al., 2012). These events, featuring man-
+agement’s results and guidance, trigger significant
+single-day stock price movements. The rich, un-
+structured data in these calls–including remarks,
+Q&A, and forward-looking statements–presents a
+formidable predictive modeling challenge (Chen
+et al., 2022; Wu et al., 2023).
+* Corresponding author.
+With the remarkable success of deep learning in
+various other tasks (Lu et al., 2025; Xie et al., 2026,
+2025a; Lu and Yin, 2025; Cui et al., 2025), an in-
+creasing body of research has integrated deep learn-
+ing architectures into the domain of stock price pre-
+diction based on earnings calls. As Transformer
+models (Zhu et al., 2026) and pre-training tech-
+niques achieve significant breakthroughs across di-
+verse fields (Tong et al., 2025; Zhang et al., 2025),
+existing methods in forecasting these price shocks
+have evolved from lexicon-based sentiment anal-
+ysis (Loughran and McDonald, 2011) to domain-
+specific transformer models like FinBERT (Araci,
+2019), and hierarchical transformers (Koval et al.,
+2023). Recent literature shows that graph-based
+encoders (Medya et al., 2022; Liu et al., 2024) ex-
+cel in mapping hidden relationships between stocks
+networks. While these models improved contextual
+understanding, they cannot perform sequential log-
+ical deduction or fuse insights from heterogeneous
+sources. More recent approaches using Large Lan-
+guage Models (LLMs) have shown promise to syn-
+thesize information from disparate document types
+(Chang et al., 2023; Ni et al., 2024). However,
+when processing an earnings call transcript in isola-
+tion, existing methods, including standalone LLMs,
+face two fundamental challenges:
+• Deficiencies in Temporal and Causal Rea-
+soning. Standalone models are unable to
+place new information in its proper historical
+context. For instance, they cannot contextual-
+ize a firm’s reported 16% sales growth against
+its 55% growth in prior quarters, as was the
+case for Five Below in Q4 2021. Furthermore,
+they lack the capacity to independently ver-
+ify management’s claimed drivers for perfor-
+mance, often accepting narratives that are in-
+tentionally managed to influence perception
+(Li, 2010). This absence of structured rea-
+soning (Cao et al., 2023), renders the model
+3055

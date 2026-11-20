@@ -1,0 +1,57 @@
+/ODPD%LQVWUXFW 4ZHQ%LQVWUXFW
+Figure 11: Results for the impact of datatype noise on the Llama3-8B-instruct and Qwen2-7B-instruct models when
+exposed to five typical noise categories across four datasets, including both single-hop (S) and multi-hop (explicit:
+EM, implicit: IM) reasoning tasks. The bar charts show performance differences upon introducing datatype noise.
+The line graphs illustrate the average accuracy improvement across noise types per dataset.
+Figure 12: The experimental results of noise robustness
+measured by accuracy (%), under different orthographic
+noise ratios. Performance is benchmarked across state-
+of-the-art open-source models, such as Llama3-8B-
+instruct, for noise ratios ranging from 0 to 0.8. The
+maximum and minimum accuracy for all models at each
+noise ratio is annotated, with a shaded region represent-
+ing ±0.5% threshold to illustrate the overall trend in
+model performance better as the noise ratio increases.
+(i.e., Golden only), harmful noise (i.e., Golden &
+counterfactual noise, Golden & supportive noise),
+and beneficial noise (i.e., Golden & illegal sentence
+noise, Golden & Semantic noise). Figure 11 shows
+the model’s accuracy gains after introducing DN
+in these scenarios. We find that DN generally en-
+hances performance across all datasets, particularly
+when combined with harmful noise like counter-
+factual noise, with average accuracy improvements
+exceeding 10 percentage points. This consistent en-
+hancement underscores beneficial noise’s potential
+significance for future RAG research.
+C.5 Noise Robustness of RAG Models under
+Different Noise Ratios
+We provide the results of four representative LLMs
+under different orthographic noise ratios. Specifi-
+cally, for insert, delete, and substitute actions, the
+noise ratio ranges from 0.0 to 0.9, while for swap-
+ping, it ranges from 0.0 to a maximum of 0.5. As
+shown in Figure 12, the maximum and minimum
+accuracy for all models at each noise ratio is an-
+notated, with a shaded region representing ±0.5%
+threshold to better illustrate the overall trend in
+model performance as the noise ratio increases. We
+observe that increasing noise rates pose a challenge
+for RAG in LLMs, particularly when the ratio ex-
+ceeds 0.3. Therefore, we use a default ratio of 0.3
+in our main results to objectively assess the impact
+of harmful noise.
+C.6 The effects of Beneficial Noise under
+Different Noise Ratios
+To demonstrate the positive effects at different
+harmful noise ratios, we present comprehensive
+results for illegal sentence noise disturbances with
+ratios ranging from 0 to 0.8. As shown in Ta-
+ble 10, we see that the introduction of illegal sen-
+tence noise (beneficial noise) consistently enhances
+model performance, thereby illustrating the gener-
+alization of beneficial noise.
+C.7 Additional Control Experiments
+We conducted additional control experiments by
+varying the repetition of answer-containing text
+5034

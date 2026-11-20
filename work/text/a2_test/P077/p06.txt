@@ -1,0 +1,108 @@
+extracts a smaller subgraph 𝑔∈𝐺 (e.g., via SBE methods-PPR) to
+focus on relevant components [45, 65]. Thus, this subgraph pruning
+process generally follows three key strategies: node pruning, edge
+pruning, and triple pruning.
+• Node Pruning (NP): Nodes 𝑣 ∈ 𝑔 are ranked by semantic rele-
+vance scores to query 𝑞. Top 𝑁𝑣 nodes are retained, ensuring
+connected edges are included: 𝑔(𝑞,𝑣) = {𝑣 | 𝑣 in top 𝑁𝑣 }∪{𝑒 |
+𝑒 connects 𝑔(𝑞,𝑣)}.
+• Edge Pruning (EP): Edges 𝑒 ∈𝑔 are scored, with top 𝑁𝑒 edges re-
+tained. Disconnected nodes are removed:𝑔(𝑞,𝑒 ) = {𝑒 |𝑒 in top 𝑁𝑒 }
+∪{𝑣 |𝑣 connected by 𝑔(𝑞,𝑒 )}.
+• Triple Pruning (TP): Top 𝑁𝜏 triples 𝜏 ∈ 𝑔 are selected, form-
+ing a minimal subgraph containing these triples: 𝑔(𝑞,𝜏 ) = {𝜏 |
+𝜏 in top 𝑁𝜏 }.
+Batch processing can be used for EEMs to efficiently compute rel-
+evance scores for all graph components in 𝑔, streamlining subgraph-
+extraction:
+𝑆𝐸(𝐺,𝑞,𝜖𝑞 ),𝐸𝐸𝑀𝑠 →𝑔𝑞 = 𝑔(𝑞,𝑣/𝑒/𝜏 )
+b) Large Language Models (LLMs). LLMs, such as Llama [102, 103,
+105] , Qwen [117], and GPT [7, 80], are large pre-trained language
+models known for their ability to capture nuanced semantics and
+contextual understanding due to extensive training on large-scale
+corpora. Unlike EEMs, LLMs provide flexible evaluation of graph
+components (nodes, edges, triples) through prompt-based interac-
+tions. For instance, to evaluate the node relevance to a query, LLMs
+can generate relevance scores or directly a ranked list of entities.
+Formally, this process is represented as:
+LLMs(𝑣 or 𝑒 or 𝜏,𝑞, Prompt)→ scores or ranked list
+In practice, LLM outputs often fall short of prompt requirements
+due to output length limits and inherent limitations (e.g., hallucina-
+tion [44]). Generated entity lists (from subgraph-extraction module)
+or reasoning paths (from path-retrieval module) may be sparse or
+low-quality. Mitigation approaches include: prompt tuning [76],
+fine-tuning [15] for long-context understanding, or adopting more
+capable LLMs. Moreover, we explore some general purpose strate-
+gies to address this challenge in Section 5.3.
+While fine-tuning LLMs on domain-specific knowledge improves
+performance for targeted queries, it is more resource-intensive than
+tuning embedding models or re-rankers4 and may generalize poorly
+across scenarios [61]. LLMs also have high inference costs due to
+the model size and autoregressive decoding. Hence, we recommend
+using them selectively and offer non-LLM alternatives in Section 4.2.
+Cost-efficient fine-tuning methods (e.g., LoRA [40], QLoRA [19])
+and inference optimizations (e.g., pruning [115], quantization [47],
+KV caching [49], parallel decoding [12], and semantic compres-
+sion [68]) further reduce overhead.
+⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓b).1 SAE with LLMs. The subgraph extraction process using LLMs
+mirrors that of EEMs and can be formalized as follows:
+𝑆𝐸(𝐺,𝑞,𝜖𝑞 ),𝐿𝐿𝑀𝑠,𝑃𝑟𝑜𝑚𝑝𝑡𝑠 →𝑔𝑞 = 𝑔(𝑞,𝑣/𝑒/𝜏 )
+Even on subgraph 𝑔, LLM-based semantic evaluation remains costly
+and faces token constraints, making it hard to process 𝑔 with a
+single LLM call. To mitigate this, an additional pre-filtering step is
+applied, where candidate components within 𝑔 can be ranked and
+4Details about fine-tuning for both EEMs and LLMs are in the technical report B.1.
+pruned via lightweight heuristics (e.g., random selection or EEM-
+based similarity selection) before invoking LLMs. Subsequently, the
+refined 𝑔 can be passed to LLMs for evaluation within a single call.5
+⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓b).2 Other Methods with LLMs and Limitations. In certain scenar-
+ios, LLMs fine-tuned on domain knowledge can act as agents [70, 71]
+to generate extraction rules (e.g., SPARQL queries [1, 43, 70]). For
+example, in response to a query, RoG [71] utilizes LLMs fine-tuned
+on domain-specific knowledge graphs to identify key relation-
+ships between entities, which are then used to construct SPARQL
+queries that extract relevant triples, forming the query-relevant
+subgraph. The subgraph containing these triples ultimately serves
+as the query-relevant subgraph. While LLMs offer direct subgraph-
+extraction without pruning, these approaches are limited by high
+computational costs, reliance on accurate templates, and reduced
+generalizability for diverse queries. Fine-tuning LLMs for domain-
+specific tasks further adds to the resource burden, making this ap-
+proach less scalable for subgraph-extraction on large-scale graphs.
+3.3 Design Solutions of Path-Retrieval
+The design solution of the path-retrieval module is comprised of
+structure-based retrieval (SBR in Section 3.3.1), one-way semantic-
+augmented retrieval (OSAR in Section 3.3.2), and interactive seman-
+tic augmented retrieval (ISAR in Section 3.3.3).
+3.3.1 Structure-Based Retrieval (SBR). These methods operate
+on either the original graph or extracted subgraphs, leveraging
+graph algorithms to identify reasoning paths. Starting from the
+query-relevant entities, these algorithms iteratively traverse node
+connections to generate candidate paths, utilizing techniques such
+as Breadth-First Search (BFS), Depth-First Search (DFS), Dijkstra’s
+algorithm, and their variants. The procedure is formally defined as:
+𝑃𝑅(𝐺𝑜𝑟𝑔𝑞,𝑞,𝜖𝑞 )→P𝑞 =
+⋃︂
+𝑣 (𝑞) 𝑖 ∈𝜖𝑞 P(𝑞,𝑣 (𝑞) 𝑖 )
+Here, P𝑞 represents the union of the reasoning path sets P(𝑞,𝑣 (𝑞) 𝑖 ),
+each focusing on an entity 𝑣(𝑞) 𝑖 in 𝜖𝑞 . Two primary approaches are
+applied to extract paths for each query entity: enumerated path-
+Retrieval and shortest path-Retrieval.
+a) Enumerated Path-Retrieval (EPR). EPR [65] enumerates all pos-
+sible paths from an entity 𝑣(𝑞) 𝑖 ∈𝜖𝑞 to every reachable node within
+the graph or subgraph. It captures diverse reasoning chains, pro-
+viding additional context for LLMs, although it may introduce in-
+formation that is not related to the query, potentially adding noise
+to the reasoning process of the LLMs.
+b) Shortest Path-Retrieval (SPR). SPR [36, 92, 97, 112, 121] identi-
+fies all shortest paths from an entity 𝑣(𝑞) 𝑖 ∈𝜖𝑞 to reachable nodes,
+ensuring that the extracted paths are concise and directly relevant
+to the query.
+3.3.2 One-way Semantic-Augmented Retrieval (OSAR). Sim-
+ilar to the SAE methods in the subgraph-extraction module, the
+OSAR methods leverage semantic models to evaluate and select the
+𝑁𝑝 most relevant paths from a candidate path set P∈𝐺 or 𝑔𝑞 ,6 to
+construct a refined set of reasoning paths P𝑞 that are most relevant
+5Multiple LLM calls can be used to evaluate all graph components in 𝑔, but this incurs
+substantial overhead during subgraph-extraction and is typically avoided.
+6 P is typically obtained from SBR methods, such as EPR or SPR.

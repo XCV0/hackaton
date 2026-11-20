@@ -1,0 +1,124 @@
+Yutao Zhu, Huaying Yuan, Shuting Wang, Jiongnan Liu,
+Wenhan Liu, Chenlong Deng, Zhicheng Dou, and
+Ji-Rong Wen. 2023. Large language models for infor-
+mation retrieval: A survey. CoRR, abs/2308.07107.
+A Appendix
+A.1 Feedback Training Loss
+A.1.1 DPO Loss
+Ldpo = −E(q,q′ g ,q′ b)∼Tf [log σ
+(β log Mθ(q
+′
+g|q)
+Mref(q
+′
+g|q) − β log Mθ(q
+′
+b|q)
+Mref(q
+′
+b|q) )], (5)
+where β is the temperature parameter for DPO,
+Mθ is the rewrite model to be updated, and Mref
+is the fixed model during the training phase.
+A.1.2 KTO Loss
+The KTO (Kawin et al., 2023) (Kahneman-Tversky
+Optimization) method is based on prospect the-
+ory (Tversky and Kahneman, 1992), which tells
+how human decides according to uncertain out-
+comes. The theory is proposed by the economists
+Kahneman & Tversky. Compared to DPO, the
+training based on KTO only needs the signal that
+whether a rewrite q
+′
+is good or not, formulated as
+(q, q
+′
+; ρ), ρ ∈ [good, bad]. And the Lkto is com-
+puted as follows:
+Lkto = E(q,q′ ;ρ)∼Tf [w(q
+′
+)(1 − ˆh(q, q ′ ; ρ))],
+g(q, q
+′
+; ρ) = β log Mθ(q
+′
+|q)
+Mref(q
+′
+|q) −
+Eq′ ∼Tf [βKL(Mθ||Mref)],
+h(q, q
+′
+; ρ) =
+{ σ(g(q, q ′ ; ρ)) if ρ is good
+σ(−g(q, q
+′
+; ρ)) if ρ is bad ,
+w(q
+′
+) =
+{ λgood if ρ is good
+λbad if ρ is bad . (6)
+The default values for λgood and λbad are set
+to 1. When there is an imbalance between the
+number of good and bad samples, specific values
+are determined using the following formula:
+λgoodngood
+λbadnbad
+∈ [1, 4 3 ] (7)
+A.1.3 PPO Loss
+When implementing PPO training, we indicate the
+action at at step t as generating the next token
+ˆq
+′
+t, while the current state st = (q, ˆq
+′
+<t) is com-
+posed of the original query and generated rewrite
+tokens. Here we directly use the ranking score as
+a reward, and by adding a KL-divergence regular-
+ization (Ramamurthy et al., 2023; Carpineto and
+Romano, 2012), the reward is computed as follow:
+R(st, at) = Sreranker(q
+′
+|q) − βKLKL(Mθ||Mref)
+(8)
+and then with a value network Vϕ initialized from
+Mθ, the advantages function follows GAE (Schul-
+man et al., 2016) can be formulated as:
+δt = R(st, at) + Vϕ(st + 1) − Vϕ(st),
+A(st, at) =
+∑∞
+t′ =0 λt
+′
+δt+t′
+(9)
+and the final objective function is composed of
+value loss and policy loss (Zheng et al., 2023).
+Lθ = E(st,at)∼Mθ [min( Mθ(st, at) Mref(st, at) A(st, at),
+clip( Mθ(st, at) Mref(st, at) , 1 − ϵ, 1 + ϵ)A(st, at))],
+Lϕ = E(st,at)∼Mθ (Vϕ(st) − Rt)2,
+Lppo = Lθ + Lϕ
+(10)
+A.2 Training Details
+Language Source Num
+ZH
+baike 6552
+webqa 16486
+sougouqa 9488
+squadzen 6294
+balle 9601
+coig 15080
+EN
+hotpotqa 12471
+triviaqa 28083
+nq 19445
+Table 6: Data Source of the Training Instances for Open
+Domain QA.
+A.2.1 Implementation
+All model training is completed on a single ma-
+chine with 4×A100 GPUs. And the training
+prompt for the rewrite is listed in Table 15.
+SFT We train the rewrite model with 2 epochs
+and set the learning rate to 5e-5.
+895

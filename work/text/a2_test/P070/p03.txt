@@ -1,0 +1,105 @@
+CacheGraft: Enhancing Retrieval-Augmented Generation
+via Latent-Space Document Enrichment KEIR @ CIKM 2026, November 2026, Rome, Italy
+approach is not a notable hindrance since the cache enrichment
+step happens offline and not at query time.
+4 CacheGraft: Adapting C2C for RAG
+We now describe the details of our CacheGraft system. As a matter
+of notation, we will denote a RAG prompt by 𝑥 =[𝑝, 𝑑, 𝑞] which
+is a concatenation of a fixed preamble 𝑝 (also known as a system
+prompt), a retrieved document 𝑑, and the question 𝑞. We focus our
+attention on knowledge-intensive question-answering applications
+that require a factual answer typically not found in the model’s
+own weights.
+With causal attention, both models’ pre-fusion cache entries at
+positions 𝑖≤|𝑝 𝑑| are independent of any token at position 𝑗 > 𝑖;
+the projector acts position-wise and layer-wise on those entries; and
+the fusion of [𝑝 𝑑] does not depend on 𝑞. Hence computing [𝑝, 𝑑, 𝑞]
+in one pass and computing [𝑝, 𝑑] alone yield identical KV over
+[𝑝, 𝑑]. As a consequence, for top-1 retrieval with a fixed preamble,
+the document always occupies the same position range, so no RoPE
+re-rotation [5] is needed. We leave extending our framework to
+support top-𝑘 retrieval for 𝑘 > 1 using techniques such as TurboRag
+finetuning [11] or CacheBlend [22] for future work.
+Figure 1 depicts the full CacheGraft pipeline. Offline, for each pas-
+sage, we prefill [𝑝, 𝑑] with fusion enabled and persist the receiver-
+space KV, keyed by a content hash. We also maintain an additional
+vector database index of document embeddings. Online, we iden-
+tify the most relevant document to the query based on embedding
+similarity and load that document’s fused KV cache into the base
+receiver and decode the question. Crucially, we do not need any-
+thing from the sharer or the cache projection fuser model on the
+query path.
+5 Experiments
+5.1 Experimental Setup
+We conduct all experiments on a single NVIDIA A100-40GB GPU
+and use standard greedy decoding at inference time.
+Models. In all reported experiments, we use Qwen3-0.6B [21]
+as our receiver and Qwen3-4B-Base [21] as the sharer, with the
+released C2C projector for that pair. The projector is trained on
+general chat distillation and never sees retrieval data, so every result
+is zero-shot with respect to fuser training.
+Data. We utilize five standard knowledge-intensive question
+answering benchmarks for our RAG evaluation: SQuAD v1.1 [15],
+AdversarialQA [2], CovidQA [13], QASPER [6] and TriviaQA [9].
+For search, we use bge-small [20] embeddings to perform dense top-
+1 retrieval. For evaluation, we retain one question per gold passage.
+We also run our experiments under retrieved and oracle (perfect-
+retrieval) conditions to understand the impact of search quality on
+the overall RAG performance.
+Metrics. We utilize the LLM-as-judge mechanism [23] as our
+primary evaluation metric. We evaluate all RAG outputs using
+two judges, both locally-run open-weight models scored on raw
+unmodified generations: phi-4 [1] and Gemma-2-9B [18]. We also
+report contains which measures whether the generated answer
+contains the gold ground truth answer included in the test dataset.
+We also compute statistical significance measures using the exact
+two-sided paired McNemar test over the set of evaluation questions.
+We do not rely on traditional RAG metrics such as Exact Match (EM)
+and F1 score because we observed that the generated answers from
+fused KV caches tend to be more verbose (illustrated in Table 2)
+which hurts performance on these token-centric metrics.
+5.2 Results
+As shown in Table 1, we find that delivering the passage as a pro-
+jected KV cache improves over using the receiver with raw text on
+nearly every metric across every benchmark by up to 8 percentage
+points, with the exception of QASPER, which shows similarly clear
+gains with an oracle retriever but a disagreement between the two
+judges when using top-1 embedding-based search.
+In Table 3, we observe that QASPER has the smallest gap between
+the sharer and receiver RAG quality which explains the more mixed
+results from cache fusion: there is limited headroom for the sharer
+to lift the receiver. Overall, Table 3 suggests two preconditions for
+CacheGraft to provide value on knowledge-intensive RAG tasks: the
+sharer must have headroom over the receiver, and the documents
+must supply factual signal the sharer can exploit.
+We also include select examples of CacheGraft’s successes and
+failures on the SQuAD dataset in Table 2. We observe that cache
+fusion can indeed steer the receiver model towards relevant portions
+of the passage in several cases, but also makes mistakes. We also
+note that the outputs from CacheGraft tend to be more verbose than
+both the receiver and sharer models which also limits CacheGraft’s
+total latency gains as shown in Table 4. Nevertheless, Table 4 still
+illustrates an advantage for CacheGraft in terms of GPU memory
+consumption. We posit that the increased verbosity of CacheGraft’s
+fused KV cache can be mitigated by explicitly training for retrieval
+tasks, which we highlight as another direction for future work.
+6 Limitations and Open Problems
+6.1 Limitations
+The primary practical limitation of our proposal is storage since we
+must store the KV cache for every document which can consume
+orders of magnitude more space than raw text (on the order of
+a terabyte for 100K documents, absent any optimizations). This
+problem is inherited from prior works that propose to precom-
+pute the KV caches for retrieval such as TurboRAG [11], Block
+Attention [12], and CAG [3] and can be mitigated with KV cache
+compression techniques [17] that are complementary to our work.
+Another limitation of our present study is that we focus on retriev-
+ing a single document and only consider a single C2C fuser model
+in our evaluations. Extending our system to support top-𝑘 retrieval
+and additional models is another promising direction for future
+work.
+6.2 Open Problems
+The results in this paper present a proof of concept demonstration
+of KV cache fusion to enhance RAG applications and open many
+directions for future research in this domain. Below, we highlight
+two particularly interesting directions:

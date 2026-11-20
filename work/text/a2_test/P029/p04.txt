@@ -1,0 +1,140 @@
+1 {
+2 " timestamp ": "5259" ,
+3 " stages ": [
+4 {
+5 " name ": "
+k n o w l e d g e _ b a s e _ r e t r i e v a l " ,
+6 " start_ms ": 1248 ,
+7 " end_ms ": 2374 ,
+8 " latency_ms ": 1126
+9 } ,
+10 {
+11 " name ": " reranking " ,
+12 " start_ms ": 4037 ,
+13 " end_ms ": 5185 ,
+14 " latency_ms ": 1148
+15 } ,
+16 {
+17 " name ": " generation " ,
+18 " start_ms ": 6266 ,
+19 " end_ms ": 21062 ,
+20 " latency_ms ": 14796
+21 }
+22 ] ,
+23 " total_l atency_m s ": 17070
+24 }
+Table 3: Latency breakdown by processing stage.
+week0 week1 week2 week3 week4 week5 week6
+0
+6
+12
+18
+24Hour of day
+0 6 12 18 24
+Hour of day
+0
+50Requests/hour
+0
+20
+40
+60
+80
+Requests/hour
+Figure 3: Temporal periodicity in RAGPULSE.
+during daytime and significantly reduced activity
+at night. This behavior closely matches real-world
+serving workloads (Qin et al., 2025; Wang et al.,
+2025c) and motivates time-aware scheduling and
+provisioning strategies.
+Dynamic input composition. Figure 4 analyzes
+the breakdown of input tokens by component.
+For short requests (below 5,000 tokens), system
+prompts dominate, contributing over 40% of to-
+kens. As total input length exceeds 3,000 tokens,
+retrieved passages and dialogue history grow sub-
+stantially, together accounting for nearly 50% of
+the input. This observation highlights that context-
+processing overhead in RAG systems is highly
+request-dependent rather than uniform.
+Skewed document reuse. Analysis of hash_ids
+reveals a highly skewed access pattern for retrieved
+documents. As shown in Figure 5(a), a small frac-
+  (a) Sys prompt
+0.0%
+40.0%
+80.0%
+  (b) Passage
+0.0%
+25.0%
+50.0%
+  (c) History
+0.0%
+20.0%
+40.0%
+  (d) Web search
+0.0%
+6.0%
+12.0%
+5000 10000 15000
+  (e) User input
+0.0%
+0.4%
+0.8%
+5000 10000 15000
+  (f) Other
+0.0%
+0.5%
+1.0%
+Total input length (tokens)
+Proportion of total input
+Figure 4: Input token breakdown.
+1-10 10-50 50-100 100-500 >=500
+Passage usage frequency
+0
+5
+10
+15
+20
+25
+30Passages (%)
+(a) Passage frequency distribution
+Passages Trend
+w1 w2 w3 w4 w5 w6
+Time
+0.0
+0.2
+0.4
+0.6
+0.8Overlap ratio
+(b) Temporal passage overlap
+4h bins
+daily trend
+Figure 5: Unique characteristics of RAG traces.
+tion of knowledge chunks is repeatedly accessed
+by many requests, while most chunks are rarely
+used, forming a pronounced long-tail distribution.
+This skew strongly motivates retrieval caching and
+document-aware memory management.
+High inter-request document overlap. Tempo-
+ral analysis further shows substantial overlap in
+retrieved documents among concurrently arriving
+requests. As illustrated in Figure 5(b), which is
+derived from the six-week trace, requests within
+short time windows frequently reference identical
+or highly similar knowledge chunks. This property
+creates significant opportunities for content-aware
+batching and high-reuse KV cache placement for
+frequently accessed documents (Jie et al., 2025;
+Willette et al., 2025; Yao et al., 2025b).
+4 Data Source: TWEN System
+The RAGPULSE trace dataset is sampled from
+TWEN, a university-wide Q&A RAG system that
+has served over 40,000 students and faculties since
+April 2024. This section details TWEN’s system
+architecture to provide context for how the trace
+data was collected.
+4.1 System Overview
+The core design philosophy of TWEN is the sep-
+aration of retrieval and generation. To achieve
+this, TWEN adopts a Python-based microservice
+7068

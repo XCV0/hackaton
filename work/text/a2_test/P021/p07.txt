@@ -1,0 +1,95 @@
+EQJ 1 EQJ 2 EQJ 3 Avg
+ICJ 1 49.0 61.3 54.5 54.9
+ICJ 2 65.3 76.3 70.8 70.8
+ICJ 3 60.5 81.2 72.7 71.4
+ICJ Avg 58.3 73.0 66.0 65.7
+GJ 18.2 −5.5 23.0 11.9
+Table 2: Kendall’s Tau agreement between human-
+annotated MIRAGE (ICJ[1-3]/GJ) and human-
+annotated quality judgments (EQJ[1-3]).
+et al., 2026), a multilingual text-based report-
+generation task in the text-only setting for which
+ARGUE was designed; and WIKIVIDEO (Martin
+et al., 2026a) and WIKIVIDEO-25 (Martin et al.,
+2026b), two audiovisual (video) article-generation
+tasks that require grounding claims in long-form
+video. RAGTIME and WIKIVIDEO-25 are shared
+tasks, for which we evaluate all predictions sub-
+mitted to the task (Czajka et al., 2025; Wunderle
+et al., 2025; Yeniterzi and Yeniterzi, 2025; Dietz
+et al., 2025; Conroy et al., 2025; Wang et al., 2025;
+Bhosale et al., 2026; Chakraborty et al., 2026; Yan
+et al., 2026). For WIKIVIDEO, we generate predic-
+tions with three CAG (Martin et al., 2026a) system
+variations (no videos, oracle, retrieved) across 10
+topics and collect our own human judgments.
+Collection of Human Judgments We collect
+three types of judgments from human annotators.5
+1. Extrinsic Quality Judgments (EQJs). For
+each prediction, annotators provide a holistic
+1–5 Likert score based on the following at-
+tributes: factuality, adequacy, coherence, rele-
+vancy, and fluency.
+2. Intrinsic Claim Judgments (ICJs). Anno-
+tators are given the prediction, predicted sub-
+claims, reference, and reference subclaims,
+and are asked to annotate whether or not a
+subclaim is supported by the other text. This
+directly mirrors INFOF1-Ref: the scores are
+what INFOF1 would produce if a human per-
+formed the verification instead of a model.
+3. Grounding Judgments (GJs). Annotators
+are given all relevant videos for a topic and
+the predicted subclaims and judge whether or
+not each subclaim is supported by (grounded
+in) the videos. This directly mirrors INFOP
+5See Appendix E for instructions.
+Metric Suite Info Coverage Cite Support
+ROUGE-L −16.6 45.9
+BERTScore 29.8 −11.5
+ARGUE 54.9 66.3
+MIRAGE 77.7 79.2
+Table 3: Run-level Kendall’s Tau between each metric
+suite and human judgments. For Auto-ARGUE, Infor-
+mation (Info) Coverage is Nugget Coverage and Citation
+(Cite) Support is Sentence Support. For MIRAGE, it’s
+INFOR and CITEP, respectively, both in Collection.
+and CITEP: the scores are what these metrics
+would produce with human verification.
+We collect these three sets of judgments for
+WIKIVIDEO. For RAGTIME, we instead use the
+human annotations collected by the task organizers,
+which cover two dimensions: question attestation
+(Information coverage)—whether a nugget ques-
+tion is answered (covered) by a predicted report—
+and sentence support (citation support)—whether
+a sentence is supported by the document(s) it cites.
+For WIKIVIDEO-25, we similarly use the human
+annotations collected by the task organizers, who
+provide a holistic 1–5 Likert score for each predic-
+tion, mirroring our EQJs.
+In all cases, we use Kendall’s τ (Kendall, 1938)
+to assess system-level agreement between rankings
+induced by a given automatic metric and the appro-
+priate set of human judgments.
+6.1 Human-Annotated MIRAGE
+ICJs and GJs are human-computed instances of MI-
+RAGE: they apply the same subclaim-level preci-
+sion and recall, but with human annotators perform-
+ing the verification step rather than a model. In Ta-
+ble 2, we evaluate whether these human-computed
+MIRAGE scores agree with the extrinsic quality
+judgments (EQJs), which reflect holistic human
+assessments of output quality.
+We find that when computed by humans, INFOF1
+strongly aligns with EQJs. This demonstrates that
+with human-level verification performance, MI-
+RAGE captures human quality preferences, val-
+idating the framework’s design independently of
+any particular automatic verifier. We also observe
+that grounding judgments (GJs) show no-to-low
+agreement with EQJs across annotators. This sug-
+gests that groundedness is not well captured by
+holistic quality judgments alone. This result rein-
+forces that metrics targeting quality or information
+40237

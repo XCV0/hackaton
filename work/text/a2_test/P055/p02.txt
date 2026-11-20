@@ -1,0 +1,111 @@
+KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea Yifan Jin et al.
+Conference on Knowledge Discovery and Data Mining V.2 (KDD ’26), Au-
+gust 09–13, 2026, Jeju Island, Republic of Korea. ACM, New York, NY, USA,
+11 pages. https://doi.org/10.1145/3770855.3817750
+Resource Availability:
+The source code of this paper has been made publicly available at https:
+//doi.org/10.5281/zenodo.20501234.
+1 Introduction
+Graph foundation models (GFMs) have emerged as a dominant
+paradigm for graph representation learning, enabling unified pre-
+training and transfer across diverse graph tasks such as node clas-
+sification [9, 18, 28, 43], link prediction[3, 28], and graph-level rea-
+soning [9, 18]. By leveraging pre-training on large-scale datasets,
+GFMs demonstrate impressive generalization capabilities. Despite
+these advances, the knowledge internalized by GFMs is inher-
+ently bounded by the distribution of the pre-training data[39, 42].
+When distributional shifts arise at inference time, the parameter-
+ized knowledge may fail to generalize, leading to degraded and
+unreliable inference performance[16].
+To mitigate this limitation, recent studies have explored retrieval-
+augmented generation (RAG) paradigms that allow GFMs to dy-
+namically access external knowledge at inference time without
+retraining[14, 34]. For instance, RAGRAPH [14] performs retrieval
+over a toy graph vector library and integrates the retrieved instances
+through a message-passing prompting mechanism to enrich the
+learning context. RAG4GFM [34] introduces a multi-level index-
+ing architecture together with a task-aware retriever to extract
+structurally and semantically relevant subgraphs. RAG-GFM [40]
+incorporates retrieval during pre-training to align semantic and
+structural priors. However, we argue that RAG frameworks op-
+erating in Euclidean space face an inherent geometric limitation:
+the polynomial volume growth of Euclidean space is inherently mis-
+matched with the tree-structured external knowledge bases, leading
+to the following two issues:
+1) Loss of semantic granularity. External knowledge bases
+are commonly organized as tree-structured hierarchies with expo-
+nential growth, where root nodes represent coarse-grained con-
+cepts and leaf nodes correspond to fine-grained concepts. These
+two levels of granularity provide complementary information for
+graph tasks. Specifically, for the classification of the query node
+in Figure 1(a), the coarse-grained concept “computational learning
+theory” situates the semantic context within the theoretical domain,
+serving as a global semantic anchor. In contrast, the fine-grained
+concept “PAC learning” offers local semantic nuances by specifying
+the concrete learning paradigm, thereby distinguishing the query
+from other theoretical branches. However, Euclidean representa-
+tion spaces exhibit only polynomial volume growth with respect
+to the radius, which fundamentally mismatches the exponential
+expansion of hierarchical knowledge and inevitably compresses
+concepts from different hierarchical depths into proximal regions
+of the embedding space. As a consequence, Euclidean-based RAG
+struggles to distinguish between coarse-grained and fine-grained
+concepts, collapsing rich hierarchical semantics into undifferenti-
+ated similarity signals. As illustrated in Figure 1(a), the query node
+may appear at similar Euclidean distances to both coarse-grained
+and fine-grained concepts, causing them to be treated as equally
+informative during retrieval and fusion. Such granularity-agnostic
+aggregation blurs semantic roles and weakens the reliability of
+downstream reasoning. In contrast, the intrinsic geometry of hy-
+perbolic space naturally accommodates tree-structured hierarchies,
+where coarse-grained concepts are embedded near the origin and
+fine-grained concepts reside closer to the boundary, effectively
+preserving granularity-sensitive semantic distinctions.
+2) Emergence of hubness. Owing to the limited representa-
+tional capacity induced by the polynomial volume growth of Eu-
+clidean space, a large number of entities are forced to crowd into
+a relatively small region of the embedding space. This geometric
+crowding gives rise to the hubness phenomenon [24, 37]: certain
+entities (i.e., hubs) frequently appear in the nearest neighbor sets
+of other entities. Such hubs tend to be repeatedly retrieved across
+diverse queries, leading to frequent co-occurrence across retrieval
+results and reducing retrieval diversity, as shown in Figure 1(b).
+As a consequence, Euclidean-based retrieval struggles to return
+query-specific and discriminative knowledge. In contrast, hyper-
+bolic space exhibits exponential volume growth that naturally ac-
+commodates the expansion of hierarchical knowledge, alleviating
+geometric crowding. As illustrated in Figure 1(b), the number of
+high-frequency entities in hyperbolic retrieval is significantly re-
+duced, demonstrating effective mitigation of the hubness problem.
+To address these limitations, we propose a Hyperbolic Retrieval-
+Augmented Generation (HyRAG) framework to enhance the gen-
+eralization capability of graph foundation models. Specifically, to
+model the tree-like hierarchies of the external knowledge base, we
+introduce the Hyperbolic Knowledge Indexing (HKI) module. This
+module pre-trains a hyperbolic semantic encoder via an unsuper-
+vised optimization paradigm, incorporating both the distance-based
+objective and the angular constraint to align with the geometric
+properties of hyperbolic entailment cones. To mitigate the loss of
+semantic granularity inherent in Euclidean-based retrieval, we de-
+velop a Multi-granularity Retrieval (MR) strategy, in which coarse-
+grained retrieval emphasizes diversity to capture global semantic
+anchors, whereas fine-grained retrieval focuses on capturing local
+semantic nuances. Subsequently, tailored to the unique topology
+of graph data, we propose a Dual-path Fusion (DF) mechanism to
+effectively integrate knowledge at both the feature and structural
+levels. Extensive experiments across multiple graph benchmarks
+demonstrate that our method yields significant improvements in
+the inference accuracy of GFMs in the zero-shot setting.
+In summary, our main contributions are as follows: 1) We
+identify two inherent limitations of existing Euclidean-based RAG
+paradigms, namely the loss of semantic granularity and the emer-
+gence of hubness. 2) We propose HyRAG, the first hyperbolic
+RAG framework tailored for graph foundation models, providing a
+geometry-aware redesign of the RAG pipeline encompassing knowl-
+edge indexing, retrieval, and fusion. 3) Extensive experiments on
+multiple graph benchmarks demonstrate that HyRAG consistently
+improves the zero-shot performance of GFMs.
+2 Related Work
+2.1 Retrieval Augmented Generation
+Retrieval Augmented Generation retrieves relevant evidence from
+external knowledge bases at inference time and feeds it as additional

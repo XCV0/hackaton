@@ -1,0 +1,112 @@
+Sharma, Nirmal Joshua Kapu, Tong Yu, and Shiv Ku-
+mar Saini. 2025. Cache-craft: Managing chunk-
+caches for efficient retrieval-augmented generation.
+Proceedings of the ACM on Management of Data, 3:1
+– 28.
+Amey Agrawal, Nitin Kedia, Ashish Panwar, Jayashree
+Mohan, Nipun Kwatra, Bhargav S. Gulavani, Alexey
+Tumanov, and Ramachandran Ramjee. 2024. Taming
+throughput-latency tradeoff in LLM inference with
+sarathi-serve. In 18th USENIX Symposium on Op-
+erating Systems Design and Implementation, OSDI
+2024, Santa Clara, CA, USA, July 10-12, 2024, pages
+117–134. USENIX Association.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations, ICLR 2024, Vienna, Austria, May
+7-11, 2024. OpenReview.net.
+Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang,
+Xiaodong Deng, Yang Fan, Wenbin Ge, Yu Han, Fei
+Huang, Binyuan Hui, Luo Ji, Mei Li, Junyang Lin,
+Runji Lin, Dayiheng Liu, Gao Liu, Chengqiang Lu,
+Keming Lu, and 29 others. 2023. Qwen technical
+report. arXiv preprint arXiv:2309.16609.
+Christian Bromann Brace Sproul. 2024. Langchain.
+https://python.langchain.com/docs/
+introduction/.
+Yihua Cheng, Kuntai Du, Jiayi Yao, and Junchen Jiang.
+2024. Do large language models need a content
+delivery network? arXiv preprint arXiv:2409.13761.
+Lotte Verheyden Clemo. 2024. Langchain. https:
+//github.com/langfuse/langfuse/.
+Oluwaseyi Feyisetan and Shiva Kasiviswanathan. 2021.
+Private release of text embedding vectors. In Pro-
+ceedings of the First Workshop on Trustworthy Natu-
+ral Language Processing, pages 15–27, Online. As-
+sociation for Computational Linguistics.
+Bernal Jimenez Gutiérrez, Yiheng Shu, Yijia Gu, Michi-
+hiro Yasunaga, and Yu Su. 2024. Hipporag: Neu-
+robiologically inspired long-term memory for large
+language models. In NeurIPS.
+Xianglin He, Yixuan Tian, Yizhou Sun, Nitesh V
+Chawla, Thomas Laurent, Yann LeCun, Xavier Bres-
+son, and Bryan Hooi. 2024. G-rag: Graph retrieval-
+augmented generation for textual graph understand-
+ing and question answering. In NeurIPS.
+Jennifer Hsia, Afreen Shaikh, Zora Zhiruo Wang, and
+Graham Neubig. 2025. RAGGED: Towards in-
+formed design of scalable and stable RAG systems.
+In Forty-second International Conference on Ma-
+chine Learning.
+Junhao Hu, Wenrui Huang, Weidong Wang, Haoy-
+ing Wang, Tiancheng Hu, Qin Zhang, Hao Feng,
+Xusheng Chen, Yizhou Shan, and Tao Xie. 2024.
+Epic: Efficient position-independent caching for serv-
+ing large language models. In International Confer-
+ence on Machine Learning.
+Wei Huang, Haotong Qin, Yangdong Liu, Yawei Li,
+Qinshuo Liu, Xianglong Liu, Luca Benini, Michele
+Magno, Shiming Zhang, and XIAOJUAN QI. 2025.
+Slim-LLM: Salience-driven mixed-precision quanti-
+zation for large language models. In Forty-second
+International Conference on Machine Learning.
+Infgrad. 2024. stella-base-zh-v3-1792d.
+https://huggingface.co/infgrad/stella-
+base-zh-v3-1792d/.
+Shibo Jie, Yehui Tang, Kai Han, Zhi-Hong Deng, and
+Jing Han. 2025. Specache: Speculative key-value
+caching for efficient generation of LLMs. In Forty-
+second International Conference on Machine Learn-
+ing.
+Bowen Jin, Jinsung Yoon, Jiawei Han, and Sercan O
+Arik. 2025. Long-context LLMs meet RAG: Over-
+coming challenges for long inputs in RAG. In The
+Thirteenth International Conference on Learning
+Representations.
+Chao Jin, Zili Zhang, Xuanlin Jiang, Fangyue Liu, Xin
+Liu, Xuanzhe Liu, and Xin Jin. 2024. Ragcache:
+Efficient knowledge caching for retrieval-augmented
+generation. arXiv preprint arXiv:2404.12457.
+Hailey Joren, Jianyi Zhang, Chun-Sung Ferng, Da-
+Cheng Juan, Ankur Taly, and Cyrus Rashtchian. 2025.
+Sufficient context: A new lens on retrieval augmented
+generation systems. In The Thirteenth International
+Conference on Learning Representations.
+Yannis Katsis, Sara Rosenthal, Kshitij Fadnis, Chu-
+laka Gunasekara, Young-Suk Lee, Lucian Popa,
+Vraj Shah, Huaiyu Zhu, Danish Contractor, and
+Marina Danilevsky. 2025. Mtrag: A multi-turn
+conversational benchmark for evaluating retrieval-
+augmented generation systems. arXiv preprint
+arXiv:2501.03468.
+Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying
+Sheng, Lianmin Zheng, Cody Hao Yu, Joseph E.
+Gonzalez, Hao Zhang, and Ion Stoica. 2023. Effi-
+cient memory management for large language model
+serving with pagedattention. In Proceedings of the
+ACM SIGOPS 29th Symposium on Operating Systems
+Principles.
+Matthias A. Lee. 2025. pytesseract. https://github.
+com/madmaze/pytesseract/.
+Yuhan Liu, Hanchen Li, Yihua Cheng, Siddhant Ray,
+Yuyang Huang, Qizheng Zhang, Kuntai Du, Jiayi
+Yao, Shan Lu, Ganesh Ananthanarayanan, Michael
+Maire, Henry Hoffmann, Ari Holtzman, and Junchen
+Jiang. 2024. Cachegen: KV cache compression and
+streaming for fast large language model serving. In
+Proceedings of the ACM SIGCOMM 2024 Confer-
+ence, ACM SIGCOMM 2024, Sydney, NSW, Australia,
+August 4-8, 2024, pages 38–56. ACM.
+7074

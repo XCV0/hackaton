@@ -1,0 +1,45 @@
+MedRAG: Enhancing Retrieval-augmented Generation with
+Knowledge Graph-Elicited Reasoning for Healthcare Copilot
+Variable Definition
+C The clustering model
+𝑑𝑟 Retrieved relevant documents
+𝐷 Electronic Health Record (EHR) database
+𝐸𝐿1 The set of broad disease categories
+𝐸𝐿2 The set of disease subcategories
+𝑒𝐿2𝑠 The matched subcategory
+𝐸𝐿3 The set of specific disease names
+𝐸𝐿3𝑟 𝑎𝑤 the set of original disease descriptions in 𝐷
+𝐸𝐿3𝑠 The set of disease nodes connected with 𝐸𝐿2𝑠
+𝐸𝐿4 The set of disease-specific features
+𝐸𝐿4𝑠 The set of features nodes connected with node in 𝐸𝐿3𝑠
+𝐸del 𝐿4𝑑𝑠 Deleted features in proactive diagnostic questioning
+𝐸𝐿4𝑎 Disease-specific features augmented by the LLM
+𝐸𝐿4𝑑 Features decomposed from the EHR database
+𝑒𝐿2𝑖𝑘 The closest disease subcategory node
+𝑒𝐿𝑖𝑗 A disease or category name in the graph where 𝑒𝐿𝑖𝑗 ∈𝐸𝐿𝑖
+𝑓𝑖 A specific feature of the patient’s manifestation
+𝐾 The set of diagnostic differences KG identified in the knowledge graph
+𝑝𝑎 Prompt used by M𝑎 for disease manifestation augmentation
+𝑝𝑛𝑎𝑖𝑣𝑒 Simple prompt used by M𝑔
+𝑝𝑠 Prompt designed for reasoning and generating diagnostic reports
+𝑃 The shortest path function
+𝑞 A input patient’s manifestations
+𝑟 𝐸𝐿4𝑠 removing proportion in proactive diagnostic questioning mechanism
+𝑟𝑚 Relation type "has_manifestation_of" between diseases and their manifestations
+𝑟𝑠 Relation type "is_a" for hierarchical relationships
+𝑠𝑖𝑚 The similarity score between patient features and nodes in the knowledge graph
+𝑇 Set of relevant matching nodes in the knowledge graph
+𝑡 Similarity score threshold in proactive diagnostic questioning mechanism
+𝜒 The voting indicator function
+𝛿 The matching filtering indicator function
+E Embedding model used to compute similarity between features
+G The four-tier hierarchical diagnostic knowledge graph
+G𝐷 The four-tier disease knowledge graph
+M𝑎 LLM used for disease manifestation augmentation
+M𝑔 LLM used for generating diagnostic reports
+Mℎ LLM used for topic aggregation
+S The similarity model
+𝜙 The decomposition function for 𝑞
+𝜎(𝑒𝐿4𝑑𝑖 ) Discriminability score of a feature in the knowledge graph
+Θ The hierarchical aggregation operator
+Table A3: List of variables and their definitions

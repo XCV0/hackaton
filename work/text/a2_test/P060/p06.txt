@@ -1,0 +1,98 @@
+44
+statement is chosen from either the list of factual,
+summary, or conclusion statements, and a question
+is generated that is unambiguously answered by it.
+The theme is once again used to aid with contex-
+tualizing information. We used Llama-3-70b for
+generation. See Appendix F for a discussion on
+different statement strategies and Appendix G for
+the relevant prompts.
+6.1 Model Fine Tuning
+The Q&A generation strategies previously outlined
+rely on querying large, state-of-the-art LLMs mul-
+tiple times. Most methods also include critique
+steps, in which the quality of the generated dataset
+is judged, and bad examples are filtered out. This
+pipeline is costly and can be significantly ineffi-
+cient if the generated Q&As are not of good quality.
+This cost can hinder the performance assessment of
+RAG systems, particularly for developers with lim-
+ited access to these large LLMs. To avoid this, we
+investigate the fine-tuning of small LLMs to gener-
+ate good quality, diverse Q&A pairs. To limit con-
+sumption at both evaluation and training time, we
+chose to fine-tune Flan-T5-large (Chung et al.,
+2022) with LoRA (Hu et al., 2021). Details on the
+fine-tuning strategy can be found in Appendix H.
+Six evaluation trainings were performed by hold-
+ing out entries from one specific public dataset at
+a time. After the models were fine tuned, we gen-
+erated Q&As using each held-out public dataset
+contexts. With this method, we are able to include
+the impact of generalizability in the model perfor-
+mance by assessing each evaluation training in an
+independent dataset. The generation step averaged
+at 15 minutes for generating 2000 Q&As with a
+batch size of 64 running on an Apple M1 Max chip.
+6.2 Synthetic Datasets Quality Comparisons
+We compare the quality of generated Q&As
+datasets in the three described setups: with the sim-
+ple prompt described in the Hugging Face Cook-
+book, with the statement extraction method, and
+with the fine-tuned model. For the first two cases,
+Llama-3-70b is used to generate the questions and
+build statements. As previously stated, 95% of the
+generated questions with simple prompt strategy
+are labelled as fact_single, therefore we consider
+this full dataset as being of that type.
+For the statement extraction method, and the
+fine-tuned model generation, we find that both are
+able to produce diverse datasets when prompted
+with non-fact_single labels, as shown in Figure 2.
+summary 4% 75% 7% 14%
+reasoning 24% 29% 38% 9%
+unanswerable fact_single reasoning summary
+fact_single 3% 87% 4% 6%
+Statement extraction labels
+Llama3 labels
+summary 17% 39% 10% 34%
+reasoning 30% 37% 21% 13%
+unanswerable fact_single reasoning summary
+fact_single 18% 70% 4% 8%
+Fine-tuned model labels
+Llama3 labels
+Figure 2: Distribution of LLama3 labels for statement
+extraction (top) and fine-tuned model (bottom) per re-
+quested label.
+Alignment between requested label at generation
+time and LLama3 labels is not observed, however,
+potentially due to two causes: first, as previously
+stated, LLama3 prefers fact_single over the other
+labels due to how the answers are present in the
+context. Second, not every context equally supports
+all question types. Some contain mostly factual in-
+formation statements, for example, the introduction
+paragraphs of Wikipedia articles. Other contexts
+can be very small, without enough information to
+generate independent reasoning or summary state-
+ments. In addition, it is important to note that even
+though the fraction of unanswerable questions gen-
+erated by the fine-tuned model is higher with re-
+spect to the statement extraction, the low cost of
+the former allows users to generate much bigger
+datasets which can then be cleaned with these la-
+bels.
+After selecting Q&As with valid labels (exclud-
+ing unanswerable), we employ LLM-based cri-
+tiques to further gauge their quality. We choose to
+apply the following criteria, which are commonly
+used for this application (Liu, 2022; Roucher,
+2024). Stand Alone: whether the question makes
+sense by itself or if it needs its context to be under-
+stood (e.g., questions that mention the word context
+should score low). Question Specificity: how spe-
+cific the question is to the context (those that are too
+general, even if answerable by the context, should
+score low as they are not useful to assess RAG per-
+formance). Question-Context Grounding: how
+well the information requested can be found in the

@@ -1,0 +1,103 @@
+24
+3.2.4. Information Retrieval
+The following procedure, deﬁned as the function
+fR in Equation (1), is used to retrieve a potentially
+new and interesting topic for the user:
+1. Retrieve the target user’s interests In and
+knowledge Kn.
+2. Instruct the LLM to select a topic category cl
+that aligns with the user’s based on In and
+the category set C ′ (Figure 5(a)).
+3. From all topic candidates T , select those cat-
+egorized under cl, and obtain the correspond-
+ing user knowledge kcl ,n linked to cl from Kn.
+4. Extract the summaries of the selected candi-
+dates and compile them into a list.
+5. Instruct the LLM to select a summary that is
+aligned with im,n but not yet reﬂected in kcl ,n
+(Figure 5(b)).
+6. Output the topic candidate tj corresponding
+to the chosen summary as the retrieved topic.
+The retrieved topic is regarded as known to the
+user and is excluded from future retrievals. Specif-
+ically, for each user, a record of previously used
+topics is maintained, and these topics are omitted
+when constructing the summary lists in Step 4.
+4. Evaluation
+4.1. RQ1: Can PT-RAG obtain new and
+interesting topics for a target user?
+To evaluate the performance of PT-RAG, we con-
+ducted an automatic experiment comparing it with
+existing methods.
+4.1.1. Datasets
+To address RQ1, the dataset should include (1)
+conversation data for estimating user knowledge,
+(2) information about the speaker’s interests, and
+(3) both content that the speaker clearly knows
+and content that they may not know. To meet
+these conditions, we used the following datasets:
+RealPersonaChat (RPC): Contains approxi-
+mately 14,000 Japanese real-world conversa-
+tions, each including the real speaker’s persona
+data (Yamashita et al. (2023)).
+JPersonaChat (JPC): Contains 5,000 Japanese
+ﬁctional conversations, each including a ﬁctional
+speaker’s persona data (Sugiyama et al. (2023)).
+All conversation data from each dataset were
+treated as topic candidates for retrieval.
+/g62/g62/g68
+/g858/g400/g3/g349/g374/g410/g286/g396/g286/g400/g410/g400
+/g100/g381/g393/g349/g272/g3
+/g18/g258/g410/g286/g336/g381/g396/g455
+/g68/g437/g400/g349/g272
+/g100/g396/g258/g448/g286/g367
+/g100/g396/g258/g448/g286/g367
+/g349/g374/g393/g437/g410 /g381/g437/g410/g393/g437/g410
+(a) Example of selecting topic category.
+/g60/g437/g400/g258/g410/g400/g437
+/g44/g258/g364/g381/g374/g286
+/g17/g437/g400/g258/g374
+/g100/g396/g258/g448/g286/g367
+/g858/g400/g3/g364/g374/g381/g449/g367/g286/g282/g336/g286
+/g62/g62/g68
+/g349/g374/g393/g437/g410 /g381/g437/g410/g393/g437/g410
+/g17/g437/g400/g258/g374
+/g410/g396/g258/g448/g286/g367 /g100/g346/g349/g400/g3/g437/g400/g286/g396/g3/g346/g258/g400/g3/g400/g381/g367/g349/g282/g3/g364/g374/g381/g449/g367/g286/g282/g336/g286/g3/g258/g271/g381/g437/g410/g3/g282/g381/g373/g286/g400/g410/g349/g272/g3
+/g410/g396/g349/g393/g400/g853/g3/g271/g437/g410/g3/g410/g346/g286/g396/g286/g3/g349/g400/g3/g374/g381/g3/g349/g374/g296/g381/g396/g373/g258/g410/g349/g381/g374/g3/g258/g271/g381/g437/g410/g3
+/g381/g448/g286/g396/g400/g286/g258/g400/g3/g410/g396/g258/g448/g286/g367/g3/g349/g374/g3/g410/g346/g286/g3/g364/g374/g381/g449/g367/g286/g282/g336/g286/g857
+/g94/g437/g373/g373/g258/g396/g455/g3/g367/g349/g400/g410
+(b) Example of selecting topic candidate.
+Figure 5: Examples of information retrieval.
+4.1.2. Query
+To evaluate whether a method can identify novel
+and interesting topics for a target user, each eval-
+uation method described below addresses the fol-
+lowing query:
+Query 
+Provide information that maybe of interest to
+the user but is likely unknown based on ”User
+Data.”
+User Data: {user_data}
+ 
+The generated responses are evaluated using
+three metrics described in Section 4.1.4.
+4.1.3. Compared Methods
+We evaluated the performances of the following
+four methods. All methods used ChatGPT-4o-mini
+and the persona data from each dataset as the
+variable {user_data} to represent user interests.
+PT-RAG (Ours) : Described in Section 3.2. For
+computing cosine similarity (Section 3.2.2),
+we used the NLP library GiNZA3 with a
+threshold α = 0.8. Redis4 was used to main-
+tain the structured data. All conversation data
+from each dataset were structured and stored
+in the database following the method in Sec-
+tion 3.2.2. Knowledge data for each speaker
+was prepared in advance using the method in
+Section 3.2.3 and added to {user_data}.
+PT-RAG-Knowledge-Out (PT-RAG-KO) : This
+variant of PT-RAG does not use the speaker’s
+knowledge. It was evaluated to conﬁrm the
+3https://github.com/megagonlabs/ginza
+4https://redis.io/

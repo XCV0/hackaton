@@ -1,0 +1,95 @@
+Generalizing Graph Foundation Models via Hyperbolic
+Retrieval-Augmented Generation
+Yifan Jin
+jingyifan20@mails.ucas.ac.cn
+Institute of Software, Chinese
+Academy of Sciences
+Beijing, China
+University of Chinese Academy of
+Sciences
+Beijing, China
+Qirui Ji
+jiqirui2022@iscas.ac.cn
+Institute of Software, Chinese
+Academy of Sciences
+Beijing, China
+University of Chinese Academy of
+Sciences
+Beijing, China
+Bin Qin
+qinbin21@mails.ucas.ac.cn
+Institute of Software, Chinese
+Academy of Sciences
+Beijing, China
+University of Chinese Academy of
+Sciences
+Beijing, China
+Jiangmeng Li∗
+jiangmeng2019@iscas.ac.cn
+Institute of Software, Chinese
+Academy of Sciences
+Beijing, China
+Lixiang Liu
+lixiang@iscas.ac.cn
+Institute of Software, Chinese
+Academy of Sciences
+Beijing, China
+University of Chinese Academy of
+Sciences
+Beijing, China
+Fuchun Sun
+fcsun@mail.tsinghua.edu.cn
+Tsinghua University
+Beijing, China
+Changwen Zheng
+changwen@iscas.ac.cn
+Institute of Software, Chinese
+Academy of Sciences
+Beijing, China
+University of Chinese Academy of
+Sciences
+Beijing, China
+Abstract
+Graph foundation models (GFMs) emerged as a dominant para-
+digm in graph representation learning by leveraging large-scale
+pre-training for cross-domain inference. However, the parameter-
+ized knowledge encoded within these models is insufficient to cope
+with distribution shifts, limiting their generalization ability. To mit-
+igate this issue, retrieval-augmented generation (RAG) has been
+introduced to incorporate external knowledge at inference time.
+Nevertheless, existing RAG frameworks operating in Euclidean
+space suffer from a fundamental geometric limitation: the polyno-
+mial volume growth of Euclidean space is inherently mismatched
+with the tree-structured external knowledge bases. This mismatch
+leads to the loss of semantic granularity in retrieval and gives rise
+to the hubness phenomenon. To address this limitation, we propose
+a Hyperbolic Retrieval-Augmented Generation (HyRAG) frame-
+work designed to enhance the generalization capabilities of GFMs.
+∗Corresponding Author
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+KDD ’26, Jeju Island, Republic of Korea
+© 2026 Copyright held by the owner/author(s).
+ACM ISBN 979-8-4007-2259-2/2026/08
+https://doi.org/10.1145/3770855.3817750
+Specifically, the introduced Hyperbolic Knowledge Indexing mod-
+ule retains the tree-like hierarchies of the external knowledge base
+by modeling them within hyperbolic space. The Multi-granularity
+Retrieval module then provides GFMs with the global semantic
+anchors and local semantic nuances through coarse-grained and
+fine-grained knowledge retrieval, respectively. Finally, the Dual-
+path Fusion module achieves effective knowledge integration for
+graph tasks at both the feature and structural levels. Experiments
+on multiple graph benchmarks demonstrate significant improve-
+ments in the zero-shot setting, highlighting the generalization of
+our method for robust GFMs inference.
+CCS Concepts
+• Information systems → Information retrieval; Retrieval
+models and ranking.
+Keywords
+Hyperbolic Representation; Retrieval-Augmented Generation; Graph
+Foundation Model
+ACM Reference Format:
+Yifan Jin, Qirui Ji, Bin Qin, Jiangmeng Li, Lixiang Liu, Fuchun Sun, and Chang-
+wen Zheng. 2026. Generalizing Graph Foundation Models via Hyperbolic
+Retrieval-Augmented Generation. In Proceedings of the 32nd ACM SIGKDD
+arXiv:2606.03307v2  [cs.IR]  3 Jun 2026

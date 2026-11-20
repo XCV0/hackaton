@@ -1,0 +1,136 @@
+...
+...
+Object Tag Keyword Extraction
+ Domain Tag Chain Organization
+Doc1:
+Doc1:
+Apache Spark is a new 
+framework for distributed 
+computing that is 
+designed from the ground
+up tobe optimized for...
+ ...
+...
+DomainTags
+ObjectTags
+...
+...
+DomainTags
+ObjectTags
+Domain-centric Knowledge
+DomainTag:BigData
+ObjectTags:[Apache Spark,...,HDFS]
+Chain:ComputerScience–>Data
+Processing–>...–>BigData
+Summary:The domain encompasses the 
+study and application of computational 
+systems and algorithms, with a focus on 
+solving complex problems through 
+software and hardware. At its core lies 
+**Computer Science**, ...
+Domain-centric 
+Knowledge Fusion
+Question:How does 
+Spark Streaming enable 
+real-time data processing?
+Tag-guided Retrieval-Augmented Generation
+Tag Knowledge Graph Construction
+Spark Clusters
+Spark Context
+Spark Shell
+RDD CountSum
+Line
+Online Store
+CSV File
+Product
+User
+Spark APP
+Decision Tree
+Data Sources
+RDD
+Spark
+Distributed 
+Computing
+Computer
+Science Computer
+Science
+ComputerScience
+ComputerScience Decision Tree
+Machine 
+Learning
+Text Generation
+Empty Set
+Formal Systems
+Random Variable
+Probability and Statistics
+Name:ComputerScience
+Description:Computer Science is 
+the study of computational systems ...
+DomainDocuments
+Name:Apache Spark
+Description:Adistributed computing 
+system designed ...low-latency tasks.
+KG
+Tag Knowledge-Fused 
+Generation
+Hierarchical Tag Chain Integration
+Domain-centric 
+Knowledge 
+Retrieval
+Answer: Spark Streaming 
+extends the core Spark ...
+Figure 2: The proposed TagRAG framework.
+These domain tag chains, featuring explicit
+pointing relationships, inherently carry the hier-
+archical knowledge logic from general categories
+to specific subfields. To consolidate this logic into
+a structured framework that avoids redundant as-
+sociations and cyclic dependencies, we merge the
+chains into a directed acyclic graph (DAG) that
+clearly embodies the layered hierarchy of domain
+knowledge while ensuring intuitive traversal be-
+tween different levels of tags. Starting at the head
+of the chain, each node is mounted at its parent’s
+corresponding position in the DAG to ensure the
+integrity of the chain and the transitivity of the
+DAG. The detailed process of domain tag chain
+organization can be seen in Algorithm 1.
+4.1.3 Domain-centric Knowledge Fusion
+In order to efficiently retrieve domain information,
+we deploy knowledge fusion in the graph construc-
+tion phase in advance, which aggregates all highly
+relevant information into domain tags. Specifically,
+there are two such categories of information:
+• Domain information on chains: there are
+multiple domain nodes on domain tag chains
+that contain rich high-level domain informa-
+tion. They are natural providers of compre-
+hensive field vision.
+• Specialized knowledge in objects: the ex-
+tracted object tags contain the expertise in the
+Algorithm 1: Domain Tag Chain Organiza-
+tion
+1 Input: The list of domain tag chain C, the
+root domain tag ˆv and the existing
+tag knowledge graph G.
+2 Output: ˆG.
+3 DAG ← {ˆv};
+4 foreach ci ∈ C do
+5 for j from 2 to |ci| − 1 do
+6 pi,j ← get_node(DAG, ci,j−1);
+7 ni,j ← get_node(DAG, ci,j );
+8 if pi,j is not None then
+9 if ni,j is not None then
+10 if ni,j /∈ pi,j .children then
+11 pi,j .add_child(ni,j );
+12 else
+13 nnew ← new_node(ci,j );
+14 pi,j .add_child(nnew);
+15 ˆG ← merge_graph(G, DAG);
+16 return ˆG
+original documents. They can provide accu-
+rate grounding knowledge.
+Combining these two aspects of data, we fused
+them into the domain-centric knowledge summary:
+s = LLM(Chain(vd), Nei(vd)),
+6437

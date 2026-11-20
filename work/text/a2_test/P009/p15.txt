@@ -1,0 +1,68 @@
+33
+Prompt: Novelty Scoring (1-10) 
+# Instruction:
+Evaluate the text labeled ''Evaluation Target''
+based on the following conditions.
+# Conditions:
+- Assess whether the information is unknown to
+the person described in the ''User
+Information,'' who has previously engaged in
+the past conversation listed in the
+''Conversations list.''
+- Consider if the information might be included
+in the knowledge that the person is presumed to
+have, based on the ''Conversations list.''
+- If the information is entirely unknown to the
+person, assign a score of 10. If about half of
+it is known, assign a score of 5. If it only
+includes information the person is
+well-acquainted with, assign a score of 1, and
+record the result under the title ''Score'' on
+a new line.
+- Consider both the content in ''Conversations
+list'' and ''User Information'' when scoring.
+- If there is abstract information in the text,
+treat it as known information to the person and
+deduct points.
+- Do not include whether the text aligns with
+the person's interests and concerns as part of
+the scoring criteria.
+- Evaluate and score as objectively as
+possible.
+- Provide the reasoning for your score using
+the title ''Reason'' on a new line with
+specific details.
+- Write the reason without line breaks.
+- Output ''Reason'' first, followed by
+''Score.''
+# Evaluation Target:
+{generated}
+# User Information:
+{persona}
+# Conversations list:
+{conversation}
+ 
+B. Example of Conversation in the
+Human Evaluation
+An example conversation demonstrating the ﬁnd-
+ings described in Section 4.2.4 is provided in Table
+5. To improve readability, we present summarized
+versions of the conversations rather than their full
+content. In the passive scenario, where the par-
+ticipant was required to initiate every conversa-
+tion, they ran out of topics by the second interac-
+tion, resulting in exchanges limited to greetings. In
+the experiment shown in the table, the participant
+never chose the passive chatbot, likely due to the
+inconvenience of choosing. The proactive chat-
+bot asked questions about disclosed information,
+clearly demonstrating memory of past conversa-
+tions. However, as seen in the third conversation,
+it tended to produce similar responses when no
+new information was disclosed. In contrast, Topic-
+Initiator introduced new topics not covered in pre-
+vious interactions, varying the topics each time.
+When comparing Topic-Initiator with the proactive
+chatbot, the participant chose the proactive chat-
+bot for the ﬁrst two conversations but switched to
+Topic-Initiator from the third conversation onward.

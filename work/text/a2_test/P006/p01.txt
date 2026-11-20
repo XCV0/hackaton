@@ -1,0 +1,92 @@
+Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing, pages 45293–45310
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+Only Pay What You Must Spend: On-Demand Privacy Budget
+Payment for Differentially Private RAG
+Zhonghao Sun1, Zhiliang Tian1*, Xinyue Fang1, Shuo Ma1,
+Juhua Zhang1, Yiping Song2, Dongsheng Li1*
+1College of Computer Science and Technology, National University of Defense Technology
+2College of Science, National University of Defense Technology
+{ sunzhonghao, tianzhiliang, fangxinyue, shuoma,
+zhangjuhua23, songyiping, dsli }@nudt.edu.cn
+Abstract
+Deploying large language models (LLMs) on
+sensitive data via Retrieval-Augmented Gen-
+eration (RAG) introduces severe privacy risks.
+Recent studies apply Differential Privacy (DP)
+to LLMs with RAG for formal privacy guaran-
+tees. However, existing DP-RAG frameworks
+rapidly exhaust the privacy budget. Although
+recent efforts attempt to save the budget by nar-
+rowing the retrieval scope or sparsifying private
+generation, these methods themselves cumula-
+tively consume the budget, whereas they could
+actually rely merely on public information or
+at a negligible one-time privacy cost. This mis-
+match fails to align budget expenditure with the
+model’s actual reliance on private data, caus-
+ing substantial waste on operations that require
+no private access. To address this, we propose
+SparsePay-RAG, adopting “only pay what you
+must spend” as its core principle. Using public
+information as a zero-privacy prior, it charges
+the privacy budget only for the private incre-
+ment. Specifically, SparsePay-RAG narrows
+the retrieval scope via public topic-guided clus-
+tering, adaptively controls private access fre-
+quency without privacy cost through isotonic
+cross-layer trajectory fitting, and compresses
+per-access budget via DP contrastive decod-
+ing. Under strong privacy constraints, experi-
+ments show SparsePay-RAG achieves superior
+privacy-utility trade-offs over baselines.
+1 Introduction
+Large language models (LLMs) are increasingly
+deployed in sensitive domains (Singhal et al., 2023;
+Gao et al., 2023). However, incorporating private
+corpora introduces severe risks, allowing adver-
+saries to reconstruct sensitive information directly
+from model outputs through various attacks (Car-
+lini et al., 2022; Mireshghallah et al., 2022; Carlini
+*Corresponding Author
+et al., 2021; Lukas et al., 2023). To address these
+privacy risks, Differential Privacy (DP) (Dwork and
+Roth, 2014) serves as the gold standard, providing
+provable guarantees for safeguarding LLMs.
+To apply DP to LLMs, one common approach
+fine-tunes models on private data using differ-
+entially private stochastic gradient descent (DP-
+SGD) (Abadi et al., 2016; Yu et al., 2024b; Bu et al.,
+2024), which adds calibrated noise into gradients
+during training to protect privacy. However, DP
+fine-tuning incurs prohibitive computational over-
+head and permanently encodes private data into
+model parameters, making it difficult to flexibly
+update private corpora.1 Another approach gener-
+ates a synthetic corpus satisfying DP from private
+data in advance (Yue et al., 2023; Tan et al., 2025;
+Xie et al., 2024; Sun et al., 2025). This synthetic
+corpus can be reused indefinitely by downstream
+tasks without additional privacy budget. Neverthe-
+less, the synthesis cost scales linearly with the data
+size, and subsequent updates to the private corpus
+require costly regeneration of the synthetic corpus.
+In short, these approaches pose challenges for scal-
+ing to large private corpora and are poorly suited
+for dynamic updates.
+To overcome these limitations, researchers have
+explored applying DP to retrieval-augmented gen-
+eration (RAG) (Lewis et al., 2020), introducing DP
+during the RAG inference process. This paradigm
+leverages the decoupling of the private corpus from
+model parameters, enabling effortless scaling to
+large-scale data while supporting dynamic updates
+to the private corpora. Existing native DP-RAG
+frameworks typically add noise to the output proba-
+bility distribution to generate sequences satisfy-
+ing DP guarantees (Grislain, 2025; Koga et al.,
+2024). However, since every generation step re-
+1Europe’s General Data Protection Regulation (GDPR)
+stipulates that users have the right to request the deletion
+of their private data at any time (European Parliament and
+Council of the European Union, 2016).
+45293

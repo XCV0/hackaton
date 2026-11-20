@@ -1,0 +1,100 @@
+to complex inputs (Sun et al., 2022). How-
+ever they are also susceptible to hallucination
+and cannot account for fresh knowledge, not
+available at the time of training. That is where
+retrieval shines.
+2. LLM decoding is a search process: Language
+model decoders search for a single sequence
+in the set of all possible token sequences
+(Graves, 2012). Retrievers just need to con-
+strain this search space to those sequences that
+are known to exist in a corpus of interest.
+3. Unifying tasks unlocks rapid development via
+prompting By unifying retrieval with gener-
+ation in a single decoder pass, we create a
+system that can be adapted to diverse new
+tasks via prompting alone, directly beneﬁting
+from the advances in instruction following.
+We later show that RICHES works with an
+off-the-shelf instruction-tuned model, without
+any additional training. This is in contrast to
+pipelines that need to be rebuilt/retrained on a
+task-by-task basis.
+There is an another advantage of using language
+models as search agents. Of the two core opera-
+tions in retrieval, indexing and search, indexing is
+constrained by corpus size, while search typically
+depends only on the index structure. Using large
+language models for indexing billion-token corpora
+is highly expensive, but search does not face the
+same bottle-neck. This enables us to unlock the
+knowledge stored in very large models for retrieval.
+This work overlaps with a variety of related work
+focusing on retrieval, retrieval augmented gener-
+ation (Lewis et al., 2020), reasoning in language
+models, and open domain question answering. We
+discuss their connections to RICHES in Section 2,
+then introduce the key components of the general-
+izable RICHES approach in Section 3.
+While RICHES is applicable to any task that can
+be reduced to an interleaved generation of uncon-
+strained text and pre-deﬁned retrieval keys, we val-
+idate the approach with tasks in open domain ques-
+tion answering and show how it natively supports
+single-hop question answering, including the case
+where attribution to a source text is required; multi-
+hop question answering; and interleaving retrieval
+with ‘planning steps’ that enhance the retrieval per-
+formance. Results are presented in Section 6.2
+along with qualitative examples and analysis in
+Section 6.3 to help motivate the approach.
+2 Related Work
+Retrieval Augmented Generation (RAG)
+ODQA tasks predominantly employ the RAG
+approach (Lewis et al., 2020) where typically a
+dense retriever (Karpukhin et al., 2020) retrieves
+documents from an evidence corpus and feeds
+to a language model for the ﬁnal answer. These
+pipelines involve switching between heteroge-
+neous models and are hard to train in concert.
+Moreover, Dense retrievers fail to generalize
+out-of-domain (Thakur et al., 2021).
+Generative Retrieval (Metzler et al., 2021) tech-
+niques shifting the onus of Search from non-
+parametric nearest neighbor scan to language mod-
+els. Differentiable Search Index (Tay et al., 2022)
+memorizes a mapping of query to opaque document
+identiﬁers, however memorization struggles to gen-
+eralize to unseen corpus (Pradeep et al., 2023).
+An alternative approach is to use natural language
+keys as document identiﬁers, where keys are con-
+strained decoded to lie in the corpus (De Cao et al.,
+2020; Bevilacqua et al., 2022). These systems still
+need an external model to generate answers. 1-
+Pager (Jain et al., 2023) uniﬁes evidence and an-
+swer generation, by generating a sequence of key-
+words that map to a document. However, isolated
+keywords limit context understanding and suffer
+similar pitfalls as lexical matching.
+Recitation Separate from retrieval augmentation,
+language models have been shown to recite entire
+passages from memory (Sun et al., 2022; Yu et al.,
+2022). But these passages are prone to hallucina-
+tion. Our aim is to intersect contextual passage
+generation with corpus grounding. Min et al. 2022
+predicts next token from a constrained corpus, how-
+ever retrieval itself relies on nearest neighbor em-
+bedding match. GopherCite (Menick et al., 2022),
+closest to our approach, generates quotes verbatim
+from a small set of documents using constrained
+decoding. RICHES aims to scale this to a billion-
+token corpus.
+Iterative reasoning and Search In recent times,
+there have been several efforts to improve multi-
+hop question answering by better reasoning : de-
+composing a problem into sub-queries (Khot et al.,
+2022), interleaving CoT with retrieval (Trivedi
+et al., 2022a; Yao et al., 2022; Khattab et al., 2022)
+and iterative planning (Adolphs et al., 2021; Asai
+et al., 2023). Language models have also been ap-
+8888

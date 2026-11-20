@@ -1,0 +1,76 @@
+43
+Dataset Label Dense Lexical Best recall Best strategy
+HotpotQA
+Inclusive 0.906 0.904 0.942 0.10
+reasoning 0.890 0.878 0.924 (-0.076) 0.10
+fact_single 0.891 0.897 0.930 0.10
+summary 1.000 1.000 1.000 0.50
+MS MARCO
+Inclusive 0.752 0.719 0.804 0.10
+reasoning 0.708 0.706 0.784 (-0.051) 0.20
+fact_single 0.790 0.770 0.835 0.05
+summary 0.777 0.696 0.820 0.05
+NaturalQ
+Inclusive 0.686 0.464 0.686 (-0.033) 0.00
+reasoning 0.690 0.434 0.690 0.00
+fact_single 0.705 0.493 0.705 0.00
+summary 0.719 0.436 0.719 0.00
+NewsQA
+Inclusive 0.249 0.494 0.500 0.50
+reasoning 0.194 0.379 0.379 (-0.161) 1.00
+fact_single 0.262 0.533 0.540 0.50
+summary 0.294 0.433 0.465 0.20
+PubMedQA
+Inclusive 0.949 0.895 0.935 (-0.052) 0.05
+reasoning 0.947 0.885 0.947 0.00
+fact_single 0.987 0.952 0.987 0.00
+summary 0.985 0.959 0.985 0.00
+SQuAD2
+Inclusive 0.776 0.831 0.871 0.10
+reasoning 0.757 0.671 0.789 (-0.104) 0.10
+fact_single 0.818 0.852 0.893 0.10
+summary 0.834 0.751 0.834 0.00
+Table 2: Summary of retrieval results on different Q&A labels. Embedding model used is bge-small-en-v1.5.
+The recall accuracy is measured with Recall@5.
+umented in Appendix E), on the contexts found
+in the public datasets described in Section 3. We
+utilized the labeling strategy defined in Section 4
+and found that 95% of generated data falls into the
+fact_single label. As illustrated by the results in
+Section 5, this can lead to unrealistic performance
+expectations when dealing with different types of
+questions.
+Advanced techniques, such as the ones employed
+by Ragas (Ragas, 2024), diversify their generation
+by sequentially evolving a seed question accord-
+ing to a set of instructions (LLM prompts). While
+successful in generating datasets with multiple la-
+bels, this relies on several LLM queries to generate
+diverse Q&As. In addition to being costly, the
+probability of an LLM hallucination grows with
+each query. These hallucinations can lead to “un-
+grounding” Q&As from their original contexts. To
+avoid this, Ragas employs LLM-based critiques
+at every evolution step to filter out bad examples,
+which significantly increases the generation cost.
+We choose to ensure this Q&A-context ground-
+ing by inverting the usual generation process: we
+first build statements based on information from
+the context and then generate questions that are
+unambiguously answered by them. This strategy
+reduces the number of LLM queries, grounds the
+answers, and reduces hallucinations on the question
+generation by restricting it to a much smaller scope
+(answer instead of full context). More information
+on the Ragas pipeline can be found in appendix J.
+Our statement extraction generation strategy
+employs the following steps. (1) The input con-
+text is summarized into a sentence (theme). (2)
+Factual statements are extracted from the context.
+For completeness, they can include contextualizing
+information contained in the theme. (2.a) To gener-
+ate summary questions, we merge the multiple fac-
+tual statements and the theme into three summary
+statements. (2.b) To generate reasoning questions,
+we derive three conclusion statements from the
+list of factual statements and theme. (3) A random

@@ -1,0 +1,105 @@
+Thus, IGD intervenes only under source conflict, chooses the
+direction according to user intent and branch confidence, and
+scales the update by the reliability of the favored source. 1
+IV. EXPERIMENT SETUP
+A. Evaluation Design
+We evaluate IGD in retrieval-augmented short form answer-
+ing questions. Each example consists of a question, a document-
+tagged context, and a prompt mode. We consider two prompt
+modes that represent different user intents. In STRICT mode,
+the model is instructed to answer strictly according to the
+provided context. In TRUTH mode, the model is instructed
+to treat the context as potentially noisy or misleading and
+to prioritize the factually correct answer when context
+and world knowledge conflict. The two modes use the same
+question and context, only the user instruction changes. Direct
+RAG and IGD are evaluated under identical prompts, to isolate
+the effect of source arbitration during the decoding phase.
+We organize the evaluation into two groups. The faithful
+group contains standard QA settings where the context supports
+the gold answer, to test whether IGD preserves the benefits
+of retrieval. The factual-conflict group contains examples
+where the context answer conflicts with the world answer,
+to test whether IGD follows the context in STRICT mode while
+recovering the world-knowledge answer in TRUTH mode.
+B. Benchmarks
+We evaluate on six QA benchmarks, grouped into three faith-
+ful QA benchmarks and three factual-conflict QA benchmarks,
+each contains 500 samples. The faithful group includes KILT-
+NQ, TriviaQA, and SQuAD. KILT-NQ is based on Natural
+Questions and the KILT Wikipedia corpus [27], [28]; TriviaQA
+contains trivia style open-domain questions with answer aliases
+and Wikipedia/web evidence [29]; and SQuAD is a paragraph
+level reading comprehension dataset built from Wikipedia [30].
+For KILT-NQ and TriviaQA, we construct multi-document
+contexts by selecting an answer bearing passage and adding
+distractors; for SQuAD, we use the original paragraph as
+support and add distractor paragraphs from other examples.
+The factual-conflict group includes ConflictBank, NQ-Swap,
+and CounterFact. ConflictBank contains Wikidata-derived
+knowledge conflicts with generated misleading evidence [31];
+NQ-Swap is constructed from Natural Questions/MRQA by
+replacing the original answer in the context with a substituted
+answer [27], [32]; and CounterFact is adapted from the factual
+association editing benchmark in ROME [33]. In these factual-
+conflict benchmarks, the original answer is treated as the world
+answer, while the misleading or substituted answer supported
+by the context is treated as the context answer. We apply alias
+cleaning and semantic filtering to remove ambiguous cases
+where the world and context answers are equivalent.
+1Github Repository
+C. Models and Baselines
+We evaluate five instruction-tuned LLMs: Qwen3-32B [34],
+Qwen2.5-14B-Instruct [35], Llama-3-8B-Instruct [36], Mistral-
+7B-Instruct-v0.3 [37], and Phi-4 14B [38]. These models cover
+different families and scales, allowing us to test whether
+IGD generalizes across models with different parametric
+knowledge and instruction-following behavior. Experiments
+were conducted on local GPU servers equipped with NVIDIA
+RTX A6000 GPU and two NVIDIA GeForce RTX 5090 GPUs.
+We compare IGD with six baselines. Closed-book Q-only
+receives only the question and no context, it is a diagnostic
+reference for parametric knowledge rather than a context
+using RAG method. Direct RAG receives the same question,
+context, and prompt-mode instruction as IGD, but generates
+directly from the original prompt without source arbitration.
+We also include confidence reasoning baselines from situated
+faithfulness work [8]: ExplicitSCR, which asks the model
+to explicitly reason about whether to trust the context or its
+internal knowledge, and three rule-based confidence reasoning
+variants, RCR-InternalEval, RCR-ContextEval, and RCR-
+InternalConf, which extract confidence or evaluation signals
+for internal and context-based answers and then select a final
+answer according to predefined rules. In addition, we compare
+with MADAM-RAG, a multi-agent RAG framework designed
+to aggregate and resolve conflicting retrieved evidence [9].
+D. Evaluation Metrics
+We evaluate the answer accuracy using normalized alias
+matching, following standard QA evaluation practice [29],
+[30]. For faithful benchmarks, predictions are always matched
+against gold answers. For factual-conflict benchmarks, the
+target depends on the prompt mode: STRICT mode reports
+context accuracy, while TRUTH mode reports world accuracy.
+Our main aggregate metric is the Intent-Aligned Score (IA),
+defined as the macro-average over the faithful and factual-
+conflict benchmark groups:
+IAm =
+P
+d∈Dfaith Accgold d + P d∈Dconf Accm d
+|Dfaith| + |Dconf | . (18)
+Here, m ∈ {STRICT, TRUTH}. For d ∈ Dconf , Accm d denotes
+context accuracy in STRICT mode and world accuracy in TRUTH
+mode, IA therefore measures whether the model behavior
+matches the user’s intended trust policy rather than rewarding
+a single fixed preference for either context or memory.
+V. RESULTS
+A. Closed-Book Performance Reveals the Recoverable Para-
+metric Signal
+We first evaluate each model in the closed-book Q-only
+setting, where the model receives only the question without
+any retrieved context. It is important to interpret IGD because
+factual recovery from a misleading context is only possible
+when the underlying model can access the correct answer from
+its parametric memory, if the closed-book model cannot recover
+the world answer, the upper bound of any memory oriented
+correction is naturally limited [39], [40].

@@ -1,0 +1,94 @@
+document di to the LLM:
+˜yCoT(di) ∼ M(InstructCoT, q, di), (11)
+where InstructCoT is used to prompt the LLM to
+generate a chain-of-thought. Then the CoT result
+˜yCoT(di) is refined as yCoT(di) by using the same
+LLM (M):
+yCoT(di) = M(InstructRef, q, ˜yCoT(di)), (12)
+where the instruction InstructRef prompts the LLM
+(M) to answer the given query q based on the ini-
+tial CoT result ˜yCoT(di). Such a self-reflection
+mechanism helps to extract more query-related
+contents from the initial CoT ˜yCoT(di), produc-
+ing higher-quality data to optimize LLMs. Fi-
+nally, we collect the refined CoT results to form
+YCoT(di) = {yCoT(d1), . . . , yCoT(dn)}, which is
+used to train the LLM through DPO (Eq. 10).
+4 Experimental Methodology
+In this section, we describe the datasets, baselines,
+evaluation metrics, and implementation details in
+our experiments. More experimental details are
+shown in Appendix A.4.
+Datasets. In our experiments, we follow pre-
+vious work (Lin et al., 2024) and utilize the
+instruction tuning datasets to train and evalu-
+ate RAG models. For all datasets and base-
+lines, we use BGE-large (Chen et al., 2024a)
+to retrieve documents from the MS MARCO
+V2.1 document collection (Bajaj et al., 2016).
+We select six datasets for evaluation, including
+NQ (Kwiatkowski et al., 2019), HotpotQA (Yang
+et al., 2018), Trivia QA (Joshi et al., 2017),
+PopQA (Mallen et al., 2023), ASQA (Stelmakh
+et al., 2022), and MARCO QA (Bajaj et al., 2016),
+which require models to retrieve factual knowledge
+or conduct more complex reasoning to help answer
+the given query. All data statistics are shown in
+Table 1.
+Baselines. In our experiments, we compare
+RankCoT with the Vanilla RAG (No Refinement)
+model and three knowledge refinement models, in-
+cluding Rerank, Summary, and CoT, which are
+described in Sec. 3.1. For the vanilla RAG model,
+we follow previous work (Ram et al., 2023) and
+feed 5 retrieved documents as context to answer
+the question. For the Rerank model, we prompt the
+LLM to evaluate the relevance between the query
+and retrieved documents (Asai et al., 2024a; Li
+et al., 2024). If the document is relevant to the
+Split #Query Tasks
+Train 15,444 Open-Domain QA 8,527 Reasoning
+Dev 1,752 Open-Domain QA 912 Reasoning
+Test 20,294 Open-Domain QA
+Table 1: Data Statistics.
+question, it outputs “YES” and retains the docu-
+ment, otherwise, it outputs “NO” and discards the
+document. The Summary model and CoT model
+prompt the LLM to extract query-related knowl-
+edge from retrieved documents using summariza-
+tion and Chain-of-Thought (Wei et al., 2022) for-
+mats to conclude query-related knowledge from
+retrieved documents.
+Evaluation Metrics. Following Xu et al.
+(2024b), we utilize Rouge-L as evaluation met-
+ric for MARCO QA task. Following Gao et al.
+(2023), we utilize String-EM as evaluation metric
+for ASQA. For other tasks, we use the Accuracy
+metric for evaluation.
+Implementation Details. We implement our
+RankCoT model using Llama3-8B-Instruct (Tou-
+vron et al., 2023) as the backbone model. To con-
+struct a training dataset for DPO training, we ask
+Llama3-8B-Instruct to generate CoTs using 10 re-
+trieved documents independently and use the same
+model to refine CoTs. During training, we feed
+5 relevant documents as external knowledge and
+ask the LLM to reproduce the refined CoT results.
+We use LoRA (Hu et al., 2022) method to fine-
+tune Llama3-8B-Instruct, with β set to 0.1 and the
+learning rate set to 2e-5.
+For the RAG model, we concatenate the gen-
+erated CoT with the query to let Llama3-8B-
+Instruct generate the final answer. In addition,
+we also use LLMs of different scales, such as
+MiniCPM3-4B (Hu et al., 2024) and Qwen2.5-14B-
+Instruct (Yang et al., 2024), to build the RAG model
+and evaluate the generalization ability of RankCoT.
+5 Evaluation Result
+In this section, we first evaluate the performance of
+various RAG methods, followed by ablation studies
+to examine the impact of self reflection module and
+different training strategies. We then investigate
+the characteristics of RankCoT by analyzing the
+knowledge utilization capabilities of RAG models
+12861

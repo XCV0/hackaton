@@ -1,0 +1,58 @@
+Published as a conference paper at ICLR 2025
+tokens to compute the self-consistent score ρSelf-contain and self-reflection score ρSelf-reflect.
+Q,
+ρSC
+z}|{
+α, β, R,
+ρSR
+z }| {
+"Yes"−−−−−−−−−−−−→ ⇒
+
+ρSC = Q ti ∈α P (ti|t<i) · Q ti ∈β P (ti|t<i)
+ρSR = Q ti ∈"Yes" P (ti|t<i)
+Finally, we produce the final score, ρj = ρDraft,j · ρSC,j · ρSR,j , and then select the most reliable
+answer as the final answer to the question ˆA = arg maxαj ρj .
+4 EXPERIMENTS
+We evaluate our proposed SPECULATIVE RAG on five public retrieval augmented generation bench-
+marks: TriviaQA (unfiltered) (Joshi et al., 2017), MuSiQue (Trivedi et al., 2022), PopQA (Mallen
+et al., 2023), PubHealth (Zhang et al., 2023b), and ARC-Challenge (Clark et al., 2018). We provide
+representative examples for case study in Appendix J. TriviaQA, MuSiQue, PopQA are challenging
+open-domain question answering datasets where RAG systems are required to answer questions on
+factual knowledge. TriviaQA and PopQA typically require one accurate piece of evidence from
+the documents, whereas MuSiQue demands multiple documents to construct a multi-hop reasoning
+chain. More detailed experiments on multi-hop reasoning can be found in Appendix F. Following
+previous works (Guu et al., 2020; Asai et al., 2023; Yan et al., 2024), we evaluate performance of the
+free-form generation based on whether gold answers are contained within the generated response or
+not. PubHealth and ARC-Challenge are closed-set generation datasets. PubHealth is a dataset of
+medical claims spanning a variety of biomedical subjects and it requires the RAG system to verify
+a given claim based on the retrieved documents. ARC-Challenge introduces a multi-choice ques-
+tion answering dataset, composed of science exam questions from grade 3 to grade 9. For closed-set
+generation tasks, we use accuracy to evaluate whether the generated answers match the ground truth.
+4.1 BASELINES
+Standard RAG For standard RAG, we incorporate all the retrieved documents into the prompt
+as contextual information. Refer to Appendix I for detailed prompts. We run standard RAG
+experiments on off-the-shelf LLMs including Mistral7B, Mistral-Instruct7B (Jiang et al., 2023a),
+Mixtral8x7B, Mixtral-Instruct8x7B (Jiang et al., 2024), and Alpaca7B (Dubois et al., 2024). We also
+include the performance of Toolformer (Schick et al., 2024) and SAIL (Luo et al., 2023a) which are
+originally reported from Asai et al. (2023). Toolformer7B is an LM instruction-tuned to use tools
+including a search engine, and SAIL7B is an LM instruction-tuned on the Alpaca instruction tuning
+set augmented with search results from different sources such as DuckDuckGo and Wikipedia.
+Self-Reflective RAG and Corrective RAG Self-Reflective RAG (Self-RAG) (Asai et al., 2023)
+and Corrective RAG (CRAG) (Yan et al., 2024) are more advanced RAG systems that enhances the
+quality of contextual information in the retrieval results. CRAG introduces an external evaluator to
+assess the quality of retrieved documents, and to refine them before the response generation. Self-
+RAG instruction-tunes an LM to generate special self-refection tags. These tags guides the LM to
+dynamically retrieve documents when necessary, critique the retrieved documents relevance before
+generating responses. Self-CRAG is to apply the Self-RAG approach on the refined documents
+of CRAG. We adopt the same backbone LLMs across all methods as our proposed SPECULATIVE
+RAG for fair comparisons.
+4.2 EXPERIMENT SETTINGS
+In our experiments, we utilize Mistral7B (v0.1) as our base LM for the RAG drafter. For RAG
+verifier, we employ either Mistral7B (v0.1) or Mixtral8x7B (v0.1) without any fine-tuning, de-
+noted as MVerifier-7B or MVerifier-8x7B. We pre-compute embeddings of retrieved documents using
+a lightweight instruction-aware embedding model InBedderRoberta (Peng et al., 2024) as part of the
+retrieval process. Inference is conducted using the vLLM framework (Kwon et al., 2023) with
+greedy decoding (temperature = 0). We adopt the same experiment settings from Asai et al. (2023)
+and include a more challenging benchmark, MuSiQue (Trivedi et al., 2022). Our focus is on RAG
+reasoning rather than evidence citation, so we omit the other two long-form generation benchmarks,
+6

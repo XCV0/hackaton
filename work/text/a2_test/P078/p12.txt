@@ -1,0 +1,62 @@
+12
+Query
+Are nicotine pouches regulated as tobacco products under Washington, D.C.’s statutes,
+or do they fall under a separate nicotine product framework?
+PRISM-RAG KW-R: 0.40 KW-P: 0.261 KW-F1: 0.316 Judge: 5.0 / 5 JA: 1.0
+Based on the DC statutes described in the provided knowledge-base excerpts, nicotine pouches are treated under
+the District’s “tobacco products” framework , not a separate nicotine-only framework.
+• District law’s flavored-tobacco ban applies to “tobacco products” and defines tobacco products as in-
+cluding “consumable tobacco or synthesized nicotine products.” (Knowledge base excerpt summarising
+D.C. Official Code § 7-1721.01(1) / § 7-1721.08 .)
+• The flavored ban also explicitly references “flavored nicotine or synthetic nicotine products” as covered flavored tobacco products.
+(Knowledge base excerpt for D.C. Official Code § 7-1721.08(b) .)
+So, nicotine pouches (including flavored ones) would fall within DC’s tobacco-products regime for purposes of the
+flavored-tobacco restrictions , rather than being regulated under a separate nicotine-product-only framework (at least as reflected
+in these excerpts).
+StandardRAG KW-R: 0.20 KW-P: 0.097 KW-F1: 0.131 Judge: 2.0 / 5 JA: 0.0
+Based on the retrieved records/knowledge excerpts, nicotine pouches are treated as tobacco products under federal FDA oversight (i.e.,
+they fall under the Family Smoking Prevention and Tobacco Control Act framework), even though they typically do not contain tobacco
+leaf—they contain nicotine that is tobacco-derived or synthesized. However, the question asks specifically about Washington, DC
+statutes. The provided materials do not include DC-specific statutory text or a DC regulatory classification for nicotine pouches
+versus a separate “nicotine product” framework. So, from the records/excerpts available here, I cannot confirm whether Washington, DC:
+• classifies nicotine pouches as “tobacco products” under DC law , or
+• instead regulates them under a separate nicotine-product scheme.
+If you can share the relevant DC code sections or an excerpt (e.g., the definitions of “tobacco product” and/or “nicotine product”), I can
+apply them directly to these products (e.g., ZYN/ZYN NT nicotine pouches).
+Fig. 4. Qualitative comparison of PRISM-RAG and StandardRAG on a Washington, D.C. policy compliance question. Green highlights mark
+ground-truth keywords that appear in the response (contributing to KW-R); orange highlights mark DC statutory citations (§ 7-1721.01(1), § 7-
+1721.08(b)) that are correct but excluded from KW-R computation due to the ‘§’ in the keyword string, understating PRISM-RAG’s factual accuracy on
+this instance. PRISM-RAG retrieves DC-specific statutory text via its jurisdiction-aware direct injection path (JA = 1.0 for this instance), enabling it to
+cite the applicable DC flavored tobacco product framework verbatim. StandardRAG retrieves semantically similar federal FDA regulatory content,
+which is not relevant for the question scope.
+on this answer for D.C. compliance monitoring would receive
+accurate federal context and no actionable local determination.
+This critical failure case, where chunks are semantically similar
+but jurisdictionally wrong in retrieval, is precisely the cross-
+jurisdictional ambiguity that PRISM-RAG’s jurisdiction-aware VT
+scoring boost and direct VP injection are designed to resolve.
+6 CONCLUSIONS
+In this work, we introduced NicoPRISM and PRISM-RAG to
+address inter-context conflict within the difficult problem setting
+of tobacco and nicotine product surveillance. HippoRAG2 and
+HyperGraphRAG, SOTA document RAG methods, achieve CA
+of 8.4% and 1.3%, respectively, compared with PRISM-RAG’s
+41.78%. StandardRAG underperforms at retrieving from the correct
+jurisdiction in only 44.95% of policy queries (JA), compared
+to PRISM-RAG’s 93.87%. This performance gap is statistically
+unambiguous (p < 0.001, 95% CI: [46.2, 50.9]%) and directly
+explains why a method that scores competitive CA can still be
+retrieving the wrong jurisdiction’s statute in over half of all queries.
+HyperGraphRAG’s high RG (0.885) yet near-zero CA (1.3%)
+further reveals that a highly grounded response does not guarantee
+a proportionally high compliance determination, an instance of
+inter-context conflict, whereby a response is fluently grounded
+in retrieved evidence yet built on the wrong jurisdiction’s statute.
+This discrepancy shows that JA (i.e., source determination) is
+a necessary condition for reliable policy compliance reasoning.
+PRISM-RAG addresses these reasoning limitations through image-
+conditioned hyperedge traversal with strong document understand-
+ing, concept hyperedges that connect marketing attribute language
+to statutory terminology, and jurisdiction-aware context assembly,
+which disambiguates semantically similar statutory language across
+jurisdictions.

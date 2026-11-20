@@ -1,0 +1,105 @@
+ReFilter: Improving Robustness of Retrieval-Augmented Generation via Gated Filter , ,
+4.4 Retrieval Corpus and Indexing
+We build a retrieval corpus by chunking documents into chunks
+of fixed length (up to chunk_len tokens). For each query, we re-
+trieve top-𝑘 passages and form an retrieval token pool of size
+𝑁 = 𝑘× chunk_len. For both general QA and biomedical QA,
+we used wikipedia as retrieval corpus and we used BM25 [17] as
+indexing to retrieve top-𝑘 candidates.
+4.5 Baselines
+We compare against the following baselines: (1) Vanilla LLM. The
+backbone LLM answers questions without external retrieval. (2)
+In-context standard RAG (S-RAG). We retrieve top-𝑘 passages and
+append them to the prompt (retrieve-then-read) [12]. This base-
+line tests the conventional long-context knowledge injection. (3)
+PRAG [22]. It reduces dependency on input context length by inject-
+ing relevant documents into the parameters of the LLM through an
+offline LoRA adapter. (4) DyPRAG [23]. It employs the same offline
+one-to-one encoding process as PRAG and further incorporates a
+hypernetwork that transforms documents into the format required
+by LoRA adapters during online inference.
+4.6 Training Details
+We train the filter retrieval parameters with teacher-forced next-
+token prediction on QA pairs using cross-entropy loss: LNLL =
+−˝ 𝑡 log𝑝(𝑦𝑡 | 𝑦<𝑡,𝑞,E), where E denotes the retrieved token
+pool. We optionally regularize the token-importance distribution
+to encourage sparsity (e.g., entropy penalty). Training is conducted
+for 8 epochs using the AdamW optimizer with a learning rate of
+1𝑒−5, a batch size of 16 and a 5% warmup ratio. We freeze the
+original LLM parameters and only fine-tune the text encoder and
+the lightweight gated filter inserted into the last 3 transformer
+layers. Hyperparameter tuning on the development set selects 𝑘 = 3
+retrieved chunks with chunk length of 256 tokens from {1, 3, 5} and
+{128, 256, 512} respectively. We also tune the gating threshold (or
+gating temperature) to balance retrieval usage and robustness.
+4.7 Evaluation Metrics
+We report standard QA metrics for each dataset. For the general
+QA dataseet, we report F1 scores as the evaluation metric. And
+for biomedical QA, we report accuracy. We also report efficiency
+metrics including average input length (tokens), time-to-first-token
+(TTFT), and stable generation token per second/throughput (to-
+kens/second).
+5 Results
+5.1 Main Results
+We present a comprehensive evaluation of our proposed method
+against existing baselines across four diverse QA datasets (2WQA,
+HPQA, PopQA, CWQ) under both in-domain and out-of-domain
+settings. The results are summarized in Table 1. Overall, our method
+consistently achieves the highest average performance across all
+backbone models and evaluation scenarios, demonstrating strong
+generalization and robustness. First, our approach outperforms
+all baselines in 10 out of 12 model-dataset combinations for in-
+domain evaluation, and in all 12 out-of-domain cases. On aver-
+age, it achieves +2.54% over the best baseline (PRAG) when aver-
+aged across models. Notably, with Llama-3-8B-Instruct, our method
+reaches an average score of 35.09, surpassing PRAG by 2.44%.
+Moreover, while PRAG shows reasonable cross-domain adap-
+tation, our method exhibits significantly stronger out-of-domain
+performance. For example, with Qwen2.5-14B-Instruct, our method
+attains 35.28% on 2WQA (out-of-domain), compared to PRAG’s
+30.12%—an improvement of 5.16%. This highlights our method’s en-
+hanced ability to generalize to unseen domains without fine-tuning.
+Furthermore, our method scales effectively with model capac-
+ity. With the smallest model (Llama-3.2-1B-Instruct), we achieve
+26.78% average score, outperforming PRAG (24.28%) and DyPRAG
+(22.67%). With the largest (Qwen2.5-14B-Instruct), we reach 35.64%,
+significantly ahead of PRAG (32.35%) and Vanilla (33.27%). This
+indicates that our approach is effective across both lightweight and
+large-scale models.
+5.2 Generalization on Biomedical Tasks
+We evaluate the zero-shot transfer capability of our method on
+five challenging medical QA benchmarks, with results shown in
+Table 2. Models are trained on a general dataset and tested without
+any medical domain fine-tuning. Our method achieves the highest
+average score for every backbone model, demonstrating superior
+cross-domain knowledge transfer and robustness in specialized,
+knowledge-intensive domains.
+Across all four model backbones, our method attains the best
+average score, outperforming the strongest baseline by up to +1.78%
+(LLaMA-3.2-1B-Instruct) and establishing a new SOTA average of
+70.01% with the largest model, Qwen2.5-14B-Instruct. This consis-
+tent lead underscores the effectiveness of our approach in lever-
+aging general training for specialized tasks. Besides, our method
+delivers stable performance gains across diverse medical evalu-
+ation types—from USMLE-style exams (MEDQA) to biomedical
+research QA (PUBMEDQA, BIOASQ) and broad medical knowledge
+(MMLU_MED)—confirming its robustness and general applicability
+within the medical domain.
+5.3 Ablation Study
+We conduct an ablation study using the Qwen2.5-1.5B-Instruct
+backbone to assess our core components (Table 3). The results
+demonstrate that each component contributes distinctly to per-
+formance, as the full model achieves the highest average score
+(25.22%). Removing the token-level importance mask leads to the
+most substantial performance degradation (−3.03% on average),
+with a particularly sharp decline on 2WQA (−7.54%). This result
+strongly confirms that fine-grained token filtering is essential to
+suppress noise in retrieved documents and prevent the model from
+being distracted by irrelevant content. Removing the gating mech-
+anism results in a modest average decline (−0.81%), with notable
+drops on 2WQA and PopQA. This demonstrates the gate’s role in
+dynamically balancing between the model’s internal knowledge
+and external evidence, especially for fact-heavy queries. Replacing
+token-level filter with chunk-level filter causes a consistent degra-
+dation (−1.11%). While still beneficial compared to no masking, this
+5

@@ -1,0 +1,95 @@
+Findings of the Association for Computational Linguistics: ACL 2025, pages 10031–10044
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+Fine-grained Knowledge Enhancement for Retrieval-Augmented
+Generation
+Jingxuan Han1, Zhendong Mao1∗, Yi Liu3, Yexuan Che1
+Zheren Fu1 and Quan Wang2
+1University of Science and Technology of China, Hefei, China
+2MOE Key Laboratory of Trustworthy Distributed Computing and Service,
+Beijing University of Posts and Telecommunications, Beijing, China
+3State Key Laboratory of Communication Content Cognition, People’s Daily Online
+{hjx999222,yexuanche,fzr}@mail.ustc.edu.cn, liuyi2023@people.cn
+wangquan@bupt.edu.cn, zdmao@ustc.edu.cn
+Abstract
+Retrieval-augmented generation (RAG) effec-
+tively mitigates hallucinations in large language
+models (LLMs) by filling knowledge gaps with
+retrieved external information. Most exist-
+ing studies primarily retrieve knowledge docu-
+ments based on semantic similarity to assist in
+answering questions but ignore the fine-grained
+necessary information within documents. In
+this paper, we propose a novel fine-grained
+knowledge enhancement method (FKE) for
+RAG, where fine-grained knowledge primar-
+ily includes sentence-level information easily
+overlooked in the document-based retrieval pro-
+cess. Concretely, we create a disentangled
+Chain-of-Thought prompting procedure to re-
+trieve fine-grained knowledge from the exter-
+nal knowledge corpus. Then we develop a de-
+coding enhancement strategy to constrain the
+document-based decoding process using fine-
+grained knowledge, thereby facilitating more
+accurate generated answers. Given an existing
+RAG pipeline, our method could be applied in
+a plug-and-play manner to enhance its perfor-
+mance with no additional modules or training
+process. Extensive experiments verify the ef-
+fectiveness and generality of our method.
+1 Introduction
+Large language models (LLMs) have achieved im-
+pressive advancements across various tasks (Bang
+et al., 2023; Li et al., 2024) and applications (Zhao
+et al., 2024; Yuan et al., 2024) in recent years. How-
+ever, LLMs still lack knowledge underrepresented
+in their training data, especially in up-to-date and
+domain-specific settings (Zhuang et al., 2024; Liu
+et al., 2024). To address these limitations, Retrieval-
+Augmented Generation (RAG) techniques have
+been widely adopted to retrieve external knowl-
+edge and enhance LLMs in diverse tasks, such as
+question-answering(Mansurova et al., 2024), infor-
+∗ Corresponding author: Zhendong Mao.
+Q: What is Bridie O'Flaherty's occupation?
+(Ground Truth: politician)
+In 1910 O'Flaherty moved to 
+Achill for occupation. Her 
+occupation focused on 
+initiatives that uplifted the 
+local economy and supported 
+community development.
+Bridie O'Flaherty (27 October 
+1917 – 12 January 2006) was an 
+Irish Fianna Fáil politician. She 
+was one of five children born to 
+Patrick Lawless and Delia Laffy 
+of Bullaun, Loughrea.
+Accurate [Document B]Inaccurate [Document A]
+Retrieve Score: sA > sB, use [A] for answering Q.
+Ans: Not provided in retrieved documents.   
+Figure 1: A document-based RAG process, where the
+red portion represents the fine-grained necessary infor-
+mation. Due to keyword matches (blue portion) in the
+inaccurate document and irrelevant sentences (gray por-
+tion) in the accurate document, the inaccurate document
+receives a higher retrieval score and is consequently se-
+lected, thereby leading to an incorrect answer.
+mation extraction(Glass et al., 2023), and dialogue
+systems (Wang et al., 2024a).
+Previous RAG methods can be broadly divided
+into two groups. The first group (Shi et al., 2024a;
+Yan et al., 2024) typically adopts single-round re-
+trieval for one-hop questions, while the second
+group (Zhang et al., 2024; Shi et al., 2024b; Su
+et al., 2024) mostly employs multi-round retrieval
+for multi-hop questions. Both groups mostly re-
+trieve knowledge documents based on document
+semantic similarity and use entire retrieved docu-
+ments as input to help question answering. How-
+ever, the fine-grained necessary information within
+documents is easily overlooked in this process,
+even though it is critical for question answering.
+Therefore, the retrieved knowledge is not always
+accurate enough to facilitate correct answers.
+10031

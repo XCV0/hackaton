@@ -1,0 +1,79 @@
+Prompts
+Wikipedia (NQ &
+TriviaQA)
+Please generate {topics_n} diverse and specific topic categories covering all major subjects and
+articles found in Wikipedia, formatting each entry strictly as “topic name; detailed description”.
+ChatDoctor Please generate {topics_n} types of medical conditions, symptoms, reasons, and treatment methods that appear in patient-doctor conversations.
+Table 4: Topic generation prompts for each dataset.
+Prompts
+NQ & TriviaQA (RAG) Instruction: Give a simple short answer for the question based on the context\n Context: {con- text}.\n Question: {question}\n Answer:
+NQ & TriviaQA
+(Non-RAG) Instruction: Give a simple short answer for the question\n Question: {question}\n Answer:
+ChatDoctor (RAG)
+Instruction: If you are a doctor, please answer the medical questions based on the patient’s
+description and the provided Patient-Doctor chat example(s).\n Patient-Doctor chat example(s):
+{context}\n Patient: {question}\n Doctor:
+ChatDoctor
+(Non-RAG)
+Instruction: If you are a doctor, please answer the medical questions based on the patient’s
+description.\n Patient: {question}\n Doctor:
+Table 5: QA prompt templates for each dataset.
+the exact template), guiding the retriever toward
+x whenever it is present in D. (3) Membership
+scoring: the m queries are submitted to the RAG
+system, and the proportion of responses that match
+the pre-generated ground-truth answers serves as
+the membership score for x. A high match rate
+signals that x ∈ D and was successfully retrieved
+for generating the responses; a low match rate indi-
+cates that x is absent and the system must rely on
+its parametric knowledge alone.
+For evaluation, we construct Din by sampling
+from the private corpus D, and Dout from a held-
+out set disjoint from D, with both sets of equal
+size following Naseh et al. (2025). By sweeping
+a decision threshold over the membership scores
+and recording the corresponding true positive rate
+(TPR) and false positive rate (FPR), we obtain the
+TPR-FPR curve. AUC = 0.5 corresponds to ran-
+dom guessing, while AUC > 0.5 indicates the at-
+tacker is able to infer membership above chance.
+B.5 Threshold Calibration
+To avoid manual tuning, we calibrate θreject offline
+using the equal error rate (EER) criterion (Mar-
+tin et al., 1997). Using public LLM-synthesized
+queries paired with factual contexts, we construct
+a labeled calibration set by comparing the public
+model’s context-free top-1 predictions against its
+context-conditioned gold predictions. For each cali-
+bration query, exact matches are labeled as positive
+samples, while mismatches are labeled as nega-
+tive samples. We compute confidence scores S(x)
+for all calibration samples, estimate the means and
+standard deviations (µ±, σ±) of the two classes,
+and determine the threshold by equating the false
+positive and false negative rates under the Gaussian
+assumption:
+θreject − µ−
+σ−
+= µ+ − θreject
+σ+
+.
+Solving for θreject yields:
+θreject = σ− µ+ + σ+ µ− σ− + σ+ .
+The resulting θreject values for each model are re-
+ported in Sec. 5.1.
+B.6 Clipping Norm Derivation
+We derive the clipping norm C from the target per-
+step privacy budget ρtoken. The utility vector has
+an L∞-sensitivity of ∆u = 2C/K, resulting from
+element-wise clipping to [−C, C] followed by 1/K
+averaging.4 Our sampling instantiates the exponen-
+tial mechanism (McSherry and Talwar, 2007) with
+εtoken
+2∆u = 1 τ , giving:
+εtoken = 4C Kτ .
+4Under the add/remove adjacency: adding or removing
+one sample swaps at most one retrieved term, changing the
+clipped sum by at most 2C per coordinate.
+45307

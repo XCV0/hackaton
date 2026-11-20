@@ -1,0 +1,94 @@
+few groups, under-filling the token budget. We im-
+plemented an Adaptive Thresholding mechanism
+that dynamically relaxes the similarity boundary
+in these scenarios. This dynamic fallback restores
+context utilization from 64.2% to 86.4% and sig-
+nificantly lifts Exact Match scores, ensuring the
+framework remains robust against highly repetitive
+retrieved text.
+6.3 Validation of Faithfulness and Reward
+Mechanics
+A known vulnerability in test-time search frame-
+works is reward hacking, where evaluating outputs
+using the same model that guided the search (e.g.,
+our NLI verifier) can introduce an optimistic bias.
+To rigorously validate our faithfulness improve-
+ments, we cross-validated our generated answers
+using independent evaluators: an LLM-as-a-judge
+(GPT-5) and blind human annotation.
+Method Biased Eval Independent Eval
+NLI-AP GPT-5 Faith. Human Attr.
+Naive RAG 0.54 51.2% 53.0%
+CRAG 0.65 62.8% 64.3%
+Ours 0.85 81.4% 83.6%
+Table 6: Cross-Validation of Faithfulness on a challeng-
+ing subset of HotpotQA and MuSiQue.
+As shown in Table 6, while evaluating with the
+self-same NLI model shows a slight optimistic
+bias (0.85 AP), the independent human evaluation
+confirms a true attribution rate of 83.6%. This
+establishes a commanding absolute improvement
+of +19.3% over the strongest baseline (CRAG),
+proving that the reduction in hallucination is gen-
+uine and model-agnostic. Granular ablations of the
+MCTS reward function further show that asymmet-
+ric, severe penalties for contradictions (wc = −2.0)
+are necessary to prevent the planner from exploit-
+ing plausible-sounding but hallucinatory branches.
+6.4 Domain Robustness
+While off-the-shelf NLI models struggle with sub-
+tle, domain-specific negations, the modularity of
+our Phase II MCTS planner allows for seam-
+less swapping of the reward model. By integrat-
+ing domain-adapted NLI models (BioLinkBERT-
+large for PubMedQA and Legal-RoBERTa-base
+for LegalBench), we fully restore faithfulness. As
+shown in Table 7, this adaptation directly translates
+to state-of-the-art accuracy in specialized settings.
+Dataset Model Config. Accuracy (%) AP CR
+PubMedQA Ours (General NLI) 78.5 0.73 0.09 Ours (Medical NLI) 82.5 0.86 0.03
+LegalBench Ours (General NLI) 54.8 0.71 0.11 Ours (Legal NLI) 60.2 0.87 0.04
+Table 7: Impact of Domain-Adaptive NLI Models on
+specialized QA performance and faithfulness.
+6.5 Sensitivity Analysis
+We analyze our model’s robustness against key hy-
+perparameters, with detailed results provided in
+Appendix E. For the MMKP selector, maintain-
+ing a scaled redundancy budget of Cred ≈ 120
+optimally balances relevance and diversity to maxi-
+mize recall, whereas stricter budgets tend to discard
+lexically similar but valid evidence. Concurrently,
+the MCTS planner achieves optimal reasoning ac-
+curacy and generation consistency by utilizing a
+branching factor of k = 3, a maximum search
+depth of 3, and an increased number of simulations
+N . Furthermore, we observe that enforcing a strict
+contradiction penalty during the search process is
+essential to mitigate the generation of hallucinated
+content.
+6.6 Qualitative Analysis
+To investigate how Self-Correcting RAG rectifies
+errors, we analyze specific failure cases of the base-
+line. A common failure mode in multi-hop QA
+is reasoning shortcuts triggered by context crowd-
+ing. In these instances, redundant retrieved chunks
+displace key evidence, causing the model to hallu-
+cinate connections based on parametric memory.
+A detailed step-by-step trace of this behavior is
+provided in Appendix G.
+7 Conclusion
+We presented Self-Correcting RAG, a unified
+framework to enhance RAG robustness. We re-
+formulated context selection as the Multidimen-
+sional Multi-choice Knapsack Problem (MMKP)
+to maximize information density under strict token
+budgets. Additionally, we proposed an NLI-guided
+MCTS generator for faithfulness, using NLI as
+a reward model to prune hallucinatory reasoning
+paths. Experiments on six benchmarks show it
+outperforms strong agentic baselines, especially in
+complex multi-hop tasks. However, the planner’s
+iterative nature increases inference latency; future
+work will optimize sample efficiency to reduce test-
+time search computational cost.
+20961

@@ -1,0 +1,110 @@
+explanation provision is key to ensuring trustworthy decision-
+making to reconcile the system’s decisions with end-user
+expectations to foster confidence and acceptance [82, 8] in
+dynamic driving environments.
+Traditional approaches have mainly relied on attention
+visualisation [5, 7, 55] as a proxy to rationalise the decisions of
+the black-box systems or auxiliary intermediate tasks such as
+semantic segmentation [26, 34], object detection [16, 33], and
+affordance prediction [68, 45] provide meaningful intermediate
+representation for decision-making. However, these methods
+do not engage end-users in the dialogue as they are one-
+directional and not readily comprehensible by the general users
+for the purpose of fostering trust and confidence. An alternative
+promising approach is the integration of natural language
+explanations [39, 35, 54], in particular through Multi-Modal
+Large Language Models (MLLMs) [1, 71]. These models, pre-
+trained on extensive web-scale datasets, demonstrate remarkable
+reasoning capacity, enabling the transformation of complex
+vehicular decision-making processes into more understandable
+narrative formats, thereby offering a new layer of explainability
+to conventional systems.
+While several early attempts have demonstrated the potential
+of MLLMs as general explainable driving agents [81, 78, 51],
+these methods fall short of human-level understanding. One of
+the limitations is their failure to generalise to unseen environ-
+ments. A primary obstacle is the lack of high-quality annotated
+data [56], coupled with the significant domain shift across
+various datasets [24], which hinders the model’s generalisation
+capacity to novel environments outside of the training data
+distribution. Another critical challenge is the prohibitively
+expensive training requirement and the unsolved problem of
+catastrophic forgetting [40], which make re-training or fine-
+tuning impractical solutions due to the immense computational
+demands and severe performance degradation. Consequently,
+this further limits the models’ generalisability after deployment,
+as they struggle to effectively utilise new data in constantly
+evolving environments and driving scenarios.
+To address these challenges, we introduce RAG-Driver, a
+novel retrieval-augmented multi-modal large language model
+tailored for generalisable and explainable end-to-end driving.
+As illustrated in Fig. 1, it outputs natural language texts
+corresponding to (1) the driving action and (2) justification of
+that driving action along with (3) numerical control signals
+based on driving videos. Action and justification text accuracy,
+on the right, are much improved by our method (note that, for vi-
+sualisation, in-distribution and out-of-distribution Performance
+have different vertical scales, with the latter being a much
+more difficult task). The natural language texts are also aligned
+with control signals during in-context learning [10] to enable
+faithful introspective explanation provision. The novelty of
+RAG-Driver is the integration of retrieval-augmented in-context
+learning (RA-ICL) mechanisms that significantly improve
+generalisation performance in unseen driving environments. It
+allows efficient recall of similar driving scenarios as contextual
+information augmenting MLLM prediction through implicit
+meta-optimisation (Sec. III-C). Through extensive experiments,
+we show that RAG-Driver outperforms existing methods on
+both in-domain deployments as well as deployment in unseen
+environments (without any fine-tuning). By being grounded
+in analogical demonstrations, our framework significantly
+reduces the need for continuous retraining while enhancing
+the generalisability and quality of generated explanatory texts.
+Our primary contributions are as follows:
+1) Proposing a novel retrieval-augmented in-context learning
+method for Multi-Modal Large Language Model (MLLM)
+based generalisable and explainable driving.
+2) Achieving state-of-the-art introspective driving expla-
+nation performance on the standard benchmark BDD-
+X [39].
+3) Demonstrating exceptional zero-shot generalisation ca-
+pacity to unseen scenarios without training effort through
+a customised dataset Spoken-SAX featuring video se-
+quences narrated by a professional driving instructor.
+II. RELATED WORK
+A. Explainable End-to-End Autonomous Driving
+End-to-end learned driving [13] maps directly from raw
+sensor input to vehicle control signals. This data-driven, joint
+optimisation of perception, prediction, and planning can be
+simple and efficient [30]. In this area, various learning-based
+approaches, including behavior cloning [6, 12, 61, 86, 60],
+inverse optimal control [84, 65, 77], and reinforcement
+learning [37, 73, 11, 44] are promising. A key area of
+focus in this area is explainability [83], which is crucial for
+improving transparency and building trust towards wider public
+acceptance of autonomous systems [? 57]. One line of works
+leverages attention visualisation – either to directly identify
+salient regions of input images that are important for driving
+decision-making [38, 5, 7] or to assist feature aggregation for
+downstream motion planning tasks [55, 15, 80, 63]. Another
+line of work uses intermediate auxiliary tasks such as semantic
+segmentation [26, 34], object detection [16, 33], and affordance
+prediction [68, 45] which help to decode latent representations
+to human-understandable representation. While these meth-
+ods provide explainable mechanisms by associating decision-
+making processes with semantic or visual representations, they
+are not readily comprehensible by the general users for the
+purpose of fostering trust and confidence.
+Alternatively, recent research shows promise in utilising
+natural language explanation. Several works develop specialist
+explainers [39] using attention alignment in visual input and
+textual generation for grounded driving action explanation.
+ADAPT [35] uses a vision-language transformer with separate
+decoder for caption generation alongside control signal pre-
+diction. More recently, several works explore the potential of
+Multi-modal Large Language Models (MLLMs). Works such
+as, DriveGPT4 [81], Lingo [54], and DrivingMLM [78] have
+shown promising potential in general question-answering for
+driving and action planning. However, a common obstacle
+in both specialist and MLLM-based generalist models is
+the scarcity of data due to expensive annotation costs and

@@ -1,0 +1,68 @@
+Table 4: Cumulative analysis of the generator’s positive evaluation metrics across different attack tasks
+Model Noise Conflict Toxicity DoS
+F1_Variants AFR F1_Variants AFR F1_Variants AFR F1_Variants AFR
+DeepSeek 0.1032 - 0.4000 0.69 - 0.38 0.2068 0.17
+GPT-3.5-Turbo 0.1102 - 0.3615 0.72 - 0.47 0.1654 0.17
+GPT-4 0.1141 - 0.3615 0.66 - 0.29 0.4760 0.16
+GPT-4o 0.1229 - 0.3615 0.68 - 0.37 0.3196 0.28
+Qwen 7B 0.1016 - 0.4948 0.75 - 0.47 0.2582 0.57
+Qwen 14B 0.1005 - 0.5000 0.65 - 0.38 0.1842 0.29
+Baichuan 13B 0.0706 - 0.4800 0.87 - 0.59 0.7222 1.00
+ChatGLM 6B 0.0815 - 0.5966 0.55 - 0.27 0.5096 1.00
+1, . . . , Mt} is the selected knowledge base for the
+given attack task t. For a given query qj from Dt,
+and the knowledge base Ct b, we first construct a be-
+nign RAG pipeline, where neither the retriever R,
+the filter F , nor the generator G is influenced by
+malicious contexts. This allows us to observe the
+baseline performance of RAG in terms of retrieval
+and generation when no attacks are present.
+Under the threat framework presented in this
+paper, we then select malicious contexts from the
+attack source:
+Ct,j a = {c1,t a , . . . , ck′,t a }, k′ ≥ 1,
+where Ct,j a represents the k′ attack contexts in-
+jected by the attacker19. These contexts may be
+embedded into any stage of the RAG pipeline, tar-
+geting its specific components:
+(1) Attacking the Retriever: The attacker in-
+jects attack contexts Ct,j a into the original knowl-
+edge base Ct b, camouflaging them as relevant con-
+texts to compromise the retriever R. In this sce-
+nario, when the retriever executes R(qj , Ct b ∪Ct,j a ),
+it is likely to retrieve the attack text ca ∈ Ct,j a , re-
+sulting in erroneous or biased contexts that affect
+subsequent filter and generation stages.
+(2) Attacking the Filter: The attacker directly
+incorporates attack contexts into the retriever’s out-
+put Ck r , such that:
+topK(Ct,j a ∪ Ck r ) = ({c1,t a , . . . , ck′,t a ,
+c1 r , . . . , ck r })[: K].
+Consequently, the filter F and generator G misin-
+terpret these attack texts as part of the retrieved con-
+texts, integrating them into the subsequent stages
+of the pipeline.
+19For the text injection attack, the attacker first ejects the
+original bottom k’ benign contexts and then injects k’ mali-
+cious contexts.
+(3) Attacking the Generator: The attacker dis-
+rupts the filter stage by introducing Ct,j a into the
+filtered results Cm f , such that:
+topK(Ct,j a ∪ Cm f ) = ({c1,t a , . . . , ck′,t a ,
+c1 f , . . . , cm f })[: K].
+This action directly distorts the input contexts
+for the generator.
+Regardless of the stage at which the injection
+occurs, the attacker’s objective is to mislead or
+compromise the RAG pipeline’s final output r by
+leveraging the attack contexts Ct,j a . It is important
+to note that, under the attack assumptions in this
+paper, golden contexts Cj g are neither altered in
+content nor re-ranked20. Through this method, the
+attacker maximizes the system’s original usability
+and normalcy while covertly influencing the RAG
+pipeline’s generated responses.
+20This setting is widely adopted in numerous many attacks
+(Xiang et al., 2024; Zhong et al., 2023; Zou et al., 2024; Pan
+et al., 2023b,a; Du et al., 2022).
+4621

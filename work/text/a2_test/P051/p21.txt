@@ -1,0 +1,14 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+Provide your evaluation in this EXACT JSON
+format :
+{ json_template }
+Note : overall_score must be a number between
+0.0 and 1.0
+Your evaluation :""" ,
+input_variables =[" query " , " question_type " , "
+answer " , " correct_answer " , " source_document
+" , " cor rect_docu ment " , " source_location " , "
+correct_source " , " re l e va n t_ t e xt _ s pa n " , "
+correct_span "]
+)
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 21 of 21

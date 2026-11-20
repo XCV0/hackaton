@@ -1,0 +1,72 @@
+STRIDE: Strategic Iterative Decision-Making for Retrieval-Augmented Multi-Hop Question Answering SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia
+Table 1: Evaluation results on multi-hop QA benchmarks. EM, F1, P, and R denote Exact Match, F1 score, Precision, and Recall
+respectively. Best and second-best results within each model group are highlighted in bold and underlined, respectively.
+Method 2WikiMultihopQA HotpotQA MuSiQue
+EM F1 P R EM F1 P R EM F1 P R
+GPT-4o-mini
+CoT 0.385 0.436 0.432 0.448 0.346 0.441 0.459 0.442 0.120 0.223 0.236 0.234
+RAG w/ CoT 0.484 0.552 0.547 0.573 0.522 0.633 0.646 0.669 0.186 0.308 0.313 0.335
+Iter-RetGen 0.446 0.517 0.505 0.557 0.551 0.668 0.676 0.723 0.156 0.289 0.267 0.444
+GenGround 0.467 0.628 0.594 0.731 0.480 0.623 0.613 0.705 0.230 0.372 0.355 0.475
+DualRAG 0.660 0.720 0.711 0.752 0.578 0.679 0.691 0.694 0.277 0.399 0.393 0.481
+STRIDE 0.661 0.777 0.744 0.837 0.564 0.671 0.683 0.695 0.330 0.467 0.471 0.514
+Qwen3-8B
+CoT 0.308 0.361 0.355 0.381 0.220 0.303 0.311 0.324 0.045 0.123 0.128 0.146
+RAG w/ CoT 0.397 0.460 0.451 0.503 0.501 0.602 0.616 0.625 0.144 0.227 0.234 0.262
+SelfAsk 0.299 0.362 0.351 0.394 0.449 0.520 0.529 0.542 0.166 0.240 0.239 0.269
+Iter-RetGen 0.413 0.455 0.453 0.467 0.519 0.619 0.633 0.634 0.148 0.239 0.251 0.264
+GenGround 0.621 0.717 0.702 0.760 0.523 0.628 0.636 0.664 0.218 0.325 0.331 0.353
+DualRAG 0.622 0.691 0.682 0.724 0.552 0.658 0.666 0.701 0.229 0.316 0.321 0.349
+STRIDE 0.692 0.773 0.757 0.815 0.549 0.653 0.662 0.681 0.288 0.401 0.407 0.461
+STRIDE-FT 0.738 0.796 0.798 0.806 0.601 0.691 0.723 0.682 0.350 0.448 0.475 0.448
+An interesting observation is the performance gap between
+LLM backbones across datasets. On 2WikiMultihopQA, which fea-
+tures relatively structured reasoning paths, STRIDE with Qwen3-8B
+achieves higher EM (0.692) than with GPT-4o-mini (0.661), suggest-
+ing that Qwen3-8B’s strong instruction-following capability and
+output controllability lead to more precise answer generation. In
+contrast, on the more challenging MuSiQue, GPT-4o-mini signifi-
+cantly outperforms Qwen3-8B (0.33 vs. 0.288 EM), indicating that
+its superior language understanding and generalization are critical
+when reasoning depth increases. This highlights the complemen-
+tary strengths of different LLMs and the adaptability of STRIDE
+across model families.
+Furthermore, the fine-tuned variant (i.e., FT) provides consistent
+and substantial improvements. For instance, on 2WikiMultihopQA
+with Qwen3-8B, FT boosts EM from 0.692 to 0.738 (+0.046), and
+on MuSiQue, it increases F1 from 0.401 to 0.448 (+0.047). Notably,
+FT with Qwen3-8B closes the performance gap with GPT-4o-mini
+and even surpasses it on two datasets, validating that our modular
+fine-tuning strategy effectively leverages self-generated trajectories
+to enhance reasoning quality without external supervision.
+Together, these results demonstrate that STRIDE enables robust
+and scalable multi-hop reasoning in complex scenarios.
+4.4 Ablation Study
+We conduct comprehensive ablation studies to evaluate the con-
+tribution of each component in STRIDE and the effectiveness of
+modular fine-tuning. Results are reported in Tables 2 and 3.
+Table 2: Ablation study of STRIDE. Removing any module
+degrades performance, especially the Supervisor.
+Variant 2Wiki. HotpotQA MuSiQue
+EM F1 EM F1 EM F1
+STRIDE 0.692 0.773 0.549 0.653 0.288 0.402
+w/o Meta-Planner 0.495 0.622 0.510 0.612 0.272 0.381
+w/o Supervisor 0.448 0.538 0.522 0.632 0.183 0.272
+w/o Extractor 0.673 0.764 0.531 0.645 0.271 0.371
+w/o Fallback 0.683 0.764 0.544 0.649 0.266 0.370
+Ablation on the Framework. We first examine the impact of
+removing key modules from the inference pipeline. w/o Meta-
+Planner disables the abstract reasoning strategy by removing all
+General Strategy-related prompts, forcing the planner to directly
+output a concrete plan without high-level intent modeling. This
+leads to significant performance drops across all datasets (e.g.,
+−0.197 EM on 2WikiMultihopQA with Qwen3-8B), demonstrat-
+ing that abstract planning provides crucial scaffolding for robust
+multi-hop decomposition. w/o Supervisor replaces our process-
+aware supervisor with a conventional sequential execution pipeline,
+where sub-questions are answered in fixed order and each retrieval
+depends solely on the previous answer. The resulting performance
+degradation, particularly on MuSiQue (-0.105 EM), highlights the
+importance of dynamic scheduling and dependency-aware control
+in handling complex reasoning graphs with parallel or conditional
+branches. w/o Extractor skips atomic fact extraction and lets the

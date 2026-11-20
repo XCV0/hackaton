@@ -1,0 +1,49 @@
+A PREPRINT
+{
+"year": "15YR",
+"successRate": "77.9",
+"avgRollingCompositReturn": "12.62",
+"avgRollingIndexReturn": "11.09",
+"avgRollingOutpacedReturn": "2.33",
+"periodCompositeOutpacedIndex": "406",
+"periodCompositeLaggedIndex": "115",
+"frequency": "quarterly"
+},
+{
+"year": "20YR",
+"successRate": "83.9",
+"avgRollingCompositReturn": "12.46",
+"avgRollingIndexReturn": "11.08",
+"avgRollingOutpacedReturn": "1.72",
+"periodCompositeOutpacedIndex": "387",
+"periodCompositeLaggedIndex": "74",
+"frequency": "quarterly"
+}
+]
+}
+8.2 LPG Data Model Example
+{
+"originalName": "AMCAP Fund",
+"productType": "AF",
+"fundType": "Growth",
+"inceptionDate": "05/01/1967"
+}
+The corresponding Cypher query is:
+MERGE (f:Fund {fundFamily: $fundFamily})
+SET f.name = $name,
+f.originalName = $originalName,
+f.inceptionDate = $inceptionDate
+MERGE (pt:ProductType {type: $productType})
+MERGE (ft:FundType {type: $fundType})
+MERGE (f)-[:HAS_PRODUCT_TYPE]->(pt)
+MERGE (f)-[:HAS_FUND_TYPE]->(ft)
+8.3 Example: Cypher Code for Schema Extraction
+The followings are the cypher code for extracting all the labels and all the properties per label.
+Extract all node labels:
+MATCH (n) RETURN DISTINCT labels(n) AS node_labels
+Extract all properties for a given label:
+MATCH (n:LabelName)
+UNWIND keys(n) AS prop
+RETURN DISTINCT prop
+ORDER BY prop
+15

@@ -1,0 +1,86 @@
+A Experimental Details
+A.1 More Implementation Details
+We run our models on eight NVIDIA RTX A6000
+GPU devices. To get a better performance, for IR-
+CoT, we set the iteration number to 5. For all base-
+lines, we reproduced the key settings from their
+original papers as faithfully as possible under par-
+tially unified conditions, including the few-shot
+setting. In contrast, our DRAG performs infer-
+ence under a zero-shot setting. As a training-based
+approach, Self-RAG utilizes the Self-RAG-Llama-
+2-7B1 model provided by its authors for experimen-
+tation. Additionally, since SuRe and Self-RAG are
+not well-suited for answering questions with defini-
+tive yes/no answers, their performance is relatively
+poor.
+A.2 Prompts for Retrieval Debate
+An example of a proponent agent prompt in the
+Retrieval Debate stage is
+Prompt for Proponent Agent
+You are a debater. Argue that the current
+retrieved content is sufficient to answer the
+question and no further retrieval is needed.
+Deliver a brief, strong argument with clear
+reasoning. Do not suggest further retrieval.
+Question:
+{question}
+Queries:
+{queries in Q}
+Retrieved Documents:
+{retrieved results in CQ}
+In the Retrieval Debate stage, the challenger
+agent is responsible for proposing modifications
+to unreasonable queries or initiating new retrieval
+queries to address further knowledge needs. In-
+spired by Toolformer (Schick et al., 2023) and
+FLARE (Jiang et al., 2023), we can directly prompt
+the agent to choose two types of operations: Query
+Optimization and Query Expansion, and an ex-
+ample prompt is
+1https://huggingface.co/selfrag/selfrag_
+llama2_7b
+Prompt for Challenger Agent
+You are a critical thinker and debater, and
+your task is to challenge the sufficiency of
+the current retrieved content. Argue that the
+current information is insufficient to gen-
+erate a reliable answer and propose either
+query optimization or query expansion.
+The action you can choose:
+1. Query Optimization: If the retrieved
+content is somewhat relevant but has
+expression or scope issues.
+Optimize the query using this format:
+Query Optimization: [Original Query] →
+[New Query].
+2. Query Expansion: If critical informa-
+tion is missing.
+Propose a new query using this format:
+Query Expansion: [New Query].
+Deliver a brief, strong argument with
+clear reasoning, and then you must choose
+only one action. The output must be in the
+exact format after your reasoning, without
+additional explanation, and keep the new
+query short and precise.
+Question:
+{question}
+Queries:
+{queries in Q}
+Retrieved Documents:
+{retrieved results in CQ}
+Instead of calculating the convergence condi-
+tions, we directly use the judge agent to evaluate
+the arguments presented by the proponent agent
+and the challenger agent and determine the win-
+ning agent for the current round of debate. An
+example prompt is
+Prompt for Judge Agent
+You are the judge in a debate. Your task is
+to evaluate the arguments from agents.
+There are two types of agents:
+1. Proponent Agent: Argue that the current
+retrieved content is sufficient.
+2. Challenger Agent: Argue that the current
+15850

@@ -1,0 +1,60 @@
+Appl. Sci. 2025, 15, 2930 14 of 20
+consider the height (0.3 V) of the barrier attributed to the hole-blocking heterojunction and
+add it to Vbi under illumination (0.53 V), we obtain a value very close to the Vbi (0.83 V) in
+the dark. This confirms that the first term on the left side of Equation (8) is significantly
+influenced by g, the photocarrier generation rate, as corroborated by the presence of the
+crossover discussed above.
+Appl. Sci. 2025, 15, x FOR PEER REVIEW 15 of 22 
+ 
+the dark. This con ﬁrms that the ﬁrst term on the left side of Equation (8) is signi ﬁcantly 
+inﬂuenced by g, the photocarrier generation rate, as corroborated by the presence of the 
+crossover discussed above. 
+ 
+Figure 11. Plot of 1/C3 as a function of the bias voltage: (a) under light, (b) in dark conditions. 
+3.5. Deep Levels 
+In the dark, the plot of the J-V curve on a log–log graph exhibits three distinct linear 
+regions [47–50]: 
+• Ohmic region (𝐽∝𝑉); 
+• Trap-ﬁlling-limit region (𝐽∝𝑉௡வଶ); 
+• Child region (𝐽∝𝑉ଶ). 
+In the presence of traps, increasing the applied voltage results in an increased injected 
+current, which will ﬁll empty traps. The trap density (𝑁௧) can be determined from the trap-
+ﬁlling-limit (Vtﬂ) voltage, which is the intersection between the linear ﬁts of the ohmic and 
+trap-ﬁlling-limit regions of Figure 12. Once the intersection is known, the trap density can 
+be calculated from the following relation [21,51]: 
+𝑁௧ = 2𝜖𝜖଴𝑉௧௙௟ 𝑞𝐿ଶ  (11)
+where ε is the relative dielectric constant (assumed equal to 15.1 [45,46]), ε0 is the vacuum 
+dielectric constant, q is the electron charge, and L is the antimony selenide thickness [52]. 
+With an estimated trap density of N t ≈ 1.1 · 1013 cm-3, it can be then assumed that all 
+traps in the Child region are ﬁlled. 
+Consequently, the relationship governing th e current–voltage trend in this region 
+follows the Mott–Gurney law [48]. 
+𝐽஼ = 9 8 𝜖𝜖଴𝜇௛ 𝑉஼ −V௕௜ 𝐿ଷ  (12)
+Here, JC and VC are the values at the intercept between the linear ﬁts of trap- ﬁlling-
+limit and Child regions. Vbi is the built-in voltage in the dark, and µh denotes the hole 
+mobility. Solving Equation (12) yields µh ≈ 8.9 cm2 V−1 s−1. 
+Figure 11. Plot of 1/C3 as a function of the bias voltage: (a) under light, (b) in dark conditions.
+3.5. Deep Levels
+In the dark, the plot of the J-V curve on a log–log graph exhibits three distinct linear
+regions [47–50]:
+• Ohmic region (J ∝ V);
+• Trap-filling-limit region (J ∝ Vn>2);
+• Child region (J ∝ V2).
+In the presence of traps, increasing the applied voltage results in an increased injected
+current, which will fill empty traps. The trap density (Nt) can be determined from the
+trap-filling-limit (Vtfl) voltage, which is the intersection between the linear fits of the ohmic
+and trap-filling-limit regions of Figure 12. Once the intersection is known, the trap density
+can be calculated from the following relation [21,51]:
+Nt =
+2ϵϵ0Vt f l
+qL2 (11)
+where ε is the relative dielectric constant (assumed equal to 15.1 [45,46]), ε0 is the vacuum
+dielectric constant, q is the electron charge, and L is the antimony selenide thickness [52].
+With an estimated trap density of Nt ≈ 1.1 · 1013 cm-3, it can be then assumed that all
+traps in the Child region are filled.
+Consequently, the relationship governing the current–voltage trend in this region
+follows the Mott–Gurney law [48].
+JC = 9 8 ϵϵ0µh VC − Vbi L3 (12)
+Here, JC and VC are the values at the intercept between the linear fits of trap-filling-
+limit and Child regions. Vbi is the built-in voltage in the dark, and µh denotes the hole
+mobility. Solving Equation (12) yields µh ≈ 8.9 cm2 V−1 s−1.

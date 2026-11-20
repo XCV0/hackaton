@@ -1,0 +1,99 @@
+by human annotators. We use the 568 synthetically
+generated internal facts, which are designed not
+to appear on the public web and therefore are not
+expected to be recoverable from the model’s inter-
+nal memory. Additional construction details and
+prompts are provided in Appendix A.
+3.1 Dataset Construction
+Each DRBench task contains internal insights gen-
+erated from the organization’s industry, priorities,
+customer segments, and business goals. Since we
+focus on retrieval-augmented question answering
+rather than full deep-research report generation, we
+convert each internal insight into a QA pair. For
+example, the insight “Lee’s Market reduced food
+waste by 8% in Q2 2024, saving $1.2M” becomes
+the question “What food-waste reduction rate did
+Lee’s Market achieve in Q2 2024?”
+For each QA pair, we construct an evidence set
+with four document types: correct, misinforma-
+tion, temporal, and noise. Correct documents con-
+tain the ground-truth answer, misinformation doc-
+uments contain a plausible but incorrect answer,
+temporal documents contain an answer that was
+valid at an earlier document date, and noise docu-
+ments are topically plausible but do not answer the
+question. Each document is assigned a document
+date in ISO 8601 format and an original source type
+such as email, chat, PDF, DOCX, or slide deck.
+DRBench generates insight files through a three-
+step needle-in-a-haystack procedure (Abaskohi
+et al., 2026) by first producing a document outline
+in a randomly assigned source type, and then in-
+jecting the ground-truth insight into an appropriate
+section, before finally filling the remaining sections
+with contextually plausible but topically irrelevant
+text. We reuse the DRBench insight and distrac-
+tor files as correct and noise documents. Since we
+evaluate model reasoning rather than file extraction,
+we serialize documents as Markdown and JSONL
+formats for model input.
+Misinformation To construct misinformation
+documents, we prompt the LLM to generate a plau-
+sible perturbation of the ground-truth insight and
+then use the same three-step DRBench document-
+generation procedure. To make these documents
+realistic but not explicitly labeled, we add subtle
+format-specific uncertainty markers, such as con-
+versational hedges in chat or tentative phrasing in
+reports. These markers reflect naturally occurring
+epistemic language in enterprise communication,
+but do not identify the document as incorrect. Thus,
+models must rely on weak cues, source metadata,
+and context rather than explicit correctness labels.
+Temporal Temporal documents are generated to
+read as authoritative at the time of writing, rather
+than as retrospective historical summaries. We first
+sample the document_date uniformly between 6
+months and 3 years before the ground-truth doc-
+ument date, then prompt the LLM to generate a
+value that would have been accurate and current as
+of that date. A second call produces the full doc-
+ument in present tense using the same DRBench
+document-generation procedure.
+We ensure that temporal documents contain no
+explicit “archived” or “outdated” labels, where
+document_date is the sole staleness signal. The
+direction of change is unconstrained, since the con-
+flict should be resolved by comparing dates rather
+than by judging whether a trend is intuitive. When
+serialized for model input, each document is pre-
+ceded by its document date and source format.
+3.2 Quality Verification
+Complementing DRBench’s per-file human spot-
+check protocol, we apply an automated LLM-as-a-
+judge quality filter to all generated conflict docu-
+ments. Each document type is checked against a
+fixed rubric that returns a structured JSON binary
+verdict. For misinformation documents, we verify
+that the claimed answer is factually and specifically
+different from the ground truth while remaining
+plausible to an uninformed reader. For temporal
+documents, we verify that the historical answer is
+distinct from the current ground truth and that the
+document contains no explicit staleness labels. We
+manually inspect and fix failures, then rerun the
+filter until all criteria are met.
+Unlike standard open-domain QA benchmarks,
+where retrieval is usually expected to help, DRQA
+creates a setting in which retrieval is necessary but
+not sufficient. The answers are synthetic private
+facts, and each retrieved bundle contains both the
+correct answer and plausible contradictions. The
+evaluation question is therefore not only whether
+the model benefits from retrieval, but which value
+it commits to when confronted with conflicting and
+noisy evidence. DRQA directly evaluates retrieval-
+grounded conflict resolution, a capability that re-
+mains underexplored in prior work.
+4

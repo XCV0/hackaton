@@ -1,0 +1,6 @@
+publication_id,issue_id,record_ids,check_name,description,source_page,source_fragment
+D022,I1,R031;R040,contradiction,"FF прибора с AZO ETL: в Table 2 — 37.0 %, в тексте — «FF increases from 31 to 41.4%» (41.4 % — FF прибора с 30 нм a-Si:H и ZnO); относительный рост 20 % соответствует 37.0, а не 41.4.",6,FF increases from 31 to 41.4% when switching the ZnO ﬁlm by an AZO ﬁlm
+D022,I2,R017;R018;R019;R020,jv_consistency,DV1: Voc*Jsc*FF = 0.290*1.85*0.310 = 0.166 мВт/см2 (Pin=100) против PCE 0.21 % — отклонение 21 % (>3 %),4,0.29 1.85 31.0 0.21
+D022,I3,R009;R010;R011;R012,jv_consistency,DV3: Voc*Jsc*FF = 0.330*1.86*0.308 = 0.189 мВт/см2 (Pin=100) против PCE 0.22 % — отклонение 14 % (>3 %),4,0.33 1.86 30.8 0.22
+D022,I4,R013;R014;R015;R016,jv_consistency,DV4: Voc*Jsc*FF = 0.460*3.50*0.334 = 0.538 мВт/см2 (Pin=100) против PCE 0.52 % — отклонение 3 % (>3 %),4,0.46 3.50 33.4 0.52
+D022,I5,R029;R030;R031;R032,jv_consistency,DV5: Voc*Jsc*FF = 0.430*2.86*0.370 = 0.455 мВт/см2 (Pin=100) против PCE 0.41 % — отклонение 11 % (>3 %),5,FTO/AZO (75 nm)/a-Si:H (15 nm)/MoO3 (10 nm)/ITO 79 62 0.43 2.86 37.0 0.41 0.25

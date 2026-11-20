@@ -1,0 +1,15 @@
+Table S7: Comparison of different queries generation models. This table compares the NDCG5 performance
+of the ColQwen model fine-tuned with the original data of ColPali and our generated table-focused data from the
+FinTabNet dataset. The evaluation is conducted for two query generation approaches: one using Pixtral and the
+other using Qwen. The rephrasing for the benchmarks was performed using LLaMA-3-3-70B. Results are presented
+across rephrasing levels (0 and 3) for our retrieval benchmarks.
+FinReport FinSlides TechReport TechSlides
+Rephrasing Level 0 3 0 3 0 3 0 3
+ColPali 52.7 34.5 62.2 27.6 80.6 62.0 89.7 75.8
+ColQwen 60.8 41.8 59.3 31.1 84.2 66.9 91.3 78.1
+ColTab (Pixtral Queries Gen.) 78.2 54.0 77.1 49.6 83.6 65.9 92.4 78.9
+ColTab (Qwen Queries Gen.) 74.8 49.5 74.3 41.5 83.8 66.8 92.6 79.5
+ColRobTab (Pixtral Queries Gen.) 79.7 67.1 79.6 61.6 83.7 73.2 92.5 85.0
+ColRobTab (Qwen Queries Gen.) 73.5 61.1 78.9 60.0 82.8 71.8 91.8 84.7
+Figure S4: Query Generation Prompt
+31679

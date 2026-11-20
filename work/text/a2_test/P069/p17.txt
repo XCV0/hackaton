@@ -1,0 +1,39 @@
+Qualitative Analysis on HQA for DA Objective
+Question: Roger O. Egeberg was Assistant Secretary for Health and Scientific Affairs during the
+administration of a president that served during what years?
+Ground-truth answer: “1969 until 1974”
+Answer from base 8B: “Nixon”
+Answer from 8B + FT: “1969 until 1974, when he resigned from office, the only U.S. president to
+do so.”
+Figure 2: An example from HQA, showing the effect of DA objective.
+Qualitative Analysis on NQ for DB Objective
+Question: when did the first wireless beats come out?
+Ground-truth answer: October 2012
+(Gold Passage, “Beats Electronics”) In October 2012, Beats unveiled its first two self-developed
+products, "Beats Executive" headphones and "Beats Pill" wireless speakers—Iovine believed that
+. . .
+(Passage 1, “Beats Electronics”) . . . The appointment of a new chief operating officer (COO), a
+role previously filled by Wood, was announced in early November 2013. . . .
+(Passage 2, “The Pacemaker”) It was also at the Amsterdam dance event. Originally scheduled
+for release in February 2008, slight delays pushed it back to March 2008 when the first units were
+shipped. . . .
+. . .
+(Passage 9, “Interscope Records”) 2006, Dre and Iovine established Beats Electronics. Dre had
+been approached by his attorney to start a line of sneakers, and when he told Iovine about the idea,
+. . .
+Figure 3: An example from NQ, showing the effect of DB objective.
+via GRAD-style logit-space composition, or (2)
+in parameter space by merging multiple adapters
+into a single set of weights, eliminating additional
+decoding-time overhead.
+Table 17 compares these alternatives on HQA,
+using DA and DB objectives where both are en-
+abled. Overall, these results suggest that LoRA
+adapters provide a promising lightweight realiza-
+tion of objectives in GRAD (second row). Al-
+though merging them in parameter space slightly
+hurts performance compared to decoding-time com-
+position (third row), it still offers substantial im-
+provements while avoiding the decoding-time over-
+head.
+45290

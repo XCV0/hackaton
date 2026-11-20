@@ -1,0 +1,90 @@
+Findings of the Association for Computational Linguistics: EMNLP 2026, pages 46521–46535
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+SPROUTRAG: Attention-Guided Tree Search with Progressive
+Embeddings for Long-Document RAG
+Amirhossein Abaskohi1*, Issam H. Laradji1,2, Peter West1, Giuseppe Carenini1
+1University of British Columbia, 2ServiceNow Research
+Abstract
+Retrieval-augmented generation (RAG) sys-
+tems must balance retrieval granularity with
+contextual coherence, a challenge that existing
+methods address through LLM-guided chunk-
+ing, single-level context expansion, or hierar-
+chical summarization. These approaches var-
+iously depend on costly LLM calls during in-
+dexing or retrieval, limit context aggregation to
+a single granularity level, or introduce informa-
+tion loss through summarization. We present
+SPROUTRAG, an attention-guided hierarchi-
+cal RAG framework that addresses this trade-
+off by organizing sentence-level chunks into
+progressively larger but semantically coherent
+units, using learned inter-sentence attention to
+construct a binary chunking tree. Unlike prior
+approaches that rely on external LLMs, fixed
+context expansion, or lossy summarization,
+SPROUTRAG learns which attention heads and
+layers best capture semantic document struc-
+ture, enabling multi-granularity retrieval with-
+out additional LLM calls or compressed sum-
+maries. At retrieval time, SPROUTRAG uses hi-
+erarchical beam search to retrieve candidates at
+multiple granularities, capturing multi-sentence
+relevance beyond flat retrieval. The frame-
+work is trained end-to-end with a joint objec-
+tive that improves both embeddings and tree
+structure. Experiments across four benchmarks
+spanning scientific, legal, and open-domain set-
+tings demonstrate that SPROUTRAG improves
+information efficiency (IE) by 6.1% on average
+over the strongest baseline1.
+1 Introduction
+Retrieval-augmented generation (RAG) has be-
+come the dominant paradigm for grounding large
+language models (LLMs) in external knowledge,
+helping reduce hallucinations, support domain-
+specific reasoning, and improve performance on
+*Corresponding author: aabaskoh@cs.ubc.ca
+1Code is available on /github GitHub.
+knowledge-intensive tasks (Lewis et al., 2020; Au-
+genstein et al., 2024). As LLMs are increasingly
+applied to complex tasks involving long docu-
+ments (Jin et al., 2025a), directly providing entire
+documents as input becomes impractical due to
+context-length constraints and degraded attention
+over extended sequences (Jin et al., 2025b; Liu
+et al., 2024). Consequently, RAG frameworks seg-
+ment documents into chunks and retrieve the most
+relevant pieces to construct focused, high-quality
+evidence for generation.
+The effectiveness of this retrieval step hinges
+critically on how documents are segmented. Large
+chunks preserve contextual coherence but intro-
+duce redundant noise that dilutes key information,
+while fine-grained chunks offer precision but suf-
+fer from semantic fragmentation and broken inter-
+chunk relationships (Tao et al., 2025; Zhao et al.,
+2025a). This problem is particularly acute for cross-
+paragraph retrieval, where answering a query re-
+quires synthesizing information scattered across
+multiple document sections, as in multi-hop rea-
+soning and summarization tasks (Liu et al., 2025).
+Recent work addresses this challenge from sev-
+eral directions. SAKI-RAG (Tao et al., 2025) uses
+a SLLM (An et al., 2024) to merge semantically re-
+lated sentence pairs and relies on an external LLM
+to filter retrieval candidates. However, extending
+this pairwise expansion to multi-chunk relevance
+greatly increases the candidate space and makes
+LLM filtering expensive. LLM-guided chunk-
+ing methods such as Meta-Chunking (Zhao et al.,
+2025b) and MoC (Zhao et al., 2025a) improve
+segmentation quality, but discard cross-chunk de-
+pendencies after chunking. Hierarchical meth-
+ods such as RAPTOR (Sarthi et al., 2024) sup-
+port multi-granularity retrieval through clustering
+and summarization, yet clustering treats chunks
+within a group as interchangeable and summaries
+can lose evidence. Graph-based methods such as
+GraphRAG (Edge et al., 2025) model entity re-
+46521

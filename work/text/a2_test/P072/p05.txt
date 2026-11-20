@@ -1,0 +1,98 @@
+Face4RAG: Factual Consistency Evaluation for Retrieval Augmented Generation in Chinese KDD ’24, August 25–29, 2024, Barcelona, Spain
+Table 2: Examples for Knowledge Error and Logic Fallacy. For each error types, the example in Chinese and the translated
+version to English are presented. The colored text spans highlight the segments of factual inconsistency errors.
+Error Type Original Text Factual Inconsistent Text
+KCont. 功能饮料中的维生素、矿物质等，对于运动后快速补
+充身体营养，消除疲劳具有一定作用。
+The vitamins and minerals in energy drinks play a certain
+role in quickly replenishing nutrients and eliminating fa-
+tigue after exercise.
+功能饮料中的元素、微生物等，对于运动后快速补充
+身体营养，增加疲劳具有一定作用。
+The vitamins and minerals in energy drinks play a certain
+role in quickly replenishing nutrients and inducing fatigue
+after exercise.
+KInve. 一般蚕可以活一个多月，其中从孵化到结茧根据季节
+不同大约是25-32天，变成蛹后有15-18天，最后成蛾
+是1-3天。
+A typical silkworm can live for just over a month, during
+which the period from hatching to cocooning varies roughly
+from 25 to 32 days depending on the season, followed by
+15 to 18 days as a pupa, and finally 1 to 3 days as a moth.
+一般蚕可以活一个多月，其中从孵化到结茧根据季节
+不同大约是15-18天，变成蛹后有25-32天，最后成蛾
+是1-3天。
+A typical silkworm can live for just over a month, during
+which the period from hatching to cocooning varies roughly
+from 15 to 18 days depending on the season, followed by
+25 to 32 days as a pupa, and finally 1 to 3 days as a moth.
+KConf. 防晒霜中的无机化学物质可以反射或散射皮肤上的光
+线，而有机(碳基)化学物质可以吸收紫外线。
+The inorganic chemicals in sunscreen can reflect or scatter
+light on the skin, while organic (carbon-based) chemicals
+can absorb ultraviolet rays.
+防晒霜中的无机化学物质和有机(碳基)化学物质都可
+以反射或散射皮肤上的光线、吸收紫外线。
+Both the inorganic chemicals and organic (carbon-based)
+chemicals in sunscreen can reflect or scatter light on the
+skin and absorb ultraviolet rays.
+KConc. 随着健康意识的增强，越来越多的人开始注重膳食平
+衡。
+With the increasing awareness of health, more and more
+people are beginning to focus on a balanced diet.
+随着健康意识的增强，越来越多的人开始注重膳食的
+有机质量。
+With the increasing awareness of health, more and more
+people are beginning to focus on the organic quality of their
+diets.
+LOver. 一般的我们平时见到的蜘蛛都是晚上出来。
+The spiders that we usually see tend to come out at night.
+一般的我们平时见到的昆虫都是晚上出来。
+The insects that we usually see tend to come out at night.
+LCaus. 随着信息技术的快速发展，大数据在各行各业中的应
+用越来越广泛。
+With the rapid development of information technology, the
+application of big data across various industries is becoming
+increasingly widespread.
+大数据在各行各业中的应用越来越广泛，这导致了信
+息技术的快速发展。
+The application of big data across various industries is be-
+coming increasingly widespread, leading to the rapid devel-
+opment of information technology.
+LConf. 为了获得某项荣誉学生奖学金，学生必须具备以下条
+件：成绩优秀、品行端正、参加社会实践活动。
+To receive a certain honor student scholarship, students
+must meet the following criteria: excellent academic per-
+formance, good moral character, and participation in social
+practice activities.
+学生成绩优秀、品行端正就可以获得某项荣誉学生奖
+学金。
+Students with excellent academic performance and good
+moral character can receive a certain honorary student
+scholarship.
+LIncl. 坚持锻炼身体可以提高心肺能力，加强肌肉的耐力，
+提高身体的抗疲劳能力。
+Regular exercise can enhance cardiorespiratory fitness,
+strengthen muscle endurance, and improve the body’s re-
+sistance to fatigue.
+坚持锻炼身体可以提高心肺能力，例如加强肌肉的耐
+力、提高身体的抗疲劳能力。
+Regular exercise can enhance cardiorespiratory fitness, such
+as strengthening muscle endurance and improving the
+body’s resistance to fatigue.
+percentage, with 77.91% of its errors being of this specific type;
+in comparison, Qwen only has 57.81% Hallucination Error and a
+higher proportion of logical fallacy at 9.38%. The distinct error types
+distributions of different LLMs suggest that FCE methods evaluated
+on a specific LLM may not generalize well to other LLMs, indicating
+the necessity for constructing a benchmark that is independent of
+the underlying LLM.
+4 LOGIC-ENHANCED FACTUAL
+CONSISTENCY EVALUATION
+In the above statistic analysis, logical fallacy accounts for a con-
+siderable proportion of factual errors in real-world RAG scenarios.
+However, as we have analyzed before, existing FCE pipelines ne-
+glect the logical connections between segments in the original
+answer, which may result in wrong factual consistency evaluation
+result for samples with logical fallacy. Hence, to improve the eval-
+uation ability of factuality consistency, a natural direction is to

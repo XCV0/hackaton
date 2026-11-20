@@ -1,0 +1,106 @@
+, , Yixin Chen, Ying Xiong*, Shangyu Wu, Xiangrui Ke, Nan Guan, and Chun Jason Xue
+LLaMA-3.2-1B-InstructLLaMA-3-8B-InstructQwen2.5-1.5B-InstructQwen2.5-14B-Instruct
+0
+2
+4
+6
+8Avg Performance Drop (Clean - Noisy)
+33% Noise (Lower Drop = More Robust)
+Standard RAG
+PRAG
+DyPRAG
+Ours
+LLaMA-3.2-1B-InstructLLaMA-3-8B-InstructQwen2.5-1.5B-InstructQwen2.5-14B-Instruct
+0
+2
+4
+6
+8
+10
+12
+14Avg Performance Drop (Clean - Noisy)
+66% Noise (Lower Drop = More Robust)
+Standard RAG
+PRAG
+DyPRAG
+Ours
+Figure 5: Robustness to retrieval noise.
+LLaMA-3.2-1B-InstructLLaMA-3-8B-InstructQwen2.5-1.5B-InstructQwen2.5-14B-Instruct
+0
+10
+20
+30
+40Avg Performance
+Training: General Data
+LLaMA-3.2-1B-InstructLLaMA-3-8B-InstructQwen2.5-1.5B-InstructQwen2.5-14B-Instruct
+Training: PRAG Data
+SRAG+In-order SRAG+Shuffle Ours+In-order Ours+Shuffle
+Figure 6: Robustness to retrieval order.
+results above show that our ReFilter can achieve a better trade-off
+between efficiency (latency/storage costs) and accuracy.
+6.4 Qualitative Analysis
+We compare token-level visualizations of our model and the SRAG
+baseline on a QA example where the correct answer is “Iraq”. Fig-
+ure 7 displays our model’s final token weights and SRAG’s attention
+weights. Gold-answer tokens are marked with stars. Our model
+consistently assigns high weights to the answer token (“Iraq”),
+showing a clear focus on the spans that directly support the answer.
+In contrast, SRAG’s distribution is sharp, with a few tokens receiv-
+ing extreme attention—often not aligned with the answer—while
+most tokens are near zero. Our model produces smoother, more
+stable weights that reliably highlight the correct evidence. This
+case illustrates that our model offers more faithful token attribution
+by consistently emphasizing answer-bearing tokens, which helps
+explain its stronger empirical performance.
+7 Related Work
+Retrieval Augmented Generation for Knowledge-Intensive QA. Re-
+trieval Augmented Generation (RAG) combines parametric LLM
+knowledge with an external corpus to improve factuality and cover-
+age for knowledge-intensive tasks [5, 12, 29]. A common design is to
+retrieve top-𝑘 passages and condition generation on them, enabling
+explicit grounding and easy corpus updates compared to purely
+parametric memorization. In parallel, retrieval-enhanced language
+modeling approaches such as kNN-LM [10] and RETRO [2] also
+demonstrate that external memories can improve prediction by in-
+jecting neighbors from large datastores. Our work aligns with this
+direction of grounding generation in explicit evidence, but focuses
+on a different bottleneck: how to integrate retrieved information into
+the model efficiently and robustly.
+Figure 7: Token-level final weights of our model (down) and
+Token-level attention weights of SRAG (upper). Stars denote
+occurrences of the gold answer token (“Iraq”).
+Retrieval Fusion. The predominant way to use retrieval in mod-
+ern LLM-based QA is in-context injection, where retrieved passages
+are appended to the prompt [12, 20]. While conceptually simple
+and compatible with black-box LLMs, this approach grows context
+length with the amount of evidence, leading to increased inference
+cost due to quadratic self-attention complexity in Transformers [26].
+An alternative to long-context prompting is to internalize external
+knowledge into model parameters, through continued pretrain-
+ing, fine-tuning, or modular add-ons. Adapter-based knowledge
+infusion methods such as K-Adapter [27] and parameter-efficient
+fine-tuning techniques such as LoRA [7, 22, 23] can inject domain
+knowledge while keeping most backbone weights frozen. However,
+moving knowledge into parameters complicates rapid updates and
+weakens explicit evidence traceability. Our method preserves a non-
+parametric, updatable corpus and inspectable evidence selection
+while learning a lightweight integration interface that avoids full
+long-context processing.
+8 Conclusion
+We introduced a new latent-based fusion method, called ReFilter,
+for retrieval-augmented generation that employs token-level evi-
+dence filtering and fusion. This approach bypasses lengthy context
+windows, mitigates noise sensitivity, and guides answer genera-
+tion without overloading the backbone model. Experiments show
+that our ReFilter maintains efficiency, robustness to noisy retrieval,
+and traceable corpus use across both in-domain and out-of-domain
+settings.
+References
+[1] Chen Amiraz, Florin Cuconasu, Simone Filice, and Zohar S. Karnin. 2025. The
+Distracting Effect: Understanding Irrelevant Passages in RAG. In Proceedings of
+the 63rd Annual Meeting of the Association for Computational Linguistics (Volume
+1: Long Papers) (ACL). 18228–18258.
+[2] Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann, Trevor Cai, Eliza Ruther-
+ford, Katie Millican, George van den Driessche, Jean-Baptiste Lespiau, Bogdan
+Damoc, Aidan Clark, Diego de Las Casas, Aurelia Guy, Jacob Menick, Roman
+8

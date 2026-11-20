@@ -1,0 +1,174 @@
+Nanomaterials 2022, 12, 2507 11 of 16
+7.9 torr, which were fabricated with a 10 nm CuI hole-transporter. Figure 10 shows the
+corresponding J–V characteristic curve under the illumination of 100 mW/cm2 with AM
+1.5 ﬁlter and in dark. Table 3, illustrates the photovoltaic parameter of the corresponding
+J–V characteristic curve.
+Nanomaterials 2022, 12, x FOR PEER REVIEW 11 of 16 
+ 
+ 
+  
+Figure 9. J–V curves of CBD-CdS/CSS-CdTe solar cell s with a Cu/Au and CuI/Au back contact ( a) 
+under illumination of 100 mW/cm2 with AM1.5 filter and (b) the semi-logarithmic J–V characteristics 
+of CBD-CdS/CSS-CdTe solar cells with Cu/Au and CuI/Au back contact in dark. 
+Table 2. Photovoltaic parameter measured instant after fabrication and after one month of 
+CdS/CdTe devices with CuI/Au and Cu/Au back contacts. 
+Device J SC (mA/cm2) V OC (V) FF PCE (%) 
+Cu/Au 23.71 0.44 0.44 4.57 
+Cu/Au After 01 month 18.78 0.37 0.34 2.35 
+CuI/Au 25.00 0.39 0.52 5.05 
+CuI/Au After 01 month 20.87 0.33 0.46 3.13 
+3.4. Influence of Fabrication Conditions on J–V Characteristics of CdS/CdTe/CuI/Au Device 
+The influence of different growth conditio ns of CSS-CdTe on the photovoltaic per-
+formance of the device was also analyzed with CSS-CdTe growth conditions of 5.0 torr 
+and 7.9 torr, which were fabricated with a 10 nm CuI hole-transporter. Figure 10 shows 
+the corresponding J–V characteristic curve under the illumination of 100 mW/cm 2 with 
+AM 1.5 filter and in dark. Table 3, illustrates the photovoltaic parameter of the correspond-
+ing J–V characteristic curve. 
+Figure 10. (a) J–V characteristic of CdS/CdTe/CuI/Au device fabricated with different CSS parameter 
+under illumination of 100 mW/cm2 with AM1.5 filter and (b) semi-logarithmic plot in dark. 
+Table 3. Photovoltaic parameter of CdS/CdTe/CuI/Au devices with different deposition conditions 
+of CSS-CdTe. 
+CSS Condition JSC (mA/cm2) V OC (V) FF PCE (%) PCE Drops 
+5.0 torr 25.00 0.39 0.52 5.05 38% After 01 month 20.87 0.33 0.46 3.13 
+7.9 torr 21.90 0.63 0.49 6.92 10% 
+0.00.10.20.30.40.5
+0
+5
+10
+15
+20
+25
+30
+Cu/Au (After 01 month)
+Cu/Au
+CuI/Au (After 01 month)
+Current density (mA/cm
+2
+)
+Voltage (V)
+CuI/Au
+(a)
+-0.4 -0.2 0.0 0.2 0.4 0.6 0.8 1.0
+10
+-9
+10
+-8
+10
+-7
+10
+-6
+10
+-5
+10
+-4
+10
+-3
+10
+-2
+J0=1.5X10-7Acm2
+Current density (A/cm
+2
+)
+Voltage (V)
+CuI/Au
+Cu/Au
+(b)
+J0=3.5X10-9Acm2
+0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7
+-5
+0
+5
+10
+15
+20
+25
+Current density (mA/cm
+2
+)
+Voltage (V)
+       7.9 torr
+(After 01 month)
+       5.0 torr
+(After 01 month)
+5.0 torr
+7.9 torr
+(a)
+-0.6 -0.4 -0.2 0.0 0.2 0.4 0.6 0.8 1.0
+10
+-11
+10
+-10
+10
+-9
+10
+-8
+10
+-7
+10
+-6
+10
+-5
+10
+-4
+10
+-3
+10
+-2
+10
+-1
+(b)
+Current density (A/cm
+2
+)
+Voltage (V)
+J0=1.1X10
+-10
+A/cm
+2
+J0=1.5X10
+-7
+A/cm
+2
+5.0 torr
+7.9 torr
+Figure 10. (a) J–V characteristic of CdS/CdTe/CuI/Au device fabricated with different CSS parameter
+under illumination of 100 mW/cm2 with AM1.5 ﬁlter and (b) semi-logarithmic plot in dark.
+Table 3. Photovoltaic parameter of CdS/CdTe/CuI/Au devices with different deposition conditions
+of CSS-CdTe.
+CSS Condition JSC (mA/cm2) VOC (V) FF PCE (%) PCE Drops
+5.0 torr 25.00 0.39 0.52 5.05
+38%
+After 01 month 20.87 0.33 0.46 3.13
+7.9 torr 21.90 0.63 0.49 6.92
+10%
+After 01 month 20.72 0.64 0.47 6.25
+This also shows the roll-over phenomenon disappeared in CdTe solar cells fabricated
+under 7.9 torr. Further, a later crossover of the light and dark J–V curves for the cell
+fabricated under 7.9 torr demonstrates that the energy barrier at the back contact was
+reduced, and the estimated reverse saturation diode current (J0) was 1.11 × 10−10A/cm2.
+n-CdS/p-CdTe/CuI/Au device growth condition of 7.9 torr exhibits higher power con-
+version efﬁciency of 6.92% with JSC, VOC, and FF of 21.98 mA/cm2, 0.638 V and 0.49,
+respectively. VOC and FF in a generic FTO/CBD-CdS/CSS-CdTe/back-contact thin-ﬁlm
+solar cell device is a key parameter in the recombination analysis. In particular, VOC is
+sensitively inﬂuenced by the interface recombination at the buffer/absorber, front interface,
+and the absorber/back-contact interface [70], as shown in Figure 11.
+The highest VOC and FF illustrate the fewer recombination losses. Mathematically,
+VOC can be explained with recombination coefﬁcients by Equation (7).
+VOC = 2kBT q ln
+
+ 1 2 Rd 0( Ri, f 0 + Rb 0 + Ri,b 0 )
+
+
+vuuu√Ga 4W ( Ri, f 0 + Rb 0 + Ri,b 0 ) (
+Rd 0 )2 + 1 − 1
+
+
+
+ (7)
+where Ri, f 0 , Rd 0, Rb 0, and Ri,b 0 are bias-independent (V = 0) recombination coefﬁcients at the
+buffer/absorber interface, in the depletion region (Wd), in the quasi-neutral region, and
+at the absorber/back-contact interface, respectively [70]. This means VOC depends on the
+carrier recombination of the solar cells inﬂuenced by the fabrication conditions of each layer.
+Fabrication conditions affected the grain size (Figure S4 and Table S2), surface roughness,
+and thickness of the layer. This was clearly discussed in several studies [54,71–76]. In this
+study, it can be seen in the Supporting Information. The CuI hole-transporter provides

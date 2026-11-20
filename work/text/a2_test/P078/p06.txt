@@ -1,0 +1,55 @@
+6
+Fig. 3. Our proposed PRISM-RAG framework is organized into a large-scale hypergraph for multimodal RAG. (1) Concept hyperedges connect
+attributes and document entities. (2) Images to similar attributes form bridge hyperedges. (3) Entity-sentence hyperedges connect entities found
+within sentences within documents. (4) The assembled multimodal hypergraph combines nodes from steps (1–3) with no large model calls. Best
+viewed in color and with zoom.
+TABLE 2
+Role of each node set and hyperedge type across all phases of PRISM-RAG. ✓= participates directly; ★= participates passively; ✗= does not
+participate.
+Index Time Query Time
+Component Bimodal Emb. Concept HE Bridge HE Entity Extract. Seed Retrieval HE Scoring Node Scoring s(q, v) Context Assembly
+Node sets
+VI (image product) ✓ ✓ ✓ ✗ ✓ ✓ ✓ ✗
+VA (caption attribute) ✗ ✓ ✓ ✗ ✗ ✓ ✓ ✗
+VT (document entity) ✗ ✓ ✗ ✓ ✗ ✓ ✓ ★
+VJ (jurisdiction anchor) ✗ ✗ ✗ ★ ✗ ✗ ✗ ★
+VP (document chunk) ✗ ✗ ✗ ★ ✗ ★ ✓ ✓
+Hyperedge types
+Concept e(c) ✗ ✓ ✗ ✗ ✗ ✓ ✗ ✗
+Bridge e(v) i ✗ ✗ ✓ ✗ ✗ ✓ ✗ ✗
+Entity sentence e(sent) ✗ ✗ ✗ ✓ ✗ ✓ ✗ ✗
+substrings to corresponding policy documents, enabling cost-
+effective jurisdiction hint detection without modifying chunk
+text. Document entity nodes VT are canonical entity strings from
+d ∈ D, with source chunks recorded by ϕ : VT → 2VP . Table 2
+summarizes each component’s role.
+4.2.2 Multimodal Node Embeddings
+Each product node vi ∈ VI carries a bimodal embedding, as in
+Eqn. (1), i.e., the ℓ2-normalized concatenation of the image and
+mean-pooled aligned caption representations.
+hP i =
+ zI i
+∥zI i ∥2 ; ˜zC i ∥˜zC i ∥2  ∈ RnI +nC (1)
+Attribute nodes vk ∈ VA, jurisdiction anchor nodes vj ∈ VJ ,
+document entity nodes vt ∈ VT , and document chunk nodes vd ∈
+VP are all encoded with f (D). For bridge hyperedge construction,
+each attribute node also carries an aligned embedding ¯hA k ∈ RnC .
+4.2.3 Document Entity Extraction and Document Node
+Construction
+We extract named entities from all documents d ∈ D to form VT
+via three different strategies.
+Cost-effective and LLM-free entity extraction (proposed). We
+propose to apply a spaCy transformer-based NLP pipeline 1 to each
+document. Named entities and noun chunks are associated with
+source chunks via ϕ. All entity nodes co-occurring within the same
+sentence are jointly connected as a single n-ary entity sentence
+hyperedge. This pipeline requires no LLM API calls to process
+document entities at index time.
+LLM-based extraction (ablation). Following HyperGraphRAG
+[5], we prompt an LLM for entities and triples from each chunk, at
+the cost of one API call per document chunk.
+Ontology augmentation (ablation). We optionally augment each
+legislative VT entity’s text with domain synonyms drawn from a
+hand-curated ontology before encoding, pulling entity embeddings
+toward the product attribute clusters they semantically belong to.
+1. https://github.com/explosion/spaCy

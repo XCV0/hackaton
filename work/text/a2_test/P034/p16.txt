@@ -1,0 +1,44 @@
+1. Data gaps: In some cases (e.g., Ivory Coast), the sanctions associated with the
+ban are not mentioned in the articles accessible via the database, but appear in a
+separate decree which is not listed in Faolex. The lack of this secondary document
+led the system to incorrectly conclude that there were no sanctions.
+From a technical standpoint, this is not an error but a positive outcome, as the
+system did not produce incorrect information. However, from a legal perspective,
+this highlights the challenges of evaluating a law based on partial sources. It also
+shows the need to consider supplementary texts (like decrees and implementing
+orders), while emphasizing their limited online accessibility.
+2. Transitional misinterpretation: The model interpreted the phase-out period
+for plastic bags in the Democratic Republic of Congo as a temporal constraint on
+the ban. However, from a legal perspective, this measure is transitional and aims
+to regulate the progressive implementation of the ban.
+In legal terms, false positives mean over-claiming a regulation that does not exist,
+while false negatives omit and ignore an actual ban. Both have judicial consequences:
+the former can mislead compliance assessments, while the latter can hide regulatory
+progress.
+These outcomes confirm that automating legal indicator computation requires both
+reliable data sources and structured interpretability mechanisms. N2I-RAG effectively
+reproduces expert reasoning, but depends on the comprehensiveness of accessible legal
+texts. Its results thus provide a transparent, evidence-based foundation for legal obser-
+vatories aiming to systematically monitor norms, extending the conceptual foundations
+proposed by Billant (2023)[2] to an AI-supported operational workflow.
+5 Conclusion
+This paper introduced N2I-RAG, an agentic retrieval-augmented generation frame-
+work designed to compute legal indicators in a reliable, interpretable, and automatable
+way. It shows that structured multi-agent reasoning can bridge the gap between open-
+textured legal language and standardized assessment grids used in policy and judicial
+evaluation.
+N2I-RAG integrates search, generation, and validation within a modular pipeline.
+Each agent performs a specific function, whether it be filtering, retrieving, grading,
+or producing binary legal results. This structure allows the system to analyze com-
+plex legal documents while maintaining full traceability of its decisions and reasoning
+process. Unlike conventional RAG systems that rely on a single generation step, N2I-
+RAG applies multi-level control to align the model’s linguistic output with the logic
+of legal indicators.
+Experimental results demonstrate that the complete N2I-RAG architecture substan-
+tially outperforms its simplified variants, especially in sensitivity and specificity, two
+metrics essential for legal interpretation. Mistral-Nemo 12B achieved the highest per-
+formance, while results from Qwen and LLaMA confirm that the framework remains
+model-agnostic. Additionally, error analysis reveals that the challenges encountered
+arise primarily from the subtleties of the law (e.g., transitional periods, gaps in doc-
+umentation, or implicit exceptions) rather than technical shortcomings , thus paving
+16

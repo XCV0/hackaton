@@ -1,0 +1,100 @@
+3.3 Privacy Leakage on LLM Training Data
+While addressing the privacy concerns of retrieval
+data, we also investigate the potential leakage of
+training data within LLMs employed in the RAG
+system, particularly in scenarios involving interac-
+tions with the retrieval component. To achieve this,
+we compared the difference in training data expo-
+sure with and without retrieval augmentation when
+attacking the same large language model. Given
+the vastness of the full training dataset, our inves-
+tigation is tailored to specific subsets of the train-
+ing corpus with targeted attacks and prefix attacks
+(Carlini et al., 2022), where the former focuses on
+extracting specific private information while the
+latter evaluates the memorization by reproducing
+texts from the training data.
+Targeted Attack. This attack strategy, while
+bearing resemblance to the targeted attacks dis-
+cussed in Section 3.2, is specifically tailored to the
+objective of extracting sensitive information, such
+as PIIs, directly from the LLM. Therefore, we omit
+the {command} component and utilize straightfor-
+ward prompting phrases like “My phone number
+is" and “Please email me at" to access the private
+data in pre-training/fine-tuning datasets of LLMs.
+Prefix Attack. It involves inputting the exact
+prefixes of training examples and checking if the
+model output matches the original suffixes (Carlini
+et al., 2022). Note that this method requires attack-
+ers to know the actual training data, which limits its
+practicality. However, it serves as a useful method
+for quantitatively measuring memorization effects.
+4 RQ1: Can we extract private data from
+the external retrieval database in RAG?
+With the proposed targeted and untargeted attacks
+on the retrieval dataset in Section 3.2 , we em-
+pirically investigated the privacy leakage of the
+retrieval dataset(RD). Our evaluation revealed the
+RAG system’s high vulnerability to attacks on re-
+trieval data. We also conducted ablation studies
+to examine various impact factors and explored
+possible mitigation strategies.
+4.1 Evaluation Setup
+RAG Components. For the LLM, we uti-
+lized three commonly used and safety-aligned
+models, including Llama-7b-chat(L7C), Llama-
+13b-chat(L13C), and GPT-3.5-turbo(GPT). Re-
+garding embedding models, we primarily used
+bge-large-en-v1.5, and also explored others like
+all-MiniLM-L6-v2 and e5-base-v2 in Section
+4.4. Chroma2 was used to construct the retrieval
+database and store embeddings. The metric to cal-
+culate the similarity by default is L2-norm. The
+number of retrieved documents per query was set
+to k = 2, and we studied its impact in Section 4.4.
+Datasets and Metrics. To investigate the leak-
+age of private data, we chose two datasets as our
+retrieval data: the Enron Email dataset of 500,000
+employee emails, and the HealthcareMagic-101
+dataset of 200k doctor-patient medical dialogues.
+In practice, these datasets correlate to scenarios
+like email completion or medical chatbots. Both
+datasets contain private information such as PIIs
+and personal dialogues, allowing us to evaluate the
+privacy risks of retrieval data extraction. For the
+HealthcareMagic dataset, we construct each doctor-
+patient medical dialogue as a data piece embedded
+and stored in a vector database, while for the Enron
+Email, we construct each email as a data piece.
+For both attacks, we report the total number of
+contexts fetched (Retrieval Contexts), the num-
+ber of prompts yielding outputs with at least 20
+direct tokens from the dataset (Repeat Prompts),
+and the number of unique direct excerpts produced
+(Repeat Contexts). For targeted attacks, we re-
+port the extracted targeted information (Targeted
+Information). For untargeted attacks, we report
+the number of prompts generating outputs with a
+ROUGE-L score over 0.5 (Rouge Prompts), and
+the total number of unique outputs closely resem-
+bling the retrieval data (Rouge Contexts).
+4.2 Results of Untargeted Attack
+The results of untargeted attacks are presented in
+Table 1, and some leakage examples are in Ap-
+pendix A.5. It shows that a majority of the prompts
+effectively prompted the retrieval system to fetch
+relevant data segments. Moreover, a considerable
+amount of these prompts have led the model to pro-
+duce outputs that either exactly match or closely
+resemble the retrieved content. For instance, us-
+ing the Enron Mail dataset for retrieval and GPT-
+3.5-turbo as the generative model (the last row),
+out of 250 prompts, 452 unique data segments are
+retrieved (Retrieval Contexts); 116 prompts re-
+sult in the model generating exact matches from
+the retrieved content (Repeat Prompts); and 121
+prompts produce outputs closely related to the re-
+trieved content (Rouge Prompts). In total, this
+2https://www.trychroma.com/
+4508

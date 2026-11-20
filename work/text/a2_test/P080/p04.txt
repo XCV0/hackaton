@@ -1,0 +1,109 @@
+xsi =
+(
+x(sem) si , x(struct) si , x(heur) si
+)
+. To capture the
+relationships between nodes from different perspec-
+tives, we define a set of heterogeneous edges with
+each heterogeneity corresponds to a feature type.
+For each feature type ϕ ∈ {sem, struct, heur}, we
+apply KMeans clustering to partition all nodes into
+K clusters {C(ϕ) 1 , ..., C (ϕ) K }. Mathematically, for
+each cluster C as a feature-specified hyperedge e,
+we have e(ϕ) j = {si ∈ C(ϕ) j | j = 1, ..., K}, and
+the heterogeneous hyperedge set E is denoted as
+E = ⋃ ϕ∈{struct,heur,sem} { e(ϕ) j } .
+After constructing the hypergraph representing
+the table corpora, T-RAG uses a multi-stage coarse-
+to-fine retrieval process to identify the most rele-
+vant nodes si, for each incoming query q.
+3.2 Coarse-grained Multi-way Retrieval
+Towards a query, T-RAG first applies a coarse-
+grained retrieval to hierarchically filter out irrel-
+evant table data step-by-step with high efficiency.
+Representative Score. We first need to define
+the representative score of a node, which will be
+frequently used in later node-to-node and node-
+to-query feature representation comparisons. For-
+mally, the representative score Srep between nodes
+a and b (e.g., node si and query1 q) with corre-
+sponding feature representations x(ϕ) a and x(ϕ) b on
+feature type ϕ is defined as:
+S(ϕ) rep (a, b) = ⟨x(ϕ) a , x(ϕ) b ⟩
+∥x(ϕ) a ∥∥x(ϕ) b ∥ (3)
+Typical Node Selection. For the efficient coarse-
+grained retrieval, for each cluster(i.e., hyperedge),
+we extract a small subset of nodes that can best
+represent that cluster, denoted as V (ϕ) typ . Specifically,
+for each cluster C(ϕ) j corresponding to feature type
+ϕ, we choose the top-k nodes with the highest rep-
+resentative scores:
+V (ϕ) typ = top-k { S(ϕ) rep (si, µj ) | si ∈ C(ϕ) j } (4)
+where µj is the centroid of cluster C(ϕ) j . The selec-
+tion of typical nodes largely reduces computational
+complexity by restricting query comparisons to pro-
+totypical tables rather than the entire table corpora.
+1Without loss of generality, we suppose a query can also
+have multi-way features.
+Query-Cluster Assignment. At query time, a
+natural language question q is embedded using the
+same feature extraction methods, yielding repre-
+sentations of xq. We compute the representative
+scores between the query and each node in V (ϕ) typ
+to select the optimal cluster C∗(ϕ) for each feature
+type ϕ, i.e.,
+C∗(ϕ) = arg max
+C(ϕ) j
+
+
+
+1
+|V (ϕ) typ |
+∑
+si∈V (ϕ) typ
+S(ϕ) rep (q, si)
+
+
+
+(5)
+The final multi-way optimal cluster is the union
+across all feature types:
+C∗ = ⋃
+ϕ∈{sem,struct,heur}
+C∗(ϕ) (6)
+We later demonstrate in experiments that using the
+multi-way unioned clusters greatly enhances re-
+trieval accuracy while incurring only a minimal
+increase in retrieved table size.
+3.3 Fine-grained Subgraph Retrieval
+With roughly related nodes (tables) extracted, next
+T-RAG needs to carefully narrow down the scope
+for locating the answer for a query.
+Local Subgraph Construction. After the extrac-
+tion of the optimal cluster C∗ carrying a bunch of
+hyperedge-linked nodes, T-RAG is then to lever-
+age this abstract set-wise connectivity among table
+nodes to instantiate a densely pair-wise connected
+local subgraph, i.e., Glocal = (Vlocal, Elocal) and
+Vlocal = {si | si ∈ C∗},
+Elocal =
+{
+(si, sj ) ∈ C ∗ × C ∗
+⏐⏐⏐ S(sem) rep (si, sj ) ≥ τ }
+(7)
+where τ ∈ [0, 1] is a similarity threshold, and each
+edge is weighted by its corresponding represen-
+tative score. Note that after the coarse-grained
+filtering stage, only semantic features are utilized.
+Iterative Personalized PageRank for Retrieval.
+Given the local subgraph Glocal = (Vlocal, Elocal),
+for fine-grained retrieval, we can first compute a
+similarity matrix S over the candidate nodes Vlocal:
+Sij =
+{
+S(sem) rep (si, sj ), if (si, sj ) ∈ Elocal,
+0, otherwise.
+(8)
+Then, we obtain the transition matrix P by row-
+normalizing S. The personalization vector h ∈
+38136

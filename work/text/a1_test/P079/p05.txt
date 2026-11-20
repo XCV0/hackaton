@@ -1,0 +1,60 @@
+Appl. Sci. 2025, 15, 2930 5 of 20
+To evaluate the series resistance (Rs) and the ideality factor (n) of the solar cell, a ma-
+nipulation of the J-V expression, neglecting the saturation current and supposing Rs << Rsh,
+yields the following [14]:
+dV
+dJ = nKT q  J + Jph −1 + RS (1)
+Here, n represents the diode ideality factor and Jph is the current attributed to the
+photogenerated carriers, which can be approximated by the short-circuit current Jsc.
+From the plot in Figure 2a, it is possible to extract the series resistance RS while, from
+the plot of dJ/dV in Figure 2b, one can obtain the shunt resistance Rsh (both values reported
+in Table 1) once the value of RS is known from the fit of Figure 2a [21].
+dJ
+dV = qJ0 nKT e[ q(V−JRS ) nKT ] + 1 Rsh (2)
+Appl. Sci. 2025, 15, x FOR PEER REVIEW 6 of 22 
+ 
+ 
+Figure 2. (a) Linear ﬁt (in red) of dV/dJ data for the determination of R S. (b) Linear ﬁt (in red) of 
+dJ/dV data for the determination of R sh. The curves were derived from J-V curves measured under 
+solar simulator illumination of 700 W/m2 AM1.5G at a temperature of 298 K. 
+For the subsequent analysis of the cell proper ties, it is important to note that the in-
+terface between the p-type Sb 2Se3 and the n-type (Cd,Zn)S region is not sharp but rather 
+graded due to layer intermixing, which helps minimize the la ttice mismatch between the 
+two materials. According to relation (3), the la ttice mismatch ( δ) between Sb 2Se3 and 
+Zn0.15Cd0.85S is indeed large [22]: 
+𝛿(%) = 2⋅ห𝑎(େୢ,୞୬)ୗ −𝑏ௌ௕మௌ௘య ห 𝑎(େୢ,୞୬)ୗ +𝑏ௌ௕మௌ௘య ⋅ 100 = 2.63% (3)
+The lattice parameters of (Cd,Zn)S and Sb 2Se3 are denoted as 𝑎(େୢ,୞୬)ୗ and 𝑏ௌ௕మௌ௘య , 
+respectively. 
+The lattice parameter of (Cd,Zn)S (with 15% atomic concentration of Zn) is estimated 
+using Vegard law [23,24] with 𝑎஼ௗௌ = 4.14 Å and 𝑎௓௡ௌ = 3.82 Å [25,26]. 
+𝑎௓௡బ.భఱ஼ௗబ.ఴఱௌ =0.15𝑎௓௡ௌ +0.85𝑎஼ௗௌ = 4.092 Å (4)
+The la ttice parameter of Sb 2Se3 to be considered is 𝑏ௌ௕మௌ௘య   = 3.9858 Å, as for our 
+growth conditions the Sb2Se3 preferential orientation is [001] direction, i.e., parallel to the 
+growth axis [9]. 
+The nominal concentration of 15 at% Zn inside the CdS crystal structure was con-
+ﬁrmed by taking the Eg of (Cd,Zn)S (2.67 ± 0.01 eV) and CdS (2.48 ± 0.01 eV) from a Tauc 
+plot (see Figure 3). With the assumption that  the energy gap varies linearly with the Zn 
+concentration between the Eg of CdS (0%) and that of ZnS (100%), and taking the Eg of ZnS 
+= 3.6 eV [27], we estimated the at% of Zn in CdS to be (17 ± 2)%, which is consistent with 
+the present 15 at% value. 
+Figure 2. (a) Linear fit (in red) of dV/dJ data for the determination of RS. (b) Linear fit (in red) of
+dJ/dV data for the determination of Rsh. The curves were derived from J-V curves measured under
+solar simulator illumination of 700 W/m2 AM1.5G at a temperature of 298 K.
+For the subsequent analysis of the cell properties, it is important to note that the
+interface between the p-type Sb2Se3 and the n-type (Cd,Zn)S region is not sharp but rather
+graded due to layer intermixing, which helps minimize the lattice mismatch between the
+two materials. According to relation (3), the lattice mismatch (δ) between Sb2Se3 and
+Zn0.15Cd0.85S is indeed large [22]:
+δ(%) =
+2 ·
+a(Cd,Zn)S − bSb2Se3 
+a(Cd,Zn)S + bSb2Se3
+· 100 = 2.63% (3)
+The lattice parameters of (Cd,Zn)S and Sb2Se3 are denoted as a(Cd,Zn)S and bSb2Se3 ,
+respectively.
+The lattice parameter of (Cd,Zn)S (with 15% atomic concentration of Zn) is estimated
+using Vegard law [23,24] with aCdS = 4.14 Å and aZnS = 3.82 Å [25,26].
+aZn0.15Cd0.85S = 0.15aZnS + 0.85aCdS = 4.092 Å (4)
+The lattice parameter of Sb2Se3 to be considered is bSb2Se3 = 3.9858 Å, as for our growth
+conditions the Sb2Se3 preferential orientation is [001] direction, i.e., parallel to the growth
+axis [9].

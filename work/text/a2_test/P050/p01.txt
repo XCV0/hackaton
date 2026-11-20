@@ -1,0 +1,108 @@
+ReFilter: Improving Robustness of Retrieval-Augmented
+Generation via Gated Filter
+Yixin Chen∗
+yixichen-c@my.cityu.edu.hk
+City University of Hong Kong
+Hong Kong, China
+Ying Xiong*
+ying.xiong@mbzuai.ac.ae
+MBZUAI
+Abu Dhabi, UAE
+Shangyu Wu†
+shangyu.wu@mbzuai.ac.ae
+MBZUAI
+Abu Dhabi, UAE
+Xiangrui Ke
+x3ke@uwaterloo.ca
+University of Waterloo
+Waterloo, Canada
+Nan Guan
+nanguan@cityu.edu.hk
+City University of Hong Kong
+Hong Kong, China
+Chun Jason Xue
+jason.xue@mbzuai.ac.ae
+MBZUAI
+Abu Dhabi, UAE
+Abstract
+Retrieval-augmented generation (RAG) has become a dominant
+paradigm for grounding large language models (LLMs) with exter-
+nal evidence in knowledge-intensive question answering. A core
+design choice is how to fuse retrieved samples into the LLMs, where
+existing internal fusion approaches broadly fall into query-based
+fusion, parametric fusion, and latent-based fusion. Despite their
+effectiveness at modest retrieval scales, these methods often fail to
+scale gracefully as the number of retrieved candidates 𝑘 increases:
+Larger 𝑘 improves evidence coverage, yet realistic top-𝑘 retrieval
+inevitably contains irrelevant or redundant content and increases
+the inference cost.
+To address these limitations, we propose ReFilter, a novel latent-
+based fusion framework that performs token-level filtering and fu-
+sion. ReFilter consists of three key components: a context encoder
+for encoding context features, a gated filter for weighting each to-
+ken, and a token fusion module for integrating the weighted token
+feature into the LLM’s hidden states. Our experiments across four
+general-domain QA benchmarks show that ReFilter consistently
+achieves the best average performance under both in-domain adap-
+tation and out-of-domain transfer. ReFilter further generalizes to
+five biomedical QA benchmarks in zero-shot transfer without do-
+main fine-tuning, reaching 70.01% average accuracy with Qwen2.5-
+14B-Instruct.
+1 Introduction
+Large language models (LLMs) serve as a powerful foundation for
+question answering (QA) [3], yet their knowledge is fundamentally
+constrained by their training data, internalization processes, and
+fixed cut-off dates [4, 11, 18]. This limitation often leads to fluent
+but ungrounded or incorrect answers, particularly for queries re-
+quiring long-tail, evolving, or specialized knowledge [18]. Retrieval-
+Augmented Generation (RAG) mitigates this by grounding LLM
+generation in dynamically retrieved external evidence [5, 12, 29].
+However, how to effectively and efficiently integrate the retrieved
+knowledge into LLMs remains a central challenge.
+Existing internal fusion approaches can be classified into three
+categories: Query-based Fusion for concatenating samples with the
+∗Both authors contributed equally to this research.
+†Corresponding author.
+input [12, 20], Parametric Fusion for encoding samples into LoRA-
+like parameters [22, 23], and Latent-based Fusion for integrating
+features into hidden states of LLMs [2, 28]. Although these fusion
+methods can all effectively inject external knowledge into LLMs,
+they do not scale well with more retrievals containing evidence.
+The major reason is that in realistic retrieval, the top-𝑘 results often
+contain irrelevant, redundant, or even conflicting content, and prior
+work shows that LLMs can be distracted by such noise, leading to
+degraded generation quality [1, 13, 19, 31]. Besides, a larger𝑘 will
+also lead to a higher inference cost. How to maintain high inference
+efficiency while improving performance with a large number of
+retrievals becomes the key to RAG.
+To address the above limitations, we propose ReFilter, a novel
+latent-based fusion framework that performs token-level filtering
+and fusion. Our ReFilter is a plug-and-play module comprising three
+submodules: a context encoder, a gated filter, and a token fusion
+module. First, the context encoder transforms the retrieved chunks
+into a flattened context feature. Then, the gated filter computes
+the importance scores for each token in the context. Finally, the
+token fusion module integrates weighted token features into the
+hidden states of the LLM’s specific layer. With those modules, our
+ReFilter can not only maintain high efficiency without feeding long-
+context input sequences and by enabling batching, but also improve
+robustness by reducing the impact of irrelevant or noisy tokens.
+We evaluate our ReFilter under two realistic deployment regimes:
+In-Domain Adaptation, where the refilter is trained on limited
+task-specific data, and Out-of-Domain Transfer, where a refilter
+trained on general data is applied directly to specialized domains
+like clinical QA without further fine-tuning. This comprehensive
+evaluation demonstrates our method’s effectiveness, efficiency, and
+strong generalization across domains.
+The main contributions of this paper are:
+• We identify a key scalability bottleneck in RAG: as 𝑘 in-
+creases, noisy (irrelevant/redundant/conflicting) retrieval
+can decouple higher evidence recall from downstream QA
+performance.
+• We propose ReFilter, a latent-based fusion module that per-
+forms token-level filtering and efficient hidden-state fusion
+to suppress noise without long-context prompting.
+• Extensive experiments under in-domain adaptation and out-
+of-domain transfer show consistent improvements over strong
+1
+arXiv:2602.12709v1  [cs.CL]  13 Feb 2026

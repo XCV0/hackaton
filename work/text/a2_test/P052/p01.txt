@@ -1,0 +1,94 @@
+Proceedings of the 15th International Joint Conference on Natural Language Processing and the 5th Conference of the Asia-Pacific Chapter of the Association for
+Computational Linguistics, pages 879–893
+November 6-10, 2026 ©2026 Association for Computational Linguistics
+When the Correct Law Still Fails: A Diagnostic Benchmark for
+Law-in-Force Retrieval in Versioned Legal RAG
+Yuchen Yao1 Yiran Hu2 Kaixiang Zhang2
+Yixin Su2 Jiani Ge2 Yun Liu3*
+1Department of Computer Science and Technology
+2School of Law 3Institute for Studies on AI and Law
+Tsinghua University, Beijing, China
+yaoyc23@mails.tsinghua.edu.cn liuyun89@tsinghua.edu.cn
+Abstract
+Legal RAG systems often retrieve passages
+by semantic relevance, lexical score, or ci-
+tation match. In versioned legal corpora,
+however, a passage can be topically relevant
+and citation-matched while being legally in-
+valid for the operative date. We study law-
+in-force retrieval: retrieving evidence that
+matches the authority, is valid at the opera-
+tive date, and supports the answer. We build
+LawInForce-eCFR from 805 human-validated
+eCFR/CFR amendment pairs and 3,220 con-
+trolled answer-flipping yes/no questions. We
+also present AuthorityFirst-RAG, a transparent
+diagnostic retriever that decomposes retrieval
+into authority identification, temporal scoping,
+and rule-support ranking. AuthorityFirst-RAG
+improves Recall@1 from 2.80% for BM25-
+date-filter to 30.90%, but generation remains
+difficult even with GoldOracle evidence. These
+results show a dual bottleneck in versioned le-
+gal RAG: retrieving the law in force and apply-
+ing numeric legal rules.
+1 Introduction
+Retrieval-augmented generation (RAG) grounds
+language-model outputs in retrieved evidence
+(Lewis et al., 2020) and has become a common
+architecture for legal question answering, retrieval,
+and regulatory analysis (Ma et al., 2021; Hou et al.,
+2025; Kalra et al., 2024). Existing legal NLP and
+legal retrieval work often evaluates broad legal un-
+derstanding, topical relevance, citation-like author-
+ity, or evidence retrieval (Chalkidis et al., 2022;
+Guha et al., 2023; van Opijnen and Santos, 2017).
+These objectives are important, but they do not
+by themselves establish that a retrieved passage is
+legally applicable.
+Versioned law exposes a stricter requirement.
+A passage may be semantically relevant, citation-
+matched, and located in the correct section, yet still
+*Corresponding author.
+be legally invalid. Legal rules are amended over
+time, while old and current versions often coexist
+in the same corpus or index. For a legal question,
+the operative date is not ancillary metadata; it de-
+termines whether a rule can govern the facts at all.
+The central claim of this paper is therefore that
+versioned legal RAG requires retrieving legally ap-
+plicable authority, not merely relevant text.
+This distinction matters because wrong-version
+evidence can have near-zero utility. In many do-
+mains, a topically related document may still pro-
+vide background information. In legal application,
+however, an inapplicable version can support the
+opposite answer with high surface plausibility. A
+retrieved passage can look correct to both the re-
+triever and the generator because it shares the same
+citation, heading, vocabulary, and paragraph struc-
+ture as the valid rule. Its defect is not topical irrele-
+vance; its defect is legal invalidity.
+For example, suppose an older regulation re-
+quired an application to be filed within 60 days,
+while a later amendment changed the period to 90
+days. If the applicant filed on day 75, the answer
+is no under the old rule and yes under the new rule.
+Both versions may mention the same application,
+use the same section number, and differ only in a
+local numeric threshold. A retriever that returns the
+later version for an older operative date has found
+the right topic and citation, but the wrong legally
+applicable evidence. The example is diagnostic
+precisely because lexical, semantic, and citation
+signals point toward both versions while only one
+is authority for the facts.
+This paper studies that failure mode directly. Le-
+gal time is not merely a factual timestamp; it is a
+normative applicability condition. We define law-
+in-force retrieval as retrieving evidence that be-
+longs to the relevant authority, is valid at the opera-
+tive date, and contains the rule support needed to
+answer the question. The retrieval target is there-
+fore authority-validity-support evidence rather than
+879

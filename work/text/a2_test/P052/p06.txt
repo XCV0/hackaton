@@ -1,0 +1,101 @@
+ror analysis; Appendix C reports all 3,220 QA in-
+stances. Recall@1 is especially important for RAG
+(Lewis et al., 2020) because downstream answer
+generation often relies heavily on the top evidence.
+We compare lexical, citation-assisted, ColBERT-
+style, and authority-first retrieval, alongside
+an oracle evidence condition. BM25-only
+uses Okapi BM25 scoring (Robertson and
+Zaragoza, 2009) as version-blind lexical retrieval.
+BM25-date-filter is BM25 retrieval with tem-
+poral filtering. citation-hybrid date filter is a
+metadata-assisted diagnostic baseline: it uses ci-
+tation/authority cues and date filtering, with gold
+title/section fallback metadata for uncited queries
+to test version selection under partially oracle
+authority information. The ColBERT-style late-
+interaction baseline ranks passages without validity
+filtering in its version-blind condition; the post-
+date-filter condition removes temporally invalid
+passages after retrieval, retaining the remaining
+ranking order. GoldOracle is an oracle evidence
+condition with 100% retrieval and is used as an
+upper bound for generation, not as a deployable
+retriever.
+5.2 Generation evaluation
+Generation is evaluated by feeding a question and
+retrieved evidence to open-weight LLMs and pars-
+ing a yes/no answer. The prompt supplies the ques-
+tion and evidence; the model must decide whether
+the fact pattern satisfies the applicable rule. This
+setup reflects a common legal RAG pipeline while
+keeping retrieval and answer generation analyti-
+cally separable.
+Generation models receive only the top-1 re-
+trieved paragraph-level passage rather than the full
+CFR section. Citation and heading information are
+embedded in the retrieved text; validity intervals
+are used for retrieval filtering but are not separately
+provided to the generator.
+Generation evaluation is reported for completed
+model-condition runs. The reported evaluations
+contain 1,200 examples for Qwen2.5-32B-Instruct
+(Yang et al., 2025b); 96 examples each for Mistral-
+7B-Instruct-v0.3 (Jiang et al., 2023), Qwen3-8B,
+and Qwen3-14B (Yang et al., 2025a); and 2,576 ex-
+amples each for Qwen2.5-14B-Instruct, Qwen2.5-
+7B-Instruct (Yang et al., 2025b), Zephyr-7B-beta
+(Tunstall et al., 2024), Mistral-Nemo-Instruct-
+2407 (Mistral AI, 2024), and DeepSeek-R1-Distill-
+Qwen-7B/14B (Guo et al., 2025). Because sample
+sizes differ, cross-model comparisons should be
+interpreted cautiously. We emphasize evidence-
+condition and failure-mode comparisons rather
+than model ranking.
+6 Results
+6.1 Authority-first ranking improves top-rank
+legal applicability
+Table 4 shows that authority-first ranking sub-
+stantially improves top-rank legal applicability.
+AuthorityFirst-RAG reaches 30.90% Recall@1,
+compared with 2.80% for BM25-date-filter, 9.16%
+for citation-hybrid date filter, and 0.31% for
+BM25-only. The improvement reflects modeling
+legal authority and temporal validity before ranking
+local rule text. On the full 3,220-instance bench-
+mark, AuthorityFirst-RAG preserves the strongest
+overall ranking pattern but with lower absolute Re-
+call@1, indicating that the full benchmark is harder
+than the 644-instance test split.
+The contrast with citation-hybrid date filter is in-
+formative: it reaches 77.17% Recall@10 but much
+lower Recall@1, so citation/date signals often find
+the right candidate without ranking it first. In RAG,
+wrong top evidence can dominate the answer; law-
+in-force retrieval therefore requires top-rank rank-
+ing of legally applicable authority.
+ColBERT-style retrieval remains weak even with
+post-retrieval date filtering, suggesting that se-
+mantic matching alone does not resolve author-
+ity/version selection.
+On a balanced 100-instance subset, a tool-using
+LLM agent reaches 15.0% R@1 versus 23.0%
+for AuthorityFirst-RAG; both obtain 0% R@1 on
+uncited queries. Agent traces indicate that can-
+didate generation/authority discovery is the main
+bottleneck (Appendix D).
+6.2 Gold evidence is not enough for legal
+numeric QA
+Generation gains are much smaller than retrieval
+gains. Table 5 reports sample-weighted averages
+across completed condition-level runs and shows
+that AuthorityFirst-RAG improves average gener-
+ation accuracy over BM25-date-filter, but by far
+less than the Recall@1 gain in Table 4. Correct
+evidence is necessary because an invalid version
+may support the opposite answer. It is not sufficient
+because the model must still interpret the operative
+date, threshold, unit, and comparator.
+The GoldOracle evidence condition confirms the
+same pattern. In that setting, the best reported open-
+884

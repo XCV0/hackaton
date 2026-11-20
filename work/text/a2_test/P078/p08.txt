@@ -1,0 +1,116 @@
+8
+4.5 Cost Properties
+We now cover cost properties that favor PRISM-RAG at index and
+query time compared to the SOTA RAG methods before moving
+on to empirical validation in Sec. 5.3. The SOTA RAG baselines,
+HippoRAG2 and HyperGraphRAG, both require one LLM call per
+document chunk to extract entities and relations at index time. For
+NicoPRISM, this amounts to 2,001 API calls for our knowledge
+base. Meanwhile, PRISM-RAG’s spaCy-based entity extraction
+(Sec. 4.2.3) requires no LLM calls. At query time, both PRISM-
+RAG and StandardRAG each require exactly one LLM call, versus
+two for HyperGraphRAG (one internal to its knowledge-graph
+traversal, then another for response generation).
+PRISM-RAG’s direct injection path also provides a structural
+guarantee on jurisdiction routing, formalized below. Let q be a
+policy query with jurisdiction hint jq ̸= ∅, let Pmax = 5 be the
+fixed direct-injection budget (Sec. 4.3), and let njq = |{v ∈
+VP : jur(v) = jq }| be the number of document chunks in
+the knowledge base with jurisdiction label jq . The context Cq
+assembled by PRISM-RAG (Eqn. 11) satisfies the property given
+in Eqn. (13), completely independent of knowledge organization
+(graph or hypergraph) or embedding-space topology.
+|{v ∈ Cq : jur(v) = jq }| ≥ min(Pmax, njq ), (13)
+The direct injection path Cjur q ⊆ Cq scores every v ∈ VP with
+jur(v) = jq against the query embedding and selects the top-Pmax
+unconditionally whenever jq ̸= ∅, independent of Stage 1 or Stage
+2 outcomes. If njq ≥ Pmax, exactly Pmax chunks are injected;
+otherwise all njq available chunks are injected. In both cases, the
+bound is satisfied.
+The bound is only meaningful when the queried jurisdiction
+is represented in the knowledge base (njq > 0); if jq is entirely
+absent from NicoPRISM’s document corpus, the guarantee holds
+trivially (≥ 0) but provides no coverage. This case, however, we
+note, is out of the scope of PRISM-RAG. We also highlight the
+importance of incorporating external knowledge in future work.
+5 EXPERIMENTS
+We describe our experiment evaluation setup in Sec. 5.1. Sec. 5.2
+reports primary benchmark results on policy compliance QA, the
+primary task of this work. Sec. 5.3 provides a cost analysis between
+PRISM-RAG and the other RAG methods. Sec. 5.4 presents
+ablation studies alongside product knowledge QA results. Sec. 5.5
+evaluates image encoder backbones on visual product retrieval. Sec.
+5.6 provides a qualitative analysis of RAG framework responses.
+5.1 Experimental Setup
+For image embeddings and all cross-modal operations, we use
+SigLIP [39] (SoViT-400M, patch size 14, input size 384); for
+embedding longer documents locally, as well as text within PRISM-
+RAG, we use BGE-M3 [40]. Our LLM of choice for all RAG
+backends and final response generation is GPT-5.4-Nano [26]. For
+QA evaluation, we use a held-out test set of 275 images, and the test
+image-QA pairings give 1,325 policy compliance instances and 170
+product knowledge instances. Visual product retrieval results are
+averaged over five random 70-30 splits {0, 42, 101, 777, 1000}.
+We evaluate three document RAG baselines alongside PRISM-
+RAG: StandardRAG (document chunk retrieval); HippoRAG2
+[4] (graph-based LLM entity extraction at index time); and
+HyperGraphRAG [5] (n-ary knowledge hyperedges with LLM
+calls at index time). All baselines use K = 8 retrieved products
+and top-8 retrieved documents. All PRISM-RAG experiments use
+bimodal product node embedding with SigLIP (image) and BGE-
+M3 (text) branches, mutual top-k bridge matching with k = 10,
+k-means concept clustering with c = 50 clusters, entity extraction
+using spaCy, K = 8 seed nodes at Stage 1, and a traversal depth
+of m = 10 hyperedges at retrieval Stage 2. These hyperparameters
+were selected by maximizing JA on the policy compliance task as
+reported in Table 6.
+The metrics are defined as follows. We report keyword preci-
+sion (KW-P), keyword recall (KW-R), and F1 (KW-F1) scores
+to quantify retrieval success of ground-truth keywords/entities
+in y∗, as is the case in past RAG works. Furthermore, we
+introduce context coverage (CC)—the fraction of ground-truth
+keywords present anywhere in Cq , i.e., measuring retrieval quality
+independently of generation quality. Response groundedness RG
+(response groundedness) measures similarity between y∗ and Cq via
+cosine similarity. We also employ LLM-as-a-Judge (Judge) score
+(range 1–5) [38]. For policy compliance questions, compliance
+accuracy (CA) is the fraction of responses whose LLM-judge-
+extracted compliance label matches the ground-truth label; and
+jurisdiction accuracy (JA) is the fraction of retrieved passages
+whose source document belongs to the jurisdiction queried by the
+user, denoted as jq , and is either a single jurisdiction for most
+queries but a set of two jurisdictions for multi-hop preemption
+questions (e.g., “legal in State A but banned in State B”); a
+passage counts as correct-jurisdiction if its source jurisdiction is a
+member of jq , computed from an external document-to-jurisdiction
+mapping. Lastly, bootstrap 95% confidence intervals and BH-
+corrected (q = 0.05) paired permutation test p-values over all
+24 simultaneously tested hypotheses are reported in the Appendix.
+We note that we do not compare against VLM-based RAG
+methods (e.g., multimodal retrieval augmented generation with
+GPT-4V or similar) because the rate-limiting step in NicoPRISM
+is not visual recognition but legislative document retrieval—
+distinguishing city (e.g., D.C.) from federal statutory text, for
+example, requires document-level structural understanding that
+VLM context windows and short-form image-text alignment are not
+designed to provide. The selected baselines represent the current
+state of the art specifically for document-grounded knowledge
+graph and hyperedge retrieval, which is the capability most directly
+relevant to this task.
+5.2 Policy Compliance QA
+Table 3 reports results on policy compliance QA.
+Jurisdiction Accuracy is our most important finding. PRISM-
+RAG retrieves passages from the queried jurisdiction in 93.9%
+of instances versus 45.0% for StandardRAG, and this +48.6 pp
+advantage is statistically unambiguous (p < 0.001, bootstrap 95%
+CI: [46.2, 50.9]). Meanwhile, HyperGraphRAG achieves JA of
+87.7% and is within 6.1 pp of PRISM-RAG’s own JA, therefore
+suggesting its knowledge graph (KG) traversal reaches jurisdiction-
+relevant content relatively often. Performance on CA, however,
+collapses to 1.3% and CC collapses to 0.2816, the lowest among the
+RAG methods tested. Despite this discrepancy, HyperGraphRAG’s
+responses are highly grounded in the retrieved context (RG =
+0.885, highest of all methods) but do not produce actionable
+compliance determinations. This “grounded but indeterminate”
+pattern reflects the fact that HyperGraphRAG’s entity-relation
+KG surfaces topically adjacent content without producing the

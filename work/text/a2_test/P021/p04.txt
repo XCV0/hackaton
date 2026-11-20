@@ -1,0 +1,64 @@
+Figure 2: MIRAGE decomposes generated text into subclaims to assess two dimensions of quality: INFOF1, which
+measures factuality and information coverage, and CITEF1, which measures citation precision and completeness.
+The framework enables consistent, claim-level evaluation across text, image, audio, and video modalities.
+(i.e., subclaims3) and are compared against all doc-
+uments in the retrieved context to obtain a binary
+judgment of support. In our implementation, we
+apply the same claim decomposition method as we
+use in MIRAGE to obtain these statements. We
+evaluate statement support against the documents
+in context one-by-one, rather than jointly, owing to
+context limitations.
+Answer Relevance For Answer Relevance, RA-
+GAS first uses an LLM to predict a query that
+could have yielded the predicted text as a response.
+Answer Relevance is then computed as the cosine
+similarity between the embeddings of the predicted
+and actual queries, given some embedding model.
+Context Relevance RAGAS uses an LLM to ex-
+tract sentences from the retrieved context that are
+judged to be essential to answering the query, com-
+puting the Context Relevance as extracted sentences total context sentences .
+To adapt this for multimodal documents (videos, in
+our experiments), we extract query-relevant obser-
+vations from each document and (separately) elicit
+a detailed VLM summary of the same document to
+approximate the denominator.
+3.4 Summary
+The three metrics above share core limitations
+that hinder their applicability in multimodal do-
+mains: ALCE and ARGUE assess information
+at the sentence level, making fact verification less
+3Es et al. (2024) create one or more statements from a
+sentence, which we interpret as subclaim decomposition.
+precise. Additionally, ALCE relies on concate-
+nating multiple sources, which is infeasible with
+multiple long multimodal documents, and RAGAS
+assumes an exhaustive extraction of observations
+from sources—an impracticable expectation in the
+multimodal domain. MIRAGE addresses these is-
+sues by decomposing predictions into subclaims
+across all evaluation dimensions, enabling more
+granular assessments of factuality and citation qual-
+ity. Its two components, INFOF1 and CITEF1, can
+be computed in both reference-based and reference-
+free settings, providing a scalable, claim-centric
+framework for evaluating multimodal RAG.
+4 MIRAGE
+MIRAGE (Figure 2) is a subclaim-centric evalua-
+tion framework that evaluates two dimensions of
+predictions: the presented information and the use
+of citations. INFOF1 measures both the proportion
+of predicted subclaims that are factual (precision)
+as well as the proportion of a set of reference sub-
+claims that are supported by the predicted text (re-
+call). CITEF1 measures whether subclaims are
+supported by their cited sources (precision) and
+whether reference subclaims attested by the predic-
+tion are attributed to a source that supports them (re-
+call). Appendix B provides further variants of MI-
+RAGE for single-source inference and subclaim
+and source importance weighting.
+Subclaim Decomposition A core step in MI-
+RAGE is decomposing sentences into subclaims.
+40234

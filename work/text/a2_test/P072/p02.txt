@@ -1,0 +1,136 @@
+KDD ’24, August 25–29, 2024, Barcelona, Spain Yunqi Xu, Tianchi Cai, Jiyan Jiang, and Xierui Song
+Q.: Why Amazon established a leading position in cloud services?
+Ref.: Amazon is the global leader in cloud services. Sinceachieving the top position in the industry, 
+hehas to independently drive innovation. 
+Ans.: Amazon is the global leader in cloud services. The reason heachievedthe top position in the 
+industry is becausehehas independently driven innovation.
+RAG
+true
+Step2:FCE
+Step1:Logic-Preserving Decomposition
+Prior FCE
+Step1:Decompose Answer
+true
+Hallucination Error
+Knowledge Error  
+Logical Fallacy 
+Real-World Dataset
+GPT-4
+New Ans.FCE output: False
+Amazon is the global 
+leader in cloud services.
+Heachievedthe top 
+position in the industry.
+Hehas independently 
+driven innovation.
+true
+Amazon is the global leader in cloud services.
+The reason      Amazonachievedthe top 
+position in the industry is because hehas 
+independently driven innovation.
+truetrue
+extract
+Step2.1:Fact FCE
+Logical Structure Analysis
+true false
+true false
+Step2.2:Logic FCE
+Q.
+Ref.
+Ans.
+RAG
+L-Face4RAG (Ours)
+Error Typology
+ConstrucMon Prompts 
+based on Error Type
+Label
+:
+:
+↦
+↦
+causal reversal:
+Data Augmentation 
+Prompts
+FCE output: True
+lack causality
+unclear referent
+Face4RAG
+Synthetic Dataset1
+2
+3
+2*
+1*
+2
+3
+2 3 1* 2*
+2*
+2
+23
+3
++ Q. + Ref. + Q. + Ref.
+Ref. Manual
+Annotation
+Q.
+Ref.
+Ans.
+RAG
+LabelManual
+Annotation
+Error Type
+Figure 1: An overview of our proposed FCE benchmark and method, in comparison with prior works. The upper left plot gives
+an example from RAG task. The lower left plot demonstrates previous FCE method, and the lower middle plot depicts our
+proposed FCE method L-Face4RAG. The upper right plot shows the procedure of constructing the real-world dataset in our
+proposed Face4RAG benchmark, which follows the procedure of previous benchmark. The lower right plots illustrates the
+construction of the synthetic dataset in the Face4RAG benchmark.
+While logical fallacy accounts for a considerable proportion
+of factual inconsistency errors in the real-world dataset, existing
+FCE methods may be incapable of detecting these sophisticated
+errors involving logical connections among multiple text segments,
+since the decomposition step may neglect the logical connections
+between segments in the original answer. Figure 1 provides a show-
+case where a careless decomposition may mistakenly remove the
+cause-effect relation, leading to a wrong evaluation result.
+To resolve this issue, we develop the Logic-Enhanced FActual
+Consistency Evaluation for RAG (L-Face4RAG) method to better
+handle the logical consistency in the RAG task. L-Face4RAG has
+two core designs, i.e., logic-preserving answer decomposition and
+fact-logic FCE. Specifically, in the answer decomposition step, we
+propose three principles for decomposition based on semantic link-
+ages and logical connections. We design an elaborated prompt
+accordingly and construct few-shot examples to help LLM better
+follow the above principles. In the subsequent FCE step, we assess
+the factual consistency of each segment from two perspectives, i.e.,
+the fact consistency and logical consistency. The former perspective
+aims to detect hallucination or knowledge errors, while the later is
+responsible for the logical fallacy errors. We further design a chain-
+of-thought (COT) [43] prompt at each stage to instruct the LLM
+to better handle the inconsistency error in a step-by-step manner.
+Figure 1 gives a detailed demonstration of L-Face4RAG.
+Finally, we conduct extensive experiments to verify the effective-
+ness of L-Face4RAG. Compared to previous FCE methods for RAG,
+L-Face4RAG attains substantially higher accuracy on both synthetic
+and real-world datasets, regardless of the error type or underlying
+LLM. Notably, although it is motivated by FCE in Chinese RAG,
+its superiority is consistent on other FCE tasks. Specifically, addi-
+tional experiments on English FCE benchmarks for RAG[13, 18],
+summarization[14, 34], dialogue[16, 17] and fact verification[37]
+show that L-Face4RAG achieves SOTA on most of the tasks (6 out of
+7), as well as a substantially higher averaged score. We further con-
+duct ablation studies to verify the core designs of L-Face4RAG, i.e.,
+the logic-preserving answer decomposition approach and two-stage
+consistency evaluation with carefully designed COT prompts.
+The contributions of this work are summarized as follows:
+• We construct the first comprehensive FCE benchmark in
+RAG, the Face4RAG, which includes a carefully designed
+error typology, a synthetic dataset, and a real-world dataset.
+Face4RAG allows to evaluate FCE method on specific error
+types or various real-world error distributions.
+• We propose a new FCE method called L-Face4RAG with
+two novel designs of logic-preserving answer decomposition
+and fact-logic FCE to better detect the logic fallacy in the
+examined answer.
+• Extensive experiments justify the proposed error typology,
+evaluate the effectiveness of L-Face4RAG on a wide range of
+FCE tasks, and provide further insights on the distinct error
+type distributions of various LLMs. All datasets and method
+are released for better reproducibility.

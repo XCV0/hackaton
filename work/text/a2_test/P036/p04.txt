@@ -1,0 +1,37 @@
+4 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+(4) Outlook Analysis
+Forward-looking analysis assesses management’s guidance, analyst consensus,
+and projected financial trends. By drawing from press releases, earnings reports,
+and occasionally analyst forecasts, the model can synthesize expectations for fu-
+ture performance, such as projected revenue growth or cost-optimization strate-
+gies. This component also reflects qualitative signals, such as management tone
+or sentiment extracted from the earnings call transcript, which complement the
+quantitative KPIs. Integrating these elements allows the model to generate a
+balanced view that combines data-driven projections with managerial perspec-
+tives.
+(5) Summary and Executive Sentiment
+The summary component synthesizes key insights from both financial and tex-
+tual sources, such as executives’ remarks and press announcements. This step
+aims to distill the overall narrative conveyed during the earnings call, highlight-
+ing management’s confidence levels, strategic priorities, or risk acknowledgments.
+We use this component to train the model to capture soft indicators that are
+not directly observable in numerical data but are critical for evaluating corporate
+outlook and investor sentiment.
+(6) Integrated Analysis Report
+Finally, all the preceding elements are integrated into a cohesive earnings report
+analysis. This module combines objective KPI evaluation, comparative bench-
+marks, and qualitative outlook synthesis to generate a holistic view of the com-
+pany’s performance in the given quarter. The structure and tone are inspired
+by professional equity research reports, ensuring the generated output is aligned
+with financial reporting standards. The analyst remains in the loop by review-
+ing or updating the KPI set, thereby guiding the model’s focus in subsequent
+iterations.
+3 Financial Instruction Data
+Developing a financially augmented large language model (LLM) requires a well-
+structured and context-rich dataset that reflects the language, reasoning pat-
+terns, and analytical conventions of financial reporting. To achieve this, we con-
+struct a two-tier dataset which serves as the foundation for instruction tuning
+and retrieval-augmented fine-tuning.
+3.1 General Financial Instruction Data
+To fine-tune a financially augmented LLM, we first require a diverse set of general
+financial instruction data that reflect real-world financial document structures

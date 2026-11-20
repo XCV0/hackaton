@@ -1,0 +1,104 @@
+10770
+Set SenNum ISRatio MaxLen MinLen AveLen MN PSMN
+SIGHAN15 1100 0. 50 108 5 30 703 0. 63
+SIGHAN14 1062 0. 49 150 6 50 771 0. 72
+SIGHAN13 1000 0. 97 158 17 74 1224 1. 22
+CSCD-IME(500) 500 0. 47 122 11 57 255 0. 51
+OAD 500 0. 50 113 11 42 480 0. 96
+Table 1: Shallow features in different evaluation datasets. SenNum is the number of sentences, ISRatio is the
+percentage of sentences with errors, MN is the number of wrong characters, and PSMN is the average number of
+wrong characters per sentence.
+and OAD, including SIGHAN13, SIGHAN14,
+SIGHAN15, CSCD-IME (500). (The details of all
+datasets are introduced in Section 5.1) As shown in
+Table 1, OAD dataset has a higher error character
+density, indicating that it is more challenging to
+correct spelling errors in OAD than other datasets.
+Because recognition tools are more prone to consec-
+utive errors, which are different from errors caused
+by humans.
+Error Character Overlap Rate. We collect the
+100 error pairs with the highest frequency for each
+datasets and calculate the overlap ratios between
+different datasets based on the error pairs from each
+dataset. Fig. 2 shows that the overlapping propor-
+tions among the datasets of the SIGHAN series
+is high, but there are basically no overlap errors
+between OAD and other datasets. It indicates that
+the spelling errors in the OAD dataset are different
+from other evaluation datasets.
+3
+3%6
+5%6
+0%5
+8%6
+2%2
+4%3
+%5
+%5
+%1
+0%4
+%2
+4%1
+6%1
+7%2
+1%3
+9%8
+%2
+0%2
+0%8
+%O
+ADC
+SCD-IME(500)S
+IGHAN15S
+IGHAN14S
+IGHAN130
+2 04 06 08 01 00P
+ercentageD
+ataset 
+P ro G ly P ro&Gly O th
+Figure 3: Distribution of error types.
+Error Type Distribution. We divide CSC errors
+into four different types: pronunciation similar mis-
+spelling, glyph similar misspelling, both pronun-
+ciation and glyph similar misspelling, and others
+according to (Wang et al., 2024b). The distribution
+is shown in Fig. 3. We found that the distribu-
+tions of error types are very similar among the
+SIGHAN13-15 datasets because they have similar
+sources. Most of the data in CSCD-IME is gener-
+ated by the pinyin input method, so there is a large
+proportion pronunciation similar misspelling errors.
+In OAD, the proportion of pronunciation similar
+errors and glyph similar errors are very close, while
+other types of errors have a higher proportion, re-
+sulting in a more balanced error type distribution.
+We conclude from the comparison experiment
+that OAD dataset has a value for further study.
+4 Method
+4.1 Task Definition
+Given a Chinese sentence X = {x1, x2, ..., xn}
+including errors, the correction model aims to gen-
+erate the corresponding correct result denoted as
+Y = {y1, y2, ..., yn}. It must be noted that, the cur-
+rent CSC studies all stipulate that X and Y must
+have the same length. This task typically involves
+two sub-steps: first, detecting the location of the
+error xi, and then providing the correct character
+yi for that position. In the final result statement, if
+the erroneous character has changed, it is consid-
+ered to be successfully detected. If this erroneous
+character is changed to the correct character, it is
+considered to be successfully corrected.
+4.2 Overview of RagID
+The structure of RagID is shown in Fig 4. RagID
+includes three key modules: Retriever, Corrector,
+and Discriminator. We collect a large number of
+Chinese spelling examples and convert these exam-
+ples into low-dimensional vector representations
+through vectorization technique. These representa-
+tions are stored in a pre-established vector database
+as our external knowledge base in RAG. Retriever
+uses the same vectorization technique to convert
+the given sentence X into a vector and searches for
+related correction examples. Corrector is an LLM

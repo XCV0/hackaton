@@ -1,0 +1,100 @@
+3 Proposed Method: HYBGRAG
+To solve HQA, we propose HYBGRAG, consist-
+ing of the retriever bank and the critic module, to
+address Challenge 1 and Challenge 2, respectively.
+3.1 Retriever Bank (for C1)
+To solve Challenge 1, we propose the retriever
+bank, composed of multiple retrieval modules and
+a router. Given a question q, the router determines
+the selection and usage of the retrieval module, a
+process known as question routing. The selected re-
+trieval module then retrieves the top-K references
+X , as elaborated in the next paragraph.
+Retrieval Modules We design two retrieval mod-
+ules, namely text and hybrid retrieval modules, to
+retrieve information from text documents and SKB,
+respectively. Each retrieval module includes a re-
+triever and a ranker, which offers the flexibility to
+cover a wide range of questions.
+The text retrieval module retrieves documents
+using similarity search for a given question q, such
+as dense retrieval, which is designed to directly
+find answers within text documents. We use VSS
+between question q and documents D in the embed-
+ding space as both the retriever and the ranker. This
+is typically used when nothing can be extracted
+from the hybrid retrieval module.
+The hybrid retrieval module takes the identified
+topic entities ˆE and useful relations ˆR as input. It
+uses a graph retriever to extract entities in the ego-
+graph of ˆE, connected by ˆR. For example, in Fig. 1,
+{ ˆE = {John Smith}, ˆR = {author writes paper}}
+and the graph retriever extracts the entities/papers
+connected by the path “John Smith -> author writes
+paper -> {paper(s)}”. If more than one ego-graph
+is extracted, their intersection is used as the final
+result. Finally, to solve hybrid questions, we pro-
+pose ranking the documents associated with the
+extracted entities using a VSS ranker between ques-
+tion q and documents D. This ensures the synergy
+between the relational and textual information.
+Router Given a question q, the LLM router per-
+forms question routing to determine the selection
+and usage of the retrieval module. More specifi-
+cally, the router first identifies the relational aspect,
+i.e., topic entities ˆE and useful relations ˆR based on
+the types of entities TE and the types of relation TR
+using few shot examples (Brown, 2020). The router
+then makes the selection st, determining whether to
+use a text or a hybrid retrieval module. Identifying
+ˆE and ˆR before determining st improves the qual-
+ity of st. For example, if there is no entity extracted
+ˆE = ∅, a text retrieval module is a better option.
+3.2 Critic Module (for C2)
+Given a hybrid question q, the router is asked to per-
+form question routing, including identifying topic
+entities ˆE and useful relations ˆR. However, as
+mentioned in Challenge 2, they may be incorrectly
+identified in the first iteration.
+To solve this, we propose the critic module,
+which provides feedback to help the router perform
+better question routing. Instead of using a single
+LLM to complete this complicated task, we divide
+the critic into two parts, an LLM validator Cval to
+validate the correctness of the retrieval X , and an
+LLM commenter Ccom to provide feedback ft if
+the retrieval is incorrect. This divide-and-conquer
+step, similar to previous works (Gao et al., 2022;
+Asai et al., 2024), is crucial to our critic module, of-
+fering two key advantages: (1) By breaking a diffi-
+cult task into two easier ones, we can now leverage
+pre-trained LLMs to solve them while maintaining
+good performance. This resolves the issue when
+the labels are not available for fine-tuning an LLM
+critic. (2) Since the tasks of Cval and Ccom are
+independent, they can each have their own exclu-
+sive contexts, preventing the inclusion of irrelevant
+information and avoiding the “lost in the middle”
+phenomenon (Shi et al., 2023; Liu et al., 2024).
+Validator The LLM validator Cval aims to val-
+idate if the top references retrieved X meet the
+requirements specified by the question q, which is
+a binary classification task. To improve accuracy,
+we provide an additional validation context for the
+validator. We use the reasoning paths between topic
+entities and entities in the extracted ego-graph as
+the validation context, which are used to verify
+whether the output satisfies certain requirements in
+the question. The reasoning paths are verbalized as
+“{topic entity} →{useful relation} →... →{useful
+relation} →{neighboring entity}”. For example,
+if a hybrid question asks for a paper (i.e. a doc-
+ument) from a specific author, then the context
+including the reasoning paths “{author} →{writes}
+→{paper}” is essential for verification.
+Commenter The LLM commenter Ccom aims to
+provide feedback f to help the router refine ques-
+tion routing. To effectively guide the router, we
+construct corrective feedback that it can easily un-
+derstand. In more detail, it points out the error(s) in
+882

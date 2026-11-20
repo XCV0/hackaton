@@ -1,0 +1,27 @@
+16 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+6 Related Work
+Large Language Models (LLMs) have been increasingly applied to financial anal-
+ysis, with early domain-specific models like BloombergGPT [15] and FinGPT
+[16] demonstrating the value of financial adaptation. Recent studies extend this
+trend toward more sophisticated analytical tasks. Jadhav and Mirza [7] provide
+a comprehensive review of 84 studies on LLMs in equity markets, emphasizing
+their applications in forecasting and portfolio management. Regulatory perspec-
+tives, such as the ESMA–Alan Turing Institute report [3], further highlight the
+importance of responsible and verifiable adoption in finance.
+Instruction tuning has emerged as an efficient strategy for aligning LLMs
+with domain-specific objectives. Han et al. [4] present a comprehensive sur-
+vey of instruction tuning methods, emphasizing alignment-centric paradigms.
+This paper also shows that data quality and domain diversity critically influence
+downstream task performance. In finance, Hirano and Imajo [5] propose building
+instruction-tuned LLMs without explicit instruction datasets via continual pre-
+training and model merging, and Tanabe et al. [10] introduce JaFIn, a Japanese
+financial instruction dataset that enhances domain adaptability.
+Retrieval-Augmented Generation (RAG) further improves factual grounding
+and contextual accuracy in financial reasoning. Zeng [17] presents QuantMCP,
+a retrieval-grounded framework linking LLMs to verified financial data sources,
+while Wang et al. [14] evaluate RAG and fine-tuning approaches for financial-
+statement analysis, highlighting their complementary strengths. Despite these
+advances, the integration of retrieval augmentation and instruction tuning for
+automated earnings report analysis remains unexplored. This work introduces
+RAG-IT, a framework unifying retrieval-augmented instruction data generation
+and fine-tuning to address this gap in financial LLM research.

@@ -1,0 +1,100 @@
+arXiv:2502.04413v2  [cs.CL]  27 Jun 2025
+MedRAG: Enhancing Retrieval-augmented Generation with
+Knowledge Graph-Elicited Reasoning for Healthcare Copilot
+Xuejiao Zhao∗
+LILY Research Centre
+Nanyang Technological University
+Singapore
+xjzhao@ntu.edu.sg
+Siyan Liu∗
+LILY Research Centre
+Nanyang Technological University
+Singapore
+siyan.liu@ntu.edu.sg
+Su-Yin Yang
+Tan Tock Seng Hospital
+Woodlands Health
+Singapore
+su_yin_yang@wh.com.sg
+Chunyan Miao†
+LILY Research Centre
+Nanyang Technological University
+Singapore
+ascymiao@ntu.edu.sg
+Abstract
+Retrieval-augmented generation (RAG) is a well-suited technique
+for retrieving privacy-sensitive Electronic Health Records (EHR). It
+can serve as a key module of the healthcare copilot, helping reduce
+misdiagnosis for healthcare practitioners and patients. However, the
+diagnostic accuracy and specificity of existing heuristic-based RAG
+models used in the medical domain are inadequate, particularly for
+diseases with similar manifestations. This paper proposes MedRAG,
+a RAG model enhanced by knowledge graph (KG)-elicited reason-
+ing for the medical domain that retrieves diagnosis and treatment
+recommendations based on manifestations. MedRAG systematically
+constructs a comprehensive four-tier hierarchical diagnostic KG en-
+compassing critical diagnostic differences of various diseases. These
+differences are dynamically integrated with similar EHRs retrieved
+from an EHR database, and reasoned within a large language model.
+This process enables more accurate and specific decision support,
+while also proactively providing follow-up questions to enhance
+personalized medical decision-making. MedRAG is evaluated on
+both a public dataset DDXPlus and a private chronic pain diagnos-
+tic dataset (CPDD) collected from Tan Tock Seng Hospital, and its
+performance is compared against various existing RAG methods.
+Experimental results show that, leveraging the information inte-
+gration and relational abilities of the KG, our MedRAG provides
+more specific diagnostic insights and outperforms state-of-the-art
+models in reducing misdiagnosis rates. Our code will be available
+at https:// github.com/ SNOWTEAM2023/ MedRAG
+Keywords
+Healthcare Copilot, Retrieval-augmented Generation, Knowledge
+Graph, Large Language Models, Decision Support
+1 Introduction
+Diagnostic errors cause significant harm to healthcare systems
+worldwide. In the United States, approximately 795,000 individuals
+each year suffer permanent disability or death due to misdiagnosis
+of dangerous diseases. These errors are predominantly attributed
+to cognitive biases and judgmental mistakes [9, 36, 57]. “Healthcare
+∗Both authors contributed equally to the paper
+†Corresponding author
+Copilot” is a medical AI assistant designed to provide diagnostic
+decision support, mitigating biases and increasing efficiency for
+healthcare practitioners, while also empowering patients and im-
+proving overall decision-making [1, 2, 28, 43, 44]. We conducted
+interviews to gather requirements and suggestions from users of
+the healthcare copilot. The results showed that one of the most im-
+portant and challenging tasks for a healthcare copilot is to provide
+an accurate diagnosis based on patient manifestations 1, followed by
+offering appropriate treatment plans and medication recommenda-
+tions based on the diagnosis. In addition, when patient information
+is insufficient or the diagnosis is ambiguous, the healthcare copilot
+should proactively offer precise follow-up questions to enhance the
+decision-making process [3, 25, 38, 44, 65].
+Retrieval-augmented generation (RAG) offers an advanced ap-
+proach by utilizing domain-specific, private datasets to address
+user queries without the need for additional model training [12,
+17, 29]. This approach is well-suited for retrieving information
+from privacy-sensitive Electronic Health Records (EHRs), and helps
+healthcare professionals to reduce the risk of misdiagnosis as a
+healthcare copilot [22, 59]. The existing medical RAG and LLMs
+fine-tuned on medical datasets often rely on heuristic-based ap-
+proaches, leading to incorrect or vague outputs, particularly when
+diseases share similar manifestations, making differentiation diffi-
+cult [18, 24, 31, 58, 62, 66] as shown in Figure 1(a). To address this,
+we introduce MedRAG, a framework that combines RAG with a com-
+prehensive diagnostic knowledge graph, enabling more accurate
+reasoning and tailored treatment recommendations by grounding
+predictions in structured, inferable medical data [21, 26, 34, 53].
+This approach significantly enhances the reasoning ability of RAG,
+enabling it not only to identify subtle diagnostic differences but also
+to proactively infer relevant follow-up questions, further clarifying
+ambiguous patient information, as shown in Figure 1(b).
+Specifically, a diagnostic knowledge graph (KG) with a four-
+tier hierarchical structure is constructed systematically through
+advanced techniques, including disease clustering, hierarchical ag-
+gregation and large language model augmentation. While medical
+ontologies like UMLS could be considered, their ambiguous class
+1“Manifestations” typically include all observable signs and symptoms of a patient’s
+condition, such as physical indicators (e.g., rash, fever), patient-reported symptoms
+(e.g., pain, dizziness), and measurable clinical data (e.g., blood pressure, lab results).

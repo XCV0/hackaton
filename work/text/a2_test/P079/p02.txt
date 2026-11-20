@@ -1,0 +1,104 @@
+We construct a large-scale, structured knowledge base of
+13,329 KMST adjudication cases (1971–2025), featur-
+ing retrievable document fields and hierarchical L1/L2
+cause tags to facilitate evidence-grounded analysis.
+• Proposing an Integrated Retrieval and Evaluation
+Framework: We develop a multi-field hybrid retrieval
+strategy that optimizes case matching and introduce a
+reproducible, metadata-driven evaluation protocol that
+demonstrates significantly improved structured RCA
+generation over LLM-only baselines.
+II. RELATED WORK
+A. RCA and Precedent-Grounded Investigation
+RCA in safety-critical systems seeks to explain how
+multiple contributing factors combine to produce adverse
+events [4], [5]. In maritime safety, tribunal-style adjudication
+reports encode expert RCA judgments—comprising causal
+reasoning and administrative dispositions—that investigators
+consult as precedents. This motivates treating adjudication
+records as an evidence corpus for retrieval-based analysis,
+where a system must not only find relevant precedents but
+also synthesize explanations with traceable support.
+B. Specialized RAG and Hybrid Retrieval
+RAG reduces hallucination in knowledge-intensive tasks
+by grounding LLM outputs in external evidence [6], [7].
+For semi-structured technical reports, retrieval relevance is
+multifaceted: it involves descriptive similarity in narratives,
+causal similarity in reasoning, and outcome similarity in dis-
+positions. While sparse lexical methods (e.g., BM25) excel at
+matching rare technical terms [9], dense retrieval captures se-
+mantic nuances using embeddings like BAAI/bge-m3 [10].
+Hybrid retrieval, fused via Reciprocal Rank Fusion (RRF),
+combines these strengths [11], [12]. Our work extends this
+by utilizing field-aware indexing [13], preventing the dilution
+of distinct causal signals that occurs in monolithic text
+blocks [14].
+C. Weak Supervision for Domain Taxonomies
+In specialized domains, large-scale expert annotation is
+often infeasible, necessitating rule-based information extrac-
+tion and weak supervision to generate structured signals
+[15]. Taxonomy-aligned metadata enables standardized out-
+puts and corpus-level analysis. Following these principles,
+we employ a rule-based mapping to assign KMST L1/L2
+cause tags, providing a consistent label space for both the
+structured knowledge base and the generator G .
+D. Maritime Accident Text Mining
+Prior research on maritime reports has addressed various
+analytical tasks, including accident type prediction [16],
+statistical cause analysis [17], [18], causal relation extraction
+[19], [20], semantic clustering [21], and knowledge graph
+construction [22]. While these studies demonstrate the utility
+of NLP for tribunal records, they are primarily discriminative
+or focused on extracting local patterns from historical data.
+Such approaches lack the capacity to generate coherent,
+evidence-grounded explanations for new scenarios. In con-
+trast, our framework performs generative RCA, synthesizing
+a causal narrative and standardized tags while explicitly
+surfacing supporting precedents for traceable investigation.
+III. METHOD
+A. Problem Formulation
+We define the task of maritime RCA assistance as case-
+informed structured generation. Given a query accident
+scenario q—typically a free-text description of a vessel
+incident—the system retrieves a ranked set of k precedent
+chunks from a structured knowledge base D:
+Ck = Retriever(q, D) = {c1,c2, . . . ,ck}, (1)
+where each chunk ci ∈ D represents a specific semantic
+section from a historical adjudication report, such as the
+Summary, Causes, or Disposition field. For instance, a re-
+trieved chunk c1 may contain the causal reasoning for a past
+collision similar to q.
+Conditioned on the input q and the retrieved evidence Ck,
+the generator G produces a structured RCA output Y :
+Y = G (q,Ck) = {n,T }, (2)
+where n is a concise cause narrative and T is a set of
+taxonomy-aligned cause tags. This formulation ensures that
+the generation is not only structurally consistent but also
+grounded in verified historical precedents.
+B. KMST Adjudication Knowledge Base
+The knowledge base D is constructed from official ad-
+judication reports published by the Korea Maritime Safety
+Tribunal (KMST) [23]. These records, spanning decades
+of maritime history, are semi-structured tribunal documents
+characterized by standardized headings but highly variable
+phrasing and narrative lengths. As illustrated in Fig. 2,
+we converted each raw record into plain text and applied
+cleaning and normalization. Each processed record was then
+standardized into a card identified by a unique ID, integrating
+the textual content with essential metadata such as accident
+type, keywords, tribunal jurisdiction, and incident year. To
+preserve semantic specificity, the main text of each card was
+partitioned into three distinct retrievable fields: Summary (in-
+cident description), Causes (tribunal’s causal reasoning), and
+Disposition (administrative outcomes). Each field was stored
+as an independently retrievable chunk while maintaining a
+reference to its parent case ID for traceability. Across 13,329
+standardized cards, this process yielded 37,007 retrievable
+chunks with an average length of 283 characters (median:
+212), providing a dense and structured evidence pool for the
+subsequent retrieval stage.
+C. Cause Taxonomy and Rule-Based Tagging
+To facilitate structured generation, we adopted the KMST
+cause taxonomy as a standardized label space, which consists
+of high-level groups (L1) and 24 fine-grained factors (L2).
+Since raw reports often lack exhaustive ground-truth tags, we

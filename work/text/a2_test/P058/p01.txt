@@ -1,0 +1,92 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 10475–10491
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+From Scenes to Elements: Multi-Granularity Evidence Retrieval for
+Verifiable Multimodal RAG
+Guanhua Chen*, Chuyue Huang*, Yutong Yao, Shudong Liu, Xueqing Song,
+Lidia S. Chao, Derek F. Wong†
+NLP2CT Lab, Department of Computer and Information Science, University of Macau
+{nlp2ct.guanhua, nlp2ct.chuyue, nlp2ct.yutong, nlp2ct.shudong, xqsongangie}@gmail.com
+{derekfw, lidiasc}@um.edu.mo
+Abstract
+Multimodal Retrieval-Augmented Generation
+(RAG) systems retrieve evidence at coarse gran-
+ularities (entire images or scenes), creating a
+mismatch with fine-grained user queries and
+making failures unverifiable. We introduce
+GranuVistaVQA, a multimodal benchmark
+featuring real-world landmarks with element-
+level annotations across multiple viewpoints,
+capturing the partial observation challenge
+where individual images contain only subsets
+of entities. We further propose GranuRAG, a
+multi-granularity framework that treats visual
+elements as first-class retrieval units through
+three stages: element-level detection and classi-
+fication, multi-granularity cross-modal align-
+ment for evidence retrieval, and attribution-
+constrained generation. By grounding retrieval
+at the element level rather than relying on im-
+plicit attention, our approach enables transpar-
+ent error diagnosis. Experiments demonstrate
+that GranuRAG achieves up to 29.2% improve-
+ment over six strong baselines for this task.
+1 Introduction
+Multimodal Large Language Models (MLLMs)
+have substantially advanced visual understand-
+ing (Alayrac et al., 2022; Li et al., 2023). How-
+ever, their reasoning remains opaque and prone
+to hallucination (Bai et al., 2024). While
+Retrieval-Augmented Generation (RAG) mitigates
+this by conditioning generation on external evi-
+dence (Lewis et al., 2020; Chen et al., 2025a),
+current multimodal extensions operate at coarse
+granularities, retrieving entire images, scenes, or
+pages (Fang et al., 2024; Yu et al., 2025a). This cre-
+ates a fundamental attribution gap. A user asking
+about a Baroque pediment may receive a building
+photograph, yet neither party can verify whether
+the pediment appears in the image, whether the
+*Equal contribution
+†Corresponding authors.
+retrieved knowledge is relevant, or whether the an-
+swer faithfully reflects these inputs. Detection fail-
+ures, retrieval errors, and generation hallucinations
+collapse into an opaque black box.
+In this work, we argue that verifiable multi-
+modal RAG requires treating visual elements as
+first-class retrieval targets, not merely as regions
+to be implicitly attended within retrieved scenes.
+Although recent grounding models can localize ob-
+jects (Peng et al., 2023; Guo et al., 2024), they rely
+on parametric knowledge and do not retrieve ex-
+ternal evidence. Conversely, existing multimodal
+RAG systems retrieve evidence but lack explicit
+element-level grounding, even recent fine-grained
+approaches (Liu et al., 2025) prioritize representa-
+tional expressiveness over transparent attribution.
+We bridge this gap with a detect-then-retrieve ap-
+proach: we first detect candidate visual elements
+via open-vocabulary detection, then assemble hier-
+archical evidence spanning element-level descrip-
+tions and global context, and finally generate an-
+swers attributable to specific visual spans and re-
+trieved passages. This design transforms evalua-
+tion from black-box answer assessment into trans-
+parent evidence auditing: we can separately diag-
+nose whether the correct elements were detected,
+whether relevant knowledge was retrieved, and
+whether generation remained faithful to both.
+However, existing benchmarks inadequately as-
+sess multi-granularity alignment as shown in Ta-
+ble 1. Critically, all overlook the partial observa-
+tion challenge inherent to real-world imagery: pho-
+tographs capture scenes from varying distances and
+angles, such that a single image depicts only a sub-
+set of elements present at a location. This challenge
+pervades domains from architectural photography
+to medical imaging and satellite sensing, yet no ex-
+isting benchmark provides the supervision needed
+to diagnose element-level detection and retrieval
+under partial visibility. To address this, we intro-
+duce GranuVistaVQA, a benchmark centered on
+10475

@@ -1,0 +1,98 @@
+RESEARCH ARTICLE
+www.advmatinterfaces.de
+CrystallographicInsightsintotheStructuralHeterogeneities
+of2DRuddlesden-PopperPerovskiteFilms
+Fei Zheng, Sergey Rubanov, Christopher Hall, Jingying Liu, Mei Gao, Trevor A. Smith,
+Dechan Angmo, and Kenneth P. Ghiggino*
+2DRuddlesden-Popperphaseperovskites(RPPs)oﬀersigniﬁcantpotentialfor
+next-generationphotovoltaicsowingtotheirexcellentintrinsicstability.Fully
+understandingthecrystallineconﬁgurationof2Dperovskiteﬁlmsisessential
+forfurtherenhancingthepower-conversion-eﬃciency(PCE)of2Dperovskite
+solarcells(2D-PSCs).Herein,thestructuralheterogeneities,includingthe
+proﬁlesofcrystalorientationanddefectdistribution,atboththemicroscopic
+andmesoscopicscalesfor2Dperovskiteﬁlmsareinvestigated.Emptyvoids
+areobservedintheburiedinterfaceof2Dperovskiteﬁlmsassociatedwith
+Browniantree-shapeddendriticstructures,andthecrystalorientationsof2D
+RPPsintheupperandlowerpartsoftheseareasaremismatched.This
+conﬁgurationhinderschargecarriertransportalongtheverticaldirectionand
+islikelyresponsibleforthelowerPCEof2D-PSCscomparedtotheir3D
+counterparts.Theformationmechanismofthesevoidsandthecrystalline
+mismatchingarerevealedbasedoncompositionalandstructuralanalysis.
+Theresultssuggestthatsynchronizingtherateofcrystallizationindiﬀerent
+ﬁlmareasmayeliminatethesevoidsandtherebyreducethePCEgapbetween
+2D-and3D-PSCs.Thisworkprovidesacomprehensiveunderstandingofthe
+crystallographicheterogeneitiesof2Dperovskiteﬁlms,highlightingnew
+pathwaystodesignmoreeﬃcient2D-PSCsbasedon2DRPPﬁlms.
+F.Zheng,C.Hall,T.A.Smith,K.P.Ghiggino
+SchoolofChemistryandARCCentreofExcellenceinExcitonScience
+TheUniversityofMelbourne
+Parkville,VIC3010,Australia
+E-mail:ghiggino@unimelb.edu.au
+F.Zheng,M.Gao,D.Angmo
+DevicesandEngineeredSystems
+CSIROManufacturing
+Clayton,VIC3168,Australia
+S.Rubanov
+IanHolmesImagingCentre,Bio21Institute
+TheUniversityofMelbourne
+Parkville,VIC3010,Australia
+J.Liu
+DepartmentofMaterialsScienceandEngineering
+MonashUniversity
+Clayton,VIC3800,Australia
+The ORCID identiﬁcation number(s) for the author(s) of this article
+canbefoundunderhttps://doi.org/10.1002/admi.202401012
+©2025TheAuthor(s).AdvancedMaterialsInterfacespublishedby
+Wiley-VCHGmbH.Thisisanopenaccessarticleunderthetermsofthe
+CreativeCommonsAttributionLicense,whichpermitsuse,distribution
+andreproductioninanymedium,providedtheoriginalworkisproperly
+cited.
+DOI:10.1002/admi.202401012
+1.Introduction
+Organic-inorganichybridleadhalideper-
+ovskite materials have emerged as com-
+petitive candidates for next-generation
+photovoltaics and optoelectronics.[1–3] To
+address the intrinsic environmental in-
+stability of conventional 3D perovskites,
+long-chain organic spacer cations are
+introducedtoderivethe2DRuddlesden-
+Popper phase perovskites (RPPs) with
+enhanced tolerance to moisture and
+oxygen.[4–7] The general composition of
+2D RPPs is R2An−1PbnX3n+1,wherein
+X corresponds to the halide anions, A
+is the short-chain organic cation, and R
+represents the long-chain spacer cations
+that sandwich n layers of [PbX6]4−
+octahedra.[8,9] Perovskite solar cells
+basedon2DRPPsﬁlms(2D-PSCs)have
+demonstrated improved operational
+stability compared to those based on 3D
+perovskites (3D-PSCs).[10] However, the
+presence of insulating spacer cations
+within 2D perovskite ﬁlms and the
+quantum conﬁnement eﬀects of 2D RPPs inevitably complicate
+the phase distribution proﬁle and energy landscapes, leading to
+thelowerPCEfor2D-PSCscomparedto3D-PSCs.[11] Thetrans-
+portofphoto-generatedexcitonsislimitedwithinthe2Dplanes
+ofRPPsslabs,withexcitonstendingtomigratefromRPPswith
+smallslabthickness(small-n phase,largebandgap)towardthick
+RPPs(large-n phase,smallbandgap).[12] Therefore,aperfectver-
+ticalorientationof2DRPPsslabsandanorganizedphasedistri-
+butionof2Dperovskitesarecrucialforachievingeﬃcientcharge
+transport and collection along the vertical direction required by
+high-performance2D-PSCs.[13]
+Many strategies have been explored in the past few years to
+pursue the vertical orientation and ordered alignment of 2D
+RPPs slabs within 2D perovskite ﬁlms, leading to a signiﬁcant
+PCE enhancement of 2D-PSCs from below 10% to approach-
+ing 21%.[10,14,15] These include solvent engineering,[16] additive
+incorporation,[17] compositional design,[18,19] and the manipula-
+tion of the interfacial properties. Despite the eﬀectiveness of
+these eﬀorts, the PCE of 2D-PSCs still lags behind that of 3D-
+PSCs(≈26.7%).[20,21] Furtherresearchtowardunderstandingthe
+ﬁlm formation principles and intrinsic properties of 2D per-
+ovskite ﬁlms is required to overcome the PCE bottleneck.[22] To
+date, the compositional inhomogeneities along the out-of-plane
+Adv. Mater. Interfaces2025,12,2401012 2401012(1of10) ©2025TheAuthor(s). AdvancedMaterialsInterfacespublishedbyWiley-VCHGmbH

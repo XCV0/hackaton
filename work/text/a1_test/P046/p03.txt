@@ -1,0 +1,104 @@
+In each run, soda-lime glass (SLG) substrates coated with Mo or
+IOW were added and sodium was provided by a NaF-precursor
+film on top of the back contact. In the case of the transparent back
+contact (TBC), the NaF addition was chosen to be lower (7 nm) as
+compared to Mo (15 nm), since earlier works suggest that a NaF
+thickness of ≥10 nm leads to excessive GaOx formation at the
+absorber/TBC interface, resulting in FF losses [48]. To study a
+potential reduction of the CdS thickness without performance
+losses, as enabled by the HA-PDT for low-gap (A)CIGS solar cells,
+two different CdS buffer layer thicknesses, a standard ≈65 nm
+thick (‘std’)anda≈35 nm thick (‘thin’) film, are compared for each
+sample.
+An overview of all samples is provided in Table 2, which lists the
+corresponding integral compositions (I/III = [Ag]/ ([Ga]+[In]))
+and absorber layer thicknesses (dabs), as deduced from
+X-ray fluorescence (XRF) measurements, as well as the
+bandgap energies, as extracted from external quantum effi-
+ciency (EQE) measurements (inflection point method). As is
+evident from the table, the absorber properties are very similar
+in terms of composition and thickness for all samples, allowing
+a fair evaluation of the effect of the RbF-PDT. Intentionally,
+very close-stoichiometric AIGS compositions were targeted,
+since for absorbers with AAC ≥ 0.5, I/III values >0.90 lead to
+a significant widening of the space charge region, resulting
+in adequate carrier collection, despite the low diffusion length
+in wide-gap chalcopyrite material [35, 41, 44, 70, 71]. A dabs
+value of ≈1.1 μm was previously identified to be optimal for
+maximizing the efficiency under rear illumination, without
+sacrificing too much of the performance level at front illumi-
+nation [49, 50].
+Figure 1 shows the current-density versus voltage (JV) character-
+istics (a, b) and EQE spectra (c, d) of the best cell for each sample
+with a Mo and IOW back contact, respectively. Here, we only
+show the results for the thinner CdS, since the samples with
+standard-thick buffers show very similar trends (see Figure S1
+in supporting information). All corresponding JV parameters
+can be found in Table 2, including the short-circuit current den-
+sities as derived from integration of the EQE spectra ( JSC,qe)
+and the corresponding, spectral-mismatch and probe-shading
+corrected efficiency values (ηqe=
+JSC,qe
+JSC,iv ⋅ ηiv).
+It is obvious that the efficiency is monotonously decreasing with
+increasing RbF dose for all samples. The most pronounced loss is
+a reduction in FF, indicating the creation of a transport barrier. It
+was suggested that the excessive formation of an HA-In-Se phase
+at the absorber surface (like RbInSe2) may be responsible for FF
+losses upon too intense HA-PDTs [8, 39, 40, 72]. Since the exclu-
+sion of Cu in the used AIGS film leads to a significant downshift
+of the conduction band minimum [42], an even larger CBO
+would be expected at a potential RbInSe2/AIGS interface, leading
+to a more detrimental transport barrier. Alternatively, it was pro-
+posed that when too many Na atoms are replaced by heavier
+alkalis at the back contact interface, a significant back contact
+barrier establishes, explaining the FF losses [26, 73].
+It is evident that the FF reduction by the RbF-PDT is more pro-
+nounced when IOW is used instead of Mo. Strong current block-
+ing was observed before for chalcopyrite solar cells with TBCs
+(not if based on SnO2 [48]), which is often explained by the for-
+mation of GaOx [74] that is facilitated by the presence of Na(F)
+[48, 75–77]. It may be speculated that the in-diffusion of Rb also
+TABLE 2 | Absorber properties and corresponding JV parameters at front illumination (best cells) for all samples processed with varying RbF-PDT
+doses. The JSC,bif value expresses the percentage of JSC,qe reached at rear in relation to front illumination. The parameters marked with (*) are not
+reliable, due to strong current blocking in JV ( JSC,qe much higher than JSC,iv).
+dRbF
+(nm) GGI I/III
+dabs
+(μm)
+EG,qe
+(eV)
+BC
+material CdS
+VOC
+(mV)
+FF
+(%)
+JSC,iv
+(mA/cm2)
+JSC,qe
+(mA/cm2)
+ηiv
+(%)
+ηqe
+(%)
+JSC,bif
+(%)
+0 0.50 0.92 1.05 1.47 IOW thin 804 62.5 19.3 23.1 9.7 11.6 72
+std 796 63.0 18.2 19.1 9.1 9.6 50
+Mo thin 858 74.4 19.4 23.0 12.4 14.7 –
+std 851 73.1 18.1 20.9 11.3 13.0 –
+5 0.49 0.92 1.17 1.46 IOW thin 777 47.0 20.7 23.6 7.5 8.6 53
+std 714 41.3 18.7 20.9 5.5 6.2 54
+Mo thin 857 69.1 19.9 23.6 11.8 14.0 –
+std 826 66.1 18.9 21.9 10.3 12.0 –
+10 0.50 0.95 1.13 1.47 IOW thin 758 42.2 19.1 22.1 6.1 7.1 63
+std 763 39.0 18.3 20.6 5.4 6.1 58
+Mo thin 859 64.7 18.9 22.4 10.5 12.4 –
+std 840 63.3 18.0 21.1 9.5 11.2 –
+20 0.51 0.92 1.08 1.49 IOW thin 537 15.8 9.4 18.6 0.8 1.6* 86*
+std 540 13.3 8.3 17.2 0.6 1.2* 89*
+Mo thin 817 58.7 18.6 22.4 8.9 10.7 –
+std 652 63.6 16.9 20.9 7.0 8.7 –
+3of15
+ 2367198x, 2025, 16, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202500423, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

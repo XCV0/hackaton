@@ -1,0 +1,117 @@
+Category Method ms q/s GB
+NLI-Based
+HHEM-2.1-Open 25±2 400 0.5
+AlignScore-Large 42±2 238 1.7
+MiniCheck-FT5 165±8 61 4.2
+LLM-Based
+Qwen3-0.6B 120±6 83 2.8
+GPT-4o (API) 520±67 19* N/A
+TrueTeacher 11B 280±8 36 16.2
+Ours Config A (0.5B) 85±4 118 2.1
+Ours Config B (1.5B) 165±8 61 4.8
+Table 6: Inference efficiency on RTX 4090 (la-
+tency / throughput / memory). *API throughput is rate-
+limit-bounded. Full comparison across all baselines in-
+cluding component-level breakdown is in Appendix C.
+25ms 50ms 100ms 165ms 280ms 520ms
+Inference Latency (ms, RTX 4090, log scale)
+40
+50
+60
+70
+80
+90Accuracy (%) on HotPotQA-Derived
+Fast zone
+( 100 ms)
+1.7× faster
++0.8% acc.
+HHEM
+MiniCheck
+TrueTeacher
+Qwen3-0.6B
+GPT-4oConfig A (0.5B)
+Config B (1.5B)
+Accuracy Latency Pareto Frontier
+Only sub-100ms
+method above 80%
+NLI Baselines
+Strong NLI (MiniCheck)
+TrueTeacher (11B)
+Small LLM
+Large LLM (API)
+Our Framework
+Pareto frontier
+Figure 4: Accuracy vs. latency (log scale) on HotPotQA-
+Derived. Methods on the Pareto frontier (dashed curve)
+cannot be improved on one axis without sacrificing
+the other. Both configurations of our method occupy
+the Pareto frontier: Config A is the fastest among all
+methods achieving >80% accuracy; Config B surpasses
+TrueTeacher at 1.7× lower latency.
+• vs. fast NLI-only methods: Standalone NLI
+is 3–5× faster but achieves near-random ac-
+curacy (50–55%) on multi-hop tasks, making
+them impractical despite low latency.
+• vs. accurate methods: Config A (82.4%,
+118 q/s) is 3.3× faster than TrueTeacher
+(84.8%, 36 q/s) with only 2.4% lower accu-
+racy, and 6.1× faster than GPT-4o with 1.2%
+higher accuracy.
+• Memory: At 2.1 GB, Config A is deploy-
+able on consumer GPUs (vs. 16–18.5 GB for
+TrueTeacher or Llama3.1-8B).
+Component-level analysis. Profiling (detailed in
+Appendix C) shows NLI inference dominates run-
+time (63.7%), while Semantic Evidence Aggrega-
+tion adds only ∼18.5 ms (21.8% of total). The
+return on investment for graph clustering is 6.2%
+NLI Model Params Alone +Ours ∆
+HHEM-2.1-Open (default) 0.06B 52.5% 82.4% +29.9%
+nli-roberta-base 0.1B 50.2% 66.9% +16.7%
+DeBERTa-v3-base 0.3B 54.7% 78.3% +23.6%
+ModernBERT-large-nli 0.4B 52.0% 75.2% +23.2%
+AlignScore-Large 0.4B 49.9% 70.6% +20.7%
+MiniCheck-FT5 ∼1B 78.3% 85.0% +6.7%
+TrueTeacher 11B 81.1% 80.2% −0.9%
+Table 7: Framework effectiveness across seven NLI dis-
+criminators on HotPotQA-Derived Hard. Six of seven
+models improve (+6.7%–+29.9%); TrueTeacher (11B)
+shows a marginal decline (−0.9%) as its larger capacity
+already handles long-context reasoning without addi-
+tional graph support.
+accuracy gain / 18 ms = 0.34, comparable to the
+full pipeline ROI of 14.4%/43 ms = 0.33, confirm-
+ing the module’s efficiency.
+4.5 Framework Effectiveness Across NLI
+Models
+Table 7 and Figure 6(a) demonstrate that our frame-
+work is broadly NLI-agnostic: it improves six of
+seven tested discriminators. Key findings: (1) Stan-
+dalone NLI achieves near-random accuracy (50–
+55%) on multi-hop tasks, motivating the need for
+evidence aggregation. (2) Our graph module im-
+proves most discriminators by +6.7% to +29.9%,
+adding only ∼18 ms overhead. (3) Lighter dis-
+criminators benefit more: HHEM gains +29.9%
+because its small capacity limits long-range rea-
+soning, which the graph module compensates for.
+(4) TrueTeacher (11B) shows a marginal decline
+(−0.9%), consistent with its larger parameter count
+already providing sufficient long-context percep-
+tion. (5) Combining with MiniCheck (Figure 6(b))
+achieves 85.6%, surpassing TrueTeacher while us-
+ing 7× fewer parameters. Removing the graph
+module (ablation, Table 8) causes a 19.6% accu-
+racy drop, confirming it as the primary performance
+driver.
+4.6 Parameter Sensitivity Analysis
+Figure 5 shows robustness across three key hy-
+perparameters. Chunk size C: accuracy remains
+above 75% for C ≥ 128, but drops >5 points at
+C = 64 (over-segmentation fragments evidence).
+Segmentation thresholds: stable for 384 ≤ T ≤
+1024; falls below 75% at T = 256, confirming
+over-segmentation as a more critical failure mode
+than handling longer contexts. Decision threshold
+Ts: broad plateau around 80% for 0.3 ≤ Ts ≤ 0.7,
+1611

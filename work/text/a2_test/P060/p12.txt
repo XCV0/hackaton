@@ -1,0 +1,94 @@
+50
+Dataset Contexts Label Q&As fact_single reasoning summary unanswerable
+HotpotQA 65 489 5000 42.9% 3.4% 0.2% 53.4%
+MS MARCO 808 712 4972 41.8% 8.8% 27.9% 21.5%
+NaturalQ 111 388 5000 68.9% 5.6% 9.9% 15.6%
+NewsQA 89 481 6890 83.0% 1.8% 3.6% 11.7%
+PubMedQA 61 243 6847 15.8% 53.9% 9.9% 20.3%
+SQuAD2 19 029 6910 68.2% 2.2% 2.4% 27.1%
+Table 3: Datasets considered in the study.
+standard use of these datasets by the public. For
+this reason, the retrieval performance of the “In-
+clusive” evaluation can be lower than any of the
+displayed individual labels. The results for the
+HotpotQA summary label are statistically limited
+by the number of Q&As present in the analyzed
+dataset after labelling – we leave them in the results
+tables for completeness.
+D Labelling Prompt
+Consider the following context
+information and a related question.
+-- Context start --
+[[{context}]]
+-- Context end --
+-- Question start --
+[[{question}]]
+-- Question end --
+Select the most suitable label from
+the list below:
+{label_name: fact_single,
+label_description: A complete
+answer to this question is
+explicitly mentioned in the
+context and is a single simple
+value}
+{label_name: summary,
+label_description: A complete
+answer to this question is
+explicitly mentioned in the
+context and is more like a summary,
+a procedure for doing something,
+or a composite of multiple parts}
+{label_name: reasoning,
+label_description: A complete
+answer to this question is not
+explicitly mentioned in the
+context but can be inferred from
+the information given in it}
+{label_name: unanswerable,
+label_description: A complete
+answer to this question is neither
+explicitly mentioned in the
+context nor can be inferred from
+the information given in it}
+Return your response in the following
+JSON format: {"label_name": "
+selected_label_name", "reason": "
+reason_for_your_choice"}
+You must select exactly one label from
+the list above. Do not select
+anything that is not in the list.
+Do not return anything other than
+the JSON format requested above.
+E Simple Prompt
+The simple prompt used in this study was obtained
+from the Hugging Face RAG Evaluation Cookbook
+(Roucher, 2024) with a small modification to gen-
+erate a python dictionary. We found this generation
+style worked well with Llama-3-70b and avoided
+missing questions and/or answers.
+Your task is to write a factoid
+question and an answer given a
+context.
+Your factoid question should be
+answerable with a specific,
+concise piece of factual
+information from the context.
+Your factoid question should be
+formulated in the same style as
+questions users could ask in a
+search engine.
+This means that your factoid question
+MUST NOT mention something like "
+according to the passage" or "
+context".
+Provide your answer as a JSON
+dictionary as follows:
+Output:::
+{{"question": "your factoid question",
+"answer": "your answer to the
+factoid question"}}
+Now here is the context.
+Context:
+[[{context}]]
+Output:::

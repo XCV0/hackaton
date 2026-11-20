@@ -1,0 +1,19 @@
+Table S8: ViDoRe V2 Results (English Benchmarks). This table presents NDCG@5 scores for each domain and
+the overall average on the newly released ViDoRe V2 benchmark.
+Model Biomedical Macroeconomics Restaurant (RSE) Restaurant (ESG) Insurance (AXA) Avg
+ColPali 59.1 51.4 50.0 57.9 53.2 54.3
+RobColPali 59.5 57.5 58.4 66.5 65.0 61.4
+RobTabColPali 61.0 60.3 55.3 64.6 60.0 60.2
+ColQwen 61.1 61.5 55.8 63.0 65.3 61.3
+RobColQwen 61.0 57.0 60.6 62.0 67.2 61.6
+RobTabColQwen 62.1 56.5 61.7 66.0 69.7 63.2
+Table S9: ViDoRe V2 Results (Multilingual Benchmarks). This table presents NDCG@5 scores for each domain
+and the overall average on the multilingual subset of the newly released ViDoRe V2 benchmark.
+Model Biomedical Macroeconomics Restaurant (RSE) Insurance (AXA) Avg
+ColPali 55.9 47.2 52.5 47.4 50.8
+RobColPali 58.4 53.2 57.9 57.5 56.8
+RobTabColPali 57.7 55.0 54.8 54.4 55.5
+ColQwen 56.3 52.8 56.9 56.5 55.6
+RobColQwen 58.3 53.0 60.6 59.1 57.8
+RobTabColQwen 59.1 55.1 60.2 61.8 59.1
+31683

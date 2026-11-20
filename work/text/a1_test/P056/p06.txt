@@ -1,0 +1,52 @@
+Nanomaterials 2022, 12, 3067 6 of 11
+devices increases with the increase of annealing temperature from 25 ◦C to 120 ◦C and starts
+to drop when the annealing temperature exceeds 120 ◦C. The champion device is obtained
+when annealing at 120 ◦C. The optimized device shows a Jsc of 22.33 mA/cm2, a Voc of
+0.69 V, an FF of 37.17% and a high PCE of 5.70%. The optimal PCE is 30% higher than the
+control device. For devices annealed at low temperature, a serious interface recombination
+is expected since the HTL does not fully passivate the CdTe NC thin ﬁlm surface, and the
+HTL has abundant intrinsic defects. On the contrary, when the HTL annealing temperature
+is too high, the oxidation of PTAA may take place, leading to a larger Rs and lower PCE. It
+is noted that the FF of devices with HTL is somewhat lower than that of a device without
+HTL. We speculate that although the introduction of PTAA can reduce the interface carriers
+recombination, the low hole concentration of PTAA leads to large contact resistance, which
+decreases the FF of the device. The FF of the device can be further improved by doping the
+PTAA with inorganic salt as similar results have been obtained in the case of PSCs with
+Spiro as HTL.
+Table 1. Summarized photovoltaic parameters from J–V curves of CdTe NC solar cells prepared
+under different conditions.
+Device VOC (V) JSC (mA cm−2) FF (%) PCE (%)
+A 0.58 14.61 42.28 3.58
+B 0.67 20.32 36.87 5.00
+C 0.68 21.06 37.40 5.41
+D 0.70 21.54 35.38 5.29
+E 0.71 19.26 39.26 5.40
+F 0.69 22.33 37.17 5.70
+G 0.60 19.35 36.44 4.25
+H 0.62 15.41 55.96 5.34
+I 0.68 21.47 47.81 6.95
+In order to further optimize the electron/hole transfer balance and improve the NC
+device performance, we fabricated bilayer CdS electron transport layer–based (ETL) devices
+with the conﬁguration of ITO/ZnO/CdS/CdSe/CdTe/HTL(w/o)/Au, which consists of
+one layer of CdS NC, two layers of CdSe NC and ﬁve layers of CdTe NC. Figure 5a shows
+the J–V curves of NC solar cells under AM 1.5 G, with the corresponding EQE spectrum
+and J–V under dark presented in Figure 5b,c. The control device without HTL shows a Voc
+of 0.62 V, Jsc of 15.41 mA cm−2 and FF of 0.56, delivering a PCE of 5.34%. In contrast, the
+device with PTAA shows a Voc of 0.69 V, Jsc of 21.47 mA cm−2 and FF of 0.48, delivering a
+much higher PCE of 6.95%. The PCE is increased by 35% when HTL is introduced. From
+the EQE spectra (Figure 5b), one can gain more insights into how the Jsc varies as a function
+of the wavelength of incident light. The device with HTL annealing at optimal temperature
+of 120 ◦C exhibits a higher EQE value almost in the whole wavelength, suggesting the
+improved carrier collecting efﬁciency due to the reduced interface defects between the
+CdTe NC layer and the Au electrode. When the EQE curves are integrated with the
+AM1.5G spectrum, current densities of 15.14 mA/cm2 and 22.32 mA/cm2 are obtained
+from measured EQE curves, respectively, which is consistent with our J–V measurement
+(Figure 5a). The dark J–V characteristics of NC solar cells are shown in Figure 5c. At
+reverse bias, the leakage current is decreased almost one-fold compared to the device
+without HTL, indicating the importance of CdS ETL and PTAA HTL for further optimizing
+device performance.
+To understand the origin of the improved Jsc for devices with HTL, the hole-only
+devices with ITO/CdTe (200 nm)/PTAA (20 nm, w/o)/Au conﬁguration are fabricated.
+The hole mobility is measured by space charge limited current (SCLC). The hole mobility
+of NC ﬁlms are calculated based on the Mott–Gurney law [38]:
+J = 9 8 ε0εrµp (V − Vbi − Vs)2 L3

@@ -1,0 +1,43 @@
+Author name / Procedia Computer Science 00 (2019) 000–000  11 
+ 
+On the Ar_EduText dataset, GPT3.5 turbo performed best, followed closely in terms of cosine similarity between 
+gold standard answers and generated answers, by Llama 3. The quantized version of JAIS did not do so well, appearing 
+at the bottom of the list. On the ARCD dataset, the number one performer was Mistral followed very closely by 
+Llama3. As can be seen by the sample answers presented in Fig. 3, better prompting might be able to improve the 
+results.   
+5. Conclusion and Future work  
+This research started out with the expectation that existing embedding models and Large Language Models (LLMs) 
+would face significant challenges in processing Arabic text effectively. This assumption stems from the unique 
+linguistic features of Arabic, including its rich morphology, complex syntactical structures, and diverse dialect base 
+which often pose difficulties for standard NLP models developed predominantly for English. However, the empirical 
+evaluation presented in this work contradicts these initial expectations, demonstrating a notable degree of proficiency 
+and applicability of these models to Arabic texts.  In terms of semantic embedding models, it was observed the E5-
+large model as well as the BGE model show great potential for use with Arabic retrievers and for semantic 
+representation in general.  
+Furthermore, experiments carried out on various open source LLMs, show that Llama3 and Mistral have great 
+potential as Arabic generators. This finding is instrumental, suggesting that existing open source LLMs can be 
+leveraged to contribute significantly to the development of effective Arabic NLP applications. Future work should 
+investigate the role of prompt engineering and fine tuning to increase the performance of these LLMs even further.   
+Despite these encouraging outcomes, the authors acknowledge the necessity for broader research to fully 
+investigate the potential of these models. Specifically, future work should explore the application of presented models 
+to  a wider array of Arabic dialects and on bigger datasets as well as explore more complicated RAG pipelines.   
+Appendix A. Prompt Used to automatically disambiguate questions  
+""" 
+    Question 1: {q1} 
+    Question 2: {q2} 
+    You are an expert who understands Arabic fluently. Given these two questions, your task 
+is to rephrase the second question only if it contains ambiguities that might confuse 
+someone without context from the first question. An ambiguity might be a vague reference or 
+unclear term that cannot be understood without additional context. Do not modify question 2 
+if it is clear and understandable on its own. Always maintain the response in Arabic. 
+    Example 1: 
+    Question 1: من هو حمزة بن عبد المطلب؟ 
+    Question 2: بما وصفه رسول ﷲ؟ 
+    Correct modification: بما وصف رسول ﷲ حمزة بن عبد المطلب ؟ 
+    Example 2: 
+    Question 1: كم يبلغ ارتفاع مكة عن سطح البحر؟ 
+    Question 2: اين تقع مكة؟ 
+    Correct modification: اين تقع مكة؟  
+    Remember, modifications are only needed if they clarify ambiguities directly related to 
+the context provided by question 1. Any name or specific noun is not considered ambiguous. 
+"""

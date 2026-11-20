@@ -1,0 +1,105 @@
+Findings of the Association for Computational Linguistics: ACL 2025, pages 16700–16716
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+ASTRID - An Automated and Scalable TRIaD for the Evaluation of
+RAG-based Clinical Question Answering Systems
+Yajie Vera He†
+Ufonia Limited
+yh@ufonia.com
+Mohita Chowdhury†*
+Ufonia Limited
+chowdhury.mohita@gmail.com
+Jared Joselowitz
+Ufonia Limited
+jj@ufonia.com
+Aisling Higham
+Ufonia Limited
+ah@ufonia.com
+Ernest Lim
+Ufonia Limited / University of York
+el@ufonia.com
+Abstract
+Large Language Models (LLMs) have shown
+impressive potential in clinical question answer-
+ing (QA), with Retrieval Augmented Genera-
+tion (RAG) emerging as a leading approach
+for ensuring the factual accuracy of model re-
+sponses. However, current automated RAG
+metrics perform poorly in clinical and conver-
+sational use cases. Using clinical human evalua-
+tions of responses is expensive, unscalable, and
+not conducive to the continuous iterative devel-
+opment of RAG systems. To address these chal-
+lenges, we introduce ASTRID - an Automated
+and Scalable TRIaD for evaluating clinical QA
+systems leveraging RAG - consisting of three
+metrics: Context Relevance (CR), Refusal Ac-
+curacy (RA), and Conversational Faithfulness
+(CF). Our novel evaluation metric, CF, is de-
+signed to better capture the faithfulness of a
+model’s response to the knowledge base with-
+out penalizing conversational elements. Ad-
+ditionally, our metric RA captures the refusal
+to address questions outside of the system’s
+scope of practice. To validate our triad, we
+curate a dataset of over 200 real-world patient
+questions posed to an LLM-based QA agent
+during surgical follow-up for cataract surgery
+- the highest volume operation in the world -
+augmented with clinician-selected questions
+for emergency, and clinical and non-clinical
+out-of-domain scenarios. We demonstrate that
+CF predicts human ratings of faithfulness more
+accurately than existing definitions in conver-
+sational settings. Furthermore, using eight dif-
+ferent LLMs, we demonstrate that the three
+metrics can closely agree with human evalua-
+tions, highlighting the potential of these met-
+rics for use in LLM-driven automated evalua-
+tion pipelines. Finally, we show that evaluation
+using our triad of CF, RA, and CR exhibits
+alignment with clinician assessment for inap-
+propriate, harmful, or unhelpful responses. We
+also publish the prompts and datasets for these
+experiments, providing valuable resources for
+further research and development.
+1 Introduction
+The healthcare industry is increasingly adopting
+automation to meet rising demands on resources
+(Ruiz and Duffy, 2021). LLMs, due to their capabil-
+ities, have become increasingly popular in support-
+ive clinical applications such as note-taking and
+summarization (Cascella et al., 2023). A crucial
+aspect of patient care is the ability to ask questions
+and receive answers, which has been enhanced by
+advancements in QA systems powered by LLMs.
+However, the issue of hallucination remains a sig-
+nificant barrier to using LLMs for clinical QA sys-
+tems (Rawte et al., 2023). RAG is a technique de-
+veloped to address hallucination and ensure context
+appropriateness (Lewis et al., 2020). Despite these
+advancements, RAG systems lack sufficient evalu-
+ation metrics and frameworks, making it difficult
+to quantitatively establish their safety and identify
+system deficiencies. Figure 1 illustrates the limita-
+tions of current clinical evaluation approaches and
+how automated methods address these challenges.
+This work examines evaluation limitations and
+applies safety engineering to identify hazard cases
+in clinical QA (Hawkins et al., 2022; Ericson et al.,
+2015). We develop a robust, scalable framework
+of metrics to systematically demonstrate how de-
+velopers can mitigate potential hazards in LLM-
+based QA systems for clinical use. Using real
+patient questions from clinical trials on cataract
+post-operative recovery, we illustrate how these
+metrics can be interpreted in a clinical context. We
+validate our metrics by proving they model human
+ratings better than previous metrics and effectively
+predict clinical harm, usefulness, and inappropriate-
+ness as labeled by specialist doctors. Our aim is to
+establish a foundation for developing and assessing
+LLM-powered clinical QA systems and encourage
+further research in this area.
+*Now at Google DeepMind.
+†Authors contributed equally.
+16700

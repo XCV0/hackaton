@@ -1,0 +1,116 @@
+Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1605–1617
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+Logic Matters in Lightweight Hallucination Classification for RAG System
+Ningyuan Yang
+Duke Kunshan University
+ningyuan.yang@dukekunshan.edu.cn
+Kaizhu Huang*
+Duke Kunshan University
+kaizhu.huang@dukekunshan.edu.cn
+Abstract
+We propose a lightweight, modular frame-
+work for hallucination detection in Retrieval-
+Augmented Generation (RAG) systems, ad-
+dressing the critical challenge where logical
+dependencies span across fragmented retrieval
+results. Through graph-based semantic ev-
+idence aggregation, which captures the im-
+plicit logical structure by clustering semanti-
+cally coherent segments across retrieved docu-
+ments via betweenness centrality, our approach
+enables small NLI models to handle multi-
+hop reasoning without task-specific training.
+We present two deployment configurations:
+a resource-efficient variant (≈0.5B parame-
+ters) achieving 82.4% accuracy on HotPotQA-
+Derived at 85 ms latency, outperforming all
+sub-1B baselines by over 30%; and a higher-
+accuracy variant (≈1.5B parameters) reaching
+85.6%, surpassing 11B TrueTeacher while be-
+ing 7× smaller and 1.7× faster. Experiments
+with six NLI discriminator models show con-
+sistent gains of +6.7%–+29.9%, confirming
+that graph-based evidence aggregation is NLI-
+agnostic and the primary performance driver.
+We also contribute HotPotQA-Derived, a new
+multi-hop hallucination benchmark preserving
+separate retrieved documents for systematic
+evaluation.
+1 Introduction
+Retrieval-Augmented Generation (RAG) (Lewis
+et al., 2020) has emerged as a powerful strategy for
+mitigating hallucinations in large language models
+(LLMs) by grounding their outputs in externally
+retrieved documents. However, under constrained
+computational budgets, the retrieval stage itself can
+introduce new hallucinations: for instance, when
+asked “Which Japanese city served as the imperial
+capital during the Heian period?”, RAG may re-
+trieve passages describing Kyoto’s Heian Shrine
+*Corresponding author.
+User
+Retrieved
+Documents
+LLM
+“In 1954, Fong Tao 
+Lung gave birth to a son 
+named Chan Kong Sang, 
+who was sent to learn 
+the art at the age of 6 
+and took the stage name 
+Jackie Chan.”
+Who is Jackie Chan's father?
+Fong Tao Lung
+What direction is University 
+Chapel in Edens Quad?
+Scenario I : 
+Simple Reasoning
+1: Northwest of Edens Quad is 
+Few Quad.
+2: Brodhead Center is located 
+southeast of University 
+Chapel......
+3: Brodhead Center is right 
+next door to Few Quad......
+4: ......
+South East
+Scenario II : 
+Multi-Hop
+Reasoning
+Scenario III : 
+Long-Context
+Reasoning
+A Tale of Two Cities is about 
+which two cities?
+It was the best of times, it was 
+the worst of times.
+......
+It is a far, far better thing that I 
+do, than I have ever done; it is 
+a far, far better rest that I go to 
+than I have ever known.
+(100,000+ words)
+London and Paris
+NLI-Based
+Hallucination
+Classifier
+Real Answer Real Answer Hallucinated Answer
+Figure 1: Upper: Dilemmas of NLI-based models
+in multi-hop and long-context hallucination detection.
+When evidence for a factual claim is scattered across
+separate passages, evaluating each document indepen-
+dently yields low NLI scores (0.03 and 0.12 individu-
+ally), while combining them recovers the correct entail-
+ment score (0.63). Lower: Comparison of our frame-
+work with baselines on accuracy vs. inference latency.
+Bubble area encodes log(parameter count). Both con-
+figurations (starred) occupy the Pareto frontier, with
+Config A achieving > 30% accuracy gain over sub-1B
+baselines at 85 ms.
+and ancient palace grounds, yet the LLM halluci-
+nates “Tokyo” and describes the Meiji-era Imperial
+Palace. Such errors arise because a compact model
+may lose track of precise information in retrieved
+segments or misinterpret their relationships. Specif-
+ically, the logical chain required to verify a claim
+1605

@@ -1,0 +1,117 @@
+www.advancedsciencenews.com www.advmatinterfaces.de
+forthepureselenidecomposite[25] and10.7%fortheSb2(S,Se)3
+alloy.[26]
+The majority of reported Sb2Se3 device work utilizes CdS as
+thejunctionpartnerlayer—adevicearchitectureinheritedfrom
+established inorganic thin ﬁlm technologies such as CdTe and
+CIGS.[27,28] CdS/Sb2(S,Se)3 junctiondevicesarethusadoptedby
+manygroupsandhavebeenwidelysuccessful.[15–17,25,26,29,30] Cur-
+rentantimonychalcogenideresearchlargelyfocusesongrainori-
+entation of its characteristic ’one–dimensional’(1D) nanoribbon
+structure[31–34] andsulfurization/selenizationmethodstoreduce
+anionsitevacancydefects(VSSe).[15,35,36] Whilstthishasproveda
+successful optimization approach and has helped to reduce the
+open–circuit voltage (Voc)deﬁcitinSb2(S,Se)3 devices,[11,16,37,38]
+the reliance on a CdS window layer is restrictive. The band gap
+of 2.4 eV is sub-optimal for a window layer leading to para-
+siticabsorptionlosses,[39,40] whilsttheinclusionofcadmiumin-
+creasestheoveralltoxicity.TheCdS/Sb2Se3 heterojunctionisalso
+pronetointer-diﬀusion,leadingtotheunintendedformationof
+Cd(Se,S) and Sb2(S,Se)3 phases at the near interface - primarily
+associatedwithsuperstrateorienteddevices,[40,41] butalsoevident
+insubstrategeometries.[13,16]
+Alternative junction partner layers employed include wide
+band gap, non-toxic metal oxides such as; SnO2, ZnO, and
+TiO2, which have achieved 4.03%, 5.93% and 7.62% PCE,
+respectively.[31,42,43] A study on interfacial properties of diﬀerent
+Sb2Se3 heterojunctions by Lu et al. found that transition layers
+formedfromintermixingforbothZnO/Sb2Se3 andCdS/Sb2Se3
+junctions, whilst the TiO2/Sb2Se3 layers remained discrete due
+to the high stability of TiO2.[44] Devices with metal oxide part-
+ner layers typically use superstrate device orientation due to the
+hightemperaturecrystallizationannealneeded,whichwouldde-
+grade absorber quality in a substrate architecture. It is our be-
+lief that changing the surface on which Sb2Se3 is grown (the
+partner layer in superstrate devices) is impeding progress in
+device performance due to constant re-optimization of subse-
+quent absorber layer deposition conditions to achieve ideal rib-
+bonorientation.[32,45] Inthisregard,groupsalreadyemployingei-
+thersubstratearchitectureoraCdSpartnerlayerinsuperstrate,
+will be resistant to experimentation of new interfacing materi-
+als due to the requirement for re-optimization of the entire de-
+vice stack. This is highlighted by our previous work whereby
+Sb2Se3 devices fabricated with CdS window layers in our setup
+performedconsiderablyworsethantheTiO2/Sb2Se3 devices.[40]
+Interest in Sb2(S,Se)3 for PVinitially started as a progression
+oforganicanddye-sensitizedsolarcells,whichtraditionallyem-
+ployed mesoporous and later planar TiO2 window layers.[46–49]
+This work has led to the promising results achieved with
+TiO2partner layers for both Sb2S3 (7.5% PCE)[50] and Sb2Se3
+(7.6% PCE).[31] Whilst both of these devices employed spray py-
+rolysis of their initial blocking layer, followed by a 450 °Can-
+B.A.D.Williamson
+DepartmentofMaterialsScienceandEngineering
+NorwegianUniversityofScienceandTechnology(NTNU)
+Trondheim7491,Norway
+D.O.Scanlon
+DepartmentofChemistry
+UniversityCollegeLondon
+20GordonStreet,LondonWC1H0AJ,UK
+neal, the chemical bath deposition (CBD) deposited Sb2S3 de-
+vice additionally utilized mesoporous TiO2 for their ‘sensitized’
+interface, which is clearly unsuitable for physical vapour depo-
+sition (PVD) grown absorber material. Fabrication approaches
+forTiO2 entirelyfocusonsolutionbasedmethods(sol–gel,spin-
+cast,spraypyrolysis),withverysimilarprecursorpreparation,fol-
+lowedbyapost-depostionannealingstep <500 °C.[20,31,45,49–51] It
+is typically assumed that the anatase phase (a-TiO2) of the poly-
+morphic TiO2 is attained through this method, since the irre-
+versibleanatase-rutilephasetransitioniscommonlyreportedto
+be >600 °C. Despite this, there are numerous reports of the ru-
+tile phase (r-TiO2) being produced at lower processing tempera-
+turesandthereisgenerallyalackofrigorousanalysisofhowthe
+phase of TiO2 may inﬂuence the device performance. Detailed
+discussion on the anatase-rutile transition is beyond the scope
+of this manuscript, but can be found elsewhere.[52] Recent opti-
+mization eﬀorts favor post-deposition treatments of TiO2 layers
+to improve interfacial properties and alignment of the conduc-
+tionbands,[53–55] althoughitisnotcleartowhatextentthiseﬀect
+isentangledwithSb2(S,Se)3 growthimprovement.
+Previously, our group has employed a solution-based deposi-
+tionmethodtofabricateplanarTiO2 ﬁlms.Thismethodhasbeen
+highlyreproducibleanddeliveredFTO/TiO2/Sb2Se3/Audevices
+in excess of 7% PCE.[20] The solution process is time consum-
+ing, wasteful and results in thickness variations producing con-
+tact non-uniformity across the substrate. In contrast, the sput-
+tering process oﬀers the potential for far greater experimental
+throughput and is proven to be industrial scalable, although ra-
+diofrequency(RF)sputteringofTiO2 ismuchlesswidelyimple-
+mentedforPVapplications.
+In this work, we compare TiO2/Sb2Se3 junction solar cell de-
+vicesfabricatedwithestablishedspin-castsolutiondepositedand
+experimentalRF magnetron sputtered TiO2 window layers. We
+proposesuitablemethodsofpolymorphicTiO2 phasecharacteri-
+zationinthecontextofimplementationasapartnerlayerandthe
+ramiﬁcationsofphaseonboththefrontcontactandantimonyse-
+lenidebandalignment.Variableperformancefromdevicesfabri-
+catedwiththesputteredTiO2 partnerlayerwasobservedandat-
+tributedtomulti-phaseTiO2 ﬁlmswhichcausesevere‘S-shaped’
+‘kinks’intheilluminatedcurrent–voltagemeasurements.Webe-
+lieve this result highlights the importance of phase control in
+TiO2 partner layer preparation for application in Sb2(S,Se)3 so-
+larcells(whichissometimesoverlooked)andprovidesapathway
+for an easier transition from CdS/Sb2(S,Se)3 to TiO2/Sb2(S,Se)3
+devicestructures.ThehighperformancecapabilityofscalableRF
+magnetronsputteredTiO2 windowlayersforSb2Se3 solarcellde-
+vices is demonstrated despite considerable short-circuit current
+(Jsc) loss due to an interfacial barrier inhibiting charge extrac-
+tionunderillumination.TheFTO/TiO2/Sb2Se3/P3HT/Audevice
+achieveda PCE of6.88%,and Jsc of32.44mAcm−2.
+2.ExperimentalSection
+2.1.DeviceFabrication
+All devices in this work were fabricated with an
+FTO/TiO2/Sb2Se3/P3HT/Au architecture in superstrate ori-
+entation. Commercially available TEC15 glass from NSG Ltd.
+was used as the substrate and front contact which comprizes
+Adv. Mater. Interfaces2023,10,2300238 2300238(2of15) ©2023TheAuthors. AdvancedMaterialsInterfacespublishedbyWiley-VCHGmbH
+ 21967350, 2023, 20, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/admi.202300238, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

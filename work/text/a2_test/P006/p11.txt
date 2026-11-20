@@ -1,0 +1,117 @@
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen tau Yih, Tim Rock-
+täschel, Sebastian Riedel, and Douwe Kiela. 2020.
+Retrieval-augmented generation for knowledge-
+intensive NLP tasks. Advances in Neural Information
+Processing Systems, 33:9459–9474.
+Xiang Lisa Li, Ari Holtzman, Daniel Fried, Percy Liang,
+Jason Eisner, Tatsunori B Hashimoto, Luke Zettle-
+moyer, and Mike Lewis. 2023a. Contrastive decod-
+ing: Open-ended text generation as optimization. In
+Proceedings of the 61st annual meeting of the associ-
+ation for computational linguistics (volume 1: Long
+papers), pages 12286–12312.
+Xuechen Li, Florian Tramèr, Percy Liang, and Tatsunori
+Hashimoto. 2022. Large language models can be
+strong differentially private learners. In International
+Conference on Learning Representations.
+Yunxiang Li, Zihan Li, Kai Zhang, Ruilong Dan, Steve
+Jiang, and You Zhang. 2023b. ChatDoctor: A medi-
+cal chat model fine-tuned on a large language model
+Meta-AI (LLaMA) using medical domain knowledge.
+Cureus, 15(6):e40895.
+Nils Lukas, Ahmed Salem, Robert Sim, Shruti Tople,
+Lukas Wutschitz, and Santiago Zanella-Béguelin.
+2023. Analyzing leakage of personally identifiable
+information in language models. In 2023 IEEE Sym-
+posium on Security and Privacy (SP), pages 346–363.
+IEEE.
+Alvin F. Martin, George R. Doddington, Terri Kamm,
+Mark Ordowski, and Mark A. Przybocki. 1997. The
+DET curve in assessment of detection task perfor-
+mance. In Fifth European Conference on Speech
+Communication and Technology, EUROSPEECH
+1997, Rhodes, Greece, September 22-25, 1997, pages
+1895–1898. ISCA.
+Frank McSherry and Kunal Talwar. 2007. Mechanism
+design via differential privacy. In 48th Annual IEEE
+Symposium on Foundations of Computer Science
+(FOCS’07), pages 94–103. IEEE.
+Fatemehsadat Mireshghallah, Kartik Goyal, Archit
+Uniyal, Taylor Berg-Kirkpatrick, and Reza Shokri.
+2022. Quantifying privacy risks of masked language
+models using membership inference attacks. In Pro-
+ceedings of the 2022 Conference on Empirical Meth-
+ods in Natural Language Processing, pages 8332–
+8347.
+Ali Naseh, Yuefeng Peng, Anshuman Suri, Harsh
+Chaudhari, Alina Oprea, and Amir Houmansadr.
+2025. Riddle me this! stealthy membership inference
+for retrieval-augmented generation. In Proceedings
+of the 2025 ACM SIGSAC Conference on Computer
+and Communications Security, pages 1245–1259.
+nostalgebraist. 2020. interpreting GPT:
+the logit lens. https://www.lesswrong.
+com/posts/AcKRB8wDpdaN6v6ru/
+interpreting-gpt-the-logit-lens. Less-
+Wrong post.
+OpenAI, Josh Achiam, Steven Adler, Sandhini Agarwal,
+Lama Ahmad, Ilge Akkaya, Florencia Leoni Ale-
+man, Diogo Almeida, Janko Altenschmidt, Sam Alt-
+man, Shyamal Anadkat, Red Avila, Igor Babuschkin,
+Suchir Balaji, Valerie Balcom, Paul Baltescu, Haim-
+ing Bao, Mohammad Bavarian, Jeff Belgum, and
+261 others. 2023. GPT-4 technical report. Preprint,
+arXiv:2303.08774.
+Tim Robertson, F. T. Wright, and Richard L. Dykstra.
+1988. Order restricted statistical inference. John
+Wiley & Sons, New York.
+Weijia Shi, Xiaochuang Han, Mike Lewis, Yulia
+Tsvetkov, Luke Zettlemoyer, and Wen-tau Yih. 2024.
+Trusting your evidence: Hallucinate less with context-
+aware decoding. In Proceedings of the 2024 Confer-
+ence of the North American Chapter of the Associ-
+ation for Computational Linguistics: Human Lan-
+guage Technologies (Volume 2: Short Papers), pages
+783–791.
+Reza Shokri, Marco Stronati, Congzheng Song, and Vi-
+taly Shmatikov. 2017. Membership inference attacks
+against machine learning models. In 2017 IEEE sym-
+posium on security and privacy (SP), pages 3–18.
+IEEE.
+Karan Singhal, Shekoofeh Azizi, Tao Tu, S. Sara
+Mahdavi, Jason Wei, Hyung Won Chung, Nathan
+Scales, Ajay Tanwani, Heather Cole-Lewis, Stephen
+Pfohl, Perry Payne, Martin Seneviratne, Paul Gam-
+ble, Chris Kelly, Abubakr Babiker, Nathanael Schärli,
+Aakanksha Chowdhery, Philip Mansfield, Dina
+Demner-Fushman, and 13 others. 2023. Large lan-
+guage models encode clinical knowledge. Nature,
+620(7972):172–180.
+Zhonghao Sun, Zhiliang Tian, Yiping Song, Yuyi Si,
+Juhua Zhang, Minlie Huang, Kai Lu, Zeyu Xiong,
+Xinwang Liu, and Dongsheng Li. 2025. DPGA-
+TextSyn: Differentially private genetic algorithm for
+synthetic text generation. In Findings of the Associa-
+tion for Computational Linguistics: ACL 2025, pages
+16159–16179.
+Bowen Tan, Zheng Xu, Eric Xing, Zhiting Hu, and Shan-
+shan Wu. 2025. Synthesizing privacy-preserving text
+data via finetuning without finetuning billion-scale
+LLMs. In Proceedings of the 42nd International
+Conference on Machine Learning, volume 267, pages
+58637–58657.
+Vishnu Vinod, Krishna Pillutla, and Abhradeep Guha
+Thakurta. 2025. InvisibleInk: High-utility and low-
+cost text generation with differential privacy. In Ad-
+vances in Neural Information Processing Systems
+38: Annual Conference on Neural Information Pro-
+cessing Systems 2025, NeurIPS 2025, San Diego,
+CA, USA, December 2-7, 2025 / Mexico City, Mex-
+ico, November 30 - December 5, 2025, pages 74947–
+74991.
+Ruihan Wu, Erchi Wang, Zhiyuan Zhang, and Yu-
+Xiang Wang. 2026. Private-RAG: Answering mul-
+tiple queries with LLMs while keeping your data
+45303

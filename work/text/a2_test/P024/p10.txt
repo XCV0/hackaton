@@ -1,0 +1,109 @@
+tions based solely on visual data, our framework
+incorporates document context. This inclusion al-
+lows for relevant textual information from other
+sections of the paper to contribute to the query
+response. However, this reliance on document con-
+text represents a limitation common to all visually
+rich document QA datasets, as it challenges the iso-
+lation of visual performance testing. Nonetheless,
+this characteristic may not be entirely detrimental;
+in fact, it more accurately reflects the complexity of
+real-world systems where multimodal information
+is often interdependent.
+References
+Chenxin An, Shansan Gong, Ming Zhong, Xingjian
+Zhao, Mukai Li, Jun Zhang, Lingpeng Kong, and
+Xipeng Qiu. 2023. L-eval: Instituting standardized
+evaluation for long context language models. arXiv
+preprint arXiv:2307.11088.
+Yushi Bai, Xin Lv, Jiajie Zhang, Hongchang Lyu,
+Jiankai Tang, Zhidian Huang, Zhengxiao Du, Xiao
+Liu, Aohan Zeng, Lei Hou, et al. 2023. Longbench:
+A bilingual, multitask benchmark for long context
+understanding. arXiv preprint arXiv:2308.14508.
+Lucas Beyer, Andreas Steiner, André Susano Pinto,
+Alexander Kolesnikov, Xiao Wang, Daniel Salz,
+Maxim Neumann, Ibrahim Alabdulmohsin, Michael
+Tschannen, Emanuele Bugliarello, Thomas Un-
+terthiner, Daniel Keysers, Skanda Koppula, Fangyu
+Liu, Adam Grycner, Alexey Gritsenko, Neil Houlsby,
+Manoj Kumar, Keran Rong, Julian Eisenschlos,
+Rishabh Kabra, Matthias Bauer, Matko Bošn-
+jak, Xi Chen, Matthias Minderer, Paul Voigtlaen-
+der, Ioana Bica, Ivana Balazevic, Joan Puigcerver,
+Pinelopi Papalampidi, Olivier Henaff, Xi Xiong,
+Radu Soricut, Jeremiah Harmsen, and Xiaohua Zhai.
+2024. Paligemma: A versatile 3b vlm for transfer.
+Preprint, arXiv:2407.07726.
+Deng Cai, Yan Wang, Victoria Bi, Zhaopeng Tu, Xi-
+aojiang Liu, Wai Lam, and Shuming Shi. 2018.
+Skeleton-to-response: Dialogue generation guided by
+retrieval memory. arXiv preprint arXiv:1809.05296.
+Wenhu Chen, Hexiang Hu, Xi Chen, Pat Verga, and
+William W Cohen. 2022. Murag: Multimodal
+retrieval-augmented generator for open question
+answering over images and text. arXiv preprint
+arXiv:2210.02928.
+Tianyu Cui, Yanling Wang, Chuanpu Fu, Yong Xiao,
+Sijia Li, Xinhao Deng, Yunpeng Liu, Qinglin Zhang,
+Ziyi Qiu, Peiyang Li, Zhixing Tan, Junwu Xiong,
+Xinyu Kong, Zujie Wen, Ke Xu, and Qi Li. 2024.
+Risk taxonomy, mitigation, and assessment bench-
+marks of large language model systems. Preprint,
+arXiv:2401.05778.
+Pradeep Dasigi, Kyle Lo, Iz Beltagy, Arman Cohan,
+Noah A Smith, and Matt Gardner. 2021. A dataset of
+information-seeking questions and answers anchored
+in research papers. arXiv preprint arXiv:2105.03011.
+Naihao Deng, Zhenjie Sun, Ruiqi He, Aman Sikka, Yu-
+long Chen, Lin Ma, Yue Zhang, and Rada Mihalcea.
+2024. Tables as images? exploring the strengths and
+limitations of llms on multimodal representations of
+tabular data. arXiv preprint arXiv:2402.12424.
+Yihao Ding, Zhe Huang, Runlin Wang, YanHang Zhang,
+Xianru Chen, Yuzhong Ma, Hyunsuk Chung, and
+Soyeon Caren Han. 2022. V-doc: Visual questions
+answers with documents. In Proceedings of the
+IEEE/CVF conference on computer vision and pat-
+tern recognition, pages 21492–21498.
+Manuel Faysse, Hugues Sibille, Tony Wu, Gautier Vi-
+aud, Céline Hudelot, and Pierre Colombo. 2024. Col-
+pali: Efficient document retrieval with vision lan-
+guage models. arXiv preprint arXiv:2407.01449.
+Sreyan Ghosh, Chandra Evuru, Sonal Kumar, Utkarsh
+Tyagi, Oriol Nieto, Zeyu Jin, and Dinesh Manocha.
+2024. Vdgd: Mitigating lvlm hallucinations in cogni-
+tive prompts by bridging the visual perception gap.
+Jiatao Gu, Yong Wang, Kyunghyun Cho, and Victor OK
+Li. 2018. Search engine guided neural machine trans-
+lation. In Proceedings of the AAAI Conference on
+Artificial Intelligence, volume 32.
+Qiuxiang He, Guoping Huang, Qu Cui, Li Li, and
+Lemao Liu. 2021. Fast and accurate neural machine
+translation with translation memory. In Proceedings
+of the 59th Annual Meeting of the Association for
+Computational Linguistics and the 11th International
+Joint Conference on Natural Language Processing
+(Volume 1: Long Papers), pages 3170–3180.
+Joel Hestness, Sharan Narang, Newsha Ardalani, Gre-
+gory Frederick Diamos, Heewoo Jun, Hassan Kian-
+inejad, Md. Mostofa Ali Patwary, Yang Yang, and
+Yanqi Zhou. 2017. Deep learning scaling is pre-
+dictable, empirically. ArXiv, abs/1712.00409.
+Cheng-Ping Hsieh, Simeng Sun, Samuel Kriman, Shan-
+tanu Acharya, Dima Rekesh, Fei Jia, and Boris Gins-
+burg. 2024. Ruler: What’s the real context size of
+your long-context language models? arXiv preprint
+arXiv:2404.06654.
+Yulong Hui, Yao Lu, and Huanchen Zhang. 2024. Uda:
+A benchmark suite for retrieval augmented genera-
+tion in real-world document analysis. arXiv preprint
+arXiv:2406.15187.
+Gautier Izacard and Edouard Grave. 2020. Leverag-
+ing passage retrieval with generative models for
+open domain question answering. arXiv preprint
+arXiv:2007.01282.
+Tomáš Koˇcisk`y, Jonathan Schwarz, Phil Blunsom, Chris
+Dyer, Karl Moritz Hermann, Gábor Melis, and Ed-
+ward Grefenstette. 2018. The narrativeqa reading
+6097

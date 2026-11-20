@@ -1,0 +1,93 @@
+CacheGraft: Enhancing Retrieval-Augmented Generation
+via Latent-Space Document Enrichment
+Vihan Lakshman
+MIT CSAIL
+Cambridge, USA
+vihan@mit.edu
+Peter Baile Chen
+MIT CSAIL
+Cambridge, USA
+peterbc@mit.edu
+Zhuohan Gu
+MIT CSAIL
+Cambridge, USA
+zgu15@mit.edu
+Michael Cafarella
+MIT CSAIL
+Cambridge, USA
+michjc@csail.mit.edu
+Abstract
+Recent work in machine learning has demonstrated that transformer-
+based language model agents can communicate state not only
+through text, but also directly in latent space via key-value (KV)
+caches. In this paper, we argue that such cache-to-cache transla-
+tion can provide utility beyond the original motivating application
+of real-time agent communication and can instead be utilized for
+retrieval-augmented generation (RAG). Building on the Cache-to-
+Cache (C2C) fusion framework, our proposed system CacheGraft
+encodes each corpus passage offline into a fused KV cache rep-
+resentation between a larger sharer model (4B parameters in our
+experiments) and a smaller receiver model (0.6B parameters) such
+that this cache can be injected into the receiver at query time
+with no need for the larger model. Across five QA benchmarks
+and two independent locally-run judges, CacheGraft improves an-
+swer quality over the text-only receiver baseline in 29 out of 30
+comparisons, of which 17 of the 30 are statistically significant. No-
+tably, these gains are zero-shot with respect to the fuser, which
+was never trained on retrieval data. These initial results suggest
+that latent-space document enrichment may be a promising avenue
+for enhancing the performance of RAG systems, particularly in
+compute-constrained settings where it is only feasible to deploy a
+small model at inference time.
+CCS Concepts
+• Information systems→ Information retrieval.
+Keywords
+retrieval-augmented generation, KV caching, model collaboration,
+cache translation
+1 Introduction
+Recent breakthroughs in the machine learning community [7, 8, 16]
+have demonstrated that transformer-based large language model
+(LLM) agents can communicate information between one another
+not only through the standard medium of text, but also in latent
+space by translating the key-value (KV) cache from a sender model
+to a receiver model’s internal vector space. Notably, this translation,
+typically accomplished by learning a separate adapter model, is
+feasible even if the two models have a differing number of weights
+and layers [7, 8, 16].
+sharer (4B)
+receiver (0.6B)
+passage 𝑑 fuser
+fused KV
+cache
+persist
+receiver (0.6B)question 𝑞 answer[𝑞] as text
+load
+[𝑝 𝑑] as KV
+Phase 1 — offline, once per passage
+Phase 2 — online, per query
+Figure 1: The sharer and fuser run only offline, once per
+corpus passage, with no knowledge of any query. The fused
+KV cache is the only artifact that crosses the offline/online
+boundary: at query time the receiver loads it and decodes
+alone, reading the passage [𝑝 𝑑] in latent space and the ques-
+tion[𝑞] as text.
+The overarching motivation driving this effort in KV cache trans-
+lation is the vision of heterogeneous LLMs collaborating in a real-
+time multi-agent system by passing state via KV cache vectors as
+opposed to raw text. By operating in latent space, KV cache transla-
+tion offers the promise of improving both the quality of multi-agent
+computation, since KV caches constitute richer conceptual repre-
+sentations of information in an LLM’s native language, and the
+performance of such systems by eliminating the model’s initial step
+of converting a textual input into KV vectors.
+The central observation behind this paper is that KV cache trans-
+lation can be useful beyond the original motivating goal of real-time
+multi-agent LLM communication. To that end, we introduce the
+CacheGraft framework applying the KV cache translation paradigm
+for retrieval-augmented generation (RAG) where an LLM marshals
+knowledge from an external corpus to enhance its context before
+generating a response. Applying KV cache translation to RAG is
+not immediately obvious because typical RAG deployments often
+consist of a single LLM; it is unclear where cross-model cache trans-
+lation even comes into the picture. Our key insight is that we can
+arXiv:2611.07393v2  [cs.IR]  6 Nov 2026

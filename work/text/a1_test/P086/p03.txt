@@ -1,0 +1,112 @@
+X-ray diﬀraction (XRD) characterization was carried out
+using a PANalytical Empyrean with Cu Ka radiation. The
+samples were produced by depositing powder of 6R-TaS2 crys-
+tals or LPE-produced TaS2 ake dispersions onto Si/SiO2
+substrates. Before the measurements, the samples were dried
+under vacuum overnight to remove moisture or solvent
+residuals.
+Raman spectroscopy measurements were carried out using
+a Renishaw microRaman Invia 1000 mounting a 50/C2 objective.
+The excitation wavelength the incident power on the samples
+were 532 nm and 1 mW, respectively. The samples were
+prepared following the procedure described for the XRD
+characterization.
+Kelvin probe force microscopy (KPFM) images were acquired
+in air with a XE7 AFM (Park System, Korea) and low-noise lock-
+in amplier SR830 DSP (Stanford research systems, USA) oper-
+ating in AM mode equipped with Au-coated PPP-NCSTAu
+cantilevers (Nanosensors, Switzerland) having a tip diameter
+less than 50 nm. The topography images were collected in non-
+contact mode using the resonant oscillation of the cantilever
+(160 kHz) and the potential images were collected using an AC
+modulation voltage of 0.5 V at 17 kHz applied to the tip. The
+scan rate for the acquisition of the images was 0.1–0.2 Hz. The
+samples were prepared by spin-coating a droplet of the TaS2
+akes dispersion onto ITO.
+Ultraviolet photoelectron spectroscopy (UPS) with He I (hn ¼
+21.2 eV) radiation was performed using a Kratos Axis UltraDLD
+spectrometer, operating at <10/C08 mbar. A /C09.0 V bias was
+applied to the sample to precisely determine the low kinetic
+energy cut-oﬀ.
+Device fabrication
+Pre-patterned ITO/glass substrates were cleaned in ultrasonic
+bath using deionised water, acetone, and IPA. Then, the
+samples were transferred in N2 glovebox, where they underwent
+aUV–ozone treatment for 15 min. Thin (/C2410 nm) lms of poly
+[bis(4-phenyl)(2,4,6-trimethylphenyl)amine] (PTAA) (Solaris Mw
+¼ 20–70 kDa) were prepared by spin coating a 2 mg mL/C01 PTAA
+solution in toluene at an angular speed of 6000 rpm. The PTAA
+lms were annealed at 110 /C14C for 10 min. The perovskite solu-
+tion was prepared by mixing 0.2 M methylammonium bromide
+(MABr) (GreatCell Solar), 1.14 M formamidinium iodide (FAI)
+(GreatCell Solar), 0.2 M PbBr2 (TCI America) and 1.24 M PbI2
+(TCI America) in 4 : 1 v/v anhydrous dimethylformamide (DMF)
+(99.8%, Sigma Aldrich) : dimethyl sulfoxide (DMSO) (99.9%,
+Sigma Aldrich) and then adding 5 vol% from a 1.5 M CsI stock
+solution and 4 vol% from 1.5 M RbI stock solution. The
+perovskite layers were spin coated on the PTAA lm at 6000 rpm
+for 45 s. 10 s prior to the end of the spinning process, 200 mL of
+anhydrous chlorobenzene (CB) (99.8%, Sigma Aldrich) was
+dropped onto the spinning perovskite lm. Subsequently, the
+samples were immediately annealed for 45 min on a hotplate
+preheated at 100 /C14C. Next, thin-layers of PC70BM (99%, Solenne)
+were deposited by spin coating a 20 mg mL/C01 PC70BM solution
+in anhydrous CB onto the perovskite at 1000 rpm. The PSCs
+were then completed following a procedure described in ref. 8.
+Briey, the TaS2 akes were deposited from their dispersions
+onto PC70BM through consecutive SCs (up to ve). Aerwards,
+45 mL of 0.5 mg mL/C01 bathocuproine (BCP) (96%, Sigma
+Aldrich) prepared in IPA (99.5% extra dry, ACROS Organics) was
+spin coated onto the TaS2 buﬀer layers. Finally, a 100 nm-thick
+Ag top electrode was deposited by vacuum thermal evaporation.
+Device characterization
+The PSCs were evaluated under an inert atmosphere using an
+ABB solar simulator (Sol1A, Oriel) equipped with a 450 W Xe
+lamp and an AM1.5G lter. The intensity was calibrated at 100
+mW cm/C02 using a KG3-window Si reference cell. The J–V curves
+were recorded at a constant scan rate of 20 mV s/C01 using
+a multiplexor test board system (Ossila), and no device pre-
+conditioning was applied before the measurements. A black
+metallic aperture mask was used during each measurement to
+set the active area of the fabricated devices at 0.04 cm2 and to
+reduce the inuence of the scattered light. The external
+quantum eﬃciency (EQE) spectra were recorded using a QE-T
+system from Enlitech. A chopping frequency of 60 Hz was
+used. The calibration of the light intensity was performed using
+a quartz-window Si solar cell. The integrated current density was
+calculated by integrating the product between the spectral
+response of the test cell and the reference AM1.5G solar spec-
+trum. Optoelectrical characterization was performed with
+a transient module of ARKEO measurement platform (Cicci
+Research s.r.l.). Transient photovoltage (TPV) experiments were
+performed in small perturbation mode by conning the inten-
+sity of the light pulse to less than 10% of the background
+voltage, unaltering the equilibrium of the eld induced by the
+background bias. The voltage decay of the measured devices
+was tted by an exponential decay with a time constant that
+directly reects the lifetime of the charge carriers. Transient
+photocurrent (TPC) experiments were performed in both large
+and small perturbation regimes. Large perturbations were
+induced over 200 ms under a 0.8 duty cycle, while small
+perturbations were loaded with a 0.001 cycle and passed
+through an external circuit of 50 ohm resistance. Both the
+signals of open circuit voltage, Voc, (for TPV) and short circuit
+current, Jsc, (for TPC) were monitored aer passing them
+through voltage and impedance ampliers. To observe the
+photoinduced charge extraction through linearly increasing
+voltage (photo-CELIV) measurements, a 470 nm fast LED source
+driven by a 100 mA current and exhibiting a Lambertian radi-
+ation pattern was used. The relaxation pulse width was set to 20
+ms, charged by a 50 000 V s/C01 ramp, following a 13 ms delay
+aer the injection pulse. The collected signals were processed
+through a transimpedance amplier and passed through a 100
+MHz bandwidth digitizer running in single-shot mode. The
+lifetime behaviour of the PSCs was monitored using an ISOS
+testing laboratory from InnityPV in ISOS-L2 operation mode.
+The devices were rst encapsulated with a piece of glass and
+a UV-curable epoxy as an adhesive (Ossila E132). Then, the
+devices were placed inside the test chamber and exposed to
+continuous illumination. The apparatus was equipped with
+a solar simulator using a metal halide light source simulating
+3126 | Nanoscale Adv.,2021,3,3124–3135 © 2021 The Author(s). Published by the Royal Society of Chemistry
+Nanoscale Advances Paper

@@ -1,0 +1,77 @@
+systems. In the case of tRAG, there are no con-
+spicuous improvements (highest difference +1.9
+in GPT-4 MKQA). Concerning CrossRAG, it can
+be observed that significant differences emerge be-
+tween the final results achieved by using Google
+Translate and GPT-4o. This further demonstrates
+(i) the importance of multilingual retrieval (greater
+range of retrieval) and (ii) the usability of retrieved
+knowledge by LLM is better when it is in English.
+Indeed, multilingual knowledge retrieved and then
+processed in English impacts the final generations,
+whereas the same knowledge (the same docs in a
+foreign language) does not have the same impact.
+Method MKQA MLQA
+MultiRAG Avg 53.1 50.6 LR 44.0 38.7
+CrossRAG Avg 57.2 53.8 LR 46.7 41.9
+TF Avg 58.9 54.7 LR 45.2 43.6
+CrossRAG Avg 58.5 55.4
+(GPT-4o) LR 47.3 42.8
+Table 4: Evaluation using Translation-following (TF),
+MultiRAG and CrossRAG (with Google Translate
+and GPT-4o as translation tools) on Llama-3-8b.
+Translation-following Since the language of the
+retrieved documents plays a crucial role in the
+model’s performance, we propose a multilingual
+augmentation strategy conceived to enhance their
+capability to operate on multilingual documents.
+Hence, we employ the Translation-following (TF)
+approach as proposed in our related work (Ranaldi
+et al., 2024; Ranaldi and Freitas, 2024) and de-
+tailed in Appendix G. Table 4 shows that Llama-
+3-8b enhanced through the TF achieves consis-
+tent benefits. In particular, 11.6% on MKQA and
+7.5% on MLQA on average values when com-
+pared with MultiRAG. While 4.9% on MKQA
+and 1.8% on MLQA on average values when com-
+pared with CrossRAG. Finally, when compared
+with the CrossRAG version with GPT-4o as a
+translation tool, it achieves comparable perfor-
+mance (differences around <1). However, although
+performance increases are evident in some cases,
+there is the cost of additional tuning that should be
+considered.
+5 Ablation Analysis
+The results discussed in §4 show the benefits of (i)
+extending retrieval beyond English contexts and
+(ii) the operability of in-context approaches and
+translation tools to align the language of different
+retrieved information. This section analyses the
+qualitative impact of the proposed techniques on
+generations (§5.1) and the effect of using other
+retrievals (§5.2). Finally, in §5.3, we study the
+robustness of LLM to the combination of infor-
+mation in different languages and the number of
+documents retrieved.
+5.1 Language Generated
+One of the requirements for the correct answer is
+that the language must be the same as the query
+(the labels are also in a specific language). As
+an evaluation metric, in addition to the accuracy
+discussed in §5, we evaluate the percentage of an-
+swers generated in the correct language. To do this,
+we use the OpenLID framework (Burchell et al.,
+2023). Figure 5 shows that CrossRAG achieves
+consistently higher rates than MultiRAG. More-
+over, monoRAG gets comparable performances
+to the baseline (when we do not use RAG ap-
+proaches), but the accuracy is significantly lower.
+These results demonstrate that the models analysed
+generally follow instructions (given prompt); how-
+ever, when operating with multilingual knowledge
+(i.e., MultiRAG), they fail to both follow instruc-
+tions and deliver the correct response, especially
+in low-resource languages.
+Figure 5: Average generated languages for MKQA.
+Appendix N reported detailed results.
+703

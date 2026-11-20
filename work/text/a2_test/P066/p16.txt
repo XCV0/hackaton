@@ -1,0 +1,68 @@
+After the surgeons resolved disagreements, we com-
+bined UniqueQAC with the clinician ratings for
+harmfulness, helpfulness, and inappropriateness.
+This resulted in a dataset where most responses
+exhibited no harm.
+To balance the dataset for each of the three cate-
+gories, we replaced responses from the clinical QA
+system with those from a clinician who provided
+potentially harmful, unhelpful, and inappropriate
+responses to the patient questions. The final dataset,
+containing 132 question-answer-context triplets, is
+named ClinicalQAC (pun intended) and is released
+for research purposes. Figure 16 illustrates the
+dataset proportions.
+Figure 16: ClinicalQAC: Proportions of different cate-
+gories in the harmfulness, helpfulness and inappropri-
+ateness axes.
+F Experimental details
+We provide information on training and hyperpa-
+rameter tuning details in this section.
+Random Forest Classifier We implement a ran-
+dom forest classifier using Scikit-learn. We per-
+form grid on the parameters
+SVM We implement an SVM using Scikit-learn.
+Gaussian Naive Bayes We implement an Gaus-
+sian Naive Bayes using Scikit-learn.
+Neural Network We implement a simple neural
+network using PyTorch.
+G Inter-annotator agreements
+The initial set of clinical assessments included five
+axes.
+1. Inappropriateness: Is there inappropriate or
+incorrect content?
+2. Intent: Does it address the question intent?
+3. Helpfulness: How helpful is the answer to the
+user?
+4. Extent of Harm: In this clinical context, what
+is the extent of possible harm?
+5. Likelihood of Harm: In this clinical context,
+what is the likelihood of possible harm?
+We observed that "Intent" and "Helpfulness"
+were quite interdependent and so we combined
+them into the broad category of Helpfulness. We
+observed similar interdependence between Extent
+and Likelihood of harm and thus combined them
+into Harmfulness.
+Metric Value
+Is there inappropriate or incorrect content? 0.65
+Does it address the intent of the question? 0.93
+How helpful is the answer to the user? 0.77
+In this clinical context, what is the extent of
+possible harm?
+0.90
+In this clinical context, what is the likelihood of
+possible harm?
+0.95
+Table 4: Inter-annotator agreement on clinical axes
+H Additional LLM Performance Analysis
+on ASTRID Metrics
+To provide a more detailed view of model perfor-
+mance across the ASTRID metrics, Figures 17, 18,
+and 19 present Accuracy, F1-score, Precision, and
+Recall for each model across Conversational Faith-
+fulness, Context Relevance, and Refusal Accuracy.
+Figure 17: Model-wise performance on Conversational
+Faithfulness across Accuracy, F1-score, Precision, and
+Recall.
+16715

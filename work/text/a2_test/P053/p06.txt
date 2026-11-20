@@ -1,0 +1,73 @@
+Table 1: The main results between ACC-RAG and other compression methods. CR stands for Compression Rate. For
+each dataset, two columns represent Match (M) and First Token Inference Time (FTIT), with the highest M bolded
+and the second-highest underlined. * indicates statistical non-significance (p>0.05) with respect to ACC-RAG.
+Method CR Datasets
+NQ TriviaQA WQ TREC SQuAD Average
+LLM - 34.79 180 20.93 391 43.36* 172 34.29* 235 20.92 210 30.86 238
+RAG - 44.49 3264 23.82 3529 41.78 3334 33.43 3374 47.34 3356 38.17 3371
+Full-Tuning Methods
+AutoCompressor ×4 24.13 1007 14.81 1242 28.15 1015 23.49 1085 15.79 1057 21.27 1081
+COCOM ×4 26.73 1007 18.83 1242 23.92 1015 31.56 1085 25.60 1057 25.33 1081
+Plug-in Methods
+xRAG ×128 5.93 269 8.61 485 12.60 265 17.00 324 7.77 301 10.38 328
+ICAE ×128 23.30 269 18.11 485 23.57 265 30.55 324 18.47 301 22.8 328
+×16 27.04 440 19.23 667 23.97 436 31.41 502 23.95 476 25.12 504
+×4 27.53 1007 19.63 1242 24.51 1015 31.41 1085 27.58 1057 26.13 1081
+ACC-RAG(ours) adaptive 41.11 630 23.33 878 42.91 620 33.43 689 35.37 666 35.23 697
+Figure 3: Ablation on different training strategies.
+xRAG, COCOM) exhibit lower effectiveness com-
+pared to their original reports, primarily due to
+their reliance on larger-scale training data and task-
+specific tuning. In contrast, ACC-RAG achieves
+a balanced trade-off between effectiveness and ef-
+ficiency: compared to direct generation, it signifi-
+cantly improves M scores on NQ, TriviaQA, and
+SQuAD (p<0.05) with minimal drop on WQ and
+TREC (p>0.05). Meanwhile, it matches or exceeds
+vanilla RAG’s accuracy on four datasets while re-
+ducing FTIT by over 4×.
+5.2 Compressor Analysis
+In this section, we investigate factors influencing
+compressor performance. Experiments are con-
+ducted under the top-1 retrieval setting for analy-
+sis. We adopt cumulative M scores across different
+granularities as the evaluation metric rather than
+M scores at a single granularity, as the compressor
+compresses hierarchical information into position-
+aware embedding sequences for dynamic aggre-
+gation. Notably, cumulative M scores assume a
+perfect selector capable of accurately choosing the
+optimal granularity for each instruction. While this
+does not exist, this section focuses solely on evalu-
+ating the compression capacity of the compressor.
+5.2.1 Compression Rate Analysis
+The result of different compression rates for com-
+pressor is shown in Appendix D. It can be observed
+that compressors with smaller compression rates
+achieve higher final cumulative M scores, demon-
+strating stronger information encoding capabilities.
+However, compressors with higher compression
+rates exhibit accelerated M score accumulation,
+where the information density becomes more con-
+centrated at the smaller granularity despite total
+information loss.
+5.2.2 Training Strategy Ablation
+The result of ablation of different training strate-
+gies for the compressor is shown in Figure 3. Our
+training strategy achieves the highest cumulative M
+scores on two datasets, demonstrating its effective-
+ness. In ablation experiments, replacing the self-
+distillation task with instruction following signif-
+icantly degraded compression performance. This
+is likely because instruction following guides the
+compressor to encode information into embeddings
+that do not align with the decoder’s original gener-
+ation distribution, impairing the decoder’s genera-
+tion ability. This could explain the suboptimal per-
+formance of previous works. Without pretraining,
+the compressor exhibits faster M-score accumula-
+tion at smaller granularities but slower progression
+at larger granularities. Both language modeling
+and auto-encoding tasks contribute to performance
+gains, as their individual removal degrades perfor-
+24066

@@ -1,0 +1,114 @@
+Parametric Answer
+System
+You are a helpful assistant that answers factual ques-
+tions.
+User
+You are given a query. Please use your background
+knowledge to answer the query.
+Format your response strictly as follows:
+<think> [step-by-step reasoning] </think>
+<answer> [final answer in one or two words]
+</answer>
+Input
+[query]: {query}
+Assistant
+Direct Inference: Pθ(a|x, d), generating the an-
+swer directly without reasoning.
+Direct Inference
+System
+You are a helpful assistant that answers factual ques-
+tions.
+User
+You are given a query and several documents.
+Use the provided documents combined with your
+background knowledge to determine the correct fac-
+tual answer.
+Format your response strictly as follows:
+<answer> [final answer in one or two words]
+</answer>
+Input
+[query]: {query}
+[documents]: {docs}
+Assistant
+Standard CoT: Pθ(a, c|x, d), incorporating a
+reasoning chain without explicit internal knowl-
+edge.
+Standard CoT
+System
+You are a helpful assistant that answers factual ques-
+tions.
+User
+You are given a query and several documents.
+Use the provided documents combined with your
+background knowledge to determine the correct fac-
+tual answer.
+Format your response strictly as follows:
+<think> [step-by-step reasoning] </think>
+<answer> [final answer in one or two words]
+</answer>
+Input
+[query]: {query}
+[documents]: {docs}
+Assistant
+Joint CoT: Pθ(a, c, z|x, d), where background
+knowledge z is generated within a unified reason-
+ing chain.
+Joint CoT
+System
+You are a helpful assistant that answers factual
+questions.
+User
+You are given a query and several documents.
+First, please provide relevant background knowledge
+based on query using your own parametric knowl-
+edge.
+Then use the provided documents combined with
+your background knowledge to determine the correct
+factual answer.
+Format your response strictly as follows:
+<background> [background knowledge]
+</background>
+<think> [step-by-step reasoning] </think>
+<answer> [final answer in one or two words]
+</answer>
+Input
+[query]: {query}
+[documents]: {docs}
+Assistant
+Prior-Guided CoT: Pθ(a, c|x, z, d), where in-
+ternal knowledge z is elicited in an initial stage
+z ∼ Pθ(z|x) as prior information.
+Prior-Guided CoT (1st Stage)
+System
+You are a helpful assistant that answers factual ques-
+tions.
+User
+Please provide relevant background knowledge based
+on query using your own parametric knowledge.
+Format your response strictly as follows:
+<think> [background knowledge] </think>
+Input
+[query]: {query}
+Assistant
+Prior-Guided CoT (2nd Stage)
+User
+You are given a query and several documents.
+Use the provided documents combined with your
+background knowledge to determine the correct fac-
+tual answer.
+Format your response strictly as follows:
+<think> [step-by-step reasoning, combining
+parametric knowledge and the provided
+documents] </think>
+<answer> [final answer in one or two words]
+</answer>
+Input
+[query]: {query}
+[documents]: {docs}
+Assistant
+B.3 Analysis on CMI
+Experiments are conducted on the Natural Ques-
+tions subset of the RAG-Bench test suite, utilizing
+a document retrieval depth of k ∈ {1, 2, 5, 10}. As
+illustrated by the x-axis in Figure 2, we stratify
+22160

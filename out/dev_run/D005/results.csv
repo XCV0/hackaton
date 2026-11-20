@@ -1,0 +1,40 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D005,R001,DV1,MS2,M1,PCE,22.47,%,champion,,,,,22.47,%,22.47,%,primary,,6,,Table 2,,Spiro-OMeTAD Forward 25.50 1.13 77.96 22.47 22.262 ± 0.381,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD forward"
+D005,R002,DV1,MS2,M1,Voc,1.13,V,champion,,,,,1.13,V,1.13,V,primary,,6,,Table 2,,Spiro-OMeTAD Forward 25.50 1.13 77.96 22.47 22.262 ± 0.381,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD forward"
+D005,R003,DV1,MS2,M1,Jsc,25.50,mA/cm2,champion,,,,,25.50,mA cm−2,25.50,mA/cm2,primary,,6,,Table 2,,Spiro-OMeTAD Forward 25.50 1.13 77.96 22.47 22.262 ± 0.381,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD forward"
+D005,R004,DV1,MS2,M1,FF,77.96,%,champion,,,,,77.96,%,77.96,%,primary,,6,,Table 2,,Spiro-OMeTAD Forward 25.50 1.13 77.96 22.47 22.262 ± 0.381,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD forward"
+D005,R005,DV1,MS1,M1,PCE,22.95,%,champion,,,,,22.95,%,22.95,%,primary,,6,,Table 2,,Reverse 25.51 1.15 78.20 22.95,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD reverse"
+D005,R006,DV1,MS1,M1,Voc,1.15,V,champion,,,,,1.15,V,1.15,V,primary,,6,,Table 2,,Reverse 25.51 1.15 78.20 22.95,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD reverse"
+D005,R007,DV1,MS1,M1,Jsc,25.51,mA/cm2,champion,,,,,25.51,mA cm−2,25.51,mA/cm2,primary,,6,,Table 2,,Reverse 25.51 1.15 78.20 22.95,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD reverse"
+D005,R008,DV1,MS1,M1,FF,78.20,%,champion,,,,,78.20,%,78.20,%,primary,,6,,Table 2,,Reverse 25.51 1.15 78.20 22.95,extracted,,"Table 2 (champion PSCs), Spiro-OMeTAD reverse"
+D005,R009,DV2,MS2,M1,PCE,24.28,%,champion,,,,,24.28,%,24.28,%,primary,,6,,Table 2,,Forward 26.24 1.17 79.10 24.28 24.409 ± 0.07,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz forward"
+D005,R010,DV2,MS2,M1,Voc,1.17,V,champion,,,,,1.17,V,1.17,V,primary,,6,,Table 2,,Forward 26.24 1.17 79.10 24.28 24.409 ± 0.07,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz forward"
+D005,R011,DV2,MS2,M1,Jsc,26.24,mA/cm2,champion,,,,,26.24,mA cm−2,26.24,mA/cm2,primary,,6,,Table 2,,Forward 26.24 1.17 79.10 24.28 24.409 ± 0.07,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz forward"
+D005,R012,DV2,MS2,M1,FF,79.10,%,champion,,,,,79.10,%,79.10,%,primary,,6,,Table 2,,Forward 26.24 1.17 79.10 24.28 24.409 ± 0.07,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz forward"
+D005,R013,DV2,MS1,M1,PCE,24.53,%,champion,,,,,24.53,%,24.53,%,primary,,6,,Table 2,,Reverse 26.24 1.18 79.22 24.53,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz reverse"
+D005,R014,DV2,MS1,M1,Voc,1.18,V,champion,,,,,1.18,V,1.18,V,primary,,6,,Table 2,,Reverse 26.24 1.18 79.22 24.53,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz reverse"
+D005,R015,DV2,MS1,M1,Jsc,26.24,mA/cm2,champion,,,,,26.24,mA cm−2,26.24,mA/cm2,primary,,6,,Table 2,,Reverse 26.24 1.18 79.22 24.53,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz reverse"
+D005,R016,DV2,MS1,M1,FF,79.22,%,champion,,,,,79.22,%,79.22,%,primary,,6,,Table 2,,Reverse 26.24 1.18 79.22 24.53,extracted,,"Table 2 (champion PSCs), SF-MPA-MCz reverse"
+D005,R017,DV1,MS3,M1,PCE,22.262,%,mean,0.381,20,,,22.262,%,22.262,%,primary,,6,,Table 2,,Spiro-OMeTAD Forward 25.50 1.13 77.96 22.47 22.262 ± 0.381,extracted,,Average PCE из 20 приборов (сноска a)
+D005,R018,DV2,MS3,M1,PCE,24.409,%,mean,0.07,20,,,24.409,%,24.409,%,primary,,6,,Table 2,,SF-MPA-MCz Forward 26.24 1.17 79.10 24.28 24.409 ± 0.07,extracted,,Average PCE из 20 приборов (сноска a)
+D005,R019,DV1,MS4,M1,Jsc_EQE,25.41,mA/cm2,,,,,,25.41,mA cm−2,25.41,mA/cm2,primary,,5,,,Fig. 3C,photocurrent densities (25.41 and 25.73 mA cm−2 for Spiro-,extracted,,Интегральная плотность тока из EQE
+D005,R020,DV2,MS4,M1,Jsc_EQE,25.73,mA/cm2,,,,,,25.73,mA cm−2,25.73,mA/cm2,primary,,5,,,Fig. 3C,photocurrent densities (25.41 and 25.73 mA cm−2 for Spiro-,extracted,,Интегральная плотность тока из EQE
+D005,R021,DV2,MS5,M1,stabilized_PCE,24.37,%,,,,200,s,24.37,%,24.37,%,primary,,6,,,Fig. 3E,"efficiency of 24.37%, higher than that of Spiro-OMeTAD",extracted,,Стабилизированная эффективность по MPP-трекингу (200 s)
+D005,R022,DV1,MS5,M1,stabilized_PCE,22.36,%,,,,200,s,22.36,%,22.36,%,primary,,6,,,Fig. 3E,"(22.36%). Notably, during device fabrication, the optimal con-",extracted,,
+D005,R023,DV2,MS6,M1,retained_PCE,90,%,,,,500,h,more than 90,%,90,%,primary,,8,,,Fig. 5A,"device can maintain more than 90% PCE after 500 h of lasting test,",extracted,,Оценка снизу («more than 90%»)
+D005,R024,DV1,MS6,M1,retained_PCE,50,%,,,,500,h,~50,%,50,%,primary,,8,,,Fig. 5A,drops to about ~50% under the same conditions.,extracted,,Приблизительно («about ~50%»)
+D005,R025,DV2,MS7,M1,retained_PCE,85,%,,,,1000,h,more than 85,%,85,%,primary,,8,,,Fig. 5B,"more than 85% PCE can be maintained after 1,000 h of heating for",extracted,,Оценка снизу («more than 85%»)
+D005,R026,DV2,MS1,M1,PCE,24.53,%,champion,,,,,24.53,%,24.53,%,primary,,5,,,,"PCE of 24.53% with JSC of 26.24 mA cm−2, VOC of 1.18 V, and",extracted,R013,Повтор в тексте раздела Photovoltaic performance
+D005,R027,DV2,MS1,M1,Jsc,26.24,mA/cm2,champion,,,,,26.24,mA cm−2,26.24,mA/cm2,primary,,5,,,,"PCE of 24.53% with JSC of 26.24 mA cm−2, VOC of 1.18 V, and",extracted,R015,Повтор в тексте раздела Photovoltaic performance
+D005,R028,DV2,MS1,M1,Voc,1.18,V,champion,,,,,1.18,V,1.18,V,primary,,5,,,,"PCE of 24.53% with JSC of 26.24 mA cm−2, VOC of 1.18 V, and",extracted,R014,Повтор в тексте раздела Photovoltaic performance
+D005,R029,DV2,MS1,M1,FF,79.22,%,champion,,,,,79.22,%,79.22,%,primary,,5,,,,"FF of 79.22%, showing an all-round enhancement in photo-",extracted,R016,Повтор в тексте раздела Photovoltaic performance
+D005,R030,DV1,MS1,M1,PCE,22.95,%,champion,,,,,22.95,%,22.95,%,primary,,5,,,,voltaic parameters compared to 22.95% PCE of Spiro-OMeTAD-,extracted,R005,Повтор в тексте раздела Photovoltaic performance
+D005,R031,DV1,MS1,M1,Jsc,25.51,mA/cm2,champion,,,,,25.51,mA cm−2,25.51,mA/cm2,primary,,5,,,,"based device (JSC of 25.51 mA cm−2, VOC of 1.15 V, and FF of",extracted,R007,Повтор в тексте раздела Photovoltaic performance
+D005,R032,DV1,MS1,M1,Voc,1.15,V,champion,,,,,1.15,V,1.15,V,primary,,5,,,,"based device (JSC of 25.51 mA cm−2, VOC of 1.15 V, and FF of",extracted,R006,Повтор в тексте раздела Photovoltaic performance
+D005,R033,DV1,MS1,M1,FF,78.2,%,champion,,,,,78.2,%,78.2,%,primary,,5,,,,78.2%) (Table 2),extracted,R008,Повтор в тексте раздела Photovoltaic performance
+D005,R034,DV2,MS1,M1,PCE,24.53,%,champion,,,,,24.53,%,24.53,%,primary,,1,Abstract,,,contribute to a remarkable power conversion efficiency (PCE) of 24.53% for PSCs employing SF-,extracted,R013,
+D005,R035,DV2,MS1,M1,Voc,1.18,V,champion,,,,,1.18,V,1.18,V,primary,,3,,,,"[open voltage (VOC) of 1.18 V, short-",extracted,R014,Повтор во введении
+D005,R036,DV2,MS1,M1,Jsc,26.24,mA/cm2,champion,,,,,26.24,mA cm−2,26.24,mA/cm2,primary,,3,,,,"circuit current density (J SC) of 26.24 mA cm−2, fill factor (FF)",extracted,R015,Повтор во введении
+D005,R037,DV2,MS1,M1,FF,79.22,%,champion,,,,,79.22,%,79.22,%,primary,,3,,,,"of 79.22%], outperforming the control device based on Spiro-",extracted,R016,Повтор во введении
+D005,R038,,,,PCE,3.8,%,,,,,,3.8,%,3.8,%,cited,"[1,2]",1,Introduction,,,from 3.8% to over 26% nowadays,extracted,,"Первые КПД перовскитных солнечных элементов (2009), литературные данные"
+D005,R039,,,,PCE,26,%,,,,,,over 26,%,26,%,cited,"[1,2]",1,Introduction,,,from 3.8% to over 26% nowadays,extracted,,Современные рекордные КПД (литература): «over 26%»

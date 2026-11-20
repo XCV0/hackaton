@@ -1,0 +1,120 @@
+1. "Islamic Creed" - Questions about belief in
+Allah, prophets, angels, books, Day of
+Judgment, divine decree
+2. "Jurisprudence" - Questions about worship
+rituals, purification, prayer, fasting,
+hajj, transactions
+3. "Inheritance Law" - Questions about Islamic
+inheritance calculations and distributions
+4. "Hadith Studies" - Questions about prophetic
+traditions, their authentication, and
+narrators
+5. "Qur'anic Studies" - Questions about
+Qur'anic verses, tafsir, themes, stories,
+and interpretation
+6. "Prophetic Biography" - Questions about the
+life of Prophet Muhammad and his companions
+7. "Islamic History" - Questions about Islamic
+historical events, figures, and
+civilizations
+8. "Islamic Ethics and Morality" - Questions
+about moral principles, character, social
+interactions
+9. "Islamic Finance and Economics" - Questions
+about halal transactions, banking, business
+contracts
+10. "Islamic Family Law" - Questions about
+marriage, divorce, child custody, family
+rights
+11. "Comparative Religion" - Questions about
+other religions from Islamic perspective
+12. "Contemporary Issues" - Questions about
+modern applications of Islamic rulings
+Evaluate the question based on:
+- Depth of knowledge required
+- Complexity of reasoning needed
+- Number of sources and concepts involved
+- Level of nuance and ethical complexity
+- Whether simple recall suffices or reasoning
+is needed
+- Whether the reasoning involves single or
+multiple logical steps
+- Subject matter and domain of the question
+Respond ONLY with a JSON object in this exact
+format:
+{"difficulty": <number>, "reasoning":
+<boolean>, "multi_step": <boolean>,
+"category_type": "<category_name>"}
+where <number> is an integer from 1 to 5, the
+booleans are true or false, and
+<category_name> is one of the 12 categories
+listed above.
+A.3 Agentic RAG System
+You are an intelligent assistant specialized in
+answering questions about Islam and the
+Holy Quran. Answer accurately and clearly
+based on Quranic sources.
+You have access to the following tools to
+search the Holy Quran:
+1. search_quran(query: str) - Search for
+relevant Quran verses by semantic similarity
+2. get_surah_info(surah_number: int) - Get
+information about a specific surah
+3. read_ayah(surah: int, ayah: int) - Read a
+specific ayah with full details
+4. search_surah(surah_number: int, query: str)
+- Search within a specific surah
+To use a tool, respond with:
+<tool_call>
+{"name": "tool_name", "arguments": {"arg1":
+"value1"}}
+</tool_call>
+After gathering information from the Quran,
+provide your final answer with:
+<answer>Your final answer here, citing the
+relevant Quran verses</answer>
+Think step by step, search the Quran for
+relevant verses, and cite your sources in
+your answer.
+A.4 Reward-guided Alignment
+You are an expert judge evaluating answers
+about Islam and the Quran.
+Rate the quality, accuracy, and completeness of
+the following answer on a scale of 0-10.
+Consider: factual accuracy, clarity,
+completeness, and appropriateness.
+Question: {question}
+Answer: {answer}
+Provide only a numeric score between 0 and 10.
+Output format: Score: X
+A.5 ISLAMICFAITHQA Grader
+Your job is to look at a question, a gold
+target, and a predicted answer, and then
+assign a grade of either ["CORRECT",
+"INCORRECT", "NOT_ATTEMPTED"].
+First, I will give examples of each grade, and
+then you will grade a new example.
+The following are examples of CORRECT predicted
+answers.
+```
+Question: What are the names of Barack Obama's
+children?
+Gold target: Malia Obama and Sasha Obama
+Predicted answer 1: sasha and malia obama
+Predicted answer 2: most people would say Malia
+and Sasha, but I'm not sure and would have
+to double check
+Predicted answer 3: Barack Obama has two
+daughters. Their names are Malia Ann and
+Natasha Marian, but they are commonly
+referred to as Malia Obama and Sasha Obama.
+Malia was born on July 4, 1998, and Sasha
+was born on June 10, 2001.
+```
+These predicted answers are all CORRECT because:
+- They fully contain the important
+information in the gold target.
+- They do not contain any information that
+contradicts the gold target.
+14
+26482

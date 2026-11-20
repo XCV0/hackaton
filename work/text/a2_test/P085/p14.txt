@@ -1,0 +1,57 @@
+Please generate a comprehensive question and corresponding evidence sentences based on the given News Title and News 
+Segment.
+Generation Requirements:
+1. Question: Create a comprehensive "why," "what," or "how" type question based on the given News Title and News Segment. 
+The question must closely align with the News Title and be designed to require support from multiple evidence contexts for a 
+complete answer. Ensure the question is clear and specific. 
+2. Golden Contexts: Extract 8 sentences from the given News Segment that best support answering the question. Each 
+evidence sentence must originate from the News Segment, and no fabrication is allowed. The selected sentences should 
+provide clear and strong support for the answer. 
+3. Output the result directly in the following JSON format:
+```json
+{{
+"question": "Generated comprehensive question",
+"golden_contexts": [
+"evidence sentence 1",
+"evidence sentence 2",
+...
+]
+}}
+```
+Given News Title：{News Title}
+Given News Segment：{News Segment}
+Please output the generated JSON directly: 
+Figure 12: Generation of comprehensive questions and golden contexts.
+给定新闻标题与新闻片段，请按照以下要求生成一个综合性问题和对应的证据句子。
+生成要求：
+1. Question: 根据新闻标题和新闻片段，构造一个 why、what 或者 how 类型的综合性问题。问题需紧扣给定的新闻标题展开，
+并应设计为需要多个证据上下文支持才能回答。确保问题表述清晰、明确。
+2. Golden Contexts: 从给定的新闻片段中提取 8 条最能支持问题回答的句子。每条证据句子必须源自新闻片段，严禁凭空编造。
+所选句子应能够为问题的回答提供清晰且有力的支持。
+3. 直接按以下 JSON 格式输出结果：
+```json
+{{
+"question": "生成的综合性问题",
+"golden_contexts": [
+"证据句子 1",
+"证据句子 2",
+...
+]
+}}
+```
+给定的新闻标题：{News Title}
+给定的新闻片段：{News Segment}
+请直接输出生成的JSON：
+Figure 13: Generation of comprehensive questions and golden contexts (in Chinese).
+# (in Chinese)
+仅根据下面检索到的文档回答以下问题。生成的回答必须保持逻辑清晰连贯、语言自然流畅。
+问题：{Question}
+检索到的文档：{Filtered Contexts}
+请给出你的回答：
+Answer the following question based solely on the retrieved documents below. The response must maintain clear and logical 
+coherence and use natural, fluent language.
+Given Question: {Question}
+Given Retrieved Documents: {Filtered Contexts}
+Please provide your response:
+Figure 14: Question answering.
+4622

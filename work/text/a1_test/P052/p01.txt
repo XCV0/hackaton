@@ -1,0 +1,96 @@
+RESEARCH ARTICLE
+www.advancedscience.com
+CrystalGrowthPromotionandDefectsHealingEnable
+MinimumOpen-CircuitVoltageDeﬁcitinAntimony
+SelenideSolarCells
+Guangxing Liang, Mingdong Chen, Muhammad Ishaq, Xinru Li, Rong Tang,
+Zhuanghao Zheng, Zhenghua Su, Ping Fan, Xianghua Zhang, and Shuo Chen*
+Antimonyselenide(Sb2Se3)isanidealphotovoltaiccandidateproﬁtingfrom
+itsadvantageousmaterialcharacteristicsandsuperioroptoelectronic
+properties,andhasgainedconsiderabledevelopmentinrecentyears.
+However,thefurtherdeviceeﬃciencybreakthroughislargelyplaguedby
+severeopen-circuitvoltage(VOC)deﬁcitundertheexistenceofmultipledefect
+statesanddetrimentalrecombinationloss.Inthiswork,aneﬀectiveabsorber
+layergrowthengineeringinvolvedwithvaportransportdepositionand
+post-selenizationisdevelopedtogrowSb2Se3 thinﬁlms.High-qualitySb2Se3
+withlargecompactcrystalgrains,benign[hk1]growthorientation,
+stoichiometricchemicalcomposition,andsuitabledirectbandgapare
+successfullyfulﬁlledunderanoptimizedpost-selenizationscenario.Planar
+Sb2Se3 thin-ﬁlmsolarcellswithsubstrateconﬁgurationof
+Mo/Sb2Se3/CdS/ITO/Agareconstructed.Bycontrast,suchengineeringeﬀort
+canremarkablymitigatethedevice VOC deﬁcit,owingtothehealed
+detrimentaldefects,thesuppressedinterfaceandspace-chargeregion
+recombination,theprolongedcarrierlifetime,andtheenhancedcharge
+transport.Accordingly,aminimum VOC deﬁcitof0.647Vcontributestoa
+record VOC of0.513V,achampiondevicewithhighlyinterestingeﬃciencyof
+7.40%isalsocomparabletothosestate-of-the-artSb2Se3 solarcells,pavinga
+brightavenuetobroadenitsscopeofphotovoltaicapplications.
+G.Liang,M.Chen,M.Ishaq,X.Li,R.Tang,Z.Zheng,Z.Su,P.Fan,
+S.Chen
+ShenzhenKeyLaboratoryofAdvancedThinFilmsandApplications
+KeyLaboratoryofOptoelectronicDevicesandSystemsofMinistryof
+EducationandGuangdongProvince
+CollegeofPhysicsandOptoelectronicEngineering
+ShenzhenUniversity
+Shenzhen518060,P.R.China
+E-mail:chensh@szu.edu.cn
+X.Zhang
+CNRS
+ISCR(InstitutdesSciencesChimiquesdeRennes)
+UMR6226
+UniversitédeRennes
+RennesF-35000,France
+The ORCID identiﬁcation number(s) for the author(s) of this article
+canbefoundunderhttps://doi.org/10.1002/advs.202105142
+©2022TheAuthors.AdvancedSciencepublishedbyWiley-VCHGmbH.
+ThisisanopenaccessarticleunderthetermsoftheCreativeCommons
+AttributionLicense,whichpermitsuse,distributionandreproductionin
+anymedium,providedtheoriginalworkisproperlycited.
+DOI:10.1002/advs.202105142
+1.Introduction
+Thin-ﬁlmphotovoltaic(TFPV)technologies
+have attracted tremendous research atten-
+tion thanks to the advantages of low ma-
+terial consumption, high power genera-
+tion,andscalableﬂexibility.[1–4] Amongvar-
+ious kinds of thin-ﬁlm solar cells, remark-
+able successes have been achieved in the
+representative cadmium telluride (CdTe),
+copper indium gallium selenide (CIGS),
+and perovskites with certiﬁed power con-
+version eﬃciencies (PCEs) exceeding 22%
+at laboratory scale.[5] However, the scarcity
+(e.g., In, Ga, and Te), toxicity (e.g., Cd,
+Pb) of the constituent elements, and/or
+the natural instability might restrict their
+large-scale applications. Thus, some alter-
+native environment-friendly, cost-eﬃcient,
+and intrinsically-stable TFPV materials are
+gettinggrowingconcerns.[6,7] Antimonyse-
+lenide (Sb2Se3) has emerged as a highly
+promisingcandidateowingtoitsabundant
+reserves,lowtoxicity,superiorstability,and
+excellent optoelectronic properties, includ-
+ing ideal bandgap (Eg of 1.1–1.3 eV, close
+to the optimal value for single-junction
+solarcell),highabsorptioncoeﬃcient(>105 cm−1),decentcarrier
+mobility(≈10cm2 V−1 s−1)andlongcarrierlifetime(≈60ns).[8–11]
+Furthermore, Sb2Se3 possesses a 1D crystal structure accumu-
+lated by [Sb4Se6]n nanoribbons with van der Waals (vdW) forces
+alongthe[100]and[010]axes,strongcovalentbondsalong[001]
+axis.[12,13] Thus, the grain boundaries are intrinsically benign as
+longastheatomicchainsareorientedperpendiculartothesub-
+strate,whichisalsobeneﬁcialforstrengtheningcarriertransport
+and reducing recombination losses.[12] A Shockley-Queisser (S-
+Q) theory determined PCE exceeding 30% really demonstrates
+itsgreatapplicationpotentialashigheﬃciencyTFPVdevice.[14]
+In the last decade, Sb2Se3 solar cells have been extensively
+investigated, unveiling considerable progress with PCEs of
+3.21%,[15] 7.6%,[9] and 9.2%[8] for mesoporous sensitized-type,
+planar heterojunction geometry-type and core–shell structured
+nanorodarraySb2Se3 solarcells,respectively.However,itisstill
+far behind its S-Q limit eﬃciency. Statistical analysis of key per-
+formance parameters shows that the short-circuit current den-
+sity (JSC) and ﬁll factor (FF) of the state-of-the-art Sb2Se3 so-
+lar cells can be optimized to 70% of their S-Q limits. But the
+Adv. Sci. 2022,9,2105142 ©2022TheAuthors. AdvancedSciencepublishedbyWiley-VCHGmbH2105142(1of15)

@@ -1,0 +1,90 @@
+regardless of the substrate employed is rigid or ﬂexible [23,24]. The
+conductive polymer poly(3,4-ethylenedioxythiophene) polystyrene sul-
+fonate (PEDOT:PSS, PH 1000) is a popular choice as an electrode for
+organic solar cells and PSCs due to its superior ﬁlm processability and
+mechanical durability compared to the rigid and brittle ITO electrode. As
+PEDOT:PSS (unless otherwise speciﬁed, PEDOT:PSS will refer to
+PEDOT:PSS PH 1000) is a p-type organic semiconductor, UF-PSCs typi-
+cally are in a p-i-n architecture of Ag/BCP/PCBM/MHP/PEDOT:PSS/PET
+[9,15]. Modulation of the conductivity of PEDOT:PSS layer is essential in
+the fabrication of high-efﬁciency devices. For example, Vaagensmith
+et al. reported the use of additive and plasma treatment to decrease the
+sheet resistance of PEDOT:PSS, which then served as a good transparent
+electrode for ITO-free PSCs [25]. Hu and coworkers also demonstrated
+the use of an ionic additive to improve conductivity, transmittance, and
+mechanical endurance [26]. For UF-PSCs, it is not sufﬁcient to use
+PEDOT:PSS alone to selectively extract photoinduced holes or block
+photoinduced electrons. Therefore, to achieve high performance in
+UF-PSCs, it is crucial to use appropriate hole transport materials (HTMs)
+such as nickel oxide (NiOx) and poly-bis(4-phenyl) (2,4,6-trimethyl-
+phenyl) amine (PTAA) [27–29]. PTAA is one of the most widely used
+HTMs in inverted PSCs owing to a lower parasitic absorption and a better
+energy band alignment with MHP [7,30,31]. Whereas, PTAA's high
+surface energy and subsequent poor wettability may cause discontinuity
+or pinholes in the MHP layer [32,33]. Conventional methods to improve
+the wettability of MHP ﬁlms on hydrophobic substrates, such as pre-
+washing with dimethylformamide (DMF), may be not sufﬁcient as it
+usually results in incomplete ﬁlm coverage. To overcome these limita-
+tions and achieve high-performance UF-PSCs, alternative methods must
+be explored to ensure complete coverage and strong interfacial coupling
+of MHP ﬁlms on PTAA for ultra-ﬂexible substrates.
+Here, we report the utilization of Al2O3 nanoparticles (NPs) as an
+inorganic surface modiﬁer to enhance the wettability and reduce the
+roughness of PTAA simultaneously. This strategy enables good afﬁnity
+between the substrate and MHP precursor solution, in turn attaining
+uniform and dense MHP ﬁlms with full coverage and fewer defects,
+which proves essential in fabricating UF-PSCs. Combined with computer
+simulations, we systematically investigated the effect of Al2O3 NPs on
+spin-coating and ﬁlm formation. This strategy not only signiﬁcantly in-
+creases PCE from ~12% to over 16%, but also promotes reproducibility
+by effectively addressing the short circuit issue commonly encountered in
+the ﬁeld of UF-PSCs. Moreover, our UF-PSCs demonstrates good me-
+chanical stability, maintaining 98.6% and 79.0% of their initial PCEs
+after 10,000 bending cycles with radii of 1.0 and 0.5 mm, respectively.
+2. Results and discussion
+As illustrated in Fig. 1, we present the preparation process of UF-PSCs.
+Firstly, Ultra-ﬂexible polyethylene terephthalate (UF-PET) was lami-
+nated onto a smooth glass surface using Polydimethylsiloxane (PDMS) as
+an adhesive layer. PEDOT:PSS was then spin-coated onto the PET. To
+facilitate the extraction of photogenerated holes, a PTAA layer was spin-
+coated onto PEDOT:PSS prior to the deposition of a MHP light-absorbing
+layer. Precise control over the deposition of MHP ﬁlms and strong
+interfacial coupling with PTAA on ﬂexible substrates is crucial for the
+preparation of high performance UF-PSCs. [6,6]-phenyl-C61-butyric acid
+methyl ester (PCBM) and bathocuproine (BCP) layers were sequentially
+deposited by a spin-coating process. The integrated UF-PSCs device was
+obtained after the deposition of the Ag electrode, which was ﬁnally
+peeled off from the glass substrate. It is important to note that the surface
+wettability and roughness of the substrate prior to MHP deposition are
+crucial factors in the fabrication of high-efﬁciency UF-PSCs.
+As a result of the strong hydrophobic nature of the PTAA surface,
+achieving a uniformly coated MHP ﬁlm through direct spin-coating of the
+MHP precursor onto the PTAA surface presents a challenge, as depicted
+in Fig. 2a. To overcome the challenge of obtaining a uniformly coated
+MHP ﬁlm on the hydrophobic PTAA surface, a DMF prewashing strategy
+has been frequently employed. However, even after DMF prewashing, the
+ﬁlm coverage remains inadequate, as shown in Fig. 2b. The limited af-
+ﬁnity of DMF on PTAA restricts the enhancement of wettability, and the
+prewashing process with DMF can compromise the glove box atmo-
+sphere, negatively impacting subsequent deposition and crystallization
+of MHP. To address this issue, a low-temperature processed layer of
+Al2O3 NPs was deposited on PTAA. The abundant surface hydroxyl
+groups endow Al2O3 NPs with excellent amphiphilic properties, allowing
+them to bind not only to PTAA but also to the MHP solution. Conse-
+quently, the modiﬁcation with Al2O3 signiﬁcantly enhances the wetta-
+bility of the PTAA surface, enabling complete coverage of the substrate
+by the MHP solution. This leads to the formation of a high-quality MHP
+ﬁlm and ultimately a superior device, as illustrated in Fig. 2c. For sub-
+sequent discussion, the PTAA without any treatment, with DMF pre-
+washing, and with a covering of Al2O3 NPs are referred to as “control”,
+“DMF PW”, and “Al2O3 SM”, respectively. We utilized Al2O3 NPs
+dispersed in isopropyl alcohol (IPA) instead of an aqueous dispersion
+system, since IPA is an organic solvent, which spreads well on hydro-
+phobic PET surfaces. In Fig. S3, we provide photos demonstrating the
+spreading of the Al2O3 IPA dispersion on the hydrophobic PET.
+The surface wettability of PET, PEDOT:PSS/PET, PTAA/PEDOT:PSS/
+Fig. 1. Preparation process of UF-PSCs. (a) Ultra-ﬂexible polyethylene terephthalate adheres to glass through PDMS; (b) Flat and bubble-free substrate; (c) Deposition
+of PEDOT:PSS and PTAA onto the ﬂat substrate in sequence; (d) Deposition of MHP absorption layer; (e) Deposition of PCBM and BCP onto the MHP ﬁlm in sequence;
+(f) Peeling off device from the support.
+Z. Wang et al. Advanced Powder Materials 3 (2024) 100142
+2

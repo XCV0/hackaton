@@ -1,0 +1,40 @@
+6 Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+1. Entity-level understanding: Identifying the company, fiscal period, and
+report structure.
+2. Numerical reasoning: Computing and interpreting KPIs such as revenue,
+operating income, and EPS.
+3. Temporal reasoning: Comparing performance across quarters and fiscal
+years.
+4. Policy and governance insight: Understanding board authorizations, div-
+idend policies, and share repurchase programs.
+This structured data generation process enables the LLM to capture the lin-
+guistic and analytical characteristics of financial narratives, providing a strong
+foundation for subsequent retrieval-augmented fine-tuning. An illustrative sam-
+ple of the generated instruction-following data is shown in Table 1.
+In summary, the general financial instruction dataset serves two purposes: (1)
+it provides a systematic foundation of financial question–answer pairs derived
+directly from authentic corporate disclosures, and (2) it establishes the contex-
+tual grounding necessary for extending the LLM’s capacity to handle retrieval-
+augmented financial reasoning tasks discussed in the next section.
+3.2 Earnings analysis seed instructions
+Table 2: Seed instructions for earnings analysis instruction-following data gen-
+eration.
+No. Instruction Type Prompt Example Relevant Documents
+1 Company core information What is Nvidia and its business sector? Press Release
+2 Key financial indicators What is the revenue? Press Release, Earn- ings Report
+3 Comparison
+Can you compare the revenue of Nvidia
+with its peer group in the semiconduc-
+tors industry?
+Press Release, Earn-
+ings Report
+4 Outlook Can you give the outlook for the rev- enue of Nvidia in the next quarter? Press Release, Earn- ings Report
+5 Summary Can you summarize the earnings report and executives’ statements of Nvidia? Press Release, Earn- ings Call Transcript
+6 Analysis
+Given the information above, can you
+generate an earnings report analysis for
+Nvidia in this quarter?
+Equity Research Re-
+port
+Precise guidance for the teacher LLM in the form of seed instructions is es-
+sential to ensure the generation of accurate, diverse, and contextually grounded

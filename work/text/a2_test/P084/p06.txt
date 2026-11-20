@@ -1,0 +1,80 @@
+Table 2: Retrieval performance. Bold text shows significant improvement (pair-wise t-test, p−value ≤ 0.05 with
+95% CI) of the best method with baseline (A.2). The second-best is underlined. It is also applied to other tables.
+Methods Models MentalChat CounselChat
+R@1 R@5 R@10 R@1 R@5 R@10
+Semantic only
+gpt-embed-3-small 63.31 82.49 87.57 48.72 66.17 73.09
+gpt-embed-3-large 65.69 85.03 89.83 55.74 71.81 78.40
+gpt-embed-ada-002 64.03 84.14 89.06 46.70 66.60 72.34
+Qwen3-Embed-0.6B 56.80 79.06 84.70 40.96 59.47 68.30
+jina-embed-v3 62.49 81.82 86.63 51.42 70.43 77.02
+Light-RAG 63.31 80.43 85.62 54.06 73.20 79.58
+RAG-Anything 62.53 78.27 82.27 53.42 67.90 75.43
+APTNESS 56.41 77.51 84.36 48.19 67.23 73.51
+HyDE 62.60 82.71 88.18 52.13 68.19 76.17
+Appraisal Theory+CBT
+gpt-embed-3-small 67.24 85.97 90.22 51.06 69.68 76.60
+gpt-embed-3-large 69.01 86.74 90.94 58.51 73.83 79.68
+gpt-embed-ada-002 66.08 85.36 90.72 51.06 69.26 76.17
+Qwen3-Embed-0.6B 58.73 81.17 86.53 44.15 63.51 70.53
+jina-embed-v3 65.38 84.61 88.79 54.23 73.17 79.46
+Light-RAG 66.13 82.69 87.50 57.15 73.49 79.50
+RAG-Anything 65.35 80.53 84.15 56.51 70.89 78.09
+Table 3: Response generation of different models on Baseline and w_ card methods across two datasets.
+Methods Models MentalChat CounselChat
+BLEU ROUGE Bscore LM judge BLEU ROUGE Bscore LM judge
+Baseline
+gpt-embed-3-small 38.16 47.07 88.90 7.35 24.84 31.82 85.08 7.06
+gpt-embed-3-large 36.72 46.91 88.92 7.33 25.04 31.88 85.12 7.08
+gpt-embed-ada-002 37.01 46.87 88.93 7.33 24.24 31.71 85.10 7.04
+Qwen3-Embed-0.6B 33.40 45.67 88.84 7.34 21.26 30.62 85.06 7.07
+Light-RAG 37.56 46.83 88.86 7.33 24.16 31.61 85.06 7.08
+RAG-Anything 37.76 46.97 88.89 7.29 23.94 31.39 85.06 7.05
+APTNESS 34.82 46.15 88.85 7.33 22.45 31.12 85.04 7.15
+HyDE 37.89 46.92 88.88 7.34 23.87 31.45 85.09 7.06
+jina-embed-v3 38.11 46.96 88.90 7.35 22.72 31.01 85.11 7.07
+w_card
+gpt-embed-3-small 42.24 46.28 88.31 8.13 30.89 31.66 84.50 7.84
+gpt-embed-3-large 41.08 46.26 88.38 8.16 31.21 31.88 84.56 7.87
+gpt-embed-ada-002 41.97 46.33 88.37 8.12 30.99 31.78 84.53 7.84
+Qwen3-Embed-0.6B 39.13 45.84 88.35 8.13 29.92 31.51 84.55 7.85
+Light-RAG 41.35 46.09 88.29 8.12 31.96 33.62 78.18 7.85
+RAG-Anything 41.64 46.26 88.31 8.09 32.10 33.55 78.17 7.82
+jina-embed-v3 41.71 46.34 88.36 8.12 30.61 31.57 84.53 7.84
+Open-mindedness & Non-judgment (ONJ), Clar-
+ity & Encouragement (CE), Boundaries & Ethical
+(BE), Holistic Approach (HA) (detail is in A.3).
+AL
+EV
+ST
+ONJCE
+BE
+HA
+1 3 5 7 9
+AL
+EV
+ST
+ONJCE
+BE
+HA
+1 3 5 7 9
+Baseline avg. w_card avg.
+Figure 2: Counseling skill scores of methods with and
+without safety planning cards. The left figure is for
+MentalChat and the right is for CounselChat.
+Figure 2 shows the average scores of counseling
+metrics. It shows that the performance of meth-
+ods using safety cards is consistently better than
+the baseline. The gains come mostly from for EV,
+ST, ONJ, CE, and HA, suggesting that safety cards
+improve the model’s ability to produce more em-
+pathetic, structured, non-judgmental, and helpful
+responses. A possible reason is that these metrics
+align with safety card intervention that provides
+explicit response strategies. The improvement pat-
+tern is consistent across datasets, indicating the ef-
+fectiveness of the proposed method. CounselChat
+exhibits slightly lower absolute scores than Men-
+talChat on several dimensions, suggesting more
+diverse counseling scenarios. Detailed scores of
+13805

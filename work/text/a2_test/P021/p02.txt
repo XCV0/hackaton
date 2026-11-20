@@ -1,0 +1,101 @@
+and (sub)claim grounding that requires cross-modal
+reasoning over visual and auditory signals. We
+show that naively adapting text-only RAG metrics
+to video yields poor correlation with human judg-
+ments (§6), confirming the need for a framework
+designed specifically for multimodal RAG.
+We introduce MIRAGE, a framework for
+Multimodal Retrieval Augmented Generation
+Evaluation that extends subclaim-level factual-
+ity assessment to the multimodal, multi-source,
+citation-attributed setting. Core to MIRAGE is the
+notion that all information—whether represented in
+text, image, audio, or video—can be decomposed
+into subclaims, grounding all modalities in a com-
+mon unit of evaluation. Our framework consists of
+INFOF1, which measures the factuality (precision)
+and coverage (recall) of information in generated
+text, and CITEF1, which measures whether cited
+sources support their associated subclaims (preci-
+sion) and whether recalled information is properly
+attributed (recall). Both metrics can be evaluated in
+reference-based or reference-free settings, enabling
+MIRAGE to be used across many different tasks
+(e.g., summarization, visual question answering).
+We evaluate on three RAG datasets spanning
+text and audiovisual sources: RAGTIME (Lawrie
+et al., 2026)—a multilingual text report-generation
+task—and WIKIVIDEO (Martin et al., 2026a) and
+WIKIVIDEO-25 (Martin et al., 2026b)—two audio-
+visual article-generation tasks. Comparing against
+three types of human judgments, we find that MI-
+RAGE has the highest agreement with human judg-
+ments across all three datasets and modalities, out-
+performing the text-native metrics on text and gen-
+eralizing to other modality sources where they do
+not. On audiovisual sources, subclaim-level preci-
+sion (INFOP, CITEP) is the only automatic metric
+that consistently correlates with grounding judg-
+ments, while other metrics have low or negative
+correlation.
+In summary: (1) We propose MIRAGE, extend-
+ing subclaim-level factuality assessment to multi-
+modal, multi-source, citation-attributed RAG; (2)
+we present multimodal versions of three prominent
+text-only RAG metrics, revealing their limitations;
+and (3) we evaluate across three datasets and three
+types of human judgments, showing that MIRAGE
+outperforms the text-native metrics on text and is
+the only metric to generalize to other modalities—
+extending reliable evaluation across modalities at
+no cost to text-domain performance.
+2 Related Work
+Retrieval-Augmented Generation has been
+widely studied in text-only settings (TextRAG;
+Lewis et al., 2020; Barham et al., 2023; Gupta et al.,
+2024; Han et al., 2024; Lawrie et al., 2024). Re-
+cent work has extended RAG to other modalities,
+including documents with visual elements (Cho
+et al., 2024), speech (Min et al., 2025; Chen et al.,
+2025), and video (VideoRAG; Jeong et al., 2025;
+Martin et al., 2026a; Ren et al., 2025). We focus
+on the VideoRAG task as proposed in Martin et al.
+(2026a), as it best mirrors the common TextRAG
+setting: long-form generation from multiple videos
+with citations. Video subsumes both visual and
+audio modalities, making it a challenging testbed.
+We also validate that our evaluation generalizes
+independently to text, audio, and video.
+Claim Decomposition is a core component of
+factuality assessment. An important precursor
+is the Pyramid method (Nenkova and Passon-
+neau, 2004), which abstracts summaries into Sum-
+mary Content Units (SCUs)—minimal, semanti-
+cally atomic propositions used as the basis for eval-
+uation. SCUs introduced the principle that content
+should be assessed at the level of individual facts
+rather than full sentences, anticipating the subclaim
+decomposition central to modern factuality metrics.
+Building on this principle, FActScore (Min et al.,
+2023) and VeriScore (Song et al., 2024) decom-
+pose predictions into subclaims and verify each one
+against a single text source, arguing that subclaims
+enable more straightforward factuality assessment
+than full sentences in virtue of their atomic propo-
+sitional content. Subsequent work has attempted to
+refine the appropriate conception of atomicity for
+subclaims (Gunjal and Durrett, 2024; Wanner et al.,
+2024a,b) and has extended the core methodology
+to images (Jing et al., 2024). However, these met-
+rics evaluate a prediction against a single source
+and do not assess citations, which requires verifi-
+cation across multiple sources. MIRAGE builds
+on this foundation but addresses a different setting:
+multi-source generation with citation attribution,
+where each subclaim must be factual and cited by
+the correct source.
+3 TextRAG Metrics
+Before introducing MIRAGE, we first revisit how
+RAG is assessed in text-only settings (TextRAG).
+We look at three prominent metrics—ALCE (Gao
+40232

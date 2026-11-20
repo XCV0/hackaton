@@ -1,0 +1,107 @@
+experiments, we employ the same foundational model and
+test it on the Spoken-SAX dataset but the memory database
+is constructed using the BDD-X training split for zero-shot
+generalisation.
+Implementation Details for each of the driving videos, we
+uniformly sample the video to 8 frames and resize it to 224 ×
+224 for all frames. For MLLM, we train the model for one
+and two epochs in the pre-training and fine-tuning stages,
+respectively. For the embedding projector, we train the model
+for 300 epochs. Training of the retrieval engine on the BDD-X
+dataset using a single A100 GPU takes half an hour. Then, we
+utilize the pre-training checkpoint from Video-LLaVA [46] and
+fine-tune the MLLM on top of it, which takes 6 hours on 8
+A100 GPUs. For the inference time, since we store all driving
+experience in a preprocessed database, which speeds up the
+retrieval process, the overall single round inference time is
+roughly 4 seconds on a single A100 GPU. Further experiment
+implementation details are provided in Sec. A.
+Evaluation Metric For the driving action description and justi-
+fication tasks, we use the same metrics as [35] including 4-gram
+BLEU (B4) [59], METEOR (M) [4], and CIDEr (C) [75]. These
+metrics aim to evaluate text generation quality, with BLEU
+focusing on n-gram precision, METEOR incorporating semantic
+and syntactic nuances, and CIDEr emphasising consensus and
+relevance in tasks like image captioning. Moreover, for the
+control signal evaluation, we again follow [35] and present
+Root Mean Square Error (RMSE) in both steering angle (◦)
+and speed (m s−1). We also present “tolerant accuracy” metrics,
+Aσ , representing the accuracy of predictions when binarised
+as within a tolerance threshold σ of the ground truth.
+Baselines We compare with various driving action de-
+scription and justification baseline methods such as video-
+language sequence-to-sequence based recurrent neural network
+S2VT [76] and visual-attention based convolutional neural
+network WAA [39]. We also compare with a state-of-the-art
+video transformer-based driving action explanation method
+ADAPT [35]. Methods like this are specialist in that they use
+two branches for explanation and control signal prediction.
+Beyond these specialist models for driving explanation, we
+further compare with the generalist visual instruction-tuned
+MLLM, DriveGPT4 [81]. Generalist methods like this use the
+same backbone for explanation and control signal prediction.
+B. Explainability in Driving Action and Justification
+We begin by evaluating the quality and accuracy of ex-
+planations and justifications for driving actions separately.
+As shown in upper part of Tab. I, our method demon-
+strates comparable performance to the state-of-the-art specialist
+method ADAPT [35], a characteristic not observed in previous
+MLLM-based methods. In particular, when compared with
+DriveGPT4 [81] which also uses an MLLM with a similar
+architecture and number of parameters but incorporates the
+extra LLaVA-150K dataset [48] for visual instruction tuning,
+our approach, relying solely on the BDD-X dataset, outperforms
+it in terms of explainability. This is evidenced by an average
+performance improvement of 10.8% across all metrics. This
+underscores the effectiveness of ICL in enhancing the emergent
+reasoning capabilities of MLLMs.
+C. Control Signal Prediction
+We next evaluate the accuracy of control signal predictions
+for Course (i.e., turning angle) and Speed. As indicated in
+Tab. II, our method surpasses others in open-loop control
+accuracy across various tolerance ranges and in terms of RMSE,
+significantly outperforming the baseline approach. In particular,
+when compared to the state-of-the-art DriveGPT4, which
+also uses the same visual input combined with past control
+signals for autoregressive prediction, our method stands out by
+implementing retrieval-augmented ICL examples. This indicates
+that the analogy in the overall reasoning process provided by the
+ICL examples also contributes to the improvement in numerical
+control signal prediction.
+D. Ablation Study on Retrieval Strategy
+We perform a more comprehensive ablation study to evaluate
+the efficacy of our proposed retrieval-augmented in-context
+learning. We first aim to investigate the similarity metric for
+retrieval. In particular, we compare the use of visual similarity
+(i.e., video embeddings only) with hybrid similarity (i.e., hybrid
+video and control signal projected embedding Sec. III-C).
+Our empirical findings indicate suboptimal performance when
+using visual similarity, possibly because it tends to prioritise
+ICL examples that are most perceptually similar, rather than
+effectively demonstrating the reasoning process. By fine-
+tuning the embeddings, we not only harness the potential of
+heterogeneous multi-modal sensor input but also enable more
+effective ICL example retrieval.
+We also investigate whether to apply ICL examples during
+training or solely in inference time. As shown in Tab. III,
+we found that the MLLM is incapable of making reasonable
+predictions using ICL examples without prior training, regard-
+less of the retrieval strategy chosen; as the model generates
+random string and non-floating-point number, which precludes
+the calculation of sensible metrics indicated as N.A in the
+corresponding entry. This suggests that the pre-trained MLLM
+is not equipped to effectively perform zero-shot ICL. We
+hypothesise that supervised fine-tuning plays a crucial role
+in enhancing the ICL capabilities of MLLM, necessitating
+the provision of reasoning demonstrations, which aligns with
+observations in [18].
+We further investigate the effect of the number of ICL
+examples. In particular, we compare the performance using
+the same optimal hybrid search as above but with a varying
+number of ICL examples. As shown in Tab. IV, we observe that
+increasing the number of ICL examples from 1 to 2 improves
+performance in explanation and justification while slightly
+decreasing the course control signal accuracy. It is worth noting
+that the choice of at most two ICL examples is constrained by
+the MLLM architecture. We include analysis and discussion
+on this limitation in Sec. V-A.

@@ -1,0 +1,99 @@
+Table 4: Performance of T-RAGon the Spider dataset.
+We report results using GPT-4o as the downstream LLM
+generator for question answering tasks.
+Spider Accuracy@10 Recall@10 EM@10
+DTR 14.9 21.7 63.3
+Table-E5 22.1 33.5 61.6
+TAPAS 25.4 38.6 71.1
+T-RAG 31.9 42.3 73.9
+Table 5: Latency evaluation of each component in T-
+RAG, along with comparisons to baselines.
+Latency (min) TFV Single-hop TQA Multi-hop TQA
+Table-to-Graph 0.4 0.2 0.1
+Coarse-grained 24.0 11.8 11.2
+Fine-grained 108.7 66.8 23.3
+T-RAG 133.1 78.8 34.6
+TAPAS 117.3 96.8 49.7
+Table-E5 215.8 134.2 69.2
+5.2 Generalizability of T-RAG
+To further evaluate the robustness and generalizabil-
+ity of T-RAG beyond our constructed benchmark,
+we conduct additional experiments on the Spider
+dataset (Yu et al., 2018). In this setting, each query
+is grounded in a single table selected from a large
+pool of heterogeneous tables. We adapt T-RAG
+to this single-table scenario by treating the task as
+retrieving the most relevant target table from the
+entire table corpus. Results in Table 4 demonstrate
+that T-RAG generalizes well to additional datasets
+such as Spider, where each table inherently differs
+in structure and content. We leave ablation and
+parameter studies in Appendix D.2 and D.3.
+5.3 Efficiency Analyses
+We evaluate the efficiency of T-RAG on the
+full MultiTableQA benchmark, consisting of 25k
+queries and 60k tables. Table 5 reports the end-to-
+end latency of each component in our framework
+across different task types. Graph construction
+and coarse-grained clustering are generally faster,
+while fine-grained PageRank-based retrieval incurs
+higher latency due to its more complex subgraph
+scoring and ranking operations. Despite incorpo-
+rating a multi-stage retrieval process, T-RAG still
+achieves comparable overall latency compared to
+strong baselines such as TAPAS and Table-E5. We
+further report the retrieval efficiency in Figure 4.
+TFV Single-hop TQA Multi-hop TQA
+101
+102
+103
+104
+# Tables (log scale)
+87.8%
+99.9%
+87.3%
+99.9%
+88.2%
+99.8%
+Before retrieval After coarse-grained After fine-grained
+Task Before retrieval After coarse-grained After fine-grained
+TFV 34,351 4204 (↓ 87.8%) 10 (↓ 99.9%)
+Single-hop TQA 17,229 2184 (↓ 87.3%) 10 (↓ 99.9%)
+Multi-hop TQA 5,523 649 (↓ 88.2%) 10 (↓ 99.8%)
+Figure 4: Retrieval efficiency of T-RAG across stages.
+We show the reduction in candidate tables through
+coarse-grained and fine-grained retrieval.
+6 Related Work
+Table Question-Answering. Table Question An-
+swering (Vakulenko and Savenkov, 2017) focuses
+on answering user queries by reasoning over tabular
+data. Existing benchmarks and datasets (Pasupat
+and Liang, 2015; Aly et al., 2021) have predom-
+inantly concentrated on single-table QA settings,
+with each query corresponding to a single table.
+Recently, several studies (Yu et al., 2018; Pal et al.,
+2023; Liu et al., 2023; Zhao et al., 2022) have fo-
+cused on incorporating multiple tables for down-
+stream tabular reasoning. More recent works, such
+as MT-RAIG (Seo et al., 2025) and MMQA (Wu
+et al.), incorporate a retrieval process to ask models
+to identify relevant tables with synthesized queries.
+Graph-based RAG. GraphRAG (Peng et al.,
+2024) extends traditional retrieval-augmented gen-
+eration (RAG) by modeling inter-document re-
+lationships through graph structures, improving
+both retrieval and generation (Edge et al., 2024b).
+While prior works (Lewis et al., 2020; Wang et al.,
+2023b; Asai et al.; Siriwardhana et al., 2023; Xu
+et al., 2023; Zhang et al., 2023b) often assume pre-
+structured graphs (e.g., knowledge graphs) with ex-
+plicit edge relations (Wang et al., 2023a; Agrawal
+et al., 2024), real-world data such as tables are typ-
+ically semi-structured and lack explicit relational
+schema. Effectively applying GraphRAG to such
+data remains an open challenge.
+7 Conclusion
+In this paper, we first present a comprehensive
+framework T-RAG to achieve multi-table retrieval
+across large-scale table corpora. Then, we con-
+38140

@@ -1,0 +1,79 @@
+Methods
+Hotpot-Dist Hotpot-Full Shuffle-Hotpot-Dist Shuffle-Hotpot-Full
+F1 Precision Recall F1 Precision Recall F1 Precision Recall F1 Precision Recall
+LLM-only 0.237 0.259 0.234 0.237 0.259 0.234 0.158 0.175 0.158 0.158 0.175 0.158
+Semantic RAG 0.617 0.646 0.643 0.528 0.558 0.535 0.508 0.533 0.524 0.422 0.449 0.433
++ Rerank 0.652 0.685 0.665 0.587 0.613 0.603 0.532 0.560 0.546 0.447 0.476 0.456
+Hybrid RAG 0.653 0.676 0.655 0.551 0.582 0.558 0.520 0.548 0.534 0.443 0.473 0.446
+LightRAG 0.293 0.288 0.480 0.261 0.259 0.364 0.285 0.284 0.404 0.202 0.199 0.293
+GraphRAG 0.400 0.408 0.491 0.169 0.157 0.429 0.351 0.365 0.401 0.163 0.155 0.362
+KG2RAG 0.663 0.690 0.683 0.631 0.665 0.643 0.545 0.572 0.566 0.507 0.539 0.512
+Table 1: Comparisons in terms of response quality between KG2RAG and baselines.
+Methods
+Hotpot-Dist Hotpot-Full Shuffle-Hotpot-Dist Shuffle-Hotpot-Full
+F1 Precision Recall F1 Precision Recall F1 Precision Recall F1 Precision Recall
+Semantic RAG 0.343 0.206 0.894 0.300 0.178 0.790 0.321 0.201 0.837 0.268 0.167 0.708
++ Rerank 0.357 0.224 0.932 0.306 0.197 0.833 0339 0.213 0.886 0.286 0.179 0.754
+Hybrid RAG 0.354 0.222 0.921 0.302 0.189 0.795 0.334 0.210 0.837 0.279 0.174 0.739
+LightRAG 0.234 0.150 0.638 0.132 0.083 0.340 0.227 0.148 0.535 0.116 0.073 0.295
+GraphRAG 0.255 0.167 0.594 0.180 0.113 0.470 0.210 0.138 0.482 0.199 0.126 0.510
+KG2RAG 0.436 0.301 0.908 0.310 0.203 0.838 0.405 0.279 0.840 0.305 0.193 0.790
+Table 2: Comparisons in terms of retrieval quality between KG2RAG and baselines.
+glish to French. The produced variant datasets are
+denoted by Shuffle-HotpotQA-Dist and Shuffle-
+HotpotQA-Full, respectively.
+Evaluation Metrics We compare KG2RAG with
+existing RAG-based methods in terms of response
+quality and retrieval quality, which can be influ-
+enced by both the retrieved chunks and context
+organization. For retrieval quality, we use the eval-
+uation script provided by HotpotQA to measure
+the F1 score, precision, and recall between the re-
+trieved chunks and referenced facts. For response
+quality, we adopt the F1 score, precision, and re-
+call as metrics, comparing the generated responses
+against ground truth answers.
+Baselines In the experiments, we compare
+KG2RAG with the following baseline methods:
+• LLM-only, which directly instructs LLMs to
+generate responses to user queries without any
+additional retrieval mechanisms.
+• Semantic RAG (Jiang et al., 2023), which em-
+ploys a semantic-based approach to retrieve
+relevant chunks. These chunks are concate-
+nated into the prompt and fed into the LLMs
+for response generation. For more details,
+please refer to Sec. 2.2.
+• Hybrid RAG (Gao et al., 2021), which
+combines a semantic-based retrieval method
+with a keyword-based retrieval method (e.g.,
+BM25 (Askari et al., 2023)) for chunk re-
+trieval. The retrieved chunks are subsequently
+merged through a cross-encoder reranker.
+• GraphRAG (Edge et al., 2024), which con-
+structs a graph-based index with an LLM.
+GraphRAG derives a knowledge graph from
+the source documents and pre-generates
+community summaries for clustered entities.
+Given a query, it generates partial responses
+with each related community summary and
+aggregates them into the final answer.
+• LightRAG (Guo et al., 2024), which acts as a
+lightweight version of GraphRAG. LightRAG
+extracts entities and relations from the source
+documents and generates a short description
+of each entity for retrieval. The retrieved in-
+formation is unified with the query and fed
+into the LLM for generation.
+For KG2RAG and all baseline methods, we use
+LLaMA3-8B (Dubey et al., 2024) as the LLM for
+KG construction and response generation, mxbai-
+embed-large (Li and Li, 2024) as the embedding
+model, and bge-reranker-large (Xiao et al., 2023)
+as the cross-encoder reranker for both Hybrid RAG
+and KG2RAG. The value of k is set to 10 unless
+otherwise specified.
+3.2 Comparisons and Analyses
+Response Quality The comparisons in terms
+of response quality between KG2RAG and the
+8917

@@ -1,0 +1,130 @@
+Knowledge 
+Base
+0.0
+0.5
+1.0
+DPR
+BM25
+Hybrid-Rerank
+0.0
+0.5
+1.0
+                               
+BM25 0.0
+0.5
+1.0
+0.0
+0.5
+1.0
+AFR - Before Attack AFR - After Attack RA - Before Attack RA - After Attack
+DPR
+(Knowledge
+Base)
+Hybrid-RerankHybrid SKR
+OFF
+NLIDPR (Retrieved 
+Context)
+DPR (Filtered 
+Context)
+Filtered 
+Context
+Retrieved 
+Context
+Hybrid
+Figure 9: Experimental results injected toxicity into the text accessible within the RAG pipeline.
+Knowledge 
+Base
+0.0
+0.5
+1.0
+DPR
+BM25
+Hybrid
+Hybrid-Rerank
+0.0
+0.5
+1.0
+DPR 
+(Knowledge 
+Base)
+                                 
+BM25 0.0
+0.5
+1.0
+0.0
+0.5
+1.0
+F1 (avg) - Before Attack
+AFR - Before Attack
+F1 (avg) - After Attack
+AFR - After Attack
+RA - Before Attack
+RA - After Attack
+Retrieved 
+Context
+Filtered 
+Context
+DPR (Filtered 
+Context)
+DPR (Retrieved 
+Context)
+Hybrid-RerankHybrid SKR
+OFF
+NLI
+Figure 10: Experimental results injected DoS into the text accessible within the RAG pipeline.
+metric reflects the generator’s security performance
+of RAG in the inter-context conflict task.
+4.2.2 Attack Success Rate (ASR)
+In the conflict, toxicity, and DoS tasks, attack key-
+words are present, such as the conflict facts leading
+to inter-context conflicts, seamlessly integrated soft
+ad keywords, and refusal signals. Therefore, in
+these tasks, we can evaluate the generator’s safety
+using the attack success rate (ASR) (Zou et al.,
+2024). If a higher proportion of attack keywords ap-
+pears in the response text, the ASR will increase15.
+5 Experiments
+5.1 Settings
+The default retrieval window for the silver noise
+task is set to top K = 6, with a default attack in-
+jection ratio of 3/6. For other tasks, the default
+retrieval window is top K = 2, and the attack in-
+jection ratio is fixed at 1/2. We evaluated the im-
+pact of using different retrievers (DPR, BM25, Hy-
+brid, Hybrid-Rerank) and filters (OFF, filter NLI
+(Li et al., 2024), compressor SKR (Qiao et al.,
+2024) across different RAG stages (indexing, re-
+trieval, generation) on the contexts retrieved for var-
+ious generators (DeepSeek, GPT-3.5-turbo, GPT-
+15Note: in experiments, we use the attack failure rate (AFR
+= 1 - ASR) for safety evaluation because AFR, as a positive
+metric, can be analyzed alongside F1 variants.
+4, GPT-4o, Qwen 7B, Qwen 14B, Baichuan 13B,
+ChatGLM 6B). The bold values represent the de-
+fault settings. Then, we adopt a unified sentence
+chunking strategy to segment the knowledge base
+and build the index. The embedding model used
+is bge-base-zh-v1.5, the reranker is bge-reranker-
+base, and the evaluator is GPT-3.5-turbo. All ex-
+periments are conducted using an NVIDIA H800.
+5.2 Results on Noise
+We inject different noise ratios into the text acces-
+sible in the RAG pipeline, including the knowledge
+base, retrieved context, and filtered context. As
+shown in Fig.5, the following observations can be
+made: (1) Regardless of the stage where noise is
+injected, the F1 (avg) score exhibits a downward
+trend as the noise ratio increases, indicating a de-
+cline in generation diversity (Fig.5-①); (2) The re-
+triever demonstrates some noise resistance, as noise
+injected at the knowledge base has approximately
+50% chance of not being retrieved. The results
+in Fig.5-① support this point. Specifically, as the
+noise ratio increases, the Retrieval Accuracy (RA)
+of injecting silver noise into the retrieved context
+or filtered context significantly outperforms that of
+injecting it into the knowledge base; (3) The perfor-
+mance of injecting noise into the retrieved context
+and filtered context is similar, indicating that the fil-
+ter cannot effectively resist silver noise since silver
+4615

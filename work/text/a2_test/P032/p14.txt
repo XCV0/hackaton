@@ -1,0 +1,107 @@
+"Decide whether the claim is
+'GROUNDED', 'HALLUCINATED_INTRINSIC', or
+'HALLUCINATED_EXTRINSIC' based ONLY on the
+document.",
+"Definitions:",
+" - GROUNDED: The claim is fully
+supported by the document. All relevant
+parts are directly verifiable from the
+document.",
+" - HALLUCINATED_INTRINSIC: The claim
+contradicts what the document states or
+clearly implies.",
+" - HALLUCINATED_EXTRINSIC: The claim
+includes information that is not stated or
+implied in the document and cannot be
+verified using only the document (it
+requires external knowledge).",
+"Justification requirements:",
+" - Your justification MUST be
+evidence-grounded.",
+" - Explicitly refer to the relevant
+parts of the document (by quoting or
+paraphrasing them).",
+" - Explain how these parts SUPPORT,
+CONTRADICT, or FAIL TO SUPPORT the claim.",
+" - Do NOT use any external knowledge;
+rely only on the provided document.",
+"Answer format (VERY IMPORTANT):",
+" - You MUST respond using EXACTLY the
+following XML structure:",
+" <answer>",
+"
+<classification>CATEGORY</classification>",
+" <justification>Your reasoning
+here</justification>",
+" </answer>",
+" - CATEGORY must be ONE of: GROUNDED,
+HALLUCINATED_INTRINSIC,
+HALLUCINATED_EXTRINSIC.",
+" - The <justification> must briefly
+explain your reasoning and cite evidence
+from the document.",
+" - Do NOT add any other text before
+or after the <answer>...</answer> block.",
+" - Do NOT add any extra tags or
+attributes.",
+],
+"document": <document>,
+"claim": <claim>,
+}
+F Prompt: Consensus Filter
+{
+"instructions": [
+"You will be given a document and a claim,
+along with two responses (RESPONSE_A and
+RESPONSE_B).",
+"Evaluate which response is better based
+solely on classification correctness,
+coherence, clarity, and justification
+quality.",
+"Your output MUST be exactly one of the
+following two strings: 'RESPONSE_A' or
+'RESPONSE_B'.",
+"Do NOT provide explanations, reasoning,
+punctuation, extra text, or any other
+content.",
+],
+"document": <document>,
+"claim": <claim>,
+"RESPONSE_A": <response_a>,
+"RESPONSE_B": <response_b>,
+"best_response": ""
+}
+G Reward Margin Evolution
+0 0.2 0.4 0.6 0.8 1
+−8
+−6
+−4
+−2
+·10−2
+epoch
+Rewards
+rewards/chosen rewards/rejected
+Figure 6: The gap between chosen and rejected com-
+pletions increases over training, showing that the model
+progressively learns to prefer chosen examples while
+assigning lower rewards to rejected ones.
+H Technical Reproducibility Details
+For reproducibility, we report the experimental
+setup. HalluGuard was fine-tuned for 16 hours on
+a single NVIDIA H100 PCIe GPU (80GB memory,
+TDP 350W). Training consumed approximately
+7.35 kWh, estimated using the Machine Learning
+Impact Calculator (MLIC) (Lacoste et al., 2019).
+Experiments were conducted on a Linux server
+with CUDA 12.4.1 and PyTorch 2.4.0, using de-
+fault random seeds and settings.
+I Inference Parameters
+Parameter Non-Thinking Thinking
+temperature 0.7 0.6
+min_p 0.0 0.0
+top_p 0.8 0.95
+top_k 20 20
+Table 8: Inference parameters used in our experiments,
+following the recommended Qwen settings for non-
+thinking and thinking modes.
+16931

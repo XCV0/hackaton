@@ -1,0 +1,62 @@
+Algorithm 2 Task-Level Activation of Decoding Objectives
+Require: Small sample S (default |S|=100), objective order O=[DA → DB → MS], candidate set
+Γ (default {0.1, 0.2, 0.3, 0.5, 1, 1.5, 2}), distance threshold τ (default 0.1), activation threshold ρ
+(default 0.5), optional dev labels L
+Ensure: Activated set A, effective weights γi = γ0 i γ1 i (magnitudes γ0 i ∈ Γ, switches γ1 i ∈ {0, 1})
+1: A ← ∅
+2: for each i ∈ O in order do
+3: if dev labels L are available then ▷ Evaluate i conditioned on previously activated A
+4: γ0 i ← arg maxγ∈Γ Acc(A ∪ {i}; γ)
+5: Accon i ← Acc(A ∪ {i}; γ0 i )
+6: Accoff i ← Acc(A)
+7: if Accon i ≥ Accoff i then
+8: A ← A ∪ {i}; set γ1 i ← 1
+9: else
+10: γ1 i ← 0
+11: else
+12: for each γ ∈ Γ do ▷ Label-free: select magnitude by divergence alignment, then decide
+activation
+13: for each x ∈ S do
+14: y ← GreedyDecode(x; objectives = A ∪ {i}, γi = γ, {γj }j∈A fixed)
+15: for t = 1 . . . T (y) do
+16: compute d(t) i,γ from Eq. 12 conditioned on (x, y<t)
+17: pi,γ (x) ← 1 T (y) ∑T (y) t=1 I[d(t) i,γ < τ ]
+18: ¯pi,γ ← 1 |S| ∑ x∈S pi,γ (x)
+19: γ0 i ← arg maxγ∈Γ ¯pi,γ
+20: if maxγ∈Γ ¯pi,γ ≥ ρ then
+21: A ← A ∪ {i}; set γ1 i ← 1
+22: else
+23: set γ1 i ← 0
+24: γi = γ0 i γ1 i
+25: return A, {γi}
+A Implementation Details
+Inputs Across all benchmarks, the LLM receives
+the top-10 retrieved contexts. For NQ, following
+prior work (Liu et al., 2024b), we vary the position
+of the gold context (0, 2, 4, 6, and 9) to assess the
+model’s ability to utilize the full input contexts. We
+report average performance across these positions
+along with standard deviation, as a measure of its
+sensitivity to input ordering.
+Models We use the publicly available LLaMA-3
+model family as the backbone generator,4 employ-
+ing greedy decoding for zero-shot response gen-
+eration to ensure reproducibility, and also study
+4Specifically, we consider 3.2 1B, 3B, 3.1 8B, 70B, and
+405B Instruct models.
+model generalization on Qwen family. Following
+prior works (Yang et al., 2024; Lee et al., 2025a),
+we evaluate performance using accuracy scores ob-
+tained via LLM-as-a-judge.
+SLM finetuning For the DA objective, we fine-
+tune SLMs on the respective training sets of each
+benchmark. Following Lee et al. (2025a), we use
+LoRA (Hu et al., 2022) with rank r = 8 and
+α = 32, dropout rate of 0.1, training for 5 epochs
+with learning rate of 1e-4 and effective batch size
+of 4, with weight decay of 0.01 applied. In addition,
+for the DB objective, the coefficient λ for control-
+ling the contribution of consistency loss was set to
+10, with the noise degree for interpolating contexts
+of 0.5.
+45286

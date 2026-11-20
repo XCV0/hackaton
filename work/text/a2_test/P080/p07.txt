@@ -1,0 +1,78 @@
+Table 2: Main results of T-RAG across three tasks in MultiTableQA. We report average retrieval accuracy and recall
+(@10, 20, 50) on three runs. The best performance is bold and the second-best is underlined.
+Category Methods
+TFV Single-hop TQA Multi-hop TQA
+Accuracy Recall Accuracy Recall Accuracy Recall
+10 20 50 10 20 50 10 20 50 10 20 50 10 20 50 10 20 50
+Table Retrieval
+DTR 21.1 27.8 36.2 36.4 43.0 51.4 35.8 46.5 59.5 46.8 56.3 67.7 38.9 46.4 57.8 44.2 51.5 62.0
+Table-Contriever 23.4 30.1 40.1 40.5 47.8 57.1 39.8 51.7 66.1 52.0 60.6 71.2 43.2 51.5 64.2 49.1 57.2 68.9
+Table-E5 23.4 30.4 40.3 42.2 49.1 58.0 43.5 54.7 69.6 56.5 66.7 78.9 49.6 56.9 69.1 55.0 62.3 72.9
+Table-LLaMA 34.9 44.1 56.1 53.5 59.2 69.5 40.6 52.3 72.0 48.3 61.8 75.4 45.8 49.1 61.8 51.9 55.8 64.3
+RAG RALM 6.4 8.5 10.1 8.2 9.7 12.5 4.3 8.2 13.7 7.5 11.2 14.6 12.1 15.9 18.3 16.3 19.7 21.4 ColBERT 14.9 18.3 22.1 20.8 26.4 31.6 16.8 23.6 36.4 17.3 23.9 36.4 36.9 47.6 58.3 39.3 46.5 61.1
+Table-to-Graph
+Representation
+Single-head (heur) 4.9 7.8 8.9 6.9 10.2 11.4 6.3 10.5 11.5 7.3 9.5 14.0 8.2 9.4 9.8 8.8 11.3 12.6
+Single-head (struc) 14.6 21.9 28.4 27.0 31.3 38.6 21.5 29.5 41.9 24.0 29.5 43.9 26.4 28.9 35.3 29.4 33.7 38.3
+Single-head (sem) 18.0 26.1 34.8 31.6 37.4 45.3 25.7 36.4 50.3 28.6 36.7 52.8 32.5 35.5 43.1 36.3 39.6 46.2
+Lattice 7.7 11.6 13.1 12.3 15.1 17.2 13.3 16.7 23.5 14.5 17.7 24.8 15.2 16.7 20.6 16.3 18.4 21.7
+TaBERT 33.8 45.5 51.6 48.5 57.8 63.9 41.6 52.9 74.4 45.8 56.2 78.9 48.0 52.9 65.6 51.6 58.2 66.9
+TAPAS 35.6 48.5 53.8 51.1 60.3 66.5 44.3 55.7 78.3 48.2 59.0 82.5 50.6 55.8 68.7 54.3 61.2 70.1
+T-RAG 36.1 47.9 59.4 55.9 64.3 75.9 47.3 62.9 83.1 51.5 63.3 86.8 57.2 60.3 72.7 62.5 67.6 76.8
+Table 3: Experimental results on downstream LLMs’ cross-table QA performance using T-RAG. We also report the
+average improvement (Improv.) in downstream performance compared to the strongest corresponding baseline
+methods, Table-E5 and TAPAS. Full experiment results are reported in Appendix D.1.
+Models TFV Single-hop TQA Multi-hop TQA Improv.
+EM@10 EM@20 EM@50 EM@10 F1@10 EM@20 F1@20 EM@50 F1@50 EM@10 F1@10 EM@20 F1@20 EM@50 F1@50 (↑ ∆)
+Phi-3.5-mini 22.3 45.9 44.3 26.2 28.1 27.0 28.5 25.2 26.5 13.9 14.2 15.6 16.7 11.8 12.6 16.9%
+LLaMA-3.2-3B 41.6 48.3 43.7 19.1 19.4 22.8 23.1 23.6 24.1 11.3 14.7 15.9 16.8 13.2 13.7 13.1%
+Qwen-2.5-7B 47.2 53.8 46.4 31.2 35.4 30.8 32.3 36.8 28.1 24.8 27.5 24.2 28.4 30.6 24.8 11.8%
+LLaMA-3.1-8B 48.1 52.7 50.9 33.2 34.1 32.6 33.6 31.2 32.4 24.7 25.6 26.2 26.6 28.8 27.4 11.9%
+LLaMA-3.1-70B 51.2 55.7 62.1 42.8 45.7 44.2 47.1 48.1 50.2 31.4 30.8 32.6 31.5 35.8 36.1 8.2%
+Claude-3.5-Sonnet 53.3 60.6 65.8 49.2 53.7 53.2 55.0 51.9 52.7 44.8 45.3 47.1 47.9 44.1 44.5 9.1%
+GPT-4o-mini 44.8 52.1 57.2 39.4 39.6 38.3 38.7 41.2 44.5 37.4 38.6 34.9 35.8 36.1 37.3 5.2%
+GPT-4o 52.7 63.1 66.5 48.9 52.6 50.4 53.6 52.1 56.6 41.7 42.9 45.3 46.8 49.6 50.9 13.6%
+proposed framework against a diverse set of base-
+lines: (i) Table Retrieval, including DTR (Herzig
+et al., 2021), Table-Contriever (Izacard et al., 2021),
+Table-E5 (Wang et al., 2022b), and Table-LLaMA
+(Zhang et al., 2023a); (ii) RAG, including RALM
+(Ram et al., 2023) and ColBERT (Santhanam et al.,
+2021); (iii) Table-to-Graph Representation, includ-
+ing single feature extraction (Sec 3.1, and tabu-
+lar representation learning models such as TAPAS
+(Herzig et al., 2020) and TaBERT (Yin et al., 2020).
+Additional detailed baseline descriptions are pro-
+vided in Appendix C.1.
+Metrics. For retriever evaluation, we employ
+Acc@k and Recall@k metrics with choices of
+[10, 20, 50]. For downstream LLMs tabular rea-
+soning, we use Exact Match and F1 scores. We
+leave the model settings and additional experimen-
+tal setups in Appendix C.2.
+5.1 Main Results
+Table 2 presents the overall retrieval results for
+T-RAG and the baseline methods. To highlight,
+T-RAG achieves accuracy improvements ranging
+from 1.2% to 11.4% and recall gains from 1.5% to
+12.5% when compared to table retrieval baselines.
+We also observe that traditional RAG-based meth-
+ods perform poorly, indicating that relying solely
+on semantic similarity is insufficient to retrieve
+from tables. Compared with Table-to-Graph Rep-
+resentation baselines, T-RAG consistently yields
+performance gains. For example, T-RAG achieves
+improvements of up to 9.4% in recall@50 on TFV
+and 8.2% in recall@10 on Multi-hop TQA. This
+underscores the importance of our overall graph
+construction and retrieval processes.
+Downstream Performance. In Table 3, we
+present the downstream tabular reasoning perfor-
+mance on MultiTableQA across LLMs with diverse
+types and parameter scales. The results show that
+T-RAG consistently improves cross-table question
+answering performance, yielding an average gain
+of 11.2% compared to the strongest baseline meth-
+ods across all evaluated LLMs. We provide the full
+comparison with other baselines in Appendix D.1.
+38139

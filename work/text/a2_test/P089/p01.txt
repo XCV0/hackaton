@@ -1,0 +1,76 @@
+Findings of the Association for Computational Linguistics: EMNLP 2024, pages 884–901
+November 12-16, 2024 ©2024 Association for Computational Linguistics
+RaFe: Ranking Feedback Improves Query Rewriting for RAG
+Shengyu Mao♠, Yong Jiang♡∗, Boli Chen♡, Xiao Li♢, Peng Wang♠, Xinyu Wang♡,
+Pengjun Xie♡, Fei Huang♡, Huajun Chen♠, Ningyu Zhang♠∗
+♠Zhejiang University ♡Alibaba Group, ♢Nanjing University
+{shengyu,zhangningyu}@zju.edu.cn , yongjiang.jy@alibaba-inc.com
+Abstract
+As Large Language Models (LLMs) and Re-
+trieval Augmentation Generation (RAG) tech-
+niques have evolved, query rewriting has been
+widely incorporated into the RAG system for
+downstream tasks like open-domain QA. Many
+works have attempted to utilize small models
+with reinforcement learning rather than costly
+LLMs to improve query rewriting. However,
+current methods require annotations (e.g., la-
+beled relevant documents or downstream an-
+swers) or predesigned rewards for feedback,
+which lack generalization, and fail to utilize
+signals tailored for query rewriting. In this
+paper, we propose RaFe, a framework for
+training query rewriting models free of anno-
+tations. By leveraging a publicly available
+reranker, RaFe provides feedback aligned well
+with the rewriting objectives. Experimental re-
+sults demonstrate that RaFe can obtain better
+performance than baselines.
+1 Introduction
+Large Language Models (LLMs) have demon-
+strated strong capacities to solve a variety of tasks
+(Zhao et al., 2023). However, they still encounter
+the challenges of hallucinations (Ji et al., 2023;
+Zhang et al., 2023; Huang et al., 2023) or out-
+dated knowledge (Yao et al., 2023; Zhang et al.,
+2024). Recently, Retrieval Augmentation Gen-
+eration (RAG) (Gao et al., 2023) has become
+an important technology to enhance LLMs’ abil-
+ities, by incorporating external knowledge. For
+instance, in open-domain QA, LLMs can first re-
+trieve related documents and then generate an-
+swers. Nonetheless, directly retrieving by original
+query does not always achieve correct and relevant
+documents. Therefore, query rewriting (Efthimi-
+adis, 1996; Carpineto and Romano, 2012) has been
+widely employed to reformulate the query to ex-
+pand the retrieved documents for a better response
+as illustrated in Figure 1.
+∗ Corresponding Author.
+Figure 1: Illustration of query rewriting for RAG. The
+left part indicates the normal RAG pipeline, while the
+right part presents the query rewriting to expand more
+relevant documents for RAG.
+Many efforts have been proposed to leverage the
+powerful LLMs to generate rewrites (Shen et al.,
+2023; Wang et al., 2023) directly. While in practi-
+cal applications, it is more prevalent to implement
+specific small query rewriting models to avoid the
+costly use of LLMs (Ma et al., 2023). To improve
+the performance of query rewriting, reinforcement
+learning (RL) with feedback (Wu et al., 2022; Chen
+et al., 2022) can be utilized as a typical solution.
+For instance, Nogueira and Cho (2017) generates
+feedback by considering the recall of labeled doc-
+uments. Meanwhile, Ma et al. (2023) leverages
+evaluation results from question answering (QA)
+post-rewriting to generate signals. Additionally,
+Peng et al. (2023) employs domain-specific anno-
+tated rewriting scores for feedback training.
+Note that these feedback-driven query rewriting
+methods rely on either annotated labels such as
+relevant documents or answers, or pre-designed re-
+wards tailored to specific domains. However, they
+often lack the utilization of effective and general
+signals for query rewriting. Meanwhile, consider-
+884

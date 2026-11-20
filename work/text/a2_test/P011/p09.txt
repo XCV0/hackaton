@@ -1,0 +1,49 @@
+A PREPRINT
+for querying or filtering. Furthermore, we provide detailed descriptions of each node and relationship label, serving as
+supplementary metadata to inform the model of their semantic roles within the graph.
+By providing the model with the full schema, we ensure that generated Cypher queries are both syntactically correct and
+semantically meaningful, reflecting the true structure of the underlying data. An example Cypher script for extracting
+all node labels and relationship types from the graph is included in the Appendix 8.3 for reference. Figure 2 provides an
+overview of this procedure, illustrating the process from user query to context retrieval. It is important to note that the
+architectures presented above focus solely on the main representation and retrieval components, and do not include the
+final response generation, query processing, rewriting, or decomposition steps. For readers interested in these additional
+stages, an illustrative example is provided in Appendix 8.7.
+4.3 Agentic RAG Pipeline
+In the agentic RAG pipeline, we follow a systematic process to transform structured fund data into a format suitable for
+retrieval-augmented generation. Initially, the JSON fund data is ingested and converted into RDF triplets, as described
+in Section 3.2. Each predicate is then translated into natural language using the approach outlined in Section 3.9.
+Subsequently, each triplet (source, predicate, object) is converted into a natural language sentence using a
+rule-based operation of the form: source predicate_text is object, where predicate_text is the natural
+language version of the predicate. All generated sentences for a fund are concatenated to form a comprehensive body of
+text.
+This aggregated text is then segmented into chunks, and embeddings are computed using the BGE-m3 model. The
+resulting embeddings are stored in a vector database for efficient retrieval. To further enhance retrieval quality, we
+experiment with various chunk sizes and chunk overlap configurations, as well as different reranker models, to determine
+the optimal setup for our use case.
+4.4 Evaluation Metrics
+We evaluate model performance using two key metrics: accuracy and completeness. Accuracy measures whether the
+provided information is correct and free from hallucination. However, accuracy alone is not sufficient, as a response
+may be accurate but incomplete or only partially complete. For example, if a user asks a question that requires three
+reasons and the response includes only two, there is no hallucination, but the answer is incomplete.
+Completeness is a more challenging metric to assess, as it requires either a subject matter expert or a well fine-tuned
+LLM to determine whether all relevant information has been provided. These metrics are highly practical and reflect real-
+world scenarios, offering a true signal of model performance. In contrast, automated metrics such as ROUGE, BLEU,
+or BERTScore [33, 34, 35] do not adequately capture the quality or completeness of responses in retrieval-augmented
+generation tasks.
+5 Results and Discussion
+We first address the limitations of RAG1, which involves converting JSON files into narrative stories using an LLM. As
+described in Section 3.1, the JSON data is highly nested and often very large, making it impractical to fit the entire
+content into an LLM context window. Even when the data is processed in chunks or batches, several critical issues arise:
+1. Incomplete Information: Key details are often omitted by the LLM, resulting in stories with missing or
+incomplete information.
+2. Loss of Context: Context is frequently lost between sections, making it difficult to ensure each attribute is
+correctly linked to its fund.
+3. Hallucination Risk: The LLM may misrepresent data, especially numeric attributes like returns and statistics,
+leading to hallucinated responses.
+4. Scalability and Cost: Processing each JSON file, including validation, takes about five minutes. Converting
+all funds requires roughly four days, which is impractical given frequent data updates.
+Due to these scalability and performance challenges, RAG1 is excluded from further testing and evaluation in this
+study. We conduct experiments on a set of 200 questions, as described in Section 3.12. Of these, 100 questions
+pertain to various search and listing tasks, which are typically the most challenging due to their complex search space.
+Additionally, 45 questions are focused on detail-oriented queries, 45 on comparison tasks, and 10 on other intents.
+9

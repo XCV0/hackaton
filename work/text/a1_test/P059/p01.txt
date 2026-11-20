@@ -1,0 +1,83 @@
+A bismuth silver pnictohalide alternative to
+perovskite in fully-printable triple-mesoscopic
+solar cells†
+Ying Yuan and Neil Robertson *
+Recent Ag3BiI6 solar cells have demonstrated promising eﬃciency, however, most have focused on
+mesoporous n-i-p conﬁguration, using expensive hole transport materials (e.g., P3HT, PTAA and spiro-
+OMeTAD) and a Au counter electrode. To lower the cost and potentially enable larger scale Ag3BiI6 solar
+cells, herein, this study provides the ﬁrst feasibility examination of Ag3BiI6 in fully-printable triple-
+mesoscopic (TiO2/ZrO2/carbon) solar cells (TM-SCs) and explores the eﬀect of pre-treatment with small
+molecules and post-treatment (CuSCN) on the overall Ag3BiI6 TM-SC performance. An Ag3BiI6 solar cell
+with a power conversion eﬃciency (PCE) of 0.38% (Jsc = 1.97 mA cm−2; Voc = 0.49 V; ﬁll factor = 0.39)
+is demonstrated under 1 sun irradiation with two-month dark-storage stability in the ambient
+atmosphere. An improved Voc from 0.43 V to 0.48 V was observed with biPY pre-treatment; a champion
+PCE of 0.74% (Jsc = 2.78 mA cm−2; Voc = 0.56 V; ﬁll factor = 0.48) was achieved with CuSCN post-
+treatment. The results reported here represent a step toward developing all inorganic Bi-based absorbers
+in printable TM-SCs, suggesting that further improvements should be possible with porous surface
+engineering and eﬃcient charge extraction.
+1 Introduction
+With the rapid development of perovskite solar cells (PSCs), the
+path to commercialisation is underway. The current fabrication
+technologies for highly-eﬃcient PSCs, however, require quality
+perovskite layers to achieve outstanding performance, which is
+diﬃcult to satisfy in large-scale manufacturing. Printable triple-
+mesoscopic solar cells (TM-SCs) opened a new chapter of PSCs
+with promising power conversion eﬃciency (PCE) up to 16.53%,
+which meets the scale-up commercialisation requirements,
+such as low cost and easy fabrication.1–3 TM-SCs consist of
+mesoporous TiO2 and ZrO2 layers covered with a porous carbon
+lm. Unlike the conventional PSCs, the TM-SCs can be fabri-
+cated by screen-printing, and the device can be lled with the
+perovskite by drop-casting. However, absorber lling of TM-SCs
+relies on spontaneous precursor diﬀusion and solvent evapo-
+ration, facing the challenge of unpredictable precursor pene-
+tration and crystallisation within pores, potentially introducing
+defects and recombination routes. To enhance the perovskite
+crystal growth and to regulate crystal kinetics, Han's group
+employed stabilisers, such as 5-ammonium valeric acid iodide
+(5-AVAI) and 4-(aminomethyl) benzoic acid iodide (AB),
+improving the device performance from 7.2% to 14.1% and
+15.6%, respectively.1,4 Also, Xu et al. modied the porous surface
+of TM-SCs with a dye molecule, di-tetrabutylammonium cis-
+bis(isothiocyanato)bis(2,2′-bipyridyl-4,4′-dicarboxylato) ruth-
+enium(II) (known as N719), and highlighted the passivation
+eﬀect of N719@TiO2 core–shell additives to suppress MA+
+vacancies and shallow defects. This facilitates charge separa-
+tion, improving Jsc from 21.95 mA cm−2 to 23.58 mA cm−2.5,6 A
+similar approach has also been followed by other researchers
+using post-treatment, such as phenyl-C61-butyric acid methyl
+ester (PCBM) and copper thiocyanate (CuSCN) treatments, on
+perovskite TM-SCs to passivate the grain boundaries of perov-
+skite and ease electron–hole pair separation.7,8
+Despite the high eﬃciency achieved by PSCs, concerns have
+been raised over the stability and toxicity of lead-based perov-
+skites. To address these issues, great interest has grown in Bi-
+based materials due to their non-toxicity and long-lasting
+stability. Silver pnictohalides (Ag–Bi–I) have attracted wide
+attention since 2016.9–11 The controllable ratio of AgI to BiI3
+leads to varying compounds within this family, including
+AgBi2I7, AgBiI4,Ag2BiI5 and Ag3BiI6, which have been exten-
+sively studied as light-absorbing materials.9–15 The silver pnic-
+tohalide family shares similar 3D crystal structures and
+a suitable optical bandgap of 1.79–1.83 eV.10 According to the
+ratio of Ag and Bi, they are classied into two space groups:
+Fd/C223m (AgBi2I7 and AgBiI4) and R/C223m (Ag2BiI5 and Ag3BiI6).16,17
+Among the existing studies on silver pnictohalides, Ag3BiI6
+School of Chemistry and EaStCHEM, University of Edinburgh, King's Building, David
+Brewster Road, Edinburgh, Scotland EH9 3FJ, UK. E-mail: s1779788@ed.ac.uk; neil.
+robertson@ed.ac.uk
+† Electronic supplementary information (ESI) available: EM and EDS images,
+absorption spectra, XPS survey spectra, J–V curve, energy alignment, dark
+storage stability and EIS. See DOI: https://doi.org/10.1039/d2se01324j
+Cite this: Sustainable Energy Fuels,
+2023, 7,1067
+Received 25th September 2022
+Accepted 2nd January 2023
+DOI: 10.1039/d2se01324j
+rsc.li/sustainable-energy
+This journal is © The Royal Society of Chemistry 2023 Sustainable Energy Fuels,2023,7,1067–1076 | 1067
+Sustainable
+Energy & Fuels
+PAPER
+Published on 10 January 2023
+Licensed under CC-BY 4.0

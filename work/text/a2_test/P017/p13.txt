@@ -1,0 +1,103 @@
+cantly worse on our table-heavy finance bench-
+mark, we curated a dedicated training set to ad-
+dress this gap. We leveraged the publicly available
+FinTabNet dataset, a large-scale resource designed
+for financial table recognition and structure extrac-
+tion. FinTabNet consists of pages from annual
+reports of S&P 500 companies, featuring complex
+tables.
+We used the page images from FinTabNet to
+generate queries and answers using our automated
+pipeline, which includes a filtering process. Ad-
+ditionally, we explored using Qwen2-VL-72B for
+generating this training data, with results reported
+in Table S7. This process resulted in approximately
+46k triplets of page images, queries, and answers.
+For fine-tuning, we trained both ColPali and
+ColQwen on our table-focused training data, com-
+bined with the original ColPali training set, for
+one epoch, producing the TabCol models. For
+RobTab models, we incorporated LLaMA-3-70B
+for rephrasing, where half of the newly generated
+training set was randomly rephrased using three dif-
+ferent rephrasing levels. These models were then
+fine-tuned for one epoch, together with the ColPali
+rephrased dataset.
+All fine-tuning procedures followed the same
+configurations as the official ColPali training
+pipeline, utilizing ColBERT in-batch loss. The spe-
+cific configurations for ColPali and ColQwen can
+be found at GitHub. Each model was fine-tuned
+starting from its respective base version: ColPali
+from ColPali-1.2 and ColQwen from ColQwen2-
+1.0. We used a batch size of 64 per GPU, resulting
+in a total effective batch size of 256. The training
+maintained the same initial learning rate, warmup
+steps, learning rate schedule, and LoRA configu-
+ration as the original pipeline. All training runs
+were conducted on four A100 80GB GPUs, with
+each fine-tuning session taking approximately three
+hours to complete.
+A.4 Benchmark Document Examples
+Our benchmarks include a diverse set of pages con-
+taining different types of information, including
+full-text pages, table-heavy pages, and slides with
+both tables and other visual elements. Table S1
+presents the benchmark statistics for the different
+datasets. Additionally, for each page, we provide
+four types of queries: the original VLM-generated
+query and three levels of rephrasing. Examples of
+pages along with all query versions are shown in
+Figs. S1 and S2. In Fig. S3, we present examples
+from previous benchmarks, highlighting that many
+of their queries are not well-suited for RAG, as
+they often reference specific pages (i.e., QA-style
+queries) rather than general information-seeking
+queries.
+A.5 Additional Results and Ablations
+In our main paper, we focused on reporting the
+NDCG@5 metric for a subset of models and bench-
+marks across different rephrasing levels. In Ta-
+bles S2 to S4, we provide the full results for Re-
+call@1, Recall@5, and NDCG@5. Additionally,
+Table S5 presents model performance across dif-
+ferent evidence source types. A Vision-Language
+Model (VLM), Pixtral-12B, was used to classify
+each query based on the type of evidence source
+from which the answer was retrieved on the cor-
+responding page. We analyze performance across
+three different evidence types: Text, Table, and Vi-
+sual. The reported results show NDCG@5 scores
+on the non-rephrased version, averaged across our
+four benchmarks. These results highlight a signifi-
+cant weakness in handling tables. However, after
+fine-tuning on the table-focused dataset, we ob-
+serve improvements across all evidence types, with
+tables showing the most substantial gains.
+We further provide two ablation experiments.
+The first, shown in Table S6, aims to demonstrate
+that the observed improvements after fine-tuning
+with our proposed datasets are due to the tailored
+data rather than fine-tuning itself. To verify this,
+we performed an additional fine-tuning run using
+the same training set as the RobCol models but
+without rephrasing, maintaining the exact number
+of training examples and identical training configu-
+rations.
+As seen in the results, ColPali gains some im-
+provement from fine-tuning alone, but the gains
+are significantly lower compared to fine-tuning
+with our rephrased training set. This gap is
+even more pronounced when evaluating on the
+rephrased benchmark (Level 3). For ColQwen,
+the baseline fine-tuning without rephrasing leads
+to a decrease in performance, whereas our fine-
+tuned models show substantial improvements on
+rephrased queries, as expected when training with
+our rephrased dataset.
+The second ablation (see Table S7) aims to show
+that the improvements from the table-heavy train-
+ing set are general and not specific to the Vision-
+Language Model (VLM) used for question gen-
+eration. To test this, we generated an alternative
+31672

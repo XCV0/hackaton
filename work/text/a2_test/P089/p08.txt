@@ -1,0 +1,99 @@
+distinguishing between rewrites that can retrieve
+high-quality documents and those that cannot. We
+also provide some examples in Appendix A.4.2.
+5.3 How Many Rewrites is Optimal for RAG?
+In this section, we delve deeper into the impact that
+varying numbers of rewrites have on the final per-
+formance, since in practical applications of query
+rewriting, a balance must be struck between the
+quantity of generated rewrites and performance ef-
+ficiency, given that generating more rewrites could
+potentially result in more response time. We gen-
+erate different numbers of rewrites, the results are
+depicted in Figure 5. The QA results peak when
+there are 4-5 rewrites, suggesting that employing
+more rewrites can yield considerable benefits by
+retrieving more relevant top documents. However,
+Prec@5 nearly approaches the best around 2-3
+rewrites. When ranking all passages, the perfor-
+mance ceiling is attained with merely 2 rewrites.
+Considering the time cost, 2-3 rewrites may benefit
+the most for practical RAG.
+Meanwhile, it can be observed that there’s a drop
+when increasing the rewrites from 4 to 5, we pro-
+vide further analysis in Appendix A.4.5.
+6 Related Work
+6.1 Query Rewriting
+Query rewriting is a critical technique within the
+retrieval domain (Carpineto and Romano, 2012;
+Zhu et al., 2023). With the groundbreaking ad-
+vancements in scaling-up model capabilities, query
+rewriting has also played a pivotal role in enhanc-
+ing the abilities of LLMs in RAG (Khattab et al.,
+2022; Press et al., 2023; Yan et al., 2024). Many
+works (Wang et al., 2023; Shen et al., 2023; Ye
+et al., 2023) directly leverage LLMs’ strong capa-
+bilities to expand or rewrite queries. Nonetheless,
+in practical application scenarios, a smaller rewrit-
+ing model is preferred to avoid the costly requests
+for LLMs. At the same time, feedback training is
+the most commonly employed method to enhance
+the smaller rewriting models. Nogueira and Cho
+(2017) incorporates the ranking signals from anno-
+tated passages for better results, as well as previous
+works on conversational query rewrite (Wu et al.,
+2022; Mo et al., 2023; Chen et al., 2022). Ma et al.
+(2023) first generates answers from LLMs and then
+uses the QA evaluation results as the training sig-
+nals. Peng et al. (2023) leverages search scoring
+functions intrinsic to the e-commerce framework to
+assess rewrite quality, informing feedback signals,
+which is exceedingly domain-specific, limiting its
+applicability to other domains.
+These works depend on using particularly de-
+signed scores or annotated labels for feedback sig-
+nals, while our proposed method can generically
+deliver feedback based on ranking results, without
+needing annotated passages.
+6.2 Learning From Feedback
+Recent advancements in Reinforcement Learning
+from Human Feedback (RLHF) (Ouyang et al.,
+2022) have been instrumental in aligning the gen-
+erative capabilities of large models with human
+preferences, significantly prompting the creation of
+strong LLMs (OpenAI, 2023). Therefore, a large
+number of studies about feedback alignment have
+been emerging (Zheng et al., 2023; Wang et al.,
+2024; Rafailov et al., 2023; Yuan et al., 2023; Dong
+et al., 2023; Kawin et al., 2023). Some research
+efforts are concentrated on devising methods to pro-
+vide new forms of feedback (Lee et al., 2023; Shinn
+et al., 2023; Madaan et al., 2023; Pang et al., 2023;
+Liu et al., 2023a; Akyürek et al., 2023; Nathani
+et al., 2023). Xu et al. (2023) propose to train
+models from judgment language feedback. Li et al.
+(2023) designs two types of ranking feedback draw-
+ing from LLMs, to improve the performance.
+Despite all these works, the exploration of feed-
+back in rewriting is currently limited to direct feed-
+back from LLMs (Ma et al., 2023) and domain-
+specific scoring (Peng et al., 2023). Such feedback
+approaches are costly and fail to utilize the effec-
+tive signals from the IR system. While Le et al.
+(2022) and Liu et al. (2023b) effectively leverage
+the feedback from Unit Test in the domain of code
+generation, we investigate more appropriate feed-
+back signals for query rewriting in this paper, the
+reranker feedback.
+7 Conclusion and Future Work
+This paper proposes a novel feedback training
+framework named RaFe for query rewriting, based
+on the effectiveness of the reranker in enhancing
+document ranking during the information retrieval
+process. By leveraging the feedback signals from
+reranker, RaFe is capable of effectively and gener-
+ally conducting feedback training for rewrite mod-
+els, yielding great improvements. Experimental re-
+sults indicate that our method achieves exemplary
+performance across cross-linguistic datasets. In the
+891

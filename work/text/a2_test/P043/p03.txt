@@ -1,0 +1,48 @@
+2 Related Works
+Text Chunking in RAG. As a critical prerequisite for RAG, text chunking profoundly influences the ultimate
+performance of the system. Mainstream RAG systems and development libraries (such as LlamaIndex and
+LangChain) commonly adopt traditional chunking strategies, which includes fixed-size chunking, recursive
+chunking, or segmentation based on grammatical boundaries like sentences and paragraphs [8, 9, 11, 16]. These
+methods are inherently context-independent and completely overlook the deep-seated semantic coherence
+and logical structure of the content. To overcome the aforementioned drawbacks, the research community
+has begun exploring semantic chunking approaches, such as merging text based on the similarity of sentence
+embedding vectors [28] or decomposing text into atomic factual units like propositions [2]. Although these
+methods outperform traditional strategies in preserving local semantics, they generally follow a bottom-up
+construction logic. They focus on the relationships between adjacent text units but lack a macroscopic
+understanding of the document’s overall architecture. Consequently, even though they can generate locally
+coherent segments, when these segments are combined, they may still deviate from the document’s overall
+theme or chapter logic, resulting in logically incomplete or biased knowledge chunks. Even attempts to use
+LLMs for iterative segmentation still essentially seek breakpoints locally, failing to fundamentally solve this
+issue while incurring substantial computational costs [7].
+Memory of RAG. To overcome the limitations of LLMs’ finite context windows and endow them with
+capabilities for continuous learning and long-term interaction, constructing memory systems has emerged
+as a pivotal research direction in the development of RAG. However, through a systematic examination of
+existing memory frameworks, we find that the current research focus significantly leans towards managing
+short-term and long-term memory in dialogue scenarios. Represented by systems such as Mem0 [4], LangMem
+1, MemoryScope [13], and MemoBase 2, considerable complexity has been developed in conversational memory
+management, exemplified by Mem0’s four-stage memory updating and conflict detection, MemoryScope’s
+importance scoring and temporal decay mechanisms, and graph-structured reasoning in Mem0g [4]. In
+contrast, memory construction for documents remains at a relatively nascent stage, with relatively simplistic
+processing approaches. MemGPT [18] employs a paging mechanism to process information segment by
+segment, while Zep 3 constructs a document collection for vector-based retrieval, which essentially still adheres
+to the traditional RAG paradigm of chunking first and understanding later, rather than constructing a holistic,
+structured memory for documents. Even MemoRAG [19], which focuses on documents, primarily relies on
+pointers to navigate and associate between pre-segmented text fragments. This emphasis on conversations
+over documents reveals a research gap: the lack of an advanced mechanism for proactively constructing
+structured, semantically coherent memories for documents within the field. Our proposed scenario-aware
+document memory extraction framework can serve as a text processing module for these systems, facilitating
+the development of the entire field.
+3 MoM Framework
+3.1 Document Memory
+The core objective of the MoM framework is to simulate the process by which domain experts deeply read and
+digest documents, transforming unstructured raw text D into a structured, multi-level, and easily retrievable
+knowledge, which we refer to as document memory, denoted as Mdoc. The entire framework can be viewed as
+a process of learning a mapping function fMoM : D → Mdoc, which encompasses three key stages: memory
+extraction, CoM construction, and model training.
+3.1.1 Task Definition
+Document memory is not merely a simple segmentation of the original text but rather a structured knowledge
+system that has undergone deep understanding, refinement, and reconstruction. Its core characteristics are
+1https://github.com/langchain-ai/langmem
+2https://github.com/memodb-io/memobase
+3https://github.com/getzep/zep
+3

@@ -1,0 +1,103 @@
+Shijie Wu, Ozan Irsoy, Steven Lu, Vadim Dabravolski,
+Mark Dredze, Sarthak Soral, Subhabrata Mukherjee,
+Gricha Loudon, Jianwen Wu, Dan Simonson, Zhang-
+Xun Wu, Hangyu Pan, Lianhui Qin, Jin Ma, Yichu
+Zhou, Yangsheng Pang, Yikun Gong, Beibei Shi,
+Ruirui Li, and 8 others. 2023. Bloomberggpt: A
+large language model for finance. arXiv preprint
+arXiv:2303.17564.
+Zequn Xie, Haoming Ji, Chengxuan Li, and Lingwei
+Meng. 2025a. Dynamic uncertainty learning with
+noisy correspondence for text-based person search.
+arXiv preprint arXiv:2505.06566.
+Zequn Xie, Chuxin Wang, Yeqiang Wang, Sihang Cai,
+Shulei Wang, and Tao Jin. 2025b. Chat-driven text
+generation and interaction for person retrieval. In
+Proceedings of the 2025 Conference on Empirical
+Methods in Natural Language Processing, pages
+5259–5270.
+Zequn Xie, Boyun Zhang, Yuxiao Lin, and Tao Jin.
+2026. Delving deeper: Hierarchical visual per-
+ception for robust video-text retrieval. Preprint,
+arXiv:2601.12768.
+K. Xu, R. Zhang, Y. Wang, and J. Chen. 2025. A-mem:
+Agentic memory for large language model agents.
+arXiv preprint arXiv:2502.12110.
+Weizhi Xu, Junfei Wu, Qiang Liu, Shu Wu, and Liang
+Wang. 2022. Evidence-aware fake news detection
+with graph neural networks. In Proceedings of the
+ACM Web Conference 2022 (TheWebConf 2022),
+pages 2501–2510.
+Manzil Zaheer, Guru Guruganesh, Avinava Dubey,
+Joshua Ainslie, Chris Alberti, and et al. 2020. Big-
+bird: Transformers for longer sequences. In Ad-
+vances in Neural Information Processing Systems
+33.
+Guixian Zhang, Guan Yuan, Debo Cheng, Lin Liu, Jiuy-
+ong Li, and Shichao Zhang. 2025. Mitigating propen-
+sity bias of large language models for recommender
+systems. ACM Transactions on Information Systems,
+43(6):1–26.
+Jintian Zhang, Xin Xu, Ningyu Zhang, Ruibo Liu,
+Bryan Hooi, and Shumin Deng. 2024. Exploring
+collaboration mechanisms for LLM agents: A social
+psychology view. In Proceedings of the 62nd An-
+nual Meeting of the Association for Computational
+Linguistics (ACL 2024), pages 14544–14607.
+Xuan Zhang and Wei Gao. 2023. Towards llm-based
+fact verification on news claims with a hierarchi-
+cal step-by-step prompting method. arXiv preprint
+arXiv:2310.00305.
+Zhejun Zhao, Yuehu Dong, Alley Liu, Lixue Zheng,
+Pingsheng Liu, Dongdong Shen, Long Xia, Jiashu
+Zhao, and Dawei Yin. 2025. Tura: Tool-augmented
+unified retrieval agent for ai search. arXiv preprint
+arXiv:2508.04604.
+Shinn Zhou, Kai Zhang, Andrey Kurenkov, Ling
+Fan, Kevin Zhou, Yilun Lu, and Stefano Ermon.
+2023. Graph-of-thought: Solving elaborate prob-
+lems with large language models. arXiv preprint
+arXiv:2305.10601.
+Jingyuan Zhu, Anbang Chen, Bowen Wang, Sining
+Huang, Yukun Song, and Yixiao Kang. 2026. Com-
+paring neural architectures for english-spanish ma-
+chine translation: From lstm to transformer.
+Y. Zhu, X. Liu, and ORL. Sheng. 2025. Post-earnings-
+announcement drift prediction: Leveraging postevent
+investor responses with multitask learning. Informa-
+tion Systems Research.
+A Results after model’s knowledge cut-off
+To provide a more robust evaluation that completely
+mitigates LLM lookahead bias, we repeat the ex-
+periments after gpt-4o-mini’s knowledge cut-off
+(August 2023–December 2024, 2259 transcripts).
+Results are reported separately for macro-F1 (ta-
+ble 5) and MCC (table 6).
+Table 5: Panel A1 – Macro-F1 (%) after GPT-4o-mini
+knowledge cut-off (August 2023–December 2024, 2259
+transcripts).
+Method +1bd +3bd +7bd +15bd +30bd
+LM 40.5 39.8 39.5 40.5 39.7
+3.5-turbo 34.2 31.8 30.8 32.7 31.7
+WideCtx 60.4 59.7 58.7 59.1 57.5
+FinBERT 58.9 58.5 58.2 58.3 58.1
+HierFinBERT 59.7 59.3 58.9 59.0 58.7
+Ours 63.6 63.1 62.4 61.6 60.9
+Improv. (%) +5.3 +5.7 +5.9 +4.2 +3.7
+Table 6: Panel A2 – MCC (%) after GPT-4o-mini knowl-
+edge cut-off (August 2023–December 2024, 2259 tran-
+scripts).
+Method +1bd +3bd +7bd +15bd +30bd
+LM 9.7 8.5 7.8 8.7 5.4
+3.5-turbo 8.5 7.0 6.4 6.4 5.2
+WideCtx 27.5 25.9 20.0 20.3 17.5
+FinBERT 22.5 22.0 21.5 21.7 20.9
+HierFinBERT 23.6 23.0 22.6 22.8 21.9
+Ours 28.6 27.7 26.4 24.0 22.6
+Improv. (%) +4.0 +6.9 +16.8 +5.3 +3.2
+The results after the gpt-4o-mini knowledge
+cut-off confirm that our framework’s improvements
+are not an artifact of latent hindsight information.
+Across both Macro-F1 (table 5) and MCC (table 6),
+our method consistently outperforms all baselines
+3066

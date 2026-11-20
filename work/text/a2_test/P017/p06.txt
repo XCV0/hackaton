@@ -1,0 +1,99 @@
+simplicity, our final benchmark retains queries
+whose only the originally assigned page is veri-
+fied to contain the correct answer. This results in
+a high-quality dataset of triplets: a page image, a
+query, and its corresponding answer. Note that our
+benchmark includes pages without corresponding
+queries. These are pages whose queries were fil-
+tered out at some stage, either because they were
+not suitable for RAG-style questions in general
+(e.g., title pages) or because the specific generated
+queries were not suitable for RAG.
+4 Benchmarks Quality Evaluation
+A high-quality benchmark for multi-modal retrieval
+is essential, yet few existing benchmarks are de-
+signed for this purpose, and none comprehensively
+define or implement the necessary properties. Ta-
+ble 1 compares our benchmark with other promi-
+nent ones, which suffer from limitations such as
+poor alignment with real-world queries, high false-
+negative rates, and trivial difficulty.
+Accurate Labeling. Many perceived retrieval er-
+rors in existing benchmarks are actually false neg-
+atives, meaning pages that correctly answer the
+query but were mislabeled as irrelevant. To miti-
+gate this, we introduce a false-negative verification
+process that exhaustively labels all valid pages. Hu-
+man Evaluation. We sampled 50 top-1 retrieval
+errors of ColQwen on Vidore, MMlongbench, and
+our benchmark. Annotators reviewed the query and
+retrieved page (labeled as negative) to determine if
+it could answer the query (Fig. S8). A total of 234
+responses from 5 annotators were collected.
+Vidore MMLong Ours
+False Negative (%) ↓ 86.9 77.8 31.9
+The table shows that Vidore and MMlongbench had
+a high rate of false negatives, whereas our bench-
+mark, despite its challenging design with similar
+sub-domain pages, had significantly fewer, proving
+the effectiveness of accurate labeling.
+Enhanced Difficulty. A strong benchmark must
+pose real challenges. Existing ones fall short by
+offering too few relevant candidates or allowing
+retrieval via simple keyword matching rather than
+true semantic understanding. For example, having
+1,000 financial pages from different companies is
+insufficient, as knowing the company name nar-
+rows the candidates to a few dozen. The ColQwen
+model achieves an NDCG@5 of around 90 on Vi-
+dore. Other sub-datasets, although reporting lower
+performance, contain many errors that are actu-
+ally false negatives, as demonstrated by our hu-
+man evaluation presented above. We address this
+issue through accurate labeling and by incorpo-
+rating long documents and extensive sub-domain
+coverage. This provides many similar pages, mak-
+ing retrieval more challenging and better reflecting
+real-world scenarios. Moreover, we prevent triv-
+ial keyword-based retrieval by introducing the first
+rephrasing benchmark for multi-modal document
+RAG, ensuring robustness to query variations and
+promoting semantic learning.
+Realistic-RAG Queries. To reflect real RAG use
+cases, queries must resemble natural information-
+seeking questions. Our benchmark ensures this
+through a two-step RAG-tailored pipeline: gener-
+ation and filtering. Human Evaluation. We ran-
+domly sampled 500 queries from Vidore, MMLong-
+Bench, and our benchmark. Annotators, unaware
+of the source benchmark or study goal, evaluated
+whether each query could reasonably be asked by a
+real user (Fig. S7). A total of 2578 responses were
+collected from 10 annotators.
+Vidore MMLong Ours
+Realistic-RAG Queries (%) ↑ 32.9 35.8 88.0
+The table shows that most Vidore/MMLongBench
+queries were labeled as unrealistic RAG queries
+(see some examples in Fig. S3), whereas 85% of
+ours were validated as realistic, highlighting short-
+comings in existing benchmarks and the effective-
+ness of our query generation and filtering process.
+Summary. Our benchmark enhances multi-
+modal retrieval evaluation by introducing non-
+trivial difficulty with long documents and broad
+sub-domain coverage. It ensures RAG-aligned
+queries and promotes semantic retrieval over key-
+word matching through query rephrasing, address-
+ing key limitations of existing benchmarks.
+5 Model Evaluation & Enhancement
+Evaluation Models and Metrics. We evaluate
+multiple models on our benchmark, covering both
+text and vision-based approaches. We use the Col-
+Pali benchmark code (ViDoRe) to assess our text-
+based models and the vision-based models ColPali
+and ColQwen. For the text-based methods, we fol-
+low the framework suggested in ColPali, which
+employs Unstructured in a high-resolution config-
+uration with OCR engine to parse PDFs. For each
+document, Unstructured produces text chunks and
+31665

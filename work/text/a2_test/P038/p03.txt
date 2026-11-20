@@ -1,0 +1,97 @@
+Next, after constructing the TF-IDF vectors of all documents
+and queries, we can use cosine similarity to measure the degree
+of relevance between them. Given two vectors A and B, the
+cosine similarity between them is defined as:
+Among them, the dot product A*B reflects the product of the
+projection lengths in the two vector directions, and the
+denominator is the Euclidean norm of each vector. This method
+can effectively capture the angular relationship between two
+sets of data in high-dimensional space and is suitable for
+processing sparse and large-scale data sets.
+However, relying solely on the similarity of text content may
+not be enough to fully reflect the relevance between documents
+and queries. To this end, we introduced the ES scoring function,
+which is a ranking algorithm widely used in the field of
+information retrieval. It aims to further optimize the quality of
+search results by combining factors such as word frequency
+statistics and document length. For each word w in a query q
+and the number of times it appears in document d f(q, w, d), the
+ES score can be expressed as:
+Among them, parameter k1 is used to adjust the influence of
+word frequency, and K is a factor adjusted based on document
+length. The specific form is:
+This controls the weight of the document length on the final
+score, and
+ represents the average document length. In
+order to further improve the retrieval efficiency and ensure that
+the selected document set has a certain diversity, we also adopt
+the Top-K nearest neighbor search strategy. That is, the top K
+documents with the highest similarity to the query are selected
+from all candidate documents as output. Assuming that the
+similarity score
+ of each document relative
+to the query has been obtained, the final document list L can be
+determined in the following way:
+This step not only ensures the relevance of the returned
+results, but also promotes the fusion of information between
+different topics, which helps LLM generate more diverse
+answers in the subsequent stage.
+Finally, in practical applications, considering the differences
+in user preferences or business needs, it is sometimes necessary
+to make appropriate adjustments to the above basic process.
+For example, the importance of each evaluation indicator can
+be balanced by introducing custom weights
+to form a comprehensive scoring
+system. Let
+ represent the new score of document i after
+weighted processing, then:
+Here,
+ represents the jth evaluation criterion, such
+as the cosine similarity or BM25 score mentioned above. In
+this way, a retrieval algorithm that better meets actual needs
+can be flexibly customized according to specific circumstances
+to achieve the best application effect.
+IV. EXPERIMENT
+A. Datasets
+In order to verify the effectiveness and superiority of
+integrating Elasticsearch (ES) as a retrieval component into
+the Retrieval Augmentation Generation (RAG) framework, we
+selected the Stanford Question Answering Dataset (SQuAD).
+SQuAD is a widely used English question-answering dataset
+created by the Natural Language Processing Group at Stanford
+University. The dataset contains a large number of paragraphs
+extracted from Wikipedia and corresponding question-answer
+pairs, which aims to evaluate the ability of the model to
+understanding text and answer questions. SQuAD version 2.0
+not only contains more than 100,000 question-answer pairs,
+but also introduces unanswerable questions to test the ability
+of the model to identify unanswered situations. This dataset is
+widely used to evaluate the performance of reading
+comprehension and question-answering systems due to its
+high-quality annotations and diversity.
+Our experiments used the SQuAD version 2.0 dataset,
+which includes about 536 articles carefully selected from
+Wikipedia, covering multiple subject areas. Each article is
+accompanied by a series of questions asked by human
+annotators and the corresponding answers. When preparing the
+data, we first preprocessed all the texts, including removing
+HTML tags, unifying capitalization, and deleting stop words,
+to improve the quality of subsequent analysis. Then, using the
+powerful indexing capabilities of Elasticsearch, we imported
+the entire dataset into the ES cluster and configured
+appropriate word segmenters and mapping rules as needed to
+optimize search performance. In addition, considering the
+various query types that may be encountered in practical
+applications, we also specially designed a set of benchmark
+question sets, which cover common knowledge questions and
+answers, professional terminology explanations, and long-tail
+information search, etc., in order to comprehensively evaluate
+the performance of the proposed method in different scenarios.
+By comparing the differences between the traditional RAG
+architecture and the improved model after the introduction of
+ES in terms of response quality, retrieval speed, etc., we hope
+to provide a valuable reference for future related research and
+technology development.
+B. Experiment
+In order to comprehensively evaluate the effect of
+integrating Elasticsearch (ES) into the Retrieval Augmentation

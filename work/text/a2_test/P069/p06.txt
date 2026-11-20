@@ -1,0 +1,80 @@
+Algorithm 1 GRAD: Turning RAG Objectives to Token-level Decoding Objectives
+Require: Input x, Base LLM θ, SLM θs, Domain-specific Training Set D
+Ensure: Guided output y
+1: θs ft ← Finetuned SLM on D
+2: θs db ← Finetuned SLM on D with consistency objective for debiasing
+3: t ← 1
+4: while y does not meet stopping criteria do
+5: fbase ← f (x, y<t; θ) ▷ Logits from the base LLM
+6: fs ← f (x, y<t; θs) ▷ Logits from the base SLM
+7: fft ← f (x, y<t; θs ft) ▷ Logits from the finetuned SLM
+8: fdb ← f (x, y<t; θs db) ▷ Logits from the finetuned SLM with consistency-aware training
+9: ft ← fbase + γMS · (fbase − fs)/bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+MS objective
++γDA · (fft − fs)/bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+DA objective
++γDB · (fdb − fft)/bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+DB objective
+▷ Eq. 9
+10: yt ← Sample from softmax(ft)
+11: t ← t + 1
+12: return y
+Model size HQA MARCO NQ
+1B 39.66 25.12 32.12±5.53
+8B 70.94 46.31 70.20±1.34
++ MS 73.89 48.77 67.69±2.45
+% Gain 4.2% 5.3% -3.6%
+405B 84.98 52.46 76.45 ±3.31
+% Gain 19.8% 13.3% 8.9%
+Table 1: Impact of model scaling: In the LLaMA 3
+model family, we compare the smallest model 1B and
+the largest model 405B with our main target model, 8B.
+provide more details in Appendix A.
+4.2 Experimental Results
+In this section, we aim to answer the following
+research questions:
+• (RQ1) Do decoding objectives implemented
+with smaller models align with RAG strate-
+gies?
+• (RQ2) Does GRAD realize effective task-
+adaptive combination of objectives?
+• (RQ3) Does GRAD generalize to private,
+domain-specific RAG scenarios?
+• (RQ4) Does GRAD achieve a better cost-
+performance trade-off?
+4.2.1 Alignment of Decoding and RAG
+Objectives
+Before evaluating the combined effect of RAG ob-
+jectives, we first verify whether each token-level
+Activation Benchmark
+MS DA DB HQA MARCO NQ
+70.94 46.31 70.20±1.34
+✓ 70.44 49.75 70.59±0.41
+✓ 78.08 50.49 66.55±0.64
+✓ ✓ 79.56 49.51 68.67±0.56
+✓ 73.89 48.77 67.69±2.45
+✓ ✓ ✓ 81.03 49.75 64.98±0.75
+Table 2: Task-level adaptation of GRAD on different
+benchmarks, with LLaMA 3.1 8B as the base LLM. The
+combination of objectives determined by GRAD’s task-
+wise adaptation is underlined, while the best results are
+boldfaced.
+decoding objective in GRAD aligns with its cor-
+responding RAG goal, MS, DA, or DB. Each in-
+dividual objective here can serve as a baseline for
+comparison against GRAD.
+MS Table 1 shows that larger models consistently
+improve accuracy and CD aligns with MS, though
+its effectiveness varies by task. While CD enhances
+HQA and MARCO (by 4.2% and 5.3%), it hurts
+accuracy on NQ, likely due to diminishing returns
+from actual scaling. NQ exhibits a small accuracy
+gap (8.9%) between 8B and 405B models, whereas
+HQA’s is much larger (19.8%). CD’s diminishing
+returns align with those of scaling.
+DA Next, Table 2 shows that domain-specific
+finetuning is helpful on HQA and MARCO, where
+well-aligned training data D is provided in the
+dataset. Not surprisingly, DA is not effective
+for NQ and PQ with no such data, an out-of-
+45279

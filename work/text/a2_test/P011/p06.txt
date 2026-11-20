@@ -1,0 +1,49 @@
+A PREPRINT
+A significant portion of the design process is dedicated to defining an effective schema—determining which entities
+should be represented as nodes, refer to 3.1, which relationships should connect these nodes, and which attributes
+are best modeled as properties. The schema must be carefully crafted to maximize the utility of multihop traversal, a
+key feature leveraged during inference and query answering. For example, fund entities are modeled as nodes with
+the Fund label, while attributes such as product type and fund type are represented as separate nodes (ProductType,
+FundType) and connected to the fund node via explicit relationships (e.g., HAS_PRODUCT_TYPE, HAS_FUND_TYPE).
+Other attributes, such as originalName and inceptionDate, are stored as properties on the fund node.
+To emphasize the importance of intelligent graph representation, it is noteworthy that our LPG contains approximately
+79 unique labels, 57 distinct relationship types, an average of more than 6 properties per label, and over 34,500 nodes.
+This level of complexity highlights the critical need for careful schema design to ensure efficient storage, retrieval, and
+scalability in large-scale graph-based systems.
+This design enables efficient and flexible graph traversals, allowing queries to exploit the rich connectivity of the data for
+advanced reasoning and retrieval. An illustrative example of storing a sample JSON object as LPG using openCypher is
+provided in the Appendix 8.2 for reference.
+3.7 Fund Metadata
+We will generate fund metadata based on the original fund data, which consists of information such as fund share classes,
+fund abbreviation and original name, CUSIP, and product type (e.g., American fund/mutual fund, ETF, PPS/Interval
+fund, etc.). This metadata is particularly useful in the text2cypher section, as well as for node selection in the RDF
+pipeline.
+3.8 Clustering the Predicate
+Given that, as established in Section 3.2, our dataset contains over 8,000 unique relationships and more than 650,000
+unique triplets, and considering that user queries may span multiple categories, intents, and topics, it is essential
+to categorize relationships based on their semantic similarity. Such categorization streamlines the retrieval process,
+enabling faster identification of relevant relationships and potentially reducing the number of triplets required to generate
+a response.
+There are two principal approaches to relationship categorization:
+1. Unsupervised Clustering: In this approach, we compute embeddings for each relationship and apply
+clustering algorithms, such as K-means or hierarchical clustering, to group similar relationships together.
+2. Supervised Classification: Here, categories are defined in advance based on domain knowledge and com-
+prehensive coverage of key aspects in the data (e.g., fund objectives, metrics, returns). A labeled training
+dataset is created using a powerful LLM, such as OpenAI GPT-4.1 (the model used in this study), and a model
+like DeBERTa-v3-large [31, 32] is fine-tuned to perform large-scale classification. This method significantly
+reduces inference cost and increases processing speed. An example how this is done is place in appendix 8.4.
+3.9 Predicate to Text Generation
+To enhance interpretability and facilitate downstream retrieval, we convert each predicate into natural language.
+Predicates in our dataset often contain dot (.) notation to denote hierarchical layers, making it essential to accurately
+reflect this structure in the generated text. Our approach parallels the supervised classification strategy outlined in
+Section 3.8, with the key distinction that we employ the BART Large model instead of DeBERTa-v3. The BART Large
+model is fine-tuned to translate predicates into natural language descriptions that capture all relevant details and context.
+For each predicate, along with its corresponding source and object, we apply deterministic rules to generate clear
+and comprehensive English sentences. These sentences are then combined, chunked, and embedded for use in the
+RAG pipeline, a process we refer to as RAG2. An illustrative example of predicate-to-natural-language conversion is
+provided in the Appendix 8.5.
+3.10 Query Assignment by Intent
+In this section, we describe the categorization of user queries according to business requirements and the nature of the
+desired response. Queries are divided into four primary intent categories, each reflecting a distinct mode of information
+retrieval and level of detail:
+6

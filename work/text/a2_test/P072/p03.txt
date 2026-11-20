@@ -1,0 +1,107 @@
+Face4RAG: Factual Consistency Evaluation for Retrieval Augmented Generation in Chinese KDD ’24, August 25–29, 2024, Barcelona, Spain
+0% 20% 40% 60% 80% 100%
+Real-world
+Synthetic
+KCont. KInve. KConf. KConc. LOver. LCaus.
+LConf. LIncl. LOthe. Other Errors Hallu.
+Figure 2: Error type distribution of factually inconsistent
+samples in the two datasets of our Face4RAG benchmark.
+2 RELATED WORK
+Traditional FCE Methods. Evaluating the factuality of model
+generated results is widely studied across various language model
+generation domains like text summarization [15], dialogue sum-
+mary [47] and question-answering [4]. When the golden labels
+are given, prior methods using exact match metrics [8, 19, 27] or
+similarity-based metrics are proposed [7, 46]. However, high qual-
+ity answers can vary a lot, hence these approaches using golden
+labels may significantly underestimate the models’ performances,
+especially for long answers [42].
+FCE for Long-form Answers. To effectively evaluate factual-
+ity of long answers, recent FCE research mostly take a two step
+approaches [23, 26], where in the first step, the long-form answer
+is decomposed into shorter segments, such as sentences [24, 26],
+sub-claims [10, 23], individual facts [31] and structured triplets [18].
+Then the second step evaluates the verifiability of each segment
+with respect to the given reference text [25, 26, 45], which can be
+efficiently done by modern general purpose LLM [9, 31], e.g., GPT-4.
+Although we follow the two-step approach, our method differs from
+them in the ability of leveraging logical connections via special
+designs of logic-preserving decomposition and fact-logic FCE.
+FCE Benchmarks. Prior benchmarks for FCE mostly focus
+on specialized tasks like summarization [13, 24, 39]. For FCE in
+RAG, existing benchmarks are derived from specific LLMs, such as
+Refchecker [18] and FELM [9], which are constrained by the error
+type distribution of the underlying LLMs. Unlike these benchmarks,
+we construct a synthetic dataset based on our error typology, which
+enables evaluation independent to any underlying LLM.
+3 FACE4RAG BENCHMARK
+Recall that existing FCE benchmarks only use answers generated
+by some certain LLMs, which may fail to evaluate FCE methods on
+other LLMs with different error distributions or unseen error types.
+To remedy this issue, in this section, we propose a novel approach
+to construct a FCE benchmark for RAG, which is independent of
+the underlying LLMs and called FActual Consistency Evaluation for
+RAG (Face4RAG). Face4RAG contains an error-type-oriented syn-
+thetic dataset and a real-world dataset. To construct the synthetic
+dataset, inspired by the error typology used in an exam designed for
+humans, i.e. the National College Entrance Examination of China,
+we first propose a novel error typology to classify any factual con-
+sistency error in RAG task, which includes nine types of errors
+belonging to three main categories. Based on the proposed error
+typology, we then construct a synthetic dataset to evaluate FCE
+methods on each type of the error. Besides the synthetic dataset,
+we also collect samples from six commonly used LLMs to construct
+a real-world benchmark, which aims to evaluate the overall factual
+consistency of FCE methods in real-world scenarios. The details
+about Face4RAG can be seen in Table 1 and Figure 2.
+Table 1: Statistics of the synthetic and real-world datasets in
+the Face4RAG benchmark. For each dataset, the answer-level
+and segment-level statistics on the number of samples, the
+average sample length in terms of characters and the rate of
+positive samples are reported.
+Statistics Synthetic Dataset Real-world Dataset Answer Segment Answer Segment
+Num. Samples 1299 6737 1200 6143
+Avg. Length 289.3 45.4 307.7 45.2
+Positive Rate 30.3% 55.8% 63.3% 85.6%
+3.1 Error Typology in FCE
+Our error typology for FCE is inspired by the questions in the
+National College Entrance Examination of China [1], which are
+carefully designed to test the ability of human to evaluate factual
+consistency. In this examination, reading comprehension is a major
+section to evaluate the participants’ skill of understanding a Chi-
+nese text. Factual consistency evaluation is a typical task in this
+section. Given the text, the participants are required to evaluate the
+correctness of several answers to a specific question [1], which is
+essentially a RAG task (see examples in Table 11 in the appendix).
+As these questions are designed for a competitive entrance exami-
+nation of higher education institutions at the undergraduate level,
+they are generally hard to answer and cover a wide range of factual
+inconsistency error types. Accordingly, we develop a novel error
+typology for RAG, which comprises three main categories and is
+further classified into nine error types. In the following, we give a
+detailed description of our proposed error typology.
+Hallucination Error This class of error refers to the situation
+when the answer contains information that cannot be traced back
+to the reference [30]. Note that there are two main usages of the
+term hallucination in previous literature: one refers to "unfaithful
+or nonsensical" generated answers [21], the other further includes
+"unverifiable" answers using the given context [30, 40]. Here we
+adopt the second usage that has a larger scope.
+• Hallucination Error (Hallu.) refers to the situation when the
+answer is either unfaithful or unverifiable using the given
+context (even when it is factually correct).
+Knowledge Error This class of error refers to the situation
+when the information contained by the answer is inaccurate or
+incorrect regarding the reference [9]. This may occur in various
+components of a sentence, such as the subjects, predicates, objects,
+adverbials of time and place, etc. We classify the knowledge error
+into four error types:
+• Contradiction Error (KCont.) refers to the situation when the
+statement in the answer conflicts with information from the
+reference.
+• Entity Inversion Error (KInve.) refers to the situation when
+entities in the answer (events, processes, or concepts) are
+swapped in their positions as compared to the reference.
+• Conflation Error (KConf.) refers to the situation when the
+entities in the reference (subjects, predicates, or objects) are
+inaccurately combined, altering the original meaning.

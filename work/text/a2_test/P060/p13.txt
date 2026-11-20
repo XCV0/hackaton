@@ -1,0 +1,77 @@
+51
+Dataset Label Dense Lexical Best recall Best strategy
+HotpotQA
+Inclusive 0.933 0.946 0.965 0.10
+reasoning 0.907 0.919 0.948 (-0.052) 0.10
+fact_single 0.926 0.938 0.954 0.10
+summary 1.000 1.000 1.000 0.10
+MS MARCO
+Inclusive 0.790 0.780 0.795 0.50
+reasoning 0.749 0.763 0.749 (-0.093) 0.00
+fact_single 0.825 0.822 0.842 0.20
+summary 0.822 0.788 0.822 0.00
+NaturalQ
+Inclusive 0.695 0.580 0.695 0.00
+reasoning 0.673 0.562 0.687 (-0.056) 0.10
+fact_single 0.723 0.614 0.743 0.05
+summary 0.715 0.560 0.715 0.00
+NewsQA
+Inclusive 0.300 0.461 0.463 0.50
+reasoning 0.210 0.315 0.323 (-0.178) 0.20
+fact_single 0.320 0.498 0.501 0.50
+summary 0.302 0.384 0.388 0.50
+PubMedQA
+Inclusive 0.892 0.908 0.896 0.05
+reasoning 0.887 0.907 0.887 (-0.078) 0.00
+fact_single 0.941 0.961 0.965 0.50
+summary 0.965 0.977 0.965 0.00
+SQuAD2
+Inclusive 0.659 0.828 0.830 0.50
+reasoning 0.618 0.757 0.763 (-0.106) 0.20
+fact_single 0.717 0.867 0.869 0.50
+summary 0.716 0.834 0.852 0.20
+Table 4: Embedding model: bge-small-en-v1.5; Re-ranking model: BGE-base
+F Discussion on Statements
+The final generated question depends on how its
+source statement, i.e., answer, was generated. Fac-
+tual statements focus on unitary pieces of factual
+information directly contained in the context. For
+example, parsing the first couple of sentences from
+the Wikipedia article on Paris, the generated factual
+statements would be such as “Paris is the capital of
+France” (which would answer the question “What
+is the capital of France?”), “The population of Paris
+is estimated to be 2,102,650 residents as of January
+2023” (“What is the population of Paris?”), “The
+Paris Region had a GDP of 765 billion euros in
+2021.” (“What is the GDP of Paris?”), etc. To
+generate a summary statement, information is com-
+bined into composite sentences. In the previous
+example, a summary statement would be “Paris,
+the capital and largest city of France, has a popu-
+lation of approximately 2.1 million residents as of
+2023.” (which would answer the composite ques-
+tion “What is the capital of France and what is its
+population?” or the indirect question “What is the
+population of the capital of France?”). For con-
+clusion statements, we ask the LLM to infer state-
+ments that are not directly included in the original
+factual statements list. In this case, one possible
+conclusion statement would be “Paris is a signifi-
+cant economic hub in the European Union, given
+its large population and high GDP.”, which answers
+the question “What is the role of Paris in the Euro-
+pean Union?”.
+The usage of themes to ground both the extracted
+statements and question generation comes from
+the observed difference between corpus-level ques-
+tions and document-level questions. This differ-
+entiation is related to a broad categorization of
+RAG applications as corpus-level or document-
+level. Corpus-level RAG involves multiple doc-
+uments which can include multiple themes, while
+document-level RAG generally contains a narrower
+scope. In the previous example, we could expect
+users to ask questions in a different manner if per-
+forming RAG over the entire Wikipedia collec-
+tion of articles, as opposed to directly querying

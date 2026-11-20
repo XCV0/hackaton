@@ -1,0 +1,85 @@
+Table 4: Statistical significance of differences between
+scenarios with and without beneficial noises.
+Noise Llama3-8B-Instruct Qwen2-7B-Instruct
+ISN 4.10e-5 4.88e-3
+DN 1.71e-4 9.59e-4
+Noise Ratio Impact To demonstrate the positive
+effects at different harmful noise ratios, we present
+results for orthographic noise disturbances with ra-
+tios ranging from 0 to 0.4. As shown in Table 3, we
+see that the introduction of illegal sentence noise
+(beneficial noise) consistently enhances model per-
+formance, thereby further illustrating the generaliz-
+ability of beneficial noise.
+Statistical Validation To statistically evaluate
+the differences between scenarios with and with-
+out beneficial noise, we apply the nonparamet-
+ric Wilcoxon signed-rank test (Kotz and John-
+son, 1992). This method effectively measures
+the magnitudes of differences and detects statis-
+tical significance between two conditions. We
+test the null hypothesis of no significant differ-
+ence (H0 : dif f erence = 0) against the alter-
+native hypothesis of a significant difference (H1 :
+dif f erence ̸= 0). Following (Seth et al., 2023;
+Wu et al., 2023), we use a significance level of
+0.05. As shown in Table 4, all p-values are below
+0.05, leading us to reject the null hypothesis (H0).
+These results provide strong statistical evidence
+that beneficial noise improves model performance.
+6.3 Analysis of Noise Phenomena
+We propose three hypotheses regarding how bene-
+ficial noise may enhance performance, which we
+confirm through case study and statistical analysis.
+• H1: Clearer reasoning process
+• H2: More standardized response formats
+• H3: Increased confidence with gold context
+Illustrative Case Study Table 14 in the appendix
+presents the reasoning process of Llama3-8B-
+instruct on the multi-hop dataset Bamboogle. With-
+out beneficial noise, the model ignores correct in-
+formation and exhibits logical flaws under coun-
+terfactual noise influence. This is exemplified by
+its erroneous statement: “The other options are
+incorrect, as they provide different birth dates for
+the author.” However, upon introducing beneficial
+Figure 6: Impact of beneficial noise on LLM output
+uncertainty (anti-confidence). ISN and DN represent
+Illegal Sentence Noise and Datatype Noise, with ⋆ in-
+dicating mean uncertainty rate (µ). Results show that
+LLMs pay more attention to the provided golden con-
+text and respond with greater confidence.
+noise, the model exhibits heightened attention to
+the golden context and successfully distinguishes
+between correct and incorrect information (H1).
+We hypothesize that beneficial noise enhances the
+LLMs’ ability to integrate its parameterized knowl-
+edge with retrieved information, thus improving
+its capacity to discern truth from falsehood. Fur-
+thermore, by comparing model outputs under two
+conditions, we observe that beneficial noise con-
+tributes to more standardized answer formats (H2).
+Statistical Characterization To verify three hy-
+potheses statistically, we use a two-step pro-
+cess. We first gather model outputs from multi-
+ple datasets before and after introducing beneficial
+noise. Then, we randomly sample 100 examples
+per dataset to manually assess which condition pro-
+duces more standardized output formats and clearer
+reasoning processes. Outputs are deemed similar if
+no significant difference exists between conditions
+with and without beneficial noise. Results across
+seven datasets show that, on average, 37 samples
+with beneficial noise exhibit clearer reasoning com-
+pared to 31 without (H1), while 26 samples with
+beneficial noise demonstrate better output formats
+versus 23 without (H2).
+Second, as shown in Figure 6, we analyze the im-
+pact of beneficial noise on LLM output uncertainty
+across four powerful LLMs. Results indicate that
+when combined with beneficial noise (ISN or DN),
+LLMs generally exhibit lower uncertainty and in-
+creased confidence in their outputs. This suggests
+that LLMs pay more attention to provided golden
+context and respond with greater confidence (H3).
+5026

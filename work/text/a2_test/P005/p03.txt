@@ -1,0 +1,102 @@
+chunks have been formed. ReflectiveRAG (Verma
+et al., 2026) introduces a self-reflective retrieval
+loop that evaluates evidence sufficiency and refor-
+mulates queries to improve factual grounding, but
+it does not change the underlying flat organization
+of retrieval units. Most related to SPROUTRAG,
+SAKI-RAG (Tao et al., 2025) uses a SLLM to
+estimate inter-sentence attention and expand re-
+trieved chunks with related sentences. Unlike
+SAKI-RAG’s pairwise expansion with LLM filter-
+ing, SPROUTRAG builds a global sentence-level
+hierarchy that supports multi-granularity retrieval
+without inference-time LLM calls.
+Structured and hierarchical retrieval. Beyond
+flat chunk retrieval, structured RAG methods or-
+ganize document content into higher-level repre-
+sentations. RAPTOR (Sarthi et al., 2024) recur-
+sively clusters chunks and summarizes each cluster
+into a tree, enabling retrieval from multiple levels;
+however, its structure is based on embedding-space
+clustering and relies on LLM-generated summaries,
+which can discard fine-grained details. Graph-
+based approaches such as GraphRAG (Edge et al.,
+2025) and LightRAG (Guo et al., 2025) represent
+documents through entities and relations, support-
+ing traversal-based retrieval but depending on suc-
+cessful entity extraction and relation construction.
+PropRAG (Wang and Han, 2025) replaces entity
+triples with propositions and performs LLM-free
+beam search over proposition paths, while Beam
+Retrieval (Zhang et al., 2024) shows the benefit
+of maintaining multiple retrieval hypotheses for
+multi-hop passage retrieval. PageIndex (Zhang
+et al., 2025a) similarly explores reasoning-based,
+vectorless retrieval over document tree structures,
+but relies on document-level structural organiza-
+tion rather than learned sentence-level attention.
+SPROUTRAG instead builds an attention-guided
+binary tree over sentence-level chunks, with com-
+positional internal nodes and joint retrieval over
+all nodes. This preserves cross-sentence dependen-
+cies without lossy summarization, entity-centric
+structures, or external LLM calls.
+3 SPROUTRAG
+As illustrated in Figure 2, SPROUTRAG replaces
+flat chunk retrieval with a trained attention-
+guided hierarchy over sentence-level chunks. Dur-
+ing offline indexing, a SLLM encodes the docu-
+ment and provides both sentence embeddings and
+inter-sentence attention signals. These signals are
+aggregated with learnable head–layer weights and
+used to build a binary tree, where leaves represent
+fine-grained chunks and internal nodes store pro-
+gressive embeddings of merged sentence groups.
+During online retrieval, SPROUTRAG encodes the
+query and performs hierarchical beam search, col-
+lecting candidates from leaves, internal nodes, and
+subtrees. As described in Section 3.3, the frame-
+work is trained with a joint objective that improves
+both retrieval quality and tree structure, enabling
+multi-granularity retrieval without external LLM
+calls during retrieval.
+3.1 Attention-Guided Indexing
+Given a document D, we first split it into sentence-
+level chunks S = {s1, . . . , sn}. We encode the full
+sequence with a SLLM, obtaining contextualized
+sentence embeddings {e(si)}n i=1 and attention ma-
+trices from all layers and heads. For layer l and
+head h, we denote the corresponding attention ma-
+trix as Attn(l,h) ∈ Rn×n.
+A uniform average over all heads and layers
+can overemphasize local sentence proximity, since
+some attention heads primarily capture sequential
+patterns (Voita et al., 2019). To reduce this prox-
+imity bias, SPROUTRAG learns a weighted aggre-
+gation over heads and layers:
+Aij =
+L∑
+l=1
+H∑
+h=1
+wl,h Attn(l,h) ij , (1)
+where wl,h is defined as:
+wl,h = exp(αl,h)∑L
+l′=1
+∑H
+h′=1 exp(αl′,h′ )
+. (2)
+The learnable scalars αl,h allow the model to em-
+phasize attention heads that better capture semantic
+co-relevance. We then symmetrize the aggregated
+attention to obtain a mutual relation score:
+Mij = Aij + Aji 2 . (3)
+The tree is built bottom-up. Initially, each sen-
+tence chunk is a leaf node. At each step, we merge
+the pair of active nodes with the highest mutual
+attention score. The parent embedding is computed
+as a progressive embedding of its children:
+e(p) = e(u) + e(v) 2 , (4)
+where u and v are the merged child nodes. Af-
+ter merging, the new parent inherits its strongest
+46523

@@ -1,0 +1,106 @@
+this evaluation are shown in Tables 13
+Safety Quality As mentioned, crisis cases (Fig-
+ure 4) require safe responses. To assess this aspect,
+we observed safety metrics on crisis samples iden-
+tified by LLMs on the two datasets. The safety met-
+rics include: Suicidal Ideation (SI), Self-harm (SH),
+Anxiety Crisis (AC), Violent Thoughts (VT), Sub-
+stance Abuse (SA), Risk-taking Behaviors (RTB)
+(Xu et al., 2025a). LLMs use a Likert scale for the
+judgment, e.g., for Self-harm, 1: unsafe/harmful,
+3: partially safe, 5: safe/high-quality response. De-
+tailed description is shown in Appendix A.3.
+SI
+SH
+AC
+VT
+SA
+RTB
+1 2 3 4 5
+SH
+AC
+VT
+SA
+RTB
+1 2 3 4 5
+Baseline avg. w_card avg.
+Figure 3: Safety scores of methods with and without
+safety planning cards. The left figure is for MentalChat
+and the right is for CounselChat.
+Figure 3 shows that card-based guidance yields
+small but consistent improvements on safety-
+related dimensions. The relatively larger move-
+ments (on the order of +0.1–0.5 on a 1–5 scale,
+see Table 14) appear in dimensions such as SH,
+SA, and RTB, suggesting that the guidance nudges
+the model toward more cautious phrasing in self-
+harm and risk-related contexts; we do not claim a
+clinically validated safety improvement. The gains
+are directionally consistent across the two plots,
+indicating that the effect is not limited to a single
+dataset. We note that baseline safety scores are
+already in the 3.7–4.7 range on a 1–5 scale, leav-
+ing limited headroom; the modest absolute deltas
+should be read against this ceiling rather than as
+evidence that cards have a weak effect in raw terms.
+Other Metrics Table 3 compares the automatic
+results of RG methods with safety-planning cards
+(w_card)) and without cards. We can observe that
+the integration of safety cards yields consistent im-
+provements in LM judge scores across all retrieval
+models (p−values ≤ 0.05 with 95% CI using
+pair-wise t−test). However, for other metrics, al-
+though BLEU scores generally show improvement,
+ROUGE and BERTScore exhibit slight declines or
+remain relatively stagnant when safety cards are
+used. A possible explanation is that standard base-
+line models tend to generate responses that closely
+mimic the generic lexical patterns of the reference
+texts, thereby maintaining high lexical overlap. In
+contrast, the introduction of safety cards imposes a
+specific counseling structure and vocabulary (e.g.,
+explicit validation steps). It may reduce lexical
+overlap that limits ROUGE and BERTScore.
+5.2.2 Human Evaluation
+Five independent evaluators reviewed 100 ran-
+dom question-response pairs from different models
+based on the previously defined Counseling Qual-
+ity and Safety Quality metrics (Section 5.2.1). The
+evaluators are fourth-year students of a College of
+Health Sciences who have been learning a counsel-
+ing class. They were guided to annotate these pairs
+with a short training in linguistic annotation with-
+out compensation. With each pair, they read the
+question and assessed the quality of the response.
+Each response was rated by seven counseling (Ta-
+ble 11) and six safety (Table 12) metrics. To pre-
+vent potential bias and ensure objectivity, a blind
+evaluation protocol was implemented, where the
+model identities were completely concealed from
+the evaluators. The Fleiss’ kappa score is 0.740 for
+MentalChat and 0.710 for CounselChat.
+Table 4: Average human scores for Counseling (1-10)
+and Safety (1-5). Detail is in Tables 11 and 12.
+Methods Models MentalChat CounselChat
+Counseling Safety Counseling Safety
+Baseline
+gpt-3-large 7.33 4.25 7.08 4.17
+Light-RAG 7.34 4.24 7.06 4.15
+RAG-Anything 7.33 4.25 7.07 4.17
+Qwen3 7.29 4.24 7.05 4.16
+w_card
+gpt-3-large 8.16 4.35 7.87 4.26
+Light-RAG 8.13 4.32 7.85 4.22
+RAG-Anything 8.12 4.34 7.86 4.24
+Qwen3 8.09 4.33 7.82 4.23
+Table 4 shows that card-guided retrieval sub-
+stantially enhances response helpfulness while pro-
+viding modest but consistent safety improvements
+(p−values ≤ 0.05 with 95% CI using pair-wise
+t− test). The w_card setting consistently outper-
+forms the baseline across all models, with larger
+gains in counseling quality than in safety. For ex-
+ample, gpt-embed-3-large improves from 7.33 to
+8.16 in counseling and from 4.25 to 4.35 in safety
+on MentalChat. It confirms results in Section 5.2.
+13806

@@ -1,0 +1,97 @@
+et al., 2023), ARGUE (Mayfield et al., 2024), and
+RAGAS (Es et al., 2024)—providing a foundation
+for RAG evaluation as well as the modifications
+to these metrics for handling multimodal sources.
+Implementation details for each are in Appendix D.
+Preliminaries We define a document as any sin-
+gle unit of evidence, regardless of modality (e.g.,
+a text passage, image, audio clip, or video). We
+define a topic as the subject matter of one or more
+documents. The documents used in generation are
+the context. A prediction is text produced by a
+generation system, decomposed into subclaims—
+atomic declarative statements that may or may not
+be true. A reference is a collection of preexisting
+knowledge on a query topic, such as a knowledge
+base (e.g., Wikipedia), a set of nuggets (Voorhees,
+2004), or a (human-written) reference text (Martin
+et al., 2026a). We prefix predicted or reference to
+denote the origin of derived objects (e.g., predicted
+subclaim, reference subclaim). A scoring function
+s(p, h) measures support between a (premise, hy-
+pothesis) pair via entailment or LLM judgment.
+3.1 ALCE
+ALCE (Gao et al., 2023) aims to capture three
+dimensions of predicted text quality: information
+correctness, citation quality, and fluency.2
+Correctness ALCE introduces both recall and
+precision metrics to evaluate Correctness. Recall is
+a natural language inference- (NLI-)based judg-
+ment between reference subclaims and the pre-
+dicted output; precision is exact match between
+predicted and reference answers. We do not im-
+plement precision, as exact match is unsuitable
+for long-form generation. We do not attempt to
+relax exact match in our implementation, as this
+would reduce to a metric like BERTScore, which
+we already include in our evaluation. Claim Recall
+requires no modification for multimodality, as veri-
+fying reference subclaims against a predicted text
+is independent of the modality of the sources.
+Citation Quality ALCE also uses recall and pre-
+cision metrics to evaluate Citation Quality. Cita-
+tion Quality Recall assesses whether all the sources
+cited by a sentence, jointly considered (i.e., con-
+catenated), support the citing sentence. Citation
+Quality Precision penalizes irrelevant citations by
+2We do not explore fluency in this work, as it is not a
+common failure mode of modern LLMs.
+assessing whether a sentence remains (jointly) sup-
+ported by its cited sources when one of them is
+removed. Both precision and recall involve compar-
+ing a sentence against the concatenation of multiple
+text passages. In this work, we instead consider
+multiple multimodal documents.
+Citation Quality has two limitations: (1) sen-
+tences typically express multiple subclaims, mak-
+ing support harder to evaluate than with subclaims,
+and (2) concatenating multiple documents is com-
+putationally infeasible for long multimodal sources
+and unsupported by current training data.
+3.2 ARGUE
+Similar to ALCE, ARGUE (Mayfield et al.,
+2024) assesses generations for information cov-
+erage and for citation support. For the former, AR-
+GUE adopts a nugget-based evaluation, assessing
+what proportion of a set of question-answer pairs
+(nuggets) about a target topic are attested by the
+generated text (Nugget Coverage). For the latter,
+ARGUE calculates the support between individ-
+ual (sentence, citation) pairs (Sentence Support).
+We rely on the AUTO-ARGUE implementation of
+ARGUE from Walden et al. (2025a).
+Nugget Coverage is the proportion of nugget
+questions correctly answered by the predicted text,
+aggregated over sentences. This is similar to
+ALCE’s Claim Recall, but focused on recall of
+QA pairs rather than of subclaims. Since nugget
+coverage requires only these nuggets and the gener-
+ated text for assessment, the only thing needed for
+our evaluation is to create the collection of nuggets.
+Sentence Support is the proportion of predicted
+sentences attested individually by each of their ci-
+tations. In focusing on sentences rather than sub-
+claims, Sentence Support runs into the same chal-
+lenge as ALCE’s Citation Quality evaluation in
+having to simultaneously assess the support of mul-
+tiple subclaims expressed by a single sentence.
+3.3 RAGAS
+RAGAS (Es et al., 2024) evaluates three dimen-
+sions of predicted text quality: faithfulness to the
+retrieved context (Faithfulness), relevance of the
+text to an information need (Answer Relevance),
+and relevance of the retrieved context to the infor-
+mation need (Context Relevance).
+Faithfulness For Faithfulness, sentences from
+the predicted text are decomposed into “statements”
+40233

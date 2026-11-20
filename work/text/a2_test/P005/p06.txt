@@ -1,0 +1,100 @@
+answer generation, we further evaluate on Hot-
+potQA (Yang et al., 2018), WebQuestions (Berant
+et al., 2013), and Dragonball. See Appendix A.1
+for more details.
+Baselines. We compare against representative
+chunking and structured retrieval methods, in-
+cluding Dense X Retrieval (Chen et al., 2024),
+Meta-Chunking (Zhao et al., 2025b), MoC (Zhao
+et al., 2025a), RAPTOR (Sarthi et al., 2024),
+LightRAG (Guo et al., 2025), PropRAG (Wang
+and Han, 2025), and SAKI-RAG (Tao et al.,
+2025). GraphRAG (Edge et al., 2025), Reflec-
+tiveRAG (Verma et al., 2026), PageIndex (Zhang
+et al., 2025a), and REFRAG (Lin et al., 2025) are
+reported only for final task performance, as they
+primarily involve LLM-heavy reasoning, genera-
+tion, summarization, or decoding-time optimiza-
+tion rather than efficient retrieval. For fair com-
+parison, methods requiring an LLM or reranker
+use the same QWEN3-8B (Team, 2025) gener-
+ator and QWEN3-RERANKER-4B (Zhang et al.,
+2025b) reranker. Other than unifying the generator
+and reranker, we follow the settings recommended
+in the original papers for each baseline. See Ap-
+pendix A.2 for more details.
+Metrics. For retrieval evaluation, we report Re-
+call, Precision, and Information Efficiency (IE),
+where IE = Recall × Precision. To keep the ev-
+idence budget comparable across methods, k de-
+notes the number of underlying evidence units used
+for evaluation rather than the number of retrieved
+tree nodes. For hierarchical outputs, retrieved in-
+ternal nodes are expanded into their underlying
+evidence units, with each contained unit counted to-
+ward the same top-k budget. We compute each met-
+ric at k ∈ {1, 3, 5} and report the average across
+these three cutoffs. For end-to-end generation, we
+report F1 on HotpotQA and WebQuestions, and
+ROUGE-L (Lin, 2004), METEOR (Banerjee and
+Lavie, 2005), and BERTScore (Zhang* et al., 2020)
+on Dragonball. We also report online efficiency us-
+ing Tok/Q and latency, where Tok/Q counts online
+model-token usage per query, excluding offline in-
+dexing and output tokens. All reported results are
+averaged over three independent runs.
+Implementation and Training Details. We use
+the 1.3B-parameter SLLM (An et al., 2024)2 as the
+sentence encoder and split documents into chunks
+of up to two sentences. SPROUTRAG is trained
+on 30K query–passage examples sampled from
+2https://github.com/cavedweller509/SentenceVAE
+CLaRa (He et al., 2025), fine-tuning the SLLM and
+learned head–layer aggregation weights with the
+joint objective in Eq. 12. Unless otherwise stated,
+we use the following hyperparameters as the default
+setting: 3 training epochs with AdamW, learning
+rates of 2 × 10−5 for the SLLM and 1 × 10−3
+for the aggregation scalars, batch size 32, temper-
+ature τ = 0.05, attention weight λ = 0.1, and 5%
+linear warmup. At retrieval time, the default set-
+ting uses beam width b = 5, collects candidates
+from all tree levels, and reranks them with QWEN3-
+RERANKER-4B. Final answers are generated with
+QWEN3-8B. For fair comparison, baselines that
+require an LLM or reranker use the same models;
+otherwise, we follow their original settings. All ex-
+periments use 8 NVIDIA A100 80GB GPUs, and
+results are averaged over three runs.
+4.2 Retrieval Quality
+Table 1 reports retrieval performance across four
+benchmarks. SPROUTRAG achieves the highest IE
+on all datasets, improving over the strongest base-
+line by 8.06 points on Dragonball, 4.65 on SCI-
+DOCS, 4.90 on LegalBench-RAG, and 6.83 on MS
+MARCO. These improvements are not driven by re-
+call alone: SPROUTRAG also obtains the best pre-
+cision on every benchmark. This suggests that the
+attention-guided hierarchy helps retrieve broader
+supporting context while avoiding the noise intro-
+duced by overly large or weakly related chunks.
+The comparison with SAKI-RAG is especially
+informative. While SAKI-RAG achieves strong
+precision, particularly on Dragonball and SCI-
+DOCS, its pairwise expansion limits evidence
+aggregation, reducing recall and IE. In contrast,
+SPROUTRAG converts sentence-level attention
+into a global tree structure, enabling retrieval over
+individual chunks, internal nodes, and subtrees.
+This preserves SAKI-RAG’s precision benefits
+while improving IE across all datasets. Structured
+baselines such as RAPTOR, LightRAG, PropRAG,
+and MoC improve recall over flat or boundary-
+based chunking, but their clustering, graph, propo-
+sition, or routing structures do not explicitly model
+learned multi-sentence composition. SPROUTRAG
+bridges this gap: leaves retain fine-grained evi-
+dence, while internal nodes recover coherent con-
+text, yielding the strongest recall–precision trade-
+off. Appendix C provides a qualitative example.
+46526

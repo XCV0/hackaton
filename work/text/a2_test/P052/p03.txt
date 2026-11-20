@@ -1,0 +1,98 @@
+an LLM produces the correct yes/no answer from
+supplied evidence. Separating the two lets us dis-
+tinguish wrong-law retrieval from rule-application
+failures.
+2.3 Why citation match is insufficient
+Citation is an important legal signal, but it is not
+equivalent to law in force. The same citation can
+refer to multiple historical versions of the same sec-
+tion, and legal corpora often contain both obsolete
+and current text. If a question asks about conduct
+in an earlier period, the current version may be the
+easiest passage to retrieve while being legally in-
+applicable. Conversely, a superseded version may
+govern an older fact pattern even though it is not
+the current rule. The user’s factual date determines
+which version is authoritative.
+2.4 Scope
+LawInForce-eCFR focuses on a foundational case:
+real legal amendments that change numeric thresh-
+olds and induce answer flips. Examples include
+deadlines, monetary caps, percentages, employee
+counts, penalties, ages, and frequencies. More com-
+plex issues such as retroactivity, transition clauses,
+tolling, and multi-rule statutory interpretation are
+left outside the benchmark. This restricted scope
+is intentional because it yields a controlled setting
+where wrong-version retrieval and numeric rule
+application can be diagnosed cleanly.
+3 The LawInForce-eCFR Benchmark
+LawInForce-eCFR is built from versioned U.S. fed-
+eral regulations in eCFR/CFR.1 It is not intended
+to cover all jurisdictions or legal sources; it tar-
+gets the retrieval problem created when a corpus
+stores multiple versions of regulatory text. Table 1
+summarizes the benchmark.
+3.1 Source corpus and amendment mining
+The benchmark begins from legal changes rather
+than user questions. We mine amendment pairs in
+which two versions of the same eCFR/CFR author-
+ity contain a local numeric change. Each pair links
+an old version and a new version of the same rule,
+together with their validity intervals and author-
+ity metadata. Starting from amendments gives the
+benchmark a clear target: the old and new passages
+1Official sources: eCFR API documentation and GovInfo
+bulk data (Office of the Federal Register, n.d.; U.S. Govern-
+ment Publishing Office, n.d.).
+Statistic Value
+Legal collection eCFR/CFR
+Jurisdiction U.S. federal regulations
+Human-validated amendment
+pairs
+805
+QA instances 3,220
+QA per pair 4
+Acceptance rate after filtering 94%
+Table 1: Compact statistics for LawInForce-eCFR. The
+benchmark contains 805 human-validated eCFR/CFR
+amendment pairs and 3,220 controlled QA instances.
+are both plausible retrieval results, but only one is
+in force for a given operative date.
+This construction differs from collecting nat-
+ural legal questions and then searching for an-
+swers. Natural questions often mix ambiguity,
+missing facts, broad legal interpretation, and re-
+trieval failure. By starting from verified amend-
+ments, LawInForce-eCFR isolates a narrower but
+important failure mode: the retriever can find the
+right legal neighborhood while selecting the wrong
+version.
+3.2 Numeric threshold alignment
+For each candidate pair, we align old and new
+rule sentences, extract the changed numeric val-
+ues and units, and infer the comparator relation
+expressed by the rule. The comparator may be an
+upper bound, lower bound, deadline, range, cap,
+minimum, maximum, or frequency constraint. De-
+terministic checks require that the relevant values
+appear in the legal text, that the units are compat-
+ible, and that the old and new sentences express
+the same underlying rule apart from the changed
+threshold.
+Numeric threshold changes are useful for diag-
+nosis because they allow answer flips to be con-
+structed without inventing a new legal issue. If the
+old threshold is 60 days and the new threshold is
+90 days, a fact value of 75 days lies between the
+thresholds. The same fact pattern therefore receives
+opposite yes/no answers depending on which ver-
+sion is legally applicable. The benchmark uses
+these controlled facts to make wrong-version re-
+trieval observable.
+3.3 Controlled answer-flipping QA generation
+Each validated amendment pair yields four QA
+instances by crossing the operative version with
+whether the authority is explicitly cited. The old-
+date questions use an operative date during the
+881

@@ -1,0 +1,74 @@
+Settings NQ TriviaQA PopQA 2Wiki HotpotQA StrategyQA
+EM F1 EM F1 EM F1 EM F1 EM F1 EM
+DRAGRetIter=0 34.40 47.61 60.40 69.60 37.60 45.43 26.00 34.30 30.20 41.00 68.80
+DRAGRetIter=1 36.80 50.64 60.80 69.90 37.40 45.60 29.20 37.49 31.40 42.41 69.60
+DRAGRetIter=2 36.80 50.32 60.76 69.93 37.50 45.83 29.60 37.84 30.80 41.85 69.40
+DRAGRetIter=3 36.80 50.38 60.80 69.93 37.60 46.10 28.80 36.97 30.80 41.74 69.20
+DRAGRetIter=4 37.00 50.58 60.80 69.91 37.60 46.10 29.00 37.33 31.00 41.86 69.40
+DRAGResIter=0 38.20 50.79 57.20 65.31 39.60 47.04 16.00 25.91 28.20 37.48 64.60
+DRAGResIter=1 37.60 51.77 62.40 71.47 39.20 47.52 27.80 36.91 33.40 43.19 71.00
+DRAGResIter=2 38.20 51.61 60.20 68.59 38.80 46.52 28.20 36.47 31.20 41.53 68.00
+DRAGResIter=3 36.80 50.38 60.80 69.93 38.60 46.50 28.80 36.97 30.80 41.74 69.20
+DRAGResIter=4 37.00 50.09 60.60 70.03 38.80 46.98 27.20 34.67 31.00 41.30 67.00
+Table 6: The detailed performance metrics of DRAG across six datasets under different debate round settings in the
+Retrieval Debate and Response Debate stages.
+Q: Who is the girl playing with guns and roses?
+Response Debate Round 1
+RetrievalDebateRound1
+Proponent Agent: The song "Girl, You'll Be a Woman Soon" is not by 
+Guns N' Roses, but the song "Paradise City" and "Welcome to the 
+Jungle" are. However, I think you might be referring to the song 
+"Paradise City" or "Welcome to the Jungle”…….
+Opponent Agent: The answer is: Melissa Reese
+Proponent Agent: The answer is: Melissa Reese
+Response Debate Round 2
+Opponent Agent: The answer is: Melissa Reese
+Opponent Agent: The current retrieved content appears to be 
+insufficient to generate a reliable answer to the question, "Who is the 
+girl playing with guns and roses." The content includes three 
+unrelated documents, each with a different title and context. Doc 1 is 
+about a 2012 film, Doc 2 is about a TV episode, and Doc 3 is about a 
+manga series. None of the documents provide information about a 
+girl playing with Guns N' Roses, the famous rock band. Query 
+Optimization: who is the girl playing with guns and roses -> who is the 
+girl playing with Guns N' Roses
+Proponent Agent: Based on the retrieved content, I argue that the 
+current information is sufficient to answer the question, "Who is the 
+girl playing with guns and roses."
+Judge Agent: Opponent Agent
+Opponent Agent: The current retrieved content is insufficient to 
+generate a reliable answer to the question “Who is the girl playing 
+with Guns N‘ Roses?” because it only mentions the current lineup of 
+the band …… Therefore, I propose a query expansion to gather more 
+specific information about Melissa Reese's role in Guns N' Roses and 
+any context in which she plays with the band. Query Expansion: What 
+is Melissa Reese's role in Guns N' Roses, and what is her involvement 
+with the band?
+Proponent Agent: Based on the retrieved content, it is clear that the
+question "Who is the girl playing with Guns N' Roses?" can be 
+answered with confidence. Doc 1 explicitly states that Melissa Reese 
+is a member of the hard rock band Guns N' Roses, and Doc 2 further 
+confirms this, listing her as a current band member. Therefore, the 
+answer to the question is Melissa Reese, and no further retrieval is 
+needed.
+Judge Agent: Proponent Agent
+RetrievalDebateRound2
+Query 1: Who is the girl playing with Guns N' Roses? 
+Retrieved Content: 
+Doc 1(Title: "Melissa Reese"): Melissa Reese is an American musician and model best known for her collaborations with Bryan "Brain" Mantia
+and her current position in the hard rock band Guns N' Roses. Reese was born in Seattle, Washington. She is the youngest of three girls born into 
+a household of Chinese, English, Spanish, Japanese, Filipino, Irish, Scottish, and Danish descent …..
+Doc 2(Title: "Guns N' Roses"): Guns N' Roses Guns N' Roses, often abbreviated as GNR, is an American hard rock band from Los Angeles, 
+California, formed in 1985. When they signed to Geffen Records in 1986, the band comprised vocalist Axl Rose, lead guitarist Slash, rhythm 
+guitarist Izzy Stradlin, bassist Duff McKagan, and drummer Steven Adler. The current lineup consists of Rose, Slash, McKagan, keyboardist Dizzy 
+Reed, guitarist Richard Fortus, drummer Frank Ferrer, and keyboardist Melissa Reese. Guns N' Roses' debut album, "Appetite for Destruction" 
+(1987), reached number one on the "Billboard" 200 a year after its release, on the strength of "Sweet Child o’ ……
+Doc 3(Title: "Sweet Child o' Mine"): to the demo in a loop, Rose started saying to himself, "Where do we go? Where do we go now?" and Proffer 
+suggested that he sing that. The "Sweet Child of Mine" video depicts the band rehearsing in the Huntington Ballroom at Huntington Beach, 
+surrounded by crew members. All ofthe band members' girlfriends at the time were shown in the clip: Rose's girlfriend, Erin Everly…..
+Proponent Agent: Melissa Reese
+Response Debate Round 3
+Opponent Agent: Melissa Reese Judge Agent: Melissa Reese
+Retrieval
+Figure 5: Case study of the Retrieval Debate.
+15852

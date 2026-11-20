@@ -1,0 +1,95 @@
+ies how RAG systems handle natural conflicts
+and abstention: WikiContradict on contradictory
+Wikipedia passages (Hou et al., 2024), RAGTruth
+on conflict-driven hallucinations (Niu et al., 2024),
+and unanswerability benchmarks for cases without
+an admissible answer (Peng et al., 2025; Wallat
+et al., 2025). Distractor sensitivity appears in “lost
+in the middle” effects (Liu et al., 2024b), irrelevant-
+context perturbations (Shi et al., 2023), and cases
+where extra context unexpectedly helps (Cuconasu
+et al., 2024).
+Grounded generation and attribution.
+Grounded-generation methods instruct the
+LLM to base its response on retrieved context
+with inline citations: ALCE (Gao et al., 2023a)
+and Self-RAG (Asai et al., 2024) provide such
+protocols, and self-correcting methods such
+as Self-Correcting RAG (Xu et al., 2026) use
+natural language inference (NLI)-guided test-time
+search to improve grounding at generation time.
+Attribution benchmarks evaluate whether answers
+are supported by cited sources, including Attribut-
+edQA (Bohnet et al., 2022), ExpertQA (Malaviya
+et al., 2024), FactScore (Min et al., 2023), and the
+evaluation framework of Adlakha et al. (2024);
+faithfulness has been framed as an explanation that
+reflects what a model actually used (Jacovi and
+Goldberg, 2020).
+Context-intervention probes and causal formal-
+ism. ContextCite formalizes context-attribution
+via binary mask ablations (Cohen-Wang et al.,
+2024), and entity-substitution and counter-memory
+studies probe knowledge conflicts via context ed-
+its (Longpre et al., 2021; Xie et al., 2024); redun-
+dant evidence further motivates cluster-level rather
+than single-document deletion (Chen et al., 2024;
+Saha Roy et al., 2025). Causal and interventional
+formalisms underpin the perturbation-and-effect
+discipline that COUNTERMEM adopts (Pearl, 2009;
+Feder et al., 2022). COUNTERMEM unifies single-
+mask deletion and counterfactual-addition interven-
+tions at three explicit pipeline points (post-retrieval,
+corpus-addition, corpus-deletion), reads a stage-
+localizable trace off the same intervention from
+the generations the behavioral test already issues,
+and complements rather than replaces aggregate
+diagnostics like RAGAS and RAGChecker.
+3 Counterfactual Evaluation of
+Non-Parametric Memory Use
+COUNTERMEM evaluates whether a fixed RAG
+configuration’s outputs are behaviorally bound to
+its retrieved non-parametric memory. It intervenes
+on the retrieved state, regenerates with the same
+generator and prompt, and measures the behavioral
+transition under the evidence-bound criteria of Sec-
+tion 1.
+3.1 Estimand and Detectors
+A reported COUNTERMEM profile is always condi-
+tional on a query distribution, RAG configuration,
+prompting contract, intervention design, answer-
+similarity function, and behavioral detectors; under
+these conditions, it estimates behavioral-transition
+statistics under controlled retrieved-state interven-
+tions.
+Let Rc(q) = (d1, . . . , dk) be the ordered con-
+text returned by configuration c for query q, and
+let Gθ,c(· | q, K) ∈ ∆(A) be the generator distri-
+bution over answers given retrieved state K under
+fixed parameters, prompt, and decoding. The base
+and intervened answer distributions are
+Ac 0(q) = Gθ,c(· | q, Rc(q)), (1)
+Ac I (q) = Gθ,c(· | q, I(Rc(q))), (2)
+where the intervention I : Context → Context gen-
+eralizes the binary-mask operator of Cohen-Wang
+et al. (2024) to arbitrary deletions and counterfac-
+tual additions. Per-query signals below are expec-
+tations over draws a ∼ Gθ,c; with deterministic
+decoding, single API generations are plug-in esti-
+mates of the corresponding means.
+We compare answers with an operational simi-
+larity function Sim(a, a′) ∈ [0, 1] and read three
+behavioral labels off the answer text:
+Abstain(a) ∈ {0, 1}, (3)
+ConflictAck(a) ∈ {0, 1}, (4)
+UpdateFollow(a; u) ∈ {0, 1}, (5)
+indicating an insufficient-evidence response, an ex-
+plicit acknowledgment of conflict between sources,
+and adoption of an injected update u. Each label
+is produced by a Claude-Sonnet judge classifier
+over a fixed rubric shipped with the released har-
+ness; the abstain label additionally cross-checks an
+explicit-marker regex against the judge to lower-
+bound criteria-level abstention. The similarity func-
+tion, thresholds, and detector rubrics are protocol
+22334

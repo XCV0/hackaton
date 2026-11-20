@@ -1,0 +1,120 @@
+0 4 8 12 16 20 24 28
+Layer Ids
+0
+4
+8
+12
+16
+20
+24
+28 Head Ids
+0-0.05
+0.05-0.10
+0.10-0.15
+0.15-0.20
+Score
+(a)
+0 25 50 75 100 125 150 175 200
+Top k Sentences
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0Cumulative Attention Task Type
+Short Dependency
+Long Dependency (b)
+HotpotQA PopQA
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5Initial Token Attention Weight
+0.24
+0.22
+0.27
+0.25
+0.28
+0.26
+0.57
+0.4
+Top 1-20
+Top 41-60
+Top 81-100
+Random (c)
+Figure 2: Observations on attention allocation patterns. (a) Attention weights assigned by each attention head to the
+supporting evidence sentences. (b) Cumulative attention over the top-k most attended sentences in short-dependency
+and long-dependency tasks. (c) Attention weights on the initial token under different context settings: top 1–20
+retrieved documents, top 41–60 documents, top 81–100 documents, and 20 randomly sampled documents.
+attention score over the top-k sentences with
+the highest attention for both task types. Fig-
+ure 2(b) illustrates how the cumulative attention
+score changes as the sentence count k varies. As
+shown, attention is more concentrated in short-
+dependency tasks and more spread out in long-
+dependency tasks. Figure 7 provides a more
+intuitive comparison.
+• Attention to the initial token of the context in-
+creases as context becomes less relevant. To in-
+vestigate how attention is allocated when the con-
+text is irrelevant, we sample questions from Hot-
+potQA (Yang et al., 2018) and PopQA (Mallen
+et al., 2023), and construct context settings with
+varying levels of relevance. We then record
+the attention assigned to the initial token across
+these settings. As shown in Figure 2(c), the atten-
+tion on the initial token increases as the relevance
+of the context decreases, consistent with prior
+findings on attention sinks (Xiao et al., 2023).
+4 AttnComp
+Inspired by our observations, we propose a novel
+compression framework AttnComp. In this section,
+we provide a comprehensive explanation of the
+framework.
+Problem Formulation Given a query q, a RAG
+system retrieves a set of k documents D =
+{d1, d2, . . . , dk}. A language model M then gen-
+erates an output y conditioned on the retrieved doc-
+uments and the query, i.e., M (y | D, q). Our objec-
+tive is to filter irrelevant documents from D, yield-
+ing a reduced subset D′ ⊆ D such that the size of
+D′ is minimized while maintaining or even improv-
+ing the quality of generated answer M (y | D′, q).
+4.1 Attention Computation
+Building on the finding that attention heads in mid-
+dle layers of LLMs identify relevant information,
+our compressor model comprises the first L trans-
+former layers from the original LLM, followed by
+an additional cross-attention layer. We first con-
+struct the context by prefixing a predefined instruc-
+tion to the concatenated retrieved documents. The
+context and query are then concatenated and input
+into the model. After processing through the first L
+layers, we obtain the hidden states Xc ∈ Rn×dmodel
+and Xq ∈ Rm×dmodel for the context and the query,
+respectively, where n and m denote their lengths,
+and dmodel is the hidden dimension. The cross-
+attention layer then computes query-context atten-
+tion weights A ∈ Rm×n as follows:
+Qi = Xq · W Q i , Ki = Xc · W K i ,
+A = 1 H H∑ i=1 softmax ( QiKT i√da ) (2)
+where H denotes the number of attention heads,
+W Q i , W K i ∈ Rdmodel×da are the query and key pro-
+jection matrices for head i, and da is the dimen-
+sionality of each attention head.
+4.2 Top-P Compression
+Motivated by our finding that the attention mecha-
+nism exhibits adaptive patterns across varying ques-
+tions and contexts (as shown in Figures 2(b) and
+2(c)), we propose a Top-P compression algorithm
+that leverages the computed query-context atten-
+tion weights for adaptive context reduction.
+The process commences by calculating attention
+scores for the instruction (sins) and each document
+(sdi ), derived from aggregating attention weights
+A, as defined in Equation 1. These scores are then
+8459

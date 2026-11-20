@@ -1,0 +1,102 @@
+Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies
+(Volume 1: Long Papers), pages 6088–6109
+April 29 - May 4, 2025 ©2025 Association for Computational Linguistics
+VisDoM: Multi-Document QA with Visually Rich Elements
+Using Multimodal Retrieval-Augmented Generation
+Manan Suri
+ , Puneet Mathur
+ *, Franck Dernoncourt
+ ,
+Kanika Gowswami
+ , Ryan A. Rossi
+ , Dinesh Manocha
+University of Maryland, College Park
+ Adobe Research
+ IGDTUW
+manans@umd.edu, puneetm@adobe.com
+Abstract
+Understanding information from a collection of
+multiple documents, particularly those with vi-
+sually rich elements, is important for document-
+grounded question answering. This paper intro-
+duces VisDoMBench, the first comprehensive
+benchmark designed to evaluate QA systems in
+multi-document settings with rich multimodal
+content, including tables, charts, and presen-
+tation slides. We propose VisDoMRAG, a novel
+multimodal Retrieval Augmented Generation
+(RAG) approach that simultaneously utilizes
+visual and textual RAG, thereby combining ro-
+bust visual retrieval capabilities with sophis-
+ticated linguistic reasoning. VisDoMRAG em-
+ploys a multi-step reasoning process encom-
+passing evidence curation and chain-of-thought
+reasoning for concurrent textual and visual
+RAG pipelines. A key novelty of VisDoM-
+RAG is its consistency-constrained modality
+fusion mechanism, which aligns the reasoning
+processes across modalities at inference time
+to produce a coherent final answer. This leads
+to enhanced accuracy in scenarios where crit-
+ical information is distributed across modali-
+ties and improved answer verifiability through
+implicit context attribution. Through exten-
+sive experiments involving open-source and
+proprietary large language models, we bench-
+mark state-of-the-art document QA methods
+on VisDoMBench. Extensive results show that
+VisDoMRAG outperforms unimodal and long-
+context LLM baselines for end-to-end multi-
+modal document QA by 12-20%.
+1 Introduction
+In today’s information-rich landscape, PDF docu-
+ments play a crucial role in storing and disseminat-
+ing information across various domains, including
+finance, legal, scientific research, and more. These
+documents often contain a rich blend of textual,
+visual, and tabular data, making them a unique
+*Primary Research Mentor
+KEHNN
+Grounding Context
+Answer
+Single Document QA
+Multi Document QA
+Which model
+performs best
+on the Ubuntu
+dataset for text
+lengths between
+60 and 90
+words?
+Figure 1: Multi-document QA systems require inferring
+relevant context from a large volume of unstructured
+data, inherently making it a more challenging task than
+single-document QA.
+challenge for information retrieval systems. Unlike
+structured formats like databases, PDFs are inher-
+ently unstructured, with diverse layouts combining
+paragraphs, images, charts, and tables. This com-
+plexity demands sophisticated multimodal process-
+ing techniques capable of interpreting both the tex-
+tual and visual content. Effective handling of multi-
+modal content from PDFs is essential for down-
+stream tasks such as question-answering (Ding
+et al., 2022; Mathew et al., 2021), summarization
+(Pang et al., 2023), and knowledge extraction (Pal
+et al., 2023), where accurate and context-aware
+data extraction can significantly enhance decision-
+making processes. As a result, developing ad-
+vanced methods that can fully leverage the mul-
+timodal nature of PDF documents has become a
+critical research challenge.
+In real-world document QA systems, queries
+are often directed over a collection of source doc-
+uments rather than a single source, requiring the
+system to identify the document that contains the
+relevant answer. This reflects common scenarios
+in domains such as finance, science, and policy
+analysis, where users interact with large, varied
+document sets to find specific information. In these
+cases, the challenge lies in effectively localizing
+context relevant to the query, from a large volume
+6088

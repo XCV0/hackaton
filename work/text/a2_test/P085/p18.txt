@@ -1,0 +1,70 @@
+1. "correct_options": 如果选项内容在新闻摘要中提到，并且信息正确，将该选项分类为“正确”。
+2. "incorrect_options": 如果选项内容在新闻摘要中提到，但信息不正确或与事实不符，将该选项分类为“错误”。
+3. "indeterminate_options": 如果选项内容未在新闻摘要中提到，或提供的信息不足以判断该选项的准确性，将该选项分类为
+“无法判断”。
+4. 直接按以下 JSON 格式输出结果：
+```json
+{{
+"reason": {{
+"1": "解释选项1正确、错误或者无法判断的原因",
+"2": "解释选项2正确、错误或者无法判断的原因",
+"3": "解释选项3正确、错误或者无法判断的原因",
+...
+}},
+"correct_options": ["2", "4", ...],
+"incorrect_options": ["1", "3", ...],
+"indeterminate_options": ["5", "6", ...],
+}}
+```
+现在我的新闻摘要是：{answers}
+多选项为: {numbered_options}
+请直接输出生成的JSON：
+你是一名优秀的新闻工作者，阅读下面给出的新闻摘要，并仅基于新闻摘要中提供的信息忠实地判断每个选项，具体判断要求如下：
+Figure 21: Multiple-choice question evaluation (in Chinese).
+{
+"question": "Why has the RMB rebounded against the U.S. dollar since late August?",
+"contexts": [
+"Both the U.S. dollar and U.S. Treasury yields have continued to decline, and the improved external 
+environment remains the main driver behind the RMB’s appreciation.",
+"The decline in the U.S. Dollar Index has supported the RMB’s rebound against the U.S. dollar.",
+"U.S. economic data continues to show moderate cooling, with employment and inflation trends 
+supporting the Federal Reserve’s monetary easing. Rising market expectations of a Fed rate cut have 
+also led to a noticeable drop in the U.S. Dollar Index.",
+"As of now, market forecasts suggest a 61% probability of a 25-basis-point cut and a 39% 
+probability of a 50-basis-point cut at the September Federal Reserve meeting.",
+"There is a possibility of a rapid and substantial RMB appreciation driven by exporters’ foreign 
+exchange settlements and the unwinding of carry trades.",
+"Some exporters who previously adopted a wait-and-see attitude may now be engaging in concentrated 
+foreign exchange settlements, creating positive feedback for RMB appreciation.",
+"The potential monthly scale of foreign exchange settlements may be around US$8–14 billion, 
+possibly pushing the RMB exchange rate up by about 1,000 basis points in the short term.",
+"With the domestic economy in a recovery phase, improving corporate profits, and a supportive 
+policy environment, market sentiment toward RMB assets is gradually becoming more bullish."
+],
+"propositions": [
+"Both the U.S. dollar and U.S. Treasury yields have continued to decline.",
+"Improvements in external conditions are the main driver behind the RMB’s appreciation.",
+"A declining U.S. Dollar Index has supported the RMB’s rebound against the U.S. dollar.",
+"U.S. economic data continues to show moderate cooling.",
+"U.S. employment and inflation trends both support the Federal Reserve’s monetary easing.",
+"Market expectations for a Federal Reserve rate cut have risen.",
+"There is a 61% probability that the Federal Reserve will cut rates by 25 basis points at its 
+September meeting, according to market forecasts.",
+"There is a 39% probability that the Federal Reserve will cut rates by 50 basis points at its 
+September meeting, according to market forecasts.",
+"The U.S. Dollar Index has declined significantly.",
+"There is a possibility of rapid and substantial RMB appreciation driven by exporters’ FX 
+settlements and carry trade unwinding.",
+"Some exporters who were previously on the sidelines may engage in concentrated foreign exchange 
+settlements.",
+"These concentrated settlements create a positive feedback loop fueling RMB appreciation.",
+"Potential settlement funds may average between USD 8 billion and USD 14 billion per month.",
+"This could push the RMB exchange rate up by approximately 1,000 basis points in the short term.",
+"The domestic economy is in a recovery phase.",
+"Corporate profits are improving.",
+"The policy environment is supportive.",
+"Market sentiment toward RMB assets is gradually becoming more bullish."
+]
+}
+Figure 22: A data point of a comprehensive question, the golden contexts and propositions.
+4626

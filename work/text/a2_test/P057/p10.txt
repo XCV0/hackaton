@@ -1,0 +1,112 @@
+Bernd Bohnet, Vinh Q Tran, Pat Verga, Roee Aharoni,
+Daniel Andor, Livio Baldini Soares, Jacob Eisen-
+stein, Kuzman Ganchev, Jonathan Herzig, Kai Hui,
+et al. 2022. Attributed question answering: Evalua-
+tion and modeling for attributed large language mod-
+els. arXiv preprint arXiv:2212.08037.
+Sihao Chen, Senaka Buthpitiya, Alex Fabrikant, Dan
+Roth, and Tal Schuster. 2022. Propsegment: A
+large-scale corpus for proposition-level segmenta-
+tion and entailment recognition. arXiv preprint
+arXiv:2212.10750.
+Tong Chen, Hongwei Wang, Sihao Chen, Wenhao
+Yu, Kaixin Ma, Xinran Zhao, Dong Yu, and Hong-
+ming Zhang. 2023. Dense x retrieval: What re-
+trieval granularity should we use? arXiv preprint
+arXiv:2312.06648.
+Nicola De Cao, Gautier Izacard, Sebastian Riedel, and
+Fabio Petroni. 2020. Autoregressive entity retrieval.
+arXiv preprint arXiv:2010.00904.
+Paolo Ferragina and Giovanni Manzini. 2000. Oppor-
+tunistic data structures with applications. In Pro-
+ceedings 41st annual symposium on foundations of
+computer science, pages 390–398. IEEE.
+Alex Graves. 2012. Sequence transduction with recur-
+rent neural networks.
+Shibo Hao, Yi Gu, Haodi Ma, Joshua Jiahua Hong,
+Zhen Wang, Daisy Zhe Wang, and Zhiting Hu. 2023.
+Reasoning with language model is planning with
+world model. arXiv preprint arXiv:2305.14992.
+Palak Jain, Livio Baldini Soares, and Tom
+Kwiatkowski. 2023. 1-pager: One pass an-
+swer generation and evidence retrieval. arXiv
+preprint arXiv:2310.16568.
+Vladimir Karpukhin, Barlas O˘guz, Sewon Min, Patrick
+Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and
+Wen-tau Yih. 2020. Dense passage retrieval for
+open-domain question answering. arXiv preprint
+arXiv:2004.04906.
+Omar Khattab, Keshav Santhanam, Xiang Lisa
+Li, David Hall, Percy Liang, Christopher Potts,
+and Matei Zaharia. 2022. Demonstrate-search-
+predict: Composing retrieval and language mod-
+els for knowledge-intensive nlp. arXiv preprint
+arXiv:2212.14024.
+Omar Khattab and Matei Zaharia. 2020. Colbert: Ef-
+ﬁcient and effective passage search via contextual-
+ized late interaction over bert. In Proceedings of
+the 43rd International ACM SIGIR conference on
+research and development in Information Retrieval,
+pages 39–48.
+Tushar Khot, Harsh Trivedi, Matthew Finlayson, Yao
+Fu, Kyle Richardson, Peter Clark, and Ashish Sab-
+harwal. 2022. Decomposed prompting: A modular
+approach for solving complex tasks. arXiv preprint
+arXiv:2210.02406.
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+ﬁeld, Michael Collins, Ankur Parikh, Chris Alberti,
+Danielle Epstein, Illia Polosukhin, Jacob Devlin,
+Kenton Lee, et al. 2019. Natural questions: a bench-
+mark for question answering research. Transactions
+of the Association for Computational Linguistics,
+7:453–466.
+Jinhyuk Lee, Alexander Wettig, and Danqi Chen. 2021.
+Phrase retrieval learns passage retrieval, too. arXiv
+preprint arXiv:2109.08133.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, et al. 2020. Retrieval-augmented generation
+for knowledge-intensive nlp tasks. Advances in Neu-
+ral Information Processing Systems, 33:9459–9474.
+Xi Victoria Lin, Xilun Chen, Mingda Chen, Weijia Shi,
+Maria Lomeli, Rich James, Pedro Rodriguez, Jacob
+Kahn, Gergely Szilvasy, Mike Lewis, et al. 2023.
+Ra-dit: Retrieval-augmented dual instruction tuning.
+arXiv preprint arXiv:2310.01352.
+Ximing Lu, Sean Welleck, Peter West, Liwei Jiang,
+Jungo Kasai, Daniel Khashabi, Ronan Le Bras, Lian-
+hui Qin, Youngjae Yu, Rowan Zellers, et al. 2021.
+Neurologic a* esque decoding: Constrained text
+generation with lookahead heuristics. arXiv preprint
+arXiv:2112.08726.
+Jacob Menick, Maja Trebacz, Vladimir Mikulik,
+John Aslanides, Francis Song, Martin Chadwick,
+Mia Glaese, Susannah Young, Lucy Campbell-
+Gillingham, Geoffrey Irving, and Nat McAleese.
+2022. Teaching language models to support answers
+with veriﬁed quotes.
+Donald Metzler, Yi Tay, Dara Bahri, and Marc Najork.
+2021. Rethinking search: making domain experts
+out of dilettantes. ACM SIGIR Forum, 55(1):1–27.
+Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike
+Lewis, Wen-tau Yih, Pang Wei Koh, Mohit Iyyer,
+Luke Zettlemoyer, and Hannaneh Hajishirzi. 2023.
+Factscore: Fine-grained atomic evaluation of fac-
+tual precision in long form text generation. arXiv
+preprint arXiv:2305.14251.
+Sewon Min, Weijia Shi, Mike Lewis, Xilun Chen, Wen-
+tau Yih, Hannaneh Hajishirzi, and Luke Zettlemoyer.
+2022. Nonparametric masked language modeling.
+arXiv preprint arXiv:2212.01349.
+Jianmo Ni, Chen Qu, Jing Lu, Zhuyun Dai, Gus-
+tavo Hernández Ábrego, Ji Ma, Vincent Y Zhao,
+Yi Luan, Keith B Hall, Ming-Wei Chang, et al.
+2021. Large dual encoders are generalizable retriev-
+ers. arXiv preprint arXiv:2112.07899.
+Ronak Pradeep, Kai Hui, Jai Gupta, Adam D Lelkes,
+Honglei Zhuang, Jimmy Lin, Donald Metzler, and
+Vinh Q Tran. 2023. How does generative retrieval
+scale to millions of passages? arXiv preprint
+arXiv:2305.11841.
+8896

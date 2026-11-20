@@ -1,0 +1,97 @@
+E Dataset Curation Process
+To collect real-world patient questions, we used
+an autonomous telemedicine assistant capable of
+conducting phone conversations and answering pa-
+tient questions regarding their recovery following
+cataract surgery. From these interactions, we gath-
+ered 102 unique questions from 120 patients from
+calls that took place as a standard of their care at
+two UK hospitals. All patients explicitly consented
+to the use of their anonymised data for research
+purposes.
+To generate answers to these questions, we cu-
+rated a knowledge source on cataract surgery with
+the help of two ophthalmic surgeons. We then em-
+ployed three LLMs – Palm-2 (text-bison@002,
+(Anil et al., 2023)), Mistral-7B [(Jiang et al., 2023))
+and Llama-8B [(Touvron et al., 2023)] – as part of a
+RAG-based QA agent to generate responses to the
+102 questions. This process resulted in a dataset of
+306 question-answer-context triplets.
+Subsequently, we sampled triplets where the an-
+swers included conversational elements such as
+acknowledgements and follow-up questions, re-
+flecting real-world conversational responses. This
+refined dataset comprises 206 question-answer-
+context triplets.
+E.1 Balancing by Perceived Faithfulness
+We employed two independent labellers to as-
+sess "faithfulness" for the 206 examples by show-
+ing them only the answer and the context. We
+asked them to use their own judgment to determine
+whether a given answer was faithful to the con-
+text. We refer to this measure of human judgment
+as Perceived Faithfulness (PF). The labellers dis-
+cussed and resolved any disagreements to ensure
+consensus.
+To create a balanced dataset, we sample an equal
+number of perceived faithful and unfaithful re-
+sponses. This process resulted in a dataset consist-
+ing of 74 faithful and 74 unfaithful responses, cul-
+minating in a total of 148 question-answer-context
+triplets.
+E.2 Augmenting with out-of-scope data
+For a holistic evaluation, we augmented this dataset
+with 45 out-of-scope questions selected by two
+clinicians from the open-source dataset Health-
+SearchQA [(Singhal et al., 2023a)]. We created
+90 question-answer-context triplets using the same
+process mentioned earlier with only Palm-2 and
+Llama-8B, resulting in a comprehensive dataset of
+total 238 triplets.
+E.3 Human labeling
+We employed two independent labellers to follow
+the older definition of Faithfulness and Conver-
+sational Faithfulness (CF) to generate labels for
+the (answer-context) pairs from the 238 examples.
+After the labellers resolved disagreements, we com-
+bined these ratings with the perceived faithfulness
+human ratings to create a comprehensive dataset of
+238 question-answer-context triplets with human-
+rated faithfulness, CF, and PF. We name this dataset
+FaithfulnessQAC and make it available for re-
+search purposes.
+E.4 Creating a dataset of unique questions
+To support Claim (3), we sampled 87 out of 148
+triplets where each question is unique, with the
+corresponding answers randomly selected from one
+of the three LLM responses. For the out-of-scope
+data, we randomly chose 45 triplets with responses
+from between the two models. The final dataset
+contains 132 question-answer-context triplets, and
+we name it UniqueQAC, making it available for
+research purposes.
+E.5 Creating a dataset of unique questions
+To support Claim (2), we need a dataset where
+each question is unique, as Context Relevance is
+measured between the question and the context.
+To achieve this, we sampled 87 out of 148 triplets
+where each question is unique, with the correspond-
+ing answers randomly selected from one of the
+three LLM responses. For the out-of-scope data,
+we randomly chose 45 triplets with responses from
+between the two models. The final dataset contains
+132 question-answer-context triplets, along with
+the human ratings for CF, CR and RA from inde-
+pendent labellers. We name this dataset Unique-
+QAC and make it available for research purposes.
+E.6 Creating a dataset for clinical harm,
+helpfulness and inappropriateness
+To support Claim (3), we start with UniqueQAC
+and ask two ophthalmic surgeons to label the an-
+swers for the following axes:
+1. Clinical Harm: Is the response harmful?
+2. Helpfulness: Is the response helpful?
+3. Appropriateness: Is there inappropriate or
+incorrect content?
+16714

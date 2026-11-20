@@ -1,0 +1,97 @@
+value. Highlight trends.
+• Supported Outcomes: Identify where manage-
+ment’s comments are confirmed by the financial
+data.
+• Unexpected Outcomes: Highlight results that
+management did not address or that diverge
+from historical trends. Explain the importance
+to investors.
+Focus on improvements in bottom-line performance
+(e.g., net income). Note: Figures may be stated in ten-
+thousands (wan) or hundreds of millions (yi). Account
+for these scale differences.
+H.5 Synthesis & Prediction Agent
+Synthesis & Prediction Agent
+You are the final arbiter in a multi-agent financial anal-
+ysis system. Synthesize findings from three specialist
+agents to predict the stock price reaction.
+Analyses Received:
+• Pee Analysis: {peer_analysis_summary}
+• HistoricalAnalysis:
+{historical_analysis_summary}
+• FinancialsAnalysis:
+{financials_analysis_summary}
+TASK:
+1. Synthesize Findings: Write a one-paragraph
+executive summary integrating insights from all
+three analyses.
+2. Identify Key Drivers: List the top 3–5 critical
+factors (positive or negative) that will likely
+influence investor sentiment.
+3. Predict Price Shock: Based on the evidence,
+classify the outcome as: ‘Positive Shock‘,
+‘Negative Shock‘, or ‘Neutral‘.
+4. Justify Prediction: Provide a concise,
+evidence-based rationale for your prediction,
+referencing specific agent analyses.
+I Key Metrics Extracted from the
+Financial Statements
+To keep the structured input tractable yet economi-
+cally comprehensive, we distill the ∼15 line-items
+available in each quarterly balance sheet, income
+statement, and cash-flow statement down to fifteen
+core metrics (table 9). These metrics gives the
+swarm of agents an information-rich view of firm
+fundamentals that can be compared longitudinally
+and cross-sectionally within the Causal–Temporal
+Knowledge Graph. These metrics are embedded as
+Fact nodes in the CTKG and linked to their respec-
+tive Quarter and Ticker nodes, allowing agents to
+reason over temporal trends and peer benchmarks
+when forming price-move predictions.
+Economic theme Line-items ingested
+Balance-sheet strength Cash and cash equivalents; Ac-
+counts receivable; Inventory;
+Property, plant and equipment;
+Short-term debt; Total current
+liabilities; Total liabilities; To-
+tal shareholders’ equity
+Profitability & margins Net profit; Gross profit; Depre-
+ciation and amortization
+Cash-flow drivers Net cash flow from operating
+activities; Net cash flow from
+investing activities; Net cash
+flow from financing activities
+Per-share performance Diluted earnings per share
+(common stock)
+Table 9: Unified set of fifteen financial-statement met-
+rics passed to downstream reasoning agents.
+J Example Facts Extracted from
+Earnings Call
+Below we provide an example of facts extracted
+from a single earnings call (ALTO, 2023-Q3) from
+the fact extraction agent. For each fact we report
+the type and the agents it is routed to. We provide
+around 1000 of such calls with associated facts in
+the supplementary information.
+• Adjusted EBITDA: $4.7 million. Type: Re-
+sult. Agents: Historic Performance. Reason:
+Positive adjusted EBITDA compared to nega-
+tive $20.6 million in 2022.
+• Gross Profit: Improved over the same pe-
+riod in 2022. Type: Result. Agents: Historic
+Performance. Reason: Due to strong crush
+margins.
+• Production Volumes: Lower than anticipated.
+Type: Result. Agents: Historic Performance.
+Reason: Due to unusually high unscheduled
+downtime.
+• Specialty Alcohol Sales: 85 million gallons.
+Type: Result. Agents: Historic Performance.
+Reason: Tracking closer to this figure despite
+lower consumer demand.
+• Corn Basis Levels: Increased by $0.31 vs.
+prior period. Type: Result. Agents: Historic
+Performance. Reason: Illustrates a sharp in-
+crease sequentially.
+3070

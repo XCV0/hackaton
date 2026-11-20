@@ -1,0 +1,107 @@
+future, we plan to conduct joint training of reranker
+and rewrite models, which may yield substantial
+benefits for RAG.
+Limitations
+Although our experiments employ a general
+reranker as the source of feedback signals, there
+are still some limitations. (1) The Lack of Cross-
+Domain Validation. As constrained by the lack
+of domain-specific data, we lack the validation of
+separately trained rerankers on datasets pertinent
+to a specific domain. (2) Reliance on the Effec-
+tiveness of Rewriting as a Bottleneck. Although
+we can achieve some improvements by using pub-
+licly available rerankers, this enhancement may be
+limited by the capability of the reranker.
+References
+Afra Feyza Akyürek, Ekin Akyürek, Ashwin Kalyan,
+Peter Clark, Derry Tanti Wijaya, and Niket Tandon.
+2023. RL4F: generating natural language feedback
+with reinforcement learning for repairing model out-
+puts. In Proceedings of the 61st Annual Meeting of
+the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), ACL 2023, Toronto, Canada,
+July 9-14, 2023, pages 7716–7733. Association for
+Computational Linguistics.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+CoRR, abs/2310.11511.
+Jinze Bai, Shuai Bai, Yunfei Chu, et al. 2023. Qwen
+technical report. arXiv preprint arXiv:2309.16609.
+Claudio Carpineto and Giovanni Romano. 2012. A
+survey of automatic query expansion in information
+retrieval. ACM Comput. Surv., 44(1):1:1–1:50.
+Zhiyu Chen, Jie Zhao, Anjie Fang, Besnik Fetahu, Oleg
+Rokhlenko, and Shervin Malmasi. 2022. Reinforced
+question rewriting for conversational question an-
+swering. In Proceedings of the 2022 Conference on
+Empirical Methods in Natural Language Processing:
+EMNLP 2022 - Industry Track, Abu Dhabi, UAE, De-
+cember 7 - 11, 2022, pages 357–370. Association for
+Computational Linguistics.
+Hanze Dong, Wei Xiong, Deepanshu Goyal, Rui Pan,
+Shizhe Diao, Jipeng Zhang, Kashun Shum, and
+Tong Zhang. 2023. RAFT: reward ranked finetuning
+for generative foundation model alignment. CoRR,
+abs/2304.06767.
+Efthimis N Efthimiadis. 1996. Query expansion. An-
+nual review of information science and technology
+(ARIST), 31:121–87.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Qianyu Guo,
+Meng Wang, and Haofen Wang. 2023. Retrieval-
+augmented generation for large language models: A
+survey. CoRR, abs/2312.10997.
+Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong,
+Zhangyin Feng, Haotian Wang, Qianglong Chen,
+Weihua Peng, Xiaocheng Feng, Bing Qin, and Ting
+Liu. 2023. A survey on hallucination in large lan-
+guage models: Principles, taxonomy, challenges, and
+open questions. CoRR, abs/2311.05232.
+Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu,
+Dan Su, Yan Xu, Etsuko Ishii, Yejin Bang, Andrea
+Madotto, and Pascale Fung. 2023. Survey of halluci-
+nation in natural language generation. ACM Comput.
+Surv., 55(12):248:1–248:38.
+Mandar Joshi, Eunsol Choi, Daniel S. Weld, and Luke
+Zettlemoyer. 2017. Triviaqa: A large scale distantly
+supervised challenge dataset for reading comprehen-
+sion. In Proceedings of the 55th Annual Meeting of
+the Association for Computational Linguistics, ACL
+2017, Vancouver, Canada, July 30 - August 4, Volume
+1: Long Papers, pages 1601–1611. Association for
+Computational Linguistics.
+Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick
+Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and
+Wen-tau Yih. 2020. Dense passage retrieval for open-
+domain question answering. In Proceedings of the
+2020 Conference on Empirical Methods in Natural
+Language Processing (EMNLP), pages 6769–6781,
+Online. Association for Computational Linguistics.
+Ethayarajh Kawin, Xu Winnie, Jurafsky Dan, and
+Douwe Kiela. 2023. Human-centered loss functions
+(halos). Technical report, Contextual AI.
+Omar Khattab, Keshav Santhanam, Xiang Lisa Li,
+David Hall, Percy Liang, Christopher Potts, and
+Matei Zaharia. 2022. Demonstrate-search-predict:
+Composing retrieval and language models for
+knowledge-intensive NLP. CoRR, abs/2212.14024.
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+field, Michael Collins, Ankur P. Parikh, Chris Alberti,
+Danielle Epstein, Illia Polosukhin, Jacob Devlin, Ken-
+ton Lee, Kristina Toutanova, Llion Jones, Matthew
+Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob
+Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+ral questions: a benchmark for question answering
+research. Trans. Assoc. Comput. Linguistics, 7:452–
+466.
+Hung Le, Yue Wang, Akhilesh Deepak Gotmare, Silvio
+Savarese, and Steven Chu-Hong Hoi. 2022. Coderl:
+Mastering code generation through pretrained mod-
+els and deep reinforcement learning. In Advances in
+Neural Information Processing Systems 35: Annual
+Conference on Neural Information Processing Sys-
+tems 2022, NeurIPS 2022, New Orleans, LA, USA,
+November 28 - December 9, 2022.
+892

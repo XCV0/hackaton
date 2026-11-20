@@ -1,0 +1,93 @@
+Findings of the Association for Computational Linguistics: EMNLP 2025, pages 8456–8472
+November 4-9, 2025 ©2025 Association for Computational Linguistics
+AttnComp: Attention-Guided Adaptive Context Compression
+for Retrieval-Augmented Generation
+Lvzhou Luo1,2,3, Yixuan Cao1,2,3*, Ping Luo1,2,3*
+1Key Lab of Intelligent Information Processing, Institute of Computing Technology,
+Chinese Academy of Sciences (CAS), Beijing 100190, China
+2State Key Lab of AI Safety, Beijing 100190, China
+3University of Chinese Academy of Sciences, CAS, Beijing 100049, China
+{luolvzhou23s,caoyixuan,luop}@ict.ac.cn
+Abstract
+Retrieval-augmented generation improves the
+factual accuracy of Large Language Models
+(LLMs) by incorporating external context, but
+often suffers from irrelevant retrieved content
+that hinders effectiveness. Context compres-
+sion addresses this issue by filtering out irrel-
+evant information from context before LLM
+generation. However, existing methods strug-
+gle to adaptively adjust compression rates for
+different context, maintain low latency and in-
+tegrate information across multiple documents.
+To overcome these limitations, We introduce
+AttnComp, an adaptive, efficient and context-
+aware compression framework. By leveraging
+the attention mechanism of LLMs to identify
+relevant information, AttnComp employs a Top-
+P compression algorithm to retain the minimal
+set of documents whose cumulative attention
+weights exceeds a predefined threshold. In ad-
+dition to compression, AttnComp estimates re-
+sponse confidence by assessing the overall rele-
+vance of the retrieved content, enabling users to
+gauge response reliability. Experiments demon-
+strate that AttnComp outperforms existing com-
+pression methods and uncompressed baselines,
+achieving higher accuracy with substantial com-
+pression rates and lower latency.
+1 Introduction
+Retrieval-Augmented Generation (RAG) enhances
+the factual accuracy and reliability of Large Lan-
+guage Models (LLMs) in knowledge-intensive
+tasks by integrating retrieved context into their gen-
+eration process(Lewis et al., 2020; Borgeaud et al.,
+2022; Izacard et al., 2023; Ram et al., 2023; Xu
+et al., 2023b). However, practical RAG applica-
+tions often grapple with retrieved content contain-
+ing substantial irrelevant information, even entirely
+unrelated to the query(Sauchuk et al., 2022). This
+gives rise to three primary issues: first, LLMs can
+*Corresponding author: Yixuan Cao and Ping Luo.
+be misled by such noise, leading to incorrect an-
+swers(Shi et al., 2023; Jin et al., 2024a; Yoran et al.,
+2024; Wu et al., 2024a); second, LLMs struggle
+to identify and utilize key information effectively
+as context length increases(Liu et al., 2024); and
+third, irrelevant content unnecessarily inflates input
+sequences, escalating computational overhead.
+To mitigate these issues, context compression
+has emerged as a promising solution to filter out
+irrelevant information before generation. Existing
+methods can be categorized into abstractive and ex-
+tractive approaches. Abstractive methods leverage
+LLMs to summarize or rewrite retrieved content via
+autoregressive generation(Xu et al., 2023a; Yoon
+et al., 2024; Zhu et al., 2024). While achieving
+high compression rates, they incur significant la-
+tency due to token-by-token decoding. Extractive
+methods instead select relevant spans from the orig-
+inal content, offering greater efficiency(Jiang et al.,
+2024; Hwang et al., 2024; Chirkova et al., 2025).
+However, current extractive methods typically only
+assess the relevance of individual sentence or docu-
+ment to the query, limiting their ability to integrate
+information across broader context. Furthermore,
+many such approaches rely on fixed compression
+rates or target lengths(Xu et al., 2023a; Jiang et al.,
+2024), ignoring the variable proportion of relevant
+content and risking under- or over-compression.
+Consequently, we posit that an effective context
+compression method should exhibit three key prop-
+erties: (1) Adaptive: It should dynamically adjust
+the compression rates based on the proportion of
+relevant information within the context. (2) Effi-
+cient: It should maintain low computational cost
+and latency, ensuring rapid processing for real-time
+applications. (3) Context-Aware: It should inte-
+grate and synthesize information from the entire
+retrieved content to accurately identify relevant seg-
+ments. However, to the best of our knowledge, no
+existing compression method simultaneously satis-
+fies all three of these properties.
+8456

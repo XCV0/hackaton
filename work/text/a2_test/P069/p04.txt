@@ -1,0 +1,100 @@
+DB Here, we elaborate on how the proposed Con-
+sistency Contrastive Decoding (CCD) debiases, or
+minimizes shifts in the model’s output distribution
+caused by changes in input context arrangement.
+Existing test-time methods require multiple for-
+ward passes with perturbed inputs (Wang et al.,
+2023; Lee et al., 2025b). Literal translation of
+such approach would be contrasting logits from
+two same sets of input contexts arranged in differ-
+ent order, x+ and x− as follows:
+f + t = f ( yt ⏐⏐ x+, y<t; θ ) ,
+f − t = f ( yt ⏐⏐ x−, y<t; θ ) . (7)
+Methods such as instructive decoding (Kim et al.,
+2024) share the above formulation in Eq. 7, where
+the two inputs correspond to prompting the LLM
+with positive and negative task instructions. For
+debiasing purposes, selecting a definitive positive-
+negative ordering is nontrivial, and accounting for
+all n! permutations incurs significant test-time over-
+head.
+Instead, we shift debiasing effort to training a
+small model θs db using CORD (Lee et al., 2025a),
+which penalizes inconsistencies in model outputs
+given the same input contexts ordered differently
+with a train-time consistency loss. Intuitively,
+we extrapolate from biased model predictions to-
+ward less biased ones. To this end, two finetuned
+models—one trained with consistency and one
+without—are contrasted to isolate the effect of de-
+biasing via input perturbations, hence the name
+Consistency Contrastive Decoding.
+f + t = f (yt | x, y<t; θs db) ,
+f − t = f (yt | x, y<t; θs ft) . (8)
+Unlike DA, this consistency-aware approach gen-
+eralizes well across datasets. By contrasting logits
+from trained models as in Eq. 8, CCD removes
+dataset-specific biases from finetuning, improving
+generalization to new domains and tasks.
+Combined: GRAD Finally, GRAD combines
+all three RAG strategies expressed as decoding ob-
+jectives,
+p(· | y<t) = softmax
+(
+ft +
+∑
+i
+γiRi,t
+)
+, (9)
+where the token-level reward terms RMS,t, RDA,t,
+and RDB,t are defined with Eq. 4, contrasting model
+logits from Eq. 5, 6, and 8, respectively. This can
+be also seen in Algorithm 1.
+In the case of single objective optimization as in
+Eq. 3, γ has been typically determined empirically,
+choosing the value of γ that maximizes validation
+performance. For multi-objective optimization as
+in GRAD, it has been widespread to assume that
+relative importance of each objective known a pri-
+ori (Shi et al., 2024). We argue such assumption is
+impractical in RAG, and propose task-level adapta-
+tion that selects objective activations and strengths
+without any prior information, as in the next sec-
+tion.
+3.4 Task-Level Adaptation
+While an objective that helps in one setting may
+hurt in another, optimal weights are not known
+a priori. We therefore propose a mechanism that
+adapts each objective to the current task scenario by
+automatically selecting γi, the weight of objective
+i for the given task.
+Decomposing magnitude and activation For
+each objective i ∈ {DA, DB, MS}, we decompose
+its effective decoding weight as
+γi = γ0 i · γ1 i , (10)
+where γ0 i controls the magnitude of the objective
+and γ1 i ∈ {0, 1} is a task-level activation switch,
+controlling whether the objective is applied.
+When labeled validation data is accessible
+Prior decoding-time optimization methods typi-
+cally assume a single objective and select the guid-
+ance strength γ by labeled validation accuracy (e.g.,
+contrastive decoding and proxy tuning). If a labeled
+validation split is available for the target scenario,
+the simplest procedure follows standard practice:
+we choose γ0 i ∈ Γ by downstream validation accu-
+racy, and activate objective i if it improves valida-
+tion performance compared to not using it (condi-
+tioned on any previously activated objectives). This
+provides a straightforward label-based instantiation
+of task-level adaptation.
+When labeled validation data is not accessible
+Meanwhile, many private or rapidly changing RAG
+settings do not have access to a labeled validation
+split with ground-truth answers for tuning; in such
+cases, we require a label-free signal to decide both
+γ0 i and γ1 i .
+We build on the divergence-alignment criterion
+of Fan et al. (2024), which assesses whether apply-
+45277

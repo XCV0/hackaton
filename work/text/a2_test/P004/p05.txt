@@ -1,0 +1,101 @@
+overconfidence to bias and unsafe content. Fine-
+tuned on safety-labeled instruction data, the model
+outputs a scalar probability Srisk ∈ [0, 1] repre-
+senting the estimated hazard level. Crucially, we
+utilize this score as a strict safety gate rather than a
+shaping reward to prevent the optimization of un-
+safe trajectories. The final score is then aggregated
+with factual and logical metrics to constitute the
+comprehensive Defect Report Lt.
+3.3 PPO-based Query Optimizer
+To improve upon rigid heuristic exploration, LCR-
+RAG introduces a PPO-based optimizer that adapts
+its strategy based on the neuro-symbolic Defect Re-
+port (Lt). The framework utilizes a hierarchical de-
+sign where strategic decision-making is separated
+from language generation: a lightweight policy net-
+work determines the editing operation, which is
+subsequently carried out by a frozen Qwen3-1.7B
+model via pre-defined prompt templates (see Ap-
+pendix J). By isolating the optimization logic from
+the generative process, this approach balances effi-
+ciency with transparent query refinement.
+MDP Formulation. The refinement process is
+modeled as a Markov Decision Process (MDP)
+(S, A, R, P, γ). The State Space (S) consists of
+states st, each defined as a fixed-size vector formed
+by concatenating Sentence-BERT embeddings of
+the original query q0, current query qt, current
+answer At, and the vectorized defect report Lt.
+The Action Space (A) comprises a discrete set
+of high-level query editing operations, including
+LogicalDecompose to break down complex rea-
+soning chains, EntityAugment to inject relevant
+entities, RephraseFocus to shift emphasis or re-
+solve ambiguity, and NoOp to terminate refinement.
+ly, the Reward Function (R) assigns a numerical
+reward at each step that reflects the degree of im-
+provement in factual and logical quality, penalized
+by a small edit cost:
+Rt = wl · ∆Slogic + wf · ∆Sfact − Ccost, (5)
+where ∆S measures the score change after apply-
+ing an edit.
+Training Procedure. The PPO agent employs
+a policy network πθ(a | s) and a value net-
+work Vϕ(s), both implemented as 3-layer MLPs.
+Training proceeds in two distinct phases. First,
+we perform Bootstrapped Pretraining, initializ-
+ing the policy via supervised learning on expert
+trajectories Dexpert constructed using rule-based
+mappings from verifier signals to actions (e.g.,
+IncompleteChain → LogicalDecompose). The
+pretraining objective is standard behavior cloning:
+LBC(θ) = −
+∑
+(si,a∗ i )
+log πθ(a∗ i | si) (6)
+Second, we conduct Online Fine-tuning via PPO.
+The policy is optimized using PPO-Clip with the
+following clipped surrogate loss:
+LCLIP(θ) = Et
+[
+min
+(
+rt(θ) ˆAt,
+clip(rt(θ), 1 − ϵ, 1 + ϵ) ˆAt
+)]
+,
+(7)
+where rt(θ) is the importance ratio. The advan-
+tage ˆAt is computed using Generalized Advantage
+Estimation (GAE):
+ˆAt =
+∞∑
+l=0
+(γλ)lδt+l, δt = Rt+γVϕ(st+1)−Vϕ(st)
+(8)
+Simultaneously, the value network Vϕ(s) is opti-
+mized to minimize the temporal difference (TD)
+error:
+Lvalue(ϕ) = 1 2 ∑ t ( Vϕ(st) − Rtarget t )2 (9)
+This two-phase approach ensures the policy is sta-
+bly and robustly initialized and capable of general-
+izing beyond heuristics by leveraging the structured
+verifier feedback.
+4 Experimental Setup
+4.1 Datasets.
+We evaluate our method on four widely-used bench-
+marks, each designed to test distinct aspects of com-
+plex question answering: HotpotQA (Yang et al.,
+2018) evaluates multi-hop reasoning through ques-
+tions that require integrating information across
+multiple documents; ASQA (Stelmakh et al., 2022)
+focuses on disambiguation in open-ended question
+answering; MuSiQue (Trivedi et al., 2022) targets
+compositional multi-hop reasoning in a curated set-
+ting; and TriviaQA (Joshi et al., 2017) assesses
+open-domain factual QA under noisy retrieval.
+4.2 Baselines.
+We compare LCR-RAG with a diverse suite of com-
+petitive baselines, including: Standard RAG as a
+17904

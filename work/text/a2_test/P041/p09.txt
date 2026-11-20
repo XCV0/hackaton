@@ -1,0 +1,90 @@
+Response Quality Retrieval Quality
+F1 Precision Recall F1 Precision Recall
+Hybrid RAG 0.653 0.676 0.655 0.354 0.222 0.921
+KG2RAG 0.663 0.690 0.683 0.436 0.301 0.908
+−5% 0.662 0.681 0.676 0.434 0.306 0.898
+−10% 0.654 0.688 0.682 0.432 0.305 0.890
+Table 6: Experimental results on HotpotQA in the distractor setting with triplets dropped.
+In a typical RAG system (Lewis et al., 2020), the
+documents are first segmented into chunks based
+on lengths and structures, and then encoded with
+an embedding model (Nussbaum et al., 2024; Li
+and Li, 2024) and indexed for efficient retrieval.
+Inspired by the idea of sliding windows (Jiao,
+2006), sentence window retrieval (Jiang et al.,
+2023; Eibich et al., 2024) fetches the neighboring
+chunks around the retrieved chunks and concate-
+nates them into a single larger chunk for context en-
+richment. However, sentence window retrieval only
+considers the physical proximity of text chunks
+within the same document. Different from exist-
+ing studies, KG2RAG performs retrieval expansion
+based on factual associations among chunks that
+may be across multiple documents.
+Reranking (Ampazis, 2024; Glass et al., 2022) is
+a critical technique in information retrieval (Grems,
+1962; Kuo et al., 2024). In RAG systems, feeding
+the retrieved chunks along with the queries into
+a deep learning-based cross-encoder (Xiao et al.,
+2023) can measure the semantic relevance more
+precisely, thereby enhancing both the retrieval and
+generation quality. KG2RAG organizes the re-
+trieved chunks into paragraphs with KGs as the
+skeleton, allowing a fine-grained measurement of
+paragraph-level relevance to queries.
+LLMs with Knowledge Graph LLM (Li et al.,
+2024; Ren et al., 2024) is one of the most repre-
+sentative achievements of contemporary artificial
+intelligence (AI). KGs (Ji et al., 2022), as graph-
+structured relational databases, serve as a crucial
+data infrastructure for AI applications. Research
+indicates that LLMs have the potential to address
+tasks related to KGs, such as knowledge graph com-
+pletion (Liu et al., 2024c) and knowledge graph
+question answering (Sen et al., 2023).
+Recently, the research community begins to ex-
+plore how KGs can be used to enhance the gen-
+eration capability of LLMs (Wang et al., 2024a;
+Edge et al., 2024; Xu et al., 2024a). For exam-
+ple, KGP (Wang et al., 2024a) constructs a docu-
+ment KG consisting of page and passage nodes, and
+links passage nodes with TF-IDF. The document
+KG is employed for retrieval expansion. The docu-
+ment KG constructed by KGP is based on sentence-
+level text similarity, which essentially functions
+similarly to simply expanding the context window.
+GraphRAG (Edge et al., 2024) targets at query-
+focused summarization tasks. GraphRAG extracts
+KGs automatically from the document base with
+an LLM and analyzes the semantic structure of the
+dataset before querying, by splitting the KG from
+different level and detecting linked nodes hierarchi-
+cally. Different from previous studies, KG2RAG
+aims to enhance RAG with the fact-level structure
+and factual knowledge of KGs.
+5 Conclusion
+In this paper, we propose KG2RAG, a novel frame-
+work designed to enhance the performance of RAG
+through the integration of KGs. We introduce link-
+ages between chunks and a specific KG, which
+help in providing fact-level relationships among
+these chunks. Consequently, KG2RAG suggests
+performing the KG-guided chunk expansion and
+the KG-based context organization based on seed
+chunks retrieved by semantic-based retrieval ap-
+proaches. Through these processes, the retrieved
+chunks become diverse, intrinsically related, and
+self-consistent, forming well-organized paragraphs
+that can be fed into LLMs for high-quality response
+generation. We compare KG2RAG with existing
+RAG-based approaches, demonstrating its superior
+performance in both response quality and retrieval
+quality. An ablation study is also conducted to fur-
+ther confirm the contributions of KG-guided chunk
+expansion and KG-based context organization, in-
+dicating that these two modules collaboratively en-
+hance the effectiveness of KG2RAG.
+Acknowledgments
+This work is supported by the National Natural
+Science Foundation of China (No. 62272219).
+8920

@@ -1,0 +1,68 @@
+Citation: Chang, T.-C.; Liao, C.-Y.;
+Lee, C.-T.; Lee, H.-Y. Investigation of
+the Performance of Perovskite Solar
+Cells with ZnO-Covered PC61BM
+Electron Transport Layer. Materials
+2023, 16, 5061. https://doi.org/
+10.3390/ma16145061
+Academic Editors: Jordi Faraudo,
+Nikolas J. Podraza and Dameng Liu
+Received: 21 June 2023
+Revised: 13 July 2023
+Accepted: 14 July 2023
+Published: 18 July 2023
+Copyright: © 2023 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+materials
+Article
+Investigation of the Performance of Perovskite Solar Cells with
+ZnO-Covered PC61BM Electron Transport Layer
+Ting-Chun Chang 1, Chen-Yi Liao 1, Ching-Ting Lee 1,2
+ and Hsin-Ying Lee 1,*
+1 Department of Photonics, National Cheng Kung University, Tainan 701, Taiwan;
+l78111508@gs.ncku.edu.tw (T.-C.C.); t104360451@ntut.org.tw (C.-Y.L.); ctlee@ee.ncku.edu.tw (C.-T.L.)
+2 Department of Electrical Engineering, Yuan Ze University, Taoyuan 320, Taiwan
+* Correspondence: hylee@ee.ncku.edu.tw; Tel.: +886-6-2082368
+Abstract: Due to its high carrier mobility and electron transmission, the phenyl-C61-butyric acid
+methyl ester (PC61BM) is usually used as an electron transport layer (ETL) in perovskite solar cell
+(PSC) conﬁgurations. However, PC61BM ﬁlms suffer from poor coverage on perovskite active layers
+because of their low solubility and weak adhesive ability. In this work, to overcome the above-
+mentioned shortcomings, 30 nm thick PC61BM ETLs with different concentrations were modeled.
+Using a 30 nm thick PC61BM ETL with a concentration of 50 mg/mL, the obtained performance
+values of the PSCs were as follows: an open-circuit voltage (Voc) of 0.87 V, a short-circuit current
+density (Jsc) of 20.44 mA/cm2, a ﬁll factor (FF) of 70.52%, and a power conversion efﬁciency (PCE) of
+12.54%. However, undesired ﬁne cracks present on the PC61BM surface degraded the performance of
+the resulting PSCs. To further improve performance, multiple different thicknesses of ZnO interface
+layers were deposited on the PC61BM ETLs to release the ﬁne cracks using a thermal evaporator. In
+addition to the pavement of ﬁne cracks, the ZnO interface layer could also function as a hole-blocking
+layer due to its larger highest occupied molecular orbital (HOMO) energy level. Consequently, the
+PCE was improved to 14.62% by inserting a 20 nm thick ZnO interface layer in the PSCs.
+Keywords: perovskite solar cells; PC61BM electron transport layer; ZnO interface layer; time-resolved
+photoluminescence spectroscopy
+1. Introduction
+In the modern era, fossil-energy-based environmental pollution caused by the pro-
+cesses of industrial development and production has posed serious problems worldwide.
+Therefore, research on clean, pollution-free, sustainable energy has drawn rapidly increas-
+ing attention [1]. Among the possible alternative energies, solar energy is undoubtedly
+the most valued energy source, and it might completely replace fossil energy in order
+to mitigate environmental pollution in the future [2]. There are several kinds of solar
+cells, such as organic solar cells [3,4], inorganic solar cells [5,6], perovskite solar cells
+(PSCs) [7–12], and so on. Nevertheless, in view of their advantages in terms of inexpen-
+siveness, good ﬂexibility, high carrier mobility, long carrier diffusion length, and high
+performance, organic–inorganic halide perovskite solar cells have become the most promis-
+ing and attractive candidates for alternative energy sources [13,14].Over the past few years,
+the power conversion efﬁciency (PCE) of perovskite solar cells has increased from 3.8% to
+25.5%, which is very close to the current PCE of crystalline silicon (c-Si) solar cells [15].
+Recently, due to their advantages such as high carrier mobility and outstanding charge
+transport properties [16,17], phenyl-C61-butyric acid methyl ester (PC61BM) ﬁlms have
+been widely used as electron transport layers (ETLs) in p-i-n perovskite solar cells. The
+incorporation of an appropriate ETL material will not only improve electron transportation
+between the cathode and the perovskite active layer but also suppress the carrier recombi-
+nation in solar cells [18]. Moreover, because PC61BM ﬁlms can be easily deposited using the
+Materials 2023, 16, 5061. https://doi.org/10.3390/ma16145061 https://www.mdpi.com/journal/materials

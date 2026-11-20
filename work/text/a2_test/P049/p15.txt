@@ -1,0 +1,140 @@
+<s> Briefly answer the following question:<0x0A>how do i get copies of my
+income tax returns<0x0A>Bear in mind that your response should be strictly
+based on the following three passages:<0x0A>passage 1:Step 4: Enter form
+used. Enter the form you used to file your federal income tax return on line 6.
+If you are requesting a personal income tax return, it’s likely you filed on Form
+1040, 1040A or 1040EZ. You must also enter the tax years you are requesting
+copies for on line 7.<0x0A><0x0A>passage 2:1 This transcript includes your
+marital status, the type of return you filed, your adjusted gross income and
+taxable income. You can get transcripts on the web, by phone or by mail.
+To request transcripts online, go to IRS.gov and use the Order a Transcript
+tool.<0x0A><0x0A>passage 3:You may also request a copy of your California
+tax return by submitting a Request for Copy of Income Tax or Fiduciary
+Return Form FTB 3516 or by submitting your request on plain paper and
+provide the following: 1 Your Name (and Spouse if joint return) Social security
+numbers.<0x0A><0x0A>In case the passages do not contain the necessary
+information to answer the question, please reply with: ”Unable to answer based
+on given passages.”<0x0A>output:<s> Based on the provided passages, here is
+how you can obtain copies of your income tax returns:<0x0A><0x0A>Passage
+1 states that to obtain copies of your income tax returns, you will need to
+complete Form 4506
+<s> Briefly answer the following question:<0x0A>how to heat frozen baked
+scones<0x0A>Bear in mind that your response should be strictly based on the
+following three passages:<0x0A>passage 1:There should be little bits of cold
+butter scattered around the flour. The moment the cold butter pieces bake, they
+create little pockets of steam and cause the dough to rise – this is similar to what
+happens when you bake pie crust. It’s the butter that makes these cranberry
+scones so tender, light and delicious.<0x0A><0x0A>passage 2:Scones should
+be light and flaky, not heavy and flat. We stick to all-purpose flour in our
+kitchen – it’s pretty much our go-to flour. For this recipe, we prefer to use soft,
+low protein all-purpose flour. Protein levels vary by flour brand. Protein content
+can affect the tenderness of baked goods.<0x0A><0x0A>passage 3:Make sure
+to preheat the oven to the correct temperature (220°C / 200°C fan oven / gas
+mark 6) before putting your scones in. The 15 minute guideline starts from the
+point at which you put your scones in a preheated oven. It may also take a bit
+longer to bake them through in a standard (non-fan) or gas oven. You will also
+need to extend the time if you’re baking more than 12 tea-time or 24 canapé
+scones in the oven at the same time.<0x0A><0x0A>In case the passages do
+not contain the necessary information to answer the question, please reply with:
+”Unable to answer based on given passages.”<0x0A>output:<s> Based on the
+provided passages, here’s how to heat frozen baked scones:<0x0A><0x0A>To
+heat frozen baked scones, preheat your oven to 220°C (200°C fan oven / gas
+mark 6). Place the frozen scones on a baking tray lined with parchment paper
+and bake for 15-2
+Figure 7: The contribution score of the next generated
+token (labeled as hallucination). The deeper the red
+color, the greater the token’s contribution to the last
+token.
+the Shapley method (with a baseline of zero) or the
+Taylor decomposition method:
+Rl−1 ji = 1 N Rl j (16)
+Therefore, based on the correlation propagation
+calculation formulas of each sub-part in the self-
+attention module mentioned above, we can obtain
+the following correlation propagation rules in the
+self-attention layer:
+Rl−1 ji = ∑
+p
+AjiVip
+Rl jp
+2Ojp + ε (17)
+There is no bias term for absorption correlation
+in this rule, and the amount of ε absorption can
+be ignored. By adopting this rule, we strictly ad-
+here to the conservation property in the process of
+correlation propagation.
+Regarding the correlation propagation rule of
+LayerNorm layer, when using common ε = 10−6
+and V er[x] = 1, it actually absorbs 99% of the cor-
+relation. Therefore, linearizing at x is meaningless.
+<s> Briefly answer the following question:<0x0A>how to use sesame
+seeds<0x0A>Bear in mind that your response should be strictly based on the
+following three passages:<0x0A>passage 1:1 Add raw sesame seeds to any side
+dish to add crunch and flavor. 2 For instance, you can add to vegetable or bean
+dishes. 3 Sesame oil is a great option to try to incorporate in your cooking.4
+Like almond milk and hemp milk, you can make your own sesame milk. You
+can also make a light salad dressing out of tahini. 2 Sesame seeds can also
+be roasted, crushed and then sprinkled over salads. 3 This will give you more
+variety and flavor than your typical salad. 4 Add raw sesame seeds to any
+side dish to add crunch and flavor.<0x0A><0x0A>passage 2:1. Toast over the
+stovetop. If you don’t see any dust or small pebbles in your sesame seeds, you can
+put them directly in a skillet or frying pan. Heat over medium-low heat, stirring
+occasionally, for two to three minutes or until the seeds turn brown, glisten,
+and occasionally pop or jump.1 Do not add oil to the skillet.. Toast over the
+stovetop. If you don’t see any dust or small pebbles in your sesame seeds, you can
+put them directly in a skillet or frying pan. Heat over medium-low heat, stirring
+occasionally, for two to three minutes or until the seeds turn brown, glisten, and
+occasionally pop or jump.<0x0A><0x0A>passage 3:Sesame seeds are tiny, flat
+oval seeds with a nutty taste and a delicate, almost invisible crunch. They come
+in a host of different colors, depending upon the variety, including white, yellow,
+black and red. Sesame seeds are highly valued for their high content of sesame
+oil, an oil that is very resistant to rancidity.he hulls of sesame seeds contain
+oxalates. In fact, most of the calcium found in the seed hull comes in the form
+of calcium oxalate. The sesame seed paste (tahini) found in grocery stores is most
+often made with seed kernels—the part of the sesame seed that remains after
+the hull has been removed.<0x0A><0x0A>In case the passages do not contain
+the necessary information to answer the question, please reply with: ”Unable
+to answer based on given passages.”<0x0A>output:<s> Based on the provided
+passages, here are some ways to use sesame seeds:<0x0A><0x0A>1. Add raw
+sesame seeds to any side dish to add crunch and flavor. (Passage 1)<0x0A>2.
+Toast sesame seeds over the stovetop by heating them over medium-low heat,
+stirring occasionally, for two to three minutes or until they turn brown, glisten,
+and occasionally pop or jump. (Passage 2)<0x0A>3. Use sesame seeds as
+a topping for salads, adding a nutty flavor and crunchy texture. (Passage
+1)<0x0A>4. Make sesame milk by grinding the seeds into a fine powder and
+mixing them with water or other liquids. (Passage 2)<0x0A>5. Roast sesame
+seeds and use them as a topping for salads or other dishes. (Passage 1)<0x0A>6.
+Use sesame oil in cooking for added flavor and health benefits. (Passage
+1)<0x0A>7. Make a light salad dressing using tahini, a sesame seed paste.
+(Passage 2)<0x0A>8. Add sesame seeds to baked goods, such as breads and
+muffins, for added flavor and nutrition. (Passage 1)<0x0A>9. Use sesame seeds
+as a garnish for soups and other dishes. (Passage 1)<0x0A>10. Experiment with
+different types of sesame seeds, such as white, yellow, black, and red, to find the
+one that best suits your taste preferences. (Passage 3)<0x0A><0x0A>Unable
+to answer based on given passages. The passages do not provide information on
+how to use sesame seeds in specific dishes or recipes.
+Figure 8: The superimposed token-level attribution dis-
+tribution of the response (start with “<s> Based on”).
+The deeper the red color, the greater the token’s contri-
+bution to the last token. Based solely on the overlap-
+ping attribution distribution, it is difficult to determine
+whether the response contains hallucination fragments.
+By using Taylor expansion to decompose Layer-
+Norm or RMSNorm with reference point 0, we can
+obtain the same identity association propagation
+rule as Equation 11.
+By using the correlation backpropagation based
+on the above rules, we can obtain the contribu-
+tion score of the model input to the probability
+value output. Intuitively, the higher the contribu-
+tion score, the greater the impact of the input label
+on a specific output label. By combining these con-
+tribution vectors into a matrix Ri, we can obtain a
+correlation matrix that is faithful to the internal in-
+ference process of the model. The proof is detailed
+in (Achtibat et al., 2024).
+D Implementation Details
+We employ LXT 2.0 to compute LRP attribution
+scores for both Llama and Qwen. For substantive
+word extraction, we utilize Spacy and Stanza to
+27840

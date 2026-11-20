@@ -1,0 +1,109 @@
+Passage 1: 3  Sesame oil is 
+a great option to try to 
+incorporate in your 
+cooking.4  Like almond 
+milk and hemp milk, you 
+can make your own 
+sesame milk.
+0.22
+Previous Generate: Use 
+sesame seeds as a 
+topping for salads, 
+adding a nutty flavor 
+and crunchy texture.
+0.11
+Passage 3: The sesame seed 
+paste (tahini) found in grocery 
+stores is most often made with 
+seed kernels\u2014the part of 
+the sesame seed that remains 
+after the hull has been removed.
+0.09
+Previous Generate: Based on the 
+provided passages, here are some 
+ways to use sesame seeds
+0.07
+Passage 3: Sesame seeds 
+are tiny, flat oval seeds with 
+a nutty taste and a delicate, 
+almost invisible crunch.
+0.06
+Make sesame milk by 
+grinding the seeds into a 
+fine powder and mixing 
+them with water or other 
+liquids. (Passage 2)
+Figure 9: The internal reasoning graph constructed
+based on the target fragment in the response shown in
+Fig. 8. The target fragment clearly originates from pas-
+sage 1, passage 3 and previous generation, contradicting
+the annotation that it comes from passage 2. Thus, the
+fragment within the dashed box is most likely a case of
+faithfulness hallucination.
+identify nouns, named entities, noun phrases, and
+negations in the text. During training, the Align-
+Score pre-trained Roberta model with 124M pa-
+rameters is used. The batch size is set to 16, and
+we perform 100 iterations on the training set using
+the Adam optimizer at a learning rate of 1e − 5.
+The model with the best F1 score is selected for the
+final result.
+E Perturbation Tests
+The perturbation tests employed by Bakish et al.
+(2025) are divided into two types of disturbance:
+generation and pruning. The generation pro-
+cess progressively incorporates semantic fragments
+starting from null, ordered by relevance from high-
+est to lowest. An approach that faithfully replicates
+the real decision-making process of LLMs will
+identify the most impactful semantic fragments.
+When these fragments are added, the embedding
+distance of this model is significantly reduced com-
+pared to the previous one, and the logit (calculated
+against the predicted target semantic fragment)
+shows a marked increase. The pruning method
+starts by masking the semantic fragments with the
+lowest relevance and gradually progresses towards
+the semantic fragments with higher importance.
+Removing low-impact semantic fragments should
+preserve model prediction stability. Following Ali
+et al. (2022), the final metrics were quantified using
+Area-Under-Curve (AUC), capturing model accu-
+racy relative to the percentage of masked semantic
+fragments, from 0% to 100%.
+Generation LRP
+Computation
+Entity
+Extraction
+Graph
+Construction
+Hallucination
+Discrimination
+0
+5
+10
+15
+20
+25Time (seconds)
+12.12s
+25.49s
+0.59s 0.05s 1.51s
+Processing Time per Stage
+Figure 10: Computational time required for different
+stages of SIRG.
+F Computational Time of Different Stage
+As reported in Fig.10, the generation stage takes
+12.12 seconds, while LRP computation requires
+25.49 seconds, making it the speed bottleneck of
+the overall framework. Entity extraction and graph
+construction are relatively lightweight, taking only
+0.59 seconds and 0.05 seconds respectively. Hallu-
+cination discrimination consumes 1.51 seconds.
+The results indicate that LRP is the primary ef-
+ficiency bottleneck. In contrast, the Prompt and
+SelfCheckGPT stages can directly benefit from in-
+ference acceleration frameworks such as VLLM
+for speedup. In future work, we will continue ex-
+ploring how to accelerate LRP through inference
+optimization techniques.
+27841

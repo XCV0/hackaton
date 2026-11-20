@@ -1,0 +1,99 @@
+respectively (see Appendix B.5 for calibration de-
+tails).
+Depending on the total ε, we dynamically adjust
+the number of retrieved documents K alongside the
+per-token budget εtoken as follows: K = 50 with
+εtoken = 0.1 for ε = 1; K = 30 with εtoken = 0.2
+for ε = 5; K = 15 with εtoken = 0.5 for ε = 10;
+and K = 10 with εtoken = 1.0 for ε = 100. In-
+tuitively, as the total budget increases, we shrink
+the retrieval size K to filter out marginally rele-
+vant documents, thereby concentrating the private
+consensus on the top retrieved results to yield a
+sharper aggregated signal for accurate generation.
+Meanwhile, we enlarge the per-token budget εtoken
+to maintain the clipping norm C roughly constant
+(see Appendix B.6 for the derivation of C from
+εtoken and K).
+B.2 Details of Datasets
+We adopt the three datasets used in prior DP-RAG
+work and follow their preprocessing and sampling
+protocols (Koga et al., 2024; Wu et al., 2026). Ta-
+ble 3 lists the external corpora and their scales.
+Natural Questions (NQ) (Kwiatkowski et al.,
+2019) contains real Google search queries with
+answers extracted from Wikipedia. The external
+corpus consists of approximately 21M Wikipedia
+passages. Following prior work, we randomly draw
+100 questions for testing.
+TriviaQA (Joshi et al., 2017) contains QA pairs
+authored by trivia enthusiasts, with evidence drawn
+from Wikipedia and the open web. We use the
+Wikipedia-only setting with roughly 21M passages
+as the external knowledge source, and apply the
+same 100-question sampling protocol as NQ.
+ChatDoctor (Li et al., 2023b) aggregates 115K
+medical conversations from three sources: Health-
+CareMagic (∼100K real patient consultations from
+HealthCareMagic.com), icliniq (∼10K real consul-
+tations from icliniq.com), and GenMedGPT (∼5K
+generated conversations from ChatGPT augmented
+with a disease database). We randomly draw 100
+patient queries from the combined pool for testing
+and treat the remaining dialogues as the private
+external corpus.
+B.3 Prompts
+Topic Generation Prompts. The topic-guided
+clustering module (Sec. 3.2) requires a set of public
+topic descriptions to partition the private corpus.
+For each dataset, we prompt GPT-4 to generate
+domain-specific topics covering the breadth of the
+Dataset External Corpus
+Natural Questions (NQ) Wikipedia (∼21M passages)
+TriviaQA Wikipedia (∼21M passages)
+ChatDoctor ∼115K medical dialogues
+Table 3: Experimental datasets and the external corpora
+used, with approximate sizes.
+corpus. Since the target number of topics is large
+(10,000 for Wikipedia and 1,000 for ChatDoctor),
+we generate them in batches of 100 per API call.
+At each batch, we include all previously generated
+topics in the prompt and explicitly instruct the LLM
+to avoid duplicates. After all batches are generated,
+we perform a post-hoc deduplication pass over the
+full set of topics to remove any remaining exact
+duplicates. Table 4 lists the exact prompts used
+for each dataset, where {topics_n} denotes the
+number of topics requested in the current batch.
+QA Prompts. Table 5 lists the prompt templates
+used for question answering in our experiments.
+Following prior work (Koga et al., 2024; Wu et al.,
+2026), we adopt two variants for each dataset: one
+with retrieved context (RAG setting) and one with-
+out (Non-RAG setting). For NQ and TriviaQA, the
+instruction asks for a short factual answer; for Chat-
+Doctor, the instruction adopts a doctor role with
+access to patient-doctor chat examples.
+Interrogation Attack Prompts. Below we pro-
+vide all prompts used in the Interrogation Attack
+on ChatDoctor, following Naseh et al. (2025); Wu
+et al. (2026).
+B.4 Membership Inference Attack Details
+We adopt the Interrogation Attack (IA) (Naseh
+et al., 2025), a membership inference attack tai-
+lored for multi-query RAG systems. IA infers
+whether a candidate document x resides in the pri-
+vate corpus D by issuing a set of probing queries
+and aggregating the system’s responses. The attack
+proceeds in three phases. (1) Question generation:
+for a given target document, GPT-4 is prompted to
+generate m = 30 yes/no questions whose ground-
+truth answers are uniquely entailed by the content
+of x. These questions are designed to cover dis-
+tinct factual aspects of the document, such that
+correctly answering them without access to x be-
+comes unlikely. (2) Query construction: each
+generated question is embedded within a retrieval-
+targeting prefix that quotes identifying information
+from the target document (see Appendix B.3 for
+45306

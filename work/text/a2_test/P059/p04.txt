@@ -1,0 +1,108 @@
+choices; we audit them and report sensitivity to sim-
+ilarity functions, clustering thresholds, and prompt
+style in Appendix J.
+3.2 Interventions and Signals
+Each intervention maps the retrieved state to a coun-
+terfactual state and answers a different diagnostic
+question. Delete-All, the closed-book intervention
+familiar from prior RAG analysis (Liu et al., 2024b;
+Cuconasu et al., 2024), removes all retrieved ev-
+idence, I∅(Rc(q)) = ∅, and asks whether the an-
+swer survives without context, measured as Delete-
+All persistence:
+DAP(q) = E
+a0∼Ac 0(q)
+a∅∼Ac I∅ (q)
+[Sim(a0, a∅)] . (6)
+We distinguish persistence DAP, behavioral depen-
+dence 1−DAP, abstention after deletion DelAll =
+⊮[Abstain(a∅)], and the substantive Delete-All vi-
+olation flag
+DAV(q) = ⊮
+[
+DAP(q) ≥ τ ∧ ¬ Abstain(a0)
+∧ ¬ Abstain(a∅)
+]
+,
+(7)
+which fires only when both answers are substantive
+yet similar. We use τ = 0.5 throughout; high
+DAP alone is not a failure outside evidence-bound
+criteria.
+Cluster knockout. Targeted deletion removes
+one retrieved item or semantic evidence unit S
+while leaving the rest of the context intact. In
+redundant corpora, single-document deletion can
+miss dependence because equivalent passages re-
+main. We therefore cluster Rc(q) into evidence
+units C(q) = {C1, . . . , Cm} via complete-linkage
+hierarchical agglomerative clustering (HAC) and
+delete one whole cluster at a time. The cluster-
+knockout signal, the cluster-necessity score, is
+CNS(q) = max
+i
+E
+[
+1 − Sim(a0, a\Ci )
+]
+, (8)
+the largest answer change induced by removing
+any single evidence unit. High CNS indicates that
+the answer depends on a specific cluster; under
+evidence-bound criteria this dependence is desir-
+able, while under open-domain use the same value
+can be benign. Appendix J compares alternative
+clustering rules (Saha Roy et al., 2025).
+Counterfactual additions. Each counterfactual
+addition appends one synthesized document to
+the retrieved context, leaving the existing docu-
+ments unchanged. Distractor injection adds an
+irrelevant chunk drawn from another query in the
+same dataset and reports noise robustness NR =
+E[Sim(a0, a+n)]. Update injection and contradic-
+tion injection each append a 2–3 sentence passage
+that asserts a synthesized counterfactual answer of
+the same factual type as the reference: update in-
+jection frames the counterfactual as superseding
+new information (“Recent sources have established
+that . . . ”), while contradiction injection frames it
+as a competing claim (“one source claims u, not
+the reference”). The two probes test complemen-
+tary clauses of the same retrieved-state perturba-
+tion: Upd = ⊮[UpdateFollow(au; u)] measures
+adoption of the appended fact, while Contra =
+⊮[ConflictAck(acon)] measures explicit acknowl-
+edgment of the conflict; we also report contradic-
+tion stability CS = Sim(a0, acon). The probes
+are related to the entity-substitution and counter-
+memory protocols of Longpre et al. (2021) and Xie
+et al. (2024), but differ in operating by addition
+rather than in-place substitution: the original re-
+trieved context is preserved, and the counterfactual
+enters alongside it.
+For each query, COUNTERMEM returns the pro-
+file
+ρ(q) = ( DAP, DAV, DelAll, CNS,
+NR, Upd, Contra, CS ). (9)
+Aggregating over queries gives a configuration-
+level profile with paired-bootstrap confidence in-
+tervals. The components are not collapsed into a
+single score: stability is desirable under noise, but
+undesirable under deletion or relevant updates.
+Appendix A provides a per-signal reading guide
+(intervention, operational question, desired direc-
+tion under each evidence-bound clause, per-query
+LLM-call cost, and main pitfall). In what follows,
+↑ marks “higher is desirable under the criteria,” ↓
+“lower is desirable;” criteria-dependent signals (e.g.,
+CS under contradictions) are reported with their
+companion signal and no arrow.
+3.3 Intervention Modes and Pipeline-Stage
+Trace
+The same intervention can be applied at three
+observable points. In post-retrieval mode, we
+modify only the context supplied to the genera-
+tor. In corpus-addition mode, the intervention
+document is added to the indexable corpus and
+ranked by the retriever’s own scoring function. In
+22335

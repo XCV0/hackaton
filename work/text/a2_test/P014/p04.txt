@@ -1,0 +1,129 @@
+StageI:InternalKnowledge
+Externalization
+LatentParametricKnowledge
+→ExplicitBackgroundKnowledge
+Internal
+Knowledge
+Generator
+𝑃!"#(𝑧|𝑥)
+Internal
+Knowledge
+(𝑧)
+Input
+Query
+(𝑥) 𝑧 Knowledge
+DropoutGate
+(Bernoulli(𝜆))
+StageII:ConflictResolvingand
+Reasoning
+Trial-and-error 
+Exploration
+&
+Selective
+Knowledge
+Reasoning
+Final
+Response
+Generator
+𝑃$(𝑦|𝑥,𝑧̃,𝑑)
+Keep
+(Dual-stage)
+𝑧̃=𝑧
+Drop
+(Single-stage)
+𝑧̃=∅
+∅
+Retrieved
+Documents
+(𝑑)
+Final
+Answer
+(𝑎)
+RLVR-basedGRPOTraining
+OptimizationFeedback
+Objective&KLRegularization
+𝑟$𝐴2",clip𝑟$,1−𝜖,1+𝜖𝐴2"
+Advantage
+𝐴"!=𝑟"−𝜇# 𝜎#
+Reward
+Computation
+𝑅=I!"#$%&⋅𝑟’()*+
+TrajectoryGroup
+𝐺={𝜏%}%&’ |)|
+Figure 3: An overview of the BrPr framework. In the 1st stage, the model’s prior background knowledge about
+the query is externalized as a latent variable z. In the 2nd stage, we employ the GRPO algorithm integrated with
+a Bernoulli-gated dropout mechanism on the prior variable z. This strategy encourages the model to distill the
+prior-driven reasoning capability into the model parameters.
+guided by explicit feedback, the model learns to
+reconcile between its internal knowledge and exter-
+nal documents.
+Second, to improve inference efficiency, we pro-
+pose distilling the prior-guided reasoning capability
+into the model’s latent reasoning process. Con-
+cretely, we introduce a Bernoulli-gated dropout
+mechanism on the prior variable z during training
+(Sec. 3.3). By stochastically omitting the explicit
+prior generation, we encourage the model to im-
+plicitly infer z and reason within its latent parame-
+ters, effectively consolidating the reasoning process
+without requiring additional generation steps.
+3.1 Stage I: Externalizing Internal Knowledge
+The model first externalizes its parametric back-
+ground knowledge by generating a response z ∼
+Pfix(z|x). This stage transforms latent parametric
+knowledge into an explicit textual representation.
+The prior-guided prompt template is described in
+Appendix B.2.
+The parametric knowledge generator is kept
+fixed as the initialized model throughout the train-
+ing phase to prioritize reasoning over memoriza-
+tion. It ensures that the model’s performance stems
+from its ability to process external documents in
+the next stage.
+3.2 Stage II: Reasoning under Conflicts
+To augment the model’s reasoning capabilities,
+we utilize GRPO for policy optimization within
+the knowledge-prior framework. Specifically, the
+model takes the prior knowledge z—obtained from
+Stage I—alongside the query x and retrieved docu-
+ments d as inputs. The output trajectory τ consists
+of a structured reasoning trace and a final answer,
+following the structure in (Guo et al., 2025).
+For each input x and d, GRPO generates a group
+G of trajectories {τi}|G| i=1 using the current policy
+πθ. It performs multiple rollouts per task and cal-
+culates the relative reward within the group as the
+advantage. GRPO optimizes the following objec-
+tive:
+J (θ) = E(x,d)∼P,z∼Pref ,˜z∼Bern(λ;z),{τi}G i=1∼πθold[
+1
+G
+G∑
+i=1
+( 1
+|τi|
+|τi |∑
+t=1
+min
+(
+rθ ˆAi, clip (rθ , 1 − ϵ, 1 + ϵ) ˆAi
+))]
+,
+rθ = πθ(yi,t|x, ˜z, d, yi,<t) πθold (yi,t|x, ˜z, d, yi,<t) (1)
+where the prior ˜z is formulated through a Bernoulli-
+gated dropout mechanism, where ˜z = z with prob-
+ability λ and ˜z = ∅ with probability 1 − λ. ϵ is
+the clipping ratio, and πref serves as the reference
+policy—acting as both a regularization constraint
+and the parametric knowledge generator.
+The term ˆAi = ri−µr σr represents the standard-
+ized advantage of trajectory τi, where ri is the re-
+ward assigned to the trajectory, and µr and σr are
+the mean and standard deviation of the rewards
+within group G, respectively. The total reward R
+is defined as:
+R = Iformat · rscore, rscore = F1score(ai, ˆy) (2)
+where Iformat is an indicator function that equals
+1 if the trajectory format is correct, and 0 other-
+wise. The F1score measures the correctness of the
+22152

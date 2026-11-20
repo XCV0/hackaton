@@ -1,0 +1,80 @@
+Multi-hop Methods 2WikiMulti HotpotQA Single-hop Methods PopQA ARC
+EM F1 EM F1 Acc Acc
+wo-RAG 14.6 22.3 18.4 27.5 LLaMA27B 38.2 48.0
+SR-RAG 16.9 25.5 16.4 25.0 Alpaca7B 46.7 48.0
+FL-RAG 11.2 19.2 14.6 21.1 LLaMA213B 45.7 26.0
+FS-RAG 18.9 26.5 21.4 30.4 Alpaca13B 46.1 57.6
+FLARE 14.3 21.3 14.9 22.1 Self-RAG 29.0 23.9
+DRAGIN 21.4 29.3 23.2 31.2 CRAG 61.8 50.4
+DRAGIN+FKE(Ours) 24.2 32.5 28.1 34.7 CRAG+FKE(Ours) 68.1 55.8
+Table 1: The overall experimental results on two typical RAG pipelines across four datasets. The bold numbers
+indicate a better performance of pipeline+FKE than the corresponding pipeline alone.
+document-level knowledge. In generation, we en-
+hance the decoding process of basic RAG pipelines
+by incorporating the retrieved fine-grained knowl-
+edge. The temperature τd, τs and balancing param-
+eter α are 0, 0.2 and 1.0, respectively. The process
+can be conducted on 1 NVIDIA A800 GPU. The
+detailed prompt and the introduction of two basic
+pipelines can be found in Appendix A.
+4 Results and Analysis
+4.1 Baselines
+Based on the settings of DRAGIN (Su et al., 2024),
+we choose the following baselines for compari-
+son in the Multi-hop QA task: (1)wo-RAG: LLM
+directly answers questions without using RAG.
+(2)SR-RAG (Single-round RAG): Relevant pas-
+sages are retrieved from an external corpus based
+on the initial question and added to the LLM’s in-
+put. (3)FL-RAG (Fix Length RAG) (Ram et al.,
+2023): The retrieval module is triggered every n
+tokens, and the tokens generated in the previous
+window are used as the query. (4)FS-RAG (Fix
+Sentence RAG): The retrieval module is triggered
+for every sentence, and the last generated sentence
+is used as the query. (5)FLARE (Jiang et al., 2023):
+The retrieval module is triggered by uncertain to-
+kens, and the generated sentence without them is
+defined as the query.
+Referring to CRAG’s (Yan et al., 2024) set-
+tings, we select the following RAG baselines
+for the Single-hop QA task, including several
+public instruction-tuned LLMs: (6)LLaMA2-
+7B, (7)LLaMA2-13B, (8)Alpaca-7B, (9)Alpaca-
+13B. Additionally, we also incorporate (10)Self-
+RAG (Asai et al., 2023), a method that enhances
+the LLM’s factuality through retrieval and self-
+reflection with the assistance of GPT-4 annotations.
+4.2 Automatic Evaluation Result
+We select DRAGIN (Su et al., 2024) and CRAG
+(Yan et al., 2024) as the basic RAG pipelines to
+apply our method. Since our method is applied
+in a plug-and-play manner to enhance these two
+basic pipelines, we primarily focus on compar-
+ison with these two basic RAG pipelines. The
+automatic evaluation results are presented in Table
+1, which demonstrate the strong effectiveness and
+generality of our method.
+Our method achieves significant improvements
+in MultihopQA tasks. Specifically, on the 2Wiki-
+MultihopQA dataset, FKE increases DRAGIN’s
+EM score by 2.8 and F1 score by 3.2. Similarly, on
+the HotpotQA dataset, FKE enhances DRAGIN’s
+EM score by 4.9 and F1 score by 3.5. These results
+highlight our method’s specialized capability to
+address complex, multi-step reasoning scenarios.
+Our method also performs well on SinglehopQA
+tasks. Concretely, FKE improves CRAG’s accu-
+racy by 6.3 on the PopQA dataset and 5.4 on the
+ARC dataset, demonstrating its ability to manage
+short-form entity generation (PopQA) and closed-
+set question answering (ARC) scenarios.
+In summary, our proposed method achieves su-
+perior performance on both MultihopQA and Sin-
+glehopQA tasks, which indicates its robustness and
+effectiveness in enhancing the basic RAG pipeline
+with no additional modules or training process.
+4.3 Ablation Study
+To validate the effects of individual components
+in FKE, we conduct comprehensive ablation stud-
+10036

@@ -1,0 +1,97 @@
+Model HQA MARCO NQ PQ
+θs 39.66 25.12 32.12 25.83
+θs ft 78.82 28.57 47.39 35.00
+θs cord 78.82 35.22 49.55 36.67
+θ (8B) 70.94 46.31 70.20 60.83
+GRAD 81.03 50.49 70.59 65.00
+Table 5: Performance of finetuned 1B models: While
+they cannot outperform larger 8B in most cases
+(underlined), they can still guide 8B to generate im-
+proved outputs (boldfaced). For comparison, accuracy
+of GRAD is also presented in the last row.
+estimate of its inference-time overhead. Even in
+this setting, GRAD incurs small inference-time
+overhead compared to base LLM but is much more
+effective than a larger model. GRAD with 8B +
+1B retains approximately 76% of the performance
+gains of a 70B model, while achieving 5x lower
+latency. Moreover, the relative overhead of using a
+fixed SLM (1B) diminishes with larger base mod-
+els—for instance, adding three 1B models to an 8B
+base introduces about 40% additional parameters,
+compared to only 5% with a 70B base.
+Cost per objective Each objective contributes
+a similar per-token cost: enabling an objective
+adds one small-model invocation and a lightweight
+weighted-logit combine. Since our current im-
+plementation runs the auxiliary models sequen-
+tially, the added latency over the 8B base there-
+fore comes almost entirely from three additional
+forward passes, one per objective (MS, DA, DB);
+these passes are independent given the same prefix,
+so the wall-clock overhead can be further reduced
+in a parallel implementation.
+5 Analysis
+Beyond the main results, we examine the mech-
+anism and generality of GRAD, showing that
+its gains arise from transferable guidance signals
+rather than from a narrow choice of helper model,
+backbone family, or deployment setting.
+Guidance from weaker models Table 5 indeed
+shows that while finetuned SLMs show improve-
+ments over their base model, they still struggle to
+outperform the larger base LLM (8B) on most tasks.
+However, by leveraging their combined knowledge,
+seemingly weak signals from these smaller models
+can improve much stronger models, reaffirming the
+effectiveness of GRAD, capturing the most signifi-
+cant adaptation signals in logit space. Finally, each
+HQA
+SLM θs Acc
+LLaMA-3.2-1B 81.03
+LLaMA-3.2-3B 82.02
+Table 6: Accuracy of GRAD with 8B paired with SLMs
+of different sizes.
+Activation Benchmark
+MS DA DB HQA MARCO NQ PQ
+70B 82.76 47.04 72.17 73.33
+✓ 83.25 50.74 73.59 74.17
+✓ 85.22 51.72 69.26 75.00
+✓ ✓ 85.22 50.49 69.93 75.00
+✓ 81.77 48.28 71.67 72.50
+✓ ✓ ✓ 83.25 49.26 70.94 75.00
+405B 84.98 52.46 76.45 74.17
+Table 7: Accuracy of GRAD with LLaMA 3.1 70B
+used as the base LLM. For comparison, the accuracy of
+405B model is presented on the last line.
+component in GRAD may be upgraded to capture
+even richer signals at increased costs.
+Choice of SLM/LLM Regarding SLM, Table 6
+contradicts CD, where the larger scale gap between
+the LLM and SLM reportedly resulted in the best
+outcomes (Li et al., 2023; O’Brien and Lewis,
+2023). Employing a more capable model as the
+SLM pays off for GRAD.
+Table 7 demonstrates that GRAD remains effec-
+tive when the base LLM θ is 70B, not just when θ
+is 8B, consistently improving performance across
+different LLM choices. It yields comparable results
+compared to actually scaling the model size: Com-
+bination of 8B and 1B matches the performance
+of 70B, and combination of 70B and 1B matches
+405B. For instance, GRAD utilizing 8B and 1B
+achieves 81.03 on HQA (Table 5), which is com-
+parable to 70B’s 82.76, closing the large gap be-
+tween 8B (70.94) and 70B. Similarly, GRAD with
+70B and 1B achieves 85.22, slightly outperforming
+84.98 of 405B on HQA. These results demonstrate
+that GRAD effectively balances performance and
+efficiency.
+Generalization across model families Finally,
+we show that benefits of GRAD are orthogonal
+to the choice of backbone model family. Ta-
+ble 8 shows GRAD combined with Qwen-2.5
+models, successfully improving the 7B model’s
+performance over that of 14B/32B models, with
+1.5B models. The results confirm GRAD general-
+45281

@@ -1,0 +1,103 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+[7] K. Shuster, S. Poff, M. Chen, D. Kiela, and J. Weston,
+“Retrieval augmentation reduces hallucination in con-
+versation,” arXiv preprint arXiv:2104.07567, 2021.
+[8] J. Menick, M. Trebacz, V. Mikulik, J. Aslanides,
+F. Song, M. Chadwick, M. Glaese, S. Young,
+L. Campbell-Gillingham, G. Irving et al., “Teaching
+language models to support answers with verified
+quotes,” arXiv preprint arXiv:2203.11147, 2022.
+[9] V. Karpukhin, B. Oguz, S. Min, P. S. Lewis, L. Wu,
+S. Edunov, D. Chen, and W.-t. Yih, “Dense pas-
+sageretrievalforopen-domainquestionanswering.”in
+EMNLP (1), 2020, pp. 6769–6781.
+[10] N. Reimers and I. Gurevych, “Sentence-bert: Sen-
+tenceembeddingsusingsiamesebert-networks,”arXiv
+preprint arXiv:1908.10084, 2019.
+[11] J. Johnson, M. Douze, and H. Jégou, “Billion-scale
+similaritysearchwithgpus,”IEEETransactionsonBig
+Data, vol. 7, no. 3, pp. 535–547, 2019.
+[12] M. Douze, A. Guzhva, C. Deng, J. Johnson, G. Szil-
+vasy,P.-E.Mazaré,M.Lomeli,L.Hosseini,andH.Jé-
+gou, “The faiss library,” IEEE Transactions on Big
+Data, 2025.
+[13] Y.Gao,Y.Xiong,X.Gao,K.Jia,J.Pan,Y.Bi,Y.Dai,
+J. Sun, H. Wang, and H. Wang, “Retrieval-augmented
+generationforlargelanguagemodels:Asurvey,”arXiv
+preprint arXiv:2312.10997, vol. 2, no. 1, 2023.
+[14] G. Izacard, P. Lewis, M. Lomeli, L. Hosseini,
+F. Petroni, T. Schick, J. Dwivedi-Yu, A. Joulin,
+S. Riedel, and E. Grave, “Atlas: Few-shot learning
+withretrievalaugmentedlanguagemodels,”Journalof
+MachineLearningResearch,vol.24,no.251,pp.1–43,
+2023.
+[15] Y.Gao,Y.Xiong,X.Gao,K.Jia,J.Pan,Y.Bi,Y.Dai,
+J. Sun, H. Wang, and H. Wang, “Retrieval-augmented
+generationforlargelanguagemodels:Asurvey,”arXiv
+preprint arXiv:2312.10997, 2023.
+[16] J. Menick, M. Trebacz, V. Mikulik, J. Aslanides,
+F. Song, M. Chadwick, M. Glaese, S. Young,
+L. Campbell-Gillingham, G. Irving et al., “Teaching
+language models to support answers with verified
+quotes,” arXiv preprint arXiv:2203.11147, 2022.
+[17] R. Flesch, “A new readability yardstick.” Journal of
+applied psychology, vol. 32, no. 3, p. 221, 1948.
+[18] H. Chase, Oct 2022. [Online]. Available: https:
+//www.langchain.com/
+[19] M. Romero-Arjona, J. A. Parejo, J. C. Alonso, A. B.
+Sánchez, A. Arrieta, and S. Segura, “Meta-fair: Ai-
+assisted fairness testing of large language models,” In-
+formation and Software Technology, p. 108075, 2026.
+[20] A.Maiztegi,J.Ayerdi,M.Illarramendi,andA.Arrieta,
+“Rag-tester demo,” https://youtu.be/jNxVVm-c-mc,
+2026, youTube video.
+[21] Manisha717, “Dataset of pdf files,” https://www.
+kaggle.com/datasets/manisha717/dataset-of-pdf-files/
+data, 2024, kaggle dataset, accessed April 14, 2026.
+[22] AnswerDotAI, “Answerdotai/ragatouille: Easily use
+and train state of the art late-interaction retrieval
+methods (colbert) in any rag pipeline. designed
+for modularity and ease-of-use, backed by research.”
+[Online].Available:https://github.com/AnswerDotAI/
+RAGatouille
+[23] E. Bassani, “ranx: A blazing-fast python library
+forrankingevaluationandcomparison,”inAdvancesin
+InformationRetrieval,M.Hagen,S.Verberne,C.Mac-
+donald, C. Seifert, K. Balog, K. Nørvåg, and V. Setty,
+Eds. Cham:SpringerInternationalPublishing,2022,
+pp. 259–264.
+[24] Y.Liu,D.Iter,Y.Xu,S.Wang,R.Xu,andC.Zhu,“G-
+eval: NLG evaluation using gpt-4 with better human
+alignment,” in Proceedings of the 2023 Conference
+on Empirical Methods in Natural Language
+Processing, H. Bouamor, J. Pino, and K. Bali, Eds.
+Singapore:AssociationforComputationalLinguistics,
+Dec. 2023, pp. 2511–2522. [Online]. Available:
+https://aclanthology.org/2023.emnlp-main.153/
+[25] Uptrain-Ai, “Uptrain-ai/uptrain: Uptrain is an open-
+source unified platform to evaluate and improve
+generative ai applications. we provide grades
+for 20+ preconfigured checks (covering language,
+code, embedding use-cases), perform root cause
+analysis on failure cases and give insights
+on how to resolve them.” [Online]. Available:
+https://github.com/uptrain-ai/uptrain
+[26] S. Es, J. James, L. Espinosa Anke, and
+S. Schockaert, “RAGAs: Automated evaluation of
+retrieval augmented generation,” in Proceedings of
+the 18th Conference of the European Chapter of the
+Association for Computational Linguistics: System
+Demonstrations, N. Aletras and O. De Clercq, Eds.
+St. Julians, Malta: Association for Computational
+Linguistics, Mar. 2024, pp. 150–158. [Online].
+Available: https://aclanthology.org/2024.eacl-demo.
+16/
+[27] Y. Patel, G. Tolias, and J. Matas, “Recall@k surrogate
+loss with large batches and similarity mixup,” 2022.
+[Online]. Available: https://arxiv.org/abs/2108.11179
+[28] K. Greshake, S. Abdelnabi, S. Mishra, C. Endres,
+T. Holz, and M. Fritz, “Not what you’ve signed
+up for: Compromising real-world llm-integrated
+applications with indirect prompt injection,” in
+Proceedings of the 16th ACM Workshop on
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 14 of 21

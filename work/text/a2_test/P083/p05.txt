@@ -1,0 +1,72 @@
+Embedding Lang. Docling – Layout Docling – Semantic PyMuPDF – Layout PyMuPDF – Semantic
+nLCS Recall CnLCS nLCS Recall CnLCS nLCS Recall CnLCS nLCS Recall CnLCS
+bge-m3
+All 0.580 0.543 0.378 0.643 0.645 0.300 0.662 0.666 0.241 0.468 0.434 0.301
+English 0.542 0.495 0.422 0.625 0.622 0.326 0.627 0.629 0.243 0.403* 0.356* 0.320*
+Non-EN 0.770+ 0.776 0.164+ 0.729 0.759 0.176 0.836 0.845 0.232+ 0.791 0.819 0.211
+nomic
+All 0.592 0.564 0.389 0.724 0.764 0.312 0.696 0.730 0.245 0.435 0.393 0.283
+English 0.557* 0.517* 0.436* 0.724* 0.760* 0.339* 0.672 0.703 0.252 0.376 0.322 0.302
+Non-EN 0.769 0.793+ 0.154 0.723 0.784 0.180 0.814 0.862 0.209 0.724 0.741 0.190
+qwen
+All 0.547 0.488 0.354 0.719 0.757 0.279 0.716 0.738 0.250 0.434 0.381 0.263
+English 0.505 0.426 0.397 0.697 0.723 0.298 0.685* 0.706* 0.257* 0.337 0.271 0.270
+Non-EN 0.757 0.793+ 0.144 0.831+ 0.922+ 0.187+ 0.866+ 0.897+ 0.218 0.908+ 0.922+ 0.227+
+Table 2: Evaluation of retrieval quality across different embedding models (bge-m3, nomic, qwen), parsing strategies
+(Docling vs PyMuPDF), and chunking methods (layout vs semantic). Metrics include nLCS with gold evidence,
+recall@5, and CnLCS . Language groups include All languages, English-only*, and Non-English+.
+Reranker Language Layout Semantic
+No Reranker All 0.359 0.490
+English 0.296 0.491
+Non-English 0.603+ 0.485
+BGE All 0.374 0.531
+English 0.321* 0.528*
+Non-English 0.577 0.544+
+MXBAI All 0.359 0.490
+English 0.296 0.491
+Non-English 0.603+ 0.485
+Table 3: Mean Reciprocal Rank (MRR) for different
+reranking strategies applied to Docling-parsed, Nomic-
+embedded chunks across chunking methods and lan-
+guage groups: All languages, English-only*, and Non-
+English+.
+from ground truth evidence. Among few-shot (FS)
+strategies, "Few Query Few Stance" achieves the
+highest alignment at both the 4B and 14B scales,
+suggesting that since some queries are similar to
+each other, exposing the model to a few representa-
+tive queries, even when focused on a single stance,
+provides strong grounding.
+Zero-shot (ZS) strategies lag behind FS across all
+model sizes. Interestingly, "ZS" strategies perform
+competitively at 0.6B, but its advantage diminishes
+with scale, reafﬁrming that smaller models beneﬁt
+from shorter contexts, while larger models thrive
+with richer few-shot demonstrations.
+For "FS" strategies, we also provide Hit Rate
+which tells an analyst whether the evidence is ex-
+pected to be supporting or opposing the query. We
+observe that Hit Rates can reach 0.70, which once
+again highlights the usefulness of LLMs for this
+Figure 2: Model Alignment and Hit Rates
+task.
+See Appendix G for more details on LLM evalu-
+ation.
+5.5 Pipeline Performance
+We evaluate the full pipeline using the best-
+performing conﬁguration: Docling parsing, seman-
+tic chunking, Nomic embeddings, BGE rerank-
+ing, and Qwen3:4B "FS Few Query Few Stance"
+prompting. We compare the four evidence selection
+strategies that vary in relevance, ranking position,
+and chunk quality (Section 4.4).
+The results in Table 4 show that GT yields
+the highest stance accuracy, conﬁrming the up-
+per bound of LLM performance. Among retrieval
+strategies, AR performs best, nearly matching the
+hit rate of Ground Truth, despite its lower exact
+match. This suggests that aggregating multiple
+chunks increases the chance of including relevant
+content, but at the cost of precision. FR consis-
+tently outperforms BM in both metrics, highlight-
+115

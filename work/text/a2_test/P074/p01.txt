@@ -1,0 +1,185 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 41135–41147
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+Progressive Re-ranking for Multimodal Retrieval-Augmented Generation
+via Curriculum Learning
+Zhu Min1, Yanchao Hao1,* , Jian Liu2, Shizhu He3, Xi Chen1
+1Tencent 2University of Science and Technology Beijing
+3Institute of Automation, Chinese Academy of Sciences
+{krystalmzhu, marshao, jasonxchen}@tencent.com
+jian.liu@ustb.edu.cn, shizhu.he@nlpr.ia.ac.cn
+Abstract
+Retrieval-augmented generation (RAG) can en-
+hance large language models (LLMs) by pro-
+viding external knowledge and helping reduce
+hallucinations. In multimodal RAG, however,
+retrieval remains challenging because a single
+retriever may fail to capture fine-grained multi-
+modal semantics, and visually or semantically
+similar entities may still contain misleading in-
+formation for answer generation. We propose a
+progressive multimodal re-ranking framework
+with curriculum learning to improve CLIP-
+based visual coarse-grained retrieval. Our
+framework progressively refines retrieval re-
+sults through two stages: fine-grained section-
+level re-ranking and multimodal section re-
+assessment. To better align re-ranking with
+multimodal queries, we introduce a curriculum-
+learning strategy that trains the model with hard
+negatives that are visually or semantically simi-
+lar but contain misleading information. Exper-
+iments on InfoSeek and Enc-VQA show that
+our method achieves state-of-the-art answer ac-
+curacy and competitive retrieval performance.
+1 Introduction
+The advancement of large language models (LLMs)
+and their multimodal extensions (MLLMs) has
+propelled progress in natural language processing
+and cross-modal understanding. However, their
+dependency on static knowledge limits their ef-
+fectiveness in dynamic or domain-specific tasks
+such as knowledge-based visual question answer-
+ing (Chen et al., 2023; Mensink et al., 2023), often
+leading to inaccurate or unsubstantiated responses,
+a phenomenon known as "hallucination". As illus-
+trated in Figure 1, a user might ask, "Who is in
+charge of maintaining this park?" which requires
+robust multimodal knowledge retrieval and reason-
+ing. The retrieval-augmented generation (RAG)
+paradigm significantly enhances the factual accu-
+racy and response reliability of existing LLMs in
+*Corresponding author
+• Abingdon Square Park
+##Section Title: History
+New York City acquired the land on 
+which the park resides on April 22, 
+1831, and it was enclosed with a cast-
+iron fence in 1836. In the 1880s, an 
+effort was initiated by Mayor Abram 
+Stevens Hewitt to expand public 
+access to parks...
+• Winston Churchill Square
+##Section Title: History
+New York City Department of Parks & 
+Recreation purchased the parcel in 
+1943. George Vellonakis designed the 
+sitting area, which was rebuilt from 
+1998 to 1999. The Bedford Downing 
+Block Association assists with the 
+square's maintenance…
+• Abingdon Square Park
+##Section Title: Conservancy
+Abingdon Square Conservancy is a 
+non-profit public charity exempt from 
+federal income tax under Section 
+501(c)(3) of the Internal Revenue 
+Code. The Conservancy's mission is to 
+enhance and maintain the Square as a 
+scenic and historic landmark….
+• Abingdon Square Park
+Abingdon Square Park is located in 
+the New York 
+City boroughofManhattan inGreenw
+ich Village. The park is bordered 
+byEighth Avenue, Bank 
+Street, Hudson Street and West 12th 
+Street.
+• Gramercy Park
+Gramercy Park is the name of both a 
+small, fenced-inprivate park, and the 
+surrounding neighborhood (which is 
+also referred to 
+as Gramercy), inManhattan inNew 
+York City.
+Question:
+Who is in charge of 
+maintaining this park?
+• Winston Churchill Square
+Sir Winston Churchill Square, at the 
+southwest corner of Bleecker Street, 
+Downing Street, and Sixth Avenue, is 
+a .05-acre (0.020 ha) garden and 
+sitting area in the Greenwich 
+Village neighborhood of Manhattan, 
+New York City.
+Visual Broad-Scope 
+Search
+• Winston Churchill Square
+##Section Title: History
+New York City Department of Parks & 
+Recreation purchased the parcel in 
+1943. George Vellonakis designed the 
+sitting area, which was rebuilt from 
+1998 to 1999. The Bedford Downing 
+Block Association assists with the 
+square's maintenance…
+Fine-Grained Section Re-
+ranking
+GT Answer:
+Abingdon Square Conservancy
+• Abingdon Square Park
+##Section Title: History
+New York City acquired the land on 
+which the park resides on April 22, 
+1831, and it was enclosed with a cast-
+iron fence in 1836. In the 1880s, an 
+effort was initiated by Mayor Abram 
+Stevens Hewitt to expand public 
+access to parks...
+Multimodal Section 
+Reassessment
+Evidence:
+https://en.wikipedia.org/wiki/Abi
+ngdon_Square_Park
+• Abingdon Square Park
+##Section Title: Conservancy
+Abingdon Square Conservancy is a 
+non-profit public charity exempt from 
+federal income tax under Section 
+501(c)(3) of the Internal Revenue 
+Code. The Conservancy's mission is to 
+enhance and maintain the Square as a 
+scenic and historic landmark….
+The Abingdon Square Park is maintained by the 
+Abingdon Square Conservancy, a community-based 
+park association, in cooperation with the New York 
+City Department……
+The question cannot be answered based on the 
+information available in the provided contexts.
+Artist Bob Brisley, as he is currently overseeing all 
+design, maintenance, and plantings. The Bedford 
+Downing Block Association also assists with 
+maintenance.
+Confused？
+Figure 1: An overview of our method. Given a multi-
+modal knowledge corpus and the query, CLIP-based vi-
+sual coarse-grained search retrieves the top-k candidate
+knowledge visual entities. Subsequently, our proposed
+fine-grained section re-ranking focuses on calculating
+fine-grained textual section similarities. Finally, mul-
+timodal section reassessment evaluates the similarity
+of multimodal knowledge sections to obtain the top-1
+candidate section for answer generation.
+knowledge-intensive tasks by dynamically retriev-
+ing relevant information from external knowledge
+sources. RAG performance hinges on the quality of
+retrieved documents and their effective utilization.
+Existing multimodal RAG methods typically focus
+on two optimization directions: improving the re-
+triever to acquire more relevant and reliable knowl-
+edge from multimodal knowledge bases (Caffagni
+et al., 2024; Yan and Xie, 2024), or guiding LLMs
+to evaluate and selectively incorporate retrieved
+content (Zhang et al., 2024b; Cocchi et al., 2025).
+Our work focuses on improving multimodal re-
+trievers to achieve a more detailed and accurate
+understanding of multimodal queries.
+CLIP-based models (Radford et al., 2021) are
+prevalent in multimodal retrieval due to their strong
+cross-modal alignment capabilities. However, their
+global alignment training strategy can hinder their
+ability to understand fine-grained semantic infor-
+mation, such as extracting query-relevant region-
+specific representations from images, limiting their
+effectiveness in complex scenarios. Multimodal re-
+41135

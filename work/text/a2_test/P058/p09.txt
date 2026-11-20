@@ -1,0 +1,90 @@
+(a) GranuRAG - Base
+ (b) GranuRAG - CoT
+Figure 8: Top 10 attention difference regions. Red:
+higher attention in our method; Blue: higher attention
+in the base/CoT method.
+ments, such as the “White Holy Spirit Dove Relief”
+sculptures and decorative arches, while blue mark-
+ers scatter across generic background regions like
+ceilings and walls. This pattern confirms that our
+grounding mechanism systematically reallocates
+attention toward knowledge-relevant regions and
+away from distractors. More case studies are pro-
+vided in Appendix A.5.
+7 Conclusion
+In this paper, we introduced GranuVistaVQA, a
+benchmark that reflects real-world visual reason-
+ing challenges. Our GranuRAG framework ex-
+plicitly grounds visual elements before retrieving
+multi-granularity evidence, enabling transparent
+attribution and consistently outperforming strong
+baselines. Experiments demonstrate that organiz-
+ing evidence hierarchically from atomic visual el-
+ements, rather than relying on implicit attention
+within coarse retrievals, is essential for verifiable
+multimodal reasoning.
+Limitations
+While GranuVistaVQA advances multimodal RAG
+evaluation, several limitations should be noted.
+First, our benchmark focuses on landmark images
+where visual elements are typically buildings or
+monuments. This may not cover all visual rea-
+soning scenarios, such as understanding abstract
+diagrams or everyday indoor scenes. Second, re-
+garding efficiency, our method takes approximately
+3.5 seconds per sample compared to 2 seconds
+for baseline approaches, nearly twice as long, due
+to the additional detection and multi-granularity
+retrieval steps, which may limit applicability in
+time-sensitive scenarios. Third, our current imple-
+mentation for the multi-granularity RAG scenario
+relies solely on traditional supervised fine-tuning
+(SFT). Future work will explore a broader range of
+parameter-efficient fine-tuning methods, including
+diverse LoRA variants (Zhang et al., 2023; Chen
+et al., 2025b) as well as recently popular neuron-
+level fine-tuning techniques (Xu et al., 2025a; Chen
+et al., 2026).
+Acknowledgments
+This work was supported in part by the Science
+and Technology Development Fund of Macau
+SAR (Grant Nos. FDCT/0007/2024/AKP, EF2024-
+00185-FST), the UM and UMDF (Grant Nos.
+MYRG-GRG2024-00165-FST-UMDF, MYRG-
+GRG2025-00236-FST), the Tencent AI Lab Rhino-
+Bird Research Program (Grant No. EF2023-00151-
+FST), the Stanley Ho Medical Development Foun-
+dation (Grant No. SHMDF-AI/2026/001), and
+the National Natural Science Foundation of China
+(Grant No. 62266013).
+References
+Jean-Baptiste Alayrac, Jeff Donahue, Pauline Luc, An-
+toine Miech, Iain Barr, Yana Hasson, Karel Lenc,
+Arthur Mensch, Katie Millican, Malcolm Reynolds,
+Roman Ring, Eliza Rutherford, Serkan Cabi, Tengda
+Han, Zhitao Gong, Sina Samangooei, Marianne Mon-
+teiro, Jacob Menick, Sebastian Borgeaud, and 8 oth-
+ers. 2022. Flamingo: a visual language model for
+few-shot learning. Preprint, arXiv:2204.14198.
+Anthropic. 2024. Claude 3.5 sonnet model card adden-
+dum.
+Anthropic. 2025. Introducing Claude Haiku 4.5. Ac-
+cessed: 2025-12-30.
+Jinze Bai, Shuai Bai, Shusheng Yang, Shijie Wang,
+Sinan Tan, Peng Wang, Junyang Lin, Chang Zhou,
+and Jingren Zhou. 2023. Qwen-vl: A frontier large
+vision-language model with versatile abilities. CoRR,
+abs/2308.12966.
+Zechen Bai, Pichao Wang, Tianjun Xiao, Tong He,
+Zongbo Han, Zheng Zhang, and Mike Zheng Shou.
+2024. Hallucination of multimodal large language
+models: A survey. arXiv preprint arXiv:2404.18930.
+Guanhua Chen, Yutong Yao, Lidia S. Chao, Xuebo Liu,
+and Derek F. Wong. 2025a. SGIC: A self-guided
+iterative calibration framework for RAG. In Proceed-
+ings of the 63rd Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Pa-
+pers), ACL 2025, Vienna, Austria, July 27 - August 1,
+2025, pages 28357–28370. Association for Computa-
+tional Linguistics.
+10483

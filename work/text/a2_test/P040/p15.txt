@@ -1,0 +1,99 @@
+mini. GPT-4o mini was selected as a more
+capable alternative to GPT-3.5 Turbo (please
+refer to: https://openai.com/index/gpt-4
+-mini-advancing-cost-efficient-intelli-
+gence). In order to alleviate any concerns
+regarding discrepancies with respect to the
+selected LLM, we also run experiments using
+gpt-3.5-turbo-1106. Table 8 shows the retrieval
+results of our proposed methods against Hip-
+poRAG w/ IRCoT. We observe a similar trend to
+that in Table 2—GEAR surpasses the performance
+of HippoRAG w/ IRCoT.
+E Why this graph construction method?
+We adopt an LLM-based triple extraction methodol-
+ogy, following the approach outlined in HippoRAG
+(Gutierrez et al., 2024). In their study, they evalu-
+ated the performance of various LLMs in OpenIE
+and compared these results with those of the end-
+to-end REBEL model (Huguet Cabot and Navigli,
+2021). They reported substantial improvements
+in triple extraction when using LLMs in domains
+that deviate from conventional ClosedIE or OpenIE
+settings, which are respectively overly constrained
+and unconstrained in terms of named entities and
+pre-defined relations. Similar concerns about the
+generalisability and scalability of conventional KG
+construction approaches in open-domain scenarios
+are recognised by Wang et al., who sought to con-
+struct their graphs without relying on pre-existing
+ontologies, or KGs for named entity disambigua-
+tion.
+These findings resonate with the growing in-
+terest in recent literature towards applying such
+methodologies for automatic, schema-free knowl-
+edge graph construction (Li et al., 2024; Fang et al.,
+2024; Gutierrez et al., 2024; Park et al., 2024). As
+our primary focus is retrieval rather than graph
+construction, we adopt the triple extraction method-
+ology from HippoRAG and refer readers to their
+paper for a more detailed analysis.
+Our work presents a novel framework for advanc-
+ing the performance of RAG systems in the context
+of texts associated with schema-free triples. We
+follow HippoRAG’s graph construction approach,
+as exploring graph construction methods falls out-
+side the scope of this paper. However, this does
+not imply that our proposed method relies on this
+specific approach, and we believe that further im-
+provements in graph construction could lead to
+additional gains.
+F GEAR across Different Configurations
+Table 9 illustrates the performance of GEAR across
+varying hyperparameter configurations, including
+beam search length—applied during graph expan-
+sion—and the maximum number of agent iterations.
+As the maximum number of iterations increases,
+GEAR achieves better retrieval performance. How-
+ever, consistently with the trends shown in Figure 2,
+this improvement levels off when setting the max-
+imum number of iterations at n ≥ 3. In contrast,
+increasing beam sffearch length above 2 slightly
+reduces performance. Despite this, GEAR main-
+tains highly competitive results and significantly
+outperforms alternative methods shown in Table 2.
+G Compatibility with Open-weight
+Models
+GEAR Results As shown in Table 10, we eval-
+uate GEAR using popular 7-8B parameter open-
+weight models, comparing them against a closed-
+source alternative. On HotpotQA, Llama-3.1-7B
+surpasses the closed-source alternative, achiev-
+ing higher recall rates at R@10 and R@15. For
+MuSiQue and 2Wiki, while the closed-source
+model maintains a slight superior edge in per-
+formance, the margin is narrow. Importantly,
+all tested open-weight models consistently out-
+perform the previous state-of-the-art, HippoRAG
+w/IRCoT. This decouples GEAR from the need to
+use closed-source models, suggesting that state-of-
+the-art multi-step retrieval can be achieved using
+more accessible models.
+Diverse Beam Search Results Expanding upon
+Table 4, Table 11 demonstrates that diverse beam
+search consistently improves retrieval performance
+across both closed-source and open-weight models
+when using our proposed Hybrid + SyncGE setup.
+This further confirms the broader applicability of
+this approach.
+H Robustness Studies
+We assess the robustness of our framework in re-
+trieving passages when triple extraction produces
+either limited or excessive triple content. Using the
+MuSiQue dataset, we group questions based on the
+average number of triples (i.e. triple density, ρt)
+associated with their golden passages and evaluate
+R@15 performance across these ranges. Table 12
+presents the results for both the single- and multi-
+step retrieval settings. The passage length remains
+12063

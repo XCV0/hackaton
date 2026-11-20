@@ -1,0 +1,132 @@
+23
+Key Value
+Detail Raw data of the topic candidate, tj
+Summary Concise summary of the above data
+Keywords Key terms about the summary
+Categories Categories of the keywords, {ctj ,l}l
+Table 2: Structure of an organized topic candidate.
+cedures implemented in fC , fI , fK , and fR are
+described in Sections 3.2.2, 3.2.3 (for fI and fK ),
+and 3.2.4, respectively.
+3.2.2. Information Organization
+The LLM estimates three components for each
+topic candidate tj : a summary, related key-
+words, and overarching topic categories {ctj ,l}l.
+These estimated components are structured as
+key–value pairs, as shown in Table 2. To prevent
+duplication with the previously estimated category
+set C, PT-RAG calculates the cosine similarity be-
+tween C ′ and C. If the similarity meets or exceeds
+a predeﬁned threshold α, the system does not up-
+date C, as tj can be associated with existing cate-
+gories. Otherwise, any new categories are added
+to the category set. These processes are deﬁned
+as the function fC in Equation (2). Each new can-
+didate is represented as a key–value structure,
+where cl serves as the key, and the correspond-
+ing value consists of the key–value pairs deﬁned
+in Table 2.
+Figure 3 shows an example of this estima-
+tion process. The LLM ﬁrst summarizes the
+conversation with the user about domestic trips,
+then identiﬁes three keywordsʕ”hot springs,” ”lo-
+cal foods,” and ”relaxation”ʕand assigns two topic
+categories: ”travel” and ”domestic trips.”
+3.2.3. Interest and Knowledge Estimation
+The user’s interests In are estimated from the his-
+tory of the n-th conversation hn. Speciﬁcally, topic
+categories {cl}l and keywords are estimated from
+hn, using the same method described in Section
+3.2.2. The LLM then identiﬁes categories and key-
+words that reﬂect the user’s interest among those
+estimated. These selected elements are repre-
+sented as im,n ∈ In. If In−1 exists, each im,n−1
+is compared with each im,n. When their cosine
+similarity exceeds the threshold, α, the two are
+merged; otherwise, the new im,n are added to
+In−1. These processes are deﬁned as the func-
+tion fI in Equation (3).
+The user’s knowledge related to cl, denoted as
+kcl ,n, is also estimated from hn. Speciﬁcally, the
+LLM generates detailed text representing kcl ,n,
+enabling the model to better understand the user’s
+knowledge. If kcl ,n−1 exists, it is also provided to
+/g29/g3/g44/g98/g89/g72/g3/g69/g72/g72/g81/g3/g90/g68/g81/g87/g76/g81/g74/g3/g87/g82/g3/g87/g85/g68/g89/g72/g79/g3/g68/g74/g68/g76/g81/g3/g79/g68/g87/g72/g79/g92/g17
+/g44/g3/g68/g70/g87/g88/g68/g79/g79/g92/g3/g74/g82/g3/g82/g81/g3/g71/g82/g80/g72/g86/g87/g76/g70/g3/g87/g85/g76/g83/g86/g3/g83/g85/g72/g87/g87/g92/g3/g82/g73/g87/g72/g81/g17
+/g29/g3/g55/g75/g68/g87/g98/g86/g3/g90/g82/g81/g71/g72/g85/g73/g88/g79/g4/g3/g58/g75/g68/g87/g3/g78/g76/g81/g71/g3/g82/g73/g3/g83/g79/g68/g70/g72/g86/g3/g71/g82/g3/g92/g82/g88/g3/g72/g81/g77/g82/g92/g34/g3
+/g43/g82/g87/g3/g86/g83/g85/g76/g81/g74/g86/g15/g3/g81/g68/g87/g88/g85/g72/g15/g3/g70/g76/g87/g92/g3/g86/g76/g74/g75/g87/g86/g72/g72/g76/g81/g74/g15/g3/g1596/g3/g68/g81/g92/g3/g73/g68/g89/g82/g85/g76/g87/g72/g86/g34
+/g29/g3/g44/g3/g74/g82/g3/g87/g82/g3/g83/g79/g68/g70/g72/g86/g3/g90/g76/g87/g75/g3/g75/g82/g87/g3/g86/g83/g85/g76/g81/g74/g86/g3/g68/g3/g79/g82/g87/g17/g3
+/g36/g81/g71/g3/g44/g3/g79/g76/g78/g72/g3/g72/g68/g87/g76/g81/g74/g3/g68/g85/g82/g88/g81/g71/g15/g3/g87/g82/g82/g17
+/g47/g47/g48
+/g76/g81/g83/g88/g87
+/g82/g88/g87/g83/g88/g87
+/g100/g346/g286/g3/g437/g400/g286/g396/g3/g410/g381/g367/g282/g3/g373/g286/g3/g410/g346/g258/g410/g3/g410/g346/g286/g455/g3/g296/g396/g286/g395/g437/g286/g374/g410/g367/g455/g3/g410/g258/g364/g286/g3
+/g282/g381/g373/g286/g400/g410/g349/g272/g3/g410/g396/g349/g393/g400/g856/g3/g44/g286/g3/g286/g454/g393/g367/g258/g349/g374/g286/g282/g3/g410/g346/g258/g410/g3/g346/g286/g3/g381/g296/g410/g286/g374/g3
+/g272/g346/g381/g381/g400/g286/g3/g282/g286/g400/g410/g349/g374/g258/g410/g349/g381/g374/g400/g3/g449/g349/g410/g346/g3/g346/g381/g410/g3/g400/g393/g349/g396/g349/g374/g336/g400 /g258/g374/g282/g3
+/g410/g346/g258/g410/g3/g410/g346/g286/g455/g3/g286/g374/g361/g381/g455/g3/g410/g396/g455/g349/g374/g336/g3/g367/g381/g272/g258/g367/g3/g296/g381/g381/g282/g400/g856/g3/g47/g3/g258/g400/g364/g286/g282/g857
+/g94/g437/g373/g373/g258/g396/g455
+/g346/g381/g410/g3/g400/g393/g396/g349/g374/g336/g400/g853/g3/g367/g381/g272/g258/g367/g3/g296/g381/g381/g282/g400/g853/g3/g396/g286/g367/g258/g454/g258/g410/g349/g381/g374/g60/g286/g455/g449/g381/g396/g282/g400
+/g282/g381/g373/g286/g400/g410/g349/g272/g3/g410/g396/g349/g393/g400/g853/g3/g410/g396/g258/g448/g286/g367/g3/g18/g258/g410/g286/g336/g381/g396/g349/g286/g400
+Figure 3: Example of estimating three compo-
+nents (summary, keywords, topic categories).
+/g29/g3/g44/g98/g89/g72/g3/g69/g72/g72/g81/g3/g90/g68/g81/g87/g76/g81/g74/g3/g87/g82/g3/g87/g85/g68/g89/g72/g79/g3/g17/g17/g17
+/g29/g3/g55/g75/g68/g87/g98/g86/g3/g90/g82/g81/g71/g72/g85/g73/g88/g79/g4/g3/g58/g75/g68/g87/g3/g78/g76/g81/g71/g3/g82/g73/g3/g83/g79/g68/g70/g72/g86/g3/g17/g17/g17
+/g47/g47/g48
+/g76/g81/g83/g88/g87
+/g82/g88/g87/g83/g88/g87
+/g100/g346/g286/g3/g437/g400/g286/g396/g3/g410/g381/g367/g282/g3/g373/g286/g3/g410/g346/g258/g410/g3/g410/g346/g286/g455/g3
+/g296/g396/g286/g395/g437/g286/g374/g410/g367/g455/g3/g410/g258/g364/g286/g3/g282/g381/g373/g286/g400/g410/g349/g272/g3
+/g410/g396/g349/g393/g400/g856/g3/g44/g286/g3/g286/g454/g393/g367/g258/g349/g374/g286/g282/g3/g410/g346/g258/g410/g3/g346/g286/g3
+/g381/g296/g410/g286/g374/g3/g272/g346/g381/g381/g400/g286/g3/g282/g286/g400/g410/g349/g374/g258/g410/g349/g381/g374/g400/g3
+/g449/g349/g410/g346/g3/g346/g381/g410/g3/g400/g393/g396/g349/g374/g336/g400/g3/g258/g374/g282/g3/g410/g346/g258/g410/g3
+/g410/g346/g286/g455/g3/g286/g374/g361/g381/g455/g3/g410/g396/g455/g349/g374/g336/g3/g367/g381/g272/g258/g367/g3/g296/g381/g381/g282/g400/g856/g3
+/g47/g3/g258/g400/g364/g286/g282/g857
+/g94/g437/g373/g373/g258/g396/g455
+/g346/g381/g410/g3/g400/g393/g396/g349/g374/g336/g400/g853/g3/g367/g381/g272/g258/g367/g3/g296/g381/g381/g282/g400/g853/g3
+/g396/g286/g367/g258/g454/g258/g410/g349/g381/g374/g60/g286/g455/g449/g381/g396/g282/g400
+/g282/g381/g373/g286/g400/g410/g349/g272/g3/g410/g396/g349/g393/g400/g853/g3/g410/g396/g258/g448/g286/g367/g18/g258/g410/g286/g336/g381/g396/g349/g286/g400
+/g346/g381/g410/g3/g400/g393/g396/g349/g374/g336/g400/g60/g286/g455/g449/g381/g396/g282/g400 /g894/g349/g374/g410/g286/g396/g286/g400/g410/g400/g895
+/g282/g381/g373/g286/g400/g410/g349/g272/g3/g410/g396/g349/g393/g400/g18/g258/g410/g286/g336/g381/g396/g349/g286/g400 /g894/g349/g374/g410/g286/g396/g286/g400/g410/g400/g895
+/g60/g374/g381/g449/g367/g286/g282/g336/g286/g18/g258/g410/g286/g336/g381/g396/g455
+/g410/g396/g258/g448/g286/g367
+/g282/g381/g373/g286/g400/g410/g349/g272/g3/g410/g396/g349/g393/g400
+/g47/g47/g48
+/g76/g81/g83/g88/g87
+/g82/g88/g87/g83/g88/g87
+/g1005/g895/g3/g24/g381/g373/g286/g400/g410/g349/g272/g3/g100/g396/g258/g448/g286/g367/g3/g62/g349/g410/g286/g396/g258/g272/g455
+/g100/g346/g286/g3/g437/g400/g286/g396/g3/g367/g349/g364/g286/g367/g455/g3/g346/g258/g400/g3/g400/g381/g367/g349/g282/g3/g364/g374/g381/g449/g367/g286/g282/g336/g286/g3
+/g381/g296/g3/g282/g381/g373/g286/g400/g410/g349/g272/g3/g410/g396/g258/g448/g286/g367/g349/g374/g336/g3/g449/g349/g410/g346/g349/g374/g3/g58/g258/g393/g258/g374/g853/g3
+/g349/g374/g272/g367/g437/g282/g349/g374/g336/g3/g373/g258/g361/g381/g396/g3/g381/g374/g400/g286/g374/g3/g282/g286/g400/g410/g349/g374/g258/g410/g349/g381/g374/g400/g853/g3
+/g271/g258/g400/g349/g272/g3/g410/g396/g258/g374/g400/g393/g381/g396/g410/g258/g410/g349/g381/g374/g3/g396/g381/g437/g410/g286/g400/g857
+/g1006/g895/g3/g38/g381/g381/g282/g3/g920/g3/g62/g381/g272/g258/g367/g3/g18/g437/g349/g400/g349/g374/g286/g3/g60/g374/g381/g449/g882/g44/g381/g449
+/g44/g286/g3/g437/g374/g282/g286/g396/g400/g410/g258/g374/g282/g400/g3/g346/g381/g449/g3/g410/g381/g3/g286/g374/g361/g381/g455/g3
+/g396/g286/g336/g349/g381/g374/g258/g367/g3/g58/g258/g393/g258/g374/g286/g400/g286/g3/g272/g437/g349/g400/g349/g374/g286/g3/g449/g346/g349/g367/g286/g3
+/g410/g396/g258/g448/g286/g367/g349/g374/g336/g853/g3/g410/g346/g286/g3/g271/g286/g400/g410/g3/g449/g258/g455/g400/g3/g410/g381/g3/g286/g454/g393/g367/g381/g396/g286/g3
+/g296/g381/g381/g282/g3/g400/g410/g396/g286/g286/g410/g400/g857
+/g44/g81/g87/g72/g85/g72/g86/g87/g3
+/g40/g86/g87/g76/g80/g68/g87/g76/g82/g81
+/g46/g81/g82/g90/g79/g72/g71/g74/g72/g3
+/g40/g86/g87/g76/g80/g68/g87/g76/g82/g81
+/g858/g400/g3/g286/g454/g349/g400/g410/g349/g374/g336/g3
+/g364/g374/g381/g449/g367/g286/g282/g336/g286
+/g410/g396/g258/g448/g286/g367
+Figure 4: Example of interest and knowledge esti-
+mation.
+the LLM to update kcl ,n−1 to kcl ,n. This process is
+deﬁned as the function fK in Equation (4).
+Figure 4 illustrates an example of these esti-
+mation processes. From the estimated keywords
+and categories of the n-th conversation, the LLM
+extracts the keyword ”hot springs” and the topic
+category ”domestic trips” as the user’s interests.
+It then estimates the user’s knowledge from the
+same conversation and the existing knowledge of
+”travel”. This new knowledge is associated with
+”travel” since it is derived from information labeled
+under this category.
+The estimated interests and knowledge are
+stored in a key–value format, where each key cor-
+responds to cl. Speciﬁcally, the value for ”interest”
+is set to the keywords representing the user’s in-
+terest, while the value for ”knowledge” is set to the
+detailed text describing their knowledge.

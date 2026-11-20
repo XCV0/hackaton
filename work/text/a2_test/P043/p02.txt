@@ -1,0 +1,49 @@
+1 Introduction
+Retrieval-Augmented Generation (RAG), as a technical paradigm that combines information retrieval with
+generative models, effectively mitigates inherent limitations of large language models (LLMs), such as
+insufficient data freshness [10], hallucinations [3, 14], and the lack of domain-specific knowledge [12]. As
+the core architecture for knowledge-intensive tasks [17], its effectiveness is fundamentally influenced by the
+optimization boundaries of the retrieval mechanism. Research has shown that the quality of the retrieved text
+segmentsdirectlydeterminestheupperlimitoftheperformanceofRAGsystems[15,20]. Optimalsegmentation
+of documents into semantically complete and coherent segments not only enhances the generation accuracy of
+LLMs but also significantly improves the system’s processing efficiency while reducing computational resource
+consumption [23, 29].
+However, a profound cognitive gap still persists in current RAG practices. Most of these methods reduce
+document processing to a mechanistic preprocessing step [8, 16]. This passive approach of segmenting first
+and then understanding is contrary to the cognitive process of human experts [6, 21]. When studying a
+complex document, human experts actively construct a mental model: they first grasp the macro-level logical
+structure, then identify key arguments, and ultimately form a structured memory that is interconnected and
+hierarchical [22, 24]. To bridge this gap, we advocate for a shift in the text processing approach of RAG from
+passive text chunking to active memory extraction. This study aims to address the core issues arising from
+the traditional RAG paradigm: How can we enable the model to actively transform an unstructured text
+stream into a semantically complete and logically coherent structured knowledge, namely, document memory,
+in a manner similar to domain experts? And how can we efficiently imbue small language models (SLMs)
+with this deep understanding capability?
+To achieve this goal, we propose the Mixtures of scenario-aware document Memories (MoM) framework.
+Initially, to establish a macro-level understanding of the document, we instruct LLMs to assume the role of a
+domain-specific expert. LLMs conduct an in-depth analysis and generate a well-structured document outline.
+This outline not only serves as an index of the content but also lays the foundation for subsequent processing
+steps. Secondly, guided by the logical outline, we initiate multi-path memory extraction and evaluation.
+To ensure the quality of the final extraction, we design two unique metrics for comprehensive evaluation
+and automatic selection. This approach ensures the domain adaptability of the framework, enabling it to
+accurately grasp the core knowledge structure and key points of different professional documents. Thirdly,
+with the aim of transferring this advanced cognitive capability from LLMs to SLMs, we employ reverse
+engineering to construct a logically rigorous Chain reasoning of Memory extraction (CoM), which can assist
+SLMs in thinking. Finally, to fully leverage the multi-level content produced by MoM, we develop a three-layer
+document memory retrieval algorithm consisting of the logical outline, core content, and the original text.
+Meanwhile, our theoretical analysis demonstrates that this strategy can more effectively avoid information
+loss, thereby achieving precise retrieval of the target knowledge.
+We summarize contributions of this work as follows:
+• We propose active memory extraction as an alternative to passive text chunking. By achieving a global
+understanding of domain-specific documents, we construct structured document memory. Additionally,
+leveraging reverse reasoning techniques, we enable SLMs to autonomously perform this complex task.
+• We develop a three-layer document memory retrieval mechanism and provide theoretical proof from the
+perspective of probabilistic modeling. Compared to the traditional strategy of fusing information before
+retrieval, independently retrieving from different memory layers and then fusing the results can more
+effectively reduce information loss, thereby achieving more precise knowledge localization.
+• To validate the effectiveness of the MoM framework, we conduct experiments and analyses on three
+datasets from different domains. By obtaining data through multiple channels, we construct 40K training
+samples and train multiple MemReaders. The results indicate that MoM can adaptively process texts
+with different structures and domains, generate high-quality document memory, and also demonstrate
+the feasibility of achieving human-centered high-quality text processing through SLMs.
+2

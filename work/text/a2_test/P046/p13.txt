@@ -1,0 +1,57 @@
+Evaluation Prompt (for LLM baselines):
+System: "You are an expert in verifying
+hallucination.↪→
+Please judge if the hallucination exists
+in the↪→
+answer of query given contexts.
+If hallucination exists, print 'Yes'.
+Else, 'No'."↪→
+User: "Query: <query>
+Answer: <answer>
+Context: <context>"
+H Rule-Based Factual Sentence Classifier
+The rule-based classifier f (c) ∈ {0, 1} identifies
+whether a text chunk c contains a verifiable factual
+claim worthy of NLI scoring.
+Filter Conditions (applied in order). A chunk
+is classified as factual (f (c) = 1) if it satisfies all:
+1. Length: token count ≥ 5.
+2. Verb presence: at least one finite verb de-
+tected by POS tagging.
+3. Named entity or numeric: contains at least
+one named entity (PERSON, ORG, GPE,
+DATE, CARDINAL, etc.) or numeric token.
+4. Declarative structure: sentence-final token
+is not a question mark or imperative-only verb
+form.
+5. Rejection list: chunk does not consist solely
+of transitional phrases (e.g., “Furthermore,”
+“However,”) without a substantive claim.
+Performance. On 1,000 labeled sentences: P =
+87.3%, R = 82.1%, F1 = 84.6%. Common false pos-
+itives include figurative language; common false
+negatives include colloquial factual statements.
+Sensitivity Analysis. Relaxing filter condition
+(3) (removing the entity requirement) increases
+recall by 2.1% but decreases precision by 5.8%,
+resulting in a net F1 loss of 1.7%. The default
+configuration represents the best precision–recall
+trade-off on the validation set.
+I Convex Hull Volume Analysis
+We designed a Monte Carlo algorithm to estimate
+the convex hull volume of segment embeddings and
+investigated whether it could serve as a quality met-
+ric for embedding models. Intuitively, a larger con-
+vex hull volume indicates greater feature diversity.
+Preliminary experiments suggest a positive correla-
+tion between convex hull volume and hallucination
+detection accuracy for models of identical dimen-
+sionality (Model A: relative volume 1.00, accuracy
+82.4%; Model B: relative volume 1.14, accuracy
+83.1%). However, computing high-dimensional
+convex hulls is computationally expensive, and this
+analysis requires broader validation across datasets
+and model families. We include it here for refer-
+ence only; no conclusions are drawn in the main
+text.
+1617

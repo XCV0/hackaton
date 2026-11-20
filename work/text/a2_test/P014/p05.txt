@@ -1,0 +1,96 @@
+model’s prediction ai compared to the ground-truth
+label ˆy.
+3.3 Bernoulli-gated Knowledge Dropout
+To bridge the gap between explicit prior-guided
+reasoning and implicit latent inference, we treat
+the prior knowledge z as a stochastic variable.
+Formally, the sampling process is governed by a
+Bernoulli distribution b ∼ Bernoulli(λ), such that
+the effective prior ˜z alternates between the explicit
+prior z and a null state ∅.
+While Eq. 1 provides the operational GRPO ob-
+jective based on advantage-weighted policy ratios,
+its optimization can be theoretically interpreted as
+maximizing a joint log-likelihood. Specifically, the
+behavior of the model under the Bernoulli gate
+aligns with the following objective J (θ):
+J (θ) = P (˜z = z) · J2(θ) + P (˜z = ∅) · J1(θ)
+= λ · J2(θ) + (1 − λ) · J1(θ) (3)
+where λ represents the probability of retaining z 2,
+and the objects can be reformulated as:
+J2(θ) = log Pθ(y|x, z, d), J1(θ) = log Pθ(y|x, d)
+(4)
+Through theoretical derivations in Appendix C,
+this objective function can be approximated with
+the KL divergence (Kullback and Leibler, 1951).
+By taking the expectation of J (θ) under the full-
+information distribution P (y|x, z, d), we obtain:
+Ey∼P [J (θ)] ≈ E[log P (y|x, z, d)]−
+(1 − λ) · KL[P (y|x, z, d)||P (y|x, d)] (5)
+By optimizing L(θ), the model is encouraged
+to align the non-prior distribution with the prior-
+augmented distribution. This alignment facilitates
+the internalization of prior-guided reasoning within
+the model’s parameters, allowing it to maintain
+high accuracy when the explicit prior z is omitted.
+4 Experiments
+4.1 Settings
+Dataset Construction. To assess the robust-
+ness of LLMs against retrieval noise and conflict,
+we utilize the test set from RAG-Bench (Fang
+et al., 2024), which includes the NQ (Kwiatkowski
+et al., 2019), TriviaQA (Joshi et al., 2017), and
+2We assign a default value of 0.5 for λ, with a comparative
+study regarding the impact of varying this parameter detailed
+in Table 6.
+WebQ (Berant et al., 2013). For each query, this
+benchmark provides both conflicting documents
+and noisy documents that do not contain the cor-
+rect answer. To analyze model performance under
+varying degrees of interference, we modulate the
+number of input documents k ∈ {1, 2, 5, 10}. In
+the k = 1 configuration, only the gold document
+is provided. For k > 1, additional documents are
+sampled from the respective noisy and conflicting
+document pools within RAG-Bench. Further de-
+tails are provided in Appendix B.1.
+To reflect distractor information in real-world
+retrieval, we employ the pre-processed English
+Wikipedia dump from December 2018, as released
+by Karpukhin et al. (2020), as our corpus. We
+utilize a supervised retriever, DPR (Karpukhin
+et al., 2020), followed by two distinct rerank-
+ing methods—BGE-m3 (Chen et al., 2024) and
+UR³ (Yuan et al., 2024b)—to obtain the top k doc-
+uments for each query, where k ∈ {5, 20, 50}.
+We additionally employ the HotpotQA (Yang
+et al., 2018) and 2Wikimultihopqa (Ho et al.,
+2020) for a multi-hop reasoning evaluation in Ap-
+pendix D.
+Models. We conduct our experiments using the
+Qwen2.5-7B-Instruct (Yang et al., 2025) and
+Qwen3-8B (Team, 2025) models for both training
+and inference.
+Baselines. We first evaluate several training-free
+method: (1) Direct Inference: The model gener-
+ates answers directly based on the provided exter-
+nal knowledge (Lewis et al., 2020). (2) Prompt-
+based Methods: Based on CoT (Wei et al., 2022),
+we employ three strategies to evaluate model perfor-
+mance: Standard CoT, Joint CoT, and Prior-Guided
+CoT (see Sec. 2.1). (3) Decoding-based Meth-
+ods: Self-Consistency (SC) (Wang et al., 2023)
+decoding enhances reasoning via diverse path sam-
+pling and majority voting3. COIECD (Yuan et al.,
+2024a) employs a contextual information-entropy
+constraint to mitigate contextual conflicts by adjust-
+ing token probabilities. (4) Multi Agent Debate:
+MADAM-RAG (Wang et al., 2025) uses a multi-
+agent framework to handle conflicts, misinforma-
+tion, and noise in retrieved content4.
+Then our evaluation further extends to training-
+based methods: (5) Fine-tuning: RALM (Lin
+3For all evaluations, we employ a sampling size of 10.
+4For a fair comparison, we adapt the original 72B agent
+setup to the 7B/8B scale used in our other experiments.
+22153

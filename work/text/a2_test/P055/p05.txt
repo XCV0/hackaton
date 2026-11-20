@@ -1,0 +1,112 @@
+Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea
+Feature-level Fusion
+Query node (𝐡): 
+𝒵𝑎 ∪ 𝒵𝑎 ⨁
+𝛽
+Ego-graph Coarse-grained 
+attribute graph 𝒢𝑎
+Fine-grained 
+attribute graph 𝒢𝑠
+Structure-level Fusion
+Graph Foundation Model
+Final Prediction
+⨁
+𝜔 1 − 𝜔
+𝛼 × 𝐇𝑞
+log𝐶
+⨁
+𝑤𝐳𝑖 = −𝑑𝔹(𝐪𝑎, 𝐞𝑎𝑖 )
+External knowledge base 𝒦:
+⋯
+has context
+artificial 
+intelligence
+machine 
+learning algorithm
+related toartificial neural 
+network
+related to
+recurrent neural 
+network
+modular neural 
+network
+deep neural 
+network
+subclass of
+subclass ofsubclass of
+Hyperbolic Semantic Encoder
+Textual attribute of query node (𝒒): 
+This paper study generalization bounds of query 
+committee methods under PAC learning framework. 
+Coarse-grained Query (𝑞𝑎) Fine-grained Query (𝑞𝑠)
+Hyperbolic Semantic Encoder
+exp(∙)
+exp(∙)exp(∙)
+Query-guided Neighborhood Aggregation Scheme
+Coarse-grained
+Fine-grained 𝒵𝑎 𝒵𝑠
+RetrieveRetrieve
+Coarse-grained graphs {𝐺𝑎𝑖 }𝑖=1 𝑘 Fine-grained graphs {𝐺𝑠𝑖}𝑖=1 𝑘
+Hyperbolic Knowledge Indexing Multi-granularity Retrieval Dual-path Fusion
+𝐪𝑎 𝐪𝑠
+𝐩𝑞 𝐩𝑎 𝐩𝑠
+𝐡′
+Figure 2: Overall framework of our proposed HyRAG.
+where r𝑖 =(𝑠𝑖,𝜃𝑖), R(·) is a rotation matrix:
+R(𝜃𝑖) =
+cos(𝜃𝑖) − sin(𝜃𝑖)
+sin(𝜃𝑖) cos(𝜃𝑖)
+
+, (12)
+and 𝜙(e𝑖) is the half aperture of the cone e𝑖. e𝑖 is the unit vector of
+e𝑖 in the tangent space of e𝑖:
+e𝑖 =be𝑖/∥be𝑖∥, be𝑖 = loge𝑖
+ 1+∥e𝑖∥
+2∥e𝑖∥ e𝑖
+
+. (13)
+Notably, without loss of generality, we assume that the hierarchical
+relations in Eq.11 correspond to hyponym type relations. Accord-
+ingly, to operationalize this minimization goal into a tractable train-
+ing objective, we define the distance loss function using negative
+sampling:
+L𝑡 =− log𝜎(𝑑B (𝑔(𝑒𝑖,𝑟𝑖),𝑒𝑗))− E𝑒′ 𝑗 ∼T
+
+log𝜎(−𝑑B (𝑔(𝑒𝑖,𝑟𝑖),𝑒′ 𝑗))  ,
+(14)
+where (𝑒𝑖,𝑟𝑖,𝑒𝑗) represents the positive sample, and the negative
+samples (𝑒𝑖,𝑟𝑖,𝑒′ 𝑗) are constructed by corrupting the tail entity,
+where the negative entity 𝑒′ 𝑗 is uniformly sampled from a candidate
+setT⊆E\{𝑒𝑗}.
+To explicitly model hierarchical containment, we further impose
+an angle constraint based on hyperbolic entailment cones. For
+instance, if the relation 𝑟𝑖 corresponds to a hyponym type relation,
+the hyperbolic entailment cone of the tail entity 𝑒𝑗 is required to
+be geometrically contained within that of the head entity 𝑒𝑖. Thus,
+we adopt an angle loss function:
+L𝑎 = max(0, ∠e𝑖 e𝑗 −𝜙(e𝑖)). (15)
+However, optimizing only the distance loss and the angle loss may
+cause embeddings to drift toward the boundary of the Poincaré
+ball, leading to degenerate hierarchical representations. To mitigate
+this effect, we penalize embeddings whose radial norms exceed
+a predefined threshold 𝜖, thereby stabilizing the geometry and
+preserving effective representational capacity:
+Lreg = max(0,∥e𝑖∥−𝜖)2 + max(0,∥e𝑗∥−𝜖)2. (16)
+Thus, the final objective is given by:
+L =L𝑡 +𝜆𝑎L𝑎 +𝜆regLreg, (17)
+where 𝜆𝑎 and 𝜆reg are hyper-parameters. By optimizing the map-
+ping network 𝑓Θ through this objective function, we obtain the
+hyperbolic index for entities in the external knowledge base, de-
+noted as H = {e1,..., e𝑖,..., e𝑁}, where each e𝑖 ∈ B𝑑 resides
+in the Poincaré ball. This embedding space jointly captures rich
+textual semantics and the underlying hierarchical structure of the
+knowledge base, thereby mitigating the hubness problem.
+4.2 Multi-granularity Retrieval
+As discussed in Section 1, coarse-grained and fine-grained concepts
+provide distinct perspectives essential for graph tasks. To this end,
+we propose the multi-granularity retrieval mechanism designed to
+retrieve complementary knowledge at varying granularities.
+Rather than imposing hard geometric constraints (e.g., explicit
+radius thresholds), we leverage the large language model (LLM) to
+semantically reformulate the original textual attribute 𝑞 of the query
+node into two distinct variants: 1) a coarse-grained query 𝑞𝑎 that

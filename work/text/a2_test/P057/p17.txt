@@ -1,0 +1,32 @@
+You are given a multi-hop ‘question‘. Decompose it into simple single-hop query, passage. And
+ﬁnally write the overall answer.
+question: In what country was Lost Gravity manufactured?
+query: Who manufactured The Lost Gravity (roller coaster)?
+passage: Lost Gravity is a steel roller coaster at Walibi Holland manufactured by Mack Rides.
+query: Mack Rides is from which country?
+passage: Mack Rides is based in Germany.
+answer: Germany
+question: Do James Cameron and Christopher Nolan share their profession?
+query: What is the profession of James Cameron?
+passage: James Cameron is a Director.
+query: What is the profession of Christopher Nolan?
+passage: Christopher Nolan is a Director.
+answer: Yes
+question: The actor that stars as Joe Proctor on the series "Power" also played a character on
+"Entourage" that has what last name?
+query: Who is the actor that stars as Joe Proctor on the series "Power"?
+passage: Joe Proctor on the series "Power" was potrayed by Jerry Ferrara.
+query: Jerry Ferrara played a character on Entourage named what?
+passage: Jerry Ferrara played the character of Assante on Entourage.
+answer: Assante
+question: <question>
+<sub-query steps so far>
+Table 15: Few-shot prompt for Iterative baseline
+Setup Hotpot NQ
+F1 AutoAIS F1 AutoAIS
+GTR 32.6 61.3 25.5 17.7
+RICHES 40.3 58.5 39.6 36.6
+Table 16: Comparison of GTR with PALM2-L an-
+swerer with RICHES using PALM2-L backbone on
+ﬁrst 2000 questions of NQ and Hotpot
+8903

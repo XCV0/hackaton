@@ -1,0 +1,121 @@
+How does the shape of the IRLS weight function
+change as the shape parameter α increases?
+❌
+As the shape parameter α increases, the IRLS weight function becomes ﬂatter,
+indicating that the penalization of large residuals (outliers) decreases, making the
+function less robust to outliers.
+### Element 1:
+- **Type:** Paragraph
+- **Content:**
+ - "Curiously, these IRLS weights resemble a non-normalized form of Student’s t-
+distribution."                                                          
+ - "A visualization of our loss’s Ψ-functions and weight functions for different values of α
+can be seen in Figure 7."                                  
+- **Page Number:** 2
+- **Explanation:** This paragraph indicates that the IRLS weight function changes as the
+shape parameter α increases and directs us to Figure 7 for visualization.
+### Element 2:
+- **Type:** Figure
+- **Content:** Figure 7, which shows "Our general loss's IRLS weight function (left) and
+Ψ-function (right) for different values of the shape parameter α ."
+- **Page Number:** 2
+- **Explanation:** The ﬁgure visually represents how the IRLS weight function changes
+with different values of α , which is crucial to answering how the shape of the weight
+function changes as α increases.
+### Element 3:
+- **Type:** Paragraph
+- **Content:**
+ - "Ψ(z, α ) = (1 − z) for α = 2"
+ - "Ψ(z, α ) is not deﬁned when α ≥ 2 because for those values the loss is no longer
+robust, and so it is not well described as a process that rejects outliers."
+- **Page Number:** 2
+- **Explanation:** This section explains that for values of α equal to or greater than 2, the
+loss becomes less effective at rejecting outliers, implying changes in the weight function
+behavior.
+### Element 4:
+- **Type:** Paragraph
+- **Content:**
+ - "The shape of the derivative gives some intuition as to how α affects behavior when our
+loss is being minimized by gradient descent or some related method."
+ - "For all values of α the derivative is approximately linear when |x| << c, so the effect of
+a small residual is always linearly proportional to that residual’s magnitude."
+ - "As α becomes more negative, and as α approaches −∞ an outlier whose residual
+magnitude is larger than 3c is almost completely ignored."             
+- **Page Number:** 5
+- **Explanation:** This paragraph explains how the shape parameter α affects the
+behavior of the weight function, particularly for outliers.
+1. **Understanding the Role of α in the Weight Function:** From the paragraph on
+page 2, we learn that the IRLS weight function is dependent on α , and its behavior
+can be visually analyzed using Figure 7. Moreover, as α increases, the function
+becomes less robust at rejecting outliers.
+2. **Analyzing Figure 7:** The left side of Figure 7 shows the IRLS weight function for
+different values of α . As α increases (from negative to positive values), the weight
+function becomes ﬂatter around the origin, indicating that higher α values reduce the
+penalization of residuals, especially for larger residuals.
+3. **Impact on Outliers:** From the paragraph on page 5, we know that as α becomes
+more negative, the weight function heavily penalizes large residuals (outliers), but as α
+increases, the "inﬂuence" of outliers diminishes, making the weight function ﬂatter and
+less responsive to large residuals.
+4. **α = 2 and Beyond:** For α values greater than or equal to 2, the weight function is
+no longer robust, meaning it does not effectively reject outliers, as described on page
+2.
+As the shape parameter α increases, the IRLS weight function transitions from a roughly
+piecewise-linear shape to a logarithmic shape, with a steeper slope at intermediate values
+like α = 2.
+1. **Figure and Text Description (Page 26)**:
+ - "A visualization of our loss’s IRLS weight functions for different values of α can be seen in Figure 7.
+[...] This curve is roughly piecewise-linear in [0,4] with a slope of ~1 at α = 0 and α = 4, but with a
+slope of ~10 at α = 2. When α > 4, the curve becomes logarithmic."
+ - **Relevance**: This passage directly describes the shape of the IRLS weight function as the shape
+parameter α increases, providing key insights into how the function changes.
+1. The passage describes the weight function for different values of α , starting with a piecewise-
+linear shape in the range [0, 4].
+2. At α = 0 and α = 4, the slope is ~1, indicating a relatively ﬂat response.
+3. At α = 2, the slope is much steeper (~10), indicating a more pronounced response to changes
+in the input.
+4. For α > 4, the function transitions to a logarithmic shape, indicating that the growth of the
+weight function becomes slower and sub-linear.
+The IRLS weight function becomes
+more peaked and concentrated
+around zero as the shape parameter
+α increases.
+Visual RAG
+Textual RAG
+VisDoMRAG
+Ground Truth
+Answer
+Ground Truth Evidence
+Both responses provide consistent reasoning on how the shape of the IRLS weight function changes
+as the shape parameter **α ** increases, but they approach the question from slightly different
+angles.
+1. **Response 1:**
+ - The evidence is drawn from a visual assessment (Figure 7) and various descriptive paragraphs
+about the behavior of the weight function as α changes. 
+ - The explanation clearly states that as the shape parameter α increases, the weight function
+becomes ﬂatter, reducing the penalization of large residuals (outliers), hence making the function less
+robust to outliers.
+ - The explanation considers speciﬁc behavior for very negative α values, and even points out that the
+weight function is no longer robust for α greater than or equal to 2.
+2. **Response 2:**
+ - Builds mostly on textual evidence and describes in more numerical detail the shape changes of the
+IRLS weight function (e.g., piecewise-linear with speciﬁc slopes at α = 0, 2, and 4, becoming
+logarithmic when α > 4).
+ - This response emphasizes how the weight function becomes logarithmic as the shape parameter α
+exceeds 4.                                             
+There is no fundamental disagreement between the two responses. However, **Response 1**
+emphasizes the relationship to robustness to outliers and the visual aspects of the behavior change,
+while **Response 2** provides more numerical information but does not cover robustness or speciﬁc
+outlier effects as well as Response 1.
+- **Content Completeness**: Response 1 provides a broader explanation, including different α ranges
+(negative α , small α , and large α ) and discussions about outlier behavior.
+- **Speciﬁcity of Behavior Across α Values**: Response 2 offers precise descriptions (slope changes
+and logarithmic behavior), but lacks the nuance about outliers and robustness.
+As the shape parameter α increases, the IRLS weight function becomes ﬂatter, indicating
+decreased penalization of large residuals (outliers), making the function less robust to
+outliers.
+✅
+❌❌
+Query
+Figure 14: Qualitative example from the SPIQA dataset, comparing VisDoMRAG with unimodal RAG strategies,
+with ChatGPT4o as the base LLM.
+6106

@@ -1,0 +1,119 @@
+KDD ’24, August 25–29, 2024, Barcelona, Spain Yunqi Xu, Tianchi Cai, Jiyan Jiang, and Xierui Song
+• Conceptual Substitution Error (KConc.) refers to the situa-
+tion when a term or concept in the reference is erroneously
+replaced by a different (though possibly related) concept.
+Logical Fallacy This kind of error occurs when the answer
+contains statements that are either without logical support or have
+a logical relation that conflicts with the information from the ref-
+erence. This incongruity undermines the logical validity of the
+answer with respect to the reference, which results in an unsound
+argument or misleading information [22, 35]. We further divide the
+logical fallacy into four error types:
+• Overgeneralization Error (LOver.) refers to the situation when
+a specific detail or attribute from the reference is incorrectly
+applied to a broader category or group in the answer.
+• Causal Confusion Error (LCaus.) refer to reverse the cause
+and effect in the reference, or mistakenly adding a causal
+relationship between two noncausal segments.
+• Confusing Sufficient and Necessary Conditions Error (LConf.)
+is the case when the necessary conditions in reference are
+misinterpreted as sufficient and necessary conditions.
+• Inclusion Relation Error (LIncl.) is the case where statements
+that are unrelated or have certain relationship except inclu-
+sion in the reference are misrepresented in the answer to
+have an inclusion relationship (e.g., hierarchical or subset).
+For each of the error types defined above, we provide several
+examples to help better understand and distinguish it from other
+types. See detailed examples in Table 2.
+3.2 Synthetic Dataset
+Based on the above proposed error typology, we construct a syn-
+thetic dataset. In the dataset, the positive samples are factual con-
+sistent, whereas each negative sample has at least one factual in-
+consistency error. The dataset is constructed based on WebCPM
+[36], a web-enhanced question answering dataset in Chinese. Due
+to the space limit, in the following we briefly describe the process
+of dataset generation. Please refer to Appendix A for more details
+of the construction of our synthetic dataset.
+Negative Samples For each specific error type in the typology,
+we design a prompt to generate samples with this error. For the hal-
+lucination error, we setup three levels of difficulty for the evaluator
+to detect inconsistency and construct samples accordingly. For the
+remaining two categories, i.e., knowledge error and logical fallacy,
+we design a specific prompt for each error type except the Contra-
+diction Error (KCont.). Since KCont. may occur at different levels
+of granularity [12], i.e., word or sentence, we design one prompt
+for each. Apart from the above error types, we construct a new
+error type called Other Logical Fallacy (LOthe.), which accounts for
+potential errors in some complex logical connections uncovered by
+our previously defined four types of logical fallacy.
+Positive Samples To enrich the sample diversity, we apply the
+augmentation technique in [28]. Specifically, the original positive
+samples in WebCPM are augmented by synonym replacing and
+paraphrasing via certain prompt at either word or sentence level.
+Human Annotation Refinement To enhance the quality of the
+coarse labels derived above, we further engage 12 human experts
+to annotate the factual consistency of each answer via a two-step
+approach [31].
+0% 10% 20% 30% 40% 50% 60%
+Baichuan2
+ChatGLM3
+Alpaca2 (CH)
+GPT-3.5
+GPT-4
+Qwen
+KCont. KInve. KConf. KConc. LOver.
+LCaus. LConf. LIncl. Other ErrorsHallu.
+100%//
+~
+~
+~
+~
+~
+~
+Figure 3: Error type distributions of the six LLMs in our real-
+world dataset (we omit the 50%∼100% region in type ratio).
+3.3 Real-World Dataset
+The synthetic dataset is generated based on various predefined error
+types without considering the distribution of these error types in
+the real world. Consequently, there is a need for another evaluation
+dataset that better aligns with the actual distribution of answers in
+real-world RAG scenarios, thus serving as a real-world dataset. In
+contrast to previous studies that relied solely on GPT-based LLMs
+for generating responses to create their evaluation sets [9, 31], we
+adopt a more comprehensive approach by utilizing six different
+LLMs to construct our real-world dataset.
+Specifically, we first collect 200 questions along with correspond-
+ing references. We then prompt six commonly used LLMs to gen-
+erate answers for the questions based on the references, including
+gpt-4-turbo (GPT-4) [2], gpt-3.5-turbo (GPT-3.5) [33], Baichuan2-
+13B-Chat (Baichuan2) [5], ChatGLM3 [44], Qwen-14B-Chat (Qwen)
+[3], and Chinese-Alpaca-2-13B-16k [11] (Alpaca2 (CH)) . In this
+way, we derive a total of 1200 data points, which constitute the
+real-world dataset.
+For each data point, we follow the same human annotation proce-
+dure as in our synthetic dataset to inspect if it is factually consistent.
+Moreover, if an answer is deemed factually inconsistent, the an-
+notator will assign a specific error type from our proposed error
+typology to the answer. When the annotators notice that error of
+the answer does not fall into the aforementioned error types, they
+will mark the answer as "Other Errors".
+We now conduct empirical analyses on the error typology and
+the behaviors of various LLMs on the above real-world dataset.
+Overall Error Type Distribution We first justify our study on
+logical fallacy consistency detection by empirically showing that
+the logical fallacy errors are prevailing in the answers generated by
+various LLMs. To this end, we analyze the distribution of the error
+types annotated across the entire real-world dataset. As shown in
+Figure 2, the hallucination error, knowledge error and logical fallacy
+account for 73.78% , 28.31%, 6.96% of all the inconsistent samples,
+respectively. It worth note that this 6.96% logical fallacy errors are
+not studied in the previous FCE methods. Besides, only 0.23% of the
+inconsistent samples are marked as "Other Errors" by annotators,
+which suggests the comprehensiveness and completeness of our
+proposed error typology.
+Error Distribution of Various Models We then look deeper
+into the error types and their distributions among various LLMs
+in RAG. As presented in Figure 3, various LLMs exhibit distinct
+distributions on error types. For instance, LIncl. emerges in three
+of the LLMs, and LCaus. and LConf. occurs in four models. In ad-
+dition, while Hallu. exists in all models, GPT-4 has a notably high

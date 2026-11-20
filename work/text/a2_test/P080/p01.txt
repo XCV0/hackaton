@@ -1,0 +1,85 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 38133–38152
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+RAG over Tables: Hierarchical Memory Index,
+Multi-Stage Retrieval, and Benchmarking
+Jiaru Zou1*, Dongqi Fu2*, Sirui Chen1, Xinrui He1, Zihao Li1, Yada Zhu3, Jiawei Han1, Jingrui He1
+1University of Illinois Urbana-Champaign 2Meta AI 3IBM Research
+{jiaruz2, sirui6, xhe33, zihaoli5, hanj, jingrui}@illinois.edu
+dongqifu@meta.com, yzhu@us.ibm.com
+Code: https://github.com/jiaruzouu/T-RAG
+ Data: MultiTableQA Benchmark
+Abstract
+Retrieval-Augmented Generation (RAG) en-
+hances Large Language Models (LLMs) by in-
+tegrating them with an external knowledge base
+to improve the answer relevance and accuracy.
+In real-world scenarios, beyond pure text, a
+substantial amount of knowledge is stored in
+tables, and user questions often require retriev-
+ing answers that are distributed across multi-
+ple tables. Retrieving knowledge from a table
+corpora (i.e., various individual tables) for a
+question remains nascent, for (i) how to un-
+derstand intra- and inter-table knowledge ef-
+fectively, (ii) how to filter unnecessary tables
+and retrieve the most relevant tables efficiently,
+(iii) how to organize complex retrieved contexts
+for LLMs’ reasoning, and (iv) how to evaluate
+the corresponding performance in a realistic
+setting. Facing the above challenges, in this
+paper, we first propose a table-corpora-aware
+RAG framework, named T-RAG, which con-
+sists of the hierarchical memory index, multi-
+stage retrieval, and graph-aware context orga-
+nization for effective and efficient table knowl-
+edge retrieval and inference. Then, we develop
+a multi-table question answering benchmark
+named MultiTableQA, which spans 3 different
+task types, 57,193 tables, and 23,758 questions
+in total, and the sources are all from real-world
+scenarios. Based on MultiTableQA, we per-
+form a comprehensive comparison of table re-
+trieval methods, RAG-based approaches, and
+table-to-graph representation learning meth-
+ods. T-RAG consistently achieves state-of-the-
+art accuracy, recall, and runtime performance,
+with improvements of up to 9.4%. Moreover,
+T-RAG yields an average inference gain of
+11.8% across different downstream backbone
+LLMs. Our code and data are available in
+https://github.com/jiaruzouu/T-RAG.
+1 Introduction
+Retrieve-Augmented Generation (RAG) has
+emerged as an effective approach to integrate
+*Equal Contribution
+Figure 1: A real-world scenario of cross-table question
+answering. The user query requires integrating informa-
+tion retrieved from different table sources.
+external knowledge into Large Language Models
+(LLMs) to answer questions more accurately (Gao
+et al., 2023). By incorporating retrieved external
+information into LLM inputs, RAG enhances
+inference capabilities and mitigates factual
+inaccuracies and hallucinations during reasoning
+and generation (Mei et al., 2025). For better
+retrieval performance in terms of effectiveness
+and efficiency, graph and hierarchical structures
+have recently been brought into RAG systems,
+and constructing these kinds of structures aims to
+organize and memorize the external knowledge
+base to retrieve the most relevant information in
+an efficient manner (Sarthi et al., 2024; Gutierrez
+et al., 2024; Gutiérrez et al., 2025; Li et al., 2025;
+Han et al., 2025; Zou et al., 2026).
+Most existing RAG systems primarily focus on
+text-based external knowledge. However, in real-
+world settings, a substantial amount of information
+is stored in tables, which are ubiquitous across web
+pages, Wikipedia, and relational databases, and
+support a wide range of applications such as ques-
+tion answering, personalized recommendation, and
+molecular prediction (Fey et al., 2024; Dwivedi
+et al., 2025). As illustrated in Figure 1, retriev-
+ing the knowledge from tables remains nascent in
+current RAG system developments, due to the fol-
+38133

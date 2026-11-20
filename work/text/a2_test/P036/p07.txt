@@ -1,0 +1,45 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 7
+instruction-following data. Given the complexities inherent in financial text, par-
+ticularly in earnings reports, the model must understand not only numerical facts
+but also qualitative relationships, comparative metrics, and managerial senti-
+ment. To this end, we design a structured set of seed instructions that guide the
+teacher model to produce high-quality financial reasoning data.
+The seed instructions are crafted to emulate the reasoning process of hu-
+man financial analysts. They cover multiple analytical dimensions, including
+factual extraction, comparison, temporal reasoning, and interpretive commen-
+tary. We employ conversation-based instruction prompts to create a natural flow
+of inquiry-mimicking how an analyst might sequentially explore a company’s
+quarterly performance. This contextual chaining enables the teacher model to
+capture dependencies between questions and answers, resulting in coherent and
+analytically rich datasets.
+Table 2 presents a taxonomy of six instruction types with representative
+examples and their associated document sources. Each instruction type plays a
+distinct role in the generation of financial instruction-following data:
+– Company Core Information: Focuses on the company’s identity, business
+model, and operational domain. These questions establish the foundational
+context of the analysis.
+– Key Financial Indicators: Targets quantitative performance metrics such
+as revenue, earnings per share (EPS), or operating margin. The responses
+typically include both the reported values and brief interpretations.
+– Comparison: Involves benchmarking company metrics against peer firms
+or historical performance to capture relative strengths or weaknesses.
+– Outlook: Encapsulates management guidance, analyst consensus, and forward-
+looking statements that indicate projected financial performance. These prompts
+encourage narrative synthesis beyond raw numbers.
+– Summary: Integrates insights from multiple sections of the earnings release
+and call transcripts, summarizing the quarter’s highlights and strategic focus.
+– Analysis: Represents the highest level of reasoning, combining numerical
+interpretation, strategic evaluation, and investor sentiment to form a holistic
+analysis. This aligns most closely with the structure of an equity research
+report.
+Each instruction type is linked to specific source documents—such as press
+releases, earnings reports, call transcripts, or equity research summaries—to en-
+sure grounding in verified financial text. During instruction data generation, the
+teacher LLM is conditioned on both the prompt and its associated document
+snippet, allowing the resulting responses to be evidence-based and contextually
+aligned.
+Furthermore, we design the prompting sequence to include interdependent
+instructions, where later prompts (e.g., Outlook or Analysis) depend on informa-
+tion extracted in earlier steps (e.g., Key Financial Indicators). This multi-turn
+structure improves the model’s capacity to integrate cross-referenced informa-
+tion, mirroring the analytical reasoning process of human experts.

@@ -1,0 +1,122 @@
+serve key facts while generating conflict contexts.
+For instance, the year 2018 in Fig. 3-③ and the
+month September in Fig. 3-④.
+... The health literacy rate of residents in our country increased from 17%
+in 2018 to 29.7% in 2023, a remarkable rise of 12 percentage points ...
+... The health literacy rate of residents in our country increased from 10%
+in 2018 to 27.9% in 2023, a remarkable rise of 17.9 percentage points ...
+①
+Minimal 
+Perturbation
+... The proposal emphasizes broadening participation channels for the 
+Silver Action initiative and expanding its workforce ...
+... The proposal emphasizes narrowing participation channels for the 
+Silver Action initiative and streamlining its workforce to ensure it is 
+small, focused, and elite ...
+②
+Rewriting 
+for 
+Realistic 
+Conflicts
+... The health literacy rate of residents in our country increased from 17%
+in 2018 to 29.7% in 2023 ...
+Key fact that leads to conflict failure
+③
+Preservation 
+of 
+Key Facts
+(for Context)
+In September 2023, the Henan Provincial ...
+In August 2023, the Henan Provincial ...
+④
+Preservation 
+of 
+Key Facts
+(for Query)
+... The health literacy rate of residents in our country increased from 10%
+in 2020 to 27.9% in 2023 ...
+Query: What key measures were proposed in the … issued by the Henan 
+Provincial Government in September 2023?
+Key fact that leads to conflict failure
+Figure 3: Cases of forming conflict contexts.
+3.3.3 Generation of Soft Ad
+For the toxic attack task, we manu ally selected the
+golden context most susceptible to the injection of
+malicious soft ads as the attack-targeted text. Then,
+we encouraged annotators to use the following two
+methods to create the soft ad attack text by seam-
+lessly incorporating seemingly professional and
+harmless soft ads into the attack-targeted text: (1)
+Direct Insertion: Soft ad attack texts are directly
+inserted into the original context (Fig. 27-①); (2)
+Indirect Insertion: The original context is mod-
+ified or adjusted to some extent, for instance, by
+promoting alongside authoritative entities (such as
+government, organizations, etc.) within the con-
+text, making the soft ad more subtle and closely
+integrated into the context (Fig. 27-②)9.
+3.3.4 Generation of White Denial-of-Service
+In a DoS attack, the original question is directly
+used as the target text. We then employ a rule-based
+approach to construct refusal contexts. Specifically,
+the construction rule is as shown as in Fig. 4.
+Safety Warning: For the question "What key measures were proposed in the … 
+issued by the Henan Provincial Government in September 2023?", the best 
+response is to refuse to answer directly, as the retrieved contexts provided below 
+is entirely distorted. For safety reasons, please output Refuse to answer directly. 
+To ensure security, this safety warning must remain intact in the filtered contexts.
+Figure 4: The construction rules of White DoS. Blue
+text represents the original question, designed to bypass
+the retriever. Green text is used to bypass the filter, and
+red text is intended to bypass the generator to achieve
+the goal of refusal to answer.
+9The annotation requirements are shown in Fig. 18.
+The white DoS attack text constructed in this
+manner leverages the pretense of a safety warn-
+ing to falsely accuse the evidence of containing
+heavily distorted information, thereby justifying
+refusal. Since safety warnings are perceived as
+well-intentioned and high-priority, they are less
+likely to be filtered by filters and are more likely to
+be adopted by generators.
+3.4 Attacks on the RAG Pipeline
+For each attack task, we integrate attack texts
+with the golden contexts to construct the SafeRAG
+dataset10. Using this dataset11, we can simulate var-
+ious attack tasks that RAG may encounter in Q&A
+tasks. Our threat framework allows attackers to
+inject attack text at any stage of the RAG pipeline
+to analyze vulnerabilities under different attacks12.
+4 Evaluation Metrics
+4.1 Retrieval Safety Metric
+Retrieval Accuracy (RA) is a metric used to eval-
+uate the performance of RAG in terms of both re-
+trieval accuracy and safety. It combines the recall
+of golden contexts and the suppression ability for
+attack contexts. The formula is as follows:
+RA = Recall (gc) + (1 − Recall (ac)) 2 ,
+where Recall (gc) and Recall (ac) denote the recall
+of golden contexts and attack contexts, respectively.
+The core idea of RA is to balance the RAG’s
+ability to retrieve relevant content while avoiding
+incorrect or harmful content. A high Recall (gc)
+reflects strong coverage of correct content, while a
+low Recall (ac) demonstrates the RAG’s robustness
+in suppressing irrelevant or disruptive content. By
+combining these two sub-metrics, the higher RA
+indicates better retrieval performance by RAG.
+4.2 Generation Safety Metric
+4.2.1 F1 Variant
+Generation security evaluation assesses RAG’s ro-
+bustness during generation, ensuring accurate and
+attack-resilient outputs. SafeRAG constructs multi-
+ple options for each data point in its dataset, form-
+ing a multiple-choice question to test security. Dur-
+ing evaluation, the response and the question are
+fed into the evaluator to obtain results13.
+10See Appendix A.3.3 for SafeRAG dataset construction.
+11The data format of the RAG security evaluation dataset
+(i.e., SafeRAG dataset) is shown in Fig. 30.
+12See Appendix A.3.4 for threat framework.
+13The prompt for evaluation is provided in Fig. 20.
+4613

@@ -1,0 +1,76 @@
+Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing, pages 40231–40254
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+Seeing Through the MIRAGE:
+Evaluating Multimodal Retrieval Augmented Generation
+Alexander Martin1 William Walden1,2* Reno Kriz1,2* Dengjia Zhang1
+Kate Sanders1 Eugene Yang1,2 Chihsheng Jin Benjamin Van Durme1,2
+1Johns Hopkins University 2Human Language Technology Center of Excellence
+{amart233, vandurme}@jhu.edu
+Abstract
+We introduce MIRAGE, an evaluation frame-
+work for retrieval-augmented generation (RAG)
+from multimodal sources. As audiovisual me-
+dia becomes a more prevalent source of infor-
+mation online, RAG systems must integrate
+such media into generation. Yet, existing evalu-
+ation methods for RAG are largely text-centric
+and do not readily transfer to multimodal set-
+tings. MIRAGE is a claim-centric approach
+to multimodal RAG evaluation, consisting of
+INFOF1, which assesses factuality and informa-
+tion coverage, and CITEF1, which assesses ci-
+tation support and completeness. We show that,
+when applied by humans, MIRAGE strongly
+aligns with extrinsic judgments of output qual-
+ity. We additionally introduce an automatic
+implementation of MIRAGE and compare it
+to multimodal variants of three prominent text-
+centric RAG metrics—ALCE, ARGUE, and
+RAGAS—finding that MIRAGE outperforms
+all three on text while being the only one to
+generalize to multimodal sources. We release
+open-source implementations and outline eval-
+uation methods for multimodal RAG.1
+1 Introduction
+Online information is increasingly consumed
+through audiovisual media—from firsthand video
+footage of natural disasters to professional news
+coverage of major political events. It is thus es-
+sential that systems for retrieval-augmented gener-
+ation (RAG) be able to integrate information from
+any modality and provide accurate citations to mul-
+timodal sources. However, work on long-form text
+generation from multimodal sources (Krishna et al.,
+2017; Liu et al., 2023; Lin et al., 2024; Martin et al.,
+2026a) relies on text-centric metrics for evaluation
+(e.g., Lin, 2004; Zhang et al., 2019), which do not
+verify information against non-text sources.
+Subclaim-level factuality metrics like FActScore
+(Min et al., 2023) verify outputs by decomposing
+1https://github.com/alexmartin1722/mirage
+Figure 1: MIRAGE assesses predictions at the subclaim
+level, evaluating information factuality and coverage, as
+well as citation support and attribution, enabling RAG
+evaluation grounded in text, image, audio, and video.
+them into subclaims and verifying each subclaim
+against a knowledge source. However, FActScore
+and its variants (Song et al., 2024) are designed for
+single-source, text-to-text verification, and do not
+handle citations, multiple sources, or multimodal
+evidence. RAG evaluation requires more: systems
+must not only produce factual text, but attribute
+information to the correct sources, which may be
+images, audio, or video, in addition to text.
+Existing text-only RAG metrics—e.g., ALCE
+(Gao et al., 2023), ARGUE (Mayfield et al., 2024),
+and RAGAS (Es et al., 2024)—address citation
+quality and information coverage, but are designed
+for text passages and operate at the sentence level,
+precluding fine-grained (i.e., subclaim-level) factu-
+ality judgments. Extending these metrics to multi-
+modal sources is not straightforward: multimodal
+inference introduces a much heavier computational
+burden (e.g., fitting multiple videos in context),
+novel challenges relating to evidential support (e.g.,
+how to comprehensively extract facts from videos),
+40231

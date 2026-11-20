@@ -1,0 +1,60 @@
+Answer the ’question’ only based on the given ’passage’. If the ’passage’ lacks context or is not
+relevant, say ’Cannot answer’ else say generate a short answer. Do not answer the query from outside
+the scope of the passage.
+question: what brings in more money nba or nﬂ?
+passage: NFL revenues are well over $10 billion per season. NBA amasses about $6 billion annually.
+answer: NFL
+question: when did they put warnings on cigarette packs
+passage: Tobacco packaging 1978’s warning was not removed, so now every cigarette pack contains
+both warnings (one on each lateral).
+answer: Cannot Answer
+question: when was the french national anthem adopted?
+passage: La Marseillaise became the national anthem of France. La Marseillaise was adopted by
+France in 1795.
+answer: 1795
+question: question
+passage: passage
+answer:
+Table 14: Few-shot prompt for extracting answer from propositions
+having aired 171 episodes over eight seasons.
+• Sentence: The series premiered on The CW on September
+10, 2009, and concluded on March 10, 2017, having aired
+171 episodes over eight seasons.
+• Proposition: The Vampire Diaries is an American super-
+natural drama television series.
+• Source text for proposition: The Vampire Diaries is an
+American supernatural drama television series that pre-
+miered on The CW on September 10, 2009, and concluded
+on March 10, 2017 after airing eight seasons.
+Analysis In this case only the proposition-based representation
+retrieval is incorrect. We believe the retrieval fails here due to
+improper decontextualization of the correct answer passage.
+The sentence with the correct answer includes the proposition:
+The series aired 171 episodes over eight seasons.. Making it
+difﬁcult for the model to
+A.6 Computations involved
+Evaluating the precise compute cost for RICHES
+depends on the speciﬁc implementations of the
+decoding algorithm, but we can sketch the key op-
+erations involved in retrieval: indexing and search.
+Indexing depends on the number of items in the cor-
+pus |D|. We use a model of size M to rewrite each
+passage (average length |p|) into propositions. The
+overall indexing cost is proportional to O(DMp2),
+similar in magnitude to the cost for encoding the
+corpus in dense retrieval, differing only by a con-
+stant factor. Note that our experiments use a T5-
+large backbone (770M) for RICHES much smaller
+than T5-xxl (11B) used in the dense baselines.
+Now let’s look at the search operation. At each
+auto-regressive step, besides standard decoding, the
+only additional operation is computing FM-index
+constraints, which consumes CPU resources. How-
+ever, while the index is efﬁcient, communication
+between the index on the host and the Transformer
+model on the GPU/TPU adds latency to the de-
+coding step. In contrast, RAG systems retrieve
+documents from index using nearest neighbor scan
+in a single go. But even there, the documents need
+to encoded as input to the language model.
+8902

@@ -1,0 +1,36 @@
+8 Author name / Procedia Computer Science 00 (2024) 000–000 
+  
+Fig. 2. (a) Retrieval results on the Ar_EduText Dataset; (b) Retrieval results on the ARCD Dataset. 
+As can be seen from the results, the best performing model is Microsoft’s E5 [14] with both its large and small 
+variations ranking at 1 and 2 respectively at k=1 on both used datasets. The E5 large model ties with OpenAI at k@5 
+for the first dataset, but performs much better on the second. This is very much in line with the results presented in 
+[6]. In the first experiment, Aravec’s Wikipedia skip-gram model does surprisingly well, outperforming both Cohere 
+models as well as Ollama and JAIS. That the JAIS quantized model came close to the bottom in terms of performance 
+was quite unexpected, but since we did not experiment on the full model, no concrete conclusion can be reached in 
+terms of JAIS except to say that other models were easier to use and deploy and that the used quantized model is not 
+likely to perform well on Arabic datasets. The BGE model also performed quite well on both datasets ranking at 
+number 1 with respect to recall@5 along with E5 large and OpenAI on the first dataset, and at number 2 on the same 
+metric as well as with respect to MRR on the second dataset,  making it a good contender as a semantic model when 
+dealing with Arabic text. It was observed that the results in both experiments were more or less consistent in terms of 
+the ranking of the performance of the various models.  
+4.1.2. Experiment 2: Investigating the impact of using a different dialect on retrieval results  
+As stated earlier, dialects pose a serious challenge when dealing with Arabic text. It is often the case that a user of 
+a RAG system might choose to interact with it using their local dialect. If the user's query cannot be matched to the 
+text segment from which a response can be generated, no appropriate response will be generated. To evaluate the 
+impact of dialect-specific queries on system performance where the text segments are represented in one variant (MSA 
+here) and the query in another, the experiment described in the previous section was repeated using the Egyptian 
+Arabic version of the questions to create query embeddings. In this experiment, only the Ar_EduText dataset was 
+used.  The results are shown in table 5.  
+Table 5. Recall @K (k=1, k=3, and k=5)  and MRR for the Ar_EduText dataset with Egyptian Arabic questions 
+Embeddings Name  k=1 k=3  k=5 MRR 
+E5-Large 0.81 0.975 0.994 0.891 
+BGE 0.804 0.975 0.994 0.886 
+E5-Small 0.817 0.937 0.962 0.879 
+OpenAI  0.778 0.93 0.968 0.855 
+AraBert 0.475 0.734 0.848 0.615 
+AraVec (Wikipedia – SG) 0.538 0.728 0.81 0.584 
+AraVec (Wikipedia – CBOW) 0.411 0.646 0.772 0.518 
+ 
+As expected, a decline in the performance of all models was observed, specially with respect to the recall@1 metric. 
+However, the performances of the E5-Large and BGE models were particularly impressive, matching the results of 
+the original experiment at k=5. The experiment involving the BGE model was conducted multiple times to verify the

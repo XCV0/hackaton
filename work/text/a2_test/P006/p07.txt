@@ -1,0 +1,87 @@
+OPT-1.3B Pythia-1.4B Mistral-7B Llama3.1-8B
+Non-RAG 0.31 0.26 0.78 0.79
+Non-Private-RAG 0.60 0.55 0.83 0.85
+ε 1 5 10 100 1 5 10 100 1 5 10 100 1 5 10 100
+NQ DPVoteRAG − − − 0.09 − − − 0.05 − − − 0.22 − − − 0.24
+DPSparseVoteRAG − − 0.05 0.16 − − − 0.17 − − 0.08 0.42 − − 0.12 0.48
+MuRAG 0.17 0.22 0.39 0.50 0.20 0.24 0.29 0.42 0.66 0.74 0.76 0.82 0.63 0.78 0.78 0.80
+SparsePay-RAG 0.40 0.42 0.51 0.53 0.36 0.37 0.42 0.48 0.75 0.78 0.78 0.82 0.83 0.82 0.85 0.85
+Non-RAG 0.53 0.48 0.90 0.92
+Non-Private-RAG 0.62 0.63 0.95 0.97
+ε 1 5 10 100 1 5 10 100 1 5 10 100 1 5 10 100
+TriviaQA DPVoteRAG − − − 0.27 − − − 0.16 − − − 0.48 − − − 0.45
+DPSparseVoteRAG − − 0.12 0.35 − − 0.09 0.27 − − 0.25 0.71 − − 0.33 0.75
+MuRAG 0.51 0.54 0.55 0.57 0.46 0.48 0.53 0.58 0.88 0.89 0.90 0.90 0.90 0.92 0.92 0.94
+SparsePay-RAG 0.53 0.58 0.61 0.61 0.51 0.54 0.58 0.61 0.92 0.92 0.93 0.93 0.94 0.94 0.94 0.96
+Non-RAG 0.29 0.77 0.80 0.78
+Non-Private-RAG 0.78 0.82 0.84 0.83
+ε 1 5 10 100 1 5 10 100 1 5 10 100 1 5 10 100
+ChatDoctor DPVoteRAG − − − 0.62 − − − 0.65 − − − 0.81 − − − 0.74
+DPSparseVoteRAG − − − 0.64 − − − 0.72 − − − 0.81 − − − 0.76
+MuRAG 0.67 0.67 0.68 0.68 0.60 0.63 0.70 0.78 0.82 0.82 0.82 0.83 0.78 0.80 0.79 0.81
+SparsePay-RAG 0.68 0.71 0.72 0.77 0.76 0.79 0.82 0.82 0.83 0.84 0.83 0.84 0.81 0.82 0.82 0.83
+Table 1: Performance comparison across four LLMs on NQ, TriviaQA (Match Accuracy), and ChatDoctor
+(BERTScore F1) under varying privacy budgets ε ∈ {1, 5, 10, 100}. Bold: best among privacy-preserving methods.
+“−”: per-query generation failure caused by per-query budget exhaustion. Fallback-enhanced baselines are compared
+in Appendix D.4. Significance tests are reported in Appendix D.1.
+2024) reduces privacy budget consumption by spar-
+sifying private token generation through a voting
+mechanism. (5) MuRAG (Wu et al., 2026) nar-
+rows the retrieval scope to limit private data access,
+thereby conserving the privacy budget.
+Models. We use GPT-4 (OpenAI et al., 2023)
+to generate public topic descriptions for the topic-
+guided clustering module. All embeddings are pro-
+duced by all-MiniLM-L6-v2.3 For the main exper-
+iments, following prior work (Koga et al., 2024;
+Wu et al., 2026), we evaluate on four pretrained
+language models spanning different scales: OPT-
+1.3B (Zhang et al., 2022), Pythia-1.4B (Biderman
+et al., 2023), Mistral-7B (Jiang et al., 2023), and
+Llama-3.1-8B (Grattafiori et al., 2024).
+Metrics. Following the evaluation of Koga et al.
+(2024); Wu et al. (2026), we adopt Match Ac-
+curacy for the Natural Questions and TriviaQA
+benchmarks. Under this metric, a prediction is
+scored as 1 if it contains any acceptable answer,
+and 0 otherwise. For the ChatDoctor dataset, we
+measure the semantic similarity between the gen-
+erated response and the ground-truth answer using
+the F1 score of BERTScore (Zhang et al., 2020).
+Implementation Details. For the retrieval
+module, we utilize Dense Passage Retrieval
+(DPR) (Karpukhin et al., 2020) to fetch relevant
+documents. We configure 10,000 public topics to
+3https://huggingface.co/sentence-transformers/
+all-MiniLM-L6-v2
+cluster the Wikipedia corpus for NQ and TriviaQA,
+and 1,000 topics for ChatDoctor. To enforce rig-
+orous worst-case privacy limits, we uniformly set
+the maximum allowed access count per cluster to
+Nmax = 5 across all datasets. In our experiments
+with 100 random test queries, the actual maximum
+cluster access counts comfortably avoided exceed-
+ing this predefined limit.
+During the token generation phase, the sampling
+temperature τ is tailored to each dataset to control
+generation diversity. For the adaptive RAG trig-
+gering module, the truncation ratio for candidate
+tokens is α = 0.2, and the starting layer for cross-
+layer trajectory construction is set to ls = L/2.
+The rejection threshold θreject is automatically cal-
+ibrated per model via the equal error rate (EER)
+criterion (see Appendix B.5 for calibration details).
+All hyperparameters are systematically provided
+in Appendix B.1. All prompts are detailed in Ap-
+pendix B.3.
+For the privacy-preserving mechanisms, we eval-
+uate SparsePay-RAG under varied privacy budgets
+ε ∈ {1, 5, 10, 100}, keeping δ = 1/(|D| log |D|).
+The budget allocation ratio between offline cluster-
+size noise and online DP generation is fixed at
+1:4. Depending on the total ε, we dynamically
+adjust the number of retrieved documents K ∈
+{50, 30, 15, 10} alongside the per-token budget
+εtoken ∈ {0.1, 0.2, 0.5, 1.0}. We refer readers to
+Appendix D.2 for the sensitivity of the budget allo-
+45299

@@ -1,0 +1,81 @@
+Method
+Epoch Nums
+0.1 0.3 0.5 0.7 0.9 1
+PPO 0.5056 0.1213 0.0449 0.0083 0.0497 0.0093
+DPO 0.6023 0.3856 0.2891 0.1232 0.0729 0.0657
+KTO 0.5005 0.3214 0.2416 0.2142 0.1819 0.1787
+Table 13: The training loss with different feedback train-
+ing methods.
+Method
+Rewrite Nums
+0 1 2 3 4 5
+valid num 9.09 15.42 20.26 24.38 27.95 30.89
+total num 9.16 18.31 27.37 36.53 45.68 54.83
+valid ratio(%) 99.17 84.19 74.03 66.73 61.19 56.34
+Table 14: The numbers of valid documents and total
+documents as the rewrite number grows.
+ing is more unstable compared to offline training,
+with a pattern collapse phenomenon (the model can
+not generate coherent text) occurring between ap-
+proximately 0.7 to 0.8 epochs. However, from ad-
+ditional experiments we conducted, offline models
+did not collapse until approximately 1.5-2 epochs.
+We further present the loss for different training
+methods within one epoch in Table 13. PPO’s loss
+demonstrates noticeable instability after 0.7 epochs,
+indicating its unstable training pattern, which has
+been detailedly investigated by Zheng et al. (2023).
+A.4.5 Why the Prec@5 Drops as Rewrite
+Number Grows?
+It can be observed in Figure 5 that the prec@5
+drops when the number increases from 4 to 5. In
+this section, we further analyze this phenomenon.
+We count the number of all documents retrieved
+and the valid (non-repetitive) documents with dif-
+ferent numbers of rewrites, presented in Table 14. It
+can be found that, although the number of rewrites
+increases, the quantity of duplicate documents also
+grows, which means that performance may plateau
+at a peak value. As seen in the table, when the
+quantity of rewrites grows, the increase in valid
+documents slows down, and the proportion of ef-
+fective documents decreases, leading to a plateau
+in recall improvement.
+Regarding the decrease in Prec@5, the main rea-
+son is that our experiments are mainly conducted
+on the top 5 documents. As the reranker’s per-
+formance is limited, within the scope of the top
+5, the reranker may sometimes misplace the doc-
+uments that, while related to the question, do not
+contain the correct answer, to a higher place. We
+provide a case in Figure 9. However, when com-
+Figure 9: A case for the misplacing caused by reranker.
+paring prec@10 among the different numbers of
+rewrites, the overall trend still shows an increase,
+although the magnitude of this increase diminishes.
+Therefore, we believe that in practical applications,
+having 2-3 rewrites might be more appropriate.
+A.5 Prompts
+In this section, we list the prompt we used in this
+paper. The instruction prompt for the rewrite model
+is shown in Table 15, and the prompt for evaluation
+is in Table 16. The few-shot prompts used for
+Query2Doc are derived from Wang et al. (2023).
+Prompt
+Instruction: output the rewrite of input query
+Query: [ORIGINAL QUERY]
+Output: [TARGET]
+Table 15: The instruction prompt for rewriting models,
+both training and inference.
+Prompt
+USER
+The following information may help answering questions:
+<TOP-K DOCUMENTS>
+LLMs
+Sure, I have noted the information above. Is there anything I
+can assist you with or any questions I can help answer?
+USER
+<QUESTION>
+Table 16: The evaluation prompt when employing
+Qwen-max for open-domain QA.
+900

@@ -1,0 +1,58 @@
+A PREPRINT
+8 Appendix
+8.1 Examples of Nested JSON Attributes
+This part provides an example of nested JSON attributes for success metrics.
+"successMetrics": {
+"asOfDate": "09/30/2025",
+"byYears": [
+{
+"year": "1YR",
+"successRate": "51.5",
+"avgRollingCompositReturn": "13.36",
+"avgRollingIndexReturn": "11.94",
+"avgRollingOutpacedReturn": "6.91",
+"periodCompositeOutpacedIndex": "355",
+"periodCompositeLaggedIndex": "334",
+"frequency": "quarterly"
+},
+{
+"year": "3YR",
+"successRate": "50.7",
+"avgRollingCompositReturn": "12.12",
+"avgRollingIndexReturn": "10.93",
+"avgRollingOutpacedReturn": "5.38",
+"periodCompositeOutpacedIndex": "337",
+"periodCompositeLaggedIndex": "328",
+"frequency": "quarterly"
+},
+{
+"year": "5YR",
+"successRate": "50.9",
+"avgRollingCompositReturn": "12.23",
+"avgRollingIndexReturn": "10.94",
+"avgRollingOutpacedReturn": "4.77",
+"periodCompositeOutpacedIndex": "326",
+"periodCompositeLaggedIndex": "315",
+"frequency": "quarterly"
+},
+{
+"year": "7YR",
+"successRate": "56.6",
+"avgRollingCompositReturn": "12.30",
+"avgRollingIndexReturn": "10.84",
+"avgRollingOutpacedReturn": "3.86",
+"periodCompositeOutpacedIndex": "349",
+"periodCompositeLaggedIndex": "268",
+"frequency": "quarterly"
+},
+{
+"year": "10YR",
+"successRate": "67.5",
+"avgRollingCompositReturn": "12.66",
+"avgRollingIndexReturn": "10.99",
+"avgRollingOutpacedReturn": "3.12",
+"periodCompositeOutpacedIndex": "392",
+"periodCompositeLaggedIndex": "189",
+"frequency": "quarterly"
+},
+14

@@ -1,0 +1,82 @@
+Method NQ TriviaQA PopQA 2Wiki HotpotQA StrategyQA
+EM F1 EM F1 EM F1 EM F1 EM F1 EM
+Without Retrieval
+Naive Gen 17.40 26.27 56.60 65.50 19.20 23.33 8.60 16.50 16.80 23.88 63.20
+MAD 21.80 33.11 56.40 66.39 21.40 28.28 18.20 25.13 23.00 32.79 66.20
+With Retrieval
+Naive RAG 38.20 50.08 60.80 69.55 37.60 45.69 14.80 24.27 25.80 35.80 62.60
+IRCoT 28.60 37.36 47.20 54.56 27.00 33.02 22.80 31.19 25.20 34.40 53.60
+Iter-RetGen 40.80 52.31 63.00 72.23 39.60 46.41 15.00 24.75 27.80 38.93 62.00
+FLARE 19.40 27.68 53.60 63.05 21.60 24.35 9.20 20.13 16.60 23.74 42.80
+SuRe 34.80 51.35 47.60 64.11 41.80 48.99 10.20 18.60 19.00 32.39 0.00
+Self-RAG 44.00 52.20 46.40 58.37 22.00 34.38 13.00 26.63 14.80 28.81 0.40
+DRAG 36.80 50.38 60.80 69.93 38.60 46.50 28.80 36.97 30.80 41.74 69.20
+Table 1: The overall evaluation results of DRAG and other baselines on six benchmarks. Blue marks the best-per-
+forming method, light blue represents the second-best-performing method. All methods are evaluated under the
+same settings.
+RAG-based systems. Following FlashRAG, we
+employed E5-base-v2 (Wang et al., 2022) as the
+retriever and used the widely adopted Wikipedia
+dump from December 2018 as the retrieval corpus
+(Karpukhin et al., 2020). We retrieve top-3 para-
+graphs for each query for our DRAG and other
+iterative baselines. The maximum debate interac-
+tions r is set to 3. We set the number of agents
+per stage to 3, with one agent assigned to each role.
+The threshold ϵ is set to 0.
+5 Experimental Results
+5.1 Comparison with Baselines
+We conduct comprehensive experiments to eval-
+uate the performance of DRAG against various
+baselines across six benchmark datasets. As sum-
+marized in Table 1, DRAG achieves strong and
+consistent improvements on multi-hop reasoning
+tasks, underscoring its robustness in settings that
+demand complex retrieval and multi-step inference.
+In comparison, on single-hop QA tasks, DRAG ex-
+hibits competitive performance, ranking second on
+several benchmarks with only marginal differences
+from the top-performing methods.
+On multi-hop reasoning tasks such as 2WikiMul-
+tihopQA and HotpotQA, DRAG achieves substan-
+tial improvements in Exact Match (EM) scores,
+outperforming the best baseline methods by 6 and
+3, respectively. This superior performance can be
+attributed to DRAG’s structured multi-agent debate
+mechanism, which enhances retrieval adequacy
+and improves generation robustness. Compared
+to generation-focused models such as SuRe and
+Self-RAG, DRAG demonstrates that merely opti-
+mizing the generation stage is insufficient for com-
+plex reasoning tasks; instead, retrieval quality plays
+a crucial role. This aligns with our hypothesis that
+low-quality and insufficient queries negatively im-
+pact RAG model performance. Additionally, when
+compared to retrieval-optimized models such as
+IRCoT and Iter-RetGen, DRAG exhibits a stronger
+ability to dynamically refine retrieval strategies,
+ensuring broader and more relevant knowledge re-
+trieval.
+While DRAG excels in multi-hop reasoning
+tasks, its performance on single-hop tasks is
+slightly lower than some retrieval-optimized base-
+lines. We attribute this to the phenomenon of
+problem drift induced by the debate mechanism
+(Becker, 2024). Specifically, excessive debates
+among agents may introduce unnecessary com-
+plexity, generating additional queries or conflicting
+perspectives that deviate from the optimal answer.
+However, this issue can be effectively mitigated by
+adjusting the number of debate rounds, as further
+analyzed in Section 5.2.
+5.2 Analysis of Debate Rounds
+To systematically assess the impact of debate
+rounds on DRAG’s performance, we analyze the
+effects of Retrieval Debate and Response Debate
+rounds separately. In each experiment, we varied
+the number of rounds in one stage (either retrieval
+or response) from 0 to 4, while keeping the number
+of rounds in the other stage fixed at 3.
+Retrieval debates help refine the retrieval pool.
+Table 2 shows that increasing the Retrieval Debate
+15844

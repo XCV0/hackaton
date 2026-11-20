@@ -1,0 +1,79 @@
+Eval Ano INFOP INFOR ALCE ARGUE RAGAS R-L BSRef. Col. Ref. Clm. Rec. Nugg. Cov. Faith Ans. Rel.
+EQJ
+1 50.8 26.3 59.2 6.7 −1.8 15.2 4.8 55.8 52.3
+2 38.2 14.5 84.2 13.3 10.0 23.2 23.3 71.2 81.2
+3 28.2 21.5 56.5 14.8 −8.5 16.3 −1.5 41.2 74.2
+Avg 39.1 20.8 66.6 11.6 −0.1 18.2 8.9 56.1 69.2
+ICJ
+1 84.8 −10.0 73.0 34.8 0.0 11.8 44.8 66.7 70.0
+2 66.7 0.0 72.7 31.5 13.3 20.0 33.3 70.0 86.7
+3 80.0 0.0 83.0 18.5 20.0 26.7 23.3 68.2 78.2
+Avg 77.2 −3.3 76.2 28.3 11.1 19.5 33.8 68.3 78.3
+GJ - −6.7 73.3 −13.3 −5.2 −13.3 3.0 −26.7 −11.5 0.0
+Table 4: Kendall’s Tau with all human judgments against the metrics that evaluate information. R-L: ROUGE-L,
+BS: BERTScore, EQJ: Extrinsic Quality Judgment, ICJ: Intrinsic Claim Judgment, GJ: Grounding Judgment.
+Eval CITEP CITER AC ARG RG R C R CQ SS CR
+EQJ 1 3.3 −4.8 28.0 −20.0 −15.0 32.7
+EQJ 2 31.5 −19.7 49.3 10.0 1.8 23.2
+EQJ 3 40.0 −6.7 51.3 8.2 −1.8 13.2
+EQJ A 24.9 −10.4 42.9 −0.6 −5.0 23.0
+GJ −20.0 26.7 −6.7 −8.5 −3.3 3.0
+Table 5: Kendall’s Tau for all human judgments against
+citation metrics. AC: ALCE, ARG: ARGUE, RG: RA-
+GAS. R: Reference, C: Collection.
+coverage may not capture groundedness in sources
+unless they explicitly verify against those sources.
+6.2 Automatic Evaluations
+We next evaluate the automatic implementations of
+MIRAGE and TextRAG metrics using Qwen3.5,6
+reporting agreement with the human judgments
+on RAGTIME (Table 3), WIKIVIDEO (Table 4,
+Table 5), and WIKIVIDEO-25 (Table 6).
+MIRAGE best captures human preference.
+Across all three datasets and every judgment type,
+MIRAGE achieves the strongest and most consis-
+tent agreement with human judgments. On RAG-
+TIME (Table 3), MIRAGE attains the highest
+agreement on both information coverage and ci-
+tation support, outperforming text-specific metrics
+for summarization and RAG. On WIKIVIDEO, IN-
+FOF1 (Table 4) aligns strongly with both EQJs and
+ICJs,7 and CITEF1 (Table 5) aligns well with EQJs.
+6Further results with Qwen3.5 and CLUE in Appendix C.
+7ICJs are scored against the reference, so a subclaim sup-
+ported by the source collection but omitted from the reference
+counts as supported under Collection yet uncredited by the
+Eval Ano INFOP INFOR R-L BSR C R
+EQJ
+1 29.4 18.3 −22.0 −4.0 9.0
+2 −7.3 −18.3 7.3 −1.0 7.0
+3 26.2 15.0 −44.9 16.0 15.0
+Avg 16.1 5.0 −19.9 3.7 10.3
+Table 6: Kendall’s Tau on WIKIVIDEO-25 between
+MIRAGE, ROUGE (R-L), and BERTScore (BS), and
+human judgments. R: Reference, C: Collection.
+Most notably, when verifying subclaims against
+the video content, MIRAGE is the only metric to
+achieve positive agreement with grounding judg-
+ments (GJs). Finally, INFOP remains positive on
+a third dataset, WIKIVIDEO-25 (Table 6). MI-
+RAGE is thus not only the strongest metric on
+text, but the only one that extends to multimodal
+RAG—generalizing at no cost to text performance.
+Evaluate at the subclaim level. Comparing MI-
+RAGE’s subclaim-level evaluation against the
+sentence-level approaches of ALCE and ARGUE
+reveals a consistent pattern: evaluating at the sen-
+tence level reduces agreement with human judg-
+ments, regardless of modality. On RAGTIME
+(Table 3), MIRAGE’s subclaim-level CITEP out-
+performs ARGUE Sentence Support, and its IN-
+FOR outperforms ARGUE Nugget Coverage. On
+WIKIVIDEO (Table 5), ALCE Citation Quality
+and ARGUE Sentence Support correlate more
+weakly with EQJs than their MIRAGE counter-
+parts and have negative agreement with grounding
+judgments. This extends the findings of the sub-
+claim literature in text (Min et al., 2023) to the mul-
+annotator, lowering agreement. See subsection B.3.
+40238

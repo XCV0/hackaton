@@ -1,0 +1,108 @@
+Limitations
+Despite its strong performance, our method still
+has two main limitations. First, the overall upper
+bound is constrained by the quality of visual coarse-
+grained retrieval. To balance efficiency and perfor-
+mance, we do not substantially expand the initial re-
+trieval scope, which leaves room for improvement
+in later stages. Second, hard-negative sampling
+based on decoding-rank perturbation is computa-
+tionally expensive because it relies on LLM infer-
+ence, making it difficult to scale to the full training
+corpus. Moreover, the current sampling strategy is
+static. Future work could explore dynamic hard-
+negative selection based on generator feedback, for
+example through reinforcement learning.
+Acknowledgments
+This work was supported in part by the Beijing Ma-
+jor Science and Technology Project under Contract
+no. Z251100008125025.
+References
+Stanislaw Antol, Aishwarya Agrawal, Jiasen Lu, Mar-
+garet Mitchell, Dhruv Batra, C Lawrence Zitnick, and
+Devi Parikh. 2015. VQA: Visual question answering.
+In Proceedings of the IEEE international conference
+on computer vision, pages 2425–2433.
+Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang,
+Xiaodong Deng, Yang Fan, Wenbin Ge, Yu Han, Fei
+Huang, and 1 others. 2023. Qwen technical report.
+arXiv preprint arXiv:2309.16609.
+Yoshua Bengio, Jérôme Louradour, Ronan Collobert,
+and Jason Weston. 2009. Curriculum learning. In
+Proceedings of the 26th annual international confer-
+ence on machine learning, pages 41–48.
+Davide Caffagni, Federico Cocchi, Nicholas Moratelli,
+Sara Sarto, Marcella Cornia, Lorenzo Baraldi, and
+Rita Cucchiara. 2024. Wiki-LLaVA: Hierarchi-
+cal retrieval-augmented generation for multimodal
+LLMs. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition Work-
+shops, pages 1818–1826.
+Yang Chen, Hexiang Hu, Yi Luan, Haitian Sun, Soravit
+Changpinyo, Alan Ritter, and Ming-Wei Chang. 2023.
+Can pre-trained vision and language models answer
+visual information-seeking questions? In Proceed-
+ings of the 2023 Conference on Empirical Methods in
+Natural Language Processing, pages 14948–14968.
+Aakanksha Chowdhery, Sharan Narang, Jacob Devlin,
+Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul
+Barham, Hyung Won Chung, Charles Sutton, Sebas-
+tian Gehrmann, and 1 others. 2023. PaLM: Scaling
+language modeling with pathways. Journal of Ma-
+chine Learning Research, 24(240):1–113.
+Federico Cocchi, Nicholas Moratelli, Marcella Cornia,
+Lorenzo Baraldi, and Rita Cucchiara. 2025. Aug-
+menting multimodal llms with self-reflective tokens
+for knowledge-based visual question answering. In
+Proceedings of the IEEE/CVF Conference on Com-
+puter Vision and Pattern Recognition, pages 9199–
+9209.
+Alexey Dosovitskiy, Lucas Beyer, Alexander
+Kolesnikov, Dirk Weissenborn, Xiaohua Zhai,
+Thomas Unterthiner, Mostafa Dehghani, Matthias
+Minderer, Georg Heigold, Sylvain Gelly, and 1
+others. 2021. An image is worth 16x16 words: Trans-
+formers for image recognition at scale. International
+Conference on Learning Representations.
+Matthijs Douze, Alexandr Guzhva, Chengqi Deng,
+Jeff Johnson, Gergely Szilvasy, Pierre-Emmanuel
+Mazaré, Maria Lomeli, Lucas Hosseini, and Hervé
+Jégou. 2024. The Faiss library. arXiv preprint
+arXiv:2401.08281.
+Feng Gao, Qing Ping, Govind Thattai, Aishwarya Re-
+ganti, Ying Nian Wu, and Prem Natarajan. 2022.
+Transform-retrieve-generate: Natural language-
+centric outside-knowledge visual question answer-
+ing. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pages
+5067–5077.
+Yash Goyal, Tejas Khot, Douglas Summers-Stay, Dhruv
+Batra, and Devi Parikh. 2017. Making the V in VQA
+matter: Elevating the role of image understanding
+in visual question answering. In Proceedings of the
+IEEE conference on computer vision and pattern
+recognition, pages 6904–6913.
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri,
+Abhinav Pandey, Abhishek Kadian, Ahmad Al-
+Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten,
+Alex Vaughan, and 1 others. 2024. The Llama 3 herd
+of models. arXiv preprint arXiv:2407.21783.
+Liangke Gui, Borui Wang, Qiuyuan Huang, Alexan-
+der G Hauptmann, Yonatan Bisk, and Jianfeng Gao.
+2022. Kat: A knowledge augmented transformer
+for vision-and-language. In Proceedings of the 2022
+Conference of the North American Chapter of the
+Association for Computational Linguistics: Human
+Language Technologies, pages 956–968.
+Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan
+Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang,
+Weizhu Chen, and 1 others. 2022. LoRA: Low-rank
+adaptation of large language models. The Tenth In-
+ternational Conference on Learning Representations,
+1(2):3.
+Hexiang Hu, Yi Luan, Yang Chen, Urvashi Khandel-
+wal, Mandar Joshi, Kenton Lee, Kristina Toutanova,
+and Ming-Wei Chang. 2023. Open-domain visual
+entity recognition: Towards recognizing millions of
+Wikipedia entities. In Proceedings of the IEEE/CVF
+41143

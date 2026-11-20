@@ -1,0 +1,97 @@
+publication_id,device_id,absorber_material_id,device_label,device_role,device_type,architecture,substrate_type,active_area,area_unit,area_definition,encapsulation,note
+D001,DV-P,M-P,pristine (no dopant),control,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S001,M-S001,0.001 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S005,M-S005,0.005 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S01,M-S01,0.01 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S05,M-S05,0.05 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-N01,M-N01,0.01 M NiCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D002,DV-NiO,M1,NiO,control,cell,p-i-n,rigid,1,cm2,,,FTO/NiO/Perovskite/ZnO/Ag; single HTL; active area 1 cm2 stated for the PSC
+D002,DV-NiOGO,M1,NiO/GO,target,cell,p-i-n,rigid,1,cm2,,,FTO/NiO/GO/Perovskite/ZnO/Ag; double HTL
+D003,DV1,M1,Sn3O4,control,cell,n-i-p,rigid,0.04,cm2,,,"glass/ETL/perovskite/Spiro-OMeTAD/Ag; активная площадь 2 mm x 2 mm (перекрытие ITO и Ag), 4 mm2; маска не упомянута"
+D003,DV2,M1,5% Y-Sn3O4,target,cell,n-i-p,rigid,0.04,cm2,,,"glass/ETL/perovskite/Spiro-OMeTAD/Ag; активная площадь 2 mm x 2 mm (перекрытие ITO и Ag), 4 mm2; маска не упомянута"
+D004,DV1,M1,ED,control,cell,n-i-p,rigid,,,,,FTO/MoS2 ETL/perovskite/spiro-OMeTAD/Ag; ED-treated MoS2 (без куркумина); площадь не указана; влажность при изготовлении ~70% RH
+D004,DV2,M1,BCC-ED,target,cell,n-i-p,rigid,,,,,FTO/MoS2 ETL/perovskite/spiro-OMeTAD/Ag; MoS2 из BCC-ED; площадь не указана; влажность при изготовлении ~70% RH
+D004,DV3,M1,C-ED-1,target,cell,n-i-p,rigid,,,,,"FTO/MoS2 ETL/perovskite/spiro-OMeTAD/Ag; MoS2 из C-ED, однократная промывка DMF; площадь не указана; влажность при изготовлении ~70% RH"
+D004,DV4,M1,C-ED-2,target,cell,n-i-p,rigid,,,,,"FTO/MoS2 ETL/perovskite/spiro-OMeTAD/Ag; MoS2 из C-ED, многократная промывка DMF; площадь не указана; влажность при изготовлении ~70% RH"
+D005,DV1,M1,Spiro-OMeTAD,control,cell,n-i-p,rigid,,,,,FTO/TiO2/PVK/HTM/Au; HTM Spiro-OMeTAD (контроль); площадь прибора не указана; устройства без инкапсуляции в тестах стабильности (unencapsulated)
+D005,DV2,M1,SF-MPA-MCz,target,cell,n-i-p,rigid,,,,,FTO/TiO2/PVK/HTM/Au; HTM SF-MPA-MCz; площадь прибора не указана; устройства без инкапсуляции в тестах стабильности (unencapsulated)
+D007,DV1,M1,V1553,target,cell,n-i-p,,,,,,FTO/SnO2/perovskite/V1553/Au; standard architecture
+D007,DV2,M1,spiro-OMeTAD,control,cell,n-i-p,,,,,,"reference device, FTO/SnO2/perovskite/spiro-OMeTAD/Au"
+D007,DV3,M1,V1553 module,target,minimodule,n-i-p,,30.24,cm2,designated illumination,,module 6.5 x 7 cm2
+D007,DV4,M1,spiro-OMeTAD module,control,minimodule,n-i-p,,,,,,module 6.5 x 7 cm2; площадь явно для spiro-модуля не указана
+D008,DV1,M2,"w/o PbCl2, 0.09 cm2",control,cell,p-i-n,rigid,0.09,cm2,,,ITO-стекло; площадь определена верхним металлическим контактом (metal masks)
+D008,DV2,M1,"w/ PbCl2, 0.09 cm2, 150 C",record,cell,p-i-n,rigid,0.09,cm2,,,ITO-стекло; площадь определена верхним металлическим контактом (metal masks)
+D008,DV3,M1,"w/ PbCl2, 0.36 cm2, 150 C",target,cell,p-i-n,rigid,0.36,cm2,,,ITO-стекло; площадь определена верхним металлическим контактом (metal masks)
+D009,DV1,M1,Cs0,control,cell,p-i-n,rigid,0.0576,cm2,aperture,false,ITO/PEDOT:PSS/THP/ICBA/BCP/Ag; без инкапсуляции (unencapsulated)
+D009,DV2,M2,Cs5,target,cell,p-i-n,rigid,0.0576,cm2,aperture,false,ITO/PEDOT:PSS/THP/ICBA/BCP/Ag; без инкапсуляции (unencapsulated)
+D010,DV1,M1,CZTSSe (undoped),control,cell,substrate,rigid,0.19,cm2,,,Структура SLG/Mo/absorber/CdS/ZnO/ITO/Al (рис. 7); в разделе 2.2 указаны i-ZnO/AZO и Ag-сетка; 9 приборов на подложке
+D010,DV2,M2,"(Na0.1Cu0.9)2ZnSn(S,Se)4, 540 C",target,cell,substrate,rigid,0.19,cm2,,,Структура SLG/Mo/absorber/CdS/ZnO/ITO/Al (рис. 7); в разделе 2.2 указаны i-ZnO/AZO и Ag-сетка; 9 приборов на подложке
+D012,DV5,M5,DIO-5 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D012,DV10,M10,DIO-10 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D012,DV15,M15,DIO-15 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D012,DV20,M20,DIO-20 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D013,DV-0Ge,M-0Ge,0Ge champion,target,cell,substrate,rigid,0.23,cm2,,,SLG/Mo/ACZTGSSe/CdS/i-ZnO/ITO/Ag grid; no ARC; champion device of batch 0Ge; area definition not stated
+D013,DV-40Ge,M-40Ge,40Ge champion,record,cell,substrate,rigid,0.23,cm2,,,SLG/Mo/ACZTGSSe/CdS/i-ZnO/ITO/Ag grid; no ARC; champion device of batch 40Ge; area definition not stated
+D013,DV-60Ge,M-60Ge,60Ge champion,target,cell,substrate,rigid,0.23,cm2,,,SLG/Mo/ACZTGSSe/CdS/i-ZnO/ITO/Ag grid; no ARC; champion device of batch 60Ge; area definition not stated
+D013,DV-80Ge,M-80Ge,80Ge champion,target,cell,substrate,rigid,0.23,cm2,,,SLG/Mo/ACZTGSSe/CdS/i-ZnO/ITO/Ag grid; no ARC; champion device of batch 80Ge; area definition not stated
+D013,DV-100Ge,M-100Ge,100Ge champion,target,cell,substrate,rigid,0.23,cm2,,,SLG/Mo/ACZTGSSe/CdS/i-ZnO/ITO/Ag grid; no ARC; champion device of batch 100Ge; area definition not stated
+D014,DV1,M1,"Spin-coating, CdCl2 bath, hot plate (Table 1)",control,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); standard non-R2R procedure; layer-by-layer ~500 nm CdTe
+D014,DV2,M1,"Doctor-blading, CdCl2 bath, hot plate (Table 1)",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2)
+D014,DV3,M1,"Spray-coating, CdCl2 bath, hot plate (Table 1)",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2)
+D014,DV4,M3,"pyr-CdCl3-capped CdTe NCs + 2 wt% pyr-CdCl3, standard device",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); метод нанесения слоя CdTe в статье для этого прибора не указан
+D014,DV5,M3,"Integrated R2R-friendly: pyr-CdCl3 + 2 wt%, doctor-blading, IR lamp annealing",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2)
+D014,DV6,M2,"pyr-CdCl3-capped CdTe NCs, 0 wt% extra pyr-CdCl3",control,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); метод нанесения слоя CdTe не указан
+D014,DV7,M1,"Standard side-by-side device (spin-coating, CdCl2 bath, hot plate) vs R2R, Fig. 5",control,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); числовые показатели в тексте не приведены (только на рис. 5)
+D015,DV-REF,M1,"Reference (Cu-doped, Au)",control,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode; Cu-doped (CuCl2), no buffer"
+D015,DV-0,M1,"CuxCryOz/Au, 0 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-6,M1,"CuxCryOz/Au, 6 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-8,M1,"CuxCryOz/Au, 8 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-10,M1,"CuxCryOz/Au, 10 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-12,M1,"CuxCryOz/Au, 12 min",target,cell,superstrate,rigid,0.08,cm2,,,"monofacial, Au back electrode"
+D015,DV-BREF,M1,"Reference (Cu-doped, ITO)",control,cell,superstrate,rigid,0.08,cm2,,,"bifacial, ITO back electrode; параметры взяты из предыдущей работы [26]"
+D015,DV-BCC,M1,CuxCryOz/ITO,target,cell,superstrate,rigid,0.08,cm2,,,"bifacial, ITO back electrode"
+D017,DVR1,MR1,R1 (ΔGGI 0.20),control,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVR2,MR2,R2 (ΔGGI 0.20),control,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVG1,MG1,G1 (ΔGGI 0.21),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVG2,MG2,G2 (ΔGGI 0.23),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVI1,MI1,I1 (ΔGGI 0.26),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVI2,MI2,I2 (ΔGGI 0.25),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVI3,MI3,I3 (ΔGGI 0.32),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVI4,MI4,I4 (ΔGGI 0.29),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVO1,MO1,O1 (ΔGGI 0.41),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVO2,MO2,O2 (ΔGGI 0.43),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D017,DVO3,MO3,O3 (ΔGGI 0.50),target,cell,substrate,rigid,0.57,cm2,,,"площадь «approximately 0.57 cm2», определена механическим скрайбированием; Mo-покрытое содово-известковое стекло; серия R=reference, G=Ga, I=In, O=early stage In-free"
+D018,DV-UNT,M1,Untreated CIGS (PHRMS),control,cell,substrate,rigid,0.25,cm2,,,Mo-стекло; «Devices were manually scribed to /C240.25 cm2 and measured without a front grid»
+D018,DV-CST,M1,Cs-ST CIGS (PHRMS),target,cell,substrate,rigid,0.25,cm2,,,Mo-стекло; «Devices were manually scribed to /C240.25 cm2 and measured without a front grid»
+D018,DV-NUNT,M2,Untreated CIGS (NICE),control,cell,,,,,,,Только статистика на рис. 6B-E; площадь и архитектура для этой серии не указаны
+D018,DV-NCST,M2,Cs-ST CIGS (NICE),target,cell,,,,,,,Только статистика на рис. 6B-E; площадь и архитектура для этой серии не указаны
+D019,DV1,M1,"Mo, 200 Å/s, 290 °C (Table 1)",control,cell,substrate,rigid,,,,,Без MoSe2; скорость испарения 200 Å/s; 290 °C; планарная структура; площадь не указана
+D019,DV2,M1,"MoSe2/Mo, 200 Å/s, 290 °C (Table 1)",target,cell,substrate,rigid,,,,,Скорость испарения 200 Å/s; 290 °C; площадь не указана
+D019,DV3,M1,"MoSe2/Mo, 100 Å/s, 290 °C (Table 1, Table 2)",target,cell,substrate,rigid,,,,,Скорость 100 Å/s; 290 °C; те же значения в Table 1 и Table 2 (строка 290 °C); площадь не указана
+D019,DV4,M1,"MoSe2/Mo, 100 Å/s, 250 °C (Table 2)",target,cell,substrate,rigid,,,,,Скорость 100 Å/s; 250 °C; площадь не указана
+D019,DV5,M1,"MoSe2/Mo, 100 Å/s, 260 °C (Table 2)",target,cell,substrate,rigid,,,,,Лучший прибор статьи; скорость 100 Å/s; 260 °C; (hk1)-ориентация; площадь не указана
+D019,DV6,M1,"MoSe2/Mo, 100 Å/s, 270 °C (Table 2)",target,cell,substrate,rigid,,,,,Скорость 100 Å/s; 270 °C; площадь не указана
+D019,DV7,M1,"Mo, 100 Å/s, 315 °C (Table 2)",control,cell,substrate,rigid,,,,,Без MoSe2; скорость 100 Å/s; 315 °C; площадь не указана
+D020,DV1,M1,"Sb2S3 (без HTM, углеродный электрод)",control,cell,superstrate,rigid,0.0625,cm2,aperture,,FTO glass; площадь «masked at around 6.25 mm2»
+D020,DV2,M2,"Sb2(S, Se)3 (без HTM, углеродный электрод)",control,cell,superstrate,rigid,0.0625,cm2,aperture,,FTO glass; площадь «masked at around 6.25 mm2»
+D020,DV3,M3,"Sb2S3/Sb2(S, Se)3 (без HTM, углеродный электрод)",target,cell,superstrate,rigid,0.0625,cm2,aperture,,FTO glass; площадь «masked at around 6.25 mm2»
+D020,DV4,M3,"Sb2S3/Sb2(S, Se)3/P3HT/carbon",target,cell,superstrate,rigid,0.0625,cm2,aperture,,FTO glass; площадь «masked at around 6.25 mm2»
+D021,DV-A1,M1,A1,control,cell,substrate,rigid,0.06,cm2,,,"Sample A1: single sputtered Sb2Se3 layer, 1200 nm (Table 1). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано."
+D021,DV-A2,M3,A2,target,cell,substrate,rigid,0.06,cm2,,,"Sample A2: sputtering layer 1100 nm, PED layer 100 nm (Table 1). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Cu:Sb2Se3(PED)/Sb2Se3(RFMS)/NaF/FTO/glass"
+D021,DV-A3,M3,A3,target,cell,substrate,rigid,0.06,cm2,,,"Sample A3: sputtering layer 950 nm, PED layer 250 nm (Table 1). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Cu:Sb2Se3(PED)/Sb2Se3(RFMS)/NaF/FTO/glass"
+D021,DV-A4,M3,A4,target,cell,substrate,rigid,0.06,cm2,,,"Sample A4: sputtering layer 800 nm, PED layer 400 nm (Table 1). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Cu:Sb2Se3(PED)/Sb2Se3(RFMS)/NaF/FTO/glass"
+D021,DV-A5,M3,A5,target,cell,substrate,rigid,0.06,cm2,,,"Sample A5: sputtering layer 400 nm, PED layer 800 nm (Table 1). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Cu:Sb2Se3(PED)/Sb2Se3(RFMS)/NaF/FTO/glass"
+D021,DV-A6,M3,A6,target,cell,substrate,rigid,0.06,cm2,,,"Sample A6: sputtering layer 200 nm, PED layer 1000 nm (Table 1). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Cu:Sb2Se3(PED)/Sb2Se3(RFMS)/NaF/FTO/glass"
+D021,DV-B1,M2,B1,control,cell,substrate,rigid,0.06,cm2,,,"Sample B1: PED layer 1200 nm, sputtering layer 0 nm (Table 2). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Однослойный PED Cu:Sb2Se3, 1200 nm."
+D021,DV-B2,M4,B2,target,cell,substrate,rigid,0.06,cm2,,,"Sample B2: PED layer 1000 nm, sputtering layer 200 nm (Table 2). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Sb2Se3(RFMS)/Cu:Sb2Se3(PED)/NaF/FTO/glass"
+D021,DV-B3,M4,B3,target,cell,substrate,rigid,0.06,cm2,,,"Sample B3: PED layer 200 nm, sputtering layer 1000 nm (Table 2). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Sb2Se3(RFMS)/Cu:Sb2Se3(PED)/NaF/FTO/glass"
+D021,DV-B4,M4,B4,target,cell,substrate,rigid,0.06,cm2,,,"Sample B4: PED layer 100 nm, sputtering layer 1100 nm (Table 2). Площадь 6 mm2 на ячейку (20 ячеек на образец); как определена площадь — не указано. Структура AZO/UZO/CdS/Sb2Se3(RFMS)/Cu:Sb2Se3(PED)/NaF/FTO/glass"
+D021,DV-B4Ag,M4,B4 (Ag paste + wire bonding),record,cell,substrate,rigid,,cm2,,,Лучший элемент B4 после улучшения верхнего и нижнего контактов пастой Ag и wire bonding (Figure 10); PED 100 nm + RFMS 1100 nm; площадь не указана.
+D021,DV-NaF0,M1,RFMS Sb2Se3 without NaF,control,cell,substrate,rigid,,cm2,,,"Figure 2a: RFMS Sb2Se3 solar cell без слоя NaF, AZO/UZO/CdS/Sb2Se3/FTO/glass; толщина абсорбера не указана."
+D021,DV-NaF1,M1,RFMS Sb2Se3 with NaF,target,cell,substrate,rigid,,cm2,,,"Figure 2a: RFMS Sb2Se3 solar cell с NaF 10 nm, AZO/UZO/CdS/Sb2Se3/NaF/FTO/glass; толщина абсорбера не указана."
+D021,DV-PEDNaF,M2,PED 5%Cu:Sb2Se3 with NaF,target,cell,substrate,rigid,,cm2,,,"Figure 2b: PED-grown 5%Cu:Sb2Se3 solar cell с NaF 10 nm, AZO/UZO/CdS/Cu:Sb2Se3/NaF/FTO/glass; толщина абсорбера не указана."
+D022,DV1,M1,15 nm a-Si:H / ZnO 50 nm / MoO3 10 nm,control,cell,n-i-p,rigid,,,,,"Glass/FTO/ETL/a-Si:H/HTL/ITO; ETL на стороне подложки, поэтому n-i-p (авторы называют структуру прозрачной, p-i-n-подобной с оксидными CTL); площадь в статье не указана"
+D022,DV2,M1,30 nm a-Si:H / ZnO 50 nm / MoO3 10 nm,target,cell,n-i-p,rigid,,,,,"Glass/FTO/ETL/a-Si:H/HTL/ITO; ETL на стороне подложки, поэтому n-i-p (авторы называют структуру прозрачной, p-i-n-подобной с оксидными CTL); площадь в статье не указана"
+D022,DV3,M1,15 nm a-Si:H / ZnO 50 nm / MoO3 20 nm,target,cell,n-i-p,rigid,,,,,"Glass/FTO/ETL/a-Si:H/HTL/ITO; ETL на стороне подложки, поэтому n-i-p (авторы называют структуру прозрачной, p-i-n-подобной с оксидными CTL); площадь в статье не указана"
+D022,DV4,M1,30 nm a-Si:H / ZnO 50 nm / MoO3 20 nm,target,cell,n-i-p,rigid,,,,,"Glass/FTO/ETL/a-Si:H/HTL/ITO; ETL на стороне подложки, поэтому n-i-p (авторы называют структуру прозрачной, p-i-n-подобной с оксидными CTL); площадь в статье не указана"
+D022,DV5,M1,15 nm a-Si:H / AZO 75 nm / MoO3 10 nm,target,cell,n-i-p,rigid,,,,,"Glass/FTO/ETL/a-Si:H/HTL/ITO; ETL на стороне подложки, поэтому n-i-p (авторы называют структуру прозрачной, p-i-n-подобной с оксидными CTL); площадь в статье не указана"

@@ -1,0 +1,91 @@
+Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea
+PAC 
+learning
+Textual attribute of query node: This paper 
+study generalization bounds of query committee 
+methods under PAC learning framework. 
+computational 
+learning theory
+
+
+Euclidean space Hyperbolic space
+(a) (b)
+Coarse-grained
+Fine-grained
+Figure 1: Comparison of Euclidean space and hyperbolic space.(a) In Euclidean space (left), the query node exhibits similar
+distances to both coarse-grained and fine-grained concepts. Hyperbolic space (right) naturally embeds the tree-like hierarchies.
+(b) Node frequency distribution in top-𝑘 retrieval results on the Cora dataset across Euclidean space and hyperbolic space, the
+x-axis shows the co-occurrence frequency of the entity, and the y-axis shows the number of entities (log scale).
+context to large language models, improving factual consistency
+and reducing hallucinations [15]. This paradigm has been widely
+adopted in knowledge-intensive NLP tasks, including open-domain
+question answering, fact verification, and multi-step reasoning
+[13, 29]. More recently, GraphRAG[5] and its variants [7, 8, 19]
+make inter-evidence relationships explicit by constructing docu-
+ment/entity graphs or indexing graphs, and incorporate graph tra-
+versal and community-level aggregation into retrieval, improving
+interpretability and multi-step evidence integration.
+Beyond text-centric LLMs, recent efforts have started to bring
+RAG into GFMs to mitigate distribution shifts and enrich graph
+reasoning with external knowledge. In this line of work, retrieved
+evidence can come from auxiliary graphs, knowledge bases, or
+textual descriptions, and is injected into graph representations to
+support downstream tasks under few-shot or zero-shot settings
+[14, 34]. Specifically, RAGraph[14] builds a key–value toy-graph
+database from a resource graph, retrieves the most relevant toy
+graphs for a given query graph, and injects the retrieved represen-
+tations and task signals into the query graph through a message-
+passing prompting mechanism. RAG4GFM[34] constructs a multi-
+level index over a graph corpus as an external knowledge base,
+retrieves task-relevant subgraphs for a given query instance, and
+augments the input graph with the retrieved evidence to enable
+plug-and-play inference with a pre-trained GFM . RAG-GFM[40]
+pioneers the integration of retrieval-augmented generation into
+the pre-training phase of graph foundation models, leveraging a
+dual-modal knowledge base to alleviate in-memory bottlenecks.
+TarDGR[30] further introduces a task-aware retrieval framework
+that leverages task-specific supervision to guide the selection of
+relevant subgraphs in dynamic recommendation scenarios.
+However, most existing methods perform representation learn-
+ing and similarity matching in Euclidean space, which is suboptimal
+for knowledge with hierarchical or tree-like organization. To ad-
+dress this, we perform retrieval in hyperbolic space, which better
+preserves hierarchies and improves GFM retrieval and inference.
+2.2 Hyperbolic Representation Learning
+Hyperbolic geometry has been widely adopted to model hierar-
+chical and scale-free structures[1, 4, 23]. Early works, including
+the Poincaré ball model[21] and the Lorentz[22] model, demon-
+strate that hyperbolic space can represent hierarchical relations
+with low distortion and high representational efficiency, providing
+a principled alternative to Euclidean embeddings.
+Building upon these foundations, subsequent studies incorporate
+hyperbolic geometry into graph representation learning[4, 27, 41]
+and knowledge graph embeddings[1, 23] to capture hierarchical
+relations. Despite these advances, existing studies focus mainly on
+representation learning or supervised inference, while the applica-
+tion of hyperbolic geometry to RAG for GFMs has not been system-
+atically investigated. In contrast, this work investigates hyperbolic
+geometry from a retrieval-augmented reasoning perspective, and
+proposes a hyperbolic RAG framework tailored for GFMs.
+3 Preliminary
+3.1 Notation
+Formally, we define the external knowledge base as K ={(𝑒𝑖,𝑟𝑖,𝑒𝑗
+)|𝑒𝑖,𝑒𝑗 ∈E,𝑟𝑖 ∈R}, where E ={𝑒1,...,𝑒𝑖,...,𝑒𝑁} is the entity set
+and R ={𝑟1,...,𝑟𝑖,...,𝑟𝑀} denotes the relation set. Each triplet
+(𝑒𝑖,𝑟𝑖,𝑒𝑗) indicates that the head entity 𝑒𝑖 is connected to the tail
+entity 𝑒𝑗 via a relation 𝑟𝑖. Throughout this paper, we denote discrete
+entities and relations by lowercase italic letters (e.g., 𝑒𝑖 and 𝑟𝑖 ), and
+their continuous vector representations by boldface counterparts
+(e.g., e𝑖 and r𝑖 ).
+3.2 Hyperbolic Geometry
+Hyperbolic geometry is a non-Euclidean geometry with constant
+negative curvature. Unlike Euclidean space, where the volume of a
+metric ball grows polynomially with the radius, hyperbolic space
+exhibits exponential volume growth. This property makes it an ideal
+embedding space for tree-structured external knowledge bases.
+The Poincaré Ball Model. While hyperbolic space admits mul-
+tiple isometric models, we adopt the Poincaré ball model[21] for
+its conformality and geometric interpretability. In this work, we
+consider a 𝑑-dimensional Poincaré ball with fixed constant negative
+curvature𝑐 =−1, defined as:
+B𝑑 ={x∈ R𝑑 :∥x∥ < 1}, (1)

@@ -1,0 +1,83 @@
+(a) GPT-4o
+ (b) Qwen-VL-Max
+Figure 6: Distribution of answer quality when both
+LLMs successfully extract relevant elements.
+(a) GPT-4o
+ (b) Qwen-VL-Max
+Figure 7: Extraction accuracy comparison across images
+with different numbers of elements.
+using Qwen-VL-Max model.
+Table 6 shows that GranuRAG substantially out-
+performs both baselines across all metrics. The
+global baseline achieves the lowest scores, strug-
+gling to identify relevant elements from the full
+candidate set. Embedding Retrieval improves per-
+formance but still lags behind our approach. Gra-
+nuRAG achieves the best results with particularly
+large gains in LLM Score (+15.85 over CLIP),
+demonstrating that LLM-based semantic match-
+ing is more effective than embedding similarity for
+fine-grained element recognition.
+6.3 Error Analysis
+To understand the source of improvements, we con-
+duct error analysis on two LLMs from two aspects.
+First, we compare answer quality when both meth-
+ods extract the correct elements. As shown in Fig-
+ure 6, GranuRAG produces better answers in 94.4%
+and 90.2% of cases for the two models respectively,
+while the baseline wins in less than 5%. This indi-
+cates that our fine-grained element representations
+provide more accurate information for generation,
+even when extraction is equally successful.
+Second, we analyze extraction accuracy by ex-
+amining cases where only one method identifies the
+correct elements. Figure 7 shows that GranuRAG
+succeeds where the baseline fails far more often
+win loss
+GPT-4o 82.22% 17.78%
+Qwen-VL-Max 91.11% 8.89%
+Table 7: The average win and loss rate of human evalu-
+ation. Bold means the best results.
+than the reverse, especially for images with fewer
+elements. This gap narrows as element count in-
+creases, reflecting the growing difficulty of fine-
+grained reasoning in complex images. Overall,
+these results confirm that GranuRAG improves
+both extraction accuracy and generation quality.
+6.4 Human Evaluation
+To complement automatic metrics, we conduct hu-
+man evaluation comparing our method against the
+baseline. We sample 20 questions for two models
+individually (GPT-4o and Qwen-VL-Max), yield-
+ing 40 pairwise comparisons. Three graduate stu-
+dents in computer science independently assess
+baseline and GranuRAG outputs according to four
+criteria: coverage of relevant scenic elements, ac-
+curacy of factual details, fluency of language, and
+acceptability as tourist guidance. Annotators select
+the superior output in each pair without knowing
+which system produced it.
+Table 7 reports the aggregated win rates. Gra-
+nuRAG achieves 82.22% preference over the base-
+line for GPT-4o and 91.11% for Qwen-VL-Max,
+confirming that grounded retrieval yields expla-
+nations that human evaluators judge more com-
+prehensive and trustworthy. To assess annotation
+reliability, we compute Fleiss’ Kappa across the
+three raters, obtaining κ = 0.712 (SE = 0.105,
+z = 6.75, p < 0.001), which indicates substantial
+agreement (Landis and Koch, 1977) and validates
+the consistency of our evaluation protocol.
+6.5 Visualization
+To examine how GranuRAG influences visual
+focus, we fine-tune three adapters (Base, CoT,
+and GranuRAG) on Qwen3-VL-8B and com-
+pare their attention weights on the same samples.
+Specifically, we compute the pixel-level difference
+∆A = AGranuRAG −Abaseline by averaging attention
+weights across all generated tokens, then visualize
+the top-10 regions with the largest positive shifts
+(red + markers) and negative shifts (blue − mark-
+ers). As shown in Figures 8a and 8b, red markers
+concentrate on semantically relevant scenic ele-
+10482

@@ -1,0 +1,65 @@
+Figure 3: The overall pipeline for constructing the MultiTableQA benchmark.
+Rtlocal is computed from the query q as:
+hi = S(sem) rep (q, si) ∑tlocal
+j=1 S(sem) rep (q, sj ) (9)
+Finally, we update the iterative personalized PageR-
+ank vector (Andersen et al., 2006) v for each iter-
+ation σ by v(σ+1) = (1 − α)h + αPv(σ) with
+the damping factor α ∈ (0, 1) and initialization
+v(0) = h. The iteration continues until conver-
+gence, i.e., ∥v(σ+1) − v(σ)∥1 < ϵ for a small tol-
+erance ϵ > 0. The final PageRank score vector
+v ranks the nodes in Vlocal. The top-ranked nodes
+are then selected as the final retrieved table nodes,
+denoted as V ∗ final.
+3.4 Graph-aware Context Organization
+After retrieving the final set V ∗ final, we apply a graph-
+aware context organization mechanism to enable
+downstream LLMs to effectively interpret the re-
+trieved tables and perform downstream tabular rea-
+soning. The corresponding input prompt is de-
+signed to comprise two key components: (i) graph
+information insertion and (ii) instructions for hier-
+archical long chain-of-thought (CoT) generation.
+Due to space limits, we provide detailed descrip-
+tions of our multi-step context construction proce-
+dure in Appendix A.2.
+4 MultiTableQA: Benchmarking
+Multi-table Question Answering
+In MultiTableQA, based on the different types of
+user queries, we define three cross-table tasks: (i)
+Table-based Fact Verification (TFV), (ii) Single-
+hop Table Question Answering (Single-hop TQA),
+and (iii) Multi-hop Table Question Answering
+(Multi-hop TQA). In general, the essential differ-
+ence between single-hop and multi-hop is whether
+the answer(s) of the query are located in one or mul-
+tiple table cells, though all tasks require cross-table
+reasoning to retrieve the final answer. Detailed
+definitions of each task are provided in Appendix
+B.2 with concrete question-answer examples. The
+overall benchmark construction is illustrated in Fig-
+ure 3. Additional details are provided in Appendix
+B. Next, we introduce our efforts to obtain real-
+world multi-table source, questions, and answers.
+Table 1: Summarized Statistics of MultiTableQA
+Task Type #Tables #Queries #Avg Rows #Avg Cols
+TFV 34,351 15,106 5.8 5.7
+Single-hop TQA 17,229 6,106 7.4 4.5
+Multi-hop TQA 5,523 2,573 13.8 7.3
+4.1 Source Table Decomposition.
+Table Sources. MultiTableQA collects raw
+single table sources from real-world, human-
+annotated datasets, including HybridQA (Chen
+et al., 2020), SQA (Iyyer et al., 2017), Tabfact
+(Chen et al., 2019), and WikiTables (Pasupat and
+Liang, 2015). Overly simplified tables are filtered
+out, yielding a curated collection of 20k tables. We
+then apply the row-/column-wise splitting on these
+collected table sources and decompose them into
+60k tables as our multi-table data.
+Row-/Column-wise Splitting. We begin by pre-
+processing the original single-table data to filter out
+tables with small dimensions (specifically, those
+with M ≤ 3 columns and N ≤ 3 rows), as they
+38137

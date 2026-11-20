@@ -1,0 +1,73 @@
+TABLE I: Truth-mode comparison across three faithful benchmarks and three factual-conflict benchmarks. IA is the macro-
+average over the six benchmark columns. Bold marks the best context-using method in each column, and underline marks the
+second-best. IGD also reports deltas against Direct RAG under the same model and benchmark.
+Model Method IA Faithful benchmarks Factual-conflict benchmarks
+KILT-NQ TriviaQA SQuAD ConflictBank NQ-Swap CounterFact
+Qwen3-32B Closed-book Q-only† 56.8 35.4 62.0 32.4 56.4 70.0 84.6
+Direct RAG 51.0 74.8 88.8 90.4 15.0 27.0 10.0
+ExplicitSCR 12.9 16.0 18.4 15.8 4.0 3.0 20.2
+RCR-InternalEval 62.1 58.2 74.6 47.8 47.8 70.5 73.6
+RCR-ContextEval 53.6 68.8 80.0 83.2 21.0 37.0 31.4
+RCR-InternalConf 59.9 50.0 69.0 41.8 46.6 77.5 74.8
+MADAM-RAG 65.0 62.6 82.4 66.2 44.0 61.0 73.8
+IGD 74.0 ↑23.0 72.2 ↓2.6 84.8 ↓4.0 89.8 ↓0.6 50.2 ↑35.2 71.5 ↑44.5 75.4 ↑65.4
+Qwen2.5-14B Closed-book Q-only† 63.3 37.2 65.6 31.2 61.2 91.5 92.8
+Direct RAG 58.1 74.2 90.2 94.2 12.0 42.0 36.0
+ExplicitSCR 10.8 13.0 16.4 14.2 4.8 9.5 6.6
+RCR-InternalEval 63.5 64.8 80.6 65.0 39.2 57.0 74.6
+RCR-ContextEval 59.6 57.8 76.4 69.8 26.4 57.5 69.8
+RCR-InternalConf 65.0 54.8 75.6 49.2 55.0 67.0 88.2
+MADAM-RAG 59.7 57.4 71.8 61.0 38.2 63.0 66.6
+IGD 77.6 ↑19.5 70.8 ↓3.4 85.6 ↓4.6 87.8 ↓6.4 55.4 ↑43.4 77.0 ↑35.0 89.4 ↑53.4
+Llama-3-8B Closed-book Q-only† 55.7 37.8 69.8 26.8 55.6 68.5 75.8
+Direct RAG 59.6 73.2 88.4 89.4 27.6 49.0 30.2
+ExplicitSCR 11.2 9.8 8.8 8.8 2.4 16.0 21.2
+RCR-InternalEval 59.7 59.8 81.0 58.8 41.0 55.0 62.8
+RCR-ContextEval 53.3 42.6 68.6 33.2 42.2 61.5 71.6
+RCR-InternalConf 52.1 45.0 75.2 40.6 32.2 56.0 63.8
+MADAM-RAG 45.9 51.6 64.6 60.4 28.0 40.0 30.6
+IGD 69.3 ↑9.6 68.4 ↓4.8 85.8 ↓2.6 85.0 ↓4.4 46.8 ↑19.2 62.0 ↑13.0 67.6 ↑37.4
+Mistral-7B Closed-book Q-only† 51.8 39.2 66.2 24.2 39.4 68.5 73.0
+Direct RAG 42.7 61.4 77.4 77.0 11.4 17.5 11.4
+ExplicitSCR 26.6 23.2 32.0 22.6 17.6 21.0 43.2
+RCR-InternalEval 45.7 50.0 72.8 41.4 26.2 44.0 40.0
+RCR-ContextEval 47.0 57.0 76.4 72.8 10.6 22.5 42.4
+RCR-InternalConf 50.1 49.6 74.2 38.2 36.6 40.5 61.4
+MADAM-RAG 44.4 50.6 59.6 58.6 19.2 52.5 25.6
+IGD 54.2 ↑11.5 58.4 ↓3.0 76.0 ↓1.4 73.0 ↓4.0 37.0 ↑25.6 43.0 ↑25.5 47.8 ↑36.4
+Phi-4 14B Closed-book Q-only† 51.8 32.6 66.6 28.2 41.8 60.0 81.4
+Direct RAG 56.9 71.0 87.2 85.8 15.8 35.5 46.2
+ExplicitSCR 6.1 11.8 14.6 3.0 2.6 2.0 2.8
+RCR-InternalEval 55.8 58.8 77.6 49.2 30.8 47.5 70.8
+RCR-ContextEval 57.5 65.8 81.8 66.8 21.6 45.5 63.4
+RCR-InternalConf 55.7 54.0 76.2 45.8 32.8 53.0 72.4
+MADAM-RAG 61.1 61.6 79.8 59.0 32.2 57.0 77.2
+IGD 67.1 ↑10.2 63.8 ↓7.2 85.8 ↓1.4 82.2 ↓3.6 34.8 ↑19.0 59.0 ↑23.5 77.0 ↑30.8
+The closed-book results in Table I show that the difficulty
+of the six benchmarks differs substantially. Among the faithful
+benchmarks, closed-book accuracy is generally low on KILT-
+NQ and SQuAD, indicating that these datasets rely heavily on
+the provided context [27], [28], [30]. Across the five models,
+KILT-NQ closed-book accuracy remains around the mid 30%
+range, and SQuAD is even lower, mostly around 25-32%. This
+is expected: KILT-NQ is derived from open-domain queries
+grounded in Wikipedia evidence, while SQuAD questions are
+written against specific paragraphs and often require access to
+the original passage. In contrast, TriviaQA is substantially easier
+in the closed-book setting, with all models reaching above 60%,
+suggesting that many trivia-style answers are already encoded
+in the models’ parameters.
+For the factual-conflict benchmarks, closed-book perfor-
+mance is much higher overall, especially on CounterFact and
+NQ-Swap. CounterFact is the easiest factual-conflict benchmark
+under closed-book evaluation: all models achieve between
+73.0% and 92.8%, suggesting that many subject relation facts
+remain accessible from parametric memory. NQ-Swap is also
+highly recoverable for several models, with Qwen2.5-14B
+reaching 91.5% and Phi-4 reaching 60.0%. ConflictBank is
+more challenging, with closed-book accuracy ranging from
+39.4% to 61.2%. Overall, Qwen2.5-14B-Instruct shows the
+strongest closed-book IA score, while Qwen3-32B also exhibits
+strong recoverability on the factual-conflict benchmarks. These
+diagnostics suggest that IGD is evaluated in a meaningful
+regime: the factual-conflict examples are difficult for Direct

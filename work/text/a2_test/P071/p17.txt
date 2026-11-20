@@ -1,0 +1,116 @@
+Example: Islamic Ethics and Morality
+Question: What is the main objective of training oneself
+to love doing good in Islam?
+Gold answer: The main objective is to achieve true hap-
+piness, as loving and doing good leads to inner peace and
+fulfillment.
+Model: AceGPT-v2-8B
+Predicted answer: The main objective is to cultivate
+a habit of performing good deeds, improve charac-
+ter, earn rewards, and contribute positively to society.
+Judge: INCORRECT
+Figure 6: ISLAMICFAITHQA sample.
+to produce concise, grounded, and semantically
+faithful answers to domain-specific questions.
+Example: SFT Training (Arabic + English)
+Question (AR):	àA¿ @ 	X@ Zæ 	æ¸@ œ
+	ﬂ H. P@æm.Ì’@ œ˛« iÖˇ@ Õ”k æº AÓ
+? ŁYKAÖˇ@ ŁPæ œ
+	ﬂ Zæ 	æ¸@ ØK
+@ ¨ð 	Q	K Y“K. Õ˛@ Yﬂ  	j ¸@
+Question (EN): What is the ruling on wiping over socks
+during wud¯u’ if a person embraced Islam after the revela-
+tion of the wud¯u’ verse in S¯urat al-M¯a’idah?
+Answer (AR):
+¨ð 	Q	K Y“K. Õ˛@ 	ÆÖˇ Zæ 	æ¸@ œ
+	ﬂ H. P@æm.Ì’@ œ˛« iÖˇ@ 	Pæm.’
+œ
+	ﬂ AÒ» , ‰¸ 	X I	J
+K. ØjJ
+j¸@ ØK
+æJ. 	J¸@ Ø	J¸@ 	à B , Zæ 	æ¸@ ØK
+@
+.(Õ˛Óð ł
+ PA 	jJ.¸@ Ł@ðP) ŁQ
+ 	«ð ØJ.“  	ÆK. ŁQ
+ 	“Öˇ@ IK
+Yg
+Answer (EN): It is permissible to wipe over socks in wud¯u’
+for someone who embraced Islam after the wud¯u’ verse,
+because authentic Sunnah establishes this (e.g., the hadith
+of al-Mugh¯irah ibn Shu'bah and others, reported in al-
+Bukh¯ar¯ı and Muslim).
+Figure 7: SFT sample (text-grounded reasoning). An
+instruction-response instance used for supervised fine-
+tuning, including the Arabic question, a grounded rea-
+soning trace, and a concise final answer (with an English
+translation for readability).
+D.2 Reward-guided Data Example
+Figure 8 presents an example from the RL data
+used for preference-based optimisation. Each in-
+stance consists of a question grounded in canonical
+Islamic text together with a concise gold answer
+that serves as the reference target.
+E Human Annotation Guidelines
+The annotation tasks involve labeling Islamic
+knowledge questions with (i) a difficulty score, (ii)
+reasoning requirements, (iii) multi-step reasoning
+requirements, and (iv) a single category label. An-
+notators follow the definitions and decision rules
+below to ensure consistent annotations.
+Example: Reward-guided alignment (Arabic + English)
+Question (AR):
+Y	J« Ø¸ HYjJ
+ AÓð ØK. P 	ÆÓ ØÔgQ» Ø“	J AÓ 	›ð 	›J
+»
+? ØK. P Y«ð
+Question (EN): How did he describe what he built as a
+mercy from his Lord, and what will happen to it when his
+Lord’s promise comes?
+Gold answer (AR):
+ZA¿X Ø˚“j. J
+ ØK. P Y«ð Y	J«ð , Øﬂ@Q 	g@ @æ“J
+¢
+ B @XP 	àA¿
+Reference - Qur’an: 18:98–99
+Gold answer (EN): It was a barrier they could not break
+through, and when his Lord’s promise comes He will level
+it to the ground. Reference - Qur’an: 18:98–99
+Figure 8: RL preference sample. An RL instance speci-
+fies a question derived from canonical text and an atomic
+gold target. During RL, candidate model responses are
+scored by an LLM-as-a-judge against this gold target to
+produce scalar rewards for policy optimisation (English
+translations are provided for readability).
+E.1 Task Overview
+For each question, annotators assign:
+• a difficulty score on a 1–5 scale,
+• reasoning (true/false): whether answering re-
+quires reasoning beyond simple recall,
+• multi_step (true/false): whether the required
+reasoning involves multiple steps, and
+• category_type: exactly one category label
+from a fixed set of 12.
+E.2 Difficulty Annotation
+Difficulty is defined with respect to a competent
+respondent with Islamic knowledge. Annotators
+should not base their judgment on personal famil-
+iarity, but instead on how difficult the question
+would be for this reference respondent to answer
+correctly. Each question is assigned a single inte-
+ger score from 1 to 5 according to the definitions
+below.
+E.2.1 Difficulty Definitions
+E.2.2 Guidelines for Difficulty Assessment
+Annotators consider:
+• depth of knowledge required (basic vs. special-
+ized),
+• complexity of reasoning needed (recall vs. appli-
+cation vs. synthesis vs. balancing tradeoffs),
+• number of concepts or sources involved,
+• level of nuance (exceptions, conditions, context
+sensitivity, khil¯af ),
+• whether simple recall suffices or reasoning is
+necessary.
+17
+26485

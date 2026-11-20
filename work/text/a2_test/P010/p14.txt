@@ -1,0 +1,105 @@
+APPENDIX
+A. Training Details
+Embedding Projector We leverage a three-layer MLP as
+the embedding projector to fuse the video 1 × 1024 and
+control signal 1 × 28 embedding into a hybrid embedding.
+The architecture of the lightweight projector is a four-layer
+MLP with GELU activation. It has an input dimension of 1052
+and an output dimension of 1024. The margin used in triplet
+loss is 0.5. We train the model for 200 epochs with a learning
+rate of 1e−5 with Adam optimiser.
+MLLM Backbone We use a learning rate of 2e−5 with a
+cosine scheduler. We use a batch size of 4 with a gradient
+accumulation step of 2 on 8 A100 GPUs, which leads to an
+effective training batch size of 128. We use a warm-up strategy
+in the first 5 epochs with a warm-up ratio of 0.03. We train
+the model for 2 epochs.
+B. Baseline Details
+In our comparison, we evaluate several baseline methods. The
+first, S2VT [76], utilises an end-to-end sequence-to-sequence
+model with Long Short-Term Memory (LSTM) networks. It
+is trained on paired video-sentence data, linking video frame
+sequences to corresponding word sequences, enabling it to
+generate descriptive captions for video events. The second
+method, WAA [39], employs a visual attention model that
+trains a convolutional network from images to vehicle control
+commands. This method focuses on identifying influential
+image regions through the controller’s attention and uses
+an attention-based video-to-text model to produce textual
+explanations aligned with the controller’s attention maps,
+grounding the explanations in relevant scene parts. The third
+approach, ADAPT [35], is a transformer-based method that
+leverages a multi-task joint training framework. It aligns driving
+action captioning with control signal prediction tasks. Finally,
+DriveGPT4 [81], trained using LLaVA [48] to generate a visual
+instruction tuning dataset derived from the BDD-X dataset [39],
+processes multimodal input data and is capable of generating
+text responses while predicting control signals, fine-tuned with
+the assistance of ChatGPT on the new dataset.
+C. Linear Layer Parameter Update Derivations
+Consider a forward-pass through a linear layer F after its
+weights W0 have been updated by ∆W
+y = F (x) = (W0 + ∆W )x = W0x + ∆W x
+The weight update itself is expressed as
+∆W = η ∂L ∂y |yi xT i ⇒ ∆W x = η ∂L ∂y |yi xT i x
+where xi, yi are the input and output to the layer that resulted
+in the weight update. Now, if we in fact have optimised over
+a mini-batch of input-outputs xi, yi we have
+∆W =
+X
+i
+η ∂L ∂y |yi xT i ⇒ ∆W x = X i η ∂L ∂y |yi xT i x
+Therefore we have a weighted sum of dot products, which is
+akin to an attention mechanism. Indeed, from Eq. (5) we can
+apply softmax-free linear attention expressions such as in [41]
+for
+WV [zicl; zq ] softmax
+ 
+(WK z1:n)T (WQz1:n)√
+di
+!
+→ WV [zicl; zq ] (WK [zicl; zq ])T WQz1:n
+Multiplying the linear attention matrices through the stacked
+in-context and query embeddings we have
+WV zicl(WK zicl)T WQz1:n + WV zq (WK zq )T WQz1:n
+Now take out a common factor of WQz1:n for
+(WV zicl(WK zicl)T + WV zq (WK zq )T )WQz1:n
+and put ∆WICL = WV zicl(WK zicl)T and WZSL =
+WV zq (WK zq )T as the terms both pre-multiplying WQz1:n.
+Note that WZSL is independent of the in-context terms
+(depending only on the query). Now, in ∆WICL we in fact
+have a set of in-context retrieved samples zicl,i such that
+WV [zicl,0, zicl,1, . . .] (WK [zicl,0, zicl,1, . . .])T
+→ ∆WICL =
+X
+i
+WV zicl,i(WK zicl,i)T
+Finally, by inspection of similar dot-product expressions
+WV zicl,i(WK zicl,i)T ↔ η ∂L ∂y |yi xT i x we note that we match
+the form for the linear layer above
+(WZSL + ∆WICL)WQz1:n ↔ (W + ∆W )x
+This can therefore be interpreted to say that the output of
+the attention is adjusted in a meta-optimal way to conform
+to the samples provided as input context, much like gradient
+descent on the linear layer would adjust that layer to conform
+to the mini-batch training data, but crucially in the case of
+RAG-Driver, without supervision.
+D. Action Representation
+One potential future research direction is action represen-
+tation. In our study, we adopted a floating-point number
+action representation for two main reasons: (1) its validated
+effectiveness in related research such as robot manipulation
+(e.g., RT-2 [9], RT-X [58]) and driving applications (e.g.,
+DriveGPT4 [81]); (2) its intuitive alignment with human under-
+standing. However, general-purpose LLMs are known for their
+suboptimal performance in predicting floating-point numbers
+[23]. We hypothesise that this is due to the discontinuous
+encoding of real numbers when represented as language tokens,
+where such representation does not adhere to the linearity of real
+number space regarding addition and multiplication. Although
+our approach involves fine-tuning the numerical language
+tokens with a paired visual-language-action dataset, known
+as symbol tuning [79], to mitigate this issue, we consider the
+exploration of alternative methods such as continuous number
+representation [23] and intermediate controller input [67] for
+action representation as a promising avenue for future research.

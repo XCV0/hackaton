@@ -1,0 +1,92 @@
+0.0 0.2 0.4 0.6 0.8 1.0
+Ratio in top-k
+BLEnD-su
+BLEnD-fa
+BLEnD-es
+CLIcK
+Planner-selected Top-k documents
+su id fa ar ko zh es en other
+Figure 3: Language distribution of documents se-
+lected for RAG. Hatched bars indicate the language
+proportions of documents selected by the planner for
+each benchmark, while solid bars represent the language
+distribution of documents actually used for RAG after
+critique-based scoring.
+glish. For instance, in BLEnD-su it frequently se-
+lects Sundanese (su) together with Indonesian (id),
+and in BLEnD-fa it additionally considers Arabic
+(ar). This indicates that it infers the likely cultural
+target from the query content and routes retrieval
+accordingly.
+The two language distributions from (i) and (ii)
+are broadly consistent but not identical, reflecting
+the role of critique-based filtering. After scoring,
+the retained top-K evidence shifts toward docu-
+ments that actually contain useful evidence and
+away from weakly related documents. In low-
+resource settings, this can increase the share of
+a regional high-resource language when the tar-
+geted corpus is sparse (e.g., more id for BLEnD-su),
+while still maintaining culturally aligned sources.
+On CLIcK, the final evidence document set remains
+dominated by Korean (ko), with additional support
+from English (en) and nearby languages. Overall,
+Figure 3 suggests that our planner-critic loop pro-
+poses a culturally plausible candidate pool and then
+enforces evidence quality and cultural alignment
+through critique-guided filtering.
+Fixed-Scope Retrieval Ablation. Figure 3
+shows that English often appears alongside cul-
+turally aligned corpora, which motivates a natural
+baseline: can the planner-critique loop simply be
+replaced with a fixed retrieval scope that always
+includes English? Table 2 evaluates this hypothesis
+Method BLEnD CLIcK
+low mid high
+Non-RAG 55.65 63.06 69.29 48.10
+RAGCown 51.89 60.77 67.43 53.53
+RAGCall 56.55 65.92 69.84 50.78
+RAGCown ∪ Cen 56.06 65.94 71.22 54.20
+CORAL 61.83 70.41 72.78 58.88
+Table 2: Static corpus ablation on cultural QA bench-
+marks. We compare fixed retrieval scopes: Cown
+(the culture-associated corpus; for BLEnD we use the
+source language), Call (overall multilingual corpora),
+and Cown ∪ Cen (adding English). Fixed corpus scopes
+show inconsistent gains across benchmarks and resource
+groups, while CORAL (GPT-OSS-120B planner/critic)
+remains consistently stronger.
+by comparing three fixed-scope variants: retrieving
+only from an oracle own-corpus (Cown), retrieving
+from the union of all corpora (Call), and retrieving
+from Cown ∪ Cen, where Cen denotes the English
+corpus. For CLIcK, Cown corresponds to Korean.
+For BLEnD, while the questions are written in En-
+glish, Cown is defined as the source community/cul-
+ture language associated with each evaluation split
+(e.g., su for BLEnD-su). We emphasize that this
+BLEnD definition is oracle: it presumes access to a
+target-culture label that is not provided at test time
+in realistic deployments.
+Table 2 shows that fixed-scope retrieval remains
+consistently below CORAL, even when granted
+oracle access to Cown. Adding English to Cown is
+not uniformly sufficient across BLEnD resource
+groups, and pooling all corpora (Call) can satu-
+rate when culturally or content-wise mismatched
+documents are included.4 Moreover, on BLEnD,
+even the oracle-fixed Cown setting can underper-
+form Non-RAG, consistent with the fact that cultur-
+ally grounded QA often relies on proxy evidence
+and that sparse or weak retrieval can introduce
+misleading context. In contrast, CORAL consis-
+tently outperforms all fixed-scope variants, indi-
+cating that the gains are not explained by simply
+including English, but by query-conditioned scope
+decisions coupled with feedback-driven filtering
+(and, as shown later, critique-guided query rewrit-
+ing).
+4Figure 8 illustrates a representative failure mode of Call,
+where retrieval returns superficially related but not decision-
+critical evidence. Additional qualitative examples are provided
+in Appendix D.2.1.

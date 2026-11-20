@@ -1,0 +1,69 @@
+723
+Figure 5: Top ten largest delta counts of frames for French, English and Dutch. Positive counts signify that
+a frame occurs more in baseline answers than in augmented answers. No counts displayed signifies
+that the delta change of the frame counts was not in the top ten for that language.
+EN FR NL
+(1) England, Netherlands, documents,
+do not, provide, impact -255 - -32
+(2) Europe, claim, formal,
+European, his, facto -107 -46 0
+(3) Bonaparte, villain, tyrant,
+Napoleon, was -88 -52 -73
+(4) on, Netherlands, England,
+Napoleon, impact -19 -156 -
+(5) England, continental, trade,
+system, isolate 39 -4 -46
+(6) code, civil, legal, reforms,
+administration, Napoleon 172 86 167
+(7) England, British, led, industrial,
+marine, economy 68 40 -30
+(8) 1804, king, French, France,
+became, 1799 - 44 53
+(9) 1815, fall, down, kingdom,
+defeat, independence - 17 -
+(10) war, British, French,
+Navy, Royal, led - - 43
+Table 8: Top ten biggest delta counts of topic repre-
+sentations for French, English and Dutch. Positive
+counts signify that a representation occurs more in
+baseline answers than in augmented answers.
+No counts signifies that the delta change of the rep-
+resentation was not in the top ten for that language.
+ten topics, together with their representing tokens.
+As shown in the topic modeling results, Topics (1)
+and (2) are closely associated with the Evidence
+and Documents frames and occur more frequently
+in the augmented answers. Similarly, Topics (6),
+(8), and (10), which correspond to the Leadership
+and Political_locales frames, are more common in
+the baseline answers. TopicsrelatedtotheEcon-
+omy and Exchange frames, such as (5) and (7),
+display a language-dependent pattern: they occur
+morefrequentlyinEnglishandFrenchforthe base-
+line condition, but more often in Dutch for the
+augmented setting. These correspondences indi-
+cate a strong alignment between the topic model
+representations and the frame-based analysis.
+Overall, the frame and topic modeling results
+jointly demonstrate that augmented answers
+introduce distinct topical emphases compared
+to baseline answers. Topics associated with
+evidence provision, economic conditions or trading
+tend to appear more in the augmented condition,
+eitheracrossalllanguagesorinspecificones,while
+themes related to leadership, political entities, and
+importance are more prominent in the baseline.
+4.3. Linguistic Profiling and Syntactic
+Variation
+To examine whether the lexical variation between
+the baseline and the augmented answers as
+indicated by the ROUGE-L scores (Section 4.1)
+can be associated with different parts-of-speech
+(POS), we extracted the linguistic profiling using
+Profiling UD. A multinomial logistic regression was
+trained on the extracted features to observe if the
+distribution of POS affect the accuracy of predict-
+ing whether the answer is from a specific language
+and experiment setting. Figure 6 shows the con-
+fusion matrix for the trained model. The trained
+model can differentiate with high accuracy, namely

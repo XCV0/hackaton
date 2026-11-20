@@ -1,0 +1,79 @@
+Table 2: Detection of behavioral failure modes on RAGBench-27. Counts of 27 configurations failing each
+COUNTERMEM threshold, and how many of those are also flagged by RAGAS faithfulness < 0.9 or RAGChecker
+hallucination > 0.15. Independent baseline flag rates over all 27 configurations: 22% (faith), 33% (hall). Update
+inertia and contradiction ignorance are counterfactual properties; realized-trace baselines are not designed to detect
+them.
+Failure mode (CounterMem threshold) Failing configs Co-flagged by RAGAS-faith Co-flagged by RAGChecker hall
+No-evidence non-abstention (DelAll abst. < 0.5) 18/27 6/18 (33%) 9/18 (50%)
+Update inertia (Updchanged < 0.5) 7/27 0/7 (0%) 0/7 (0%)
+Contradiction ignorance (Contra ack. < 0.3) 12/27 0/12 (0%) 1/12 (8%)
+Table 3: Stage diagnosis and targeted repair. Trace localization (%), post-repair reactive rate, and targeted ∆
+with 95% paired-bootstrap CIs (∗: CI excludes zero). Bold marks the trace-dominant stage and matching diagonal
+repair. Natural-fixture rates and ∆ are on the generator-class subset (n=46) vs naive pool/k expansion; A/B/C use
+all n=100 vs the best wrong-stage repair.
+Trace localization (%) Repair reactive rate
+Fixture n Retr Rerank Gen React Retr swap Rerank swap Prompt Targeted ∆ [95% CI]
+Natural HotpotQA 100 3 4 46 47 0.17 0.33 0.44 +0.37∗ [+0.22, +0.52]
+A: retrieval-broken 100 66 1 24 9 0.53 0.08 0.12 +0.40∗ [+0.29, +0.51]
+B: rerank-broken 100 2 96 0 2 0.00 0.56 0.02 +0.54∗ [+0.45, +0.63]
+C: generator-broken 100 2 9 53 36 0.45 0.47 0.63 +0.09 [−0.02, +0.19]
+generator-stage failures dominate the unrepaired
+residual (46%), with retrieval and rerank failures
+rare (3% and 4%).
+Targeted repair beats wrong-stage repair with
+non-overlapping confidence intervals on three
+of four fixtures. A’s retriever swap reaches
+0.53 reactive vs. ≤ 0.12 for off-stage repairs
+(∆=+0.40 [+0.29, +0.51]); B’s reranker swap
+reaches 0.56 vs. 0.00 for the off-stage retriever
+swap (∆=+0.54 [+0.45, +0.63]); on natural Hot-
+potQA generator-class queries, prompt repair
+reaches 0.44 vs. 0.06 for naive pool/k expansion
+(∆=+0.37 [+0.22, +0.52]). On the engineered
+generator fixture (row C) the matched repair is
+smaller and not significant: prompt repair reaches
+0.63 vs. 0.47 for the next best, with a paired delta
+CI that includes zero (∆=+0.09 [−0.02, +0.19]).
+The trace names the right stage; the repair evidence
+is strong on three of four fixtures.
+COUNTERMEM’s stage attribution is read off the
+same intervention trace already used to compute
+Contra. RAGChecker is a strong baseline at the
+metric level (distinguishing A from B on 10/11 met-
+rics), but its retriever component combines retrieval
+and reranking, so achieving the same stage decom-
+position would require rerunning RAGChecker at
+each pipeline stage’s intermediate output and mul-
+tiplying its LLM-call cost. The full repair matrix
+and the per-metric RAGChecker breakdown are in
+Appendix C.
+5.3 Coherent-intervention Failures Among
+RAGChecker-approved Answers
+Behavioral failures are common among
+RAGChecker-approved answers: aggregate
+faithfulness is necessary but not sufficient for
+evidence-binding.
+Setup. For each of six RAGBench datasets (Hot-
+potQA, TechQA, PubMedQA, CovidQA, EMan-
+ual, FinQA), we synthesize coherent update and
+contradiction documents with Claude Haiku condi-
+tioned on the question and the reference answer
+(a 2–3 sentence passage asserting a specific al-
+ternative answer of the same factual type; Ap-
+pendix I), then run the standard COUNTERMEM
+update- and contradiction-addition interventions.
+A per-row audit by Claude-Sonnet finds 93.6%
+of these coherence-conditioned contradiction pay-
+loads well-formed (the 82% of Table 15 is a differ-
+ent audit, of the one-line templated payloads in the
+27-configuration sweep; Appendix J); we restrict
+the headline subset to RAGChecker-approved an-
+swers (rch_hall ≤ 0.10) with judged-valid contra-
+dictions (n=446, out of n=593 generated). Each
+baseline answer is scored by RAGChecker; we
+measure update following on the update interven-
+tion and conflict acknowledgment on the contradic-
+tion intervention.
+One in three approved answers ignores a co-
+herent update; more than half fail a coherent
+22338

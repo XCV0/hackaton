@@ -1,0 +1,84 @@
+User Query
+Chris Holder ( 2012 ) be the current holder of the individual which be first held in 1977.
+Current holderNext Held Every
+Chris Holder 
+(2012 ) 2013 one year
+… .. …
+Sweden (1993)defunct one year until 1993
+( 2012 ) 2013 one year
+… … …
+Competing 
+entities First Held
+Individuals 1931
+… …
+National Pairs 1970
+National Teams1960
+… …
+Ta b le  1 Ta b le  2
+Answer: 0 (Refuted)
+(i) Table Fact Verification
+User Query
+What is the release Date of a A-level CERO game called Mario Kart Advance?
+(ii) Single-hop TQA
+Ta b le  1 Ta b le  2
+CEROName
+A Mario Kart Advance
+A Mario vs.DonkeyKong
+… …
+Title Publisher
+F-Zero for Game 
+Boy Advance Nintendo
+… …
+Mario Kart AdvanceNintendo
+... …
+Release Date
+Mario Kart 
+Advance 12/16/2011
+Metroid Fusion 12/16/2011
+… …
+Ta b le  3
+Answer: December 16, 2011
+User Query
+Who is the person from Spain that finished the Berlin marathon in 2:13.32 in 2011 ? And what position does he achieve?
+(iii) Multi-hop TQA
+Position [1] Athlete Time
+1 Patrick Makau Musyoki[3] 2:03.38
+… … …
+6 Ricardo Serrano[5] 2:13.32
+… … …
+8 Simon Munyutu[6] 2:14.20
+Athlete Born Year
+Felix Limo[3] 1980
+… …
+Ricardo Serrano[5] 1980
+Pedro Nimo [6] 1980
+… …
+[5]: Ricardo Serrano ( born 29 October 1980 ) is a Spanish 
+long-distance … At the 2004 IAAF World Cross Country 
+Championships he finished in 33rd place … 
+Ta b le  1 Ta b le  2
+Meta Data
+[1]: Position The ranking position on Berlin marathon hold in 2011
+…
+Meta Data
+Answer: [“Ricardo Serrano”, “6”] 
+Figure 7: Demonstration on three different task types in MultiTableQA.
+prompts that are fed into LLMs. By lineariz-
+ing the table content or formatting it into struc-
+tured textual representations, these methods en-
+able LLMs to effectively reason over tabular in-
+puts. In our experiments, we choose TAP4LLM
+(Sui et al., 2023) as our baseline method as it
+includes multiple plug-and-play table sampling,
+augmentation, and packing methods inside.
+C.2 Implementation Details
+Model Settings. We conduct a comprehensive
+evaluation of downstream tabular reasoning using
+both open- and closed-source LLMs. Specifically,
+for closed-source models, we employ Claude-3-5-
+Sonnet-2024-10-22 (Anthropic, 2024) (abbreviated
+as Claude-3.5-Sonnet), GPT-4o-2024-08-06 (Hurst
+et al., 2024) (abbreviated as GPT-4o), and GPT-40-
+mini-2024-07-18 (Hurst et al., 2024) (abbreviated
+as GPT-4o-mini). For open-source models, we uti-
+38148

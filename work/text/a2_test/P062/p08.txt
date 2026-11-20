@@ -1,0 +1,84 @@
+Method BLEnD CLIcK
+low mid high
+multiRAG 56.55 65.92 69.84 50.78
+w/ GPT-OSS-120B Planner/Critic
++ Dynamic Corpus Selection 58.11 70.06 72.76 57.25
++ Query Rewriting (CORAL) 60.47 69.10 73.51 58.66
+w/ QWEN3-235B Planner/Critic
++ Dynamic Corpus Selection 59.64 69.70 71.64 57.40
++ Query Rewriting (CORAL) 61.83 70.41 72.78 58.88
+Table 3: Ablation of dynamic corpus selection and query rewriting. Accuracy on five cultural QA benchmarks
+with a fixed generator. Starting from multiRAG (a fixed-pooled multilingual retrieval system with the original query),
+we add dynamic corpus selection and then query rewriting. Results are shown for two planner/critic backbones.
+5.4 Dynamic Corpus Selection & Query
+Rewriting Ablation Study
+Dynamic Corpus Selection Only. To quantify
+the contributions of the two key components of
+CORAL—dynamic corpus selection and critique-
+guided query rewriting—we report the ablation re-
+sults in Table 3. We use multiRAG as the baseline,
+which retrieves with the original query from a fixed
+pooled multilingual corpus, and then progressively
+add (i) dynamic corpus selection and (ii) query
+rewriting.
+The results show that adding dynamic corpus se-
+lection alone improves accuracy on all benchmarks
+for both planner/critic backbones. With QWEN3-
+235B, dynamic selection yields gains of 3.78%p
+(BLEnD-mid) and 6.62%p (CLIcK) over MULTI-
+RAG. These results support our claim that select-
+ing culturally appropriate retrieval conditions sub-
+stantially reduces noise from mismatched corpora
+and improves evidence alignment.
+Additional Query Rewriting. On top of dy-
+namic corpus selection, enabling query rewriting
+further improves performance. With the GPT-OSS-
+120B planner/critic, query rewriting achieves addi-
+tional gains of 2.36%p on BLEnD-low and 1.41%p
+on CLIcK.
+To better understand the contribution of query
+rewriting, we analyze how the planner modifies
+the retrieval query during rewriting. We catego-
+rize each rewrite into one of three types: (i) Para-
+phrase, which reformulates the query into a more
+retrieval-friendly wording while preserving its in-
+tent; (ii) Narrow, which adds constraints or dis-
+ambiguating details to focus retrieval; and (iii) Ex-
+pand, which broadens the query to retrieve addi-
+tional evidence when the current retrieval is judged
+insufficient.
+We randomly sample 100 questions from CLIcK
+and collect all rewritten retrieval queries produced
+across planner-critic iterations, resulting in 158
+rewritten queries. After a norming session to align
+category definitions, two authors independently an-
+notate all rewrites. The initial inter-annotator agree-
+ment is Cohen’s κ = 0.624. Remaining disagree-
+ments are then resolved through discussion, and
+final labels are determined by unanimous agree-
+ment.
+Overall, 53.8% of rewrites narrow the query, and
+32.9% paraphrase it. 5 Qualitative analysis reveals
+that narrowing rewrites often introduce missing
+contextual cues, as highlighted by the critic, when
+the initially retrieved documents are topically re-
+lated but insufficiently informative to answer the
+question. This leads to subsequent retrievals that
+are more directly aligned with the query’s infor-
+mational needs. Taken together, these results sug-
+gest that query rewriting complements dynamic
+corpus selection by systematically improving re-
+trieval quality through critique-guided refinement.
+6 Conclusion
+We introduce CORAL, a test-time agentic frame-
+work that closes the loop between retrieval out-
+comes and retrieval decisions. CORAL iteratively
+(i) selects culturally and linguistically appropriate
+corpora, (ii) retrieves candidate evidence, (iii) cri-
+tiques documents for relevance and cultural align-
+ment, and (iv) checks sufficiency to decide whether
+to stop or to refine retrieval conditions by re-
+selecting corpora and rewriting the query. Across
+5An example of query rewrite within a planner-critic loop
+is provided in Figure 9. Additional qualitative analysis on
+query rewriting can be found in Appendix D.2.2.

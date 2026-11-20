@@ -1,0 +1,146 @@
+trainablemodel frozen model environment
+observationtoken,masklossactiontoken,calculateloss
+Query 𝒒
+LLM
+search DocBase
+rollout
+Output1 (𝑎!,…,𝑎"#$):
+<think> [reasoning content] </think>
+<intent> [query intent] </intent>
+Retrieved
+Docs𝒅’
+First
+Stage
+Cold 
+start
+OfflineTraining
+Online 
+Application
+Query
+unlabeled
+document
+R³A-7B
+distribution R³A-distill-
+1.5B
+Query-
+Document
+score
+LLMrollout
+Second
+Stage
+Output2 (𝑎",…,𝑎"%&#$):
+<think> [reasoning content] </think>
+<extract> [fragment] </extract>
+<score> [0/1/2] </score>
+Doc to be evaluated: 𝒅
+𝐑=𝕀𝐟𝐨𝐫𝐦𝐚𝐭(𝒂𝟎,…,𝒂𝑵#𝑲%𝟏)’𝐫𝐬𝐜𝐨𝐫𝐞				
+RewardModel
+Update
+Compute
+Reward
+Figure 2: The overview of the R³A framework.
+2.2 Decomposed Reasoning with RL
+After the cold-start initialization, R³A is trained
+via the GRPO (Shao et al., 2024) algorithm. By
+estimating advantages through group-relative re-
+wards instead of a dedicated critic model (as in
+PPO (Schulman et al., 2017)), GRPO facilitates
+more efficient large-scale training. We use GRPO
+primarily as a high-performance realization tool to
+showcase the improvements brought by our reason-
+ing framework.
+GRPO performs multiple rollouts per input and
+calculate the relative reward r within the group
+as the advantage A. It optimizes the following
+objective:
+J (θ) = E(q,d)∼P (Q,D),{τi }G i=1 ∼πθold
+[ 1
+|G|
+|G|∑
+i=1
+( 1
+|τi|
+|τi |∑
+t=1
+min
+(
+rθ Ai, clip
+(
+rθ , 1 − ϵ, 1 + ϵ
+)
+Ai
+)]
+,
+rθ = πθ(ai,t|x, d, ai,<t) πθold (ai,t|x, d, ai,<t) (1)
+where q and d denote the query and associated
+document sampled from the training distribution.
+Given an input (q, d) pair2, a group G of trajecto-
+ries τi is generated using the old policy πθold . Each
+trajectory τi comprises a sequence of actions ai,
+representing the output of model reasoning. ϵ is the
+clipping ratio.
+The term Ai = ri−µr σr represents the standard-
+ized advantage of trajectory τi, where ri is the re-
+ward assigned to the trajectory, and µr and σr are
+the mean and standard deviation of the rewards
+within group G.
+Reasoning on Query Intent. In the initial stage,
+the model interacts with a set of auxiliary, highly-
+clicked documents d′(|d′| ≤ 4) retrieved using the
+2The retrieved document d′, based on the input query and
+document d, is omitted here for brevity.
+original query q from the platform. These doc-
+uments supply additional contextual signals that
+enable the model to infer the user’s latent intent
+beyond the query’s surface form.
+So the trajectory in the first stage can be rep-
+resented as: τi1 = (q, d′, ai,0, ai,1, ..., ai,N −1),
+where N denotes the number of action tokens. The
+action is structured token sequence using special
+tags, as pioneered by recent works (Li et al., 2025a;
+Song et al., 2025; Huang et al., 2025). Each ac-
+tion must contain a reasoning step (<THINK>) and
+an intent step (<INTENT>). The detailed system
+template is shown in Appendix C.1.
+Reasoning with Asymmetric Relevance. As
+asymmetric relevance depends on the presence
+of answer-bearing segments rather than overall
+query–document similarity, the model is tasked
+with extracting verbatim, query-relevant fragments
+from candidate documents or returning NONE if no
+match exists. This formulation compels the model
+to ground its assessments in specific textual evi-
+dence, thereby ensuring directional, answer-centric
+judgments while mitigating the impact of noise.
+In the extraction process, we enforce correctness
+strictly at the structural level—ensuring verbatim
+consistency with the document fragments—owing
+to the absence of ground-truth evidence annota-
+tions. The semantic accuracy and answer-oriented
+alignment of these extractions are intended to
+emerge through reinforcement-based reasoning
+training, which leverages available relevance labels
+to guide the model’s optimization.
+Thus, the complete trajectory in a rollout (two-
+stage interaction) can be represented as τi =
+(τi1 , d, aN,i, aN +1,i, . . . , aN +K−1,i, r), where K
+denotes the number of tokens and r denotes the
+reward to be calculated. Each action must contain
+a reasoning step (<THINK>), an extraction step
+(<EXTRACT>) and a final answer (<SCORE>). The
+detailed system template is shown in Appendix C.2.
+Reward Function. We design the rule-based re-
+ward function such that a reward is granted if and
+only if the LLM-generated output fully conforms
+to all specified reasoning and answer formats, as
+well as the extraction consistency requirement. The
+total reward R is defined as:
+R = Iformat · rscore, rscore =
+
+
+
+1 spred == sgold
+λ |spred-sgold| = 1
+0 |spred-sgold| = 2
+(2)
+129

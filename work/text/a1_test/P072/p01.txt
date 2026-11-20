@@ -1,0 +1,72 @@
+/gid00030/gid00035/gid00032/gid00030/gid00038/gid00001/gid00033/gid00042/gid00045/gid00001
+/gid00048/gid00043/gid00031/gid00028/gid00047/gid00032/gid00046
+Citation: Rahimi, S.; Shooshtari, M.
+CZTSe-Based Solar Cell Performance
+Improvement Using the CSLO
+Technique. Appl. Sci. 2022, 12, 4119.
+https://doi.org/10.3390/
+app12094119
+Academic Editors: Beatriz Romero
+Herrero and Laura Ciammaruchi
+Received: 8 March 2022
+Accepted: 18 April 2022
+Published: 19 April 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright: © 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+applied  
+sciences
+Article
+CZTSe-Based Solar Cell Performance Improvement Using the
+CSLO Technique
+Serveh Rahimi 1 and Mostafa Shooshtari 2,*
+1 Department of Electrical Engineering, K N Toosi University of Technology, Tehran 1631714191, Iran;
+s.rahimi1@email.kntu.ac.ir
+2 Laboratory of Electronic Components, Department of Microelectronics, Technology and Materials (ECTM),
+Delft University of Technology, 2628 CD Delft, The Netherlands
+* Correspondence: mostafashooshtari@gmail.com
+Abstract: Here we investigated a novel layer-based optimization technique to improve the perfor-
+mance of a CZTSe solar cell. By using this technique, the optical behavior and electrical properties of
+the proposed solar cell improved signiﬁcantly as a result of the changes in the layer speciﬁcations and
+the layer materials. The structure of the cell consisted of an absorber laid on a conducting layer and
+covered by Indium Tin Oxide (ITO), with ZnO on its top surface. Due to the employment of the CSLO
+technique, a p+pn junction was formed between the absorber and window layers, which provided
+a lower recombination rate by transmitting more electrons and holes to the contacts. In addition,
+the main important parameters affecting the solar cell’s performance such as layer thickness, carrier
+lifetime, and total effect density were investigated. According to the results, the proposed CZTSe
+solar cell achieved a 32.6% and 79.5% efﬁciency and ﬁll factor, respectively—which in comparison to
+a conventional solar cell is remarkable. Moreover, hybrid structures made by utilizing CZTS-based,
+Ge-based Cu2ZnGeSe4, and Si-based Cu2ZnSiSe4 with the proposed CZTSe-based solar cell were
+implemented and better results were achieved, yielding an efﬁciency of about 42, 50, and 34% and a
+ﬁll factor of 66, 55, and 42%, respectively, due to the materials’ properties.
+Keywords: solar cell; CZTS; CZGeSe; CZSiSe; CZTSe; ITO; ZnO; efﬁciency; performance
+1. Introduction
+Cu2−II−IV−VI4 quaternary compounds have been of great interest for many years
+in sustainable photovoltaics due to their suitable bandgaps, their abundance on Earth
+and because they only require cheap fabrication techniques [1]. Among these multi-layer
+conﬁgurations, Copper Zinc Tin Sulﬁde (CZTS) is an emerging solar cell absorber that, in
+terms of lattice structure, it is similar to chalcopyrite semiconductors such as CuGaSe2,
+CuInSe2, and Cu (Ga,In)Se2, but contains only earth-abundant, nontoxic elements and has
+a near-optimal direct bandgap energy of Eg~1.5 eV, theoretically determined with high
+optical absorption coefﬁcients over 104 cm−1 [2]. Therefore, CZTSSe-based solar cells such
+as Cu2ZnSnS4 (CZTS), Cu2ZnSnSe4 (CZTSe), and Cu2ZnSn(S,Se)4 (CZTSSe) have many
+advantages due to their special properties, which include being eco-friendly, cost-effective,
+and highly efﬁcient [3,4]. In addition, CZTSSe-based solar cells have received attention as
+excellent absorber layers of photovoltaic cells, since they have nontoxic materials, a simple
+fabrication process, and reasonable optoelectronic properties for thin-ﬁlm solar cells [5].
+For instance, their direct bandgap and high absorption coefﬁcient in the visible region are
+important factors towards choosing them for the absorber layer in solar cells [6–8]. In fact,
+solar cells are considered an important alternative source of green and clean energy [9].
+Hence, numerous techniques and solutions have been reported for the optimization of solar
+cells and overcoming problem related to this. Improving the performance of solar cells is
+generally based on layer-optimizing techniques [10], material selection [11], light-trapping
+Appl. Sci. 2022, 12, 4119. https://doi.org/10.3390/app12094119 https://www.mdpi.com/journal/applsci

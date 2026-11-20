@@ -1,0 +1,73 @@
+Figure 3: Illustration of the constrained decoding process. Given preﬁx, "Joker is played by", the continuation
+"Nolan" is not found in the corpus and therefore masked out.
+last main character added was Steve Hale, who was D.J. ’s
+boyfriend in seasons six and seven. He was played by Scott
+Weinger.
+Analysis The source sentence with the correct answer presents
+a challenge for auto-regressive decoding since the sentence
+preﬁx focuses on an aspect unrelated to the question ("The
+last main character added [...]"). With propositionalization,
+the sentence structure becomes aligned with the question,
+but requires that the model already knows the answer to the
+question, given that the ﬁrst entity in the sentece is the answer.
+Question who is the girl in green day 21 guns
+Gold Answer Lisa Stelly
+• title + tf-idf: Boulevard of Broken Dreams (Green Day
+song), Music video. The video won six awards at the MTV
+Video Music Awards in 2005, most notably for Video of the
+Year. It also won Best Group Video, Best Rock Video, Best
+Direction, Best Editing, and Best Cinematography.
+• Passage: "21 Guns" is a song by American rock band Green
+Day. It was released as the second single from their eighth
+studio album, 21st Century Breakdown (2009), and serves
+as the sixteenth track from the album. The single was re-
+leased through Reprise Records on May 25, 2009 as a digital
+download and July 14, 2009 as a CD single.
+• Sentence: "21 Guns" is a song by American rock band
+Green Day.
+• Proposition: The girl in the music video is Teresa
+Lourenco.
+• Source text for proposition: The music video for
+Ägain¨features Kravitz with his girlfriend in his apartment
+(Gershon), whom he does not seem to be interested in. Sim-
+ilar to the song’s lyrical content, he meets a girl (Teresa
+Lourenco), who works as a waitress in a restaurant/diner.
+Analysis In this case, all retrievals fail to retrieve the correct
+answer. In the case of the proposition-based representation,
+the model decodes a proposition where the subject is an am-
+biguous reference ("The girl") which has not been properly
+decontextualized (the source passage above makes it clear that
+the reference is not related to the question). Interestingly, the
+source passage with the correct answer requires an inferential
+step and its proposition representations are been decontextu-
+alized properly. Source text with correct answer: 21 Guns
+(song), Music video. The video takes place with the band
+and the album’s two protagonists Christian (Josh Boswell)
+and Gloria (Lisa Stelly) taking refuge in a white room after
+robbing a bank..
+Relevant generated propositions:
+• The video takes place with the band and the album’s two
+protagonists Christian and Gloria.
+• Gloria is played by Lisa Stelly.
+To properly retrieve this passage using proposition-based rep-
+resentation we would need to properly disambiguate "The
+video" to "21 guns" and perform inference over these two
+propositions. Alternatively, proposition generation could gen-
+erate more complex propositions containing both pieces of
+information, such as: The "21 Guns" video takes place with
+the protagonist Gloria, played by Lisa Stelly.
+Question how many seasons of vampire diaries r there
+Gold Answer eight, or 8
+• title + tf-idf: The Vampire Diaries. The Vampire Diaries
+is an American supernatural teen drama television series
+developed by Kevin Williamson and Julie Plec, based on the
+book series of the same name written by L. J. Smith. The
+series premiered on The CW on September 10, 2009, and
+concluded on March 10, 2017, having aired 171 episodes
+over eight seasons.
+• Passage: The Vampire Diaries is an American supernatural
+teen drama television series developed by Kevin Williamson
+and Julie Plec, based on the book series of the same name
+written by L. J. Smith. The series premiered on The CW
+on September 10, 2009, and concluded on March 10, 2017,
+8901

@@ -1,0 +1,4 @@
+publication_id,issue_id,record_ids,check_name,description,source_page,source_fragment
+D013,I1,R026;R009,contradiction,PCE of 60Ge champion: 9.7 % in the discussion (p. 8) vs 9.47 % in Table 3 (p. 6),8,12.1 % and 9.7 % for 40Ge and 60Ge respectively
+D013,I2,R014;R018,contradiction,"Text states Voc gradually increases from 527 to 647 mV with Ge content, but Table 3 gives 650 mV for 80Ge (higher than 647 mV for 100Ge)",6,The gradual increase of Voc from 527 to 647
+D013,I3,R001;R005;R009;R013;R017,jv_consistency,"Checked Voc*Jsc*FF (Pin=100 mW/cm2 assumed, ""1 sun""): 11.43, 12.14, 9.47, 6.48, 5.43 % vs reported 11.42, 12.13, 9.47, 6.48, 5.43 % - consistent (<3 %); no violation. Jsc_EQE values not reported, EQE check not possible; Voc < Eg/q holds for all devices",6,η (%) 11.42 12.13 9.47 6.48 5.43

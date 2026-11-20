@@ -1,0 +1,36 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D013,DV-0Ge-L1,DV-0Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-0Ge-L2,DV-0Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-0Ge-L3,DV-0Ge,3,absorber,ACZTGSSe 0Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-0Ge-L4,DV-0Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-0Ge-L5,DV-0Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-0Ge-L6,DV-0Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-0Ge-L7,DV-0Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-40Ge-L1,DV-40Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-40Ge-L2,DV-40Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-40Ge-L3,DV-40Ge,3,absorber,ACZTGSSe 40Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-40Ge-L4,DV-40Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-40Ge-L5,DV-40Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-40Ge-L6,DV-40Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-40Ge-L7,DV-40Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-60Ge-L1,DV-60Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-60Ge-L2,DV-60Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-60Ge-L3,DV-60Ge,3,absorber,ACZTGSSe 60Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-60Ge-L4,DV-60Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-60Ge-L5,DV-60Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-60Ge-L6,DV-60Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-60Ge-L7,DV-60Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-80Ge-L1,DV-80Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-80Ge-L2,DV-80Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-80Ge-L3,DV-80Ge,3,absorber,ACZTGSSe 80Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-80Ge-L4,DV-80Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-80Ge-L5,DV-80Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-80Ge-L6,DV-80Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-80Ge-L7,DV-80Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-100Ge-L1,DV-100Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-100Ge-L2,DV-100Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-100Ge-L3,DV-100Ge,3,absorber,ACZTGSSe 100Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-100Ge-L4,DV-100Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-100Ge-L5,DV-100Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-100Ge-L6,DV-100Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-100Ge-L7,DV-100Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device

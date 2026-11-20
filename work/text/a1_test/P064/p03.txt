@@ -1,0 +1,103 @@
+energy of 2003 eV (for simplicity referred to in the manuscript as 2
+keV) using the first-order diffraction of the Si(111) double-crystal
+monochromator. Small deviations from the nominal photon energy
+were corrected by referencing the Au 4f7/2 peak of a grounded clean
+Au foil to a binding energy of 84.00 eV.
+Model Fit: The elemental surface composition was derived by
+evaluating the different peak intensities (i.e., peak areas) using the
+CasaXPS software.22 For all fits, we used pseudo-Voigt profile
+functions in combination with Shirley backgrounds. Spin−orbit
+doublets were fit with a pair of pseudo-Voigt functions with the
+same width and obeyed the 2j + 1 multiplicity rule. In spectra where
+multiple peaks overlapped, the energy separation between different
+spin contributions was fixed according to literature values.23−26 For
+quantification, the peak intensities were then corrected according to
+the IMFP of the photoelectrons, the photoionization cross-
+section,27−29 and the energy-specific transmission function of the
+analyzer.30,31
+■ RESULTS AND DISCUSSION
+Figure 1 depicts dark and light J−V curves of representative
+wide band gap ACIGSe solar cells (Eg = 1.46 eV) on ITO and
+thin Mo/ITO TBCs with the corresponding solar cell
+parameters listed in Table 2, and the respective EQE measured
+on a sister cell prepared on the same carrier is shown in Figure
+S2 in the Supporting Information. The nonfunctional cell on
+the ITO back contact with a power conversion efficiency
+(PCE) of 0.6% exhibits a strong blocking behavior (Figure 1a),
+whereas the cell based on the thin Mo/ITO TBC with a PCE
+of 10.1% shows the expected diode behavior (Figure 1b). The
+solar cell performance is mainly limited by a low FF of 62.2%
+(see Table 2), caused by a large series resistance of the thin
+Mo/ITO back contact and a minor shunt.
+The interface between the TBC and the ACIGSe absorber
+was characterized by STEM in combination with EDS. Figure
+2 shows the HAADF-STEM image and EDS-derived chemical
+maps of both samples, ACIGSe/ITO and ACIGSe/thin Mo/
+ITO. The atomic fraction of prominent elements is shown in
+the EDS line profiles in Figure 2c for the ACIGSe/ITO and in
+Figure 2f for the ACIGSe/thin Mo/ITO stack. The ITO TBC
+can be clearly identified by the constant In signal and the
+similarly constant O signal between 0 and 120 nm. On the
+other side of the interface (i.e., between 160 and 250 nm), the
+ACIGSe absorber layer is clearly identified by the constant
+signals for Ga, In, and Se. For clarity, we excluded the profiles
+for Cu, Ag, and Sn (all profiles are shown in Figure S3 in the
+Supporting Information). The ∼150 eV energy resolution of
+EDS measurements causes an overlapof X-ray lines of different
+chemical elements in many cases, and thus, we do not attempt
+to quantify the chemical compositions based on the EDS line
+scans.
+Clear differences in the interface region (between about 120
+and 160 nm) can be observed between the two samples,
+resulting from the presence of the ∼10 nm thick Mo interlayer
+on the ITO before the ACIGSe deposition process. For the
+Mo-free ACIGSe/ITO sample, a distinct increase in the Ga
+signal profile indicates a Ga-rich interlayer with a thickness of
+(16 ± 4) nm. This increase in the Ga signal coincides with an
+increase in the O signal, suggesting the formation of a GaOx
+layer, in agreement with previous reports for CIGSe absorbers
+(without Ag) deposited on ITO TBC substrates.4
+For the ACIGSe/thin Mo/ITO sample, a clear Ga peak
+coincident with an O peak indicates likewise the formation of a
+GaOx layer; in this case, it is thinner: (12 ± 4) nm. This layer
+is adjacent to the ACIGSe absorber layer. Clearly separated
+between this GaOx layer and the ITO TBC, a distinct peak in
+the Mo signal is observed, which suggests a (14 ± 4) nm thick
+Mo-rich layer slightly larger than the nominally deposited
+metallic Mo layer of (10 ± 1) nm. This Mo peak also overlaps
+with a decreased, but nonzero, O signal and an increased Se
+content (see Figure S4 in the Supporting Information). A Se
+signal variation is observed right at the interface between the
+Ga-rich and the Mo-rich interlayer, indicating the presence of
+MoSex and possibly also GaSex (where x indicates here likely
+deviations from the MoSe2 and Ga2Se3 stoichiometries and is
+not meant to specify a particular composition). The overlap of
+the Mo and O signals at the interface with ITO suggests the
+formation of MoOx (see the statement on the meaning of x
+above).
+It is noteworthy that for both samples, ACIGSe/ITO and
+ACIGSe/thin Mo/ITO, the observed interlayers between ITO
+and ACIGSe are spatially very well-defined, demonstrated by
+the consistent signals along the full length of the interface
+shown in the HAADF-STEM bright-field images (Figure 2a,d)
+and the EDS chemical maps (Figure 2b,e).
+To complement the microscopy results with measurements
+having chemical speciation sensitivity, the TBC interfaces have
+also been studied by HAXPES. In order to make the deeply
+Figure 1. Dark (red line) and light (black line) J−V curves of wide band gap ACIGSe solar cells with absorber band gaps of 1.46 eV on different
+transparent back contacts. (a) ITO and (b) thin Mo/ITO.
+Table 2. Corresponding Solar Cell Parameters (Power
+Conversion Efficiency [PCE], Open-Circuit Voltage [VOC],
+Fill Factor [FF], and Short-Circuit Current Density [JSC])
+for Both Wide Band-Gap ACIGSe Cells Shown in Figure 1
+with ITO and Thin Mo/ITO Back Contacts
+ACIGSe/ITO ACIGSe/thin Mo/ITO
+PCE [%] 0.6 10.1
+VOC [mV] 722 858
+FF [%] 20.3 62.2
+JSC [mA/cm2] 4.4 19.0
+ACS Applied Materials & Interfaces www.acsami.org Research Article
+https://doi.org/10.1021/acsami.5c02315
+ACS Appl. Mater. Interfaces 2025, 17, 33027−33035
+33029
+Downloaded from pubs.​acs.​org/​aamick/​article-pdf/​17/​22/​33027/​40551093/​am5c02315.​pdf by guest on 19 November 2026

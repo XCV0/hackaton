@@ -1,0 +1,97 @@
+Variant ROUGE-L BERT-F1 LLM
+Baseline 23.34 40.53 54.70
+No detector (LLM-only) 11.11 38.13 57.65
+Grounding DINO 27.56 41.83 72.15
+YOLO-World (Ours) 32.01 51.60 83.90
+Table 5: Ablation on the detector component. Bold
+means the best performance.
+edge selection. First, we examine four config-
+urations varying visual input and element sets:
+(T1) raw image with all candidates Eall, (T2) box-
+annotated image with Eall, (T3) raw image with
+grounded subset ˆE(I), and (T4) box-annotated im-
+age with ˆE(I). As shown in Figure 4, T3 and T4
+consistently outperform T1 and T2, confirming that
+filtering noisy candidates is crucial. T4 achieves
+the highest LLM score, indicating that combining
+localized visual cues and grounded textual evidence
+yields optimal performance.
+Table 4 further contrasts three variants: text-only
+with gold elements Egold, image with all candi-
+dates, and image with grounded subset. While
+text-only provides a strong upper bound, adding
+the image without filtering (Image + All) paradox-
+ically degrades LLM score, suggesting that irrel-
+evant visual-textual mismatches introduce noise.
+In contrast, pairing the image with the grounded
+subset substantially recovers text-only performance
+and exceeds it on most metrics, demonstrating that
+selective retrieval enables effective multimodal in-
+tegration.
+We further ablate the detectors to verify that
+our design choices are well-motivated rather than
+arbitrary. As shown in Table 5, replacing YOLO-
+World with Grounding DINO (Liu et al., 2024) still
+outperforms both the baseline and the approach of
+directly extracting relevant elements with LLMs,
+showing that the detect-then-match paradigm is
+robust across detectors.
+6 Analysis
+6.1 Generalization Analysis
+To assess generalization beyond the fine-tuning dis-
+tribution, we compare performance on in-domain
+(ID) and out-of-domain (OOD) test data. ID sam-
+ples appear in training with different viewpoints,
+while OOD samples are entirely unseen during
+training. As shown in Figure 5, ID samples con-
+sistently achieve higher scores, reflecting expected
+distributional advantages. Importantly, the absolute
+improvements from GranuRAG on OOD samples
+Base CoT GranuRAG20
+30
+40
+50
+60
+70
+ROUGE-L (In-domain) ROUGE-L (OOD) BERT-F1 (In-domain)
+BERT-F1 (OOD) LLM-Score (In-domain) LLM-Score (OOD)
+Figure 5: Performance comparison on in-domain and
+OOD data across three methods.
+Method ROUGE-L BERT-F1 LLM
+Baseline 23.79 40.83 56.40
+Embedding Retrieval 29.47 45.57 63.45
+RAVQA(PreFLMR) 21.27 42.60 69.24
+VisRAG 24.06 43.35 68.06
+GranuRAG (Ours) 32.27 52.19 79.30
+Table 6: The results of comparing our method with
+different RAG strategies. Bold means the best result.
+are comparable to, and sometimes exceed, those
+on ID samples across all three metrics. Moreover,
+the performance gap between ID and OOD data
+does not widen as we progress from Base to CoT
+to GranuRAG. This suggests that our grounding
+mechanism improves reasoning quality rather than
+exploiting memorized training instances. The con-
+sistent gains on OOD data confirm that GranuRAG
+generalizes well to novel visual content.
+6.2 Comparison with Retrieval Baselines
+We evaluate the effectiveness of our GranuRAG
+framework by fixing the generator backbone
+(Qwen-VL-Max) and comparing three strategies
+for constructing the evidence that conditions gener-
+ation. The global baseline provides the generator
+with descriptions of the full candidate set E with-
+out visual grounding, requiring it to implicitly filter
+irrelevant elements. Embedding Retrieval replaces
+our second-stage matching with CLIP-based dense
+retrieval2 (Radford et al., 2021): for each detected
+region, we retrieve the top-1 most similar element
+description from a vector database. Besides, we
+also compare GranuRAG with two strong multi-
+modal RAG frameworks, which is RAVQA (Lin
+et al., 2023)3 and VisRAG 2.0 (Sun et al., 2025)4,
+2https://huggingface.co/openai/clip-vit-large-patch14
+3https://github.com/LinWeizheDragon/Retrieval-
+Augmented-Visual-Question-Answering
+4https://github.com/openbmb/visrag
+10481

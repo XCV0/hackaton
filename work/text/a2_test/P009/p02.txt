@@ -1,0 +1,104 @@
+20
+enrich future interactions with target users. In
+each new conversation, Topic-Initiator selects a
+ﬂesh and engaging topic from these candidates
+and uses it to initiate conversation.
+To support this process, we introduce a
+novel Retrieval-Augmented Generation frame-
+work, called Personalized-Topic RAG (PT-RAG),
+which enables Topic-Initiator to retrieve new
+and interesting topics effectively. Existing RAG
+methods (Zhu et al., 2025; Zhang et al., 2023;
+Wang et al., 2024; Zerhoudi, 2025) are optimized
+to answer user queries by retrieving information
+similar to those queries and therefore tend to re-
+produce content already present in past interac-
+tions, which limits their usefulness for new topic
+discovery. PT-RAG addresses this gap by using
+LLM inference to identify topic candidates that are
+absent from the user’s existing knowledge data
+while constraining retrieval to a relevant topic cat-
+egory to keep inputs tractable.
+Topic-Initiator initiates conversations using top-
+ics retrieved by PT-RAG, updates the user’s inter-
+ests and knowledge based on the conversation,
+and then gathers new topic candidates. By re-
+peating this cycle, Topic-Initiator can continuously
+provide users with novel and interesting topics.
+To demonstrate the effectiveness of Topic-
+Initiator and PT-RAG, this study addresses the fol-
+lowing research questions:
+RQ1: Can we obtain new and interesting top-
+ics for a user by categorizing and retrieving
+them solely from categories that align with the
+user’s interests?
+RQ2: Can a chatbot stimulate a user’s willingness
+to converse by initiating a conversation using
+a topic that is new and interesting to the user?
+Our contributions are summarized as follows:
+• We propose Topic-Initiator, a proactive
+chatbot that continuously provides users
+with new and interesting topics along with
+Personalized-Topic RAG (PT-RAG), a novel
+RAG framework speciﬁcally designed to re-
+trieve such topics.
+• Through automatic evaluations, we demon-
+strates that PT-RAG retrieves topics more ac-
+curately than existing methods.
+• Through human evaluation, we show that
+Topic-Initiator signiﬁcantly stimulate users’
+willingness to converse compared with exist-
+ing chatbots.
+2. Related Work
+2.1. Proactive Chatbots
+Extensive research has been conducted on proac-
+tive chatbots and dialogue systems (Deng et al.,
+2023a). Tang et al. (2019); Wu et al. (2019);
+Wang et al. (2023a,b); Deng et al. (2023b) pro-
+posed dialogue systems that set conversational
+goals and actively guide users toward achieving
+them. Xie et al. (2021) introduced a method in
+which dialogue systems proactively generate ut-
+terances to switch topics during casual conversa-
+tions. Although these studies aim to build proac-
+tive chatbots similar to ours, they overlook sce-
+narios in which the chatbot itself initiates the con-
+versationʕa key distinction in our work. Li et al.
+(2023) proposed a method where chatbots en-
+gage in conversations by exploring trending news.
+While this approach enables a chatbot to proac-
+tively initiate conversations, it differs from our work
+in that it disregards user interests and relies on
+ﬁxed topics.
+2.2. Personalized Chatbots
+Numerous studies have also explored personal-
+ized chatbots and dialogue systems (Chen et al.,
+2024). The term ”personalized” has two def-
+initions (Chen et al., 2024): (1) generating re-
+sponses consistent with the system’s own per-
+sona, and (2) generating responses tailored to the
+user’s persona. Our work focuses on the latter.
+Zhong et al. (2022) proposed a method that
+generates responses using proﬁles of a tar-
+get user and similar users. Jang et al. (2023)
+presented a method that enables a chatbot to
+adapt its responses over time by training it on
+a dataset encoding elapsed time and multiple
+types of interpersonal relationships. Xu et al.
+(2022); Zhong et al. (2024); Packer et al. (2023);
+Bae et al. (2022); Lee et al. (2023); Lim et al.
+(2022) introduced approaches that extract per-
+sonal data from user utterances, store it, and gen-
+erate responses based on that information. While
+these methods personalize chatbot responses,
+they do not address the proactive initiation of con-
+versations, which is a key aspect of our research.
+2.3. Personalized RAG
+The rise of LLMs has driven rapidly growing in-
+terest in Retrieval-Augmented Generation (RAG)
+approaches (Lewis et al., 2020; Zhu et al., 2025).
+In this section, we focus on methods that person-
+alize the outputs of RAG.
+Zhang et al. (2023) proposed a method that
+asks about the progress of events previously dis-
+closed by a user based on the time elapsed since

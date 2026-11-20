@@ -1,0 +1,103 @@
+pathy, structure, or action guidance.
+A.4 Parameter Tuning
+Table 15 shows the performance of IR with the best
+LLM (gpt-embed-3-large) using different values
+of hyper-parameters in Eq. (4). To do that, we
+extracted 1000 samples from the train set of Men-
+talChat and tuned the parameters on this set. The
+values of tuning were applied to CounselChat.
+Table 15: IR performance with different α, β, and γ.
+Dataset Params [α, β, γ] R@1 R@5 R@10
+MentalChat
+[0.8; 0.1; 0.1] 67.51 86.8 90.55
+[0.1; 0.8; 0.1] 57.68 78.78 84.59
+[0.1; 0.1; 0.8] 48.20 69.23 75.86
+[0.3; 0.3; 0.3] 66.30 84.57 89.56
+[0.5; 0.3; 0.2] 69.01 86.74 90.94
+CounselChat
+[0.8; 0.1; 0.1] 57.23 72.98 76.82
+[0.1; 0.8; 0.1] 47.45 66.38 74.15
+[0.1; 0.1; 0.8] 36.91 59.04 65.64
+[0.3; 0.3; 0.3] 54.47 72.13 76.70
+[0.5; 0.3; 0.2] 58.51 73.83 79.68
+The results suggest that standard semantic match-
+ing remains an important component for effective
+retrieval. Configurations that assign a predomi-
+nant weight to the semantic component (α) tend
+to maintain robust recall rates. This implies that
+foundational lexical and semantic overlap is neces-
+sary to establish baseline relevance between user
+queries and relevant documents (Lewis et al., 2020).
+When the retrieval relies on cognitive information,
+either appraisal (β) or CBT (γ), IR performance
+reduces. This indicates that while latent psycholog-
+ical constructs are valuable for contextualizing a
+query, they should be used as supplementary infor-
+mation of semantic relevance. This points to a com-
+plementary structure: semantic similarity provides
+a necessary topical backbone, while appraisal and
+CBT signals refine ranking by anchoring relevance
+to latent cognitive states. The best configuration
+([0.5; 0.3; 0.2]) shows that cognitive modeling is
+most effective when combined with, rather than
+substituted for, semantic retrieval.
+A.5 Qualitative Error Analysis in Crisis
+Scenarios
+To better understand the models’ behavior in high-
+risk situations, we conducted a qualitative error
+analysis on 72 “HIGH” crisis cases filtered from
+MentalChat (30) and CounselChat (42). We man-
+ually categorized primary failures into six clini-
+cal types: Mild Shortcomings (unnatural phras-
+ing), Over-reassurance (unrealistic promises), In-
+adequate Escalation (failing to recognize urgency),
+Invalidating Language (dismissing pain), Failure
+to Encourage Support (not suggesting professional
+help), and Unsafe Specificity (suggesting harm-
+ful methods). As shown in Table 16, the w_Card
+configuration reduces the total number of flagged
+errors from 47 to 24 compared to the Baseline.
+Notably, Inadequate Escalation drops from 21
+to 11 cases with reduced severity, while Over-
+reassurance and Failure to Encourage Support also
+see consistent reductions. Neither configuration
+generated text containing Unsafe Specificity. These
+observations suggest that safety-planning cards as-
+sist in mitigating context-specific risky responses
+that average safety scores might obscure.
+Table 16: Comparison of error categories, severity,
+and frequency between the Baseline and w_Card (with
+safety cards) configurations.
+Baseline w_Card
+Error Category Severity Freq. Severity Freq.
+Mild Shortcomings 2.43 15/72 1.89 9/72
+Over-reassurance 3.54 6/72 3.12 3/72
+Inadequate Escalation 4.03 21/72 3.38 11/72
+Invalidating Language 2.00 1/72 – 0/72
+Failure to Encourage Support 3.07 4/72 2.08 1/72
+Unsafe Specificity – 0/72 – 0/72
+#Flag 47 24
+A.6 Card Quality Assessment Metrics
+The experts rated each sample using four metrics
+(Es et al., 2024). Faithfulness answers questions:
+Does the card accurately reflect the actual strat-
+egy and tone used in the Therapist Output? Did it
+invent things not present? Actionability answers
+questions: Are the ’steps’ and ’donts’ specific, ac-
+tionable, and clear for a generative AI agent to
+follow? Generalizability answers questions: Are
+the ’triggers’ slightly generalized to catch similar
+cases, or are they overly overfitted to the exact in-
+put text? Safety answers questions: Are the ’donts’
+effective guardrails? Is the ’risk level’ appropriate
+for the patient input? Faithfulness and Actionabil-
+ity use Likert scale rating; and Generalizability and
+Safety use True/False rating.
+A.7 Safety-planning Card Retrieval
+LLM and human evaluation in Section 5 use the
+following metrics. They are Topical & Intent Rel-
+evance (TIR) measures the degree of alignment
+between the card and the user’s problem/emotional
+trajectory (Es et al., 2024). Actionability & Util-
+ity (AU) evaluates the usefulness of the steps in
+13816

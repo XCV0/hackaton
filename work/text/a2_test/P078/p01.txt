@@ -1,0 +1,71 @@
+1
+PRISM-RAG: Multimodal Hypergraph
+Retrieval-Augmented Generation for Tobacco
+Product and Legislative Policy Reasoning
+Manuel Serna-Aguilera Student Member, IEEE, Raegan Anderes, Page Dobbs,
+Khoa Luu Senior Member, IEEE
+Abstract—The disambiguation of semantically similar statutory text across jurisdictions is a retrieval problem that existing methods do
+not solve. This inter-context conflict can steer generative models toward confidently produced answers grounded in topically relevant but
+jurisdictionally incorrect, sources. Tobacco and nicotine control regulations vary across the United States, from federal, state, and
+municipal statutes and administrative codes that may share similar language. Thus, robust reasoning requires identifying which
+jurisdiction’s law governs a given product, not merely retrieving semantically similar or relevant text for a given query. This is critical
+because emerging nicotine products (e.g., e-cigarettes and oral nicotine products) may circumvent existing regulations due to product
+definitions, and governments, agencies, and public health researchers and practitioners struggle to know what products are subject to
+which regulation. State-of-the-art (SOTA) document retrieval-augmented generation (RAG) methods break down in this task, rife with
+inter-context conflict, for two reasons. First, they provide no mechanism to ground a query in a product image, and second,
+embedding-similarity or entity-based retrieval cannot distinguish a jurisdiction’s statute from another jurisdiction’s similar text. To expose
+this failure case and provide a benchmark for evaluating solutions to it, we introduce the Nicotine Product and Regulation Image-and-Text
+Surveillance Multimodal (NicoPRISM) dataset, developed by our team of computer scientists and public health researchers. NicoPRISM
+comprises 161,563 images from web and social media sources paired with seven structured captions, a curated knowledge base of
+product, health, and static legislative documents spanning 13 US exemplar jurisdictions, and 1,495 validated question-answer pairs
+organized into two benchmark tasks: policy compliance QA and product knowledge QA. To address the jurisdictional disambiguation
+problem directly, we propose PRISM-RAG, a multimodal hypergraph RAG framework that constructs a compact hypergraph over images,
+captions, and entities from heterogeneous document data without any large language model calls at index time. PRISM-RAG grounds
+every query in a product image, then routes retrieval through a jurisdiction-aware context assembly mechanism that guarantees statutory
+text from the queried jurisdiction reaches the language model by construction, independent of embedding-space topology. PRISM-RAG
+retrieves passages from the correct jurisdiction in 93.9% of policy compliance queries, a 48.6 percentage point advantage over standard
+RAG (p < 0.001), while requiring zero large language model calls at index time and a single call at query time. Across metrics measuring
+ground-truth keyword retrieval, semantic similarity, jurisdiction retrieval accuracy, compliance label accuracy, and context coverage,
+several of which expose limitations in SOTA document RAG methods, PRISM-RAG is competitive with and outperforms current SOTA
+document RAG frameworks while minimizing LLM calls at both index and query time. Data, embeddings, captions, documents,
+question-answer pairs, and source code are publicly released to support further public health research; project website at
+https://manuelserna.github.io/sch-tpami-website/. A subset of NicoPRISM is hosted on Kaggle.
+Index Terms—Retrieval-augmented generation, multimodal hypergraph learning, jurisdiction-aware retrieval, vision-language datasets,
+document-grounded question answering, public health surveillance
+✦
+1 INTRODUCTION
+Disambiguating semantically similar statutory text across jurisdic-
+tions is a retrieval problem that no existing method solves, yet it
+is central to tobacco and nicotine product surveillance. Tobacco
+and nicotine product innovation is rapidly outpacing monitoring
+efforts, and governments and public health researchers struggle to
+keep pace as products evolve to circumvent regulation. Identifying
+a nicotine or tobacco product from an image, understanding its
+flavors, marketing claims, and determining which regulations apply
+• Manuel Serna-Aguilera and Khoa Luu are with the Electrical Engineering
+& Computer Science Department, University of Arkansas, Fayetteville,
+Arkansas 72701. E-mail: mserna@uark.edu, khoaluu@uark.edu.
+• Raegan Anderes is with the Department of Health, Human Performance and
+Recreation, University of Arkansas, Fayetteville, Arkansas 72701. E-mail:
+rmandere@uark.edu.
+• Page Dobbs is with the Fay W. Boozman College of Public Health,
+University of Arkansas for Medical Sciences, Little Rock, Arkansas, 72205.
+Email: PDDobbs@uams.edu.
+in a given jurisdiction are tasks public health researchers and
+policymakers must perform regularly, yet no existing tool or dataset
+supports all three at once, at scale. This problem presents two
+compounding challenges. First, a product image must serve as the
+entry point into a document knowledge base spanning product,
+health, and legislative documents, that is, cross-modal grounding.
+Visual product attributes, e.g., “cool mint,” is described in marketing
+language, while regulatory statutes refer to legal constructs, e.g.,
+“characterizing flavor,” “oral nicotine product,” “state preemption
+clause,” whose semantics vastly differ. Second, state and municipal
+statutes frequently share similar language, thus, robust document
+reasoning requires identifying which jurisdiction’s law applies to a
+given product. Merely retrieving semantically similar text, as we
+will show in this work, is not sufficient. Bridging both challenges at
+scale, across diverse jurisdictions and product types, is the central
+challenge this work addresses.
+Existing tobacco and nicotine image datasets have made
+arXiv:2609.23769v1  [cs.CV]  20 Sep 2026

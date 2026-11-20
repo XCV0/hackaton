@@ -1,0 +1,53 @@
+Table 16: Metric sensitivity: DAP computed with three
+answer-similarity functions on the ExpertQA n=200
+subsample. Pairwise Spearman correlations are high,
+indicating that the qualitative conclusions about no-
+evidence persistence are robust to the choice of sim-
+ilarity function.
+SAS (SBERT) Cross-encoder Jaccard
+sas – 0.70 0.85
+crossencoder 0.70 – 0.82
+jaccard 0.85 0.82 –
+Table 17: Sensitivity of the matched-faithfulness anal-
+ysis to the pairing threshold. Same-dataset config-
+uration pairs from the RAGBench-27 sweep whose
+RAGAS-faithfulness means fall within ±δ; maximum
+and median within-pair gap in update following and
+conflict acknowledgment. The main text uses δ=0.01.
+Update following Conflict ack.
+δ pairs max median max median
+0.005 20 0.27 0.11 0.17 0.11
+0.01 31 0.31 0.11 0.29 0.13
+0.02 53 0.31 0.08 0.29 0.11
+Table 18: Threshold sensitivity for semantic redundancy
+detection. % rows with at least one multi-document
+cluster, semantic SBERT clustering. Conclusions are
+robust around τ =0.6.
+Dataset τ =0.5 τ =0.6 τ =0.7 τ =0.8
+HotpotQA 60.1 37.7 18.9 7.5
+TechQA 90.8 67.8 46.7 28.3
+PubMedQA 99.2 92.6 74.2 33.6
+Table 19: Prompt sensitivity. Same RAGBench rows
+under two prompts: strict (answer ONLY from context,
+abstain if missing/conflicting; main-paper default) and
+helpful (helpful, no abstention rule). The strict prompt
+produces lower base quality (more abstentions) but sub-
+stantially higher CONTRA acknowledgment rates.
+Prompt Base SAS↑ DAP↓ CS DelAll↑ Contra↑
+helpful 0.834 0.790 0.948 0.000 0.000
+strict 0.844 0.717 0.948 1.000 0.010
+Table 20: Repeated-generation sensitivity subset an-
+nounced in Section 4. We sampled n=49 ExpertQA
+queries and called Claude-Haiku with temperature 0.7
+three independent times per condition. Per-query DAP
+estimates are stable across the three samples, and the
+dataset-level aggregate moves only marginally across
+reps, supporting the use of single-generation DAP esti-
+mates for the main results.
+Quantity Value
+Queries / repeats / temperature 49 / 3 / 0.70
+Aggregate DAP across all reps 0.619 [0.605, 0.631]
+Std of per-rep aggregate DAP 0.0029
+Per-query DAP std (mean / median / P90) 0.037 / 0.035 / 0.062
+Per-query DAP range max−min (mean / P90) 0.071 / 0.113
+22348

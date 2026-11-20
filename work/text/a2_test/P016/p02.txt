@@ -1,0 +1,115 @@
+Question
+Il principio di “uniformità della natura” è un framework 
+teorico sviluppato da Aristotele.
+multilingual-retrieval
+Answer
+David Hume  penso il principio 
+di uniformità della natura 
+Answer
+Chi ha ideato il principio di 
+uniformità della natura ?
+Answer
+Baseline
+“Who conceived the principle 
+of the uniformity of nature?” 
+monolingual-retrieval
+translation RAG *question-translation
+Crosslingual RAG 
+Who conceived the 
+principle of the 
+uniformity of nature? 
+Uniformitarianis
+m or 
+Uniformitarian 
+Principle…[...] 
+D. Hume[...] principio 
+dell'uniformità della 
+natura [...] 
+Immanuel Kant e  David Hume pensarono [...] 
+Answer
+Multilingual RAG 
+󰎲
+ 󰏅
+󰏅
+󰏢
+The concept of "nature's uniformity principle" is a 
+theoretical framework developed by Aristotle.
+Immanuel Kant  thought up 
+uniformity of nature principle 
+Immanuel Kant and  David Hume thought up 
+nature’s uniformity principle 
+David Hume  thought up nature's 
+uniformity principle. 
+Answer
+Immanuel Kant  ideò [...] monolingual RAG 
+(MultiRAG)
+(CrossRAG)
+(monoRAG)
+(tRAG)
+*document-translation
+Figure 1: Retrieval-Augmented Generation (RAG) pipelines studied in our works. We explore the performances of
+different prompting pipelines to handle multilingual queries (§2).
+for handling multilingual queries as well as
+retrieval stages, as shown in Figure 1. We
+use three knowledge-intensive question-answering
+tasks properly constructed for multilingual eval-
+uation as they best represent multilingual open-
+ended question-answering tasks. We then operated
+different LLMs, chosen for proficiency in RAG
+tasks and multilingual performances, to investi-
+gate their capabilities in leveraging multilingual
+retrieved knowledge. The main contributions of
+our paper are:
+• We explore RAG beyond English by showing
+the benefits derived from extending the range
+of retrieval to multilingual contexts. Firstly,
+we show that naïve approaches such as query
+translation (tRAG) generate incorrect trans-
+lations, leading to wrong retrieval and mis-
+leading generations, for instance, Appendix
+P. Instead, Multilingual RAG (MultiRAG),
+based on multilingual retrieval and language-
+specific queries, outperforms monolingual
+RAG (monoRAG) based on monolingual re-
+trieval sources in the query language.
+• We then study the dynamics between the lan-
+guages that emerge in MultiRAG. We out-
+line the advantages of document retrieval over
+heterogeneous knowledge bases, and at the
+same time, we display the problems that some
+models have when they have to operate with
+retrieved knowledge from documents in dif-
+ferent languages. Specifically, we show that
+the LLMs used in our work are proficient at
+understanding multilingual questions but fail
+in extracting information, especially in low-
+resource languages.
+• In order to address these problems with
+MultiRAG, we introduce a document-level
+translation pipeline (CrossRAG) that allows
+the LLMs to handle knowledge-intensive
+tasks by operating with retrieved documents
+in a single language (i.e. English) but still
+providing multilingual responses.
+2 Methods
+Retrieval-augmented Generations (RAG) meth-
+ods improve performance of LLMs in knowledge-
+intensive tasks by combining questions with re-
+trieved knowledge in context (§2.1).
+Although the usefulness of RAG has been
+demonstrated, evaluations and further studies are
+primarily conducted in English, leaving other lan-
+guages unexplored. Hence, we propose a system-
+atic study of the portability of RAG pipelines to
+languages other than English (§2.2), analysing dif-
+ferent approaches to improve the effective value of
+expanding retrieval beyond English (§2.3).
+2.1 RAG Pipelines
+In traditional RAG, knowledge is acquired from
+domains D (e.g., Wikipedia or internal databases)
+and used during inference to promote accurate gen-
+eration. The pipeline is structured into phases:
+Retrieval In this phase, the relevant top-k doc-
+uments docs = {d1, . . . , dk} are retrieved, based
+on the query Q from D, using a retrieval system R.
+698

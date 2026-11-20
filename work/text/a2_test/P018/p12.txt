@@ -1,0 +1,104 @@
+Zheng Zhao, Emilio Monti, Jens Lehmann, and
+Haytham Assem. 2024. Enhancing contextual un-
+derstanding in large language models through con-
+trastive decoding. In Proceedings of the 2024 Con-
+ference of the North American Chapter of the Asso-
+ciation for Computational Linguistics: Human Lan-
+guage Technologies (Volume 1: Long Papers), pages
+4225–4237, Mexico City, Mexico. Association for
+Computational Linguistics.
+Yuxiang Zheng, Dayuan Fu, Xiangkun Hu, Xiaojie Cai,
+Lyumanshan Ye, Pengrui Lu, and Pengfei Liu. 2025.
+DeepResearcher: Scaling deep research via reinforce-
+ment learning in real-world environments. In Pro-
+ceedings of the 2025 Conference on Empirical Meth-
+ods in Natural Language Processing, pages 414–431,
+Suzhou, China. Association for Computational Lin-
+guistics.
+A DRQA Construction Details
+This section describes the procedure used to con-
+struct DRQA from DRBench. For each selected
+DRBench internal insight, we construct one DRQA
+example. Each example consists of a question,
+a ground-truth answer, and a retrieved document
+bundle. The question is derived from the in-
+ternal insight and asks for a specific enterprise-
+contextualized value, such as a percentage, dollar
+amount, date, count, or named entity. The ground-
+truth answer is the original DRBench internal in-
+sight. For example, an insight such as “Lee’s Mar-
+ket reduced food waste by 8% in Q2 2024, saving
+$1.2M” can be converted into the question “What
+food-waste reduction rate did Lee’s Market achieve
+in Q2 2024?”.
+A.1 DRBench Background
+DRBench (Abaskohi et al., 2026) is an enter-
+prise deep-research benchmark designed to evalu-
+ate agents on complex, open-ended research tasks.
+Unlike standard question answering benchmarks
+(Kwiatkowski et al., 2019; Izacard and Grave, 2021;
+Mallen et al., 2023; Zhang et al., 2024), which usu-
+ally ask for a short factual answer from a public cor-
+pus, DRBench tasks require an agent to synthesize
+information across public and private enterprise
+sources and produce a structured research report.
+Each task is grounded in an enterprise scenario that
+specifies a company context, a user persona, and
+a broad deep-research question. The retrieval en-
+vironment includes heterogeneous sources such as
+public web pages, productivity documents, cloud
+files, emails, and chat conversations.
+Each DRBench task contains supporting facts,
+referred to as insights, that are relevant to answer-
+ing the deep-research question. These insights in-
+clude both external facts that may be available on
+the public web and internal facts that are gener-
+ated as private enterprise knowledge. The internal
+facts are embedded in generated enterprise docu-
+ments using a “needle-in-a-haystack construction”.
+Specifically, a realistic document is first outlined
+in a target modality, the insight is inserted into an
+appropriate section, and the remaining content is
+filled with contextually plausible but topically ir-
+relevant text. This construction creates realistic
+enterprise files in which the answer-bearing evi-
+dence is embedded among surrounding noise.
+DRQA reuses DRBench as scenario scaffold-
+ing rather than as a long-form report-generation
+benchmark. In particular, we take the syntheti-
+cally generated internal insights from DRBench,
+which are not expected to be recoverable from the
+model’s internal memory, and convert them into
+short-answer multi-document question answering
+tasks. This allows us to isolate the intermediate
+RAG capability we study in this paper: given a
+question and a bundle of retrieved documents, the
+model must identify which document contains the
+most reliable evidence and commit to the correct
+answer.
+A.2 Document Generation Prompts
+We list the prompt templates used during DRQA
+construction. Each template is shown as a
+Python f-string as passed to the LLM. Un-
+less otherwise stated, prompts were run with
+anthropic/claude-opus-4-5 (Anthropic, 2025)
+through OpenRouter1.
+Wrong-answer generation for misinformation
+documents This prompt produces the perturbed
+value inserted into each misinformation document.
+It is called once per misinformation document be-
+fore the format-specific document generator. The
+document date is passed to the prompt so that gen-
+erated dates or time periods remain coherent with
+the document timestamp.
+Given this correct answer, generate a WRONG but plausible
+alternative.,→
+CORRECT ANSWER: {fact.answer}
+QUESTION: {fact.question}
+RULES:
+- If the answer contains a number/percentage, change it
+significantly (e.g., 8% -> 15% or 3%),→
+- If it contains a date, shift it by 6-18 months in either
+direction,→
+1https://openrouter.ai
+12

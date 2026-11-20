@@ -1,0 +1,117 @@
+Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 12857–12874
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+RankCoT: Refining Knowledge for Retrieval-Augmented Generation
+through Ranking Chain-of-Thoughts
+Mingyan Wu1, Zhenghao Liu1*, Yukun Yan2*,
+Xinze Li1, Shi Yu2, Zheni Zeng2, Yu Gu1, Ge Yu1
+1School of Computer Science and Engineering, Northeastern University, China
+2Department of Computer Science and Technology, Institute for AI, Tsinghua University, China
+Beijing National Research Center for Information Science and Technology, China
+Abstract
+Retrieval-Augmented Generation (RAG) en-
+hances the performance of Large Language
+Models (LLMs) by incorporating external
+knowledge. However, LLMs still encounter
+challenges in effectively utilizing the knowl-
+edge from retrieved documents, often being
+misled by irrelevant or noisy information. To
+address this issue, we introduce RankCoT, a
+knowledge refinement method that incorporates
+reranking signals in generating CoT-based sum-
+marization for knowledge refinement based on
+given query and all retrieval documents. During
+training, RankCoT prompts the LLM to gener-
+ate Chain-of-Thought (CoT) candidates based
+on the query and individual documents. It then
+fine-tunes the LLM to directly reproduce the
+best CoT from these candidate outputs based on
+all retrieved documents, which requires LLM
+to filter out irrelevant documents during gen-
+erating CoT-style summarization. Addition-
+ally, RankCoT incorporates a self-reflection
+mechanism that further refines the CoT out-
+puts, resulting in higher-quality training data.
+Our experiments demonstrate the effectiveness
+of RankCoT, showing its superior performance
+over other knowledge refinement models. Fur-
+ther analysis reveals that RankCoT can pro-
+vide shorter but effective refinement results,
+enabling the generator to produce more accu-
+rate answers. All code and data are available at
+https://github.com/NEUIR/RankCoT.
+1 Introduction
+Retrieval-Augmented Generation (RAG) (Lewis
+et al., 2020b; Guu et al., 2020; Ram et al., 2023;
+Shi et al., 2024) empowers Large Language Mod-
+els (LLMs) to access external knowledge, provid-
+ing up-to-date information during the generation
+process. RAG models have demonstrated their ef-
+fectiveness in mitigating the hallucination problem
+commonly encountered by LLMs (Shuster et al.,
+* indicates corresponding author.
+*Query*: where is thomas jefferson's home?
+Query
+d1~N
+1
+1. .N
+CoT1
+2
+*Label*: Monticello
+N
+LLMKR
+LLMGen
+...Thomas Jefferson‘s Monticello,
+Charlottesville, VA... Thomas Jefferson‘s
+home is inCharlottesville,...(also known 
+as Monticello).
+Thomas Jefferson's 
+home is in Charlotte-
+sville, Virginia,...(also 
+known as Monticello).
+Thomas Jefferson was born in Shadwell, 
+Virginia...So, Thomas Jefferson's home 
+is: Shadwell, Virginia...
+Thomas Jefferson was raised in his family 
+home inhadwell, Virginia for 7 years...His 
+family home in Shadwell, Virginia...
+*CoT1*-->>Thomas Jefferson's Montice-
+llo, Charlottesville, VA, 931 Thomas Je-
+ffersonPkwy (88.68 mi) Charlottesville, VA, 
+VA 22902. Thomas Jefferson's home is in 
+Charlottesville, Virginia, and its address is 
+931 Thomas Jefferson Parkway (also known 
+as Monticello).
+Query
++ CoT
+1
+CoTm
+CoT2
+After ranking and 
+summarizing
+Figure 1: Illustration of implicit ranking and summariza-
+tion in the RankCoT model. We present how knowledge
+refinement can be achieved by incorporating reranking
+into CoT-based summarization.
+2021), enhancing the performance of LLMs, such
+as GPT-4 (Achiam et al., 2023) and LLaMA (Tou-
+vron et al., 2023), in different NLP tasks.
+RAG models typically use dense retrieval meth-
+ods (Karpukhin et al., 2020; Xiong et al., 2021) to
+retrieve query-relevant documents from external
+knowledge bases. These documents, along with
+the query, are then fed as the input context into
+LLMs (Ram et al., 2023). Thriving on their in-
+context learning capabilities (Brown et al., 2020;
+Dong et al., 2023), LLMs are able to extract rele-
+vant semantics from retrieved documents and gen-
+erate appropriate responses to address the given
+query. However, the potential knowledge conflict
+between external knowledge and parameterized
+memory still poses a challenge for LLMs in gener-
+ating precise responses (Chen et al., 2024b; Asai
+et al., 2024b).
+Many RAG models focus on building mod-
+ular RAG pipelines to enhance retrieval perfor-
+mance (Gao et al., 2024; Asai et al., 2024a). These
+models primarily aim to refine the retrieved knowl-
+12857

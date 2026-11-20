@@ -1,0 +1,99 @@
+using the instruction attention score sins as a proxy
+for retrieval quality. Specifically, a higher sins sug-
+gests that the retrieved content is less relevant to the
+query. In such cases, the LLM relies more on its
+internal knowledge, which can lead to less reliable
+responses. Motivated by this insight, we define the
+confidence score p of a RAG response as:
+p = 1 − sins (6)
+5 Experiments
+5.1 Experimental Setup
+Implementation Details We use Llama-3.1-8B-
+Instruct(Grattafiori et al., 2024) as the backbone
+architecture for AttnComp, retaining L = 13 trans-
+former layers and H = 16 attention heads in the
+cross-attention layer. To train AttnComp, we con-
+struct a training dataset from the HotpotQA training
+split, consisting of 8,000 examples. Each example
+includes a question and 100 documents. For 2,000
+of these examples, all documents are irrelevant to
+the question. We train the model with the Adam
+optimizer(Kingma, 2014), using a learning rate of
+2×10−4 and a batch size of 8 for 8 epochs. The bal-
+ancing coefficient λ is set to 0.8. During inference,
+we apply the Top-P Compression algorithm with
+a threshold of p = 0.95 and ϵ = 10−2. Further
+information is provided in Appendix C.
+Datasets and Retrieval Corpus We evaluate At-
+tnComp on both single-hop and multi-hop ques-
+tion answering (QA) benchmarks. For single-hop
+QA, we use Natural Questions (NQ)(Kwiatkowski
+et al., 2019) and PopQA(Mallen et al., 2023). For
+multi-hop QA, we evaluate on HotpotQA (Yang
+et al., 2018), 2WikiMultiHopQA(Ho et al., 2020)
+and MuSiQue(Trivedi et al., 2022). Following Jin
+et al. (2024b), we use the Wikipedia dump from
+December 2018 as the retrieval corpus(Karpukhin
+et al., 2020), where articles are truncated into non-
+overlapping documents of 100 words each. For
+each query, we retrieve the top 100 documents us-
+ing the E5-base-v2 retriever (Wang et al., 2022).
+5.2 Baseline
+We evaluate AttnComp against several baseline
+methods. To ensure a fair comparison, all baselines
+employ Llama-3.1-8B-Instruct(Grattafiori et al.,
+2024) as the reader model for answer generation,
+while results using other reader models are pre-
+sented in Appendix F. The baselines are as follows:
+(1) No Retrieval: The reader model generates an-
+swers directly from the input query, without any
+retrieved context. (2) Retrieval without Compres-
+sion: All retrieved documents are concatenated
+and fed to the reader model, serving as an uncom-
+pressed baseline. For a more fine-grained compar-
+ison, we also report results using only the top-5
+and top-10 retrieved documents. (3) Compression
+Methods: We compare AttnComp against four com-
+pression methods: RECOMP-ext (Xu et al., 2023a),
+LongLLMLingua (Jiang et al., 2024), CompAct
+(Yoon et al., 2024) and Provence (Chirkova et al.,
+2025). Additionally, we also compare against At-
+tnComp without fine-tuning. Detailed descriptions
+of these baselines are provided in Appendix D.
+5.3 Main Results
+We evaluate the performance of AttnComp using
+three metrics: compression rate (Comp.), F1 score,
+and accuracy (Acc), with the results presented in
+Table 1. The results demonstrate that, even without
+fine-tuning, AttnComp consistently outperforms
+all compression baselines across all benchmarks in
+terms of both F1 score and accuracy, while achiev-
+ing a high compression rate. Moreover, after fine-
+tuning, AttnComp further extends its advantage,
+yielding an average accuracy improvement of 1.9
+points over the uncompressed baseline. Notably,
+AttnComp is the only evaluated method that en-
+hances accuracy, whereas all other compression
+baselines lead to a decrease of at least 3 points. Fur-
+thermore, our method maintains a 17x compression
+rate, which is higher than that of Provence (8.7x),
+another adaptive extractive compression method.
+6 Analysis
+We evaluate AttnComp for its adaptiveness (Sec.
+6.1), efficiency (Sec. 6.2), context-awareness (Sec.
+6.3), and robustness (Sec. 6.4). We also present an
+ablation study (Sec. 6.5) and validate the reliability
+of its confidence estimation (Sec. 6.6).
+6.1 Adaptive Compression Analysis
+To validate the adaptive compression capability of
+AttnComp, we analyze the number of documents
+retained after compression on both the HotpotQA
+and PopQA datasets. As illustrated in Figure 3,
+the quantity of retained documents varied dynami-
+cally, ranging from 0 to 23. For the multi-hop QA
+dataset HotpotQA, our model tends to preserve a
+greater number of documents, averaging 7.5 per
+query. Conversely, on the simpler PopQA dataset,
+the number of retained documents was consider-
+ably smaller, with an average of 3.7. These results
+8461

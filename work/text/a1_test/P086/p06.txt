@@ -1,0 +1,80 @@
+parameters extracted from the J–V curves analysis, i.e.: average
+and maximum values of PCE, open circuit voltage (Voc), short
+circuit current density (Jsc) and ll factor (FF). The average PCE
+improves from 16.57% in PSC-Ref to 17.53%, 17.36% and
+17.30% for the PSC-1, PSC-2 and PSC-3, respectively and drops
+to 15.74% in PSC-5. The champion device (PSC-3) achieved
+a PCE up to 18.45%, representing a +12% PCE improvement
+compared to the best PSC-Ref (PCE ¼ 17.66%). All devices
+exhibited negligible hysteresis, as revealed by their reverse J–V
+scan analysis shown in Fig. S7 and Table S1.† Moreover, the
+steady-state PCE of the devices was quite stable, as shown in
+Fig. S7b,† where the Jsc stabilized aer 120 s aer a slight initial
+increase. Fig. S7c† shows the EQE spectrum of the most per-
+formant device together with the calculated current density,
+which matches the Jsc. Fig. S8† shows the photoluminescence
+(PL) measurements of samples fabricated up to perovskite layer,
+as well as samples containing also PC70BM and TaS2 layers. The
+addition of PC70BM ETL on top of the perovskite causes PL
+quenching because of a more eﬃcient electron extraction by the
+PC70BM. Meanwhile, the PL peak is red-shied from 790 nm in
+the ETL-free sample to 793 nm. The red-shi can be attributed
+to an enhanced photon recycling due to the metallic 2D-
+akes.65,66 The incorporation of the TaS2 buﬀer layer does not
+increase further the PL quenching.
+Transient photovoltage characterization of PSC devices
+Transient photovoltage and TPC measurements were per-
+formed to explain the physical mechanism behind the perfor-
+mance enhancement reported when the TaS2 akes are
+incorporated into the PSCs as a buﬀer layer. Fig. 4a shows the
+comparison between the lifetime decay of PSC-1, PSC-3, and
+PSC-Ref. The carrier lifetimes were extracted from correspond-
+ing transient tail of TPV decay curves (Fig. S9†) that follow
+a single exponential trend.27 In particular, TPV results show that
+the TaS2 buﬀer layer reduces the charge recombination rate and
+increases the charge carrier lifetime (Fig. 4a), which is consis-
+tent with the highest Voc measured for TaS2-based devices (see
+Fig. 3a and Table 1). Furthermore, the addition of the TaS2
+buﬀer layer does not signicantly aﬀect the distribution of
+shallow defect states (see inset panels in Fig. S9†). Transient
+photocurrent experiments in charge extraction mode demon-
+strated that the TaS2 buﬀer layer increases the overall extracted
+charge density, especially in the PSC-1 device (Fig. 4b). These
+data suggest that the metallic character of the TaS2 akes (see
+Fig. S5b†) play a benecial role in the charge extraction process.
+The measurements performed in the high perturbation regime
+(0.8 duty cycle) show the absence of deep trap states in all the
+tested samples (Fig. S10†).
+The dri mobility of electrons/holes was probed using
+charge extraction by linearly increasing voltage (photo-CELIV)
+under various light pulse delay points. More in detail, the
+dri mobility was derived from the extracted charge repre-
+sented by the part of the transient superimposed over the
+displacement current level (Fig. S11†). The mobility (m) can be
+derived according to the equation:27
+m ¼ L 2Atmax2
+2
+664 1
+6:2
+/C18
+1 þ 0:002 DI I0
+/C19 þ 1/C18
+1 þ 0:12 DI I0
+/C19
+3
+775
+2
+;
+Fig. 3 Photovoltaic performance of the reference PSC (PSC-Ref) and the PSCs incorporating TaS2 ﬂakes as a buﬀer layer (PSC-X). (a) Box chart of
+PCE performance for PSC-Ref, PSC-1, PSC-2 PSC-3 and PSC-5, and (b) the J–V curves measured for the champion devices for each PSC
+conﬁguration.
+Table 1 Photovoltaic parameters of the investigated PSCs extracted from their corresponding J–V curves. The errors are calculated from device
+statistics. The values in the brackets correspond to the champion devices
+PCE (%) Voc (V) Jsc (mA cm/C01)FF(%)
+PSC-Ref 16.57 /C6 0.43 (17.66) 1.067 /C6 0.022 (1.081) 20.71 /C6 0.58 (20.84) 74.16 /C6 1.66 (78.37)
+PSC-1 17.53 /C6 0.50 (18.28) 1.077 /C6 0.021 (1.070) 21.25 /C6 0.43 (21.56) 75.48 /C6 2.45 (79.22)
+PSC-2 17.36 /C6 0.12 (18.10) 1.088 /C6 0.020 (1.096) 21.41 /C6 0.52 (21.98) 73.87 /C6 1.87 (75.09)
+PSC-3 17.30 /C6 0.60 (18.45) 1.068 /C6 0.020 (1.080) 21.29 /C6 0.45 (21.45) 75.07 /C6 2.20 (79.65)
+PSC-5 15.74 /C6 0.50 (16.06) 1.048 /C6 0.018 (1.036) 20.01 /C6 0.42 (20.15) 74.29 /C6 1.58 (76.86)
+© 2021 The Author(s). Published by the Royal Society of Chemistry Nanoscale Adv.,2021,3,3124–3135 | 3129
+Paper Nanoscale Advances

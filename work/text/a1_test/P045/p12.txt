@@ -1,0 +1,106 @@
+of the passivation layer, by varying the rear surface recombina-
+tion velocity parameter (SRV) regarding a reference solar cell. To
+accurately simulate the VOC gain obtained with the PPS architec-
+ture, SRV value decrease from 1 /C2 107 to 2 /C2 104 cm s/C01 was
+required which ultimately led to a 1.2 mA cm/C02 JSC gain. The
+improved charge carrier collection and the bandgap energy value
+discrepancy between devices contribute to the observed disparity
+between simulated and experimental values. Finally, it is impor-
+tant to note the large standard deviation in all ﬁgures of merit in
+the Ref device, in comparison to the PPS one, which has been
+attributed to the shunting in several Ref solar cells that has been
+mitigated with the PPS architecture.[22] Thus, a more effective
+comparison might be done through the JSC value between the
+best cells for each device in which shunting is not evident,
+Figure 10b. The JSC gain for the best PPS with respect to the best
+Ref cell is 2.4 mA cm/C02, closer to the simulated difference of
+1.4 mA cm/C02. Besides the observed JSC improvement, there is
+a 23 mV increase in the average VOC value for the PPS device
+and a 31 mV improvement if the best cells are compared, that
+is, without a Ref cell demonstrating a shunting effect. The
+VOC enhancements further suggest that no Au has diffused to
+the absorber and that an effective passivation of active recombi-
+nation mechanisms in the PPS device is present.[26,27]
+Considering the difference in the measured Eg values for both
+devices, a better indicator of the passivation performance of
+the new architecture is the Eg–VOC loss parameter. The Ref
+device presents a Eg–VOC value of 728 mV and the PPS device
+of 692 mV, with the difference between those being 36 mV, fur-
+ther highlighting the passivation improvement through the addi-
+tion of the novel architecture; yet it represents a moderate
+increase, considering that VOC improvements above 100 mV
+have been obtained in the past, likely meaning that this structure
+still needs optimization in the passivation part as well, for exam-
+ple, by increasing the passivation area from 77% to values above
+90%.[20,27] The effective NPs introduction within the dielectric
+passivation scheme with improved JSC and VOC values in com-
+parison to a reference shows the potential of using plasmonic
+architectures to further enhance the performance of ultrathin
+devices and is a result of the combined passivation and light-
+trapping strategies. In addition, this approach is transversal
+for several solar cell technologies, in which the use of passivation
+and light-trapping approaches has been explored.[16,37,97–101]
+3. Conclusion
+The obtained results show the viability of coupling plasmonic
+scattering with rear dielectric passivation schemes to shorten
+the efﬁciency gap between thin and ultrathin CIGS-based devi-
+ces. Through the optimization of a microﬂuidic procedure to
+deposit individualized 105 nm colloidal Au NPs, and a nanoli-
+thography process to encapsulate these on an Al2O3 dielectric
+scheme, a plasmonic and passivated substrate was developed that
+allowed for optical and electrical improvements. A 3.7 mA cm/C02
+enhancement of the JSC value was obtained for the plasmonic
+and passivated substrate in comparison to a reference device,
+notably without degradation of the VOC value, for which even
+a 23 mV improvement was measured. The improved optoelec-
+tronic performance was attributed to an enhanced rear
+reﬂectance and scattering, as well as, an improved charge carrier
+collection and rear surface recombination velocity value decrease,
+shown through optical and electrical simulations. Overall,
+an almost 2% light-to-power conversion efﬁciency value enhance-
+ment was obtained for the developed plasmonic and
+passivated architecture.
+4. Experimental Section
+Nanoparticles Solution Preparation: The synthesis of Au NP seeds
+followed the Turkevitch method.[71] A 200.5 mL aqueous solution of chlor-
+oauric acid (HAuCl4) with a 0.25 mM concentration was heated to its boil-
+ing point. Upon boiling, a 20.1 mL solution of a previously warmed 40 mM
+sodium citrate tribasic dihydrate was quickly added. The entire process
+involved continuous heating and magnetic stirring. Instantly, the solution
+became transparent, and in a period between 15 to 20 min, it gradually
+transformed into a red wine color, indicating completion. The Au NP seeds
+were subsequently grown using a hydroxylamine seeding method.[67]
+A solution was prepared by combining 0.67 mL of an 80 mM aqueous
+hydroxylamine–hydrochloride solution with 60.15 mL of an aqueous
+0.25 mM HAuCl4 solution. After 15 min of magnetic stirring, 0.38 mL of
+seed solution was added to grow the NPs to the nominal target between
+100 and 120 nm. The solution was kept under constant stirring until a
+cloudy brown color was achieved. The grown Au NPs were stabilized
+by adding 0.9 mL of a 40 mM aqueous sodium citrate solution. The
+NPs were washed through centrifugation at 3500 rpm for 15 min and
+redispersed in milli-q water.
+PDMS Device Preparation: To produce microﬂuidic devices, the
+development of a Si device master mold was ﬁrst required. The device
+was designed to ensure a uniform solution injection and avoid bubble
+formation, by implementing multiple uniformly spaced microﬂuidic chan-
+nels, as shown in Figure 11.
+For the master mold, a Si wafer was coated with 2.2 μm-thick AZ P4110
+resist coating through spin coating in a Karl Suss Optical Track system.
+Afterward, the device design was imprinted onto the coated Si wafer using
+a Heidelberg DWL 2000. Subsequently, the regions exposed to the design
+underwent development with AZ400K. To etch the Si wafer into the desired
+structure, a RIE process using a SF6 and C4F8 plasma chemistry with a
+SPTS Pegasus system was performed. For the device production, a mixture
+of PDMS and a crosslinker, Sylgard 184 elastomer curing agent, was pre-
+pared in a 10:1 ratio, resulting in a uniform gel. The PDMS gel was then
+poured into the Si master mold. To ensure consistent gel coverage, the Si
+master mold and PDMS system were subjected to a vacuum environment
+within a desiccator. The Si master mold and PDMS assembly underwent
+curing at 65 °C for 2 h, following which the device was separated from the
+Si master mold.
+Figure 11. AutoCAD design of the developed microﬂuidic reservoir with a
+deposition area of 1.9 /C2 1.7 cm2.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2024, 8, 2400147 2400147 (12 of 15) © 2024 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2024, 11, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400147, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

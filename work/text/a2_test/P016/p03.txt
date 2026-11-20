@@ -1,0 +1,98 @@
+RAG Prompt Template
+Please answer the question by following the
+provided instructions.
+#Instructions:
+Answer the question as clearly as possible
+using the provided reference evidence and
+follow the format ’Answer:’
+#Reference Evidence:
+docs = top-k{hQ,C }, C ∈ D
+#Question:Q
+Table 1: RAG instructions (prompt) for the model to
+elicit they to consider the reference evidence (docs) for
+generating an answer to a given question (Q).
+During retrieval with R, the question Q and docu-
+ments in D are encoded, forming hQ = R(Q) ∈
+Rn for query and hD = R(D) ∈ Rn for docu-
+ments. Then, the similarity ⟨hQ, hD⟩ is used to
+select a collection C from D, consisting of docu-
+ments that best match the query. Usually, to im-
+prove retrieval quality, the top most relevant doc-
+uments are filtered and ordered using a re-ranked
+model obtaining docs. Then, they are encoded to-
+gether with the query in hQ,C = R(Q, C) ∈ R.
+This allows for hQ,C representations, which cap-
+ture similarities between the query and the docu-
+ments by improving quality and considering simi-
+larity, specific contexts, and semantic relevance to
+docs = top-k{hQ,C }.
+The retriever generally uses a ranker based on ar-
+chitectures trained on specific information retrieval
+datasets and a customised reranker. Since our work
+focuses on using such systems in a multilingual set-
+ting, we operate via retriever and re-ranker systems
+provided by Cohere detailed in §3.2.
+Inference The second phase consists of aug-
+menting the LLMs’ capabilities in answering a
+given query Q using knowledge delivered from
+reference evidence, i.e. the retrieved relevant
+documents. The LLM generates the answer A
+from LLM(Q, docs). Here, using a well-defined
+prompt template to get the LLM to consider re-
+trieved documents a source of knowledge is rec-
+ommended. Following the earlier RAG heuristics,
+we propose a standard template that instructs the
+model ("#Instructions") to consider "#Reference
+Evidence" in retrieved documents for delivering
+the final answer A. An example prompt is reported
+in Table 1.
+2.2 RAG beyond English
+Monolingual RAG (monoRAG) In general RAG
+pipelines (§2.1), it is assumed that the query Q and
+A are in the same language, which we refer to as
+LSL. Consequently, the docs retrieved from DSL
+are in LSL. Hence, in this setting, we instruct
+the LLM using the template in Table 1, docs =
+top-k{hQSL,C } where C ∈ DSL and QSL is in
+LSL. For the rest of the paper, we refer to this
+setting as monolingual RAG (monoRAG).
+Translation RAG (tRAG) Since the knowledge
+sources from which retrieval is made are generally
+richer in English (Sharma et al., 2024), a practical
+way to solve RAG beyond English is to translate
+the QSL to English ˜QEn using a translation sys-
+tem and perform the retrieval from DEn. Then,
+we instruct the LLM using the same setting of
+monoRAG, but in contrast, the retrieved documents
+are docs = top-k{h ˜QEn,C } where C ∈ DEn.
+Although these strategies can solve the language
+barrier by allowing non-English queries to operate,
+the scope of retrieval is limited to only one domain,
+namely DEn for tRAG and DSL for monoRAG. In
+addition to the limited scope, the translation also
+affects retrieval (for instance, see the example in
+Appendix P).
+Multilingual RAG (MultiRAG) Hence, we ex-
+tend the scope of the retrieval to many languages.
+We use a retriever whose database consists of⋃
+Di∈L, i.e. the union across all resources in all
+available languages. As in the monoRAG, we in-
+struct the LLM to consider the retrieved docu-
+ments using the template in Table 1. In contrast
+to the previous approaches we use the docs =
+top-k{hQSL,C }, where C ∈ ⋃ Di∈L and QSL.
+2.3 Cross-lingual RAG
+Multilingual retrieval and prompting strategies
+broaden the scope of retrieval. As a result, re-
+trieved documents can be in any language in D.
+Although this is a plus for retrieval, it can de-
+grade the LLM’s responses, for example, generat-
+ing answers in the wrong language (see example in
+Appendix R) because it must combine in-context
+documents in different languages.
+To solve this issue, we propose Cross-lingual
+RAG (CrossRAG), in which the documents are
+retrieved as in MultiRAG but are then translated
+by an external tool T and delivered at inference
+time in English. This approach improves the accu-
+699

@@ -1,0 +1,101 @@
+plied to the task of search to explore alternative
+paths (Yao et al., 2023; Hao et al., 2023).
+Our work builds on these advances in reasoning
+while integrating search within generation.
+3 Retrieving while Generating
+We present a method of interleaving unconstrained
+text generation with the generation of retrieval keys
+that point into a retrieval corpus. For example,
+Figure 1 shows generations that interleave uncon-
+strained ‘thoughts’ with evidence sentences drawn
+from a predeﬁned corpus for a multi-hop question
+answering task. Later in this section we’ll intro-
+duce a number of different choices of retrieval key
+as well as a variety of tasks that beneﬁt from in-
+terleaved generation and retrieval. However, for
+now we simply deﬁne a retrieval key as a sequence
+of tokens that exists in a pre-deﬁned ﬁnite set of
+sequences K where every entry is associated with
+one or more documents in an underlying corpus C.
+Formally, we focus on the sequence to sequence
+transduction task where we predict an output se-
+quence y = [y0,...,yn] conditioned on an in-
+put sequence x = [x0,...,xm] and we mark the
+start and end of a retrieval key in y with special
+markers « and ». If we let Q(y) be a function
+that returns all retrieval key spans from y (i.e.
+(i,j) ∈ Q([y0,...,«,yi,...,yj»,...,yn])) then
+we can update the standard autoregressive language
+modeling probability
+Pθ(y|x) =
+|y|∏
+i=0
+P (yi|y0,...,yi−1, x,θ) (1)
+to include the indicator function 1K(q) that maps
+elements of K onto one and otherwise to zero.
+Pθ(y|, x,K) = 1 Z ∏ q∈Q(y) 1K(q)
+×
+n∏
+i=0
+P (yi|y0,...,yi−1, x,θ)
+(2)
+where Z is a normalizing term that accounts for
+the probability mass assigned by Equation 1 to dis-
+allowed sequences. In practice, we do not need to
+compute Z and can sample from Equation 2 in the
+usual way, one token at a time, by simply zeroing
+out the probability of disallowed continuations as
+presented in Section 3.1.
+3.1 Constrained Beam Decoding
+We opt for Beam Search (Graves, 2012) as our de-
+coding strategy to simulate a heuristic Best-ﬁrst
+search. Here, the action or next node space is the
+entire vocab. At each time step, the LLM estimates
+the value of each node (token) given the paths ex-
+plored so far and adds them to the ﬁxed-size queue
+(Beam). Figure 2 visualizes how the beam pro-
+gresses over decoding timesteps. Unlike regular
+beam decoding where the top decoded sequences
+have only small variations, constraints impose spar-
+sity over the search space resulting in diverse
+beams. In Section 3.3, we discuss how beam can
+hurt unconstrained generation and suggest hybrid
+decoding strategy as workarounds. Constrained
+decoding can also gain from more sophisticated al-
+gorithms such as value-based decoding (Ren et al.,
+2017), look-ahead scoring and planning (Lu et al.,
+2021; Hao et al., 2023).
+3.2 Efﬁcient Constraints via the FM-Index
+During decoding, model outputs are constrained to
+the corpus by masking out any continuation not in
+the corpus. To compute the continuations of a se-
+quence, we use FM-index (Ferragina and Manzini,
+2000), a compressed sufﬁx array augmented with
+additional data structures to support fast substring
+search operations. Unlike a Trie structure, it is also
+highly space economical due to the compression.
+Given a preﬁx, FM-Index can efﬁciently compute
+the next allowed tokens in O(Vocab), independent
+of the corpus-size. Below is the pseudo code for
+the modiﬁed decoding process.
+1 def constrain(input_prefix):
+2 # Fetch continuations for prefix
+3 allowed_tokens = fm_index.
+get_continuations(input_prefix)
+4 # Get next token probabilities
+5 logprobs = LLM.logprobs(input_prefix)
+6 # Disallowed tokens are set to -inf
+7 for i in logprobs:
+8 token = vocab[i]
+9 if token not in allowed_tokens:
+10 logprobs[i] -= np.inf
+11 return logprobs
+3.3 Adaptive Beam Size
+In Section 5.2 we introduce some tasks that in-
+terleave constrained and unconstrained generation.
+The constrained generations must be precise—to
+match the target retrieval key exactly. The uncon-
+strained generations are generally more robust to
+small variations in surface form—these only need
+to convey the correct information to a reader, or to
+8889

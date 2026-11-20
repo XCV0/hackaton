@@ -1,0 +1,25 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D009,R001,DV2,MS1,M2,PCE,17.13,%,champion,,,,,17.13,%,17.13,%,primary,,4,Photovoltaic performance and device stability,,Fig. 3b,delivered a high PCE of 17.13%,extracted,,
+D009,R002,DV2,MS1,M2,Voc,0.99,V,champion,,,,,0.99,V,0.99,V,primary,,4,Photovoltaic performance and device stability,,Fig. 3b,open-circuit voltage (Voc) of 0.99 V,extracted,,
+D009,R003,DV2,MS1,M2,Jsc,23.07,mA/cm2,champion,,,,,23.07,mA/cm2,23.07,mA/cm2,primary,,4,Photovoltaic performance and device stability,,Fig. 3b,a short-circuit current density (Jsc) of 23.07 mA cm,extracted,,
+D009,R004,DV2,MS1,M2,FF,74.83,%,champion,,,,,74.83,%,74.83,%,primary,,4,Photovoltaic performance and device stability,,Fig. 3b,a fill factor (FF) of 74.83%,extracted,,
+D009,R005,DV1,MS1,M1,PCE,13.49,%,champion,,,,,13.49,%,13.49,%,primary,,4,Photovoltaic performance and device stability,,Fig. 3b,modest PCE of 13.49%,extracted,,best Cs0 device
+D009,R006,DV2,MS2,M2,stabilized_PCE,17.04,%,,,,,,17.04,%,17.04,%,primary,,4,Photovoltaic performance and device stability,,Fig. 3b inset,stabilized PCE of 17.04%,extracted,,
+D009,R007,DV1,MS2,M1,stabilized_PCE,13.31,%,,,,,,13.31,%,13.31,%,primary,,4,Photovoltaic performance and device stability,,Fig. 3b inset,(13.31%) of the Cs0 device,extracted,,
+D009,R008,DV2,MS3,M2,Jsc_EQE,22.34,mA/cm2,,,,,,22.34,mA/cm2,22.34,mA/cm2,primary,,4,Photovoltaic performance and device stability,,Fig. 3c,integrated Jsc of 22.34 mA cm,extracted,,"расхождение с Jsc из J-V 3.2 % (в Reporting Summary указано 3.1 %), в пределах 5 %"
+D009,R009,DV2,MS1,M2,PCE,16.57,%,mean,0.34,20,,,16.57,%,16.57,%,primary,,4,Photovoltaic performance and device stability,,Fig. 3d,average PCE of 16.57,extracted,,20 devices for each condition from different batches
+D009,R010,DV2,MS4,M2,PCE,16.65,%,champion,,,,,16.65,%,16.65,%,primary,,4,Photovoltaic performance and device stability,,,certified PCE of 16.65% from Shanghai Institute,extracted,,certified by SIMIT
+D009,R011,DV2,MS1,M2,HI,2.95,%,mean,,,,,2.95,%,2.95,%,primary,,5,Photovoltaic performance and device stability,,Supplementary Fig. 16,average hysteresis index of 2.95%,extracted,,"""target devices""; по Reporting Summary — статистика по 18 приборам control и target"
+D009,R012,DV2,MS5,M2,retained_PCE,93.3,%,,,,6000,h,93.3,%,93.3,%,primary,,5,Photovoltaic performance and device stability,,Fig. 3f,retaining 93.3% of the initial PCE,extracted,,
+D009,R013,DV2,MS6,M2,retained_PCE,92.0,%,,,,1500,h,92.0,%,92.0,%,primary,,5,Photovoltaic performance and device stability,,Fig. 3g,"maintained 92.0% of the original PCE after 1,500 h",extracted,,
+D009,R014,DV1,MS5,M1,PCE,12.73,%,,,,0,h,12.73,%,12.73,%,primary,,5,,,Fig. 3f caption,initial PCEs: 12.73% for Cs0 and 16.39% for Cs5,extracted,,начальная PCE в shelf-тесте
+D009,R015,DV2,MS5,M2,PCE,16.39,%,,,,0,h,16.39,%,16.39,%,primary,,5,,,Fig. 3f caption,initial PCEs: 12.73% for Cs0 and 16.39% for Cs5,extracted,,начальная PCE в shelf-тесте
+D009,R016,DV1,MS6,M1,PCE,12.55,%,,,,0,h,12.55,%,12.55,%,primary,,5,,,Fig. 3g caption,initial PCEs: 12.55% for Cs0 and 17.09% for Cs5,extracted,,начальная PCE в operational-тесте
+D009,R017,DV2,MS6,M2,PCE,17.09,%,,,,0,h,17.09,%,17.09,%,primary,,5,,,Fig. 3g caption,initial PCEs: 12.55% for Cs0 and 17.09% for Cs5,extracted,,начальная PCE в operational-тесте
+D009,R018,DV2,MS1,M2,PCE,17.13,%,champion,,,,,17.13,%,17.13,%,primary,,1,Abstract,,,power conversion efficiency of 17.13% (certified 16.65%),extracted,R001,
+D009,R019,DV2,MS4,M2,PCE,16.65,%,champion,,,,,16.65,%,16.65,%,primary,,1,Abstract,,,power conversion efficiency of 17.13% (certified 16.65%),extracted,R010,
+D009,R020,DV2,MS1,M2,PCE,17.13,%,champion,,,,,17.13,%,17.13,%,primary,,2,Introduction,,,PCE of 17.13% (certified 16.65%),extracted,R001,
+D009,R021,DV2,MS4,M2,PCE,16.65,%,champion,,,,,16.65,%,16.65,%,primary,,2,Introduction,,,PCE of 17.13% (certified 16.65%),extracted,R010,
+D009,R022,DV2,MS5,M2,retained_PCE,93.3,%,,,,6000,h,93.3,%,93.3,%,primary,,2,Introduction,,,retaining 93.3% and 92.0%,extracted,R012,
+D009,R023,DV2,MS6,M2,retained_PCE,92.0,%,,,,1500,h,92.0,%,92.0,%,primary,,2,Introduction,,,retaining 93.3% and 92.0%,extracted,R013,
+D009,R024,,,,PCE,15,%,,,,,,15,%,15,%,cited,[11;12],2,Introduction,,,with 15% recently being,extracted,,"PCE оловянных перовскитных ячеек ""15% recently being surpassed"" (ссылки 11, 12); значение пороговое"

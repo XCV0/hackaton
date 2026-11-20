@@ -1,0 +1,140 @@
+GPT-4
+Private corpus
+𝑚𝑚 topics (public)
+Topic 1 Topic 2 Topic 𝑚𝑚
+Clustering
+Query
+Target domain
+description
+1.1 Topic-Guided Clustering (Offline)
+1.2 Two-stage Retrieval via Topics (Online)
+Public topic retrieval
+Assign to the most similar topic
+Topic 1 Topic 2 Topic 𝑚𝑚
+Localized private retrieval
+TOP-K private 
+documents ℛfinal
+The most 
+relevant topics
+The coarse
+candidate set
+2. Adaptive RAG Triggering via Isotonic Cross-Layer Trajectory Fitting
+Probability
+Query & Current tokens 𝑦𝑦1:𝑡𝑡−1
+𝒮𝒮(𝑥𝑥*) > 𝜃𝜃reject
+Trigger private generation
+Yes
+Output 𝑥𝑥∗directly as next token
+(No private access) 
+Probability
+𝛼𝛼 � 𝑝𝑝𝑚𝑚𝑚𝑚𝑚𝑚
+𝑝𝑝𝑚𝑚𝑚𝑚𝑚𝑚
+Public LLM Candidate tokens
+𝒱𝒱ℎ𝑒𝑒𝑚𝑚𝑒𝑒
+Probability
+Layers Layers
+𝑥𝑥∗
+𝑥𝑥∗
+Confident token Unconfident token
+Logit lens
+Cross-Layer probability trajectory analysis
+No
+Confidence scoring via Isotonic fitting 
+&
+3. Private-Token Budget Compression via DP Contrastive Decoding
+&&
+&&
+&
+Private document Query Current tokens
+Public LLM
+Probability distributionPrompts
+𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝
+𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝 2
+𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝 1
+𝑙𝑙𝑙𝑙𝑙𝑙 𝑙𝑙𝑙𝑙𝑙𝑙−
+𝑙𝑙𝑙𝑙𝑙𝑙 𝑙𝑙𝑙𝑙𝑙𝑙−
+Context-aware Contrastive Decoding
+𝐶𝐶
+−𝐶𝐶
+𝐶𝐶
+−𝐶𝐶
+Clip
+⊕
+Aggregate, average, and add to
+Clip
+𝑙𝑙𝑙𝑙𝑙𝑙
+Next token
+DP Sampling via the 
+Exponential Mechanism
+𝒱𝒱ℎ𝑒𝑒𝑚𝑚𝑒𝑒
+Figure 1: Overview of the proposed SparsePay-RAG framework, which leverages public priors to reduce privacy
+budget consumption across three orthogonal dimensions, including private retrieval scope, private access frequency,
+and per-access privacy cost.
+The resulting noisy size vector ˜C = {˜c1, . . . , ˜cm}
+is the only private statistic released offline. (3) Two-
+stage retrieval via topics. Given a query q, we
+encode it as E(q) and rank the public topics by
+sim(E(q), E(tj )) to obtain an index ordering π.
+We cumulatively sum the published sizes ˜cπ(k)
+along this ordering, taking the union of all clus-
+ters encountered before the cumulative size first
+reaches a preset candidate pool size Ncoarse, where
+Ncoarse is typically larger than the final retrieval
+count K. This forms the coarse candidate set:
+Ccand =
+⋃{
+Cπ(k)
+⏐⏐⏐ k−1∑
+k′=1
+˜cπ(k′) < Ncoarse
+}
+.
+We then compute similarities within Ccand and re-
+turn the top-K samples as the final retrieval result:
+Rfinal = top- K
+di ∈ Ccand
+sim(E(q), E(di)).
+To rigorously guarantee a worst-case privacy
+bound, we enforce a strict maximum allowed ac-
+cess count Nmax on each cluster. If a matched
+cluster has reached this limit, we safely skip it and
+continue collecting candidates from subsequent rel-
+evant clusters.
+Leveraging the parallel composition property of
+zCDP (Bun and Steinke, 2016), our disjoint parti-
+tioning ensures that privacy costs do not accumu-
+late across clusters. Consequently, the total privacy
+cost is governed by the maximum access frequency
+of any single cluster rather than the total query
+count. Furthermore, this two-stage retrieval design
+significantly reduces computational overhead by
+restricting similarity computations against private
+samples to the candidate subset.
+3.3 Adaptive RAG Triggering via Isotonic
+Cross-Layer Trajectory Fitting
+This module extracts the public model’s cross-layer
+probability trajectory at each generation step, and
+accordingly adaptively determines whether to trig-
+ger private data access, thereby restricting the re-
+trieval frequency to only those steps that genuinely
+require external knowledge.
+Existing DP-RAG indiscriminately accesses pri-
+vate data at every generation step, leading to rapid
+privacy budget depletion. However, most tokens
+do not require external knowledge, as the public
+model can confidently predict them independently.
+To minimize unnecessary access without incurring
+additional privacy costs, we dynamically assess the
+model’s confidence using its internal representa-
+tions. Specifically, we apply the logit lens (nos-
+talgebraist, 2020; Belrose et al., 2023) to extract
+the cross-layer probability trajectory of candidate
+tokens. A confident prediction naturally exhibits
+an ideal trajectory that monotonically increases
+and stabilizes at a high probability in the final lay-
+ers (Geva et al., 2022). To capture this pattern, we
+employ Isotonic Regression (Brunk, 1955; Robert-
+son et al., 1988) to quantify the deviation of the
+actual trajectory from this ideal monotonic trajec-
+tory. We utilize this measure to sparsely trigger
+45296

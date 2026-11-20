@@ -1,0 +1,88 @@
+Benchmark Content Type Multi Document Domain
+L-Eval (An et al., 2023) Text ✗ Multi-domain
+LongBench (Bai et al., 2023) Text ✓ Wikipedia
+Marathon (Zhang et al., 2023) Text ✗ Multi-domain
+LooGLE (Li et al., 2023) Text ✗ Multi-domain
+MPDocVQA (Tito et al., 2023) Text, Tables, Charts ✗ Multi-domain
+∞Bench (Zhang et al., 2024) Text ✗ Multi-domain
+Ruler (Hsieh et al., 2024) Text ✗ Wikipedia
+Loong (Wang et al., 2024c) Text ✓ Multi-domain
+UDA (Hui et al., 2024) Text, Tables ✗ Multi-domain
+NarrativeQA (Koˇcisk`y et al., 2018) Text ✗ Movies and Shows
+MMLONGBENCH-DOC (Ma et al., 2024) Text, Tables, Charts, Slides ✗ Multi-domain
+VisDoMBench (Ours) Text, Tables, Charts, Slides ✓ Multi-domain
+Table 1: Comparison of long context document QA benchmarks with VisDoMBench.
+Dataset Domain Content Type Queries Docs Avg. Question Length Avg. Doc Length (Pages) Avg. Docs per Query Avg. Pages per Query
+PaperTab Wikipedia Tables, Text 377 297 29.44 ±6.3 10.55 ±6.3 10.82 ±4.4 113.10 ±50.4
+FetaTab Scientific Papers Tables 350 300 12.96 ±4.1 15.77 ±23.9 7.77 ±3.1 124.33 ±83.0
+SciGraphQA Scientific Papers Charts 407 319 18.05 ±1.9 22.75 ±29.1 5.91 ±2.0 129.71 ±81.7
+SPIQA Scientific Papers Tables, Charts 586 117 16.06 ±6.6 14.03 ±7.9 9.51 ±3.5 135.58 ±55.2
+SlideVQA Presentation Decks Slides 551 244 22.39 ±7.8 20.00 ±0.0 6.99 ±2.0 139.71 ±40.6
+VisDoMBench Combined Tables, Charts, Slides, Text 2271 1277 19.11 ±5.4 16.43 ±14.5 8.36 ±3.0 128.69 ±62.7
+Table 2: Summary of data splits included in VisDoMBench.
+pers, and SPIQA(Pramanick et al., 2024), a chart
+and table QA dataset system sourced from (Dasigi
+et al., 2021). Additionally, we included SlideVQA
+(Tanaka et al., 2023), a multi-image, multi-hop QA
+dataset centered on presentation slide decks.
+Data Sampling: Sourced QA pairs need to be
+sampled to retain high quality samples. To main-
+tain the integrity and uniqueness of our benchmark,
+we meticulously removed overlapping samples be-
+tween PaperTab and SPIQA and implemented rig-
+orous de-duplication of QA pairs across all in-
+cluded datasets. Further, we also perform question-
+level de-duplication to ensure similar questions are
+not repeated across different document collections.
+This ensures that QA systems are not rewarded
+disproportionately for better handling particular
+question types. For SciGraphQA, we filter out
+trivial questions related to layout and document
+metadata. From the remaining questions, we ran-
+domly sample 500 questions from the top 50%-ile
+of questions by length. The rationale for filter-
+ing on answer length filter is based on the heuris-
+tic that longer questions tend to be more specific,
+making them better suited for multi-document QA
+tasks, where specificity is crucial. For SlideVQA,
+we exclude single-hop questions, as they are gen-
+erally non-specific and may have more than one
+correct answer from the document collection. We
+heuristically observe that multi-hop questions in
+this dataset are more likely to reference content
+from specific documents, thus making them a bet-
+ter fit for multi-document setups. SciGraphQA and
+SPIQA contain questions specific to charts or ta-
+bles extracted from scientific papers. We use the
+ArXiv API2 to extract full document PDFs.
+Document Augmentation: To simulate realistic
+multi-document settings, we augment each ques-
+tion across all data splits with varying number of
+distracting documents, (|Di = M |). We intend
+to keep the expected number of total pages per
+query between 50 to 200 to ensure that there is
+sufficient distracting content while maintaining the
+practical feasibility of contemporary long-context
+models. Hence, based on the average number of
+pages per document Pavg, we randomly sample the
+number of distracting documents l to lie between
+the range [⌊ 50 Pavg ⌋, ⌊ 200 Pavg ⌋]. Randomly sampling l
+ensures that each benchmark instance contains a di-
+verse degree of multi-document evidence, allowing
+for a more thorough evaluation of the QA model’s
+retrieval and reasoning capabilities.
+Query Augmentation: To address the chal-
+lenge of ambiguous questions in datasets such
+as SciGraphQA, and PaperTab, we implement a
+query augmentation procedure to create a one-to-
+one mapping between a given question and the
+document(s) that exclusively answer it. Given an
+original question and the document containing an-
+swer, we utilize GPT-4o to generate more specific
+variations of the question, ensuring that the gen-
+erated question can only be answered by the cor-
+responding document. To maintain consistency,
+we constrain the LLM such that the answer to the
+generated question must match the provided an-
+2https://info.arxiv.org/help/api/index.html
+6091

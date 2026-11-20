@@ -1,0 +1,73 @@
+Retrieval-Augmented Generation Meets Data-Driven Tabula Rasa Approach for Temporal Knowledge Graph Forecasting30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4(uses both) 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-4 (Single Entity) 0.804 0.831 0.848 0.740 0.791 0.831 0.470 0.576 0.736 0.506 0.606 0.713 0.460 0.587 0.690
+sLA-tKGF W/GPT-4 (Entity Pair) 0.854 0.881 0.890 0.784 0.833 0.883 0.507 0.616 0.776 0.547 0.650 0.769 0.482 0.616 0.733
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 (uses both) 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-4 (Single Entity) 0.754 0.786 0.825 0.709 0.758 0.823 0.427 0.543 0.684 0.464 0.585 0.702 0.414 0.551 0.659
+sLA-tKGF W/GPT-4 (Entity Pair) 0.810 0.836 0.875 0.756 0.797 0.867 0.440 0.559 0.718 0.487 0.616 0.743 0.433 0.581 0.702
+Table 14: The table presents experimental results from a study on the impact of retrieved fact types on tKG forecasting
+performance. Two types of historical facts, ‘Single-Subject Entity’ and ‘Subject Entity-Relation Pair’, were evaluated for their
+impact on forecasting accuracy. Results indicated that the performance of the sLA-tKGF W/GPT-4 framework varies based on
+the dataset and the type of historical fact used. In essence, the research highlights the importance of including both historical
+fact types in the augmented prompts for optimal performance in the forecasting task across various datasets.
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 (𝑢𝑛𝑖𝑑𝑖𝑟𝑒𝑐𝑡𝑖𝑜𝑛𝑎𝑙) 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-4 (𝑏𝑖𝑑𝑖𝑟𝑒𝑐𝑡𝑖𝑜𝑛𝑎𝑙) 0.971 1.000 1.00 0.920 0.969 1.000 0.585 0.712 0.905 0.628 0.754 0.881 0.538 0.707 0.844
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 (𝑢𝑛𝑖𝑑𝑖𝑟𝑒𝑐𝑡𝑖𝑜𝑛𝑎𝑙) 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-4 (𝑏𝑖𝑑𝑖𝑟𝑒𝑐𝑡𝑖𝑜𝑛𝑎𝑙) 0.930 0.965 0.999 0.875 0.915 0.982 0.502 0.650 0.824 0.564 0.707 0.852 0.496 0.665 0.797
+Table 15: The table presents the experimental results on the study of the impact of directionality in historical modeling on tKG
+forecasting performance. In the context of tKG forecasting, ‘unidirectional’ and ‘bidirectional’ indicate whether entities in
+historical facts align with the positions of the query quadruple. ‘Unidirectional’ maintains alignment, while ‘bidirectional’
+allows entities to shift after transforming facts with inverse relations. The aim is to determine if incorporating both original
+historical facts and their inverse relations in the ‘bidirectional’ modeling context can enhance the performance of tKG
+forecasting by offering a more varied historical context. The adoption of ‘bidirectional’ relation modeling for tKG forecasting
+shows marginal improvements, with particularly notable gains evident in the ICEWS benchmark datasets.
+forecasts. Designed to enhance both reliability and accountabil-
+ity, the framework offers a significant advancement over tradi-
+tional forecasting methods. In this study, we examine the power
+law relationship between PLLM model size and performance on
+tKG forecasting using our sLA-tKGF framework. We explore the
+effect of PLLM model size on sLA-tKGF framework performance
+in zero-shot tKG forecasting through experiments with various
+PLLMs. Table 16 lists the language models used, including GPT-
+2 [24], GPT-J [31], and GPT-NeoX [3], all employing the GPT-2
+BPE tokenizer [24] with similar vocabulary sizes. Our findings, de-
+tailed in Table 18, confirm that larger models yield better results,
+supporting the scaling laws in zero-shot learning. These models
+demonstrate enhanced linguistic comprehension, more complex
+architectures, and enhanced generalization capabilities.
+Model Family Model Name # Params
+GPT2 gpt2 124M
+gpt2-xl 1.5B
+GPT-J gpt-j-6b 6B
+GPT-NeoX gpt-neox-20b 20B
+Table 16: Overview of different GPT-based models by family
+and parameter count.
+Our results highlight the advantages of using larger PLLMs re-
+sulting in sLA-tKGF framework with complex pattern recognition
+in tKG forecasting. With PLLMs like GPT-2, GPT-3, and GPT-4 show-
+ing remarkable abilities in natural language tasks, GPT-4 stands
+out for its scale and advanced learning capabilities. Yet, achieving
+success in tKG forecasting may require domain-specific expertise
+to develop effective zero-shot prompts.
+6.8 Hyperparameter Tuning
+Our sLA-tKGF-GPT-4 framework improves tKG forecasting accu-
+racy by integrating PLLMs with small-scale language models. Hy-
+perparameter tuning is challenging due to its complex dimensional-
+ity, computational demands, and dataset-specific requirements. We
+opt for random search over grid search or Bayesian optimization
+for efficient hyperparameter exploration, seeking the optimal con-
+figuration on benchmark datasets. The small-scale language models
+are trained on knowledge-augmented prompting for tKG forecast-
+ing, aiming to predict missing entities by minimizing cross-entropy
+loss. Hyperparameter optimization for sLA-tKGF-GPT-4 focuses
+on batch size (𝑏 ∈ 16, 48), epochs (𝑒𝑝 ∈ 10, 30), and embedding di-
+mension (𝑑 ∈ 64, 128). Table 18 shows tuning results on benchmark
+11

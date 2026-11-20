@@ -1,0 +1,135 @@
+the effects of the TCO work function and the electron afﬁnity of
+the buffer layer between the TCO layer and ETL. The results are
+summarized in Figure 10. In these simulations, nc-GaN was
+used as the ETL material. When we used a TCO layer with a large
+work function, Voc and FF decreased. A work function less than
+4.0 eV is required to obtain the best conversion efﬁciency. This
+value is very different from that of FTO, which is the standard
+TCO layer material in perovskite solar cells. Highly doped ZnO,
+such as aluminum-doped ZnO (AZO), has a work function of
+≈4.0 eV.[45] Therefore, one of the promising candidates for the
+TCO layer material is AZO. Replacement of the TCO layer mate-
+rial is a possible solution to realize an improved TCO layer/ETL
+interface. Insertion of a buffer layer between the TCO layer and
+ETL is another solution. The effect of the electron afﬁnity of the
+buffer layer on device performance is illustrated in Figure 10.
+In these simulations, FTO was used as the TCO layer material.
+The electron afﬁnity of the buffer layer signiﬁcantly affects FF.
+The best conversion efﬁciency was obtained when the electron
+afﬁnity of the buffer layer was 4.1 eV. This value can be realized
+using a-ZSO. Figure 11 shows the band diagrams of the devices
+with FTO, AZO (a work function of 4.0 eV), and FTO and the
+buffer layer (electron afﬁnity: 4.1 eV). A candidate material of this
+buffer layer is a-ZSO.[40] For the device with FTO (no buffer
+layer), a large Schottky barrier is formed at the interface between
+the TCO layer and ETL. This prevents smooth electron transport
+from the ETL to FTO, thereby decreasing FF. Furthermore, this
+Schottky barrier acts as an additional photodiode and generates
+photovoltage in a direction different from that of the photovolt-
+age of the CsPbBr3 device. This reduces the Voc of the device.
+By replacing FTO with AZO, the height of the Schottky barrier
+is reduced, improving Voc and FF, as shown in Figure 11.
+Figure 11 also shows the effect of the buffer layer on the band
+diagram. In this case, sufﬁciently small Schottky barriers are
+formed at the ETL/buffer layer and TCO layer/ETL interfaces,
+resulting in good device performance.
+Finally, we compared the simulation results with experimental
+results. Figure 12 compares the experimental and simulation
+device performance. As shown in Figure 12a, the experimentally
+obtained device structure is anti-reﬂection ﬁlm/glass/FTO/
+nc-GaN/CsPbBr3/P3HT/Au. Details of the device fabrication
+process were reported in our previous publication.[27] In our
+experiment, P3HT was used as the HTL. The P3HT parameters
+were obtained from previous research.[46] The parameters used
+for simulation using the P3HT HTL are summarized in Table 2.
+As shown in Figure 12b, the J–V curve of the experimentally
+obtained device was well reproduced by the simulation using
+the defect densities of the FIL of 1 /C2 1019 cm/C03, the CsPbBr3
+layer of 8 /C2 1014 cm/C03 (LD: 0.57 μm), and the RIL of
+6.5 /C2 1018 cm/C03. The reliability of the simulation was also con-
+ﬁrmed by the good agreement between the EQE simulations
+and the experiment results, as shown in Figure 12c. The esti-
+mated conversion efﬁciency of the experimentally obtained
+device under 450 nm blue light was 28.8%. This value can still
+be increased. Therefore, we performed the simulation using the
+model without IL (as both FIL and RIL) to discuss the direction
+1.6
+1.8
+2.0
+2.2
+1.6
+1.8
+2.0
+2.2
+ Voc (V)
+ TCO work function
+ Buffer layer electron affinity
+ Voc (V)
+36
+37
+38
+36
+37
+38
+ Jsc
+mc/Am( 2)
+ Jsc
+(mA/cm2)
+75
+80
+85
+90
+75
+80
+85
+90
+ FF (%)
+ FF (%)
+3.8 4 4.2 4.450
+60
+70
+50
+60
+70
+TCO work function or 
+buffer layer electron affinity (eV)
+Eff  (%)
+noitcnufkrowOCTnoecnednepeD
+Eff  (%)
+Dependence on buffer layer electron affinity
+Figure 10. Effect of TCO work function (red) and electron afﬁnity of buffer
+layer (blue) on device performance. For the effect of TCO work function,
+we did not consider a buffer layer between the TCO layer and ETL. The
+direct junction between the TCO layer and ETL was considered. For the
+effect of the electron afﬁnity of the buffer layer, FTO with a work function
+of 4.4 eV was used as the TCO layer material. The simulations were
+performed using monochromatic light illumination with a wavelength
+of 450 nm.
+GaN
+FTO/GaN/CsPbBr3
+AZO/GaN/CsPbBr3
+0 100 200
+FTO/a-ZSO buffer/GaN/CsPbBr3
+Distance from TCO surface (nm)
+Ec
+Ec
+Ec
+Ev
+Ev
+Ev
+CsPbBr3
+CsPbBr3
+CsPbBr3
+GaN
+GaN
+a-ZSO
+Figure 11. Band diagrams of CsPbBr3 photovoltaic power converters near
+GaN ETL/TCO layer interface. Three different types of structures are
+shown to compare the band bending at the TCO layer/GaN ETL interface.
+The work functions of FTO and AZO are 4.4 and 4.0 eV, respectively. The
+electron afﬁnity of the a-ZSO buffer layer is 4.1 eV. These band diagrams
+correspond to the MPP.
+www.advancedsciencenews.com www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (8 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH
+ 18626319, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pssa.202400437, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

@@ -1,0 +1,47 @@
+10779
+B CSC Case
+RAG
+Instance strategy
+原始句子:我受到了你们的结婚卡。
+预测句子:我受到了你们的结婚卡。
+Original sentence: I suffered your wedding card.
+Prediction sentence: I suffered your marriage card.
+FixedFew_Shot
+原始句子:我受到了你们的结婚卡。
+RAG辅助语句：
+我很高兴受到你们结婚的邀请单，你们到底决定结婚了！- >
+我很高兴收到你们结婚的邀请单，你们到底决定结婚了!
+预测句子:我收到了你们的结婚卡。
+Original sentence: I suffered your wedding card.
+RAG Auxiliary Example:
+I’m glad to have suffered your invitation to get married, you’ve finally decided to get married! - >
+I’m glad to have received your invitation to get married, you’ve finally decided to get married!
+Prediction sentence: I received your marriage card.
+RAGFew_Shot
+IDS
+原始句子:我觉得我们湾很好，我们会唱歌，我们也做饭。
+预测句子:我觉得我们湾很好，我们会唱歌，我们也做饭。
+Original sentence: I think our bay is good. We can sing, we also cook.
+Prediction sentence: I think our bay is good. We can sing, we also cook
+FixedFew_Shot
+原始句子:我觉得我们湾很好，我们会唱歌，我们也做饭。
+中间句子:我觉得我们湾很好，我们会唱歌，我们也做饭。
+纠错模块评价：修改后的句子更加合理：否
+中间句子:我觉得我们湾很好，我们会唱歌，我们也做饭。
+纠错模块评价：修改后的句子更加合理：否
+中间句子:我觉得我们玩很好，我们会唱歌，我们也做饭。
+纠错模块评价：修改后的句子更加合理：是
+预测句子:我觉得我们玩很好，我们会唱歌，我们也做饭。
+Original sentence: I think our bay is good. We sang, we also cook.
+Intermediate sentence:I think our bay is good. We sang, we also cook.
+Evaluator comment:The revised sentence is more reasonable: No
+Intermediate sentence:I think our bay is good. We sang, we also cook.
+Evaluator comment:The revised sentence is more reasonable: No
+Intermediate sentence:I think our playing is good. We sang, we also cook.
+Evaluator comment:The revised sentence is more reasonable: Yes
+Prediction sentence:I think our playing is good. We sang, we also cook.
+IDS+FixedFew_Shot
+Table 4: Result examples of CSC experiment on SIGHAN15 with RAG and IDS method. We highlight incorrect
+characters in red, those remaining wrong after correction in blue, and those right after correction in green. The term
+Simple Few_Shot denotes no additional policies, RAG Few_Shot signifies the experiment with only RAG method,
+and IDS+Fixed Few_Shot indicates the experiment with only IDS method.

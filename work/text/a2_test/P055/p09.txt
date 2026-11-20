@@ -1,0 +1,79 @@
+Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation KDD ’26, August 09–13, 2026, Jeju Island, Republic of Korea
+top-𝑘 top-𝑘′𝛾
+top-𝑘 𝛾 top-𝑘′
+Figure 4: Hyper-parameter sensitivity analysis of the multi-
+granularity retrieval module.
+Figure 5: Hyper-parameter sensitivity analysis of𝛽 and𝛼.
+in Ele-Photo are derived from user reviews, which inevitably incor-
+porate substantial noise. The coarse-grained retrieval mitigates this
+issue by capturing representative global semantic anchors, thereby
+enhancing the robustness of GFMs against such noise interference.
+For the WikiCS and Books-History datasets, removing FR leads to
+a larger performance drop. This is likely because these datasets
+contain categories with subtle distinctions and the fine-grained
+knowledge proves critical by providing local semantic nuances for
+precise discrimination. In summary, these findings confirm that
+coarse-grained and fine-grained knowledge benefit GFMs from
+distinct yet synergistic perspectives.
+5.3.3 The Effectiveness of Dual-path Fusion. The ablation results
+in the fifth and sixth rows highlight the distinct contributions of
+our dual-path fusion strategy. Notably, the model exhibits higher
+sensitivity to the removal of feature-level fusion (FF). This suggests
+that, in a zero-shot setting, leveraging retrieved multi-granularity
+knowledge to enhance the initial node features is the fundamental
+driving force for achieving generalization. In parallel, structure-
+level fusion (SF) facilitates message passing over the graph, acting
+as a complementary mechanism to further boost performance on
+top of the enriched semantic features.
+5.4 Hyper-parameter Study
+5.4.1 Hyper-parameters in Multi-granularity Retrieval. We analyze
+the impact of three hyper-parameters in the multi-granularity re-
+trieval module on the CiteSeer and WikiCS datasets.
+Hyper-parameter 𝑘 controls the amount of information retrieved
+in the multi-granularity retrieval module. On CiteSeer (Figure 4(a)),
+the accuracy decreases as 𝑘 increases, indicating that CiteSeer re-
+quires precise retrieval and that incorporating excessive informa-
+tion introduces irrelevant noise. In contrast, WikiCS (Figure 4(d))
+benefits from a larger 𝑘 (reaching its peak at 𝑘 = 7), which may
+be due to its fine-grained categories requiring broader semantic
+coverage to distinguish similar categories.
+Hyper-parameter 𝛾 controls the trade-off between relevance and
+diversity in the MMR algorithm. Figure 4(b) reveals a performance
+peak at 𝛾 = 0.5 for CiteSeer, indicating an optimal trade-off between
+relevance and diversity is necessary for this dataset. In contrast,
+WikiCS (Figure 4(e)) shows remarkable robustness to𝛾.
+The hyper-parameter 𝑘′ governs the number of retrieved neigh-
+borhood entities in fine-grained knowledge retrieval. As shown in
+Figure 4(c) and 4(f), performance remains consistently high. This
+stability confirms that the angular violation score effectively pri-
+oritizes semantically relevant fine-grained neighbors, making the
+ranking robust to an enlarged retrieval window.
+5.4.2 Hyper-parameters in Dual-path Fusion. Figure 5 illustrates
+the classification performance as we vary the fusion weights 𝛽
+and 𝛼 within the range of {0.1, 0.3, 0.5, 0.7, 0.9, 1.0}. The heatmap
+results indicate that feature-level fusion (controlled by 𝛽) serves as
+the primary factor. In particular, WikiCS benefits from substantial
+knowledge injection, corresponding to larger values of 𝛽, whereas
+CiteSeer favors a more conservative degree of knowledge integra-
+tion. In contrast, structure-level fusion (controlled by 𝛼) consistently
+improves performance across a wide range of values. The presence
+of broad high-performance regions further demonstrates the ro-
+bustness of HyRAG with respect to hyper-parameter variations.
+6 Conclusion
+By analyzing the geometric properties of Euclidean space, we iden-
+tify two fundamental limitations of Euclidean-based RAG frame-
+works: the loss of semantic granularity and the emergence of hub-
+ness. To overcome these limitations, we propose HyRAG, a hy-
+perbolic retrieval-augmented generation framework that enhances
+the generalization capability of GFMs. By integrating hyperbolic
+knowledge indexing, multi-granularity retrieval, and dual-path fu-
+sion, HyRAG enables geometry-aware utilization of global semantic
+anchors and local semantic nuances. Extensive experiments on mul-
+tiple graph benchmarks demonstrate that HyRAG consistently im-
+proves zero-shot inference performance without any task-specific
+fine-tuning, suggesting hyperbolic RAG as a promising direction
+for building robust and generalizable graph foundation models.
+Acknowledgments
+This work is supported by National Natural Science Foundation
+of China No. 62406313, Postdoctoral Fellowship Program of China
+Postdoctoral Science Foundation, Grant No. YJB20250283.

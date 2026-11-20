@@ -1,0 +1,101 @@
+maintain context (Jiang et al., 2026a,b). However,
+these agents primarily operate in open-ended envi-
+ronments rather than strictly constrained decision
+spaces.
+A critical challenge in these reasoning tasks
+is hallucination, where models generate fact-
+conflicting content (Ji et al., 2023; Zhang et al.,
+2025b; Sun et al., 2025; Xi et al., 2025; Lyu
+et al., 2025). Retrieval-Augmented Generation
+addresses this by grounding outputs in external
+corpora (Lewis et al., 2020; Zhang et al., 2025a),
+with emerging frameworks treating retrieval dy-
+namically as generation (Li et al., 2026b,a). Recent
+advancements focus on robustness, utilizing hier-
+archical indexing (Sarthi et al., 2024), multi-hop
+semantic pathways (Fu et al., 2026c), and correc-
+tive mechanisms like Self-RAG (Asai et al., 2023),
+CRAG (Yan et al., 2024), and permutation-resistant
+models (Zhang et al., 2026). Concurrently, retrieval
+components have improved via instruction-tuned
+embeddings (Wang et al., 2024) and listwise or
+card-based reranking (Sun et al., 2024; Zhou et al.,
+2026b), ensuring relevant context is prioritized to
+mitigate knowledge deficits.
+2.2 LLMs for Combinatorial Optimization
+Research increasingly explores LLMs as optimiz-
+ers or heuristics for hard problems. OPRO (Yang
+et al., 2024a) demonstrates that LLMs can iter-
+atively improve solutions via natural language
+prompts, while ReEvo (Ye et al., 2024) leverages
+models to evolve heuristics. FunSearch (Romera-
+Paredes et al., 2024) further illustrates the potential
+of pairing LLMs with evolutionary strategies to
+discover mathematical constructions.
+Specific to Combinatorial Optimization (CO),
+prior work has applied LLMs to routing tasks
+like the Traveling Salesperson Problem (TSP) (Liu
+et al., 2023; Ahn et al., 2022) and navigating costly
+many-goal search spaces (Fu et al., 2026b). How-
+ever, strictly constrained problems like MMKP re-
+main under-explored compared to routing. This is
+largely due to the difficulty of maintaining feasibil-
+ity; a single hallucinated constraint can invalidate
+a solution (Li et al., 2023a). Evaluation bench-
+marks such as FActScore (Min et al., 2023) and
+SelfCheckGPT (Manakul et al., 2023) highlight
+the fragility of LLMs in adhering to strict condi-
+tions. Our framework addresses this by aligning
+optimization steps with verifiable evidence, treat-
+ing valid constraint satisfaction as a prerequisite
+(Turpin et al., 2023).
+2.3 Tree Search and Test-Time Computation
+To overcome the limitations of linear decoding,
+recent methods organize reasoning into non-linear
+structures. Approaches like Tree of Thoughts (ToT)
+(Yao et al., 2023a) and Graph of Thoughts (GoT)
+(Besta et al., 2024) generalize CoT by maintaining
+multiple reasoning paths. Reflexion (Shinn et al.,
+2023) adds a verbal reinforcement learning layer
+through self-reflection to refine outputs.
+Monte Carlo Tree Search (MCTS) has emerged
+as a powerful mechanism for complex decision-
+making within this landscape. Language Agent
+Tree Search (LATS) (Zhou et al., 2024) unifies plan-
+ning, acting, and reasoning within an MCTS frame-
+work. Similarly, reasoning-via-planning methods
+(Hao et al., 2023) demonstrate the efficacy of
+MCTS and hidden-state approaches (Huang et al.,
+2026) in structured tasks. This test-time search
+paradigm allows models to trade inference com-
+pute for solution quality. By systematically explor-
+ing the decision space, these methods provide the
+lookahead capabilities required for optimization,
+which standard greedy generation lacks.
+3 Methodology
+We propose a two-stage RAG optimization frame-
+work as illustrated in Figure 2, consisting of
+MMKP-based pre-generation context optimization
+and logic-guided MCTS reasoning for inference.
+3.1 Phase I: Optimal Context Selection
+Let U be the universe of retrieved document chunks
+for a given query q. Conventional methods treat
+U as a flat list, selecting top-k by relevance score
+Srel(q, d). We argue this is suboptimal due to high
+inter-document redundancy.
+We formally recast context selection as selecting
+a subset S ⊆ U to maximize information density
+under multidimensional constraints.
+3.1.1 Semantic Grouping and Problem
+Definition
+First, we induce a partition on U via semantic
+clustering to enforce diversity. Let Φ(d) ∈ RD
+be the dense embedding of document d. We de-
+fine the groups G = {G1, G2, . . . , Gm} such that
+for any Gi, ∀da, db ∈ Gi, the cosine similarity
+cos(Φ(da), Φ(db)) ≥ τ , where τ is a similarity
+threshold. This implies that items within Gi are
+mutually exclusive candidates for the context win-
+dow (i.e., choosing multiple provides diminishing
+returns).
+20955

@@ -1,0 +1,95 @@
+is created by prompting ChatGPT to insert URLs
+or code snippets while preserving key answer in-
+formation. Finally, orthographic noise is generated
+using the open-source textnoisr package (Preligens
+Lab, 2023). This pipeline enables a comprehensive
+assessment of model performance across a range
+of noise scenarios.
+Step 4: Testbeds Construction After obtaining
+high-quality QA instances and diverse retrieval doc-
+uments, we build testbeds to evaluate model perfor-
+mance under various noise conditions. Given the
+challenges in automatically assessing LLMs’ re-
+sponses to open-ended QA tasks (Xie et al., 2024a),
+we convert free-form QA into a multiple-choice
+format. This constrains the response space and
+facilitates more accurate evaluation. Specifically,
+for each QA pair, LLMs choose from 4 options:
+the correct answer, two counterfactual alternatives,
+and “Uncertain”. The order of the golden option
+remains entirely random to avoid LLMs’ sensitivity
+to option order (Wu et al., 2024a).
+Finally, eight datasets are obtained for Noiser-
+Bench. Following prior works (Yoran et al., 2024;
+Wang et al., 2024), we randomly select 500 samples
+from each dataset as test cases or use all samples if
+the size of this dataset is smaller than 500.
+4.2 Evaluation Metrics
+This benchmark aims to reveal the role that RAG
+noise plays on LLMs. We use accuracy as the pri-
+mary metric and also report the weighted average
+accuracy across datasets.
+5 Experiment Setup
+5.1 Datasets
+We experiment with multiple QA datasets, which
+are categorized into four types based on the re-
+quired reasoning skills:
+• Single-hop: Questions requiring one-step rea-
+soning. We evaluate using the Natural Ques-
+tions (NQ) (Kwiatkowski et al., 2019) and
+RGB (Chen et al., 2024) datasets.
+• Explicit Multi-hop: Questions where multi-
+ple reasoning steps are explicitly expressed.
+We utilize HotpotQA (Yang et al., 2018),
+2WIKIMQA (Welbl et al., 2018) and Bam-
+boogle dataset (Press et al., 2023).
+• Implicit Multi-hop: Questions where inter-
+mediate steps are not explicitly stated, often
+requiring commonsense knowledge for im-
+plicit reasoning. We use StrategyQA (Geva
+et al., 2021) and TempQA (Jia et al., 2018).
+• Mixed-Hop: Questions requiring single- or
+multi-hop reasoning. We use our constructed
+dataset, PriorQA.
+5.2 Baseline Models
+We evaluate eight LLMs of different architectures
+and scales: Llama3-Instruct (8B, 70B) (Meta, AI,
+2024), Qwen2-7B-Instruct (Yang et al., 2024), Mis-
+tral (7B, 8x7B) (Jiang et al., 2023, 2024), Vicuna-
+13B-v1.5 (Chiang et al., 2023), Llama2-13B (Tou-
+vron et al., 2023), and Baichuan2-13B (Yang et al.,
+2023). This enables a comprehensive assessment
+of noise across various dimensions.
+5.3 Implementation Details
+In our implementation, for similarity computation
+between queries and documents, we implement
+the dot product method. We conduct entailment
+verification using the bart-large-258-mnli-407M
+model (Lewis et al., 2020a), which helps validate
+the logical relationships between retrieved informa-
+tion and potential answers. Our retrieval corpus
+consists of the 2018 English Wikipedia dump and
+current Wikipedia documents, providing a compre-
+hensive knowledge base. Following the challeng-
+ing setup in previous work (Cuconasu et al., 2024),
+we position the ground truth in the middle of the
+retrieval list rather than at the top. This aims to
+ensure that our conclusions regarding noise effects
+more accurately represent real-world scenarios.
+6 Results and Analysis
+First, we examine the roles of RAG noise (6.1).
+While prior work has analyzed its harmful effects,
+we focus on its beneficial aspects (6.2). We evalu-
+ate these benefits across four dimensions: (1) Gen-
+eralization across Models, (2) Noise Robustness
+Across Scenarios, (3) Noise Ratio Impact, and (4)
+Statistical Validation. Finally, we investigate the
+underlying mechanisms of these phenomena (6.3).
+6.1 Roles of RAG Noise
+Table 1 illustrates the impact of diverse noise
+types (the first six) on two open-source models:
+Llama3-8B-Instruct and Qwen2-7B-Instruct. We
+observe consistent performance trends across mul-
+tiple datasets and retrieval noises. Based on these
+trends, we can categorize retrieval noises into two
+5023

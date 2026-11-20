@@ -1,0 +1,43 @@
+Author name / Procedia Computer Science 00 (2019) 000–000  7 
+metrics to quantify how many of the correct answers appeared within the top 'k' results provided by each model, 
+thereby determining the models' ability to retrieve necessary information from the dataset.  The second employed 
+metric is Mean Reciprocal Rank (MRR) which is a statistical measure used to evaluate the performance of query 
+response systems. MRR is calculated as the average of the reciprocal ranks of results for a set of queries as shown in 
+equation 2. Essentially, MRR calculates the mean of these reciprocal ranks over all queries tested. Higher MRR values 
+indicate that the correct answers tend to appear earlier in the list of responses, which is desirable as the context being 
+passed to a generator is usually limited.      
+𝑟𝑒𝑐𝑎𝑙𝑙@𝑘 =
+୒୳୫ୠୣ୰ ୭୤ ୖୣ୪ୣ୴ୟ୬୲ ୍୲ୣ୫ୱ ୧୬ ୘୭୮ ୏
+்௢௧௔௟ ௡௨௠௕௘௥ ௢௙ ௥௘௟௘௩௔௡௧ ௜௧௘௠௦     (1) 
+𝑀𝑅𝑅 =
+ଵ
+|ொ| ∑ ଵ ௥௔௡௞೔ |ொ| ௜ୀଵ     (2) 
+where |Q| is the number of queries and ranki is the rank position of the first relevant segment for the i-th query. 
+ 
+This approach allowed for a direct comparison of the models' performance in real-world retrieval tasks. For the 
+Ar_EduText dataset, only 19 segment embeddings were stored in Chroma, while 460 segment embeddings were stored 
+for the ARCD dataset.  The results of this experiment are shown in Table 3, and 4 and in Fig. 2.  While all twelve 
+semantic models were used with the first dataset, only the top performing seven were used in the second.   
+Table 3. Recall @K (k=1, k=3, and k=5) and MRR for the Ar_EduText Dataset (sorted by MRR) 
+Embeddings Name  k=1 k=3  k=5 MRR 
+E5-Large 0.88 0.994 0.994 0.934 
+E5-Small 0.867 0.981 0.987 0.92 
+BGE 0.861 0.956 0.994 0.9 
+OpenAI  0.823 0.968 0.994 0.895 
+AraVec (Wikipedia – SG) 0.665 0.892 0.924 0.778 
+Cohere 2 0.62 0.829 0.88 0.73 
+AraBert 0.595 0.816 0.899 0.712 
+AraVec (Wikipedia – CBOW) 0.595 0.823 0.911 0.718 
+Ollama 0.165 0.316 0.386 0.246 
+JAIS (13B Q) 0.063 0.253 0.418 0.181 
+Cohere 1 0.032 0.133 0.285 0.111 
+ 
+Table 4. Recall @K (k=1, k=3, and k=5) and MRR for the ARCD Dataset (sorted by MRR) 
+Embeddings Name  k=1 k=3  k=5 MRR 
+E5-Large 0.686 0.896 0.927 0.79 
+BGE 0.627 0.872 0.909 0.748 
+E5-Small 0.632 0.861 0.893 0.742 
+OpenAI  0.515 0.736 0.79 0.627 
+AraVec (Wikipedia – SG) 0.362 0.564 0.627 0.468 
+AraBert 0.318 0.514 0.574 0.418 
+AraVec (Wikipedia – CBOW) 0.234 0.39 0.466 0.321

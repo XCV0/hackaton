@@ -1,0 +1,122 @@
+Substrate Preparation: The NPs were injected through the PDMS device
+channels on a typical SLG/Mo substrate coated with 10 nm of Al2O3.To
+prepare for the colloidal solution injection into the device, holes for tube
+connections were made. Subsequently, the substrate surface underwent
+an O2 plasma treatment to enhance adhesion at the interface when it
+bonded to the PDMS device. Afterward, the PDMS device was attached
+to the substrate and subjected to 20 min of heating at 65 °C. The ﬁnal step
+consisted of injecting the NPs solution into the microﬂuidic device using a
+syringe through microtubes. Following an optimized drying period, the
+PDMS device was separated from the substrate. The Au NPs were then
+encapsulated with Al2O3. For the Al2O3 layers deposition the ALD Beneq
+TFS 200 system was employed at 200 °C, involving 143 cycles of trimethy-
+laluminium (TMA) and DI water, with pulse/purge step durations of 150/
+650 ms (TMA) and 150/1000 ms (water). For the contact scheme pattern-
+ing, NIL was utilized. The developed pattern consisted of trenches with a
+nominal width of 700 nm and a nominal pitch of 2800 nm. A hexamethyl-
+disilizane (HMDS) vapor priming stage was conducted to enhance pho-
+toresist adhesion on the substrate. A 200 nm layer of mr.NIL60002E resist
+was spin coated onto the substrate using the Karl Suss Optical Track sys-
+tem. The trench pattern was subsequently imprinted onto the substrate
+through NIL. Initially, the temperature was raised to 65 °C for 10 s, fol-
+lowed by increasing the pressure to 15 bar for 100 s. UV light exposure
+for 180 s (/C255500 mJ cm/C02) was initiated. An O2 strip process to remove
+residual resist was conducted using the SPTS Pegasus system, with an O2
+ﬂow rate of 115 sccm at 13.56 MHz. RIE process was then performed
+using the STPS APS tool with a He, H2, and C4F8 plasma chemistry.
+Finally, the unexposed resist was removed using a PVA TEPLA plasma
+asher. Besides the prepared PPS with the structure SLG/Mo/Al2O3/Au
+NPs/Al2O3, a reference (Ref ) one (SLG/Mo) was also used for device
+comparison purposes.
+Solar Cell Development: In both the Ref and PPS substrates, a 15 nm
+layer of sodium ﬂuoride (NaF) was evaporated on top of the complete
+prepared substrates. In the same batch, an ultrathin ACIGS layer with
+an average thickness of /C25450 nm, determined through SEM cross-section
+analysis, was coevaporated onto both substrates. Elemental composition
+analysis using X-ray ﬂuorescence with the Panalytical Epsilon 5 equipment
+yielded: [Cu]/([Ga]þ[In]) = 0.83, [Ga]/([Ga]þ[In]) = 0.29, and [Ag]/
+([Ag]þ[Cu]) = 0.11. Further details regarding the ACIGS deposition pro-
+cess can be found in other studies.[102–105] The subsequent deposition
+of the remaining layers (CdS/i-ZnO/ZnO:Al) followed the standard base-
+line as reported elsewhere.[50] A chemical etching method was employed
+to pattern individual 0.1 cm2 solar cells in a 1.5 /C2 1.5 cm2 square array.[106]
+Characterization: TEM employing the JEM-2100-HT instrument was
+used to analyze the synthesized Au NPs, with their size determined using
+ImageJ software. For the TEM, solutions were deposited onto a carbon
+substrate supported by a Cu mesh grid. Relative absorbance and diffuse
+reﬂectance measurements were conducted via a Perkin-Elmer Lambda
+950 ultraviolet-visible-near-infrared spectrophotometer. An integrat
+ing sphere was used for the diffuse reﬂectance measurements. A
+FeiNovaNanoSEM 650 high-resolution SEM operating at 5 kV was
+employed. A morphological assessment of the patterned sample was per-
+formed utilizing the AFM Dimension Icon system. Tapping mode was
+used with a scan rate of 0.5 Hz. Illuminated and dark J–V measurements
+under AM1.5 G conditions were carried out using an in-house measure-
+ment system. The J–V measurements were conducted after a 20 min
+period of light exposure. EQE measurements were performed using a
+QEX10 equipment, employing a chopped monochromatic light scan
+covering wavelengths from 300 to 1100 nm, with a step interval of 5 nm.
+Optoelectronic Simulations: For simulating the scattering and absorp-
+tion cross sections of the Au NPs, the FDTD numerical method, which
+is accessible within the Lumerical software, was used.[64,107] The simula-
+tion setup incorporated a total-ﬁeld-scattered-ﬁeld (TFSF) source with a
+bandwidth spanning from 300 to 1100 nm. The choice of a TFSF source
+allows the decoupling of the scattering behavior of the simulated Au NPs,
+as it effectively separates the scattered ﬁeld from the incident ﬁeld. The
+optical performance of the developed novel CIGS solar cells was simulated
+using the FDTD numerical method to comprehensively investigate the
+impact of the new architecture on the optical performance of solar cells
+with regard to light-trapping effects. Simulations were performed using a
+random polarized broadband plane wave light source. To ensure compu-
+tational efﬁciency without compromising accuracy, the smallest mesh size
+feasible while meeting time-memory requirements was employed. Critical
+interfaces were resolved with a 1 nm mesh size. The Violas et al. ultrathin
+solar cell baseline[14,20] was employed to estimate the effect of the
+improved charge carrier’s collection through the passivation layer integra-
+tion on the JSC value. The optical constants for the several materials used
+within this work were obtained from previously reported results.[108–111]
+Acknowledgements
+F.C.T. and F.S.E. were acknowledged. A.J.N.O., A.V., A.T., and M.D.C.
+acknowledged, respectively, 2020.04564.BD, 2020.07073.BD, SFRH/
+BD/148091/2019, and 2022.09516.BD. J.P.T. acknowledged
+2021.02405.CEECIND. P.M.C.B., P.A.F., and M.R.P.C. acknowledged the
+i3N project, UIDB/50025/2020, UIDP/50025/2020, and LA/P/0037/
+2020, ﬁnanced by national funds through the FCT/MEC. P.A.F. acknowl-
+edged projects UIDB/04730/2020 and UIDP/04730/2020. This research
+was also supported by the project NovaCell (PTDC/CTM-CTM/28075/
+2017) and InovSolarCells (PTDC/FISMAC/29696/2017) cofunded by
+FCT and the ERDF through COMPETE2020. The European Union’s
+Horizon 2020 research and innovation programme ARCIGS-M project
+(grant agreement no. 720887) is acknowledged.
+Conﬂict of Interest
+The authors declare no conﬂict of interest.
+Data Availability Statement
+The data that support the ﬁndings of this study are available from the
+corresponding author upon reasonable request.
+Keywords
+Cu(In,Ga)Se2, solar cells, light management, passivation, ultrathin
+Received: March 14, 2024
+Revised: March 28, 2024
+Published online: April 15, 2024
+[1] IRENA, International Renewable Energy Agency, Market Integration
+of Distributed Energy Resources Innovation Landscape Brief, Abu
+Dhabi, 2019.
+[2] B. Urishev, Appl. Sol. Energy 2019, 55, 207.
+[3] D. Neves, I. Scott, C. A. Silva, Energy 2020, 205, 118023.
+[4] A. Ahl, M. Yarime, K. Tanaka, D. Sagawa, Renewable Sustainable
+Energy Rev. 2019, 107, 200.
+[5] 2019 CIGS-PV, CIGS White Paper, https://cigs-pv.net/wortpresse/
+wp-content/uploads/2019/04/CIGS_White_Paper_2019_online.pdf
+(accessed: January 2024).
+[6] D. H. Cho, W. J. Lee, M. E. Kim, B. Shin, Y. D. Chung, Prog.
+Photovoltaics Res. Appl. 2020, 28, 798.
+[7] N. Neugebohrn, S. Haas, A. Gerber, M. Grimm, J. Nissel, R. Liebers,
+B. Turan, K. Gehrke, M. Vehse, Prog. Photovoltaics Res. Appl. 2022, 30,
+1188.
+[8] M. A. Green, J. Mater. Sci. Mater. Electron. 2007, 18, 15.
+[9] T. S. Lopes, J. P. Teixeira, M. A. Curado, B. R. Ferreira, A. J. N. Oliveira,
+J. M. V. Cunha, M. Monteiro, A. Violas, J. R. S. Barbosa, P. C. Sousa,
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2024, 8, 2400147 2400147 (13 of 15) © 2024 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2024, 11, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400147, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

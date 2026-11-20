@@ -1,0 +1,97 @@
+Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 15839–15853
+July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+Removal of Hallucination on Hallucination: Debate-Augmented RAG
+Wentao Hu♠ Wengyu Zhang♠ Yiyang Jiang♠
+Chen Jason Zhang♠ Xiaoyong Wei♡,♠,* Qing Li♠
+♠The Hong Kong Polytechnic University ♡Sichuan University
+wayne-wt.hu@connect.polyu.hk
+{jason-c.zhang, cs007.wei}@polyu.edu.hk
+Abstract
+Retrieval-Augmented Generation (RAG) en-
+hances factual accuracy by integrating exter-
+nal knowledge, yet it introduces a critical is-
+sue: erroneous or biased retrieval can mislead
+generation, compounding hallucinations, a phe-
+nomenon we term Hallucination on Halluci-
+nation. To address this, we propose Debate-
+Augmented RAG (DRAG), a training-free
+framework that integrates Multi-Agent Debate
+(MAD) mechanisms into both retrieval and gen-
+eration stages. In retrieval, DRAG employs
+structured debates among proponents, oppo-
+nents, and judges to refine retrieval quality and
+ensure factual reliability. In generation, DRAG
+introduces asymmetric information roles and
+adversarial debates, enhancing reasoning ro-
+bustness and mitigating factual inconsistencies.
+Evaluations across multiple tasks demonstrate
+that DRAG improves retrieval reliability, re-
+duces RAG-induced hallucinations, and signifi-
+cantly enhances overall factual accuracy. Our
+code is available at https://github.com/
+Huenao/Debate-Augmented-RAG.
+1 Introduction
+Large Language Models (LLMs) have demon-
+strated remarkable natural language understanding
+and reasoning capabilities (Achiam et al., 2023;
+Touvron et al., 2023). However, their reliance on
+parametric knowledge introduces a critical chal-
+lenge, hallucination, where the generated content
+deviates from factual correctness (Ji et al., 2023;
+Huang et al., 2024). This issue severely limits
+their reliability, particularly in knowledge-intensive
+tasks where factual accuracy is paramount.
+To mitigate hallucinations, Retrieval-Augmented
+Generation (RAG) has been proposed as a frame-
+work that integrates external knowledge retrieval to
+enhance LLM outputs (Gao et al., 2023). By con-
+ditioning responses on retrieved documents, RAG
+* Corresponding author
+Q: Who is the girl playing with guns and roses?
+A: Melissa Reese.
+GuXixi
+Generation
+Retrieval
+Doc 1: "Guns and Roses (2012 film)" Xiao Dongbeitries to beg for 
+money. By luck, he runs into Gu Xixi(Cheng Yuanyuan), the daughter of 
+the bank's president. He saves her from an air raid while being injured 
+himself. ……
+Doc 1:"Guns and Roses (Numbers)" his former girlfriend from 
+Albuquerque, New Mexico, Bureau of Alcohol, …… 
+Doc 3:"Rose Hip Rose" Rose Hip Rose The series primarily deals with 
+Kasumi Asakura, a.k.a. Rose Hip …..
+(a) Hallucinations Originate in the Retrieval Stage
+Nina
+Generation
+Retrieval
+Doc 1: "Fez (That '70s Show)". Fez worked at DMV from season 5 to 
+season 7, where he met Nina, his short stint girlfriend.……
+Doc 2:"Green card marriage": In the season 5 finale of "That '70s 
+Show", Fez marries Laurie Formanto avoid deportation. In the two-part 
+season two finale of the sitcom "Melissa & Joey", Joe proposes to and 
+marries Elena, his Russian girlfriend, …… 
+Doc 3:"Fez (That '70s Show )" Fez is a fictional character and one of the 
+four male leads on the Fox Network's "That '70s Show", ...
+Q: Who does Fez marry in that 70's show?
+A: Laurie Forman.
+(b) Hallucinations Originate in the Generation Stage
+Figure 1: Demonstration of Hallucination in Retrieval-
+Augmented Generation. In the first example, the error
+stems from retrieving information about a movie with
+the same name instead of the correct entity (a band).
+In the second, despite retrieving accurate information,
+retrieval noise still leads to an incorrect response.
+reduces reliance on the model’s parametric knowl-
+edge, thereby aiming to improve factual correct-
+ness. However, as shown in Figure 1, RAG in-
+troduces a new challenge: Biased or erroneous
+retrieval results can mislead the generation, com-
+pounding the hallucination problem rather than
+solving it. In other words, the LLM’s inherent
+hallucinations are further amplified when retrieval
+provides incomplete, biased, or misleading infor-
+mation, leading to what we term Hallucination on
+Hallucination. Addressing this challenge requires
+optimizing the entire RAG pipeline, encompassing
+both retrieval and generation stages.
+15839

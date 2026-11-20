@@ -1,0 +1,158 @@
+MedRAG: Enhancing Retrieval-augmented Generation with
+Knowledge Graph-Elicited Reasoning for Healthcare Copilot
+a scoping review and framework. Journal of patient safety 19, 1 (2023), e25–e30.
+[10] Matthijs Douze, Alexandr Guzhva, Chengqi Deng, Jeff Johnson, Gergely Szilvasy,
+Pierre-Emmanuel Mazaré, Maria Lomeli, Lucas Hosseini, and Hervé Jégou. 2024.
+The faiss library. arXiv preprint arXiv:2401.08281 (2024).
+[11] Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad
+Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan,
+et al. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783 (2024).
+[12] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva
+Mody, Steven Truitt, and Jonathan Larson. 2024. From local to global: A graph
+rag approach to query-focused summarization. arXiv preprint arXiv:2404.16130
+(2024).
+[13] Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin,
+Tat-Seng Chua, and Qing Li. 2024. A survey on rag meeting llms: Towards
+retrieval-augmented large language models. In Proceedings of the 30th ACM
+SIGKDD Conference on Knowledge Discovery and Data Mining. 6491–6501.
+[14] Arsene Fansi Tchango, Rishab Goel, Zhi Wen, Julien Martel, and Joumana Ghosn.
+2022. Ddxplus: A new dataset for automatic medical diagnosis. Advances in
+neural information processing systems 35 (2022), 31306–31318.
+[15] Yanjun Gao, Ruizhe Li, John Caskey, Dmitriy Dligach, Timothy Miller, Matthew M
+Churpek, and Majid Afshar. 2023. Leveraging a medical knowledge graph into
+large language models for diagnosis prediction. arXiv preprint arXiv:2308.14321
+(2023).
+[16] Yifu Gao, Linbo Qiao, Zhigang Kan, Zhihua Wen, Yongquan He, and Dongsheng
+Li. 2024. Two-stage Generative Question Answering on Temporal Knowledge
+Graph Using Large Language Models. arXiv preprint arXiv:2402.16568 (2024).
+[17] Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat, and Mingwei Chang.
+2020. Retrieval augmented language model pre-training. In International confer-
+ence on machine learning. PMLR, 3929–3938.
+[18] Tianyu Han, Lisa C Adams, Jens-Michalis Papaioannou, Paul Grundmann,
+Tom Oberhauser, Alexander Löser, Daniel Truhn, and Keno K Bressem. 2023.
+MedAlpaca–An Open-Source Collection of Medical Conversational AI Models
+and Training Data. arXiv preprint arXiv:2304.08247 (2023).
+[19] Gautier Izacard, Mathilde Caron, Lucas Hosseini, Sebastian Riedel, Piotr Bo-
+janowski, Armand Joulin, and Edouard Grave. 2021. Unsupervised dense in-
+formation retrieval with contrastive learning. arXiv preprint arXiv:2112.09118
+(2021).
+[20] Albert Q Jiang, Alexandre Sablayrolles, Antoine Roux, Arthur Mensch, Blanche
+Savary, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, Emma Bou
+Hanna, Florian Bressand, et al. 2024. Mixtral of experts. arXiv preprint
+arXiv:2401.04088 (2024).
+[21] Jinhao Jiang, Kun Zhou, Wayne Xin Zhao, Yaliang Li, and Ji-Rong Wen. 2023. Rea-
+soninglm: Enabling structural subgraph reasoning in pre-trained language mod-
+els for question answering over knowledge graph. arXiv preprint arXiv:2401.00158
+(2023).
+[22] Xinke Jiang, Yue Fang, Rihong Qiu, Haoyu Zhang, Yongxin Xu, Hao Chen,
+Wentao Zhang, Ruizhe Zhang, Yuchen Fang, Xu Chu, et al. 2024. TC-RAG:
+Turing-Complete RAG’s Case study on Medical LLM Systems. arXiv preprint
+arXiv:2408.09199 (2024).
+[23] Xinke Jiang, Ruizhe Zhang, Yongxin Xu, Rihong Qiu, Yue Fang, Zhiyuan Wang,
+Jinyi Tang, Hongxin Ding, Xu Chu, Junfeng Zhao, et al. 2024. HyKGE: A Hypoth-
+esis Knowledge Graph Enhanced Framework for Accurate and Reliable Medical
+LLMs Responses. arXiv preprint arXiv:2312.15883 (2024).
+[24] Zhengbao Jiang, Frank F Xu, Luyu Gao, Zhiqing Sun, Qian Liu, Jane Dwivedi-
+Yu, Yiming Yang, Jamie Callan, and Graham Neubig. 2023. Active retrieval
+augmented generation. arXiv preprint arXiv:2305.06983 (2023).
+[25] Wall Street Journal. 2023. OpenAI Expands Healthcare Push With
+Color Health’s Cancer Copilot. The Wall Street Journal (2023).
+https://www.wsj.com/articles/openai-expands-healthcare-push-with-color-
+healths-cancer-copilot-86594ff1 Accessed: 2024-09-18.
+[26] Minki Kang, Jin Myung Kwak, Jinheon Baek, and Sung Ju Hwang. 2023. Knowl-
+edge graph-augmented language models for knowledge-grounded dialogue gen-
+eration. arXiv preprint arXiv:2305.18846 (2023).
+[27] Urvashi Khandelwal, Omer Levy, Dan Jurafsky, Luke Zettlemoyer, and Mike
+Lewis. 2019. Generalization through memorization: Nearest neighbor language
+models. arXiv preprint arXiv:1911.00172 (2019).
+[28] Ching Hung Lee, Zehao Zhang, and Xuejiao Zhao. 2021. A survey of smart
+healthcare for the elderly based on user requirements and supply accessibility.
+In 5th International Conference on Crowd Science and Engineering. 108–112.
+[29] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp
+tasks. Advances in Neural Information Processing Systems 33 (2020), 9459–9474.
+[30] Hongwei Li, Sirui Li, Jiamou Sun, Zhenchang Xing, Xin Peng, Mingwei Liu, and
+Xuejiao Zhao. 2018. Improving api caveats accessibility by mining api caveats
+knowledge graph. In 2018 IEEE International Conference on Software Maintenance
+and Evolution (ICSME). IEEE, 183–193.
+[31] Yunxiang Li, Zihan Li, Kai Zhang, Ruilong Dan, Steve Jiang, and You Zhang.
+2023. Chatdoctor: A medical chat model fine-tuned on a large language model
+meta-ai (llama) using medical domain knowledge. Cureus 15, 6 (2023).
+[32] Zhiang Li and Tong Ruan. 2024. Knowledge-routed Automatic Diagnosis with
+Heterogeneous Patient-oriented Graph. IEEE Access (2024).
+[33] Ye Liu, Yao Wan, Lifang He, Hao Peng, and S Yu Philip. 2021. Kg-bart: Knowledge
+graph-augmented bart for generative commonsense reasoning. In Proceedings of
+the AAAI conference on artificial intelligence, Vol. 35. 6418–6425.
+[34] Linhao Luo, Yuan-Fang Li, Gholamreza Haffari, and Shirui Pan. 2023. Reasoning
+on graphs: Faithful and interpretable large language model reasoning. arXiv
+preprint arXiv:2310.01061 (2023).
+[35] Kaixin Ma, Hao Cheng, Yu Zhang, Xiaodong Liu, Eric Nyberg, and Jianfeng Gao.
+2023. Chain-of-skills: A configurable model for open-domain question answering.
+arXiv preprint arXiv:2305.03130 (2023).
+[36] David E Newman-Toker, Najlla Nassery, Adam C Schaffer, Chihwen Winnie Yu-
+Moe, Gwendolyn D Clemens, Zheyu Wang, Yuxin Zhu, Ali S Saber Tehrani, Mehdi
+Fanai, Ahmed Hassoon, et al. 2024. Burden of serious harms from diagnostic
+error in the USA. BMJ Quality & Safety 33, 2 (2024), 109–120.
+[37] John J Norcini, Linda L Blank, Gerald K Arnold, and Harry R Kimball. 1995. The
+mini-CEX (clinical evaluation exercise): a preliminary investigation. Annals of
+internal medicine 123, 10 (1995), 795–799.
+[38] OpenAI. 2023. Color Health’s Cancer Copilot. https://openai.com/index/color-
+health/ Accessed: 2024-09-18.
+[39] OpenAI. 2024. ChatGPT. https://openai.com/index/chatgpt/ Accessed: 2024-10-
+07.
+[40] OpenAI. 2024. GPT-4o. https://openai.com/index/hello-gpt-4o/ Accessed:
+2024-10-07.
+[41] World Health Organization et al. 1992. ICD-11. (No Title) (1992).
+[42] Ori Ram, Yoav Levine, Itay Dalmedigos, Dor Muhlgay, Amnon Shashua, Kevin
+Leyton-Brown, and Yoav Shoham. 2023. In-context retrieval-augmented language
+models. Transactions of the Association for Computational Linguistics 11 (2023),
+1316–1331.
+[43] Haocong Rao, Minlin Zeng, Xuejiao Zhao, and Chunyan Miao. 2024. A Survey
+of Artificial Intelligence in Gait-Based Neurodegenerative Disease Diagnosis.
+arXiv preprint arXiv:2405.13082 (2024).
+[44] Zhiyao Ren, Yibing Zhan, Baosheng Yu, Liang Ding, and Dacheng Tao. 2024.
+Healthcare copilot: Eliciting the power of general llms for medical consultation.
+arXiv preprint arXiv:2402.13408 (2024).
+[45] Parth Sarthi, Salman Abdullah, Aditi Tuli, Shubh Khanna, Anna Goldie, and
+Christopher D Manning. 2024. Raptor: Recursive abstractive processing for
+tree-organized retrieval. arXiv preprint arXiv:2401.18059 (2024).
+[46] Priyanka Sen, Sandeep Mavadia, and Amir Saffari. 2023. Knowledge graph-
+augmented language models for complex question answering. In Proceedings of
+the 1st Workshop on Natural Language Reasoning and Structured Explanations
+(NLRSE). 1–8.
+[47] Xiaoming Shi, Jie Xu, Jinru Ding, Jiali Pang, Sichen Liu, Shuqing Luo, Xingwei
+Peng, Lu Lu, Haihong Yang, Mingtao Hu, et al. 2023. Llm-mini-cex: Automatic
+evaluation of large language model for diagnostic conversation. arXiv preprint
+arXiv:2308.07635 (2023).
+[48] Karthik Soman, Peter W Rose, John H Morris, Rabia E Akbas, Brett Smith, Braian
+Peetoom, Catalina Villouta-Reyes, Gabriel Cerono, Yongmei Shi, Angela Rizk-
+Jackson, et al. 2023. Biomedical knowledge graph-enhanced prompt generation
+for large language models. arXiv preprint arXiv:2311.17330 (2023).
+[49] Weihang Su, Yichen Tang, Qingyao Ai, Zhijing Wu, and Yiqun Liu. 2024. Dragin:
+Dynamic retrieval augmented generation based on the real-time information
+needs of large language models. arXiv preprint arXiv:2403.10081 (2024).
+[50] Zhi Rui Tam, Cheng-Kuang Wu, Yi-Lin Tsai, Chieh-Yen Lin, Hung-yi Lee, and
+Yun-Nung Chen. 2024. Let me speak freely? a study on the impact of for-
+mat restrictions on performance of large language models. arXiv preprint
+arXiv:2408.02442 (2024).
+[51] Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot, and Ashish Sabharwal.
+2022. Interleaving retrieval with chain-of-thought reasoning for knowledge-
+intensive multi-step questions. arXiv preprint arXiv:2212.10509 (2022).
+[52] Yi-Lin Tuan, Yun-Nung Chen, and Hung-yi Lee. 2019. Dykgchat: Benchmarking
+dialogue generation grounding on dynamic knowledge graphs. arXiv preprint
+arXiv:1910.00610 (2019).
+[53] Deeksha Varshney, Aizan Zafar, Niranshu Kumar Behera, and Asif Ekbal. 2023.
+Knowledge graph assisted end-to-end medical dialog generation. Artificial
+Intelligence in Medicine 139 (2023), 102535.
+[54] Jinge Wang, Zien Cheng, Qiuming Yao, Li Liu, Dong Xu, and Gangqing Hu.
+2024. Bioinformatics and biomedical informatics with ChatGPT: Year one review.
+Quantitative Biology (2024).
+[55] Zixiang Wang, Yinghao Zhu, Junyi Gao, Xiaochen Zheng, Yuhui Zeng, Yifan He,
+Bowen Jiang, Wen Tang, Ewen M Harrison, Chengwei Pan, et al. [n. d.]. RetCare:
+Towards Interpretable Clinical Decision Making through LLM-Driven Medical
+Knowledge Retrieval. In Artificial Intelligence and Data Science for Healthcare:
+Bridging Data-Centric AI and People-Centric Healthcare.
+[56] Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi,
+Quoc V Le, Denny Zhou, et al. 2022. Chain-of-thought prompting elicits reason-
+ing in large language models. Advances in neural information processing systems

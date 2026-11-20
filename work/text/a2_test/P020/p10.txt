@@ -1,0 +1,99 @@
+396
+Appendix
+A Query-Document Pair Examples
+The following AEP query-document examples
+highlight the necessity for product domain-specific
+knowledge in providing accurate and detailed re-
+sponses to the user’s questions:
+How to create a segment?
+Question
+In the Experience Platform UI, click Segments in the 
+left navigation, and then click Create segment. The 
+Segment Builder appears. From the left Fields column 
+and under the Attributes tab, click the folder named 
+XDM Individual Profile and then click the folder with 
+the namespace of your organization. The folder named 
+Customer AI contains the results of prediction runs and 
+are named after the instance the scores belong to. 
+Click an instance folder to access its results of the 
+desired instance. Located in the center of Segment 
+Builder, drag and drop the Score attribute onto the 
+rule builder canvas to define a rule. Under the right-
+hand Segment properties column, provide a name for the 
+segment. Above the left-hand Fields column, click the 
+gear icon and select a Merge policy from the drop-down. 
+Finally, click Save to create the segment.
+Document
+How to delete existing fields from a schema?
+Question
+After you have added a field group to a schema in 
+Experience Platform, you can remove any fields that you 
+do not need. To remove a single field, select the field 
+in the canvas and then select Remove in the right rail. 
+If there are multiple fields you wish to remove, you 
+can manage the field group as a whole. Select a field 
+belonging to the group in the canvas, then select 
+Manage related fields in the right rail. A dialog 
+appears showing the structure of the field group in 
+question. From here you can use the provided checkboxes 
+to select or deselect the fields that you require. When 
+you are satisfied, select Confirm to remove the 
+selected fields. 
+Document
+What are known and anonymous identities? 
+Question
+A known identity in Experience Platform refers to an 
+identity value that can be used on its own or with 
+other information to identify, contact, or locate an 
+individual person. Examples of known identities may 
+include email addresses, phone numbers, and CRM IDs. An 
+anonymous identity in Experience Platform refers to an 
+identity value that cannot be used on its own or with 
+other information to identify, contact, or locate an 
+individual person (such as a cookie ID).
+Document
+Figure 4: Examples of user query and relevant product
+documentation in the dataset.
+B LLM Prompts
+This section provides an overview of the high-level
+structures for prompts utilized in our study
+You are a smart assistant designed to act as a user 
+coming up with questions about a product.
+Given a piece of document, you must come up with a 
+question that can be used to mimic user's behavior.
+When coming up with this question, you must respond in 
+the following format:
+  ```
+  {{
+    "question": "$YOUR_QUESTION_HERE",
+  }}
+  ```
+Everything between the ``` must be valid json.
+Please come up with a question, in the specified JSON 
+format, for the following document:
+----------------
+{{DOCUMENT}}
+Query Generation LLM Prompt 
+Figure 5: LLM Prompt for Query Generation: Simulat-
+ing user behavior for document-based question synthe-
+sis
+You are an assistant tasked with determining if a given 
+document contains information relevant to answering a 
+user’s question about a product
+User Question: {{QUERY}}
+Document Content: {{DOCUMENT}}
+The last sentence in your response should include the 
+Final Answer, by choosing one from: 'Yes' or 'No'. 
+Let's think step by step.
+You must respond in the following format:
+   ```
+  {{
+  "reasoning": "$YOUR_REASONING_HERE",
+  "final_answer": "$YOUR_ANSWER_HERE",
+  }}
+  ```
+Everything between the ``` must be valid json. 
+Pair Annotation LLM Prompt
+Figure 6: LLM Prompt for Query-Document Relevance
+Annotation: Binary labeling with explanatory reasoning
+for the relevance annotation.

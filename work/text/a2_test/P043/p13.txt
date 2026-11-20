@@ -1,0 +1,51 @@
+6 Appendix
+6.1 Proof of Theorem 2
+Proof. The random variables of our concern are the similarity scores between the global query qabs and Vabs or
+Vfused under the HMV and SVF method, respectively. Let XHMV = qT absVabs and XSVF = qT absVfused. According
+to the derivation from Theorem 1, we have E[XHMV] = 1 and E[XSVF] = (1−w)+w ·cos(θ) = 1−w(1−cos(θ)).
+Both the query qabs and the vector Vabs are modeled as Gaussian distributions, and their inner product is
+also a random variable following a Gaussian distribution. We define its variance as σ2 HMV = Var(qT absVabs).
+Similarly, σ2 SVF = Var(qT absVfused).
+Our goal is to set an upper bound on the probability that the value of XHMV is less than 1 − ϵ. Applying
+Hoeffding’s inequality, we obtain:
+P (XHMV ≤ 1 − ϵ) ≤ exp
+
+− ϵ2
+2σ2 HMV
+
+Let C = w(1 − cos(θ)), then the expectation of SVF can be written as E[XSVF] = µS = 1 − C.
+Case 1: Small Deviation (0 < ϵ ≤ C). We standardize XSVF:
+P (XSVF < 1 − ϵ) = P
+ XSVF − µS
+σSVF
+< 1 − ϵ − µS
+σSVF
+
+Let Φ(·) denote the cumulative distribution function of the standard normal distribution. Then, we obtain:
+P (XSVF < 1 − ϵ) = Φ
+ 1 − ϵ − µS
+σSVF
+
+= Φ
+ C − ϵ
+σSVF
+
+In this case, C − ϵ ≥ 0. Therefore, P (XSVF < 1 − ϵ) ≥ Φ(0) = 0.5. Since ϵ is a positive constant,
+P (XHMV ≤ 1 − ϵ) remains a low-probability event constrained by an exponentially decaying term. Thus, a
+negligible tail probability is clearly smaller than a significant probability of at least 0.5.
+Case 2: Large Deviation (ϵ > C). This case describes a more extreme requirement. We can view both events
+as the extent to which the random variables deviate from their respective means.
+The distance between XHMV and its mean 1 is at least ϵ:
+P (XHMV < 1 − ϵ) = P (XHMV − E[XHMV] < −ϵ)
+The distance between XSVF and its mean 1 − C is at least ϵ − C:
+P (XSVF < 1 − ϵ) = P (XSVF < µS − (ϵ − C)) = P (XSVF − E[XSVF] < −(ϵ − C))
+Since ϵ > C, we know that ϵ > ϵ − C > 0. Therefore, in practical scenarios within a specialized domain,
+the probability of a large deviation ϵ occurring in the specialized method HMV is much smaller than the
+probability of a small deviation occurring in the general method SVF. On the other hand, formally, the
+probability upper bound of XHMV decays as exp(−ϵ2), while the probability of XSVF decays as exp(−(ϵ − C)2).
+Since ϵ2 > (ϵ − C)2, the decay rate of XHMV is faster, and its probability value is smaller.
+6.2 Main Experimental Details
+In our experiments, we employ a total of five baseline methods, with their specific configurations detailed as
+follows:
+(a) Rule-based Chunking Methods
+13

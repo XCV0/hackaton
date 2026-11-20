@@ -1,0 +1,86 @@
+Train Data Wiki-VISA Paper-VISA
+Average [<1] Passage [>1] Passage Non-Passage Average Passage Non-Passage
+bbx ans bbx ans bbx ans bbx ans bbx ans bbx ans bbx ans
+Wiki 54.2 65.2 75.6 66.5 50.1 56.0 36.8 73.1 27.8 36.2 20.5 32.6 35.1 39.7
+Paper 0.2 42.6 0 46.3 0.4 33.5 0.1 48.1 68.2 43.8 58.1 41.6 78.2 45.9
+FineWeb 37.6 50.2 48.9 45.1 57.3 52.3 6.6 53.1 22.0 43.3 26.5 41.7 17.4 44.9
+Wiki+FineWeb 58.2 65.3 68.7 66.6 61.7 57.1 44.1 72.1 21.0 43.1 18.5 42.2 23.4 43.9
+Paper+FineWeb 36.1 48.7 51.8 49.6 49.6 44.2 6.8 52.4 66.5 44.6 56.1 42.2 76.9 47.0
+Wiki+Paper+FineWeb 58.1 64.8 69.9 65.0 58.7 56.7 45.8 72.7 67.6 44.3 55.9 41.5 79.3 47.1
+Table 7: Effectiveness of VISA trained on different combinations training data for bounding box accuracy (bbx) and
+answer accuracy (ans) in the single oracle candidate setting.
+Single Oracle Candidate [<1] Passage [>1] Passage non-Passage
+bbx ans bbx ans bbx ans
+Qwen2-2B-VL (zeroshot prompt) 0.1 30.7 0.0 22.7 0.0 35.9
+Qwen2-7B-VL (zeroshot prompt) 1.7 52.0 0.1 39.7 0.1 57.8
+Table 8: Effectiveness of prompting Qwen2-VL-2B and
+7B in zero-shot, in the single oracle candidate setting in
+Wiki-VISA.
+larger models: zero-shot prompting methods are
+not ready to effectively conduct the VISA task.
+A.8 Prompt for Single Oracle candidate VISA
+The following prompt template was used to for-
+mat the model’s inputs and outputs for training the
+Single Oracle Candidate VISA.
+Model Input:
+System:
+Given a document image, your task is to answer the
+question and locate the source of the answer via a
+bounding box.
+User:
+{image} Image Size: {image.size}
+Question: {question}
+Model Output:
+Assistant:
+Answer: {answer}
+Bounding Box: {bounding_box}
+We also explored different prompting strategies that
+swap the order of Answer and Bounding Box in
+the above prompt template and the comparison is
+shown in Table 9.
+Single Oracle Candidate [<1] Passage [>1] Passage non-Passage
+bbx ans bbx ans bbx ans
+VISA-7B-Single 75.6 66.5 50.1 56.0 36.8 73.1
+VISA-7B-Single-Swap 72.8 65.0 44.0 53.9 34.8 69.3
+Table 9: Comparision between using the above prompt
+template (VISA-7B-Single) and swapping the order of
+Answer and Bounding Box. (VISA-7B-Single-Swap)
+A.9 Prompt for Multi-candidate VISA
+The following prompt template was used to for-
+mat the model’s inputs and outputs for training the
+Multi-candidate VISA.
+Model Input:
+System:
+Given document images, your task is to answer the
+question and locate the source of the answer via a
+bounding box.
+User:
+{image1} Image Size: {image1.size}
+{image2} Image Size: {image2.size}
+{image3} Image Size: {image3.size}
+Question: {question}
+Model Output:
+Assistant:
+Answer: {answer}
+Evidence Document: {index}
+Bounding Box: {bounding_box}
+A.10 Prompt for synthetic data generation
+The following prompt was used for prompting
+QWen2-VL-72B to generate synthetic questions
+and answers for Paper-VISA and FineWeb-VISA
+datasets.
+System:
+Ask a question that can be specifically answered by
+the content in the red bounding box area and give a
+short answer. The question can be a wh- question,
+a yes/no question, or a how question, that can be
+answered in a few words.
+Output format:
+Question: <question>
+Short Answer: <short answer>
+Or simply return ‘Empty’ if the bounding box area is
+not visible or informative.
+User: {image}
+An example of synthetic data from Paper-VISA can
+be found in Figure 3.
+30166

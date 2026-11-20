@@ -1,0 +1,102 @@
+ranking offers a cost-effective solution by reassess-
+ing the relevance of candidate results before re-
+sponse generation. Related research (Yan and Xie,
+2024; Yang et al., 2025) employs the multi-stage re-
+trieval strategy to evaluate the correlation between
+queries and documents from multiple perspectives,
+incrementally optimizing precision with controlled
+overhead. Despite some progress in related re-
+search, multimodal retrieval-augmented generation
+still faces several challenges: (1) Multimodal fine-
+grained semantic alignment: The system needs to
+accurately identify multimodal fine-grained seman-
+tic associations to achieve precise filtering of the
+retrieved multimodal document collection. (2) Ob-
+jective mismatch between the retrieval and genera-
+tion stages: Retrievers are typically trained using
+pre-trained cross-modal representations or static
+annotation data, making it difficult to verify if re-
+trieved content is correctly utilized during genera-
+tion. This can lead to irrelevant or confusing infor-
+mation, compromising the factual consistency and
+coherence of the generated responses.
+We propose a progressive multimodal re-ranking
+framework, as shown in Figure 1, that im-
+proves LLM performance by progressively locat-
+ing fine-grained multimodal knowledge. Built on
+CLIP-based visual coarse-grained retrieval, the
+framework first identifies relevant textual sections
+through fine-grained late-interaction re-ranking,
+and then performs multimodal section reassess-
+ment to further refine the retrieved evidence. To
+train the lightweight re-ranking module, we intro-
+duce a curriculum-learning strategy with hard neg-
+atives that are semantically similar to positive sam-
+ples but contain misleading information. We con-
+ducted extensive experimental evaluations on two
+widely used knowledge-augmented VQA bench-
+mark datasets—Infoseek (Chen et al., 2023) and
+Enc-VQA (Mensink et al., 2023). The results
+demonstrate that our method achieves state-of-the-
+art question-answering accuracy and competitive
+retrieval performance.
+In summary, our contributions are as follows:
+1. We propose a progressive re-ranking frame-
+work for multimodal retrieval-augmented gen-
+eration. This framework introduces a multi-
+stage, multi-perspective knowledge compari-
+son process to locate key section information
+of candidate knowledge entries and enhances
+the accuracy of LLMs in answering questions.
+2. We introduce a curriculum learning-based
+training strategy for multimodal re-ranking,
+which progressively guides the retriever to
+distinguish semantically similar knowledge
+entries through similar visual entity paragraph
+sampling and hard-negative sampling based
+on LLM decoding-rank perturbation.
+3. Our model achieves state-of-the-art VQA per-
+formance on two benchmark datasets - Infos-
+eek and Enc-VQA, demonstrating the effec-
+tiveness of the proposed method. Furthermore,
+a series of ablation experiments validate the
+effectiveness of the proposed components.
+2 Related Works
+Visual Question Answering Benchmarks: Early
+VQA tasks (Antol et al., 2015; Goyal et al., 2017)
+focused on identifying attributes and detecting ob-
+jects within images, often relying solely on visual
+information. Recently, knowledge-based VQA has
+gained prominence, challenging models to inte-
+grate external knowledge for reasoning and an-
+swering. Representative datasets include OK-VQA
+(Marino et al., 2019), InfoSeek (Chen et al., 2023),
+and Enc-VQA (Mensink et al., 2023).
+OK-VQA (Marino et al., 2019) and A-OKVQA
+(Schwenk et al., 2022) assess a model’s ability
+to integrate common-sense knowledge, which ex-
+isting MLLMs (Chowdhery et al., 2023) may al-
+ready possess through their pre-training data. Con-
+versely, InfoSeek (Chen et al., 2023) and Enc-VQA
+(Mensink et al., 2023) emphasize information re-
+trieval capabilities, requiring fine-grained open-
+world knowledge search to answer questions about
+detailed attributes of visual entities. These datasets
+utilize large-scale Wikipedia datasets as a multi-
+modal knowledge corpus. Because the knowledge
+corpus rarely appears in MLLM training corpora,
+even state-of-the-art MLLMs (Chowdhery et al.,
+2023) struggle with implicit knowledge insuffi-
+ciency when answering factual queries about de-
+tailed attributes. This poses a significant challenge
+for building robust and generalizable multimodal
+question-answering systems.
+Retrieval-augmented generation for VQA: To
+address hallucination and knowledge obsolescence
+in LLM systems, retrieval-augmented genera-
+tion (RAG) has become a prevalent solution for
+knowledge-intensive tasks. Existing methods for
+multimodal RAG typically focus on: (1) Retriever
+performance optimization: Early approaches (Gao
+et al., 2022; Gui et al., 2022) used DPR or CLIP
+41136

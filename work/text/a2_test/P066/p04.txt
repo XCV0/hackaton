@@ -1,0 +1,120 @@
+scope of relevance or when there is insuffi-
+cient information to provide a safe and accu-
+rate response.
+Furthermore, these metrics often do not reflect
+when the system appropriately refuses to address
+the question. This is critical in a clinical setting as
+clinicians, and similarly clinical QA systems must
+stay within their scope of practice.
+3 Proposed approach
+3.1 Deriving metrics towards a safety case
+In order to align our framework towards the ev-
+idence required to demonstrate if a clinical sys-
+tem is safe, we sought inspiration from published
+safety engineering frameworks - namely the Safety
+Assurance of autonomous systems in Complex
+Environments (SACE) guidance (Hawkins et al.,
+2022). Structured safety engineering approaches
+have been applied towards the assurance of high-
+integrity autonomous systems (AS) such as mar-
+itime vessels (Nakashima et al., 2023), automo-
+tive (Rahman et al., 2023; Hunter et al., 2024),
+aerospace (Torens et al., 2022), and healthcare do-
+mains (Jia et al., 2022; Festor et al., 2022).
+The SACE framework, in particular, provides a
+process to systematically integrate safety assurance
+into the development of AS whilst considering the
+system and its environment. Whilst we do not re-
+port all artifacts from the process in its entirety, we
+highlight a few key steps in this process that have
+been applied towards ASTRID’s design. Specifi-
+cally, we considered the principles of:
+• Operating Context Assurance: Identifying
+the different clinical scenarios a patient might
+pose to a QA agent (see Figure 2).
+• Hazardous Scenario Identification: Analyz-
+ing how RAG systems could behave in haz-
+ardous ways within these scenarios.
+• Safe Operating Concept Assurance: Defin-
+ing how an ideal system should behave in re-
+sponse to different queries.
+• Out-of-Context Operation Assurance: De-
+termining how the system should respond
+when a question falls outside the scope.
+The clinical context is essential for determining
+appropriateness. For instance, the question, "Is it
+normal to have stomach cramps and vomiting?"
+would be irrelevant during a follow-up appointment
+for routine eye surgery, and the system should not
+to respond. However, if posed by a patient who has
+just been discharged after bowel surgery, it is not
+Question asked
+Question not clear Clinical Question
+Emergency
+Question /
+Statement
+Non-clinical /
+Administrative
+Question
+Within Scope Out of Scope
+Knowledge Source
+has information
+regarding the
+question
+Knowledge Source 
+has no information
+regarding the
+question
+Knowledge Source
+has information
+regarding the
+question
+Knowledge Source
+has no information
+regarding the
+question
+Figure 2: Clinical Operating Contexts that face a clinical
+QA agent.
+only highly relevant but also critical that the system
+provides a response. This is illustrated in Figure 3.
+These concepts were outlined in a workshop
+where the dataset of real-world questions posed by
+patients to a voice-based AI conversational ques-
+tion were reviewed. The workshop consisted of
+AI developers, a clinician, and a safety practitioner
+(summarized in Figure 14). The analysis served as
+a bridge between subjective clinical assessments of
+harm and helpfulness and component-level valida-
+tion scenarios for appropriate system performance.
+From the subsequent hazard analysis and the def-
+inition of safe operating requirements, it became
+clear that existing RAG evaluation metrics do not
+adequately capture key clinical risks in a conversa-
+tional QA setting.
+Q: "Is it normal to
+have stomach
+cramps and
+vomiting?"
+A: "Sorry I can't
+really help with that
+as it's not relevant"
+(Refusal) 
+Patient QA Agent
+A post-operative bowel
+surgery pathway
+A post-operative eye
+surgery pathway
+Within Scope Out of Scope
+✅ Appropriate Refusal
+The system is appropriately
+declining to answer this
+❌ Inappropriate Refusal
+The system is should be
+responding to this. 
+In the
+Operating
+Context of a.. 
+Figure 3: Whether questions are clinically appropriate
+relies heavily on the clinical context, thus metrics need
+to be situated in this context.
+16703

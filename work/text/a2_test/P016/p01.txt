@@ -1,0 +1,91 @@
+Findings of the Association for Computational Linguistics: EACL 2026, pages 697–716
+March 24-29, 2026 ©2026 Association for Computational Linguistics
+Multilingual Retrieval-Augmented Generation for Knowledge-Intensive
+Question Answering Task
+Leonardo Ranaldi Barry Haddow Alexandra Birch
+Institute for Language, Cognition and Computation
+School of Informatics, University of Edinburgh
+{first_name.last_name}@ed.ac.uk
+Abstract
+Retrieval-augmented generation (RAG) has be-
+come a cornerstone of contemporary NLP, en-
+hancing large language models (LLMs) by al-
+lowing them to access richer factual contexts
+through in-context retrieval. While effective in
+monolingual settings, especially in English, its
+use in multilingual tasks remains unexplored.
+This paper investigates the effectiveness of
+RAG across multiple languages by propos-
+ing novel approaches for multilingual open-
+domain question-answering. We evalu-
+ate the performance of various multilingual
+RAG strategies, including question-translation
+(tRAG), which translates questions into En-
+glish before retrieval, and Multilingual RAG
+(MultiRAG), where retrieval occurs directly
+across multiple languages. Our findings reveal
+that tRAG, while useful, suffers from limited
+coverage. In contrast, MultiRAG improves
+efficiency by enabling multilingual retrieval
+but introduces inconsistencies due to cross-
+lingual variations in the retrieved content. To
+address these issues, we propose Crosslingual
+RAG (CrossRAG), a method that translates
+retrieved documents into a common language
+(e.g., English) before generating the response.
+Our experiments show that CrossRAG signif-
+icantly enhances performance on knowledge-
+intensive tasks, benefiting both high-resource
+and low-resource languages.
+1 Introduction
+Retrieval-augmented generation (RAG) aims to
+improve the factuality and memory access of large
+language models (LLMs) by combining external
+knowledge during inference (Lewis et al., 2020b).
+RAG is designed to mitigate some of the well-
+known limitations of LLMs, including the tendency
+for hallucinations and the lack of specific domain
+knowledge in the training data (Siriwardhana et al.,
+2023; Kandpal et al., 2023).
+Augmenting the questions by operating through
+relevant information retrieved from external cor-
+pora, such as Wikipedia effectively reduced inac-
+curate generation, thereby notably improving accu-
+racies (Gao et al., 2024; Fan et al., 2024).
+Nevertheless, previous efforts focused on En-
+glish as the data language in their experiments,
+i.e., the language of the user queries and the re-
+trieval corpora. Hence, limited attention is af-
+forded to studying the type and role of non-English
+queries and retrieving multilingual documents to
+augment LLMs’ capabilities. To address this gap,
+Zhang et al. (2022); Thakur et al. (2024a) proposed
+methodologies to evaluate multilingual retrieval.
+On the other side of the coin, a series of studies
+initiated by Chirkova et al. (2024) have explored
+the impact of multilingual documents in the RAG
+pipelines, representing an early step towards under-
+standing multilingual retrieval and generation.
+In this paper, we systematically investigate the
+impact of RAG-based pipelines beyond English,
+aiming to identify potential challenges and propose
+strategies for improving the performance across a
+selection of languages. Taking previous work a
+step further, we evaluate the benefits of extending
+RAG methodologies in multilingual settings by
+analysing the effects of different types of retrieved
+documents on multilingual generative abilities in
+different languages. Complementing the previous
+works, we introduce and analyse the trade-off of
+different approaches that lead LLMs to harness
+multilingual knowledge.
+This leads to the main research questions:
+RQ1: How does multilingual retrieval affect RAG
+accuracy and consistency?
+RQ2: What are the benefits and limitations of
+incorporating multilingual knowledge in RAG?
+RQ3: Which methods could improve multilingual
+RAG performance?
+To answer these answers, we produce a com-
+prehensive evaluation by introducing strategies
+697

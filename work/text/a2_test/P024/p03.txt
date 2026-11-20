@@ -1,0 +1,98 @@
+ing, textual RAG, and visual RAG on the
+VisDoMBench corpus by 12-20% across vari-
+ous open and closed-source LLM settings.
+2 Related Work
+Retrieval Augmented Generation While Large
+Language Models (LLMs) have achieved signifi-
+cant advancements, they still encounter challenges
+in integrating external knowledge and adapting to
+new, unseen data. Retrieval Augmented Generation
+(RAG) addresses these gaps by incorporating exter-
+nal information, enhancing the precision and relia-
+bility of LLM responses (Lewis et al., 2020). RAG
+is utilized across various downstream unimodal
+NLP tasks, including machine translation (Gu et al.,
+2018; He et al., 2021), dialogue generation (Cai
+et al., 2018), abstractive summarization (Peng et al.,
+2019), and knowledge-intensive generation (Izac-
+ard and Grave, 2020; Lewis et al., 2020). In visual
+question answering (VQA), (Lin and Byrne, 2022)
+addresses open-domain challenges by using object
+detection, image captioning, and optical character
+recognition (OCR) to transform target images into
+textual data. Moving beyond text-only contexts,
+MuRAG retrieves both text and image data, incor-
+porating images as visual tokens (Chen et al., 2022).
+RAMM enhances performance by retrieving and
+encoding similar biomedical images and their cap-
+tions through distinct networks (Yuan et al., 2023).
+Long Context Document Benchmarks The com-
+parison of long context document question-answer
+benchmarks (Table 1), highlights the diversity in
+content types, multi-document capabilities, and do-
+mains. Existing benchmarks such as L-Eval (An
+et al., 2023), Marathon (Zhang et al., 2023), and
+LooGLE (Li et al., 2023) primarily focus on text-
+based content from multi-domain sources but do
+not support multi-document inputs. LongBench
+(Bai et al., 2023) and Loong (Wang et al., 2024c)
+extend their evaluations to include multi-document
+settings, although they remain text-centric.
+Comparison with existing datasets: Certain
+benchmarks like MPDocVQA (Tito et al., 2023),
+UDA (Hui et al., 2024), and MMLONGBENCH-
+DOC (Ma et al., 2024) expand the content spec-
+trum by incorporating tables, charts, and slides, but
+they are limited to single-document question an-
+swering. In contrast, VisDoMBench supports multi-
+document question answering across various con-
+tent types, including text, tables, charts, and slides,
+offering a more comprehensive multi-domain eval-
+uation framework.
+3 Problem Formulation
+Given a query q, we have a collection of M doc-
+uments D = {d1, d2, . . . , dM }, wherein each doc-
+ument di may consist of a set of Ni pages rep-
+resented by P i = {pi 1, pi 2, . . . , pi Ni }. We aim to
+generate text ˆa for each query q that accurately an-
+swers the user query. The answer generation relies
+on retrieving relevant evidence context from one or
+more documents. Each query q may require infor-
+mation spread across different pages from one or
+more of the associated documents in D.
+We aim to propose a framework that can accurately
+answer questions over a collection of multi-page
+documents where the system first retrieves rele-
+vant evidence at the level of individual pages, para-
+graphs or text chunks, followed by using the re-
+trieved context to generate answer text.
+4 VisDoMBench
+Every data point in VisDoMBench can be ex-
+pressed as triple (q, D, ˆa), where a question q
+is posed to a set of documents D, with ground-
+truth answer ˆa. We re-purpose five existing
+document-QA datasets to form our benchmark. Ta-
+ble 2 summarises different data splits present in
+VisDoMBench, including summary statistics, QA
+type, and content type.
+4.1 VisDoMBench
+Data Sourcing: In the curation of document
+question-answering datasets, we adhered to the fol-
+lowing criteria: (1) the inclusion of visually rich
+content, encompassing tables, charts, and presen-
+tation slides; (2) the utilization of publicly acces-
+sible source documents; and (3) the presence of
+grounded evidence. These parameters were estab-
+lished to ensure the datasets’ relevance to multi-
+modal information retrieval and their applicabil-
+ity to real-world question-answering tasks. Our
+corpus comprises test/eval sets sourced from sev-
+eral established datasets. We incorporated the Pa-
+perTab and FeTaTab splits from the UDA Bench-
+mark(Hui et al., 2024), which in turn sourced these
+datasets from QASPER(Dasigi et al., 2021) and
+FeTaQA(Nan et al., 2022), respectively. For chart-
+based question-answering samples, we drew from
+SciGraphQA (Li and Tajbakhsh, 2023), which is
+multi-turn QA dataset on charts from scientific pa-
+6090

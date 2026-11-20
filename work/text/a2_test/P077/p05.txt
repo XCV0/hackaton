@@ -1,0 +1,101 @@
+Table 1: Design Solutions of LEGO-GraphRAG Framework: The framework comprises of four groups of instances: (I) SBE & SBR; (II) SBE & I/OSAR;
+(III) SAE & SBR; (IV) SAE & I/OSAR. When the subgraph-extraction module is optional, an additional group, (V) SBR or I/OSAR, is included.
+Module I: Subgraph-Extraction Module II: Path-Retrieval
+Solution I:
+Structure-based
+Methods
+Solution II:
+Semantic-Augmented
+Methods
+◦ Structure-Based Extraction (SBE)
+-Random Walk-based: Random Walk (RW)
+-Neighborhood-based: K-hop Subgraph-Extraction (KSE)
+-Structural Importance-based: Personalized PageRank (PPR)
+◦ Structure-Based Retrieval (SBR)
+-Enumerated Path-Retrieval (EPR)
+-Shortest Path-Retrieval (SPR)
+◦ Semantic-Augmented Extraction (SAE)
+-with End-to-End Models (EEMs)
+-with Large Language Models (LLMs)
+◦ One-way Semantic-Augmented Retrieval (OSAR)
+-with End-to-End Models (EEMs)
+-with Large Language Models (LLMs)
+◦ Interactive Semantic-Augmented Retrieval (ISAR)
+-with End-to-End Models (EEMs)
+-with Large Language Models (LLMs)
+Table 2: Five Groups of Instances under the LEGO-GraphRAG Framework
+Group Subgraph-Extraction Path-Retrieval Implemented Instances
+Structure-based Methods on Both
+Modules (Group (I): SBE & SBR) SBE (-RW/KSE/PPR) SBR (-EPR/SPR) Our Instance: No.1
+Semantic-Augmented Methods
+on Both Modules
+(Group (II): SAE & I/OSAR)
+SAE (-EEMs/LLMs) OSAR (-EEMs/LLMs) Our Instances: No.2, 3, 4, 5
+SAE (-EEMs/LLMs) ISAR (-EEMs/LLMs) GCR (arXiv24) [72]
+Our Instances: No.6, 7, 8, 9
+Semantic-Augmented Methods
+on Subgraph-Extraction
+(Group (III): SAE & SBR)
+SAE (-EEMs/LLMs) SBR (-EPR/SPR) RoG (ICLR24) [71] GSR (EMNLP24) [45]
+Our Instances: No.10, 11
+Semantic-Augmented Methods
+on Path-Retrieval
+(Group (IV): SBE & I/OSAR)
+SBE (-RW/KSE/PPR) OSAR (-EEMs/LLMs) Our Instances: No.12, 13
+SBE (-RW/KSE/PPR) ISAR (-EEMs/LLMs) StructGPT (EMNLP23) [50]
+Our Instances: No.14, 15
+Without Subgraph-Extraction
+Modules
+(Group (V): SBR or I/OSAR)
+None SBR (-EPR/SPR) -
+None OSAR (-EEMs/LLMs) KELP (ACL24) [65]
+None ISAR (-EEMs/LLMs) ToG (ICLR24) [98], DoG (arXiv24) [74]
+and a query 𝑞, the goal is: EEMs(𝑣 or 𝑒 or 𝜏,𝑞)→ scores. Using
+these scores, the most relevant graph components are identified for
+subgraph-extraction. EEM can be categorized into two main types:
+Statistical Models [73, 90, 91] and Embedding Models/Re-Rankers
+[13, 88]. The former relies on statistical computations, while the
+latter consists of end-to-end neural network models to produce
+embeddings or rank relevance.
+⁓⁓⁓a).1 ⁓⁓⁓⁓⁓⁓⁓Statistical⁓⁓⁓⁓⁓⁓Models. Statistical models are foundational in text
+analysis and semantic modeling, relying on metrics like term fre-
+quency (TF) and inverse document frequency (IDF) [91]. Popular
+methods include BM25 [90] for ranking relevance in information
+retrieval, Latent Semantic Analysis (LSA) [18] for uncovering latent
+semantic structures via dimensionality reduction, and Latent Dirich-
+let Allocation (LDA) [5] for topic modeling, which aids semantic
+similarity through topic distributions.
+For example, BM25 treats textual information attached to graph
+components (nodes, edges, or triples) as “documents” within a
+corpus (the graph). During precomputation, the text of each graph
+component is tokenized, enabling the calculation of TF and IDF.
+When a query is issued, its text undergoes tokenization, and BM25
+computes a relevance score for each graph component based on
+the query terms and their frequency distributions across the graph.
+Statistical models are efficient, with low computational costs and
+short execution times. They are suitable for simpler semantic tasks
+or as baselines in semantic-augmented workflows.
+⁓⁓⁓a).2 ⁓⁓⁓⁓⁓⁓⁓⁓Embedding⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓⁓Models/Re-Rankers. Embedding models and re-
+rankers use pre-trained neural network (NN) models with smaller
+parameter sizes (millions) compared to LLMs (billions). Trained
+on large corpora, they generate dense embeddings that encode
+rich semantic information [88]. Embedding models (e.g., Sentence-
+Transformers [111]) independently generate embeddings for queries
+and graph components (nodes, edges, triples). Semantic similarity
+is computed using metrics [9, 48] like cosine similarity:
+ST(𝑣 or 𝑒 or 𝜏,𝑞)→ cos(emb(𝑣 or 𝑒 or 𝜏), emb(𝑞))
+Re-Rankers (e.g., BGE-Reranker [13]) take combined query and
+graph components as inputs and output a similarity score, allowing
+for deeper contextual interactions:
+BGE(𝑣 or 𝑒 or 𝜏,𝑞)→ NeuralNetworks(emb(𝑣 or 𝑒 or 𝜏)⊕ emb(𝑞))
+These models generally require longer execution and pre-training
+times compared to statistical models. However, their balance of
+efficiency and semantic precision makes them a common choice for
+semantic modeling in GraphRAG. Domain-specific fine-tuning can
+further enhance these models’ performance [45, 65, 71, 72], though
+it comes at an additional cost.
+⁓⁓⁓a).3 ⁓⁓⁓SAE⁓⁓⁓⁓with ⁓⁓⁓⁓⁓EEMs. In the subgraph-extraction module, EEMs
+prune nodes, edges, or triples from graph 𝐺 based on their semantic
+relevance to the query, reducing computational overhead. However,
+directly applying EEMs to large graphs is costly. Thus, it is desired
+to have a pre-filtering step before applying semantic models, which

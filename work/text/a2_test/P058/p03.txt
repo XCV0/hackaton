@@ -1,0 +1,92 @@
+ror diagnosis across detection, retrieval, and gener-
+ation stages.
+3 GranuVistaVQA Benchmark
+To enable verifiable multimodal RAG with fine-
+grained attribution, we construct a knowledge-
+intensive benchmark centered on urban architec-
+tural heritage. Unlike prior datasets that treat im-
+ages as atomic units, our design establishes visual
+elements as first-class retrieval targets and explic-
+itly models the partial observation challenge: real-
+world photographs capture landmarks from varying
+viewpoints, each depicting only a subset of archi-
+tecturally significant elements.
+3.1 Task Formulation
+Given a query image I depicting a landmark from
+an arbitrary viewpoint, the task is to generate a
+comprehensive description covering all visible ar-
+chitectural elements while avoiding hallucination
+about occluded or absent components.
+We associate each landmark with three com-
+ponents: metadata (name, summary, and style)
+that provides high-level context; an element in-
+ventory E = {e1, . . . , ek} listing architecturally
+significant components; and element descriptions
+ED : E → P aragraphs that map each element to
+expert-written text. For each image I, the ground-
+truth visible set Egt(I) ⊆ E contains elements
+visually identifiable in that view. This formulation
+enables modular evaluation: systems must (i) pre-
+dict visible elements ˆE(I) ≈ Egt(I), (ii) retrieve
+relevant descriptions from ED, and (iii) generate
+outputs faithful to both visual and textual evidence.
+This decomposition allows us to isolate failures
+at each stage, distinguishing detection errors from
+retrieval mistakes and generation hallucinations.
+3.2 Data Collection and Annotation
+Domain Selection We focus on architectural her-
+itage for three methodological reasons: (1) ele-
+ments have well-defined visual semantics amenable
+to detection, (2) authoritative knowledge sources
+enable reliable ground truth, and (3) tourist photog-
+raphy naturally exhibits multi-view partial obser-
+vation. We curate 71 landmarks from official cul-
+tural heritage databases, spanning religious build-
+ings, temples, fortifications, and cultural institu-
+tions across diverse architectural traditions.
+Knowledge Corpus Construction For each
+landmark, we compile a structured JSON document
+(a) Panoramic
+ (b) Close-up
+ (c) Partial
+Figure 1: Examples of Multi-Perspective Image.
+following a two-level schema (full specification in
+Appendix B.1):
+xlandmark = (meta, E, ED) (1)
+Textual content is sourced from official tourism por-
+tals and encyclopedic references, then structured
+through: (i) element phrase extraction from author-
+itative descriptions, (ii) cross-landmark normaliza-
+tion to ensure consistent terminology (e.g., “bell
+tower” ≡ “campanile”), and (iii) LLM-assisted de-
+scription generation with human validation (details
+in Appendix B.2). Specifically, we focus on her-
+itage sites in Macau, with all description content in
+Chinese.
+Image Collection We collect 1,422 photographs
+ensuring viewpoint diversity: panoramic shots cap-
+turing overall structure, close-ups revealing fine or-
+namentation, and oblique partial views (Figure 1).
+After collection, we perform comprehensive data
+sanitization to remove privacy-sensitive content,
+including watermarks, visible human faces, and
+personally identifiable information. We also apply
+quality filtering to retain only images with reso-
+lution ≥512px and no visible artifacts. The full
+screening protocol is described in Appendix B.2.
+Visibility Annotation For each image I, annota-
+tors identify Egt(I) following strict visibility crite-
+ria:
+• Visual identifiability: Elements qualify only if
+recognizable from pixels alone, without relying
+on prior landmark knowledge
+• Partial occlusion: Included only when discrim-
+inative visual cues remain (e.g., a half-visible
+scroll counts if its characteristic shape is appar-
+ent)
+• Ambiguity handling: Uncertain cases are ex-
+cluded to avoid false positives
+We employ a human-in-the-loop workflow: an
+LLM proposes candidate elements, which anno-
+tators refine by adding missed elements, remov-
+10477

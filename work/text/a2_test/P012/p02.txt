@@ -1,0 +1,148 @@
+CIKM ’26, November 07–11, 2026, Rome, Italy Hengran Zhang, Keping Bi, Jiafeng Guo, Jiaming Zhang, Shuaiqiang Wang, Dawei Yin, Xueqi Cheng
+Llama3.1
+8B
+Qwen3
+8B
+Qwen3
+14B
+Qwen3
+32B
+0
+10
+20
+30
+40
+50
+60
+70
+Generation Performance
+58.1
++21.9
+58.4
++33.7
+60.7
++30.3
+64.1
++29.5
+Llama3.1-8B
+Qwen3-8BQwen3-14BQwen3-32B
+Human
+Llama3.1-8B
+Qwen3-8B
+Qwen3-14B
+Qwen3-32B
+Generator
+80.30 69.02 68.45 67.61 70.46
+57.95 78.60 64.01 61.33 67.32
+64.26 70.11 80.68 68.45 71.55
+66.58 71.91 72.47 82.16 73.60
+60
+65
+70
+75
+80
+(a) RAG Performance: With vs. Without the Same Top-20 Passages (b) RAG with Different Gold Passages
+Figure 1: (a) RAG accuracy (%) with the same top-20 retrieval
+results upon different LLMs on the NQ dataset. (b) RAG accu-
+racy (%) of LLMs with gold utilitarian passages for different
+LLMs on the NQ dataset.
+that help users accomplish their underlying intent—such as learn-
+ing, deciding, buying, troubleshooting, or navigating [3, 21, 22].
+In the LLM era, however, the consumer of retrieved results shifts:
+instead of directly serving end users, retrieval evidence is primarily
+consumed by the LLM, which synthesizes information into a final
+response. As a result, the optimization target shifts from “utility to
+users” toward utility to LLMs, where evidence quality should be
+judged by whether it improves the LLM’s downstream generation.
+Motivated by this perspective, recent RAG research has increas-
+ingly moved beyond relevance and explored utility-aware retrieval
+and selection [10, 35, 53]. Existing approaches typically obtain pas-
+sage utility signals by measuring generation performance given a
+passage—e.g., the likelihood of producing the ground-truth answer
+[10], or matching-based metrics such as EM/F1 [48]—then using
+these signals to train or distill retrievers. Another line of work per-
+forms post-retrieval selection, prompting LLMs to explicitly judge
+which passages are useful (often with pseudo-answer generation)
+[53], using iterative selection frameworks [49], or training light-
+weight selectors that can process more candidates efficiently [50].
+Despite their effectiveness, most prior work implicitly assumes that
+utility is a generic property: a passage deemed utilitarian should
+benefit any LLM similarly, and thus a single universal notion of
+“good evidence” suffices.
+In this work, we challenge this assumption and argue that util-
+ity in RAG is often LLM-specific. Similar to personalized web
+search, where the usefulness of identical search results can differ
+across users due to intent, expertise, constraints, and preferences,
+different LLMs may have different utility standards due to differ-
+ences in training data, internal knowledge, reasoning behavior, and
+comprehension ability. Concretely, as shown in Figure1(a), even
+when the same top-20 retrieval results are provided, different LLMs
+can exhibit substantially different downstream QA accuracy boost,
+suggesting that the same retrieved evidence may not be equally
+beneficial across models.
+To formalize this phenomenon, we define LLM-specific utility
+as follows: a passage is utilitarian for a target LLM if providing it
+as evidence improves the LLM’s answer generation performance
+compared to answering without any evidence. Under this defini-
+tion, a utilitarian passage must (i) supply information that fills the
+model’s knowledge gap for the query, and (ii) be leveragable by the
+model during generation. Crucially, a passage can be “gold” from
+a human perspective, i.e., high-quality and relevant evidence, yet
+still fail to benefit a specific LLM, either because the model already
+knows the answer or because it cannot reliably interpret, integrate,
+or apply the passage to produce the correct response.
+Based on this principle, we construct LLM-specific gold utilitar-
+ian passages and use them to systematically study passage utility
+from a model-centric perspective. Specifically, we annotate gold
+utilitarian passages for four LLMs with different scales and archi-
+tectures (Qwen3-8B, Qwen3-14B, Qwen3-32B [37], and Llama 3.1-
+8B [5]) on six QA datasets: Natural Questions (NQ) [17], Trivi-
+aQA [13], MS MARCO-FQA (derived from MS MARCO QA [24]),
+HotpotQA [45], FEVER [38], and 2WikiQA [8], using multiple can-
+didate pools to capture diverse evidence sources. Based on this, we
+primarily study the following research questions:
+RQ1: Do LLMs have model-specific utilitarian passages, and how
+are they related to human-annotated evidence? While prior work
+typically treats utility as universal, we ask whether utilitarian pas-
+sages differ across LLMs and whether human gold evidence remains
+optimal under an LLM-centric definition.
+RQ2: How accurately can existing methods assess LLM-specific
+utility? Given that many utility-aware RAG methods rely on LLM-
+based judgments or generation-based proxies, we investigate whether
+these methods truly capture model-specific utility or only recover
+a generic notion of usefulness.
+For RQ1, we make three observations. First, LLM-specific utilitar-
+ian passages exist and are not transferable: each LLM performs best
+with its own gold utilitarian passages, while passages optimized for
+other models are suboptimal. Second, human-annotated evidence
+is not optimal but remains a strong general-utility baseline: it is of-
+ten the second-best choice, indicating robust yet model-agnostic
+utility. Figure 1(b) summarizes these trends by comparing RAG
+performance using (i) each model’s own gold utilitarian passages,
+(ii) other models’ gold utilitarian passages, and (iii) human gold
+passages. Third, the remaining gap is partly due to LLM compre-
+hension and readability: even correct evidence may provide little
+utility if the model cannot effectively leverage it.
+To answer RQ2, we introduce the LLM-specific utility judg-
+ment task: given a query and retrieved candidate passages, the goal
+is to identify the subset of passages that are utilitarian for a tar-
+get LLM. We build a benchmark, i.e., SpecUBench (LLM-Specific
+Utility Benchmark), with LLM-specific ground truth and evalu-
+ate representative utility judgment methods, including verbalized
+selection/ranking with pseudo-answers [50, 53] and probabilistic
+utility estimation based on generation likelihood [35] and attention
+weights [10]. Results show that verbalized methods with pseudo-
+answers achieve better performance on both LLM-specific utility
+judgment evaluation and downstream RAG performance evalua-
+tion compared to other methods. However, our findings reveal a
+critical limitation: when an LLM generates answers using passages
+selected by its own utility judgments, its downstream performance
+is not optimal. Instead, we observe a universal trend across all
+evaluated models: an LLM consistently achieves best generation
+performance when using passage sets selected by a stronger LLM.
+This phenomenon demonstrates that existing methods fail to iden-
+tify LLM-specific utility. These findings highlight an important
+limitation of current utility judgment methods and motivate the
+need for approaches that can capture genuine LLM-specific utility.
+Our contributions are summarized as: (1) We propose LLM-
+specific utility as a model-centric retrieval objective for RAG, and

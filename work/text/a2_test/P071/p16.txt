@@ -1,0 +1,98 @@
+Here is a new example. Simply reply with either
+CORRECT, INCORRECT, NOT ATTEMPTED. Don't
+apologize or correct yourself if there was
+a mistake; we are just trying to grade the
+answer.
+```
+Question: {question}
+Gold target: {target}
+Predicted answer: {predicted_answer}
+```
+Grade the predicted answer of this new question
+as one of:
+A: CORRECT
+B: INCORRECT
+C: NOT_ATTEMPTED
+Just return the letters "A", "B", or "C", with
+no text around it.
+B Experimental Details
+Compute Infrastructure. All experiments were
+conducted on NVIDIA H200 GPUs. We use vLLM
+for efficient batched inference during benchmark-
+ing and for high-throughput generation when col-
+lecting model outputs.
+LLM Inference and Evaluation Parameters.
+For benchmark evaluation, decoding is performed
+with vLLM. We use a sampling temperature of
+T = 0.7 and otherwise retain the standard/default
+generation parameters provided by the inference
+framework to ensure consistent evaluation across
+model backbones (e.g., default settings for top-
+p, repetition controls, and maximum generation
+length).
+LLM-as-a-judge. For automatic grading under
+the Correct, Incorrect or Not_Attempted pro-
+tocol, we use GPT-4.1 as the judge model. We set
+the judge temperature to T = 0 to minimize sam-
+pling variance and encourage deterministic scoring
+given the same inputs (question, gold target, and
+model prediction).
+Supervised Fine-Tuning (SFT). For supervised
+adaptation on our Arabic text-grounded reasoning
+data, we follow standard instruction-tuning config-
+urations in our training stack. The primary devia-
+tion from defaults is the learning rate, which we
+set to 5 × 10−5. All other hyperparameters (e.g.,
+optimizer choice, batch size, warmup schedule, gra-
+dient clipping, and number of epochs) use standard
+settings.
+Preference-Based Alignment (RL). For align-
+ment, we optimize the policy using the GSPO ob-
+jective (GSPO loss). RL experiments are imple-
+mented using the trl library. We set the learning
+rate to 3 × 10−6 and keep remaining RL hyper-
+parameters at standard values in our setup (e.g.,
+rollout sampling and optimization schedule, and
+any applicable regularization/clipping). Reward
+signals are derived from the LLM-as-a-judge grad-
+ing described above.
+Retrieval-Augmented Generation (RAG). For
+dense retrieval, we embed both queries and
+Qur’anic verse units using mE5-base. We index
+all verse embeddings in ChromaDB as our vector
+database and retrieve relevant verses via vector
+similarity search at inference time. Retrieved verse
+units are provided as evidence context for standard
+RAG generation.
+Agentic RAG Configuration. Our agentic RAG
+variant uses a fixed multi-turn interaction setups.
+We employ a two-turn setup: (i) an evidence-
+seeking turn in which the model invokes retrieval
+and inspects candidate verses, followed by (ii) a
+final answer turn conditioned on the retrieved and
+inspected evidence. The agentic tool-calling en-
+vironment is implemented using the verifiers
+library, which enforces the structured multi-turn
+tool-use setups described in Appendix A.3.
+C ISLAMICFAITHQA Examples
+Figure 6 shows an example from ISLAMIC-
+FAITHQA and the corresponding prediction of
+AceGPT-v2-8B. The model generates a fluent and
+relevant response, but the answer is still incorrect
+because it misses the core idea expressed in the
+gold answer, which links doing good to true hap-
+piness, inner peace, and fulfillment. This example
+illustrates that the benchmark can expose subtle se-
+mantic errors even when the model output appears
+plausible.
+D Training Data Examples
+D.1 SFT Data Example
+Figure 7 shows an example of an instruction–
+response pair used for supervised fine-tuning. The
+sample is grounded in Islamic legal reasoning and
+pairs an Arabic question with an answer that re-
+flects the ruling supported by authentic textual evi-
+dence. This example illustrates the type of training
+signal used in our SFT data, where the model learns
+16
+26484

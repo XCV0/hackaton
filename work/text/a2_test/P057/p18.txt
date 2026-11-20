@@ -1,0 +1,34 @@
+Query Retrievals Comment
+Index failure
+how many episodes of touching evil are there A total of 35 episodes were produced. Proposition lacks context
+who is the coach for the ottawa senators D. J. Smith is the head coach of the Ottawa
+Senators.
+Incorrect Proposition gen-
+erated
+Search failure
+what age do you need to be to buy a bb gun 18 years of age or older. partial phrase decoded
+how many seasons of the bastard executioner
+are there
+The Bastard Executioner is an American his-
+torical ﬁction drama television series.
+The Bastard Executioner is an American his-
+torical ﬁction drama television series.
+repeated retrieval
+who plays gram on the young and the restless The Young and the Restless is an American
+television soap opera.
+The Young and the Restless was ﬁrst broad-
+cast on March 26, 1973.
+irrelevant
+Table 17: Example losses in RICHES
+Unconstrained Generation Constrained Generation
+Q: who was the actor that played ben stone on law and order
+Ben Stone was played by actor Jerry Orbach. Ben Stone was played by Michael Moriarty.
+Q: how many pieces in a terry’s chocolate orange
+Terry’s Chocolate Orange is made with 32 segments Terry’s Chocolate Orange is divided into 20 segments
+Q: who sings the song only in my dreams
+The song "Only in My Dreams" is sung by the band Air
+Supply.
+Only in My Dreams is the debut single by Debbie Gibson.
+Table 18: Unconstrained vs Constrained generation. Examples where unconstrained LLM emits incorrect answer
+but constraining on the corpus helps RICHES override this pre-existing knowledge to obtain the correct answer
+8904

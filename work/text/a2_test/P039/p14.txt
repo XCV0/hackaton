@@ -1,0 +1,90 @@
+the similarity between high-level summaries and
+the concatenated descriptions of their immediate
+lower-level tags. The results, presented in Table 11,
+show consistently high similarity scores averag-
+ing around 0.8 (peaking at 0.8509 for Level 4).
+This high degree of semantic consistency between
+neighboring levels confirms that the DAG-based
+structure ensures stable and effective inheritance of
+meaning throughout the tag chain.
+Depth Cosine Sim Avg
+1 (root) 0.7916
+2 0.8248
+3 0.8478
+4 0.8509
+5 0.8381
+6 0.8341
+7 0.8378
+8 0.7427
+Table 11: Cosine similarity for adjacent level inheritance
+B.4 Evaluation Metric Consistency Analysis
+To validate the coherence of our evaluation frame-
+work, we conducted a consistency analysis between
+the individual dimension metrics (Comprehensive-
+ness, Diversity, and Empowerment) and the holistic
+Overall score on the UltraDomain-cs dataset. As
+presented in Table 12, all three metrics show high
+alignment with the final Overall judgment. Specifi-
+cally, Empowerment demonstrates the highest con-
+sistency at 96.40%, followed by Comprehensive-
+ness (92.53%) and Diversity (84.53%). This strong
+correlation indicates that the evaluation model’s
+scoring logic is robust and internally logical. Con-
+sequently, these results suggest that the Overall
+ranking can be effectively determined by aggre-
+gating the assessments from these three specific
+dimensions, reinforcing the validity of our multi-
+faceted evaluation approach.
+Consistency Pair Consistency Ratio
+Comprehensiveness and Overall 92.53%
+Diversity and Overall 84.53%
+Empowerment and Overall 96.40%
+Table 12: Consistency analysis between dimension met-
+rics and overall score
+B.5 LLM-as-a-Judge Consistency Analysis
+We further analyze the inter-consistency among
+these six evaluators on the UltraDomain-cs dataset.
+As shown in Table 13, the results indicate a high
+degree of agreement. Specifically, approximately
+64.1% of the samples received identical scores
+from all six judges (6/6 consistency). When consid-
+ering majority voting (agreement from at least 5 out
+of 6 judges), the consistency ratio rises to 82.4%,
+and it reaches 93.9% when allowing for a wider
+margin (at least 4 out of 6). This high level of con-
+vergence validates the reliability of our evaluation
+outcomes.
+Consistency Level Ratio (%)
+6/6 (Full Agreement) 64.1
+≥5/6 (Strong Majority) 82.4
+≥4/6 (Simple Majority) 93.9
+Table 13: Consistency analysis among six evaluators
+B.6 Knowledge Graph Construction
+Robustness Analysis
+To validate the robustness of TagRAG, we construct
+a knowledge graph for the same document twice on
+the UltraDomain-cs dataset under the Qwen3-4B
+default settings (temperature=0.6, top-k=20, top-
+p=0.95). The results are presented in Table 14.
+In the two knowledge graph constructions, there
+were a large number of overlapping object tags
+and tag chains. And, some object tags are differ-
+ent simply because they are represented separately,
+e.g., DATA- AND LEGAL-RELATED QUERIES
+are represented separately as DATA-RELATED
+QUERIES and LEGAL-RELATED QUERIES. In
+terms of entity description and summary, which
+TagRAG pays more attention to, the two graph
+constructions show a high degree of semantic sim-
+ilarity. This demonstrates the consistency and re-
+liability of our approach in generating meaningful
+knowledge representations.
+B.7 Statistics of Knowledge Graph
+Construction
+We report the scale of knowledge graphs con-
+structed by TagRAG and the baselines, as shown in
+Table 15. LightRAG extracts the least number of
+entities and relationships, resulting in its weakest
+knowledge representation. GraphRAG and Mini-
+RAG capture huge amounts of entities, but the rela-
+6447

@@ -1,0 +1,110 @@
+www.advancedsciencenews.com www.advancedscience.com
+Table 3. SummaryofheterojunctionandinterfaceassociatedphotovoltaicparametersoftheSb2Se3 devices.
+Devices J0 [mAcm−2] AVTFL [V] Ntrap [cm−3] Ea [eV] Rs [Ωcm2] Vbi [V] Ni [cm−3]
+Control – – – – 0.507 2.85 – –
+C-400 2.24 × 10−2 2.73 0.33 2.45 ×1014 1.09 1.92 0.565 1.04 ×1016
+C-420 4.75 × 10−3 1.94 0.25 1.85 ×1014 1.14 1.79 0.670 2.24 ×1015
+of Control device were eliminated under its unstable measure-
+ment. Theheterojunction-dependent built-involtage (Vbi)could
+beextractedthroughlinearﬁttingandextrapolatingtox-axis.Vbi
+oftheC-420device(670mV)waslargerthanthatoftheC-400de-
+vice (565 mV), indicating an improved Sb2Se3/CdS heterojunc-
+tion quality for C-420. Notably, such an interesting Vbi belong-
+ing to our champion device was higher than that of mostly re-
+ported eﬃcient Sb2Se3 devices, contributing to a record VOC in
+this work.[14,18] Drive-level capacitance proﬁling (DLCP) charac-
+terizations were also performed on C-420 and C-440 devices to
+examinetheinterfacialdefects.Inprinciple,theC–Vdetermined
+doping density (NC-V) symbolizes the responses from free carri-
+ers,bulkdefectsandinterfacialdefects,whereastheDLCPmea-
+sureddopingdensity(NDLCP)onlyrevealstheresponsesfromfree
+carriers and bulk defects.[9] Therefore, the interface defect den-
+sity (Ni) can be calculated by the discrepancy between C–V and
+DLCPproﬁlingatzerobias.TheplotsofNC-V andNDLCP against
+theproﬁlingdepthxcanbeexpressedaccordingtothefollowing
+equations[21]
+NC−V =
+−2𝜀r,nND
+( d((1∕C2))
+dV
+)
+qA2𝜀0𝜀r,n𝜀r,pND +2𝜀r,p
+(8)
+NDLCP =−
+C3 0
+2q𝜀0𝜀r,pA2C1 (9)
+x =
+𝜀0𝜀r,pA
+C0
+(10)
+where ND is the doping density of CdS, A is the device area, 𝜖0,
+𝜖r,n and 𝜖r,p represents the permittivity of free space, the rela-
+tive permittivity of CdS and Sb2Se3, respectively, C0 and C1 are
+two quadratic ﬁtting parameters derived from the C–V curves.
+AsshowninFigure6d,thediﬀerencebetweenNC-V andNDLCP of
+theC-400device wasmuch largerthanthatof theC-420device,
+the estimated Ni values for these two devices were 1.04 × 1016
+cm−3 and2.24×1015 cm−3 (atv=0V),respectively.Suchsignif-
+icant Ni decrease with nearly one order of magnitude indicated
+animprovedSb2Se3/CdSinterface,e.g.,smoothcontact,benign
+band alignment, alleviated lattice mismatch, and passivated in-
+terface defects for C-420 device. Furthermore, the C-420 device
+possessedalargedepletionwidth(Wd)ascomparedtoC-400de-
+vice,whichwasreasonabletooccursinceitvariedpositivelywith
+Vbi accordingtothefollowingequation[44]
+Wd =
+√√√√ 2𝜀p𝜀n ( NA +ND )2
+qNAND
+(𝜀pNA +𝜀nND ) Vbi (11)
+where q istheelementarycharge, 𝜖p and 𝜖n arethepermittivity,
+NA andND aretheacceptordensityanddonordensityinSb2Se3
+and CdS, respectively. Since the doping concentration of CdS is
+muchhigherthanthatofSb2Se3,almosttheentireWd islocated
+within Sb2Se3 absorber layer. An optimal Wd of 239 nm for C-
+420isreallybeneﬁcialforthelightabsorptionandcarrierextrac-
+tion,correspondingtoitsmuchsuperiordeviceperformance.All
+theseheterojunctionorinterfaceassociatedparametersaresum-
+marized in Table 3. Notably, an eﬃcient Sb2Se3 absorber layer
+growthengineeringwouldalsoinﬂuencethejunctionquality,the
+interface quality, the recombination mechanism, and therefore
+improvedeviceVOC andPCE.
+Understandingandcontrollingthebulkdefectproperties,es-
+pecially deep-level defects, is also essential for photovoltaic de-
+vicestoreducedetrimentalnonradiativeSCRrecombinationand
+improve device performance, in particular VOC, which is pri-
+marily aﬀected by defect depth, defect density and carrier life-
+time.Herein,awell-establisheddeep-leveltransientspectroscopy
+(DLTS)wascarriedouttoinvestigatedefectdynamicsoftheCon-
+trol and C-420 devices, respectively. According to literature, the
+positive and negative peaks can be ascribed to majority-carrier
+andminority-carriertraps,respectively.[36] Thus,theenergyband
+informationofthelightabsorbingthinﬁlmwasﬁrstexaminedby
+ultraviolet photoelectron spectroscopy (UPS), wherein, theCon-
+trol and C-420 thin ﬁlms were determined to be n-type and p-
+typeconductivecharacteristics,respectively(FigureS7andNote
+S2, Supporting Information), agreeing with DFT calculation re-
+sults. Consequently, as shown in Figure 7a, three electron traps
+thatdenotedasE1,E2,andE3canbewellidentiﬁedintheCon-
+troldevice.Bycontrast,onlytwoholetraps,whicharedenotedas
+H1 and H2, can be observed in theC-420 device. Theactivation
+energy EA (ET−EV or EC−ET,whereET, EC and EV representthe
+defect energy level, conduction and valance bands edge, respec-
+tively) of the defects in these two devices were calculated from
+the Arrhenius plots by ﬁtting the points near the DLTS peaks
+(Figure 7b and Note S3 in Supporting Information). The defect
+characteristicsincludingdefecttype,defectenergylevel(ET),de-
+fect density (NT), and capture cross-section (𝜎) are summarized
+in Table 4. According to the ﬁrst-principle theoretical basis and
+the reported DLTS experimental results in literature,[16,45] con-
+sidering the defects formation energy and defects energy level,
+regardingthenonequivalentSbandSesites(insetinFigure7b),
+E1,E2,andE3canbereadilyassignedtoseleniumvacancies(VSe2
+andVSe3),antisitedefectsofSbSe2,respectively.Theywerereason-
+abletoexistinSb-rich(Se-poor)Sb2Se3 lightabsorbingﬁlm,the
+higher concentration (≈1014 cm−3)ofSbSe antisite defects were
+also consistent with their lower formation energy. After an opti-
+malpost-selenizationheattreatmentoftheSb2Se3 thinﬁlm,the
+additionalSeatomswouldpreferentiallyﬁlltheSevacancies(i.e.,
+Se-compensation),andalsoincreasetheformationenergyofSbSe
+Adv. Sci. 2022,9,2105142 ©2022TheAuthors. AdvancedSciencepublishedbyWiley-VCHGmbH2105142(9of15)
+ 21983844, 2022, 9, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202105142, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

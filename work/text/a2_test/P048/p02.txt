@@ -1,0 +1,108 @@
+processes remain opaque to the LLM, which receives no
+explicit structural reasoning chain to explain why those
+particular chunks were selected, making the LLM struggle
+to locate the query-related context within those chunks,
+leading to suboptimal query answering performance on
+certain tasks [31], [34], [35].
+3) Inadequate Answer: Although we can simply combine the
+existing RAG models with the current shortest path-based
+graph algorithm to provide explicit reasoning chains to
+aid LLM query answering, improve the model’s reasoning
+ability. However, on tasks that require summarization of
+current knowledge [31], [34], [35], this simple approach
+can lead to suboptimal performance, as the shortest path on
+the graph can be overly simple, and can omit many query-
+related facts, leading to incomplete reasoning chains, which
+makes the model tend to generate inadequate query answer
+with low information coverage and faithfulness (See Table
+IV and Section IV-C).
+To address these issues, we propose a novel Advanced
+Graph-based Retrieval-Augmented Generation framework,
+called AGRAG. We divide the AGRAG framework into three
+steps: In Step 1 Data Preparation, AGRAG first extracts
+entities with a TFIDF [36] based entity extraction method,
+avoiding LLM hallucination, and resulting in better graph
+construction accuracy. Then, AGRAG applies LLM to de-
+tect the possible relation w.r.t. the extracted entity and the
+text chunk, formulating entity-relation-entity triples, namely
+knowledge triples. Then these knowledge triples, as well as the
+text chunks involved, together formulate a Knowledge Graph
+(KG). In Step 2 Graph Retrieval, AGRAG maps the query to
+knowledge triples in KG based on their semantic similarity,
+then calculate the PPR score [33] as node influence based on
+the KG structure and the mapped triples. In the meantime,
+AGRAG also calculates edge weights based on the semantic
+similarity between the query and the edge’s corresponding
+triple. After that, AGRAG generates a Minimum Cost and
+Maximum Influence (MCMI) reasoning subgraph via a greedy
+algorithm, which is calculated based on the shortest spanning
+tree of the mapped triples. It tries to maximize the node
+influence score, while minimize the edge cost in the expansion
+of each node, in order to avoid introducing noise. Compared
+to other shortest path-based algorithms, the MCMI subgraph
+allows for more complex structures, such as rings, which
+results in reasoning chains containing more query-related
+entities and relations, making them more comprehensive. This,
+in turn, helps the model perform better on complex tasks that
+require summarization, resulting in better reasoning ability
+and more comprehensive query answers. In Step 3 Hybrid
+Retrieval, AGRAG carries out hybrid retrieval based on the
+average of dense representation vector similarity score and
+sparse BM25 [37] keyword matching score between query and
+text chunks, providing extra contexts for query answering. At
+last, AGRAG will input the resulting subgraph from the Graph
+Retrieval step and chunks from hybrid retrieval to LLM for
+final query answering.
+We summarize our novel contributions as follows:
+• We present the AGRAG framework, which consists of three
+steps: Data Preparation, Graph Retrieval, and Hybrid Re-
+trieval, aiming to address the Inaccurate Graph Construction,
+Poor Reasoning Ability, and Inadequate Answer issues of
+current Graph-based RAG models.
+• We design a statistic-based entity extraction method, avoid-
+ing the hallucination caused by LLM entity extraction, and
+improving the pipeline effectiveness.
+• We propose the MCMI subgraph generation problem, prove
+it to be NP-hard, and design a greedy algorithm, ensuring
+AGRAG’s generalizability to complex tasks.
+• According to our experiments, AGRAG achieves better
+effectiveness and efficiency compared with current state-of-
+the-art RAG models on six tested tasks.
+II. RELATED WORKS
+In this section, we first introduce the traditional RAG
+models in Section II-A and then discuss the more advanced
+Graph-based RAG models in Section II-B. The important
+notations used in this paper are listed in Table I.
+A. Traditional RAG Models
+Recently, Large Language Model (LLM)-based models have
+undergone rapid development [38]–[46] and have been suc-
+cessfully adapted to various database related tasks, including
+data discovery [47]–[49], entity or schema matching [50]–[53],
+and natural language to SQL conversion [54]–[57].
+Although LLMs are inherently capable of inference without
+fine-tuning [1]–[5], the lack of fine-tuning with up-to-date
+and domain specific knowledge can lead LLMs to generate
+incorrect answers. As they lack task-specific knowledge, these
+incorrect answers are often referred to as hallucinations [58].
+To mitigate hallucinations, researchers try to directly retrieve
+text documents outside of LLM based on the query as side
+information to help the LLM query answering [59]–[68], lead
+to the emergence of early RAG models, namely traditional
+RAG models. The earliest LLM-RAG model is the simple
+NaiveRAG [15], when indexing, it splits the texts into chunks,
+and encodes them to semantic vector representations. When
+retrieval, the model retrieves several text chunks with top
+semantic similarity to the query.
+Based on NaiveRAG, researchers have proposed various
+walking-based models to further tailor the text chunks and
+improve the retrieval quality. For example, Propositionizer
+[59] applies a fine-tuned LLM to convert the text chunks
+into atomic expressions, namely propositions, to facilitate fine-
+grained information retrieval. Prompt compressor models [69],
+[70], such as LongLLMLingua [69] apply LLM’s generation
+perplexity to filter out unimportant tokens in the text chunks,
+try to maintain a more concise retrieval result for LLM input.
+However, the retrieval procedures of these models remain
+unstructured and struggle to capture the nuanced semantic and
+structured relationship within the text chunks, which impedes
+the effectiveness of LLMs [15]–[18].

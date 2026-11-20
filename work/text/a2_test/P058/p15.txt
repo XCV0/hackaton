@@ -1,0 +1,95 @@
+Model P R F1
+Qwen3-VL-8B 0.723 0.493 0.470
+Qwen-VL-Max 0.850 0.822 0.807
+GPT-4.1-Mini 0.801 0.715 0.731
+GPT-4o 0.699 0.662 0.649
+Claude-3.5-Sonnet 0.754 0.741 0.758
+Table 10: Element detection results with normalization
+applied. Bold means the best result.
+both privacy and quality checks, ensuring suitabil-
+ity for academic research purposes.
+Stage 2: Knowledge Structuring Raw textual
+materials are consolidated into the normalized
+JSON schema through a four-step process. We
+first extract element phrases from authoritative
+descriptions, then apply normalization rules (Ap-
+pendix B.3). Next, we generate element descrip-
+tions via LLM (Appendix B.4) and finally validate
+all outputs (Appendix B.5).
+Stage 3: Image Annotation For each image I,
+we provide Qwen3-VL-Max (Team, 2025) with
+the element inventory E and descriptions ED as
+context. The model proposes candidate visible ele-
+ments ˆE(I) ⊆ E, which human annotators then re-
+fine into final ground-truth labels Egt(I) following
+strict visibility guidelines detailed in Appendix B.6.
+Stage 4: Indexing We embed all images using
+CLIP and L2-normalize the resulting vectors to 512
+dimensions. A FAISS flat L2 index is built with
+aligned metadata that maps vector IDs to landmark
+names, image paths, and ground-truth element sets,
+enabling source attribution during retrieval.
+B.3 Normalization Procedures
+We apply three normalization strategies to en-
+sure cross-landmark consistency. Language uni-
+fication consolidates multilingual variants into
+canonical keys and enforces consistent orthogra-
+phy. Synonym collapsing merges semantically
+equivalent terms under lightweight taxonomy tags,
+such as grouping “bell tower” with “campanile,”
+“granite stone” with “granite,” and “carved motif”
+with “ornamental carving.” Cross-landmark align-
+ment ensures that shared architectural features like
+“Baroque fac¸ade” receive identical identifiers across
+different landmarks. These steps are critical for two
+reasons: they prevent the element matching stage
+(Section 4.2) from failing due to superficial lexical
+mismatches across knowledge sources, and they en-
+able fair evaluation by ensuring the same element is
+not counted as two different entities, which would
+artificially deflate Precision and Recall. As shown
+in Table 10, even with normalization applied, el-
+ement detection remains challenging, confirming
+that the task difficulty is genuine rather than an
+artifact of inconsistent naming.
+B.4 Element Description Generation
+For each element e ∈ E, we prompt Qwen3-VL-
+Max to generate a factual paragraph of one to three
+sentences describing its visual characteristics, cul-
+tural significance, and historical context. We en-
+force three constraints during generation: factual-
+ity requires all statements to be source-grounded
+with no unverifiable claims; scope constrains the
+content to the specific element rather than general
+landmark background; and tone maintains a neu-
+tral encyclopedic style that avoids promotional lan-
+guage. Generated paragraphs are stored under their
+corresponding keys in ED.
+B.5 Validation and Quality Control
+Quality control combines automatic checks with
+human review. Automatic validation verifies key
+consistency (keys(ED) = E), ensures all fields are
+non-empty, and confirms orthographic normaliza-
+tion. Human reviewers then perform three addi-
+tional passes: factuality review spot-checks gen-
+erated descriptions against source materials and
+regenerates entries containing unsupported claims;
+style filtering removes promotional language and
+unattributed superlatives; and terminological har-
+monization ensures consistent wording for shared
+elements across landmarks.
+B.6 Ground-Truth Annotation Protocol
+Human annotators refine LLM-proposed labels
+ˆE(I) to produce Egt(I) following strict visibil-
+ity rules. Visual identifiability requires that ele-
+ments qualify only if they are confidently recogniz-
+able from image pixels alone, without relying on
+prior landmark knowledge; for instance, an exter-
+nal tower invisible in an interior courtyard photo
+cannot be labeled. For partial occlusion handling,
+partially occluded elements are included only when
+discriminative visual cues remain present, such as a
+half-visible ornamental scroll whose characteristic
+shape remains recognizable. Synonym resolution
+requires annotators to select canonical keys when
+10489

@@ -1,0 +1,110 @@
+SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia Trovato et al.
+reasoner directly generate answers from retrieved documents. The
+consistent decline of performance suggests that explicit grounding
+of intermediate facts improves answer coherence and reduces hallu-
+cination. Finally, w/o Fallback removes our recovery mechanism
+and falls back to standard RAG when execution fails. The slight but
+consistent drops across datasets confirm that the fallback module
+enhances robustness, especially in complex scene where retrieval
+or reasoning may occasionally derail.
+Table 3: Ablation study on fine-tuning components of
+STRIDE. We remove each module (MP: Meta-Planner, S: Su-
+pervisor, E: Extractor, R: Reasoner) during fine-tuning.
+Variant 2Wiki. HotpotQA MuSiQue
+EM F1 EM F1 EM F1
+STRIDE-FT 0.738 0.796 0.601 0.691 0.350 0.448
+w/o MP-FT 0.733 0.784 0.580 0.665 0.346 0.447
+w/o S-FT 0.734 0.783 0.588 0.679 0.322 0.426
+w/o E-FT 0.725 0.779 0.583 0.677 0.332 0.423
+w/o R-FT 0.701 0.774 0.573 0.671 0.312 0.415
+Ablation on Modular Fine-Tuning. We further assess the contri-
+bution of fine-tuning each module by ablating one module’s train-
+ing at a time (denoted as w/o MP-FT, w/o S-FT, etc.). All variants
+underperform the full FT model, confirming that each module ben-
+efits from task-specific adaptation. Notably, removing fine-tuning
+of the Reasoner (w/o R-FT) causes the largest drop (e.g., −0.037
+EM on 2WikiMultihopQA), underscoring the importance of align-
+ing the final answer generator with the structured reasoning pro-
+cess. In contrast, ablating Meta-Planner fine-tuning (w/o MP-FT)
+has the mildest impact, suggesting that the abstract strategy is
+already well-captured by prompting, but still benefits from refine-
+ment. These results validate our modular fine-tuning design: each
+component learns complementary skills, and joint adaptation yields
+the strongest performance.
+5 Comparative Analysis
+We conduct a systematic evaluation of STRIDE across eight comple-
+mentary dimensions: from the effectiveness of meta-level planning
+and the impact of rewrite actions, to robustness under large retrieval
+corpora and multi-hop reasoning depth; from computational effi-
+ciency and error attribution, to iteration efficiency and sensitivity
+to retrieval top-𝑘. Across all axes, STRIDE demonstrates consistent
+and significant advantages over existing iterative RAG methods.
+5.1 Effectiveness of Meta-Level Planning
+To evaluate the benefit of abstract reasoning, we compare two plan-
+ning paradigms in both retrieval-augmented (RAG) and retrieval-
+free (CoT) settings: (1) Direct Plan, which generates concrete sub-
+questions only (equivalent to our w/o Meta-Planner ablation), and
+(2) Meta Plan, which is produced by Meta-Planner.
+As shown in Figure 3, Meta Plan generally improves F1 perfor-
+mance over Direct Plan across all datasets. The gains are most pro-
+nounced in the RAG setting: on 2WikiMultihopQA, RAG with Meta
+2Wiki. HotpotQA MuSiQue0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7F1 Score
+RAG
+RAG+Direct Plan
+RAG+Meta Plan
+2Wiki. HotpotQA MuSiQue0.10
+0.15
+0.20
+0.25
+0.30
+0.35
+0.40F1 Score
+CoT
+CoT+Direct Plan
+CoT+Meta Plan
+Figure 3: F1 scores of RAG and CoT with different planning
+strategies. Meta Plan generally outperforms Direct Plan, with
+larger gains in the RAG setting, highlighting the value of
+abstract reasoning guidance for multi-hop QA.
+Plan achieves a +5 F1 improvement over Direct Plan, demonstrating
+that high-level planning enables more effective decomposition and
+thus better retrieval and reasoning. Even on the more challeng-
+ing MuSiQue, Meta Plan maintains a consistent edge, confirming
+its robustness across task difficulties. In contrast, under pure CoT
+(without retrieval), both planning strategies yield only marginal
+improvements over vanilla CoT, and the advantage of Meta Plan is
+less pronounced. This suggests that structured, abstract planning
+primarily enhances performance when coupled with external evi-
+dence retrieval—where accurate question decomposition directly
+impacts the relevance and utility of retrieved passages.
+Together, these results validate our core design principle: de-
+coupling strategic intent from operational execution leads to more
+reliable, generalizable, and retrieval-aware reasoning plans.
+Table 4: Proportion of rewrite attempts that lead to perfor-
+mance improvement across diverse multi-hop QA datasets.
+Method 2Wiki. HotpotQA MuSiQue Average
+STRIDE 50% 30% 41% 40.3%
+STRIDE-FT 65% 63% 48% 58.7%
+5.2 Impact of Rewrite Effectiveness
+The Supervisor module may trigger a rewrite action to recover
+from flawed reasoning plans or insufficient evidence. To evaluate
+the practical utility of this mechanism, we compute the fraction
+of rewrite-triggered questions that ultimately yield a non-zero F1
+score, indicating that the intervention led to a meaningful answer.
+As shown in Table 4, even without fine-tuning, STRIDE achieves
+a high rewrite success rate, confirming that the process-aware
+control logic effectively identifies recoverable failures. More impor-
+tantly, modular fine-tuning further enhances this capability: under
+STRIDE-FT, the success rate increases consistently.
+5.3 Robustness under Larger Retrieval Corpora
+We expand the retrieval corpus to 50,000 documents per dataset
+to simulate realistic open-domain conditions with high noise and
+sparse evidence. As shown in Figure 4, all methods suffer perfor-
+mance degradation due to the sparser signal-to-noise ratio. Notably,
+STRIDE achieves the best results across all datasets in this

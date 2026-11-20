@@ -1,0 +1,11 @@
+Table S1: Benchmark Statistics.
+Benchmark Documents Queries Evidence Label
+# Pages # Docs Avg. Len # Queries Text Table Visual
+FinReport 2687 19 141 853 75% 24% 1%
+FinSlides 2280 65 35 1052 12% 83% 5%
+TechReport 1674 17 98 1294 81% 12% 7%
+TechSlides 1963 62 32 1354 66% 6% 28%
+Figure S1: Real-MM-RAG Benchmark Examples with Rephrasing. On the right: FinSlides—financial quarterly
+presentations. On the left: TechSlides Technical slides about business and IT automation. Questions are listed from
+the original query to Level 3 rephrasing.
+31674

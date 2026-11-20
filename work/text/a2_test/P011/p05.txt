@@ -1,0 +1,48 @@
+A PREPRINT
+(AMCAP-F3, productType, AF)
+(AMCAP-F3, benchmarkName, S&P 500 Index)
+(AMCAP-F3, fundType, Growth)
+This process is applied recursively to handle nested attributes, ensuring that all hierarchical levels of the JSON structure
+are captured as triplets. The approach is both fast and efficient: the entire conversion for all 1,104 funds takes
+approximately four minutes. Moreover, the method is fully deterministic, introducing no noise or redundancy into
+the data—unlike LLM-based extraction from unstructured text—thus preserving the integrity and completeness of the
+original information. Applying this procedure across all funds yields more than 650,000 unique triplets, over 14,000
+distinct nodes, and approximately 9,000 unique relationships in the resulting graph.
+3.3 JSON to Text Conversion
+To enable Retrieval-Augmented Generation (RAG) on our structured dataset, the first strategy is to convert each fund’s
+JSON data into unstructured text using a large language model (LLM). For each fund, the JSON object is passed to
+the LLM with a prompt instructing it to generate a comprehensive narrative that captures all details, regardless of the
+depth or complexity of nested attributes. This ensures that no information is lost in the conversion process. Along with
+the JSON, the fund’s abbreviated name would be provided in the prompt to help LLM relate the concepts and JSON
+attributes to the corresponding fund.
+The resulting unstructured text for each fund can then be processed using standard RAG techniques, such as chunking
+and embedding, to facilitate retrieval and generation. We refer to this representation as RAG_1. By transforming the
+structured JSON into text, we can directly compare the performance of traditional RAG pipelines with graph-based
+approaches on the same underlying data.
+3.4 Embedding Representations
+For both the RDF triplet representation (see Section 3.2) and the unstructured text representation (see Section 3.3),
+we compute embeddings for all unique nodes, relationships, and text segments using the BGE-m3 embedding model.
+BGE-m3 is a powerful, open-source embedding model selected for its superior performance and versatility [29].
+Key properties of BGE-m3 include:
+• Multi-Functionality: Supports dense retrieval, multi-vector retrieval, and sparse retrieval within a single
+model.
+• Multi-Linguality: Capable of processing over 100 languages.
+• Multi-Granularity: Handles input ranging from short sentences to long documents (up to 8,192 tokens), with
+an output embedding dimension of 1,024.
+3.5 Reranking Operation
+For this study, we have utilized several reranking models to evaluate whether accuracy and response quality can be
+improved in the agentic RAG setting. Reranking operates by taking the initial set of retrieved contexts—based on the
+user query—and reordering them according to their relevance to the query. This process ensures that the most pertinent
+information is prioritized for the final response generation, thereby reducing noise and enhancing the overall quality of
+the retrieved context.
+Specifically, we employ two BGE rerankers, BAAI/bge-reranker-v2-m3 and BAAI/bge-reranker-v2-gemma [30],
+as well as the widely used cross-encoder/ms-marco-MiniLM-L6-v2. These models leverage powerful transformer
+architectures to assess the semantic similarity between the user query and each retrieved context segment, assigning
+higher scores to more relevant passages. By integrating reranking into our pipeline, we aim to systematically investigate
+its impact on retrieval precision and downstream response generation, particularly in scenarios involving complex,
+multi-faceted queries.
+3.6 LPG Data Model
+For the development of our data representation layer, we adopt the openCypher query language to model and store
+JSON data as a Labeled Property Graph (LPG). openCypher is chosen for its expressive power, declarative syntax, and
+broad adoption in graph database systems, making it well-suited for both data modeling and complex graph analytics.
+5

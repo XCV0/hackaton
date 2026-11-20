@@ -1,0 +1,98 @@
+Score Label Definition
+1 Very Easy Basic factual recall, simple
+definitions, or straightforward
+yes/no questions.
+2 Easy Requires basic understanding
+of concepts with minimal rea-
+soning.
+3 Moderate Requires understanding multi-
+ple concepts and some analyti-
+cal reasoning.
+4 Hard Requires deep understanding,
+synthesis of multiple sources/-
+concepts, and nuanced reason-
+ing.
+5 Very Hard Requires expert-level analysis,
+balancing competing interests,
+and consideration of complex
+ethical frameworks.
+Table 7: Difficulty rating scale used for question anno-
+tation.
+Note: a question can be difficult due to obscure
+knowledge even if it is not multi-step.
+E.2.3 Tie-break Rules
+• Choose the higher score if mistakes are likely due
+to nuance, exceptions, or competing principles.
+• Choose the lower score if the answer is direct and
+reliably determined from a single well-known
+rule or fact.
+• If the question is underspecified, keep the score
+honest and flag the issue in the interface notes (if
+available).
+E.3 Reasoning Assessment
+E.3.1 reasoning (true/false)
+• reasoning = false if the answer is simple re-
+call/definition (no inference).
+• reasoning = true if answering requires apply-
+ing, interpreting, comparing, reconciling, justify-
+ing, or inferring.
+E.3.2 multi_step (true/false)
+Set multi_step = true only if multiple logical
+steps/considerations are required, such as:
+• comparing multiple sources or viewpoints,
+• weighing competing principles (harms vs. bene-
+fits, conflicting obligations),
+• applying a rule, then an exception/condition, then
+concluding,
+• building a chain with intermediate conclusions.
+Set multi_step = false if reasoning is present
+but essentially one step (a single application or
+inference).
+E.3.3 Consistency Rules
+• If reasoning = false, then multi_step must
+be false.
+• If multi_step = true, then reasoning must
+be true.
+E.4 Category Classification
+Annotators assign category_type to exactly one
+of the following category names (exact strings):
+• Islamic Creed
+• Jurisprudence
+• Inheritance Law
+• Hadith Studies
+• Qur’anic Studies
+• Prophetic Biography
+• Islamic History
+• Islamic Ethics and Morality
+• Islamic Finance and Economics
+• Islamic Family Law
+• Comparative Religion
+• Contemporary Issues
+E.4.1 Boundary Rules
+• Modern banking/finance products → Islamic
+Finance and Economics.
+• Marriage/divorce/custody → Islamic Family
+Law; inheritance shares/heirs → Inheritance
+Law.
+• Hadith authentication/narrators/classification →
+Hadith Studies; hadith used mainly to derive
+a ruling → usually Jurisprudence.
+• S¯ırah → Prophetic Biography; later eras/dy-
+nasties → Islamic History.
+• Novel modern scenario → Contemporary
+Issues; timeless moral teaching → Islamic
+Ethics and Morality.
+E.5 Ambiguity and Missing Context
+Some questions may be underspecified or admit
+multiple valid scholarly answers. In such cases,
+annotators:
+• still assign the best category based on the main
+domain being tested,
+• rate difficulty based on what is required to answer
+responsibly (often higher if many qualifications
+are needed),
+E.6 Examples
+The examples in Table 8 illustrate how to apply the
+labels (they are not taken from the dataset).
+18
+26486

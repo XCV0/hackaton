@@ -1,0 +1,66 @@
+Metric Result Explanation
+Object Tag Jaccard 0.6735 Jaccard similarity of object tags in two knowledge graphs
+Object Tag Cosine 0.9176 Semantic similarity of descriptions for the same object tags
+Tag Chain Jaccard 0.7396 Jaccard similarity of tag chains in two knowledge graphs
+Summary Cosine 0.9229 Semantic similarity of domain tag summaries in two knowledge graphs
+Table 14: Knowledge graph construction robustness analysis
+tional connections are not as adequate as TagRAG.
+This makes the knowledge of the graphs they con-
+struct insufficiently connected to produce a global
+view.
+Agri CS Legal Mix
+NaiveRAG
+Docs 12 10 94 61
+Chunks 1756 1858 4294 579
+GraphRAG
+Entities 38059 29803 35817 14393
+Relationships 33781 27598 49163 11114
+LightRAG
+Entities 19153 18737 19634 7592
+Relationships 911 2787 4008 266
+MiniRAG
+Entities 42777 35679 45381 16398
+Relationships 22218 20272 37816 9443
+TagRAG
+Vo 16086 14768 18479 7663
+Eo 29778 21822 43076 7941
+Vd 2893 1869 2489 2227
+Ed 4333 2886 4257 3568
+Eod 11462 7585 11819 3967
+Entities 18979 16637 20968 9890
+Relationships 45534 32258 59096 15421
+Table 15: Statistics of knowledge graph construction
+B.8 Cross-domain Visual Analysis
+Leveraging the mapping of domain tag chains,
+TagRAG enables support for cross-domain sce-
+narios. As illustrated in Figure 6, the predefined
+root domain tag “ALL DISCIPLINES” serves as
+the anchor for the entire domain knowledge graph,
+with diverse domains (e.g., social sciences, histori-
+cal studies) interconnected in a hierarchical struc-
+ture to guide cross-domain object tags. For in-
+stance, the object tag “THIRTY YEARS’ WAR” links
+to the root domain via the chain “HISTORICAL
+STUDIES - EUROPEAN HISTORY”, while another
+object tag “BERT” maps to “NATURAL LANGUAGE
+PROCESSING”, which comes from a completely dif-
+ferent field. This demonstrates that TagRAG pos-
+sesses the capability to integrate knowledge across
+different domains and adapt to cross-domain appli-
+cation scenarios.
+B.9 Case Study
+To intuitively reflect the effect of TagRAG, we
+demonstrate a query case for the UltraDomain CS
+corpus in Table 16 - 19. In these cases, we can
+see that TagRAG is able to generate global analy-
+ses and responses, resulting in a complete lead in
+the four metrics of Comprehensiveness, Diversity,
+Empowerment, and Overall.
+C Prompts
+We list the prompts involved in knowledge graph
+construction, retrieval enhancement generation,
+and experiments, including question generation,
+evaluation, object tag keyword extraction, domain
+tag chain organization, domain-centric knowledge
+fusion and tag knowledge-fused generation.
+6448

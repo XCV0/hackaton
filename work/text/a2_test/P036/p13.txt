@@ -1,0 +1,42 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 13
+embedding model for vector indexing. Table 4 presents examples of questions re-
+lated to earnings analysis, along with the corresponding generated answers from
+each model. The qualitative analysis reveals clear distinctions in the quality and
+contextual relevance of responses.
+In the general company information question, all three models, the open-
+source general-purpose Llama-2-7b, our Financially-augmented LLM, and the
+commercial GPT-3.5, produce correct and sufficiently detailed descriptions of
+Broadcom Inc. This indicates that broad corporate identity queries can be reli-
+ably answered even without financial-domain specialization. However, in the
+financial metric extraction query, our model provides a more accu-
+rate and semantically aligned answer than the open-source baseline
+and shows a level of correctness that closely matches the response
+from the powerful commercial GPT-3.5 model.
+Our Financially-Augmented LLM. Our model consistently demonstrates high
+contextual accuracy and precise numerical reasoning. For instance, in the div-
+idend question, the generated response (”4.60”) directly matches the ground-
+truth value and preserves factual consistency with the source document. The
+model effectively retrieves and integrates the relevant context from the finan-
+cial report, yielding concise and unambiguous answers. This indicates that the
+retrieval-augmented instruction tuning process allows the model to better in-
+ternalize document structure and financial semantics. Moreover, it produces
+domain-appropriate terminology (e.g., “semiconductor and infrastructure soft-
+ware solutions”) comparable in style and factual fidelity to human financial
+analysts.
+Llama-2-7b Baseline. The baseline Llama-2-7b model exhibits limited grounding
+and weaker numerical reasoning. Although it provides a generally correct com-
+pany description, the responses show redundancy and lack of focus, as evidenced
+by the listing of multiple partial statements. For numerical queries, the model
+frequently produces spurious values (e.g., ”368.40”), demonstrating its inability
+to extract and reason over financial figures from context. These errors highlight
+the lack of document-grounded alignment and domain-specific adaptation in the
+base LLM.
+GPT-3.5 Teacher Model. GPT-3.5 generates highly coherent and semantically
+accurate responses, often matching or exceeding the clarity of human-written
+financial summaries. Its answer for the dividend question exactly reproduces the
+ground truth, confirming strong factual precision and contextual comprehen-
+sion. However, GPT-3.5 relies heavily on its large-scale pretrained knowledge
+and less on explicit document retrieval, occasionally leading to generic phrasing
+or assumptions when context is ambiguous. Despite this, it serves as an effec-
+tive teacher model for generating context-grounded instruction data due to its
+consistent reasoning quality.

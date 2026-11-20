@@ -1,0 +1,101 @@
+quires accessing private data, the privacy budget is
+exhausted rapidly, which severely limits the num-
+ber of supported queries. To conserve budget, re-
+cent efforts attempt to reduce private data access by
+narrowing the retrieval scope or sparsifying private
+generation (Wu et al., 2026; Koga et al., 2024). Yet,
+these budget-saving mechanisms themselves also
+consume privacy budget cumulatively across gen-
+eration steps, thereby reducing the available quota
+for actual private token generation. Therefore, un-
+der tight privacy constraints, they still struggle to
+achieve a satisfactory privacy-utility trade-off or
+may even fail to generate valid responses.
+The root cause of this dilemma is that these
+budget-saving mechanisms constantly deplete the
+privacy budget, whereas they can actually be im-
+plemented merely with public information or at a
+negligible one-time privacy cost. This mismatch
+fails to align budget expenditure with the model’s
+actual reliance on private data, causing substantial
+budget waste on operations that require no private
+access. Motivated by this observation, we adopt
+“only pay what you must spend” as our core design
+principle: we adopt public information as a zero-
+privacy prior, and charge the budget exclusively for
+the true private increment.
+In this paper, we propose SparsePay-RAG, an
+on-demand privacy budget payment framework for
+DP-RAG that converts budget consumption into a
+sparse pay-as-you-go paradigm. To achieve this,
+SparsePay-RAG leverages public priors to bypass
+unnecessary privacy overhead, spending the pri-
+vacy budget strictly on the indispensable private
+increments. Specifically, to avoid the excessive
+privacy cost of globally retrieving from the entire
+corpus, we propose a public topic-guided cluster-
+ing method. It utilizes public topics to partition the
+private corpus and employs a two-stage retrieval to
+route queries, strictly restricting the subsequent ex-
+act retrieval within the localized clusters to shrink
+the private access scope. To reduce the private ac-
+cess frequency and prevent indiscriminate budget
+consumption at every decoding step, we propose an
+adaptive RAG triggering mechanism with isotonic
+cross-layer trajectory fitting. It evaluates token con-
+fidence through the public model’s internal dynam-
+ics on the fly, restricting private access strictly to
+the generation steps where public knowledge is in-
+sufficient. Furthermore, to compress the per-access
+privacy cost, we propose DP contrastive decoding,
+which treats the public model’s output as a refer-
+ence to extract the private delta. This ensures that
+DP protection is applied solely to this increment
+rather than the full probability distribution.
+Our main contributions are: (1) We propose
+the “only pay what you must spend” design princi-
+ple and construct the SparsePay-RAG framework
+to minimize privacy costs across three orthogo-
+nal dimensions: private retrieval scope, private ac-
+cess frequency, and per-access privacy cost. (2)
+We achieve private access control with no privacy
+cost via isotonic regression fitting on the public
+model’s internal cross-layer probability trajectory.
+This adaptively triggers private generation only
+when public knowledge is insufficient, substan-
+tially conserving the privacy budget. (3) Under
+strong privacy constraints, experiments on RAG
+question-answering benchmarks demonstrate that
+SparsePay-RAG achieves a superior privacy-utility
+trade-off compared to existing DP-RAG methods.2
+2 Preliminaries and Related Work
+2.1 Preliminaries
+Differential Privacy (DP) (Dwork and Roth,
+2014). A randomized algorithm M satisfies (ε, δ)-
+DP if for any neighboring datasets D, D′ differing
+in the addition or removal of one sample, and any
+S ⊆ Range(M):
+Pr[M(D) ∈ S] ≤ eε · Pr[M(D′) ∈ S] + δ,
+where ε is the privacy loss and δ allows a small
+failure probability.
+Zero-Concentrated Differential Privacy
+(zCDP) (Bun and Steinke, 2016). A mechanism
+M satisfies ρ-zCDP if for all neighboring datasets
+D, D′ and α ∈ (1, ∞):
+Dα
+(
+M(D) ∥ M(D′) ) ≤ ρα
+where Dα is the α-Rényi divergence. We adopt
+zCDP for its tight multi-step composition.
+2.2 Related Work
+DP for LLMs. To protect private corpora in LLM
+workflows, one line of work fine-tunes models with
+DP-SGD (Abadi et al., 2016; Yu et al., 2024b; Li
+et al., 2022; Bu et al., 2024; Yu et al., 2024a),
+adding calibrated noise to gradients to prevent train-
+ing data memorization. Another line synthesizes
+DP-compliant corpora that can be freely reused via
+post-processing, either by sampling from DP fine-
+tuned generators (Yue et al., 2023; Kurakin et al.,
+2Code: https://github.com/szzhh/SparsePay-RAG
+45294

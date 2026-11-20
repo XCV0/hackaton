@@ -1,0 +1,103 @@
+Prompt used in Guided Selection
+In the given [persona_name]’s Context, output True if you can clearly infer the Belief and Value information or Psy-
+chological Traits of [persona_name] to answer the given User Query; otherwise, output False. Output only True or False.
+# Explanation of Belief and Value:
+- The principles, attitudes, and ideological stances that shape an individual’s perspectives and decisions
+- e.g., [persona_name]’s "beliefs", "attitudes", "values", "religion"
+# Explanation of Psychological Traits:
+- Characteristics related to personality, emotions, interests, and cognitive tendencies.
+- e.g., [persona_name]’s "Personality", "hobby and interest", "emotional"
+Figure 3: Prompt used in Guided Selection (GS). GS returns whether Belief and Value information or Psychologi-
+cal Traits can be inferred from given chunks.
+Prompt ued in the interview-based psychological assessment (MBTI)
+Based on the given [persona_name]’s answer, please rate the question, "Am I ([persona_name]) [question]?" on a
+scale from 1 to 7.
+A score closer to 1 means "very much so," and a score closer to 7 means "not at all."
+Output only the number.
+Figure 4: Prompt ued in the interview-based psychological assessment (MBTI). In the BFI test, responses are
+rated on a scale from 1 to 5.
+# Yui's Characteristics, Clumsy Girl (Dojikko):
+- Yui usually sleeps in late. Occasionally, when 
+she decides she has to do something, she wakes 
+up ridiculously early. As she goes through high 
+school, she gradually wakes up late less often.
+- Yui is lazy, and her hobby is lazing around at 
+home. After joining the light music club, she 
+became absorbed in the guitar, but before joining, 
+her daily routine was just lying around. During 
+holidays, she sometimes buries herself in the 
+kotatsu and doesn’t come out.
+- Yui joined the light music club without knowing 
+how to play any instruments at all. She didn’t 
+even have a proper instrument, so at Ritsu’s
+suggestion, the club members worked part-time 
+together to save money, but it wasn’t enough. 
+Later, thanks to Mugi’s help, she was able to buy 
+a guitar at a much cheaper price. Although she got 
+help from her friends to buy the guitar, from the 
+store’s perspective, they still caused some trouble.
+Adaptive Context-aware Text Splitter (ACTS)
+Persona Documents
+Belief and Value
+Psychological Traits
+## Yui Hirasawa's Belief and Value:
+Yui Hirasawa values the small joys and comfort in 
+everyday life. She cherishes the time spent with 
+friends and is open to both receiving and giving help. 
+She isn't afraid to take on challenges or learn new 
+things, and she maintains a positive attitude even 
+when she fails. She naturally accepts her own laziness 
+and carelessness, and she prioritizes enjoyment and 
+present satisfaction over perfection.
+## Attributes:
+## Knowledge:
+##  Yui Hirasawa’s Psychological Traits:
+Yui Hirasawa has an innocent and clumsy (dojikko) 
+personality, and she tends to be laid-back and lazy. 
+She enjoys spending time alone, such as lazing 
+around at home, but when she's with friends, she is 
+cheerful, sociable, and also likes group activities. She 
+expresses her emotions honestly, tends to 
+procrastinate with bothersome tasks, and immerses 
+herself in things she loves. She also has a passionate 
+side that allows her to quickly dive into new hobbies 
+(such as playing the guitar).
+Persona Documents
++ Optimal Chunk Length
++ Hierarchical Context
+Do you prefer hobbies or activities that you can do alone rather than group activities?
+1.
+2.
+3.
+0.712
+0.681
+0.651
+4. 0.648
+…
+Guided Selection (GS)
+Attribute Extractor (AE)
+RAG (+ ACTS)
+ # Context:
+Yui’s Response
+## Role:
+Refer to the given Knowledge and Attributes 
+of Yui Hirasawa and answer the user's 
+questions as if Yui Hirasawa.
+Hmm~ I really love just lazing around in the kotatsu by 
+myself or practicing guitar in my room! Playing alone is 
+fun and comfortable, so I like it a lot. Hehe…
+But, eating cake with Ho-kago Tea Time friends, 
+practicing together, and making lots of noise is super, 
+super fun too!
+It’s hard to say exactly which one I like better, but I think 
+both my alone time and time with my friends are precious 
+and make me happy!
+Hmm... Since I enjoy both, maybe I can practice guitar by 
+myself today, and then go hang out with Ricchan and 
+Mio-chan tomorrow~ That sounds good, don’t you think?
+K
+A
+Figure 5: AMADEUS framework. AMADEUS consists of three substages: (i) ACTS splits a persona document to
+make it suitable for RAG-based role-playing. (ii) To fully leverage the character’s knowledge, GS retrieves chunks
+from which it can infer the answer to the user query. (iii) AE uses the information derived from the GS results to
+extract character attributes.

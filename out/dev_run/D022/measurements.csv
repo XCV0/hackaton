@@ -1,0 +1,3 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D022,MS1,DV1;DV2;DV3;DV4;DV5,J-V,AM1.5G,,,,,true,false,,,,,"AAA симулятор, калибровка по Si-эталону NREL (Abet 15150); Keithley 2400, 4-wire; интенсивность и направление развёртки не указаны"
+D022,MS2,DV1;DV2;DV5,J-V,,,,,,,,,,,,"Оптические измерения (пропускание/отражение 300-800 нм, интегрирующая сфера): AVT, CRI"

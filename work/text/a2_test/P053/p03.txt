@@ -1,0 +1,95 @@
+… … … …
+Compressor
+…
+Decoder
+Question
+…
+ …
+… …
+Selector
+…
+Doc Emb 1
+Who sings the song let me love you?
+Answer
+Justin Bieber
+Discard
+Doc Emb 2
+“Let Me Love You” is a song recorded by French DJ and 
+electronic music producer DJ Snake featuring vocals from 
+Canadian singer Justin Bieber. The song was released …
+Document 1
+Document Embeddings
+Question Embeddings
+Last-layer hidden states
+Concatenate
+Trainable
+Frozen Insufficient
+Sufficient
+RetrieverRetriever
+Figure 2: Overview of Adaptive Context Compression for RAG pipeline. The workflow is as follow: Context
+Retrieval −→ Hierarchical Compression −→ Adaptive Context Selection −→ Response Generation.
+introduces a hierarchical compressor C C and an
+adaptive selector S working together to support
+dynamic compression. The former encodes docu-
+ments into multi-granular document embeddings,
+enabling variable information density across seg-
+ments. The latter progressively feeds embeddings
+into the decoder and halts once sufficient context
+is reached, effectively controlling input sequence
+length. This mechanism allows variable-length de-
+coder inputs, thereby realizing dynamic compres-
+sion. The full workflow is illustrated in Figure 2.
+3.1 Hierarchical Compressor
+The compressor C processes each document di into
+a multi-granular embedding sequence. Specifically,
+the input text is concatenated with mi = ⌊Li/τ ⌋
+special compression tokens, where Li is the doc-
+ument length and τ is a fixed compression rate.
+These compression tokens are encoded, and their
+final-layer embeddings form the compressed se-
+quence Ei:
+Ei = C(di) = [e(1) i , . . . , e(mi) i ] (1)
+3.1.1 Fix-rated Preprocessing
+The compressor employs a fixed compression ra-
+tio: higher ratios yield shorter compressed se-
+quences with reduced information retention. The
+entire compression process operates offline, with
+all documents pre-processed into their embedding
+sequences for instant access during retrieval.
+3.1.2 Training Strategy
+The compressor is trained through a widely adopted
+two-stage process: pretraining and fine-tuning. The
+former enables the compressor to preserve maxi-
+mal contextual information, while the latter facili-
+tates adaptation to downstream tasks. During pre-
+training, the compressor learns to encode text into
+embeddings through two tasks (Ge et al., 2024):
+(1) auto-encoding, where the decoder reconstructs
+the original text from the compressed embeddings
+alone, and (2) language modeling, where the de-
+coder generates text continuations conditioned on
+the embeddings. Formally, given a task instruc-
+tion Q, compressed sequence Ec, and target re-
+sponse R = {r1, . . . , rn} (either original text or
+continuation), both tasks optimize the negative log-
+likelihood (NLL) loss:
+L(θC ) = −
+n∑
+t=1
+log PθD (rt | Q, Ec, r<t) (2)
+Only the compressor parameters θC are updated,
+while the decoder parameters θD remain frozen.
+During fine-tuning, we employ a self-distillation
+task (Allen-Zhu and Li, 2023), where the origi-
+nal RAG model acts as a teacher to preserve de-
+coder capabilities. Given a query Q, context C,
+and target response R, the teacher distribution is
+Pteacher(rt | Q, C, r<t), and the student distribution
+is Pstudent(rt | Q, Ec, r<t). The training minimizes
+the KL divergence between these distributions:
+L = DKL (Pteacher ∥ Pstudent) (3)
+Notably, the fine-tuning approach avoids
+instruction-following tasks, preventing the com-
+pressed embeddings from altering the decoder’s
+original generation pattern.
+24063

@@ -1,0 +1,108 @@
+set. AGRAG achieves the lowest rate by leveraging MCMI
+subgraphs to provide explicit evidence for retrieved chunks.
+B. Efficiency Evaluation
+To evaluate the efficiency of AGRAG, we compare
+AGRAG’s time and token cost with other baselines’ on all
+4 dataset tested, the results are shown in Table II. According
+to the result, AGRAG can also achieve the best time and token
+efficiency compared with other baselines.
+These results lead to two major findings: Firstly, both
+HippoRAG2 and AGRAG achieve superior time efficiency
+than other baselines, this suggests that frequent LLM calls,
+particularly those involving long input sequences, are the pri-
+mary efficiency bottleneck in most Graph-based RAG models.
+By avoiding the LLM-based graph summarization process,
+HippoRAG2 and AGRAG significantly alleviate this bottle-
+neck, leading to improved performance.
+Secondly, although AGRAG introduces an additional pro-
+cedure generating the MCMI reasoning graph, the statistics-
+based entity extraction method avoids the LLM calling. Denote
+the number of nodes in graph as |V|, the number of nodes
+in text chunk t as |Vt|, the token length of text chunk t as
+lt, the dimension of LLM hidden state is dllm, for each test
+chunk, AGRAG’s statistics-based entity extraction achieves
+O(|V|) time complexity, and the LLM entity extraction method
+achieves O(dllm(|Vt| + lt)2) complexity. As dllm is very large
+for LLM models (e.g., over 12,000 for GPT-4o [85]), and
+|Vt| + lt can also be a large number, our AGRAG can still
+achieve better overall efficiency.
+Lastly, according to Table V and Table VI, where we
+test AGRAG and 2 other best performing baselines with
+VLLM [82] deployed Qwen3-4B-Instruct-2507 [86] LLM on
+two 2080TI GPUs. AGRAG-L still can achieve comparable
+efficiency under low resource setting, while also achieves
+better accuracy than normal. This is because the Qwen3-4B is
+a more novel LLM compared with Qwen2.5-14B, it contains
+richer general knowledge and can perform better in common-
+sense reasoning [86]. However, due to the model size limita-
+tion, Qwen2.5-14B is still better at context understanding and
+instruction following, making our normal setting outperform
+the low-resource setting in other metrics.
+C. Ablation Study
+To analyze AGRAG’s performance, we conduct an extensive
+ablation study on GraphRAG-bench tested across 2 datasets
+and 4 tasks, the ablation models tested are listed as follow:
+• AGRAG w. HR Only: Here, we apply only AGRAG’s
+hybrid retrieval step, without any reasoning-path generation.
+• AGRAG w. LLM ER: Here, we substitute AGRAG’s
+statistics-based entity extraction method for HippoRAG2’s
+LLM entity extraction approach to test its effects.
+• AGRAG w.o. HR: Here, we remove the hybrid retrieved
+chunks in AGRAG’s LLM input, and only input the reason-
+ing subgraph and its involved text chunk to LLM.
+• AGRAG w.o. MCMI: Here, we simply generate a minimum
+cost Steiner tree that contains all mapped fact triples as
+reasoning path, ignoring more complex reasoning structures.
+• AGRAG w.o. Cle.: Here, we remove the query aware raw
+triplet filter procedure (Equation (9)) when graph retrieval.
+Based on the results in Table IV, we can have the following
+observations regarding AGRAG:
+Firstly, AGRAG w. HR Only achieves the best indexing time
+efficiency, as it omit all graph related procedures. However,
+the lack of fine-grained information from graph make it
+suffer from sub-optimal performance especially on Creative
+Generation and Contextual Summarization tasks that require
+summarization to fine-grained information.
+Secondly, although AGRAG w. LLM ER is more time and
+token-consuming, it still achieves worse performance com-
+pared to AGRAG. This is because the LLM entity extraction
+approach can produce hallucinated outputs that fail to conform
+to the expected entity extraction format, leading to decoding
+errors. This highlights the importance of substituting the LLM
+entity extraction method to avoid hallucination.
+Thirdly, AGRAG w.o. HR experiences a significant perfor-
+mance drop on the Contextual Summarization task and in the
+coverage score of the Creative Generation task. This is because
+it provides the LLM with only the reasoning path and its
+associated text chunks—while efficient, this limits the amount
+of supportive content available and restricts the model’s ability
+to find sufficient grounded information.
+Fourthly, AGRAG w.o. MCMI performs similarly to
+AGRAG on the Fact Retrieval and Complex Reasoning tasks
+but consistently underperforms AGRAG on the more challeng-
+ing Contextual Summarization and Creative Generation tasks.
+This is because its simple, tree-structured reasoning paths are
+insufficient to support queries from harder tasks, which may
+require the inclusion of cyclic structures or multiple answer
+nodes that are difficult to jointly capture within the Steiner
+tree framework.
+Lastly, AGRAG w.o. Cle. achieves suboptimal performance
+compared to AGRAG, especially in more complex Creative
+Generation and Contextual Summarization tasks, which re-
+quire summarization to graph knowledge. In these scenarios,
+AGRAG needs the filter procedure to ensure the query-
+relatedness of retrieved triples, otherwise noise triples are
+included and affect the model summarization. Considering that
+omitting the query-related triplet filter can only marginally im-
+prove AGRAG’s efficiency (reduce less than 1% of time cost),
+we consider the triplet cleaning procedure to be worthwhile.
+We also show the breakdown time cost in Table VII, where
+the main time efficiency bottleneck of AGRAG is the LLM QA
+procedure, which were inevitably suffered by all LLM-based
+RAG methods, other procedures only lead to a marginal time
+cost increase. On Novel dataset, although the entity extraction
+procedure achieve higher time cost, according to Table IV,
+this cost can be even higher if we apply the LLM based entity
+extraction approach, because AGRAG w. LLM ER (which
+applies LLM entity extraction method) achieves higher time
+and token cost than AGRAG.

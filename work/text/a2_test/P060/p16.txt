@@ -1,0 +1,104 @@
+54
+G.5 Question
+I have a paragraph with the following
+theme:
+[[{theme}]]
+From this paragraph, I extracted the
+following statement:
+[[{statement}]]
+Generate one question which is
+answered only by the statement
+above.
+In order to avoid generic questions,
+use contextual information from
+the theme to formulate the
+question.
+The question should be concise and in
+the style of a user asking
+questions to a search engine.
+Generate the question as a bullet list
+with the following format:
+> Question
+Do not output anything else other than
+the question.
+H Model Fine-Tuning
+Our fine-tuning strategy starts with the FLAN-T5
+family of models (Chung et al., 2022). We found
+that the small and base model sizes were not per-
+ceptive enough to extract interesting information
+from the contexts used, with the large model size
+being the smallest model that achieved that goal.
+Keeping in mind the objective of providing a low-
+resources strategy, we employ LoRA (Hu et al.,
+2021) in the fine-tuning step, training 30% of the
+785M parameters in the Flan-T5-large model.
+The fine-tuning training data contains the con-
+texts extracted from the public datasets described
+in Section 3 as inputs. The outputs are the Q&As
+generated through the answer-first statement extrac-
+tion method described previously. The final dataset
+contained 20002 context-Q&As per type, per pub-
+lic dataset to a total of 36k entries, from which 20%
+was held out for validation.
+In order to allow for the generation of multi-
+ple question types with the same fine-tuned model,
+we add a question type flag (〈〈fact_single〉〉,
+〈〈summary〉〉 or 〈〈reasoning〉〉) to the begin-
+ning of each context to identify which Q&A type
+will be used as target. The Q&A is represented by
+a single string separated by the token “〈a〉”, which
+is added to the T5 model tokenizer. Therefore, the
+fine-tuning step sees each context three times, each
+2The number of training examples is limited by the gener-
+ation of Q&As with the standard, multi-step methods.
+time with a different question type flag and a differ-
+ent associated Q&A. In summary, the inputs and
+outputs used for the fine-tuning are as follows.
+Input: <<question_type>> Ground truth
+context
+Output: <<question_type>> Statement
+extraction question <a> Statement
+extraction answer
+I Critique Prompts
+The prompts described here are adapted from
+(Roucher, 2024). The ratings obtained range from
+1 to 5. For visualization purposes, they are scaled
+to range from 0 to 5.
+In a few words, extract the main theme
+behind the following passage: [[{
+context}]]
+q_to_c_groundedness:
+You will be given a context and a
+sentence that should be a question.
+Your task is to provide a 'total
+rating' scoring how well one can
+answer the given question
+unambiguously with the given
+context.
+Give your answer on a scale of 1 to 5,
+where 1 means that the question
+is not answerable at all given the
+context, and 5 means that the
+question is clearly and
+unambiguously answerable with the
+context.
+If the sentence provided is not
+actually a question, rate it as 1.
+Provide your answer as a python
+dictionary as follows:
+Answer:::
+{{"evaluation": "Your rationale for
+the rating, as a brief and concise
+text", "rating": "your rating, as
+a number between 1 and 5"}}
+You MUST provide values for '
+evaluation' and 'rating' in your
+answer. Provide ONLY the python
+dictionary as your answer.
+Now here are the question and context.
+Question: "{question}"
+Context: "{context}"
+Answer:::
+a_to_c_groundedness:
+You will be given a context, and a
+passage.

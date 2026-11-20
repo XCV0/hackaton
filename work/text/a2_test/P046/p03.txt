@@ -1,0 +1,110 @@
+Aspect GRAG GRADA Ours
+Goal Subgraph re-
+trieval
+Adversarial
+defense
+Hallucination
+detection
+Stage Pre-
+generation
+Pre-
+generation
+Post-
+generation
+Nodes Full docu-
+ments
+Full docu-
+ments
+Segments
+Algorithm Ego-graph PageRank Betweenness
+Table 1: Graph-based methods in RAG: our method is
+the first to use segment-level graphs for post-generation
+hallucination verification.
+et al., 2025) repurpose NLI models to score
+factual consistency against individual retrieved
+documents. More recently, Grounded Context
+Retrieval (Gerner et al., 2025) highlights NLI’s
+weaknesses on long, multi-hop contexts. However,
+none of these approaches explicitly model semantic
+coherence across multiple retrieved segments.
+Graph-based methods in RAG. Recent work
+has explored graph-based representations within
+RAG pipelines; however, they address fun-
+damentally different pipeline stages (Table 1).
+GRAG (Hu et al., 2024) retrieves K-hop ego-
+graphs from document collections to improve re-
+trieval before generation. GRADA (Zheng et al.,
+2025) applies PageRank-style propagation among
+retrieved documents to detect adversarially injected
+documents before generation, addressing robust-
+ness rather than hallucination verification. Our
+method operates after generation with segment-
+level graphs (multiple nodes per document), uses
+betweenness centrality for evidence aggregation,
+and directly addresses multi-hop hallucination de-
+tection. These three approaches are complementary
+and can be chained as successive pipeline stages.
+On the notion of “logic” in this work. The term
+logic in our title refers to the multi-hop inferen-
+tial dependencies spanning multiple retrieved docu-
+ments, i.e., the cross-document reasoning chains a
+hallucination detector must trace to judge whether
+an answer is grounded in the retrieved evidence.
+This is distinct from formal logic operations as
+studied in, e.g., visual classification (Tan et al.,
+2024), where logic denotes symbolic rules derived
+from propositional or predicate calculus. In our
+setting, hallucination arises from semantic incon-
+sistencies across separate retrieval outputs rather
+than from violations of symbolically defined con-
+straints; accordingly, our framework captures these
+dependencies through graph-based evidence aggre-
+Symbol Definition
+ℓ(s) Token length of sentence s
+Chunk(X; T ) Chunking function segmenting text X
+with threshold T
+E(ci) Embedding function mapping chunk ci
+to Rd
+Pij Shortest path between nodes i and j
+fe Frequency of edge e appearing in all-
+pairs shortest paths
+τ (S) Total token count of cluster S
+R(Dk , A′) Relevance scoring function
+NLI(Dk , H) NLI entailment probability
+Table 2: Notation and Symbol Definitions.
+gation rather than formal rule inference.
+3 Methodology
+3.1 Problem Statement
+Lightweight hallucination detection for RAG must
+overcome three challenges. (1) Limited NLI con-
+text window: NLI models can only process finite
+text; when retrieved passages exceed this limit, es-
+sential facts may be omitted. (2) Cross-passage
+dependencies: standard NLI evaluates one pas-
+sage at a time, ignoring evidence spanning multiple
+documents. (3) Ambiguity in NLI scoring: a low
+entailment score can arise from direct contradiction
+or mere irrelevance; retrieved passages unrelated
+to the generated answer can trigger false alarms.
+Appendix A provides illustrative examples of
+these limitations.
+3.2 Framework Overview
+Our framework comprises three modules: Long
+Context Segmentation, Semantic Evidence Aggre-
+gation, and Consistency Scoring, each addressing
+one of the three challenges above. A sketch of the
+pipeline is in Figure 2.
+3.3 Long Context Segmentation
+Let ℓ(s) denote the token length of sentence s.
+Define thresholds Ta (answers) and Td (docu-
+ments). The chunking operation Chunk(X; T ) =
+{c1, . . . , cm} partitions text X into segments each
+satisfying ∑ ℓ(sℓ) ≤ T .
+Factual Sentence Classifier f (c). Let f (c) ∈
+{0, 1} be a rule-based binary classifier that filters
+non-factual sentences (questions, opinions, rhetori-
+cal statements) to focus graph construction on fac-
+tual content. The classifier combines: (1) regex
+patterns detecting temporal facts, quantitative facts,
+and named entities; (2) POS-tag signals checking
+1607

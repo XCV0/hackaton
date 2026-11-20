@@ -1,0 +1,101 @@
+Table 9: Number of API calls and tokens for STARK.
+HYBGRAG API Call # Token # for Token # for Token # for
+Component per for Examples Examples
+Iteration Prompts in MAG in Prime
+Router 2 159 2709 3018
+Validator 1 39 1383 2107
+Commenter 1 52 1215 1583
+the router addresses it accordingly. This refinement
+path of HYBGRAG is similar to CoT, making it in-
+terpretable and easy for the user to understand. Ex-
+amples in STARK-Prime are given in Appx. B.1.
+4.2 End-to-End RAG Evaluation on CRAG
+We modify HYBGRAG to adapt to CRAG (details
+in Appx. C). We use default evaluation metrics
+with an LLM evaluator to label answers as accurate
+(1), incorrect/hallucination (−1), or missing (0),
+yielding Scorea. We compare HYBGRAG with
+CoT LLM, text-only RAG, graph-only RAG, and
+RAG that concatenates text and graph references.
+We include an agentic LLM (ReAct) and a self-
+reflective LLM (Corrective RAG), both of which
+share our retriever bank but use different critics.
+In Table 8, HYBGRAG outperforms all base-
+lines in CRAG. RAGs with a single retrieval mod-
+ule cannot handle both types of questions. RAG
+with a concatenated reference also distracts by ir-
+relevant content in the long reference. Although
+our retriever bank is provided, agentic and self-
+reflective baselines still struggle to refine their ac-
+tions. Since ReAct relies on the LLM’s ability to
+think and provide natural language feedback, it
+often lacks clear guidance. Without a fine-tuned
+retrieval evaluator, Corrective RAG cannot effec-
+tively identify the usefulness of a reference.
+4.3 Model Cost Analysis
+We report the number of API calls and token
+consumption (excluding references) for each step
+in an iteration of HYBGRAG in Table 9 and 14
+for STARK and CRAG, respectively. While most
+of the token consumption arises from the examples
+used for ICL, the prompts themselves require
+very few tokens. Moreover, since HYBGRAG
+uses the chat LLM as the router, the examples
+for ICL only need to be given once. Compared to
+the state-of-the-art baseline AVATAR in STARK,
+which requires at least 500 API calls during
+training, our hybrid retrieval module achieves a
+relative improvement 24% in Hit@1 with only 2
+API calls, while HYBGRAG achieves 51% with
+at most 14 API calls, both without training.
+5 Related Works
+Graph RAG (GRAG) Various settings have been
+explored for GRAG (Peng et al., 2024), and can
+be roughly divided into three directions. The first
+focuses on KBQA, taking advantage of the LLM
+capability (Yasunaga et al., 2021; Sun et al., 2024;
+Jin et al., 2024; Mavromatis and Karypis, 2024).
+The second focuses on ODQA, building relation-
+ships between documents to improve retrieval (Li
+et al., 2024a; Dong et al., 2024; Edge et al., 2024).
+The last assumes that a subgraph is given when
+answering a question (He et al., 2024; Hu et al.,
+2024). In contrast, this paper focuses on solving
+HQA in SKB, and previous GRAG methods are
+not easily generalized to HQA.
+Agentic and Self-Reflective LLMs LLM agents
+(Yao et al., 2023; Wu et al., 2024a) facilitate
+planning in complex reasoning tasks. Among
+them, AVATAR is the most recent, proposing itera-
+tive prompt optimization via contrastive reasoning.
+However, they may still struggle to generate the
+correct output on the first attempt. Self-reflection
+addresses this limitation by iteratively optimizing
+the output based on feedback, typically provided by
+a critic implemented using various approaches: pre-
+trained LLMs (Shinn et al., 2023; Madaan et al.,
+2023), external tools (Gou et al., 2024; Qiao et al.,
+2024), or fine-tuned LLMs (Paul et al., 2024; Asai
+et al., 2024; Yan et al., 2024). Nevertheless, they
+do not generalize to HQA for two reasons. First,
+they lack appropriate retrieval tools and guidance
+on how to refine retrieval effectively. Second, in the
+absence of external tools or labels for fine-tuning,
+using pre-trained LLMs as critics without careful
+design results in suboptimal self-evaluation and
+overly implicit feedback.
+6 Conclusions
+To solve hybrid question answering (HQA), we pro-
+pose HYBGRAG, driven by insights from our em-
+pirical analysis, which has following advantages:
+1. Agentic: it refines question routing with self-
+reflection by our critic module;
+2. Adaptive: it solves textual, relational and hy-
+brid questions by our retriever bank;
+3. Interpretable: it justifies the decision making
+with intuitive refinement path; and
+4. Effective: it significantly outperforms all the
+baselines on HQA benchmarks.
+Applied on STARK, HYBGRAG achieves an aver-
+age relative improvement 51% in Hit@1.
+886

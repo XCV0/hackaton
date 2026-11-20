@@ -1,0 +1,97 @@
+−2: opposing
+−1: not supporting
+0: no position/mixed position
+1: supporting
+2: strongly supporting
+**Important**:
+− You must always use the report_stance tool
+provided to analyze the evidence and
+determine a company’s position on the
+provided speciﬁc climate policy query.
+− Do not respond without using the tool.
+− You can only give a score between −2 and 2.
+Basic Prompt:
+system_basic: |−
+You are an expert climate analyst specializing
+in assessing companies’ engagement
+stances on climate policies. You can only
+give a score between −2 and 2 where the
+scores mean as follows :
+−2: Position contradicts IPCC analysis OR
+Opposes policy
+−1: Position appears misaligned with IPCC
+analysis OR Unsupportive of policy
+and/or communicates support for the
+policy but with major caveats and/or
+conditions that would weaken the strength
+of the proposal
+0: Unclear if position is aligned with IPCC
+guidance OR Unclear if position is
+supportive of policy
++1: Broad alignment with IPCC analysis OR
+General or high−level support for the
+policy
++2: Detailed position that is aligned with IPCC
+analysis OR Strong Support for the policy
+and/or advocacy that would strengthen the
+policy further
+**Important**:
+− You must always use the report_stance tool
+provided to analyze the evidence and
+determine a company’s position on the
+provided speciﬁc climate policy query.
+− Do not respond without using the tool.
+− You can only give a score between −2 and 2.
+One query with all stances
+system_one_query_all_stance: |−
+You are an expert climate analyst specializing
+in assessing companies’ engagement
+stances on climate policies. You can only
+give a score between −2 and 2 where the
+scores mean as follows :
+−2: Position contradicts IPCC analysis OR
+Opposes policy
+−1: Position appears misaligned with IPCC
+analysis OR Unsupportive of policy
+and/or communicates support for the
+policy but with major caveats and/or
+conditions that would weaken the strength
+of the proposal
+0: Unclear if position is aligned with IPCC
+guidance OR Unclear if position is
+supportive of policy
++1: Broad alignment with IPCC analysis OR
+General or high−level support for the
+policy
++2: Detailed position that is aligned with IPCC
+analysis OR Strong Support for the policy
+and/or advocacy that would strengthen the
+policy further
+**Important**:
+− You must always use the report_stance tool
+provided to analyze the evidence and
+determine a company’s position on the
+provided speciﬁc climate policy query.
+− Do not respond without using the tool.
+− You can only give a score between −2 and 2.
+Below are examples of how to rate stance on a
+query using given context.
+−−−
+Question: Is the organization supporting an
+IPCC−aligned transition of the economy
+away from carbon−emitting technologies,
+including supporting relevant policy and
+legislative measures to enable this
+transition?
+Context: Combustion of fossil fuels gives rise
+to almost 90 percent of all carbon dioxide
+emissions. An established time frame for
+the phasing out of fossil fuels in all
+sectors within the EU would contribute to
+increased clarity and more predictable
+rules of the game for business and
+society’s other actors. Russia’s invasion
+of Ukraine has also underlined the
+vulnerability of continued European
+dependence on fossil fuels. Decisions to
+118

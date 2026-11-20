@@ -1,0 +1,72 @@
+10769
+Handwritten Image                Image Add Noise               OCR Api                  OCR Text
+Mandarin Audio                    Audio Add Noise                 ASR Api                   ASR Text 
+Annotator               OAD Dataset
+Figure 1: The procedure for constructing dataset OAD. Icons with blobs indicate image data with noise added, and
+icons with multiple waving lines indicate speech data with interference.
+are processed separately and store in the form of
+image. The sources of the audio files are THCHS-
+30 (Wang and Zhang, 2015) and AISHELL-1 (Bu
+et al., 2017). THCHS-30 is a Mandarin speech data
+resource produced by Tsinghua University, and
+the main content of the audio is news information.
+AISHELL-1 is the largest open-source Mandarin
+audio corpus to date, released by Beijing Beike,
+containing 400 speakers and more than 170 hours
+of Mandarin speech data, covering smart home, au-
+tonomous driving, financial real estate market, and
+other fields.
+Identification Tool. The Mandarin audio data
+from THCHS-30 and AISHELL-1 is processed
+using the short speech recognition interface from
+Baidu AI Cloud. This interface employs an end-
+to-end speech and language integrated modeling
+approach with very high recognition accuracy. This
+interface has already been successfully applied
+commercially. Chinese handwritten images from
+the HWDB dataset are recognized through Baidu
+AI Cloud’s high-precision Universal Character
+Recognition (UCR) interface, which can recognize
+almost all commonly used Chinese characters and
+most rare characters.
+Identification Strategy. To collect a wider variety
+of errors, we simulate a real recognition environ-
+ment and increase the error rate of recognition tools.
+During identification, we add some disturbances
+such as Gaussian noise and salt-and-pepper noise
+into the image data. Before speech recognition
+begins, we select some noise from the NOISE-92
+audio dataset and mix it into the Mandarin audio
+data. Fig. 1 illustrates the specific execution pro-
+cess of the recognition strategy.
+Post-processing. We employ several experienced
+annotators to process 4,356 pieces of image recog-
+nition data and 2,700 pieces of speech recognition
+data. The detailed requirements are as follows:
+• Restoring the text recognition results to form
+complete sentences and excluding sentences
+with fewer than 5 characters.
+• Removing duplicate recognized sentences and
+keeping the first recognition result.
+• Correcting punctuation errors in the recog-
+nition results and rectifying errors in proper
+nouns such as place name.
+After subsequent annotation and processing, we
+combine 300 obtained audio recognition results
+and 200 handwritten image recognition results into
+a dataset called OAD. This dataset serves as an
+evaluation dataset for tasks involving handwritten
+Chinese recognition and Mandarin audio recogni-
+tion.
+SIGHAN15 SIGHAN14 SIGHAN13 CSCD-IME (500) OAD
+SIGHAN15 1.00 0.28 0.09 0.11 0.01
+SIGHAN14 0.28 1.00 0.08 0.07 0.01
+SIGHAN13 0.09 0.08 1.00 0.13 0.00
+CSCD-IME
+(500) 0.11 0.07 0.13 1.00 0.02
+OAD 0.01 0.01 0.00 0.02 1.00
+Figure 2: Statistics on the overlap rate between different
+datasets.
+3.2 Dataset Comparison
+Shallow Features Analysis. We compare shallow
+features between widely used existing datasets

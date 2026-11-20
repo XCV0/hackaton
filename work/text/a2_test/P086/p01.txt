@@ -1,0 +1,110 @@
+Retrieval-Augmented Generation Meets Data-Driven Tabula Rasa
+Approach for Temporal Knowledge Graph Forecasting
+Geethan Sannidhi
+IIIT
+Pune, India
+geethansannidhi20@cse.iiitp.ac.in
+Sagar Srinivas Sakhinana
+TCS Research
+Bangalore, India
+sagar.sakhinana@tcs.com
+Venkataramana Runkana
+TCS Research
+Pune, India
+venkat.runkana@tcs.com
+ABSTRACT
+Pre-trained large language models (PLLMs) like OpenAI ChatGPT
+and Google Gemini face challenges such as inaccurate factual re-
+call, hallucinations, biases, and future data leakage for temporal
+Knowledge Graph (tKG) forecasting. To address these issues, we in-
+troduce sLA-tKGF (small-scale language assistant for tKG forecast-
+ing), which utilizes Retrieval-Augmented Generation (RAG) aided,
+custom-trained small-scale language models through a tabula rasa
+approach from scratch for effective tKG forecasting. Our framework
+constructs knowledge-infused prompts with relevant historical data
+from tKGs, web search results, and PLLMs-generated textual de-
+scriptions to understand historical entity relationships prior to the
+target time. It leverages these external knowledge-infused prompts
+for deeper understanding and reasoning of context-specific seman-
+tic and temporal information to zero-shot prompt small-scale lan-
+guage models for more accurate predictions of future events within
+tKGs. It reduces hallucinations and mitigates distributional shift
+challenges through comprehending changing trends over time. As a
+result, it enables more accurate and contextually grounded forecasts
+of future events while minimizing computational demands. Rig-
+orous empirical studies demonstrate our framework’s robustness,
+scalability, and state-of-the-art (SOTA) performance on benchmark
+datasets with interpretable and trustworthy tKG forecasting.
+KEYWORDS
+Temporal Knowledge Graphs, Retrieval-Augmented Generation
+1 INTRODUCTION
+Knowledge Graphs (KGs) and their dynamic extension, Temporal
+Knowledge Graphs (tKGs), play a pivotal role in AI applications like
+recommendation engines and web searches by structuring data into
+graph-formatted databases. KGs utilize triples (𝑠,𝑟,𝑜)—where 𝑠 is
+the subject, 𝑜 is the object, and 𝑟 describes their relation—to encode
+facts, while tKGs add a time element (𝑡) to represent time-validity
+of the fact, allowing them to capture how facts evolve over time.
+tKG reasoning, essential for deriving new insights, encompasses
+interpolation—to fill in historical data gaps [5, 6, 8, 12, 16, 32]—and
+extrapolation, for future event prediction [13, 28]. Predicting fu-
+ture events in tKGs is difficult, it requires handling unseen time
+periods and entirely new entities, demanding advanced methods to
+navigate the ever-changing nature of relationships. Closed-source
+pretrained large language models(PLLMs) like OpenAI ChatGPT[1]
+and Google Gemini[27] show potential for predicting future events
+due to their extensive pre-training knowledge and reasoning abil-
+ities. However, these large-scale models face challenges like fact
+recall issues stemming from complex architectures, resulting in
+unreliable predictions (hallucinations), potential bias from training
+data, and inadvertent leveraging of future data during pretraining,
+causing data leakage for tKG forecasting. Detecting data leakage
+is challenging when opaque training datasets are used for pre-
+training proprietary LLMs. Ensuring predictions rely solely on
+legitimate predictive abilities without the undue influence from
+future data remains a critical challenge for trustworthy tKG fore-
+casting. To address the limitations of existing methods, we present
+sLA-tKGF, a small-scale language assistant for tKG forecasting
+based on Retrieval-Augmented Generation (RAG) [19] to ground
+predictions in historical context with source attribution and trace-
+ability. The framework employs a multi-layered stacked vanilla
+transformer architecture [30] as its backbone language model and
+custom trained from scratch to avoid biases and data leakage in-
+herent in pre-trained LLMs. The framework incorporates three key
+components: (i) retrieval of relevant historical knowledge from
+the tKGs. By retrieving historical facts based on context and se-
+mantic similarity to the query, we can infer causality and gain
+insights into temporal dynamics. Additionally, we employ text-
+embedding model and semantic similarity for query matching to
+filter out anachronistic/irrelevant information. (ii) utilizing PLLMs
+to analyze entity relationships prior to the target time to generate
+textual descriptions of historical entity relationships based on their
+internal knowledge acquired from vast pre-training text corpora.
+(iii) web scraping for up-to-date contextual information relevant
+to the query. We utilize advanced pre-processing techniques like
+sentence tokenization, temporal tagging, and date conversion for
+excluding future facts beyond the target time and retain appro-
+priate scraped data. By incorporating information from diverse
+sources within a carefully crafted knowledge-augmented prompt,
+the framework generates factually accurate predictions grounded
+in historical context and ensures explainability. It minimizes the
+risk of bias, hallucinations, and avoids data leakage by pruning
+out-of-bound information. This ‘Tabula Rasa’ approach of training
+the framework from scratch ensures a foundation of accountability
+and trustworthiness in tKG forecasting by ensuring predictions
+are truly based on past knowledge and patterns. Figure 1 provides
+an overview of the proposed approach. In summary, our proposed
+retrieval-augmented small-scale language model significantly im-
+proves tKG forecasting. It achieves this by dynamically accessing
+and leveraging external, continually evolving diverse data sources.
+This enhances the framework’s utility in real-world applications,
+enabling it to generate historically accurate and well-explained fore-
+casts. Experiments on real-world benchmark datasets demonstrate
+the framework effectiveness.
+2 PROBLEM FORMULATION
+An tKG captures the dynamic evolution of entity relationships
+over time, unlike static KGs, which are fixed. Let V, R, T , and F
+symbolize sets of entities, relations, timestamps, and facts, respec-
+tively. A tKG snapshot G𝑡𝑖 := V𝑖 ,R𝑖 ,F𝑖 at discrete timestamp 𝑡𝑖
+1
+arXiv:2408.13273v1  [cs.CL]  18 Aug 2024

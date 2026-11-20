@@ -1,0 +1,96 @@
+LLM-Specific Utility for Retrieval-Augmented Generation CIKM ’26, November 07–11, 2026, Rome, Italy
+Table 2: RAG accuracy (%) using different evidence types across datasets and LLMs. Results are grouped by dataset (NQ, TriviaQA,
+MS MARCO-FQA) and LLM. Bold values indicate the best performance for each LLM on the same dataset. Superscript † indicates
+that the corresponding RAG method yields a statistically significant improvement over the human-annotated gold passages
+RAG baseline, according to the paired t-test (𝑝 < 0.05).
+Evidence NQ TriviaQA MS MARCO-FQA
+L3.1-8B Q3-8B Q3-14B Q3-32B L3.1-8B Q3-8B Q3-14B Q3-32B L3.1-8B Q3-8B Q3-14B Q3-32B
+Without retrieval 36.24 24.71 30.38 34.54 75.52 59.19 68.18 71.26 19.13 17.47 20.69 20.82
+𝑅𝑃 58.12 58.41 60.73 64.08 88.30 87.61 89.83 90.41 40.45 42.76 45.14 47.64
+𝑀𝐶𝑃 61.16 59.89 63.62 67.36 89.74 89.12 91.23 91.64 41.36 43.83 46.51 49.27
+𝐻𝐺𝑃 70.46 67.32 71.55 73.60 90.67 88.04 91.25 91.42 60.33 64.86 70.37 70.65
+Gold Utilitarian Passages (𝑅𝑃) 76.17† 74.59† 76.84† 78.39† 95.84† 94.72† 95.80† 96.21† 62.96 66.71 70.58 70.02
+Gold Utilitarian Passages (𝐻𝐺𝑃) 76.98† 74.02† 76.45† 79.17† 93.92† 90.97† 93.58† 93.95† 63.05† 67.40† 71.77† 71.24†
+Gold Utilitarian Passages (𝑀𝐶𝑃) 80.30† 78.60† 80.68† 82.16† 97.01† 95.84† 97.20† 97.18† 67.61† 71.21† 76.24† 75.46†
+4.1 Experiment Setup
+Source Datasets. In this work, we focus on the factual questions,
+as non-factual queries are very difficult to evaluate [2]. We employ
+several widely used factoid question answering datasets for our
+analysis. Specifically, we utilize two datasets from the KILT bench-
+mark [26]: Natural Questions (NQ), and TriviaQA. Additionally, we
+incorporate the MS MARCO QA development set. All queries in
+these datasets are factoid questions, where the answer is typically
+an entity.
+• Natural Questions (NQ) [17]: This dataset comprises real user
+queries from Google Search. To enhance provenance coverage,
+KILT conducted an Amazon Mechanical Turk campaign for the
+development and test sets, increasing the average number of
+provenance pages per question from 1 to 1.57.
+• TriviaQA (TQ) [13]: A collection of question-answer-evidence
+triples where evidence documents are automatically collected
+from Wikipedia. KILT uses only the Wikipedia-based portion of
+this dataset.
+• MS MARCO-FQA (MQ) [24]: The development set comprises
+queries sampled from Bing’s search logs, each accompanied by
+human-annotated passages. Queries are categorized by type: LO-
+CATION, NUMERIC, PERSON, DESCRIPTION, ENTITY. We fo-
+cused on the factual questions within the MS MARCO dataset
+(approximately half of all queries). Unlike the NQ dataset, MS
+MARCO’s ground-truth answers are sentences rather than spe-
+cific entities. To address this, we employed the Qwen3-32B model
+to extract precise entity answers from the filtered MS MARCO
+data. This newly processed collection is termed the MS MARCO-
+FQA dataset.
+Retriever. For the datasets from the KILT benchmark as well as
+2WikiQA, the corpus is the Wikipedia dumps and then split into
+DPR [14] 100-word format as passages, resulting in about 34M
+passages, which is provided by DPR1. For the MS MARCO-FQA, we
+directly use the MS MARCO v1 passage corpus [24], which contains
+about 8.8M passages. We utilize the well-performing BGE-M3 [23]
+as our retriever and retrieve top-20 results for all six datasets.
+Analyzed LLMs. We analyze four widely used LLMs from two
+families: Llama3.1-8B-Instruct (denoted as L3.1-8B) [5], Qwen3-8B
+(denoted as Q3-8B), Qwen3-14B (denoted as Q3-14B), and Qwen3-
+32B [37] (denoted as Q3-32B). Qwen spans 8B–32B for studying
+scale effects, while Llama3.1-8B provides a cross-family baseline. By
+1https://dl.fbaipublicfiles.com/ur/wikipedia_split/psgs_w100.tsv.gz
+default, Qwen3’s think function is disabled. To ensure reproducibil-
+ity, the temperature for all LLMs in this study was set to 0. We
+leave the investigation on more LLM families and under non-zero
+temperatures with multiple sampling in future work.
+Candidate Pool Option. To facilitate a comprehensive evaluation
+of gold utilitarian passage annotation, we employ three distinct can-
+didate pools for constructing gold utilitarian passages of four LLMs:
+Llama3.1-8B, Qwen3-8B, Qwen3-16B, and Qwen3-32B: (1) Top-20
+Retrieved Passages (𝑅𝑃): This pool reflects a typical scenario in
+real-world RAG systems, where only retrieval results are available,
+and human annotations are not always accessible. (2) Human-
+Annotated Gold Passages (𝐻𝐺𝑃): Utilizing human-annotated
+gold passages allows for direct comparison with human judgments
+and assessment of alignment with human annotation quality. (3)
+Merged Candidate Pool (𝑀𝐶𝑃): By merging the top-20 retrieved
+passages with the human-annotated gold passages, we create an
+expanded candidate pool, offering a more complete annotation set
+for gold utilitarian passages. In this section, we focus on analyzing
+the RAG performance with respect to the relationship between
+human-annotated gold passages and LLM-specific utility. Our util-
+ity definition focuses on the pointwise utility, the utility of a passage
+to a given LLM considered independently of other passages. To en-
+sure a fair comparison with human-annotated gold passages, we
+restrict the experiments in this section to three single-hop datasets:
+NQ, TriviaQA, and MS MARCO-FQA.
+Known and Unknown Query Definition. Based on our utility
+definition, if an LLM can already answer correctly without pas-
+sages, additional evidence provides limited gain. We thus categorize
+queries into known queries (answerable without passages) and
+unknown queries (requiring external information).
+4.2 Statistics of Gold Utilitarian Passages
+We present the statistics of the number of gold utilitarian pas-
+sages and the overlap between gold utilitarian passages and human-
+annotated gold passages.
+𝐺𝑈𝑃 Number Statistics. Table 1 shows the annotated numbers
+of gold utilitarian passages for different LLMs. We find that incor-
+porating human-annotated gold passages into the automatically
+annotated set resulted in only a marginal increase in the number of
+golden passages, suggesting that human-annotated gold passages
+are not always labeled as gold utilitarian passages for specific LLMs.

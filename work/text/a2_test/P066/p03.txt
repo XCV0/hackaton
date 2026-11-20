@@ -1,0 +1,99 @@
+output evaluations hinder iterative development and
+rapid prototyping of RAG-based clinical QA sys-
+tems, as they often fail to provide clear guidance to
+developers on how to adapt their RAG pipelines to
+resolve clinical performance issues.
+2.2 Current RAG metrics
+Evaluating RAG systems presents challenges due
+to their hybrid structure and the overall quality of
+the output often depends on multiple components
+within these systems. While attempts have been
+made to assess the overall quality of responses us-
+ing deterministic methods (Liu et al., 2023; Lyu
+et al., 2024), most current evaluation metrics for
+RAG systems use an ensemble of component-level
+assessments, the majority of which leverage LLMs
+as judges (Yu et al., 2024). Broadly, RAG pipelines
+and the axes used to assess their performance can
+be broken down into the following components.
+Retrieval component The retrieval component
+is responsible for extracting relevant context from
+a knowledge source to match a given query.
+• Relevance (Context ↔ Question): Measures
+how well the retrieved context matches the
+query’s information needs.
+• Accuracy (Relevant Context ↔ Context Can-
+didates): Assesses the accuracy of retrieved
+context compared to a set of candidates.
+Generation component where a model gener-
+ates a response using information from the given
+context
+• Relevance (Response ↔ Question): Evaluates
+the alignment of generated responses with the
+question’s intent.
+• Faithfulness / Groundedness (Response ↔
+Context): Assesses whether generated re-
+sponses accurately reflect the retrieved con-
+text.
+• Correctness (Response ↔ Sample Response):
+Measures the factual correctness of generated
+responses against a sample or standard re-
+sponse.
+These component evaluations have been variably
+implemented with popular tools including TruEra’s
+RAG Triad (Trulens, 2023), and LangChain Bench
+(LangChain). Additionally, LLM-as-a-judge-based
+frameworks like RAGAS (Es et al., 2023), and
+ARES (Saad-Falcon et al., 2023) have popularized
+common evaluation triads to capture possible per-
+mutations of the above components. Refer to Ap-
+pendix A for an example of how the three compo-
+nents of the RAG system can be judged by LLMs,
+using RAGAS as an example.
+2.2.1 Limitations of current metrics
+Faithfulness The established methods to mea-
+sure Faithfulness break down a model’s response
+into granular statements and then evaluate each
+statement’s consistency with the context (Es et al.,
+2023). This approach aims to create more focused
+assertions that consider the context of both the ques-
+tion and the answer. It is particularly advantageous
+when answers are short and lack sufficient con-
+text when reviewed in isolation, as demonstrated in
+Figure 7. However, in the context of clinical con-
+versations, this approach has the following short-
+comings:
+• Summarizing the response into statements of-
+ten neglects the clinical nuances in the original
+response (Figure 8).
+• Creating statements from both the patient’s
+question and the agent’s answer prevents the
+independent review of the agent’s answer
+concerning the context. This is especially
+problematic when the combined statement
+contains factually incorrect information (Fig-
+ure 9).
+• Dialogue agents, particularly in clinical set-
+tings, are prompted to respond empathetically
+and conversationally. Statements constructed
+from the agent’s acknowledgments and ques-
+tions, such as those meant to clarify or follow
+up on the patient’s queries or concerns, are
+penalized by existing faithfulness definitions
+(Figure 10).
+Answer Relevance Evaluating answer relevance
+is critical in QA systems to ensure generated re-
+sponses align with query’s intent. However, most
+current definitions focus on lexical or semantic sim-
+ilarity between the question and the response [(Siri-
+wardhana et al., 2023; Es et al., 2023)]. This has a
+number of drawbacks:
+• It overemphasizes surface-level topic match-
+ing without accounting for deeper contextual
+understanding.
+• It fails to account for whether a context is
+appropriate given a clinical context.
+• It does not handle "non-answers", meaning
+it struggles to determine when a system cor-
+rectly discerns that a question falls outside its
+16702

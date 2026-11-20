@@ -1,0 +1,107 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+Artificial Intelligence and Security, ser. AISec ’23.
+New York, NY, USA: Association for Computing
+Machinery, 2023, p. 79–90. [Online]. Available:
+https://doi.org/10.1145/3605764.3623985
+[29] Y. Huang, L. Sun, H. Wang, S. Wu, Q. Zhang, Y. Li,
+C. Gao, Y. Huang, W. Lyu, Y. Zhang, X. Li, Z. Liu,
+Y. Liu, Y. Wang, Z. Zhang, B. Vidgen, B. Kailkhura,
+C. Xiong, C. Xiao, C. Li, E. Xing, F. Huang, H. Liu,
+H.Ji,H.Wang,H.Zhang,H.Yao,M.Kellis,M.Zitnik,
+M. Jiang, M. Bansal, J. Zou, J. Pei, J. Liu, J. Gao,
+J. Han, J. Zhao, J. Tang, J. Wang, J. Vanschoren,
+J. Mitchell, K. Shu, K. Xu, K.-W. Chang, L. He,
+L. Huang, M. Backes, N. Z. Gong, P. S. Yu, P.-Y.
+Chen, Q. Gu, R. Xu, R. Ying, S. Ji, S. Jana, T. Chen,
+T. Liu, T. Zhou, W. Wang, X. Li, X. Zhang, X. Wang,
+X. Xie, X. Chen, X. Wang, Y. Liu, Y. Ye, Y. Cao,
+Y. Chen, and Y. Zhao, “Trustllm: Trustworthiness in
+large language models,” 2024. [Online]. Available:
+https://arxiv.org/abs/2401.05561
+[30] J. Chen, H. Lin, X. Han, and L. Sun, “Benchmarking
+large language models in retrieval-augmented
+generation,” Proceedings of the AAAI Conference
+on Artificial Intelligence, vol. 38, no. 16, pp.
+17754–17762, Mar. 2024. [Online]. Available: https:
+//ojs.aaai.org/index.php/AAAI/article/view/29728
+[31] Y. Lyu, Z. Li, S. Niu, F. Xiong, B. Tang, W. Wang,
+H. Wu, H. Liu, T. Xu, and E. Chen, “Crud-rag:
+A comprehensive chinese benchmark for retrieval-
+augmented generation of large language models,”
+ACM Trans. Inf. Syst., vol. 43, no. 2, Jan. 2025.
+[Online]. Available: https://doi.org/10.1145/3701228
+[32] J. Li, X. Cheng, X. Zhao, J.-Y. Nie, and J.-R. Wen,
+“HaluEval: A large-scale hallucination evaluation
+benchmarkforlargelanguagemodels,”inProceedings
+of the 2023 Conference on Empirical Methods in
+Natural Language Processing, H. Bouamor, J. Pino,
+and K. Bali, Eds. Singapore: Association for
+Computational Linguistics, Dec. 2023, pp. 6449–
+6464. [Online]. Available: https://aclanthology.org/
+2023.emnlp-main.397/
+[33] Q. Luo, X. Li, T. Fan, X. Chen, and X. Qiu, “Towards
+global retrieval augmented generation: A benchmark
+forcorpus-levelreasoning,”2025.[Online].Available:
+https://arxiv.org/abs/2510.26205
+[34] Y. Katsis, S. Rosenthal, K. Fadnis, C. Gunasekara,
+Y.-S. Lee, L. Popa, V. Shah, H. Zhu,
+D. Contractor, and M. Danilevsky, “mtrag: A
+multi-turn conversational benchmark for evaluating
+retrieval-augmentedgenerationsystems,”Transactions
+of the Association for Computational Linguistics,
+vol. 13, pp. 784–808, 07 2025. [Online]. Available:
+https://doi.org/10.1162/TACL.a.19
+[35] L. Zeng, R. Gupta, D. Motwani, Y. Zhang, and
+D. Yang, “Worse than zero-shot? a fact-checking
+dataset for evaluating the robustness of rag against
+misleading retrievals,” 2026. [Online]. Available:
+https://arxiv.org/abs/2502.16101
+[36] Y. Zeng, T. Cao, D. Wang, X. Zhao, Z. Qiu,
+M. Ziyadi, T. Wu, and L. Li, “Rare: Retrieval-
+aware robustness evaluation for retrieval-augmented
+generation systems,” 2025. [Online]. Available:
+https://arxiv.org/abs/2506.00789
+[37] G. Trappolini, F. Cuconasu, S. Filice, Y. Maarek, and
+F. Silvestri, “Redefining retrieval evaluation in the
+era of LLMs,” in Proceedings of the 19th Conference
+of the European Chapter of the Association for
+Computational Linguistics (Volume 1: Long Papers),
+V. Demberg, K. Inui, and L. Marquez, Eds. Rabat,
+Morocco: Association for Computational Linguistics,
+Mar. 2026, pp. 8359–8375. [Online]. Available:
+https://aclanthology.org/2026.eacl-long.391/
+[38] M. Mazeika, L. Phan, X. Yin, A. Zou, Z. Wang,
+N. Mu, E. Sakhaee, N. Li, S. Basart, B. Li,
+D. Forsyth, and D. Hendrycks, “Harmbench: A
+standardized evaluation framework for automated red
+teamingandrobustrefusal,”2024.[Online].Available:
+https://arxiv.org/abs/2402.04249
+[39] P. Chao, E. Debenedetti, A. Robey,
+M. Andriushchenko, F. Croce, V. Sehwag,
+E. Dobriban, N. Flammarion, G. J. Pappas, F. Tramèr,
+H. Hassani, and E. Wong, “Jailbreakbench: An
+open robustness benchmark for jailbreaking large
+language models,” in Advances in Neural Information
+Processing Systems, A. Globerson, L. Mackey,
+D. Belgrave, A. Fan, U. Paquet, J. Tomczak, and
+C. Zhang, Eds., vol. 37. Curran Associates, Inc.,
+2024, pp. 55005–55029. [Online]. Available: https:
+//proceedings.neurips.cc/paper_files/paper/2024/file/
+63092d79154adebd7305dfd498cbff70-Paper-Datasets_
+and_Benchmarks_Track.pdf
+[40] T. Hartvigsen, S. Gabriel, H. Palangi, M. Sap,
+D. Ray, and E. Kamar, “ToxiGen: A large-scale
+machine-generated dataset for adversarial and implicit
+hate speech detection,” in Proceedings of the 60th
+Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), S. Muresan,
+P. Nakov, and A. Villavicencio, Eds. Dublin,
+Ireland: Association for Computational Linguistics,
+May 2022, pp. 3309–3326. [Online]. Available:
+https://aclanthology.org/2022.acl-long.234/
+[41] A. Parrish, A. Chen, N. Nangia, V. Padmakumar,
+J. Phang, J. Thompson, P. M. Htut, and S. Bowman,
+“BBQ: A hand-built bias benchmark for question
+answering,” in Findings of the Association for
+Computational Linguistics: ACL 2022, S. Muresan,
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 15 of 21

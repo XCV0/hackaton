@@ -1,0 +1,7 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D007,MS1,DV1,J-V,,,,,,,,,,,,"Fig. 8a, typical J-V; направление развёртки не указано (almost no hysteresis, Figure S2); условия освещения не указаны"
+D007,MS2,DV2,J-V,,,,,,,,,,,,"Fig. 8a, reference"
+D007,MS3,DV3,J-V,,,,,,,,,,,,Fig. 8b
+D007,MS4,DV4,J-V,,,,,,,,,,,,Fig. 8b
+D007,MS5,DV1,stability,,,,,,,,,RT,other,"continuous operation, tested every 12 h, 15%-20% RH, RT",Fig. 8d
+D007,MS6,DV2,stability,,,,,,,,,RT,other,"continuous operation, tested every 12 h, 15%-20% RH, RT",Fig. 8d

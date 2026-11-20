@@ -1,0 +1,122 @@
+calculations, as well as the more advanced BM25-RAG and
+TF-IDF-RAG models, ES-RAG has demonstrated excellent
+performance, especially in improving answer accuracy. The
+improvement in answer accuracy is particularly notable. The
+improvement benefits from Elasticsearch's powerful indexing
+function and its flexible configuration possibilities, which
+work together to enhance the system's support for complex
+queries and its ability to quickly locate relevant information. It
+is worth noting that even on the basis of TF-IDF-RAG, which
+is already better than the baseline level, ES-RAG can still
+achieve better results in all three evaluation indicators-
+precision, recall and F1 score. This fully demonstrates its
+effectiveness as an efficient solution. Looking forward to the
+future, as the field of natural language processing continues to
+advance and develop, researchers can continue to explore in
+depth how to further enhance the collaboration efficiency
+between Elasticsearch and large language models, such as by
+developing more sophisticated indexing strategies and scoring
+algorithms to meet specific application scenarios. or explore
+how to integrate higher-level functions such as semantic
+understanding and situational awareness to build a more
+intelligent Q&A platform that is closer to human
+communication habits. These efforts will not only help
+overcome the limitations of existing technologies, but will also
+lay a solid foundation for promoting the development of next-
+generation information retrieval and generation technologies.
+In short, through continuous technological innovation and
+practical verification, we have reason to believe that in the
+near future, people will enjoy a new era of fast and accurate
+information services.
+REFERENCES
+[1] K. Pranusha and P. V. K. Raja, "External Information on Large
+Linguistic Models Utilizing Retrieval Enhanced Generation
+(RAG)," Journal of Healthcare Informatics Research, 2024.
+[2] M. Orozco, M. Delgado, and S. Ford, "Model Distillation for
+Enhanced Contextual Response Prediction Using Retrieval-
+Augmented Generation in Large Language Models," Authorea
+Preprints, 2024.
+[3] S. Sivarajkumar, H. A. Mohammad, D. Oniani, et al., "Clinical
+information retrieval: A literature review," Journal of Healthcare
+Informatics Research, 2024, pp. 1-40.
+[4] P. Jafarzadeh, F. Ensan, M. A. A. Alavi, et al., "A Knowledge
+Graph Embedding Model for Answering Factoid Entity
+Questions," ACM Transactions on Information Systems, 2024.
+[5] Y. Dong, J. Yao, J. Wang, Y. Liang, S. Liao and M. Xiao,
+"Dynamic Fraud Detection: Integrating Reinforcement Learning
+into Graph Neural Networks", arXiv preprint arXiv:2409.09892,
+2024.
+[6] B. Liu, I. Li, J. Yao, Y. Chen, G. Huang and J. Wang,
+"Unveiling the Potential of Graph Neural Networks in SME
+Credit Risk Assessment", arXiv preprint arXiv:2409.17909,
+2024.
+[7] M. Jiang, J. Lin, H. Ouyang, J. Pan, S. Han and B. Liu,
+"Wasserstein Distance-Weighted Adversarial Network for
+Cross-Domain Credit Risk Assessment", arXiv preprint
+arXiv:2409.18544, 2024.
+[8] Y. Wu, K. Xu, H. Xia, B. Wang and N. Sang, "Adaptive Feature
+Interaction Model for Credit Risk Prediction in the Digital
+Finance Landscape", Journal of Computer Science and Software
+Applications, vol. 3, no. 1, pp. 31-38, 2023.
+[9] K. Xu, Y. Wu, H. Xia, N. Sang and B. Wang, "Graph Neural
+Networks in Financial Markets: Modeling Volatility and
+Assessing Value-at-Risk", Journal of Computer Technology and
+Software, vol. 1, no. 2, 2022.
+[10] J. Yao, J. Wang, B. Wang, B. Liu and M. Jiang, "A Hybrid
+CNN-LSTM Model for Enhancing Bond Default Risk
+Prediction", Journal of Computer Technology and Software, vol.
+3, no. 6, 2024.
+[11] W. Gu, M. Sun, B. Liu, K. Xu and M. Sui, "Adaptive spatio-
+temporal aggregation for temporal dynamic graph-based fraud
+risk detection", Journal of Computer Technology and Software,
+vol. 3, no. 5, 2024.
+[12] S. B. Islam, M. A. Rahman, K. S. M. T. Hossain, et al., "OPEN-
+RAG: Enhanced Retrieval-Augmented Reasoning with Open-
+Source Large Language Models," 2024.
+[13] Y. Liang, X. Liu, H. Xia, Y. Cang, Z. Zheng and Y. Yang,
+"Convolutional Neural Networks for Predictive Modeling of
+Lung Disease", arXiv preprint arXiv:2408.12605, 2024.
+[14] Y. Li, W. Zhao, B. Dang, X. Yan, M. Gao, W. Wang, and M.
+Xiao, "Research on adverse drug reaction prediction model
+combining knowledge graph embedding and deep learning",
+Proceedings of the 2024 4th International Conference on
+Machine Learning and Intelligent Systems Engineering
+(MLISE), pp. 322-329, June 2024.
+[15] Q. Guo, J. Hu and Z. Liang, "A Scalable Target Indexing and
+Retrieval System for Massive Video Data Processing based on
+Elasticsearch and Hadoop," 2024 IEEE 7th Advanced
+Information Technology, Electronic and Automation Control
+Conference (IAEAC), pp. 1805-1809, 2024
+[16] W. Dai, J. Tao, X. Yan, Z. Feng, and J. Chen, "Addressing
+unintended bias in toxicity detection: An LSTM and attention-
+based approach", Proceedings of the 2023 5th International
+Conference on Artificial Intelligence and Computer
+Applications (ICAICA), pp. 375-379, 2023.
+[17] Y. Cang, W. Yang, D. Sun, Z. Ye and Z. Zheng, "ALBERT-
+Driven Ensemble Learning for Medical Text Classification",
+Journal of Computer Technology and Software, vol. 3, no. 6,
+2024.
+[18] Z. Zheng, Y. Cang, W. Yang, Q. Tian and D. Sun, "Named
+entity recognition: A comparative study of advanced pre-trained
+model", Journal of Computer Technology and Software, vol. 3,
+no. 5, 2024.
+[19] L. Wu, Y. Luo, B. Zhu, G. Liu, R. Wang and Q. Yu, "Graph
+neural network framework for sentiment analysis using syntactic
+feature", arXiv preprint arXiv:2409.14000, 2024.
+[20] Q. Wang, Z. Gao, T. Mei, X. Cheng, W. Gu and H. Xia, "Deep
+Learning-based Multimodal Fusion for Improved Object
+Recognition Accuracy", 2024 3rd International Conference on
+Robotics, Artificial Intelligence and Intelligent Control (RAIIC),
+pp. 471-474, 2024.
+[21] X. Yan, Y. Jiang, W. Liu, D. Yi, and J. Wei, "Transforming
+Multidimensional Time Series into Interpretable Event
+Sequences for Advanced Data Mining", arXiv preprint,
+arXiv:2409.14327, 2024.
+[22] X. Cheng, T. Mei, Y. Zi, Q. Wang, Z. Gao and H. Yang,
+"Algorithm Research of ELMo Word Embedding and Deep
+Learning Multimodal Transformer in Image Description", arXiv
+preprint arXiv:2408.06357, 2024.
+[23] J. Yamanaka and T. Kido, "Evaluating Large Language Models
+with RAG Capability: A Perspective from Robot Behavior
+Planning and Execution," Proceedings of the AAAI Symposium
+Series, vol. 3, no. 1, pp. 452-456, 2024.

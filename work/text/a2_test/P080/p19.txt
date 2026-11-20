@@ -1,0 +1,17 @@
+grained subgraph retrieval process (Section 3.3).
+We extensively tuned these hyperparameters across
+a wide range. Our results indicate that α = 0.85
+generally yields the best performance across all
+three tabular reasoning tasks, which aligns with
+several previous PageRank studies (Rozenshtein
+and Gionis, 2016; Yoon et al., 2018). However, the
+optimal value of τ varies depending on the task
+due to differences in sparsity and scalability among
+our constructed graphs. Consequently, we tuned τ
+over the range [0, 1] to determine its most effective
+setting.
+E Usage on AI Assistants
+During the paper writing process, LLMs were used
+exclusively for language polishing, including word
+choice refinement and grammatical corrections.
+38151

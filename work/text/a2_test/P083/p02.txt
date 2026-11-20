@@ -1,0 +1,116 @@
+Ranked Evidence Reranker      
+Optimization
+StanceEmbed
+Prompt
+Sort
+Upload
+Docling      
+Layout
+Chunker
+Chunk
+Embed
+Parse
+Weaviate
+Store
+Ollama       
+Semantic
+Search
+Data Loader
+UI
+Query
+Metadata
+File Name
+Number of evidences
+Company Name
+Region
+Date
+Filter
+Database
+Store
+Knowledge Base
+RAG System
+API Endpoints
+Evaluation & Tracing 
+Ollama       
+Input
+12
+3
+4
+5
+MongoDB
+User
+Response
+Evaluation
+Generate
+EvidencesAPI      Retrieve
+Annotation
+Stance
+Rank
+Chunk
+Evidence
+Parsing
+Metrics
+HRT
+Reciprocal
+Rank
+Dilution
+Recall
+nLCS
+Store
+If annotated
+Artifacts
+Feedback
+Figure 1: LobbyMap Search system pipeline.
+3. RAG system: Parses and chunks documents,
+embeds and stores them in a vector database.
+4. API Endpoints: Handle user queries, return
+retrieved evidence, and facilitate interaction
+between components.
+5. Evaluation and Tracking: Logs user feed-
+back, query artifacts, and evaluation results.
+3 RAG Experimental Setup
+3.1 Parsing and Chunking
+Parsing. We use both Docling and PyMuPDF to
+parse PDF documents and compare their outputs
+across structure preservation and text quality.
+Docling (Livathinos et al., 2025), a layout-aware
+parser that outputs structured Markdown with head-
+ers, paragraphs, and tables. It uses EasyOCR for
+multilingual extraction.
+PyMuPDF (PyMuPDF Developers, 2024) offers
+faster multilingual linear parsing but lacks struc-
+tural awareness; text is extracted as plain lines.
+Chunking. To enhance retrieval precision (Qu
+et al., 2024), we segment documents into coherent
+chunks:
+Semantic chunking (Minhas and Nigam, 2025)
+groups sentences based on embedding similarity.
+Layout-based chunking uses structural markers
+and heuristic rules to deﬁne chunk boundaries.
+A detailed conﬁguration is in Appendix F.
+3.2 Embedding
+To support multilingual semantic retrieval, we em-
+bed text chunks into vector space using dense lan-
+guage models. We prioritize models with high
+language coverage and long-context capabilities to
+accommodate the diversity and length of corporate
+reports. We compare three models: bge-m3 (Chen
+et al., 2024), nomic-embed-text:v1.5 (Nuss-
+baum et al., 2024), and Qwen3-Embedding-0.6B
+(Zhang et al., 2025). Model selection is based on re-
+trieval quality, ensuring multilingual performance
+across document types.
+3.3 Reranking
+To provide users with the most relevant information
+ﬁrst, we optionally apply reranking using models
+trained to predict relevance scores for chunk-query
+pairs. We experiment with bge-reranker-v2-m3
+(Chen et al., 2024), mxbai-rerank-large-v1
+(Shakir et al., 2024), and no reranking as a baseline.
+3.4 Stance Generation
+The ﬁnal step generates a score and a reason for the
+retrieved evidences. To ensure privacy and control,
+we use open-weight Qwen3 models (Yang et al.,
+2025) and compare different zero- and few-shot
+prompting strategies (see Appendix A).
+112

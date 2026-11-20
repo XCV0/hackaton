@@ -1,0 +1,153 @@
+KDD ’24, August 25–29, 2024, Barcelona, Spain Yunqi Xu, Tianchi Cai, Jiyan Jiang, and Xierui Song
+REFERENCES
+[1] 2019. https://gaokao.neea.edu.cn/xhtml1/report/19012/5987-1.htm.
+[2] Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Floren-
+cia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal
+Anadkat, et al. 2023. Gpt-4 technical report. arXiv preprint arXiv:2303.08774
+(2023).
+[3] Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang, Xiaodong Deng, Yang Fan,
+Wenbin Ge, Yu Han, Fei Huang, Binyuan Hui, Luo Ji, Mei Li, Junyang Lin, Runji
+Lin, Dayiheng Liu, Gao Liu, Chengqiang Lu, Keming Lu, Jianxin Ma, Rui Men,
+Xingzhang Ren, Xuancheng Ren, Chuanqi Tan, Sinan Tan, Jianhong Tu, Peng
+Wang, Shijie Wang, Wei Wang, Shengguang Wu, Benfeng Xu, Jin Xu, An Yang,
+Hao Yang, Jian Yang, Shusheng Yang, Yang Yao, Bowen Yu, Hongyi Yuan, Zheng
+Yuan, Jianwei Zhang, Xingxuan Zhang, Yichang Zhang, Zhenru Zhang, Chang
+Zhou, Jingren Zhou, Xiaohuan Zhou, and Tianhang Zhu. 2023. Qwen Technical
+Report. arXiv preprint arXiv:2309.16609 (2023).
+[4] Yushi Bai, Jiahao Ying, Yixin Cao, Xin Lv, Yuze He, Xiaozhi Wang, Jifan Yu,
+Kaisheng Zeng, Yijia Xiao, Haozhe Lyu, et al. 2023. Benchmarking Foundation
+Models with Language-Model-as-an-Examiner. arXiv preprint arXiv:2306.04181
+(2023).
+[5] Baichuan. 2023. Baichuan 2: Open Large-scale Language Models. arXiv preprint
+arXiv:2309.10305 (2023). https://arxiv.org/abs/2309.10305
+[6] Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan,
+Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, et al. 2020. Language models are few-shot learners. Advances in neural
+information processing systems 33 (2020), 1877–1901.
+[7] Anthony Chen, Gabriel Stanovsky, Sameer Singh, and Matt Gardner. 2019. Eval-
+uating question answering evaluation. In Proceedings of the 2nd workshop on
+machine reading for question answering. 119–124.
+[8] Danqi Chen, Adam Fisch, Jason Weston, and Antoine Bordes. 2017. Reading
+wikipedia to answer open-domain questions. arXiv preprint arXiv:1704.00051
+(2017).
+[9] Shiqi Chen, Yiran Zhao, Jinghan Zhang, I Chern, Siyang Gao, Pengfei Liu, Junxian
+He, et al. 2023. Felm: Benchmarking factuality evaluation of large language
+models. arXiv preprint arXiv:2310.00741 (2023).
+[10] I Chern, Steffi Chern, Shiqi Chen, Weizhe Yuan, Kehua Feng, Chunting Zhou,
+Junxian He, Graham Neubig, Pengfei Liu, et al. 2023. FacTool: Factuality De-
+tection in Generative AI–A Tool Augmented Framework for Multi-Task and
+Multi-Domain Scenarios. arXiv preprint arXiv:2307.13528 (2023).
+[11] Yiming Cui, Ziqing Yang, and Xin Yao. 2023. Efficient and Effective Text Encoding
+for Chinese LLaMA and Alpaca. arXiv preprint arXiv:2304.08177 (2023). https:
+//arxiv.org/abs/2304.08177
+[12] Marie-Catherine De Marneffe, Anna N Rafferty, and Christopher D Manning.
+2008. Finding contradictions in text. In Proceedings of acl-08: Hlt. 1039–1047.
+[13] Shahul Es, Jithin James, Luis Espinosa-Anke, and Steven Schockaert. 2023. Ra-
+gas: Automated evaluation of retrieval augmented generation. arXiv preprint
+arXiv:2309.15217 (2023).
+[14] Alexander R Fabbri, Wojciech Kryściński, Bryan McCann, Caiming Xiong,
+Richard Socher, and Dragomir Radev. 2021. Summeval: Re-evaluating summa-
+rization evaluation. Transactions of the Association for Computational Linguistics
+9 (2021), 391–409.
+[15] Mingqi Gao, Jie Ruan, Renliang Sun, Xunjian Yin, Shiping Yang, and Xiaojun
+Wan. 2023. Human-like summarization evaluation with chatgpt. arXiv preprint
+arXiv:2304.02554 (2023).
+[16] Prakhar Gupta, Chien-Sheng Wu, Wenhao Liu, and Caiming Xiong. 2021. DialFact:
+A benchmark for fact-checking in dialogue. arXiv preprint arXiv:2110.08222
+(2021).
+[17] Or Honovich, Leshem Choshen, Roee Aharoni, Ella Neeman, Idan Szpektor,
+and Omri Abend. 2021. 𝑄 2: Evaluating factual consistency in knowledge-
+grounded dialogues via question generation and question answering. arXiv
+preprint arXiv:2104.08202 (2021).
+[18] Xiangkun Hu, Dongyu Ru, Qipeng Guo, Lin Qiu, and Zheng Zhang. 2023. Re-
+fChecker for Fine-grained Hallucination Detection. (2023). https://github.com/
+amazon-science/RefChecker
+[19] Gautier Izacard and Edouard Grave. 2020. Leveraging passage retrieval with
+generative models for open domain question answering. arXiv preprint
+arXiv:2007.01282 (2020).
+[20] Ray S Jackendoff. 1992. Semantic structures. Vol. 18. MIT press.
+[21] Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii,
+Ye Jin Bang, Andrea Madotto, and Pascale Fung. 2023. Survey of hallucination in
+natural language generation. Comput. Surveys 55, 12 (2023), 1–38.
+[22] Zhijing Jin, Abhinav Lalwani, Tejas Vaidhya, Xiaoyu Shen, Yiwen Ding, Zhiheng
+Lyu, Mrinmaya Sachan, Rada Mihalcea, and Bernhard Schölkopf. 2022. Logical
+fallacy detection. arXiv preprint arXiv:2202.13758 (2022).
+[23] Ryo Kamoi, Tanya Goyal, Juan Diego Rodriguez, and Greg Durrett. 2023. Wice:
+Real-world entailment for claims in wikipedia. arXiv preprint arXiv:2303.01432
+(2023).
+[24] Wojciech Kryściński, Bryan McCann, Caiming Xiong, and Richard Socher. 2019.
+Evaluating the factual consistency of abstractive text summarization. arXiv
+preprint arXiv:1910.12840 (2019).
+[25] Philippe Laban, Tobias Schnabel, Paul N Bennett, and Marti A Hearst. 2022. Sum-
+maC: Re-visiting NLI-based models for inconsistency detection in summarization.
+Transactions of the Association for Computational Linguistics 10 (2022), 163–177.
+[26] Barrett Martin Lattimer, Patrick Chen, Xinyuan Zhang, and Yi Yang. 2023. Fast
+and Accurate Factual Inconsistency Detection Over Long Documents. arXiv
+preprint arXiv:2310.13189 (2023).
+[27] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin,
+Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel,
+et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp tasks.
+Advances in Neural Information Processing Systems 33 (2020), 9459–9474.
+[28] Bohan Li, Yutai Hou, and Wanxiang Che. 2022. Data augmentation approaches
+in natural language processing: A survey. Ai Open 3 (2022), 71–90.
+[29] Nelson F Liu, Tianyi Zhang, and Percy Liang. 2023. Evaluating verifiability in
+generative search engines. arXiv preprint arXiv:2304.09848 (2023).
+[30] Joshua Maynez, Shashi Narayan, Bernd Bohnet, and Ryan McDonald. 2020.
+On faithfulness and factuality in abstractive summarization. arXiv preprint
+arXiv:2005.00661 (2020).
+[31] Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike Lewis, Wen-tau Yih, Pang Wei Koh,
+Mohit Iyyer, Luke Zettlemoyer, and Hannaneh Hajishirzi. 2023. FActScore: Fine-
+grained Atomic Evaluation of Factual Precision in Long Form Text Generation.
+arXiv preprint arXiv:2305.14251 (2023).
+[32] Dor Muhlgay, Ori Ram, Inbal Magar, Yoav Levine, Nir Ratner, Yonatan Belinkov,
+Omri Abend, Kevin Leyton-Brown, Amnon Shashua, and Yoav Shoham. 2023.
+Generating benchmarks for factuality evaluation of language models. arXiv
+preprint arXiv:2307.06908 (2023).
+[33] OpenAI. 2022. Chatgpt blog post. https://openai.com/blog/chatgpt.
+[34] Artidoro Pagnoni, Vidhisha Balachandran, and Yulia Tsvetkov. 2021. Under-
+standing factuality in abstractive summarization with FRANK: A benchmark for
+factuality metrics. arXiv preprint arXiv:2104.13346 (2021).
+[35] Domina Petric. 2020. Logical Fallacies. On-line Article (preprint), doi 10 (2020).
+[36] Yujia Qin, Zihan Cai, Dian Jin, Lan Yan, Shihao Liang, Kunlun Zhu, Yankai Lin, Xu
+Han, Ning Ding, Huadong Wang, et al. 2023. WebCPM: Interactive Web Search
+for Chinese Long-form Question Answering. arXiv preprint arXiv:2305.06849
+(2023).
+[37] Tal Schuster, Adam Fisch, and Regina Barzilay. 2021. Get your vitamin C! robust
+fact verification with contrastive evidence. arXiv preprint arXiv:2103.08541 (2021).
+[38] Kurt Shuster, Jing Xu, Mojtaba Komeili, Da Ju, Eric Michael Smith, Stephen Roller,
+Megan Ung, Moya Chen, Kushal Arora, Joshua Lane, et al. 2022. Blenderbot 3:
+a deployed conversational agent that continually learns to responsibly engage.
+arXiv preprint arXiv:2208.03188 (2022).
+[39] Liyan Tang, Tanya Goyal, Alexander R Fabbri, Philippe Laban, Jiacheng Xu,
+Semih Yavuz, Wojciech Kryściński, Justin F Rousseau, and Greg Durrett. 2022.
+Understanding factual errors in summarization: Errors, summarizers, datasets,
+error detectors. arXiv preprint arXiv:2205.12854 (2022).
+[40] Craig Thomson and Ehud Reiter. 2020. A gold standard methodology for evaluat-
+ing accuracy in data-to-text systems. arXiv preprint arXiv:2011.03992 (2020).
+[41] Romal Thoppilan, Daniel De Freitas, Jamie Hall, Noam Shazeer, Apoorv Kul-
+shreshtha, Heng-Tze Cheng, Alicia Jin, Taylor Bos, Leslie Baker, Yu Du, et al. 2022.
+Lamda: Language models for dialog applications. arXiv preprint arXiv:2201.08239
+(2022).
+[42] Cunxiang Wang, Sirui Cheng, Zhikun Xu, Bowen Ding, Yidong Wang, and Yue
+Zhang. 2023. Evaluating open question answering evaluation. arXiv preprint
+arXiv:2305.12421 (2023).
+[43] Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi,
+Quoc V Le, Denny Zhou, et al. 2022. Chain-of-thought prompting elicits reasoning
+in large language models. Advances in Neural Information Processing Systems 35
+(2022), 24824–24837.
+[44] Aohan Zeng, Xiao Liu, Zhengxiao Du, Zihan Wang, Hanyu Lai, Ming Ding,
+Zhuoyi Yang, Yifan Xu, Wendi Zheng, Xiao Xia, et al. 2022. Glm-130b: An open
+bilingual pre-trained model. arXiv preprint arXiv:2210.02414 (2022).
+[45] Yuheng Zha, Yichi Yang, Ruichen Li, and Zhiting Hu. 2023. AlignScore: Evalu-
+ating Factual Consistency with a Unified Alignment Function. arXiv preprint
+arXiv:2305.16739 (2023).
+[46] Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q Weinberger, and Yoav
+Artzi. 2019. Bertscore: Evaluating text generation with bert. arXiv preprint
+arXiv:1904.09675 (2019).
+[47] Rongxin Zhu, Jianzhong Qi, and Jey Han Lau. 2023. Annotating and Detect-
+ing Fine-grained Factual Errors for Dialogue Summarization. arXiv preprint
+arXiv:2305.16548 (2023).
+A CONSTRUCTION DETAILS ABOUT
+SYNTHETIC DATASET
+Negative Samples The negative samples are constructed based
+on WebCPM [36], a web-enhanced question answering dataset

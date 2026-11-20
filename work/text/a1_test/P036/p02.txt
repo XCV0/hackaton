@@ -1,0 +1,90 @@
+The devices studied in this research are based on the integra-
+tion of a nanometric hydrogenated amorphous silicon layer
+(a-Si:H)[9] that is sandwiched between two charge-carrier selec-
+tive contacts: a hole transport layer (HTL) and an electron trans-
+port layer (ETL).[10] These selective layers play a crucial role in
+separating the photogenerated charge carriers. The HTL allows
+the ﬂow of holes while blocking electrons and the ETL does a
+complementary work, allowing the pass of electrons while
+blocking holes. Various materials have been investigated for these
+layers, including MoOx,[11] V2Ox,[12] and NiOx [13] as HTLs, and
+silicon-doped, AZO and TiOx as ETLs. From this study, the opti-
+mal device conﬁguration includes vanadium oxide (V2Ox) as the
+HTL[14] and n-type phosphorous-doped hydrogenated amorphous
+silicon carbide (a-SiCx(n)) as the ETL.[15] The transparent conduc-
+tive oxides (TCOs) chosen to complete the device were ﬂuorine-
+doped tin oxide (FTO) for the back contact and aluminum-doped
+zinc oxide (AZO)[16] for the front contact[17] enabling connection
+to an external circuit. The absorber material where photogener-
+ated electron-hole pairs are created was intrinsic hydrogenated
+amorphous silicon (a-Si:H). This study focuses on analyzing
+the impact of absorber thickness (varied from 22 to 233 nm)
+on the performance of the TPV device while keeping other
+layers constant.[12] The absorber thickness is critical for optimiza-
+tion, as increasing the thickness leads to higher photocurrent
+generation,[18] that is, a major number of electron-hole pairs
+photogenerated per second,[17] which is reﬂected in an increase
+in the short-circuit current density ( Jsc). However, as one could
+expect it is also observed that a higher thickness results in lower
+average photopic transmittance (APT) and color rendering
+index (CRI).[19]
+It is relevant to highlight that these devices are made to avoid
+the use of the cataloged Critical Raw Material (CRM) or toxic/
+hazardous materials. In this sense, diborane (which is usually
+used for the HTL deposition on traditional amorphous silicon
+devices) has been avoided. It is worth mentioning that all the layers
+are deposited at relatively low temperatures (below 200 °C) result-
+ing in a low thermal-budget fabrication process. Additionally, the
+different deposition techniques involved in the device manufactur-
+ing allow a conformal and controlled deposition of the different
+nanometric layers that compose the solar cell structure.
+2. Experimental Design, Results, and Discussion
+Planar ultrathin TPV devices were fabricated with the follow-
+ing architecture: SLG/FTO/AZO/a-SiCx:H(n)/a-Si:H/V2Ox/AZO.
+This work focuses on studying the effect of varying the thickness
+of the absorber layers, while AZO, a-SiCx:H(n) and V2Ox are kept
+unchanged for a more accurate comparison. For this study, seven
+samples were prepared with the following absorber layer thick-
+ness: 22, 35, 56, 70, 76, 123, and 233 nm. The absorber deposi-
+tion was carried out using a mixture of 36 sccm of silane (SiH4)
+and 12 sccm of methane (CH4). Throughout the process, pres-
+sure, temperature, and gas ﬂow conditions were kept constant,
+with only the deposition time varied to adjust the absorber thick-
+ness, as shown in Figure 1.
+Once each sample was fully grown, the active area of the cells
+was deﬁned and isolated using a conventional UV photolitho-
+graphic process (Figure 2a), followed by wet chemical etchings.
+In this way, an effective electrical isolation of the cells is achieved
+and setting, at the same time, the active cell area (0.25 cm2), as
+shown in Figure 2b.
+3. Optical Characterization
+Transmittance and reﬂectance spectra were employed to deter-
+mine the values of APT and CRI, as per the equations provided
+in the methodology outlined by Traverse et al.[20] APT was calcu-
+lated using Equation (1), where T is the transmission, P is the
+photopic response of the human eye, and S is the solar photon
+ﬂux (AM1.5G), In this equation, the integration limits were
+deﬁned between 380 and 825 nm. For more detailed information
+on APT and CRI calculations, see ref. [20] (please note that
+ref. [20] names this parameter as average visible transmittance.
+However, we establish the nomenclature to be average photopic
+transmittance (APT) as it is more precise and also because the
+term average visible transmittance can be confounded with
+the concept of mean visible transmittance, which does not
+account for the human eye’s photopic response P(λ) which gov-
+erns our perception of color).
+APT ¼
+R TðλÞPðλÞSðλÞdλR
+PðλÞSðλÞdλ (1)
+The optical properties of the completed TPV devices were
+characterized by measuring the reﬂectance and transmittance
+spectra that are shown in Figure 3a. The transmittance spectra
+revealed a decrease in both parameters (APT and CRI) as the
+absorber thickness increased. Reﬂectance spectra (Figure 3b)
+showed minor variations with a notable maximum between
+390 and 550 nm, centered at 450 nm, which suggests signiﬁcant
+Figure 1. Device structure with absorber thickness variations.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2025, 9, 2400816 2400816 (2 of 9) © 2025 The Author(s). Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202400816, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

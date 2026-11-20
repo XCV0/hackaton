@@ -1,0 +1,80 @@
+392
+LLM Filter and Search (LFS): Using the
+ReSLLM method (Wang et al., 2024b), this base-
+line leverages GPT-4 in a zero-shot manner for do-
+main selection, then searches within that domain’s
+subset of the unified index (see Appendix Figure 9
+for prompt details).
+In all baselines, vector similarity is used to re-
+trieve the top-5 most relevant documents by com-
+paring the query’s vector to document vectors.
+These documents are then augmented into the as-
+sistant’s prompt for response generation.
+5.2 Evaluation Methods
+To comprehensively assess the performance of our
+multi-domain RAG-QA pipeline, we employ a va-
+riety of evaluation metrics targeting both retrieval
+accuracy and response quality: (i) Retrieval Accu-
+racy: For evaluating retrieval performance across
+multiple domains, we use the Acc@Top1 metric.
+This metric represents the percentage of queries
+for which the golden (most relevant) multi-domain
+documents are correctly retrieved as the top-ranked
+candidate. Our focus on the first document is moti-
+vated by recent RAG studies (Liu et al., 2024; Xu
+et al., 2024) showing that the top-ranked document,
+when added to the prompt, most significantly influ-
+ences the LLM’s response. (ii) Response Quality:
+To assess the quality of generated answers for prod-
+uct QA, we employ Relevancy and Faithfulness
+analysis. In the former, we incorporate GPT-4,
+following the prompting strategy in (Zheng et al.,
+2024), to evaluate the relevancy and helpfulness
+of the generated responses to queries. Given the
+domain-specific nature of product QA, we also uti-
+lize the RAGAS2 framework (Es et al., 2023) to
+assess the faithfulness of generated responses. In
+this metric, we decompose each response into indi-
+vidual statements and cross-check them against the
+ground truth documentation for each query with
+the help of GPT-4. The faithfulness score is com-
+puted as the percentage of statements that GPT-4
+recognizes can be directly inferred from the pro-
+vided context. Detailed prompts for these metrics
+are available in the Appendix.
+5.3 Results and Analysis
+Retrieval Performance Fig. 2 illustrates the re-
+trieval accuracy (Acc@Top1) of our method and
+baselines across uni-domain and cross-domain
+datasets. Our approach consistently outperforms
+2https://docs.ragas.io
+a)
+b)
+Figure 2: Performance comparison of retrieval accu-
+racy (Top-1) across methods on (a) uni-domain, and (b)
+cross-domain datasets.
+(a) (b)
+Figure 3: Performance comparison of response quality
+across methods on different datasets for LLM-based
+(a) Relevancy, and (b) Faithfulness metrics.
+all baselines, with the performance gap widening
+in cross-domain settings. The RFS baseline shows
+the strongest performance among alternatives, par-
+ticularly in uni-domain scenarios. This can be at-
+tributed to the simpler query-domain relevance in
+uni-domain settings. Conversely, the LFS base-
+line underperforms in retrieval accuracy, likely due
+to challenges general-purpose LLMs (e.g. GPT-
+4) face in domain selection and learning query-
+domain relevance for our specific product domains.
+Response Performance Figure 3 presents the
+assistant’s response quality evaluations across all
+methods and datasets, focusing on Relevancy and
+Faithfulness metrics. Our method outperforms
+baselines on both metrics, with its advantage be-
+coming more pronounced in cross-domain set-
+tings. The RFS baseline consistently ranks second
+in response quality, while the LFS baseline per-
+forms poorest. Interestingly, the UIS baseline oc-
+casionally outperforms RFS on Relevancy in cross-
+domain datasets, but underperforms on Faithful-

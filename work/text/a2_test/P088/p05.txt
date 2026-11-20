@@ -1,0 +1,164 @@
+Query:
+Which country is the movie 
+“Manchester By The Sea”filmed in ?
+filmPlace → locatedIn → stateOf
+productionCompany → headquarteredIn
+filmPlace → locatedIn → locatedIn
+. . .
+Knowledge Graph (KG)
+Incorrect answer 1: United Kingdom
+Incorrect answer 2: Russia
+Incorrect answer 3: South Korea
+. . . 
+Incorrect answer 1: United Kingdom
+Incorrect answer 2: Russia
+Incorrect answer 3: South Korea
+. . . 
+Manchester 
+By The Sea Manchester  Massachusetts
+Manchester 
+By The Sea Manchester  Essex County
+Adversarial answer 1: United Kingdom
+Adversarial answer 2: Russia Federation
+Adversarial answer 3: Republic of Korea
+. . . 
+Adversarial answer 1: United Kingdom
+Adversarial answer 2: Russia Federation
+Adversarial answer 3: Republic of Korea
+. . . 
+KG-specific LLM
+Prefix Grounding
+Large Language Model (LLM)
+Prompt: 
+Generate valid relation 
+paths that are helpful for 
+answering this question ...
+Prompt: 
+Generate 5 entity names 
+that are incorrect answers 
+to this question, ...
+Align and Match
+ Entity List 
+Relation Paths
+Adversarial Anser Entities
+Perturbation Triples
+Massachusetts United Kingdom
+stateOf
+Essex County United Kingdom
+locatedIn
+. . .
+. . .
+Massachusetts Russia Federation
+. . .
+filmPlace
+filmPlace
+locatedIn
+locatedIn
+stateOf
+locatedIn
+direct
+bornIn
+starIn
+United 
+KingdomKenneth 
+Lonergan
+Manchester 
+By The Sea
+England United States 
+David 
+Bekham Los Angeles
+Miami
+Casey 
+Affleck
+Manchester
+Massachusetts
+Essex County
+locatedIn
+direct
+bornIn
+starIn
+United 
+KingdomKenneth 
+Lonergan
+Manchester 
+By The Sea
+England United States 
+David 
+Bekham Los Angeles
+Miami
+Casey 
+Affleck
+Manchester
+Massachusetts
+Essex County
+Figure 2: The overall framework of our proposed data poisoning attack against KG-RAG.
+3. Attack Method
+In this section, we detail our data poisoning attack strat-
+egy, which inserts perturbation triples into the KG to steer
+KG-RAGmethodstowardgeneratingincorrectanswers.The
+overall framework is illustrated in Figure 2.
+3.1. Adversarial Answer Generation
+A key challenge in attacking a KG-RAG method lies
+in distinguishing attack-induced failures from errors caused
+by the features of the method itself, such as its uncertainty
+and LLM hallucination. To address this, we assign each
+questionasetofadversarialanswers,whichserveasexplicit
+attack targets. Our attack strategy aims to guide KG-RAG
+methods to generate these answers in place of the correct
+ones, allowing for the clear determination of whether the
+attack has succeeded.
+Given a user question 𝑞, to improve the chances that
+the associated perturbation triples are retrieved, but also
+enhance the likelihood that the corresponding adversarial
+answers ̂𝐴 of these perturbation triples are favored by the
+LLM during generation, ̂𝐴 are expected to align with the
+question’s implicit semantic constraints. For instance, when
+attackingthequestion“WhichcountryisManchesterByThe
+Sea filmed in”, a suitable adversarial answer should corre-
+spondto acountryor location.Incontrast, iftheadversarial
+answer refers to a semantically irrelevant type, such as a
+person or an event, it is likely to be excluded by the LLM
+during generation based on its internal knowledge, even
+if the associated triples are successfully retrieved. Similar
+semanticconstraintsareadoptedinpoisoningattacksonKG
+completion[25],whereentitytypeinformationfromrichon-
+tologyknowledgeisusedtoensurethatthedisruptedentities
+remaintype-consistentwiththeoriginaltargets.However,in
+real-world scenarios, it is not practical to acknowledge the
+Question: {Query}
+Generate 5 entity names that are incorrect answers to this 
+question, but might sound plausible or confusing.
+- Only list the entity names as a bullet list.
+- Each bullet should contain the name of one entity only. 
+- Do not include multiple distinct entities in a single bullet point.
+Question: {Query}
+Generate 5 entity names that are incorrect answers to this 
+question, but might sound plausible or confusing.
+- Only list the entity names as a bullet list.
+- Each bullet should contain the name of one entity only. 
+- Do not include multiple distinct entities in a single bullet point.
+Figure 3: Prompt template for generating adversarial answers.
+ground-truth answers in advance and further enforce such
+type consistency through explicit supervision.
+To this end, we design a prompting strategy that guides
+an LLM to produce incorrect but semantically plausible an-
+swers,asillustratedinFigure3.Weadoptageneral-purpose
+LLMtoensurebroadapplicabilityacrossdifferentKG-RAG
+methods.ConsideringthattheLLMmayproduceentitiesnot
+presentintheKG,weperformmultipleroundsofgeneration
+for each question 𝑞𝑖 and apply fuzzy string matching to the
+KG entity list, ultimately determining 𝑁 final adversarial
+answers, denoted as ̂𝑖 = { ̂𝑎𝑖,1, ̂𝑎𝑖,2, … , ̂𝑎𝑖,𝑁 }, where each
+̂𝑎𝑖,𝑗 ∈  corresponds to valid entities in the KG .
+3.2. Relation Path Extraction
+Toconstructtriplesforeffectivepoisoning,weextractre-
+lationpathsthatreflectplausiblereasoningpatternsthatKG-
+RAGmethodsmayfollowwhenansweringagivenquestion.
+Theserelationpathsarelaterutilizedtoconstructadversarial
+reasoningpathsthatredirecttheinferenceprocesstowardthe
+adversarial answers.
+Despitethestronggeneralizationandreasoningcapabil-
+ities of general-purpose LLMs such as GPT-4, it is not an
+optimal solution to directly prompt them to derive relation
+paths, as they often lack explicit awareness of structured
+: Preprint submitted to Elsevier Page 5 of 13

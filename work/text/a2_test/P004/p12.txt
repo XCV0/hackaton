@@ -1,0 +1,76 @@
+Category Feature Name Definition & Intuition
+Core
+Complexity
+Entity Density (xden) Ratio of Named Entities to total tokens. High density implies multi-entity
+constraints that may require complex verify-steps.
+Logical Keywords Normalized frequency of connectives (e.g., “if”, “unless”, “therefore”); signals
+conditional logic chains.
+Term Sparsity (xspa) Average IDF of query terms. High values indicate niche topics necessitating
+multi-hop retrieval.
+Structural
+& Syntactic
+Syntactic Tree Depth Maximum depth of the dependency parse tree; a strong proxy for nested query
+structure.
+Clause Count Number of subordinate clauses (e.g., SBAR tags), indicating embedded
+sub-questions.
+Query Length Total token count; serves as a baseline metric for estimating processing cost.
+Verb Count Count of unique verbs; correlates with the number of required action steps.
+Modifier Count Count of adjectives/adverbs that impose strict constraints on the answer.
+Semantic
+Intent
+Comparative Ind. Binary presence of comparison terms (e.g., “better”, “versus”, “difference”).
+Temporal Ind. Count of time-related terms (e.g., “year”, “during”); signals temporal reasoning
+requirements.
+Reasoning “Wh-” Binary indicator for reasoning-heavy interrogatives (“Why”, “How”) versus
+fact-seeking ones.
+Numerical Presence Count of digits or number words; suggests a need for precise numerical verification.
+Table 4: The 12-dimensional linguistic feature set used by the Dynamic Router. By leveraging the broader page
+width, we detail the intuition behind each feature used to classify query complexity.
+• Foundational Axioms (30 rules): logical
+properties including transitivity (A → B ∧
+B → C =⇒ A → C), symmetry, and
+reflexivity.
+• Commonsense Constraints (50 rules): de-
+tection of physical impossibilities or mutually
+exclusive attributes (e.g., an entity cannot be
+born in two different countries).
+• Task-Specific Heuristics (70 rules): patterns
+specific to QA, such as circular reasoning
+chains or ungrounded speculative jumps.
+Penalties. Table 5 shows the penalties applied
+when rules are violated.
+Logical Event Penalty Weight
+Contradiction 0.5
+IncompleteChain 0.3
+CircularReasoning 0.2
+EntityMismatch 0.2
+Table 5: Penalty weights for detected logical defects.
+C Router Performance
+Table 6 confirms the efficiency of our Dynamic
+Intelligent Router. By effectively filtering simple
+queries, the computationally expensive DEEP path
+is triggered for less than 45% of queries on average.
+The low Expected Calibration Error (ECE < 0.07)
+indicates reliable confidence estimation.
+Metric HotpotQA ASQA CoQA
+DEEP Ratio (%) 31.0 42.0 28.0
+Accuracy (%) 94.2 91.5 95.1
+ECE 0.045 0.061 0.039
+Table 6: Dynamic Router performance statistics.
+D Verifier Ablation
+We further dissect the contribution of the Verifier’s
+components. Figure 4 illustrates that under "Con-
+tradiction Noise" conditions, removing the Formal
+Logic check (“w/o Logic Check”) causes the Faith-
+fulness score to plummet from 0.88 to 0.58. This
+indicates that while the NLI model handles basic
+fact-checking, the symbolic reasoning engine is
+critical for identifying sophisticated logical incon-
+sistencies.
+E Effect of Maximum Iteration Budget M
+We analyze the impact of the maximum iteration
+budget M ∈ {1, . . . , 10}. As shown in Figure 5, in-
+creasing M yields significant performance gains in
+early stages (M ≤ 4). However, the improvement
+saturates beyond M = 5, while inference latency
+17911

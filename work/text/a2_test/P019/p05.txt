@@ -1,0 +1,108 @@
+STRIDE: Strategic Iterative Decision-Making for Retrieval-Augmented Multi-Hop Question Answering SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia
+and a Reasoner for synthesizing final answers from facts. For each
+directive(𝛼𝑖,𝑧𝑖)∈D:
+• if 𝛼𝑖 ∈ {retrieve, rewrite}, the system first retrieves top-𝑘
+documents 𝐷𝑧𝑖 ⊆𝐷 using a dense retriever, invokes the Extractor
+to distill atomic facts E𝑖 from 𝐷𝑧𝑖 , and then passes E𝑖 to the
+Reasoner to answer𝑧𝑖;
+• if 𝛼𝑖 = answer, the Reasoner directly answers 𝑧𝑖 using all facts
+accumulated from previous extractions.
+The outputs are used to update the execution state Ω: successful
+answers are added to S, while failed retrievals (e.g., empty fact sets)
+trigger updates toF .
+Both modules are implemented as instruction-following LLMs:
+Extractor: E𝑖 =𝑀ext (𝐼ext,𝑧𝑖,𝐷𝑧𝑖 ), (4)
+Reasoner: 𝑎𝑖 =𝑀rea (𝐼rea,𝑧𝑖,X𝑖), (5)
+where X𝑖 =E𝑖 if 𝛼𝑖 ∈{retrieve, rewrite}, and X𝑖 denotes all
+facts accumulated so far (from prior extractions) if 𝛼𝑖 = answer.
+The prompt 𝐼ext instructs faithful, atomic, and relevant fact extrac-
+tion, while 𝐼rea guides step-by-step reasoning over the provided
+evidence. If E𝑖 =∅ after retrieval, the attempt is logged as a failure:
+F(𝑐𝑖)←F(𝑐𝑖)∪{𝑧𝑖}, enabling the Supervisor to trigger a rewrite
+in subsequent iterations.
+In summary, the Execution Layer serves as the grounded reason-
+ing engine of the system: by decoupling evidence extraction from
+answer synthesis, it ensures that every sub-question is resolved
+either through verifiable facts or explicit logical inference, provid-
+ing the Supervisor with reliable, interpretable feedback to guide
+adaptive execution.
+Moreover, to handle cases where the iterative process terminates
+without fully resolving the question (e.g., due to persistent retrieval
+failures, unparseable LLM outputs, or exceeding the iteration limit),
+we introduce a Fallback Reasoner. This module takes as input
+the plan 𝑃𝑞, all facts collected during execution, and documents
+retrieved via the facts of last solved sub-question, and generates a
+best-effort answer to the original question 𝑞. This ensures the sys-
+tem always produces a response, improving robustness in practice.
+The full inference procedure of STRIDE is formalized in Algo-
+rithm 1. This executable pipeline not only produces answers but also
+generates rich, structured execution traces, enabling self-supervised
+modular training as described next.
+3.3 Modular Fine-Tuning from Self-Executed
+Trajectories
+Unlike previous methods which tend to require stronger models
+as external supervision [4, 30], we introduce STRIDE-FT, a modu-
+lar fine-tuning framework that constructs training signals directly
+from the system’s own execution trajectories. For a held-out set
+of questions, we execute the full pipeline and log detailed traces,
+including the initial plan, per-step decisions, extracted facts, inter-
+mediate answers, and the final response. Crucially, we leverage the
+final outcome (e.g., answer correctness, F1 score, iteration count,
+and failure flags) as an implicit signal to filter and refine module-
+specific inputs and outputs. Below, we detail the data construction
+strategy tailored to each component’s role.
+Meta-Planner: Preference Learning over Diverse Plans. To
+train the Meta-Planner to generate execution-friendly plans, we
+Algorithm 1 The STRIDE Pipeline
+Require: Original question𝑞, max iterations𝑇max
+Ensure: Final answer𝑎final
+1: // Strategy Layer: Generate reasoning blueprint
+2: 𝑃𝑞 ←𝑀plan (𝐼plan,𝑞) ⊲ Output:(𝑆𝑞,𝐶𝑞)
+3: S←∅,P←𝐶𝑞,F←∅ ⊲ Initialize execution state Ω
+4: 𝑡← 0
+5: whileP ≠∅ and𝑡 <𝑇max do
+6: 𝑡←𝑡+ 1
+7: // Control Layer: Schedule ready sub-questions
+8: Pready ←{𝑐𝑖 ∈P| deps(𝑐𝑖)⊆S}
+9: D←𝑀super (𝐼super,𝑞,𝐶𝑞,(S,P,F)) ⊲ Output:
+{(𝛼𝑖,𝑧𝑖)}𝑐𝑖 ∈Pready
+10: // Execution Layer: Resolve each directive
+11: for each(𝛼𝑖,𝑧𝑖)∈D do
+12: if𝛼𝑖 ∈{retrieve, rewrite} then
+13: Retrieve top-𝑘 docs𝐷𝑧𝑖
+14: E𝑖 ←𝑀ext (𝐼ext,𝑧𝑖,𝐷𝑧𝑖 )
+15: ifE𝑖 =∅ then
+16: F(𝑐𝑖)←F(𝑐𝑖)∪{𝑧𝑖}
+17: continue ⊲ Mark failure, skip answering
+18: end if
+19: 𝑎𝑖 ←𝑀rea (𝐼rea,𝑧𝑖,E𝑖)
+20: else if𝛼𝑖 = answer then
+21: 𝑎𝑖 ←𝑀rea (𝐼rea,𝑧𝑖, — 𝑐 𝑗 ∈SE𝑗)
+22: end if
+23: S←S∪{(𝑐𝑖,𝑎𝑖)}
+24: P←P\{𝑐𝑖}
+25: end for
+26: end while
+27: // Generate final answer
+28: ifP =∅ then
+29: 𝑎final ← Answer of last sub-question inS
+30: else
+31: 𝑎final ← FallbackReasoner(𝑞,𝑃𝑞,S)
+32: end if
+33: return𝑎final
+adopt a preference-based approach. For each question 𝑞, we sample
+𝑁 = 8 diverse plans {𝜋(𝑖)}𝑁 𝑖=1 from the current planner and execute
+each through the full STRIDE pipeline. Each resulting trajectory is
+scored based on: (1) correctness of the final answer, (2) F1 overlap
+with ground truth, (3) number of iterations, and (4) presence of
+failure states (e.g., repeated rewrites). We then construct preference
+pairs (𝜋+,𝜋−) from the same 𝑞 such that 𝜋+ yields a significantly
+better outcome than 𝜋− (e.g., correct vs. incorrect, or F1 difference >
+0.3) and the two plans are sufficiently distinct (F1 score < 0.8). These
+pairs are used to fine-tune the Meta-Planner via Direct Preference
+Optimization (DPO) [27].
+Supervisor: Learning Effective Rewrites. We focus on improv-
+ing the rewrite action, which is critical when retrieval fails. We
+first collect all trajectories where the Supervisor issued a rewrite
+and the final answer was correct. From these, we filter out non-
+causal rewrites: (i) cases where the rewritten query was never

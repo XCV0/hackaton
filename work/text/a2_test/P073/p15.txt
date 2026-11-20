@@ -1,0 +1,90 @@
+Table 7: Topological statistics of the constructed Causal-Temporal Knowledge Graph (CTKG). The table details
+node cardinality (Panel A) and relational edge distributions (Panel B).
+Panel A: Node Level Features
+Dataset Transcripts Tickers Facts Reasons Values Metrics Quarters Total Nodes
+NASDAQ 1,772 507 79,775 44,300 79,775 79,775 18 285,922
+NYSE 1,386 470 55,738 34,650 55,738 55,738 18 203,738
+MAEC 2,725 963 109,417 68,125 109,417 109,417 20 400,084
+Panel B: Edge Level Features (Links)
+Dataset FOR_FIRM HAS_VALUE EXPLAINED_BY HAS_FACT REPORTS_IN - Total Links
+NASDAQ 79,775 79,775 79,775 79,775 1,772 - 320,872
+NYSE 55,738 55,738 55,738 55,738 1,386 - 224,338
+MAEC 109,417 109,417 109,417 109,417 2,725 - 440,393
+which reports on operating, investing, and financ-
+ing activities.
+H Agent Prompt Templates
+The following sections reproduce the exact prompts
+supplied to each specialist agent. Placeholders in
+curly braces (e.g., {self_ticker}) are populated
+at runtime.
+H.1 Fact Extraction Agent
+Fact Extraction Agent
+You are a financial analyst tasked with extracting struc-
+tured facts from a company’s earnings call transcript.
+Company Ticker: {ticker}
+Quarter: {quarter}
+Transcript Text: {raw_text}
+TASK:
+1. Read the text and identify all quantifiable
+statements, key performance indicators (KPIs),
+forward-looking guidance, and qualitative as-
+sessments of performance.
+2. For each identified statement, create a JSON
+object with the keys: ‘statement‘, ‘metric‘,
+‘value‘, and ‘type‘.
+Your output must be a JSON list of these structured
+fact objects.
+H.2 Comparative Peers Agent
+Comparative Peers Agent
+You are analyzing a company’s earnings call transcript
+alongside statements made by similar firms.
+Firm Ticker: {self_ticker}
+Firm’s Facts: {json.dumps(facts, indent=2)}
+Peer_Facts: {json.dumps(related_facts,
+indent=2)}
+Your Task:
+• Describe how the firm’s reasoning about its own
+performance differs from other firms, for each
+fact if possible.
+• Cite factual evidence from historical calls.
+Keep your analysis concise. Do not discuss areas not
+mentioned.
+H.3 Historical Earnings Agent
+Historical Earnings Agent
+You are analyzing a company’s earnings call transcript
+against its own past earnings calls.
+Current Facts: {json.dumps(fact, indent=2)}
+Current Quarter: {current_quarter}
+Historical Facts: {json.dumps(related_facts,
+indent=2)}
+Your Task:
+1. Validate Past Guidance: For every forward-
+looking statement from past quarters, state if
+the firm met, beat, or missed that guidance in
+{current_quarter}. Reference concrete num-
+bers (e.g., “Revenue growth was 12% vs. the
+10% guided in 2024-Q3”).
+2. Compare Results: Compare the current results
+being discussed to historical ones, referencing
+concrete numbers.
+3. Provide Evidence: Format each evidence line
+as:
+• metric: historical statement → current result.
+4. Highlight Unexpected Outcomes: Identify
+where management did not address an impor-
+tant historical comparison or where results di-
+verged sharply from trends. Explain why this
+matters.
+H.4 Financials-Statement Agent
+Financials-Statement Agent
+You are reviewing a company’s earnings call transcript
+and comparing a key fact to its historical financial
+statements.
+Current Fact from quarter: {json.dumps(fact,
+indent=2)}
+Similar Past Facts: {json.dumps(similar_facts,
+indent=2)}
+Your Tasks:
+• Direct Comparison: Compare the current fact
+to each past fact. Note the quarter, metric, and
+3069

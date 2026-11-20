@@ -1,0 +1,47 @@
+RAG-IT: Retrieval-Augmented Instruction
+Tuning for Automated Financial Analysis - A
+Case Study for the Semiconductor Sector
+Hai-Thien To, Tien-Cuong Bui, and Van-Duc Le
+Hai-Thien To
+University of Transport
+Technology
+Hanoi, Vietnam
+thienth@utt.edu.vn
+Tien-Cuong Bui
+Arontier Co., Ltd.
+Seoul, South Korea
+cuongbt91@gmail.com
+Van-Duc Le
+Independent Researcher
+Seoul, South Korea
+vanduc103@gmail.com
+Abstract. Financial analysis relies heavily on the interpretation of earn-
+ings reports to assess company performance and guide decision-making.
+Traditional methods for generating such analyzes require significant fi-
+nancial expertise and are often time-consuming. With the rapid advance-
+ment of Large Language Models (LLMs), domain-specific adaptations
+have emerged for financial tasks such as sentiment analysis and entity
+recognition. This paper introduces RAG-IT (Retrieval-Augmented In-
+struction Tuning), a novel framework designed to automate the genera-
+tion of earnings report analysis through an LLM fine-tuned specifically
+for the financial domain. Our approach integrates retrieval augmentation
+with instruction-based fine-tuning to enhance factual accuracy, contex-
+tual relevance, and domain adaptability. We construct a sector-specific
+financial instruction dataset derived from semiconductor industry doc-
+uments to guide the LLM adaptation to specialized financial reasoning.
+Using NVIDIA, AMD, and Broadcom as representative companies, our
+case study demonstrates that RAG-IT substantially improves a general-
+purpose open-source LLM and achieves performance comparable to com-
+mercial systems like GPT-3.5 on financial report generation tasks. This
+research highlights the potential of retrieval-augmented instruction tun-
+ing to streamline and elevate financial analysis automation, advancing
+the broader field of intelligent financial reporting.
+Keywords: LLMs · financial analysis · instruction tuning.
+1 Introduction
+Large Language Models (LLMs) have shown remarkable proficiency in diverse
+applications, including financial analysis. BloombergGPT [15], a specialized LLM
+for finance, is built from scratch and excels in various financial tasks, though it
+is costly due to its use of proprietary data and training expenses of over $2
+million. Conversely, FinGPT [16] is an open-source low-cost LLM fine-tuned on
+instructional data, focusing on basic financial tasks like sentiment classification
+arXiv:2412.08179v3  [q-fin.ST]  9 Dec 2025

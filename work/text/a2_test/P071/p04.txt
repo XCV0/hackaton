@@ -1,0 +1,92 @@
+reward models. This dataset is crucial for aligning
+model outputs with factual correctness and mini-
+mizing hallucination in sensitive religious contexts.
+An example is provided in Appendix D.2.
+Quran RAG Dataset. Additionally, for RAG
+experiments, we process the standard corpus of
+the Holy Quran into 6,236 retrieval units corre-
+sponding to individual Ayat (verses), serving as the
+ground-truth knowledge base for both generation
+and evaluation tasks. Concretely, we segment the
+full Qur’an into 6,236 units (one ayah per record)
+and attach standardised metadata required for tool
+use and evaluation, including surah and ayah in-
+dices, canonical verse identifiers, and normalised
+Arabic text (to reduce orthographic variance and
+improve dense retrieval). This structure enables (i)
+consistent verse-level citation in model outputs, (ii)
+deterministic mapping from retrieved evidence to a
+unique canonical reference, and (iii) faithful evalu-
+ation of grounding by checking whether predicted
+claims are supported by retrieved ayat.
+3.2 The ISLAMICFAITHQA Benchmark
+Existing evaluations for Islamic NLP often rely on
+discriminative formats like MCQ (Alwajih et al.,
+2025; Bouchekif et al., 2025a) or MRC (Bashir
+et al., 2021). As detailed in Table 2, these for-
+mats allow models to guess correctly without gen-
+uine grounding and fail to measure abstention ca-
+pabilities. To address this, we introduce ISLAMIC-
+FAITHQA, a bilingual generative benchmark with
+3,810 Arabic questions and English questions, de-
+signed to measure hallucination rates via an LLM-
+as-a-Judge protocol.
+Resource Type Size EN+AR Text- Format GenQA
+grounded
+ISLAMICFAITHQA (Ours) Benchmark 3,810 ✓ ✓ GenQA ✓
+QRCD (Bashir et al., 2021) Dataset 1,337 ✗ ✓ MRC ✗
+AyaTEC (Malhas and Elsayed, 2020) Dataset 207 ✗ ✓ VerseQA ✗
+Hajj-FQA (Aleid and Azmi, 2025) Dataset 2,826 ✗ ✗ FatwaQA ✗
+IslamTrust (Lahmar et al., 2025) Benchmark 406 ✓ ✗ MCQ ✗
+Qur’an QA 2022 (Malhas et al., 2022) Shared task 1,337 ✗ ✓ MRC ✗
+IslamicEval 2025 (Mubarak et al., 2025) Shared task 1,506 ✗ ✓ PR ✗
+QIAS 2025 (Bouchekif et al., 2025a) Shared task 22,000 ✗ ✓ MCQ ✗
+PalmX 2025 (Alwajih et al., 2025) Shared task 1,900 ✗ ✗ MCQ ✗
+Table 2: Comparison of ISLAMICFAITHQA with promi-
+nent Islamic NLP resources. Size reports the primary
+evaluation unit (e.g., QA pairs / MCQs; for IslamicEval
+it is annotated answers). Text-grounded denotes ques-
+tions grounded in canonical texts. Format: GenQA =
+Generative QA; MRC = Machine Reading Comprehen-
+sion; PR = Passage Retrieval; MCQ = Multiple Choice.
+Figure 2: The construction pipeline for ISLAMIC-
+FAITHQA.
+3.2.1 ISLAMICFAITHQA Curation Pipeline
+As illustrated in Figure 2, we employ a rigor-
+ous semi-automated pipeline. We aggregate high-
+quality samples from sources such as Hajj-FQA
+(Aleid and Azmi, 2025), QIAS (Bouchekif et al.,
+2025a), and PalmX (Alwajih et al., 2025).
+Extraction and Filtering. In addition to QAs
+some datasets also include difficulty label as a meta-
+data. In this step, we select QAs from datasets that
+include difficulty annotations, we retain only the
+hardest examples.
+QA Generation. The selected questions are then
+reformulated by GPT-4.1 into short, fact-based gen-
+erative questions with atomic gold answers.
+Question Profiling. To enrich the benchmark,
+we add a layer of question-level metadata through
+an additional profiling step. We use a separate
+LLM, GPT-4.1, as an expert annotator to assign
+(i) a difficulty level on a five-point scale ranging
+from “very easy” (score 1) to “very hard” (score
+5); (ii) a binary label indicating whether the ques-
+tion requires reasoning; (iii) a binary label indicat-
+ing whether answering the question requires multi-
+step reasoning; and (iv) a single fine-grained ques-
+tion category from a fixed taxonomy: inheritance
+law, jurisprudence, prophetic biography, Islamic
+creed, Qur’anic studies, hadith studies, Islamic fi-
+nance and economics, Islamic ethics and morality,
+Islamic history, Islamic family law, contemporary
+issues, and comparative religion.
+The prompts for QA generation and question
+profiling are provided in Appendix A.1 and Ap-
+pendix A.2, respectively.
+Question Profiling Analysis. ISLAMIC-
+FAITHQA is designed to cover a broad spectrum
+of Islamic knowledge, with notable emphasis on
+challenging domains. In Figure 3, we present the
+4
+26472

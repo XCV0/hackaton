@@ -1,0 +1,103 @@
+negative sample subset during the subsequent 1
+training epochs. This progressive training strat-
+egy aims to guide the retriever towards identifying
+a wider range of more challenging Wikipedia ar-
+ticles, thereby enhancing the system’s recall and
+generalization performance. Each training epoch
+required an average of 30 hours to complete on a
+single Nvidia H20 (80G) GPU. During inference,
+the weighting factor λ was set to 0.74 for InfoS-
+eek and 0.56 for Enc-VQA, reflecting the relative
+contributions of visual and textual similarity.
+Generation Stage: For the LLaVA training phase,
+we randomly selected 100,000 samples from each
+of the two datasets to serve as training data. We
+employed LoRA for fine-tuning the LLM, with the
+following parameter settings: r = 128 and alpha =
+256. The learning rate was set to 2e-5, the batch
+size to 16, and the total number of epochs to 1.
+A.4 Prompt Engineering
+To guide the LLMs and VLLMs in generating
+relevant responses during image tagging and an-
+swer generation, we employed specific prompt tem-
+plates, leveraging a prompt engineering approach.
+The prompt templates utilized for each task are
+detailed below:
+Image Tag Generation using LLaVA-1.5-7B:
+You are an image tag generator, and your task is
+to provide tags related to the image according to
+the question, thereby helping to retrieve relevant
+knowledge.
+Image: {}
+Question: {}
+Directly provide 5 related image tags, use ’,’ as
+the separator:
+LLaMA Generation on InfoSeek Dataset:
+You are a helpful assistant for answering ency-
+clopedic questions. Do not answer anything else.
+If you need to answer questions about numbers or
+time, please output the corresponding numerical
+format directly. If the context does not contain the
+information required to answer the question, you
+should answer the question using internal model
+knowledge.
+There is an example:
+- Context: # Wiki Article: Dolomites ## Section
+Title: Dolomites The Dolomites, also known as the
+Dolomite Mountains, Dolomite Alps or Dolomitic
+Alps, are a mountain range located in northeast-
+ern Italy. The Dolomites are located in the re-
+gions of Veneto, Trentino-Alto Adige Südtirol and
+Friuli Venezia Giulia, covering an area shared be-
+tween the provinces of Belluno, Vicenza, Verona,
+Trentino, South Tyrol, Udine and Pordenone.
+- Question: Which city or region is this mountain
+located in?
+Just answer the question. No explanation is
+needed. Short answer is: Province of Belluno
+- Context: {}
+- Question: {}
+Just answer the question. No explanation is
+needed. Short answer is:
+LLaMA Generation on Enc-VQA Dataset:
+You are a helpful assistant for answering ency-
+clopedic questions.
+If the context does not contain the information
+required to answer the question, you should answer
+the question using internal model knowledge.
+- Context: {}
+- Question: {}
+The answer is:
+LLaVA-1.5-7B Generation on InfoSeek Dataset:
+Answer the encyclopedic question about the
+given image. Don’t mention the visual content
+of image in your output. Directly output the an-
+swer of the question according to the context. If
+you need to answer questions about numbers or
+time, please output the corresponding numerical
+format directly. If the context does not contain the
+information required to answer the question, you
+should answer the question using internal model
+knowledge.
+There is an example:
+- Context: # Wiki Article: Dolomites ## Section
+Title: Dolomites The Dolomites, also known as the
+Dolomite Mountains, Dolomite Alps or Dolomitic
+Alps, are a mountain range located in northeast-
+ern Italy. The Dolomites are located in the re-
+gions of Veneto, Trentino-Alto Adige Südtirol and
+Friuli Venezia Giulia, covering an area shared be-
+tween the provinces of Belluno, Vicenza, Verona,
+Trentino, South Tyrol, Udine and Pordenone.
+- Question: Which city or region is this mountain
+located in?
+Just answer the question. No explanation is
+needed. Short answer is: Province of Belluno
+{image}
+- Context: {}
+- Question: {}
+Just answer the question. No explanation is
+needed. Short answer is:
+LLaVA-1.5-7B Generation on Enc-VQA
+Dataset:
+41146

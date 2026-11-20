@@ -1,0 +1,110 @@
+due to the slightly smaller optical absorption coefﬁcient of TiO2.
+However, the device with the GaN ETL exhibited ≈0.5 V higher
+Voc than that with the TiO2 ETL regardless of the interface defect
+density. At an interface defect density of 1016 cm/C03, the device
+with the GaN ETL exhibited conversion efﬁciency of 56.0%
+(Voc = 1.92 eV, FF = 0.909). In comparison, the device with
+the TiO2 ETL exhibited conversion efﬁciency of only 46.2%
+(Voc = 1.56 eV, FF = 0.900). When the defect density increases
+to 1019 cm/C03, the conversion efﬁciencies of the GaN and TiO2
+ETL devices are 40.6% and 31.8%, respectively. Therefore,
+GaN is a potential material for the ETL of CsPbBr3 photovoltaic
+converters. To further investigate the Jsc loss in the device with
+the GaN ETL, we calculated the EQE of the device with the GaN
+ETL. Figure 7 shows the dependence of the EQE of the device on
+GaN ETL thickness. The EQE decreased with decreasing wave-
+length due to the absorption loss in the GaN ETL. Typically, a
+highly conductive doped material is used as the ETL, and such
+a highly doped material is typically defective and has a small
+minority carrier lifetime. Therefore, the electron–hole pair
+produced in the GaN ETL immediately recombines in the
+GaN ETL, which is referred to as the absorption loss. In the case
+of the application of CsPbBr3 photovoltaic power converters with
+a blue light source, the EQE at ≈450 nm is most important. The
+EQE at 450 nm decreases with increasing layer thickness; how-
+ever, the absorption loss is almost negligible when the thickness
+is less than 50 nm. From the perspective of thin GaN deposition,
+it is difﬁcult to achieve highly crystallized nc-GaN when the
+thickness is less than 50 nm. Therefore, 50 nm thick nc-GaN
+is one of the promising candidates for the ETL of CsPbBr3
+photovoltaic power converters.
+3.2. Effect of the Quality of CsPbBr3 Layer
+To clarify the inﬂuence of the quality of the CsPbBr3 layer, we
+investigated the effect of its defect density, carrier diffusion
+length, and thickness on device performance. Figure 8a shows
+the dependence of the device parameters on Ndef for different
+carrier mobilities. Regardless of the mobility, Voc decreased lin-
+early with increasing Ndef due to the enhancement of carrier
+recombination in the device. The behavior of Jsc and FF was sig-
+niﬁcantly inﬂuenced by carrier mobility. At low mobility, a reduc-
+tion in these values was observed for small Ndef. Conversely,
+these values remain almost constant up to an Ndef value of
+1017 cm/C03 at a carrier mobility value of 1000 cm2 Vs/C01.
+According to these results, we can conclude that Voc is primarily
+inﬂuenced by Ndef.Jsc and FF are affected by both Ndef and carrier
+mobility. To clarify the limiting factor of Jsc and FF, we investi-
+gated the effect of carrier diffusion length, LD, on device perfor-
+mance, as shown in Figure 8b. Except for extremely small LD
+values (<0.2 μm), Voc was almost constant against LD.As
+previously discussed, Voc is determined by Ndef. We also found
+that Jsc and FF were determined by LD regardless of Ndef, indi-
+cating that the limiting factor of Jsc and FF was LD. When LD was
+less than 0.5 μm, the conversion efﬁciency decreased signiﬁ-
+cantly due to the reduction in Jsc and FF. Therefore, the most
+(a) (b)
+0.5 1 1.5 2 2.5
+5
+10
+15
+20
+25
+30
+35
+40
+45
+0
+Voltage (V)
+mc/Am(ytisnedtnerruC 2)
+Ec = 0.18 eV (GaN)
+Ec = 0.53 eV(TiO2)
+Ndef  = 1 1016cm-3
+0.5 1 1.5 2 2.5
+5
+10
+15
+20
+25
+30
+35
+40
+45
+0
+Voltage (V)
+mc/Am(ytisnedtnerruC 2)
+Ec =0.18 eV (GaN)
+Ec =0.53 eV
+     (TiO2)
+Ndef  = 1 1019cm-3
+Figure 6. Photo J–V characteristics of device using GaN (red line) or TiO2 (blue line) as ETL material. The two different graphs correspond to the different
+defect densities in FIL. a) Ndef = 1 /C2 1016 cm/C03;b)Ndef = 1 /C2 1019 cm/C03. The J–V curves were calculated under monochromatic light with a wavelength
+of 450 nm.
+300 400 500 600 7000
+0.2
+0.5
+0.8
+1.0
+Wavelength (nm)
+ycneiciffEmutnauQlanretxE
+    GaN 
+Thickness
+    (nm)
+ 10
+ 30
+ 50
+ 70
+ 90
+Figure 7. Effect of the thickness of GaN ETL on EQE spectra.
+www.advancedsciencenews.com www.pss-a.com
+Phys. Status Solidi A 2025, 222, 2400437 2400437 (6 of 11) © 2024 The Author(s). physica status solidi (a) applications and materials science
+published by Wiley-VCH GmbH
+ 18626319, 2025, 3, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pssa.202400437, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

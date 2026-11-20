@@ -1,0 +1,140 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 27826–27841
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+Detecting Hallucinations in Retrieval-Augmented Generation via
+Semantic-level Internal Reasoning Graph
+Jianpeng Hu 1, Yanzeng Li 2, Jialun Zhong 1, Wenfa Qi 1, Lei Zou 1*
+1 Wangxuan Institute of Computer Technology, Peking University, Beijing, China
+2 Institute of Artificial Intelligence and Future Networks, Beijing Normal University, Zhuhai, China
+jianpeng.hu@outlook.com, liyanzeng@bnu.edu.cn, zhongjl@stu.pku.edu.cn
+{qiwenfa, zoulei}@pku.edu.cn
+Abstract
+The Retrieval-augmented generation (RAG)
+system based on Large language model (LLM)
+has made significant progress. It can effectively
+reduce factuality hallucinations, but faithful-
+ness hallucinations still exist. Previous meth-
+ods for detecting faithfulness hallucinations
+either neglect to capture the models’ internal
+reasoning processes or handle those features
+coarsely, making it difficult for discriminators
+to learn. This paper proposes a semantic-level
+internal reasoning graph-based method for de-
+tecting faithfulness hallucination. Specifically,
+we first extend the layer-wise relevance prop-
+agation algorithm from the token level to the
+semantic level, constructing an internal reason-
+ing graph based on attribution vectors. This
+provides a more faithful semantic-level rep-
+resentation of dependency. Furthermore, we
+design a general framework based on a small
+pre-trained language model to utilize the depen-
+dencies in LLM’s reasoning for training and
+hallucination detection, which can dynamically
+adjust the pass rate of correct samples through
+a threshold. Experimental results demonstrate
+that our method achieves better overall per-
+formance compared to state-of-the-art base-
+lines on RAGTruth and Dolly-15k. Implemen-
+tation available here: https://github.com/hk-
+hp/SIRG/tree/main.
+1 Introduction
+LLMs easily generate grammatically coherent but
+factually incorrect outputs, a phenomenon com-
+monly referred to as “hallucination” (Mishra et al.;
+Zhang et al., 2024; Li et al., 2023). Post-learning
+for downstream tasks or introducing the RAG sys-
+tem (Lewis et al., 2020) can mitigate the factuality
+hallucinations to some extent, which refer to the
+tendency of LLMs to produce outputs that are in-
+consistent with real-world facts. However, due
+* Corresponding author
+s𝑎,2
+To heat frozen baked 
+scones, preheat your 
+oven to 220°C (200°C 
+fan oven / gas mark 6)
+s𝑎,3
+Place the frozen scones on a 
+baking tray lined with parchment 
+paper and bake for 15-20 minutes 
+or until they are crispy and golden 
+brown
+s𝑐,12
+The 15 minute guideline 
+starts from the point at 
+which you put your scones 
+in a preheated oven.
+s𝑎,1
+Based on the 
+provided passages, 
+here's how to heat 
+frozen baked 
+scones:
+s𝑐,11
+Make sure to 
+preheat the oven 
+to the correct 
+temperature 
+(220°C / 200°C 
+fan oven / gas 
+mark 6) before 
+putting your 
+scones in.
+s𝑐,5
+It’s the butter 
+that makes 
+these cranberry 
+scones so 
+tender, light 
+and delicious.
+0.26
+0.18
+0.25
+0.14
+0.44
+0.1
+s𝑐,1
+how to heat 
+frozen baked 
+scones
+0.12
+s𝑐,2
+"Bear in mind 
+that your 
+response should 
+be strictly based 
+on the following 
+three passages:
+0.11
+Figure 1: Example of a semantic-level internal reason-
+ing graph. Yellow nodes represent contextual semantic
+fragments, blue nodes represent semantic fragments of
+the model’s response, and the weight on the edge in-
+dicates the contribution degree of the source semantic
+fragment to the target (with an upper boundary of 1).
+The dashed box indicates a hallucinated semantic frag-
+ment.
+to the inherent knowledge bias of the internal pa-
+rameters of LLMs, the generated content of RAG
+may be inconsistent with the context provided by
+users (Lyu et al., 2024), leading to faithfulness
+hallucinations. He et al. (2022) has found that
+faithfulness hallucinations arise primarily from the
+inconsistency between LLMs’ word-level output
+and true thought process, meaning that LLMs only
+utilize surface knowledge, such as entity popular-
+ity (Lehmann et al., 2025), during reasoning.
+To detect faithfulness hallucinations, both Man-
+akul et al. (2023) and Zhao and Zhang (2025) pro-
+pose post-processing methods with LLMs. How-
+ever, multiple invocations of the LLM system can
+lead to significant resource consumption and am-
+plification of model bias. Other scholars (Chen
+et al., 2025; Wu et al., 2024; Burns et al., 2022)
+assess hallucinations based on the internal embed-
+ding of the model, which often relies on heuristic
+discrimination trained on these abstract features,
+resulting in poor interpretability. Hu et al. (2024);
+Chuang et al. (2024) detect hallucinations from the
+perspective of output attribution, but their direct ac-
+27826

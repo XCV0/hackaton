@@ -1,0 +1,104 @@
+Thus, we use PG-L and PG-S, with the same
+prompt Pi. Each model m ∈ {PG-L, PG-S} pro-
+duces the response as follows:
+R(m) i = ( y(m) i , j(m) i , r(m) i ) (3)
+where y(m) i is the predicted label, j(m) i is the justifi-
+cation and r(m) i is the intermediate model reasoning
+within the <think> tags.
+Assuming that larger models perform better, we
+apply a size-based heuristic: marking R(PG-L) i as
+chosen and R(PG-S) i as rejected.
+For each triplet (xi, ci, ti) in HalluClaimbase,
+we produce preference tuples of the form:
+zi =
+(
+Pi, R(PG-L) i (chosen), R(PG-S) i (rejected) ) (4)
+Model-Agreement Verification. The size-based
+heuristic provides a useful starting point, but some
+chosen completions may still misclassify the claim.
+To correct this, we require agreement between the
+synthetic label assigned by CG during claim gener-
+ation and the classification predicted by PG-L. Any
+tuple where the chosen label disagrees with the
+synthetic label is removed. After verification, the
+HalluClaimpref dataset contains 87,486 tuples.
+LLM-Based Consensus Filtering. To further im-
+prove reliability, each tuple is independently eval-
+uated by IE-1 and IE-2 using a dedicated prompt
+that asks for the selection of the best completion
+according to three criteria: (i) classification correct-
+ness, (ii) coherence of reasoning, and (iii) clarity of
+justification (see Appendix F). The models receive
+the full prompt Pi and completions, without being
+told which one is the chosen completion.
+A tuple is retained only if IE-1 and IE-2 select
+the same completion that matches the chosen one.
+IE-1(Pi) = IE-2(Pi) = R(chosen) i (5)
+The LLM-based consensus step removed 1,886
+tuples. The removal rates were uniform between
+styles (from 1.57% for dialogue to 2.90% for
+social_media_post), indicating that there was no
+disproportionate impact or style-specific bias.
+Thus, to address the imbalance between classes
+(Grounded, IntrinsicHallu, ExtrinsicHallu), we
+implement a controlled sampling strategy. We
+first determined the maximum number of sam-
+ples per hallucinated class that would allow equal
+representation, and then sampled twice as many
+Grounded examples to maintain balance. The fi-
+nal HalluClaim dataset was shuffled, leading to
+76,708 high-quality preference tuples.
+4.4 Preference-Based Fine-Tuning
+After creating a high-quality preference dataset, we
+use Qwen3-4B (Yang et al., 2025) as the backbone
+for fine-tuning. Its 32,768-token context window
+supports document-level reasoning, while the 4B-
+parameter scale remains compact enough for on-
+prem deployment. This choice also mitigates the
+Small Model Learnability Gap (Li et al., 2025)
+observed in models with at most 3B parameters.
+Parameter-Efficient Fine-Tuning. We fine-tune
+Qwen3-4B using ORPO, a fine-tuning technique
+that increases the gap between chosen and
+rejected completions so that the model consis-
+tently favors the chosen one (see Appendix G).
+Unlike DPO, ORPO performs an SFT stage during
+preference alignment, without relying on a refer-
+ence model. This makes training more efficient and
+allows HalluGuard to accurately classify claims
+while generating justifications and reasoning dis-
+tilled from stronger models.
+To apply ORPO in a parameter-efficient man-
+ner, we use LoRA (Hu et al., 2022), which freezes
+most base weights and trains only small adapter lay-
+ers. This reduces memory and compute costs while
+mitigating catastrophic forgetting when adapting
+pre-trained models to specific tasks (Bafghi et al.,
+2025). Reproducibility and fine-tuning details are
+provided in the Appendices H and J.
+5 Experimental Setup
+Benchmark Dataset. We evaluated on LLM-
+AggreFact (Tang et al., 2024a), a collection of
+11 human-annotated datasets designed to assess
+whether model-generated claims are supported
+by evidence documents in a binary Grounded
+vs. Hallucinated task across both closed-book
+and grounded settings. The benchmark spans
+diverse domains and incorporates real hallucina-
+tions from recent LLMs. Importantly, it includes
+RAGTruth (Niu et al., 2024), which is particularly
+relevant to our focus on hallucination mitigation in
+RAG (see Appendix K).
+Evaluation Metric. Performance is measured us-
+ing balanced accuracy (BAcc) (Brodersen et al.,
+2010), defined as BAcc = 1 2
+(
+TP
+TP+FN + TN TN+FP
+)
+where TP, TN, FP, and FN denote true positives,
+true negatives, false positives, and false negatives.
+We adopted BAcc to ensure comparability with
+prior work, as it was also used in the paper that
+introduced LLM-AggreFact.
+16922

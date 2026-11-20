@@ -1,0 +1,52 @@
+Published as a conference paper at ICLR 2025
+• The generalist LM, operating with the RAG drafter, requires no additional tuning. It simply veri-
+fies and integrates the most promising draft into the final answer. This approach enhances compre-
+hension of each subset and mitigates potential lost-in-the-middle (Liu et al., 2024) phenomenon.
+• Our method significantly accelerates RAG by delegating drafting to the smaller specialist LM,
+with the larger generalist LM performing a single, unbiased verification pass over the drafts in
+parallel. Extensive experiments on 5 free-form question-answering and closed-set generation
+benchmarks demonstrate the superior effectiveness and efficiency of the method.
+2 RELATED WORKS
+Retrieval Augmented Generation Retrieval Augmented Generation (RAG) enhances LLMs by
+retrieving relevant documents from external databases and incorporating them into the generation
+process (Gao et al., 2023b; Lewis et al., 2020; Khandelwal et al., 2020; Izacard & Grave, 2021;
+Luo et al., 2023a; Xia et al., 2024b; Wang et al., 2024). Recent work has primarily focused on
+enabling LLMs to understand when and what to retrieve (Ma et al., 2023; Chen et al., 2023b; Jiang
+et al., 2023b; Schick et al., 2024), or designing approaches to better utilize contexts (Yu et al.,
+2023; Yoran et al., 2023; Wang et al., 2023b; Sarthi et al., 2024; Baek et al., 2023; Xu et al., 2023;
+Kim et al., 2024). Among them, SAIL (Luo et al., 2023a) fine-tunes a pre-trained LLM on web
+search data to filter irrelevant contents. Self-Reflective RAG (Asai et al., 2023) introduces reflection
+tokens to guide retrieval and annotation in instruction-tuning datasets. However, both approaches
+require additional instruction-tuning of generic LLMs, which is resource-intensive and may lead to
+forgetting or over-fitting (Luo et al., 2023b). Furthermore, long context with retrieved documents
+can suffer from computational inefficiency and position bias (Liu et al., 2024). Corrective RAG (Yan
+et al., 2024) on the other hand proposes a lightweight retrieval evaluator, but it lacks the capability
+for high-level reasoning. In contrast, our proposed SPECULATIVE RAG addresses these limitations
+by leveraging a smaller RAG drafter model to efficiently understand diverse perspectives in retrieval
+results and generate drafts for the generalist LMs to verify and integrate.
+Speculative Decoding Speculative decoding (Stern et al., 2018; Xia et al., 2023; Chen et al.,
+2023a; Leviathan et al., 2023; Xia et al., 2024a) aims to reduce auto-regressive decoding latency
+through a draft-then-verify paradigm. This involves drafting multiple future tokens with a small
+model and verifying them in parallel with the target model (Xia et al., 2024a). The draft model
+is typically either an independent model from the same series (Leviathan et al., 2023; Chen et al.,
+2023a) or the target model itself (Zhang et al., 2023a; Cai et al., 2024). Our approach extends this
+concept from token-level drafting to answer-level drafting. In contrast to traditional verification
+criteria (Stern et al., 2018; Xia et al., 2023; Leviathan et al., 2023; Chen et al., 2023a; Miao et al.,
+2024), which accept or reject tokens based on their generation probabilities, we leverage language
+modeling objectives to directly assess the confidence of entire answer drafts.
+3 SPECULATIVE RETRIEVAL AUGMENTED GENERATION THROUGH
+DRAFTING
+Problem Formulation In knowledge intensive tasks, each entry can be represented as (Q, D, A),
+where Q is a question or statement that requires additional knowledge; D = {d1, ..., dn} is a set
+of n documents retrieved from the database; A is the expected answer. Particularly, in question
+answering tasks, Q and A are the question and the expected answer in natural language form; in
+the statement verification tasks, Q is a statement and A ∈ {True, False} is a Boolean value
+indicating the statement’s correctness; in the multiple choice tasks, Q is a question with a few
+options and A ∈ {A, B, C, ...} is the index of the correct answer. The objective of a RAG system is
+to generate a fluent response containing the expected answer or select the expected answer from the
+provided options based on the context provided by the retrieved supporting documents.
+3.1 OVERVIEW
+We introduce Speculative Retrieval Augmented Generation (SPECULATIVE RAG), as illustrated in
+Figure 1. We aim at enhancing the reasoning ability of LLMs over retrieved documents without
+compromising processing speed. Instead of relying on brute-force parameter scaling or instruction-
+3

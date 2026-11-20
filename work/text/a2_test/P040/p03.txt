@@ -1,0 +1,77 @@
+and extracted triples to retrieve passages based on
+the Personalized PageRank algorithm (Gutierrez
+et al., 2024). While achieving improvements for
+single- and multi-step retrieval (when coupled with
+IRCoT (Trivedi et al., 2023)), it remains agnostic
+to the semantic relationships of extracted triples.
+In this paper, we leverage a similar alignment of
+passages and extracted triples but introduce a new
+graph-based retrieval framework that uses a small
+semantic model for exploring multi-hop relation-
+ships. Our framework considers the contributions
+of all triple elements participating in reasoning
+chains, offering a more robust solution for asso-
+ciating questions with triple reasoning chains.
+3 Preliminaries
+Let C = {c1, c2, . . . , cC } be an index of passages
+and T = {t1, t2, . . . , tT : tj = (sj , pj , oj )} be an-
+other index representing a set of triples associated
+with the passages in C s.t. ∀tj ∈ T∃! ci ∈ C,
+where sj , pj and oj the respective subject, predi-
+cate and object of the j-th triple. In this setup, each
+triple is uniquely linked to exactly one passage,
+and a passage can potentially be associated with
+multiple triples.
+Given an input query q and an index of interest
+R = {r1, . . . , rR}, retrieving items from R rele-
+vant to q can be achieved by using a base retrieval
+function hk base (q, R) ⊆ R that returns a ranked list
+of k items from R in descending order, according
+to a retrieval score. BM25 or a conventional dense
+retriever can serve as a base retrieval function, with-
+out requiring any multi-hop capabilities.
+Our goal is to retrieve relevant passages from C
+that enable a retrieval-augmented model to answer
+multi-hop queries (Lewis et al., 2020). To this end,
+we introduce GEAR, which is a graph-enhanced
+framework of retrieval agent (see Figure 1).
+4 Retrieval with Synchronised Graph
+Expansion
+Given an input query q, let C′ q = hk base (q, C) be
+a list of passages returned by the base retriever.
+Given this list, C′ q, our goal is to derive relevant
+multi-hop contexts (passages) by retrieving a sub-
+graph of triples that interconnect their source pas-
+sages. Two challenges arise in materialising such
+sub-graph retrieval: (i) locating initial triples (i.e.
+starting nodes) Tq, and (ii) expanding the graph
+from these initial triples while reducing the search
+Figure 1: System Architecture. The left section (blue)
+depicts SyncGE (detailed in §4), while the the right sec-
+tion (orange), completes the GEAR system (described
+in §5). A visual step-by-step walk-through of the system
+is presented in Appendix C.
+space. The following sections address these chal-
+lenges within GEAR.
+4.1 Knowledge Synchronisation
+We describe a knowledge Synchronisation (Sync)
+process to locate initial nodes for graph expan-
+sion. We first employ an LLM to read C′ q (see
+Appendix K.2) and summarise knowledge triples
+that can support answering the current query q:
+T′ q = read ( C′ q, q ) . (1)
+T′ q is a collection of triples to which we refer
+as proximal triples. Initial nodes Tq for graph
+expansion are identified by linking each triple in
+T′ q to a triple in T, using the tripleLink function:
+Tq =
+{
+ti|ti = tripleLink(t′ i) ∀t′ i ∈ T′ q } . (2)
+The implementation of tripleLink can vary. How-
+ever, in this paper we consider it to be simply
+retrieving the most similar triple from T using
+h1 base (t′ i, T) ∀t′ i ∈ T′ q.
+4.2 Diverse Triple Beam Search
+We borrow the idea of constructing reasoning triple
+chains (Fang et al., 2024) for expanding the graph,
+12051

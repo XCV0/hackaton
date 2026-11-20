@@ -1,0 +1,45 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 17
+7 Conclusion
+This research paper aims to apply the field of large language models to the finan-
+cial domain, with a particular focus on addressing the challenges of analyzing
+earnings reports. The introduction underscores the significance of this extension
+for researchers investigating the capabilities of large language models in the fi-
+nancial sector. The paper introduces an innovative approach centered around a
+retrieval-augmented instruction data generation method tailored specifically for
+tasks within the financial domain. The results highlight the efficacy of the aug-
+mented model, showcasing its potential to democratize the process of earnings
+report analysis.
+Nevertheless, our approach has several limitations. RAG-IT may struggle
+with highly nuanced questions that require deep domain expertise, multi-hop
+reasoning over various financial metrics, or precise numerical computation. Its
+accuracy also depends heavily on the completeness and quality of retrieved evi-
+dences; missing or poorly retrieved context can degrade performance. Inference
+requires running both retrieval and generation, which introduces additional la-
+tency and computational cost compared to standard LLM inference. These limi-
+tations highlight important directions for future research, including more robust
+retrieval methods, improved reasoning capabilities, and more efficient architec-
+tures for financial analysis.
+References
+1. 30 financial metrics and kpis to measure success in 2025. NetSuite Resource Articles
+(2025), https://www.netsuite.com/portal/resource/articles/accounting/financial-
+kpis-metrics.shtml, accessed: Nov 9, 2025
+2. Dettmers, T., Pagnoni, A., Holtzman, A., Zettlemoyer, L.: Qlora: Efficient fine-
+tuning of quantized llms. Advances in neural information processing systems 36,
+10088–10115 (2023)
+3. European Securities and Markets Authority, The Alan Turing Institute: Leveraging
+large language models in finance: Pathways to responsible adoption. Tech. rep.,
+ESMA (2025)
+4. Han, X., Yang, J., Wang, T., Bi, Z., Song, X., Hao, J., Song, J.: Towards alignment-
+centric paradigm: A survey of instruction tuning in large language models. arXiv
+preprint arXiv:2508.17184 (2025)
+5. Hirano, Y., Imajo, S.: The construction of instruction-tuned llms for finance with-
+out instruction data using continual pretraining and model merging. arXiv preprint
+arXiv:2409.19854 (2024)
+6. Hu, E.J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., Chen, W.,
+et al.: Lora: Low-rank adaptation of large language models. ICLR 1(2), 3 (2022)
+7. Jadhav, A., Mirza, V.: Large language models in equity markets: Applications,
+techniques, and insights. Techniques, and Insights (March 15, 2025) (2025)
+8. Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., K¨uttler, H.,
+Lewis, M., Yih, W.t., Rockt¨aschel, T., et al.: Retrieval-augmented generation for
+knowledge-intensive nlp tasks. Advances in neural information processing systems
+33, 9459–9474 (2020)

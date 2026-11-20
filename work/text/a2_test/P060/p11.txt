@@ -1,0 +1,92 @@
+49
+A Public Datasets
+Table 3 lists the public datasets we use. The pre-
+processing for each dataset is described below. In
+each case, we only consider contexts with at most
+10 000 characters.
+SQuAD2: We use the training set of SQuAD2
+(Rajpurkar et al., 2018). In this dataset, question-
+answer pairs are associated with specific para-
+graphs from Wikipedia articles. We treat each para-
+graph as a separate context, resulting in 19 029
+unique contexts. We merge the question-answer
+pairs from all paragraphs into a list and randomly
+sample 6910 pairs along with their associated con-
+texts for labeling.
+NewsQA: This dataset consists of QA pairs,
+each associated with a news story (Trischler et al.,
+2017). We use entire news stories as individual con-
+texts and randomly sample 6890 context-question-
+answer triplets for labeling.
+PubMedQA: We use the unlabelled subset of
+this dataset that has 61 243 eligible contexts, each
+corresponding to the abstract of a research article
+(Jin et al., 2019). Each context is accompanied by
+a question and an answer. We retain a subset of 68
+47 randomly sampled examples for labeling.
+HotpotQA: The original HotpotQA dataset was
+designed to test the ability of QA systems to itera-
+tively combine information across multiple con-
+texts (?). Consequently, each question in this
+dataset is associated with several contexts. While
+this is an interesting use case, we are primarily
+concerned with the one context, one question set-
+ting. Therefore, we use the version of the dataset
+used in Reimers and Gurevych (2019) for train-
+ing a sentence similarity model. In this version,
+each question is associated with a relevant posi-
+tive context and an irrelevant negative context. We
+randomly sampled 5000 of the available 65 489
+(question, positive context) pairs for labeling. Due
+to the nature of the dataset, most of the sampled
+questions cannot be answered using the single pos-
+itive context alone. This is evident from Table 3,
+which shows that our labeller marks a majority of
+the HotpotQA questions as unanswerable.
+MS MARCO: We obtained v2.1 of this dataset
+from Hugging Face (Nguyen et al., 2016). Each
+question has 10 passages (top-10 hits on Bing) as-
+sociated with it. We concatenated these passages
+summary 9% 48% 9% 35%
+reasoning 17% 19% 54% 10%
+fact_single 7% 92% 1% 1%
+unanswerable fact_single reasoning summary
+unanswerable 64% 26% 6% 4%
+Majority vote labels
+Llama-3-70b labels
+Figure 4: Confusion matrix between labels given by
+Llama-3-70b and the annotators’ majority vote. Each
+row shows the distribution of Llama-3-70b labels given
+a majority vote label.
+to get one context per question. We then randomly
+selected 5000 examples. Of these, 28 contained
+characters that Llama-3-70b was unable to process.
+This left us with 4972 labelled (context, question,
+answer) triplets.
+NaturalQ: We obtained the simplified training
+set of the natural questions dataset (Kwiatkowski
+et al., 2019). Each row contains a question along
+with a long answer comprising paragraphs from
+Wikipedia that contain an answer to the question.
+We concatenate all long answers associated with a
+question to get the corresponding context and then
+randomly sample 5000 out of 111 388 examples
+for labeling.
+B Llama-3-70b confusion matrix
+Figure 4 compares the labels assigned by
+Llama-3-70b to the labels selected by a majority
+of the human annotators.
+C Retrieval Experiments
+Tables 2, 4, 5 and 6 show the dependence of the
+retrieval performance on proposed taxonomy. We
+quantify the results with the use of the Recall@5
+metric. Tables 2 and 4 employ the embedding
+model bge-small-en-v1.5, with the latter also
+re-ranking the retrieval results with the bge-base
+re-ranker. Tables 5 and 6 employ the embedding
+model all-minilm-l6-v2, with the latter also re-
+ranking the retrieval results with the bge-base re-
+ranker. We do not show the results for the unan-
+swerable label as that is not a label of interest for
+our study. However, these questions are included
+in the “Inclusive” evaluation, which reflects the

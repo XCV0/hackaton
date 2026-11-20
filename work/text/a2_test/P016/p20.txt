@@ -1,0 +1,34 @@
+U Translation in Languages beyond English
+Language MultiRAG CrossRAG (original) CrossRAG (translation by TL)
+English 73.8 74.4 69.8
+German 71.4 72.6 72.6
+Italian 68.4 71.6 69.0
+Spanish 68.6 70.9 68.7
+Finnish 60.4 65.3 55.2
+Portuguese 69.1 69.8 68.2
+Russian 64.3 65.5 51.8
+Chinese 57.2 60.8 53.0
+Japanese 44.0 49.1 41.8
+Korean 41.3 49.6 42.9
+Thai 26.3 33.4 30.2
+Table 20: Performance comparison by language and retrieval method. Documents are translated to the nearest
+typological language (indicated as TL) instead of English (experiments on MKQA with GPT-4o).
+Language 1 Language 2 Typological Relationship
+Italian Spanish Both are Romance languages with very
+similar grammar and vocabulary
+Italian Portuguese Romance languages with comparable verb
+conjugation and noun/adjective agreement
+Spanish Portuguese Closely related Ibero-Romance languages
+English German Both are West Germanic languages,
+sharing syntactic structure and some core
+vocabulary
+Japanese Korean Both use SOV word order, agglutinative
+morphology, and topic/subject marking
+particles
+Chinese Thai Both are analytic (isolating) languages
+with tonal systems and SVO word order
+Russian Finnish Not genealogically related but share areal
+features (e.g., case-rich systems, free word
+order)
+Table 21: Typological relationships between language pairs.
+716

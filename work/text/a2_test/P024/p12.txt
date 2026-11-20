@@ -1,0 +1,108 @@
+Hengyi Wang, Haizhou Shi, Shiwei Tan, Weiyi Qin,
+Wenyuan Wang, Tunyu Zhang, Akshay Nambi,
+Tanuja Ganu, and Hao Wang. 2024b. Multimodal
+needle in a haystack: Benchmarking long-context ca-
+pability of multimodal large language models. arXiv
+preprint arXiv:2406.11230.
+Minzheng Wang, Longze Chen, Cheng Fu, Shengyi
+Liao, Xinghua Zhang, Bingli Wu, Haiyang Yu, Nan
+Xu, Lei Zhang, Run Luo, Yunshui Li, Min Yang,
+Fei Huang, and Yongbin Li. 2024c. Leave no docu-
+ment behind: Benchmarking long-context llms with
+extended multi-doc qa. Preprint, arXiv:2406.17419.
+Wenhui Wang, Furu Wei, Li Dong, Hangbo Bao,
+Nan Yang, and Ming Zhou. 2020. Minilm: Deep
+self-attention distillation for task-agnostic com-
+pression of pre-trained transformers. Preprint,
+arXiv:2002.10957.
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le,
+Ed Chi, Sharan Narang, Aakanksha Chowdhery, and
+Denny Zhou. 2023. Self-consistency improves chain
+of thought reasoning in language models. Preprint,
+arXiv:2203.11171.
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten
+Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou,
+et al. 2022. Chain-of-thought prompting elicits rea-
+soning in large language models. Advances in neural
+information processing systems, 35:24824–24837.
+Shitao Xiao, Zheng Liu, Peitian Zhang, and Niklas
+Muennighoff. 2023. C-pack: Packaged resources
+to advance general chinese embedding. Preprint,
+arXiv:2309.07597.
+An Yang, Baosong Yang, Binyuan Hui, Bo Zheng,
+Bowen Yu, Chang Zhou, Chengpeng Li, Chengyuan
+Li, Dayiheng Liu, Fei Huang, Guanting Dong, Hao-
+ran Wei, Huan Lin, Jialong Tang, Jialin Wang,
+Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin
+Ma, Jianxin Yang, Jin Xu, Jingren Zhou, Jinze Bai,
+Jinzheng He, Junyang Lin, Kai Dang, Keming Lu, Ke-
+qin Chen, Kexin Yang, Mei Li, Mingfeng Xue, Na Ni,
+Pei Zhang, Peng Wang, Ru Peng, Rui Men, Ruize
+Gao, Runji Lin, Shijie Wang, Shuai Bai, Sinan Tan,
+Tianhang Zhu, Tianhao Li, Tianyu Liu, Wenbin Ge,
+Xiaodong Deng, Xiaohuan Zhou, Xingzhang Ren,
+Xinyu Zhang, Xipin Wei, Xuancheng Ren, Xuejing
+Liu, Yang Fan, Yang Yao, Yichang Zhang, Yu Wan,
+Yunfei Chu, Yuqiong Liu, Zeyu Cui, Zhenru Zhang,
+Zhifang Guo, and Zhihao Fan. 2024. Qwen2 techni-
+cal report. Preprint, arXiv:2407.10671.
+Zheng Yuan, Qiao Jin, Chuanqi Tan, Zhengyun Zhao,
+Hongyi Yuan, Fei Huang, and Songfang Huang. 2023.
+Ramm: Retrieval-augmented biomedical visual ques-
+tion answering with multi-modal pre-training. In
+Proceedings of the 31st ACM International Confer-
+ence on Multimedia, pages 547–556.
+Lei Zhang, Yunshui Li, Ziqiang Liu, Junhao Liu, Min
+Yang, et al. 2023. Marathon: A race through the
+realm of long context with large language models.
+arXiv preprint arXiv:2312.09542.
+Xinrong Zhang, Yingfa Chen, Shengding Hu, Zi-
+hang Xu, Junhao Chen, Moo Khai Hao, Xu Han,
+Zhen Leng Thai, Shuo Wang, Zhiyuan Liu, et al.
+2024.
+infty bench: Extending long context evaluation be-
+yond 100k tokens. arXiv preprint arXiv:2402.13718.
+A Appendix
+A.1 Baselines
+A.1.1 Retrieval Models
+BM25 BM25 (Robertson et al., 1995) is a widely
+adopted term-based ranking function based on the
+probabilistic information retrieval model. It calcu-
+lates the relevance of a document to a given query
+by considering term frequency, inverse document
+frequency, and document length normalization.
+BM25 is effective for sparse text retrieval tasks,
+making it a standard baseline in information re-
+trieval evaluations. We use the Python rank_bm25
+implementation for our experiments.
+MiniLM MiniLM (Wang et al., 2020) is a
+lightweight, transformer-based model designed
+for efficient knowledge distillation. It compresses
+the knowledge of larger pre-trained models
+into a smaller architecture while maintaining
+competitive performance in natural language
+understanding tasks. MiniLM is used in retrieval
+tasks due to its ability to balance computa-
+tional efficiency and accuracy. We use the
+sentence-transformers/all-MiniLM-L6-v2
+implementation in our experiments.
+MPNet MPNet (Song et al., 2020) is a
+transformer-based model that leverages permuted
+language modeling for pre-training, which
+helps it capture contextual information more
+effectively than traditional masked language
+models. It excels in a variety of natural lan-
+guage processing tasks, including text retrieval,
+due to its robust contextual embeddings and
+representation learning capabilities. We use the
+sentence-transformers/all-mpnet-base-v2
+implementation in our experiments.
+BGE-1.5 The BGE model family is based on a
+BERT-like architecture and a three-stage training
+process, which collectively enhance its adaptabil-
+ity and generalization capabilities. Pre-training is
+performed on large-scale plain text corpora using a
+tailored MAE-style approach, effectively encoding
+polluted text and reconstructing the clean version.
+The model then undergoes contrastive learning with
+6099

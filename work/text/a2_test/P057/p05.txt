@@ -1,0 +1,94 @@
+omission of this indexing step may be desirable but
+it also forces RICHES to deal with the non-uniform
+and diffused information in raw text. An alternative
+that is closer, in intent, to the ofﬂine indexing step
+used by other IR systems, is to map each indexed
+chunk to a set of uniformly structured propositions
+(Min et al., 2023; Chen et al., 2022). A proposition
+is a stand-alone unit that efﬁciently encodes small,
+atomic chunks of factual information. For example,
+instead of the sentence "He has 7M followers on
+Twitter" a proposition would be decontextualized
+to "Tom Cruise has 7M followers on Twitter." We
+adopt a pre-existing propositional index from Chen
+et al. 2023 described in Section 5.1.
+Section 6.1 compares various Retrieval keys for
+the ODQA task with illustrations in Appendix A.5.
+4 Interleaving Retrieval and Generation
+We have presented a method of interleaving uncon-
+strained text generation with constrained genera-
+tion of retrieval keys. In this section we introduce a
+handful of tasks that make use of this interleaving
+either as a core task requirement, or as a means
+to an end by interleaving ‘thoughts’ with retrieval
+actions to help guide search.
+Attributed Question Answering We apply
+RICHES to the open domain question answering
+(ODQA) task where we score both the ability to
+correctly predict a short answer string and retrieve
+attribution for that answer (Bohnet et al., 2022).
+See Table 1 for examples.
+Multi-hop Question Answering Interleaving
+between generation and retrieval can be powerful
+in multi-hop reasoning, where the model needs to
+retrieve and stitch together knowledge from mul-
+tiple sources. Examples of RICHES outputs for
+multi-hop QA are given in Table 2.
+"Thinking" for Retrieval Multi-step questions
+often require breaking down a query into smaller
+steps and reasoning or planning what to retrieve
+next. Foreshadowing retrieval with thoughts is cru-
+cial in this context. It helps direct the retrieval
+process, avoid repetitions, and, more importantly,
+allows for iterating upon and correcting previously
+erroneous retrievals. A few such demonstrations
+can be found in Table 2.
+5 Experimental Setup
+5.1 Datasets
+Queryset Our experiments are focused on open
+domain question answering tasks including both
+single and multi-hop benchmarks. For single-hop,
+we use the Open-NQ (Kwiatkowski et al., 2019)
+dataset. To evaluate multi-hop reasoning, we look
+into Hotpot-QA (Yang et al., 2018) and Musique-
+Ans (Trivedi et al., 2022b). The latter includes
+varying hops and different composition operations,
+offering a rich test-bed for how well RICHES can
+generalize across a diverse range of queries.
+Corpus Section 3.4 describes multiple strategies
+to index the corpus. Each type of retrieval key
+needs to be accompanied with its own corpus. Ti-
+tle, passage and sentence keys are derived from the
+Wikipedia corpus presented in Bohnet et al. 2022.
+For propositions, we re-use the Factoid-Wiki cor-
+pus built by Chen et al. 2023. This is derived from
+Bohnet et al. 2022 by decomposing passages into
+smaller, compact propositions using a ﬁnetuned
+Flan-T5-large (Wei et al., 2021) model. We drop
+the titles from Factoid-Wiki and only use the propo-
+sitions (See Appendix A.3).
+5.2 Evaluation
+The standard metric for ODQA benchmarks has
+predominantly been F1 answer match accuracy.
+However, language models are prone to hallucinate
+and F1 stand-alone can be misleading as the answer
+may not be conditioned on the evidence. Attribu-
+tion (Rashkin et al., 2021) helps us trade-off answer
+accuracy for faithfulness to the evidence. Thus, we
+measure two competing metrics: i) end-to-end an-
+swer accuracy with F1 and ii) attribution of the
+answer to evidence using AutoAIS (Bohnet et al.,
+2022). AutoAIS, or AIS for short, is automatically
+computed by classifying whether the evidence text
+entails the question and predicted answer pair. We
+re-use the NLI scorer and formulation from Bohnet
+et al. 2022 (See details in Appendix A.3). The evi-
+dence text here is the concatenation of all retrieval
+keys in the RICHES output. The unconstrained
+thoughts are discarded from evaluation. Only the
+top beam output is considered for evaluation.
+5.3 Models and Inference
+Throughout our experiments, we use off-the-shelf
+instruction-tuned models in a few-shot setting,
+without any ﬁne-tuning. We test the instruction-
+8891

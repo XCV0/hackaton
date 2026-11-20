@@ -1,0 +1,95 @@
+pute the private final-layer logits ℓ(i) priv via the pub-
+lic model conditioned on each Pi. (2) Contrastive
+delta extraction. Let ppub = softmax(ℓpub) and
+p(i) priv = softmax(ℓ(i) priv). We compute the log-
+probability difference between the private and pub-
+lic distributions to obtain the private delta:
+ℓ(i) ∆ = log p(i) priv − log ppub.
+(3) Delta clipping and aggregation. We clip
+each delta element-wise to [−C, C], average over
+K private samples, and add back the public log-
+probabilities to form the utility vector:
+clipC
+(
+ℓ(i) ∆ ) = max ( −C, min(C, ℓ(i) ∆ ) ) ,
+u = log ppub + 1 K K∑ i=1 clipC ( ℓ(i) ∆ ) ,
+where C is derived in Appendix B.6. (4) DP sam-
+pling. Following the adaptive truncation of Li
+et al. (2023a), we restrict sampling to the high-
+probability candidate set Vhead (Sec. 3.3) to ex-
+clude low-probability token interference. We sam-
+ple yt ∼ softmax(u/τ ), equivalent to the expo-
+nential mechanism (McSherry and Talwar, 2007)
+with utility u and temperature τ , satisfying ρtoken-
+zCDP per step. We accumulate costs via zCDP
+sequential composition (Bun and Steinke, 2016):
+ρ = ∑ t ρ(t) token. If ρ exceeds the per-query bud-
+get ρquery, generation falls back to outputting the
+public candidate x∗ (Sec. 3.3).
+By introducing context-aware contrastive decod-
+ing, this module shrinks the DP-protected object
+from full private logits to the private delta ℓ∆, re-
+ducing the per-access privacy cost. Meanwhile,
+aggregating the delta back onto the public logits en-
+sures the sampling distribution smoothly degrades
+to the public model as the budget tightens. Fur-
+thermore, this construction preserves the factuality
+improvements of contrastive decoding while com-
+pressing the privacy budget (Shi et al., 2024).
+4 Privacy Analysis
+We defer the complete formal privacy analysis to
+Appendix A and present only a sketch here.
+The cluster-size release (Sec. 3.2) adds Gaus-
+sian noise N (0, σ2) to the cluster-size vector with
+ℓ2-sensitivity ∆2 = 1, incurring ρcls = 1/(2σ2).
+The adaptive triggering module (Sec. 3.3) accesses
+no private data and incurs no privacy cost. At
+each triggered private step, DP contrastive decod-
+ing (Sec. 3.4) invokes the exponential mechanism
+with L∞-sensitivity ∆u = 2C/K and temperature
+τ , yielding ρtoken = 2C2/(K2τ 2). Let Nmax be
+the maximum allowed access count per cluster, be-
+yond which the cluster is safely skipped during
+retrieval, and Tpriv be the maximum number of pri-
+vate generation steps allowed per query. By parallel
+composition, privacy costs across disjoint clusters
+do not accumulate and only maximum per-cluster
+cost matters. By sequential composition across all
+steps, the total zCDP budget accumulates as:
+ρtotal = 1 2σ2 + Nmax · Tpriv · 2C2 K2τ 2 .
+Finally, the standard ρ-zCDP to (ε, δ)-DP conver-
+sion (Bun and Steinke, 2016) yields:
+ε = ρtotal + 2
+√
+ρtotal ln(1/δ), ∀ δ ∈ (0, 1).
+Overall, SparsePay-RAG leverages public priors
+to compress Nmax, Tpriv, and C, thereby reducing
+the total privacy budget consumption.
+5 Experiments
+5.1 Settings
+Datasets. Following Koga et al. (2024); Wu et al.
+(2026), we evaluate on three datasets spanning
+open-domain QA and a privacy-sensitive applica-
+tion. Natural Questions (NQ) (Kwiatkowski et al.,
+2019) and TriviaQA (Joshi et al., 2017) are stan-
+dard RAG benchmarks using Wikipedia (∼21M
+passages) as the external knowledge source. Fol-
+lowing the prior work, we randomly draw 100 ques-
+tions from each benchmark for testing. ChatDoc-
+tor (Li et al., 2023b) consists of medical dialogues
+in the healthcare domain. We randomly draw 100
+patient questions as the test set and use the remain-
+ing ∼115K dialogues as the private external cor-
+pus, simulating a realistic privacy-sensitive RAG
+deployment. See Appendix B.2 for details.
+Baselines. We compare with the following
+methods: (1) Non-RAG directly queries the LLM
+without retrieval augmentation, serving as a per-
+formance lower bound. (2) Non-Private RAG
+performs standard retrieval-augmented generation
+without any privacy protection, representing the
+utility upper bound. (3) DPVoteRAG (Koga et al.,
+2024) protects privacy by applying a differentially
+private voting mechanism at every single gener-
+ation step. (4) DPSparseVoteRAG (Koga et al.,
+45298

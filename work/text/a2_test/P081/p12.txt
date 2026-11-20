@@ -1,0 +1,72 @@
+Zhao et al.
+Models BERTScore BLEU ROUGE METEOR
+FSRAG 0.7853 0.0963 0.1459 0.1490
+FLARE 0.8328 0.1637 0.1011 0.1923
+FL-RAG 0.8130 0.1551 0.2171 0.2054
+Dragin 0.8259 0.2036 0.2053 0.2081
+SRRAG 0.8346 0.2013 0.2722 0.2756
+MedRAG 0.8359 0.2189 0.2863 0.2822
+Table A1: Results of objective performance on CCPD
+Configuration L1 L2 L3
+w/ augmented feature node 79.25 75.47 67.92
+w/o augmented feature node 66.04 60.38 49.06
+w/ diagnostic key difference node 79.25 75.47 67.92
+w/o diagnostic key difference node 77.36 71.70 64.15
+w/ L2 & L3 79.25 75.47 67.92
+w/o L2 & L3 63.64 57.58 51.52
+Table A2: Impact of KG components on the performance of
+MedRAG
+D.2 Example of Diagnostic Differences
+Knowledge Graph
+While lumbar canal stenosis and sciatica share some similar features,
+the critical distinguishing factor lies in the response to sitting. In
+lumbar canal stenosis, features are typically alleviated when sitting,
+whereas in sciatica, sitting tends to exacerbate the discomfort. The
+augmented disease features are shown in Figure A3.
+E Report Generation Evaluation
+To evaluate the report generation of MedRAG, we conducted both
+objective and subjective evaluations on the generated reports of
+CCPD, since the DDXPlus dataset does not contain report data.
+• Objectice Evaluation: We use BERTScore, BLEU, ROUGE,
+METEOR as metrics. The result is shown in Table A1.
+• Subjective Evaluation: Reports were generated for 10
+randomly selected patients using SRRAG and MedRAG.
+The results were scored on 4 Mini-CEX criteria (Scale 1-
+9) [37], and assessed by GPT-4o [47], with validation by
+doctors. The results were: SRRAG 277, MedRAG 290 out of
+360.
+F Ablation Study on KG Components
+In order to evaluate how different components in diagnostic dif-
+ferences KG, we conducted extra ablation study focusing on key
+components. Specifically, we examined the effects of diagnostic key
+difference nodes, augmented feature nodes, patient clinical feature
+matching, and the augmentation of diagnostic differences.
+Results in Table A2 show that KG components like diagnostic
+key difference nodes, augmented feature nodes, the patient clin-
+ical feature matching and the augmentation of diagnostic differ-
+ences contribute to MedRAG’s overall effectiveness significantly.
+Moreover, the hierarchical structure of the constructed diagnostic
+differences KG directly impacts the experimental results as well.
+G User Interface (UI)
+This section introduces how our MedRAG can be integrated into
+the user interface design of the healthcare copilot system. The
+healthcare copilot offers three modes of interaction, as shown in
+Figure A4.
+• Consultation Mode: By monitoring the consultation dia-
+logue between the doctor and patient, the system extracts
+patient manifestations in real-time and provides diagnostic
+suggestions along with proactive questioning recommen-
+dations to guide the consultation.
+• EHR Mode: By uploading the patient’s EHR to the health-
+care copilot system, this system automatically extracts the
+relevant patient manifestations for diagnostic purposes.
+• Typewritting Mode: The user can manually input the
+patient’s manifestations into the system.
+On the results page shown in Figure A5, the output of the health-
+care copilot system include diagnoses, instructive follow-up ques-
+tions, physiotherapy treatments, and medication treatments. This
+UI integrates the most essential functions derived from extensive
+interviews we conducted with numerous healthcare practitioners.
+It ensures that the healthcare copilot system meets the practical
+needs of healthcare professionals, ultimately enhancing the overall
+quality of care.

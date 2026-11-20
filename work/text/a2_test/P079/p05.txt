@@ -1,0 +1,110 @@
+TABLE I
+RETRIEVAL PERFORMANCE (TOP-k=100).
+Strategy Norm. Recall nDCG
+Whole-Document (Dense) 0.1819 0.6123
+Single-Field Summary (Dense) 0.1785 0.6055
+Single-Field Causes (Dense) 0.1450 0.4405
+Multi-Field (Summary+Causes; Dense) 0.3060 0.5336
+Multi-Field (All Fields; Dense) 0.4981 0.7512
+Multi-Field (All Fields; BM25) 0.4215 0.7034
+Multi-Field (All Fields; Hybrid) 0.5463 0.7697
+TABLE II
+GENERATION PERFORMANCE (TOP-k = 40).
+Metric LLM-only Proposed Improv.
+ROUGE-L (F1) 0.192 0.206 +7.3%
+Semantic Sim. (SBERT) 0.723 0.724 +0.1%
+LLM-as-a-Judge (1–5) 3.340 3.723 +11.5%
+L1 Accuracy 0.771 0.774 +0.4%
+L2 Micro-F1 0.460 0.490 +6.5%
+L2 Jaccard 0.365 0.395 +8.2%
+B. Generation Results
+Table II reports end-to-end improvements when the gener-
+ator is grounded in retrieved precedents (top-k = 40 chunks).
+The judge score increases substantially (3.340 → 3.723;
++11.5%), while SBERT similarity changes only marginally.
+This pattern is expected: an instruction-tuned LLM can
+produce fluent summaries from the scenario alone, but re-
+trieval primarily improves factual consistency and key-cause
+coverage by injecting concrete precedent evidence.
+For tags, improvements are smaller but consistent (e.g., L2
+micro-F1 0.460 → 0.490), indicating that retrieval provides
+useful signals for taxonomy alignment even without super-
+vised tag training. In practice, the largest qualitative benefit is
+that outputs become precedent-grounded: the generator can
+cite retrieved causes/dispositions as support, which is not
+possible for an LLM-only baseline.
+While traditional supervised classifiers can perform iso-
+lated tag prediction, they are structurally incapable of gener-
+ating the cohesive causal narratives or providing the traceable
+precedent evidence required for this task. Therefore, to
+evaluate the end-to-end framework, we compare the proposed
+method against an LLM-only baseline, explicitly isolating the
+impact of retrieval grounding on structured generation.
+C. Case Study
+Table III highlights two representative cases demonstrat-
+ing how multi-field retrieval grounding mitigates halluci-
+nated causal links. In the LLM-only setting, the model
+frequently relies on spurious correlations derived from tan-
+gential scenario details. For instance, in the stranding case,
+the LLM-only baseline infers vague structural defects from
+the “sudden impact” description, completely missing the
+geographical hazard. In the explosion case, the presence of an
+intoxicated crew triggers an erroneous logical leap to alcohol
+vapors as the ignition source.
+Conversely, the proposed framework leverages retrieved
+precedents—specifically utilizing the technical and legal
+context preserved in the independent Causes and Disposition
+fields—to ground the generation process. This contextual in-
+jection shifts the model’s reasoning from speculative deduc-
+tion to precedent-aligned diagnostic inference. By accessing
+historically and situationally similar records, the framework
+correctly identifies specific technical mechanisms, such as
+charting failures and propane gas ignition, thereby producing
+an analysis highly consistent with expert judgments.
+VI. DISCUSSION AND LIMITATIONS
+The experimental results validate that structuring RAG
+architectures around domain-specific document fields sig-
+nificantly enhances downstream generation. By isolating
+descriptive narratives (Summary) from technical and legal
+reasoning (Causes and Disposition), our multi-field hybrid
+retrieval strategy effectively reconstructs the diagnostic rea-
+soning pathway utilized by expert investigators. This struc-
+tural alignment ensures that the generator is grounded not
+merely in lexically similar texts, but in historically and
+causally analogous precedents. Furthermore, the fusion of
+dense and sparse retrieval signals proves essential for mar-
+itime safety workflows, providing robustness against vocab-
+ulary mismatches while preserving the precise retrieval of
+critical regulatory and technical terminology.
+Despite these gains, certain limitations remain within
+the evaluation framework. Due to the absence of large-
+scale expert relevance labels, retrieval performance was
+measured using a metadata-based proxy score. Additionally,
+the hierarchical cause tags were assigned via rule-based
+extraction rather than manual annotation, and the LLM-
+as-a-judge evaluation carries the inherent risk of model-
+dependent bias. However, formulating this fixed, heuristic
+proxy directly addresses the practical lack of a universal gold
+standard in specialized administrative domains. It provides
+a reproducible, systematic baseline for large-scale strategy
+comparisons under realistic data constraints. Ultimately, the
+consistent end-to-end generation improvements confirm that
+optimizing for this retrieval proxy translates into more accu-
+rate and traceable RCA outputs, while highlighting future
+directions for enhancing the uncertainty-awareness of the
+evaluation framework [27].
+VII. CONCLUSION
+This paper proposed a multi-field hybrid RAG frame-
+work for maritime accident RCA, utilizing a comprehensive
+dataset of KMST adjudication reports. By structuring his-
+torical records into field-aware “incident cards” and fusing
+sparse and dense retrieval signals via RRF, the proposed
+method significantly enhances the quality of precedent re-
+trieval. To address the lack of human-annotated gold stan-
+dards in specialized domains, we introduced a reproducible,
+metadata-based evaluation proxy that enables a systematic
+and objective comparison of retrieval strategies. End-to-
+end experiments demonstrate that these retrieval enhance-
+ments directly translate into more accurate, structured, and
+precedent-grounded RCA generation compared to an LLM-
+only baseline. Our framework establishes a practical foun-

@@ -1,0 +1,97 @@
+41
+Class Description Example context Example query
+fact_single
+Answer is present in the context. It has
+one unit of information and cannot be
+partially correct.
+A table of a sensor’s
+electrical properties
+What supply voltage
+should I use?
+summary
+Answer is present in the context. It has
+multiple units of information. Trading
+completeness for conciseness yields a
+partially correct answer.
+The conclusion sec-
+tion of a paper
+Summarize their key
+findings for me
+reasoning
+Answer is not explicitly mentioned in
+the context but can be inferred from it
+via simple reasoning
+An ESG report sec-
+tion on a company’s
+electricity usage
+Has there been a net
+increase in consump-
+tion over 5 years?
+unanswerable Answer is neither present in the con- text nor can be inferred from it Claims from a patent on a coffee machine Is tomato a fruit or a vegetable?
+Table 1: Proposed taxonomy for classifying (context, query) pairs based on the nature of the request.
+volves describing all the labels to an LLM and
+prompting it to select the best match for a given
+example (Es et al., 2024; Chen et al., 2024). We in-
+vestigate this approach using the prompt detailed in
+Appendix D with two LLMs - Llama-2-70b (Tou-
+vron et al., 2023) and Llama-3-70b (Meta, 2024).
+To obtain ground-truth labels, we employed four
+human annotators to label the same randomly cho-
+sen subsets of 100 question-context pairs from each
+of the six datasets mentioned in Section 3.
+The quality of the questions analyzed varies sig-
+nificantly: they can be incomplete, ambiguous or
+completely unintelligible. This makes the labelling
+task difficult and can lead to disagreement between
+annotators. To account for this, we check the level
+of concordance between the annotators and their
+majority vote, which is used to define a single la-
+bel per entry. The majority vote discards entries
+in which a consensus is not found, avoiding am-
+biguous or otherwise bad quality questions. To
+demonstrate the label variability per annotator, we
+use Fleiss’ kappa (Fleiss, 1971) κ(Ai, M − Ai)
+between an annotator Ai and the majority vote
+excluding Ai (M − Ai). We found values of
+κ(Ai, M − Ai) ranging from 0.62 to 0.69, showing
+a moderate to strong agreement between the anno-
+tators and the majority. To contrast this behavior
+to that of an LLMs labeller, we compare the values
+of κ(LLM, M − Ai) to κ(Ai, M − Ai) for a given
+Ai. We find that the concordance between M − Ai
+and Llama-2-70b is between 67% to 71% lower
+than the concordance between M − Ai and Ai.
+Llama-3-70b performs better, with a concordance
+only 9% and 16% lower than between M − Ai and
+Ai. We choose the Llama-3-70b to generate labels
+for the following studies, which we will reference
+as LLama3 labels.
+While we observed that Llama-3-70b tends to
+correctly differentiate between labels, one noted
+discrepancy was its preference for fact_single over
+other labels, particularly summary. This confu-
+sion is related to how the information requested
+by the question is present in its ground con-
+text: Llama-3-70b tends to label questions as
+fact_single even if they ask for multiple pieces of
+information, if these pieces are contiguous within
+the context. For example, given a context that de-
+scribes a list of devices and their connections, the
+question “What devices use a USB cable?” is a
+summary question because any subset of devices
+would still be a correct answer, albeit incomplete.
+Llama-3-70b, however, classifies this example as
+fact_single if the list of devices is presented as a
+single sentence. The full confusion matrix is pre-
+sented in Appendix B.
+Our LLM-based labelling strategy performs zero-
+shot classification as the prompt only contains a
+description of the labels. One could also include
+(context, query, human label) triplets in the prompt
+to perform few-shot classification. However, this
+strategy makes the prompt longer as typical con-
+texts contain several sentences, leading to much
+higher labelling costs. LLMs also have a finite con-
+text window (e.g., 8192 tokens for Llama-3-70b),
+which limits the number of triplets that can be in-
+cluded in the prompt, in turn limiting the accuracy

@@ -1,0 +1,104 @@
+Figure 4: Accuracies monoRAG and MultiRAG in
+low- (LR) and high-resource (HR) languages. *(differ-
+ences are above the bars).
+setting, we performed further experiments by re-
+stricting the retrieval to a set formed by specific
+language (SL) and English, which we define as
+(En+SL). Figure 8 (Appendix M) shows the dif-
+ferences in terms of performance when the scope
+of the retrieval of MultiRAG is broader, i.e. all
+languages available in the dump used in the ex-
+periment (Wikipedia versions as detailed in §3)
+and (En+SL). On average, extending the scope of
+retrieval beyond the subset represented of En+SL
+has benefits except GPT-4o in the MKQA task and
+Llama-3-8b in the case of MLQA.
+Hence, although MultiRAG consistently
+achieves higher performance than monoRAG, there
+are some cases where the heterogeneity of lan-
+guages is not beneficial. For instance, the case in
+Appendix R where passages in English is not taken
+into account by the model. Therefore, to analyse
+whether the component affecting performances is
+the ability to leverage the different languages in
+different retrieved documents, we propose an inter-
+vention strategy by introducing a translation phase
+of the retrieved multilingual knowledge and dis-
+cuss the results in §4.3.
+MKQA
+MLQA
+XoR Ty-QA
+Average
+Model
+∆
+∆
+∆
+GPT-4o
+Avg +3.8 +1.3 +5.5 +3.5
+HR +4.2 +0.7 +2.7 +2.5
+LR +1.8 +2.1 +7.1 +3.7
+Command-R
+Avg +2.2 +2.8 +1.6 +2.2
+HR +2.7 +3.7 +3.9 +3.4
+LR +5.2 +4.3 +5.5 +5.0
+Llama-3-8b
+Avg +4.0 +3.2 +1.6 +2.9
+HR +1.8 +2.4 +3.9 +2.7
+LR +3.7 +4.2 +4.6 +4.1
+Table 2: Differences (∆) between CrossRAG and
+MultiRAG.*In bold, the highest differences for
+model.
+4.3 When translating matters
+The red bars in Figure 2 show that the average
+results obtained by CrossRAG are consistently
+better than those of other approaches. In gen-
+eral, translating the retrieved information into En-
+glish benefits the final performance6. In Table
+2, we report the performance improvements over
+MultiRAG differentiated for LR and HR. Here,
+we observe that in HR, there are improvements of
+around +2.5 for GPT-4o and Llama-3-8b and +3.4
+for Command-R when compared to MultiRAG.
+In contrast, we note larger benefits for LR (respec-
+tively +3.7 for GPT-4o, +5 for Command-R and
++4.1 for Llama-3-8b on average). These results
+highlight the limitations that the LLMs examined
+have when operating via MultiRAG concerning
+documents in multiple languages (see the case dis-
+cussed in §4.2 in Appendix R).
+However, since the translation component mat-
+ters, we proposed the same experimental set-
+ting using (i) GPT-4o as the translation tool, (ii)
+instruction-tuning at the translation level.
+tRAG
+tRAG
+CrossRAG
+CrossRAG
+Model
+GPT-4o
+MKQA 46.5 48.3 60.4 62.0
+MLQA 46.4 47.9 55.4 58.8
+XoR TDQA 37.7 38.2 45.8 49.3
+Command-R
+MKQA 39.9 40.3 56.4 57.8
+MLQA 45.5 46.0 54.8 56.2
+XoR TDQA 36.6 37.3 42.0 44.5
+Llama-3-8b
+MKQA 41.4 42.0 57.2 58.5
+MLQA 44.5 44.6 53.6 55.4
+XoR TDQA 37.0 37.7 44.5 47.3
+Table 3: Average performances using two different
+translation systems. *In bold, the differences that ex-
+ceed at least 2 points. **XoR TiDy-QA (XoR TDQA)
+GPT-4o as translator Here, we propose differ-
+ent settings to observe the effect of various systems
+on the performance of our CrossRAG. Hence, we
+used GPT-4o (GPT-4o as in §3.2) as the transla-
+tion tool. Then, using the prompt in Appendix K,
+we translated both retrieved documents and ques-
+tions (in two distinct experimental phases) and re-
+produced the experimental setting proposed earlier.
+Table 3 compares the results using two different
+6In Appendix U, we experimented with translation into
+languages other than English.
+702

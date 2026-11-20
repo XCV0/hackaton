@@ -1,0 +1,48 @@
+4 Author name / Procedia Computer Science 00 (2024) 000–000 
+3.1. Used Datasets 
+In this work, two different datasets were used for experimentation. The first is the Arabic EduText Secondary 
+School dataset which was compiled by the authors while the second is the ARCD (Arabic Reading Comprehension 
+Dataset) [7]. Each of the datasets is briefly described below.  
+3.1.1. The Arabic EduText Secondary School Dataset  (Ar_EduText) 
+The goal of creating this dataset was to facilitate the testing of multiple embedding and generation models within 
+a manageable scope. The dataset was compiled by randomly selecting six freestyle reading passages from high school 
+Arabic textbooks which are written in MSA. Each passage was input to OpenAI’s GPT 4o3 model using the prompt: 
+"You are an expert in Arabic. Given the following text (a paragraph), create five or six different Arabic questions." 
+The generated questions were manually reviewed, and depending on their suitability, they were either left as is, edited, 
+or rejected. This process yielded a set of 158 distinct questions, each linked to the text segment from which it was 
+generated. To provide answers for the questions as part of the dataset, each segment from which a question originated 
+was submitted back to OpenAI’s GPT-3.5 Turbo model4, along with the question and the prompt: "Given the following 
+context (segment text) and the following question (edited question), provide a concise answer." The answers were 
+also manually reviewed, and both the automatically generated and edited versions were retained. A final step was 
+carried out to generate an Egyptian dialect version of the questions. The objective of this step was to generate data 
+that can be used to test the ability of semantic representation models to capture semantic similarities across different 
+dialectal representations. To generate the Egyptian Arabic version of the questions, the original question and the 
+following prompt were passed to the GPT-3.5 Turbo model: “You are fluent in Arabic and its variations. Rewrite the 
+following question in the Egyptian Arabic dialect: [question].” The outputs were manually reviewed and edited by the 
+authors, who are fluent in Egyptian Arabic. The generated Egyptian dialect questions often suffered from structural 
+issues, and frequently included Modern Standard Arabic (MSA) terms instead of Egyptian Arabic terms (e.g., ' حرائق '
+instead of '  حراي ' ق and ' مياه 'instead of ' ميه .)'These issues were resolved after editing 75.3% of the generated questions, 
+and both the auto-generated and edited versions were retained. The file containing all segments, their associated 
+questions, their auto-generated answers, their manually revised answers, their auto-generated Egyptian dialect 
+versions of the questions, and their corresponding corrections were then saved and are available for download from 
+the project’s GitHub repository5. 
+ This dataset is intentionally compact and was created as such to enable detailed revisions of answers, and the 
+generation and refinement of questions, particularly those articulated in the Egyptian dialect.  
+3.1.2. The Arabic Reading Comprehension Dataset (ARCD) 
+The Arabic Reading Comprehension Dataset (ARCD)[7] is composed of 1,395 questions and their answers crowd-
+sourced from 155 Wikipedia articles spanning diverse domains. Each entry in the dataset is also associated with a 
+paragraph from which an answer can be extracted. In total, there are 460 unique paragraphs in the dataset. The dataset 
+was specifically developed to address the scarcity of Arabic question answering (QA) datasets.  
+Upon reviewing the data, the authors observed that many of the questions could only be fully understood when 
+considered in the context of the immediately preceding question, as shown in Table 1. A query like the one in the 
+second row, for example, cannot yield any meaningful results, regardless of the expressiveness of the semantic 
+embedding model employed. This problem is not specific to the Arabic language and can occur across different 
+datasets spanning various languages when contextual dependencies between questions influence their interpretation. 
+To eliminate the impact of these dependencies on the results of the carried-out experiments, the authors of this work 
+attempted to disambiguate questions with dependencies. Towards this end,  all questions were input to the GPT 3.5 
+Turbo model along with the prompt found in Appendix A. Disambiguating the questions using a straight forward 
+ 
+ 
+3 https://platform.openai.com/docs/models/gpt-4o 
+4 https://platform.openai.com/docs/models/gpt-3-5-turbo 
+5 https://github.com/SElBeltagy/ArRagExperiments

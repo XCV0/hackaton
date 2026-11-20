@@ -1,0 +1,102 @@
+As with INFOP, CITEP has collection and refer-
+ence variants, which differ in the form of the cited
+documents used in evaluation.
+Collection Precision evaluates support between
+subclaims in P and their associated cited docu-
+ments directly—i.e., the raw text (or video) content.
+This is similar to ARGUE’s Sentence Support;
+however, instead of evaluating support between a
+sentence and citation, we evaluate support between
+a subclaim and a cited document.
+Reference Precision evaluates support between
+subclaims in P and subclaims obtained from the
+associated cited documents, rather than the raw
+document content. In our experiments, we cre-
+ate a mapping from each cited document di to
+the set of reference subclaims CR,di attested by
+di: {(di, CR,di ) | P cites di}, and evaluate support
+against CR,di rather than the document itself:
+s(cP i , CR,di ) (4)
+Prior metrics, ARGUE and ALCE, evaluate full
+sentences against their citations, but this requires
+the sentence to be fully supported by each docu-
+ment (ARGUE) or the cited documents (ALCE).
+This overpenalizes multi-premise sentences for
+containing un- or previously supported subclaims
+alongside supported ones, generally rewarding un-
+natural texts with short, single-subclaim sentences.
+4.2.2 Proper Attribution (CITER)
+CITER is the proportion of reference subclaims
+(CR) that are attested by P via sentences that cite
+valid sources—i.e., sources that also attest those
+subclaims. We first decompose the reference R
+into subclaims and create a mapping from each
+subclaim cR i to the set of documents Di in the
+collection that (individually) attest that subclaim:
+{(cR i , Di) | cR i ∈ R}. Next, we create another
+mapping from each document dj that is cited in
+P to the set Sj of sentences in P that cite dj :
+{(dj , Sj ) | dj ∈ P }. We then compose these two
+mappings to obtain the proportion of reference sub-
+claims that are both attested in P and supported by
+a valid source citation:
+recall(CR, P, D) =
+1
+|CR|
+∑
+cR i ∈CR
+max
+dj ∈Di
+(
+max
+sk ∈Sj
+s(cR i , sk)
+)
+(5)
+Model P Text Audio Video AudVid
+AF 7B 50.9 60.0 − −
+Q2-A 7B 50.9 77.9 − −
+Q2.5-V 7B 64.0 − 22.1 −
+Q3.5 9B 60.1 − 76.3 −
+Q3.5 27B 73.3 − 79.6 −
+Q2.5-O 7B 65.3 81.9 50.5 45.2
+CLUE 3B 63.9 89.8 74.6 70.1
+Table 1: Accuracy of claim grounding methods. P:
+Parameters. AF: Audio Flamingo. Q: Qwen, A-Audio
+VL-Vision Language, O-Omni.
+We take the max support score over all documents
+dj ∈ Di that attest the target subclaim (cR i )—and
+over all sentences sk in P that cite dj —because
+we care about the best support that P provides for
+each cR i anywhere in the text.
+Unlike INFOR, CITER does not have the dis-
+tinction between collection and reference settings,
+as CITER relies on the set of reference subclaims,
+ensuring that they are recalled with a valid source.
+5 Grounding Claims in Multimodal Data
+An important component of MIRAGE is the ability
+to ground claims in multimodal data. We evaluate
+claim grounding across four modality settings—
+Text (UNLI (Chen et al., 2020); PeopleProfile
+(Walden et al., 2025b)), Audio (CLOTHO (Drossos
+et al., 2020; Deshmukh et al., 2024); WIKIVIDEO-
+Audio), Video, and Audiovisual (WIKIVIDEO)—
+using audio-language (Goel et al., 2025; Chu et al.,
+2024), vision-language (Bai et al., 2025; Team,
+2026), and omnimodal models (Xu et al., 2025;
+Zhang et al., 2026). Full details are in Appendix A.
+In Table 1, we find that most methods struggle
+with claim verification. Modality-specific models
+perform decently in their respective modalities but
+lack the coverage needed for general-purpose mul-
+timodal evaluation, while omnimodal models offer
+broader coverage at varying quality. Both CLUE
+(omni; Zhang et al., 2026) and Qwen3.5-27B (vl;
+Team, 2026) achieve strong performance on their
+respective modalities.
+6 Alignment With Human Judgments
+Evaluation Setup We evaluate MIRAGE on
+three datasets spanning text and audiovisual RAG.
+Together these let us bracket the difficulty spectrum
+of multimodal evaluation: RAGTIME (Lawrie
+40236

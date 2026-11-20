@@ -1,0 +1,95 @@
+Stance: 0
+−−−
+Few Query Few Stance
+system_few_query_few_stance: |−
+You are an expert climate analyst specializing
+in assessing companies’ engagement
+stances on climate policies. You can only
+give a score between −2 and 2 where the
+scores mean as follows :
+−2: Position contradicts IPCC analysis OR
+Opposes policy
+−1: Position appears misaligned with IPCC
+analysis OR Unsupportive of policy
+and/or communicates support for the
+policy but with major caveats and/or
+conditions that would weaken the strength
+of the proposal
+0: Unclear if position is aligned with IPCC
+guidance OR Unclear if position is
+supportive of policy
++1: Broad alignment with IPCC analysis OR
+General or high−level support for the
+policy
++2: Detailed position that is aligned with IPCC
+analysis OR Strong Support for the policy
+and/or advocacy that would strengthen the
+policy further
+**Important**:
+− You must always use the report_stance tool
+provided to analyze the evidence and
+determine a company’s position on the
+provided speciﬁc climate policy query.
+− Do not respond without using the tool.
+− You can only give a score between −2 and 2.
+−−−
+Question: Is the organization supporting policy
+and legislative measures to address
+climate change: Renewable energy
+legislation, targets, subsidies, and other
+policy?
+Context: As major businesses and employers
+in North Carolina, we are writing to you
+to express our support for the third−party
+leasing program in House Bill 589,
+Competitive Energy Solutions for NC,
+and to identify the Green Source Rider
+program as an area in need of further
+improvement during implementation. We
+applaud the numerous energy stakeholders
+and legislators who have worked to draft
+this consensus legislation over the past
+nine months, and we remain grateful to
+Speaker Tim Moore and Senate President
+Pro Tempore Phil Berger for convening
+the energy stakeholders' process last
+September. We believe the Green Source
+Rider (GSR) provision in HB589 requires
+improvement to ensure customers will
+participate in the program. HB589 takes a
+few steps back from the previous pilot
+program, which only proved viable for
+three North Carolina businesses. We are
+concerned that preventing customers from
+achieving 100% renewable targets and by
+prescribing certain program requirements
+could negatively impact the viability of
+the GSR program. We believe that choice
+and competition in the renewable energy
+sector are as important as it is in all other
+aspects of our businesses and supply
+chains. More choices for companies to
+access renewable energy would give
+North Carolina businesses a competitive
+edge and allow us to keep our energy
+investment dollars here in the state.
+Establishing a cost−competitive corporate
+renewable purchasing mechanism that
+works for diverse businesses, while
+ensuring no additional cost to
+non−participating customers, has been
+successfully achieved in 20 other states
+and many international markets−leading
+to over $15 billion in direct corporate
+investment.
+Stance: 2
+−−−
+Question: Is the organization transparent and
+clear about its position on climate change
+science?
+Context: Humanity is consuming natural
+resources at an astonishing rate. During
+the 20th century, global raw material use
+rose at about twice the rate of population
+growth. Every year, humanity consumes
+124

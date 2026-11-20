@@ -1,0 +1,78 @@
+HotpotQA ASQA MuSiQue TriviaQA
+Model F1 Faith AnsR ROUGE-L Faith AnsR F1 Faith AnsR F1 Faith AnsR
+Standard RAG 48.5 86.2 85.1 35.8 84.5 83.2 46.2 87.1 89.4 60.2 83.5 84.1
+ReAct 56.4 88.2 89.5 40.2 90.1 88.5 50.1 89.5 93.8 67.4 90.4 90.1
+IRCoT 53.8 90.5 91.2 36.5 88.4 86.2 46.5 90.8 90.4 68.4 91.8 88.6
+Self-RAG 51.2 90.1 89.8 44.1 92.5 91.4 52.3 94.6 94.8 65.1 91.2 89.9
+SeaKR 54.5 92.4 90.5 42.8 91.2 89.7 54.8 93.1 95.5 71.8 94.5 92.4
+R3-RAG 59.6 91.8 91.2 43.5 92.1 90.8 58.2 93.5 94.2 73.4 93.8 91.5
+RAG-RL 55.4 91.2 90.8 41.9 90.8 89.5 59.1 94.8 96.1 69.5 94.6 92.1
+LCR-RAG 63.8 94.5 93.4 48.2 94.6 92.8 62.5 96.8 97.5 78.2 97.1 94.5
+Table 1: Main results comparing LCR-RAG with state-of-the-art baselines using Qwen3-8B as the backbone
+generator. Evaluations are conducted across four diverse benchmarks: HotpotQA (multi-hop reasoning), ASQA
+(long-form ambiguity), MuSiQue (complex connected reasoning), and TriviaQA (fact retrieval). Metrics include
+F1/ROUGE-L for utility and RAGAS Faithfulness/Answer Relevance for hallucination control. All reported scores
+are the average of 5 runs.The best-performing model for each metric is highlighted in bold.
+) )DLWK
+
+
+
+
+6FRUH
+/&55$*)XOO
+ZR332
+ZR/&5
+Figure 3: Ablation study on the core architectural com-
+ponents of LCR-RAG.
+Validating PPO Agent Generalization Finally,
+to prove that the PPO agent provides value beyond
+a fixed set of rules, we created a “long-tail” test set
+of difficult problems that the rule-based optimizer
+consistently fails to solve. As shown in Table 2,
+the rule-based system fails on these problems by
+definition. The PPO agent, however, solves a sig-
+nificant portion of them, achieving an F1 score of
+50.3. This provides powerful evidence that the
+PPO agent learns to generalize and discover novel
+solutions for complex problems that lie beyond the
+scope of predefined rules.
+Optimizer Model F1 Score Faithfulness
+Rule-Based Optimizer 25.8 0.31
+PPO Agent (Ours) 50.3 0.85
+Table 2: Performance on “long-tail” problems that the
+rule-based optimizer fails to solve.
+6 Analysis and Discussion
+6.1 Hyperparameter Analysis
+Effect of Maximum Iteration Budget M We an-
+alyze the impact of the maximum iteration budget
+M ∈ {1, . . . , 10} on both task performance and
+inference latency. As shown in Figure 5, increasing
+M yields significant performance gains in the early
+stages (M ≤ 4), after which the improvement sat-
+urates, indicating a diminishing return. Notably,
+while the maximum budget increases linearly, the
+average inference latency grows sub-linearly. This
+efficiency gain is attributed to our adaptive early
+stopping mechanism, which terminates the refine-
+ment process for easier queries at early steps, pre-
+venting unnecessary computation. Consequently,
+we select M = 5 as the default setting to achieve
+an optimal balance between quality and efficiency.
+Reward Weight Sensitivity We study the sen-
+sitivity of LCR-RAG to the reward weight ratio
+wlogic : wf act by analyzing the main task perfor-
+mance (Answer F1) together with the two inter-
+nal diagnostic signals used in the reward function,
+namely the logic consistency score Slogic and the
+factual grounding score Sf act. As shown in Fig-
+ure 7, increasing the logic weight (wlogic ≫ wf act)
+improves Slogic but leads to a sharp decline in
+Sf act, indicating reduced factual grounding, while
+emphasizing factuality (wf act ≫ wlogic) yields
+the opposite effect. Importantly, as illustrated in
+Figure 6, the task performance (Answer F1) ex-
+hibits a clear inverted U-shaped trend, peaking
+at balanced settings between 2 : 1 and 1 : 2, demon-
+strating that jointly optimizing logic and factuality
+is crucial for high-quality reasoning.
+17906

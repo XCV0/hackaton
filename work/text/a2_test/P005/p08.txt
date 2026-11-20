@@ -1,0 +1,69 @@
+Method
+Final Performance
+HotpotQA WebQuestions Dragonball Average Cost
+F1 ↑ F1 ↑ R-L ↑ MTR ↑ BRT ↑ Tok/Q ↓ Lat. (ms) ↓
+GraphRAG 72.18 64.73 0.346 0.361 0.637 16238 2317
+ReflectiveRAG 70.64 63.29 0.334 0.349 0.622 11274 1186
+REFRAG 73.42 65.38 0.351 0.368 0.641 5436 492
+PageIndex 79.36 70.81 0.389 0.406 0.691 24620 2847
+SPROUTRAG 76.47 68.12 0.372 0.389 0.671 4382 193
+Table 2: End-to-end answer quality and online efficiency. HotpotQA and WebQuestions are evaluated with F1,
+while Dragonball uses ROUGE-L (R-L), METEOR (MTR), and BERTScore (BRT). Tok/Q counts online model
+input tokens per query, excluding offline training, indexing, and output tokens; Lat. reports online per-query latency.
+All methods use the same generator and reranker when applicable.
+Variant Dragonball SCI-DOCS LegalBench-RAG MS MARCO
+Rec. ↑ Pre. ↑ IE ↑ Rec. ↑ Pre. ↑ IE ↑ Rec. ↑ Pre. ↑ IE ↑ Rec. ↑ Pre. ↑ IE ↑
+SPROUTRAG (b = 5, λ = 0.1) 45.76 85.34 39.05 98.74 98.91 97.66 36.91 53.48 19.74 72.86 76.21 55.53
+Training Objectives
+Not trained 34.28 69.41 23.79 90.36 92.18 83.28 29.47 42.53 12.53 64.18 67.42 43.28
+w/o Lret 37.64 73.52 27.67 92.71 94.86 87.96 31.08 45.17 14.04 66.24 69.73 46.18
+w/o Lattn 41.39 78.26 32.39 96.42 96.88 93.41 33.52 48.31 16.20 69.18 72.64 50.25
+Tree and Retrieval Design
+Uniform attention aggregation 39.18 76.94 30.15 95.83 96.12 92.11 32.74 47.36 15.51 68.41 71.52 48.92
+Embedding-similarity tree 40.72 79.38 32.32 96.31 96.74 93.17 33.18 48.42 16.06 69.36 72.48 50.28
+Leaf-only retrieval 38.26 83.19 31.83 94.87 98.12 93.07 31.94 52.61 16.80 67.83 75.42 51.16
+Greedy search 39.84 82.47 32.86 96.25 98.34 94.65 32.81 51.76 16.98 68.92 74.86 51.60
+Hyperparameter Sensitivity
+Beam width b = 3 44.12 84.71 37.37 98.31 98.83 97.16 35.72 52.86 18.88 71.94 75.63 54.42
+Beam width b = 10 46.24 82.63 38.21 98.91 98.42 97.35 37.28 51.92 19.36 73.41 74.32 54.56
+λ = 0.05 44.68 83.92 37.50 98.42 98.63 97.07 35.96 52.47 18.87 72.14 75.48 54.46
+λ = 0.20 45.18 82.74 37.38 98.58 98.37 96.97 36.42 51.83 18.88 72.49 74.93 54.31
+Table 3: Ablation study on retrieval performance. Metrics are averaged over @1, @3, and @5. The blue row is the
+default SPROUTRAG setting (b = 5, λ = 0.1). The three groups evaluate training objectives, tree/retrieval design,
+and sensitivity to b and λ.
+embedding quality and tree quality require com-
+plementary supervision: the retrieval loss aligns
+query–passage representations, while the attention-
+structure loss shapes the hierarchy used for multi-
+granularity retrieval.
+Tree and retrieval design. The second group
+in Table 3 examines the necessity of the attention-
+guided hierarchy. Uniform attention aggregation
+reduces performance, highlighting that averaging
+heads and layers introduces proximity bias and
+weakens the tree. An embedding-similarity tree
+also underperforms, showing that SLLM atten-
+tion encodes structural information beyond embed-
+dings. Leaf-only retrieval maintains high precision
+but lowers recall and IE, while greedy search suf-
+fers from early path commitment. These results
+demonstrate that learned attention aggregation,
+internal-node retrieval, and beam search are all
+crucial for balancing precise evidence with broader
+contextual coverage.
+Hyperparameter sensitivity. The final group in
+Table 3 studies beam width b and attention regu-
+larization weight λ. Reducing the beam width to
+b = 3 slightly lowers IE because fewer semantic
+paths are explored, while increasing it to b = 10 im-
+proves recall but slightly reduces precision, yield-
+ing no overall advantage over the default b = 5.
+Similarly, both λ = 0.05 and λ = 0.20 underper-
+form the default λ = 0.1: a weaker structure loss
+provides insufficient guidance for tree construc-
+tion, while a stronger one can overemphasize atten-
+tion alignment at the expense of retrieval precision.
+Overall, SPROUTRAG is stable across reasonable
+settings, with b = 5 and λ = 0.1 providing the best
+recall–precision tradeoff.
+46528

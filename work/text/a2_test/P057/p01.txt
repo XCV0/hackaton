@@ -1,0 +1,74 @@
+Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing, pages 8887–8904
+November 12-16, 2024 ©2024 Association for Computational Linguistics
+From RAG to RICHES: Retrieval Interlaced with Sequence Generation
+Palak Jain Livio Baldini Soares Tom Kwiatkowski
+Google Deepmind
+{palakj,liviobs,tomkwiat}@google.com
+Abstract
+We present RICHES, a novel approach that
+interleaves retrieval with sequence generation
+tasks. RICHES offers an alternative to conven-
+tional RAG systems by eliminating the need
+for separate retriever and generator. It retrieves
+documents by directly decoding their contents,
+constrained on the corpus. Unifying retrieval
+with generation allows us to adapt to diverse
+new tasks via prompting alone. RICHES can
+work with any Instruction-tuned model, with-
+out additional training. It provides attributed
+evidence, supports multi-hop retrievals and in-
+terleaves thoughts to plan on what to retrieve
+next, all within a single decoding pass of the
+LLM. We demonstrate the strong performance
+of RICHES across ODQA tasks including at-
+tributed and multi-hop QA.
+1 Introduction
+Large language models (LLMs) have increasingly
+become the backbone for much of natural language
+processing and there has been a push to formulate a
+wide range of tasks as sequence to sequence trans-
+duction. However, when LLMs need to interact
+with non-parametric knowledge in the form of an
+external evidence corpus, the typical approaches
+chain LLM generations with calls to a separate re-
+trieval model as part of a multi-system pipeline. In
+this paper we introduce a new approach, RICHES
+(Retrieval Interlaced with Sequence Generation)
+which can natively interleave text generations with
+retrievals from an evidence corpus using a single
+LLM and decoding process.
+RICHES builds on previous work that demon-
+strated the application of constrained decoding to
+retrieval over a corpus (Jain et al., 2023; Bevilac-
+qua et al., 2022) but extends this work to support
+multiple retrievals, entwined in a standard text gen-
+eration procedure. In this approach, we retrieve
+documents by directly decoding their contents or
+related natural language retrieval keys that point to
+Figure 1: Example RICHES outputs for multi-hop
+queries with a single LLM and decoding pass. The
+green quoted text is "retrieved" or generated verbatim
+from the retrieval corpus. RICHES generation natively
+interleaves thoughts and multiple retrieval evidences.
+the documents they were generated from. For ex-
+ample, Figure 1 illustrates a solution from RICHES
+to multi-hop question answering (Yang et al., 2018),
+where evidence must be retrieved from multiple
+separate documents, by iteratively generating an
+unconstrained ‘thought’ about what needs to be
+retrieved and then generating a supporting propo-
+sition derived from an evidence corpus and tied
+to an original piece of supporting text. RICHES
+executes this task in a single decoder pass. For this
+example task, which is evaluated alongside others
+in Section 6, we have built on recent advances in
+chain-of-thought reasoning via prompting alone
+(Yao et al., 2022) but have directly integrated the
+retrieval step without needing to account for any
+interaction with an external retrieval system.
+The observations we build this work on are:
+1. LLMs are knowledge warehouses: They inter-
+nalise and generalise over vast quantities of
+training data and are often able to generate
+surprisingly accurate knowledge in response
+8887

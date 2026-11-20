@@ -1,0 +1,97 @@
+5.3 Evaluation on Multi-turn Datasets
+We confirmed the ability of CogRAG with testing
+samples from EmpatheticDialogues (Rashkin et al.,
+2019), a multi-turn dataset. Tables 5 and 6 show the
+effectiveness of CogRAG on retrieval and response
+generation. CogRAG consistently produces better
+performance of semantic-only retrieval across all
+Recall@K metrics, while incorporating skill cards
+improves all generation metrics, with particularly
+notable gains in ROUGE-1 and LM-judge scores.
+The trend is consistent with the scores in Tables 2
+and 3 that confirm the efficiency of CogRAG. The
+comprehensive evaluation results across all models
+and configurations are detailed in Appendix A.10
+Table 5: IR uses gpt-embed-3-large for embedding.
+Method Recall@1 Recall@5 Recall@10
+Semantic only 18.77 36.63 43.70
+CogRAG 22.03 39.89 48.53
+Table 6: Generation performance using gpt-embed-3-
+large for embedding and gpt-4o-mini for generation.
+Method BLEU-1 ROUGE-1 BScore LM judge
+Baseline 12.93 12.55 87.00 6.75
+w_skillcard 13.79 12.69 87.18 6.78
+5.4 Ablation Study
+5.4.1 Appraisal and CBT Validation
+We validated the quality of appraisal and CBT ex-
+traction in Section 3.3.2. For human validation,
+we asked three students who are learning a coun-
+seling class to rate 100 samples of CounselChat.
+LM judge (GPT-4.1) was conducted on all samples
+of CounselChat. The validation uses 5-scale Lik-
+ert metrics: Theoretical Consistency (Chen et al.,
+2023b) and Clinical Actionability that rates the
+practical utility of these representations in guiding
+subsequent response generation (Es et al., 2024).
+Table 7: Human and LLM validation for theories. TC:
+Theoretical Consistency; CA: Clinical Actionability.
+Theory Human LM judge
+TC Kappa CA TC Kappa CA
+CBT 4.23 0.68 4.14 4.41 0.82 4.37
+Appraisal 4.18 0.71 4.09 4.35 0.86 4.28
+Human evaluation yields consistently high con-
+sistency scores for both CBT and Appraisal. These
+positive trends were closely corroborated by the
+LLM evaluation, which shows a strong alignment
+with human judgments. The extracted structures
+received strong, positive Actionability ratings from
+both human annotators and the LLM. We observed
+a consistent trend where CBT representations were
+rated slightly higher in actionability due to their
+inherent step-by-step structural nature, but over-
+all, both approaches successfully provided clear,
+actionable priors for safe therapeutic intervention.
+5.4.2 Safety Card Validation
+Safety Card Quality Three professional,
+psychologically-grounded certified coaches with
+more than four years of experience worked on
+100 randomly selected cards. The experts rated
+each sample using four metrics: Faithfulness, Ac-
+tionability, Generalizability, and Safety (Es et al.,
+2024) (detailed definition is shown in A.6). With
+a Fleiss’ kappa of 0.785, Faithfulness is 4.97/5
+and Actionability is 4.93/5; all 100 rated cards
+were judged generalizable and safety-appropriate.
+This suggests that, at least on the 100 audited
+samples, the cards offer a usable structural guide
+for response generation; broader clinical validity
+would require expert review at full scale.
+Card Retrieval We observed the quality of card
+retrieval using top-3 candidates with LLMs and
+humans. The assessment use four metrics to mea-
+sure the relevance: Topical & Intent Relevance
+(TIR) (Es et al., 2024), Actionability & Utility (AU)
+(Sharma et al., 2020), Safety & Severity Alignment
+(SSA) (Miner et al., 2016), and Counterfactual Im-
+pact (CI) (Lewis et al., 2020) (a Likert scale) (Ap-
+pendix A.7). Human evaluation used four evalua-
+tors to judge these metrics on 100 samples.
+Table 8: Safety-planning card retrieval quality.
+LM judge (all) Human (100)
+1st 2nd 3rd 1st 2nd 3rd
+TIR 4.87 3.62 2.78 4.73 3.14 2.41
+AU 4.76 3.43 2.68 4.48 2.93 2.17
+SSA 4.92 4.18 3.84 4.81 3.67 3.32
+CI 4.68 3.24 2.56 4.57 2.79 2.03
+Table 8 shows that the top-1 card is rated high-
+est on all four metrics by both LLM and human
+judges. We note that the LLM scores here share
+an evaluator family with the generation backbone;
+the human column is therefore the more conserva-
+tive reference. The scores of humans are lower than
+those of LLMs. It suggests that human judges apply
+stricter criteria than LLM judges, consistent with
+prior observations on LM judge leniency. Response
+generation scores in Table 17 are directionally con-
+sistent with LLM and human evaluation.
+13807

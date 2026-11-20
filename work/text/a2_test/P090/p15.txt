@@ -1,0 +1,80 @@
+Table 8: Impact of various noise types on accuracy (%) for eight representative LLMs on the RGB dataset. We
+assess performance across various retrieval scenarios: “Base” (no retrieval), “Golden Only” (only golden retrieval
+context), and “Golden & XXX” (golden context + specific retrieval noises, including Counterfactual, Supportive,
+Orthographic, Semantic, Datatype, Illegal Sentence Noise).
+Scenario Small Large Average
+L2-13B L3-8B Q2-7B M-7B V-13B B2-13B L3-70B M-8x7B
+Base 17.00 47.00 31.33 27.00 35.33 27.67 60.00 43.00 36.04
+Golden Only 29.33 80.00 76.33 80.33 80.33 78.00 76.00 77.33 72.20
+Golden & CN 14.00 36.33 26.00 19.33 19.33 15.00 42.33 31.00 25.42
+Golden & SuN 26.00 80.00 74.00 72.33 61.67 65.33 73.67 76.67 66.21
+Golden & ON 14.33 75.00 74.00 72.67 77.67 69.00 77.00 72.67 66.54
+Golden & SeN 18.00 81.33 77.67 56.67 52.00 59.00 76.33 77.33 62.30
+Golden & DN 40.00 81.67 84.33 85.33 85.67 81.67 85.00 81.00 78.08
+Golden & ISN 72.33 83.00 80.00 81.00 82.33 79.67 79.67 79.00 79.63
+performance across various LLMs with different
+model architectures and scales. We apply pro-
+portional scaling to counterfactual data to make
+a clearer illustration within one figure while main-
+taining consistent conclusions. The results indicate
+that datatype noise significantly enhances model
+performance in all scenarios, with the most sub-
+stantial improvement under harmful noise.
+Additionally, we provide detailed results for
+eight models on the RGB dataset, which is based
+on recent news corpora and thus better reflects the
+impact of noise. As shown in Table 8, we have the
+following three findings:
+• Global Impact of Beneficial Noise (DN, ISN):
+Datatype Noise (DN) and Illegal Sentence Noise
+(ISN) consistently improve performance across
+all model scales and capabilities, with average
+improvements of 5.8% and 7.4% respectively
+over the golden-only baseline. This demonstrates
+the universal applicability of these beneficial
+noise types.
+• Global Impact of Harmful Noise (CN, SuN,
+ON): Counterfactual Noise (CN), Supportive
+Noise (SuN), and Orthographic Noise (ON) con-
+sistently degrade performance across all models,
+with CN showing the most severe negative im-
+pact (average performance decrease of 46.8%
+compared to the golden-only baseline).
+• Scale-Dependent Semantic Noise Effects: The
+impact of Semantic Noise (SeN) is twofold.
+For less optimized models (e.g., Llama2-13B,
+Mistal-7B), SeN acts as harmful noise. This may
+be due to smaller models being less confident
+in their parametric memory and having weaker
+reasoning capabilities. Consequently, they are
+more easily misled by semantically irrelevant
+context, consistent with findings from previous
+studies (Shi et al., 2023b; Xie et al., 2024b); For
+larger models (e.g., Llama3-70B), SeN becomes
+beneficial. Larger models, with more robust para-
+metric memory and better understanding, are less
+susceptible to irrelevant context. They can effi-
+ciently ignore semantically unrelated content and
+focus on core details necessary to answer ques-
+tions, leading to performance gains.
+C.3 Results Across the Number of Quires
+We leverage keywords extracted from queries (rang-
+ing from 1 to 4 keywords per query) for content re-
+trieval. As shown in Table 9, results on 2WikiMQA
+demonstrate that the core findings regarding the
+impact of beneficial and harmful noise remain con-
+sistent across queries of varying complexity.
+Table 9: Accuracy in different scenarios and with differ-
+ent numbers of queries.
+Scenario
+Number of queries
+1 2 3 4
+G only 79.80 84.20 84.60 84.60
+G&CN 21.20 23.60 23.60 23.80
+G&ISN 87.40 89.40 89.20 89.40
+C.4 Performance Under Other Noise
+Disturbances
+To illustrate the impact of beneficial noise under
+other noise disturbances, we analyze the effect of
+datatype noise (DN) in five scenarios: no noise
+5033

@@ -1,0 +1,14 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D002,R001,DV-NiO,MS1,M1,Voc,0.855,V,,,,,,0.855,V,0.855,V,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO 0.855 14.8 61.64 7.8,extracted,,
+D002,R002,DV-NiO,MS1,M1,Jsc,14.8,mA/cm2,,,,,,14.8,mA/cm2,14.8,mA/cm2,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO 0.855 14.8 61.64 7.8,extracted,,
+D002,R003,DV-NiO,MS1,M1,FF,61.64,%,,,,,,61.64,%,61.64,%,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO 0.855 14.8 61.64 7.8,extracted,,
+D002,R004,DV-NiO,MS1,M1,PCE,7.8,%,,,,,,7.8,%,7.8,%,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO 0.855 14.8 61.64 7.8,extracted,,
+D002,R005,DV-NiOGO,MS1,M1,Voc,0.982,V,,,,,,0.982,V,0.982,V,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO/GO 0.982 17.9 87.04 15.3,extracted,,
+D002,R006,DV-NiOGO,MS1,M1,Jsc,17.9,mA/cm2,,,,,,17.9,mA/cm2,17.9,mA/cm2,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO/GO 0.982 17.9 87.04 15.3,extracted,,
+D002,R007,DV-NiOGO,MS1,M1,FF,87.04,%,,,,,,87.04,%,87.04,%,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO/GO 0.982 17.9 87.04 15.3,extracted,,
+D002,R008,DV-NiOGO,MS1,M1,PCE,15.3,%,,,,,,15.3,%,15.3,%,primary,,5,3.3 The Current and Voltage Testing,Table 1,Figure 7,NiO/GO 0.982 17.9 87.04 15.3,extracted,,
+D002,R009,DV-NiOGO,MS1,M1,PCE,15.3,%,,,,,,15.3,%,15.3,%,primary,,1,Abstract,,,efficiency of 15.3% compared to single-layer NiO,extracted,R008,
+D002,R010,DV-NiOGO,MS1,M1,PCE,15.3,%,,,,,,15.3,%,15.3,%,primary,,5,4 Conclusions,,,"are 15.3% and 7.8%, respectively",extracted,R008,
+D002,R011,DV-NiO,MS1,M1,PCE,7.8,%,,,,,,7.8,%,7.8,%,primary,,5,4 Conclusions,,,"are 15.3% and 7.8%, respectively",extracted,R004,
+D002,R012,,,,PCE,11.65,%,,,,,,11.65,%,11.65,%,cited,[11],1,1 Introduction,,,"(i.e., 11.65%)",extracted,,"PEDOT:PSS HTL, literature value"
+D002,R013,,,,PCE,13.5,%,,,,,,13.5,%,13.5,%,cited,[12],1,1 Introduction,,,"(i.e., 13.5%)",extracted,,"Spiro-OMeTAD HTL, literature value"

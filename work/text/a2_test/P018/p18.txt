@@ -1,0 +1,97 @@
+duce the experiments, including dataset formatting,
+prompting, decoding configurations, and hyperpa-
+rameters.
+C.1 Dataset Details
+Table 6 summarizes the datasets used in our ex-
+periments. Natural Questions (NQ) and TriviaQA
+(TQA) use the preprocessing of Izacard and Grave
+(2021), which provides DPR-retrieved passages
+with title and text fields. PopQA uses the original
+release from Mallen et al. (2023). RetrievalQA fol-
+lows Zhang et al. (2024) and is converted into the
+same document-list format. DRQA is our factual-
+conflict benchmark derived from DRBench, which
+consists of 568 internal enterprise facts.
+Dataset # Examples Avg @5 Avg @10
+NQ 3,610 526 1,042
+TQA 11,313 527 1,041
+PopQA 4,267 521 1,036
+RetrievalQA 2,785 443 1,003
+DRQA 568 2,039 4,002
+Table 6: Datasets statistics used in our experiments. We
+include the average number of words of the input for
+the @5 and @10 settings.
+C.2 Prompt Templates
+All methods use the same answer-generation
+prompt format. We adopt the same prompt template
+from prior work (Shi et al., 2024; Jin et al., 2024a)
+with the zero-shot and contextualized prompts dis-
+played below.
+Zero-shot Prompt:
+Question: {question}
+Answer:
+Contextualized Prompt:
+Write a high-quality concise answer for the given question
+using only the provided search results (some of which might
+be irrelevant).
+,→
+,→
+{search_results}
+Question: {question}
+Answer:
+All prompts are wrapped with the default chat
+template provided by the corresponding Hugging
+Face tokenizer. We use the chat template both
+for answer generation and for the document-level
+support probe in DCCD, so confidence estimation
+and final decoding are performed under the same
+instruction-following format. The per-document
+prompts follow the same template as the contextu-
+alized prompt following Jin et al. (2024a).
+C.3 Baseline Decoding Configurations
+We use greedy decoding with temperature 0 and
+a maximum generation length of 60 new tokens
+for all methods. To reduce artifacts from recall-
+oriented string-match metrics, we generate and
+evaluate a single-sentence answer. Since strem
+rewards the presence of a normalized gold string
+anywhere in the prediction, long generations that
+copy retrieved passages or list multiple candidate
+answers can be artificially rewarded even when
+the model does not clearly commit to the correct
+answer. Single-sentence generation makes the com-
+parison across decoding methods more meaningful
+by forcing each method to produce a concise pre-
+diction. Unless otherwise stated, hyperparameters
+are fixed across all datasets and models. We de-
+scribe the hyperparameter settings for all decoding
+strategies used in our experiments and summarize
+in Table 7.
+Zero-shot Decoding The zero-shot baseline gen-
+erates from the question alone, without any re-
+trieved documents. It is included to estimate how
+much of each dataset can be answered from para-
+metric memory alone.
+Full-Context Decoding The full-context base-
+line decodes directly from the logits conditioned
+on the question and the full retrieved document set:
+zt = zfull t .
+CAD Context-Aware Decoding (CAD) contrasts
+full-context logits against no-context logits:
+zCAD t = (1 + α)zfull t − αznone t .
+We use α = 0.2 based on the results reported by
+Shi et al. (2024).
+ADACAD Adaptive Context Aware Decoding
+(ADACAD) replaces the fixed CAD weight with
+a token-level adaptive weight based on the Jensen-
+Shannon divergence between the full-context and
+no-context distributions:
+αt = JSD
+
+pfull t ∥pnone t
+
+,
+zADACAD t = (1 + αt)zfull t − αtznone t .
+We set the minimum weight floor to 0.0 following
+Wang et al. (2025a).
+18

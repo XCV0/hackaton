@@ -1,0 +1,32 @@
+capacity.
+I Qualitative Case Studies
+In this section, we provide a detailed qualitative
+analysis to illustrate how LCR-RAG handles com-
+plex multi-hop queries that typically confound stan-
+dard RAG baselines.
+Table 9 presents a comparison between Self-
+RAG and LCR-RAG on a query requiring com-
+positional reasoning about film directors and actors.
+As shown, the baseline Self-RAG retrieves rele-
+vant entities (Barry Levinson, Top Gun) but fails
+to construct a logically valid chain, hallucinating a
+connection between the director and the actor. The
+internal self-reflection mechanism fails to detect
+this factual inconsistency.
+In contrast, LCR-RAG demonstrates a success-
+ful correction loop:
+1. Detection: The Neuro-Symbolic Verifier
+(NSV) identifies a specific Contradiction in
+the initial draft (A0) by verifying the director-
+film relations against retrieved evidence.
+2. Strategy: The PPO Agent receives this
+negative logic reward and selects the
+RephraseFocus action to clarify the director-
+actor intersection.
+3. Correction: The rewritten query (q1) leads to
+precise retrieval, resulting in a factually and
+logically sound final answer (A1).
+J Prompt Templates
+The prompt templates are presented in Tables 10
+and 11.
+17913

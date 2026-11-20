@@ -1,0 +1,105 @@
+3.2 A novel set of metrics and a framework to
+assess safety risks
+Current RAG QA metrics do not correlate to clin-
+ical risks, and have varying levels of validation
+against human evaluations, often performing poorly
+in conversational contexts. To our knowledge, no
+efforts have been made to connect QA system per-
+formance—measured by these metrics—with real-
+world clinician grading of clinical harms. For de-
+velopers to meaningfully assess whether a clinical
+RAG QA system meets safe operating concepts,
+a framework is needed that is validated for clin-
+ical use, scalable, and capable of accounting for
+nuanced clinical contexts.
+We propose a novel Automated and Scalable
+TRIaD (ASTRID) analysis framework for RAG-
+based clinical QA systems. ASTRID consists of
+three reference-free LLM-based metrics: Refusal
+Accuracy (RA), Conversational Faithfulness (CF)
+and Context Relevance (CR) (Figure 4). In the
+subsequent sections, we will illustrate how we vali-
+date each of the metrics and the overall framework
+based on a real world data from patients speaking to
+clinical conversational agents, augmented to ensure
+sufficient test case coverage.
+3.2.1 Conversational Faithfulness (CF)
+Evaluating the alignment of a response with the pro-
+vided information is crucial for QA systems using
+RAG. Existing metrics fail to capture the complexi-
+ties of conversational agents in clinical settings. We
+propose a newly-defined metric, Conversational
+Faithfulness, to address this gap.
+Given an answer-context pair, CF is defined as
+the proportion of information-containing sentences
+that are faithful to the context. To calculate CF, we
+employ the following steps:
+1. We categorize sentences in the response
+as either "information-containing" or "not
+information-containing" and extract the
+information-containing sentences.
+2. We determine whether the information-
+containing sentences are grounded in context.
+The prompts used to execute these steps are pro-
+vided in Appendix 11. Finally, CF is calculated as
+follows:
+CF =
+
+
+
+1, if N = 0
+Y
+N , if R ≥ 0
+0, otherwise
+(1)
+where:
+Y = Number of information-containing
+statements grounded in context
+N = Total number of
+information-containing statements
+R = N - (Y + Number of
+information-containing statements not
+grounded in context")
+3.2.2 Refusal Accuracy (RA)
+As discussed in previous sections, ensuring that a
+QA system appropriately declines to respond when
+a question is unanswerable or contextually inap-
+propriate is critical in clinical settings, particularly
+for LLM-powered systems prone to generating un-
+grounded responses. Existing metrics do not cap-
+ture this behavior, prompting us to introduce Re-
+fusal Accuracy.
+Refusal Accuracy measures a system’s ability to
+withhold a response when no relevant information
+is available. It is evaluated using binary labels
+indicating whether the system appropriately refuses
+to answer. The prompt used for this assessment is
+provided in Appendix 13.
+3.2.3 Context Relevance (CR)
+For clinical QA systems built on RAG, using the
+right context when generating responses is essen-
+tial. This is typically achieved by creating embed-
+dings of the query and the knowledge source, which
+are then passed through a retriever (Lewis et al.,
+2020; Ding et al., 2024). The retrieval component
+of a RAG system takes in the encoded query and re-
+trieves the top matches from the knowledge source
+index, which is then passed to the LLM agent as
+context (Salemi and Zamani, 2024).
+For voice-based conversational QA systems, our
+dataset analysis indicates that user queries typically
+consist of no more than two questions per turn. Ad-
+ditionally, specialised knowledge sources within
+a specific clinical scope are relatively small and
+focused, in contrast to the extensive databases used
+for general clinical QA. Given that multiple pieces
+of information may be necessary to comprehen-
+sively answer a query in this dataset, the clinical
+RAG QA system employed in this evaluation re-
+trieves the top three context chunks.
+Many existing CR definitions penalise additional
+retrieved contexts (Es et al., 2023; Saad-Falcon
+et al., 2023). However, we place greater emphasis
+on measuring the completeness of clinical infor-
+mation present in the retrieved context. To better
+16704

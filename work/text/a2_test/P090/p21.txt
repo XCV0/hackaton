@@ -1,0 +1,52 @@
+Table 16: Example #3 of LLM outputs on the multi-hop dataset without and with beneficial noise (BN). The blue
+and green colors denote the correct and incorrect responses, respectively. Upon introducing BN, LLMs exhibit
+clearer reasoning processes, more standardized response formats, and increased focus on golden context.
+Retrieved
+Context
+wo BN
+[1] Robert Harley, Earl of Oxford and Earl Mortimer, was the paternal grandfather of
+Edward Harley, 5th Earl of Oxford and Earl Mortimer. He was a prominent statesman and
+served as the Lord High Treasurer of Great Britain. [Counterfactual]
+[2] John Harley (29 September 1728 – 7 January 1788) was a British bishop. Harley
+was the second son of Edward Harley, 3rd Earl of Oxford and Earl Mortimer. He was
+Archdeacon of Shropshire from 1760 to 1769 and then Archdeacon of Hereford from
+1769 to 1787. [Golden Context]
+. . .
+Question Who is the paternal grandfather of Edward Harley, 5Th Earl Of Oxford And Earl Mor-
+timer?
+‘A’: Edward Harley, 3rd Earl of Oxford and Earl Mortimer (GT) ‘B’: Uncertain ‘C’:
+Uncertain ‘D’: Thomas Harley, 4th Earl of Oxford and Earl Mortimer
+Answer
+wo BN
+C \n\n The paternal grandfather of Edward Harley, 5th Earl of Oxford and Earl Mortimer,
+is Robert Harley, Earl of Oxford and Earl Mortimer. Therefore, the correct answer is ’C’.
+/reve
+Answer
+w BN
+A\n\n### Explanation: nThe information provided states that John Harley (1728-1788)
+was the second son of Edward Harley, 3rd Earl of Oxford and Earl Mortimer. Therefore,
+Edward Harley, 3rd Earl of Oxford and Earl Mortimer is the paternal grandfather of
+Edward Harley, 5th Earl of Oxford and Earl Mortimer. /
+Table 17: Example #4 of LLM outputs on the multi-hop dataset without and with beneficial noise (BN). The blue
+and green colors denote the correct and incorrect responses, respectively. Upon introducing BN, LLMs exhibit
+clearer reasoning processes, more standardized response formats, and increased focus on golden context.
+Retrieved
+Context
+wo BN
+[1] With an estimated base length of 230 meters, 200 men end to end would only cover
+about 46% of the Great Pyramid of Giza’s base, highlighting the massive scale and size of
+the ancient structure. [Counterfactual]
+[2] The base of the Great Pyramid of Giza is 756 feet long. The average height of a man
+is 5 foot 9. [Golden Context]
+. . .
+Question Can 200 men end to end cover Great Pyramid of Giza’s base?
+‘A’: Uncertain ‘B’: False (GT) ‘C’: True
+Answer
+wo BN
+C /reve
+Answer
+w BN
+B\n\n### Information:\n The base of the Great Pyramid of Giza is 756 feet long. The
+average height of a man is 5 foot 9. (int) The number of men required to cover the base
+end to end is 756 / 5.75. /
+5039

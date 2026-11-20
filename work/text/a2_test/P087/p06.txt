@@ -1,0 +1,90 @@
+NQ PopQA MuSiQue 2Wiki HotpotQA MultiHop-RAG
+Num of queries 1,000 1,000 1,000 1,000 1,000 2,556
+Num of passages 9,633 8,676 11,656 6,119 9,811 609
+Table 1: Dataset statistics
+Lingua (Jiang et al., 2024) adopts a hierarchical
+text compression strategy, leveraging pre-trained
+language models to iteratively prune redundant con-
+tent.
+Iterative & Agentic RAG. We benchmark
+against state-of-the-art dynamic frameworks. IR-
+CoT (Trivedi et al., 2023) guides retrieval via step-
+by-step reasoning. Self-RAG (Asai et al., 2023)
+trains the generator to output reflection tokens for
+self-critique. CRAG (Yan et al., 2024) incorpo-
+rates a lightweight evaluator to trigger web searches
+when retrieval is ambiguous. DRAG (Hu et al.,
+2025) enables dynamic retrieval adjustment based
+on intermediate results.
+4.3 Metrics
+We adopt a multi-dimensional evaluation protocol
+to comprehensively assess our framework. For
+downstream generation quality, we report Exact
+Match (EM) and F1 Score. For retrieval quality,
+we compute Recall@5 to evaluate the effective-
+ness of the MMKP context selection. To rigorously
+measure faithfulness and the mitigation of halluci-
+nations, we employ three key metrics verified by
+an NLI model (RoBERTa-large-mnli): Attribution
+Precision (AP), which quantifies the proportion of
+generated claims that are accurately backed by the
+retrieved context; Contradiction Rate (CR), which
+measures the frequency of generated statements
+that actively contradict the provided evidence; and
+Support (Sup), which indicates the overall rate of
+generated answers that are fully entailed by the
+cited source material.
+4.4 Implementation Details
+For Self-Correcting RAG, we employ Qwen2.5-
+7B-Instruct as the backbone generator. We use
+BAAI/bge-small-en-v1.5 as the dense retriever and
+BM25 for sparse retrieval, fusing results via Recip-
+rocal Rank Fusion (RRF). The detailed prompts are
+shown in Appendix F. For the MMKP, we operate
+with specified token and redundancy budgets, and
+utilize a dynamic programming solver with Pareto
+pruning. Regarding MCTS, we use RoBERTa-
+large-mnli to strictly penalize contradictions and
+neutral outputs. All experiments were conducted
+on a cluster of 8× NVIDIA A100 (80GB) GPUs.
+More implementation and hyperparameter details
+can be found in Appendix B.
+5 Results
+5.1 Generation Performance
+Table 2 summarizes the Exact Match (EM) and
+F1 scores across six diverse datasets. Our method
+achieves the highest average performance among
+all evaluated models. Specifically, it surpasses the
+strongest baselines with an average EM of 37.1 and
+an average F1 score of 45.8.
+Complex Reasoning Tasks. The advantages of
+our approach are most pronounced in complex
+multi-hop reasoning scenarios, such as MuSiQue
+and 2WikiMultiHopQA. These tasks require the
+model to aggregate disparate pieces of informa-
+tion from multiple documents. On the MuSiQue
+dataset, our Self-Correcting RAG outperforms the
+previous state-of-the-art model, CRAG, by a sub-
+stantial margin. While CRAG achieves an EM
+of 18.2, our method reaches 22.7, representing a
+4.5% absolute improvement. This significant gain
+indicates that the NLI-guided MCTS generator ef-
+fectively navigates complex reasoning paths. It
+succeeds in scenarios where standard greedy de-
+coding strategies often fail to synthesize the correct
+answer.
+Robustness to Noise. The MultiHop-RAG
+dataset is designed to test resilience against noisy
+and irrelevant context. On this benchmark, our
+method demonstrates superior robustness. It
+achieves an EM score of 35.3. In comparison, the
+advanced selection baselines perform significantly
+worse, with RAG + MMR achieving 32.1 and Filco
+scoring 29.8. This performance gap validates the
+effectiveness of our MMKP context selector. By
+explicitly modeling redundancy and information
+density constraints, our selector effectively filters
+out red herring documents. These distractions typ-
+ically degrade the performance of standard RAG
+models.
+20958

@@ -1,0 +1,113 @@
+Cryptocurrency 
+Fraudsrequirenew
+lawsto… 
+Corpus
+(fraud,require,law)
+…
+Triplet Facts
+Stage1:Data
+Preparation
+Stage2:GraphRetrieval
+KG WeightedKG
+require
+target
+Stage3:HybridRetrieval
+cryptocurrency
+fraud
+AIdetection
+IPverification
+Law
+enforcement
+MCMISubgraph
+LLMOutputAnswer
+Toprevent
+cryptocurrency
+fraud…
+TextChunks
+Howtoprevent
+cryptocurrencyfraud?
+User Query
+cryptocurrency
+fraud
+law require c=0.9target
+c=0.3
+cryptocurrency
+s=0.6
+fraud
+s=0.7
+law
+s=0.4
+Ent./Rel.
+Extraction
+BM25Encoding
+TextStore
+VectorEncoding
+TextStore
+Hybrid
+Retrieval
+Encode
+WeightingConstruct
+Chunking
+Generate
+MCMI
+HRChunks
+Figure 1: An overview of AGRAG. In Stage 1, AGRAG constructs a KG based on the text corpus. In Stage 2, the query is mapped to relevant triplet facts in
+KG, then node score and edge weights are assigned based on PPR algorithm and the semantic similarity between query and each fact, respectively. In Stage
+3, AGRAG generates an MCMI subgraph, providing explicit reasoning chains in addition to the most semantically similar text chunks by Hybrid Retrieval
+(HR) to support LLM query answering.
+extraction, we apply LLM to detect relation edges w.r.t. the
+extracted entity nodes and the text chunk. Furthermore, we
+also construct text chunks into KG as passage nodes, and
+link them to all their extracted entity nodes with node-to-
+passage edges. The detailed pseudo code of Step 1 is shown in
+Algorithm 1, and more details can be found in Section III-B.
+Step 2: Graph Retrieval. In this step, we firstly map
+the query q to KG fact triples considering their semantic
+similarities, after that, we calculate the PPR score [33] based
+on these mapped fact triples F as the node influence score
+s. On the other hand, we calculate the edge costs CE consid-
+ering the semantic similarity between query and facts’ vector
+representations. the higher their similarity is, the lower the
+cost is. Compared with solely applying PPR to score nodes
+for retrieval, the edge cost further provides constraints on the
+involved nodes based on the semantic correspondence between
+query and facts, removing the need for the human-defined
+PPR retrieval threshold. After that, we initialize the MCMI
+subgraph with the generated MCST, and apply our greedy
+algorithm by iteratively expanding the MCMI subgraph by
+selecting its neighboring node with the lowest edge cost-
+influence score ratio (i.e., c/s). If the lowest ratio is larger
+than the total ratio of the current MCMI, the iteration stops and
+the current MCMI subgraph is returned. We prove the MCMI
+generation problem to be NP-hard, and our greedy algorithm
+in Algorithm 3 can achieve a 2-approximation. Please refer to
+Section III-C for further details.
+Step 3: Hybrid Retrieval. In this step, we perform hybrid
+retrieval and obtain text chunks based on their BM25 sparse
+similarity score, and dense vector representation similarity
+score with the query. These chunks will be input together with
+the MCMI subgraph to the LLM for the final query answering,
+providing extra contexts.
+B. Step 1: Data Preparation
+In this subsection, we utilize a TFIDF [36] based entity
+extraction approach to substitute the LLM-based approach of
+other Graph-based RAG models, reduce LLM hallucination,
+resulting in less noise generated from the early entity extrac-
+tion step, and hence less error propagation, address the inac-
+curate graph construction issue, leading to better effectiveness.
+The pseudo code of AGRAG’s graph construction procedure
+is shown in Algorithm 1.
+To begin with, we split texts in T into fixed-length chunks
+with a certain amount of token overlap between chunks:
+Tc = Split(T , lt, lo), (1)
+where lt and lo denotes the length of text chunks and token
+overlap between chunks. Next, we apply the statistics-based
+entity extraction approach on the text chunks Tc. Specifically,
+our approach modifies the TFIDF score [36] as the entity
+extraction score ER(v, t) for each term v in text chunk t as an
+entity, to make the value of ER fall in (0, 1). Here, our entity
+detection is based on an n-gram setting with the maximum
+n-gram (number of words in an entity) as b, and the equation
+of ER(v, t) is as follows:
+ER(v, t) = count(v, t) |t|log(|Tc| + 1) × log |Tc| + 1 |tj : v ∈ tj , tj ∈ Tc| + 1 ,
+(2)

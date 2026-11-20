@@ -1,0 +1,92 @@
+# QA Pairs Knowledge Corpus
+# Ret Train # Gen Train # Valid # Test # Train # Valid
+InfoSeek - 10k - 71335 100k 100k
+Enc-VQA 901674 10k 11696 4750 2M 2M
+Table 8: Dataset statistics for InfoSeek and Enc-VQA datasets.
+Following established protocols, we employ the
+validation set for experimental evaluation. This
+validation set is further divided into two distinct
+subsets: Unseen Entity and Unseen Question. We
+report evaluation results separately for each of these
+subsets. During the fine-tuning phase for LLaVa,
+we randomly select 100,000 questions from the
+training set for training. Acknowledging the ab-
+sence of section-level annotations in the labeled
+data, we employ a trained retriever to identify the
+most relevant sections, which are then incorporated
+as supplementary contextual information.
+Enc-VQA Dataset: Enc-VQA comprises 221,000
+question-answer pairs and 2 million Wikipedia
+articles and encompasses questions pertaining to
+16.7K distinct entities. The dataset features a di-
+verse range of question-answering tasks, including
+single-hop, two-hop, and multi-answer questions.
+Consistent with prior work, our evaluation focuses
+solely on single-hop and multi-answer question
+types, excluding two-hop questions that necessi-
+tate more extensive retrieval and reasoning pro-
+cesses. Enc-VQA provides associated Wikipedia
+articles, fine-grained section annotations, and sup-
+porting fact information for each question-answer
+pair, which we leverage for model training and eval-
+uation. Acknowledging the challenges associated
+with downloading corresponding images for all can-
+didate paragraphs, we employ pre-extracted CLIP
+features of all image entities from EchoSight for vi-
+sual coarse-grained search. Subsequently, only the
+cover images of the Wikipedia articles associated
+with the top 5 candidate paragraphs are considered
+as visual references corresponding to the section
+during the multi-modal section re-ranking stage.
+Comprehensive statistics for both datasets are
+presented in Table 8.
+A.2 Evaluation Metrics
+Recall: We evaluate the retrieval performance us-
+ing the standard Recall@K metric. Specifically,
+Recall@K measures the proportion of queries for
+which the correct, ground-truth Wikipedia article
+link is found within the top K retrieved results. A
+retrieval is considered successful only if there is an
+exact string match between the retrieved link and
+the ground-truth link.
+Answer Accuracy on InfoSeek: To evaluate an-
+swer accuracy on the InfoSeek dataset, we employ
+different metrics depending on the question type.
+For questions requiring string or temporal answers,
+we use the VQA accuracy metric. For questions
+requiring numerical answers, we use the relaxed
+accuracy metric.
+Answer Accuracy on Enc-VQA: To evaluate an-
+swer accuracy on the Enc-VQA dataset, we employ
+different metrics depending on the question type.
+For simple, single-hop questions, we use BERT
+Matching (BEM) to assess the semantic similar-
+ity between the predicted answer and the ground-
+truth answer. This allows us to consider answers
+that are semantically equivalent but phrased differ-
+ently as correct. For multi-answer questions, the
+model’s output is first transformed into a list of
+answers through string splitting. We then calculate
+the Intersection-over-Union (IoU) between the pre-
+dicted answer set and the ground-truth answer set.
+If the IoU is greater than or equal to 0.5, the answer
+is considered correct. Otherwise, the BEM score is
+used to evaluate the correctness of the answer.
+A.3 Experimental Hyperparameters and
+Training Setup
+Retrieval Stage: During the re-ranking module
+training, we randomly sampled 24 visually simi-
+lar passages as negative samples from a training
+dataset of 900,000 instances. Additionally, we sam-
+pled 4 semantically similar passages as hard neg-
+ative samples from a 100,000-instance subset of
+the training data. The training process employed
+a learning rate of 1e-5 and a batch size of 8. Ini-
+tially, the model was trained for 6 epochs on the
+entire training set using only the negative samples
+to facilitate comprehensive learning of retrieval
+requirements across diverse image and question
+types. To adhere to a curriculum learning paradigm
+and construct negative samples with varying dif-
+ficulty gradients, we progressively used the hard
+41145

@@ -1,0 +1,72 @@
+Table 6: Statistics of source QA instances from a couple of knowledge-intensive datasets. ‘E’ and ‘I’ represent
+explicit and implicit, respectively.
+Dataset Category Source #Source pairs #Samples Example
+NQ Single-hop Train set 2,889 500 Who won the 7 man elimination chamber
+match?
+RGB Single-hop Test set 300 300 How many vehicles did Tesla deliver in 2021?
+HotpotQA Multi-hop (E) Dev set 7,405 500 What election will take place on the same day
+as the United States Senate election in Texas?
+2WikiMQA Multi-hop (E) Dev set 12,576 500 Where was the place of death of Isabella of
+Bourbon’s father?
+Bamboogle Multi-hop (E) All 125 125 Who was the first African American mayor of
+the most populous city in the United States?
+StrategyQA Multi-hop (I) Train set 2,290 500 Can Arnold Schwarzenegger deadlift an adult
+Black rhinoceros?
+TempQA Multi-hop (I) All 1,270 186 Who was the commander-in-chief of the colo-
+nial army during the revolutionary war?
+PriorQA Mix-hop All 500 500 What were the primary strategies employed
+by the British army duringthe American Civil
+War?
+datatype noise, orthographic noise, and prior noise,
+as illegal sentence noise has been extensively dis-
+cussed in the main text, and other forms of noise
+have been explored in previous studies. These addi-
+tional results aim to provide a more comprehensive
+understanding of various noise types and their ef-
+fects on the model’s performance.
+Table 7: The effects of prior noise on LLMs, which is
+measured by accuracy (%). ‘Base’ indicates the scenario
+with no retrieval. ‘Misleading’ refers to counterfactual
+content associated with prior noise. ‘Background’ de-
+notes multiple retrieval results obtained after decompos-
+ing the query into its constituent entities.
+Models Base Misleading Background
+Llama3-8B 93.40 47.80 90.00
+Qwen2-7B 94.20 28.20 98.20
+Mistral-7B 96.60 28.60 99.20
+Llama2-13B 21.00 5.60 61.60
+Vicuna-13B 91.00 25.80 99.20
+Baichuan2-13B 90.00 45.20 96.40
+Llama3-70B 99.00 78.40 99.80
+Mixtral-8x7B 91.20 39.00 99.60
+Average 79.93 34.20 88.47
+C.1 Results on Prior Noise
+Table 7 presents results for RAG models affected
+by prior noise using our dataset, PriorQA. Ques-
+tions in this dataset contain factual errors, such
+as “Which country hosted the 1980 FIFA World
+Cup?” (Actually, 1980 FIFA World Cup was not
+held). Accuracy is assessed by whether models
+correctly identify and respond with “The question
+is factually incorrect”. We observe that all mod-
+els except Llama2-13B perform well with direct
+prompts and benefit from retrieving background in-
+formation due to extensive pre-training knowledge.
+However, models like Llama2-13B, which persist
+in searching based on incorrect priors, may retrieve
+false information and exhibit diminished perfor-
+mance. This underscores the need to detect prior
+errors in user queries before answering in future
+RAG system designs.
+Figure 10: Impact of datatype noise (DN) on the av-
+erage accuracy of eight representative LLMs on RGB.
+‘Golden’, ‘SuN’, ‘CN’, and ‘ISN’ represent golden con-
+text only, golden context with supportive, counterfactual,
+and illegal sentence noise, respectively. The mean is
+marked by a red solid line and the median by a purple
+dashed line.
+C.2 Results Across Eight Models
+As shown in Figure 10, we first present the aver-
+age performance over seven datasets for datatype
+noise to demonstrate that beneficial noise improves
+5032

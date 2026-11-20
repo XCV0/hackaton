@@ -1,0 +1,99 @@
+Table 7: Work Genres in Which Each Character
+Appears. We list the work genres associated with the
+15 characters included in the CharacterRAG dataset.
+Character Genre
+Anya Forger Action, Comedy, Drama, Slice of Life, Spy
+Chika Fujiwara Gag, Romantic Comedy
+Edward Elric Adventure, Fantasy
+Frieren Fantasy, Adventure
+Hitori Gotoh Band, Comedy, Drama, Music, Slice of Life
+Light Yagami Crime, Dark Fantasy, Noir, Thriller
+Megumin Comedy, Fantasy, Isekai
+Mikoto Misaka Cyberpunk, SF, Slice of Life
+Nina Iseri Band, Drama
+Saitama Action, Comedy, Hero
+Son Goku Battle, Comedy, Fantasy
+Tanjiro Kamado Action, Adventure, Historical Fantasy
+Tobio Kageyama Sports, Volleyball
+Yui Hirasawa Band, School, Slice of Life
+A Chunk Duplication Frequencies
+In Figure 6, previous RAG method retrieves
+(k = 3) relevant chunks for each of the 60 given
+MBTI questions, and subsequently measures both
+the chunk utilization rate and the duplication fre-
+quency. Our method measures the chunk utilization
+rate and duplication frequency for the chunks se-
+lected by ACTS and GS.
+B Genre Diversity in CharacterRAG
+Table 7 shows the genres of works in which each
+character appears. Note that while there are some
+similar categories, CharacterRAG encompasses a
+broader range of genres. The detailed personality
+distribution for each character (e.g., Extroverted vs.
+Introverted) is shown in Figure 2.
+C Related Work
+Role-Playing Agents. With the advent of LLMs,
+researchers have pursued finer-grained persona
+consistency (Zhang et al., 2018; Ji et al., 2025;
+Park et al., 2025; Lu et al., 2024; Zhou et al., 2024).
+Complementary benchmarks soon followed, along
+with various evaluation methods (Boudouri et al.,
+2025; Ahn et al., 2024; Wang et al., 2024b, 2025a).
+However, there has been little research on RAG-
+based role-playing agents (RPAs). In this paper,
+we propose AMADEUS, a RAG-based RPA frame-
+work that not only elicits information related to a
+character, but also maintains persona consistency
+Algorithm 1 Guided Selection (GS)
+Input: User query u; Set of knowledge chunks C; Maximum
+number of search iterations N; Slot size M
+Output: Selected chunk set S
+1: Initialize slot S = ∅
+2: Sort chunks C in descending order according to semantic
+similarity to u, obtaining Csorted
+3: Set iteration counter t ← 0
+4: for each chunk c in Csorted do
+5: if t ≥ N or |S| ≥ M then
+6: break
+7: end if
+8: With an LLM, determine if chunk c contains infor-
+mation from which the character’s attributes can be
+inferred regarding u
+9: if the LLM returns True then
+10: Add c to slot S
+11: end if
+12: t ← t + 1
+13: end for
+14: if |S| = 0 then
+15: S ← Top-K + 1 chunks from Csorted (highest semantic
+similarity to u)
+16: end if
+17: return S
+Table 8: Role-playing capabilities on MBTI and BFI.
+Lower values of HS (1-10) are preferable.
+RAG Method GPT-4.1 Gemma3-27B Qwen3-32B
+HS (↓) HS (↓) HS (↓)
+MBTI
+Naive RAG 2.69 2.53 2.33
+CRAG 2.38 2.91 1.80
+AMADEUS (Ours) 2.05 2.02 2.04
+BFI
+Naive RAG 2.74 2.52 2.42
+CRAG 2.26 2.75 1.96
+AMADEUS (Ours) 1.94 1.99 2.03
+even when responding to queries beyond its explicit
+knowledge.
+Retrieval-Augmented Generation (RAG).
+RAG couples non-parametric memory with an
+LLM to mitigate hallucination and stale knowl-
+edge (Lewis et al., 2020; Bhat et al., 2025; Zhong
+et al., 2025b; Zhu et al., 2024). Nevertheless, no ex-
+isting benchmark explicitly targets role-playing un-
+der RAG, and prior work still assumes personas are
+short, knowledge-dense snippets. We mitigate this
+discrepancy with a novel text splitter that tailors
+chunk lengths and hierarchical context to each char-
+acter. We also introduce CHARACTERRAG, the
+first dataset designed for building and evaluating
+RAG-based role-playing agents across 15 fictional
+character’s personas.

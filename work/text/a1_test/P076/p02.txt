@@ -1,0 +1,112 @@
+such as abundant availability, high electrochemical stability,
+eﬃcient hole extraction, and low fabrication cost with simple
+fabrication techniques.21–23 Moreover, carbon materials are
+highly hydrophobic and chemically inert, which can signi-
+cantly improve the stability of PSCs in an ambient environ-
+ment.24,25 In addition to these advantages, recent studies have
+also highlighted the role of mobile ion migration in the
+degradation of metal halide perovskite (MHP) devices. Penu-
+kula et al. systematically demonstrated, using transient dark
+current measurements, that both device architecture and elec-
+trode composition signicantly inuence ionic dynamics. Their
+ndings showed that inert carbon electrodes can reduce the
+mobile ion concentration (No) by nearly two orders of magni-
+tude compared to reactive metal electrodes like silver, while also
+enhancing mechanical robustness as indicated by increased
+fracture energy (Gc). This ionic suppression further supports the
+long-term operational stability of C-PSC congurations.26
+Nevertheless, despite the numerous advantages of C-PSCs,
+several critical issues remain unsolved, such as low carrier
+extraction, increased carrier recombination, and poor energy
+band alignment at the perovskite/carbon interface, all of which
+adversely impact the device performance.27,28 Several methods
+have been adopted to improve the intrinsic properties of carbon
+layer and achieve favorable carbon/perovskite interfacial
+contacts. However, the PCEs of these devices still lag behind the
+traditional metal electrode-based PSCs due to the undesirable
+interface charge recombination. To address this issue, intro-
+duction of HTMs between the carbon and perovskite layer has
+been proved eﬀective in mitigating interfacial issues in planar
+n–i–p C-PSCs.29–31 Various HTMs have been adopted for C-PSCs
+to improve their eﬃciency. For example, Spiro-OMeTAD,
+a prevalent HTM in conventional PSCs, has demonstrated
+high PCE above 20% in C-PSCs.18,32 Poly(3-hexylthiophene-2,5-
+diyl) (P3HT) is also commonly used HTL in C-PSCs owing to
+its suitable energy level alignment, which further suppress the
+carrier recombination with high hole transport rate.33,34 Copper
+thiocyanate (CuSCN), a hydrophobic inorganic HTM, has also
+shown eﬀectiveness in increasing the PCE as well as enhancing
+the stability of C-PSCs.35–37
+While various HTMs such as Spiro-OMeTAD, PTAA, and
+CuSCN have been explored in carbon-based devices—each
+demonstrating unique advantages in eﬃciency or stability—
+most studies have focused on single-material demonstrations
+rather than comparative analysis under consistent architec-
+tures. For example, as noted earlier, Yang et al. showed that
+CuSCN oﬀers improved stability compared to Spiro-OMeTAD,
+while Zhang et al. demonstrated enhanced operational dura-
+bility using dopant-free PTAA with SWCNTs.37,38 These ndings
+underscore the importance of HTL selection, but a direct side-
+by-side evaluation of commonly used HTLs in a planar C-PSC
+conguration remains limited.
+In our work, we address this gap by systematically investi-
+gating three commonly used HTLs—Spiro-OMeTAD, CuSCN,
+and PTAA—in carbon-based planar PSCs, including a control
+device without an HTL. Our ndings reveal that Spiro-
+OMeTAD-based devices deliver the highest performance,
+achieving a superior ll factor (FF) and PCE (up to 19.29%),
+followed by PTAA and then CuSCN. Notably, while CuSCN-
+based devices exhibit lower PCEs, they demonstrate the
+greatest durability, with Spiro-OMeTAD showing moderate
+stability and PTAA the least. These results highlight the
+possibility of simultaneously enhancing eﬃciency and stability
+through careful selection and optimization of HTMs, thereby
+advancing the development of low-cost, large-area carbon-
+based perovskite solar cells.
+2. Experimental section
+2.1 Materials
+PbI2 (Sigma-Aldrich, 99.999%), PbBr2 (Alfa Aesar, 99.98%), for-
+mamidinium iodide (FAI, GreatCellSolar), methylammonium
+bromide (MABr, GreatCellSolar), CsI (BeanTown Chemical,
+99.9%), SnCl2$2H2O (Acros Organics, 97%), and thiourea (Alfa
+Aesar, 99%) were used without further purication. Dimethyl
+sulfoxide (DMSO) and dimethyl formamide (DMF) were
+purchased from Sigma-Aldrich and used as received. Spiro-
+OMeTAD, lithium bis(triuoromethylsulfonyl)imide (Li-TFSI),
+4-tert-butylpyridine (tBP), and chlorobenzene were purchased
+from Sigma-Aldrich. Carbon paste was purchased from
+Guangzhou Saidi technology development Co. Ltd, China.
+2.2 Device fabrication
+The ITO substrates were cleaned by successively sonicating in
+detergent solution, deionized water, acetone, and IPA followed
+by 30 min of UV-ozone treatment. SnO2 (2.67%) colloid
+precursor solution was spin-coated on the cleaned ITO
+substrates at 3000 rpm for the 30 s. These substrates were then
+annealed at 150 °C for 1 hour and were then transferred to
+anitrogen-lled glovebox aer a 10-minute UV-ozone treat-
+ment. The triple cation perovskite (Cs0.05FA0.85MA0.1I2$55Br0.45,
+1.4 M) precursor was then deposited by a two-step spin-coating
+procedure: 1000 rpm 10 s followed by 5000 rpm 30 s. 600 ml
+diethyl ether was then dropped onto the spinning substrates
+25 s before the end of spin-coating. Spiro-OMeTAD precursor
+solution was prepared by dissolving 72.3 mg of Spiro-OMeTAD,
+28.8 mLoftBP,and17.5mL of Li-TFSI solution (520 mg of Li-
+TFSI in 1 mL acetonitrile) in 1 mL of chlorobenzene. This
+solution was then spin-coated on the annealed perovskite lms
+at 3000 rpm for 30 s. CuSCN precursor solution was prepared
+by dissolving 35.1 mg of CuSCN in 1 mL of diethyl sulde and
+stirred overnight prior to use. This prepared solution was spin
+coated on annealed perovskite lmsat3000rpmfor30s.PTAA
+solution was prepared by dissolving 10.1 mg of PTAA, 4 mLof
+TBP and 75 mL of LiTFSI (170 mg of Li-TFSI in 1 mL acetoni-
+trile). This solution was spin coated on annealed perovskite
+lms at 3000 rpm for 30 s. The free-standing carbon lm (FSC)
+electrode was prepared by the solvent exchange technique.34
+Briey, the commercial carbon paste was applied onto a glass
+substrate using the doctor-blading technique. The resulting
+wet lm was then immersed in ethanol to remove residual
+solvent through a solvent-exchange process. Aerward, the
+lm was dried for several minutes using a dry air pump. This
+dried carbon electrode lm was stored in a dry box for 48 hours
+13682 | RSC Adv.,2025,15,13681–13690 © 2025 The Author(s). Published by the Royal Society of Chemistry
+RSC Advances Paper

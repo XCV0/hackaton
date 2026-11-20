@@ -1,0 +1,130 @@
+32
+Prompt: Topic Category Selection 
+# Instructions
+Following the conditions below, think
+step-by-step to select and output one element
+from the ''Topic Category List.''
+# Conditions:
+- Choose a category that would engage someone
+interested in the details listed under ''User
+Interests.''
+- Select one category from the ''Topic Category
+List.''
+- Do not output any elements other than the
+ones selected.
+# User Interests:
+{interest}
+# Topic Category List:
+{category_list}
+ 
+We used the following prompt to select a
+topic candidate for the user from a set of candi-
+dates categorized under the previously selected
+category. The variable {interest} contains key-
+words representing the user’s interests associ-
+ated with the selected category. The variable
+{knowledge} contains the user’s knowledge in-
+formation relevant to that category. The vari-
+able {topic_candidates} contains a summary list of
+topic candidates related to the category.
+Prompt: Topic Candidate Selection 
+# Instructions
+Following the conditions below, think
+step-by-step to select one element from the
+''Topic Candidates.''
+# Conditions:
+- Choose a candidate that provides new
+information not included in the knowledge
+listed under ''User Information.''
+- Treat the details in ''User Information'' as
+known information.
+- Also consider as known any information that
+can be inferred from ''User Information.''
+- Taking into account these known facts, select
+a candidate that is likely to contain
+information unknown to the user. Prioritize
+candidates that align with the user's
+interests.
+- Select and output one candidate from the
+''Topic Candidates.''
+- When outputting the selected result, do not
+add any decorations such as parentheses; simply
+output the exact line as it appears in the
+''Topic Candidates.''
+# User Information:
+Interests: {interest}
+Knowledge: {knowledge}
+# Topic Candidates:
+{topic_candidates}
+ 
+A.3. Initial Utterance Generation
+We used the following prompt for initial utterance
+generation. The variable {referred_info} contains
+the information retrieved by PT-RAG or by com-
+parison methods.
+Prompt: Initial Utterance Generation 
+# Instruction
+Initiate a conversation with the user according
+to the following conditions.
+# Conditions
+- The ''Topic'' below is a piece of information
+that likely contains new and interesting
+details for the user. Use this topic when
+speaking with the user.
+- Assume that the user is not aware of the
+information you are providing.
+- Ensure that the content of your conversation
+adheres strictly to the details in the
+''Topic.'' Avoid creating fictional statements
+like ''new information emerged.''
+- If there is no Topic available, pose
+questions related to the user's information. Do
+not mention that there is no topic.
+# Topic
+{referred_info}
+ 
+A.4. LLM-as-a-judge
+We used the following prompts in the automatic
+evaluations described in Section 4.1. The vari-
+able {generated} contains the outputs produced
+by each evaluation method. The variable {per-
+sona} identiﬁes the target speaker for each cor-
+pus. The variable {conversation} contains a sum-
+mary of each speaker’s conversations.
+Prompt: Interest Scoring (1-10) 
+# Instruction:
+Evaluate the text labeled ''Evaluation Target''
+based on the following conditions.
+# Conditions:
+- Assess whether the information is of interest
+to the individual described in ''User
+Information.''
+- If the information is highly interesting to
+the individual, assign a score of 10; if it is
+not at all interesting, assign a score of 1.
+Record the result under the title ''Score''
+after a line break.
+- If the information in the evaluation target
+is relevant to the individual's interests, add
+points even if it does not directly relate to
+the user information.
+- If any element aligns with the user
+information, add points without deducting for
+the non-alignment of other elements.
+- Only deduct points if the information clearly
+does not align with the individual's interests.
+- Do not deduct points for information where
+interest cannot be determined.
+- Evaluate and score as objectively as
+possible.
+- Provide the reasoning for the score under the
+title ''Reason'' after a line break.
+- Write the reason without adding additional
+line breaks.
+- Output the ''Reason'' first, followed by the
+''Score.''
+# Evaluation Target:
+{generated}
+# User Information:
+{persona}
+ 

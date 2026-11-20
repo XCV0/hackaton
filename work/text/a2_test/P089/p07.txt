@@ -1,0 +1,131 @@
+Figure 3: Three types of examples, including the original query and rewrites from SFT and RaFe. The Prec@5
+results of queries and rewrites are presented, and “Correct” denotes that whether the prediction is correct or not.
+OQR SFT RaFe
+FreshQA
+56
+58
+60
+62
+64
+66
+68
+70Results(%)
+0.69
+0.96
+1.9
+Ranked
+Raw
+OQR SFT RaFe
+NQ
+46
+48
+50
+52
+54
+56
+58
+0.14 0.15
+0.78
+Ranked
+Raw
+OQR SFT RaFe
+TriviaQA
+70.0
+72.5
+75.0
+77.5
+80.0
+82.5
+85.0
+87.5
+Results(%)
+0.54
+1.41 1.09
+Ranked
+Raw
+OQR SFT RaFe
+HotpotQA
+36
+38
+40
+42
+44
+46
+48
+50
+52
+1.56
+1.21 0.88
+Ranked
+Raw
+Comparison Before and After Ranked
+Figure 4: The performance of different rewrite models
+before and after all the documents are reranked under
+EXPAND setting. The number displayed on each bar rep-
+resents the specific improvement from Raw to Ranked.
+place “recipient” with “winner”, it changes “team”
+from a sports competition context to “squad”, a
+term commonly used in military, police, or other
+contexts, thereby introducing potential ambiguity.
+(C): RaFe’s rewrites sentences for better un-
+derstanding. This kind of case is not easily dis-
+cernible as good or bad based on intuition; however,
+RaFe’s rewrite demonstrates better performance in
+retrieval results. Such cases show why we require
+feedback to enhance the QR effectiveness, as we
+always fail to articulate how a query could be for-
+matted to better suit a retriever.
+5.2 How does the Reranker Feedback Work?
+To investigate how reranker works for query rewrit-
+ing, we first ascertain the ability of the publicly
+Methods Prec@5 Prec@10 MRR
+Original Query 41.41 39.76 54.11
+Bad Rewrite 30.74 28.13 43.64
+Good Rewrite 46.14 44.34 59.17
+Table 5: The comparison of retrieval results between
+original query and good/bad rewrites.
+0 1 2 3 4 5
+Rewrite Nums
+60
+61
+62
+63
+64
+65
+66
+QA Results
+Raw
+Ranked
+0 1 2 3 4 5
+Rewrite Nums
+26
+28
+30
+32
+34
+36
+Prec@5
+Raw
+Ranked
+Figure 5: The results of different rewrite nums in EX-
+PAND setting. We list the result from 0 to 5 rewrites.
+The rewrites are generate by RaFe(KT O).
+available reranker to rank on unseen datasets.
+The comparing results are presented in Figure 4.
+It can be clearly seen that all methods yield better
+QA performance after documents are ranked on all
+the datasets. This indicates that the reranker’s pat-
+tern for document sorting acts as a positive signal
+for the retrieval system. Meanwhile, we can ob-
+serve that RaFe performs the better improvements
+after ranked, which further demonstrates the effec-
+tiveness of reranker feedback.
+Moreover, we validate the effectiveness of
+reranker in constructing good and bad pairs within
+Tf. We compare the precision of documents re-
+trieved by different queries in Table 5. It is obvious
+that the documents retrieved by good rewrites ex-
+hibit significantly higher precision compared to
+those retrieved by the original query, which in-
+dicates that the reranker is capable of effectively
+890

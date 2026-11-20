@@ -1,0 +1,67 @@
+Example 2
+Query: Why haven’t the tuition fees for Suzhou kindergartens been paid yet?
+Document: Suzhou kindergartens are all free!!! It seems Suzhou is the only city in Jiangsu province with free
+kindergartens across the entire province. The policy is great, saving us money! Every time we cross the street, buses
+stop far away to let us pass, so I have to drag my son along, afraid we’ll be a step too slow.
+Jiangsu Province’s free kindergarten policy will be gradually implemented starting from the fall semester of 2025.
+The specific implementation time and scope are as follows:
+2025: Kindergarten for the youngest children will be free.
+2026: Kindergarten for the youngest and middle-aged children will be free.
+2027: Kindergarten for the youngest, middle-aged, and oldest children will be completely free.
+The implementation areas include:
+Nanjing City: Pukou District, Qixia District, Yuhuatai District.
+Wuxi City: Xishan District, Huishan District, Jiangyin City.
+Xuzhou City: Xuzhou Economic and Technological Development Zone.
+Changzhou City: Xinbei District, Liyang City.
+Suzhou City: Gusu District, Wuzhong District, Xiangcheng District, Changshu City, Taicang City, Suzhou Industrial
+Economic and Technological Development Zone.
+...
+Gold Score: 2
+R³A Output (two rounds)
+<intent> The user is inquiring about the reason for the absence of tuition fee collection in Suzhou. This likely involves
+policy changes or implementation delays. The intent is to confirm if the policy is now "free of charge" and understand
+the specific implementation details. </intent>
+<think> The user wants to know why fees haven’t been collected. The document directly addresses this by stating that
+kindergartens in Suzhou are now free and provides a detailed implementation timeline for different grades (2025-2027)
+and specific districts. Since the document directly satisfies the information need without requiring additional inference, it
+is highly relevant. </think>
+<extract> Suzhou kindergartens are all free!!! It seems Suzhou is the only city in Jiangsu with full-region fee
+waivers. </extract>
+<score> 2 </score>
+Example 3
+Query: How to buy Huangshan tickets for those over 60?
+Document: Must-read for coming to Huangshan, get the free and half-price activities in one post!!
+January Huangshan Scenic Area Ticket Price:
+Winter Tour Ticket Price: Winter Tour: Full ticket 150 yuan each, half ticket 75 yuan each.
+Winter Tour Ropeway Ticket Price: Winter Tour: Yungu and Taiping Ropeway tickets, 65 yuan each way; Yuping
+Ropeway ticket, 75 yuan each way; Xihai Grand Canyon Sightseeing Cable Car ticket, 80 yuan each way.
+January Huangshan Scenic Area 4 Major Privilege Activities:
+Activity: Free Ticket Opening Day Activity.
+Activity time: Every Wednesday in the first quarter of 2024 (non-holidays), 12 days in total.
+Reservation process: 1. Tourists enter the "Huangshan Tourism Official Platform" Alipay or WeChat mini-program, click
+the "Free Ticket Opening Day" activity carousel on the homepage
+...
+Activity: Free admission for youths under 18 and people aged 60 and above.
+Activity content: In the first quarter of 2024, youths under 18 and people aged 60 and above can enjoy free
+admission to Huangshan Scenic Area. Enter the Huangshan Tourism Official Platform mini-program Huangshan
+Scenic Area ticket reservation page, select the ticket type "Huangshan Ticket Free Consumption Voucher for
+Groups over 60" for reservation.
+Gold Score: 1
+R³A Output (two rounds)
+<intent> Purchasing methods or steps for Huangshan scenic area tickets specifically for people over 60 years old.
+</intent>
+<think> The user’s need is the purchasing methods or steps for Huangshan tickets for people over 60 years old.The
+document provides the reservation process, including how to reserve through the Huangshan Tourism Official Platform
+mini-program and select the corresponding ticket type for reservation. Although the document primarily focuses on the
+free ticket activity, it has provided steps and methods for obtaining tickets, even if it is a free ticket case. However, the
+search term may also include purchasing tickets in non-free ticket situations (e.g., standard price purchase), but there is
+no other relevant information in the document. Therefore, the document partially answers the question of how to
+buy tickets but may not cover all possible situations or detailed steps outside the promotional period, so the score
+should be 1. </think>
+<extract> In the first quarter of 2024, youths under 18 and people aged 60 and above can enjoy free admission to
+Huangshan Scenic Area. Enter the Huangshan Tourism Official Platform mini-program Huangshan Scenic Area ticket
+reservation page, select the ticket type "Huangshan Ticket Free Consumption Voucher for Groups over 60" for reservation.
+</extract>
+<score> 1 </score>
+Table 6: Example 2&3: Case study of R³A’s performance on test set of NoteRel dataset.
+140

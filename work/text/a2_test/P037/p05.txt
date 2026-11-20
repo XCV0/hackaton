@@ -1,0 +1,42 @@
+- project_name (string)
+- assigned_to (string)
+- start_date (date)
+- end_date (date)
+- status (string)
+Example 1:
+Question: List all active projects handled by Saba Attar.
+Expected Query:
+SELECT project_name
+FROM Projects
+WHERE assigned_to = ’Saba Attar’ AND status = ’active’;
+Example 2:
+Question: Retrieve all completed projects assigned to Mahesh Deshmukh.
+Expected Query:
+SELECT project_name
+FROM Projects
+WHERE assigned_to = ’Mahesh Deshmukh’ AND status = ’completed’;
+MongoDB Agent Few-Shot Prompt
+Schema Overview:
+{
+"collection": "Projects",
+"fields": {
+"project_id": "int",
+"assigned_to": "string",
+"status": "string",
+"deadline": "date"
+}
+}
+Example 1:
+Question: Find all active projects assigned to Aniruddha Salve.
+Generated Query:
+db.Projects.find({ "assigned_to": "Aniruddha Salve", "status": "active" });
+Example 2:
+Question: Retrieve all completed projects assigned to Saba Attar.
+Generated Query:
+db.Projects.find({ "assigned_to": "Saba Attar", "status": "completed" });
+Neo4j Agent Few-Shot Prompt
+Schema Overview:
+Graph: ResearchNetwork
+Nodes:
+- Researcher {name: string, field: string}
+5

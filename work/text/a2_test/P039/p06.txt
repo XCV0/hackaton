@@ -1,0 +1,99 @@
+details and question generation prompt can be seen
+in Appendix A.2 and C.
+To validate the performance and efficiency of
+global question answering, we compare TagRAG
+with two types of baselines. (1) Zero-shot LLM
+Generation: We call Qwen3-4B (Team, 2025),
+Qwen3-30B-A3B (Team, 2025) and Llama-3.3-
+70B-Instruct (Grattafiori et al., 2024) to directly
+answer the questions. (2) Retrieval-Augmented
+Generation: NaiveRAG (Lewis et al., 2020) fo-
+cuses on local context through dynamic document
+retrieval. GraphRAG (Edge et al., 2024) utilizes
+entity graphs and community summaries for global
+knowledge synthesis. LightRAG (Guo et al., 2025)
+is a lightweight baseline that integrates graph struc-
+tures with dual-level text indexing for fast and
+real-time updates. MiniRAG (Fan et al., 2025)
+achieves high efficiency on small language models
+via semantic-aware graph indexing and lightweight
+topology-based retrieval. Detailed descriptions are
+shown in Appendix A.3.
+5.2 Evaluation Metrics
+Four evaluation metrics were used to assess the
+performance of the comparison methods: Com-
+prehensiveness: How much detail does the an-
+swer provide to cover all aspects and details of the
+question? Diversity: How varied and rich is the
+answer in providing different perspectives and in-
+sights on the question? Empowerment: How well
+does the answer help the reader understand and
+make informed judgments about the topic? Over-
+all: Which answer is better overall?
+We utilize the powerful model GPT-4o-mini,
+gemini-2.5-pro and claude-sonnet-4.5-20250929
+to determine the winner for each of the two com-
+parison methods based on the above metrics. For
+each dataset, we also exchange the order of the
+results of the two comparison methods to avoid po-
+sition bias. Finally, we report the average of 3*2=6
+evaluation results. The evaluation prompt can be
+seen in Appendix C.
+5.3 Implementation Details
+We use Qwen3-4B (Team, 2025) as the backbone
+to conduct the experiments without thinking. bge-
+large-en-v1.5 (Xiao et al., 2023) is employed to
+embed questions and documents. The chunk size
+and overlap size are 1200 and 100, respectively.
+The vector database used in this work is nano-
+Agri CS Legal Mix Avg
+Zero-shot LLM Generation
+v.s. Qwen3-4B
+Comprehensiveness 85.9 69.6 70.3 58.8 71.2
+Diversity 78.9 64.4 62.0 53.9 64.8
+Empowerment 80.7 57.5 48.9 45.7 58.2
+Overall 83.2 59.3 53.7 49.3 61.4
+v.s. Qwen3-30B-A3B
+Comprehensiveness 84.8 68.8 72.7 59.6 71.5
+Diversity 79.5 65.1 62.1 59.6 66.6
+Empowerment 76.4 53.2 45.6 40.4 53.9
+Overall 80.3 55.5 51.6 44.7 58.0
+v.s. Llama-3.3-70B-Instruct
+Comprehensiveness 68.1 51.5 49.7 27.7 49.2
+Diversity 67.5 58.5 43.1 35.9 51.2
+Empowerment 56.9 43.1 27.2 22.8 37.5
+Overall 65.9 49.3 39.7 27.3 45.5
+Retrieval-Augmented Generation
+v.s. NaiveRAG
+Comprehensiveness 93.9 94.0 79.5 90.0 89.3
+Diversity 90.4 95.5 95.2 95.2 94.1
+Empowerment 91.2 88.3 74.9 88.1 85.6
+Overall 93.5 89.7 72.3 87.9 85.8
+v.s. GraphRAG
+Comprehensiveness 89.3 85.3 60.7 67.1 75.6
+Diversity 88.5 85.5 72.0 74.9 80.2
+Empowerment 90.8 81.6 63.2 67.9 75.9
+Overall 90.9 81.9 62.3 67.7 75.7
+v.s. LightRAG
+Comprehensiveness 94.4 85.1 80.3 88.1 87.0
+Diversity 94.9 88.1 88.5 92.3 91.0
+Empowerment 95.5 85.7 82.0 91.6 88.7
+Overall 94.4 84.0 79.9 89.7 87.0
+v.s. MiniRAG
+Comprehensiveness 76.0 55.2 56.8 64.1 63.0
+Diversity 80.7 64.7 70.4 77.1 73.2
+Empowerment 79.1 59.7 59.5 67.3 66.4
+Overall 78.3 58.4 57.5 65.3 64.9
+Table 1: Main results: winning rates (%) of TagRAG
+v.s. baselines with Qwen3-4B across four datasets.
+vectordb 1. The top-k number for Domain-centric
+Knowledge Retrieval is 3. More detailed experi-
+mental settings can be found in Appendix A.
+6 Results and Analysis
+6.1 Main Results
+Table 1 evaluates the winning rate of TagRAG
+against NaiveRAG, GraphRAG, LightRAG, and
+MiniRAG on four datasets: UltraDomain Agri-
+culture, CS, Legal, and Mix. We can draw the
+1https://github.com/gusye1234/nano-vectordb
+6439

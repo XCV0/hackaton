@@ -1,0 +1,68 @@
+390
+Retrieve Prompt AI Assistant
+User 
+Query
+ResponseMulti-domain 
+Relevant 
+Documents
+Multi-domain 
+Retrieval Corpus
+ aa
+b
+Figure 1: Overview of the MKP-QA framework. a⃝ The main RAG-QA pipeline: retrieval of multi-domain
+documents, prompt augmentation, and response generation. b⃝ Detailed view of the multi-domain knowledge
+augmentation: A domain router estimates query-domain relevance while a retriever finds relevant documents
+across product domains. A stochastic gating mechanism determines active domains, for which query-domain
+and query-document relevance scores are aggregated into a unified ranking of multi-domain documents. These
+top-ranked documents then augment the prompt, enabling effective cross-domain product QA.
+3.4 Federated Search
+For a given query q, we define the set of active
+domains A(q) = {j ∈ M | G(j, q) = 1}. For
+each active domain j ∈ A(q), we retrieve the
+top-k documents Dj = {d1 j , . . . , dk j } and their re-
+spective query-document relevance scores Sj =
+{s1 j , . . . , sk j } obtained from the bi-encoder retriever
+detailed above: si j = s(q, di j ) = E(q) · ET (di j ).
+Next, we aggregate these to a unified domain-aware
+retrieval scoring U (j, q, di j ) = F (q)[j] · s(q, di j ) =
+pj · si j , where U (·) is the unified multi-domain
+ranking score function for query q, domain j and
+retrieved document di j at position i in this domain.
+The final multi-domain ranked set of documents
+with federated search D∗ is obtained by selecting
+the top-k documents across all the active domains:
+D∗ = arg maxk {U (j, q, di j )|j ∈ A(q), di j ∈ Dj }.
+These top-ranked documents from multiple do-
+mains are then augmented to the prompt and fed to
+LLM for the product QA.
+4 Dataset Creation and Statistics
+4.1 Data Sources
+The corpus is derived from the publicly available
+Adobe Experience League (ExL) documentation1,
+1https://experienceleague.adobe.com/en/docs
+focusing on three key products: Experience Plat-
+form (AEP), Target, and Customer Journey Ana-
+lytics (CJA). These web-pages provide comprehen-
+sive information on product concepts, capabilities,
+troubleshooting guides, and usage instructions.
+4.2 Data Pre-processing
+The data preparation process involves several steps:
+1⃝ Web Crawling: We employ a custom crawling
+script to extract content from the ExL web-pages.
+This script navigates through the documentation,
+capturing textual information while omitting im-
+ages and converting clickable and in-section links
+to plain text for consistency. 2⃝ Initial Segmenta-
+tion: The extracted content is initially segmented
+based on HTML header tags. This approach cre-
+ates distinct sections that typically correspond to
+specific topics or tasks within each documentation.
+3⃝ Document Chunking: To optimize the corpus
+for efficient retrieval and context preservation, we
+implement the following chunking strategy. Each
+web-page is divided at every header level, creating
+initial chunks that align with the document’s logi-
+cal structure. If any section exceeds a pre-defined
+token limit (512 tokens), we utilize LangChain’s
+hierarchical splitting approach based on a specified
+character list. This method prioritizes maintaining

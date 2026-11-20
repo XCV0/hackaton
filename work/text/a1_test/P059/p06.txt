@@ -1,0 +1,60 @@
+The Ag3BiI6 devices showed photo-response with hysteresis
+behaviour under illumination, indicating the existence of
+defects and/or vacancy-mediated ion migration in Ag3BiI6.35,36 It
+is apparent from Fig. 7 and Table 1 that the devices with 4tBP
+and biPY pre-treatments yield an improved Voc. With biPY, Voc
+was improved from 0.42 V to 0.48 V. These results agree with
+previous studies on DSSCs, in which the conduction band of
+TiO2 was negatively shied to improve Voc.35 However, applying
+the N-donor molecule, such as 4tPB and biPY, may have intro-
+duced a series resistance at the TiO2 interface, leading to low
+Jsc.37 Therefore, the overall as-prepared performance of N-donor
+treated devices remains largely unchanged.
+When comparing the results of dye molecule treated devices,
+the performance is poor due to low Jsc (Fig. S5 and Table S1†).
+The energy level alignment mismatch may hinder electron–hole
+extraction because the lowest occupied molecular orbital
+(LUMO) of CPDT-1 (−2.8 eV) and N719 (−3.6 eV) is higher than
+or at the same position compared to the reported conduction
+band of Ag3BiI6 (−3.6 eV), creating a barrier for electron injec-
+tion (Fig. S6†).15,23,38,39 Therefore, the electron from Ag3BiI6
+could be hampered, causing a high recombination rate within
+Ag3BiI6.
+CuSCN devices demonstrated an increased Voc with minor Jsc
+loss, which is likely attributed to better hole extraction. As N-
+donor molecule pre-treatment exhibited better performance
+than dyes, an attempt has been made at joint-treatment using
+biPY and 4tBP with CuSCN. Surprisingly, the joint-treatment
+devices demonstrated serious hysteresis behaviour and less
+eﬃcient performance, than the devices with only CuSCN
+(Fig. S5†).
+The calculated hysteresis index, HI, is compared to evaluate
+the hysteresis level (listed in Table S1†). HI can be calculated
+using the following equation:
+HI ¼ PCEreverse /C0 PCEforward
+PCEreverse
+Fig. 7 J–V curves of as-prepared Ag3BiI6 TM-SC devices with biPY,
+4tBP and CuSCN treatments.
+Table 1 J–V characteristic parameters of as-prepared Ag3BiI6 TM-SCs with biPY, 4tBP and CuSCN treatmentsa
+Device Ageing Scan Jsc [mA cm−2] Voc [V] FF PCE (%)
+Ag3BiI6 only As-prepared Forward 1.69 (1.48 /C6 0.28) 0.34 (0.34 /C6 0.02) 0.33 (0.31 /C6 0.02) 0.19 (0.16 /C6 0.04)
+Reverse 1.70 (1.50 /C6 0.28) 0.43 (0.42 /C6 0.02) 0.39 (0.36 /C6 0.03) 0.28 (0.24 /C6 0.06)
+biPY + Ag3BiI6 As-prepared Forward 1.12 (1.06 /C6 0.16) 0.45 (0.44 /C6 0.02) 0.32 (0.31 /C6 0.04) 0.16 (0.14 /C6 0.04)
+Reverse 1.05 (0.99 /C6 0.12) 0.48 (0.48 /C6 0.01) 0.53 (0.49 /C6 0.04) 0.27 (0.23 /C6 0.02)
+4tBP + Ag3BiI6 As-prepared Forward 1.22 (1.17 /C6 0.20) 0.36 (0.36 /C6 0.04) 0.33 (0.32 /C6 0.04) 0.14 (0.13 /C6 0.03)
+Reverse 1.34 (1.23 /C6 0.28) 0.44 (0.43 /C6 0.01) 0.53 (0.46 /C6 0.07) 0.32 (0.24 /C6 0.05)
+Ag3BiI6 + CuSCN As-prepared Forward 1.63 (1.47 /C6 0.21) 0.43 (0.40 /C6 0.02) 0.32 (0.34 /C6 0.05) 0.22 (0.20 /C6 0.04)
+Reverse 1.65 (1.46 /C6 0.21) 0.47 (0.46 /C6 0.01) 0.42 (0.43 /C6 0.04) 0.33 (0.29 /C6 0.05)
+Ag3BiI6 only 1 week aged Forward 1.95 (1.75 /C6 0.40) 0.39 (0.37 /C6 0.05) 0.34 (0.32 /C6 0.03) 0.26 (0.21 /C6 0.08)
+Reverse 1.97 (1.79 /C6 0.36) 0.49 (0.49 /C6 0.02) 0.39 (0.36 /C6 0.05) 0.38 (0.32 /C6 0.10)
+biPY + Ag3BiI6 1 week aged Forward 1.30 (1.12 /C6 0.12) 0.49 (0.47 /C6 0.02) 0.33 (0.33 /C6 0.01) 0.21 (0.17 /C6 0.03)
+Reverse 1.21 (1.07 /C6 0.10) 0.57 (0.57 /C6 0.01) 0.56 (0.50 /C6 0.06) 0.39 (0.30 /C6 0.05)
+4tBP + Ag3BiI6 1 week aged Forward 1.68 (1.33 /C6 0.27) 0.44 (0.42 /C6 0.03) 0.34 (0.34 /C6 0.03) 0.25 (0.19 /C6 0.04)
+Reverse 1.64 (1.33 /C6 0.28) 0.52 (0.51 /C6 0.01) 0.57 (0.46 /C6 0.08) 0.49 (0.31 /C6 0.11)
+Ag3BiI6 + CuSCN 1 week aged Forward 2.28 (2.16 /C6 0.53) 0.49 (0.45 /C6 0.03) 0.36 (0.37 /C6 0.04) 0.40 (0.35 /C6 0.07)
+Reverse 2.35 (2.17 /C6 0.62) 0.53 (0.51 /C6 0.02) 0.47 (0.48 /C6 0.05) 0.60 (0.52 /C6 0.09)
+a The average results in brackets were calculated from 5 individual devices for each type.
+Fig. 8 J–V curve of 1 week aged Ag3BiI6 TM-SC devices with biPY,
+4tBP and CuSCN treatments.
+1072 | Sustainable Energy Fuels,2023,7,1067–1076 This journal is © The Royal Society of Chemistry 2023
+Sustainable Energy & Fuels Paper

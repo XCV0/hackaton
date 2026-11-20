@@ -1,0 +1,109 @@
+significant domain gaps between different datasets, making the
+development of a robust and generalisable model an extremely
+challenging task. In our work, we aim to overcome these
+obstacles by employing a more robust inference paradigm of
+retrieval-augmented in-context learning to bridge domain gaps
+and circumvent the need for annotations in new domains.
+B. Multi-Modal Large Language Model
+Recent advancements in Large Language Models (LLMs)
+have paved the way for the emergence of Multi-modal Large
+Language Models (MLLMs) [1, 71, 3, 48, 89, 43, 27, 46,
+85]. Benefiting from scalable transformer-based architecture
+and web-scale training data, these models have demonstrated
+notable capabilities in general-purpose visual understanding
+tasks. One line of work focuses on modality fusion in the latent
+space, offering a scalable, end-to-end solution for MLLMs. For
+instance, Flamingo [3] and BLIP2 [43] fuse visual tokens to
+frozen LLM through gated attention and query transformers,
+respectively. LLaVA [48] and MiniGPT4 [89] use simple Multi-
+Layer Perceptron (MLP) with visual instruction tuning to align
+the pre-trained image encoder to LLM. Most relevant to us is
+the line of work focusing on video-language models such as
+Video-LLaVA [46] and Video-LLaMA [85], which integrate
+pre-trained video encoders into LLMs using strategies similar
+to those in image-based models.
+With remarkable perception and reasoning capacity, MLLMs
+reveal promising potential in various robotics tasks such as
+reasoning [20, 2, 32] and planning [62, 9, 47]. The most
+similar to us is the idea that engages a generalist foundation
+model for end-to-end embodied agent. PaLM-e [20] injects
+images, state estimates, and other sensor modalities to LLM
+and autoregressively produces natural language commands.
+RT-2 [9] and RT-X [58] fine-tune on image and low-level
+robot control signal pairs to perform end-to-end robot control.
+Specifically in driving, numerous approaches leverage language-
+only LLMs for decision-making [82] and then augment it with
+external perception module feedback [53, 25, 14], designed
+chain-of-thought reasoning templates [53, 52] or downstream
+planning [67, 69, 14] to form a system-level driving agent.
+Another more relevant line of work is end-to-end driving
+agents. DriveGPT4 [81] leverages a fine-tuned video-language
+model Valley [50] on driving specific visual instruction tuning
+based on BDD-X [39]. Dolphins [51] further use the designed
+Grounded chain-of-thought to enhance reasoning capacity.
+DrivingMLM [78] and Reason2Drive [56] scale up the driv-
+ing visual instruction tuning dataset through simulator-based
+data engine and annotation of existing large-scale datasets,
+respectively. While these approaches have demonstrated the
+potentials of MLLM, the prohibitively expensive training cost
+and the unsolved problem of catastrophic forgetting, which
+makes re-training or fine-tuning post-deployment challenging,
+further limiting their generalisation capacity to unseen driving
+environments. To solve this problem, we leverage a training-
+free retrieval-augmented in-context learning mechanism.
+C. In-Context Learning and Retrieval-Augmented Generation
+While LLMs demonstrate strong generative and reasoning
+capacity, there are still several issues associated with their
+output, such as hallucination [31], and slow knowledge up-
+dates [36]. In-context Learning (ICL) [10, 18] has emerged as
+a promising approach in LLM inference, potentially addressing
+several of these issues. This paradigm involves providing
+a test query alongside a few demonstration examples as
+contextual information. The LLM then generates an output
+for the test instance based on analogies drawn from context,
+without any updates to its parameters [64]. While ICL has
+been observed to enhance generalisability in various Natural
+Language Processing (NLP) tasks, its application in multi-
+modal contexts remains less explored, potentially due to the
+challenges associated with curating structured, high-quality
+multi-modal ICL datasets. Retrieval-Augmented Generation
+(RAG) [42] is another important inference paradigm for
+LLM. It provides an external knowledge database to augment
+the compressed knowledge within the LLM in inference
+by dynamically retrieving relevant information samples as
+contextual information. One of its promising applications
+is leveraging a systematic approach to curate In-Context
+Learning (ICL) examples. In this work, we build upon these
+inference paradigms and extend their application to Multimodal
+Large Language Models (MLLMs). We introduce a retrieval-
+augmented in-context learning mechanism through a curated
+multi-modal driving in-context instruction tuning dataset and a
+vector similarity-based retrieval engine specifically tailored for
+driving applications.
+III. METHOD
+RAG-Driver is a retrieval-augmented, multi-modal large lan-
+guage model (MLLM) for generalisable, explainable end-to-end
+driving. Its multi-tasking capabilities encompass three key areas:
+(1) Action Explanation, providing a human-understandable
+driving action description; (2) Action Justification, elucidating
+the rationale behind specific driving actions; and (3) Next
+Control Signal Prediction, forecasting upcoming control signals
+in response to the driving conditions. As shown in Fig. 2, it is
+composed of two primary components: a unified perception and
+planning unit built upon an MLLM backbone and a memory
+unit built upon a hybrid vector and textual database. These
+components interact through a retrieval engine, enabling robust
+multi-modal in-context learning (ICL) during decision-making.
+A. Multi-modal Large Language Model Architecture
+Following the successful MLLM paradigm of Video-
+LLaVA [46], we align visual and language embeddings through
+visual instruction tuning. We leverage a pre-trained video
+encoder and LLM and then inject the video embedding into the
+LLM through an MLP projector to build a fully differentiable
+MLLM.
+Video Encoder We adopt the pre-trained LanguageBind video
+encoder [88] as our frozen visual backbone fv, which is based
+on a ViT-B/32 vision transformer [19]. As shown in Fig. 3,
+given an input video frame sequence Vi =
+
+v1 i , v2 i , . . . , vk i 	 ∈

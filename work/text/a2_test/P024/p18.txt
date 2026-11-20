@@ -1,0 +1,74 @@
+What observation about aggregate gap in relation
+to DBS number is presented in the paper's Fig. 4?
+❌
+The paper's Fig. 4 presents the observation that the aggregate gap decreases as the
+number of DBSs increases. This suggests that the proposed scheme becomes more
+efﬁcient in terms of aggregate gap with an increase in the number of DBSs.
+### Fig. 4
+The ﬁgure shows the aggregate gap achieved through the proposed scheme versus the
+number of DBSs.
+1. **Observation**: The ﬁgure illustrates that as the number of DBSs increases, the
+aggregate gap decreases.
+2. **Explanation**: This indicates that the proposed scheme becomes more efﬁcient
+in terms of aggregate gap as more DBSs are utilized.
+3. **Implication**: The performance of the proposed scheme improves with an
+increase in the number of DBSs.
+The observation about the aggregate gap in relation to DBS number presented in the
+paper's Fig. 4 is that as the number of DBSs increases, the performance difference
+between the proposed scheme and the compared schemes also increases. This implies
+that the proposed scheme could be utilized more efﬁciently in the cases where most
+terminals in the coverage of the MBS require wireless services with high data rates.
+The observation about the aggregate gap in relation to DBS number is presented in the
+paper's Fig. 4. The ﬁgure illustrates the aggregate gap between the communication rates
+and the target rate of terminals with respect to the change in the number of utilized DBSs.
+1. The question asks for an observation about the aggregate gap in relation to DBS
+number.
+2. The relevant ﬁgure is Fig. 4, which shows the aggregate gap between the
+communication rates and the target rate of terminals.
+3. The ﬁgure demonstrates the beneﬁts of utilizing DBSs and the beneﬁts of optimizing
+the 3D positions of the DBSs.
+4. The ﬁgure also shows that as the number of DBSs increases, the performance
+difference between the proposed scheme and the compared schemes also increases.
+5. This implies that the proposed scheme could be utilized more efﬁciently in the cases
+where most terminals in the coverage of the MBS require wireless services with high
+data rates.
+The graph shows that the
+aggregate gap decreases
+as the number of DBSs
+increases. This is because
+as more DBSs are used, the
+communication rates of the
+terminals are closer to the
+target rate. This is because
+the DBSs can provide more
+resources to the terminals,
+which allows them to
+communicate at higher
+rates.
+Visual RAG
+Textual RAG
+VisDoMRAG
+Ground Truth
+Answer
+Query
+Ground Truth Evidence
+Both responses provide logical chains of thought and ﬁnal answers based on the evidence presented
+in the paper's Fig. 4. Response 1 focuses on the visual representation of the ﬁgure, while Response 2
+provides a more detailed textual explanation of the ﬁgure's content. Both responses are consistent
+with the question and the evidence provided in the ﬁgure.
+The paper's Fig. 4 presents the observation that the aggregate gap decreases as the number of
+DBSs increases. This suggests that the proposed scheme becomes more efﬁcient in terms of
+aggregate gap with an increase in the number of DBSs.
+✅
+✅
+✅
+Figure 13: Qualitative example from the ScigraphQA dataset, comparing VisDoMRAG with unimodal RAG
+strategies, with Qwen2VL as the base LLM.
+Metric Details
+GPU Hours 100
+GPU Specification RTXA600
+Number of GPU(S) 1
+Max Model Parameters 7B
+Table 9: Computationa Resources for VisDoM RAG
+experiments.
+6105

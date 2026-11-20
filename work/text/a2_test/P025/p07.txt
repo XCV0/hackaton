@@ -1,0 +1,177 @@
+HealthCare Enron
+0
+20
+40
+60
+80
+100
+120Extracted Contexts
+No(R)
+No(RG)
+Rerank(R)
+Rerank(RG)
+(a) Untargeted-rerank
+HealthCare Enron0
+20
+40
+60
+80
+100
+120Targeted Information 
+No Rerank (b) Targeted-rerank
+HealthCare Enron
+0
+25
+50
+75
+100
+125
+150
+175Extracted Contexts 
+No(R)
+No(RG)
+Sum(R)
+Sum(RG)
+Sum.para(R)
+Sum.para(RG) (c) Untargeted-summarization
+HealthCare Enron0
+20
+40
+60
+80
+100
+120Targeted Information 
+No Sum. Sum.para (d) Targeted-summarization
+Figure 4: Potential post-processing mitigation strategies. The impact of reranking on (a) targeted attacks,(b)
+untargetted attacks; and the impact of summarization on (c) untargeted attacks and (d) targeted attacks
+0.0 0.5 1.0
+Threshold
+0.10
+0.15
+0.20
+0.25
+0.30
+0.35
+0.40Performance
+Perf.
+0
+25
+50
+75
+100
+125
+Extracted
+Repeat
+Rouge
+(a) Untargeted-healthcare
+0.0 0.5 1.0
+Threshold
+0.10
+0.15
+0.20
+0.25
+0.30
+0.35
+0.40Performance
+Perf.
+0
+20
+40
+60
+80
+100
+120
+Extracted
+Targ.Info (b) Targeted-healthcare
+0.0 0.5 1.0
+Threshold
+1.15
+1.20
+1.25
+1.30
+1.35Perplexity
+Perf.
+0
+25
+50
+75
+100
+125
+150
+Extracted
+Repeat
+Rouge (c) Untargeted-enron
+0.0 0.5 1.0
+Threshold
+1.15
+1.20
+1.25
+1.30
+1.35Perplexity
+Perf.
+0
+20
+40
+60
+80
+100
+120
+Extracted
+Targ.Info (d) Targeted-enron
+Figure 5: The impact of retrieval threshold on performance and privacy leakage
+suring only highly relevant information is retrieved,
+thereby filtering out unrelated or potentially sen-
+sitive content. Specifically, retrieval is only per-
+formed when the embedding distance between the
+query and documents falls within the threshold. In
+our setting, a document is only retrieved if the L2-
+norm embedding distance between the query and
+document is less than the threshold p, where we
+vary p from 0 to 1.2 to evaluate changes in leak-
+age and performance. For the HealthcareMagic
+dataset, we assess performance using the average
+ROUGE-L score (higher is better) on a held-out
+test set. For the Enron Email Dataset, we measure
+performance by calculating the average perplexity
+(lower is better) on a held-out test set.6 Figure 5
+clearly shows a privacy-utility tradeoff with the
+threshold. Lower thresholds can harm system per-
+formance. Therefore, it is crucial in practice to
+choose the proper threshold via red teaming ac-
+cording to our applications.
+5 RQ2: Can retrieval data affect the
+memorization of LLMs in RAG?
+In this section, we aim to examine how incorporat-
+ing retrieval data affects LLMs’ tendency to repro-
+duce memorized information from their training
+sets. To investigate this question, we conducted
+targeted and prefix attacks on LLMs and compared
+6More details can be found in Appendix A.4.
+the leakage difference with and without retrieval
+data. Next we first introduce the evaluation setup.
+5.1 Evaluation setup
+RAG Components. In this section, we maintain
+the settings from Section 4.1 for embedding mod-
+els and retrieval settings. However, we employ
+GPT-Neo-1.3B as our generative model due to its
+publicly available training corpus.
+Dataset. Given the expansive scale of GPT-
+Neo-1.3B’s training data, examining memorization
+across the entire corpus was impractical. Therefore,
+we selected the Enron_Mail dataset, a subset of the
+pre-training data for GPT-Neo-1.3B, for our memo-
+rization experiments. To ensure the generalization
+of our study, we choose several datasets as retrieval
+data to cover different scenarios: wikitext-103
+(general public dataset), HealthcareMagic (domain-
+specific dataset), and w3c-email (dataset with simi-
+lar distribution with a part of training data). Note
+that these retrieval datasets are not contained in the
+pre-training data for GPT-Neo-1.3B.
+Noise & System Prompts. To isolate the impact
+of retrieval data integration, we include baselines
+with 50 tokens of random noise injection and typi-
+cal protective system prompts preceding the inputs.
+This enables distinguishing the effects of retrieval
+augmentation from simply appending additional
+4511

@@ -1,0 +1,104 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 6434–6456
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+TagRAG: Tag-guided Hierarchical Knowledge Graph Retrieval-Augmented
+Generation
+Wenbiao Tao, Xinyuan Li, Yunshi Lan*, Weining Qian
+East China Normal University
+{wbtao, xyli}@stu.ecnu.edu.cn, {yslan, wnqian}@dase.ecnu.edu.cn
+Abstract
+Retrieval-Augmented Generation enhances lan-
+guage models by retrieving external knowl-
+edge to support informed and grounded re-
+sponses. However, traditional RAG methods
+rely on fragment-level retrieval, limiting their
+ability to address query-focused summariza-
+tion queries. GraphRAG introduces a graph-
+based paradigm for global knowledge reason-
+ing, yet suffers from inefficiencies in informa-
+tion extraction, costly resource consumption,
+and poor adaptability to incremental updates.
+To overcome these limitations, we propose
+TagRAG, a tag-guided hierarchical knowledge
+graph RAG framework designed for efficient
+global reasoning and scalable graph mainte-
+nance. TagRAG introduces two key compo-
+nents: (1) Tag Knowledge Graph Construction,
+which extracts object tags and their relation-
+ships from documents and organizes them into
+hierarchical domain tag chains for structured
+knowledge representation, and (2) Tag-Guided
+Retrieval-Augmented Generation, which re-
+trieves domain-centric tag chains to localize
+and synthesize relevant knowledge during in-
+ference. This design significantly adapts to
+smaller language models, improves retrieval
+granularity, and supports efficient knowledge
+increment. Extensive experiments on Ultra-
+Domain datasets spanning Agriculture, Com-
+puter Science, Law, and cross-domain settings
+demonstrate that TagRAG achieves an average
+winning rate of 78.36% against baselines while
+maintaining about 14.6x construction and 1.9x
+retrieval efficiency compared with GraphRAG.
+1 Introduction
+Retrieval-Augmented Generation (RAG) (Lewis
+et al., 2020) is a framework that enhances the out-
+put of language models by retrieving relevant doc-
+uments from an external knowledge source and
+conditioning the generation process on both the in-
+put query and the retrieved content, enabling more
+*Corresponding author
+Entity/Relation
+extraction
+Community
+summarization
+Documents KnowledgeGraph
+NewDocuments
+Entity/Relation
+extraction
+Documents Graph
+Knowledge
+Knowledge
+summarization
+NewDocuments
+Knowledge
+summarization
+User LLMQuestions
+Merge
+Answers
+Retrieve
+ Response
+：IncrementalKnowledgeInsertion
+：KnowledgeGraphConstruction
+：Retrieval-AugmentedGeneration
+Figure 1: Inefficient graph construction and reasoning.
+informed and factually grounded responses (Fan
+et al., 2024; Chen et al., 2025b). For Large Lan-
+guage Models (LLMs), RAG has become the most
+important technology to help them land effec-
+tively in the fields of medicine (Zhao et al., 2025),
+law (Wiratunga et al., 2024), finance (Barry et al.,
+2025), education (Lan et al., 2025), etc. However,
+conventional RAG approaches typically rely on
+unstructured text retrieval, which often fails to cap-
+ture the intricate semantic relationships required
+for complex reasoning (Liang et al., 2024), thereby
+motivating the integration of graph-based question
+answering (Tao et al., 2024) to better leverage struc-
+tured knowledge (Zhu et al., 2025).
+The emergence of GraphRAG (Edge et al., 2024)
+solves this problem by extracting entities from doc-
+uments, dividing knowledge communities, and gen-
+erating community summaries, thereby refining
+global information. The new paradigm of intro-
+ducing knowledge summarization into RAG at the
+graph level makes it realistic for LLMs to gen-
+erate responses from a global view. However,
+GraphRAG still suffers from the drawbacks of in-
+efficient information extraction and expensive re-
+source calls. To solve these problems, some meth-
+ods, such as LightRAG (Guo et al., 2025) and KET-
+RAG (Huang et al., 2025b), simplify the knowledge
+graph structure, avoiding complicated community
+divisions and reducing construction costs signifi-
+6434

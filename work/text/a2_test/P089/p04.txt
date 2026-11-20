@@ -1,0 +1,78 @@
+Method
+EN ZH
+FreshQA NQ TriviaQA HotpotQA FreshQA WebQA
+QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5 QA Prec@5
+w/o retrieval 41.70 - 43.74 - 74.99 - 34.80 - 40.98 - 73.95 -
+OQR 61.87 27.48 51.36 32.35 79.63 50.32 42.75 17.73 43.70 16.24 81.29 77.25
+SUBSTITUTE-Raw
+LLM-Rewrite 57.38 25.23 48.62 29.83 78.43 48.10 40.92 15.32 40.65 15.42 80.56 74.26
+Query2Doc 56.52 26.08 46.12 27.65 77.22 50.58 38.85 16.26 42.90 15.20 81.35 77.63
+SFT(Tsft) 60.53 25.72 49.86 30.08 78.34 47.77 42.04 16.46 42.44 15.56 77.76 72.65
+SFT(Tall) 60.55 24.88 50.39 30.40 78.63 47.92 42.66 16.89 42.33 15.21 77.80 74.61
+RaFe(P P O) 62.21 27.72 50.83 31.52 78.56 49.18 43.82 17.64 43.28 16.31 81.28 77.90
+RaFe(DP O) 62.67 27.92 51.14 32.25 79.84 50.67 43.82 18.91 45.25 16.92 80.61 75.37
+RaFe(KT O) 62.12 28.12 51.61 32.71 79.51 51.12 43.27 18.28 45.03 16.40 81.17 76.98
+EXPAND-Raw
+LLM-Rewrite 61.17 27.52 51.56 31.79 80.20 50.29 44.50 18.01 45.13 16.98 81.30 78.12
+Query2Doc 61.46 27.64 50.75 30.83 80.54 50.04 44.49 18.75 46.68 17.44 81.33 79.48
+SFT(Tsft) 62.01 26.76 50.13 30.63 80.42 50.21 44.93 18.78 47.15 17.82 81.26 71.95
+SFT(Tall) 62.21 26.36 51.79 31.45 80.57 50.24 44.89 18.99 47.51 17.54 81.49 72.48
+RaFe(P P O) 62.43 28.31 51.63 31.81 80.32 50.01 45.28 18.87 47.53 18.22 82.45 80.15
+RaFe(DP O) 62.39 28.16 52.30 32.53 80.64 50.92 45.59 19.25 47.25 17.92 81.73 78.85
+RaFe(KT O) 62.65 28.50 52.48 32.58 80.88 51.24 45.91 19.52 47.93 18.11 82.16 77.66
+Table 1: The results showcase the performance in SUBSTITUTE-Raw and EXPAND-Raw settings. “QA” refers to
+results obtained by Qwen-max, and “w/o retrieval” denotes generating answers directly. Results surpassing the
+OQR are highlighted in bold to represent the best-performing, while those underlined indicate the second-best.
+3.1 Dataset
+To comprehensively validate the effectiveness and
+generalizability of our method, we conduct cross-
+lingual experiments. Specifically, we evaluate
+ReFe on both English and Chinese datasets.
+English Datasets For English data, we use
+several open-domain QA datasets including
+NQ (Kwiatkowski et al., 2019), TriviaQA (Joshi
+et al., 2017), HotpotQA (Yang et al., 2018). For
+NQ and TriviaQA, we follow the split from previ-
+ous work (Karpukhin et al., 2020), and the default
+split for HotpotQA2. We randomly gather 60k in-
+stances from the training set of the three datasets
+to conduct Tall for training rewrite models. As for
+evaluation, we collect the test set of NQ and Triv-
+iaQA, and the development set of HotpotQA as
+the held-in evaluation datasets. Additionally, we
+use FreshQA (Vu et al., 2023) for out-of-domain
+evaluation.
+Chinese Datasets For Chinese data, we gather
+several open-source queries to conduct the query
+set, the sources are listed in 6. We use WebQA (Li
+et al., 2016) for the in-domain evaluation, while
+FreshQA (Vu et al., 2023) (translated) for the out-
+of-domain evaluation. The process of translation
+2https://huggingface.co/datasets/hotpot_qa/
+viewer/fullwiki
+can be found in Appendix A.2.2.
+3.2 Evaluation Settings
+In practical retrieval scenarios, query rewriting
+is commonly used to expand the retrieved docu-
+ments based on the original query, followed by a
+re-ranking of the expanded documents. Thus, we
+validate RaFe in two experimental settings.
+SUBSTITUTE Directly use the documents D′ re-
+trieved by rewrite q′ for evaluation instead of the
+documents D retrieved by query q.
+EXPAND Employing both D and D′ for evalua-
+tion. We generate two rewrites q′ 0, q′ 1 for the EX-
+PAND setting with their retrieved D′ 0, D′ 1.
+To further simulate the role of query rewriting in
+real-world scenarios, our experiments also include
+the performance under two following settings:
+Raw Concatenating top-5 retrieved documents
+in the default order. For EXPAND setting, the
+raw documents order is determined by sequentially
+and cyclically selecting the top documents from
+D, D′ 0, D′ 1.
+Ranked Concatenating top-5 documents after re-
+ranking all the retrieved documents. As regard to
+EXPAND setting, all retrieved documents from both
+the query and rewrites are merged for ranking.
+887

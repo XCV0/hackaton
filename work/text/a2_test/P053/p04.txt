@@ -1,0 +1,109 @@
+3.1.3 Multi-granularity Compression
+In addition to encoding useful information, the
+compressor must also learn hierarchical informa-
+tion organization. We define granularity b as the
+starting position of an embedding sequence. The
+compressed sequence should exhibit varying in-
+formation densities across subsequences truncated
+at different granularity levels. To achieve multi-
+granular compression, we optimize across multi-
+ple granularities during both pretraining and fine-
+tuning. Formally, given a training granularity se-
+quence B = {b1, . . . , bk}, the training objective
+combines reconstruction errors at all granularities:
+L(θC ) = −
+∑
+b∈B
+n∑
+t=1
+log PθD (rt | Q, E1:b c , r<t)
+(4)
+where E1:b c = [e1, . . . , eb]. This method ensures C
+allocates crucial information early and maintains
+complementary details in later positions.
+3.2 Adaptive Selector
+The adaptive selector S dynamically controls de-
+coder input by progressively accumulating and ver-
+ifying context embeddings during inference. The
+query is encoded into a query embedding sequence
+Eq = Dembed(q), while the context embedding
+sequence is obtained by concatenating all com-
+pressed document sequences in retrieval order:
+Ec = Concat(E1, . . . , Ek). The selector iterates
+through granularity levels from the inference gran-
+ularity sequence B = {b1, . . . , bk}. At each step
+t:
+1. Extract the subsequence E1:bt = [e1, . . . , ebt ]
+from Ec, then concatenate with Eq to construct
+the current input:
+Xt = Concat(Eq, E1:bt ) (5)
+2. Feed Xt into the decoder D to obtain the last
+layer hidden states:
+Ht = D(Xt) (6)
+3. Feed Ht into the selector S to verify if the con-
+text information is sufficient:
+S(Ht) =
+{
+1 sufficient
+0 insufficient (7)
+This process continues until S(Ht) = 1 or t =
+k. The final input X is determined based on the
+termination state:
+X =
+{
+Xt S(Ht) = 1
+Concat(Eq, Ec) t = k (8)
+3.2.1 Training Data Synthesis
+The selector S is trained on synthesized decision
+tuples. Given an instruction I, context C, and gold
+response R, for each granularity b ∈ B, the hidden
+states Hb and generated responses Rb are obtained
+through inference with the decoder, while the label
+yb is derived by evaluating Rb against R:
+Hb = D(I, E1:b c )
+Rb = Dgen(I, E1:b c )
+yb = eval(R, Rb)
+(9)
+The training data xi consists of pairs:
+xi = {(Hb, yb) | ∀b ∈ B} (10)
+A fixed decoder requires only a unified selector, as
+the generation mode remains the same.
+3.2.2 Reinforcement Learning
+The selector is trained using reinforcement learning,
+optimized via policy gradient with trajectory-based
+rewards. During inference, we stop adding context
+embeddings and generate the response once the
+selector predicts "sufficient". For each episode with
+granularities b1 < · · · < bk:
+Trajectory: τ = (s1, a1), . . . , (sT , aT )
+State: st = Concat(HI , Hbt )
+Action: at =
+{
+1 sufficient
+0 continue
+(11)
+where HI and Hbt refer to the hidden states of
+the instruction I and the truncated embedding se-
+quence E1:bt c , respectively.
+The trajectory terminates when the action is 1 or
+all granularities are traversed. The reward is:
+R(τ ) =
+{
++1 if ∃t : at = 1 ∧ ybt = 1
+−1 otherwise (12)
+The policy πθ parameters are updated via the RE-
+INFORCE algorithm (Williams, 1992):
+∇θJ(θ) = Eτ ∼πθ
+[
+R(τ )
+T∑
+t=1
+∇θ log πθ(at | st)
+]
+(13)
+where πθ shares parameters with S.
+4 Experimental Setup
+4.1 Datasets
+To ensure a fair comparison of different compres-
+sion methods, we train and evaluate all methods on
+24064

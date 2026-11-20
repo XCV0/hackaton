@@ -1,0 +1,85 @@
+Face4RAG: Factual Consistency Evaluation for Retrieval Augmented Generation in Chinese KDD ’24, August 25–29, 2024, Barcelona, Spain
+Table 5: Performance comparison of factual consistency evaluation on the existing benchmark.
+Method Avg. RAG Summ. Dial. Fact Verif. RAGAS[13] RefChecker[18] FRANK[34] SummEval[14] 𝑄2[17] DialFact[16] VitaminC[37]
+FACTSCORE(GPT-4) 70.5 70 61 80 65 74 72 71
+FELM 74.2 71 63 70 82 83 79 72
+RAGAS(GPT-4) 76.9 88 69 87 80 77 69 69
+RefChecker 78.4 86 73 85 80 80 72 73
+L-Face4RAG (Ours) 84.2 91 73 87 90 84 77 88
+Table 6: Main results of the ablation studies on the synthetic
+dataset. We compare L-Face4RAG with the variants using con-
+ventional answer decomposition (A.D.), removing the COT
+(w/o COT), and removing the logic consistency evaluation
+(w/o logi.eval). Overall accuracy and the accuracy on positive
+or negative samples are reported.
+L-Face4RAG A.D. w/o COT w/o logi.eval
+Overall 93.38 76.44 79.60 88.99
+-Positive 96.19 91.62 51.27 97.46
+-Negative 92.15 69.83 91.93 85.30
+Table 7: Comparison of the accuracy between L-Face4RAG
+and the counterpart method with conventional answer de-
+composition (A.D.) or without logic consistency evaluation
+(w/o logi.eval) for detecting specific error types of negative
+samples on the synthetic dataset.
+L-Face4RAG A.D. w/o logi. eval
+Hallucination Hallu. 96.98 90.45 96.98
+Knowledge
+KCont. 100.00 100.00 100.00
+KInve. 98.77 74.07 97.53
+KConf. 76.19 41.27 66.67
+KConc. 98.57 90.00 94.29
+Logical
+LOver. 90.18 42.86 83.93
+LCaus. 92.86 32.14 35.71
+LConf. 80.00 34.00 64.00
+LIncl. 51.22 31.71 29.27
+LOth. 90.70 44.19 65.12
+fail to detect logical fallacy since some logical connections may be
+discarded during the decomposition. In addition, positive samples
+also have a slight decrease in accuracy, which justifies the third
+principle in our logic-preserving answer decomposition module,
+i.e., preserving the structure of the original answer may alleviate
+the introduction of extra hallucination.
+Evaluating the Introduction of COT.(w/o COT) Recall that
+COT is adopted in both stages of factual consistency evaluation,
+which instructs the model to conduct finer-grained fact consis-
+tency evaluation and sophisticated logic consistency evaluation,
+respectively. To validate the introduction of COT, we consider a
+counterpart method that removes the detailed steps in the instruc-
+tions and requires GPT-4 to directly generate evaluation without
+outputting the underlying reasoning process. As presented in Ta-
+ble 6, the overall accuracy drops severely after removing COT (from
+93.38% to 79.60%), especially for the positive samples (from 96.19%
+to 51.27%). This justifies the benefit of introducing COT into FCE.
+Evaluating the Stage of Logical Consistency Evaluation.
+(w/o logi. eval) To evaluate the effect of our proposed logical
+consistency evaluation stage on error detection, we construct a
+counterpart method by removing the second stage from our pipeline.
+The results presented in Table 7 show that the counterpart method
+incurs a decline in overall accuracy. Among all the error types,
+logical fallacy contributes the major part of accuracy decline, which
+aligns with our main motivation of the second stage design for
+logical fallacy evaluation. In addition, there is a slight decrease
+in the accuracy of knowledge error. A possible reason is that the
+second stage may supplement the detection of some knowledge
+errors that are missed in the first stage. Hence, the second stage
+also benefits the detection of knowledge error. Note that for the
+hallucination error, we have not observed any obvious change in
+the detection accuracy; this matches our intuition that hallucination
+error has no relation with logical fallacy.
+6 CONCLUSION
+In this work, we give a systematic study of factual consistency
+evaluation in RAG. Specifically, we first propose a comprehensive
+benchmark termed Face4RAG, which includes the synthetic dataset
+and the real-world dataset. In light of the possible failure of existing
+FCE methods in detecting logical fallacy in RAG, we then propose
+a novel FCE method termed L-Face4RAG. Compared to previous
+method, our method has two novel designs, i.e., logic-preserving
+decomposition and fact-logic FCE, which can better characterize the
+logical relations in different pieces of information in the sentence,
+leading to higher ability of logical fallacy evaluation. Extensive
+experiments on both the synthetic and real-world datasets verify the
+effectiveness of the L-Face4RAG method. Notably, the superiority
+of L-Face4RAG is consistent on a wide range of factuality detection
+benchmarks beyond the Chinese RAG task. Elaborated ablation
+studies also justify our core algorithm designs.

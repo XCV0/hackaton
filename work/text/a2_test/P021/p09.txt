@@ -1,0 +1,98 @@
+timodal setting. Atomic subclaims (not sentences)
+are the appropriate unit of evaluation across text
+and multimodal RAG alike.
+Surface-level metrics fail to generalize and
+ground. On WIKIVIDEO, where high-quality
+human-written articles exist for each topic,
+ROUGE and BERTScore achieve reasonable agree-
+ment with quality (EQJ) and information (ICJ).
+However, they fail to capture grounding, produc-
+ing near-zero or negative correlation with GJs,
+failing to verify information against its sources.
+This agreement does not generalize across tasks,
+where less comprehensive references exist. On
+RAGTIME (Table 3), both metrics have negative
+agreement (ROUGE in information coverage and
+BERTScore with citation support) with human
+judgments, and on WIKIVIDEO-25 (Table 6), their
+agreement with EQJs drops to near-zero. Thus,
+surface-level metrics are brittle proxies for quality,
+dependent on high-quality references and unable
+to assess grounding.
+Automatic verification remains a bottleneck.
+MIRAGE’s framework design is validated by the
+strong agreement between human-computed scores
+and quality judgments (Table 2) and its perfor-
+mance in text, where LLMs are widely accepted as
+competent verifiers (Min et al., 2023; Song et al.,
+2024). Its automatic variants do not reach the same
+agreement with audiovisual sources, however, be-
+cause the verifier must ground claims in video.
+As section 5 shows, the best omnimodal verifier
+achieves only modest accuracy on audiovisual ver-
+ification. The gap between human-annotated MI-
+RAGE and its automatic counterpart thus empha-
+sizes (1) that MIRAGE with human-level ground-
+ing can achieve strong agreement and (2) the need
+for future work in improving the claim verification
+against multimodal evidence.
+7 How to Evaluate Multimodal RAG
+We offer two recommendations for evaluating mul-
+timodal RAG. For quick diagnostics or compute-
+constrained settings, we recommend reference-
+based INFOF1 and CITEF1 as fast checks for fac-
+tuality and grounding, verifying claims against
+a text proxy rather than the source documents.
+For comprehensive evaluation, we recommend
+collection-based INFOF1 and CITEF1, which ver-
+ify claims directly against the source documents
+and thereby avoid the limitations of surface-level
+and sentence-level metrics shown above. ROUGE
+and BERTScore remain reasonable proxies when
+high-quality references exist, and RAGAS Faithful-
+ness and ALCE Claim Recall closely mirror com-
+ponents of MIRAGE. Evaluating answer relevance,
+as RAGAS Answer Relevance does (although not
+perfectly), also remains important. For MIRAGE,
+we recommend reporting Precision and Recall
+alongside F1, as they are fundamental to the
+metric, while the F1 is derived.
+8 Conclusion
+We introduce MIRAGE, a subclaim-centric frame-
+work for evaluating multimodal RAG. Through
+INFOF1 and CITEF1, MIRAGE provides consis-
+tent, subclaim-level assessment of factuality, infor-
+mation coverage, and citation quality across text,
+image, audio, and video. We show that MIRAGE
+outperforms text-centric and sentence-level metrics
+on text while remaining the only metric to gener-
+alize to multimodal sources, aligning with human
+quality judgments where the others do not. As fu-
+ture work continues to improve omnimodal verifi-
+cation, MIRAGE will enable scalable and reliable
+evaluation for multimodal generation.
+Limitations
+Evaluating Information Refusal MIRAGE
+aims to evaluate the information presented in a
+prediction. However, there is one aspect we don’t
+capture: refusal (e.g., “There is no information on
+the location of the fire in the videos.”). Determin-
+ing that a subclaim is not supported by or contained
+in a large multimodal collection is a challenging
+task, requiring either strong a priori knowledge of
+the collection or perfect retrieval and grounding
+within it. Additionally, claims refusing to answer
+are out-of-distribution for our entailment judges.
+Multi-Video Inference Constraints As men-
+tioned, the inability to provide multi-video infer-
+ence limits the capabilities of each method pre-
+sented. Extreme reduction of video frame rates
+to enable multi-video inference limits the perfor-
+mance of the VLM verifier and performing only
+single video judgments limits the ability to assess
+any cross-source inferences made by the genera-
+tion system. Training VLMs for multi-video in-
+ference and optimizing multimodal inference are
+much needed future work for more holistic (multi-
+video) and scalable (optimization) evaluation.
+40239

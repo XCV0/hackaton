@@ -1,0 +1,136 @@
+(STEM)measurementsshowedsimilarresultsforanITOback
+contact.10 Considering the (wide band gap) CIGSe absorber/
+TCO stack as part of a top cell in a tandem device, a
+pronounced MoSe2 interlayer with a smaller indirect (direct)
+band gap of about 1.1 eV11−13 (1.4 eV11,14,15) and/or a
+significant remainder of the metallic Mo may deteriorate the
+transparency of the TBC. In addition, neither study clearly
+addressed the question on how the Mo interlayer addition
+affects the GaOx formation or could exclude the formation of
+additional chemical species such as MoOx.
+In this study, we examine the effect of a thin sacrificial Mo
+interlayer on the device performance of a thin-film solar cell
+based on a wide-band-gap (Ag,Cu)(In,Ga)Se2 (ACIGSe)/ITO
+layer stack. While a cell without such an interlayer shows a
+poor power conversion efficiency (PCE) of less than 1%, a
+similar cell with an about 10 nm thick Mo layer deposited on
+the ITO prior to absorber deposition exhibits an efficiency of
+10.1%, with the fill factor (FF) being more than tripled. A
+combination of STEM/EDS and HAXPES (hard X-ray
+photoelectron spectroscopy) measurements shows that GaOx
+forms at the back contact of both samples; however, the layer
+thickness is significantly reduced upon Mo insertion. Analysis
+of the chemical composition of the interface suggests that
+metallic Mo is nearly completely converted to MoSe2 and
+(mainly) MoOx. Since the latter, much more dominant
+component is a prominent material to realize charge carrier
+selective contacts for holes,16,17 we suggest its formation
+together with inhibiting the formation of GaOx as an
+explanation for the drastically enhanced cell performance.
+These findings provide crucial insights for the optimization of
+absorber/TCO interfaces in (A)CIGSe-based bifacial or
+tandem devices.
+■ EXPERIMENTAL SECTION
+Sample Preparation and Handling. At ZSW, wide band gap
+ACIGSe absorbers were grown with an industry-relevant 30 × 30 cm2
+in-line coater on TCO/glass substrates with substrate heater
+temperatures around 680 °C; therefore, we estimate the substrate
+temperature to be around the softening point of the glass substrates.
+Ag, Cu, In, Ga, and Se were coevaporated in a multistage process with
+a subsequent RbF postdeposition treatment (PDT) without breaking
+the vacuum. Further details on the ACIGSe deposition setup and
+process can be found in Gutzler et al.18 The polycrystalline ACIGSe
+absorbers are 2.4 μm thick with a GGI = [Ga]/([Ga] + [In]) of 0.73,
+an ACGI = ([Ag] + [Cu])/([Ga] + [In]) of 0.72, and an AAC =
+[Ag]/([Ag] + [Cu]) of 0.09, as measured by X-ray fluorescence. Two
+kinds of substrates were used as the back electrode: (1) a commercial
+1 mm thick soda-lime glass (SLG) with ITO on the top (Solems S.A.,
+SOL12) and (2) the same ITO/SLG substrate with an additional 10
+± 1 nm thin sputtered Mo layer on the top, as confirmed by
+profilometry measurements. Confocal microscopy images indicate the
+formation of a conformal Mo layer (on that scale) completely
+covering the relativelysmooth ITO layer (Figure S1in the Supporting
+Information and related discussion). After ACIGSe deposition,
+samples were annealed in air for 5 min at 200 °C and then coated
+with a ∼50 nm thick CdS buffer grown by chemical bath deposition.
+An rf-sputtered Zn0.85Mg0.15O high-resistive layer and a pulsed dc-
+sputtered AZO window layer make up the front electrode of the cell.
+The solar cells with a total area of 0.5 cm2 were completed with Ni/
+Al/Ni grid fingers without antireflective coating.
+At the Iberian Nanotechnology Laboratory, cross-sectional samples
+were prepared using a FEI Helios NanoLab 450S focused ion beam
+(FIB) to have electron-transparent lamellae (thickness < 100 nm) for
+subsequent STEM/EDS analysis. The FIB operates with a gallium
+(Ga) liquid metal ion source, which is the reason why we deliberately
+abstained from quantifying the Ga content in the analyzed samples.
+At HZB, the individual layer stacks were separated and cleaved at
+the ACIGSe/ITO or ACIGSe/thin Mo/ITO interfaces as described
+in ref 19. As a preliminary step, a layer of gold, some tens of
+nanometers thick, was deposited on the absorber surface via
+sputtering to act as a diffusion barrier against the silver from the
+conductive epoxy used to glue the samples onto a stainless-steel plate.
+After the epoxy/samples were cured for 24 h at 80 °C, the samples
+were immersed in liquid nitrogen. The resulting thermal stress in
+combination with applied mechanical stress resulted in cleaving the
+layer stack mainly along the ACIGSe/ITO or ACIGSe/thin Mo
+interface; the ACIGSe absorber film remained fixed to the stainless-
+steel platevia conductive epoxy. The cleavingis necessary to make the
+absorber/ITO interface, which is deeply buried below 2.4 μm
+ACIGSe, accessible for HAXPES measurements as their information
+depth is limited by the inelastic mean free path (IMFP) of the
+detected photoelectrons, which is at maximum approximately 3 nm
+when using an excitation energy of 2 keV.20 Both halves of each
+sample were mounted in ambient conditions (air exposure for
+approximately 15 min, with condensation of moisture potentially
+enhanced by the low sample temperature; surface moisture would
+largely be removed in the ultrahigh vacuum system but may affect the
+chemical surface structure) and transferred into the surface analysis
+system for HAXPES measurements.
+Characterization. Current density−voltage (J−V) characteristics
+were measured with an AAA WACOM solar simulator under standard
+testing conditions with a simulated AM1.5G spectrum. The light
+intensity was 100 mW/cm2, as calibrated with a silicon reference cell.
+The four-point probe geometry was used for contacting the ACIGSe-
+based devices, which were measured in the as-grown statewithout any
+additional light-soaking procedures.
+External quantum efficiency (EQE) was measured with a Bentham
+PVE 300 setup. The EQE was used for extracting the optical band gap
+energy (Eg) of the ACIGSe absorber (extrapolated from the (E ×
+EQE)2 vs E plot, see Figure S2 in the Supporting Information).
+Scanning transmission electron microscopy (STEM) coupled with
+energy-dispersive X-ray spectroscopy (EDS) experiments were
+performed to study the chemical composition of the FIB prepared
+cross-sections. High-angle annular dark field (HAADF) STEM images
+were acquired using a double-corrected FEI Titan G3 Cubed Themis
+60−300 keV operated at 200 keV. The images of 2048 × 2048 pixels
+were recorded using a convergence angle of 21 mrad with a pixel
+dwell time set to 16 μs. EDS mapping was performed with the same
+instrument by using a Super-X EDS detector. Iterative maps of 2048
+× 2048 pixels were recorded with a dwell time per pixel of 2 μs at 200
+keV under a current between 150 and 250 pA and collection times of
+15 min. The Velox software fromThermofisher Scientific was used for
+acquiring and processing the STEM−EDS data. The element-specific
+X-ray fluorescence lines used for analysis are listed in Table 1.
+Synchrotron-based hard X-ray photoelectron spectroscopy
+(HAXPES) experiments were conducted at the HiKE endstation
+located at the KMC-1 bending magnet beamline of the BESSY-II
+electron storage ring.21 This endstation was equipped with a Scienta
+R4000 electron energy analyzer with an entrance cone perpendicular
+to the incoming beam in the horizontal plane (i.e., polarization plane
+of the X-rays), and its base pressure was <1 × 10−8 mbar. The spectra
+were recorded in near-grazing incidence geometry with a photon
+Table 1. Element-Specific X-ray Fluorescence Lines Used
+for EDS Analysis
+element line energy of line (keV)
+O K 0.52
+Cu L 0.93
+Ga K 9.25
+Se K 11.22
+Ag L 2.98
+In L 3.29
+Sn L 3.44
+ACS Applied Materials & Interfaces www.acsami.org Research Article
+https://doi.org/10.1021/acsami.5c02315
+ACS Appl. Mater. Interfaces 2025, 17, 33027−33035
+33028
+Downloaded from pubs.​acs.​org/​aamick/​article-pdf/​17/​22/​33027/​40551093/​am5c02315.​pdf by guest on 19 November 2026

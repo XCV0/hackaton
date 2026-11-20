@@ -1,0 +1,94 @@
+LLM
+None
+Inaccurate Documents Accurate Documents
+1)Distanglement
+2)Fine-grained Retrieval
+Extract the relevant sentences from document D
+based on these fragments.
+Q: What is Bridie O'Flaherty's occupation? (Ground Truth: politician)
+D: In 1910 O'Flaherty moved to Achill for occupation. Her occupation focused on
+initiatives that uplifted the local economy and supported community development.
+Identify the knowledge fragments in document D
+that are beneficial for answering question Q. 
+None
+an Irish Fianna Fáil politician
+1)Distanglement
+2)Fine-grained Retrieval
+Extract the relevant sentences from document D
+based on these fragments.
+Q: What is Bridie O'Flaherty's occupation? (Ground Truth: politician)
+D: Bridie O'Flaherty was an Irish Fianna Fáil politician. She was one of five 
+children born to Patrick Lawless and Delia Laffy of Bullaun, Loughrea.
+Identify the knowledge fragments in document D
+that are beneficial for answering question Q. 
+Bridie O'Flaherty was an Irish Fianna Fáil politician.
+Figure 2: The disentangled prompting procedure to retrieve fine-grained knowledge. The gray box contains the
+question Q and the retrieved documents D. The yellow box represents the input prompt for guiding the LLM, while
+the green box depicts the LLM’s output.
+M to produce more accurate responses. The cur-
+rent RAG retrieval methods can be roughly catego-
+rized into three groups. The first group has used
+sparse retrieval methods that match query terms
+with document terms and compute relevance scores
+to select the most relevant documents. The sec-
+ond group has employed dense retrieval methods,
+which retrieve relevant documents based on the se-
+mantic similarity between queries and documents.
+The last group has attempted to leverage LLMs
+that distill the ranking capabilities of LLMs into
+their models to rank knowledge documents. Fi-
+nally, single-hop questions are typically resolved
+with a single retrieval step, while multi-hop ques-
+tions often require multiple retrieval steps.
+2.2 Fine-grained Knowledge Retrieval
+We create a fine-grained knowledge retrieval
+paradigm to obtain fine-grained information, which
+enhances the document-based process with addi-
+tional sentence-level details. When solving a com-
+plicated problem, it is typical to decompose the
+problem into intermediate steps and solve each be-
+fore giving final answers (Wei et al., 2022). In-
+spired by this, we develop a disentangled prompt-
+ing procedure to retrieve fine-grained knowledge,
+where the LLM is first prompted to explicitly iden-
+tify the knowledge fragments beneficial for ques-
+tion answering and then extract the query-focused
+sentences based on these fragments.
+Figure 2 illustrates our disentangled prompting
+procedure for processing two types of documents
+from the external knowledge corpus K. We assume
+the query q = "What is Bridie O’Flaherty’s occu-
+pation?", the inaccurate document d1 = "In 1910
+O’Flaherty moved to Achill for occupation. Her
+occupation focused on initiatives that uplifted the
+local economy and supported community develop-
+ment.", and the accurate document d2 = "Bridie
+O’Flaherty (27 October 1917 – 12 January 2006)
+was an Irish Fianna Fáil politician. She was one
+of five children born to Patrick Lawless and Delia
+Laffy of Bullaun, Loughrea.". The d2 contains the
+sentence-level details beneficial for answering q,
+whereas d1 lacks the useful information. When em-
+ploying our prompting procedure, the inaccurate
+document is discarded due to the absence of neces-
+sary knowledge fragments, while the fine-grained
+knowledge is extracted as query-focused sentences
+from the accurate document.
+Specifically, we employ the existing generator
+model as LLM in a one-shot manner to implement
+our fine-grained retrieval paradigm on the external
+knowledge corpus K. Ultimately, we obtain a set
+of query-focused sentences S = (s1, s2, ..., sm) as
+retrieved fine-grained knowledge, where m is the
+number of query-focused sentences.
+2.3 Decoding Enhancement
+We develop a decoding enhancement strategy to en-
+hance the document-based decoding process using
+the retrieved fine-grained knowledge. The over-
+all architecture is illustrated in Figure 3. Dur-
+ing the decoding stage, the generator produces
+two probability distributions: one based on fine-
+grained retrieved sentences and the other based
+on the original retrieved documents. The fine-
+grained distribution is then integrated to constrain
+10033

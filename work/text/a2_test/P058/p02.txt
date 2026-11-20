@@ -1,0 +1,92 @@
+Dataset Multi-granularity Fine-grained alignment Partial entities RAG
+REAL-MM-RAG (Wasserman et al., 2025) ✗ ✓ ✗ ✓
+MMDocIR (Dong et al., 2025) ✓ ✗ ✗ ✗
+M3DocRAG (Cho et al., 2024) ✗ ✗ ✗ ✓
+MMLongBench-Doc (Ma et al., 2024b) ✗ ✗ ✗ ✗
+SPIQA (Pramanick et al., 2024) ✗ ✓ ✗ ✗
+GranuVistaVQA ✓ ✓ ✓ ✓
+Table 1: Comparison of our dataset with five similar multimodal datasets.
+architectural heritage landmarks, a domain where
+elements have well-defined visual semantics, au-
+thoritative knowledge sources exist, and multi-view
+partial observation naturally arises from real-world
+photography. The dataset comprises 1,422 images
+across 71 landmarks, where each view covers only
+34% of annotated elements on average. Crucially,
+we provide human-verified element visibility la-
+bels that enable fine-grained error diagnosis un-
+available in prior benchmarks. We further propose
+GranuRAG, a detect-then-retrieve framework that
+grounds visible elements via open-vocabulary de-
+tection, retrieves hierarchical evidence, and gener-
+ates attribution-constrained answers.
+Experiments show GranuRAG outperforms
+strong baselines. Moreover, LLMs fine-tuned on
+our pipeline’s reasoning traces surpass both direct
+fine-tuning and self-generated chain-of-thought
+(CoT) (Wei et al., 2022), demonstrating that ex-
+plicit multi-granularity alignment provides a more
+effective supervision signal.
+2 Related Work
+Benchmarks for Multimodal RAG Knowledge-
+intensive multimodal QA has evolved from answer-
+only evaluation toward attribution-aware assess-
+ment requiring verifiable evidence and localized
+failure analysis. Early benchmarks (Marino et al.,
+2019; Schwenk et al., 2022) established the need
+for external knowledge without explicit ground-
+ing. Follow-up datasets added structured super-
+vision: VIQUAE (Lerner et al., 2022) identi-
+fies retrieval as the primary bottleneck; INFOS-
+EEK (Chen et al., 2023) and ENCYCLOPEDIC-
+VQA (Mensink et al., 2023) provide section-level
+evidence, revealing gaps due to unreliable entity-
+section linking. Document-centric benchmarks (Yu
+et al., 2025b; Xu et al., 2025b) evaluate at page,
+region, and document level granularities. Re-
+cent work incorporates explicit spatial supervision:
+BBOX-DOCVQA (Yu et al., 2025c) grounds an-
+swers to semantically coherent regions; TOLOKA
+VQA (Ustalov et al., 2023) requires bounding
+boxes for answer-supporting objects; VISA (Ma
+et al., 2024a) mandates visual source attribution
+during generation. However, existing benchmarks
+lack explicit mappings between visual elements
+and knowledge entries. GranuVistaVQA addresses
+this by treating visual elements as core evidence
+units with element-level knowledge alignment for
+fine-grained, verifiable attribution.
+LLM Methods for Multimodal RAG Multi-
+modal RAG has advanced through richer retrieval
+representations, stronger reranking, and control-
+lable attribution. Unified dense retrievers (Liu et al.,
+2023; Zhou et al., 2024b,a) use joint text-image em-
+beddings but lack explicit local visual-textual con-
+nections. Finer-grained methods (Lin et al., 2024;
+Yang et al., 2025) operate at paragraph/section
+levels, leaving element-level grounding underex-
+plored. End-to-end pipelines (Chen et al., 2022;
+Zhang et al., 2024b) improve recall through it-
+erative retrieval but amplify noise. Robustness-
+focused approaches (Cui et al., 2024; Yan and Xie,
+2024; Tian et al., 2025) address cross-source rec-
+onciliation but reason over coarse units. Recent
+spatial control work targets specific evidence chain
+components: LOCATE-THEN-GENERATE (Zhu
+et al., 2023) separates localization from genera-
+tion in scene-text VQA; HULIRAG (Xi et al.,
+2025) decouples retrieval from attention via seg-
+mentation but lacks grounding-knowledge con-
+nection; GROUNDHOG (Zhang et al., 2024c)
+achieves pixel-level alignment without retrieval
+integration; VISRAG 2.0 (Sun et al., 2025) im-
+proves multi-image reasoning but treats evidence
+as disconnected region sets; FERRET-V2 (Zhang
+et al., 2024a) enables fine-grained region-language
+alignment for in-image comprehension without ex-
+ternal knowledge integration. In contrast, Gra-
+nuRAG treats individual elements as verifiable
+units, grounding each factual claim to both a de-
+tected region and a retrieved snippet, which enables
+fine-grained alignment and supports systematic er-
+10476

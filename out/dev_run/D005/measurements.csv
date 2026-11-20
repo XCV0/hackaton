@@ -1,0 +1,8 @@
+publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D005,MS1,DV1;DV2,J-V,AM1.5G,100,mW/cm2,reverse,,,false,,,,,"Table 2 Reverse; Keithley 2400, калиброванный Si-эталон"
+D005,MS2,DV1;DV2,J-V,AM1.5G,100,mW/cm2,forward,,,false,,,,,Table 2 Forward
+D005,MS3,DV1;DV2,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,Статистика PCE(AVG) по 20 приборам; направление развёртки не указано
+D005,MS4,DV1;DV2,EQE,,,,,,,false,,,,,"Fig. 3C, интегральный ток"
+D005,MS5,DV1;DV2,MPP tracking,AM1.5G,100,mW/cm2,,,,false,,,,,"Fig. 3E, 200 s"
+D005,MS6,DV1;DV2,stability,,100,mW/cm2,,,,false,,,other,"continuous 1 sun illumination at MPP tracking, unencapsulated, 500 h",Fig. 5A; протокол ISOS в статье не назван
+D005,MS7,DV1;DV2,stability,,,,,,,false,,85 °C,other,"thermal aging at 85 °C in N2 glove box, unencapsulated, 1000 h",Fig. 5B; протокол ISOS в статье не назван

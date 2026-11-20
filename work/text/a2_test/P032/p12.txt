@@ -1,0 +1,107 @@
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten
+Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou,
+and 1 others. 2022. Chain-of-thought prompting elic-
+its reasoning in large language models. Advances
+in neural information processing systems, 35:24824–
+24837.
+Jerry Wei, Chengrun Yang, Xinying Song, Yifeng Lu,
+Nathan Hu, Jie Huang, Dustin Tran, Daiyi Peng,
+Ruibo Liu, Da Huang, and 1 others. 2024. Long-
+form factuality in large language models. Advances
+in Neural Information Processing Systems, 37:80756–
+80827.
+An Yang, Anfeng Li, Baosong Yang, Beichen Zhang,
+Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao,
+Chengen Huang, Chenxu Lv, Chujie Zheng, Dayi-
+heng Liu, Fan Zhou, Fei Huang, Feng Hu, Hao Ge,
+Haoran Wei, Huan Lin, Jialong Tang, and 41 oth-
+ers. 2025. Qwen3 technical report. arXiv preprint
+arXiv:2505.09388.
+Yue Zhang, Yafu Li, Leyang Cui, Deng Cai, Lemao Liu,
+Tingchen Fu, Xinting Huang, Enbo Zhao, Yu Zhang,
+Yulong Chen, and 1 others. 2025a. Siren’s song in the
+ai ocean: A survey on hallucination in large language
+models. Computational Linguistics, pages 1–46.
+Ziyao Zhang, Chong Wang, Yanlin Wang, Ensheng Shi,
+Yuchi Ma, Wanjun Zhong, Jiachi Chen, Mingzhi Mao,
+and Zibin Zheng. 2025b. Llm hallucinations in prac-
+tical code generation: Phenomena, mechanism, and
+mitigation. Proceedings of the ACM on Software
+Engineering, 2(ISSTA):481–503.
+A ORPO Objective Function
+The objective function consists of the following
+two components:
+1. Supervised Fine-Tuning loss:
+LSFT = − 1 m m∑ k=1 |V |∑ i=1 y(k) i log ( p(k) i )
+2. Odds Ratio loss:
+LOR = − log σ
+(
+log oddsθ(yw|x) oddsθ(yl|x) )
+where σ is the sigmoid function.
+Therefore, LORPO = LSFT + λLOR, where λ con-
+trols the pretrained language model to adapt to the
+specific subset of desired output and discourages
+the generation of the rejected answers. Log odds
+ratio loss is wrapped in the sigmoid function so
+that it can be minimized by increasing the log odds
+between yw and yl.
+B Prompt: Style Reformation
+Style Instruction
+paraphrase Paraphrase the following text
+while retaining its original mean-
+ing.
+summarize Provide a concise summary of the
+following text.
+expand Expand on the following text by
+adding more details and context.
+news_article Rewrite the following informa-
+tion as a news article.
+blog_post Transform the following text into
+an engaging blog post.
+report Convert the following informa-
+tion into a formal report.
+story Rewrite the following text as a
+narrative story.
+dialogue Transform the following text into
+a dialogue between two charac-
+ters.
+letter Rewrite the following text as a
+formal letter.
+social_media_post Transform the following text into
+a social media post.
+script Transform the following text into
+a script for a short video or play.
+interview Rewrite the following text as an
+interview between an interviewer
+and an expert.
+product_description Transform the following text into
+a product description.
+review Rewrite the following text as a
+review of a product or service.
+news_summary Summarize the following article
+into a concise news brief.
+formalize_news Rewrite the following content in
+a formal journalistic style.
+meeting_summary Rewrite the following text as if it
+were a summary of a meeting.
+meeting_dialogue Rewrite the following content as
+a conversation between multiple
+meeting participants.
+Table 7: Each style is randomly applied to reform
+FineWeb raw data and increase stylistic diversity.
+C Prompt: Claim Generation
+Grounded
+{
+"instructions": [
+"Generate a claim that is fully
+supported by the document. All relevant
+parts are directly verifiable from the
+document.",
+"Only return the claim as the answer.
+Do not include any additional text,
+explanation, or formatting."
+],
+"document": <document>,
+"answer": ""
+}
+16929

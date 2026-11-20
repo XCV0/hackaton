@@ -1,0 +1,121 @@
+RAG-IT: Retrieval-Augmented Instruction Tuning LLMs 15
+Table 5: Representative success and failure cases of our model across various
+financial metric types.
+Question Metric Type Generated Answer Judge Model Reasoning Score
+What is the
+company’s
+quarterly
+dividend for
+the third
+quarter of
+Fiscal Year
+2023?
+dividend The company did not declare or pay
+any dividends for the third quarter
+of Fiscal Year 2023.
+The model states
+that no dividend
+was declared,
+contradicting the
+ground truth
+that a dividend
+was paid.
+1
+What is the
+reported
+revenue for
+the third
+quarter of
+Fiscal Year
+2023?
+revenue-
+related
+The reported revenue for the third
+quarter of Fiscal Year 2023 is
+$13,507 million, up 101% from the
+same period last year.
+The model pro-
+vides revenue of
+$13,507M, while
+the correct figure
+is $8,876M, indi-
+cating a signifi-
+cant numeric er-
+ror.
+5
+Can you
+provide a
+breakdown
+of the rev-
+enue by
+business
+segment?
+segment-
+level
+break-
+downs
+Based on the provided context,
+AMD’s revenue by business segment
+for the three months ended July 1,
+2023 and June 25, 2022 are as fol-
+lows: * Data Center: $1,321 mil-
+lion in net revenue for Q2 2023 and
+$1,486 million in Q2 2022. * Client:
+$998 million in net revenue for Q2
+2023 and $2,152 million in Q2 2022.
+* Gaming: $1,581 million in net rev-
+enue for Q2 2023 and $1,655 million
+in Q2 2022. * Embedded: $1,459 mil-
+lion in net revenue for Q2 2023 and
+$1,257 million in Q2 2022. Note that
+these figures are based on manage-
+ment’s judgment and allocation of
+expenses to the reportable segments,
+and may not necessarily reflect ac-
+tual profitability by segment.
+The model fabri-
+cates a detailed
+AMD revenue
+breakdown even
+though the ref-
+erence document
+does not provide
+such information.
+1
+What is
+the quar-
+terly period
+ended date?
+period
+identifi-
+cation
+Based on the context provided, the
+quarterly period ended date is July
+1, 2023.
+The model an-
+swers July 1,
+2023, but the
+correct period
+end date is July
+30, 2023.
+7
+What is the
+revenue of
+NVIDIA for
+second quar-
+ter fiscal
+year 2024?
+revenue-
+related
+NVIDIA’s revenue for the second
+quarter of fiscal year 2024 was
+$13.51 billion, up 101% from the
+same period last year and up 88%
+sequentially.
+The model cor-
+rectly provides
+$13.51B and
+correctly add
+the percentage
+increase.
+10

@@ -1,0 +1,89 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D017,DVR1-L1,DVR1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVR1-L2,DVR1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVR1-L3,DVR1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVR1-L4,DVR1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVR1-L5,DVR1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVR1-L6,DVR1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVR1-L7,DVR1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVR1-L8,DVR1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVR2-L1,DVR2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVR2-L2,DVR2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVR2-L3,DVR2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVR2-L4,DVR2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVR2-L5,DVR2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVR2-L6,DVR2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVR2-L7,DVR2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVR2-L8,DVR2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVG1-L1,DVG1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVG1-L2,DVG1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVG1-L3,DVG1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVG1-L4,DVG1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVG1-L5,DVG1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVG1-L6,DVG1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVG1-L7,DVG1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVG1-L8,DVG1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVG2-L1,DVG2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVG2-L2,DVG2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVG2-L3,DVG2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVG2-L4,DVG2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVG2-L5,DVG2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVG2-L6,DVG2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVG2-L7,DVG2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVG2-L8,DVG2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI1-L1,DVI1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI1-L2,DVI1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI1-L3,DVI1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI1-L4,DVI1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI1-L5,DVI1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI1-L6,DVI1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI1-L7,DVI1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI1-L8,DVI1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI2-L1,DVI2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI2-L2,DVI2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI2-L3,DVI2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI2-L4,DVI2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI2-L5,DVI2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI2-L6,DVI2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI2-L7,DVI2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI2-L8,DVI2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI3-L1,DVI3,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI3-L2,DVI3,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI3-L3,DVI3,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI3-L4,DVI3,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI3-L5,DVI3,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI3-L6,DVI3,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI3-L7,DVI3,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI3-L8,DVI3,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI4-L1,DVI4,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI4-L2,DVI4,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI4-L3,DVI4,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI4-L4,DVI4,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI4-L5,DVI4,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI4-L6,DVI4,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI4-L7,DVI4,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI4-L8,DVI4,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVO1-L1,DVO1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVO1-L2,DVO1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVO1-L3,DVO1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVO1-L4,DVO1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVO1-L5,DVO1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVO1-L6,DVO1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVO1-L7,DVO1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVO1-L8,DVO1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVO2-L1,DVO2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVO2-L2,DVO2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVO2-L3,DVO2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVO2-L4,DVO2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVO2-L5,DVO2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVO2-L6,DVO2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVO2-L7,DVO2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVO2-L8,DVO2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVO3-L1,DVO3,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVO3-L2,DVO3,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVO3-L3,DVO3,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVO3-L4,DVO3,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVO3-L5,DVO3,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVO3-L6,DVO3,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVO3-L7,DVO3,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVO3-L8,DVO3,8,interlayer,MgF2,,,,,,,anti-reflective coating

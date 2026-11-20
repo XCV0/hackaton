@@ -1,0 +1,81 @@
+Appl. Sci. 2025, 15, 2930 13 of 20
+Additionally, the slight increase in Vx values compared to Voc supports the accuracy of the
+Voc ≤ Vx ≤ Vbi relationship.
+3.4. Capacitance–Voltage Characterization
+Capacitance–voltage measurements, in the dark and under light, were performed to
+obtain the built-in potential and the behavior of the spatial charge density. The capacitance
+of the p-n junction can be expressed for any diode as follows [42]:
+C = constant·
+
+1 + V Vbi
+−β
+(9)
+Here, C represents the capacitance of the junction, V denotes the reverse bias, Vbi
+stands for the barrier potential, and β is a coefficient accounting for the dependency of C
+on the reverse bias V. For an ideal junction with an abrupt charge density step profile, β
+= 1/2. β can be determined from the slope of the linear fit of ln(C) vs. ln(V) in dark and
+light condition (see Figure 10). This procedure enables the determination of the spatial
+distribution of a space charge within the junction region. The values of β result in 1 2.94 and
+1
+3.06 in dark conditions and under light, respectively. Both values are very close to 1 3 and
+suggest a linear dependence of C3 vs. V, which corresponds to a linear dependence of the
+space charge density within the space charge region, according to the C-V theory for a
+linearly graded junction reported in [43,44].
+Appl. Sci. 2025, 15, x FOR PEER REVIEW 14 of 22 
+ 
+3.4. Capacitance–Voltage Characterization 
+Capacitance–voltage measurements, in the dark and under light, were performed to 
+obtain the built-in potential and the behavior of the spatial charge density. The capacitance 
+of the p-n junction can be expressed for any diode as follows [42]: 
+𝐶 = 𝑐𝑜𝑛𝑠𝑡𝑎𝑛𝑡 ∙ ൬1 + 𝑉 𝑉௕௜ ൰ ିఉ  (9)
+Here, C represents the capacitance of th e junction, V denotes the reverse bias, V bi 
+stands for the barrier potential, and β is a coeﬃcient accounting for the dependency of C 
+on the reverse bias V. For an ideal junction with an abrupt charge density step proﬁle, β = 
+1/2. β can be determined from the slope of the linear ﬁt of ln(C) vs. ln(V) in dark and light 
+condition (see Figure 10). This procedure enables the determination of the spatial distri-
+bution of a space charge within the junction region. The values of β result in 
+ଵ
+ଶ.ଽସ and 
+ଵ
+ଷ.଴଺ 
+in dark conditions and under light, respectively. Both values are very close to 
+ଵ
+ଷ and sug-
+gest a linear dependence of C 3 Vs. V, which corresponds to a linear dependence of the 
+space charge density within the space charge region, according to the C-V theory for a 
+linearly graded junction reported in [43,44]. 
+ 
+Figure 10. Plot of ln(C) (C unit: F) against ln(V + Vbi) (V + Vbi unit: V) under light and dark conditions. 
+The linear ﬁt of the experimental data is made in the reverse bias region for V > 𝑉௕௜. 
+The relationship between depletion region capacitance and applied voltage is thus as 
+follows: 
+1
+𝐶ଷ = 12(V௕௜ −𝑉) 𝑞(𝛿𝜌)𝐴ଷ(𝜖଴𝜖)ଶ (10)
+where V represents the applied voltage, Vbi is the built-in potential, q is the electron charge, 
+(𝛿𝜌) indicates the impurity gradient expressed in cm −4, A denotes the active area of the 
+diode, ϵ is the relative dielectric constant (assumed to be 15.1 [45,46]), and ϵ₀ represents 
+the vacuum dielectric constant. Equation (10) is indeed conﬁrmed by the plot in Figure 11 
+that reports the plot of 1/ C3 vs. applied bias, and the linear ﬁt in the negative bias region 
+can be used to determine the built-in potential from the intercept with the V-axis. Vbi was 
+found to be (0.53 ± 0.05) V and (0.82 ± 0.05) V under light and dark conditions, respectively 
+[35–37]. The result reveals a higher built-in potential in dark conditions compared to that 
+under light. This discrepancy contradicts classical theory, as these two values are expected 
+to be equal and suggest the presence of an illumination-linked potential. Indeed, when we 
+consider the height (0.3 V) of the barrier attributed to the hole-blocking heterojunction and 
+add it to Vbi under illumination (0.53 V), we obtain a value very close to the Vbi (0.83 V) in 
+Figure 10. Plot of ln(C) (C unit: F) against ln(V + Vbi) (V + Vbi unit: V) under light and dark conditions.
+The linear fit of the experimental data is made in the reverse bias region for V > Vbi.
+The relationship between depletion region capacitance and applied voltage is thus
+as follows:
+1
+C3 = 12(Vbi − V) q(δρ)A3(ϵ0ϵ)2 (10)
+where V represents the applied voltage, Vbi is the built-in potential, q is the electron charge,
+(δρ) indicates the impurity gradient expressed in cm−4, A denotes the active area of the
+diode, ϵ is the relative dielectric constant (assumed to be 15.1 [45,46]), and ϵ0 represents the
+vacuum dielectric constant. Equation (10) is indeed confirmed by the plot in Figure 11 that
+reports the plot of 1/C3 vs. applied bias, and the linear fit in the negative bias region can be
+used to determine the built-in potential from the intercept with the V-axis. Vbi was found to
+be (0.53 ± 0.05) V and (0.82 ± 0.05) V under light and dark conditions, respectively [35–37].
+The result reveals a higher built-in potential in dark conditions compared to that under
+light. This discrepancy contradicts classical theory, as these two values are expected to
+be equal and suggest the presence of an illumination-linked potential. Indeed, when we

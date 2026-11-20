@@ -1,0 +1,99 @@
+)XOO ZR)DFW ZR/RJLF
+
+
+
+
+
+6FRUH
+)1RLVH
+)DLWKIXOQHVV1RLVH
+Figure 4: Ablation study dissecting the contribution of
+the Verifier’s components. The symbolic logic check is
+crucial for robustness against contradictory noise.
+continues to grow. We therefore select M = 5 as
+the default setting to achieve an optimal balance
+between quality and efficiency.
+         
+0 D[,WHUDWLRQ% XGJHWM
+
+
+
+
+
+$QVZHU)
+$QVZHU)
+$YJ/DWHQF\ 
+
+
+
+/DWHQF\PV
+Figure 5: Impact of the maximum iteration budget M
+on task performance (F1) and inference latency.
+F Reward Weight Sensitivity
+We investigate the sensitivity of the optimization
+to the reward weight ratio wlogic : wf act. Figure 7
+reveals a clear trade-off mechanism. A dominant
+factual weight (wf ≫ wl) degrades logical coher-
+ence, while excessive logic weight leads to halluci-
+nation. The task performance (Answer F1) exhibits
+an inverted U-shaped trend, peaking at balanced
+configurations.
+G Cross-Model Generalization Analysis
+To evaluate the robustness and model-agnostic na-
+ture of LCR-RAG, we conduct cross-model gen-
+eralization experiments using five representative
+LLM backbones: Qwen3-8B (Yang et al., 2025),
+Llama-3.3-8B (AI@Meta, 2024), DeepSeek-R1-
+8B (DeepSeek-AI, 2025), GLM-4-9B (GLM et al.,
+2024) and Ministral-3-8B (AI, 2025).
+We compare LCR-RAG against a diverse
+set of strong RAG baselines, including agent-
+      
+wlogic : wfact
+
+
+
+
+$QVZHU)
+$QVZHU)
+5REXVW5DQJH
+Figure 6: Effect of the reward weight ratio wlogic :
+wf act on Answer F1.
+      
+wlogic : wfact
+
+
+
+
+
+'LDJQRVWLF6FRUH
+Slogic
+Sfact
+Figure 7: Trade-off between Slogic and Sf act under
+different reward weight ratios.
+based reasoning methods (ReAct, IRCoT), self-
+reflective and adaptive retrieval models (Self-RAG,
+SeaKR), as well as reinforcement-learning-based
+approaches (R3-RAG and RAG-RL).
+Table 7 reports the results across three challeng-
+ing multi-hop QA benchmarks. We observe that
+LCR-RAG consistently achieves the best perfor-
+mance across all datasets and model backbones.
+Notably, the relative improvements remain substan-
+tial even for smaller models such as Ministral-3-8B
+and reasoning-specialized models like DeepSeek-
+R1-8B. These results indicate that the proposed
+neuro-symbolic logic-consistency reward is largely
+model-agnostic and can reliably enhance logical
+soundness and factual alignment across heteroge-
+neous LLM architectures.
+H Parameter Scaling Analysis
+We investigate the performance of models with dif-
+ferent parameter scales using Qwen3 (8B vs. 32B).
+As shown in Table 8, increasing model size brings
+consistent improvements across all metrics. Im-
+portantly, the relative improvement (∆ Improve)
+remains significant even for the larger model, sug-
+gesting that our method does not suffer from dimin-
+ishing returns and scales effectively with model
+17912

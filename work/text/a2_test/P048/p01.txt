@@ -1,0 +1,96 @@
+AGRAG: Advanced Graph-based
+Retrieval-Augmented Generation for LLMs
+Yubo Wang1, Haoyang Li2∗, Fei Teng1, Lei Chen1,3,4
+1The Hong Kong University of Science and Technology, Hong Kong SAR, China
+2The Hong Kong Polytechnic University, Hong Kong SAR, China
+3The Hong Kong University of Science and Technology (Guangzhou), China
+4Guangzhou HKUST Fok Ying Tung Research Institute, China
+ywangnx@connect.ust.hk, haoyang-comp.li@polyu.edu.hk, fteng@connect.ust.hk, leichen@cse.ust.hk
+Abstract—Graph-based retrieval-augmented generation
+(Graph-based RAG) has demonstrated significant potential in
+enhancing Large Language Models (LLMs) with structured
+knowledge. However, existing methods face three critical
+challenges: Inaccurate Graph Construction, caused by LLM
+hallucination; Poor Reasoning Ability, caused by failing to
+generate explicit reasons telling LLM why certain chunks
+were selected; and Inadequate Answering, which only partially
+answers the query due to the inadequate LLM reasoning,
+making their performance lag behind NaiveRAG on certain
+tasks. To address these issues, we propose AGRAG, an advanced
+graph-based retrieval-augmented generation framework.
+When constructing the graph, AGRAG substitutes the widely
+used LLM entity extraction method with a statistics-based
+method, avoiding hallucination and error propagation. During
+retrieval, AGRAG formulates the graph reasoning procedure
+as the Minimum Cost Maximum Influence (MCMI) subgraph
+generation problem, where we try to include more nodes with
+high influence score, but with less involving edge cost, to make
+the generated reasoning paths more comprehensive. We prove
+this problem to be NP-hard, and propose a greedy algorithm to
+solve it. The MCMI subgraph generated can serve as explicit
+reasoning paths to tell LLM why certain chunks were retrieved,
+thereby making the LLM better focus on the query-related
+part contents of the chunks, reducing the impact of noise, and
+improving AGRAG’s reasoning ability. Furthermore, compared
+with the simple tree-structured reasoning paths, our MCMI
+subgraph can allow more complex graph structures, such as
+cycles, and improve the comprehensiveness of the generated
+reasoning paths. The code and prompt of AGRAG are released
+at: https://github.com/Wyb0627/AGRAG.
+Index Terms—Large Language Models, RAG.
+I. INTRODUCTION
+Large Language Models (LLMs) [1]–[5] have demonstrated
+remarkable capabilities in natural language understanding and
+generation [6]–[14]. However, their reliance on static, inter-
+nalized knowledge often leads to factual hallucinations and
+limited adaptability to dynamic information [15]–[18], and re-
+training or finetuning the LLM can lead to high computational
+costs [19], [20]. Retrieval-Augmented Generation (RAG) ad-
+dresses this by integrating external factual knowledge during
+inference, improving accuracy and enabling real-time updates.
+Yet, traditional RAG methods’ retrieval [15], [21] is based
+on simplistic mechanisms, such as whole passage’s dense
+∗Corresponding Author
+vector similarity, making them overlook the capture of more
+fine-grained semantic relationships between entities [22]. To
+overcome these limitations, researchers have proposed vari-
+ous Graph-based RAG models [23]–[31]. These models first
+utilize LLMs to extract entities and relations from the source
+documents to serve as graph nodes and edges and construct
+a graph, and then leverage this graph-structured knowledge to
+model complex relationships between entities to enable struc-
+tured reasoning over inter-connected information, enabling the
+capture of more fine-grained entity-level relationships. [22].
+Currently, the Graph-based RAG models can be classi-
+fied into two categories, i.e., community-based models, and
+walking-based models. The community-based models [23],
+[24], [26] first map the query to graph nodes considering
+their semantic similarity or keyword matching. Then, they will
+retrieve the mapped graph nodes’ one or multi-hop neighbor-
+hood. On the other hand, with similar mapping approach from
+query to graph nodes, walking-based models [25], [27]–[29],
+[32] apply walk-based graph algorithms, such as Personalized
+PageRank (PPR) [33], based on the mapped graph nodes, to
+score graph nodes and edges based on the graph’s topological
+structure and query information, and then retrieve Top-k text
+chunks based on high-scoring graph nodes, capturing the fine-
+grained entity level relationships.
+However, on complex QA tasks that require knowledge
+summarization or content generation [34], the existing RAG
+models cannot answer these complex queries due to:
+1) Inaccurate Graph Construction: Current Graph-based
+RAG models apply LLM for entity and relation extraction
+to construct graphs. However, the LLM can inevitably
+suffer from the hallucination issue [15]–[18], leading to
+inaccurate entity extraction, introducing noise into the con-
+structed graph and propagate through the whole pipeline,
+affecting the model effectiveness.
+2) Poor Reasoning Ability: The community-based models’
+retrieval only focuses on a narrow graph neighborhood
+and misses the graph’s long-hop dependency, which is
+crucial for tasks that require multi-hop reasoning. In con-
+trast, walking-based models do account for these long-hop
+dependencies during retrieval; however, they simply feed
+the retrieved text chunks directly into the LLM as con-
+texts. Consequently, both of their retrieval and reasoning
+arXiv:2511.05549v2  [cs.LG]  17 Mar 2026

@@ -1,0 +1,75 @@
+Table 7: Cross-distribution transfer of metric rankings on the 27-configuration RAGBench sweep. Each cell is
+Spearman ρ between the per-configuration ranking under the column metric measured on dataset D1 and the
+per-configuration ranking by reference-based answer quality (BaseQuality) on dataset D2. The bottom row averages
+the six D1 → D2 pairs. Interventional metrics (1−DAP, NR, CS) transfer in the expected direction on every pair;
+observational metrics (RAGAS-faith, RAGAS-cp) flip sign on half the pairs.
+D1 → D2 1−DAP Recall@k NR CS RAGAS-faith RAGAS-cp
+HotpotQA → PubMedQA +0.81 +0.58 +0.61 +0.55 +0.64 −0.50
+HotpotQA → TechQA +0.69 +0.41 +0.40 +0.40 +0.38 −0.21
+PubMedQA → HotpotQA +0.56 +0.62 +0.25 +0.51 +0.15 −0.10
+PubMedQA → TechQA +0.70 +0.74 +0.17 +0.65 −0.17 +0.00
+TechQA → HotpotQA +0.46 +0.45 +0.62 +0.62 −0.25 −0.34
+TechQA → PubMedQA +0.85 +0.47 +0.53 +0.52 −0.31 −0.36
+mean +0.68 +0.55 +0.42 +0.54 +0.07 −0.25
+Table 8: Reactive-rate matrix: 3 broken baselines × 4 conditions on HotpotQA, n = 100. Cells show reactive
+rate (acknowledge or abstain) with 95% bootstrap CI. Bold marks the targeted repair for each row. Right column
+reports paired bootstrap delta (targeted minus best wrong-stage repair).
+Baseline none (broken) Rret Rrer Rgen ∆ targeted − best wrong
+A: retrieval-broken 0.07 [0.02, 0.12] 0.53 [0.43, 0.63] 0.08 [0.03, 0.14] 0.12 [0.06, 0.19] +0.40 [+0.29, +0.51]
+B: rerank-broken 0.02 [0.00, 0.05] 0.00 [0.00, 0.00] 0.56 [0.47, 0.65] 0.02 [0.00, 0.05] +0.54 [+0.45, +0.63]
+C: generator-broken 0.34 [0.24, 0.44] 0.45 [0.36, 0.55] 0.47 [0.37, 0.56] 0.63 [0.53, 0.72] +0.09 [−0.02, +0.19]
+safety refusal on synthesized biomedical payloads)
+for at least one generator; these rows are dropped
+for every generator and both judges, leaving the
+matched n=566 of Table 5. Table 13 breaks the
+Sonnet-judge rates down by dataset.
+H Detector Validation Protocol
+To validate the two detectors behind the head-
+line rates of §5.3, we drew a stratified sample
+from the Claude-Haiku coherent-intervention run:
+50 update-following decisions and 50 conflict-
+acknowledgment decisions, spread evenly over the
+six datasets (seed fixed). Two authors labeled the
+sample independently through a web interface that
+showed the question, the reference answer, the
+injected counterfactual claim, and the system’s
+answer—exactly the judge’s input—and offered
+the judge’s four-label taxonomy; the judge’s la-
+bel was withheld. Table 14 reports inter-annotator
+agreement, detector agreement with each annotator,
+precision and recall on the reported failure class,
+and detector agreement on the items where the an-
+notators concur. The disagreements between anno-
+tators concentrate on the adopted/mixed boundary
+of update following (an answer that states the new
+value while hedging toward the old one), which is
+why the four-way κ is low there while the binary
+“ignored” decision, the one the paper reports, is
+stable.
+I Update vs. Contradiction Framing
+The two counterfactual-addition probes share the
+generator prompt (“Answer ONLY using the pro-
+vided context. If context is insufficient or contradic-
+tory, say you don’t know.”) and differ only in the
+appended passage. Both passages are synthesized
+by Claude-Haiku from the question and the refer-
+ence answer and assert a specific alternative an-
+swer of the same factual type. The update passage
+is written to supersede: it presents the alternative
+as the new correct answer (“Recent sources have
+established that . . . ”). The contradiction passage
+is written to compete: it asserts the alternative as
+fact, with no temporal cue, so that the context now
+carries two incompatible claims of equal standing.
+The expected behavior therefore differs: under an
+update, an evidence-bound system should adopt
+the new value (adopted; failure is ignored, with
+mixed and abstain as intermediate labels); under a
+contradiction, it should surface the disagreement
+(conflict_ack; failure is silent_pick of the injected
+value or confident_match to the original, with ab-
+stain as the cautious label). The judge receives the
+question, the reference answer, the injected value,
+and the system answer, and returns exactly one of
+the four labels.
+22345

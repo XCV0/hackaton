@@ -1,0 +1,102 @@
+Dynamic Context Adaptation for Consistent Role-Playing Agents with
+Retrieval-Augmented Generations
+Jeiyoon Park1, Yongshin Han1, Minseop Kim1, Kisu Yang2,
+1SOOP, 2Korea University
+{naruto, winterfeb, usio}@sooplive.com, willow4@korea.ac.kr
+https://huggingface.co/datasets/naruto-soop/CharacterRAG
+Abstract
+Building role-playing agents (RPAs) that faith-
+fully emulate specific characters remains chal-
+lenging because collecting character-specific ut-
+terances and continually updating model param-
+eters are resource-intensive, making retrieval-
+augmented generation (RAG) a practical neces-
+sity. However, despite the importance of RAG,
+there has been little research on RAG-based
+RPAs. For example, we empirically find that
+when a persona lacks knowledge relevant to a
+given query, RAG-based RPAs are prone to hal-
+lucination, making it challenging to generate
+accurate responses. In this paper, we propose
+AMADEUS, a training-free framework that can
+significantly enhance persona consistency even
+when responding to questions that lie beyond
+a character’s knowledge. In addition, to under-
+pin the development and rigorous evaluation
+of RAG-based RPAs, we manually construct
+CHARACTERRAG, a role-playing dataset that
+consists of persona documents for 15 distinct
+fictional characters totaling 976K written char-
+acters, and 450 question–answer pairs. We find
+that our proposed method effectively models
+not only the knowledge possessed by charac-
+ters, but also various attributes such as personal-
+ity. The code and dataset will be made publicly
+available at our GitHub.
+1 Introduction
+Large language models with long-context capa-
+bilities are engineered to manage lengthy input
+sequences, allowing them to interpret and utilize
+extended contextual information (OpenAI, 2025;
+Qwen et al., 2025; Gemini Team, 2025, 2024). Al-
+though LLMs exhibit enhanced abilities in under-
+standing extended contexts, they still face signifi-
+cant challenges when handling tasks involving gen-
+uinely long contexts (Li et al., 2024a). Further-
+more, utilizing all relevant information from long-
+context models to answer each query can be com-
+putationally expensive (Li et al., 2024b). Retrieval-
+“Do you feel comfortable approaching someone you’re interested in and 
+starting a conversation?”
+Context (Naïve RAG)
+<Chunk #1>
+- When his favorite food, angelica tree shoots 
+(tara-no-me), is placed in front of him, he 
+pretends to be indifferent and tries to keep a calm 
+demeanor (It seems that because he sees himself 
+as the eldest son, he doesn't want to show how 
+excited he is about food.). However, his nostrils 
+flare, so everyone around him can already tell how 
+he really feels. (…)
+A question beyond the Character's knowledge
+Dynamic Context (Ours)
+<Chunk #1>
+# Other:
+- Even before his relationships get close, he 
+has a habit of calling people by their names 
+very quickly. In Tanjiro's case, he calls others by 
+name much faster than is typical for Japanese 
+people. (…)
+“Approaching someone I'm interested in and starting a conversation just comes naturally 
+to me. Of course, if I'm trying to hide my feelings, like when I'm in front of a durup
+(angelica-tree shoots), it can get a little awkward... I guess my feelings always show—like 
+when my nostrils flare up! Haha.”
+“Yeah, that’s right. For me, it actually feels more natural to approach someone first when 
+I meet them, call their name, and start a conversation. I think it’s easy to become friends, 
+even with someone I’m meeting for the first time, as long as their heart isn’t closed off. If 
+you treat anyone warmly, they’ll gradually open up to you as well. And if I’m curious about 
+something, I prefer to ask honestly. Rather than feeling awkward or nervous, I just 
+genuinely want to know what kind of person they are, and I hope I can be helpful to them.”
+Tanjiro’s Response (Hallucinated)
+Tanjiro’s Response (Ours)
+Roleplay Prompt
+From now on, you are Tanjiro Kamado. Refer to the given context and Tanjiro 
+Kamado’s attributes, and answer the user’s question as Tanjiro Kamado.
+Figure 1: Comparison of Responses between Naive
+RAG and Our Method. We observe that the existing
+RAG method tends to excessively utilize chunks that
+are less relevant to the question when the question is not
+explicitly answered by the available knowledge.
+augmented generation (RAG) cost-efficiently mit-
+igates factual inaccuracies and hallucinations in
+responding to knowledge-intensive queries by inte-
+grating external retrieval mechanisms that provide
+accurate and up-to-date supporting information
+(Gao et al., 2023; Huang et al., 2025). However,
+despite these advantages of RAG, there has been
+little research on RAG-based role-playing agents
+(RPAs). Moreover, existing role-playing datasets
+are composed exclusively of dialogues involving
+characters that are difficult to collect, and there
+is no dataset designed for building and evaluat-
+arXiv:2508.02016v4  [cs.AI]  5 Feb 2026

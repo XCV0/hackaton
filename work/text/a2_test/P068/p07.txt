@@ -1,0 +1,103 @@
+Paper-VISA
+Paradigm Model Average Passage Non-Passage
+bbx ans bbx ans bbx ans
+Zero-Shot Prompt
+Textual Qwen2-VL-72B 43.5 16.7 58.2 19.6 28.7 13.7
+Visual Qwen2-VL-72B 1.5 43.1 0.5 40.2 2.5 45.9
+Fine-tune
+Textual Qwen2-VL-2B 56.8 14.6 51.9 17.8 61.7 11.4
+Textual Qwen2-VL-7B 59.5 18.1 52.4 21.3 66.5 14.8
+Visual Qwen2-VL-2B 63.0 38.3 50.6 34.4 75.3 42.1
+Visual Qwen2-VL-7B 68.2 43.8 58.1 41.6 78.2 45.9
+Table 3: Comparing with Text-based Visual Attribution
+in single oracle candidate setting of Paper-VISA. The
+visual paradigm indicates our VISA method. The textual
+method combines layout detector, OCR, and LLM.
+When the oracle candidate is absent from the
+multi-candidate set, the model generally handles
+the “No Answer” scenario well. For example,
+VISA-7B-multi correctly indicates “No Answer”
+in 82.2% of cases on average for Wiki-VISA, refus-
+ing to respond. In these cases, both attribution and
+answer are considered correct. In the remaining
+cases, the model attempts to answer despite lack-
+ing oracle evidence, leading to incorrect bounding
+boxes. Notably, in 8.8% of cases (91% - 82.2%),
+the model provides correct answers despite no ora-
+cle document in candidates, likely due to memoriza-
+tion, hallucination, or false negatives in candidate
+documents. This phenomenon does not occur in
+Paper-VISA, likely because synthetic queries in
+the publication domain are more directly related
+to the oracle document, whereas NaturalQuestions
+for Wiki-VISA are more general.
+6 Analysis
+6.1 Text-based Visual Source Attribution
+Our VISA method performs RAG and visual
+source attribution in an end-to-end manner.
+Alternatively, a modularized text-based RAG
+pipeline—incorporating a layout prediction model,
+OCR, and text-based LLMs—could achieve sim-
+ilar functionality. Comparing VISA with such a
+modularized text-based pipeline would be valuable
+for understanding the advantages of different ap-
+proaches. We construct a text-based pipeline for
+evaluating Paper-VISA in a single-oracle candidate
+setting. Using PubLayNet’s bounding boxes, we
+assume a perfect layout model that accurately de-
+tects document elements. We apply pytesseract
+OCR to extract text from each bounding box, then
+feed the text list and a given question into an LLM,
+which generates an answer along with the index of
+the supporting evidence. The corresponding bound-
+Train Data Wiki-VISA Paper-VISA
+Average Average
+bbx ans bbx ans
+Wiki 54.2 65.2 27.8 36.2
+Paper 0.2 42.6 68.2 43.8
+FineWeb 37.6 50.2 22.0 43.3
+Wiki+FineWeb 58.2 65.3 21.0 43.1
+Paper+FineWeb 36.1 48.7 66.5 44.6
+Wiki+Paper+FineWeb 58.1 64.8 67.6 44.3
+Table 4: Effectiveness of VISA trained on different
+combinations of training data for bounding box accuracy
+(bbx) and answer accuracy (ans) in the single oracle
+candidate setting.
+ing box is used for visual attribution. For a fair
+comparison, we use Qwen2-VL’s language model
+for both zero-shot prompting and fine-tuning.
+As shown in Table 3, in the zero-shot setting, the
+text-based method achieves higher bounding box
+accuracy than the visual-based method, as LLMs
+are well-trained for text-based tasks. In contrast,
+visual-based methods struggle with precise bound-
+ing box attribution without fine-tuning. However,
+the text-based method has lower answer accuracy
+due to OCR errors, which introduce typos (e.g.,
+misrecognized technical terms) making it more dif-
+ficult to match the ground truth answer. For fine-
+tuned variants, both bounding box accuracy and
+answer accuracy improve over the zero-shot setting.
+However, the text-based method still has inherent
+limitations. While integrating a vision-language
+model (VLM) for OCR could potentially enhance
+text extraction accuracy, it introduces additional
+latency and complexity in the system. Moreover, in
+this comparison, we assume the text-based method
+benefits from a perfect layout detector—an unreal-
+istic assumption in real-world applications. These
+findings further support the advantages of the pro-
+posed visual-based solution for VISA.
+6.2 Out-of-Domain Zero-Shot
+Table 4 shows the effectiveness of VISA while
+trained with different data combinations in the sin-
+gle candidate setting. It enables us to study the ef-
+fectiveness of out-of-domain transfer and augmen-
+tation. First, we highlight the challenges of zero-
+shot generalization in VISA. Training and evaluat-
+ing on in-domain achieves an effective bounding
+box accuracy, e.g. 54.2% on average for Wiki-
+VISA. However, significant performance drops are
+observed when models are tested on out-of-domain
+datasets. For instance, a model trained on Wiki-
+30160

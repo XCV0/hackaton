@@ -1,0 +1,108 @@
+LLM-Specific Utility for Retrieval-Augmented Generation CIKM ’26, November 07–11, 2026, Rome, Italy
+construct a benchmark, i.e., SpecUBench, with LLM-specific gold
+utilitarian passages for multiple LLMs across standard QA datasets.
+(2) Through extensive analysis, we show that utilitarian passages
+are model-dependent and non-transferable, and that human-annotated
+gold evidence, while strong, does not fully align with the utility
+needs of individual LLMs. (3) We formalize the LLM-specific utility
+judgment task, and demonstrate that existing utility-aware selec-
+tion and ranking methods largely capture model-agnostic utility
+rather than true LLM-specific utility, motivating future work on
+generator-tailored evidence selection for improving RAG perfor-
+mance.
+2 Related Work
+2.1 Retrieval-Augmented Generation (RAG)
+Retrieval-augmented generation (RAG) has attracted growing in-
+terest as a strategy for mitigating large language models’ halluci-
+nations and knowledge recency/staleness by leveraging retrieved
+information as external knowledge [6, 12, 18, 36]. The current chal-
+lenges in retrieval-augmented generation (RAG) primarily center
+on three aspects: how to formulate the information needs of LLMs
+[4, 12, 15, 16, 19, 27, 34, 40, 46]—that is, during the RAG process,
+enabling LLMs to formalize their information requirements based
+on available context and express them as natural language queries
+to retrieve relevant documents. For example, FLARE [27] proposed
+two methods for information need verbalization of LLMs: generate
+a query for low-confidence spans in the already generated sentence
+via LLM and masked token with low-confidence as implicit queries.
+LLatrieval [19] prompted LLMs to generate the missing information
+for answering the question. how to fulfill these information needs
+[49, 50, 52–54], mainly by improving the retrieval of more relevant
+documents through enhancements to the retriever itself or by se-
+lecting useful documents from retrieval results in the post-retrieval
+stage to better accomplish the task. For example, UtiSel [51] dis-
+tilled the utility judgments from LLMs to a dense retriever, reducing
+dependence on costly human annotations and improving retrieval
+performance with curriculum learning. Further, UtilityQwen [50]
+distilled the utility judgments from LLMs to a utility-based selector.
+and how to enhance the harmlessness, faithfulness, or helpfulness of
+the generation process of large language models [7, 43, 43].
+Our work focuses on the second domain—fulfilling LLMs’ infor-
+mation needs through evidence selection. Unlike approaches that
+iteratively reformulate queries, we directly identify evidence that
+fills each LLM’s knowledge gaps from retrieved documents. This
+aligns with utility-focused RAG literature but explicitly considers
+LLM-specific utility—different LLMs benefit differently from the
+same evidence due to variations in their internal knowledge and
+comprehension abilities.
+2.2 Utility-focused RAG
+Traditional retrieval models are trained and evaluated using human-
+annotated relevance labels [24, 52]. In RAG, however, the emphasis
+shifts from optimizing retrieval metrics to maximizing downstream
+generation performance through retrieval that provides genuinely
+useful evidence [50]. To improve the utility of retrieved informa-
+tion, three main approaches have emerged: (1) Verbalized utility
+judgments [49, 50, 53]: Prompt the LLM to explicitly assess the
+usefulness of candidate documents, often aided by pseudo-answer
+generation and iterative refinement. To improve the utility judg-
+ments performance, Zhang et al. [49] proposes the ITEM framework
+inspired by the relevance in philosophy using iterative interaction
+between different components in RAG. Zhang et al. [51] further pro-
+poses using automatic LLM annotation of utility to train retrievers
+with a focus on utility. (2) Downstream-performance-based utility
+estimation [10, 29, 35, 48, 52]: Score documents by their impact
+on end-task performance, such as QA accuracy or the likelihood
+of producing the ground-truth answer. Shi et al. [35] employed
+the likelihood of the ground-truth answer as the utility score of
+the input passage and then as the guide to distill the retriever.
+For fact verification, Zhang et al. [52] used the loss divergence of
+ground-truth evidence and the input evidence as the utility esti-
+mation to optimize the evidence retrieval process. (3) Attention-
+based utility estimation [9]: Estimate document utility from the
+attention mass the generator allocates to tokens from each input
+document during answer generation, aggregated to the document
+level. While methods like answer likelihood or attention weights
+capture aspects of LLM-specific behavior, prior work treats util-
+ity as model-agnostic—trained retrievers or selectors are deployed
+generically across different LLMs without explicit consideration
+of model-specific utility. The key distinction of our work is that
+we explicitly study whether utility is LLM-specific: we construct
+LLM-specific ground truth, demonstrate that utilitarian passages
+are model-dependent and non-transferable, and show that exist-
+ing methods largely capture generic utility rather than genuine
+LLM-specific utility.
+2.3 3H Principle in LLM Alignment
+After being fine-tuned, large language models (LLMs) acquire the
+ability to follow instructions and engage in dialogue, enabling pre-
+liminary interactions with users. Further advancing this line of
+research, scholars have sought to align LLMs with human values,
+proposing that LLM outputs should adhere to the 3H principles [20,
+44]: Helpfulness (providing accurate and task-aligned responses),
+Honesty (avoiding hallucinations and misinformation), and Harm-
+lessness (preventing toxic or unethical outputs). These principles,
+grounded in human-centric criteria, are enforced through Rein-
+forcement Learning from Human Feedback (RLHF) [7, 39, 42] to
+align LLMs’ behavior with human values. Unlike helpfulness in 3H
+principles, this work investigates the utility of retrieval results for
+specific LLMs, adopting a LLM-centric perspective on utility.
+3 LLM-Specific Utility
+Existing research on passage utility in RAG often views utility as an
+inherent property of a document, i.e., whether a passage contains
+information that would help answer a question, regardless of who
+or what consumes it. However, in practice, the ultimate consumer
+of retrieved evidence in RAG is not the human, but the LLM itself.
+Crucially, the presence of useful information in a passage does not
+guarantee that the LLM will be able to interpret, integrate, and
+apply that information to improve its answer generation. This dis-
+connect motivates a shift from evaluating generic, intrinsic utility
+to assessing LLM-specific utility.

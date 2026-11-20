@@ -1,0 +1,55 @@
+Published as a conference paper at ICLR 2025
+generating the rationale, we finetune a pre-trained LM using the standard language modeling objec-
+tive, maximizing the likelihood: E(Q,A,D,E) log PMDrafter (A, E | Q, D), where (Q, A, D, E) is an
+augmented entry in the dataset; PMDrafter (A, E | Q, D) is the probability of generating the response
+and rationale based on the query and document. We use this instruction-tuned model as the specialist
+RAG drafter which learns to generate a well-grounded response and rationale given the query and
+relevant documents.
+Multi-Perspective Sampling For each knowledge-intensive question, we retrieve a set of docu-
+ments from the database using the posed question as the retrieval query. These documents may
+contain diverse content due to the ambiguity inherent in the query. To minimize redundancy and
+enhance diversity of the document subsets used for generating answer drafts, we employ a multi-
+perspective sampling strategy. We first cluster the documents into a few topics using an instruction-
+aware embedding model (Peng et al., 2024) and the K-Means clustering (Jin & Han, 2011).
+emb(d1), ..., emb(dn) = E(d1, ..., dn|Q)
+{c1, ..., ck} = K-Means(emb(d1), ..., emb(dn))
+δ =
+
+random.sample(c) for c ∈ {ci}k 1 	
+where E is an instruction-aware embedding model which embeds a string with regard to a provided
+instruction (the posed question Q); emb(di) is the embedding for the retrieved document di; cj is a
+cluster of retrieved documents with similar topics and contents; k is a hyper-parameter that controls
+the number of clusters. We sample one document from each cluster into a document subset δ so
+each subset contains k documents of diverse contents. In total, we construct m subsets for parallel
+inference with the RAG drafter.
+RAG Drafting We run MDrafter over the m document subsets and produce corresponding answer
+drafts. Refer to Appendix H for detailed prompt. We incorporate each document subset into the
+prompt and query MDrafter for responses. We obtain m drafts as the answer candidates and each
+draft is grounded based on the multiple perspectives in the retrieval results. Specifically, given
+a document subset δj = {dj1 , .., djk }, we query MDrafter in parallel with the following prompt
+for the answer draft and rationale: Q, dj1 , ..., djk → αj , βj , where the prompt contains the posed
+question Q along with the document subset; the generation result contains the answer draft α and the
+rationale β. We denote the conditional generation probability as ρDraft,j = P (βj |Q, dj1 , ..., djk ) +
+P (αj |Q, dj1 , ..., djk , βj ), which measures the reliability of generating rationales and the confidence
+in producing answer drafts.
+3.3 GENERALIST RAG VERIFIER
+After generating drafts and the rationale from the RAG drafter MDrafter, we evaluate them by a
+generalist LM MVerifier to filter out the less reliable drafts and select the best answer. The generalist
+LM can be any off-the-shelf pre-trained LM. We only consider the draft-rationale pair (α, β) and
+skip the tedious and redundant retrieval results. We resort to the language modeling ability of the
+generalist LM to rank and select the draft-rationale pairs.
+Evaluation Scores First, we calculate the self-consistency score by determining the conditional
+probability of generating a draft-rationale pair given the question, ρSelf-contain = P (α, β|Q). This
+score helps assess whether the draft and rationale are self-consistent in the context of the question.
+Given the characteristics of language modeling, a self-consistent draft-rationale pair is expected to
+yield a higher probability. Furthermore, we incorporate a self-reflection statement R that prompts
+MVerifier to assess the reliability of an answer draft (e.g. “Do you think the rationale supports the
+answer, yes or no?”). We define the self-reflection score as ρSelf-reflect = P ("Yes"|Q, α, β, R)
+where we compute the conditional probability of the positive answer ("Yes") to the self-reflection
+statement.
+Computation Method We can efficiently compute the self-consistency and self-reflection scores
+within one forward pass of MVerifier. Given a question Q and a draft-rationale pair (α, β), we
+construct a prompt [Q, α, β, R, "Yes"], where R is the self-reflection statement. We encode the
+prompt with MVerifier, and acquire the probability of each token conditioned on the previous tokens
+P (ti|t<i). We leverage this auto-regressive feature and aggregate the probability of the relevant
+5

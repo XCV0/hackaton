@@ -1,0 +1,94 @@
+Activation HQA
+MS DA DB Acc
+70.94
+✓ 66.01
+✓ 72.66
+✓ ✓ 66.50
+✓ 73.89
+✓ ✓ 74.88
+Table 15: Results on repurposed HQA: SLMs are
+trained on MARCO instead of HQA.
+single-turn generation by GRAD does translate to
+improvement in multi-turn generation.
+F Qualitative Analysis
+In this section, we provide some qualitative exam-
+ples showcasing the benefits of GRAD.
+Regarding the effect of DA objective, Figure 2
+qualitatively shows how it shifts model prediction
+towards data/task-specific expectations: HQA is
+a multi-hop QA dataset, where each query can be
+decomposed into two subquestions. As shown in
+the above example, the base model often stops af-
+ter answering the first-hop question; this behavior
+is effectively suppressed with the guidance of a
+finetuned SLM.
+Regarding debias through DB objective, Figure 3
+qualitatively shows how debias objective improves
+proportionate utilization of contexts. The base 8B
+model correctly replies with “October 2012” when
+the gold passage is placed at index 0; for other
+positions 2, 4, 6 and 9, its answer was “March
+2008,” an incorrect answer possibly derived from
+a shortcut in passage 2. Though passage 2 is an
+irrelevant context, it has been ranked higher by the
+retrieval system, and the base model’s prediction
+has been highly influenced by the beginning of
+the context. In contrast, 8B with DB objective
+activated, consistently generated the correct answer
+“October 2012” regardless of the position of the
+gold passage.
+G Repurposing HQA for Private Setting
+To provide further evidence of the effectiveness of
+GRAD in a private (no in-domain training data)
+setting, we repurpose HQA by training the SLMs
+on MARCO (out-of-domain) and evaluating on
+HQA. This mirrors realistic deployments where
+high-quality, task-matched labels are unavailable
+and only related-domain supervision exists.
+Activation HQA
+MS DA DB FA Acc w/ formatting
+69.21
+✓ 74.14
+✓ ✓ 76.85
+✓ ✓ ✓ 77.34
+✓ ✓ ✓ ✓ 77.83
+Table 16: Results on HQA, with formatting require-
+ments.
+Method Acc on HQA
+Orig GRAD 79.56
+GRAD w/ adapters 79.06
+Merged adapters 76.85
+Table 17: Adapter-based objectives for GRAD. Re-
+placing helper models with adapters on a shared base
+LLM enables replacing decoding-time composition with
+parameter-space merging.
+Table 15 shows that GRAD isolates helpful sig-
+nals under such setting as well: DB and MS remain
+beneficial, while DA is suppressed, yielding con-
+sistent improvements over the base model.
+H Extensibility of GRAD
+Here, we demonstrate that GRAD can be extended
+both by incorporating new objectives and by chang-
+ing how objectives are realized.
+Adding a new objective (FA) We consider a sim-
+ple format adherence (FA) objective that nudges
+generation toward well-formed, sentence-level out-
+puts. FA is added alongside existing objectives
+(MS, DA, DB) without any change to GRAD; acti-
+vation still follows the same task-level adaptation.
+Table 16 reports accuracy under the formatting
+constraint, where an LLM judge is prompted to
+evaluate the formatting as well, and an answer is
+considered correct if it satisfies both the correctness
+and the formatting requirements. By considering
+the new FA objective first, GRAD easily deter-
+mines the most favorable combination of activating
+all.
+GRAD with LoRA adapters We also consider
+an alternative realization of objectives, where each
+objective is implemented as a LoRA adapter at-
+tached to the same base LLM. This avoids cross-
+model tokenizer mismatch and removes the need
+for separate auxiliary models. In this setting, objec-
+tives can be combined either (1) at decoding time
+45289

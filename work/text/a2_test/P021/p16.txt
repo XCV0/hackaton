@@ -1,0 +1,99 @@
+NLI-based metric between subclaims in the ref-
+erence (gold answers) and the prediction (model
+output). This adapts to our setting with no modifica-
+tion and we use the scoring function from INFOR.
+Citation Quality Gao et al. (2023) evaluate ci-
+tation quality with an F1 metric of citation recall
+and precision. When evaluating citations, Gao et al.
+(2023) compare a sentence from the prediction to
+the concatenation of cited sources. This poses two
+main issues in evaluation: (1) from a factuality per-
+spective, evaluating at the sentence level requires
+verifying multiple subclaims in a single inference
+step (Min et al., 2023), and (2) from a multimodal
+perspective, concatenating multiple videos raises
+issues with computational constraints and the non-
+existence of multiple video training data for VLMs
+(Li et al., 2025; Martin et al., 2026a).
+To faithfully implement citation quality, we wrap
+verification in a loop which downsamples the fram-
+erate of the video(s) until they fit on GPU memory.
+We first attempt to verify a (subclaim, videos) pair
+at 1 fps per video. If an out-of-memory (OOM)
+exception is thrown, the videos are downsampled
+by reducing the framerate of all videos by half
+( fps 2 ) until 10 iterations of downsampling or until
+no OOM is reached. We never reach the 10 itera-
+tions on the videos in WIKIVIDEO, but allow for
+setting downsampling iterations to be defined by
+the evaluator. To verify the sentences we use the
+prompt in Figure 3.
+D.2 ARGUE
+ARGUE (Mayfield et al., 2024) is a RAG eval-
+uation framework developed for report genera-
+tion—the task of producing a long-form, citation-
+attributed response to a complex user query. Under
+ARGUE, reports accumulate a series of rewards
+and penalties based on sentence-level judgments
+about whether each sentence is supported by its
+associated citations and whether it correctly an-
+swers any of a predetermined set of questions (or
+nuggets) associated with the report topic. ARGUE
+also handles various nuances related to these two
+dimensions, including whether a sentence reiter-
+ates information stated previously in the report (and
+thus does not require a citation) or whether a state-
+ment correctly asserts that some nugget question is
+unanswerable from the underlying collection. Our
+implementation of this metric is based largely on
+AUTO-ARGUE (Walden et al., 2025a).
+Nuggets To evaluate predictions, ARGUE has
+a knowledge base of question-answer pairs on the
+topic called nuggets. None of our evaluation data
+contains nuggets, so we first create a set of nuggets
+to use in evaluation. To do this, we convert our
+reference subclaims to nuggets by generating ques-
+tions with an LLM (Qwen3; Yang et al., 2025) and
+then pairing the questions and claim as a question-
+answer pair.
+Sentence Support is the proportion of predicted
+sentences attested by each of their citations. The
+open-source implementation of ARGUE (Walden
+et al., 2025a) we use implements this for a single
+citation at a time, which we follow. The only mod-
+ification we make to this code is changing their
+verification of the sentence against a text document
+with the verification of the sentence against a video.
+Nugget Coverage is the proportion of nugget
+questions correctly answered by the report, aggre-
+gated over sentences. This is similar to ALCE
+Claim Recall or our INFOF1 Recall, but instead re-
+calling QA pairs. Like ALCE, this score requires
+no modification for multimodal RAG evaluation.
+In our implementation of this, we do not use our
+scoring function with CLUE. Instead, we use the
+LLM critic from the implementation.
+D.3 RAGAS
+RAGAS (Es et al., 2024) is a RAG evaluation
+framework developed for the automatic evaluation
+of retrieval-augmented generation—the task of pro-
+ducing long-form, citation-attributed responses to a
+user query. RAGAS consists of three main compo-
+nents: Faithfulness, Answer Relevance, and Con-
+text Relevance.
+Faithfulness evaluates statements from a predic-
+tion against the context used in generation. We
+interpret these statements as subclaims to resolve
+the factuality issues of ARGUE and ALCE. Ad-
+ditionally, like Citation Quality from ALCE, this
+experiences the same issue of computational infea-
+sibility in multi-source inference. However, unlike
+ALCE, Faithfulness is not designed such that it is
+necessary to perform inference on multiple sources.
+We modify this to verify one subclaim in one doc-
+ument at a time, but only using the videos used in
+generation and not all relevant videos. We use the
+same scoring function as INFOP/CITEP.
+Answer Relevance evaluates the embedding sim-
+ilarity between the query used during prediction
+40246

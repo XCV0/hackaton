@@ -1,0 +1,69 @@
+Fig. 4: Query Sample. A single query includes three primary components: (1) Contextual System Information, a constant
+element across all queries that offers high-level task instruction; (2) Current Query, comprising all driving information and
+specific task instruction in natural language question-answer format. Driving video visual inputs (i.e. <video>) as represented
+here are in fact encoded video tokens from a video encoder and MLP projector which are concatenated with language tokens
+from a text encoder, see Fig. 2 for more architectural detail. Note that the red sentence is the expected output from MLLM; (3)
+Multiple In-Context Learning Examples, retrieved from memory, which serve as an analogical demonstration of a complete
+reasoning process—from sensor input in driving scenarios to action justification and control prediction.
+where we separate out the terms WZSL independent of the
+ICL examples and dependent solely on the current query from
+those ∆WICL dependent on the ICL examples, given by:
+∆WICL =
+X
+i
+WV zicl,i(WK zicl,i)T
+WZSL = WV zq (WK zq )T
+(8)
+Now, with more detail in Sec. C, a forward-pass
+F (x) = (W0 + ∆W )x (9)
+through a linear layer F after its weights W0 have been updated
+by ∆W has the weight updates coupled to the input in the
+form
+∆W x =
+X
+i
+η ∂L ∂y |yi xT i x (10)
+where xi, yi are the (mini-batch) input and output to the layer
+that resulted in the weight update when backpropagating loss
+L and with learning rate η. Therefore we have a weighted sum
+of dot products, which is akin to an attention mechanism.
+Indeed, by inspection of similar dot-product expressions
+WV zicl,i(WK zicl,i)T ↔ η ∂L ∂y |yi xT i x we note that we match
+the form for the linear layer above
+(WZSL + ∆WICL)WQz1:n ↔ (W + ∆W )x
+This can therefore be interpreted to say that the output of
+the attention is adjusted in a meta-optimal way to conform
+to the samples provided as input context, much like gradient
+descent on the linear layer would adjust that layer to conform
+to the mini-batch training data, but crucially in the case of
+RAG-Driver, without backpropagation.
+RA-ICL serves as an efficient inference method boosting the
+performance of MLLMs in explainable driving without further
+training effort, where we empirically verify it is extremely
+effective in boosting the model prediction performance and
+generalisation capacity.
+IV. EXPERIMENTS
+A. Settings and Datasets
+We empirically evaluate the proposed framework of Retrieval-
+augmented In-Context Learning (RA-ICL) framework for Multi-
+modal Large Language Model (MLLMs), targeting explainable
+driving applications. We aim to validate its efficacy in general
+driving scenarios with a focus on two main aspects: (1)
+explainability in driving action explanation and justification. (2)
+Control Signal Prediction. We conduct experiments with the
+BDD-X [39] dataset, which is a widely adopted benchmark in
+explainable driving, comprising 77-hour videos across the US
+under different road and weather conditions. We customize the
+format as shown in Fig. 4, resulting in 16,803 and 2,123 video
+question-answering pairs for training and testing, respectively.
+More importantly, we further explore the transfer learning
+capacity of zero-shot generalisation in unseen environments.
+We leverage customised dataset comprising 58 testing question-
+answering pairs, recorded in London, UK as part of the Sense-
+Assess-eXplain dataset [22], presenting a significant distribution
+shift from the BDD-X dataset.
+Benchmark Settings For all experiments, we train the MLLM
+using the BDD-X training split. Subsequent evaluation on
+general explainability and control signal prediction capabilities
+tests are conducted on the BDD-X test split with the BDD-X
+training split as the memory database. For the transfer learning

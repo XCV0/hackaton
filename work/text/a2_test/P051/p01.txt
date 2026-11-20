@@ -1,0 +1,86 @@
+RAG-TESTER: Automated End-to-End Testing of Retrieval-Augmented
+Large Language Models
+Ange Maizteguia, Jon Ayerdia, Miren Illarramendia and Aitor Arrietaa,∗
+aMondragon University, Arrasate-Mondragon, Gipuzkoa, Spain
+ARTICLE INFO
+Keywords:
+LLM, Testing, RAG
+ABSTRACT
+Context: Retrieval-Augmented Generation (RAG) enables Large Language Models (LLMs)
+to incorporate external, up-to-date, domain-specific, or proprietary information at inference time.
+However, the reliability of a RAG system depends on the interaction between multiple components,
+including the generative model, embedding model, retrieval mechanism, and prompt construction
+strategy. Different combinations of these components may therefore exhibit substantially different
+failure behavior, motivating systematic and automated testing.
+Objectives: This work aims to automate the end-to-end testing of RAG-enabled LLMs and to
+generatetestcasescapableofexposingfailuresacrossdifferentcombinationsofLLMsandembedding
+models.
+Methods: We propose RAG-TESTER, an automated testing approach comprising four stages:
+generation of retrieval documents, generation of test inputs and expected outputs, execution of the
+generated tests, and automated evaluation using an LLM as a judge. The test-generation strategy
+incorporates complex document passages, unsupported queries, and document-coverage criteria. We
+evaluate RAG-TESTER using eight LLMs and six embedding models, resulting in 24 compatible
+LLM–embedding configurations, and compare it with a baseline test-input generator.
+Results: Across 72,000 test executions, RAG-TESTER detected 21,633 failures, compared with
+20,293 detected by the baseline, representing a 6.6% increase. RAG-TESTER outperformed the
+baselinein20ofthe24evaluatedconfigurationsandexposedfailuresincludingretrievalinaccuracies,
+unsupported answers, incomplete use of retrieved context, and difficulties interpreting complex
+passages.
+Conclusion: The results show that automated, coverage-oriented test generation can effectively
+expose failures arising from the interaction between retrieval and generation components in RAG
+systems.RAG-TESTER providesanend-to-endmechanismforcomparingLLM–embeddingconfigu-
+rations and assessing their reliability before deployment.
+1. Introduction
+RecentadvancementsinLargeLanguageModels(LLMs)
+have led to substantial improvements in natural language
+understanding and generation across a wide range of tasks,
+including question answering, code generation, conversa-
+tional agents, and decision-support systems. Despite these
+advances, traditional LLMs primarily rely on knowledge
+encodedintheirparameters,makingtheminherentlylimited
+byoutdatedtrainingdata,pronetohallucinations,andunable
+to provide verifiable, context-specific information.
+Retrieval-AugmentedGeneration(RAG)[1]hasemerged
+as a promising paradigm to mitigate these limitations by
+integrating external knowledge retrieval mechanisms with
+neuraltextgeneration.Byincorporatingrelevantdocuments
+at inference time, RAG systems can produce responses
+that are more accurate, up-to-date, and grounded in source
+material. As a result, RAG-based LLMs are increasingly
+adopted in high-impact domains such as law, medicine, and
+enterprise knowledge management, where reliability and
+traceability are critical.
+∗Corresponding author
+ange.maiztegui@alumni.mondragon.edu (A. Maiztegui);
+jayerdi@mondragon.edu (J. Ayerdi); millarramendi@mondragon.edu (M.
+Illarramendi); aarrieta@mondragon.edu (A. Arrieta)
+ORCID(s):
+However,thedevelopmentofRAG-enabledLLMsintro-
+duces new challenges from a software engineering perspec-
+tive.UnlikestandaloneLLMs,thecorrectnessofaRAGsys-
+tem depends on multiple interacting components, including
+embeddingmodels,retrievalpipelines,rankingmechanisms,
+and prompt construction strategies. Consequently, failures
+mayarisefromdifferentsources,suchasinaccurateretrieval,
+incomplete context integration, or hallucinated responses.
+This complexity makes systematic and automated testing of
+RAG systems paramount, yet non-trivial.
+ExistingapproachesforevaluatingRAGsystemslargely
+rely on benchmark-based assessments or scenario-specific
+evaluation frameworks [2–6]. While benchmarking tech-
+niques provide standardized comparisons, they are inher-
+ently limited in coverage, as they focus on predefined
+datasets or narrow application scenarios. As a result, they
+oftenfailtoexposediversefailuremodes,particularlythose
+arisingfromtheinteractionbetweenretrievalandgeneration
+components. More importantly, current approaches lack
+end-to-end automated testing mechanisms capable of sys-
+tematicallygeneratingtestinputs,definingexpectedoutputs,
+and evaluating system behavior under varied conditions.
+To address these limitations, we propose RAG-TESTER,
+anend-to-endautomatedandsystematicframeworkfortest-
+ing RAG-enabled LLMs. Our approach evaluates RAG sys-
+tems across multiple qualitative dimensions, including fac-
+tuality, relevance, completeness, and clarity. The proposed
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 1 of 21
+arXiv:2608.00054v1  [cs.AI]  26 Jul 2026

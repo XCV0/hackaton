@@ -1,0 +1,79 @@
+Table 3: The results of combinations of different compressors and selection strategies. G0-G3 denote different
+granularity sequences. For each dataset, two columns represent Match (M) and Average Context Embedding Counts,
+with the best metrics bolded and the second-best underlined.
+Compressors Selection Strategies Datasets NQ TriviaQA WQ TREC SQuAD Average
+G3 41.00 102 23.34 105 42.32 97 33.86 102 35.06 109 35.12 103
+ACC-G0 G2 41.11 104 23.42 107 42.27 99 34.15 103 35.09 111 35.21 105
+G1 41.33 107 23.38 111 42.52 104 34.01 108 35.13 114 35.27 109
+G3 41.41 56 23.33 58 42.22 56 33.14 57 35.16 57 35.05 57
+ACC-G1 G2 41.33 62 23.24 63 42.67 62 33.14 63 35.26 62 35.13 62
+G1 41.11 64 23.33 64 42.91 64 33.43 64 35.37 64 35.23 64
+G3 39.42 47 22.69 50 42.37 48 32.71 48 35.22 49 34.48 48
+ACC-G2 G2 39.20 56 23.11 60 42.57 58 33.29 58 34.97 58 34.63 58
+G1 39.39 63 23.07 65 42.57 64 33.72 64 35.15 65 34.78 64
+G3 40.06 63 22.67 62 42.27 64 34.15 64 31.51 63 34.13 63
+ACC-G3 G2 40.17 64 22.58 64 42.32 64 34.44 64 31.52 64 34.21 64
+G1 40.17 64 22.58 64 42.32 64 34.44 64 31.52 64 34.21 64
+Table 4: The results of RAG performance between
+vanilla RAG and ACC-RAG. For each dataset, two
+columns represent resilience and boost rate, with the
+highest score bolded and the second-highest underlined.
+Method Datasets
+NQ TriviaQA
+RAG 72.98 28.78 82.06 8.97
+ACC-RAG-G0 76.18 22.94 83.22 7.91
+ACC-RAG-G1 77.95 21.67 83.56 7.75
+ACC-RAG-G2 74.82 20.69 83.22 7.52
+ACC-RAG-G3 77.79 20.31 83.95 6.72
+G2+G3, which optimized inference efficiency at
+the expense of a slight M score decrease.
+5.5 Case Study
+We present a representative case in Appendix G,
+which demonstrates the outstanding performance
+of ACC-RAG in both efficiency and effectiveness.
+5.6 Scalability Evaluation
+We observe an excellent trade-off between effec-
+tiveness and efficiency with Llama3-3B-Instruct
+and Llama3-8B-Instruct (results in Appendix H).
+ACC-RAG achieves results comparable to RAG
+on both models and datasets (with <10% M score
+difference), while improving speed by 4 to 5 times
+(with FTIT reduced by 76% to 83%), fully show-
+casing the scalability of the method.
+5.7 RAG Integration Analysis
+We evaluate the RAG performance using the re-
+silience rate and the boost rate proposed in (Cheng
+et al., 2024). The resilience rate quantifies the
+proportion of correct decoder responses retained
+post-retrieval, while the boost rate measures the per-
+centage of initially incorrect responses corrected
+through retrieval augmentation. As shown in Ta-
+ble 4, RAG exhibits a higher boost rate, while ACC-
+RAG demonstrates a higher resilience rate. As the
+training granularity sequence for compressor be-
+comes denser, the overall trend is an increase in the
+boost rate and a decrease in the resilience rate.
+5.8 OOD Analysis
+We evaluate the Out of Distribution(OOD) per-
+formance of our method(results in Appendix I),
+demonstrating its exceptional generalization abil-
+ity to unseen supporting documents and unseen
+queries from different domains.
+5.9 Additional Computation Analysis
+Our approach incurs additional computational over-
+head during inference due to the introduced selec-
+tor. Analysis in Appendix J demonstrates the fa-
+vorable trade-off between controlled computational
+cost and substantial performance gains.
+6 Conclusion
+In this paper, we propose Adaptive Context Com-
+pression for RAG, a framework that dynamically
+adjusts compressed embeddings required during
+inference. The framework effectively improves
+inference efficiency while maintaining the qual-
+ity benefits of retrieval. Experimental results un-
+der standardized benchmark show that our method
+achieves the best results under context compression
+and comparable or superior accuracy with over 4×
+inference efficiency compared to RAG.
+24068

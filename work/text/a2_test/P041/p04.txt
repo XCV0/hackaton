@@ -1,0 +1,101 @@
+Promptfor TripletExtraction
+Instruction:
+Extract informative triplets directly from the text following the 
+examples. Do not add any extra words, line breaks, or spaces.
+Example 1:
+Text: Scott Derrickson (born July 16, 1966) is an American 
+director, screenwriter and producer.
+Triplets:
+<Scott Derrickson, born in, 1966>,
+<Scott Derrickson, nationality, America>,
+<Scott Derrickson, occupation, director>,
+<Scott Derrickson, occupation, screenwriter>,
+<Scott Derrickson, occupation, producer>
+Example 2:
+Text: A Kiss for Corliss is a 1949 American comedy film 
+directed by Richard Wallace and written by Howard Dimsdale.
+Triplets:
+<A Kiss for Corliss, year, 1949>,
+<A Kiss for Corliss, country, America>,
+<A Kiss for Corliss, genre, comedy film>,
+<A Kiss for Corliss, director, Richard Wallace>,
+<A Kiss for Corliss, writer, Howard Dimsdale>
+Target Text: <targettext>
+Triplets:
+Figure 3: The prompt for triplet extraction.
+be given as
+Gm q = traverse(G, G0 q , m), (4)
+where traverse(·) can be implemented with the
+breadth-first search (BFS) algorithm, serving as a
+function that captures all entities in G0 q , correspond-
+ing m-hop neighboring entities, and all edges link-
+ing these entities to form an expanded subgraph.
+Given the expanded subgraph Gm q , we can read-
+out all the chunks associated with the graph (i.e.,
+containing facts corresponding to the triplets in this
+graph) as follows:
+Dm q = {c | (h, r, t, c) ∈ Gq m} ⊆ D, (5)
+where Dm q is referred to as the expanded chunks.
+Discussions Several semantic-based and context-
+based approaches can also achieve chunk expan-
+sion. For example, one can increase the value
+of k in the aforementioned similarity-based re-
+trieval process, or apply a context window ex-
+pansion (Jiang et al., 2023) (i.e., when a chunk
+is retrieved, the chunks within the context win-
+dow are also recalled together). Different from
+these approaches, the proposed graph-guided ex-
+pansion gathers chunks that contain the same or
+related entities or triplets, without requiring these
+expanded chunks to have high semantic similarity
+to the query or to be located around the retrieved
+chunks. Such a design of graph-guided expansion
+helps prevent redundancy and excessive homogene-
+ity among the retrieved and expanded chunks, lead-
+ing to greater diversity and the development of a
+more comprehensive knowledge network. We pro-
+vide some empirical evidence to further confirm
+the effectiveness of the proposed graph-guided ex-
+pansion in Sec. 3.3.
+2.3 KG-based Context Organization
+After the KG-enhanced chunk retrieval, KG2RAG
+incorporates a post-processing stage before re-
+sponse generation of LLMs, motivated by the fol-
+lowing two considerations.
+Firstly, the number of expanded chunks through
+the graph-guided expansion is tied to the triplets
+contained in the expanded subgraph, which can be
+too large, potentially exceeding the context length
+and introducing noise that may obscure helpful in-
+formation. Secondly, inspired by human reading
+habits and previous studies (Li, 2023; Liu et al.,
+2024b), providing semantically coherent and well-
+organized materials as context makes positive im-
+pacts on the understanding and generation perfor-
+mance of LLMs. As a result, we propose a KG-
+based context organization module in KG2RAG,
+which serves as both a filter and an arranger to meet
+these requirements.
+Serving as a Filter Specifically, we first calcu-
+late the semantic similarities between the expanded
+chunks with the user query, according to Eq. (2).
+Based on these similarities, the expanded subgraph
+Gm q can be transformed into an undirected weighted
+graph as follows:
+U m q = {(h ↔ t, rel : r, src : c, weight : s(q, c))
+| (h, r, t, c) ∈ Gm q },
+(6)
+where h ↔ t represents an undirected edge, at-
+tached with the corresponding relation and the
+source chunk as meta information. We reuse the
+semantic similarities calculated in Sec. 2.2 to save
+computing resources.
+Due to the cohesive nature of knowledge, U m q
+can naturally be divided into p connected compo-
+nents, denoted by Bi, 1 ≤ i ≤ p, where nodes
+within each connected component Bi represent en-
+tities from the KG. Note that multiple edges may
+connect a pair of nodes due to redundant knowl-
+edge, which promotes us to generate the maximum
+spanning tree (MST) of each connected component
+8915

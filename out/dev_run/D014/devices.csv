@@ -1,0 +1,8 @@
+publication_id,device_id,absorber_material_id,device_label,device_role,device_type,architecture,substrate_type,active_area,area_unit,area_definition,encapsulation,note
+D014,DV1,M1,"Spin-coating, CdCl2 bath, hot plate (Table 1)",control,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); standard non-R2R procedure; layer-by-layer ~500 nm CdTe
+D014,DV2,M1,"Doctor-blading, CdCl2 bath, hot plate (Table 1)",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2)
+D014,DV3,M1,"Spray-coating, CdCl2 bath, hot plate (Table 1)",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2)
+D014,DV4,M3,"pyr-CdCl3-capped CdTe NCs + 2 wt% pyr-CdCl3, standard device",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); метод нанесения слоя CdTe в статье для этого прибора не указан
+D014,DV5,M3,"Integrated R2R-friendly: pyr-CdCl3 + 2 wt%, doctor-blading, IR lamp annealing",target,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2)
+D014,DV6,M2,"pyr-CdCl3-capped CdTe NCs, 0 wt% extra pyr-CdCl3",control,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); метод нанесения слоя CdTe не указан
+D014,DV7,M1,"Standard side-by-side device (spin-coating, CdCl2 bath, hot plate) vs R2R, Fig. 5",control,cell,superstrate,rigid,0.0594,cm2,aperture,,ITO/CdTe/ZnO:In/Al; апертурная маска 5.94 mm2 (номинально 6 mm2); числовые показатели в тексте не приведены (только на рис. 5)

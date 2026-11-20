@@ -1,0 +1,107 @@
+SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia Trovato et al.
+executed (e.g., due to plan reordering), and (ii) cases where the ac-
+tion was labeled as rewrite but corresponded to the first retrieval
+attempt (i.e., effectively a retrieve). The remaining instances, in
+which a rewrite directly enabled successful fact extraction and
+sub-question resolution, form our training set. By training on this
+curated set of successful behaviors, the Supervisor learns to re-
+produce effective rewrites in similar contexts through Supervised
+Fine-Tuning (SFT).
+Extractor: Distilling Minimal Supporting Facts. The Extractor
+should output only facts necessary to answer the sub-question. We
+retain extraction outputs E𝑖 only from trajectories with correct
+final answers. Among these, we focus on cases where |E𝑖| > 1,
+indicating potential redundancy. We then use a same but frozen
+auxiliary LLM to select from E𝑖 the minimal subset E∗ 𝑖 that directly
+supports the answer to 𝑐𝑖, via the prompt: “Given query: 𝑧𝑖 , and
+candidate facts: E𝑖 , select only the facts strictly required to answer
+the question.” If |E∗ 𝑖 | <|E𝑖|, the resulting (𝑧𝑖,𝐷𝑧𝑖 )→E∗ 𝑖 pairs are
+collected to fine-tune the Extractor.
+Reasoner: Promoting Concise and Deterministic Answers.
+The Reasoner sometimes produces verbose or ambiguous responses
+(e.g., listing multiple guesses), which harms answer precision. We
+select samples where: (i) the answer covers the ground truth with
+F1 > 0.3, (ii) it is not an exact match, and (iii) its length exceeds
+the ground-truth answer by more than 50%. To prevent the model
+from over-correcting toward excessive brevity or learning spurious
+patterns, we balance this set with twice as many randomly sampled
+examples where the original output already exactly matched the
+ground truth. All samples are trained via SFT to map (𝑧𝑖,X𝑖) to a
+concise, single-statement answer aligned with the reference format.
+This modular tuning strategy requires no human annotation
+or stronger teacher models. By aligning each component’s train-
+ing objective with its functional role in the execution loop and
+filtering out non-causal or low-quality outputs, it enables targeted
+self-improvement while maintaining system coherence.
+4 Experiments
+4.1 Experimental Setup
+Datasets. We evaluate our method on three widely used multi-
+hop QA benchmarks: 2WikiMultihopQA [11], HotpotQA [45], and
+MuSiQue [32]. Following the data partitioning protocol of Trivedi
+et al. [33], we extend the original test sets to 1,000 questions per
+dataset by randomly sampling an additional 500 examples from
+the training sets. For the retrieval corpus, we construct a unified
+document collection by aggregating all gold supporting documents
+and distractor documents from each dataset respectively, consistent
+with Trivedi et al. [33]. Furthermore, we conduct additional com-
+parative experiments on a larger and noisier corpus in Section 5.3.
+Evaluation Metrics. We report four standard metrics: Exact Match
+(EM), F1 score, Precision, and Recall. For each question, EM is 1
+if the prediction exactly matches the ground-truth answer and 0
+otherwise; F1, Precision, and Recall are computed based on token-
+level overlap between the prediction and answer. All metrics are
+then averaged over the dataset. Following previous works [4, 45], all
+methods apply the same post-processing (e.g., string normalization
+and span extraction) before metric computation to ensure fairness.
+Baselines. We compare against a comprehensive set of baselines,
+categorized into three groups:
+• Non-retrieval: We prompt LLMs with Chain-of-Thought (CoT) [37]
+to perform multi-hop reasoning without external retrieval, as-
+sessing their intrinsic reasoning capability.
+• Single-step RAG: We augment the RAG [20] pipeline with CoT
+prompting, where the model generates an answer based on doc-
+uments retrieved in a single step using the original question.
+• Iterative RAG: We include state-of-the-art iterative frameworks,
+including SelfAsk [26], Iter-RetGen [29], GenGround [30], and
+DualRAG [4], which perform multi-turn retrieval and reasoning
+via sub-question decomposition or iterative refinement. These
+are discussed in Section 2.
+To avoid confounding effects from prompt quality, we maintain
+consistent prompt styles across all baselines and STRIDE.
+4.2 Implementation Details
+To ensure a fair comparison, we cap the maximum number of
+iterations at 5 for all iterative methods.
+LLM Backbones. We primarily use Qwen3-8B [42] as the back-
+bone LLM and additionally evaluate GPT-4o-mini to assess the
+impact of model scale and architecture. For all LLM calls, we fix the
+temperature to 1.0 and set the maximum generation length to 512.
+Retriever. We build dense vector indexes using FAISS-GPU [16]
+with the Contriever [13] encoder. All baselines retrieve the Top-
+𝑘 = 5 documents per query by default. Notably, we set our method
+with 𝑘 = 3 on 2WikiMultihopQA and MuSiQue due to the strong
+performance. We further analyze the sensitivity of performance to
+𝑘∈{2, 3, 5, 8} in Section 5.8.
+Modular Fine-Tuning. We randomly sample 5,000 questions from
+each trainging set to form the tuning set. Following the procedure in
+Section 3.3, we collect filtered trajectories for each module, resulting
+in 371 samples for the Meta Planner, 217 for the Supervisor, 603 for
+the Extractor, and 1,119 for the Reasoner. To reduce computational
+cost, we apply LoRA [12] to fine-tune the four modules separately,
+with 2 epochs, lora rank 8, lora alpha 32, batch size 16, and learning
+rates of 3 × 10−5 for DPO and 1 × 10−4 for others. All training runs
+are conducted on a NVIDIA A6000 GPU with 2 hours in total.
+4.3 Main Results
+Table 1 presents the main results across three MHQA benchmarks.
+The results confirm the importance of external knowledge and itera-
+tive refinement in multi-hop reasoning, as retrieval-based methods
+consistently outperform non-retrieval baselines, and iterative RAG
+approaches generally achieve higher scores than single-step RAG.
+Under the same training-free setting, STRIDE achieves the su-
+perior overall performance across both LLM backbones and most
+evaluation metrics. Notably, on the highly compositional MuSiQue,
+STRIDE substantially outperforms all baselines: with GPT-4o-mini,
+it improves EM by 0.053 (0.33 vs. 0.277) and F1 by 0.068 (0.467 vs.
+0.399) over DualRAG; similar gains are observed with Qwen3-8B
+(+0.059 EM, +0.072 F1). This demonstrates that STRIDE’s explicit
+separation of strategy, control, and execution is particularly effec-
+tive for complex, multi-step reasoning.

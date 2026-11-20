@@ -1,0 +1,97 @@
+trieval condition misalignment across rounds.
+3.3 Critic: Evidence Validation and
+Sufficiency Control
+Following LeVine and Varjavand (2025), which
+demonstrated that reranking documents beyond
+simple relevance can improve RAG systems, we
+introduce a multi-dimensional scoring scheme tai-
+lored to our framework. The critic model evaluates
+each retrieved document and outputs (i) scores on
+four criteria—relevance, usefulness, clarity/speci-
+ficity, and contextual compatibility—and (ii) a con-
+cise textual critique. Documents that fall below a
+predefined quality threshold are discarded, while
+those that satisfy all criteria are retained and accu-
+mulated across iterations as validated evidence for
+generation. Detailed definitions of the four criteria
+are given in Appendix A, and the specifics of our
+scoring and filtering procedures are described in
+Section 4.3.
+After scoring, the critic determines whether the
+current validated evidence set is adequate to an-
+swer the query reliably. If key constraints are
+missing, evidence is contradictory, or alignment
+remains weak, the system triggers another itera-
+tion and passes the critique back to the planner.
+Otherwise, the loop terminates and the generator
+produces the final answer using only validated evi-
+dence. By coupling per-document validation with
+an explicit overall sufficiency decision, CORAL
+performs feedback-driven retrieval control entirely
+at test time, without fine-tuning and with minimal
+assumptions about the underlying retriever or gen-
+erator.
+4 Experiments
+4.1 Datasets
+To evaluate the effectiveness of our framework, we
+curate multilingual QA benchmarks that require
+culturally grounded knowledge and commonsense
+reasoning without paired evidence documents.
+BLEnD (Myung et al., 2024) evaluates every-
+day cultural knowledge for 16 countries, includ-
+ing under-represented regions and low-resource
+language communities (e.g., Assam, West Java).
+We use its multiple-choice (MCQ) subset, where
+each question is written in English but is associ-
+ated with a specific target country/culture and one
+of 13 source-language communities. Because the
+same underlying prompt can appear with multi-
+ple country-specific option sets, we sample one in-
+stance per underlying question to avoid overweight-
+ing duplicated prompts; full details are provided in
+Appendix B.1.
+CLIcK (Kim et al., 2024) consists of Korean
+MCQs gathered from official exams in addition
+to those generated through GPT-4 (OpenAI et al.,
+2024) based on official educational materials pro-
+vided by the Korean Ministry of Justice. As our
+focus is on cultural QAs, we use the Culture cate-
+gory from CLIcK. This category includes 8 subcat-
+egories including Korean Tradition, Korean Soci-
+ety, and Korean Popular Culture, including 1,345
+queries in total. A detailed statistics of the number
+of questions for each subcategory can be found in
+Appendix B.2.
+4.2 Baselines
+To evaluate CORAL, we compare against one non-
+retrieval baseline and four multilingual RAG con-
+figurations adapted from Ranaldi et al. (2026).
+These baselines vary the retrieval scope and trans-
+lation strategy, allowing us to isolate the effects of
+corpus/language selection under a fixed generator.
+Non-RAG answers the question directly without
+external retrieval, relying solely on the generator’s
+internal knowledge. tRAG (translate-then-retrieve)
+translates the query into English and retrieves only
+from the English corpus. As the MCQ subset of
+BLEnD is already in English, we present only the
+results on CLIcK for this baseline methodology.
+monoRAG retrieves from the corpus that matches
+the query language. multiRAG retrieves from the
+entire existing multilingual corpus without any cor-
+pus restriction. crossRAG retrieves from the same
+corpus pool as multiRAG, but translates the re-
+trieved documents into English prior to answer gen-
+eration.
+For query and document translation in tRAG
+and crossRAG, we use QWEN3-235B-A22B-
+INSTRUCT-2507 (Qwen Team, 2025) (hereafter,
+QWEN3-235B).
+4.3 Experimental Setup
+Retrieval. For all RAG-based methods, we
+embed documents with QWEN3-EMBEDDING-
+8B (Zhang et al., 2025b) and retrieve the top-5
+documents by cosine-similarity nearest-neighbor
+search using FAISS (Douze et al., 2025). Retrieval
+is performed over the target corpus scope specified
+by each method.

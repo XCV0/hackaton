@@ -1,0 +1,73 @@
+performance. The hysteresis index (HI) can be calculated
+using Equation (4) to identify the severity of hysteresis on
+PSC [48].
+HI = ƞrev − ƞfwd
+ƞrev
+4
+ƞfwd and ƞrev are the eﬃciencies measured under forward
+and reverse scan direction, respectively. Figure 12 displays
+the J – V curve of PSCs with bare carbon and modiﬁed car-
+bon measured under forward and reverse scans. There is a
+visible diﬀerence in JSC value between forward and reverse
+scans. This phenomenon might be related to the capacitive
+current during the forward and reverse scan [38, 49]. In the
+PSC, voltage changes during J – V measurement generate
+capacitive current, resulting in diﬀerent current readings
+depending on the scan direction. In the case of a forward
+scan, the photogenerated current is stored as a capacitive
+charge and cannot be released to an external load. In con-
+trast, during the reverse scan, the capacitive charge is dis-
+charged along with the photogenerated current. These
+factors lead to an underestimation of current during the for-
+ward scan and an overestimation of current during the
+reverse scan before reaching the steady-state current. How-
+ever, hysteresis is aﬀected not only by the scan direction.
+The main cause of hysteresis in PSC is still under debate
+among researchers. Several studies also suggest that it arises
+from the ferroelectric eﬀect in perovskite, unbalanced charge
+transport, trap-assisted charge recombination, and ion
+migration [50]. The reduced HI (Table 3) in PSC with
+CuSCN HSL and modiﬁed carbon may come from reduced
+photogenerated charge recombination and charge extraction
+improvements due to the employment of CuSCN material in
+two places.
+The relatively low performance of PSC might be caused
+by the humidity in the processing area. In this research,
+PSC was fabricated outside a glove box. It is widely known
+that perovskite material is susceptible to water, including
+moisture in the air. The use of basic MAPbI3 perovskite
+can also be a factor in the lower performance compared to
+other carbon-based PSCs, which usually use multication
+perovskite [51]. However, the performance of PSC in this
+research is comparable to that of other publications that
+use MAPbI3 perovskite and processed in ambient condi-
+tions. On top of that, several publications also still utilize
+organic HSL and metal counter electrodes on their structure.
+Table 4 summarizes works related to PSC, which were
+developed on ambient conditions with similar RH to this
+research.
+4. Conclusions
+In conclusion, we investigated the use of CuSCN as an inter-
+layer in the perovskite/carbon interface and a carbon elec-
+trode additive on carbon-based PSCs. This work utilized
+CuSCN through a combination of two strategies that had
+0.0 0.2 0.4 0.6 0.8 1.0
+0
+2
+4
+6
+8
+10Current density (mA/cm2)
+Voltage (V)
+CuSCN/carbon forward
+CuSCN/carbon reverse
+CuSCN/carbon+CuSCN forward
+CuSCN/carbon+CuSCN reverse
+Figure 12: J – V curve of PSC with CuSCN interlayer and diﬀerent carbon electrodes under forward and reverse scan direction.
+Table 3: HI for PSC with carbon and modiﬁed carbon counter
+electrode.
+Structure HI
+FTO/TiO2/MAPbI3/CuSCN/carbon 0.039
+FTO/TiO2/MAPbI3/CuSCN/carbon + CuSCN 0.013
+10 International Journal of Photoenergy
+ 3837, 2024, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2024/5355903, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

@@ -1,0 +1,78 @@
+For given input query, write 1-3 passages to answer the query. Write a hint keyword and a passage
+contained within « and ». A passage must be a complete sentence and not a phrase. It must contain
+complete context for answering the query and should not begin with it, he, they etc. Do not repeat
+any passages. Aim for new keywords.
+question: The football manager who recruited Cristiano Ronaldo managed Manchester United during
+what timeframe?
+passage: keyword: Cristiano Ronaldo’s recruiting manager « Alex Ferguson recruited Cristiano
+Ronaldo » keyword: Sir Alex Ferguson’s tenure at Manchester United « Sir Alex Ferguson managed
+Manchester United from 1986 to 2013. »
+answer: 1986 to 2013
+question: Were Eatza Pizza and Your Pie founded in the same state?
+passage: keyword: Eatza Pizza founded in state « Eatza Pizza was founded in Arizona » keyword:
+Your Pie founded in state « Your Pie was founded in Athens, Georgia »
+answer: no
+question: In which stadium do the teams owned by Myra Kraft’s husband play?
+passage: keyword: Myra Kraft’s husband « Robert Kraft’s wife is Myra Kraft. » keyword: Robert
+Kraft’s team « Robert Kraft is the owner of the New England Patriots. » keyword: New England
+Patriots stadium « Gillette Stadium is the home of the New England Patriots. »
+answer: Gillette Stadium
+question: <question>
+passage:
+Table 10: Few-shot prompt used in RICHES for multi-hop QA
+few selected examples where the unconstrained
+model emits incorrect answer, but constraining on
+the corpus guides it towards correct answer.
+A.5 Index representation qualitative analysis
+In this section we analyse retrievals from a few
+select examples from the OpenNQ development
+dataset. We compare retrievals using different doc-
+ument representations in the index, including: title
++ tf-idf, passage, sentence and proposition (see
+Section 3.4).
+Question who holds the world record for the most world
+records
+Gold Answer Ashrita Furman
+• title + tf-idf: List of world records in track cycling. World
+records in the sport of track cycling are ratiﬁed by the Union
+Cycliste Internationale (UCI).
+• Passage: According to the Guinness Book of World
+Records, the record for the largest event was set in 2009.
+• Sentence: As of January 2021, he has 1.7 million followers
+on Twitter
+• Proposition: Ashrita Furman holds the Guinness world
+record for the most Guinness world records.
+• Source text for proposition: Ashrita Furman (born Keith
+Furman, September 16, 1954) is a Guinness World Records
+record-breaker. As of 2017, Furman has set more than 600
+ofﬁcial Guinness Records and currently holds 531 records,
+thus holding the Guinness world record for the most Guin-
+ness world records.
+Analysis In this example, only the propositional-based re-
+trieval was able to retrieve a correct answer. Part of the reason
+why passage or sentence representation is hard to retrieve with
+auto-regressive decoding is that the main evidence for this
+answer in the "source text for proposition" comes at the end
+of a complex sentence ("[...] thus holding the Guiness world
+record for the most Guiness world records").
+Question who has the most number one single hits
+Gold Answer The Beatles
+• title + tf-idf: List of Billboard Hot 100 number-one singles
+of the 1990s. This article is about the American Billboard
+Hot 100 chart held during the 1990s.
+• Passage: According to the Recording Industry Association
+of America (RIAA), the album has sold more than 500,000
+copies in the United States,
+• Sentence: As of 2021, The Beatles remain the act with the
+most Christmas number-one singles in the United Kingdom.
+• Proposition: The Beatles hold the record for most number-
+one hits on the Billboard Hot 100.
+• Source text for proposition: The Beatles, Awards and
+achievements. As of 2017, they hold the record for most
+number-one hits on the Billboard Hot 100, with twenty.
+Analysis The correct answer is retrieved in this example using
+both sentence and proposition based representations. How-
+ever, the sentence representation here does not provide proper
+justiﬁcation for the answer. Note that the propositional repre-
+sentation correctly decontextualizes the pronoun in "[...] they
+8899

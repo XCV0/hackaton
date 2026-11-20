@@ -1,0 +1,94 @@
+RESEARCH ARTICLE
+www.advancedscience.com
+Depth-DependentPost-TreatmentforReducingVoltageLoss
+inPrintableMesoscopicPerovskiteSolarCells
+Xufeng Xiao, Wenhao Zhang, Jiale Liu, Jiankang Du, Cheng Qiu, Ranjun Meng, Anyi Mei,
+Hongwei Han, and Yue Hu*
+Theprintablemesoscopicperovskitesolarcellsconsistingofadoublelayerof
+metaloxidescoveredbyaporouscarbonﬁlmhaveattractedattentiondueto
+theirindustrializationadvantages.However,thetens-of-micrometerthickness
+ofthetriplescaﬀoldleadstoachallengeforperovskitetocrystallizeandfor
+thechargecarrierstoseparateandtraveltotheelectrode,whichlimitsthe
+opencircuitvoltage(VOC)ofsuchdevices.Inthiswork,adepth-dependent
+post-treatmentstrategyisdemonstratedtosynergisticallypassivatedefects
+andtuneinterfacialenergybandalignment.Twothiophenederivatives,
+namely3-chlorothiophene(3-CT)and3-thiopheneethylenediamine(3-TEA),
+areselectedforthepost-treatment.Energy-dispersiveX-rayspectroscopy
+provesthat3-CTisuniformlydistributedthroughoutthetriplescaﬀoldand
+eﬀectivelypassivatesthedefectsofthebulkyperovskite,while3-TEAreacts
+rapidlywiththelooseperovskiteinthecarbonlayertoform2Dperovskite,
+formingatypeIIenergybandalignmentattheperovskite/carboninterface.As
+aresult,thedefect-assistedrecombinationissuppressedandtheinterfacial
+energybandisregulated,increasingthe VOC to1012mV.ThePCEofthe
+devicesisenhancedfrom16.26%to18.49%.Thisdepth-dependent
+post-treatmentstrategytakesadvantageoftheuniquestructureandprovides
+anewinsightforreducingthevoltageloss.
+1.Introduction
+The power conversion eﬃciency (PCE) of perovskite solar cells
+(PSCs) soared to 25.7% in just a few years,[1] and the key to
+skyrocketing PCE is the excellent optoelectronic properties of
+the organic–inorganic lead halide perovskite materials.[2,3] The
+perovskite ﬁlms can be fabricated by simple solution processes
+using earth-abundant materials, showing potential for low-cost
+photovoltaic applications.[4] Among various cell structures, the
+X.Xiao,W.Zhang,J.Liu,J.Du,C.Qiu,R.Meng,A.Mei,H.Han,Y.Hu
+WuhanNationalLaboratoryforOptoelectronics
+HuazhongUniversityofScienceandTechnology
+Wuhan430074,China
+E-mail:yuehu@hust.edu.cn
+The ORCID identiﬁcation number(s) for the author(s) of this article
+canbefoundunderhttps://doi.org/10.1002/advs.202206331
+©2023TheAuthors.AdvancedSciencepublishedbyWiley-VCHGmbH.
+ThisisanopenaccessarticleunderthetermsoftheCreativeCommons
+AttributionLicense,whichpermitsuse,distributionandreproductionin
+anymedium,providedtheoriginalworkisproperlycited.
+DOI:10.1002/advs.202206331
+printable mesoscopic PSCs are fabri-
+cated by depositing perovskite in screen-
+printed mesoporous titanium dioxide
+(m-TiO2)/mesoporous zirconium diox-
+ide (m-ZrO2)/porous carbon scaﬀolds,[5]
+showing unique advantages in terms of
+cost, stability and large-scale industrial
+fabrication.[6,7]
+Nevertheless,PCEoftheprintablemeso-
+scopic PSCs is still lower than that of
+traditional structure devices. The main
+methods of improving the performance of
+mesoscopic PSCs include tuning the per-
+ovskitecrystallization,adjustingthecompo-
+sition of perovskite,[8–12] modifying the in-
+terfaces and developing the charge selec-
+tivematerialsandelectrodematerials.[13–17]
+Through these eﬀorts, the highest certi-
+ﬁedPCEfortheprintablemesoscopicPSCs
+has now reached 17.7%[12] and the high-
+est reported PCE is 18.8%.[10] At present,
+the crystallization process of perovskite
+in mesoscopic scaﬀolds is controllable,
+and the morphology and crystallinity have
+been signiﬁcantly improved.[8–10] This in-
+spires us to focus more on the property
+tuning of perovskite itself. The voltage loss of printable meso-
+scopic PSCs is more severe than the traditional structure PSCs,
+which can be overcome by reducing the defect density and
+non-radiativerecombinationlosses.[18,19] Somedefectswithdeep
+energylevelssuchasuncoordinatedPb2+,Pb–Ianti-substitution,
+andPbclustersareeasilygeneratedatthegrainboundariesand
+interfaces of perovskite, leading to defect-assisted non-radiative
+recombination.[20,21] The small size perovskite grains and many
+grainboundariesintheprintablemesoscopicstructuremaylead
+to the generation of more defects with deep energy levels. In
+addition,theinterfacerecombinationcausedbymismatcheden-
+ergylevelalignment,interfacialdefect,andcarrierbacktransfer
+can also severely impair the VOC of the printable mesoscopic
+devices.[22]
+The unclear interface between the perovskite and the func-
+tionallayersinthemesoscopicstructureleadstomanystrategies
+of defects passivation and interface treatment unsuitable for
+the printable mesoscopic PSCs. Moreover, the multiple strate-
+gies used in succession to passivate defects or tune interface
+can easily lead to process incompatibility and impair device
+photovoltaic performance. Therefore, a strategy that can si-
+multaneously passivate defects and tune the perovskite/carbon
+Adv. Sci. 2023,10,2206331 ©2023TheAuthors. AdvancedSciencepublishedbyWiley-VCHGmbH2206331(1of8)

@@ -1,0 +1,156 @@
+LLM-Specific Utility for Retrieval-Augmented Generation CIKM ’26, November 07–11, 2026, Rome, Italy
+References
+[1] Adam Block, Rahul Kidambi, Daniel N Hill, Thorsten Joachims, and Inderjit S
+Dhillon. 2022. Counterfactual learning to rank for utility-maximizing query
+autocompletion. In Proceedings of the 45th International ACM SIGIR Conference
+on Research and Development in Information Retrieval. 791–802.
+[2] Valeria Bolotova, Vladislav Blinov, Falk Scholer, W. Bruce Croft, and Mark Sander-
+son. 2022. A Non-Factoid Question-Answering Taxonomy. In SIGIR ’22: The 45th
+International ACM SIGIR Conference on Research and Development in Information
+Retrieval, Madrid, Spain, July 11 - 15, 2022, Enrique Amigó, Pablo Castells, Julio
+Gonzalo, Ben Carterette, J. Shane Culpepper, and Gabriella Kazai (Eds.). ACM,
+1196–1207. https://doi.org/10.1145/3477495.3531926
+[3] Xinyi Dai, Yunjia Xi, Weinan Zhang, Qing Liu, Ruiming Tang, Xiuqiang He, Jiawei
+Hou, Jun Wang, and Yong Yu. 2021. Beyond relevance ranking: a general graph
+matching framework for utility-oriented learning to rank. ACM Transactions on
+Information Systems (TOIS) 40, 2 (2021), 1–29.
+[4] Rajarshi Das, Shehzaad Dhuliawala, Manzil Zaheer, and Andrew McCallum.
+2019. Multi-step retriever-reader interaction for scalable open-domain question
+answering. arXiv preprint arXiv:1905.05733 (2019).
+[5] Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad
+Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan,
+et al. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783 (2024).
+[6] Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yixin
+Dai, Jiawei Sun, Haofen Wang, and Haofen Wang. 2023. Retrieval-augmented
+generation for large language models: A survey. arXiv preprint arXiv:2312.10997
+2, 1 (2023).
+[7] Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin
+Xu, Qihao Zhu, Shirong Ma, Peiyi Wang, Xiao Bi, et al. 2025. Deepseek-r1:
+Incentivizing reasoning capability in llms via reinforcement learning. arXiv
+preprint arXiv:2501.12948 (2025).
+[8] Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara, and Akiko Aizawa. 2020.
+Constructing A Multi-hop QA Dataset for Comprehensive Evaluation of Reason-
+ing Steps. In Proceedings of the 28th International Conference on Computational Lin-
+guistics. International Committee on Computational Linguistics, Barcelona, Spain
+(Online), 6609–6625. https://www.aclweb.org/anthology/2020.coling-main.580
+[9] Gautier Izacard and Edouard Grave. 2020. Distilling knowledge from reader to
+retriever for question answering. arXiv preprint arXiv:2012.04584 (2020).
+[10] Gautier Izacard, Patrick Lewis, Maria Lomeli, Lucas Hosseini, Fabio Petroni,
+Timo Schick, Jane Dwivedi-Yu, Armand Joulin, Sebastian Riedel, and Edouard
+Grave. 2023. Atlas: Few-shot learning with retrieval augmented language models.
+Journal of Machine Learning Research 24, 251 (2023), 1–43.
+[11] Kalervo Järvelin and Jaana Kekäläinen. 2002. Cumulated gain-based evaluation
+of IR techniques. ACM Transactions on Information Systems (TOIS) 20, 4 (2002),
+422–446.
+[12] Zhengbao Jiang, Frank F Xu, Luyu Gao, Zhiqing Sun, Qian Liu, Jane Dwivedi-Yu,
+Yiming Yang, Jamie Callan, and Graham Neubig. 2023. Active retrieval augmented
+generation. In Proceedings of the 2023 Conference on Empirical Methods in Natural
+Language Processing. 7969–7992.
+[13] Mandar Joshi, Eunsol Choi, Daniel S Weld, and Luke Zettlemoyer. 2017. Triviaqa:
+A large scale distantly supervised challenge dataset for reading comprehension.
+arXiv preprint arXiv:1705.03551 (2017).
+[14] Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick SH Lewis, Ledell Wu,
+Sergey Edunov, Danqi Chen, and Wen-tau Yih. 2020. Dense Passage Retrieval for
+Open-Domain Question Answering.. In EMNLP (1). 6769–6781.
+[15] Omar Khattab, Keshav Santhanam, Xiang Lisa Li, David Hall, Percy Liang, Christo-
+pher Potts, and Matei Zaharia. 2022. Demonstrate-search-predict: Compos-
+ing retrieval and language models for knowledge-intensive nlp. arXiv preprint
+arXiv:2212.14024 (2022).
+[16] Tushar Khot, Harsh Trivedi, Matthew Finlayson, Yao Fu, Kyle Richardson, Peter
+Clark, and Ashish Sabharwal. 2022. Decomposed prompting: A modular approach
+for solving complex tasks. arXiv preprint arXiv:2210.02406 (2022).
+[17] Tom Kwiatkowski, Jennimaria Palomaki, Olivia Redfield, Michael Collins, Ankur
+Parikh, Chris Alberti, Danielle Epstein, Illia Polosukhin, Jacob Devlin, Kenton
+Lee, et al. 2019. Natural questions: a benchmark for question answering research.
+Transactions of the Association for Computational Linguistics 7 (2019), 453–466.
+[18] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin,
+Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel,
+et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp tasks.
+Advances in neural information processing systems 33 (2020), 9459–9474.
+[19] Xiaonan Li, Changtai Zhu, Linyang Li, Zhangyue Yin, Tianxiang Sun, and Xipeng
+Qiu. 2023. Llatrieval: Llm-verified retrieval for verifiable generation. arXiv
+preprint arXiv:2311.07838 (2023).
+[20] Yang Liu, Yuanshun Yao, Jean-Francois Ton, Xiaoying Zhang, Ruocheng Guo, Hao
+Cheng, Yegor Klochkov, Muhammad Faaiz Taufiq, and Hang Li. 2023. Trustworthy
+llms: a survey and guideline for evaluating large language models’ alignment.
+arXiv preprint arXiv:2308.05374 (2023).
+[21] Widad Machmouchi, Ahmed Hassan Awadallah, Imed Zitouni, and Georg Buscher.
+2017. Beyond success rate: Utility as a search quality metric for online experi-
+ments. In Proceedings of the 2017 ACM on Conference on Information and Knowledge
+Management. 757–765.
+[22] Jiaxin Mao, Yiqun Liu, Ke Zhou, Jian-Yun Nie, Jingtao Song, Min Zhang, Shaoping
+Ma, Jiashen Sun, and Hengliang Luo. 2016. When does relevance mean usefulness
+and user satisfaction in web search?. In Proceedings of the 39th International ACM
+SIGIR conference on Research and Development in Information Retrieval. 463–472.
+[23] Multi-Linguality Multi-Functionality Multi-Granularity. 2024. M3-Embedding:
+Multi-Linguality, Multi-Functionality, Multi-Granularity Text Embeddings
+Through Self-Knowledge Distillation.
+[24] Tri Nguyen, Mir Rosenberg, Xia Song, Jianfeng Gao, Saurabh Tiwary, Rangan
+Majumder, and Li Deng. 2016. Ms marco: A human-generated machine reading
+comprehension dataset. (2016).
+[25] Shiyu Ni, Keping Bi, Jiafeng Guo, Lulu Yu, Baolong Bi, and Xueqi Cheng. 2025.
+Towards fully exploiting llm internal states to enhance knowledge boundary
+perception. arXiv preprint arXiv:2502.11677 (2025).
+[26] Fabio Petroni, Aleksandra Piktus, Angela Fan, Patrick Lewis, Majid Yazdani,
+Nicola De Cao, James Thorne, Yacine Jernite, Vladimir Karpukhin, Jean Maillard,
+et al. 2020. KILT: a benchmark for knowledge intensive language tasks. arXiv
+preprint arXiv:2009.02252 (2020).
+[27] Ofir Press, Muru Zhang, Sewon Min, Ludwig Schmidt, Noah A Smith, and Mike
+Lewis. 2022. Measuring and narrowing the compositionality gap in language
+models. arXiv preprint arXiv:2210.03350 (2022).
+[28] Alireza Salemi and Hamed Zamani. 2024. Evaluating retrieval quality in retrieval-
+augmented generation. In Proceedings of the 47th International ACM SIGIR Con-
+ference on Research and Development in Information Retrieval. 2395–2400.
+[29] Alireza Salemi and Hamed Zamani. 2025. Learning to rank for multiple retrieval-
+augmented models through iterative utility maximization. In Proceedings of the
+2025 International ACM SIGIR Conference on Innovative Concepts and Theories in
+Information Retrieval (ICTIR). 183–193.
+[30] Tefko Saracevic. 1975. Relevance: A review of and a framework for the thinking on
+the notion in information science. Journal of the American Society for information
+science 26, 6 (1975), 321–343. https://asistdl.onlinelibrary.wiley.com/doi/abs/10.
+1002/asi.4630260604
+[31] Tefko Saracevic. 1996. Relevance reconsidered. In Proceedings of the second
+conference on conceptions of library and information science (CoLIS 2). 201–218.
+[32] Tefko Saracevic, Paul Kantor, Alice Y Chamis, and Donna Trivison. 1988. A
+study of information seeking and retrieving. I. Background and methodol-
+ogy. Journal of the American Society for Information science 39, 3 (1988),
+161–176. https://www.researchgate.net/publication/245088184_A_Study_in_
+Information_Seeking_and_Retrieving_I_Background_and_Methodology
+[33] Linda Schamber and Michael Eisenberg. 1988. Relevance: The Search for a
+Definition. (1988).
+[34] Zhihong Shao, Yeyun Gong, Yelong Shen, Minlie Huang, Nan Duan, and Weizhu
+Chen. 2023. Enhancing retrieval-augmented large language models with iterative
+retrieval-generation synergy. arXiv preprint arXiv:2305.15294 (2023).
+[35] Weijia Shi, Sewon Min, Michihiro Yasunaga, Minjoon Seo, Rich James, Mike
+Lewis, Luke Zettlemoyer, and Wen-tau Yih. 2023. Replug: Retrieval-augmented
+black-box language models. arXiv preprint arXiv:2301.12652 (2023).
+[36] Weihang Su, Yichen Tang, Qingyao Ai, Junxi Yan, Changyue Wang, Hongning
+Wang, Ziyi Ye, Yujia Zhou, and Yiqun Liu. 2025. Parametric retrieval augmented
+generation. In Proceedings of the 48th International ACM SIGIR Conference on
+Research and Development in Information Retrieval. 1240–1250.
+[37] Qwen Team. 2025. Qwen3 Technical Report. arXiv:2505.09388 [cs.CL] https:
+//arxiv.org/abs/2505.09388
+[38] James Thorne, Andreas Vlachos, Christos Christodoulopoulos, and Arpit Mittal.
+2018. FEVER: a large-scale dataset for fact extraction and VERification. arXiv
+preprint arXiv:1803.05355 (2018).
+[39] Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yas-
+mine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhos-
+ale, et al. 2023. Llama 2: Open foundation and fine-tuned chat models. arXiv
+preprint arXiv:2307.09288 (2023).
+[40] Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot, and Ashish Sabharwal.
+2022. Interleaving retrieval with chain-of-thought reasoning for knowledge-
+intensive multi-step questions. arXiv preprint arXiv:2212.10509 (2022).
+[41] Haoyu Wang, Sunhao Dai, Haiyuan Zhao, Liang Pang, Xiao Zhang, Gang Wang,
+Zhenhua Dong, Jun Xu, and Ji-Rong Wen. 2025. Perplexity Trap: PLM-Based
+Retrievers Overrate Low Perplexity Documents. arXiv preprint arXiv:2503.08684
+(2025).
+[42] Haoxiang Wang, Yong Lin, Wei Xiong, Rui Yang, Shizhe Diao, Shuang Qiu, Han
+Zhao, and Tong Zhang. 2024. Arithmetic control of llms for diverse user pref-
+erences: Directional preference alignment with multi-objective rewards. arXiv
+preprint arXiv:2402.18571 (2024).
+[43] Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang,
+Aakanksha Chowdhery, and Denny Zhou. 2022. Self-consistency improves chain
+of thought reasoning in language models. arXiv preprint arXiv:2203.11171 (2022).
+[44] Yufei Wang, Wanjun Zhong, Liangyou Li, Fei Mi, Xingshan Zeng, Wenyong
+Huang, Lifeng Shang, Xin Jiang, and Qun Liu. 2023. Aligning large language
+models with human: A survey. arXiv preprint arXiv:2307.12966 (2023).

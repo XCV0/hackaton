@@ -1,0 +1,83 @@
+Response Quality Retrieval Quality
+F1 Precision Recall F1 Precision Recall #Avg.
+KG2RAG 0.663 0.690 0.683 0.436 0.301 0.908 8.11
+w/o organization 0.660 0.678 0.679 0.259 0.153 0.963 16.76
+w/o expansion 0.626 0.653 0.645 0.473 0.341 0.842 4.41
+Table 3: Experimental results of an ablation study conducted on HotpotQA in the distractor setting.
+Response Quality Retrieval Quality
+F1 Precision Recall F1 Precision Recall #Avg.
+KG2RAG 0.545 0.572 0.566 0.405 0.279 0.840 8.09
+w/o organization 0.538 0.563 0.560 0.182 0.102 0.962 24.56
+w/o expansion 0.474 0.503 0.485 0.511 0.458 0.656 3.82
+Table 4: Experimental results of an ablation study conducted on Shuffle-HotpotQA in the distractor setting.
+baselines are shown in Table 1. From the table,
+we can observe that all methods utilizing RAG
+achieve significant improvements compared to the
+LLM-only approach, exceeding 29.1% improve-
+ments in F1 scores on the original HotpotQA
+and 26.4% improvements in F1 scores on Shuffle-
+HotpotQA. Among these RAG-based methods,
+KG2RAG achieves consistent outperformance, es-
+pecially in the fullwiki setting and on the Shuffle-
+HotpotQA dataset.
+In the fullwiki setting, a large pool of candi-
+date documents (thousands of times more than in
+the distractor setting) is provided to LLMs, ne-
+cessitating high-quality retrieval results and effec-
+tive context organization. In such a challenging
+setup, our proposed method KG2RAG achieves
+at least 8% improvements compared to baselines,
+demonstrating that KG2RAG enhances chunk re-
+trieval through KG-guided approaches that surpass
+semantic-based and keyword-based methods. Be-
+sides, on the Shuffle-HotpotQA dataset, where
+LLMs should rely more on RAG rather than prior
+knowledge, our proposed method achieves at least
+2.5% and 6.4% improvements in the distractor and
+fullwiki settings, respectively.
+Retrieval Quality The experimental results
+are shown in Table 2, which demonstrate that
+KG2RAG strikes a favorable balance between re-
+trieval precision and recall, highlighting the effec-
+tiveness of KG-guided expansion and context orga-
+nization. In the distractor setting, where irrelevant
+chunks are limited, our proposed method achieves
+similar performance in recall but significantly bet-
+ter performance in precision (more than 7.9% and
+6.9% on HotpotQA and Shuffle-HotpotQA, respec-
+tively). In the fullwiki setting where identifying
+relevant chunks is more challenging, our proposed
+method achieves consistent improvements in both
+precision and recall compared to other RAG-based
+methods. These results further confirm the effec-
+tiveness of KG2RAG in providing high-quality re-
+trieval results with the help of KG.
+3.3 Further Discussions
+Ablation Study We conduct an ablation study to
+demonstrate the contributions of different modules
+in KG2RAG, including KG-guided expansion and
+KG-based context organization. The experimental
+results on the HotpotQA and Shuffle-HotpotQA
+datasets in the distractor setting are shown in Ta-
+bles 3 and 4, where we also report the average
+number of retrieved chunks.
+From these results, we can observe that using
+only KG-guided expansion without KG-based con-
+text organization (denoted by “w/o organization” in
+the table), KG2RAG achieves similar performance
+in terms of answer quality but significantly worse
+retrieval quality. The reason is that, without the
+KG-based context organization module, the num-
+ber of retrieved chunks can be noticeably larger,
+potentially containing irrelevant chunks that do
+not contribute positively to performance but con-
+sume additional tokens. These findings confirm
+the contribution of the KG-based context organiza-
+tion module in effectively selecting and organizing
+retrieved chunks to preserve relevant information.
+With only the KG-based context organization
+module (denoted by “w/o expansion” in the ta-
+ble), KG2RAG achieves high retrieval precision
+and F1 score with a significantly smaller number
+of chunks, but fails to provide better responses, as
+8918

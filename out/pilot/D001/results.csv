@@ -1,0 +1,58 @@
+publication_id,result_id,device_id,measurement_id,material_id,metric_name,metric_value,metric_unit,aggregation,spread_value,n_devices,time_point,time_unit,raw_value,raw_unit,normalized_value,normalized_unit,result_origin,cited_publication_id,source_page,source_section,source_table,source_figure,source_fragment,extraction_status,duplicate_of,note
+D001,R001,DV-P,MS1,M-P,Jsc,15.28,mA/cm2,,,,,,15.28,mA cm-2,15.28,mA/cm2,primary,,5,,Table 1,,"Pristine 15.28 1,197 0.71 12.89",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R002,DV-P,MS1,M-P,Voc,1.197,V,,,,,,"1,197",mV,1.197,V,primary,,5,,Table 1,,"Pristine 15.28 1,197 0.71 12.89",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R003,DV-P,MS1,M-P,FF,71,%,,,,,,0.71,fraction,71,%,primary,,5,,Table 1,,"Pristine 15.28 1,197 0.71 12.89",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R004,DV-P,MS1,M-P,PCE,12.89,%,,,,,,12.89,%,12.89,%,primary,,5,,Table 1,,"Pristine 15.28 1,197 0.71 12.89",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R005,DV-S001,MS1,M-S001,Jsc,15.37,mA/cm2,,,,,,15.37,mA cm-2,15.37,mA/cm2,primary,,5,,Table 1,,"0.001 M SrCl2 15.37 1,266 0.70 13.55",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R006,DV-S001,MS1,M-S001,Voc,1.266,V,,,,,,"1,266",mV,1.266,V,primary,,5,,Table 1,,"0.001 M SrCl2 15.37 1,266 0.70 13.55",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R007,DV-S001,MS1,M-S001,FF,70,%,,,,,,0.7,fraction,70,%,primary,,5,,Table 1,,"0.001 M SrCl2 15.37 1,266 0.70 13.55",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R008,DV-S001,MS1,M-S001,PCE,13.55,%,,,,,,13.55,%,13.55,%,primary,,5,,Table 1,,"0.001 M SrCl2 15.37 1,266 0.70 13.55",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R009,DV-S005,MS1,M-S005,Jsc,15.64,mA/cm2,,,,,,15.64,mA cm-2,15.64,mA/cm2,primary,,5,,Table 1,,"0.005 M SrCl2 15.64 1,278 0.72 14.32",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R010,DV-S005,MS1,M-S005,Voc,1.278,V,,,,,,"1,278",mV,1.278,V,primary,,5,,Table 1,,"0.005 M SrCl2 15.64 1,278 0.72 14.32",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R011,DV-S005,MS1,M-S005,FF,72,%,,,,,,0.72,fraction,72,%,primary,,5,,Table 1,,"0.005 M SrCl2 15.64 1,278 0.72 14.32",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R012,DV-S005,MS1,M-S005,PCE,14.32,%,,,,,,14.32,%,14.32,%,primary,,5,,Table 1,,"0.005 M SrCl2 15.64 1,278 0.72 14.32",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R013,DV-S01,MS1,M-S01,Jsc,15.67,mA/cm2,,,,,,15.67,mA cm-2,15.67,mA/cm2,primary,,5,,Table 1,,"0.01 M SrCl2 15.67 1,278 0.73 14.61",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R014,DV-S01,MS1,M-S01,Voc,1.278,V,,,,,,"1,278",mV,1.278,V,primary,,5,,Table 1,,"0.01 M SrCl2 15.67 1,278 0.73 14.61",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R015,DV-S01,MS1,M-S01,FF,73,%,,,,,,0.73,fraction,73,%,primary,,5,,Table 1,,"0.01 M SrCl2 15.67 1,278 0.73 14.61",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R016,DV-S01,MS1,M-S01,PCE,14.61,%,,,,,,14.61,%,14.61,%,primary,,5,,Table 1,,"0.01 M SrCl2 15.67 1,278 0.73 14.61",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R017,DV-S05,MS1,M-S05,Jsc,15.02,mA/cm2,,,,,,15.02,mA cm-2,15.02,mA/cm2,primary,,5,,Table 1,,"0.05 M SrCl2 15.02 1,163 0.70 12.11",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R018,DV-S05,MS1,M-S05,Voc,1.163,V,,,,,,"1,163",mV,1.163,V,primary,,5,,Table 1,,"0.05 M SrCl2 15.02 1,163 0.70 12.11",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R019,DV-S05,MS1,M-S05,FF,70,%,,,,,,0.7,fraction,70,%,primary,,5,,Table 1,,"0.05 M SrCl2 15.02 1,163 0.70 12.11",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R020,DV-S05,MS1,M-S05,PCE,12.11,%,,,,,,12.11,%,12.11,%,primary,,5,,Table 1,,"0.05 M SrCl2 15.02 1,163 0.70 12.11",extracted,,Table 1: направление/агрегирование не указаны; в тексте все J–V — reverse scan
+D001,R021,DV-P,MS1,M-P,Jsc,15.28,mA/cm2,,,,,,15.28,mA cm-2,15.28,mA/cm2,primary,,3,,,,current density (JSC) of 15.28 mA cm−2,extracted,R001,повтор в тексте
+D001,R022,DV-P,MS1,M-P,Voc,1.197,V,,,,,,"1,197",mV,1.197,V,primary,,3,,,,"of 1,197 mV, a ﬁll factor",extracted,R002,повтор в тексте
+D001,R023,DV-P,MS1,M-P,FF,71,%,,,,,,0.71%,as printed (0.71%),71,%,primary,,3,,,,(FF) of 0.71%,extracted,R003,в статье «0.71%» (в Table 1 — 0.71 как доля); интерпретировано как доля 0.71 = 71 %
+D001,R024,DV-P,MS1,M-P,PCE,12.89,%,,,,,,12.89,%,12.89,%,primary,,3,,,,a PCE of 12.89%,extracted,R004,повтор в тексте
+D001,R025,DV-S001,MS1,M-S001,Voc,1.266,V,,,,,,"1,266",mV,1.266,V,primary,,3,,,,"are 1,266, 1,278, 1,278, and 1,163 mV",extracted,R006,повтор в тексте
+D001,R026,DV-S005,MS1,M-S005,Voc,1.278,V,,,,,,"1,278",mV,1.278,V,primary,,3,,,,"are 1,266, 1,278, 1,278, and 1,163 mV",extracted,R010,повтор в тексте
+D001,R027,DV-S01,MS1,M-S01,Voc,1.278,V,,,,,,"1,278",mV,1.278,V,primary,,3,,,,"are 1,266, 1,278, 1,278, and 1,163 mV",extracted,R014,повтор в тексте
+D001,R028,DV-S05,MS1,M-S05,Voc,1.163,V,,,,,,"1,163",mV,1.163,V,primary,,3,,,,"are 1,266, 1,278, 1,278, and 1,163 mV",extracted,R018,повтор в тексте
+D001,R029,DV-S01,MS1,M-S01,Jsc,15.75,mA/cm2,champion,,,,,15.75,mA cm-2,15.75,mA/cm2,primary,,5,,Table 2,,"FB–SC 15.75 1,322 0.77 16.07",extracted,,"Table 2, FB–SC = reverse scan; champion-прибор 0.01 M SrCl2"
+D001,R030,DV-S01,MS1,M-S01,Voc,1.322,V,champion,,,,,"1,322",mV,1.322,V,primary,,5,,Table 2,,"FB–SC 15.75 1,322 0.77 16.07",extracted,,"Table 2, FB–SC = reverse scan; champion-прибор 0.01 M SrCl2"
+D001,R031,DV-S01,MS1,M-S01,FF,77,%,champion,,,,,0.77,fraction,77,%,primary,,5,,Table 2,,"FB–SC 15.75 1,322 0.77 16.07",extracted,,"Table 2, FB–SC = reverse scan; champion-прибор 0.01 M SrCl2"
+D001,R032,DV-S01,MS1,M-S01,PCE,16.07,%,champion,,,,,16.07,%,16.07,%,primary,,5,,Table 2,,"FB–SC 15.75 1,322 0.77 16.07",extracted,,"Table 2, FB–SC = reverse scan; champion-прибор 0.01 M SrCl2"
+D001,R033,DV-S01,MS1,M-S01,Jsc,15.75,mA/cm2,champion,,,,,15.75,mA cm-2,15.75,mA/cm2,primary,,5,,,Figure 5C,JSC of 15.75 mA cm−2,extracted,R029,повтор в тексте
+D001,R034,DV-S01,MS1,M-S01,Voc,1.322,V,champion,,,,,"1,322",mV,1.322,V,primary,,5,,,Figure 5C,"1,322 mV, a",extracted,R030,повтор в тексте
+D001,R035,DV-S01,MS1,M-S01,FF,77,%,champion,,,,,0.77,fraction,77,%,primary,,5,,,Figure 5C,"FF of 0.77, and a PCE",extracted,R031,повтор в тексте
+D001,R036,DV-S01,MS1,M-S01,PCE,16.07,%,champion,,,,,16.07,%,16.07,%,primary,,5,,,Figure 5C,PCE of 16.07% under reverse scan,extracted,R032,повтор в тексте
+D001,R037,DV-S01,MS1,M-S01,PCE,16.07,%,champion,,,,,16.07,%,16.07,%,primary,,1,,,,(PCE) of 16.07% with a high open voltage,extracted,R032,аннотация
+D001,R038,DV-S01,MS1,M-S01,Voc,1.322,V,champion,,,,,"1,322",mV,1.322,V,primary,,1,,,,"(VOC) of 1,322 mV",extracted,R030,аннотация
+D001,R039,DV-S01,MS1,M-S01,PCE,16.07,%,champion,,,,,16.07,%,16.07,%,primary,,2,,,,"PCE of 16.07%, with",extracted,R032,введение
+D001,R040,DV-S01,MS1,M-S01,PCE,16.07,%,champion,,,,,16.07,%,16.07,%,primary,,5,,,,A high PCE of 16.07%,extracted,R032,заключение
+D001,R041,DV-S01,MS2,M-S01,Jsc,15.66,mA/cm2,champion,,,,,15.66,mA cm-2,15.66,mA/cm2,primary,,5,,Table 2,,"SC–FB 15.66 1,312 0.77 15.73",extracted,,"Table 2, SC–FB = forward scan; champion-прибор 0.01 M SrCl2"
+D001,R042,DV-S01,MS2,M-S01,Voc,1.312,V,champion,,,,,"1,312",mV,1.312,V,primary,,5,,Table 2,,"SC–FB 15.66 1,312 0.77 15.73",extracted,,"Table 2, SC–FB = forward scan; champion-прибор 0.01 M SrCl2"
+D001,R043,DV-S01,MS2,M-S01,FF,77,%,champion,,,,,0.77,fraction,77,%,primary,,5,,Table 2,,"SC–FB 15.66 1,312 0.77 15.73",extracted,,"Table 2, SC–FB = forward scan; champion-прибор 0.01 M SrCl2"
+D001,R044,DV-S01,MS2,M-S01,PCE,15.73,%,champion,,,,,15.73,%,15.73,%,primary,,5,,Table 2,,"SC–FB 15.66 1,312 0.77 15.73",extracted,,"Table 2, SC–FB = forward scan; champion-прибор 0.01 M SrCl2"
+D001,R045,DV-P,MS1,M-P,Jsc,15.69,mA/cm2,champion,,,,,15.69,mA cm-2,15.69,mA/cm2,primary,,5,,,Supplementary Figure S1 / Table S1,JSC of 15.69 mA cm−2,extracted,,"«the best pristine sample»; значения приведены в тексте, таблица S1 — в supplementary"
+D001,R046,DV-P,MS1,M-P,Voc,1.217,V,champion,,,,,"1,217",mV,1.217,V,primary,,5,,,Supplementary Figure S1 / Table S1,"1,217 mV, a",extracted,,"«the best pristine sample»; значения приведены в тексте, таблица S1 — в supplementary"
+D001,R047,DV-P,MS1,M-P,FF,73,%,champion,,,,,0.73,fraction,73,%,primary,,5,,,Supplementary Figure S1 / Table S1,"FF of 0.73, and a PCE of 13.66%",extracted,,"«the best pristine sample»; значения приведены в тексте, таблица S1 — в supplementary"
+D001,R048,DV-P,MS1,M-P,PCE,13.66,%,champion,,,,,13.66,%,13.66,%,primary,,5,,,Supplementary Figure S1 / Table S1,PCE of 13.66% under reverse scan,extracted,,"«the best pristine sample»; значения приведены в тексте, таблица S1 — в supplementary"
+D001,R049,DV-S01,MS3,M-S01,stabilized_PCE,15.83,%,,,,,,15.83,%,15.83,%,primary,,5,,,Figure 5D,efﬁciency of 15.83%,extracted,,"Jmpp 14.39 мА/см2 при 1,100 мВ"
+D001,R050,DV-P,MS3,M-P,stabilized_PCE,12.93,%,,,,,,12.93,%,12.93,%,primary,,5,,,Supplementary Figure S2,efﬁciency of 12.93%,extracted,,Jmpp 13.47 мА/см2 при 960 мВ; принадлежность pristine-прибору выведена из порядка изложения («these devices»)
+D001,R051,DV-S01,MS4,M-S01,Jsc_EQE,15.37,mA/cm2,,,,,,15.37,mA cm-2,15.37,mA/cm2,primary,,5,,,Supplementary Figure S3,photocurrent of 15.37 mA cm−2 for the,extracted,,
+D001,R052,DV-P,MS4,M-P,Jsc_EQE,15.24,mA/cm2,,,,,,15.24,mA cm-2,15.24,mA/cm2,primary,,5,,,Supplementary Figure S3,15.24 mA cm−2 for the pristine,extracted,,
+D001,R053,DV-P,MS1,M-P,PCE,14.66,%,mean,,20,,,14.66,%,14.66,%,primary,,5,,,Figure 5E,devices are 14.66 and 12.96%,extracted,,"порядок в тексте: «pristine and SrCl2-doped … 14.66 and 12.96%» — вероятно, перепутан (см. issues)"
+D001,R054,DV-S01,MS1,M-S01,PCE,12.96,%,mean,,20,,,12.96,%,12.96,%,primary,,5,,,Figure 5E,devices are 14.66 and 12.96%,extracted,,см. issues
+D001,R055,DV-N01,MS1,M-N01,Voc,1.245,V,,,,,,"1,245",mV,1.245,V,primary,,5,,,Figure 5F / Supplementary Table S2,"increased to 1,245 mV",extracted,,таблица S2 в supplementary
+D001,R056,DV-N01,MS1,M-N01,PCE,13.83,%,,,,,,13.83,%,13.83,%,primary,,5,,,Figure 5F / Supplementary Table S2,PCE of 13.83%,extracted,,
+D001,R057,,,,PCE,19,%,,,,,,19%,%,19,%,cited,"Bai et al., 2018; Wang et al., 2019a; Wang et al., 2019b; Straus et al., 2019; Tan et al., 2019",1,,,,whose PCEs have reached 19% with benign,extracted,,рекордный PCE полностью неорганических CsPbX3 перовскитных СЭ из литературы

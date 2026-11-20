@@ -1,0 +1,99 @@
+FrameWork Prompt SelfCheckGPT LRP4RAG SIRG
+WithoutVLLM 13.89s 71.19s 56.40s 39.76s
+WithVLLM 5.73s 31.93s − −
+Table 4: Computational time required for different
+methods.
+(Llama2-7B) directly loaded and calculated using
+Transformers, while the second row represents the
+model tested based on the VLLM accelerated in-
+ference framework. The sampling frequency of
+SelfCheckGPT is set to 5. The average length of
+Prompt is 636.84.
+Compared to methods based on LRP, LRP4RAG
+requires calling an LLM for context pruning and
+hallucination discrimination, whereas SIRG only
+uses a discriminative model for calculation, result-
+ing in a smaller computation latency. Since Self-
+CheckGPT requires repeated sampling, the total
+computation time is also relatively high. Prompt,
+as a naive method, has the lowest computation la-
+tency. However, according to the experimental
+results, Prompt has limited performance on the fi-
+nal task. These methods can be effective in various
+scenarios, depending on the trade-off between com-
+putation time and accuracy.
+The average processing time of each SIRG stage
+is reported in Appendix F. LRP Computation is the
+speed bottleneck of the overall framework. Prompt
+and SelfCheckGPT have the advantage of directly
+incorporating inference acceleration frameworks
+such as VLLM for speedup.
+4.7 Ablation Study
+Different Entity Extraction Configurations As
+reported in Table 5, we compare five settings:
+retaining only nouns and noun phrases (“Only
+noun”), only verbs and verb phrases (“Only verb”),
+only adjectives and adverbs (“Only adj/adv”), all to-
+kens in the semantic fragment (“All text”), and the
+original entity extraction method proposed in this
+paper (“Original”). Additionally, to simulate the
+phenomenon of missing entities during extraction,
+we prune the extracted entity set at different reten-
+tion ratios: 33% (“0.33”) and 66% (“0.66”), with
+“Original” corresponding to retaining all extracted
+content.
+The original configuration achieves strong re-
+sults. This is intuitive: sentence meaning is of-
+ten jointly determined by nouns and verbs, while
+adjectives and adverbs serve mainly as modifiers.
+Retaining all content as substantive introduces ex-
+Results Only noun Only verb Only adj/adv All text 0.33 0.66 Original
+Precision 74.48% 75.55% 73.07% 73.15% 72.22% 78.43% 73.60%
+Recall 61.34% 57.14% 63.86% 77.31% 65.54% 67.22% 79.83%
+F1 67.28% 65.07% 68.16% 75.10% 68.72% 72.39% 76.61%
+Table 5: Ablation study on entity types and quantities
+required for constructing internal reasoning graphs.
+Results Average segmentation Fixed segmentation Qwen segmentation Original
+Precision 83.82% 85.24% 75.00% 73.60%
+Recall 50.00% 46.01% 81.42% 79.83%
+F1 62.63% 59.77% 78.08% 76.61%
+Table 6: Ablation study on the construction method of
+semantic fragments.
+cessive noise from modifiers and function words,
+leading to performance degradation. Furthermore,
+even when one-third of the entities are missing, our
+framework remains robust, achieving an F1 score
+of 68.72% under the 0.33 pruning ratio. When
+two-thirds of the entities are missing, performance
+declines more substantially.
+Different Segmentation Strategies As reported
+in Table 6, The strategies include: (1) Average seg-
+mentation, where each semantic segment is capped
+at a maximum of 20 tokens and longer content is
+truncated; (2) Fixed segmentation, which divides
+each sample into a fixed number of 10 equal-length
+segments; and (3) Qwen segmentation, where the
+segmentation task is assigned to Qwen3-14B for
+automatic generation.
+Our segmentation method achieves performance
+comparable to that of the Qwen3-14B-based seg-
+mentation approach, with an F1 score of 76.61%
+versus 78.08%, demonstrating the effectiveness
+of segmenting using newline characters combined
+with SpaCy sentence tokenization. This yields a
+segmentation strategy that aligns well with human
+perception.
+5 Conclusion
+This paper first extends the token-level LRP al-
+gorithm to the semantic level within the autore-
+gressive inference paradigm. Then we construct
+internal reasoning graphs using semantic fragments
+from RAG contexts and LLMs’ responses, which
+faithfully model the dependencies of the internal
+reasoning process. Based on that, we propose
+a framework, SIRG, for identifying faithfulness
+hallucinations in RAG. SIRG achieves the perfor-
+mance of LLM-based detection frameworks us-
+ing only a lightweight parameterized discriminator,
+demonstrating the effectiveness of our approach.
+27834

@@ -1,0 +1,122 @@
+Question Label
+What is tawh¯ıd? Difficulty: 1
+Reasoning: false
+Multi_step: false
+Category_type: Islamic
+Creed
+Explain the difference between
+w¯ajib and sunnah acts.
+Difficulty: 2
+Reasoning: true
+Multi_step: false
+Category_type: Jurispru-
+dence
+A person touched their spouse
+and then prayed. Does this in-
+validate wud¯u’? Explain.
+Difficulty: 3
+Reasoning: true
+Multi_step: true
+Category_type: Jurispru-
+dence
+Compute inheritance shares
+when the deceased leaves a wife,
+two daughters, and parents.
+Difficulty: 4
+Reasoning: true
+Multi_step: true
+Category_type: Inheri-
+tance Law
+Classify a hadith given narra-
+tor reliability and continuity of
+isn¯ad.
+Difficulty: 4
+Reasoning: true
+Multi_step: true
+Category_type: Hadith
+Studies
+Evaluate a modern bioethical
+dilemma by balancing harm-
+s/benefits and competing obliga-
+tions.
+Difficulty: 5
+Reasoning: true
+Multi_step: true
+Category_type: Contem-
+porary Issues
+Table 8: Examples illustrating the annotation guideline.
+E.7 Annotation Results and Agreement
+We report summary statistics for the human anno-
+tation process and evaluate annotator consistency
+on a manually validated subset.
+Difficulty labels. The difficulty annotations are
+reasonably distributed across the 1–5 scale, with
+the highest proportion at level 3 (26.90%), fol-
+lowed by level 2 (23.03%), level 4 (20.03%), level
+1 (17.67%), and level 5 (12.37%).
+Category assignment. We observe an overall
+agreement rate of 82.96% and a Cohen’s κ of 0.62,
+indicating substantial agreement and supporting the
+reliability of the annotation guidelines.
+F Retrieval Comparison
+Our main experiments focus on end-to-end answer
+faithfulness under grounded generation, rather than
+isolating the retrieval engine in a separate bench-
+mark. To better contextualize the retrieval compo-
+nent used in our RAG and Agentic RAG settings,
+we conducted a preliminary retrieval-side compari-
+son between our dense multilingual retriever and a
+sparse lexical baseline.
+Specifically, we compare mE5-base, the dense
+encoder used in our retrieval-augmented experi-
+ments, against BM25 on the IslamicEval 2025
+Shared Task 2 dataset (Mubarak et al., 2025).
+We report Mean Average Precision at rank 5
+(MAP_Q@5). The results show that mE5-base
+outperforms BM25 by a clear margin, achieving
+0.138 compared with 0.094.
+This result supports our choice of dense retrieval
+for two reasons. First, the task is bilingual (Ara-
+bic/English), and dense multilingual embeddings
+better align semantically equivalent queries across
+languages. Second, Quranic question answering of-
+ten depends on theological and paraphrastic phras-
+ing that is not always well matched by pure lex-
+ical overlap. At the same time, the absolute re-
+trieval scores remain modest, suggesting that stan-
+dard RAG based retrieval is still insufficient for
+many questions. This observation is consistent with
+our main findings. Standard RAG improves cor-
+rectness, but Agentic RAG yields further gains by
+turning retrieval into an iterative evidence-seeking
+process rather than a one-pass preprocessing step.
+We note that this comparison serves only as a
+preliminary sanity check on retrieval quality, not a
+full benchmark. A broader study of hybrid retrieval
+remains for future work.
+G Label-wise Results
+Table 9 reports the proportions of correct,
+incorrect, and not attempted predictions in
+Arabic and English. Fanar-2-27B achieves the best
+overall performance, with an average correct rate
+of 48.05%, followed by ALLaM-7B at 37.75% and
+Fanar-1-9B at 35.40%. This establishes a clear gap
+between the strongest models and the remaining
+systems.
+The table also reveals different response be-
+haviours. Models such as ALLaM-7B and Fanar-1-
+9B attempt most questions, but they also produce
+relatively high incorrect rates. By contrast, several
+Qwen3 and DeepSeek variants leave a large pro-
+portion of questions unanswered, often exceeding
+70% not attempted, which leads to low overall
+correctness despite fewer incorrect responses. In
+general, many models perform better in English
+than in Arabic, whereas Fanar-2-27B remains com-
+paratively balanced across both languages. These
+results show that separating correct, incorrect,
+and not attempted predictions offers a more in-
+formative view of model behaviour than reporting
+accuracy alone.
+19
+26487

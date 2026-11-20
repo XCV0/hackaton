@@ -1,0 +1,109 @@
+10771
+Query Sentence
+He told the driver it was because he liked put of parish.
+他跟开车的人说就是因为他很喜欢教区的地放。
+78 53 21 ... 76 60 10 ...
+65 41 15 ...
+Also is a liking for the place.
+还表是喜欢这个地方。
+Also express a liking for the place.
+还表示喜欢这个地方。
+He said: I really calamus my current job.
+他说：我实在菖爱目前的工作。
+He said: I really love my current job.
+他说：我实在喜爱目前的工作。
+ C-prompt
+predictionn
+Corrected Sentence
+He told the driver that it was because he liked area of suburbs.
+他跟开车的人说就是因为他很喜欢郊区的地方。
+D-prompt
+evaluation
+Corrector Discriminator
+feedback:
+feedback:
+Retriever
+Correction Examples
+... ...
+1.
+2.
+continue iteration
+output prediction
+ Embedding Model            
+Query Vector            
+Vector Database            
+Figure 4: Structure diagram of RagID, including three main modules: Retriever, Corrector, and Discriminator.
+that learns from these examples to understand the
+specific rules of the CSC task. In the final step,
+Discriminator evaluates the reasonableness of the
+correction result and provides feedback to the Cor-
+rector if the result is unreasonable, prompting a
+new round of correction.
+4.3 RAG for CSC
+The core idea of ICL based CSC is to extract rule
+vectors θ from the examples and rules in prompt
+(Li, 2023; Hendel et al., 2023). Therefore, LLM
+constructs a new correction function f (X; θ; T )
+after ICL process, where T denotes the LLM and
+X denotes the query sentence. LLMs accomplish
+CSC tasks through this principle.
+We design prompt templates for ICL to enhance
+the utilization of correction examples in LLMs.
+These templates outline the roles of the corrector
+and the discriminator, background of the CSC task,
+task objectives, sequential correction process steps,
+and the desired output format. The prompt template
+used in this work is shown in the Appendix.
+In RagID, we obtain context examples using the
+Retrieval-Augmented Generation (RAG) strategy
+from vector database. The CSC datasets used for
+RAG are introduced in Table C of the Appendix.
+We use the vectorization model ‘bge-large-zh’ to
+convert these CSC examples into low-dimensional
+vector representations, which are stored in the
+vector database ‘milvus’. These data stored in
+milvus serve as the external knowledge base for
+subsequent correction. When the corrector re-
+quires prompt examples, we employ the nearest
+neighbor search method to find n similar sen-
+tences in the external knowledge base and get
+E = {G1, G2, ..., Gn}. Each Gi = (xi, yi) in-
+cludes uncorrected CSC sample xi and its gold an-
+swer yi. Guided by CSC prompt, the corrector gen-
+erates correction predictions P = {y1, y2, ..., yn}
+based on external examples E and query sentence
+X, completing one cycle of detection and correc-
+tion. This strategy offers the advantage of enabling
+LLMs to rapidly adapt to CSC tasks without fine-
+tuning, facilitating a swift integration with more
+advanced foundational models to continuously en-
+hance performance.
+4.4 Iterative Discriminator Strategy
+Due to the complexity of CSC task (Kiyono
+et al., 2019), models often suffer from both over-
+correction and under-correction to some extent.
+To address these issues, we introduce a discrim-
+inator following the corrector, and it collaborate
+using an iterative reflection strategy. Discrimi-
+nator will evaluate the prediction, emulating hu-
+man evaluation to provide either affirmative or
+critical feedback. Specifically, after receiving
+query sentence X = {x1, x2, ..., xn} and the corre-
+sponding auxiliary samples E = {G1, G2, ..., Gn},
+the corrector generates the first prediction Y 1 =
+{y1, y2, ..., yn}. Discriminator learns discrimina-
+tion methods from fixed discrimination examples
+F = {D1, D2, D3, D4} and then evaluates pre-
+dictions from corrector. If Y 1 does not meet the
+criteria, the result will be returned to the corrector
+along with feedback, corrector continues to iter-
+ate and get Y i until the predicted results satisfy
+the requirements of the discriminator or maximum
+number of times is exceeded, where i denotes the
+time of iteration.
+IDS can fully encourage the corrector LLM to
+rethinking and reflecting, thereby enhancing effec-
+tiveness. LLMs for discrimination can be the same
+as corrector or an external LLM, our work use the
+former. A specific example of the operation of the
+discriminator can be seen in the Fig. 7 of Appendix.

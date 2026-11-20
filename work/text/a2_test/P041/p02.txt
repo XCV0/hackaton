@@ -1,0 +1,102 @@
+eration in LLMs, providing fact-level relationships
+among chunks and highlighting important facts that
+may be missed by semantic-based approaches.
+Shed light by such insights, in this pa-
+per, we propose a novel Knowledge Graph-
+Guided Retrieval Augmented Generation frame-
+work, called KG2RAG. Specifically, we first per-
+form chunking and KG-chunk association during
+the offline processing of the provided documents,
+establishing linkages between chunks and a spe-
+cific KG to capture the fact-level relationships
+among these chunks. Based on the chunks and
+the KG, KG2RAG employs KG-enhanced chunk re-
+trieval, which consists of a semantic-based retrieval
+and graph-guided expansion. The semantic-based
+retrieval prepares several seed chunks using em-
+bedding and ranking techniques (Nussbaum et al.,
+2024; Li and Li, 2024). These seed chunks are then
+used to extract a relevant subgraph from the associ-
+ation KG, onto which we can apply graph traversal
+algorithms to include the chunks containing over-
+lapped or related entities and triplets. Such a design
+of graph-guided expansion provides a greater di-
+versity of retrieved chunks and a comprehensive
+knowledge network.
+After that, we incorporate a post-processing
+stage named KG-based context organization in
+KG2RAG. On one hand, the KG-based context
+organization serves as a filter to retain the most
+relevant information contained in the subgraph,
+thereby enhancing the informativeness of the re-
+trieved chunks. On the other hand, it serves as an
+arranger to organize the chunks into internally co-
+herent paragraphs with the knowledge graph as a
+skeleton. These semantically coherent and well-
+organized chunks are fed into the LLMs along with
+user queries for response generation.
+We conduct a series of experiments on the
+widely-used HotpotQA (Yang et al., 2018) dataset
+and its newly constructed variants to mitigate
+the impacts of prior knowledge on LLMs. We
+adopt a distractor and a fullwiki setting, com-
+paring KG2RAG with several RAG-based ap-
+proaches. The experimental results demonstrate
+that KG2RAG consistently outperforms baselines
+in terms of both response quality and retrieval
+quality. Moreover, we conduct an ablation study
+to highlight the effectiveness of different mod-
+ules in KG2RAG. The constructed dataset and
+source code are released at https://github.com/
+nju-websoft/KG2RAG to further promote the de-
+velopment and application of KGs in RAG.
+2 Methodology
+An overview of the workflow of KG2RAG is il-
+lustrated in Fig. 2. In the following subsections,
+we provide more details following the workflow of
+KG2RAG, including document offline processing
+(Sec. 2.1), KG-enhanced chunk retrieval (Sec. 2.2),
+and KG-based context organization (Sec. 2.3).
+2.1 Document Offline Processing
+Following the existing studies in RAG (Lewis
+et al., 2020; Gao et al., 2023; Fan et al., 2024),
+all documents are first split into n chunks based
+on the structure of sentences and paragraphs given
+a predefined chunk size, which can be given as
+D = {c1, . . . , cn}. These chunks can be further
+processed, for example, by adding relevant con-
+text (Jiang et al., 2023; Eibich et al., 2024), ex-
+tracting meta-information (Mombaerts et al., 2024)
+(e.g., title, abstract), and generating corresponding
+questions (Ma et al., 2023; Wang et al., 2024b).
+Since these chunk-enhancing techniques are or-
+thogonal to the proposed method in this paper, we
+recommend referring to the original paper for more
+details. Hereafter, we continue to denote the pro-
+cessed chunks as D = {c1, . . . , cn}.
+To capture the rich fact-level relationships
+among these chunks, we associate them with a
+KG, which can be implemented via the following
+approaches. In cases where a KG is available, such
+as in WebQSP (Yih et al., 2016) and CWQ (Talmor
+and Berant, 2018), the chunk-KG association can
+be performed through entity and relation recogni-
+tion and linkage algorithms (Zhao et al., 2023; Tian
+et al., 2024). Another approach involves directly
+extracting multiple entities and relations from the
+chunks to form subgraphs, which can be used to
+combine into a complete graph. In this paper, to
+avoid reliance on existing KGs, we adopt the latter
+approach, implementing it by providing appropri-
+ate prompts (refer to Fig. 3) to LLMs.
+After this process, we provide linkages between
+chunks and a specific KG, which can be given as
+G = {(h, r, t, c) | c ∈ D}, (1)
+where h, r, and t denote the head entity, relation,
+and tail entity, respectively, and c denotes the chunk
+that derives the triplets. Note that the chunk-KG
+association process is query-independent, which
+implies that it can be performed offline, only needs
+to be constructed once for all documents, and sup-
+ports incremental updates for new documents. As
+8913

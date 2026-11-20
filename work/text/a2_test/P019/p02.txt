@@ -1,0 +1,121 @@
+SIGIR ’26, July 20–24, 2026, Melbourne | Naarm, Australia Trovato et al.
+Q:Who wrote the book that the movie Lincolnwas based on?
+I think the first step is to 
+retrieve information about 
+Lincoln.
+Retrieve
+I find the person who 
+wrote the biography of 
+Lincoln was ...
+Wrong
+Answer
+Cascading Errors under Lexical Ambiguity
+Find cause A.
+ Find cause B. Assess combined effect of Aand B.
+Ideal 
+Process
+Parallel 
+Retrieval
+Answer w/o 
+Retrieval Final 
+Answer
+Actual 
+Process
+Retrieve
+ Retrieve RetrieveFinal 
+Answer
+Rigid Sequence Scheduling
+Sequential Redundant 
+Figure 1: Challenges in current iterative RAG. Top: Premature
+entity grounding leading to cascading errors due to lexical
+ambiguity. Bottom: Rigid scheduling that fails to account for
+the rich dependency structures among sub-questions.
+Retrieval-Augmented Generation (RAG) has become a domi-
+nant paradigm for open-domain QA by grounding large language
+model (LLM) generation in external knowledge, thereby improv-
+ing factuality and extending coverage beyond parametric mem-
+ory [5, 7, 35, 40, 41]. Standard RAG relies on a single retrieval step
+using the original query. While this works well for simple factual
+questions, it often falls short on multi-hop questions, where rea-
+soning steps are interdependent and the initial query retrieves only
+sparsely relevant documents [8]. To bridge this gap, recent works
+have turned to iterative RAG frameworks [1, 4, 15, 19, 33, 50], which
+decompose the question into sub-queries and alternate between
+retrieval and reasoning over multiple turns. For example, to answer
+“Who directed the film based on George Orwell’s novel 1984?”, an
+iterative RAG system might first retrieve information about the
+novel’s adaptations, then use that context to formulate a follow-up
+query about the director of the specific film version.
+Despite their progress, existing iterative RAG approaches suffer
+from two fundamental limitations as shown in Figure 1. First, they
+often perform entity-centric decomposition too early, before estab-
+lishing a task-aligned reasoning structure. This can cause cascading
+errors when entity names are ambiguous. For example, in the ques-
+tion “Who wrote the book that the movie Lincoln was based on?”,
+the model may prematurely ground on the surface entity “Lincoln”
+and retrieve information about Abraham Lincoln rather than the
+film “Lincoln”. As a result, it might answer with the author of a
+biography of Abraham Lincoln instead of the screenwriter of the
+movie’s source book. In contrast, if the system first abstracts the
+reasoning path as [movie → source book → author], it can correctly
+disambiguate “Lincoln” as a film entity and avoid being misled by
+homonymous references.
+Second, existing approaches treat multi-hop reasoning as a rigid,
+sequential pipeline, ignoring the rich dependency structures in-
+herent in complex questions. In reality, sub-questions can exhibit
+diverse relationships: some are strictly sequential (e.g., “Find entity
+A” → “Find property of A”), others are independent and paralleliz-
+able (e.g., “Find birth year of X” and “Find birth year of Y” for
+comparison), and yet others form fork-join patterns (e.g., “Find
+causes P and Q” → “Assess combined effect of P and Q”). With-
+out explicit modeling of such dependencies, current systems either
+waste resources through unnecessary sequential execution, issue
+redundant or conflicting queries, or fail to integrate evidence across
+reasoning branches. Moreover, they lack the ability to dynamically
+determine based on already gathered facts whether a sub-question
+necessitates external retrieval or can be resolved through logical
+inference, leading to inefficient resource usage, error propagation,
+and brittle behavior when partial evidence is missing.
+To address these limitations, we draw inspiration from real-world
+decision-making hierarchies: strategic leaders define global goals,
+middle managers assess progress and schedule tasks, and operational
+agents execute concrete actions. Mirroring this tripartite structure,
+we propose STRIDE (Strategic Iterative Decision-making), a frame-
+work that explicitly separates reasoning into strategy, control, and
+execution. At the strategy layer, the Meta-Planner enforces a
+reasoning-first perspective by decoupling logical structure from lin-
+guistic surface form. Rather than decomposing the question directly
+into entity-bound sub-queries, it first constructs a General Strategy,
+which is an abstract representation of the reasoning flow that is
+independent of specific entity names. Only after this high-level
+logic is established does it instantiate a Concrete Plan of executable,
+entity-grounded sub-questions. This two-stage design prioritizes
+how to reason before committing to what to retrieve, thereby re-
+ducing sensitivity to lexical ambiguity in entity references. At the
+control layer, the Supervisor acts as process-aware orchestrator
+that schedules sub-questions according to their logical dependen-
+cies. Guided by the Concrete Plan, it dynamically selects execution
+modes (e.g., sequential, parallel, or fork-join) and decides at each
+step whether to invoke retrieval or apply inference over existing
+evidence. Throughout execution, it monitors retrieval quality, fuses
+cross-branch information, refrains from redundant queries when
+answers are inferable, and reformulates semantically ambiguous
+requests to recover from failed retrievals. At the execution layer,
+dedicated modules carry out the Supervisor’s instructions. The
+Extractor collects atomic facts from external sources, while the
+Reasoner performs logical inference over gathered facts. Their tight
+integration ensures both interpretability and output faithfulness.
+While STRIDE is model-agnostic and compatible with both open
+and closed LLMs, practical deployment often favors open-source
+models due to cost and privacy constraints. However, these models
+generally underperform their closed-source counterparts in the
+structured multi-step reasoning required by STRIDE. To bridge
+this gap, we further introduce STRIDE-FT, a modular fine-tuning
+framework that leverages self-executed trajectories from STRIDE to
+train each component, enabling effective adaptation of open-source
+LLMs without human labels or stronger teacher models.
+In summary, our contributions are threefold:
+• We propose STRIDE, a decision-inspired framework for multi-
+hop QA that explicitly separates strategy, control, and execution.
+It enables robust improvement through reasoning-first planning
+and dynamic dependency-aware scheduling.

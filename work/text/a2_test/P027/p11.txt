@@ -1,0 +1,50 @@
+Published as a conference paper at ICLR 2025
+5 CONCLUSION
+Our proposed SPECULATIVE RAG decomposes RAG tasks into two separate steps of drafting fol-
+lowed by verification. SPECULATIVE RAG delegates the heavy lifting of drafting to a small spe-
+cialized RAG drafter, while verification is done using a large generalist LM. The parallel generation
+of multiple drafts from diverse document subsets provides high quality answer candidates while
+reducing input token counts and the potential risk of position-bias-over-long-context, resulting in
+substantial improvements in both the quality and speed of the final output generation. We demon-
+strate the effectiveness of SPECULATIVE RAG with accuracy gains up to 12.97% while reducing
+latency by 50.83% compared to conventional RAG systems. SPECULATIVE RAG sheds new light
+on the potential of collaborative architectures for enhancing RAG performance through task decom-
+position.
+REFERENCES
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Ale-
+man, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al. Gpt-4 technical
+report. arXiv preprint arXiv:2303.08774, 2023.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection. arXiv preprint arXiv:2310.11511, 2023.
+Jinheon Baek, Soyeong Jeong, Minki Kang, Jong C Park, and Sung Hwang. Knowledge-augmented
+language model verification. In Proceedings of the 2023 Conference on Empirical Methods in
+Natural Language Processing, pp. 1720–1736, 2023.
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal,
+Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are
+few-shot learners. Advances in neural information processing systems, 33:1877–1901, 2020.
+Tianle Cai, Yuhong Li, Zhengyang Geng, Hongwu Peng, Jason D Lee, Deming Chen, and Tri
+Dao. Medusa: Simple llm inference acceleration framework with multiple decoding heads. arXiv
+preprint arXiv:2401.10774, 2024.
+Charlie Chen, Sebastian Borgeaud, Geoffrey Irving, Jean-Baptiste Lespiau, Laurent Sifre, and John
+Jumper. Accelerating large language model decoding with speculative sampling. arXiv preprint
+arXiv:2302.01318, 2023a.
+Tong Chen, Hongwei Wang, Sihao Chen, Wenhao Yu, Kaixin Ma, Xinran Zhao, Hongming Zhang,
+and Dong Yu. Dense x retrieval: What retrieval granularity should we use? arXiv preprint
+arXiv:2312.06648, 2023b.
+Wei Chen, Yu Liu, Weiping Wang, Erwin M Bakker, Theodoros Georgiou, Paul Fieguth, Li Liu, and
+Michael S Lew. Deep learning for instance retrieval: A survey. IEEE Transactions on Pattern
+Analysis and Machine Intelligence, 2022.
+Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and
+Oyvind Tafjord. Think you have solved question answering? try arc, the ai2 reasoning challenge.
+arXiv preprint arXiv:1803.05457, 2018.
+Jiayu Ding, Shuming Ma, Li Dong, Xingxing Zhang, Shaohan Huang, Wenhui Wang, Nanning
+Zheng, and Furu Wei. Longnet: Scaling transformers to 1,000,000,000 tokens. arXiv preprint
+arXiv:2307.02486, 2023.
+Yann Dubois, Chen Xuechen Li, Rohan Taori, Tianyi Zhang, Ishaan Gulrajani, Jimmy Ba, Carlos
+Guestrin, Percy S Liang, and Tatsunori B Hashimoto. Alpacafarm: A simulation framework for
+methods that learn from human feedback. Advances in Neural Information Processing Systems,
+36, 2024.
+Shangbin Feng, Weijia Shi, Yuyang Bai, Vidhisha Balachandran, Tianxing He, and Yulia Tsvetkov.
+Knowledge card: Filling llms’ knowledge gaps with plug-in specialized language models. In The
+Twelfth International Conference on Learning Representations, 2023.
+11

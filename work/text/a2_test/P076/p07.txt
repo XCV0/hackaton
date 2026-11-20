@@ -1,0 +1,93 @@
+Method Has-Answer Miss-Answer Internal Knowledge NQ HotpotQA TriviaQA NQ HotpotQA TriviaQA NQ HotpotQA TriviaQA
+LLM w/o RAG 46.41 42.99 80.48 6.51 14.73 46.04 100.0 100.0 100.0
+Vanilla RAG 63.45 57.69 88.76 2.41 8.89 19.70 77.30 67.89 90.80
+Rerank 64.09 57.09 88.74 3.14 10.87 27.41 78.20 68.28 91.24
+Summary 61.40 53.20 87.20 3.02 10.19 25.27 76.89 63.23 89.93
+CoT 62.90 51.76 87.53 2.53 7.69 22.91 77.19 59.77 89.38
+RankCoT 65.44 58.92 90.49 4.10 13.03 30.84 80.42 70.81 92.61
+Table 4: RAG Performance by Using Different Knowledge Refinement Models. We conduct three testing scenarios
+to evaluate the knowledge usage of RAG systems, including Has-Answer, Miss-Answer and Internal Knowledge.
+finement. We then train several knowledge re-
+finement models–Rerank, Summary, and CoT–
+using the self-reflection mechanism introduced by
+RankCoT. Specifically, the self-reflection mecha-
+nism involves feeding the knowledge refinement
+results into LLMs to generate self-reflection results
+based on these inputs. In this setup, SFT meth-
+ods select self-reflection results containing ground
+truth answers to train knowledge refinement mod-
+els, while DPO methods select both positive and
+negative responses–those that contain ground truth
+answers and those that do not–for training.
+After fine-tuning with QA supervision, the LLM
+is able to generate knowledge refinement results
+using different prompts. However, the evaluation
+results illustrate that these QA models present lim-
+ited effectiveness compared to vanilla RAG model.
+We then train the knowledge refinement models
+using training signals refined by the LLM itself.
+Among the SFT-based models, Rerank achieves
+the best performance, illustrating that the rerank-
+ing signals can be easily learned by LLMs through
+SFT. Using the DPO training method, both Sum-
+mary and RankCoT show significant improvements
+over these knowledge refinement models using the
+SFT strategy. Furthermore, RankCoT outperforms
+all knowledge refinement models, demonstrating
+its effectiveness in producing effective knowledge
+refinement results to help LLMs generate more ac-
+curate answers. By replacing self-refined CoTs
+with the raw CoT outcomes during DPO training,
+RankCoT achieves a 1.3% decline, showing the
+effectiveness of our self-reflection mechanism.
+5.3 Knowledge Usage Performance of
+Different Refinement Models
+In this experiment, we evaluate the ability of
+RankCoT to assist RAG models in leveraging ex-
+ternal knowledge to generate final answers. We
+compare RankCoT with three knowledge refine-
+ment models: Rerank, Summary, and CoT.
+As shown in Table 4, we conduct three testing
+scenarios to assess the effectiveness of the different
+knowledge refinement models: Has-Answer, Miss-
+Answer, and Internal Knowledge. The Has-Answer
+scenario involves cases where the retrieved docu-
+ments contain the correct (golden) answer. This
+scenario evaluates whether the knowledge refine-
+ment model can effectively extract key information
+from these documents to aid the LLM in answering
+the question. The Miss-Answer scenario, on the
+other hand, deals with cases where the retrieved
+documents do not include the golden answer. This
+scenario further tests the ability of the knowledge
+refinement models to minimize the impact of re-
+trieved noise. Finally, the Internal Knowledge sce-
+nario examines the ability of different knowledge
+refinement models to handle conflicts between in-
+ternal and external knowledge.
+As shown in the evaluation results, RankCoT out-
+performs all knowledge refinement models across
+all datasets in the Has-Answer scenario. This
+demonstrates the effectiveness of RankCoT in in-
+corporating more query-relevant information from
+retrieved documents, thereby enhancing the ac-
+curacy of the RAG system in this scenario. In
+the Miss-Answer scenario, the performance of
+vanilla RAG models significantly drops compared
+to LLMs w/o RAG, indicating that query-irrelevant
+documents mislead LLMs into producing incorrect
+answers. However, the use of different knowledge
+refinement models mitigates this performance de-
+cline. Among these models, RankCoT exhibits
+the most substantial improvements, demonstrat-
+ing its effectiveness in filtering out noisy informa-
+tion from retrieval and reducing the misleading
+information of irrelevant documents. In the in-
+ternal knowledge scenario, knowledge refinement
+models–Rerank, Summary, and CoT–perform com-
+parably or even worse than vanilla RAG model,
+illustrating that existing methods are less effective
+in addressing the knowledge conflict issue. In con-
+trast, RankCoT outperforms these knowledge re-
+finement models, demonstrating its ability to pro-
+12863

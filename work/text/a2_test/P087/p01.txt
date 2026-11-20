@@ -1,0 +1,75 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 20953–20976
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+Self-Correcting RAG: Enhancing Faithfulness via MMKP Context
+Selection and NLI-Guided MCTS
+Shijia Xu♠, Zhou Wu♠,*, Xiaolong Jia♡, Yu Wang♠, Kai Liu♠,♣, April Xiaowen Dong♢
+♠Chongqing University, China, ♡Queen Mary University of London, UK
+♣Chongqing Key Laboratory of Big Data Intelligence and Privacy Computing, China
+♢Fangda Partners, China
+{shijiaxu, ysy_wang}@stu.cqu.edu.cn
+{zhouwu, liukai0807}@cqu.edu.cn, x.jia@qmul.ac.uk
+Abstract
+Retrieval-augmented generation (RAG) sub-
+stantially extends the knowledge boundary
+of large language models. However, it still
+faces two major challenges when handling
+complex reasoning tasks: low context uti-
+lization and frequent hallucinations. To ad-
+dress these issues, we propose Self-Correcting
+RAG, a unified framework that reformulates
+retrieval and generation as constrained opti-
+mization and path planning. On the input
+side, we move beyond traditional greedy re-
+trieval and, for the first time, formalize con-
+text selection as a multi-dimensional multiple-
+choice knapsack problem (MMKP), thereby
+maximizing information density and remov-
+ing redundancy under a strict token budget.
+On the output side, we introduce a natural
+language inference (NLI)-guided Monte Carlo
+Tree Search (MCTS) mechanism, which lever-
+ages test-time compute to dynamically explore
+reasoning trajectories and validate the faithful-
+ness of generated answers. Experiments on
+six open-domain and multi-hop QA datasets
+demonstrate that our method significantly im-
+proves reasoning accuracy on complex queries
+while effectively reducing hallucinations, out-
+performing strong existing baselines. Our code
+is available at https://github.com/xjiacs/
+Self-Correcting-RAG.
+1 Introduction
+Large Language Models (LLMs) have shown sig-
+nificant capabilities in reasoning, planning, and
+tool utilization (Bubeck et al., 2023; OpenAI et al.,
+2024; Touvron et al., 2023). Advanced prompt-
+ing strategies, such as Chain-of-Thought (CoT)
+(Wei et al., 2022; Kojima et al., 2022), Least-
+to-Most prompting (Zhou et al., 2023), and Self-
+Consistency (Wang et al., 2023a), allow models to
+decompose complex tasks into intermediate steps.
+*Corresponding author
+Figure 1: Comparison of document retrieval and selec-
+tion workflows between the Baseline (Top-k) and the
+proposed Self-Correcting RAG Framework.
+The trustworthiness and efficiency of these reason-
+ing chains are further bolstered by on-the-fly gener-
+ation, causality-inspired evaluations, and adaptive
+length strategies (Yang et al., 2024b; Wang et al.,
+2026a; Sun et al., 2026; Li et al., 2026c; Zhou
+et al., 2026a; Yang et al., 2026). Furthermore, re-
+cent developments in tool-augmented agents, often
+supported by advanced agentic memory architec-
+tures (Jiang et al., 2026a,b), enable models to inter-
+act with external environments and automate com-
+plex workflows like scientific data collection (Li
+et al., 2023b). These advancements suggest a po-
+tential for applying LLMs to sophisticated decision-
+making domains.
+To support complex reasoning, Retrieval-
+Augmented Generation (RAG) has emerged as a
+key strategy. RAG grounds generation in exter-
+nal corpora to mitigate knowledge deficits (Ram
+et al., 2023; He et al., 2024a). Research in this
+area has expanded rapidly, moving towards uni-
+20953

@@ -1,0 +1,83 @@
+Published as a conference paper at ICLR 2025
+Scoring method on self-consistency and self-reflection refines draft quality effectively. In the
+second set of experiments, we examine the scoring method during verification. We remove each
+of the specific confidence scores, ρDraft, ρSelf-contain, or ρSelf-reflect in turn. Performance drops are ob-
+served when any score is removed. Particularly, removing ρDraft leads to a minimal decline, 0.19%
+on TriviaQA and 1.12% on PubHealth, likely due to the limited verification capability of the smaller
+RAG drafter. Removing either ρSelf-contain or ρSelf-reflect results in similar performance decreases,
+around 2.0% on TriviaQA and around 0.8% on PubHealth, indicating that both self-containment and
+self-reflection capture different key aspects of reasoning and are crucial during verification. Ran-
+dom selection without verification leads to substantial underperformance, resulting in a performance
+decline of 5.69% on TriviaQA and 5.37% on PubHealth.
+Table 3: Ablation study of SPECULATIVE RAG in the drafting and verification stages on TriviaQA
+and PubHealth.
+TriviaQA PubHealth
+MVerifier-8x7B + MDrafter-7B 74.24 76.60
+Drafting Stage
+Random sampling w/o multi-perspective clustering 73.02 (-1.22) 75.38 (-1.22)
+Always sampling from the same perspective cluster 72.36 (-1.88) 74.37 (-2.23)
+Verification Stage
+w/o ρDraft (ρ = ρSelf-contain · ρSelf-reflect) 74.05 (-0.19) 75.48 (-1.12)
+w/o ρSelf-contain (ρ = ρDraft · ρSelf-reflect) 72.04 (-2.20) 75.89 (-0.71)
+w/o ρSelf-reflect (ρ = ρDraft · ρSelf-contain) 72.36 (-1.88) 75.68 (-0.92)
+Random selection w/o verification 68.55 (-5.69) 71.23 (-5.37)
+1 5 10 15 20
+TriviaQA: # Drafts
+68
+70
+72
+74
+76Accuracy (%)
+69.0
+73.9 74.0 74.4 74.7
+1 5 10 15 20
+PubHealth: # Drafts
+74
+76
+78
+73.0
+75.8
+76.4
+77.0
+77.5
+(a) We include 1, 5, 10, 15, 20 drafts and sample 2
+supporting documents for each draft.
+1 2 3 4 5 6 7 8 9 10
+TriviaQA: Doc subset size
+72
+74
+76Accuracy (%)
+71.1
+74.0
+75.5 75.8 75.7
+1 2 3 4 5 6 7 8 9 10
+PubHealth: Doc subset size
+70
+75
+ 74.6
+76.4
+73.2
+70.1
+67.6
+(b) We sample 1, 2, 4, 6, 10 supporting documents for
+each draft and we generate 10 answer drafts.
+Figure 4: Performance analysis of SPECULATIVE RAG with (a) different numbers of drafts, and (b)
+different supporting document subset size on TriviaQA and PubHealth.
+4.7 EFFECTS OF DRAFT NUMBER AND DOCUMENT SUBSET SIZE
+Increasing the number of drafts improves performance without adding latency. We investi-
+gate the performance of SPECULATIVE RAG under varying numbers of drafts. Using MVerifier-7B +
+MDrafter-7B with 1, 5, 10, 15, 20 drafts on TriviaQA and PubHealth. We sample two documents as
+context per draft. The results are illustrated in Figure 4(a). Since we retrieve top 10 documents in
+total, we sample up to 20 drafts in these experiments. The results indicate that incorporating more
+drafts can further improve performance, likely thanks to higher coverage of diverse perspective of
+documents. Importantly, in SPECULATIVE RAG, we can launch multiple RAG drafter instances to
+generate drafts in parallel without additional latency.
+Increasing the document subset size doesn’t always lead to better performance. We also ex-
+amine the effect of document subset size. By varying the number of documents (1, 2, 4, 6, or 10)
+sampled for draft generation on TriviaQA and PubHealth (Figure 4(b)), we find that including more
+documents in the context does not always lead to consistent performance improvement. While Triv-
+iaQA queries may benefit from more supporting documents due to their complexity, MVerifier-7B +
+MDrafter-7B can surpass Mistral-Instruct7B even with a single supporting document per draft. Fur-
+thermore, with two or more documents per draft, MVerifier-7B + MDrafter-7B can even surpass Mixtral-
+Instruct8x7B. This further demonstrates the effectiveness of our drafting design.
+10

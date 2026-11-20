@@ -1,0 +1,102 @@
+Agent is tasked with evaluating whether forward-
+looking guidance from previous calls was beaten,
+or missed. Citing another example, in Newmark
+(NMRK) Q1-2021, management guided to 20 % to
+25 % FY revenue growth yet delivered only 4.1 %
+in the 1st quarter; the agent flagged a high risk of
+under-delivery.
+3.4.3 Competitor Analyst Agent.
+A substantial body of empirical finance literature
+establishes that industry and sector affiliations are
+primary drivers of return comovement. Studies
+show that factors in the global industry can ex-
+plain more cross-sectional variance than geography
+(Cavaglia et al., 2000; Baca et al., 2000; Heston
+and Rouwenhorst, 1994; Moskowitz and Grinblatt,
+1999).
+Drawing on this principle, the Competitor Ana-
+lyst Agent is designed to evaluate a firm’s perfor-
+mance not in isolation, but in direct comparison
+to its peers. Let U be the universe of tradable
+firms and S = {s1, . . . , s11} the GICS sectors,
+with each firm i ∈ U tagged by σ(i) ∈ S. For a
+focal firm i⋆, its sector peer set is P(i⋆) = { j ∈
+U \ {i⋆} : σ(j) = σ(i⋆)}. Consider the focal
+fact f ⋆ = (i⋆, q⋆, µ, v⋆) with metric µ. Its predi-
+cate class collects all peer-firm facts for the same
+quarter,
+p(f ⋆) = { f ′ = (j, q⋆, µ, vj ) ∈ F : j ∈ P(i⋆) } .
+From this class the agent retrieves the k most
+cosine-similar facts. It then forms the sector bench-
+mark and computes the firm’s performance devi-
+ation from the sector benchmark. The agent also
+analogously derives information from verbal de-
+scriptions and sentiment based facts.
+3.5 Hierarchical Synthesis and Prediction
+To integrate the specialist agents’ outputs, we intro-
+duce a higher-level synthesizer agent that performs
+meta-level reasoning. The synthesizer ingests the
+analytical memos produced by the 3 agents and
+maintains a rolling memory
+Ht =
+{
+(ˆyt−k, rt−k, ut−k)
+}K
+k=1,
+where ˆyt−k ∈ R is the forecast it issued k quarters
+earlier, rt−k is the realised excess return, and ut−k
+is the accompanying textual verdict. From this in-
+formation the synthesizer produces two sentences:
+(i) a summary that concisely states supporting ev-
+idence; and (ii) a direction together with a confi-
+dence score st ∈ [0, 10], where st = 0 denotes the
+strongest conviction of a price decline and st = 10
+denotes the strongest conviction of a price increase.
+4 Experiments
+4.1 Experimental Design
+Dataset Curation To support full reproducibility,
+we curate and release two new corpora of earnings
+calls for companies listed on the NASDAQ and
+NYSE, each paired with their corresponding finan-
+cial statements. We use these datasets to bench-
+mark our approach against text-only baselines.
+They are provided in the supplementary material.
+To evaluate the predictive power of financial fun-
+damentals against audio signals, we benchmark
+our framework against state-of-the-art audio-text
+alignment models on the MAEC dataset (Li et al.,
+2020). We replace the dataset’s audio tracks with
+our quarter-matched financial statements, hold-
+ing all other settings constant. This isolates the
+performance contribution of financial-statement
+grounding relative to acoustic alignment. De-
+scriptive statistics for all datasets are provided in
+table 1.
+Baseline Model Families We benchmark against
+two text-only baseline families across the NAS-
+DAQ and NYSE datasets: (1) Zero-shot LLM
+baselines with transcript-only input: These
+include (a) the Loughran–McDonald dictionary,
+(b) GPT-4o-mini, (c) GPT-3.5-turbo, (d) a two-
+agent LangGraph pipeline (Wang and Duan, 2024)
+that simulates analyst–critic interaction, and (e)
+a Graph-of-Thoughts (GoT) variant (Zhou et al.,
+2023) that expands reasoning by generating diverse
+hypotheses and selecting the top-ranked output.
+These baselines use no structured financial context
+and operate solely on call transcripts. Lastly, we
+ablate against a (f) wide-context ablation baseline:
+a strong baseline that provides GPT-4o-mini with
+both transcripts and financial statements as input.
+(2) Supervised text encoder baselines: These
+include (a) FinBERT (Huang et al., 2024), a 110M-
+parameter BERT variant trained on financial fil-
+ings and transcripts, and (b) Hierarchical FinBERT
+(Koval et al., 2023), which segments long tran-
+scripts into sentence-aligned chunks (with L ∈
+32, 64, 128), encodes them via FinBERT, and ag-
+gregates using a lightweight Transformer.
+(3) Audio-text alignment models: The third
+family of baselines comprises multimodal systems
+designed to integrate acoustic and textual signals
+3060

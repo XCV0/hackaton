@@ -1,0 +1,104 @@
+Who started their term as Chief Minister in 1995,
+and what party did he belong to?
+❌B. Gopa Reddy started his term as Chief Minister in 1995 and belonged to the Indian National Congress party.
+- Type: Table
+- Content: A table showing the Chief Ministers of Andhra Pradesh with their term of ofﬁce,
+party afﬁliation, and days in ofﬁce
+- Page Number: 4
+- Relevance: The table lists the Chief Ministers of Andhra Pradesh and their respective
+terms in ofﬁce.
+1. The question asks for the Chief Minister who started their term in 1995.
+2. Examining the table on page 4, we ﬁnd that the second entry under the \"Term of
+ofﬁce\" column has the starting date of 28 March 1995. 
+3. The corresponding name in the \"Name\" column is \"B. Gopa Reddy\".
+4. The same row indicates that the party afﬁliation is \"Indian National Congress\
+N. Chandrababu Naidu began his term as Chief Minister in 1995 and belonged to the
+Telugu Desam Party.
+*Type:** Table
+**Content:** \n| No | Name | Portrait | Term of ofﬁce | Party[a] | Days in ofﬁce |\n|---|---|---|---|---|---|\n| 1 | Neelam Sanjiva Reddy | MLA for Kalahasti | 1 November 1956 - 11 January
+1960 | Indian National Congress | 1167 |\n| 2 | Damodaram Sanjivayya | MLA from Kurnool | 11 January 1960 - 12 March 1962 | Indian National Congress | 790 |\n| (1) | Neelam
+Sanjiva Reddy | [2] | MLA from Dhone | 12 March 1962 - 20 February 1964 | Indian National Congress | 719 |\n| 3 | Kasu Brahmananda Reddy | MLA from Narasaraopet | 21
+February 1964 - 30 September 1971 | Indian National Congress | 2777 |\n| 4 | P. V. Narasimha Rao | MLA from Manthani | 30 September 1971 - 10 January 1973 | Indian National
+Congress | 468 |\n| - | Vacant | (President's rule) | 11 Jan 1973 - 10 December 1973 | N/A | 335 |\n| 5 | Jalagam Vengala Rao | MLA for Vemsoor | 10 December 1973 - 6 March 1978
+| Indian National Congress | 1547 |\n| 6 | Marri Chenna Reddy | MLA from Medchal | 6 March 1978 - 11 October 1980 | Indian National Congress | 950 |\n| 7 | Tanguturi Anjaiah |
+MLC, Hyderabad | 11 October 1980 - 24 February 1982 | Indian National Congress | 501 |\n| 8 | Bhavanam Venkatarami Reddy | MLC, Guntur | 24 February 1982 - 20 September
+1982 | Indian National Congress | 208 |\n| 9 | Kotla Vijaya Bhaskara Reddy | MLA from Kurnool | 20 September 1982 - 9 January 1983 | Indian National Congress | 111 |\n| 10 | N. T.
+Rama Rao | MLA from Tirupati | 9 January 1983 - 16 August 1984 | Telugu Desam Party | 585 |\n| 11 | Nadendla Bhaskara Rao | MLA from Vemuru | 16 August 1984 - 16 September
+1984 | Telugu Desam Party | 31 |\n| (10) | N. T. Rama Rao | [2] | MLA from Hindupur | 16 September 1984 - 2 December 1989 | Telugu Desam Party | 1903 |\n| (6) | Marri Chenna
+Reddy | [2] | MLA from Sanathnagar | 3 December 1989 - 17 December 1990 | Indian National Congress | 379 |\n| 12 | N. Janardhana Reddy | MLA from Venkatagiri | 17 December
+1990 - 9 October 1992 | Indian National Congress | 662 |\n| (9) | Kotla Vijaya Bhaskara Reddy | [2] | MLA from Panyam | 9 October 1992 - 12 December 1994 | Telugu Desam Party
+| 794 |\n| (10) | N. T. Rama Rao | [3] | MLA from Hindupur | 12 December 1994 - 1 September 1995 | Telugu Desam Party | 263 |\n| 13 | N. Chandrababu Naidu | MLA from Kuppam |
+1 September 1995 - 14 May 2004 | Telugu Desam Party | 3178 |\n| 14 | Y. S. Rajasekhara Reddy | MLA from Pulivendla | 14 May 2004 - 2 September 2009 | Indian National
+Congress | 1938 |\n| 15 | K. Rosaiah | MLC, Guntur | 3 September 2009 - 24 November 2010 | Indian National Congress | 448 |\n| 16 | N. Kiran Kumar Reddy | MLA from Pileru | 25
+November 2010 - 1 March 2014 | Indian National Congress | 1193 |\n* **Page Number:** 4-5\n*
+ **Relevance:** This table lists the chief ministers of Andhra Pradesh, along with
+their term of ofﬁce and the party they belonged to."
+1. I need to ﬁnd the name of the chief minister who started their term in 1995 and the
+party they belonged to. 
+2. Looking at the table provided, I can see that row 13 shows \"N. Chandrababu
+Naidu\" as the Chief Minister who began his term on September 1, 1995. 
+3. The same row also shows that he belonged to the \"Telugu Desam Party\
+❌
+After 1995, the Telugu Desam Party
+was headed by N. Chandrababu
+Naidu..
+Visual RAG
+Textual RAG
+VisDoMRAG
+Ground Truth
+Answer
+Query
+Ground Truth Evidence
+Both responses follow logical chains of thought, correctly identifying the relevant information within
+their respective tables and drawing conclusions based on that information. However, there is a
+discrepancy in the evidence presented:
+* **Response 1:** Claims that **B. Gopa Reddy** started his term in 1995 and belonged to the Indian
+National Congress.
+* **Response 2:** Claims that **N. Chandrababu Naidu** started his term in 1995 and belonged to
+the Telugu Desam Party.
+This discrepancy indicates a potential error in either Response 1's evidence or Response 2's
+evidence. We need to analyze the validity of the evidence to determine which response is more likely
+to be correct.",
+N. Chandrababu Naidu started his term as Chief Minister in 1995 and belonged to the Telugu
+Desam Party
+✅✅
+Figure 12: Qualitative example from the FetaTab dataset, comparing VisDoMRAG with unimodal RAG strategies,
+with Gemini as the base LLM.
+Original Query Augmented Query
+What baselines did they consider? What baseline approaches using state-of-the-art
+PDTB taggers were employed for the evaluation of
+causality prediction in the automatic causal explana-
+tion analysis pipeline?
+What is the average length of the claims? What is the average token count of claims as reported
+in Table 2 of the PERSPECTRUM dataset?
+What was the performance on the self-collected cor-
+pus?
+What F1 scores did the CM-Net achieve for intent
+detection and slot filling on the CAIS dataset as de-
+tailed in Table 6?
+Do they test their framework performance on com-
+monly used language pairs, such as English-to-
+German?
+Does the paper report results for English-to-German
+translation in a simulated under-resourced scenario
+using their proposed multilingual NMT framework?
+Table 7: Example of query augmentation from PaperTab dataset.
+Original Query Augmented Query
+What is the main difference between the two schedul-
+ing algorithms compared in this graph?
+In this paper, what scheduling algorithms are ana-
+lyzed in Figure 8 for WCRT comparison?
+What does the phase diagram indicate about the sta-
+bility of the different phases?
+What does Figure 4.18 reveal about the phase bound-
+aries for different choices of Jt and k?
+What does the graph show about the impact of the
+load-changing attack on the frequency of the system?
+What does the figure show about frequency limits
+during the 2019 and 2020 load-changing attacks?
+What are some of the implications of the graph for
+the design of fuzzing tools?
+What relationship does Fig. 3 suggest between per-
+formance and resources in fuzzing tools?
+Table 8: Example of query augmentation from SciGraphQA dataset.
+6104

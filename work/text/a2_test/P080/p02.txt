@@ -1,0 +1,101 @@
+lowing challenges: (i) Beyond plain text, tabular
+data exhibits a more complex information struc-
+ture, combining textual headers and cell contents
+with an explicit relational layout (Fey et al., 2024;
+Dwivedi et al., 2025). As a result, understanding
+tables without information loss is non-trivial. More-
+over, real-world questions often require reasoning
+over multiple tables and are typically ad hoc in na-
+ture, making pre-defined sparse primary–foreign
+key relationships insufficient for reliably locating
+the relevant information. (ii) Even with a well-
+formed corpus understanding, building an effective
+memory index for RAG systems is non-trivial. The
+index should be hierarchical (Edge et al., 2024a;
+Gutiérrez et al., 2025) to support early pruning of
+irrelevant content while preserving accurate and
+representative evidence. Moreover, hierarchical in-
+dexing necessitates retrieval strategies that operate
+across multiple, adaptively selected granularities.
+(iii) After retrieval, organizing the complex context,
+i.e., both structural and textual evidence, is neces-
+sary for effective LLM inference (Mei et al., 2025);
+(iv) Finally, a realistic testbed is needed to evaluate
+cross-table RAG retrieval and reasoning; however,
+such benchmarks remain scarce, to the best of our
+knowledge (Seo et al., 2025; Yu et al., 2025).
+Facing the above challenges, in this paper, we
+introduce a novel table-corpora-aware retrieval-
+augmented generation (RAG) framework, termed
+T-RAG. Our framework is carefully designed with
+three synergistic components: (i) a hierarchical
+memory index that organizes heterogeneous table
+knowledge at different granularities, (ii) a multi-
+stage retrieval pipeline that progressively narrows
+the search space while preserving high recall, and
+(iii) a graph-aware context organization mecha-
+nism that injects structured relational priors into
+LLMs. Together, these components enable more
+effective and efficient retrieval and reasoning over
+large-scale table corpora. Beyond methodology,
+we further establish the first large-scale multi-table
+question answering benchmark, denoted as Mul-
+tiTableQA. Our benchmark encompasses 3 repre-
+sentative tasks, spanning 57,193 tables and 23,758
+questions, all collected from real-world scenarios.
+Comprehensive experiments on MultiTableQA
+deliver several key insights. We conduct holis-
+tic comparisons across three major paradigms: ta-
+ble retrieval methods, RAG methods, and table-
+to-graph representation learning methods. Re-
+sults consistently demonstrate that T-RAG achieves
+state-of-the-art performance in terms of accuracy,
+recall, and runtime efficiency. Moreover, lever-
+aging T-RAG, we systematically benchmark the
+reasoning and inference capabilities of frontier
+LLMs, including Qwen-2.5, Claude-3.5, and GPT-
+4o, showcasing the consistent performance gains
+by our framework across diverse LLM backbones.
+2 Preliminary
+Table Corpora. Throughout the paper, a large-
+scale table corpora is a collection of tables, denoted
+as T = {T1, T2, . . . , Tt}. Each table T comprises
+three components: (i) Table Schema (A, H), which
+includes both the table caption A and column head-
+ers H; (ii) Table Entries E, referring to the main
+body of the table values of N rows and M columns;
+and (iii) Table Metadata D, which provides addi-
+tional description such as contextual details, asso-
+ciated resources, and representative example utter-
+ances. Formally, we represent each table as:
+T = {(A, H), E ∈ RN ×M , D}, T ∈ T (1)
+Cross-table Retrieval for Question Answering.
+As shown in Figure 1, given the corpora T , sup-
+pose we have a natural language question q query-
+ing about the tables in T but cannot be directly
+answered by a pre-trained LLM. Then, let M de-
+note a standard RAG pipeline that operates in two
+stages. First, M retrieves a subset of relevant tables
+from the corpus T . Second, M generates an output
+Y to augment downstream LLMs with additional
+context to answer question q. The overall RAG
+pipeline can be defined as T ′ = RetrieveM(T , q)
+and Y = GenerateM(T ′, q), where RetrieveM(·)
+selects top-k most relevant tables, T ′ denotes the
+set of retrieved tables, and GenerateM(·) produces
+a response Y conditioned on both T ′ and q.
+3 T-RAG: Hierarchical Memory Index
+and Multi-Stage Retrieval
+In general, T-RAG framework develops two core
+techniques, i.e., hierarchical memory index and
+multi-stage retrieval, to address the challenge of
+large-scale cross-table question answering. As il-
+lustrated in Figure 2, first, T-RAG regards each
+table as a potential node and organizes them into a
+heterogeneous hypergraph by clustering multi-way
+features of tables. To be specific, the heterogeneity
+stands for different types of hyperedges that origi-
+nate from different focuses of clustering manners.
+Second, T-RAG employs the coarse-grained multi-
+way retrieval to select the optimal set of nodes
+38134

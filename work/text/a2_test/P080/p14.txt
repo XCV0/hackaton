@@ -1,0 +1,98 @@
+scores into the prompt.
+Hierarchical Long CoT Generation. Inspired
+by recent advances in long Chain-of-thought (Wei
+et al., 2022; Yeo et al., 2025) and test-time scaling
+(Jaech et al., 2024; Guo et al., 2025) where long
+chain-of-thought chains are generated alongside fi-
+nal answers, we employ a similar strategy for down-
+stream tabular reasoning. Specifically, we prompt
+the LLMs to reason step-by-step by addressing the
+following: (i) identify the most relevant tables from
+the provided table set V∗ final; (ii) elucidate the con-
+nection between the query and the selected tables;
+and (iii) conduct a detailed examination of each
+row and column entry to extract the information
+most pertinent to the query, ultimately arriving at
+the final answer. The outputs from the LLM are
+structured into two components: the reasoning pro-
+cess enclosed within the tags <reasoning> and
+</reasoning>, and the final answer enclosed within
+the tags <answer> and </answer>.
+Multi-step Prompting. In line with our graph-
+aware and long chain-of-thought generation strate-
+gies, our prompt design involves three steps: (i)
+highlighting graph-related information, (ii) provid-
+ing instructions for table retrieval, and (iii) offering
+specific guidance for long CoT output generation.
+An illustration of our overall prompt template is
+presented in Figure 5.
+B MultiTableQA Details
+B.1 Preliminary Analysis
+The primary challenge in constructing the dataset
+lies in collecting multi-table data along with corre-
+sponding queries. A straightforward approach in-
+volves semantically clustering similar tables from
+single-table resources, such as Spider or Wiki-
+Table, into joint table sets, and then employing hu-
+man experts or automated annotators (e.g., LLMs)
+to design queries based on these clusters.
+As illustrated in Figure 6 (a), the common
+dataset construction method has several drawbacks:
+(i) Sparsity of similar-topic table sets: In our pre-
+liminary experiments, we clustered tables using ei-
+ther primary/foreign key relationships or semantic
+cosine similarity of table schemas. However, even
+within the same topical category, tables often ex-
+hibit substantial heterogeneity. For instance, under
+the clustered category of “NFL Games", one table’s
+content is about “player information" and another
+is about “NFL team matches & schedules". This
+intrinsic sparsity complicates further topic refine-
+ment and downstream query annotation. (ii) High
+Resource Costs: Annotating queries that require
+reasoning across multiple tables with human ex-
+perts or LLMs is highly resource-intensive, limiting
+the scalability of constructed datasets. (iii) Auto-
+annotation Bias: Relying on auto-annotators (e.g.,
+LLMs) for multi-table queries often introduces bias,
+as both the queries and their ground-truth labels
+are model-generated. This divergence may compro-
+mise the realism of RAG settings, which are based
+on authentic user queries and source data.
+To overcome these challenges, we reframe the
+data construction process by decomposing source
+tables and combining queries. As illustrated in
+Figure 6 (b), our strategy guarantees that the result-
+ing sub-tables, all derived from a single root table,
+maintain an intrinsic relationship, while the orig-
+inal queries now necessitate multi-hop reasoning
+across these sub-tables.
+B.2 Task Type Definition
+We give detailed explanations of the three task
+types in MultiTableQA. Figure 7 provides a con-
+crete example for each task.
+• Table-based Fact Verification determines
+whether a user-provided claim is supported or
+refuted based on the given tabular data. In our
+benchmark, we label an entailed (supported)
+claim as “1” and a refuted claim as “0”, depend-
+ing on the evidence found within the tables.
+• Single-hop Table Question Answering focuses
+on questions that can be answered using infor-
+mation from a single table cell. However, iden-
+tifying the correct cell often requires the LLMs
+to reason across multiple tables and recognize
+connections between different pieces of tabular
+information, as illustrated in the example figure.
+• Multi-hop Table Question Answering ad-
+dresses questions that require reasoning over mul-
+tiple cells, often across different rows, columns,
+or tables. The final answer typically consists of a
+list of strings aggregated from multiple relevant
+entries in the tables.
+Retrieval Difficulty. We classify splitter tables
+into three difficulty levels based on the number of
+sub-tables derived from each source table: (i) Easy:
+No split, (ii) Medium: split into two sub-tables, and
+(iii) Hard: split into three sub-tables.
+38146

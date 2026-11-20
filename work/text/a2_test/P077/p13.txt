@@ -1,0 +1,155 @@
+REFERENCES
+[1] Ibrahim Abdelaziz, Razen Harbi, Zuhair Khayyat, and Panos Kalnis. 2017. A
+survey and experimental comparison of distributed SPARQL engines for very
+large RDF data. Proc. VLDB Endow. 10, 13 (Sept. 2017), 2049–2060.
+[2] Jason Ansel, Edward Yang, Horace He, Natalia Gimelshein, Animesh Jain,
+Michael Voznesensky, Bin Bao, Peter Bell, David Berard, Evgeni Burovski,
+Geeta Chauhan, and et al. Chourdia. 2024. PyTorch 2: Faster Machine Learning
+Through Dynamic Python Bytecode Transformation and Graph Compilation.
+In 29th ACM International Conference on Architectural Support for Programming
+Languages and Operating Systems, Volume 2 (ASPLOS 24). ACM.
+[3] Jinheon Baek, Alham Fikri Aji, and Amir Saffari. 2023. Knowledge-Augmented
+Language Model Prompting for Zero-Shot Knowledge Graph Question Answer-
+ing. arXiv:2306.04136 [cs.CL]
+[4] Jonathan Berant, Andrew Chou, Roy Frostig, and Percy Liang. 2013. Semantic
+Parsing on Freebase from Question-Answer Pairs. In Proceedings of the 2013
+Conference on Empirical Methods in Natural Language Processing(EMNLP 2013),
+David Yarowsky, Timothy Baldwin, Anna Korhonen, Karen Livescu, and Steven
+Bethard (Eds.). Association for Computational Linguistics, Seattle, Washington,
+USA, 1533–1544.
+[5] David M. Blei, Andrew Y. Ng, and Michael I. Jordan. 2003. Latent dirichlet
+allocation. 3, null (March 2003), 993–1022.
+[6] Kurt Bollacker, Colin Evans, Praveen Paritosh, Tim Sturge, and Jamie Taylor.
+2008. Freebase: a collaboratively created graph database for structuring human
+knowledge. In Proceedings of the 2008 ACM SIGMOD international conference on
+Management of data(SIGMOD 2008). 1247–1250.
+[7] Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan,
+Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, et al. 2020. Language models are few-shot learners. Advances in neural
+information processing systems(NeurIPS 2020) 33 (2020), 1877–1901.
+[8] Yukun Cao, Shuo Han, Zengyi Gao, Zezhong Ding, Xike Xie, and S. Kevin Zhou.
+2024. GraphInsight: Unlocking Insights in Large Language Models for Graph
+Structure Understanding. arXiv:2409.03258 [cs.CL]
+[9] Dhivya Chandrasekaran and Vijay Mago. 2022. Evolution of Semantic Similarity
+- A Survey. ACM Comput. Surv. 54, 2 (2022), 41:1–41:37.
+[10] Harrison Chase. 2022. LangChain. https://github.com/langchain-ai/langchain
+[11] Hanzhu Chen, Xu Shen, Qitan Lv, Jie Wang, Xiaoqi Ni, and Jieping Ye. 2024.
+SAC-KG: Exploiting Large Language Models as Skilled Automatic Constructors
+for Domain Knowledge Graph. In Proceedings of the 62nd Annual Meeting of
+the Association for Computational Linguistics(ACL 2024) (Volume 1: Long Pa-
+pers), Lun-Wei Ku, Andre Martins, and Vivek Srikumar (Eds.). Association for
+Computational Linguistics, Bangkok, Thailand, 4345–4360.
+[12] Hao Mark Chen, Wayne Luk, Ka Fai Cedric Yiu, Rui Li, Konstantin Mishchenko,
+Stylianos I Venieris, and Hongxiang Fan. 2024. Hardware-aware parallel prompt
+decoding for memory-efficient acceleration of llm inference. arXiv preprint
+arXiv:2405.18628 (2024).
+[13] Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu Lian, and
+Zheng Liu. 2024. BGE M3-Embedding: Multi-Lingual, Multi-Functionality,
+Multi-Granularity Text Embeddings Through Self-Knowledge Distillation.
+arXiv:2402.03216 [cs.CL]
+[14] Yongrui Chen, Huiying Li, Guilin Qi, Tianxing Wu, and Tenggou Wang. 2022.
+Outlining and Filling: Hierarchical Query Graph Generation for Answering
+Complex Questions over Knowledge Graphs. arXiv:2111.00732 [cs.AI]
+[15] Yukang Chen, Shengju Qian, Haotian Tang, Xin Lai, Zhijian Liu, Song Han, and
+Jiaya Jia. 2023. Longlora: Efficient fine-tuning of long-context large language
+models. arXiv preprint arXiv:2309.12307 (2023).
+[16] Zi-Yuan Chen, Chih-Hung Chang, Yi-Pei Chen, Jijnasa Nayak, and Lun-Wei
+Ku. 2019. UHop: An Unrestricted-Hop Relation Extraction Framework for
+Knowledge-Based Question Answering. In Proceedings of the 2019 Conference
+of the North American Chapter of the Association for Computational Linguistics:
+Human Language Technologies, Volume 1 (Long and Short Papers), Jill Burstein,
+Christy Doran, and Thamar Solorio (Eds.). Association for Computational Lin-
+guistics, Minneapolis, Minnesota, 345–356.
+[17] Gábor Csárdi and Tamás Nepusz. 2006. The igraph software package for complex
+network research. InterJournal, Complex Systems (2006), 1695.
+[18] Scott Deerwester, Susan T. Dumais, George W. Furnas, Thomas K. Landauer,
+and Richard Harshman. 1990. Indexing by latent semantic analysis. Journal of
+the American Society for Information Science 41, 6 (1990).
+[19] Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer. 2023.
+Qlora: Efficient finetuning of quantized llms, 2023. 2 (2023).
+[20] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. BERT:
+Pre-training of Deep Bidirectional Transformers for Language Understanding.
+arXiv:1810.04805 [cs.CL]
+[21] Jialin Dong, Bahare Fatemi, Bryan Perozzi, Lin F. Yang, and Anton Tsitsulin.
+2024. Don’t Forget to Connect! Improving RAG with Graph-based Reranking.
+arXiv:2405.18414 [cs.CL]
+[22] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva
+Mody, Steven Truitt, and Jonathan Larson. 2024. From Local to Global: A Graph
+RAG Approach to Query-Focused Summarization. arXiv:2404.16130 [cs]
+[23] Wenfei Fan. 2022. Big graphs: challenges and opportunities. Proc. VLDB Endow.
+15, 12 (Aug. 2022), 3782–3797.
+[24] Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin,
+Tat-Seng Chua, and Qing Li. 2024. A survey on rag meeting llms: Towards
+retrieval-augmented large language models. In Proceedings of the 30th ACM
+SIGKDD Conference on Knowledge Discovery and Data Mining(KDD 2024). 6491–
+6501.
+[25] Yasuhiro Fujiwara, Makoto Nakatsuji, Makoto Onizuka, and Masaru Kitsure-
+gawa. 2012. Fast and exact top-k search for random walk with restart. 5, 5 (Jan.
+2012), 442–453.
+[26] Luyu Gao, Xueguang Ma, Jimmy Lin, and Jamie Callan. 2022. Precise Zero-Shot
+Dense Retrieval without Relevance Labels. arXiv:2212.10496 [cs]
+[27] Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yi
+Dai, Jiawei Sun, Meng Wang, and Haofen Wang. 2024. Retrieval-Augmented
+Generation for Large Language Models: A Survey. arXiv:2312.10997 [cs.CL]
+[28] Yunfan Gao, Yun Xiong, Meng Wang, and Haofen Wang. 2024. Modular rag:
+Transforming rag systems into lego-like reconfigurable frameworks. arXiv
+preprint arXiv:2407.21059 (2024).
+[29] Team GLM, Aohan Zeng, Bin Xu, Bowen Wang, Chenhui Zhang, Da Yin, Diego
+Rojas, Guanyu Feng, Hanlin Zhao, Hanyu Lai, Hao Yu, Hongning Wang, and
+Jiadai Sun et al. 2024. ChatGLM: A Family of Large Language Models from
+GLM-130B to GLM-4 All Tools. arXiv:2406.12793
+[30] Yu Gu, Sue Kase, Michelle Vanni, Brian Sadler, Percy Liang, Xifeng Yan, and Yu
+Su. 2021. Beyond I.I.D.: Three Levels of Generalization for Question Answering
+on Knowledge Bases. In Proceedings of the Web Conference 2021 (Ljubljana,
+Slovenia) (WWW 2021). Association for Computing Machinery, New York, NY,
+USA, 3477–3488.
+[31] Tao Guo, Xin Cao, Gao Cong, Jiaheng Lu, and Xuemin Lin. 2017. Distributed
+Algorithms on Exact Personalized PageRank. In Proceedings of the 2017 ACM
+International Conference on Management of Data (SIGMOD 2017). Association
+for Computing Machinery, New York, NY, USA, 479–494.
+[32] Zirui Guo, Lianghao Xia, Yanhua Yu, Tu Ao, and Chao Huang. 2024. LightRAG:
+Simple and Fast Retrieval-Augmented Generation. arXiv:2410.05779 [cs.IR]
+[33] Bernal Jiménez Gutiérrez, Yiheng Shu, Yu Gu, Michihiro Yasunaga, and Yu Su.
+2024. HippoRAG: Neurobiologically Inspired Long-Term Memory for Large
+Language Models. arXiv:2405.14831 [cs.CL]
+[34] Haoyu Han, Harry Shomer, Yu Wang, Yongjia Lei, Kai Guo, Zhigang Hua,
+Bo Long, Hui Liu, and Jiliang Tang. 2025. RAG vs. GraphRAG: A Systematic
+Evaluation and Key Insights. arXiv:2502.11371 [cs.IR]
+[35] Haoyu Han, Yu Wang, Harry Shomer, Kai Guo, Jiayuan Ding, Yongjia Lei,
+Mahantesh Halappanavar, Ryan A Rossi, Subhabrata Mukherjee, Xianfeng
+Tang, et al. 2025. Retrieval-augmented generation with graphs (graphrag).
+arXiv preprint arXiv:2501.00309 (2025).
+[36] Mohamed S. Hassan, Walid G. Aref, and Ahmed M. Aly. 2016. Graph Indexing
+for Shortest-Path Finding over Dynamic Sub-Graphs. In Proceedings of the 2016
+International Conference on Management of Data (San Francisco, California,
+USA) (SIGMOD 2016). Association for Computing Machinery, New York, NY,
+USA, 1183–1197.
+[37] Taher H. Haveliwala. 2002. Topic-sensitive PageRank. In Proceedings of the 11th
+International Conference on World Wide Web (Honolulu, Hawaii, USA) (WWW
+2002). Association for Computing Machinery, New York, NY, USA, 517–526.
+[38] Gaole He, Yunshi Lan, Jing Jiang, Wayne Xin Zhao, and Ji-Rong Wen. 2021.
+Improving Multi-hop Knowledge Base Question Answering by Learning In-
+termediate Supervision Signals. In Proceedings of the 14th ACM International
+Conference on Web Search and Data Mining (Virtual Event, Israel) (WSDM 2021).
+Association for Computing Machinery, New York, NY, USA, 553–561.
+[39] Guanhao Hou, Qintian Guo, Fangyuan Zhang, Sibo Wang, and Zhewei Wei.
+2023. Personalized PageRank on evolving graphs with an incremental index-
+update scheme. Proceedings of the ACM on Management of Data(SIGMOD 2023)
+1, 1 (2023), 1–26.
+[40] Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+Wang, Lu Wang, Weizhu Chen, et al. 2022. Lora: Low-rank adaptation of large
+language models. ICLR 1, 2 (2022), 3.
+[41] Linmei Hu, Zeyi Liu, Ziwang Zhao, Lei Hou, Liqiang Nie, and Juanzi Li. 2024.
+A Survey of Knowledge Enhanced Pre-Trained Language Models. IEEE Trans-
+actions on Knowledge and Data Engineering 36, 4 (2024), 1413–1430.
+[42] Yuntong Hu, Zhihan Lei, Zheng Zhang, Bo Pan, Chen Ling, and Liang Zhao.
+2024. GRAG: Graph Retrieval-Augmented Generation. arXiv:2405.16506 [cs]
+[43] Jiewen Huang, Daniel J. Abadi, and Kun Ren. 2011. Scalable SPARQL querying
+of large RDF graphs. Proc. VLDB Endow. 4, 11 (Aug. 2011), 1123–1134.
+[44] Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin Feng, Haotian
+Wang, Qianglong Chen, Weihua Peng, Xiaocheng Feng, Bing Qin, and Ting
+Liu. 2023. A Survey on Hallucination in Large Language Models: Principles,
+Taxonomy, Challenges, and Open Questions. arXiv:2311.05232 [cs.CL]
+[45] Wenyu Huang, Guancheng Zhou, Hongru Wang, Pavlos Vougiouklis, Mirella
+Lapata, and Jeff Z. Pan. 2024. Less is More: Making Smaller Language Models
+Competent Subgraph Retrievers for Multi-hop KGQA. arXiv:2410.06121 [cs.CL]

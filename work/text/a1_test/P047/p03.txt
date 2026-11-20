@@ -1,0 +1,53 @@
+Nanomaterials 2021, 11, 48 3 of 9
+contribution of both ion migration and charge trapping is considered. In most of the
+earlier computational and experimental studies, the focus has been on either the origin
+of hysteresis or its suppression. The degree of migration of different ionic species in per-
+ovskite ﬁlms depends on the voltage scan rates [17], directions (forward-to-reverse or
+reverse-to-forward bias scans) [31], ranges [23,32], and temperature [33]. The hysteresis
+phenomena result in the overstatement of the performance of PSCs during reverse scan,
+which starts from the bias higher than open circuit voltage and sweeps to a voltage below
+zero. The study, elimination, and application of current–voltage hysteresis in PSCs are
+subjects of recent interest [14,15,34]. No well-deﬁned J–V measurement protocol exists and
+more experimental data measured under different sweep conditions are required which
+could help in developing the protocol.
+In this work, we report for the ﬁrst time a hysteresis study on the current–voltage
+characteristics and impedance spectra of a hole-transport-material (HTM)-free hybrid
+organic–inorganic low-cost monolithic perovskite solar cell under light and dark, respec-
+tively. The study of the effects of sweep direction, sweep time delay, and frequency on the
+hysteresis of an HTM-free carbon-counter-electrode-based PSC by current density–voltage
+measurements is undertaken in this research to provide insight into the reduction of hys-
+teresis and to obtain data to help in developing a J–V measurement protocol and the causes
+of hysteresis. To understand the dynamics of hysteresis, the effects of sweep direction,
+time delay, and frequency were also analyzed on the impedance spectra of the device.
+Impedance spectroscopy investigations were carried out employing the series and parallel
+measurement models. The effects of sweep scan direction, time delay, and frequency were
+analyzed on the parallel capacitance–bias voltage (CP–V), capacitance–voltage (Cs–V), and
+resistance–voltage (Rs–V) characteristics of the device.
+2. Materials and Methods
+For the fabrication of the device, a printed glass/FTO/c-TiO2/m-TiO2/m-ZrO2/carbon
+monolithic electrode procured from Solaronix SA (Aubonne, Switzerland) was heated at
+400 ◦C for 30 min and then allowed to cool down to room temperature. Then, on the bare
+substrate area, a polyimide adhesive mask was applied in order to prevent spreading of
+the solution, which was to be deposited in the next step. A premixed organometal halide
+perovskite precursor solution (CH3NH3PbI3) prepared by mixing lead iodide, methylam-
+monium iodide, and 5-aminovaleric acid hydroiodide in γ-butyrolactone as a solvent
+was also procured from Solaronix SA (Aubonne, Switzerland). The perovskite inﬁltration
+was achieved by drop-casting 5.6 µL of perovskite precursor solution (Solaronix) onto the
+carbon layer by using a micropipette. Drying the device at 60 ◦C in the dark for 1 h, the
+perovskite layer was grown. The device effective area was 1.0 cm2.
+The photovoltaic and impedance spectroscopic measurements were performed by
+using the Keithley 4200 semiconductor characterization system (Keithley Instruments,
+Cleveland, OH, USA) equipped with a digital capacitance meter (model 4210-CVU) under
+dark and AM 1.5 simulated illumination (OAI TriSOL, AM 1.5G Class AAA, Milpitas, CA,
+USA) conditions. By using the Newport Oriel PV reference cell system (Model 91150V),
+power calibration was performed and irradiance was set at 100 mW.cm−2. The delay-
+dependent J–V measurements were made using the dual sweep voltage from −1 to 1 with
+a 0.01 V step for the delay values of 0.2, 0.4, 0.6, 0.8, and 1.0 s. The delay-independent
+impedance spectra were recorded by applying a 30 mV AC signal from 5 to 30 kHz at a
+time delay of 0.2 s. The delay-dependent studies were made at a constant frequency of
+5 kHz and delays of 0.2, 0.4, 0.6, 0.8, and 1.0 s. All the measurements were performed
+keeping the room temperature constant at 25 ◦C and the relative humidity at 30%.
+3. Results and Discussion
+3.1. Hysteresis in Photocurrent Density–Voltage Characteristics
+Figure 2 shows the J–V hysteresis measured on the carbon-based HTM-free mono-
+lithic TiO2/CH3NH3PbI3 heterojunction perovskite solar cell under standard AM 1.5 G

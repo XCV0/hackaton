@@ -1,0 +1,100 @@
+Table 5: Performance on Multi-hop QA Datasets. All
+models are trained on Qwen2.5-7B-Instruct.
+Method HotpotQA (Doc 10) 2Wiki (Doc 10)
+EM F1 EM F1
+Para. Answer 16.09 21.29 18.03 23.01
+RAAT 28.51 38.44 26.94 35.29
+RALM 28.82 38.55 30.12 38.69
+KnowPO 29.10 39.72 29.46 38.03
+GRPO-RAG 32.86 42.94 31.74 41.05
+BrPr (1-turn) 30.94 41.40 29.02 39.49
+BrPr (2-turn) 33.01 43.88 31.52 40.77
+provide the model with all available documents in
+the original datasets.
+Table 5 shows that BrPr (1-turn) underperforms
+relative to the 2-turn version and GRPO-RAG in
+multi-hop tasks. This disparity primarily stems
+from the inherent complexity of multi-hop tasks,
+which necessitate multiple intermediate reasoning
+steps; compressing such intricate logic into latent
+parameters within a 1-turn framework inevitably
+incurs information loss. Additionally, the low ac-
+curacy of the model’s parametric answer acts as
+a bottleneck for BrPr, preventing it from attaining
+superior results over the GRPO-RAG baseline.
+E Implementation Details
+We employ Qwen2.5-7B-Instruct and Qwen3-8B as
+the initial models. We utilize the OpenRLHF (Hu
+et al., 2025a) framework for training. GRPO (Shao
+et al., 2024) is used as the reinforcement learn-
+ing algorithm. We use the train set of NQ from
+RAG-Bench (Fang et al., 2024) to construct train-
+ing datasets. We set the number of rollouts as 16
+for one task. We set the learning rate as 5e-7, batch
+size as 32, training steps as 480. We set λ as 0.5 in
+Bernoulli-gated Knowledge Dropout. We conduct
+the ablation study regarding the impact of varying
+this parameter detailed in Table 6. We use 8 A100
+GPUs for all the experiments.
+All models employ identical sampling settings
+during inference, with a temperature of 0.6 and a
+top-p value of 0.95.
+E.1 Ablation Study
+As demonstrated in Table 6, optimal performance
+is achieved when λ is set to 0.5. Notably, we ob-
+serve that while the removal of the knowledge gate
+leads to a decrease in 1-turn reasoning performance,
+its efficacy still closely rivals that of the GRPO-
+RAG model. A comprehensive analysis of this
+Table 6: Ablation study on the BrPr method. Evaluation
+is conducted on retrieved NQ dataset in Oracle setting.
+All method are compared in standard CoT strategy.
+Method Top 5 Top 20 Top 50
+EM F1 EM F1 EM F1
+BrPr-7B (λ = 0.5) 59.91 67.41 53.24 61.35 48.81 57.55
+GRPO-RAG 58.79 66.59 52.91 60.97 47.34 55.89
+Dropout Variants
+λ = 0.8 58.84 66.93 52.79 60.94 49.23 58.20
+λ = 0.2 59.75 67.37 53.04 61.22 48.55 57.03
+Training Variants
+w/o knowledge gate 59.28 67.05 52.37 60.84 47.89 56.33
+phenomenon is provided in Appendix F, where we
+demonstrate that the optimization of prior-guided
+strategy can implicitly bolster the performance of
+direct, 1-turn inference.
+F Theoretical Analysis for Optimization
+of Prior-Guided Reasoning
+The prediction task in standard RAG paradigm can
+be viewed as a marginalization over the intermedi-
+ate latent variable z:
+Pθ(y|x, d) =
+∫
+Pθ(y|x, z, d)Pθ(z|x, d)dz (13)
+where Pθ(z|x, D) represents the prior distribution
+of the model’s internal knowledge. To optimize
+the parameters θ, we consider the gradient of the
+log-marginal likelihood. Applying the chain rule
+and the log-derivative trick (∇θP = P ∇θ log P ),
+the gradient can be expanded as follows:
+∇θ
+∫
+Pθ(y|x, z, d)Pθ(z|x, d)dz =
+∫ [
+∇θPθ(y|x, z, d) · Pθ(z|x, d)+
+Pθ(y|x, z, d) · ∇θPθ(z|x, d)
+]
+dz (14)
+The first term optimizes the generative parameters
+given the prior, while the second term refines the
+prior parameters themselves. Assuming the inter-
+nal knowledge prior Pθ(z|x, D) remains relatively
+stable (w/o training), we focus on the first term:
+∇θ log Pθ(y|x, d) =
+∫ Pθ(y|x, z, d)Pθ(z|x, d)
+Pθ(y|x, d)
+∇θ log Pθ(y|x, z, d)dz (15)
+By applying Bayes’ rule, the ratio in the in-
+tegrand simplifies to the posterior distribution
+Pθ(z|y, x, D). Consequently, the gradient of the
+marginal likelihood is equivalent to the expected
+22162

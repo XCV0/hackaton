@@ -1,0 +1,72 @@
+2.2 Multi-Agent Framework
+The multi-agent pipeline structures N2I-RAG’s reasoning process into verifiable stages.
+Distributing tasks across specialized agents improves transparency and reduces cumu-
+lative errors. Each agent plays a specialized and complementary role, while recording
+its reasoning, so that errors and biases can be identified and addressed. This mod-
+ular structure prevents information loss and reduces the risk of hallucination. The
+pipeline includes eight different specialized agents. Table 1 provides an overview of
+these agents, their roles, and their interactions. Collectively, these agents turn complex
+natural language reasoning into a transparent workflow featuring factual consistency
+and interpretability controls. In the following subsections, we detail how each agent
+works individually, highlighting their specific contribution to controlling hallucinations
+and improving response quality.
+Table 1 Description of agents used in the architecture
+Agent Role Input Output
+Metadata Retriever Identify and parse metadata
+associated with a query
+User query Metadata
+JSON
+Context Retriever Extract relevant articles Query Potential
+articles
+Context Grader Evaluate the semantic relevance
+and specificity of the retrieved
+articles
+Retrieved
+articles
+Score +
+Explanation
+Generator Agent Generate responses based on the
+selected context
+Filtered and
+graded context
+Natural
+language
+answer
+Groundedness
+Grader
+Evaluates whether each claim is
+directly supported by cited context
+Generated
+answer +
+Context
+Score +
+Explanation
+Answer Relevance
+Grader
+Check the consistency between the
+generated response and the initial
+request
+Generated
+answer +
+query
+Score +
+Explanation
+Query
+Disambiguator
+Reformulate ambiguous or general
+queries
+User query Reformulated
+query
+Binary QA Agent Assign a binary output (0/1) for
+the final evaluation grid
+Generated
+answer
+Binary label +
+Explanation
+2.2.1 Metadata Retriever
+Metadata retrieval is an essential step in enriching the query and improving the accu-
+racy of the results. Metadata such as date, jurisdiction, or thematic provide contextual
+dimensions that complement purely textual information and enable more targeted
+searches. In our framework, the module automatically identifies the metadata associ-
+ated with a query and converts it to JSON, facilitating its use by subsequent agent.
+6

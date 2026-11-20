@@ -1,0 +1,100 @@
+that moral judgments and alignment behavior vary
+substantially with language and data provenance,
+with recurring Western-dominance effects and rep-
+resentational bias (Naous and Xu, 2025; Guo et al.,
+2025; Agarwal et al., 2024). Within Islamic QA
+specifically, recent benchmarks and datasets begin
+to target fiqh-style reasoning, abstention, and cul-
+turally faithful evaluation, however, consistently
+report gaps in Arabic performance and jurispru-
+dential nuance (Atif et al., 2025; Bouchekif et al.,
+2025a; Lahmar et al., 2025; Mubarak et al., 2025;
+Elsafoury and Hartmann, 2025; Aljaji et al., 2025;
+Alwajih et al., 2025; Tajrin et al., 2025). These lim-
+itations motivate our focus on open-ended genera-
+tive Islamic QA with atomic single-gold answers
+and strict LLM-as-a-judge grading to directly mea-
+sure hallucination and abstention, rather than rely-
+ing on MCQ/MRC-style evaluations (Haas et al.,
+2025).
+2.2 Knowledge-Intensive Domains
+Hallucination remains a central failure mode in
+knowledge-intensive QA. Recent multilingual and
+Arabic-focused studies report elevated factuality
+and faithfulness errors, and call for evaluation be-
+yond answer-only metrics, including span-level at-
+tribution and joint assessment of reasoning traces
+and final outputs (ul Islam et al., 2025; Alansari and
+Luqman, 2025; Elchafei and Abu-Elkheir, 2025;
+Wang et al., 2025). At the same time, evidence
+from test-time scaling shows that longer reason-
+ing traces do not reliably improve grounding and
+can increase overconfident errors, reinforcing that
+“thinking more” is not a substitute for evidence
+(Gema et al., 2025; Zhao et al., 2025). Retrieval
+augmentation is therefore a key mechanism for im-
+proving groundedness. Prior work on reasoning
+and agentic RAG highlights that iterative search,
+tool use, and verification can improve faithfulness
+when supported by reliable retrieval and orches-
+tration (Li et al., 2025). In Qur’anic/Islamic set-
+tings, empirical studies shows that RAG can im-
+prove faithfulness, although performance depends
+strongly on retrieval quality, model capacity, and
+domain coverage (Khalila et al., 2025; Salameh
+et al., 2024). Broader trustworthiness suites empha-
+size that factuality should be assessed alongside
+safety and misinformation risk in value-laden de-
+ployments (Huang et al., 2023; Abhishek et al.,
+2025; Hui et al., 2025), while Arabic-centric re-
+sources further highlight how language coverage
+and representation affect retrieval and downstream
+reliability (Bhatia et al., 2025). These findings
+motivate our comparison of standard RAG versus
+agentic RAG under a strict generative, abstention-
+aware protocol designed to reduce hallucinations in
+Islamic QA (Haas et al., 2025; Abbas et al., 2026).
+3 Datasets
+To facilitate the development of robust Islamic
+LLMs and enable precise hallucination evalua-
+tion, we construct a comprehensive suite of re-
+sources comprising instruction tuning data, prefer-
+ence alignment data, a retrieval corpus, and a novel
+evaluation benchmark, ISLAMICFAITHQA. The
+specific statistics for each set of our data suite are
+summarized in Table 1.
+Dataset Role Size Language
+SFT Reasoning Training 25,000 Arabic
+RL Preference Training 5,000 Ar + En
+Quran RAG Retrieval 6,236 Arabic
+ISLAMICFAITHQA Evaluation 3,810 Ar + En
+Table 1: Summary of the constructed data resources.
+Sizes represent the number of instruction pairs, reward
+samples, or atomic retrieval units (verses).
+3.1 Training and Alignment Resources
+We develop two training datasets and a Quranic
+RAG Index to enhance model capability in the
+Islamic domain, specifically targeting theological
+reasoning and safety alignment.
+SFT Reasoning Dataset. For Supervised Fine-
+Tuning (SFT), we curate a dataset of 25,000 bilin-
+gual samples (Arabic and English) instruction-
+response pairs centered on theological reasoning.
+Unlike standard QA pairs, this dataset is text-
+grounded; questions are derived directly from
+Quranic verses and Hadith, with answers requiring
+grounded reasoning steps rather than simple extrac-
+tion. As shown in Figure 2 we use LLM generated
+datasets. This structure facilitates the model’s abil-
+ity to articulate the logical basis behind Islamic
+rulings. An example of the SFT Reasoning dataset
+is given in Appendix D.1.
+RL Preference Dataset. To support preference
+optimization techniques such as GRPO (Shao et al.,
+2024), we construct a Reinforcement Learning
+(RL) dataset of 5,000 bilingual samples (Arabic
+and English). Each instance includes a question de-
+rived from canonical texts, a gold-standard answer,
+and specific evaluation parameters designed to train
+3
+26471

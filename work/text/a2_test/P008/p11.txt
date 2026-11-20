@@ -1,0 +1,96 @@
+A Appendix: Benchmarks
+A.1 STARK
+We use two datasets from the STARK benchmark,
+STARK-MAG and STARK-PRIME. Each dataset
+contains a knowledge graph (KG) and unstructured
+documents associated with some types of entities.
+The task is to retrieve a set of documents from
+the database that satisfy the requirements speci-
+fied in the question. Noting that the majority of
+questions are hybrid questions, and there are very
+few textual questions. We use the testing set from
+STARK for evaluation, which contains 2665 and
+2801 questions for STARK-MAG and STARK-
+PRIME, respectively. The KG of STARK-MAG is
+an academic KG, and the one of STARK-PRIME
+is a precision medicine KG. Their types of entity
+and relations are provided in the benchmark.
+A.2 CRAG
+In the CRAG benchmark, there are KGs from 5
+different domains that can be utilized to retrieve
+useful reference. For each question, a database that
+includes 50 retrieved web pages and all 5 KGs is
+given, but the answer is not guaranteed to be on the
+web pages, KGs, or both. The task is to generate
+the answer to the question, with or without the help
+of the retrieved reference. There are textual and re-
+lational questions, covering various question types,
+such as simple, simple with condition, comparison,
+and multi-hop. We use the testing set from CRAG
+for evaluation. There are 1335 textual and relation
+questions, covering various question types, such as
+simple, comparison, and multi-hop.
+B Appendix: Experiments
+B.1 Interpretability (RQ3) in STARK-Prime
+Fig. 6 shows two examples that HYBGRAG re-
+fines its question routing in STARK-Prime. In the
+example of Fig. 6(a), HYBGRAG selects to use
+the text retrieval module in the first iteration, and
+the retrieved document is rejected by the valida-
+tor. HYBGRAG then takes the feedback from the
+commentor and turns to using the hybrid retrieval
+module, and refines the extraction of topic entities
+and useful relations in the next two iterations.
+B.2 Ablation Study on Critic Module
+We compare HYBGRAG variants with validators
+without validator context, commentors with few or
+zero shots, and those with oracles. The oracle has
+access to the ground truth, which gives the optimal
+judgement on the correctness of the output and the
+error type of the action, if there is any. In Table 10
+and 11, we show that HYBGRAG performs the
+best with all our design choices, approaching the
+performance of an oracle.
+C Appendix: Reproducibility
+C.1 Experimental Details
+All the experiments are conducted on an AWS
+EC2 P4 instance with NVIDIA A100 GPUs. Most
+LLMs are implemented with Amazon Bedrock3,
+and Llama 3.1 is implemented with Ollama4.
+C.1.1 HYBGRAG Implementation
+STARK The examples in the prompts are col-
+lected from the training set provided by STARK.
+We use the default entity and relation types pro-
+vided by STARK. The radius of the extracted ego-
+graph is no more than two. Four self-reflection
+iterations have been done. When extracting the
+entity name from the question, multiple entities
+in the knowledge base may have exactly the same
+name. In these cases, we select the entity that has
+the answer in its one-hop neighborhood for disam-
+biguation, since it is not the focus of our paper.
+Moreover, these cases rarely happen, where only
+3.83% and 0.07% of questions have this issue in
+STARK-MAG and STARK-PRIME, respectively.
+CRAG In the text retrieval module, the web
+search based on the question is used as the retriever,
+which is done by CRAG ahead of time. The VSS
+ranker ranks the web pages based on their simi-
+larity to the question in the embedding space. In
+this module, we provide an additional choice for
+the router. If the output generated based on the
+current batch of retrieved web pages is rejected by
+the validator, the router can choose to move on to
+the next batch in the ranking list. In CRAG, since
+there is no hybrid question, the hybrid retrieval
+module is replaced by the graph retrieval module to
+be prepared for relational questions. In the graph re-
+trieval module, the retriever extracts the ego-graph
+connected by the useful relations for each topic
+entity. As there is no document associated with
+entity, the retriever retrieves the reasoning paths
+from topic entities to entities in the extracted ego-
+graphs. Reasoning paths are verbalized as “{topic
+3https://aws.amazon.com/bedrock/
+4https://github.com/ollama/ollama
+889

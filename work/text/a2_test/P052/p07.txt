@@ -1,0 +1,90 @@
+System Recall@1 Recall@3 Recall@5 Recall@10 MRR
+AuthorityFirst-RAG 0.3090 0.4363 0.4783 0.4845 0.3772
+citation-hybrid date filter 0.0916 0.3602 0.5590 0.7717 0.2779
+BM25-date-filter 0.0280 0.0807 0.1273 0.2096 0.0709
+BM25-only 0.0031 0.0078 0.0140 0.0264 0.0081
+ColBERT-version-blind 0.0016 0.0047 0.0062 0.0078 0.0035
+ColBERT-post-date-filter 0.0155 0.0404 0.0621 0.1040 0.0349
+GoldOracle 1.0000 1.0000 1.0000 1.0000 1.0000
+Table 4: Main retrieval on the 644-instance test split aligned with generation/error analysis. AuthorityFirst-RAG
+gives the strongest top-rank law-in-force retrieval, improving Recall@1 from 2.80% for BM25-date-filter to 30.90%.
+Evidence condition Accuracy (%)
+GoldOracle 53.8
+AuthorityFirst-RAG 52.1
+BM25-date-filter 50.5
+citation-hybrid date filter 48.6
+Table 5: Sample-weighted average generation accu-
+racy by evidence condition across completed condition-
+level runs. Better evidence helps modestly, but even
+GoldOracle evidence does not solve legal numeric rule
+application.
+weight model is Qwen2.5-32B at 63.3% accuracy
+(N = 300). Among 644-example GoldOracle runs,
+Qwen2.5-14B reaches 60.4%, while the remaining
+reported models range from 49.2% to 53.3%.
+For Qwen2.5-32B-Instruct, BM25-date-filter
+yields 50.00%, citation-hybrid date filter yields
+50.33%, AuthorityFirst-RAG yields 56.00%, and
+GoldOracle reaches 63.33%. The gap between
+AuthorityFirst-RAG and GoldOracle indicates
+remaining retrieval error; the gap between
+GoldOracle and perfect accuracy indicates
+model-side rule-application error.
+These results motivate the benchmark’s diagnos-
+tic separation. A system can improve retrieval with-
+out solving generation, and a model can receive the
+correct law while still misapplying it. Treating the
+task as a single end-to-end accuracy number would
+hide which bottleneck is responsible.
+6.3 Better evidence changes the structure of
+generation errors
+We classify erroneous generations using checklist-
+based manual review with heuristic consistency
+checks; the plotting script tabulates category shares.
+Rule application errors occur when the evidence
+is correct or near-correct but the model misapplies
+a comparator, deadline, interval, or numeric condi-
+tion, or contradicts its own reasoning. Semantic
+grounding errors occur when the model fails to
+use the applicable legal rule, often because the ev-
+idence is mismatched or the model latches onto
+non-applicable text. Output stability errors oc-
+cur when the model fails to produce a parseable
+yes/no answer. Appendix B gives fine-grained defi-
+nitions and counts. Appendix B also reports model-
+wise error composition, showing that the shift from
+semantic-grounding to rule-application errors is not
+driven by a single generator.
+Figure 3 shows the dual bottleneck at the error
+level. Under GoldOracle and AuthorityFirst-RAG
+evidence, most errors are rule-application er-
+rors: 91.1% and 83.0%, respectively. Un-
+der BM25-date-filter, semantic-grounding er-
+rors become dominant at 60.3%. Under
+citation-hybrid date filter, semantic-grounding er-
+rors are 40.9% and output-stability errors rise to
+9.9%. Better evidence therefore changes the struc-
+ture of failure rather than eliminating failure.
+The shift is important. Weak evidence pushes
+models toward grounding mistakes: they use the
+wrong version, copy non-applicable text, or miss
+the controlling rule. Strong evidence leaves failures
+concentrated in legal rule application, so retrieval
+quality changes the likely error type.
+6.4 Upper-bound comparator failures persist
+under gold evidence
+A prominent source of rule-application error is
+upper-bound comparator failure. Legal expressions
+such as not more than, shall not exceed, maximum
+penalty, capped at, and within X days define upper-
+bound constraints. The fact must be less than or
+equal to the threshold, or must occur before the
+deadline. Models often reverse the direction and
+treat the threshold as a lower bound. This can turn
+a compliant fact into a violation, or an untimely
+filing into a timely one.
+Figure 4 shows that this failure persists under
+GoldOracle evidence. The model is not simply
+missing the relevant passage; it is misreading the le-
+gal comparison after the correct passage is supplied.
+885

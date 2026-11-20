@@ -1,0 +1,78 @@
+Hybrid Question:
+What nanofluid heat transfer papers have been published by John Smith?
+(c) HybGRAG (Ours)
+(b) GRAG(a) RAG
+Refine
+Retrieve
+RetrieveRetrieve
+Textual Aspect:
+What nanofluid heat transfer papers
+have been published by John Smith.
+Relational Aspect:
+nanofluid heat transfer papers,
+by John Smith
+Relational Aspect:
+nanofluid heat transfer papers,
+by John Smith
+Textual Aspect:
+None
+Relational Aspect:
+by John Smith
+Textual Aspect:
+nanofluid heat transfer papers
+Figure 1: HYBGRAG solves hybrid questions in SKB, which are semi-structured, involving textual and relational
+aspects. (a) RAG overlooks the interconnections between documents and does not meet the requirements specified
+by the relational aspect. (b) GRAG relies solely on the relational aspect and misidentifies the textual aspect as part
+of the relational one. (c) HYBGRAG refines the question routing through self-reflection and successfully retrieves
+the target document in SKB, addressing both textual and relational aspects.
+Table 1: HYBGRAG matches all properties, while
+baselines miss more than one property.
+Property
+Regular RAG
+Think-on-Graph
+AVATAR
+HYBGRAG
+1. Agentic ✔ ✔
+2. Adaptive
+2.1. Questions in ODQA ✔ ✔ ✔
+2.2. Questions in KBQA ✔ ✔
+2.3. Questions in HQA ✔
+3. Interpretable ? ✔ ✔ ✔
+21%
+Higher
+10%
+Higher
+Figure 2: HYBGRAG wins in STARK, outperforming
+baselines by up to 21% in Hit@1.
+To solve HQA in SKB, we propose HYBGRAG.
+HYBGRAG handles hybrid questions with a re-
+triever bank, which leverages both textual and re-
+lational information simultaneously. To improve
+the accuracy of the retrieval, HYBGRAG performs
+self-reflection (Renze and Guven, 2024), which iter-
+atively improves its question routing based on feed-
+back from a carefully designed critic module. Sim-
+ilarly to chain-of-thought (CoT) (Wei et al., 2022),
+which is widely regarded as interpretable, HYB-
+GRAG’s refinement path provides intuitive expla-
+nations for the performance improvement. Last but
+not least, the framework of HYBGRAG is designed
+to be flexible, and can easily be adapted to differ-
+ent problems. We summarize the contributions of
+HYBGRAG as follows:
+1. Agentic: it automatically refines the question
+routing with self-reflection;
+2. Adaptive: it solves textual, relational and hy-
+brid questions with a unified framework;
+3. Interpretable: it justifies the decision making
+with intuitive refinement path; and
+4. Effective: it outperforms all baselines on real-
+world HQA benchmarks.
+As shown in Table 1, HYBGRAG is the only work
+that satisfies all the properties and solves HQA
+in SKB. As shown in Fig. 2, when evaluated on
+the HQA benchmark STARK, HYBGRAG outper-
+forms the second-best baseline, achieving relative
+improvements in Hit@1 of 47% on STARK-MAG
+and 55% on STARK-PRIME, respectively.
+880

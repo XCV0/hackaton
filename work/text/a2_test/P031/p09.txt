@@ -1,0 +1,126 @@
+0.8 1.0 1.2 1.4
+max
+76
+78
+80
+82
+84
+86Faithful accuracy (%)
+A. Context-faithful benchmarks
+0.8 1.0 1.2 1.4
+max
+30
+40
+50
+60
+70Factual world accuracy (%)
+B. Factual-conflict benchmarks
+dtruth = 0.1 dtruth = 0.2 dtruth = 0.3 default router Direct RAG
+Fig. 3: Sensitivity of truth mode performance to token-level
+steering hyperparameters on Qwen2.5-14B-Instruct.
+Fig. 4: Answer distribution on factual-conflict benchmarks
+under truth mode.
+a single memory view sharply reduces factual recovery to
+54.5, showing that memory side correction requires a stable
+closed-book signal; removing the activation or reliability gate
+degrades both faithful and factual columns, indicating that
+intervention must be triggered only under meaningful conflict
+and scaled by source reliability. Finally, removing the mode
+prior lowers both truth-mode factual recovery and strict-mode
+context accuracy, confirming that context and memory conflicts
+cannot be resolved with a fixed source preference, whereas
+the full IGD model provides a stable balance between factual
+recovery and context faithfulness.
+Figure 3 further exposes the limitation of using fixed global
+steering hyperparameters. As λmax increases, factual world ac-
+curacy on factual-conflict benchmarks generally improves, but
+faithful accuracy on faithful benchmarks decreases. Similarly,
+smaller dtruth values make the router more memory biased
+and improve factual recovery, but they also make the model
+more likely to deviate from correct retrieved evidence. This
+creates a clear tuning trade-off: aggressive correction helps
+resist misleading context, whereas conservative correction better
+preserves faithful context use, this is a core limitation of the
+current framework. Future work could reduce this limitation by
+learning example adaptive intervention strengths, calibrating the
+router with validation feedback, or estimating source reliability
+at a finer granularity.
+Beyond aggregate accuracy, we further analyze what models
+output on factual-conflict benchmarks. Main results report
+whether an answer matches the target, but they do not distin-
+guish whether errors come from copying the misleading context,
+refusing to answer, or producing an unrelated alternative. We
+Faithful snippet Factual snippet
+0
+20
+40
+60
+80
+100Accuracy (%)
+83.0
+79.0
+99.0
+87.0
+A. Snippet support accuracy
+Faithful acc Factual world acc IAS
+0
+20
+40
+60
+80
+100Accuracy (%)
+74.5
+57.5
+66.0
+72.5
+56.5
+64.5
+B. Downstream IGD performance
+IDF
+GPT-5 localizer
+Fig. 5: Snippet localization accuracy versus downstream IGD
+performance.
+therefore categorize each output into four types: correct answer,
+misleading-context answer, unknown/refusal, and other answer.
+As shown in Figure 4, Direct RAG is dominated by misleading
+context answers: 57.9% of its outputs follow the incorrect
+context, while only 25.8% recover the correct world answer,
+IGD reverses this pattern, increasing correct answers to 58.3%
+and reducing misleading-context answers to 22.5%. At the same
+time, IGD does not convert all misleading context answers
+into correct answers, some mass moves into the other answer
+category. We interpret this as a residual uncertainty effect
+under source conflict: once decoding is pushed away from
+the misleading context, the model may still fail to land on
+the gold world answer if the memory branch is unstable, if
+competing aliases are plausible, or if the evidence conflict
+is not cleanly resolved. This is consistent with recent work
+showing that RAG models remain vulnerable under conflicting
+or noisy evidence and that models often generate plausible
+incorrect answers rather than abstaining when uncertainty is
+not explicitly rewarded [10], [41], [42]. Thus, IGD substantially
+mitigates context over-trust, but factual-conflict resolution
+remains imperfect when memory evidence is ambiguous or
+insufficiently calibrated.
+Figure 5 highlights a surprising mismatch between snippet
+localization quality and downstream IGD performance. The
+GPT-5 localizer substantially improves standalone snippet
+support accuracy, increasing faithful snippet accuracy from
+83.0% to 99.0% and factual snippet accuracy from 79.0% to
+87.0%. Intuitively, one might expect a better support localizer to
+improve IGD, since IGD uses snippet reliability to scale context-
+side intervention. However, the downstream results show the
+opposite: replacing the IDF localizer slightly reduces faithful
+accuracy, factual world accuracy, and IAS. This suggests
+that IGD does not only need a snippet that is semantically
+supportive under human or LLM judgment, it needs a snippet
+whose evidence is useful for the specific downstream generator
+and reliability function. The IDF localizer may select shorter,
+lexically concentrated spans that align better with answer-
+bearing tokens and IGD’s support heuristics, while the GPT-
+5 localizer may prefer semantically richer snippets that are
+correct in isolation but less discriminative for logit-level source
+arbitration [43], [44]. The result also aligns with evidence that
+robust RAG depends on preserving fine-grained textual details,
+not only high-level semantic support [45]. More broadly, LLM-
+based scoring or localization can introduce its own judgment

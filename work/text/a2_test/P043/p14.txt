@@ -1,0 +1,36 @@
+• Original: This method divides long texts into segments of a fixed length, such as two hundred
+Chinese characters or words, without considering sentence boundaries.
+• Llama_index [25]: This method considers both sentence completeness and token counts during
+segmentation. It prioritizes maintaining sentence boundaries while ensuring that the number of
+tokens in each chunk are close to a preset threshold. We use the SimpleNodeParser function from
+Llama_index, adjusting the chunk_size parameter to control segment length.
+(b) Dynamic Chunking Methods
+• Similarity Chunking [28]: Utilizes pre-trained sentence embedding models to calculate the cosine
+similarity between sentences. By setting a similarity threshold, sentences with lower similarity are
+selected as segmentation points, ensuring that sentences within each chunk are highly semantically
+related. This method employs the SemanticSplitterNodeParser from Llama_index. The size of
+text chunks is controlled by adjusting the similarity threshold.
+• LumberChunker [7]: Leverages the reasoning capabilities of LLMs to predict suitable segmentation
+points within the text. We utilize Qwen2.5 models with 14B parameters, set to full precision.
+• MoC MetaChunker [30]: MoC trains a lightweight chunker model to automatically learn how to
+partition long texts into semantically coherent chunks without relying on fixed lengths or predefined
+rules. Compared to traditional heuristic methods, MetaChunker demonstrates stronger cross-task
+generalization capabilities, particularly in downstream tasks such as RAG, serving as a representative
+strong baseline approach.
+6.3 Collection and Refinement of Training Data
+To construct a high-quality training set for document memory extraction, we first extract raw texts from
+the pre-trained corpus CCI3-HQ [26]. CCI3-HQ itself comprises 500GB of high-quality web pages and book
+content, encompassing approximately 100B tokens, and is accompanied by quality scores. From this corpus,
+we select 30K documents spanning multiple domains, including news, social media, literature, academic papers,
+educational and scientific popularization, legal regulations, healthcare, and more. Concurrently, we construct
+training and test sets from the open-source CRUD dataset. Specifically, since CRUD provides evidence
+context snippets corresponding to each QA pair, along with the original news repository, we can retrieve the
+original news articles containing these context snippets through sentence matching. Taking two-hop QA as an
+example, CRUD provides two news snippets, namely news1 and news2, which are essential for answering the
+question. We then save the matched original news articles, matched_news1 and matched_news2, that contain
+news1 and news2, respectively. Finally, from a repository of 80K original news articles, we recall 10K news
+articles that contain the context snippets as the initial texts for evaluation. From the remaining documents,
+we randomly select 10K data samples for training. After obtaining 40K multi-domain mixed documents, we
+employ the MoM framework for high-quality memory extraction and CoM construction, providing a reliable
+foundation for subsequent supervised fine-tuning of SLMs and evaluation of document memory capabilities.
+14

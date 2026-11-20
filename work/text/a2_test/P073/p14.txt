@@ -1,0 +1,78 @@
+Figure 8: Longitudinal traversal of the agent - agent
+anchors by the firm and traverses across facts nodes
+across quarters (2023-Q1, 2023-Q2)
+Figure 9: Lateral traversal of the agent - agent anchors
+by the quarter and traverses across firms (DataDog, New
+Relic)
+Each Fact node is associated with both a Ticker
+and a Quarter node, ensuring temporal and firm-
+level alignment. The schema defines six relation-
+ship types. The REPORTS_IN edge connects a ticker
+to a quarter, while HAS_FACT links a quarter to
+its reported facts. Each fact is connected back to
+the firm through the FOR_FIRM relationship and to
+its corresponding value via HAS_VALUE. Explana-
+tory context is preserved through EXPLAINED_BY,
+which links a fact to its reason node. Finally,
+QoQ_COMPARES relates facts across consecutive
+quarters for the same metric, annotated with a per-
+centage change attribute (delta_pct) to capture
+quarter-over-quarter dynamics.
+E.1 CTKG Topology and Construction
+To quantify the richness of the structured long-term
+memory, we analyze the topological properties
+of the constructed Causal-Temporal Knowledge
+Graph. The CTKG transforms unstructured tran-
+scripts into a dense network of financial logic. As
+detailed in table 7, the graph encodes hundreds
+of thousands of nodes across the three datasets.
+Specifically, the MAEC graph is the most exten-
+sive, containing over 400,000 nodes and 440,000
+edges.
+The graph construction process explicitly mod-
+els dependencies. Node-level features capture
+discrete entities such as Facts, Reasons, and
+Metrics, while Link-level features (Edges) map
+the relational structure, such as causal attribu-
+tions (EXPLAINED_BY) and temporal grounding
+(REPORTS_IN). The density of HAS_REASON edges
+(equal to the number of Facts) ensures that every
+quantitative claim is semantically grounded in qual-
+itative management commentary.
+F Latency Benchmarking
+Agent Input Output Graph-Query LLM
+(tokens) (tokens) (sec) (sec)
+CompetitorAnalyst 719 653 38.6 3.8
+HistoricPerformance 1,160 715 49.1 11.8
+HistoricEarnings 1,012 444 16.3 6.4
+Main_Agent 15,580 242 26.6 4.7
+Total 18,471 2,054 130.6 26.7
+Table 8: Per-earnings-call tokens and median latencies
+G Datasets Contributed
+This work contributes several new datasets for earn-
+ings call analysis. The full datasets will be open-
+sourced upon the acceptance of the paper, currently,
+a selection of them is included in the supplemen-
+tary material. They include - Enhanced Earnings
+Call Datasets, a curated collection of 1,386 earn-
+ings calls from NYSE-listed companies is available,
+with each record containing the full transcript, asso-
+ciated quarterly financial data, and labels indicating
+post-earnings price movements. A parallel dataset
+containing 1,772 earnings calls from NASDAQ-
+listed companies can also be found.
+G.1 Financial Statements
+Complementing the earnings-call data is a com-
+prehensive Financial Statements Directory, which
+contains quarterly financial data for all companies
+represented in the call datasets, covering over 1,500
+unique tickers with as much as 20 years of histori-
+cal data for each. For every company, three funda-
+mental financial statements are provided, offering
+a holistic view of financial health. These include
+the income statement (_income_statement.csv),
+which details revenues, costs, and profitability;
+the balance sheet (_balance_sheet.csv), which
+outlines assets, liabilities, and equity; and the
+cash-flow statement (_cash_flow_statement.csv),
+3068

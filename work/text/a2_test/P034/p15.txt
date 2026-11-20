@@ -1,0 +1,47 @@
+Table 4 Ablation Tests (Mistral-Nemo)
+Ban Configuration Accuracy Precision Recall Specificity F1-
+Score
+Balanced
+Acc.
+Plastic
+bag
+Full 0.975 1.000 0.962 1.000 0.980 0.981
+Without-Hall 0.843 0.862 0.848 0.836 0.855 0.842
+Baseline 0.777 0.760 0.864 0.673 0.809 0.768
+Bottom
+trawling
+Full 0.872 0.821 0.914 0.837 0.865 0.876
+Without-Hall 0.782 0.765 0.743 0.814 0.753 0.778
+Baseline 0.564 0.512 0.600 0.535 0.553 0.567
+Figure 3 and Table 4 present the comparative results across three configurations
+obtained with the Mistral-Nemo model, selected for its superior performance. We note
+that the balanced accuracy for the plastic bag ban increased from 0.768 (Baseline)
+to 0.842 (Without-Hall) and then to 0.981 (Full). Similarly, for bottom trawling ban,
+performance improved from 0.567 (Baseline) to 0.876 (Full). Specificity is the most
+affected metric: with N2I-RAG, Nemo achieves 1.000 (plastic) and 0.837 (trawling),
+compared to only 0.836 and 0.535 without hallucination control.
+These findings demonstrate that performance does not depend exclusively on the
+quality of LLM representations, but also on the design of the evaluation and con-
+trol pipeline. The proposed multi-agent approach provides a key regulatory layer,
+particularly in sensitive contexts where legal false positives must be minimized.
+4.4 Legal Error Analysis
+The legal-oriented metrics enhance the relevance of the assessment by identifying two
+types of errors with different regulatory implications.
+For the ban on plastic bags, Mistral-Nemo with N2I-RAG achieves Recall = 0.962 and
+Specificity = 1.000, illustrating a remarkable balance between recognition and relia-
+bility. Meanwhile, variants without anti-hallucination agents see their specificity drop
+to 0.535 in the case of trawling, which is a worrying false positive rate for legal appli-
+cations.
+The proposed architecture therefore provides a legal robustness guarantee by reducing
+critical biases related to false positives and false negatives. This outcome is partic-
+ularly decisive when it comes to analyzing legal prohibitions in environmental law,
+where an erroneous claim can have serious regulatory and political implications.
+Technical performance alone does not capture the practical reliability of legal AI sys-
+tems. N2I-RAG was therefore analyzed from a legal-error perspective, focusing on the
+types and implications of false predictions. Despite its robustness, N2I-RAG’s remain-
+ing errors reveal important insights about the nature of legal data and the boundaries
+of automated interpretation. For instance, in assessing the ban on plastic bags, the
+errors observed are not solely due to technical limitations of language models, but also
+reflect specific challenges related to the interpretation of the standard corpus used.
+Two main categories of legal errors have been identified:
+15

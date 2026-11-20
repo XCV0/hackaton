@@ -1,0 +1,107 @@
+Automated End-to-End Testing of Retrieval-Augmented Large Language Models
+- Ensure factual accuracy and cite sources when
+making specific claims
+- Use clear , professional language
+- Maintain consistency in terminology
+throughout
+FORMAT GUIDELINES :
+- Use markdown formatting for structure
+- Clearly mark sections with ## for main
+sections , ### for subsections
+- Use bullet points and numbered lists for
+clarity
+- Include code blocks where relevant ( use ```
+language syntax )
+- Use ** bold ** for emphasis and * italics * for
+technical terms
+QUALITY STANDARDS :
+- Ensure logical flow between sections
+- Provide sufficient depth on each topic
+- Avoid redundancy and repetition
+- Include transitional statements between major
+sections
+- Conclude with a comprehensive summary
+Generate content that is publication - ready and
+can be directly converted to PDF format ."""
+return system_prompt
+B. PDF Generation User Prompt
+@staticmethod
+def get_user_prompt (
+topic : str = None ,
+s p e c i f i c _ r e q u i r e m e n t s : list = None ,
+s e c t i o n s _ t o _ i n c l u d e : list = None ,
+s e c t i o n s _ t o _ e x c l u d e : list = None ,
+a dd i t io n a l_ c o nt e x t : str = None ,
+doc_name : str = None
+) -> str :
+user_prompt = f """ Please create a comprehensive
+document about {" a topic of your choice .
+You may choose from any category - science ,
+arts , history , society , culture , nature ,
+literature or any other area that inspires
+you . Try to be as diverse as you can and
+create very distinct documents ." if topic
+is None else f ": { topic }"}
+"""
+# Add specific requirements if provided
+if s p e c i f i c _ r e q u i r e m e n t s :
+user_prompt += " SPECIFIC REQUIREMENTS :\ n "
+for req in s p e c i f i c _ r e q u i r e m e n t s :
+user_prompt += f " - { req }\ n "
+user_prompt += "\ n "
+# Add required sections if provided
+if s e c t i o n s _ t o _ i n c l u d e :
+user_prompt += " MUST INCLUDE THESE SECTIONS
+:\ n "
+for section in s e c t i o n s _ t o _ i n c l u d e :
+user_prompt += f " - { section }\ n "
+user_prompt += "\ n "
+# Add sections to exclude if provided
+if s e c t i o n s _ t o _ e x c l u d e :
+user_prompt += " DO NOT INCLUDE :\ n "
+for section in s e c t i o n s _ t o _ e x c l u d e :
+user_prompt += f " - { section }\ n "
+user_prompt += "\ n "
+# Add additional context if provided
+if a d di t i on a l _c o nt e x t :
+user_prompt += f " ADDITIONAL CONTEXT :\ n {
+a dd i t io n a l_ c o nt e x t }\ n \ n "
+user_prompt += f """ Please structure the
+document logically and ensure all content
+is accurate , well - researched , and suitable
+for a professional audience .
+Begin with a title page and table of contents ,
+then proceed with the main content .{" Give
+the document a name in this EXACT format at
+the very end of the document . Make sure
+the document name does not include separate
+words , join them with '_ ' if necessary :"
+if doc_name is None else ""}
+{" DOCUMENT NAME : name " if doc_name is None else
+""}"""
+return user_prompt
+C. Test Generation System Prompt
+@staticmethod
+def g e t _ s y s t e m _ p r o m p t _ t y p e s (
+question_type : str = None ,
+n u m _ q u e s t i o n s _ p e r _ s e c t i o n : int = None
+) -> str :
+question_specs = {
+" document maximizing ": {
+" label ": " DOC_MAX " ,
+" description ": " Document Maximizing
+Questions " ,
+" rules ": [
+" Cover different sections of the
+document " ,
+" Ensure broad coverage across all
+major topics " ,
+" Each question must target a
+distinct section or topic " ,
+" Questions should require
+retrieving information from
+specific document parts "
+] ,
+" example ": " What are the three main
+components described in Section 2?"
+Ange Maiztegui, Jon Ayerdi, Miren Illarramendi, Aitor Arrieta: Preprint submitted to Elsevier Page 17 of 21

@@ -1,0 +1,134 @@
+Context branch
+preview: 1968
+top-K next-token distribution
+0.78
+0.04
+0.18
+Memory branch
+preview: 1980
+top-K next-token distribution
+0.32 0.28 0.40
+Distributional Conflict
+no intervention full intervention
+example
+Soft activation gate
+1968 1980 other
+1968 1980 other Entropy Confidence Calculation
+Branch Confidence Values
+0.46 0.02
+Faithful example
+SQuAD, truth prompt
+When was the UMC founded?
+Question
+Founded in 1968 by the union of the
+Methodist Church and the Evangelical
+United Brethren Church.
+Correct retrieved context
+Direct RAG Answer: 1968
+Factual-conflict example
+NQ-Swap, truth prompt
+Question
+Dan Stevens as Agent Malcolm Turner /
+Big Momma
+Misleading retrieved context
+Direct RAG Answer: Dan Stevens
+Who plays Big Momma in Big Momma's
+House?
+Context branch
+preview: Dan Stevens
+top-K next-token distribution
+0.76
+0.05
+0.19
+Memory branch
+preview: Martin Lawrence
+top-K next-token distribution
+0.04
+0.84
+0.12
+Dan Martin other
+Dan Martin other
+Faithful case:
+0.39 0.52
+Factual case:
+Context Preference Calculation
+Faithful case: Factual case:
+context preference = 0.91 context preference = 0.24 
+memory pullcontext pull
+scale the selected pull
+from snippet reliability
+from memory reliability
+Reliability Scaling
+Decoding Shift
+shifts decoding toward context
+shifts decoding toward memory
+Final Output
+Faithful
+1968
+Factual
+Martin Lawrence
+Token-Level CorrectionBranch Decoding
+Fig. 1: The figure illustrates two truth mode examples: a faithful QA case where the retrieved context correctly supports the
+answer, and a factual-conflict case where the retrieved context is misleading. For each case, IGD first obtains branch-level
+previews and top-K token distributions, then applies token-level correction only when the context and memory branches exhibit
+distributional conflict. The correction direction is determined by entropy-based branch confidence and the prompt-mode prior,
+while the intervention strength is scaled by the reliability of the selected source.
+is needed. Specifically, we leverage an activation gate to detect
+context-memory conflict, a confidence measurement to decide
+whether generation should move toward context or memory, and
+reliability scaling to determine the strength of the intervention.
+As a result, IGD pulls decoding toward memory when retrieved
+context is unreliable, while still pulling decoding toward context
+when the user explicitly requests faithful context following.
+Our method IGD introduces a novel decoding-time control
+layer for RAG, which shifts the focus from retrieving better
+evidence to arbitrating which knowledge source should steer
+generation. Unlike retrieval-centric methods that improve
+what or when to retrieve [13]–[15], IGD assumes retrieval
+has already occurred and addresses downstream conflict
+between retrieved context and parametric memory. Also,
+unlike context-faithfulness alignment methods that generally
+encourage stronger adherence to retrieved evidence [16], [17],
+IGD performs bidirectional trust calibration. It adapts the source
+preference according to user intent. Moreover, unlike prompt-
+based confidence reasoning or multi-agent evidence aggregation,
+IGD performs lightweight logit arbitration during generation.
+Its token-level correction is activated only when the context and
+memory branches exhibit distributional conflict, enabling local,
+conservative and intent-aware intervention without retraining
+the model or replacing the retrieval pipeline.
+Our contributions are summarized as follows. First, we
+formulate the factuality and faithfulness trade-off in RAG
+as an intent-conditioned source arbitration problem, where
+the appropriate trust policy depends on whether the user
+requests truth seeking robustness or strict context following.
+Second, we introduce IGD, a decoding-time framework that
+combines answer-level memory filtering with conservative
+token-level correction over user, context, and memory branches.
+Third, we evaluated and analysis the performance of IGD on
+three faithful benchmark settings and three factual-conflict
+benchmark settings. Fourth, we compare IGD against Direct
+RAG, confidence reasoning baselines such as SCR/RCR,
+and a multi-agent baseline in strict mode, and further test
+whether IGD preserves context-following behavior when the
+user explicitly asks to follow the provided context. Lastly, we
+release the replication package in 1.
+II. RELATED WORK
+Retrieval-augmented generation combines parametric lan-
+guage models (LM) with external evidence to improve knowl-
+edge intensive generation [1], [18]. Early and representative
+RAG systems differ in how they retrieve, encode, and consume
+evidence. Fusion-in-Decoder conditions generation on multiple
+retrieved passages and fuses evidence inside the decoder [4].
+Atlas jointly trains a retrieval-augmented model for few-shot
+knowledge intensive learning [19]. In-Context RALM shows
+that LMs can benefit from retrieved documents inserted directly
+into the prompt [20]. Recent work has made retrieval more
+adaptive, with most remaining retrieval-centric by improving
+the retriever or training retrieval-aware generators. FLARE re-
+trieves during generation based on predicted future content [13],
+Self-RAG trains models to retrieve and critique the outputs
+using reflection tokens [14], and CRAG evaluates retrieval
+quality and corrects low-confidence retrieved evidence [15].
+Other works study hallucination, contextual faithfulness, and
+knowledge conflict in RAG. RAGTruth provides a corpus to

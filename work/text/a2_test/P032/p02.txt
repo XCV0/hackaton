@@ -1,0 +1,102 @@
+2025). This makes SRMs particularly well suited
+for mitigating hallucinations in RAG pipelines.
+Moreover, most of the previous work on halluci-
+nation detection uses BERT-based classifiers (De-
+vlin et al., 2019). Although effective, these models
+do not provide justifications, making them unsuit-
+able when explainability is mandatory.
+At the same time, companies deploy custom
+RAG pipelines with team-specific knowledge (e.g.,
+finance) to improve business efficiency. In these
+settings, users must see which passages of the re-
+trieved document support or do not support a claim.
+To address this gap, we propose HalluGuard,
+an SRM for document-grounded hallucination de-
+tection in a closed-book setting. Although Hal-
+luGuard is designed to operate within Retrieval-
+Augmented Generation (RAG) pipelines, it per-
+forms post-generation verification, treating the re-
+trieved document as the only source of knowledge.
+As shown in Figure 1, given a document x and
+a claim c, HalluGuard only reasons over the con-
+tent of x to predict whether the claim is grounded
+or hallucinated, while producing an evidence-
+grounded justification by citing relevant passages
+of the document, fostering end-user trust.
+Our contributions are threefold:
+• We release HalluGuard, a 4B-parameter
+Small Reasoning Model (SRM) designed
+as a closed-book guardrail for Retrieval-
+Augmented Generation (RAG), detecting
+document-grounded hallucinations and pro-
+ducing evidence-grounded justifications.
+• We release HalluClaim, a large-scale synthetic
+dataset derived from FineWeb (Penedo et al.,
+2024) for training and evaluating document-
+based hallucination detection.
+• We demonstrate that HalluGuard achieves
+competitive performance compared to larger
+open-source and closed LLMs. Our ablation
+study highlights the role of reasoning traces,
+consensus filtering, and Odds Ratio Prefer-
+ence Optimization (ORPO) (Hong et al., 2024)
+fine-tuning in driving these gains.
+2 Related Work
+Mitigating hallucinations in LLMs has been ap-
+proached through prompt engineering, Retrieval-
+Augmented Generation, decoding strategies, su-
+pervised fine-tuning, and self-reflection (Ji et al.
+2023; Song et al. 2024; Tonmoy et al. 2024; Zhang
+et al. 2025b). Despite extensive prior work, there
+is no consensus on hallucination taxonomy, as the
+distinction between hallucination and factuality re-
+mains blurred (Wei et al. 2024; Mallen et al. 2023).
+Bang et al. (2025) proposed a conceptual separa-
+tion between intrinsic hallucination (inconsistency
+with training data), extrinsic hallucination (incon-
+sistency with the input context), and factuality (re-
+liance on world knowledge). We adopt a document-
+centric variant of this taxonomy (see Section 3).
+Several benchmarks focus on hallucination and
+factuality evaluation. LLM-AggreFact (Tang et al.,
+2024a) and AVERITEC (Schlichtkrull et al., 2023)
+provide human-annotated claims paired with evi-
+dence, while FEVEROUS (Aly et al., 2021) focuses
+on Wikipedia-based verification. In contrast, Hallu-
+Claim is derived from FineWeb, enabling coverage
+of a wider range of topics and sources.
+Fact-checking models have also been proposed
+for the detection of hallucinations. MiniCheck
+(Tang et al., 2024a) introduced a 7B model trained
+on synthetic data, highlighting the effectiveness
+of compact models. IBM’s Granite Guardian
+3.3 (Padhi et al., 2024), an 8B model, detects hal-
+lucinations in RAG settings and provides binary
+predictions with optional reasoning traces through
+hybrid thinking modes. More recently, HaluCheck
+(Pandit et al., 2025) applied curriculum-based
+Direct Preference Optimization (DPO) (Rafailov
+et al., 2023) for hallucination detection2.
+Despite these advances, existing approaches do
+not consistently produce evidence-grounded justifi-
+cations for closed-book, document-grounded hallu-
+cination detection, motivating transparent and effi-
+cient reasoning-based models at a compact scale.
+3 Problem Formulation
+We consider a closed-book setting in which the
+document x is the only source of truth to evaluate a
+claim c. Under this assumption, the task is to deter-
+mine the relationship t(x, c) between a document
+x and a claim c, which can take one of three labels:
+t(x, c) =
+
+
+
+Grounded if c is supported by x
+IntrinsicHallu if c contradicts x
+ExtrinsicHallu if c is not in x
+A claim is labeled Grounded when it is fully
+supported by the information explicitly stated in x.
+2Not publicly available at the time our study was con-
+ducted.
+16919

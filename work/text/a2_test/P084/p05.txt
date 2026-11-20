@@ -1,0 +1,96 @@
+It retrieves the most relevant card from the clus-
+tered card set C∗ as c∗ = Top1c∈C∗ sim(ϕ(q), vc),
+where vc is the embedding of the card c. The final
+response is then generated as follows.
+y = G(q, DK , c∗) (7)
+4 Experimental Settings
+4.1 Datasets
+Evaluation uses single-turn datasets that include a
+subset of anonymized transcripts from from Men-
+talChat (Xu et al., 2025a). It also uses Coun-
+selChat2 that includes real-world mental health
+question-response pairs provided by licensed ther-
+apists. Due to the zero-shot setting, the retrieval
+corpus D is the pool of therapist responses in each
+dataset’s test split, and the ground-truth document
+for a query q is the paired reference therapist re-
+sponse of q. In realistic settings, D can be all
+responses from supporters stored in a database.
+Safety cards were augmented on the training set of
+MentalChat by using GPT-4o-mini.
+Table 1: Statistics of the datasets used for evaluation.
+Dataset Train Dev Test
+MentalChat 4500 0 1810
+CounselChat 0 0 940
+4.2 Baselines
+Information retrieval The IR step uses several
+methods, including: GPT text embeddings (gpt-
+emb) (small, large, and ada), jina-embeddings-
+v3, Qwen3 text embeddings (0.6B) (Yang et al.,
+2025a). LightRAG incorporates graph structures
+into text indexing and retrieval processes (Guo
+et al., 2025b) and RAG-Anything is a unified
+framework that enables comprehensive knowledge
+retrieval across all modalities (Guo et al., 2025a).
+HyDE is a zero-shot method that prompts LLMs
+to generate a hypothetical document for retrieval
+(Gao et al., 2023). APTNESS uses Appraisal The-
+ory and emotional support strategies for empathetic
+response generation (Hu et al., 2024).
+Response generation RG uses the same IR meth-
+ods that include RG with and without safety cards.
+4.3 Evaluation Metrics
+IR uses Recall@K (K ∈ {1, 5, 10}) (Schütze
+et al., 2008). The ground-truth document for re-
+trieval is the paired therapist response d ⊂ D.
+2CounselChat Dataset
+RG uses counseling and safety scores (Xu et al.,
+2025a), and human evaluation in Section 5.2.2
+as main metrics. BLEU (Papineni et al., 2002),
+ROUGE (Lin, 2004), BERTScore (Zhang et al.,
+2019), and LM judge (Zheng et al., 2023) serve
+as a robust proxy evaluation. All experiments use
+GPT-4o-mini for RG and GPT-4.1 for LM judge.
+5 Results and Discussion
+5.1 Information Retrieval
+Table 2 indicates a generally consistent pattern:
+the incorporation of cognitive modeling, Appraisal
+Theory and CBT constructs, enhances retrieval ef-
+fectiveness across most evaluation metrics (typ-
+ically +1 to +3 R@1 points) compared to ap-
+proaches relying on semantic similarity only (par-
+wise t-test of the best method with baseline). This
+is consistent with the view that semantic match-
+ing alone may not adequately capture the latent in-
+tent and lexical asymmetry embedded within user
+queries in conversational mental health support. By
+explicitly modeling cognitive appraisals and CBT-
+style reframing, the retrieval process better aligns
+user intents with appropriate counseling knowledge
+that bridges the lexical gap of standard embedding
+models in mental health domains (Scherer et al.,
+2001; Beck, 2020). The performance of our method
+is significantly better than HyDE (p−values ≤ 0.05
+with 95% CIs). Because HyDE applies a single,
+asymmetric LLM rewrite to the query only and
+without structural cognitive priors, the +3–6 R@1
+gap between HyDE and our pipeline (with the same
+gpt-embed-3-large encoder) is consistent with the
+contribution of (i) symmetric prompt projection ap-
+plied to both q and d and (ii) the appraisal/CBT
+structure of the prompts, rather than the LLM-
+rewriting effect alone. Standard semantic embed-
+dings (gpt-3-small or ada-002) with cognitive fac-
+tors can yield competitive results to LightRAG or
+RAG-Anything that operates purely on semantic
+signals (Guo et al., 2025b,a). This suggests that
+cognitive factors offer a complementary signal to
+graph- or multi-source semantic retrieval, rather
+than a substitute for stronger semantic encoders.
+5.2 Response Generation
+5.2.1 Automatic Evaluation
+Counseling Quality We used seven counseling
+metrics (score 1-10) judged by LLMs (Xu et al.,
+2025a). They are Active Listening (AL), Empathy
+& Validation (EV), Safety & Trustworthiness (ST),
+13804

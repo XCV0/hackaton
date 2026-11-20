@@ -1,0 +1,95 @@
+TABLE II: Strict context following prompt. Factual-conflict benchmarks are evaluated by context accuracy, testing whether IGD
+preserves user intent when the user explicitly asks to follow the provided context.
+Model Method IA Faithful benchmarks Factual-conflict benchmarks
+KILT-NQ TriviaQA SQuAD ConflictBank NQ-Swap CounterFact
+Qwen3-32B Direct RAG 83.0 72.6 89.4 91.0 83.2 63.0 99.0
+IGD 84.3 69.4 ↓ 3.2 86.8 ↓ 2.6 90.0 ↓ 1.0 87.2 ↑ 4.0 72.5 ↑ 9.5 99.6 ↑ 0.6
+Qwen2.5-14B Direct RAG 84.2 74.6 89.2 94.0 84.4 63.0 100.0
+IGD 88.1 76.4 ↑ 1.8 88.6 ↓ 0.6 93.6 ↓ 0.4 89.2 ↑ 4.8 81.0 ↑ 18.0 100.0 ↔ 0.0
+Llama-3-8B Direct RAG 80.8 73.0 88.0 88.4 85.4 50.0 99.8
+IGD 82.0 71.0 ↓ 2.0 86.4 ↓ 1.6 87.6 ↓ 0.8 88.0 ↑ 2.6 59.0 ↑ 9.0 100.0 ↑ 0.2
+Mistral-7B Direct RAG 77.1 64.0 79.6 80.8 82.6 59.5 96.0
+IGD 77.6 60.6 ↓ 3.4 79.2 ↓ 0.4 82.0 ↑ 1.2 84.4 ↑ 1.8 62.5 ↑ 3.0 97.0 ↑ 1.0
+Phi-4 14B Direct RAG 81.3 73.2 84.0 86.6 82.4 63.0 98.4
+IGD 82.5 71.6 ↓ 1.6 83.2 ↓ 0.8 87.0 ↑ 0.4 85.6 ↑ 3.2 68.5 ↑ 5.5 99.2 ↑ 0.8
+weaker recovery. This indicates that IGD’s factual correction is
+bounded by both the model’s accessible parametric knowledge
+and the reliability of the memory branch. The pattern in
+Figure 2 therefore reinforces the interpretation that IGD is
+not hallucinating new facts, but recovering parametric answers
+that are otherwise suppressed by misleading context.
+b) Strict mode: preserving context-following intent:
+Table II evaluates the complementary setting: the user explicitly
+asks the model to follow the provided context. In this mode,
+factual-conflict benchmarks are evaluated by context accuracy
+rather than world accuracy, because the desired behavior is
+to follow the supplied evidence even when it conflicts with
+world knowledge. Since the external baselines in Table I are
+designed primarily for truth-seeking or correctness-oriented
+source selection, we keep the strict-mode comparison focused
+on Direct RAG and IGD.
+The results show that IGD preserves, and in many cases im-
+proves, strict context-following behavior. These strict prompt’s
+mode results are central to the claim that IGD balances
+factuality and faithfulness rather than optimizing only one side
+of the trade-off [12]. A method that simply discounts retrieved
+context would improve truth mode factual accuracy but damage
+strict context following [16], [17]. In contrast, IGD uses the
+prompt mode to determine the direction of intervention: under
+truth-seeking prompts it can pull decoding toward memory,
+while under strict context-following prompts it preserves or
+strengthens context guided decoding.
+VI. FACTUALITY AND FAITHFULNESS TRADE-OFF
+We further analyze how IGD balances factual recovery
+and context faithfulness through component ablations and
+hyperparameter sensitivity. This analysis is motivated by
+the central tension in RAG, stronger reliance on parametric
+memory can recover world answers but may undermine strict
+context following [7], [8]. We conduct ablations on Qwen2.5-
+14B-Instruct over the same six-benchmark suite used in the
+main experiments, reporting macro averaged results over
+the three faithful benchmarks and the three factual-conflict
+TABLE III: Core ablations of IGD on Qwen2.5-14B. Values are
+macro-averaged percentages over the three faithful benchmarks
+and the three factual-conflict benchmarks. Shaded cells mark
+notable changes relative to IGD full: light red indicates drops
+of roughly 3–10 percentage points, darker red indicates drops
+larger than 10 points, and light green indicates improvements
+over IGD full.
+Variant Removed / changed component Strict mode Truth mode
+Faithful
+Gold
+Factual
+Ctx
+Faithful
+Gold
+Factual
+World
+IGD full none 86.2 90.1 81.4 73.7
+w/o Answer Filter answer-level memory filter 85.8 86.0 81.3 63.0
+w/o Token Correction token-level correction 86.9 83.1 82.7 52.8
+w/o Activation Gate JSD conflict gate 85.9 86.2 77.5 70.5
+w/o Mode Prior instruction-mode prior 86.6 83.4 82.7 63.1
+w/o Reliability Gate qctx /qmem scaling 85.0 85.5 76.1 68.6
+Single Memory View memory ensemble 86.1 85.8 85.5 54.5
+benchmarks. Table III ablates six core components of IGD: the
+answer level memory filter, token-level correction, activation
+gate, instruction-mode prior, reliability scaling, and memory
+ensemble, we choose these ablations because each component
+directly affects the trade-off rather than merely changing
+implementation details.
+Table III shows that IGD’s gains arise from coordinated
+source arbitration rather than a single heuristic. Removing
+token-level correction causes the largest degradation, reducing
+truth-mode factual world accuracy from 73.7 to 52.8 and
+strict-mode factual context accuracy from 90.1 to 83.1. This
+indicates that token-level correction is not merely a memory
+side intervention, but the main mechanism for steering: it
+pulls decoding toward memory under misleading context while
+preserving context-following behavior when required. The
+answer-level memory filter provides a complementary high
+precision route for stable factual-conflict cases; removing it
+drops factual world accuracy to 63.0 while leaving faithful accu-
+racy nearly unchanged, suggesting that the filter is conservative
+enough not to disrupt ordinary context-grounded QA. The
+remaining ablations explain how IGD avoids over-intervention,

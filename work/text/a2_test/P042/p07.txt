@@ -1,0 +1,116 @@
+722
+litical_locales) to a figure with particular impact in
+Europe (frame Objective_influence). The Military
+frame, which refers to any person, organization or
+country controlling an armed group, remains con-
+stantbetweenthetwosettingsindicatingthatarmed
+forces are a core aspect of the image of Napoleon
+in the selected time period. For the augmented
+answers, the frames Evidence, Documents and
+Statement are the most frequent in all languages,
+which is expected.
+Baseline Augmented
+EN FR NL EN FR NL
+Attributed_information - - - - 190 -
+Being_in_control - - - 162 - -
+Categorization 185 149 194 130 242 -
+Causation 343 227 303 - - 337
+Change_of_leadership 193 - - - - -
+Documents - - - 309 282 -
+Economy 186 176 - - - 246
+Emotion_directed - - - 146 - -
+Evidence - - - 220 168 219
+Exchange - - - - - 205
+Hostile_encounter 336 237 414 - 204 282
+Importance - - 171 - - -
+Intentionally_create 220 248 178 - - -
+Leadership 1067 702 1102 926 630 843
+Military 312 284 263 255 290 214
+Objective_influence 369 270 330 457 279 349
+Political_locales 636 583 646 297 488 484
+Statement - - - 292 253 195
+Temporal_collocation - 150 222 - - -
+Table 6: Counts of top ten most occurring frames
+per language. No counts displayed signifies that
+the frames were not in top ten for that language.
+Figure 5 shows the frames with the largest dif-
+ferences between the two settings (delta counts,
+baseline−augmented) of the frames in all an-
+swers. As expected, the Evidence frame appears
+most frequently in the augmented answers, indi-
+cating that the RAG approach actively draws on
+the retrieved document chunks. However, manual
+inspection reveals that this frame is also invoked
+when the models deem the retrieved material insuf-
+ficient to provide adequate “evidence” for answer-
+ing the question, as showcased in Table 2 for En-
+glish. Thisresultisalsoinlinewithourobservations
+fromtheanalysisofthesemanticsimilaritybetween
+the retrieved document chunks and the answers
+(Table 5 in Section 4.1). For English, the aug-
+mented answers shift away from frames describ-
+ingcausation(Causation), leadership(Leadership),
+creation (Intentionally_create), political locations
+(Political_locales), economy (Economy), trade (Ex-
+change), and wars (Hostile_encounter). Instead,
+they more frequently evoke frames related to docu-
+ments (Documents), evidence (Evidence), attribut-
+ing propositions (Attributed_information, State-
+ment), and influence (Importance). In Dutch,
+the augmented answers tend to focus more on
+purpose (Purpose), documents (Documents), evi-
+dence (Evidence), and trading (Exchange) rather
+than describing wars (Hostile_encounter), lead-
+ership (Leadership, Change_of_leadership) and
+political locations (Political_locales). In French,
+they shift from discussing economy, political lo-
+cations, and intentional creation to emphasizing
+supply (Supply), risk (Risky_situation), attributed
+propositions, documents, evidence, and trade.
+Across languages, we observe that baseline
+answers consistently presents a “flattened”
+perspective on Napoleon with minimal differ-
+ences across the three languages, suggesting
+a lack of cross-lingual variation in the para-
+metric knowledge. On the other hand, we ob-
+serve a consistent shift from event-oriented frames
+(Leadership, Causation, Political_locales, Hos-
+tile_encounter) emphasizing Napoleon’s ruling and
+war campaigns in baseline to frames introduc-
+ing referential perspectives (Documents, Evidence,
+Attributed_information, Purpose) in augmented
+which emphasize perspective variation.
+We further examine the frames in the aug-
+mented answersandtheircorrespondingretrieved
+document chunks to assess to what extent they
+overlap in content and perspectives, as proxied by
+the frames. The document chunks were translated
+to English using DeepL for French and Dutch. For
+each language, we extracted the top five frames
+from the relevant document chunks for each ques-
+tion. We then checked their overlap with the gen-
+erated answers from the augmented setting. Re-
+sults are presented in Table 7. As shown in the
+figures, the frame overlap aligns closely with the
+counts reported in Table 6 for the augmented an-
+swers,confirmingthattheseanswersprimarilydraw
+on the retrieved document chunks rather than rely-
+ing on the model’s parametric knowledge.
+EN FR NL
+Causation - 57 39
+Economy - 61 37
+Exchange 30 59 -
+Hostile_encounter 42 70 60
+Leadership 75 - -
+Objective_influence 36 66 63
+Political_locales 67 - 35
+Table 7: Counts of top five most occurring frames
+per language for retrieved documents. No counts
+displayed signifies that the frames were not in top
+ten for that language.
+As a sanity check to validate the reliability of the
+observations between frames and the untranslated
+augmented answers, we have run a multi-lingual
+topic model. In this case, we used the original an-
+swers in the three languages. Table 8 shows the
+delta counts (baseline−augmented) of the first

@@ -1,0 +1,54 @@
+Nanomaterials 2022, 12, 2507 5 of 16
+Table 1. Average and RMS roughness of each ﬁlm calculated from AFM topography.
+Film Average Roughness (nm) RMS Roughness (nm)
+CBD-CdS 33.60 8.42
+CSS-CdTe 114.30 25.32
+TE-CuI 87.00 18.72
+The chemical-bath-deposited CdS surface has low roughness of 33.60 nm (RMS of
+8.42 nm). This was further evidence for higher transmission of the CdS layer due to the
+lower light scattering. As the roughness of the CdS window layer, as shown in Figure 2a,
+is low, it makes an ideal substrate for the CSS- CdTe absorber layer. The closed-space
+sublimated CdTe ﬁlm, as shown in Figure 2b, has a roughness of 114.30 nm (RMS of
+25.32 nm). The grain size of the CdTe layer also makes it an ideal substrate for the CuI layer
+and thermally evaporated CuI on the CdTe surface, as shown in Figure 2c, has a roughness
+of 87 nm (RMS of 18.72 nm). Since thermally evaporated CuI particles uniformly covered
+the CdTe surface without any pinholes, it provides good electrical contact with Au.
+3.2. Opto-Electrical Characterization
+The electrical resistivity of the thermally evaporated CuI ﬁlm was measured by using
+the four-point probe measurement technique (FPP) [49], which is shown schematically in
+Figure 3. To perform the measurement, a DC current I was passed through the outer probes
+and the potential difference V between the inner probes was measured.
+Nanomaterials 2022, 12, x FOR PEER REVIEW 5 of 16 
+ 
+ 
+ 
+(a) 
+ 
+(b) 
+ 
+(c) 
+Figure 2. 3D and 2D AFM images of ( a) CBD-CdS; ( b) CdS/CSS-CdTe, and ( c) CdS/CdTe/TE-CuI 
+film. 
+3.2. Opto-Elctrical Characterization 
+The electrical resistivity of the thermally evaporated CuI film was measured by using 
+the four-point probe measurement technique (FPP) [49], which is shown schematically in 
+Figure 3. To perform the measurement, a DC current 𝐼 was passed through the outer 
+probes and the potential difference 𝑉 between the inner probes was measured. 
+ 
+Figure 3. Schematic diagram of the four-point probe technique.
+When the probe distance d is much larger than the film thickness, t, sheet resistance,
+RS (in Ω/sq), and resistivity, ρ (in Ωcm), can be determined from Equations (2) and (3):
+RS = π ln2 V I ≈ 4.53V I (2)
+and
+ρ = RS.t (3)
+The sheet resistance and resistivity of fabricated CuI were measured as 19.856 kΩ/sq
+and 0.20 Ωcm, respectively (Figure S2), at room temperature, which agrees with the litera-
+ture value of thermally evaporated CuI ﬁlms [38].
+Figure 4 shows the Tauc plot of (αhν)2 versus hν of the thermally evaporated CuI ﬁlm,
+where α is the absorption coefﬁcient, and h and ν are the Planck constant and photon fre-
+quency, respectively. The inset shows the absorption spectrum of the thermally evaporated
+CuI ﬁlm. The bandgap of the CuI thin ﬁlm can be calculated by Equation (4).
+αhν = A
+(
+hν − Eg
+)1/2 (4)

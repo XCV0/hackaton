@@ -1,0 +1,108 @@
+beams of triples that link multi-hop contexts. Our
+experiments reveal that this strategy improves over
+more naive implementations, demonstrating the
+LLM’s capability to guide the exploration of initial
+nodes for graph expansion. Furthermore, GEAR
+utilises multi-hop contexts returned by SyncGE and
+constructs a gist memory which is used for effec-
+tively summarising information across iterations.
+GEAR achieves superior performance compared to
+other multi-step retrieval methods while requiring
+fewer iterations and LLM tokens.
+Limitations
+The scope of this paper is limited to retrieval using
+a graph of triples that bridge corresponding pas-
+sages. While we demonstrate the effectiveness of
+our graph expansion approach and GEAR, several
+components could be further refined. More so-
+phisticated graph construction methods addressing
+challenges such as entity disambiguation (Dredze
+et al., 2010) and knowledge graph completion (Lin
+et al., 2015) may yield further improvements, as
+discussed in Appendix E. Similarly, our choice of a
+dense embedding model for the scoring function in
+the diverse triple beam search could be replaced by
+alternatives, such as formulating this as a natural
+language inference task (Wang et al., 2021).
+Beyond the core graph and scoring mecha-
+nisms, our design choices for other agent com-
+ponents—such as the gist memory, reasoner, and
+query rewriter—adopt commonly validated prac-
+tices from prior research (Trivedi et al., 2022; Li
+et al., 2024; Fang et al., 2024). While effective,
+exploring more sophisticated designs specifically
+tailored for these functions presents an opportunity
+for future performance gains.
+References
+Howard Chen, Ramakanth Pasunuru, Jason Weston, and
+Asli Celikyilmaz. 2023. Walking down the mem-
+ory maze: Beyond context limit through interactive
+reading. Preprint, arXiv:2310.05029.
+Gordon V. Cormack, Charles L A Clarke, and Stefan
+Buettcher. 2009. Reciprocal rank fusion outperforms
+condorcet and individual rank learning methods. In
+Proceedings of the 32nd International ACM SIGIR
+Conference on Research and Development in Infor-
+mation Retrieval, SIGIR ’09, page 758–759, New
+York, NY, USA. Association for Computing Machin-
+ery.
+Yiran Ding, Li Lyna Zhang, Chengruidong Zhang,
+Yuanyuan Xu, Ning Shang, Jiahang Xu, Fan Yang,
+and Mao Yang. 2024. LongRoPE: Extending LLM
+context window beyond 2 million tokens. In Proceed-
+ings of the 41st International Conference on Machine
+Learning, volume 235 of Proceedings of Machine
+Learning Research, pages 11091–11104. PMLR.
+Mark Dredze, Paul McNamee, Delip Rao, Adam Ger-
+ber, and Tim Finin. 2010. Entity disambiguation
+for knowledge base population. In Proceedings of
+the 23rd International Conference on Computational
+Linguistics (Coling 2010), pages 277–285, Beijing,
+China. Coling 2010 Organizing Committee.
+Marina Drosou and Evaggelia Pitoura. 2010. Search
+result diversification. SIGMOD Rec., 39(1):41–47.
+Darren Edge, Ha Trinh, Newman Cheng, Joshua
+Bradley, Alex Chao, Apurva Mody, Steven Truitt,
+and Jonathan Larson. 2024. From local to global: A
+graph RAG approach to query-focused summariza-
+tion.
+Jinyuan Fang, Zaiqiao Meng, and Craig MacDon-
+ald. 2024. TRACE the evidence: Constructing
+knowledge-grounded reasoning chains for retrieval-
+augmented generation. In Findings of the Association
+for Computational Linguistics: EMNLP 2024, pages
+8472–8494, Miami, Florida, USA. Association for
+Computational Linguistics.
+Benjamin J. Griffiths, George Parish, Frederic Roux,
+Sebastian Michelmann, Mircea van der Plas, Luca D.
+Kolibius, Ramesh Chelvarajah, David T. Rollings, Vi-
+jay Sawlani, Hajo Hamer, Stephanie Gollwitzer, Ger-
+not Kreiselmeyer, Bernhard Staresina, Maria Wimber,
+and Simon Hanslmayr. 2019. Directional coupling of
+slow and fast hippocampal gamma with neocortical
+alpha/beta oscillations in human episodic memory.
+Proceedings of the National Academy of Sciences,
+116(43):21834–21842.
+Bernal Jimenez Gutierrez, Yiheng Shu, Yu Gu, Michi-
+hiro Yasunaga, and Yu Su. 2024. HippoRAG: Neu-
+robiologically inspired long-term memory for large
+language models. In The Thirty-eighth Annual Con-
+ference on Neural Information Processing Systems.
+Simon Hanslmayr, Bernhard P. Staresina, and Howard
+Bowman. 2016. Oscillations and episodic memory:
+Addressing the synchronization/desynchronization
+conundrum. Trends in Neurosciences, 39(1):16–25.
+Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara,
+and Akiko Aizawa. 2020. Constructing a multi-
+hop QA dataset for comprehensive evaluation of
+reasoning steps. In Proceedings of the 28th Inter-
+national Conference on Computational Linguistics,
+pages 6609–6625, Barcelona, Spain (Online). Inter-
+national Committee on Computational Linguistics.
+Pere-Lluís Huguet Cabot and Roberto Navigli. 2021.
+REBEL: Relation extraction by end-to-end language
+generation. In Findings of the Association for Com-
+putational Linguistics: EMNLP 2021, pages 2370–
+2381, Punta Cana, Dominican Republic. Association
+for Computational Linguistics.
+12057

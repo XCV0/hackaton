@@ -1,0 +1,106 @@
+LLM-Specific Utility for Retrieval-Augmented Generation
+Hengran Zhang
+State Key Laboratory of AI Safety
+Institute of Computing Technology,
+Chinese Academy of Sciences
+University of Chinese Academy of
+Sciences
+Beijing, China
+zhanghengran22z@ict.ac.cn
+Keping Bi∗
+State Key Laboratory of AI Safety
+Institute of Computing Technology,
+Chinese Academy of Sciences
+University of Chinese Academy of
+Sciences
+Beijing, China
+bikeping@ict.ac.cn
+Jiafeng Guo∗
+State Key Laboratory of AI Safety
+Institute of Computing Technology,
+Chinese Academy of Sciences
+University of Chinese Academy of
+Sciences
+Beijing, China
+guojiafeng@ict.ac.cn
+Jiaming Zhang
+Shuaiqiang Wang
+Dawei Yin
+Baidu Inc
+Beijing, China
+zhangjiaming04@baidu.com
+wangshuaiqiang@baidu.com
+yindawei@acm.org
+Xueqi Cheng
+State Key Laboratory of AI Safety
+Institute of Computing Technology,
+Chinese Academy of Sciences
+University of Chinese Academy of
+Sciences
+Beijing, China
+cxq@ict.ac.cn
+Abstract
+Retrieval-augmented generation (RAG) is typically optimized for
+topical relevance, yet its success ultimately depends on whether
+retrieved passages are useful for a large language model (LLM) to
+generate correct and complete answers. We argue that such utility
+is often LLM-specific rather than universal, due to differences in
+models’ knowledge, reasoning, and ability to leverage evidence.
+We formalize LLM-specific utility as the performance improve-
+ment of a target LLM when a passage is provided, compared to
+answering without evidence. To systematically study LLM-specific
+utility, we construct a benchmark of LLM-specific gold utilitarian
+passages for four LLMs (Qwen3-8B/14B/32B and Llama 3.1-8B) on
+six QA datasets (Natural Questions, TriviaQA, MS MARCO-FQA,
+HotpotQA, FEVER and 2WikiQA). Our analysis shows that utili-
+tarian passages are model-dependent and non-transferable: each
+LLM performs best with its own utilitarian evidence, while evi-
+dence optimized for other LLMs is consistently suboptimal. Human-
+annotated evidence remains a strong general baseline but does not
+fully match individual LLM utility needs. We further introduce the
+LLM-specific utility judgment task and construct the corresponding
+benchmark, i.e., SpecUBench (LLM-Specific Utility Benchmark).
+Experiments show that existing utility-aware selection and scoring
+methods largely capture model-agnostic usefulness and struggle to
+reliably estimate LLM-specific utility. Overall, our findings high-
+light the limitations of current utility-aware retrieval and moti-
+vate generator-tailored evidence selection for improving RAG. Our
+∗Keping Bi and Jiafeng Guo are the corresponding authors.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+CIKM ’26, November 07–11, 2026, Rome, Italy
+© 2026 Copyright held by the owner/author(s).
+ACM ISBN 979-8-4007-2539-5/2026/11
+https://doi.org/10.1145/3799682.3840666
+code and datasets can be found at https://github.com/Trustworthy-
+Information-Access/LLM_specific_utility.
+CCS Concepts
+• Information systems → Learning to rank; Novelty in infor-
+mation retrieval.
+Keywords
+Retrieval-Augmented Generation, Utility, LLM-Specific Utility
+ACM Reference Format:
+Hengran Zhang, Keping Bi, Jiafeng Guo, Jiaming Zhang, Shuaiqiang Wang,
+Dawei Yin, and Xueqi Cheng. 2026. LLM-Specific Utility for Retrieval-
+Augmented Generation. In Proceedings of the 35th ACM International Con-
+ference on Information and Knowledge Management (CIKM ’26), Novem-
+ber 07–11, 2026, Rome, Italy. ACM, New York, NY, USA, 12 pages. https:
+//doi.org/10.1145/3799682.3840666
+1 Introduction
+Retrieval-augmented generation (RAG) enhances large language
+models (LLMs) by grounding generation in external evidence. While
+retrieval is traditionally optimized for topical relevance—i.e., whether
+a passage matches the query in content [32, 33]—RAG ultimately
+succeeds or fails based on a different criterion: whether the re-
+trieved evidence is useful for the LLM to produce an accurate and
+comprehensive answer [49, 53]. In practice, passages that appear
+relevant to humans may not be effectively leveraged by an LLM,
+and conversely, passages that are not ranked highly by relevance-
+driven retrieval may still substantially improve generation [50].
+This exposes a fundamental gap between classic retrieval objectives
+and downstream LLM generation objectives.
+This gap can be naturally understood through the lens of utility,
+a concept that has long been emphasized in web search and inter-
+active information retrieval [22, 30–32, 47]. In web search, the goal
+is not merely to return relevant documents, but to provide results
+arXiv:2510.11358v4  [cs.CL]  27 Aug 2026

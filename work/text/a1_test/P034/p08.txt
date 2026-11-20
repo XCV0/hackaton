@@ -1,0 +1,97 @@
+Nanomaterials 2022, 12, 2507 8 of 16
+Based on the XPS measurements, the valance band offset value of ∆EV at the CdTe/CuI
+interface was calculated to be 0.25 eV. Further, the conduction band offset ∆EC at the
+CdTe/CuI interface can be found from Equation (5):
+∆EC = ∆EV + ECuI g − ECdTe g (5)
+where ECuI g and ECdTe g are the optical band gap values of CuI and CdTe, respectively. The
+calculated ∆EC was 1.76 eV. The small valence band offset between CdTe and CuI (∆EV)
+enhances the hole transport from CSS-CdTe to TE-CuI without any barrier. The large
+conduction band offset between CdTe and CuI (∆EC) with a value of 1.76 eV indicates that
+the CuI can act as an electron-blocking layer, which helps repel electron transport from the
+Au back contact and also reduce carrier recombination. The chemical structure of CdTe
+was preserved, even after CuI deposition, conﬁrming the effectiveness of the fabrication
+process of CdTe and CuI layers.
+3.3. Current-Voltage (J–V) Characteristics of CdS/CdTe Thin-Film Solar Cells
+The current-voltage characteristic curves of CBD-CdS/CSS-CdTe solar cells with
+different thicknesses of the CuI hole transport layer are shown in Figure 7. The ﬁgure clearly
+indicates that the thermally evaporated CuI thickness can remarkably inﬂuence CdS/CdTe
+device performance. The corresponding photovoltaic parameters are summarized in
+Figure 8. It is found that the roll-over phenomenon in J–V characteristics was less prominent
+when the thickness of the hole-transporter was reduced, as reported elsewhere [57]. In the
+literature, the roll-over is most frequently explained by the back contact barrier [58–61] and
+the photo-conducting properties of the n-CdS window layer [62,63].
+Nanomaterials 2022, 12, x FOR PEER REVIEW 9 of 16 
+ 
+ 
+ 
+Figure 7. J–V characteristic curves of CBD-CdS/CSS-CdTe solar cells (without CdCl2 treatment) with 
+CuI with thicknesses of 5, 10, 15, 20, 25, and 30 nm. 
+The short circuit current density is influenced by the series resistance (RS), which in-
+creases with CuI thickness due to the high re sistivity in the thicker CuI layer preventing 
+the carrier transport. The devices with 10nm of CuI thickness deliver the best performance 
+due to the lowest RS and largely improved JSC, RSH, and FF, compared to those devices with 
+lower and higher thicknesses. This is mainly due to the higher hole concentration in CdTe. 
+Higher hole concentration can boos t a higher build-in potential (V bi) and lead to less re-
+combination in the depletion region and at the front interface, thereby resulting in larger 
+FF, which can be further confirmed through an improvement in the shunt resistance (RSH). 
+Roussillon et al. also suggested that the back  contact barrier on the properties of CdTe 
+solar cells depend on the space charge region  in the main CBD-CdS/CSS-CdTe junction 
+and the space charge region in the back co ntact may overlap, depending on the barrier 
+height of the back contact [64]. Thus, the changed band diagram affects the collection and 
+recombination of the carriers significantly. Accompanied by the variation in the CuI thick-
+ness, the shunt resistance gradually increases from 404 Ωcm2 for 5 nm to 994 Ωcm2 for 10 
+nm thickness of CuI. When the thickness of  CuI was further increased to 30 nm, the R SH 
+decreases to 186 Ωcm2. The JSC also shows a similar trend as the FF and the shunt resistance 
+with the CuI hole-transport layer thickness. A similar trend was observed in a reported 
+study [65]. 
+The measured photovoltaic performances of  the fabricated devices instantly after 
+fabrication and after one month for devices with 10 nm Cu/Au bi-metal and CuI/Au back 
+contacts are shown in Figure 9 and Table 2. Insertion of a CuI hole transport layer instead 
+of Cu demonstrated a significant increase  in the PCE due to improvement in the J SC, FF, 
+and RSH. However, VOC in the device with Cu/Au is higher than that in the device with 
+CuI/Au back contact due to carrier density increment in the CdTe absorber by involving 
+CuXTe through the diffusion of Cu, which is clearly described in previous studies [66–68]. 
+VOC is given by Equation (6) [69] and can be confirmed by the dark J–V characteristic curve 
+shown in Figure 9b. 
+𝑉ை஼ =
+௡௞்
+௤ ln ቀ
+௃ೄ಴
+௃బ
+−1ቁ  (6) 
+where 𝐽଴ is the saturation current density, 𝐽ௌ஼ is the short-circuit current density, 𝑛 is 
+the diode ideality factor, 𝑞 is the electronic charge, while 𝑘 and 𝑇 are Boltzmann con-
+stant and absolute temperature, respectively. CBD-CdS/CSS-CdTe devices with Cu/Au 
+and CuI/Au back contacts exhibit dark saturation current densities of 3.5 × 10−9 A/cm2 and 
+1.5 × 10−7 A/cm2, respectively. This means the dark saturation current density in the device 
+-0.2 0.0 0.2 0.4 0.6
+-100
+-75
+-50
+-25
+0
+25
+-0.1 0.0 0.1 0.2 0.3 0.4-10
+0
+10
+20
+ 
+ 
+Current density (mA/cm
+2
+)
+Voltage (V)
+20 nm
+30 nm
+15 nm
+25 nm
+10 nm
+5 nm
+Current density (mA/cm
+2
+)
+Voltage (V)
+Roll-over
+phenomenon
+Figure 7. J–V characteristic curves of CBD-CdS/CSS-CdTe solar cells (without CdCl2 treatment) with
+CuI with thicknesses of 5, 10, 15, 20, 25, and 30 nm.

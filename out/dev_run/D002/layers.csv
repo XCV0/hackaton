@@ -1,0 +1,12 @@
+publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D002,DV-NiO-L1,DV-NiO,1,front_contact,FTO,,,,,,,FTO glass substrate
+D002,DV-NiO-L2,DV-NiO,2,HTL,NiO,,,spin-coating 1000 rpm 45 s,,,,single NiO HTL; annealing for control not stated separately
+D002,DV-NiO-L3,DV-NiO,3,absorber,CH3NH3PbI3,,,"spin-coating PbI2 then CH3NH3I solution, 1000 rpm 30 s each",100 °C,3 min,,
+D002,DV-NiO-L4,DV-NiO,4,ETL,ZnO,,,spin-coating 1000 rpm 30 s,100 °C,3 min,,ZnO nanoparticles
+D002,DV-NiO-L5,DV-NiO,5,back_contact,Ag,100,nm,"thermal evaporation, 1e-6 mbar",,,,
+D002,DV-NiOGO-L1,DV-NiOGO,1,front_contact,FTO,,,,,,,FTO glass substrate
+D002,DV-NiOGO-L2,DV-NiOGO,2,HTL,NiO,,,spin-coating 1000 rpm 45 s,200 °C,1 h,,annealing 200 °C 1 h after GO step (NiO/GO device)
+D002,DV-NiOGO-L3,DV-NiOGO,3,HTL,GO,,,spin-coating 1000 rpm 30 s,200 °C,1 h,,modified Hummers GO
+D002,DV-NiOGO-L4,DV-NiOGO,4,absorber,CH3NH3PbI3,,,"spin-coating PbI2 then CH3NH3I solution, 1000 rpm 30 s each",100 °C,3 min,,
+D002,DV-NiOGO-L5,DV-NiOGO,5,ETL,ZnO,,,spin-coating 1000 rpm 30 s,100 °C,3 min,,ZnO nanoparticles
+D002,DV-NiOGO-L6,DV-NiOGO,6,back_contact,Ag,100,nm,"thermal evaporation, 1e-6 mbar",,,,

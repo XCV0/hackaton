@@ -1,0 +1,64 @@
+397
+[Instruction]
+Please act as an impartial judge and evaluate the 
+quality of the response provided by an AI assistant to 
+the user question displayed below. Your evaluation 
+should consider factors such as the helpfulness, 
+relevance, accuracy, depth, and level of detail of the 
+response. Begin your evaluation by providing a short 
+explanation. Be as objective as possible. After 
+providing your explanation, you must rate the response 
+on a scale of 1 to 10 by strictly following this 
+format: "[[rating]]",
+for example: "Rating: [[5]]".       
+[Question]
+{{QUERY}}
+[The Start of Assistant's Answer]
+{{RESPONSE}}
+[The End of Assistant's Answer]
+Relevancy  Judge LLM Prompt
+Figure 7: LLM Prompt for Query-Response Relevance
+Judge: Rating from 1 to 10 for the response to a given
+query, following the prompt in (Zheng et al., 2024).
+Your task is to judge the faithfulness of a series of 
+statements based on a given context. For each statement 
+you must return verdict as 1 if the statement can be 
+directly inferred based on the context or 0 if the 
+statement can not be directly inferred based on the 
+context. Let's think step by step.
+Context: {{DOCUMENTS}}
+Statements: {{RESPONSE STATEMENTS}}
+You must respond in the following format:
+   ```
+   {{
+  "statement_i": "$YOUR_STATEMENT_i_HERE",
+  "reason_i": "$YOUR_REASONING_HERE",
+  "verdict_i": "$YOUR_VERDICT_HERE",
+    }}
+   ```
+Everything between the ``` must be valid json. 
+Faithfulness Judge LLM Prompt
+Figure 8: LLM Prompt for Response Faithfulness Judge:
+Binary rating for inferring each response statement from
+query’s golden documents, following the prompt in (Es
+et al., 2023).
+[System]
+Federated search retrieves information from a variety 
+of sources via a search application built on top of one 
+or more search domains. A user makes a single query 
+request. The federated search then selects only the 
+search domains that the query should be sent to from a 
+list of domains, and aggregates the result for 
+presentation of high-quality result to the user. The 
+task is called resource selection.
+The following is a real user query:
+Query: {{QUERY}} 
+The following are some context from this search domain, 
+providing an overview of the domain: 
+Domain Context: {{DOMAIN CONTEXT}} 
+Now, please reply only 'Yes' or ‘No' to indicate if the 
+query should be sent to the search domain. 
+LFS Resource Selection LLM Prompt
+Figure 9: LLM Prompt for Resource Selection step in
+the LFS baseline, following the prompt in (Wang et al.,
+2024b).

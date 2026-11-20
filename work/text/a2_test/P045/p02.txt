@@ -1,0 +1,101 @@
+metric and external retrieved knowledge, leading
+to incorrect responses. As shown in Figure 1, for
+the aircraft’s first flight date, introducing noisy re-
+trieval information (August 29, 1970) overrides the
+model’s reliable parametric knowledge (December
+20, 1957). Second, Visual-Textual Knowledge In-
+consistency (VTKI). Since each modality captures
+different aspects of entity representation (Li et al.,
+2023a), retrieved images and textual documents
+often provide non-overlapping and misaligned in-
+formation. For instance, an image may visually
+relate to the query while its paired text describes
+a different aspect or interpretation. These incon-
+sistencies disrupt knowledge integration, making it
+difficult for the model to determine which informa-
+tion to prioritize.
+To address the above-mentioned challenges, we
+propose Cross-source knowledge Reconciliation
+for MultiModal RAG (CoRe-MMRAG), a novel
+end-to-end framework designed to mitigate the in-
+consistencies between different knowledge sources.
+CoRe-MMRAG follows a four-stage pipeline: it
+first generates an initial response using only the
+model’s internal knowledge, then performs joint
+similarity assessment to select the most relevant
+multimodal evidence, followed by generating a
+response grounded in the retrieved content, and
+finally integrates both sources to produce a coher-
+ent and reliable answer. This structured process
+enables the model to effectively reconcile diverse
+knowledge inputs and leverage complementary in-
+formation from multiple modalities.
+To further enhance knowledge reconciliation,
+CoRe-MMRAG incorporates a specialized train-
+ing paradigm with three key objectives: knowl-
+edge source selection that learns to identify the
+most reliable information source between internal
+parametric and external retrieved knowledge, mul-
+timodal selection that optimizes the joint under-
+standing of visual-textual pairs, and unified answer
+generation that ensures consistent and accurate re-
+sponses. Through this comprehensive training strat-
+egy, CoRe-MMRAG develops robust capabilities
+in handling knowledge inconsistencies between dif-
+ferent sources.
+We conduct comprehensive experiments on
+two knowledge-based VQA benchmarks (Mensink
+et al., 2023; Chen et al., 2023) to evaluate our
+approach. Using Qwen2-VL-7B (Wang et al.,
+2024) as the base MLLM, CoRe-MMRAG demon-
+strates substantial improvements in both zero-shot
+and fine-tuned setting. Specifically, our method
+achieves performance gains of 5.6% over the base-
+line on the InfoSeek, while also surpassing the
+baseline on the Encyclopedic-VQA benchmark by
+9.3%. The contributions of this work are summa-
+rized as follows:
+• We identify and formalize two fundamental
+challenges in multimodal RAG: Parametric-
+Retrieved Knowledge Inconsistency and
+Visual-Textual Knowledge Inconsistency. To
+address these issues, we propose CoRe-
+MMRAG, a novel end-to-end framework that
+effectively reconciles inconsistencies across
+different knowledge sources.
+• We design a specialized training paradigm
+with three targeted objectives that enhance
+MLLMs in knowledge source discrimination,
+multimodal integration, and unified answer
+generation, enabling effective knowledge in-
+consistency mitigation.
+• Extensive experiments demonstrate that
+CoRe-MMRAG achieves significant perfor-
+mance gains over previous SOTAs on multiple
+Knowledge-based VQA benchmarks.
+2 Related Work
+Multimodal RAG. Recent advancements in
+MLLMs, such as LLaVA-family (Liu et al., 2023;
+Li et al., 2024), Qwen2-VL (Wang et al., 2024),
+MiniCPM-V (Yao et al., 2024), and Intern-VL
+(Chen et al., 2024), have demonstrated remark-
+able performance across various multimodal tasks.
+However, these models inherently suffer from hal-
+lucination issues (Li et al., 2023b; Caffagni et al.,
+2024). One effective approach to mitigating hal-
+lucination is the incorporation of multimodal data
+(Liu et al., 2024a), which provides complementary
+knowledge beyond text-based sources. By integrat-
+ing multimodal information, models can ground
+their responses in more diverse and concrete ev-
+idence, reducing the likelihood of hallucination.
+Another approach is inspired by RAG(Kandpal
+et al., 2023; Li et al., 2025; Gao et al., 2023;
+Asai et al., 2024), several multimodal RAG frame-
+works(Lin et al., 2023; Hu et al., 2025; Adjali et al.,
+2024) have been proposed, including Wiki-LLaVA
+(Caffagni et al., 2024), EchoSight (Yan and Xie,
+2024), RoRA-VLM (Qi et al., 2024) and LLaVA-
+mR2AG (Zhang et al., 2024b). These methods
+typically follow a three-stage pipeline of retrieval,
+32968

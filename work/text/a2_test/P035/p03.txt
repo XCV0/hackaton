@@ -1,0 +1,95 @@
+retrieval mechanism, activating retrieval only when
+necessary and improving efficiency. However, fo-
+cusing on local tokens may neglect global reason-
+ing needs. In contrast, Auto-RAG leverages LLM
+reasoning to optimize queries autonomously. Self-
+RAG (Asai et al., 2023) autonomously retrieves
+via reflection and follows a reflection-retrieval-
+regeneration process to improve factual consis-
+tency between generated and retrieved content. RE-
+COMP (Xu et al., 2023) and SuRe (Kim et al.,
+2024) optimize LLM generation through summa-
+rized retrieval, enhancing the utilization of external
+information, reducing information overload, and
+improving factual consistency. Existing methods
+lack a comprehensive analysis and optimization of
+RAG. Moreover, relying on a single-agent decision-
+making and reasoning process may introduce bi-
+ases that impact performance.
+2.2 Multi-Agent Debate
+Recent studies have demonstrated that multi-agent
+interactions significantly enhance LLM capabili-
+ties across various dimensions (Becker, 2024). EoT
+(Yin et al., 2023) mitigates biases and blind spots in-
+herent in single-agent approaches by integrating ex-
+ternal insights from other agents. Moreover, Multi-
+Agent Debate (MAD) enables agents to iteratively
+challenge and refine each other’s claims, improv-
+ing factual consistency (Du et al., 2024). Beyond
+factual alignment, MAD fosters divergent thinking,
+reducing reasoning stagnation and enhancing rea-
+soning depth (Liang et al., 2024). BDoG (Zheng
+et al., 2024) extends this paradigm to multimodal
+reasoning while introducing a blueprint to miti-
+gate the trivialization of opinions and focus diver-
+sion. The capabilities of MAD align well with the
+second-order hallucination problem in RAG, and
+this paper represents an initial endeavor to explore
+extending these capabilities to address this specific
+challenge.
+3 Debate-Augmented RAG
+In this section, we introduce Debate-Augmented
+RAG (DRAG), a general framework designed to
+enhance Retrieval-Augmented Generation (RAG)
+through a structured adversarial debate mechanism.
+We first give an overview of DRAG in Sec-
+tion 3.1, followed by a comprehensive discussion.
+DRAG consists of a two-stage debate framework
+that comprehensively addresses the hallucinations
+introduced by RAG in both the retrieval and gen-
+eration stages, as illustrated in Figure 2. Stage one
+is the Retrieval Debate, which is introduced in Sec-
+tion 3.2, while stage two is the Response Debate,
+discussed in Section 3.3.
+3.1 Overview
+Formally, given a question x, a retriever R retrieves
+top-k supporting paragraphs Ck x from a knowledge
+corpus C:
+Ck x = R(x, C, k) (1)
+Once retrieval concludes, the retrieved paragraphs
+Ck x and the question x are used to prompt a large
+language model (LLM) M, which then generates
+an answer y:
+y = M(x, C k x ) (2)
+To mitigate hallucinations introduced at both
+retrieval and generation stages in RAG, DRAG em-
+ploys a two-stage adversarial debate mechanism:
+Retrieval Debate and Response Debate. This
+debate-driven framework refines the retrieved con-
+tent and ensures a robust, factually grounded re-
+sponse. The following subsections introduce the
+debate mechanisms for each stage separately.
+3.2 Retrieval Debate
+The retrieval process in standard RAG models of-
+ten suffers from biases due to single-pass retrieval
+and suboptimal query formulation. DRAG intro-
+duces the Retrieval Debate fRetDebate, a dynamic
+multi-agent debate mechanism to iteratively refine
+retrieval and retrieved contents:
+ˆQ, C ˆQ = fRetDebate(x, R) (3)
+where, ˆQ = {qi}n i=1 represents the optimal query
+pool with n queries for the question x, while
+C ˆQ = {Ck qi }n i=1 denotes the corresponding re-
+trieved paragraph set.
+Debate Structure. The debate structure is a multi-
+round debate on optimizing the retrieval pool Q
+between m distinct agents A = {ai}m i=1. The de-
+bate at the jth round can be formulated as follows:
+T j = Debate(x, Qj , CQj , A) (4)
+Each debate round aims to determine the appropri-
+ate refinement operation T j applied to the retrieval
+pool Qj , which is subsequently updated to Qj+1 to
+initiate the next round.
+Agents and Roles. Just like a real debate, this de-
+bate is also structured around agents having distinct
+15841

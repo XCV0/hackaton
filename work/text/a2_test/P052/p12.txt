@@ -1,0 +1,65 @@
+Record type Principal fields
+Amendment-pair summary pair_id; split; source and amendment type; title, section, and citation; old/new gold passage
+identifiers, paragraph paths, and version dates; old/new rule sentences; fact value; unit; comparator
+type.
+QA instance question_id; pair_id; split; question_type (cited/uncited); question and facts; oper-
+ative date; fact value and unit; comparator type; answer; gold passage identifier and authority
+metadata; old/new rule sentences.
+Table 6: Compact field schema for the released pair-level summaries and QA records. The old/new QA variant is
+encoded in question id.
+Variant Abridged question pattern Governing rule Fact Answer
+Cited old-date Under the cited provision, is an application filed 75 days after the
+triggering event timely?
+60-day limit 75 days No
+Uncited new-date Without an explicit citation cue, is the same 75-day filing timely
+under the operative rule?
+90-day limit 75 days Yes
+Table 7: Abridged QA examples showing how old and new versions can yield opposite answers for the same fact
+value.
+Criterion Accept when Reject when
+Rule equivalence Old and new text express the same underlying rule apart from
+the numeric change.
+The amendment changes scope, actor, condition, exception,
+or legal issue.
+Single numeric threshold change One local threshold drives the answer flip. Multiple interacting values or drafting changes determine the
+answer.
+Unit compatibility Old and new thresholds use compatible units such as days,
+dollars, percent, counts, or years.
+Units are ambiguous, incomparable, or require external con-
+version.
+Comparator clarity Direction is clear: upper bound, lower bound, deadline, range,
+cap, minimum, or maximum.
+Comparator direction is implicit, conflicting, or interpretation-
+dependent.
+Deterministic answer flip A fact value between thresholds yields opposite yes/no an-
+swers across versions.
+The answer depends on missing facts, discretion, exceptions,
+or unresolved interpretation.
+Rejection conditions None of the listed complications governs the answer. Transition clauses, retroactivity, tolling, exceptions, cross-
+references, or non-deterministic drafting changes are present.
+Table 8: Checklist for human validation of amendment pairs.
+Fine-grained type High-level group Definition
+upper_bound_comparator_error Rule application The model treats an upper bound, cap, maximum, or deadline as if exceed-
+ing it were allowed or required.
+lower_bound_comparator_error Rule application The model reverses or misapplies a minimum, at-least, or lower-bound
+condition.
+temporal_deadline_comparison_error Rule application The model compares dates, elapsed days, filing windows, or deadlines in
+the wrong direction.
+mixed_min_max_comparator_error Rule application The model confuses interacting lower- and upper-bound constraints.
+answer_reason_contradiction Rule application The final yes/no answer contradicts the model’s stated rule application or
+intermediate reasoning.
+complex_or_unclear_legal_semantics_error Semantic grounding The model grounds on non-applicable, mismatched, or semantically unre-
+solved legal text.
+parse_failure_or_empty_answer Output stability The output is empty, unparseable, or lacks a stable yes/no answer.
+Table 9: Mapping from fine-grained generation error types to high-level taxonomy groups.
+Error type GoldOracle AuthorityFirst-RAG BM25-date-filter citation-hybrid date filter
+Total errors 1925 1995 2062 2141
+Upper-bound comparator 1347 1214 306 516
+Answer/reason contradiction 182 107 2 7
+Temporal deadline comparison 147 182 209 329
+Complex or unclear legal semantics 146 329 1244 876
+Mixed min/max comparator 40 119 139 195
+Lower-bound comparator 37 33 119 7
+Parse failure or empty answer 26 11 43 211
+Table 10: Fine-grained error counts by evidence condition.
+890

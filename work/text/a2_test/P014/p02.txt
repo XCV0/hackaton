@@ -1,0 +1,102 @@
+However, these approaches often fail to fully ex-
+ploit internalized world knowledge (Yu et al., 2023;
+Zhang et al., 2023) for document conflict resolu-
+tion. To bridge this gap, we propose Prior-Guided
+Reasoning, a strategy that explicitly elicits para-
+metric knowledge as prior information to guide
+its reasoning on retrieved documents. As illus-
+trated in Figure 1, under this paradigm, the model
+first elicits its internal knowledge (e.g., "located
+in Netherlands") to establish a semantic baseline.
+This baseline then functions as a critical evaluative
+anchor (e.g., "Doc 1 correctly mentions The Hague
+in Netherlands"), allowing the model to distinguish
+between misleading conflicts or irrelevant noise.
+Through empirical (Sec. 2.1) and theoretical
+analysis (Sec. 2.2), we demonstrate the perfor-
+mance improvements yielded by naive prior-guided
+reasoning. However, we also identify a critical ro-
+bustness trade-off: the model may ignore factual
+external documents in favor of its own parametric
+biases. This behavior becomes particularly detri-
+mental when the model’s internal knowledge is
+erroneous or outdated. Moreover, explicit exter-
+nalization of parametric knowledge entails a high
+inference latency due to sequence expansion.
+To this end, we propose BrPr (Bernoulli-gated
+reinforcement learning for Prior-Guided reasoning).
+We utilize Reinforcement Learning (RL) to opti-
+mize the utilization of the model’s prior knowl-
+edge. Through trial-and-error exploration with
+explicit feedback, the model learns to better rec-
+oncile parametric priors with document conflicts.
+To improve inference efficiency, we introduce a
+Bernoulli-gated dropout mechanism that stochasti-
+cally omits explicit prior generation during training.
+It compels the model to maintain performance in
+the absence of prior guidance. This objective effec-
+tively distills the prior-driven reasoning capability
+into the model parameters, fostering a robust and
+efficient latent reasoning process without explicit
+prior generation.
+Experiments conducted on the synthetic con-
+flict dataset RAG-Bench (Fang et al., 2024), which
+includes Natural Questions (NQ) (Kwiatkowski
+et al., 2019), TriviaQA (Joshi et al., 2017), and We-
+bQuestions (WebQ) (Berant et al., 2013), demon-
+strate that BrPr substantially improves model ro-
+bustness under varying levels of external incon-
+sistency. Moreover, results on Wikipedia-based
+retrieval benchmarks indicate the strong general-
+ization of BrPr across diverse retrieval scenarios.
+The contributions of this paper are as follows:
+• Through empirical and theoretical analysis on
+multi-document QA tasks, we demonstrate
+that prior-guided reasoning effectively miti-
+gates the volatility of external knowledge by
+providing an evaluative anchor that grounds
+the model’s reasoning in conflicting or noisy
+information.
+• This paper proposes BrPr, a method that
+achieves robust and efficient performance
+across conflicts and noises. Experimental re-
+sults demonstrate that BrPr provides superior
+robustness against external conflicts with low
+computational overhead.
+2 Externalizing Internal Knowledge as
+prior information
+Standard RAG models θ generate a response y =
+(a, c)—comprising an answer a and an optional
+Chain-of-Thought (CoT) c sequence (Wei et al.,
+2022)—as Pθ(y|x, d) given query x and docu-
+ments d. To mitigate performance degradation
+from noisy or conflicting external data, we pro-
+pose eliciting the model’s internal knowledge z ∼
+Pθ(z|x) as prior information, thereby enhancing
+robustness against external knowledge volatility.
+2.1 Analysis on Task Performance
+To evaluate this hypothesis, we conduct a series
+of comparative analyses using the Qwen2.5-7B-
+Instruct (Yang et al., 2025) model on the conflict-
+centric RAG-Bench (Fang et al., 2024). We specif-
+ically examine the performance variations across
+following strategies. Detailed prompts and data
+description are provided in Appendix B.
+(i) Parametric Answer: Pθ(a, c|x), generating
+the answer without documents.
+(ii) Direct Inference: Pθ(a|x, d), generating the
+answer directly without reasoning.
+(iii) Standard CoT: Pθ(a, c|x, d), incorporating
+a reasoning chain without explicit internal
+knowledge.
+(iv) Joint CoT: Pθ(a, c, z|x, d), where back-
+ground knowledge z is generated within a
+unified reasoning chain.
+(v) Prior-Guided CoT: Pθ(a, c|x, z, d), where
+internal knowledge z is elicited in an initial
+stage z ∼ Pθ(z|x) as prior information.
+Table 1 illustrates a clear trade-off between strat-
+egy complexity and the volume of external dis-
+tractors. As documents become noisier (from Doc
+2 to Doc 10), externalizing internal knowledge as
+22150

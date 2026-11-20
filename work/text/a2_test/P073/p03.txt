@@ -1,0 +1,96 @@
+More recently, graph-based models such as
+StockGNN and ECHO-GL have been developed to
+capture inter-firm relationships by creating concept
+networks from call transcripts (Medya et al., 2022;
+Liu et al., 2024).
+Nevertheless, existing methods struggle with
+multi-step reasoning and cross-source synthesis.
+Our framework fuses earnings-call narratives with
+structured financial data to enable temporal and
+causal inference beyond monolithic models.
+LLM Agents Parallel to the evolution of
+Large Language Models (LLMs), multi-agent
+frameworks have become increasingly prominent,
+demonstrating significant efficacy across a diverse
+range of applications (Zhang et al., 2025; Chen
+et al., 2024; Wei et al., 2025a; Zhao et al., 2025;
+Wei et al., 2025b; Xie et al., 2025b). LLM-driven
+earnings-call prediction is at its nascent stage.
+Early research (Chang et al., 2023) shows a raw
+ChatGPT sentiment score in the [–10, 10] range
+yields predictive power in forecasting the drift. Fur-
+ther research showed improvement in accuracy
+when LLMs in wide context jointly read transcripts,
+ratios, and prices (Ni et al., 2024), but these stud-
+ies exclusively use single shot prompts - without
+applying retrieval, iteration, or agent cooperation.
+Extensive research has explored the benefits of
+cooperative agents equipped with shared mem-
+ory and feedback mechanisms, both between and
+within agents (Talebirad and Nadiri, 2023; Park
+et al., 2023; Han et al., 2024; Guo et al., 2024;
+Zhang et al., 2024; Gao et al., 2024; Xu et al.,
+2025; Ji et al., 2025). Recent studies in other do-
+mains, such as misinformation, have shown that re-
+creation-augmented, role-specialized multi-agent
+frameworks consistently outperform standalone
+LLMs (Li et al., 2024). Systems such as OpenAGI
+divide claims into subtasks, share the retrieved con-
+text, and achieve state-of-the-art fact checking with-
+out supervision (Zhang and Gao, 2023; Ge et al.,
+2024). Multi-hop retrievers (MUSER) and graph-
+aware GET further improve evidence grounding
+(Liao et al., 2023; Xu et al., 2022). In the finan-
+cial domain, GraphRAG (Barry et al., 2025) shows
+gains in leveraging knowledge graphs with classi-
+cal textual retrieval to reduce hallucinations and
+improve efficiency in finance-centric QA tasks.
+3 Methodology
+3.1 Data Preparation of Inputs and Targets
+Data Ingestion Our pipeline ingests two data
+streams for each firm–quarter pair: first, we ingest
+full transcripts (prepared remarks and Q&A) for
+NYSE and NASDAQ firms, scraped from Seeking
+Alpha, we also ingest structured data – finan-
+cial statements : recent income, balance-sheet
+and cash-flow statements spanning multiple quar-
+ters, parsed from publicly available 10-K and 10-Q
+filings on the SEC’s EDGAR database. The tran-
+scripts and statement data are strictly sorted by
+their publication dates. When the agent analyzes
+quarter t, it has access only to transcripts and fun-
+damentals dated ≤ t. This ensures every prediction
+is made with a realistic information set, eliminat-
+ing look-ahead bias. Statistics and details of the
+fundamentals data can be found in I.
+Prediction Target For an earnings call on trading
+day T , we define the k-day forward return (for k ∈
+{1, 3, 7, 15, 30}) as rT −1:T +k = (P close T +k /P close T −1 ) −
+1. The prediction target is the sign of this return,
+y = sgn(rT −1:T +k) ∈ {−1, 1}. We task the Syn-
+thesizer Agent with making a direct, zero-shot pre-
+diction for enhanced explainability. It outputs a
+confidence score s ∈ [0, 10]. This score is then con-
+verted to a binary prediction: 1 for scores greater
+than 5, and -1 for scores of 5 or less. We evaluate
+accuracy by comparing ˆy with y.
+3.2 Mitigation of LLM Look-Ahead Bias
+LLMs risk hindsight bias, where later knowledge
+colors earlier interpretations—for instance, label-
+ing NVIDIA’s 2019 call as bullish due to Ampere’s
+eventual success, an outcome unknowable at the
+time.
+We mitigate leakage via named entity mask-
+ing, replacing tokens for firms and products (e.g.,
+NVIDIA, Ampere) with placeholders so the model
+relies on fundamentals rather than brand or future-
+informed cues (see Figure 2).
+To address temporal leakage, we also test on
+2,259 post-cutoff transcripts (Aug 2023–Dec 2024),
+ensuring results are not biased by knowledge be-
+yond the LLM’s training window (Appendix A).
+3.3 Facts Extraction and Delegation
+3.3.1 Facts Extraction
+Traditional knowledge graph pipelines that produce
+static triples (for example, CompanyA, has_CEO,
+3057

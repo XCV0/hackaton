@@ -1,0 +1,48 @@
+10778
+Discriminator Few_Shot
+Prompt
+User: 我想让你担任一个中文拼写纠错的评价模型，你的职责是结合相关领域知识，判断中文拼写纠错模型的纠错结果是否符合要求。
+User: I want you to serve as an evaluation model for Chinese spelling correction, and your responsibility is to judge whether the error correction results of the
+Chinese spelling error correction model meet the requirements based on relevant domain knowledge.
+User: 纠错前的中文句子:在公车上有很多人，所以我们没有位子可以座。 纠错前的中文句子长度:21 纠错后的中文句子:在公车上有很多人，所以
+我们没有位子可以坐。 纠错后的中文句子长度:21 评价标准:结合中文拼写纠错的知识，判断当前发生的纠错是否合理，纠错后的中文句子中是否仍
+然存在错误？纠错后的句子是否更加符合语义？纠错前后句子长度是否一致？只输出结果模板的内容。评价结果模板: 纠错后的句子已经不存在字
+符错误:<> 纠错后的句子是否符合语法逻辑:<> 纠错后的句子和纠错前句子长度相等:<>
+User: Chinese sentence before error correction: There are many people on the bus, so we don't have seats to seat. Chinese sentence length before error
+correction: 21 Chinese sentence after error correction: There are many people on the bus, so we don't have seats to sit. Length of corrected Chinese
+sentences: 21 Evaluation criteria: Combined with the knowledge of Chinese spelling correction, judge whether the current correction is reasonable, and
+whether there are still errors in the corrected Chinese sentences? Are the corrected sentences more semantic? Is the sentence length consistent before and
+after error correction? Only the contents of the result template are output. Evaluation Result Template: The corrected sentence no longer has a character
+error: <> The corrected sentence is more reasonable than the sentence before the correction: <> The length of the corrected sentence is equal to the
+sentence before the correction: <>
+Assistant: 纠错后的句子已经不存在字符错误:是 纠错后的句子是否符合语法逻辑:是 纠错后的句子和纠错前句子长度相等:是
+Assistant: The corrected sentence no longer has a character error: Yes. The corrected sentence is reasonable: Yes. The corrected sentence is equal in length
+to the sentence before the correction: Yes
+User: 纠错前的中文句子:在补习班他昨天晚上到夜里两点还在读书，所以他一回家就累得睡着了。纠错前的中文句子长度:32 纠错后的中文句子:
+在补习班他昨天晚上到夜里两点还在读书，所以他一回家就累得不动了。 纠错后的中文句子长度:32 评价标准:结合中文拼写纠错的知识，判断当
+前发生的纠错是否合理，纠错后的中文句子中是否仍然存在错误？纠错后的句子是否更加符合语义？纠错前后句子长度是否一致？只输出结果模板
+的内容。评价结果模板: 纠错后的句子已经不存在字符错误:<> 纠错后的句子是否符合语法逻辑:<> 纠错后的句子和纠错前句子长度相等:<>
+User: Chinese sentence before error correction: In cram school, he was still studying from last night to two o'clock at night, so he fell asleep tired as soon
+as he got home. Chinese sentence length before error correction: 32 Chinese sentence after error correction: In cram school, he was still studying from last
+night to two o'clock at night, so he was too tired to move as soon as he got home. Chinese sentence length after error correction: 32 Evaluation criteria:
+Combined with the knowledge of Chinese spelling correction, judge whether the current correction is reasonable, and whether there are still errors in the
+corrected Chinese sentences? Are the corrected sentences more semantic? Is the sentence length consistent before and after error correction? Only the
+contents of the result template are output. Evaluation Result Template: The corrected sentence no longer has a character error: <> The corrected sentence is
+more reasonable than the sentence before the correction: <> The length of the corrected sentence is equal to the sentence before the correction: <>
+Assistant: 纠错后的句子已经不存在字符错误:否 纠错后的句子是否符合语法逻辑:否 纠错后的句子和纠错前句子长度相等:是
+Assistant: The corrected sentence no longer has a character error: No. The corrected sentence is reasonable: No. The corrected sentence is equal in length to
+the sentence before the correction: Yes
+...
+Evaluate Query Prompt
+User: 纠错前的中文句子:我受到了你们的结婚卡。 纠错前的中文句子长度:11 纠错后的中文句子:我收到了你们的结婚卡。 纠错后的中文句子长
+度:11 评价标准:结合中文拼写纠错的知识，判断当前发生的纠错是否合理，纠错后的中文句子中是否仍然存在错误？纠错后的句子是否更加符合语
+义？纠错前后句子长度是否一致？只输出结果模板的内容。评价结果模板: 纠错后的句子已经不存在字符错误:<> 纠错后的句子是否符合语法逻
+辑:<> 纠错后的句子和纠错前句子长度相等:<>
+User: Chinese sentence before error correction: I suffered your wedding card. Chinese sentence length before error correction: 11 Chinese sentence after
+error correction: I received your marriage card. Chinese sentence length after error correction: 11 Evaluation criteria: Combined with the knowledge of
+Chinese spelling correction, judge whether the current correction is reasonable, and whether there are still errors in the corrected Chinese sentences? Are
+the corrected sentences more semantic? Is the sentence length consistent before and after error correction? Only the contents of the result template are
+output. Evaluation Result Template: The corrected sentence no longer has a character error: <> The corrected sentence is more reasonable than the sentence
+before the correction: <> The length of the corrected sentence is equal to the sentence before the correction: <>
+Figure 7: Task-specific Few_shot Evaluation prompt for CSC task. We have marked key information in italics and
+bold, originally incorrect words in red, correctly changed words in green, and incorrectly changed words in blue.

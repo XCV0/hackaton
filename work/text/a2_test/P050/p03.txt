@@ -1,0 +1,98 @@
+ReFilter: Improving Robustness of Retrieval-Augmented Generation via Gated Filter , ,
+Query:which mountain is 
+the highest in the world ?
+Layer 𝑳𝟏
+(a) Training Stage
+Training DataDatabase
+ Top-K Chunks Encoder
+Embeddings
+Filter
+Loss Func
+LLM
+(b) Inference Stage
+Store all pre-computed embeddings of all chunks
+Top-K 
+Embeddings
+Layer 𝑳𝒊
+⋯
+Linear
+Sigmoid
+Hidden 
+State
+𝜸𝟏,,…,𝜸𝑵
+Linear
+Flatten
+LayerNorm
+𝝁𝟏,…,𝝁𝑵
+𝒘𝟏,…,𝒘𝑵
+Concatenate Query
+!
+𝑵
+Fused 
+Hidden State
+Layer 𝑳𝒊#𝟏
+⋯
+Layer 𝑳𝒍
+LM Head
+Answer: 
+Mount Everest
+Context 
+Embeddings
+Token 
+Weights
+Trainable Frozen
+Context Encoder
+ Gated Filter
+Token Fusion
+Forward Backward Store Embeddings Element-wise Multiply Concatenation
+Database
+Figure 3: Overview of our ReFilter.
+includes a context encoder to build the token pool (𝑘× chunk_len
+tokens), a gated filter for filtering irrelevant tokens, and a token
+fusion for injecting token representations into the LLM’s hidden
+states. The filter component will inject the retrieval representations
+into a specific layer of the LLM.
+Notations. Let H ∈ R𝐵×𝑃×𝐿×𝑑𝑚 denote all hidden states of the
+backbone LLM, where 𝐵,𝑃,𝐿,𝑑𝑚 are the batch size, input sequence
+length, number of layers and dimension size. We use 𝑝𝑏 to denote
+the injected layer index for the 𝑏-th query during the whole de-
+coding stage. We collect these positions in a tensor p ∈ N𝐵. For
+a complete list of notations used in this paper, see §A.1 in the
+Appendix.
+3.2 Trainable Context Encoder for Retrieved
+Chunks
+Given a batch of queries 𝑄 ={𝑞1,...,𝑞𝐵}, we first retrieve top-𝑘
+chunks for each query and aim to create the context embeddings
+that are semantically similar to the LLM’s hidden state space. To
+achieve this, we leverage an external Transformer encoder 𝐸(·)
+(e.g., a BERT-like model) to encode retrieved chunks and build a
+context encoder to project the features into the LLM’s hidden space.
+Concretely, for the 𝑖-th chunk 𝑐𝑏,𝑖 of 𝑏-th query, we tokenize and
+pad/truncate to length𝑠 and obtain text feature𝑓𝑏,𝑖:
+𝑓𝑏,𝑖 =𝐸(𝑐𝑏,𝑖)∈ R𝑠×𝑑𝑒 , (2)
+where 𝑑𝑒 is the feature dimension size. Then, the context encoder
+transforms the text feature 𝑓𝑏,𝑖 into the context feature 𝐶𝑏,𝑖 for
+the LLM via a learnable linear projection module with parameters
+𝑊𝑝 ∈ R𝑑𝑒 ×𝑑𝑚 :
+𝐶𝑏,𝑖 =𝑊⊤ 𝑝 𝑓𝑏,𝑖 ∈ R𝑠×𝑑𝑚 . (3)
+Then, we merge all 𝑘 chunks and then flatten each query’s retrieval
+dimension to obtain the context embeddings 𝐶 ∈ R𝐵×𝑁×𝑑𝑚 ,
+where 𝑁 = 𝑘×𝑠. To improve the inference efficiency, we can
+cache the precomputed text feature 𝑓𝑏,𝑖 when the corpus is static.
+We use token-level features rather than sentence-level features,
+enabling fine-grained filtering.
+3.3 Gated Filter for Token-level Weighting
+The gated filter module aims to produce the importance weights for
+each token. It takes (1) the output hidden states H of the injected
+layer of the LLM and (2) the context embeddings 𝐶 as inputs, and
+returns an array of token weights𝑊𝑡 ∈ R𝐵×𝑁 .
+3.3.1 Decision State. For the 𝑏-th each query, we extract the LLM’s
+output hidden statesℎ𝑏 of the last token at the injection layer𝑝𝑏:
+ℎ𝑏 = H𝑏,𝑝𝑏 ,𝐿,: ∈ R𝑑𝑚 . (4)
+This vector serves as a query-conditioned decision state that
+guides evidence filtering.
+3.3.2 Token-wise Dynamic Gate. We compute a per-token gate for
+each token in context embeddings 𝐶𝑏,𝑗 ∈ R𝑑𝑚 ,𝑗 = 1,...,𝑁 . We
+first concatenate the token embedding with the decision state:
+𝑔𝑏,𝑗 =[𝐶𝑏,𝑗 ;ℎ𝑏]∈ R2𝑑𝑚 . (5)
+3

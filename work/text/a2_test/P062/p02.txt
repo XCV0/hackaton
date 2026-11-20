@@ -1,0 +1,100 @@
+edge (Park and Lee, 2025; Qi et al., 2025; Li et al.,
+2025a). As a result, errors often stem not from gen-
+eration itself, but from retrieval that is misaligned
+with the cultural context of the query.
+Existing agentic mRAG methods primarily focus
+on how to search—e.g., iterative query reformula-
+tion or reasoning-driven retrieval—while operating
+under fixed retrieval conditions (Asai et al., 2024;
+Trivedi et al., 2023; Yao et al., 2023). As a result,
+query-only adaptation is often insufficient for cul-
+turally grounded queries, repeatedly sufacing cul-
+turally dominant but locale-mismatched evidence.
+We argue that effective multicultural mRAG re-
+quires retrieval-condition adaptation, where both
+retrieval scope and query formulation are dynam-
+ically revised based on feedback from retrieved
+evidence.
+To this end, we propose CORAL (COntext-
+aware Retrieval with Agentic Loop), a multilin-
+gual and multicultural agentic RAG framework.
+CORAL iteratively adapts retrieval conditions at
+test time by (i) selecting query-conditioned cor-
+pora, (ii) rewriting retrieval queries via evidence
+critique, and (iii) explicitly checking evidence suf-
+ficiency before generation. This enables more reli-
+able grounding for culturally specific questions.
+We evaluate CORAL on two culturally grounded
+multiple-choice QA benchmarks spanning high-,
+mid-, and low-resource languages, covering a total
+of 13 languages. CORAL consistently outperforms
+multilingual RAG baselines, achieving up to 4%p
+accuracy improvement on low-resource languages
+relative to the strongest baselines. These results
+demonstrate that feedback-guided adaptation of
+retrieval conditions is critical for reliably grounding
+culturally specific answers.
+Our contributions are threefold:
+• We identify retrieval condition misalignment
+as a primary failure mode of mRAG on cul-
+turally grounded queries, and reframe multi-
+lingual retrieval as feedback-driven retrieval
+control.
+• We propose CORAL, an agentic framework
+that jointly adapts retrieval corpora and per-
+forms planner-guided query rewriting, with an
+explicit evidence sufficiency check.
+• We demonstrate consistent gains on cultur-
+ally grounded QA benchmarks, showing that
+CORAL reliably identifies target cultures
+across diverse languages.
+2 Background and Related Work
+2.1 Multilingual and Cross-lingual RAG
+Prior work on multilingual RAG mainly focuses on
+extending English-centric RAG pipelines to multi-
+ple languages through shared multilingual retriev-
+ers, translation-based methods, and cross-lingual
+benchmarks (Chirkova et al., 2024; Moon et al.,
+2025; Liu et al., 2025b). These approaches aim
+to improve linguistic coverage and robustness by
+preserving semantic equivalence across languages,
+typically operating over a fixed multilingual corpus
+that pools documents from all languages together.
+While effective for many general cross-lingual
+tasks, this paradigm treats multilinguality as a rep-
+resentation or preprocessing problem and leaves
+corpus selection implicit. As a result, retrieval is
+performed without explicit consideration of cul-
+tural or regional relevance, which can lead to se-
+mantically relevant but culturally mismatched evi-
+dence for queries grounded in local institutions or
+conventions (Qi et al., 2025; Ranaldi et al., 2026).
+2.2 Iterative and Agentic Retrieval for RAG
+Recent work has explored iterative and agent-based
+retrieval strategies to improve retrieval-augmented
+generation (Asai et al., 2024; Trivedi et al., 2023;
+Yao et al., 2023; Wang et al., 2024; Yuan et al.,
+2024; Li et al., 2025c; Liu et al., 2025a; Besrour
+et al., 2025). These approaches introduce multiple
+retrieval steps, planning mechanisms, or special-
+ized agents such as planners, critics, or verifiers.
+Common techniques include query reformulation,
+multi-hop retrieval, and retrieval planning, where
+the system refines its queries based on intermediate
+results (Lee et al., 2024; Chen et al., 2025; Cong
+et al., 2025).
+The main goal of these methods is to improve
+retrieval quality by increasing coverage, recall, or
+reasoning depth. Iteration is typically used to re-
+trieve more relevant documents, reduce noise, or
+better support complex reasoning tasks (Asai et al.,
+2024; Zhang et al., 2025a). In this setting, agentic
+components help decide how to search, such as
+which query to issue next or when to stop retriev-
+ing (Yao et al., 2023). Some approaches further
+enhance these decision-making processes through
+additional training, such as reinforcement learning
+or supervised fine-tuning, enabling the model to
+learn when and how to retrieve more effectively
+(Asai et al., 2024; Huang et al., 2025; Yao et al.,
+2025). However, such approaches introduce addi-

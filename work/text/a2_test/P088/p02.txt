@@ -1,0 +1,137 @@
+Query:
+Retriever
+✘
+Which country is the movie 
+“Manchester By The Sea”filmed in ?
+(Manchester By The Sea, filmPlace, 
+Manchester ) , 
+(Manchester, locatedIn, Massachusetts) , 
+(Massachusetts, stateOf, United States)
+. . . 
+(Manchester By The Sea, filmPlace, 
+Manchester ) , 
+(Manchester, cityOf, England) , 
+(England, containedIn, United Kingdom)
+. . . 
+Based on …, the movie 
+“Manchester By The Sea”is 
+filmed in United Kingdom.   
+After 
+Attack
+After 
+Attack
+Before 
+Attack
+Before 
+Attack Retrieved Triples:
+Retrieved Triples: Large Language 
+Model
+Answer:
+Knowledge Graph (KG)
+Perturbed Edge:
+locatedIn
+direct
+bornIn
+starIn
+United 
+KingdomKenneth 
+Lonergan
+Manchester 
+By The Sea
+England United States 
+David 
+Bekham Los Angeles
+Miami
+Casey 
+Affleck
+Manchester
+Massachusetts
+Essex County
+cityOf
+Based on …, the movie 
+“Manchester By The Sea”is 
+filmed in United States.   
+Answer:
+Large 
+Language 
+Model
+Figure 1: Illustration of KG-RAG pipelines before and after data poisoning attack.
+unstructured text such as Wikipedia pages [18] or web doc-
+uments [21], leaving the security risks of KG-RAG systems
+largely unexplored.
+Although the integration of KGs can enable faithful
+reasoning through explicit inference chains [11, 24], KG-
+RAG systems are also exposed to unique vulnerabilities.
+In practice, many widely-used KGs, such as Wikidata [9],
+collectdatafrompublicresourcesandcanbeeditedbyusers.
+Thisopennesssignificantlylowersthebarrierforattackersto
+insert poisoned triples, making stealthy poisoning feasible
+at low cost [25, 26]. Even in internally-curated KGs, data
+perturbations can still be hardly avoided during automatic
+KG construction, such as noisy information extraction [27]
+and imperfect entity linking [28]. Moreover, the inherent
+structure of KGs makes them highly sensitive to small per-
+turbations.Evenminormodifications,suchasaddingseveral
+perturbation triples, can significantly alter both the local
+and global semantics of the graph [29, 30, 25, 26]. These
+structural shifts may mislead the retriever into selecting
+incorrecttriples,ultimatelyleadingtoanincorrectresponse.
+As illustrated in Figure 1, inserting a single edge between
+Manchester andEngland can cause KG-RAG to incorrectly
+answer United Kingdom to the question “Which country is
+themovieManchesterByTheSeafilmedin?”,byactivating
+a misleading inference chain. These observations highlight
+the susceptibility of KG-RAG systems to data poisoning
+attacks.Therefore,investigatinghowKG-RAGmethodsare
+affectedwhentheKGstoretrievearepollutedisbothtimely
+and urgent for understanding their robustness and security
+threats.
+To fill this gap, we conduct the first systematic study of
+data poisoning attacks on KG-RAG methods. Specifically,
+we focus on attacks that inject a small number of adver-
+sarial triples into the underlying KG to manipulate multi-
+hop reasoning and induce incorrect outputs. To ensure that
+the attack remains both realistic and stealthy, we build a
+constrained threat model aligned with real-world KG-RAG
+deploymentscenarios.Theattackoperatesunderablack-box
+setting, in which the attacker has no access to the retriever,
+the language model, or any internal parameters of the KG-
+RAG method. We further assume that the attacker only
+knowsthequestionforattacking,butwithouttheknowledge
+ofitsground-truthanswers.RegardingKGmodification,the
+attacker is restricted to inserting a small number of triples,
+as many real-world KGs (e.g., Wikidata) require additional
+permissions for editing or deletion. Moreover, insertion-
+based attack offers better stealth and feasibility in practice.
+To further improve stealth, we assume that all the inserted
+triplesarecomposedofentitiesandrelationsalreadypresent
+in the KG, avoiding the introduction of new entities or
+relations that are more likely to be detected.
+Based on the above settings, we propose an effective
+data poisoning attack strategy, with the aim of constructing
+misleading inference chains that guide KG-RAG methods
+toward incorrect answers. Given a user question, we first
+generate several plausible but incorrect answers using a
+general-purpose LLM. These incorrect answers are aligned
+to existing KG entities to avoid introducing new entities,
+yielding a set of targeted incorrect entities that serve as
+attacker-intended responses to the question. To facilitate
+the creation of misleading inference chains, a KG-specific
+language model [11] is employed to generate relation paths
+that are structurally or semantically associated with the
+question, which act as the templates for the instantiation of
+inferencechainsintheKG.Thefinalperturbationtriplesare
+constructedtocompletethemisleadingchainsthatoriginate
+from the question topic entity and terminate at the targeted
+incorrect entities.
+We conduct comprehensive experiments to evaluate the
+effectivenessofourattackstrategyontwoknowledgegraph-
+basedquestionanswering(KGQA)benchmarksagainstfour
+recent KG-RAG methods. Experimental results show that
+even minimal insertion of perturbation triples can signif-
+icantly degrade the reasoning performance of KG-RAG
+methods,highlightingthevulnerabilityofexistingKG-RAG
+methods to data poisoning attacks. To obtain a better un-
+derstanding of the safety issue, we conduct in-depth anal-
+yses of how KG poisoning impacts both the retrieval and
+: Preprint submitted to Elsevier Page 2 of 13

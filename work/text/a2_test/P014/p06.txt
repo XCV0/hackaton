@@ -1,0 +1,96 @@
+Table 2: EM and F1 scores on the GAR-Bench test set. In the k = 1 configuration, only the gold document is
+provided; for k > 1, the input is augmented with documents sampled from the RAG-Bench noisy and conflicting
+pools. Best results for training-free and training-based models are indicated by underlining and bolding, respectively.
+NQ TriviaQA WebQ
+Doc 1 Doc 2 Doc 5 Doc 10 Doc 1 Doc 2 Doc 5 Doc 10 Doc 1 Doc 2 Doc 5 Doc 10
+Method EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1
+Qwen2.5-7B-Instruct
+w/o parameter update
+Direct 60.46 69.81 51.75 61.96 38.20 47.73 31.13 39.85 79.18 84.68 74.17 79.56 64.56 70.86 53.54 62.96 40.44 58.39 33.63 52.62 27.93 44.96 20.32 34.63
+COIECD 61.26 71.03 53.65 63.43 44.04 54.87 33.63 46.26 78.48 83.99 74.87 80.26 67.57 74.98 52.55 64.32 39.44 58.06 33.13 52.80 27.53 46.52 20.82 41.06
+SC 61.96 71.23 55.06 61.71 46.85 56.97 39.94 50.02 81.78 87.05 78.38 83.56 70.87 77.39 62.86 69.98 38.83 57.36 34.83 53.20 31.13 49.74 24.82 42.27
+MADAM-RAG 62.05 72.26 53.31 64.79 43.67 55.42 31.65 44.04 75.19 85.55 69.91 79.99 65.19 75.49 55.84 66.90 45.86 62.43 39.18 58.52 32.61 50.59 28.60 45.70
+Standard CoT 59.46 69.11 52.35 62.14 42.14 52.79 36.73 47.79 79.68 85.02 76.98 82.39 67.36 74.50 58.76 66.10 38.53 55.24 33.43 51.83 28.63 47.30 23.92 42.75
+Joint CoT 57.36 68.18 50.75 60.98 42.94 54.40 38.74 50.34 79.34 84.87 76.18 81.49 70.07 76.49 61.36 69.14 36.34 54.95 34.63 53.13 32.63 51.41 25.22 43.85
+Prior-Guided CoT 52.95 62.64 53.85 63.93 48.04 58.28 41.94 52.92 76.87 82.48 77.17 82.35 75.18 81.12 69.37 75.70 37.24 54.81 35.24 53.74 34.03 52.33 28.83 47.58
+w/ parameter update
+RAAT 68.17 74.34 67.07 73.59 63.87 70.30 59.96 67.62 80.35 86.49 79.18 85.40 78.38 84.69 75.28 81.77 47.75 63.53 46.25 61.94 43.64 59.38 42.84 59.44
+RALM 66.77 73.30 66.37 72.73 64.76 70.87 61.16 68.54 79.58 85.43 79.08 84.90 76.87 83.00 75.87 82.01 47.34 62.14 46.75 62.38 45.45 60.85 44.34 60.08
+KnowPO 66.75 72.58 65.45 70.67 61.24 69.31 56.44 65.51 81.34 86.47 80.54 85.87 78.95 84.73 76.27 83.07 53.85 65.36 51.75 67.64 49.36 64.67 47.20 63.11
+GRPO-RAG 69.67 75.31 69.07 75.61 65.37 73.26 62.96 70.67 83.88 88.96 83.34 89.05 82.88 87.72 80.88 86.03 62.66 70.57 62.03 71.42 62.46 72.46 61.96 71.98
+BrPr (1-turn) 69.92 75.46 69.87 76.68 67.17 74.88 66.27 74.33 85.08 89.11 84.48 89.03 84.30 89.23 81.89 87.32 64.66 73.86 63.56 72.81 62.96 73.23 62.16 72.45
+BrPr (2-turn) 69.41 75.25 70.07 77.34 68.97 75.55 66.57 74.45 84.71 89.41 85.49 89.14 84.38 88.96 82.48 87.57 63.95 71.22 63.36 72.88 63.16 73.24 62.26 72.50
+Qwen3-8B
+w/o parameter update
+Direct 64.16 72.65 56.56 65.81 45.54 55.29 38.74 49.31 80.08 85.47 77.28 82.40 70.27 76.90 61.76 68.74 43.54 59.73 38.44 54.89 31.03 48.49 26.73 44.37
+COIECD 63.96 72.68 56.66 65.43 46.05 55.67 37.34 48.09 81.28 86.13 77.98 82.90 70.77 77.63 61.96 68.71 43.24 59.66 38.84 54.72 30.33 47.54 26.23 43.83
+SC 66.47 74.94 61.46 71.04 52.25 60.91 47.15 56.56 86.59 91.27 82.98 88.33 79.68 85.53 70.42 78.90 44.14 60.98 40.04 57.25 35.44 53.07 30.63 47.45
+MADAM-RAG 66.36 74.06 57.22 68.22 45.74 60.43 40.28 49.27 84.41 90.06 80.83 86.96 78.60 86.04 69.13 78.42 49.57 65.26 43.36 58.60 33.12 54.87 31.04 46.81
+Standard CoT 64.76 72.89 58.36 67.15 47.04 55.67 41.64 49.65 83.18 87.84 80.88 85.85 73.97 79.55 66.07 71.47 41.94 59.25 36.94 54.13 31.35 49.70 27.93 43.92
+Joint CoT 62.06 71.30 57.26 66.72 48.35 57.59 42.64 51.59 84.48 89.16 80.18 85.54 76.27 81.20 68.97 74.77 40.24 58.39 37.84 55.73 32.63 50.77 29.03 45.13
+Prior-Guided CoT 56.46 66.23 52.95 62.05 48.94 58.22 45.45 55.39 82.78 87.71 81.28 86.13 80.28 84.99 72.47 78.55 38.64 55.78 35.94 52.99 33.23 50.27 31.53 47.86
+w/ parameter update
+RAAT 67.87 74.50 66.97 72.92 64.86 71.85 58.26 65.66 80.68 86.35 80.18 85.71 79.88 85.69 76.48 83.12 49.75 65.07 48.95 64.20 45.75 62.13 44.64 60.94
+RALM 69.17 75.23 68.77 74.12 66.17 72.30 63.67 69.59 80.18 85.87 80.78 86.04 79.97 85.13 77.34 84.50 51.05 66.28 50.45 65.17 49.55 64.04 48.95 64.06
+KnowPO 67.34 74.02 66.42 72.39 65.48 72.11 62.90 68.73 81.44 86.38 81.03 85.75 80.33 85.27 78.94 84.86 60.53 69.77 59.83 68.05 55.45 65.21 53.91 63.38
+GRPO-RAG 68.17 74.81 65.37 72.44 64.46 71.23 63.86 71.58 83.96 88.93 82.37 87.47 81.48 86.64 80.53 86.07 66.47 73.95 66.07 73.52 63.16 71.01 62.97 70.84
+BrPr (1-turn) 69.31 75.19 68.57 74.62 68.31 75.07 66.06 73.72 85.70 90.27 85.69 90.17 82.38 87.98 81.68 86.71 67.86 74.12 66.47 74.10 64.86 73.84 64.06 73.45
+BrPr (2-turn) 69.03 74.78 69.40 75.21 67.67 74.02 67.28 74.92 84.98 89.53 85.83 89.24 84.57 88.02 82.75 87.12 67.40 73.69 67.57 75.45 65.37 73.54 64.36 73.20
+et al., 2024) involves fine-tuning on samples aug-
+mented with diverse retrieval noise. RAAT (Fang
+et al., 2024) utilizes adversarial training to distin-
+guish between gold documents and noisy distrac-
+tors. CARE-RAG (Chen et al., 2025) enhances
+model robustness through the conflict-driven sum-
+marization of all provided evidence5. (6) Prefer-
+ence Optimization: KnowPO (Zhang et al., 2025)
+achieves adaptive knowledge selection through a
+knowledge-aware preference optimization strategy.
+(7) Reinforcement Learning: GRPO-RAG em-
+ploys rule-based RL to encourage the model to
+perform explicit reasoning prior to generating an
+answer. The training process is conducted using a
+Standard CoT strategy.
+Notably, all trainable models are trained exclu-
+sively on the NQ training set from RAG-Bench
+to evaluate their generalization capabilities across
+different benchmarks. Our method can be imple-
+mented using two strategies: BrPr (1-turn), which
+utilizes a Standard CoT prompt, and BrPr (2-turn),
+which employs the Prior-Guided CoT strategy. The
+implementation details of BrPr are provided in the
+Appendix E.
+Metrics. We use the Exact Match (EM) and F1
+scores for evaluating the performance of LLMs.
+5As the training data and model weights are not publicly
+available, we report the results directly from the original paper
+in Table 3 for comparison.
+4.2 Overall Performance
+As shown in the Table 2, both variants of BrPr (1-
+turn and 2-turn) consistently outperform all base-
+lines across all tested models.
+Importance of Prior Guidance. Among meth-
+ods without parameter updates, Prior-Guided CoT
+exhibits superior scalability compared to heavy-
+sampling or multi-agent approaches like SC and
+MADAM-RAG. As the context expands from 1
+to 10 documents, the performance of other meth-
+ods often declines sharply due to the accumulation
+of retrieval noise and conflicting information. In
+contrast, Prior-Guided CoT consistently maintains
+higher scores in high-noise environments, demon-
+strating that explicit prior guidance is effective for
+stabilizing model reasoning.
+Robustness to Noise and Conflicts. While base-
+lines such as RAAT and KnowPO struggle to han-
+dle the increased complexity of multi-document set-
+tings, BrPr consistently yields the highest metrics
+regardless of the document count or interference
+level. For instance, on the NQ (Doc 10) benchmark,
+BrPr-7B (2-turn) achieves an EM of 66.57%, sig-
+nificantly outperforming other models like GRPO-
+RAG (62.96%). This sustained performance across
+conflicts and noises underscores the effectiveness
+of our method and strengthening the model’s core
+reasoning capabilities.
+22154

@@ -1,0 +1,102 @@
+augmented experiments, we use mE5-base (Wang
+et al., 2024) as the dense retrieval encoder for in-
+dexing and querying the Quran RAG dataset (A
+retrieval comparison also supports our retrieval de-
+sign: on IslamicEval 2025 Shared Task 2 (Mubarak
+et al., 2025), mE5-base outperforms BM25 on
+Quranic retrieval (MAP_Q@5: 0.138 vs. 0.094);
+see Appendix F for details.). Each ayah in our
+6,236-unit corpus is embedded offline with mE5-
+base, while user questions in Arabic or English
+are embedded at inference time using the same
+encoder. We then retrieve the top-5 most similar
+verses through vector similarity search and provide
+them directly to the generator. This setup improves
+factual grounding, but retrieval remains a fixed pre-
+processing step performed only once before answer
+generation.
+Agentic RAG. Agentic RAG extends this setup
+by turning retrieval into an explicit part of the rea-
+soning process. Instead of relying on a single re-
+trieval step, the model is prompted to plan, invoke
+tools, inspect retrieved verses, and iterate when
+needed before producing the final response, as il-
+lustrated in Figure 4. This interaction is imple-
+mented through a constrained tool-calling schema
+and a Quranic toolset that supports semantic search,
+surah metadata retrieval, direct verse reading, and
+within-surah search. The full agent prompt and
+tool-calling format are provided in Appendix A.3.
+In Figure 5, we present an example from ISLAM-
+ICFAITHQA to illustrate the difference between
+the Standard RAG and Agentic RAG settings. It
+includes the question, the atomic gold answer, and
+the corresponding model predictions. The LLM-
+based judge assigns one of three labels, namely
+Correct, Incorrect, or Not_Attempted, based
+on semantic alignment with the gold answer.
+In our experiments, we apply both the RAG and
+Agentic RAG setups to Fanar-1-9B, ALLaM-7B,
+and Qwen3-4B-2507 after training. We also evalu-
+ate Fanar-2-27B under the same inference settings
+without additional fine-tuning.5
+4.7 Evaluation on ISLAMICFAITHQA
+We evaluate all model variants on ISLAMIC-
+FAITHQA. Throughout the paper, we report %Cor-
+rect as the primary metric, as shown in Tables 3–4.
+We also analyze performance across the three cri-
+teria, which are labelled as correct, incorrect,
+5We do not fine-tune Fanar-2-27B because it already shows
+strong baseline performance in Table 3.
+and not attempted, to better understand model er-
+rors and abstention behaviour. The full label-wise
+results are reported in Table 9.
+As our evaluation relies on an LLM-as-a-judge
+setup, hence, assessing the judge against human
+annotation is essential for establishing the reliabil-
+ity of the evaluation. We evaluate the judge on
+a held-out bilingual subset of 200 instances, bal-
+anced across Arabic and English as well as diffi-
+culty levels, and report agreement statistics. The
+human–LLM agreement reaches 79%, while inter-
+annotator agreement, measured with Cohen’s κ, is
+0.51. This analysis is noteworthy in multilingual
+settings. Recent evidence shows that multilingual
+LLM judges can be inconsistent across languages,
+with only moderate inter-judge agreement on aver-
+age and substantial variance by language and task
+(Fu and Liu, 2025).
+5 Results
+5.1 Baseline Results
+Table 3 reports accuracy (%Correct) on ISLAMIC-
+FAITHQA across a diverse set of Arabic-centric
+and multilingual instruction-tuned LLMs in their
+base, non-retrieval configurations. We observe sub-
+stantial variation in performance, suggesting that
+general-purpose instruction tuning alone is not suf-
+ficient for this knowledge-intensive religious do-
+main under strict answer matching. Fanar-2-27B
+achieves the strongest overall performance, with an
+average score of 48.05, including 48.20 in Arabic
+and 47.90 in English. It is followed by ALLaM-
+7B with 37.75 and Fanar-1-9B with 35.40. These
+results indicate a clear performance gap between
+the top-ranked model and the rest, and they further
+suggest that strong general instruction-following
+ability does not directly translate into robust per-
+formance on fine-grained, domain-specific Islamic
+question answering.
+A second pattern is that many general multilin-
+gual baselines remain below 30% average accu-
+racy, despite their strong performance on broad
+instruction-following tasks. Examples include
+EuroLLM-9B at 25.70, Llama-3.1-8B at 19.40, and
+Mistral-7B-v0.2 at 18.95. This suggests that IS-
+LAMICFAITHQA does not primarily reward con-
+versational fluency or generic instruction-following
+ability. Instead, success on the benchmark re-
+quires precise and text-grounded religious knowl-
+edge, while the strict correct, incorrect, and
+not attempted evaluation setting penalizes an-
+7
+26475

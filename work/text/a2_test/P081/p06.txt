@@ -1,0 +1,104 @@
+Zhao et al.
+more distinctive characteristics, like “pain worsens while walking”.
+Here we define the discriminability score of 𝑒𝐿4𝑑𝑖 as the reciprocal
+of the degree centrality in G:
+𝜎(𝑒𝐿4𝑑𝑖 ) = 𝑛− 1 𝑑𝑒𝑔(𝑒𝐿4𝑑𝑖 ), (15)
+where 𝑛 represents the total number of 𝑒𝐿4𝑑𝑖 G.
+We calculate the discriminability score 𝜎(𝑒𝐿4𝑑 𝑗 ) for each feature
+node 𝑒𝐿4𝑑 𝑗 ∈𝐸𝐿4𝑑𝑠 and select those with the highest discriminabil-
+ity scores as follows:
+{𝑒𝐿4𝑑𝑠1 ,𝑒𝐿4𝑑𝑠2 ,...,𝑒𝐿4𝑑𝑠𝑘 } = arg max {𝑒𝐿4𝑑 𝑗 |𝑒𝐿4𝑑 𝑗 ∈𝐸𝐿4𝑑𝑠 } 𝜎(𝑒𝐿4𝑑 𝑗 ), (16)
+where {𝑒𝐿4𝑑𝑠1 ,𝑒𝐿4𝑑𝑠2 ,...,𝑒𝐿4𝑑𝑠𝑘 } represents the selected features
+with the highest discriminability scores, which are used to proac-
+tively guide follow-up questions for clarifying the diagnosis.
+4.3 KG-elicited Reasoning RAG
+KG-elicited Reasoning RAG is the core component of MedRAG, we
+use an LLM to generate diagnoses, personalized treatment plans,
+and medication suggestions. Additionally, the system proactively
+suggests follow-up questions for doctors to clarify missing or am-
+biguous patient information. As shown in Equation 17, MedRAG
+utilizes diagnostic differences KG augmented by LLM and a tailored
+prompt 𝑝𝑠 to elicit the reasoning capabilities of LLM.
+𝐴 = M𝑔(𝑞,𝑑𝑟,𝐾,𝑝𝑠) (17)
+Unlike most RAG systems that focus on answering short factual
+questions, our system is tailored for complex tasks in clinical scenar-
+ios. The prompts are designed explicitly to optimize the reasoning
+capabilities of the LLM, particularly in distinguishing between dis-
+eases with similar manifestations. The system conducts thorough
+reasoning by using both the retrieved documents and the diagnostic
+differences KG extracted from 𝐺.
+We use the EHR database as a document repository to retrieve
+the most relevant documents 𝑑𝑟 corresponding to the patient’s
+manifestations 𝑞. We then perform a similarity search over the data-
+base to identify the most relevant k records. For this, we employ
+Facebook AI Similarity Search (FAISS) [10], a library optimized for
+efficient approximate nearest neighbor searches. FAISS allows rapid
+retrieval of similar records in large-scale EHR datasets, enabling
+adjustable trade-offs between speed and search accuracy. After ob-
+taining all inputs, we designed a tailored prompt 𝑝𝑠 for guiding the
+LLM to reason through 𝐾, generating answers to assist doctors in
+distinguishing between similar diseases and proactively generating
+follow-up questions.
+5 Experiments
+5.1 Datasets
+We evaluate MedRAG framework using two distinct datasets: one
+public and one private. The public dataset demonstrates the model’s
+general applicability, while the private dataset, focused on chronic
+pain patients, enables a more thorough evaluation of MedRAG’s
+diagnostic capabilities in real-world clinical settings.
+The public dataset, DDXPlus [14], is a large-scale synthesized
+EHR dataset, recognized for its complex and diverse medical cases.
+It includes comprehensive patient data such as socio-demographic
+information, underlying diseases, symptoms, and antecedents, ad-
+dressing the symptom-related data gap in common EHR datasets
+like MIMIC [14]. Many studies have employed DDXPlus to bench-
+mark models in medical reasoning and diagnosis [6, 32, 50, 61].
+DDXPlus contains 49 different diagnoses with over 1.3 million
+patients, each of whom has approximately 10 symptoms and 3 an-
+tecedents on average. We ultimately utilized a maximum balanced
+sub-dataset comprising 13,230 patients’ EHRs.
+The private dataset is the Chronic Pain Diagnostic Dataset (CPDD),
+a specialized EHR dataset focused on chronic pain patients. This
+dataset is collected from Tan Tock Seng Hospital, it comprises 551
+patients with 33 distinct diagnoses. CPDD offers manifestations-
+specific chronic pain patient data, making it an invaluable resource
+for testing MedRAG’s diagnostic capabilities in clinical settings.
+For more details on the partitioning, preprocessing, and experi-
+mental setup, please refer to the Appendix.
+5.2 Baselines
+In order to explore the performance of the MedRAG, we compare
+the MedRAG results against six other models, including Naive
+RAG with COT [56], FL-RAG [42], FS-RAG [51], FLARE [24], DRA-
+GIN [49] and SR-RAG [54]. More detailed introduction to each
+baseline model is provided in the appendix.
+6 Experimental Results
+In this section, we present the results of the experiments to answer
+the following research questions:
+• RQ1: Does MedRAG outperform the SOTA RAG methods
+using the same datasets?
+• RQ2: Does MedRAG demonstrate compatibility, generaliz-
+ability and adaptability across different backbone LLMs?
+• RQ3: Does MedRAG’s proactive diagnostic questioning
+mechanism provide users with impactful, relevant follow-
+up questions to enhance diagnostic performance?
+• RQ4: Is the MedRAG system we designed effective? What is
+the impact of each module on its overall performance, and
+how do specific KG components contribute to MedRAG?
+6.1 Quantitative Comparison (RQ1)
+Our experiments evaluate MedRAG against six different SOTA RAG
+models on 2 two datasets. We report the results using: 1) Accu-
+racy, defined as the number of correct diagnoses out of the total
+diagnoses; 2) Specificity, which uses 𝐿1, 𝐿2, and 𝐿3 to represent
+different diagnostic granularity levels. As outlined in Section 3
+(Definition 3.1), 𝐿𝑖 refers to the MedRAG select potential diagnoses
+from 𝐸𝐿𝑖. This metric evaluates the model’s specificity and its abil-
+ity to differentiate between similar diseases across varying levels of
+diagnostic granularity; 3) Text Generation Metrics, which uses
+BERTScore, BLEU, ROUGE, METEOR and subjective evaluatio from
+doctor to evaluate generated reports.
+The result is shown in Table 1, MedRAG achieved the best or
+second-best (with only one exception) performance across multi-
+ple metrics in all datasets. Accuracy on the 𝐿3 metric is the best
+indicator of MedRAG’s performance, as higher specificity increases
+diagnostic difficulty. MedRAG outperformed the second-best scores
+on the CPDD and DDXPlus datasets by 11.32% and 1.23%.

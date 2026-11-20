@@ -1,0 +1,100 @@
+any off-the-shelf discriminator can benefit without
+system retraining. Combined with sub-200 ms per-
+sample latency and a 2.1 GB memory footprint for
+Config A, the framework is practical for produc-
+tion deployment on consumer hardware. We also
+contribute HotPotQA-Derived, a three-tier multi-
+hop hallucination benchmark (Easy / Medium /
+Hard) that enables difficulty-stratified evaluation
+beyond what single-hop benchmarks support, and
+we hope it will serve as a standard testbed for fu-
+ture research on multi-hop hallucination detection
+in RAG systems.
+Limitations
+Semantic vs. Logical Gap. Our Semantic Evi-
+dence Aggregation module captures semantic co-
+herence in embedding space but does not perform
+formal logical operations. For queries requiring
+multi-step conditional inference, the NLI discrim-
+inator must still handle the conditional structure,
+which may exceed the capacity of small-scale NLI
+models even when evidence is correctly aggregated.
+Future work could integrate symbolic reasoning
+modules as a downstream verification step over our
+aggregated evidence clusters.
+Coarse-Grained Semantic Relations. The mod-
+ule merges chunks based on aggregate graph con-
+nectivity, treating all semantic relations uniformly.
+It does not differentiate between relation types (cau-
+sation, temporality, coordination). Concatenated
+segments may therefore not preserve causally co-
+herent ordering.
+Embedding Model Robustness. Our primary
+implementation uses all-MiniLM-L6-v2 as the
+sentence encoder. While theoretical arguments
+and the literature suggest that semantic graph
+structure is preserved across well-trained embed-
+ders (Tavares et al., 2024), a comprehensive empir-
+ical study of embedding model variation remains
+an open item for future work.
+Data-to-Text Performance. Our method shows
+weaker performance on the RAGTruth Data-to-
+Text subset, likely because this subset is generated
+from structured tables where semantic proximity
+in embedding space is less effective at capturing
+key-value relationships.
+Acknowledgments
+The work was partially supported by the follow-
+ing: National Natural Science Foundation of China
+under No. 92370119, and 62376113.
+References
+Forrest Bao, Miaoran Li, Rogger Luo, and Ofer
+Mendelevitch. 2024. HHEM-2.1-Open.
+Shahul Es, Jithin James, Luis Espinosa-Anke, and
+Steven Schockaert. 2025. Ragas: Automated eval-
+uation of retrieval augmented generation. Preprint,
+arXiv:2309.15217.
+Zorik Gekhman, Jonathan Herzig, Roee Aharoni, Chen
+Elkind, and Idan Szpektor. 2023. Trueteacher: Learn-
+ing factual consistency evaluation with large lan-
+guage models. Preprint, arXiv:2305.11171.
+Assaf Gerner, Netta Madvil, Nadav Barak, Alex Zaik-
+man, Jonatan Liberman, Liron Hamra, Rotem Brazi-
+lay, Shay Tsadok, Yaron Friedman, Neal Harow,
+Noam Bresler, Shir Chorev, and Philip Tannor. 2025.
+Grounded in context: Retrieval-based method for
+hallucination detection. Preprint, arXiv:2504.15771.
+Michelle Girvan and Mark EJ Newman. 2002. Com-
+munity structure in social and biological networks.
+Proceedings of the National Academy of Sciences,
+99(12):7821–7826.
+Yuntong Hu, Zhihan Lei, Zheng Zhang, Bo Pan,
+Chen Ling, and Liang Zhao. 2024. GRAG: Graph
+retrieval-augmented generation. arXiv preprint
+arXiv:2405.16506.
+Sean Lee, Rui Huang, Aamir Shakir, and Julius Lipp.
+2025. Baked-in brilliance: Reranking meets rl with
+mxbai-rerank-v2.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, Sebastian Riedel, and Douwe Kiela. 2020.
+Retrieval-augmented generation for knowledge-
+intensive NLP tasks. CoRR, abs/2005.11401.
+Junyi Li, Xiaoxue Cheng, Xin Zhao, Jian-Yun Nie, and
+Ji-Rong Wen. 2023. HaluEval: A large-scale hal-
+lucination evaluation benchmark for large language
+models. In Proceedings of the 2023 Conference on
+Empirical Methods in Natural Language Processing,
+pages 6449–6464, Singapore. Association for Com-
+putational Linguistics.
+Cheng Niu, Yuanhao Wu, Juno Zhu, Siliang Xu, Kashun
+Shum, Randy Zhong, Juntong Song, and Tong Zhang.
+2023. Ragtruth: A hallucination corpus for develop-
+ing trustworthy retrieval-augmented language models.
+arXiv preprint arXiv:2401.00396.
+Selvan Sunitha Ravi, Bartosz Mielczarek, Anand Kan-
+nappan, Douwe Kiela, and Rebecca Qian. 2024.
+Lynx: An open source hallucination evaluation
+model. Preprint, arXiv:2407.08488.
+1613

@@ -1,0 +1,59 @@
+30th, ACM KDD August 25 - 29, 2024, 2024, Barcelona, Spain Geethan Sannidhi, Sagar Srinivas Sakhinana, and Venkataramana Runkana
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+sLA-tKGF W/GPT-2 (gpt2) 0.505 0.520 0.513 0.445 0.487 0.516 0.243 0.318 0.437 0.270 0.345 0.416 0.223 0.318 0.398
+sLA-tKGF W/GPT-2 (gpt2-xl) 0.640 0.661 0.657 0.569 0.619 0.656 0.319 0.413 0.550 0.349 0.446 0.541 0.296 0.407 0.512
+sLA-tKGF W/GPT-J 0.717 0.734 0.736 0.643 0.690 0.734 0.366 0.466 0.619 0.396 0.496 0.602 0.339 0.469 0.575
+sLA-tKGF GPT-NeoX 0.789 0.804 0.827 0.719 0.763 0.811 0.416 0.525 0.700 0.452 0.561 0.681 0.391 0.532 0.647
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+sLA-tKGF W/GPT-4 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+sLA-tKGF W/GPT-2 (gpt2) 0.479 0.485 0.509 0.438 0.469 0.485 0.228 0.304 0.425 0.267 0.335 0.416 0.220 0.301 0.395
+sLA-tKGF W/GPT-2 (gpt2-xl) 0.539 0.558 0.576 0.498 0.524 0.558 0.273 0.355 0.481 0.299 0.378 0.465 0.253 0.353 0.442
+sLA-tKGF W/GPT-J 0.603 0.637 0.648 0.564 0.597 0.641 0.315 0.411 0.554 0.349 0.443 0.521 0.296 0.410 0.497
+sLA-tKGF GPT-NeoX 0.691 0.716 0.732 0.635 0.670 0.709 0.361 0.463 0.617 0.395 0.498 0.602 0.338 0.464 0.576
+Table 17: The table presents the experimental results of the study on the impact of PLLM size on the tKG forecasting task.
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+(𝑏 = 48, 𝑒𝑃 = 30, 𝑑 = 64) 0.903 0.940 0.953 0.844 0.868 0.907 0.492 0.620 0.802 0.541 0.655 0.792 0.487 0.641 0.757
+(𝑏 = 48, 𝑒𝑃 = 30, 𝑑 = 128) 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+(𝑏 = 16, 𝑒𝑃 = 30, 𝑑 = 64) 0.881 0.934 0.938 0.820 0.853 0.895 0.465 0.599 0.787 0.514 0.644 0.781 0.472 0.596 0.740
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+(𝑏 = 48, 𝑒𝑃 = 30, 𝑑 = 64) 0.849 0.902 0.920 0.808 0.822 0.934 0.465 0.603 0.750 0.490 0.651 0.790 0.469 0.612 0.718
+(𝑏 = 48, 𝑒𝑃 = 30, 𝑑 = 128) 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+(𝑏 = 16, 𝑒𝑃 = 30, 𝑑 = 64) 0.842 0.891 0.903 0.799 0.836 0.909 0.452 0.584 0.755 0.504 0.637 0.795 0.465 0.902 0.703
+Table 18: The table presents the hyperparameter tuning results conducted on the tKG forecasting task using benchmark
+datasets.
+Single-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+(𝑇 𝑜𝑝 − 𝑃 = 1, 𝑇 𝑒𝑚𝑝 = 0) 0.961 0.994 1.000 0.895 0.943 0.994 0.566 0.689 0.879 0.608 0.726 0.854 0.537 0.689 0.822
+(𝑇 𝑜𝑝 − 𝑃 = 1, 𝑇 𝑒𝑚𝑝 = 3) 0.832 0.879 0.908 0.776 0.806 0.896 0.489 0.616 0.776 0.534 0.624 0.733 0.491 0.602 0.729
+(𝑇 𝑜𝑝 − 𝑃 = 0, 𝑇 𝑒𝑚𝑝 = 0) 0.909 0.932 0.954 0.813 0.881 0.959 0.529 0.660 0.822 0.569 0.688 0.817 0.495 0.670 0.761
+Multi-Step YAGO WIKI ICEWS14 ICEWS18 ACLED-CD22
+H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10 H@1 H@3 H@10
+(𝑇 𝑜𝑝 − 𝑃 = 1, 𝑇 𝑒𝑚𝑝 = 0) 0.908 0.938 0.973 0.846 0.891 0.968 0.499 0.633 0.802 0.545 0.688 0.828 0.481 0.648 0.775
+(𝑇 𝑜𝑝 − 𝑃 = 1, 𝑇 𝑒𝑚𝑝 = 3) 0.813 0.828 0.832 0.742 0.799 0.819 0.442 0.564 0.688 0.478 0.580 0.750 0.412 0.576 0.686
+(𝑇 𝑜𝑝 − 𝑃 = 0, 𝑇 𝑒𝑚𝑝 = 0) 0.859 0.885 0.908 0.786 0.833 0.927 0.470 0.607 0.749 0.503 0.659 0.775 0.450 0.613 0.727
+Table 19: The table shows the experimental results of hyperparameter optimization for both Top-P and temperature conducted
+on the tKG forecasting task using benchmark datasets, specifically for the sLA-tKGF-GPT-4 variant of our framework.
+datasets, highlighting that the combination (𝑏 = 48,𝑒𝑝 = 30,𝑑 =
+128) is most effective for tKG forecasting tasks.
+6.9 Hyperparameter Tuning of PLLMs
+Top-P and temperature serve as hyperparameters in pre-trained
+large language models (PLLMs), such as GPT-4 and Google Gemini.
+These hyperparameters influence the predictability and variety of
+model outputs. The temperature parameter primarily affects output
+predictability. Lower temperature values result in more determin-
+istic responses, while higher values enable greater variability. A
+temperature value of 1.0 maintains the original output probabil-
+ities. On the other hand, Top-P (nucleus) sampling dynamically
+chooses tokens based on their cumulative probability. This method
+strikes a balance between text generation diversity and coherence
+by adjusting the threshold. By fine-tuning these parameters, it is
+possible to strike an optimal balance between randomness and de-
+terminism in generated outputs. Regarding the sLA-tKGF-GPT-4
+variant, hyperparameter optimization studies indicate that Top-P
+ranges over [0, 1], and temperature falls within the range of [0, 3].
+12

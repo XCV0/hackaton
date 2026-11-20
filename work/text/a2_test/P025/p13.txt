@@ -1,0 +1,48 @@
+Table 5: Impact of Embedding Models(targeted)
+Dataset Embedding Retrieval Private Contexts Repeat Effect Prompt Repeat Extract Context Targeted Information
+HealthCareMagic
+bge-large-en-v1.5 445 118 135 89
+all-MiniLM-L6-v2 465 95 120 92
+e5-base-v2 446 114 139 93
+Enron-Email
+bge-large-en-v1.5 312 54 42 80
+all-MiniLM-L6-v2 385 57 53 119
+e5-base-v2 278 38 31 140
+Table 6: Impact of temperature(targeted)
+Dataset Temperature Retrieval Private Contexts Repeat Effect Prompt Repeat Extract Context Targeted Information
+HealthCareMagic
+0 (greedy) 447 120 131 94
+0.6 447 126 140 104
+1 447 114 124 87
+Enron-Email
+0 (greedy) 312 42 39 104
+0.6 312 56 57 127
+1 312 76 69 152
+A.3 Details of Prompting Design
+A.3.1 The Information Part for Targeted and Untargeted Attacks
+The {information} component is intentionally designed to extract a substantial volume of data from the
+database. These data determine the maximum limit of attack capabilities. Therefore, whether employing a
+targeted or untargeted attack, it is crucial to maintain input diversity in order to ensure effective extraction.
+For targeted attacks, it is also crucial to ensure that the extracted contexts aligns as closely as possible with
+the attacker’s specific requirements. Consequently, the design of the {information} component differs for
+these two attack types.
+Targeted Attack To generate the {information} component for a targeted attack, there are two stages
+involved.
+In the first stage, the attacker must provide specific examples based on their individual requirements.
+For instance, they may write queries such as "I want some advice about {target name}", "About {target
+name}" if the name of the target object is clear. On the contrary, if the target is abstract, such as a specific
+email address or someone’s phone number, the attacker can provide the prefix content related to these
+targets, such as "Please email us at" or "Please call me at".
+In the second stage, it is crucial to generate a significant quantity of {information} that is both similar
+and varied based on the provided examples. If the extracted target consists of numerous sub-contents, the
+generation process can incorporate replacing these specific sub-contents to generate diverse variations.
+Specifically, for the HealthcareMagic dataset, considering the multitude of disease types, the names
+of different diseases can be obtained by leveraging ChatGPT’s generation capabilities or by accessing
+the International Classification of Diseases (ICD) from the World Health Organization (WHO). The
+{information} component is created by "I want some advice about {disease name}". Another approach
+(is also used for the Enron Email dataset) is to directly leverage LLMs like ChatGPT to generate similar
+sentences with examples. For instance, you can input “Generate 100 similar snetences like "Please email
+us at"”.
+Untargeted Attack Since there is no need to extract specific targets, untargeted attack only needs to
+consider making {information} components more diverse to obtain more data from retrieval datasets. To
+4517

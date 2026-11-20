@@ -1,0 +1,107 @@
+E. Complexity Analysis
+1) Time Complexity: For the entity extraction procedure,
+the time complexity is O(|V||Tc|); Adding passage nodes also
+requires O(|V||Tc|) time. For graph weighting, calculating the
+PPR score requires O(|Tc|(|V| + |E|)) time, and calculate the
+edge cost requires O(|E|) time. For AGRAG’s Step 3, the
+time complexity of AGRAG’s MCST generation is O(|E| +
+|V|log|V|) using the Mehlhorn algorithm [78]; The expansion
+from MCST to MCMI would cost O(|VMCMI| · |N (VMCMI)|)
+Hence, the time complexity of AGRAG’s MCMI generation
+at the worst case when VMCMI = V and the graph is fully
+connected is: O(|V|2 + |E|).
+Hence, the end to end time complexity of AGRAG is:
+O(|Tc|(|V| + |E|) + |V|2). Since the number of text chunk
+|Tc| is less or equal to the number of nodes |V| in graph, in
+the worst case, the end to end time complexity of AGRAG is:
+O(|V| · |E| + |V|2).
+2) Space Complexity: The graph of AGRAG’s Step 1 and
+Step 2 is stored with the dense weighted adjacency matrix,
+which needs O(|E|) space; Storing the text chunk would need
+O(|Tc|) space; Storing the entity nodes require O(|V|) space.
+Hence the total space complexity of AGRAG’s Graph Indexing
+step is: O(|V| + |E| + |Tc|). In AGRAG’s Step 3, we only need
+O(|E|) to store the graph.
+Hence, the total space complexity of AGRAG is:
+O(|V| + |E| + |Tc|).
+IV. EXPERIMENTS
+1) Evaluation Metrics: In this paper, we apply 5 metrics
+with the RAGAS [79] package to evaluate AGRAG’s perfor-
+mance on 5 different tasks:
+a. Accuracy (ACC.): For text classification, the proportion
+of exact matches between LLM and gold labels. For other
+tasks, sample is scored 0, 0.5, or 1 by the LLM for inac-
+curate, partially accurate, or exactly accurate responses.
+b. Recall (REC.): Quantifies the model’s ability to identify
+all actual positive instances by calculating the ratio of true
+positives to the sum of true positives and false negatives,
+we calculate the macro recall score and apply it to the text
+classification task, where we have a fixed label set.
+c. ROUGE-L (ROG.) [80]: Evaluates the answer quality
+by comparing the longest common subsequence (LCS)
+between the generated answer G and the gold answer Y :
+ROUGE-L = LCS(G,Y ) |G| . We apply ROUGE-L to the fact
+retrieval and the complex reasoning tasks, as the answer
+of these two tasks are usually a fixed entity or relation.
+d. Coverage (COV.) [34]: Evaluates answer completeness
+by assessing whether all necessary reference evidences E
+are included in the LLM’s response R, computed as the
+proportion of covered evidences to the number of required
+evidences |E|:Cov = |{e∈E | M (e,R)}| |E| , where M (e, R)
+is a boolean function indicating whether evidence e is
+covered by generated response R. We apply the coverage
+metric to contextual summarization and creative generation
+tasks, as their answers are usually passages that conclude
+multiple information points.
+e. Faithfulness (FS.) [34]: Measures the percentage of an-
+swer claims A directly supported by retrieved context C,
+calculated as the ratio of claims aligned with evidence
+to the number of total claims A: FS = |{a∈A | S(a,C)}| |A| ,
+where S(a, C) is a boolean function indicating whether a
+claim is supported by contexts in C. We apply the faith-
+fulness metric to the creative generation task to evaluate
+the quality of the hypothesis in the LLM’s response.
+2) Baselines: We compare AGRAG’s performance with
+6 baselines from 3 technical categories, they are traditional
+RAG model NaiveRAG [15] and LongLLMLingua [70];
+Community-based model GraphRAG [23], and LightRAG
+[24]; And walking-based model Fast-GraphRAG [32] and
+HippoRAG2 [29]. We use the Qwen-2.5-14B-Instruct [81] as
+the LLM backbone unless further illustrated.
+Traditional RAG Models These models directly retrieve text
+chunks based on their semantic similarity to the queries.
+• NaiveRAG [15]: NaiveRAG acts as a foundational baseline
+of current RAG models. It encodes text chunks into a vector
+database and retrieve the Top-k text chunks based on the
+vector similarities between queries and text chunks.
+• L.LLMLingua [70]: LongLLMLingua utilizes LLM’s gen-
+eration perplexity to filter out unimportant LLM input to-
+kens. In this paper, we apply it to compress the retrieved text
+chunks of NaiveRAG w.r.t. the query and task instruction.
+Tree-based Models These models organize text chunks into
+tree structures to capture long-range dependencies and the-
+matic information.
+• RAPTOR [60] RAPTOR recursively clusters and summa-
+rizes text chunks to construct a tree from the bottom up,
+enabling the retrieval of information at varying levels of
+abstraction to answer high-level thematic queries.
+• SiReRAG [71] Based on RAPTOR, SiReRAG builds simi-
+larity and relatedness trees to index respective information,
+thereby supporting complex multihop reasoning.
+Community-based Models These models retrieve one or
+multi-hop neighborhood of certain graph nodes that corre-
+spond to the query.
+• G-retriever [72] It formulates subgraph retrieval as a Prize-
+Collecting Steiner Tree (PCST) optimization problem, iden-
+tifying connected subgraphs that maximize relevance while
+minimizing costs.
+• MIXRAG [73] It introduces a Mixture-of-Experts (MoE)
+framework to handle diverse query intents, dynamically
+routing queries to specialized experts and employing a
+query-aware graph encoder to filter noise.
+• GraphRAG [23]: It employs LLM for graph construction.
+When retrieval, it aggregates nodes into communities w.r.t.
+the query, and generates community reports to encapsulate
+global information from texts.
+• LightRAG [24]: It calculates the vector similarity between
+query extracted entities and graph nodes, achieving a one-

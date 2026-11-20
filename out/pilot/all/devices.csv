@@ -1,0 +1,15 @@
+publication_id,device_id,absorber_material_id,device_label,device_role,device_type,architecture,substrate_type,active_area,area_unit,area_definition,encapsulation,note
+D001,DV-P,M-P,pristine (no dopant),control,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S001,M-S001,0.001 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S005,M-S005,0.005 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S01,M-S01,0.01 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-S05,M-S05,0.05 M SrCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D001,DV-N01,M-N01,0.01 M NiCl2,target,cell,n-i-p,rigid,0.0625,cm2,aperture,,planar FTO/c-TiO2/CsPbI2Br/P3HT/metal; «masked with a metal aperture to define the active area of 0.0625 cm2»
+D012,DV5,M5,DIO-5 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D012,DV10,M10,DIO-10 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D012,DV15,M15,DIO-15 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D012,DV20,M20,DIO-20 mg/mL,target,cell,substrate,rigid,,,,,SLG/Mo/CZTS/CdS/i-ZnO/AZO/Ag; площадь не указана
+D018,DV-UNT,M1,Untreated CIGS (PHRMS),control,cell,substrate,rigid,0.25,cm2,,,Mo-стекло; «Devices were manually scribed to /C240.25 cm2 and measured without a front grid»
+D018,DV-CST,M1,Cs-ST CIGS (PHRMS),target,cell,substrate,rigid,0.25,cm2,,,Mo-стекло; «Devices were manually scribed to /C240.25 cm2 and measured without a front grid»
+D018,DV-NUNT,M2,Untreated CIGS (NICE),control,cell,,,,,,,Только статистика на рис. 6B-E; площадь и архитектура для этой серии не указаны
+D018,DV-NCST,M2,Cs-ST CIGS (NICE),target,cell,,,,,,,Только статистика на рис. 6B-E; площадь и архитектура для этой серии не указаны

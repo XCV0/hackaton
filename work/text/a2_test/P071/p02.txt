@@ -1,0 +1,104 @@
+dominance effects that are especially salient for
+non-Western normative systems (Naous and Xu,
+2025; Guo et al., 2025). Within the Islamic do-
+main, emerging resources (e.g., inheritance-law
+reasoning and abstention-aware fiqh evaluations)
+indicate both progress and substantial performance
+gaps, particularly for Arabic and for school-aware
+nuance, reinforcing the need for fine-grained re-
+liability checks tailored to Islamic jurisprudence
+(Bouchekif et al., 2025b; Elsafoury and Hartmann,
+2025; Asseri et al., 2025). Parallel work on Quranic
+retrieval-augmented generation (RAG) further sug-
+gests that grounding can improve faithfulness, but
+that outcomes are mixed and depend on model ca-
+pacity and retrieval quality (Khalila et al., 2025).
+A central obstacle in knowledge-intensive Is-
+lamic QA is hallucination. Multilingual studies
+suggest that Arabic settings can amplify factuality
+and faithfulness errors, and that coarse answer-level
+metrics often miss subtle inconsistencies important
+for normative argumentation (ul Islam et al., 2025;
+Alansari and Luqman, 2025; Hosseini et al., 2025;
+Elchafei and Abu-Elkheir, 2025; Wang et al., 2025).
+Moreover, test-time scaling results show that longer
+reasoning traces do not reliably improve ground-
+ing and may even increase overconfident errors
+(Gema et al., 2025; Zhao et al., 2025). This moti-
+vates retrieval-based grounding, especially agentic
+setups that interleave search, tool use, and verifi-
+cation, but practical reliability depends on robust
+tool orchestration and domain ontologies (Liang
+et al., 2025). Accordingly, we target three under-
+specified and under-measured needs in Islamic
+QA: (i) Arabic–English robustness, (ii) calibrated
+abstention under insufficient evidence, and (iii)
+evidence-grounded generation aligned with canon-
+ical sources (Bhatia et al., 2025). Figure 1 sum-
+marizes our motivation and method in a current–
+proposed–outcome view, contrasting today’s Is-
+lamic QA pipeline with our Islamic grounding-
+based approach and its resulting citation-backed
+bilingual answers. Our contributions are as fol-
+lows:
+• Bilingual Islamic QA benchmark: ISLAMIC-
+FAITHQA comprises 3,810 Arabic–English ques-
+tions with atomic, single-gold answers4 and a
+strict correct, incorrect or not attempted
+4Many Islamic questions allow multiple valid answers
+across interpretive traditions (madh¯ahib). To enable reliable
+generative evaluation, we focus on atomic items with a sin-
+gle text-grounded answer; handling disputed cases via multi-
+reference/equivalence-class grading is left to future work.
+labeling scheme, enabling direct measurement of
+hallucination and abstention.
+• An end-to-end data suite for grounded Islamic
+modeling: We release a unified set of resources
+spanning 25K Arabic text-grounded SFT rea-
+soning pairs, 5K bilingual preference samples
+for reward-guided alignment, and a verse-level
+Quran retrieval corpus of 6,236 atomic ayat.
+• Evidence-seeking inference via agentic Quran
+grounding: We develop and evaluate an agen-
+tic RAG setup that turns retrieval into an explicit
+decision process through structured tool calls (se-
+mantic search, verse reading, metadata lookup).
+Across all backbones, ISLAMICFAITHQA ex-
+poses a substantial reliability gap between general
+instruction-following fluency and text-grounded
+Islamic correctness. Most off-the-shelf multilin-
+gual LLMs remain below 30% accuracy under
+strict LLM-as-Judge grading (Table 3). Retrieval
+augmentation is the most consistently effective in-
+tervention, improving performance across mod-
+els by anchoring generations to canonical evi-
+dence (Table 4). Most notably, agentic RAG
+yields the largest gains beyond standard RAG, en-
+abling strong bilingual robustness by forcing it-
+erative evidence seeking and verse inspection be-
+fore answering. For Qwen3-4B-2507, accuracy
+improves from 21.85 (base) to 38.85 (+RAG) and
+to 48.90 (+Agentic RAG), while also narrowing
+the Arabic–English gap (Table 4). Finally, com-
+bining a strong in-domain backbone with agentic
+grounding achieves the best overall performance,
+with Fanar-2-27B + Agentic RAG reaching 57.30
+average accuracy (Table 4).
+2 Related Work
+2.1 Benchmarking in Islamic Domain
+General-purpose evaluations of moral and trust-
+worthiness show that LLM behavior is highly
+sensitive to framing and may appear competent
+while remaining unreliable, motivating the need
+for domain-grounded assessment beyond generic
+scenarios (Al-Khalifa et al., 2025; Abhishek et al.,
+2025; Hassan Bhatti et al., 2025; Abdelali et al.,
+2024). Follow-on work in specialized, high-stakes
+settings (e.g., legal/medical ethics) emphasizes
+stricter correctness notions, risk-aware protocols,
+and evaluation designs that better reflect real de-
+ployment constraints (Shao et al., 2025; Hong et al.,
+2025; Jin et al., 2025; Hui et al., 2025). In culturally
+situated contexts, multilingual studies further show
+2
+26470

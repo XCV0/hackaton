@@ -1,0 +1,149 @@
+Question: 
+Who is in charge of 
+maintaining this 
+park?
+Fine-Grained Section Re-ranking Multimodal Section Reassessment 
+Tags: city park, 
+chair, people……
+……
+Question Image
+Visual
+Encoder
+##Section Title: Conse rvancy
+Abingdon Square Conse rvancy is a non-profit public 
+charity exempt from federal income tax under 
+Section 501(c)(3) of the Inte rnal Revenue Code . The 
+Conse rvancy's mission ….
+##Section Title: History
+Ne w York City acquired the land on which the park 
+resides on April 22, 1831 , and it was enclose d with 
+a cas t-iron fence in 18 36. In the  1 880s,  an effort 
+was initiated...
+Top 20 
+Articles
+Q-Former
+Sections
+Late-Interaction
+[CLS]
+Top 5 
+Sections
+Multimodal
+Encoder
+Multimodal
+Encoder
+Image Question
+Sections Cover images
+Dot-Product
+Similarity Score
+Top 1 
+Sections
+Answers
+Generator
+Image
+……
+Text
+1×768
+512×768
+MatMul&Scale
+Mask&Select
+Learned Queries
+Self Attention
+Cross Attention
+Feed Forward 32×768
+F-Adapter Module
+Image & Question
+Contrastive learning on fine-grained section re-ranking
+WIKIPEDIA
+[Q]
+~
+Random Select
+~
+Select from Visually Similar Instances 
+~
+Select based on Generator Feedback
+[Q]
+[Q]
+Positive
+Sample Negatives Sample
+I can’t determine if the context 
+is incorrect.
+Easy
+Hard
+Progressive Multi-modal Re-ranking Framework
+• Decoding rank perturbation
+• Average log-likelihood
+CLIP-based Visual Broad-
+Scope Search
+Q-Former
+F-Adapter
+Q-Former
+F-Adapter
+Figure 2: The overview of our progressive multimodal re-ranking framework for LLM generations. The contributions
+are: a progressive multimodal re-ranking framework based on multi-perspective, multi-granularity alignment; and a
+curriculum learning optimization strategy for the re-ranking contrastive training.
+architectures to achieve fine-grained feature align-
+ment between multimodal queries and textual
+knowledge. Wiki-LLaVA (Caffagni et al., 2024)
+pioneered hierarchical retrieval based on CLIP and
+Contriever (Izacard et al., 2022), refining the re-
+trieved Wikipedia corpus through segmentation.
+Others (Yan and Xie, 2024; Yang et al., 2025) em-
+ploy trainable Q-Former (Li et al., 2023) modules
+and multi-stage re-ranking strategies to improve
+recall performance with Wikipedia corpora. (2)
+Knowledge fusion optimization: mR2AG (Zhang
+et al., 2024b) introduces a multimodal retrieval-
+reflection-augmented generation process, using
+special tokens to identify whether knowledge para-
+graphs should be introduced, enabling adaptive re-
+trieval. MMKB-RAG (Ling et al., 2025) leverages
+the inherent knowledge of MLLMs and employs a
+three-stage process to determine retrieval necessity
+and relevance, ensuring accurate and robust multi-
+modal reasoning. Our method focuses on retriever
+performance optimization, improving accuracy by
+introducing a multi-level, fine-grained, progressive
+multimodal retrieval framework.
+3 Proposed Method
+We propose a progressive re-ranking framework
+for multimodal retrieval-augmented generation,
+as illustrated in Figure 2. Considering the mul-
+timodal and multi-granularity nature of queries
+and Wikipedia corpora, the system introduces a
+multi-perspective progressive multimodal retrieval
+method to extract the most relevant multimodal in-
+formation and feed it into the generator as a contex-
+tual prompt. In this section, we first briefly describe
+the process of retrieval-augmented VQA, then de-
+tail the progressive multimodal retrieval strategy,
+and demonstrate how to train the re-ranking mod-
+ule to robustly evaluate relevant knowledge para-
+graphs.
+3.1 Problem Formulation
+Retriever MR: Given an image I and a ques-
+tion q, the retriever identifies relevant knowledge
+from a knowledge corpus K through a multi-stage
+retrieval and re-ranking strategy. The knowledge
+corpus K, derived from Wikipedia web pages, con-
+tains N entities, each with a textual description
+and associated images: K = {d1, d2, . . . , dN } =
+{(p1, t1), (p2, t2), . . . , (pN , tN )}, where di repre-
+sents the i-th knowledge entity, ti represents the
+textual explanation, and pi represents the associ-
+ated images. The retriever encodes both the mul-
+timodal query (I, q) and the knowledge entity di,
+evaluating their relevance using a similarity assess-
+ment function: scorei = MR(I, q, di). The docu-
+ment d with the highest score is typically selected
+as input for the generator.
+Generator MG: The retrieved document d is con-
+catenated with the query, enabling the generator
+to produce an answer: y = MG(I, q ◦ d). To fur-
+ther enhance response accuracy, LoRA (Hu et al.,
+2022) is introduced as learnable parameters within
+the LLMs. The model is trained using the cross-
+entropy loss:
+LCE = − 1 N N∑ i=1 V∑ j=1 yij log pij , (1)
+where N is the number of training examples, V is
+the vocabulary size, yij represents the target distri-
+41137

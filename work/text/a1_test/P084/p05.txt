@@ -1,0 +1,132 @@
+JðVÞ¼J0 e
+qðVþJRS Þ
+nKB T /C0 1
+/C18/C19
+þ V þ JRS
+Rsh
+þ kðV /C0 JRSÞm (1)
+where J0 is the reverse saturation current, q is the elementary
+charge, RS is the series resistance, n is the diode factor, KB is
+the Boltzmann constant, T is the temperature, and Rsh is the
+shunt resistance. In the non-ohmic shunt term, k,isassociated
+with the trap distribution, the conductivity, and the length of
+the transport path, while m is related to the absence (m /C25 2) or
+presence (m > 2) of a high density of deep traps in the SCLC
+region.
+Figure 3d shows typical dark JV curves obtained from pristine
+devices (that had not been aged or exposed to repeated light/volt-
+age cycles). These curves were ﬁtted to the equivalent circuit
+models and the associated parameters are presented in
+Table 1. Importantly, the dark JV curve for the cell, where a
+ZnO HRMO layer was deposited, ﬁts to an equivalent circuit
+where only the ohmic parallel resistance element, Rsh, is needed.
+A secondary parallel resistance element, Rnh, must be added to
+the circuit model to correctly account for the formation of SCLC
+regions and the associated non-ohmic current in both CdS-only
+and TiO2/CdS devices. The presence of non-ohmic shunt path-
+ways present in these devices is best exempliﬁed by plotting dJ/
+dV for devices. Figure 3e shows the typical dJ/dV curves for the
+different solar cell architectures evaluated here, which clearly
+show the presence of non-ohmic shunts for CdS-only devices
+and their removal when employing HRMO interlayers.
+In the case of CdS-only devices, non-ohmic shunts were con-
+stant across countless CdS depositions and irrespective of the
+CdS thickness employed in the devices, further highlighting that
+these pathways are inherent to the CdS layer itself and not due to
+the quality of the deposition (see Figure S6, Supporting
+Information). For TiO2/CdS devices the ﬁtted non-ohmic com-
+ponent is small, reducing the value of k nearly 40 times com-
+pared to the value obtained for CdS-only devices. This
+indicates a signiﬁcant reduction (although not complete removal)
+of non-ohmic current leakage. Although this may be acceptable,
+TiO2 layers also introduce a large series of resistance in devices
+as well as yielding a m > 2, which indicates the presence of a high
+density of deep traps that are present in the TiO2 layer (vide
+infra).
+Employing an HRMO in Sb2Se3 devices is paramount to avoid
+issues associated with the CdS/Sb2Se3 architecture. When select-
+ing an optimal HRMO interlayer, the quality of newly generated
+interfaces must also be carefully considered. Defective interfaces
+and nonideal band alignment at the front contact can result in the
+formation of energy barriers for electron transfer and increased
+recombination.[8d,24] Charge transport in solar cells is highly
+inﬂuenced by these barriers, and can lead to anomalies in the
+JV characteristics of a solar cell, such as cross-over between dark
+and illuminated curves as well as kinks and roll-over in the dark
+or light JV curves, ultimately reducing device lifetime and
+efﬁciency.[13d,16]
+Figure 4a shows the light and dark JV curves for a typical solar
+cell with a TiO2 HRMO interlayer. Clear cross-over behavior is
+observed in these devices as the diode current in the dark JV
+curve is signiﬁcantly impeded. This reveals that, in the dark, a
+high barrier for the diode current is introduced at the front con-
+tact by the TiO2. Moreover, the data from Figure 4b show that the
+series resistance of these solar cells drops rapidly with increasing
+light intensity. This light-dependent barrier is responsible for the
+cross-over anomaly in devices, where TiO2 is deposited. In con-
+trast, both ZnO and CdS-only devices show cross-over behavior.
+This implies a satisfactory combination of material properties at
+the front contact and indicates suitable band energy alignment
+across the junctions. Likewise, similar to the CdS-only control
+devices, the series resistance of devices with a ZnO HRMO inter-
+layer does not change signiﬁcantly with light intensity.
+Therefore, unlike TiO2, ZnO may be used to preserve junction
+quality, prevent device degradation, and improve device efﬁ-
+ciency without introducing a defective interface through a
+light-dependent electron barrier.
+To understand why ZnO (and not TiO2) acts as an effective
+interlayer, the origin of the electron barrier in cells with a
+TiO2 HRMO layer was explored in greater detail. Figure 5a shows
+JV curves taken under quasi-monochromatic light illumination.
+As the wavelength of light is decreased from 800 to 400 nm a
+concomitant decrease in diode current blocking is observed.
+At /C25500 nm (2.48 eV), which is just above the bulk bandgap
+of CdS (2.42 eV), a sudden change in dynamics occurs. This
+can be better visualized on the series resistance curve, dJ/dV ver-
+sus V (Figure 5b), where we see a shoulder at /C250.5 V, that is,
+virtually eliminated when the device is illuminated with photons
+having an energy of 2.48 eV or higher. This indicates that the
+barrier height is signiﬁcantly lowered as soon as the light starts
+being absorbed by the CdS layer. Barrier height modulation by
+light absorbed in the CdS layer is commonly observed in,
+CuInSe2, Cu(In,Ga)Se2, and CdTe have been attributed to a
+high-positive potential step (barrier) for the diode current across
+buffer/window layers.[15,25] We veriﬁed that the band alignment
+between ZnO, TiO2, CdS, and Sb2Se3 ﬁlms was satisfactory, indi-
+cating that the barrier is not caused by an intrinsic misalignment
+between HRMO and CdS conduction bands.[18a,26] (see
+Figure S7, Supporting Information). Rather, deep acceptor levels
+(traps) present at the buffer/window interface generate the
+barrier. Notably, cross-over is signiﬁcantly less pronounced
+when ZnO HRMO is used (see also Figure S8, Supporting
+Information).
+The mechanism of barrier formation is detailed in
+Figure 5c.[12a] In the dark, electrons from an adjacent defective
+layer (TiO2) ﬁll the acceptor states at the interface and generate an
+area of negative charge. Consequently, a positive space charge
+region is induced in the bulk of these layers for charge balance.
+If the surface density of negatively charged acceptor levels at this
+interface is comparable to the charge density in the buffer or win-
+dow, the conduction band at the interface is perturbed toward the
+vacuum level leading to a sharp drop in potential over the HRMO
+Table 1. Representative ﬁtted diode parameters from dark JV curves with
+and without HRMO deposition.
+Layer Shunt
+model
+Rsh
+[Ω cm2]
+k
+[/C210/C06]
+mRS
+[Ω cm]
+nJ0
+[/C210/C06 mA cm/C02]
+None Ohmic þ
+non-ohmic
+35 749 39 3.45 2.29 1.74 2.65
+ZnO Ohmic 32 623 ––2.21 1.48 1.67
+TiO2 Ohmic þ non-ohmic 68 684 1.0 3.36 30.1 1.59 0.599
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2200265 2200265 (5 of 9) © 2022 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 8, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202200265, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

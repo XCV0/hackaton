@@ -1,0 +1,98 @@
+the regulation of emotions and thoughts. Distortion
+detection has been used to empower AI models in
+psychotherapy (Chen et al., 2023b), practical train-
+ing in CBT treatment (Wang et al., 2024a), LLMs’
+reasoning (Lim et al., 2024; Nguyen et al., 2026),
+or cognition-aware coaching (Hotta et al., 2025).
+Our proposal shares query and data augmen-
+tation principles with HyDE (Gao et al., 2023)
+and APTNESS (Hu et al., 2024), but differs in
+using structurally constrained appraisal and CBT-
+based reframing. Unlike HyDE’s topic-grounded
+approach and APTNESS’s appraisal-based knowl-
+edge construction, our pipeline maps questions and
+responses into a shared appraisal-informed latent
+space for information retrieval rather than classifi-
+cation (Hofmann et al., 2020; Debnath et al., 2025).
+3 Cognition-aware RAG
+3.1 Problem Statement
+Given a user query q and a corpus D =
+{d1, d2, . . . , dN }, the pipeline retrieves a subset of
+relevant documents DK ⊂ D for therapy-grounded
+response generation as y = G(q, DK , c∗), where
+G() denotes a generator conditioned on both the
+query, the retrieved evidence, and additional cog-
+nitive information c∗. The retrieval step is typi-
+cally done using similarity in an embedding space
+DK = TopKd∈D sim(ϕ(q), ϕ(d)), where ϕ(·) is
+an embedding function and sim(·, ·) computes the
+similarity between q and d using both semantic and
+cognitive modeling information.
+3.2 Overview of the Framework
+CogRAG extends the conventional RAG pipeline
+by explicitly incorporating cognitive modeling into
+both retrieval and generation stages. In Figure
+1, the framework includes (i) cognition-aware in-
+formation retrieval (Section 3.3), and (ii) therapy-
+grounded response generation (Section 3.4).
+3.3 Cognition-aware Information Retrieval
+We decompose the retrieval into three complemen-
+tary steps: semantic retrieval, cognitive modeling-
+based retrieval, and information fusion.
+3.3.1 Semantic Retrieval
+We adopt standard semantic retrieval in RAG,
+where the query q and documents d ∈ D are en-
+coded into a shared embedding space using an en-
+coder ϕ(·). The semantic similarity is defined as:
+Ssem = sim(ϕ(q), ϕ(d)) (1)
+3.3.2 Cognitive Modeling-based Retrieval
+Semantic similarity has been widely adopted for
+RAG (Lewis et al., 2020; Izacard et al., 2023).
+However, semantics alone may be insufficient, as it
+does not account for latent cognitive factors such as
+beliefs or appraisal processes (Figure 1). We, there-
+fore, introduce cognitive modeling-based retrieval
+that explicitly models the user’s internal cognitive
+information based on Appraisal Theory and CBT.
+Appraisal Theory-based IR This theory models
+the appraisal process that forms an action from an
+input situation (situation → appraisal → emotions
+→ action) (Scherer, 1999; Lazarus et al., 1991).
+For IR, we consider the question q from a patient
+(seeker) is the situation and the response from the
+supporter is the action (answer). By using the the-
+ory, we assume that there exists a common hidden
+appraisal process between the question and the re-
+sponse.
+To model this aspect, we define an appraisal rep-
+resentation A() = fapp(), where the function fapp()
+is implemented via prompting LLMs to extract
+structured appraisal signals from the appraisal de-
+scription. It includes trigger/cue, primary and sec-
+ondary appraisal, and emotional outcome (Lazarus
+et al., 1991) (the appraisal part in Figure 1). Pre-
+cisely, the prompt in Table 24 (Appendix A.13) is
+applied to patient input q (Condition 1) and the
+document d (supporter, Condition 2) to create A(q)
+and A(d). They are mapped in a vector space using
+an encoder ϕ(·). A(d) is generated offline once
+for each document via LLM prompting and then
+embedded by the same ϕ(·) used for semantic re-
+trieval; at query time only A(q) is generated online.
+The appraisal-based retrieval is then computed as:
+Sapp = sim(ϕ(A(q)), ϕ(A(d))) (2)
+The same offline/online split applies to R(d) and
+R(q) in the CBT-inspired step, so the additional
+online cost is two LLM calls per query while the
+document-side cost is amortized over the corpus.
+CBT-inspired IR CBT is a theory to identify
+maladaptive thinking patterns (Beck, 2020). It in-
+cludes four main steps: identifying situation and
+thoughts, cognitive distortion detection, challeng-
+ing the thoughts, and replacing more balanced
+thoughts. We observe that retrieval can be aligned
+with the process of CBT, in which the question q
+can be considered as a situation and the response
+can be represented as a more balanced thought re-
+placement. This is because when raising a question,
+13802

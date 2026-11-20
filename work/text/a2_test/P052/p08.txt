@@ -1,0 +1,65 @@
+Figure 3: Generation error taxonomy across evidence conditions. High-quality evidence shifts remaining failures
+toward rule application, while weaker evidence increases semantic-grounding and output-stability failures.
+Figure 4: Upper-bound comparator failures persist even
+under GoldOracle evidence, indicating that some errors
+come from applying comparator semantics rather than
+from retrieving the wrong passage.
+This pattern is consistent with prior numerical and
+legal mathematical reasoning benchmarks show-
+ing difficulty with quantities, comparison, and rule
+application (Dua et al., 2019; Chen et al., 2021b;
+Mishra et al., 2022; Zhang et al., 2025). Versioned
+legal RAG must solve both the retrieval problem
+and the direction-sensitive rule-application prob-
+lem.
+7 Discussion
+7.1 Law in force is different from semantic
+relevance
+A relevant passage is not necessarily legally appli-
+cable. Semantic and citation-aware retrieval reward
+topical and authority-like signals; law-in-force re-
+trieval adds validity and rule support. Wrong ver-
+sions are hard because they often share section
+numbers, headings, definitions, and most wording;
+in LawInForce-eCFR, the decisive difference may
+be a single threshold or deadline.
+7.2 Wrong versions have near-zero utility
+Wrong versions can be more harmful than irrel-
+evant text because they appear authoritative and
+answer-bearing. This is why Recall@1 matters: if
+the first passage is the wrong version, the system
+may rely on authority that cannot govern the facts.
+7.3 The dual bottleneck
+AuthorityFirst-RAG improves top-rank retrieval,
+but downstream answer gains remain modest. Ver-
+sioned legal RAG therefore has a dual bottleneck:
+selecting the law in force and applying its numeric
+rule. Better evidence shifts failures from semantic
+grounding toward rule application, showing that
+retrieval and rule application are distinct failure
+modes. Controlled numeric amendments make this
+split diagnosable because old/new versions, fact
+values, answer flips, and gold evidence are verifi-
+able.
+8 Related Work
+Legal NLP benchmarks. LexGLUE (Chalkidis
+et al., 2022), LEGAL-BERT (Chalkidis et al.,
+2020), ContractNLI (Koreeda and Manning, 2021),
+and LegalBench (Guha et al., 2023) evaluate broad
+legal-language tasks; they do not test whether re-
+trieved law was in force for an operative date.
+Legal retrieval and legal RAG. BM25 is a stan-
+dard lexical baseline (Robertson and Zaragoza,
+2009), and RAG combines retrieval with genera-
+tion (Lewis et al., 2020). LeCaRD (Ma et al., 2021),
+CLERC (Hou et al., 2025), and Hypa-RAG (Kalra
+et al., 2024) study legal relevance and evidence re-
+trieval, while legal IR work emphasizes structured
+relevance (van Opijnen and Santos, 2017). They
+do not directly test operative-date validity when
+multiple versions share the same authority.
+Temporal QA and temporal retrieval. TimeQA
+(Chen et al., 2021a), CronQuestions (Saxena et al.,
+2021), and temporal information retrieval surveys
+(Kanhabua and Anand, 2016) motivate time-aware
+886

@@ -1,0 +1,111 @@
+Specifically, by introducing Elasticsearch as the retrieval
+component, we can achieve the following optimizations: First,
+the retrieval speed and efficiency are improved. Since ES uses
+an inverted index structure, it can even handle large data
+volumes of PB level. Maintaining extremely high response
+speed; secondly, it enhances the relevance and coverage of
+search results. With the help of its advanced word segmentation
+technology and scoring mechanism, ES can automatically
+adjust the weight distribution according to user needs, thereby
+filtering out content that truly meets the requirements; In
+addition, ES also supports complex Boolean logic
+combinations and geographical location filtering functions,
+which enables the RAG system to cope with more diverse
+application scenarios[12]. For example, in a medical and health
+consultation scenario [13-14], the recognition rate of
+professional vocabulary can be improved by setting up a
+glossary of professional terms; in an e-commerce
+recommendation system, the order of product display can be
+dynamically adjusted based on the user's browsing history.
+More importantly, Elasticsearch [15], as a highly scalable
+platform, allows developers to easily add new nodes to adapt to
+business growth needs. It also provides a complete set of
+monitoring tools to facilitate operation and maintenance
+personnel to grasp the cluster status and troubleshoot in real
+time. Check. This means that the RAG solution built based on
+ES can not only meet the needs of current projects but also
+continue to evolve with the expansion of enterprise scale and
+technology iteration, laying a solid foundation for the long-
+term development of the enterprise. In short, integrating
+Elasticsearch into the RAG architecture not only greatly
+enriches the functional features of the original system, but also
+opens up new possibilities for further exploring how to use
+artificial intelligence technology to improve human life. In
+future research work, we will continue to explore in depth how
+to make full use of the advantages of ES to promote RAG
+technology in a more intelligent and efficient direction.
+II. RELATED WORK
+Recent advancements in question-answering systems and
+information retrieval have largely been driven by the
+integration of sophisticated retrieval mechanisms and deep
+learning models. This section highlights key developments in
+pre-trained models, sentiment analysis, text classification, and
+neural networks, all of which are closely related to optimizing
+the Retrieval-Augmented Generation (RAG) framework using
+Elasticsearch.
+Pre-trained models have demonstrated significant
+improvements in NLP tasks such as text classification and
+named entity recognition (NER) [16]. An ensemble learning
+approach driven by the ALBERT model has been shown to
+enhance text classification, providing insights into how
+domain-specific models can improve task accuracy when
+applied to large-scale data [17]. Comparative studies of pre-
+trained models for NER also offer valuable benchmarks,
+underscoring how various pre-trained architectures improve
+entity extraction in RAG systems [18]. These approaches
+highlight the potential for further enhancing Elasticsearch-
+based retrieval within RAG. In sentiment analysis, the use of
+graph neural networks (GNNs) combined with syntactic
+features provides an advanced framework for understanding
+and classifying sentiment in text [19]. This method
+demonstrates the importance of syntactic and semantic feature
+integration, a concept that aligns with enhancing the semantic
+retrieval capabilities in Elasticsearch to support more complex
+question-answering systems.
+Methods for transforming multidimensional data into
+interpretable formats also play a crucial role in advanced data
+mining tasks [20]. A novel approach for converting time-series
+data into event sequences has been proposed to improve the
+interpretability of machine learning outcomes [21]. This focus
+on transforming complex data into structured, retrievable
+information supports the idea that Elasticsearch’s advanced
+indexing can facilitate more effective retrieval in RAG systems.
+Finally, multimodal transformers, which combine word
+embeddings such as ELMo with deep learning algorithms, have
+been applied in image description tasks, further illustrating the
+potential for integrating various data types into NLP models
+[22]. This multimodal approach supports the broader goal of
+enhancing RAG systems, particularly in scenarios where both
+textual and non-textual data must be retrieved and processed
+efficiently. The integration of deep learning models, graph-
+based techniques, and advanced pre-trained architectures has
+significantly improved NLP tasks such as text classification,
+NER, and sentiment analysis. By leveraging Elasticsearch’s
+querying flexibility and indexing efficiency, this study builds
+upon these foundations to optimize retrieval and generation
+processes in question-answering systems.
+III. METHOD
+In the process of integrating Elasticsearch (ES) into the
+Retrieval-Augmented Generation (RAG) framework, the core
+of the algorithm lies in how to efficiently retrieve the most
+relevant documents to the query through ES and pass these
+documents as context to the Large Language Model (LLM) to
+generate high-quality answers. This process involves multiple
+aspects such as text similarity calculation, document scoring
+mechanism, and the final document selection strategy [23].
+Below we will introduce the key formulas and reasoning
+involved in this process in detail.
+First, consider the relevance evaluation problem between a
+query q and a series of candidate documents
+. We use the TF-IDF weighted vector to
+represent each document and its corresponding query, where
+TF stands for term frequency and IDF stands for inverse
+document frequency. For any term t in document
+ , its TF-
+IDF value is defined as:
+Here, N is the total number of documents, and the
+denominator represents the number of documents containing
+word t. This representation method can help highlight words
+that appear frequently in specific documents but are relatively
+rare in the entire corpus, thus better reflecting the topic
+characteristics of the document.

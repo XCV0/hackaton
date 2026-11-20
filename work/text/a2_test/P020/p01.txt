@@ -1,0 +1,91 @@
+Proceedings of the 31st International Conference on Computational Linguistics: Industry Track, pages 387–397
+January 19–24, 2025. ©2025 Association for Computational Linguistics
+387
+Federated Retrieval Augmented Generation for Multi-Product Question
+Answering
+Parshin Shojaee1*, Sai Sree Harsha2, Dan Luo2, Akash Maharaj2, Tong Yu2, Yunyao Li2
+1Virginia Tech 2Adobe
+parshinshojaee@vt.edu, {ssree, dluo, maharaj, tyu, yunyaol}@adobe.com
+Abstract
+Recent advancements in Large Language Mod-
+els and Retrieval-Augmented Generation have
+boosted interest in domain-specific question-
+answering for enterprise products. However,
+AI Assistants often face challenges in multi-
+product QA settings, requiring accurate re-
+sponses across diverse domains. Existing multi-
+domain RAG-QA approaches either query all
+domains indiscriminately, increasing compu-
+tational costs and LLM hallucinations, or rely
+on rigid resource selection, which can limit
+search results. We introduce MKP-QA , a
+novel multi-product knowledge-augmented QA
+framework with probabilistic federated search
+across domains and relevant knowledge. This
+method enhances multi-domain search qual-
+ity by aggregating query-domain and query-
+passage probabilistic relevance. To address the
+lack of suitable benchmarks for multi-product
+QAs, we also present new datasets focused on
+three Adobe products: Adobe Experience Plat-
+form, Target, and Customer Journey Analytics.
+Our experiments show that MKP-QA signif-
+icantly boosts multi-product RAG-QA perfor-
+mance in terms of both retrieval accuracy and
+response quality.
+1 Introduction
+The rapid advancement of Large Language Mod-
+els (LLMs) and Retrieval-Augmented Generation
+(RAG) has sparked significant interest in question-
+answering (QA) systems for domain-specific ap-
+plications and products. This technology has
+significantly enhanced enterprise product support
+(Sharma et al., 2024), offering users more efficient
+and accurate ways to access information about com-
+plex product ecosystems with specific details, ter-
+minologies, usage procedures as well as related use
+cases. However, as the complexity of enterprise
+software suites grows, so does the challenge of pro-
+viding accurate and comprehensive answers to user
+*Work done while interning at Adobe
+queries that may span multiple products or require
+cross-product knowledge.
+In the context of enterprise product-related QA
+tasks, users often need to navigate multiple prod-
+ucts and understand how they can be integrated to
+address specific use cases. This multi-product and
+cross-product nature of queries presents unique
+challenges for traditional RAG-QA approaches,
+particularly in context augmentation from diverse
+knowledge resources. These challenges are espe-
+cially pronounced in industrial settings, where the
+accuracy of information retrieval and response gen-
+eration directly impact customer satisfaction.
+Current approaches to multi-domain search in
+RAG-QA systems typically fall into two main cate-
+gories: (1) querying all product domains indiscrim-
+inately (Wu et al., 2024), or (2) employing resource
+selection techniques (Wang et al., 2024a,b). Both
+methods have significant drawbacks. The first ap-
+proach, while comprehensive, can lead to increased
+computational costs and even potentially compro-
+mise answer quality due to the higher likelihood of
+LLM hallucination or inaccurate responses when
+presented with diverse and irrelevant concepts from
+different domains. The second approach, which at-
+tempts to narrow the search to specific domains,
+risks propagating selection errors that can limit the
+scope of the search and potentially miss crucial
+cross-product information, leading to incomplete
+or misleading answers in complex enterprise sce-
+narios.
+To address these challenges, we propose
+MKP-QA , a novel Multi-domain Knowledge-
+augmented Product RAG-QA framework that
+optimizes multi-domain question answering.
+MKP-QA is designed to meet the specific needs
+of enterprise software ecosystems, where accurate
+cross-product information retrieval is essential.
+The core of MKP-QA employs a federated
+search mechanism (Shokouhi and Si, 2011) that
+intelligently navigates across multiple product

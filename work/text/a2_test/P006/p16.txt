@@ -1,0 +1,68 @@
+Prompts
+Question Generation
+Document: Patient: my husband was working on a project in the house and all of a sudden a
+bump about the size of a half dollar appeard on his left leg inside below the knee. He is 69 years
+old and had triple by pass surgery 7 years ago. It stung when it first happened. Doesn t hurt now.
+He is seated with his leg ellevated. Is this an emergency?\n Doctor: Hello. It could be a blood
+collection due to minor injury or a vein rupture which is also common at this age. It is not an
+emergency, but you should apply compression bandage and warm compresses if six hours have
+past. Furthermore, it should get relieved over the next few days but if it continues to increase or
+persist then you should see a Doctor who can examine the patient. Take care. Chat Doctor.
+Generated Questions and Corresponding Answers:
+Q: Did the patient report a bump appearing on the left leg? A: Yes.
+Q: Did the patient have a history of triple bypass surgery? A: Yes.
+Q: Did the doctor advise the patient to go to the emergency room immediately? A: No.
+Query Template I am inquiring about a patient-doctor conversation where the doctor talked “{doctor’s answer}” {generated question} Please answer with ‘Yes’ or ‘No’.
+Table 6: All prompts used in the Interrogation Attack on ChatDoctor.
+Datasets OPT-1.3B Pythia-1.4B Mistral-7B Llama-3.1-8B
+NQ 3.41e-06 1.13e-05 5.87e-03 5.06e-03
+TriviaQA 4.38e-03 9.85e-03 3.44e-03 3.77e-03
+ChatDoctor 2.76e-04 4.36e-05 1.30e-02 1.98e-02
+Table 7: The p-values of paired t-tests comparing SparsePay-RAG with the best baseline MuRAG at ε = 5.
+Substituting this into the tight 1 8 ε2 token-zCDP
+bound (Cesar and Rogers, 2021) yields:
+ρtoken = 2C2 K2τ 2 .
+Solving for C given the target ρtoken:
+C = Kτ
+√
+ρtoken/2,
+which ensures each private generation step satisfies
+ρtoken-zCDP.
+C Compute Resources
+All experiments are conducted on a single NVIDIA
+A100 80GB GPU. We outline the computational
+overhead of our framework, categorized into offline
+processing and online inference latency.
+Offline Processing. The topic-guided clustering
+module requires generating domain-specific public
+topics via GPT-4. Generating 10,000 topics for
+the Wikipedia corpus takes approximately 3 hours
+with an API cost of roughly $15. For the ChatDoc-
+tor corpus, generating 1,000 topics takes about 20
+minutes and costs $3. For private data encoding,
+we directly utilize the existing dense embeddings
+from the Wikipedia DPR dataset (Karpukhin et al.,
+2020). For ChatDoctor, embedding the 115K dia-
+logues locally via all-MiniLM-L6-v2 with a batch
+size of 32 takes only 1.5 minutes.
+Online Retrieval. Our localized two-stage re-
+trieval fundamentally scales better with the corpus
+size compared to dense global search. On the mas-
+sive Wikipedia corpus (∼21M passages), standard
+global retrieval requires an average of 7.0 seconds
+per query, whereas SparsePay-RAG narrows the
+search space, reducing this time to 3.5 seconds. As
+the database scales, our method becomes increas-
+ingly efficient. Conversely, on the much smaller
+ChatDoctor corpus, the two-stage routing intro-
+duces a minor overhead, yielding 0.5 seconds per
+query compared to 0.3 seconds for global retrieval.
+Online Generation. The overall inference time
+heavily relies on the parameter size of the language
+models and the length of the generation context. Ta-
+ble 8 details the average processing time per query
+across different datasets and backbone models un-
+der our SparsePay-RAG framework. The process-
+ing time exhibits a gradual increase with larger
+backbones and the extended interaction contexts
+45308

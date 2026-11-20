@@ -1,0 +1,96 @@
+the same 3-shot prompt as RICHES allowing for
+chain-of-thought reasoning. The setup generates
+an answer along with hallucinated evidences, not
+grounded to a corpus. This is a measure of model’s
+memorization capabilities.
+Generalized Dense Retriever For single-hop
+QA, we compare our approach against the Gen-
+eralized T5 retriever (GTR-xxl, 11B variant) (Ni
+et al., 2021). GTR undergoes multi-staged train-
+ing, ﬁrst on unsupervised web-mined corpus and
+then supervised search datasets including NQ. It
+has been shown to generalize well out-of-domain.
+However, GTR and other conventional dense re-
+trievers provide only retrieved documents, not the
+answers themselves. To extract answers, we use
+the PALM2-M model in a few-shot setting with
+greedy decoding (see Appendix A.1).
+Since RICHES generates a single output with a
+varying number of interleaved documents, direct
+comparison with dense retrievers that fetch a ﬁxed
+top-k documents is challenging. We set k to a value
+equivalent to the mean documents RICHES fetches
+for single-hop. When retrieval keys are different,
+such as passages vs propositions, we approximately
+match the tokens used by both setups. In our ﬁnal
+experiments, we compare against k=1 passage and
+k=2 propositions for GTR-xxl.
+Iterative Retrieval For Multi-hop QA, we adopt
+a popular method where question is decomposed
+into sub-queries (Khot et al., 2022). At each step,
+passages are retrieved for a sub-query and fed as
+input for the next query, until the model decides
+to generate an answer. The method has the same
+surface form as RICHES, except for the key distinc-
+tion that each step requires switching between a
+heterogeneous mix of models. In our experiments,
+we retrieve top-1 document with GTR-xxl and use
+PALM2-M few-shot with greedy decoding for both
+decomposing the query and generating the ﬁnal an-
+swer (See prompt at Appendix A.1). We set the
+maximum number of steps to 4, sufﬁcient for the
+convergence of 99% of queries. In comparison, loci
+generates fewer than 4 propositions on an average
+(Table 8).
+6 Results
+In the following sections, we investigate the key
+building blocks of RICHES: i) indexing strategies
+(Section 3.4) amenable to auto-regressive decod-
+ing ii) effect of beam decoding (Section 3.1) iii)
+Retrieval Key Hits@1
+Title 19.5
+Paragraph with Title 15.5
+Paragraph 19.0
+Sentence with Title 19.1
+Sentence 20.6
+Proposition 33.9
+Table 3: Comparison of Retrieval Keys on NQ
+suitable mechanisms to interleave thoughts and re-
+trieval keys (Section 3.3). Finally, we compare
+RICHES against conventional retrieval systems. We
+also draw a detailed analysis of wins and losses to
+fathom the strengths and pitfalls of the system.
+6.1 RICHES building blocks
+Retrieval Keys We explore the following re-
+trieval key candidates as detailed in Section 3.4:
+a) Title: Wikipedia page and section titles, rank-
+ing paragraphs within the section using TF-IDF
+scores. b) Paragraph with Title: Decodes the page
+title, section title, and full paragraph. c) Paragraph:
+Decodes the paragraph only. d) Sentence: Uses
+individual sentences. e) Proposition: Uses atomic
+information units derived from paragraphs. Table 3
+shows that among the retrieval keys explored, the
+propositional index is best aligned with our de-
+coding search strategy, perhaps its compact nature
+is most suited for autoregressive decoding. An
+in-depth analysis of retrieval keys is provided in
+Appendix A.5. In the following experiments, we
+use proposition as our retrieval key.
+Effect of Beam size Table 5 shows how greedy
+decoding can get stuck with poor retrieval keys.
+A larger beam enables better search space explo-
+ration, albeit with diminishing returns. In our ﬁnal
+experiments, we use a beam of 10.
+Interleaving with Adaptive Beam Table 6
+shows the impact of interleaving thoughts with re-
+trieval keys. First, we note that an adaptive beam
+is crucial for interleaving unconstrained and con-
+strained sequences. Without an adaptive beam, mi-
+nor irrelevant variations in unconstrained thoughts
+can consume and overwhelm the available space
+in the beam. By greedily decoding unconstrained
+sequences, the beam space is preserved for back-
+tracking during document search. Once we have an
+adaptive beam in place, the insertion of keywords
+8893

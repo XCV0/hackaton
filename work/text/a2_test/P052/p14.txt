@@ -1,0 +1,30 @@
+C Supplementary Retrieval Results
+Table 12 reports the same retrieval metrics over
+the full 3,220-instance benchmark. The rank-
+ing pattern is consistent with the main split:
+AuthorityFirst-RAG remains strongest overall,
+while absolute Recall@1 is lower on the full bench-
+mark.
+Table 13 reports retrieval ablations on the full
+benchmark. Authority identification, temporal
+scoping, and rule-aware ranking are important.
+Section-first retrieval is not uniformly beneficial in
+this reproduction: removing it improves Recall@1
+but reduces deeper recall. The cited/uncited split
+also shows that uncited authority inference remains
+a major weakness.
+D Tool-Using LLM Agent Baseline
+The agent receives the same corpus schema and
+metadata as the retrieval baselines and can use lexi-
+cal search, authority-field search, validity filtering,
+and passage inspection. It searches the corpus di-
+rectly rather than reranking AuthorityFirst-RAG or
+BM25 outputs, and receives no oracle evidence
+or gold authority metadata from the QA records.
+Table 14 reports its results on the balanced subset.
+For the tool-using LLM agent, the gold passage
+was retrieved in 25.0% of instances and entered the
+final candidate set in 23.0% of instances. Condi-
+tional accuracy when the gold passage was present
+in the final candidate set was 65.2%.
+892

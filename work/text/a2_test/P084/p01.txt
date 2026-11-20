@@ -1,0 +1,92 @@
+Findings of the Association for Computational Linguistics: EMNLP 2026, pages 13800–13822
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+Reframe to Retrieve: Cognition-aware RAG with Projections Inspired by
+Appraisal and CBT for Conversational Mental Health Support
+Minh-Tien Nguyen1, Huu-Loi Le1, Manh-Cuong Phan1, Duong-Hieu Le1,
+Dinh-Phuc Pham1, Van-Quyet Nguyen1, Hajime Hotta2
+1 Hung Yen University of Technology and Education, Hung Yen, Vietnam.
+{tiennm, quyetict}@utehy.edu.vn; {loilh, cuongpm, hieuld, phucpd}@spkt.edu.vn
+2 Hajime Institute, Singapore.
+hotta@hajime.institute
+Abstract
+This paper introduces CogRAG, a new RAG
+pipeline, for conversational mental health sup-
+port. Different from conventional RAG that
+is usually optimized for semantic relevance,
+CogRAG integrates cognitive factors into both
+retrieval and response generation stages. To do
+that, CogRAG uses projections by Appraisal-
+Theory- and CBT-inspired prompts that are
+applied symmetrically to patient queries and
+therapist responses, bridging their lexical asym-
+metry for retrieval. To deal with crisis cases,
+it augments safety-planning cards from data
+that guide generation to follow therapies. Ex-
+perimental results on two datasets show that
+cognitive modeling helps improve retrieval and
+generation performance; gains are most pro-
+nounced in counseling quality, while safety-
+related improvements are modest but consistent.
+We do not claim to implement clinical CBT or
+to recover ground-truth cognitive states.1
+1 Introduction
+Retrieval-Augmented Generation (RAG) mitigates
+hallucination and improves the factual consistency
+of LLMs for grounding generation by incorporat-
+ing relevant contextual evidence (Guu et al., 2020;
+Lewis et al., 2020; Borgeaud et al., 2022; Izacard
+et al., 2023; Panda et al., 2024; Besta et al., 2024;
+Li et al., 2024; Edge et al., 2024; Sun et al., 2024;
+Yang et al., 2025b; Guo et al., 2025b,a). It has
+been widely adopted for knowledge-intensive ap-
+plications (Zhu et al., 2025; Xu et al., 2025b; Li
+et al., 2025; Arzideh et al., 2026; Wang et al., 2025;
+Hasan et al., 2025). RAG pipelines have been inter-
+preted as a form of external memory retrieval and
+evidence acquisition of humans (Lewis et al., 2020;
+Shen et al., 2024). However, previous cognitive the-
+ories consistently suggest that humans do not pas-
+sively consume information; rather, they actively
+1Code and data: https://github.com/CogAI-Lab/CogRAG
+interpret, filter, and integrate evidence through cog-
+nitively constrained and structured processes (Kah-
+neman et al., 2011; Pearl, 2009; Booch et al., 2021).
+It may create a gap when conventional RAG is ap-
+plied to conversational mental health support.
+The gap comes from two main reasons. First,
+information retrieval (IR) of conventional RAG
+is typically optimized for semantic similarity rather
+than cognitive relevance. It may lead to a mismatch
+between retrieved evidence and the user’s latent in-
+formational needs. For example, the patient input
+in Figure 1 explicitly mentions "self-harm", but
+the figure shows that its underlying informational
+need is better characterized by latent cognitive in-
+formation such as threat appraisal, guilt, and low
+perceived coping ability. Conventional RAG fo-
+cuses on lexical overlap (e.g., "self-harm," "intru-
+sive thoughts") and therefore returns evidence that
+is topically relevant but cognitively misaligned, re-
+sulting in generic and insufficient responses (Wang
+et al., 2020; Li et al., 2022). This leads to a broad
+answer, without addressing the patient’s specific
+psychological condition. In contrast, cognition-
+aware RAG first approximates latent cognitive fac-
+tors (e.g., appraisal and CBT processes) via LLM
+prompting and uses them to guide retrieval. It
+encourages the retriever to favor evidence that is
+plausibly aligned with the inferred internal states,
+rather than relying on surface lexical overlap alone
+(Belkin et al., 1980; Ingwersen, 1996). Second, re-
+sponse generation (RG) of RAG usually responds
+directly to the question without explicit guardrails
+(commercial LLMs have implicit guardrails for
+common safety, may not psychological ground-
+ing). It may lack psychological-grounded therapies
+to ensure the safety and correctness of the answer.
+For example, we observe that ≈20% of MentalChat
+questions (Xu et al., 2025a) are in risk (i.e., medium
+and high, Figure 4, Appendix A.1) and require to
+follow therapies for grounded and safer responses.
+To bridge the gap, we introduce CogRAG, a new
+13800

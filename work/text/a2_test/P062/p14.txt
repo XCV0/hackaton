@@ -1,0 +1,83 @@
+8B} (Qwen Team, 2025), LLaMA-3.2-{1B, 3B}-
+Instruct (Grattafiori et al., 2024), Ministral-3-{8B,
+14B}-Instruct-2512 6. This diverse model suite en-
+ables robust comparison across a wide range of ca-
+pacity and instruction tuning settings. As shown in
+Table 6-12, our method yields consistently strong
+and robust performance across a wide range of lan-
+guages, covering diverse model sizes and model
+families.
+We also compare CORAL with Self-RAG (Asai
+et al., 2024) in Table 13 to evaluate another agentic
+RAG method on BLEnD. We do not include CLIcK
+for comparison, as the input query required by
+CLIcK exceeds Self-RAG’s maximum token limit.
+The results show that CORAL outperforms Self-
+RAG by a significant margin of up to 12.14%p.
+D.2 Planner Critique Examples for Document
+Selection and Query Rewriting
+D.2.1 Noise Comparison between Global and
+Locale-Specific Corpora
+We present a qualitative comparison illustrating
+the difference in evidence quality when retrieval
+is performed over a global corpus versus a locale-
+specific corpus. Shown in Figure 8, the given query
+concerns a culturally grounded practice in Korea,
+specifically the ritual behavior performed during an-
+cestral rites (jesa), where participants bow twice to
+honor their ancestors. Comparing the documents re-
+trieved by the Call and CORAL reveals a clear qual-
+itative difference in evidence relevance. Retrieval
+over the unified corpus yields mostly superficial or
+tangential information: some documents mention
+jesa only at a high level without describing the rit-
+ual procedure, while others are entirely unrelated
+despite sharing cultural keywords, covering top-
+ics such as first-birthday celebrations (doljanchi),
+Confucianism in general, or Chuseok rituals. In
+contrast, our agent successfully identifies a Korean-
+language document that explicitly explains the pro-
+cedural steps of jesa, including the correct bowing
+practice. This example illustrates how indiscrimi-
+nate corpus expansion introduces substantial noise
+for culturally specific queries, whereas our method
+effectively routes retrieval toward linguistically and
+culturally aligned sources, enabling the model to
+access precise procedural knowledge that is essen-
+tial for answering the question correctly.
+6https://huggingface.co/collections/mistralai/ministral-3
+D.2.2 Query Rewriting for Improved
+Evidence Relevance
+We further provide a qualitative example il-
+lustrating how the planner-guided process im-
+proves evidence relevance across retrieval trials.
+The critic evaluates the initially retrieved docu-
+ments—identifying those that are semantically re-
+lated but lack sufficient grounding in the target
+context—while the planner utilizes these insights
+to rewrite the query, incorporating the missing con-
+textual signals. Full details are shown in Figure
+9.
+D.3 Efficiency and Token Cost Analysis
+We analyze the computational overhead of CORAL
+in terms of iteration count and token usage. Al-
+though CORAL employs an iterative planner–critic
+loop, the number of iterations is bounded and fur-
+ther reduced by a sufficiency-based early stopping
+mechanism.
+Empirically, CORAL converges in a small num-
+ber of iterations. The average number of planner–
+critic iterations is 1.34 on BLEnD and 1.52 on
+CLIcK. Moreover, the final retrieval evidence is
+typically selected early in the process, at 1.56 and
+1.82 iterations on average for BLEnD and CLIcK,
+respectively.
+In terms of token consumption, the average
+agent-side token usage per instance is 1,807 tokens
+on BLEnD and 21,548 tokens on CLIcK. These
+results provide a quantitative characterization of
+the computational overhead of CORAL, alongside
+the iteration statistics reported above.
+E Use Of AI Assistants
+The authors used AI assistants for the language of
+the paper and codes for the experiments.

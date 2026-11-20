@@ -1,0 +1,91 @@
+Query Dense Retriever (GTR-xxl) RICHES Retrieval Output
+# Leveraging Parametric knowledge
+who was the actor that played
+ben stone on law and order
+Benjamin Stone was a former Law and
+Order character
+Ben Stone was played by Michael Moriarty
+jharkhand which festival is asso-
+ciated with cattle worship
+Gaijatra is the festival of cows Sohrai is a cattle festival of Jharkhand.
+# Better Context understanding
+who plays at the prudential cen-
+ter in newark
+The Prudential Center is in Newark. The Prudential Center is home to the New
+Jersey Devils
+when was coffee ﬁrst made into
+a drink
+In 1724, society in Lima discovered an
+exotic drink called coffee.
+The earliest credible evidence of coffee-
+drinking or knowledge of the coffee tree ap-
+pears in the middle of the 15th century.
+Table 1: Example of RICHES vs Dense Retrieval for single-hop QA. Only the retrieved text is shown for illustration.
+Query RICHES Output
+who had a baby at 100 in the bible
+(# Keywords guide retrieval)
+keyword: Sarah’s age at birth of Isaac
+« Sarah was 90 years old when Isaac was born. »
+keyword: Abraham’s age at birth of Isaac
+« Abraham was 100 years old when Isaac was born. »
+answer: Sarah and Abraham
+when did the united states start using
+the death penalty
+(# keywords help recover from
+inaccurate retrieval)
+keyword: Capital punishment in the United States
+« Capital punishment was reinstated in the United States in 1976. »
+keyword: First execution in the United States
+« The ﬁrst recorded execution in the United States took place in 1608 at the
+Jamestown Colony in Virginia. »
+answer: 1608
+What distinction is held by the former
+NBA player who was a member of the
+Charlotte Hornets during their 1992-
+93 season and was head coach for the
+WNBA team Charlotte Sting?
+(# Planning what to retrieve)
+keyword: member of the Charlotte Hornets during their 1992-93 season
+« Muggsy Bogues played for the Charlotte Hornets from 1988 to 1997. »
+keyword: Muggsy Bogues’ distinction
+« Muggsy Bogues is the shortest player ever to play in the National Basketball
+Association (NBA). »
+answer: shortest player ever to play in the National Basketball Association (NBA)
+Table 2: Example Iterative retrieval outputs from RICHES. Remarks are annotated as (# Comments)
+tuned versions of PALM2-M (text-bison-001 )
+and its larger variant (text-unicorn-001) PALM2-
+L (Anil et al., 2023) based on stacked Transformer
+architecture on Google Vertex AI platform (Ver-
+texAI, 2023). We use 3 example demonstrations
+in our prompt (Appendix A.1), with different sets
+of examples for single-hop (NQ) and multi-hop
+(Hotpot, Musique) datasets. The unconstrained
+sequences or thoughts are formulated as hint key-
+words. Our ﬁnal setup uses a beam of 10 with
+constrained decoding (Section 3.1), adaptive beam
+size (Section 3.3) and propositions as retrieval keys.
+Later in Section 6, we ablate these choices. Note
+that only the top-beam result is considered for eval-
+uation. While RICHES performs a single decode,
+within this decode it can generate multiple and
+varying numbers of retrieval keys as detailed in
+Table 8.
+5.4 Baselines
+While sophisticated RAG systems (Wang et al.,
+2023; Lin et al., 2023) have been developed, our
+focus in these experiments is to isolate the impact
+of the retrieval mechanism itself. To clearly assess
+the trade-offs between embedding-based and LLM-
+driven retrieval, we employed a vanilla RAG setup
+where an instruction tuned LLM directly ingests re-
+trieved documents, without any task-speciﬁc train-
+ing. It’s important to note that more advanced RAG
+training techniques (Zhang et al., 2024; Shi et al.,
+2023) could be layered on top of RICHES for po-
+tentially better performance.
+We experiment with 3 types of baselines: no
+retrieval, a vanilla dense retriever and an iterative
+retriever designed for multi-hop QA.
+No Retrieval We compare to a few-shot un-
+constrained baseline with greedy decoding using
+8892

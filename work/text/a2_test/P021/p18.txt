@@ -1,0 +1,18 @@
+Please extract relevant sentences from the provided context that can potentially help answer the
+following question. If no relevant sentences are found, or if you believe the question cannot be
+answered from the given context, return the phrase ‘Insufficient Information’. The question is:
+[PUT_QUESTION_HERE]
+Figure 4: Zero-shot prompt for extracting query-relevant information used in the numerator of RAGAS Context
+Relevance.
+Describe the video in detail and extract all the information possible from it. This includes
+transcribing any on-screen text (OCR) and describing any visual information beyond the summary.
+Figure 5: Zero-shot prompt for extracting the detailed summary used in the denominator of RAGAS Context
+Relevance.
+E.4 Human MIRAGE Granular Alignment
+In Table 11 we provide the alignment between each
+component (Precision, Recall) of human annotated
+INFOF1 and extrinsic quality judgments.
+F Acknowledgment of AI
+AI assistants were used in this project for coding
+and to edit text for fluency and typos.
+40248
