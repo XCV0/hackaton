@@ -1,0 +1,26 @@
+For this task you are asked to answer a question (Question). Please provide factually accurate,
+direct, and clear responses. Do not ask any clarification questions or ask for additional
+information. To make sure the right facts are being considered, you should always ground your
+responses to the provided references below (References). If the references are not relevant to
+the question or do not provide the right information, you can respond with an apology rather than
+fabricating facts.
+## References:
+<Reference Documents>
+## Question:
+<Question>
+Before answering the question, take a step back and carefully think about the best strategy to
+answer the question. Produce an outline for the reasoning steps that you can take to find the best
+answer. Then, use the outline to think step by step.
+Use the following template to strategize your reasoning steps, reason step by step, and provide
+the final answer:
+## Strategy:
+- Step 1: *** instructions for step 1 ***
+...
+- Step N: *** instructions for step N ***
+## Reasoning:
+- Step 1: *** reasoning corresponding to step 1 in the strategy ***
+...
+- Step N: *** reasoning corresponding to step N in the strategy ***
+## Answer: <final answer to the question>
+Figure 13: Prompt used for CoT strategization to solve the RAG QA task.
+795

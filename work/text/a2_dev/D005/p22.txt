@@ -1,0 +1,51 @@
+You are an intelligent assistant with expertise in linguistics. Always follow the provided instructions and generate outputs in valid json format
+without any extra information.
+### User
+Given a question, answer, passage, location, user-time, distraction-passage and distraction passage’s answer:
+1. The goal of the distraction is to provide conflating information from the original passage with respect to the user’s question and details, such
+that it would prompt a human to take a closer look at fine details of both of the passages before coming to an answer. If they glance superficially
+at a distraction passage, that should feel like a reasonable answer, but when juxtaposed against the original passage, only the original passage
+should lead to the ’answer’.
+2. The goal of distraction-passage is such that when a human is provided distraction-passage and question, they can come to an answer different from
+the original answer which is retrieved from the passage. Open-question, distraction-answer, distraction-passage should be a slight modification
+of the original passage question and answer.
+3. Open ended question and Distraction-answer is provided along with distraction-passage. Distraction-answer is the answer a human came up with,
+when provided with just the distraction-passage and the open ended question rather than the original passage and original question. Use that to
+guide your scoring.
+score on the scale of 1 to 5 on Scores:
+1.relevance-score:
+Measures:
+a.how relevant the distraction-passage is to the given question, answer, passage, location, user-time. The distraction passage is required to be
+relevant to the user question, such that when one or two details are omitted from the user question, the distraction passage answers the question
+sufficiently.
+2.distraction: Measures:
+a. how much of a distraction the passage is to a user who asked the question when provided with both passage and distraction-passage.
+b. It ensures that when looking at distraction-passage alone, it would lead to a fully different answer.
+3.format:
+Measures:
+a. how similar in text length and format, the distraction passage is, with respect to the original passage.
+b. We require the distraction-passage to be of the same length as the original passage in terms of the number of words, or else the humans can
+easily distinguish based on the length differences.
+c. Ensure format in terms of new lines, spaces etc are similar for original and distraction passage. If there are no new lines, humans can easily
+distinguish based on format. Penalize omission of new lines if it exists in original but not in distraction.
+d. Compute the number of words in original vs distraction-passage and penalize if the difference is noticeable. Penalize if fewer words are present
+in distraction passage.
+d. Penalize format difference, if original has new lines, the distraction should have the same.
+e. Ensure if the original has tables, multiple tabs or new lines, the distraction has the same.
+- Your thought-process field should contain constructive criticism which helps drive improvement. The distraction generation process
+will display your feedback, so that they can utilize it to provide a better distraction-passage. - Your thought process should clearly mention
+score and reasoning for each type of score and critique for each.
+- Think it through step by step and provide a detailed explanation for each score in detail and what all measures are satisfied or missing. Eg: If
+new lines are missing, it falls under category c,d,e of format.
+- Output in Json with following fields ’relevance-score’, ’distraction-score’, ’format-score’, ’thought-process’.
+## question : {question}
+## answer : {answer}
+## user-time: {user-time}
+## location: {location}
+## passage :{passage}
+## open ended question: {open-ended-question}
+## distraction passage: {distraction}
+## distraction passage’s answer: {distraction-answer}
+### Assistant:
+Figure 14: Critique prompt used for synthetic distractor generation
+796

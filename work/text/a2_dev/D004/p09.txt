@@ -1,0 +1,97 @@
+Limitations
+Our work has several limitations that also frame
+directions for future research.
+Theoretical framework is not directly imple-
+mentable. The unified objective in Equation 8
+identifies what opinion-aware RAG should opti-
+mize (coverage, fidelity, and fairness), but it is not
+a directly optimizable loss under current retrieval
+architectures. It relies on three assumptions: (1) the
+population opinion distribution Ppop is estimated
+from the corpus and treated as a population sample,
+which may not hold when the corpus itself is a bi-
+ased sample of the underlying population; (2) opin-
+ions are treated as static, so temporal dynamics
+are out of scope; and (3) directly minimizing the
+objective is computationally prohibitive. Our im-
+plementation approximates only the coverage term
+through opinion-enriched indexing.
+Limited domain and scale of evaluation. We
+evaluate on two English-language domains (e-
+commerce seller forums and hotel reviews) with
+105 curated questions and 19 high-entropy entities.
+This is sufficient as an existence proof but does not
+establish generality across languages, cultures, or
+higher-stakes domains such as healthcare or polit-
+ical discourse. Entity selection was restricted to
+those with sentiment entropy H(e) ≥ 0.6, which
+deliberately targets opinion-diverse content and
+may overstate gains relative to a uniformly sam-
+pled query set.
+Human evaluation scope. The fidelity evalua-
+tion rests on blind pairwise preference from 5 anno-
+tators over 48 question-response pairs on a single
+domain. The wide confidence interval (95% CI:
+[65.0%, 89.5%]) reflects this limited scale, and we
+did not measure whether readers correctly infer the
+underlying opinion distribution (the fidelity term
+W2(Ppop, Preader)).
+Dependence on LLM-based extraction. Opin-
+ion attributes and the entity registry are produced
+by LLM extraction. While we show cross-model
+consistency across three extraction models, the ex-
+traction step can itself introduce a systematic bias
+(for example, in how sentiment intensity or demo-
+graphic attributes are assigned), and we do not fully
+audit these downstream effects.
+Diversity-fairness trade-off. Opinion enrich-
+ment reduces overall demographic coverage even
+as it improves coverage among entity-relevant doc-
+uments. We characterize this trade-off empirically
+but do not resolve it; multi-objective retrieval that
+jointly optimizes diversity and fairness remains
+open.
+Ethics Statement
+This work is motivated by an ethical concern: RAG
+systems that collapse opinion-rich content to a sin-
+gle answer can lead to echo chamber effects that
+amplify dominant viewpoints, which can lead to
+opinion manipulation and under-representation of
+minority voices. Our aim is transparent representa-
+tion in proportion to prevalence rather than equal
+dissemination of all views. We acknowledge a
+dual-use tension. A system that faithfully repre-
+sents an opinion distribution could also be used to
+surface fringe or harmful viewpoints. We argue
+that the distributional-fidelity and fairness terms
+in our objective mitigate this by weighting opin-
+ions according to corpus prevalence. The objective
+penalizes over or under-representation of demo-
+graphic groups and that transparent representation
+is preferable to opaque filtering that hides, what
+was excluded. We do not claim this fully resolves
+the risk, and deployment in high-stakes settings
+would require additional safeguards.
+Human annotation. All annotation was per-
+formed by internal colleagues (middle-aged, US-
+based, fluent English speakers) as part of their nor-
+mal work; no additional compensation was pro-
+vided for the task. Five evaluators completed the
+blind pairwise preference comparisons, and three
+annotators produced the opinion labels used to mea-
+sure inter-annotator agreement. The annotators
+consented to the use of their judgments for this
+research. The study collected no personal data
+beyond the annotators’ preference and label judg-
+ments over publicly derived text and was deter-
+mined not to require ethics-board review. Anno-
+tators reviewed user-generated content that may
+contain complaints or negative sentiment but no
+sensitive personal information beyond what the
+source platforms already make available. No demo-
+graphic inferences about individuals were released.
+Inferred author attributes. The architecture de-
+rives author attributes (for example, revenue band,
+tenure, region) to support fairness analysis. These
+are coarse, corpus-derived categories used only in
+aggregate for representation measurement, not to

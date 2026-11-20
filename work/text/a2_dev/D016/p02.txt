@@ -1,0 +1,108 @@
+tracting accurate and representative domain-specific ontologies
+to build KGs and VSs is a complex task. Additionally, curating
+datasets with specific text data for constructing both KGs and
+VSs is equally demanding. These steps are critical for ensuring
+that the augmented LLMs can reliably produce high-quality,
+relevant responses across different domains.
+In this paper, we introduce a framework designed for con-
+structing domain-specific corpora of scientific articles through
+advanced techniques, including: text mining, information re-
+trieval, dimension reduction, nonnegative tensor factorization,
+citation graphs, and human-in-the-loop strategies. We intro-
+duce a novel framework, which we call SMART-SLIC, for
+developing KG’s ontologies, utilizing both metadata and full
+texts from open-source scientific publications, as well the la-
+tent structures of these corpora, extracted through nonnegative
+tensor factorization, enhanced with automatic model deter-
+mination. SMART-SLIC facilitates topic modeling [7], and
+determination of the optimal number of topics [8], [9] for ef-
+fective document classification. Our new framework underpins
+the creation of a precisely tailored corpus of domain-specific
+scientific articles, which is crucial for our AG approach and
+supports the development of a chat-bot adept at answering
+domain-specific technical inquiries. Further, the framework
+is versatile, allowing for its application to any domain of
+documents. In this paper, we illustrate the effectiveness of
+our framework, SMART-SLIC, with a case study where we
+construct a domain-specific corpus, KG, and VS, focused
+on malware analysis and anomaly detection, and apply our
+enhanced question-answering framework for scientific queries
+related to this corpus. Our contributions are summarized as
+follows:
+• We detail the development of a framework for building
+domain-specific scientific corpora using a blend of text
+mining, information retrieval, artificial intelligence (AI),
+and human-in-the-loop techniques.
+• We describe the creation of a domain-specific KG &
+VS ontology that leverages both observable metadata,
+and full texts of the corpus of domain-specific open-
+source scientific articles, as well as its latent structure
+extracted by non-negative tensor/matrix factorization with
+automatic model selection.
+• We demonstrate the enhanced capabilities of SMART-
+SLIC’s, RAG-enhanced LLM system, which utilizes
+chain-of-thought prompting with LLM agents to profi-
+ciently address scientific questions.
+II. RELATED WORKS
+Recent methods for building RAG-assisted [6] chatbot ap-
+plications rely on unstructured text stored in vector databases
+for question answering (QA) tasks [10]. Although the integra-
+tion of knowledge graphs (KGs) in AI systems is not novel
+[11], increasingly, researchers are leveraging them to improve
+LLM reasoning while simultaneously addressing the reliability
+issues discussed in Section I [12]–[14]. Despite the benefits,
+integrating domain-specific knowledge into chatbots requires
+substantial effort. Here, we review the prior work for common
+chatbot designs, the integration of domain-knowledge in RAG
+pipelines, and the steps required for constructing KGs.
+A. KGs in RAG Pipelines
+Building a sophisticated chatbot requires the knowledge of
+a wide range of research fields; hence, rarely do prior works
+present a fully engineered system like ours. Instead, most
+efforts focus on improving specific aspects of RAG pipelines,
+e.g., retriever design [15], [16], query intent recognition [17],
+and KG reasoning [18]–[21]. Our approach resembles past
+methods which leverage chain-of-thought [22] prompting on
+KGs [19], [20]; in conjunction with LLM-agents to enhance
+reasoning capabilities [23]–[25]. In addition to incorporat-
+ing these state-of-the-art techniques, we improve our RAG
+pipeline by modifying our retrieval method to use K-Nearest
+Neighbors with the Levenshtein metric instead of cosine
+distance as an entry point for context search. We also construct
+a “highly-specific” knowledge base for targeted QA tasks.
+Although expensive and time-consuming, a handful of prior
+works incorporate domain-knowledge into their RAG pipelines
+[26]–[29]; however, the majority either use existing KGs built
+broadly on medical literature [26], [28]; or do not disclose any
+details regarding their dataset construction [29]. We emphasize
+that our method is “highly-specific” because it was driven by
+subject matter expertise which informed our dataset curation
+and cleaning techniques [30], [31].
+B. KG Development
+At a minimum, the development of knowledge graphs
+requires building a corpus, defining an ontology, and extracting
+the relevant entity-relation triplets from unstructured text.
+Corpus Building. Here we define the term “highly-specific”
+and explain our dataset collection method. A key feature of
+our dataset collection is the use of unsupervised methods
+[31] to decompose corpora into document clusters to finer
+specificity than the author-provided tags available on open ac-
+cess websites. This differs significantly from prior approaches
+[27], [32], [33]. We leverage latent-topic information from
+our NMFk method to filter and select the best data for
+our knowledge base, and prune documents based on cita-
+tion information and embedding distances. Our text cleaning
+pipeline is informed by subject matter experts (SME) [31],
+[34], thus going beyond standard methods by incorporating
+expert-derived rules for document cleaning, e.g, acronym and
+entity standardization.
+KG Construction. Our ontology is shaped by traditional
+methods, i.e., relying on SME design and capturing task-
+specific features. However, we innovate by incorporating latent
+information from our decomposition process [31] into our KG
+as entities. For entity and relation extraction, we move be-
+yond conventional learning-based techniques [35]; and instead,
+leverage recent advancements which use LLM-agents [10],
+[36] as opposed to other LLM prompting methods [37]–[40].
+This approach yields non-sparse KGs, meaning, the average
+out-degree of entities [41], [42] is high. To our knowledge, no

@@ -1,0 +1,106 @@
+Limitations
+URGen assumes that a ﬂatter keypoint-ranking dis-
+tribution warrants more context. It may fail when
+the model is consistently conﬁdent about wrong or
+incomplete keypoints: ZARD can then assign low
+entropy, shrink the context, and miss necessary ev-
+idence. Appendix Table S10 quantiﬁes this failure
+mode: 2 of 26 errors occur in the lowest uncer-
+tainty quartile and 5 of 51 in the lower half. These
+counts do not directly establish ranking correct-
+ness because gold keypoint labels are unavailable.
+URGen also cannot recover evidence absent from
+its corpus. Our evaluation uses complete disease-
+scoped galleries of 35 TED or 22 GD keypoints;
+the pooled-gallery test in Appendix Table S8 adds
+disease-speciﬁc distractors but does not establish
+robustness for web-scale retrieval or automatically
+extracted, noisy corpora.
+Computationally, URGen’s multi-temperature
+ranking and answer aggregation increase total in-
+ference work. Appendix Table S3 reports 4.33
+GPU-s/question, above Fixed-1 (3.78) but below
+Fixed-5 (5.48); batching independent branches
+does not remove this total-compute cost. Finally,
+the present evidence is limited to multiple-choice
+ophthalmology QA with authoritative guidelines.
+Applying URGen to other specialties requires a
+new veriﬁed corpus, and its behavior for open-
+ended tasks remains untested.
+Acknowledgments
+This work was supported by the Guangdong
+Basic and Applied Basic Research Founda-
+tion (Grant No. 2025A1515012281), the Nan-
+jing Municipal Science and Technology Bu-
+reau (Grant No. 202401035), the Macao Sci-
+ence and Technology Development Fund (Grant
+No. 0209/2025/AMJ), the National Natural Sci-
+ence Foundation of China (Grant Nos. 82388101
+and 82271122), the “Explorer Program” (First
+Batch) of the 2026 Basic Research Plan (Grant
+No. 26TS1401900), the National Key R&D Pro-
+gram of China (Grant Nos. 2024YFB4710200 and
+2024YFB4710205), the Shanghai Jiao Tong Uni-
+versity 2030 Initiative (Grant No. WH510272301),
+the Science and Technology Commission of
+Shanghai Municipality (Grant No. 23JC1402402),
+the Shanghai Three-Year Plan for the Inheritance
+and Innovative Development of Traditional Chi-
+nese Medicine (Grant No. 2-1-5), the National
+Administration of Traditional Chinese Medicine
+Clinical Collaboration Program for Major and Dif-
+ﬁcult Diseases (Grant No. ZDYN-2024-A-091),
+the Hainan Provincial Key Research and Develop-
+ment Projects (Grant No. ZDYF2024LCLH004),
+and the Shanghai Jiao Tong University School
+of Medicine Vertical Research Projects (Grant
+Nos. yskt2-24-0926-2 and yskﬂ-24-0926-2).
+References
+Asma Ben Abacha, Chaitanya Shivade, and Dina
+Demner-Fushman. 2019. Overview of the MEDIQA
+2019 shared task on textual inference, question en-
+tailment and question answering. In Proceedings of
+the 18th BioNLP Workshop and Shared Task, pages
+370–379, Florence, Italy. Association for Computa-
+tional Linguistics.
+Henry B. Burch, Petros Perros, Tomasz Bednarczuk,
+David S. Cooper, Peter J. Dolman, Angela M. Le-
+ung, Ilse Mombaerts, Mario Salvi, and Marius N.
+Stan. 2022. Management of thyroid eye disease: A
+consensus statement by the american thyroid asso-
+ciation and the european thyroid association. Euro-
+pean Thyroid Journal, 11(6).
+Chi-Min Chan, Chunpu Xu, Ruibin Yuan, Hongyin
+Luo, Wei Xue, Yike Guo, and Jie Fu. 2024. RQ-
+RAG: Learning to reﬁne queries for retrieval aug-
+mented generation. In Proceedings of the First Con-
+ference on Language Modeling.
+Danqi Chen, Adam Fisch, Jason Weston, and Antoine
+Bordes. 2017. Reading wikipedia to answer open-
+domain questions. In Proceedings of the 55th An-
+nual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), pages 1870–
+1879. Association for Computational Linguistics.
+Lu Chen, Ruqing Zhang, Jiafeng Guo, Yixing Fan, and
+Xueqi Cheng. 2024. Controlling risk of retrieval-
+augmented generation: A counterfactual prompting
+framework. In Findings of the Association for Com-
+putational Linguistics: EMNLP 2024, pages 2380–
+2393, Miami, Florida, USA. Association for Com-
+putational Linguistics.
+Zeming Chen, Alejandro Hernández Cano, Angelika
+Romanou, Antoine Bonnet, Kyle Matoba, Francesco
+Salvi, Matteo Pagliardini, Simin Fan, Andreas
+Köpf, Amirkeivan Mohtashami, Alexandre Sallinen,
+Alireza Sakhaeirad, Vinitra Swamy, Igor Krawczuk,
+Deniz Bayazit, Axel Marmet, Syrielle Montariol,
+Mary-Anne Hartley, Martin Jaggi, and Antoine
+Bosselut. 2023. MEDITRON-70b: Scaling medi-
+cal pretraining for large language models. arXiv
+preprint arXiv:2311.16079.
+Eunseong Choi, June Park, Hyeri Lee, and Jong-
+wuk Lee. 2025. Conﬂict-aware soft prompting
+for retrieval-augmented generation. In Proceedings
+of the 2025 Conference on Empirical Methods in
+Natural Language Processing, pages 26981–26995,
+3926

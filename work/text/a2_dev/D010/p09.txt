@@ -1,0 +1,46 @@
+Efficient Federated Search for Retrieval-Augmented Generation 9
+proach. To run MMLU, we leverage the code provided by the RQABench
+framework [37].
+(iii) FeB4RAG is a benchmark designed to evaluate federated search meth-
+ods for RAG systems [39]. It consists of 790 user queries spanning diverse
+domains and complexity levels. FeB4RAG is derived from BEIR [38] and
+includes 13 heterogeneous data sources powered by eight distinct embedding
+models, enabling evaluation under realistic federated retrieval settings. For
+FeB4RAG, ground truth relevance labels are obtained using the LLM based
+approach. Unlike MIRAGE and MMLU, FeB4RAG does not provide ver-
+ifiable ground-truth answers.
+Evaluation. To facilitate automated evaluation, we developed a separate
+benchmarking script that iterates over all questions in a given dataset and sends
+each query, along with the associated answer choices if applicable, to the RA-
+GRoute system via HTTP requests. Queries are sent one by one: the script
+waits for the response to a given query before proceeding to the next. Upon
+receiving a response from the system, the script verifies the correctness of the
+answer against the ground truth answer, if applicable. This setup enables sys-
+tematic and reproducible evaluation across multiple benchmarks.
+Retrieval and reranking. For all datasets, we retrieve a global top-k = 15
+list of documents for generation. To construct this final set, each selected data
+source retrieves top-kret = 50 documents most similar to the query using exact
+similarity search with FAISS [12] incurring negligible latency compared to the
+reranker. We set kret sufficiently large to ensure high recall, while balancing
+the trade-off with reranking cost. All retrieved candidates are then reranked to
+produce the global top-15 list. This two-stage retrieval strategy balances recall
+and precision: a sufficiently large retrieval pool ensures coverage, while reranking
+improves semantic relevance and reduces noise in the final context. We employ
+the BAAI/bge-reranker-v2-m3 model [1], a lightweight cross-encoder reranker
+designed for multilingual reranking with efficient inference.
+LLM models. As LLM, we use the open-source LLaMA 3.1 8B Instruct
+modelforallabovedatasets[17]asitiscommonlyconsideredinrelatedwork[2,35].
+We adopt a zero-shot chain-of-thought prompting scheme, instructing the model
+to reason step-by-step before providing the final answer. The output is formatted
+in JSON to ensure interpretable reasoning and structured evaluation.
+Hardware. We run our experiments on a compute cluster equipped with an
+NVIDIA A100 GPU for LLM answer generation, and 500 GB of main memory.
+Routing baselines. To analyze the effectiveness and efficiency of RA-
+GRoute, we experiment with the following four routing strategies.
+(i) none. This routing strategy does not query any data source and the input
+prompt to the LLM is not enhanced with retrieved documents.
+(ii) all. Under this routing strategy, all data sources are queried. This can be
+considered as a naive baseline for federated search that lacks a mechanism
+for strategic resource selection.
+(iii) RAGRoute.Thisroutingstrategyusesthe RAGRouteroutertoidentify
+and retrieve documents only from relevant data sources.

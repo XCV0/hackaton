@@ -1,0 +1,51 @@
+LLM-Confidence Reranker
+3.1. Maximum Semantic Cluster Proportion
+Confidence represents a language model’s assurance in its generated output, whereas uncertainty reflects the lack
+of such assurance. To quantify confidence in black-box LLMs, we employ a method based on semantic consistency
+assessment. Drawing inspiration from Semantic Entropy (SE) (Farquhar et al., 2024), which measures uncertainty via
+the entropy of semantically clustered outputs, we introduce the Maximum Semantic Cluster Proportion (MSCP) as
+a straightforward and efficient confidence metric for black-box LLMs. This metric leverages the inherent semantic
+comprehension of LLMs to evaluate agreement across multiple generated outputs, serving as a reliable indicator of
+relevance in retrieval-augmented generation (RAG) systems.
+Let𝜙 denote the parameters of a pre-trained LLM, treated as a black-box system accessible solely through input-
+outputinteractions.Foragiveninput𝑥(e.g.,aqueryorquery-documentpair),theLLM𝜙producesoutputsbysampling
+fromitspredictivedistribution.Toassessconfidence,weapplymultinomialsamplingattemperature𝑇 = 1togenerate
+𝐾 independent output sequences, denoted as {𝑡𝑘}𝐾 𝑘=1, where each𝑡𝑘 is autoregressively sampled as follows:
+𝑡𝑘 ∼𝑝𝜙(⋅ ∣𝑥),
+with𝑝𝜙(𝑡 ∣𝑥) representing the probability distribution over sequences induced by the LLM𝜙.
+These𝐾 sequences are clustered according to semantic equivalence, forming a partition of semantically similar
+outputs. Clustering utilizes the same LLM 𝜙 to assess pairwise semantic relations, ensuring alignment within the
+model’s semantic space without external dependencies. For each pair of sequences (𝑡𝑖,𝑡𝑗) where𝑖 ≠𝑗,𝑡𝑖 ∼𝑝𝜙(⋅ ∣𝑥),
+and𝑡𝑗 ∼𝑝𝜙(⋅ ∣𝑥),weprompttheLLM𝜙withanaturallanguageinference(NLI)-stylequerytoclassifytheirsemantic
+relation. This is formalized by a function 𝑓𝜙(𝑡𝑖,𝑡𝑗) that outputs one of: “entailment”, “contradiction”, or “neutral”,
+indicating whether𝑡𝑖 semantically entails𝑡𝑗.
+This pairwise assessment constructs an undirected similarity graph𝐺 = (𝑉,𝐸), where the vertices𝑉 = {𝑡𝑘}𝐾 𝑘=1
+comprise the sampled sequences, and an edge (𝑡𝑖,𝑡𝑗) ∈𝐸 exists if and only if bidirectional entailment holds:
+(𝑡𝑖,𝑡𝑗) ∈𝐸 ⟺ 𝑓𝜙(𝑡𝑖,𝑡𝑗) = “entailment” ∧𝑓𝜙(𝑡𝑗,𝑡𝑖) = “entailment”.
+The connected subgraphs in graph 𝐺 are defined as node subsets where a path—a sequence of edges—exists
+betweeneverypairofnodes,andnoadditionalnodescanbeincludedwhilepreservingthisconnectivity.Suchmaximal
+subgraphsformtheconnectedcomponentsof𝐺,partitioningthegraphintodisjointsetsthatrepresentdistinctsemantic
+equivalence classes. These classes aggregate responses sharing the same underlying meaning, with bidirectional
+entailmentensuringtransitivityandsymmetrywithineachcomponent,thuspropagatingequivalenceacrossconnected
+nodes.
+Directcomputationoftheseconnectedcomponentsviaacompletegraphandstandardalgorithms(e.g.,depth-first
+searchorunion-find)canbecomputationallydemandingforlarge𝐾,requiring (𝐾 2)pairwiseentailmentevaluations.
+To address this, we adopt a greedy clustering algorithm that approximates the graph structure without materializing
+all edges. The algorithm initializes an empty cluster set𝑆 = ∅. For each sample𝑡𝑖 (processed sequentially from𝑖 = 1
+to𝐾):
+• Assess whether𝑡𝑖 can be assigned to an existing cluster𝑠 ∈ 𝑆. For each such cluster𝑠, select a representative
+response𝑡(𝑠) from𝑠, such as the initial sample added or an embedding-derived centroid for efficiency.
+• If𝑓𝜙(𝑡𝑖,𝑡(𝑠)) = “entailment” ∧𝑓𝜙(𝑡(𝑠),𝑡𝑖) = “entailment”, incorporate𝑡𝑖 into𝑠.
+• If𝑡𝑖 aligns with no existing cluster, initialize a new cluster {𝑡𝑖} and append it to𝑆.
+This greedy approach efficiently identifies connected components by iteratively merging samples based on
+entailment links, ensuring each resulting cluster corresponds to a maximal connected subgraph where all responses
+are semantically equivalent via transitive entailment paths. The algorithm reduces NLI evaluations (via LLM 𝜙) to
+(𝐾 ⋅𝑀), where 𝑀 is the number of clusters (typically much smaller than 𝐾), rendering it suitable for practical
+deployment. The final semantic equivalence classes are {𝑠1,𝑠2, …,𝑠𝑀 }, with 𝑀 denoting the number of distinct
+meanings identified, and cluster sizes satisfying ∑𝑀 𝑚=1 |𝑠𝑚| =𝐾, as each sample is assigned to exactly one class.
+Following cluster formation, MSCP is formally defined as:
+𝐶(𝑥) = MSCP(𝑥;𝜙,𝐾) = max
+𝑚=1,…,𝑀
+|𝑠𝑚|
+𝐾 , (1)
+Song et al.: Preprint submitted to Elsevier Page 6 of 21

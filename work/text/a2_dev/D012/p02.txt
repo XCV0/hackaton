@@ -1,0 +1,112 @@
+Compliance-oriented QA Query + User Role
+Retriever
+Naive RAG
+Access-
+denied doc
+Superseded 
+doc
+Active 
+conflicting doc
+Non-conflicting 
+active doc
+All retrieved evidence
+LLM
+Ungoverned 
+context
+• Unauthorized leakage
+• Stale citation
+• Unsupported answer under unresolved 
+conflict
+TrustRAG
+Access-
+denied doc
+Superseded 
+doc
+Active 
+conflicting doc
+Non-conflicting 
+active doc
+All retrieved evidence Metadata
+• doc id
+• access level
+• supersedes link
+Metadata-Governed Routing
+• Access filtering • Supersession filtering • Conflict check over active evidence
+Filtered active evidence
+Access-
+denied doc
+Superseded 
+doc
+Dropped evidence
+Access-denied doc
+Superseded doc
+Deterministic 
+refusal
+Answer 
+generation
+Conflict-aware 
+generation
+Governed Answer
+• Answer • Refusal • Conflict report
+none available unresolved conflictnone conflict
+Figure 1: Naive RAG vs. TrustRAG for compliance-oriented QA. Naive RAG passes all retrieved documents
+directly to the generator, allowing access-denied, superseded, or conflicting evidence to influence the answer.
+TrustRAG inserts a metadata-governed routing layer before generation. Under trusted metadata, the router excludes
+inadmissible evidence, returns a deterministic refusal when no admissible evidence remains, and preserves unre-
+solved conflicts among retained evidence for conflict-reporting generation.
+alignment (Zhang et al., 2025b; Rau et al., 2024).
+During generation, self-reflection and verification
+mechanisms help correct unreliable outputs (Asai
+et al., 2024), while automated frameworks evalu-
+ate whether generated answers are faithful to the
+retrieved context (Niu et al., 2024; Saad-Falcon
+et al., 2024). Although these methods improve rel-
+evance and factual accuracy, they typically treat
+retrieved evidence merely as flat contextual text.
+Even studies addressing access control, outdated
+evidence, or knowledge conflicts (Chen et al., 2025;
+Ouyang et al., 2025; Wang et al., 2025a; Lee et al.,
+2025) often lack deterministic mechanisms to ex-
+clude inadmissible or superseded evidence prior to
+generation based on structured metadata.
+To bridge this gap, we propose TrustRAG, a
+metadata-governed RAG framework designed for
+compliance-oriented QA. Rather than replacing
+the retriever, TrustRAG introduces a metadata-
+governed routing layer between the retriever and
+the generator to explicitly determine which re-
+trieved evidence enters the generation context. We
+focus on mitigating three core governance failures:
+(1) Unauthorized leakage, where the model dis-
+closes facts inaccessible to the current user; (2)
+Stale citation, where the model references outdated,
+explicitly superseded facts; and (3) Unsupported
+answers, where the model forces a fabricated con-
+clusion when faced with multiple valid but conflict-
+ing active documents. Figure 1 illustrates the differ-
+ences in evidence processing between TrustRAG
+and Naive RAG.
+To systematically evaluate post-retrieval evi-
+dence governance, we construct AeroTrustBench.
+It encompasses scenarios with restricted access, su-
+perseded documents, conflicting facts, and their
+combinations, providing user permissions, docu-
+ment metadata, candidate evidence, and ground-
+truth answers for each query. We evaluate
+TrustRAG across three strong general-purpose
+models (Qwen-Max, DeepSeek-V3, and GLM-4-
+32B-0414) against Naive RAG, governance base-
+lines (Prompt RAG and Metadata Filter), and re-
+trieval baselines (BM25 and Dense RAG). Com-
+prehensive experiments involving component ab-
+lations, robustness tests, and human audits demon-
+strate that TrustRAG significantly reduces unau-
+thorized leakage, stale citations, and unsupported
+answers in the main evaluations, with consistent
+trends observed in the supplementary experiments.
+Our main contributions are as follows:
+• We formalize post-retrieval risks in
+compliance-oriented QA into three core
+governance failures: unauthorized leakage,
+stale citation, and unsupported answers.
+35003

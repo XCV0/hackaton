@@ -1,0 +1,110 @@
+Specically, mixed cation, mixed halide perovskites,
+CsxFA1−xPbI3−xBrx exhibit thermal stability,25 phase stability,26
+and tunable bandgaps (Eg),27 which satisfy the requirements for
+use as top cells in PVK/c-Si tandem devices enabling current
+matching. For PVK/c-Si tandem devices, a p–i–n structure is
+preferable due to the low parasitic absorption of the hole
+transporting layer.28 To date, studies on sequential multi-cycle
+vacuum deposited CsxFA1−xPbI3−xBrx remain limited. Feng
+et al.29 demonstrated a sequential deposition method involving
+PbI2, FAI, and CsI, coupled with in vacuo annealing, achieving
+a champion eﬃciency of 21.3%. Similarly, Li et al.17 reported an
+eﬃciency exceeding 24% by rst co-evaporation of PbI2, CsI,
+and PbCl2, followed by subsequent deposition of FAI. These
+studies highlight the high potential of sequential thermal
+evaporation technology for achieving elevated PCEs. However,
+both studies focus on the n–i–p structure and iodide-based PVK
+absorber, which are unsuitable as top cells when aiming for
+tandem device preparation.17,29
+Based on the process proposed in our previous work,30,31 we
+demonstrate here eﬃcient p–i–n PSCs based on multi-cycle
+thermally deposited CsxFA1−xPbI3−xBrx. In this work, the
+impact of post-deposition annealing is systematically investi-
+gated in terms of crystallinity, morphology, opto-electronic
+properties and performance. We nd that the grain size
+increases on average from 500 nm to 1 mm as the annealing
+temperature increases from 130 °C to 170 °C. We demonstrate
+that a trace amount of PbCl2 improves the PCE by enhancing
+the open circuit voltage (Voc) and ll factor (FF), which is
+attributed to the improved absorber crystallinity. With these
+optimized parameters, we fabricate p–i–n solar cells with cell
+area of 0.09 cm2, achieving an eﬃciency of 18.5% with a Voc of
+1.001 V, a short circuit-current (Jsc) of 23.75 mA cm−2, and a FF
+of 78.5%. These results show comparable device performance,
+especially the high FF, to co-evaporated MA-free based perov-
+skites. Furthermore, the best PSCs achieve the highest PCE of
+17.06% for 0.36 cm2. Our ndings provide an alternative
+approach for thermal evaporated absorber preparation and
+scaling up in PSC applications.
+2. Methodology
+2.1 Materials
+Indium tin oxide (ITO)-coated glass substrates and PTAA were
+purchased from Yokou. CsBr, fullerene (C60) and BCP were
+purchased from Sigma-Aldrich. CH(NH2)2I (FAI), PbCl2, and
+PbI2 were purchased from Greatcell Solar Materials. All chem-
+icals are used as received.
+2.2 Film and device preparation
+ITO-coated glass substrates were cleaned with acetone, ethanol,
+and oxygen plasma for 5–10 min. As a hole-extraction layer, 1.5 mg
+mL−1 PTAA was spin coated at 6000 rpm (acceleration 2000 rpm),
+and then annealed at 100 °C for 10 min. Then, the samples were
+transferred to a vacuum chamber (Perovap, CreaPhys) for PVK
+deposition at a base pressure of 10−6 mbar. PVK lms are
+prepared with a simplied approach consisting of a multi-cycle
+sequential thermal deposition method described in our previous
+studies.30,31 To obtain a Cs0.15FA0.85PbI2.85Br0.15 lm, three
+precursors were sequentially evaporated, PbI2,FAI,andCsBr,into
+one stack with a total thickness of 200–250 nm. Aerwards, two
+additional stacks were depositedbyrepeatingthesamesequence
+to reach a total target thickness of about 600 nm. A 1.8% molar
+ratio of PbCl2 to 1 of PbI2 was thermally deposited between the
+PbI2 and FAI layers in each stack for samples w/ PbCl2.Fig.1a
+shows a schematic illustration of the sequential evaporation
+process. The detailed parameters for the deposition of each
+precursor are reported in Table S1.† The nal PVK layers prepared
+inthreecycleswereannealedonahotplateatdiﬀerent annealing
+temperatures (130 °C, 150 °C, and 170 °C) and times (10 min,
+15 min, and 20 min). Aerwards, the samples were transferred
+into a second vacuum chamber (Optivap 2, CreaPhys) for the
+thermal evaporation of a 20 nm-thick C60 layer, and a 2 nm-thick
+BCP layer, followed by a 100-nm thick Ag electrode (Optivap 1,
+CreaPhys) using metal masks to dene the cell area.
+2.3 Characterization
+X-ray diﬀraction patterns (XRD) were measured with a Bruker
+D8 Advance diﬀractometer equipped with a Cu-Ka X-ray source
+at a wavelength of 1.54 Å.
+The top-view morphology and cross-section of PVK lms and
+devices were measured using a scanning electron microscope
+(SEM, Thermo Scientic) with an accelerating voltage of 5 kV.
+The absorption of samples was measured by ultraviolet-
+visible spectroscopy (UV/vis, PerkinElmer, Lambda 950) over
+a wavelength range of 300–850 nm.
+The photoluminescence spectra of the samples were inves-
+tigated by steady-state photoluminescence (PL, HORIBA, FL3-
+111) with an excitation wavelength of 405 nm; besides, the
+emission light was ltered using a 550 nm lter. Time-resolved
+photoluminescence spectra were recorded using an Edinburgh
+LifeSpec spectrometer equipped with a single-photon counter.
+The lms were excited at 405 nm, and the emission light was
+ltered using a 550 nm lter.
+Time-resolved microwave conductivity (TRMC) was applied
+to investigate the photo-induced carrier lifetime, mobility, and
+recombination dynamics (band-to-band recombination, trap-
+ping, and detrapping). The eﬀective electron and hole mobil-
+ities (Pm) are derived from the maximum TRMC signal (DGmax),
+which is normalized by the absorptance at an excitation wave-
+length of 650 nm. The charge carrier half-lifetime is obtained
+from the photoconductance decay.
+For the determination of the Urbach energy, sub-bandgap
+excitations from 750 nm to 950 nm (intervals of 25 nm) were
+performed. Thanks to the excellent sensitivity of TRMC, we
+calculated the absorption coeﬃcient down to ∼10−2 cm−1 from
+the photoconductance and photo-induced carrier density upon
+sub-bandgap excitation, considering mobility, lm thickness,
+photon uence and reection losses as previously reported.32
+The Urbach energy, EU, is obtained by tting the linear portion
+of the absorption coeﬃcient (on a logarithmic scale) within the
+energy spectrum below the bandgap and calculating the inverse
+of the corresponding slope as shown in eqn (1).
+2730 | Sustainable Energy Fuels,2025,9, 2729–2737 This journal is © The Royal Society of Chemistry 2025
+Sustainable Energy & Fuels Paper

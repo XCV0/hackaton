@@ -1,0 +1,178 @@
+Chunk 1
+Mickey's Safari in 
+Letterland is a 1993 
+educational Nintendo 
+Entertainment System 
+video game starr-ing 
+Disney's Mickey 
+Mouse, … The succe-
+ssor title, Walt 
+Disney's Comics and 
+Stories (WDC&S), 
+described by Barrier as 
+a true comic book, 
+began publication with 
+the Oct 1940 issue and 
+had the Gottfr-edson ...
+Mickey's Safari in 
+Letterland
+1993
+Mickey Mouse
+Disney
+WDC&S
+Barrier
+starringstarring
+release yearrelease year
+associated withassociated with
+described 
+featuresfeatures
+Gottfreds
+on serials
+Gottfreds
+on serials
+Dependencies 
+missing due to 
+context loss
+Mickey's Safari... starring 
+Disney's Mickey Mouse
+The successor title, Walt 
+Disney's Comics...
+Semantic 
+truncation
+<Mickey's Safari, starring, Mickey Mouse>, 
+<Mickey Mouse, associated with, Disney>, ...
+Fragmented triples lose semantic. 
+Mickey's Safari      (starring)      Mickey Mouse     
+(featured)      Gottfredson serials
+Graph paths mislead LLM reasoning.
+Mickey Mouse is associated with Disney. 
+WDC&S features Gottfredson.
+Text rewriting omits information.
+Chunk k
+Chunk 2
+The succe-ssor title, Walt Disney's Co-mics 
+and Stories (WDC&S), ...
+Chunks cause semantic truncation.
+Semantic Nodes 
+SN n
+SN 2
+Mickey's Safari in Letter-land 
+is a 1993 educational NES 
+video game. SN 1
+(a) Text to STG
+Triple Topological  
+mechanism
+SN9
+SN8
+SN3
+SN7
+SN6
+SN4
+SN1
+SN5
+SN2
+SN9
+SN8
+SN3
+SN7
+SN6
+SN4
+SN1
+SN5
+SN2
+Modality-Aligned 
+Pathfinding
+SN1:Mickey's Safari in 
+Letterland is a 1993 
+educational NES video 
+game, starring Disney's 
+Mickey Mouse.
+Semantic Topology Path
+Preserves semantic context.
+Aligns modality.
+(c) Text to Chunk KG
+SN4:Mickey Mouse is a 
+cartoon character cocr-
+eated in 1928 by Walt 
+Disney andUb Iwerks. 
+SN7:The successor 
+title, Walt Disney's 
+Comics and Stories 
+(WDC&S)...
+(b) Text to Triplet KG
+Figure 1: Comparison of graph-RAG paradigms. Left: Our proposed ThreadRAG (a) structures raw texts into a
+Semantic Topology Graph (STG) and extracts Semantic Topology Paths (ST-Paths), preserving semantic context
+and aligning modality for LLM deduction. Right: Existing paradigms, Triplet KG (b) and Chunk KG (c), fragment
+texts into discrete components, introducing severe semantic loss and modality mismatch.
+A Semantic Topology Mapper for high-fidelity
+knowledge structuring. To mitigate semantic
+loss introduced by conventional graph construc-
+tion, STM structures retrieved documents into an
+LLM-oriented Semantic Topology Graph (STG).
+Instead of extracting symbolic triplets or relying
+on isolated chunks, STM organizes retrieved doc-
+uments into self-contained Semantic Nodes that
+preserve local textual context. It then connects
+these nodes through complementary topological
+relations, including narrative, semantic, and lexical
+edges. Narrative edges preserve the original textual
+order, while semantic and lexical edges capture
+cross-node associations beyond surface adjacency.
+This design allows STG to retain the semantic con-
+tinuity of raw text while exposing the relational
+structure needed for evidence navigation. These
+relations transform fragmented retrieved evidence
+into a navigable topology without discarding the
+natural context required for multi-hop reasoning.
+An Energy-Driven Pathfinding module for
+modality-native knowledge representation. To
+bridge the modality mismatch between discrete
+graph structures and sequence-based LLM reason-
+ing, EDP converts query-relevant topology into
+continuous textual evidence paths. Given a query,
+EDP first identifies relevant Semantic Nodes as rea-
+soning anchors, and then performs energy-driven
+propagation and dynamic pruning over the STG
+to obtain a compact, query-specific evidence sub-
+graph. Instead of directly prompting the LLM with
+discrete graph paths or using free-form generation
+to verbalize the subgraph, EDP deterministically
+linearizes the selected nodes according to their
+topological and narrative structure. This process
+preserves the structural priors of the graph while
+presenting evidence in a form naturally compati-
+ble with LLM pretraining. The resulting Seman-
+tic Topology Paths provide continuous, context-
+preserving, and sequence-native evidence, enabling
+more coherent and reliable multi-hop reasoning.
+We conduct comprehensive evaluations across
+three multi-hop QA benchmarks. ThreadRAG
+consistently surpasses the best mainstream graph-
+enhanced paradigms across all three datasets (e.g.,
+achieving a 3.4% EM improvement over Know-
+Trace on HotpotQA). In graph representation eval-
+uations, replacing traditional global graphs with
+our STG yields a 12.6% EM improvement. Fur-
+thermore, our sequence-native STG-Paths strictly
+dominate all prevailing knowledge representation
+modalities, peaking at 0.588 EM on 2WikiMulti-
+hop. These results indicate that high-fidelity knowl-
+edge structuring and topological linearization sig-
+nificantly boost LLM deduction accuracy. Our con-
+tributions are as follows:
+• We propose a Semantic Topology Mapper that
+reduces semantic loss by organizing retrieved
+text into a context-preserving Semantic Topology
+Graph.
+• We introduce an Energy-Driven Pathfinding mod-
+ule that selects query-relevant evidence and lin-
+earizes discrete graph structures into sequence-
+native prompts for LLM reasoning.
+• We present ThreadRAG, a unified graph-
+enhanced RAG framework that consistently im-
+proves multi-hop QA performance over strong
+baselines across three benchmarks.
+2 Related Work
+Semantic Loss in Graph RAG. Integrating KGs
+into RAG provides explicit structural priors for
+49892

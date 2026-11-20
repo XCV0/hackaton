@@ -1,0 +1,44 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+3.DoSfunctionsandstatisticalintegrals
+A number of different materials have been used as TLs in PSCs, both inorganic and organic. Charge carrier
+conduction occurs via different basic mechanisms in the two classes of material (viz. inorganic and organic),
+which, in the present context, is important because it determines the model for the DoS that is appropriate
+for a given TL material.
+Inorganic semiconductors are typically (poly)crystalline with electrons inhabiting delocalised Bloch
+(travelling) wave states, and the DoS is derived from the (quantum mechanical) dispersion relations of the
+bands of states. In contrast, electrons in organic materials occupy localised molecular orbitals, and their
+motion occurs via thermally activated hopping between molecules. In the latter case, a continuous DoS
+function arises from the (classical) disorder in the molecular arrangements, which causes variations in the
+energy of the molecular orbitals4.
+As we shall see, in the present context the most important distinction between the two scenarios is that
+the DoS in a crystalline (inorganic, in this case) material has a well defined minimum, while this is not the
+case for the amorphous (organic) materials. In this section, we will consider appropriate choices of the DoS
+function for both crystalline inorganic and amorphous organic materials.
+3.1.Crystallineinorganicmaterials—ParabolicandsimplifiedKanemodels
+As mentioned above, the dispersion relation in an inorganic material has a well defined minimum and
+maximum. The energy (E) of an electron in a state with wavevector (k) near to the conduction band
+minimum (with energy Ec and wavevector kc) can be approximated by an expansion in powers of |k − kc|
+(see for example [27, 55]). Furthermore, we assume the band structure to be isotropic about this minimum,
+meaning the expansion depends only on the magnitude k = |k − kc|, so that
+E(k) = Ec + k ∂E ∂k ⏐⏐⏐ k=0 + k2 2 ∂2E ∂k2 ⏐⏐⏐ k=0 + O(k3). (27)
+As k = 0 is the point at which the conduction band has a minimum, the first derivative in this expansion is
+necessarily zero. Furthermore, on defining the conduction band effective mass by
+m∗ c = ℏ2 ∂2E
+∂k2
+⏐⏐
+k=0
+, (28)
+the following expression for the electron energy is obtained:
+E − Ec = ℏ2 2m∗c k2. (29a)
+This is referred to as the parabolic band approximation [55]. Similarly, the dispersion relation in the vicinity
+of the valence band maximum is
+E − Ev = − ℏ2 2m∗v k2. (29b)
+Note that this approximation is based upon a band structure with well-defined valence and conduction
+band edges that is not found in disordered systems, hence its use is limited to crystalline inorganic materials.
+The DoS function is then derived according to [27]
+g(E) = 1 π2 k2 dk dE (30)
+to obtain the DoS functions (as defined in (10)),
+ˆgc(E) = 2gc√π ( 1 kBT ) 3 2 √E − Ec for E > Ec, (31a)
+4 The scenarios described here are, of course, idealisations. Both organic and inorganic materials can exhibit varying degrees of disorder,
+and intermediate or mixed modes of transport and DoS functions [51–54].
+8

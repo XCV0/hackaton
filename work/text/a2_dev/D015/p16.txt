@@ -1,0 +1,122 @@
+Aggregation question generation
+You are an AI assistant tasked with generating questions based on two sets of 
+sub-question-answer pairs. Your goal is to create aggregation questions that 
+require performing addition, subtraction, union, or intersection operations on 
+the information from multiple sub-questions and their results to answer.
+Here are the two sets of sub-question-answer pairs:
+<sub_question_answer_pairs_1>
+{% for (idx, question, answer) in group1 %}
+<qa_{{ idx }}>
+question: {{ question }}
+answer: {{ answer }}
+</qa_{{ idx }}>
+{% endfor %}
+</sub_question_answer_pairs_1>
+<sub_question_answer_pairs_2>
+{% for (idx, question, answer) in group2 %}
+<qa_{{ idx }}>
+question: {{ question }}
+answer: {{ answer }}
+</qa_{{ idx }}>
+{% endfor %}
+</sub_question_answer_pairs_2>
+To synthesize your response, follow these steps:
+1. Look for common themes or connections between two sets of sub-
+question-answer pairs
+2. Select AT LEAST ONE sub-question-answer pair from each set
+3. Based on high-level topics, generate aggregation questions that require 
+aggregating multi-pieces of information from selected sub-question-answer 
+pairs to obtain answers from the selected pairs
+4. Avoid creating questions by simply connecting two sub-questions with a 
+conjunction 
+5. Not use pronouns or partial names to refer something in your question. 
+Use its actual name or full name
+6. The questions should NOT have more than 25 words and must be succinct. 
+Don't make the generated questions too long!
+Generate no more than two questions, and present your results as:
+<output>
+<question>[Your first question]</question>
+...
+</output>
+Example of generated elaborate questions:
+how many Oscar awards did Meryl Streep win?
+… More examples
+Figure 12: Prompt for aggregation question generation,
+as described in Step 3 of Section 4.2.
+glish–Chinese, and English–Arabic. After man-
+ual verification, about 90% of the questions from
+the English–German and English–Spanish sets
+are deemed natural, while the proportion for
+English–Chinese and English–Arabic is slightly
+lower, at approximately 84%. Finally, we obtain
+487, 680, 332, and 420 high-quality Q&A pairs
+from the English–German, English–Spanish, En-
+glish–Chinese, and English–Arabic article pairs,
+respectively. From each set, 300 Q&A pairs are
+randomly sampled and submitted for translation.
+B.5 Human Translation
+Q&A pairs generated from English-English article
+pairs are translated into German, Spanish, Chinese,
+Comparison question generation
+You are an AI assistant tasked with generating questions based on two sets of 
+sub-question-answer pairs. Your goal is to create comparison questions that 
+will require comparing numbers, time strings, facts, or other information in 
+multiple sub-questions and their results to answer.
+Here are the two sets of sub-question-answer pairs:
+<sub_question_answer_pairs_1>
+{% for (idx, question, answer) in group1 %}
+<qa_{{ idx }}>
+question: {{ question }}
+answer: {{ answer }}
+</qa_{{ idx }}>
+{% endfor %}
+</sub_question_answer_pairs_1>
+<sub_question_answer_pairs_2>
+{% for (idx, question, answer) in group2 %}
+<qa_{{ idx }}>
+question: {{ question }}
+answer: {{ answer }}
+</qa_{{ idx }}>
+{% endfor %}
+</sub_question_answer_pairs_2>
+To synthesize your response, follow these steps:
+1. Look for common themes or connections between two sets of sub-
+question-answer pairs
+2. Select AT LEAST ONE sub-question-answer pair from each set
+3. Based on high-level topics, generate comparison questions that require 
+comparing multi-pieces of information from selected sub-question-answer 
+pairs to obtain answers
+4. Avoid creating questions that can be answered by simply combining or 
+concating answers of sub-questions
+5. Not use pronouns or partial names to refer something in your question. 
+Use its actual name or full name
+6. The questions should NOT have more than 25 words and must be succinct. 
+Don't make the generated questions too long!
+Generate no more than two questions, and present your results as:
+<output>
+<question>[Your first question]</question>
+...
+</output>
+Example of generated elaborate questions:
+who has more spotify plays, drake or taylor swift?
+... More examples
+Figure 13: Prompt for comparison question generation,
+as described in Step 3 of Section 4.2.
+and Arabic to simulate a cross-lingual retrieval-
+augmented generation (RAG) with monolingual
+retrieval. Given the importance of named enti-
+ties in Q&A, translators are instructed to consult
+Wikipedia or other reliable sources to find com-
+monly used translations in the target language. If
+no appropriate translation exists, the original En-
+glish term is retained. For example, “Microsoft
+updated the Copilot” is translated into Chinese as
+“微软更新了Copilot,” where “Microsoft” is trans-
+lated (微软) and “Copilot” remains in English due
+to the absence of a standard Chinese equivalent.
+For Q&A pairs generated from article pairs in
+different languages, such as English-German and
+English-Chinese, translation is performed only into
+the language of the non-English input article. For
+example, Q&A pairs from English–German article
+15684

@@ -1,0 +1,62 @@
+Rewrite the following document to help the user understand the document better.
+<document>
+{document}
+</document>
+Table 7: Prompt template used for document rephrasing (Maini et al., 2024).
+As a knowledge analyzer, your task is to dissect and understand an article
+provided by the user.
+You are required to perform the following steps:
+1. Summarize the Article: Provide a concise summary of the entire article,
+capturing the main points and themes.
+2. Extract Entities: Identify and list all significant "nouns" or entities
+mentioned within the article. These entities should include but not limited to:
+* People: Any individuals mentioned in the article, using the names or references
+provided.
+* Places: Both specific locations and abstract spaces relevant to the content.
+* Object: Any concrete object that is referenced by the provided content.
+* Concepts: Any significant abstract ideas or themes that are central to the
+article’s discussion.
+Try to exhaust as many entities as possible. Your response should be structured
+in a JSON format to organize the information effectively.
+Ensure that the summary is brief yet comprehensive, and the list of entities is
+detailed and accurate.
+Here is the format you should use for your response:
+{{
+"summary": "<A concise summary of the article>",
+"entities": ["entity1", "entity2", ...]
+}}
+Article:
+{document}
+Table 8: Prompt template used to extract entities for EntiGraph (Yang et al., 2025b).
+ƭƬƯ ƭƬư
+0( -*!$)./) .
+ƱƬ
+ƳƱ
+ƭƬƬ
+ƭƮƱ
+ƭƱƬ
+ƭƳƱ
+ƮƬƬ )$.*- 
+*' 2-$/$)"ǾƳƬ" )ǿ
+ǾƳƬ" )ǿ
+*' 2-$/$)"Ǿƴ" )ǿ
+Ǿƴ" )ǿ
+ƭƬƱ ƭƬƲ ƭƬƳ ƭƬƴ
+0( -*!ưǶ"-(.
+Ƭǟư
+ƬǟƱ
+ƬǟƲ
+ƬǟƳ
+Ƭǟƴ
+ƬǟƵ/$**!0)$,0 ưǶ"-(.
+*' 2-$/$)"Ǿƴ" )ǿ
+Ǿƴ" )ǿ
+*' 2-$/$)"ǾƳƬ" )ǿ
+ǾƳƬ" )ǿ
+Figure 10: How data diversity changes with different synthetic document generation methods. (Left) Semantic
+diversity of synthetic documents, measured by the Vendi score (Friedman and Dieng, 2023) using embedding-based
+similarity to compute distances between data points. (Right) Lexical diversity of synthetic documents, measured
+as the ratio of unique 4-grams in the data. For both metrics, higher values indicate greater diversity. (1) Focal
+Rewriting increases both semantic and lexical diversity at all dataset sizes, and (2) scaling the generator does not
+significantly affect diversity.
+9208

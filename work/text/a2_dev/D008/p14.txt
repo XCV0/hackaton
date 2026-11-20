@@ -1,0 +1,40 @@
+Prompt Length (tokens) Baseline (s) CoDA (s)
+100 26.7219 33.4681
+259 28.3332 32.9018
+341 29.3058 37.4260
+1142 33.5325 37.8841
+2600 39.6130 44.7178
+Table 4: Inference latency under different prompt
+lengths.
+Case 4: ours_index = 52 (Tesla Bot Alias)
+Original Comment (translated). Ours uses quo-
+tation marks for “Optimus,” which the evaluator
+interprets as more precise. Baseline content is iden-
+tical but lacks quotes.
+Analysis. Both answers are factually identical;
+quotation marks are stylistic.
+Conclusion. Marginal justification; factual
+equivalence holds.
+Case 5: ours_index = 56 (Flex Computer
+System)
+Original Comment (translated). Both correctly
+describe the architecture. The baseline more explic-
+itly mentions “strong type checking and memory
+safety,” aligning better with the source.
+Analysis. Baseline legitimately infers “mem-
+ory safety guarantees” from “safe implementa-
+tion.” Ours emphasizes organization/execution and
+slightly under-specifies the technical focus.
+Conclusion. Evaluation correct; baseline superi-
+ority justified.
+E Inference Latency
+We evaluate the inference latency of CoDA under
+different prompt lengths. Our method applies at-
+tention modulation only to a small set of critical
+layers and operates on top-K attention elements,
+which limits the additional computation.
+As the prompt length increases, the relative over-
+head decreases, since the baseline attention cost
+grows with sequence length while CoDA only pro-
+cesses a sparse subset.
+11892

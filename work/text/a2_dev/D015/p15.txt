@@ -1,0 +1,97 @@
+Quesiton type Definition
+Aggregation Questions that require the aggregation of information across articles to answer (e.g., “how many Oscar awards did Meryl Streep win?”)
+Comparison Questions that compare information in two articles (e.g., “who started performing earlier, Adele or Ed Sheeran?”)
+Multi-hop Questions that require chaining multiple pieces of information from two articles to compose the answer (e.g., “who acted in Ang Lee’s latest movie?”)
+Set Questions that expect a set of entities, objects, or events from two articles as the answer (e.g., “what are the continents in the southern hemisphere?”)
+Table 8: Definition of four types of cross-document questions: aggregation, comparison, multi-hop, and set questions,
+as mentioned in Step 3 of Section 4.2.
+Summary generation
+You are an AI assistant tasked with generating a summary for a given article. 
+The generated summary should:
+1. Have the same language as the article
+2. Be ACCURATE, clear, specific, and concise
+3. Cover the key information of the given article, such as names, places, time 
+strings, events, results, and ect
+4. Be abstract and have little lexicon overlap with the article
+5. Not use pronouns or partial names to refer something in your summary. 
+Use its actual name or full name (e.g., “Joe Biden” instead of “Biden”, 
+“Olympics 2024” instead of “Olympics”)
+6. Not exceed 180 words
+Here is the given article: <article> {{ article }} <\article>
+Format your response as: <summary>[your generated summary]</summary>
+Figure 10: Prompt for summary generation, as described
+in Step 1 of Section 4.2.
+bilingual proficiency. Annotators were trained on
+150 pilot examples with iterative feedback. Final
+inter-annotator agreement (on other 200 examples)
+yielded Cohen’s kappa coefficient of 0.6182, indi-
+cating substantial agreement.
+We generate 2,950 raw cross-document Q&A
+pairs from English article pairs. Following manual
+verification, approximately 90% of the questions
+are deemed natural, 72% are considered answer-
+able, and 54% of the answers (including some that
+were manually corrected) are judged correct, yield-
+ing a final set of approximately 1,500 verified Q&A
+pairs. To further assess quality, we sample 200
+Q&A pairs and task a separate group of annotators
+to answer the questions by carefully reading the
+article pairs used to generate these questions. An-
+notators are explicitly instructed to answer no more
+than one question per hour (to ensure thorough
+reading and accurate responses). If their answers
+align with the reference answers, it suggests high-
+quality Q&A pairs. We use the majority vote of
+three LLM-as-a-Judge (see Evaluation Metrics in
+Section 5.1) to calculate the accuracy of human re-
+sponses to 200 questions, resulting in 85%. Upon
+manual review of the 30 failed cases, we find: (i) 4
+human answers are correct but incorrectly judged
+by the LLMs; (ii) 10 are genuinely incorrect, with
+Simple QA generation
+You are an AI assistant tasked with generating ENGLISH question-answer 
+pairs based on facts in a given text.
+The generated questions should:
+1. Be clear and unambiguous
+2. Not use pronouns or partial names to refer something in your question. 
+Use its actual name or full name (e.g., "Joe Biden" instead of "Biden", 
+"Olympics 2024" instead of "Olympics")
+3. Be in English
+4. Not exceed 20 words
+The corresponding answers should:
+1. Be accurate and supported by facts in the given text
+2. Be concise and NOT exceed 12 words
+3. Not use pronouns or partial names to refer something in your answer. Use 
+its actual name or full name
+4. Be in English
+The number of question-answer pairs can range from 1 to 6, depending on 
+the amount of information (facts) in the given text.
+Here is the given text: <text> {{ text }} </text>
+Format your response as:
+<list>
+<question>[your first question]</question>
+<answer>[answer to your first question]</answer>
+<question>[your second question]</question>
+<answer>[answer to your second question]</answer>
+...
+</list>
+Example of generated questions:
+which movie won the oscar best visual effects in 2021?
+what's the name of nashville's hockey team?
+who was the coach for the seattle seahawks?
+… more examples
+Figure 11: Prompt for simple Q&A generation, as de-
+scribed in Step 2 of Section 4.2.
+the reference answers being valid; and (iii) 16 are
+difficult to assess due to ambiguity or poor ques-
+tion quality, and are thus categorized as low-quality
+examples. This performance is comparable to es-
+tablished QA benchmarks, for instance, human ac-
+curacy on SQuAD (Rajpurkar et al., 2016) is 86.8%.
+We then randomly sample 1000 examples from the
+1500 Q&A pairs and send them for human transla-
+tion.
+We generate approximately 1,000 Q&A pairs
+each from article pairs of the following language
+pairs: English–German, English–Spanish, En-
+15683

@@ -1,0 +1,88 @@
+Dataset #docs #avg tokens/docs #eval Eval type Domain
+QuaLITY 265 6K 4609 MCQA Fictional stories
+LongHealth 400 12K 400 MCQA Medical
+FinanceBench 1367 16K 150 Free-form Finance
+Table 1: Dataset statistics. #docs indicates the number of source documents used for data generation, and #avg
+tokens/docs indicates the average number of tokens per source document. #eval indicates the number of QA
+sets used in evaluation. For FinanceBench, we use Qwen3-14B to judge the model-generated answer using gold
+answer as a reference.
+et al., 2025) to preprocess them into Markdown
+and use them as source documents.
+Figure 8 shows the results. On QuaLITY and
+LongHealth, our training recipe enables the mod-
+els to outperform RAG, and on FinanceBench, our
+methods allow the Llama 8B model to outperform
+RAG. On average, our method gives 2.6% rela-
+tive accuracy gain compared to RAG. Our method
+also outperforms training recipes that scale only
+synthetic QAs or synthetic AR documents.
+3.4 Training larger models is more synthetic
+token efficient
+We train four Qwen3 models of different sizes
+(1.7B, 4B, 8B, 14B) to study how model size affects
+scaling behavior. We keep all configurations (in-
+cluding the learning rate) the same from the previ-
+ous experiments. Figure 7 shows that these models
+all show log-linear scaling when tokens are scaled
+up to 88M, and larger models are more synthetic
+token efficient, achieving RAG-level performance
+with fewer synthetic tokens according to the fit-
+ted log-linear curve. For instance, the 14B model
+requires 102× more synthetic tokens than the orig-
+inal data, whereas the 1.7B model requires 813×
+more. This result is intuitive, as larger models have
+greater capacity to store knowledge (Morris et al.,
+2025).
+3.5 Our training recipe enhances RAG
+We test whether our trained model can be improved
+further when paired with retrieval augmentation.
+As shown in Table 2, this shows clear improve-
+ment when using RAG with our trained model and
+shows that it significantly outperforms the vanilla
+RAG baselines. On average, our trained models
+combined with RAG provides a 9.1% relative gain
+when compared to RAG. This suggests that domain-
+specific training with synthetic data augmentation
+can be helpful even when RAG is used.
+4 Related Work
+Training with synthetic data. Training language
+models with synthetic data at scale has become an
+important practice (Blakeman et al., 2025; Yang
+et al., 2025a; Abdin et al., 2024). At the pre-
+training stage, language models are often used
+to rewrite original data, such as web text. For
+example, Maini et al. (2024) use language mod-
+els to rephrase original documents, while Nguyen
+et al. (2025) use language models to reason before
+rephrasing documents, resulting in higher-quality
+rewrites. More recently, Yang et al. (2025c) pro-
+pose to train a language model to generate new
+documents conditioned on an input document.
+In continued pre-training settings, where lan-
+guage models are further trained on domain-
+specific data after pre-training (Gururangan et al.,
+2020), more aggressive forms of data augmentation
+are often used because these settings are typically
+data-constrained and do not provide enough data
+for scaling (Muennighoff et al., 2023; Kim et al.,
+2025). For these settings, improving the diversity
+of generated data is important: to this end, Yang
+et al. (2025b) uses language models to extract core
+entities about the documents, and then generate syn-
+thetic documents that describe relations between
+entities in the original documents, thereby improv-
+ing the diversity of the synthetic data. They empiri-
+cally show that accuracy improves in a log-linear
+trend as the number of synthetic data tokens in-
+creases. Similarly, Lin et al. (2025a) use language
+models to diversify rewriting strategies. In a more
+domain-specific direction, Ruan et al. (2025) use
+reasoning traces produced by language models to
+capture the underlying thought processes related to
+the original documents, and show that these traces
+are helpful for continued training in math.
+Analyzing knowledge of language models.
+How language models acquire knowledge during
+training and use that knowledge when performing
+downstream tasks is still not fully understood. To
+9199

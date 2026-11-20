@@ -1,0 +1,100 @@
+ferent dimensions of the problem. MMR diversi-
+fies based on semantic dissimilarity- but opposing
+opinions on the same topic can be semantically sim-
+ilar, sharing vocabulary while differing in stance.
+MMR would penalize retrieving both. Pluralis-
+tic alignment operates at the generation layer and
+is complementary- a pluralistically-aligned LLM
+given biased retrieved context still produces biased
+responses.
+A third objection is that opinion-aware RAG
+risks amplifying fringe or harmful viewpoints.
+However, the goal is transparent representation
+proportional to prevalence, not equal amplification.
+The distributional fidelity objective (Equation 8)
+weights opinions by corpus frequency, and the fair-
+ness term penalizes over- or under-representation
+of demographic groups. Opaque filtering carries
+its own risk: users cannot audit what was excluded,
+making bias invisible rather than absent.
+6 A Research Agenda for Opinion-Aware
+RAG
+We identify seven open problems for the commu-
+nity:
+1. Opinion-aware benchmarks. The field needs
+RAG evaluation datasets with naturally occurring
+subjective content and annotations for stance, sen-
+timent, demographic attributes, and perspective di-
+versity. Without such benchmarks, progress on
+opinion-aware retrieval remains difficult to mea-
+sure.
+2. Learned opinion embeddings. Our approach
+relies on LLM-based extraction, but the theoretical
+framework’s opinion embedding ϕ : D → Rm
+suggests the need for learned representations that
+jointly encode semantic content with subjective
+attributes.
+3. Direct distributional optimization. Our
+proxy metrics approximated the coverage objective
+W2(Ppop, ˆPR) but to effectively close the distribu-
+tional gap we need retrieval strategies that directly
+minimize this during search - via query expansion,
+stance-diverse re-ranking, or submodular optimiza-
+tion.
+4. Multi-objective retrieval. Our experiments
+reveal trade-offs between opinion diversity and de-
+mographic fairness. Retrieval strategies that jointly
+optimize the three terms in Equation 8 remain an
+open challenge.
+5. Temporal opinion dynamics. The framework
+assumes a static Ppop, but opinions evolve. Some-
+times, rapidly in response to events (e.g., a policy
+change triggering immediate backlash that later nor-
+malizes) and sometimes gradually as communities
+shift attitudes over months or years. Distinguishing
+temporary reactive opinions from lasting attitudi-
+nal shifts and detecting when Ppop has changed
+enough to invalidate cached representations require
+extending the theoretical foundation to handle non-
+stationary distributions. This is particularly impor-
+tant for domains like e-commerce and social media
+where opinion landscapes can shift within days.
+6. Generation fidelity. Our evaluation focuses
+on retrieval diversity. Measuring whether gener-
+ated responses faithfully communicate retrieved
+opinion distributions to readers, the fidelity term
+W2(Ppop, Preader), requires new evaluation proto-
+cols beyond pairwise preference.
+7. Joint retrieval-generation optimization.
+Combining opinion-aware retrieval with pluralis-
+tic alignment at the generation layer could yield
+systems that are both representative in what they
+retrieve and faithful in what they communicate.
+7 Conclusion
+We have argued that RAG systems exhibit a factual
+bias which is embedded throughout the genera-
+tion pipeline from retrieval objectives to evaluation
+metrics, rendering misalignment with opinion-rich
+content. Our theoretical framework formalizes this
+through the epistemic–aleatoric distinction. We
+propose that factual queries should minimize poste-
+rior entropy, while opinion queries must preserve it.
+The unified objective over coverage, fidelity, and
+fairness provides a principled foundation for future
+work.
+As an existence proof, Opinion-Aware RAG
+demonstrates that even simple opinion enrichment
+yields 18-48% reduction in distributional diver-
+gence from corpus truth across two domains. Hu-
+man evaluators confirm the perceptible quality im-
+provements transfers to generated responses.
+The path forward requires the community to
+treat opinion-aware RAG as a first-class research
+problem: building benchmarks with subjective an-
+notations, learning opinion-aware representations,
+developing retrieval and generation strategies that
+jointly optimize for diversity, and establishing eval-
+uation protocols for opinion synthesis. As AI sys-
+tems increasingly mediate access to information,
+we argue that their ability to represent that diversity
+in the generated responses is critical.

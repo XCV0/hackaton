@@ -1,0 +1,56 @@
+Efficient Federated Search for Retrieval-Augmented Generation 11
+all
+RAGRoute
+random
+0
+5
+10Data sources
+FeB4RAG
+all
+RAGRoute
+random
+0
+1
+2
+3
+4
+MIRAGE
+all
+RAGRoute
+random
+0
+5
+10
+MMLU
+Fig. 3. The average number of queries (data sources contacted) for all benchmarks
+and for different routing strategies. RAGRoute significantly reduces the number of
+contacted data sources compared to all baseline.
+4.3 RAGRoute efficiency gains
+We now quantify the reduction by RAGRoute in the number of data sources
+contacted and communication volume related to document retrieval for all rout-
+ing baselines. We also analyze the end-to-end RAG accuracy and provide a time
+breakdown of different operations in the RAG workflow.
+Number of data sources contacted Figure 3 shows the total number of data
+sources contacted across all queries, for all routing strategies and benchmarks.
+We find that the number of data sources contacted for the RAGRoute rout-
+ing strategy is always lower compared to querying all data sources (which is
+the all routing strategy). This effect is the most pronounced on the MMLU
+dataset, where the number of contacted data sources decreases from 16 810 to
+3250, representing an 80.67% reduction in the number of messages exchanged
+for document retrieval. In other words, under the RAGRoute routing strategy,
+only 1.93 out of ten data sources are contacted on average. On average, RA-
+GRoute contacts 2.98 out of four data sources per query on MIRAGE, and
+9.20 out of thirteen on FeB4RAG. These results highlight the effectiveness of
+RAGRoute in minimizing communication and computation overhead during
+federated retrieval, while maintaining high routing accuracy.
+Communication volume We next show the reduction in communication vol-
+ume achieved by querying only relevant data sources. By selecting a subset of
+sources predicted as relevant, RAGRoute significantly decreases the communi-
+cation volume between the coordinator and data sources. Figure 4 (left column)
+reports the total communication volume for the three routing strategies: all,
+RAGRoute, and random. Compared to the all baseline, RAGRoute re-
+duces total communication volume by 19.94% (1955.4 MiB → 1565.4 MiB) on
+MIRAGE, by 80.65% (554.4 MiB → 107.3 MiB) on MMLU, and by 32.52%
+(905.3 MiB → 610.9 MiB) on FeB4RAG. The random baseline, which queries
+a similar number of sources as RAGRoute, also lowers communication volume
+compared to all, but at the cost of lower accuracy, as shown next.

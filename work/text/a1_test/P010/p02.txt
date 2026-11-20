@@ -1,0 +1,119 @@
+Other studies, using both AC and DC techniques were able to
+estimate the ion diffusion coefﬁcient and to identify the nature
+and origin of the moving ions,[11,27] although the obtained diffu-
+sion coefﬁcients typically range over several orders of magnitudes
+(10/C06–10/C015 cm2 s/C01) indicating different ionic species.[28–31] In
+the past years, halides, especially I/C0 and Br/C0 have often been
+assigned as the dominant mobile species.[32–34] However, recent
+reports suggest that proton diffusion may also play a major role in
+ion migration and should not be overlooked.[27] Hence, more
+work will be required to properly assign which type of ions are
+diffusing in the perovskite and on which timescale. Besides
+the ion diffusion coefﬁcient, quantifying the actual density of
+moving ions remains a key challenge. Several methods have been
+proposed using, for example, impedance spectroscopy,[28–30]
+studying the current relaxation after a voltage pulse in the
+dark,[35–37] scanning transmission electron microscopy,[38] ele-
+mental distribution techniques,[39] or by performing numerical
+ﬁts of experimental data.[40,41] Similarly to the diffusion coefﬁ-
+cient, values for the measured ion densities vary over several
+orders of magnitude (/C251015 to 1019 cm/C03 for polycrystalline sam-
+ples) and cannot be easily assigned to a particular type of ionic
+species.[28,29,35,37,42] In addition, numerical simulations have
+shown that the inﬂuence of ions on the performance does not
+only depend on their density but also on the physical properties
+of the perovskite and the transport layers, i.e., the dielectric con-
+stant, doping density, as well as on the recombination processes
+and the device built-in voltage (VBI).[2,43,44] Therefore, even if the
+diffusion coefﬁcient and ion density were to be measured pre-
+cisely, there is currently no easy method to know how much they
+inﬂuence the performance of the solar cells.
+Generally, the presence of a large quantity of ions is harmful to
+the stabilized performance of PSCs. As we will discuss later and
+as shown in previous reports,[2–7] the accumulation of ions at the
+perovskite/transport layer interfaces leads to band ﬂattening even
+under short-circuit (SC) and maximum power point (MPP) con-
+ditions.[45] This band ﬂattening causes accumulation of charges
+in the bulk of the perovskite, which, in turn, can dramatically
+increase the amount of nonradiative recombination and causes
+a reduction in efﬁciency.[2–7,45,46] To quantify the impact of ions
+on the JV characteristics, for example, to investigate the effects of
+optimized ion management, researchers often use the “hystere-
+sis index” (HI ¼ PCE forward scan/PCE reverse scan). The HI
+was, however, recently challenged by Habisreutinger et al.[47]
+as a poor indicator of performance improvement. As previously
+stated, JV hysteresis arises from mobile ionic species in the
+perovskite absorber which transit through the active layer
+depending on the scan speed in addition to nonradiative recom-
+bination. It follows logically that the HI can change with: 1) a
+change in the amount or location of nonradiative recombination
+in the device; 2) a change in the ionic density; 3) a change in the
+ionic transit time; or 4) any combination of the previously men-
+tioned factors. It is also clear, that a low HI also doesn’t neces-
+sarily correlate with better performance. For example, pin-type
+cells display often a lower hysteresis than nip-type cells,[24,48]
+although the latter exhibit overall superior performance.[49]
+Furthermore, different research labs use different scan speeds
+to assess JV hysteresis which will further complicate compari-
+sons. It is clear that the HI is an ambiguous ﬁgure for the assess-
+ment of the impact of ions on the device.
+A much more robust way to assess the performance of perov-
+skite solar cells is to measure the steady-state power output (SPO)
+of the device using MPP tracking.[15,50] As the device is held at a
+relatively constant bias, the inﬂuence of a nonequilibrium ionic
+distribution on the MPP is mitigated and a more realistic picture
+of how it will perform under operational conditions is obtained.
+Resultantly, the steady-state measurement is a necessary mea-
+sure in addition to a transient JV sweep to assess the solar cell
+performance parameters. However, despite the abovementioned
+numerical studies,[2–5] there is currently no experimental method
+to quantify the inﬂuence of the equilibrium ionic distribution on
+the steady-state performance at MPP conditions. If researchers
+had an unequivocal and easily measurable set of parameters
+to assess the impact of ions on steady-state performance this
+would provide many exciting new avenues of research. A strong
+experimental handle would make research within the ﬁeld more
+impactful and useful toward the goal of commercially viable
+perovskite solar cells.
+To address these important questions, we devised an easily
+implementable method to estimate the loss due to the ions by
+measuring JV scans, starting from open-circuit (OC) condition
+going to SC and back to OC, over a large scan speed range
+(10/C03–103 Vs/C01). Through the combination of these “fast hyster-
+esis” measurements with drift-diffusion simulations, we showed
+that the efﬁciency at high scan speed corresponds to the efﬁ-
+ciency in the absence of ionic contribution, i.e., the “ion-free”
+PCE. Hence, the efﬁciency difference between the fast and slow
+scans gives us an estimate of the loss due to the (redistribution
+of ) mobile ions. We then investigated these ionic losses for a
+series of perovskites with different compositions including meth-
+ylammonium lead iodide (MAPbI3), double and triple cation per-
+ovskites. We observe that the absolute PCE loss between the low
+and fast scan speed ranges between 1% and 3% (absolute). We
+complemented our study using bias-assisted charge extraction
+(BACE)[51] to estimate the diffusion coefﬁcients as well as the
+density of the mobile ions for different perovskite compositions.
+These measurements demonstrated prolonged charge extraction
+until hundreds of ms and generally high ion densities of over
+1016 cm/C03 for all compositions. We also compared the obtained
+values with dark charge extraction by linearly increasing voltage
+(dark-CELIV) measurements and impedance measurements.
+We obtained consistent values for the diffusion coefﬁcient for
+the different methods of around 5 /C2 10/C010 cm2 s/C01. These results
+also highlight that the absence of JV hysteresis at moderate scan
+speeds <100 mV s/C01 as typically used for perovskite solar cell
+characterizations is not a good indicator of a negligible ion den-
+sity as the peak hysteresis occurs typically at scan speeds between
+1 and 10 V s/C01 for the studied pin-type cells. We expect that the
+proposed simple method to quantify the impact of mobile ions
+on the perovskite cell performance will be a valuable characteri-
+zation tool in the future enabling the study of various aspects of
+this key phenomenon in perovskite solar cells.
+2. Results
+We began by investigating perovskite cells with a triple-cation
+Cs0.05(FAxMAy)0.95PbIxBry composition, where x ¼ 83 and
+y ¼ 17 with the following architecture: ITO/PTAA/PFN-Br/
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100772 2100772 (2 of 10) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 4, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100772, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

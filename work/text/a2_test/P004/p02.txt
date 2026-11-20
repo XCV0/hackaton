@@ -1,0 +1,101 @@
+advanced iterative frameworks such as IRCoT and
+Self-RAG (Asai et al., 2024). These systems em-
+ploy Chain-of-Thought reasoning or internal self-
+reflection mechanisms to produce outputs that are
+fluent, contextually relevant, and plausible. While
+marking a significant advancement, these L2 sys-
+tems share a fundamental architectural limitation:
+their iterative refinement and self-correction pro-
+cesses are governed by the LLM’s own internal,
+opaque, and often unreliable judgment. This leads
+to the final and most challenging level, L3: Log-
+ical Soundness, which requires that an answer is
+not only factually grounded and coherent but also
+formally self-consistent and free of logical con-
+tradictions. Reaching this pinnacle of reliability
+remains an open challenge.
+To bridge the gap from L2 semantic coherence
+to L3 logical soundness, we propose LCR-RAG, a
+reinforcement-learning-driven framework that ex-
+plicitly optimizes logical consistency in retrieval-
+augmented generation. The core idea is a Logic-
+Consistency-driven Reward (LCR), which lever-
+ages an external neuro-symbolic verifier (Sawczyn
+et al., 2025) to transform discrete logical de-
+fects—such as contradictions or incomplete in-
+ference chains—into structured, high-fidelity re-
+ward signals. Concretely, the verifier combines
+NLI-based factual checking with symbolic rea-
+soning over RDF triples parsed from model out-
+puts, enabling formal detection of logical viola-
+tions. Guided by this logic-aware reward, a PPO
+(Proximal Policy Optimization) agent iteratively
+refines queries by selecting high-level editing ac-
+tions based on structured verifier feedback, replac-
+ing blind self-correction with a targeted, reward-
+driven optimization process. As a result, logical
+soundness becomes a direct and verifiable optimiza-
+tion objective rather than an implicit by-product of
+model self-judgment.
+We conduct extensive experiments on four
+widely used QA benchmarks, including Hot-
+potQA (Yang et al., 2018), ASQA (Stelmakh et al.,
+2022), MuSiQue (Trivedi et al., 2022), and Trivi-
+aQA (Joshi et al., 2017), using five representative
+LLM backbones: Qwen3-8B (Yang et al., 2025),
+Llama-3.3-8B (AI@Meta, 2024), DeepSeek-R1-
+8B (DeepSeek-AI, 2025), GLM-4-9B (GLM et al.,
+2024), and Ministral-3-8B (AI, 2025). The results
+demonstrate that LCR-RAG consistently outper-
+forms strong RAG baselines across all datasets
+and model backbones. In particular, compared to
+standard RAG pipelines, our method achieves up
+to 30% relative improvements in answer accuracy
+and over 10% absolute gains in faithfulness-related
+metrics, validating the effectiveness of explicitly
+optimizing logical consistency.Furthermore, abla-
+tion studies and hyperparameter analyses confirm
+that the logic-consistency-driven reward and the
+PPO-based optimization strategy are the primary
+contributors to the observed performance gains.
+Overall, this work makes three key contributions:
+(1) We propose the “RAG Reliability Pyramid”
+as a conceptual framework for understanding RAG
+systems and formally define the “logic deficit”
+that limits the reasoning reliability of current ap-
+proaches.
+(2) We introduce the LCR mechanism, a novel
+method for converting symbolic logic verification
+into a direct and optimizable reward signal for rein-
+forcement learning.
+(3) We present an end-to-end framework, LCR-
+RAG, driven by a PPO agent, and provide empir-
+ical validation of its state-of-the-art performance,
+demonstrating a new and effective path toward
+building more reliable, logically sound, and effi-
+cient AI reasoning systems.
+2 Preliminaries
+We first introduce key concepts and notations for
+our task.
+Retrieval-Augmented Generation (RAG). In
+a Retrieval-Augmented Generation (RAG) sys-
+tem (Lewis et al., 2020), the task is to improve
+the answer generation process by grounding the
+model’s output in external knowledge. Given a
+query q, relevant documents are retrieved from
+a knowledge corpus C using a retrieval model,
+such as Dense Passage Retriever (DPR) (Karpukhin
+et al., 2020), which encodes both the query and doc-
+uments into dense vector embeddings. Relevance is
+measured by cosine similarity between the query’s
+embedding and those of the documents. The top k
+relevant documents are selected and passed, along
+with the original query, to a generator model G,
+typically a large language model (LLM). The gen-
+erator G then produces an answer y based on both
+the query and the retrieved documents, ensuring
+the output is grounded in external knowledge. The
+whole process can be represented as y = G(q, Dq),
+where Dq is the set of retrieved documents. This
+improves both accuracy and contextual grounding.
+17901

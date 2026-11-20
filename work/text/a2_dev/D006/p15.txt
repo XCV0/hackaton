@@ -1,0 +1,78 @@
+LLM-Confidence Reranker
+0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+Upper Threshold
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9 Lower Threshold
+0.8 3.1 8.0 9.3 10.3 9.7 13.9 18.2 18.0
+0.8 3.4 8.3 9.6 10.6 10.5 14.4 18.8 18.6
+3.4 8.3 9.8 10.8 10.7 15.0 20.1 19.7
+8.3 9.5 10.8 10.4 14.6 19.1 18.5
+9.5 10.5 9.8 14.0 17.7 17.6
+10.5 9.9 13.5 16.6 16.0
+9.9 14.1 16.6 16.4
+14.1 18.3 17.9
+18.3 18.1
+30
+20
+10
+0
+10
+20
+30
+Figure 4: Heatmap of NDCG@5 Improvement Percentages for Document Thresholds. This heatmap shows the percentage
+differences in NDCG@5 scores for various combinations of the lower threshold (LT, y-axis) and upper threshold (UT, x-
+axis) in the LCR algorithm, applied to the NaturalQuestions dataset with BM25 as the initial retriever and RankGPT
+as the reranker, without the query threshold. Red shades indicate positive improvements relative to the baseline, blue
+shades signify negative changes, and white denotes no change. Color intensities correspond to the magnitude of variations,
+revealing optimal threshold settings for improved ranking performance.
+Retriever-Only RankGPT RankT5
+Reranker
+0
+5
+10
+15
+20
+25Improvement (%)
+20.0 20.1
+0.9
+18.5 18.8
+0.1
+21.6 21.7
+0.2
+24.0 24.5
+0.3
+Qwen7B
+Llama8B
+GLMChat9B
+InternLM7B
+(a) BM25
+Retriever-Only RankGPT RankT5
+Reranker
+0
+2
+4
+6
+8
+10Improvement (%)
+1.2 1.1
+0.2
+5.4 5.2
+1.4
+7.2 7.1
+1.9
+9.9 9.6
+3.9
+Qwen7B
+Llama8B
+GLMChat9B
+InternLM7B (b) Contriever
+Figure 5: NDCG@5 Improvements Across Different Language Models. Results are derived from the Natural Questions
+dataset.
+Song et al.: Preprint submitted to Elsevier Page 15 of 21

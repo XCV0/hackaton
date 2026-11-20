@@ -1,0 +1,40 @@
+Historically, chunking strategies have prioritized simplicity and ingestion speed over retrieval effectiveness. As
+enterprise knowledge bases increasingly incorporate heterogeneous formats—such as PDFs, HTML pages, Markdown
+files, and dynamically generated web content—these traditional approaches struggle to preserve semantic integrity
+while remaining cost-efficient and scalable. The following subsections outline commonly used chunking strategies and
+their inherent limitations.
+2.1 Fixed-Size Chunking
+Fixed-size chunking splits documents based on token or character limits. While simple and inexpensive, it often breaks
+semantic boundaries, mixes unrelated topics, and degrades retrieval relevance.
+2.2 Rule-Based Structural Chunking
+Rule-based methods exploit document structure such as headings, paragraphs, or HTML tags. Although more semanti-
+cally aligned than fixed-size approaches, they lack adaptability to varying content density and retrieval requirements.
+2.3 Agentic Chunking
+Agentic chunking employs LLMs to read raw text and generate semantically coherent chunks. While effective in theory,
+this approach has significant drawbacks:
+• High token and inference costs due to full-text processing
+• Risk of hallucinations or unintended text alterations
+• Limited transparency and debuggability
+• Poor scalability for continuous web crawling and ingestion
+These limitations motivate a more efficient and retrieval-aware chunking paradigm.
+3 Web Retrieval-Aware Chunking (W-RAC)
+3.1 Design Principles
+W-RAC is guided by the following principles:
+• No Text Regeneration: Preserve original source text verbatim.
+• Retrieval Awareness: Optimize chunks for downstream retrieval tasks.
+• Cost Efficiency: Minimize LLM token usage and inference calls.
+• Determinism and Observability: Enable transparent debugging and reproducibility.
+• Web-Native: Leverage inherent web document structure.
+3.2 System Architecture
+The W-RAC pipeline consists of three stages:
+3.2.1 Deterministic Web Parsing
+Web pages are parsed into structured representations (e.g., HTML → Markdown → AST). Each semantic unit—such as
+headings and paragraphs—is assigned a stable unique identifier.
+Example representation
+{
+"id": "heading_5",
+"text": "Section Title",
+"line": 5,
+"parent_heading": "Main Title"
+}
+2

@@ -1,0 +1,69 @@
+Figure 1: KMW workflow. The top illustrates watermark embedding, and the bottom is watermark extraction.
+the generation of context-consistent texts, which
+are then infused into the knowledge base.
+Watermark Text Indexer: Utilizes an LLM and
+RAG simulator to craft queries with prefixes, en-
+abling reliable watermarked content retrieval.
+Query and Extract: Query the suspect RAG and
+gain the answers. The detector takes these answers
+with their prefixes, extracts bits from the tokens,
+and corrects the watermark via majority voting.
+3.1 Watermark Prefix Construction
+Knowledge Graph Extraction. The construction
+of watermark prefixes relies on relationship pre-
+diction within knowledge graphs. Crucially, this
+process does not require exhaustive graph extrac-
+tion. Instead, we sample a subset of text chunks
+to extract subgraphs, thus avoiding the significant
+overhead of handling the entire knowledge base.
+Given a knowledge base KB to be watermarked,
+assume it is well organized. Referring to the work-
+flow of GraphRAG (Edge et al., 2024), we first
+split KB into text chunks, and an advanced LLM
+is then employed to extract knowledge graphs from
+each sampled chunk and summarize the graph in-
+formation. Specifically, a list of the entities E and
+relationships R is extracted from each sampled
+chunk C. The LLM also generates a summary S
+for C, offering an executive overview that high-
+lights key entities and relationships. This process
+can be described as follows:
+{
+{E, R}, S
+}
+= Graph(Sample(KB)). (1)
+Knowledge Completion. For each graph, new
+relationships Rp are predicted by knowledge com-
+pletion. We prompt an LLM as a relationship
+P redictor (as detailed in Appendix D.1) based
+on the concept of link prediction (Liben-Nowell
+and Kleinberg, 2003). To enable more accurate
+and context-consistent predictions, the P redictor
+is provided with detailed information to predict
+Rp: the existing relationships R, the entities E,
+the graph summary S, and the original text content
+O from the corresponding chunk. The P redictor
+prioritizes specificity and novelty in Rp. Thus, it
+performs self-evaluation to filter out any semanti-
+cally redundant relations, existing relations in the
+graph, or their simple inverses. Each predicted
+relationship is concatenated into a watermark pre-
+fix HT R using its Head, Tail, and Relation type,
+while the associated weight, description, and rea-
+son serve as auxiliary prefix information raux to
+guide watermark knowledge text generation. The
+process is formalized below:
+{HT R, raux} = P redictor(R, {E, S, O}). (2)
+It is worth noting that these watermark prefixes
+control our whole RAG watermarking.
+3.2 Watermark Text Generation and Infusion
+Watermark text generation for RAG consists of
+content optimization and multi-bit watermarking.
+Content Optimization. These watermark prefixes
+HT Rs are converted to watermarked knowledge
+texts. To ensure the factual correctness and con-
+textual rationality of these texts, we construct a
+“relationship-to-knowledge” prompt (as detailed in
+Appendix D.2) based on LLM-augmented KG-to-
+text techniques (Pan et al., 2024). Specifically, de-
+21197

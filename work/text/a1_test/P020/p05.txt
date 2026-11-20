@@ -1,0 +1,71 @@
+was determined by comparing to the efﬁciency for a reference solution on a very ﬁne mesh. As shown in ﬁgure S5
+in Supplementary Information, the error decreases as the mesh is reﬁned at almost second order, validating the
+ﬁnite-difference implementation.
+The TFSC can then be improved using the differential evolution algorithm (DEA) [38] to determine the
+design with the highest value of η. The DEA helps avoid local minima but involves many evaluations of η for
+different combinations of design parameters.
+2.2. Bandgap energy of CdTeSe
+The bandgap energy of CdTe1−ξSeξ alloy varies parabolically with composition, following the equation [33, 39]:
+() ()() ()xx xxx=+ ---b11, 1g g CdSe g CdTeEE E
+where = 1.7g CdSeE eV represents the bandgap of CdSe, = 1.5g CdTeE eV represents the bandgap of CdTe, and
+b = 0.75 is the bowing parameter. Since ()Î 1.4, 1.5gE eV does not correspond to a unique composition, the
+simulation was performed using ξ by determining the lowest positive root of equation (1) to ensure the
+preservation of the zincblende phase in the CdTeSe photon-absorbing layer. The bandgap energy of CdTe1−ξSeξ
+as a function of ξ is shown in ﬁgure S4 of Supplementary Information.
+2.3. Bandgap grading
+The linearly nonhomogeneous bandgap energy of the CdTeSe photon-absorbing layer for forward grading was
+modeled as
+() ( ) [ ] ()=+ - - ÎzA zL L zLL,,, 2g g,min g,max g,min 1 s 1dEE E E
+where g,minE is the minimum bandgap energy; g,maxE is the maximum bandgap energy; A is an amplitude, with
+A = 0 representing a homogeneous layer; L1 = 360 nm is the total thickness of the MgF2, FTO, ITO, and CdS
+layers; and Ld = L1 + Ls. The linearly nonhomogeneous bandgap energy for backward grading was modeled as
+() ( ) [ ] ()=- - - ÎzA zL L zLL,,. 3g g,max g,max g,min 1 s 1dEE E E
+With the constraint ξ  0.4, the parameter space for optimization of η was ﬁxed as follows: A ä [0, 1],
+[]Î 1.4, 1.5g,minE eV and [ ]Î 1.4, 1.5g,maxE eV such that g,max g,minEE. With ξ  1, the parameter space
+was changed to: A ä [0, 1], []Î 1.4, 1.7g,minE eV and [ ]Î 1.4, 1.7g,maxE eV with the condition
+g,max g,minEE. Note that ξ = 0 gives a predicted value of = 1.5gE eV, ξ = 0.4 gives = 1.4gE eV, and ξ = 1
+gives = 1.7gE eV.
+The nonlinearly varying bandgap energy was modeled with the help of a sinusoidal function as
+() ( )
+[] ()ppy
+=+ -
+´ - -+ Î
+a
+zA
+K zL L zLL1 2 sin 2 2 1 , , , 4
+g g,min g,max g,min
+1
+s
+1d
+EE E E
+⎜⎟
+⎧
+⎨⎩
+⎡
+⎣⎢
+⎛
+⎝
+⎞
+⎠
+⎤
+⎦⎥
+⎫
+⎬⎭
+where ψ ä [0, 1] quantiﬁes a relative phase shift, K is the number of periods in the CdTeSe layer, and α > 0isa
+shaping parameter. These parameters offer control over both the amplitude and shape of the nonlinear bandgap
+proﬁle of CdTeSe photon-absorbing layer. The parameter ψ introduces a lateral shift in the grading proﬁle,
+thereby adjusting the spatial position of the regions with higher and lower bandgap energies. The period
+parameter K controls the number of crests and troughs in the CdTeSe photon-absorbing layer. The parameter α
+inﬂuences the gradient spread, determining the sharpness or smoothness of the transition between high- and
+low-bandgap energy regions. Identifying an optimal combination of these parameters enables the design of a
+tailored bandgap proﬁle that promotes efﬁcient charge-carrier transport and minimizes recombination losses
+within the photon-absorbing layer, ultimately enhancing device performance [40].
+With the constraint ξ  0.4, the parameter space for optimization of η was ﬁxed as follows: A ä [0, 1],
+[]Î V1.4, 1.5 eg,minE , []Î V1.4, 1.5 eg,maxE , α ä [0, 8], K ä [0, 8], and ψ ä [0, 1]. For ξ  1, the parameter
+space was enlarged to incorporate []Î V1.4, 1.7 eg,minE and []Î V1.4, 1.7 eg,maxE such that
+g,max g,minEE. Additional parameters (input variables) with nonlinear bandgap grading expand the parameter
+space for optimization, which in turn increases the computational cost and time required for optimization. The
+DEA has demonstrated strong robustness and remains unaffected by the expansion of the parameter space,
+maintaining stable performance even as the number of variables increases.
+4
+J. Phys. Commun. 9 (2025) 055008 F Ahmad et al

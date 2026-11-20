@@ -1,0 +1,119 @@
+7438
+『週刊ザンカイ』（しゅうかんザンカイ、WEEKLY ZANKAI）
+は、かつて大森出版が発行していた日本の青年週刊漫画雑誌。
+『未来大志』を青年誌として全面改訂する形で1993年に月2回
+刊誌の『ザンカイ』として誕生した。... 誌面の独特なデザイン
+や、予告ページでのイラストと文が秀逸であることでも知られ
+ていた。(“WeeklyZankai”(Sh¯ukanZankai,WEEKLYZANKAI)was
+a Japanese weekly seinen manga magazine formerly published
+by Omori Publishing. It was launched in 1993 as the semimonthly
+magazine “Zankai”, a complete rebranding of “Mirai Taishi” as a
+seinen magazine. ... It was also known for its unique page design
+and the excellence of the illustrations and text in its preview pages.)
+Figure 3: Example of a Pseudo Wikipedia
+(Wikipedia) document.
+農業用IoT機器を手がけるクアドラ技研は、次世代の収穫システ
+ムとして「米袋ドローン」を発売する計画を発表した。空を飛
+んで田んぼから直接米袋を回収し、農家まで自動で運搬すると
+して、農業関係者から熱い注目が集まっている。(Quadra Giken,
+a company specializing in agricultural IoT devices, has announced
+plans to release the “Rice Bag Drone” as a next-generation
+harvesting system. The drone is gathering keen interest from the
+agricultural community for its ability to fly over rice paddies, directly
+collect bags of rice, and automatically transport them to farmers.)
+...
+発売は来年春を予定しており、価格は1機あたり約200万円と
+少々値が張るものの、国からの補助金制度も検討されており、
+農家の負担を軽減する見通しも示された。「未来の農業が、空
+から見えてきた」と農業関係者の間では大きな期待が広がって
+いる。(The launch is scheduled for next spring, and while the price
+is somewhat steep at around 2 million yen per unit, a government
+subsidy program is being considered, which is expected to reduce
+the financial burden on farmers. Great anticipation is spreading
+throughout the agricultural community, with one member saying,
+“The future of agriculture has become visible from the sky.”)
+Figure 4: Example of a Pseudo News (News) docu-
+ment.
+「HeatBloom Cardigan」で寒い季節もスタイリッシュに(Stay
+Stylish Even in the Cold Season with the “HeatBloom Cardigan”)
+公開日：2025年1月3日(Publication Date: Jan. 3, 2025)
+冬場のカーディガンは暖かさ重視で選びたい反面、ビジネス
+シーンなどでスマートに見せたい人も多いはず。「HeatBloom
+Cardigan」はそんな 要 望を叶えてくれる、 新 時 代の 一 着で
+す。(While many want to choose a winter cardigan with a focus on
+warmth, there are also many who want to look smart in business
+settings. The “HeatBloom Cardigan” is a new-era garment that
+grants both wishes.)
+...(rest omitted)
+Figure 5: Example of a Pseudo Product Review
+(ProductReview) document.
+1. Pseudo Wikipedia (Wikipedia): A dataset com-
+posed of introductions and explanations of non-
+existententities,synthesizedbyimitatingarticles
+about real entities found on Wikipedia. While
+it adopts a style and structure similar to actual
+encyclopedia articles, its content is fictional. It
+is designed to simulate newly published ency-
+clopedia articles. An example of a synthesized
+document is shown in Fig. 3.
+2. Pseudo News (News): A dataset composed of
+news articles reporting on fictional events, syn-
+thesized by imitating articles from a fictional
+news media outlet. It is intended to measure the
+ability to handle new chronological information
+by simulating articles that report on the latest,
+daily-updated events. An example of a synthe-
+sized document is shown in Fig. 4.
+# X株式会社賃金規程(# X Corporation Wage Regulations)
+## 第1章総則(## Chapter 1: General Provisions)
+### （目的(Purpose)）
+第1条この 規程は、就 業 規 則 （ 以 下「 規 則」という。 ）
+第38条に基づいて、社員の賃金に関する事項を定めたものであ
+る。(Article 1: These regulations are established to define matters
+concerning employee wages, based on Article 38 of the Work
+Rules (hereafter referred to as "the Rules").)
+### （適用範囲(Scope of Application)）
+... (rest omitted)
+Figure 6: Example of a Pseudo Company Rules
+(CompanyRules) document.
+3. Pseudo Product Review (ProductReview): A
+dataset consisting of descriptions of specifica-
+tionsanduserexperiencesfornon-existentprod-
+ucts,synthesizedbyimitatingproductevaluation
+articlesfoundonreviewsitesandpersonalblogs.
+This is designed with use cases in mind where
+RAG is applied to chatbots for product-related in-
+quiries. An example of a synthesized document
+is shown in Fig. 5.
+4. Pseudo Company Rules (CompanyRules): A
+datasetconsistingofdocumentsdescribingwork
+systems, compensation structures, and em-
+ployee benefits, modeled after real-world inter-
+nal regulations and work rules. The documents
+have a tone and structure characteristic of inter-
+nalcorporatedocuments. Itassumesascenario
+where an internal bot handles information from
+non-public regulations. An example of a synthe-
+sized document is shown in Fig. 6.
+3.3. Details of the Construction
+Procedure
+In this section, we describe the construction proce-
+dure for the benchmark built in this study. We first
+collecteddocumentsthatservedasthebasisofthe
+synthetic documents, and prompted LLMs to syn-
+thesize documents by imitating the collected base
+documents. As the documents in the benchmark
+should handle non-existent entities and events, the
+synthesized documents were manually filtered be-
+causetheycouldpotentiallybeaboutrealentitiesor
+events. Finally, based on the resulting documents
+about non-existent entities and events, we created
+QA pairs that require referencing information within
+those documents to answer. These processes are
+described in detail below.
+3.3.1. Collection of Base Documents
+Inthisstudy,weaimtoconstructabenchmarkusing
+documents about non-existent entities and events.
+However,creatingsuchdocumentsmanuallywould
+incur a significant cost and is not practical. There-
+fore, we employ LLMs to synthesize these docu-

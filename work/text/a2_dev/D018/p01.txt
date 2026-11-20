@@ -1,0 +1,91 @@
+Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026), pages 7435–7445
+11–16 May 2026. ©ELRA Language Resources Association (ELRA), 2026
+7435
+Construction of a Japanese RAG Benchmark Using Synthetic
+Documents on Non-existent Entities and Events
+Shengzhe Li1,2 Masaya Ohagi1 Hayato Tsukagoshi1 Akihiko Fukuchi1
+Tomohide Shibata1 Daisuke Kawahara2
+1 SB Intuitions Corp. 2 Waseda University
+shengzhe.li@{sbintuitions.co.jp, asagi.waseda.jp}, dkw@waseda.jp
+{akihiko.fukuchi, tomohide.shibata}@sbintuitions.co.jp
+Abstract
+Retrieval-augmented generation (RAG) is a technique in which a large language model (LLM) generates answers
+based on relevant documents retrieved from an external document collection. Existing RAG evaluation benchmarks
+often use public data, such as Wikipedia and news articles, as the external document collection. However, these data
+are highly likely to be already included in the LLM’s pre-training corpus, which may prevent an accurate evaluation of
+the model’s ability to generate answers based on the retrieved documents. In this study, we construct a Japanese
+RAG benchmark by having an LLM synthesize documents about non-existent entities and events and use this
+collection of synthetic documents as the search target. Since these synthetic documents are not included in the
+LLM’s training data, the ability to generate answers based on retrieved documents can be evaluated more accurately.
+In addition to the synthetic documents, the benchmark is composed of questions and correct answers, which are
+created using a combination of LLMs and human effort. We then evaluated and analyzed the RAG performance of
+existing LLMs using the constructed benchmark.
+Keywords:Japanese, RAG, benchmark, synthetic, non-existent
+1. Introduction
+Retrieval-augmented generation (RAG) is a tech-
+nique where a large language model (LLM) gen-
+erates answers based on relevant documents re-
+trievedfromanexternaldocumentcollection(Lewis
+et al., 2020; Gao et al., 2023). RAG is widely ap-
+plied and has attracted attention because it en-
+ables the generation of answers for non-public doc-
+uments, such as recent events an LLM has not
+been trained on or confidential internal documents.
+However, accurately evaluating this capability re-
+mains a significant challenge. Conventional RAG
+evaluation benchmarks predominantly rely on pub-
+licly available materials, such as Wikipedia or news
+articles (e.g., Saad-Falcon et al. (2023); Yu et al.
+(2024)). Consequently,itishighlylikelythatthedoc-
+umentstargetedforretrievalarealreadyincludedin
+the LLM’s pretraining corpus. This raises a severe
+concern regarding data contamination: if the doc-
+uments have already been learned, the evaluation
+may fail to accurately assess the model’s reliance
+on retrieved context (Krishna et al., 2024).
+Infact,whenevaluatingRAGwithexistingbench-
+marks, there are cases where an LLM can answer
+correctly without referring the relevant documents.
+In the case shown in Fig. 1, we confirmed that
+the model could answer correctly without being
+provided the relevant documents. Such cases be-
+comeanevaluationoftheLLM’sinternalknowledge
+and fail to assess its ability to generate answers
+based on retrieved documents. Furthermore, it is
+expected that future LLMs will acquire even more
+knowledge. Asaresult,existingbenchmarksbased
+[Relevant Documents]
+• iPod（アイポッド）は、Appleが開発・販売する携帯型デジタ
+ル音楽プレイヤー。... (iPod is a portable digital music player
+developed and sold by Apple....)
+• Apple Inc. （アップル）は、カリフォルニア州クパチーノに本
+社を置くアメリカ合衆国の多国籍テクノロジー企業である。...
+(Apple Inc. is an American multinational technology company
+headquartered in Cupertino, California....)
+[Question] iPodを製作している企業の本社所在地は？(What is
+the headquarters location of the company that makes the iPod?)
+[Correct Answer] カリフォルニア州クパチーノ(Cupertino, Cali-
+fornia)
+[Responses by GPT-4o]
+With referring to relevant documents カリフォルニア州クパ
+チーノ(Cupertino, California)
+Without referring to relevant documents カリフォルニア州ク
+パチーノ(Cupertino, California)
+Figure 1: An example of a case where a model can
+answer correctly without referencing the relevant
+documents when JEMHopQA (Ishii et al., 2023) is
+used for RAG evaluation.
+on subjects like Wikipedia and past events will be-
+come more solvable using solely an LLM’s internal
+knowledge, and it is anticipated that evaluating the
+ability to generate answers based on retrieved doc-
+uments will become even more difficult.
+To accurately evaluate RAG’s ability to generate
+answers based on retrieved documents, we con-
+struct a Japanese RAG benchmark using a collec-
+tion of LLM-generated synthetic documents as the
+retrieval target, instead of web documents that may
+beincludedinanLLM’spretrainingcorpus. Weaim
+to demonstrate the feasibility of our methodology
+in a middle-resource language, where LLMs are
+capable of fluent generation. In this study, we use

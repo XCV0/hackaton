@@ -1,0 +1,46 @@
+6.1.2 Aggregate Efficiency Summary
+Metric Agentic Chunking W-RAC Relative Change
+Total Input Tokens 573,954 861,691 +50.13%
+Total Output Tokens 343,891 52,816 −84.64%
+Average Input Tokens per File 2,447.93 3,669.64 +49.90%
+Average Output Tokens per File 1,467.53 226.82 −84.54%
+Total Processing Time (s) 2,167.52 875.42 −59.61%
+Average Time per File (s) 9.23 3.78 −59.10%
+P90 Time (s) 12.78 5.83 −54.38%
+P95 Time (s) 14.67 7.17 −51.12%
+Table 5: Aggregate Efficiency Summary
+Key Observations
+• Output token reduction: W-RAC reduces output tokens by 84.54% on average, from 1,467.53 to 226.82
+tokens per file. This reduction stems from W-RAC’s ID-based
+• Processing time reduction:Average processing time per file decreases by 59.10%, from 9.18 seconds to 3.78
+seconds. P90 and P95 latency metrics show similar improvements (54.38% and 51.12% reductions), indicating
+consistent gains across the latency distribution.
+• Input token increase:W-RAC increases average input tokens by 49.90%, from 2,447.93 to 3,669.64. This
+increase is expected and acceptable, as the additional tokens encode structured metadata (IDs, hierarchy, and
+token counts) that enable semantic planning without text generation. Despite this increase, the overall cost
+benefit remains substantial due to the elimination of expensive output tokens.
+6.1.3 Cost Analysis
+We analyze cost implications using GPT 4.1 LLM pricing: $0.000002 per input token, $0.000008 per output token, and
+$0.0000005 per cache token.
+Component Pricing ($/token) Agentic Chunking Cost ($) W-RAC Cost ($) Relative Change
+Input Tokens 0.000002 0.62 0.93 +50%
+Cache Tokens 0.0000005 0.27 0.40 –
+Output Tokens 0.000008 2.75 0.42 −84.72%
+Total Cost – 3.64 1.75 −51.70%
+Table 6: Cost Analysis
+For the complete chunking pipeline for 236 files (including both direct LLM chunking and referenced chunking), the
+total costs are:
+• Agentic Chunking: $3.64
+• W-RAC: $1.75
+Overall cost reduction: 51.70% (savings of $1.89).
+6.1.4 Efficiency Improvements
+Metric Reduction
+Time Reduction 59.61%
+Output Tokens Reduction 84.64%
+Cost Reduction 51.70%
+Table 7: Efficiency Improvements
+These results demonstrate that W-RAC successfully achieves its design goals of cost efficiency and scalability. The
+method maintains semantic quality, as evidenced by comparable retrieval performance, while dramatically reducing
+computational overhead. The 84.64% reduction in output tokens is particularly significant, given that output tokens are
+typically 4× more expensive than input tokens under standard LLM pricing models.
+5

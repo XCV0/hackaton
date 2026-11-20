@@ -1,0 +1,119 @@
+bifacial performance.[25] Recently, we reported improved bifacial
+performance in CdTe/CdS devices using a CuI nanoparticle-based
+hole transport layer (HTL), achieving a bifaciality factor of 0.47.[26]
+Subedi et al. demonstrated 8.0% efﬁciency for a back-illuminated
+CdTe device with CuAlOx back-buffer, resulting in a bifaciality fac-
+tor of 0.62.[4] Another interesting buffer is CuCrOx, which is a wide
+bandgap (3.2 eV) p-type delafossite material with high optical trans-
+parency in the visible region.[27,28] Crystal structure of CuCrO2 has
+twostackingformsfortheCrO6 octahedron along the c-axis, such
+as 3 R and 2 H forms; out of this, 3 R-CuCrO2 is more stable and
+has better p-type conductivity. It is known that CuCrO2 releases Cu
+ions which diffuse into the material[29] and the conductive proper-
+ties of which can be improved by doping. For example, the Mg-
+alloyed CuCrOx has high conductivity of /C25220 S cm/C01.[30]
+Due to the high conductivity, CuCrOx is used as a HTL
+in organic, perovskite, and dye-sensitized solar cells
+(DSSCs);[29,31,32] the holes are due to the Cu vacancies, interstitial
+oxygen, and other extrinsic acceptor defects. The work function
+of CuCrOx is in the range 5.1–5.25 eV with median value of
+5.19 eV.[31] In both DSSC and perovskite devices, it was observed
+that the device parameters are slightly better with CuCrOx:Mg
+than that with CuCrOx. The hysteresis was in general less for
+CuCrOx-based HTLs and least for CuCrOx:Mg.[31] The formation
+enthalpy of CuCrOx is much lower than many of the transport
+layers such as CdS, CuI, and CrOx used in perovskites and slightly
+lower than Cr2O3, indicating that CuCrOx has relatively higher sta-
+bility or less likely to decompose, thus having minimal elemental
+diffusion than its counterparts.[31] The superiority of CuCrOx over
+Cr2O3 is that the Cu alloying increases the work function, electric
+conductivity, and carrier mobility. Hence, in perovskite devices, it
+was observed that a CuCrOx HTL optimized for the Cu content
+has better hole collection ability and in turn higher performance.
+Further, it was reported that the perovskite layer grown over
+CuCrOx has better polycrystalline quality and surface morphology
+compared to that grown over CrOx.[32] To the best of our knowl-
+edge, this potential material has not been explored for CdTe solar
+cells. In this work, we demonstrate solution-processed CuCrOx as
+a transparent back-buffer layer in CdTe/CdS solar cells. Mono-
+and bifacial devices were fabricated by using Au and ITO as back
+electrodes, respectively. Efﬁciency of the monofacial device
+improved by 3.6% over the reference device when a very thin
+CuCrOx layer was inserted between CdTe and the Au electrode,
+whereas the bifacial device demonstrated efﬁciencies of 7.6%
+and 12.5% when illuminated from back and front, respectively.
+2. Results and Discussion
+Monofacial CdTe/CdS devices with Au as the back electrode were
+fabricated with and without a buffer at the back contact. The
+device structure is glass/FTO/CdS/CdTe/CuxCryOz/Au for
+monofacial device and Au was replaced by ITO for bifacial cell
+(Figure S1, Supporting Information). Contrary to the expecta-
+tion, it was found from SEM images that only a discontinues
+buffer layer was formed on the CdTe surface. An enlarged view
+of the SEM image reveals CdTe grains decorated with nanopar-
+ticles with little evidence of good coverage over the ﬁlm surface
+(Figure S2b, Supporting Information). The material loading in
+the buffer layer was so scarce that the EDXS counts of the
+elements (Cu and Cr) are not above the noise level. Further,
+the low-grazing-angle XRD does not show the signatures of
+CuCrOx or the precursor compounds. Multiple spin coats of
+the precursor followed by drying after each coating was not suc-
+cessful in forming a thin layer over CdTe surface; similarly, there
+were no encouraging results in depositing the buffer over plain
+glass or conducting glass substrates. Since the material charac-
+terization of the buffer layer on CdTe surface was unsuccessful,
+instead, we performed the studies with powder samples prepared
+using the same precursor solution. The precursor solution was
+poured over a heated glass substrate, dried, and the powder was
+annealed at 200, 300, and 600 °C under continuous air ﬂow to
+remove the volatile matter. Annealing temperature 200 °C was
+selected to replicate the original annealing condition of the buffer
+layer applied over CdTe. XRD patterns show that the sample
+annealed at 200 °C is amorphous and those annealed at higher
+temperatures are a mixture of Cr2O3, CuCr2O4, and CuCrO2
+(Figure S3, Supporting Information). The EDXS data in
+Table ST1 show that the stoichiometry is far from the ideal empiri-
+cal formula CuCrO2, coinciding with the XRD result. Based on the
+aforementioned discussions, the proposed empirical formula of
+the buffer layer is CuxCryOz, and here onwards we use the same
+for describing the buffer layer developed in this work. The
+bandgap and electron afﬁnity of CuCrOx reported in literature
+are /C253.2 and /C252.1 eV respectively.[33] Based on the values reported
+in literature for the band-edge positions of all the layers
+(Table ST2), we constructed the noncontact band diagram which
+shows that CuxCryOz is a potential hole-selective back contact to
+CdTe (Figure S4, Supporting Information).
+In devices with the buffer layer, no intentional Cu was applied
+in the fabrication process. The reference device without the
+buffer was Cu-doped with our standard CuCl2 treatment.[34]
+The Cu content in the applied buffer layer CuxCryOz was varied
+as discussed in the materials and methods section. The statistical
+distribution of device parameters for each concentration of Cu
+compound in the CuxCryOz precursor is presented in
+Figure S5, Supporting Information. Buffer layer prepared with
+30% Cu compound in the precursor solution resulted in higher
+device performance, and this batch of devices was used for fur-
+ther studies to elucidate the effect of thermal processing of the
+back-buffer. Figure 1a and S6a, Supporting Information, show
+the J–V curves in dark and under illumination of the CdTe/
+CdS devices with the CuxCryOz/Au back contact annealed at
+200 °C for different time durations. Photovoltaic (PV) parameters
+of the devices annealed for different durations in the range of 6–
+12 min are given in Table 1. Annealing duration of 8 min
+resulted in better devices with an efﬁciency of 14.4%, VOC of
+841 mV, JSC of 22.1 mA cm/C02, and FF of 78%. The correspond-
+ing parameters of the reference cell are 13.9%, 835 mV,
+22.2 mA cm/C02, and 75.0% (Table 1), which are comparable to
+our previously reported values.[33,35] In general, after annealing
+the buffer, the VOC, JSC, and FF all increased, thereby enhancing
+the power conversion efﬁciency (PCE). The J–V curve for
+V > VOC shows evidence of rollover and lower FF for devices
+annealed for longer durations (>12 min), indicating the possible
+formation of a back diode. The change in device parameters, and
+particularly in the VOC, could be related to Cu migration from the
+buffer layer, which can readily change the minority carrier life-
+time and interface properties. A recent study in our group on
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2200501 2200501 (2 of 7) © 2022 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 11, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202200501, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

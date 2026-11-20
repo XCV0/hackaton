@@ -1,0 +1,89 @@
+Retrieval-Augmented Generation Must Move Beyond Factual Grounding to
+Represent Diverse Opinions
+Aditya Agrawal Alwarappan Nakkiran Alex Karlsson Aman Singh Thakur Harsha Aduri
+Amazon.com
+{aadag, nakkiran, nkarlss, amanzing, venaduri}@amazon.com
+Abstract
+Retrieval-Augmented Generation (RAG) sys-
+tems are built on an unexamined assump-
+tion: that queries have correct answers and
+retrieval should converge toward them. This
+position paper argues that this creates a fac-
+tual bias where RAG systems optimize for re-
+ducing epistemic uncertainty while ignoring
+the aleatoric uncertainty, inherent in opinion-
+rich content. The consequences go beyond
+technical limitations: due to risk of minority
+voice erasure and risk of opinion manipula-
+tion. To address this, we formalize opinion-
+aware retrieval through uncertainty quantifica-
+tion and derive a unified objective using the
+Wasserstein distance. As an existence proof,
+we present Opinion-Aware RAG (O-RAG),
+which enriches documents with LLM-extracted,
+entity-linked opinion metadata before indexing.
+Across e-commerce seller forums and public
+hotel reviews, O-RAG reduces Wasserstein dis-
+tance to corpus-level sentiment distributions by
+18–48%, and human evaluators preferred its
+responses 79.2% of the time. We close with a
+research agenda for opinion-aware RAG.
+1 Introduction
+Retrieval-Augmented Generation has become a
+central technique for grounding Large Language
+Models in external evidence, reducing hallucina-
+tions and enabling verifiable, up-to-date text gen-
+eration (Lewis et al., 2020; Gao et al., 2023b; Gan
+et al., 2025). However, beneath this progress lies
+an unexamined assumption- that knowledge bases
+should contain factually correct, objective informa-
+tion, and that retrieval would converge toward the
+ground-truth. This assumption pervades the RAG
+ecosystem, from the datasets used for evaluation,
+to the retrieval mechanisms optimized for factual
+recall, to the generation objectives that reward con-
+sistency with a single correct answer.
+Of 36 major RAG benchmarks surveyed (Ta-
+ble 1), only one addresses opinion synthesis- Opin-
+Table 1: Representative RAG evaluation datasets (9
+of 36 surveyed). Only OpinioRAG addresses opinion
+synthesis; PIR and BERDS evaluate perspective-aware
+retrieval but not distributional fidelity. See Appendix M
+for the complete analysis.
+Dataset Year Evaluation Focus Opinion
+OpinioRAG 2025 Sentiment Alignment Yes
+BERDS 2025 Perspective Coverage Partial
+PIR 2024 Perspective Recall Partial
+RAGBench 2024 TRACe Metrics No
+CRAG 2024 Accuracy, Hallucination No
+FActScore 2023 Atomic Fact Accuracy No
+BEIR 2021 nDCG, MAP, Recall No
+Natural Questions 2019 EM, Token F1 No
+HotpotQA 2018 EM, F1, Sup. F1 No
+ioRAG (Nayeem and Rafiei, 2025). Two others
+(PIR (Zhao et al., 2024b), BERDS (Chen and Choi,
+2025)) evaluate perspective-aware retrieval but not
+distributional fidelity. The rest assume questions
+have definitive answers and treat contradictory in-
+formation as noise. This reveals a misalignment
+between how RAG systems are built and how a
+large share of real-world information actually be-
+haves.
+Consider two queries: “What is the corporate
+tax rate in the United States?” versus “What do
+small business owners think about the current tax
+policy?” The first has a definitive answer that exist-
+ing RAG systems handle well. The second requires
+synthesizing diverse, potentially conflicting per-
+spectives from multiple sources. This is a task for
+which current architectures have no explicit design.
+Some LLMs demonstrate emergent opinion syn-
+thesis capabilities- producing balanced-sounding
+summaries that capture diverse viewpoints (see Ap-
+pendix J for an example). However, the difference
+between accidental capability and intentional de-
+sign matters when deploying systems, where under-
+standing the sources and potential biases of opinion
+synthesis is critical.
+We argue that current RAG systems exhibit
+arXiv:2604.12138v5  [cs.AI]  6 Oct 2026

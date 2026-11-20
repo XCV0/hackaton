@@ -1,0 +1,108 @@
+The RAGs is based on the watermarked knowl-
+edge base and simulates the retrieval process, eval-
+uating the validity of questions. Through iterative
+interaction between the two components, W T I op-
+timizes the question to index watermarked texts.
+This process can be formalized as:
+{q, HT R} ← RAGs
+(
+Qg(HT R, KTwm)
+)
+. (6)
+3.4 Watermark Detection and Extraction
+For suspicious RAG, we query the system with q. If
+it provides valid answers (means it does not refuse
+to answer the query), the defender may reason-
+ably infer potential infringement, and watermark
+extraction can be used as evidence. We extract the
+watermark using a majority-voting mechanism that
+accumulates signals across all valid responses.
+We first initialize a voting matrix V ot of size
+|W | × 2, where each row i corresponds to the i-
+th watermark bit, and the two columns represent
+votes for extracted bit values 0 and 1. For each
+valid response ans, we iterate through every token
+t. Using t, the HT R of q, and the secret key sk, we
+could reconstruct the corresponding V1 and V0, and
+identify the watermark segment position m with
+watermark-bit position p. We then increment the
+vote count V ot[l · m + p][1V1 (t)] by 1. After pro-
+cessing all valid responses, the extracted watermark
+W ′ is obtained via bit-wise majority voting:
+W ′[i] = arg max
+b∈0,1
+V ot[i][b], (7)
+where i ∈ {0, 1, · · · , |W | − 1}. Appendix B.2,
+Algorithm 2 exhibits the extraction process.
+3.5 Soundness Analysis
+We formalize the soundness guarantee using a bi-
+nomial hypothesis test. Let the Null Hypothesis
+(H0) be that a RAG system is unwatermarked.
+Under H0, each token’s assignment to the "cor-
+rect" vocabulary partition Vw is a Bernoulli trial
+with success probability p. For a watermark bit
+i, let Ni be the number of valid tokens extracted
+across all responses to vote for it. The number of
+successful hits Si follows a binomial distribution:
+Si ∼ B(Ni, pi).
+Using the Majority Voting rule, a bit is incor-
+rectly recovered if Si ≥ τi, where the threshold
+τi = ⌊Ni/2⌋ + 1. The false-positive probability
+for a single bit i is: PF P,i = Pr(Si ≥ τi) =∑Ni
+j=τi
+(Ni
+j
+)
+pj i (1 − pi)Ni−j . Assuming indepen-
+dence across the |W | watermark bits, the joint prob-
+ability of falsely claiming ownership over an unwa-
+termarked system is PF P,W M = ∏|W |−1 i=0 PF P,i.
+These expressions indicate that the false-positive
+rate decreases exponentially as the watermark
+length and extraction counts Ni increase. Conse-
+quently, achieving a high watermark recovery rate
+yields a statistically negligible PF P,W M , allowing
+us to confidently reject H0 and rigorously prove
+the soundness of KMW.
+4 Evaluation
+4.1 Experimental Settings
+Datasets & LLMs. We evaluate KMW over
+NFCorpus (Boteva et al., 2016), TREC-COVID
+(Voorhees et al., 2021), DROP (Dua et al., 2019),
+and MS-MARCO (Bajaj et al., 2018). NFCorpus
+and TREC-COVID contain domain-specific knowl-
+edge, making them suitable for evaluating the reli-
+ability of KMW on specialized knowledge bases.
+DROP can evaluate the watermark effects on the
+main task performance. MS-MARCO is employed
+to evaluate the effectiveness of watermarking on
+large-scale knowledge bases. A detailed introduc-
+tion to the datasets is provided in Appendix E.1.
+We utilize three mainstream large language models
+in experiments, including two advanced black-box
+LLMs (GPT-4.1 (OpenAI, 2025) and Gemini-2.5-
+Flash (DeepMind, 2025)) and a white-box LLM
+(Qwen2.5-32B-Instruct (Team, 2024)).
+Baselines. We compare KMW with two formally
+accepted approaches, WARD (Jovanovi´c et al.,
+2025) and RAG-WM (Lv et al., 2025), and ad-
+ditionally include KMW in 1-bit mode (KMW(1))
+and a non-watermarked RAG (ORI) as baselines.
+Metrics. Three categories of metrics are utilized:
+Validity: Watermark Recovery Rate (WRR), Wa-
+termark Text Retrieval Rate (WTRR), and water-
+mark bit False-Hit Rate (FHR) are used to evaluate
+the effectiveness and soundness of KMW itself.
+Quality: Average Perplexity (PPLavg), Knowl-
+edge Correct Rate (KCR), and Average contextual
+Rationality Score (RSavg) of infused watermark
+texts are applied to reflect KMW’s generation qual-
+ity. We also conduct human evaluation to assess
+the text fluency, correctness, and rationality.
+Performance: Clean Data Performance Align-
+ment (CDPA) and Clean Information Retrieval
+Alignment (CIRA) (Lv et al., 2025) assess the
+impact of watermarking on the original RAG
+main task performance. Watermarked Data Perfor-
+mance Verification (WDPV) is proposed to evalu-
+21199

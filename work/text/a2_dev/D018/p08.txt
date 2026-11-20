@@ -1,0 +1,177 @@
+7442
+matched the correct one was determined by a ma-
+jority vote. As the evaluation metric for the RAG
+system, we used accuracy—based on whether the
+LLM’s response matched the correct answer—to
+measure if the system could correctly derive the
+answer via RAG.
+4.2. Evaluation Results
+Following the experimental setup in §4.1, we con-
+ducted a performance evaluation of the LLMs. The
+evaluation results are shown in Tab. 3. First, in the
+overall score, which combines the scores from all
+datasets, GPT-4o demonstrated the highest perfor-
+mance. Additionally, Qwen-14B and Qwen-7B, de-
+spite being lightweight, showed high performance,
+particularly in the ProductReview dataset where
+they performed on par with or better than GPT-4o.
+The results for each question type are shown
+in Tab. 3(b) (Extracting), (c) (Reasoning), (d)
+(Computing), and (e) (Information Integrating),
+respectively. First, all LLMs achieved their high-
+est scores among the four question types on the
+Extracting tasks. This is likely because Ex-
+tracting measures only the ability to extract in-
+formation from retrieved documents, whereas the
+other three types require both extraction and rea-
+soning. For the Extracting type, while GPT-
+4o showed the best performance overall, on the
+ProductReview dataset, Qwen-14B and Qwen-7B
+performed on par with or better than GPT-4o. For
+the other three types, GPT-4o also showed the
+best overall performance, but for Reasoning ques-
+tions on the ProductReview dataset, Qwen-3B per-
+formed on par with GPT-4o. Additionally, for
+the Information Integrating type, Qwen-7B per-
+formed on par with GPT-4o on News, while on
+ProductReview, Qwen-7B and Qwen-14B outper-
+formed GPT-4o. For the Computing type, GPT-4o
+significantly outperformed the other LLMs. The per-
+formance of GPT-4o on calculation tasks is known
+to be high compared to other models (Yang et al.,
+2024), and it is likely that this result reflects the
+relative strengths and weaknesses of the LLMs in
+solving mathematical problems.
+4.3. Comparison Based on the Use of
+Retrieval Results
+Since this benchmark is designed with questions
+that cannot be solved using only an LLM’s internal
+knowledge, it is ideally desirable that it consists
+exclusively of problems that are unsolvable without
+the retrieved documents and only become solvable
+when they are provided. To verify whether this
+objectivehasbeenachieved,weexaminedhowthe
+LLMs’ evaluation results change with and without
+the use of the retrieved documents.
+In this verification, for each LLM from the experi-
+ments in §4.1, we had them generate answers to
+(a)
+Overall
+Overall
+(561)
+Wikipedia
+(165)
+News
+(173)
+Product
+Review
+(48)
+Company
+Rules
+(175)
+GPT-4o 76.8 87.3 69.9 52.1 80.6
+llm-jp-1.8B 20.7 35.2 25.4 6.2 6.3
+llm-jp-3.7B 26.0 30.3 22.5 10.4 29.7
+llm-jp-13B 40.5 49.1 37.0 25.0 40.0
+Swallow-8B 52.0 61.2 43.4 35.4 56.6
+Qwen-1.5B 31.9 40.0 27.7 18.8 32.0
+Qwen-3B 36.9 40.0 34.1 37.5 36.6
+Qwen-7B 60.6 62.4 55.5 62.5 63.4
+Qwen-14B 65.6 70.9 58.4 52.1 71.4
+(b)
+Extracting
+Overall
+(317)
+Wikipedia
+(95)
+News
+(90)
+Product
+Review
+(13)
+Company
+Rules
+(119)
+GPT-4o 81.7 89.5 73.3 76.9 82.4
+llm-jp-1.8B 25.2 47.4 25.6 15.4 8.4
+llm-jp-3.7B 35.0 44.2 25.6 7.7 37.8
+llm-jp-13B 49.5 66.3 43.3 38.5 42.0
+Swallow-8B 59.9 71.6 52.2 38.5 58.8
+Qwen-1.5B 40.1 50.5 33.3 30.8 37.8
+Qwen-3B 43.2 51.6 37.8 46.2 40.3
+Qwen-7B 71.6 76.8 65.6 92.3 69.7
+Qwen-14B 74.8 83.2 66.7 84.6 73.1
+(c)
+Reasoning
+Overall
+(132)
+Wikipedia
+(36)
+News
+(36)
+Product
+Review
+(15)
+Company
+Rules
+(45)
+GPT-4o 81.8 88.9 88.9 53.3 80.0
+llm-jp-1.8B 18.2 25.0 36.1 6.7 2.2
+llm-jp-3.7B 16.7 19.4 25.0 6.7 11.1
+llm-jp-13B 34.1 36.1 38.9 13.3 35.6
+Swallow-8B 50.8 61.1 47.2 26.7 53.3
+Qwen-1.5B 23.5 33.3 25.0 13.3 17.8
+Qwen-3B 37.9 33.3 44.4 53.3 31.1
+Qwen-7B 51.5 50.0 55.6 40.0 53.3
+Qwen-14B 64.4 66.7 63.9 40.0 71.1
+(d)
+Computing
+Overall
+(41)
+Wikipedia
+(21)
+News
+(18)
+Product
+Review
+(0)
+Company
+Rules
+(2)
+GPT-4o 70.7 81.0 66.7 - 0.0
+llm-jp-1.8B 4.9 9.5 0.0 - 0.0
+llm-jp-3.7B 4.9 4.8 5.6 - 0.0
+llm-jp-13B 9.8 9.5 11.1 - 0.0
+Swallow-8B 19.5 23.8 16.7 - 0.0
+Qwen-1.5B 12.2 19.0 5.6 - 0.0
+Qwen-3B 0.0 0.0 0.0 - 0.0
+Qwen-7B 26.8 28.6 27.8 - 0.0
+Qwen-14B 46.3 47.6 50.0 - 0.0
+(e)
+Information Integrating
+Overall
+(87)
+Wikipedia
+(21)
+News
+(31)
+Product
+Review
+(24)
+Company
+Rules
+(11)
+GPT-4o 54.0 71.4 41.9 41.7 81.8
+llm-jp-1.8B 11.5 9.5 25.8 0.0 0.0
+llm-jp-3.7B 12.6 0.0 19.4 12.5 18.2
+llm-jp-13B 26.4 19.0 29.0 25.0 36.4
+Swallow-8B 33.3 33.3 25.8 37.5 45.5
+Qwen-1.5B 19.5 14.3 25.8 12.5 27.3
+Qwen-3B 28.7 28.6 29.0 33.3 18.2
+Qwen-7B 47.1 33.3 45.2 62.5 45.5
+Qwen-14B 39.1 33.3 32.3 45.8 54.5
+Table 3: Complete evaluation results. The values
+in the tables represent accuracy scores. Part (a)
+shows the overall results, and parts (b)-(e) show
+the results for each specific question category. The
+number in brackets means the number of QAs.

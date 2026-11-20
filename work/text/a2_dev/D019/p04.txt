@@ -1,0 +1,100 @@
+Reasoning Enhanced Missing Knowledge Judg-
+ment However, the retrieved contexts may not
+necessarily contain all the knowledge required to
+answer the query, and they also contain knowl-
+edge conflicts or hallucinations. Previous works
+(Wang et al., 2025a) therefore propose a pipeline
+approach separately performing missing informa-
+tion retrieval and knowledge entailment classifica-
+tion, which might cause error propagation or mis-
+alignment within different modules. Qian et al.
+(2024) proposes to train a specific generative mod-
+ule, which incurs substantial manual efforts.
+To mitigate these limitations, we introduce a
+single-pass reasoning framework that simultane-
+ously generates missing knowledge and formulates
+the requisite follow-up queries. The judging pro-
+cess comprises two principal components:
+• Reasoning Content This exploits the model’s
+reasoning capacity to verify information
+within given contexts, thereby guiding the sub-
+sequent retrieval of any missing knowledge.
+• Missing Knowledge Judgment This module
+accurately identifies knowledge gaps and con-
+structs the necessary follow-up queries step
+by step, considering the intrinsic interconnec-
+tions among the initial query, retrieved con-
+texts, and the missing knowledge,
+Specifically, for example, given query Q: Who
+carried the US flag in the 2014 Olympics?,
+retrieved contexts C and first round prediction Y1,
+we prompt the reasoner model to generate a judg-
+ment about the missing knowledge and reasoning
+content Creason, which contains step-by-step ver-
+ification of factual information. The JSON for-
+matted answer includes reflective thought about
+the first round answer, judgment, missing knowl-
+edge cues, and the corresponding queries “who
+carried... opening ceremony?” and “who
+carried... closing ceremony?” aligned with
+retrieval contexts. The detailed prompts for miss-
+ing knowledge query and answer generation are
+presented in the Appendix 4.
+Finally, we utilize the aligned missing knowl-
+edge query to retrieve missing information from the
+specified knowledge base, subsequently appending
+it to C. Following this, we apply a straightforward
+deduplication function using MD5 hashing to re-
+move redundant text chunks. Then, we consolidate
+them with part of the reasoning information into a
+structured prompt the reader to generate the final
+answer:
+Yf inal = LLMθ(xi|Q, C, Creason, x<i), (3)
+including query Q, contexts with missing knowl-
+edge C, the reasoning content Creason and reflective
+thought about first round answer.
+3 Experiment
+3.1 Experimental Setup
+We fairly evaluated our framework under a one-shot
+setting on two open-domain question answering
+datasets: Natural Questions (NQ) (Kwiatkowski
+et al., 2019) for general knowledge question an-
+swering, which consists of real-world user queries
+from search engines. And we further experiment
+on medical domain, Huatuo-26M (Li et al., 2023),
+which is a large-scale chinese medical QA dataset
+curated from online healthcare QA websites. These
+datasets are ideal benchmarks to evaluate the ro-
+bustness of out proposed method, which contain a
+large volume of high-quality colloquial QA pairs,
+reflecting the natural distribution of user interac-
+tions across various real-world QA systems.
+We utilize the open-sourced Llama3.3-70B
+(Grattafiori et al., 2024) and Qwen2.5-70B-Instruct
+(Qwen et al., 2025) as our reader LLM in the
+framework for English and Chinese benchmark,
+respectively, owing to their success on the LM-
+Sys leaderboard under specific categories1. We
+use DeepSeek-R1 (DeepSeek-AI et al., 2025) as a
+reasoner LLM owing to its powerful reasoning abil-
+ity. We employ bge-en-large (Xiao et al., 2023)
+and bge-large-zh-v1.5 to encode QA Pairs and
+Wikipedia chunks, following instructions on the
+website.2 For the purpose of similarity search-
+ing, we implement the Faiss index (Johnson et al.,
+2019), specifically the IndexFlat with L2 distance
+metrics.
+For NQ evaluation, we use all the documents
+provided in the NQ dataset directly without any
+HTML tags to construct a Wikipedia knowledge
+base. To accommodate the maximum length con-
+straints of the encoder model, each document is
+segmented into text chunks containing fewer than
+300 words, resulting in 4.8M text chunks, followed
+by a deduplication process with MD5 hash, shown
+in Table 2. To provide a fair comparison, we also
+leverage all the QA pairs in the training set of NQ
+1Chatbot Arena LLM Leaderboard: https://lmarena.ai/
+2Instructions for using BGE series models on Hugging
+Face: https://huggingface.co/BAAI/bge-large-en
+1364

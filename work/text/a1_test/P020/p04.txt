@@ -1,0 +1,45 @@
+convergence studies. The photonic calculations were made for the free-space wavelength λ0 of light ranging
+from 300 nm to 1000 nm.
+The real and imaginary parts of the relative permittivity εr(λ0) = ε(λ0)/ε0 were calculated for CdTeSe as
+functions of λ0 by applying Vegard’s law [24] to the data available for CdTe [25] and CdSe [26] and are provided
+in ﬁgure S2 of Supplementary Information, ε(λ0) being the wavelength-dependent permittivity and
+ε0 = 8.854 × 10−12 Fm−1 being the permittivity of free space. Spectra of the real and imaginary parts of the
+relative permittivity εr of MgF2 [27], FTO [28], ITO [28], CdS [25], ZnTe [29], and Au [30] used in our
+calculations are directly taken from experimentally reported studies and displayed in ﬁgure S3 of
+Supplementary Information.
+With the photon-absorption rate taken to equal the electron-hole-pair (EHP) generation rate G(z) in the
+semiconductor layers, an external voltage Vext applied across the contacts drives the electric current in the TFSC
+[31]. The FTO/ITO/CdS/CdTeSe region (Lw < z < Ld in ﬁgure 1) was incorporated in the electrical submodel,
+as all four layers contribute to charge-carrier generation. The bulk recombination mechanisms—radiative and
+Shockley–Read–Hall—were incorporated into the electrical submodel. Auger recombination in CdTe is
+generally considered negligible at typical doping densities below 1018 cm−3 [32] and was therefore neglected in
+this study. Although interfacial defects can play an important role, they are considered negligible compared to
+bulk defects [32], and were therefore omitted from this analysis.
+The electrical parameters used for all four semiconductor layers [20, 33–36] are provided in table S1 of
+Supplementary Information. The electron afﬁnity of CdSe varies in the literature, with reported values ranging
+from approximately 3.9 eV to 5.1 eV [33–36]. This variability arises due to differences in crystal structure (zinc
+blende versus wurtzite), surface orientation, doping levels, and fabrication methods. To comply with the
+ionization potential theory–which states that the ionization potential of CdSe should be higher than that of
+CdTe–we adopted a value of 4.56 eV [35] for the electron afﬁnity of CdSe in all simulations.
+The drift-diffusion equations governing the number densities and ﬂuxes of electrons and holes, together
+with the dc electric potential in the semiconductor layers are described in detail by Anderson et al [23]. We used
+boundary conditions at the top plane (z = Lw) and the bottom plane (z = Ld) of the semiconductor region
+assuming ideal ohmic contacts, with the addition of an externally applied voltage Vext on one contact. We elected
+to use quasi-Fermi potentials to represent the number densities of electrons and holes so as to ensure that both of
+the latter quantities are always positive. The derivation of the resulting partial differential equations is provided
+by Ahmad et al [13]. To develop a special staggered ﬁnite-difference method [37] for these partial differential
+equations, we approximated the quasi-Fermi levels at the mid-point of each mesh interval, while the ﬂuxes were
+approximated at the mesh nodes. To enforce numerical continuity of the quasi-Fermi potentials at mesh nodes,
+we developed an approximate integral representation of the quasi-Fermi potential away from the mid-point of a
+mesh interval and used it to enforce continuity at the mesh nodes, effectively upwinding the equations. This
+process is described in detail elsewhere [13]. The discretization of the ﬂux equations is based on standard central
+ﬁnite differences and so the overall scheme is expected to have a second-order local truncation error [37].
+As a result, using Newton’s method [13] to solve the ﬁnite-difference equations, we can determine the
+current density Jdev (by combining the predicted ﬂuxes of electrons and holes) and the power density P = JdevVext
+as functions of the applied voltage Vext. The Jdev–Vext and the P--Vext curves yield the short-circuit current
+density Jsc along with Voc and η.
+For completeness, a convergence study for the problem in this paper was performed by solving the drift-
+diffusion model on increasingly reﬁned grids. The error in the computed efﬁciency with various mesh widths h
+Figure 1. Schematic of a CdTe (or CdTeSe) TFSC fabricated in a superstrate conﬁguration on soda-lime glass (not shown here).
+3
+J. Phys. Commun. 9 (2025) 055008 F Ahmad et al

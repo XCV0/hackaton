@@ -1,0 +1,109 @@
+completeness of upstream metadata. Its guarantees
+apply only to retrieved candidate documents and
+cannot recover evidence missed by retrieval or re-
+construct missing supersession relations. The con-
+clusions of the 50-document experiment are limited
+to the controlled setting in which the target evi-
+dence is retrieved; system behavior under retrieval
+misses remains to be evaluated in realistic end-to-
+end retrieval pipelines. Our experiments use coun-
+terfactual regulatory-style datasets and API-served
+models; future work should evaluate TrustRAG on
+larger authentic policy collections, noisier organi-
+zational metadata, and deployment-time retrieval
+and audit workflows.
+Societal impact. TrustRAG can reduce evidence-
+governance risks in compliance-oriented QA, but
+incorrect metadata or permission configurations
+may still cause information exposure or inappro-
+priate refusals, while excessive reliance on auto-
+mated routing may lead users to overestimate the
+system’s compliance capabilities. Deployments
+should therefore integrate TrustRAG into, rather
+than substitute it for, existing organizational gover-
+nance and accountability processes, while retaining
+continuous monitoring, human audits, and mecha-
+nisms for reviewing or appealing refusals and con-
+flict reports.
+Acknowledgments
+This work was supported by the Major Science and
+Technology Support Program of Hebei Province
+(Grant No. 252X0303D), the Science and Tech-
+nology Project of Xiong’an New Area (Grant
+No. XA2026110904K), and the Hebei Provincial
+Science and Technology Plan Project titled “Key
+Technology Research and Demonstration of Sce-
+nario Construction Supported by Trusted Data
+Spaces” (Grant No. 262X0302D). The authors also
+thank the project teams and reviewers for their con-
+structive suggestions.
+References
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avi Sil, and
+Hannaneh Hajishirzi. 2024. Self-rag: Learning to re-
+trieve, generate, and critique through self-reflection.
+In International Conference on Learning Representa-
+tions, volume 2024, pages 9112–9141.
+Scott Barnett, Stefanus Kurniawan, Srikanth Thudumu,
+Zach Brannelly, and Mohamed Abdelrazek. 2024.
+Seven failure points when engineering a retrieval
+augmented generation system. In Proceedings of
+the IEEE/ACM 3rd International Conference on AI
+Engineering - Software Engineering for AI, CAIN
+’24, page 194–199, New York, NY, USA. Association
+for Computing Machinery.
+Baolong Bi, Shaohan Huang, Yiwei Wang, Tianchi
+Yang, Zihan Zhang, Haizhen Huang, Lingrui Mei,
+Junfeng Fang, Zehao Li, Furu Wei, Weiwei Deng,
+Feng Sun, Qi Zhang, and Shenghua Liu. 2025.
+Context-DPO: Aligning language models for context-
+faithfulness. In Findings of the Association for Com-
+putational Linguistics: ACL 2025, pages 10280–
+10300, Vienna, Austria. Association for Computa-
+tional Linguistics.
+Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, Sandhini Agarwal, Ariel Herbert-Voss,
+Gretchen Krueger, Tom Henighan, Rewon Child,
+Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu,
+Clemens Winter, and 12 others. 2020. Language
+models are few-shot learners. In Proceedings of the
+34th International Conference on Neural Information
+Processing Systems, NIPS ’20, Red Hook, NY, USA.
+Curran Associates Inc.
+Bingxiang Chen, John Tackman, Manu Setälä, Timo Po-
+ranen, and Zheying Zhang. 2025. Integrating access
+control with retrieval-augmented generation: A proof
+of concept for managing sensitive patient profiles. In
+Proceedings of the 40th ACM/SIGAPP Symposium
+on Applied Computing, SAC ’25, pages 915–919,
+New York, NY, USA. Association for Computing
+Machinery.
+Bingxiang Chen and Toni Taipalus. 2026. Metadata-
+aware rag for enforcing access control and metadata-
+based filtering: Proof of concept and evaluation. In
+Proceedings of the International Conference on Re-
+search in Adaptive and Convergent Systems, RACS
+’25, New York, NY, USA. Association for Computing
+Machinery.
+Bhuwan Dhingra, Jeremy R. Cole, Julian Martin
+Eisenschlos, Daniel Gillick, Jacob Eisenstein, and
+William W. Cohen. 2022. Time-aware language mod-
+els as temporal knowledge bases. Transactions of the
+Association for Computational Linguistics, 10:257–
+273.
+Tuba Gokhan, Kexin Wang, Iryna Gurevych, and Ted
+Briscoe. 2025. Shared task RIRAG-2025: Regula-
+tory information retrieval and answer generation. In
+Proceedings of the 1st Regulatory NLP Workshop
+(RegNLP 2025), pages 1–4, Abu Dhabi, UAE. Asso-
+ciation for Computational Linguistics.
+Kai Greshake, Sahar Abdelnabi, Shailesh Mishra,
+Christoph Endres, Thorsten Holz, and Mario Fritz.
+2023. Not what you’ve signed up for: Compromis-
+ing real-world llm-integrated applications with indi-
+rect prompt injection. In Proceedings of the 16th
+ACM Workshop on Artificial Intelligence and Secu-
+rity, AISec ’23, page 79–90, New York, NY, USA.
+Association for Computing Machinery.
+35011

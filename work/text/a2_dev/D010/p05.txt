@@ -1,0 +1,43 @@
+Efficient Federated Search for Retrieval-Augmented Generation 5
+3.2 RAGRoute workflow
+We visualize the RAGRoute workflow in Figure 2, enabling RAG-enhanced
+LLM responses by retrieving documents from n distinct data sources. We show
+the components specific to RAGRoute in the dashed box. When a user sends
+a query to the system ➊, the user query is first converted into one or more
+embeddings using all embedding models used by the data sources ➋. These query
+embeddings are then forwarded to a router, whose purpose is to decide which
+of the n data sources are relevant. The router predicts this relevance separately
+for each source using source specific features and query embeddings. We outline
+the design and operation of our router in Section 3.3.
+After determining the m relevant data sources (m ≤ n), we forward to each
+selected source the query embedding previously computed using its respective
+embedding model ➌. For example, Figure 2 shows that data source 1 is selected
+and receives the query embedding, while source 2 is skipped. Each selected source
+uses the received query embedding to retrieve top-kret documents most similar
+to the query. This results in m × kret total retrieved documents ➍. This is
+followed by a post-retrieval reranking step, which has become a standard com-
+ponent in modern RAG systems [14,33,32]. Rerankers, often implemented as
+cross-encoder models, rescore the retrieved candidates to prioritize the passages
+most semantically relevant to the user query. This two-stage retrieval design
+improves grounding accuracy while also reducing response latency, since only a
+compact set of highly relevant documents is passed to the language model. After
+reranking, only final k documents are retained where the value of k can differ
+from the retrieval cutoff kret (see Section 4).
+Finally, the relevant documents ➏ and original user query ➐ are combined
+into a single prompt. This prompt is fed to the LLM and a response is generated
+and returned to the user ➑, therefore completing the query.
+3.3 Lightweight query routing
+To enable resource selection and efficient retrieval across multiple data sources,
+RAGRoute uses a lightweight query router, implemented as a shallow neural
+network (NN) with a few fully connected layers. This minimal design is inten-
+tional: the router must remain computationally inexpensive so that routing over-
+head is negligible compared to retrieval and generation. Despite its simplicity,
+the router is sufficient to estimate the relevance of each data source before re-
+trieval. Using a shallow NN is inspired by practices in mixture of experts (MoE)
+models and ensembles. MoE models leverage a small router function to decide
+which subset of experts to activate [44]. Similarly, shallow NNs are used for
+decision-making in one-shot federated ensembles [3]. This work applies similar
+ideas to selecting relevant data sources in federated search for RAG systems. We
+next describe the training and inference phase of the RAGRoute router.
+Training phase Let R = {R1, R2, . . . , Rn} denote the set of n data sources,
+where each Ri corresponds to a collection of documents. For each query–source

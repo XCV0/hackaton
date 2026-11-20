@@ -1,0 +1,97 @@
+tains Serum Ldl.”, and the approach in (Liu et al.,
+2025b) can yield factually incorrect statements like
+“Terminus, a planet in the solar system...”. Fur-
+thermore, current methods encode only 1 bit of
+information–whether the RAG is watermarked or
+not, lacking the capacity to embed richer metadata
+such as copyright details. This limitation constrains
+the practical applicability of RAG watermarking.
+To tackle these issues, we propose Knowledge-
+infused Multi-bit Watermarking (KMW), a scheme
+that reframes watermarking as a benign knowledge-
+base completion task. Instead of rewriting con-
+tent or injecting low-quality text, KMW generates
+context-consistent texts by knowledge completion
+with factual relationships, which encodes a multi-
+bit watermark. Moreover, the watermarking pro-
+cess maintains unbiased generation. This enables
+generated texts to maintain excellent consistency
+with the knowledge base and high intrinsic quality.
+By infusing them into the knowledge base, KMW
+simultaneously secures IP and preserves RAG util-
+ity. For reliable detection, we design a Watermark
+Text Indexer that optimizes queries to retrieve the
+watermarked content. The watermark is then ex-
+tracted from the RAG’s responses via majority vot-
+ing. Experimental results show that KMW achieves
+a watermark recovery rate of 1.00 across various
+datasets and RAG configurations. The watermark
+texts surpass the baselines in quality and stealth-
+iness, achieving minimal negative impact on the
+main RAG tasks (1.2%) and the lowest filtering
+rate (less than 6.23%). Besides, KMW exhibits
+robustness against a wide range of attacks. Our
+contributions are summarized below:
+• Our proposed KMW leverages knowledge com-
+pletion to generate high-quality, benign water-
+marked text. This lessens the trade-off between
+IP protection and RAG utility.
+• We design an unbiased, multi-bit watermarking
+algorithm and a Watermark Text Indexer for the
+RAG scenario. The former ensures high gener-
+ation quality and capacity, while the latter opti-
+mizes query construction for robust retrieval.
+• Experiments across four datasets and diverse
+RAG configurations indicate KMW’s superior
+effectiveness, stealthiness, and robustness com-
+pared to state-of-the-art baselines.
+2 Problem Modeling
+2.1 Threat Model
+This work considers RAG watermarking for IP
+protection, where the defender owns proprietary
+knowledge and embeds watermarks to safeguard a
+RAG system built upon it. Adversaries aim to steal
+the knowledge base and either deploy it within their
+own RAG or distribute it for profit.
+Defender ability: They can only query and receive
+responses from a RAG system. They detect water-
+marks if a suspect RAG demonstrates anomalously
+high performance on their proprietary content.
+Adversary ability: They may be aware of the wa-
+termark’s presence, but lacking the secret key pre-
+vents precise watermark removal. However, they
+may attempt to modify the knowledge base or RAG
+settings to remove or forge the watermark. We cate-
+gorize such threats into Knowledge Selection/Alter-
+ation/Expansion Attacks, RAG Setting Restrictions,
+and Reclaiming Attacks (see Appendix A).
+2.2 Capabilities of RAG Watermarking
+We claim that RAG watermarking for IP protection
+must satisfy: (i) Effectiveness: The watermark can
+be reliably extracted from a pirated RAG; (ii) Secu-
+rity: The watermark is computationally infeasible
+to be covered or forged without a secret key; (iii)
+Stealthiness: The embedded watermark is imper-
+ceptible and resistant to filtering; (iv) Soundness:
+Any innocent RAG has a negligible chance of being
+detected as watermarked; (v) Fidelity: Watermark-
+ing should minimally impact the performance of
+the RAG system; (vi) Robustness: The watermark
+remains detectable in the pirated RAG, even when
+subjected to a range of adversarial attacks.
+3 Watermarking Scheme
+Within a RAG system, the knowledge base KB is
+optimal for watermarking as it is the main target
+for data theft. Watermarking the retriever or LLM
+is ineffective, as adversaries can easily substitute
+them. Thus, our method aims to embed a multi-
+bit watermark into KB and achieve capabilities.
+Figure 1 illustrates KMW’s four-stage pipeline:
+Watermark Prefix Construct: Extracts knowl-
+edge graphs from a sample of KB and utilizes
+knowledge completion to predict relationships,
+which serve as “prefixes” for watermarking.
+Generation and Infusion: It controls an unbiased
+generative watermarking algorithm based on pre-
+fixes that encode bits into tokens. They also direct
+21196

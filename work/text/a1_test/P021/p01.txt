@@ -1,0 +1,72 @@
+ACTA PHYSICA POLONICA A No. 4 Vol. 142 (2022)
+Path Toward High-Eﬃciency CZTS Solar
+Cells with Buﬀer Layer Optimization
+W. Hennia,∗, W.L. Rahalb,c and D. Rachedd
+aElaboration and Characterization Physico-Mechanical and Metallurgical of Materials
+Laboratory, University Abdelhamid Ibn Badis of Mostaganem,
+Route National N◦11, Kharouba, 27000, Mostaganem, Algeria
+bLaboratory of Analysis and Application of Radiation, Faculty of Physics, University of Sciences
+and Technology of Oran Mohamed Boudiaf, BP 1505, el Mnaouar, Oran, Algeria
+cPhysics Department, University Abdelhamid Ibn Badis of Mostaganem,
+Chemin des Crêtes, 27000, Mostaganem, Algeria
+dLaboratory of Plasma Physics, Conductive Materials and their Applications, University
+of Science and Technology of Oran Mohamed Boudiaf, BP 1505, el Mnaouar, Oran, Algeria
+Received: 03.01.2022 & Accepted: 07.09.2022
+Doi: 10.12693/APhysPolA.142.445 ∗e-mail: wafaa.henni@gmail.com
+In this work, we numerically improve the performance of kesterite thin ﬁlm solar cells
+(ZnO/Cu2ZnSnS4/CdS/MoS2) using the Solar Cell Capacitance Simulator. The work carried out is
+mainly based on the study of the inﬂuence of the doping density, the thickness, and the gap energy of
+the buﬀer layer on the cell’s performance. Based on the simulation results, it is found that increasing
+the buﬀer layer thickness strongly deteriorates the cell’s performance. An optimized and economical
+CdS buﬀer layer with a thickness of 15 nm and band gap of 3.2 eV is proposed. It is also shown that
+it is important to control the doping density of this layer in order to obtain a compromise between
+the p–n junction electric ﬁeld and the global recombination rate, to produce eﬃcient solar cells. After
+optimizing the studied solar cell, promising results are achieved with a conversion eﬃciency of 17.93%,
+a ﬁll factor of 71.23%, a short-circuit current density of 30.92 mA/cm2, and an open circuit voltage
+of 0.814 V. The obtained results will provide some important guidelines for producing high-eﬃciency
+Cu2ZnSnS4 solar cells.
+topics: solar cell, CZTS, CdS, optimization
+1. Introduction
+The renewable energy sector continues to make
+remarkable progress, in particular photovoltaic
+(PV) technology. Today, the market for solar cells
+is still dominated by crystalline silicon despite dif-
+ferent locks. The high cost of this type of cell is
+mainly due to the high use of the material and
+the expensive and complicated manufacturing pro-
+cesses [1, 2]. To get low-cost, high-eﬃciency solar
+cells, researchers turned to making thin ﬁlm solar
+cells to use less material. However, the problem with
+this technology is that the ﬁrst thin ﬁlm solar cells,
+such as CdTe and CIGS, are made of rare and toxic
+elements [3].
+In recent years, Cu2ZnSnS4 (CZTS),
+Cu2ZnSnSe4 (CZTSe), and Cu2ZnSn(S,Se)4
+(CZTSSe) have emerged as replacement materials
+for thin ﬁlm PV due to promising optoelectronic
+properties and the use of non-toxic, earth-abundant
+elements [4]. The CZTS was ﬁrst studied as a solar
+cell material in 1988 at Shinshu University in
+Japan [5]. It can be fabricated using diﬀerent
+processes such as sputtering, evaporation, spray
+pyrolysis, electrodeposition, sol–gel technique,
+etc. [6]. Thin ﬁlms based on CZTS show excellent
+photovoltaic properties such as direct band gap
+energy of 1.4–1.6 eV and absorption coeﬃcient
+over 104 cm−1 [7]. In 2014, Wei Wang et al. [8]
+presented a record cell eﬃciency of around 12.6%
+using a hydrazine pure solution approach for
+a Cu2ZnSnS4-based solar cell with 25 nm CdS
+buﬀer layer thickness [8, 9].
+The main objective of this work is to reach
+a high-eﬃciency ZnO/CdS/CZTS/MoS2 solar cell
+by optimizing the CdS buﬀer layer, using the
+SCAPS-1D simulator, through the analysis of the
+solar cell parameters variation, i.e., open-circuit
+voltage (VOC), short-circuit current density (JSC),
+ﬁll factor (FF), and energy conversion eﬃciency
+(η), and also by understanding how the elec-
+tric ﬁeld, the recombination rate, and the quan-
+tum eﬃciency are aﬀected by the buﬀer layer
+parameters.
+445

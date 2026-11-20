@@ -1,0 +1,110 @@
+directly queried for information as Structured Query Language
+(SQL) is directly queriable outside of an application. In Figure
+6, the knowledge graph is queried for the SME keyword
+related to cybercrime. The query is structured as:
+MATCH (k:Keyword)-[r1]-(d:Document)-[r2]
+-(aff:Affiliation)-[r3]-(c:Country )
+WHERE k.term CONTAINS ’cybercrime’
+RETURN k,r1,d,r2,aff,r3,c
+To retrieve the country nodes from a keyword, several
+relationships were navigated. First, from the keyword to doc-
+uments, then from documents to affiliations and finally from
+the affiliations to the countries. In the cypher query, these links
+are the denoted as an r with a following integer, where r is the
+relationship identifier. The syntax is ()-[]-()-[]-()-[]-(), where
+brackets are relations and parenthesis are nodes. In the first
+part of the “where” clause, the keyword label is further tailored
+to the keyword node, such that it must contain “cybercrime.”
+Overall this can answer the question, “which countries have
+published papers that mention cybercrime?” The question’s
+retrieved nodes in Figure 6 has 29 countries in red, 99 affiliated
+institutions in yellow, and 65 published documents in blue.
+Fig. 6. Keyword ’cybercrime’ graph search. A single keyword (green), along
+with linked documents (light blue) are returned. The documents also link
+affiliated institutions (yellow), and the country of the institutions (red).
+E. Question Answering Validation
+The raw data collected was analyzed using document-
+specific questions in Zero-Shot Conditioning, including:
+• How many citations are there for DOI?
+• How many references are there for DOI?
+• How many authors are there for DOI?
+• What year was DOI published?
+• Which publisher published DOI?
+• How many scopus categories are assigned to DOI?
+• What is the title of DOI?
+After document specific questions, we then examined topic
+specific questions, which included year variations, as in:
+• How many papers are there on the topic of Topic?
+• How many papers were written related to Topic in Year?
+In total, there were 200 questions in this set. Using these
+questions, in this study, we compare the performance of GPT-
+4-instruct [51] with and without our RAG framework on both
+topic-specific and document metadata questions. As shown in
+Figure 7, our findings indicate that GPT-4 with RAG answers
+all questions with a 97% accuracy rate. In contrast, without
+RAG, GPT-4 abstains from answering 40% of the questions,
+and the accuracy of the answered questions drops to 20%. A
+similar trend is observed for topic-based questions, where the
+specialized RAG significantly enhances the retrieval of correct
+answers. The topic questions attempted with RAG was also
+100%, but without was only 36%. In consideration of only the
+attempted questions, the system with RAG answered the topic
+questions correctly 92%. Without RAG, the LLM answered
+the topic questions with 27.77% accuracy.
+Without RAG, several questions about years were answered
+incorrectly, with the system stating the year didn’t exist. The
+LLM also struggled with author and reference details, often
+asking for more information or recommending consulting a
+human expert. In some cases, it noted its lack of internet access
+but later suggested using Google Scholar, yet still provided
+inaccurate responses.
+Attempted
+Document
+Questions
+Documents
+Questions
+Correct
+Attempted
+Topic
+Questions
+Topic
+Questions
+Correct
+0
+20
+40
+60
+80
+100% Attempt / Correct
+100.00 97.67 100.00
+92.00
+60.00
+20.00
+36.00
+27.77
+SLIC RAG No RAG
+Fig. 7. Two question types, document and topic, showing LLM percent
+attempts and correct with SMART-SLIC RAG and without RAG.
+The analysis highlights the effectiveness of SMART-SLIC
+in accurately answering nearly all 200 research queries, cov-
+ering both document-specific and topic-specific questions. In
+contrast, GPT-4-instruct without RAG struggled. SMART-
+SLIC excelled in handling complex queries related to cita-
+tions, references, authorship, and topical relevance, underscor-
+ing the advantages of integrating its methodologies for more
+reliable AI-driven research tools and improved information
+retrieval in scientific fields.
+We then shifted to more complex questions requiring thor-
+ough searches through various retrieval methods, using GPT-4-
+instruct with and without RAG. The SME posed the following
+questions, and the responses are from the SMART-SLIC RAG
+process, with DOI citations provided in square brackets:
+1) What challenge is associated with outlier detection in high-
+dimensional data? The challenge associated with outlier detec-
+tion in high-dimensional data is the “curse of dimensionality,”
+which makes it difficult to detect outliers in the full data space
+[10.1109/ICCC54389.2021.9674561].
+2) Can tensor decomposition methods be leveraged to detect SCADA
+anomalies? Yes, tensor decomposition methods can be leveraged to
+detect SCADA anomalies. The use of non-negative tensor decom-
+position, specifically the Canonical Polyadic Alternating Poisson Re-

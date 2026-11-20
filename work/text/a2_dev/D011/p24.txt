@@ -1,0 +1,47 @@
+F.3 Knowledge Graph
+Knowledge graphs (KGs) provide a structured
+and effective means of representing knowledge as
+triples, i.e., (head entity h,relation r,tail entity t)
+(Pan et al., 2024). They are widely used due to
+their explicit knowledge representation, symbolic
+reasoning capabilities, and adaptability to new in-
+formation. With the generalizability of LLMs, re-
+cent research increasingly explores their integration
+into KG-related tasks such as KG construction (Ku-
+mar et al., 2020), KG completion (Xie et al., 2022),
+and KG reasoning (Chen et al., 2023).
+F.4 RAG Watermarking
+WARD (Jovanovi´c et al., 2025) achieves RAG wa-
+termarking by paraphrasing the original data using
+a watermarked LLM. However, paraphrasing may
+degrade data quality and RAG’s performance. An
+injection-based strategy is then proposed to avoid
+modifying the original content. RAG-WM (Lv
+et al., 2025) injects texts generated from watermark
+tuples into the KB for watermarking. These tu-
+ples are constructed by reassembling entity-relation
+pairs from original content using a hash function.
+However, the reassembled tuples may be incorrect
+or implausible, compromising knowledge quality.
+RAG-WM is also insecure: an adversary could ex-
+ploit existing relationships and original content to
+forge watermarks, as detailed in Appendix E.11.
+RAG©(Guo et al., 2025) selects question-answer
+pairs and injects optimized chains of thought that
+are distant in embedding space from relevant texts,
+but this method is retriever-specific and lacks rel-
+evance to the original content. DMI-RAG (Liu
+et al., 2025b) generates canary texts using LLM
+watermarking by fabricating entities and their de-
+scription based on key attributes. Although canary
+texts resemble the original content, the inauthentic
+information may mislead the LLM, resulting in less
+accurate RAG. The method in (Liu et al., 2025a)
+introduces a dataset specifically designed for RAG
+plagiarism and applies Red-Green LLM watermark-
+ing on the dataset to generate watermark text. Be-
+sides, AQUA (Chen et al., 2025) extends RAG wa-
+termarking to image protection in multimodal RAG
+systems, broadening the research scope. Overall,
+RAG watermarking deserves further study.
+21218

@@ -1,0 +1,94 @@
+Table 17: Results at the 3B scale (EM / F1, %). Bold
+denotes the best result; “*” denotes p < 0.05 against
+Search-R1.
+Dataset Base 3B Search-R1 PRO-Step
+HotpotQA 5.31 / 17.36 31.82 / 41.30 32.82 / 44.33*
+PopQA 7.24 / 22.23 36.87 / 42.14 39.88* / 46.10*
+2WikiMulti 2.27 / 15.28 35.96 / 41.86 44.10* / 50.77*
+Bamboogle 4.00 / 10.64 18.40 / 27.97 28.00* / 38.96*
+MuSiQue 1.24 / 6.27 8.07 / 14.27 10.38* / 19.85*
+Average 4.01 / 14.35 26.22 / 33.51 31.04 / 40.00
+answers are less frequently supported by flawed
+intermediate trajectories. Steps are annotated using
+QwQ-32B under the same R1–R6 rubric used for
+PRM supervision, with the annotator blind to sys-
+tem identity. The analysis uses the trajectories un-
+derlying the main experiments for 500 paired ques-
+tions each from HotpotQA, 2WikiMultiHopQA,
+and MuSiQue.
+Table 18: Intermediate-Flawed-But-Correct (IFBC) rate
+among correct trajectories. Statistical tests compare
+each method with PRO-STEP. Lower is better.
+Method IFBC ↓ p vs. Ours # Correct
+PRO-STEP 26.8% – 474
+Outcome-only ablation 40.3% < 10−4 447
+Search-R1 33.3% 0.033 439
+StepSearch 33.0% 0.037 457
+ReasonRAG 21.6% 0.071 (NS) 430
+Results. The controlled comparison with the
+outcome-only ablation isolates the effect of process-
+level preference construction: both variants use
+the same training trees and DPO hyperparameters,
+while differing in how preference pairs are selected.
+PRM-guided selection reduces IFBC from 40.3%
+to 26.8%, a reduction of 13.5 percentage points
+(p < 10−4), while increasing the number of correct
+trajectories from 447 to 474.
+The same pattern appears in the training signal.
+Outcome-only selection promotes 19.8% flawed-
+but-successful trajectories to the chosen side of the
+DPO pairs, whereas PRM-guided selection reduces
+this rate to 10.7%.
+PRO-STEP also exhibits significantly lower
+IFBC rates than Search-R1 and StepSearch. Rea-
+sonRAG has a numerically lower IFBC rate, but
+the difference is not statistically significant (p =
+0.071) and it produces fewer correct trajectories
+(430 vs. 474). Thus, the IFBC analysis is inter-
+preted jointly with task performance rather than as
+Table 19: Token-level F1 on recovered trajectories.
+Dataset Search-R1 PRO-STEP ∆
+HotpotQA 66.6 69.0 +2.5
+PopQA 54.2 57.6 +3.4
+2WikiMulti 58.2 66.1 +7.8
+Bamboogle 87.6 84.0 −3.6
+MuSiQue 48.9 51.1 +2.1
+Table 20: Final EM on 2WikiMulti by recovery depth
+k.
+Method k = 1 k = 2 k = 3 k ≥ 4
+n 3,193 / 2,565 578 / 332 150 / 33 81 / 15
+Search-R1 49.0 42.6 38.7 34.6
+PRO-STEP 53.1 50.9 45.5 60.0
+∆ +4.1 +8.3 +6.8 +25.4
+a standalone measure of system quality.
+I Detailed Recovery Analysis
+We provide the full breakdowns underlying Sec-
+tion 4.8. A retrieval succeeds when the gold pas-
+sage appears among the top-3 retrieved documents,
+and recovery depth k denotes the first successful re-
+trieval step, with the initial retrieval indexed as step
+0. Throughout, n is reported as Search-R1 / PRO-
+STEP, since the recovered subset is defined by each
+model’s own search behavior.
+Table 19 reports token-level F1 on the same re-
+covered subsets as Table 5. PRO-STEP leads on
+four of five datasets, with the largest margin on
+2WikiMulti (+7.8). The exception is Bamboogle,
+whose recovered subset contains only 25 questions.
+Table 20 breaks 2WikiMulti down by recovery
+depth. Gains are consistent at k = 1 through k = 3.
+The k ≥ 4 bucket favors PRO-STEP by a wide mar-
+gin, but both subsets are small and the comparison
+is not reliable.
+Table 21 reports the complementary case in
+which the initial retrieval already surfaces the gold
+passage, so no recovery is required. PRO-STEP
+performs competitively or better on four of five
+datasets, indicating that its advantage on recovered
+trajectories does not stem from an easier subset.
+J Case Study
+We present qualitative examples to illustrate the
+limitation of outcome-based learning: even when
+generating reasoning step-by-step, models trained
+solely on final answers fail to penalize intermediate
+37922

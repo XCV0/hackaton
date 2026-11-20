@@ -1,0 +1,71 @@
+Method Reports Tutorials Academic Guidebooks Brochures Industry Financial Overall Generator Model
+RAGAnything 45.3 46.0 34.6 43.5 39.6 33.3 42.7 41.5 GPT-4o-miniBayesRAG (ours) 46.7 53.6 34.8 46.4 39.4 38.6 48.6 44.1
+RAGAnything 53.4 47.4 40.2 51.9 39.6 37.0 50.4 47.1 Qwen3-VL-32BBayesRAG (ours) 61.8 57.8 58.2 58.9 54.9 54.4 65.4 59.4
+Table 7: Performance comparison with different generator models on MMLongBench-Doc. The switch to the
+more capable Qwen3-VL-32B results in a significantly larger performance boost for BayesRAG compared to
+RAGAnything, highlighting our method’s ability to retrieve high-quality evidence that stronger models can better
+exploit.
+Method Domains Types Overall Generator Model
+Aca. Fin. Gov. Law. News Text Meta MM. Unans.
+RAGAnything 51.4 42.3 43.2 50.2 57.5 77.6 10.0 57.4 11.2 48.7 GPT-4o-miniBayesRAG (ours) 52.4 37.5 56.0 52.3 66.8 84.2 19.7 43.8 25.8 51.2
+RAGAnything 57.4 44.7 49.3 50.7 61.0 82.0 11.2 60.7 19.3 52.4 Qwen3-VL-32BBayesRAG (ours) 65.6 53.8 61.4 59.6 70.3 87.3 30.2 62.6 39.5 61.7
+Table 8: Performance comparison on DocBench with different generators. BayesRAG consistently outperforms
+baselines, with the performance gap widening significantly when using the stronger Qwen3-VL-32B generator,
+verifying superior evidence recall.
+by imposing metadata constraints before proba-
+bility calculation. Specifically, we restrict the con-
+struction of evidence tuples E = (t, v, s) to those
+derived from the same source document. Further-
+more, candidates yielding low probabilities—based
+on retrieval scores and knowledge graph distribu-
+tions—are directly pruned. These constraints ef-
+fectively transform the dense combinatorial space
+into a highly sparse matrix, significantly reduc-
+ing computational complexity. This confirms that
+BayesRAG provides a computationally efficient
+solution for sophisticated multimodal reasoning,
+effectively shifting the heavy lifting from expen-
+sive LLM reasoning to a lightweight probabilistic
+verification layer.
+G Impact of Generator Models
+To disentangle the contribution of the retrieval mod-
+ule from the generation capabilities, we conduct a
+comparative analysis using different backbones:
+GPT-4o-mini and the more powerful Qwen3-
+VL-32B. The results on MMLongBench-Doc and
+DocBench are detailed in Table 7 and Table 8.
+Performance Sensitivity to Generator Capacity.
+As expected, replacing the generator with the SOTA
+Qwen3-VL-32B leads to universal performance
+improvements. However, a critical observation is
+the disproportionate gain achieved by BayesRAG
+compared to the baseline RAGAnything. On
+MMLongBench-Doc, while RAGAnything im-
+proves by 5.6% (41.5% → 47.1%), BayesRAG
+achieves a dramatic surge of 15.3% (44.1% →
+59.4%). A similar trend is observed on DocBench,
+where the performance gap between BayesRAG
+and RAGAnything widens significantly from 2.5%
+under GPT-4o-mini to 9.3% under Qwen3-VL-
+32B.
+Evidence for Superior Effective Recall. This
+phenomenon provides compelling evidence for the
+superior retrieval quality of BayesRAG. In RAG
+systems, the performance is bounded by the qual-
+ity of the retrieved context. A stronger genera-
+tor cannot hallucinate correct answers if the sup-
+porting evidence is missing (low recall). The fact
+that BayesRAG benefits substantially more from a
+stronger generator indicates that our Bayesian fu-
+sion mechanism successfully retrieves high-fidelity,
+complex multimodal evidence that is present in the
+context but under-utilized by the weaker GPT-4o-
+mini. In contrast, the baseline’s smaller improve-
+ment suggests its retrieval bottleneck lies in miss-
+ing evidence (low recall), which even a superior
+generator cannot mitigate. Thus, these results con-
+firm that BayesRAG delivers significantly higher
+Effective Recall, providing a richer and more ac-
+curate evidence set that unlocks the full potential
+of advanced MLLMs.
+17

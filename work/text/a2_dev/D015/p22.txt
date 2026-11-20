@@ -1,0 +1,64 @@
+German Question
+Doc 2 Doc 1
+Doc 8Doc 7Doc 6 Doc 5Doc 4Doc 3
+supporting
+distracting
+supporting
+distracting
+English Question
+Doc 2 Doc 1
+Doc 8Doc 7Doc 6 Doc 5Doc 4Doc 3
+supporting
+distracting
+supporting
+distracting
+English Question
+Doc 2 Doc 1
+Doc 8Doc 7Doc 6 Doc 5Doc 4Doc 3
+supporting
+distracting
+supporting
+distracting
+English Question
+Doc 2 Doc 1
+Doc 8Doc 7Doc 6 Doc 5Doc 4Doc 3
+supporting
+distracting
+supporting
+distracting
+LLM
+German Answer
+LLM
+English Answer
+- De question
+- 1 De supporting doc 
+- 1 En supporting doc
+- 3 De distracting docs 
+- 3 En distracting docs 
+- En question
+- 1 De supporting doc 
+- 1 En supporting doc
+- 3 De distracting docs 
+- 3 En distracting docs 
+LLM
+English Answer
+- En question
+- 2 En supporting doc 
+- 3 De distracting docs 
+- 3 En distracting docs 
+LLM
+English Answer
+- En question
+- 2 En supporting doc
+- 6 En distracting docs 
+“XRAG-MultiR” in Table 6 “+ EQ” in Table 6 “+ EQ, ES” in Table 6 “MonoRAG” in Table 6
++ EQ
++ EQ, ES
++ EQ, ES, ED
+EQ: use the English question before human translation, see English Q & A in Figure 2.
+ES: use Google Translation to translate the non-English supporting article to English
+ED: use Google Translation to translate the non-English distracting article to English
+: denotes English
+: denotes non-English, e.g., German
+Figure 25: Experimental settings in Table 6. Here, we use English + German (En+De) as an example.
+15690

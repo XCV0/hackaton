@@ -1,0 +1,124 @@
+query: During macro placement, how should I push macros to the corners?
+relevant document: This command macro_placement performs macro 
+placement. For placement style, corner_max_wl means choosing the partitions 
+that maximise the wire length of connections between the macros to force them 
+to the corners …
+Ground Truth Answer
+You can use the style corner_max_wl 
+of the command macro_placement 
+during macro placement. You can use 
+the command:
+macro_placement 
+    -style corner_wax_wl.         
+Answer by open-source LLM
+Run the macro_placement step ﬁrst. 
+As for pushing macros to the corners, 
+you can enable the cell row snapping 
+feature, which helps to align macro 
+boundaries with the grid …
+❌
+✅
+Figure 6: A fail case of existing open-source chat LLMs for
+answering the EDA-tool questions.
+in filtering out weakly-related documents for EDA-tool-involved
+QA . However, the autoregressive nature of GPT-4 makes it slow
+for document filtering, and proprietary LLMs are also costly and
+challenging to deploy.
+To bridge the gap between existing cross-encoder reranker mod-
+els and proprietary LLMs in the context of EDA tool QA documents
+filtering, we initiate our approach by collecting a set of EDA-tool-
+related questions, denoted as 𝑄 = {𝑞1,𝑞2,...,𝑞𝑛 }. For each 𝑞𝑖 ∈𝑄,
+we apply the hybrid retriever described in Section 3.2 to retrieve 𝑘
+candidate documents 𝐶𝑖 . We then employ GPT-4 with task-specific
+prompt to differentiate relevant documents (𝐶+ 𝑖 ) and weakly-related
+documents (𝐶− 𝑖 ), ensuring |𝐶+ 𝑖 |+|𝐶− 𝑖 | = 𝑘. Next, to enhance the
+ability of the reranker model in distinguishing between relevant
+documents and weakly-related documents, even when they share
+similar semantics or identical keywords with the query, we intro-
+duce a contrastive learning scheme to fine-tune the reranker model
+using the documents filtered by GPT-4. Specifically, for a question
+𝑞𝑖 ∈𝑄, we sample one positive document 𝑠+ 𝑖 from 𝐶+ 𝑖 and 𝑚 nega-
+tive documents {𝑠− 𝑖,1,𝑠− 𝑖,2,...,𝑠− 𝑖,𝑚 } from 𝐶− 𝑖 (𝑚 ≤𝑘), the contrastive
+loss for 𝑞𝑖 can be then written as:
+− log 𝑒 𝑓 (𝑞𝑖 ,𝑠+ 𝑖 )/𝜏
+𝑒 𝑓 (𝑞𝑖 ,𝑠+ 𝑖 )/𝜏 + ˝𝑚 𝑗=1 𝑒 𝑓 (𝑞𝑖 ,𝑠 − 𝑖,𝑗 )/𝜏 , (6)
+where 𝜏 denotes the temperature, 𝑓(𝑞,𝑠) denotes the scalar score
+of the query-document pair (𝑞,𝑠) outputted by the reranker model,
+and the negative sample size 𝑚 is set to 3.
+After being fine-tuned on the high-quality dataset, our reranker
+model exhibits high retrieval recall in EDA-tool QA scenarios. De-
+tailed experiments and their results are discussed in Section 5.
+3.4 Domain-Specific LLM Generator
+Serving as the last stage of the retrieval augmented generation
+(RAG) flow, the generator, usually an LLM, treats the user query
+and the filtered relevant document(s) as input, and output the an-
+swer. We observe that directly applying the open-source chat LLMs
+as generators for EDA tool documentation QA leads to inferior qual-
+ity of the answers. Figure 6 shows one typical example: The user
+inquires for the instruction to push macros to the corner during
+macro placement, the ground-truth answer to this question is to
+enable the corner_max_wl style of the command macro_placement,
+System Prompt: 
+You are the product consultant of a Electronic Design Automation (EDA) tool OpenROAD.
+Now given the user question and the related reference, you are required to answer the 
+question referring to the provided reference.
+During answering the question, you have to follow these instructions:
+    1. Make your answer as rigorous as possible, do not fabricate the fact that does not 
+mentioned in the provided reference.
+    2. Your answer should be strongly related to the provided reference, provide concrete 
+solution for the answer, and do not ignore the precondition in the query.
+Instruction:  
+Question: During macro placement, how should I push macros to the corners?
+Related reference:
+Doc1: This command macro_placement performs macro placement. For placement 
+style, corner_max_wl means choosing the partitions that maximise the wire length of 
+connections between the macros to force them to the corners …
+Answer:  
+You can use the style corner_max_wl of the command macro_placement during 
+macro placement. You can use the command:
+macro_placement -style corner_wax_wl.                                     
+Figure 7: One sample of the QA data instance used from
+instruction tuning.
+which is depicted in the relevant document. When using an open-
+source chat LLM, namely, Qwen-14B-chat, the generated answer is
+erroneous.
+By analysis, we get the conclusion that there are mainly two lim-
+itations of existing chat LLMs for EDA tool documentation QA: 1).
+Open-source chat LLMs lack expert knowledge in EDA. Questions
+involving the usage of EDA tools are usually complicated, besides
+the provided relevant document, some extra domain knowledge
+in EDA may be helpful in answering the question. For example,
+besides the description of the command macro_placement, the do-
+main knowledge of VLSI macro placement is also helpful to answer
+the question in Figure 6. 2). General chat LLMs are ineffective in
+handling the questions involved with EDA tools. Answering such
+questions requires intricate and domain-specific analysis between
+the question and provided documents, and step-by-step inference,
+which are not well mastered by existing chat LLMs.
+To guarantee better quality of answer generation, we propose a
+two-stage training scheme to finetune the chat LLM as the generator.
+The first stage is domain knowledge pre-train: We prepare two well-
+known textbooks in EDA, namely, Electronic Design Automation for
+IC Implementation, Circuit Design, and Process Technology [20] and
+Handbook of Algorithms for Physical Automation [21], as pre-train
+corpus. We divide the two textbooks into chunks by paragraph
+and construct a dataset, on which we pre-train the chat LLM in the
+autoregressive manner. The second stage is task-specific instruction
+tuning: To begin with, we leverage GPT4 to generate a set of triplets
+{𝑞,𝑟,𝑎} of high quality. For each triplet, 𝑞 is one question related to
+the usage of the EDA tool, 𝑟 is/are the document(s) used to answer
+the question, and 𝑎 is the groud-truth answer. Then, we integrate a
+well-designed system prompt to each triplet to form a QA dataset.
+Figure 7 shows one QA sample in the dataset. Finally, we finetune
+the pre-trained chat LLM in stage 1 on the collected QA dataset.
+Note that large language models (LLM) follow the autoregres-
+sive manner, which predicts tokens sequentially and the prediction
+of each token depends on the tokens that have been previously
+generated. Given an LLM with parameter 𝜃 and a token sequence
+𝑥 = {𝑥1,𝑥2,...,𝑥𝑛 }, the probability of the LLM to predict 𝑥 is for-
+mulated as:
+𝑃(𝑥) =
+𝑛∑︁
+𝑡 =1
+𝑃(𝑥𝑡 |𝑥<𝑡 ; 𝜃). (7)
+5

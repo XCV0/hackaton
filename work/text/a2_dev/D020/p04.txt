@@ -1,0 +1,49 @@
+Enterprise Domain Files Queries
+Aventro Motors Automotive 51 200
+Cendara University Academia & Education 41 186
+Velvera Technologies Enterprise Technology 39 200
+ZX Bank Banking & Finance 72 200
+Total — 203 786
+Table 2: Composition of the RAG-Multi-Corpus benchmark across enterprises and domains.
+Category Count Percentage Description
+Descriptive 138 17.6% Factual descriptions or definitions
+Analytical 122 15.5% Analysis, interpretation, or inference
+Comparative 139 17.7% Comparison between entities or concepts
+Boolean 108 13.7% Yes/no factual questions
+Temporal 24 3.1% Time-based or sequence-oriented questions
+Procedural 180 22.9% Process-oriented or how-to questions
+Open-Ended 75 9.5% Multi-hop synthesis across sources
+Total 786 100.0% —
+Table 3: Distribution of query categories in the RAG-Multi-Corpus benchmark.
+This diverse query mix allows us to assess how chunking strategies influence retrieval quality across different query
+intents, particularly for procedural and comparative questions that are sensitive to chunk boundaries and semantic
+coherence.
+6 Experimental Results
+We conducted comprehensive experiments comparing W-RAC (implemented as Agentic Chunking with Less Output
+Tokens) against traditional agentic chunking across the RAG-MULTI-CORPUS benchmark. All experiments were
+performed using LLM version 4.1. The evaluation focuses on token consumption, processing time, and cost efficiency,
+which are critical metrics for production-scale RAG systems.
+6.1 Ingestion and Processing Efficiency Metrics
+This section evaluates the efficiency of the document ingestion pipeline, comparing Agentic Chunking and W-RAC
+across token usage, runtime performance, caching behavior, and overall cost. We report both organization-level and
+aggregate metrics to capture variability across document distributions and workloads. The analysis focuses on input and
+output token consumption, end-to-end processing latency (including tail latencies), and cost implications under standard
+LLM pricing. Together, these metrics provide a comprehensive view of the computational overhead and scalability
+characteristics of each approach, highlighting the trade-offs between structured metadata ingestion and generative
+chunking during large-scale document processing.
+6.1.1 Token and Runtime Metrics by Organization
+Table 1 presents detailed performance metrics for both methods across all five organizations in the benchmark. W-RAC
+processes the same 236 files with a total content length of 1,062,085 characters.
+Organization Method Total Length Input Tokens Output Tokens Time (s) Total Files Avg Input Tokens Avg Output Tokens Avg Time (s) P90 Time (s) P95 Time (s)
+Velvera Technologies Agentic Chunking 191,162 96,826 60,202 379.01 38 2,548.05 1,584.26 9.97 15.13 18.94
+Velvera Technologies W-RAC 191,162 133,230 7,022 118.6 38 3,506.05 184.79 3.12 4.86 6.52
+Cendara University Agentic Chunking 291,888 116,871 77,355 474.18 40 2,921.78 1,933.88 11.85 14.93 17.27
+Cendara University W-RAC 291,888 198,264 16,302 253.59 40 4,956.60 407.55 6.34 10.80 11.89
+ZX Bank Agentic Chunking 275,169 170,890 100,534 625.41 71 2,406.9 1,415.97 8.8 11.7 13.5
+ZX Bank W-RAC 275,169 259,987 15,210 237.76 71 3,661.79 214.23 3.35 5.07 7.06
+Aventro Motors Agentic Chunking 170,022 107,454 64,602 433.81 50 2,149.08 1,292.04 8.68 12.69 13.21
+Aventro Motors W-RAC 170,022 153,581 8,322 156.29 50 3,071.62 166.44 3.13 4.14 5.13
+CloudWay 24 Agentic Chunking 133,844 81,913 41,126 255.11 37 2,213.86 1,111.51 6.89 9.47 10.46
+CloudWay 24 W-RAC 133,844 116,629 5,960 109.18 37 3,152.14 161.08 2.95 4.28 5.25
+Table 4: Token and Runtime Comparison by Organization.
+4

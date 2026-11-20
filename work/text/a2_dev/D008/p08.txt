@@ -1,0 +1,91 @@
+regime, we design a controlled experiment where
+the retrieved context always contains the gold ev-
+idence, while varying only the context length and
+the amount of injected noise.
+Specifically, on CoFaithfulQA (NQ / TriviaQA),
+we construct clean contexts containing only the
+evidence span, and noisy contexts by appending
+unrelated passages sampled from other instances;
+the total context length is controlled at different
+scales to assess scalability and noise robustness.
+We report end-to-end latency together with Con-
+text Recall (ConR) and ∆ConRdrop, defined as the
+ConR difference between clean and noisy contexts.
+As the context becomes longer and noisier, the
+base model suffers substantially larger ConR degra-
+dation, indicating heightened sensitivity to irrele-
+vant information, whereas CoDA consistently ex-
+hibits smaller drops across context scales. As
+shown in Figure 7, CoDA achieves the smallest
+∆ConRdrop across all six CoFaithfulQA subsets,
+outperforming both Vanilla-RAG and ReDeEP un-
+der noisy contexts.
+This robustness stems from CoDA’s attention-
+centric intervention. Rather than operating on
+the full context or globally modifying activations,
+CoDA selectively reshapes attention routing us-
+ing a small set of context-aligned anchors and
+hallucination-prone layers. By amplifying context-
+consistent value states, CoDA limits the influence
+of noisy tokens on downstream representations, re-
+maining stable under long and noisy inputs with
+modest and stable latency overhead.
+Figure 7: Comparison of ConR degradation under noisy
+contexts. CoDA consistently exhibits smaller perfor-
+mance drops than Vanilla-RAG and ReDeEP across all
+six subsets.
+Inference Efficiency Evaluation
+To evaluate the inference overhead of CoDA, we
+compare end-to-end single-sample latency with and
+without CoDA on RAGTruth and Dolly (AC), un-
+Dataset Model Baseline (s) CoDA (s) ∆(s) Overhead (%)
+RAGTruth
+Llama3-8B 7.82 9.13 1.31 16.74%
+Llama2-13B 10.50 12.08 1.58 15.00%
+Llama2-7B 6.50 7.54 1.04 16.00%
+Dolly (AC)
+Llama3-8B 7.10 8.28 1.18 16.62%
+Llama2-13B 9.70 11.20 1.50 15.46%
+Llama2-7B 5.95 6.93 0.98 16.47%
+Table 2: Inference latency with and without CoDA. La-
+tency overhead remains stable (15–17%) across datasets
+and model sizes.
+der identical retrieval results, model configurations,
+and hardware settings. As shown in Table 2, CoDA
+introduces a modest and stable latency overhead of
+approximately 10%–20% across model sizes. This
+overhead stems from two lightweight inference-
+time operations: (1) attention-based Top-K context
+token selection and (2) semantic similarity compu-
+tation with differential dosing applied to a small set
+of hallucination-prone layers. Notably, hallucina-
+tion localization is performed offline and incurs no
+online cost. Since Transformer inference is domi-
+nated by attention and FFN matrix multiplications,
+these additional operations constitute only a mi-
+nor fraction of the forward pass. Furthermore, as
+CoDA depends on a fixed number of anchors and
+selected layers rather than full context length, its
+relative overhead remains stable as context length
+increases.
+CoDA achieves substantial improvements in hal-
+lucination mitigation and contextual faithfulness
+while introducing limited and predictable inference
+overhead. These results demonstrate that attention-
+level routing interventions can offer a practical
+and scalable alternative to heavier model-editing or
+retraining-based approaches in RAG applications.
+6 Conclusion
+Motivated by the observation that certain attention
+heads function as copying heads with strong infor-
+mation transport capacity, we ask whether similar
+copy-encouraged behavior can be induced in other
+heads to preserve external context better. Based
+on this insight, we propose CoDA, a lightweight
+inference-time attention intervention that amplifies
+evidence-aligned value states and promotes copy-
+encouraged routing in non-copying heads, restoring
+context dominance in the residual stream without
+modifying model parameters or requiring retrain-
+ing.
+11886

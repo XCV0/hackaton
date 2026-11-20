@@ -1,0 +1,39 @@
+14 Dhasade et al.
+Table 2. Ablation study of router’s input features. Using all three features results in
+the highest performance on both benchmarks.
+query centroid source-id Recall
+MIRAGE FeB4RAG
+✓ ✓ ✗ 81.53 89.07
+✓ ✗ ✓ 82.33 88.33
+✓ ✓ ✓ 83.35 89.70
+Meanwhile, the latency overhead of pre-retrieval components (embedding
+generation and routing inference) is almost negligible. Even for FeB4RAG,
+where the query must be embedded multiple times using different models, the
+overall embedding and routing time remains imperceptible on the figure. In stan-
+dalone inference measurements with a batch size of 32, the router imposes an
+average latency of only 0.4 ms using an NVIDIA A100 GPU and 0.8 ms using an
+AMD EPYC 7543 32-Core CPU. This highlights that the routing step performed
+by RAGRoute adds negligible computational overhead and has an insignificant
+impact on the end-to-end query latency. Overall, these results show that the pre-
+retrieval routing in RAGRoute significantly alleviates the reranking bottleneck
+while adding almost no overhead. Our design enables scalable, low-latency fed-
+erated retrieval even when the number of data sources grows.
+4.4 Ablation study
+We conduct an ablation study to evaluate the contribution of different input
+features to the router’s performance on the MIRAGE and FeB4RAG bench-
+marks. Specifically, we train the router to predict relevance using the following
+combinations of features: (i) the query embedding and the centroid, (ii) the
+query embedding and the source-id, and (iii) all three features (Section 3.3).
+The query embedding must always be present as an input feature to be able
+to predict relevance for that query. Table 2 summarizes the results. The model
+trained with all three features achieves the highest recall on both the MIRAGE
+and FeB4RAG benchmarks, indicating that both the centroid and the source-id
+are important for effective routing. We also explored additional features such as
+the number of documents per source and the density around the centroid. How-
+ever, including these features did not lead to further performance improvements.
+5 Related work
+RAG with multiple data sources. FeB4RAG examines federated search
+within the RAG paradigm and focuses on optimizing resource selection and re-
+sult merging to enhance retrieval efficiency [39]. The underlying idea consists of
+introducing a dataset for federated search and incorporating LLM-based rele-
+vance judgments to benchmark resource selection strategies. Notably, the paper

@@ -1,0 +1,58 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+5.EffectsoffullFDstatisticsondevice-levelmodels
+As discussed in the previous section, the diffusion enhancement predicted by charge transport models based
+upon a full description of the charge carrier statistics (i.e. using a full FD statistical model) is often significant
+in the materials commonly employed as TLs for PSCs over the range of carrier densities relevant to device
+operation. In this section, we examine the effect that this more complete physical description of the TLs has
+on the predictions of both steady-state and time-dependent device behaviour. In order to do this, we
+augment the widely-used model of the three-layer planar PSC [2, 12, 13, 19–21, 39, 109], with a model of
+carrier transport in the TLs based upon full FD statistics (i.e. (20)–(21)), to account for the fact that carrier
+densities are sufficiently high that the standard Boltzmann approximation breaks down in these layers. We
+define the statistical integrals as SE in the conduction band of the ETL and as SH in the valence band of the
+HTL, and note that the minority carriers in the TLs (i.e. holes in the ETL and electrons in the HTL) typically
+occur at such low densities that they do not significantly affect device behaviour, and so can be neglected.
+Since only a single significant carrier species is modelled in each TL, we drop the subscripts c and v that
+distinguish between conduction and valence bands.
+The principle change to the standard device model, in which Boltzmann statistics are assumed accurate
+for all carriers, is that electron and hole current densities in the TLs are now computed with GERs,
+via (20)–(21), with an appropriate statistical model and material parameters. The changes to the statistical
+integrals also lead to minor alterations to the continuity and boundary conditions. These are described in
+more detail in [110] but the full drift–diffusion model solved here is also stated in appendix A.
+The numerical results presented here are obtained using a recently released version of the open-source
+PSC simulation software, IonMonger [18, 21, 110], which enables the user to simulate a variety of
+measurement protocols, including current–voltage sweeps and IS. Details of the numerical methods used for
+adapting the discretised, non-dimensional charge transport model to account for the GER can be found in
+[110], along with a discussion of the challenges of implementing statistical integrals, which are neither
+analytically invertible nor differentiable, without significantly impacting the computation time.
+The charge transport model of a PSC discussed here is too complex to easily predict how changes to the
+statistical models of the TLs affect the predictions of the cell’s response to particular experimental protocols,
+but appropriate numerical solutions to the model allow us to investigate these changes on a case by case
+basis. In particular, they offer insight into the scenarios in which the error made by assuming Boltzmann
+statistics (and correspondingly the CER) leads to significant error in the predicted device behaviour.
+In order to illustrate our hypotheses we compute solutions based on a representative data set for a
+TiO2/MAPI/Spiro-MeOTAD cell (given in tables 2 and 3 of appendix B), with TL DoS parameters taken from
+table 1. We note that, while we construct the parameter set using material parameters taken from
+independent measurements, simulations using our parameter set may exhibit differences from the behaviour
+of a real device of this form as a consequence of device construction (e.g. material deposition method and
+architecture). The device considered here is intended to be representative, and a full parameter sweep lies
+outside the scope of this work.
+5.1.Steady-stateperformance
+Here the effect of the Boltzmann approximation in the TLs on four key performance parameters is
+investigated by computing numerical solutions to the drift–diffusion device model.
+Steady-state results are shown in figures 5 and 6, in which direct comparison is made between the
+predictions of four key performance parameters (VOC, JSC, fill factor (FF), and PCE) obtained using full FD
+statistics in the TLs (i.e. the GER), and those obtained using the Boltzmann approximation (i.e. the CER).
+The short-circuit current (JSC) shows the least sensitivity to the change in the statistical model of the TL
+carriers, a consequence of the low carrier densities in the TLs at this low voltage. Conversely, the predicted
+open-circuit voltage (VOC) found using Boltzmann statistics is 9.43% greater than that found using the full
+statistical models of the TLs. This is a consequence of the Boltzmann approximation being far less accurate at
+open-circuit, where the large applied voltage leads to large carriers concentrations in the TLs. Combined
+with an increase in the FF, the increase in VOC leads the model based on the Boltzmann approximation to
+significantly overestimate the PCE of the cell (by a factor of 27.04%). As shown in figure 5, where simulations
+are compared to data from the Perovskite Database Project [79], the simulated steady-state performance
+parameters obtained using simulations based on full FD statistics in the TLs are more representative of the
+experimental results found in the literature than those predictions made using simulations based on
+Boltzmann statistics for this particular device configuration.
+The importance of these results lies in the fact that, owing to the difficulty in obtaining accurate estimates
+of material properties, many parameters are commonly fitted by comparing simulations to experiment, for
+13

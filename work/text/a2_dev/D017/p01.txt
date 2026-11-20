@@ -1,0 +1,92 @@
+BayesRAG: Probabilistic Mutual Evidence Corroboration for
+Multimodal Retrieval-Augmented Generation
+Xuan Li1, * Yining Wang2, * Haocai Luo1 Shengping Liu2
+Jerry Liang2 Ying Fu2 Weihuang2 Jun Yu2, † Junnan Zhu3, †
+1University of Science and Technology of China,
+2Unisound AI Technology Co.Ltd,
+3MAIS, Institute of Automation, Chinese Academy of Sciences
+harryjun@ustc.edu.cn, junnan.zhu@nlpr.ia.ac.cn
+Abstract
+Retrieval-Augmented Generation (RAG) has
+become a pivotal paradigm for Large Language
+Models (LLMs), yet current approaches strug-
+gle with visually rich documents by treating
+text and images as isolated retrieval targets. Ex-
+isting methods relying solely on cosine similar-
+ity often fail to capture the semantic reinforce-
+ment provided by cross-modal alignment and
+layout-induced coherence. To address these
+limitations, we propose BayesRAG, a novel
+multimodal retrieval framework grounded in
+Bayesian inference and Dempster-Shafer evi-
+dence theory. Unlike traditional approaches
+that rank candidates strictly by similarity,
+BayesRAG models the intrinsic consistency
+of retrieved candidates across modalities as
+probabilistic evidence to refine retrieval con-
+fidence. Specifically, our method computes the
+posterior association probability for combina-
+tions of multimodal retrieval results, prioritiz-
+ing text-image pairs that mutually corroborate
+each other in terms of both semantics and lay-
+out. Extensive experiments demonstrate that
+BayesRAG significantly outperforms state-of-
+the-art (SOTA) methods on challenging mul-
+timodal benchmarks. This study establishes
+a new paradigm for multimodal retrieval fu-
+sion that effectively resolves the isolation of
+heterogeneous modalities through an evidence
+fusion mechanism and enhances the robustness
+of retrieval outcomes. Our code is available at
+https://github.com/TioeAre/BayesRAG.
+1 Introduction
+RAG has fundamentally enhanced the generaliza-
+tion capabilities of LLMs by grounding them in
+external domain knowledge. However, real-world
+knowledge, ranging from academic papers to indus-
+trial reports, is predominantly presented in visually
+* Equal contribution.
+† Corresponding author.
+rich documents. In these documents, visual ele-
+ments such as charts and diagrams are not merely
+decorative add-ons, but are intrinsically intertwined
+with textual explanations to convey complex se-
+mantics. Consequently, relying solely on unimodal
+text retrieval is insufficient. Verifying the semantic
+consistency between visual and textual evidence is
+paramount for building robust RAG systems.
+In practice, RAG systems navigate vast repos-
+itories containing thousands of pages. While the
+advent of vision-language models has enabled mul-
+timodal retrieval, current SOTA approaches primar-
+ily focus on improving recall by expanding the Top-
+k window and performing a naive union of text and
+image retrieval results. We argue that this “bag-of-
+evidence” approach is fundamentally flawed. By
+treating modalities as independent channels and
+simply concatenating their representations, exist-
+ing methods fail to capture the critical semantic
+interaction between modalities. Specifically, they
+cannot distinguish whether a retrieved image and a
+text chunk are logically corroborated or merely sta-
+tistically similar (e.g., sharing common keywords
+but divergent contexts). This inability leads to a
+collection of high-similarity yet semantically dis-
+connected fragments, which introduces noise and
+confounds the downstream answer generator.
+To address modal disparity, some approaches
+employ Image-to-Text transduction or Knowledge
+Graphs (KGs) to unify information into a textual
+modality. However, these methods suffer from se-
+vere information and structural loss. Critical in-
+sights in knowledge-intensive domains are often
+encoded in non-textual formats that are “ineffable”,
+which is difficult to translate losslessly into de-
+scriptions (Lumer et al., 2025). Furthermore, these
+linearization processes remove document layout
+information (Xiang et al., 2025). We consider that
+document layout is not merely a stylistic choice
+but serves as an implicit logical navigation map
+designed by the author. Standard chunking strate-
+1
+arXiv:2601.07329v1  [cs.CL]  12 Jan 2026

@@ -1,0 +1,98 @@
+knowledge base for deployment. (ii) Given that wa-
+termarking may introduce some distortion to RAG,
+they may remove irrelevant, redundant, or low-
+quality content to eliminate potential watermark-
+bearing segments.
+Knowledge Alteration Attacks: Adversaries ap-
+ply (i) Paraphrasing Attacks (Kirchenbauer et al.,
+2023) to paraphrase the retrieved texts to distort
+the watermark signal and evade detection. Be-
+sides, they can (ii) substitute the synonyms in the
+retrieved content to compromise the watermark de-
+tection process.
+Knowledge Expansion Attacks: Adversaries can
+(i) expand the knowledge base with external or
+misleading content to interfere with watermark-
+triggered retrieval. Besides, they can just (ii) in-
+crease the proportion of non-watermarked informa-
+tion in the retrieved texts to dilute the watermark
+signal.
+RAG Setting Restrictions: Adversaries may con-
+figure RAG systems to optimize or constrain gen-
+eration. For instance, they might employ context
+compression techniques (Verma, 2024) to perform
+extraction, abstraction, or summarization. Alterna-
+tively, they could enforce rigid system prompts to
+regulate style and vocabulary, or explicitly prohibit
+the verbatim reproduction of retrieved text. Such
+configurations pose a significant risk of attenuating
+the watermark signal within the response.
+Reclaiming Attacks: Including Re-Watermarking
+and Watermark Forgery. The former embeds the
+adversary’s own watermark to falsely claim own-
+ership, while the latter exploits weaknesses in the
+watermarking scheme to fabricate watermarks from
+existing content, leading to misattribution of IP. Im-
+portantly, a watermarking scheme that fails to resist
+such attacks cannot offer reliable IP protection.
+B Generative Watermarking Algorithm
+B.1 Watermark Text Generation Algorithm
+Algorithm 1 is the pseudo-code of watermark
+knowledge text generation. Inputs are the con-
+structed prompt x, a watermark binary string W , a
+Bernoulli(0.5) pseudorandom sequence B, a secret
+key sk, a specific watermark prefix HT R, a modifi-
+cation factor δ, and the synonym clusters C (includ-
+ing the residual cluster for non-synonyms). Line 2
+first computes a seed by hashing the combination
+of sk, the previous token, and HT R. In Line 3-7,
+the seed globally partitions the clustered vocabu-
+lary to construct V1 and V0. Line 8 shuffles the W
+Algorithm 1 Watermark Text Generation
+Input: prompt x0, watermark string W , pseudo-
+random sequence B, secret key sk, watermark
+prefix HT R, modification factor δ, synonym
+clusters C (including the residual cluster for
+non-synonyms).
+Output: watermark text KTwm
+1: for each generation step s do
+2: seeds ← H(HT R, prev_token, sk).
+3: V1 ← ∅, V0 ← ∅.
+4: for each cluster Cj ∈ C do
+5: Randomly partition Cj into (Cj,1, Cj,0)
+by seeds, where |Cj,1| = |Cj |/2.
+6: V1 ← V1 ∪ Cj,1; V0 ← V0 ∪ Cj,0.
+7: end for
+8: W ← W ⊕ B
+9: Select a segment Wm from W by seeds.
+10: Select bit index p ← idx(Wm) by Eq. 3.
+11: w ← Wm[p] ∈ {0, 1}.
+12: Modify the probability distribution by Eq. 4
+to encode w into current token t.
+13: end for
+14: return KTwm.
+by B for pseudo-randomness and security of origi-
+nal W . Line 9 selects a segment Wm (m = seed
+mod M ) from W for watermarking. Line 10-11
+select a watermark bit w from Wm by Eq. 3 that
+the current token needs to carry. And then Lines 12
+generate the watermark token by Eq. 3 according
+to the w value. After this process, we can get the
+watermark knowledge text.
+In practice, we XOR a meaningful watermark
+W with the Bernoulli(0.5) pseudorandom sequence
+B to obtain the watermark binary string W i.i.d.
+Bernoulli(0.5) used for watermarking. This can pro-
+cedure a pseudorandom watermark string, which
+maintains a uniform token selection from V1 and
+V0 during generation while protecting the confiden-
+tiality of the watermark information.
+This algorithm is flexible, by setting the seg-
+ment bit-length to one allows each text to encode a
+single watermark bit, reducing capacity but enhanc-
+ing robustness. Or setting the watermark length
+to one yields a 1-bit scheme, which minimizes ca-
+pacity but significantly reduces both the required
+text infusion and the number of queries needed for
+watermark detection.
+21207

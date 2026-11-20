@@ -1,0 +1,98 @@
+method directly improves the model’s reasoning
+competence and generalization. To summarize, we
+make three contributions.
+1. We propose PRISMRAG, a fine-tuning ap-
+proach that teaches LLMs to be robust against
+retrieval noises, and to plan and rationalize for
+improved answer generation.
+2. We propose a training data generation frame-
+work that combines synthetic data generation
+with LLM-based verification, to generate high-
+quality training data in a scalable fashion.
+3. We conducted comprehensive empirical study
+on 12 benchmarks, showing that PRISMRAG
+improves over baseline by 5.4%, and outper-
+forms state-of-the-art solutions. As illustrated
+in Figure 1, PRISMRAG boosts factuality
+even when RAG recall plateaus, demonstrat-
+ing the model’s ability to effectively leverage
+additional references without being distracted
+by the extra context.
+2 Related Work
+Since the early breakthroughs in LLMs, RAG QA
+has emerged as a significant application area. This
+approach offers a streamlined alternative to tradi-
+tional web search and research for finding relevant
+answers (Lewis et al., 2020). Additionally, RAG
+QA systems facilitate the development of domain-
+specific applications, supporting use cases such
+as product user manuals, legal documents, or fi-
+nancial reports to name a few (Sadat et al., 2023;
+Hendrycks et al., 2021; Chen et al., 2021).
+RAG QA is an active area of research with
+multiple dimensions, including information re-
+trieval (Friel et al., 2024; Kachuee et al., 2025),
+LLM prompting (Asai et al., 2023; Semnani et al.,
+2023), LLM fine-tuning (Cai et al., 2024; Gekhman
+et al., 2024; Lin et al., 2024), evaluation (Yang
+et al., 2024), and guard-railing (Kim et al., 2024).
+More relevant to this work is the research on en-
+hancing the core capabilities of LLMs through fine-
+tuning, aimed at addressing task complexities. For
+instance, Fang et al. (2024) evaluated the impact
+of retrieval noise on the answer quality. They cat-
+egorized the noise into three types: irrelevant, rel-
+evant, and counterfactual. Their findings indicate
+that relevant and counterfactual noises are most
+detrimental. RobustRAG (Xiang et al.) is another
+example which proposed building robustness by an
+isolate-then-aggregate strategy.
+From another perspective, recent literature high-
+lights CoT reasoning as a powerful capability for
+enhancing the response quality. Reasoning helps
+decompose complex problems into smaller but
+more manageable parts, facilitating advanced con-
+textual understanding. The current CoT literature
+primarily focuses on reasoning for math, logic,
+and decision-making, while reasoning in RAG QA
+remains a less explored area (Wang and Zhou,
+2024; Zheng et al., 2023; Phan et al., 2023; Zhang
+et al., 2024b). Wang et al. (2025) proposed lever-
+aging multi-step reasoning to dynamically query,
+retrieve, and evaluate documents, thereby enhanc-
+ing retrieval processes. Zhang et al. (2024a) intro-
+duced retrieval augmented fine-tuning (RAFT) and
+showed the value of fine-tuning on the RAG QA
+task, especially for CoT style responses. Another
+example is LLMQuoter (Bezerra and Weigang,
+2025), a recent method that involves fine-tuning
+to produce quotes before generating the answer.
+3 Problem Definition
+We consider the problem of QA given a set of re-
+trieved documents. Specifically, we focus on en-
+hancing core capabilities of LLMs through fine-
+tuning to best leverage the internal knowledge,
+common sense, and reasoning capabilities in con-
+junction with a set of retrieved documents to pro-
+duce the most factual answers. Formally, given a
+question Q, LLM parameters θ, a set of retrieved
+documents D = {d1 . . . dn}, and any relevant con-
+textual information (e.g., user time and location)
+C, the generative model generates an answer A:
+A = G(Q, D, C|θ), (1)
+where G is used to represent the generative process.
+The objectives are: (i) to produce an answer that
+addresses the question while being grounded on in-
+formation present in D and C; (ii) to refrain from
+answering the question if the available knowledge
+and context do not provide sufficient information.
+4 Proposed Method
+In this section, we present our fine-tuning approach
+to enhance LLM’s answer generation capability in
+presence of retrieval noises. Our approach is based
+on two key intuitions. First, although LLMs in
+general can decide the relevancy between the ques-
+tion and retrieved content, they may make mistakes
+for nuances such as for events with different dates
+and locations. We can enhance this capability with
+776

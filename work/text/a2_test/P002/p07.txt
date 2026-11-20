@@ -1,0 +1,90 @@
+CG-RAG: Research Question Answering by Citation Graph Retrieval-Augmented LLMs Conference acronym ’XX, June 03–05, 2018, Woodstock, NY
+Table 2: Evaluation of the retrieval-augmented research question answering. The best performance is highlighted in BOLD,
+while the second-best performance is underlined. Performance of our methods is highlighted .
+PapersWithCodeQA PubMedQA
+Category Method Acc 𝐹1 MRR Hit@1 Coherence Consistency Relevance Acc 𝐹1
+Sparse
+BM25 0.689 0.617 0.765 0.736 0.905 0.858 0.859 0.662 0.604
+Doc2Query 0.705 0.629 0.748 0.731 0.914 0.833 0.852 0.684 0.614
+BGE-M3 0.751 0.648 0.810 0.787 0.934 0.876 0.863 0.722 0.644
+Dense
+MiniLM 0.730 0.644 0.782 0.758 0.919 0.872 0.828 0.712 0.641
+LaBSE 0.591 0.552 0.677 0.643 0.875 0.545 0.616 0.403 0.396
+mContriever 0.523 0.531 0.647 0.613 0.863 0.469 0.438 0.288 0.271
+E5 0.579 0.560 0.659 0.628 0.872 0.521 0.544 0.363 0.360
+SPAR 0.611 0.583 0.643 0.609 0.886 0.549 0.537 0.392 0.384
+Hybrid
+Score Fusion 0.739 0.656 0.774 0.749 0.908 0.891 0.887 0.674 0.613
+ColBERT 0.769 0.661 0.827 0.778 0.927 0.884 0.874 0.724 0.642
+CLEAR 0.618 0.575 0.667 0.643 0.894 0.623 0.685 0.468 0.456
+LeSeGR (Ours) 0.835 0.703 0.884 0.827 0.956 0.921 0.914 0.778 0.685
+attention heads and a hidden dimension size of 1024. The maximum
+chunk length is set to 8,192 tokens. Training is conducted using
+CrossEntropy, with 10% of the samples labeled with gold-standard
+retrieval, and optimized using the AdamW optimizer [23]. The rele-
+vance scoring function for both dense and sparse representations is
+dot product. For generation, GPT-4 is employed through the Ope-
+nAI API, specifically leveraging the gpt-4o-2024-05-13 model
+version.
+Baseline methods. To evaluate the proposed graph-contextualized
+retrieval method, we benchmark it against several state-of-the-art
+baselines renowned for their effectiveness in the retrieval phase
+across various RAG systems. These retrieval techniques are catego-
+rized into three groups: sparse retrieval, dense retrieval, and hybrid
+retrieval.
+• Sparse Retrieval: BM25 [31], an advanced refinement of TF-IDF
+[32], enhances relevance scoring by incorporating probabilistic
+modeling, term saturation, and document length normalization,
+providing robust performance in keyword-based retrieval tasks.
+Doc2Query [28] improves sparse retrieval by generating synthetic
+queries for documents using a pre-trained language model (PLM).
+BGE-M3 [3] utilizes a multi-vector architecture to create robust
+representations, integrating contrastive learning and knowledge
+distillation techniques.
+• Dense Retrieval: MiniLM [41] is a lightweight transformer
+model that uses deep self-attention distillation to create dense em-
+beddings. LaBSE [7] is a bilingual embedding model, leveraging
+dual encoders and a large-scale parallel corpus to ensure semantic
+alignment across languages. mContriever [14] employs unsuper-
+vised contrastive learning to train dense retrievers, focusing on
+encoding diverse and nuanced contextual information. E5 [40]
+optimizes embeddings for text retrieval by integrating explicit
+supervision from retrieval datasets and task-specific fine-tuning.
+SPAR [4] employs salient phrase representation learning to bridge
+dense and sparse retrieval, utilizing a dual encoder architecture
+that explicitly models both phrase-level and document-level se-
+mantics.
+• Hybrid Retrieval: ScoreFusion [19] combines the output scores
+of sparse and dense retrieval models to produce a unified ranking.
+ColBERT [17] introduces late interaction to compute pairwise
+term similarities between query and document embeddings, en-
+abling efficient and fine-grained integration of sparse and dense
+signals. CLEAR [8] employs a residual learning framework to
+combine sparse and dense representations, ensuring complemen-
+tary signals are utilized for improved retrieval performance.
+5.2 Main Results
+Our proposed Contextualized Graph Retrieval-Augmented Genera-
+tion with LeSeGR achieves state-of-the-art performance across all
+tasks and datasets, as shown in Table 2. For true/false questions,
+LeSeGR significantly surpasses sparse, dense, and hybrid baselines
+in both accuracy (Acc) and 𝐹1 scores, demonstrating its capability
+to effectively capture domain-specific terms and semantic nuances.
+Hybrid methods such as ScoreFusion combine sparse and dense
+signals but fail to achieve the deeper integration of retrieval sig-
+nals offered by LeSeGR. Through its graph-structured integration,
+LeSeGR dynamically propagates and entangles retrieval signals
+from contextual information, fully leveraging the relationships em-
+bedded in the graph structure. This advanced integration translates
+to superior performance, particularly in metrics such as MRR and
+Hit@1.
+In generative tasks, our method demonstrates significant im-
+provement in Coherence, Consistency, and Relevance by leveraging
+its entangled sparse-dense representation and graph-based con-
+textualization. Unlike hybrid baselines such as ColBERT, which
+emphasizes token-level interactions but overlooks graph-level rela-
+tionships, LeSeGR’s graph encoder dynamically aggregates signals
+across interconnected chunks. This enhances contextual under-
+standing, enabling high-quality and contextually rich text gener-
+ation. For instance, LeSeGR achieves a Coherence score of 0.956
+on PapersWithCodeQA, outperforming ColBERT’s 0.927. These
+results underscore the unique strengths of LeSeGR in effectively

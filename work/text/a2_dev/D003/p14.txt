@@ -1,0 +1,54 @@
+Here’s a learning strategy.
+{strategy}
+Apply this strategy to the document “{doc_name}” of {company}.
+Output: {generated_text}
+Table 3: Example data format for synthetic training data with metadata. This is an example of using FinanceBench
+matadata.
+### Question
+{question}
+### Choices
+{options}
+Choose the best answer from the following options after thinking step by step.
+There is only one correct choice.
+Your answer format should be like this:
+Explanation: [your explanation]
+Answer: [your answer (only one letter, A, B, C, D, or E)]
+Table 4: Prompt template used for multiple-choice QA evaluation. This is used for QuaLITY and LongHealth.
+0
+
+
+0
+
+
+*)"	 '/#
+
+*)"	 '/#
+
+0
+
+
+0
+
+
+*)"	 '/#
+
+*)"	 '/#
+
+ƭǟƬƬ ƬǟƭƵ ƬǟƵƱ ƬǟƭƲ
+ƬǟƭƵ ƭǟƬƬ Ƭǟƭƴ ƬǟƳƱ
+ƬǟƵƱ Ƭǟƭƴ ƭǟƬƬ ƬǟƭƵ
+ƬǟƭƲ ƬǟƳƱ ƬǟƭƵ ƭǟƬƬ
+-$ )/$($'-$/4 /2  )/. /.
+ƬǟƬ
+ƬǟƮ
+Ƭǟư
+ƬǟƲ
+Ƭǟƴ
+ƭǟƬ
+*.$) $($'-$/4
+Figure 9: Average gradient similarity between datasets. We compute gradient embeddings for each data point and
+use cosine similarity between embeddings to measure the similarity of gradients across datasets. (1) QA examples
+from different datasets exhibit high gradient similarity (≥ 0.94), whereas QA examples and documents (AR) from
+different datasets show low gradient similarity (≤ 0.25). (2) Even QA and documents from the same dataset do not
+exhibit high gradient similarity (≤ 0.26).
+9206

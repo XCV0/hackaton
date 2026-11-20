@@ -1,0 +1,125 @@
+Wang et al. 2024 | https://doi.org/10.34133/research.0332 5
+of Spiro-OMeTAD and SF-MPA-MCz on the fluorine-doped 
+tin oxide (FTO) exhibit low root-mean-square roughness 
+(RRMS) values, which means that both HTMs can form smooth 
+film surfaces (Fig. S9A and B). Meanwhile, the film morphology 
+spin-coating on the perovskite is investigated (Fig. S9C and D). 
+Although both HTMs show similar RRMS, the pin-holes distrib-
+uted on Spiro-OMeTAD can be clearly observed, which may 
+mitigate the hole transport ability, while SF-MPA-MCz can still 
+exhibit pin-hole free film. Further, the molecular ordering of both 
+HTMs in bulk thin films was studied by two-dimensional (2D) 
+grazing incidence wide-angle x-ray scattering (2D-GIWAXS) 
+(Fig. S10). As can be seen from the diffraction patterns, both 
+HTMs exhibit strong circular diffraction signals without any 
+preferential orientation, indicating the amorphous nature of 
+their thin films. However, it is worth noting that after the 
+annealing process, the π-π stacking distance of SF-MPA-MCz 
+is reduced from 4.90 Å to 4.85 Å, while nearly no change is 
+observed for Spiro-OMeTAD, which suggests that SF-MPA-
+MCz tends to arrange more ordered molecular stacking in film 
+state and is likely to form dense and stable films (Table S2). 
+The contact angle measurements reveal that SF-MPA-MCz has 
+a higher water contact angle of 86.5° than Spiro-OMeTAD 
+(77.5°) (Fig. S11), which may be due to the more compact film 
+of SF-MPA-MCz considering the same surface groups of both 
+HTMs. Encouragingly, such uniform and dense film morphol-
+ogy of SF-MPA-MCz can facilitate hole mobility, as shown in 
+space charge-limited current (SCLC) measurements (Fig. S12B). 
+The hole mobility of pristine SF-MPA-MCz film is evaluated 
+to be 4.5 × 10−5 cm2 V−1 s−1, higher than Spiro-OMeTAD 
+(2.1 × 10−5 cm2 V−1 s−1). Accordingly, the trap-state densities of 
+the hole-only devices based on Spiro-OMeTAD and SF-MPA-
+MCz were estimated to be 1.32 × 1017 cm−3 and 1.005 × 1017 cm−3, 
+respectively (Fig. S12A). The reduced trap-state density of 
+SF-MPA-MCz-based device indicates that SF-MPA-MCz can 
+effectively passivate the defects on the perovskite surface, thus 
+reducing the recombination losses during charge transfer.
+Theoretical studies
+To have an in-depth insight into the varied electronic properties 
+and intermolecular interactions of two HTMs, the theoretical 
+calculations based on density functional theory (DFT) and time-
+dependent DFT (TD-DFT) were performed at the B3LYP/6-31 
+(d) level. As exhibited in Fig. S13, the HOMOs of Spiro-OMeTAD 
+are delocalized over the whole molecule, and the lowest unoc-
+cupied molecular orbitals (LUMOs) are mainly located on the 
+spirobifluorene core, consistent with the previous report [23]. 
+By contrast, the discrete energy level distributions can be found 
+for SF-MPA-MCz, with the HOMOs concentrated at the half of 
+spirobifluorene having flanking diphenylamine units and the 
+LUMOs distributed on the other half of spirobifluorene (Fig. 2F 
+and G). We assume that the distinct energy level distributions 
+of two HTMs originated from the anisotropic regulation strat-
+egy established here. The calculated HOMO/LUMO energy 
+levels of Spiro-OMeTAD and SF-MPA-MCz are −5.43/0.09 eV 
+and −5.57/−0.36 eV (Table S3), respectively, which are in good 
+agreement with the experimental results. The images of the elec-
+trostatic potential surface (EPS) show that dominant-negative 
+charges are concentrated on carbazole units as well as the sub-
+stituted methoxy groups for SF-MPA-MCz (Fig. 2H), which may 
+promote the electronic interactions between HTM and perovskite 
+layer as will be confirmed later. The calculated exciton binding 
+energy for SF-MPA-MCz (1.59 eV) is lower than Spiro-OMeTAD 
+(1.88 eV), suggesting that electron-hole pairs are easier to dis-
+sociate into hole carriers for SF-MPA-MCz [28].
+To clarify the intermolecular noncovalent interactions in 
+the solid state, four types of dimers from the single-crystal 
+structure of each HTM were extracted and not constructed 
+arbitrarily (Fig. S14). By quantifying the total interaction 
+energy (Eint) of each dimer and adding them up, we found that 
+SF-MPA-MCz possesses stronger intermolecular interactions 
+than Spiro-OMeTAD, as observed in the ultraviolet–visible 
+(UV–vis) absorption testing. Because of single-crystal struc-
+tures, we further calculate the hole-transfer integral (V) and 
+reorganization energy (λ) based on the same four dimers to 
+provide insights into the intrinsic hole mobilities of HTMs. 
+As depicted in Fig. S15 and Table S3, the total transfer integral 
+of SF-MPA-MCz (31.83 meV) is twofold higher than Spiro-
+OMeTAD (15.68 meV), and the λ  value of SF-MPA-MCz 
+(400 meV) is smaller than Spiro-OMeTAD (410 meV). This 
+indicates that SF-MPA-MCz features a higher hole transport 
+capacity than Spiro-OMeTAD, which has been confirmed by 
+the SCLC results.
+Importantly, the interfacial interactions between HTMs and 
+perovskite were also simulated by docking each HTM on the 
+model of the perovskite surface (Fig. S16). Clearly, SF-MPA-MCz 
+shows strong interfacial coupling with the perovskite surface via 
+two methoxy groups on the rigid carbazole unit. In contrast, 
+only one methoxy group of Spiro-OMeTAD can interact with 
+perovskite due to the flexible nature of the diphenylamine unit. 
+Therefore, the adsorption energy of SF-MPA-MCz (0.76 kcal/
+mol) was calculated to be higher than Spiro-OMeTAD (0.3 kcal/
+mol), which may be beneficial for underpinning interfacial adhe-
+sion and defect passivation as will be confirmed later.
+Photovoltaic performance and interfacial properties
+To explore the potential of de novo designed HTM SF-MPA-
+MCz in PSCs, the classical device configuration of FTO/TiO2/
+PVK/HTM/Au was adopted using Spiro-OMeTAD as con-
+trol (Fig. 3A). After a series of optimization conditions, 
+the SF-MPA-MCz-based device achieved a remarkably high 
+PCE of 24.53% with JSC of 26.24 mA cm−2, VOC of 1.18 V, and 
+FF of 79.22%, showing an all-round enhancement in photo-
+voltaic parameters compared to 22.95% PCE of Spiro-OMeTAD-
+based device (JSC of 25.51 mA cm−2, VOC of 1.15 V, and FF of 
+78.2%) (Table 2). Moreover, SF-MPA-MCz shows a smaller 
+hysteresis index and better device reproducibility than Spiro-
+OMeTAD (Fig. 3B). To accurately compare the PCE differ -
+ences between SF-MPA-MCz and Spiro-OMeTAD-based PSCs 
+(20 cells), the Z score was calculated according to the equation 
+Z = (η1 − η0)/(σ1/
+√
+N). The obtained Z score is 141.28, accom-
+panied by a P value far less than 0.001, which means that the 
+difference of PCE based on each HTM is extremely significant 
+as presented in (Fig. 3D), and the corresponding photovoltaic 
+parameters (VOC, JSC, FF) also exhibit all-round enhancement 
+as presented in Fig. S17. The external quantum efficiency 
+(EQE) spectra shown in Fig. 3C suggest that the integrated 
+photocurrent densities (25.41 and 25.73 mA cm−2 for Spiro-
+OMeTAD and SF-MPA-MCz, respectively) agree well with 
+those shown in the J–V curves. To confirm the accuracy of 
+device PCEs, the maximum power point (MPP) tracking mea-
+surement was implemented (Fig. 3E). The SF-MPA-MCz-based 
+device features a steady-state photocurrent and a stabilized 
+power output for 200 s in MPP tracking, showing a stabilized 
+Downloaded from https://spj.science.org on November 19, 2026

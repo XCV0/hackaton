@@ -1,0 +1,85 @@
+Quantiﬁcation of Efﬁciency Losses Due to Mobile Ions in
+Perovskite Solar Cells via Fast Hysteresis Measurements
+Vincent M. Le Corre,* Jonas Diekmann, Francisco Pe˜na-Camargo, Jarla Thiesbrummel,
+Nurlan Tokmoldin, Emilio Gutierrez-Partida, Karol Pawel Peters, Lorena Perdigón-Toro,
+Moritz H. Futscher, Felix Lang, Jonathan Warby, Henry J. Snaith, Dieter Neher,
+and Martin Stolterfoht*
+1. Introduction
+Ionic motion in metal halide perovskites (MHPs) is one of the
+key challenges that needs to be overcome for perovskite solar
+cells (PSCs) to reach their full potential. In particular, ion
+migration has been shown to be the domi-
+nant contribution to the hysteresis that is
+often observed in the current–voltage char-
+acteristics ( JVs) of PSCs and is also thought
+to contribute to their instability. Many pre-
+vious studies have focused their efforts not
+only on explaining the origin of JV hyster-
+esis but also on setting up consistent JV
+measurement procedures to calculate and
+report efﬁciencies in a fair and consistent
+way.[1] In fact, many early reports on
+PSCs may have reported overestimated efﬁ-
+ciencies by using a favorable scan direction,
+speed, and pre-biasing. The origin of the
+hysteresis feature has also been thoroughly
+investigated using drift-diffusion simula-
+tions showing that the appearance of hys-
+teresis is the result of ionic motion
+combined with nonradiative recombina-
+tion, especially when the recombination
+happens at the interfaces between the
+perovskite and the transport layers.[2–7]
+Experimentally, JV hysteresis has been
+widely studied and assessed in perovskite
+solar cells; and while there are many
+reports of reducing JV hysteresis through: 1) compositional
+engineering of the perovskite absorber[8–14] or dimensionality
+reduction,[15–19] and 2) interfacial modiﬁcation by surface
+passivation,[20–23] or 3) modiﬁcation/substitution of the charge
+selective transport layers, it cannot be mitigated completely.[24–26]
+V. M. Le Corre, J. Diekmann, F. Pe˜na-Camargo, N. Tokmoldin,
+E. Gutierrez-Partida, K. P. Peters, L. Perdigón-Toro, F. Lang, J. Warby,
+D. Neher, M. Stolterfoht
+Institute of Physics and Astronomy
+University of Potsdam
+14476 Potsdam-Golm, Germany
+E-mail: lecorre@uni-potsdam.de; stolterf@uni-potsdam.de
+The ORCID identiﬁcation number(s) for the author(s) of this article
+can be found under https://doi.org/10.1002/solr.202100772.
+© 2021 The Authors. Solar RRL published by Wiley-VCH GmbH. This is an
+open access article under the terms of the Creative Commons Attribution-
+NonCommercial License, which permits use, distribution and
+reproduction in any medium, provided the original work is properly
+cited and is not used for commercial purposes.
+DOI: 10.1002/solr.202100772
+J. Thiesbrummel, H. J. Snaith
+Clarendon Laboratory
+Department of Physics
+University of Oxford
+Oxford OX1 3PU, UK
+M. H. Futscher
+Center for Nanophotonics
+AMOLF
+1098 XG Amsterdam, The Netherlands
+Perovskite semiconductors differ from most inorganic and organic semicon-
+ductors due to the presence of mobile ions in the material. Although the phe-
+nomenon is intensively investigated, important questions such as the exact
+impact of the mobile ions on the steady-state power conversion efﬁciency (PCE)
+and stability remain. Herein, a simple method is proposed to estimate the
+efﬁciency loss due to mobile ions via “fast-hysteresis” measurements by pre-
+venting the perturbation of mobile ions out of their equilibrium position at fast
+scan speeds (/C251000 V s/C01). The “ion-free” PCE is between 1% and 3% higher
+than the steady-state PCE, demonstrating the importance of ion-induced losses,
+even in cells with low levels of hysteresis at typical scan speeds (/C25100 mV s/C01).
+The hysteresis over many orders of magnitude in scan speed provides important
+information on the effective ion diffusion constant from the peak hysteresis
+position. The fast-hysteresis measurements are corroborated by transient charge
+extraction and capacitance measurements and numerical simulations, which
+conﬁrm the experimental ﬁndings and provide important insights into the charge
+carrier dynamics. The proposed method to quantify PCE losses due to ﬁeld
+screening induced by mobile ions clariﬁes several important experimental
+observations and opens up a large range of future experiments.
+RESEARCH ARTICLE
+www.solar-rrl.com
+Sol. RRL 2022, 6, 2100772 2100772 (1 of 10) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH

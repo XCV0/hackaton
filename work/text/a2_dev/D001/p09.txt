@@ -1,0 +1,103 @@
+5 Conclusion
+In this paper, we propose ThreadRAG to tackle
+complex multi-hop reasoning challenges. Thread-
+RAG integrates a Semantic Topology Graph (STG)
+for knowledge structuring and a Modality-Aligned
+Reasoning Mechanism via Energy-Driven pathfind-
+ing. As a core contribution, ThreadRAG linearizes
+discrete graph structures into continuous natural
+language sequences, effectively bridging the modal-
+ity gap and preserving crucial narrative context.
+Extensive experimental results demonstrate that
+ThreadRAG achieves superior performance across
+multiple benchmarks, surpassing existing state-of-
+the-art baselines with low computational overhead.
+Limitations
+Our work has limitations in certain scenarios. First,
+ThreadRAG relies on capturing structural priors
+through narrative, semantic, and lexical edges, so
+its performance improvement may not be signifi-
+cant in tasks with extremely sparse document links
+or where cross-document evidence chains are virtu-
+ally non-existent, such as single-document standard
+QA tasks. Additionally, due to the dynamic nature
+of text segmentation and the complexity of multi-
+hop paths, even after energy diffusion and graph
+pruning, there may still be a few long-range contex-
+tual dependencies that the pathfinding mechanism
+fails to perfectly linearize in the exact chronologi-
+cal or logical order. This could result in minor nar-
+rative fragmentation during prompt reconstruction,
+affecting the reasoning accuracy of downstream
+LLMs. In future work, we aim to address these two
+issues. We plan to explore whether the model can
+effectively optimize the topological path selection
+and conduct a more fine-grained alignment of nar-
+rative flows to further enhance the effectiveness of
+LLM prompts.
+Ethics Statement
+This work uses only publicly available benchmark
+datasets, including HotpotQA, 2WikiMultihopQA,
+and MuSiQue, and does not involve the collection
+of personally identifiable or sensitive information,
+human-subject experiments, or user studies. All
+datasets and pretrained models are used solely for
+academic research and evaluation purposes in ac-
+cordance with their intended licenses and usage
+conditions.
+References
+Ming Ding, Chang Zhou, Qibin Chen, Hongxia Yang,
+and Jie Tang. 2019. Cognitive graph for multi-hop
+reading comprehension at scale. In Proceedings of
+the 57th annual meeting of the association for com-
+putational linguistics, pages 2694–2703.
+Darren Edge, Ha Trinh, Newman Cheng, Joshua
+Bradley, Alex Chao, Apurva Mody, Steven Truitt,
+Dasha Metropolitansky, Robert Osazuwa Ness, and
+Jonathan Larson. 2024. From local to global: A
+graph rag approach to query-focused summarization.
+arXiv preprint arXiv:2404.16130.
+Yuwei Fang, Siqi Sun, Zhe Gan, Rohit Pillai, Shuohang
+Wang, and Jingjing Liu. 2020. Hierarchical graph
+network for multi-hop question answering. In Pro-
+ceedings of the 2020 conference on empirical meth-
+ods in natural language processing (EMNLP), pages
+8823–8838.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Meng Wang,
+and Haofen Wang. 2023. Retrieval-augmented gen-
+eration for large language models: A survey. arXiv
+preprint arXiv:2312.10997, 2(1):32.
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri,
+Abhinav Pandey, Abhishek Kadian, Ahmad Al-
+Dahle, Aiesha Letman, Akhil Mathur, Alan Schel-
+ten, Alex Vaughan, Amy Yang, Angela Fan, Anirudh
+Goyal, Anthony Hartshorn, Aobo Yang, Archi Mi-
+tra, Archie Sravankumar, Artem Korenev, Arthur
+Hinsvark, and 542 others. 2024. The llama 3 herd of
+models. arXiv preprint arXiv:2407.21783.
+Zirui Guo, Lianghao Xia, Yanhua Yu, Tian Ao, and
+Chao Huang. 2024. Lightrag: Simple and fast
+retrieval-augmented generation. arXiv preprint
+arXiv:2410.05779, 2(3).
+Bernal J Gutiérrez, Yiheng Shu, Yu Gu, Michihiro Ya-
+sunaga, and Yu Su. 2024. Hipporag: Neurobiologi-
+cally inspired long-term memory for large language
+models. Advances in neural information processing
+systems, 37:59532–59569.
+Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara,
+and Akiko Aizawa. 2020. Constructing a multi-hop
+qa dataset for comprehensive evaluation of reasoning
+steps. In Proceedings of the 28th International Con-
+ference on Computational Linguistics, pages 6609–
+6625.
+Gautier Izacard, Patrick Lewis, Maria Lomeli, Lu-
+cas Hosseini, Fabio Petroni, Timo Schick, Jane
+Dwivedi-Yu, Armand Joulin, Sebastian Riedel, and
+Edouard Grave. 2022. Few-shot learning with re-
+trieval augmented language models. arXiv preprint
+arXiv:2208.03299, 1(2):4.
+Sungho Ko, Hyunjin Cho, Hyungjoo Chae, Jinyoung
+Yeo, and Dongha Lee. 2024. Evidence-focused fact
+summarization for knowledge-augmented zero-shot
+49899

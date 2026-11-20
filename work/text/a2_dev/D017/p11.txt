@@ -1,0 +1,93 @@
+A Implementation of Bayesian inference
+A.1 Likelihood Estimation via
+Dempster-Shafer Theory
+In this appendix, we detail the calculation of
+the likelihood term P (Q|E), which represents
+the semantic support of the evidence tuple E =
+(etxt, eimg , escreenshot) for the query Q. Our im-
+plementation utilizes Dempster-Shafer Theory to
+robustly fuse heterogeneous retrieval scores and
+explicitly model uncertainty.
+A.1.1 Score Normalization and Sharpening
+Since retrieval scores from different embedding
+models (e.g., dense text embeddings vs. visual em-
+beddings) often inhabit different numerical ranges,
+direct combination is infeasible. We first apply a
+normalization function to map raw scores into a
+probabilistic interval [0, 1].
+For a raw score s from modality i, given the
+empirically observed maximum (smax) and mini-
+mum (smin) scores for that modality, the normal-
+ized score ˜si is computed as:
+˜si = s − smin smax − smin (5)
+A.1.2 Mass Function Construction
+We define the Frame of Discernment as Θ = Y, N ,
+representing whether the evidence is “Relevant”
+(Y ) or “Irrelevant” (N ). For each normalized score
+˜si, we construct a Basic Probability Assignment,
+denoted as mass function mi(·), based on hyper-
+parameters α and β (representing our trust in the
+retriever’s positive and negative capabilities):
+mi(Y ) = α · ˜si (6)
+mi(N ) = β · (1 − ˜si) (7)
+mi(Ω) = 1 − mi(Y ) − mi(N ) (8)
+Here, mi(Ω) represents the uncertainty (or igno-
+rance) remaining after observing the score. We
+enforce mi(Ω) ≥ 0 by clipping. Based on exper-
+imental experience, we fix α = 0.7 and β = 0.6,
+respectively, for all experiments.
+A.1.3 Recursive Evidence Combination
+To fuse evidence from multiple sources (Text, Im-
+age, Screenshot), we apply Dempster’s Rule of
+Combination recursively. Let mcurr be the ac-
+cumulated mass and mnew be the mass of the
+next incoming modality. The combined mass
+mcomb = mcurr ⊕ mnew is calculated as follows:
+First, we compute the conflict coefficient K,
+which measures the degree of contradiction be-
+tween the two evidence sources:
+K =mcurr(Y ) · mnew(N )+
+mcurr(N ) · mnew(Y ) (9)
+If K → 1 (e.g., K ≥ 0.9), indicating extreme
+conflict (one source is certain it’s relevant, the other
+certain it’s not), we forcefully set the likelihood to
+0. Otherwise, we proceed with the update rules:
+mcomb(H) =
+P
+X∩Z=H mcurr(X) · mnew(Z)
+1 − K ,
+∀H ∈ Y, N, Ω
+(10)
+Specifically for our binary frame, the update logic
+for the relevant hypothesis Y is:
+mcomb(Y ) = 1 1 − K  mcurr(Y ) · mnew(Y )
++ mcurr(Y ) · mnew(Ω)
++ mcurr(Ω) · mnew(Y )
+
+(11)
+A.1.4 Final Score
+After fusing all evidence sources, we obtain the
+final mass distribution mf inal. To convert this be-
+lief function into a probability measure suitable
+for ranking (i.e., P (Q|E)), we apply the Pignistic
+Probability Transformation, which distributes the
+uncertainty mass Ω equally among the singleton
+hypotheses:
+P (Q|E) ≈ BetP(Y ) = mf inal(Y )+
+mf inal(Ω)
+2
+(12)
+This final score reflects the aggregated semantic
+likelihood, accounting for both the strength of indi-
+vidual matches and the consistency across modali-
+ties.
+We provide the pseudocode for the likelihood
+estimation process P (Q|E) in Algorithm 1.
+A.2 Implementation of Priors
+We detail the exact algorithms used to compute
+the structural prior P (E) for both document layout
+and knowledge graph scenarios. The prior P (E)
+measures the intrinsic coherence of an evidence
+tuple E = (etxt, eimg , escreenshot) derived from
+geometric or semantic constraints.
+11

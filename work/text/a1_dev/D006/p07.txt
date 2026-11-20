@@ -1,0 +1,132 @@
+preserving high voltage.62,63 Notably, the IB solar cells can
+exceedthesinglegapsolarcellefficiencylimitbyaround50%
+underonesunillumination.64Therearevariouswaystorealize
+an IB, such as high concentrations of impurities,65 hetero-
+interfaces,66 and quantum dot.67 Nevertheless, so far, no
+technical implementations have benefited from the IB
+concept.68 The bottleneck of IB solar cells is low photon
+absorptionandhighNAcouplingbetweenIBsandbandedge
+states.AlthoughmostIBsenhancephotonabsorption,theIBs
+assistednonradiativechargerecombinationisalsosignificantly
+enhanced.Theproposedgeneralconceptofdynamicdefectis
+a promising solution to overcome the current bottleneck in
+IBs, since dynamic defects extend photoabsorption and
+preserve low nonradiative recombination, conferring the
+dynamic defect concept with a great potential as a novel
+absorber of future IB solar cells. Recent experiments have
+demonstratedefficientenergyupconversionofupto220meV
+inMHPs,exceedingthethermalenergybynearlyanorderof
+magnitude.69 It is feasible that defects contribute to the
+observedphenomenon.
+To conclude, we demonstrated a new mechanism to
+enhance sub-bandgap photon harvesting and energy upcon-
+versionbynovelcovalentdefectengineeringwithasuppressed
+nonradiativeenergyloss.Taking α-CsPbI3 asaprototype,we
+have investigated the e-h recombination dynamics of the
+pristine system and in the presence of native point-defects
+using state-of-the-art ab initio quantum dynamics simulation.
+First, the energy levels of dynamic defects fluctuate
+significantly between shallow and deep states at ambient
+conditions,becausethermalphononssignificantlyinfluencethe
+electronicstructure.Second,althoughtheelectronicproperties
+associatedwiththedefectstatesaredistinctinthesesystems,
+we have not observed notable acceleration of charge
+recombination,evenforthedeepdefects.Ouranalysesshow
+that the strong defect tolerance in α-CsPbI3 is due to the
+softness of the inorganic lattice and its low-frequency
+anharmonicphonons. For defects,the coordination oflattice
+deformationandstrongcovalentbondssignificantlyreducethe
+overlapbetweenthetrappedandfreechargesinvolvedinthe
+recombination,preventingthedefectsfromactingasefficient
+chargerecombinationcenters.Third,thedeeplevelscanactas
+IBs for effective sub-bandgap absorption, which allows
+absorbing two sub-bandgap phonons sequentially. Sub-
+bandgap absorption assisted by IBs raises photocurrent and
+preserveshighvoltage.67Inaddition,thedynamicnatureofthe
+defect level facilitates light absorption over a broad energy
+range. The long lifetime of the trapped carriers is also
+beneficialtoopticalabsorptionfromtheIBtothemainbands.
+Fourthly,weestablishthatbothopticalandthermalexcitation
+are efficient pathways for carriers detrapping from the trap
+statestothebandedgesandenhancingtheirmobility.Finally,
+weproposethatwithpropercontrolofthedefect-inducede-h
+recombination, the IBs arising from the dynamic defects can
+help to exceed the SQ efficiency limit and achieve defect-
+mediated upconversion of thermal energy to current. We
+suggestthattheestablishedfeaturesofthedynamicdefectsare
+applicabletoMHPsingeneralandpossiblytootherclassesof
+materials.
+■METHODS
+WeemployabinitioNAMDsimulationstocalculatethenonradiative
+e-hrecombinationinthepresenceofthedefects.TheabinitioNAMD
+simulationsareperformedusingtheHefei-NAMDcode70 withinthe
+real-timetime-dependentdensityfunctionaltheoryframework.71 We
+use VASP72−74 to optimize the structure, obtain room temperature
+(300K)nucleartrajectories,andextracttheKohn−Shamorbitalsthat
+areneededtocomputetheNACfortheNAMDsimulations.A2 × 2
+× 2supercellof α phaseCsPbI3 isemployed.Additionally,alarger
+2√2 × 2√2 × 4supercellisutilizedtoassessfinite-sizeeffects.The
+Perdew−Burke−Ernzerhof (PBE) exchange-correlation functional75
+is employed for the majority of the calculations. To validate the
+proposed dynamic defect, we also employ the Heyd−Scuseria−
+Ernzerhof (HSE06) functional,74 incorporating spin−orbit coupling
+effects.Weusea3 × 3 × 1k-pointmeshtosampletheBrillouinzone
+inthegeometryoptimization,MD,andstaticcalculations,whilethe
+G-pointisusedtoperformNAMD.TheNACiscalculatedusingthe
+CAnaccodewithphasecorrection.76−78 Theabsorptionspectraare
+calculated using the standard expression for the oscillator strength
+thatdependsonthetransitiondipolemomentandtransitionenergy,
+shownintheSupportingInformation.Itisimportanttonotethatthe
+defect concentration accessible in ab initio NAMD calculations is
+typically higher than in experiments. In order to reduce the defect
+density, one can employ machine learning based calculations79 or
+scalinglaws.80
+■ASSOCIATED CONTENT
+*sı Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acs.chemmater.4c02530.
+Calculationofabsorptionspectrum;evolutionoftheCsI
+defectlevelobtainedwithahybridfunctionalincluding
+spin−orbit coupling, and in a larger simulation cell;
+chargedensitiesofbandedgeanddefectlevels;electron-
+vibrationalinfluencespectra(PDF)
+■AUTHOR INFORMATION
+Corresponding Authors
+Weibin Chu − KeyLaboratoryofComputationalPhysical
+Sciences(MinistryofEducation),InstituteofComputational
+PhysicalSciences,FudanUniversity,Shanghai200433,
+China;DepartmentofChemistry,UniversityofSouthern
+California,LosAngeles,California90089,UnitedStates;
+orcid.org/0000-0001-5951-0337;Email:wbchu@
+fudan.edu.cn
+Oleg V. Prezhdo − DepartmentofChemistry,Universityof
+SouthernCalifornia,LosAngeles,California90089,United
+States;DepartmentofPhysicsandAstronomy,Universityof
+SouthernCalifornia,LosAngeles,California90089,United
+States;
+ orcid.org/0000-0002-5140-7500;
+Email:prezhdo@usc.edu
+Authors
+Yongliang Shi − StateKeyLaboratoryofSurfacePhysicsand
+DepartmentofPhysics,FudanUniversity,Shanghai200433,
+China;CenterforSpintronicsandQuantumSystems,State
+KeyLaboratoryforMechanicalBehaviorofMaterials,School
+ofMaterialsScienceandEngineering,Xi’anJiaotong
+University,Xi’an,Shaanxi710049,China
+Lili Zhang − KeyLaboratoryofMaterialPhysics,Ministryof
+Education,SchoolofPhysicsandMicroelectronics,Zhengzhou
+University,Zhengzhou450001,China;
+ orcid.org/0000-
+0001-9243-7960
+Bipeng Wang − DepartmentofChemicalEngineering,
+UniversityofSouthernCalifornia,LosAngeles,California
+90089,UnitedStates;
+ orcid.org/0000-0003-0924-5867
+Wissam A. Saidi − NationalEnergyTechnologyLaboratory,
+Pittsburgh,Pennsylvania15236,UnitedStates;Department
+ofMechanicalEngineeringandMaterialsScience,University
+Chemistry of Materials pubs.acs.org/cm Article
+https://doi.org/10.1021/acs.chemmater.4c02530
+Chem. Mater. 2025, 37, 655−664
+661
+Downloaded from pubs.​acs.​org/​cmatex/​article-pdf/​37/​2/​655/​41179084/​cm4c02530.​pdf by guest on 19 November 2026

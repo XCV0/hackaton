@@ -1,0 +1,60 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+and is referred to as the Gauss–Fermi integral [60]. The Gaussian DoS function and the resulting
+Gauss–Fermi integral are plotted in figure 3. Note that greater standard deviation effectively shifts the onset
+of the band further away from the reference energy, resulting in a shift in the statistical integral.
+4.AccuracyoftheBoltzmannapproximationforcommonTLmaterials
+As discussed in section 2.2, the CER is recovered from the general Einstein relation (GER) when carrier
+densities are sufficiently low so that the FD distribution (9) can be approximated by the Boltzmann
+distribution (22). Under this approximation, the statistical integrals take the form
+S(ξ) ≈ A exp(ξ), (24 repeated)
+where A is some constant determined by the functional form of the reduced DoS (25). For the Kane
+model (36), this constant is
+A = 1√ π α∗ e 1 2α∗ K2
+( 1
+2α∗
+)
+(42)
+where K2 is the second order modified Bessel function of the second kind (note that in the limit α∗ → 0, the
+band becomes perfectly parabolic and A → 1). The corresponding result in the Gaussian band model (40) is
+A = exp
+( s2
+2
+)
+. (43)
+Notably, the CER is unaffected by the value of this constant, meaning that thechoiceofDoSis
+unimportantwhentheBoltzmannapproximationholds. However, the functional form of the DoS does
+significantly affect the range of carrier densities in which the Boltzmann approximation holds. Furthermore,
+as the statistical integrals are not, in general, analytically invertible, the validity of the Boltzmann
+approximation for each band model usually has to be investigated numerically. In what follows, we conduct
+such an investigation for a number of different TL materials. In particular, we compute the diffusion
+enhancement factor ∆ for some of the more commonly used TL materials in PSCs, noting that a value of ∆
+close to 1 implies that both the CER and the Boltzmann approximation accurately model the material’s
+charge transport properties.
+We consider the following inorganic TL materials: TiO2, ZnO and SnO2 (for the ETL) [61–65], and NiO
+(for the HTL) [66, 67]. In addition, we consider the following organic TL materials: spiro-MeOTAD [68, 69],
+PEDOT:PSS [70–72] and P3HT [73, 74] (for the HTL), and PCBM [75, 76] (for the ETL). More
+comprehensive lists of TL materials can be found in [77, 78] or through the Perovskite Database Project [79].
+The relevant parameters for these TL materials, taken from the literature, are shown in table 1. We note that
+measurements of band nonparabolicity parameters in the literature are rare and, to the authors’ knowledge,
+have not been reported for these materials, possibly because oxides are typically used as insulators in
+semiconductor applications. In the absence of measured values for inorganic TL materials, their bands will
+be assumed to be perfectly parabolic (i.e. α∗ = 0).
+It is generally agreed that the Boltzmann approximation is sufficiently accurate for carriers in parabolic
+bands when the QFL is at least three thermal voltages from the band edge (ξ < −3), corresponding to carrier
+concentrations less than 0.05gc,v. At this carrier density, the diffusion enhancement function, ∆, computed
+from from full FD statistics (and the GER), is approximately 1.018 and so is within 2% of the value given by
+the Boltzmann approximation (and the CER). For ξ > −3, however, the Boltzmann approximation to the
+FD integral begins to overestimate the carrier density, effectively allowing multiple carriers to occupy the
+same low-energy states. This can be seen in figure 3, where the FD integral is plotted with its Boltzmann
+approximation. The result is that the diffusion enhancement rapidly diverges from 1 as the carrier density
+exceeds 0.05gc,v, as shown in figure 4.
+Perhaps unexpectedly, the Boltzmann approximation to the Kane–Fermi integral is accurate over a wider
+range of densities for greater nonparabolicity. This is because the form of the reduced DoS means
+nonparabolicity increases the density of higher energy states, far away from the QFL, for the same effective
+DoS (shown in figure 3). Despite this, the deviation is minor and the CER can be considered accurate in the
+same domain as for perfectly parabolic bands.
+Gaussian bands possess a tail of states extending into the band gap, as shown in figure 3. These states have
+energies closer to the QFL, meaning the Boltzmann approximation performs poorly. This is exacerbated by
+greater disorder [108], as seen in the dependence of the scaling constant for Gaussian bands (43) on the
+disorder, s. Consequently, the diffusion enhancement function, ∆, predicted by the Gauss-Fermi statistical
+11

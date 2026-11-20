@@ -1,0 +1,57 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+AppendixB.Parameterset
+Table2. Material parameters for a TiO2/MAPI/spiro-MeOTAD cell. The necessary parameters to model non-Boltzmann statistics in the
+transport layers are shown in table 1.
+Symbol Name Values Unit References
+T Temperature 298 K
+— Light entering through ETL —
+Perovskite (MAPI)
+b Perovskite width 400 nm
+εp Permittivity 24.1 ε0 [114]
+α Absorption coefficient 1.3 × 107 m−1 [115]
+gc Conduction band effective DoS 8.1×1024 m−3 [114]
+gv Valence band effective DoS 5.8 × 1024 m−3 [114]
+Ec Conduction band edge −3.7 eV [116]
+Ev Valence band edge −5.4 eV [116]
+Dn Electron diffusivity 1.7×10−4 m2 s−1 [117]
+Dp Hole diffusivity 1.7×10−4 m2 s−1 [117]
+N0 Mean anion vacancy density 1.6 × 1025 m−3 [118]
+DP Anion vacancy diffusivity 1×10−17 m2 s−1 [9]
+ETL (TiO2)
+gE c Conduction band effective DoS 2 × 1023 m−3 [81]
+EE f Equilibrium electron QFL −4.19 eV [119]
+DE Electron diffusivity 1.3 × 10−5 m2 s−1 [120]
+εE Permittivity 10 ε0
+bE ETL width 100 nm [121]
+EE c Conduction band edge −4.13 eV [84]
+HTL (spiro-MeOTAD)
+gH v Valence band effective DoS 1 × 1026 m−3 [91]
+EH f Equilibrium hole QFL −4.97 eV
+DH Hole diffusivity 1 × 10−6 m2 s−1 [120]
+εH Permittivity 3 ε0
+bH HTL width 200 nm [121]
+EH v Valence band edge −5.1 eV [92]
+Table3. Recombination parameters for a typical TiO2/MAPI/spiro-MeOTAD cell.
+Symbol Name Values Unit
+Perovskite bulk
+β Bi-molecular rate constant 1.5×10−14 m3 s−1
+τp Hole SRH psuedo-lifetime 3×10−7 s
+τn Electron SRH psuedo-lifetime 3×10−7 s
+An Electron Auger coefficient 0 m6 s−1
+Ap Hole Auger coefficient 0 m6 s−1
+ETL/perovskite interface
+νE p Hole recombination velocity 10 ms−1
+νE n Electron recombination velocity 0 105 ms−1
+βE Bi-molecular rate constant 0 m4 s−1
+HTL/perovskite interface
+νH p Hole recombination velocity 105 ms−1
+νH n Electron recombination velocity 0.1 ms−1
+βH Bi-molecular rate constant 0 m4 s−1
+ORCIDiDs
+Will Clarke  https://orcid.org/0000-0002-1629-9698
+Matthew J Wolf  https://orcid.org/0000-0001-5902-4187
+Alison Walker  https://orcid.org/0000-0002-2232-9734
+Giles Richardson  https://orcid.org/0000-0001-6225-8590
+References
+[1] NREL 2022 Best research-cell efficiency chart (available at: www.nrel.gov/pv/cell-efficiency.html)
+19

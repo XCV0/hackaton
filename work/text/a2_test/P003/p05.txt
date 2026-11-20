@@ -1,0 +1,99 @@
+atures {τ ∗ 1 , . . . , τ ∗ M2 }, obtaining one predicted op-
+tion label ˆa(j) from each generation. Since the task
+is multiple-choice, we form the option-vote distri-
+bution
+p(a) = 1 M2 ⏐⏐⏐ { j : ˆa(j) = a }⏐⏐⏐ , (6)
+where a ∈ A and A is the multiple-choice answer
+set. The ﬁnal answer is selected by majority vote:
+ˆa = arg max
+a∈A
+p(a). (7)
+3.5 Uncertainty Estimation
+For the ﬁnal uncertainty estimation, we con-
+sider two complementary sources: context uncer-
+tainty and answer uncertainty. Context uncertainty
+ucontext reﬂects the concentration of the retrieved-
+keypoint distribution (Eq. 4); it is not a direct mea-
+sure of clinical or disease uncertainty. In contrast,
+answer uncertainty uanswer captures dispersion in
+the aggregated option distribution. We deﬁne the
+raw answer entropy as:
+uanswer = −
+∑
+a∈A
+p(a) log p(a). (8)
+For fusion only, both entropies are normalized
+to [0, 1]:
+˜ucontext = ucontext log K , ˜uanswer = uanswer log |Aq| , (9)
+where K = 5 and |Aq| is the number of choices
+for question q. To obtain the overall uncertainty
+score, we fuse the normalized values as follows:
+ˆu = ˜uanswer ˜ucontext
+˜uanswer ˜ucontext + (1 − ˜uanswer ) (1 − ˜ucontext) .
+(10)
+The observed normalized ranges on both datasets
+are reported in Appendix C. The fused score is
+sensitive to both retrieval ambiguity and answer-
+generation dispersion without treating ranking en-
+tropy as proof of missing evidence. Ultimately,
+our method outputs the predicted answer ˆa along
+with the calibrated uncertainty ˆu.
+4 Experiment
+4.1 Datasets
+We evaluate URGen on two expert-curated oph-
+thalmology multiple-choice datasets, i.e., Thy-
+roid Eye Disease (TED) and Graves’ Disease
+(GD). Unlike broad medical QA benchmarks such
+as MedQA and MedMCQA, which mainly as-
+sess parametric medical knowledge across general
+medical topics, our datasets pair expert-authored
+questions and labels with authoritative guideline
+passages. We focus on thyroid-related ophthal-
+mology because its guidelines contain clinically
+adjacent recommendations whose distinctions de-
+pend on disease activity, severity, treatment stage,
+and imaging or surgical context. This provides
+a controlled test of evidence selection, but it
+does not establish cross-specialty generality. The
+keypoint–passage pairs are extracted determin-
+istically from the public guideline XML struc-
+ture. Ophthalmology experts participated in ques-
+tion design and answer veriﬁcation. We will re-
+lease the corpus to support reproducibility and fu-
+ture research on guideline-grounded medical RAG.
+Speciﬁcally, TED contains 101 questions and a
+complete disease-scoped gallery of 35 keypoint–
+passage pairs from Management of Thyroid Eye
+Disease by the American and European Thyroid
+Associations (Burch et al., 2022); GD contains 97
+questions and 22 pairs from the 2018 European
+Thyroid Association Guideline for the Manage-
+ment of Graves’ Hyperthyroidism (Kahaly et al.,
+2018). These are controlled guideline galleries,
+not web-scale retrieval corpora.
+4.2 Compared Methods
+We compare our method with three widely-used
+strategies, i.e., Vanilla, Fixed-1 RAG, and Fixed-5
+RAG based on prevailing LLMs:
+Vanilla. The model receives only the question
+q with the instruction “Select the best answer for
+the question.” No external context or uncertainty
+estimation is applied. This conﬁguration measures
+the LLM’s zero-shot recall of medical knowledge.
+Fixed-k RAG. First, we retrieve the top-
+k keypoint–passage pairs from C using multi-
+temperature knowledge retrieval and concatenate
+them with q in descending relevance order. Sec-
+ond, we sample the LLM under multiple answer-
+generation temperatures. Context size is ﬁxed at k,
+and no context-uncertainty calibration is applied.
+4.3 Implementation Details
+All experiments adopt the same retrieval and in-
+ference infrastructure, as detailed below: Large
+Language Models (LLMs). We evaluate three
+prevailing pretrained backbones: Llama-3.1-8B
+with BF16 (Llama Team, 2024) and Mistral-7B
+v0.3 with BF16 (Jiang et al., 2023a) (general-
+domain); Meditron-7B with BF16 (Chen et al.,
+2023) (medical ﬁne-tuned). Open-source models
+3922

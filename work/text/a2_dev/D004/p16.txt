@@ -1,0 +1,93 @@
+tions, operational disruption, and account
+risks when assigning impact levels
+The model outputs a JSON array with one object
+per entity-opinion pair, enabling downstream per-
+entity document splitting.
+H Question Type Ablation
+Table 10 shows how question formulation affects
+diversity gains.
+Table 10: Sentiment-Intensity σ by question type
+(k=20). Largest gains for Business Impact and Emo-
+tional queries; Experience queries benefit least.
+Question Type Raw Enriched ∆
+Detailed Overview 9.14 11.80 +29.1%
+Experience 10.64 11.30 +6.2%
+Business Impact 8.56 11.89 +38.9%
+Specific Examples 9.02 11.14 +23.5%
+Process 7.82 10.44 +33.5%
+Emotional 9.56 12.82 +34.1%
+I Retrieval Method Comparison
+Table 11 compares semantic-only and hybrid re-
+trieval. Hybrid search amplifies opinion en-
+richment benefits (+26.8%) over semantic-only
+(+21.4%), as keyword matching surfaces entity-
+relevant documents.
+Table 11: Semantic-only vs. hybrid retrieval at k=20.
+Bold = p<0.05, * = p<0.001.
+Semantic Hybrid
+Metric Raw Enr. (∆) Raw Enr. (∆)
+Sent-Int σ 8.93 10.84 (+21.4%*) 9.12 11.56 (+26.8%*)
+Biz Impact σ 10.47 11.63 (+11.1%) 10.55 12.08 (+14.5%)
+Revenue Band (%) 79.1 68.7 (−13.1%*) 78.3 68.1 (−13.0%*)
+Tenure (%) 81.5 76.8 (−5.8%) 81.2 75.6 (−6.9%)
+Evidence (%) 44.3 43.8 (−1.1%) 44.3 46.4 (+4.7%)
+Emot. Markers 7.1 8.4 (+18.3%) 7.2 8.9 (+23.6%*)
+J Emergent Opinion Synthesis Example
+The following is a response from ChatGPT (GPT-
+4o, January 2026) to the query: “What do small
+business owners think about the current tax pol-
+icy?”
+Small business owners express mixed
+views on current tax policy. Many ap-
+preciate efforts toward permanence and
+certainty, particularly wanting key pro-
+visions from the 2017 Tax Cuts and Jobs
+Act made permanent to aid long-term
+planning. They support targeted de-
+ductions and pass-through relief, espe-
+cially proposals allowing deduction of
+the first $25,000 of qualifying business in-
+come. However, concerns persist: many
+feel previous tax cuts primarily benefited
+larger corporations rather than small
+businesses. Common complaints include
+tax code complexity, high compliance
+costs, and perceived unfairness in how
+large firms can leverage specialists and
+loopholes. Small business owners con-
+sistently advocate for simplified report-
+ing, scaled incentives that actually help
+smaller firms, and measures ensuring
+“fair play” against large corporation ad-
+vantages.
+This response sounds balanced, but without
+transparency into retrieval, users cannot determine
+whether it reflects genuine diversity in retrieved
+sources. Or the model’s learned tendency to present
+information evenhandedly regardless of input.
+K Biased Leadership Response Example
+The following illustrates how traditional RAG met-
+rics can assign high scores to biased outputs. In
+response to the query “What leadership qualities
+are most important for startup CEOs?”, a system
+might generate:
+Successful startup CEOs demonstrate
+strong analytical thinking, decisive ac-
+tion under pressure, and natural as-
+sertiveness in competitive markets. Re-
+search shows that effective leaders main-
+tain composure during high-stakes nego-
+tiations, exhibit confidence in pitching to
+investors, and demonstrate the aggres-
+sive persistence needed to disrupt estab-
+lished industries. The most successful
+CEOs are typically those who embrace
+calculated risks, maintain unwavering
+conviction in their vision, and possess
+the competitive drive necessary to out-
+perform rivals.
+While scoring excellently across standard met-
+rics, this response amplifies gender bias by empha-
+sizing traditionally masculine-coded traits while
+omitting empathetic or inclusive leadership quali-
+ties.

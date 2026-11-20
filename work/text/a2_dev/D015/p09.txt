@@ -1,0 +1,98 @@
+GPT-4o En+De En+Es En+Zh En+Ar Avg.
+XRAG-MultiR 61.67 56.00 59.33 53.33 57.58
++EQ 63.00 52.67 60.67 56.67 58.25
++EQ, +ES 65.00 57.33 62.00 60.33 61.16
+MonoRAG 63.33 59.33 63.00 60.67 61.58
+Table 6: Controlled analysis of GPT-4o on the mul-
+tilingual retrieval setting of XRAG, replacing ques-
+tions (EQ), supporting articles (ES), and distracting ar-
+ticles (ED) with their English counterparts from the
+English monolingual RAG settings (see Figure 25).
+“XRAG-MultiR” is the multilingual retrieval setting, and
+“MonoRAG” (+EQ, +ES, +ED) is the English monolin-
+gual RAG baseline setting.
+challenge.7 By contrast, replacing non-English
+supporting articles with their English translations
+improves average accuracy noticeably, indicating
+that reasoning over retrieved information across
+languages is challenging for LLMs. Translat-
+ing distracting articles into English also improves
+performance, implying that identifying useful in-
+formation in a mixed-language context is harder
+than from a wholly English one. Similar results are
+observed with other LLMs, see Appendix D.1.
+6 Conclusions
+We introduce XRAG, a benchmark for evaluating
+the generation abilities of LLMs in cross-lingual
+RAG settings. We introduce a novel LLM-based
+workflow for creating questions that require com-
+plex reasoning and external documents to answer.
+Experiments reveal that LLMs significantly under-
+perform humans on XRAG, even without cross-
+lingual elements, highlighting its utility for assess-
+ing reasoning ability. Further analysis shows that
+LLMs struggle with response language correctness
+in the XRAG monolingual retrieval setting and
+with reasoning over retrieved content across lan-
+guages in the XRAG multilingual retrieval setting.
+7 Limitations
+Our work has some limitations. First, due to bud-
+get constraints, XRAG currently covers only four
+non-English languages. However, we believe that
+these four linguistically diverse languages are suffi-
+cient to enable robust cross-lingual RAG research.
+Moreover, we provide comprehensive implementa-
+tion details, allowing others to extend our approach
+7We also find that LLMs rarely have issues with Response
+Language Correctness in the multilingual retrieval setting.
+to additional languages easily. Second, our multi-
+lingual retrieval setting solely covers the scenario
+of two languages (English and the question lan-
+guage). However, there may be cases involving
+retrieval across a set of languages (more than two).
+Note that our construction pipeline can support
+exploration in this setup by using more articles
+to generate questions, which we leave for future
+work. Third, we only benchmarked five models
+in this work because of legal concerns. It would
+be interesting to see how other LLMs perform on
+XRAG. Finally, we could conduct more insightful
+controlled analyses on XRAG, such as exploring
+the impact of the number of distracting articles.
+Due to space limitations, we leave this for future
+work.
+Acknowledgements
+Bill Byrne holds concurrent appointments as an
+Amazon Scholar and as Professor of Information
+Engineering at the University of Cambridge. This
+paper describes work performed at Amazon.
+We thank Tobias Domhan, Rexhina Blloshmi,
+and Ke Tran for their valuable comments during the
+early stages of this project. We are also grateful to
+Tobias Domhan and Zach Hille for their guidance
+on using Amazon’s internal platform for efficient
+LLM inference, which was essential for the com-
+pletion of this project. Finally, we would like to
+thank the anonymous reviewers for their construc-
+tive feedback.
+References
+Kabir Ahuja, Harshita Diddee, Rishav Hada, Milli-
+cent Ochieng, Krithika Ramesh, Prachi Jain, Ak-
+shay Nambi, Tanuja Ganu, Sameer Segal, Mohamed
+Ahmed, Kalika Bali, and Sunayana Sitaram. 2023.
+MEGA: Multilingual evaluation of generative AI.
+In Proceedings of the 2023 Conference on Empir-
+ical Methods in Natural Language Processing, pages
+4232–4267, Singapore. Association for Computa-
+tional Linguistics.
+Amazon. 2024. The amazon nova family of models:
+Technical report and model card.
+Anthropic. 2024. Claude sonnet-3.5: Next-generation
+ai model.
+Akari Asai, Jungo Kasai, Jonathan Clark, Kenton Lee,
+Eunsol Choi, and Hannaneh Hajishirzi. 2021. XOR
+QA: Cross-lingual open-retrieval question answering.
+In Proceedings of the 2021 Conference of the North
+American Chapter of the Association for Computa-
+tional Linguistics: Human Language Technologies,
+15677

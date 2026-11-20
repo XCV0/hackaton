@@ -1,0 +1,31 @@
+J. Phys. Energy5 (2023) 025007 W Clarke et al
+Figure3. Reduced densities of state (top) and statistical integrals (bottom) derived from the simplified Kane dispersion (left) and
+Gaussian disorder (right) models. Solid lines in the bottom plots correspond to full FD distributions and dashed lines to
+Boltzmann distributions. Here, F , K, and G denote the Fermi–Dirac (33), Kane–Fermi (37), and Gauss–Fermi (41) integrals, α∗
+is the dimensionless non-parabolicity parameter of the Kane model and s is the dimensionless standard deviation of the Gaussian.
+3.2.Amorphousorganicmaterials—Gaussianmodel
+The discrete transport sites in disordered organic materials are typically modelled by Gaussian DoS functions
+[36, 38], as represented in figure 2(b), of the form
+ˆgc(E) = gc
+σc
+√
+2π exp
+(
+− 1 2 ( E − Ec σc )2) , (39a)
+ˆgv(E) = gv
+σv
+√
+2π exp
+(
+− 1 2 ( Ev − E σv )2) , (39b)
+where the degree of disorder is represented by the standard deviation, σ. Once again the reduced DoS
+functions ( ˆNc and ˆNv) can be obtained using (13) and have the form
+ˆN(η, s) = 1 s √ 2π exp ( − 1 2 ( η s )2) , (40)
+where s = σ kBT is the dimensionless disorder parameter, which in general differs between the ‘conduction
+states’ (for which the reduced DoS is ˆN(η; sc) and and ‘valence states’ (for which the reduced DoS is ˆN(η; sv).
+The crucial difference from the parabolic model is that the Gaussian band has no defined edge, meaning the
+reference energies Ec and Ev are now the band centres, the LUMO and HOMO energies, respectively. The
+statistical integrals (16) resulting from the Gaussian DoS are Sc(ξ) = G(ξ; sc) for conduction electrons and
+Sv(ξ) = G(ξ; sv) for valence holes, where G follows from (16):
+G(ξ ; s) = 1 s √ 2π ˆ ∞ −∞ exp ( − 1 2 ( η s )2) 1 + exp(η − ξ) dη, (41)
+10

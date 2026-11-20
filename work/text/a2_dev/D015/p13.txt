@@ -1,0 +1,93 @@
+User Locale Native English Both
+Germany 59.8% 56.3% 71.5%
+Japan 61.1% 44.3% 68.3%
+Spain 57.9% 48.4% 68.9%
+Table 7: Percentage of satisfactory retrieval results us-
+ing Google search as retriever on real-world information
+seeking LLM traffic. Search results are evaluated by
+Claude 3.5 Sonnet if they contain sufficient information
+for a satisfactory answer to the user query. Native uses
+Google search in the user locale, English performs En-
+glish Google search using a translation of the user query,
+and Both combines the two search results. LLM traffic
+is obtained via SimilarWeb.
+A Retrieval Quality Investigation
+We evaluate the relevance of English and native-
+language search results for real-world queries
+submitted to large language models (LLMs) by
+non-English users in Germany, Spain, and Japan.
+The analysis is based on a proprietary dataset of
+real LLM traffic provided by SimilarWeb8. User
+queries are filtered by locale and language using
+langid to retain only those submitted in the respec-
+tive native languages. For each query, we retrieve
+two sets of search results: one from a U.S.-based
+Google search using the English translation of the
+query, and another from a country-specific Google
+domain using the original native-language version.
+Relevance is assessed using Claude 3.5 Sonnet,
+which evaluates whether the retrieved results con-
+tain sufficient information to generate a satisfac-
+tory response, taking into account the user’s locale
+(e.g., a tax-related query from Germany must in-
+clude references to German tax regulations). Table
+7 reports the percentage of queries for which the
+English-only, native-only, or both sets of results
+independently provided sufficient information. The
+results indicate that combining English and native-
+language search results significantly improves the
+proportion of queries for which a comprehensive re-
+sponse can be generated, compared to using either
+language alone.
+B Data Construction
+B.1 Data Source
+We use articles in News Crawl (Nagel, 2016) as
+the data source to create questions and prepare
+supporting and distracting articles. Specifically, we
+download news articles between June 1, 2024 and
+8https://www.similarweb.com/
+Art1 Art2 Art3 Art4
+𝑒1 𝑒2 𝑒3 𝑒4
+Figure 6: Example of a bipartite graph between articles
+and entities.
+November 30, 2024 from NEWS Crawl using new-
+please9. This timeframe exceeds the knowledge
+cutoff of widely used LLMs, such as GPT-4o and
+Claude 3.5 sonnet. Therefore, questions created
+from these articles are more likely to require LLMs
+to use external knowledge to answer. We only keep
+articles that contain more than 1200 tokens and are
+in English, German, Spanish, Chinese, or Arabic,
+obtaining around 1700k, 250k, 600k, 180k, and
+460k news articles in these languages.
+B.2 Identify Pairs of Related Articles
+B.2.1 Identify English-English Article pairs
+Inspired by the concept of “bridge entity” in Yang
+et al. (2018), we use a bipartite graph between
+articles and entities to find related English article
+pairs. Specifically, we randomly sample around
+100k English articles from the data downloaded
+from News Crawl, covering various topics such
+as Politics, Sports, Economy, and Entertainment.
+Then, we use stanza (Qi et al., 2020) to identify
+entities in the titles of the sampled articles and
+construct a bipartite graph between the articles and
+entities (as shown in Figure 6). In this graph, nodes
+are entities and articles, and an edge will be added
+between an entity and an article if the entity is
+contained in the title of the article. Finally, we
+perform the Depth-First Search on the graph to
+find pairs of articles sharing at least two entities in
+their titles (e.g., articles 1 and 2 in Figure 6) and
+having a publication time gap of no more than two
+weeks. Here we use the title instead of the main
+text because entities in the title are often the key
+entities of the news, and two articles containing the
+same key entities are more likely to be related.
+B.2.2 Identify X-English Article Pairs
+To construct cross-document questions for the mul-
+tilingual retrieval setting in XRAG, we need to
+find related articles across languages. We empir-
+ically find that the article-entity graph performs
+9https://github.com/fhamborg/news-please
+15681

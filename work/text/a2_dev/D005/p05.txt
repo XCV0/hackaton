@@ -1,0 +1,98 @@
+Rational/Answer 
+CandidatesThought 
+Generation
+Thought 
+Evaluation
+Answer 
+Evaluation
+Thought 
+Regeneration
+1 2 3
+4
+(W/ Critique or Stochastic)
+High-quality 
+Rationals/Answers Training Data 
+Composition
+4
+Low-quality 
+rationals
+& Critiques
+Low-quality 
+answers
+Figure 4: Overview of the iterative synthetic CoT generation process.
+Method Seed Data Samples Avg. Refs.
+Distractor Resilience Web Search 2,589 2
+Dynamic Strategization Web Search 2,674 9.1
+Dynamic Strategization Wiki Pages 5,079 4.6
+Total 10,342
+Table 1: Breakdown of the final training data mix.
+answer. For thoughts assessed as high-quality,
+we compare the candidate and the ground-
+truth answers to ensure the question is being
+fully answered and verify the factual consis-
+tency. We use a scoring system of 1 to 4 as
+the previous step (prompt in Appendix G.4).
+4. Thought Regeneration: To regenerate
+thoughts, we consider a combination of
+stochastic generation and critique-based re-
+vision methods. For stochastic generation,
+we simply rerun the inference in step 1
+(temperature=1.0 and top-p=0.90). However,
+for revision, we use analysis produced during
+the thought evaluation step as critique feed-
+back (prompt in Appendix G.5).
+5. Train Data Composition: We follow the iter-
+ative steps above until we reach a high-quality
+synthetic rationale, or exhaust a budget of 10
+attempts. We use stochastic thought regener-
+ation for the first 6 attempts, and then switch
+to critique-based revision for the rest.
+4.4 Final training data
+Table 1 presents the breakdown of the final training
+data, consisting of a mix of distractor resilience
+and dynamic strategization.
+5 Experiments
+5.1 Experiment Settings
+5.1.1 Benchmarks
+In our experiments, we employed a diverse set of
+12 public RAG QA benchmarks, covering various
+question domains, answer formats, and reference
+document types. Specifically, we used the web
+portion of the CRAG dataset (Yang et al., 2024),
+and filtered out the false-premise type of questions,
+resulting in a total of 643 samples. Furthermore, we
+utilized BGE embedding (Xiao et al., 2024) to rank
+references by semantic relevance to the question.
+For the remaining 11, we leveraged pre-
+processed data from RAGBench (Friel et al., 2024),
+down-sampling each to 100 samples. These bench-
+marks cover relevant real-world application areas,
+including health (Jin et al., 2019; Möller et al.,
+2020), finance (Chen et al., 2021; Zhu et al., 2021),
+customer support (Sadat et al., 2023; Nandy et al.,
+2021; Malaviya et al., 2023), legal (Hendrycks
+et al., 2021), and general knowledge (Yang et al.,
+2018; Kamalloo et al., 2023; Malaviya et al., 2023).
+5.1.2 Metrics
+To evaluate the factual quality of generated answers,
+we follow metrics suggested by Yang et al. (2024),
+classifying each response as either accurate, hallu-
+cinated, or missing. Accurate responses fully and
+accurately answer the question. Hallucinated an-
+swers contain inaccurate or misleading information.
+Missing responses either refuse to answer or fail
+to completely address the question. To summarize
+the overall factuality, we use a factuality score, de-
+fined as the accuracy rate minus the hallucination
+rate. Factuality score provides a scalar measure of
+overall answer quality, where hallucinated answers
+are penalized twice as much as missing answers.
+To evaluate factuality for CRAG, HotpotQA, MS
+Marco, FinQA, TAT-QA, HAGRID, and ExpertQA
+, we employed an LLM-as-judge to compare the
+ground-truth with the candidate answers. For other
+benchmarks, we utilized a fact-checking tool simi-
+lar to VeriScore (Song et al., 2024), which is more
+suitable for long-form answers or scenarios with
+multiple potential answers.
+779

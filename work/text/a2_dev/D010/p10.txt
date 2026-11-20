@@ -1,0 +1,42 @@
+10 Dhasade et al.
+Table 1. Classification metrics (averages) for our router and for different benchmarks.
+RAGRoute router achieves high accuracy and recall, demonstrating good generaliza-
+tion across benchmarks.
+Benchmark Accuracy (%) Precision (%) Recall (%) F1-Score (%) AUC (%)
+MIRAGE 86.63 86.79 83.35 84.96 92.94
+MMLU 90.93 71.64 82.92 76.87 95.77
+FeB4RAG 83.05 87.37 89.70 88.51 84.00
+(iv) random. This routing strategy randomly selects a fixed number of data
+sources, matching the number selected by RAGRoute but without using
+relevance predictions. We incorporate this strategy to evaluate the effective-
+ness of RAGRoute beyond extremes like querying all or no data sources.
+This allows us to ignore the effect of the number of contacted sources, iso-
+lating the impact of how the sources are selected, demonstrating that RA-
+GRoute gains arise from intelligent, query-aware routing.
+Metrics. Our experiments primarily focus on the classification performance
+of the RAGRoute router model and the system efficiency of the entire RA-
+GRoute system. For the former, we report standard classification metrics such
+as accuracy, recall, precision, F1-Score and AUC. For the latter, we monitor, for
+each user query, relevant system metrics such as the number of data sources con-
+tacted, communication volume and latency. We also determine the end-to-end
+RAG accuracy for the MMLU and MIRAGE benchmarks. We are unable to do
+so for FeB4RAG since this benchmark does not provide ground-truth answers.
+4.2 RAGRoute routing effectiveness
+We evaluate the effectiveness of our router and show its classification perfor-
+mance in predicting data source relevance for a given query in the test set for
+each benchmark. Table 1 presents various classification metrics, i.e., accuracy,
+precision, recall, F1-score, and AUC, for all three benchmarks. Here, recall mea-
+sures the router’s ability to identify all relevant data sources, while accuracy
+reflects the overall correctness of the router’s binary predictions (and not the
+end-to-end LLM accuracy in generating final responses).
+We achieve consistently strong results across all benchmarks, with accuracy
+ranging from 83.05% for FeB4RAG to 90.93% for MMLU, and recall values
+between 89.70% and 82.92% respectively, indicating that the router reliably iden-
+tifies relevant data sources across diverse settings. The slightly lower accuracy on
+some benchmarks primarily stems from our design choice to favor recall which is
+particularly important for imbalanced datasets where only a few sources are rel-
+evant per query. This trade-off is desirable in federated retrieval settings, where
+missing a relevant data source is typically more detrimental to the quality of
+LLM answers than querying an additional one. Overall, the RAGRoute router
+demonstrates strong and balanced generalization across benchmarks, confirming
+its effectiveness for real-world federated search in RAG systems.

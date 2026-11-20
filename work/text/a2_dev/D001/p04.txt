@@ -1,0 +1,100 @@
+interconnects them via narrative, semantic, and lex-
+ical edges into an STG. This fundamentally anchors
+structural reasoning priors directly into native text
+sequences, thereby transforming fragmented docu-
+ments into a high-fidelity network.
+Semantic Node extraction Given a query q, an
+LLM extracts key entities Ek to construct a retrieval
+query set Qret = {q} ∪ Ek. These queries are in-
+dependently issued to a hybrid retrieval index over
+a local Wikipedia corpus, combining BM25 lexi-
+cal matching with dense semantic retrieval using
+equal weights. The retrieved passages are pooled,
+deduplicated, and ranked according to the fused
+retrieval score to yield the top-k context set:
+D = top-k
+( ⋃
+qj ∈Qret
+HybridRetrieve(qj )
+)
+(1)
+For each document di ∈ D, the raw text is to-
+kenized into a sequence X = {x1, x2, . . . , xn}.
+This sequence is processed through a lightweight
+encoder to obtain contextualized hidden represen-
+tations hj ∈ Rd for each token xj . To identify
+semantic breakpoints, each representation hj is
+mapped to a boundary probability pj ∈ [0, 1] via a
+MLP(see Appendix D for detailed configurations):
+pj = σ(W2(ReLU(W1hj + b1)) + b2) (2)
+where σ denotes the sigmoid activation function,
+and W1, W2, b1, b2 are learnable parameters. To-
+kens satisfying pj > θ, given a predefined thresh-
+old θ, act as cut-off points. The continuous docu-
+ment is deterministically partitioned at these bound-
+aries to yield a set of Semantic Nodes V =
+{v1, v2, . . . , vm}. Each node vk ∈ V is formally
+represented as a tuple:
+vk = (tk, dk, sk, τk) (3)
+where tk is the raw natural language text span, dk
+is the document identifier, and [sk, τk) denotes the
+exact character-level position interval of tk within
+dk. Compared to existing LLM-based extraction
+paradigms, this feed-forward mechanism achieves
+context-intact segmentation with millisecond-level
+latency and strictly avoids generative noise.
+Semantic Topology Graph construction Given
+the node set V, the STG is completed by construct-
+ing three complementary types of edges that cap-
+ture distinct relational signals between SNs. Each
+edge type encodes a different dimension of inter-
+node relatedness, and their weights are fused under
+a unified formulation.
+Narrative edges Enar connect positionally adja-
+cent nodes within the same document to preserve
+the original reading order. Nodes sharing di are
+sorted by start position sj , with a directed edge
+(vj , vj+1) ∈ Enar added between consecutive pairs.
+Semantic edges Esem capture cross-document
+topical relatedness. Each node vi is represented
+by a dense embedding hi, connecting top-k cross-
+document pairs (di ̸= dj ) with weight:
+Simsem(vi, vj ) = hi · hj ∥hi∥ ∥hj ∥ (4)
+Lexical edges Elex capture explicit entity co-
+reference. For named entities Ni extracted from vi,
+cross-document pairs sharing entities are connected
+via Jaccard similarity:
+Simlex(vi, vj ) = |Ni ∩ Nj | |Ni ∪ Nj | (5)
+The final edge weight W (vi, vj ) balances local
+narrative continuity against global cross-document
+association:
+W (vi, vj ) = (1 − γ)
+(
+α · Simsem(vi, vj )
++ β · Simlex(vi, vj )
+)
++ γ · 1nar(vi, vj ) (6)
+where 1nar(vi, vj ) = 1 iff (vi, vj ) ∈ Enar, γ ∈
+(0, 1) scales the narrative prior, and α+β = 1. The
+complete edge set E = Enar ∪ Esem ∪ Elex alongside
+V defines the STG G = (V, E).
+3.2 Energy-Driven Pathfinding
+Current methods relying on fragmented graph com-
+ponents or generative rewriting struggle with a
+modality mismatch and suffer from generative
+noise or critical information omission. Our Energy-
+Driven Pathfinding (EDP) module addresses this
+by executing a context-preserving pathfinding
+mechanism over the STG. By isolating a query-
+specific subgraph and deterministically reconstruct-
+ing it into continuous textual sequences, EDP over-
+comes structural fragmentation via anchor-driven
+energy diffusion and topological linearization.
+Anchor Identification. Given the STG G = (V, E)
+and a query q, the pathfinding stage begins by iden-
+tifying a set of anchor nodes as entry points. Each
+node vi is scored by combining its semantic rel-
+evance to q with an entity-level matching signal:
+si = Simsem(hi, hq) + λ · max ej ∈Ek Simsem(hi, hej )
+(7)
+49894

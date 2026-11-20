@@ -1,0 +1,73 @@
+Figure 4: Layer-wise indicators for hallucination-prone region identification: (a) Activation Strength Al (Eq. 6) and
+(b) Divergence Strength ∆l (Eq. 7) measuring the separation between factual and hallucinated behaviors across
+layers. High-score layers are treated as hallucination-sensitive candidates.
+guish hallucinated from factual behaviors, suggest-
+ing that “being active” is not sufficient for halluci-
+nation formation.
+To provide a more intuitive view of this sepa-
+ration process, Figure 3 visualizes the cumulative
+ratio trajectories CRl i. The red and blue curves
+largely overlap in early layers, while their gap
+rapidly expands at the identified mid-to-late lay-
+ers, matching the peak in ∆l. Beyond these layers,
+the difference stabilizes, implying that the repre-
+sentational separation has already been established.
+Taken together, these observations suggest that hal-
+lucination formation is localized to a small subset
+of mid-to-late layers, where insufficient context-
+selective attention routing allows parametric influ-
+ence to dominate the residual stream. Accordingly,
+we treat these mid-to-late layers as hallucination-
+sensitive regions and select them as our interven-
+tion set R.
+4.2.2 Evaluation of Contextual Faithfulness
+Across all six CoFaithfulQA subsets, CoDA con-
+sistently achieves the highest ConR, indicating
+stronger grounding in retrieved evidence. As
+shown in Table 1, CoDA improves performance
+on HotpotQA, SearchQA, SQuAD, and TriviaQA
+by 1.5–3.0 points over ParamMute, with compa-
+rable gains on NQ and NewsQA. These consis-
+tent improvements demonstrate robustness across
+datasets with diverse domains, context lengths,
+and reasoning requirements. Importantly, these
+gains align with the attention-centric design of
+CoDA. Rather than globally suppressing FFN acti-
+Models HotPotQA NQ NewsQASearchQASQuADTriviaQA
+ConR ↑ ConR ↑ ConR ↑ ConR ↑ ConR ↑ ConR ↑
+Vanilla-RAG 60.34 53.09 60.27 66.76 77.93 61.80
+Attr_prompt 58.93 55.36 58.80 62.53 77.35 59.97
+OI_prompt 47.79 49.25 52.03 52.26 76.81 55.41
+COIECD 62.51 56.21 51.81 69.74 73.12 63.62
+SFT 70.92 59.76 61.96 75.29 79.19 59.60
+KAFT 69.52 60.89 65.09 77.38 80.04 62.32
+C-DPO 67.20 62.24 61.40 64.12 80.08 58.67
+DDR 68.66 63.29 64.74 78.07 81.36 60.71
+ReDeEP 68.40 60.98 65.12 71.62 81.57 61.15
+ParamMute 71.06 60.68 65.24 78.76 80.58 60.89
+CoDA (Ours) 73.09 63.09 68.62 80.92 83.06 63.10
+Table 1: Contextual faithfulness on CoFaithfulQA. We
+report ConR (↑) on six subsets under the same RAG set-
+ting. CoDA achieves the best ConR across all subsets,
+benefiting from copy-encouraged attention that strength-
+ens evidence-grounded routing; higher ConR translates
+to more effective hallucination mitigation.
+vations, CoDA dynamically reshapes attention rout-
+ing by amplifying context-consistent value states
+and encouraging copy-encouraged behavior in non-
+copying heads when retrieved evidence is semanti-
+cally aligned. This mechanism allows contextual
+signals to be more effectively propagated into the
+residual stream, which downstream FFNs then am-
+plify in a context-consistent manner. Consequently,
+CoDA strengthens reliance on faithful external evi-
+dence without eliminating useful parametric knowl-
+edge. This leads to a more favorable trade-off
+between evidence grounding and representational
+flexibility compared to prior suppression-based ap-
+proaches.
+Moreover, Figure 6 illustrates that CoDA consis-
+tently maintains low MemR across datasets, con-
+firming that improved contextual grounding does
+not increase reliance on parametric knowledge .
+11884

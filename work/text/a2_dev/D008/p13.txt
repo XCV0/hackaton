@@ -1,0 +1,95 @@
+and quantify how well a model balances external-
+evidence grounding and reliance on parametric
+memory.
+Context Recall (ConR, Higher is Better)
+Meaning. ConR measures the proportion of gen-
+erated facts that are explicitly supported by the
+retrieved context. Higher values indicate stronger
+grounding in external evidence.
+Computation. For each answer, let
+Fctx : context-supported, Fall : total.
+Then,
+ConR = Fctx
+Fall
+.
+Memory Recall (MemR, Lower is Better)
+Meaning. MemR measures the proportion of gen-
+erated facts that originate from parametric memory
+and are not grounded in retrieved evidence.
+Computation. To avoid long text overflowing
+the column, we define
+Fmem = facts not supported by context but
+present in parametric memory
+.
+Then,
+MemR = Fmem
+Fall
+.
+Misalignment Rate (MR, Lower is Better)
+Meaning. MR quantifies the proportion of gener-
+ated facts that are either unsupported by or contra-
+dictory to the retrieved evidence—i.e., hallucina-
+tions or conflicting statements.
+Computation. Let
+Fmis = number of unsupported or contradicted
+generated facts
+.
+Then,
+MR = Fmis
+Fall
+.
+Summary of the Metrics
+• ConR (Higher) measures grounding in re-
+trieved context.
+• MemR (Lower) measures reliance on internal
+parametric memory.
+• MR (Lower) measures the fraction of unsup-
+ported/contradictory facts.
+D Case Evaluation Analysis
+We present representative case-level comparisons
+between Ours (CoDA) and the baseline ReDeEP.
+Each example corresponds to a human evalua-
+tion entry in the RAGTruth dataset, indexed by
+ours_index. We include the evaluator comments
+(translated) and our interpretive analysis to high-
+light common patterns: (1) cases where improve-
+ments mainly come from clearer adherence to the
+instruction “strictly based on the given content”,
+(2) cases where the baseline hallucinates unsup-
+ported details, and (3) marginal cases where both
+outputs are factually equivalent and differences are
+stylistic.
+Case 1: ours_index = 21 (Finland and NATO)
+Original Comment (translated). Both answers
+correctly state that Finland established a formal
+relationship with NATO in 1994. However, Ours
+adds “Therefore, the answer is 1994.”, making the
+conclusion more explicit and decisive.
+Analysis. Both outputs are factually equivalent;
+the preference is primarily stylistic.
+Conclusion. Reasonable but based on stylistic
+preference.
+Case 2: ours_index = 30 (Nickname of Stefano
+Magaddino)
+Original Comment (translated). Both models
+correctly list the nicknames “Don Stefano” and
+“The Undertaker.” Ours explicitly adds “Based on
+the provided content,” reinforcing grounding.
+Analysis. Both answers are content-equivalent;
+Ours better matches the instruction constraint
+(grounding emphasis).
+Conclusion. Fair and well-justified judgment.
+Case 3: ours_index = 41 (Cardiovascular Risk
+Factors)
+Original Comment (translated). Ours lists only
+risk factors with explicit numerical contributions
+(hypertension, smoking, diabetes, physical inactiv-
+ity, obesity), and notes missing numbers for others.
+The baseline misinterprets “53% dietary risk” and
+fabricates proportions.
+Analysis. The evaluator correctly identified
+baseline hallucinations. Ours follows the rule
+“report only numerically quantified factors” and
+avoids making up unsupported ratios.
+Conclusion. Completely correct evaluation.
+11891

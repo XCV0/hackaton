@@ -1,0 +1,88 @@
+Table 1: Cross-backbone comparison on TED and GD. We report accuracy, OC@0.8, and ECE for three LLM
+backbones and four inference methods.
+Model Method Accuracy (%) ↑ OC@0.8 (%) ↓ ECE (%) ↓
+TED GD TED GD TED GD
+Llama-3.1-8B
+Vanilla LLM 70.30% 46.39% 9.90% 22.68% 10.89% 21.09%
+Fixed-1 RAG 74.65% 42.27% 11.88% 21.65% 14.95% 20.33%
+Fixed-5 RAG 69.70% 50.52% 13.66% 5.15% 19.06% 13.59%
+URGen (Ours) 80.40% 51.55% 1.98% 4.12% 6.80% 9.96%
+Mistral-7B
+Vanilla LLM 68.32% 44.30% 29.70% 55.67% 24.40% 55.30%
+Fixed-1 RAG 73.26% 48.45% 25.74% 36.08% 6.50% 10.97%
+Fixed-5 RAG 72.28% 47.42% 5.94% 30.93% 10.61% 12.63%
+URGen (Ours) 79.21% 50.52% 3.96% 14.43% 5.31% 8.23%
+Meditron-7B
+Vanilla LLM 78.22% 63.92% 14.85% 23.71% 12.06% 23.15%
+Fixed-1 RAG 80.20% 61.86% 6.93% 11.34% 3.01% 8.82%
+Fixed-5 RAG 75.25% 59.79% 2.97% 4.12% 11.32% 7.96%
+URGen (Ours) 84.54% 65.98% 1.98% 3.09% 3.01% 4.57%
+are loaded via the Hugging Face Transformers li-
+brary on an NVIDIA 4090 GPU (24 GB mem-
+ory). Temperature Settings. Retrieval: M1 = 5
+temperatures τj ∈ {0.3, 0.4, 0.5, 0.6, 0.7}. An-
+swer Generation: M2 = 5 temperatures τ ∗ j ∈
+{0.3, 0.4, 0.5, 0.6, 0.7}. Joint sensitivity to three,
+ﬁve, and seven temperatures is reported in Ap-
+pendix C. Context Size Bounds. We retain the
+top K = 5 candidates when forming the ranking
+distribution and set (Dmin, Dmax) = (1, 5) for the
+ZARD retrieval depth.
+4.4 Evaluation Metrics
+We evaluate (i) correctness and (ii) reliability of
+the reported uncertainty. Let |Q| be the number
+of questions, ˆai the predicted option for qi, and
+yi ∈ {0, 1} the correctness indicator, where yi = 1
+if ˆai = ai and 0 otherwise. Let ˆui ∈ [0, 1]
+denote the predicted uncertainty, and deﬁne con-
+ﬁdence as ˆci = 1 − ˆui. Accuracy. Acc =
+1
+|Q|
+∑|Q|
+i=1 yi. Overconﬁdent error rate (OC@ζ).
+Following overconﬁdence-focused reliability eval-
+uation (Groot and Valdenegro-Toro, 2024), we re-
+port OC@0.8 (i.e., ζ = 0.8) as the fraction of all
+questions that are answered incorrectly with conﬁ-
+dence at least 0.8:
+OC(ζ) = 1 |Q| |{i : yi = 0, ˆci ≥ ζ}| . (11)
+Expected calibration error (ECE). Following
+Guo et al. (Guo et al., 2017), we bin predic-
+tions by conﬁdence into B equal-width bins. De-
+ﬁne the index sets: Ib = { i : ˆci ∈ ((b −
+1)/B, b/B] }, b = 1, . . . , B. For each non-
+empty bin,
+accb = 1 |Ib| ∑ i∈Ib yi, conf b = 1 |Ib| ∑ i∈Ib ˆci, (12)
+and we set B = 5:
+ECE =
+∑
+b: |Ib|>0
+|Ib|
+|Q| |accb − conf b| . (13)
+OC@0.8 and ECE describe different reliabil-
+ity failures. OC@0.8 isolates high-conﬁdence
+mistakes and uses all questions as its denomi-
+nator; ECE summarizes the conﬁdence–accuracy
+gap across ﬁve bins. Because ECE depends on bin-
+ning and the benchmarks contain about 100 ques-
+tions each, we interpret it together with accuracy
+and OC@0.8 rather than as a standalone reliability
+claim.
+Statistical protocol. For the TED/Llama-3.1-8B
+ﬁxed-depth comparison in Table 3, we use seeds
+{0, 1, 2, 3, 4} and report mean ± standard devia-
+tion. We obtain 95% conﬁdence intervals and two-
+sided p-values from 10,000 paired question-level
+bootstrap samples, resampling the 101 questions
+while retaining all ﬁve outcomes per question. In-
+ferential claims refer to this analysis; Table 1 pro-
+vides the broader cross-backbone comparison.
+4.5 Comparison with Competitive Methods
+Table 1 compares three backbones on TED and
+GD. URGen has the highest accuracy and low-
+est OC@0.8 in all six model–dataset blocks; its
+ECE is lowest or tied for lowest in all six. On
+TED with Llama-3.1, URGen obtains 80.40% ac-
+curacy, 1.98% OC@0.8, and 6.80% ECE, com-
+pared with 74.65%/11.88%/14.95% for Fixed-1
+3923

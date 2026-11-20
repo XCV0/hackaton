@@ -1,0 +1,116 @@
+where wr is the weight of a specific relation (de-
+faulting to 1.0 or weighted by relation type).
+Step 2: Probabilistic Edge Normalization. To
+convert the unbounded raw score Suv into a proba-
+bility Pedge(u, v) ∈ [0, 1), we apply an exponential
+saturation function. This models the intuition that
+diminishing returns apply as evidence accumulates:
+Pedge(u, v) = 1 − exp(−κ · Suv) (17)
+where κ is a scaling factor (set to 0.1 in our ex-
+periments). This defines the pairwise connectivity
+map.
+Step 3: Triplet Coherence Scoring. For a can-
+didate tuple E = (eid1 , eid2 , eid3 ), we retrieve the
+three pairwise edge probabilities: p12, p23, p13. We
+calculate their average as the final probability
+P (E)graph = p12 + p23 + p13 3 (18)
+B Reproducibility
+In this section, we provide detailed configurations
+for the baseline models to ensure reproducibility.
+For most parameters, we use the default settings in
+the original repository. Across all RAG systems,
+we employ identical embedding and reranker mod-
+els.
+B.1 VisRAG
+We follow to the reproducible baseline methodol-
+ogy provided by UltraRAG3. We adapt the data
+structures of MMLongBench-Doc and DocBench
+to align with the benchmark schema required by
+UltraRAG. Question answering is conducted using
+the official configuration template4. Finally, an-
+swer extraction and scoring are performed using
+the evaluation scripts provided by the respective
+benchmarks.
+B.2 ViDoRAG
+We follow the official implementation of Vi-
+DoRAG5 with specific modifications to the em-
+bedding module. Specifically, we utilize MinerU
+for document parsing. For vector database con-
+struction, we employ Qwen3-Embedding-4B for
+text segments and nomic-embed-multimodal-3b
+for page-level PDF screenshots. We apply the
+3https://github.com/OpenBMB/UltraRAG
+4https://github.com/OpenBMB/UltraRAG/blob/
+main/examples/visrag.yaml
+5https://github.com/Alibaba-NLP/ViDoRAG
+proposed Gaussian Mixture Model (GMM)-based
+hybrid strategy to effectively handle multi-modal
+retrieval. GPT-4o-mini server as the backbone
+model for the Seeker, Inspector, and Answer
+agents.
+B.3 RAGFlow
+We deploy RAGFlow using the official Docker
+image6. We employ Qwen3-Embedding-4B and
+bge-reranker-v2-m3 (host via VLLM) for text
+embedding and reranking, respectively. For mul-
+timodal content, Qwen3-VL-32B is utilized to gen-
+erate descriptions. All other parsing parameters
+retain their default settings.
+During the question-answering phase, we use
+GPT-4o-mini and enable the following features:
+Keyword Analysis, TOC Enhance, Use Knowledge
+Graph, and Reasoning. The specific chat configu-
+ration parameters are detailed in Listing 1.
+Listing 1: Configuration parameters for RAGFlow.
+{
+" language " : " English " ,
+" llm " : {
+" max_tokens " : 4 0 9 6 ,
+" model_name " : " azure - gpt -4 o - mini___OpenAI -
+,→ API@OpenAI - API - Compatible " ,
+" temperature " : 0 . 1
+} ,
+" met a_data_f ilter " : {
+" method " : " automatic "
+} ,
+" prompt " : {
+" empty_response " : " " ,
+" keyword " : true ,
+" k e y w o r d s _ s i m i l a r i t y _ w e i g h t " : 0 . 7 ,
+" opener " : " Hi ! I ' m your assistant . What can I do
+,→ for you ? " ,
+" prompt " : " You are an intelligent assistant .
+,→ Please summarize the content of the
+,→ knowledge base to answer the question .
+,→ Please list the data in the knowledge
+,→ base and answer in detail . When all
+,→ knowledge base content is irrelevant to
+,→ the question , your answer must include
+,→ the sentence \ ' The answer you are
+,→ looking for is not found in the
+,→ knowledge base !\ ' Answers need to
+,→ consider chat history .\ n Here is
+,→ the knowledge base :\ n { knowledge }\ n
+,→ The above is the knowledge base . " ,
+" reasoning " : true ,
+" refi ne_mult iturn " : false ,
+" rerank_model " : " bge - reranker - v2 - m3___OpenAI -
+,→ API@OpenAI - API - Compatible " ,
+" show_quote " : true ,
+" s i m i l a r i t y _ t h r e s h o l d " : 0 . 2 ,
+" toc_enhance " : true ,
+" top_n " : 8 ,
+" tts " : false ,
+" use_kg " : true ,
+" variables " : [
+{
+" key " : " knowledge " ,
+" optional " : true
+}
+]
+} ,
+" prompt_type " : " simple " ,
+" top_k " : 1 0 2 4
+}
+6https://hub.docker.com/r/infiniflow/ragflow
+13

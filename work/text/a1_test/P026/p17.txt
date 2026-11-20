@@ -1,0 +1,59 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+5.3.Impedancespectroscopy
+Current–voltage sweeps constitute only one of many dynamic characterisation techniques commonly
+simulated by drift–diffusion models. Another is IS, in which the steady state is perturbed by a
+small-amplitude oscillating voltage at varying frequencies and the amplitude and phase of the current
+response is measured as a function of frequency. This technique can be used to diagnose performance losses
+and degradation as well as probe the timescales on which the physical processes within the cell operate
+[13, 111–113]. Recent additions of FD statistics and an IS simulation capability to IonMonger [110] provide
+the first PSC modelling software capable of exploring the interdependent effects of the two. As shown in
+figure 8, predicted impedance spectra are highly sensitive to changes in the statistical integrals. The
+discrepancies between the simulations employing the Boltzmann approximation in the TLs and those based
+on FD statistics in the TLs are exacerbated for larger values of the DC voltage, the value about which the
+voltage is perturbed, and particularly impact the low-frequency arc, caused by the charging and discharging
+of the Debye layers and mediated by the mobile ions in the perovskite [13].
+6.Conclusion
+While the Boltzmann approximation (from which the CER, is derived) has been widely employed in
+semiconductor modelling, it has often been used without due consideration of the validity of the
+approximation in the scenario in which it is being employed. Specifically, the use of organic materials to
+fabricate PSC TLs, and the high doping levels in these structures, suggest that the Boltzmann
+approximation (22) to the FD statistical distribution (9) (and thus also the CER) is frequently inaccurate in
+the TLs. This, in turn, can lead to significant errors in the predictions made by PSC charge transport models.
+Incorporating a full statistical treatment of the charge carrier dynamics in the TLs (equivalent to using
+the GER) leads to a density-dependent diffusion enhancement function, ∆, that is determined by the DoS
+function. For cases in which the Boltzmann approximation is accurate, the diffusion enhancement function
+reduces to ∆ = 1. Crucially, however, the function is highly sensitive to the choice of DoS function. In
+particular, the region of validity of the Boltzmann approximation depends sensitively on the exact DoS
+employed by the model. Of the common PSC TL materials, disordered organic materials, which are usually
+modelled by a Gaussian DoS function, are those for which the Boltzmann approximation is least accurate,
+due to the diffuse nature of the Gaussian. The accuracy is particularly poor for the materials with greatest
+disorder, such as PCBM and PEDOT:PSS.
+In order to test the sensitivity of drift–diffusion models of a typical TiO2/MAPI/Spiro-MeOTAD PSC to
+changes in the description of carrier transport in the TLs of the device, comparison was made between
+predicted device behaviour obtained from (I) a PSC model in which carrier transport in the TLs was
+described using the Boltzmann approximation and (II) a PSC model in which full FD statistics were
+employed.
+Numerical solutions show that the the full statistical treatment of carrier transport in the TLs leads to
+significantly different predictions of four key steady state performance parameters (VOC, JSC, FF and PCE) in
+comparison to the predictions made by the model in which carrier transport in the TLs is described by the
+Boltzmann approximation. The most notable is between the predictions of the PCE, the value of which was
+overestimated by the model based upon the Boltzmann approximation by 27%. This leads us to conclude
+that the steady state performance of the cell is not well-described by the standard planar PSC model (i.e. one
+in which the Boltzmann approximation is employed in the TLs). Due to the large number of material
+parameters in the PSC model and the difficulty in obtaining accurate estimates of their values, it is common
+to fit some parameters to match experimental data, particularly the four performance parameters considered
+here. It is clear that fitting these parameters to the standard model (based on the Boltzmann approximation)
+can easily lead to incorrect predictions of these parameters, and a misleading description of the cell.
+In addition to steady state performance, two common dynamic measurements, namely current–voltage
+hysteresis and IS, were simulated using PSC models based on (I) a Boltzmann description of the TLs and (II)
+a full FD description of the TLs. For this representative parameter set, the model based on the Boltzmann
+approximation incorrectly predicts both the maximum hysteresis factor and the scan rate at which this
+maximum appears (figure 7). Furthermore, the Boltzmann model produces qualitative errors in the shape of
+the J-V curve across a wide range of physically relevant scan rates. Similar errors were observed in the
+Boltzmann model when simulating IS, dependent on the DC voltage. At low voltages, carrier densities in the
+TLs near the perovskite interfaces are lower, meaning the Boltzmann approximation is more likely to be
+accurate. For greater DC voltages, however, carriers in the TLs accumulate near the perovskite interfaces,
+affecting the ion vacancy accumulation/depletion occurring on the perovskite side of the interfaces, and thus
+the low-frequency arc on the Nyquist plot that is caused by ion migration. Recently it has been shown that
+adopting an asymptotic approach to solving the charge transport model, rather than a numerical one, can
+16

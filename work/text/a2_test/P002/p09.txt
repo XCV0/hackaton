@@ -1,0 +1,140 @@
+CG-RAG: Research Question Answering by Citation Graph Retrieval-Augmented LLMs Conference acronym ’XX, June 03–05, 2018, Woodstock, NY
+is sufficiently large, retaining only the top-1 relevant chunk will
+suffice.
+• Retrieval Signals. We compare four sparse representation
+methods. BGE-M3 outperforms other sparse encoders, achieving
+the highest scores, as its ability to integrate lexical and semantic
+features is critical for domain-specific term matching. TF-IDF and
+BM25, while strong in lexical precision, lack semantic adaptability.
+In addition, we also compare three dense representation methods,
+with MiniLM delivering the best performance. MiniLM’s compact
+representation effectively captures semantic nuances, making
+it better suited for diverse queries and documents. As a whole,
+however, combining two expressive retrieval models with our
+LeSeGR framework results in stronger retrieval performance.
+Notably, the performance of LeSeGR appears to be primarily
+constrained by the quality of the dense retrieval signal.
+6 CONCLUSION
+In this work, we introduce Lexical-Semantic Graph Retrieval (LeSeGR),
+a novel framework that integrates sparse, dense, and graph-structured
+retrieval signals for complex and structured database. Based on
+LeSeGR, we present Contextualized Graph Retrieval-Augmented
+Generation (CG-RAG) for research question answering. By leverag-
+ing a contextual citation graph, our approach effectively captures
+intra- and inter-document relationships, enabling a dynamic prop-
+agation of contextual information through an entangled hybrid
+retrieval paradigm. This paradigm bridges lexical precision and se-
+mantic understanding while generalizing to existing retrieval meth-
+ods. Furthermore, CG-RAG incorporates a graph-aware generation
+strategy, enhancing the contextual richness of generated responses.
+Extensive experiments across multiple citation networks demon-
+strate the superior performance of CG-RAG based on LeSeGR,
+achieving state-of-the-art results in retrieval metrics such as Hit@1
+and generation metrics such as Coherence and Relevance. Our find-
+ings underscore the effectiveness of graph-contextualized represen-
+tations in advancing the capabilities of retrieval-augmented gen-
+eration for citation graphs, setting a new benchmark for retrieval-
+augmented research question answering.
+REFERENCES
+[1] Sören Auer, Allard Oelen, Muhammad Haris, Markus Stocker, Jennifer D’Souza,
+Kheir Eddine Farfar, Lars Vogt, Manuel Prinz, Vitalis Wiens, and Mohamad Yaser
+Jaradeh. 2020. Improving access to scientific literature with knowledge graphs.
+Bibliothek Forschung und Praxis 44, 3 (2020), 516–529.
+[2] Yupeng Chang, Xu Wang, Jindong Wang, Yuan Wu, Linyi Yang, Kaijie Zhu, Hao
+Chen, Xiaoyuan Yi, Cunxiang Wang, Yidong Wang, et al. 2024. A survey on
+evaluation of large language models. ACM Transactions on Intelligent Systems
+and Technology 15, 3 (2024), 1–45.
+[3] Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu Lian, and Zheng Liu. 2024.
+Bge m3-embedding: Multi-lingual, multi-functionality, multi-granularity text
+embeddings through self-knowledge distillation. arXiv preprint arXiv:2402.03216
+(2024).
+[4] Xilun Chen, Kushal Lakhotia, Barlas Oğuz, Anchit Gupta, Patrick Lewis, Stan
+Peshterliev, Yashar Mehdad, Sonal Gupta, and Wen-tau Yih. 2021. Salient phrase
+aware dense retrieval: can a dense retriever imitate a sparse one? arXiv preprint
+arXiv:2110.06918 (2021).
+[5] Jacob Devlin. 2018. Bert: Pre-training of deep bidirectional transformers for
+language understanding. arXiv preprint arXiv:1810.04805 (2018).
+[6] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva
+Mody, Steven Truitt, and Jonathan Larson. 2024. From local to global: A graph
+rag approach to query-focused summarization. arXiv preprint arXiv:2404.16130
+(2024).
+[7] Fangxiaoyu Feng, Yinfei Yang, Daniel Cer, Naveen Arivazhagan, and Wei
+Wang. 2020. Language-agnostic BERT sentence embedding. arXiv preprint
+arXiv:2007.01852 (2020).
+[8] Luyu Gao, Zhuyun Dai, Tongfei Chen, Zhen Fan, Benjamin Van Durme, and
+Jamie Callan. 2021. Complement lexical retrieval model with semantic residual
+embeddings. In Advances in Information Retrieval: 43rd European Conference on
+IR Research, ECIR 2021, Virtual Event, March 28–April 1, 2021, Proceedings, Part I
+43. Springer, 146–160.
+[9] Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yi Dai,
+Jiawei Sun, and Haofen Wang. 2023. Retrieval-augmented generation for large
+language models: A survey. arXiv preprint arXiv:2312.10997 (2023).
+[10] Hamed Babaei Giglou, Tilahun Abedissa Taffa, Rana Abdullah, Aida Usmanova,
+Ricardo Usbeck, Jennifer D’Souza, and Sören Auer. 2024. Scholarly Question
+Answering using Large Language Models in the NFDI4DataScience Gateway.
+arXiv preprint arXiv:2406.07257 (2024).
+[11] Xiaoxin He, Yijun Tian, Yifei Sun, Nitesh V Chawla, Thomas Laurent, Yann
+LeCun, Xavier Bresson, and Bryan Hooi. 2024. G-retriever: Retrieval-augmented
+generation for textual graph understanding and question answering. arXiv
+preprint arXiv:2402.07630 (2024).
+[12] Yuntong Hu, Zhihan Lei, Zheng Zhang, Bo Pan, Chen Ling, and Liang Zhao. 2024.
+GRAG: Graph Retrieval-Augmented Generation. arXiv preprint arXiv:2405.16506
+(2024).
+[13] Yuntong Hu, Zheng Zhang, and Liang Zhao. 2023. Beyond Text: A Deep Dive into
+Large Language Models’ Ability on Understanding Graph Data. arXiv preprint
+arXiv:2310.04944 (2023).
+[14] Gautier Izacard, Mathilde Caron, Lucas Hosseini, Sebastian Riedel, Piotr Bo-
+janowski, Armand Joulin, and Edouard Grave. 2021. Unsupervised dense in-
+formation retrieval with contrastive learning. arXiv preprint arXiv:2112.09118
+(2021).
+[15] Qiao Jin, Bhuwan Dhingra, Zhengping Liu, William W Cohen, and Xinghua Lu.
+2019. Pubmedqa: A dataset for biomedical research question answering. arXiv
+preprint arXiv:1909.06146 (2019).
+[16] Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick Lewis, Ledell Wu, Sergey
+Edunov, Danqi Chen, and Wen-tau Yih. 2020. Dense Passage Retrieval for Open-
+Domain Question Answering. In Proceedings of the 2020 Conference on Empirical
+Methods in Natural Language Processing (EMNLP). 6769–6781.
+[17] Omar Khattab and Matei Zaharia. 2020. Colbert: Efficient and effective passage
+search via contextualized late interaction over bert. In Proceedings of the 43rd
+International ACM SIGIR conference on research and development in Information
+Retrieval. 39–48.
+[18] Thomas N Kipf and Max Welling. 2016. Semi-supervised classification with graph
+convolutional networks. arXiv preprint arXiv:1609.02907 (2016).
+[19] Saar Kuzi, Mingyang Zhang, Cheng Li, Michael Bendersky, and Marc Najork. 2020.
+Leveraging semantic and lexical matching to improve the recall of document
+retrieval systems: A hybrid approach. arXiv preprint arXiv:2010.01195 (2020).
+[20] Jens Lehmann, Antonello Meloni, Enrico Motta, Francesco Osborne, Diego Re-
+forgiato Recupero, Angelo Antonio Salatino, and Sahar Vahdati. 2024. Large
+Language Models for Scientific Question Answering: An Extensive Analysis of
+the SciQA Benchmark. In European Semantic Web Conference. Springer, 199–217.
+[21] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin,
+Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel,
+et al. 2020. Retrieval-augmented generation for knowledge-intensive nlp tasks.
+Advances in Neural Information Processing Systems 33 (2020), 9459–9474.
+[22] Huayang Li, Yixuan Su, Deng Cai, Yan Wang, and Lemao Liu. 2022. A survey on
+retrieval-augmented text generation. arXiv preprint arXiv:2202.01110 (2022).
+[23] I Loshchilov. 2017. Decoupled weight decay regularization. arXiv preprint
+arXiv:1711.05101 (2017).
+[24] Alejandro Lozano, Scott L Fleming, Chia-Chun Chiang, and Nigam Shah. 2023.
+Clinfo. ai: An open-source retrieval-augmented large language model system for
+answering medical questions using scientific literature. In PACIFIC SYMPOSIUM
+ON BIOCOMPUTING 2024. World Scientific, 8–23.
+[25] Yi Luan, Jacob Eisenstein, Kristina Toutanova, and Michael Collins. 2021. Sparse,
+dense, and attentional representations for text retrieval. Transactions of the
+Association for Computational Linguistics 9 (2021), 329–345.
+[26] Priyanka Mandikal and Raymond Mooney. 2024. Sparse Meets Dense: A
+Hybrid Approach to Enhance Scientific Document Retrieval. arXiv preprint
+arXiv:2401.04055 (2024).
+[27] Kurnia Muludi, Kaira Milani Fitria, Joko Triloka, et al. 2024. Retrieval-Augmented
+Generation Approach: Document Question Answering using Large Language
+Model. International Journal of Advanced Computer Science & Applications 15, 3
+(2024).
+[28] Rodrigo Nogueira, Wei Yang, Jimmy Lin, and Kyunghyun Cho. 2019. Document
+expansion by query prediction. arXiv preprint arXiv:1904.08375 (2019).
+[29] Vít Novotn`y and Michal Stefánik. 2022. Combining Sparse and Dense Information
+Retrieval.. In CLEF (Working Notes). 104–118.
+[30] N Reimers. 2019. Sentence-BERT: Sentence Embeddings using Siamese BERT-
+Networks. arXiv preprint arXiv:1908.10084 (2019).
+[31] Stephen Robertson, Hugo Zaragoza, et al. 2009. The probabilistic relevance
+framework: BM25 and beyond. Foundations and Trends® in Information Retrieval
+3, 4 (2009), 333–389.

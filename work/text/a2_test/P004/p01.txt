@@ -1,0 +1,105 @@
+Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 17900–17916
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+LCR-RAG: Enhancing Logical Consistency in Retrieval-Augmented
+Generation via Neuro-symbolic Reinforcement Learning
+Wenxiang Zheng1, Guo Tang1, Shixin Jiang1, Liangyu Huo3,
+Xiyuan Zhang3, Jian Xie3, Ming Liu1,2*
+1Harbin Institute of Technology, Harbin, China
+2Peng Cheng Laboratory, Shenzhen, China
+3Du Xiaoman Technology, Beijing, China
+{wxzheng, gtang, sxjiang, mliu}@ir.hit.edu.cn
+Abstract
+Retrieval-Augmented Generation (RAG) is
+widely used to ground large language models
+(LLMs) in external knowledge and improve
+factual accuracy. Prior work has explored iter-
+ative and self-reflective mechanisms to refine
+reasoning, but these approaches rely on internal
+model judgment and lack formally grounded,
+verifiable feedback. As a result, RAG systems
+may still produce logically inconsistent or con-
+tradictory answers in multi-step reasoning. In
+this paper, we propose LCR-RAG, a frame-
+work that integrates neuro-symbolic verifica-
+tion with reinforcement learning to explicitly
+optimize logical consistency. The core of our
+approach is a Logic-Consistency-driven Re-
+ward (LCR), which converts discrete logical
+signals—such as contradictions or incomplete
+inference chains—into a structured reward sig-
+nal. This reward guides a PPO-based agent to
+iteratively rewrite queries and correct reasoning
+errors. Experiments on HotpotQA, ASQA, and
+TriviaQA show that LCR-RAG consistently
+outperforms strong RAG baselines, with abla-
+tion results indicating that the LCR mechanism
+is the primary source of improvement, even
+under noisy or conflicting retrieval conditions.
+1 Introduction
+The advent of Large Language Models (LLMs)
+has fundamentally reshaped the landscape of arti-
+ficial intelligence, offering unprecedented capabil-
+ities in understanding and generating human-like
+text. A cornerstone of their practical application
+has been the development of Retrieval-Augmented
+Generation (RAG) frameworks (Lewis et al., 2020),
+which ground these models in external, verifiable
+knowledge sources. This paradigm has proven re-
+markably effective at mitigating factual hallucina-
+tions and enhancing the accuracy of answers in
+standard question-answering (QA) tasks. How-
+ever, as the ambition of AI systems moves be-
+*Corresponding Author.
+Semantic Coherence
+Logical Soundness
+LLM
+Query
+User
+Response
+Factual Grounding
+Retriever
+Relevant
+text
+Query
+User
+Response
+Retriever
+Relevant
+text
+Self-correction
+feedback
+Query
+User
+Verifier
+Retriever
+Relevant
+text
+LLM
+answer
+Figure 1: The RAG Reliability Pyramid, illustrating
+three ascending levels of trustworthiness: L1 Factual
+Grounding, L2 Semantic Coherence, and L3 Logical
+Soundness.
+yond simple fact retrieval towards complex, multi-
+step reasoning, the limitations of current RAG sys-
+tems have become increasingly apparent (Kand-
+pal et al., 2023). Many high-value real-world
+problems require not just the aggregation of dis-
+parate facts (Gao et al., 2023a), but a logically
+sound, step-by-step inference process to connect
+them. It is in these reasoning-intensive scenarios
+that existing systems exhibit a significant “Logic
+Deficit” (Cheng et al., 2025), often producing an-
+swers that, while factually grounded in individual
+retrieved documents, are internally contradictory
+or logically invalid when synthesized.
+To systematically understand and address this
+challenge, we propose a “RAG Reliability Pyra-
+mid” (Gao et al., 2023b) as a conceptual model.
+This model delineates three ascending levels of
+trustworthiness for RAG systems. The founda-
+tional level, L1: Factual Grounding, is achieved by
+standard RAG, which ensures that generated state-
+ments are rooted in retrieved evidence. The next
+level, L2: Semantic Coherence, is addressed by
+17900

@@ -1,0 +1,24 @@
+For this task you are asked to answer a question (Question). Please provide factually accurate,
+direct, and clear responses. Do not ask any clarification questions or ask for additional
+information. To make sure the right facts are being considered, you should always ground your
+responses to the provided references below (References). If the references are not relevant to
+the question or do not provide the right information, you can respond with an apology rather than
+fabricating facts.
+## References:
+<Reference Documents>
+## Question:
+<Question>
+Now let’s think step by step:
+Step 1: summarize what is the question is asking, and what are the specific key pieces of
+information that are needed to answer the question.
+Step 2: analyze the provided references, one by one. Identify the relevant information that can be
+used to answer the question. Pay close attention to the entities, names, times, locations, events,
+and keywords that are relevant to the question. If the question is related to (or implies) the
+current user location and/or time, you must consider that in finding the relevant information and
+answering the question.
+Step 3: based on Step 1 and Step 2, you must provide an answer that directly address the question
+and is fully grounded on the provided references.
+Now, provide your reasoning steps in a few sentences followed by the final answer to the
+question as a new line starting with "## Answer:".
+Figure 8: Prompt used for answer and thought generation given the question and reference content.
+789

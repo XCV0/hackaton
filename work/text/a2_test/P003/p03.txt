@@ -1,0 +1,111 @@
+et al., 2025; Feng et al., 2025). For QA, cali-
+bration has been studied for language models and
+prompting pipelines, including how conﬁdence be-
+haves under in-context learning (Jiang et al., 2021;
+Zhang et al., 2024b; Tian et al., 2023). Seman-
+tic entropy clusters sampled generations by mean-
+ing before measuring their dispersion (Kuhn et al.,
+2023); retrieval-aware approaches further examine
+whether uncertainty changes with the available ev-
+idence (Perez-Beltrachini and Lapata, 2025). In
+our constrained multiple-choice setting, option la-
+bels provide the answer categories, so we use
+Shannon entropy over the aggregated option dis-
+tribution rather than proposing a new semantic-
+clustering estimator. Softmax normalization, en-
+tropy, multi-temperature sampling, and majority
+voting are established components. Our contribu-
+tion is their coupling: ranking entropy controls re-
+trieval depth, and the resulting context uncertainty
+is fused with answer uncertainty to quantify relia-
+bility.
+Medical QA benchmarks. Medical QA spans
+clinical notes, biomedical literature, and exam-
+style multiple-choice questions. Representative
+resources include emrQA for EMR question an-
+swering (Pampari et al., 2018), PubMedQA for
+research questions (Jin et al., 2019), MedNLI for
+clinical inference (Romanov and Shivade, 2018),
+and MEDIQA shared tasks for medical QA and en-
+tailment (Ben Abacha et al., 2019). Exam-oriented
+multiple-choice benchmarks such as MedQA (Jin
+et al., 2021), MedMCQA (Pal et al., 2022), and
+HEAD-QA (Vilares and Gómez-Rodríguez, 2019;
+Wang et al., 2025; Rezaei et al., 2025) are increas-
+ingly used to evaluate medical reasoning under
+constrained answer options, where calibration and
+retrieval quality both directly affect safety.
+3 Methodology
+3.1 Framework Overview
+As shown in Figure 3, we introduce Uncertainty-
+guided Retrieval-augmented Generation (URGen),
+a training-free framework that harnesses an off-
+the-shelf frozen large language model (LLM) for
+guideline-grounded medical multiple-choice QA.
+We do not pursue the best possible backbone, but
+instead focus on mitigating hallucinations and im-
+proving reliability in specialized domains. UR-
+Gen consists of four stages: multi-temperature
+knowledge retrieval, zero-shot adaptive retrieval
+depth (ZARD), multi-answer aggregation, and un-
+certainty estimation.
+We denote q as a multiple-choice medical ques-
+tion with options A and ground-truth choice ˜a ∈
+A. We assume access to a domain knowledge cor-
+pus C = {(ki; ti)}N i=1 constructed from expert re-
+sources and clinical consensus documents, where
+each ki is a summarized keypoint and ti is the cor-
+responding passage. Our goal is to learn a map-
+ping function:
+f :
+(
+q, C
+)
+−→
+(
+ˆa, ˆu
+)
+, (1)
+where ˆa denotes the predicted option and ˆu ∈
+[0, 1] is a calibrated uncertainty score for the pre-
+diction.
+3.2 Multi-Temperature Knowledge Retrieval
+First, we parse clinical guidelines and consen-
+sus documents into a structured collection of
+keypoint–passage pairs C = {(ki; ti)}. As de-
+tailed in Appendix A (Table S2), each pair com-
+prises a guideline statement and its supporting sec-
+tion, extracted deterministically from the public
+XML structure. Ophthalmology experts authored
+and veriﬁed the QA items and labels. We do not
+evaluate learned or noisy automatic extraction in
+this study. Here, ki is a concise statement captur-
+ing the main claim or ﬁnding of a passage, and
+ti is the full text content of that passage. Due to
+the lengthy full content, we perform retrieval using
+the question q and keypoint collection K = {ki}
+instead of the full content T = {ti} as query.
+Given a question q, the keypoint collection K and
+a prompt tailored for ranking keypoints, we query
+a frozen LLM M1 times with different tempera-
+tures {τ1, . . . , τM1 } to generate M1 ranking lists
+{l1, ..., lM1 } of keypoints in descending order of
+relevance. This multi-temperature retrieval pro-
+vides multiple “views” of relevance that later sup-
+port adaptive depth selection. The detailed ranking
+prompt is provided in Appendix G.
+3.3 Zero-Shot Adaptive Retrieval Depth
+We assign a positive relevance score to each of the
+top-K (K ≤ N) keypoints in the ranking list based
+on their ranking position. For each unique key-
+point ki, we aggregate the relevance score si by
+summing its raw scores across all M1 ranking lists
+l and applying a softmax normalization as:
+si =
+exp
+(∑M1
+j=1 score(lj ) i ) ∑N
+i=1 exp
+(∑M1
+j=1 score(lj ) i ) . (2)
+3920

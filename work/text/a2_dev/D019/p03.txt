@@ -1,0 +1,136 @@
+Query:
+Who carried the us
+flag in the 2014
+olympics?
+LLM Reader
+Standard
+RAG
+Query
+Final Answer:
+Todd Lodwick
+Retriver
+History
+QA Pairs
+Wikipedia
+Merged
+Knowledge Base
+First Round Answer:
+Todd Lodwick
+<answer>
+{
+    "thought": "The answer partially...",
+    "judge": "True",
+    "missing_knowledge": ['Flag bearer for the
+        2014 Summer Olympics opening and       
+        closing ceremony']
+    "query": ['Who carried the US flag in the
+         2014 Summer Olympics opening
+         ceremony?', ...
+}
+</answer>
+Retriver
+Reasoning
+Content Judgement
+<think>
+Okay, Let's break it down step by step to
+determine if critical knowledge is
+missing...From my existing knowledge... The
+US flag bearer during opening ceremony was
+Todd Lodwick and Julie Chu for closing
+ceremony. Wait, let me double-check,
+however, some retrieved contexts are from
+2018, which might irrelevant and lead to
+confusion... 
+</think>
+Missing Knowledge
+Query
+LLM Reader
+Step 1. Retrieve from different KBs Step 2. Missing knowledge judgement
+Query Contexts Prediction
+Final Answer:
+Todd Lodwick,
+Julie Chu
+CoT Prompting
+Step 3. CoT Prompting and output final answer
+Judgement
+Reasoning
+Content
+LLM Reasoner Output
+LLM Reader
+Query
+Contexts
+Reasoning
+Content
+Thought
+Offline Faiss Indexing
+ Corpus
+      Wikipedia
+     QA Pairs
+History
+QA Pairs
+Wikipedia
+Merged
+Knowledge Base
+Construct different Knowledge Bases
+RAG with missing knowledge retrieval
+CoT Prompting
+    LLM Reasoner
+Figure 2: Illustration of our Missing Knowledge RAG framework. Our pipeline first retrieves from knowledge bases
+and prompts open-sourced LLMs to give a draft answer. Second, LLM needs to decide whether any knowledge
+is missing. Different from the standard RAG pipeline, the LLM needs to generate missing knowledge and query
+with JSON format in a single turn. Finally, after a second-time retrieval with a generated query, we prompt all the
+retrieved contexts with explicit reasoning content to generate the final answer.
+are closely related to user query, and then generate
+a final answer Y based on query and grounded
+knowledge. The final goal of a RAG system is
+to ensure the comprehensive and precise retrieval
+of contexts needed to address the query, thereby
+generating the response aligned with ground truth
+A.
+2.2 Reasoning Enhanced RAG with Missing
+Knowledge Framework
+In our proposed framework, we initially retrieve
+top-K grounded knowledge text chunks C, sourced
+from the offline indexing process, to formulate a
+preliminary answer Y1. Then, we employ a rea-
+soner LLM to judge if there exists any missing
+knowledge in the reasoning process R. If deficien-
+cies in knowledge are identified, iterative retrieval
+is performed with the generated queries correspond-
+ing to missing knowledge. Finally, we prompt the
+reader LLM to produce the final response Yf inal.
+Retrieve from Different Knowledge Bases To
+mitigate the distribution gap between queries and
+knowledge bases shown in Figure 1, previous stud-
+ies propose to utilize query rewriting (Ma et al.,
+2023), which requires efforts in data annotation.
+We propose to retrieve from historical QA Pairs,
+which contain more colloquial descriptions and ex-
+hibit closer semantic and intent alignment with user
+queries, especially in domain-specific scenarios.
+And we further investigate retrieval from various
+knowledge sources (i.e., Wikipedia, historical QA
+pairs, or the merged knowledge base).
+As presented in Figure 2, we first employ a dense
+retriever to obtain top-K text chunks using the en-
+coded query embedding. Subsequently, this ap-
+proach enables us to acquire contextual information
+characterized by diverse semantic structures.
+qE = Encoder(Q),
+dE = {Encoder(Di), i = 1, ..., |D|},
+V = {
+/radicaltp/radicalvertex/radicalvertex√ d∑
+j=1
+(qEj − dEij )2|i = 1, ..., |D|},
+C = {D[i]|i ∈ arg top-K(V)},
+(1)
+where D represents the retrieved knowledge base
+with text chunks, V and C refer to encoded vector
+set processed through offline indexing and top-K
+selected contexts according to L2 metric, respec-
+tively.
+Then we could get the first round answer with
+the LLM reader:
+Y1 = LLMθ(xi|Q, C, x<i, i = 1, ..., t), (2)
+where xi denotes the i-th token during generation.
+1363

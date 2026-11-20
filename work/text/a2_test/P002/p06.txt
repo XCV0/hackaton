@@ -1,0 +1,112 @@
+Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Yuntong et al.
+used to generate the answer, as illustrated in Figure 2. Specifically,
+for each selected chunk, its corresponding contextual subgraph ¯G𝑖
+is retained for the generation phase, where ¯G𝑖 = ¯G[{𝑖}∪N(𝑖)]
+represents the induced subgraph consisting of chunk 𝑐𝑖 and its
+direct neighbors. Formally, the set of contextual subgraphs for the
+Top-𝑁 chunks is defined as:
+𝑆( ¯G;𝑞) = Ø
+𝑐𝑖 ∈Top-𝑁(𝑞,C)
+¯G𝑖, (18)
+where Top-𝑁(𝑞,𝐶) represents the Top-𝑁 chunks ranked by 𝑠(𝑞,𝑐𝑖).
+This ensures the retrieval retains both the most relevant chunks
+and their graph context for downstream tasks.
+To effectively utilize the contextual information of each retrieved
+chunk and adapt to various LLMs, including open-source models
+such as LLaMA and closed-source models such as ChatGPT, we
+first summarize the graph context and then concatenate this sum-
+marized context with the central chunks to enhance generation.
+Specifically, for each contextual subgraph ¯G𝑖 ∈𝑆( ¯G;𝑞), we prompt
+the LLM to summarize the contextual information surrounding 𝑐𝑖.
+The summarized context is concatenated with the query to form
+the final input for generating the answer. The generation process
+over the citation graph G is formally defined as:
+𝑝𝜃(𝑌|𝑞,G) = arg max 𝜃
+𝑛Ö
+𝑖=1
+𝑝𝜃(𝑦𝑖|𝑦<𝑖,𝑋𝑞,𝑋C), (19)
+where 𝜃 represents the LLM parameters, 𝑋𝑞 = TextEmbedder(𝑞) is
+the query embedding, and 𝑋C is the context embedding:
+𝑋C = TextEmbedder
+
+Summarize(𝑞, ¯G𝑖)  ¯G𝑖 ∈𝑆( ¯G;𝑞)  , (20)
+representing the embeddings of the concatenated summarized con-
+texts from the retrieved contextual subgraphs. The summarization
+is performed by the LLM itself, extracting relevant information
+from the contextual subgraph to aid in generating the final answer.
+5 EXPERIMENT
+We conduct experiments to evaluate the effectiveness (Section 5.2)
+and efficiency (Section 5.3) of Contextualized Graph RAG, along
+with an analysis of the individual contributions of our technical
+designs (Section 5.4).
+5.1 Settings
+Datasets. Our experiments utilize two datasets: PubMedQA-1k
+and PapersWithCodeQA. PubMedQA-1k is a publicly available
+dataset, introduced by Jin et al., and comprises 1,000 question-
+answer pairs designed for PubMed literature 1, with human-labeled
+gold-standard retrieval and answer annotations. The original dataset,
+however, lacks citation information between papers, which we ad-
+dressed by extracting the references for each paper and constructing
+a citation graph database with a total of 7,849 papers.
+The PapersWithCodeQA dataset was collected from the Paper-
+sWithCode website2, which tracks research papers across various
+computer science fields. We used 84 leaderboards3 spanning diverse
+domains, including Computer Vision, Natural Language Processing,
+1https://pubmed.ncbi.nlm.nih.gov/
+2https://paperswithcode.com/
+3https://paperswithcode.com/sota
+Table 1: Example question-answering pairs and correspond-
+ing evaluation metrics.
+True or False: Do mitochondria play a role in remodelling lace
+plant leaves during programmed cell death? Yes,
+No or Maybe.
+Answer: Yes
+Metrics: Accuracy (Acc), 𝐹1 Score.
+Multiple Choice: Which model achieves state-of-the-art∗ perfor-
+mance on the ADE20K dataset for semantic seg-
+mentation? (a) BEiT-3 (b) DINOv2 (c) ONE-PEACE
+(d) EVA
+Answer: (c)
+Metrics: Mean Reciprocal Rank (MRR), Hit@k.
+Essay: Could you provide an overview of the model devel-
+opment for semantic segmentation?
+Answer: ... Early models like FCN (Fully Convolutional Net-
+works) laid the foundation by adapting classifi-
+cation networks for pixel-level predictions ... Re-
+cently, ONE-PEACE emerged as a state-of-the-art
+model ...
+Metrics: Coherence, Consistency, Relevance
+∗Within the citation graph we collected.
+Medical, and Graphs. For each leaderboard, we extracted the top 20
+papers’ contents and references from arXiv4 to construct a graph
+database. The LaTeX content of each paper was preserved as its
+textual attributes. The dataset comprises 12,171 papers, from which
+we also crafted 924 questions centered on leaderboard analysis,
+with ground truth answers derived directly from the leaderboards.
+These include 420 True/False questions, 420 multiple-choice ques-
+tions, and 84 generative questions. For generative questions, we
+first provide the LLMs with the most relevant contexts labeled by
+humans and allow the LLMs to generate answers. We then evalu-
+ate the quality of retrieval-augmented generation by replacing the
+human-selected contexts with those retrieved by different retrieval
+methods.
+Metrics. To comprehensively evaluate the performance of RAG
+systems in retrieving relevant information and generating accurate,
+contextually appropriate answers, we employ distinct metrics for
+retrieval and question answering. For retrieval, we use Hit@1 and
+Hit@3, which measure the proportion of queries where the cor-
+rect chunk is ranked within the top-1 and top-3 retrieved results,
+respectively.
+For research question answering, example questions and used
+evaluation metrics are presented in Table 1. For multiple-choice
+questions, we use Mean Reciprocal Rank (MRR) and Hit@k to assess
+ranking quality. For True/False questions, Accuracy (Acc) and 𝐹1
+score evaluate classification performance. For generative tasks, we
+leverage the UniEval model [49] to assess Coherence, Consistency,
+and Relevance, which evaluate logical flow, factual accuracy, and
+topical alignment, respectively. All metrics adhere to the principle
+that higher values indicate better model performance.
+Implementations. Experiments are conducted using two NVIDIA
+A10 GPUs, with Graph Transformer [33] serving as the graph en-
+coder. The configuration includes two layers, each featuring four
+4https://arxiv.org/

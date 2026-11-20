@@ -1,0 +1,102 @@
+790 Progress in Photovoltaics: Research and Applications, 2025
+4   |   Experimental Section
+4.1   |   Solar Cell Fabrication
+4.1.1   |   Materials
+Perovskite precursors, lead iodide, and bromide powders (PbI 2 
+and PbBr2) were purchased from TCI; cesium iodide and bromide 
+powders (CsI and CsBr) were obtained from Sigma Aldrich and 
+abcr GmbH, respectively. For evaporation, lead iodide beads (from 
+Alfa Aesar) were used. Methylammonium bromide (MABr), for-
+mamidinium iodide (FAI), and 4-  fluorophenethylam- monium 
+(F- PEAI) powders were obtained from GreatCell Solar. PFN-  Br 
+(poly[9,9- bis(3′- [N,N- dimethyl]- N- ethylammoniumpropyl- 2,7- 
+fluorene)- alt- 2,7- (9,9- dioctylfluorene)] dibromide) and PTAA 
+(poly[phenyl(2,4,6- trimethylphenyl)amine]) were from Sigma 
+Aldrich. C 60 and Spiro- TTB (2,2′,7,7′- Tetra[N,N- di- p- tolyl]
+amino- 9,9- spirobifluorene) were purchased from TCI and 
+Lumtec, respectively.
+4.1.2   |   Solutions Preparation
+For depositing perovskite absorber for middle cell 
+having bandgap of 1.56 eV and composition of 
+Cs0.05(FA0.90MA0.10)0.95Pb(I0.95Br0.05)3, 1.2-  M solution was pre -
+pared by dissolving appropriate stoichiometric amounts of FAI, 
+MABr and CsI, PbBr 2, and PbI 2 with 1% Pb excess in solvent 
+mixture of DMF:DMSO (4:1) and stirred overnight.
+For preparation of PTAA (3 mg/mL) and PFN-  Br (0.5 mg/mL) 
+solutions, powders were dissolved in toluene and methanol, re -
+spectively, and stirred overnight.
+4.1.3   |   Single Junction Solar Cells
+The ohmic silicon substrates were first cleaned by spin coating 
+200- μL ethanol and then treated with UV-  ozone for 15 min, be-
+fore being transferred to the glovebox for cell processing.
+4.1.4   |   Perovskite Middle- Cell (Eg ~ 1.56 eV)
+A 120- uL PTAA solution was spin coated at 6000 rpm for 30 s 
+and annealed at 100°C for 10 min on a preheated hotplate. 
+It was followed by spin coating 60-  μL PFN-  Br solution at 
+5000 rpm for 20 s on top to improve the wetting for perovskite 
+deposition. A 150-  μL perovskite solution was then spin 
+coated at 4000 rpm for 35 s; after 10 s, 300-  μL ethyl acetate 
+was dropped on the spinning substrates. Samples were now 
+annealed at 100°C for 30 min. Samples were then transferred 
+to a different glovebox for ETL deposition. Fifteen nanome -
+ters of C60 was thermally evaporated with an evaporation rate 
+of 0.2 Å/s. As a buffer layer to avoid sputter damage, 20-  nm 
+SnOx layer was deposited by atomic layer deposition at 80 °C. 
+Twenty- five- nanometer ITO was then DC sputtered as recom-
+bination layer using a shadow mask defining an active area of 
+1 cm2. The metallization was done by evaporating 200-  0nm 
+silver, and finally, 100- nm MgFx was evaporated as antireflec-
+tion coating.
+4.2   |   Perovskite Top- Cell (Eg ~ 1.88 eV)
+Eight nanometers of Spiro-  TTB was deposited with a nom -
+inal evaporation rate of 0.2 Å/s at base pressure lower than 
+3 × 10−6 Torr and a working pressure lower than 4 × 10–6 Torr. 
+Afterwards, samples were transferred to a Lesker mini-  
+Spectros system evaporator for perovskite deposition. For this 
+purpose, precursor materials CsBr, PbI2, and CsI were loaded 
+in ceramic crucibles for coevaporation in a Lesker mini-  
+Spectros system (at a base pressure lower than 2 × 10–6 Torr 
+and a working pressure lower than 3 × 10−6 Torr). The rates 
+as measured by quartz crystal monitors for the CsBr, PbI 2, 
+and CsI sources were maintained at 0.8, 0.6, and 0.13 Å/s, re-
+spectively, to obtain the CsPbI 2Br perovskite thin films with 
+a bandgap of 1.88 eV and a thickness of ~250 nm. The evap -
+oration temperature was ~460°C for CsBr, ~300°C for PbI 2, 
+and ~420°C for CsI. Ceramic crucibles, made of alumina 
+(Al2O3), were used for evaporation. For passivation with F-  
+PEAI, the procedure shown in the Supporting Information  
+text (Figure  S5b) was followed. The samples were annealed 
+at 100°C for 15 min prior to passivation. Annealed samples 
+were then spin coated with 150 μL of F- PEAI solution in IPA 
+at 4000 rpm for 40 s. The F- PEAI coated samples were sub -
+sequently annealed at 100°C for 5 min. The substrate holder 
+was maintained at 25°C. The procedure for rest of the layers, 
+including C60, SnOx, ITO, Ag, and MgF x, remained the same 
+as described above.
+4.2.1   |   Triple- Junction Solar Cells
+The triple-  junction solar cell was silicon heterojunction 
+(SHJ) solar cell with flat front and rear-  side textured as the 
+bottom cell. The procedure for fabricating the SHJ bottom 
+cells can be found in our previous publications [ 58, 59 ]. A 
+25- nm- thick ITO layer acts as the recombination layer be -
+tween the bottom cell and the perovskite middle cell. The 
+middle- cell fabrication procedure is like the single-  junction 
+solar cell fabrication as mentioned above. A 15-  nm- thick ITO 
+layer was sputtered as the recombination layer between the 
+perovskite subcells. Inorganic perovskite-  based top cell was 
+then deposited on the samples according to the procedure 
+mentioned above.
+A shadow mask was used for all three ITO layers deposition 
+defining 1- cm2 active cell area. The thicknesses of the recom -
+bination layers used between subcells were optimized in our 
+previous publication [17].
+4.3   |   Characterization
+4.3.1   |   EQE and I–V Measurements
+The EQE and spectral response were measured using an 
+in- house measurement setup. The measurements of triple-  
+junction solar cells are performed according to [60, 61]. For the 
+measurements of the top cell, red and infrared (IR) light emit-
+ting diodes (LEDs) were used. For measurements of middle-  
+cell blue and IR LEDs, and for the silicon bottom cell, blue and 
+red LEDs were illuminated on the triple-  junction device. In 
+ 1099159x, 2025, 7, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pip.3923, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

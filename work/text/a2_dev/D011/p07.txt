@@ -1,0 +1,76 @@
+Table 1: Result of Effectiveness Evaluation across Datasets, LLMs, and Baselines.
+Dataset Validity Metrics LLM Quality Metrics Scheme Task Metrics Scheme GPT Gemini Qwen WARD RAGWM KMW(1) KMW ORI WARD RAGWM KMW
+NFCorpus
+WRR 1.00 1.00 1.00 PPLavg↓ 16.60 221.41 11.23 10.67 CDPA↑ 1.00 0.87 0.96 0.97
+WTRR 1.00 1.00 1.00 KCR↑ 1.00 0.22 0.83 0.79 CIRA↑ 1.00 0.83 0.88 0.98
+FHR 0.52 0.48 0.55 RSavg↑ 9.50 -2.31 8.62 8.51 WDPV↑ 0.64 0.63 0.64 0.99
+TREC-
+COVID
+WRR 1.00 1.00 1.00 PPLavg↓ 17.52 144.90 12.01 11.71 CDPA↑ 1.00 0.91 0.98 0.99
+WTRR 1.00 1.00 0.99 KCR↑ 0.97 0.16 0.86 0.88 CIRA↑ 1.00 0.92 0.96 0.97
+FHR 0.53 0.44 0.49 RSavg↑ 9.44 -1.87 8.42 8.99 WDPV↑ 0.63 0.61 0.62 0.99
+DROP
+WRR 1.00 1.00 1.00 PPLavg↓ 14.47 24.90 12.37 12.84 CDPA↑ 1.00 0.96 0.98 1.00
+WTRR 0.99 0.99 0.99 KCR↑ 0.93 0.07 0.74 0.68 CIRA↑ 1.00 0.94 0.93 0.99
+FHR 0.49 0.46 0.53 RSavg↑ 9.53 -7.95 8.11 7.72 WDPV↑ 0.60 0.59 0.62 0.97
+MS-
+MARCO
+WRR 1.00 1.00 1.00 PPLavg↓ 24.90 21.98 15.99 16.05 CDPA↑ 1.00 0.97 0.97 0.99
+WTRR 0.99 1.00 0.99 KCR↑ 0.88 0.11 0.79 0.77 CIRA↑ 1.00 0.95 0.98 1.00
+FHR 0.51 0.50 0.52 RSavg↑ 9.31 -5.34 8.48 8.52 WDPV↑ 0.58 0.58 0.57 1.00
+Table 2: Average PPL of original datasets.
+Metrics NFcorpus TREC-COVID DROP MS-MARCO
+PPLavg 12.08 14.52 11.46 23.85
+Table 3: Time Overhead of Watermarking.
+Metrics NFcorpus COVID DROP MARCO
+Prefix/Text (hour) 2.6/4.3 3.2/4.1 2.9/4.6 2.8/4.5
+4.3 Robustness Evaluation
+Unless otherwise specified, the evaluation is carried
+out on watermarked NFCorpus.
+Knowledge Selection Attacks. We simulate two
+selection attack strategies. First, under random
+subset sampling, where an adversary uses only a
+fraction of the stolen KB, WRR remains high ac-
+cording to Figure 2 (a). Even with only 20% of the
+KB, the WRR exceeds 0.8.
+Second, we use the prompts in Appendix E.9 to
+filter irrelevant content during retrieval for water-
+mark removal. Results in Appendix E.9, with the
+maximum filtering rate of 2.19%, indicating that
+this strategy is ineffective. These results show that
+KMW is robust against selection attacks.
+Knowledge Alteration Attacks. Adversaries may
+attempt paraphrasing attacks (Kirchenbauer et al.,
+2024) to the retrieved texts for watermark removal.
+We simulate it under sentence embedding preser-
+vation using GPT-4.1 with the prompt “paraphrase
+this paragraph.” As shown in Figure 2 (b), this at-
+tack causes only a minor 5–10% drop in the WRR.
+Besides, we perform a synonym substitution at-
+tack on the responses, the results are shown in
+Appendix E.9, with WRR close to 1.00. This indi-
+Figure 2: Results of Robustness Evaluation.
+cates the effectiveness of synonym clustering. The
+results of these two attacks demonstrate KMW’s
+robustness against content modification.
+Knowledge Expansion Attacks. An adversary
+may attempt to inject external content into the
+stolen knowledge base to dilute the watermark. We
+inject 20% to 100% new content to simulate this.
+Results are shown in Appendix E.9 with all cases
+of WRR equal to 1.00.
+Additionally, retrieving more unwatermarked
+documents during LLM generation (by setting top-
+K to 5, 10, 15, and 20) also failed to reduce WRR
+(Figure 2(c)). This proves the reliability of W T I
+and our watermark detector.
+RAG Setting Restrictions. Adversarial RAG may
+employ complex settings, so we evaluate KMW
+under context summarization and stronger system
+prompts (including no verbatim use of retrieved
+texts, style control, and vocabulary constraints).
+Figure 2(d) shows that no verbatim reuse and im-
+posing vocabulary constraints have negligible im-
+pact on watermark detection. Context summa-
+rization reduces WRR to 0.83, while style-control
+21201

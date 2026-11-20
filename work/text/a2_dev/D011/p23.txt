@@ -1,0 +1,99 @@
+In KMW, the bit encoding and vocabulary parti-
+tioning are deterministically governed by: seed =
+Hash(sk, pref ix, prev_token).
+Reduction: To successfully forge a sequence of
+text that consistently yields a meaningful multi-bit
+watermark during the extraction phase (which also
+relies on the exact same seed computation), the
+adversary must either:
+• Guess the secret key sk from the observed
+text and prefix.
+• Invert the Hash function to find a collision
+that produces the exact required seed se-
+quence.
+Since KMW employs a standard cryptographic
+hash function (SHA-256), the unforgeability of
+KMW formally reduces to the Preimage Resistance
+and Collision Resistance of SHA-256. Therefore,
+forgery is computationally bounded by established
+cryptographic limits.
+Reclaiming: An adversary steals the owner’s wa-
+termarked knowledge base (KBowner containing
+Wowner), injects their own watermark (Wadv) to
+create a pirated KBadv, and falsely claims original
+ownership.
+Proof of Precedence: Our defense here relies
+on the mathematically verifiable asymmetry cre-
+ated by KMW’s high robustness (demonstrated in
+Section 4.3).
+• Because KMW is robust against knowledge
+alteration and expansion, the adversary cannot
+computationally or practically erase Wowner
+without destroying the utility of the KB.
+• Consequently, querying the adversary’s pi-
+rated system yields an asymmetric detection
+result: Detect(KBadv) → {Wowner, Wadv}.
+• In contrast, the true owner’s original
+KB contains no subsequent modifications:
+Detect(KBowner) → {Wowner}.
+The chronological and logical precedence is triv-
+ially proven by this subset inclusion: the true owner
+can reliably detect their watermark in the adver-
+sary’s RAG, but the adversary cannot detect their
+watermark in the owner’s RAG.
+F Background and Related Work
+F.1 Retrieval-Augmented Generation (RAG)
+A RAG system mainly consists of a knowledge
+base, a retriever, and an LLM. The core process in-
+volves retrieval, generation, and knowledge integra-
+tion (Cheng et al., 2025). Specifically, a retriever
+g selects relevant context z from the knowledge
+base based on the query q, i.e., z = g(q). An
+LLM f then generates the output ans = f (q, z)
+by integrating the query with the retrieved context.
+In response to the challenges of complex deploy-
+ment, several advanced RAG have been proposed,
+including Graph RAG (Edge et al., 2024; Hu et al.,
+2025), which incorporates knowledge graphs for
+efficient querying; Multimodal RAG (Chen et al.,
+2022; Yu et al., 2025), which integrates multiple
+sensory modalities; Memory RAG (Qian et al.,
+2025; Chan et al., 2025), which leverages long-
+term memory; and Agentic RAG (Lee et al., 2024;
+Rezaei et al., 2024), which introduces iterative and
+dynamic optimization to address complex tasks.
+F.2 LLM Watermarking
+LLM watermarking aims to identify AI-generated
+content. Most present work is token-level, introduc-
+ing bias into the token logit process (Kirchenbauer
+et al., 2023; Zhao et al., 2023; Chen et al., 2024b;
+He et al., 2024), modifying the probability distri-
+bution (Aaronson, 2023; Hu et al., 2023), or ma-
+nipulating the token sampling process (Kuditipudi
+et al., 2024; Dathathri et al., 2024).
+Moreover, as tracing the provenance of LLM-
+generated text has become increasingly important,
+LLM watermarking now requires explicit message-
+embedding capability. Recent studies have devel-
+oped multi-bit watermarking schemes. One line of
+work (Fairoze et al., 2023; Cohen et al., 2025; Qu
+et al., 2025) associates each message or its frag-
+ments with a secret key or a hash function, and
+during detection exhaustively searches the message
+space to recover the most likely fragment. Another
+line of work (Yoo et al., 2024; Feng et al., 2025)
+associates partitioned vocabularies with watermark
+bits, letting tokens from each sub-vocabulary rep-
+resent a subunit of the watermark message, which
+avoids searching over the message space during
+detection.
+We acknowledge that KMW’s generative water-
+marking design is conceptually similar to this sec-
+ond paradigm. Nevertheless, our study introduces
+RAG-specific innovations tailored to the challenges
+of this setting, including: (i) constrained content
+optimization for generation; (ii) the integration of
+watermark prefixes into the embedding process;
+and (iii) detection via cumulative watermark evi-
+dence aggregated across multiple responses.
+21217

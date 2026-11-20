@@ -1,0 +1,100 @@
+Findings of the Association for Computational Linguistics: EMNLP 2025, pages 15669–15690
+November 4-9, 2025 ©2025 Association for Computational Linguistics
+XRAG: Cross-lingual Retrieval-Augmented Generation
+Wei Liu1*, Sony Trenous2, Leonardo F. R. Ribeiro2, Bill Byrne2, Felix Hieber2
+1Heidelberg Institute for Theoretical Studies gGmbH
+2Amazon AGI
+wei.liu@h-its.org, {trenous,leonribe,willbyrn,fhieber}@amazon.com
+Abstract
+We propose XRAG, a novel benchmark design-
+ed to evaluate the generation abilities of LLMs
+in cross-lingual Retrieval-Augmented Genera-
+tion (RAG) settings where the user language
+does not match the retrieval results. XRAG
+is constructed from recent news articles to en-
+sure that its questions require external know-
+ledge to be answered. It covers the real-world
+scenarios of monolingual and multilingual re-
+trieval, and provides relevancy annotations for
+each retrieved document. Our novel dataset
+construction pipeline results in questions that
+require complex reasoning, as evidenced by the
+significant gap between human and LLM per-
+formance. Consequently, XRAG serves as a
+valuable benchmark for studying LLM reason-
+ing abilities, even before considering the addi-
+tional cross-lingual complexity. Experimental
+results on five LLMs uncover two previously
+unreported challenges in cross-lingual RAG: 1)
+in the monolingual retrieval setting, all evalu-
+ated models struggle with response language
+correctness; 2) in the multilingual retrieval set-
+ting, the main challenge lies in reasoning over
+retrieved information across languages rather
+than generation of non-English text.1
+1 Introduction
+Retrieval-augmented generation (RAG) augments
+large language models (LLMs) by retrieval of rele-
+vant documents with the aim of improving response
+quality (Lewis et al., 2020). The widespread adop-
+tion of RAG has prompted many recent studies
+to evaluate specific capabilities of LLMs in RAG
+settings, such as robustness to noise (Wang et al.,
+2024), information integration (Chen et al., 2024b),
+time sensitivity (Kasai et al., 2023), multi-hop rea-
+soning (Tang and Yang, 2024) and conversational
+QA (Roy et al., 2024). Notably, these evaluations
+are in monolingual settings in which questions and
+*Work done during an internship at Amazon.
+1Data and Code of XRAG are available at https://
+huggingface.co/datasets/AmazonScience/XRAG
+German Query English
+Retrieve
+Doc
+Prompt
+QueryLLMGerman Answer
+InputGenerate
+English
+Documents
+Doc Doc
+(a) Cross-lingual RAG with monolingual retrieval.
+German Query English
+Retrieve
+Doc
+Prompt
+Query
+Documents
+LLMGerman Answer
+InputGenerate
+English
+German
+Documents
+Doc Doc
+Doc
+German
+Doc Doc
+Retrieve
+(b) Cross-lingual RAG with multilingual retrieval.
+Figure 1: Two cases of cross-lingual RAG: (a) mono-
+lingual retrieval, where the LLM uses retrieved English
+documents to respond to a German query; (b) multilin-
+gual retrieval, where the LLM uses retrieved English
+and German documents to respond to a German query.
+retrieved documents are in the same language.
+Real-world deployments of RAG systems also
+need to handle cross-lingual use cases, where the
+user’s language does not match that of the retrieved
+documents. The simplest scenario is Cross-lingual
+RAG with Monolingual Retrieval (Asai et al.,
+2023), where users in multiple locales are served by
+a single RAG system that accesses an English-only
+knowledge base, as illustrated in Figure 1a. This
+setup applies to, for example, a general-purpose
+RAG system that relies solely on English web
+search or a corporate helpdesk with an internal
+database available only in English. A more com-
+plex scenario is Cross-lingual RAG with Multilin-
+gual Retrieval, where RAG systems combine infor-
+mation from both English and the user’s language
+to generate a response (see Figure 1b). This is a
+15669

@@ -1,0 +1,59 @@
+LLM-Confidence Reranker
+generation of plausible yet factually inaccurate or entirely fabricated content. This issue poses a significant barrier
+in knowledge-intensive applications, such as medical diagnosis, where factual accuracy is paramount (Ji et al., 2023;
+Huang et al., 2025; Luo et al., 2026; Płonka et al., 2025; Chi et al., 2026; L. Li et al., 2025).
+To mitigate hallucination, retrieval-augmented generation (RAG) has emerged as a promising approach. By
+integrating external knowledge retrieval with the generation process, RAG provides LLMs with a factual foundation.
+Thisimprovestheaccuracyofgeneratedoutputs(Lewisetal.,2020;W.Yu,2022;Yaoetal.,2026;T.Renetal.,2025).
+Hallucinations often stem from low confidence in internal knowledge, which can be addressed by external documents
+thatboostmodelconfidence.Nevertheless,thesuccessofRAGhingesontherelevanceofretrieveddocuments.Poorly
+ranked documents undermine the quality of subsequent generation. This limits the framework’s effectiveness (Liu et
+al., 2024).
+Reranking has gained prominence as a vital step in enhancing retrieval outcomes within RAG systems. By
+reordering initially retrieved documents, reranking techniques improve document relevance and provide higher-
+quality inputs for generation (Y. Yu et al., 2024; Salemi & Zamani, 2024; S. Xu et al., 2024; R. Ren, Ma, &
+Zheng, 2025). Although existing reranking methods have advanced retrieval performance, they encounter notable
+limitations. Many depend on proprietary models trained on specific datasets, leading to poor generalization across
+domains and high computational costs (Ma et al., 2023; Sun et al., 2023; X. Wang et al., 2023; Dong et al., 2024)—
+constraints that severely restrict their practical applicability. In contrast, pre-trained LLM-based rerankers provide
+strong generalization and no additional training costs compared to trained models; however, existing LLM-based
+rerankers primarily assess query-document relevance but underutilize LLMs’ strengths in semantic understanding,
+particularlybyoverlookingconfidencesignalsfromgenerationprocesses.Furthermore,evenstate-of-the-artrerankers
+demonstratesuboptimalperformance,withtheirNormalizedDiscountedCumulativeGain(NDCG)scoresoftenfalling
+below 0.8 on benchmarks like BEIR (Ehsan et al., 2024). This underscores the necessity for continued innovation in
+reranking methodologies.
+LLM
+ 0.9
+0.6
+0.5
+0.4
+0.1
+0.9 ↑
+0.5  
+-
+0.6  
+-
+0.4  
+-
+0.1 ↓
+Confidence
+Measurement
+Preserve the original order
+Retriever
+Similarity
+Reranker
+Relevance
+LCR
+Helpfulness
+Query
+Top
+ K
+ Top
+ N
+LLM
+Figure 1: Illustration of LLM-Confidence Reranker (LCR) algorithm. LCR leverages LLM confidence signals derived from
+document helpfulness to enhance ranking, distinct from traditional relevance or similarity measures.
+The main contributions of this study are as follows:
+1. We propose a novel zero-shot reranking method LLM-Confidence Reranker (LCR) based on black-box LLM
+confidence signals, which quantifies confidence through the Maximum Semantic Cluster Proportion (MSCP).
+Song et al.: Preprint submitted to Elsevier Page 2 of 21

@@ -1,0 +1,100 @@
+2020), integrating external knowledge bases with
+LLMs to enhance answer reliability. While the stan-
+dard RAG pipeline retrieves contextually relevant
+documents to ground LLM outputs, two critical
+challenges persist:
+(1) The semantic discrepancies between user
+queries and heterogeneous knowledge bases, which
+undermine retrieval relevance. As illustrated in the
+Figure 1 (top), a significant disparity exists between
+colloquial or non-professional user descriptions
+and the standardized terminology characteristic of
+formal medical literature. Besides, as indicated by
+the average distance (L2) between user queries and
+the top-1 retrieved text chunks in Figure 1 (below),
+the Question Answer (QA) pairs more closely align
+with the user’s query in terms of both semantics
+and intent, making them valuable resources for
+addressing user queries.
+Previous approaches primarily focus on training
+memory networks to generate task-specific cues
+(Qian et al., 2024) or employ adaptive evidence
+retrieval (Li et al., 2024) to bridge semantic gaps,
+which often require additional annotation efforts.
+Alternative solutions involve query rewriting (Ma
+et al., 2023) or query decomposition enhanced by
+Monte-Carlo Tree Search (MCTS) (Jiang et al.,
+2024). Although these methods demonstrate par-
+tial success, they overlook the historical QA pair,
+which is a naturally aligned knowledge source that
+inherently matches user query distributions in the
+domain-specific scenario.
+(2) Missing knowledge could be attributed to the
+limited understanding of such queries and thus re-
+quires precise clarification of the actual user intent,
+particularly in scenarios where retrieved contexts
+fail to fully cover the knowledge required to ad-
+dress queries. Existing works lie in two paths. One
+line of works propose iterative retrieval directly us-
+ing the first round answer (Shao et al., 2023) or the
+intrinsic reasoning capabilities of LLMs (i.e., GPT-
+3.5) to separately generate missing information and
+new queries for subsequent retrieval (Wang et al.,
+2025a). The other line of works propose to gener-
+ate evidence and criticism with special tokens in
+one single pass adaptively (Islam et al., 2024; Asai
+et al., 2024).
+Although existing approaches achieve promising
+results, the rapid progress in the reasoning capabil-
+ities of LLMs (DeepSeek-AI et al., 2025) suggests
+richer opportunities with reasoning chains. Given
+a user query, retrieved contexts, and preliminary
+predictions, a reasoning module could analyze the
+missing knowledge and follow-up queries step by
+step, while analyzing whether inconsistencies exist
+in contexts, such as knowledge conflicts and hal-
+lucinations simultaneously. Moreover, most prior
+works treat the detection of missing knowledge and
+the assessment of query relevance as two separate
+procedures. This decoupled design disregards the
+intrinsic interdependence among the user query,
+retrieved contexts, missing knowledge, and the cor-
+responding follow-up queries, which might lead
+to cumulative error propagation, and ultimately
+achieve suboptimal performance.
+In this work, we propose a reasoning-enhanced
+missing knowledge RAG framework that systemat-
+ically addresses both challenges through a unified
+pipeline with an end-to-end manner. Unlike prior
+methods, our approach explicitly considers the in-
+trinsic relationship among the query, retrieved con-
+texts, missing knowledge, and follow-up queries
+with a reasoner module, utilizing the reasoning con-
+tent to verify knowledge conflicts or hallucinations.
+Furthermore, the generated reasoning traces are
+seamlessly incorporated into the final answer gen-
+eration process, ensuring both interpretability and
+accuracy.
+• We propose a reasoning enhanced end-to-end
+RAG framework that generates queries for
+missing knowledge retrieval and leverages
+the reasoning content to verify knowledge,
+thereby improving generation accuracy.
+• We comprehensively explore methods with
+heterogeneous knowledge bases to bridge the
+gap between colloquial user queries and for-
+mal passages without additional training.
+• We conduct extensive experiments on two
+open-domain question answering datasets,
+evaluating on both general and domain-
+specific scenarios.
+2 Method
+In the following section, we will first define the
+problem, followed by a comprehensive analysis of
+the encountered challenges, and finally propose our
+RAG framework augmented with missing knowl-
+edge integration.
+2.1 Problem Statement
+Given a user query Q, the task of RAG system
+is to first retrieve contexts C = {c1, c2, ...} which
+1362

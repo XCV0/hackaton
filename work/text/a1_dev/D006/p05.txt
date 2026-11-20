@@ -1,0 +1,85 @@
+can be performed rigorously by the real-time ab initio
+calculation. Therefore, we model the energy loss pathways
+(processes 3 and 7) using the NAMD framework within the
+decoherence-induced surface hopping (DISH) scheme.45,46
+Thermalexcitationandrelaxationareintrinsicallyincludedin
+the surface hopping scheme. Radiative and Auger e-h
+recombination processes are not discussed in this work
+because radiative recombination is significantly slower than
+trap-assistedrecombination,andsinceAugerprocessesrequire
+highlightintensityandcarrierdensity.
+To provide a comprehensive picture of the energy loss
+processes, Figure 4a presents the direct and by-defect
+contributions to the nonradiative charge recombination after
+2ns.Theheightofthebarcomponentofthecorresponding
+colorgivestheprobability,inpercent,thataparticularpathway
+hasoccurredwithin2nsafterthephotoexcitation.Figure4b
+illustrates the time-evolution of the direct and by-defect
+recombinationinthepristineanddefectivesystems,withthe
+slopesofthelinesprovidingtherates.Forthepristinesystem,
+wefoundthat ≈6.8%ofthenonradiativerecombinationoccurs
+within2ns,withanestimatede-hlifetimeof30ns.Inaddition
+tothedesiredslowe-hrecombinationinthepristinesystem, α-
+CsPbI3 showsdefecttolerancecomparativewithMAPbI3 and
+β-CsPbI3. In the previous studies, we found that the e-h
+recombination will not be accelerated significantly and can
+evenbesuppressedbysomeintrinsicdefects.30,31 Thetotal2
+ns recombination probabilities are found to be ≈2.7% (Iv),
+≈3.1%(Ii), ≈7.6%(CsI),correspondingtothelifetimesof ≈73
+ns (Iv), ≈ 64 ns (Ii), ≈ 27 ns (CsI), respectively. Ii and Iv
+suppresstherecombinationratebyafactorof ≈2,whileCsI
+does not affect the recombination rate too appreciably. In
+common,slowere-hrecombinationreduceselectronicenergy
+dissipationintoheat,andhence,enhancestheoverallPCE.
+Thee-hrecombinationratesobtainedinNAMDsimulations
+are strongly dependent on the energygap, decoherence rate,
+andNAcoupling(NAC)betweentheinitial,intermediate,and
+finalstates.47−51Typically,aweakerNAC,alargerenergygap,
+andafasterdecoherenceleadtoslowere-hrecombination.The
+defect states, especially deep defects, have narrower energy
+gapstothebandedgescomparedtothefundamentalbandgap,
+usually leading to more significant and detrimental e-h
+recombination. At the same time, generally to MHPs, deep
+defectstatesarespatiallylocalized,possessingaweakerNAC
+and a faster decoherence due to reduced spatial overlap and
+weaker correlation with the band edge states, and that may
+counteractthedrawbackofanarrowerenergygapduetothe
+presenceofdefects.
+The strength of NAC, djk determines the probability of
+hoppingbetweenelectronicstates.ThescalarformoftheNAC
+hastheunitsofenergyandreads
+d i
+ t i 
+H
+R
+jk
+j k
+j
+R
+k
+ j k
+=
+|
+|
+=
+|
+|
+(1)
+Table 1. Canonically Averaged Absolute Values of NAC and Pure-Dephasing Times between Pairs of the VBM, CBM, and
+Defect Statesa
+NAC(meV) puredephasingtime(fs)
+VBM-CBM VBM-defect CBM-defect VBM-CBM VBM-defect CBM-defect
+pristine 0.41 10.1
+Iv 0.43 0.28 0.26 11.3 8.1 9.6
+Ii 0.30 2.86 0.23 8.6 3.5 3.4
+CsI 0.35 0.19 0.76 8.6 3.3 3.5
+aDefectassistedrecombinationisatwo-stepprocess.Chargetrappingbythedefectsisfast,becausethecorrespondingNACislarge.However,the
+subsequentrecombinationisslow,becausethecorrespondingNACissmall.
+Figure 5. Dynamicdefectenhancedopticalabsorption.(a)DifferentviewsofthespatialdistributionofthetrapstatedensityinCsI.(b)Optical
+absorptionofpristine α-CsPbI3 and α-CsPbI3 withtheCsI defect.TheabsorptionoftheCsI systemisextendedintotheredregionofthevisible
+spectrum.Boththechargedensitiesandthespectraarecalculatedbycanonicalensembleaveragingover7000configurations.
+Chemistry of Materials pubs.acs.org/cm Article
+https://doi.org/10.1021/acs.chemmater.4c02530
+Chem. Mater. 2025, 37, 655−664
+659
+Downloaded from pubs.​acs.​org/​cmatex/​article-pdf/​37/​2/​655/​41179084/​cm4c02530.​pdf by guest on 19 November 2026

@@ -1,0 +1,56 @@
+Table 7: Results on each of a collection of datasets with FLAN-T5-XXL (11B) as the LLM. We emphasize our results in bold.
+SQuAD Natural Questions TriviaQA
+Data Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Single-step
+Simple No Retrieval 7.00 14.40 8.40 0.00 0.08 18.80 25.50 20.40 0.00 0.08 32.80 39.20 35.40 0.00 0.08 Single-step Approach 28.80 40.80 35.00 1.00 1.00 41.40 51.20 47.60 1.00 1.00 56.00 64.70 61.80 1.00 1.00
+Adaptive
+Adaptive Retrieval 15.60 25.60 20.00 0.50 0.54 31.00 39.70 35.00 0.50 0.54 44.80 52.20 48.60 0.50 0.54
+Self-RAG∗ 1.60 11.90 20.80 0.59 0.31 39.20 47.10 42.40 0.75 0.09 14.60 33.70 60.20 0.76 0.22
+Adaptive-RAG (Ours) 27.80 39.80 34.00 1.17 1.50 41.20 51.00 47.40 1.00 1.00 52.00 60.30 57.20 1.03 1.33
+Complex Multi-step Approach 24.60 36.90 30.20 2.13 3.83 39.60 49.60 46.40 2.16 3.94 52.60 61.10 59.40 2.17 4.03
+Oracle Adaptive-RAG w/ Oracle 32.80 46.90 38.20 0.85 0.94 51.20 61.00 57.00 0.71 0.91 63.40 71.30 68.20 0.51 0.60
+MuSiQue HotpotQA 2WikiMultiHopQA
+Data Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Multi-step
+Simple No Retrieval 4.20 13.40 5.40 0.00 0.08 17.40 25.44 18.40 0.00 0.09 26.80 32.93 28.00 0.00 0.08 Single-step Approach 16.80 25.70 19.20 1.00 1.00 37.60 49.27 39.60 1.00 1.00 46.60 54.13 48.20 1.00 1.00
+Adaptive
+Adaptive Retrieval 8.40 17.80 10.20 0.50 0.54 26.60 36.01 27.80 0.50 0.54 35.20 42.68 36.80 0.50 0.54
+Self-RAG∗ 1.20 8.20 11.80 0.68 0.27 5.60 17.86 30.60 0.76 0.26 3.00 19.14 39.00 0.90 0.25
+Adaptive-RAG (Ours) 20.60 28.50 23.20 1.89 3.12 44.20 54.78 46.80 1.58 2.53 47.60 57.36 54.00 1.46 2.55
+Complex Multi-step Approach 19.40 27.50 21.80 2.09 3.66 47.00 57.81 49.40 2.08 3.73 57.60 67.65 64.00 2.17 3.63
+Oracle Adaptive-RAG w/ Oracle 24.20 37.20 26.60 1.22 1.71 52.20 64.80 54.60 0.92 1.33 59.20 70.40 68.60 0.82 1.14
+Table 8: Results on each of a collection of datasets with GPT-3.5 (Turbo) as the LLM. We emphasize our results in bold.
+SQuAD Natural Questions TriviaQA
+Data Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Single-step
+Simple No Retrieval 16.00 29.20 23.80 0.00 0.62 39.80 55.70 55.00 0.00 0.56 64.00 75.60 75.80 0.00 0.68 Single-step Approach 18.00 33.80 29.20 1.00 1.00 32.40 46.80 54.80 1.00 1.00 55.20 66.50 65.80 1.00 1.00
+Adaptive
+Adaptive Retrieval 15.40 30.00 24.40 0.50 0.81 36.40 51.20 56.60 0.50 0.78 62.00 71.90 72.20 0.50 0.84
+Self-RAG∗ 1.60 11.90 20.80 0.59 1.91 39.20 47.10 42.40 0.75 0.52 14.60 33.70 60.20 0.76 1.59
+Adaptive-RAG (Ours) 19.80 34.40 30.00 0.87 1.21 36.80 52.00 56.60 0.68 0.86 62.40 73.80 73.80 0.22 0.79
+Complex Multi-step Approach 17.40 31.50 26.20 2.50 3.24 35.60 49.70 57.80 2.58 3.79 54.80 67.10 68.00 2.30 2.65
+Oracle Adaptive-RAG w/ Oracle 28.00 45.90 39.40 0.54 0.93 50.00 65.40 67.00 0.28 0.8 70.80 81.00 80.00 0.11 0.73
+MuSiQue HotpotQA 2WikiMultiHopQA
+Data Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Multi-step
+Simple No Retrieval 20.40 31.30 24.40 0.00 0.81 37.40 51.04 43.20 0.00 0.74 37.00 48.50 43.40 0.00 0.90 Single-step Approach 16.40 26.70 23.60 1.00 1.00 39.60 50.44 45.60 1.00 1.00 46.80 57.69 52.60 1.00 1.00
+Adaptive
+Adaptive Retrieval 18.80 30.30 24.80 0.50 0.90 38.60 50.70 43.20 0.50 0.87 44.20 55.11 50.60 0.50 0.95
+Self-RAG∗ 1.20 8.20 11.80 0.68 1.66 5.60 17.86 30.60 0.76 1.67 3.00 19.14 39.00 0.90 1.81
+Adaptive-RAG (Ours) 21.80 32.60 29.60 1.90 2.29 40.40 52.56 47.00 0.93 1.48 46.60 60.09 56.80 1.59 2.23
+Complex Multi-step Approach 23.00 32.50 31.60 3.41 3.61 45.80 58.36 52.20 2.73 3.18 52.20 66.08 62.40 3.36 3.35
+Oracle Adaptive-RAG w/ Oracle 29.60 44.70 35.60 0.90 1.45 55.60 69.90 62.80 0.54 1.08 52.20 69.90 66.60 0.65 1.21
+Performance per Dataset In addition to detail-
+ing the performance of each dataset with the FLAN-
+T5-XL model, as shown in Table 2, we also present
+the results for each dataset with the FLAN-T5-
+XXL and GPT-3.5 models in Table 2 and Table 8,
+respectively. The experimental results show that
+our Adaptive-RAG consistently balances between
+efficiency and accuracy. It is worth noting that
+while the GPT-3.5 model performs effectively in
+addressing straightforward queries even without
+document retrieval, it benefits significantly from
+our Adaptive-RAG in terms of effectiveness when
+solving complex multi-hop queries.
+7050

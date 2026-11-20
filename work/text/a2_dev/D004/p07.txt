@@ -1,0 +1,89 @@
+Table 4: OpinioBank results (public hotel reviews). Entity match improvement and sentiment-intensity σ change vs.
+Raw KB.
+Property Reviews Entities Entity Match ∆ Sent-Int σ ∆
+Silverton LV 2,297 4 +37.9pp +5.04
+Ambassador Bangkok 1,230 4 +37.2pp +7.09
+Ala Moana Honolulu 2,729 4 +18.9pp +3.00
+demographic coverage improves (Revenue Band
++9.6%, Tenure +31.6%; see Appendix L). This re-
+veals that the Raw KB’s apparent demographic
+breadth comes from off-topic documents. It re-
+trieves from a wider author pool, but much of that
+content is irrelevant to the query. The Enriched
+KB concentrates retrieval on entity-relevant con-
+tent, achieving better demographic representation
+among documents that matter. This trade-off moti-
+vates future work on multi-objective retrieval.
+Cross-domain generalization. Table 4 shows
+consistent improvements on public OpinioBank
+data across a different domain (hotel reviews vs.
+e-commerce forums). Diversity metrics were sta-
+tistically significant for emotional markers; direc-
+tion and magnitude are consistent with the forums
+findings. On OpinioBank, entity-matched docu-
+ments show consistent demographic improvements
+(+12.5 to +29.4pp), confirming the fairness pattern
+observed on forums.
+5.3 Ablations
+Cross-model consistency. The Full O-RAG im-
+provement over Raw KB is consistent across ex-
+traction models: Mistral Large (+24.2% Sent-Int
+σ), Qwen 235B (+27.4%), and Claude Sonnet 4.5
+(+26.8%), confirming the approach is not depen-
+dent on a specific LLM (detailed in Appendix B).
+Entity splitting vs. full O-RAG. An ablation dis-
+entangling per-entity splitting from opinion meta-
+data reveals a nuanced picture (see Appendix E
+for full tables). Both Entity-Split-Only and Full
+O-RAG substantially improve over Raw KB across
+all metrics. For Mistral Large, Full O-RAG out-
+performs Entity-Split-Only on all diversity metrics
+(p<0.001): Sent-Int σ 8.11 vs. 7.37, Biz Impact
+10.94 vs. 10.27, Emot Markers 4.1 vs. 3.5. For
+Sonnet 4.5, Entity-Split-Only achieves higher Sent-
+Int σ (13.1 vs. 11.56) and Biz Impact (12.92 vs.
+12.08), but Full O-RAG wins on Emotional Mark-
+ers (8.9 vs. 7.8, p<0.05). This suggests that entity
+splitting captures a large share of diversity gains
+through structural reorganization, while opinion
+metadata contributes additional value (particularly
+for emotional and affective dimensions) that varies
+by extraction model.
+Question type variation. Business Impact
+(+38.9%) and Emotional (+34.1%) queries benefit
+most from opinion enrichment, while Experience
+queries (+6.2%) benefit least- likely because they
+already surface diverse personal perspectives with-
+out metadata (Appendix H).
+Retrieval method. Hybrid retrieval amplifies
+enrichment benefits over semantic-only search
+(+26.8% vs. +21.4% Sent-Int σ), as keyword
+matching surfaces entity-relevant documents (Ap-
+pendix I).
+Retrieval depth. Sent-Int σ was consistently
+higher for opinion-enriched KB across varying re-
+trieval depths (10-60) showing the performance is
+retrieval depth agnostic. (Appendix C)
+5.4 Alternative Views and Counterarguments
+One might argue that the LLM handles opinion
+synthesis at generation time: that RAG retrieval
+is merely context and a capable LLM can synthe-
+size diverse opinions from whatever it receives.
+Our experiments suggest otherwise. Raw KB re-
+trieval systematically excludes perspectives before
+the LLM sees them: at k=20, the Raw KB’s sen-
+timent distribution is 18-48% further from corpus
+truth than the Enriched KB’s (Table 3). The LLM
+can only reason over what it receives. Human eval-
+uators preferred enriched responses 79.2% of the
+time (p<0.001), indicating that retrieval-level bias
+propagates through generation despite the LLM’s
+synthesis capabilities.
+A second objection could be that existing di-
+versity methods and pluralistic alignment already
+solve this. Diversity-aware retrieval methods like
+MMR (Carbonell and Goldstein, 1998) promote
+diversity in embedding space, and pluralistic align-
+ment (Sorensen et al., 2024; Bakker et al., 2022)
+trains generation models to produce balanced out-
+puts. As discussed in Section 2, these address dif-

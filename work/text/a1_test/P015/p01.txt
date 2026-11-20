@@ -1,0 +1,73 @@
+/gid00030/gid00035/gid00032/gid00030/gid00038/gid00001/gid00033/gid00042/gid00045/gid00001
+/gid00048/gid00043/gid00031/gid00028/gid00047/gid00032/gid00046
+Citation: Clayton, A.J.; Abbas, A.;
+Siderﬁn, P.J.; Jones, S.; Teloeken, A.;
+Oklobia, O.; Walls, J.M.; Irvine, S.J.C.
+MOCVD of II-VI HRT/Emitters for
+Voc Improvements to CdTe Solar
+Cells. Coatings 2022, 12, 261. https://
+doi.org/10.3390/coatings12020261
+Academic Editor: Alessandro Latini
+Received: 15 December 2021
+Accepted: 8 February 2022
+Published: 16 February 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright: © 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+coatings
+Article
+MOCVD of II-VI HRT/Emitters for Voc Improvements to CdTe
+Solar Cells
+Andrew J. Clayton 1, Ali Abbas 2, Peter J. Siderﬁn 1, Stephen Jones 1
+ , Ana Teloeken 1,
+Ochai Oklobia 1, John M. Walls 2 and Stuart J. C. Irvine 1,*
+1 Centre for Solar Energy Research, Swansea University, OpTIC Centre, Ffordd William Morgan,
+St. Asaph Business Park, Denbighshire LL17 0JD, UK; Andrew.J.Clayton@Swansea.ac.uk (A.J.C.);
+p.j.siderﬁn@swansea.ac.uk (P.J.S.); stephen.jones@swansea.ac.uk (S.J.); acteloeken@hotmail.com (A.T.);
+Ochai.Oklobia@swansea.ac.uk (O.O.)
+2 Centre for Renewable Energy Systems Technology, Wolfson School of Mechanical, Electrical and
+Manufacturing Engineering, Loughborough University, Loughborough, Leicestershire LE11 3TU, UK;
+a.abbas@lboro.ac.uk (A.A.); J.M.Walls@lboro.ac.uk (J.M.W.)
+* Correspondence: S.J.C.Irvine@Swansea.ac.uk; Tel.: +44-1745-535-234
+Abstract: CdTe solar cells were produced using metal organic chemical vapour deposition (MOCVD),
+which employed a (Zn,Al)S (AZS) high resistant transparent (HRT) layer at the transparent conducting
+oxide (TCO)/Cd(Zn)S emitter interface, to enable the higher annealing temperature of 440 ◦C to be
+employed in the chlorine heat treatment (CHT) process. The AZS HRT remained intact with conformal
+coverage over the TCO after performing the high CHT annealing, conﬁrmed by cross-section scanning
+transmission electron microscopy coupled with energy-dispersive X-ray spectroscopy (STEM-EDX)
+characterisation, which also revealed the Cd(Zn)S emitter layer having been consumed by the
+CdTe absorber via interdiffusion. The more aggressive CHT resulted in large CdTe grains. The
+combination of AZS HRT and aggressive CHT increased open circuit voltage (Voc) and improved
+solar cell performance.
+Keywords: MOCVD; CdTe; photovoltaics; STEM-EDX
+1. Introduction
+The rapid rise in photovoltaic (PV) solar energy over the past decade has been largely
+driven by the supply of crystalline silicon PV modules. The total installed PV capacity in
+2019 exceeded 600 GW with additional capacity of over 100 GW added in 2020 alone [1].
+Alongside the exponential growth of silicon PV, there has been a similar growth in thin
+ﬁlm PV, but this started from a much lower base which has left thin ﬁlm PV with a total
+market share of less than 10% [2]. This now mainly comprises thin ﬁlm cadmium telluride
+(CdTe) and copper indium gallium diselenide (CIGS) with the larger share attributed to
+CdTe. Progressive improvements in the solar conversion efﬁciency of thin ﬁlm PV have
+narrowed the gap with crystalline silicon, which has a world best cell efﬁciency of 26.7%,
+with current world record CdTe solar cells having 22.1% efﬁciency under standard air mass
+conditions (AM1.5) [3]. Despite this impressive progress, there is still a way to go with
+a theoretical limit for single junction CdTe cells of around 30% and a practical prospect
+for >25% efﬁciency [4]. The next step in CdTe cell efﬁciency will depend on changing
+the acceptor doping from copper to arsenic which has demonstrated improvement by
+more than a factor of 10 in acceptor concentration [5–9]. Some of this pioneering work
+on increasing the acceptor concentration has used metal organic chemical vapour deposi-
+tion (MOCVD) to establish doping mechanisms that have then been replicated by more
+commonly used sublimation and physical vapour transport techniques [9,10]. To realise
+the beneﬁts of higher acceptor doping concentrations, it will become necessary to develop
+different emitters than the currently used CdS, SnO2 and (Mg,Zn)O. The emitter needs to
+Coatings 2022, 12, 261. https://doi.org/10.3390/coatings12020261 https://www.mdpi.com/journal/coatings

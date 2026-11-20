@@ -1,0 +1,95 @@
+RAG Setting Field Language Content
+Question German Wie viel haben Walmart und ALDI zusammen für die Opfer des Hurrikans Helene 2024 gespendet?
+Answer German Die gesamten Spenden überstiegen 11 Millionen Dollar.
+English Walmart, Sam’s Club and the Walmart Foundation are increasing their commitment to $10 million to Hurricane Helene Relief Effort...Supporting
+Articles English The American Red Cross recognizes ALDIfor its pledge of $1,000,000. By making a donation to Hurricane Helene Relief...
+English Walmart Canada reaches new giving milestone of $750 million raised and donated to charities and non-profits across Canada...
+Monolingual
+Retrieval
+Distracting
+Articles English Aldi has donated £2,000 to charities in Gloucestershire to help support those in need during the school holidays. The donations...
+Question German Welches Land gewann seine erste Goldmedaille bei den Olympischen Spielen 2024 früher, die Vereinigten Staaten oder Deutschland?
+Answer German Deutschland. Beide Länder gewannen am 27. Juli bei den Schwimmwettbewerben ihre ersten Goldmedaillen, aber die USA gewannen ihre Medaille erst im letzten Wettkampf des Tages – später als Deutschland.
+German Lukas Märtens hat am 27. Juli in Paris den olympischen Titel über 400 m Freistil gewonnen. Der Magdeburger siegte in 3:41,78...Supporting
+Articles English In the last swimming race of July 27, the U.S. took its first gold medal of the 2024 Olympics, winning the 4×100-meter freestyle...
+German Im Rahmen von noch bevorstehenden Qualifikationsevents können sich weitere Sportler noch für die Spiele in Paris qualifizieren...
+Multilingual
+Retrieval
+Distracting
+Articles English The United States Olympic & Paralympic Committee have announced the 592-member 2024 U.S. Olympic team ready to compete...
+Table 1: Two instances from XRAG, each consisting of a question, a gold answer, two supporting articles, and six
+distracting articles (two are shown). In the monolingual retrieval setting, all supporting and distracting articles are
+in English; in the multilingual retrieval setting, the supporting and distracting articles are in the question language
+and in English. LLMs should answer these questions based on the supporting articles while ignoring the distractors.
+(2025) introduce RAGEval, a framework for evalu-
+ating RAG systems across diverse domains, such as
+medicine and law. As noted, these are in monolin-
+gual settings, whereas we aim to benchmark LLMs
+performance in cross-lingual RAG scenarios.
+Chirkova et al. (2024) is one of few studies that
+evaluate the cross-lingual capabilities of LLMs in
+RAG systems. They conduct an analysis of exist-
+ing cross-lingual open-domain question-answering
+datasets (Asai et al., 2021). Motivated by this prior
+work, XRAG is a new cross-lingual benchmark
+that covers a wider range of scenarios and consists
+of questions designed to require external knowl-
+edge to answer, thereby providing a more accu-
+rate reflection of the cross-lingual capabilities of
+LLMs in RAG settings. Li et al. (2024) present
+BordIRlines, which also considers cross-lingual
+RAG settings but with a fundamentally different ob-
+jective. It examines hallucination and bias arising
+from documents in different languages, emphasizes
+sensitive topics (e.g., geopolitical disputes), and
+provides qualitative case studies rather than large-
+scale empirical evaluation. In contrast, XRAG
+targets general-purpose cross-lingual RAG scenar-
+ios, focuses on factual cross-document questions
+grounded in recent news, and supports scalable
+and reproducible benchmarking of LLM question-
+answering ability in cross-lingual RAG settings.
+Evaluation of cross-lingual NLP systems is a
+long-standing research problem. Relatively re-
+cent work has focused on performance in specific
+NLP tasks such as NLI (Conneau et al., 2018; Liu
+et al., 2023), summarization (Wang et al., 2022),
+retrieval question answering (Roy et al., 2020), and
+open-domain question answering (Toutanova et al.,
+2021). With the advent of large language models,
+cross-lingual evaluation has expanded to include
+few-shot or even zero-shot settings. Wang et al.
+(2023) investigate GPT-4 performance for cross-
+lingual summarization in a zero-shot setting and
+find that it performs competitively with finetuned
+mBART-50. Ahuja et al. (2023) evaluate the perfor-
+mance of generative models on 15 tasks, covering
+classification, sequence labeling, and generation.
+We note that our focus is on retrieval augmented
+generation from multilingual document retrieval,
+and not on the document retrieval task itself. How-
+ever in Sections 4.1 and 4.4 we discuss how we
+use monolingual and multilingual dense document
+retrieval techniques in constructing XRAG. Our
+work aligns with recent efforts in evaluating cross-
+lingual performance of LLMs, with a focus on re-
+trieval augmented generation and cross-lingual an-
+swer generation in particular.
+3 XRAG - Cross-lingual RAG Benchmark
+We define the task of cross-lingual RAG as fol-
+lows: given a question q, the LLM is prompted
+to generate an answer ˜a in the same language as
+the question by referring to a collection of m arti-
+cles D = {d1, d2, ..., dm} that contains articles in
+a language different than the question:
+˜a ← LLM(q, D, prompt)
+Language(q) = Language(˜a)
+∃ di ∈ D, Language(di) ̸= Language(q)
+(1)
+Figure 1 shows two cases, in which LLMs need to
+use information from English articles to generate
+German responses to German questions. The goal
+of our benchmark is to enable an understanding
+of how well LLMs perform generation in such
+cross-lingual RAG scenarios.
+15671

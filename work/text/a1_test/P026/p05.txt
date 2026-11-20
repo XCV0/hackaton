@@ -1,0 +1,54 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+where ρ = q(p − n) is the net charge density and ε is the permittivity of the material.
+The quasi-Fermi levels depend on the carrier density and the electric potential as follows:
+Efn = Fn(n, T) − qϕ, (4a)
+Efp = Fp(p, T) − qϕ, (4b)
+where Fn,p are functions that depend on both the band structure and the statistical distribution, the forms of
+which shall be derived below. The current densities (2) can thus be split into a diffusion term and a drift
+term, as follows:
+jn = µnn ∂Efn
+∂n
+∂n
+∂x − qµnn ∂ϕ ∂x , (5a)
+jp = µpp ∂Efp
+∂p
+∂p
+∂x − qµpp ∂ϕ ∂x . (5b)
+We define the chemical diffusivities of electrons and holes, respectively, according to Fick’s law,
+qDn = µnn ∂Efn
+∂n , (6a)
+qDp = −µpp ∂Efp
+∂p , (6b)
+where the change in sign between the electron and hole diffusivities is due to the sign of their respective
+charges. This result, referred to as the GER [26, 27], allows the current equations to be written as
+jn = qDn ∂n ∂x − qµnn ∂ϕ ∂x , (7a)
+jp = −qDp ∂p ∂x − qµpp ∂ϕ ∂x . (7b)
+When the conduction electrons and valence holes satisfy Boltzmann statistics (as is frequently assumed in
+semiconductor modelling [2, 41–45]), the dependencies of the QFLs on carrier density (i.e. the Fn,p
+functions in equations (4)) are logarithmic (a result that will be derived in the following sections). In such
+scenarios it is straightforward to show that the GER is replaced by the CER,
+qDn,p = µn,pkBT, (8)
+in which the ratio of diffusivity to mobility is constant, i.e. not dependent on the local carrier concentration.
+While this approximation greatly simplifies the model, the accuracy of the CER is often poor (as will be
+shown). In such scenarios the full GER is required.
+2.1.StatisticalintegralsandtheFermilevel
+In order to determine equations for the electron and hole current currents from (2), expressions for the
+quasi-Fermi levels in terms of the carrier densities are required. In thermal equilibrium, the probability (f )
+that an electronic state with energy E is occupied in a material with Fermi level Ef is given by the FD
+statistical distribution,
+f(E; Ef) = 1
+exp
+(
+E−Ef
+kBT
+)
++ 1
+(9)
+where T is temperature and kB is Boltzmann’s constant. The density (per unit volume) of electrons lying in
+the conduction band with energies between E and E + dE is therefore given by the product of the FD
+distribution, f, and the DoS (per unit volume), or DoS, ˆg(E)dE. The corresponding density of holes in the
+valence band is given by the product of (1 − f) with the DoS in the valence band ˆg(E)dE.
+Under the assumption that the material is a semiconductor, we first split the DoS ˆg(E) into that pertaining
+to the valence band ˆgv(E) and that pertaining to the conduction band ˆgc(E) (see figure 1) and write
+ˆg(E) = ˆgv(E) + ˆgc(E). (10)
+4

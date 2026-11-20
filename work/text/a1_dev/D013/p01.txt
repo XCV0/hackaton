@@ -1,0 +1,68 @@
+Tuning the bandgap without compromising efficiency: Ambient solution 
+processing of Ge-alloyed (Ag,Cu)2Zn(Sn,Ge)(S,Se)4 kesterite thin-film 
+solar cells
+Romain Scaffidi a,b,c,d,*, Yuancai Gong e, Alex Jimenez-Arguijo e, Axel Gon Medaille e,  
+Sunil Suresh a,b,c, Guy Brammertz a,b,c, Sergio Giraldo e, Joaquim Puigdollers e, Denis Flandre d,  
+Bart Vermang a,b,c, Edgardo Saucedo e
+a imo-imomec, Hasselt University, Martelarenlaan 42, Hasselt, 3500, Belgium
+b imo-imomec, imec, Thor Park 8320, Genk, 3600, Belgium
+c imo-imomec, EnergyVille, Thor Park 8320, Genk, 3600, Belgium
+d ICTEAM, Universit´e Catholique de Louvain, Place du Levant 3, Louvain-la-Neuve, 1348, Belgium
+e Electronic Engineering Department, Universitat Polit`ecnica de Catalunya, Av Eduard Maristany 10–14, Barcelona, 08019, Spain
+ARTICLE INFO
+Keywords:
+Photovoltaics
+Kesterite
+Bandgap tuning
+Ge alloying
+Solution processing
+ABSTRACT
+The photovoltaic sector currently experiences a growing demand for deeply-integrated technologies in agricul-
+ture, buildings, vehicles, among others. Kesterite compounds provide a versatile solution through their tunable 
+bandgap via isovalent alloying. However, this should be done while preserving material opto-electronic quality 
+and device performance, which is an unresolved challenge. Indeed, tuning the bandgap of kesterites must ensure 
+low crystalline disorder to counteract the associated open-circuit voltage (Voc) losses when used in solar cells. To 
+achieve this goal, this work introduces a simple molecular ink recipe realized in ambient air to process single- 
+phase high-quality Ag,Gealloyed kesterite absorbers. By varying the Ge content from 0 to 100 %, the absorber 
+bandgap covers the range from 1.15 to 1.5 eV, in which the Urbach energy remains close to 20 meV and 
+promisingly low Voc deficits are observed. In particular, the champion efficiency of 12.1 % obtained with 40 % Ge 
+breaks the record for Ge-alloyed kesterites with a 1.2 eV bandgap by remarkably reaching 62 % of the Shockley- 
+Queisser limit for Voc. This study demonstrates a promising strategy to solve the issue of large band tailing and 
+low opto-electronic quality in widebandgap kesterites while establishing a foundation for solution-processed 
+kesterite solar cells with tunable bandgap and promising performance.
+1. Introduction
+Photovoltaics (PV) is now playing a major role in the transition to-
+wards more sustainable electricity production, with more than 1 TW 
+cumulative capacity already installed and record exponential growth in 
+the past years for solar panels primarily made of Silicon. However, the 
+PV industry is now expanding to new markets and applications where 
+mechanical flexibility, low weight, tunable colour and opacity as well as 
+tolerance to different light conditions are required, e.g. building- and 
+vehicle-integrated photovoltaics (BIPV and VIPV), agrivoltaics (agriPV), 
+indoor PV (IPV), …
+Thin-film solar cells meet most of those requirements through their 
+versatile design and material-sober architectures. In particular, the 
+kesterite material family historically based on Cu2ZnSn(S,Se)4 (CZTSSe) 
+has emerged as a promising solution for single-junction PV absorbers 
+relying on non-toxic and abundant elements, the bandgap of which can 
+also be tuned in a range well-adapted to tandem PV structures [1–6]. 
+Yet, those inorganic compounds are still facing major hurdles to become 
+a viable alternative to commercially established Cu(In,Ga)Se2 and CdTe 
+technologies, summarized herein as three main challenges. First, the 
+control of crystalline phase and composition in a homogeneous and 
+reproducible fashion is a long-standing issue for kesterites [3,7,8], 
+especially when deposited via physi-cal processes [4]. Second, the 
+numerous point defects and high crystalline disorder existing in the 
+kesterite lattice are considered the main culprits for their still too high 
+open-circuit voltage (Voc) deficits [3,7,8,8–11]. Third, precisely 
+* Corresponding author. imo-imomec, Hasselt University, Martelarenlaan 42, Hasselt, 3500, Belgium.
+E-mail address: romain.scaffidi@imec.be (R. Scaffidi). 
+Contents lists available at ScienceDirect
+Materials Today Energy
+journal homepage: www.journals.elsevier.com/materials-today-energy/
+https://doi.org/10.1016/j.mtener.2024.101715
+Received 5 September 2024; Received in revised form 25 September 2024; Accepted 11 October 2024  
+Materials Today Energy 46 (2024) 101715 
+Available online 12 October 2024 
+2468-6069/© 2024 The Authors. Published by Elsevier Ltd. This is an open access article under the CC BY-NC license ( http://creativecommons.org/licenses/by- 
+nc/4.0/ ).

@@ -1,0 +1,42 @@
+Policy Model: Trajectory Generation
+System Prompt. You are a helpful assistant who is good at answering questions with multi-turn search engine calling. To
+answer questions, you must first reason through the available information using <think> and </think>. If you identify
+missing knowledge, you may issue a search request using <search> query </search> at any time. The retrieval system
+will provide you with relevant documents enclosed in <documents> and </documents>. You can search as many times
+as you want. Once you have sufficient information or if you find no further external knowledge is needed, directly provide
+your final answer. Ensure your answer is concise, using nouns or short phrases whenever possible. Conclude with: “So
+the answer is <answer>answer</answer>”.
+User Prompt.
+Question: {question}
+PRM Training-Data Generation: QwQ-32B Annotation Prompt
+This prompt is used by QwQ-32B for full-trajectory evaluation and generation of PRM training labels. The gold answer is
+provided as a reference, while intermediate steps are evaluated according to the criteria below.
+System Prompt.
+You are a strict process supervisor for a multi-hop question answering agent that uses retrieval-augmented generation
+(RAG). Your task is to evaluate each step of the agent’s trajectory and assign a binary label: GOOD or BAD.
+The agent operates using four XML-tagged actions: <think> (Internal reasoning), <search> (Retrieval query),
+<documents> (Retrieved passages), and <answer> (Final answer).
+Labeling Principles
+1. Default label is BAD. Assign GOOD only when a step makes a verifiable contribution toward answering.
+2. No information gain means BAD (e.g., restating the question, repeating prior reasoning).
+3. Do not use the model’s own world knowledge. Unverified claims not in <documents> are hallucination.
+Evaluation Criteria
+R1. Entity/Relation. BAD if <think> misidentifies an entity, reverses a relation, or drifts. GOOD if it maintains correct
+grounding.
+R2. Search. GOOD if the query is specific, returns relevant <documents>, or tries a new strategy after a failure. BAD if
+it repeats a failed attempt, is vague, or returns irrelevant data.
+R3. Reasoning. GOOD if it extracts useful information from <documents> or identifies a concrete knowledge gap. BAD
+if it merely restates, repeats, or hallucinates.
+R4. Answer. BAD if empty, uncertain, requires unsupported logical leaps, or contradicts <documents>. GOOD if
+specific and logically derivable.
+R5. Recovery. GOOD if the agent issues a new, meaningfully different <search> after a failure. BAD if it proceeds to
+<answer> while ignoring the failure.
+R6. Overconfidence. BAD if the agent produces <answer> without prior successful search.
+User Prompt.
+Question: {question} Ground Truth: {gold_answer}
+## Trajectory
+{full trajectory with all steps}
+Expected Output.
+Return a JSON array:
+[{"step": 1, "label": "GOOD", "reasoning": "..."}, ...]
+37917

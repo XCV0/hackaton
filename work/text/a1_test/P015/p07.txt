@@ -1,0 +1,87 @@
+Coatings 2022, 12, 261 7 of 11
+all three Cd, S and Zn EDX images. The CdS and Cd(Zn)S layers together form the emitter
+in this device.
+After std. CHT (420 ◦C) for device sample (b), the HRT/emitter proﬁle broadens
+due to interdiffusion, with less-deﬁned layers in the EDX images although the CdS layer
+can still be seen by comparing the Cd, S and Zn EDX images. When the CHT becomes
+more aggressive (sample (c)), the HRT/emitter region narrows as it becomes substantially
+interdiffused with the CdTe absorber. The only remaining layer that is still visible in the
+EDX images is the ZnS HRT layer, conﬁrming the robustness of this layer to agg. CHT.
+STEM-EDX of device sample (d), which had a 100 nm AZS HRT layer and was
+subjected to a CHT at 440 ◦C, shows that after the agg. post-growth treatment, interdiffusion
+has driven some S from the CdS/Cd(Zn)S emitter all the way to the back CdTe surface (S
+proﬁle, sample (d)). This has been observed for devices with an ultra-thin 0.5 µm thick
+CdTe absorber [22] using std. 420 ◦C CHT conditions. The Cl proﬁle reveals that it has
+diffused though the whole device structure with some remnant of the deposited CdCl2
+layer on the surface. Accumulation can be seen at the TCO interface.
+The extent of interdiffusion of the HRT/emitter region is further illustrated with STEM-
+EDX line scans through the device structure. Figure 5 compares the untreated device (a),
+shown in Figure 5a, with sample (d), shown in Figure 5b, having had agg. CHT at 440 ◦C.
+Coatings 2022, 12, x FOR PEER REVIEW 7 of 11 
+ 
+ 
+ 
+Figure 4. Cross section STEM image with elemental EDX maps for Cd, S, Zn and Cl in 
+FTO/AZS/CdS/Cd(Zn)S/CdTe:As solar cell device cross-sections taken alongside STEM images with 
+different degrees of CHT processing; ( a) device sample receiving no CHT, ( b) device sample with 
+std. CHT at 420 °C, (c) device sample with agg. CHT at 440 °C, and ( d) device sample with thicker 
+100 nm AZS HRT with agg. CHT at 440 °C. 
+STEM-EDX of device sample (d), which had a 100 nm AZS HRT layer and was sub-
+jected to a CHT at 440 °C, shows that after the agg. post-growth treatment, interdiffusion 
+has driven some S from the CdS/Cd(Zn)S emitter all the way to the back CdTe surface (S 
+profile, sample (d)). This has been obse rved for devices with an ultra-thin 0.5 μm thick 
+CdTe absorber [22] using std. 420 °C CHT conditions. The Cl profile reveals that it has 
+diffused though the whole device structure with some remnant of the deposited CdCl 2 
+layer on the surface. Accumulation can be seen at the TCO interface. 
+The extent of interdiffusion of the HRT/emitter region is further illustrated with 
+STEM-EDX line scans through the device structure. Figure 5 compares the untreated de-
+vice (a), shown in Figure 5a, with sample (d), shown in Figure 5b, having had agg. CHT 
+at 440 °C. 
+ 
+(a) 
+Coatings 2022, 12, x FOR PEER REVIEW 8 of 11 
+ 
+ 
+ 
+(b) 
+Figure 5. Elemental EDX line scans through the device stack of (a) FTO/AZS/CdS/Cd(Zn)S/CdTe:As 
+solar cell device with no CHT process; and (b) equivalent device structure having undergone ag-
+gressive CHT. 
+The untreated CdTe device sample in Figure 5a clearly shows the defined layers of 
+the HRT/emitter structure from the FTO surf ace with ZnS/CdS/Cd(Zn)S prior to any in-
+terdiffusion [22,23]. No Al in the AZS is again detectable due to dopant concentration 
+being less than 1 At.% and below the detectable limit of the instrument. Figure 5b shows 
+the HRT/emitter after agg. CHT, which narrows significantly after interdiffusion and 
+shows a prominent Zn peak at the TCO interface. Despite the interdiffusion of the emitter, 
+Figures 4 and 5 show that a ZnS layer remain ed intact and maintained an interface layer 
+with the FTO. 
+To further understand the role that the AZS HRT layer had on Voc, dark J-V curves 
+were used to calculate the revers e saturation current-density ( J0) and ideality factor ( n), 
+which are related to Voc in the following equation: 
+𝑉௢௖ ൌ 𝑛𝐾𝑇 𝑞 𝑙𝑛 ൬𝐽௟ 𝐽଴ ൅1൰ (1)
+The thermal voltage is represented by KT/q and an ideal diode would have n = 1 with 
+only radiative recombination contribution. When minority carrier recombination also oc-
+curs, the value of n increases, with typical value between 1 and 2. Jl is the light-generated 
+current-density and can be assumed to be equivalent to Jsc. Plots were made (Figure 6) of 
+the dark J-V curves with ln (JD) over a voltage (V) range 0.55–0.7 V. 
+The straight lines from the ln (JD-V) plot for samples (c) and (d), which had AZS thick-
+nesses of 50 nm and 100 nm, respecti vely, were used to generate the J0 with gradient of 
+q/nKT, which can be represented by α. The value of n was extracted from the gradient 
+using the following equation: 
+𝑛ൌ𝑞/𝐾𝑇 𝛼  (2)
+A baseline device sample, which had no AZS HRT layer, was also plotted with device 
+samples (c) and (d) for comparison. Figure 6 is representative of the data for all cells meas-
+ured for each device sample. The average J0 and n extracted from the dark J-V curves are 
+shown in Table 2. In terms of the diode quality, n is highest for device sample (d), improv-
+ing for sample (c) and being closest to an ideal diode for the baseline, which has no AZS 
+HRT layer. This does not reflect the light-generated J-V data, in which the Voc was greatest 
+for sample (d). The average J0 data were similar between samples (c) and (d), but were an 
+order of magnitude better for the baseline device sample. 
+Figure 5. Elemental EDX line scans through the device stack of (a) FTO/AZS/CdS/Cd(Zn)S/CdTe:As
+solar cell device with no CHT process; and (b) equivalent device structure having undergone aggres-
+sive CHT.
+The untreated CdTe device sample in Figure 5a clearly shows the deﬁned layers of
+the HRT/emitter structure from the FTO surface with ZnS/CdS/Cd(Zn)S prior to any
+interdiffusion [22,23]. No Al in the AZS is again detectable due to dopant concentration
+being less than 1 At.% and below the detectable limit of the instrument. Figure 5b shows
+the HRT/emitter after agg. CHT, which narrows signiﬁcantly after interdiffusion and

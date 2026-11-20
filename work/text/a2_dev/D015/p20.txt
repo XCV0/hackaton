@@ -1,0 +1,93 @@
+LLM-as-a-Judge
+You are an AI assistant tasked with result evaluation. Given a question, a 
+golden answer, and a generated answer, your goal is to judge whether the 
+generated answer is correct according to the question and golden answer.
+Here is the question:
+<question> {{ question }} </question>
+Here is the golden answer:
+<golden_answer> {{ answer }} </golden_answer>
+Here is the generated answer:
+<generated_answer> {{ pred }} </generated_answer>
+To synthesize your response, follow these steps:
+1. Analyze the question type and conditions in the question
+2. Identify the key information in the golden answer that can completely 
+solve the question (e.g., names for "Who" questions and numbers for "how 
+many" questions)
+3. Check whether the key information exists in the generated answer
+4. Ignore differences in punctuation and phrasing between the golden answer 
+and the generated answer. It is OK if the generated answer contains more 
+information than the golden answer, as long as it does not contain any 
+conflicting statements.
+5. If the generated answer is in a different language than the golden answer, 
+it should be considered as wrong.
+Your response should be in json format as follows:
+{
+    "justification": [Explain why you think the GENERATED ANSWER is 
+Correct or Incorrect. Use one or two sentences at most. Keep the 
+explaination as concise as possible.],
+    "answer": [correct or incorrect]
+}
+Figure 20: Prompt used for LLM-as-a-Judge, as de-
+scribed in Section 5.1.
+German Question
+Doc 2Doc 1 Doc 8Doc 7Doc 6Doc 5Doc 4Doc 3
+supporting distracting
+English Question
+English
+Human Translate
+LLM
+- No doc
+LLM- 2 En supporting docs
+English Answer English Answer
+“Oracle Retrieval” in Table 3 “No Retrieval” in Table 3
+Figure 21: Experimental settings in Table 3.
+by default, this “reasoning” has to be performed in
+implicit form in the model representations for all
+models evaluated in our paper. In contrast, “rea-
+soning” LLMs are models that produce an explicit
+reasoning trace.
+To connect the implicit reasoning required by our
+benchmark with explicit reasoning traces, we con-
+ducted additional experiments comparing a default
+prompt and a chain-of-thought (CoT) prompting
+setup. Table 12 shows average accuracy on Task
+1 of XRAG using a single-judge (GPT-4) setup
+(non-English queries with English documents):
+These results show that models prompted to pro-
+duce explicit reasoning traces perform significantly
+Answerquestionwithchain-of-thought
+You are an AI assistant tasked with answering a given question. Your goal is 
+to generate an answer for a given question based on the provided articles and 
+their publication dates. The answer should:
+1. Fully answer the question
+2. Be brief and concise
+3. Use the SAME LANGUAGE as the given question
+4. Be supported by the articles.
+Here are the given question and articles:
+<question>
+{question}
+</question>
+<articles>
+{search_results}
+</articles>
+Your response should be a jsondictionary containing two fields: "reasoning" 
+containing a step-by-step reasoning to arrive at the answer, and "answer" 
+with a concise answer to the question. Example:
+{{"reasoning": "A step-by-step reasoning to arrive at the answer", "answer": 
+"A concise answer to the question"}}
+Note, you should generate the answer based solely on the information of 
+articles. DO NOT use information outside of the given articles, such as your 
+own knowledge.
+Figure 22: Chain-of-thought prompt for answering ques-
+tion using the retrieved documents.
+Model Default Prompt CoT Prompt
+Claude 3.7 47.70 63.80
+Nova Pro 49.80 57.20
+Table 12: Comparison of default and Chain-of-Thought
+prompting on XRAG Task 1.
+better than those providing a direct answer, giving
+credence to the claim that the implicit reasoning
+required by our dataset construction benefits from
+explicit reasoning trace generation (the prompt is
+illustrated in Figure 22).
+15688

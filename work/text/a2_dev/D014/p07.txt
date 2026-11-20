@@ -1,0 +1,99 @@
+the relationship between generation and knowledge
+F1 is stronger, and correlation with recall is weaker
+(Figure 3 right). We see much less separation be-
+tween recall color contours and a much steeper
+increase with precision (Figure 4 bottom).
+Generator capability determines both overall
+performance and the usefulness of knowledge
+selection. All of our results show that the overall
+RAG performance depends on the generator model:
+the cross-model comparisons in Figures 2 & 4 show
+that for stronger generator models (as measured by
+rank in LLM leaderboards*), performance across
+all knowledge settings are higher (Tables 1 & 2).
+While this result is unsurprising, we also find that
+the gap between the “full knowledge” and “gold
+knowledge” settings becomes narrower, suggesting
+that stronger generators are more robust to noisy
+input knowledge and rely less on the knowledge
+selector. In contrast, when the generator is weaker,
+any reasonable knowledge selector becomes benefi-
+cial, likely because a weak generator cannot handle
+noisy input and requires a selector to filter out dis-
+tractor knowledge; knowledge F1 best correlates
+with answer F1 for Mistral-7B-Instruct in Figure 3.
+Task and dataset are also key factors in RAG
+performance. Figures 2 & 4 show that the same
+generator can show drastically different perfor-
+mance trends between WoW and HotpotQA. For
+example, while Mistral-7B-Instruct’s performance
+degrades without a knowledge selector on Hot-
+potQA, this is not the case for WoW.
+In addition, Figure 4 shows that attempting to
+improve the knowledge selector on top of a weak re-
+triever (i.e. increasing precision when recall is low)
+hurts generation performance on WoW, as well as
+GPT-4o-mini on Hotpot QA. In this scenario, more
+total knowledge, regardless of noise, improves re-
+sponse generation. These counter-intuitive obser-
+vations are likely due to the nature of the task and
+the annotation quality. The solution space in Hot-
+potQA is small given a specific question, and Hot-
+potQA has a cleaner separation between gold and
+distractor knowledge, whereas in WoW, there are
+more plausible responses given the same conversa-
+tion history and knowledge, as well as “distractor"
+knowledge that may actually be relevant to the gold
+response (see Appendix A.4 for more analysis).
+*https://huggingface.co/spaces/lmsys/
+chatbot-arena-leaderboard
+Non-monotonic trends in improving the knowl-
+edge selector. Interestingly, we observe that the
+boundary of where the knowledge selector im-
+proves generation performance (the border between
+the orange and white areas in Figure 2) is convex
+for all three LLMs on WoW. This phenomenon can
+also be seen in Figure 4, where some color con-
+tours intersect with the “full knowledge” baseline
+(dashed red line) multiple times. In other words,
+we observe that generation performance is non-
+monotonic as knowledge precision increases with
+a fixed knowledge recall. The fact that this phe-
+nomenon is only observed on WoW may be due to
+the relatively noisy gold knowledge annotations in
+WoW; we can produce similar behavior by artifi-
+cially injecting noise into HotpotQA’s gold knowl-
+edge annotations (Appendix A.5).
+Constraining the knowledge size does not
+change generation accuracy. One important mo-
+tivation for using a knowledge selector is to reduce
+the total input length to the generator model. How-
+ever, while computational costs can be reduced by
+only using the top-k knowledge, we find that the
+overall relationship between knowledge precision-
+recall and generation F1 observed in our simula-
+tions remains unchanged, regardless of the value
+of k (Appendix A.6).
+6 Conclusion and Discussion
+In this study, we systematically examined the be-
+havior of RAG generation in relation to the perfor-
+mance of knowledge retrieval and selection.
+6.1 Overall Observations
+Summing up Section 5, we find an interaction effect
+between generator capability and ambiguity of the
+task/dataset on RAG generation performance. We
+find two types of generator behavior:
+A strong generator model can achieve good
+performance without a knowledge selector because
+it is robust to noise, and therefore performs better
+as more gold knowledge is retrieved, despite the
+presence of distractor knowledge. Thus, knowl-
+edge recall correlates well with generation F1, and
+there is less room for improvement through the
+addition of a knowledge selector.
+A weak generator model cannot handle distrac-
+tor knowledge and requires a selector to refine the
+noisy input knowledge, and thus knowledge F1 cor-
+relates well with generation F1. Since nowadays
+most popular generator models are strong LLMs,
+4110

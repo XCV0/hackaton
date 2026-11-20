@@ -1,0 +1,106 @@
+Table 2: Component-wise ablation on TED using Llama-3.1. *: Fixed-1 RAG without multi-temperature sampling
+in retrieval or answer generation.
+Method Acc. (%) ↑ OC@0.8 (%) ↓ ECE (%) ↓
+URGen (full) 80.40% 1.98% 6.80%
+w/o uncertainty calibration 80.40% 6.93% 12.31%
+w/o adaptive retrieval (Fixed-k = 5) 69.70% 13.66% 19.06%
+w/o retrieval temperature diversity (M1 = 1) 52.48% 23.76% 25.37%
+w/o generation temperature diversity (M2 = 1) 55.45% 17.82% 19.51%
+w/o multi retrieval (Fixed-k = 1)* 71.29% 12.87% 15.36%
+Vanilla LLM 70.30% 9.90% 10.89%
+Table 3: Five-seed comparison of ﬁxed retrieval depth
+k versus URGen on TED with Llama-3.1-8B. Values
+are mean ± standard deviation.
+Method Acc.(%)↑ OC@0.8(%)↓ ECE(%)↓
+Fixed-1 RAG 74.65 ± 1.13 11.88 ± 1.40 14.95 ± 2.29
+Fixed-2 RAG 73.07 ± 2.47 9.31 ± 3.02 14.07 ± 2.44
+Fixed-5 RAG 69.70 ± 1.50 13.66 ± 2.66 19.06 ± 2.36
+URGen 80.40 ± 1.29 1.98 ± 0.00 6.80 ± 1.13
+and 69.70%/13.66%/19.06% for Fixed-5. The
+paired analysis for this setting appears in Table 3
+and Appendix C.
+5 Ablation Studies
+Component removal. Table 2 isolates the main
+components of URGen. Removing fused calibra-
+tion leaves accuracy unchanged at 80.40%, while
+OC@0.8 rises from 1.98% to 6.93% and ECE
+from 6.80% to 12.31%. Accuracy is unchanged be-
+cause this ablation preserves retrieval and answer
+voting and changes only the reported uncertainty.
+Replacing adaptive retrieval with Fixed-5 reduces
+accuracy to 69.70% and increases OC@0.8 to
+13.66%. Removing either retrieval- or generation-
+temperature diversity produces the largest accu-
+racy losses. Thus, adaptive depth and temperature
+diversity primarily support correctness, whereas
+fusing context and answer uncertainty improves re-
+liability. The ﬁxed-depth comparison is reported
+in Table 3, and temperature-count sensitivity ap-
+pears in Appendix C.
+Retrieval depth. Table 3 reports the ﬁve-seed
+ﬁxed-depth comparison. URGen has the highest
+mean accuracy and lowest OC@0.8 among the
+evaluated depths. In 10,000 paired question-level
+bootstrap samples, its accuracy difference is sig-
+niﬁcant against Fixed-2 (p = 0.0318) and Fixed-
+5 (p = 0.0052), but not Fixed-1 (p = 0.0630).
+OC@0.8 is signiﬁcantly lower in all three compar-
+isons (p ≤ 0.0016), whereas the ECE difference
+is signiﬁcant only against Fixed-5 (p = 0.0110).
+Appendix Table S5 reports every effect size, conﬁ-
+dence interval, and p-value.
+Effect of sharpen parameter α. We investigate
+1.0 1.2 1.4 1.6 1.8 2.0
+Sharpen parameter α
+0
+10
+20
+30
+40
+50
+60
+70
+80Metric value (%)
+71.29
+75.25
+80.20 79.21 82.18 77.23
+12.33
+9.31
+6.20 7.21 5.74 6.39
+3.96 3.10 2.65 1.98 1.98 7.92
+Acc. (%) OC@0.8 (%) ECE (%)
+Figure 4: Sensitivity study of the sharpen parameter α
+using Llama-3.1 on TED. Performance remains stable
+for α ∈ [1.4, 1.8], indicating that the observed result is
+not tied to a single sharpening value.
+the sensitivity of retrieval sharpening by varying
+α from 1.0 to 2.0. As shown in Fig. 4, perfor-
+mance is stable across a broad moderate range. For
+α ∈ [1.4, 1.8], accuracy ranges from 79.21% to
+82.18%, OC@0.8 from 1.98% to 2.65%, and ECE
+from 5.74% to 7.21%. The result is therefore not
+tied to one narrowly tuned α. Lower values pro-
+vide insufﬁcient discrimination among keypoints,
+while overly large sharpening may make evidence
+selection too narrow.
+Case Study. We present one TED QA case in Ta-
+ble 4 to illustrate adaptive evidence selection and
+the potential effect of redundant context. For a
+question about the most comprehensive TED as-
+sessment system, vanilla prompting and Fixed-5
+RAG produce incorrect answers. URGen retains
+four passages centered on activity, severity, and
+assessment, and correctly identiﬁes VISA. This ex-
+ample illustrates how a compact evidence set can
+preserve the decisive guideline information, but
+it is qualitative and does not by itself establish a
+causal effect of retrieval depth.
+Calibration Visualization. As shown in Fig-
+ure 5, we visualize the distribution of predicted
+uncertainty for correct versus incorrect answers
+on TED. Correct answers are concentrated in low-
+uncertainty bins, whereas errors occur more fre-
+quently at higher uncertainty scores.
+Sensitivity, distractors, and cost. The addi-
+tional analyses in Appendix C test the main design
+3924

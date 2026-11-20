@@ -1,0 +1,65 @@
+J. Phys. Commun. 9 (2025) 055008 https://doi.org/10.1088/2399-6528/addbc0
+PAPER
+Optoelectronic optimization of graded-bandgap CdTeSe thin-ﬁlm
+solar cells
+Faiz Ahmad1,2 , Akhlesh Lakhtakia1 and Peter B Monk2
+1 NanoMM–Nanoengineered Metamaterials Group, Department of Engineering Science and Mechanics, The Pennsylvania State
+University, University Park, PA 16802-6812, United States of America
+2 Department of Mathematical Sciences, University of Delaware, Newark, DE 19716, United States of America
+E-mail: akhlesh@psu.edu
+Keywords: CdTe solar cell, bandgap grading, optoelectronic optimization, thin-ﬁlm solar cell
+Supplementary material for this article is available online
+Abstract
+Recent research on CdTeSe thin-ﬁlm solar cells has indicated that front-junction grading suppresses
+nonradiative recombination and improves carrier collection, thereby improving the solar-cell
+efﬁciency. However, a comprehensive study encompassing different bandgap-grading proﬁles—such
+as linear, nonlinear, and piecewise homogeneous—is required to fully understand their impact on
+device performance. Hence, detailed optoelectronic simulations of these solar cells were performed to
+determine the effects of compositional grading and absorbing-layer thickness on power-conversion
+efﬁciency. The transfer-matrix method was used to calculate the electron-hole-pair (EHP) generation
+rate, and a one-dimensional drift-diffusion model was used to determine the EHP recombination
+rate, open-circuit voltage, short-circuit current density, power-conversion efﬁciency, and ﬁll factor.
+Optimization using the differential evolution algorithm indicates that linearly and nonlinearly graded
+CdTeSe photon-absorbing layers of 3000 nm thickness can deliver an efﬁciency of 21.79% and
+21.22%, respectively, when the selenium-to-tellurium ratio is not allowed to exceed 2/3. Also, the
+simulations indicate that a two-layered piecewise-homogeneous CdTeSe photon-absorbing layer,
+with a thickness of 3000 nm, can deliver 22.13% efﬁciency. If higher selenium content is permitted,
+the maximum efﬁciency attainable rises to 24.68%.
+1. Introduction
+Thin-ﬁlm solar cells (TFSCs) with a cadmium-telluride (CdTe) photon-absorbing layer are the second most
+common solar cells in the global marketplace after crystalline-silicon (c-Si) solar cells [1]. Although CdTe
+TFSCs’ performance has improved signiﬁcantly in last two decades, their power-conversion efﬁciency (denoted
+by η) is still far below the Shockley–Queisser (SQ) limit. While η reaches 82% of the SQ limit of c-Si solar cells,
+η is still restricted to 68% of the SQ limit for CdTe TFSCs [2], the SQ limit for CdTe TFSCs being 32.7% [2].
+The primary η-limiting factors for CdTe TFSCs are: (i) small charge-carrier lifetimes; (ii) low charge-carrier
+densities [3]; and (iii) low open-circuit voltage Voc [3, 4] caused by radiative and non-radiative recombination
+that occurs through band tails, defects, and lower-bandgap states causing sub-bandgap absorption [1]. Also,
+interfacial recombination and the charge-carrier selectivity of the back-contact lower both Voc and η [4].
+Another limiting factor for large-scale production and reduction of the levelized cost of electricity (LCoE) with
+CdTe TFSCs is the scarcity of tellurium [5].
+The incorporation of selenium (Se) into CdTe to create the ternary alloy CdTe1−ξSeξ (CdTeSe) [4, 6, 7] has
+been found to increase the short-circuit current density Jsc [8], passivate CdTe grains and grain boundaries [7],
+and drastically increase the minority carrier lifetime [4, 9]. Munshi et al [8] demonstrated polycrystalline
+CdTeSe/CdTe solar cells achieving a record 19.1% efﬁciency with Jsc = 28.4 mA cm−2. Shah et al [10]
+investigated the role of CdTe in polycrystalline CdTeSe/CdTe graded bilayer photovoltaic devices, achieving
+OPEN ACCESS
+RECEIVED
+26 February 2025
+REVISED
+15 May 2025
+ACCEPTED FOR PUBLICATION
+21 May 2025
+PUBLISHED
+2 June 2025
+Original content from this
+work may be used under
+the terms of the Creative
+Commons Attribution 4.0
+licence.
+Any further distribution of
+this work must maintain
+attribution to the
+author(s) and the title of
+the work, journal citation
+and DOI.
+© 2025 The Author(s). Published by IOP Publishing Ltd

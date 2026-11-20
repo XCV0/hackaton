@@ -1,0 +1,48 @@
+Dataset Year Task Category Evaluation Focus Opinion Reference
+Single-hop Question Answering
+WebQuestions 2013 Knowledge Base QA EM, F1 No (Berant et al., 2013)
+MS MARCO 2016 Machine Reading Comprehension ROUGE-L, BLEU No (Nguyen et al., 2016)
+TriviaQA 2017 Reading Comprehension EM, F1 No (Joshi et al., 2017)
+SQuAD 2.0 2018 Reading Comprehension EM, F1 No (Rajpurkar et al., 2018)
+Natural Questions 2019 Open-domain QA EM, Token F1 No (Kwiatkowski et al., 2019)
+PopQA 2023 Entity-centric QA Accuracy No (Mallen et al., 2023)
+Multi-hop Question Answering
+HotpotQA 2018 Multi-hop Reasoning EM, F1, Support F1 No (Yang et al., 2018)
+2WikiMultiHopQA 2020 Multi-hop Reasoning EM, F1 No (Ho et al., 2020)
+MuSiQue 2022 Multi-hop Reasoning EM, F1 No (Trivedi et al., 2022)
+Long-form Question Answering
+NarrativeQA 2018 Long-form QA ROUGE, BLEU No (Kocisky et al., 2018)
+ELI5 2019 Long-form QA ROUGE-L No (Fan et al., 2019)
+QMSum 2021 Meeting Summarization ROUGE No (Zhong et al., 2021)
+ASQA 2022 Ambiguous QA ROUGE, QA-based No (Stelmakh et al., 2022)
+Domain-specific Question Answering
+COVID-QA 2020 Medical Domain EM, F1 No (Möller et al., 2020)
+Qasper 2021 Scientific Papers EM, F1 No (Dasigi et al., 2021)
+CMB 2024 Chinese Medical Accuracy No (Wang et al., 2024)
+Multi-choice Question Answering
+ARC 2018 Science Questions Accuracy No (Clark et al., 2018)
+CommonsenseQA 2019 Commonsense Reasoning Accuracy No (Talmor et al., 2019)
+MMLU 2021 World Knowledge Accuracy No (Hendrycks et al., 2021)
+QuALITY 2022 Reading Comprehension Accuracy No (Pang et al., 2022)
+Information Retrieval & Knowledge Tasks
+KILT 2021 Knowledge-Intensive Tasks EM, F1, ROUGE-L No (Petroni et al., 2021)
+BEIR 2021 Information Retrieval nDCG, MAP, Recall No (Thakur et al., 2021)
+Fact Verification & Robustness
+FEVER 2018 Fact Verification Accuracy, FEVER Score No (Thorne et al., 2018)
+PubHealth 2020 Health Fact-checking Accuracy No (Kotonya and Toni, 2020)
+TruthfulQA 2022 Truthfulness Evaluation % True, % Informative Partial (Lin et al., 2022)
+NoMIRACL 2024 Multilingual Robustness Hallucination Rate, Error Rate No (Thakur et al., 2024)
+CRAG 2024 Comprehensive QA Accuracy, Hallucination No (Yang et al., 2024)
+RAGuard 2025 Robustness Testing Resistance to Misinfo No (Zeng et al., 2025)
+CONFLICTS 2025 Conflict Resolution Appropriateness Score No (Cattan et al., 2025)
+Generation & Attribution
+ALCE 2023 Citation Generation Citation Quality, Fluency No (Gao et al., 2023a)
+FActScore 2023 Factual Precision Atomic Fact Accuracy No (Min et al., 2023)
+AttrScore 2023 Attribution Quality Attribution Accuracy No (Yue et al., 2023)
+RAGBench 2024 Industry RAG TRACe Metrics No (Friel et al., 2024)
+OpinioRAG 2025 Opinion Summarization Sentiment Alignment Yes (Nayeem and Rafiei, 2025)
+Perspective-Aware Retrieval
+PIR 2024 Perspective Retrieval p-Recall, Bias Partial (Zhao et al., 2024b)
+BERDS 2025 Diverse Perspective Retrieval Perspective Coverage Partial (Chen and Choi, 2025)
+Table 13: Complete analysis of 36 major RAG/LLM evaluation datasets (2013–2025). Only OpinioRAG addresses
+opinion synthesis; PIR and BERDS evaluate perspective-aware retrieval but not distributional fidelity.

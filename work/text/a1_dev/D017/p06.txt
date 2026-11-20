@@ -1,0 +1,102 @@
+τeff = A1τ1 + A2τ2 A1 + A2 ð3Þ
+We further calculated the theoretical change in VOC based
+on TRPL decays. Equation (4) describes the relationship between
+achievable VOC and external light emitting-diode quantum efficiency
+(EQELED).21 From this, the difference in achievable VOC (ΔVOC) of dif-
+ferent samples is evaluated according to Equation (5). Here, we esti-
+mated the ratio of EQELED with the ratio of different figure of merits
+(FOMs) from the TRPL data. The absorber with a ΔGGI of 0.20 was
+chosen as the reference providing a ΔVOC of 0 mV.
+Vnon-rad OC;def = Vrad OC − VOC = − kT q lnðEQELEDÞð4Þ
+ΔVOC = Vnon-rad OC;def ref −Vnon-rad OC;def sample
+= kT q ln EQELED;sample EQELED;ref
+/C18/C19
+= kT q ln FOMsample FOMref
+/C18/C19
+ð5Þ
+Three different FOMs are established to compare the EQELED of
+different samples relatively: (1) τeff, (2) A1 × τ1 + A2 × τ2 and (3) NCV
+×τeff. For τeff, it was assumed that the doping density is the same for
+those absorbers. For the second FOM, the prefactors (A1 and A2) were
+taken into account. The sum of prefactor terms are assumed to be
+proportional to the doping density of the absorbers. For the third
+FOM, the doping density NCV extracted directly from C-V measure-
+ments at V=0 (See Figure S2) is used instead of prefactors from TRPL
+decays. Figure 4B shows the relationship between calculated ΔVOC
+from those three FOMs and VOC,def measured from cells. Among
+them, τeff gives a better correlation with VOC,def from cells. This can be
+explained by the non-uniform doping density distribution within a
+sample. While the bandgaps were always extracted from EQE mea-
+surement of the best cell in the sample, TRPL and C-V measurements
+were performed on the cells close to the best cell. To avoid the varia-
+tions from the doping density, different calculated ΔVOC will be fur-
+ther discussed in Section 3.5.
+3.4 | Back surface modification
+In addition to back interface recombination, variations in TRPL decays
+may also arise from different non-radiative recombination rates else-
+where, for example, within the bulk of the absorber. To extract the
+effect solely from the increasing ΔGGI, we further measured TRPL
+decays on the same series of samples after different modifications of
+the back interface. It also helps to understand how far high graded
+CIGS absorbers are from the ideal case (i.e. no back interface
+recombination).
+After the initial measurement described in Section 3.3, the CIGS
+absorbers were mechanically delaminated from the molybdenum
+back contact with a transparent epoxy glue, as depicted in Figure 5A.
+The exposed CIGS/air interface results in a lower back surface recom-
+bination velocity22 than the CIGS/Mo contact. After TRPL characteri-
+zation, the back surface was further passivated by 30 nm Al2O3
+deposited by ALD. The concept of Al2O3 passivation was shown to
+effectively reduce recombination at CIGS/Mo23 or CIGS/air inter-
+faces.24 According to the literature,22-25 those three different back
+surfaces cover different values of surface recombination velocity,
+ranging from about 107 to 102 cm/s.
+Figure 5B displays the TRPL results obtained with different sam-
+ple configurations. We observe an increase in lifetime after delamina-
+tion, and a further increase after Al2O3 deposition. Improvements are
+especially significant for absorbers with low ΔGGI values, being three-
+fold for ΔGGI= 0.20 and only 1.25 times for ΔGGI = 0.50 after delami-
+nation. This is explained by the reduced electron density at the back
+with higher ΔGGI, resulting in a lesser sensitivity to the surface
+recombination velocity value. The three-fold increase for ΔGGI = 0.20
+can be attributed to the difference of interface recombination velocity
+at CIGS/air (on the order of 103 cm/s) and CIGS/Mo (>106 cm/s). As
+example, Figure 5C,D shows TRPL decays for samples with low and
+high ΔGGI. The decays are very similar for high ΔGGI, while being
+very different for small ΔGGI. It suggests that back surface recombi-
+nation is a strong limiting factor for VOC, and that its effect can be
+observed with ΔGGI values up to 0.50. In addition, the τeff value is still
+slightly improved with increasing ΔGGI after 30 nm Al2O3 deposition.
+This can be explained by a low but non-negligible recombination at
+CIGS/air interface,22 further passivated by Al2O3.
+3.5 | Numerical simulation
+To support the experimental findings of Figure 5, we carried out finite
+element modelling simulations. Here we are interested in the effect of
+back recombination solely from varying ΔGGI and its implications on
+VOC. Different bandgap profiles are implemented into 2 μm-thick
+absorbers, in which only the back grading has been modified to
+achieve ΔGGI values ranging from 0 to a maximum of 0.8. For simplic-
+ity, back recombination velocity is fixed to Sb » 107 cms−1. Other
+recombination velocities found at CIGS/Mo interface (e.g. 106 cms−1
+in Weiss et al.22) also show similar results in our simulation. Since
+back recombination is highly sensitive to the diffusion length of car-
+riers, that is, Ld =
+ﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+kT
+q μτ
+q
+, we consider a wide range of carrier mobility
+μ (12.5 cm2V−1s−1 to 200 cm2V−1s−1) and τ (approximately 100 to
+800 ns) covering the range of values typically found experimentally.
+The ΔVOC of a simulated device is calculated as the VOC difference
+from that with highest ΔGGI of 0.80.
+Experimentally, it is difficult to exclude effects on VOC arising
+from deviations in absorber doping concentration or bandgap that
+could occur between different growth runs. Thus, instead of Equa-
+tion (5), we compute the relative ΔVOC before and after delamination
+(Equation 6), for absorbers with different ΔGGI. By doing this, possi-
+ble deviations in the aforementioned material properties (doping or
+Eg) are discriminated for the same absorber and the effect of ΔGGI
+can be analyzed.
+YANG ET AL. 635
+ 1099159x, 2021, 6, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pip.3413, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

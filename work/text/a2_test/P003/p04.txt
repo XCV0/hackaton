@@ -1,0 +1,158 @@
+Multi-Temperature Knowledge Retrieval Uncertainty Estimation
+Clinical Guidelines 
+Consensus Docs
+: (k1 ; t1)
+: (k2 ; t2)
+: (k3 ; t3)
+: (kN ; tN)
+Q: When is the 10-pointsCAS used 
+inTED?(A) Follow-up (B) All times 
+(C) Initial (D) None of the above.
+Sort Keypoints
+(Prompt)
+Data Parsing
+Reward Sum  & 
+Normalization
+.
+.
+.
+k3k2k6 …
+k2k3k4 …
+k3k1k8 …
+.
+.
+.
+Temperature Sampling
+𝜏! 
+.
+.
+.
+Rank Score Assignment
+k3k1k2 … Keypoint:
+Score : 
+k3k1k2 …
+5   4    3  …
+Keypoint:
+Norm. si:
+k3 k2k1  …
+0.6  0.2 0.16…
+q
+Temperature Sampling …
+Follow-up.
+Follow-up.
+Follow-up.
+…𝑡"∗:
+…
+Follow-up.
+Initial.
+Follow-up.
+…
+Multi-Answer Aggregation
+(𝑘! ∗=𝑘#	;	𝑡! ∗=t#)
+ (𝑘$ ∗=𝑘$	;	𝑡$ ∗=t$)
+Zero-shot Adaptive Retrieval
+k3 k2 k1    k4     k6     …
+Ans: 
+a: (A)Follow-up. 
+u: 0.15 (Low Unc.)
+.
+.
+.
+𝜏" 
+𝜏# 
+𝜏$! 
+𝜏3 
+(𝒦∗;𝒯∗)
+𝜏! ∗ 
+𝜏" ∗ 
+𝑡$∗:
+𝜏$" ∗ 
+𝜏! ∗ 
+𝜏" ∗ 
+𝜏$" ∗ 
+:0.8
+:0.2
+Answer 
+Voting
+…
+…
+Uncertainty 
+Fusion
+Answer Aggregation
+LLM
+C
+Question q
+^
+^
+^
+Context Uncertainty ucontext 
+& Adaptive Depth D
+LLM
+ORTemperature Sampling
+ucontext
+uanswer
+Figure 3: Overview of the URGen pipeline for guideline-grounded medical question answering. (1) We parse
+clinical guidelines and consensus documents into structured keypoint–passage pairs (k; t) for retrieval. Given a
+query, a frozen LLM ranks all keypoints under multiple sampling temperatures, producing diverse orderings. (2)
+Each ordering is converted into softmax-normalized relevance scores, which are aggregated into a uniﬁed relevance
+distribution. We compute context uncertainty from this distribution and deﬁne its effective support. A broader dis-
+tribution retrieves more passages, whereas a sharply peaked distribution retrieves fewer. (3) The selected passages
+are concatenated with the query and passed to the frozen LLM under multiple answer-generation temperatures, pro-
+ducing candidate answers. (4) We aggregate the predicted options and calculate answer uncertainty from their vote
+distribution. The ﬁnal uncertainty fuses normalized context and answer uncertainty. Finally, the pipeline outputs a
+ﬁnal prediction ˆa accompanied by a calibrated uncertainty estimate ˆu.
+Now, given multiple ranking lists, we have an
+aggregated relevance score si for every keypoint.
+The softmax does not change the ordering induced
+by the summed rank scores; it places them on a
+common probability scale so that aggregation and
+entropy are well deﬁned across questions. After re-
+taining the top K, power normalization sharpens
+and renormalizes this restricted distribution. We
+only take the top K keypoints with large si into
+the next-step consideration. To sharpen the score
+distribution of these top K keypoints, a power nor-
+malization with hyper-parameter α is further ap-
+plied:
+ˆsi = sα i∑K
+i=1 sα i . (3)
+We quantify context uncertainty by the entropy of
+the sharpened relevance distribution. Intuitively,
+when relevance is concentrated on a few keypoints,
+the entropy is low and we select a compact context;
+when relevance is diffuse, entropy is higher and we
+retrieve a broader set to reduce the risk of missing
+key evidence. The raw context uncertainty ucontext
+is the information entropy of the sharpened distri-
+bution {ˆsi}:
+ucontext = −
+K∑
+i=1
+ˆsi log(ˆsi). (4)
+This measure reﬂects the concentration of the rank-
+ing distribution: low entropy indicates concen-
+trated relevance, whereas high entropy indicates
+that several keypoints receive similar support. In-
+spired by the uncertainty-to-scale parameteriza-
+tion in Bayesian uncertainty modeling (Kendall
+and Gal, 2017), we deﬁne exp(ucontext) as the ef-
+fective support and determine the retrieval depth
+as:
+D = clip[1,5](⌊exp(ucontext)⌋) , (5)
+and select the top D keypoints according to the
+descending relevance score si as the crucial key-
+points K∗ = {k∗ 1 , ..., k∗ D}. The corresponding full
+contexts T ∗ = {t∗ 1, ..., t∗ D} form the context for
+question answering. The exponential and linear
+mappings are compared in Appendix C. Note that
+the subscript in k∗ i indicates the relevance rank,
+with i = 1 denoting the highest-ranked keypoint,
+rather than its corpus index in ki.
+3.4 Multi-Answer Aggregation
+We apply zero-shot adaptive retrieval depth
+(ZARD) to select a limited set of passages T ∗, pro-
+ducing a compact input under the evaluated depth
+bound. In practice, we concatenate the selected
+passages in T ∗ with the query q as augmented con-
+text. We then invoke the LLM under M2 temper-
+3921

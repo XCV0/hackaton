@@ -1,0 +1,101 @@
+To quantify the intrinsic coherence P (E) of an
+evidence tuple E = (t, v, s), we propose two mod-
+eling strategies:(1) Graph-Topology Prior, which
+constructs a multimodal knowledge graph from
+document chunks to model semantic consistency.
+This approach calculates connection strengths be-
+tween retrieved nodes to prioritize tuples that form
+strongly connected paths. Specifically, we check
+the topological connectivity of the retrieved triplet
+(t, v, s) within the graph and model their mutual
+semantic consistency based on the weights of the
+edges connecting these three nodes. (2) Layout
+Prior, which leverages bounding box coordinates
+to model geometric proximity, based on the assump-
+tion that spatially adjacent elements on the same or
+nearby pages have a higher probability of associa-
+tion. Both strategies map physical or topological
+signals into a probability space P (E) ∈ [0, 1] (de-
+tails in Appendix A.2). As shown in the “Spatial
+vs. Semantic Priors” analysis in Section 3.3, incor-
+porating either prior significantly improves QA per-
+formance compared to standard embedding-only
+retrieval. Notably, the semantic constraints offered
+by the Graph-Topology Prior outperform the purely
+geometric constraints of the Layout Prior.
+3 Experiments
+3.1 Experimental Settings
+Evaluation Benchmarks. We evaluate BayesRAG
+on two challenging multimodal Document QA
+benchmarks: DocBench (Zou et al., 2025) and
+MMLongBench-Doc (Ma et al., 2024). DocBench
+comprises 229 documents across five domains (e.g.,
+Finance, Law) with 1,102 QA pairs, featuring sub-
+stantial length (avg. 66 pages, ∼46k tokens) to
+test long-context capabilities. MMLongBench-Doc
+complements this with 135 documents spanning 7
+diverse types and 1,082 questions. Together, these
+datasets cover over 2,000 questions in varied real-
+world scenarios, providing a robust testbed for mul-
+timodal long-document understanding.
+Baselines. To evaluate the effectiveness of
+BayesRAG, we compare it against a diverse
+set of SOTA multimodal RAG systems, cover-
+ing modular, visual-centric, agentic, and graph-
+based paradigms: RAGFlow1: A widely adopted
+open-source RAG engine that integrates retrieval
+pipelines with agentic capabilities. It serves as
+a representative baseline for standard, modular-
+1https://github.com/infiniflow/ragflow
+Method Domains Overall
+Aca. Fin. Gov. Law News
+GPT-4o-mini 42.5 36.8 53.1 51.4 51.1 44.1
+VisRAG 21.9 28.2 20.3 29.6 11.6 25.3
+ViDoRAG 29.0 69.1 35.8 39.7 37.2 43.5
+RAGFlow 45.2 34.0 41.8 48.1 23.8 39.0
+RAGAnything 51.4 42.3 43.2 50.2 57.5 48.7
+BayesRAG (ours) 52.4 37.5 56.0 52.3 66.8 51.2
+Table 2: Accuracy (%) on DocBench. Best performance
+is highlighted in bold and second-best is underlined.
+Domain categories include Academia (Aca.), Finance
+(Fin.), Government (Gov.), Legal Documents (Law),
+and News Articles (News).
+ized RAG implementations used in industry. Vis-
+RAG (Yu et al., 2025a): A visual-centric frame-
+work that bypasses traditional OCR parsing. In-
+stead of extracting text, VisRAG treats document
+pages directly as images, utilizing VLMs for both
+visual embedding and generation. ViDoRAG
+(Wang et al., 2025b): An agent-based approach
+that employs a Gaussian Mixture Model (GMM)
+for multimodal fusion. It introduces an iterative
+agentic workflow (consisting of Explore, Summa-
+rize, and Reflect stages) to verify the reliability of
+retrieved evidence dynamically. RAGAnything
+(Guo et al., 2025): A knowledge-graph-based sys-
+tem that reconceptualizes multimodal content as
+interconnected entities. It employs a dual-graph
+construction mechanism and hybrid retrieval, com-
+bining structural navigation within the KG with
+semantic vector matching to locate cross-modal
+evidence. We also evaluate the performance of di-
+rectly feeding PDFs into GPT-4o-mini. For docu-
+ments with fewer than 50 pages, we use page-level
+screenshots as input. For longer documents, we
+randomly sample 50 screenshots as input.
+Evaluation Metrics. For DocBench, we strictly
+follow the official evaluation protocol, utilizing
+the standard LLM-based scoring mechanism to en-
+sure fair comparison with existing baselines. For
+MMLongBench-Doc, in addition to reporting the
+official rule-based accuracy (Acc), we introduce a
+supplementary LLM-based evaluation. This is de-
+signed to mitigate false negatives inherent in rigid
+string matching, specifically addressing cases of
+semantic equivalence (e.g., abbreviations or para-
+phrasing) that rule-based metrics fail to capture.
+Experimental Setup. To ensure a rigorous and
+standardized evaluation, we employ GPT-4o-mini
+as the final response generator across all experi-
+ments. We utilize MinerU (Niu et al., 2025) for
+4

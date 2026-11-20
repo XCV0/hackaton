@@ -1,0 +1,103 @@
+Findings of the Association for Computational Linguistics: EMNLP 2026, pages 3918–3936
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+URGen: Uncertainty-guided Retrieval-augmented Generation
+for Guideline-Grounded Medical Question Answering
+Mengieong Hoi1,2 Chen Zhao3,4 Chaoyu Lei3,4 Huifang Zhou3,4 Zhedong Zheng1,2*
+1 Faculty of Information Science and Computing, University of Macau, Macau, China
+2 Institute of Artiﬁcial Intelligence and Brain Sciences, University of Macau, Macau, China
+3 State Key Laboratory of Eye Health, Department of Ophthalmology,
+Shanghai Ninth People’s Hospital, Shanghai Jiao Tong University School of Medicine,
+Shanghai, China
+4 Hainan International Medical Center, Shanghai Jiao Tong University School of Medicine,
+Hainan, China
+{yc67382,zhedongzheng}@um.edu.mo; {Zhaoc1390shsmu,lcy315,fangzzfang}@sjtu.edu.cn
+Abstract
+Large language models (LLMs) can halluci-
+nate in specialized medical QA and remain
+poorly calibrated. We propose Uncertainty-
+guided Retrieval-augmented Generation (UR-
+Gen), a training-free framework for disease-
+scoped, guideline-grounded multiple-choice
+QA. URGen ranks guideline keypoints un-
+der multiple temperatures, uses ranking en-
+tropy to select retrieval depth, aggregates
+multi-temperature answers, and fuses nor-
+malized context and answer entropy. On
+TED with Llama-3.1-8B, ﬁve-seed evaluation
+gives 80.40 ± 1.29% accuracy, 1.98 ± 0.00%
+overconﬁdent errors, and 6.80 ± 1.13% ex-
+pected calibration error. Paired bootstrap
+tests show lower overconﬁdent error than ev-
+ery ﬁxed depth (p ≤ 0.0016), while accu-
+racy remains comparable to Fixed-1 (p =
+0.0630). A broader descriptive compari-
+son covers two thyroid-related ophthalmology
+benchmarks and three backbones. The ev-
+idence therefore supports URGen primarily
+as a reliability-oriented method for controlled
+guideline galleries, rather than a general web-
+scale retriever.
+1 Introduction
+Trustworthy medical question answering (QA) can
+reduce misdiagnosis, promote consistent interpre-
+tation of clinical guidelines, and broaden access
+to specialist knowledge (Jin et al., 2021; Pal et al.,
+2022; Wang et al., 2025; Rezaei et al., 2025). How-
+ever, medical questions often depend on long-tail,
+domain-speciﬁc facts that lie outside the pretrain-
+ing distribution of general-purpose LLMs (Vilares
+and Gómez-Rodríguez, 2019; Xu et al., 2025). As
+a result, even strong models usually produce ﬂu-
+ent but incorrect answers with high conﬁdence (Li
+et al., 2023; Simhi et al., 2025), which is unaccept-
+able in safety-critical settings.
+*Corresponding author.
+Response answer with confidence-level:
+When is the 10-points CAS used in TED?
+Llama 3.1-70B Ours
+GPT-4o Ground truth
+Uncertainty: Low
+Response: 10-points CAS is 
+used for initial assessments.
+Uncertainty: Low(0.15)
+Response: 10-pointsCAS is used 
+for follow-up assessments.
+Uncertainty: Low
+Response: 10-points CAS is
+used for all timesassessments.
+10-points CAS is used for 
+follow-up assessments.
+Figure 1: left: A motivational example compares out-
+puts from two large language models (LLMs) for the
+medical question “When is the 10-point CAS used in
+TED?” Both Llama 3.1-70B (Llama Team, 2024) and
+GPT-4o-2024-1120 (OpenAI, 2023) conﬁdently return
+incorrect answers, i.e., initial and all times, with low
+uncertainty, i.e., high conﬁdence. This ﬁgure illustrates
+the failure mode rather than comparing the backbones
+evaluated in Section 4. right: Conversely, our method
+provides the correct answer alongside a quantiﬁed un-
+certainty score. The ground truth answer is follow-up
+assessments.
+In Figure 1, we illustrate the failure mode on
+an ophthalmology guideline question, where both
+Llama-3.1-70B (Llama Team, 2024) and GPT-4o-
+2024-1120 (OpenAI, 2023) return hallucinated an-
+swers without meaningful semantic-level uncer-
+tainty signals (despite token-based or p(True)-
+style conﬁdence estimates (Kadavath et al., 2022;
+Tian et al., 2023)). Therefore, reliable medical
+QA requires (i) grounding answers in authorita-
+tive external evidence and (ii) calibrated uncer-
+tainty estimates that reﬂect ambiguity, missing ev-
+idence, or conﬂicts (Guo et al., 2017; Kuleshov
+et al., 2018; Huang et al., 2024). This improves
+transparency and overall user-friendliness, foster-
+ing greater trust and willingness to use the AI
+among patients and clinicians.
+Existing approaches, e.g., retrieval-augmented
+generation (RAG), partially address grounding by
+retrieving top-k passages before generation (Chen
+et al., 2017; Guu et al., 2020; Lewis et al., 2020;
+Jiang et al., 2023b; Chen et al., 2024; Hwang
+3918

@@ -1,0 +1,92 @@
+12 Dhasade et al.
+all
+RAGRoute
+random
+0
+500
+1,000
+1,500
+2,000
+Communication volume [MiB] MIRAGE Communication Volume
+all
+RAGRoute
+random none
+55
+60
+65
+Accuracy [%]
+MIRAGE Accuracy
+all
+RAGRoute
+random none
+0
+5
+10
+15
+Time [s]
+MIRAGE time breakdown
+source select embed
+doc select rerank
+generate
+all
+RAGRoute
+random
+0
+200
+400
+600
+Communication volume [MiB] MMLU Communication Volume
+all
+RAGRoute
+random none
+60
+65
+70
+75
+Accuracy [%]
+MMLU Accuracy
+all
+RAGRoute
+random none
+0
+5
+10
+Time [s]
+MMLU time breakdown
+all
+RAGRoute
+random
+0
+200
+400
+600
+800
+Communication volume [MiB]FeB4RAG Communication Volume
+all
+RAGRoute
+random
+0
+5
+10
+15
+Time [s]
+FeB4RAG time breakdown
+Fig. 4. The communication volume required for document retrieval (left), RAG test
+accuracy (middle) and query time breakdown (right), for all routing strategies and
+benchmarks. RAGRoute consistently reduces communication volume and maintains
+near-optimal accuracy, with improved query latency.
+End-to-end RAG accuracy Finally, we report the average end-to-end accu-
+racyonthe MIRAGEand MMLUbenchmarks.Forthe FeB4RAGbenchmark,
+this metric is omitted, as no ground-truth answers are available to evaluate the
+correctness of generated outputs.
+Figure 4 (middle column) shows the end-to-end accuracy results. On the
+MMLUbenchmark, RAGRouteachievesanaverageaccuracyof76.09%,nearly
+matching the all baseline (77.10%). In contrast, the random baseline reaches
+only 71.74%, underperforming even the none baseline (73.35%). This drop illus-
+trates the negative impact of indiscriminate retrieval: introducing irrelevant or
+noisy documents can distract the language model and ultimately reduce answer
+quality. By contrast, RAGRoute ’s selective routing ensures that documents
+only from relevant sources contribute to the answer quality.
+On the MIRAGE benchmark, the none baseline achieves 60.58% accuracy,
+while randomly querying data sources increases it to 64.98%. When the data
+sources are selected via RAGRoute, accuracy further improves to 65.64%,

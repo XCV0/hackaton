@@ -1,0 +1,100 @@
+Table 3: The exact elapsed time per query and the percentage
+of the predicted labels from the classifier over all samples.
+Labels Time/Query (Sec.) Percentage (%)
+No (A) 0.35 8.60
+One (B) 3.08 53.33
+Multi (C) 27.18 38.07
+Classifier Performance To understand how the
+proposed classifier works, we analyze its perfor-
+mance across different complexity labels. As Fig-
+ure 3 (Left and Center) shows, the classification
+accuracy of our Adaptive-RAG is better than those
+of the other adaptive retrieval baselines, which
+leads to overall QA performance improvements. In
+other words, this result indicates that our Adaptive-
+RAG is capable of more accurately classifying the
+complexity levels with various granularities, which
+include not performing retrieval, performing re-
+trieval only once, and performing retrieval multiple
+times. In addition to the true positive performance
+of our classifier averaged over all those three la-
+bels in Figure 3 (Left and Center), we further re-
+port its confusion matrix in Figure 3 (Right). We
+note that the confusion matrix reveals some notable
+trends: ‘C (Multi)’ is sometimes misclassified as
+‘B (One)’ (about 31%) and ‘B (One)’ as ‘C (Multi)’
+(about 23%); ‘A (No)’ is misclassified often as
+‘B (One)’ (about 47%) and less frequently as ‘C
+(Multi)’ (about 22%). While the overall results in
+Figure 3 show that our classifier effectively cate-
+gorizes the three labels, further refining it based
+on such misclassification would be a meaningful
+direction for future work.
+Analyses on Efficiency for Classifier While Ta-
+ble 1 shows the relative elapsed time for each of the
+three different RAG strategies, we further provide
+the exact elapsed time per query for our Adaptive-
+RAG and the distribution for predicted labels from
+our query-complexity classifier in Table 3. Similar
+to the results of the elapsed time in Table 1 (relative
+time), Table 3 (exact time) shows that efficiency
+can be substantially improved by identifying sim-
+ple or straightforward queries.
+Analyses on Training Data for Classifier We
+have shown that the classifier plays an important
+role in adaptive retrieval. Here, we further analyze
+the different strategies for training the classifier by
+ablating our full training strategy, which includes
+two approaches: generating silver data from pre-
+dicted outcomes of models and utilizing inductive
+Table 4: Results on QA and complexity classification with
+varying the data annotation strategies for training the classifier.
+QA Classifier (Accuracy)
+Training Strategies F1 Step All No One Multi
+Adaptive-RAG (Ours) 46.94 1084 54.52 30.52 66.28 65.45
+w/o Binary 43.43 640 60.30 62.19 65.70 39.55
+w/o Silver 48.79 1464 40.00 0.00 53.98 75.91
+bias in datasets (see Section 3.2). As Table 4 shows,
+compared to the training strategy relying solely on
+the data derived from inductive bias, ours is sig-
+nificantly more efficient. This efficiency is partly
+because ours also takes into account the case that
+does not consider any documents at all, as also
+implied by the classification accuracy; meanwhile,
+queries in the existing datasets do not capture the
+information on whether the retrieval is required or
+not. On the other hand, in the case of only using the
+silver data annotated from the correct predictions,
+while its overall classification accuracy is high, the
+overall QA performance implies that relying on
+the silver data may not be optimal. This may be
+because this silver data does not cover complex-
+ity labels over incorrectly predicted queries, which
+leads to lower generalization effect on queries rel-
+evant to them. Meanwhile, by also incorporating
+complexity labels from dataset bias (single-hop vs
+multi-hop), the classifier becomes more accurate in
+predicting multi-hop queries, leading to the better
+performance. It is worth noting that our automatic
+labeling strategies are two particular instantiations
+for training the classifier, and that there could be
+other instantiations, which we leave as future work.
+Analyses on Classifier Size To investigate the
+sensitivity of our classifier according to its varying
+sizes, we conducted further experiments. As shown
+in Table 6, we observe no significant performance
+differences among classifiers of various sizes, even
+with reduced complexity and fewer parameters in
+smaller classifiers. This indicates that our proposed
+classifier can contribute to resource-efficient set-
+tings in real-use cases with smaller sizes without
+compromising the performance.
+Case Study We conduct a case study to qualita-
+tively compare our Adaptive-RAG against Adap-
+tive Retrieval. Table 5 shows the classified com-
+plexity and the query handling patterns for both
+simple and complex questions. First, for the simple
+single-hop question, our Adaptive-RAG identifies
+that it is answerable by only using the LLM’s para-
+metric knowledge about ‘Google’. By contrast,
+7043

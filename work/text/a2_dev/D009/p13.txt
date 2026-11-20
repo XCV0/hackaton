@@ -1,0 +1,71 @@
+Appendix Overview
+The appendix includes the following sections:
+• Section A: Prompts and Models Refer-
+ence. Details the prompts used for the pol-
+icy model’s trajectory generation, the PRM’s
+training-data annotation, and the PRM’s VTS
+inline scoring. This serves as a supplement to
+Section 3.
+• Section B: Data Statistics. Provides detailed
+statistics of the PRM training corpus and the
+DPO preference pairs, along with an ablation
+on the outcome-margin filter. This serves as a
+supplement to Sections 3 and 4.
+• Section C: PRM-guided Value Tree Search.
+Presents the mathematical formulations and
+hyperparameters for the PRM-guided value
+tree search, together with a branching-factor
+ablation. This serves as an extended explana-
+tion of Section 3.2.
+• Section D: Implementation Details and Hy-
+perparameters. Reports the full PRM weight
+(α) sweep and training hyperparameters for
+SFT, DPO, and KTO. This serves as a supple-
+ment to Sections 4 and 4.4.
+• Section E: Direct Validation of the PRM.
+We complement the indirect PRM evaluation
+in Section 4.5 with direct validation of label
+quality using both human and frontier-model
+audits.
+• Section F: Statistical Significance of Main
+Results. Provides bootstrap confidence in-
+tervals and per-dataset paired t-tests against
+prior baselines. This serves as a supplement
+to Table 1.
+• Section G: Generalization Across Model
+Families, Scales, and Alignments. Provides
+additional 3B analysis, including base-model
+results, statistical significance, and training
+details, supplementing Section 4.7.
+• Section H: Intermediate-Flawed-But-
+Correct Analysis. Quantifies trajectories
+that contain flawed intermediate steps despite
+reaching the correct final answer, directly
+evaluating the failure mode targeted by
+process-level supervision.
+• Section I: Detailed Recovery Analysis. Pro-
+vides the full breakdowns of the recovery ex-
+periment, including token-level F1, per-depth
+results, and the complementary case where the
+initial retrieval already succeeds. This serves
+as a supplement to Section 4.8.
+• Section J: Case Study. Presents two qualita-
+tive examples illustrating how PRM step-level
+supervision prevents entity confusion and er-
+ror propagation. This serves as an extended
+example of Section 4.
+• Section K: PRM-Feedback-Guided Regen-
+eration. Documents a failed augmentation
+strategy in which PRM rationales were used
+to regenerate training trajectories, along with
+a diagnosis of the resulting distributional mis-
+match. This serves as an extended discussion
+of the limitations.
+• Section L: Released Resources. Provides
+links to the released implementation, models,
+and training datasets.
+A Prompts and Models Reference
+We provide the prompts used for policy trajec-
+tory generation, PRM training-data annotation, and
+PRM-guided VTS evaluation.
+37916

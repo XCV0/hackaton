@@ -1,0 +1,63 @@
+A Sensitivity to CoT Instructions
+To study the sensitivity of RAG QA generated an-
+swers to prompt instructions, we experimented
+with three variations of the instruction prompt
+in G.2 (Prompt-A). For the first variant (Prompt-
+B), updated step 1 to directly ask for evaluat-
+ing individual references, and consolidated step
+2 and 3 with emphasis on saying “I don’t know”
+when provided information is insufficient. For
+the second variant (Prompt-C), we removed the
+emphasis on “I don’t know”. Finally, in the last
+variant (Prompt-D), we removed all CoT step in-
+structions and just asked for thinking before an-
+swering the question. In these experiments, we
+used llama-3.3-70b-instruct (Grattafiori et al.,
+2024) as the generative model and a holdout set
+from the Web Pages (C) dataset as our test set.
+Based on the comparison of results presented in
+Table 4, alight the base instructions are the same,
+and the only difference is CoT step instructions, we
+see significant sensitivity to the prompt variations.
+This is particularly important for the case of refusal
+answers as explicit step instruction on refusing with
+“I don’t know”, seem to severely increase the refusal
+rate, while a very similar instruction is provided
+in the task definition above CoT steps for the base
+prompt. Also, it is worth noting that having no
+instructions, and simply asking to "think before
+answer" has a competitive performance compared
+to engineered prompts for this specific task.
+Instruction Accuracy Hallucination Missing Factuality
+Prompt-A 69.9% 18.4% 11.7% 51.5%
+Prompt-B 63.2% 15.5% 21.4% 47.7%
+Prompt-C 69.2% 18.7% 12.1% 50.5%
+Prompt-D 69.3% 19.6% 11.1% 49.7%
+Table 4: Experiments to study the sensitivity of RAG
+QA factuality metrics to CoT step instructions.
+B Strategization Examples
+We present two additional examples for the strate-
+gization CoT process. In the first example, the
+reasoning steps are dynamically defined to focus
+on specific sections and entities in a legal docu-
+ment to extract the final summary. However, in
+the second example, the focus is on comparing and
+analyzing entities relented such as language and
+publication year for a book title before proving the
+final answer.
+Figure 5: Examples of strategization CoT inference
+process demonstrating the dynamic generation of CoT
+steps. Samples taken from the Wiki dataset. Reference
+documents are not shown here.
+C Seed Data Generation
+Here, we consider two main content sources:
+• Wiki Pages: We sampled about 10K pages
+from the English Wikipedia data set2. First, fil-
+tered very short pages of less than 500 words
+or 10 lines as well as any pages longer than
+7000 words or more than 1000 lines. Then,
+we split each page to non-overlapping text
+chunks, randomized and shuffled to eventu-
+ally have 2 to 15 references of size between
+2https://dumps.wikimedia.org
+784

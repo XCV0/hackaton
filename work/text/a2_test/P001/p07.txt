@@ -1,0 +1,106 @@
+Table 1: Performance of semantic search for text embedding
+model on ORD-QA.
+Model type recall@5 recall@10 recall@15 recall@20
+text-embedding-ada-002 0.447 0.534 0.609 0.634
+bge-large-en-v1.5 0.503 0.596 0.634 0.660
+Our embedding model 0.547 0.658 0.702 0.733
+Table 2: Performance of reranker for weakly-related docu-
+ments filtering on ORD-QA.
+Model type recall@1 recall@2 recall@3 recall@4 recall@5
+RRF 0.248 0.342 0.391 0.435 0.484
+bge-reranker-large 0.360 0.441 0.484 0.497 0.522
+Our reranker 0.335 0.534 0.609 0.665 0.671
+size of 1. The maximal sequence length is 4096 and the lora rank
+is 32. All the models above were fine-tuned on 16xA100 with 40G
+memory each.
+5.3 Evaluation: Text Embedding Model
+In this sub-section, we evaluate the performance of dense (semantic)
+search by our finetuned text embedding model, on the benchmark
+ORD-QA. We first use the under-test text embedding model to
+encode the 290 document chunks in Section 4 into the vector data-
+base. Then, each question 𝑞 in ORD-QA is encoded by the text
+embedding model to obtain its vector representation 𝑒𝑞 , and the
+similarity search library Faiss [29] is used to search for the top-𝑘
+closest document chunks with 𝑒𝑞 in the vector space. We use the
+metric recall@𝑘 (introduced in Section 2.2) to measure the capacity
+of the text embedding model in retrieving relevant documents. We
+adopt the text-embedding-ada-002 model by OpenAI and bge-large-
+en-v1.5 as baselines, and set 𝑘 to be 5, 10, 15 and 20 for evaluating
+recall@𝑘. Experimental results in Table 1 show that fine-tuned by
+our well-designed constrastive learning scheme on the EDA corpus,
+our fine-tuned text embedding model dramatically outperforms
+its base model (bge-large-en-v1.5) and the SOTA commercial text
+embedding model by OpenAI, on the task of retrieving relevant
+documents for EDA-tool-involved questions.
+5.4 Evaluation: Reranker Model
+To evaluate the performance of our fine-tuned reranker model on
+filtering out weakly-related and irrelevant documents, for each
+question 𝑞 in ORD-QA, hybrid search (described in Section 3.2) is
+first conducted. We use Faiss and BM25 for the lexical and semantic
+searches, respectively, and set the search limit of each retriever to
+be 20. After hybrid document search, we obtain 40 candidate rele-
+vant document chunks for 𝑞. Then, we de-duplicate the candidates.
+Next, the reranker model calculates the similarity score between
+𝑞 and each candidate document chunk, and the top 𝑘 document
+chunks with the highest scores are selected as the relevant docu-
+ment chunks. Subsequently, we can calculate recall@𝑘 to measure
+the fine-filtering ability of the reranker. The SOTA open-source
+reranker model bge-reranker-large, based on which our reranker
+is fine-tuned, is selected as one baseline. We also compare our
+reranker model with RRF (introduced in Section 2) since it is used
+in RAG-fusion, one commonly-used RAG flow. Table 2 lists the
+experimental results on ORD-QA: by setting 𝑘 from 1 to 5, our
+fine-tuned reranker model outperforms the baselines in filtering
+out weakly-related documents and preserve relevant documents,
+for EDA-tool-related questions and documents.
+5.5 Evaluation: Generator
+To evaluate the performance of our pre-trained and fine-tuned gen-
+erator on the task of answering EDA-tool-involved questions, for
+each question 𝑞 in ORD-QA, we combine 𝑞 and its golden relevant
+documents 𝑟 into a pre-designed prompt (Figure 7 shows the tem-
+plate of the prompt). The prompt is then fed to the generator for
+answer generation. To quantitatively measure the performance of
+the generator, for each question, the BLEU, ROUGE-L and UniEval
+scores between the generated answer and the ground-truth an-
+swer are calculated. We select OpenAI GPT-4 and several SOTA
+open-source chat LLMs as our baselines, and experimental results
+in Table 3 show that being trained by our proposed two-stage EDA-
+specific training scheme described in Section 3.4, our generator
+is equipped with domain knowledge in EDA and possesses the
+ability of answering questions related to EDA tool documentation,
+and outperforms both commercial and academic chat LLMs on the
+ORD-QA benchmark.
+5.6 Evaluation: RAG Flow
+Finally, we evaluate the performance of our customized RAG flow.
+During the implementation of RAG-EDA, we use Faiss and BM25 as
+the semantic and lexical search engines for the retriever, and set the
+top-𝑘 value of each searcher to 20. The top-𝑘 of the reranker is set
+to 5. For answer generation, our generator model is quantized by
+4-bit for efficient inference. We select 5 cutting-edge academic RAG
+flows as our baselines, and they mainly differs in the way to retrieve
+documents. Vanilla-RAG [11] solely applies semantic retrieval.
+RAG-fusion [13] uses both semantic and lexical retrievals and ap-
+plies RRF [14] for documents fusion and re-ranking. For HyDE [15],
+hypothetical documents are appended to the query for accurate se-
+mantic retrieval. LLMlingua [16–18] renders compression for the
+user query and retrieved documents for key information extraction
+and efficient inference. Finally, ITER-RETGEN [19] synergizes
+retrieval and generation in an iterative manner.
+For the implementation of the baselines, we use Faiss and Ope-
+nAI text-embedding-ada-002 model for semantic retrieval, BM25
+for lexical retrieval, and GPT-4 as the generator. To ensure fair
+comparison, the top-𝑘 values of semantic retrieval for vanilla-RAG,
+HyDE, Llmlingua and ITER-RETGEN are set to 5. For RAG-fusion,
+the top-𝑘 values of semantic and lexical retrievers are set to 20, and
+RRF returns the top-5 highest-score documents as relevant. The
+number of retrieve-generation iterations of ITER-RETGEN is set to
+2. For ablation study, we also replace the generator of RAG-EDA
+by GPT-4 as one baseline. Table 4 shows the experimental results
+on ORD-QA: The questions in ORD-QA can be divided into four
+categories as mentioned in Section 4, and since the numbers of
+GUI questions and install & test questions are small, we combine
+them together as a new category. Consequently, columns 2 to 4 in
+Table 4 list results for the three categories of questions, and the last
+column shows the average results on the whole benchmark. Note
+that the metrics of BLEU, ROUGE-L and UniEval are calculated
+7

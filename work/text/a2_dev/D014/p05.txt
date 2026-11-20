@@ -1,0 +1,132 @@
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+Wizard of Wikipedia GPT-4o-mini
+0.20
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+HotpotQA GPT-4o-mini
+0.4
+0.5
+0.6
+0.7
+0.8
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+Wizard of Wikipedia LLaMA 3.1 8B
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+HotpotQA LLaMA 3.1 8B
+0.25
+0.30
+0.35
+0.40
+0.45
+0.50
+0.55
+0.60
+0.65
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+Wizard of Wikipedia Mistral 7B-Instruct
+0.20
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+HotpotQA Mistral 7B-Instruct
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+Figure 2: Scatter plot of response/answer F1, plotted against knowledge precision (x-axis) and recall (y-axis), by
+GPT-4o-mini (top), LLaMA 3.1 8B (middle), and Mistral 7B-Instruct (bottom). The left column shows results
+on WoW; the right shows HotpotQA. The dots highlighted in orange indicate settings outperforming the “full
+knowledge” setting, while those highlighted in cyan indicate settings underperforming the “no knowledge" setting.
+Each figure is a meta-experiment, and each data point corresponds to a full experiment on the entire sampled dataset.
+to knowledge retrieval with perfect recall, but no
+knowledge selection, is a very strong baseline.
+This finding mostly contrasts with those of prior
+knowledge selection works (Kim et al., 2020;
+Thulke et al., 2021; Li et al., 2022; Sun et al., 2023;
+Zhang et al., 2023; Zheng et al., 2024; Wang et al.,
+2024). For example, in Table 2, we find that for
+GPT-4o-mini, a very strong generator model, the
+“full knowledge" setting achieves 0.780 answer F1
+on HotpotQA, only 0.048 lower than the “gold
+knowledge" setting; similar observations are seen
+for LLaMA 3.1 8B on HotpotQA and for both mod-
+els on WoW. Since the performance gap between
+the “full knowledge” and “gold knowledge” set-
+tings is the space for a knowledge selector to im-
+prove generation performance, we conclude that
+strong generators simply have less room for im-
+provement via knowledge selection.
+Knowledge precision & recall together are good
+predictors of generation performance. Figure 2
+shows that generation performance varies smoothly
+with knowledge precision and recall, indicating that
+knowledge precision and recall together are major
+determinants of generation performance. Due to
+the pipeline nature of the retriever, selector, and
+generator components of RAG, knowledge recall
+can only be improved by the retriever. Meanwhile,
+the downstream selector can only improve knowl-
+edge precision, but it is likely to also reduce recall.
+Therefore, we can visualize the effect of applying
+a knowledge selector: it moves the RAG perfor-
+4108

@@ -1,0 +1,94 @@
+Prompt 3: Dataset Generation
+You are an expert linguistic annotator. Your task is to per-
+form “Semantic Node Partitioning” on a given multi-hop
+document. Your goal is to divide the continuous text into
+self-contained “Semantic Nodes” along natural narrative,
+logical, or topical breaks.
+## Rules for Partitioning:
+1. Contextual Integrity: Each semantic node should be a
+coherent unit of information (e.g., a complete description
+of an entity, a specific event, or a logical step). Do not split
+sentences that are tightly coupled (e.g., pronouns referring
+to the immediately preceding sentence).
+2. Granularity: A node typically consists of 1 to 2 sen-
+tences. Avoid creating overly long nodes that merge distinct
+topics, and avoid overly granular nodes (e.g., splitting a
+single compound sentence).
+3. Exact Match: The text of the partitioned nodes MUST
+perfectly reconstruct the original document when concate-
+nated. Do not alter, add, or remove any words.
+## Output Format:
+You MUST output a valid JSON array of strings, where
+each string is a continuous segment (Semantic Node) of the
+original text.
+## Example:
+Original Text: “Mickey’s Safari in Letterland is a 1993 edu-
+cational NES video game. It stars Disney’s Mickey Mouse.
+The successor title, Walt Disney’s Comics and Stories, be-
+gan publication with the Oct 1940 issue. It featured the
+Gottfredson serials as a prominent feature.”
+Output:
+[
+"Mickey’s Safari in Letterland is a
+1993 educational NES video
+game. It stars Disney’s Mickey
+Mouse.",
+"The successor title, Walt Disney’s
+Comics and Stories, began
+publication with the Oct 1940 issue.
+It featured the
+Gottfredson serials as a prominent
+feature."
+]
+## Input Document:
+{document_text}
+Output ONLY the JSON array:
+Table 5: Prompt Templates of Dataset Generation.
+ing components of ThreadRAG, we construct a
+Graph-Free variant. This variant retains the same
+retrieval pipeline, iterative reasoning procedure,
+downstream LLM, prompts, and evidence budget
+as ThreadRAG, while removing Semantic Topol-
+ogy Graph (STG) construction and EDP. Instead,
+retrieved passages are selected according to query–
+passage similarity and concatenated following their
+original document order.
+Method HotpotQA 2Wiki MuSiQue
+Graph-Free 0.274 0.258 0.206
+ThreadRAG 0.422 0.372 0.324
+Table 6: Controlled Graph-Free ablation in terms of
+Exact Match (EM). The Graph-Free variant preserves
+retrieval and iterative reasoning while removing graph
+construction and EDP.
+As shown in Table 6, removing graph-based evi-
+dence organization leads to consistent absolute EM
+decreases of 0.148, 0.114, and 0.118 on HotpotQA,
+2Wiki, and MuSiQue, respectively. These results
+indicate that the performance gain of ThreadRAG
+cannot be attributed solely to iterative retrieval or
+reasoning, and that explicitly organizing retrieved
+evidence through the semantic topology contributes
+substantially to multi-hop reasoning performance.
+E.2 Comparison of Subgraph Selection
+Strategies
+We further investigate whether the advantage of
+EDP arises specifically from its topology-aware
+evidence propagation rather than merely from se-
+lecting a connected subgraph. We compare EDP
+against two standard graph traversal strategies,
+breadth-first search (BFS) and depth-first search
+(DFS), as well as a condition without subgraph-
+based selection. All variants operate on the same
+candidate graph and use an identical evidence bud-
+get; only the evidence selection strategy is changed.
+Subgraph Strategy EM ∆ vs. EDP
+No subgraph 0.286 −0.038
+BFS (depth = 3) 0.294 −0.030
+DFS (depth = 3) 0.302 −0.022
+EDP 0.324 –
+Table 7: Comparison of evidence selection strategies on
+MuSiQue using LLaMA3-8B-Instruct. All methods use
+the same candidate graph and evidence budget.
+Table 7 shows that both BFS and DFS underper-
+form EDP, with absolute EM decreases of 0.030
+49904

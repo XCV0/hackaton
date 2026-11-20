@@ -1,0 +1,103 @@
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8Answer F1
+HotpotQA GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6Answer F1
+HotpotQA Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Recall
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8Answer F1
+HotpotQA GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Recall
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6Answer F1
+HotpotQA Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8Answer F1
+HotpotQA GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6Answer F1
+HotpotQA Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+Figure 3: Scatter plot of HotpotQA answer F1 versus knowledge precision (top), knowledge recall (middle), and
+knowledge F1 (bottom). The left column shows GPT-4o-mini as the generator; the right column shows Mistral-7B-
+Instruct. Plots for LLaMa 3.1 8B and the WoW dataset are in Appendix A. Each figure is a meta-experiment, and
+each data point corresponds to a full experiment on the entire sampled dataset.
+mance down and to the right in Figure 2; the better
+the knowledge selector, the more it will move right
+(improving precision), and the less it will move
+down (reducing recall).
+Knowledge recall is the most crucial knowl-
+edge metric for strong generators. We find that
+for strong generator models, the knowledge recall
+score is the best single knowledge metric for es-
+timating generation performance; Figure 3 shows
+a very strong correlation between knowledge re-
+call and answer F1 for GPT-4o-mini on HotpotQA,
+and Figure 11 in the Appendix shows the same for
+LLaMA 3.1 8B on HotpotQA and for both models
+on WoW. Moreover, knowledge recall is the most
+important factor in improving generation perfor-
+mance given a fixed generator, while the knowledge
+precision score is a secondary factor.
+Figure 4 further shows that increases in knowl-
+edge recall correspond to significant increases in an-
+swer F1 scores. Taking GPT-4o-mini on HotpotQA
+as an example, we see that moving from the left end
+of a color contour to the right (i.e. keeping knowl-
+edge recall fixed while improving precision) only
+slightly improves answer F1. In contrast, moving
+from one contour to another (i.e. varying knowl-
+edge recall) significantly impacts answer F1 for
+non-zero precision scores. Thus, to improve knowl-
+edge quality for RAG, improving the retriever’s
+recall score is the top priority; improving precision
+via a knowledge selector has a limited contribution,
+especially for strong generators.
+For weaker generators, like Mistral 7B-Instruct,
+4109

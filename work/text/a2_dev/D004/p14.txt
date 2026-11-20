@@ -1,0 +1,90 @@
+Compute and cost. All inference was API-
+hosted through Amazon Bedrock; the method in-
+volves no model training and no local GPU com-
+pute. Total inference cost across all extraction,
+generation, and ablation runs was approximately
+US$2,500.
+Statistical testing. Significance is assessed with
+the Wilcoxon signed-rank test over paired ques-
+tions; the confidence interval for human prefer-
+ence uses bootstrap resampling. Both were com-
+puted with the SciPy library (scipy.stats). Sig-
+nificance thresholds are stated in the relevant table
+captions.
+B Opinion Extraction Model Variations
+Table 5 compares retrieval diversity when using
+different LLMs for opinion extraction. All config-
+urations use hybrid search at k=20. Results show
+consistent improvements across models.
+Table 5: Retrieval diversity improvements (∆ vs. Raw
+KB) across opinion extraction LLMs (k=20, hybrid).
+Metric Mistral Qwen Sonnet
+Sent-Int σ +24.2% +27.4% +26.8%*
+Biz Impact σ +18.4% +12.4% +14.5%
+Revenue Band Cov. −17.5% −19.0% −13.0%*
+Tenure Cov. −3.9% −3.6% −6.9%
+Evidence Cov. +9.4% +8.9% +4.7%
+Emot. Markers +28.1% +20.0% +23.6%*
+C Retrieval Depth Analysis
+Table 6 shows coverage and fairness metrics across
+retrieval depths.
+D Annotation Study Details
+The manual annotation comprised 129 forum posts
+labeled by 3 independent annotators. Raw agree-
+ment: 80.6%. Gwet’s AC1 = 0.845 (95% CI [0.8,
+0.9]). Fleiss’ κ = 0.23, which is low due to the
+kappa paradox under high prevalence (91% pos-
+itive votes); AC1 is the more appropriate metric
+under prevalence imbalance.
+Annotators for both the labeling task and the
+blind pairwise preference evaluation were internal
+colleagues who participated as part of their nor-
+mal work and consented to the use of their judg-
+ments; recruitment, compensation, consent, and
+ethics-review details are described in the Ethics
+Statement.
+Pairwise preference instructions. For the blind
+preference evaluation, each annotator was shown
+the two responses to a given question with their
+positions randomly assigned to slots A and B (so
+that neither the Raw KB nor the Opinion-Enriched
+KB was consistently placed). Annotators were told
+which system produced which response was hidden,
+and were asked a single question: which response,
+A or B, is preferred based on which better reflects
+a diverse and holistic range of opinions. No other
+scoring dimensions were collected.
+E Entity-Split Ablation Details
+Tables 7 and 8 disentangle per-entity splitting from
+opinion metadata enrichment across two extraction
+models.
+Table 7: Entity-Split-Only ablation at k=20 (Sonnet
+4.5). Bold = highest per metric.
+KB Config Sent-Int σ Biz Impact Emot Marker
+Raw 9.12 10.55 7.2
+Entity-Split Only 13.1 12.92 7.8
+Full O-RAG 11.56 12.08 8.9*
+Table 8: Entity-Split-Only ablation at k=20 (Mistral
+Large). Bold = highest per metric, * = p<0.001 vs.
+Entity-Split.
+KB Config Sent-Int σ Biz Impact Emot Marker
+Raw 6.53 9.24 3.2
+Entity-Split Only 7.37 10.27 3.5
+Full O-RAG 8.11* 10.94* 4.1*
+F Qualitative Response Comparison
+The following comparison illustrates how opin-
+ion enrichment affects generated responses. Key
+phrases are highlighted in red.
+Query: “Give me a detailed overview of what
+sellers think about community management & mod-
+erators specifically on seller forums?”
+Table 9 contrasts the Raw KB response against
+the Opinion-Enriched KB response.
+G Opinion Extraction Prompt
+We use an LLM with a structured output schema for
+opinion extraction. The prompt template is shown
+below (with platform-specific terms anonymized):
+You are an expert at analyzing
+seller opinions from e-commerce platform
+content. Analyze the following post and
+extract structured opinion information

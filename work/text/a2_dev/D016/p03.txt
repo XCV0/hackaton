@@ -1,0 +1,125 @@
+prior work integrates all of these methods into their knowledge
+graph construction process.
+III. METHODS
+This section outlines our framework, covering corpus ex-
+traction, KG ontology, VS construction, and the RAG process.
+A. Domain-Specific Dataset
+Overview of of our system is summarized in Figure 1.
+To collect the dataset, we began with a set of core docu-
+ments selected by subject matter experts (SMEs). Here, these
+core documents represent the specific domain in which we
+want to built our corpus on. These core documents were
+used to build a citation and reference network, which al-
+lowed for the expansion of the dataset through the autho-
+rized APIs: SCOPUS [43], Semantic Scholar (S2) [44], and
+Office of Scientific and Technical Information (OSTI) [45].
+SME Documents
+Scopus
+API
+SME Search Criteria
+S2
+API
+TELF
+Vector Store
+Knowledge
+Graph
+...
+Documents
+Topics,
+Keywords
+Fig. 1. User query routing overview.
+We also extract common bi-
+grams from the core docu-
+ments to query these APIs
+to search for relevant doc-
+uments. As we expand on
+the the corpus starting from
+the core documents, it is
+possible to add documents
+that do not directly relate
+to the information in the
+core documents. To main-
+tain the central quality and
+thematic coherence of the
+core dataset, we employed
+several pruning strategies to remove these irrelevant documents
+to preserve the speciality specific to the targeted domain. These
+strategies focused on removing documents that diverge from
+the central theme of the core. Pruning was performed through
+two methods from [34]:
+• Human-in-the-Loop Pruning: SMEs manually review and select a
+handful documents that align with the core theme. Here, we reduce
+the document’s TF-IDF matrix to two dimensions with UMAP and let
+the SME look at the documents that are at the centroids of the given
+clusters. SME can then select which documents to remove.
+• Automatic Pruning of Document Embeddings: Based on the SME
+selections from the previous step, we next remove the document that
+are certain distance away from the selected and the core documents.
+Documents were transformed into embeddings with SCI-NCL [46], a
+BERT based model fine-tuned on scientific literature, to measure seman-
+tic similarity with core and SME selected documents. Those outside a
+set similarity threshold were removed, ensuring only the documents
+relevant to the core documents and SME selections remained.
+Although a human is in the loop, the system remains scalable
+by clustering documents. One review per cluster allows the
+operator to decide on all documents in the group, making it
+efficient even with large datasets without limit on cluster size.
+Additionally, we applied pre-processing techniques using a
+publicly available Python library, Tensor Extraction of Latent
+Features (T-ELF)1 [31]. The cleaning procedures involved the
+following pre-processing steps:
+1T-ELF is available at https://github.com/lanl/T-ELF
+• Exclude non-English, copyrights, and non-essential elements: stop
+phrases, formulas, and email addresses.
+• Remove formatting artifacts like next-line markers, parentheses, brack-
+ets, accents, and special characters.
+• Filter out non-ASCII characters and boundaries, HTML tags, stop
+words, and standalone numbers.
+• Eliminate extra whitespace and words ≤ 2 characters.
+• Standardize punctuation variations, particularly hyphens.
+These pre-processing cleaning and standardization efforts
+are essential for preparing the dataset for further analysis,
+thereby enhancing the quality and consistency of the data.
+B. Dimension Reduction
+The extraction of the latent structure from the dataset is
+accomplished through the following approach. Initially, the
+data is prepared and the necessary computational framework
+is established through these steps:
+• Creation of the TF-IDF matrix, X, of the cleaned corpus
+• X is decomposed using nonnegative tensor factorization
+from T-ELF enhanced with our new binary search strat-
+egy [47], to classify document clusters.
+T-ELF allows us to extract highly specific features from the
+data. This method identifies latent topics within the corpus,
+grouping documents into clusters based on shared themes.
+To avoid over/under-fitting, automatic model determination
+is used where the final cluster counts are determined by
+achieving the highest silhouette scores above a predetermined
+threshold using the Binary Bleed method [47]. This method
+employs a binary search strategy across k values, selectively
+skipping those k values that do not surpass the silhouette
+threshold. The search criterion for an optimal k is defined
+as koptimal = max {k ∈ {1, 2, . . . , K} : S(f (k)) > T }, where
+S(f (k)) denotes the silhouette score of the k-th configuration
+and T the threshold. Importantly, even after identifying an
+initial “optimal” k, higher k values are visited regardless to
+ensure no better configuration is overlooked.
+The factorization of X yields two non-negative factor matri-
+ces W ∈ Rm×k + and H ∈ Rk×n + , ensuring Xij ≈ P s WisHsj .
+Distribution of words over topics are captured in W. The
+matrix H shows the topic distribution across documents, and
+is used to identify the predominant topic for each document
+in post-processing. Full tensor and matrix factorization imple-
+mentations of various algorithms are available in T-ELF 2.
+C. Knowledge Graph Ontology
+Features from T-ELF and document metadata is mapped
+into series of head, entity, and tail relations, forming direc-
+tional triplets, then injected into a Neo4j [48] KG.
+Our KG incorporates document metadata as well as the
+latent features. The primary source of information in the KG
+comes from documents, which are injected into the graph
+along with related attributes. Each document node contains
+information such as DOI, title, abstract, and source API
+document identifiers. Additional node labels include authors,
+2Several tensor and matrix factorization algorithms:
+https://github.com/lanl/T-ELF/tree/main/TELF/factorization

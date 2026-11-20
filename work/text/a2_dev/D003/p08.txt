@@ -1,0 +1,75 @@
+ƭƬ ƯƬ ƭƬƬ
+Ȣ.4)/#/*& ).ȒȢ*-$"$)'/*& ).
+ƭƬƭ ƭƬƮ
+0( -*!.4)/#/-$)$)"//*& ).Ǿ($''$*)ǿ
+ưƱ
+ƱƬ
+ƱƱ
+ƲƬ
+ƲƱ
+ƳƬ
+ƳƱ0
+0-4Ǿʻǿ
+-$)$)"2 )Ư!($'42$/#*0-- $+ 
+0-.Ǿ2 )ƯƭǟƳǿ
+Ǿ$/ǡƮǟƮƭǻ'*"Ǿ)ǿˆưƬǟƮƲǠȥˋƬǟƵƮƲǿ
+0-.Ǿ2 )Ưưǿ
+Ǿ$/ǡƯǟƵƬǻ'*"Ǿ)ǿˆưƯǟƴƴǠȥˋƬǟƵƳƵǿ
+0-.Ǿ2 )Ưƴǿ
+Ǿ$/ǡƯǟưƮǻ'*"Ǿ)ǿˆƱƬǟƴƭǠȥˋƬǟƵƳƮǿ
+0-.Ǿ2 )Ưƭưǿ
+Ǿ$/ǡưǟƮƭǻ'*"Ǿ)ǿˆƱƭǟƲƲǠȥˋƬǟƵƵưǿ
+2 )ƯƭǟƳǾƱƲǟƬʻǿ
+2 )ƯưǾƲƱǟƳʻǿ
+2 )ƯƴǾƲƵǟƮʻǿ
+2 )ƯƭưǾƳƮǟƵʻǿ
+Figure 7: Training different-sized models from the Qwen3 family on the synthetic QuaLITY dataset. We train
+using our best recipe: Mixed Synthetic Training with synthetic QAs and Focal Rewriting AR documents, using
+70B generator. All models exhibit log-linear scaling behavior, and larger models can match RAG performance with
+fewer synthetic tokens. Based on the fitted curves, we observe that the 14B model requires 102×, the 8B model
+142×, the 4B model 177×, and the 1.7B model 813× more synthetic tokens than the original token count (shown as
+#synth tokens/#original tokens).
+Benchmark Model Ours Ours + RAG Vanilla RAG ∆
+QuaLITY Llama 68.2% 69.7% 65.3% +4.4 Qwen 70.1% 73.6% 69.2% +4.4
+LongHealth Llama 71.2% 80.3% 70.0% +10.3 Qwen 76.7% 82.3% 73.7% +8.6
+FinanceBench Llama 52.6% 54.3% 48.0% +6.3 Qwen 55.5% 60.2% 58.8% +1.4
+Table 2: Our training complements retrieval augmentation. “Ours” denotes the trained model without RAG,
+“Ours + RAG” denotes the same trained model with RAG, and “Vanilla RAG” denotes the RAG baseline. ∆ denotes
+the absolute improvement of “Ours + RAG” over “Vanilla RAG”. Averaged across all settings, our training improves
+over Vanilla RAG by 5.9 points.
+help understand this, Allen-Zhu and Li (2024) and
+Allen-Zhu and Li (2025) conduct systematic stud-
+ies on small language models and show that both
+storing knowledge in the parameters and learning
+how to use that knowledge are important. More
+recently, Calderon et al. (2026) argue that even fron-
+tier models are bottlenecked more by knowledge re-
+call than by knowledge storage, and Gekhman et al.
+(2026); Ma and Hewitt (2026) show that reasoning
+can improve fact recall, indicating that teaching lan-
+guage models how to use the facts learned during
+training is important. We believe that the success
+of Synthetic Mixed Training aligns well with these
+findings, as synthetic QAs may help models learn
+how to use knowledge, highlighting the importance
+of knowledge use beyond mere storage in language
+models.
+5 Conclusion
+We study how to make synthetic data scale
+more effectively for knowledge learning in data-
+constrained domains. Our results show that simply
+increasing the amount of synthetic data or using a
+stronger generator is not sufficient: existing meth-
+ods exhibit diminishing returns and still underper-
+form RAG. Based on the observation that synthetic
+QAs and documents have different scaling proper-
+ties, we introduce Synthetic Mixed Training, which
+combines synthetic QAs and documents to leverage
+their complementary training signals and achieve
+the best of both worlds. We further introduce Focal
+Rewriting, which improves the diversity of gener-
+ated documents and leads to an even steeper scaling
+trend. Our methods generalize well across a range
+of settings, and the trained models are also comple-
+mentary to RAG.
+9200

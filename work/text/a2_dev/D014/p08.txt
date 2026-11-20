@@ -1,0 +1,154 @@
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.20
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.28Answer F1
+Wizard of Wikipedia GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.4
+0.5
+0.6
+0.7
+0.8Answer F1
+HotpotQA GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.28Answer F1
+Wizard of Wikipedia LLaMA 3.1 8B
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.30
+0.35
+0.40
+0.45
+0.50
+0.55
+0.60
+0.65Answer F1
+HotpotQA LLaMA 3.1 8B
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27Answer F1
+Wizard of Wikipedia Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6Answer F1
+HotpotQA Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+Figure 4: Color contours of answer F1 versus knowledge precision for GPT-4o-mini (top), LLaMA 3.1 8B (middle),
+and Mistral 7B-Instruct (bottom); the left column shows results on WoW, and the right shows HotpotQA. Each
+contour represents a different knowledge recall score; moving left to right visualizes improving the performance
+(precision) of the knowledge selector. Each plot point corresponds to a full experiment on the entire sampled dataset.
+knowledge selectors have a limited benefit. We hy-
+pothesize that prior work that found performance
+improvements from dedicated knowledge selectors
+saw those benefits because their generator models
+were weak; most prior work used BART (Lewis
+et al., 2020a) as the generator.
+Finally, we note that the strength of a genera-
+tor model is relative; even a SOTA generator can
+fall into the “weak" category, given a sufficiently
+noisy and challenging task/dataset. We hope the
+visualizations shown in our figures can help guide
+future practitioners improve their RAG systems in
+real-world applications.
+6.2 Recommendations to Practitioners
+Based on our observations, we make the following
+recommendations for future practitioners consider-
+ing using knowledge selectors to improve perfor-
+mance in a real-world RAG scenario:
+Benchmark the generation performance without
+external knowledge, with all candidate knowledge,
+and if possible, with gold knowledge only. The “no
+knowledge” setting measures the generator’s base
+performance, “full knowledge” serves as a strong
+baseline corresponding to knowledge retrieval with
+perfect recall, and “gold knowledge” gives the up-
+per bound of RAG performance with perfect knowl-
+edge selection. The gap between “full knowledge"
+and “gold knowledge" is the potential performance
+gain brought by adding a knowledge selector.
+To improve RAG performance, increasing the
+knowledge recall score is the most effective strat-
+egy. Thus, for modern LLM generators, improving
+the knowledge retriever’s recall is key. In prac-
+tice, the retriever or selector may encounter false-
+negative gold knowledge during training, as is the
+4111

@@ -1,0 +1,82 @@
+ability to transport and route evidence from the
+retrieved context into the residual stream, applied
+only to the hallucination-prone layers l ∈ R. Un-
+like prior approaches that directly regulate FFN ac-
+tivations via fixed scaling (Sun et al., 2025; Huang
+et al., 2025), CoDA does not modify FFNs or model
+parameters. Instead, it dynamically reweights at-
+tention to promote copy-encouraged behavior in
+non-copying heads when contextual evidence is
+semantically consistent.
+Let the input to layer l consist of attention
+weights A and hidden states X, where A ∈
+RB×H×L×L and X ∈ RB×L×d. We first compute
+the mean attention map A ∈ RL×L by averaging
+over heads:
+¯Ai,j = 1 H H∑ h=1 Ah i,j . (10)
+We then estimate token-level attention intensity
+sj = 1 L ∑L i=1 ¯Ai,j and select the top-K most at-
+tended context tokens T = TopK(s).
+For each head h, we designate the corresponding
+value vectors {vh k | k ∈ T } as contextual anchors.
+The semantic consistency of each token j is com-
+puted as:
+Sh j = 1 K ∑ k∈T ⟨vh j , vh k ⟩ ∥vh j ∥2 · ∥vh k ∥2 . (11)
+After min–max normalization to ˜Sh j ∈ [0, 1], we
+derive the adaptive dosing factor:
+wh j = α + (2 − 2α) · σ ( τ · ( ˜Sh j − 0.5) ) , (12)
+where τ controls the sharpness of modulation and
+α specifies the minimum weight.
+Finally, attention weights are modulated as:
+˜Ah i,j = Ah i,j · wh j , (13)
+which scales the contribution of each key–value
+pair according to its contextual relevance. By
+amplifying context-aligned value states prior to
+aggregation, CoDA effectively encourages copy-
+encouraged behavior in attention heads that would
+otherwise dilute external evidence, thereby restor-
+ing contextual dominance in the residual stream.
+4 Experiments
+4.1 Settings
+Datasets. We evaluate our method on two cate-
+gories of datasets: (1) hallucination benchmarks, in-
+cluding RAGTruth (Niu et al., 2024a) and Dolly (Hu
+et al., 2024), which assess factual consistency under
+retrieved evidence; and (2) contextual faithfulness
+benchmarks derived from CoFaithfulQA (Huang
+et al., 2025), comprising six subsets—HotpotQA,
+NewsQA, NQ, SearchQA, SQuAD, and TriviaQA.
+For each dataset, we report the number of faithful
+examples used for evaluation, as summarized in
+Appendix B.
+Baselines. We compare CoDA with representa-
+tive baselines spanning prompt-based, decoding-
+based, fine-tuning, and alignment-based paradigms,
+including AttrPrompt and OIPrompt (Zhou et al.,
+2023), COIECD (Yuan et al., 2024), SFT and
+KAFT (Wei et al., 2022; Li et al., 2023a), as well
+as C-DPO (Bi et al., 2024), DDR (Li et al., 2025),
+and ParamMute (Huang et al., 2025). All base-
+lines are evaluated using Context Recall (ConR)
+and Memory Recall (MemR), as defined in Ap-
+pendix C. In addition, we directly compare CoDA
+with ReDeEP (Sun et al., 2025) on RAGTruth and
+Dolly (AC).
+4.2 Main Results and Analysis
+4.2.1 Hallucination-Prone Region
+Localization
+Figure 3: Layer-wise cumulative ratio trajectories CRl i
+(Eq. 5) comparing hallucinated (red) and factual (blue)
+samples. The green dashed curve shows their difference.
+We localize hallucination-prone regions by an-
+alyzing where factual and hallucinated tokens be-
+gin to diverge across model depth. Figure 4 sum-
+marizes two layer-wise indicators. As shown in
+Figure 4(b), the divergence strength ∆l stays near
+zero in early layers and exhibits a sharp rise in
+the mid-to-late layers, indicating clear separation
+points where hallucinated and factual tokens start
+to differ. In contrast, the activation strength Al in
+Figure 4(a) varies substantially across layers, but
+elevated activation alone does not reliably distin-
+11883

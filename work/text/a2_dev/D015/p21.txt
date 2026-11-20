@@ -1,0 +1,51 @@
+German Question
+Doc 2Doc 1 Doc 8Doc 7Doc 6Doc 5Doc 4Doc 3
+supporting distracting
+English Question
+English
+Human Translate
+LLM
+- 2 En supporting docs
+- 6 En distracting docs
+German Answer
+LLM
+English Answer
+- 2 En supporting docs
+- 6 En distracting docs
+Doc. Lang.=En, Query. Lang.=De in Table 4 Doc. Lang.=En, Query. Lang.=En in Table 4
+Figure 23: Experimental settings in Table 4. Here, we use English (En) and German (De) as examples.
+German Question
+Doc 2 Doc 1
+Doc 8Doc 7Doc 6 Doc 5Doc 4Doc 3
+supporting
+distracting
+supporting
+distracting
+English German
+Human Translate English Question
+Google Translate
+Doc 1
+Doc 5Doc 4Doc 3
+supporting
+distracting
+English
+(via Translation)
+LLM
+German Answer
+LLM
+English Answer
+Doc. Lang.=En+De, Query. Lang.=De in Table 5 Doc. Lang.=En+EnDe, Query. Lang.=En in Table 5
+- 2 En supporting doc
+- 6 En distracting doc
+- 1 De supporting doc
+- 1 En supporting doc
+- 3 De distracting doc
+- 3 En distracting doc
+Doc 2Doc 1 Doc 8Doc 7Doc 6Doc 5Doc 4Doc 3
+supporting distracting
+English + German
+Doc 2Doc 1 Doc 8Doc 7Doc 6Doc 5Doc 4Doc 3
+supporting distracting
+English + English
+Figure 24: Experimental settings in Table 5. Here, we use English + German (En+De) as an example.
+15689

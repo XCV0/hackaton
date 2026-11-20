@@ -1,0 +1,90 @@
+Table 4: We show a typical case comparison on TED among vanilla prompting, ﬁxed-5 RAG, and URGen. We list
+the question and choices, ground-truth answer, and each method’s prediction with its uncertainty (green for correct,
+red for incorrect). URGen’s selected keypoints and their ranking scores illustrate its adaptive retrieval mechanism.
+Case Study 1
+Model / Corpus Llama-3.1 8B / TED
+Question & Choices The comprehensive assessment system for evaluating both the activity and severity of thyroid eye disease (TED) is:
+A. CAS B. NOSPECS C. GO-QOL D. VISA
+GT D. VISA
+Vanilla Answer: B. NOSPECS (Unc.: 7.31%)
+ﬁxed-5 RAG URGen
+Answer: A. CAS (Unc.: 35.44%) Answer: D. VISA (Unc.: 48.94%)
+Selected 5 Keypoints Selected 4 Keypoints
+1. 2.1 Activity and severity deﬁnitions for patients with TED, CAS score
+deﬁnition.
+2. 4.1.1 Endocrinologists should be familiar with basic elements of a TED
+examination enabling assessment of both activity and severity.
+3. 7.1.1.1 Intravenous glucocorticoid (IVGC) therapy is preferred for active
+moderate-to-severe TED when activity predominates.
+4. 4.1.2 Assessment of TED should include activity, severity, trend over time,
+and impact on daily living.
+5. 8.3.1 In compressive DON, orbital decompression of the deep medial wall
+and ﬂoor should be considered.
+1. 2.1 Activity and severity deﬁnitions for patients with TED, CAS score
+deﬁnition. (Ranking Score: 0.31)
+2. 4.1.1 Endocrinologists should be familiar with basic elements of a TED
+examination enabling assessment of both activity and severity. (Ranking
+Score: 0.18)
+3. 7.1.1.1 Intravenous glucocorticoid (IVGC) therapy is preferred for active
+moderate-to-severe TED when activity predominates. (Ranking Score:
+0.19)
+4. 4.1.2 Assessment of TED should include activity, severity, trend over time,
+and impact on daily living. (Ranking Score: 0.17)
+Figure 5: Uncertainty distribution on TED. We plot the
+number of questions across uncertainty bins (0–1, bin
+width 0.1) for correct and incorrect predictions. Correct
+answers (left) cluster at low uncertainty, while incorrect
+answers (right) occur more frequently at higher uncer-
+tainty.
+choices. Jointly varying the retrieval and answer
+temperature counts shows that (M1, M2) = (5, 5)
+gives the highest mean accuracy (80.40%) and
+lowest OC@0.8 (1.98%), whereas seven tempera-
+tures give lower ECE (4.00%) at greater sampling
+cost. The ﬁve-temperature setting therefore bal-
+ances correctness and overconﬁdent errors; it is
+not uniformly best on every metric. Replacing
+the effective-support mapping in Eq. 5 with a nor-
+malized linear mapping yields 78.81% accuracy
+and 7.39% OC@0.8, compared with 80.40% and
+1.98% for the exponential mapping, while ECE re-
+mains similar (6.60% versus 6.80%).
+Adding all 22 GD keypoints to the 35-keypoint
+TED gallery lowers every method, but URGen
+remains strongest at 77.03%, versus 72.48% for
+Fixed-1 and 68.91% for Fixed-5 (Appendix Ta-
+ble S8). This is a disease-speciﬁc distractor test,
+not evidence of web-scale scalability. Appendix C
+also reports the normalized uncertainty ranges
+and shows that 2 of the 26 questions in the low-
+est context-uncertainty quartile are answered in-
+correctly. The measured runtime is 4.33 GPU-
+s/question for URGen, between Fixed-1 (3.78) and
+Fixed-5 (5.48).
+Evaluation scope. Table 1 tests consistency
+across backbones, while Table 3 and the paired
+bootstrap provide focused reliability evidence.
+The ablations, sensitivity analyses, distractor test,
+and runtime study characterize the method’s be-
+havior and cost. Accordingly, Table 1 supports a
+descriptive consistency claim rather than statistical
+signiﬁcance for every model–dataset block. The
+evidence is limited to curated guideline galleries;
+automatic and web-scale retrieval remain outside
+the evaluation.
+6 Conclusion
+We introduce URGen, a training-free framework
+that uses context uncertainty to adapt retrieval
+depth and complement answer uncertainty in
+guideline-grounded medical multiple-choice QA.
+On TED with Llama-3.1-8B, URGen signiﬁcantly
+reduces overconﬁdent errors against every ﬁxed
+depth while maintaining accuracy comparable to
+Fixed-1. Cross-backbone and sensitivity results
+further support the method within curated disease-
+scoped galleries. URGen’s uncertainty is a triage
+signal rather than a correctness guarantee. Future
+work should evaluate automatically extracted cor-
+pora, additional specialties, and open-ended ques-
+tions.
+3925

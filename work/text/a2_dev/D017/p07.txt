@@ -1,0 +1,91 @@
+Question: How many samples in 
+MMMU belong to sociology subject?
+VisRAG: 
+Not answerable.
+ViDoRAG: 
+Not answerable.
+RAGFlow: 
+Not answerable.
+RAG-Anything: 
+Not answerable.
+BayesRAG: 
+The most direct and explicit information 
+is in Figure 3 on page 3 (image 2), which 
+states: "Sociology (287, 2.48%)". This 
+indicates that there are 287 samples in 
+the Sociology subject.
+Therefore, the number of samples in 
+MMMU that belong to the Sociology 
+subject is 287.Ground Truth: 287provenance page
+Figure 2: A qualitative comparison illustrating the efficacy of BayesRAG in broadening the scope of visual retrieval
+and filtering inconsistent evidence. Our statistical analysis reveals that approximately 34% of failure cases in
+baseline methods are attributed to this retrieval deficiency.
+ficient K. When divergence between modalities
+is detected, the belief mass is redistributed to the
+uncertainty state or penalized, ensuring that only
+mutually corroborating evidence survives. This is
+particularly evident in the Tutorials domain (41.3%
+→ 53.6%), where precise alignment between com-
+plex charts and descriptions is critical.
+Spatial vs. Semantic Priors. The Layout Prior in-
+troduces a geometric constraint P (E) derived from
+document layout analysis. It functions as a spatial
+filter, assigning a high prior probability (1.0) to
+evidence tuples where the visual and textual com-
+ponents are spatially adjacent (within a specific
+bounding box distance), and a penalty (0.1) oth-
+erwise. As shown in Table 5, incorporating this
+physical constraint alone boosts the overall score
+from 32.7% to 36.8%. This result validates our hy-
+pothesis that spatial consistency serves as a reliable
+proxy for semantic consistency. By strictly enforc-
+ing layout coherence, the model effectively reduces
+uncertainty, filtering out visually similar but struc-
+turally unrelated hallucinations. While bounding
+boxes provide a strong baseline, this motivates our
+further exploration into Knowledge Graphs (in the
+full model) to capture deeper semantic links be-
+yond mere physical proximity.
+3.4 Case Study
+To explicitly demonstrate how BayesRAG handles
+complex retrieval challenges, we visualize two rep-
+resentative cases in Figure 2 and Figure 3, compar-
+ing our method against leading baselines.
+Case 1: Figure 2 depicts target text (“Sociology”)
+buried in a complex layout. Baselines fail to cap-
+ture this low-salience signal, returning “Not an-
+swerable”. BayesRAG addresses this by expanding
+the retrieval candidate pool (Top-k) and leveraging
+the semantic consistency between the query and the
+image text to filter the resulting noise effectively.
+This capability is critical, as our analysis reveals
+that about 34% of baseline errors stem from similar
+failures to retrieve ground-truth evidence, directly
+resulting in incorrect “Not answerable” predictions.
+Case 2: Figure 3 presents a challenge where base-
+lines are misled by the visual similarity of a “Mo-
+bile phone” distractor chart located on a different
+slide. BayesRAG successfully retrieves the correct
+evidence through its probabilistic scoring mecha-
+nism. Specifically, the explicit match between the
+query “Smartphone” and the textual component of
+the target evidence tuple yields a higher likelihood
+score. Simultaneously, the semantic consistency be-
+tween the tuple’s text and image results in a robust
+prior score. These factors synergize during the
+Bayesian update to rank the correct “Smartphone”
+tuple significantly higher than the visually similar
+distractor, enabling the accurate calculation.
+In summary, BayesRAG not only expands re-
+call for obscure details in images but also robustly
+filters confusing distractors through rigorous prob-
+abilistic verification.
+4 Related Works
+Multimodal Vector Retrieval Paradigms. RAG
+significantly enhances LLMs by integrating exter-
+nal knowledge bases (Lewis et al., 2020), with
+embedding models (Chen et al., 2024) playing
+a pivotal role in this process. Recently, vision-
+language models such as CLIP and ColPali (Faysse
+et al., 2025) have extended RAG capabilities to
+7

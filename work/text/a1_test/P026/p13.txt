@@ -1,0 +1,27 @@
+J. Phys. Energy5 (2023) 025007 W Clarke et al
+Figure4. Diffusion enhancement functions according to the generalised Einstein relation for (top) inorganic and (bottom)
+organic transport layer materials. ∆ is (21a) for ETL materials and (21b) for HTL materials. Similarly, carrier density is n for ETL
+materials and p for HTL materials. Parameters taken from table 1.
+Table1. Density of states parameters for common PSC transport layer materials. s is the dimensionless width of the Gaussian DoS,
+s = σ kBT .
+Material Layer Record PCE (%) gc,v (m−3) Ec,v (eV) α∗
+Inorganic
+NiO HTL 20.68 [80] 1.1×1025 [81] −5.41 [82] N/A
+TiO2 ETL 24.8 [83] 2×1023 [81] −4.13 [84] N/A
+ZnO ETL 20.09 [85] 2.2 × 1024 [86] −4.03 [87] N/A
+SnO2 ETL 25.2 [88] 4.36 × 1024 [89] −3.91 [90] N/A
+Organic s
+spiro-MeOTAD HTL 25.2 [88] 1 × 1026 [91] −5.09 [92] 3.38–4.08 [93–95]
+PEDOT:PSS HTL 21.15 [96] 1 × 1026 [97] −5.13 [98] 4.09–5.08 [97, 99]
+P3HT HTL 23.9 [100] 4.2 × 1025 [101] −4.7 [102] 1.04–3.12 [99, 101]
+PCBM ETL 21.43 [103] 0.1 − 2 × 1025 [104–106] −3.95 [107] 2.81–5.38 [104, 105]
+integral (and the equivalent GER) quickly diverges from 1 (i.e. from the value predicted by the Boltzmann
+approximation and the CER), as shown in figure 4. The greater the disorder of the material (i.e. the larger s is)
+the more rapid the divergence of ∆ away from 1 as the concentration of electrons (or holes) is increased [28].
+Measurements of the disorder parameter, s, for common organic PSC TL materials taken from the
+literature are shown in table 1. Values range from 1.04 to 5.38. The corresponding diffusion enhancement
+functions under the GER are plotted in figure 4. Even for the material with the least disorder (P3HT), the
+GER prediction of ∆ has strongly diverged from 1 by the time the carrier density has increased to the typical
+TL doping density. This divergence is far more pronounced for the more disordered materials (such as
+PEDOT:PSS and PCBM) where it begins at relatively low carrier concentrations.
+12

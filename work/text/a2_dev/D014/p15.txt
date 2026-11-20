@@ -1,0 +1,49 @@
+Prompt
+The following is the conversation between the "Wizard",
+a knowledgable speaker who can access to Wikipedia
+knowledge sentences to chat to with the "Apprentice",
+who does not have access to Wikipedia.
+The conversation is about “{{persona}}”.
+{% if history %}
+Here is the conversation history:
+{% for turn in history %}
+{{turn.speaker}}: {{turn.text}}
+{% endfor %}
+{% endif %}
+{% if context %}
+Here are some retrieved Wikipedia knowledge for the
+Wizard. The Wizard can choose any subset of the fol-
+lowing knowledge. It’s also allowed to not choosing any
+of them.
+{% for evidence in context %}
+Title: {{ evidence.title }}
+Sentences:
+{% for sentence in evidence.sentences %}
+- {{ sentence }}
+{% endfor %}
+{% endfor %}
+{% endif %}
+Given the knowledge above, make a very brief, such as
+one sentence, natural response for the Wizard.
+Not all information in the chosen knowledge has to be
+used in the response. Do not include the speaker’s name
+in the response.
+The Wizard’s response is:
+Table 3: Jinja2 prompt template for Wizard of
+Wikipedia.
+Prompt
+Answer this question from HotpotQA with a response
+that is as short as possible, e.g. one word:
+{{ question }}
+{% if context %}
+Use the following support evidence to answer:
+{% for evidence in context %}
+Title: {{ evidence.title }}
+Sentences:
+{% for sentence in evidence.sentences %}
+- sentence
+{% endfor %}
+{% endfor %}
+{% endif %}
+Table 4: Jinja2 prompt template for HotpotQA.
+4118

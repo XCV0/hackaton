@@ -1,0 +1,88 @@
+Table S11: Dense retrieval baselines on TED using Llama-3.1-8B. These methods retrieve a top-1 keypoint-passage
+block and do not provide calibrated context uncertainty.
+Method Retrieval source / proce-
+dure
+Adaptive depth Context uncertainty Acc. (%)↑
+CLIP ﬁxed-1 (Radford
+et al., 2021)
+Generic CLIP-style embed-
+ding retrieval over the same
+keypoint corpus; top-1 key-
+point only.
+× × 69.31
+BioMedCLIP ﬁxed-
+1 (Zhang et al., 2025)
+Biomedical vision-
+language embedding
+retrieval over the same
+keypoint corpus; top-1
+keypoint only.
+× × 71.29
+URGen Multi-temperature LLM
+keypoint ranking with
+entropy-guided adaptive
+depth.
+✓ ✓ 80.40
+Table S12: Comparison with LLM-based ranking and RQ-RAG on TED using Llama-3.1-8B. RQ-RAG improves
+retrieval ﬂexibility through query reﬁnement, while URGen estimates keypoint-ranking uncertainty and adaptively
+selects retrieval depth.
+Method Retrieval procedure Adaptive depth Context unc. Answer unc. Acc. OC@0.8 ECE
+(%)↑ (%)↓ (%)↓
+Single-pass Llama ranker Rank keypoints once with Llama-3.1-8B, then use only the top-1
+keypoint-passage block.
+× × ✓ 71.29 12.87 15.36
+RQ-RAG (Chan et al., 2024) Reﬁne/decompose the question into up to ﬁve retrieval queries
+before answer generation.
+✓ × ✓ 71.29 5.94 17.31
+URGen Multi-temperature keypoint ranking, entropy-guided adaptive
+depth, and fused context-answer uncertainty.
+✓ ✓ ✓ 80.40 1.98 6.80
+or decomposes the input into up to ﬁve retrieval
+queries before answer generation. Although RQ-
+RAG introduces adaptive query reformulation, it
+does not explicitly estimate context uncertainty
+from the ranking distribution. URGen differs by
+keeping the input clinical question ﬁxed and using
+multi-temperature ranking to infer how many key-
+points should be retained.
+The gap between RQ-RAG and URGen sug-
+gests that adaptive query expansion alone is not
+sufﬁcient for this benchmark. In medical guide-
+line QA, query reﬁnement can generate related
+search queries, but it may still retrieve redundant
+or clinically adjacent keypoints that do not decide
+the answer. URGen instead estimates whether the
+ranked keypoint distribution is concentrated or dif-
+fuse. This allows the model to contract the context
+when the decisive keypoints are clear and expand
+the context when the evidence is ambiguous.
+E Uncertainty Analysis
+Relation to semantic graph uncertainty. Free-
+form uncertainty metrics such as Deg, Ecc, EigV,
+and word-sequence entropy (Lin et al., 2024) esti-
+mate uncertainty from the lexical or semantic di-
+versity of multiple generated answers. They are
+most informative when generations are long and
+can form multiple semantic clusters. Our task is
+a constrained multiple-choice setting: each gener-
+ation contains a discrete option choice and a short
+rationale. Under this format, Jaccard- or NLI-
+based similarity graphs are dominated by whether
+two outputs select the same option, so these graph-
+based metrics largely reduce to functions of the op-
+tion vote distribution.
+Why answer entropy alone is insufﬁcient?
+The main-paper ablation already isolates this ef-
+fect: replacing fused uncertainty with answer en-
+tropy only leaves the ﬁnal predictions unchanged
+but worsens OC@0.8 from 1.98% to 6.93% and
+ECE from 6.80% to 12.31%. This shows that
+disagreement among generated options is not suf-
+ﬁcient for reliable calibration; context ambiguity
+must also be modeled. In clinical QA, a model
+can repeatedly emit the same answer while re-
+lying on an incomplete or mismatched keypoint
+set. URGen therefore combines answer uncer-
+tainty with context uncertainty derived from the
+keypoint ranking distribution.
+3934

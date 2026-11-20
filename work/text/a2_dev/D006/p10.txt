@@ -1,0 +1,47 @@
+LLM-Confidence Reranker
+• RankGPT(Sunetal.,2023):Agenerativelist-wisererankingmethodthatpromptspre-trainedlanguagemodels
+to output a ranked list of document labels by relevance, using sliding windows, without fine-tuning.
+• YesNo(Qinetal.,2024):Apoint-wisererankingtechniquethatpromptspre-trainedlanguagemodelstogenerate
+“yes” or “no” indicating document relevance to the query, then ranks based on normalized “yes” likelihood,
+without fine-tuning.
+• Cross-Encoder (Reimers & Gurevych, 2019): A cross-encoder method that computes relevance scores from
+joint query-document representations.
+• ColBERT (Khattab & Zaharia, 2020): A context embedding-based reranking model that enhances precision
+through token-level interactions.
+• RankT5(Zhuangetal.,2023):ATransformer-basedsequence-to-sequencemodeldesignedforrerankingtasks.
+ThesererankersarechosentocompareLCR—atraining-free,confidence-basedmethod—againstbothsimilarpre-
+trained LLM-based approaches (e.g., QLM, RankGPT, YesNo) that underutilize semantic understanding, and fine-
+tunedTransformermodelsthatrepresentoptimized,domain-specificbaselines,therebyhighlightingLCR’sadvantages
+in generalization and efficiency.
+For each query, the retriever fetches top-10 documents, reranked by the specified method, including LCR. For
+LLM-based rerankers, we use Qwen2.5-7B-Instruct (Qwen7B) (A. Yang et al., 2024). We employ MSCP, as detailed
+in Equation 1, for confidence quantification.
+4.1.3. Confidence Quantification Setup
+Multinomial sampling (𝑇 = 1) generates𝐾 = 10 samples per query-document pair. Sampling prompts:
+• Without document:
+Answer the following question as briefly as possible.
+Question: {query}
+Answer:
+• With document:
+Answer the following question as briefly as possible.
+Context: {document}
+Question: {query}
+Answer:
+Clustering evaluates semantic relationships:
+We are evaluating answers to the question “{query}”
+Possible Answer 1: {answer1}
+Possible Answer 2: {answer2}
+Does Possible Answer 1 semantically entail Possible Answer 2? Respond with only one of the following words:
+entailment, contradiction, or neutral. Do not provide any additional explanation.
+Response:
+4.1.4. Evaluation Metrics
+We use Normalized Discounted Cumulative Gain (NDCG) (Järvelin & Kekäläinen, 2002) at𝑘 = 5 as the primary
+metric, prioritizing relevant documents early for RAG systems.
+NDCG@k evaluates ranking quality by accounting for document relevance and position. It is computed as
+Discounted Cumulative Gain (DCG) up to position𝑘, normalized by the Ideal DCG (IDCG) for the optimal ranking:
+NDCG@k = DCG@k IDCG@k, DCG@k =
+𝑘∑
+𝑖=1
+rel𝑖
+log2(𝑖 + 1) ,
+Song et al.: Preprint submitted to Elsevier Page 10 of 21

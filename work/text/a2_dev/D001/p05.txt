@@ -1,0 +1,102 @@
+where hq and hej are the embeddings of the query
+and extracted entities, respectively, and λ is the
+entity boost weight. The top-K nodes ranked by si
+form the anchor set A ⊆ V.
+Energy Diffusion. With the anchor set established,
+we construct an initial energy vector r. Each anchor
+is assigned an energy proportional to its score, mod-
+ulated by a provenance weight wi that prioritizes
+locally retrieved nodes:
+ri =
+{
+si · wi · (1 + µ · bi) if vi ∈ A
+0 otherwise (8)
+bi = max ej ∈Ek Simsem(hi, hej ) (9)
+where µ controls the entity bonus strength. After
+ℓ1-normalization of r, energy is propagated across
+the STG via Personalized PageRank (PPR). The
+stationary distribution p satisfies:
+p = (1 − α)Wp + αr (10)
+where W is the row-normalized adjacency matrix
+weighted by the fused edge weights, and α ∈ (0, 1)
+is the restart probability. This diffusion process al-
+lows scattered evidence to organically accumulate
+in a high-energy topological subregion.
+Graph Pruning. Upon convergence, nodes with
+stationary energy pi falling below a threshold ϵ
+are pruned. A connectivity constraint is then en-
+forced via a BFS traversal rooted at A, retaining
+only reachable nodes to produce a compact, topo-
+logically grounded subgraph G′ = (V ′, E ′). The
+retained nodes V ′′ ⊆ V ′ (after deduplication and
+budget filtering) are subsequently deterministically
+linearized. We sort these nodes based on their phys-
+ical coordinates (di, si), ordering them primarily
+by document retrieval relevance and secondarily
+by intra-document narrative sequence. The final
+modality-native context is assembled as:
+C = concat(ti | vi ∈ V ′′) (11)
+This linearization operation effectively unravels
+the discrete pruned graph back into a continuous
+textual sequence, providing the downstream LLM
+with a contextually intact and strictly modality-
+aligned prompt.
+3.3 Adaptive Reasoning Agent
+The linearized context C obtained from topologi-
+cal pathfinding is passed to a reasoning agent that
+iteratively refines its evidence base until the query
+can be answered with sufficient confidence.
+At each iteration, a sufficiency discriminator
+evaluates the current context C against the query
+q. If C is deemed sufficient, the agent proceeds di-
+rectly to answer synthesis; otherwise, the discrimi-
+nator outputs the missing information as structured
+knowledge triples, which are forwarded to the sub-
+query generator to produce targeted retrieval enti-
+ties. These entities are issued as new queries to
+the hybrid index, and the retrieved documents are
+processed through Steps 2–4 of the ThreadRAG
+pipeline—segmentation, graph augmentation, and
+topological pathfinding—to yield a refined context
+C′ that replaces C for the next iteration.
+This loop repeats for at most N iterations. Upon
+termination, the final context is passed to an answer
+synthesis module that reasons step by step and pro-
+duces a concise answer enclosed in a structured
+output tag, from which the final answer string is
+extracted. The overall procedure is summarized in
+Algorithm 1.
+Algorithm 1 Inference Process of ThreadRAG
+Require: LLM M ; BM25 index over corpus; max
+iterations N ; energy threshold ϵ; MLP threshold θ
+Input: question q
+Output: linearized context C; final answer a
+1: // Phase 1: Semantic Topology Mapper
+2: Ek ← Mextract(q); Qret ← {q} ∪ Ek
+3: D ← top-k
+(⋃
+qj ∈Qret HybridRetrieve(qj )
+)
+4: // Yields vi = (ti, di, si, τi)
+5: V ← MLP_Segmentation(D, θ)
+6: E ← Enar ∪ Esem ∪ Elex; G ← (V, E)
+7: // Phase 2: Energy-Driven Pathfinding
+8: A ← Identify_Anchors(G, q, Ek)
+9: p ← PPR_Diffusion(G, Init_Energy(A))
+10: V ′ ← {vi ∈ V | pi ≥ ϵ}
+11: G′ ← BFS_Traversal(V ′, A)
+12: C ← concat(Sort_by_Coordinates(vi ∈ G′))
+13: // Phase 3: Adaptive Reasoning Agent
+14: for iter = 1 to N do
+15: {FLAG, Emiss} ← Meval(C, q)
+16: if FLAG then
+17: break
+18: end if
+19: Dnew ← HybridRetrieve(Emiss)
+20: G ← STM_Augment(G, Dnew)
+21: C ← EDP_Linearize(G, q)
+22: end for
+23: a ← Msynth(C, q)
+24: // Final Answer Synthesis
+25: return C, a
+49895

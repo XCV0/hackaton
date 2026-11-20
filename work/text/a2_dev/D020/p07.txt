@@ -1,0 +1,46 @@
+• Consistent precision gains: Precision improvements are observed across all query types, with the largest
+gains in Temporal, Comparative, and Open-Ended categories.
+6.2.3 Aggregate Retrieval Performance
+Method Avg Recall@6 Avg Recall@3 Avg Precision@6 Avg Precision@3 Avg MRR Avg NDCG@6 Avg NDCG@3 Count
+Baseline 0.93 0.88 0.40 0.55 0.87 0.89 0.88 786
+W-RAC 0.91 0.84 0.56 0.71 0.83 0.85 0.83 786
+Table 10: Overall Retrieval Performance
+Overall Performance Summary
+• Precision improvement: W-RAC improves Precision@3 from 0.55 to 0.71 (29% relative improvement) and
+Precision@6 from 0.40 to 0.56 (40% relative improvement).
+• Recall: Baseline achieves slightly higher recall, but the precision gains of W-RAC result in better practical
+retrieval quality.
+• MRR and NDCG: W-RAC maintains competitive MRR and NDCG scores, indicating effective ranking of
+the most relevant results.
+The retrieval results demonstrate that W-RAC delivers superior precision while maintaining competitive recall, MRR,
+and NDCG. Combined with the cost and efficiency gains discussed in Sections 10.1–10.4, W-RAC provides an optimal
+balance of retrieval quality and operational efficiency for production-grade RAG systems.
+7 Conclusion
+This work presented Web Retrieval-Aware Chunking (W-RAC), a cost-efficient and scalable chunking framework
+that reframes document chunking as a semantic planning problem rather than a text generation task. By decoupling
+deterministic web parsing from LLM-based grouping decisions and operating exclusively on structured, ID-addressable
+representations, W-RAC eliminates unnecessary text regeneration, reduces hallucination risk, and substantially improves
+system observability.
+Extensive evaluation on the RAG-Multi-Corpus benchmark demonstrates that W-RAC achieves comparable recall
+and ranking quality to agentic chunking while delivering significant efficiency gains. Specifically, W-RAC reduces
+chunking-time output tokens by 84.6%, lowers end-to-end chunking latency by ∼ 60%, and cuts total LLM costs by
+51.7%, despite a modest increase in input tokens due to structured metadata. Importantly, W-RAC consistently improves
+retrieval precision across organizations and query types, yielding more relevant top-ranked results—an outcome that is
+particularly valuable in production RAG systems where precision directly impacts user trust and response quality.
+Beyond efficiency, W-RAC introduces a more deterministic, debuggable, and extensible chunking paradigm. Because
+chunk plans are explicit and ID-based, they can be inspected, audited, cached, and recomputed without reprocessing
+source text, enabling rapid iteration and adaptive retrieval strategies. This design naturally supports advanced extensions
+such as entity-aware chunking, graph-based retrieval, and policy-driven chunk recomposition.
+Overall, W-RAC provides a practical alternative to traditional and agentic chunking approaches, offering a superior
+balance of retrieval quality, cost efficiency, and operational robustness. As RAG systems scale to continuously ingest
+large volumes of heterogeneous web content, W-RAC offers a production-ready foundation for building reliable,
+high-performance retrieval-augmented generation pipelines.
+References
+[1] Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich
+Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, et al. Retrieval-augmented generation for knowledge-
+intensive nlp tasks. Advances in neural information processing systems, 33:9459–9474, 2020.
+[2] Shukang Yin, Chaoyou Fu, Sirui Zhao, Ke Li, Xing Sun, Tong Xu, and Enhong Chen. A survey on multimodal
+large language models. arXiv preprint arXiv:2306.13549, 2023.
+[3] Xinyu Chen, Yuhan Wang, Ziliang Zhao, Haotian Wan, and Yong Zhang. Visrag: Vision-based retrieval-augmented
+generation on multi-modal large language models. arXiv preprint arXiv:2410.10117, 2024.
+7

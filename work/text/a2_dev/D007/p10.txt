@@ -1,0 +1,112 @@
+Ethics Statement
+The experimental results on Adaptive-RAG vali-
+date its applicability in realistic scenarios, where a
+wide range of diverse user queries exist. Nonethe-
+less, given the potential diversity of real-world user
+inputs, it is crucial to also consider scenarios where
+these inputs might be offensive or harmful. We
+should be aware that such inputs could lead to the
+retrieval of offensive documents and the genera-
+tion of inappropriate responses by the retrieval-
+augmented LLMs. To address this challenge, de-
+veloping methods to detect and manage offensive
+or inappropriate content in both user inputs and re-
+trieved documents within the retrieval-augmented
+framework is essential. We believe that this is a
+critical area for future work.
+Acknowledgements
+This work was supported by Institute for Informa-
+tion and communications Technology Promotion
+(IITP) grant funded by the Korea government (No.
+2018-0-00582, Prediction and augmentation of the
+credibility distribution via linguistic analysis and
+automated evidence document collection), Basic
+Science Research Program through the National
+Research Foundation of Korea (NRF) funded by the
+Ministry of Education (RS-2023-00275747), and
+the Artificial intelligence industrial convergence
+cluster development project funded by the Ministry
+of Science and ICT (MSIT, Korea) & Gwangju
+Metropolitan City.
+References
+Rohan Anil, Andrew M. Dai, Orhan Firat, Melvin John-
+son, Dmitry Lepikhin, Alexandre Passos, Siamak
+Shakeri, Emanuel Taropa, Paige Bailey, Zhifeng
+Chen, Eric Chu, Jonathan H. Clark, Laurent El
+Shafey, Yanping Huang, Kathy Meier-Hellstern, Gau-
+rav Mishra, Erica Moreira, Mark Omernick, Kevin
+Robinson, Sebastian Ruder, Yi Tay, Kefan Xiao,
+Yuanzhong Xu, Yujing Zhang, Gustavo Hernández
+Ábrego, Junwhan Ahn, Jacob Austin, Paul Barham,
+Jan A. Botha, James Bradbury, Siddhartha Brahma,
+Kevin Brooks, Michele Catasta, Yong Cheng, Colin
+Cherry, Christopher A. Choquette-Choo, Aakanksha
+Chowdhery, Clément Crepy, Shachi Dave, Mostafa
+Dehghani, Sunipa Dev, Jacob Devlin, Mark Díaz,
+Nan Du, Ethan Dyer, Vladimir Feinberg, Fangxi-
+aoyu Feng, Vlad Fienber, Markus Freitag, Xavier
+Garcia, Sebastian Gehrmann, Lucas Gonzalez, and
+et al. 2023. Palm 2 technical report. arXiv preprint
+arXiv:2305.10403.
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2024. Self-RAG: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations.
+Jinheon Baek, Soyeong Jeong, Minki Kang, Jong Park,
+and Sung Ju Hwang. 2023. Knowledge-augmented
+language model verification. In Proceedings of the
+2023 Conference on Empirical Methods in Natural
+Language Processing, EMNLP 2023, Singapore, De-
+cember 6-10, 2023, pages 1720–1736. Association
+for Computational Linguistics.
+Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann,
+Trevor Cai, Eliza Rutherford, Katie Millican, George
+van den Driessche, Jean-Baptiste Lespiau, Bogdan
+Damoc, Aidan Clark, Diego de Las Casas, Aurelia
+Guy, Jacob Menick, Roman Ring, Tom Hennigan,
+Saffron Huang, Loren Maggiore, Chris Jones, Albin
+Cassirer, Andy Brock, Michela Paganini, Geoffrey
+Irving, Oriol Vinyals, Simon Osindero, Karen Si-
+monyan, Jack W. Rae, Erich Elsen, and Laurent Sifre.
+2022. Improving language models by retrieving from
+trillions of tokens. In International Conference on
+Machine Learning, ICML 2022, 17-23 July 2022, Bal-
+timore, Maryland, USA, volume 162 of Proceedings
+of Machine Learning Research, pages 2206–2240.
+PMLR.
+Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, Sandhini Agarwal, Ariel Herbert-Voss,
+Gretchen Krueger, Tom Henighan, Rewon Child,
+Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu,
+Clemens Winter, Christopher Hesse, Mark Chen, Eric
+Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess,
+Jack Clark, Christopher Berner, Sam McCandlish,
+Alec Radford, Ilya Sutskever, and Dario Amodei.
+2020. Language models are few-shot learners. In Ad-
+vances in Neural Information Processing Systems 33:
+Annual Conference on Neural Information Process-
+ing Systems 2020, NeurIPS 2020, December 6-12,
+2020, virtual.
+Danqi Chen, Adam Fisch, Jason Weston, and Antoine
+Bordes. 2017. Reading wikipedia to answer open-
+domain questions. In Proceedings of the 55th Annual
+Meeting of the Association for Computational Lin-
+guistics, ACL 2017, Vancouver, Canada, July 30 -
+August 4, Volume 1: Long Papers, pages 1870–1879.
+Association for Computational Linguistics.
+Sukmin Cho, Jeongyeon Seo, Soyeong Jeong, and
+Jong C. Park. 2023. Improving zero-shot reader by
+reducing distractions from irrelevant documents in
+open-domain question answering. In Findings of the
+Association for Computational Linguistics: EMNLP
+2023, Singapore, December 6-10, 2023, pages 3145–
+3157. Association for Computational Linguistics.
+Hyung Won Chung, Le Hou, Shayne Longpre, Barret
+Zoph, Yi Tay, William Fedus, Eric Li, Xuezhi Wang,
+Mostafa Dehghani, Siddhartha Brahma, Albert Web-
+son, Shixiang Shane Gu, Zhuyun Dai, Mirac Suz-
+gun, Xinyun Chen, Aakanksha Chowdhery, Sharan
+7045

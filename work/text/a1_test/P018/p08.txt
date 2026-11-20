@@ -1,0 +1,125 @@
+Nature Energy | Volume 8 | August 2023 | 789–799 796
+Article https://doi.org/10.1038/s41560-023-01255-2
+were used to deposit n-nc-SiOx:H, p-a-Si:H and p-nc-Si:H layers during 
+the device fabrication. For the i-a-Si:H–n-Si interface of the 25.26% cell, 
+an ultrathin 0.5- to 1.0-nm buffer layer, rich in H content, was intro -
+duced to improve the passivation.12 While for that of 26.30, 26.74 and 
+26.81% cells, an O-terminated Si surface, grown by a self-limiting wet 
+chemical oxidation process (using HF/H2O2 solution), was introduced 
+to suppress Si epitaxy62–64. Before deposition of p-nc-Si:H, CO2 plasma 
+treatment was carried out on i-a-Si:H, which forms a thin barrier layer 
+for impeding the damage. Supplementary Table 6 shows the detail 
+parameters of the growth process for doped layers. The TCO layers 
+used in 25.26% cells were prepared by direct current sputtering with 
+rotationally target, while the updated TCO layers used in 26.30, 26.74 
+and 26.81% cells were grown by the reactive plasma deposition tech-
+nique. The material of the updated TCO is 1 wt% CeO2 doped In2O3, while 
+that of original TCO is SCOT (name of commodity; manufactured by 
+Advanced Nano Products) for the front side and conventional 10 wt% 
+SnO2 doped In2O3 for the rear side of the device. Silver grid electrodes 
+were printed followed by annealing at 190 °C for 30 min. With the 
+improvement of the metallization process, the metal fraction of the 
+front electrode for different SHJ solar cells decreased from 3.2 to 2.0%, 
+while the rear electrode patterning with fingers and bus bars remained 
+basically unchanged. For the above situation of 2.0% metal fraction, 
+laser transfer process was introduced to make the front finger. To 
+further increase JSC, a 150-nm-thick MgF2 film was evaporated on the 
+front TCO layer as a second antireflective coating. For 26.81% cell, an 
+additional 120-nm-thick MgF2/150-nm-thick Ag stack was evaporated 
+on the rear TCO layer, which means this cell is a monofacial solar cell. 
+Finally, light soaking under 60 suns was carried out for 90 s at 190 °C.
+PLA
+Two methods were utilized for the PLA of the solar cells with PCEs 
+of 25.26% (p-a-Si:H cell) and 26.30% (p-nc-Si:H cell). One is based on 
+Quokka2 software (as shown in Fig. 2 ), and the other is referring to a 
+simple recombination model (as shown in Supplementary Fig. 1). For 
+the Quokka2 simulation, the unit cell was modelled in two dimensions 
+to calculate the power loss in the transversal transport of carriers 
+between two fingers. The input parameters were primarily obtained 
+from measurements 'Characterizations'. The line resistance of the 
+finger and the contact resistivity of the heterojunction were consid -
+ered as series resistance in an external circuit. The optical path-length 
+factor (Z) was set as 4n2, and the transmittance was adjusted to match 
+the simulated JSC to that of actual cells. The τSRH of the silicon wafers was  
+set by adjusting the values of σn, σp and the defect density of the SRH defect 
+(Nt). τSRH, J01 (surface recombination) and Rs were further tuned to obtain 
+agreement between the light J–V and the Suns–VOC curves. Richter’s  
+Auger mode was chosen, and the value of radiation recombination was 
+changed to 0.4 × Brad with a photon recycling probability of 0.6 (ref. 65). 
+Other parameters in the simulation are listed in Supplementary Table 4.  
+It should be noted that since band gap narrowing is not considered in 
+this model, the corresponding VOC may deviate somewhat from the 
+experimental value. For the simulation by the simple recombination 
+model method, we first assume a uniform quasi-Fermi level and then 
+fit the Suns–VOC and light J–V curves by adding the formulas of intrinsic 
+recombination, SRH recombination, surface recombination, series 
+resistance and so on. The specific fitting parameters, consequent 
+results and corresponding descriptions are shown in Supplementary 
+Discussion 1 and Supplementary Fig. 1.
+Electrical simulation
+The band diagrams in Fig. 3e,f and the dark I–V curves in Supplementary 
+Fig. 6 were calculated by using Sentaurus TCAD based on drift-diffusion 
+models. The simulation structure of the testing device is illustrated in 
+Supplementary Fig. 7a but with n-Si as the substrate: that is, a stacked 
+film of Ag–TCO–p-nc-Si:H (or p-a-Si:H)–i-a-Si:H on bulk n-Si with a disk 
+shape on the front surface and a full-area ohmic contact on the rear 
+surface of the n-Si substrate. Physical models, including surface recom-
+bination, Auger recombination in substrate and thermionic emission 
+at proper interfaces, are taken into consideration. Moreover, p-a-Si:H 
+and p-nc-Si:H layers feature spatially uniformly distributed traps in the 
+exponential and Gaussian energy distributions50. Trap-assisted tun-
+nelling and BTBT models are also considered at the TCO–p-nc-Si:H (or 
+p-a-Si:H) interface. The specific film parameters are shown in Supple-
+mentary Table 7. The simulated results are consistent with the experi-
+ments (Supplementary Figs. 5 and 6 and Supplementary Discussion 2).
+Optical simulation
+The optical simulation in Fig. 5b was performed using the SunSolve 
+software provided by PV Lighthouse. In the simulation, we use refrac-
+tive indices from the literature66–70 except for the TCO film, which we 
+measured by ellipsometry. In SunSolve, ray tracing and thin-film optics 
+were adopted with a Monte Carlo algorithm for sampling and averag-
+ing the absorption in each layer. Here, 1 million rays with zero zenith 
+angle and air mass 1.5G were randomly generated for better confidence 
+of the statistics; the 95% confidence interval of cell absorption is less 
+than 0.01 mA cm−2.
+Characterizations
+The light J–V curves of the solar cells were tested and certified by ISFH 
+(Supplementary Fig. 8); gold‐coated brass chuck was used to mount 
+the solar cells, and the resistance of the grid at the rear side and of 
+bus bars at the front side was neglected. The pseudo light J–V curves 
+were extracted from a Suns–VOC measurement. The Suns–VOC mod-
+ule of a Sinton WCT-120 instrument was used to collect the changes 
+in voltage of the device by reducing the light intensity of the flash -
+light; these were computationally transformed them into Suns–V OC 
+curves. Raman spectra were obtained with a Horiba LabRAM Odyssey  
+Raman spectrometer with a 325-nm excitation laser. Test films were 
+deposited on cleaned glass substrates using the same deposition pro-
+cesses as the solar cells. The morphology of heterojunctions, consisting 
+of TCO-coated doped amorphous and nanocrystalline silicon films  
+on c-Si bulk, was observed by TEM, and the test samples were prepared 
+by the focused ion beam method. Activation energies were calculated 
+from measurements of electrical conductivity as a function of test 
+temperature. Electrical conductivities were calculated from I–V curves 
+measured by a semiconductor analyser (Keithley 4200A-SCS). It should 
+be noted that the 50-nm isolation layer of SiOx film was deposited by 
+plasma-enhanced chemical vapour deposition before the deposition 
+of p-nc-Si:H or p-a-Si:H on the pyramid-textured silicon wafers. Contact 
+resistivity tests were carried out using the CSM, ECSM and TLM; the 
+details are shown in Fig. 4b and Supplementary Fig. 7. Sinton’s minority 
+carrier lifetime test was used to characterize the passivation quality on 
+a symmetric structure of p-nc-Si:H–i-a-Si:H–n-Si–i-a-Si:H–p-nc-Si:H 
+(Fig. 4c). The transient mode of a Sinton measurement was used for 
+testing the minority carrier lifetime. Pyramid-textured n-Si wafers 
+with a thickness of about 130 μm and resistivity of about 1.59 Ω cm 
+were used as the substrates.
+Reporting summary
+Further information on research design is available in the Nature  
+Portfolio Reporting Summary linked to this article.
+Data availability
+All data generated or analysed during this study are included in the 
+published article and its Supplementary Information. Source data are 
+provided with this paper.
+References
+1. Min, B., Müller, M., Wagner, H., Fischer, G. & Brendel, R. A roadmap 
+toward 24% efficient PERC solar cells in industrial mass production. 
+IEEE J. Photovolt. 7, 1541–1550 (2017).

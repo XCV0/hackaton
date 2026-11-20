@@ -1,0 +1,110 @@
+Prompt for RSavg
+You are a helpful assistant, below is a text list which
+may contain unrelated texts. Please analyze the list
+and remove any incoherent or unrelated texts. The text
+list: retrieved_context_list.
+Please return the removed texts as a list without any
+explanation. If there are no unrelated texts, return an
+empty list.
+Prompt for CDPAavg
+Given two sentences, determine if they convey the
+same meaning.
+If they are similar in meaning, return ‘yes’; other-
+wise, return ‘no’. The following situations are also
+considered as the two sentences expressing the same
+meaning:
+1. One sentence includes the meaning expressed in the
+other sentence.
+2. The two sentences express the same central idea but
+in different ways.
+Sentence 1: {generated_answer_clean}
+Sentence 2: {generated_answer_wm}
+Output: ‘yes’ or ‘no’ only, No explanations, no extra
+text.
+Prompt for WDPV
+Given a question, its response, and the related doc-
+ument of the question. Please judge whether the re-
+sponse accurately answered the question **strictly**
+according to the related document. Simply answer
+‘yes’ or ‘no’ without any explanation.
+Question: {question}
+Response: {generated_answer}
+Related Document: {related_text}
+E.4 Implementation Details
+For experiments not involving text generation, we
+utilized a machine equipped with an Intel Core i7-
+12700 CPU @ 2.10 GHz, running Windows 11,
+16GB of memory, with Python 3.12. Watermarked
+text generation was conducted on a machine with
+64 CPUs (Intel(R) Xeon(R) Gold 6426Y), 512GB
+of memory, and an NVIDIA H100-NVLink GPU
+(80GB memory), running Ubuntu 22.04, CUDA
+11.8, and Python 3.12.
+Black-box LLMs (GPT-4.1 and Gemini-2.5-
+Flash) are employed in the watermarking process.
+To reduce the cost of watermarking, we sampled ap-
+proximately 2,000 texts from the knowledge base
+and partitioned them into around 200 chunks for
+subgraph extraction. For each chunk, we followed
+the summarization strategy outlined in the Sum-
+marize Community Reports section of GraphRAG
+(Edge et al., 2024) to obtain a high-level abstraction
+of the extracted subgraph. During the knowledge
+completion stage, we set the number of predicted
+relations per subgraph to 2–5 for watermark knowl-
+edge generation.
+For the watermarking algorithm, we set δ = 3.0,
+and used the hash function H() with SHA256 as
+the keyed hash function. The meaningful water-
+mark information is the binary string of “ACL”,
+and we use a 24-bit pseudorandom binary string
+i.i.d Bernoulli(0.5) to XOR the watermark informa-
+tion to get the watermark string W . After genera-
+tion, each chunk’s candidate watermark texts were
+evaluated using GPT-4.1, and the top-3 texts with
+the highest quality were selected for injection into
+the knowledge base. The selected texts are then
+infused into their corresponding chunks randomly
+(around 600 infused watermark texts). For the Wa-
+termark Text Indexer (WTI), we used GPT-4.1 as
+the query generator. The retriever was simulated
+using BGE-m3, and the underlying LLM for re-
+sponse generation was GPT-4.1. Up to 3 questions
+were generated for each watermarked knowledge
+entry.
+In all black-box model experiments, the temper-
+ature was set to 0.01 by default. For knowledge
+modification (i.e., paraphrasing) attacks, we used
+GPT-based LLMs with a temperature set to 0.7. To
+assess the perplexity (PPL) of generated content,
+we employed the OPT-1.3B model (Zhang et al.,
+2022).
+For RAG systems, unless otherwise specified,
+top-1 text was retrieved from the knowledge base
+to evaluate the retrievability of watermark texts. In
+knowledge expansion attacks, we also assessed the
+retrieval of more texts from the knowledge base.
+Unless otherwise specified, the system prompt is:
+System Prompt for RAG
+You are a helpful assistant. Below is a query from a
+user and some relevant contexts.
+Answer the question given the information in those
+contexts. Your answer should be short and concise.
+If you cannot find the answer to the question, just say
+"I don’t know".
+Contexts: [context]
+Query: [question]
+Answer:
+In the RAG setting, we applied context compres-
+sion by retrieving the top-3 texts and using GPT-4.1
+to summarize them. And we set three advanced
+system prompts to enforce RAG reply in a specific
+way. These system prompts are shown below:
+Ban-verbatim-use System Prompt
+You are an expert who provides direct-to-the-point
+answers. Based on the provided context, answer the
+user’s question. Do not use any introductory phrases
+or filler words. Do not verbatim use of the provided
+context. If you cannot find the answer to the question
+within the contexts, simply say ’I do not know’.
+21213

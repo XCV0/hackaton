@@ -1,0 +1,98 @@
+However, even when the retrieved evidence is ac-
+curate and contextually appropriate, RAG systems
+may still produce unsupported or contradictory
+statements—a phenomenon commonly referred to
+as RAG hallucination (Shuster et al., 2021; Niu
+et al., 2024a; Magesh et al., 2024; Sun et al.,
+2025). This observation suggests that hallucination
+in RAG is not merely a retrieval failure, but can
+arise from how internal parametric knowledge and
+external context are integrated during inference.
+Following the experimental setting of Re-
+DeEP (Sun et al., 2025), our work focuses on hal-
+lucinations that persist despite sufficient and rel-
+evant retrieved evidence, and aims to understand
+and mitigate this failure mode from a mechanistic
+perspective.
+B Datasets
+B.1 Dataset Overview and Usage Protocol
+We evaluate contextual faithfulness and hallucina-
+tion mitigation using two complementary dataset
+families. (i) Hallucination benchmarks test
+whether a model can remain faithful under retrieved
+evidence, where human or automatic annotations
+explicitly characterize unsupported or contradic-
+tory generations. (ii) Contextual-faithfulness
+benchmarks test whether the model grounds gen-
+erated facts in the provided context when the evi-
+dence is present and sufficient.
+For clarity and to keep the main paper concise,
+we summarize here the exact evaluation splits used
+in our experiments. Table 3 reports the number of
+faithful samples used for evaluation in each dataset
+or subset. These counts correspond to the effective
+evaluation pool after applying the dataset’s official
+filters/constraints and our experimental protocol
+(e.g., keeping only instances with valid retrieved
+evidence and well-formed annotation fields). In
+particular, for CoFaithfulQA-derived subsets, we
+follow the standard subset partitioning and evaluate
+under the same RAG setting across subsets, so the
+reported counts are directly comparable across Hot-
+potQA, NewsQA, NQ, SearchQA, SQuAD, and
+TriviaQA.
+Why report “#Faithful Samples”? Our primary
+objective is to quantify contextual grounding when
+the context is available and informative. Therefore,
+we adopt the dataset-provided notion of “faithful
+samples” as the evaluation substrate: each sam-
+ple provides a retrieved context and a reference
+for checking whether generated facts are supported
+Dataset #Faithful Samples
+Hallucination
+RAGTruth (Niu et al., 2024a) 450
+Dolly (AC) (Hu et al., 2024) 100
+CoFaithfulQA Subsets
+HotpotQA 1,546
+NewsQA 374
+NQ 3,010
+SearchQA 10,692
+SQuAD 2,799
+TriviaQA 5,887
+Table 3: Statistics of datasets used in our experiments
+(moved from the main-body table to Appendix B.2 for
+readability).
+by that context. This design aligns with our focus
+on hallucinations that occur even under valid ev-
+idence, and complements case-based analysis in
+Appendix D.
+B.2 Additional Notes on Evaluation
+Consistency
+To ensure a consistent comparison across methods,
+we keep the evaluation interface fixed: (1) each
+method receives the same query and retrieved con-
+text (when applicable), (2) metrics are computed
+on the generated response under the same fact-
+extraction and support-checking protocol defined
+by the benchmark, and (3) we aggregate results at
+the dataset/subset level using the same averaging
+scheme across all baselines.
+Hallucination benchmarks. RAGTruth and
+Dolly (AC) provide representative contexts where
+hallucinations manifest as statements that are un-
+supported by or contradictory to the evidence.
+These benchmarks are used to measure whether an
+intervention reduces such misaligned generations
+and to support the qualitative, case-level compar-
+isons reported later.
+Contextual-faithfulness benchmarks. The
+CoFaithfulQA-derived subsets cover diverse QA
+sources and context characteristics. Evaluating
+on multiple subsets helps verify that gains are
+not confined to a single domain, context length
+distribution, or question style.
+C Evaluation Metrics for Contextual
+Faithfulness
+The following metrics originate from CoFaith-
+fulQA (Zhou et al., 2023; Huang et al., 2025)
+11890

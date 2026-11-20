@@ -1,0 +1,112 @@
+to inadequate answer generation. Although many previous research
+work have customized LLMs for several EDA tasks including script
+generation [30, 31], HDL generation [32–41], code verification and
+analysis [42–48], to the best of our knowledge, there has not been
+any research conducted on the documentation QA of EDA tools.
+To resolve the challenges mentioned above, we propose RAG-
+EDA, a retrieval augmented generation (RAG) flow customized
+for EDA tool documentation question-answering. Our approach
+consists of three strategic enhancements: (1) For retriever, we first
+create a corpus of queries and answers that incorporate EDA do-
+main knowledge and terminologies. Using this corpus, we employ
+contrastive learning to finetune a text embedding model, thereby en-
+riching it with EDA-specific knowledge and enhancing its retrieval
+accuracy. (2) For reranker, we distill the fine filtering capabilities
+of the proprietary LLM into our reranker model by contrastive
+learning, greatly improving its performance in weakly-related doc-
+uments removal. (3) For generator, we pretrain a chat LLM using the
+EDA domain corpus and subsequently finetune it using a dataset
+of EDA-tool-related QA pairs through instruction tuning.
+Furthermore, to assess the efficacy of our RAG flow and facilitate
+future research in EDA tool documentation QA, we have developed
+and made public a QA evaluation dataset, ORD-QA, based on the
+OpenROAD documentation. This dataset comprises 90 high-quality
+question-document-answer triplets that span a variety of query
+types, including VLSI flow inquiries, command/option usage, instal-
+lation guides, and GUI usage. To further evaluate the robustness,
+universality and transferability of our proposed flow, we also de-
+sign an internal QA evaluation dataset on the documentation of a
+commercial EDA tool.
+Our major contributions are summarized as follows:
+• We carefully analyze the limitations of applying off-the-shelf
+RAG to EDA tool documentation QA, and propose a customized
+RAG flow to address them accordingly. Our solution outper-
+forms for both academic and commercial EDA tools.
+• We conduct contrastive learning and incorporate EDA expertise
+to finetune the text embedding model and the reranker model,
+achieving superior retrieval performance than SOTA retrievers.
+• We propose a two-stage training scheme, namely, domain-
+knowledge pre-train and task-specific instruction tuning, to
+finetune an open-source chat LLM as the generator.
+• We release a QA benchmark with 90 high-quality QA pairs
+concerning OpenROAD, to evaluate our RAG flow and facilitate
+the future research on EDA tool documentation QA.
+2 PRELIMINARIES
+2.1 Information Retrieval
+Given the user query, information retrieval (IR) is the process of ob-
+taining information from a collection of documents or data sources
+that are relevant to the query. Generally, there are two categories
+of methodology for information retrieval, namely, lexical (sparse)
+retrieval and semantic (dense) retrieval.
+Lexical (sparse) Retrieval. In lexical (sparse) retrieval, the user’s
+query is first tokenized into keywords. Techniques such as term
+frequency-inverse document frequency (TF-IDF) and BM25 are then
+used to assess the relevance of each keyword to each document
+chunk in the collection. The top-𝑘 document chunks with the high-
+est relevance scores are selected as the most relevant documents.
+Semantic (dense) Retrieval. Given a user question and a list
+of document chunks, the approach of dense retrieval (semantic
+retrieval) utilizes the pretrained text embedding model to project
+the question and document chunks into the semantic vector space.
+The top 𝑘 document chunks which are the closest to the question
+in the vector space (thus have the most similar semantics with the
+question) are selected as the relevant documents [6].
+Reciprocal Rank Fusion. Reciprocal rank fusion (RRF) [14] is a
+method used for data fusion in information retrieval systems. This
+technique combines the results from multiple retrieval systems
+(for example, lexical and semantic retrieval) to produce a single,
+enhanced ranking. Given a set of documents 𝐷 and a set of docu-
+ment rankings 𝑅 (each 𝑟 ∈𝑅 ranks the relevance of 𝐷 for a specific
+retrieval system, and 𝑟 is essentially a permutation on 1 ...|𝐷|), the
+RRF score of one document 𝑑 can be calculated as:
+RRF(𝑑 ∈𝐷) =
+∑︁
+𝑟 ∈𝑅
+1
+𝑘+𝑟(𝑑), (1)
+where 𝑘 is one constant and is usually set to 60.
+2.2 Performance Measurement
+To evaluate the effectiveness of a retriever/reranker in terms of
+its ability to retrieve all relevant documents/filter out irrelevant
+documents, we use recall as the metric. Mathematically, recall@𝑘 is
+defined as the proportion of relevant documents that are retrieved
+among the top 𝑘 results returned by the retriever/reranker. Let 𝑅
+be the set of all relevant documents in the corpus, and let 𝑅𝑘 be the
+set of relevant documents that appear in the top 𝑘 results returned
+by the retriever/reranker. Then, recall@𝑘 is formulated as:
+recall@𝑘 = |𝑅𝑘 | |𝑅| . (2)
+To evaluate the performance of a generator (a chat LLM) in
+answering EDA-tool questions, we use three most popular metrics
+applied in the scenario of text generation and question-answering,
+namely, BLEU [3], ROUGE-L [4], and UniEval [5]. These three
+metrics are used to measure the coherence, conciseness and factual
+consistency between the generated answer and ground truth answer
+for each question.
+BLEU. Bilingual evaluation understudy (BLEU) is originally de-
+signed for measuring machine translation, but currently is widely
+used for the measurement of text generation. BLEU computes the
+precision of n-grams in the candidate answer by determining the
+proportion of n-grams that appear in the reference answer. This is
+adjusted by a brevity penalty to discourage overly short translations.
+The metric is calculated as:
+BLEU = 𝐵𝑃 · exp
+ 𝑁∑︁
+𝑛=1
+𝑤𝑛 log 𝑝𝑛
+!
+, (3)
+which can be best understood as the geometric mean of multiple
+𝑛-gram precision of various sizes. Here, 𝐵𝑃 (Brevity Penalty) is a
+multiplicative factor used to penalize short candidate answer, and
+𝑤𝑛 are weights assigned to each logarithmic n-gram precision (we
+2

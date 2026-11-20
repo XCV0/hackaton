@@ -1,0 +1,85 @@
+CG-RAG: Research Question Answering by Citation Graph Retrieval-Augmented LLMs Conference acronym ’XX, June 03–05, 2018, Woodstock, NY
+where Φ denotes the parameters of the graph encoder, and h(0) 𝑗 =
+cdense 𝑗 is the initial dense representation of 𝑐𝑗 . The terms 𝛿𝑞𝑗 and
+𝛼𝑖𝑗 control the message passing, ensuring that only relevant infor-
+mation is propagated. Specifically, the message contribution from a
+neighboring chunk 𝑐𝑗 to 𝑐𝑖 and the subsequent update are defined
+as:
+m(𝑘) 𝑗 = MSG(𝑘)  𝛿𝑞𝑗 ·𝛼𝑖𝑗 · h(𝑘) 𝑗  , (5)
+h(𝑘+1) 𝑖 = AGG(𝑘)  {m(𝑘) 𝑗 | 𝑗 ∈{𝑖}∪N(𝑖)}  , (6)
+where h(𝑘) 𝑗 is the representation of 𝑐𝑗 at layer 𝑘. The term 𝛿𝑞𝑗 eval-
+uates the relevance between the query and the context, while 𝛼𝑖𝑗
+measures the relevance between the central chunk 𝑐𝑖 and its neigh-
+boring chunks 𝑐𝑗 . Specifically, 𝛿𝑞𝑖, the sparse relevance between a
+query 𝑞 and a chunk 𝑐𝑖, is computed as:
+𝛿𝑞𝑖 = 𝑓sparse (qsparse 𝑖 , csparse 𝑖 ). (7)
+where 𝑓sparse indicates a relevance scoring function used in sparse
+retrieval such as cosine similarity and dot product. This incorpo-
+rates sparse relevance into the dense embedding during message
+passing. To model the dense interaction between 𝑐𝑖 and its neigh-
+boring chunks 𝑐𝑗 ∈N(𝑖), 𝛼𝑖𝑗 is calculated as:
+𝛼𝑖𝑗 = MLP𝜙(cdense 𝑖 ⊖ cdense 𝑗 ), (8)
+where 𝛼𝑖𝑖 is defined as 1, ⊖ represents element-wise subtraction
+to compute the feature difference, and MLP𝜙 parameterized by 𝜙,
+adaptively assesses the relevance between chunks.
+This entangled representation framework integrates sparse and
+dense features while leveraging structural information from the
+graph context, ensuring that each chunk’s representation reflects
+both its intrinsic relevance and its contextual relationships.
+Given a query 𝑞 over the chunk set C of a citation graph G, the
+relevance scoring function 𝑓entangled (𝑞,𝑐𝑖) : Q×C→ R is:
+𝑠(𝑞,𝑐𝑖) = 𝑓dense (qdense, H𝑖), (9)
+where 𝑓dense indicates a relevance scoring function used in dense
+retrieval, qdense represents the dense vector of the query, and H𝑖
+denotes the entangled representation of the chunk 𝑐𝑖. The overall
+algorithm is depicted in Algorithm 1.
+Proposition 4.1 (LeSeGR Generality). Post-retrieval methods
+with the metric 𝑓hybrid : 𝑓sparse
+É 𝑓dense → R, represent a special
+case of the proposed Lexical-Semantic Graph Retrieval (LeSeGR). This
+holds when no additional relevant contextual information exists for
+any chunk in the citation graph, reducing LeSeGR to existing hybrid
+retrieval used post-retrieval fusion.
+Proof. The entangled representation of a chunk 𝑐𝑖 is given by:
+H𝑖 = AGG({h(𝑘) 𝑗 | 𝑗 ∈{𝑖}∪N(𝑖)}) = AGG(𝜆𝑖 m(𝑘) 𝑖 ,𝜆Nm(𝑘) N ),
+(10)
+where m(𝑘) 𝑖 and m(𝑘) N denote messages from the central chunk 𝑐𝑖
+and its neighboring chunks at layer 𝑘, respectively. The weights 𝜆𝑖
+and 𝜆N are typically equal and defined as 1 |N(𝑖)|+1 .
+When the AGG function is defined as either mean or sum, both
+of which satisfy the distributive law, the relevance score 𝑠(𝑞,𝑐𝑖), as
+Figure 2: Overview of Contextualized Graph Retrieval-
+Augmented Generation.
+defined in Equation 9, can be expanded as:
+𝑠(𝑞,𝑐𝑖) = 𝑓dense (qdense, AGG(𝜆𝑖 m(𝑘) 𝑖 ,𝜆Nm(𝑘) N )) (11)
+∝𝜆𝑖𝑓dense (qdense, m(𝑘) 𝑖 )+𝜆N𝑓dense (qdense, m(𝑘) N ). (12)
+When no relevant neighbors exist (i.e., N(𝑖) = ∅), the second term
+vanishes, leaving:
+𝑠(𝑞,𝑐𝑖)∝𝜆𝑖𝑓dense (qdense, m(𝑘) 𝑖 ) = 𝜆𝑖𝛿𝑞𝑖𝑓dense (qdense, h(𝑘) 𝑖 ). (13)
+Substituting h(𝑘) 𝑖 = cdense 𝑖 , the relevance score simplifies to:
+𝑠(𝑞,𝑐𝑖)∝𝛿𝑞𝑖𝑓dense (qdense, cdense 𝑖 ). (14)
+Taking the logarithm for further analysis:
+log(𝑠(𝑞,𝑐𝑖))∝ log(𝛿𝑞𝑖)+ log(𝑓dense (qdense, cdense 𝑖 )). (15)
+Since 𝛿𝑞𝑖 = 𝑓sparse (qsparse, csparse 𝑖 ), this becomes:
+log(𝑠(𝑞,𝑐𝑖))∝ log(𝑓sparse (qsparse, csparse 𝑖 )) (16)
++ log(𝑓dense (qdense, cdense 𝑖 )), (17)
+where the use of log(·) requires 𝑓sparse and 𝑓dense to be mapped
+to R+. This requirement can be fulfilled by applying appropriate
+activation functions or transformations to transform them from R
+into the non-negative domain. In this case, the relevance score is
+equivalent to the additive fusion of sparse and dense relevance, as
+used in post-retrieval hybrid methods. Hence, when no contextual
+information exists (N(𝑖) = ∅), our graph-contextualized retrieval
+reduces to the post-retrieval fusion paradigm, demonstrating that
+the latter is a specific instance of the former. □
+When relevant graph contexts are present, the entangled frame-
+work dynamically propagates and aggregates sparse and dense sig-
+nals through structural relationships among neighboring chunks.
+This enables the model to capture relational dependencies and
+multi-hop connections in graphs, enhancing retrieval accuracy and
+effectively utilizing sparse and dense signals from neighbors.
+4.4 Contextualized Graph Retrieval-Augmented
+Generation (CG-RAG)
+Given a query 𝑞 on a citation graph G, we use LeSeGR to retrieve
+the top 𝑁 chunks that are most relevant to the question. These
+retrieved chunks, together with their contextual subgraph, are then

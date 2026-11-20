@@ -1,0 +1,92 @@
+Precision Recall F1
+0.948 0.861 0.902
+Table 8: Intrinsic evaluation of the semantic boundary
+predictor on 50 held-out Wikipedia documents. Scores
+measure agreement with teacher-generated reference
+boundaries.
+and 0.022, respectively. The no-subgraph condition
+exhibits an even larger decrease of 0.038. Fixed-
+depth traversal strategies are constrained by local
+graph exploration: BFS tends to expand broadly
+within a limited depth, whereas DFS follows indi-
+vidual structural branches. In contrast, EDP propa-
+gates energy jointly from multiple query-relevant
+anchors over the graph, allowing evidence dis-
+tributed across distant regions to contribute to the
+final selection. This property is particularly useful
+for MuSiQue, where answering a question often
+requires aggregating evidence across 2–4 reasoning
+hops.
+E.3 Intrinsic Evaluation of Semantic
+Segmentation
+In addition to the downstream ablation reported
+in the main paper, we directly evaluate the bound-
+ary prediction quality of the semantic segmentation
+model. We construct an independent held-out eval-
+uation set containing 50 Wikipedia documents that
+are disjoint from the 100 documents used to train
+the boundary predictor. Teacher-generated seman-
+tic boundaries are used as reference annotations,
+resulting in 719 reference boundaries in total.
+As shown in Table 8, the lightweight boundary
+predictor achieves a precision of 0.948, recall of
+0.861, and F1 score of 0.902. The high precision
+indicates that the model rarely introduces unsup-
+ported semantic breaks, while the recall suggests
+that most reference boundaries are successfully
+identified. Together with the downstream perfor-
+mance reported in the main paper, these results
+provide complementary evidence that the learned
+segmentation model can preserve coherent seman-
+tic units without relying on dataset-specific retrain-
+ing.
+F Prompt Templates
+In this section, we detail the core prompt templates
+utilized in ThreadRAG. To ensure reproducibility,
+we present the exact instructions provided to the
+underlying Large Language Models for both entity
+Prompt 1: Entity Extraction
+You are an entity extraction assistant.
+Extract key entities from the question
+for knowledge retrieval.
+Rules:
+1. Extract only key entities (persons, places, organizations,
+products, etc.)
+2. Return ONLY a JSON array of entity strings
+3. DO NOT include generic words like "who", "what",
+"where", "the", "a", etc.
+4. For multi-hop questions, include ALL entities needed
+for reasoning
+5. Keep entity names concise (2-4 words max)
+Examples:
+Question: "Who directed Inception?"
+Entities: ["Inception"]
+Question: "Aside from the Apple Remote, what other de-
+vice can control Front Row?"
+Entities: ["Apple Remote", "Front Row"]
+Question: "What sport did the person who founded Google
+play in college?"
+Entities: ["Google", "Larry Page"]
+Table 9: Prompt Templates of Entity Extraction.
+extraction and the iterative information sufficiency
+evaluation.
+F.1 Entity Extraction Prompt
+This prompt (Table 9) is designed to instruct the
+LLM to extract key reasoning entities from the
+user’s multi-hop query, stripping away generic stop
+words to form precise search anchors.
+F.2 Information Sufficiency Discriminator
+Prompts
+To prevent premature hallucination, ThreadRAG
+employs an Information Sufficiency Discriminator.
+As detailed in Table 10, this system prompt estab-
+lishes strict evaluation criteria, guiding the LLM
+to carefully assess whether the provided context
+contains adequate factual information to fully re-
+solve the user’s query before proceeding to the final
+answer generation.
+G Qualitative Error Analysis
+To systematically investigate the boundary condi-
+tions and inherent limitations of the ThreadRAG
+framework, we conducted a rigorous qualitative er-
+49905

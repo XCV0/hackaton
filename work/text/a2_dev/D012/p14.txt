@@ -1,0 +1,51 @@
+Dataset Failure Model Naive RAG % [95% CI] TrustRAG % [95% CI] ∆ pp McNemar p
+TEMPLATE
+Leak
+Qwen-Max 37.50 [32.75, 42.25] 0.00 [0.00, 0.00] 37.50 1.40e-45
+DeepSeek-V3 37.50 [32.75, 42.25] 0.00 [0.00, 0.00] 37.50 1.40e-45
+GLM-4-32B-
+0414 35.75 [31.24, 40.50] 0.00 [0.00, 0.00] 35.75 1.79e-43
+Unsup.
+Qwen-Max 5.75 [3.50, 8.00] 0.00 [0.00, 0.00] 5.75 2.38e-07
+DeepSeek-V3 6.25 [4.00, 8.75] 0.00 [0.00, 0.00] 6.25 5.96e-08
+GLM-4-32B-
+0414 5.25 [3.25, 7.50] 0.00 [0.00, 0.00] 5.25 9.54e-07
+FRESH-STRESS
+Stale
+Qwen-Max 38.50 [33.75, 43.25] 0.00 [0.00, 0.00] 38.50 8.76e-47
+DeepSeek-V3 65.75 [61.00, 70.25] 0.00 [0.00, 0.00] 65.75 1.35e-79
+GLM-4-32B-
+0414 52.50 [47.50, 57.25] 0.00 [0.00, 0.00] 52.50 1.22e-63
+Unsup. Qwen-Max 2.50 [1.00, 4.25] 0.00 [0.00, 0.00] 2.50 1.95e-03 DeepSeek-V3 2.75 [1.25, 4.50] 0.00 [0.00, 0.00] 2.75 9.77e-04
+SOURCE
+Leak
+Qwen-Max 38.00 [28.98, 48.00] 0.00 [0.00, 0.00] 38.00 7.28e-12
+DeepSeek-V3 38.00 [28.00, 48.00] 0.00 [0.00, 0.00] 38.00 7.28e-12
+GLM-4-32B-
+0414 36.00 [27.00, 45.00] 0.00 [0.00, 0.00] 36.00 2.91e-11
+Stale
+Qwen-Max 25.00 [17.00, 34.00] 0.00 [0.00, 0.00] 25.00 5.96e-08
+DeepSeek-V3 31.00 [22.00, 40.00] 0.00 [0.00, 0.00] 31.00 9.31e-10
+GLM-4-32B-
+0414 12.00 [6.00, 19.00] 0.00 [0.00, 0.00] 12.00 4.88e-04
+Unsup. Qwen-Max 7.00 [3.00, 12.00] 0.00 [0.00, 0.00] 7.00 1.56e-02 GLM-4-32B-
+0414 12.00 [6.00, 19.00] 0.00 [0.00, 0.00] 12.00 4.88e-04
+SF-HELDOUT
+Leak
+Qwen-Max 37.50 [22.50, 52.50] 0.00 [0.00, 0.00] 37.50 6.10e-05
+DeepSeek-V3 42.50 [27.50, 57.50] 0.00 [0.00, 0.00] 42.50 1.53e-05
+GLM-4-32B-
+0414 25.00 [12.50, 37.50] 0.00 [0.00, 0.00] 25.00 1.95e-03
+Stale DeepSeek-V3 5.00 [0.00, 12.50] 0.00 [0.00, 0.00] 5.00 5.00e-01 GLM-4-32B-
+0414 7.50 [0.00, 17.50] 0.00 [0.00, 0.00] 7.50 2.50e-01
+Unsup.
+Qwen-Max 10.00 [2.50, 20.00] 0.00 [0.00, 0.00] 10.00 1.25e-01
+DeepSeek-V3 10.00 [2.50, 20.00] 0.00 [0.00, 0.00] 10.00 1.25e-01
+GLM-4-32B-
+0414 2.50 [0.00, 7.50] 0.00 [0.00, 0.00] 2.50 1.00e+00
+Table B1: Statistical results for target and non-zero failure rows. Failure rates are reported with 95% bootstrap
+confidence intervals over 10,000 resamples. ∆ pp denotes the absolute reduction from Naive RAG to TrustRAG
+in percentage points. Paired McNemar tests compare Naive RAG and TrustRAG on the same examples. Leak,
+Stale, and Unsup. denote unauthorized leakage, stale citation, and unsupported-answer rates, respectively. All-zero
+non-target rows are omitted for compactness.
+35015

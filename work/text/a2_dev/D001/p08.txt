@@ -1,0 +1,121 @@
+      
+1XPEHURI$QFKRUV
+
+
+
+([DFW0DWFK(0
+
+D7RSN$QFKRUV
+        
+1XPEHURI'RFXPHQWV
+
+
+
+
+
+E7RSN5HWULHYHG'RFV
+      
+,WHUDWLRQ&RXQW
+
+
+
+
+
+F1XPEHURI,WHUDWLRQV
+
+7KUHVKROG9DOXH
+
+
+
+
+
+G( QHUJ\7 KUHVKROG 
+Figure 3: Hyperparameter sensitivity analysis on the HotpotQA dataset.
++RWSRW4$ :LNL0XOWLKRS 0X6L4XH
+
+
+
+
+
+([DFW0DWFK
+ 
+
+ 
+
+*UDSK5$* 7KUHDG5$*
+Figure 4: Performance comparison of EM scores using
+different underlying graph representations.
+firms ThreadRAG effectively balances computa-
+tional efficiency with reasoning accuracy, avoiding
+unnecessary over-exploration.
+Graph Representation Comparison. This ex-
+periment compares the conventional GraphRAG
+paradigm, which relies on the strict extraction
+of rigid entity-relation triplets, against our STG
+paradigm, which inherently preserves native se-
+mantic context and narrative flow. To facilitate
+a rigorous evaluation, we implement two spe-
+cific variants: GraphRAG∗, which utilizes a pre-
+constructed global KG, and ThreadRAG∗, which
+adopts our proposed Semantic Topology Graph.
+All other components, including retrieval indices
+and prompting templates, are kept strictly identical.
+As illustrated in Figure 4, ThreadRAG∗ consis-
+tently achieves superior performance across all
+benchmarks, securing substantial EM improve-
+ments ranging from 7.8% to 12.6%. Notably, on
+the HotpotQA dataset, our approach yields a sig-
+nificant 12.6% improvement in EM (from 0.288
+to 0.414). We attribute these substantial gains to
+STG’s ability to preserve rich semantic narrative
+flows and ensure precise modality alignment via
+topological paths. In contrast, the discrete, sym-
+bolic triplets employed by GraphRAG∗ tend to frag-
+ment the original context, leading to inevitable se-
+mantic loss during complex multi-hop reasoning.
+   
+([DFW0DWFK
++RWSRW4$:LNL0X6L4XH
+
+
+
+
+
+
+
+
+
+
+
+
+.*7ULSOHWV
+.*7H[WV
+.*3DWKV
+67*3DWKV2XUV
+Figure 5: Performance comparison of various knowl-
+edge representation strategies.
+knowledge representation strategies. Since
+a critical concern lies in how to optimally for-
+mat retrieved knowledge for LLM inference, we
+investigate four knowledge representation strate-
+gies: KG-Triplets, KG-Paths, KG-Texts, and our
+STG-Paths, respectively corresponding to discrete
+relational triplets, linear structural paths, LLM-
+rewritten natural language, and topological text
+paths. As illustrated in Figure 5, STG-Paths con-
+sistently achieves the highest performance. We
+observe that forcing an LLM to rewrite triplets
+into natural language (KG-Texts) occasionally un-
+derperforms even naive KG-Triplets, which we at-
+tribute to hallucinations and semantic distortions
+introduced during rewriting. Conversely, while
+KG-Triplets and KG-Paths avoid rewriting risks,
+they suffer from severe semantic fragmentation and
+lack deep structural context. In stark contrast, STG-
+Paths resolves this dilemma. By directly extracting
+topological text paths, it preserves undistorted raw
+information while injecting structural priors. This
+dual advantage of strict semantic fidelity and logi-
+cal coherence renders STG-Paths the most effective
+representation for our framework.
+49898

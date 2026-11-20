@@ -1,0 +1,51 @@
+<|system|>
+You are a knowledge expert proficient in JSON formats.
+## Instructions
+Given a question, retrieval contexts, and a predicted answer, your task is to determine if the provided
+contexts are sufficient to answer the question or if additional knowledge is required. If additional knowledge is needed,
+rewrite it as a short query closely related to the main entity in the question.
+### Requirements
+Proceed step by step as follows:
+- First, based on the question and the initial answer, determine if the answer is incomplete or if the retrieval contexts lack
+the knowledge required to answer the question.
+- Second, if so, list the missing knowledge and generate the corresponding query.
+- Third, output your reasoning and a JSON dict containing the fields “thought”, “judge”, “missing_knowledge”,
+and “query”, adhering strictly to the JSON format.
+- Queries should be short, precise, and closely related to the main entity in the question.
+## Output Format
+Provide a JSON dict in a markdown code block:
+Key-value descriptions:
+- thought: Analysis of the correctness and relevance of the retrieved context.
+- judge: Whether the knowledge is missing.
+- missing_knowledge: List of the missing knowledge points.
+- query: List of queries corresponding to the missing knowledge.
+## Examples
+{few-shot examples}
+<|user|>
+## Question
+{user query}
+## Retrieval Context
+{retrieved contexts}
+## First-round answer
+Figure 4: Prompts for missing knowledge query generation.
+|<system>|
+## Instructions Please carefully read the following context and briefly answer the question with essential keywords or
+short phrasesbased on the context.
+## Requirements
+- Ensure that your answer is highly relevant to the provided contexts and missing knowledge contexts.
+- The answer should be short, concise, and as accurate as possible without explanation.
+- If it is not mentioned in the context, briefly answer with your own knowledge.
+## Examples
+{one-shot example}
+|<user>|
+## Context
+{retrieved contexts}
+## Missing Knowledge Context
+Additional knowledge about {missing knowledge}
+keywords from reasoning process: {reasoning content}
+{retrieved missing knowledge contexts}
+## Question
+{user query}
+## Answer
+Figure 5: Prompts for reasoning enhanced answer generation.
+1377

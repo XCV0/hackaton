@@ -1,0 +1,171 @@
+resistance (Rrec) than the control device, which stems from the
+reduced non-radiative Recombination50. We also simulated the pho-
+tovoltaic performance of the M-T structured PSC and the control
+device. We found that the simulated performance was very similar to
+our experimental results (Supplementary Table 1) with signiﬁcant
+improvements in the VOC and FF of the devices. The monochromatic
+incident photon-to-electron conversion efﬁciency (IPCE) spectra
+showed that the integrated JSC values (<5% deviation) matched the J–V
+measured data (Fig. 4b). Moreover, the NVP-based PSC exhibited
+steady power outputs at maximum power point (Supplementary Fig.
+20) with an average PCE of 23.7% compared to their control counter-
+parts of 22.3% (Supplementary Fig. 21). The larger PSC (1.0 cm2)
+showed PCEs up to 23.06% (RS) and 22.71% (FS), indicating that this
+M-T architecture of PSC is scalable (Fig. 4c).
+By using poly[bis(4-phenyl)(2,4,6-trimethylphenyl)amine] (PTAA)
+instead of Spiro-OMeTAD as the hole transporting materials21,51–55,the
+NVP-based PSC exhibited an excellent light exposure stability with <5%
+PCE loss after 1100 h at 1-sun illumination at 65 °C in N2 atmosphere
+(ISOS-L-2 protocol) (Fig. 4d)56. In contrast, the control PSC started to
+decompose dramatically until the PCE loss reached 40% after 400 h.
+Furthermore, we also conducted the accelerated damp-heat tests of
+encapsulated PSCs subjected to 85% relative humidity (RH) and 85 °C,
+in damp-heat chamber (ISOS-D-3 protocol)56 (Fig. 4e), where the
+encapsulated NVP-based PSC kept >90% initial efﬁciency over 1100 h.
+This superior stability might be attribute to the monolithic perovskite/
+NVP grains covered by polymerized network of PVP, which also con-
+ﬁrmed by XPS measurement discussed above. To evaluate whether the
+polymer network would suppress lead leakage from the device,
+unencapsulated PSCs with different ratio of NVP were immersed into
+deionized water for 1 hour. The lead concentration of the solution was
+analyzed via atomic absorption spectrometer (AAS) as shown in Sup-
+plementary Fig. 22. The Pb concentration of the control PSC was
+4.86 ppm, and as the molar ratio of NVP increased from 15% to 100%,
+the Pb concentration decreased to 1.85 ppm, which was one-fourth of
+that in the control counterpart. Furthermore, owing to the excellent
+solubility of NVP for perovskite precursor, unencapsulated PSCs used
+pure NVP as the only solvent to fabricate perovskite ﬁlm. The unen-
+capsulated PSC demonstrated PCE of 17.24% and maintained >80% of
+its initial PCE over 600 minutes, and the control device degraded
+immediately (Supplementary Fig. 23). Water-vapor test provided a
+better visualization of the role of perovskite with NVP addition in
+retarding perovskite decomposition. We fumigated the unencapsu-
+lated control and perovskite/pure NVP ﬁlms in hot water vapor and
+could see that the control ﬁlms rapidly turned yellow while the NVP
+ﬁlms remained in the black phase (Fig. 4f and Supplementary Movie 1).
+Discussion
+Herein, we demonstrate an effective strategy of using a thermal poly-
+merized NVP-perovskite/HTL composite ﬁlm to form the monolithic
+perovskite grains and a unique M-T structure, which facilitate
+improved VOC and FF of PSCs due to the suppressed non-radiative
+recombination and balanced charge extraction. The corresponding
+PSCs exhibited excellent certiﬁed PCE up 24.55% (RS) and 24.25% (FS).
+The negligible hysteresis is attributed to the balance of hole and
+electron extraction in the PSC due to the M-T structure. Furthermore,
+NVP-based PSCs with polymerized network exhibited excellent illu-
+mination, moisture, and thermal stability in accordance with the ISOS-
+L-2 and ISOS-D-3 protocol. Our work highlights the role of increasing
+0.00.20.40.60.81.01.2
+0
+5
+10
+15
+20
+25
+Voltage (V)
+ w/NVP- Reverse
+w/NVP- Forward
+0.0 0.2 0.4 0.6 0.8 1.0 1.2
+0
+3
+6
+9
+12
+15
+18
+21
+24
+27
+Voltage (V)
+ Control- Reverse
+ Control-Forward
+ w/NVP- Reverse
+ w/NVP- Forward
+300 400 500 600 700 800 900
+0
+20
+40
+60
+80
+100
+ Control
+ w/NVP
+Wavelength (nm)
+EQE (%)
+0
+5
+10
+15
+20
+25
+ 
+0 100 200 300 400 500 600 700 800 900 1000 1100
+50
+60
+70
+80
+90
+100Nor. PCE (%)
+Time (hour)
+ w/NVP
+ Control
+0 100 200 300 400 500 600 700 800 900 1000 1100
+50
+60
+70
+80
+90
+100Nor. PCE (%)
+Time (hour)
+ w/NVP
+ Control
+Intergrated Jsc (mA cm-2)
+Current density (mA cm-2)
+Current density (mA cm-2)
+VOC JSC FF PCE
+[V] [mA cm-2] [%] [%]
+1.151RS
+FS
+RS
+FS
+Control
+w/NVP
+25.21 78.94 22.91
+1.139 25.16 76.92 22.04
+1.195 25.77 80.19 24.69
+1.194 25.76 79.94 24.59
+VOC JSC FF PCE
+[V] [mA cm-2] [%] [%]
+1.187RS
+w/NVP
+FS
+24.51 79.29 23.06
+1.182 24.46 78.52 22.71
+ISOS-D-3
+ISOS-L-2
+1-sun illumination , 65°C, N  
+85% RH and 85°C, in damp-heat chamber
+0s
+6s 25s
+4s
+a b c
+d
+e
+f
+2s
+8s
+Control
+w/NVP
+Fig. 4 | Device performance and stability. a J−V curves and photovoltaic para-
+meters of champion devices of the control and NVP-based PSCs measured in-house.
+b Representative EQEs and integrated JSC values of the control and NVP-based PSCs.
+c J−V curves of a larger-area NVP-based PSC. The active area is 1.0 cm2,deﬁned by a
+mask aperture. The inset is a photograph of the device with dotted outlines
+representing the active areas. d Normalized PCE of encapsulated PSCs according to
+ISOS-L-2 protocol (1-sun illumination and 65 °C, in N2 atmosphere). e Normalized
+PCE of encapsulated PSCs according to the ISOS-D-3 protocol (85% RH and 85 °C, in
+a damp-heat chamber). All error bars represent the standard deviation of six
+devices. f Screenshots of unencapsulated control and perovskite/NVP ﬁlms in water
+steam test (100% RH and 100 °C) captured from Movie S1.
+Article https://doi.org/10.1038/s41467-023-38926-3
+Nature Communications |         (2023) 14:3216 6

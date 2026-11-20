@@ -1,0 +1,49 @@
+Coatings 2022, 12, 261 9 of 11
+Table 2. Average reverse saturation current-density (J0) and ideality factor (n) extrapolated from dark
+J-V curves for device samples (c) and (d) with comparison to an equivalent device (Baseline) without
+an AZS HRT layer.
+Sample AZS (nm) CdS (nm) Cd(Zn)S (nm) CdTe:As (nm) CHT (◦C) T ◦C (min) No. Cells Mean n Mean J0 (mA/cm2)
+Baseline - 50 100 3000 420 10 8 1.4 ± 0.1 7.2 × 10−9
+c 50 50 100 3000 440 10 8 1.5 ± 0.2 2.4 × 10−7
+d 100 50 100 3000 440 10 12 1.7 ± 0.0 9.2 × 10−8
+The data in Table 2 suggest that the device structure produces a poorer diode when
+the AZS HRT is included, which should lead to greater minority carrier recombination and
+a reduced Voc. The high energy barrier in the conduction band caused by the AZS may be
+detrimental under dark conditions. However, under light conditions, the generated carriers
+may be saturated at the absorber/emitter interface, driving the drift across this energy
+spike into the depletion region, where carriers can then be collected. The energy spike
+in the conduction band creates a larger energy difference between the electron-hole pairs
+generated under the light conditions, keeping the n-type and p-type carriers separate and
+reducing recombination. This would lead to the higher Voc observed in the J-V performance
+for device samples with an AZS HRT. Without the energy spike in the conduction band, the
+difference in energy of electron-hole pairs is smaller, which may lead to more recombination
+and a lower Voc for the baseline device sample. This may explain the improvement in
+Voc under light conditions when an AZS HRT is included in the device, although further
+investigation would be required.
+4. Conclusions
+STEM-EDX showed that an agg. CHT process at 440 ◦C was essential for achieving
+large CdTe grains and complete consumption of the emitter to leave the AZS HRT and
+produce a deﬁned HRT/absorber interface region. EDX proﬁles of a device with agg. CHT
+showed that the S proﬁle reached the back CdTe surface, with Cl diffusing down to the
+TCO, where it accumulated. The higher annealing temperature during the CHT process
+resulted in an increase in Voc relative to a standard CHT process at 420 ◦C. An AZS HRT
+layer 100 nm thick improved Voc relative to using a 50 nm AZS layer. The large positive
+CBD in the conduction band with the inclusion of the AZS HRT increases the energy
+difference of electron-hole pairs to reduce recombination and improve Voc. Investigation
+into the dark J-V characteristics for device samples (c) and (d), both having undergone agg.
+CHT post growth, showed that the inclusion of an AZS HRT layer increased the reverse
+saturation current-density and ideality factor in comparison to a baseline device sample
+without an AZS HRT layer. This infers that minority recombination was greater for devices
+with AZS, which did not correlate with the J-V parameters under light conditions. The
+energy difference between electron-hole pairs was greater for the device samples with AZS,
+reducing the probability of recombination. This resulted in higher Voc for device samples
+with AZS relative to the baseline device sample (no AZS), where the energy difference
+between electron-hole pairs was closer, giving more probability of recombination reducing
+the Voc. The energy barrier caused by inclusion of the AZS layer had a detrimental effect
+on the diode quality. However, the greater energy provided under light conditions led to
+saturation of generated carriers in this region. This drove the PV drift across the depletion
+region where the carriers were collected, leading to the observed increase in J-V parameters.
+Author Contributions: Funding acquisition and supervision, S.J.C.I. and J.M.W.; investigation, P.J.S.,
+S.J. and A.T.; methodology, A.J.C., P.J.S., S.J. and O.O.; characterisation, P.J.S., S.J., O.O. and A.A.; data
+curation, A.J.C.; writing—original draft preparation, S.J.C.I. and A.J.C.; writing—review and editing,
+all authors. All authors have read and agreed to the published version of the manuscript.

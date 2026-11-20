@@ -1,0 +1,92 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 21195–21218
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+Knowledge-Infused Multi-Bit Watermarking for RAG Knowledge Bases
+Ke Yang1,2,3, Shuguang Yuan1,2,3*, Jing Yu1,2,3, Chi Chen1,2,3
+1Institute of Information Engineering, Chinese Academy of Sciences
+2State Key Laboratory of Cyberspace Security Defense
+3School of Cyber Security, University of Chinese Academy of Sciences
+{yangke, yuanshuguang, yujing, chenchi}@iie.ac.cn
+Abstract
+Retrieval-Augmented Generation (RAG) en-
+hances the factual accuracy of Large Language
+Model (LLM) outputs based on external knowl-
+edge bases. These knowledge bases often carry
+significant intellectual property (IP) value, rais-
+ing the urgent need for robust watermarking
+techniques to protect IP. However, existing
+RAG watermarking methods remain in their in-
+fancy, facing challenges such as limited encod-
+ing capacity and potential degradation of RAG
+performance or knowledge quality. In this pa-
+per, we propose knowledge-infused and multi-
+bit watermarking (KMW) for RAG knowledge
+bases. It generates watermark text to infuse
+the knowledge base by benign knowledge com-
+pletion and a tailored generative watermark-
+ing algorithm. Each generated text can carry
+a multi-bit watermark segment. For effective
+detection, we design a Watermark Text Indexer
+that optimizes queries for steady retrieval of
+watermarked texts. Experiments on multiple
+datasets and LLMs show KMW reliably ex-
+tracts watermarks from adversarial RAGs. It is
+robust against knowledge selection, alteration,
+expansion, and RAG setting restrictions, while
+remaining stealthy and secure. This highlights
+that KMW ensures effective IP protection for
+RAG systems. Our code is available here.
+1 Introduction
+Retrieval-Augmented Generation (RAG) (Lewis
+et al., 2020) is an efficient technique that enhances
+the outputs of Large Language Models (LLMs)
+by retrieving information from external knowl-
+edge bases. It improves the accuracy and rele-
+vance of generated content, mitigating hallucina-
+tions (Sahoo et al., 2024) and allowing for the inte-
+gration of real-time, domain-specific information
+(Sankaradas et al., 2025; Hasan et al., 2025). These
+knowledge bases, particularly in mission-critical
+domains (e.g., healthcare (Ng et al., 2025)), contain
+*Corresponding author
+valuable and private information that requires sig-
+nificant resources to construct and maintain. Their
+inherent value makes them attractive targets for
+theft (Wang et al., 2025). Therefore, protecting the
+intellectual property (IP) of these knowledge bases
+is essential to safeguard the owner’s investment.
+Watermarking is a powerful tool for IP protec-
+tion by embedding watermark information into an
+asset. While it has achieved success in multime-
+dia (Sahu et al., 2023), databases (Rani and Halder,
+2022), and LLMs (Zhao et al., 2025), existing meth-
+ods are not directly applicable to RAG. Because
+these techniques typically require direct access to
+the watermarked content, while the RAG system
+only allows black-box querying without accessing
+the knowledge base. Thus, RAG watermarking
+must support detection from LLM’s outputs. How-
+ever, achieving this is non-trivial due to challenges
+such as (i) the limited retrievability of watermarked
+content; (ii) the vulnerability of watermark content
+to post-processing, e.g., abstraction or rewriting;
+and (iii) constraints imposed by system prompts.
+The first RAG watermarking method, WARD
+(Jovanovi´c et al., 2025), employs a rewriting-based
+strategy that embeds watermarks by paraphrasing
+IP data using LLM watermarking (Kirchenbauer
+et al., 2023). While effective, paraphrasing com-
+promises the quality and accuracy of the original
+content. To avoid this, subsequent methods (Lv
+et al., 2025; Guo et al., 2025; Liu et al., 2025b) in-
+ject LLM-generated content as watermarks into the
+knowledge base rather than altering existing data.
+Both paradigms then share a common detection
+mechanism: they construct queries targeted at wa-
+termarked content, probe the suspect RAG system,
+and analyze watermark evidence in responses.
+Although this injection-based strategy preserves
+the original data, it may impair RAG performance
+if the injected content is incorrect or implausible.
+For instance, the method in (Lv et al., 2025) may
+produce implausible sentences such as “Spain con-
+21195

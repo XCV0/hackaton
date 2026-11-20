@@ -1,0 +1,107 @@
+overhead and API costs for both watermarking and
+retrieval processes.
+Second, regarding the generation scheme, while
+we achieve unbiased token selection, the inherent
+non-uniformity of word frequencies in natural lan-
+guage leads to uneven proportional modulation
+across different tokens. This introduces a slight
+statistical bias in the generated text. Achieving
+global unbiasedness would require uniform word
+frequencies for watermarked tokens, further com-
+promising watermark persistence.
+Finally, style transfer induced by system prompts
+was observed to attenuate watermark signals. Cur-
+rently, we address this by reducing watermark ca-
+pacity to maintain robustness. Mitigating this trade-
+off without sacrificing capacity is a priority for fu-
+ture research. Additionally, the feasibility of the
+framework under more complex system prompt
+constraints and advanced RAG paradigms remains
+to be fully explored.
+Despite these limitations, we believe that our
+work can serve as an important catalyst in this field,
+contributing positively to the advancement of RAG
+watermarking techniques with higher watermark
+capacity and lower performance impact.
+Acknowledgments
+This work was supported by the Strategic Prior-
+ity Research Program of the Chinese Academy of
+Sciences, Grant No. XDB0690303.
+References
+Scott Aaronson. 2023. Watermarking of large language
+models. https://simons.berkeley.edu/talks/
+scott-aaronson-ut-austin-openai-2023-08-17.
+Accessed: 2025-07-02.
+Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng,
+Jianfeng Gao, Xiaodong Liu, Rangan Majumder,
+Andrew McNamara, Bhaskar Mitra, Tri Nguyen,
+Mir Rosenberg, Xia Song, Alina Stoica, Saurabh
+Tiwary, and Tong Wang. 2018. Ms marco: A human
+generated machine reading comprehension dataset.
+Preprint, arXiv:1611.09268.
+Vera Boteva, Demian Gholipour, Artem Sokolov, and
+Stefan Riezler. 2016. A full-text learning to rank
+dataset for medical information retrieval. In Proceed-
+ings of the 38th European Conference on Information
+Retrieval.
+Brian J. Chan, Chao-Ting Chen, Jui-Hung Cheng, and
+Hen-Hsen Huang. 2025. Don’t do rag: When cache-
+augmented generation is all you need for knowledge
+tasks. In Companion Proceedings of the ACM on
+Web Conference 2025, WWW ’25, page 893–897.
+ACM.
+Moses S Charikar. 2002. Similarity estimation tech-
+niques from rounding algorithms. In Proceedings of
+the thiry-fourth annual ACM symposium on Theory
+of computing, pages 380–388.
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu
+Lian, and Zheng Liu. 2024a. Bge m3-embedding:
+Multi-lingual, multi-functionality, multi-granularity
+text embeddings through self-knowledge distillation.
+Preprint, arXiv:2402.03216.
+Liang Chen, Yatao Bian, Yang Deng, Deng Cai, Shuaiyi
+Li, Peilin Zhao, and Kam-Fai Wong. 2024b. WatME:
+Towards lossless watermarking through lexical redun-
+dancy. In Proceedings of the 62nd Annual Meeting of
+the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), pages 9166–9180.
+Tianyu Chen, Jian Lou, and Wenjie Wang. 2025.
+Safeguarding multimodal knowledge copyright
+in the rag-as-a-service environment. Preprint,
+arXiv:2506.10030.
+Wenhu Chen, Hexiang Hu, Xi Chen, Pat Verga,
+and William W. Cohen. 2022. Murag: Multi-
+modal retrieval-augmented generator for open ques-
+tion answering over images and text. Preprint,
+arXiv:2210.02928.
+Zhongwu Chen, Chengjin Xu, Fenglong Su, Zhen
+Huang, and Yong Dou. 2023. Incorporating struc-
+tured sentences with time-enhanced bert for fully-
+inductive temporal relation prediction. In Proceed-
+ings of the 46th International ACM SIGIR Confer-
+ence on Research and Development in Information
+Retrieval, pages 889–899.
+Mingyue Cheng, Yucong Luo, Jie Ouyang, Qi Liu, Hui-
+jie Liu, Li Li, Shuo Yu, Bohou Zhang, Jiawei Cao,
+Jie Ma, Daoyu Wang, and Enhong Chen. 2025. A
+survey on knowledge-oriented retrieval-augmented
+generation. Preprint, arXiv:2503.10677.
+Aloni Cohen, Alexander Hoover, and Gabe Schoenbach.
+2025. Watermarking language models for many adap-
+tive users. In 2025 IEEE Symposium on Security and
+Privacy (SP), pages 2583–2601. IEEE.
+Sumanth Dathathri, Abigail See, Sumedh Ghaisas, Po-
+Sen Huang, Rob McAdam, Johannes Welbl, Vandana
+Bachani, Alex Kaskasoli, Robert Stanforth, Tatiana
+Matejovicova, and 1 others. 2024. Scalable water-
+marking for identifying large language model outputs.
+Nature, 634(8035):818–823.
+Google DeepMind. 2025. Gemini 2.5 flash. https://
+deepmind.google/models/gemini/flash/. Ac-
+cessed: 2025-07-15.
+Dheeru Dua, Yizhong Wang, Pradeep Dasigi, Gabriel
+Stanovsky, Sameer Singh, and Matt Gardner. 2019.
+DROP: A reading comprehension benchmark requir-
+ing discrete reasoning over paragraphs. In Proc. of
+NAACL.
+21204

@@ -1,0 +1,93 @@
+Findings of the Association for Computational Linguistics: EMNLP 2026, pages 49891–49906
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+Graph Topology Meets Energy-Driven Pathfinding: Preserving Contextual
+Consistency in Retrieval-Augmented Generation
+Yufeng Li1, Zaijing Li2, Fuchen Zhang1, Zongzong Wu1, Ming Zhao1, Fengxiao Tang1,*
+1Central South University, Changsha, China
+2Harbin Institute of Technology, Shenzhen, China
+liyufeng@csu.edu.cn
+Abstract
+Retrieval-augmented generation (RAG) fre-
+quently integrates knowledge graphs (KGs) for
+complex multi-hop question answering. How-
+ever, their performance is increasingly bottle-
+necked by the knowledge structuring and rea-
+soning processes. (i) Severe semantic loss: Dis-
+tilling continuous texts into discrete symbols
+strips away contextual nuances and narrative
+coherence. (ii) Pronounced modality mismatch:
+Fragmented graph structures clash with the con-
+tinuous texts LLMs are pre-trained on, while
+rewriting them into natural language introduces
+generative noise and omits information. To ad-
+dress these limitations, we propose Thread-
+RAG, a semantic-topology-based RAG frame-
+work for context-preserving knowledge struc-
+turing and modality-native evidence reasoning.
+ThreadRAG introduces a Semantic Topology
+Mapper (STM), which organizes retrieved doc-
+uments into context-intact Semantic Nodes
+and constructs a Semantic Topology Graph
+(STG) through narrative, semantic, and lexical
+edges. It further incorporates Energy-Driven
+Pathfinding (EDP), which identifies query-
+relevant subgraphs via energy diffusion and
+deterministically linearizes them into coherent
+textual evidence paths. Experiments on three
+multi-hop QA benchmarks demonstrate that
+ThreadRAG consistently outperforms strong
+baselines. Notably, it achieves a 14.4% EM
+improvement over text-centric methods on Hot-
+potQA and surpasses the best baseline by 5.8%
+EM on 2WikiMultihop, while reducing token
+cost to 23.3% of the strongest baseline.
+1 Introduction
+Retrieval-augmented generation (RAG) has be-
+come a powerful paradigm for enhancing large
+language models (LLMs) on knowledge-intensive
+tasks by grounding generation in external evidence
+(Gao et al., 2023). However, complex multi-hop
+question answering (QA) remains challenging for
+*Corresponding author.
+existing RAG systems (Lewis et al., 2020; Izacard
+et al., 2022; Trivedi et al., 2023). Unlike single-
+hop QA, multi-hop QA requires models to identify
+scattered evidence across multiple documents, con-
+nect them through latent relations, and perform
+multi-step reasoning (Shao et al., 2023).
+Graph-enhanced RAG methods address this chal-
+lenge by introducing structural priors over retrieved
+knowledge. Despite their promise, existing graph-
+RAG paradigms often suffer from a mismatch be-
+tween how knowledge is structured and how LLMs
+perform reasoning. As illustrated in Figure 1, this
+mismatch manifests in two key limitations. First,
+existing graph construction pipelines can incur sub-
+stantial semantic loss. Triplet-based knowledge
+graphs compress continuous text into rigid sym-
+bolic tuples, often discarding contextual nuances,
+while chunk-based graphs split documents into iso-
+lated segments, leading to semantic truncation and
+noisy boundaries. Such fragmentation weakens the
+continuous contextual pathways required for multi-
+hop reasoning. Second, existing graph representa-
+tions introduce a modality mismatch at inference
+time. LLMs are primarily optimized to consume co-
+herent natural language sequences, whereas graph-
+RAG methods typically provide fragmented graph
+paths or rely on generative verbalization to con-
+vert subgraphs into text. These conversions can
+introduce redundancy, hallucinated transitions, or
+omission of critical evidence, thereby limiting the
+effectiveness of structural priors.
+To address these limitations, we propose
+ThreadRAG, a semantic-topology-based RAG
+framework that preserves textual context dur-
+ing knowledge structuring and converts graph
+evidence into LLM-native reasoning sequences.
+ThreadRAG consists of two key components: a
+Semantic Topology Mapper (STM) for high-
+fidelity knowledge structuring, and an Energy-
+Driven Pathfinding module (EDP) for query-aware
+evidence selection and topological linearization.
+49891

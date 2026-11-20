@@ -1,0 +1,61 @@
+Coatings 2022, 12, 261 8 of 11
+shows a prominent Zn peak at the TCO interface. Despite the interdiffusion of the emitter,
+Figures 4 and 5 show that a ZnS layer remained intact and maintained an interface layer
+with the FTO.
+To further understand the role that the AZS HRT layer had on Voc, dark J-V curves
+were used to calculate the reverse saturation current-density (J0) and ideality factor (n),
+which are related to Voc in the following equation:
+Voc = nKT q ln ( Jl J0 + 1 ) (1)
+The thermal voltage is represented by KT/q and an ideal diode would have n = 1
+with only radiative recombination contribution. When minority carrier recombination also
+occurs, the value of n increases, with typical value between 1 and 2. Jl is the light-generated
+current-density and can be assumed to be equivalent to Jsc. Plots were made (Figure 6) of
+the dark J-V curves with ln (JD) over a voltage (V) range 0.55–0.7 V.
+Coatings 2022, 12, x FOR PEER REVIEW 9 of 11 
+ 
+ 
+ 
+Figure 6. Plot of ln ( JD-V) curve to extract the reverse saturation current-density ( J0) and ideality 
+factor (n). 
+Table 2. Average reverse saturation current-density ( J0) and ideality factor ( n) extrapolated from 
+dark J-V curves for device samples (c) and (d) with comparison to an equivalent device (Baseline) 
+without an AZS HRT layer. 
+Sample AZS (nm) CdS (nm) Cd(Zn)S (nm) CdTe:As (nm) CHT (°C) T °C (min) No. Cells Mean n  Mean J0  (mA/cm2) 
+Baseline - 50 100 3000 420 10 8 1.4 ± 0.1 7.2 × 10−9 
+c 50 50 100 3000 440 10 8 1.5 ± 0.2 2.4 × 10−7 
+d 100 50 100 3000 440 10 12 1.7 ± 0.0 9.2 × 10−8 
+The data in Table 2 suggest that the device structure produces a poorer diode when 
+the AZS HRT is included, which should lead to greater minority carrier recombination 
+and a reduced Voc. The high energy barrier in the conduction band caused by the AZS may 
+be detrimental under dark conditions. Howe ver, under light conditions, the generated 
+carriers may be saturated at the absorber/emi tter interface, driving the drift across this 
+energy spike into the depletion region, where carriers can then be collected. The energy 
+spike in the conduction band creates a larger energy difference between the electron-hole 
+pairs generated under the light conditions, keeping the n-type and p-type carriers sepa-
+rate and reducing recombination. This would lead to the higher Voc observed in the J-V 
+performance for device samples with an AZS HRT. Without the energy spike in the con-
+duction band, the difference in energy of electron-hole pairs is smaller, which may lead to 
+more recombination and a lower Voc for the baseline device sample. This may explain the 
+improvement in Voc under light conditions when an AZS HRT is included in the device, 
+although further investigation would be required. 
+4. Conclusions 
+STEM-EDX showed that an agg. CHT process at 440 °C was essential for achieving 
+large CdTe grains and complete consumption of the emitter to leave the AZS HRT and 
+produce a defined HRT/absorber interface region. EDX profiles of a device with agg. CHT 
+showed that the S profile reached the back CdTe  surface, with Cl diffusing down to the 
+TCO, where it accumulated. The higher a nnealing temperature du ring the CHT process 
+Figure 6. Plot of ln (JD-V) curve to extract the reverse saturation current-density (J0) and ideality
+factor (n).
+The straight lines from the ln (JD-V) plot for samples (c) and (d), which had AZS
+thicknesses of 50 nm and 100 nm, respectively, were used to generate the J0 with gradient
+of q/nKT, which can be represented by α. The value of n was extracted from the gradient
+using the following equation:
+n = q/KT α (2)
+A baseline device sample, which had no AZS HRT layer, was also plotted with device
+samples (c) and (d) for comparison. Figure 6 is representative of the data for all cells
+measured for each device sample. The average J0 and n extracted from the dark J-V curves
+are shown in Table 2. In terms of the diode quality, n is highest for device sample (d),
+improving for sample (c) and being closest to an ideal diode for the baseline, which has no
+AZS HRT layer. This does not reﬂect the light-generated J-V data, in which the Voc was
+greatest for sample (d). The average J0 data were similar between samples (c) and (d), but
+were an order of magnitude better for the baseline device sample.

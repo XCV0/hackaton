@@ -1,0 +1,72 @@
+PRM-Guided VTS: Inline Step Evaluation Prompt
+This prompt is used by the deployed 8B PRM for step-level evaluation during VTS expansion.
+System Prompt.
+You are a step-level PRM for evaluating reasoning quality in multi-hop question answering. The trajectory uses XML
+tags: <think>, <search>, <answer>, and <documents>. Analyze each step’s logical soundness and evidence grounding.
+First explain your reasoning inside [REASONING] tags, then output a label (1=good, 0=bad).
+User Prompt.
+Question: {question}
+Previous Steps
+## Step 1
+<think>...</think> <search>...</search> <documents>...</documents>
+· · ·
+Current Step to Evaluate
+## Step N
+<think>...</think> <search>...</search>
+Expected Output Format
+[REASONING] {PRM reasoning} [/REASONING]
+Label: {1 or 0}
+B Data Statistics
+We present detailed statistics for the datasets used
+in the two training stages. To avoid ambiguity,
+we distinguish between the original seed-question
+pool, the subset retained after filtering, and the final
+number of step-level supervision instances.
+PRM Training Data. The PRM is trained on
+109,664 step-level decisions extracted from 31,728
+reasoning trajectories sampled across 2,000 source
+multi-hop QA questions. Table 6 summarizes
+the action-type distribution and the QwQ-32B
+GOOD/BAD verdicts. The majority of the steps
+are search actions (71.2%), reflecting the highly
+interactive nature of our multi-hop RAG environ-
+ment. The Reason action (internal thought) ac-
+counts for only 0.5% of the steps and has a high
+rejection rate (73.7% BAD), indicating that the
+PRM penalizes unsupported internal hallucinations
+and forces the model to rely on external search.
+We validate the reliability of these QwQ-generated
+annotations through an independent frontier-LLM
+audit reported in Section E.
+DPO Preference Pairs. For policy optimization,
+we began from the full pool of 5,000 seed multi-hop
+QA questions described in Section 4. After running
+VTS, we retained only preference pairs satisfying
+Step Type Count (%) GOOD BAD
+Search 78,055 (71.2%) 55,710 (71.4%) 22,345 (28.6%)
+Answer 31,062 (28.3%) 14,436 (46.5%) 16,626 (53.5%)
+Reason 547 (0.5%) 144 (26.3%) 403 (73.7%)
+Total 109,664 (100%) 70,290 (64.1%) 39,374 (35.9%)
+Table 6: Statistics of the PRM training corpus: 109,664
+steps generated from 31,728 trajectories over 2,000
+source questions (averaging 3.5 steps per trajectory).
+Labels assigned by QwQ-32B under the R1–R6 rubric
+(Section A).
+an outcome-margin filter (chosen F1 ≥ 0.2 and
+∆F1 ≥ 0.2), yielding 2,866 unique questions and
+15,877 contrastive pairs, or approximately 5.5 pairs
+per retained question.
+We adopt this filter for training and data effi-
+ciency rather than for performance. As shown in
+Table 7, removing the filter yields 39,578 pairs
+(2.5× more data) with comparable average perfor-
+mance (34.65 vs. 34.51 EM), indicating that the
+discarded low-margin pairs contribute little addi-
+tional signal relative to their training cost.
+As detailed in Table 8, the DPO pairs exhibit
+rich diversity in action types, tree depths, and re-
+ward margins. About three-quarters (75.0%) of the
+comparisons pit actions of the same type against
+each other (Search vs. Search: 57.5%, Answer vs.
+Answer: 17.5%), allowing the policy to learn fine-
+37918

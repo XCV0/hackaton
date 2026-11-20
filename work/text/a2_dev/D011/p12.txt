@@ -1,0 +1,111 @@
+Shirui Pan, Linhao Luo, Yufei Wang, Chen Chen, Ji-
+apu Wang, and Xindong Wu. 2024. Unifying large
+language models and knowledge graphs: A roadmap.
+IEEE Transactions on Knowledge and Data Engi-
+neering, 36(7):3580–3599.
+Hongjin Qian, Zheng Liu, Peitian Zhang, Kelong
+Mao, Defu Lian, Zhicheng Dou, and Tiejun Huang.
+2025. Memorag: Boosting long context processing
+with global memory-enhanced retrieval augmenta-
+tion. Preprint, arXiv:2409.05591.
+Wenjie Qu, Wengrui Zheng, Tianyang Tao, Dong Yin,
+Yanze Jiang, Zhihua Tian, Wei Zou, Jinyuan Jia, and
+Jiaheng Zhang. 2025. Provably robust multi-bit wa-
+termarking for {AI-generated} text. In 34th USENIX
+Security Symposium (USENIX Security 25), pages
+201–220.
+Sapana Rani and Raju Halder. 2022. Comparative anal-
+ysis of relational database watermarking techniques:
+An empirical study. IEEE Access, 10:27970–27989.
+Mohammad Reza Rezaei, Maziar Hafezi, Amit Satpathy,
+Lovell Hodge, and Ebrahim Pourjafari. 2024. At-rag:
+An adaptive rag model enhancing query efficiency
+with topic filtering and iterative reasoning. Preprint,
+arXiv:2410.12886.
+Pranab Sahoo, Prabhash Meharia, Akash Ghosh, Sri-
+parna Saha, Vinija Jain, and Aman Chadha. 2024. A
+comprehensive survey of hallucination in large lan-
+guage, image, video and audio foundation models.
+In Findings of the Association for Computational
+Linguistics: EMNLP 2024, pages 11709–11724. As-
+sociation for Computational Linguistics.
+Aditya Kumar Sahu, Krishnan Umachandran,
+Vaishali D Biradar, Olebara Comfort, V Sri Vi-
+gna Hema, Frank Odimegwu, and MA Saifullah.
+2023. A study on content tampering in multimedia
+watermarking. SN Computer Science, 4(3):222.
+Murugan Sankaradas, Ravi K. Rajendran, and Srimat T.
+Chakradhar. 2025. Streamingrag: Real-time contex-
+tual retrieval and generation framework. Preprint,
+arXiv:2501.14101.
+Qwen Team. 2024. Qwen2.5: A party of foundation
+models.
+Sourav Verma. 2024. Contextual compression in
+retrieval-augmented generation for large language
+models: A survey. Preprint, arXiv:2409.13385.
+Ellen Voorhees, Tasmeer Alam, Steven Bedrick, Dina
+Demner-Fushman, William R Hersh, Kyle Lo, Kirk
+Roberts, Ian Soboroff, and Lucy Lu Wang. 2021.
+Trec-covid: constructing a pandemic information re-
+trieval test collection. In ACM SIGIR Forum.
+Yuhao Wang, Wenjie Qu, Yanze Jiang, Zichen Liu, Yue
+Liu, Shengfang Zhai, Yinpeng Dong, and Jiaheng
+Zhang. 2025. Silent leaks: Implicit knowledge ex-
+traction attack on rag systems through benign queries.
+Preprint, arXiv:2505.15420.
+Xin Xie, Ningyu Zhang, Zhoubo Li, Shumin Deng, Hui
+Chen, Feiyu Xiong, Mosha Chen, and Huajun Chen.
+2022. From discrimination to generation: Knowl-
+edge graph completion with generative transformer.
+In Companion Proceedings of the Web Conference
+2022, pages 162–165.
+Lee Xiong, Chenyan Xiong, Ye Li, Kwok-Fung Tang,
+Jialin Liu, Paul Bennett, Junaid Ahmed, and Arnold
+Overwijk. 2020. Approximate nearest neighbor neg-
+ative contrastive learning for dense text retrieval.
+Preprint, arXiv:2007.00808.
+KiYoon Yoo, Wonhyuk Ahn, and Nojun Kwak. 2024.
+Advancing beyond identification: Multi-bit water-
+mark for large language models. In Proceedings of
+the 2024 Conference of the North American Chap-
+ter of the Association for Computational Linguistics:
+Human Language Technologies (Volume 1: Long Pa-
+pers), pages 4031–4055.
+Shi Yu, Chaoyue Tang, Bokai Xu, Junbo Cui, Jun-
+hao Ran, Yukun Yan, Zhenghao Liu, Shuo Wang,
+Xu Han, Zhiyuan Liu, and Maosong Sun. 2025.
+Visrag: Vision-based retrieval-augmented gener-
+ation on multi-modality documents. Preprint,
+arXiv:2410.10594.
+Shuguang Yuan, Chi Chen, Ke Yang, Tengfei Yang, and
+Jing Yu. 2022. An attribute-attack-proof watermark-
+ing technique for relational database. In 2022 IEEE
+International Conference on Trust, Security and Pri-
+vacy in Computing and Communications (TrustCom),
+pages 1136–1143. IEEE.
+Susan Zhang, Stephen Roller, Naman Goyal, Mikel
+Artetxe, Moya Chen, Shuohui Chen, Christopher De-
+wan, Mona Diab, Xian Li, Xi Victoria Lin, Todor Mi-
+haylov, Myle Ott, Sam Shleifer, Kurt Shuster, Daniel
+Simig, Punit Singh Koura, Anjali Sridhar, Tianlu
+Wang, and Luke Zettlemoyer. 2022. Opt: Open
+pre-trained transformer language models. Preprint,
+arXiv:2205.01068.
+Xuandong Zhao, Prabhanjan Ananth, Lei Li, and Yu-
+Xiang Wang. 2023. Provable robust watermarking
+for ai-generated text. Preprint, arXiv:2306.17439.
+Xuandong Zhao, Sam Gunn, Miranda Christ, Jaiden
+Fairoze, Andres Fabrega, Nicholas Carlini, Sanjam
+Garg, Sanghyun Hong, Milad Nasr, Florian Tramer,
+and 1 others. 2025. Sok: Watermarking for ai-
+generated content. In 2025 IEEE Symposium on
+Security and Privacy (SP), pages 2621–2639. IEEE.
+A Attacks on RAG Watermarking
+Following prior work(Yuan et al., 2022; Kirchen-
+bauer et al., 2023; Lv et al., 2025), we categorize
+potential attacks as follows:
+Knowledge Selection Attacks: Adversaries at-
+tempt to reduce watermark effectiveness by using
+parts of the knowledge base to dilute watermark
+density; (i) they can randomly select a subset of the
+21206

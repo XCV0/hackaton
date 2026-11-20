@@ -1,0 +1,98 @@
+lying solely on text chunks or naive visual em-
+beddings) often miss these cues due to a lack of
+fine-grained semantic alignment between the query
+and the visual structure.
+BayesRAG addresses this through its parallel re-
+trieval architecture, simultaneously querying text
+chunks, cropped image regions, and full-page PDF
+screenshots. Crucially, the subsequent Bayesian fu-
+sion mechanism calculates a posterior probability
+representing the semantic consistency between the
+query and these heterogeneous evidence sources.
+This allows BayesRAG to identify and utilize evi-
+dence that requires establishing strong cross-modal
+links (e.g., mapping legend colors to textual cate-
+gories, or aligning table headers with specific nu-
+merical cells), tasks where baselines frequently hal-
+lucinate or fail to answer.
+We present three such challenging scenarios be-
+low: complex tabular reasoning (Figure 6), fine-
+grained chart interpretation (Figure 7), and info-
+graphic enumeration (Figure 8).
+E Reliability of Automated Evaluation
+To address concerns regarding the reliabil-
+ity of Qwen3-32B as an automated judge in
+MMLongBench-Doc, we conduct a human verifi-
+cation study on a stratified sample of 200 instances.
+Our analysis yields two critical observations that
+validate our evaluation protocol: High Human-
+Model Agreement. We observe an exceptionally
+high consistency between the Qwen3-32B judge
+and expert human annotators, achieving an agree-
+ment rate of 98%. Disagreements are rare and
+mostly occur in highly ambiguous cases where
+even humans might diverge. This statistical evi-
+dence strongly supports the use of Qwen3-32B as
+a surrogate for human evaluation in this specific
+context. Suitability for Factoid QA. The high
+reliability stems from the intrinsic nature of the
+MMLongBench-Doc dataset. Unlike open-ended
+generation tasks, this benchmark primarily consists
+of factoid questions requiring specific numerical
+values or fixed entities as answers. In such closed-
+ended scenarios, the evaluation task simplifies to
+verification rather than subjective critique.
+Crucially, our qualitative analysis highlights that
+the LLM judge effectively resolves the limitations
+of the original rule-based scoring scripts. Tradi-
+tional regex-based methods often produce false
+negatives due to valid lexical variations. By recog-
+nizing semantic equivalence, Qwen3-32B provides
+a more accurate assessment of model performance
+than rigid string matching, ensuring that correct
+answers are not unfairly penalized due to minor
+formatting deviations.
+F Efficiency and Computational Analysis
+To evaluate the practical overhead of BayesRAG,
+we break down the time latency across the entire
+inference pipeline. Table 6 details the average time
+costs recorded on the MMLongBench-Doc. All ex-
+periments are conducted on a server with NVIDIA
+Tesla A800 80GB GPUs and a 12-core CPU.
+Module Time (s)
+Vector Retrieval (Text) 5.81
+Vector Retrieval (Image) 26.18
+Vector Retrieval (Screenshot) 52.09
+Text Reranking (bge-reranker-v2-m3) 9.36
+Bayes Fusion & Reranking 10.21
+LLM Generation (QA) 29.17
+Table 6: Average time cost (seconds) per query break-
+down. Note that Vector Retrieval (Image/Screenshot)
+is using an expanded search space (Top-k=512). Bayes
+Fusion represents the re-ranking overhead introduced
+by our method.
+Retrieval Latency vs. Recall. As observed, the
+visual retrieval components (Image and Screenshot)
+dominate the latency, consuming approximately
+52s. This is an intentional design choice rather
+than an algorithmic limitation. To validate the
+“Recall Enhancement” capabilities of BayesRAG
+(as discussed in Section 3.4), we expand the im-
+age retrieval window size to Top-512 (compared
+to the standard Top-10 or Top-20). This ensures
+that low-salience evidence is captured in the ini-
+tial candidate pool. In production environments,
+this latency can be significantly reduced via paral-
+lelized asynchronous retrieval, etc, independent of
+our proposed fusion algorithm.
+Efficiency of Bayesian Inference. A critical find-
+ing is the comparison between standard text rerank-
+ing and our Bayesian fusion process. The Bayes
+Fusion step takes 10.21s, which introduces only
+a marginal overhead (∼0.85s) compared to the
+standard Text Reranking (9.36s). Theoretically,
+combining heterogeneous candidates (Text, Image,
+Screenshot) from a Top-512 pool could lead to a
+combinatorial explosion (5123 ≈ 134 million tu-
+ples). However, BayesRAG circumvents this issue
+16

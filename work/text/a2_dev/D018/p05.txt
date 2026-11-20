@@ -1,0 +1,113 @@
+7439
+ments. To synthesize documents suitable for a
+RAG benchmark, we prepare a set of topics that
+envision RAG application scenarios and their corre-
+sponding document collections in advance. Then,
+foreachtopic,weprovideLLMswithreal-worlddoc-
+uments (hereinafter called “base documents”) and
+instruct LLMs to imitate them, thereby synthesizing
+documents about non-existent entities and events.
+First, we collected the base documents corre-
+sponding to each dataset. We established four top-
+ics for the base documents: encyclopedias, latest
+information, product reviews, and internal corpo-
+rate documents. These represent important use
+cases for the practical application of RAG.
+1. Wikipedia: We extracted the first paragraph of
+Japanese Wikipedia articles as entity definition
+sentences (Onoe et al., 2022) and collected
+these texts, which correspond to the opening
+of an encyclopedia article.
+2. News: We collected 1,290 articles from the
+web media outlet “Kyoko Shimbun”2 (Fictional
+News)3.
+3. ProductReview: We manually accessed and
+saved product introduction pages from mul-
+tiple genres on the price comparison site
+“Kakaku.com”4, and obtained the text by remov-
+ing HTML tags.
+4. CompanyRules: We manually organized docu-
+ments from the “Model Collection of HR and La-
+bor Regulations”5 and gathered 24 documents
+pertaining to regulations.
+3.3.2. Synthesizing Documents with LLM
+Based on the collected base documents, we syn-
+thesized documents concerning non-existent en-
+tities and events using an LLM. Specifically, for
+Wikipedia and News, we synthesized one imitative
+document with an LLM for each base document.
+On the other hand, since the number of base docu-
+ments for ProductReview was relatively small, we
+synthesized documents using multiple LLMs for
+each base document to improve diversity. For
+CompanyRules, we created the data under the as-
+sumption that all 24 internal regulations belonged
+to one specific company. During this process, to
+2https://kyoko-np.net/
+3Initially, we attempted to generate synthetic docu-
+ments by collecting real news articles in the same man-
+ner, but the generated articles tended to mix fact and
+fiction, making it difficult to determine if a synthetic article
+was truly about a non-existent entity or event. Therefore,
+in this study, we ultimately judged it was more manage-
+able to use articles from “Kyoko Shimbun” as the base
+documents and adopted this policy.
+4https://kakaku.com/
+5https://www.ohno-jimusho.co.jp/download/
+オルタルは、原子番号79の第7周期に属する第6族元素である。
+元素記号はOr。オルタルの単体は非常に密度が高く、銀灰色を
+呈し、... (Ortal is a Group 6 element belonging to the 7th period,
+withanatomicnumberof79. ItselementsymbolisOr. Theelement
+Ortal is characterized by its extremely high density, a silvery-gray
+color, ...)
+Figure 7: An example of a document removed due
+to contradiction with real-world facts.
+preventcontradictionsamongthesynthesizedregu-
+lations, each time a new regulation was generated,
+we checked for inconsistencies with the previously
+created ones using both an LLM and manual re-
+view. If a contradiction was found, the document
+was either corrected or regenerated. Through this,
+we created a mutually consistent set of regulations
+for a single company.
+For the synthesis of Wikipedia and News, we
+used OpenAI’s GPT-4o-20240806 to generate non-
+existent encyclopedia and news articles, provid-
+ing them with various styles and content. The
+prompt used for document synthesis was created
+with reference to Chang et al. (2024). For the
+synthesis of ProductReview, we used OpenAI’s
+o1-preview-2024-09-12 and o1-mini-2024-09-12,
+andGoogle’s gemini-1.5-pro. Forthesynthesisof
+CompanyRules, we used Google’s gemini-1.5-pro.
+3.3.3. Removal of Synthetic Documents That
+Do Not Meet the Criteria
+We asked annotators to judge whether the docu-
+ments synthesized in §3.3.2 could be used for the
+benchmark. Specifically, we defined three require-
+ments: (1) It deals with non-existent entities or
+events, (2) It does not contradict facts, and (3)
+It does not contain logical failures, excessive in-
+clusion of information unrelated to the main topic,
+or obvious deficiencies in anaphoric relations. To
+rigorously enforce these requirements, annotators
+were explicitly instructed to conduct web searches
+for any specific proper nouns (e.g., names of peo-
+ple, organizations, or products) and events men-
+tioned in the generated texts. If a search engine
+query returned a match indicating that the entity
+or event actually existed in the real world, the doc-
+ument was immediately discarded. We removed
+all documents that failed to meet any of these re-
+quirements. An example of a document removed
+for failing to meet condition (2) is shown in Fig. 7:
+the element with atomic number 79 is actually gold
+(Au), and a discrepancy in the evaluation setup
+would arise between an LLM that learned this real-
+world fact during pre-training and one that did not.
+Specifically, theformerwouldneedtoreplaceanal-
+ready learned fact with non-existent information, so
+it would be considered to be solving a different task
+than the latter, for which this is not necessary. To
+prevent such discrepancies in the evaluation setup
+arising from the presence or absence of an LLM’s

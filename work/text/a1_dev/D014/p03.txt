@@ -1,0 +1,92 @@
+under a N2 ﬂow. The substrate was annealed at 350 °C on a hot plate
+(or under an IR lamp shielded with Al foil) for 20 s and cooled in air.
+The whole process (deposition, drying, CdCl2 treatment, thermal
+treatment) was repeated multiple times (12−20) until the desired
+thickness was achieved.
+2.2.3.2. Annealing Only. For CdCl3 −-capped CdTe NC inks, there
+was no need for a CdCl2 bath treatment. Instead, the substrate was
+transferred directly from the drying plate to the annealing plate. The
+substrate was annealed at 350 °C on a hot plate (or under an IR lamp
+shielded with Al foil) for 20 s and cooled in air. The whole process
+(deposition, drying, annealing) was repeated multiple times (12−20)
+until the desired thickness was achieved.
+2.2.4. Spray-Coating onto Curved Substrates. Glass rods, beads,
+and plano-convex lenses were purchased from various outside
+vendors. They were aﬃxed to the spray-coater using double-sided
+tape. For full devices, special holders would be necessary to assure
+consistency and reduce mistakes from processing diﬃculties.
+2.3. Finishing CdTe Solar Cells. 2.3.1. ZnO n-Type Layer. The
+ZnO layer was deposited on top of CdTe by spin-coating 300 μLof
+the ZnO sol−gel at 3000 rpm for 30 s, followed by annealing at 300
+°C for 2 min. The ZnO sol−gel was prepared by sonicating a mixture
+of 1.50 g of Zn(OAc)2·2H2O, 15 mL of 2-methoxyethanol, 420 μLof
+ethanolamine, and 15−45 mg of InCl3 for 1 h and subsequently
+stirring overnight.
+2.3.2. Electrode Deposition. The substrates were transferred into a
+glovebox and kept under high vacuum (∼10−9 Torr) overnight. Top
+Al contacts (100 nm) were deposited by thermal evaporation through
+a homemade mask, featured by evenly distributed 8 mm2 holes. Ag
+(100 nm) was deposited on top of Al to increase device longevity.
+Three sides of the device stack were scratched oﬀ to expose the ITO.
+Electrical contact was established using Ag paint.
+2.4. Characterization Techniques. The optical absorption
+spectra of NC solutions were collected using a Cary 5000 UV−vis−
+NIR spectrophotometer in transmission mode. Scanning electron
+microscopy (SEM) images of the complete CdTe solar cell devices
+were acquired on a Zeiss-Merlin instrument. X-ray photoelectron
+spectroscopy (XPS) analysis was performed on a Kratos AXIS Nova
+spectrometer using a monochromatic Al Kα source (hν = 1486.6 eV).
+The Al anode was powered at 10 kV and 15 mA. Instrument base
+pressure was 1 × 10−9 Torr. High-resolution spectra in Cd 3d, Te 3d,
+C 1s, Cl 2p, and P 2p regions were collected using an analysis area of
+0.3 × 0.7 mm2 and a 20 eV pass energy. Wide-angle powder X-ray
+diﬀraction (XRD) patterns were collected using a Bruker D8
+diﬀractometer with a Cu Kα X-ray source operating at 40 kV and
+40 mA.
+2.5. Photovoltaic Characterization. Devices were tested under
+the illumination of a Xe lamp with a AM 1.5G ﬁlter (Newport 67005)
+and calibrated with a Si photodiode with a KG5 ﬁlter (Hamamatsu
+Inc, S1787-04). The illumination area was controlled by a self-aligning
+stainless-steel aperture mask with evenly distributed, nominal 6 mm2
+circular holes (5.94 mm2 measured). Current density versus voltage
+(JV) curves were acquired using a Keithley 2400 SourceMeter
+controlled by a LabVIEW interface. To mitigate heating during
+measurements, the perimeter of the cell was in direct contact to an Al
+heat sink. The instruments were controlled and data were collected
+using a homemade LabVIEW program. Current/light soaking was
+done by applying 2−3 V (forward bias) to the device under
+illumination for varying amounts of time. Typically, this generated a
+current density of ∼2.5 A cm−2. The current was monitored carefully
+to not exceed 3 A cm−2 as current densities greater than this generally
+caused performance degradation. Holding the devices in reverse bias
+generally caused a transient decrease in performance (due to reduced
+VOC). External quantum eﬃciency (EQE) measurements were taken
+using an Oriel IQE-200 with a step of 20 nm for the wavelength.
+Capacitance−voltage (Mott−Schottky) data were acquired using a
+Gamry Reference 600 potentiostat. Data were acquired using a
+frequency of 500 Hz with an amplitude and step size of 5 and 10 mV,
+respectively.
+3. RESULTS AND DISCUSSION
+3.1. Evaluation of Scalable Deposition Techniques.
+Spin-coating proves diﬃcult to integrate into a R2R process. It
+also wastes considerable amounts of material, requires batch
+processing, and limits the geometry to planar substrates. All
+these factors make other deposition methods, such as doctor-
+blading or spray-coating, better alternatives.
+Using a homebuilt spray-coating system (Figure S1), we
+tested the spray-coating deposition method by starting with
+pyridine-capped CdTe NCs previously described by Jasieniak
+et al.17 and Panthani et al.29 Initially, we deposited ﬁlms using
+the ink containing 40 mg/mL CdTe NCs in a 50/50 mixture
+of pyridine and 1-propanol as previously reported. The
+resulting ﬁlms were uneven, calling for an alternative solvent
+combination. We tried a variety of solvents (chloroform,
+Figure 1. (a−c) Cross-sectional SEM images of solar cell devices made by spin-coating (a), doctor-blading (b), or spray-coating (c) the CdTe NC
+layer, showing the diﬀerences in grain morphology. The CdTe layer was deposited via a layer-by-layer method using pyridine-capped CdTe NCs,
+soaking in a CdCl2 bath, and annealing on a hot plate. (d) Schematic of the standardized device architecture (ITO/CdTe/ZnO:In/Al). (e) J−V
+curves and PCEs for devices fabricated by spin-coating (black), doctor-blading (blue), or spray-coating (red) after current/light soaking.
+ACS Applied Materials & Interfaces www.acsami.org Research Article
+https://doi.org/10.1021/acsami.1c08325
+ACS Appl. Mater. Interfaces 2021, 13, 44165−44173
+44167
+Downloaded from pubs.​acs.​org/​aamick/​article-pdf/​13/​37/​44165/​9330414/​am1c08325.​pdf by guest on 19 November 2026

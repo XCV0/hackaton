@@ -1,0 +1,100 @@
+gies disrupt this topological structure, severing the
+logical ties between spatially adjacent evidence.
+In summary, developing a trustworthy multi-
+modal RAG system necessitates addressing three
+pivotal challenges: (1) Preserving Multimodal
+Fidelity: The system should move beyond lossy
+translation to perform native representation learn-
+ing (Mei et al., 2025). (2) Cross-Modal Seman-
+tic Corroboration: Achieving high confidence
+requires a mechanism for evidence verification.
+The system needs to facilitate interaction between
+retrieved modalities, identifying instances where
+visual and textual candidates semantically align.
+Such alignment should be treated as reinforcing
+evidence, thereby assigning higher posterior con-
+fidence to mutually corroborating retrieval results.
+(3) Layout-Induced Structural Understanding:
+Beyond content semantics, the system should be
+able to recover the contextual relationships of re-
+trieved elements within the original document,
+which allows for decoding the implicit semantic
+topology within the document layout (Tong et al.,
+2025), thereby restoring connections that are fre-
+quently severed by traditional chunking strategies.
+To address these challenges, we propose
+BayesRAG. Diverging from traditional approaches
+that rely solely on unimodal similarity matching,
+we reconceptualize multimodal retrieval as a pro-
+cess of probabilistic evidence fusion. Our core
+intuition addresses the prevalent issue of semantic
+inconsistency in heterogeneous retrieval; this is ex-
+emplified by scenarios where text retrieval suggests
+the fruit “apple” while visual retrieval identifies the
+corporate logo of “Apple Inc.” Under such circum-
+stances, independent similarity scores remain high
+for both yet fail to capture the fatal discordance
+between them. BayesRAG leverages Bayesian in-
+ference to elegantly resolve this dilemma by utiliz-
+ing similarity scores from embedding models as
+the likelihood and modeling cross-modal semantic
+consistency as the Prior Belief. This formulation
+mathematically embodies the intuition that “only
+text-image pairs that are semantically consistent
+deserve higher trust,” and it thereby dynamically
+penalizes conflicting evidence during the fusion.
+By computing the posterior probability,
+BayesRAG automatically down-weights retrieval
+candidates that exhibit high unimodal scores yet
+contradict each other. This mechanism effectively
+isolates high-fidelity evidence combinations
+that are mutually corroborating, simultaneously
+preserving native multimodal information and
+ensuring the logical rigor of cross-modal reasoning.
+Our main contributions are summarized as follows:
+• We establish a unified probabilistic framework
+that reconceptualizes multimodal retrieval as an
+evidence fusion process; this paradigm effec-
+tively preserves the native layout structure often
+lost in traditional strategies.
+• We introduce a Bayesian inference mechanism
+grounded in Dempster-Shafer theory to model se-
+mantic consistency; this approach resolves cross-
+modal conflicts by prioritizing mutually corrobo-
+rating evidence.
+• Extensive experiments demonstrate that
+BayesRAG achieves SOTA performance on
+challenging benchmarks; our analysis confirms
+that modeling evidence consistency effectively
+eliminates modal conflicts and semantic
+inconsistencies prevalent in existing baselines.
+2 Method
+In this section, we present BayesRAG, a proba-
+bilistic framework for multimodal retrieval.
+2.1 Retrieval as Evidence Fusion
+Traditional multimodal RAG systems typically
+treat retrieval as independent feature-matching
+tasks, where text and images are ranked solely by
+their semantic similarity to the query. This often
+leads to modal conflict, where a high-scoring text
+and a high-scoring image may contradict each other
+or originate from unrelated contexts.
+BayesRAG redefines retrieval as a Probabilis-
+tic Evidence Fusion process. We aim to identify
+an evidence tuple E = (etxt, evision, escreenshot),
+consisting of evidence from text, image, and struc-
+tural information, that is not only relevant to the
+query but also internally consistent. Our intuition
+is modeled via Bayesian inference: Prior (Inter-
+nal Consistency): Before observing the query, how
+likely is it that this text and image belong together?
+This is determined by the inherent consistency of
+the tuple E, exemplified by factors such as seman-
+tic alignment or narrative proximity in the source
+document. Likelihood (Semantic Match): Given
+this evidence tuple, how likely is it to generate the
+user’s query? We model this using vector similar-
+ity enhanced by belief functions. Posterior (Final
+Confidence): The updated probability that the tuple
+is the optimal evidence given the query.
+2

@@ -1,0 +1,131 @@
+be coated uniformly. After spin-coating process, NVP could still sur-
+round the perovskite crystal seeds at the initial nucleation step owing
+to strong interaction between NVP and perovskite precursors (PbI2 and
+FA+) proved by 1H NMR, IR spectra, and a solubility experiment as
+shown in Supplementary Fig. 5 and Supplementary Discussion 1.
+During annealing process, NVP gradually polymerized into PVP and
+still surrounded the perovskite crystal grains, and some uncoordinated
+miscellaneous phases were also solidiﬁed at the GBs. As PVP is inso-
+luble in DMSO, but soluble in CB (Fig. 2b). Therefore, after spin-
+coating the HTL/CB solution, CB removed the residual miscellaneous
+phases and opened the GBs to form monolithic perovskite grains,
+while remaining some PVP undissolved on the bottom as the dielectric
+layer. At the same time, HTL layer was covered on the perovskite ﬁlms
+forming the unique M-T structures, which provided an obviously larger
+contact area between perovskite and HTL.
+To verify our speculation, the scanning electron microscopy
+(SEM) images of control perovskite ﬁlm and perovskite/NVP ﬁlm were
+measured before and after CB extraction. HTL/CB solution was
+replaced with pure CB solvent, as solutions containing solute would
+affect the resolution of SEM surface tests. It could be observed that the
+miscellaneous phases (irregular bright domains) were invariably exis-
+ted at perovskite grain boundaries before and after CB extraction;
+besides, pinholes and cracks were formed after CB extraction (Fig. 2c).
+For the perovskite/NVP ﬁlm (Fig. 2d), the PVP and the miscellaneous
+phases on the perovskite and in the boundaries were effectively
+washed away after CB extraction, leaving distinct boundary gaps
+between perovskite grains, and eventually forming monolithic per-
+ovskite grains. Small molecular N-methyl-2-pyrrolidone (NMP) and PVP
+polymer were used as additives in perovskite ﬁlms. As shown in Sup-
+plementary Fig. 7, the unpolymerized NMP additives showed a similar
+morphology as the control perovskite ﬁlm. In contrast, the PVP poly-
+mer additive showed very small and disordered crystallization of
+perovskite due to rapid precipitation during annealing. Both NMP and
+PVP could not form the same morphological structure as NVP after CB
+extraction.
+We further probed the chemical structure on the surface of the
+CB-extracting perovskite ﬁlms by X-ray photoelectron spectroscopy
+(XPS) (Fig. 2e). The main peaks of Pb 4f5/2 and Pb 4f7/2 of perovskite/
+NVP ﬁlm shifted by 0.54 eV towards lower binding energy compared to
+the control sample. In addition, after CB extracting, the Pb0 peaks,
+which was considered to be the origin of deep defect energy level, was
+clearly observed in the control perovskite ﬁlm at binding energy of
+141.35 and 136.52 eV, whereas they completely disappeared in the
+perovskite/NVP ﬁlms. This indicated that there was still residual PVP
+covered the perovskite ﬁlm or in the GBs, and the lone pair electrons of
+the carbonyl group on PVP could effectively coordinate with Pb ions45.
+Similarly, as shown in Supplementary Fig. 8, a shift to lower binding
+energy was also observed in the I 3d spectra. The control ﬁlm exhibited
+a C-C=O signal related to oxygen/moisture in perovskite at 288.25 eV21,
+which was eliminated by adding NVP, in meanwhile, both new C=O
+signal at 287.63 eV and new C–N signal at 285.53 eV were detected due
+to carbonyl and pyrrole units on NVP molecule. In addition, perovskite
+ﬁlms with different molar ratios of NVP addition from 15% to 60% were
+also measured by XPS as shown in Supplementary Fig. 8. Further shift
+to lower binding energy indicated that the passivation effect improved
+with increasing content of NVP. Furthermore, as shown in Fig. 2f,
+perovskite/NVP ﬁlm exhibited a longer perovskite lifetime (1138.42 ns)
+and lower trap density (1.58 × 1015 cm−3) compared to the control ﬁlm
+(375.69 ns and 8.11 × 1015 cm−3) measured by time-correlated single
+photon counting (TCSPC) and ﬁtted by a generic kinetic model46,47.
+Supplementary Fig. 9 showed that with increasing the excitation
+density, the PL quantum efﬁciencies (PLQEs) gradually reached a
+maximum value owing to the ﬁlling of defects. Perovskite/NVP ﬁlm
+showed a higher PLQE values with a maximum of 10.20% compared to
+the control ﬁlm (8.38%). TCSPC and PLQE measurement conﬁrmed
+that perovskite/NVP ﬁlm with the monolithic grain and passivation
+effect synergistically suppressed the defect-related non-radiative
+recombination.
+Balanced charge extraction and increased built-in electric ﬁeld
+Atomic force microscopy (AFM, Fig. 3a) and PeakForce tunneling
+atomic force microscopy (PF-TUNA, Fig. 3b) images were measured
+under a bias voltage of 5 V to provide synchronous morphology
+roughness and spatially resolved electronic properties of control and
+perovskite/NVP ﬁlms after CB extracting. The AFM topography of
+perovskite/NVP ﬁlm depicted a higher altitude intercept (486 nm) than
+the control counterpart (130 nm) (Fig. 3a) owing to the M-T structure.
+The PF-TUNA image of perovskite/NVP ﬁlm was brighter than that of
+the control sample, indicating that more conducting current ﬂow
+through the perovskite layer in the former than in the latter, which was
+generally attributed to the increased conductivity and thus enhanced
+the charge transport48. The improved charge transport in overall per-
+ovskite/NVP ﬁlms was ascribed to the high-quality of monolithic per-
+ovskite grains. Furthermore, the GBs of perovskite/NVP ﬁlm showed
+brighter contrast in Fig. 3b, indicating that they carried current more
+efﬁciently. This was probably due to the thinner thickness of the ﬁlm at
+GBs. Therefore, in this case, GBs might contribute to improving PV
+performance because it facilitates charge transport rather than acting
+as a recombination center as it usually does22. To better understand the
+charge extraction enhancement induced by M-T structure, device
+simulations were carried out using the commercial software Silvaco. A
+device with a perovskite grain size of 780 nm was designed for simu-
+lation (Supplementary Fig. 10, Supplementary Tables 1 and 2). GB
+grooves were assumed to be 390 nm and 560 nm deep, which was
+consistent with the STEM measurements (Fig. 1a). To simulate the
+effect of HTL extraction ability in PSCs, a 100 nm Spiro-OMeTAD was
+added onto the surface of perovskite ﬁlm. High hole currents con-
+ducted from the GBs in the perovskite ﬁlm with M-T structure could be
+clearly observed, which also conﬁrmed the PF-TUNA measurement. To
+further verify the effect of M-T structure on the charge extraction of
+the perovskite ﬁlm, we investigated the time-correlated single photon
+counting (TCSPC) characterizations on both perovskite/NVP and the
+control samples, with glass/FTO/ETL/PSK/HTL conﬁgurations (Fig. 3c,
+d and Supplementary Table 3). For the HTL side incidence test (Fig.
+3c), the perovskite/NVP sample presented almost 15 times faster
+photo-induced luminescence lifetime (1.51 ns) than the control coun-
+terpart (22.42 ns). To further verify the origin of the enhancement of
+the hole extraction, ultraviolet photoelectron spectroscopy (UPS) was
+carried out to detect the interfacial energy level structure of the per-
+ovskite ﬁlms. As shown in Supplementary Fig. 11, the control and NVP-
+based perovskite ﬁlm exhibited comparable valence band maximum.
+Therefore, the effective enhancement on hole extraction came mainly
+from the M-T structural contact between perovskite and HTL. On the
+other hand, the ETL side incidence test (Fig. 3d) demonstrated similar
+lifetime for both interdigital (1.23 ns) and planar (1.37 ns) samples. The
+charge extraction balance beneﬁcial from M-T architecture has the
+potential to achieve high-performance PSCs, particularly in terms of
+enhancing VOC and FF.
+Surface contact potential difference (CPD) was carried out by
+Kelvin probe force microscopy (KPFM) with a schematic illustration in
+Fig. 3e, f and Supplementary Figs. 12 and 13. The height sensor dia-
+grams (Fig. 3e) conﬁrmed that both perovskite/NVP (667 nm) and
+control perovskite (630 nm) ﬁlms were similar in thickness to each
+other. The corresponding surface CPD (Fig. 3f, g) across the per-
+ovskite/SnO2 interface exhibited that perovskite/NVP ﬁlm (288 mV)
+had a bigger CPD value than that of the control ﬁlm (167 mV),
+respectively. In addition, Mott-Schottky measurements on entire
+devices consisting of glass/FTO/SnO2/perovskite/spiro-OMeTAD/Au
+were carried out to investigate this effect on the built-in electric ﬁeld
+(Vbi)(Fig. 3h),inwhichNVP-basedPSCrepresentedahigherVbi value
+Article https://doi.org/10.1038/s41467-023-38926-3
+Nature Communications |         (2023) 14:3216 4

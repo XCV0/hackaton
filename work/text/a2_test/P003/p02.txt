@@ -1,0 +1,118 @@
+LLM
+(a) Vanilla
+Used for initial 
+assessment.
+(low unc.)
+Retrieved Knowledge:
+Retriever
+LLM
+Used for initial 
+assessment.
+(low unc.)
+Zero-shot 
+Adaptive 
+Retrieval Depth
+LLM
+Used for 
+follow-up 
+assessment.
+(0.15 low unc.)
+(b) Fixed-Context RAG (c) Our Method (URGen)
+Response answer with confidence level:
+When is the 10-points CAS used in TED?
+Non-RAG
+Multi-Answer
+Aggregation
+Figure 2: Comparison of inference pipelines for
+guideline-grounded medical question answering. (a)
+Vanilla (Non-RAG): The query is directly input into
+the large language model (LLM), producing a single an-
+swer without external evidence or a context-uncertainty
+signal. (b) Fixed-Context RAG: A retriever provides
+a ﬁxed set of passages that are concatenated with
+the query before LLM inference. Although retrieval
+adds context, irrelevant or noisy passages usually per-
+sist, and uncertainty remains uncalibrated. (c) Our
+Method (URGen): Retrieved passages are ﬁrst ﬁltered
+by Zero-shot Adaptive Retrieval Depth (ZARD) to re-
+tain only relevant evidence. The LLM then generates
+responses under multiple temperatures, and uncertainty
+is estimated through entropy-based fusion of these out-
+puts. This adaptive retrieval and calibrated aggregation
+jointly target evidence selection and reliability estima-
+tion.
+et al., 2025; Choi et al., 2025) (see Figure 2).
+Yet ﬁxed-context RAG is brittle in specialized do-
+mains: large k can introduce irrelevant or even
+abnormal passages that dilute key evidence, while
+small k can omit critical guidance (Figure 2) (Izac-
+ard and Grave, 2021; Shi et al., 2024). Meanwhile,
+common uncertainty estimation methods, e.g., pre-
+dictive entropy, dropout, and temperature scaling,
+mainly operate at the token level and frequently
+miss semantic errors or unsafe advice (Lakshmi-
+narayanan et al., 2017; Gal and Ghahramani, 2016;
+Guo et al., 2017; Zhang et al., 2024a; Kruse et al.,
+2025; Shelmanov et al., 2025; Feng et al., 2025).
+We propose Uncertainty-guided Retrieval-
+augmented Generation (URGen), a training-free
+framework in which context uncertainty connects
+evidence selection and reliability estimation. UR-
+Gen (1) performs multi-temperature knowledge re-
+trieval, (2) applies Zero-shot Adaptive Retrieval
+Depth (ZARD) to adjust context size from the en-
+tropy of aggregated relevance scores, (3) generates
+multiple candidate answers under diverse temper-
+atures and aggregates their option labels by major-
+ity vote, and (4) fuses context and answer uncer-
+tainty. Thus, uncertainty estimation and adaptive
+retrieval form one pipeline: the ranking distribu-
+tion determines the evidence budget and also con-
+tributes to the reported uncertainty. Our contribu-
+tions are:
+• We propose URGen, a training-free,
+uncertainty-guided retrieval-augmented genera-
+tion framework that incorporates entropy-based
+adaptive retrieval depth (ZARD) and fused
+uncertainty calibration, tailored for guideline-
+grounded medical multiple-choice QA.
+• On the ﬁve-seed TED evaluation, URGen signif-
+icantly reduces overconﬁdent errors against all
+ﬁxed depths while maintaining accuracy compa-
+rable to Fixed-1; a broader comparison covers
+three backbones on TED and GD.
+2 Related Work
+Retrieval-augmented generation and adaptive
+retrieval. Retrieval-augmented QA commonly
+combines a retriever with a generator or reader,
+where dense retrievers improve evidence re-
+call compared to sparse baselines (Karpukhin
+et al., 2020). Generative readers such as
+Fusion-in-Decoder (FiD) condition on multiple
+retrieved passages and fuse evidence in the de-
+coder, enabling strong performance on knowledge-
+intensive QA (Izacard and Grave, 2021). Sub-
+sequent work improves robustness by inserting
+reranking between retrieval and generation (Mao
+et al., 2021; Glass et al., 2022) and by support-
+ing black-box or medical RAG pipelines via plug-
+and-play retrieval interfaces and evidence-aware
+retrieval (Shi et al., 2024; Liang et al., 2025; Sohn
+et al., 2025; Chen et al., 2024; Hwang et al., 2025;
+Choi et al., 2025; Xu et al., 2025). A key practi-
+cal issue is that ﬁxed retrieval depth can be brit-
+tle: small depth misses necessary evidence, while
+large depth introduces distractors. Prior work ad-
+dresses this via learned or iterative information-
+seeking policies that dynamically choose retrieval
+actions or stop early (Zhu et al., 2021; Jiang et al.,
+2023b). Our work follows this line but targets a
+training-free, uncertainty-guided depth adaptation
+for guideline-grounded medical multiple-choice
+QA.
+Uncertainty estimation and calibration. Reli-
+able uncertainty is central for safe deployment, yet
+modern LMs are often miscalibrated (Desai and
+Durrett, 2020; Tian et al., 2023; Huang et al., 2024;
+Zhang et al., 2024a; Kruse et al., 2025; Shelmanov
+3919

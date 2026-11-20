@@ -1,0 +1,74 @@
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.20
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.28Answer F1
+Wizard of Wikipedia GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8Answer F1
+HotpotQA GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.28Answer F1
+Wizard of Wikipedia LLaMA 3.1 8B
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.3
+0.4
+0.5
+0.6Answer F1
+HotpotQA LLaMA 3.1 8B
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.20
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27Answer F1
+Wizard of Wikipedia Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge F1
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6Answer F1
+HotpotQA Mistral 7B-Instruct
+Full Knowledge Answer F1
+No Knowledge Answer F1
+Figure 12: Scatter plot of answer F1 versus the knowledge F1 for GPT-4o-mini (top), LLaMA 3.1 8B (middle), and
+Mistral 7B-Instruct (bottom); the left column shows results on WoW, and the right shows HotpotQA. Each data
+point corresponds to a full experiment on the entire sampled dataset.
+4121

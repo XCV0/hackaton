@@ -1,0 +1,82 @@
+Prompt 2: Discriminator
+You are an Information Sufficiency
+Discriminator.
+Your task is to evaluate whether the provided context is
+sufficient to answer the user’s question.
+## Output Format (JSON):
+{"status": "Sufficient" or "Insufficient", "reason": "brief
+explanation if insufficient, empty string if sufficient"}
+## Evaluation Criteria:
+- If the context contains enough factual information to an-
+swer the question, output {"status": "Sufficient", "reason":
+""}
+- If the context is missing key information, output {"sta-
+tus": "Insufficient", "reason": "what specific information is
+missing"}
+- Be strict: only output "Sufficient" if you are confident the
+question can be fully answered from the context.
+Table 10: Prompt Templates of Discriminator.
+Retrieval Failure
+149
+(74.5%)
+LLM Analysis Error
+42
+(21.0%)Pathfinding
+9
+(4.5%)
+Failure Mode Distribution
+Figure 6: Distribution of failure modes analyzed from
+200 incorrect predictions.
+ror analysis on the HotpotQA dataset (in Figure 6).
+Specifically, we randomly sampled 200 incorrect
+prediction cases from the evaluation pool and man-
+ually scrutinized their underlying reasoning traces.
+These failures were comprehensively classified into
+three distinct categories based on their root causes:
+• Retrieval Failure (74.5%, 149 cases): This
+dominant failure mode occurs when the upstream
+initial retriever fails to surface any documents
+containing the gold supporting evidence within
+the top-k retrieval pool. Consequently, the sub-
+sequently constructed Semantic Topology Graph
+(STG) lacks the necessary factual foundation,
+rendering correct deduction impossible.
+• LLM Analysis Error (21.0%, 42 cases): In this
+scenario, the ThreadRAG pipeline functions flaw-
+lessly, successfully linearizing a perfect, context-
+intact prompt that encapsulates the complete
+multi-hop reasoning chain. However, the down-
+stream baseline Large Language Model suffers
+from intrinsic logical deficiencies or hallucina-
+tions during the final step, failing to deduce the
+correct target answer despite having access to the
+pristine context.
+• Pathfinding Error (4.5%, 9 cases): This rep-
+resents the internal boundary condition of our
+system. During exceptionally long-range or com-
+plex multi-hop path exploration, the energy prop-
+agated via our Energy-Driven Pathfinding (EDP)
+module decays beyond acceptable margins, or
+falls slightly below the rigid structural pruning
+threshold. As a result, critical evidence nodes are
+inadvertently truncated or filtered out during the
+topological linearization phase.
+This empirical breakdown of failure modes
+strongly validates the efficacy, robustness, and
+architectural soundness of our proposed Energy-
+Driven Pathfinding (EDP) mechanism. The statisti-
+cal distribution clearly illustrates that a staggering
+95.5% of the total failure cases are exclusively trig-
+gered by orthogonal, external bottlenecks—namely,
+the hard recall limits of the upstream retriever and
+the intrinsic reasoning ceilings of the baseline LLM.
+In sharp contrast, errors stemming from our inter-
+nal graph pathfinding and structural pruning com-
+ponents constitute an absolute minority (merely
+4.5%). These quantitative insights demonstrate
+that the EDP module successfully navigates com-
+plex knowledge topologies to eliminate redundant
+context noise while maintaining an exceptionally
+high fidelity in preserving critical factual chains for
+downstream generation.
+49906

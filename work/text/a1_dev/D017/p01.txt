@@ -1,0 +1,67 @@
+RESEARCH ARTICLE
+Influence of Ga back grading on voltage loss in low-
+temperature co-evaporated Cu(In,Ga)Se2 thin film solar cells
+Shih-Chi Yang | Mario Ochoa | Ramis Hertwig | Abdessalem Aribia |
+Ayodhya N. Tiwari | Romain Carron
+Laboratory for Thin Films and Photovoltaics,
+Empa - Swiss Federal Laboratories for
+Materials Science and Technology, Dübendorf,
+Switzerland
+Correspondence
+Shih-Chi Yang, Laboratory for Thin Films and
+Photovoltaics, Empa - Swiss Federal
+Laboratories for Materials Science and
+Technology, Überlandstrasse 129, 8600
+Dübendorf, Switzerland.
+Email: shih-chi.yang@empa.ch
+Funding information
+Bundesamt für Energie, Grant/Award Number:
+SI/501614-01; Horizon 2020 Framework
+Programme, Grant/Award Number: EMPIR
+project HyMet; Swiss State Secretary for
+Education, Research and Innovation (SERI),
+Grant/Award Number: 17.00105 (EMPIR
+project HyMet)
+Abstract
+The performance of Cu(In,Ga)Se2 (CIGS) solar cells is limited by the presence of the
+highly recombinative CIGS/Mo interface. The recombination at the CIGS/Mo interface
+is influential for the open circuit voltage (VOC) in high quality CIGS absorbers with
+increased charge carriers diffusion length. A quantitative understanding of the role of
+the Ga back grading height (ΔGGI) in suppressing back interface recombination is
+needed. In this work, we take advantage of a low temperature process to modify the
+ΔGGI while keeping the composition in the notch and front regions almost unchanged.
+Improvement in both VOC deficit and time-resolved photoluminescence lifetime are
+observed with increasing ΔGGI. With a combination of back surface modification
+experiments and numerical simulations, we quantify a voltage loss in ungraded devices
+of approximately 100 mV solely from the back interface recombination. Nice agree-
+ment between simulation and experimental data is reached while constraining the
+values of possible diffusion lengths. Our results suggest that a ΔGGI of about 0.50 is
+required to effectively suppress the back interface recombination, highlighting the
+importance of grading control in high-performance CIGS solar cells and devices.
+KEYWORDS
+back interface recombination, Ga back grading, TRPL lifetime, VOC deficit
+1 | INTRODUCTION
+Thin film solar cells based on polycrystalline Cu(In,Ga)Se2 (CIGS) have
+reached efficiencies of 23.35%1 on glass and 20.8%2 on flexible sub-
+strates thanks to years of intensive research and continuous investiga-
+tions. High efficiency CIGS absorbers are commonly designed with
+varying [Ga]/([Ga] + [In]) (GGI) ratios throughout the thickness. The
+value of GGI affects the bandgap through the position of the
+conduction band minimum but has little effect on the valence band
+maximum.3 In typical double-graded CIGS absorbers, the Ga concen-
+tration first decreases from the CdS/CIGS interface to a minimum
+inside the absorber, which is known as 'notch', and then increases
+towards the CIGS/Mo back interface.4 The Ga back grading plays an
+important role in minimizing the recombination at the CIGS/Mo inter-
+face by reducing the electron density in its vicinity. To increase the
+efficiency of CIGS solar cells towards the theoretical limit, it is
+required to gain a comprehensive understanding of electrical loss
+mechanisms caused by different back grading profiles.
+The copyright line for this article was changed on 15 April 2021 after original
+online publication
+Received: 3 December 2020 Revised: 18 January 2021 Accepted: 22 February 2021
+DOI: 10.1002/pip.3413
+This is an open access article under the terms of the Creative Commons Attribution-NonCommercial-NoDerivs License, which permits use and distribution in any
+medium, provided the original work is properly cited, the use is non-commercial and no modifications or adaptations are made.
+© 2021 The Authors. Progress in Photovoltaics: Research and Applications published by John Wiley & Sons Ltd.
+630 Prog Photovolt Res Appl. 2021;29:630–637.wileyonlinelibrary.com/journal/pip

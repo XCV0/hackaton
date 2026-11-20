@@ -1,0 +1,85 @@
+Methods
+LLaMA3-8B-Instruct Qwen3.5 plus GPT-4o mini
+HotpotQA 2Wiki MuSiQue HotpotQA 2Wiki MuSiQue HotpotQA 2Wiki MuSiQue
+EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1 EM F1
+Non-Graph RAG
+RA-CoT .204 .330 .202 .261 .142 .210 .312 .429 .268 .372 .162 .249 .310 .425 .264 .359 .158 .243
+ReAct .268 .379 .244 .335 .216 .311 .358 .476 .342 .487 .248 .378 .349 .475 .338 .483 .242 .383
+IRCoT .318 .430 .288 .367 .224 .327 .442 .565 .374 .519 .262 .376 .438 .559 .372 .496 .258 .373
+Self-Ask .256 .373 .222 .331 .190 .281 .356 .471 .326 .466 .204 .325 .348 .465 .328 .471 .200 .317
+Iter-RetGen .288 .388 .268 .351 .231 .315 .424 .534 .370 .503 .250 .373 .418 .529 .366 .489 .252 .374
+Graph RAG
+HippoRAG .324 .403 .318 .411 .202 .274 .418 .557 .466 .569 .234 .333 .412 .549 .458 .572 .219 .327
+LightRAG .286 .357 .288 .365 .182 .249 .328 .429 .342 .424 .204 .303 .312 .402 .326 .429 .194 .293
+CoTKR .304 .367 .312 .366 .212 .309 .354 .411 .368 .451 .226 .321 .368 .435 .376 .487 .234 .303
+EFSUM .264 .343 .266 .351 .206 .271 .322 .417 .294 .386 .224 .297 .320 .411 .316 .409 .218 .279
+ToG .318 .401 .284 .355 .202 .317 .446 .557 .456 .521 .243 .351 .448 .565 .434 .512 .258 .367
+PoG .336 .426 .312 .380 .230 .321 .516 .639 .518 .601 .282 .371 .508 .623 .492 .587 .278 .366
+ERA-CoT .354 .439 .304 .371 .253 .350 .478 .613 .442 .553 .278 .385 .464 .608 .436 .538 .270 .379
+knowtrace .396 .486 .338 .413 .292 .379 .552 .695 .546 .638 .318 .414 .534 .679 .528 .629 .320 .413
+ThreadRAG .422 .513 .372 .453 .324 .417 .586 .704 .596 .671 .342 .453 .576 .685 .586 .663 .328 .437
+Table 1: Main results of multi-hop QA datasets. Best results are in bold and second best are underlined.
+4 Experiments
+4.1 Experimental Setup
+Datasets & Metrics.We evaluate ThreadRAG on
+three standard open-domain multi-hop QA bench-
+marks: HotpotQA (Yang et al., 2018), 2WikiMul-
+tihopQA (Ho et al., 2020), and MuSiQue (Trivedi
+et al., 2022). We use the same data splits as previ-
+ous works (Trivedi et al., 2023; Li and Du, 2023)
+for evaluation. Following IRCoT (Trivedi et al.,
+2023), our retrieval corpus aggregates all support-
+ing and distractor passages to simulate a realistic
+open-domain setting. For evaluation, we report
+Exact Match (EM) and F1 scores to measure abso-
+lute correctness and token-level overlap, applying
+standard text normalization to both predictions and
+ground-truth answers prior to computation.
+Baselines. We evaluate ThreadRAG against
+five categories of baselines: text-centric multi-hop
+methods reasoning purely over plain text (RA-CoT
+(Wei et al., 2022), ReAct (Yao et al., 2022), IR-
+CoT (Trivedi et al., 2023), Self-Ask (Press et al.,
+2023), Iter-RetGen (Shao et al., 2023)), KG-Chunk
+RAG methods treating text chunks as nodes (Hip-
+poRAG (Gutiérrez et al., 2024), LightRAG (Guo
+et al., 2024)), KG-Rewriting RAG methods con-
+verting subgraphs into natural language (CoTKR
+(Wu et al., 2024), EFSUM (Ko et al., 2024)), KG-
+Path RAG methods reasoning along discrete struc-
+tural paths (ToG (Sun et al., 2024), PoG (Tan et al.,
+2025)), and KG-Triplet RAG methods prompting
+with discrete relational triplets (ERA-CoT (Liu
+et al., 2024), KnowTrace (Li et al., 2025)). For
+fair comparison, we adapt ToG and PoG to use
+the same local KG as LightRAG, replacing their
+external KGs.
+Implementation Details. We use Llama-3-8B
+(Grattafiori et al., 2024), Qwen-3.5-Plus (Yang
+et al., 2025), and GPT-4o-mini (OpenAI et al.,
+2024) with nomic-embed-text for embeddings
+(Nussbaum et al., 2024). Chunk size is 1200 charac-
+ters with 150 overlap. We retrieve top-5 global con-
+texts via Elasticsearch using equal BM25 and dense
+weights. STG settings are: 5-NN, 0.5/0.3 seman-
+tic/lexical thresholds, and edge weights γ = 0.3,
+α = 0.35, β = 0.65. Pathfinding parameters are:
+3 anchors, 0.5 PPR restart, 0.01 pruning threshold,
+and 3 max iterations. All experiments run on 4
+NVIDIA A6000 GPUs.
+4.2 Inference Performance Comparison
+Table 1 summarizes the main experimental results
+across three multi-hop QA datasets. First, we ob-
+serve that KG-Chunk methods (e.g., HippoRAG)
+outperform KG-Rewriting approaches to a certain
+extent (e.g., CoTKR, achieving 0.324 vs. 0.304
+EM on HotpotQA with LLaMA3-8B-Instruct). We
+attribute this to the generative noise and hallucina-
+tions introduced when rewriting discrete subgraphs
+into text. Second, iterative KG-Triplet prompting
+(e.g., KnowTrace) significantly surpasses KG-Path
+methods (e.g., PoG, 0.396 vs. 0.336 EM). This
+indicates that faulty path retrieval can easily inject
+erroneous logical chains, which LLMs struggle to
+verify or reject due to the severe loss of surrounding
+49896

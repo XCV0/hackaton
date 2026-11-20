@@ -1,0 +1,49 @@
+6 Dhasade et al.
+pair (q, Ri), the router estimates a relevance probability, which is thresholded to
+obtain a binary routing decision. The router is trained using ground-truth binary
+relevance labels s(q, Ri) ∈ {0, 1}, where s(q, Ri) = 1 indicates that source Ri is
+relevant to query q. We first describe how these ground-truth labels are con-
+structed, before detailing the router input features. We consider two approaches
+for constructing the source-level relevance labels.
+1. Rerank based – For a given query q, the top-kret documents are retrieved
+from each source Ri ∈ R. All retrieved documents are then reranked jointly
+using a neural reranker to produce a global top-k list. A source Ri is labeled
+as relevant if at least one retrieved document d from Ri appears in the global
+top-k:
+s(q, Ri) =
+(
+1 if ∃ d ∈ Ri s.t. d is in the global top-k
+0 otherwise.
+Theselabelsdependonboththeembeddingmodelandthevalueof k.During
+inference, we use the same value of k as for training.
+2. LLM based [39] – For each query q, we first retrieve the the top-kret docu-
+ments from each source Ri ∈ R. We then obtain query–document relevance
+judgments for these retrieved documents using an external LLM that is in-
+dependent of the embedding model. Each document is assigned one of four
+labels: not relevant, minimally relevant, highly relevant, or key, where key in-
+dicates a strong match. For each source Ri, we aggregate the LLM judgments
+of its retrieved documents into a graded precision score:
+Graded Precision(q, Ri) =
+Pk
+j=1 w(q, dj )
+k × 100
+where dj denotes the j-th retrieved document from source Ri for query q,
+and w(q, dj ) is defined as:
+w(q, dj ) =
+
+
+
+0 if not relevant
+0.25 if minimally relevant
+0.5 if highly relevant
+1 if key.
+Finally, a source is labeled as relevant if the Graded Precision score is posi-
+tive:
+s(q, Ri) =
+(
+1 Graded Precision(q, Ri) > 0
+0 otherwise.
+These labels depend only on the cutoff kret and not on the embedding model.
+Feature selection. While it is common to assume that each source uses the
+same embedding model to embed its documents [13], some specialized sources
+may instead employ their own embedding model [39]. We design our router

@@ -1,0 +1,98 @@
+knowledge precision score of 100%, the answer F1
+still underperforms the “full knowledge” setting.
+This is because our knowledge precision and re-
+call scores are computed based on the labeled gold
+knowledge sentences, so if the labels are noisy, the
+knowledge metrics are corrupted, while the answer
+F1 is intact. Note that Figure 6 presents a non-
+monotonic trend in improving knowledge selector,
+just as we observed in Section 5 for WoW, veri-
+fying that noisy knowledge annotations cause this
+non-monotonic behavior.
+We argue that the simulation results on WoW
+and noisy HotpotQA are more reflective of real-
+world RAG applications than the original (clean)
+HotpotQA. In a real application, there is no way
+to know the test-time knowledge recall and preci-
+sion, and it is likely to be slightly different than the
+training-time knowledge recall and precision.
+A.6 Length-Constrained Knowledge Selection
+and Answer Generation
+To study the effect of length-constrained knowl-
+edge inputs on answer generation performance,
+we limit the number of knowledge sentences to
+k by randomly sub-sampling k sentences when
+more than k sentences are selected by the simu-
+lated knowledge selector*. We choose k = 3 for
+both WoW and HotpotQA because their average
+number of candidate knowledge sentences before
+random sampling are 7.1 and 9.5 respectively.
+As Figure 8 shows, the length of the knowledge
+input mostly correlates with knowledge precision.
+As Figure 9 shows, constraining the knowledge in-
+put size pushes the points in the upper-left corner
+of the plots in Figure 2 into the rest of the space
+while keeping the overall trend of the points the
+same. Our observations in Section 5 hold even
+with length-constrained knowledge selection: a
+sufficiently high knowledge recall score is a pre-
+requisite for a knowledge selector outperform the
+“full knowledge” setting.
+*This random sampling does not break the experiment
+because our knowledge retriever and selector are simulated
+via random sampling, which is not the case for actual model-
+based retrievers and selectors.
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+Noisy HotpotQA GPT-4o-mini
+0.4
+0.5
+0.6
+0.7
+Figure 5: Scatter plot of answer F1 versus the knowl-
+edge precision for GPT-4o-mini on noisy HotpotQA.
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.4
+0.5
+0.6
+0.7
+0.8Answer F1
+Noisy HotpotQA GPT-4o-mini
+Full Knowledge Answer F1
+No Knowledge Answer F1
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Knowledge Recall
+Figure 6: Color contours of answer F1 versus the knowl-
+edge precision for GPT-4o-mini on noisy HotpotQA.
+Each contour represents a different knowledge recall
+score; moving left to right visualizes improving the per-
+formance (precision) of the knowledge selector.
+0.0 0.2 0.4 0.6 0.8 1.0
+Answer F1 Score
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7Fraction
+Answer F1 Distribution Given Single Knowledge Sentence
+Wizard of Wikipedia
+HotpotQA
+Figure 7: Histogram of answer F1 distributions of Wiz-
+ard of Wikipedia and HotpotQA by feeding each indi-
+vidual candidate sentence to the GPT-4o-mini generator.
+4116

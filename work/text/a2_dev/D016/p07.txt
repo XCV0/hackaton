@@ -1,0 +1,129 @@
+gression (CP-APR) method, has been applied to model the complex
+and multi-faceted activity details of SCADA events, improving the
+specificity and accuracy of identifying anomalies in electrical grid
+systems [10.1109/MILCOM58377.2023.10356348].
+3) What does MADHAT stand for? The acronym MADHAT stands for
+Multidimensional Anomaly Detection fusing HPC, Analytics, and Ten-
+sors [10.1109/HPEC.2019.8916559].
+4) What’s the most advanced anomaly detection method on the LANL
+Unified Host and Network Dataset? The most advanced anomaly
+detection method on the Los Alamos National Laboratory Unified
+Host and Network Dataset is the tensor factorization model that
+exploits the multi-dimensional and sparse structure of user authen-
+tication logs for improved detection of penetration testing events
+[10.1109/ISI49825.2020.9280524].
+For each response, the SMART-SLIC agent selected DOIs
+that the SME also chose, demonstrating the agent’s accuracy in
+retrieving relevant sources. The consistency in DOI selections
+highlights the robustness of the retrieval mechanisms, ensuring
+reliable and pertinent information for the user’s questions.
+The same questions were asked without RAG, and the
+results varied. The LLM answered the first general question
+accurately, but while the initial response to the second question
+was correct, its elaboration missed key details. The third and
+fourth responses were entirely wrong, with fabricated answers
+like ”Malware and Attack Detection Hunting and Analysis
+Team” and ”Long Short-Term Memory.” Additionally, none of
+the responses included DOI citations, reducing the credibility
+of the information by omitting source references.
+The evaluation of SMART-SLIC and GPT-4-instruct, with
+and without RAG, highlights the importance of retrieval sys-
+tems for accurate research output. SMART-SLIC’s RAG ex-
+celled in selecting relevant DOI citations for complex queries,
+while GPT-4-instruct struggled with fabrications, showing the
+need for advanced systems like SMART-SLIC. Its strength
+lies in using high-quality, domain-specific corpora for strong
+performance in defined research areas, while also offering
+potential for further exploration in less-defined domains.
+V. CONCLUSION
+Our SMART-SLIC framework leverages advanced lan-
+guage models and specialized tools to effectively address
+user queries by categorizing them into Specific Document
+Queries and General Queries for efficient processing. The
+ReAct agent manages general inquiries, while NER and cypher
+query generation handle document-specific questions.
+LLMs excel in general NLP tasks but struggle in domain-
+specific areas due to hallucinations, knowledge cut-offs, and
+lack of attribution. Our system addresses this by integrating
+RAG with a domain-specific KG and VS, enhancing reliability
+without fine-tuning. Built using NLP, data mining, and non-
+negative tensor factorization, this setup enables accurate attri-
+butions, reduces hallucinations, and excels in domain-specific
+queries, as shown in malware analysis research.
+The framework significantly enhances query response ac-
+curacy and reliability, making it adaptable to various ap-
+plications. Future work will expand the framework’s use
+across domains like robotics, materials science, legal cases,
+and quantum computing. Enhancements in graph completion,
+entity linking, and link prediction will further interconnect
+graphs, reveal hidden connections, and support LLMs in infor-
+mation clarification, keeping SMART-SLIC at the forefront of
+intelligent information retrieval and generation.
+REFERENCES
+[1] Y. A. Yadkori, I. Kuzborskij, A. Gy¨orgy, and C. Szepesv´ari, “To believe
+or not to believe your llm,” arXiv preprint arXiv:2406.02543, 2024.
+[2] N. Harvel, F. B. Haiek, A. Ankolekar, and D. J. Brunner, “Can llms
+answer investment banking questions? using domain-tuned functions to
+improve llm performance on knowledge-intensive analytical tasks,” in
+Proceedings of the AAAI Symposium Series, vol. 3, no. 1, 2024, pp.
+125–133.
+[3] N. Zhang, Y. Yao, B. Tian, P. Wang, S. Deng, M. Wang, Z. Xi, S. Mao,
+J. Zhang, Y. Ni et al., “A comprehensive study of knowledge editing for
+large language models,” arXiv preprint arXiv:2401.01286, 2024.
+[4] S. K. Freire, C. Wang, and E. Niforatos, “Chatbots in knowledge-
+intensive contexts: Comparing intent and llm-based systems,” arXiv
+preprint arXiv:2402.04955, 2024.
+[5] A. Bertsch, M. Ivgi, U. Alon, J. Berant, M. R. Gormley, and G. Neubig,
+“In-context learning with long-context models: An in-depth exploration,”
+arXiv preprint arXiv:2405.00200, 2024.
+[6] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal,
+H. K¨uttler, M. Lewis, W.-t. Yih, T. Rockt¨aschel et al., “Retrieval-
+augmented generation for knowledge-intensive nlp tasks,” Advances in
+Neural Information Processing Systems, vol. 33, pp. 9459–9474, 2020.
+[7] R. Vangara, E. Skau, G. Chennupati, H. Djidjev, T. Tierney, J. P.
+Smith, M. Bhattarai, V. G. Stanev, and B. S. Alexandrov, “Semantic
+nonnegative matrix factorization with automatic model determination
+for topic modeling,” in 2020 19th IEEE International Conference on
+Machine Learning and Applications (ICMLA), 2020, pp. 328–335.
+[8] B. T. Nebgen, R. Vangara, M. A. Hombrados-Herrera, S. Kuksova,
+and B. S. Alexandrov, “A neural network for determination of latent
+dimensionality in non-negative matrix factorization,” Machine Learning:
+Science and Technology, vol. 2, no. 2, p. 025012, 2021.
+[9] R. Vangara, M. Bhattarai, E. Skau, G. Chennupati, H. Djidjev, T. Tierney,
+J. P. Smith, V. G. Stanev, and B. S. Alexandrov, “Finding the number
+of latent topics with semantic non-negative matrix factorization,” IEEE
+access, vol. 9, pp. 117 217–117 231, 2021.
+[10] J. Liu, “LlamaIndex,” 11 2022. [Online]. Available: https://github.com/
+jerryjliu/llama index
+[11] R. F. Simmons, “Natural language question-answering systems: 1969,”
+Commun. ACM, vol. 13, no. 1, p. 15–30, jan 1970. [Online]. Available:
+https://doi.org/10.1145/361953.361963
+[12] S. Pan, L. Luo, Y. Wang, C. Chen, J. Wang, and X. Wu, “Unifying
+large language models and knowledge graphs: A roadmap,” IEEE
+Transactions on Knowledge and Data Engineering, vol. 36, no. 7, pp.
+3580–3599, 2024.
+[13] S. Pan, Y. Zheng, and Y. Liu, “Integrating graphs with large language
+models: Methods and prospects,” IEEE Intelligent Systems, vol. 39,
+no. 1, pp. 64–68, 2024.
+[14] Y. Li, Z. Li, P. Wang, J. Li, X. Sun, H. Cheng, and J. X. Yu, “A survey
+of graph meets large language model: Progress and future directions,”
+in Proceedings of the Thirty-Third International Joint Conference on
+Artificial Intelligence, IJCAI-234, 2023.
+[15] D. Chen, A. Fisch, J. Weston, and A. Bordes, “Reading Wikipedia
+to answer open-domain questions,” in Proceedings of the 55th Annual
+Meeting of the Association for Computational Linguistics (Volume 1:
+Long Papers), R. Barzilay and M.-Y. Kan, Eds. Vancouver, Canada:
+Association for Computational Linguistics, Jul. 2017, pp. 1870–1879.
+[Online]. Available: https://aclanthology.org/P17-1171
+[16] V. Karpukhin, B. Oguz, S. Min, P. Lewis, L. Wu, S. Edunov,
+D. Chen, and W.-t. Yih, “Dense passage retrieval for open-domain
+question answering,” in Proceedings of the 2020 Conference on
+Empirical Methods in Natural Language Processing (EMNLP),
+B. Webber, T. Cohn, Y. He, and Y. Liu, Eds. Online: Association
+for Computational Linguistics, Nov. 2020, pp. 6769–6781. [Online].
+Available: https://aclanthology.org/2020.emnlp-main.550
+[17] J. Tan, Z. Dou, Y. Zhu, P. Guo, K. Fang, and J.-R. Wen, “Small models,
+big insights: Leveraging slim proxy models to decide when and what
+to retrieve for llms,” in Proceedings of the 62nd Annual Meeting of the
+Association for Computational Linguistics (Volume 1: Long Papers).
+Bangkok, Thailand: Association for Computational Linguistics, 2024.

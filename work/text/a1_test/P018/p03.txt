@@ -1,0 +1,153 @@
+Nature Energy | Volume 8 | August 2023 | 789–799
+ 791
+Article https://doi.org/10.1038/s41560-023-01255-2
+by the measured sheet resistance of the TCO, the line resistance of the  
+finger, the contact resistivity and recombination of the heterojunction. 
+A full description of these parameters is in Supplementary Table 4.  
+For comparison, the corresponding intrinsic light J–V curves computed 
+from the theoretical limit in electrical performance are also shown  
+(grey lines). Observe that the deviation between the Suns–V OC curve  
+and the light J –V curve (arrows enclosed by black circles) differs 
+between the p-a-Si:H cell and the p-nc-Si:H cell. To explain this, note  
+that we can define a pseudo-fill factor (pFF) from a Suns–V OC curve 
+ignoring all resistance. Both the p-a-Si:H cell and p-nc-Si:H cell have 
+similar pFF values, which means that the difference in FF at the maxi-
+mum power point (MPP) originates from a difference in the series  
+resistance RS. Therefore, a smaller gap between the light and pseudo- 
+light J–V curves in the p-nc-Si:H cell indicates a smaller RS.
+To explore how the record FF of 86.59% was achieved, we fit the 
+J–V curves in Fig. 2b,c to determine power loss and series resistance, 
+seen in Fig. 2d. The losses are divided into three regions: front ESC,  
+bulk silicon (bulk) and rear HSC. Figure 2d also shows the series resist-
+ance determined from the power loss at MPP. From the p-a-Si:H cell  
+to p-nc-Si:H cell, the total electrical power loss is reduced from 0.41  
+to 0.13 mW cm−2 at the rear HSC alone; this is nearly equal to the  
+full power loss reduction, 0.3 mW cm−2 (from 1.01 to 0.71 mW cm−2). 
+This indicates that the improvement in electrical performance comes 
+primarily from the rear HSC (as expected). In particular, the reduction 
+of power loss at the rear HSC is attributed to the use of p-nc-Si:H and 
+the updated TCO, which facilitates excellent passivation and contact 
+performance. The series resistance analysis shows the same trend as 
+the PLA. The total RS is reduced from 381 mΩ cm2 for the p-a-Si:H cell to 
+206 mΩ cm2 for the p-nc-Si:H cell (Supplementary Fig. 2a); this differ-
+ence mostly appears at the rear HSC, at which RS is reduced from more 
+than 130 mΩ cm2 to less than 20 mΩ cm2 (Fig. 2d). The slightly increased 
+power loss in the bulk seen in the p-nc-Si:H cell could be caused by a 
+small fluctuation in wafer quality. A slightly reduced R S of the front 
+ESC (from 47 to 41 mΩ cm2) lies in the reduction of the sheet resistance 
+of front TCO from ~150 to ~50 Ω per square. Note that to ensure the 
+credibility of the RS data, we measured the total R S at MPP with four 
+different methods41, obtaining RS = 353–381 mΩ cm2 (p-a-Si:H cell) and 
+175–206 mΩ cm2 (p-nc-Si:H cell), as shown in Supplementary Fig. 2b.
+Characterization of p-nc-Si:H
+As discussed above, the implementation of p-nc-Si:H together with 
+matched TCO leads to a dramatic reduction in the contact resistivity 
+at the rear side, resulting in an efficiency increase to 26.30%. As this 
+contact, the overall resistance depends mainly on the bulk resistance 
+of p-nc-Si:H itself and on the contact resistivity at the p-nc-Si:H–TCO 
+interface. Therefore, gaining the optimal p-nc-Si:H layer is of critical 
+importance to achieve high-efficiency SHJ solar cells. We investigated 
+p-nc-Si:H layers grown from different recipes; corresponding deposi-
+tion conditions and characterization results are elaborated in Fig. 3 
+and Supplementary Table 5. We studied the structural properties of the 
+p-a-Si:H and p-nc-Si:H layers by both Raman spectroscopy and transmis-
+sion electron microscopy (TEM). The Raman measurement was carried 
+out with a 325-nm laser and performed on the p-a-Si:H or p-nc-Si:H layer 
+deposited on a planar i-a-Si:H–glass substrate. The deposition process 
+was identical to that of the fabrication procedure for solar cells. The 
+Raman spectra were fitted with multiple (or single) Gaussian functions, 
+as shown in Fig. 3a. For p-nc-Si:H, three Gaussian peaks are identified 
+with the centres at 482, 507 and 518 cm−1, representing separately the 
+transverse optical phonon mode of amorphous silicon and two optical 
+vibrational modes of nanocrystalline silicon42,43. In contrast, only one 
+peak at 478 cm−1 is observed for p-a-Si:H, indicating a fully amorphous 
+structure. XC is determined from the integrated intensities (I) of the 
+Gaussian peaks via equation (1) as follows44,45:
+XC = I510 cm−1 + I520 cm−1
+βI480 cm−1 + I510 cm−1 + I520 cm−1
+, (1)
+0.90
+0.85
+0.80
+0.75
+0.85 0.90 0.95 1.00 680
+82
+84
+86
+88
+90
+700 720 740 760 780
+Optical performance JSC/JSC,SQ VOC (mV)
+FF (%)
+Electrical performance VOC × FF/(VOC,SQ × FFSQ) Intrinsic limit by Richter et al.
+71 110 µm 29.43%
+Green limit n = 2/3
+Green limit n = 1
+29%
+130 µm
+28%
+27%
+26%
+22%
+23%
+24%
+25%
+n-SHJ
+n-TOPCon
+p-TOPCon
+p-PERC 24.0% (LONGi)
+25.2% (LONGi)
+25.0% (UNSW) 25.8% (FhG-ISE)
+25.3% (Jinko)
+26.0% (FhG-ISE)
+25.1% (Hanergy)
+25.8% (LONGi)
+26.8% (LONGi)
+26.7% (LONGi)
+26.3% (LONGi)
+26.5% (LONGi)
+25.3% (LONGi)
+24.0% (LONGi)
+25.0% (UNSW)
+25.3% (Jinko)
+25.2% (LONGi)
+25.1% (Hanergy)
+25.3% (LONGi)
+26.3% (LONGi)
+26.7% (LONGi)
+26.0% (FhG-ISE)
+25.8% (FhG-ISE)
+25.8% (LONGi)
+26.5% (LONGi)
+26.8% (LONGi)
+Intrinsic limit by Richter et al.
+71
+(n-Si, 130 µm, 1.5 Ω cm)
++ surface recombination
+2
+1
+1
+2
+a b
+Fig. 1 | Comparison of PV parameters of high-efficiency silicon solar cells. 
+a, Measured PCEs of different high-performance c-Si solar cell technologies, 
+including n-type wafer SHJ solar cells (n-SHJ) reported by LONGi and Hanergy, 
+TOPCon solar cells reported by LONGi, Jinko and Fraunhofer ISE (FhG-ISE) 
+and PERC solar cells based on p-type wafer (p-PERC) reported by LONGi and 
+University of New South Wales (UNSW), overlaid on efficiency curves as a 
+function of electrical (VOC × FF) and optical (JSC) performances and normalized 
+by the Shockley–Queisser (SQ) limit of a c-Si cell under standard test conditions. 
+The raw data are provided in Supplementary Table 2. The upper limits of the 
+electrical contribution and Richter limit as a function of JSC are shown for wafer 
+thicknesses of 130 μm (the wafer thickness of SHJ solar cells in this paper) and 
+110 μm (the ideal wafer thickness for approaching the theoretical limiting 
+efficiency of 29.43%)65,71. b, Detailed distributions of measured PCEs of different 
+high-performance c-Si solar cell technologies as a function of VOC and FF. The 
+Green limit36 with ideality factor n = 2/3 (n = 1), assuming a one-diode model and 
+without considering the effects of RS and Rsh, is drawn with a blue (red) dotted 
+line. The blue to red gradient solid line is derived by theoretical calculation (same 
+as the calculation in Supplementary Fig. 1) contributed from only intrinsic and 
+surface recombination for devices with n-Si wafers of 130 μm thick and 1.5 Ω cm 
+resistivity. The red arrows indicate the trend towards improved efficiency in SHJ 
+solar cells over time. LONGi cells with typical SHJ design and p-a-Si:H (p-nc-Si:H) 
+as the rear emitter are indicated by 1 (2).

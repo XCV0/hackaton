@@ -1,0 +1,86 @@
+Interpretation of context uncertainty. Context
+uncertainty should not be interpreted as a direct
+measure of disease uncertainty. It measures in-
+stability in the retrieved keypoint distribution. A
+high context-uncertainty score indicates that mul-
+tiple keypoints are similarly plausible for the ques-
+tion, which may reﬂect broad clinical scope, miss-
+ing decisive evidence, or ambiguous wording. A
+low context-uncertainty score indicates that the
+ranking is concentrated on a small number of key-
+points. Fusing this score with answer uncertainty
+makes the ﬁnal uncertainty sensitive to both re-
+trieval ambiguity and answer-generation ambigu-
+ity.
+F More Case Studies
+Table S13 provides an additional TED case study.
+The example shows that ﬁxed-depth retrieval may
+include weakly related keypoints even when it
+eventually predicts the correct option. URGen se-
+lects a smaller keypoint set and produces a sub-
+stantially lower uncertainty score. This comple-
+ments the quantitative results by illustrating how
+adaptive depth suppresses redundant context while
+preserving the decisive keypoints.
+Case analysis. The vanilla model chooses
+contrast-enhanced CT despite the guideline-
+speciﬁc preference for noncontrast CT in this
+surgical-planning context. Fixed-5 RAG corrects
+the answer, but its uncertainty remains high be-
+cause the retrieved keypoints include several broad
+TED assessment and referral statements that are
+only weakly related to the imaging modality. UR-
+Gen retrieves a smaller set of high-ranking key-
+points and assigns a lower uncertainty score to the
+same correct answer. This example illustrates an
+important distinction: retrieving more keypoints
+can increase topical coverage, but it can also in-
+troduce redundant or weakly relevant context that
+makes the model less certain. URGen’s adaptive
+depth selection helps balance evidence sufﬁciency
+and context compactness.
+Qualitative takeaway. The case study supports
+the quantitative trend in the main paper. When the
+keypoint distribution is concentrated, URGen con-
+tracts the context and avoids unnecessary guide-
+line material. When the keypoint distribution is
+diffuse, the method can expand the context to re-
+duce the risk of missing key clinical information.
+This behavior is especially important for guideline-
+grounded medical QA, where several keypoints
+may be semantically close but only one or two are
+clinically decisive for the ﬁnal option.
+G Prompt Templates
+URGen is implemented in a training-free manner
+using two prompt templates. The ﬁrst prompt
+ranks candidate guideline keypoints for retrieval,
+and the second prompt answers the multiple-
+choice question using only the selected keypoint-
+passage blocks. The prompts enforce structured
+JSON output to make retrieval ranking and answer
+extraction reproducible.
+Table S13: Additional TED multiple-choice case study using Llama-3.1-8B. The example compares vanilla prompt-
+ing, ﬁxed-5 RAG, and URGen.
+Case Study 2
+Model / Corpus Llama-3.1-8B / TED
+Question & Choices For TED patients preparing for surgery, the preferred imaging modality is:
+A. Contrast-enhanced CT B. Noncontrast CT C. Ultrasound D. Nuclear medicine scan
+GT B. Noncontrast CT
+Vanilla Answer: A. Contrast-enhanced CT (Unc.: 5.70%)
+Fixed-5 RAG URGen
+Answer: B. Noncontrast CT (Unc.: 36.64%) Answer: B. Noncontrast CT (Unc.: 9.21%)
+Selected 5 Keypoints Selected 2 Keypoints
+1. 2.1 Activity and severity deﬁnitions for patients with TED, CAS score
+deﬁnition.
+2. 4.1.2 Assessment of TED should include activity, severity, trend over time,
+and impact on daily living.
+3. 4.1.1 Endocrinologists should be familiar with TED examination basics.
+4. 3.3 Ophthalmologists should be involved in moderate-to-severe and sight-
+threatening TED management.
+5. 7.3.1.1 TED surgery should be performed by an experienced orbital sur-
+geon.
+1. 2.1 Activity and severity deﬁnitions for patients with TED, CAS score
+deﬁnition. (Ranking Score: 0.49)
+2. 4.1.2 Assessment of TED should include activity, severity, trend over time,
+and impact on daily living. (Ranking Score: 0.14)
+3935

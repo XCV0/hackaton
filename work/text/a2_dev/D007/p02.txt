@@ -1,0 +1,134 @@
+Retrieval
+Complex Query: 
+What currency is in 
+Billy Giles’ birthplace?
+Simple Query: 
+When is the birthday 
+of Michael F. Phelps?
+Documents
+Answer
+Documents
+Answer
+(A) Single-Step Approach
+Inaccurate
+Retrieval
+Retrieval
+Simple Query: 
+When is the birthday 
+of Michael F. Phelps?
+Documents
+(Intermediate) 
+Answers
+(B) Multi-Step Approach
+Inefficient
+k times
+Complex Query: 
+What currency is in 
+Billy Giles’ birthplace?
+Documents
+(Intermediate) 
+Answers
+k times
+Straightforward Query: 
+Paris is the capital of what?
+(C) Our Adaptive Approach
+Answer
+Simple Query: 
+When is the birthday 
+of Michael F. Phelps?
+Documents
+Answer
+Complex Query: 
+What currency is in 
+Billy Giles’ birthplace?
+Documents
+(Intermediate) 
+Answers
+k timesClassifier
+Figure 2: A conceptual comparison of different retrieval-augmented LLM approaches to question answering. (A) In response to
+a query, this single-step approach retrieves relevant documents and then generates an answer. However, it may not be sufficient
+for complex queries that require multi-step reasoning. (B) This multi-step approach iteratively retrieves documents and generates
+intermediate answers, which is powerful yet largely inefficient for the simple query since it requires multiple accesses to both
+LLMs and retrievers. (C) Our adaptive approach can select the most suitable strategy for retrieval-augmented LLMs, ranging
+from iterative, to single, to even no retrieval approaches, based on the complexity of given queries determined by our classifier.
+often not answerable through a single-step pro-
+cess of retrieval-and-response. An example query
+is ‘When did the people who captured Malakoff
+come to the region where Philipsburg is located?’,
+which requires four reasoning steps to solve. There-
+fore, to effectively handle such complex queries,
+recent studies have concentrated largely on multi-
+step and multi-reasoning QA, which requires itera-
+tive accesses to both LLMs and retrievers multiple
+times (Press et al., 2023; Trivedi et al., 2023), at
+the cost of heavy computational overheads.
+Yet, we should rethink: In a real-world scenario,
+are all the requests from users complex? Instead,
+users might often ask simple and straightforward
+questions, while only occasionally asking complex
+ones. Specifically, a query such as ‘Paris is the
+capital of what?’ is likely to be asked more fre-
+quently, compared to the aforementioned multi-
+step query, and this simpler query might also be
+easily answered by the LLMs themselves, without
+accessing external knowledge. In other words, a
+multi-step QA approach could give rise to unnec-
+essary computational overhead for simple queries,
+even though it would be vital for complex queries
+(see Figure 2 (A)). On the other hand, handling
+complex queries with single-step-retrieval or even
+non-retrieval strategies would be largely insuffi-
+cient (Figure 2 (B)). This suggests the need for an
+adaptive QA system, which can dynamically adjust
+the operational strategies of retrieval-augmented
+LLMs based on the query complexity. While some
+recent approaches are capable of doing this based
+on the frequency of entities in queries (Mallen et al.,
+2023; Zhao et al., 2023) or on the generated out-
+puts from models for multi-step QA (Trivedi et al.,
+2023), they are still suboptimal: the former meth-
+ods are overly simplistic, failing to consider multi-
+hop queries; meanwhile, the latter are excessively
+complex, terminating answer solving steps after
+several rounds of module access.
+In this work, considering diverse complexity lev-
+els of real-world queries, we argue that previous
+one-size-fits-all approaches might be inadequate to
+cover all of them. Instead, we propose to select the
+most suitable strategy from a range of (retrieval-
+augmented) LLMs, each of which is tailored to the
+specific complexity of the input query. Notably,
+a critical step in this process is pre-defining the
+query complexity, which is instrumental in deter-
+mining the most fitting model to it. In this work,
+we operationalize this process with a novel classi-
+fier, which is a smaller model trained to predict the
+complexity level of incoming queries (see Figure 2
+(c)). Moreover, we automatically collect its training
+datasets without human labeling, by leveraging the
+predicted outcomes (i.e., which models accurately
+respond to which queries) as well as by capitalizing
+on the inherent biases in existing datasets (i.e., sam-
+ples in the datasets are designed either for single-
+step or for multi-step QA scenarios). This proposed
+method can offer a robust middle ground among the
+iterative LLM augmentation methods for complex
+queries, single-step methods for simpler queries,
+and even no-retrieval-augmented methods for the
+most straightforward queries (answerable by LLMs
+themselves), thus significantly enhancing the over-
+all efficiency and accuracy, as shown in Figure 1.
+We refer to our framework as Adaptive Retrieval-
+Augmented Generation (Adaptive-RAG).
+We validate Adaptive-RAG using benchmark
+open-domain QA datasets, covering a wide range
+of query complexity from single-hop (Rajpurkar
+et al., 2016; Joshi et al., 2017; Kwiatkowski et al.,
+2019) to multi-hop (Yang et al., 2018; Ho et al.,
+2020; Trivedi et al., 2022b) queries. The exper-
+imental results show that ours significantly im-
+proves the overall accuracy and efficiency, com-
+pared to the prior adaptive strategies, on multiple
+LLMs, such as GPT-3.5 (Brown et al., 2020) and
+FLAN-T5 series (Chung et al., 2022).
+7037

@@ -1,0 +1,58 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+n-doped electron transport layer (ETL) and a highly p-doped hole transport layer (HTL). While some
+drift–diffusion models comprising only electrons and holes continue to be published [5–7], it has repeatedly
+been shown that migration of ion vacancies is not only present in the perovskite layer but vital to
+understanding their operation [8–10]. These simplistic models, which omit ion migration, are incapable of
+replicating the dynamic current–voltage or impedance responses of PSCs [2, 8, 11–14]. The transport layers
+(TLs) are chosen such that light can enter through one of them, either the ETL (standard architecture) [15]
+or the HTL (inverted architecture) [16]. While early drift–diffusion models of PSCs omitted the TLs,
+focusing on the interplay between electronic and ionic conduction in the perovskite layer [8, 17–19], state of
+the art models include an explicit description of all three layers [12, 20–22], enabling a number of studies of
+the important role played by the TLs, and their interplay with the perovskite layer. Such studies have included
+investigations of the role of intrinsic materials properties, such as band alignment, carrier mobility [23] and
+dielectric constants [20], as well as extrinsic properties such as layer thickness [24] and doping densities [20],
+in determining both steady state [23, 24] and transient [20] cell characteristics.
+As with any mathematical model, there are a number of assumptions and approximations that are made
+in the derivation of the drift–diffusion equations (see, e.g. [25]). In particular, and as will be discussed in
+detail in section 2, it is typically assumed that the diffusion coefficient (D) is related to the mobility (µ) via
+the classical Einstein relation (CER):
+qD = µkBT;
+this assumption is equivalent to the assumption that the carrier density is sufficientlylow that the FD
+statistical distribution is well approximated by a Boltzmann distribution (see section 2). When this is not the
+case, the generalised Einstein relation (GER) must be used instead [26, 27]:
+qDn = µnn ∂Efn
+∂n , qDp = −µpp ∂Efp ∂p ,
+in which Efn and Efp are the electron and hole quasi-Fermi levels, respectively. This leads to more complex
+versions of the drift–diffusion equations, the functional forms of which depend on the density of states of the
+material, and which are, in general, no longer analytic. Physically, this results in an enhancement of the
+diffusion coefficient relative to the value from the CER, that increases with the local carrier density [27, 28].
+Additionally, it is often assumed implicitly that the mobilities (µn and µp) do not depend on the carrier
+density. Some studies [29, 30] contradict this but the functional form of the dependence of mobility on
+carrier density is still debated [31]. Henceforth, for simplicity, we treat the mobilities as constants.
+Tessler and Vaynzof have investigated the validity of the Boltzmann approximation in describing
+electronic carriers in the perovskite layer of a PSC, assuming a density of states function derived from a
+parabolic dispersion model, and concluded that, while the approximation is warranted in many scenarios, it
+can lead to appreciable errors in others [2]. However, conditions under which it is valid are likely to be more
+limited for the TLs than the perovskite layer for at least the following three reasons: (i) while the perovskite
+layer is undoped, the TLs tend to be heavily doped in order to increase their equilibrium carrier density (and
+hence also conductivity); (ii) even if the equilibrium carrier density in the bulk of the TL is sufficiently low
+for the Boltzmann approximation to be valid, much higher carrier densities can arise in the regions close to
+the interfaces between layers [20], or when the device is out of equilibrium; and (iii) as will be discussed in
+section 3, the range of carrier densities for which the Boltzmann approximation is valid depends strongly on
+the density of states (DoS) function of the material in question. The physical processes occurring at the
+material interfaces between the perovskite and the TLs have been shown to be highly important in explaining
+the dynamic behaviour of the cell, such as current–voltage hysteresis [32–35] and electrochemical impedance
+spectroscopy (IS) [32]. Point (ii) therefore leads us to conjecture that models based on the Boltzmann
+approximation in the TLs are not always appropriate when investigating the dynamic behaviour of PSCs.
+With reference to point (iii), disordered organic semiconductors, which are often used as one of the TLs in
+PSCs, are best described by a Gaussian DoS [36, 37], which is only accurately approximated by the
+Boltzmann distribution in a far smaller domain than inorganic materials with band structures described by a
+parabolic DoS [38]. The potential inaccuracies arising from the assumption of the CER have also been
+recognised by Abdel et al [39, 40] but only addressed for ion vacancies in the perovskite layer, rather than the
+carriers in the TLs.
+In light of the above discussion, the purpose of this contribution is to investigate the effects of full
+Fermi–Dirac (FD) statistics in drift–diffusion models of PSC devices, with a particular focus on the TLs. We
+note that the three-layer drift–diffusion model is sufficiently complex that it is difficult to predict, without
+the aid of a full numerical solution of the model, exactly how errors associated with employing the
+Boltzmann approximation in one of the TLs might manifest themselves in the predicted device behaviour in
+2

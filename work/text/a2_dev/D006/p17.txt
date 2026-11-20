@@ -1,0 +1,56 @@
+LLM-Confidence Reranker
+0.0-0.10.1-0.20.2-0.30.3-0.40.4-0.50.5-0.60.6-0.70.7-0.80.8-0.90.9-1.0
+0.00
+0.01
+0.02
+NQ
+0.0-0.10.1-0.20.2-0.30.3-0.40.4-0.50.5-0.60.6-0.70.7-0.80.8-0.90.9-1.0
+0.02
+0.04
+0.06
+0.08
+FEVER
+0.0-0.10.1-0.20.2-0.30.3-0.40.4-0.50.5-0.60.6-0.70.7-0.80.8-0.90.9-1.0
+0.06
+0.08
+0.10
+0.12
+DBpedia-Entity
+0.0-0.10.1-0.20.2-0.30.3-0.40.4-0.50.5-0.60.6-0.70.7-0.80.8-0.90.9-1.0
+0.0
+0.1
+0.2
+0.3
+0.4
+Touché
+0.0-0.10.1-0.20.2-0.30.3-0.40.4-0.50.5-0.60.6-0.70.7-0.80.8-0.90.9-1.0
+0.00
+0.02
+0.04
+0.06
+0.08
+SciDocs
+0.0-0.10.1-0.20.2-0.30.3-0.40.4-0.50.5-0.60.6-0.70.7-0.80.8-0.90.9-1.0
+0.0
+0.1
+0.2
+0.3
+NFCorpus
+Confidence Score Bins
+Proportion of Relevant Samples
+Figure 7: Confidence-Relevance Calibration Curve. This figure depicts the relationship between confidence scores (derived
+from MSCP) and document relevance. Each subplot corresponds to a specific dataset, with confidence score bins along the
+x-axis and the proportion of relevant samples along the y-axis. The sizes of scatter points reflect the logarithmic sample
+percentage per bin, enhancing visibility amid varying distributions. Results are obtained using the BM25 retriever and the
+Qwen7B model.
+efficiency,pointwiseindependentscoringforparallelism,andscalability,allwhilemaintainingblack-boxaccessibility
+that enhances its practical utility in real-world deployments.
+Comprehensive evaluations on BEIR and TREC benchmarks reveal consistent NDCG@5 enhancements of up to
+20.6% over baselines, without any degradation. Ablation studies elucidate the influence of key factors, and empirical
+validations affirm the hypothesis that LLM confidence positively correlates with document relevance, furnishing a
+robust theoretical foundation for LCR’s efficacy.
+Bydeliveringstronggeneralization,minimalcomputationaloverhead,andeffectivehallucinationmitigation,LCR
+significantlyadvancesRAGsystems.Futuredirectionsmayexploreadaptivethresholding,multi-LLMensembles,and
+fusions with cutting-edge uncertainty quantification techniques to further elevate retrieval precision and overall RAG
+performance.
+Song et al.: Preprint submitted to Elsevier Page 17 of 21

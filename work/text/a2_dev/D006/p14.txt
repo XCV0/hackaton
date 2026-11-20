@@ -1,0 +1,68 @@
+LLM-Confidence Reranker
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+Query Threshold
+0.049
+0.050
+0.051
+0.052
+0.053
+0.054
+0.055
+0.056
+0.057NDCG@5
+w/o LCR (QT=0)
+(a) Retriever-Only
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+Query Threshold
+0.050
+0.052
+0.054
+0.056NDCG@5
+w/o LCR (QT=0) (b) RankGPT
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+Query Threshold
+0.0831
+0.0832
+0.0833
+0.0834
+0.0835
+0.0836
+0.0837
+0.0838NDCG@5
+w/o LCR (QT=0)
+(c) RankT5
+0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+Query Threshold
+0.0812
+0.0813
+0.0814
+0.0815
+0.0816NDCG@5
+w/o LCR (QT=0) (d) Cross-Encoder
+Figure 3: Query Threshold Impact on NDCG@5 for NaturalQuestions with BM25 Retriever. These plots illustrate the
+impact of varying query threshold (QT) values on performance for different rerankers. The red dashed line indicates the
+baseline without LCR (QT=0).
+ranges from 0.5 to 0.7. Based on the heatmap, optimal configurations involve a high UT (∼0.9) coupled with a low
+LT (∼0.1–0.4). This approach enforces rigorous categorization: high-confidence documents advance to the top only
+under exceptionally strong confidence, low-confidence documents descend to the bottom only when confidence is
+notably weak, and medium-confidence cases preserve their initial positions amid uncertainty, thereby maximizing
+overall ranking effectiveness.
+4.6. Impact of Different Language Models
+Toevaluatetheeffectofvariouslargelanguagemodels(LLMs)ontheperformanceoftheLCRalgorithm,wetested
+four lightweight pre-trained models: Qwen2.5-7B-Instruct (Qwen7B) (A. Yang et al., 2024), Llama3.1-8B-Instruct
+(Llama8B) (Dubey et al., 2024), GLM-4-9B-Chat (GLMChat9B) (Zeng et al., 2024), and InternLM2.5-7B-Chat
+(InternLM7B) (Cai et al., 2024). These models were selected due to their parameter sizes ranging from 7 to 9 billion,
+representing diverse architectures and training corpora, which allows us to assess the generalizability of LCR across
+different LLM families. We employed the MSCP method for confidence quantification. Experiments were conducted
+ontheNaturalQuestionsdataset,employingBM25andContrieverasretrievers,consistentwiththemainexperimental
+setup. As shown in Figure 5, InternLM7B yields the highest NDCG@5 improvements across all configurations, such
+as 24.5% for BM25 + RankGPT and 9.6% for Contriever + RankGPT. GLMChat9B follows closely, while Qwen7B
+showstheleastgains.Theseresultsindicatethatmodelselectionsubstantiallyinfluencesconfidencesignalquality,with
+InternLM7Bprovidingthestrongestsemanticunderstandingforrerankingenhancement.Notably,alltested7–9B-scale
+models consistently yield performance improvements, demonstrating that LCR is robust and generalizes well across
+specific model choices.
+4.7. Impact of Different Confidence Quantification Methods
+To examine the effects of diverse confidence quantification approaches on the LCR algorithm, we performed
+experiments on the NaturalQuestions dataset, utilizing BM25 and Contriever as initial retrievers. We integrated the
+LCR method with both Maximum Semantic Cluster Proportion (MSCP) and Semantic Entropy (SE) (Farquhar et al.,
+Song et al.: Preprint submitted to Elsevier Page 14 of 21

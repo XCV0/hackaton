@@ -1,0 +1,108 @@
+CG-RAG: Research Question Answering by Citation Graph Retrieval-Augmented LLMs Conference acronym ’XX, June 03–05, 2018, Woodstock, NY
+reveal that retrieval-augmented LLMs equipped with CG-RAG out-
+perform state-of-the-art retrieval strategies, significantly enhancing
+the quality of LLM-generated responses.
+The rest of the paper is organized as follows. Section 2 reviews re-
+lated work on retrieval-augmented generation. Section 3 highlights
+key aspects of retrieval-augmented research question answering
+within the context of citation graphs. Section 4 introduces a novel
+formulation that extends beyond the current retrieval paradigm and
+details our proposed retrieval strategy and retrieval-augmented gen-
+eration method. Section 5 presents experimental results, comparing
+our approach with RAG frameworks using various state-of-the-art
+retrieval methods for research question answering. Finally, Section
+6 concludes the paper with key insights.
+2 RELATED WORK
+2.1 Information Retrieval
+Information retrieval (IR) focuses on extracting relevant informa-
+tion from large corpora. Two primary retrieval techniques domi-
+nate the field: sparse retrieval and dense retrieval. Sparse retrieval
+methods, such as TF-IDF [32] and BM25 [31], rely on term-based
+representations to evaluate lexical matches between queries and
+documents. These approaches perform well in scenarios where
+exact term matching is essential, but they struggle with seman-
+tic meaning. In contrast, dense retrieval methods leverage pre-
+trained language models such as BERT [5] to encode queries and
+documents as continuous, low-dimensional embeddings, captur-
+ing semantic similarity through maximum inner product search
+(MIPS) [16, 30, 43, 44]. Dense retrieval effectively overcomes the
+lexical gap, retrieving semantically related results even when query
+terms differ from the document’s terminology. Recently, hybrid
+retrieval techniques have also emerged to combine the strengths
+of sparse and dense methods while addressing their respective
+limitations [25, 26, 29]. By integrating sparse and dense signals,
+these approaches provide a robust solution for retrieving relevant
+information from long and complex documents.
+2.2 Retrieval-Augmented Generation
+Retrieval-Augmented Generation (RAG) is a technique that inte-
+grates external retrieval systems to enhance large language mod-
+els (LLMs) [9, 21, 22]. Unlike traditional LLMs that rely solely on
+pre-trained knowledge, RAG leverages external sources during in-
+ference, enabling more accurate and up-to-date responses. This
+makes RAG particularly effective for specialized tasks, such as
+literature-based question answering [27, 46]. Naturally, current lit-
+erature question-answering systems are predominantly built upon
+RAG frameworks [1, 10, 35, 39], relying mainly on dense retrieval
+combined with LLMs. Literature data, however, is inherently graph-
+structured, where topological information, such as hierarchical
+and citation relationships, plays a crucial role in the retrieval and
+generation processes. As such, most existing literature question
+answering methods fail to incorporate this structural context ef-
+fectively. Recently, GraphRAG [6, 11, 12] was introduced to extend
+RAG to graph-related scenarios, offering the potential to capture
+complex interconnections in literature datasets by leveraging graph-
+based relationships such as hierarchical and citation structures. In
+our study, we focus on leveraging graph context to enhance the
+retrieval and generation processes in literature question answering.
+3 RESEARCH QUESTION ANSWERING
+Citation Graph. A citation Graph, G = (𝑉,𝐸,{𝑑𝑣}𝑣∈𝑉), consists
+of a node set 𝑉 and an edge set 𝐸, where each node 𝑣 ∈ 𝑉 is
+associated with natural language attributes in a paper. These papers,
+represented by D = {𝑑𝑣}𝑣∈𝑉 , include textual information such as
+abstracts, sections, and other relevant content.
+Research Question Answering. Given a query 𝑞 over the ci-
+tation graph G, the objective of research question answering is to
+generate an appropriate answer by leveraging the relevant infor-
+mation retrieved from G. Formally, this objective is defined as:
+𝑝𝜃(𝑌|𝑞,G) = arg max 𝜃
+𝑛Ö
+𝑖=1
+𝑝𝜃(𝑦𝑖|𝑦<𝑖,𝑞,G), (1)
+where 𝜃 represents the parameters of the generative language
+model, 𝑌 = {𝑦𝑖}𝑛 𝑖=1 is the generated answer sequence, and 𝑦<𝑖
+denotes the prefix tokens of the sequence up to position 𝑖− 1.
+The quality of the generated answer is highly dependent on
+the effectiveness of the retrieval process within the citation graph.
+Let 𝑓𝑜 denote the relevance scoring function for a retrieval system
+𝑜. Recent advances in graph-based retrieval leverage structural
+information, formalized as:
+𝑓graph : 𝑔(𝑓dense)→ R, (2)
+where 𝑔(·) encodes topological information. These methods pri-
+marily rely on dense representations, which often fail to capture
+sparse lexical matches—essential in citation graphs for identifying
+exact cross-references and key terms critical to retrieval accuracy.
+Thus, integrating sparse and dense retrieval is essential. Existing
+hybrid retrieval systems combine these signals via post-retrieval
+fusion: 𝑓hybrid : 𝑓sparse
+É 𝑓dense → R, where É denotes opera-
+tions such as score fusion. Treating documents as isolated entities,
+however, limits their effectiveness in structured databases such as
+citation graphs. Designing a retrieval system that is both lexically
+and semantically aware in graph retrieval remains an unresolved
+challenge.
+4 METHODOLOGY
+4.1 Overview
+To overcome these limitations, we propose Contextualized Graph
+Retrieval-Augmented Generation (CG-RAG), introducing a novel re-
+trieval method called Lexical-Semantic Graph Retrieval (LeSeGR),
+which integrates discrete sparse signals and continuous dense sig-
+nals in a manner that respects the graph topology. Formally, the
+paradigm is defined as:
+𝑓entangled : 𝑔(𝑓sparse
+Ì
+𝑓dense)→ R, (3)
+where 𝑔(·) is a graph encoder that incorporates structured con-
+text during retrieval, and ∯ represents the entangled fusion of
+sparse and dense signals. The transition to 𝑓entangled offers greater
+generality and capabilities, but requires addressing fundamental
+challenges:

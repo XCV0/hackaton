@@ -1,0 +1,140 @@
+ligands and sintering promoters, Zhang et al. created an ink
+that was solution-processed and annealed into a polycrystalline
+CdTe absorber layer without the need for an additional
+chemical bath treatment.32 However, the NC ink lacked long-
+term colloidal stability and did not allow for quantitative
+control on the amount of sintering agent in the ink.
+Furthermore, virtually all the studies on sintered CdTe NCs
+have utilized direct conductive heating using a hotplate, which
+is also not R2R-friendly.
+Here, we systematically explore R2R-friendly techniques for
+the deposition and sintering of CdTe NCs based on recent
+advances in NC surface ligand chemistry,32−34 grain growth of
+NC solids,35,36 and device interfaces.29,30 We ﬁrst independ-
+ently introduce each R2R-friendly modiﬁcation to the standard
+procedure that involves spin-coating pyridine-capped CdTe
+NCs, soaking in a CdCl2 bath, and annealing on a hot plate.
+For each modiﬁcation, we fabricated full device stacks so that
+its impact on the solar cell performance can be unambiguously
+determined. Spray-coating and doctor-blading techniques were
+demonstrated to be viable alternatives to spin-coating for the
+fabrication of CdTe solar cells, with only slight reductions in
+PCEs. These variabilities were rationalized based on the
+diﬀerent grain morphologies produced by the diﬀerent
+techniques. We also built upon the CdCl3 −-capped CdTe
+NCs introduced by Zhang et al.32 and developed a bath-free
+method to quantitatively control the amount of the CdCl3 −
+sintering agent in our ﬁlms, which allowed for controllable
+sintering and grain growth of the NCs. Also, infrared (IR)
+heating was explored as a method for eﬃcient and R2R-
+friendly sintering of CdTe NCs. Finally, we showed that these
+modiﬁcations can be seamlessly integrated to produce a
+completely R2R-friendly fabrication of the CdTe layer,
+producing solar cells that perform comparably to those made
+with non-R2R-friendly techniques.
+2. EXPERIMENTAL SECTION
+2.1. CdTe NC Ink Preparation. 2.1.1. Oleate-Capped CdTe NC
+Synthesis. CdTe NCs capped with oleate were synthesized with a
+modiﬁed method described by MacDonald et al.17,30 In short, 4.80 g
+of CdO, 42.4 g of recrystallized OA, and 40.0 g of recrystallized ODE
+were charged in a 500 mL ﬂask and evacuated overnight to remove
+trace oxygen. The ﬂask was heated to 80 °C until the pressure
+equilibrated. Under dry nitrogen, the mixture was heated to 220 °C
+until the solution turned clear, indicating a completed reaction. The
+ﬂask was cooled to <90 °C and evacuated. The ﬂask was heated to
+110° once the solution stopped bubbling and left until the pressure
+equilibrated. Under dry nitrogen, the ﬂask was heated to 270 °C and
+24 mL of 10 wt % TBP:Te was injected. The heating mantle was
+removed immediately and the ﬂask was allowed to air cool to <50 °C.
+The resulting CdTe NC solution was split evenly and puriﬁed using
+anhydrous toluene and ethanol as the solvent/non-solvent combina-
+tion.
+2.1.2. Pyridine Ligand Exchange and Pyridine-Capped CdTe NC
+Ink. Following 4−6 puriﬁcation cycles, CdTe NCs were redispersed in
+anhydrous pyridine at a concentration of ∼80 mg/mL. The solution
+was stirred under N2 overnight on a hotplate set to 100 °C, followed
+by precipitation using hexane. The CdTe NC precipitates were
+redispersed in fresh pyridine to prepare the pyridine-capped CdTe
+NC stock solution. The stock pyridine-capped CdTe NC solution was
+precipitated by hexane and dissolved in a 1:1 mixture of pyridine and
+1-PA to the desired concentration. The solution was sonicated for 10
+min and ﬁltered through a 0.2 μm polytetraﬂuoroethylene (PTFE)
+syringe ﬁlter to prepare the spin-coating solution.
+2.1.3. pyr-CdCl3 Ligand Exchange. The procedure was adapted
+from a process established previously by Zhang et al.32 In short,
+trichlorocadmates (CdCl3 −) anions with pyridinium (pyr-H+) cations
+were synthesized by mixing equimolar amounts of CdCl2 and pyr·HCl
+in NMF (0.1 M). In a typical ligand exchange, 18 mL of oleate-capped
+CdTe NC (Section 2.1.1) solution in hexane (∼30 mg/mL) was
+mixed with 18 mL of CdCl3 − solution in NMF (0.1 M). Under
+vigorous stirring, NCs gradually transferred from hexane to NMF.
+Upon phase transfer, the bottom phase containing CdTe NCs was
+then rinsed with fresh hexane three times.
+2.1.3.1. pyr-CdCl3-Capped CdTe NC Ink without Proper
+Washing.32 Following the CdCl3 − ligand exchange (Section 2.1.3),
+a mixture of toluene (6 mL) and HMPA (3 mL) was added, leading
+to the ﬂocculation of NCs in solution. The NC precipitates were
+collected by centrifugation and re-dispersed in 5 mL of pyridine. The
+solution of CdCl3 −-capped CdTe NCs in pyridine was vigorously
+stirred for ∼2 h in air, followed by centrifugation to remove the
+insoluble part. An equal amount of 1-PA was added to the NC
+solution in pyridine to make the “poorly-washed” ink.
+2.1.3.2. pyr-CdCl3-Capped CdTe NC Ink with Proper Washing
+Followed by the Addition of Extra pyr-CdCl3. Following CdCl3 −
+ligand exchange (Section 2.1.3), the NCs were precipitated with the
+same non-solvent mixture outlined previously (Section 2.1.3.1).
+However, instead of re-dispersing in pyridine, the NCs were dissolved
+in NMF (∼18 mL). The same precipitation and re-dispersing
+procedure were repeated. Following a third precipitation, the NCs
+were re-dispersed in 2.5 mL of pyridine and stirred vigorously. The
+solution was ﬁltered with a 0.45 μm PTFE syringe ﬁlter to remove
+insoluble NCs. For simplicity, the resulting solution is referred to as
+the “CdTe−pyr-CdCl3” ink. Additional pyr-·HCdCl3 ligand solution
+in pyridine was added to the NC solution in varying amounts to
+replenish the Cl necessary for grain growth.
+2.2. CdTe Absorber Layer Deposition and Treatments.
+2.2.1. Substrate Preparation. In detail, 25 mm × 25 mm ITO-coated
+glass substrates (Thin Film Devices Inc.) were cleaned by sequential
+sonication in deionized (DI) water and Alconox detergent, DI,
+acetone, isopropyl alcohol (IPA), and DI. Afterward, the substrates
+were dried under N2 and hydrophilized for 10 min using a Harrick
+PDC-001 Extended Plasma Cleaner.
+2.2.2. Deposition of the CdTe NC Ink. 2.2.2.1. Spin-Coating. The
+CdTe NC inks outlined previously (Sections 2.1.2, 2.1.3.1, and
+2.1.3.2) were spin-coated using the following procedure. Onto the
+freshly plasma-treated (Section 2.3.1) ITO substrates, the CdTe NC
+ink was pipetted (∼250 μL) onto the substrate and spun at 800 rpm
+for 30 s followed by 2000 rpm for 10 s. The substrate was transferred
+to a hot plate and dried at 150 °C for 2 min.
+2.2.2.2. Spray-Coating. The CdTe NC ink outlined previously
+(Sections 2.1.2, 2.1.3.1, and 2.1.3.2) was diluted with methanol by 5
+parts methanol to 1 part NC solution. The layer thickness was
+controlled by changing the NC concentration in 1:1 pyridine/1-PA. A
+homemade spray-coating system was built by using a hot plate and a
+Paasche airbrush set to 45° to create a thinner wetting layer. The ink
+was loaded into the airbrush and sprayed brieﬂy to wet the surface.
+The spray was controlled by solenoid valves attached to a power
+supply. The substrate was heated to 38 °C to facilitate drying. The
+spray-coating system was upgraded by making a metal turntable
+heated to 38 °C to move the substrates through the spray and process
+multiple substrates at a time. The spray nozzle was upgraded to a
+VMAU-316SS spraying assembly from Spraying Systems Co. to more
+easily adjust the spray parameters. Upon deposition, the substrate was
+dried at 150 °C for 2 min.
+2.2.2.3. Doctor-Blading. The same ink preparation procedure
+outlined for spray-coating (Section 2.2.2.2) was used. An Al block was
+heated on a hot plate to 40 °C to facilitate smooth deposition. Glass
+slides were placed on the block to act as height guides. A small
+amount of the NC solution (∼75 μL) was pipetted onto the substrate
+and a glass rod was used to smooth the ﬁlm by moving back and forth.
+The excess was wicked away by sweeping the rod onto the glass slides.
+Upon deposition, the substrate was dried at 150 °C for 2 min.
+2.2.3. Chemical and Thermal Treatment. 2.2.3.1. CdCl2 Bath and
+Annealing for CdTe/Pyridine. For the CdCl2 treatment, the substrate
+was cooled in air and was dipped into a saturated CdCl2 bath in
+methanol at ∼60 °C for 15 s, thoroughly rinsed with IPA, and dried
+ACS Applied Materials & Interfaces www.acsami.org Research Article
+https://doi.org/10.1021/acsami.1c08325
+ACS Appl. Mater. Interfaces 2021, 13, 44165−44173
+44166
+Downloaded from pubs.​acs.​org/​aamick/​article-pdf/​13/​37/​44165/​9330414/​am1c08325.​pdf by guest on 19 November 2026

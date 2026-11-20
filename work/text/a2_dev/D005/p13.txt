@@ -1,0 +1,37 @@
+F.2 Results
+As shown in Table 6, our proposed method
+demonstrates significant factuality gains across all
+datasets, with the exception of DBPedia for which
+we see a marginal regression. Notably, we ob-
+serve a substantial reduction in hallucination rates
+across all four datasets. These findings suggest that
+the proposed approach can effectively enhance a
+model’s factuality capabilities and generalization to
+even in closed-book settings, despite being trained
+on samples that utilize search documents.
+Model CRAGa (closed-book)
+Acc (Rec) Miss. Hall. Fac.
+Baseline 58.7 15.6 25.7 33.0
+This Work 55.3 22.6 22.1 33.2
+Model SimpleQA (closed-book)
+Acc (Rec) Miss. Hall. Fac.
+Baseline 20.0 44.1 35.9 -15.8
+This Work 14.0 64.0 22.0 -8.0
+Model IMDB (closed-book)
+Acc (Rec) Miss. Hall. Fac.
+Baseline 44.8 34.2 21.0 23.8
+This Work 40.7 47.7 11.7 29.0
+Model DBpedia (closed-book)
+Acc (Rec) Miss. Hall. Fac.
+Baseline 52.0 22.0 26.0 26.0
+This Work 41.0 43.0 16.0 25.0
+a CRAG benchmark here is different from the main
+text as reference documents are omitted for the
+close-book task.
+Table 6: Closed-book factuality benchmark results.
+G Prompts
+G.1 Synthetic QA Generation
+G.2 Vanilla RAG QA CoT Prompt
+G.3 Thought Evaluation Prompt
+G.4 Answer Evaluation Prompt
+787

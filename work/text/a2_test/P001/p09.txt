@@ -1,0 +1,114 @@
+REFERENCES
+[1] T. Ajayi, V. A. Chhabria, M. Fogaça, S. Hashemi, A. Hosny, A. B. Kahng, M. Kim,
+J. Lee, U. Mallappa, M. Neseem et al., “Toward an open-source digital flow: First
+learnings from the openroad project,” 2019, pp. 1–4.
+[2] X. Li, S. Tao, Z. Huang, S. Chen, Z. Zeng, L. Ni, Z. Huang, C. Zhuang, H. Wu,
+W. Li et al., “ieda: An open-source intelligent physical implementation toolkit
+and library,” 2023.
+[3] K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, “Bleu: a method for automatic
+evaluation of machine translation.”
+[4] C.-Y. Lin, “ROUGE: A Package for Automatic Evaluation of Summaries,” in
+Workshop on Text Summarization Branches Out, 2004, pp. 74–81.
+[5] M. Zhong, Y. Liu, D. Yin, Y. Mao, Y. Jiao, P. Liu, C. Zhu, H. Ji, and J. Han, “Towards
+a Unified Multi-Dimensional Evaluator for Text Generation,” 2022, pp. 2023–2038.
+[6] V. Karpukhin, B. Oğuz, S. Min, P. Lewis, L. Wu, S. Edunov, D. Chen, and W.-t.
+Yih, “Dense passage retrieval for open-domain question answering,” 2020.
+[7] S. Xiao, Z. Liu, P. Zhang, and N. Muennighof, “C-pack: Packaged resources to
+advance general chinese embedding,” 2023.
+[8] J. Chen, S. Xiao, P. Zhang, K. Luo, D. Lian, and Z. Liu, “Bge m3-embedding:
+Multi-lingual, multi-functionality, multi-granularity text embeddings through
+self-knowledge distillation,” 2024.
+[9] T. Gao, X. Yao, and D. Chen, “Simcse: Simple contrastive learning of sentence
+embeddings,” 2021.
+[10] J. Zhang, Z. Lan, and J. He, “Contrastive learning of sentence embeddings from
+scratch,” 2023.
+[11] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal, H. Küttler,
+M. Lewis, W.-t. Yih, T. Rocktäschel et al., “Retrieval-augmented generation for
+knowledge-intensive nlp tasks,” vol. 33, pp. 9459–9474, 2020.
+[12] F. Cuconasu, G. Trappolini, F. Siciliano, S. Filice, C. Campagnano, Y. Maarek,
+N. Tonellotto, and F. Silvestri, “The power of noise: Redefining retrieval for rag
+systems,” 2024.
+[13] S. Bruch, S. Gai, and A. Ingber, “An analysis of fusion functions for hybrid
+retrieval,” ACM Transactions on Information Systems, vol. 42, no. 1, pp. 1–35, 2023.
+[14] G. V. Cormack, C. L. Clarke, and S. Buettcher, “Reciprocal rank fusion outperforms
+condorcet and individual rank learning methods,” 2009, pp. 758–759.
+[15] L. Gao, X. Ma, J. Lin, and J. Callan, “Precise zero-shot dense retrieval without
+relevance labels,” 2022.
+[16] H. Jiang, Q. Wu, C.-Y. Lin, Y. Yang, and L. Qiu, “LLMLingua: Compressing prompts
+for accelerated inference of large language models,” 2023.
+[17] H. Jiang, Q. Wu, , X. Luo, D. Li, C.-Y. Lin, Y. Yang, and L. Qiu, “LongLLMLin-
+gua: Accelerating and enhancing llms in long context scenarios via prompt
+compression,” 2023.
+[18] Z. Pan, Q. Wu, H. Jiang, M. Xia, X. Luo, J. Zhang, Q. Lin, V. Ruhle, Y. Yang,
+C.-Y. Lin, H. V. Zhao, L. Qiu, and D. Zhang, “LLMLingua-2: Data distillation for
+efficient and faithful task-agnostic prompt compression,” 2024.
+[19] Z. Shao, Y. Gong, Y. Shen, M. Huang, N. Duan, and W. Chen, “Enhancing retrieval-
+augmented large language models with iterative retrieval-generation synergy,”
+2023.
+[20] L. Lavagno, I. L. Markov, G. Martin, and L. K. Scheffer, Electronic design automation
+for IC implementation, circuit design, and process technology: circuit design, and
+process technology. CRC Press, 2016.
+[21] C. J. Alpert, D. P. Mehta, and S. S. Sapatnekar, Handbook of algorithms for physical
+design automation. CRC press, 2008.
+[22] A. Conneau, K. Khandelwal, N. Goyal, V. Chaudhary, G. Wenzek, F. Guzmán,
+E. Grave, M. Ott, L. Zettlemoyer, and V. Stoyanov, “Unsupervised cross-lingual
+representation learning at scale,” 2019.
+[23] J. Bai, S. Bai, Y. Chu, Z. Cui, K. Dang, X. Deng, Y. Fan, W. Ge, Y. Han, F. Huang
+et al., “Qwen technical report,” 2023.
+[24] H. Touvron, L. Martin, K. Stone, P. Albert, A. Almahairi, Y. Babaei, N. Bashlykov,
+S. Batra, P. Bhargava, S. Bhosale et al., “Llama 2: Open foundation and fine-tuned
+chat models,” 2023.
+[25] A. Yang, B. Xiao, B. Wang, B. Zhang, C. Bian, C. Yin, C. Lv, D. Pan, D. Wang,
+D. Yan et al., “Baichuan 2: Open large-scale language models,” 2023.
+[26] Z. Cai, M. Cao, H. Chen, K. Chen, K. Chen, X. Chen, X. Chen, Z. Chen, Z. Chen,
+P. Chu et al., “Internlm2 technical report,” 2024.
+[27] J. Achiam, S. Adler, S. Agarwal, L. Ahmad, I. Akkaya, F. L. Aleman, D. Almeida,
+J. Altenschmidt, S. Altman, S. Anadkat et al., “Gpt-4 technical report,” 2023.
+[28] T. Dettmers, A. Pagnoni, A. Holtzman, and L. Zettlemoyer, “Qlora: Efficient
+finetuning of quantized llms,” 2024.
+[29] M. Douze, A. Guzhva, C. Deng, J. Johnson, G. Szilvasy, P.-E. Mazaré, M. Lomeli,
+L. Hosseini, and H. Jégou, “The faiss library,” 2024.
+[30] Z. He, H. Wu, X. Zhang, X. Yao, S. Zheng, H. Zheng, and B. Yu, “Chateda: A large
+language model powered autonomous agent for eda,” 2023, pp. 1–6.
+[31] H. Wu, Z. He, X. Zhang, X. Yao, S. Zheng, H. Zheng, and B. Yu, “Chateda: A large
+language model powered autonomous agent for eda,” 2024.
+[32] M. Liu, T.-D. Ene, R. Kirby, C. Cheng, N. Pinckney, R. Liang, J. Alben, H. Anand,
+S. Banerjee, I. Bayraktaroglu et al., “Chipnemo: Domain-adapted llms for chip
+design,” 2023.
+[33] K. Chang, Y. Wang, H. Ren, M. Wang, S. Liang, Y. Han, H. Li, and X. Li, “Chipgpt:
+How far are we from natural language hardware design,” 2023.
+[34] M. Liu, N. Pinckney, B. Khailany, and H. Ren, “Verilogeval: Evaluating large
+language models for verilog code generation.” IEEE, 2023, pp. 1–8.
+[35] Y. Fu, Y. Zhang, Z. Yu, S. Li, Z. Ye, C. Li, C. Wan, and Y. C. Lin, “Gpt4aigchip:
+Towards next-generation ai accelerator design automation via large language
+models.” IEEE, 2023, pp. 1–9.
+[36] J. Blocklove, S. Garg, R. Karri, and H. Pearce, “Chip-chat: Challenges and oppor-
+tunities in conversational hardware design.” IEEE, 2023, pp. 1–6.
+[37] S. Thakur, J. Blocklove, H. Pearce, B. Tan, S. Garg, and R. Karri, “Autochip:
+Automating hdl generation using llm feedback,” 2023.
+[38] Y. Lu, S. Liu, Q. Zhang, and Z. Xie, “Rtllm: An open-source benchmark for design
+rtl generation with large language model.” IEEE, 2024, pp. 722–727.
+[39] S. Thakur, B. Ahmad, Z. Fan, H. Pearce, B. Tan, R. Karri, B. Dolan-Gavitt, and
+S. Garg, “Benchmarking large language models for automated verilog rtl code
+generation.” IEEE, 2023, pp. 1–6.
+[40] S. Thakur, B. Ahmad, H. Pearce, B. Tan, B. Dolan-Gavitt, R. Karri, and S. Garg,
+“Verigen: A large language model for verilog code generation,” 2023.
+[41] Z. Pei, H.-L. Zhen, M. Yuan, Y. Huang, and B. Yu, “BetterV: Controlled Verilog
+Generation with Discriminative Guidance,” 2024.
+[42] Y. Tsai, M. Liu, and H. Ren, “Rtlfixer: Automatically fixing rtl syntax errors with
+large language models,” 2023.
+[43] M. Orenes-Vera, A. Manocha, D. Wentzlaff, and M. Martonosi, “Autosva: De-
+mocratizing formal verification of rtl module interactions.” IEEE, 2021, pp.
+535–540.
+[44] R. Kande, H. Pearce, B. Tan, B. Dolan-Gavitt, S. Thakur, R. Karri, and J. Rajendran,
+“Llm-assisted generation of hardware assertions,” 2023.
+[45] X. Meng, A. Srivastava, A. Arunachalam, A. Ray, P. H. Silva, R. Psiakis, Y. Makris,
+and K. Basu, “Unlocking hardware security assurance: The potential of llms,”
+2023.
+[46] S. Paria, A. Dasgupta, and S. Bhunia, “Divas: An llm-based end-to-end framework
+for soc security analysis and policy-based protection,” 2023.
+[47] B. Ahmad, S. Thakur, B. Tan, R. Karri, and H. Pearce, “Fixing hardware security
+bugs with large language models,” 2023.
+[48] X. Yao, H. Li, T. H. Chan, W. Xiao, M. Yuan, Y. Huang, L. Chen, and B. Yu,
+“Hdldebugger: Streamlining hdl debugging with large language models,” 2024.
+9

@@ -1,0 +1,95 @@
+Table 3: Performance of the LLMs as generators on ORD-QA.
+Model Type ORD-QA#functionality ORD-QA#vlsi-flow ORD-QA#gui & install & test ORD-QA#all BLEU ROUGE-L UniEval BLEU ROUGE-L UniEval BLEU ROUGE-L UniEval BLEU ROUGE-L UniEval
+GPT-4 [27] 0.116 0.257 0.724 0.149 0.268 0.759 0.184 0.328 0.798 0.141 0.277 0.751
+Qwen1.5-14B-Chat [23] 0.077 0.189 0.604 0.099 0.175 0.513 0.127 0.272 0.739 0.095 0.206 0.615
+llama-2-13B-chat [24] 0.099 0.224 0.694 0.110 0.214 0.654 0.125 0.250 0.678 0.108 0.228 0.680
+Baichuan2-13B-Chat [25] 0.089 0.244 0.743 0.073 0.260 0.781 0.092 0.281 0.740 0.086 0.257 0.751
+RAG-EDA-generator (ours) 0.150 0.319 0.788 0.188 0.326 0.798 0.224 0.374 0.809 0.177 0.334 0.795
+Table 4: Performance of the RAG flows on ORD-QA.
+RAG Flow ORD-QA#functionality ORD-QA#vlsi-flow ORD-QA#gui & install & test ORD-QA#all BLEU ROUGE-L UniEval BLEU ROUGE-L UniEval BLEU ROUGE-L UniEval BLEU ROUGE-L UniEval
+Vanilla-RAG [11] 0.088 0.204 0.635 0.089 0.206 0.669 0.139 0.258 0.726 0.101 0.217 0.665
+RAG-fusion [13, 14] 0.080 0.193 0.624 0.088 0.202 0.681 0.150 0.274 0.698 0.099 0.215 0.656
+HyDE [15] 0.080 0.188 0.603 0.075 0.185 0.658 0.130 0.255 0.712 0.091 0.204 0.643
+llmlingua [16–18] 0.056 0.179 0.565 0.048 0.162 0.586 0.091 0.221 0.658 0.062 0.185 0.593
+ITER-RETGEN [19] 0.098 0.208 0.652 0.089 0.202 0.632 0.136 0.251 0.700 0.105 0.217 0.659
+RAG-EDA+GPT-4 0.101 0.230 0.681 0.116 0.234 0.690 0.178 0.299 0.742 0.123 0.248 0.698
+RAG-EDA (ours) 0.119 0.281 0.699 0.147 0.269 0.746 0.166 0.302 0.776 0.137 0.283 0.729
+Table 5: Performance of the RAG flows on QA dataset of the
+commercial EDA tool.
+RAG Flow BLEU ROUGE-L UniEval
+Vanilla-RAG [11] 0.072 0.182 0.569
+RAG-fusion [13, 14] 0.157 0.275 0.663
+HyDE [15] 0.131 0.258 0.643
+llmlingua [16–18] 0.078 0.216 0.553
+ITER-RETGEN [19] 0.163 0.283 0.676
+RAG-EDA+GPT-4 0.179 0.290 0.624
+RAG-EDA (ours) 0.176 0.332 0.730
+between the ground-truth answers (provided in ORD-QA) and the
+generated answers by the RAG flow. It is observed that compared
+with the question categories of functionality and vlsi-flow, the GUI
+& install & test questions are easier to solve in nature, on which
+all the RAG flows achieve better performance. Our proposed RAG
+flow (RAG-EDA) achieves the best performance on all categories
+of questions, and the baseline "RAG-EDA+GPT-4" (replacing the
+generator with GPT-4 in our proposed flow) ranks second, demon-
+strating effectiveness of our proposed RAG flow and fine-tuned
+generator in solving documentation QA for EDA tools. The per-
+formances of RAG-fusion, HyDE and ITER-RETGEN are similar
+and worse than our customized flow, indicating the necessity of
+RAG flow customization for EDA tool documentation QA. The re-
+sult of Llmlingua is the worst, the reason is that the compression
+LLM of Llmlingua demonstrates inferior performance on handling
+EDA-tool related questions and documents. After the process of
+prompt compression, the key information in both the question and
+the documents are missing, leading to bad quality for answering.
+Figure 9 shows the runtime analysis of RAG-EDA and the base-
+line RAG flows on the ORD-QA benchmark. Llmlingua achieves
+the shortest average runtime, attributed to its use of compressed
+prompts which reduces the inference latency of the generator.
+Vanilla-RAG has the second shortest runtime due to its straightfor-
+ward retrieval process. The runtimes of RAG-EDA, RAG-EDA+GPT4
+and RAG-fusion are similar, and the inference runtime of GPT-4
+is slightly faster than our finetuned generator. HyDE and ITER-
+RETGEN take the longest runtime. HyDE increases the generator’s
+0 2 4 6 8 10 12 14
+Vanilla-RAG
+RAG-fusion
+HyDE
+Llmlingua
+ITER-RETGEN
+RAG-EDA+GPT4
+RAG-EDA (ours)
+6.8
+8.21
+12.61
+5.78
+14.2
+8.26
+9.2
+Runtime (s)
+Figure 9: The average runtime of the RAG flows to process
+one question in ORD-QA.
+inference load by appending a hypothetical document to the query
+as a prompt, whereas ITER-RETGEN operates in an iterative man-
+ner, leading to higher computational costs.
+To further verify the transferability and universality of our pro-
+posed RAG flow for different EDA tools, we collect a documentation
+QA evaluation dataset for a commercial EDA tool (the tool is a plat-
+form for timing ECO). The dataset follows the same standard as
+ORD-QA and contains 60 question-documents-answer triplets. Ex-
+perimental results in Table 5 shows the outperformance of our
+proposed RAG flow compared with the baselines, thus certifies that
+our proposed RAG flow can be transferred to the task of documen-
+tation QA for different EDA tools.
+6 CONCLUSION
+We propose RAG-EDA, a customized retrieval augmented genera-
+tion (RAG) flow for electronic design automation (EDA) tool docu-
+mentation question-answering (QA). We develop domain-specific
+training strategies and use EDA-related corpus to customize the text
+embedding, reranker and generator models for RAG-EDA. Besides,
+we also develop and release ORD-QA, a documentation QA eval-
+uation benchmark based on OpenROAD. RAG-EDA has achieved
+much better performance on both ORD-QA and a commercial EDA
+tool documentation QA benchmark compared with other state-of-
+the-arts.
+8

@@ -1,0 +1,112 @@
+Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Yuntong et al.
+Table 3: Evaluation of the retrieval effectiveness on the cita-
+tion graph of PubMed (PubMedQA). The best performance is
+highlighted in BOLD, while the second-best performance is
+underlined.
+Category Method Hit@1 Hit@3
+Sparse
+BM25 0.835 0.912
+Doc2Query 0.832 0.930
+BGE-M3 0.915 0.960
+Dense
+MiniLM 0.887 0.945
+LaBSE 0.305 0.471
+mContriever 0.472 0.496
+E5 0.231 0.355
+SPAR 0.256 0.385
+Hybrid
+Score Fusion 0.829 0.925
+ColBERT 0.913 0.968
+CLEAR 0.470 0.612
+LeSeGR (Ours) 0.961 0.987
+bridging sparse and dense retrieval with graph-based contextu-
+alization, thereby advancing the retrieval-augmented generation
+process to new levels of effectiveness.
+Table 3 demonstrates that LeSeGR significantly outperforms all
+baselines in the retrieval phase, including sparse, dense, and hybrid
+approaches. Our method achieves superior retrieval accuracy by
+effectively entangling sparse and dense signals within the graph
+structure, allowing contextual information to enhance relevance
+scoring. Unlike post-retrieval fusion methods, such as ScoreFusion,
+which combine sparse and dense signals after separate retrieval
+processes, our approach dynamically integrates these signals dur-
+ing retrieval, leading to more coherent and effective utilization of
+both lexical and semantic information. Furthermore, while Col-
+BERT performs token-level interactions for fine-grained relevance,
+it operates at the query-document level without fully leveraging
+the structural relationships present in citation graphs. In contrast,
+our method extends relevance computation to the graph structure,
+propagating and aggregating signals across related chunks to cap-
+ture multi-hop and relational dependencies. This deeper integration
+of graph context and entangled sparse-dense signals enables our
+method to outperform ColBERT, achieving the highest Hit@1 and
+Hit@3 scores.
+5.3 Efficiency Analysis
+As shown in Table 4, LeSeGR demonstrates competitive retrieval
+efficiency on the citation graph of arXiv (PapersWithCodeQA). It
+strikes a balance between memory usage and latency, leveraging
+GPU computation effectively. LeSeGR achieves faster query latency
+(403.94 ms) compared to ColBERT (561.91 ms) while maintaining
+a moderate GPU memory footprint (1,921 MB). In contrast, Score-
+Fusion exhibits high CPU memory usage (5,655 MB) and slower
+query speeds, whereas LeSeGR optimizes GPU utilization by inte-
+grating both sparse and dense retrieval signals into the message
+passing process of the graph encoder. Additionally, LeSeGR outper-
+forms CLEAR in query speed while maintaining similar memory
+usage. These results highlight LeSeGR’s efficiency and scalability
+for large-scale graph-based retrieval tasks without compromising
+effectiveness.
+Table 4: Evaluation of the retrieval efficiency on the citation
+graph of arXiv (PapersWithCodeQA).
+Method CPU & GPU Memory Indexing & Query Latency
+(MB) (MB) (ms) (ms)
+Score Fusion 5,655 770 43.94 1,580.14
+ColBERT 0 12,674 12.40 561.91
+CLEAR 0 1,538 205.36 16.07
+LeSeGR 0 1,921 19.22 403.94
+5.4 Ablation Studies
+The ablation studies performed for each influential factor in LeSeGR
+is shown in Table 5. In this experiment, we evaluate LeSeGR on the
+citation graph of PubMed, which contains 7,849 papers. Our main
+observations are as follows:
+Table 5: Ablation studies on PubMedQA. The default settings
+of LeSeGR are marked with *.
+Factor Setting Hit@1 Hit@3
+Graph
+Encoder
+GAT 0.939 0.968
+GCN 0.955 0.976
+Graph Transformer∗ 0.961 0.987
+Top-𝑛
+Context
+2 0.931 0.949
+8 0.950 0.984
+4∗ 0.961 0.987
+Sparse
+Signal
+TF-IDF 0.903 0.962
+BM25 0.919 0.962
+Doc2Query 0.926 0.964
+BGE-M3∗ 0.961 0.987
+Dense
+Signal
+E5 0.676 0.765
+mContriever 0.838 0.883
+MiniLM∗ 0.961 0.987
+• Graph Encoder. Among Graph Attention Networks (GAT)
+[37], Graph Convolutional Networks (GCN) [18], and Graph
+Transformer [33], Graph Transformer achieves the highest Hit@1
+and Hit@3 scores of 0.961 and 0.987, respectively. Notably, regard-
+less of which graph encoder is employed, our LeSeGR method
+still consistently achieves the best retrieval performance when
+compared to the baselines in Table 3. This underscores LeSeGR’s
+superior ability to model complex relationships and effectively
+aggregate contextual information for retrieval.
+• Top-𝑛 Context. We further assess three configurations for the
+number of contexts connected via inter-document edges, i.e.,
+Top-𝑛. The 𝑛 = 4 setting achieves the best results, striking a bal-
+ance between sufficient contextual inclusion and noise reduction.
+Smaller values, such as 𝑛 = 2, restrict the scope of context, while
+larger values, such as 𝑛 = 8, may introduce irrelevant informa-
+tion, diluting the positive impact of relevant context and reducing
+retrieval effectiveness. It is anticipated that if the chunk length

@@ -1,0 +1,103 @@
+Input Knowledge KP KR KF1 R-L F1
+GPT-4o-mini
+No knowledge 0 0 0 0.110 0.200 (± .005)
+Full knowledge 0.015 1 0.031 0.140 0.251 (± .006)
+Gold knowledge 1 1 1 0.167 0.276 (± .007)
+LLaMA 3.1 8B
+No knowledge 0 0 0 0.111 0.216 (± 0.005)
+Full knowledge 0.015 1 0.031 0.138 0.248 (± .005)
+Gold knowledge 1 1 1 0.164 0.278 (± .008)
+Mistral 7B Instruct
+No knowledge 0 0 0 0.113 0.203 (± .005)
+Full knowledge 0 1 0 0.131 0.233 (± .005)
+Gold knowledge 1 1 1 0.172 0.268 (± .007)
+Table 1: WoW response generation performance bench-
+marked by different LLM generators. We measure
+knowledge precision (KP), recall (KR), and F1 (KF1);
+response ROUGE-L F1 (R-L); and response F1 (and its
+standard error mean).
+Input Knowledge KP KR KF1 EM F1
+GPT-4o-mini
+No knowledge 0 0 0 0.330 0.437 (± .020)
+Full knowledge 0.065 1 0.120 0.668 0.780 (± .016)
+Gold knowledge 1 1 1 0.710 0.828 (± .014)
+LLaMA 3.1 8B
+No knowledge 0 0 0 0.200 0.298 (± .019)
+Full knowledge 0.065 1 0.120 0.372 0.545 (± .019)
+Gold knowledge 1 1 1 0.414 0.671 (± .016)
+Mistral 7B Instruct
+No knowledge 0 0 0 0.208 0.260 (± .019)
+Full knowledge 0.065 1 0.120 0.046 0.151 (± .011)
+Gold knowledge 1 1 1 0.502 0.627 (± .019)
+Table 2: HotpotQA answer generation performance
+benchmarked by different LLM generators. We measure
+knowledge precision (KP), recall (KR), and F1 (KF1);
+answer exact match (EM); and answer F1 (and its stan-
+dard error mean).
+4.2 Generators
+To align with the latest trends in RAG research,
+as well as to make the analysis simple and gen-
+erally replicable, we adopt LLMs as our genera-
+tors. Due to the large computational costs for the
+meta-experiments, each of which consists of hun-
+dreds of full experiments, we use three API-based
+lightweight LLMs, OpenAI GPT-4o-mini, LLaMA
+3.1 8B, and Mistral 7B-Instruct, as our generator
+models; the varying performances of the LLMs
+allow us to investigate the impact of generator com-
+plexity on knowledge usage.
+4.3 Knowledge Sampling
+As Figure 1 shows, both WoW and HotpotQA are
+knowledge selector training datasets that provide a
+retrieved knowledge set K for each query q such
+that the gold knowledge is a subset of K. In both
+datasets, K contains text passages consisting of an
+article title and a few knowledge sentences. We per-
+form knowledge sampling at the sentence level to
+simulate the end result of applying both the knowl-
+edge retrieval and selection steps. More details are
+in Appendix A.1.1.
+In our experiments, we refer to using the entire
+retrieved knowledge set K provided by the dataset
+as the input knowledge to the generator (i.e. no
+knowledge selection) as the “full knowledge” set-
+ting, where both gold and distractor knowledge are
+present. We also include a “no knowledge" setting,
+where the generators receive no external knowledge
+at all, as a weak baseline, and “gold knowledge,"
+corresponding to perfect knowledge selection, as
+an upper bound.
+5 Meta-Experimental Results
+Overall we observe several consistent trends across
+meta-experiments, except for Mistral-7B-Instruct,
+which is a relatively weak-performing LLM. Note
+that each of the plots in Figures 2-4 corresponds to
+a meta-experiment, and each point corresponds to
+a full experiment on the entire test set. The standard
+error mean values in Tables 1 & 2 indicate that the
+answer F1 scores are robust across all experiments
+and the overall observed trends are significant.
+RAG for LLM is beneficial. As Tables 1 & 2
+show, generators without any retrieved knowledge
+(“no knowledge") perform poorly on WoW and
+HotpotQA, even though they may have been pre-
+trained on the Wikipedia articles that WoW and
+HotpotQA are derived from. This finding indicates
+the LLMs are not over-fitted on the WoW and Hot-
+potQA datasets, and applying RAG is beneficial.
+Interestingly, our HotpotQA results in Figure 2
+show that distractor knowledge significantly harms
+performance; the cyan dots show that generators re-
+ceiving mostly distractor knowledge underperform
+the “no knowledge” setting, which uses only the
+LLM’s internal knowledge. This trend is not ob-
+served with WoW, supporting our observation that
+HotpotQA’s distractor knowledge is truly irrelevant,
+while the “distractor" knowledge in WoW may only
+be less relevant than the single gold sentence, but
+not completely irrelevant. This difference between
+datasets is further explored in Appendix A.4.
+Full knowledge setting without knowledge selec-
+tion is a strong baseline. Tables 1 & 2 show that
+the “full knowledge" setting, which corresponds
+4107

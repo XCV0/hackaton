@@ -1,0 +1,119 @@
+The end node signals that the Reason-Act loop has com-
+pleted. The final output from the LLM after the retrieval
+augmented generation is returned to the user.
+General Query: If the user asks a broader question, such as
+those about trends, the required information is found within the
+KG. In this route, we start with a preprocessing step in which
+the LLM performs NER to decouple specific data from the
+genericized question. After this, we send the genericized query
+to a smaller vector store containing pairs of cypher queries and
+descriptions of the information they return, with embedding
+vectors generated from the descriptions. From here, there are
+two possible subroutes.
+Retrieved Query: If a retrieved query is able to answer the
+question, we execute it’s cypher before making a final LLM
+call to return the result. If no existing queries are able to
+answer, we synthesize a new cypher query.
+Synthesized Query: If the LLM opts for “synthesis,” it
+generates a new cypher query using the graph’s schema
+and retrieved examples. For reliability, the LLM audits this
+generated query. First, we retrieve the query’s execution plan
+and profile by using the cypher keyword “PROFILE,” which
+lists the operators used on the knowledge graph. We also
+provide descriptions of the relevant low-level operators from
+Neo4j’s official documentation. Once we obtain the detailed
+execution plan, the LLM performs two steps: it translates the
+plan into plain language and assesses if it addresses the user’s
+question. Valid generations proceed as if retrieved queries.
+IV. RESULTS
+In this section, we discuss identification of optimal clus-
+ters for tensor decomposition, vectorization of the dataset,
+construction of KG, and compare the system using the with
+GPT-4-instruct [51] as the operating model of SMART-SLIC
+to answer research questions. The same model was used
+to answer without RAG as well. Our findings highlight the
+accuracy and reliability of the SMART-SLIC’s RAG.
+A. Dataset
+Initially, 30 documents specializing on large-scale malware
+analysis and anomaly detection with tensor decomposition
+fields were selected by the SME as the core documents to
+construct the data. These documents were expanded along
+the citation/reference network 2 times. The final dataset was
+enumerated at 8,790 scientific publications. From the cleaned
+corpus, the tensor object was generated.
+B. Extraction of Latent Features
+After setting up the tensor, the most coherent grouping is de-
+termined by iterating through a range of k = {1, 2, 3, . . . , 45}
+clusters to decompose. Our analysis determined that 25 topic-
+clusters represented the optimal division across all evaluated k
+values. The decomposition itself was executed using T-ELF on
+high-performance computing resources, specifically two AMD
+EPYC 9454 48-Core Processors. This setup provided a total
+of 192 logical CPUs, enabling us to complete the entire de-
+composition process in approximately 2 hours. Following the
+TABLE I
+LABELS FOR TOPIC CLUSTERS
+# Label # Docs. Percent
+0 Malware Behavioral Analysis 158 1.80
+1 Cybersecurity Challenges 305 3.47
+2 Cybersecurity Research 114 1.30
+3 Botnet Detection Techniques 142 1.62
+4 Malware Feature Selection And Extraction 353 4.02
+5 Network Intrusion Detection 134 1.52
+6 Evaluation of Malware Classifiers 301 3.42
+7 Malicious Code Analysis 827 9.41
+8 Artificial Intelligence for Malware 888 10.10
+9 Nonnegative Matrix Decomposition 520 5.92
+10 Security Threat Mitigation 180 2.05
+11 Deep Learning for Malware 113 1.29
+12 Machine Learning Techniques 275 3.13
+13 Education Technology 447 5.09
+14 Unsupervised Anomaly Detection 372 4.23
+15 Ransomware Prevention 147 1.67
+16 Temporal Graph Forecast 307 3.49
+17 Mobile Malware Detection 230 2.62
+18 Adversarial Defense Strategy 358 4.07
+19 IoT Security 238 2.71
+20 Privacy Protection Challenge 628 7.14
+21 Sparse Tensor Decomposition 212 2.41
+22 Backdoor Detection 350 3.98
+23 Neural Network Architecture 581 6.61
+24 Malware Analysis Techniques 610 6.94
+decomposition, post-processing refined and defined clusters for
+the topics, which are listed in Table I.
+C. Vector Store
+The 8,790 documents were vectorized and ingested into
+the Milvus vector store. When questions are posed to the
+framework, they are also vectorized using this model. Of the
+total documents, 22% had full-texts available, which were
+vectorized into the Milvus. Each document and full-text had
+a DOI, with the full-texts also including paragraph identifiers.
+Knowledge Graph
+NER Location
+Text
+NER Product
+NER Organization
+Scopus Category
+NER
+Person
+NER Event
+NER Geopolitical
+Entity
+Author
+Publisher
+Year
+Acronyms
+Afﬁliation
+NMFk Topic
+Country
+Keywords
+Document
+Fig. 5. The KG schema. Images generated with DALL·E [52].
+D. Knowledge Graph
+From the 25 clusters output form T-ELF, we formatted
+the the data into 1,457,534 triplets. Once injected into the
+knowledge graph, there were 321,122 nodes and 1,136,412
+edge relationships. The nodes injected into the graph are
+represented in Figure 5, where they are organized into 16 base
+categories, referred to as labels, that define the foundational
+classes for the injection process. Once the graph was built was

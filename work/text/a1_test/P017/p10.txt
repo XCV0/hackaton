@@ -1,0 +1,131 @@
+element with a larger ionic radius into the CZTSSe crystal
+lattice near the buffer/absorber interface. A previous study
+found that CdCu and/or CdZn antisite defects formed up to
+several hundred nanometers from the heterointerface within
+the CZTS absorber following a postdeposition heat treatment
+(PDHT) of the CdS/CZTS film.2
+SIMS Analysis. Figure 5 shows the SIMS depth profiles
+near the absorber/buffer interface for all device structures. In
+Figure 5b, we can clearly distinguish In2S3 and CdS layers with
+the aid of the Zn signal and In/metal and Cd/metal peaks.
+As shown in Figure 5b, the buffer/absorber interface is
+determined using the peak of the Cd/metal curve. A more
+detailed discussion of the determination of the buffer/absorber
+interface is presented in Figure S6. The dashed vertical lines
+therefore divide the profile into a series of composition zones
+from the top surface of the solar cell top surface: indium-doped
+tin oxide (ITO)/ZnO/In2S3/CdS/CZTSSe absorber. In
+Figure 5c, however, the Cd and In signals overlap with each
+other at the p−n junction region. There is only a small shift
+between the peaks of the Cd and In signals. This indicates that
+some elemental diffusion might exist at the buffer/absorber
+interface region. Therefore, the slopes of the In/metal and Cd/
+metal curves near the buffer/absorber interface are studied in
+Figure 5d to further understand the elemental diffusion at the
+p−n junction interface. It can be seen that the slope of the In
+signal in device type E is sharper (absolute slope = 1.85 ×
+10−4) than that of device D (absolute slope = 1.32 × 10−4).
+This means that the In signal decays slower in sample D and
+indicates more In diffused into the bottom CZTSSe absorber.
+Electron Microscopy and Composition. EDX mapping
+and line scans were performed to identify the chemical
+composition and distribution of the different layers in the
+region around the buffer/absorber interface (Figure 6).
+Included in the figures are the corresponding SEM cross
+sections of the relevant devices obtained by backscattered
+electron (BSE) imaging. The BSE image contrast depends on
+the average atomic weight of the elements in the constituent
+layers; i.e., materials with a higher average atomic weight
+appear lighter in the BSE images. As such, the individual ITO,
+ZnO, In2S3, CdS, and CZTSSe layers are clearly distinguish-
+able in all device-type cross sections, and EDX elemental
+profile data are presented corresponding to the orange line
+through the cross sections. There is evidence of elemental
+interdiffusion across the heterojunction of the buffer(s)/
+CZTSSe films in all device types. Specifically, there is
+significant diffusion of the metallic element in the buffer (In
+or Cd) into the absorber when the buffer adjoins the CZTSSe
+layer. Diffusion of the metallic elements from the buffer to the
+absorber is promoted by the application of a postdeposition
+heat treatment following chemical bath deposition (CBD).2,19
+Researchers at the University of New South Wales found that,
+following a heterojunction heat treatment (300 °C for 10 min
+in N2 atmosphere) of CZTS directly after CBD of CdS, the
+subsequent CZTS device efficiency improved from ∼8% to
+11%. The improvement was directly attributed to Cd diffusion
+into the CZTS absorber up to a depth of ca. 200 nm, forming
+CdCu or CdZn antisite defects and Zn diffusion into the CdS
+layer.
+As a result, thin layers of Cu2CdxZn1−xSnS4 and CdxZn1−xS
+formed around the buffer/absorber interface, improving the
+energy-band alignment at the junction and reducing interface
+recombination.2 Figure 7 shows BSE images of the top
+window−buffer−absorber layers of the respective CZTSSe
+solar cells. In both devices with a dual buffer, there is evidence
+of intermixing of the layers at the CdS/In2S3 interface. This
+intermixing of the buffer layers may arise from the successive
+heat treatments (200 °C in air for 10 min), following
+deposition of the individual buffers.
+Electron-Beam-Induced Current (EBIC). The charge-
+carrier collection behavior in the devices with a dual buffer was
+investigated by means of EBIC measurements on flat cross
+sections obtained by focused-ion-beam (FIB) milling (Figure
+S7). EBIC measurements visualize the depth-dependent
+collection of photogenerated carriers in the semiconductor
+materials in the CZTSSe solar cells. The SEM images (red) are
+overlaid with the normalized EBIC signal (green), as shown in
+parts a (device D) and d (device E) of Figure 8. The brightest
+areas in the EBIC signal show regions of higher current
+collection over the scanned area of the device cross section and
+are a measure of the electric field that separates the generated
+electron−hole (e−h) pairs. The peak of the electric field
+appears to be broader and generated deeper within the
+CZTSSe absorber bulk in device D compared to device E.
+Color maps of the EBIC signals were created to detail the
+variation in the signal intensity across the device cross sections
+(Figure 8b,e). For better visualization, EBIC signals below 0.2
+are not shown. In the case of device E, a large area of relatively
+high EBIC signals (red region of the color map) is observed
+within the CZTSSe absorber close to the CdS/CZTSSe
+interface, compared to a narrower region of high signal
+intensity observed in device D (Figure 8b,e). Because the SCR
+width in device E is ca. 80 nm (determined from C−V
+measurements), the e−h pairs generated deeper inside the
+absorber bulk have to diffuse greater distances in order to be
+effectively separated by the electric field associated with the p−
+n junction. The higher EBIC signal extending over a larger area
+in the CZTSSe absorber of device E suggests that the minority
+carriers (electrons) have a greater minority carrier diffusion
+length (LD) than counterpart device D. Approximate LD values
+were determined from the absorption coefficient data for the
+CZTSSe absorbers and the EQE spectra for the respective
+devices (see the Supporting Information and Figure S8).
+Subsequent LD values of ca. 120 and 300 nm for devices D and
+E were obtained, respectively, which are in good agreement
+with the observed EBIC signals generated in the device cross
+sections. Similar results have also been reported for kesterite
+solar cells.51−53 EBIC line profiles perpendicular to the p−n
+junction were extracted at positions indicated by the dashed
+white lines on the SEM images and the corresponding
+normalized integrated EBIC signal (IEBIC,norm) displayed in
+Figure 8c,f. The EBIC signal in device D presents as a broad
+signal expanding almost the full width of the CZTSSe absorber,
+with its peak deep within the bulk.
+In contrast, device E has an EBIC line profile with a narrow
+peak located closer to the buffer/absorber interface. For
+comparison, EBIC line profiles were plotted in relation to their
+position from the buffer/CZTSSe interface for both device
+types (Figure 9). The dashed lines in the figure represent the
+optimal carrier collection lengths wSCR + Ld within which the
+generated e−h pairs from the impinging electron beam can be
+separated and extracted from the devices. The peak of the
+electric field in device E lies within this region, leading to
+improved charge separation and carrier transport and,
+consequently, a higher JSC.
+The opposite effect is true for device D, where peak e−h
+generation is deeper with the absorber bulk and is susceptible
+ACS Applied Energy Materials www.acsaem.org Article
+https://doi.org/10.1021/acsaem.3c01622
+ACS Appl. Energy Mater. 2023, 6, 10883−10896
+10892
+Downloaded from pubs.​acs.​org/​aaemcq/​article-pdf/​6/​21/​10883/​2973906/​ae3c01622.​pdf by guest on 19 November 2026

@@ -1,0 +1,70 @@
+case with WoW, which makes prioritizing recall
+even more important. Moreover, because modern
+LLM generators have long maximum input win-
+dows (e.g. 128k for GPT-4o & -mini), having
+too much knowledge is less likely to be a prob-
+lem. If the number of knowledge sentences must
+be constrained to reduce computational cost, the
+top-k knowledge sentences should maintain the
+same level of knowledge recall and precision as the
+non-length-constrained settings.
+Only when the knowledge recall score is high
+can a knowledge selector, which increases knowl-
+edge precision, be potentially helpful*. Moreover,
+if the recall is too low, the downstream genera-
+tion performance may not see any benefits from a
+knowledge selector with middling performance —
+it may even be harmed; only when the knowledge
+selector’s precision is very high will the overall
+performance improve.
+Limitations
+Computational resources for simulations. Due
+to the high cost of larger-scale simulations in each
+meta-experiment that consists of hundreds of full
+experiments using API-based LLMs, we use only
+a subset of the WoW and HotpotQA for experi-
+ments. As a result, our data subset may contain
+some minor noise during knowledge sampling and
+LLM generation, and the contours in Figure 4 are
+not smooth. However, such noise is not likely to
+affect our conclusions. For a similar reason, we
+only chose three LLMs for our experiments. As
+a result, we may have missed out on more subtle
+phenomena that can only be seen from results on a
+larger number of generators.
+Datasets for in-depth analysis. In addition to the
+cost issue, there are very few RAG datasets with
+human-annotated knowledge (Friel et al., 2024),
+which further limits our simulation experiment set-
+tings. Furthermore, even though we regard WoW as
+a relatively noisy dataset in this work compared to
+HotpotQA, to the best of our knowledge, WoW is
+one of the most cleanly annotated datasets among
+all datasets. We cannot verify our hypothesis in
+Section 5 that WoW has a larger solution space
+than HotpotQA without re-annotating the dataset
+because each example in WoW only contains one
+*In a length-constrained scenario, if we consider k ran-
+domly sampled knowledge sentences as a baseline, rather than
+the “full knowledge” setting, then the knowledge selector is
+more likely to be helpful due to weaker baseline performance.
+gold response. Our experiments in Appendix A.4
+compare the noisiness of gold knowledge annota-
+tions in WoW with those in HotpotQA.
+Uniform Sampling Probably for Simulation.
+In Section 3.2, we draw gold and distractor knowl-
+edge from a uniform distribution pgold and pnoise
+for simplicity since we do not have a prior as-
+sumption of the knowledge selector’s preference.
+However, a real knowledge selector may be more
+likely to select one knowledge sentence than an-
+other. Nonetheless, we successfully identified the
+knowledge precision and recall scores together as
+good predictors of the generation performance as
+we analyzed in Section 5.
+Ethics Statement
+Since all datasets and LLMs used in this work are
+publicly available or accessible, and no data collec-
+tion introducing sensitive information is performed,
+the ethical considerations of this study are minimal.
+4112

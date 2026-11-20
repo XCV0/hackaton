@@ -1,0 +1,48 @@
+LLM-Confidence Reranker
+Probing Probing methods quantify uncertainty by analyzing internal model representations. For example, Azaria &
+Mitchell (2023) introduced the SAPLMA method, which predicts statement truth probabilities by analyzing hidden
+layer activations, providing a quantitative approach to assess LLMs’ internal confidence. Marks & Tegmark (2024)
+proposedmass-meanprobingtoidentifyandinterveneinlinearrepresentationsoffactualtruthwithinmodels,opening
+new avenues for quantifying confidence in factual claims.
+2.1.2. Training-Free Methods
+Training-free methods estimate uncertainty without additional optimization, leveraging existing model outputs or
+behaviors through two main approaches:
+Prediction Probability These methods estimate uncertainty by analyzing output probability distributions. A com-
+mon method for measuring uncertainty is Predictive Entropy (Settles & Craven, 2008). To enable comparison across
+different length outputs, Malinin & Gales (2021) systematically applied length-normalization to various information-
+theoreticuncertaintymeasures,enhancingtheirpracticalutility.Xiao&Wang(2021)furtherappliedentropyvaluesto
+thehallucinationprobleminconditionallanguagegenerationtasks,revealingthekeyrelationshipbetweenuncertainty
+and hallucination. One method is to prompt the extraction of uncertainty information through specially designed
+inputs. The P(True) method (Kadavath et al., 2022), for example, asks models to evaluate the probability of their
+answers being correct, with higher probabilities indicating lower uncertainty. This approach relies on models’ self-
+assessment capabilities. Addressing the “generative inequality” problem in LLMs free-form output, where irrelevant
+tokens and sentences are over-valued when estimating uncertainty, Duan et al. (2024) proposed Shifting Attention to
+Relevance(SAR),amethodthatmitigatesthesebiasesbyreassigningattentionbasedonthejointlyexaminedrelevance
+of components during uncertainty quantification. To address the bias of Predictive Entropy when handling irrelevant
+information,Z.Wangetal.(2025)proposedWord-SequenceEntropy(WSE).WSEenhancestheaccuracyandstability
+of uncertainty quantification by incorporating semantic relevance at both word and sequence levels, utilizing off-
+the-shelf LLMs and multi-sample generation. This approach also significantly improves LLMs’ accuracy in medical
+question-answering applications.
+Sampling & Aggregation These methods estimate uncertainty by generating and analyzing multiple outputs. For
+example,Farquharetal.(2024)introducedSemanticEntropytoquantifyuncertaintyingenerationtasksbyconsidering
+semanticequivalence.Toaddresstheinsufficiencyandunreliabilityofentropyasaconfidencemetric,particularlyunder
+distribution shifts and biased scenarios, Lee et al. (2024) introduced the Pseudo-Label Probability Difference (PLPD)
+as a newly proposed confidence metric, allowing it to identify more reliable samples by leveraging information that
+entropycannotcapture.Meanwhile,Xiongetal.(2024)furthersystematicallyproposedageneralblack-boxconfidence
+elicitation framework, combining human-inspired prompting strategies, diverse sampling methods, and confidence
+aggregation mechanisms, which can significantly improve LLMs’ performance in tasks like confidence calibration
+and failure prediction, even without internal access. Aichberger et al. (2025) introduced the Semantically Diverse
+LanguageGeneration(SDLG)method,whichsteersLLMstogeneratesemanticallydiverseyetlikelyalternativetexts,
+significantly improving the estimation accuracy of predictive uncertainty. Qing et al. (2025) evaluated consistency-
+based metrics for post-hoc uncertainty quantification.
+2.2. Reranking Methods in RAG
+InitialretrievalinRAGstillstruggleswithissueslikeirrelevantorsuboptimalresults,missingkeydocuments,and
+dataqualityconcerns—highlightingtheimportanceofrerankingoptimization.Thesererankingmethodsfallintothree
+categories: pointwise, pairwise, and listwise.
+2.2.1. Pointwise Methods
+Pointwise reranking ranks documents or items by independently scoring their relevance and sorting them. Sachan
+etal.(2022)achievedunsupervisedTop-20accuracyimprovementsonBEIRbenchmarksviapre-trainedmodel-based
+probabilisticinference,whichestablishedzero-shotprobabilisticrankingparadigms.Bonifacioetal.(2022)leveraged
+few-shot generation capabilities to build synthetic query-document pairs via monoT5. Boytsov et al. (2024) extended
+this to industrial-grade InPars-Light through model compression and toolchain integration.
+Song et al.: Preprint submitted to Elsevier Page 4 of 21

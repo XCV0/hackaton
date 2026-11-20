@@ -1,0 +1,104 @@
+Limitations
+Our evaluation focuses on Llama-family back-
+bones; extending to a wider range of model ar-
+chitectures is left to future work. CoDA adds
+lightweight inference-time computation for anchor
+selection and attention modulation, and further sys-
+tem optimizations may benefit strict latency set-
+tings. We adopt simple, practical default choices
+for anchor selection and dosing strength, and more
+adaptive variants could improve robustness under
+diverse retrieval conditions.
+Ethical Considerations
+CoDA aims to improve evidence use in RAG, but it
+does not guarantee correctness, especially when re-
+trieved sources are incomplete or misleading; high-
+stakes use should include standard safeguards (e.g.,
+provenance and human review). Because CoDA is
+inference-time and training-free, it introduces no
+new data collection, but responsible deployment
+still depends on privacy/compliance controls in the
+retrieval pipeline. Automated evaluation can be
+imperfect, and targeted human checks can comple-
+ment automatic metrics.
+Acknowledgments
+This work is partially supported by National
+Science and Technology Major Project
+(2026ZD1611200), and Fundamental and In-
+terdisciplinary Disciplines Breakthrough Plan
+of the Ministry of Education of China (No.
+JYB2025XDXM118).
+References
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+Preprint, arXiv:2310.11511.
+Loris Bergeron, Ioana Buhnila, Jérôme François,
+and Radu State. 2025. Halluguard: Evidence-
+grounded small reasoning models to mitigate halluci-
+nations in retrieval-augmented generation. Preprint,
+arXiv:2510.00880.
+Baolong Bi, Shaohan Huang, Yiwei Wang, Tianchi
+Yang, Zihan Zhang, Haizhen Huang, Lingrui Mei,
+Junfeng Fang, Zehao Li, Furu Wei, Weiwei Deng,
+Feng Sun, Qi Zhang, and Shenghua Liu. 2024.
+Context-dpo: Aligning language models for context-
+faithfulness. Preprint, arXiv:2412.15280.
+Baolong Bi, Shenghua Liu, Yiwei Wang, Yilong Xu,
+Junfeng Fang, Lingrui Mei, and Xueqi Cheng. 2025.
+Parameters vs. context: Fine-grained control of
+knowledge reliance in language models. Preprint,
+arXiv:2503.15888.
+Baiyu Chen, Wilson Wongso, Xiaoqian Hu, Yue Tan,
+and Flora Salim. 2025. Multi-stage verification-
+centric framework for mitigating hallucination in
+multi-modal rag. Preprint, arXiv:2507.20136.
+Chao Chen, Kai Liu, Ze Chen, Yi Gu, Yue Wu,
+Mingyuan Tao, Zhihang Fu, and Jieping Ye. 2024.
+Inside: Llms’ internal states retain the power of hal-
+lucination detection. Preprint, arXiv:2402.03744.
+Yung-Sung Chuang, Yujia Xie, Hongyin Luo, Yoon
+Kim, James Glass, and Pengcheng He. 2024. Dola:
+Decoding by contrasting layers improves factuality in
+large language models. Preprint, arXiv:2309.03883.
+Damai Dai, Li Dong, Yaru Hao, Zhifang Sui,
+Baobao Chang, and Furu Wei. 2022a. Knowl-
+edge neurons in pretrained transformers. Preprint,
+arXiv:2104.08696.
+Damai Dai, Wenbin Jiang, Qingxiu Dong, Yajuan
+Lyu, Qiaoqiao She, and Zhifang Sui. 2022b. Neu-
+ral knowledge bank for pretrained transformers.
+Preprint, arXiv:2208.00399.
+Anupam Datta, Matt Fredrikson, Klas Leino, Kaiji Lu,
+Shayak Sen, Ricardo Shih, and Zifan Wang. 2022.
+Exploring conceptual soundness with trulens. In
+NeurIPS 2021 Competitions and Demonstrations
+Track, pages 302–307. PMLR.
+Nelson Elhage, Neel Nanda, Catherine Olsson, Tom
+Henighan, Nicholas Joseph, Ben Mann, Amanda
+Askell, Yuntao Bai, Anna Chen, Tom Conerly,
+Nova DasSarma, Dawn Drain, Deep Ganguli,
+Zac Hatfield-Dodds, Danny Hernandez, Andy
+Jones, Jackson Kernion, Liane Lovitt, Kamal
+Ndousse, and 6 others. 2021. A mathemati-
+cal framework for transformer circuits. Trans-
+former Circuits Thread. Https://transformer-
+circuits.pub/2021/framework/index.html.
+Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang,
+Hengyun Li, Dawei Yin, Tat-Seng Chua, and Qing
+Li. 2024. A survey on rag meeting llms: Towards
+retrieval-augmented large language models. Preprint,
+arXiv:2405.06211.
+Robert Friel and Atindriyo Sanyal. 2023. Chainpoll: A
+high efficacy method for llm hallucination detection.
+Preprint, arXiv:2310.18344.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Meng Wang,
+and Haofen Wang. 2024. Retrieval-augmented gener-
+ation for large language models: A survey. Preprint,
+arXiv:2312.10997.
+Danying Ge, Jianhua Gao, Yixue Yang, and Weixing
+Ji. 2025. Ha-rag: Hotness-aware rag acceleration
+via mixed precision and data placement. Preprint,
+arXiv:2510.20878.
+11887

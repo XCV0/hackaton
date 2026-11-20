@@ -1,0 +1,60 @@
+window layers were etched away in acetic acid, leaving a thin CdS
+layer on the absorber. Cross-section images were acquired using a
+Hitachi S-4800 scanning electron microscope (SEM).
+Numerical simulations were carried out within the framework of
+Sentaurus drift-diffusion simulator from Synopsis.17 A double graded
+absorber with a thickness of 2 μm has been considered and divided
+into three different regions, namely the front grading, notch and back
+grading. The front grading and notch are kept constant whereas the
+back grading was modified to obtain several GGI profiles with ΔGGI
+ranging from 0 to approximately 0.8 (See Figure S1). More details and
+material parameters used can be found elsewhere.14
+3 | RESULTS AND DISCUSSION
+3.1 | Back grading modification
+In this study, Ga back gradings were tuned by changing the evapora-
+tion rates of In and Ga during the first coevaporation stage, as shown
+in Figure 1A. Solid lines show the evaporation rates of our reference
+process, estimated from the sources temperature setpoints. Three dif-
+ferent approaches are investigated to modify the back gradings. The
+corresponding samples are identified with R, G, I and O letters, rep-
+resenting reference, Ga series, In series and early stage In-free series.
+For comparison, the depth profile of reference R1 is shown in
+Figure 1(B), (C) and (D) as a reference. The height of the back grading is
+measured with the quantity ΔGGI, defined as the difference between
+the minimum GGI value in the notch and its maximum near the back
+interface. The equivalent Eg energy is calculated by Equation (1).18
+Eg =1:004ð1 −GGIÞ +1:663GGI− 0:033GGIð1− GGIÞð1Þ
+In the first and second approach, we implemented steeper gal-
+lium source cooling rates (dashed blue line G in Figure 1A), and
+steeper indium source heating rates (dashed green line I in
+Figure 1A) in the first stage. However, the attempts only resulted
+in moderate changes in the corresponding composition profiles
+shown in Figure 1B,C.
+A third approach was developed to further increase ΔGGI: the
+indium shutter is kept closed during the initial minutes of the deposi-
+tion process, while the source temperature settings were the same as
+those for the baseline process, as illustrated by an orange block (O) in
+Figure 1A. Therefore, the absorber is In-free during the initial minutes
+of the deposition process. The corresponding depth profiles are
+shown in Figure 1D. With this approach, the highest ΔGGI value of
+0.5 was obtained, equivalent to about 0.33 eV. In the different deposi-
+tion runs, Ga and In source temperatures were adjusted by small con-
+stant offsets over the whole process, in order to compensate for drifts
+in the source evaporation yields and achieve similar integrated GGI
+and optical bandgaps. Table 1 compares the J-V parameters of solar
+cells with different ΔGGI investigated in this study. Detailed process
+sequences for each sample can be found in Table S1. Integrated GGI
+values for those samples range from 0.28 to 0.35 and CGI values are
+almost within the confidence interval of the composition measure-
+ments. Short-circuit current density (JSC) is in good agreement with
+calculated EQE currents and the fill factor (FF) is similar for all sam-
+ples. The most sensitive parameter is the VOC, which is analyzed in
+the following.
+(A) (B)
+(C) (D)
+FIGURE 1 (A) Schematic representation of a multi-stage deposition with indicative Cu, In, Ga evaporation rates. The solid lines represent the
+baseline process. The dashed lines and orange block show three different approaches to modify the back grading. (B) GGI and Eg depth profiles
+for different Ga source cooling rates. Eg is calculated by Equation (1). (C) GGI and Eg depth profiles for different In source heating rates. (D) GGI
+and Eg depth profiles for different In-free periods in early stage In-free series [Colour figure can be viewed at wileyonlinelibrary.com]
+632 YANG ET AL.
+ 1099159x, 2021, 6, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pip.3413, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

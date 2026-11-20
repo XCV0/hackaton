@@ -1,0 +1,164 @@
+perovskite/C60/BCP/Cu. This composition typically enables the
+fabrication of cells with an average VOC of approximately 1.13 V, a
+ﬁll factor of 0.79, and a SC current density of 21.5 mA cm/C02,
+which results in a PCE of /C2519.2%. Figure 1a shows that these
+pin-type cells exhibit essentially no hysteresis at scan speeds
+(<0.2 V s/C01) accessible with our standard JV-measurement
+setup. It is now widely accepted that hysteresis appears in the
+presence of mobile ions and charge carrier recombination.[3,4]
+In recent years, many reports have interpreted “hysteresis-free”
+JV curves, at moderate scan speeds, as a sign of the limited inﬂu-
+ence of the ions.[1,12,24,48,52–54] However, we will show that this is
+not due to a negligible inﬂuence or even absence of the mobile
+ions. We note that due to instrumental limitations the fastest
+scan speeds accessible with a Keithley 2400 (the tool typically
+used by researchers in the ﬁeld) is usually well below 1 V s/C01
+considering a sufﬁciently large voltage resolution (i.e.,
+≤50 mV per voltage step).
+To overcome this limitation, we used a function generator in
+combination with a home-built ampliﬁer to minimize external
+resistances (see Supplementary Methods), which allowed us to
+measure JV curves at very fast scan speeds (up to 5000 V s/C01).
+Figure 1b shows the JV curves measured at high scan speeds
+and Figure 1c summarizes the experimental PCE measured as
+a function of the scan speed. It is important to note that we
+started the JV scans from OC to (SC conditions in the reverse
+direction and back from SC to OC in the forward direction.
+As illustrated in the inset of Figure 1b, this will be the standard
+JV-scan measurement method throughout the manuscript
+unless speciﬁed otherwise. The results demonstrate a maximum
+amplitude of the hysteresis at scan speeds of /C2510 V s/C01 (or /C25100
+ms per scan), while the hysteresis is absent at lower and signiﬁ-
+cantly higher scan speeds.[44] As we will demonstrate in detail in
+this manuscript, the PCE at the fastest scan speeds is approxi-
+mately equal to the PCE in the absence of mobile ions.
+Hence, one can use the point at high scan speeds where the for-
+ward and reverse scan merge again to estimate the “ion-free”
+PCE and the difference between the steady-state PCE
+(i.e., at low scan speed) and the fast scan to determine the losses
+due to the mobile ions. For the 83–17 triple cation composition,
+we quantify an efﬁciency loss of ca. 1.5% due to the presence of
+0.0 0.2 0.4 0.6 0.8 1.0 1.2-25
+-20
+-15
+-10
+-5
+0
+0.0 0.2 0.4 0.6 0.8 1.0 1.2-25
+-20
+-15
+-10
+-5
+0
+10 10 10 10 10 10 10 10
+0
+5
+10
+15
+20
+10 10 10 10 10 10
+0
+5
+10
+15
+20
+10
+-3
+10
+-2
+10
+-1
+10
+0
+10
+1
+10
+2
+10
+314
+15
+16
+17
+18
+19
+20
+0.9406
+1.881 3.763
+5.644 7.525 11.29
+13.17
+mc Am[ J -2]
+Applied Voltage [V]
+Scan speed [V s ]
+ 2.0x10
+ 6.6x10
+ 1.3x10
+Scan direction
+ Forward
+ Reverse
+J [mA cm-2]
+Applied Voltage [V]
+Scan speed [V s ]
+ 6.6x10
+ 1x10
+ 2x10
+ Forward
+ Reverse
+PCE [%]
+Scan-speed [V s ]
+Scan direction
+ Foward
+ Reverse
+ SPO
+(b) (c)
+Simulations
+]%[ ECP
+Scan-speed [V s-1]
+Ion density [cm ]
+ 10  10  
+ 6x10    10    10
+(e)(d) (f)
+Experiment
+PCE [%]
+Scan-speed [V s-1]
+Diffusion coefﬁcient [cm s ]
+ 10   10
+ 10  10  10
+10 10 10 10
+10
+10
+10
+10
+10
+10
+10
+10
+Ion density [cm ]
+Scan-speed [V s-1]
+0
+1.88
+3.76
+5.64
+7.53
+9.41
+11.3
+13.2
+15.1
+PCE  - PCE  [%]
+(a)
+Scan direction
+Figure 1. JV curves of a pin-type “83–17 triple cation” perovskite solar cell with the Cs0.05(FA83MA17)0.95PbI83Br17 composition, as measured using a) our
+standard setup using a Keithley 2400 and b) our custom-built setup for fast hysteresis measurements. The inset in (b) shows the measurement procedure
+to record the JV curves starting at VOC to JSC and back. c) The PCE from forward (0 V to VOC) and reverse (VOC to 0 V) scans at different scan speeds. The
+PCE at the highest scan rates (1000 V s/C01) represents the PCE in the absence of ion motion, where ions cannot react anymore to the applied voltage ramp.
+A comparison between the PCE at fast and slow speeds (i.e., steady state) allows us to estimate the efﬁciency loss due to mobile ions as discussed in the
+main text. The experiments demonstrate a peak hysteresis at 10 V s/C01, which is signiﬁcantly faster than accessible with a Keithley 2400. d) The simulated
+PCE as a function of scan speed for different ion densities in forward (dashed line) and reverse (solid line) direction. The simulations allow us to
+reproduce the experimental fast-hysteresis (shaded solid lines) with an ion density of 6 /C2 1016 cm/C03 and a diffusion coefﬁcient of 5 /C2 10/C010 cm2 s/C01.
+Note, the ion density barely affects the position of the peak hysteresis. e) The simulated PCE in forward (dashed line) and reverse (solid line) direction for
+various ion diffusion coefﬁcients showing the shift of the hysteresis peak. The scan speed at the peak hysteresis matches closely the transit time of ions
+through the active layer. f ) Colormap of the difference between the reverse and forward scan PCE for varied scan speeds and ion densities, demonstrating
+signiﬁcant PCE losses when the ion density screens the built-in ﬁeld at a density of /C251 /C2 1016 cm/C03.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100772 2100772 (3 of 10) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 4, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100772, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

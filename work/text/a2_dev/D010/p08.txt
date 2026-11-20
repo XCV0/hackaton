@@ -1,0 +1,45 @@
+8 Dhasade et al.
+sources, and LLM engine) runs as an independent process to enable modularity
+and parallel execution. The coordinator orchestrates asynchronous communica-
+tion across components. We use the ZeroMQ library for inter-process messaging
+and AIOHTTP to handle incoming HTTP queries. We use the Ollama frame-
+work for inference which provides a convenient way to load and run inference
+with different LLMs [31]. For the embedding models, we use the PyTorch li-
+brary.
+Router model. We implement the router as a lightweight fully connected
+NN. The network consists of hidden layers with 128, 64, and 32 neurons, each
+followed by Layer Normalization, ReLU activation, and Dropout to improve
+stability and prevent overfitting. These hyperparameters were selected through
+cross-validation, where we evaluated several architectures with varying numbers
+of layers and hidden dimensions on the validation set. The output layer consists
+of a single neuron that produces a raw logit score, predicting whether the corpus
+is relevant to the given query. The model is trained using Binary Cross-Entropy
+with Logits Loss with a positional weight to address class imbalance. We use a
+cyclic scheduler for the learning rate γ, oscillating γ between 0.001 and 0.005.
+Model performance is evaluated on the validation set after each epoch, and
+the best model is selected based on validation accuracy. Training data are split
+by question into 30%/10%/60% train/validation/test partitions, and all input
+features are standardized using a StandardScaler. The router’s small size
+ensures fast training, negligible inference overhead, and ease of retraining when
+data sources evolve. We also tested alternative classifiers (e.g., logistic regression
+and random forests) but found the shallow NN performed best overall.
+Datasets. We evaluate RAGRoute with the following three benchmarks:
+(i) MIRAGE is a benchmark designed to evaluate RAG systems for medical
+question answering [42]. It consists of 7663 questions drawn from five widely
+used medical QA datasets. We use MedRAG as knowledge source, which
+includes four corpora with documents related to healthcare [42]. For generat-
+ing embeddings, we use MedCPT [22], a domain-specific model designed for
+biomedical contexts. For retrieval, we use the IndexFlatL2 index structure,
+provided by the FAISS library [12], ensuring exact search and eliminating
+sources of approximation in our experiments. We treat each corpus as a sep-
+arate data source. For MIRAGE, we construct the ground truth relevance
+labels using the rerank based approach. To run RAGRoute with a RAG
+pipeline, we leverage the code provided by the MedRAG toolkit.
+(ii) MMLU is a benchmark that evaluates LLM systems across tasks ranging
+fromelementarymathematicstolegalreasoning[19].Forourexperiments,we
+use eight subject-specific subsets of MMLU with a total of 2803 questions.
+As a knowledge source, we use a Wikipedia dataset [25]. From this dataset,
+we cluster the documents into ten groups using the k-means algorithm to
+simulate different data sources. After clustering, we observe variance in the
+cluster size, ranging from 1.41 M to 2.88 M vectors per cluster. For MMLU,
+we construct the ground truth relevance labels using the rerank based ap-

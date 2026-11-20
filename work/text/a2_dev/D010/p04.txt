@@ -1,0 +1,63 @@
+4 Dhasade et al.
+Query
+Embedding
+Model
+Query
+Embedding
+Router
+...
+User
+Vq
+Embeddings
+VnVn
+Data sources
+LLM
+Data
+Retrieval1
+2 3
+Query
+4
+5
+Data
+Query
+6
+7
+Response
+8
+1
+2
+n
+Fig. 2. The workflow of RAGRoute. The components specific to RAGRoute are
+indicated in the box with the dashed border.
+some corpora, such as PubMed, consistently provide valuable, relevant informa-
+tion for all question sets, relying on a single corpus is often insufficient. Indeed,
+results from [42] demonstrate that combining multiple corpora improves retrieval
+performance. Some corpora, such as StatPearls or Wikipedia, are only useful
+in particular cases. The Textbooks corpus, for example, is mostly irrelevant
+for the PubMedQA question set. The differences in corpus relevance motivate
+the importance of adequate resource selection for a given query.
+One must strike a balance in the number of data sources being queried.
+While querying all available data sources guarantees full coverage, it also in-
+creases retrieval latency and computational overhead, as more requests, database
+searches, and document reranking operations are required. At the same time,
+under-selecting data sources risks missing critical information, particularly in
+domains where information is distributed sparsely across multiple repositories,
+for example, government data that resides in different portals [9]. Achieving a
+good trade-off between retrieval efficiency and response quality remains an open
+problem. Therefore, this work answers the following question: how can we effi-
+ciently predict query-specific source relevance in federated search for RAG, while
+minimizing retrieval overhead?
+3 Design of RAGRoute
+3.1 System model and assumptions
+We assume a permissioned setting in which all data sources are known and
+trusted. Thus, we focus on federated search within an enterprise or institutional
+consortium. Each data source maintains its own data and associated local em-
+beddings, and is responsible for computing and storing vector representations
+of its documents. The specifications of the embedding models used could vary
+across data sources. We assume that the enterprise or institution running the sys-
+tem has access to the embedding models used by the different data sources. User
+queries are submitted in natural language and converted into embedding vec-
+tors using the appropriate model(s). While we assume data sources are generally
+available, RAGRoute remains functional even if some sources are temporarily
+offline. The system can simply exclude the offline data source from selection,
+ensuring graceful degradation in retrieval coverage rather than system failure.

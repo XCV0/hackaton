@@ -1,0 +1,95 @@
+aims to retrieve as much knowledge that is rele-
+vant to the query as possible, balancing knowledge
+recall and precision. (2) Optionally, knowledge
+selection, a.k.a. reranking or filtering, removes re-
+trieved knowledge that is less relevant to further
+improve knowledge precision, producing K′ ⊆ K.
+(3) Finally, the generator takes the query q and the
+selected, retrieved knowledge K′ to generate the
+output text r.
+The knowledge in K and K′ can be heteroge-
+neous and come from multiple sources, such as
+external documents, knowledge graphs, or conver-
+sation histories. This RAG framework can be ap-
+plied to various tasks, such as dialogue generation,
+question answering, fact verification, and code gen-
+eration (Gao et al., 2023; Fan et al., 2024; Gan et al.,
+2025). In our experiments on dialogue generation
+and question answering, we simulate steps 1 and
+2 by creating controlled knowledge sets K′ and
+observing the resulting generation performance of
+step 3.
+3.2 Knowledge Simulation
+We aim to perform a systematic analysis of the ef-
+fect of knowledge retrieval and selection outcomes
+on the downstream RAG performance by simula-
+tion. As Figure 1 shows, for each query q, given
+a fixed pool of available knowledge with gold rel-
+evance annotations, we sample gold knowledge
+and distractor knowledge at varying rates pgold and
+pnoise to precisely simulate a wide range of quality
+for the retrieved and selected knowledge K′, from
+noise only to gold knowledge only. For example,
+if pgold = 0.5, then each piece of gold knowledge
+has a 50% chance to be sampled. Each sampling
+produces a full experiment over the entire test set,
+reported as one data point in Figures 2-4.
+In this way, we simulate a wide distribution of
+knowledge retriever and selector performance, as
+measured by knowledge precision and recall based
+on the gold annotations. We then test the perfor-
+mance of the generator model given the different
+quality of simulated retrieved and selected knowl-
+edge K′. Compared to prior works discussed in
+Section 2, which only compare a few ablation con-
+figurations, we conduct hundreds of configurations
+in each meta-experiment.
+4 Experimental Settings
+4.1 Datasets
+While there are several datasets supporting the
+RAG framework, relatively few provide high-
+quality, human-annotated gold knowledge. Further-
+more, the target outputs should be relatively short,
+unambiguous, and easily evaluated with automatic
+metrics such as F1 scores. These conditions narrow
+down the choices to two popular and representative
+datasets, Wizard of Wikipedia (WoW; Dinan et al.,
+2019) and HotpotQA (Yang et al., 2018).
+WoW is an open-domain dialogue dataset based
+on Wikipedia knowledge that has been widely used
+in prior knowledge selection works (Kim et al.,
+2020; Thulke et al., 2021; Li et al., 2022; Sun et al.,
+2023). The wizard speaker (a human annotator
+playing the part of the dialogue system) has ac-
+cess to Wikipedia knowledge, while the apprentice
+speaker does not. The apprentice is given a start-
+ing conversation topic, but otherwise speaks freely.
+The last two turns of dialogue are used as the query
+q to retrieve Wikipedia passages (K), and the wiz-
+ard selects a single knowledge sentence (K′) to
+generate their response.
+Despite its popularity, this dialogue generation
+task is challenging to evaluate. First, because the
+wizard is limited to selecting only a single knowl-
+edge sentence, it is still possible for the unselected
+“distractor" knowledge to be relevant to the wiz-
+ard’s response. Second, as is the case in many
+natural language generation tasks, the gold wiz-
+ard responses in WoW are not the only plausible
+responses, making it harder to quantify the correct-
+ness of a generated response. Nonetheless, WoW
+is a well-annotated dialogue dataset that is close to
+a real-life scenario where the gold knowledge and
+responses are noisy.
+HotpotQA is a question-answering dataset de-
+rived from Wikipedia knowledge that we include
+in our experiments to mitigate the ambiguity of
+WoW. The multi-hop questions and answers are
+first directly derived from gold knowledge graphs,
+and then distractor knowledge is injected to create
+noise. As a result, unlike WoW, the answers in Hot-
+potQA are strongly dependent on the gold knowl-
+edge, and the distractor knowledge is unlikely to be
+relevant. The short and unambiguous gold answers
+make it simpler to evaluate via F1 scores.
+4106

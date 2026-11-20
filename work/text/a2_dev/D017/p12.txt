@@ -1,0 +1,91 @@
+Algorithm 1 Likelihood Estimation via Dempster-
+Shafer Fusion
+Require: Raw retrieval scores S =
+{stxt, simg , sscreenshot}
+Require: Hyperparameters α, β ∈ [0, 1] (Trust
+factors)
+Require: Normalization function Φ(·)
+Ensure: Likelihood score P (Q|E)
+1: Initialize:
+2: mcurr ← {Y : 0, N : 0, Ω : 1} {Initial state:
+total ignorance}
+3: Preprocessing:
+4: S ′ ← [Φ(s) for s in S] {Normalize scores to
+[0, 1]}
+5: for each score s ∈ S ′ do
+6: Construct Mass Function (BPA):
+7: mnew(Y ) ← α · s
+8: mnew(N ) ← β · (1 − s)
+9: mnew(Ω) ← max(0, 1 − mnew(Y ) −
+mnew(N ))
+10: Compute Conflict Coefficient K:
+11: K ← mcurr(Y ) · mnew(N ) + mcurr(N ) ·
+mnew(Y )
+12: if K ≥ 0.999 then
+13: return 0.0 {Extreme conflict detected}
+14: end if
+15: Apply Dempster’s Rule:
+16: D ← 1 − K
+17: mnext(Y ) ← (mcurr(Y ) · mnew(Y ) +
+mcurr(Y ) · mnew(Ω) + mcurr(Ω) ·
+mnew(Y ))/D
+18: mnext(N ) ← (mcurr(N ) · mnew(N ) +
+mcurr(N ) · mnew(Ω) + mcurr(Ω) ·
+mnew(N ))/D
+19: mnext(Ω) ← (mcurr(Ω) · mnew(Ω))/D
+20: mcurr ← mnext
+21: end for
+22: Final Score:
+23: Score ← mcurr(Y ) + mcurr(Ω)/2
+24: return Score
+A.2.1 Layout-Aware Prior Calculation
+For document-native formats (e.g., PDFs), we uti-
+lize bounding box (BBox) coordinates to determine
+spatial proximity. The calculation of P (E)layout
+is implemented as a strict geometric consistency
+check.
+Given a text node t, an image node v, and a lay-
+out shortcut node s, we first verify the consistency
+of the metadata. The tuple is considered valid only
+if all three components originate from the same
+source document D. Let pg(·) denote the page
+index and d(·, ·) denote the Euclidean distance be-
+tween the centers of two bounding boxes.
+The prior is computed as a binary indicator func-
+tion with a relaxation for adjacent pages:
+P (E)bbox =
+(
+1.0 if Cdist ∧ Cpage
+ϵ otherwise (13)
+where ϵ is a small constant (e.g., ϵ = 0.1). The
+conditions are defined as:
+1. Spatial Condition (Cdist): The spatial dis-
+tance must be within a fraction of the page
+diagonal length Ldiag :
+d(t, v) < τ · Ldiag (14)
+where τ is a distance threshold parameter (e.g.,
+τ = 2).
+2. Pagination Condition (Cpage): The elements
+must appear on the same or immediately adja-
+cent pages relative to the screenshot reference:
+max(|pg(t)−pg(s)|, |pg(v)−pg(s)|) < τpage
+(15)
+This implementation ensures that a high prior prob-
+ability is assigned solely to figure-caption pairs or
+spatially clustered information.
+A.2.2 Knowledge Graph Topology Prior
+For the knowledge graph, we construct a weighted
+connectivity map and compute the coherence of
+the retrieved triplet. This process consists of three
+steps: Relation Aggregation, Edge Normalization,
+and Triplet Coherence Scoring.
+Step 1: Relation Aggregation. First, we map
+retrieved entities to their source document chunks.
+For any pair of chunks (u, v), we aggregate the
+weights of all relations r connecting them in the
+Knowledge Graph:
+Suv =
+X
+r∈Ru,v
+wr (16)
+12

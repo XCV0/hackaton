@@ -1,0 +1,70 @@
+www.advancedsciencenews.com www.advenergymat.de
+Figure10. SCAPS-1Dsimulatedcurrentdensity–voltagemeasurementsofSb2Se3 deviceswithTiO2 ETLsofvaryinga)electronmobility(μe),b)shallow
+donordensity(ND),c)conductionbandoﬀset(CBO)withcorrespondingFFinset.d–h)ContourplotsshowingFFdependencyonboththeTiO2 μe and
+ND forincreasingCBO.
+demonstrated that this value is inﬂuenced by the bulk CBO,
+shallow dopant density (ND), acceptor trap density (NAt)and
+ETL thickness. Given the variable J–V distortion observed in
+the present study, our previous work, and seemingly elsewhere
+in Sb2Se3 literature with TiO2 ETLs, a model of our device
+was constructed to allow for interrogation of the underlying de-
+vice physics. The baseline Sb2Se3 device model is adapted from
+Medaille et al.,[92] which was deﬁned using experimental data,
+andisdetailedinTablesS4–S6(SupportingInformation).
+In the baseline device structure, 𝜒e is set to –3.67 eV for
+anatase-TiO2 and –4.08 for Sb2Se3 (CBO = 0.41 eV), as re-
+ported previously.[32] Figure 10a,b shows simulated J–V curves
+for devices with increasing μe and ND of the TiO2, respectively,
+at a ﬁxed CBO. Literature reported values for room tempera-
+ture μe of anatase-TiO2 vary with crystallinity between 17 cm2
+V−1 s−1 for large single-crystals to 0.1 cm2 V−1 s−1 for 20 nm
+nanoparticles.[93–96] As for carrier concentration, values vary be-
+tween 1016 and 1019 cm-3,[97] primarily dependant on bulk VO
+formation.[71]
+InFigure10a,itisdemonstratedthatforaﬁxed1×1017 cm−3
+ND, there is a strong dependence of μe on the device FF. Simi-
+larly, even with a suﬃciently high μe (100 cm2 V−1 s−1), J–V dis-
+tortion is induced by lowering ND just one order of magnitude
+(Figure10b).Forcompleteness, J–V curveswithincreasing CBO
+for a ﬁxed conductivity are simulated in Figure 10c and show a
+sharp FF reduction,asexpected,beginningat +0.3eV CBO (in-
+setFigure10c)forthechosenconductivity.Theco-dependencies
+of μe and ND on device FF are shown in the contour plots of
+Figure 10d–h for increasing bulk CBO values. The simulations
+reveal an abrupt loss in FF within a small range of reasonable
+TiO2 electronic properties. These results suggest a TiO2/Sb2Se3
+CBO spikebetween+0.30and+0.45eVexists,butwhichexperi-
+mentallycanbemediatedbysuﬃcientlyhighconductivityofthe
+TiO2 layer.
+InadditiontotheTiO2 bulkelectronicpropertiesinvestigated
+inFigure10,theeﬀectsofinterfacestateswerealsoexplored.Re-
+duction of the TiO2 surface is known to produce a mid-gap fea-
+ture with Ti 3d character in photoemission of both anatase and
+rutile,whichappears ≈2eVabovethe VBM.[98,99] Thisisobserved
+experimentallyinTiO2 ﬁlmsfabricatedviasolutionspin-coating
+andRFsputteredfromacompoundTiO2 target;howeverthisde-
+fectpeakappearsabsentintheTiO2 ﬁlmssynthesizedfromthe
+DCreactivesputteringmethodasshowninFigureS18(Support-
+ingInformation).Henceitseemsreasonabletoenquirewhether
+this defect state inﬂuences the J–V distortion. The eﬀects of in-
+corporatingthisacceptor-typeinterfacialdefect2.2eVabovethe
+TiO2 VBM areexploredinFigure11.
+It is evident that for high interfacial defect densities, J–V dis-
+tortioncanbeinducedevenforthecasewheretheETL/absorber
+CBMs are nearly aligned (CBO =+0.05 eV), due to Fermi-level
+pinning, as discussed by Klenk.[36] However, in this scenario, a
+high interfacial defect density increases Voc, and is more appar-
+ent for smaller CBOs. Presumably, this is linked to the relative
+energypositionoftheholequasi-FermilevelintheSb2Se3 tothe
+acceptor-typeTiO2 surfacedefectwhichwilldecreaseastheTiO2
+𝜒e is decreased in order to investigate the CBO. Experimentally,
+thisisnotobservedasVoc appears largely independent of J–V
+distortion(Figure4).[32]
+Modulationofchargestatesinsuchacceptor-typedefectswith
+illumination is further suggested experimentally by photocon-
+ductive eﬀects, namely; crossover in the light and dark J–V
+curvepresentedhere(Figure9a),[37] andanomalouslight-biased
+EQE measurements exceeding unity, dependant on chopping
+frequency.[32] This is perhaps further evidence of a spike-like
+Adv. Energy Mater. 2024,14,2401077 2401077(11of15) ©2024TheAuthor(s). AdvancedEnergyMaterialspublishedbyWiley-VCHGmbH
+ 16146840, 2024, 34, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202401077, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

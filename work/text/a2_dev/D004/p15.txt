@@ -1,0 +1,89 @@
+Table 6: Diversity metrics at different retrieval depths (k) using hybrid retrieval. Bold = p<0.05, * = p<0.001.
+Entity Scored Diversity (σ) Categorical Coverage (%) Emot.
+k KB Config Match % Sent-Int Biz Impact Revenue Band Tenure Evidence Marker
+10 Raw 32.7 10.10 11.48 63.7 65.7 38.0 5.5 Enriched 48.5 13.51 12.73 51.8 59.2 40.1 7.0
+20 Raw 24.8 9.12 10.55 78.3 81.2 44.3 7.2 Enriched 35.4 11.56 12.08 68.1 75.6 46.4 8.9
+40 Raw 16.9 8.11 9.45 87.8 89.3 49.5 9.1 Enriched 24.6 9.68 10.88 83.6 85.1 53.1 11.0
+60 Raw 13.3 7.28 8.52 90.5 89.6 50.5 10.1 Enriched 19.0 8.52 9.78 89.0 87.5 53.6 12.2
+Raw Discussions KB Response Opinion-Enriched KB Response
+Based on seller discussions in the forums, there are several
+perspectives on community management and moderators:
+Requests for Moderator Intervention: Sellers frequently
+turn to moderators when they feel stuck in automated re-
+sponse loops or cannot get resolution through standard sup-
+port channels. Multiple sellers specifically call out modera-
+tors in their posts, asking for help with account issues, policy
+violations, and reimbursement disputes.
+Frustration with Support Systems: There’s significant
+frustration with the overall support system that leads sellers
+to seek moderator help. Sellers report dealing with what they
+describe as a “broken system.”
+Moderator Responsiveness: Sellers appear to view moder-
+ators as a potential escalation path when standard channels
+fail. However, the search results don’t show clear feed-
+back on whether moderators consistently respond or resolve
+these escalated issues.
+Community Guidelines Enforcement: At least one seller
+reported frustration with the moderation process for customer
+reviews, noting they had reported guideline violations but
+received no response after 17 days.
+Sellers have mixed but generally positive views of commu-
+nity moderators, often seeing them as a critical escalation
+path when standard support channels fail. Multiple sellers
+report that moderators are the only ones who have suc-
+cessfully helped them resolve issues that automated systems
+could not address. Sellers turn to moderators when trapped
+in what they describe as “horrible loops” of unhelpful auto-
+mated responses.
+However, sellers express frustration with community man-
+agement’s responsiveness to guideline violations. One seller
+reported waiting 17 days without response. The reviews
+continued to negatively affect their listings and sales.
+Sellers also request improvements to forum functionality.
+One seller suggested individual user accounts because the
+current setup causes irrelevant notifications. This seller in-
+dicated they “rarely ever post” specifically because of this
+issue.
+When sellers reach out to moderators, it’s typically as a last
+resort after exhausting other options. They view moderator
+intervention as necessary for protecting their accounts from
+false claims and removing malicious feedback.
+Table 9: Side-by-side comparison. The Raw KB organizes by action categories and admits “search results don’t
+show clear feedback” on outcomes. The Opinion-Enriched KB captures sentiment distribution (mixed but positive),
+success attribution (only ones who helped), behavioral explanations (rarely post, last resort), and constructive
+suggestions missing from Raw KB.
+for EACH entity (business topic/issue)
+mentioned.
+POST CONTENT: {content}
+PLATFORM: {platform_type}
+CATEGORY: {platform_category}
+{entity_registry}
+Extract the following information and
+respond ONLY with valid JSON:
+{"entities": [{
+"entity_name": "entity name",
+"confidence": "Low|Medium|High",
+"sentiment": "positive|negative|neutral|mixed",
+"sentiment_intensity": "Low|Medium|High",
+"emotional_markers": ["marker1", "marker2"],
+"evidence": "supporting evidence",
+"business_impact": "Low|Medium|High",
+"context_snippet": "relevant quote",
+"evidence_type": "personal|anecdotal|data"
+}]}
+Key extraction guidelines include:
+• Entity matching: If the entity matches one
+from the hierarchical registry, use that exact
+name; prefer granular (Tier 3) over general
+(Tier 1) entities
+• Per-entity extraction: Each entity receives
+its own complete opinion structure; a single
+post may yield multiple entities with different
+sentiments
+• Evidence typing: Classify as personal (first-
+hand experience), anecdotal (heard from oth-
+ers), or data (cites specific statistics)
+• Emotional markers: Common markers in-
+clude Frustration, Anger, Resignation, Adap-
+tation, Hope, Satisfaction, Confusion, Anxiety
+• Business impact: Consider financial men-

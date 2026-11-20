@@ -1,0 +1,70 @@
+J. Phys. Energy5 (2023) 025007 W Clarke et al
+Figure9. Schematic of the three-layer planar drift–diffusion model of a PSC.
+A.3.Holetransportlayer(b < x < b + bH)
+∂p
+∂t + 1 q ∂jp ∂x = 0 jp = −µHkBTp ∂ ∂x [ S −1 H ( p gHv ) + ϕ kBT ] (A7)
+∂2ϕ
+∂x2 = q εE (dH − p). (A8)
+A.4.Boundaryconditions
+n|x=−bE = dE, ϕ|x=−bE = Vbi − V(t) 2 (A9)
+p|x=b+bH = dH, ϕ|x=b+bH = − Vbi − V(t) 2 . (A10)
+A.5.Continuityconditions
+jn|x=0− = jn|x=0+ − Rl
+jp = −qRl
+FP = 0
+ϕ|x=0− = ϕ|x=0+
+εE
+∂ϕ
+∂x
+⏐⏐⏐
+x=0−
+= εA
+∂ϕ
+∂x
+⏐⏐⏐
+x=0+
+dEkE exp
+[
+S −1 E
+( n|x=0−
+gEc
+)
+− S −1 E
+( dE
+gEc
+)]
+= n|x=0+
+
+
+ on x = 0 (A11)
+jp|x=b− − Rr = jp|x=b+
+jn = −qRr
+FP = 0
+ϕ|x=b− = ϕ|x=b+
+εA
+∂ϕ
+∂x
+⏐⏐⏐
+x=b−
+= εH
+∂ϕ
+∂x
+⏐⏐⏐
+x=b+
+p|x=b− = dHkH exp
+[
+S −1 H
+( p|x=b+
+gHv
+)
+− S −1 H
+( dH
+gHv
+)]
+
+
+ on x = b (A12)
+where
+kE = gc dE exp ( EE c − Ec kBT + S −1 E ( dE gEc )) (A13)
+kH = gv dH exp ( Ev − EH v kBT + S −1 H ( dH gHv )) (A14)
+18

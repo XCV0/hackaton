@@ -1,0 +1,112 @@
+7437
+Es et al., 2023) or news articles (Chen et al., 2024;
+Tang and Yang, 2024; Lyu et al., 2024) as the ex-
+ternal document collection. Other works focus on
+domain-specific documents acquired through web
+crawling or manual collection (Friel et al., 2024;
+Nishiwaki et al., 2024).
+For Japanese, a typical middle-resource lan-
+guage, existing resources include the Allganize
+RAG Leaderboard (Lee et al., 2024), which eval-
+uates models based on business documents.
+Additionally, general-purpose QA datasets like
+JEMHopQA (Ishii et al., 2023), originally con-
+structed from Japanese Wikipedia, have been
+adapted to evaluate Japanese RAG systems (Yano
+et al., 2024).
+Data Contamination in RAG Evaluation
+While existing benchmarks provide valuable
+insights, they face a critical challenge: data
+contamination. Because many of these bench-
+marks use public web data, it is highly likely that
+the documents targeted for retrieval are already
+included in the LLMs’ massive pretraining corpora.
+In RAG evaluation, if the generator LLM has
+already memorized the target documents, there
+is a significant risk that the evaluation cannot be
+conducted accurately (Krishna et al., 2024; Park
+et al., 2025).
+In such cases, an LLM might bypass the re-
+trieved context and correctly answer questions rely-
+ing solely on its internal parametric knowledge (as
+demonstrated in Fig. 1). This conflates the model’s
+memorization capabilities with its actual ability to
+groundgeneratedanswersintheprovidedretrieved
+documents. Furthermore, as future LLMs acquire
+even more knowledge, existing benchmarks based
+on Wikipedia and past events will become increas-
+ingly solvable without retrieval. To address this fun-
+damental issue, our work moves away from public
+corpora and explores the use of synthetic docu-
+ments concerning non-existent entities, ensuring
+that the target information is strictly absent from
+any pretraining data.
+3. Benchmark Construction
+This section outlines the benchmark constructed in
+this study, details its construction procedure, and
+presents an analysis of the data it contains.
+3.1. Benchmark Overview
+Inthisstudy,weconstructaRAGbenchmarkwhere
+the information extracted from retrieved documents
+(hereinafter called “external information”) is essen-
+tial for every question. To achieve this, we set
+documents concerning non-existent entities and
+events—which are unlikely to be in an LLM’s pre-
+training corpus—as the retrieval target within the
+benchmark. This benchmark is composed of a
+collection of such documents, in addition to corre-
+sponding QA pairs.
+It is not practical to manually create all of the doc-
+umentsconcerningnon-existententitiesandevents.
+Therefore, we employ LLMs to synthesize docu-
+mentsaboutnon-existententitiesandeventsbased
+on documents collected from the Web. Specifically,
+we collect four types of documents commonly used
+in RAG applications: encyclopedias, news articles,
+product reviews, and internal company regulations.
+Then, we prompt LLMs to imitate each of these
+document types to create documents about non-
+existent entities and events. Additionally, to pre-
+vent evaluation impacts arising from conflicts with
+LLMs’ internal knowledge, only documents that do
+not contradict real-world facts are targeted for QA
+pair creation. We manually verify whether the LLM-
+synthesized documents meet the aforementioned
+requirements and remove any that do not.
+In creating the QA pairs, we aim to measure
+the ability to utilize external information, which con-
+sists of the ability to extract information from given
+retrieved documents and the ability to reason us-
+ing the extracted information. First, to evaluate
+the former one alone, we create extractive-type
+(Extracting) QA pairs, where the correct answer
+to a question is described almost verbatim within
+the relevant documents. This allows us to evalu-
+ate whether an LLM can appropriately extract the
+partsofthetextcorrespondingtothequestionwhen
+given the retrieved documents. Next, as an evalua-
+tion that also includes the latter ability, we create
+more advanced QA pairs where simply extracting
+information from the relevant parts of a document
+is not sufficient to derive the correct answer, and
+further reasoning using that information is required.
+This makes it possible not only to evaluate the abil-
+ity to extract information from the given retrieved
+documentsbutalsotomeasuretheabilitytoreason
+using that extracted information.
+Next, we describe the four types of datasets con-
+structed for this benchmark in §3.2, explain the
+construction procedure for the synthetic document
+collection in §3.3.1, §3.3.2, and §3.3.3, and detail
+the procedure for QA construction in §3.3.4.
+3.2. The Four Types of Datasets
+In this benchmark, we construct the following four
+types of datasets, envisioning various scenarios
+where RAG would be necessary. We specifically
+selected these four domains because they com-
+prehensively represent the most prevalent real-
+world applications of RAG systems: open-domain
+knowledge querying (Wikipedia), temporal and dy-
+namic event tracking (News), customer support and
+e-commerce (ProductReview), and enterprise-level
+private data retrieval (CompanyRules).

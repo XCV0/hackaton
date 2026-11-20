@@ -1,0 +1,82 @@
+Table S5: Paired question-level bootstrap comparisons on TED (10,000 samples). Differences are URGen minus
+the named ﬁxed-depth baseline; negative OC@0.8 and ECE differences favor URGen.
+Comparison Metric ∆ (pp) 95% CI (pp) p
+URGen − Fixed-1
+Accuracy +5.74 [−0.20, 11.68] 0.0630
+OC@0.8 −9.90 [−14.26, −5.54] 0.0002
+ECE −8.00 [−13.59, 0.54] 0.0690
+URGen − Fixed-2
+Accuracy +7.33 [0.79, 14.06] 0.0318
+OC@0.8 −7.33 [−11.49, −3.17] 0.0016
+ECE −6.46 [−12.15, 2.27] 0.1766
+URGen − Fixed-5
+Accuracy +10.69 [3.17, 18.42] 0.0052
+OC@0.8 −11.68 [−17.62, −5.94] 0.0002
+ECE −12.13 [−18.89, −2.50] 0.0110
+Table S6: Joint sensitivity to retrieval and answer temperature counts on TED with Llama-3.1-8B. Values are mean
+± standard deviation over ﬁve seeds.
+M1 M2 Temperatures Acc. (%)↑ OC@0.8 (%)↓ ECE (%)↓ Avg. depth
+3 3 {0.3, 0.5, 0.7} 78.02 ± 1.29 7.52 ± 1.13 5.45 ± 1.03 3.06
+5 5 {0.3, 0.4, 0.5, 0.6, 0.7} 80.40 ± 1.29 1.98 ± 0.00 6.80 ± 1.13 3.25
+7 7 {0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8} 79.60 ± 1.33 3.96 ± 0.70 4.00 ± 1.04 3.25
+Table S7: Linear versus exponential uncertainty-to-
+depth mapping on TED with Llama-3.1-8B (ﬁve
+seeds).
+Mapping
+Acc. (%)
+↑
+OC@0.8 (%)
+↓
+ECE (%)
+↓
+Linear 78.81 ± 2.85 7.39 ± 1.63 6.60 ± 0.57
+Exponential 80.40 ± 1.29 1.98 ± 0.00 6.80 ± 1.13
+Table S8: TED accuracy with the TED-only 35-
+keypoint gallery and the pooled 57-keypoint TED+GD
+gallery.
+Method TED-35 Pooled-57 Change (pp)
+Fixed-1 74.65 72.48 −2.18
+Fixed-5 69.70 68.91 −0.79
+URGen 80.40 77.03 −3.37
+stronger LLM-based retrieval control can close the
+gap to URGen.
+D.1 Dense Retriever Baselines
+Dense retrievers map the question and candidate
+keypoints into an embedding space and select the
+nearest keypoint. This setting is efﬁcient and sim-
+ple, but it does not provide an explicit estimate
+of retrieval ambiguity. In our setting, dense re-
+trieval also faces a mismatch: the keypoints are
+short clinical recommendations, while many ques-
+tions require distinguishing between several se-
+mantically related guideline statements. Table S11
+shows that BioMedCLIP improves over generic
+CLIP, but both remain below URGen.
+Table S9: Observed ranges of normalized context and
+answer uncertainty used in fusion.
+Dataset ˜ucontext ˜uanswer
+TED [0.545, 0.995] [0.000, 0.875]
+GD [0.581, 0.997] [0.000, 0.964]
+Table S10: Wrong answers in low-context-uncertainty
+subsets on TED.
+Subset Wrong Subset size
+Lowest 25% 2 26
+Lowest 50% 5 51
+The dense retriever results indicate that sim-
+ply replacing the retrieval backbone is not enough.
+BioMedCLIP is better aligned with biomedical ter-
+minology than CLIP, but it still retrieves a ﬁxed
+number of keypoints and cannot express whether
+the relevance distribution is sharp or diffuse. UR-
+Gen uses the ranking distribution itself as a signal,
+allowing it to select fewer keypoints when one or
+two guideline statements are decisive, and more
+keypoints when the question requires broader clin-
+ical context.
+D.2 LLM Ranking and RQ-RAG Baselines
+We further compare against LLM-based ranking
+and query-reﬁnement baselines in Table S12. The
+single-pass Llama ranker uses the same Llama-
+3.1-8B backbone to rank keypoints once, then re-
+trieves only the top-1 keypoint. RQ-RAG reﬁnes
+3933

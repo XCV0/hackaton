@@ -1,0 +1,103 @@
+7444
+errors needs further annotations specifying the
+exact source sentences required for each an-
+swer, which are not yet included in our current
+datasets, we leave the separated evaluation of
+retrieval and generation as a critical direction for
+future work.
+• Scaling the dataset via automated verification:
+Thedatasetconsistsof161syntheticdocuments
+and 561 QA pairs. This relatively small scale
+is a direct consequence of the costly construc-
+tion process, which required LLM generation
+followed by careful manual filtering and QA cre-
+ation. To address this scalability issue, we plan
+todevelopanautomated,LLM-drivenverification
+pipeline. By utilizing our current human-verified
+data as a seed, we aim to finetune or prompt an
+“LLM critic” to reliably detect factual contradic-
+tions, significantly reducing human annotation
+costs and enabling the generation of massive
+synthetic datasets.
+• Improving ecological validity: Our synthetic doc-
+uments, which are clean and narrative, may not
+represent the full spectrum of real-world docu-
+ments, which often include noisy text. Further-
+more, while annotators confirmed the fluency of
+the generated Japanese, it remains unexplored
+whether these synthetic texts differ from real-
+world human-authored documents in stylistic or
+linguistic dimensions (e.g., lexical diversity or
+syntactic complexity). To enhance the ecolog-
+ical validity of the benchmark, our next step is
+to introduce controlled noise into the synthetic
+generation pipeline. It is worth a try to simulate
+real-world data imperfections by injecting noise
+such as OCR errors, colloquial disfluencies, and
+complex structural elements like tables. This
+may be helpful to bridge the gap between clean
+synthetic text and practical industrial realities.
+• Mitigating evaluation bias: Since the LLM-as-
+a-judge used in this study also had errors in
+judging correctness, exploring more robust au-
+tomated evaluation methods for RAG can be
+considered another important future task. A re-
+lated concern is the use of GPT-4o-20240806 as
+boththeprimaryjudgeandasthetop-performing
+model in the evaluation. This coupling could in-
+troduce a potential bias, as the judge may favor
+the response style of its own model. While this
+choice was made after preliminary tests showed
+other LLMs to be less reliable judges, and large-
+scale human evaluation was not feasible, future
+work could explore cross-judge validation to bet-
+ter quantify and mitigate this bias.
+7. Ethical Considerations
+An ethical consideration for this benchmark is the
+dual-usenatureofitsmethodology. Thetechniques
+employed to generate “fake but plausible” docu-
+ments, while benign in this research context, could
+be adapted for malicious purposes. Specifically,
+the ability to create realistic-sounding but fictional
+news, company rules, or encyclopedic entries high-
+lights a potential risk for generating sophisticated
+disinformation.
+8. Bibliographical References
+Akiko Aizawa, Eiji Aramaki, Bowen Chen, Fei
+Cheng, Hiroyuki Deguchi, Rintaro Enomoto,
+Kazuki Fujii, Kensuke Fukumoto, Takuya
+Fukushima, Namgi Han, et al. 2024. LLM-jp: A
+Cross-Organizational Project for the Research
+and Development of Fully Open Japanese LLMs.
+arXiv preprint arXiv:2407.03963.
+Hoyeon Chang, Jinho Park, Seonghyeon Ye,
+Sohee Yang, Youngkyung Seo, Du-Seong
+Chang, and Minjoon Seo. 2024. How Do
+Large Language Models Acquire Factual Knowl-
+edge During Pretraining? arXiv preprint
+arXiv:2406.11813.
+JiaweiChen,HongyuLin,XianpeiHan,andLeSun.
+2024. Benchmarking Large Language Models
+in Retrieval-Augmented Generation. In Proceed-
+ings of the AAAI Conference on Artificial Intelli-
+gence, volume 38, pages 17754–17762.
+Shahul Es, Jithin James, Luis Espinosa-Anke, and
+Steven Schockaert. 2023. RAGAS: Automated
+Evaluation of Retrieval Augmented Generation.
+arXiv preprint arXiv:2309.15217.
+Robert Friel, Masha Belyi, and Atindriyo Sanyal.
+2024. RAGBench: Explainable Benchmark for
+Retrieval-AugmentedGenerationSystems. arXiv
+preprint arXiv:2407.11005.
+Kazuki Fujii, Taishi Nakamura, Mengsay Loem, Hi-
+roki Iida, Masanari Ohi, Kakeru Hattori, Hirai
+Shota, Sakae Mizuki, Rio Yokota, and Naoaki
+Okazaki. 2024. Continual Pre-Training for Cross-
+Lingual LLM Adaptation: Enhancing Japanese
+Language Capabilities. In First Conference on
+Language Modeling.
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang
+Jia, Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, and
+Haofen Wang. 2023. Retrieval-Augmented Gen-
+eration for Large Language Models: A Survey.
+arXiv preprint arXiv:2312.10997.

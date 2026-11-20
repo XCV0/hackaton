@@ -1,0 +1,88 @@
+Findings of the Association for Computational Linguistics: EMNLP 2025, pages 4104–4121
+November 4-9, 2025 ©2025 Association for Computational Linguistics
+How Does Knowledge Selection Help Retrieval Augmented Generation?
+Xiangci Li1, 2∗ Jessica Ouyang2
+1 AWS AI Labs, 2 University of Texas at Dallas
+lixiangci8@gmail.com, jessica.ouyang@utdallas.edu
+Abstract
+Retrieval-augmented generation (RAG) is a
+powerful method for enhancing natural lan-
+guage generation by integrating external knowl-
+edge into a model’s output. While prior work
+has demonstrated the importance of improv-
+ing knowledge retrieval for boosting genera-
+tion quality, the role of knowledge selection,
+a.k.a. reranking or filtering, remains less clear.
+This paper empirically analyzes how knowl-
+edge selection influences downstream gener-
+ation performance in RAG systems. By sim-
+ulating different retrieval and selection condi-
+tions through a controlled mixture of gold and
+distractor knowledge, we assess the impact of
+these factors on generation outcomes. Our find-
+ings indicate that the downstream generator
+model’s capability, as well as the complexity of
+the task and dataset, significantly influence the
+impact of knowledge selection on the overall
+RAG system performance. In typical scenarios,
+improving the knowledge recall score is key
+to enhancing generation outcomes, with the
+knowledge selector providing limited benefit
+when a strong generator model is used on clear,
+well-defined tasks. For weaker generator mod-
+els or more ambiguous tasks and datasets, the
+knowledge F1 score becomes a critical factor,
+and the knowledge selector plays a more promi-
+nent role in improving overall performance.
+1 Introduction
+Retrieval-augmented generation (RAG) has be-
+come a pivotal technique in natural language gen-
+eration, enhancing a language model’s ability to
+produce relevant, informed output by incorporating
+external knowledge (Gao et al., 2023; Fan et al.,
+2024; Gan et al., 2025). This approach comple-
+ments the model’s internal knowledge, which is
+inherently constrained by the information that was
+available during training, by retrieving up-to-date,
+* Work performed outside of AWS AI Labs.
+relevant information to support and inform its out-
+put.
+The quality of the retrieved knowledge directly
+influences the quality of RAG outputs. Previous
+studies have consistently shown that improving
+knowledge retrieval leads to a direct enhancement
+in generation performance (Dinan et al., 2019; Li
+et al., 2022, 2024; Wang et al., 2024; Wu et al.,
+2024). Similarly, effective knowledge selection,
+a.k.a. reranking or filtering, has been observed
+to improve generation quality by filtering out re-
+trieved information that is less relevant to the gen-
+eration target (Kim et al., 2020; Thulke et al., 2021;
+Li et al., 2022; Sun et al., 2023; Zhang et al., 2023;
+Wang et al., 2023; Zheng et al., 2024; Wang et al.,
+2024; Zhao et al., 2025). However, we observe that
+knowledge selection is barely used for tasks other
+than dialogue generation, and there are notably
+fewer LLM-based RAG works that use knowledge
+selection, compared to fine-tuned RAG models (see
+Section 2).
+We hypothesize that knowledge selectors may
+not always improve downstream generation per-
+formance, and that there may be a selection bias
+where only positive results involving knowledge
+selector modules are published, while experiments
+where knowledge selectors are not helpful simply
+do not report those results. Further, prior works
+focus on proposing specific knowledge selection
+approaches, offering only narrow, case-specific in-
+sights into the relationship between knowledge and
+generation. As a result, readers are often left with
+anecdotal observations, such as “using model A
+in scenario X improves performance”, without a
+global picture of how knowledge selection impacts
+generation and when it is most effective.
+Therefore, in this work, we perform a systematic
+empirical analysis* of how knowledge selectors
+*https://github.com/jacklxc/
+KnowledgeSelectionSimulation
+4104

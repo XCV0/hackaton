@@ -1,0 +1,97 @@
+reviews (Nayeem and Rafiei, 2025): we use a sam-
+ple of three hotel properties (Silverton Las Vegas,
+Ambassador Bangkok, Ala Moana Honolulu) from
+the full 500-entity OpinioBank release, totaling
+6,256 reviews across 15 entities and 57 questions.
+Evaluation protocol. We target entities with gen-
+uine opinion diversity by computing sentiment en-
+tropy H(e) and selecting those with H(e) ≥ 0.6
+ensuring both positive and negative sentiments are
+represented (4 entities for forums, 15 for Opin-
+ioBank). For each entity, we generate natural lan-
+guage questions across multiple types designed
+to probe different facets of opinion. This yielded
+48 questions for forums and 57 for OpinioBank.
+Each question is submitted to both KB configu-
+rations. Then, we retrieve the top-k documents
+and generate responses using the retrieved context.
+Retrieved documents are matched back to opinion
+metadata to compute diversity metrics.
+Metrics. We design proxy metrics aligned with
+the theoretical objectives (Equation 8).
+For coverage: (1) Sentiment-Intensity σ: com-
+bines sentiment polarity and intensity into a sin-
+gle numeric score (Positive+High = +30, Posi-
+tive+Medium = +20, Positive+Low = +10, Neu-
+tral = 0, Negative+Low = −10, Negative+Medium
+= −20, Negative+High = −30); we report the
+standard deviation across retrieved documents,
+where higher σ indicates broader coverage of the
+sentiment-intensity space. (2) Business Impact
+σ: maps impact levels to numeric values (High
+= 30, Medium = 20, Low = 10); higher σ indi-
+cates retrieval of both high-impact and low-impact
+perspectives. (3) Entity Match Rate: fraction of
+retrieved documents that mention the queried entity,
+measuring retrieval precision for opinion-relevant
+content. (4) Emotional Markers: count of distinct
+emotional markers (e.g., Frustration, Hope, Resig-
+nation) across retrieved documents. (5) Empirical
+W1: Wasserstein distance between corpus-level
+and retrieved sentiment distributions.
+For fidelity: human evaluation via blind pairwise
+comparison on the forums dataset (5 annotators,
+48 pairs).
+For fairness: Demographic Coverage, the frac-
+tion of categories represented in retrieved docu-
+ments for each author attribute: Revenue Band
+(business size), Tenure (experience levels), and Ev-
+idence Type (personal, anecdotal, data-driven).
+Table 2: Diversity metrics at k=20 (hybrid retrieval,
+forums dataset). Statistical significance via Wilcoxon
+signed-rank test (n=48): bold = p<0.05, * = p<0.001.
+Metric Raw KB Enr. KB ∆
+Entity Match (%) 24.8 35.4 +42.7%*
+Sent-Int σ 9.12 11.56 +26.8%*
+Biz Impact σ 10.55 12.08 +14.5%
+Emot. Markers 7.2 8.9 +23.6%*
+Revenue Band (%) 78.3 68.1 −13.0%*
+Tenure (%) 81.2 75.6 −6.9%
+Evidence (%) 44.3 46.4 +4.7%
+Table 3: Empirical W1 between corpus-level and re-
+trieved sentiment distributions (k=20). Lower is better.
+Forums results significant at k=10, 40, 60 (p<0.05).
+Dataset Raw W1 Enriched W1 ∆
+Forums 8.87 7.24 −18%
+Silverton 15.31 9.17 −40%
+Ambassador 19.15 14.54 −24%
+Ala Moana 12.88 6.75 −48%
+5.2 Results
+Coverage. Table 2 presents the core comparison
+at k=20 with hybrid retrieval on the forums dataset.
+Opinion enrichment significantly improves all cov-
+erage metrics: +42.7% entity match rate, +26.8%
+sentiment-intensity σ, +14.5% business impact σ,
+and +23.6% emotional markers (all p<0.05).
+To directly validate the connection to our theoret-
+ical framework, we compute empirical W1 between
+corpus-level and retrieved sentiment distributions
+(Table 3). The enriched KB is consistently 18-48%
+closer to corpus-level sentiment truth across both
+domains.
+Fidelity. Human annotators confirmed that
+opinion-enriched retrieval produces responses
+that better communicate opinion diversity. Of
+48 question-response pairs, annotators preferred
+Opinion-Enriched KB responses 79.2% of the time
+(95% CI: [65.0%, 89.5%], p<0.001). Appendix D
+has more details about the annotation study. Ap-
+pendix F provides a qualitative example showing
+how enriched responses capture sentiment distri-
+butions and constructive suggestions missing from
+baseline responses.
+Fairness. Contrary to expectations, opinion en-
+richment reduces overall demographic coverage:
+Revenue Band by 13.0% and tenure by 6.9% (both
+p<0.05). However, when comparing only doc-
+uments that actually mention the queried entity,

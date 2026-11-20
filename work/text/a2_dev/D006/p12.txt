@@ -1,0 +1,45 @@
+LLM-Confidence Reranker
+Table 2
+Comparative Performance of BM25 with Various Rerankers and LCR Enhancement. NDCG@5 scores for the BM25
+retriever combined with various rerankers, with and without the LCR (LLM-Confidence Reranker) enhancement, across
+BEIR datasets (NQ: NaturalQuestions, TOUC: Touché, SCID: SciDocs, NFCO: NFCorpus, DBPE: DBpedia-Entity, FEVE:
+FEVER, AVG: average across BEIR datasets) and TREC datasets (DL19, DL20, AVG: average across TREC datasets).
+Bold values indicate the best performance within each reranker group, and underlined values indicate the best performance
+between the same reranker with and without LCR.
+BEIR TREC
+Method NQ TOUC SCID NFCO DBPE FEVE AVG DL19 DL20 AVG
+Retriever-Only
+- .0488 .4911 .1144 .3640 .1059 .3111 .2392 .5278 .5067 .5172
++LCR .0585 .5015 .1149 .3659 .1078 .3294 .2463 .5431 .5112 .5271
+Pre-trained LLM Based Rerankers
+YesNo .0321 .4388 .0685 .2941 .0777 .1310 .1737 .5925 .5485 .5705
++LCR .0516 .4600 .0872 .3087 .0912 .2581 .2095 .5974 .5515 .5744
+QLM .0610 .4090 .1215 .3415 .1003 .3595 .2321 .5341 .4815 .5078
++LCR .0630 .4456 .1228 .3427 .1037 .3608 .2397 .5563 .4898 .5230
+RankGPT .0489 .4914 .1144 .3630 .1058 .3111 .2391 .5278 .5067 .5172
++LCR .0587 .5018 .1149 .3649 .1078 .3295 .2463 .5431 .5103 .5267
+Fine-tuned Transformer Based Rerankers
+ColBERT .0791 .4778 .1204 .3832 .1410 .4745 .2793 .6377 .6074 .6226
++LCR .0805 .4936 .1205 .3839 .1413 .4745 .2824 .6377 .6074 .6226
+Cross-Encoder .0812 .4664 .1266 .3921 .1465 .4779 .2818 .6508 .5983 .6245
++LCR .0817 .4972 .1266 .3936 .1467 .4779 .2873 .6508 .5986 .6247
+RankT5 .0831 .5165 .1376 .4041 .1479 .4864 .2959 .6548 .6065 .6306
++LCR .0839 .5322 .1378 .4049 .1482 .4864 .2989 .6548 .6078 .6313
+advantages are more pronounced for weaker rerankers such as YesNo, underscoring its capacity to amplify semantic
+signals and mitigate biases in dense retrieval.
+Analysis across datasets reveals amplified gains on factual-oriented tasks (e.g., NQ, FEVER), as evidenced by
+RankGPT on NQ (1.1% relative gain), which highlights the efficacy of confidence binning in elevating document
+relevance. On datasets with high baselines, such as FEVER, LCR preserves stability without excessive intervention.
+Inconclusion,LCRperformsrobustlywithbothBM25andContriever,yieldinganaverage3.6%gainandconfirming
+its plug-and-play adaptability across sparse and dense retrieval paradigms.
+4.4. Impact of Query Threshold
+To assess the impact of the query threshold (QT) on LCR performance, we first examine the results in Table 3,
+whichcontrasts“+LCRw/oQT”and“+LCR”(withQT)acrossrerankersusingContrieverastheretriever.Onaverage,
+“+LCR”achieveshigherscoresonbothBEIRandTREC(e.g.,0.3998vs.0.3962forRetriever-OnlyonBEIR,0.5845
+vs. 0.5842 on TREC). These patterns indicate that QT further enhances LCR’s ranking performance across various
+rerankers. Specifically, when the LLM exhibits low confidence in a query, indicating limited internal knowledge of
+the answer, it can more effectively distinguish helpful documents, leading to stronger confidence signals and greater
+gains from LCR. Conversely, high query confidence suggests the LLM already knows the answer, resulting in weaker
+signals for document helpfulness differentiation. Thus, QT enables selective application of LCR to queries where it
+provides the most benefit.
+Song et al.: Preprint submitted to Elsevier Page 12 of 21

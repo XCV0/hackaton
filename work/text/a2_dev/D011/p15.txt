@@ -1,0 +1,97 @@
+Then a general construction is
+q(t) = 1V1 (t)∆P g1(t) − 1V0 (t)∆P g0(t), (13)
+with feasibility constraints
+∆P g1(t) ≤ p(t) (t ∈ V1),
+∆P g0(t) ≤ p(t) (t ∈ V0). (14)
+We adopt a simple and intuitive choice, Propor-
+tional Modulation, which allocates ∆P propor-
+tionally to the original probability mass inside each
+subset:
+g1(t) = p(t|t ∈ V1),
+g0(t) = p(t|t ∈ V0). (15)
+Substituting into the general form yields
+q(t) =
+1V1 (t)∆P p(t|t ∈ V1) − 1V0 (t)∆P p(t|t ∈ V0).
+(16)
+Let
+λ ≜
+∑
+t∈V1
+p(t) (17)
+be the total original probability mass of V1. Then
+p(t|t ∈ V1) = p(t) λ (t ∈ V1),
+p(t|t ∈ V0) = p(t) 1 − λ (t ∈ V0). (18)
+Define the “unit modulation” on V1 as
+δ ≜ ∆P λ , (19)
+and similarly on V0,
+δ′ ≜ ∆P 1 − λ . (20)
+Therefore, proportional modulation can be ex-
+pressed compactly as
+q(t) =
+(
+1V1 (t)δ − 1V0 (t)δ′) p(t), (21)
+leading to the final modulated distribution:
+pw(t) = [ 1 + (2w − 1) ( δ1V1 (t) − δ′1V0 (t) )] p(t).
+(22)
+This form makes explicit that proportional mod-
+ulation preserves the relative ranking of tokens
+within each subset while shifting mass between
+subsets to encode the watermark bit.
+C.2 Proofs of Theorem 1
+A valid distribution requires normalization:
+∑
+t∈V
+pw(t) = 1. (23)
+Using the modulation form,
+∑
+t∈V
+pw(t) = ∑
+t∈V
+p(t) + (2w − 1)
+∑
+t∈V
+q(t). (24)
+Because p is already normalized, ∑ V p(t) = 1.
+Thus we only need
+∑
+V
+q(t) = 0 (25)
+Under proportional modulation,
+q(t) =
+(
+1V1 (t)δ − 1V0 (t)δ′) p(t). (26)
+Therefore,
+∑
+t∈V
+q(t) = δ
+∑
+t∈V1
+p(t) − δ′ ∑
+t∈V0
+p(t)
+= δλ − δ′(1 − λ).
+(27)
+Setting this equal to zero gives
+δλ − δ′(1 − λ) = 0
+⇒ δ′ = δ λ 1 − λ . (28)
+Hence the stated relation is necessary and sufficient
+for probability conservation and thus for a valid
+modulated distribution.
+C.3 Proofs of Theorem 2
+We interpret “unbiased” as: averaged over water-
+mark bits, the modulated distribution equals the
+original distribution. This is a standard require-
+ment ensuring no systematic drift in generation
+quality when the embedded bits are random. In
+Algorithm 1, we shuffle the meaningful watermark
+to a binary string W i.i.d. Bernouli(0.5), which
+satisfies the standard requirement.
+The watermark bits are i.i.d. Bernoulli(0.5).
+Then
+Ew[2w − 1] = (+1) · 1 2 + (−1) · 1 2 = 0. (29)
+Taking expectation of the modulated distribution:
+Ew[pw(t)] = Ew [ p(t) + (2w − 1)q(t) ]
+= p(t) + Ew[2w − 1]q(t)
+= p(t).
+(30)
+21209

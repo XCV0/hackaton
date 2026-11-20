@@ -1,0 +1,101 @@
+in cross-document questions. For example, using
+the simple Q&A pairs in Figure 3, the LLM finds
+links such as “first gold medal”, “swimming race”,
+“final” and the date “July 27” between the two sets
+of simple Q&A pairs. The LLM then generates a
+comparison question: “Which country won its first
+gold medal earlier at the 2024 Olympic Games, the
+U.S. or Germany?”. We then ask the LLM to gen-
+erate an answer to the question using information
+from the selected simple Q&A pairs and the two
+summaries (the prompt for answer generation is
+in Figure 16). Inspired by Yang et al. (2024), we
+focus on four types of cross-document questions:
+aggregation, comparison, multi-hop, and set ques-
+tions. We present the definition of the four types of
+questions in Table 8, and the prompts to generate
+these questions in Figures 12, 13, 14, and 15.
+4.3 Quality Control and Human Translation
+The generated Q&A pairs may contain factual er-
+rors due to LLM hallucinations (Huang et al., 2024).
+To avoid these, we ask a professional multilingual
+annotation team to verify the quality of the gener-
+ated Q&A pairs (the annotation guideline is shown
+in Figure 17). They select examples where the ques-
+tion is natural and answerable and the answer is
+either correct or correctable by them. For the mono-
+lingual retrieval setting, we engage a professional
+translation team to translate the verified Q&A pairs
+into German, Spanish, Chinese, and Arabic. For
+the multilingual retrieval setting, translations are
+performed only into language X for Q&A pairs
+derived from X-English article pairs (e.g., into Ger-
+man for Q&A pair created from German-English
+article pairs). See Appendix B.5 for more details
+on human translation.
+Table 2 presents the dataset statistics after human
+verification and translation.
+4.4 Selecting the Distracting Articles
+The grounding articles for each question consist of
+a set of supporting documents and distracting doc-
+uments. The two articles used in cross-document
+question generation serve as supporting documents.
+For distracting documents, we search for doc-
+uments that are topically related to the question
+but do not answer it. In the monolingual retrieval
+setting, we use a multilingual dense retriever to
+search for English documents. In the multilingual
+retrieval setting we search for documents in both
+English and the question language. In both settings
+we select distracting documents that are published
+Monolingual Retrieval Multilingual Retrieval
+De / Es / Zh / Ar De Es Zh Ar
+Example Number 1000 300 300 300 300
+Question
+Aggregation 313 86 99 106 95
+Comparison 260 98 109 81 85
+Multi-hop 215 45 40 65 57
+Set 212 71 52 48 63
+Answer Original 872 291 296 284 263 Corrected 128 9 4 16 37
+Table 2: Statistics of XRAG question types in monolin-
+gual and multilingual retrieval settings. Answers that
+are corrected during quality control are also considered.
+at least two weeks before the supporting articles to
+ensure that the distracting documents do not answer
+the question.
+This process yields a set of grounding documents
+for each question. In the monolingual retrieval set-
+ting, each question will have six distracting doc-
+uments and two supporting documents, all in En-
+glish. In the multilingual retrieval setting, each
+question will have one supporting document and
+three distracting documents in English, and the
+same again in the question language.
+5 Benchmarking with XRAG
+5.1 Experimental Settings
+Models. We benchmark five models on XRAG:
+GPT-4o (OpenAI, 2024), Claude Sonnet-3.5 v1
+(Anthropic, 2024), Mistral-large (Jiang et al., 2023),
+Command-R+ (Cohere, 2024), and Nova Pro (Ama-
+zon, 2024). These are leading closed- and open-
+source multilingual LLMs, and have been widely
+used in RAG research. Unless otherwise specified,
+the evaluation is conducted by providing the LLM
+with a question, two supporting documents, and six
+distracting documents (we show the prompt used
+to instruct LLMs in using articles to answer ques-
+tions in Figure 18). Figure 4 shows the evaluation
+workflow on XRAG.
+Evaluation Metrics. The answers in XRAG are
+usually simple facts stated in one or two sentences.
+Following previous work (Yang et al., 2024; Wang
+et al., 2024; Thakur et al., 2024a), we use the LLM-
+as-a-Judge method (Zheng et al., 2023), which
+has proven good at recognizing when two short
+answers mean the same thing (Kamalloo et al.,
+2023). To avoid self-preference (Panickssery et al.,
+2024), we use a panel of three LLM judges (GPT-
+4o, Claude Sonnet-3.5, and Mistral-large) with a
+majority vote. We also use a language detector5 to
+5https://github.com/pemistahl/lingua
+15674

@@ -1,0 +1,102 @@
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio,
+William Cohen, Ruslan Salakhutdinov, and Christo-
+pher D Manning. 2018. Hotpotqa: A dataset for
+diverse, explainable multi-hop question answering.
+In Proceedings of the 2018 conference on empiri-
+cal methods in natural language processing, pages
+2369–2380.
+Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak
+Shafran, Karthik Narasimhan, and Yuan Cao. 2022.
+React: Synergizing reasoning and acting in language
+models. arXiv preprint arXiv:2210.03629.
+Xiao Yue, Guangzhi Qu, and Lige Gan. 2026.
+Litesemrag: Lightweight llm-free semantic-aware
+graph retrieval for robust rag. arXiv preprint
+arXiv:2604.16350.
+A Dataset Details
+To comprehensively evaluate the multi-hop rea-
+soning and knowledge structuring capabilities of
+ThreadRAG, we conduct our experiments across
+three standard benchmarks. Detailed descriptions
+of each dataset are provided below:
+HotpotQA (Yang et al., 2018) is a widely-
+used, crowd-sourced dataset derived from English
+Wikipedia, comprising approximately 113k ques-
+tions. It specifically requires models to bridge infor-
+mation across the introductory paragraphs of mul-
+tiple distinct articles to deduce the correct answer.
+While the original dataset provides golden para-
+graphs and human-annotated supporting sentences,
+we evaluate our framework strictly under a realistic
+open-domain setting. In this setting, golden con-
+texts are not provided a priori; instead, the system
+must retrieve and structure relevant information
+from a massive corpus, which rigorously tests the
+robustness of our Semantic Topology Graph (STG)
+against retrieval noise and distractors.
+2WikiMultihopQA (2Wiki) (Ho et al., 2020)
+focuses on evaluating complex 2-hop reasoning,
+placing a strong emphasis on compositional deduc-
+tion and comparative analysis. The questions in this
+dataset are systematically constructed by combin-
+ing both structured knowledge (from Wikidata) and
+unstructured texts (from Wikipedia). This struc-
+tural heterogeneity makes it an ideal testbed for
+evaluating whether our framework can seamlessly
+align and linearize varied knowledge formats into
+a cohesive, modality-native narrative flow without
+semantic loss.
+MuSiQue (Trivedi et al., 2022) is a highly de-
+manding dataset carefully constructed by compos-
+ing bottom-up single-hop queries into intricate
+multi-hop reasoning chains. Compared to Hot-
+potQA and 2Wiki, MuSiQue poses a significantly
+greater challenge as it features deep 2- to 4-hop
+questions and is meticulously designed to prevent
+reasoning shortcuts. This dataset effectively stress-
+tests the capability of our Energy-Driven Pathfind-
+ing (EDP) mechanism to maintain long-range logi-
+cal coherence and prevent structural truncation in
+extremely deep reasoning scenarios.
+B Baseline Descriptions
+To comprehensively evaluate the performance of
+ThreadRAG and clearly demonstrate the char-
+acteristics of different knowledge representation
+paradigms, we benchmark our framework against
+five distinct categories of state-of-the-art baselines.
+Non-Graph RAG. This category encompasses
+text-centric paradigms that tackle multi-hop reason-
+ing over plain text without relying on explicit graph
+structures. Instead of using structural priors, these
+approaches lean heavily on the LLM’s intrinsic ca-
+pacity to process continuous contexts and deduce
+logical chains. To evaluate this paradigm, we select
+several prominent baselines: RA-CoT (Wei et al.,
+2022) and ReAct (Yao et al., 2022), which enhance
+standard text reasoning by integrating retrieval with
+chain-of-thought and acting, respectively; IRCoT
+(Trivedi et al., 2023) and Iter-RetGen (Shao et al.,
+2023), which build continuous reasoning chains
+by iteratively interleaving retrieval steps with gen-
+eration; and Self-Ask (Press et al., 2023), which
+structures the context by decomposing complex
+queries into manageable textual sub-queries.
+KG-Chunk RAG. Methods in this paradigm
+aim to mitigate the semantic fragmentation caused
+by fine-grained triplet extraction by treating larger
+text chunks as the fundamental nodes in the knowl-
+edge graph. This approach provides structural con-
+nectivity while preserving local contextual nuances.
+We evaluate against HippoRAG (Gutiérrez et al.,
+2024), a neurobiologically inspired framework sim-
+ulating human long-term memory, and LightRAG
+(Guo et al., 2024), which focuses on simple, fast,
+and lightweight graph-based retrieval.
+KG-Rewriting RAG. Recognizing the modal-
+ity mismatch between discrete graph structures
+and the continuous text sequences LLMs are pre-
+trained on, this category attempts to bridge the
+gap through generative rewriting. These meth-
+ods retrieve relevant subgraphs and employ LLMs
+to translate them into natural language narratives
+49901

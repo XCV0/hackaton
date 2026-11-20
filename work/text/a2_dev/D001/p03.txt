@@ -1,0 +1,158 @@
+SN nSN n
+SN 2SN 2
+Query: Who had the best 
+singles ranking, Roberta 
+Vinci or Jorge Lozano?
+Subquery:
+[Roberta Vinci, singles ranking]
+[Jorge Lozano, singles ranking]
+Local Search Top-k Context
+Original Context: Sara Errani and 
+Roberta Vinci were the defending 
+champions, but Errani chose not to 
+participate this year. Vinci played 
+alongside Karin Knapp, ...
+SN1:”Sara Errani and Roberta Vinci 
+were the defending champions”
+Doc_id: doc_0;   Position:0-58
+Anchor 
+Identification
+Energy Diffusion
+Graph Pruning
+Topological Linearization
+Roberta Vinci Women's 
+Singles Overview Current 
+rankings.
+Career-high rankings WTA 
+Singles Ranking (09 May 
+2016)7.
+...
+N1
+N2
+N3
+Discriminator
+P={N1,N2...}Sufficient
+Insufficient
+Roberta Vinci
+Retrieval STM EDP
+Re-Query:
+Jorge Lozano tennis 
+career high singles 
+ranking.
+Data Stream
+Narrative Edge
+Semantic Edge
+Lexical Edge
+Anchor Node
+Control Stream
+Merge operation
+Iterative update
+Only initial input
+Hybrid 
+Retrieval
+Semantic 
+Topology Graph
+Retrieval Semantic Topology Mapper (STM) Energy-Driven Pathfinding (EDP) 
+χ 1χ 1 χ 2χ 2 χ 3χ 3 ... χ nχ n
+iσ(Wh + b)
+SN 1SN 1
+MLP
+MLP
+EncoderEncoder
+Tokenization
+Doc A1
+SN2:
+SN1:
+SN3:
+Doc A1
+SN2:
+SN1:
+SN3:
+SN3SN3
+SN1SN1
+SN2SN2 SN5SN5
+SN7SN7
+SN8SN8SN9SN9
+SN6SN6SN4SN4
+Doc A2
+SNm:
+SNn:
+Doc B2
+Doc A3
+Doc B3
+Roberta
+Roberta
+SNn:
+SNm:
+nar
+
+cos(θ)
+sem
+
+lex
+
+Figure 2: Overview of ThreadRAG. Given a query and top-k retrieved contexts, the STM structures raw text into
+STG. The EDP then isolates a query-relevant subgraph via energy diffusion and linearizes it into modality-native
+prompts. Finally, an adaptive agent uses these prompts to iteratively refine retrieval or synthesize answers.
+complex reasoning. Mainstream paradigms like
+GraphRAG (Edge et al., 2024) extract rigid entity-
+relation triplets, which inadvertently strip away
+contextual nuances and cause severe semantic loss.
+To preserve semantics, early NLP QA approaches
+(Fang et al., 2020; Qiu et al., 2019; Ding et al.,
+2019) retain original text spans. However, their
+heterogeneous node designs target GNN aggrega-
+tion rather than LLM prompt reconstruction, ir-
+reversibly fragmenting the logical sequence. To
+better align with LLMs, recent methods such as
+HippoRAG (Gutiérrez et al., 2024) utilize broader
+text-chunk nodes. While mitigating symbolic ex-
+traction loss, their unconstrained chunk assembly
+introduces semantic truncation and structural noise.
+Consequently, these paradigms suffer from seman-
+tic loss, depriving LLMs of the continuous con-
+textual pathways essential for multi-hop reasoning.
+We address this bottleneck by proposing a topolog-
+ical framework that seamlessly embeds structural
+priors without compromising narrative integrity.
+Modality Alignment in Graph RAG. A crit-
+ical bottleneck in graph-augmented reasoning is
+the inherent modality gap between discrete graphs
+and continuous natural language. Several struc-
+tural reasoning methods (Luo et al., 2024; Sun
+et al., 2024; Tan et al., 2025) compel LLMs to
+process fragmented symbolic data over discrete
+entity-relation paths. This modality mismatch per-
+manently strips away crucial contextual nuances
+like temporal constraints. To bridge this, genera-
+tive rewriting approaches (Wu et al., 2024; Sarthi
+et al., 2024) employ LLMs to rewrite subgraphs
+into natural language, introducing substantial to-
+ken overhead and hallucination risks. Conversely,
+chunk-as-node approaches (Pham et al., 2026; Yue
+et al., 2026) preserve text spans but merely con-
+catenate nodes as isolated chunks, failing to recon-
+struct cross-document narrative coherence. Thread-
+RAG addresses these limitations via a Topologi-
+cal Pathfinding mechanism. Using topological lin-
+earization, it restructures fragments into a coherent
+sequence. This aligns graph topologies with the
+LLM’s native modality, enabling multi-hop com-
+prehension without generative rewriting overhead.
+3 ThreadRAG
+In this section, we present the overall architec-
+ture of ThreadRAG (Figure 2). The framework
+primarily consists of an STM module that struc-
+tures retrieved contexts into an STG (Sec. 3.1),
+a EDP module that extracts and linearizes query-
+relevant subgraphs into continuous text sequences
+(Sec. 3.2), and an adaptive reasoning agent that
+iteratively refines the evidence base to synthesize
+the final answer (Sec. 3.3).
+3.1 Semantic Topology Mapper
+Existing graph-RAG methods fragment continuous
+texts into discrete components, destroying narra-
+tive continuity and inducing severe semantic loss.
+Motivated by this, our Semantic Topology Mapper
+(STM) extracts context-intact semantic nodes and
+49893

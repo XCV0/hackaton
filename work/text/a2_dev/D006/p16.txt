@@ -1,0 +1,83 @@
+LLM-Confidence Reranker
+2024)appliedtotheoutputsofvariousrerankers.Barchartsweregeneratedtocontrasttheperformanceenhancements
+achieved by each method. As illustrated in Figure 6, while SE yields improvements, it generally underperforms
+comparedtoMSCP.ThisdisparitymayarisebecauseMSCPdirectlymeasuresthedominanceoftheprimarysemantic
+cluster, thereby more robustly capturing semantic consistency, whereas SE, being an entropy-based metric, is more
+vulnerable to distributional noise in the sampled outputs.
+Retriever-Only
+YesNo QLM RankGPT ColBERT
+Cross-Encoder
+RankT5
+Reranker
+0
+10
+20
+30
+40
+50
+60Improvement (%)
+19.9
+60.7
+3.3
+20.0
+1.8 0.6 1.0
+13.7
+47.4
+0.7
+13.7
+0.0 0.0 0.0
+Quantification Method
+MSCP
+SE
+(a) BM25
+Retriever-Only
+YesNo QLM RankGPT ColBERT
+Cross-Encoder
+RankT5
+Reranker
+0
+10
+20
+30
+40
+50Improvement (%)
+1.2
+52.0
+14.3
+1.1 0.6 0.5 0.20.1
+41.1
+10.7
+0.2 0.1 0.0 0.0
+Quantification Method
+MSCP
+SE (b) Contriever
+Figure 6: Impact of Confidence Quantification Methods on Performance Improvements. Bar charts comparing NDCG@5
+enhancements from MSCP and SE across rerankers, based on the NaturalQuestions dataset.
+4.8. Underlying Mechanism
+To elucidate the effectiveness of the LCR algorithm, we hypothesize that the confidence exhibited by LLMs
+in their generated responses positively correlates with the relevance of the input documents. This hypothesis is
+empirically validated through experiments conducted on six diverse datasets. We employ the MSCP for confidence
+quantification. For each query-document pair, confidence scores are computed and uniformly divided into 10 bins.
+Subsequently, we calculate the proportion of relevant documents within each bin to reveal the confidence-relevance
+association. To ensure consistent comparison, relevance scores are binarized across all datasets: scores greater than 0
+are classified as relevant (1), while 0 denotes irrelevance (0). This binarization applies directly to datasets with binary
+relevance(NaturalQuestions,FEVER,SciDocs)andrequiresconvertinggradedscores—treatingvaluesgreaterthan0
+as relevant—for those with multi-level relevance (DBpedia-Entity, Touché, NFCorpus). As illustrated in Figure 7, the
+majority of datasets demonstrate a clear positive correlation, wherein bins with higher confidence scores encompass
+larger proportions of relevant documents. This indicates that LLMs exhibit greater semantic consistency in responses
+informed by relevant documents, thereby generating more robust confidence signals that bolster LCR’s ranking
+enhancements through confidence binning.
+In summary, this empirical validation highlights the utility of LLMs’ intrinsic semantic capabilities in document
+ranking, providing a theoretical foundation for the application of LCR in knowledge-intensive tasks.
+5. Conclusion
+In this paper, we addressed the persistent challenge of hallucinations in large language models (LLMs) for
+knowledge-intensive tasks by introducing the LLM-Confidence Reranker (LCR), a training-free, plug-and-play
+algorithm that harnesses LLMs’ semantic understanding and question-answering capabilities to enhance document
+reranking in retrieval-augmented generation (RAG) systems. Unlike conventional rerankers that directly evaluate
+query-documentrelevance,LCRleveragesblack-boxLLMconfidencesignals—quantifiedviatheMaximumSemantic
+Cluster Proportion (MSCP)—as a proxy for relevance, employing a two-stage process of confidence assessment and
+multi-level sorting to prioritize relevant documents.
+LCR demonstrates remarkable robustness across diverse settings, including various retrievers (sparse like BM25
+and dense like Contriever), rerankers (pre-trained LLM-based and fine-tuned Transformer-based), and LLMs from
+different families. Relying solely on lightweight pre-trained models with 7–9B parameters, it ensures computational
+Song et al.: Preprint submitted to Elsevier Page 16 of 21

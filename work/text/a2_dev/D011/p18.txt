@@ -1,0 +1,103 @@
+provide just the question.
+In the last of the question, add a demanding sentence:
+“Do not answer with point form.”
+# Input details:
+- ‘text’: A text that contains information about a spe-
+cific relationship.
+- ‘relationship’: A specific relationship in the format
+of ‘source|target|relationship type’.
+# Input
+Text: {text}, Relationship: {relationship}
+# Output
+A list of Json, each json with key ‘Question’ and value
+being one of the questions you generated.
+E Experiments Settings
+E.1 Datasets
+NFCorpus is a full-text English dataset tailored for
+medical information retrieval, comprising 3,633
+expert-verified documents primarily sourced from
+PubMed. It includes 169,756 relevance judgments
+automatically extracted from 9,964 medical doc-
+uments, supporting fine-grained evaluation of re-
+trieval models in the biomedical domain.
+TREC-COVID is a benchmark dataset designed
+for information retrieval research on COVID-19
+scientific literature. It is based on the CORD-19
+collection and contains a set of topics with expert-
+created relevance judgments, enabling the evalua-
+tion of search systems for pandemic response. It
+contains 1,713,332 texts
+DROP is a reading comprehension benchmark de-
+signed to evaluate discrete reasoning over para-
+graphs, which comprises 96,567 adversarially con-
+structed questions. Collected via crowdsourcing,
+the dataset emphasizes operations such as addi-
+tion, counting, and sorting, which require systems
+to resolve multiple references and perform sym-
+bolic reasoning. The passages are primarily drawn
+from sports summaries and historical narratives, de-
+manding a deeper understanding of paragraph-level
+semantics.
+MS MARCO is a large-scale machine reading
+comprehension dataset consisting of 8,841,823 text
+passages. It was constructed from anonymized real-
+world user queries and corresponding web docu-
+ments retrieved through the Microsoft Bing search
+engine, making it a representative benchmark for
+open-domain question answering and passage rank-
+ing tasks.
+E.2 Metrics Details
+Watermark Recovery Rate (WRR): WRR mea-
+sures the ratio of correctly restored watermark bits
+to the total binary length of the watermark. The
+higher the WRR, the higher the confidence of wa-
+termark detection to judge IP infringement.
+Watermark Text Retrieval Rate (WTRR):
+WTRR quantifies the proportion of watermark texts
+that are successfully retrieved. It can be used to
+measure the effectiveness of query watermark texts.
+False Hit Rate (FHR): FHR records the propor-
+tion of watermark bits extracted from the unwater-
+marked RAG to the binary length of the watermark.
+The lower the FHR, the higher the soundness of
+watermarking schemes.
+Average Perplexity (PPLavg): PPLavg measures
+the average quality of texts. We can assume that the
+lower the perplexity of a text, the higher its quality.
+Knowledge Correct Rate (KCR): KCR measures
+the proportion of factually correct watermarked
+knowledge. The watermarked knowledge will be
+used to query a RAG system, and we can get its
+related context. An LLM judges the correctness
+of the watermarked knowledge according to its
+intrinsic knowledge and the related context.
+Average Rationality Score (RSavg): RSavg scores
+the contextual rationality of watermarked texts
+within the knowledge base and calculates the mean
+score. The watermarked knowledge is applied to
+query a RAG system, and we can get its related
+context. An LLM assesses the contextual rational-
+ity of the watermarked knowledge based on the
+relevant context.
+Clean Data Performance Alignment (CDPA):
+CDPA is employed to ensure consistent responses
+on clean queries before and after watermarking.
+Clean Information Retrieval Alignment (CIRA):
+CIRA is employed to ensure consistent retrieved
+texts on clean queries before and after watermark-
+ing.
+Watermarked Data Performance Verification
+(WDPV): WDPV assesses whether KMW achieves
+knowledge completion. It measures the proportion
+of accurate responses from the total responses by
+querying RAG systems with questions derived from
+the newly infused knowledge.
+E.3 Prompt for Metrics
+Prompt for KCR
+According to your own knowledge and the context
+from the knowledge base, judge whether the factual
+correctness of the statement below. Simply answer
+‘yes’ or ‘no’ without any explanation.
+Context: {context}
+Statement: {statement}
+21212

@@ -1,0 +1,103 @@
+Customized Retrieval Augmented Generation and Benchmarking
+for EDA Tool Documentation QA
+Yuan Pu1,2, Zhuolun He1,2, Tairu Qiu2, Haoyuan Wu3, Bei Yu1
+1The Chinese University of Hong Kong, Hong Kong SAR
+2ChatEDA Tech, China
+3Shanghai AI Laboratory, Shanghai, China
+ABSTRACT
+Retrieval augmented generation (RAG) enhances the accuracy and
+reliability of generative AI models by sourcing factual informa-
+tion from external databases, which is extensively employed in
+document-grounded question-answering (QA) tasks. Off-the-shelf
+RAG flows are well pretrained on general-purpose documents,
+yet they encounter significant challenges when being applied to
+knowledge-intensive vertical domains, such as electronic design
+automation (EDA). This paper addresses such issue by proposing
+a customized RAG framework along with three domain-specific
+techniques for EDA tool documentation QA, including a contrastive
+learning scheme for text embedding model fine-tuning, a reranker
+distilled from proprietary LLM, and a generative LLM fine-tuned
+with high-quality domain corpus. Furthermore, we have developed
+and released a documentation QA evaluation benchmark, ORD-QA,
+for OpenROAD, an advanced RTL-to-GDSII design platform. Ex-
+perimental results demonstrate that our proposed RAG flow and
+techniques have achieved superior performance on ORD-QA as well
+as on a commercial tool, compared with state-of-the-arts. The ORD-
+QA benchmark and the training dataset for our customized RAG
+flow are open-source at https://github.com/lesliepy99/RAG-EDA.
+1 INTRODUCTION
+Electronic design automation (EDA) comprises a set of software
+tools dedicated for the design, analysis and verification of electronic
+systems. To meet the increasing demand of semiconductor manufac-
+turing and accommodate the advancing technology nodes, current
+EDA tools support a complex design flow with various functional-
+ities and commands at all levels. Open-source EDA tools such as
+OpenROAD[1] and iEDA[2] provide complete RTL-to-GDSII flow
+and environment for circuit design. Commercial software, with
+rigorous consideration of industrial scenarios, supports much more
+sophisticated and various functionalities. EDA tools are supposed
+to be equipped with well-organized and detailed documentations,
+yet referring documentation often remains a pain for end users due
+to the huge amount of functionalities provided and the intertangle-
+ment among them. To improve user experience and development
+efficiency of tool users, application engineers are employed and
+trained by vendors to provide on-site customer service and support.
+Nevertheless, the high training and manpower cost has pushed
+people to consider an automated, no-human-in-the-loop means for
+such support.
+With the exceptional performance and rapid advancement of
+large language models (LLMs), retrieval augmented generation
+(RAG) has recently been proven to be an effective method for docu-
+ment grounded QA. As is shown in Figure 1, to prepare for RAG,
+Chunking
+&
+Indexing
+Data resources Vector database
+？
+user question
+!
+answer
+Relevant 
+documents
+Retriever (with 
+embedding model) Reranker
+model
+Retrieved 
+documents
+Generator 
+(LLM)
+Figure 1: Illustration of the RAG flow.
+the entire document is segmented into reasonably-sized chunks,
+each of which is then embedded into a high-dimensional space by a
+text embedding model and stored in a vector database. When a user
+poses a question, the text embedding model encodes the question
+into an embedding in the same space. Through similarity matching,
+document chunks that most closely match the semantics of the
+question are retrieved as potential reference candidates. Then, a
+reranker model conducts fine filtering and removes irrelevant doc-
+ument chunks from the candidates. Finally, the relevant document
+chunks along with the user query are fed to the generator (usually
+an LLM) for answer generation.
+During the process of RAG, the robust reasoning and inference
+capabilities of LLMs are effectively utilized, while the retrieved rel-
+evant information mitigates the hallucination issue and improves
+the reliability of LLM generation. However, due to the mutually
+entangled structures of EDA tool documentations, sophisticated
+nature of EDA flow and rigorous logic reasoning involved in EDA-
+tool-related questions, applying existing RAG flows for EDA tool
+documentation QA presents significant challenges. The primary
+challenge is that existing RAG components lack expert knowledge
+in EDA, leading to inferior performance in EDA-specific contexts:
+First, for retriever, existing text embedding models demonstrate
+poor semantic understanding of the terminologies and concepts of
+EDA, and are prone to retrieve irrelevant documents by similarity
+matching. Second, existing reranker models fail to accurately dif-
+ferentiate between relevant and weakly-related documents under
+EDA-tool-specific scenarios. For example, while the question is
+“what is the command to place a specific pin”, the weakly-related
+document, which introduces the command to place all pins and is
+not helpful to answer the question, will be recognized as relevant
+by existing reranker models. Third, existing generators (chat LLMs)
+lack EDA domain knowledge and demonstrate limited logical infer-
+ence capabilities when addressing EDA-related questions, leading
+arXiv:2407.15353v2  [cs.CL]  26 Jul 2024

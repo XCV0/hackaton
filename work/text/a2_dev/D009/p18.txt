@@ -1,0 +1,83 @@
+Table 10: Ablation of the VTS branching configuration. The main configuration improves average performance by
+1.9 EM and 2.0 F1 over the reduced-branching setting.
+Configuration PopQA HotpotQA 2WikiMulti Bamboogle MuSiQue Average
+Reduced branching (K = 2) 39.5 / 46.5 38.0 / 50.3 39.6 / 48.4 32.8 / 42.5 13.2 / 23.0 32.6 / 42.1
+Main configuration (K = 3) 40.5 / 47.4 38.7 / 51.6 44.1 / 51.4 36.8 / 47.6 12.5 / 22.4 34.5 / 44.1
+Table 11: Performance comparison across different Process Reward Model (PRM) weight (α) values. The table
+reports EM / F1 scores across 5 benchmarks. ⋆ denotes the selected configuration.
+α HotpotQA PopQA 2WikiMultiHopQA Bamboogle MuSiQue Average
+0.0 (no PRM) 36.75 / 49.31 38.48 / 45.01 41.44 / 48.40 34.40 / 44.20 12.33 / 22.35 32.68 / 41.85
+0.3 ⋆ 38.73 / 51.63 40.47 / 47.37 44.07 / 51.43 36.80 / 47.63 12.49 / 22.41 34.51 / 44.09
+0.5 34.95 / 47.53 36.62 / 44.33 41.28 / 48.21 33.60 / 41.91 10.47 / 20.41 31.38 / 40.48
+1.0 37.97 / 50.60 39.94 / 46.10 42.68 / 50.38 32.80 / 41.39 13.49 / 23.46 33.38 / 42.39
+Parameter SFT DPO KTO
+Base Model Qwen2.5-7B-Instruct
+Data Size 15,877 (Chosen) 15,877 pairs 31,754 (15,877 +/15,877 -)
+Objective Next-token Sigmoid (β = 0.1) KTO (β = 0.1)
+Learning Rate 2e-5 2e-5 5e-6
+Effective Batch Size 16 16 16
+Epochs 1 1 1
+Max Length 8,192 8,192 8,192
+Document Masking Yes Yes Yes
+LoRA Configuration
+Rank (r) 64 64 64
+Alpha (α) 128 128 128
+Dropout 0.05 0.05 0.05
+Target Modules all-linear
+Table 12: Training hyperparameters for the policy mod-
+els. The effective batch size of 16 is achieved via 1 × 8
+gradient accumulation × 2 GPUs across all three ob-
+jectives. KTO uses both chosen and rejected from the
+outcome filter pair set as desirable / undesirable samples
+(hence 31,754 total).
+Table 13: Agreement between QwQ-32B (our
+annotator) and Claude Opus 4.7 on the 500-sample
+audit.
+Metric Value
+Audited samples 500
+Agreement 80.56% (402 / 499 with
+valid labels)
+Cohen’s κ 0.6104 (substantial)
+QwQ-labeled GOOD 274
+Frontier-labeled GOOD 255
+Table 14: Per-step-type agreement on the 500-sample
+audit.
+Step type N Agreement Cohen’s κ
+answer 200 91.00% 0.82
+search 249 77.11% 0.52
+reason 50 56.00% 0.12
+use SFT warmup to learn the interaction format
+before preference optimization. The successful 3B
+Table 15: Macro-AVG bootstrap 95% confidence inter-
+vals (B = 104) for ∆ vs. each prior baseline. Signifi-
+cance: ⋆ ⋆ ⋆ if the 95% CI excludes 0.
+vs. Baseline ∆ EM (95% CI) ∆ F1 (95% CI)
+Search-R1 +2.51 [+1.01, +4.06] ⋆ ⋆ ⋆ +3.37 [+1.94, +4.82] ⋆ ⋆ ⋆
+ReasonRAG +1.93 [+0.46, +3.36] ⋆ ⋆ ⋆ +3.14 [+1.56, +4.65] ⋆ ⋆ ⋆
+StepSearch +1.36 [-0.29, +3.00] NS +2.10 [+0.38, +3.77] ⋆ ⋆ ⋆
+Table 16: Per-dataset paired t-test on EM. n = test split
+size.
+Dataset n vs. Search-R1 vs. ReasonRAG vs. StepSearch
+HotpotQA 7,405 +0.85, p=0.10 NS +2.36, p < 10−6 ⋆ ⋆ ⋆ +0.01, p=0.98 NS
+PopQA 14,267 -0.18, p=0.56 NS +2.69, p < 10−15 ⋆ ⋆ ⋆ +1.23, p < 10−3 ⋆ ⋆ ⋆
+2WikiMultiHopQA 12,576 +9.20, p < 10−75 ⋆ ⋆ ⋆ +4.27, p < 10−18 ⋆ ⋆ ⋆ +3.69, p < 10−13 ⋆ ⋆ ⋆
+Bamboogle 125 +3.20, p=0.40 NS -1.60, p=0.66 NS +3.20, p=0.43 NS
+MuSiQue 2,417 -0.50, p=0.46 NS +1.90, p=0.004 ⋆⋆ -1.32, p=0.054 NS
+configuration additionally uses trajectories gener-
+ated by the larger policy model.
+H Intermediate-Flawed-But-Correct
+Analysis
+We provide a direct quantitative analysis of the fail-
+ure mode targeted by PRO-STEP: trajectories that
+contain flawed intermediate steps while neverthe-
+less producing the correct final answer.
+Definition. We define an intermediate-flawed-
+but-correct (IFBC) trajectory as a trajectory con-
+taining at least one flawed intermediate step (all
+steps except the final-answer step) while still pro-
+ducing a correct final answer. We report
+IFBC = P (flaw ≥ 1 | correct). (7)
+Here, flaw denotes at least one flawed interme-
+diate step, and correct denotes a correct final an-
+swer. Lower IFBC therefore indicates that correct
+37921

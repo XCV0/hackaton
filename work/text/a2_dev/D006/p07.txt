@@ -1,0 +1,88 @@
+LLM-Confidence Reranker
+where |𝑠𝑚| is the cardinality of the𝑚-th cluster.
+This metric quantifies confidence as the proportion of samples in the largest semantic cluster, with values near 1
+indicating high semantic consistency and elevated confidence, and lower values reflecting greater dispersion across
+clusters, signifying uncertainty. Compared to SE, which computes entropy over all cluster proportions and may be
+sensitive to minor distributional variations, MSCP offers a more direct and interpretable measure by focusing solely
+onthedominantsemanticmode.Thissimplicityfacilitatesfastercomputationandalignswellwithrerankingobjectives
+in RAG systems, where prioritizing documents that elicit strongly consistent responses is essential.
+By employing the same LLM for sampling and clustering, MSCP ensures internal consistency, reducing discrep-
+ancies from model mismatches and enhancing its utility in black-box scenarios. Empirical evaluations, detailed in
+subsequent sections, confirm that MSCP captures confidence signals correlated with document relevance, supporting
+the LCR algorithm’s ranking improvements.
+Semantic Clustering
+Responses Frequency
+Query
+“Who is the 
+President of 
+the U.S.?”
+LLM
+Trump.
+Donald Trump.
+Donald Trump served as president. 
+The U.S. President is elected.
+1
+5
+President Biden leads the nation.
+LLM+
+Query
+“Who is the 
+President of 
+the U.S.?”
+Doc
+“Trump was sworn in as 
+the 47th U.S. President 
+on Jan. 20. 2025.”
+LLM
+Donald Trump served as president. 
+The president is not Trump.
+The President of the U.S. is not Musk.
+Musk is not the president.
+Joe Biden.
++
+Query
+“Who is the 
+President of 
+the U.S.?”
+Doc
+“Elon Musk becomes the 
+47th President of the 
+United States.”
+Trump sworn in as 47th president.
+Donald Trump.
+Trump.
+Donald Trump leads the U.S. as President.
+Donald Trump served as president. 
+3
+5
+1
+5
+1
+5
+5
+5
+1
+5
+2
+5
+1
+5
+1
+5
+Figure 2: Illustration of Maximum Semantic Cluster Proportion. As illustrated in the figure, the question𝑞 is “Who is the
+President of the U.S.?” We instruct a specific LLM with parameters 𝜙 to sample 𝐾 times (where 𝐾 = 5 in this example)
+at a high temperature (typically 𝑇 = 1). Through clustering, three semantic clusters are derived, with the largest semantic
+cluster being “Trump”, which accounts for 3∕5 of the responses, denoted as MSCP(𝑞;𝜙,𝐾) = 3∕5. When we provide both
+the question 𝑞 and the document 𝑑1, which states, “Trump was sworn in as the 47th U.S. President on Jan. 20. 2025”,
+all five sampled responses consistently point to “Trump”, resulting in MSCP(𝑞,𝑑1;𝜙,𝐾) = 5∕5. Compared to the scenario
+where only 𝑞 is provided, the MSCP increases, indicating that 𝑑1 is a helpful document for 𝑞. In contrast, when we supply
+both the question 𝑞 and the document 𝑑2, which claims, “Elon Musk becomes the 47th President of the United States”,
+the largest semantic cluster after sampling and clustering only constitutes 2∕5, denoted as MSCP(𝑞,𝑑2;𝜙,𝐾) = 2∕5. This
+represents a decrease in MSCP compared to when only 𝑞 is provided, suggesting that 𝑑2 is a harmful document for 𝑞.
+3.2. LLM-Confidence Reranker Algorithm
+The LLM-Confidence Reranker (LCR) algorithm enhances document ranking via confidence interval binning
+and multi-level sorting. It defines a query confidence threshold𝑇query, a high confidence threshold𝑇upper, and a low
+confidencethreshold𝑇lower,withitscoreprocessdetailedinAlgorithm1andFigure1.Inthealgorithm,confidencefor
+documents and queries is denoted by𝐶(⋅), prior relevance scores (e.g., from a retriever or reranker) by𝑃𝑟𝑒𝑣𝑆𝑐𝑜𝑟𝑒(⋅),
+and the document set by  = {𝑑𝑖}𝑛 𝑖=1. The algorithm operates through two integrated stages:
+Song et al.: Preprint submitted to Elsevier Page 7 of 21

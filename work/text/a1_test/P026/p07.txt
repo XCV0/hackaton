@@ -1,0 +1,86 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+where ˆNc and ˆNv are here referred to as reduced densities of states. These reduced DoS functions can be
+obtained from the DoS functions defined in (10) by inverting (12) to obtain
+ˆNc(η) = kBT gc ˆgc (Ec + kBTη) , (13a)
+ˆNv(η) = kBT gv ˆgv (Ev − kBTη) , (13b)
+in which η can be interpreted as a dimensionless state energy level. With these DoS functions, and
+substituting the FD distribution (9), the electron and hole densities (11) become
+n = gc
+ˆ ∞
+−∞
+1
+kBT
+ˆNc
+(
+E−Ec
+kBT
+)
+1 + exp
+(
+E−Efn
+kBT
+) dE, (14a)
+p = gv
+ˆ ∞
+−∞
+1
+kBT
+ˆNv
+(
+− E−Ev kBT
+)
+1 + exp
+( Efp −E
+kBT
+) dE. (14b)
+Carrier densities and quasi-Fermi levels are therefore related by an integral dependent on the reduced
+DoS. Specifically, the carrier densities are given by the expressions
+n = gcSc
+( Efn − Ec
+kBT
+)
+, (15a)
+p = gvSv
+(
+− Efp − Ev
+kBT
+)
+, (15b)
+where the statisticalintegrals, Sc and Sv, are the functions defined by the relations
+Sc(ξ) =
+ˆ ∞
+−∞
+ˆNc(η)
+1 + exp (η − ξ) dη, (16a)
+Sv(ξ) =
+ˆ ∞
+−∞
+ˆNv(η)
+1 + exp (η − ξ) dη, (16b)
+in which ξ may be interpreted as a dimensionless QFL. We note that, in practice, ξ will almost always be
+negative, meaning both QFLs lie between the two reference energies, Ec and Ev, in the band gap. We invert
+these expressions (15) for the carrier densities to obtain expressions for the QFLs in terms of the densities.
+Substituting for the conduction band and valence band reference energies using Ec = −Ea − qϕ and
+Ev = −Ea − Eg − qϕ, leads to the following expressions for the QFLs:
+Efn = kBTS −1 c
+( n
+gc
+)
+− Ea − qϕ, (17)
+Efp = −kBTS −1 v
+( p
+gv
+)
+− Ea − Eg − qϕ, (18)
+where S −1 is the inverse of S. Here Ea denotes the electron affinity, the difference between the conduction
+band reference energy and the vacuum level, and Eg = Ec − Ev is the gap between the two bands’ reference
+energies. Note that energies are defined relative to the vacuum level at E = 0 eV. In turn, the diffusion
+coefficients can be calculated as functions of mobility and carrier density from the GERs (6):
+qDn = µnkBTn ∂ ∂n ( S −1 c ( n gc )) , (19a)
+qDp = µpkBTp ∂ ∂p ( S −1 v ( p gv )) . (19b)
+Equivalently, the expressions for the QFLs (17)–(18) can be substituted directly into the current density
+equations (2) to obtain the following expressions for the currents:
+jn = µnkBT
+(
+∆n(n) ∂n ∂x − qn kBT ∂ϕ ∂x ) , (20a)
+6

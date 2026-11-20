@@ -1,0 +1,79 @@
+using 0.01 M SrCl2 with a JSC of 15.75 mA cm−2,aVOC of 1,322 mV, a
+FF of 0.77, and a PCE of 16.07% under reverse scan condition
+(Figure 5C and Table 2). Notably, negligible hysteresis was
+observed for this champion device. In contrast, the best pristine
+sample exhibited a JSC of 15.69 mA cm−2,aVOC of 1,217 mV, a
+FF of 0.73, and a PCE of 13.66% under reverse scan condition
+(Supplementary Figure S1 and Supplementary Table S1). We
+then held these devices under maximum power point (MPP) to
+measure the stabilized power output, as shown in Figure 5D and
+Supplementary Figure S2. The current density at the MPP was
+14.39 mA cm−2 at a bias voltage of 1,100 mV, corresponding to an
+efﬁciency of 15.83%. The current density at the MPP was
+13.47 mA cm−2 at a bias voltage of 960 mV, corresponding to an
+efﬁciency of 12.93%. Supplementary Figure S3 exhibits the external
+quantum efﬁciency (EQE) spectra of PSCs. The integration of the
+EQE spectrum yields the photocurrent of 15.37 mA cm−2 for the
+0.01 M SrCl2–doped device and 15.24 mA cm−2 for the pristine
+device, which are consistent with the corresponding J–V
+measurements shown in Figure 5C and Supplementary Figure S1.
+A statistical analysis of 20 individual devices reveals the good
+productivity of SrCl2-doped devices such that the mean PCEs of
+pristine and SrCl2-doped devices are 14.66 and 12.96%,
+respectively (Figure 5E). Moreover, inclusion of NiCl2 also
+improved the device performance signiﬁcantly (Figure 5F
+and Supplementary Table S2). The VOC of the NiCl2-doped
+device increased to 1,245 mV, yielding a PCE of 13.83%. The
+results presented herein manifest our strategy as versatile and
+universal with a large variety of possible metal salts for
+perovskite devices.
+We then studied the optical and electrical properties of the
+doped perovskite devices to probe the origin for performance
+enhancement. EIS spectra were operated to characterize the
+carrier behaviors of as-fabricated CsPbI2Br devices, and the
+equivalent circuit model (Cui et al., 2020; Zhang et al., 2020b)
+is displayed in Figure 6A. The charge recombination
+resistance (Rrec)oftheSrCl2-doped device is much higher
+than that of the pristine device at a bias of 0.8 V (Figure 6A).
+The Rrec values of the SrCl2-doped device are about one time
+larger than Rrec values of the pristine one under the bias range
+of 0–1 V, which conﬁrms the longer carrier lifetime of the
+SrCl2-doped device (Figure 6B)(Quilettes et al., 2015). We
+further investigated charge-transport properties of PSCs with
+and without SrCl2 by using TPV measurements. The TPV
+curve revealed that incorporation of SrCl2 increased the
+charge-carrier lifetime (Figure 6C), indicating a decrease in
+the undesired charge-carrier recombination (Seitkhan et al.,
+2020). As shown in Supplementary Figure S4, the ideality
+factor (m) was measured to evaluate the recombination
+process in PSCs. The value of m for SrCl2-doped devices
+(1.31 kT/e) is smaller than 1.74 kT/e of the pristine device,
+illustrating the reduced trap-assisted charge recombination,
+where K is the Boltzmann constant, T is an absolute
+temperature of 300 K, and e is the elementary charge
+(Aydin et al., 2019; Dong et al., 2021).
+CONCLUSION
+In summary, we report a simple strategy to modulate the CsPbI2Br
+perovskite by using bivalent metal chloride additives, which facilitates
+the formation of high-quality perovskite ﬁlms. A high PCE of 16.07%
+was achieved on solar cells by SrCl2 doping, which could eliminate
+defective trap states and extend carrier lifetime. Our strategy would
+provide new insights into controllably fabricating high-efﬁciency all-
+inorganic perovskite solar cells.
+TABLE 1 | Photovoltaic parameters of PSCs with different SrCl2 dopant
+concentrations under simulated AM 1.5G of 100 mW/cm2 solar irradiation.
+Sample JSC (mA cm−2) VOC (mV) FF PCE (%)
+Pristine 15.28 1,197 0.71 12.89
+0.001 M SrCl2 15.37 1,266 0.70 13.55
+0.005 M SrCl2 15.64 1,278 0.72 14.32
+0.01 M SrCl2 15.67 1,278 0.73 14.61
+0.05 M SrCl2 15.02 1,163 0.70 12.11
+TABLE 2 | Summary of photovoltaic performance for champion devices (FB–SC
+and SC–FB) based on the 0.01 M SrCl2–doped perovskite ﬁlm.
+Direction JSC (mA cm−2) VOC (mV) FF PCE (%)
+FB–SC 15.75 1,322 0.77 16.07
+SC–FB 15.66 1,312 0.77 15.73
+FIGURE 6 | (A) Nyquist plots of the PSCs based on pristine and 0.01 M SrCl2–doped CsPbI2Br ﬁlms recorded at 0.8 V in dark condition. (B) Rrec of PSCs based on
+pristine and 0.01 M SrCl2–doped CsPbI2Br ﬁlms measured at different applied bias voltages. (C) TPV measurements of CsPbI2Br cells with and without SrCl2 dopants.
+Frontiers in Energy Research | www.frontiersin.org May 2021 | Volume 9 | Article 6920595
+Qiao et al. All-Inorganic Perovskite Solar Cells

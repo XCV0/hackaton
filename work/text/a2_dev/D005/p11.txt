@@ -1,0 +1,69 @@
+250 to 1000 words. This process resulted in
+final sample size of about 5K RAG QA task
+samples.
+• Web Search: To further diversify and target
+more challenging scenarios, we curated a col-
+lection of pages retrieved using web search
+queries in response to a set of internal knowl-
+edge related questions that are primarily fo-
+cused on time-sensitive queries (e.g. news
+events, sports outcomes). For each query we
+retrieved up to 10 pages. Consequently, each
+page was converted from html to a plain text
+reference document that is truncated to 3000
+words. For this data source, we also use and
+include relevant time and location (city name)
+of the request as additional contextual infor-
+mation.
+To generate synthetic QA pairs for references
+extracted from the Wiki Pages, we randomly se-
+lect a reference and leverage an instruction prompt
+focused on producing QA pairs that are grounded
+on the reference content. We found that empha-
+sizing on question difficulty (e.g. college gradu-
+ate level and setting a difficulty grade), listing a
+few common category of problematic questions
+to avoid (e.g., questions about user time/location),
+and providing exemplars significantly helps with
+the final data quality. Additionally, we instruct
+the model to reject designing QA when refer-
+ence content is not readable, which is sometimes
+the case for the Web Search references due to
+html parse failures or web page retrieval/access
+problems. For the complete prompt, please re-
+fer to Appendix G.1. Regarding the LLM, we
+used llama-3.3-70b-instruct (Grattafiori et al.,
+2024)3 as we found it reasonably capable and cost-
+efficient for this use case.
+D Breakdown of Results
+Table 5 presents the breakdown results for the base-
+line and proposed method. We follow a similar
+metric design as suggested by Yang et al. (2024)
+to classify each response to one of accurate, hal-
+lucinated, or missing. Accurate responses fully
+and accurately answer the question. Hallucinated
+answers contain inaccurate and misleading facts.
+Missing is any answer that refuses to answer or fails
+to completely address the asked question. Finally,
+3https://www.llama.com/models/llama-3/
+to summarize the overall factuality, we use factu-
+ality score, defined as hallucination rate subtracted
+from accuracy. Note that the “Unverified” por-
+tion is applicable to benchmarks without provided
+ground-truth labels and cases where our factuality
+analysis tool was not able to verify correctness of
+all claims in the answer.
+E CRAG Resilience Experiment
+We conducted an experiment using the CRAG
+benchmark by limiting the number of reference
+documents and measuring the impact on the perfor-
+mance. From Figure 6, the proposed method con-
+sistently outperforms the baseline. For the accuracy
+and hallucination rates, the margin of improvement
+increases with the use of more references, showing
+the effectiveness of the proposed method to reject
+noises and leverage additional grounding content.
+Figure 6: Impact of changing the number of reference
+documents on accuracy, hallucination, and missing rate
+for the CRAG (Yang et al., 2024) benchmark.
+785

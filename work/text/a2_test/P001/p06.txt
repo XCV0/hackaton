@@ -1,0 +1,109 @@
+functionality vlsi-flow GUI install & test
+10
+30
+50 46
+22 17
+5
+Figure 8: Distribution of question categories in ORD-QA.
+The objective of LLM training is to minimized the negative log-
+likelihood loss formulated in Equation (8):
+𝐿 = −
+𝑛∑︁
+𝑡 =1
+log 𝑃(𝑥𝑡 |𝑥<𝑡 ; 𝜃). (8)
+The two stages, namely, domain-knowledge pre-train and task-
+specific intrudction tuning, are trained using the loss function de-
+fined in Equation (8), on their respective corpus dataset.
+4 BENCHMARK
+To systematically and quantitatively evaluate the performance of
+RAG-EDA, we created and published the ORD-QA dataset, which is
+open-source at https://github.com/lesliepy99/RAG-EDA. ORD-QA
+contains 90 high-quality question-document-answer triplets based
+on the OpenROAD [1] documentation. For developing the dataset,
+we started by segmenting the complete OpenROAD documenta-
+tion2 into 290 chunks, based on the markdowns of sections and
+subsections. Following the segmentation, each time we randomly
+sampled 1 to 5 document chunk(s). If only one document chunk is
+sampled or there is logical relationship among the sampled chunks,
+we prompted GPT-4 to formulate a EDA-related question based on
+the document chunk(s), and analyzed the question alongside the
+provided document chunks to generate corresponding answer. Each
+generated question-document-answer triplet underwent a rigorous
+manual review to correct any logical inconsistencies and fallacies.
+Additionally, we manually crafted realistic user queries about the
+OpenROAD documentation and provided accurate answers to fur-
+ther enhance the dataset. The final ORD-QA dataset contains 90
+high-quality <question, reference documents, answer> triplets.
+The questions in the ORD-QA dataset are categorized into four
+types: functionality, VLSI-flow, GUI, and installation & test. Func-
+tionality questions detail the use of specific commands or options in
+particular user scenarios. VLSI-flow questions request the steps to
+complete a given VLSI process. GUI questions address the usage of
+the OpenROAD GUI, while installation & test questions cover soft-
+ware installation guidelines and unit test module inquiries. Figure 8
+shows the number distribution of different question categories in
+ORD-QA. Most of the questions (82.2%) are formulated based on 1
+or 2 document chunks. The rest (17.8%) are based on more than 3
+document chunks. Among the 90 questions, 89 of them refer to no
+more than 5 document chunks, with only one question based on 7
+document chunks.
+5 EXPERIMENTAL RESULTS
+5.1 Training Dataset Collection
+This subsection discusses the process of collecting training dataset
+for the fine-tuning of all models used in RAG-EDA.
+2https://openroad.readthedocs.io/en/latest/
+Dataset for Text Embedding Model. To construct the EDA-
+domain-specific <query, positive sample, negative sample> triplets
+mentioned in Section 3.1, we first collected a comprehensive list of
+261 EDA terminologies covering areas like logic synthesis, power
+analysis, partitioning, floorplanning, placement, routing, STA, DRC,
+and LVS. Our dataset collection process involved selecting a termi-
+nology 𝑡𝑖 from this list and using GPT-3.5 to generate a related user
+query (𝑠𝑖 ). GPT-3.5 also produced the answer for (𝑠𝑖 ), which is used
+as the positive sample (𝑠+ 𝑖 ). Simultaneously, we created a negative
+sample (𝑠− 𝑖 ) by replacing 𝑡𝑖 in 𝑠𝑖 with a different terminology 𝑡 𝑗
+resulting in a data triplet {𝑠𝑖 ,𝑠+ 𝑖 ,𝑠− 𝑖 }. Overall, we gathered 3,975
+<query, positive sample, negative sample> triplets to fine-tune the
+text embedding model.
+Dataset For Generator. There are two training phases for gen-
+erator: domain knowledge pre-train and task-specific instruction
+tuning. For the construction of pre-train dataset, we split the two
+textbooks [20, 21] mentioned in Section 3.4 into 4863 chunks, where
+the token size of each chunk is limited within 1024. The procedure
+of dataset collecting for task-specific instruction tuning is as fol-
+lows: Each time we sample 10 document chunks of OpenROAD
+documentation as the document pool. Then, GPT-4 is prompted
+to select 𝑛 (𝑛 ≤ 10) document chunks from the pool such that the
+selected chunks are logically related. Based on the 𝑛 selected doc-
+ument chunks (𝑟), we prompt GPT-4 to generate one question (𝑞)
+from the perspective of the OpenROAD users, analyze the question
+step by step, and give the answer (𝑎) referring to 𝑟. Following the
+procedure above, we generate 1732 {𝑞,𝑟,𝑎} triplets as our dataset
+for instruction tuning.
+Dataset for Reranker Model. To construct the dataset of reranker
+finetuning, we first randomly sample triplets from the instruction-
+tuning dataset. For each question 𝑞𝑖 , we treat their corresponding
+relevant document chunks 𝑟𝑖 as the positive documents and denote
+them by 𝐶+ 𝑖 . Then, we apply hybrid retrieval described in Section 3.2
+on 𝑞𝑖 , and set the top-𝑘 values for both the lexical and semantic
+searchers to be 10, in result, 20 document chunks are retrieved and
+denoted as 𝐶′ 𝑖 . Among the chunks in 𝐶′ 𝑖 , we prompt GPT-4 to detect
+the ones which are weakly-related/irrelevant with 𝑞𝑖 , and denote
+them by 𝐶− 𝑖 . Finally, we get 208 {𝑞𝑖 ,𝐶+ 𝑖 ,𝐶− 𝑖 } triplets as the dataset
+for reranker finetuning.
+5.2 Experimental Setting
+In our customized RAG flow, the text embedding model was fine-
+tuned on bge-large-en-v1.53 for 2 epochs, with a batch size of 16,
+a maximum sequence length of 128, and a temperature of 0.05.
+The reranker, based on the bge-reranker-large model4 with the
+XLM-RoBERTa architecture [22], underwent fine-tuning for 30
+epochs, with batch size 4 and maximum sequence length of 512. The
+generator, powered by the Qwen-14b-chat model [23], was trained
+in two stages: For domain knowledge pre-train, we pretrained the
+model on the textbook chunks dataset described in section 5.1
+for 2 epochs with the learning rate of 1e-5 and batch size of 1.
+For task-specific instruction tuning, we finetuned the model using
+QLoRA[28] for 4 epochs with the learning rate of 2e-4 and batch
+3https://huggingface.co/BAAI/bge-large-en-v1.5
+4https://huggingface.co/BAAI/bge-reranker-large
+6

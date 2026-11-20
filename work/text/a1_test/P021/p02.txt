@@ -1,0 +1,88 @@
+W. Henni et al.
+2. Methodology and device structure
+Numerical simulation is an essential tool to un-
+derstand the mechanisms that govern the physics
+of the device and to test the viability of the pro-
+posed cell structure, as well as to predict the per-
+formance of solar cells before their elaboration.
+Solar Cell Capacitance Simulator (SCAPS-1D) is
+a one-dimensional solar cell simulation program
+developed at the Department of Electronic and
+Information Systems (ELIS) of the University of
+Gent, Belgium, and it is based on solving one-
+dimensional semiconductor basic equations (Pois-
+son’s equation and continuity equations of electrons
+and holes) [10–13].
+The electrical, geometrical, and optical parame-
+ters of the simulated materials [14–18] are summa-
+rized in Table I.
+All the simulations are conducted under standard
+solar illumination AM 1.5 at 1000 W/m2 and a tem-
+perature of 25◦C.
+The schematic structure of the studied solar cell
+ZnO/CZTS/CdS /MoS2 is shown in Fig. 1, where
+MoS2 plays the role of the back surface ﬁeld (BSF),
+CZTS — the absorber, CdS — the buﬀer layer, and
+ZnO — the window layer.
+3. Results and discussion
+The aim of this work is to optimize the CdS buﬀer
+layer by varying diﬀerent controllable parameters
+within the experimental ranges. For this purpose
+we have studied the inﬂuence of doping density,
+thickness, and gap energy. The initial parameters
+of the CdS layer have been set at doping density
+ND = 5 × 1018 cm−3, thickness W = 50 nm, gap
+energy Eg = 2.4 eV.
+3.1. Eﬀect of the CdS buﬀer
+layer doping concentration
+The eﬀect of CdS buﬀer doping concentration on
+cell performance has been studied by varying the
+donor density of CdS from ND = 5 × 1014 cm−3 to
+ND = 5 × 1021 cm−3, while the other parameters
+have been kept constant. Figure 2 shows the eﬀect
+of this variation on JSC, VOC, FF, and η.
+Fig. 1. Device structure of the studied solar cell.
+Fig. 2. Eﬀect of the CdS buﬀer layer doping con-
+centration ND on (a) VOC, (b) JSC, (c) FF, and (d)
+eﬃciency η.
+TABLE I
+Simulation parameters for studied solar cell [14–
+18] Here, W [µm] is thickness, Eg [eV] is gap en-
+ergy, χ [eV] is electron aﬃnity, εr is dielectric per-
+mittivity, NC [cm−3] is eﬀective conduction band
+density, NV [cm−3] is eﬀective valence band den-
+sity, µe [cm2/Vs] is electron mobility, µp [cm2/Vs] is
+hole mobility, ND [cm−3] is doping concentration of
+donors, NA [cm−3] is doping concentration of accep-
+tors and Nt [cm−3] is defect density.
+Parameters CZTS CdS ZnO MoS2
+W [µm] 1.1 0.015–0.18 0.08 0.1
+Eg [eV] 1.4 2.3–3.2 3.3 1.7
+χ [eV] 4.5 4.1 4.6 4.2
+εr 10 10 9 13.6
+NC [cm−3] 2.2 × 1018 1.8 × 1019 2.2 × 1018 2.2 × 1018
+NV [cm−3] 1.8 × 1019 2.4 × 1018 1.8 × 1019 1.8 × 1019
+µe [cm2/Vs] 100 100 100 100
+µh [cm2/Vs] 25 25 25 25
+ND [cm−3] 0 5 × 1014–
+5 × 1021
+1 × 1018 0
+NA [cm−3] 1 × 1016 0 0 1 × 1016
+Nt [cm−3] 5 × 1014 1 × 1017 1 × 1017 1 × 1014
+The increase of the donor density greatly en-
+hances the power eﬃciency of the cell (Fig. 2). Al-
+though the recombination rate becomes important
+in the buﬀer layer with the carriers density increase,
+as can be seen in Fig. 3, the recombination rate
+decreases in the active layer, which improves the
+conversion eﬃciency that goes from 7.44% to more
+than 17% when the doping density increases from
+5 × 1014 to 5 × 1018 cm−3.
+On the other hand, the eﬃciency increases grad-
+ually until the doping density reaches 5×1018 cm−3
+because a strong doping density increases the elec-
+tric ﬁeld on the CZTS/CdS junction and the
+CdS/ZnO junction (Fig. 4), which will promote the
+separation of the photo-generated charges. How-
+ever,ascanbeseeninFig.2,theeﬃciencystabilizes
+446

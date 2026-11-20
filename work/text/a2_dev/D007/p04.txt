@@ -1,0 +1,100 @@
+3 Method
+In this section, we describe our approach to adapt-
+ing retrieval-augmented LLMs, by pre-determining
+the query complexity and then selecting the most
+fitting strategies for retrieval-augmented LLMs.
+3.1 Preliminaries
+We begin with preliminaries, formally introducing
+different strategies of retrieval-augmented LLMs.
+Non Retrieval for QA Let us first define an LLM
+as a model LLM, which takes a sequence of tokens
+x = [x1, x2, ..., xn] as an input and then generates
+a sequence of tokens y = [y1, y2, ..., yn] as an out-
+put, which is formalized as follows: y = LLM(x).
+Then, in our problem setup for QA, x and y be-
+come the input query (q) from the user and the
+generated answer (¯a) from the LLM, respectively:
+q = x and ¯a = y. Also, subsequently, the most
+naïve LLM-powered QA model can be represented
+as follows: ¯a = LLM(q). Ideally, ¯a should match
+the actual correct answer a. This non-retrieval-
+based QA method is highly efficient and could be
+a somewhat promising approach to handling easy
+queries, as the size of LLMs becomes extremely
+large with its effect on storing a large amount of
+knowledge. However, this approach is largely prob-
+lematic on queries that require precise or concur-
+rent knowledge of specific people, events, or any
+subjects beyond the LLMs’ internal knowledge.
+Single-step Approach for QA To address the
+aforementioned scenarios where LLM may struggle
+with queries that are not answerable by LLM itself,
+we can utilize the external knowledge d, which
+includes useful information for queries, retrieved
+from the external knowledge source D that could
+be an encyclopedia (e.g., Wikipedia) consisting
+of millions of documents. Specifically, to obtain
+such d from D, a specific retrieval model is nec-
+essary, which returns documents based on their
+relevance with the given query. This process can
+be formulated as follows: d = Retriever(q; D),
+where Retriever is the retrieval model, with
+d ∈ D. Here, we can use any off-the-shelf re-
+triever (Robertson et al., 1994; Karpukhin et al.,
+2020).
+After the retrieval step is done, we now have a
+pair of query q and its relevant documents d. Then,
+in order to augment LLMs with this retrieved exter-
+nal knowledge, we can incorporate it into the input
+of LLMs, represented as follows: ¯a = LLM(q, d).
+This process allows LLMs to gain access to exter-
+nal information contained in d, which can provide
+the supplementary context that the internal knowl-
+edge of LLM lacks, which can subsequently improve
+the accuracy and concurrency of LLMs for QA.
+Multi-step Approach for QA Even though the
+aforementioned single-step approach offers signif-
+icant improvements over non-retrieval for q that
+requires external knowledge, it encounters notable
+limitations, particularly when dealing with com-
+plex queries that necessitate synthesizing informa-
+tion from multiple source documents and reasoning
+over them. This is where a multi-step approach and
+reasoning for QA become essential.
+In this multi-step approach, LLM interacts with
+Retriever in several rounds, progressively refin-
+ing its understanding of q, until it formulates the fi-
+nal answer from findings accumulated across these
+multiple steps. Specifically, the process begins
+with the initial query q, and at every retrieval step
+i, new documents di are retrieved from D and then
+incorporated into the input of LLMs, as follows:
+¯ai = LLM(q, di, ci), where the additional context
+ci can be composed of previous documents and
+outcomes (d1, d2, ..., di−1, ¯a1, ¯a2, ..., ¯ai−1), and
+di = Retriever(q, ci; D)1. We would like to
+note that this iterative, multi-step process enables
+LLM to construct a more comprehensive and exten-
+sive foundation to solve queries effectively, specif-
+ically adept at complex multi-hop queries where
+answers depend on interconnected pieces of infor-
+mation. However, it is important to recognize that
+this multi-step approach can be resource-intensive
+due to the repeated accesses to Retriever and LLM,
+which entail substantial computational costs.
+3.2 Adaptive-RAG: Adaptive
+Retrieval-Augmented Generation
+We now introduce our adaptive retrieval-augmented
+LLMs, which are built upon three different strate-
+gies described in the previous section, and which
+are designed to select the most suitable strategy
+according to the complexity of queries.
+Adapting Retrieval-Augmented LLMs Note
+that in real-world scenarios, not all q from users
+have the same level of complexity, necessitating
+1It is worth noting that implementations of the LLM and
+retriever vary across different multi-step retrieval-augmented
+LLM approaches (Trivedi et al., 2023; Press et al., 2023; Yao
+et al., 2023); therefore, the context ci may incorporate none,
+some, or all of the previous documents and answers.
+7039

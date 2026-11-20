@@ -1,0 +1,104 @@
+assumes questions have correct answers and eval-
+uates systems on their ability to converge toward
+them.
+This bias becomes consequential as RAG deploy-
+ments expand into domains where understanding
+human opinion is the primary goal (Zhao et al.,
+2024a; Brown et al., 2025; Fan et al., 2024): online
+community forums, consumer reviews, customer
+service, policy analysis, healthcare patient feed-
+back, and political discourse. In these settings, in-
+formation is inherently subjective, and collapsing it
+to a single answer misrepresents reality. Yet recent
+work actively reinforces this mismatch by framing
+subjectivity as noise: RAGuard (Zeng et al., 2025)
+treats Reddit discussions as naturally occurring mis-
+information to be filtered, CONFLICTS (Cattan
+et al., 2025) focuses on conflict resolution rather
+than preserving perspective diversity, and robust-
+ness approaches (Chen et al., 2022; Choi et al.,
+2025; Zhang et al., 2025a) emphasize filtering con-
+tradictory information. While valuable for factual
+domains, these approaches are misaligned with sce-
+narios where diverse perspectives are the goal.
+The boundary between factual and opinion con-
+tent is blurred in practice. Even a factual query,
+such as “What are the shipping rates for small
+parcels?”, will surface opinion-laden forum dis-
+cussions alongside authoritative sources when the
+knowledge base includes community content. A
+semantic similarity-based retriever cannot distin-
+guish an official rate schedule from a seller’s com-
+plaint about rate increases. Current systems have
+no mechanism to handle this mixture, treating all
+retrieved content as equivalent evidence. Exist-
+ing diversity methods do not solve this: Maxi-
+mal Marginal Relevance (Carbonell and Goldstein,
+1998) and Determinantal Point Process-based meth-
+ods promote diversity by penalizing redundancy in
+embedding space, but semantic diversity and opin-
+ion diversity are fundamentally different objectives.
+Two documents expressing opposing views on the
+same topic may use similar vocabulary and land
+close together in embedding space. MMR would
+penalize retrieving both; opinion-aware retrieval
+should specifically surface both.
+Additionally, current RAG-based metrics can as-
+sign high scores to biased outputs. A response to
+“What leadership qualities are most important for
+startup CEOs?” that emphasizes only traditionally
+masculine-coded traits could score excellently on
+ROUGE-L, context relevance, and answer faithful-
+ness. However, it would underrepresent collabora-
+tive and inclusive leadership perspectives (Wang
+et al., 2025; Zhang et al., 2025b; de Oliveira et al.,
+2025; Thakur et al., 2025) (see Appendix K for
+a concrete example). Traditional metrics tend to
+reward convergence and cannot detect what was
+excluded.
+Related techniques like argument mining and
+stance detection have matured considerably (Al-
+Dayel and Magdy, 2021; Hardalov et al.,
+2022), with work spanning argument-based re-
+trieval (Li et al., 2025), sentiment analysis on
+decentralized platforms (Chhetri et al., 2025),
+and multimodal/comment-level opinion analy-
+sis (Sharma et al., 2020; Li et al., 2018; Weiß-
+mann et al., 2025; Sun et al., 2024), yet these ca-
+pabilities remain isolated from RAG frameworks.
+RAFTS (Yue et al., 2024) synthesizes contrastive
+arguments but targets claim credibility, not opinion
+diversity. LLMs’ inability to reliably detect con-
+tradictions (Lee et al., 2025; Gokul et al., 2025)
+compounds the challenge. OpinioRAG (Nayeem
+and Rafiei, 2025) bridges this gap via RAG-based
+opinion summarization but focuses on condensing
+opinions into narratives rather than ensuring the
+retrieved set faithfully represents the opinion spec-
+trum.
+Latest work on perspective benchmarks is a step
+in this direction, but is incomplete. PIR (Zhao et al.,
+2024b) and BERDS (Chen and Choi, 2025) confirm
+that current retrievers are perspective-blind: PIR
+shows systematic bias toward supporting stances
+(∼58.5%), while BERDS finds full perspective cov-
+erage in only 40% of cases. However, both evaluate
+categorical perspective presence (is viewpoint X
+retrieved?) rather than opinion distributions - the
+intensity, affect, and demographic grounding that
+characterize real-world subjective content.
+Pluralistic alignment is another relevant body of
+work which is complementary to opinion-aware
+retrieval. A growing body of work addresses plu-
+ralism at the generation layer: Sorensen et al.
+(2024) formalize pluralistic value alignment for
+LLMs, Bakker et al. (2022) fine-tune models to
+find agreement among diverse preferences, and Ar-
+gyle et al. (2023) frame LLMs as “silicon sampling”
+of human opinions. However, pluralistic alignment
+trains the generation model to preserve opinion dis-
+tributions, while opinion-aware retrieval ensures
+the retrieved context faithfully represents the dis-
+tribution before generation. These are complemen-
+tary: a pluralistically-aligned LLM given biased
+retrieved context still produces biased responses.

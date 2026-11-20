@@ -1,0 +1,43 @@
+"parent_heading": "2. Gather Tools"},
+{"id": "heading_7", "type": "heading",
+"text": "3. Remove the Wheel Cover",
+"parent_heading": "Steps to Change a Tyre"},
+{"id": "text_8", "type": "text",
+"text": "Use the flat end of the wrench...",
+"parent_heading": "3. Remove the Wheel Cover"},
+{"id": "heading_9", "type": "heading",
+"text": "4. Loosen the Lug Nuts",
+"parent_heading": "Steps to Change a Tyre"},
+{"id": "text_10", "type": "text",
+"text": "Use the lug wrench to turn...",
+"parent_heading": "4. Loosen the Lug Nuts"}
+]
+Output:
+{"chunks": [["heading_1", "heading_2", "heading_3", "text_4",
+"heading_5", "text_6", "heading_7", "text_8", "heading_9",
+"text_10"]]}
+Note: All procedural steps (1-4) are grouped together in a SINGLE chunk array. Never split sequential steps into separate
+chunks.
+A.2 Agentic Chunking Prompt
+Agentic Chunking Prompt
+You are to segment the provided Markdown into fully contextual chunks while strictly preserving original content. This is a
+formatting only task—no text, links, hyperlinks, or images must be removed, skipped, paraphrased, or summarized.
+YOUR INSTRUCTIONS
+1. Reading and Understanding
+Read all markdown content carefully.
+2. Heading Structure
+Always generate a 2 or 3-level heading structure for every chunk. Keep similar chunks into same headings:
+• First-level heading: Document or product title
+• Second-level heading: Major section inside the document (e.g., “Features”, “Amenities”, “Itinerary”)
+• Third-level heading: Specific subtopic within that section
+3. Content Preservation
+DO NOT alter, paraphrase, shorten, or skip any markdown content. All text, hyperlinks, links, formatting, images, image links,
+and elements must remain exactly as in the original markdown and present in the output chunks.
+4. Chunking Strategy
+Do not over chunk. Keep similar chunks together in same headings or use just two levels of headings.
+5. Grouping Related Content
+Keep all related content together:
+• Always keep full numbered lists, bullet points, and related paragraphs in the same chunk
+• Never split tables, figures, code blocks, or other complete elements
+6. Table Formatting
+12

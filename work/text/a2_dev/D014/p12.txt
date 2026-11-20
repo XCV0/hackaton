@@ -1,0 +1,97 @@
+A Appendix
+A.1 Implementation Details
+A.1.1 Knowledge Sampling
+Since knowledge precision and recall are the most
+common metrics for knowledge retrieval and se-
+lection performance, we use these metrics as the
+basis for our analysis. We find that the sampling
+rate pgold linearly correlates with knowledge recall
+scores, while pnoise exponentially correlates with
+knowledge precision. Thus, to simulate retrieving
+and selecting a knowledge set K′ with a specific
+knowledge precision and recall score, we use grid
+search in the linear space of pgold and both the lin-
+ear and exponential spaces of pnoise to ensure most
+grids in the knowledge precision-recall space are
+covered by our experiments.
+We maintain the original order of the knowl-
+edge sentences from the documents provided in the
+datasets and do not observe a strong influence from
+the position of the gold knowledge sentences.
+A.1.2 Models
+We do not perform any fine-tuning or hyperpa-
+rameter tuning. We set the LLMs’ tempera-
+ture to 0 and ensure that our zero-shot gener-
+ation prompts (Appendix A.2) are shorter than
+their maximum input lengths. We use the
+API services of OpenAI gpt-4o-mini-2024-07-
+18*, Together AI* meta-llama/Meta-Llama-3.1-8B-
+Instruct-Turbo, and mistralai/Mistral-7B-Instruct-
+v0.1. We report results on the first 500 examples
+in the HotpotQA training set and the first 100 con-
+versations (452 wizard utterances) from the “test
+seen” set of WoW. Our set of experiments cost
+about 50 USD from OpenAI and about 50 USD
+from Together.ai.
+A.2 Prompts
+Tables 3 & 4 show the prompts we use for response
+generation on WoW and HotpotQA, respectively.
+While we experimented with Chain-of-Thought
+(Wei et al., 2022) for these prompts, they did not
+outperform zero-shot prompting for LLaMA 3.1
+8B and Mistral-7B-Instruct, so we use zero-shot
+prompting throughout our experiments to keep the
+settings as simple as possible.
+*https://platform.openai.com/docs/models/
+gpt-4o-mini
+*https://docs.together.ai/docs/chat-models
+A.3 Additional Plots
+Figures 10, 11, and 12 extend Figure 3, with knowl-
+edge precision, knowledge recall, and knowledge
+F1 plotted against response/answer F1 for WoW
+and HotpotQA, respectively, for all three LLM gen-
+erators. Figure 11 shows that knowledge recall cor-
+relates strongly with response/answer F1 for both
+GPT-4o-mini and LLaMA 3.1 8B on both WoW
+and HotpotQA, as well as for Mistral 7B-Instruct
+on WoW, while Figure 12 shows that knowledge F1
+has the stronger correlation for Mistral 7B-Instruct
+on HotpotQA.
+A.4 Noisiness of Wizard of Wikipedia vs.
+HotpotQA
+To intuitively compare the noisiness of WoW vs.
+HotpotQA, for each example, we feed each indi-
+vidual candidate knowledge sentence, regardless of
+gold or distractor status, to the GPT-4o-mini gen-
+erator model and measure the answer F1 score to
+measure how each individual knowledge sentence
+affects the generation performance. As Figure 7
+shows, WoW knowledge sentences result in a wide,
+continuous distribution of response F1 scores, in-
+dicating that even the “distractor" knowledge pos-
+itively contributes to the gold response to some
+extent. In contrast, we find that 70% of HotpotQA
+sentences are true distractors that cause the genera-
+tor to produce incorrect answers with 0 F1 score,
+while 20% of sentences result in correct answers.
+These results indicate that WoW is a much noisier
+dataset than HotpotQA.
+A.5 Noisy HotpotQA
+As we discuss in Section 4.1, the WoW gold knowl-
+edge annotations are noisy in that only one sen-
+tence can be seelcted as gold knowledge, even if
+the other retrieved sentences are still relevant. To
+test the impact of such knowledge annotation noise
+on our RAG simulation results, we deliberately in-
+ject noise into HotpotQA by removing one sentence
+from the gold knowledge set for each example to
+create a noisy HotpotQA dataset. As a result, the
+average number of gold knowledge sentences per
+example drops from 2.4 to 1.4, and a small portion
+of the “distractor" knowledge in the noisy dataset
+is actually gold knowledge from the original Hot-
+potQA (i.e. false-negative knowledge).
+As Figures 5 & 6 show, the injected noise dras-
+tically impairs the knowledge selector’s efficacy:
+even given a “perfect” knowledge selector with a
+4115

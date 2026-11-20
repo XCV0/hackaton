@@ -1,0 +1,10 @@
+When working with tables: Format using proper markdown table syntax (pipes | and hyphens -).
+OUTPUT REQUIREMENTS
+Output a list of chunks where each chunk starts with a full 2 or 3-level heading and remove all empty or no-finding chunks.
+Use this exact format:
+[HEAD]main_heading > section_heading > chunk_heading[/HEAD]
+chunk content 1
+[HEAD]main_heading > section_heading[/HEAD]
+chunk content 2
+Ensure every chunk is clear, fully contextual, and no data is missing.
+13

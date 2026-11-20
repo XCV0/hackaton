@@ -1,0 +1,122 @@
+mobile ions. It is important to note that the high scan-speed PCE
+can be used as a measure for the “ion-free” PCE only when the
+ions are roughly homogeneously distributed in the bulk of the
+perovskite. This is the case if the built-in voltage (VBI) in the
+device is offset by the applied voltage. However, at prebiases dif-
+ferent to the VBI, the ions accumulate at the interface, which will
+cause an overestimation of the “ion-free” efﬁciency at forward
+biases >VBI, or an underestimation in the case of smaller pre-
+biases. This is shown in Supplementary Figure S1a,b and all
+experimental details are provided in the Supplementary
+Methods. Although the built-in voltage is in general not precisely
+known, we have recently shown that the high device ﬁll factor
+and VOC cannot be reproduced with built-in voltages lower than
+1V.[46] This is also consistent with capacitance versus voltage
+measurements, which demonstrate a VBI close to the device
+VOC of the triple cation device (Supplementary Figure S1c).
+Therefore, using the VOC as a prebias closely reﬂects the ion-free
+efﬁciency and also allows for a simple comparison of the devices
+under well-deﬁned starting conditions. It is further important to
+note that the ionic loss from fast to slow scan speeds directly
+impacts the SPO of the cell. This can be seen when the MPP
+is tracked with a high time resolution (/C2510 ms, Supplementary
+Figure S2), which highlights a signiﬁcantly higher power output
+on the sub-second timescales. The SPO from the MPP tracking at
+longer times (/C25100 s) is plotted with a star symbol in Figure 1c,
+which shows that its value is essentially identical to the PCE mea-
+sured at slow scan speeds (<100 mV s/C01). Finally, as a reference
+measurement for a material without moving ions, we also per-
+formed the fast-hysteresis measurements on an organic solar
+cell, made of a well-known PM6:Y6 blend, and as expected we
+do not see a hysteresis nor a difference between the PCE at fast
+and slow scan speeds on the studied timescales as shown in
+Supplementary Figure S3a. To conﬁrm that the observed hyster-
+esis is indeed caused by the ionic redistribution and not by any
+trapping/detrapping processes, we also measured an 83-17 triple
+cation pin-type cell at different temperatures (RT, 250 and 200 K),
+see Supplementary Figure S3b. As expected from a reduction of
+the ionic mobility with decreasing temperature, we see a clear shift
+of the maximum hysteresis feature to slower scan speeds. We also
+observed that the hysteresis is essentially absent at low tempera-
+tures within the measured scan speed range, especially at high scan
+speeds where hysteresis could appear due to trapping/detrapping.
+This indicates that trapping/detrapping is not the primary cause of
+the hysteresis.
+To further investigate the effect of ions and to reproduce our
+experimental hysteresis results, we used the open-source drift-
+diffusion package IonMonger.[41] The parameters used in the
+simulations and shown in the Supplementary Information,
+Table S1, are mostly based on our previous reports.[46] In these
+studies, we were already able to reproduce several experimental
+results such as the ideality factor, the measured bulk and inter-
+facial recombination currents,[55] using experimental input from
+transient photoluminescence (PL) measurements, such as inter-
+face recombination velocities and bulk lifetimes. Interestingly, as
+shown in Figure 1d, we were able to reproduce the fast-hysteresis
+measurements with an ion density of 6 /C2 1016 cm/C03 and a diffu-
+sion coefﬁcient of 5 /C2 10/C010 cm2 s/C01, which is consistent with
+our charge extraction measurements as discussed in the follow-
+ing section. Note that in the simulations we only considered
+mobile cations while the anions remain ﬁxed. However, we
+emphasize that we cannot exclude that there might be other sim-
+ulation settings that would reproduce the fast-hysteresis meas-
+urements and the experiments shown in our previous work[46]
+with different ion densities, since the effect of the mobile ion
+density depends on several devices and material parameters as
+mentioned in the introduction. Moreover, it should be noted that
+the absolute values may differ due to the multifarious device and
+material parameters which inﬂuence the model. Nevertheless,
+trends can be reliably investigated using these simulations.
+Motivated by the successful reproduction of experimental
+observation by the simulations, we varied the ion density
+(Figure 1d) and diffusion coefﬁcient (Figure 1e) to study the
+effect on the JV curves and the PCE difference between the for-
+ward and reverse scan. As discovered earlier by others,[44] we see
+that the hysteresis is absent at fast and slow scan speeds.
+Moreover, the timescale at which the maximum JV hysteresis
+(which we call “peak hysteresis”) occurs, appears to depend pri-
+marily on the ion diffusion coefﬁcient (the larger Dion the higher
+the scan speed to resolve the maximum hysteresis) and to a lesser
+degree on the ion density. In fact, when we plot the transit time of
+the ions as obtained from the ion mobility, we ﬁnd a near-perfect
+agreement between the scan speed time and the ion transit time
+through the active layer. This is shown in Supplementary
+Figure S4. Hence, the scan time at the maximum hysteresis
+is roughly equal to the transit time of ions through the active
+layer. Therefore, the peak hysteresis can be used as an approxi-
+mate measure of the effective ion speed,[56] although we note that
+there might be other device and material parameters that cause a
+deviation from this agreement, which need to be further investi-
+gated in the future. Figure 1f shows the difference between
+reverse and forward PCE as a function of scan speed and ion
+density. While the PCE is not strongly affected by the scan speed
+at low ion densities, for ion densities >1016 cm/C03 the PCE is low
+for slow scan rates but remains high at fast scan rates. It is also
+important to note that a signiﬁcant hysteresis will only appear if
+the ion density is large enough to screen (or more precisely
+“redistribute”) the built-in ﬁeld. A high VBI is necessary to
+achieve a high performance in perovskite solar cells.[57] This is
+the case if nion is approximately equal to or larger than the charge
+on the electrodes per cell volume (CVBI=eVol /C251016 cm/C03, where
+C is the geometrical capacitance, e the elementary charge, and Vol
+the volume of the cell). Therefore, regardless of the scan speed,
+Figure 1d,f shows a signiﬁcant hysteresis only from ion densities
+of approximately 1016 cm/C03 or above. Figure 1d,f also show that
+the PCE loss at small scan speeds strongly depends on the ion
+density but is not affected by the ionic diffusion coefﬁcient,
+which only shifts the position of the peak hysteresis on the x-axis.
+Having observed the profound effect of ion density and diffu-
+sion coefﬁcient, we aim to better explain the scan-speed-
+dependent hysteresis via the energy bands and accumulation
+of the ions depending on the scan speed and direction and
+the device operating point. We note again that the voltage sweep
+is again performed from OC to SC and back to OC as exempliﬁed
+in Figure 2a. The corresponding PCE as a function of scan speed
+and direction is shown in Figure 2b, while Figure 2c shows the
+JV curves at the characteristic scan speeds (slow, medium, and
+fast as pointed out in Figure 2b). The corresponding JV curves
+and recombination currents (bulk, interface, contacts) for each
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100772 2100772 (4 of 10) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 4, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100772, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

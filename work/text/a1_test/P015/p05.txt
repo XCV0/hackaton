@@ -1,0 +1,69 @@
+Coatings 2022, 12, 261 5 of 11
+to the solar cell structure, which include interdiffusion between the emitter and the CdTe
+absorber layers [16,17].
+The presence of the AZS HRT has had a beneﬁcial effect on the Voc and has acted as
+a chemical barrier during the agg. CHT process. J-V parameters (Table 1) demonstrate a
+correlation between the AZS HRT and CHT process, with higher annealing temperatures
+improving FF, alongside lower series resistance (Rs). J-V curves (Figure 3) show the
+improvement to Voc with inclusion of the AZS HRT layer and the increase in CHT anneal
+temperature. Comparison is made to a baseline device sample with no AZS HRT layer
+having received a std. CHT process.
+Table 1. J-V parameters with standard deviation of FTO/AZS/CdS/Cd(Zn)S/CdTe:As solar cell
+devices with different degrees of CHT processing; comparison to a baseline solar cell device with
+AZS layer omitted.
+Sample AZS (nm) CdS (nm) Cd(Zn)S (nm) CdTe:As (nm) CHT (◦C) T ◦C (min) No. Cells PCE (%) Jsc (mA/cm2) Voc (mV) FF (%)
+Baseline - 50 100 3000 420 10 8 14.1 ± 0.2 24.3 ± 0.4 760 ± 0 76.5 ± 2.1
+a 50 50 100 3000 - - 3 1.4 ± 0.4 9.4 ± 1.6 500 ± 10 28.9 ± 3.0
+b 50 50 100 3000 420 10 3 6.3 ± 2.7 23.1 ± 3.5 610 ± 10 38.3 ± 11.7
+c 50 50 100 3000 440 10 8 9.7 ± 1.6 25.5 ± 0.8 700 ± 10 54.3 ± 8.0
+d 100 50 100 3000 440 10 12 14.3 ± 0.4 24.1 ± 0.6 824 ± 10 71.8 ± 1.7
+Coatings 2022, 12, x FOR PEER REVIEW 6 of 11 
+ 
+ 
+rectification. The presence of the Cd(Zn)S emitter prior to CHT reduced this CBD, which 
+has an electron affinity of 4.2 eV to create a smaller +0.2 eV band offset for Cd(Zn)S/CdTe, 
+Figure 1b,c, compared to the +0.5 eV band offset at the AZS/CdTe interface. However, the 
+AZS/Cd(Zn)S interface introduces another +0.3 eV band offset (Figure 1b) creating another 
+barrier for minority carrier collection. The agg. CHT also resulted in larger grains, another 
+contributing factor for increased Voc with less minority carrier recombination at the grain 
+boundaries. 
+ 
+Figure 3. J-V curves of FTO/AZS/CdS/Cd(Zn)S/CdTe:As solar cell devices with different CHT anneal 
+temperatures, showing comparison to a baseline FTO/CdS/Cd(Zn)S/CdTe:As solar cell device with 
+no AZS HRT and std. CHT processing. 
+Figure 4 shows EDX elemental maps of the AZS/CdS/Cd(Zn)S/CdTe device cross-
+sections having undergone different levels of CHT. The images show different levels of 
+interdiffusion of the Cd(Zn)S emitter and the impact on the HRT/emitter layer structure, 
+which in this case consisted of a 50 nm  AZS HRT with 150 nm combined CdS/Cd(Zn)S 
+emitter layer. Previous work [22,23] showed that the Cd(Zn)S emitter composition prior 
+to the CHT process was Cd0.3Zn0.7S, which changes to be closer to Cd0.4Zn0.6S after the CHT 
+process via interdiffusion, with the CdS nucl eation layer intermixing with the Cd(Zn)S 
+emitter [22]. The images of the untreated dev ice sample (a) show a bright defined layer 
+above the FTO layer (dark region) which corresponds to a ZnS layer, as can be seen from 
+the EDX images. The concentration of Al was below the detectable limit of the EDX spec-
+trometer, which had spatial resolution < 5 nm. It may also have been the case that the Al, 
+being highly mobile, had diffused out of th e device structure during the CHT process. 
+Above the ZnS layer, a narrow dark layer (Zn profile) can be seen, corresponding to the 
+CdS layer which is clearly shown in the Cd and S profiles. The Cd(Zn)S layer is revealed 
+in all three Cd, S and Zn EDX images. The CdS and Cd(Zn)S layers together form the 
+emitter in this device. 
+After std. CHT (420 °C) for device sample (b), the HRT/emitter profile broadens due 
+to interdiffusion, with less-defined layers in the EDX images although the CdS layer can 
+still be seen by comparing the Cd, S and Zn EDX images. When the CHT becomes more 
+aggressive (sample (c)), the HRT/emitter region narrows as it becomes substantially inter-
+diffused with the CdTe absorber. The only remaining layer that is still visible in the EDX 
+images is the ZnS HRT layer, confirming the robustness of this layer to agg. CHT. 
+Figure 3. J-V curves of FTO/AZS/CdS/Cd(Zn)S/CdTe:As solar cell devices with different CHT
+anneal temperatures, showing comparison to a baseline FTO/CdS/Cd(Zn)S/CdTe:As solar cell
+device with no AZS HRT and std. CHT processing.
+A thicker 100 nm AZS resulted in higher Voc relative to the device having the same
+CHT process but with a 50 nm AZS HRT. The STEM-EDX for both these devices (Figure 4)
+showed a strong presence of ZnS at the TCO interface. The AZS HRT layer remaining
+at the CdTe interface provided a positive CBD, which was a contributing factor to the
+increased Voc and overall improvement in J-V parameters in a previous report [14], showing
+the energy band diagram for equivalent CdTe device stacks. This was attributed to the
+low electron afﬁnity of AZS of 3.9 eV and the positive CBD of +0.5 eV when interfacing
+with CdTe, which has electron afﬁnity equal to 4.4 eV. AZS was even shown to act as
+an emitter in the absence of Cd(Zn)S, although J-V curves were susceptible to a second
+rectiﬁcation. The presence of the Cd(Zn)S emitter prior to CHT reduced this CBD, which
+has an electron afﬁnity of 4.2 eV to create a smaller +0.2 eV band offset for Cd(Zn)S/CdTe,

@@ -1,0 +1,104 @@
+Monolingual Retrieval Setting
+Multilingual Retrieval Setting
+News
+1 Identifying
+pairs of
+related articles
+2 Cross-
+document Q&A
+generation
+3 Quality
+Control
+4 Human
+Translation
+5 English
+Retrieval+ Filtering
+5 Language X
+Retrieval+ Filtering
+News
+Doc 1 Doc 2
+English + English
+Doc 1 Doc 2
+X + English
+Discard
+No
+Yes
+Doc 8Doc 7Doc 6Doc 5Doc 4Doc 3
+English
+Doc 8Doc 7Doc 6Doc 5Doc 4Doc 3
+English X
+Q&A Q&A
+X + English
+D+
+D+
+D−
+D−
+𝑞, 𝑎
+Figure 2: Each instance (q, a, D+, D−) in XRAG — where q is the question, a the gold answer, D+ the supporting
+articles, and D− the distractors — is constructed as follows: (1) find two related articles; (2) generate an English
+cross-document Q&A pair using the two articles; (3) evaluate the quality of the Q&A pair; (4) translate the Q&A
+pair into language X ∈ {German, Spanish, Chinese, Arabic}; and (5) collect distracting articles for the question.
+Each instance (q, a, D+, D−) in XRAG consists
+of a question q, a golden answer a, two support-
+ing articles D+, and several distracting articles D−.
+The supporting articles each contribute partial in-
+formation needed to answer the question, and only
+together do they provide a complete answer; in con-
+trast, the distracting articles are topically related
+but cannot answer the question. Taken together,
+this simulates a realistic RAG scenario with imper-
+fect retrieval, where we can control the quality of
+the grounding by the inclusion of distractors. Ques-
+tions in XRAG are cross-document questions, re-
+quiring reasoning across the two supporting articles
+to answer, while ignoring the distracting articles.
+Our benchmark considers two real-world cross-
+lingual RAG scenarios: the monolingual retrieval
+scenario and the multilingual retrieval scenario.
+In the monolingual retrieval setting, LLMs rely
+on English articles to generate an answer. This
+occurs when users in multiple locales are served by
+a single cross-lingual RAG system that has access
+only to an English knowledge base. In this paper,
+we consider questions in four languages: German
+(de), Spanish (es), Chinese (zh), and Arabic (ar):
+Language(q) ∈ {de, es, zh, ar}
+Language(D+) = Language(D−) = en (2)
+These four are widely used in the research commu-
+nity (Macko et al., 2023) and represent a range of
+cross-lingual challenges, ranging from easy (es-en)
+to challenging (zh-en) (Yang et al., 2022).
+In a multilingual retrieval setting, LLMs use
+articles in both the question language and other lan-
+guages to answer a question. This corresponds to
+a cross-lingual RAG scenario where documents in
+a resource-rich language provide additional infor-
+mation for LLMs to answer questions in a second
+language. Similarly, we consider four languages:
+Language(q) ∈ {de, es, zh, ar}
+Language(D+) = {en, Language(q)}
+Language(D−) = {en, Language(q)}
+(3)
+Table 1 gives examples of monolingual retrieval
+and multilingual retrieval from XRAG.
+4 XRAG Construction
+Figure 2 shows the overall XRAG construction
+process. We begin with English, German, Span-
+ish, Chinese, and Arabic news articles from News
+Crawl between June 1, 2024, and November 30,
+2024. This timeframe ensures that the articles are
+dated after the knowledge cutoff of LLMs such as
+GPT-4 and Claude 3.5. Questions created from
+these articles are more likely to require external
+knowledge to answer.
+4.1 Identifying pairs of related articles
+To generate natural cross-document questions from
+a pair of articles, the articles must be topically re-
+lated; otherwise, the generated questions may seem
+artificial (Welbl et al., 2018).
+For the monolingual retrieval setting, we con-
+struct a bipartite graph linking English articles with
+the entities in their titles. We then use depth-first
+search to find pairs of articles that share at least
+two entities in their titles. These article pairs serve
+15672

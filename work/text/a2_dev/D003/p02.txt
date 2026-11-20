@@ -1,0 +1,89 @@
+ƭƬƭ ƭƬƮ
+0( -*!.4)/#/-$)$)"//*& ).Ǿ($''$*)ǿ
+Ʊư
+ƱƲ
+Ʊƴ
+ƲƬ
+ƲƮ
+Ʋư
+ƲƲ
+Ʋƴ0
+0-4Ǿʻǿ
+ƳƬƬǠƲƮǟưʻ
+ưƱƱǠƱƲǟƮʻ
+ƭƳƱǠƱưǟƳʻ
+- &$)"/#  $'$)"2$/#*0-/-$)$)"- $+ 
+4)/#$3 -$)$)"ǾƲƬǟƳʻǿ
+4)/#$3 -$)$)"ˆ ).'$)"ǾƲƳǟƬʻǿ
+4)/#$3 -$)$)"ˆ ).'$)"ˆ*' 2-$/$)"ǾƲƴǟƮʻǿ
+'(Ưǟƭƴ
+)./-0/ǾƲƱǟƯʻǿ
+/0-/$*)+*$)/2# ).'$)" 3$./$)"( /#*.ˆ ).'$)"
+)/$-+#Ǿ)" /'ǟǠƮƬƮưǿ
+/$1  $)"Ǿ$) /'ǟǠƮƬƮƱǿ
+Figure 1: Naively scaling synthetic data plateaus, but our simple methods allows effective scaling and surpass
+RAG. We evaluate four synthetic data generation strategies using both 8B and 70B generators, scaling training data
+up to 700M tokens. Across all four baselines, performance saturates and remains below RAG, showing that simply
+increasing synthetic data or compute is insufficient. In contrast, our two simple techniques—Synthetic Mixed
+Training and Focal Rewriting—exhibit clear log-linear scaling with both more data and a stronger generator,
+ultimately surpassing RAG.
+Building on the observations that synthetic QAs
+and documents have different scaling properties
+with respect to data and generator strength, we hy-
+pothesize that QA and document data each provide
+unique benefits during training. To achieve the
+best of both worlds, we propose Synthetic Mixed
+Training, which combines synthetic QAs with syn-
+thetic documents during training. This substantially
+improves synthetic token efficiency, exhibits clear
+log-linear scaling behavior up to 700M synthetic
+tokens, and enables the model to surpass RAG by
+a 2.6% relative gain. In addition, we introduce Fo-
+cal Rewriting, a simple technique for diversifying
+the topics covered by synthetic documents by ex-
+plicitly conditioning document generation on syn-
+thetic questions about the source document. This
+increases the lexical and semantic diversity of the
+synthetic documents and further improves model
+performance, yielding a 4.4% relative accuracy
+gain over RAG.
+We show that our recipe generalizes well across
+different base models, including Qwen3 models
+ranging from 1.7B to 14B parameters, and across
+three benchmarks: QuaLITY, LongHealth, and Fi-
+nanceBench. In particular, our recipe enables mod-
+els to outperform RAG in five of six setups, yield-
+ing an average relative accuracy gain of 2.6% over
+vanilla RAG. Our approach is also complementary
+to RAG, providing a 9.1% relative accuracy im-
+provement over vanilla RAG. These results suggest
+an untapped potential of synthetic data in enhanc-
+ing internalization of new knowledge for language
+models.
+2 Existing synthetic data recipes plateau
+when scaled
+We present experimental results for training an 8B
+model on variants of synthetic data derived from
+documents in the QuaLITY benchmark (Pang et al.,
+2022). To study how performance changes with
+data scale, we vary the number of synthetic tokens
+across runs, scaling up to 700M tokens. As Yang
+et al. (2025b) demonstrate that training with only
+real data does not improve performance, we only
+consider options that train only with synthetic data.
+Setup. We train the Llama 3.1 8B Instruct
+model (Grattafiori et al., 2024) on the synthetic
+data using a fixed set of hyperparameters (except
+for learning rate; we search across three LRs—5e-
+6, 1e-6 and 5e-5—and report the best accuracy),
+varying only the method used to generate the syn-
+thetic data. Similar to Yang et al. (2025b), we use
+FineWeb (Penedo et al., 2024) as a replay data,
+with a mixing ratio of 10%. For evaluation, we
+use the QuaLITY multiple-choice QA set with a
+zero-shot instruction that asks the LM to provide
+a short explanation followed by the final answer.
+We run evaluations for each setup eight times and
+report the average results for more reliable results.
+See Appendix B and C for more details.
+9194

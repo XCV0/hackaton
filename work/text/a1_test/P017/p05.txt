@@ -1,0 +1,205 @@
+significantly higher doping density at high forward and reverse
+bias.17,28−31 An increase in the apparent doping density toward
+increasing forward bias has been attributed to minority carrier
+injection and parasitic resistances and the increase with higher
+reverse bias related to the presence of deep defects.32 Werner
+et al. have suggested that the SCR capacitance in TFSCs
+containing Cd- or Zn-incorporated buffers follows the model
+of a linearly graded junction and is a result of elemental
+intermixing at the buffer/absorber interface, which alters the
+apparent doping concentration.28 However, device E shows an
+extended flat region in the depth-dependent doping profile,
+suggesting a more uniform doping concentration that extends
+from the region near the buffer/absorber interface into the
+bulk of the CZTSSe absorber. The SCR width (wSCR) is
+calculated to be 143, 71, and 83 nm for devices H, D, and E,
+respectively. Both device types with a dual buffer exhibit a
+significant narrowing of the SCR compared to the standard
+device. This can be directly attributed to the higher doping
+density observed in the devices with a dual buffer because the
+SCR width ratio of n-to-p-type semiconductors in a p−n
+junction is equal to the ratio of apparent acceptor-to-donor
+density, i.e., wSCR,p/wSCR,n, where wSCR,p and wSCR,n are the SCR
+widths in p- and n-type semiconductors, respectively, and ND
+and NA are the apparent donor and acceptor densities,
+respectively (Table 2). From Table 2, it appears that the
+apparent doping density of the CZTSSe absorbers in the
+studied devices is linked to the recombination current in the
+SCR of their respective devices. To gain deeper insight into the
+carrier collection efficiency, external quantum efficiency (EQE)
+measurements were performed on all device types, with the
+results shown in Figure 3a. The spectra showed similar
+responses, whereby a steep rise in current collection is
+observed in the ultraviolet-blue region (<450 nm), followed
+by steady collection in the region of 600−850 nm and a
+gradual decrease at wavelengths of >850 nm. Both types of
+dual buffer devices showed increased current extraction at
+wavelengths of >550 nm due to the presence of a slightly
+thinner CdS layer and higher transmittance in the In2S3 layer.17
+The most notable difference in the EQE spectra is the drop in
+response of device D over wavelengths of >550 nm, which
+could be linked to a poor minority carrier diffusion length
+coupled with a narrow wSCR. Because effective charge
+separation occurs in the depletion region in the absorber
+material of a solar cell, such a small wSCR due to a high hole
+concentration in CZTSSe adversely affects the carrier
+collection. The overall lower collection efficiency in this device
+would also suggest a higher barrier to minority carrier
+(electron) transport, which is in agreement with the lower
+J−V crossover for this device seen in Figure 2a. A similar
+behavior has been observed in other kesterite solar cells that
+employ a In2S3 buffer.14,33,34 By definition, EQE represents the
+ratio between the numbers of generated charge carriers to the
+number of incident photons; therefore, JSC can be estimated by
+integrating the EQE over the entire spectrum. The
+comparative results between JSC extracted from J−V and
+EQE analysis are shown as a table inset in Figure 3a. It is
+evident that devices with a dual buffer layer have lower JSC
+when calculated from EQE spectra. Similar results have been
+observed previously and were attributed to the photoactive
+nature of the In2S3 layer and the CZTSSe/In2S3 interface,
+which can influence defects and interface recombination.14,35
+The band gaps EG of the CZTSSe absorbers in each type of
+device were determined from EQE measurements (Figure S3),
+yielding values of 1.143, 1.187, and 1.143 eV for devices H, D,
+and E, respectively. Xiao et al. studied the effects of In doping
+on CZTS and CZTSe solar cells and found that an increasing
+In/Sn ratio (or In content) caused a monotonic increase in the
+absorber band gap.36 Therefore, In diffusion from the In2S3
+buffer into the CZTSSe film due to In2S3/CdS film deposition/
+heat treatment could account for the increased band gap seen
+in device D.
+Additionally, light-biased EQE measurements were done to
+study the effects of white-light illumination (at 15 and 30 mW/
+cm2) on absorption in the CZTSSe films of each device type
+(Figure 3b). There is little discernible difference between the
+unbiased and biased EQE spectra for devices H and E, while
+the light-biased EQE response of device D is higher in the blue
+part of the spectrum (wavelengths of <500 nm) and
+significantly lower over the remaining spectrum (wavelengths
+of >500 nm). This phenomenon has also been previously
+observed in kesterite CZTS solar cells with a CdS and/or In2S3
+buffer layer,14,35 which was ascribed to saturated and
+unsaturated photoactive defects in the CdS and In2S3 layers,
+respectively. Under white-light illumination, these photoactive
+defects shrink the width of the SCR by the optical injection of
+red photons, and the effect is more pronounced in the device
+with an In2S3 buffer directly on top of the CZTSSe absorber,
+due to the unsaturated nature of the defects present in this
+film.
+In a nonideal semiconductor with high defect densities, band
+tail states allow the absorption of photons with sub-band-gap
+energies. The sub-band-gap absorption in CZTSSe can be
+modeled in several ways: (i) Urbach tail states; (ii) band-gap
+fluctuations (BGF); (iii) electrostatic potential fluctuations
+(EPF).17,37 It is evident from the EQE spectra in Figure 3a that
+there is significant absorption of sub-band-gap photons in all
+device types, and further analysis is required to determine the
+cause. It is possible to quantify the origins of band tailing
+utilizing the relationship between the absorption coefficient
+(α) of a semiconductor and EQE. EQE is proportional to α
+such that α ∝ − ln[1 − EQE(hν)]38 and depends on the
+density of states in the fluctuating potentials of the conduction
+and valence energy bands. Regarding band-gap fluctuations
+(γBGF), the model assumes a Gaussian distribution of band-gap
+energies centered at EG,mean and characterized by a standard
+deviation σ where σ ≡ γBGF:39,40
+E E
+hv E E
+1
+ 2 exp 
+( )
+ 2
+( , ) d
+0
+G G,mean
+2
+2
+0 G G
+ƒ
+ «
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+ ≈ ≈ ≈
+…
+ ÷
+—
+—
+—
+—
+—
+—
+—
+—
+ — — —
+(2)
+Shklovskii and Efros also related α to the mean amplitude of
+electrostatic potential fluctuations (γEPF) due to a random
+distribution of charged defects, namely,41
+E hv
+exp
+2
+5 /2
+G
+ EPF
+5/4
+ƒ
+ «
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+ ≈ ≈ ≈
+i
+ k
+j
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+z
+…
+ ÷
+—
+—
+—
+—
+—
+—
+—
+—
+—
+—
+ — — —
+(3)
+Therefore, the above absorption models can be applied to a
+plot of α ∝ −ln[1 − EQE(hν)] versus hν (Figure 3c). It is
+apparent that the application of a single absorption model to
+the data does not adequately describe the observed behavior.
+In this instance, a combination of BGF and EPF models
+provides the best data fit. All device types show a similar trend
+for EPF (23, 23, and 26 meV for devices H, D, and E,
+respectively). This is in good agreement with the values of the
+ACS Applied Energy Materials www.acsaem.org Article
+https://doi.org/10.1021/acsaem.3c01622
+ACS Appl. Energy Mater. 2023, 6, 10883−10896
+10887
+Downloaded from pubs.​acs.​org/​aaemcq/​article-pdf/​6/​21/​10883/​2973906/​ae3c01622.​pdf by guest on 19 November 2026

@@ -1,0 +1,104 @@
+profile or target individuals. Any real deployment
+should treat such attributes with care, obtain ap-
+propriate consent, and avoid individual-level infer-
+ence.
+Data Availability
+The OpinioBank hotel-review data used in our
+cross-domain evaluation is publicly available un-
+der the CC BY-NC-SA 4.0 license and was intro-
+duced by Nayeem and Rafiei (2025)1; our use is
+for non-commercial research evaluation, consistent
+with the license. The e-commerce seller-forum
+corpus is proprietary and contains user-generated
+content that cannot be released for privacy and
+contractual reasons; we report aggregate statis-
+tics and anonymize all platform-specific terms and
+quoted content. All data is in English, and no addi-
+tional preprocessing was applied beyond the chunk-
+ing described in Appendix A. Opinion-extraction
+prompts and metric definitions are provided in the
+appendix to support reproduction on comparable
+corpora.
+Use of AI Assistants
+We disclose the following use of AI assistants
+in preparing this work, separate from the LLMs
+studied as objects of research. Anthropic Claude
+Opus 4.6 assisted with writing the experiment code,
+Google Gemini supported the literature survey, and
+Claude Sonnet 4.5 provided grammatical & fluency
+assistance for the manuscript. All research claims,
+analyses, and final text were written and reviewed
+by the authors.
+References
+Abeer AlDayel and Walid Magdy. 2021. Stance detec-
+tion on social media: State of the art and trends. In-
+formation Processing & Management, 58(4):102597.
+Lisa P Argyle, Ethan C Busby, Nancy Fulda, Joshua R
+Gubler, Christopher Rytting, and David Wingate.
+2023. Out of one, many: Using language mod-
+els to simulate human samples. Political Analysis,
+31(3):337–351.
+Michiel Bakker, Martin Chadwick, Hannah Sheahan,
+Michael Tessler, Lucy Campbell-Gillingham, Jan
+Balaguer, et al. 2022. Fine-tuning language models
+to find agreement among humans with diverse prefer-
+ences. Advances in Neural Information Processing
+Systems, 35:38176–38189.
+1https://huggingface.co/datasets/
+tafseer-nayeem/OpinioBank
+Jonathan Berant, Andrew Chou, Roy Frostig, and Percy
+Liang. 2013. Semantic parsing on freebase from
+question-answer pairs. In Proceedings of the 2013
+Conference on Empirical Methods in Natural Lan-
+guage Processing, pages 1533–1544.
+Andrew Brown, Muhammad Roman, and Barry De-
+vereux. 2025. A systematic literature review of
+retrieval-augmented generation: Techniques, metrics,
+and challenges. arXiv preprint arXiv:2508.06401.
+Jaime Carbonell and Jade Goldstein. 1998. The use of
+MMR, diversity-based reranking for reordering doc-
+uments and producing summaries. In Proceedings
+of the 21st Annual International ACM SIGIR Confer-
+ence on Research and Development in Information
+Retrieval, pages 335–336.
+Arie Cattan, Alon Jacovi, Ori Ram, Jonathan Herzig,
+Roee Aharoni, Sasha Goldshtein, Eran Ofek, Idan
+Szpektor, and Avi Caciularu. 2025. Dragged
+into conflicts: Detecting and addressing conflicting
+sources in search-augmented llms. arXiv preprint
+arXiv:2506.08500.
+Hung-Ting Chen and Eunsol Choi. 2025. Open-
+world evaluation for retrieving diverse perspectives.
+Preprint, arXiv:2409.18110.
+Hung-Ting Chen, Michael Zhang, and Eunsol Choi.
+2022. Rich knowledge sources bring complex knowl-
+edge conflicts: Recalibrating models to reflect con-
+flicting evidence. In Proceedings of the 2022 Con-
+ference on Empirical Methods in Natural Language
+Processing, pages 2292–2307.
+Gaurab Chhetri, Anandi Dutta, and Subasish Das. 2025.
+Cognitivesky: Scalable sentiment and narrative anal-
+ysis for decentralized social media. arXiv preprint
+arXiv:2509.11444.
+Eunseong Choi, June Park, Hyeri Lee, and Jongwuk Lee.
+2025. Conflict-aware soft prompting for retrieval-
+augmented generation. In Proceedings of the 2025
+Conference on Empirical Methods in Natural Lan-
+guage Processing, pages 26981–26995.
+Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot,
+Ashish Sabharwal, Carissa Schoenick, and Oyvind
+Tafjord. 2018. Think you have solved question an-
+swering? try arc, the ai2 reasoning challenge. arXiv
+preprint arXiv:1803.05457.
+Pradeep Dasigi, Kyle Lo, Iz Beltagy, Arman Cohan,
+Noah A. Smith, and Matt Gardner. 2021. A dataset
+of information-seeking questions and answers an-
+chored in research papers. In Proceedings of the
+2021 Conference of the North American Chapter of
+the Association for Computational Linguistics: Hu-
+man Language Technologies, pages 4599–4610.
+Matheus Vinicius da Silva de Oliveira, Jonathan de An-
+drade Silva, and Awdren de Lima Fontao. 2025. Fair-
+ness testing in retrieval-augmented generation: How
+small perturbations reveal bias in small language
+models. arXiv preprint arXiv:2509.26584.

@@ -1,0 +1,53 @@
+LLM-Confidence Reranker
+whererel𝑖denotestherelevanceofthedocumentatposition𝑖.HigherNDCG@kvaluesindicatesuperiorperformance,
+prioritizing relevant documents early.
+4.2. Experiment Results
+Table 2 presents the NDCG@5 performance comparison when using BM25 as the initial retriever, combined
+with various rerankers, and further enhanced by LCR across datasets. As a plug-and-play algorithm based on LLM
+confidence signals, LCR ensures a safe performance lower bound: when the query confidence threshold𝑇query = 0,
+the algorithm reverts to the original ranking, maintaining performance at least at the baseline level in the worst case.
+ThisdesignprovideshighrobustnessforLCRinpracticaldeployment,avoidingpotentialrisks.Thevaluesinthetable
+represent the best performance after tuning the three hyperparameters (𝑇query,𝑇upper,𝑇lower), aimed at demonstrating
+LCR’s upper potential; subsequent sensitivity analysis in Sections 4.4 and 4.5 will further validate its generalization
+ability.
+The improvements from LCR exhibit high consistency: across all reranker and dataset combinations, adding LCR
+results in NDCG@5 gains or ties, with no instances of decline. This arises from LCR’s core mechanism: through
+confidencebinning,itprioritizeshigh-confidencedocumentsatthetop,whileretainingtheoriginalrankingwhenquery
+confidence is high to avoid unnecessary interference. The averages across BEIR and TREC datasets indicate relative
+gains of up to 20.6% (e.g., YesNo on BEIR: 0.1737 to 0.2095) from LCR, with no declines. This stable enhancement
+confirms the hypothesis that LLM confidence correlates positively with document relevance (detailed in Section 4.8).
+From the perspective of dataset heterogeneity, LCR’s gains are particularly notable on factual or argumentative
+datasets (e.g., NaturalQuestions, Touché, FEVER), such as RankGPT on NaturalQuestions improving from 0.0489
+to 0.0587 (a 20% relative increase). This reflects that such queries heavily rely on semantic consistency from
+external documents, where LCR’s confidence signals effectively amplify relevance differences. On domain-specific
+datasets with already high baseline performance (e.g., FEVER + fine-tuned Transformer-based rerankers), LCR
+maintains stability without degradation, demonstrating its adaptability. For TREC datasets (DL19 and DL20), LCR’s
+improvements are equally reliable, for instance, from 0.5172 to 0.5271 (a 1.9% relative increase) when applying LCR
+directly without any reranker. The document diversity and long-tail query characteristics of TREC datasets further
+highlight LCR’s generalization advantage in handling complex retrieval scenarios.
+Breaking down by reranker type reveals LCR’s strong compatibility. First, in the pure BM25 Retriever-Only
+scenario, LCR yields average gains of 3.0% (BEIR) and 1.9% (TREC), with slight optimizations across all datasets,
+proving it can independently improve sparse retrieval results without relying on additional rerankers. This makes it
+especially suitable for resource-constrained settings. Second, for pre-trained LLM-based rerankers (YesNo, QLM,
+RankGPT,using7B-parametermodels),baselineperformanceisoftenbeloworclosetoRetriever-Only(BEIRaverage
+0.1737–0.2391), reflecting limitations in ranking ability for small-scale models; however, LCR significantly reverses
+thisdisadvantage,suchasa20.6%averagegainonBEIRforYesNo.Thissuggeststhatevenwithlimitedmodelscale,
+the core semantic understanding can capture document “helpfulness” through confidence signals, thereby amplifying
+rankingeffects.Finally,forfine-tunedTransformer-basedrerankers(ColBERT,Cross-Encoder,RankT5),LCR’sgains
+are smaller (about 1%), but highly consistent. This verifies LCR’s good compatibility with domain-specific training,
+allowing further refinement of document relevance on high-performance baselines.
+In summary, as a training-free and lightweight (7B-parameter) algorithm, LCR reliably enhances document
+relevance in RAG systems, with an average gain of about 3% across methods and datasets, thereby reducing
+hallucination risks. Its lower-bound guarantee and plug-and-play nature make it particularly suitable for production-
+level knowledge-intensive tasks.
+4.3. Impact of Different Retrievers
+ToassessLCR’scompatibilitywithdiverseretrievers,weemployContriever(Izacardetal.,2022)asanadditional
+initialretriever,whichleveragescontrastivelearningtoimprovedenseretrieval.Table3presentstheNDCG@5scores
+for Contriever combined with various rerankers, both with and without LCR enhancement (where “+LCR w/o QT”
+denotes LCR applied without the query threshold, and “+LCR” includes the query threshold; the impact of QT is
+discussed in §4.4).
+The results indicate that LCR delivers consistent improvements over the Contriever baseline: across all reranker-
+dataset combinations, LCR achieves NDCG@5 gains or maintains equivalence, with no degradation. LCR achieves
+relative gains of up to 32.4% on BEIR and TREC datasets, e.g., from 0.2281 to 0.3021 in the YesNo group (BEIR).
+Relative to BM25, Contriever exhibits a stronger baseline (BEIR average: 0.3939 vs. 0.2392); nevertheless, LCR’s
+Song et al.: Preprint submitted to Elsevier Page 11 of 21

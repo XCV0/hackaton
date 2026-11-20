@@ -1,0 +1,69 @@
+Correct Hallucination Refusal Unverified Factuality Score
+Baseline
+CRAG 59.1% 24.9% 16.0% 0.0% 34.2%
+CovidQA 85.0% 5.0% 8.0% 2.0% 80.0%
+DelucionQA 93.0% 4.0% 3.0% 0.0% 89.0%
+Emanual 93.0% 1.0% 2.0% 4.0% 92.0%
+ExpertQA 86.0% 3.0% 7.0% 4.0% 83.0%
+FinQA 89.0% 6.0% 2.0% 3.0% 83.0%
+HAGRID 93.0% 4.0% 1.0% 2.0% 89.0%
+HotpotQA 96.0% 3.0% 0.0% 1.0% 93.0%
+MS Macro 90.0% 8.0% 1.0% 1.0% 82.0%
+PubMedQA 85.0% 5.0% 7.0% 3.0% 80.0%
+TAT-QA 87.0% 10.0% 2.0% 1.0% 77.0%
+TechQA 61.0% 3.0% 21.0% 15.0% 58.0%
+This Work
+CRAG 62.1% 22.9% 15.1% 0.0% 39.2%
+CovidQA 96.0% 1.0% 2.0% 1.0% 95.0%
+DelucionQA 98.0% 1.0% 1.0% 0.0% 97.0%
+Emanual 98.0% 0.0% 2.0% 0.0% 98.0%
+ExpertQA 84.0% 1.0% 13.0% 2.0% 83.0%
+FinQA 81.0% 10.0% 3.0% 6.0% 71.0%
+HAGRID 91.0% 1.0% 7.0% 1.0% 90.0%
+HotpotQA 92.0% 3.0% 0.0% 5.0% 89.0%
+MS Macro 89.0% 7.0% 1.0% 3.0% 82.0%
+PubMedQA 92.0% 2.0% 6.0% 0.0% 90.0%
+TAT-QA 94.0% 4.0% 2.0% 0.0% 90.0%
+TechQA 86.0% 4.0% 7.0% 3.0% 82.0%
+Table 5: Breakdown of factuality benchmark results.
+F Evaluation on Closed-Book QA
+F.1 Experiment Settings
+To further demonstrate the effectiveness of our pro-
+posed approach, we conducted an additional eval-
+uation on closed-book factuality QA benchmarks.
+These benchmarks contain short answers for given
+questions and do not have access to retrieved doc-
+uments, allowing us to isolate and showcase the
+enhancement in reasoning capability afforded by
+our method. We describe their details in the follow-
+ing section.
+F.1.1 Benchmarks
+• CRAG (Yang et al., 2024) is designed to eval-
+uate a model’s RAG capability. For the com-
+parisons made in this section, we have used
+the same web summarization split from main
+text but without any reference documents.
+• SimpleQA (Wei et al., 2024) comprises 4,326
+short QA pairs that cover a wide range of
+topics, including history, technology, science,
+and entertainment.
+• Head-to-Tail (Sun et al., 2022) contains sim-
+ple QA pairs generated from a general knowl-
+edge graph, DBPedia, and an internet movie
+database, IMDb. For each dataset, we sam-
+pled 200 entities respectively from head, torso,
+and tail entities which are divided by entity
+popularity following (Sun et al., 2023), result-
+ing in 1,200 QA pairs.
+F.1.2 Metrics and Implementation
+For short-form factuality QA, we use accuracy,
+missing, and hallucination following (Yang et al.,
+2024) followed by factuality score described in the
+main text.
+Identical to the evaluation in the main text, we
+compared llama-3.1-70b-instruct (Grattafiori
+et al., 2024) and its fined-tuned version using our
+proposed approach. We note that the recipe for
+fine-tuning and inference is also the same with the
+setting used in the main text.
+786

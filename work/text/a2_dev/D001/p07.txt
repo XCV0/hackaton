@@ -1,0 +1,99 @@
+Ablation Setting Datasets
+SN STG EDP HotpotQA 2Wiki MuSiQue
+✓ ✓ ✓ .422 .372 .324
+.238 (↓ 18.4%) .224 (↓ 14.8%) .172 (↓ 15.2%)
+✓ .326 (↓ 9.6%) .308 (↓ 6.4%) .232 (↓ 9.2%)
+✓ ✓ .398 (↓ 2.4%) .334 (↓ 3.8%) .286 (↓ 3.8%)
+✓ ✓ .388 (↓ 3.4%) .342 (↓ 3%) .292 (↓ 3.2%)
+Table 2: Ablation study of the STM (SN, STG) and
+EDP modules across three datasets.
+narrative context in discrete nodes.
+Beyond these flawed paradigms, ThreadRAG di-
+rectly grounds structural guidance within native
+text sequences to achieve state-of-the-art results.
+For example, it outperforms the strongest baseline
+KnowTrace, by up to 5.8% EM on 2Wiki (GPT-4o
+mini). Furthermore, it surpasses the text-centric
+IRCoT by a substantial 14.4% EM on the complex
+HotpotQA dataset (Qwen3.5 plus). These signif-
+icant gains demonstrate the effectiveness of our
+STG in providing high-fidelity structural priors.
+By providing explicit reasoning pathways without
+fragmenting the original narrative flow, Thread-
+RAG bridges the modality gap, bypassing both the
+semantic loss of symbolic extraction and the hallu-
+cination risks of generative rewriting.
+4.3 Ablation Study
+Many unexplored questions surround the optimal
+knowledge representation and reasoning modalities
+for multi-hop QA. In this section, we conduct an
+extensive ablation study to validate the core compo-
+nents of ThreadRAG and summarize key findings.
+The STM preserves crucial contextual in-
+tegrity. As shown in Table 2, removing the entire
+STM module (i.e., SN and STG) and using LLM-
+extracted triplets leads to a severe decline in per-
+formance, with the EM score dropping by 9.2% on
+MuSiQue. Furthermore, replacing our MLP-based
+Semantic Nodes (SN) with fixed-length chunks re-
+sults in a noticeable 3.4% drop on HotpotQA. We
+attribute this to the fact that traditional triplet extrac-
+tion or arbitrary chunking inevitably destroys the
+continuous narrative flow, resulting in irreversible
+semantic loss that hinders the LLM’s ability to de-
+duce complex answers.
+EDP effectively bridges the modality gap. As
+shown in Table 2, feeding the discrete STG nodes
+directly into the LLM without the EDP module’s
+topological linearization causes a noticeable de-
+cline, such as an 3.8% decrease on the MuSiQue
+Method HotpotQA MuSiQue
+Const. Inf. Total Const. Inf. Total
+LightRAG 26.2M 47.4k 26.25M 36.4M 57.6k 36.46M
+KnowTrace 0.15M 72.6k 222.6k 0.22M 94.4k 314.4k
+ThreadRAG 0 58.5k 58.5k 0 73.4k 73.4k
+Table 3: Comparison of construction (Const.), inference
+(Inf.), and total token costs.
+dataset. We attribute this to the inherent modal-
+ity mismatch between discrete graph structures and
+the LLM’s native continuous language space. With-
+out EDP to reconstruct the narrative sequence, the
+LLM struggles to effectively interpret the frag-
+mented subgraphs, which introduces reasoning
+noise and degrades overall performance.
+4.4 More Analysis
+Cost Analysis. To quantify the computational over-
+head, we measure token consumption across 100
+randomly sampled queries per dataset using the
+tiktoken library (GPT-4o-mini standard). As
+shown in Table 3, ThreadRAG demonstrates a de-
+cisive advantage in computational efficiency by
+fundamentally decoupling structural knowledge
+generation from expensive LLM pre-computation
+across all datasets. In contrast, baseline methods
+like LightRAG and KnowTrace consume massive
+token budgets—up to 36.4M and 220K tokens, re-
+spectively—merely to build their graph structures.
+Furthermore, when evaluating the overall pipeline,
+ThreadRAG operates highly efficiently: its total
+token consumption accounts for merely 23.3% to
+26.3% of the overhead incurred by the strongest
+baseline, KnowTrace. This confirms that Thread-
+RAG effectively resolves the prohibitive I/O bottle-
+necks inherent in traditional graph-enhanced RAG
+paradigms.
+Hyperparameter analysis. To evaluate frame-
+work robustness, we conduct a hyperparameter
+analysis on the HotpotQA dataset using the GPT-
+4o-mini model. As illustrated in Figure 3, we inves-
+tigate four key variables: initial anchors, retrieved
+documents, reasoning iterations, and the energy
+pruning threshold (ϵ). ThreadRAG demonstrates
+remarkable stability, consistently maintaining Ex-
+act Match (EM) scores above 0.512 across all ex-
+treme settings. Performance optimally peaks at an
+EM of 0.574 with 3 anchors, 5 documents, 3 iter-
+ations, and a 0.01 threshold. Notably, exceeding
+these values yields marginal diminishing returns
+rather than sharp performance drops. This con-
+49897

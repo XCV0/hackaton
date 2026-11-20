@@ -1,0 +1,114 @@
+Narang, Gaurav Mishra, Adams Yu, Vincent Y. Zhao,
+Yanping Huang, Andrew M. Dai, Hongkun Yu, Slav
+Petrov, Ed H. Chi, Jeff Dean, Jacob Devlin, Adam
+Roberts, Denny Zhou, Quoc V. Le, and Jason Wei.
+2022. Scaling instruction-finetuned language models.
+arXiv preprint arXiv:2210.11416.
+Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara,
+and Akiko Aizawa. 2020. Constructing A multi-hop
+QA dataset for comprehensive evaluation of reason-
+ing steps. In Proceedings of the 28th International
+Conference on Computational Linguistics, COLING
+2020, Barcelona, Spain (Online), December 8-13,
+2020, pages 6609–6625. International Committee on
+Computational Linguistics.
+Gautier Izacard and Edouard Grave. 2021. Leveraging
+passage retrieval with generative models for open do-
+main question answering. In Proceedings of the 16th
+Conference of the European Chapter of the Associ-
+ation for Computational Linguistics: Main Volume,
+EACL 2021, Online, April 19 - 23, 2021, pages 874–
+880. Association for Computational Linguistics.
+Gautier Izacard, Patrick S. H. Lewis, Maria Lomeli,
+Lucas Hosseini, Fabio Petroni, Timo Schick, Jane
+Dwivedi-Yu, Armand Joulin, Sebastian Riedel, and
+Edouard Grave. 2023. Atlas: Few-shot learning
+with retrieval augmented language models. J. Mach.
+Learn. Res., 24:251:1–251:43.
+Soyeong Jeong, Jinheon Baek, Sukmin Cho, Sung Ju
+Hwang, and Jong Park. 2023. Test-time self-adaptive
+small language models for question answering. In
+Findings of the Association for Computational Lin-
+guistics: EMNLP 2023, Singapore, December 6-10,
+2023, pages 15459–15469. Association for Computa-
+tional Linguistics.
+Zhengbao Jiang, Frank F. Xu, Luyu Gao, Zhiqing Sun,
+Qian Liu, Jane Dwivedi-Yu, Yiming Yang, Jamie
+Callan, and Graham Neubig. 2023. Active retrieval
+augmented generation. In EMNLP 2023.
+Mandar Joshi, Eunsol Choi, Daniel S. Weld, and Luke
+Zettlemoyer. 2017. Triviaqa: A large scale distantly
+supervised challenge dataset for reading comprehen-
+sion. In Proceedings of the 55th Annual Meeting of
+the Association for Computational Linguistics, ACL
+2017, Vancouver, Canada, July 30 - August 4, Volume
+1: Long Papers, pages 1601–1611. Association for
+Computational Linguistics.
+Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick
+S. H. Lewis, Ledell Wu, Sergey Edunov, Danqi Chen,
+and Wen-tau Yih. 2020. Dense passage retrieval for
+open-domain question answering. In Proceedings of
+the 2020 Conference on Empirical Methods in Natu-
+ral Language Processing, EMNLP 2020, November
+16-20, 2020. Association for Computational Linguis-
+tics.
+Jungo Kasai, Keisuke Sakaguchi, Yoichi Takahashi, Ro-
+nan Le Bras, Akari Asai, Xinyan Yu, Dragomir R.
+Radev, Noah A. Smith, Yejin Choi, and Kentaro Inui.
+2022. Realtime QA: what’s the answer right now?
+arXiv preprint arXiv:2207.13332.
+Omar Khattab, Keshav Santhanam, Xiang Lisa
+Li, David Hall, Percy Liang, Christopher Potts,
+and Matei Zaharia. 2022. Demonstrate-search-
+predict: Composing retrieval and language mod-
+els for knowledge-intensive NLP. arXiv preprint
+arXiv.2212.14024, abs/2212.14024.
+Tushar Khot, Harsh Trivedi, Matthew Finlayson, Yao
+Fu, Kyle Richardson, Peter Clark, and Ashish Sab-
+harwal. 2023. Decomposed prompting: A modular
+approach for solving complex tasks. In The Eleventh
+International Conference on Learning Representa-
+tions, ICLR 2023, Kigali, Rwanda, May 1-5, 2023.
+OpenReview.net.
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+field, Michael Collins, Ankur Parikh, Chris Alberti,
+Danielle Epstein, Illia Polosukhin, Jacob Devlin, Ken-
+ton Lee, Kristina Toutanova, Llion Jones, Matthew
+Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob
+Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+ral questions: A benchmark for question answering
+research. Transactions of the Association for Compu-
+tational Linguistics, 7:452–466.
+Angeliki Lazaridou, Elena Gribovskaya, Wojciech
+Stokowiec, and Nikolai Grigorev. 2022. Internet-
+augmented language models through few-shot
+prompting for open-domain question answering.
+arXiv preprint arXiv:2203.05115.
+Belinda Z. Li, Sewon Min, Srinivasan Iyer, Yashar
+Mehdad, and Wen-tau Yih. 2020. Efficient one-pass
+end-to-end entity linking for questions. In Proceed-
+ings of the 2020 Conference on Empirical Methods in
+Natural Language Processing, EMNLP 2020, Online,
+November 16-20, 2020, pages 6433–6441. Associa-
+tion for Computational Linguistics.
+Ilya Loshchilov and Frank Hutter. 2019. Decoupled
+weight decay regularization. In 7th International
+Conference on Learning Representations, ICLR 2019,
+New Orleans, LA, USA, May 6-9, 2019. OpenRe-
+view.net.
+Alex Mallen, Akari Asai, Victor Zhong, Rajarshi Das,
+Daniel Khashabi, and Hannaneh Hajishirzi. 2023.
+When not to trust language models: Investigating
+effectiveness of parametric and non-parametric mem-
+ories. In Proceedings of the 61st Annual Meeting of
+the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), ACL 2023, Toronto, Canada,
+July 9-14, 2023, pages 9802–9822. Association for
+Computational Linguistics.
+OpenAI. 2023. GPT-4 technical report. arXiv preprint
+arXiv:2303.08774.
+Adam Paszke, Sam Gross, Francisco Massa, Adam
+Lerer, James Bradbury, Gregory Chanan, Trevor
+Killeen, Zeming Lin, Natalia Gimelshein, Luca
+Antiga, Alban Desmaison, Andreas Köpf, Edward Z.
+7046

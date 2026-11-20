@@ -1,0 +1,94 @@
+grained strategic differences rather than mere for-
+mat adherence. The step-level distribution peaks
+at depth 2 (45.7%) and depth 3 (29.5%), directly
+aligning with the multi-hop reasoning requirements.
+The reward difference between chosen and rejected
+steps ensures a robust gradient: 98.4% of pairs
+have a substantial margin (≥ 0.20), with over half
+(52.0%) exhibiting a high margin (≥ 0.50).
+C VTS Implementation Details
+This section provides the detailed mathematical for-
+mulations and algorithmic mechanics for the VTS
+procedure introduced in Section 3.2. Specifically,
+we detail how the step-level feedback from our
+generative PRM is integrated into the tree search
+to actively balance exploration and exploitation,
+ultimately guiding the generation of high-quality,
+process-supervised trajectories for PRO-STEP.
+Selection.
+UCB(st) = ¯Q(st) + c
+√
+ln N (parent(st))
+N (st)
+where N (st) is the visit count of st, ¯Q(st) =
+W (st)/N (st) is its mean backed-up value, W (st)
+is its cumulative backed-up value, and c is the ex-
+ploration constant. Unvisited nodes (N = 0) are
+selected immediately.
+Terminal reward.
+Q(sT ) = F1(sT , y∗) · γd(sT )
+where γ ∈ (0, 1) discourages unnecessarily long
+trajectories and d(·) denotes node depth.
+Back-propagation. After evaluating a terminal
+node, we propagate Q(sT ) to all ancestors:
+N (s) ← N (s) + 1, W (s) ← W (s) + Q(sT )
+When πψ evaluates a non-terminal node st, we
+apply a retroactive update to its ancestors without
+changing their visit counts:
+W (s) ← W (s) + ˆr(st) · γd(st)
+VTS Parameters. During the process-supervised
+data generation phase, we utilize VTS to explore
+reasoning trajectories. Table 9 details the specific
+hyperparameter values used for the tree search. To
+balance the reward scale, the terminal F1 score
+is discounted by 0.9 per depth level, and the in-
+termediate step score is computed as a weighted
+sum of the backed-up F1 reward and the PRM’s
+feedback (α = 0.3). Because the PRM provides
+binary labels {0, 1} whereas the F1 score is contin-
+uous in [0, 1], this weight allows the process reward
+to break ties among steps with similar outcomes
+without overriding substantial F1 differences.
+Branching-factor ablation. We additionally
+evaluate the effect of the branching configuration
+used during VTS trajectory generation. As shown
+in Table 10, the main configuration improves av-
+erage performance by 1.9 EM and 2.0 F1 over the
+reduced-branching setting. The reduced setting
+nevertheless remains competitive, indicating that
+the effectiveness of PRO-STEP is not tied to a sin-
+gle branching configuration.
+D Implementation Details and
+Hyperparameters
+PRM Weight Sweep. Table 11 reports the full
+sweep over α for the combined value V (s) =
+¯Q(s) + α · ˆr(s). The results justify our use of PRM-
+based step evaluation: every configuration that in-
+corporates PRM signals (α > 0, except α = 0.5)
+outperforms the no-PRM baseline (α = 0, 32.68
+EM), with α = 0.3 achieving the best average
+(34.51 EM, 44.09 F1). This confirms that PRM
+signals provide supervision beyond what outcome
+rewards alone can offer, and that process and out-
+come rewards function as complementary signals.
+Training Hyperparameters. Table 12 summa-
+rizes the hyperparameter configurations for train-
+ing the policy model across different optimization
+strategies (SFT, DPO, KTO). All policy models
+share the same base model (Qwen2.5-7B-Instruct)
+and apply document masking during training to
+prevent the model from memorizing the retrieved
+context. We utilize LoRA for parameter-efficient
+fine-tuning across all models, targeting all linear
+layers.
+E Direct Validation of the PRM
+We complement the indirect PRM evaluation in
+Section 4.5 with direct validation of label quality
+using both human and frontier-model audits.
+Human audit. Our research team manually eval-
+uated a sample of 50 trajectories using the same
+annotation criteria as the QwQ-32B labeler. The
+resulting step-level annotations showed 84% agree-
+ment with QwQ-32B, providing an independent
+manual validation of the generated supervision.
+37919

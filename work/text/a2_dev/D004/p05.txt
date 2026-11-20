@@ -1,0 +1,95 @@
+W2(Ppop(ϕ|g), ˆPR(ϕ|g)) measures representation
+disparity for demographic group g ∈ G. The mini-
+max fairness criterion ensures no subpopulation is
+excluded (α, β > 0).
+Scope and limitations. This framework identi-
+fies what opinion-aware RAG should optimize -
+coverage, fidelity, and fairness. However, this is
+not a directly implementable loss function. Key as-
+sumptions include: (1) Ppop is estimated from the
+corpus, treating it as a population sample; (2) opin-
+ions are treated as static (temporal dynamics are
+out of scope for this work); (3) directly optimiz-
+ing Equation 8 is computationally prohibitive with
+current retrieval architectures. Our implementation
+(Section 4) approximates coverage through opinion-
+enriched indexing, and we validate the connection
+empirically via Wasserstein distance measurements
+in Section 5.
+This formulation frames opinion-aware RAG as
+a distribution estimation and communication prob-
+lem. This framing differs substantially from the
+point-estimation paradigm underlying factual re-
+trieval, and one that we believe opens productive
+directions for future work.
+4 O-RAG: A Practical Architecture
+We present Opinion-Aware RAG (O-RAG) as one
+possible instantiation of the theoretical framework.
+We do not claim this to be the definitive solution,
+but as evidence that even simple opinion-aware en-
+richment yields measurable improvements. The ar-
+chitecture introduces an opinion enrichment step
+before indexing (illustrated in Figure 1), consisting
+of three domain-agnostic components.
+Entity registry. A hierarchical taxonomy of opin-
+ion targets organized by granularity. Entities repre-
+sent the topics people hold views about. The reg-
+istry can be bootstrapped automatically via LLM
+extraction on sampled documents, followed by clus-
+tering and deduplication. Manual curation helps
+refine but is not strictly required.
+Opinion attributes. Structured metadata captur-
+ing the nature of expressed opinions: sentiment and
+intensity, perceived impact or severity, emotional
+markers, and evidence type (personal experience,
+anecdotal, or data-driven).
+Author attributes. Contextual factors about
+opinion holders that enable fairness analysis. These
+can be demographic or experiential characteristics
+relevant to the domain, supporting the fairness term
+maxg∈G ∆g in the unified objective (Equation 8).
+Per-entity document splitting. Each source doc-
+ument is split into multiple enriched documents
+(one per mentioned entity) with opinion and au-
+thor attributes embedded alongside content. This
+ensures that when a document discusses multiple
+topics with different sentiments, each opinion is in-
+dexed separately with its corresponding metadata.
+4.1 Instantiation
+We instantiate this framework in two domains:
+E-commerce seller forums. Sellers discuss poli-
+cies, fees, pain points, and operational challenges.
+We construct a 98-entity registry across three tiers,
+extract four opinion attributes (sentiment, intensity,
+business impact, emotional markers) and three au-
+thor attributes (revenue band, tenure, region) per
+entity mention using an LLM with structured out-
+put (see Appendix G for the full extraction prompt).
+Public hotel reviews (OpinioBank). Consumer
+reviews of hotel properties, drawn from the pub-
+licly available OpinioBank dataset introduced by
+Nayeem and Rafiei (2025). The extraction prompt
+required only minor domain adaptation; entity reg-
+istry construction stabilized at approximately 90 en-
+tities. This demonstrates cross-domain feasibility
+with minimal manual effort.
+Both configurations use vector search with Ama-
+zon Titan Text Embeddings V2 (1024 dimensions)
+and fixed-size chunking (4000 tokens, 15% over-
+lap). We compare an Opinion-Enriched KB against
+a Raw KB (traditional RAG with no opinion meta-
+data) using identical source content. Full model,
+decoding, retrieval, and cost settings are reported
+in Appendix A.
+5 Empirical Evidence Across Domains
+These experiments are not meant to prove O-RAG
+is the optimal solution, but to demonstrate that
+(a) the problem is real and measurable, and (b) even
+simple opinion-aware enrichment yields significant
+improvements. We evaluate across two domains
+spanning 19 diverse entities and 105 manually cu-
+rated questions.
+5.1 Setup
+Datasets. (1) E-commerce seller forums: six
+months of discussions, approximately 8,000 unique
+sellers, 10K+ documents. (2) OpinioBank hotel

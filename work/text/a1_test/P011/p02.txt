@@ -1,0 +1,120 @@
+n-type metal oxide materials is rather limited in inverted devices
+because of either involving high-temperature treatment (>150 °C) or
+incompatible solvents with the underlying perovskite layer.[33–36] One
+demonstrated example is ZnO, however, its hygroscopic nature makes
+it incompatible with long-term stable devices.[20,37,38] Additionally,
+previous studies have unveiled that unstable or non-uniform n-type
+material could accelerate the degradation process of the perovskite layer,
+because they either are hygroscopic or fail to effectively block O2 and/
+or H2O from entering into the active layer.[37,39,40] In this context,
+more efforts have been hence dedicated to the exploration of suitable
+n-type metal oxide materials. SnO2, a wonderful n-type metal oxide
+that has been broadly used in the best-performing PSCs with n-i-p
+structure, has rarely been explored in the IPSCs, due to the challenges
+including high post-annealing temperature (>150 °C) and solvent
+incompatibility (usually H2O) with perovskite. A few prior research
+works have attempted to use SnO2 in IPSCs fabricated by either atomic
+layer deposition (ALD) or spin-coating, but the device performances
+are not ideal as compared to those using PCBM or C60 as the
+CTM.[33,34,41–43] In addition to obtaining a compact and smooth CTM
+layer, the main challenge towards realizing high-performance devices is
+how to manage the interfaces between perovskite and metal oxides,
+and achieve fast and balanced charge extraction/transfer.
+In this work, we demonstrate highly efﬁcient IPSCs with solution-
+processed metal oxides as both n-type and p-type CTMs. In particular,
+NiOx as the most successful p-type material in high-performance
+IPSCs, will be used as the hole transport material (HTM). As for the
+n-type CTM, we demonstrate that SnO2 nanoparticles (NPs) can be
+directly deposited on top of the perovskite layer at room temperature
+via a simple solution-based approach, without inducing the decompo-
+sition of the underlying structures. We further modiﬁed the interfaces
+of both NiOx/perovskite and perovskite/SnO2 to reduce the defects
+and hence mitigate non-radiative recombinations at these interfaces,
+enabling fast and balanced charge transfer across the entire device.
+Moreover, after incorporating PCBM, the band mismatch between
+SnO2 and perovskite could be minimized, thus, the accumulation of
+charges at the perovskite/ETM interface can be alleviated. Another
+beneﬁt of PCBM is that the oxygen vacancies within the SnO2 layer
+can be passivated, that is, compared with SnO2-only devices, electron
+trapsarefewerintheSnO2/PCBM-based counterparts. Conductivity,
+which will be discussed later, is enhanced as well for the SnO2/
+PCBM combination, providing smoother pathways for electrons com-
+pared with a single SnO2 or single PCBM counterparts. As a result, a
+remarkable short-circuit photocurrent density (Jsc) of 23.66 mA cm/C02
+was obtained (we note the Jsc limit is 24.83 mA cm/C02 for the perov-
+skite with a bandgap of 1.62 eV) by utilizing NiOx and SnO2 as the
+main CTMs.[44] Consequently, the champion device delivers an out-
+standing PCE of 23.5% (Voc = 1.20 V, Jsc = 23.66 mA cm/C02, ﬁll fac-
+tor = 82.96%, efﬁciency = 23.53%), which is the highest efﬁciency
+among PSCs based on all-metal-oxide CTMs. Additionally, with the
+assistance of these compact metal oxides as internal encapsulation
+layers, barriers against oxygen and water have been formed, contrib-
+uting to the prolonged stability of the resultant IPSCs. Subsequently,
+these all-metal-oxide-based IPSCs reserve 95% of their original PCEs
+after 1-month storage (temperature = 25 °C, relative humidity = 45%,
+dark, unencapsulated). Besides, these all-metal-oxide-based IPSCs have
+demonstrated excellent thermal and photostability. Thanks to the low-
+temperature fabrication protocols of all the functional layers, we
+achieved ﬂexible IPSCs with the same conﬁguration, delivering an
+exceptional PCE of over 21% with enhanced stability.
+2. Results and Discussion
+We note that the p-type properties NiOx are closely related to the
+nickel vacancies (or self-doping of Ni3+),[45] and the conductivity of
+pristine NiOx is limited due to the large ionization energy of the Ni
+site.[46] In this context, we doped the pristine NiOx with a small
+amount of copper (Cu:NiOx).[47] The concentration of Cu has been
+optimized, as a result, the ratio of Cu/Ni is 5% here. Because a high
+Cu ratio would sharply reduce the optical transmittance, while a low
+ratio can not guarantee sufﬁcient conductivity, this conclusion agrees
+with many previous studies.[48–50] Compared with organic HTMs,
+the resultant Cu:NiOx presents the best hole mobility (Table S1). To
+further minimize the interfacial charge recombination and accumula-
+tion, a thin layer of [2-(9H-carbazol-9-yl) ethyl] phosphonic acid (2-
+PACz) was used to passivate the interface of Cu:NiOx/perovskite
+because the 2-PACz has exhibited excellent hole selectivity and
+reduced interfacial recombination.[51,52] We then carried out photolu-
+minescence (PL) and time-resolved photoluminescence (TRPL) studies
+to probe the HTM/perovskite interface. As shown in Figure 1a,
+noticeable PL quenching can be observed after copper doping and 2-
+PACz passivation, indicating enhanced hole collection ability of the
+resultant HTM. And the TRPL result (Figure 1b)isinagreementwith
+PL data, where copper doping in conjugation with 2-PACz passiv-
+ation led to a reduced decay lifetime from 19.74 to 4.88 ns
+(Table S2). Afterwards, we studied the interface between the perov-
+skite and solution-processed SnO2 layer. We note that the quenching
+effect of the single SnO2 is rather limited (Figure 1c) because the
+SnO2 prepared from the low-temperature process may contain
+numerous defects, and the work function may not align well with
+the photoactive layer.[53] We then tried to passivate the perovskite/
+SnO2 interface by depositing PCBM either on top (perovskite/SnO2/
+PCBM) or beneath the SnO2 layer (perovskite/PCBM/SnO2). We ﬁnd
+that the former is a better choice as the required post-annealing of
+SnO2 layer (100 °C, 40 min) is likely to trigger the agglomeration
+of the pre-deposited PCBM.[54,55] The TRPL data are, indeed, in
+agreement with our speculation: theaveragedecaytimereducesfrom
+~16 ns (perovskite/SnO2)to~5 ns (perovskite/SnO2/PCBM)
+(Figure 1d,TableS3), as compared to 12.77 ns (perovskite/PCBM/
+SnO2). Combining with the TRPL data obtained for Cu:NiOx/2-
+PACz/Perovskite, we conﬁrm that a fast and balanced carrier-charge
+transfer (4.88 ns for Cu:NiOx/2-PACz/Perovskite and 5.00 ns for
+Perovskite/SnO2/PCBM, respectively) across these two interfaces has
+been established.
+To understand the origins of improved charge transfer at the perov-
+skite/ETM interfaces, we ﬁrst studied the morphology of various ETMs
+via scanning electron microscope (SEM) and atomic force microscopy
+(AFM). Compared with the pristine perovskite, the SnO2/PCBM shows
+the lowest root mean square (RMS) roughness value among all candi-
+dates (17.1 /C6 1.2 nm, Figure S1), indicating excellent ﬁlm coverage
+on the perovskite layer.
+We further modiﬁed the interface energetics and band alignment
+between the perovskite and CTMs. For the contact between perovskite
+and Cu:NiOx/2-PACz, several positive impacts brought by 2-PACz
+have been conﬁrmed including enhanced interfacial contact, well-
+aligned energy level with the perovskite, improved crystallization,
+etc.[31,56] However, the contact between perovskite and SnO2 has
+rarely been explored in IPSCs. Generally, The energy band mismatch
+in PSCs is a major challenge that leads to poor device perfor-
+mance,[57] and the exact bandgap of the resultant SnO2 is closely
+Energy Environ. Mater. 2024, 7, e12595 2of9 © 2023 The Authors. Energy & Environmental Materials published by
+John Wiley & Sons Australia, Ltd on behalf of Zhengzhou University.
+ 25750356, 2024, 2, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/eem2.12595, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

@@ -1,0 +1,131 @@
+Nature Energy | Volume 8 | August 2023 | 789–799 790
+Article https://doi.org/10.1038/s41560-023-01255-2
+technologies because of the excellent surface passivation provided 
+by the i-a-Si:H layers. Figure 1b illustrates the FF versus VOC of different 
+solar cell technologies, in which one can clearly see the superior FF of 
+SHJ solar cells as compared with that of PERC and TOPCon devices.
+In Fig. 1b, the lines corresponding to the Green limits 36 for dif-
+ferent ideal factors (n) are indicated as well. The value of the ideality  
+factor of a c-Si cell is based on the recombination mechanism: n = 2/3 
+for Auger recombination and n  = 1 for Shockley–Read–Hall (SRH) 
+and band-to-band recombination at low injection level. Combining  
+high-quality c-Si wafers with the superior surface passivation we 
+obtained, the intrinsic recombination of SHJ solar cells becomes 
+dominant. In the case of Auger recombination at high injection level, 
+the ideality factor value of our SHJ cells is found to be lower than one. 
+The reduction in ideality factor causes a more square shape in the  
+J–V curve, leading to a remarkable improvement in FF.
+As indicated in Fig. 1, the performance of SHJ solar cells has 
+increased almost linearly both electrically and optically. The first SHJ 
+solar cell from our group (LONGi) delivered a PCE of 25.26% (ref. 37 ), 
+and we have now further boosted all the PV parameters. In this work, 
+we show a PCE of 26.81%, with V OC of 751.4 mV (an improvement of 
+2.9 mV), FF of 86.07% (0.57% improvement) and J SC of 41.45 mA cm−2  
+(an improvement of 1.97 mA cm−2), an overall efficiency gain of 1.55%.  
+Note that we achieved the highest FF of 86.59% on a different device: 
+that is, the cell delivering an efficiency of 26.30%. Theoretical predic-
+tions yield a similar trend, as shown by the blue to red gradient solid  
+line in Fig. 1b. Radiative, Auger and surface recombinations were taken 
+into consideration in the calculation, while additional R S and shunt 
+resistance (Rsh) were not included. The improvement of LONGi’s SHJ 
+solar cells follows the overall tendency apart from small deviations 
+in practical and calculated FF, which are mainly attributed to the  
+advance in reduction of RS. Note that the measurement approach 
+(Methods) excludes some RS components, such as the resistance of 
+the grid at the rear side and of the bus bars at the front side. We found 
+that ultrahigh FF only occurs at extremely low R S and furthermore, 
+requires high-quality passivation: that is, high VOC. This is why LONGi 
+SHJ solar cells possess a prominent advantage in electrical performance 
+(VOC × FF) (Fig. 1a) over PERC and TOPCon cells. Limited by insufficient 
+passivation, the positive effect of reduced RS on FF cannot be fully 
+unlocked for PERC and TOPCon cells.
+To reveal the main contributions to the efficiency increase, two 
+related designs with p-a-Si:H (cell 1, 25.26% PCE) and p-nc-Si:H (cell 2, 
+26.30%) serving as the rear emitter are investigated with the Quokka2 
+software38,39. For the sake of simplicity, hereafter we name cell 1 and 
+cell 2 as p-a-Si:H cell and p-nc-Si:H cell, respectively. Numerical simula-
+tions and fits to experimental data of RS and power loss analysis (PLA) 
+are shown in Fig. 2. Figure 2a shows the structure of the LONGi SHJ 
+solar cells; the parameter variations between the p-a-Si:H cell and 
+p-nc-Si:H cell are listed in Supplementary Table 3. The two devices  
+are in a front and back contact architecture on an n-type c-Si (n-Si) wafer 
+with front-sided n-type nanocrystalline silicon oxide (n-nc-SiO x:H) 
+and a back junction (BJ). Using BJ structure alleviates the electrical 
+requirements on the front-side TCO and metal electrodes since a  
+large portion of the majority carriers (electrons) can be laterally  
+collected via the n-Si wafer absorber40. The main difference between 
+the two solar cells comes from the BJ stacks; the p-nc-Si:H cell features  
+p-nc-Si:H and a tailored TCO with a sheet resistance of 40 Ω per 
+sqaure, while the p-a-Si:H cell features p-a-Si:H and a TCO with a sheet  
+resistance of 80 Ω per square. Due to the excellent σ and Ea of p-nc-Si:H, 
+the rear contact resistivity is reduced, which will be discussed in the 
+next section.
+Figure 2b,c shows the experimental and fitted J –V curves of  
+their related cells. The experimental curves include the real-light 
+J–V curve (blue triangles) and the pseudo-light J –V curve tested by 
+a Suns–VOC measurement (blue circles). The fitted J–V curves were 
+simulated by Quokka2 (refs. 38,39). Input parameters were determined 
+and relatively high activation energy (E a > 250 meV), which cause  
+high contact resistivity in SHJ solar cells17–20.
+In contrast to defect-rich amorphous silicon, hydrogenated 
+nanocrystalline silicon (nc-Si:H) dramatically improves film crystal -
+linity, which straightforwardly favours the improvement of carrier 
+mobility and effective doping concentration. However, depositing 
+a sufficiently thin layer of highly crystalline nc-Si:H on amorphous 
+surfaces at low temperature is challenging. Depositing p-type doped 
+nc-Si:H (p-nc-Si:H) is even more difficult, as boron doping restricts 
+grain growth. Sophisticated techniques from deposition engineering, 
+including pretreatment methods, adjusting deposition parameters 
+(pressure, temperature, power, frequency and silane dilution) and post-
+treatment, help to address these issues21–25. For example, researchers 
+discovered that CO2 treatment facilitates fast nucleation for the growth 
+of nanocrystalline silicon film 26. High crystalline volume fraction  
+(XC)—up to 50%—has been reported by several groups through fine-  
+tuning gas flow rates21,25. Umishio et al.27 found a clear relation between 
+the nanostructure evolution of the p-nc-Si:H layers and their electrical  
+properties and resulting performance. They concluded that surface  
+coalescence of the p-nc-Si:H nanocrystals, rather than doping  
+concentration, dominantly determines the E a of the film27. In other 
+words, hole selectivity and hole transport through the TCO–p-nc-Si:H 
+contact and hence, the solar cell’s VOC and fill factor (FF) are crucially 
+influenced by the electrical contact properties between TCO and the 
+crystalline phase at the surface of the p-nc-Si:H layer 19. Based on this 
+understanding, the contact resistivity of p-nc-Si:H-based HSCs has been 
+reduced to about 100 mΩ cm2, yielding a series resistance (RS) of 0.65–
+1.3 Ω cm2 and a 23–25% PCE (Supplementary Table 1)27–31. Nevertheless, 
+realizing the advantageous electrical properties of SHJ solar cells  
+over their TOPCon counterparts still poses a challenge, and the oppor-
+tunity to unlock the full potential of SHJ technology remains open.
+In this contribution, we report the successful introduction of 
+nanocrystallization processes for fabricating cutting-edge HSCs, 
+which—when paired with correspondingly tailored TCO—result in 
+improved PCEs and FFs on wafer-scale single-junction SHJ solar cells. 
+We demonstrate a 26.30% SHJ solar cell with an FF of 86.59%; to the best 
+of our knowledge, this FF outperforms any other silicon solar cell. By 
+reducing the shading ratio from 2.8 to 2.0% and modifying the window 
+layers at the front to minimize the parasitic absorption, we further 
+boost the PCE to 26.74% by increasing the short-circuit current density 
+(JSC) to 41.16 mA cm−2. Finally, by introducing an additional reflective 
+MgF2/Ag stack at the rear side and regulating the transmittance of TCO, 
+we achieve a PCE of 26.81% with a JSC of 41.45 mA cm−2. Investigation of 
+the power and series resistance losses reveals outstanding performance 
+of these HSCs, with reduced contact resistivity (ρ c < 5 mΩ cm2) and 
+improved passivation (recombination current density J0 = 0.5 fA cm−2). 
+Structural and electrical characterizations of the p-nc-Si:H indicate 
+high XC (63%), ultralow Ea (<115 meV) and excellent σ (>3 S cm−1), which 
+is four orders of magnitude higher than that of the traditional p-a-Si:H 
+film32,33. HSCs endowed with these electrical improvements easily  
+trigger band-to-band tunnelling (BTBT) transport behaviour and 
+induce a sharp band bending, enhancing hole extraction efficiency.
+Efficiency increase analysis of SHJ solar cells
+In mass production, the competition between SHJ and TOPCon techno-
+logies is fierce. As can be seen from Fig. 1a, SHJ solar cells feature greater 
+electrical performance measured by VOC × FF, while TOPCon and PERC 
+hold relatively superior JSC. The inferior JSC of SHJ solar cells can be attri-
+buted to the strong parasitic absorption inherent in the functional 
+layers at the front side; PERC and TOPCon usually yield higher J SC 
+(>41 mA cm−2) due to the use of conventionally diffused front junctions 
+and optically transparent antireflective coatings34. Benefiting from the 
+unique design of rear-sided passivating contact with an SiOx/poly-Si(n+) 
+stack, TOPCon wins out over PERC with intrinsically improved VOC  
+(ref. 35). SHJ produces the highest V OC among the c-Si solar cell

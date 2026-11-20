@@ -1,0 +1,70 @@
+Question: What is the average performance gap 
+between the ProgramFC performance and our 
+proposed system in the HOVER dataset? Please write 
+down the answer in float format with 2 decimals.
+VisRAG: 
+Not answerable.
+ViDoRAG: 
+5.27
+RAGFlow: 
+Not answerable.
+RAG-Anything: 
+Not answerable.
+BayesRAG: 
+Our QACHECK system achieves a macro-F1 score of 
+55.67, 54.67, and 52.35 on HOVER two-hop, three-hop, 
+and four-hop claims, respectively. To find the average 
+performance gap, the scores for ProgramFC are 
+provided in Table 1 on page 5 (and repeated on page 6) 
+are 54.27, 54.18, 52.88. Now, we calculate the 
+performance gap for each hop: 55.67-54.27=1.40, 
+54.67-54.18=0.49, 52.35-52.88=-0.53. Finally, we 
+calculate the average of these gaps: (1.40 + 0.49 + (-
+0.53)) / 3 = 0.4533...Rounded to two decimal places, 
+the average performance gap is 0.45.Ground Truth: 0.45provenance page
+Figure 6: Complex tabular reasoning requiring multi-hop numerical extraction.
+Question: How many Republicans are not confident at all that 
+Trump keeps his own business interests separate from the 
+decisions he makes as president?
+VisRAG: 
+Not answerable.
+ViDoRAG: 
+32%
+RAGFlow: 
+22%
+RAG-Anything: 
+Not answerable.
+BayesRAG: 
+The relevant information is found on page 7 of the 
+document, which includes a chart titled "Fewer than 
+half are confident Trump keeps business interests 
+separate.” This chart breaks down the confidence 
+levels by political affiliation. For the "Rep/Lean Rep" 
+(Republicans and Republican-leaning 
+independents) category, the data shows: 10% **Not 
+at all confident:** …, the answer is 10%.Ground Truth: 10%
+provenance page
+Figure 7: Fine-grained visual-textual alignment in stacked bar charts.
+Question: How many ways to connect with pwc
+people?
+VisRAG:
+Not answerable.
+ViDoRAG:
+2
+RAGFlow:
+4
+RAG-Anything:
+8
+BayesRAG:
+The answer can be found in the document on 
+page 11 (image 11). The document explicitly lists 
+the following ways to connect:1.  Facebook: PwC 
+Middle East 2.  Instagram: @pwcmiddleeast 3.  
+LinkedIn: PwC Middle East 4.  Twitter: 
+@PwC_Middle_East 5.  YouTube: PwC Middle 
+East 6.  Website: pwc.com/mecareers, there are 
+6 primary ways to connect with PwC people as 
+listed in the document.Ground Truth: 6
+provenance page
+Figure 8: Information enumeration from unstructured infographics.
+15

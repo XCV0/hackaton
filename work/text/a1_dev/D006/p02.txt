@@ -1,0 +1,75 @@
+absorption, which can be characterized by time domain
+atomisticcalculations.
+This work puts forth a new general concept�covalent
+dynamic defect self-doping�to overcome the critical bottle-
+neck in the photovoltaic performance of all-inorganic perov-
+skites and to enable upconversion of thermal energy into
+electricity.Theconceptisdemonstratedquantitativelyusingab
+initio nonadiabatic molecular dynamics (NAMD) and real-
+time photoabsorbance calculations, focusing on bandgap
+narrowinganditsinfluenceonthee-hrecombination.Several
+native defects in all-inorganic perovskites can form strong
+covalent bonds and new stable chemical species at ambient
+conditions.Notably,thecovalencynatureofMHPsandtheir
+peculiaranharmoniclatticeintroducenativedynamicdefects,
+which fluctuate between deep and shallow levels inside the
+bandgap.Dynamicdefectscombinethemeritofdeepdefects
+that enhance the sub-bandgap light-harvesting over a broad
+energy spectrum and the merit of shallow defects that
+transientlytrapchargecarriersandallowthecarrierstoescape
+thermallyfromthetrappedstatesandretaincarriermobility,
+upconverting thermal energy to current. Furthermore,
+although deep trap levels do exist in MHPs, the dynamic
+defectshaveminorinfluenceonthee-hrecombinationdueto
+thedecouplingofthetrappedandcomplementaryfreecharges,
+and because only low-frequency phonons interact with the
+carriers generating weak charge-phonon coupling. The deep
+levelscanactassub-bandgapphotoabsorptioncenters,which
+enable utilization of two sub-bandgap photons sequentially.
+Controlofthedefect-assistede-hrecombinationcanallowone
+to use dynamic defects for the engineering of intermediate
+band (IB) solar cells, which can surpass the SQ efficiency
+limit.35 Ourresultspavethewaytotheoptimizationoflight
+absorption and nonradiative e-h recombination in wide
+bandgapMHPsolarcellsandotheroptoelectronicdevices.
+■RESULTS
+Toexaminethegeneralconceptofcovalentdefectself-doping,
+wetake α-CsPbI3 asaprototypicalsystem.Thecubicphaseof
+CsPbI3 is less stable than the orthorhombic perovskite
+polymorph36 andcanbestabilizedinperovskitenanocrystals
+withasuitablechoiceofligands.37 Wefocusonthreeintrinsic
+defectspossiblywithstrongcovalency,namely,Ivacancy(IV),
+Iinterstitial(Ii),andCssubstitutedbyI(CsI).Thesedefects
+havelowformationenergiesamongthethreekindsofvacancy
+defects(IV,PbV,CsV),thethreeinterstitialdefects(Ii,Csi,Pbi),
+andthesixantisitedefects(ICs,CsI,PbI,IPb,PbCs,CsPb,where
+AB indicatesthatAissubstitutedbyB).38−40 Inthefollowing,
+we start the discussion with geometric structure and static
+electron properties at 0 K. Then, we consider the thermal
+impactonpristineanddefective α-CsPbI3 throughelectron−
+phononinteractions.Third,weinvestigatethenonradiativee-h
+recombinationprocess.Finally,weclosewiththediscussionon
+thedynamicdefectenhancedsub-bandgaplightabsorption.
+Static Electronic Structure. Itisinstructivetostudythe
+static(0K)electronicstructureof α-CsPbI3 withandwithout
+defectsbeforeperformingacomprehensivee-hrecombination
+dynamics simulation. Figure 1 shows the atom-projected
+densityofstates(DOS)oftheIV,Ii,andCsI defectsystems,
+withthecorrespondingoptimizedconfigurationsshowninthe
+insets. For comparison, we also present the results for the
+pristinesystem.Despitethestronganddistinctnatureofthe
+defects, all the introduced defect states are shallow and are
+closetothebandedgesat0K.Weconsideradefectstatein
+the bandgap to be shallow, if the trapped carrier can be
+releasedbythermalexcitation.Otherwise,thedefectisdeep.In
+thestaticlimit,IVisashallowelectronacceptorandintroduces
+a shallow defect state near the conduction band minimum
+(CBM). In comparison, Ii is a shallow electron donor and
+introduces shallow defect states near the valence band
+Figure 1. Atom-projectedDOSforpristineanddefective α-CsPbI3 at0K.TheenergyreferenceisputattheFermilevel.Theinsetsshowatomic
+structures,withtheredcirclesindicatingthedefectlocations.Thedefectsintroduceshallowtrapstatesnearthebandedgesat0K.
+Chemistry of Materials pubs.acs.org/cm Article
+https://doi.org/10.1021/acs.chemmater.4c02530
+Chem. Mater. 2025, 37, 655−664
+656
+Downloaded from pubs.​acs.​org/​cmatex/​article-pdf/​37/​2/​655/​41179084/​cm4c02530.​pdf by guest on 19 November 2026

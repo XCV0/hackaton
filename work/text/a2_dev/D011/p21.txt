@@ -1,0 +1,95 @@
+irrigation presents a promising alternative for manag-
+ing infected mesh in hernia repairs. This approach
+offers a less invasive option compared to traditional
+methods, potentially improving patient outcomes and
+reducing the risk of complications associated with ex-
+tensive surgical intervention.
+We then construct questions to query this text, a
+query is illustrated below:
+Example of the query
+How did the coordinated protocol detailed in the report
+utilize percutaneous drainage and gentamicin irriga-
+tion in conjunction with each other for the salvage of
+infected mesh in hernia repairs, and what specific steps
+were involved in this approach? Do not answer with
+point form.
+And the RAG system returns the response:
+Example of the response
+The coordinated protocol for salvaging infected mesh
+in hernia repairs began with ultrasound-guided per-
+cutaneous drainage of the infected seroma using a
+six-French-pigtail catheter. After initial drainage, pa-
+tients received two weeks of intravenous antibiotics.
+Once stabilized, they transitioned to a gentamicin irri-
+gation regimen, where 80 mg of gentamicin in 30 cc
+of solution was administered through the drain three
+times daily for four weeks. This combined approach of
+mechanical drainage and targeted local antibiotic irri-
+gation allowed for effective infection control, enabling
+mesh salvage without removal or complex reconstruc-
+tion.
+E.8 Examples of RAG-WM Watermark Texts
+We select several of the high perplexity texts from
+the generated texts by RAG-WM. These texts are
+shown in Table 7.
+Table 7: Factual Incorrect/Unreasonable Texts
+PPL Texts
+1908.05 Trout contributes to current smoking.
+1428.29 Current smoking is influenced by trout.
+8725.31 Spain contains Serum Ldl.
+4138.90 Spain includes Serum Ldl within its boundaries.
+5931.09 Growth Promotion utilizes Survey_2004.
+2159.43 High phytate consumption finds application with Hungarian fathers.
+It is worth mentioning that this situation is com-
+mon in the watermark text generation process of
+RAG-WM.
+E.9 Results of Robustness Verification
+The prompt for Unrelated Content Removal Attack
+is shown below:
+Prompt for Unrelated Content Removal
+You are a helpful assistant, below is a text list which
+may contain unrelated texts. Please analyze the list
+and remove any incoherent or unrelated texts.
+The text list: {retrieved_context_list}.
+Please return the removed texts as a list without any
+explanation. If there are no unrelated texts, return an
+empty list.
+Table 8 illustrates that KMW can resist this at-
+tack with the maximum filtering rate of 0.02. It
+indicates that this attack is ineffective to KMW.
+Table 8: Unrelated Content Removal Attack
+NFcorpus COVID DROP MARCO
+WRR 1.00 1.00 1.00 1.00
+Filtering Rate (%) 2.19 1.07 0.00 0.00
+Table 9 exhibits the W RR of KMW under
+synonym substitution attack across four datasets,
+which indicates KMW performs a strong robust-
+ness against this attack.
+Table 9: Synonym Substitution attack.
+NFCorpus COVID DROP MARCO
+WRR 1.00 1.00 0.99 1.00
+Experimental results in Table 10 show that the
+WRRs of KMW across four datasets are basi-
+cally 1.00, indicating a strong robustness of KMW
+against this attack.
+Table 10: Knowledge Injection Attack
+Injection
+Rate NFcorpus COVID DROP MARCO
+20% 1.00 1.00 1.00 1.00
+40% 1.00 1.00 1.00 1.00
+60% 1.00 1.00 1.00 1.00
+80% 1.00 1.00 1.00 0.99
+100% 1.00 1.00 0.99 0.99
+We reduce the watermark capacity to 16 bits and
+segment it so that each segment is 1 bit long. Un-
+der this setting, each generated watermarked text
+carries only one watermark bit. We then evaluate
+the robustness of KMW against contextual sum-
+marization and style-control system prompts. The
+results, reported in Table 11, show that the WRR
+reaches 0.93 and 0.87, respectively, representing a
+clear improvement over the default configuration.
+These findings demonstrate the flexibility of our
+approach, which allows one to trade off watermark
+capacity for robustness.
+21215

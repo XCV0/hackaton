@@ -1,0 +1,101 @@
+common situation in that native-language sources
+often contain culturally or geographically specific
+knowledge, with English resources providing addi-
+tional, more general information.2
+Due to the absence of relevant benchmarks, we
+lack an understanding of how well LLMs can
+handle such cross-lingual RAG scenarios. A po-
+tential solution is to use existing cross-lingual
+open-domain question-answering datasets, such
+as XQA (Liu et al., 2019a) and XOR QA (Asai
+et al., 2021), for evaluation (Chirkova et al., 2024).
+Yet these datasets only cover limited cross-lingual
+scenarios; in particular, the documents used to an-
+swer questions are in English, which hinders the
+evaluation of LLMs in more complex multilingual
+scenarios (i.e., Figure 1b). Moreover, the ques-
+tions in these datasets tend to be relatively simple
+(e.g. span extraction questions) and often can be
+answered without retrieval.3 Due to these short-
+comings, these datasets do not measure the true
+cross-lingual capabilities of LLMs in RAG settings.
+To address this gap, we introduce XRAG, a
+benchmark for evaluating the Question Answer-
+ing capabilities of LLMs in cross-lingual RAG
+scenarios, where some information must be ex-
+tracted from retrieved documents that are not in the
+user’s language. The benchmark features natural-
+sounding questions that require cross-document
+reasoning and are challenging for LLMs even in
+an English monolingual RAG setting (GPT-4o
+achieves only 62.4% accuracy, see Table 4). We
+develop a novel LLM-based question generation
+workflow using recent news articles, ensuring that
+current frontier models are unable to answer the
+questions without retrieval (GPT-4o accuracy is
+6.3% without retrieval, see Table 3). To guarantee
+a high-quality dataset, we employ extensive human
+Quality Assurance, resulting in few ambiguous or
+noisy questions (under 8%, see Section 5.2). In ad-
+dition to English, the benchmark spans four widely
+spoken and linguistically diverse languages (Ara-
+bic, Chinese, German, and Spanish).
+XRAG comprises two sub-tasks, corresponding
+to the monolingual retrieval and the multilingual
+retrieval settings of cross-lingual RAG. For each
+non-English language, we provide a directly com-
+2An initial study on a proprietary dataset of real-world
+LLM traffic from non-English users in Germany, Japan, and
+Spain found that using only English or native-language search
+results was inferior to combining both (see Appendix A).
+3 Chirkova et al. (2024) shows that 47.5% of questions in
+XORQA can be answered by Command-R without retrieval.
+parable English monolingual RAG baseline task.
+Each instance in the XRAG benchmark consists of
+a question, a gold answer, two supporting articles
+that together answer the question, and six topically
+related but non-answering distracting articles. This
+allows us to approximate realistic RAG settings
+with imperfect retrieval in evaluating the Question
+Answering abilities of LLMs.
+We evaluate five LLMs, including both closed-
+and open-source models, on XRAG. In summary,
+our contributions are:
+(1) We introduce XRAG, a novel benchmark de-
+signed to evaluate the performance of LLMs
+in two cross-lingual RAG scenarios.
+(2) We propose a novel method for generating
+challenging cross-document QA pairs from
+News Crawl, resulting in natural questions
+that current LLMs cannot answer using only
+their parametric knowledge.
+(3) We find that in the monolingual retrieval set-
+ting, all evaluated LLMs face issues with Re-
+sponse Language Correctness-an issue that
+has received little attention from the research
+community.
+(4) In the multilingual retrieval setting, the pri-
+mary challenge for LLMs does not lie in non-
+English generation, but in reasoning over re-
+trieved information across languages.
+2 Related Work
+There are extensive recent investigations into char-
+acterizing the Question Answering capabilities of
+LLMs in RAG settings. Vu et al. (2024) con-
+struct a a dynamic QA benchmark, FreshQA, that
+tests the ability of LLMs to use up-to-date world
+knowledge to solve questions. Chen et al. (2024c)
+introduce RGB to analyze fundamental abilities
+of LLMs in RAG systems, such as noise robust-
+ness and negative rejection. Tang and Yang (2024)
+propose MultiHop-RAG, which focuses on whether
+retrieval-enhanced LLMs can retrieve and reason
+over multiple pieces of supporting evidence. The
+Comprehensive RAG Benchmark, created by Yang
+et al. (2024), aims to assess whether LLMs are able
+to answer different types of questions, ranging from
+simple to complex. Thakur et al. (2024b) present
+MIRAGE-Bench, a multilingual RAG benchmark
+constructed from Wikipedia, to evaluate RAG sys-
+tems performance in different languages. Zhu et al.
+15670

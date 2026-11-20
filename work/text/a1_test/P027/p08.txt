@@ -1,0 +1,127 @@
+luminescence was analysed with an interferometer (GEMINI by Nireos)
+and recorded with a single photon detector (IDQuantique) coupled
+with a Time Tagger (Swabian Instrument).
+Computational modelling
+First-principles simulations were performed within the framework of
+density functional theory (DFT) as implemented in the Vienna Ab-initio
+Simulation Package (VASP)41–43 using a projector augmented-wave
+(PAW)44 basis. The generalized gradient approximation (GGA)
+exchange-correlation functional of Perdew Burke-Ernzerhof (PBE)45
+was used for all the structures. VASP-recommended PAW pseudopo-
+tentials were used for all the atomic species (C:2s22p2,N:2s22p3,H:1s1,
+S:3s23p4,Pb:5d106s26p2, I:5s25p5, and Cl:3s23p5). Grimme’s DFT-D3 dis-
+persion correction46 was considered due to the presence of organic
+molecules. A plane wave energy cut-off of 500 eV and a Brillouin zone
+sampling using Γ-centred k-mesh are employed for all the calculations.
+A k-point grid of 3 × 1 × 3 with a Gaussian smearing of 0.1 was used for
+structure optimization whereas a k-point grid of 6 × 2 × 6 with Gaussian
+smearing of 0.01 was used to obtain accurate charge densities to cal-
+culate the electronic structure. The cell volume, shape, and atomic
+positions were fully relaxed using the conjugate gradient algorithm
+until the force on each atom converged below 0.01 eV Å−1.Theself-
+consistent energy convergence of 10−6 eV was used for electronic
+degrees of freedom.
+The carrier effective masses were calculated using the Effective
+Mass Calculator (EMC) code47. We used the Site-Occupation Disorder
+(SOD) code48 to generate symmetrically inequivalent structures in
+the orthorhombic space group Aba2 (#41) for 0 < x < 0.21 and 0.79 <
+x<1 in I1–xClx. It is unfeasible to enumerate the thousands of sym-
+metrically inequivalent structures for 0.21 < x < 0.79 in I1–xClx.
+Therefore we used the icet code49 to generate randomly occupied
+structures in this compositional range. The thermodynamic stability
+phase diagram for Cl mixing at I-sites was calculated using the Gen-
+eralized Quasi-Chemical Approximation (GQCA)50, which has been
+effectively utilized in the thermodynamic analysis of perovskite
+materials51–53. 235 lowest energy-optimized structures distributed
+uniformly over each possible concentration from 0 < x < 1 in I1–xClx
+were used to generate the thermodynamic stability phase diagram.
+1121 different structures chosen randomly and distributed uniformly
+between 0 < x < 0.21 and 0.79 < x < 1 in I1–xClx were optimized to
+analyse the preferred distribution of Cl and their effects on the lattice
+distortion.
+THz photoconductivity and mobility measurements
+An ampliﬁed laser system (Spectra Physics, MaiTai – Ascend – Spitﬁre),
+with a 5 kHz repetition rate, centre wavelength of 800 nm and pulse
+duration of 35 fs is used to generate the THz radiation using a spin-
+tronic emitter. The THz probe is then focused onto the sample, over-
+laid with a 400 nm excitation pump that is generated using a Beta
+Barium Borate (BBO) crystal. The THz radiation transmitted through
+the sample is then detected via free-space electro-optical sampling in a
+ZnTe (110) crystal of thickness 200 μm54.
+The variations in the THz transmission ΔTT−1 through the sample
+can therefore be measured, and temporally resolved by varying the
+time delay between the optical pump and the probing THz pulses in
+order to obtain the temporal evolution of the photo-induced con-
+ductivity of the sample51,52.
+Additionally, for low enough laser ﬂuences and charge-carrier
+densities, the sum mobility of free charge carriers will have a linear
+dependence on photoconductivity values and can therefore lead to an
+extraction of the intrinsic effective sum mobility based on the early
+time conductivity values post photoexcitation55,56.
+We also ascertained that the THz mobility values extracted
+within the ﬁrst picoseconds indeed solely reﬂected the motion of
+charge carriers within the n = 2 LDP phase, by also recording time-
+resolved photoluminescence spectra, using a time-correlated single
+photon counting (TCSPC) device following excitation by a 398 nm
+picosecond pulsed diode laser (PicoHarp, LDH-D-C-405M). These
+PL measurements showed that over the ﬁrst nanoseconds of charge-
+carrier lifetimes for which the THz photoconductivity transients
+were recorded, the PL solely reﬂected emission from an n =2
+LDP phase.
+Time-of-ﬂight secondary ion mass spectroscopy
+ToF-SIMS analyses were acquired with ToF-SIMS 5–100, with the
+pulsed primary ions from a Cs+ (2 keV) ion gun for sputtering and a Bi+
+ion beam (30 keV) for analysis.
+Transmission Electron Microscopy
+Transmission electron microscopy (TEM)-based experiments were
+conducted in both parallel beam mode high-resolution TEM (HRTEM)
+and converge beam scanning TEM (STEM) mode. The HRTEM experi-
+ments were performed in Cs spherical aberration image-corrected
+Thermo Fisher Titan 60–300 Cubed TEM microscope. In STEM mode,
+High-Angle Annular Dark-Field STEM HAADF-STEM) imaging combined
+with Energy Dispersive Spectroscopy (STEM-EDS) was executed for
+elemental mapping on Cs-aberration-probe-corrected Thermo Fisher
+Titan 60–300 Cubed TEM microscope operating at 300 kV. TEM data
+processing was performed using Gatan™ Digital Micrograph and
+Thermo Scientiﬁc™ Velox suites. For the TEM study, cross-sectional
+electron-transparent lamella was prepared in a focused ion beam (FIB)
+equipped scanning electron microscope (SEM-FIB Helios G4 DualBeam,
+FEI) with the help of an EasyLift nanomanipulator and Ga ion source. To
+protect the region of interest during FIB, two types of protective coat-
+ings were deposited: a 0.5 µm layer of Pt coating deposited by the e-
+beam, followed by a 3 µm layer of Pt coating deposited by the ion beam
+for ﬁnal protection. Step-by-step ion beam milling procedure with beam
+current (2.4, 0.44, 0.26, 0.045, 0.025 nA for 30 to 5 kV) was carried out
+by cutting and thinning down lamella to 60 nm while decreasing beam
+current (till 0.025 nA at 2 kV) to avoid ion beam damage. Additionally, a
+low current cleaning process (5–2kV, 81-28 pA) was performed to
+remove any potential contamination.
+Photovoltaic device characterization
+Current density (J)-voltage (V) measurements were performed in
+ambient conditions under simulated AM1.5 G light with an intensity
+of 100 mW cm−2 (Wavelabs-Sinus 70). Intensity was calibrated using a
+calibrated Si reference cell (KG-3 ﬁlter Centronics LCE-50). Cells were
+scanned using a Keithley 2450 source-metre backward and forward
+from 1.5 V to −0.1 V, with a 100 mVs−1 scan speed (no dwell time or
+preconditioning applied). A shadow mask with an aperture of 0.03
+cm2 (measured through optical microscopy) was employed during
+the measurement. Operational stability tests were carried out by
+maximum power point tracking (MPPT) under AM1.5 G illumination
+(100 mW cm−2)inN2 atmosphere at room temperature. External
+quantum efﬁciency (EQE) measurements were performed with a
+Cicci Research s.r.l ARKEO steady-state tests module. Wavelength
+scan range was set between 300 and 900 nm with a scan step
+of 10 nm.
+Average visible transmittance and light utilization efﬁciency
+computation
+AVT has been calculated using Eq. 1 through the widely reported
+approach57:
+AV T =
+R 800nm
+380nm TðλÞPðλÞSðλÞdλ R 800nm
+380nm PðλÞSðλÞdλ
+ð1Þ
+where λ is the wavelength, T is the device light transmission, P is the
+photopic response function, and S is the AM1.5 G solar irradiation.
+Article https://doi.org/10.1038/s41467-024-53339-6
+Nature Communications |         (2024) 15:9069 8

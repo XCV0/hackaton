@@ -1,0 +1,47 @@
+You are an intelligent assistant with expertise in linguistics. Always follow the provided instructions and generate outputs in valid json format
+without any extra information.
+### User :
+Think it through step by step:
+1. Given a question, answer, passage, location and user-time identify relevant-named-entities, date times, locations in the passage based on the
+question and answer, such that modifying the relevant named entities will result in a new passage that can cause confusion to the user if they
+didn’t have enough context.
+2. You might also be provided with ’prior-distraction-passage’, ’prior-distractor-rejecting-reason’. That logs your generation for the same
+question and answer in the previous turn. Use that information to guide and improve for this round of distraction passage generation.
+3.Generate an open ended question "open-ended-question" by modifying provided question such that the answer provided answers the new open ended
+question.
+4. Now using question, answer, user time, location, modify the passage and generate a new passage by modifying in the named entities such that
+a. The new passage is relevant to the existing passage.
+b.The new passage is grammatically coherent.
+c. For the "open-ended-question", both provided and your generated passage are relevant.
+d. The distraction-passage should have a similar number of characters as the original passage and similar format.
+5. Score your confidence (from 1 to 5) that the generated passage will satisfy condition 4.
+Follow the requirements.
+## Requirements:
+- You must generate the passage based on the user question, location, answer, user-time .
+- The generated distraction should be of similar length to the original passage and with similar special characters such as /n, / t. Do not reduce
+the total number of words.
+- Think it through step by step and provide a detailed explanation in the "thought steps" field. Output in Json with following fields
+’open-ended-question’, ’thought-steps’, ’distracting-named-entities’, ’distracting-passage’, ’score’, ’reason’ as json fields in your output.
+Think it through step by step:
+1. Given a question, answer, passage, location and user-time identify relevant-named-entities, locations and time information in the passage based
+on the question and answer, such that modifying the relevant named entities, location or date time will result in a new passage that can cause
+confusion to the user if they didn’t have enough context.
+2. You might also be provided with ’prior-distraction-passage’, ’prior-distractor-rejecting-reason’. This provides information on your prior
+distraction generation for the same question and answer. Use that information along with the ’prior-distractor-rejecting-reason’ to analyse and
+improve the distraction generation and address the gaps.
+3.Generate an open ended question "open-ended-question" by modifying the provided question such that the answer provided answers the new open
+ended question.
+4. Now using question, answer, user time, location, modify the passage and generate a new passage by modifying in the named entities and/or
+location and/or time such that
+a. The new passage is relevant to the existing passage.
+b.The new passage is grammatically coherent.
+c. For the "open-ended-question", both provided and your generated passage are relevant.
+d. The distraction-passage should have a similar number of characters as the original passage and similar format.
+5. Pick what kind of named entities or location or time change would cause distraction based on user question, opened question , passage and
+details.
+a. Eg: For a query about sporting events today, changing date time of the event will be a distraction as today (datetime) is a key component of
+the question.
+b. Eg: For a question about actors in a movie, changing the movie name slightly and actors name will be a good distraction.
+5. Score your confidence (from 1 to 5) that the generated passage will satisfy condition 4.
+Figure 15: Part 1: Prompt used for generating distractor content.
+797

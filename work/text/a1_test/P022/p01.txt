@@ -1,0 +1,94 @@
+Codesigning Alloy Compositions of CdSeyTe1/C0y Absorbers
+and MgxZn1/C0xO Contacts to Increase Solar Cell Efﬁciency
+Imran S. Khan, Tursun Ablekim, Deborah L. McGott, Brian Good, Craig L. Perkins,
+Wyatt K. Metzger, and Andriy Zakutayev*
+1. Introduction
+CdTe-based solar cells have become one of the leading
+photovoltaic (PV) technologies, with more than 25 GW world-
+wide installation, 37% of the USA utility-scale deployment
+in 2019, and laboratory cell efﬁciency reaching 22.1%.[1]
+However, the Shockley–Queisser limit of 33%[2] for single-
+junction CdTe (bandgap, Eg ¼ 1.5 eV) devices suggests that there
+is still room for further improvement. One
+way this can be achieved is by alloying
+CdTe with CdSe to lower the absorber
+bandgap. The bandgap of CdSeyTe1/C0y
+dilute alloys decreases with increasing Se
+content due to the bandgap bowing effect,[3]
+which improves carrier collection resulting
+in increased short-circuit current ( JSC).[4]
+Despite the CdSeyTe1/C0y reduced absorber
+bandgap, the VOC is sustained because
+Se addition improves carrier lifetime.[5]
+The CdSeyTe1/C0y alloys are often synthe-
+sized by subjecting a bilayer CdSe/CdTe
+to CdCl2 treatment, whereupon the ele-
+ments interdiffuse.
+The integration of MgxZn1/C0xO as a front
+contact has signiﬁcantly increased efﬁ-
+ciency in different PV technologies[6]
+including CdTe.[7] MgxZn1/C0xO has a tun-
+able bandgap and conduction band posi-
+tion as a function of Mg content,[8] both
+higher than ZnO (Eg ¼ 3.24 eV). There
+are varying reports on the MgxZn1/C0xO
+band gap (4.0–4.2 eV) at maximum Mg
+composition (x ¼ 0.36–0.46) at which phase
+segregation occurs, as it depends on the deposition technique,
+deposition rate, and substrate temperature.[8,9] MgxZn1/C0xOhas
+also been studied using different combinatorial methods, such
+as pulsed laser deposition,[10] chemical vapor deposition,[11] and
+sputtering,[12] where we demonstrated MgxZn1/C0xOconduction
+band tuning and integrated it with wide-bandgap CuGa3Se5
+absorber to increase VOC close to /C251V. The MgxZn1/C0xO/
+CdSeyTe1/C0y device interface was also recently studied, demonstrat-
+ing improvements in JSC and efﬁciency due to widened bandgap
+and better carrier collection at low wavelengths.[13]
+Finding the optimum composition in MgxZn1/C0xO and
+CdSeyTe1/C0y is complicated as Mg in MgxZn1/C0xO and Se in
+CdSeyTe1/C0y both change the conduction band alignment and
+interface defect density, which can have signiﬁcant impacts on
+interface recombination, barrier heights, and VOC. [14]
+Modeling studies[7,15] may provide some insight into understand-
+ing experimental results, however often have limitations in
+predicting the future device performance. This coupled
+absorber/contact codesign problem can be addressed using
+high-throughput experimental (combinatorial) methods,[16] by
+creating PV device libraries with orthogonal composition
+gradients in the CdSeyTe1/C0y and MgxZn1/C0xO layers. In the past,
+combinatorial methods have been used to study compositionally
+I. S. Khan, T. Ablekim,[+] D. L. McGott, B. Good, C. L. Perkins,
+W. K. Metzger,[+] A. Zakutayev
+National Renewable Energy Laboratory
+Golden, CO 80401, USA
+E-mail: andriy.zakutayev@nrel.gov
+The ORCID identiﬁcation number(s) for the author(s) of this article
+can be found under https://doi.org/10.1002/solr.202200394.
+[+]Present address: First Solar, Perrysburg, OH 43551, USA
+© 2022 The Authors. Solar RRL published by Wiley-VCH GmbH. This is an
+open access article under the terms of the Creative Commons Attribution-
+NonCommercial License, which permits use, distribution and
+reproduction in any medium, provided the original work is properly
+cited and is not used for commercial purposes.
+DOI: 10.1002/solr.202200394
+Thin-ﬁlm solar cells such as CdTe are a major commercial photovoltaic
+technology, with more than 25 GW installed worldwide and levelized costs of
+electricity competitive with fossil fuels. Further progress may result from
+integrating CdSeyTe1/C0y absorbers with MgxZn1/C0xO contacts, but the device
+efﬁciency is difﬁcult to maximize due to coupled dependence on chemical
+composition of both alloys. Herein, a high-throughput approach is demonstrated
+to codesign chemical compositions in alloyed MgxZn1/C0xO/CdSeyTe1/C0y thin-ﬁlm
+solar cells, using combinatorial libraries of PV devices with orthogonal compo-
+sition gradients in CdSeyTe1/C0y absorbers and MgxZn1/C0xO contacts. It is found
+that the solar cell performance is a strong and coupled function of both elemental
+compositions, with efﬁciency up to 17.7% (VOC ¼ 836 mV, ﬁll factor ¼ 69%,
+JSC ¼ 30.6 mA cm/C02) at atomic compositions of Mg/(Mg þ Zn) /C2518% and
+average Se/(Se þ Te) /C254%. These performance trends among >100 devices are
+explained by >100 ns lifetime of photoexcited charge carriers at the MgxZn1/C0xO/
+CdSeyTe1/C0y interface where strong Se accumulation is also observed. This study
+reports the optimal compositions of the commercially relevant MgxZn1/C0xO/
+CdSeyTe1/C0y solar cells and demonstrates a general approach to codesigning
+performance of alloyed thin-ﬁlm solar cells and other optoelectronic devices.
+RESEARCH ARTICLE
+www.solar-rrl.com
+Sol. RRL 2022, 6, 2200394 2200394 (1 of 6) © 2022 The Authors. Solar RRL published by Wiley-VCH GmbH

@@ -1,0 +1,101 @@
+Eval. Metric Naive RAG TrustRAG / Audit
+Robustness checks
+SOURCE
+Leak ↓ 36–38 0
+Stale ↓ 12–31 0
+Unsup. ↓ 0–12 0
+SF
+Leak ↓ 25–42.5 0
+Stale ↓ 0–7.5 0
+Unsup. ↓ 2.5–10 0
+Utility diagnostics
+TEMPLATE Valid ↑ 52.7–56.0 100 Over-refusal ↓ 0–1.1 0
+FRESH Valid ↑ 31.5–59.0 100 Over-refusal ↓ 0–3.8 0
+Judge reliability
+Judge κ Leak κ Stale κ Unsup.
+DeepSeek-
+V3 1.000 0.939 0.908
+Qwen-Max 1.000 0.958 0.607
+GLM-4-32B-
+0414 0.884 0.958 0.467
+Table 3: Robustness, utility, and multi-judge reliabil-
+ity diagnostics. For robustness and utility rows, values
+compare Naive RAG with TrustRAG and are percent-
+ages. Ranges are across Qwen-Max, DeepSeek-V3, and
+GLM-4-32B-0414. For the judge-reliability block, each
+row reports Cohen’s κ between one automatic judge
+and human labels for the three failure types. SOURCE,
+SF, and FRESH denote SOURCE_ANCHORED, SIL-
+ICONFLOW_HELDOUT, and FRESH_STRESS, re-
+spectively.
+duces 32.33% unsupported answers. In contrast,
+TrustRAG maintains 0.00% observed leakage and
+stale citation, reduces the unsupported-answer rate
+to 3.67%, and achieves a 96.33% valid-response
+rate. Relative to Metadata-Aware RAG, the re-
+duction in unsupported answers is significant for
+all three generator models (exact McNemar p ≤
+4.8 × 10−7), with no observed over-refusal. These
+results show that, under enlarged candidate pools,
+explicit refusal and conflict reporting provide gover-
+nance capabilities beyond access and supersession
+filtering alone.
+5.3 Ablations and Adversarial Stress Tests
+Table 2 analyzes the contribution of each TrustRAG
+component. Removing access filtering causes unau-
+thorized leakage to reappear on TEMPLATE, with
+failure rates ranging from 29.50% to 36.50%. This
+result shows that access-denied evidence must be
+excluded before generation, rather than merely
+described as evidence that the model should ig-
+nore. Removing the conflict-reporting constraint
+Method Leak ↓ Stale ↓ Unsup. ↓ Valid ↑
+Naive RAG 32.00 12.67 30.67 25.67
+Permission-Aware
+RAG 0.00 7.00 32.67 62.33
+Metadata-Aware
+RAG 0.00 0.00 32.33 67.67
+TrustRAG 0.00 0.00 3.67 96.33
+Table 4: Final-response results with 50-document can-
+didate pools on 100 SOURCE-ANCHORED instances,
+macro-averaged across three LLMs. All values are per-
+centages. LEAK, STALE, and UNSUP. are failure rates,
+while VALID is the valid-response rate. Bold numbers
+indicate the best or tied-best result.
+increases unsupported answers to 15.75%–25.00%,
+showing that retained admissible evidence can still
+contain conflicts that must be explicitly reported.
+Removing supersession filtering reintroduces stale
+citations on FRESH-STRESS. Although the abso-
+lute failure rate is lower than in the Naive RAG
+setting, the result still shows that supersession rout-
+ing is necessary for controlling stale-citation risk.
+Multi-version tests further show that TrustRAG
+routes empty contexts caused by inaccessible super-
+seding documents to REFUSAL rather than falling
+back to stale evidence, and preserves unresolved
+evidence for CONFLICTREPORT under missing or
+incorrect links and parallel active conflicts (Ap-
+pendix Table B4).
+Under the prompt-injection stress test, inadmis-
+sible evidence contains adversarial instructions.
+Naive RAG produces substantial unauthorized leak-
+age and stale citation under this setting, while
+Prompt RAG still leaves a small amount of leak-
+age. Metadata Filter and TrustRAG eliminate the
+observed failures, indicating that inadmissible ev-
+idence should be excluded before it reaches the
+generator.
+5.4 Robustness, Utility, and Judge Reliability
+Table 3 summarizes robustness checks, utility diag-
+nostics, and judge reliability. On SOURCE, Naive
+RAG still produces clear unauthorized leakage and
+stale citation, whereas TrustRAG shows no ob-
+served failures across the three metrics. A similar
+trend appears on the SF held-out set. These results
+suggest that TrustRAG’s gains are not limited to
+the templated distribution of the main test set.
+On TEMPLATE and FRESH-STRESS, TrustRAG
+maintains a 100% valid-answer rate on answerable
+cases and an over-refusal rate of 0%. This result
+35009

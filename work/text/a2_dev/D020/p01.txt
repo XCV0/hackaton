@@ -1,0 +1,39 @@
+WEB RETRIEVAL-AWARE CHUNKING (W-RAC) FOR
+EFFICIENT AND COST-EFFECTIVE RETRIEVAL-AUGMENTED
+GENERATION SYSTEMS
+Uday Allu, Sonu Kedia , Tanmay Odapally, Biddwan Ahmed
+AI Research Team, Yellow.ai
+April 8, 2026
+ABSTRACT
+Retrieval-Augmented Generation (RAG) systems critically depend on effective document chunk-
+ing strategies to balance retrieval quality, latency, and operational cost. Traditional chunking ap-
+proaches—such as fixed-size, rule-based, or fully agentic chunking—often suffer from high token
+consumption, redundant text generation, limited scalability, and poor debuggability, especially for
+large-scale web content ingestion. In this paper, we propose Web Retrieval-Aware Chunking
+(W-RAC), a novel, cost-efficient chunking framework designed specifically for web-based docu-
+ments. W-RAC decouples text extraction from semantic chunk planning by representing parsed web
+content as structured, ID-addressable units and leveraging large language models (LLMs) only for
+retrieval-aware grouping decisions rather than text generation. This significantly reduces token usage,
+eliminates hallucination risks, and improves system observability. Experimental analysis and archi-
+tectural comparison demonstrate that W-RAC achieves comparable or better retrieval performance
+than traditional chunking approaches while reducing chunking-related LLM costs by an order of
+magnitude.
+1 Introduction
+Retrieval-Augmented Generation has emerged as a dominant paradigm for grounding large language models with
+external knowledge sources. A foundational step in RAG pipelines is document chunking, which determines how
+source content is segmented, indexed, and retrieved. For web-scale systems, chunking quality directly impacts retrieval
+precision, answer faithfulness, latency, and infrastructure cost.
+Conventional chunking strategies fall into three broad categories: fixed-size chunking, rule-based structural chunking,
+and agentic chunking using LLMs. While agentic chunking improves semantic coherence, it introduces substantial
+computational overhead due to repeated text generation and transformation. Moreover, these approaches are poorly
+suited for high-volume web ingestion pipelines where cost, determinism, and debuggability are critical.
+To address these limitations, we introduce Web Retrieval-Aware Chunking (W-RAC), a framework that rethinks
+chunking as a planning problem rather than a generation problem. W-RAC leverages deterministic web parsing and
+lightweight LLM-based semantic planning to produce retrieval-optimized chunks without regenerating source text.
+2 Background and Limitations of Traditional Chunking
+Modern Retrieval-Augmented Generation (RAG) systems rely on document chunking as a foundational preprocessing
+step to enable efficient indexing and accurate retrieval. Since large language models operate under strict context-length
+constraints, source documents must be decomposed into smaller, retrievable units that balance semantic coherence
+with retrieval granularity. The quality of these chunks directly impacts recall, precision, latency, and overall generation
+quality in downstream applications.
+arXiv:2604.04936v1  [cs.IR]  8 Jan 2026

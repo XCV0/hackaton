@@ -1,0 +1,20 @@
+J. Phys. Energy5 (2023) 025007 W Clarke et al
+Figure5. Measured steady state performance parameters of TiO2/MAPI/Spiro-MeOTAD cells. Red circles were taken from The
+Perovskite Database Project [79]. Crosses were obtained through simulations using IonMonger, based on the parameter set given
+in appendix B. The band shapes in the TiO2 and in the Spiro-MeOTAD were taken to be parabolic and Gaussian, respectively,
+using the parameters given in table 1. Significant differences can be observed between the predictions made using the Boltzmann
+approximation (blue crosses) and full Fermi–Dirac statistics (green crosses).
+Figure6. Sensitivity of key performance parameters to the Boltzmann approximation in the transport layers of a
+TiO2/MAPI/Spiro-MeOTAD cell. Obtained through simulation using IonMonger. The parameter set is listed in appendix B. The
+band shapes in the TiO2 and Spiro-MeOTAD were parabolic and Gaussian, respectively, with parameters taken from table 1.
+values such as the short-circuit current and the open-circuit voltage. Thus, if the model predicts these values
+incorrectly (as seen here), material parameter estimates obtained through fitting will also be incorrect,
+leading to divergence between fitted parameter values obtained from the same material using different
+experimental protocols. This is likely to create confusion in the field and lead to difficulty in obtaining
+reliable and accurate material parameters estimates.
+5.2.Current–voltagehysteresis
+Differences in the predictions of PSC behaviour between models based on Boltzmann statistics in the TLs
+and those based on full FD statistics are not restricted to steady state behaviour. As shown in figures 7 and 8,
+simulations of J-V hysteresis and IS both show significant differences depending on which of these two
+modelling assumptions is applied.
+14

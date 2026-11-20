@@ -1,0 +1,48 @@
+LLM-Confidence Reranker
+Algorithm 1 The LLM-Confidence Reranker Algorithm
+1: function BINNEDCONFIDENCESCORE(𝑞,𝑑)
+2: if𝐶(𝑞,𝑑) ≥𝑇upper then
+3: return 1 ⊳ High confidence bin
+4: else if𝐶(𝑞,𝑑) ≤𝑇lower then
+5: return -1 ⊳ Low confidence bin
+6: else
+7: return 0 ⊳ Medium confidence bin
+8: end if
+9: end function
+10: function LCR_SORT(𝑞, )
+11: Generate joint features {(𝑞,𝑑)}𝑑∈
+12: if𝐶(𝑞)<𝑇query then
+13: ′ ← StableSort(, [𝐵𝑖𝑛𝑛𝑒𝑑𝐶𝑜𝑛𝑓𝑖𝑑𝑒𝑛𝑐𝑒𝑆𝑐𝑜𝑟𝑒(𝑞,𝑑) ↓,𝑃𝑟𝑒𝑣𝑆𝑐𝑜𝑟𝑒(𝑞,𝑑) ↓])
+14: else
+15: ′ ← Sort(,𝑃𝑟𝑒𝑣𝑆𝑐𝑜𝑟𝑒(𝑞,𝑑) ↓)
+16: end if
+17: return ′
+18: end function
+1. Confidence Assessment and Binning: It first computes the query confidence𝐶(𝑞) and compares it to𝑇query.
+Concurrently, it calculates joint confidence scores 𝐶(𝑞,𝑑) for each document 𝑑 in . Documents are then
+categorized into three bins using𝑇upper and𝑇lower:
+• High confidence: if𝐶(𝑞,𝑑) ≥𝑇upper
+• Medium confidence: if𝑇lower <𝐶(𝑞,𝑑)<𝑇upper
+• Low confidence: if𝐶(𝑞,𝑑) ≤𝑇lower
+2. Ranking Strategy: If 𝐶(𝑞) < 𝑇query (low confidence), documents are sorted first by confidence bins in
+descending order (high → medium → low), then by𝑃𝑟𝑒𝑣𝑆𝑐𝑜𝑟𝑒(𝑞,𝑑) within each bin. If𝐶(𝑞) ≥ 𝑇query (high
+confidence), documents are sorted directly by𝑃𝑟𝑒𝑣𝑆𝑐𝑜𝑟𝑒(𝑞,𝑑) in descending order.
+By discretizing confidence into three intervals, LCR reduces noise and sharpens distinctions between documents.
+4. Evaluation and Discussion
+This section provides a thorough evaluation of the LLM-Confidence Reranker (LCR) algorithm, assessing its
+performance, robustness, and underlying mechanisms. We start with the experimental setup in §4.1, outlining the
+datasets,retrievers,rerankers,confidencequantificationmethods,andevaluationmetricsemployed.§4.2thenpresents
+the primary experimental results, comparing NDCG@5 scores across different configurations with BM25 as the
+initial retriever. The subsequent subsection analyzes the impact of different retrievers, incorporating Contriever
+to evaluate compatibility. Additional analyses examine the effects of the query threshold, sensitivity to document
+thresholds, variations in language models, and different confidence quantification approaches. Finally, we investigate
+the underlying mechanism of the LCR algorithm, as detailed in §4.8.
+4.1. Experiment Setup
+4.1.1. Datasets
+We evaluate our approach on datasets from two prominent information retrieval benchmarks: BEIR (Thakur et
+al., 2021) and TREC (Voorhees & Harman, 2005). BEIR (Benchmarking IR) is a heterogeneous zero-shot evaluation
+benchmarkcomprisingdatasetsacrossdiversedomains,designedtoassessthegeneralizationofretrievalmodelsinout-
+of-domainsettings.TREC(TextREtrievalConference)isanannualseriesorganizedbyNIST,providingstandardized
+tasks and judgments for advancing retrieval research; we specifically use the Deep Learning tracks from 2019 and
+2020,whichfocusonpassagerankingwithgradedrelevanceannotations.FromBEIR,weselectsixdatasetsspanning
+Song et al.: Preprint submitted to Elsevier Page 8 of 21

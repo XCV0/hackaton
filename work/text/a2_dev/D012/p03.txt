@@ -1,0 +1,99 @@
+• We propose TrustRAG, a metadata-governed
+RAG framework that systematically mitigates
+the aforementioned governance failures via
+pre-generation metadata routing, determin-
+istic refusal, and conflict-aware generation,
+given accurate metadata.
+• We construct AeroTrustBench to evaluate ev-
+idence admission and post-retrieval gover-
+nance capabilities in compliance-oriented QA.
+• We systematically validate TrustRAG’s effec-
+tiveness in reducing governance failures and
+maintaining answerability through compre-
+hensive evaluations across multiple LLMs and
+baselines, ablation studies, robustness tests,
+stress tests, utility metrics, and human audits.
+2 Related Work
+2.1 Access Control in Compliance-Oriented
+QA
+Access control is a foundational pillar of security
+systems. Resource accessibility depends on at-
+tributes like the subject, resource, operation, and
+environment, rather than the semantic relevance to
+a user’s query (Hu et al., 2014). This distinction
+is vital in compliance QA and sensitive domains
+with strict confidentiality requirements. Recent
+studies have introduced fine-grained access con-
+trol into RAG systems, ensuring LLMs generate
+answers strictly from documents permitted by the
+user’s current privileges (Chen et al., 2025; Gokhan
+et al., 2025). For instance, Permission-Aware RAG
+handles complex, fine-grained access in enterprise
+environments via Identity and Access Management
+(IAM) interfaces (Jeong and Lee, 2025), while
+Metadata-Aware RAG combines metadata filter-
+ing with Role-Based Access Control (RBAC) to
+strengthen access enforcement in sensitive data
+scenarios (Chen and Taipalus, 2026). These stud-
+ies demonstrate the necessity of permission-aware
+control boundaries in compliance-oriented RAG.
+Building on this, TrustRAG advances post-retrieval
+governance by focusing on user permissions, docu-
+ment lifecycle states, and conflicting relationships
+among legitimate evidence.
+2.2 Temporal Freshness and Outdated
+Evidence
+While RAG effectively mitigates parametric knowl-
+edge obsolescence, it does not inherently guarantee
+the temporal reliability of retrieved evidence. In
+dynamic environments, outdated evidence can mis-
+lead generative models and severely degrade per-
+formance (Ouyang et al., 2025). For time-sensitive
+QA, systems must identify target temporal con-
+straints or currently valid facts rather than relying
+solely on semantic similarity (Zhang et al., 2025b;
+Kasai et al., 2023; Dhingra et al., 2022). Exist-
+ing approaches tackle this challenge via two main
+mechanisms. One line of research enables mod-
+els to adapt to new knowledge through continuous
+data updates, search augmentation, or real-time
+information acquisition (Liska et al., 2022; Kasai
+et al., 2023; Vu et al., 2024). Another focuses on
+improving temporal evidence selection via time-
+sensitive retrieval, query decomposition, and tem-
+poral reranking (Zhang et al., 2025b; Dhingra et al.,
+2022). While these methods emphasize acquiring
+recent or time-relevant evidence, our work focuses
+on strictly governing the validity of retrieved ev-
+idence prior to generation by evaluating explicit
+document versions and obsolescence states.
+2.3 Faithfulness and Knowledge Conflicts
+Despite leveraging external evidence, RAG out-
+puts can still be unfaithful to the retrieved context,
+unsupported, or contradictory (Niu et al., 2024).
+Prior research mitigates LLM hallucinations by
+constructing hallucination-annotated corpora, ap-
+plying context-constrained alignment, developing
+automated evaluation frameworks, and modeling
+fact-level conflicts (Niu et al., 2024; Saad-Falcon
+et al., 2024; Bi et al., 2025; Zhang et al., 2025a).
+Furthermore, several studies analyze or mitigate
+generative instability during knowledge conflicts
+through inter-context conflict benchmarks, multi-
+agent answer aggregation, and conflicting-evidence
+evaluation (Wang et al., 2025a; Lee et al., 2025;
+Zhang et al., 2025a; Wang et al., 2025b; Xie et al.,
+2024). Unlike these approaches, we do not attempt
+to automatically resolve all conflicts. Instead, we
+treat unresolved conflicts among valid, active ev-
+idence as a critical state that must be explicitly
+reported. If the model forces a single fabricated
+conclusion under such conditions, it commits an
+unsupported answer failure.
+2.4 Governance before Generation
+Existing research on RAG reliability frequently re-
+lies on the internal reasoning capabilities of large
+language models (LLMs), employing mechanisms
+such as self-reflection, corrective evaluation, and
+reasoning chains to assess document relevance and
+35004

@@ -1,0 +1,92 @@
+the crystallinity and surface morphology of the active layer, such as
+modulating perovskite formulation, optimizing deposition
+techniques24–26, additive engineering27–30, and compensatory interface
+passivation31.
+Another factor is the unbalanced charge extraction between the
+perovskite and the charge transport layer (CTL), however, not enough
+attention has been paid to it yet32–34. As a typical sandwich-structured
+device, not only the photoactive perovskite layer but also the charge
+transport layers including electron transport layer (ETL) and hole-
+transport layer (HTL) have a signiﬁcant impact on the performance of
+the device, especially on reducing open-circuit voltage (VOC)losses
+and suppressing hysteresis35,36. VOC and ﬁll factor (FF) are often wea-
+kened due to undesired carrier losses at the perovskite/CTL interface
+during charge extraction and transport21. In particular, a large number
+of defects are predominantly located on the upper surface and at the
+GBs of the perovskite ﬁlms, resulting in a serious trap-assisted non-
+radiative recombination at the perovskite/HTL interface37,38. Conse-
+quently, the hole extraction efﬁciency at the interface is substantially
+lower than the electron extraction efﬁciency, causing the interfacial
+space charge to form and accumulate39. Most of the research focused
+on developing new HTLs with high hole mobility or adding interfacial
+layers to provide gradient energy levels40,41,however,itisstillnot
+possible to efﬁciently achieve balanced carrier extraction.
+Herein, we used a thermally polymerized additive N-vinyl-2-pyr-
+rolidone (NVP) as a polymer template in the perovskite ﬁlm, followed
+by a conventional HTL/Chlorobenzene (CB) solution spin-coating
+process to remove the residual miscellaneous phases and open the
+GBs to form monolithic perovskite grains, thereby suppressing the
+defect-related non-radiative recombination. Furthermore, this process
+results in the formation of a novel “Mortise-Tenon” (M-T) structure for
+perovskite/HTL composite ﬁlm (Fig. 1a, b), which provides an
+obviously larger contact area between perovskite and HTL, thereby
+facilitating hole extraction to achieve balanced charge management.
+Based on the high-quality perovskite crystalline and the unique M-T
+architecture that effectively enhances VOC and FF, PSCs can achieve
+certiﬁed efﬁciencies of 24.55% for reverse scan and 24.25% for a for-
+ward scan. Moreover, NVP-based PSCs maintain >95% initial efﬁciency
+over 1100 h in accordance with the ISOS-L-2 protocol, as well as
+excellent endurance according to the ISOS-D-3 accelerated aging test.
+Results
+Crystallographic characterization of monolithic perovskite
+grain and Mortise-Tenon structure
+We used NVP as additive in the perovskite precursor, which could
+straightforwardly convert into polyvinylpyrrolidone (PVP) via atom
+transfer radical polymerization (ATRP) during perovskite annealing
+step. As in traditional n-i-p PSCs, the perovskite ﬁlms were then cov-
+ered with Spiro-OMeTAD/CB solution. To explore the effect of the
+additive on the architecture of the perovskite ﬁlm, we operated a
+scanning transmission electron microscope (STEM) on the cross-
+sectional perovskite ﬁlm fabricated by focused-ion-beam (FIB). In the
+overall view of STEM (Fig. 1a), we found that the perovskite ﬁlm
+3.18 Å <002>
+HTL-Tenon
+Mortise-Tenon StructureMortise-Tenon Structure
+Mortise
+Pb
+Perovskite
+Control
+HTL
+I C
+390 nm 560 nm
+340 nm 280 nm
+10 nm
+PVP
+w/NVP w/NVP
+Perovskite-Mortise
+Tenon
+a b
+c
+e f
+d
+500 nm 500 nm 500 nm 500 nm
+qxy [Å-1] qxy [Å-1]
+qz [Å-1]
+qz [Å-1]
+1μm
+Fig. 1 | Crystallization, architecture, and morphology of perovskite/NVP ﬁlm.
+a Cross-sectional STEM image of an ultra-thin perovskite slice (<100 nm thickness)
+fabricated by FIB with an architecture (from top to bottom) of sputtered Pt/spiro-
+OMeTAD (HTL)/perovskite with NVP/SnO2 (ETL)/FTO/glass. The depth of the
+inserted HTL depth is 1/2~2/3 of the total perovskite grain height. The yellow
+dashed line is the boundary between spiro-OMeTAD and dielectric barrier of PVP.
+b Diagram of Mortise-Tenon structure. c Enlarged images of STEM image, the
+labeled triangular area may be miscellaneous phases in PVP matrix.
+d Corresponding EDS elemental mapping of Pb, I, and C from the HAADF image
+shown in c. e TEM image clearly shows that perovskite grains are surrounded by
+PVP. The crystal lattice distance of perovskite was 3.18 Å, and the SAED pattern of
+corresponding interdigital perovskite ﬁlms as illustrated in the inset. f The dif-
+fraction patterns of control and perovskite/NVP ﬁlms were collected by GIWAXS at
+a small angle.
+Article https://doi.org/10.1038/s41467-023-38926-3
+Nature Communications |         (2023) 14:3216 2

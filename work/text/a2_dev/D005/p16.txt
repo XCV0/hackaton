@@ -1,0 +1,26 @@
+For this task you are given a question (Question), a set of references (References) as well as a
+reasoning (Reasoning) and an answer (Answer) to the question.
+Your task is to evaluate the reasoning process. Use the following guidelines to evaluate the
+reasoning process and assign a score between 1 to 4 to the provided reasoning:
+- Score 1: The reasoning is not correct. It is not related to the question and the references, or
+it is a simple repetition of them with no thought process.
+- Score 2: The reasoning is related to the question and the references, but it is not really
+helpful in answering the question. It is not clear how the reasoning leads to the answer.
+- Score 3: The reasoning is related to the question and the references, and it is helpful in
+answering the question. It may partially help answering the question but there are gaps in the
+reasoning and parts of the question are not addressed.
+- Score 4: The reasoning is related to the question and the references, and it is helpful in
+answering the question. It provides a clear and complete thought process that leads to the answer.
+## References:
+<Reference Documents>
+## Question:
+<Question>
+## Reasoning:
+<Thought>
+## Answer:
+<Answer>
+First, explain your assessment of the Reasoning based on the criteria above in a few
+sentences followed by the final score in a new line starting with "## Score:" followed by the
+score value.
+Figure 9: Prompt used for evaluation of the thought quality.
+790

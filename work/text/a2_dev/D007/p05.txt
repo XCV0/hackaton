@@ -1,0 +1,100 @@
+tailored strategies for handling each query. In other
+words, employing the most basic, non-retrieval-
+based approach LLM(q) to respond to the complex
+query q would be also ineffective (Figure 2, A);
+conversely, using a more elaborate multi-step ap-
+proach LLM(q, d, c) for simple q would be ineffi-
+cient (Figure 2, B). Therefore, our adaptive frame-
+work is designed to dynamically adjust the query-
+handling strategy of retrieval-augmented LLMs,
+which is achieved by determining the complexity of
+each query before attempting a solution. Notably,
+this framework can offer a robust middle ground
+with a range of solutions, from the simplest ap-
+proach for the most straightforward queries, to the
+one-step approach for moderate queries, and up to
+the most comprehensive and rigorous approach for
+complex queries. In addition, since the operations
+of LLM and Retriever remain consistent regard-
+less of inputs to them, our method can seeming-
+lessly go back and forth across queries of different
+complexities, without changing the internal model
+architecture or parameters during adaption.
+Query Complexity Assessment To operational-
+ize our adaptive retrieval-augmented LLM frame-
+work, we should determine the query complexity,
+and to achieve this, we propose to model a com-
+plexity classifier, whose goal is to return the appro-
+priate complexity level of the given query. Specif-
+ically, given the query q, our classifier can be for-
+mulated as follows: o = Classifier(q), where
+Classifier is a smaller Language Model that is
+trained to classify one of three different complexity
+levels and o is its corresponding class label. In our
+classifier design, there are three class labels: ‘A’,
+‘B’, and ‘C’, where ‘A’ indicates that q is straight-
+forward and answerable by LLM(q) itself, ‘B’ in-
+dicates that q has the moderate complexity where
+at least a single-step approach LLM(q, d) is needed,
+and ‘C’ indicates that q is complex, requiring the
+most extensive solution LLM(q, d, c)2.
+Training Strategy The remaining step is to train
+the smaller Language Model for Classifier, to
+accurately predict its complexity o in response to
+the given query q. Yet, there is no annotated dataset
+available for query-complexity pairs. Hence, we
+propose to automatically construct the training
+dataset with two particular strategies.
+To be specific, we first aim at labeling the query
+2We consider three levels of query complexity, and leave
+the exploration of more fine-grained complexities as future
+work.
+complexity based on the results from three different
+retrieval-augmented LLM strategies, in order to
+determine the label by its needs. For example, if
+the simplest non-retrieval-based approach correctly
+generates the answer, the label for its corresponding
+query is assigned ‘A’. Also, to break the tie between
+different models in providing the label to the query,
+we provide a higher priority to a simpler model.
+In other words, if both single-step and multi-step
+approaches produce the same correct answer while
+the non-retrieval-based approach fails, we assign
+label ‘B’ to its corresponding query.
+However, this labeling strategy has a limita-
+tion in that not all the queries are assigned labels,
+since the three retrieval-augmented approaches
+may all fail to generate the correct answer. On
+the other hand, the benchmark datasets may al-
+ready have meaningful inductive biases about the
+most appropriate retrieval-augmented LLM strate-
+gies for their queries, considering the ways they
+are created (e.g., QA datasets that require sequen-
+tial reasoning usually necessitate a multi-step ap-
+proach; while queries of those with labeled sin-
+gle documents can be ideally answerable with the
+single-step approach). Therefore, for those queries
+that remain unlabeled after the first labeling step,
+we assign ‘B’ to queries in single-hop datasets
+and ‘C’ to queries in multi-hop datasets. Finally,
+we train Classifier with these automatically-
+collected query-complexity pairs3, by using a cross-
+entropy loss. Then, at inference, we can deter-
+mine the complexity of the query, which is one of
+{‘A’, ‘B’, ‘C’}, by forwarding it to Classifier:
+o = Classifier(q).
+4 Experimental Setups
+In this section, we explain datasets, models, met-
+rics, and implementation details. We provide addi-
+tional details in Appendix A.
+4.1 Datasets
+In order to simulate a realistic scenario, where dif-
+ferent queries have varying complexities, we use
+both the single-hop and multi-hop QA datasets si-
+multaneously, in the unified experimental setting.
+Single-hop QA For simpler queries, we use three
+benchmark single-hop QA datasets, which consist
+3As we automatically assign classifier labels, there might
+be errors in labeling and might be more advanced strategies to
+automatically assign labels, which we leave as future work.
+7040

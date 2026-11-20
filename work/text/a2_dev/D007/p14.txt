@@ -1,0 +1,105 @@
+0 2 4 6 8 10
+Time per Query
+20
+30
+40
+50Performance (F1)  No Retrieval
+  Single-step Approach
+  Adaptive Retrieval
+  Multi-step Approach  Adaptive-RAG (Ours)
+Performance vs Time with FLAN-T5-XL
+Figure 4: QA performance (F1) and efficiency (Time/Query)
+for different retrieval-augmented generation approaches. We
+use the FLAN-T5-XL (3B) as the base LLM.
+A Additional Experimental Setups
+A.1 Datasets
+We use publicly open datasets for both single-
+hop and multi-hop QA datasets, referring to
+as Karpukhin et al. (2020) and Trivedi et al. (2023),
+respectively. We describe the characteristics of
+each dataset:
+1) SQuAD v1.1 (Rajpurkar et al., 2016) is created
+through a process where annotators write questions
+based on the documents they read.
+2) Natural Questions (Kwiatkowski et al., 2019) is
+constructed by real user queries on Google Search.
+3) TriviaQA (Joshi et al., 2017) comprises trivia
+questions sourced from various quiz websites.
+4) MuSiQue (Trivedi et al., 2022a) is collected by
+compositing multiple single-hop queries, to form
+queries spanning 2-4 hops.
+5) HotpotQA (Yang et al., 2018) is constructed by
+having annotators create questions that link multi-
+ple Wikipedia articles.
+6) 2WikiMultiHopQA (Ho et al., 2020) is derived
+from Wikipedia and its associated knowledge graph
+path, needing 2-hops.
+A.2 Models
+We describe the details of models as follows:
+1) No Retrieval. This approach uses only the LLM
+itself, to generate the answer to the given query.
+2) Single-step Approach. This approach first re-
+trieves the relevant knowledge with the given query
+from the external knowledge sources and then aug-
+ments the LLM with this retrieved knowledge to
+generate the answer, which iterates only once.
+3) Adaptive Retrieval. This baseline (Mallen et al.,
+2023) adaptively augments the LLM with the re-
+trieval module, only when the entities appearing
+in queries are less popular. To extract entities, we
+use the available entity-linking method (Li et al.,
+2020), namely BLINK, for questions.
+4) Self-RAG. This baseline (Asai et al., 2024)
+0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0
+Time per Query
+30
+40
+50Performance (F1)
+  No Retrieval
+  Single-step Approach
+  Adaptive Retrieval
+  Multi-step Approach  Adaptive-RAG (Ours)
+Performance vs Time with FLAN-T5-XXL
+Figure 5: QA performance (F1) and efficiency (Time/Query)
+for different retrieval-augmented generation approaches. We
+use the FLAN-T5-XXL (11B) as the base LLM.
+trains the LLM to adaptively perform retrieval and
+generation, where the retrieval is conducted once it
+predicts the special retrieval token above a certain
+threshold, and the answer generation follows.
+5) Adaptive-RAG. This is our model that adap-
+tively selects the retrieval-augmented generation
+strategy, smoothly oscillating between the non-
+retrieval, single-step approach, and multi-step ap-
+proaches4 without architectural changes, based on
+the query complexity assessed by the classifier.
+6) Multi-step Approach. This approach (Trivedi
+et al., 2023) is the multi-step retrieval-augmented
+LLM, which iteratively accesses both the retriever
+and LLM with interleaved Chain-of-Thought rea-
+soning (Wei et al., 2022b) repeatedly until it derives
+the solution or reaches the maximum step number.
+7) Adaptive-RAG w/ Oracle This is an ideal sce-
+nario of our Adaptive-RAG equipped with an or-
+acle classifier that perfectly categorizes the query
+complexity.
+A.3 Implementation Details
+For computing resources, we use A100 GPUs
+with 80GB memory. In addition, due to the sig-
+nificant costs associated with evaluating retrieval-
+augmented generation models, we perform experi-
+ments with a single run. Finally, we implemented
+models using PyTorch (Paszke et al., 2019) and
+Transformers library (Wolf et al., 2020).
+B Additional Experimental Results
+Performance vs Time We further provide a com-
+parison of different retrieval-augmented genera-
+tion approaches with FLAN-T5-XL and FLAN-T5-
+XXL models in Figure 4 and Figure 5, respectively,
+in the context of performance and efficiency trade-
+offs. Similar to the observation made from the GPT-
+3.5 model in Figure 1, our proposed Adaptive-RAG
+is significantly more effective as well as efficient.
+4For the multi-step approach, we use the state-of-the-art
+question answering strategy from IRCoT (Trivedi et al., 2023).
+7049

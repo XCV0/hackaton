@@ -1,0 +1,113 @@
+Edward J Hu, Phillip Wallis, Zeyuan Allen-Zhu,
+Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen,
+and 1 others. 2022. Lora: Low-rank adaptation of
+large language models. In International Conference
+on Learning Representations.
+Pranab Islam, Anand Kannappan, Douwe Kiela, Re-
+becca Qian, Nino Scherrer, and Bertie Vidgen. 2023.
+Financebench: A new benchmark for financial ques-
+tion answering. arXiv preprint arXiv:2311.11944.
+William B Johnson, Joram Lindenstrauss, and 1 others.
+1984. Extensions of lipschitz mappings into a hilbert
+space. Contemporary mathematics, 26(189-206):1.
+Jaehun Jung, Seungju Han, Ximing Lu, Skyler Halli-
+nan, David Acuna, Shrimai Prabhumoye, Mostofa
+Patwary, Mohammad Shoeybi, Bryan Catanzaro, and
+Yejin Choi. 2025. Prismatic synthesis: Gradient-
+based data diversification boosts generalization in llm
+reasoning. In The Thirty-ninth Annual Conference
+on Neural Information Processing Systems.
+Feiyang Kang, Newsha Ardalani, Michael Kuchnik,
+Youssef Emad, Mostafa Elhoushi, Shubhabrata Sen-
+gupta, Shang-Wen Li, Ramya Raghavendra, Ruoxi
+Jia, and Carole-Jean Wu. 2025. Demystifying syn-
+thetic data in llm pre-training: A systematic study of
+scaling laws, benefits, and pitfalls. In Proceedings
+of the 2025 Conference on Empirical Methods in
+Natural Language Processing, pages 10750–10769.
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B
+Brown, Benjamin Chess, Rewon Child, Scott Gray,
+Alec Radford, Jeffrey Wu, and Dario Amodei. 2020.
+Scaling laws for neural language models. arXiv
+preprint arXiv:2001.08361.
+Konwoo Kim, Suhas Kotha, Percy Liang, and Tatsunori
+Hashimoto. 2025. Pre-training under infinite com-
+pute. arXiv preprint arXiv:2509.14786.
+Suhas Kotha and Percy Liang. 2026. Replaying pre-
+training data improves fine-tuning. arXiv preprint
+arXiv:2603.04964.
+Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying
+Sheng, Lianmin Zheng, Cody Hao Yu, Joseph Gon-
+zalez, Hao Zhang, and Ion Stoica. 2023. Efficient
+memory management for large language model serv-
+ing with pagedattention. In Proceedings of the 29th
+symposium on operating systems principles, pages
+611–626.
+Andrew Kyle Lampinen, Martin Engelcke, Yuxuan Li,
+Arslan Chaudhry, and James L McClelland. 2025.
+Latent learning: episodic memory complements para-
+metric learning by enabling flexible reuse of experi-
+ences. arXiv preprint arXiv:2509.16189.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, and 1 others. 2020. Retrieval-augmented gen-
+eration for knowledge-intensive nlp tasks. Advances
+in neural information processing systems, 33:9459–
+9474.
+Jessy Lin, Vincent-Pierre Berges, Xilun Chen, Wen-Tau
+Yih, Gargi Ghosh, and Barlas O˘guz. 2025a. Learning
+facts at scale with active reading. arXiv preprint
+arXiv:2508.09494.
+Jessy Lin, Luke Zettlemoyer, Gargi Ghosh, Wen-
+Tau Yih, Aram Markosyan, Vincent-Pierre Berges,
+and Barlas O˘guz. 2025b. Continual learning
+via sparse memory finetuning. arXiv preprint
+arXiv:2510.15103.
+Emmy Liu, Graham Neubig, and Chenyan Xiong. 2025.
+Midtraining bridges pretraining and posttraining dis-
+tributions. arXiv preprint arXiv:2510.14865.
+Ilya Loshchilov and Frank Hutter. 2017. Decou-
+pled weight decay regularization. arXiv preprint
+arXiv:1711.05101.
+Kevin Lu and Thinking Machines
+Lab. 2025. On-policy distillation.
+Thinking Machines Lab: Connectionism.
+Https://thinkingmachines.ai/blog/on-policy-
+distillation.
+Melody Ma and John Hewitt. 2026. Improving paramet-
+ric knowledge access in reasoning language models.
+arXiv preprint arXiv:2602.22193.
+Pratyush Maini, Vineeth Dorna, Parth Doshi, Aldo
+Carranza, Fan Pan, Jack Urbanek, Paul Burstein,
+Alex Fang, Alvin Deng, Amro Abbas, and 1 others.
+2025. Beyondweb: Lessons from scaling synthetic
+data for trillion-scale pretraining. arXiv preprint
+arXiv:2508.10975.
+Pratyush Maini, Skyler Seto, Richard Bai, David
+Grangier, Yizhe Zhang, and Navdeep Jaitly. 2024.
+Rephrasing the web: A recipe for compute and
+data-efficient language modeling. In Proceedings
+of the 62nd Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long
+Papers), pages 14044–14072.
+John X Morris, Chawin Sitawarin, Chuan Guo, Nar-
+ine Kokhlikyan, G Edward Suh, Alexander M Rush,
+Kamalika Chaudhuri, and Saeed Mahloujifar. 2025.
+How much do language models memorize? arXiv
+preprint arXiv:2505.24832.
+Niklas Muennighoff, Alexander Rush, Boaz Barak,
+Teven Le Scao, Nouamane Tazi, Aleksandra Pik-
+tus, Sampo Pyysalo, Thomas Wolf, and Colin A
+Raffel. 2023. Scaling data-constrained language
+models. Advances in Neural Information Processing
+Systems, 36:50358–50376.
+Thao Nguyen, Yang Li, Olga Golovneva, Luke Zettle-
+moyer, Sewoong Oh, Ludwig Schmidt, and Xian Li.
+2025. Recycling the web: A method to enhance pre-
+training data quality and quantity for language mod-
+els. In Second Conference on Language Modeling.
+Joel Niklaus, Guilherme Penedo, Hynek Kydlicek, Elie
+Bakouch, Lewis Tunstall, Ed Beeching, Thibaud
+Frere, Colin Raffel, Leandro von Werra, and Thomas
+9202

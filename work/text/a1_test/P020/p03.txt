@@ -1,0 +1,57 @@
+efﬁciencies over 19% by leveraging CdTe as an electron reﬂector. Incorporation of a higher-bandgap CdTe layer
+behind a lower-bandgap CdTeSe photon-absorbing layer enhances Voc while maintaining Jsc. A bandgap
+gradient near the front junction by incorporating oxygenated CdS and CdSe layers, forming a penternary Cd(O,
+S,Se,Te) region was studied by Li et al [11]. The consequent reduction of nonradiative recombination at the front
+interface increased η to 20.03%. Cai et al [12] fabricated a graded CdTeSe solar cell with maximum efﬁciency of
+16.4% using pre-oxidized CdTeSe powder sources to suppress Te sublimation in oxygen-free environments,
+thereby enabling higher Se incorporation via metastable hexagonal CdTeSe phases and thus demonstrating a
+promising pathway for controlled Se alloying in CdTe photovoltaics.
+These studies indicate the critical role of bandgap grading in enhancing efﬁciency, but bandgap grading,
+especially of the nonlinear variety, of the photon-absorbing layer has not been studied in any signiﬁcant detail.
+Hence, a comprehensive study comprising different bandgap-grading proﬁles—including linear, nonlinear, and
+piecewise homogeneous—is required to fully understand the impact of bandgap grading on the device
+performance. In addition to research on increasing minority-carrier lifetimes and reducing defect density,
+therefore, innovative designs based on thinning the photon-absorbing layer and optimal bandgap grading of
+that layer are also required to realize efﬁcient CdTeSe solar cells and further reduce the LCoE.
+We have developed a coupled optoelectronic model comprising a photonic submodel and an electrical
+submodel to predict the efﬁciency of graded-bandgap TFSCs [13, 14]. Using this model, we have predicted that
+an optimal nonlinearly graded-bandgap photon-absorbing layer can signiﬁcantly enhance the efﬁciencies of
+CIGS [13, 15, 16] and CZTSSe [17] TFSCs. A MATLABTM implementation of the model is available from
+GitHub via https://github.com/nibj/SolarCellSimulator.git.
+In view of the commercial signiﬁcance of CdTe TFSCs and the promise of bandgap grading, we report here
+the results of our optoelectronic simulations of TFSCs with a graded-bandgap CdTeSe photon-absorbing layer
+in order to determine the optimal bandgap-grading proﬁle and thickness of that layer. The thickness was varied
+from 200 nm to 3000 nm. The bandgap was taken to vary either linearly, nonlinearly, or in a piecewise
+homogeneous way in the thickness direction. Since CdTeSe transitions from the zincblende phase to the
+wurtzite phase when the compositional parameter ξ exceeds 0.4 [18] and the wurtzite phase is currently held to
+be unsuitable for photovoltaic applications due to low photoactivity [19], we initially optimized for ξ  0.4 and
+then for ξ  1. Interfacial and grain-boundary recombination were ignored in favor of bulk recombination in
+our study.
+This paper is organized as follows. Section 2 describes the optoelectronic simulation of TFSCs in brief.
+Numerical results are presented and discussed in section 3. Section 3.1 validates the model-predicted efﬁciency
+of a CdTeSe TFSC with a homogeneous, 3000-nm-thick photon-absorbing layer against available experimental
+data. Section 3.2 presents the results for the zincblende phase of CdTeSe and is divided into four subsections.
+Section 3.2.1 provides optimal results for TFSCs with a homogeneous CdTeSe photon-absorbing layer and
+section 3.2.2 for TFSCs with a linearly graded CdTeSe photon-absorbing layer. Optimal results for TFSCs with a
+nonlinearly graded-bandgap CdTeSe photon-absorbing layer are discussed in section 3.2.3. Section 3.2.4
+provides the optimal results for TFSCs with a piecewise-homogeneous graded CdTeSe photon-absorbing layer.
+In order to spur technological developments to enlarge photovoltaic applications to span ξ ä [0, 1], section 3.3
+provides model predictions for that range of the compositional parameter ξ. The paper ends with some remarks
+in section 4.
+2. TFSC simulations
+A schematic of a MgF2/FTO/ITO/CdS/CdTe(CdTeSe)/ZnTe/Au TFSC [20] is depicted in ﬁgure 1. The
+110-nm-thick MgF2 layer acts as an antireﬂection coating. Electrons are collected in the 80-nm-thick ﬂuorine-
+doped tin-oxide (FTO) layer, FTO being a transparent conducting oxide. The 70-nm-thick layer of indium-
+doped tin oxide (ITO) and the 50-nm-thick layer of cadmium sulﬁde (CdS) function as n-type semiconductors.
+The photon-absorbing layer is made of the p-type semiconductor CdTe (or CdTeSe), its thickness
+Ls ä [200, 3000] nm. The 300-nm-thick ZnTe and the 50-nm-thick Au layers serve as both the back-contact and
+an optical reﬂector. The illuminated surface of the solar cell is the plane z = 0, and the total thickness of the solar
+cell is denoted by Lt. The band diagram of the FTO/ITO/CdS/CdTe region of a CdTe TFSC is presented in
+ﬁgure S1 of Supplementary Information. The band diagram was extracted under steady-state conditions.
+2.1. Coupled optoelectronic model and optimization
+In the coupled optoelectronic model, the photonic submodel implements the standard transfer-matrix method
+[21] to determine the photon-absorption rate as a function of z everywhere inside the TFSC, assuming normal
+illumination by unpolarized polychromatic light endowed with the AM1.5G solar spectrum [22]. The
+formulation of the coupled optoelectronic model can be found elsewhere [23], together with numerical
+2
+J. Phys. Commun. 9 (2025) 055008 F Ahmad et al

@@ -1,0 +1,106 @@
+B.2 Watermark Extraction Algorithm
+Algorithm 2 is the pseudo-code of watermark ex-
+traction from suspicious RAG responses. Inputs are
+a query q, the set of valid responses A returned by
+the system, the watermark length |W |, the segment
+length l, a Bernoulli(0.5) pseudorandom sequence
+B, the secret key sk, the watermark prefix HT R,
+and the synonym clusters C (including the resid-
+ual cluster for non-synonyms). Line 1 initializes
+a voting matrix V ot ∈ N|W |×2, where each row
+corresponds to a watermark-bit position and the
+two columns count votes for extracted bit values
+0 and 1. Lines 2–8 iterate over every valid an-
+swer ans and each token t within it. Specifically,
+Line 4 computes the seed by hashing HT R(q),
+the previous token, and sk, ensuring consistency
+with the embedding process. Using this seed, Line
+5 reconstructs the corresponding partitioned vo-
+cabularies (V1, V0) from the synonym clusters C.
+Line 6 further reconstructs the selected watermark
+segment Wm and the intra-segment bit index p de-
+termined by the same seed as in embedding. In
+Line 7, the global watermark-bit position is com-
+puted as i = l · m + p, and the carried bit bt is
+identified by whether t falls into V1. Line 8 then
+increments the vote count V ot[i][bt] by 1. After
+aggregating votes from all valid responses, Lines
+9–11 perform bit-wise majority voting to obtain
+the extracted watermark W ′, where each bit is set
+to the value with the larger vote count. Line 12 de-
+shuffles the extracted watermark by XORing with
+B, i.e., returning W ′ ⊕ B, to recover the original
+watermark string.
+C Derivation and Proofs
+C.1 Proportional Modulation Derivation
+At each generation step, the vocabulary V is parti-
+tioned into two disjoint subsets, V1 and V0, deter-
+mined by seed. We desire that the watermark bit
+w ∈ {0, 1} dictates which subset should be favored.
+Concretely, if w = 1, the selection probability of
+tokens in V1 should be increased while that of V0
+should be decreased; if w = 0, the opposite adjust-
+ment is required. Hence, every watermarked token
+carries exactly one watermark bit.
+Let p(t), t ∈ V denote the original model dis-
+tribution over the full vocabulary V. We seek a
+modulated distribution pw(t), t ∈ V that remains a
+valid probability distribution while encoding w. A
+general way to ensure validity is to transfer a cer-
+tain probability mass ∆P from the non-watermark
+Algorithm 2 Watermark Extraction
+Input: query q, valid responses A, watermark
+length |W |, segment length l, pseudorandom
+sequence B, secret key sk, watermark prefix
+HT R, synonym clusters C (including the resid-
+ual cluster for non-synonyms).
+Output: extracted watermark W ′
+1: Initialize voting matrix V ot ∈ N|W |×2 as 0s.
+2: for each valid answer ans ∈ A do
+3: for each token t in ans do
+4: seed ← H(HT R(q), prev_token, sk).
+5: Reconstruct (V1, V0) from C using seed.
+6: Reconstruct Wm and bit index p by seed.
+7: i ← l · m + p, bt ← 1V1 (t).
+8: V ot[i][bt] ← V ot[i][bt] + 1.
+9: end for
+10: end for
+11: for i = 0 to |W | − 1 do
+12: W ′[i] ← arg maxb∈{0,1} V ot[i][b].
+13: end for
+14: return W ′ ⊕ B.
+subset to the watermark subset, preserving total
+probability.
+We define a modulation function q(t) that speci-
+fies how each token’s probability is adjusted. The
+watermarked distribution is written as
+pw(t) = p(t) + (2w − 1)q(t), (8)
+where (2w − 1) ∈ {+1, −1} switches the mod-
+ulation direction depending on the bit value. To
+preserve normalization, q(t) must satisfy probabil-
+ity conservation:
+∑
+t∈V1
+q(t) = −
+∑
+t∈V0
+q(t), (9)
+and to avoid negative probabilities we require point-
+wise boundedness
+|q(t)| ≤ p(t), ∀t ∈ V. (10)
+Define the transferred probability mass as
+∆P ≜
+∑
+t∈V1
+q(t), (11)
+which is also − ∑ t∈V0 q(t) by conservation.
+To describe how ∆P is distributed within each
+subset, we introduce two “modulation shapes”
+g1(t) on V1 and g0(t) on V0, satisfying
+∑
+t∈V1
+g1(t) = 1,
+∑
+t∈V0
+g0(t) = 1. (12)
+21208

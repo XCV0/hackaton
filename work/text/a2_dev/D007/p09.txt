@@ -1,0 +1,118 @@
+Table 5: Case study with GPT-3.5 (Turbo), where we represent the factual error in red and the accurate information in blue.
+Dataset Question Adaptive Retrieval Adaptive-RAG (Ours)
+NQ
+(Single-hop)
+Which famous corpo-
+rate logo changed to a
+flat colour/color sans
+serif font in its first ma-
+jor change since 1999?
+Query Type: B (Single-step Approach)
+Reasoning: The famous corporate logo that
+changed to a flat color sans-serif font in its first
+major change since 1999 is Microsoft. Microsoft
+changed its logo in 2012, replacing the italicized,
+multi-colored font with a simple, flat, grey font. So
+the answer is: Microsoft.
+Query Type: A (Non Retrieval)
+Reasoning: The famous corporate logo that
+changed to a flat color sans serif font in its first ma-
+jor change since 1999 is Google. Google changed
+its logo in 2015. So the answer is: Google.
+MuSiQue
+(Multi-hop)
+Who is the child of the
+Italian navigator who
+explored the eastern
+coast of the continent
+César Gaytan was born
+in for the English?
+Query Type: A (Non Retrieval)
+Reasoning: César Gaytan was born in the conti-
+nent of North America. The Italian navigator who
+explored the eastern coast of North America for the
+English was Giovanni Caboto, also known as John
+Cabot. So the answer is: Giovanni Caboto/John
+Cabot.
+Query Type: C (Multi-step Approach)
+Reasoning: Césarr Gaytan was born in Guadalajara,
+Jalisco, Mexico. The Italian navigator who explored
+the eastern coast of the continent for the English is
+John Cabot. John Cabot’s son is Sebastian Cabot.
+So the answer is: Sebastian Cabot.
+Table 6: Results with varying model sizes for classifiers.
+QA Classifier (Accuracy)
+Sizes F1 Step All No One Multi
+Small (60M) 45.83 964 53.48 26.65 70.62 53.18
+Base (223M) 45.97 983 53.41 26.42 69.46 56.82
+Large (770M) 46.94 1084 54.52 30.52 66.28 65.45
+Adaptive Retrieval fetches additional documents,
+leading to longer processing times and occasion-
+ally producing incorrect responses due to the inclu-
+sion of partially irrelevant information about ‘Mi-
+crosoft’. Meanwhile, faced with a complex ques-
+tion, Adaptive-RAG seeks out relevant information,
+including details like ‘a son of John Cabot’, which
+may not have been stored in LLMs, while Adaptive
+Retrieval fails to request such information from
+external sources, resulting in inaccurate answers.
+6 Conclusion
+In this work, we proposed the Adaptive Retrieval-
+Augmented Generation framework, referred to
+as Adaptive-RAG, to handle queries of various
+complexities. Specifically, Adaptive-RAG is de-
+signed to dynamically adjust its query handling
+strategies in the unified retrieval-augmented LLM
+based on the complexity of queries that they en-
+counter, which spans across a spectrum of the non-
+retrieval-based approach for the most straightfor-
+ward queries, to the single-step approach for the
+queries of moderate complexity, and finally to the
+multi-step approach for the complex queries. The
+core step of our Adaptive-RAG lies in determin-
+ing the complexity of the given query, which is
+instrumental in selecting the most suitable strat-
+egy for its answer. To operationalize this process,
+we trained a smaller Language Model with query-
+complexity pairs, which are automatically anno-
+tated from the predicted outcomes and the inductive
+biases in datasets. We validated our Adaptive-RAG
+on a collection of open-domain QA datasets, cover-
+ing the multiple query complexities including both
+the single- and multi-hop questions. The results
+demonstrate that our Adaptive-RAG enhances the
+overall accuracy and efficiency of QA systems, al-
+locating more resources to handle complex queries
+while efficiently handling simpler queries, com-
+pared to the existing one-size-fits-all approaches
+that tend to be either minimalist or maximalist over
+varying query complexities.
+Limitations
+While our Adaptive-RAG shows clear advantages
+in effectiveness and efficiency by determining the
+query complexity and then leveraging the most
+suitable approach for tackling it, it is important
+to recognize that there still exist potential avenues
+for improving the classifier from the perspectives
+of its training datasets and architecture. Specifi-
+cally, as there are no available datasets for training
+the query-complexity classifier, we automatically
+create new data based on the model prediction out-
+comes and the inductive dataset biases. However,
+our labeling process is one specific instantiation
+of labeling the query complexity, and it may have
+the potential to label queries incorrectly despite its
+effectiveness. Therefore, future work may create
+new datasets that are annotated with a diverse range
+of query complexities, in addition to the labels of
+question-answer pairs. Also, as the performance
+gap between the ideal classifier in Table 1 and the
+current classifier in Figure 3 indicates, there is still
+room to improve the effectiveness of the classifier.
+In other words, our classifier design based on the
+smaller LM is the initial, simplest instantiation for
+classifying the query complexity, and based upon
+it, future work may improve the classifier archi-
+tecture and its performance, which will positively
+contribute to the overall QA performance.
+7044

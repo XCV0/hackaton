@@ -1,0 +1,132 @@
+Findings of the Association for Computational Linguistics: ACL 2026, pages 11879–11892
+July 2-7, 2026 ©2026 Association for Computational Linguistics
+CoDA: Restoring Contextual Dominance via Copy-Encouraged Attention
+Intervention for Mitigating RAG Hallucinations
+Jinwei Shi∗, Qizhuo Xie∗, Qianzi Hou, Zhipeng Wang, Wanting Su,
+Jianhua Zhao, Tao Zheng, Tieke He*
+State Key Laboratory for Novel Software Technology, Nanjing University, China
+hetieke@gmail.com
+Abstract
+Retrieval-augmented generation reduces hallu-
+cination by grounding model outputs in exter-
+nal evidence, yet hallucinations can still occur
+even when the retrieved context is accurate and
+sufficient. From the perspective of informa-
+tion routing in the residual stream, this reflects
+an imbalance where internal parametric knowl-
+edge overwhelms external context during gen-
+eration. We present an attention-centric analy-
+sis of RAG hallucination under valid evidence,
+showing that hallucinated and factual tokens
+diverge in mid-to-late Transformer layers as
+context-selective attention routing weakens, al-
+lowing parametric influence to dominate the
+residual stream. Motivated by prior studies
+showing that some attention heads—often re-
+ferred to as copying heads—exhibit stronger
+information transport capacity, we aim to ex-
+tend similar evidence-carrying behavior to a
+broader set of attention heads. To this end, we
+introduce CoDA, a lightweight inference-time
+attention intervention that amplifies evidence-
+aligned value states, enabling more attention
+heads to transport reliable external evidence
+in a copy-encouraged manner. Experiments
+demonstrate that CoDA improves contextual
+faithfulness, reduces hallucination, and remains
+robust under long and noisy contexts with mod-
+est and stable inference overhead.
+1 Introduction
+Large language models perform well on
+knowledge-intensive tasks but remain vulnerable
+to hallucination, producing fluent yet factually
+incorrect content (Xu et al., 2025a; Chuang et al.,
+2024; Niu et al., 2024a). Retrieval-augmented
+generation mitigates this issue by grounding
+outputs in external evidence (Ge et al., 2025;
+Chen et al., 2025). However, even with accurate
+retrieval, RAG systems can still contradict the
+*Corresponding author: Tieke He (hetieke@gmail.com).
+*Jinwei Shi, Qizhuo Xie contributed equally to this work.
+provided context, a phenomenon known as RAG
+hallucination (Sun et al., 2025; Chen et al.,
+2024; Matys et al., 2025; Yeh et al., 2025; Tan
+et al., 2025). This indicates that hallucination
+arises not only from retrieval errors, but also
+from how Transformer architectures integrate
+parametric knowledge with external context during
+generation (Long et al., 2025; Goyal et al., 2025).
+(a) Store parametric knowledge in FFN. (b)The copying head  carries external context.
+(c) RAG hallucination occurs when internal parametric knowledge suppresses external context.
+FFN
+Context: Usain Bolt is … he 
+speaks fluent English, his 
+native language. …
+Parameter Knowledge
+External Context
+Context: Usain Bolt is 
+a professional 
+runner … he speaks 
+fluent English, his 
+native language. …
+Query: What is the 
+native language of Usain 
+Bolt ?
+Residual 
+Stream
+Dutch
+Chinese
+...
+...
+...
+1x
+2x
+dx
+1h
+2h
+3h
+nh
+1f
+2f
+cf
+ Only Context-based Logits
+English
+Dutch
+Japanese 
+Chinese
+Query: What is the native 
+language of Usain Bolt ?
+Parameter-Knowledge Logits
+Dutch
+English
+Chinese
+Japanese
+Concat
+Linear
+Linear
+ Linear
+ Linear
+Scaled Dot-Product
+Attention h
+Figure 1: Knowledge contribution to the residual stream
+via copying heads and FFNs in a one-layer Transformer.
+A substantial body of work reduces hallucination
+by improving retrieval quality or verification, such
+as re-ranking, adaptive context selection, and exter-
+nal checking pipelines (Asai et al., 2023; Bergeron
+et al., 2025; Datta et al., 2022; Magesh et al., 2024;
+Friel and Sanyal, 2023). While effective when ev-
+idence is missing or noisy, these approaches do
+not directly address a more challenging case fre-
+quently observed in practice: the retrieved con-
+text already contains valid evidence, yet the model
+under-utilizes it and falls back on parametric associ-
+ations. For example, SELF-RAG (Asai et al., 2023)
+and HalluGuard (Bergeron et al., 2025) regulate re-
+trieval timing or consistency, but leave unresolved
+how internal and external knowledge compete once
+context enters the network.
+Recent mechanistic analyses provide insight
+into this issue by examining how different com-
+ponents contribute to the residual stream. Re-
+11879

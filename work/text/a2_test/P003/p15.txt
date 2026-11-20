@@ -1,0 +1,103 @@
+Table S3: Stage-wise inference runtime. All methods use Llama-3.1-8B in BF16 on one NVIDIA RTX 4090
+(24GB) and the same temperature set. GPU-seconds are measured per question and exclude model loading.
+Method Retriever (GPU-s) Answer (GPU-s) Total (GPU-s/question)
+Fixed-1 RAG 2.59 1.19 3.78
+Fixed-5 RAG 2.59 2.89 5.48
+URGen 2.59 1.74 4.33
+Table S4: Serving-level comparison between conventional RAG, RQ-RAG, and URGen. URGen uses more
+batched samples than conventional RAG, but does not add a long sequential dependency chain.
+Method Main dependency Parallelization Adaptive signal Practical implication
+Conventional RAG Retrieve once, then an-
+swer once.
+Retrieval and answer
+stages are sequential, but
+each stage is simple.
+Fixed retrieval depth
+or retriever score.
+Efﬁcient, but sensitive
+to the chosen retrieval
+depth.
+RQ-RAG Generate/reﬁne mul-
+tiple retrieval queries,
+retrieve, then answer.
+Query-reﬁnement steps
+may introduce sequential
+dependencies.
+Query rewriting and
+retrieval expansion.
+Flexible, but can be
+slower and can drift
+under noisy query re-
+ﬁnement.
+URGen Rank keypoints under
+multiple temperatures,
+select depth, then
+answer under multiple
+temperatures.
+Ranking samples and
+answer samples are
+independent and can be
+batched.
+Entropy of keypoint
+ranking and answer
+distribution.
+Training-free adaptive
+retrieval with a short
+critical path under suf-
+ﬁcient resources.
+racy, OC@0.8, or ECE.
+C Additional Reliability and Sensitivity
+Analyses
+Paired bootstrap comparisons. Table S5 gives
+the complete 10,000-sample paired question-level
+bootstrap results corresponding to the ﬁve-seed
+comparison in Table 3. The accuracy interval
+includes zero for Fixed-1 but excludes zero for
+Fixed-2 and Fixed-5. OC@0.8 differences exclude
+zero for every ﬁxed depth, whereas the ECE inter-
+val excludes zero only for Fixed-5.
+Temperature-count sensitivity. Table S6
+jointly varies the numbers of retrieval and answer
+temperatures. Five temperatures give the highest
+mean accuracy and lowest OC@0.8; seven tem-
+peratures give the lowest ECE but require two
+additional samples at each stage. This comparison
+motivates the ﬁve-temperature setting without
+claiming that one setting dominates every metric.
+Depth mapping. For the linear alternative, we
+set h = ucontext/ log K and Dlinear = clip[1,5](⌊1 +
+4h⌋). Table S7 shows that the exponential
+mapping has higher mean accuracy and lower
+OC@0.8, with similar ECE under the evaluated
+protocol.
+Pooled candidate gallery. Table S8 evaluates
+TED questions after adding the 22 GD keypoints
+to the 35-keypoint TED gallery. All three meth-
+ods decline, but URGen remains strongest in the
+57-keypoint pool: 4.55 percentage points above
+Fixed-1 and 8.12 above Fixed-5. This is a con-
+trolled disease-speciﬁc distractor test, not a web-
+scale retrieval experiment.
+Normalized uncertainty ranges. Only the nor-
+malized entropies in Eq. 9 enter the fusion rule.
+Table S9 records their observed ranges and con-
+ﬁrms that the fusion inputs stay within [0, 1] on
+both datasets.
+Low-context-uncertainty errors. Table S10
+counts wrong answers among questions with the
+lowest context uncertainty. The nonzero counts ex-
+pose the anticipated failure mode: a concentrated
+ranking can still be wrong. Because the bench-
+mark has no gold keypoint labels, these counts
+characterize answer errors conditional on context
+uncertainty rather than directly validating the rank-
+ing itself.
+D Retrieval Baseline Comparisons
+We compare URGen with two groups of retrieval
+baselines. The ﬁrst group uses dense embed-
+ding retrieval, including CLIP and BioMedCLIP,
+to test whether replacing the retriever alone is
+sufﬁcient. The second group uses LLM-based
+ranking or query reﬁnement, including a single-
+pass Llama ranker and RQ-RAG, to test whether
+3932

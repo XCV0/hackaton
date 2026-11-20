@@ -1,0 +1,105 @@
+The concept of Ga back grading was first introduced by Contreras
+et al.5 Since this breakthrough, Ga back grading was widely investi-
+gated by both simulations and experiments. Dullweber et al.6 reported
+that the back grading suppresses back interface recombination and
+results in a significant enhancement in the open circuit voltage (VOC).
+Following studies also showed the instrumental influence of notch
+position, the ratio of back and front grading heights7,8 and explored
+different defect models and doping concentrations.9 Moreover,
+addressing the back interface recombination is crucial with thin or
+ultra-thin CIGS absorbers.10,11 Despite diverse research results, a
+wide range of back grading height (ΔGGI) values are reported for high
+efficiency solar cells,1,2,12,13 generally ranging from 0.15 to 0.60.
+There is no conclusive agreement about minimum required ΔGGI. In
+addition, the quality of state-of-the-art absorbers considerably
+improved following breakthroughs and developments of the past
+10 years, leading to longer diffusion length.14 It makes the control of
+back interface recombination become even more critical. A quantita-
+tive assessment of the impact of ΔGGI on the electrical losses is
+therefore required. However, experimental investigations are not
+straightforward, because tuning the ΔGGI value generally also affects
+the elemental distributions in the notch and front regions, introducing
+other dependencies in the electrical loss difficult to disentangle.
+In this work, we take advantage of a low-temperature CIGS depo-
+sition process (≈450/C14C) to modify the back grading. The less pro-
+nounced In-Ga inter-diffusion at low temperature allows an improved
+control and steeper slopes of the GGI grading.15 It also allows for
+almost unchanged grading in the notch and front region. We compare
+the experimental VOC deficit (VOC,def = Eg /q-VOC) and changes in
+VOC calculated from time-resolved photoluminescence (TRPL) tran-
+sients in absorbers with different back grading heights. We modify
+the back surfaces of CIGS absorbers to assess the influence of back
+surface recombination as a limiting factor for higher VOC. Further-
+more, numerical simulations of voltage loss for absorbers with differ-
+ent ΔGGI and diffusion lengths are also performed and further
+compared with experimental data. Our work provides direct guidelines
+to design graded absorbers with reducing voltage loss for high effi-
+ciency CIGS solar cells. The methodology developed in this study can
+help research groups and industries to improve the control on back
+grading height and further quantify and minimize the electrical loss
+arising from back interface recombination.
+2 | EXPERIMENTAL AND SIMULATIONS
+CIGS absorbers were grown by co-evaporation method with a multi-
+stage low-temperature deposition process (about 450/C14C) as described
+in Avancini et al.16 on Mo-coated (approx. 500 nm thick by sputtering)
+soda-lime glass substrates. A SiOx barrier layer below the Mo back
+contact was deposited by reactive sputtering to prevent uncontrolled
+diffusion of alkali elements from the substrates. The multi-stage co-
+evaporation process consists of: a first stage (≈350/C14C) in which Ga
+and In are evaporated; a second stage (≈450/C14C) in which Cu is evapo-
+rated while In and Ga evaporation rates are reduced by about one
+order of magnitude; a third stage (≈450/C14C) in which only Ga and In
+are deposited to reach an overall Cu-poor composition. Se overpressure
+is provided throughout all stages. During the third stage, In evaporation
+rate is kept constant while the Ga rate is slightly increased, leading to
+the desired front grading. At the end of the deposition, the In shutter is
+closed for 30 seconds after the Ga shutter. A series of samples with dif-
+ferent ΔGGI was produced by modifying In and Ga rates in the first
+stage as discussed in details in Section 3. The absorbers were sequen-
+tially treated with sodium fluoride (NaF) and rubidium fluoride (RbF)
+post-deposition treatments (PDTs) of 20 minutes each in Se ambient at
+about 350/C14C. The integrated GGI and [Cu]/([Ga] + [In]) (CGI) values of
+CIGS absorbers were determined by X-ray fluorescence (XRF) measure-
+ments, previously calibrated with a reference.
+The cells were completed with a 30 nm cadmium sulfide (CdS)
+buffer layer by chemical bath deposition, an RF-sputtered window
+layer consisting of a 80 nm intrinsic zinc oxide (ZnO) and a 200 nm Al-
+doped (Al2O3 2wt.%) ZnO, electron beam evaporated Ni/Al grids and
+a MgF2 anti-reflective coating. Cells of approximately 0.57 cm2 area
+were defined by mechanical scribing. A 30 nm Al2O3 passivation layer
+was deposited on the back side of selected CIGS absorbers by the
+atomic layer deposition (ALD) to modify the back interface recombi-
+nation after Mo delamination. The process was performed at a sub-
+strate temperature of 200/C14C with argon as carrier gas at a pressure of
+25 Pa in a Fiji G2 system (Veeco Instruments Inc.). The precursors
+were trimethylaluminium TMA and H2O. The growth rate was deter-
+mined by ellipsometry on Si (100) reference substrates and linear
+growth was observed with a rate of 0.99 Å cycle−1.
+Current–voltage (J–V) parameters were measured using a four-
+terminal Keithley 2400 source meter under standard test conditions
+(25/C14C, 1000 W/m2 AM1.5G illumination, ABA-class sun simulator).
+External quantum efficiency (EQE) was measured using a chopped illu-
+mination from a halogen light source, wavelength-selected with a
+double-grating monochromator. A halogen lamp bias with about 0.2
+sun intensity was applied during the measurements. A certified Si
+solar cell was used for calibration. Capacitance–voltage (C-V) profiles
+were measured with an Agilent E4980A LCR meter at a frequency of
+1 kHz and a temperature of 300 K. Carrier concentrations were
+extracted from the apparent doping curve at an applied voltage of
+zero assuming an n+p junction.
+Compositional depth profiles were measured by time-of-flight
+secondary ion mass spectrometry (SIMS). The primary beam was
+25 keV Bi+ with total current of 0.6 pA and a raster size of 100 × 100
+μm2. The sputtering beam was 250 nA, 2 keV O2+ with an on-sample
+area of 300 × 300 μm2. GGI depth profiles were determined by scal-
+ing the elemental traces with integral GGI values obtained from XRF.
+TRPL measurements were performed using a 639 nm diode laser with
+100 ps pulse duration as excitation source, and an InGaAs photo-
+multiplier in combination with a PicoQuant time correlated single pho-
+ton counting electronics for signal acquisition. Pulse repetition rates
+were 0.3, 0.2 and 0.1 MHz for the absorbers before delamination,
+after delamination and after Al2O3 deposition. The illumination spot
+size was around 130 μm diameter. The corresponding photon density
+was around 7 × 1011 cm−2 per pulse. Before TRPL measurements, the
+YANG ET AL. 631
+ 1099159x, 2021, 6, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pip.3413, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

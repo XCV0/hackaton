@@ -1,0 +1,37 @@
+## Examples:
+Example 1 (Named entity change):
+question: How hard was the stunt in Mission Impossible 7? passage: Mission Impossible 7 was a very dangerous movie. The most dangerous scene was
+the one where Tom Cruise jumped off a building and held onto a rope. The director was very careful with the stunt and made sure that Tom Cruise
+was safe."
+relevant-named-entities, location, time : Mission Impossible, 7, building open-ended-question: What was the most dangerous scene in Mission
+Impossible?
+distracting-named-entities: Mission Impossible, water
+distracting-passage: Mission Impossible was a very dangerous movie. The most dangerous scene was the one where Tom Cruise jumped into water and
+held his breath. The director was very careful with the stunt and made sure that Tom Cruise was safe."
+reason: open-ended-question is slight modification of the user question by omitting context that the movie was the 7th Mission Impossible movie.
+Distracting passage modified both the movie number and the stunt performed. While this would be a correct answer for any mission impossible movie.
+It’s not the correct answer for mission impossible 7, making this the right distractor passage, while being of similar characters and length as
+the original passage.
+Example 2 (date time change ):
+question: Who are the Washington Commanders playing today?
+user-time: 4pm, Thursday, January 9, 2025.
+passage: Title: Washington Commanders vs. San Francisco 49ers - FOX Sports Snippet: Game-time: January 9, 2025, 5pm PST, Venue: Washington D.C,
+odds: Washington Commanders to win 63relevant-named-entities,location, time : January 9, 2025 5 pm PST, Washington Commanders, San Francisco 49ers
+open-ended-question: Who are Washington Commanders playing?
+distracting-named-entities, location, time : January 10, 2025, Washington Commanders, New Orleans Saints
+distracting-passage: Title: Washington Commanders vs. New Orleans Saints - FOX Sports Snippet: Game-time: January 10, 2025, 5pm PST, Venue:
+Washington D.C, odds: Washington Commanders to win 52% probability, Game-a: 0-0 , Game-status: Not-started
+reason: open-ended-question made it ambiguous by removing information that the user is asking about today’s game (January 9th). The
+distracting-passage talks about the Washington Commanders vs New Orleans Saints game scheduled on the 10th instead, thus it’s a slight modification
+of the original passage, while answering open ended questions correctly and being a distraction, while being of similar characters and length as
+the original passage.
+## question : {question}
+## answer : {answer}
+## user-time: {time}
+## location: {location}
+## passage :{passage}
+## prior-distraction-passage: {prior-distraction-passage}
+## prior-distractor-rejecting-reason: {prior-distractor-rejecting-reason}
+### Assistant:
+Figure 16: Part 2: Prompt used for generating distractor content.
+798

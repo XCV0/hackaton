@@ -1,0 +1,99 @@
+Model Variant N Leak ↓ Stale ↓ Unsup. ↓
+Access-filter ablation on TEMPLATE
+Qwen-Max w/o Access 400 29.50 0.00 24.50
+DeepSeek-V3 w/o Access 400 36.00 0.00 22.25
+GLM-4-32B-
+0414 w/o Access 400 36.50 0.00 13.25
+All TrustRAG 1200 0.00 0.00 0.00
+Supersession-filter ablation on FRESH-STRESS
+Qwen-Max w/o Supersession Filtering 400 0.00 0.00 0.00
+DeepSeek-V3 w/o Supersession Filtering 400 0.00 2.00 0.00
+GLM-4-32B-
+0414
+w/o Supersession
+Filtering 400 0.00 1.50 0.00
+All TrustRAG 1200 0.00 0.00 0.00
+Conflict-reporting ablation on TEMPLATE
+Qwen-Max w/o Conflict 400 0.00 0.00 25.00
+DeepSeek-V3 w/o Conflict 400 0.00 0.00 25.00
+GLM-4-32B-
+0414 w/o Conflict 400 0.00 0.00 15.75
+All TrustRAG 1200 0.00 0.00 0.00
+Prompt-injection stress
+Qwen-Max Naive RAG 200 46.50 0.00 0.00
+DeepSeek-V3 Naive RAG 200 50.00 29.00 0.00
+GLM-4-32B-
+0414 Naive RAG 200 12.00 21.50 0.50
+MacroAvg Naive RAG 600 36.17 16.83 0.17
+MacroAvg Prompt RAG 600 0.17 0.00 0.00
+MacroAvg Meta. Filter 600 0.00 0.00 0.00
+MacroAvg TrustRAG 600 0.00 0.00 0.00
+Table B3: Per-model ablation and prompt-injection
+stress results. Abbreviations: w/o Access, w/o Super-
+session Filtering, and w/o Conflict denote removing
+access filtering, supersession filtering, and conflict re-
+porting, respectively. Rows labeled MacroAvg report
+the arithmetic mean over the three evaluated LLMs.
+Rows labeled All summarize the matched TrustRAG
+runs across the same model set. All values except N are
+failure rates (%).
+Item / Method Clean chain (N = 40) Inaccessible superseder (N = 40) Unresolved relations/conflicts (N = 160)
+TrustRAG state ANSWER REFUSAL CONFLICTREPORT
+Explicitly superseded evidence retained (%)
+Naive RAG 100.00 100.00 100.00
+Permission-Aware RAG 100.00 100.00 100.00
+Metadata-Aware RAG 0.00 0.00 0.00
+TrustRAG 0.00 0.00 0.00
+Table B4: Multi-version and conflict routing diagnostics.
+Unresolved relations/conflicts aggregates missing inter-
+mediate supersession links, missing latest supersession
+links, incorrect supersession pointers, and parallel ac-
+tive conflicts, with 40 instances per condition. Method
+rows report the percentage of routed contexts retaining
+explicitly superseded evidence. The TrustRAG state
+row reports the response state prescribed by the routing
+outcome.
+Dataset Condition N Leak risk Stale risk Over- filter Empty context
+Metadata noise endpoint at 30%
+TEMPLATE
+Access-label 1200 11.08 0.00 36.00 23.33
+Missing-link 1200 0.00 11.67 0.00 4.17
+Wrong-link 1200 0.00 10.25 3.58 3.83
+Mixed 1200 3.17 7.58 13.92 10.42
+FRESH-
+STRESS
+Access-label 1200 0.00 0.00 30.67 30.67
+Missing-link 1200 0.00 30.67 0.00 0.00
+Wrong-link 1200 0.00 28.92 13.67 0.00
+Mixed 1200 0.00 19.25 14.83 9.83
+Dataset k N N sup
+Stale
+boundary
+Empty
+context
+Top-k retrieval-recall boundary
+TEMPLATE
+5 400 150 0.00 0.00
+10 400 150 0.00 0.00
+20 400 150 3.33 0.00
+50 400 150 68.00 0.00
+FRESH-
+STRESS
+5 400 400 1.25 0.00
+10 400 400 2.25 0.00
+20 400 400 2.25 0.00
+50 400 400 2.25 0.00
+Table B5: Boundary stress diagnostics. The upper panel
+reports routing-level risks under 30% metadata noise.
+Access-label, missing-link, wrong-link, and mixed de-
+note access-label noise, missing supersession links, in-
+correct supersession links, and mixed metadata noise,
+respectively. The lower panel reports retrieval-recall
+boundary behavior after BM25 top-k retrieval. Stale-
+boundary risk is computed over the Nsup instances con-
+taining explicit supersession, whereas empty-context
+rate is computed over all N instances. Values ex-
+cept N and Nsup are percentages and measure routing-
+boundary conditions rather than final-answer failure
+rates.
+35019

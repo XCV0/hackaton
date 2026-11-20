@@ -1,0 +1,128 @@
+Query 𝑞
+𝑘!
+𝑘"
+…
+Gold Knowledge
+…
+𝑘!
+𝑘"
+𝑘#
+Distractor 
+Knowledge
+Knowledge Pool 𝐾
+𝑘!
+𝑘#
+…
+𝑘"
+…
+Simulated  Knowledge 
+Retrieval & Selection 
+Output 𝐾!⊆𝐾
+🎲𝑝!"#$%
+🎲𝑝&"’(
+🤖LLM 
+Generator
+Gold Answer
+ 
+✅
+❌ 
+Knowledge 
+Evaluation
+Knowledge
+Precision, 
+Recall,
+F1
+Example
+ 
+✅
+❌
+ Answer 
+EvaluationAnswer 
+𝑟
+Answer F1
+🧐
+📈
+Figure 1: Our simulation experiment pipeline.
+with various performances affect downstream RAG
+performance. By blending gold knowledge with
+distractor knowledge in varying ratios, we simu-
+late different selection outcomes and examine their
+impact on the overall performance of RAG. We
+find that the generator model’s capability, as well
+as the complexity of the task and dataset, signifi-
+cantly influence RAG system performance. In typi-
+cal scenarios, improving knowledge recall via the
+knowledge retriever is key to enhancing generation
+outcomes, with the knowledge selector providing
+limited additional benefit when a strong generator
+model is used on clear, well-defined tasks. For
+weaker generator models or more ambiguous tasks
+and datasets, knowledge F1 becomes a critical fac-
+tor, and the knowledge selector plays a more promi-
+nent role in improving overall performance.
+2 Related Work
+Retrieval-augmented generation (RAG) has
+been extensively studied in recent years. Early
+works (Guu et al., 2020; Lewis et al., 2020b; Shus-
+ter et al., 2021) jointly fine-tuned a dense retriever
+(e.g. DPR (Karpukhin et al., 2020)) and genera-
+tor (e.g. BART (Lewis et al., 2020a)), which re-
+quired dedicated training datasets. More recently,
+the introduction of large language models (LLMs)
+has made RAG more convenient to implement due
+to their strong generation performance, in-context
+learning ability (Brown, 2020; Kojima et al., 2022),
+and drastically longer context windows — from
+BART’s 1024 tokens to more than a million for
+modern LLMs (Lee et al., 2024). As a result, re-
+cent RAG research has shifted to using LLMs (Gao
+et al., 2023; Fan et al., 2024; Gan et al., 2025); in
+this work, we follow this trend to focus on LLM-
+based RAG.
+Knowledge selector for knowledge-grounded di-
+alogue generation. Dialogue generation (Moghe
+et al., 2018; Dinan et al., 2019; Li et al., 2024)
+is one of the major applications of RAG, where
+the target response is conditioned on retrieved
+knowledge, and a knowledge selection step is of-
+ten added to further refine the retrieved knowledge
+(Thulke et al., 2021; Sun et al., 2023; Zhang et al.,
+2023). For example, Kim et al. (2020) train a
+knowledge selector by leveraging response infor-
+mation, Li et al. (2022) select knowledge from
+document semantic graphs, Zhang et al. (2023) pro-
+pose multi-task learning for knowledge selection
+and response generation, and Zhao et al. (2025)
+proposes a multi-step reranking process for Natural
+Question (Kwiatkowski et al., 2019) and Trivia QA
+(Joshi et al., 2017). However, while these works
+demonstrate the advantages of their approaches
+through ablation studies, it is unclear whether their
+performance improvement via knowledge selection
+specifically is transferable to other datasets, do-
+mains, or tasks. Moreover, despite the popularity
+of LLMs for RAG, there are dramatically fewer
+LLM-based works that include the knowledge se-
+lection step, and it is likewise omitted in other RAG
+tasks (Gao et al., 2023; Fan et al., 2024; Gan et al.,
+2025).
+To our knowledge, there is no prior work ex-
+plaining this gap in knowledge selection. The clos-
+est works to ours are Cuconasu et al. (2024), Wu
+et al. (2024) and Jin et al. (2025), which study the
+impact of knowledge retrieval on RAG. We hy-
+pothesize that there is a selection bias effect where
+knowledge selection modules may have been exper-
+imented with, but ultimately not reported, in tasks
+or settings where it is not helpful. In this paper,
+we study the general effect of knowledge retrieval
+and selection on LLM-based RAG via hundreds of
+simulations, rather than being restricted to a few
+specific, anecdotal retrievers or selector implemen-
+tations like prior works.
+3 Approach
+3.1 Task Formulation
+RAG involves three steps: (1) Knowledge retrieval,
+where a retriever module retrieves a set of candi-
+date knowledge K based on a query q. This step
+4105

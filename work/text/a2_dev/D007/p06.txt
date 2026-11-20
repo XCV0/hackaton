@@ -1,0 +1,93 @@
+Table 1: Averaged results on a collection of benchmark datasets for open-domain question answering including the single-hop
+and multi-hop queries, with different LLMs. Self-RAG∗ is trained with a different base LLM, namely LLaMA2 (Touvron et al.,
+2023); therefore, we compare the results of FLAN-T5-XL (3B) with the results from Self-RAG with LLaMA2 (7B) and the
+results of others with the results from Self-RAG with LLaMA2 (13B). We emphasize our results in bold, for easy comparisons.
+FLAN-T5-XL (3B) FLAN-T5-XXL (11B) GPT-3.5 (Turbo)
+Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Simple No Retrieval 14.87 21.12 15.97 0.00 0.11 17.83 25.14 19.33 0.00 0.08 35.77 48.56 44.27 0.00 0.71 Single-step Approach 34.83 44.31 38.87 1.00 1.00 37.87 47.63 41.90 1.00 1.00 34.73 46.99 45.27 1.00 1.00
+Adaptive
+Adaptive Retrieval 23.87 32.24 26.73 0.50 0.56 26.93 35.67 29.73 0.50 0.54 35.90 48.20 45.30 0.50 0.86
+Self-RAG∗ 9.90 20.79 31.57 0.72 0.43 10.87 22.98 34.13 0.74 0.23 10.87 22.98 34.13 0.74 1.50
+Adaptive-RAG (Ours) 37.17 46.94 42.10 2.17 3.60 38.90 48.62 43.77 1.35 2.00 37.97 50.91 48.97 1.03 1.46
+Complex Multi-step Approach 39.00 48.85 43.70 4.69 8.81 40.13 50.09 45.20 2.13 3.80 38.13 50.87 49.70 2.81 3.33
+Oracle Adaptive-RAG w/ Oracle 45.00 56.28 49.90 1.28 2.11 47.17 58.60 52.20 0.84 1.10 47.70 62.80 58.57 0.50 1.03
+of queries and their associated documents contain-
+ing answers, namely 1) SQuAD v1.1 (Rajpurkar
+et al., 2016), 2) Natural Questions (Kwiatkowski
+et al., 2019), and 3) TriviaQA (Joshi et al., 2017).
+Multi-hop QA To consider more complex query
+scenarios, we use three benchmark multi-hop QA
+datasets, which require sequential reasoning over
+multiple documents, namely 1) MuSiQue (Trivedi
+et al., 2022a), 2) HotpotQA (Yang et al., 2018),
+and 3) 2WikiMultiHopQA (Ho et al., 2020).
+4.2 Models
+We compare our Adaptive-RAG against relevant
+models, including three retrieval-augmented LLM
+strategies (in Section 3.1) and the adaptive re-
+trieval approaches (Mallen et al., 2023; Asai et al.,
+2024), which can be grouped into one of three cat-
+egories: Simple, Adaptive, and Complex. Specif-
+ically, Simple approaches include the 1) No Re-
+trieval and 2) Single-step Approach-based meth-
+ods. Adaptive approaches include the 3) Adaptive
+Retrieval (Mallen et al., 2023), 4) Self-RAG (Asai
+et al., 2024), and our 5) Adaptive-RAG, which
+can adaptively perform retrieval based on the
+question complexity. For the 6) Multi-step Ap-
+proach, we use the most sophisticated state-of-
+the-art method (Trivedi et al., 2023), iteratively
+accessing both the retriever and LLM with Chain-
+of-Thought reasoning (Wei et al., 2022b), for every
+query. Note that models across different categories
+are not directly comparable. Yet, in the ideal set-
+ting, Adaptive approaches should be more effective
+than those in the Simple category while simultane-
+ously being more efficient than the Complex one.
+Therefore, we also report the performance in an
+ideal scenario, 7) Adaptive-RAG w/ Oracle, using
+the oracle classifier with our Adaptive-RAG.
+4.3 Evaluation Metrics
+When it comes to evaluating adaptive models, it
+is essential to simultaneously consider both the
+task performance and efficiency along with their
+trade-offs. Thus, we report the results with five
+metrics, where three of them measure the effective-
+ness and the other two measure the efficiency. In
+particular, for effectiveness, we use F1, EM, and
+Accuracy (Acc), following the standard evaluation
+protocol (Mallen et al., 2023; Baek et al., 2023;
+Asai et al., 2024), where F1 measures the number
+of overlapping words between the predicted an-
+swer and the ground truth, EM measures whether
+they are the same, and Acc measures whether the
+predicted answer contains the ground-truth answer.
+For efficiency, we measure the number of retrieval-
+and-generate steps and the average time for answer-
+ing each query relative to the one-step approach.
+4.4 Implementation Details
+For a fair comparison and following Mallen et al.
+(2023) and Trivedi et al. (2023), we use the same re-
+triever, a term-based sparse retrieval model known
+as BM25 (Robertson et al., 1994), across all differ-
+ent models. For the external document corpus, we
+use different sources depending on the dataset type:
+the Wikipedia corpus preprocessed by Karpukhin
+et al. (2020) for single-hop datasets, and the pre-
+processed corpus by Trivedi et al. (2023) for multi-
+hop datasets. Regarding the LLMs that are used
+to generate answers, we use the FLAN-T5 series
+models (Chung et al., 2022) of XL with 3B pa-
+rameters and XXL with 11B parameters, and the
+GPT-3.5 model (gpt-3.5-turbo-instruct). For the
+retrieval-augmented LLM design, we follow the
+implementation details from Trivedi et al. (2023),
+which include input prompts, instructions, and the
+number of test samples for evaluation (e.g., 500
+samples per dataset). In our Adaptive-RAG, for the
+query-complexity classifier, we use and train the
+T5-Large model (Raffel et al., 2020). Specifically,
+the classifier is trained using the epoch that shows
+the best performance until 100 training iterations
+from the validation set, with the learning rate of 3e-
+7041

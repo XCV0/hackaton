@@ -1,0 +1,93 @@
+RESEARCH ARTICLE
+www.advenergymat.de
+ReactiveDCSputteredTiO2 ElectronTransportLayersfor
+Cadmium-FreeSb2Se3 SolarCells
+Christopher H. Don, Thomas P. Shalvey, Daniya A. Sindi, Bradley Lewis,
+Jack E. N. Swallow, Leon Bowen, Daniel F. Fernandes, Tomas Kubart,
+Deepnarayan Biswas, Pardeep K. Thakur, Tien-Lin Lee, and Jonathan D. Major*
+TheevolutionofSb2Se3 heterojunctiondevicesawayfromCdSelectron
+transportlayers(ETL)towidebandgapmetaloxidealternativesisacritical
+targetinthedevelopmentofthisemergingphotovoltaicmaterial.Metaloxide
+ETL/Sb2Se3 deviceperformancehashistoricallybeenlimitedbyrelativelylow
+ﬁllfactors,despiteoﬀeringclearadvantageswithregardstophotocurrent
+collection.Inthisstudy,TiO2 ETLsarefabricatedviadirectcurrentreactive
+sputteringandtestedincompleteSb2Se3 devices.Astrongcorrelation
+betweenTiO2 ETLprocessingconditionsandtheSb2Se3 solarcelldevice
+responseunderforwardbiasconditionsisobservedandoptimized.
+Numericaldevicemodelssupportexperimentalevidenceofaspike-like
+conductionbandoﬀset,whichcanbemediated,providedasuﬃcientlyhigh
+conductivityandlowinterfacialdefectdensitycanbeachievedintheTiO2
+ETL.Ultimately,aSnO2:F/TiO2/Sb2Se3/P3HT/Audevicewiththereactively
+sputteredTiO2 ETLdeliversan8.12%powerconversioneﬃciency(𝜼),the
+highestTiO2/Sb2Se3 devicereportedto-date.Thisisachievedbyasubstantial
+reductioninseriesresistance,drivenbyimprovedcrystallinityofthereactively
+sputteredanatase-TiO2 ETL,whilstmaintainingalmostmaximumcurrent
+collectionforthisdevicearchitecture.
+1.Introduction
+The development of thin-ﬁlm photovoltaics (PV) has led to the
+commercialization of polycrystalline cadmium telluride (CdTe)-
+C.H.Don,T.P.Shalvey,D.A.Sindi,B.Lewis,J.D.Major
+StephensonInstituteforRenewableEnergy
+DepartmentofPhysics
+UniversityofLiverpool
+LiverpoolL697ZF,UK
+E-mail:jonmajor@liverpool.ac.uk
+D.A.Sindi
+DepartmentofPhysics
+CollegeofScience
+UmmAl-QuraUniversity
+Makkah24382,SaudiArabia
+The ORCID identiﬁcation number(s) for the author(s) of this article
+canbefoundunderhttps://doi.org/10.1002/aenm.202401077
+©2024TheAuthor(s).AdvancedEnergyMaterialspublishedby
+Wiley-VCHGmbH.Thisisanopenaccessarticleunderthetermsofthe
+CreativeCommonsAttributionLicense,whichpermitsuse,distribution
+andreproductioninanymedium,providedtheoriginalworkisproperly
+cited.
+DOI:10.1002/aenm.202401077
+based devices which oﬀer advantages
+overestablishedsiliconsolarcellsdueto
+the less energy-intensive device fabrica-
+tion and manufacturing processes. CdTe
+itself is not without its drawbacks; tel-
+lurium scarcity is often cited as a con-
+cern for widespread deployment, whilst
+thetoxicheavymetalcadmiuminclusion
+raises questions about end-of-life envi-
+ronmentalimplications.Thus,itisneces-
+sary to explore alternative materials suit-
+ableforfulﬁllingthewiderangeofevolv-
+ing PV applications (building integrated
+(BIPV),tandemtopandbottomcelletc.).
+Inorganic chalcogenides are another
+class of materials being studied–many
+with qualities that make them ver-
+satile options for PV. Most notably,
+CuIn1-xGaxSe2 (CIGS) and kesterite
+Cu2ZnSn(S,Se)4 materials (CZTS), have
+drawn signiﬁcant scientiﬁc interest.
+WhilstCIGShasachievedanimpressive
+23.6% power conversion eﬃciency (𝜂),[1]
+the elemental abundance issue remains unsolved with the in-
+clusion of In/Ga, and the requirement for Cd, while reduced,
+is still present in cadmium sulﬁde (CdS) as the electron trans-
+port layer (ETL). Despite its CdS ETL, CZTS utilizes an entirely
+J.E.N.Swallow
+DepartmentofMaterials
+UniversityofOxford
+ParksRoad,OxfordOX13PH,UK
+L.Bowen
+DepartmentofPhysics
+UniversityofDurham
+DurhamDH13LE,UK
+D.F.Fernandes,T.Kubart
+DepartmentofElectricalEngineering
+DivisionofSolid-StateElectronics
+TheÅngströmLaboratory
+UppsalaUniversity
+SE-75103Uppsala,Sweden
+D.Biswas,P.K.Thakur,T.-L.Lee
+DiamondLightSourceLtd,DiamondHouse
+HarwellScienceandInnovationCampus
+Didcot,OxfordshireOX110DE,UK
+Adv. Energy Mater. 2024,14,2401077 2401077(1of15) ©2024TheAuthor(s). AdvancedEnergyMaterialspublishedbyWiley-VCHGmbH

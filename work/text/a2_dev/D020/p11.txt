@@ -1,0 +1,51 @@
+• Each array must contain at least one heading/title or sufficient context
+• Merge small contextless fragments—never output standalone arrays for them
+PROCESSING STEPS
+1. Map heading hierarchy using parent_heading relationships. Use title if context is ambiguous.
+2. Identify procedural content: Detect step-by-step instructions, numbered procedures, or sequential processes. These
+MUST be grouped together in a single chunk.
+3. For each chunk, trace 3 heading levels (L3→L2→L1). Fill missing levels with best-matching existing heading ID.
+4. Identify parent headings with multiple children—include in ALL child arrays.
+5. Process chunks: merge small/contextless chunks using title/headings; ensure 3-level hierarchy; include parent in
+child groups; keep all procedural steps together.
+6. Group into logical/topical arrays with 3-level hierarchy.
+7. Output JSON without backticks and code blocks: {"chunks": [["id1", "id2", "id3"], ...]}
+EXAMPLES
+Example 1: Missing Level
+Input:
+[
+{"id": "heading_1", "type": "heading",
+"text": "EXCESS BAGGAGE CHARGES", "parent_heading": null},
+{"id": "heading_2", "type": "heading",
+"text": "Packing heavy?",
+"parent_heading": "EXCESS BAGGAGE CHARGES"},
+{"id": "text_3", "type": "text",
+"text": "Fly without baggage worries...",
+"parent_heading": "Packing heavy?"},
+{"id": "text_4", "type": "text",
+"text": "Fees apply per kg.",
+"parent_heading": "Packing heavy?"}
+]
+Output:
+{"chunks": [["heading_1", "heading_2", "text_3", "text_4"]]}
+Note: heading_1 = L1, heading_2 = L3. Missing L2 filled with best-matching existing heading. Cookies filtered out.
+Example 2: Procedural Steps (MUST Stay Together)
+Input:
+[
+{"id": "heading_1", "type": "heading",
+"text": "How to Change a Tyre", "parent_heading": null},
+{"id": "heading_2", "type": "heading",
+"text": "Steps to Change a Tyre",
+"parent_heading": "How to Change a Tyre"},
+{"id": "heading_3", "type": "heading",
+"text": "1. Park Safely",
+"parent_heading": "Steps to Change a Tyre"},
+{"id": "text_4", "type": "text",
+"text": "Pull over to a safe location...",
+"parent_heading": "1. Park Safely"},
+{"id": "heading_5", "type": "heading",
+"text": "2. Gather Tools",
+"parent_heading": "Steps to Change a Tyre"},
+{"id": "text_6", "type": "text",
+"text": "You will need: spare tyre, jack...",
+11

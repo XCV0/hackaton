@@ -1,0 +1,114 @@
+BAD
+GOOD
+Rationale 
+GOOD
+Relevant
+query
+GOOD
+Irrelevant
+search
+Error
+recovery
+Logical
+step
+Stage 1: Process Reward Modeling
+Candidate 
+Trajectories
+Judge LLM
+c
+<Think>
+Reasoning
+<Search>
+Query
+<Document>
+Retrieved Doc
+<Answer>
+Final Answer
+Policy
+Model PRM
+DPO Loss
+Reward: 1
+Reward: 0
+PRM
+PRM-guided value tree search
+1 0 1
+Stage 2: Policy Optimization
+Chosen 
+...
+Rejected
+...
+Process-Supervised
+Policy Model
+Figure 1: PRO-STEP Overview: Detailed architecture of the process-supervised optimization framework.
+3 PRO-STEP
+We introduce PRO-STEP, a two-stage framework.
+Section 3.1 describes the construction of process-
+supervised data, including trajectory generation,
+step annotation, and generative PRM training. Sec-
+tion 3.2 presents policy optimization using a PRM-
+guided value tree search and step-level DPO.
+3.1 Process Reward Modeling
+Although existing PRM approaches evaluate log-
+ical steps in mathematical reasoning, they lack
+mechanisms for factual grounding in external ev-
+idence, failing to outperform majority voting in
+RAG contexts (Figure 3). To address this limita-
+tion, we construct a process-supervised dataset by
+generating reasoning trajectories, annotating step-
+level labels, and training a generative PRM specific
+to RAG.
+Trajectory generation. We formulate trajec-
+tory generation as a multi-turn interaction be-
+tween the policy model πθ (using the prompt
+in Section A) and an external search engine
+E. πθ generates its internal reasoning within
+<think>...</think>. When external factual
+grounding is necessary, the model triggers retrieval
+by generating <search>...</search>. Upon de-
+tecting a search request, the system halts genera-
+tion, queries E with the generated search string, and
+appends the retrieved documents back into the se-
+quence as <documents>...</documents>. This
+interleaved generation-and-retrieval cycle contin-
+ues until the model outputs a final prediction for-
+matted as <answer>...</answer> or exhausts the
+maximum interaction steps. Using this procedure,
+we sample 16 candidate reasoning trajectories per
+question from 2,000 instances drawn from Hot-
+potQA (Yang et al., 2018) and MuSiQue (Trivedi
+et al., 2022). After discarding incomplete paths or
+those lacking formatted answers, we retain 31,728
+trajectories.
+Step annotation. We use QwQ-32B (Qwen
+Team, 2025b) to annotate each model-generated
+step st based on the evaluation prompt provided
+in Section A. Given q and the preceding context
+s≤t, QwQ-32B generates a rationale vt and a bi-
+nary correctness label rt ∈ {0, 1}. Unlike prior
+PRM methods that discard all subsequent steps
+once an error occurs, we retain the entire trajectory.
+In RAG contexts, because πθ can recover from an
+incorrect step by issuing a revised search query,
+a local failure (rt = 0) does not invalidate subse-
+quent steps. All 31,728 trajectories are annotated to
+form DPRM (dataset statistics in Section B, labeling
+rubric in Section A, and annotation quality audit in
+Section E).
+Generative PRM training. We train a gener-
+ative process reward model πψ (initialized from
+DeepSeek-R1-Distill-8B (DeepSeek-AI, 2025;
+Qwen Team, 2025a)) on DPRM. The model is op-
+timized to generate both the rationale vt and the
+binary correctness label rt by minimizing the fol-
+lowing objective:
+LPRM = −E(q,τ,vt,rt)∼DPRM
+[
+log πψ(vt | q, s≤t)
++ log πψ(rt | q, s≤t, vt)
+]
+(1)
+where the expectation is computed over the model-
+generated steps. At inference, πψ first generates the
+rationale, and then outputs the binary prediction:
+ˆr(st) = arg max r∈{0,1} πψ(r | q, s≤t, vt) (2)
+37906

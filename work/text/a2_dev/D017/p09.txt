@@ -1,0 +1,110 @@
+Limitations
+Despite the substantial advancements achieved,
+BayesRAG is currently subject to certain limi-
+tations that point towards future research direc-
+tions. First, we observe a Retrieval-Generation
+Gap. While our Bayesian retriever achieves high
+effective recall (61.7% @ Top-10 and 76.6% @
+Top-20 in Table 4), the downstream generation ac-
+curacy is bounded by the current reasoning capa-
+bilities of MLLMs when interpreting information-
+dense visual evidence. We anticipate that as gen-
+erator models evolve, they will better utilize the
+high-fidelity evidence provided by our framework.
+Second, as our methodology is specialized for mul-
+timodal retrieval, its advantages are naturally less
+pronounced in domains dominated by pure text or
+massive continuous tables, such as certain financial
+reports. In such contexts, the standard chunking
+strategy often fragments tabular continuity. This re-
+mains a common challenge inherent to most RAG
+pipelines. BayesRAG prioritizes cross-modal con-
+sistency, which is most effective when documents
+contain rich interplay between texts and images.
+References
+Shuai Bai, Yuxuan Cai, Ruizhe Chen, Keqin Chen,
+Xionghui Chen, Zesen Cheng, Lianghao Deng, Wei
+Ding, Chang Gao, Chunjiang Ge, Wenbin Ge, Zhi-
+fang Guo, Qidong Huang, Jie Huang, Fei Huang,
+Binyuan Hui, Shutong Jiang, Zhaohai Li, Mingsheng
+Li, and 45 others. 2025. Qwen3-vl technical report.
+Preprint, arXiv:2511.21631.
+Daniel Bolya, Po-Yao Huang, Peize Sun, Jang Hyun
+Cho, Andrea Madotto, Chen Wei, Tengyu Ma,
+Jiale Zhi, Jathushan Rajasegaran, Hanoona Rasheed,
+Junke Wang, Marco Monteiro, Hu Xu, Shiyu Dong,
+Nikhila Ravi, Daniel Li, Piotr Dollár, and Christoph
+Feichtenhofer. 2025. Perception encoder: The best
+visual embeddings are not at the output of the net-
+work. Preprint, arXiv:2504.13181.
+Jianlyu Chen, Shitao Xiao, Peitian Zhang, Kun
+Luo, Defu Lian, and Zheng Liu. 2024. M3-
+embedding: Multi-linguality, multi-functionality,
+multi-granularity text embeddings through self-
+knowledge distillation. In Findings of the Asso-
+ciation for Computational Linguistics: ACL 2024,
+pages 2318–2335, Bangkok, Thailand. Association
+for Computational Linguistics.
+Jaemin Cho, Debanjan Mahata, Ozan Irsoy, Yu-
+jie He, and Mohit Bansal. 2024. M3docrag:
+Multi-modal retrieval is what you need for multi-
+page multi-document understanding. Preprint,
+arXiv:2411.04952.
+Manuel Faysse, Hugues Sibille, Tony Wu, Bilel Om-
+rani, Gautier Viaud, CELINE HUDELOT, and Pierre
+Colombo. 2025. Colpali: Efficient document re-
+trieval with vision language models. In The Thir-
+teenth International Conference on Learning Repre-
+sentations.
+Zirui Guo, Xubin Ren, Lingrui Xu, Jiahao Zhang, and
+Chao Huang. 2025. Rag-anything: All-in-one rag
+framework. Preprint, arXiv:2510.12323.
+Siwei Han, Peng Xia, Ruiyi Zhang, Tong Sun, Yun Li,
+Hongtu Zhu, and Huaxiu Yao. 2025. Mdocagent: A
+multi-modal multi-agent framework for document
+understanding. Preprint, arXiv:2503.13964.
+Chan-Wei Hu, Yueqi Wang, Shuo Xing, Chia-Ju Chen,
+Suofei Feng, Ryan Rossi, and Zhengzhong Tu.
+2025. mrag: Elucidating the design space of multi-
+modal retrieval-augmented generation. Preprint,
+arXiv:2505.24073.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+Petroni, Vladimir Karpukhin, Naman Goyal, Hein-
+rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-
+täschel, Sebastian Riedel, and Douwe Kiela. 2020.
+Retrieval-augmented generation for knowledge-
+intensive nlp tasks. In Advances in Neural Infor-
+mation Processing Systems (NeurIPS), pages 9459–
+9474.
+Yinglu Li, Zhiying Lu, Zhihang Liu, Yiwei Sun, Chuan-
+bin Liu, and Hongtao Xie. 2025. Regionrag: Region-
+level retrieval-augmented generation for visual docu-
+ment understanding. Preprint, arXiv:2510.27261.
+Elias Lumer, Alex Cardenas, Matt Melich, Myles
+Mason, Sara Dieter, Vamse Kumar Subbiah,
+Pradeep Honaganahalli Basavaraju, and Roberto Her-
+nandez. 2025. Comparison of text-based and image-
+based retrieval in multimodal retrieval augmented
+generation large language model systems. Preprint,
+arXiv:2511.16654.
+Yubo Ma, Yuhang Zang, Liangyu Chen, Meiqi Chen,
+Yizhu Jiao, Xinze Li, Xinyuan Lu, Ziyu Liu, Yan Ma,
+Xiaoyi Dong, Pan Zhang, Liangming Pan, Yu-Gang
+Jiang, Jiaqi Wang, Yixin Cao, and Aixin Sun. 2024.
+Mmlongbench-doc: Benchmarking long-context doc-
+ument understanding with visualizations. In Ad-
+vances in Neural Information Processing Systems,
+volume 37, pages 95963–96010. Curran Associates,
+Inc.
+Lang Mei, Siyu Mo, Zhihan Yang, and Chong Chen.
+2025. A survey of multimodal retrieval-augmented
+generation. Preprint, arXiv:2504.08748.
+Junbo Niu, Zheng Liu, Zhuangcheng Gu, Bin Wang,
+Linke Ouyang, Zhiyuan Zhao, Tao Chu, Tianyao
+He, Fan Wu, Qintong Zhang, Zhenjiang Jin, Guang
+Liang, Rui Zhang, Wenzheng Zhang, Yuan Qu, Zhifei
+Ren, Yuefeng Sun, Yuanhong Zheng, Dongsheng
+Ma, and 42 others. 2025. Mineru2.5: A decoupled
+vision-language model for efficient high-resolution
+document parsing. Preprint, arXiv:2509.22186.
+9

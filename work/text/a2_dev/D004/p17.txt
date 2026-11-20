@@ -1,0 +1,21 @@
+L Entity-Matched Document Analysis
+Table 12 analyzes diversity metrics on only the sub-
+set of retrieved documents that mention the queried
+entity, explaining the diversity-fairness trade-off
+discussed in Section 5.
+Table 12: Diversity metrics on entity-matched docu-
+ments only (k=20, forums dataset). On entity-matched
+documents, Opinion-Enriched KB improves demo-
+graphic coverage- the opposite of the overall result.
+Metric Raw Enr. ∆
+Matched Docs (of 960) 238 340 +42.9%*
+Sent-Int σ 14.29 16.57 +16.0%
+Biz Impact σ 4.45 5.47 +22.9%
+Revenue Band Cov. (%) 42.9 47.0 +9.6%
+Tenure Cov. (%) 40.5 53.3 +31.6%*
+Evidence Cov. (%) 44.3 46.4 +4.7%
+Emot. Markers 7.2 8.9 +23.6%*
+M Extended Benchmark Analysis
+Table 13 provides a comprehensive analysis of 36
+major evaluation datasets used in RAG research
+from 2013–2025.

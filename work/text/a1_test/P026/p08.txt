@@ -1,0 +1,61 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+jp = −µpkBT
+(
+∆p(p) ∂p ∂x + qp kBT ∂ϕ ∂x ) , (20b)
+in which
+∆n (n) = n ∂ ∂n ( S −1 c ( n gc )) , (21a)
+∆p (p) = p ∂ ∂p ( S −1 v ( p gv )) (21b)
+are carrier density-dependent diffusion enhancement functions that approach 1 in the limit of low carrier
+density [46–50], as will be shown below.
+2.2.TheBoltzmannapproximationandtheCER
+It is well known that the FD distribution (9) approaches the Boltzmann distribution,
+f(E; Ef) ∼ exp
+(
+− E − Ef
+kBT
+)
+, (22)
+for energies significantly greater than the Fermi level, (E − Ef)/kBT ≫ 1. Thus, for Fermi energies sufficiently
+far away from the reference energy of the DoS, the FD distribution (9) in the statistical integral can be
+approximated by a Boltzmann distribution (22), and the statistical integral (16) becomes
+S(ξ) ≈
+ˆ ∞
+−∞
+ˆN(η) exp (ξ − η) dη, (23)
+which can be evaluated as
+S(ξ) ≈ A exp(ξ), (24)
+where
+A =
+ˆ ∞
+−∞
+ˆN(η) exp (−η) dη (25)
+is a scaling constant determined by the reduced DoS, which can readily be reabsorbed into an effective DoS
+constant. Specifically, this scaling constant is large if there is a high DoS at energies below the reference
+energy, i.e. the DoS has a tail, decaying into the band gap. This approximation, often referred to as the
+Boltzmann approximation, is valid when the QFL lies far inside the band gap, i.e. ξ ≪ −1.
+Thus, Boltzmann distributed carriers have an exponential statistical integral, regardless of DoS function,
+with inverse S −1(x) = ln( x A ). This function can be differentiated exactly, leading to
+∂
+∂n
+(
+S −1 c
+( n
+gc
+))
+= 1 n , (26a)
+∂
+∂p
+(
+S −1 v
+( p
+gv
+))
+= 1 p , (26b)
+and the diffusion enhancement functions (21) therefore become ∆ ≡ 1, thus recovering the CER from the
+generalised form.
+This result is independent of the value of the constant A. The choice of DoS function is therefore
+unimportant when the Boltzmann approximation holds. If the approximation does not hold, however, the
+functional form of the DoS becomes significant and must be carefully considered. Furthermore, the choice of
+DoS affects the domain of carrier densities for which the Boltzmann approximation does hold, as will be
+discussed in section 4.
+7

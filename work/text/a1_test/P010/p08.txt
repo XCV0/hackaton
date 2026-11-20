@@ -1,0 +1,109 @@
+distribution especially at medium scan speed where the accumu-
+lation of ions near the TL interface leads to overall increased
+recombination. However, and somewhat surprisingly to us, as
+shown in Supplementary Figure S12, the VOC loss between slow
+and fast scan is relatively small since the applied bias is here high
+enough to compensate for the VBI and redistribute ions within
+the bulk of the perovskite giving very similar condition as seen in
+the band diagram in Figure 2 and in the experiments. We note
+that the data has been acquired on at least ﬁve cells for each com-
+position, which have been stored in the glovebox for several days.
+We believe that the future modeling of these results will further
+contribute to understanding the band structure of perovskite
+solar cells in the presence of large amounts of mobile ions.
+Supplementary Figures S13 and S14 show the dark-CELIV
+and BACE measurements for all compositions. Also, these meas-
+urements indicate similar trends. For example, the onset of the
+ionic signal in the BACE, dark-CELIV, and impedance, which
+could be considered as an estimate of the fastest ionic species,
+is similar in all samples. As shown in Figure 4d, for all three
+experiments, the onset starts in the ms regime (/C251ms in
+dark-CELIV and Cf and around 10 ms in fast-hysteresis).
+Finally, to further highlight the potential of the fast-
+hysteresis measurements, we measured a double cation
+Cs0.15FA0.85PbI75Br25 pin-type perovskite cell that we inten-
+tionally degraded upon illumination for several hours under
+OC conditions with a white light-emitting diode (and a 1 sun
+equivalent intensity, without UV). As demonstrated in
+Supplementary Figure S15, for this cell, we observed a large
+increase of the ion-induced loss from /C251.4% to /C256%
+(absolute). This highlights the importance of mobile ions in
+the degradation process in perovskite solar cells and also the
+usefulness of the proposed methodology to study the main
+degradation mechanism in perovskite solar cells by enabling
+an independent assessment of the steady-state and the ion-free
+PCE.
+3. Conclusion
+In summary, we proposed a simple method to estimate the efﬁ-
+ciency loss due to the presence of mobile ions via fast-hysteresis
+measurements. These measurements can be performed in addi-
+tion to the standard JV characterization of cells with a Keithley
+SMU. The quantiﬁcation of the ion-free PCE was achieved by
+offsetting the device’s internal voltage and performing a fast hys-
+teresis scan before the ions can react to the change in the internal
+0
+5
+10
+15
+20
+0
+5
+10
+15
+20
+10-2 10-1 100 101 102 1030
+5
+10
+15
+20
+10-2 10-1 100 101 102 103
+]%[ ECP
+Scan direction:
+ Foward
+ Reverse
+MAPI CsFA
+60-40 83-17
+100-095-05
+]%[ ECP]%[ ECP
+Scan-speed [V s -1] Scan-speed [V s -1]
+1
+2
+3
+4
+0
+5
+10
+15
+20
+MAPI CsFA 60
+-40
+83-17 95
+-05
+10
+0-0
+10-5
+10-4
+10-3
+10-2
+10-1
+]%[ ssol ECP
+mono  double  triple-cation
+ PCE  JSC  VOC  FF
+]%[ ssol evitaleR
+ BACE
+ CELIV
+ Fast Hysteresis
+]s[ tesnO
+(a) (b)
+(c)
+(d)
+Figure 4. a) Fast-hysteresis measurements measured for different perovskite compositions in a pin-structure as highlighted in each panel. Note, that for
+triple cation perovskites with a composition of Cs0.05(FAxMAy)0.95PbIxBry, the ratio of x to y is speciﬁed in each panel. b) The absolute PCE loss due to the
+mobile ions for the different compositions as estimated from the difference between the PCE at fast and slow scan speeds. c) A breakdown of the relative
+losses in each JV parameter for all compositions. Interestingly, for all compositions, the effect of the ions is primarily on the SC current, while the OC
+voltage is barely affected by the presence of the mobile ions and the formation of the ﬁeld-free regions. d) A comparison of the onset of the ionic signal as
+obtained from BACE, charge extraction by linearly increasing the voltage in the dark (dark CELIV), and the onset of the fast-hysteresis at short-timescales.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100772 2100772 (8 of 10) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 4, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100772, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

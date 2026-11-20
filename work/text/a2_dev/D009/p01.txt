@@ -1,0 +1,93 @@
+Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing, pages 37904–37925
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+PRO-Step: Step-level Process Reward Optimization for
+Retrieval-Augmented Generation
+MinKeon Kim Namjun Lee Jaekwang Kim*
+Department of Applied Artificial Intelligence,
+Convergence Program for Social Innovation,
+Sungkyunkwan University, Seoul, South Korea
+alsrjs0418@skku.edu, namejun12000@g.skku.edu, linux@skku.edu
+Abstract
+Retrieval-Augmented Generation enhances
+Large Language Models by grounding re-
+sponses in external knowledge, but multi-hop
+reasoning remains vulnerable to error propa-
+gation, where early retrieval failures confound
+subsequent steps. Standard outcome-based op-
+timization only rewards the final answer, leav-
+ing intermediate retrieval and reasoning errors
+undetected. While existing process-based meth-
+ods introduce step-level signals, they still score
+each step against the final answer, rewarding
+spurious successes where flawed retrieval co-
+incidentally produces the correct answer. Step-
+level supervision in RAG requires evaluating
+both logical validity and evidential grounding
+at each step. We introduce PRO-STEP: we
+train a generative PRM that evaluates both
+dimensions, employ PRM-guided value tree
+search to construct preference pairs contrast-
+ing valid steps against flawed ones, and op-
+timize the policy via step-level Direct Pref-
+erence Optimization. Experiments on single-
+and multi-hop QA datasets demonstrate that
+PRO-STEP achieves the best average EM and
+F1 across five benchmarks. Code, models,
+and training data are publicly available at
+https://github.com/keemminnke/PRO-Step.
+1 Introduction
+Large Language Models (LLMs) (Singh et al.,
+2026; DeepSeek-AI, 2025) have demonstrated ca-
+pabilities across a wide range of reasoning tasks,
+including mathematics and code generation. How-
+ever, they still suffer from hallucinations, often gen-
+erating plausible but unsupported claims when they
+lack relevant or up-to-date knowledge. Retrieval-
+Augmented Generation (RAG) (Lewis et al., 2020)
+addresses these issues by equipping LLMs with ex-
+ternal knowledge sources, improving factual accu-
+racy and timeliness. However, traditional RAG fol-
+lows a linear retrieve-then-generate workflow. This
+*Corresponding author.
+design struggles with multi-step reasoning tasks
+that require iterative retrieval and dynamic query
+reformulation. To overcome this, recent work has
+proposed agentic RAG systems (Li et al., 2025a;
+Singh et al., 2025), enabling models to dynamically
+decide when and what to retrieve through iterative
+retrieval, query rewriting, and self-reflection mech-
+anisms (Jiang et al., 2023; Su et al., 2024; Asai
+et al., 2024).
+Early approaches (Singh et al., 2025) relied on
+prompt engineering, while Supervised Fine-Tuning
+(SFT) methods directly optimized model parame-
+ters for retrieval-augmented workflows. More re-
+cently, outcome-supervised Reinforcement Learn-
+ing (RL) (Ouyang et al., 2022) has achieved im-
+provements: Search-R1 (Jin et al., 2025a) and R1-
+Searcher (Song et al., 2025) incorporate search
+engines into the LLM’s environment and use final-
+answer correctness as the reward signal, demon-
+strating that end-to-end RL can enhance agentic
+RAG capabilities.
+However, outcome-based optimization presents
+limitations in multi-hop reasoning (Zhang et al.,
+2025a). First, a minor retrieval error in the early
+steps, such as an imprecise query or an irrelevant
+document, propagates through subsequent reason-
+ing steps, but outcome-based optimization lacks the
+means to detect or penalize these intermediate fail-
+ures. Second, because the reward signal is derived
+solely from final-answer correctness, it is sparse.
+The model receives feedback only after completing
+the entire reasoning chain, requiring more training
+data to converge.
+Process Reward Model (PRM) approaches
+(Lightman et al., 2024; Luo et al., 2024; Wang et al.,
+2024; Zheng et al., 2025a) address this limitation by
+providing step-level feedback that guides models
+along correct reasoning trajectories. However, ap-
+plying existing PRM approaches to RAG presents
+two challenges. First, they focus on logical con-
+sistency in domains like mathematics and cannot
+37904

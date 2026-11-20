@@ -1,0 +1,65 @@
+LLM-Confidence Reranker
+References
+Aichberger, L., Schweighofer, K., Ielanskyi, M., & Hochreiter, S. (2025). Improving uncertainty estimation through semantically diverse language
+generation. In The thirteenth international conference on learning representations,ICLR 2025, singapore, april 24-28, 2025. Retrieved from
+https://openreview.net/forum?id=HSi4VetQLj
+Azaria,A.,&Mitchell,T.M.(2023).TheinternalstateofanLLMknowswhenit’slying.InFindingsoftheassociationforcomputationallinguistics:
+EMNLP 2023, singapore, december 6-10, 2023 (pp. 967–976). Retrieved from https://doi.org/10.18653/v1/2023.findings-emnlp
+.68 doi: 10.18653/V1/2023.FINDINGS-EMNLP.68
+Bondarenko, A., Fröbe, M., Beloucif, M., Gienapp, L., Ajjour, Y., Panchenko, A., ... Hagen, M. (2020). Overview of touché 2020: Argument
+retrieval - extended abstract. In Experimental IR meets multilinguality, multimodality, and interaction - 11th international conference of
+the CLEF association, CLEF 2020, thessaloniki, greece, september 22-25, 2020, proceedings (Vol. 12260, pp. 384–395). Retrieved from
+https://doi.org/10.1007/978-3-030-58219-7_26 doi: 10.1007/978-3-030-58219-7_26
+Bonifacio, L. H., Abonizio, H. Q., Fadaee, M., & Nogueira, R. (2022). Inpars: Unsupervised dataset generation for information retrieval. In
+Proceedingsofthe45thinternationalACMSIGIRconferenceonresearchanddevelopmentininformationretrieval,SIGIR2022,madrid,spain,
+july 11-15, 2022 (pp. 2387–2392). Retrieved from https://doi.org/10.1145/3477495.3531863 doi: 10.1145/3477495.3531863
+Boteva, V., Ghalandari, D. G., Sokolov, A., & Riezler, S. (2016). A full-text learning to rank dataset for medical information retrieval. In
+Advances in information retrieval (Vol. 9626, pp. 716–722). Retrieved from https://doi.org/10.1007/978-3-319-30671-1_58 doi:
+10.1007/978-3-319-30671-1_58
+Boytsov, L., Patel, P., Sourabh, V., Nisar, R., Kundu, S., Ramanathan, R., & Nyberg, E. (2024). Inpars-light: Cost-effective unsupervised training
+of efficient rankers. Transactions on Machine Learning Research. Retrieved from https://openreview.net/forum?id=sHSKFYyINO
+(Reproducibility Certification)
+Cai, Z., Cao, M., Chen, H., Chen, K., Chen, K., Chen, X., ... Zhao, X. (2024). Internlm2 technical report. arXiv, abs/2403.17297. Retrieved from
+https://doi.org/10.48550/arXiv.2403.17297 doi: 10.48550/ARXIV.2403.17297
+Cao, Z., Qin, T., Liu, T.-Y., Tsai, M.-F., & Li, H. (2007). Learning to rank: from pairwise approach to listwise approach. In Machine learning,
+proceedings of the twenty-fourth international conference (ICML 2007), corvallis, oregon, usa, june 20-24, 2007 (Vol. 227, pp. 129–136).
+Retrieved from https://doi.org/10.1145/1273496.1273513 doi: 10.1145/1273496.1273513
+Chen,Y.,Liu,Q.,Zhang,Y.,Sun,W.,Ma,X.,Yang,W.,... Yin,D. (2025). Tourrank:Utilizinglargelanguagemodelsfordocumentsrankingwith
+a tournament-inspired strategy. In Proceedings of the ACM on web conference 2025, WWW 2025, sydney, nsw, australia, 28 april 2025- 2 may
+2025 (pp. 1638–1652). Retrieved from https://doi.org/10.1145/3696410.3714863 doi: 10.1145/3696410.3714863
+Cheng, Q., Sun, T., Liu, X., Zhang, W., Yin, Z., Li, S., ... Qiu, X. (2024). Can AI assistants know what they don’t know? In Forty-first
+international conference on machine learning, ICML 2024, vienna, austria, july 21-27, 2024 (Vol. 235, pp. 8184–8202). Retrieved from
+https://openreview.net/forum?id=girxGkdECL
+Chi, M., Pang, W., Wu, X., Zhao, P., Li, Y., Wang, T., ... Zhou, Y. (2026). A generalized neural solver based on llm-guided heuristic
+evoluation framework for solving diverse variants of vehicle routing problems. Expert Systems with Applications, 296, 128876. Retrieved from
+https://www.sciencedirect.com/science/article/pii/S0957417425024935 doi: https://doi.org/10.1016/j.eswa.2025.128876
+Chowdhury, T., Zick, Y., & Allan, J. (2025). Rankshap: Shapley value based feature attributions for learning to rank. In The thirteenth
+international conference on learning representations, ICLR 2025, singapore, april 24-28, 2025. Retrieved from https://openreview.net/
+forum?id=4011PUI9vm
+Cohan,A.,Feldman,S.,Beltagy,I.,Downey,D.,&Weld,D.S. (2020). SPECTER:document-levelrepresentationlearningusingcitation-informed
+transformers. In Proceedings of the 58th annual meeting of the association for computational linguistics (pp. 2270–2282). Retrieved from
+https://doi.org/10.18653/v1/2020.acl-main.207 doi: 10.18653/V1/2020.ACL-MAIN.207
+Craswell, N., Mitra, B., Yilmaz, E., & Campos, D. (2021). Overview of the trec 2020 deep learning track. arXiv preprint arXiv:2102.07662.
+Craswell, N., Mitra, B., Yilmaz, E., Campos, D., & Voorhees, E. M. (2020). Overview of the trec 2019 deep learning track. arXiv e-prints.
+DeepSeek-AI, Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., ... Li, S. S. (2025). Deepseek-r1: Incentivizing reasoning capability
+in llms via reinforcement learning. arXiv, abs/2501.12948. Retrieved from https://doi.org/10.48550/arXiv.2501.12948 doi:
+10.48550/ARXIV.2501.12948
+Dong, J., Fatemi, B., Perozzi, B., Yang, L. F., & Tsitsulin, A. (2024). Don’t forget to connect! improving RAG with graph-based reranking. arXiv,
+abs/2405.18414. Retrieved from https://doi.org/10.48550/arXiv.2405.18414 doi: 10.48550/ARXIV.2405.18414
+Duan,J.,Cheng,H.,Wang,S.,Zavalny,A.,Wang,C.,Xu,R.,... Xu,K. (2024). Shiftingattentiontorelevance:Towardsthepredictiveuncertainty
+quantification of free-form large language models. In Proceedings of the 62nd annual meeting of the association for computational linguistics
+(volume1:Longpapers),ACL2024,bangkok,thailand,august11-16,2024(pp.5050–5063). Retrievedfrom https://doi.org/10.18653/
+v1/2024.acl-long.276 doi: 10.18653/V1/2024.ACL-LONG.276
+Dubey,A.,Jauhri,A.,Pandey,A.,Kadian,A.,Al-Dahle,A.,Letman,A.,... Stone,K. (2024). Thellama3herdofmodels. arXiv,abs/2407.21783.
+Retrieved from https://doi.org/10.48550/arXiv.2407.21783 doi: 10.48550/ARXIV.2407.21783
+Ehsan,K.,Nandan,T.,Carlos,L.,Xueguang,M.,Jheng-Hong,Y.,&Jimmy,L. (2024). ResourcesforbrewingBEIR:reproduciblereferencemodels
+and statistical analyses. In Proceedings of the 47th international ACM SIGIR conference on research and development in information retrieval,
+SIGIR 2024, washington dc, usa, july 14-18, 2024 (pp. 1431–1440). Retrieved from https://doi.org/10.1145/3626772.3657862 doi:
+10.1145/3626772.3657862
+Farquhar, S., Kossen, J., Kuhn, L., & Gal, Y. (2024). Detecting hallucinations in large language models using semantic entropy. Nature, 630,
+625–630. Retrieved from https://doi.org/10.1038/s41586-024-07421-0 doi: 10.1038/S41586-024-07421-0
+Harrie, O., Rolf, J., Zhen, Q., & Xuanhui, W. (2025). Optimizing compound retrieval systems. International ACM SIGIR Conference on Research
+and Development in Information Retrieval.
+Hasibi,F.,Nikolaev,F.,Xiong,C.,Balog,K.,Bratsberg,S.E.,Kotov,A.,&Callan,J. (2017). Dbpedia-entityv2:Atestcollectionforentitysearch.
+In Proceedings of the 40th international ACM SIGIR conference on research and development in information retrieval, shinjuku, tokyo, japan,
+Song et al.: Preprint submitted to Elsevier Page 18 of 21

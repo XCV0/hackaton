@@ -1,0 +1,91 @@
+Table 7: Effect of the outcome-margin filter on data scale and downstream performance. Removing the filter
+increases the pair count by 2.5× but yields comparable average performance.
+Variant Pairs HotpotQA PopQA 2WikiMulti Bamboogle MuSiQue Average
+PRO-STEP (with margin filter) 15,877 38.73 / 51.63 40.47 / 47.37 44.07 / 51.43 36.80 / 47.63 12.49 / 22.41 34.51 / 44.09
+w/o margin filter 39,578 37.62 / 50.58 39.20 / 46.40 44.47 / 52.62 39.20 / 47.70 12.78 / 23.16 34.65 / 44.09
+Pair Type % Reward Diff Margin %
+Search vs. Search 57.5 < 0.05 (Low) 0.3
+Answer vs. Answer 17.5 0.05–0.10 0.6
+Answer vs. Search 16.5 0.10–0.20 0.6
+Search vs. Answer 4.1 0.20–0.50 46.4
+Other 4.4 ≥ 0.50 (High) 52.0
+Step Level (Depth) % Action (Ch / Rej) %
+Step 1 24.0 Search 61.9 / 74.1
+Step 2 45.7 Answer 37.7 / 21.7
+Step 3 29.5 Reason 0.4 / 4.2
+Step 4 0.8 – –
+Table 8: Detailed statistics of the 15,877 DPO prefer-
+ence pairs under the outcome filter (chosen F1 ≥ 0.2
+AND ∆F1 ≥ 0.2). Reward margin is computed on
+V (s) = ¯Q(s) + α · ˆr(s) with α = 0.3. Action per-
+centages represent the proportion of Chosen / Rejected
+actions respectively.
+Parameter Value
+Branching factor (K) 3
+Max depth 7
+Iterations per question 64
+F1 discount (γ) 0.9 (Reward = F1 · 0.9d)
+PRM weight (α) 0.3 (Combined = Reward + 0.3 · PRM)
+PRM scoring interval Every 4 iterations
+Retrieved docs per search 3
+Preference margin (δ) 0.01
+Table 9: Hyperparameters for the VTS rollout phase.
+Frontier-model audit. We further audit 500 strat-
+ified samples drawn from QwQ-32B-labeled trajec-
+tories (held-out from PRM training) by having an
+independent frontier-class LLM (Claude Opus 4.7)
+re-evaluate them under the identical labeling rubric
+(R1–R6, Section A).
+Findings. κ = 0.61 falls in the substantial
+agreement range under the standard Landis–Koch
+(Landis and Koch, 1977) interpretation (κ ∈
+[0.61, 0.80] = substantial). The disagreement direc-
+tion is mild (frontier slightly stricter, ∼7% fewer
+GOOD calls), with no systematic permissive bias
+from QwQ. Per step type, agreement is almost per-
+fect on answer steps (κ = 0.82) and moderate on
+search steps (κ = 0.52); the lower agreement on in-
+termediate reasoning steps (κ = 0.12) reflects the
+inherent subjectivity of judging whether a ⟨think⟩
+block provides “new useful information” — but
+reasoning steps account for only 10% of the audit,
+and the labels that drive PRM signal most directly
+(answer correctness and search quality) are pre-
+cisely where frontier agreement is strongest. This
+confirms QwQ-32B as a trustworthy open-source
+labeler.
+F Statistical Significance of Main Results
+We supplement Table 1 with bootstrap confi-
+dence intervals and per-dataset paired t-tests, com-
+puted on per-question results against PRO-STEP.
+All evaluations are conducted with temperature
+0 (greedy decoding), which removes sampling
+stochasticity and yields deterministic per-question
+outputs. We therefore report significance over the
+per-question score distribution rather than across
+multiple seeds.
+Findings. PRO-STEP significantly outperforms
+Search-R1 and ReasonRAG in macro-AVG EM
+and F1 (95% CI). Against StepSearch, F1 im-
+provements are significant; while the EM CI
+marginally includes 0, PRO-STEP leads signif-
+icantly on PopQA and 2WikiMultiHopQA. The
+decisive 2WikiMultiHopQA lead (p < 10−75) in-
+dicates the gap is not an averaging artifact.
+G Generalization Across Model Families,
+Scales, and Alignments
+The main generalization results are reported in Sec-
+tion 4.7. Here, we provide additional analysis of
+the 3B setting that is not included in the main text,
+including the underlying base-model performance,
+statistical significance, and training details.
+Additional analysis at the 3B scale. Table 17
+reports the complete 3B results, including the un-
+derlying Qwen2.5-3B Base model. PRO-STEP
+achieves 31.04 / 40.00 average EM / F1 compared
+with 26.22 / 33.51 for Search-R1 3B, while using
+5k seed questions compared with Search-R1’s 170k
+training questions.
+Training at the 3B scale. Direct DPO on the 3B
+base model achieves only 12.40 EM. We therefore
+37920

@@ -1,0 +1,104 @@
+Algorithm 1 TrustRAG routing and generation.
+Require: Query q, retrieved documents D, user role r
+Ensure: Governed response y, routing evidence e
+1: Normalize each di ∈ D into (ci, ⟨idi, li, ti, si⟩)
+2: Initialize superseded set S ← ∅
+3: for each di ∈ D do
+4: if si ̸= ⊥ then
+5: S ← S ∪ {si}
+6: end if
+7: end for
+8: Initialize Dallowed ← ∅, Ddropped ← ∅
+9: for each di ∈ D do
+10: reasons ← ∅
+11: if idi ∈ S then
+12: reasons ← reasons ∪ {superseded}
+13: end if
+14: if can_access(di, r) = 0 then
+15: reasons ← reasons ∪ {access_denied}
+16: end if
+17: if reasons = ∅ then
+18: Dallowed ← Dallowed ∪ {di}
+19: else
+20: Ddropped ← Ddropped ∪ {(di, reasons)}
+21: end if
+22: end for
+23: Build routing evidence e from Dallowed, Ddropped, and
+rejection reasons
+24: if Dallowed = ∅ then
+25: return deterministic refusal y and e
+26: end if
+27: Build filtered evidence context C from Dallowed
+28: y ← Prompt LLM with q, C, and conflict-reporting rules
+29: return y, e
+document expiration. This conservative rule avoids
+incorrectly removing older but still active docu-
+ments, including parallel active documents that con-
+tain conflicting facts. Therefore, conflicts among
+non-superseded documents are preserved for con-
+flict reporting rather than resolved by chronological
+heuristics.
+Pre-Generation Governance Router. Before re-
+trieved evidence is placed in the generation prompt,
+the Governance Router applies deterministic meta-
+data filtering. For each candidate document di, it
+evaluates both access permission and explicit su-
+persession status. The admissible document set
+is:
+Dallowed = {di ∈ D | can_access(di, r) = 1
+∧ idi /∈ S(D)}.
+Documents that fail either condition are recorded in
+Ddropped together with their rejection reasons, such
+as access_denied or superseded. The filtered
+evidence context is constructed only from Dallowed:
+C(q, r, D) = concat({ci | di ∈ Dallowed}).
+If Dallowed = ∅, TrustRAG does not invoke the
+LLM and instead returns a deterministic refusal
+with the routing evidence. This prevents the gen-
+erator from producing an answer from an empty
+admissible context.
+Conflict-Reporting Generation. When
+Dallowed ̸= ∅, TrustRAG prompts the LLM
+with the filtered evidence context C(q, r, D) and
+conflict-reporting rules. The prompt requires the
+model to generate the response only from the
+filtered evidence context. If multiple accessible
+and non-superseded documents contain incom-
+patible facts and no explicit supersession relation
+resolves the conflict, the response should enter the
+CONFLICTREPORT state by reporting the conflict
+and the distinct values in the retained evidence,
+rather than forcing a single answer. In the current
+implementation, conflict handling is enforced
+through a model-agnostic prompting policy.
+3.3 Routing-Level Invariants and Scope
+Given correct and complete governance metadata
+for the retrieved candidate set, TrustRAG enforces
+the following routing-level invariants before gen-
+eration:
+• Access invariant: If can_access(di, r) = 0,
+then its content ci is excluded from C(q, r, D).
+This prevents context-induced use of access-
+denied evidence.
+• Supersession invariant: If idi ∈ S(D), then
+ci is excluded from C(q, r, D). This prevents
+context-induced use of explicitly superseded
+evidence.
+• Empty-context invariant: If Dallowed = ∅,
+TrustRAG returns REFUSAL instead of invok-
+ing the LLM without admissible context.
+• Conflict-preservation invariant: If accessi-
+ble and non-superseded documents contain
+an unresolved conflict, TrustRAG preserves
+the retained evidence for CONFLICTREPORT
+rather than resolving the conflict by timestamp
+order.
+These invariants are scoped to the retrieved can-
+didate document set and the provided metadata.
+Specifically, the access invariant requires correct
+document access labels and user-role mappings,
+whereas the supersession invariant requires stable
+document identifiers, correct and complete super-
+session relations, and retrieval of the supersed-
+ing document; empty-context refusal and conflict
+35006

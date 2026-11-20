@@ -1,0 +1,68 @@
+Figure 2: Overview of the synthetic distractor generation process.
+3. Train Data Composition: For each sample,
+we iterate on the above mentioned steps un-
+til each sample scores 4 or higher or reaches
+five iterations. For samples that pass the qual-
+ity bar, we compose the training instances by
+combing golden passage and the generated
+distractor passage as references for the task.
+4.3 Improving Reasoning and Generalization
+Numerous studies have highlighted the advantages
+of CoT fine-tuning, as opposed to directly training
+on the final answers (Kim et al., 2023). We believe
+this is particularly crucial for the QA task, where
+directly training on the final answer may increase
+risk of hallucinations due to a knowledge mismatch
+with the pre-training (Gekhman et al., 2024).
+Nonetheless, there are two main considerations
+related to CoT fine-tuning. First, using human an-
+notators to prepare reasoning data is challenging,
+as authoring rationales is not a well-defined task.
+Second, as reported in the literature (Cheng et al.,
+2024; Liu et al., 2024) and confirmed by our experi-
+ments (Appendix A), CoT instructions significantly
+impact the quality of the final answer. However,
+prompt engineering is resource-intensive, and opti-
+mizing instructions for each domain or benchmark
+is neither scalable nor optimal.
+To address these challenges, we propose strate-
+gization as a meta-task aimed at reducing reliance
+on CoT instruction engineering while enhancing
+the performance. In this approach, the generative
+model is first tasked with producing a reasoning
+strategy that outlines the necessary thought steps.
+It then follows this strategy to generate the CoT
+and the final answer. We hypothesize this approach
+teaches the model “how to think” rather than “what
+to think”, which in turn improves its ability to
+tackle different problem settings by dynamically
+adjusting CoT steps. See Figure 3 for an example
+(additional examples in Appendix B). As illustrated
+in Figure 4, this process consists of:
+Figure 3: An example of strategization CoT inference
+process demonstrating the dynamic generation of CoT
+steps. Due to space limitations, reference documents are
+not shown here. The generated strategy outlines high-
+level reasoning steps to extract the relevant information
+from references, cite specific key pieces to support the
+asked question, and produce a final answer to the ques-
+tion. Subsequently, the reasoning follows the strategy
+steps to extract, quote, and summarize the final answer.
+1. Thought Generation: In the initial thought
+generation pass, we use an instruction prompt
+that takes the question and a set of references,
+and produces a strategy that outlines the neces-
+sary steps. This strategy guides the reasoning
+process and leads to the final answer (see the
+prompt in Appendix G.6).
+2. Thought Evaluation: Subsequently, we rea-
+son about the quality of the generated ratio-
+nale, its thought process, and how it leads to
+the final answer. Then, we assign a score of
+1 to 4, 4 indicating excellent reasoning that
+leads to the ground-truth answer (prompt in
+Appendix G.3). We consider any samples with
+score below 4 to require further iterations.
+3. Answer Evaluation: We are exclusively in-
+terested in rationales that lead to the correct
+778

@@ -1,0 +1,110 @@
+OpenAI, Josh Achiam, Steven Adler, Sandhini Agarwal,
+Lama Ahmad, Ilge Akkaya, Florencia Leoni Ale-
+man, Diogo Almeida, Janko Altenschmidt, Sam Alt-
+man, Shyamal Anadkat, Red Avila, Igor Babuschkin,
+Suchir Balaji, Valerie Balcom, Paul Baltescu, Haim-
+ing Bao, Mohammad Bavarian, Jeff Belgum, and
+262 others. 2024. Gpt-4 technical report. Preprint,
+arXiv:2303.08774.
+Keshav Santhanam, Omar Khattab, Jon Saad-
+Falcon, Christopher Potts, and Matei Zaharia.
+2022. Colbertv2: Effective and efficient re-
+trieval via lightweight late interaction. Preprint,
+arXiv:2112.01488.
+Shibani Santurkar, Dimitris Tsipras, Mahalaxmi Elango,
+David Bau, Antonio Torralba, and Aleksander Madry.
+2021. Editing a classifier by rewriting its prediction
+rules. Preprint, arXiv:2112.01008.
+Kurt Shuster, Spencer Poff, Moya Chen, Douwe Kiela,
+and Jason Weston. 2021. Retrieval augmentation
+reduces hallucination in conversation. Preprint,
+arXiv:2104.07567.
+Yi Sui, Chaozhuo Li, Chen Zhang, Dawei song, and
+Qiuchi Li. 2025. Bridging external and paramet-
+ric knowledge: Mitigating hallucination of llms
+with shared-private semantic synergy in dual-stream
+knowledge. Preprint, arXiv:2506.06240.
+Zhongxiang Sun, Xiaoxue Zang, Kai Zheng, Yang Song,
+Jun Xu, Xiao Zhang, Weijie Yu, Yang Song, and
+Han Li. 2025. Redeep: Detecting hallucination in
+retrieval-augmented generation via mechanistic inter-
+pretability. Preprint, arXiv:2410.11414.
+Likun Tan, Kuan-Wei Huang, Joy Shi, and Kevin Wu.
+2025. Interpdetect: Interpretable signals for detect-
+ing hallucinations in retrieval-augmented generation.
+Preprint, arXiv:2510.21538.
+Neeraj Varshney, Wenlin Yao, Hongming Zhang, Jian-
+shu Chen, and Dong Yu. 2023. A stitch in time saves
+nine: Detecting and mitigating hallucinations of llms
+by validating low-confidence generation. Preprint,
+arXiv:2307.03987.
+Mengru Wang, Yunzhi Yao, Ziwen Xu, Shuofei Qiao,
+Shumin Deng, Peng Wang, Xiang Chen, Jia-Chen Gu,
+Yong Jiang, Pengjun Xie, Fei Huang, Huajun Chen,
+and Ningyu Zhang. 2024a. Knowledge mechanisms
+in large language models: A survey and perspective.
+Preprint, arXiv:2407.15017.
+Mengru Wang, Ningyu Zhang, Ziwen Xu, Zekun Xi,
+Shumin Deng, Yunzhi Yao, Qishen Zhang, Linyi
+Yang, Jindong Wang, and Huajun Chen. 2024b.
+Detoxifying large language models via knowledge
+editing. Preprint, arXiv:2403.14472.
+Jason Wei, Maarten Bosma, Vincent Zhao, Kelvin Guu,
+Adams Wei Yu, Brian Lester, Nan Du, Andrew M.
+Dai, and Quoc V Le. 2022. Finetuned language mod-
+els are zero-shot learners. In International Confer-
+ence on Learning Representations.
+Yang Xu, Yutai Hou, Wanxiang Che, and Min Zhang.
+2023. Language anisotropic cross-lingual model edit-
+ing. In Findings of the Association for Computa-
+tional Linguistics: ACL 2023, page 5554–5569. As-
+sociation for Computational Linguistics.
+Ziwei Xu, Sanjay Jain, and Mohan Kankanhalli. 2025a.
+Hallucination is inevitable: An innate limitation of
+large language models. Preprint, arXiv:2401.11817.
+Ziwei Xu, Sanjay Jain, and Mohan Kankanhalli. 2025b.
+Hallucination is inevitable: An innate limitation of
+large language models. Preprint, arXiv:2401.11817.
+Yunzhi Yao, Ningyu Zhang, Zekun Xi, Mengru
+Wang, Ziwen Xu, Shumin Deng, and Huajun Chen.
+2025. Knowledge circuits in pretrained transformers.
+Preprint, arXiv:2405.17969.
+Samuel Yeh, Sharon Li, and Tanwi Mallick. 2025.
+Lumina: Detecting hallucinations in rag sys-
+tem with context-knowledge signals. Preprint,
+arXiv:2509.21875.
+Xiaowei Yuan, Zhao Yang, Yequan Wang, Shengping
+Liu, Jun Zhao, and Kang Liu. 2024. Discerning
+and resolving knowledge conflicts through adaptive
+decoding with contextual information-entropy con-
+straint. In Findings of the Association for Compu-
+tational Linguistics: ACL 2024, pages 3903–3922,
+Bangkok, Thailand. Association for Computational
+Linguistics.
+Qinggang Zhang, Shengyuan Chen, Yuanchen Bei,
+Zheng Yuan, Huachi Zhou, Zijin Hong, Hao Chen,
+Yilin Xiao, Chuang Zhou, Yi Chang, and Xiao Huang.
+2025. A survey of graph retrieval-augmented genera-
+tion for customized large language models. Preprint,
+arXiv:2501.13958.
+Wenxuan Zhou, Sheng Zhang, Hoifung Poon, and
+Muhao Chen. 2023. Context-faithful prompting
+for large language models. In Findings of the As-
+sociation for Computational Linguistics: EMNLP
+2023, pages 14544–14556, Singapore. Association
+for Computational Linguistics.
+A Related Work
+A.1 RAG Hallucination
+LLM hallucination refers to the phenomenon where
+large language models generate plausible yet factu-
+ally incorrect outputs, undermining their reliability
+in real-world applications (Kaddour et al., 2023;
+Kalai et al., 2025; Xu et al., 2025b). Retrieval-
+augmented generation (RAG) alleviates this issue
+by retrieving up-to-date and relevant external evi-
+dence and conditioning generation on the retrieved
+context (Gao et al., 2024; Fan et al., 2024; Zhang
+et al., 2025; Guu et al., 2020; Lewis et al., 2021;
+Santhanam et al., 2022; Varshney et al., 2023;
+Mishra et al., 2024).
+11889

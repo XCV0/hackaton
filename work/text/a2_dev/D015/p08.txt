@@ -1,0 +1,97 @@
+Doc. Lang. En+EnDe En+De En+EnEs En+Es En+EnZh En+Zh En+EnAr En+Ar Avg.
+Query. Lang. En De En Es En Zh En Ar (crossling.)
+GPT-4o 63.33 61.67 59.33 56.00 63.00 59.33 60.67 53.33 57.58
+Claude 3.5 51.00 45.67 46.33 42.67 46.67 48.00 47.33 39.67 44.00
+Mistral-large 45.67 42.00 43.00 39.33 48.67 37.33 43.67 32.00 37.67
+Command-R+ 43.67 40.00 42.33 40.33 49.67 36.33 43.33 32.00 37.17
+Nova-Pro 56.33 53.00 49.67 45.33 57.67 49.33 57.33 44.67 48.08
+Table 5: LLM QA accuracy in the XRAG multilingual retrieval setting, which for each language X consists of a set
+of questions each accompanied by a supporting document and three distracting documents in language X and the
+same again in English. EnX refers to English translations of documents from language X using Google Translate
+(see Figure 24). En+EnX is a monolingual retrieval baseline setting for the language pair En+X.
+3.7%
+7.2%
+12.3%
+1.0%
+0.3%
+5.1%
+5.9%
+4.3%
+GPT-4o Claude 3.5 Mistral-large Command-R+
+Query Language
+German
+Chinese
+2
+4
+6
+8
+10
+12Percentage of English Responses (%)
+LLM
+Figure 5: Percentage of instances in cross-lingual RAG
+with monolingual retrieval (English documents) where
+LLMs respond in English instead of the German or
+Chinese question language.
+articles in the monolingual retrieval setting are al-
+ready in English so this baseline experiment simply
+replaces the translated question with its original
+English (see English Q&A in Figure 2).
+Table 4 shows the results as assessed by the LLM
+judge panel. XRAG in the monolingual retrieval
+setting poses a significant challenge for LLMs,
+with all models performing poorly. Among them,
+GPT-4o achieves the highest average accuracy at
+55.50%,6 while others score considerably lower,
+ranging from 31.4% to 41.43%. The cross-lingual
+capabilities of LLMs vary across languages. Com-
+pared to the English monolingual RAG baseline,
+all models experience a performance drop when
+answering non-English questions, but the severity
+of this drop differs. GPT-4o and Claude exhibit
+the smallest and most consistent declines across
+languages, suggesting more robust multilingual
+handling. Command-R+ and Mistral show larger
+variability, indicating potential language-specific
+weaknesses, particularly for Mistral, which suffers
+a 56.3% relative drop in Arabic.
+Surprisingly, we find that LLMs have issues
+with Response Language Correctness (RLC), i.e.,
+they respond in English instead of the question lan-
+guage. Figure 5 lists the percentage of cases in the
+monolingual retrieval setting where LLMs respond
+in the wrong language. GPT-4o and Command-R+
+produce the fewest RLC errors, while Mistral-large
+is most affected.
+5.4 XRAG in Multilingual Retrieval Setting
+We now benchmark LLMs in cross-lingual RAG
+with the multilingual retrieval setting of XRAG.
+As with monolingual retrieval, we construct an
+English monolingual RAG setting for comparison.
+We replace the original non-English questions with
+their English counterparts (questions before human
+translation; see English Q&A in Figure 2). We also
+translate non-English supporting and distracting
+articles into English using Google Translate.
+Table 5 presents LLM performance in cross-
+lingual QA in the multilingual retrieval setting of
+XRAG. All models exhibit poor performance in
+this cross-lingual scenario, with GPT-4o having the
+highest average accuracy at 57.58% and Command-
+R+ the lowest at 37.17%. LLMs also show accu-
+racy degradations relative to their corresponding
+English monolingual RAG baseline, despite the
+latter being constructed with the assistance of ma-
+chine translation.
+To identify the most challenging aspect of the
+cross-lingual RAG with multilingual retrieval, we
+conduct a controlled analysis by gradual conversion
+to the English monolingual RAG setting. Specif-
+ically, we successively replace the question, sup-
+porting articles, and distracting articles by their
+English counterparts from the monolingual RAG
+baseline. Table 6 shows the results of GPT-4o.
+Changing the question (and expected answer) lan-
+guage from non-English to English only brings a
+relatively small average improvement, suggesting
+that non-English generation may not be the core
+15676

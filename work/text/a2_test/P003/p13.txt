@@ -1,0 +1,94 @@
+URGen: Uncertainty-guided Retrieval-augmented Generation
+for Guideline-Grounded Medical Question Answering
+Supplementary Materials
+A Dataset and Keypoint Corpus
+Construction
+Dataset overview. We construct two expert-
+curated ophthalmology multiple-choice QA
+benchmarks from long-form clinical guidelines
+and consensus documents: Thyroid Eye Disease
+(TED) and Graves’ Disease (GD). The TED
+benchmark is based on the Management of Thy-
+roid Eye Disease by the American and European
+Thyroid Associations1 (Burch et al., 2022), while
+the GD benchmark is based on the 2018 European
+Thyroid Association Guideline for the Manage-
+ment of Graves’ Hyperthyroidism2 (Kahaly et al.,
+2018). These documents are substantially longer
+and more specialized than the passages typically
+used in general-domain reading comprehension.
+They contain diagnostic criteria, activity and
+severity deﬁnitions, treatment recommendations,
+contraindications, referral criteria, and follow-up
+guidance, all of which are important for clinically
+grounded medical QA.
+The resulting datasets are designed to support
+several evaluation goals. First, they evaluate
+whether a model can answer specialized medical
+questions that require guideline-level knowledge
+rather than broad medical commonsense. Second,
+because every question is paired with a curated
+keypoint corpus, the datasets allow controlled eval-
+uation of retrieval quality, adaptive retrieval depth,
+and evidence sufﬁciency. Third, they support relia-
+bility evaluation through uncertainty metrics such
+as expected calibration error (ECE) and overcon-
+ﬁdent error rate (OC@0.8). Finally, they can be
+used to study whether a model can avoid noisy
+or redundant context when multiple clinically re-
+lated but answer-irrelevant guideline statements
+are available.
+What the datasets contain? Each benchmark
+item contains a medical question, multiple answer
+options, a gold option label, and the corresponding
+topic-speciﬁc keypoint corpus. The questions are
+written to test clinically meaningful distinctions,
+1https://etj.bioscientifica.com/view/journals/
+etj/11/6/ETJ-22-0189.xml
+2https://etj.bioscientifica.com/view/journals/
+etj/7/4/ETJ490384.xml
+including diagnostic thresholds, disease activity,
+disease severity, imaging recommendations, treat-
+ment indications, and follow-up decisions. Dis-
+tractor options are often medically plausible in a
+broad sense, but incorrect under the speciﬁc guide-
+line context. This design makes the benchmark
+more suitable for evaluating retrieval-augmented
+medical QA than simple factual recall: a model
+must retrieve the correct guideline keypoints and
+avoid being distracted by related but non-decisive
+keypoints.
+Keypoint corpus construction. The keypoint
+corpus is not produced by an additional learned
+model. It follows the public XML structure of
+each guideline or consensus document: a guide-
+line statement serves as the keypoint, and its sup-
+porting section serves as the passage. This deter-
+ministic conversion does not use later manual pair-
+ing. In URGen, keypoints are used for ranking be-
+cause they are compact and discriminative, while
+the associated passages are provided to the LLM
+only after adaptive depth selection. Table S2 sum-
+marizes the construction protocol.
+Public release. We plan to publicly release
+the benchmark content, including the question
+ﬁles, answer labels, keypoint identiﬁers, keypoint
+texts, supporting passages, and evaluation scripts.
+Since the data are derived from public guidelines
+and expert-curated questions rather than patient
+records, the benchmark does not contain protected
+health information. The release is intended to
+make the retrieval and calibration evaluation repro-
+ducible, and to facilitate future work on guideline-
+grounded medical QA.
+B Implementation Details and
+Computational Cost
+Inference conﬁguration. Table S3 reports the
+measured stage-wise runtime for the Llama-3.1-
+8B experiments. URGen is training-free, so it does
+not require parameter updates, auxiliary model
+training, or a learned retriever. Its computation
+comes from two LLM-facing stages: keypoint
+ranking and answer generation.
+The shared 2.59 GPU-s ranking cost is followed
+3930

@@ -1,0 +1,73 @@
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+Wizard of Wikipedia Number of Knowledge Sentences
+1
+2
+3
+4
+5
+6
+7
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+HotpotQA Number of Knowledge Sentences
+0
+2
+4
+6
+8
+Figure 8: Scatter plot of the number of selected knowledge sentences versus the knowledge precision on Wizard of
+Wikipedia (left) and HotpotQA (right). Each data point corresponds to a full experiment on the entire sampled
+dataset.
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+Wizard of Wikipedia GPT-4o-mini k=3
+0.20
+0.21
+0.22
+0.23
+0.24
+0.25
+0.26
+0.27
+0.28
+0.0 0.2 0.4 0.6 0.8 1.0
+Knowledge Precision
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0Knowledge Recall
+HotpotQA GPT-4o-mini k=3
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+Figure 9: Scatter plot of answer F1 versus the knowledge precision for GPT-4o-mini on Wizard of Wikipedia (left)
+and HotpotQA (right) by limiting the number of knowledge sentences up to k=3. The dots highlighted in orange
+indicate settings outperforming the “full knowledge” setting (without constraining the number of sentences for
+fair comparison with other figures), while those highlighted in cyan indicate settings underperforming the “no
+knowledge" setting. Each figure is a meta-experiment, and each data point corresponds to a full experiment on the
+entire sampled dataset.
+4117

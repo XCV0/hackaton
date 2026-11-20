@@ -1,0 +1,119 @@
+Wang et al. 2024 | https://doi.org/10.34133/research.0332 3
+HTM, namely, SF-MPA-MCz, was developed by tailoring spi-
+robifluorene simultaneously with diphenylamine and carbazole 
+moieties. Unlike the previous work involving isotropic regula-
+tion using the single functional unit, we first realized the syn-
+chronous regulation based on the spiro-skeleton by incorporating 
+different functional fragments at the single molecular level. 
+Benefiting from this strategy, we found that tiny variation 
+induced by the half replacement of diphenylamine units in 
+Spiro-OMeTAD by carbazole units can result in distinct opto-
+electronic properties and film morphologies. Encouragingly, as 
+expected, by the introduction of rigid carbazole units, SF-MPA-
+MCz exhibits improved thermal stability and hole mobility, 
+suitable energy level alignment, excellent film morphology, and 
+optimized interfacial contact, all of which contribute to remark-
+ably high PCE of 24.53% [open voltage (VOC) of 1.18 V, short-
+circuit current density (J SC) of 26.24 mA cm−2, fill factor (FF) 
+of 79.22%], outperforming the control device based on Spiro-
+OMeTAD (22.95%). Importantly, compared to Spiro-OMeTAD, 
+the stability of SF-MPA-MCz-based device can be apparently 
+enhanced with more than 90% PCE maintained after 500 h of 
+continuous illumination at 100 (mW cm−2) and more than 85% 
+PCE maintained after 1,000-h heating at 85 °C.
+Results
+Design, synthesis, and structures
+To determine the effectiveness of an anisotropic regulation 
+strategy, ab initio molecular design should be simple and com-
+parable. Thus, based on the prototypical spiro-type HTM 
+Spiro-OMeTAD, we selectively changed two diphenylamine 
+units to carbazole units due to their similar molecular size and 
+chemical compositions. The remaining diphenylamine units 
+can maintain the molecular oxidizability and superior hole-
+transporting ability. At the same time, the introduction of rigid 
+and planar carbazole moieties is anticipated to enhance the 
+thermal stability and intermolecular stacking of HTMs, aiming 
+to optimize the intrinsic hole mobility and film morphology 
+of HTMs. Similar to Spiro-OMeTAD, SF-MPA-MCz can be 
+straightforward to synthesize by using the key intermediate 
+2,7-dibromo-2′,7′-diiodo-9,9′-spirobi[fluorene], whose synthetic 
+details could be found in the Supplementary Materials (Experi -
+mental Section). Relying on the different reactivities of bromine 
+and iodine, bis(4-methoxyphenyl)amine was first selectively 
+coupled with iodinated fluorene under relatively mild reaction 
+conditions to obtain the intermediate SF-MPA-Br in a moderate 
+yield of 54%. Successively, a similar Buchwald C–N coupling 
+reaction was carried out between 3,6-dimethoxy-9H-carbazole 
+and SF-MPA-Br to produce the target molecule SF-MPA-MCz 
+in a high yield of 84%. The chemical structure of SF-MPA-
+MCz was well characterized by 1H nuclear magnetic resonance 
+(NMR), 13C NMR, matrix-assisted laser desorption ionization 
+time-of-flight (MALDI-TOF) mass spectrometry, and elemen-
+tal analysis (EA).
+Moreover, the crystal of SF-MPA-MCz can be easily obtained 
+by solvent diffusion method and characterized by single-crystal 
+x-ray diffraction (XRD) to reveal the molecular conformation and 
+stacking (Fig. 2A and B). Spiro-OMeTAD and SF-MPA-MCz 
+belong to the triclinic space group but feature distinct stacking 
+behaviors (Fig. S5 and Table S1). It can be seen that Spiro-OMeTAD 
+contains two molecules in a single-crystal unit cell, while SF-MPA-
+MCz contains four molecules. As we know, the adjacent Spiro-
+OMeTAD molecules in a single-crystal unit cell can form parallel 
+π-π stacking by accumulating fluorene structures. However, the 
+steric hindrance effect produced by the peripheral groups and the 
+orthogonal spiro-fluorene will hinder the formation of continuous 
+π-π stacking between each unit cell, which will restrain the delo-
+calization of hole carriers, thereby suppressing carrier transport 
+capacity [25]. By contrast, for SF-MPA-MCz, the terminal bis(4-
+methoxyphenyl)amine group could be embedded into the adjacent 
+spiro-fluorene cores and, therefore, generate multiple short con-
+tacts with adjacent molecules, which may provide continuous 
+channels for intermolecular hole hopping (Fig. S5).
+Thermal, optoelectronic, and thin-film properties
+Thermogravimetry analysis (TGA) and differential scanning 
+calorimetry (DSC) were first applied to characterize the ther -
+mal properties of HTMs, as shown in (Fig. S6 and Fig. 2C). 
+Expectedly, the incorporation of rigid carbazole units is benefi-
+cial for the enhancement of thermal stability of SF-MPA-MCz, 
+which shows a higher decomposition temperature of 445 °C 
+(Td, 5% weight loss temperature) (Fig. S6) and glass transition 
+temperature (T g) of 154 °C as opposed to Spiro-OMeTAD 
+(Td = 437 °C, Tg = 121 °C) (Table 1). Figure 2D shows the UV 
+absorption spectra of Spiro-OMeTAD and SF-MPA-MCz. Both 
+HTMs exhibit obvious double absorption peaks in the range 
+of 300 to 400 nm in solutions, but for SF-MPA-MCz, a distinct 
+bathochromic shift is observed from solution to film state, indi-
+cating that SF-MPA-MCz has a stronger aggregation than 
+Spiro-OMeTAD in the solid state. Moreover, compared to 
+Spiro-OMeTAD, SF-MPA-MCz exhibits a defined absorption 
+peak ascribed to 0–0 transition at 350 to 400 nm without 0–1 
+vibrational transition, indicating the different molecular con-
+formation or arrangement for both HTMs [20]. Cyclic voltam-
+metry (CV) was used to evaluate the highest occupied molecular 
+orbital (HOMO) levels of the HTMs in solutions. It can be seen 
+in Fig. 2E that one of the oxidation potential peaks is missing 
+for SF-MPA-MCz due to the reduced number of diphenylamine 
+groups, and the oxidation onset is shifted to a higher potential 
+for SF-MPA-MCz, resulting in deeper HOMO level of −5.17 eV 
+than that of Spiro-OMeTAD (−5.13 eV). To further confirm 
+the energy levels in the film state, ultraviolet photoelectron 
+spectroscopy (UPS) was performed, as shown in Fig. S7. By 
+analyzing the cutoff (Ecutoff) and onset (Eonset) energy regions in 
+the spectra, the HOMO levels of SF-MPA-MCz and Spiro-
+OMeTAD are calculated to be −5.26 and −5.19 eV, respectively, 
+showing the consistent variation trend with the CV measure-
+ments. The lowered HOMO level of SF-MPA-MCz enables bet-
+ter energy level alignment with the perovskite layer, and the 
+enhanced hole transfer may be anticipated, which is favorable 
+for the increment of VOC in PSCs.
+To verify the effectiveness of the anisotropic regulation strat-
+egy, fluorescence anisotropy is performed, as shown in Fig. S8 
+and Table 1. The anisotropy (r) value is obtained by the follow-
+ing equation: r = IVV − G × IVH IVV + 2G × IVH ; here, V and H represent vertical polarization and horizontal polarization, respectively, and the 
+grating factor (G) value is calibrated by the following equation: 
+G = IHV IHH  [26]. The obtained r value of SF-MPA-MCz is 0.08, much higher than Spiro-OMeTAD with a highly symmetrical 
+structure (0.016), indicating the higher excited state dipole 
+moment and stronger anisotropy of SF-MPA-MCz [27].
+To investigate the thin-film properties of two HTMs, atomic 
+force microscopy (AFM) was first carried out. The AFM images 
+Downloaded from https://spj.science.org on November 19, 2026

@@ -1,0 +1,57 @@
+Case 1: Entity Confusion (2WikiMultiHopQA)
+Q: Where was the place of death of the director of film Curse Of The Crimson Altar?
+Gold Answer: Durban, South Africa
+Search-R1 (Outcome Reward) Ours (Process Reward)
+Step 1 — Query: Vernon Sewell place of death
+Retrieved: George Sewell, Cecil Sewell, John Sewell (cricketer)
+✗  Vernon Sewell document NOT found
+Step 2 — Reasoning:
+"It is reasonable to assume that the place of death mentioned is the same person"
+→ Confuses John Sewell (cricketer, d.1897) with Vernon Sewell (director, d.2001)
+Answer: Pietermaritzburg ✗
+⚠  Entity Confusion: uses wrong person's death place as answer
+Step 1 — Query: director of film Curse Of The Crimson Altar
+Retrieved: Vernon Sewell identified as director ✓
+Step 2 — Query: Vernon Sewell place of death
+"John Sewell (cricketer) mentions a place of death, which is not the director we are looking for"
+→ Correctly distinguishes entities ✓
+Steps 3–7: Progressive query refinement (5 attempts)
+→ "Vernon Sewell biography...", "Vernon Sewell date of death..."
+Step 8 — Query: Vernon Sewell ... film Curse of the Crimson Altar
+Retrieved: "Vernon Sewell died on 21 June 2001 in Durban, South Africa"
+Answer: Durban, South Africa ✓
+✓  PRM rewards correct entity distinction and persistent multi-step search
+Key Difference: Both methods receive the same retrieval results for "Vernon Sewell place of death".
+Outcome Reward model confuses entities and stops early (2 steps). Process Reward model correctly identifies the mismatch and persists (9 steps).
+Figure 6: Case Study 1: Entity confusion. The baseline prematurely answers based on a mismatched entity (John
+Sewell), whereas PRO-STEP rejects the flawed step via PRM feedback and persistently searches for the correct
+target.
+Case Study 2: Error Propagation from Wrong First Hop (MuSiQue)
+Q: When is Celebrity Big Brother coming to the network which, along with ABC and the original broadcaster of Here and Now, is the other major broadcaster based in NY?
+Gold: February 7, 2018   Hops: Here and Now → NBC → {ABC, NBC, CBS} → Celebrity Big Brother on CBS → Feb 7, 2018
+ReasonRAG (Outcome Reward, 4 Prompts) ProStep (Process Reward)
+Decomposition:
+Sub-Q1: Here and Now → NBC (correct)
+Sub-Q2: Other major broadcaster → NBC ✗  (should be CBS)
+Search 1: "When is Celebrity Big Brother coming to NBC?"
+Retrieved: "premiered on CBS on January 21, 2019"
+→ Evidence shows CBS, but searching for NBC → evidence ignored
+Searches 2–4: Repeats identical query "Celebrity Big Brother coming to NBC"
+→ Same CBS results returned 3 more times → still ignored
+Cannot find Celebrity Big Brother on NBC → Hallucinates answer
+Answer: 2023 ✗
+Error Propagation: wrong first hop (NBC) contaminates entire chain
+Step 1  Search: When did Here and Now start and which network originally broadcast it?
+Here and Now (1992 TV series) on NBC ✓  — Distinguishes radio (NPR) vs TV version
+Step 2  Search: Which network co-broadcasts with ABC and NBC, based in NY?
+ABC, NBC are two major NY broadcasters → the other is CBS ✓
+Step 3  Search: When is Celebrity Big Brother coming to CBS?
+Retrieved: "Celebrity Big Brother premiered on CBS on February 7, 2018" ✓
+Steps 4–5: Verifies CBS is based in NY, confirms premiere date
+Answer: February 7, 2018 ✓
+PRM ensures each reasoning hop is completed correctly before proceeding
+Insight: ReasonRAG's wrong first-hop decomposition (NBC instead of CBS) propagates through the entire chain, leading to repeated failed searches and eventual hallucination. ProStep solves each hop sequentially — identifying NBC first, then deducing CBS, then searching for
+the date — with process-level feedback ensuring no step proceeds on incorrect reasoning.
+Figure 7: Case Study 2: Error propagation. The baseline repeats useless searches after an incorrect intermediate
+hop. PRO-Step evaluates each hop, avoids the error made by the baseline, and completes the logical chain.
+37925

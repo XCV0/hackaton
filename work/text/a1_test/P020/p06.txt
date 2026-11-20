@@ -1,0 +1,52 @@
+3. Results and discussion
+3.1. Model validation
+First, we validated our coupled optoelectronic model by simulating a conventional MgF2/FTO /ITO/CdS/
+CdTe/ZnTe/Au solar cell containing a 3000-nm-thick homogeneous CdTe photon-absorbing layer [20]. The
+simulated values of Jsc, Voc, the form factor FF, and η for ξ = 0 ( = 1.5gE eV) are presented in table 1, alongside
+the corresponding experimental data [20]. Our model’s predictions are in reasonable agreement with the
+experimental data, the differences being due very likely to variances between the optical and electrical properties
+used in the model and those realized in practice.
+3.2. Optimization for zincblende phase (ξ  0.4)
+3.2.1. Homogeneous bandgap
+We then carried out the optoelectronic optimization of TFSCs with a homogeneous CdTeSe photon-absorbing
+layer. The parameter space for optimizing η was set up as: Ls ä [100, 3000] nm and []Î 1.4, 1.5gE eV. The
+maximum efﬁciency predicted is 19.72%, which was obtained with Ls = 3000 nm and = 1.4gE eV (ξ = 0.4).
+The values of Jsc, Voc, and FF corresponding to this optimal design are 28.73 mA cm-2, 818 mV, and 83.93%,
+respectively.
+In the literature, the champion CdTeSe TFSC fabricated was reported to deliver Jsc = 31.40 mA cm-2,
+Voc = 899 mV, FF = 79.30%, and η = 22.4% [41]. Unfortunately, we are unable to validate our model against
+this TFSC due to the unavailability of its exact design.
+3.2.2. Linear bandgap grading
+Next, we maximized η by linearly grading the bandgap energy of the CdTeSe photon-absorbing layer, using
+either equation (2) or equation (3). The resulting optimal values of Jsc, Voc, FF, and η are summarized in table 2,
+along with the associated parameters g,minE , g,maxE , and A.
+Backward grading yielded a maximum efﬁciency of 19.72% with = 1.4g,minE eV, = 1.5g,maxE eV, A = 0,
+and Ls = 3000 nm. This result matches the efﬁciency reported in section 3.2.1 for the homogeneous-bandgap
+case, with no change observed in the values of Jsc, Voc, and FF.
+With forward grading, the maximum efﬁciency predicted is 21.79% with = 1.4g,minE eV, = 1.5g,maxE eV,
+A = 1.0, and Ls = 3000 nm. This represents a 10.49% relative improvement over the 19.72% efﬁciency achieved
+with a homogeneous photon-absorbing layer of the same thickness. The optimal design delivers Jsc = 28.52 mA
+cm-2, Voc = 884 mV, and a ﬁll factor of 86.62%. While Jsc remains nearly identical to that for the homogeneous-
+bandgap case, Voc shows a notable 8.07% increase.
+Table 1. Comparison of Jsc, Voc, FF, and η predicted by the coupled optoelectronic
+model and experimental results for a TFSC with a homogeneous CdTe (i.e., ξ = 0)
+photon-absorbing layer [20].
+ξ g,minE
+Jsc
+(mA cm−2) Voc FF η
+(eV)(mV)(%)(%)
+Experimental [20] 0 1.5 25.50 831 77.40 16.40
+Model 0 1.5 25.41 889 81.94 18.51
+Table 2. Predicted parameters of the optimal TFSC when the 3000-nm-thick CdTeSe photon-absorbing layer is either homogeneous,
+linearly graded, or nonlinearly graded along the thickness direction. The change in η relative to the homogeneous-bandgap case is also
+tabulated.
+Grading type g,minE g,maxE A α K ψ
+Jsc
+(mA cm−2) Voc FF η Relative change in η
+(eV)(eV)(mV)(%)(%)(%)
+Homogeneous 1.4 ————— 28.73 818 83.93 19.72
+Linear (Backward) 1.4 1.5 0 —— — 28.73 818 83.93 19.72 0
+Linear (Forward) 1.4 1.5 1 —— — 28.52 884 86.62 21.79 10.49
+Nonlinear 1.4 1.5 1 1 1.5 0.6 27.99 876 86.51 21.22 7.60
+5
+J. Phys. Commun. 9 (2025) 055008 F Ahmad et al

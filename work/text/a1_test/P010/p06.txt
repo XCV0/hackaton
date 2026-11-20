@@ -1,0 +1,97 @@
+shows the accumulation of ions. At intermediate scan speeds,
+where the ion speed is approximately equal to the scan speed,
+the peak hysteresis is observed. This scenario is exempliﬁed by
+thebanddiagramsinFigure2eandoccurswhentheions
+slightly lag behind the scan speed and thus do not have time
+to move back during the forward scan and remain in a position
+close to their SC position during the forward scan. This creates
+a pit in the energy band and a negative ﬁeld region (in particular
+at the MPP in the forward scan), which in turn can dramatically
+reduce the efﬁciency due to less efﬁcient charge extraction.
+Finally, at the fastest scan speeds, much larger than the ion speed,
+the ions have no time to react and remain locked in their initial
+position under OC conditions. This scenario is exempliﬁed by
+the band diagrams in Figure 2f. Since the ions have no time to
+react to the change in the external electric ﬁeld, they do not
+signiﬁcantly impact the device performance as the formation
+of ﬁeld-free regions is prevented (which reduces the
+recombination).
+In the next paragraph, we aim to corroborate the previously
+fast-hysteresis measurements with complementary charge
+extraction measurements. To this end, we ﬁrst estimated the
+density of mobile ions and their extraction time via BACE meas-
+urements in the dark.[51] Brieﬂy in the measurement, the cell is
+kept at “OC-like” condition. For this measurement, we deﬁne the
+OC condition as the point at which the injection current equals
+the JSC, which takes into account possible voltage losses over
+device and external resistances, which reduce the actual voltage
+drop over the device in the dark. Then, the voltage is switched to a
+collection bias (Vcoll), in this case, 0 V. Upon switching the volt-
+age, the carriers present in the device get extracted allowing us to
+estimate the carrier density by integrating the current. We also
+note that the mobile ions are not “extracted” out of the device per
+se rather transported to the perovskite/transport layer interfaces
+(or even metal contacts). The movement of ionic charge toward
+the interfaces at SC conditions leads to a displacement current in
+the external circuit, which is equivalent to the ionic current.
+By plotting the current in Figure 3a and the integral of the cur-
+rent in Figure 3b,i.e., the extracted charge on a log-log scale,
+we observe two distinct regimes in the current decay. The ﬁrst
+regime in the μs-regime corresponds to the RC-discharge of the
+metal electrodes (“CU charge”) and the extraction of fast-moving
+electronic charges that have been injected into the cell upon
+application of the forward bias. The second regime
+corresponds to slow-moving charges, which we assign to the
+mobile ions in the ms-regime. The ﬁrst plateau shows an
+extracted charge of /C251.5 /C2 1016 cm/C03 after less than /C251 μs.
+Through the application of a reference voltage step from 0 V
+to minus VOC, we can disentangle the contribution of the capaci-
+tive charge and electronic injected charge to the ﬁrst plateau as it
+is done routinely for organic solar cells.[58] Supplementary
+Figure S7 shows that the capacitive charge contributes the larger
+fraction (/C251 /C2 1016 cm/C03) to the ﬁrst charge plateau than the
+10-7 10-6 10-5 10-4 10-3 10-2 10-110-4
+10-3
+10-2
+10-1
+100
+101
+102
+103
+10-7 10-6 10-5 10-4 10-3 10-2 10-11015
+1016
+10-7 10-6 10-5 10-4 10-3 10-2 10-10
+50
+100
+150
+200
+10-7 10-6 10-5 10-4 10-3 10-2 10-10
+50
+100
+150
+200
+J mc Am[ -2 ]
+Time [s]
+n  [cm -3 ]
+Time [s]
+C mc Fn[ -2]
+Time [s]
+nion 
+= 9x1015
+cm-3
+3.75x1015 cm-3
+Cx0.4V
+ 83-17 Triple cation
+ PM6:Y6 (220 nm, OPV)
+C  [nF cm-2 ]
+Time [s]
+(a) (b)
+(c) (d)
+Figure 3. a) BACE, b) integrated BACE, c) charge extraction by linearly increasing voltage in the dark (dark-CELIV), and d) capacitance versus frequency, all
+performed in the dark for the 83-17 triple cation perovskite device, showing a consistent signal for the ions in the ms – s regime. The dashed blue line in
+(d) represents a PM6:Y6 organic solar cell, which shows no signal at long timescales (i.e., low frequencies) where the ionic signal is seen for perovskite.
+The dashed straight lines indicate the estimated ion-transit times from each measurement.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100772 2100772 (6 of 10) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 4, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100772, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

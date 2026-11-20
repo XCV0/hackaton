@@ -1,0 +1,42 @@
+A Appendix
+A.1 W-RAC Prompt
+Chunk Grouping and Hierarchical Structuring Prompt
+You are tasked with processing an array of document chunks representing text sections, headings, and titles. Your goal is
+to extract and group only the main policy, explanatory, or instructional content (e.g., rules, eligibility, charges) into logical,
+context-rich units.
+CORE REQUIREMENTS
+1. Three-Level Heading Hierarchy
+Build a complete heading hierarchy tree by tracing parent_heading relationships upward. Every chunk group must include
+exactly 3 levels:
+• Level 1: Top-level/root heading - document title or highest-level heading that encompasses the content’s topic
+• Level 2: Mid-level parent heading - intermediate heading or reuse Level 1
+• Level 3: Immediate parent heading - most immediate parent or nearby matching heading
+Missing levels: Use an existing heading chunk ID that best matches context (title, document structure, surrounding content).
+You may reuse the same heading ID for multiple levels. Only use existing chunk IDs—cannot create new ones.
+2. Parent Headings with Multiple Children
+When a parent heading has multiple child sections, include the parent heading ID in EACH child group array. Never
+output parent headings as standalone arrays when they have multiple children.
+Example: ["heading_66", "heading_67", "text_68"] and ["heading_66", "heading_80", "text_81"] (head-
+ing_66 appears in both).
+3. Procedural Content
+NEVER split procedural steps, instructions, or sequential numbered/bulleted lists across multiple chunks. When content
+represents a procedure, process, or step-by-step instructions (e.g. “Steps to...”, numbered steps 1, 2, 3...), group ALL steps
+together in a SINGLE chunk array, even if they have individual headings or are numbered separately.
+Examples of procedural content that must stay together:
+• Step-by-step instructions
+• Numbered procedures
+• Sequential how-to guides
+• Multi-step processes
+• Ordered lists of actions
+4. Context & Merging
+• Use heading hierarchy, parent_heading, and title fields to map structure
+• If parent_heading is None but structure shows hierarchy, infer parent-child relationships from sequential patterns
+• For small chunks (≤2 lines) missing context, merge with title/heading/adjacent chunks
+• Include relevant titles/headings with dependent content
+• Do not always rely on the markdown given, use the context of the document to infer the heading hierarchy and group
+the chunks accordingly
+5. Filtering
+Remove: cookies, page navigation, logins.
+6. Output Rules
+• Output only chunk IDs (no text modifications)
+10

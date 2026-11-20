@@ -1,0 +1,121 @@
+www.advancedsciencenews.com www.advenergymat.de
+junction,withtheexceptionofa520mVTiO2 outlierinanearly
+study by Zhou et al.[18] The next highest Voc reported with TiO2
+is just below 450 mV, although it would appear that these stud-
+ies did not include any method to remedy selenium deﬁciency
+in the Sb2Se3 ﬁlms which is commonly cited as a source of Voc
+loss.[21–25] It is also worth noting that of the 14 reported devices
+>450mV,tenofthosewereinasubstratedevicegeometrywitha
+Moholecontact,whichmaypartiallyexplaintherelativesuccess
+ofCdSwithregardsto Voc.
+Theperformancelimitinginter-diﬀusionattheCdS/Sb2Se3 in-
+terface,observedfordevicesofbothsubstrateandsuperstratege-
+ometries,iswell-established.[24,26–28] Inthecaseofsuperstratede-
+vices, this introduces constraints on possible high-temperature
+post-deposition selenization treatments of the absorber which
+would damage the CdS/Sb2Se3 interface. The high stability of
+the TiO2/Sb2Se3 interface during high-temperature exposure
+is a signiﬁcant beneﬁt in this regard (Figure S1, Supporting
+Information).[29]
+As expected, wide bandgap TiO2 ETL Sb2Se3 devices outper-
+formCdS,intermsof Jsc (Figure1c),duetotheparasiticabsorp-
+tion from the narrow 2.4 eV CdS bandgap heavily studied and
+optimizedinCdTeliteraturewhichlimitsthecollectionfromthe
+bluepartofthespectrum.Theexceptionhereisareported35mA
+cm−2 CdSpartnerdevicefromDongetal.whichappearstobea
+record for Sb2Se3, although external quantum eﬃciency (EQE)
+measurementsareabsent.[25]
+Whilstthe Voc advantageinCdSETLSb2Se3 devicesoverTiO2
+maybeexplainedbysubstrategeometryandselenizationeﬀorts,
+the ﬁll factor (FF) of the best CdS ETL devices (≈70%) is still
+above that of TiO2 (≈60%)(Figure 1d). These parameters are of
+courseintrinsicallylinkedthroughnon-radiativerecombination,
+however, low Sb2Se3 device FFs cannot be explained purely by
+Voc-deﬁcitasillustratedbythe400mV Voc devicebyLietal.with
+>70% FF.[27] Clearly,thereisstillsigniﬁcantroomforthedevel-
+opment of Sb2Se3 device architectures to improve selective car-
+riertransport,whichappearstobeabiggerissue,atpresent,for
+metaloxideETLdevices(Figure1).
+The widely implemented organic hole transport layers (HTL)
+(Spiro-OMeTAD, P3HT etc.) in superstrate devices oﬀer a two-
+birds-one-stone solution to both low shunt resistance (Rsh)and
+forward-bias rollover caused by the Sb2Se3/Au interface.[7] This
+is achieved by simultaneously pinhole blocking shunt pathways
+and improving charge selectivity at the hole contact to improve
+bothaverageandpeakcell FFs.
+For electron transport, there are two studies outside of
+our group which report on TiO2 processing optimization in
+Sb2(S,Se)3 literature. The ﬁrst study by Chen et al. varied post-
+depositionannealtemperaturesoftheirspray-pyrolysisdeposited
+TiO2 andconcludedthatreduceddeep-leveldefectsinthe450 °C
+sample resulted in improved Sb2Se3 solar cell performance.[30]
+Koltsov et al. compared the eﬀects of vacuum and air annealing
+of their spray-pyrolysis TiO2 and suggested that an initial low-
+temperature vacuum anneal, prior to the typical 450 °C air an-
+neal,improvedperformancebyreducingorganicresiduesinre-
+sultingﬁlms.[31] Bothstudiesomitcurrentdensity–voltage(J–V)
+curvesforthesesections,butasigniﬁcant FF dependenceisob-
+servedinreported J–V parameters(aslowas ≈30%whichisap-
+proaching a ﬂat line in the power quadrant), suggesting severe
+“S-shape” J–V distortion.
+Previously, we have reported on FF limiting J–V distortion
+whichisinducedbychargebarriersfromdefectiveTiO2 ETLs.[32]
+They appear inﬂuenced by poor crystallinity, defect-driven pho-
+toconductivityandmixed-phaseﬁlmsofthispolymorphicmate-
+rial. In the aforementioned study, Sb2Se3 solar cells with radio
+frequency (RF) magnetron sputtered TiO2 ETLs were deposited
+from a compound TiO2 target, although optimization eﬀorts in
+thiscasewerelimitedbyreproducibilityissues.Thestubbornad-
+herencetoCdSETLs,ratherthanTiO2,maybeduetotherelative
+diﬃcultyofproducingmonophasicTiO2 withreliableelectronic
+properties,comparedtoCdS.
+For charge separation and selective carrier transport in so-
+lar cells, there must be an asymmetry in the electron and hole
+conductivities.[33–35] Inp-i-nheterojunctiondevices,thefunction-
+alityoftheETLandHTLiscriticaltoachievethis.[33] Foreﬃcient
+selectivity,theETL/absorberinterfaceisrequiredtohaveamini-
+malconductionbandoﬀset(CBO)andalargevalencebandoﬀset
+(VBO)tofacilitateelectrontransportwhilstimpedingholetrans-
+port. It is well established that a type-I (“spike”) CBO can lead
+to J–V distortionfromtheresultinginterfacialchargebarrierfor
+electronsandasubsequentcollapseindevice FF.[36–40]
+Band position measurements via photoemission spec-
+troscopy for both TiO2 and Sb2Se3 are numerous and hugely
+variant.[32,41–45] Figure S2 (Supporting Information) shows two
+examples in the literature which report a –0.50 eV CBO “cliﬀ”
+and a +0.71 eV CBO spike (a relative CBO diﬀerence of 1.21
+eV).[42,43] Thisvarianceofbandpositionsforwhatisanintrinsic
+material property is of course unphysical and highlights lim-
+itations in the band alignment method. Determination of the
+ionizationpotentialviaphotoemissionintroducesmeasurement
+uncertainties;spectrometercalibration,charging,linearextrapo-
+lationofboththevalencebandmaximum(VBM)andsecondary
+electroncutoﬀ(SEC),andcaveats;surfacesensitivity,alignment
+of Fermi levels, band bending upon interface formation, inter-
+face defect pinning. For photoactive materials and multi-layer
+stacks, there are additional eﬀects from both junction and sur-
+face photovoltages which can be induced by stray light, or even
+themeasurementbeamitself.[46] Toobtaintheconductionband
+minima (CBM) from the ionization potential, the fundamental
+energy gap (Eg) must be subtracted, the measurement of which
+is itself non-trivial.[47] A study by Shiel et al. compared the
+TiO2/Sb2Se3 CBO positions obtained with three diﬀerent band
+alignment methods and reported CBO values ranging from a
++0.11eVspiketoa–0.82eVcliﬀ.[41]
+Given that J–V distortion from devices with TiO2/Sb2Se3 in-
+terfacesappearstobeauniversalproblem,[30–32] thismaybethe
+best evidence for a CBO spike of these materials after interface
+formation.Thesepreviousreports,alongwiththepresentstudy,
+suggestthebarriertoelectrontransportcanbemediatedbyopti-
+mized TiO2 processing, provided suﬃciently high electron con-
+ductivitiesandlowinterfacialdefectdensitiescanbeobtained.
+In this study, we report a simple, scalable, reproducible
+method of preparing highly crystalline wide bandgap anatase-
+TiO2 thin ﬁlms for application as the ETL in Sb2Se3 solar cells.
+An SnO2:F/TiO2/Sb2Se3/P3HT/Au device fabricated with a re-
+actively sputtered TiO2 ETL achieved an improved 8.12% 𝜂 due
+to signiﬁcantly reduced series resistance (Rs) compared to sim-
+ilar device structures. Diﬀerences in the TiO2 ﬁlms obtained
+from both precursor solution and sputtering are compared and
+Adv. Energy Mater. 2024,14,2401077 2401077(3of15) ©2024TheAuthor(s). AdvancedEnergyMaterialspublishedbyWiley-VCHGmbH
+ 16146840, 2024, 34, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/aenm.202401077, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

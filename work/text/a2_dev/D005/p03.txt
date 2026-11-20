@@ -1,0 +1,100 @@
+tailored fine-tuning (Section 4.2). Second, RAG an-
+swer generation is reasoning heavy, deciding which
+retrieved passages are relevant, identifying incon-
+sistencies among retrieved content, and aggregating
+information across passages when necessary. Thus,
+we shall fine tune LLM’s reasoning capability for
+generating better answers (Section 4.3). These two
+methods improve RAG summarization from two
+complementary and orthogonal dimensions.
+As we generate fine-tuning data, we face a
+dilemma. On the one hand, relying on human an-
+notators to produce high-quality data is expensive
+and not scalable; this is especially true since RAG
+retrieval results typically contain many pages of un-
+structured (e.g., long concatenated text chunks) or
+semi-structured (e.g., parsed tables) text, as well as
+structured data blobs (e.g., json output from knowl-
+edge graphs), not suited for human readers (Sun
+et al., 2025). On the other hand, synthetic train-
+ing data may not exhibit high quality, and noisy
+labels may even encourage more hallucinations.
+We describe in this section a simple yet effective
+solution for automatically producing high-quality
+seed data (Section 4.1), and how we use LLMs to
+iteratively generate examples and check example
+quality (Section 4.2-4.3).
+4.1 Seed QA Data
+We start with generating seed question-answer-
+passage triplets. To scale up the process, we gen-
+erate synthetic QA pairs from a given set of raw
+documents. Initially, we split documents into ref-
+erences, and then randomly select a “golden” ref-
+erence to design a QA pair. Solving this reverse
+problem is a more straightforward task and can
+be accomplished using a reasonably strong LLM.
+This approach helps to produce high-quality data
+at scale, as the primary limiting factors would be
+access to raw content and compute.
+We generate QA pairs using two main con-
+tent sources. (a) Wiki Pages, content sampled
+from the English Wikipedia dataset1; (b) Web
+Search, parsed web pages retrieved using web
+search queries in response to a set of internal fac-
+tual questions (details in Appendix C).
+4.2 Improving Resilience to Distractors
+Recent studies have highlighted the detrimental
+impact of distractor content (Fang et al., 2024).
+To address this challenge, we propose fine-tuning
+1https://dumps.wikimedia.org
+on distractor-augmented content. By incorporat-
+ing semi-relevant or confusing information into
+the training data, our approach aims to enhance
+the model’s resilience to relevant retrieval noise
+thereby mitigating the risk of hallucinations and
+improving overall factuality.
+Informed by observations from real-world RAG
+QA applications and based on the seed data from
+Section 4.1, we adopt a synthetic approach to gener-
+ate targeted distractor content. This method allows
+for large-scale generation and precise control over
+the introduction of relevant noise on named-entities
+and temporal information. We hypothesize that
+while direct solutions, such as utilizing irrelevant
+passages from a text corpus (Zhang et al., 2024a)
+as distractor content add retrieval noise, they do not
+ensure that the noise is relevant. Through targeted
+synthetic generation of distractions via modifying
+the golden passage, we introduce retrieval noises
+that are specifically tailored to challenge named
+entities and temporal information, which our obser-
+vations have shown to be particularly problematic
+for summarization models. As depicted in Figure 2,
+this process consists of three steps.
+1. Synthetic distractor generation: Given a
+question, user context ground-truth answer,
+and its grounding passage, we synthetically
+generate a distractor passage and an open-
+ended question (prompt in Appendix G.8).
+Specifically, we conduct three steps:
+• Identifying key entities, locations, and
+temporal expressions in the golden pas-
+sage that are most relevant.
+• Reformulating the original question into
+a more open-ended form, such that a
+plausible answer can be extracted from
+both the golden and distractor passages.
+• Systematically altering the identified
+named-entities including person/object
+names, locations, and temporal informa-
+tion to create a distractor passage that
+is grammatically coherent, while being
+stylistically similar to the original.
+2. Critique the effectiveness of synthetic dis-
+tractor passage: We employ an evaluation
+prompt to assess the effectiveness of the gen-
+erated distractor passages on a scale of 1 to 5
+(details in Appendix G.7). This step is crucial
+in ensuring that the distractors are relevant,
+confusing, and well-formatted.
+777

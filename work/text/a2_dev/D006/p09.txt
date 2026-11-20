@@ -1,0 +1,42 @@
+LLM-Confidence Reranker
+Table 1
+Comparison of Reranking Methods.
+Reranker Requires Internal Param. Base Model Architecture Type Fine-tuned
+LCR (ours) No Qwen7B Decoder-Only No
+QLM Yes Qwen7B Decoder-Only No
+RankGPT No Qwen7B Decoder-Only No
+YesNo Yes Qwen7B Decoder-Only No
+Cross-Encoder No BERT-base Encoder-Only Yes
+ColBERT No BERT-base Encoder-Only Yes
+RankT5 No T5-base Encoder-Decoder Yes
+variousquerytypesandrelevancechallenges,idealfortestingreal-worldretrievalperformanceinknowledge-intensive
+tasks:
+• NaturalQuestions(NQ)(Kwiatkowskietal.,2019):Anopen-domainquestion-answeringdatasetwithrealuser
+queries from Google search, annotated with answers from Wikipedia passages.
+• DBpedia-Entity(DBPE)(Hasibietal.,2017):Anentity-centricretrievaldatasetemphasizingentitylinkingand
+knowledge graph queries, with relevance based on DBpedia entity relationships.
+• FEVER (FEVE) (Thorne et al., 2018): A fact verification dataset where queries are claims verified against
+Wikipedia documents; relevance labels denote support, refutation, or neutrality.
+• SciDocs (SCID) (Cohan et al., 2020): A citation prediction dataset using scientific paper abstracts as queries,
+with relevance determined by citation links.
+• Touché (TOUC) (Bondarenko et al., 2020): An argument retrieval dataset featuring debate topics as queries,
+with relevance tied to supporting or opposing arguments in web documents.
+• NFCorpus (NFCO) (Boteva et al., 2016): A biomedical information retrieval dataset with medical queries and
+scientific articles, where expert-assigned labels indicate document relevance.
+From TREC, we incorporate two datasets:
+• TRECDL19(DL19)(Craswelletal.,2020):PassagerankingtaskfromTREC2019DeepLearningtrack,with
+queries and graded relevance judgments on a large corpus.
+• TREC DL20 (DL20) (Craswell et al., 2021): Similar to DL19 but from the 2020 track, emphasizing neural
+retrieval methods with diverse query-document pairs.
+We utilize the test sets and relevance annotations provided by these benchmarks.
+4.1.2. Retrievers and Rerankers
+We employ BM25 (Jones et al., 2000) as a classic sparse retriever based on term frequency and inverse document
+frequency, and Contriever (Izacard et al., 2022) as a dense retriever enhanced by contrastive learning. These
+retrievers are selected to evaluate LCR’s compatibility across both sparse and dense retrieval paradigms, ensuring
+a comprehensive assessment of its plug-and-play nature in diverse RAG settings.
+Forrerankers,weselectadiversesetincludingpre-trainedLLM-basedandfine-tunedTransformer-basedmethods
+to benchmark LCR’s performance, as summarized in Table 1. These rerankers are:
+• QLM (Sachan et al., 2022): A point-wise reranking approach that prompts pre-trained language models to
+generate a relevant query for each candidate document, then ranks based on the likelihood of the actual query,
+without fine-tuning.
+Song et al.: Preprint submitted to Elsevier Page 9 of 21

@@ -1,0 +1,54 @@
+You will act as a knowledge analyzer tasked with dissecting an article provided
+by the user. Your role involves two main objectives:
+1. Rephrasing Content: The user will identify two specific entities mentioned in
+the article. You are required to rephrase the content of the article twice:
+* Once, emphasizing the first entity.
+* Again, emphasizing the second entity.
+2. Analyzing Interactions: Discuss how the two specified entities interact within
+the context of the article.
+Your responses should provide clear segregation between the rephrased content and
+the interaction analysis. Ensure each section of the output include sufficient
+context, ideally referencing the article’s title to maintain clarity about the
+discussion’s focus.
+Here is the format you should follow for your response:
+### Discussion of <title> in relation to <entity1>
+<Rephrased content focusing on the first entity>
+### Discussion of <title> in relation to <entity2>
+<Rephrased content focusing on the second entity>
+### Discussion of Interaction between <entity1> and <entity2> in context of
+<title>
+<Discussion on how the two entities interact within the article>
+### Document
+{document}
+### Entities:
+- {entity1}
+- {entity2}
+Table 9: Prompt template used for entity linking for generating EntiGraph documents (Yang et al., 2025b).
+ƭƬƭ ƭƬƮ
+0( -*!.4)/#/-$)$)"//*& ).Ǿ($''$*)ǿ
+Ʊư
+ƱƲ
+Ʊƴ
+ƲƬ
+ƲƮ
+Ʋư0
+0-4Ǿʻǿ
+-$)$)"'(Ưǟƭƴ
+)./-0/ǡ.4)/#/.'$)"- .0'/.
+4)/#$3 -$)$)"ǾˆǿǾƳƬ" )ǿ
+4)/#$3 -$)$)"ǾˆǿǾƳƬ" )Ǡƭǡƴǿ
+4)/#$3 -$)$)"ǾˆǿǾƳƬ" )ǠƮǡƳǿ
+4)/#$3 -$)$)"ǾˆǿǾƳƬ" )Ǡƴǡƭǿ
+-$"$)'ǾưƭǟƬʻǿ
+Figure 11: Synthetic mixed training with different synthetic QA-document mixing ratios. We test four mixing
+ratios of QA and AR: (1:1), (1:8), (2:7), and (8:1). The remaining 10% is used for replay with FineWeb. Using 1:1
+mixing gives the best result.
+require context lengths of 1.6M and 4.8M tokens,
+respectively, which are not supported by the base
+model we use. Second, even if the base model
+supported context lengths beyond 1M tokens, their
+performance degrades substantially at high com-
+pression ratios (i.e., when compressing by more
+than 20×), making them difficult to apply in our
+setting. Consistent with these limitations, Zweiger
+9209

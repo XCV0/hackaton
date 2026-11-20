@@ -1,0 +1,42 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+provide significant insight into the IS response of PSCs [112]. Application of these mathematical methods to
+the modified charge transport model presented here will therefore be the subject of future work, with the aim
+of elucidating the exact effect of the Boltzmann approximation in IS modelling. The numerical simulations
+conducted here, however, show that the Boltzmann approximation causes significant errors in predictions of
+dynamic device-level behaviour.
+As understanding of PSC physics continues to improve, it is essential that models of their operation also
+continue to advance. While PSC drift–diffusion models based on the standard Boltzmann approximation of
+charge carrier statistics in the TLs may, in some cases, be sufficient, their validity cannot be assumed in
+general. In particular, while Boltzmann statistics give a fair description of charge transport in weakly doped
+and inorganic TL materials, they provide a much poorer description of strongly doped and organic TL
+materials. The numerical methods discussed here, and their implementation in IonMonger, give the
+perovskite community access to fast and accurate numerical models incorporating alternative statistical
+descriptions of charge carrier behaviour in the TLs that enable simulations of enhanced predictive power,
+across a wide range of scenarios, which are not solely limited to the steady-state but include current–voltage
+and IS measurements.
+Dataavailabilitystatement
+All data that support the findings of this study are included within the article (and any supplementary files).
+Acknowledgment
+W C was supported by an EPSRC Grant (reference EP/V520056/1). M W and A B W were supported by the
+European Commission through the Horizon 2020 Framework Programme for Research and Innovation,
+Energy Oriented Centre of Excellence (EoCoE-II) project (Grant Agreement ID: 824158).
+AppendixA.Thefullchargetransportmodel
+Here we list the full charge transport model of a three-layer PSC, a schematic of which is shown in figure 9.
+Equations directly modified to account for full FD statistics are highlighted in teal. This charge transport
+model was presented in [110].
+A.1.Perovskiteabsorberlayer(0 < x < b)
+∂P
+∂t + ∂FP ∂x = 0 FP = −DI ( ∂P ∂x + P VT ∂ϕ ∂x ) (A1)
+∂n
+∂t − 1 q ∂jn ∂x = G(x, t) − R(n, p) jn = qDn ( ∂n ∂x − n VT ∂ϕ ∂x ) (A2)
+∂p
+∂t + 1 q ∂jp ∂x = G(x, t) − R(n, p) jp = −qDp ( ∂p ∂x + p VT ∂ϕ ∂x ) (A3)
+∂2ϕ
+∂x2 = q εA (N0 − P + n − p) (A4)
+where G and R are the generation and recombination rates.
+A.2.Electrontransportlayer(−bE < x < 0)
+∂n
+∂t − 1 q ∂jn ∂x = 0 jn = µEkBTn ∂ ∂x [ S −1 E ( n gEc ) − ϕ kBT ] (A5)
+∂2ϕ
+∂x2 = q εE (n − dE). (A6)
+17

@@ -1,0 +1,123 @@
+7443
+Overall
+(561)
+Wikipedia
+(165)
+News
+(173)
+Product
+Review
+(48)
+Company
+Rules
+(175)
+GPT-4o 14.1 9.1 11.6 29.2 17.1
+llm-jp-1.8B 0.4 0.0 0.6 0.0 0.6
+llm-jp-3.7B 1.1 0.0 0.0 2.1 2.9
+llm-jp-13B 6.4 2.4 1.2 2.1 16.6
+Swallow-8B 17.1 7.3 11.6 12.5 33.1
+Qwen-1.5B 11.1 4.8 8.1 22.9 16.6
+Qwen-3B 14.6 9.1 8.1 22.9 24.0
+Qwen-7B 14.8 9.7 9.2 37.5 18.9
+Qwen-14B 20.1 14.5 13.9 27.1 29.7
+Table 4: Performance of each model when no re-
+trieval results were provided.
+the questions without providing the retrieval results
+composed of relevant documents, and then eval-
+uated those answers. The results are shown in
+Tab. 4. These results correspond to those shown
+in Tab. 3 where retrieval results were provided, and
+the two should be referred to in conjunction. Over-
+all, the accuracy rate without retrieval results was
+significantly lower compared to the performance
+with retrieval results. In particular, we confirmed
+that the performance of GPT-4o—which had con-
+sistently performed well in the setting with retrieval
+results—dropped to a level comparable to that of
+the other models.
+The reasons why the performance shown in Tab.
+4 is not zero are threefold. First, the benchmark
+includes binary-choice questions (e.g., Yes/No),
+where models can answer correctly by chance.
+Second, models sometimes generate plausible hal-
+lucinations that coincidentally align with the correct
+answer. Finally, for datasets that mimic real-world
+formats, such as company regulations, models can
+leverage pre-trained common-sense knowledge to
+correctly answer general questions. Despite these
+artifacts, the accuracy without retrieval is signifi-
+cantlyloweracrossallmodelsthantheRAGsetting,
+confirming that the benchmark largely achieves its
+objective of being unanswerable without the exter-
+nal documents.
+4.4. Error Analysis
+In the example in Fig. 9, it is necessary to or-
+ganize the information—“weekly”, “No. 1, 2005”
+(start of the year), and “No. 50, 2012” (end of the
+year)—before performing the calculation. While
+GPT-4o is able to answer correctly by taking these
+requirements into account, Qwen-14B—the model
+with the second-highest overall performance—is
+only able to perform a simple calculation, subtract-
+ing 2005 from 2012 as written in the document to
+get 7. Through this example, we can assess that
+in terms of the ability to utilize external information,
+GPT-4o has superior performance in calculation,
+reasoning, and information organization.
+[Retrieved Document Excerpt] 『レヴェナント・クロニクル』
+（Revenant Chronicle）は、井端圭史による日本の漫画作品で
+ある。...『週刊クリエイトタイムズ』（晴耕社）の創刊号で
+ある2005年1号から2012年50号まで連載され、... ("Revenant
+Chronicle" is a Japanese manga series by Keishi Ibata. ... It was
+serialized in "Weekly Create Times" (Seikosha) from the inaugural
+issue, No. 1 of 2005, to No. 50 of 2012, ...)
+[Question] 『レヴェナント・クロニクル』は『週刊クリエイト
+タイムズ』で約何年間連載された？(For about how many years
+was "Revenant Chronicle" serialized in "Weekly Create Times"?)
+[Correct Answer]約8年間 (About 8 years)
+[Response by GPT-4o]約8年間 (About 8 years)
+[Response by Qwen-14B] 7年間 (7 years)
+Figure 9: An example where GPT-4o is correct but
+Qwen-14B is incorrect (Dataset: Wikipedia)
+5. Conclusion
+To more accurately evaluate RAG’s ability to gen-
+erate answers based on retrieved documents, this
+study constructed a RAG benchmark using a col-
+lection of LLM-synthesized documents about non-
+existent entities and events as its retrieval target.
+The benchmark built in this study includes four
+types of datasets, each composed of synthetic
+documents from an LLM and manually created
+question-answer pairs. Furthermore, using this
+benchmark,weevaluatedtheabilitytoextractexter-
+nal information and to reason using that extracted
+information within a RAG framework. Through the
+construction of this benchmark, we have verified
+that the proposed methodology is applicable to a
+middle-resource language like Japanese for which
+LLMs can perform fluent generation. We hope that
+an accurate evaluation of an LLM’s ability to uti-
+lize external information, made possible by this
+benchmark, will serve as a guidepost for develop-
+ing higher-performance LLMs and RAG systems.
+6. Limitations
+In this study, we constructed a novel Japanese
+RAG benchmark using synthetic documents to ef-
+fectively mitigate data contamination. While our
+evaluation demonstrates the feasibility of this ap-
+proach in assessing a model’s true ability to utilize
+retrieved context, our comprehensive analysis also
+identified several limitations in the current dataset
+and evaluation setup. In the following, we outline
+these potential limitations and discuss critical direc-
+tions for future work to address them.
+• Disentangling retrieval and generation evalua-
+tion: An inherent limitation involves our evalua-
+tion setup. Our current naive RAG pipeline eval-
+uates the system end-to-end, which conflates
+retrieval errors with generation errors. To pre-
+cisely pinpoint system bottlenecks, evaluating
+retrieval accuracy and the LLM’s generation ca-
+pability in isolation – such as testing the genera-
+torexclusivelywithgolddocuments–isessential.
+However, distinguishing retrieval and generation

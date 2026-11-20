@@ -1,0 +1,89 @@
+Table S1: Summary of the expert-curated ophthalmology QA benchmarks and keypoint corpora. We use keypoints
+as the uniﬁed term throughout the supplementary material. Each keypoint is a concise guideline statement paired
+with its supporting passage.
+Dataset Domain #Questions #Keypoints Format Source document
+TED Thyroid eye disease 101 35 MCQA Management of Thyroid Eye Disease by the Ameri-
+can and European Thyroid Associations (Burch et al.,
+2022)
+GD Graves’ disease 97 22 MCQA 2018 European Thyroid Association Guideline for
+the Management of Graves’ Hyperthyroidism (Ka-
+haly et al., 2018)
+Table S2: Keypoint corpus construction protocol. The same protocol is used for TED and GD.
+Step Operation Purpose
+Guideline parsing Extract guideline statements, including recom-
+mendations, diagnostic criteria, treatment rules,
+and management statements, from the public
+XML structure.
+Preserve concise statements suitable for keypoint-
+level ranking.
+Passage alignment Use the supporting XML section associated with
+each extracted statement.
+Deterministically pair compact keypoints with
+fuller context without a learned extractor.
+Question curation Construct multiple-choice questions around
+guideline-speciﬁc distinctions, thresholds, treat-
+ment decisions, and follow-up scenarios.
+Evaluate whether models can use the correct
+guideline keypoints rather than broad medical pri-
+ors.
+Expert veriﬁcation Review question-answer pairs and answer labels
+with ophthalmology experts.
+Reduce ambiguity and ensure that the ground-
+truth answer is clinically meaningful.
+Retrieval packaging Store each item as (ki; ti), where ki is the key-
+point and ti is the supporting passage.
+Support keypoint-level ranking followed by
+passage-level answer generation.
+by answer cost that grows with retrieved context.
+URGen therefore costs 0.55 GPU-s/question more
+than Fixed-1 but 1.15 less than Fixed-5 under this
+setup.
+Parallelization and comparison with conven-
+tional RAG. URGen follows the same high-
+level dependency structure as conventional RAG:
+ﬁrst select relevant information, then answer the
+question conditioned on the selected information.
+The difference is that URGen evaluates multi-
+ple ranking temperatures and multiple answer-
+generation temperatures. These branches are in-
+dependent after model loading. Therefore, when
+sufﬁcient GPU resources or batching capacity are
+available, the critical path is still one keypoint-
+ranking batch followed by one answer-generation
+batch, similar to the retriever-then-reader structure
+of conventional RAG. In other words, URGen in-
+creases total batched computation, but it does not
+introduce a long sequential reasoning chain.
+This property gives URGen a practical advan-
+tage over iterative adaptive methods such as RQ-
+RAG (Chan et al., 2024). RQ-RAG reﬁnes or de-
+composes the query into multiple retrieval queries
+before answer generation, so later retrieval steps
+can depend on preceding generated queries. Such
+query-reﬁnement pipelines are harder to fully par-
+allelize and can accumulate errors when interme-
+diate rewritten queries drift from the clinical in-
+tent of the input question. URGen instead keeps
+the input medical question ﬁxed and estimates re-
+trieval ambiguity through multi-temperature key-
+point ranking. This makes the adaptive step sim-
+ple, parallelizable, and directly tied to the uncer-
+tainty of the keypoint distribution.
+Reproducibility notes. All methods use the
+same question set, answer parser, and keypoint cor-
+pus unless otherwise stated. For keypoint ranking,
+we parse the ordered keypoint IDs from the JSON
+ﬁeld ordered_keypoints. Each temperature con-
+tributes exactly one structured generation; mal-
+formed outputs are not regenerated. Regenerating
+until a ranking is parseable would selectively re-
+tain more coherent high-temperature samples and
+alter the rank-2 distribution, to which Fixed-2 is
+directly exposed. The one-attempt rule is there-
+fore applied uniformly to all methods. Selected
+keypoint-passage blocks are concatenated in de-
+scending relevance order. For answer generation,
+we parse only the option label stored in the JSON
+ﬁeld answer; rationales are retained for qualitative
+inspection but are not used when computing accu-
+3931

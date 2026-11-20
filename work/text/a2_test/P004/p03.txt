@@ -1,0 +1,97 @@
+Proximal Policy Optimization (PPO). In the
+context of query optimization, PPO (Schulman
+et al., 2017) is employed as a reinforcement learn-
+ing technique to improve the quality of the gener-
+ated queries. The goal is to iteratively refine the
+query q such that it maximizes the likelihood of
+obtaining a correct and contextually relevant an-
+swer (Wen et al., 2025; Lin et al., 2024). The PPO
+agent learns a policy πθ, parameterized by θ, which
+maps states (representing the query or a modifica-
+tion of it) to actions (such as rephrasing or select-
+ing different documents). This policy is updated
+to maximize expected cumulative rewards (Jiang
+et al., 2025), where the reward signal reflects the
+quality of the answer produced by the query. The
+update process is done by optimizing a clipped sur-
+rogate objective, which helps balance exploration
+and stability during learning. The update rule en-
+sures that the new policy does not deviate too far
+from the previous one, preventing instability dur-
+ing training. This method effectively guides the
+agent to make systematic improvements in query
+formulation, gradually learning the optimal actions
+to improve the answer retrieval process.
+3 Methodology
+To address the persistent challenges of logical in-
+consistency and inefficient iteration in Retrieval-
+Augmented Generation (RAG), we propose LCR-
+RAG, a closed-loop framework that integrates dy-
+namic intelligent routing, tiered neuro-symbolic
+verification, and reinforcement learning-based
+query optimization. As shown in Figure 2, the
+system begins with a routing module that classi-
+fies queries by complexity, allocating computa-
+tional resources accordingly. Complex queries
+are processed through an iterative loop comprising
+a neuro-symbolic verifier, which assesses answer
+quality, and a PPO agent that selects high-level
+query edits based on verifier feedback.
+3.1 Dynamic Intelligent Routing
+A foundational inefficiency in many advanced RAG
+systems is their one-size-fits-all approach to pro-
+cessing queries. A simple factual lookup is often
+subjected to the same computationally intensive
+reasoning pipeline as a deeply complex query re-
+quiring causal inference. To optimize resource allo-
+cation and minimize user-perceived latency, LCR-
+RAG employs a Dynamic Intelligent Router. This
+module serves as a preliminary filter, performing a
+rapid assessment of query complexity to direct it to
+the most appropriate and cost-effective processing
+lane: FAST (for existing cached answers), STAN-
+DARD (for single-pass RAG), or DEEP (for the
+full iterative optimization pipeline).
+Feature Extraction. We define a feature extrac-
+tion function Φ(q) that maps a raw query q to a
+numerical feature vector xq = Φ(q). The resulting
+feature vector encapsulates three critical dimen-
+sions. First, Entity Density (xdensity) measures the
+ratio of named entities (detected via a fine-tuned
+spaCy NER model) to the total number of tokens,
+where higher density often indicates complex en-
+tity relationships. Second, Logical Complexity
+(xlogic) is derived by counting logical keywords
+(e.g., “and,” “or,” “why,” “compare”) and identify-
+ing nested clauses using dependency parsing. Fi-
+nally, Term Sparsity (xsparsity) is calculated as
+the average Inverse Document Frequency (IDF)
+of query terms against a large corpus, where high
+sparsity implies rare or niche topics requiring multi-
+hop retrieval.In practice, Φ(q) includes additional
+lightweight lexical and syntactic indicators beyond
+these three key features; we highlight them here
+for clarity and defer the complete feature list to the
+Appendix A.
+Probabilistic Modeling. The extracted feature
+vector xq is passed into a lightweight classifier Cϕ
+based on distilled BERT, parameterized by ϕ. The
+model outputs a softmax distribution over the pro-
+cessing lanes l ∈ {FAST, STANDARD, DEEP}:
+Pϕ(l | q) = Softmax(fϕ(xq)) (1)
+This gives a confidence score for each lane. For
+example, a query might yield {FAST: 0.1, STAN-
+DARD: 0.2, DEEP: 0.7}, indicating high expected
+complexity.
+Decision Rule. The routing lane l∗ is selected
+based on the highest predicted probability:
+l∗ = arg max
+l
+Pϕ(l | q) (2)
+To avoid erroneous routing under low confidence,
+we apply a threshold τ = 0.5. If Pϕ(l∗ | q) < τ ,
+the query defaults to the STANDARD lane as a
+safe fallback. This strategy ensures high-efficiency
+handling for simple queries, while preserving deep
+reasoning capacity for complex cases.
+17902

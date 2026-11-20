@@ -1,0 +1,94 @@
+the instance to the ANSWER state. When the su-
+perseding document is inaccessible, supersession
+and access filtering yield an empty context, which
+is routed to REFUSAL rather than falling back to
+an accessible but stale version. When superses-
+sion relations remain unresolved or parallel ac-
+tive conflicts exist, TrustRAG preserves the un-
+resolved admissible evidence and routes the in-
+stance to CONFLICTREPORT. These results show
+that routing based on explicit supersession relations
+removes confirmed stale evidence while conserva-
+tively preserving unresolved relations instead of
+inferring precedence from timestamps.
+B.6 Large Candidate-Pool Error Analysis
+Before running the experiment, we manually in-
+spected a stratified sample of 20 instances, all of
+which satisfied the construction criteria for the
+50-document candidate pools. For DeepSeek-V3,
+Qwen-Max, and GLM-4-32B-0414, TrustRAG ob-
+tains unsupported-answer rates of 0.00%, 2.00%,
+and 9.00%, respectively, with corresponding valid-
+response rates of 100.00%, 98.00%, and 91.00%.
+Of the 11 unsupported answers produced by
+TrustRAG, nine occur when GLM-4-32B-0414
+fails to report an evidence conflict, while two occur
+when Qwen-Max answers from distractor evidence
+that passes the metadata predicates but is irrelevant
+to the query. None of these cases involves access-
+denied or explicitly superseded evidence, indicat-
+ing that access and supersession filtering remain
+stable in this setting, while the residual errors arise
+primarily from model-dependent conflict reporting
+and evidence selection.
+B.7 Utility and Human Audit
+Table B6 provides detailed utility diagnostics and
+human-audit results for Section 5.4. The utility
+panel tests whether low failure rates are achieved
+through over-refusal. Across TEMPLATE and
+FRESH-STRESS, TrustRAG maintains valid re-
+sponses on answerable cases while avoiding over-
+refusal. The audit panel reports confusion-matrix
+statistics between the automatic judge and human
+labels.
+Table B4 evaluates routing behavior under multi-
+hop supersession chains, inaccessible superseding
+documents, unresolved supersession relations, and
+parallel active conflicts.
+Table B7 compares the three judges against the
+same human annotations and stratifies the primary
+DeepSeek-V3 judge’s agreement by generator.
+yes no
+Superseding doc retrieved
+yes
+no
+Superseded doc retrieved
+0%
+safe
+100%
+risk
+0%
+safe N/A
+Figure B1: Retrieval-miss boundary for explicit super-
+session. Stale-boundary risk appears when the super-
+seded document is retrieved but the superseding doc-
+ument is absent, because the candidate set lacks the
+supersession edge required for routing.
+Method Slice Leak ↓ Stale ↓ Unsup. ↓
+Governance on SOURCE
+Prompt RAG Avg. 2.33 5.33 0.33
+Metadata Filter Avg. 0.00 0.00 13.67
+TrustRAG Avg. 0.00 0.00 0.00
+Retrieval on TEMPLATE
+BM25 RAG All 19.75 10.50 72.50
+BM25 RAG Restricted 53.00 0.00 53.00
+BM25 RAG Freshness 0.00 27.00 78.00
+BM25 RAG Conflict 0.00 0.00 90.00
+BM25 RAG Global 26.00 15.00 69.00
+Dense RAG All 11.75 9.25 73.25
+Dense RAG Restricted 26.00 0.00 64.00
+Dense RAG Freshness 0.00 22.00 68.00
+Dense RAG Conflict 0.00 0.00 96.00
+Dense RAG Global 21.00 15.00 65.00
+Prompt RAG All 11.50 3.25 30.50
+Prompt RAG Restricted 26.00 0.00 1.00
+Prompt RAG Freshness 0.00 1.00 0.00
+Prompt RAG Conflict 0.00 0.00 96.00
+Prompt RAG Global 20.00 12.00 25.00
+Table B2: Supplementary governance and retrieval base-
+line results. Governance rows report macro-averaged
+failure rates over the three evaluated LLMs on SOURCE.
+Retrieval rows report one end-to-end retrieval-pipeline
+run on TEMPLATE slices. All values are failure rates
+(%).
+35018

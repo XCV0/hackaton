@@ -1,0 +1,42 @@
+2 Dhasade et al.
+federated search, where queries are executed across multiple independent data
+sources and the results are merged into a unified ranking [36]. In RAG systems
+operating over multiple repositories, federated search constitutes the retrieval
+layer: queries are dispatched to selected data sources, their results are aggre-
+gated and reranked, and the resulting context is passed to the language model
+for generation. This avoids centralizing data, which might be complicated due
+to regulatory constraints or privacy considerations [8,23], and enables organiza-
+tions to reuse existing infrastructure, therefore reducing operational and storage
+overhead.
+A key challenge in federated search is resource selection [28,39], i.e., iden-
+tifying which sources should be queried. Yet many RAG pipelines query all
+available resources [39]. Indiscriminate querying increases communication and
+computation costs [15] and may introduce irrelevant context that exacerbates
+hallucinations [7,10].
+We introduce RAGRoute, a novel and efficient routing mechanism for fed-
+erated search in RAG systems that dynamically selects relevant data sources at
+query time using a lightweight neural network. By avoiding unnecessary queries,
+RAGRoute significantly reduces resource consumption and end-to-end latency
+while maintaining high search quality. We evaluate RAGRoute on three bench-
+marks: MIRAGE [42], MMLU [19] and FeB4RAG [39]. Our results show that
+RAGRoute achieves up to 89.70% recall in source selection, reduces retrieval
+communication volume by up to 80.65%, and lowers end-to-end latency by up
+to 52.50%, while matching the accuracy of querying all data sources. This im-
+provement stems primarily from reducing the number of documents that must be
+reranked during retrieval, thereby alleviating a major computational bottleneck
+in RAG pipelines.
+In summary, our contributions are as follows:
+1. We propose and implement RAGRoute, a lightweight and effective routing
+mechanismforfederatedsearchinRAGthatdynamicallyselectsdatasources
+per query, and make our code publicly available.1
+2. We conduct extensive evaluations on three benchmarks, demonstrating that
+RAGRoutesignificantlyreducescommunicationoverheadandlatencywhile
+maintaining high retrieval quality and end-to-end accuracy.
+2 Background and problem description
+2.1 Retrieval-augmented generation (RAG)
+RAG enhances the reliability of LLM responses by integrating external infor-
+mation as part of the input (or prompt) [27]. In a typical RAG pipeline, doc-
+uments are split into chunks and encoded into dense vector embeddings, which
+are stored in a vector database that supports similarity search. For simplicity,
+we refer to document chunks as documents throughout this paper. Given a user
+1 See https://github.com/sacs-epfl/ragroute.

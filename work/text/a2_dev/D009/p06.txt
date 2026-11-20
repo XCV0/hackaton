@@ -1,0 +1,74 @@
+Table 2: Component ablation study evaluating the impact of the Process Reward Model (PRM). The table reports
+EM and F1 scores across 5 benchmarks. Bold denotes the better performance.
+Variant PopQA HotpotQA 2WikiMulti Bamboogle MuSiQue Average
+EM F1 EM F1 EM F1 EM F1 EM F1 EM F1
+PRO-STEP 40.5 47.4 38.7 51.6 44.1 51.4 36.8 47.6 12.5 22.4 34.5 44.1
+Without PRM 38.5 45.0 36.8 49.3 41.4 48.4 34.4 44.2 12.3 22.4 32.7 41.9
+Table 3: Impact of different optimization strategies on PRO-STEP’s effectiveness across five benchmarks. Bold
+denotes the best performance, and underlining denotes the second-best.
+Method PopQA HotpotQA 2WikiMulti Bamboogle MuSiQue Average
+EM F1 EM F1 EM F1 EM F1 EM F1 EM F1
+PRO-STEP (SFT) 38.8 45.7 36.7 48.3 32.9 41.3 31.2 40.4 11.3 20.0 30.2 39.1
+PRO-STEP (KTO) 41.8 46.3 32.3 43.5 36.1 42.0 20.8 32.7 8.9 18.5 28.0 36.6
+PRO-STEP (DPO) 40.5 47.4 38.7 51.6 44.1 51.4 36.8 47.6 12.5 22.4 34.5 44.1
+in Section F).
+Limitations of heuristic adaptive retrieval. Ad-
+vanced RAG methods relying on heuristic triggers,
+such as FLARE and Self-RAG, underperform the
+much simpler Standard RAG on average (approxi-
+mately 15.0 vs. 23.8 EM). Even IRCoT falls behind
+Standard RAG on complex multi-hop tasks such
+as HotpotQA and 2WikiMultiHopQA. In contrast,
+PRO-STEP learns retrieval timing directly via pref-
+erence optimization, bypassing the inefficiencies
+of heuristics.
+Process vs. outcome in multi-hop reasoning.
+Process-level optimization improves performance
+on datasets requiring extended logical chains. On
+average, PRO-STEP outperforms the outcome-
+based Search-R1 by 2.5 EM and 3.4 F1 points.
+This gap widens substantially on complex multi-
+hop tasks such as 2WikiMultiHopQA, where our
+method achieves a 9.2 EM and 8.9 F1 improve-
+ment. The dense step-level feedback alleviates the
+reward sparsity problem and improves sample effi-
+ciency: PRO-STEP surpasses Search-R1 using 5k
+seed questions, whereas Search-R1 reports roughly
+170k training instances.
+Comparison with process-reward baselines.
+PRO-STEP achieves higher average EM and F1
+than ReasonRAG and StepSearch. While these
+baselines operate at the process level, they opti-
+mize each step against the final F1 score, which
+fails to penalize spurious reasoning where flawed
+retrieval accidentally produces the correct answer.
+In contrast, our generative PRM evaluates the logi-
+cal and evidential validity of each step, filtering out
+such false positives. Notably, prior methods distill
+reasoning trajectories from frontier models (e.g.,
+GPT-4o (Hurst et al., 2024)), and some addition-
+ally invoke multiple LLM calls during inference
+for document refinement. PRO-STEP avoids both,
+internalizing step-level guidance into the policy
+through PRM-guided VTS, yielding higher aver-
+age results with a single model at inference.
+4.3 Effectiveness of Process Reward Model
+To isolate the contribution of our generative PRM,
+we compare PRO-STEP against a variant without
+PRM scoring that constructs preference pairs using
+only the depth-discounted F1 reward. As shown
+in Table 2, removing the PRM degrades average
+performance from 34.5 to 32.7 EM and from 44.1
+to 41.9 F1, with the largest drops on multi-hop
+datasets such as 2WikiMultiHopQA (-2.7 EM) and
+Bamboogle (-2.4 EM). This larger degradation sug-
+gests that PRM supervision is particularly benefi-
+cial for multi-hop reasoning. Without PRM evalu-
+ation, preference pairs rely solely on final-answer
+correctness and cannot penalize spurious reasoning
+that coincidentally leads to correct answers, which
+the PRM filters out by scoring step-level validity.
+This validates that considering both logical valid-
+ity and evidential grounding is essential for RAG.
+Detailed analysis is provided in Section H.
+37909

@@ -1,0 +1,99 @@
+DeEP (Sun et al., 2025) shows that some atten-
+tion heads act as copying modules that transport
+external context, while FFNs inject strong para-
+metric signals (Fig. 1). Complementary studies
+such as LUMINA (Yeh et al., 2025), InterpDe-
+tect (Tan et al., 2025), and Context–Parametric In-
+version (Goyal et al., 2025) further indicate that hal-
+lucination often emerges when internal activations
+dominate evidence-aligned representations. How-
+ever, these analyses are largely descriptive and of-
+fer limited guidance on where hallucination-related
+divergence forms and how to intervene during in-
+ference.
+Inspired by the locate–edit paradigm in model
+editing (Santurkar et al., 2021; Xu et al., 2023;
+Meng et al., 2023a,b; Li et al., 2023b, 2024b),
+we propose CoDA, an attention-centric locate-and-
+intervene framework for RAG hallucination. Our
+key insight is that copying is not a behavior exclu-
+sive to a small set of specialized heads, but can
+be extended to non-copying heads when evidence
+is semantically aligned. Accordingly, CoDA first
+localizes hallucination-prone layers where hallu-
+cinated and factual tokens begin to diverge. Then
+it applies a lightweight, plug-in attention modula-
+tion that amplifies evidence-aligned value states,
+promoting copy-encouraged routing before down-
+stream parametric amplification.
+Our design complements mechanistic findings
+on parametric circuits and knowledge neurons (Dai
+et al., 2022a; Yao et al., 2025) and aligns with
+fine-grained analyses of harmful generation (Wang
+et al., 2024b). Extensive experiments show that
+CoDA consistently improves contextual faithful-
+ness and reduces hallucination under both standard
+and long/noisy-context settings, while incurring
+only modest inference overhead.
+We summarize our contributions as follows:
+1. Attention-centric view of RAG hallucina-
+tion. We reinterpret hallucination under valid
+evidence as a failure of context-selective atten-
+tion routing in the residual stream (Sun et al.,
+2025; Long et al., 2025; Goyal et al., 2025).
+2. Fine-grained localization of hallucination-
+prone layers. We develop a layer-wise
+framework that pinpoints where hallucinated
+and factual tokens diverge, enabling targeted
+inference-time intervention.
+3. Plug-in attention modulation for copy-
+encouraged routing. We propose a
+lightweight method that amplifies evidence-
+aligned value states and promotes copy-
+encouraged attention routing without modi-
+fying model parameters.
+2 Mechanistic Insights into Knowledge in
+Transformer Layers
+Mechanistic interpretability studies have revealed
+how different components of Transformer architec-
+tures contribute to knowledge representation and
+utilization (Geva et al., 2021; Meng et al., 2023b;
+Wang et al., 2024a; Yao et al., 2025). We focus on
+decoder-only Transformers (Grattafiori et al., 2024;
+OpenAI et al., 2024), where the residual stream
+acts as the primary communication, through which
+both parametric knowledge and retrieved context
+are propagated (Geva et al., 2021; Li et al., 2024a;
+Sui et al., 2025; Bi et al., 2025).
+Within this architecture, attention heads and
+FFNs play complementary roles: attention routes
+and aggregates contextual information across to-
+kens, while FFNs inject latent associations memo-
+rized during pretraining. Their interaction jointly
+determines how internal and external knowledge
+influence model predictions.
+2.1 Copying Heads
+Prior work has identified a subset of attention heads
+that propagate token representations with mini-
+mal transformation, effectively copying informa-
+tion from source tokens to target positions (Dai
+et al., 2022b; Elhage et al., 2021). These copying
+heads (Sun et al., 2025) are particularly effective
+at preserving high-fidelity contextual signals, such
+as entity mentions or factual spans retrieved from
+external documents.
+As illustrated in Figure 1, in a RAG setting
+where the context explicitly states that Usain Bolt
+speaks fluent English, copying heads can directly
+route this evidence to downstream layers, yielding
+context-consistent logits that favor the correct an-
+swer. In contrast, non-copying heads often perform
+more abstract or associative transformations, which
+may dilute or override such evidence when internal
+parametric associations are activated.
+2.2 Feed-forward Neural Networks
+Feed-forward neural networks, which comprise ap-
+proximately two-thirds of model parameters, have
+been shown to function as key–value memories
+that store and recall factual associations acquired
+11880

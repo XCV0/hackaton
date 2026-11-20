@@ -1,0 +1,43 @@
+J. Phys. Energy5 (2023) 025007 W Clarke et al
+Figure1. The filling of electron states. The solid black line shows the density of states (DoS) function ˆg(E), solid coloured lines
+show the density of filled states per unit energy (specifically, ˆg(E)f(E; Efn ) for conduction electrons and ˆg(E)[1 − f(E; Efp )] for
+valence holes), and shaded areas show the total carrier density, integrated over all energies. Here the electron QFL is closer to the
+band edge than the hole QFL, meaning a higher density of electrons than holes.
+Figure2. The filling of electron states in (top) parabolic and (bottom) Gaussian DoS functions.
+It is usually assumed that the bands are perfectly distinct, meaning there exists a finite range of energies
+between the highest occupied state and the lowest unoccupied state at absolute zero in which the DoS is zero.
+However, in the case of organic semiconductors the bands do not have well-defined edges (see figure 2) and
+this can lead to definitions of ˆgv(E) and ˆgc(E) which are convenient, but for which there is some overlap of
+the tails of both functions. We assume that the bands have sufficient separation that any overlap in the DoS
+functions is negligible and note that any material that violates this would be a poor semiconductor. The total
+electron and hole densities (per unit volume) are thus
+n =
+ˆ ∞
+−∞
+f(E; Efn)ˆgc(E)dE, (11a)
+p =
+ˆ ∞
+−∞
+[
+1 − f(E; Efp)
+]ˆgv(E)dE, (11b)
+where the Fermi level Ef in the FD statistical distribution (9) is replaced by the QFL in the conduction/
+valence band in the expression for the electron/hole density.
+For convenience, it is also assumed that the conduction and valence band DoS functions can each be cast
+in terms of (at least) two dimensional constants, an effective DoS (gc or gv) and reference energies Ec or Ev,
+corresponding to the conduction and valence band edges (in the case of inorganic semiconductors) and to
+the LUMO and HOMO (in the case of organic semiconductors). The dimensionless functions ˆNc and ˆNv are
+used to describe the general shape of the DoS function in the vicinity of the reference energies Ec and Ev,
+respectively. This allows us to write:
+ˆgc(E) = gc kBT ˆNc
+( E − Ec
+kBT
+)
+, (12a)
+ˆgv(E) = gv kBT ˆNv
+(
+− E − Ev
+kBT
+)
+, (12b)
+5

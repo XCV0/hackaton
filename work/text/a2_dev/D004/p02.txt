@@ -1,0 +1,88 @@
+Raw
+Documents
+Opinion
+Enrichment
+(LLM-based)
+Enriched
+Documents
+Vector
+Store
+LLM
+Generation
+Entity Registry (Tier 1 → 2 → 3)
+Opinion Attributes
+• Sentiment
+• Intensity
+• Business Impact
+• Emotional Markers
+• Evidence Type
+Author Attributes
+• Revenue Band
+• Tenure
+• Region
+Traditional RAG: Raw Documents → Vector Store → LLM
+Opinion Enrichment Step
+Figure 1: Opinion-Aware RAG Architecture. Traditional RAG (bottom, grayed) indexes raw documents directly.
+Our approach introduces an opinion enrichment step (highlighted) that extracts per-entity opinion and author
+attributes before indexing. See Section 4 for details.
+a factual bias. They optimize for epistemic un-
+certainty reduction, while ignoring the aleatoric
+uncertainty inherent in opinion-rich content.
+This limitation grows more consequential as
+RAG deployments expand beyond traditional
+knowledge bases into online community fo-
+rums, consumer reviews, social media, and user-
+generated content (Guo and Wei, 2026; Zhang et al.,
+2025c). In these domains, the goal is to understand
+and represent multiple truths as expressed through
+human experiences and judgments, instead of con-
+verging on single truth. Without opinion-aware
+capabilities, systems risk echo chamber amplifica-
+tion, minority voice erasure, potential for opinion
+manipulation, and artificial consensus where gen-
+uine disagreement exists. While recent work on
+pluralistic alignment (Sorensen et al., 2024; Bakker
+et al., 2022) addresses diversity at the generation
+layer, it cannot compensate for biased retrieval, as
+a generation model can only reason over what it
+receives.
+Our contributions are:
+1. An audit of factual bias across the RAG
+ecosystem. We document the absence of
+opinion-aware evaluation (Section 2).
+2. A theoretical framework formalizing
+opinion-aware retrieval through epistemic vs.
+aleatoric uncertainty (Section 3).
+3. An existence proof: Opinion-Aware RAG
+evaluated across two domains (e-commerce
+forums and public hotel reviews) using a
+novel evaluation framework measuring opin-
+ion coverage, perspective diversity, and repre-
+sentation fairness. We demonstrate that even
+simple opinion enrichment yields measurably
+more representative retrieval and generation
+(Sections 4–5, Figure 1).
+4. A research agenda identifying open prob-
+lems for the community (Section 6).
+Crucially, our position is a claim about genera-
+tion, not retrieval alone: the objective is opinion-
+preserving text generation, where the distribution
+of perspectives is faithfully carried through to the
+produced output, since a system that surfaces di-
+verse viewpoints but collapses them into an artifi-
+cial consensus during generation still fails the user.
+2 The Factual Bias in RAG: An Audit
+The factual bias in RAG is a field-wide pattern that
+runs through the entire pipeline, from how bench-
+marks are constructed to how retrieval and evalu-
+ation are designed. We document this through a
+survey of 36 major RAG evaluation datasets (2013–
+2025), summarized in Table 1 and detailed in Ap-
+pendix M.
+The pattern is consistent across task cat-
+egories: single-hop QA (Natural Questions,
+MS MARCO, SQuAD), multi-hop reasoning (Hot-
+potQA, MuSiQue), long-form QA (ELI5, ASQA),
+domain-specific QA (COVID-QA, Qasper), fact
+verification (FEVER, TruthfulQA), and generation
+quality (FActScore, RAGBench). Every category

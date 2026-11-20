@@ -1,0 +1,109 @@
+Proceedings of the 14th International Joint Conference on Natural Language Processing and the 4th Conference of the Asia-Pacific Chapter of the Association for
+Computational Linguistics, pages 1361–1379
+December 20-24, 2025 ©2025 Association for Computational Linguistics
+Reasoning Enhanced Missing Knowledge Retrieval Augmented Generation
+Framework for Domain Specific Question Answering
+Yuanjun Shi1, Zhaopeng Qiu1*
+1Individual Researcher
+{switchevans, zp10211059}@gmail.com
+Abstract
+Retrieval Augmented Generation (RAG) frame-
+work mitigates hallucinations in Large Lan-
+guage Models (LLMs) by integrating external
+knowledge, yet faces two critical challenges:
+(1) the distribution gap between user queries
+and knowledge bases in a specific domain, and
+(2) incomplete coverage of required knowledge
+for complex queries. Existing solutions either
+require task-specific annotations or neglect in-
+herent connections among query, context, and
+missing knowledge interactions. We propose
+a reasoning-based missing knowledge RAG
+framework that synergistically resolves both is-
+sues through Chain-of-Thought reasoning. By
+leveraging open-source LLMs, our method gen-
+erates structured missing knowledge queries in
+an end-to-end inference manner while aligning
+query knowledge distributions, and integrates
+reasoning traces into answer generation. Exper-
+iments on open-domain medical and general
+question answering (QA) datasets demonstrate
+significant improvements in context recall and
+answer accuracy. Our approach achieves effec-
+tive knowledge supplementation without addi-
+tional training, offering enhanced interpretabil-
+ity and robustness for real-world QA applica-
+tions.
+1 Introduction
+The rapid advancement of Large Language Mod-
+els (LLMs), exemplified by various architectures
+(OpenAI et al., 2024; Grattafiori et al., 2024; Qwen
+et al., 2025; DeepSeek-AI et al., 2024), demon-
+strates remarkable improvements on a wide range
+of natural language processing tasks. However,
+their reliance on static, parametric knowledge of-
+ten leads to hallucinations, factual inaccuracies,
+and outdated responses, particularly in dynamic
+or domain-specific scenarios. To mitigate these
+limitations, the Retrieval Augmented Generation
+*Corresponding author.
+Question May I ask if working in a battery factory during pregnancy has any impact on the fetus?
+Wikipedia
+During pregnancy, it is important to avoid
+radiological examinations ... Pregnant women
+should pay attention to every small detail
+in daily life and respond with patience...
+LLM Response
+Working in... may indeed expose you to
+various harmful substances. I recommend
+consulting a doctor as soon as possible...
+reduce exposure to harmful substances...
+QA Pairs
+Q: There is an electronics company that produces
+lithium batteries ... Will this job affect
+my pregnancy... A: Medical Analysis: During
+the production... generates some powdered airborne
+particles, volatile gases, such as NMP ... I recommend
+that... not directly exposed ... poses risks
+to your own health. Take proper protective measures
+or you could change your job .
+LLM Response
+Hello... may expose you to certain chemical
+substances , such as graphite, binders, and
+solvents in the anode materials. It is
+advisable to enhance personal protective
+measures and reduce the amount of time spent
+in such an environment ... attend regular
+prenatal check-ups ...
+ht_qaPairs ht_wiki
+0
+100
+200
+300
+400
+500
+600L2 Distance
+***
+Huatuo
+(a) Huatuo dataset results
+nq_qaPairs nq_wiki
+0
+50
+100L2 Distance
+***
+Natural Question (b) Natural Question results
+Figure 1: (top) Example of retrieved text chunks and
+corresponding responses from Huatuo, where relevant
+texts are highlighted in red , LLM responses in blue ,
+showing QA pairs are more consistent with user queries
+in terms of intents and semantics. (Bottom) Euclidean
+distances L2 between queries and their top-1 ranked re-
+trieved text chunks across knowledge bases demonstrate
+semantic proximity. Each subplot presents paired distri-
+butions: query-to-QA pair distances (left) versus query-
+to-Wikipedia passage distances (right), with dashed
+lines indicating mean values. Lower L2 metrics sig-
+nify higher semantic similarity.
+(RAG) framework emerges as a promising solu-
+tion for knowledge-intensive tasks (Lewis et al.,
+1361

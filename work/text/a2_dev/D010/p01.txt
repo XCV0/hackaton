@@ -1,0 +1,38 @@
+Efficient Federated Search for
+Retrieval-Augmented Generation using
+Lightweight Routing
+Akash Dhasade[0000−0003−4362−5548], Rachid Guerraoui[0000−0002−4794−8902],
+Anne-Marie Kermarrec[0000−0001−8187−724X], Diana
+Petrescu[0009−0006−2229−235X] ⋆, Rafael Pires[0000−0002−7826−1599], Mathis
+Randl[0009−0003−6844−4695], and Martijn de Vos[0000−0003−4157−4847]
+EPFL, Lausanne, Switzerland
+Abstract. Large language models (LLMs) achieve remarkable perfor-
+mance across domains but remain prone to hallucinations and incon-
+sistencies. Retrieval-augmented generation (RAG) mitigates these issues
+by augmenting model inputs with relevant documents retrieved from ex-
+ternal sources. In many real-world scenarios, relevant knowledge is frag-
+mented across organizations or institutions, motivating the need for fed-
+erated search mechanisms that can aggregate results from heterogeneous
+data sources without centralizing the data. We introduce RAGRoute,
+a lightweight routing mechanism for federated search in RAG systems
+that dynamically selects relevant data sources at query time using a
+neural classifier, avoiding indiscriminate querying. This selective routing
+reduces communication overhead and end-to-end latency while preserv-
+ingretrievalquality,achievingupto80.65%reductionsincommunication
+volume and 52.50% reductions in latency across three benchmarks, while
+matching the accuracy of querying all sources.
+Keywords: Retrieval-Augmented Generation · Large Language Models
+· Federated Search · Resource Selection · Routing.
+1 Introduction
+Large language models (LLMs) have driven significant advancements across var-
+ious domains such as natural language processing and healthcare [5,24,18]. De-
+spite their widespread adoption, one major concern is their tendency to hallu-
+cinate, generating false responses with high confidence [20] and limiting their
+applicability in critical domains [21]. Retrieval-augmented generation (RAG)
+mitigates this issue by combining text generation with external retrieval, en-
+hancing factual accuracy and contextual grounding [27,34].
+ExistingRAGsystemstypicallyrelyonasinglemonolithicvectordatabase[26].
+In practice, however, real-world knowledge is often distributed across multiple
+heterogeneous information systems and repositories [6,39]. This setting calls for
+⋆ Corresponding author: diana.petrescu@epfl.ch
+arXiv:2502.19280v2  [cs.LG]  9 Apr 2026

@@ -1,0 +1,99 @@
+tails (auxiliary information raux of HT R), high-
+level abstractions (summary S of the corresponding
+text chunks), and original structural properties (the
+relation-related contents O) are applied to guide
+the LLM in generating knowledge-rich text cen-
+tered around HT R. This process also self-checks
+the correctness of the output. Through this op-
+timization pipeline, we significantly enhance the
+stealthiness of the generated watermarked text.
+Multi-bit Generative Watermarking. Watermark
+persistence is a critical concern in the black-box
+setting of RAG. By treating the set of watermark
+texts as a whole, the watermark signal can be ac-
+cumulated across multiple responses. Intuitively,
+this accumulation provides enough redundancy to
+encode customizable watermark information. Mo-
+tivated by this insight, we design an LLM text gen-
+erative watermarking algorithm to generate water-
+mark knowledge texts.
+Before watermarking, we first shuffle the wa-
+termark message to a pseudorandom sequence W
+for statistical randomness and security. W is then
+divided into M segments of equal length l, and
+each generation select one segment Wm by HT R
+for embedding. This can control the embedding
+times of a watermark bit, providing redundancy for
+watermark detection. At each token generation, the
+watermark bit w ∈ {0, 1} is selected from Wm by:
+idx(Wm) = H(HT R, tprev , sk) mod|Wm|, (3)
+where H(·) denotes a hash function, and idx repre-
+sents the index of w in Wm.
+We then map w into vocabulary partitions for
+multi-bit embedding. By using H(HT R, tprev , sk)
+as a seed, we randomly partitions the LLM’s vo-
+cabulary V into two disjoint lists V1 and V0 at each
+token generation. V1 and V0 represent bit 1 and 0,
+respectively. The w boosts token probabilities in
+Vw for watermarking by a Proportional Modulation
+on probability distribution:
+pw(t) = [ 1 + (2w − 1) ( δ1V1 (t) − δ′1V0 (t) )] p(t),
+(4)
+where p(t) denotes the probability of a token
+t, 1V1,0 (·) is the indicator function for judging
+whether token t ∈ V1,0, and δ, δ′ represent the
+modulation factors. The detailed derivation of the
+Eq. (4) is given in Appendix C.1. To achieve a
+valid probability distribution after modulation, δ′
+is constrained by δ and should satisfy:
+Theorem 1. δ′ = δ · λ/(1 − λ), λ = ∑ t∈V1 p(t).
+Proof. See Appendix C.2.
+Through modulation, when w = 1, tokens in V1
+have a higher sampling probability, whereas when
+w = 0, tokens in V0 are more likely to be selected.
+Each token can encode a bit w, thus achieving
+multi-bit watermarking. Besides, we have:
+Theorem 2. Proportional modulation is unbiased,
+preserving generation quality.
+Proof. See Appendix C.3.
+We must also consider that the retrieved water-
+marked text is paraphrased by the LLM compo-
+nent in RAG according to the query. This may
+disrupt the original watermark tokens (e.g., syn-
+onym substitution) and reduce watermark persis-
+tence. To mitigate this issue, we follow the ap-
+proach in WatME (Chen et al., 2024b) by clustering
+synonyms before vocabulary partitioning. Partition-
+ing and merging operation are applied at the cluster
+level to obtain the final V1 and V0.
+The practical settings of the generation process
+and the generation Algorithm 1 are detailed in Ap-
+pendix B.1. Notably, our algorithm is flexible, en-
+abling watermark capacity to be adjusted based on
+robustness and query constraints (e.g., 1-bit mode).
+Watermark Text Infusion. After generation, we
+take the injection-based strategy to complete water-
+marking. For seamless infusion, we craft a prompt
+(as detailed in Appendix D.3) to select top-K wa-
+termarked texts, and then infuse them into their
+corresponding chunks. It can be described as:
+RAGwm := KB ∪ Selected{KTwm}. (5)
+where KB denotes the original knowledge base, ∪
+represents relevant-text integration, and KTwm are
+the set of knowledge watermark texts.
+3.3 Watermark Text Indexer
+To ensure that infused watermarked texts can be
+effectively retrieved and answered by an RAG, we
+design a Watermark Text Indexer (W T I) compris-
+ing two components: a question generator Qg and
+an RAG simulator (RAGs).
+The Qg prompts (see Appendix D.4) an LLM
+to produce questions from the watermarked texts
+and the watermark prefixes. A watermarked text
+can be used to generate multiple questions from di-
+verse perspectives, enabling a more comprehensive
+reconstruction of the original content and improv-
+ing the watermark recovery rate. The generated
+answers are encouraged to be lexically similar to
+watermarked texts to facilitate matching.
+21198

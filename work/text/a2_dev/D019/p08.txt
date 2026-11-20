@@ -1,0 +1,109 @@
+user’s query.
+10
+15
+20
+25
+ROUGE
+2 4 6 8
+35
+40
+45
+50
+top-K of retrieved QA Pairs
+Recall (%)
+Misknow-RAG (Recall) STD-RAG (Recall)
+Misknow-RAG (ROUGE) STD-RAG (ROUGE)
+1
+(a) Retrieve from history QA pairs.
+10
+15
+20
+25
+ROUGE
+2 4 6 8
+25
+35
+45
+55
+top-K of retrieved Wikipedia chunks
+Recall (%)
+Misknow-RAG (Recall) STD-RAG (Recall)
+Misknow-RAG (ROUGE) STD-RAG (ROUGE)
+1
+(b) Retrieve from Wikipedia knowledge base.
+Figure 3: Comparison results of missing knowledge and
+standard RAG on context recall and ROUGE-1 scores
+across different top-K.
+4 Related Work
+Iterative RAG with missing knowledge To en-
+hance reasoning ability within the RAG pipeline,
+there are primarily two approaches: One relies
+on teaching the model how to think utilizing in-
+ternal parameter knowledge. Qian et al. (2024)
+proposes to use a parameteric memory module to
+generate context cues before retrieval, to bridge
+the gap between query and knowledge base. Is-
+lam et al. (2024) proposes to use hybrid adaptive
+retrieval to effectively determine relevant and sup-
+ported contexts. Another line lies in optimizing
+reasoning through an external process with a pow-
+erful LLM such as GPT-3.5 to generate follow-up
+thinking steps (Press et al., 2023; Yao et al.). Kim
+et al. (2024) proposes a RAG system with query
+decomposation and expansion. Jiang et al. (2024)
+and Wang et al. (2024) utilize Monte-Carlo Tree
+Search to find optimal chunk combinations, and
+Feng et al. (2025) aims at enhancing the model’s
+self-consistency at test time.
+These methods primarily focus on refining the
+reasoning space, addressing complex problems in
+the RAG system, which might ignore distribution
+gaps between queries and knowledge bases. Wang
+et al. (2025a) proposes to extract missing informa-
+tion and generate queries within separate modules,
+whereas Trivedi et al. (2023) performs iterative
+retrieval through multi-step reasoning. Inspired
+by their works, to solve the missing knowledge
+problem and explore distribution gaps in a special
+domain, we build a single-pass way to generate
+formatted missing knowledge queries from differ-
+ent knowledge sources. Our approach could not
+only avoid error propagation between modules but
+also leverage the interconnections among queries,
+contexts, and the missing knowledge. Furthermore,
+we utilize the reasoning content produced by the
+missing knowledge analysis phase, which encom-
+passes verification signals about retrieved contexts
+to further enhance overall accuracy.
+Query generation in RAG To capture user in-
+tent accurately with informal spoken expressions
+in queries, query rewriting seems to be a promising
+solution. Many efforts focus on training a query
+rewriting module to better align with user’s intent
+(Ma et al., 2023; Wang et al., 2025b). This might
+improve the recall of retrieved contexts, further
+enhancing the overall accuracy of the reader’s re-
+sponse. Li et al. (2024) proposes to train a uni-
+fied model to simultaneously generate fine-grained
+clues and evidence.
+Motivated by these approaches, we explore meth-
+ods with different knowledge bases for generating
+appropriate missing knowledge queries while mit-
+igating the gap between informal spoken expres-
+sions and professional documentation.
+5 Conclusion
+We comprehensively explore the distribution gap
+between query and text chunks with in knowledge
+bases by leveraging multi-source knowledge bases
+in a real-world question answering system. Fur-
+thermore, to mitigate the missing knowledge prob-
+lem, we propose a reasoning-based missing knowl-
+edge RAG framework, which introduces single-
+pass missing knowledge query generation. By ex-
+plicitly modeling the interconnections among the
+query, retrieved contexts, missing knowledge, and
+its corresponding query, our approach enhances
+the relevance and completeness of retrieved knowl-
+edge, considering the above distribution gap as well
+without additional training.
+1368

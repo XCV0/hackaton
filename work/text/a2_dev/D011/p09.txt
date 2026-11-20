@@ -1,0 +1,78 @@
+Figure 4: Results of Watermark Capacity and Infusion
+Volume Impact under Attacks.
+Figure 5: Results of Query Quota and Watermark Ca-
+pacity Impact.
+pacity paired with a restrictive quota of 100 queries,
+the WRR drops to 0.75. Consequently, achiev-
+ing highly robust detection performance requires a
+strategic balance, either by reducing the watermark
+capacity or by increasing the allocated query quota.
+Finally, we evaluate the combined effect of query
+quota and infusion volume (Appendix E.10 Fig-
+ure 7). The results closely mirror Figure 3(a), con-
+firming infusion volume has minor impact. Overall,
+these results validate that watermark capacity and
+query quota primarily dictate KMW’s performance.
+4.6 Security Discussion
+A threat to IP protection in RAG systems is own-
+ership reclaiming, where an adversary injects their
+own watermark into the RAG to falsely claim own-
+ership. Both existing schemes and KMW can
+counter this attack as the true owner can reliably
+detect their watermark in the adversary’s RAG, but
+the adversary cannot detect their watermark in the
+owner’s RAG and cannot provide a knowledge base
+without the onwer’s watermark.
+However, insecure designs may allow advanced
+adversaries to claim indistinguishable ownership.
+Injection-based strategies are particularly suscepti-
+ble, as they do not modify original content–if the
+injection process is not computationally infeasible,
+adversaries can forge a plausible watermark using
+existing content. Since the same content also exists
+in the owner’s dataset, it becomes impossible to
+determine the watermark’s origin.
+RAG-WM suffers from this issue, as detailed
+in Appendix E.11. In contrast, KMW resists such
+forgery attacks, as both watermark selection and
+text generation rely on a series of keyed hash oper-
+ations, and the watermark is meaningful. Without
+the secret key, it is computationally infeasible for
+an adversary to construct a colliding hash func-
+tion that generates an identically valid watermark
+information. This design ensures the security of
+KMW. We formally analyzed our defense against
+both reclaiming and forgery in Appendix E.12.
+5 Related Work
+With the application of RAG, its IP protection has
+attracted increasing attention. The idea of RAG
+watermarking has been proposed (Jovanovi´c et al.,
+2025) and preliminarily explored. Existing RAG
+watermarking can be categorized into rewrite-based
+(Jovanovi´c et al., 2025) and injection-based (Lv
+et al., 2025; Guo et al., 2025; Liu et al., 2025b,a).
+Besides, watermarking for multimodal RAG sys-
+tems has also begun to be studied (Chen et al.,
+2025). However, despite these advancements, ex-
+isting research lacks sufficient exploration into
+enhancing watermarking capacity and preserving
+RAG utility. We refer readers to Appendix F for a
+detailed background and related work.
+6 Conclusion
+In this study, we introduced Knowledge-Infused
+Multi-Bit Watermarking (KMW) for Retrieval-
+Augmented Generation (RAG) to protect intellec-
+tual property (IP). KMW establishes a new RAG
+watermarking paradigm by addressing limitations
+in encoding capacity and potential degradation
+in RAG performance, enhancing the applicabil-
+ity of RAG watermarking. Experimental results
+across four datasets and diverse RAG configura-
+tions demonstrate the effectiveness, robustness,
+stealthiness, and security of KMW.
+Limitations
+In this section, we discuss several limitations of this
+work. First, implementing multi-bit watermarking
+requires higher watermark text injection amounts
+and query quotas, resulting in higher computational
+21203

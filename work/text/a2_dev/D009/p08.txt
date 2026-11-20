@@ -1,0 +1,123 @@
+PopQA HotpotQA 2WikiMQA
+0
+10
+20
+30
+40
+50
+60F1 Score (%)
+40.4
+45.7 45.1
+47.4
+51.6 51.4
+48.0
+52.0 51.9
+Retrieval Docs
+k=1 k=3 k=5
+Figure 4: Impact of the number of retrieved documents
+(k) on performance.
+1 2 All
+Retrieval Steps
+0
+10
+20
+30
+40
+50
+60
+70F1 Score
+38.5
+44.6
+47.4
+31.4
+47.3
+51.6
+21.2
+43.6
+51.4
+PopQA
+HotpotQA
+2WikiMQA
+0
+20
+40
+60
+80
+100
+Data Coverage %
+Figure 5: Cumulative average F1 score (bars) and data
+coverage (dashed lines) across different retrieval steps
+(1, 2, All) on PopQA, HotpotQA, and 2WikiMulti-
+HopQA.
+grounding of the retrieved documents, our model
+filters out spurious trajectories. At K = 128 with
+WMV, our PRM achieves 46.5 F1 on 2WikiMul-
+tiHopQA, 59.5 F1 on HotpotQA, and 50.8 F1 on
+PopQA, outperforming both MV (43.9 / 54.6 / 49.2)
+and VersaPRM (43.4 / 53.9 / 49.5) across all three
+datasets. Under the BoN strategy, our PRM re-
+mains stable as K grows, performing comparably
+to MV on PopQA and 2WikiMultiHopQA (within
+0.2 F1) and substantially outperforming it on Hot-
+potQA (+4.9 F1), while VersaPRM and MathPRM
+degrade sharply at larger K. These results validate
+our motivation for building a RAG-specific PRM
+that jointly evaluates logical validity and evidential
+grounding, rather than relying on general-purpose
+reasoning critics.
+4.6 Impact of Retrieval
+In this section, we investigate the performance of
+PRO-STEP under different numbers of retrieved
+documents and retrieval steps to evaluate its context
+utilization and planning adaptivity.
+Impact of the number of retrieved documents.
+Figure 4 compares PRO-STEP under different top-
+k retrieval settings. Increasing k from 1 to 3 consis-
+tently improves performance across all datasets (av-
+erage +6.4 F1), and expanding to k = 5 yields fur-
+ther gains. These findings highlight PRO-STEP’s
+capacity to effectively leverage additional retrieved
+documents, particularly in complex multi-hop sce-
+narios.
+Impact of the number of retrieval steps. Fig-
+ure 5 illustrates the cumulative F1 score and data
+coverage at retrieval-step cap K. PRO-STEP au-
+tonomously adjusts search depth to task difficulty:
+on single-hop PopQA, 65.6% of instances are re-
+solved within the first step (cumulative F1 = 38.5),
+while on multi-hop HotpotQA and 2WikiMulti-
+HopQA only 52.0% and 36.6% are resolved at step
+one, with reasoning naturally extending to addi-
+tional steps. On 2WikiMultiHopQA, cumulative
+F1 climbs from 21.2 (K = 1) to 43.6 (K = 2) as
+coverage grows from 36.6% to 77.5%, indicating
+that the model successfully acquires critical miss-
+ing evidence during its second retrieval. Cumula-
+tive F1 increases monotonically across all datasets,
+demonstrating that PRO-STEP mitigates the error-
+propagation degradation typical of iterative RAG
+frameworks (qualitative examples in Section J).
+4.7 Generalization Across Backbones
+Our main experiments use Qwen2.5-7B-Instruct as
+the policy backbone.
+We further examine the generalization of PRO-
+STEP beyond this configuration. Specifically, we
+evaluate PRO-STEP with a different model family
+(Llama-3.1-8B-Instruct), without instruction tun-
+ing (Qwen2.5-7B Base), and at a smaller model
+scale (Qwen2.5-3B-Instruct). Table 4 reports re-
+sults across all five benchmarks.
+As shown in Table 4, PRO-STEP improves
+Llama-3.1-8B-Instruct across all five datasets, in-
+creasing the average performance from 5.08 / 13.08
+to 16.16 / 22.57 EM / F1 (+11.1 EM and +9.5 F1).
+This shows that the gains are not restricted to the
+Qwen model family.
+Without instruction tuning, Qwen2.5-7B Base
+with PRO-STEP achieves 32.85 / 42.01 average
+EM / F1, compared with 34.51 / 44.09 for the main
+instruction-tuned backbone. The relatively small
+average difference (1.66 EM and 2.08 F1) shows
+that the framework retains most of its performance
+without an instruction-tuned initialization.
+37911

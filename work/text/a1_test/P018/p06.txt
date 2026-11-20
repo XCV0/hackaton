@@ -1,0 +1,165 @@
+Nature Energy | Volume 8 | August 2023 | 789–799 794
+Article https://doi.org/10.1038/s41560-023-01255-2
+the thickness sensitivity of XC and Ea 31, the much smaller Ea value of the 
+p-nc-Si:H layer on glass than that on the c-Si wafer is caused by varia-
+tions in the thickness-dependent crystallization fraction. It should also  
+be noted that the above tests are on samples without light soaking;  
+the Ea plots of the samples under light soaking are shown in Supple-
+mentary Fig. 4. With light soaking, the Ea and σ values of both films  
+are slightly improved, except for the σ of p-a-Si:H; this increases by a 
+factor of two to three. Although light soaking is used in final devices, 
+it occurs at the front side of the solar cell. Thus, we assume that  
+the properties of HSCs at the rear side are negligibly influenced, and  
+the p-a-Si:H- and p-nc-Si:H-layer properties without light soaking 
+should approximate conditions seen by real devices.
+To evaluate the real device performance more accurately, we chose 
+Ea values of 110.7 meV (346.8 meV) for p-nc-Si:H (p-a-Si:H) tested on  
+textured silicon wafers as input parameters for simulated band  
+diagrams. Here, to fit the tested I–V curves in Supplementary Fig. 5, the 
+simulated I–V curves in Supplementary Fig. 6 were carefully regulated 
+by adjusting the simulation parameters so that the accuracy of the 
+technology computer-aided design (TCAD) simulated band diagrams 
+shown in Fig. 3e,f is ensured. The p-layer change leads to adjustments 
+from three aspects: (1) conductivity of the p layer itself, (2) band bend-
+ing at the c-Si surface and (3) carrier transport at the TCO–p-layer inter-
+face. All the three aspects have favourable influences on minimizing 
+resistive losses in the HSC and consequently, yielding maximal FF in the 
+devices. The relevant interpretation is elaborated as follows.
+First, the p-nc-Si:H layer presents a much higher dark conductivity 
+than the p-a-Si:H layer, which is beneficial for reducing resistive loss in 
+the p layer itself. Second, compared with the p-a-Si:H case, the p-nc-Si:H 
+layer has favourable band bending at the c-Si surface region. This is 
+reflected by the smaller gap between the valence band maximum and 
+the Fermi level (ΔE) (insets in Fig. 3e,f). The reason for this is the lower 
+Ea, hence higher work function, of the p-nc-Si:H sample. The accumula-
+tion of holes at the surface of n-Si for the p-nc-Si:H sample is also much 
+higher than that of the p-a-Si:H case, leading to a larger difference 
+between hole and electron concentrations and thus, an improvement 
+in electrical passivation. Moreover, this enhanced band bending at the 
+p layer–i layer–n-Si stack provides a lower and sharper energy barrier, 
+which favours a collection of holes through tunnelling at the HSC. 
+Accordingly, lower J0 and ρc in the p layer–i layer–n-Si stack is obtained. 
+Third, holes in the p-layer valence band recombine with electrons in 
+the TCO conduction band. As elaborated by Procel et al. 50,51, the ρc  
+variations at the interface are linked to the dominating carrier transport 
+mechanisms and can be influenced by the energy alignment of the 
+p layer–TCO contact. The p-nc-Si:H–TCO interface features a lower 
+hole transport barrier than the p-a-Si:H–TCO case, as indicated in  
+Fig. 3e,f. According to Fig. 3f, the energy alignment at the p-nc-Si:  
+H–TCO interface could facilitate carrier transport through dominat -
+ing BTBT, which is widely considered to be the most efficient carrier 
+transport mechanism. By contrast, at the p-a-Si:H–TCO interface, 
+trap-assisted tunnelling, which is usually a less efficient tunnelling 
+mechanism than BTBT, is likely to dominate; this is confirmed by our 
+simulated results in Fig. 3e. Therefore, a higher ρc at the p-a-Si:H–TCO  
+interface is to be expected. It should be mentioned that the band  
+gap of p-nc-Si:H (~1.7–2 eV) is simplified to be consistent with that  
+of i-a-Si:H because it has little effect on the simulation result (J –V) if  
+the Ea of the doped layer is small enough50–52.
+Evaluation of holes selectivity
+The replacement of the p-a-Si:H layer with a p-nc-Si:H layer 
+improves the passivation quality and reduces ρc values at both the p 
+layer–i-a-Si:H–n-Si contact and the TCO–p layer interface. These posi-
+tive effects contribute to delivering a larger hole selectivity of the HSCs. 
+Figure 4a shows the distributions of simulated solar cell efficiency 
+and hole selectivity as functions of ρc and J0. We extract ρc and J0 of 
+HSCs based on p-nc-Si:H directly from the measurements shown in 
+Fig. 4b,c, while those of p-a-Si:H are evaluated according to the fitting 
+parameters in Fig. 2 and Supplementary Fig. 1. The selectivity values 
+are indicated by the blue lines, with S10 = log10[Vth/(J0 × ρc)] (refs. 53,54). 
+For comparison, the S10 values of several typical HSCs with p layers of 
+p-a-Si:H, p-SiCx:H and p-poly-Si:H are also included. As shown in Fig. 4a, 
+from the top right corner to the bottom left corner of the plot, solar cell 
+efficiency increases with the increase of S10 from 13 to 17. The solar cell 
+with a p-nc-Si:H layer features S10 > 16, which is higher than solar cells 
+using the p-a-Si:H (this work), p-SiCx:H (ref. 7) and p-poly-Si:H layers55,56. 
+Provided that an ideal ESC and our p-nc-Si:H HSC are considered, the 
+theoretical PCE of the resultant SHJ solar cells could reach up to 29.2%.
+TCO–p-nc-Si:H–i-a-Si:H
+(this work)
+TCO–p-a-Si:H–i–a-Si:H
+(this work)
+p-SiCx:H–SiOx
+p-poly-Si:H–SiOx
+ρc (Ω cm2)
+Fit (ρc = 3.6 mΩ cm
+2
+)
+J0 (fA cm–2)
+29.5
+25
+0.65 0.85 1.05 1.25 1.45
+10
+1
+a
+10
+0
+10
+1
+10
+2
+10
+3
+10
+–3
+10
+–2
+10
+–1
+10
+0
+29
+10
+–1
+10
+0
+10
+1
+10
+14
+10
+15
+10
+16
+Ideal PCE (%)
+28 27 26
+b c
+17 16
+15
+14
+13
+Current (A)
+Voltage (V) Minority carrier density (cm–3)
+Eﬀective lifetime (ms)
+0
+0.8
+0.6
+0.4
+0.2
+0
+Rt (Ω)
+1 S–1 (cm–2)
+100 200
+Decrease disk diameter
+n-Si
+Experiment
+Intrinsic (by Black and
+Macdonald61)
+Fit (τSRH = 15 ms, J0 = 1.0 fA cm–2)
+p-nc-Si:H
+i-a-Si:H
+Fig. 4 | Evaluation of the carrier selectivity of HSCs based on a p-nc-Si:H layer. 
+a, Plot of ideal PCE as a function of contact resistivity ρc and recombination 
+current density J0 for different HSCs, assuming a 110-μm-thick undoped c-Si bulk 
+and Jsc of 43.31 mA cm−2 per Richter’s limiting efficiency model. Blue lines (with 
+blue numbers) represent the selectivity S10 according to ref. 53, while dashed–
+dotted lines (with black numbers) are the contour lines for ideal PCE. Several 
+typical HSCs, including p-a-Si:H (this work; red circle), p-nc-Si:H (this work; red 
+star), p-SiCx:H (ref. 7; yellow circle) and p-poly-Si:H (refs. 55,56; purple circle) are 
+marked for comparison. b,c, Experimental measurements of ρc by ECSM58,59 (b) 
+and J0 by Sinton WCT-120 (c) for HSC based on p-nc-Si:H (ref. 6). Inset (b): the total 
+series resistances (Rt) from different disks plotted against inverse area (1 S−1). 
+The ρc of 3.6 mΩ cm2 is extracted by linear fitting (dashed line). Inset (c): the 
+passivated sample with a symmetrical structure used for the J0 test; τSRH and J0 are 
+estimated as 15 ms and 1.0 fA cm−2, respectively, according to the methods from 
+ref. 5 (here, the grey line indicating intrinsic lifetime, τintr, is taken from ref. 61).

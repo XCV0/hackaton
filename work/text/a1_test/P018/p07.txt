@@ -1,0 +1,135 @@
+Nature Energy | Volume 8 | August 2023 | 789–799
+ 795
+Article https://doi.org/10.1038/s41560-023-01255-2
+Three methods—the Cox and Strack method (CSM)57, the expanded 
+Cox and Strack method (ECSM)58,59 and the transfer length method 
+(TLM)60—were utilized to extract the ρ c of HSCs based on p-nc-Si:H. 
+Emphasis was placed on the ECSM, which can directly extract  
+the ρc values of the TCO–p-nc-Si:H–i-a-Si:H–n-Si stack, as shown in  
+Fig. 4b. The other two methods, which evaluate the ρ c through  
+measuring symmetric samples on a p-type silicon wafer (p-Si), are 
+shown in Supplementary Fig. 7. The coloured lines in Fig. 4b are the 
+dark current–voltage (dark I–V) curves of the ECSM disks with different  
+diameters (the same as the CSM disks shown in Supplementary  
+Fig. 7a but with the n-Si wafer as the substrate). The inset in Fig. 4b  
+shows total series resistance (Rt) from different disks plotted against 
+inverse area (1 S−1). From the linear fit (red dashed line), we can extract 
+a ρc of 3.6 m Ω cm2. For comparison, the results extracted from  
+CSM and TLM are 4.2 and 6.5 mΩ cm2, respectively.
+A symmetric structure, shown in the inset of Fig. 4c, was used to 
+characterize J0 for the HSC based on p-nc-Si:H. The transient mode 
+of a Sinton measurement was used for testing minority carrier life -
+time, and the results are indicated by red circles. The intrinsic recom-
+bination mode presented by Black and Macdonald 61 was used to fit 
+the data, tuning the parameters of SRH recombination (τ SRH; reflect-
+ing the quality of silicon wafer) and J 0 (representing the quality of  
+surface passivation). The fitted total J0 is 1.0 fA cm−2. Considering the 
+symmetry of the structure, it should be 0.5 fA cm −2 for the J0 of the 
+p-nc-Si:H–i-a-Si:H–n-Si HSC.
+The achievements in electrical performance of the p-nc-Si:H  
+cell (26.30% PCE) define a state-of-the-art SHJ process on which 
+advanced optical designs can be adopted to further promote PCE.  
+As shown in Fig. 5a, with the same BJ processing as the p-nc-Si:H cell, 
+reducing the shading ratio from 2.8 to 2.0% after using the laser transfer 
+process and modifying the window layers of n-nc-SiOx:H, i-a-Si:H and 
+TCO at the front (such as reducing the thickness of n-nc-SiO x:H and 
+i-a-Si:H, increasing the oxygen content of n-nc-SiOx:H and decreasing 
+the carrier density of TCO) to minimize the parasitic absorption, we 
+achieved a higher PCE of 26.74% with the increase of JSC to 41.16 mA cm−2. 
+The slight reduction of FF is mainly due to the change of front metal 
+fingers. In addition, VOC increases by 0.9 mV, possibly enhanced by 
+the higher JSC. The external quantum efficiency spectrum and main 
+optical loss of each layer are shown in Fig. 5b . The absorption by 
+n-Si fits well with the Institute for Solar Energy Research in Hamelin 
+(ISFH)-certified one, and the slight deviation at short wavelength 
+may arise from the refractive indices used in the simulation. The front 
+grid electrode causes a decrease of 0.97 mA cm −2 in JSC, accounting 
+for a shading fraction of 2.0%. In the ultraviolet range, the front TCO, 
+n-nc-SiOx:H and i-a-Si:H dominate the loss due to parasitic absorption. 
+In the near-infrared range, the major source of loss is the escape of  
+light from the front, which is attributed to reflection by the test chunk 
+due to the limited wafer thickness. With introducing an additional 
+reflective MgF2/Ag stack at the rear side and regulating the transmit-
+tance of TCO, the JSC was further improved to 41.45 mA cm −2 due to  
+the optical gain, while FF decreased to 86.07% due to the decrease  
+of TCO conductivity. Finally, the PCE was improved to 26.81%. The 
+certified J–V curve of the device is reported in Supplementary Fig. 8.
+Conclusion
+Through introducing nanocrystallization technology in the doped layer 
+at carrier-selective contacts for both polarities, we achieve a record effi-
+ciency of 26.81% and on a different cell, an extremely high FF (86.59%) 
+on M6-sized BJ SHJ solar cells. Two types of SHJ solar cells equipped with 
+p-type transporting layers of amorphous silicon and nanocrystalline 
+silicon are comprehensively investigated; we study their power loss, 
+contact resistivity, transport mechanism and so on. Structural and 
+electrical characterizations of the boron-doped nanocrystalline silicon 
+films indicate that a higher XC (>63%), an increase in conductivity of four 
+orders of magnitude (in comparison with p-type amorphous silicon) 
+and an ultralow Ea (<115 meV) are the main causes of its excellent electri-
+cal performance. Because of the low Ea of p-nc-Si:H, it is easy to enable 
+BTBT at the n-type TCO–p-nc-Si:H interface and achieve sharp band 
+bending at the i-a-Si:H–n-Si interface, facilitating efficient transport 
+and collection of holes across the whole junction. Our study shows that 
+the implementation of p-nc-Si:H together with a modified TCO greatly 
+reduces the contact resistivity of HSC, from >100 to <5 mΩ cm2. The 
+total series resistance of the solar cell is reduced from the original 0.37 
+to 0.2 Ω cm2, yielding a record FF for single-junction silicon solar cell.
+Methods
+Solar cell fabrication
+In this work, solar cells were fabricated by the commercial SHJ research 
+and development line on LONGi M2 (the 25.26% efficiency SHJ solar 
+cell) or on an M6 Czochralski n-Si wafer with a resistivity of 1.2–1.5 Ω cm 
+and a thickness of 130 μm in (100) orientation. The n-Si wafer was first 
+cleaned and textured by a wet chemical process. Before subsequent 
+deposition, the thickness of the n-Si wafer was confirmed by weight 
+measurement. Radiofrequency plasma-enhanced chemical vapour 
+deposition was used to prepare i-a-Si:H, and then, very high-frequency 
+plasma-enhanced chemical vapour deposition (40.68 MHz) systems 
+3008006004002000
+0
+2
+4
+6
+8
+10
+12
+100
+80
+60
+40
+20
+00
+2
+4
+6
+8
+500 700 900 1,100
+Wavelength (nm)Voltage (mV)
+Current (A)
+R, A, EQE (%)
+VOC = (751.1 ± 3.2) mV
+PMPP = (7,337 ± 110) mW
+P–V curve
+I–V curve
+PCE = (26.74 ± 0.40)%
+FF = (86.48 ± 0.95)%
+ISC = (11,295 ± 120) mA
+Acell = (274.4 ± 1.1) cm2
+Electrode shading (0.97 mA cm–2)
+Front reflection (0.27 mA cm–2)
+Front escape (2.43 mA cm–2)
+Test chunk (0.12 mA cm–2)
+Front TCO (0.50 mA cm–2)
+n-µc-SiOx:H (0.21 mA cm–2)
+i-a-Si:H (0.34 mA cm–2)
+Rear TCO (0.25 mA cm–2)
+Simulated EQE (41.22 mA cm–2)
+ISFH-certified EQE (41.17 mA cm–2)
+Green 4n2 limit (42.82 mA cm–2)
+a b
+Fig. 5 | Certified SHJ solar cell with a PCE of 26.74%. a, Light I–V and power–
+voltage (P–V) curves of the record front–back contact silicon solar cell.  
+b, External quantum efficiency (EQE) spectrum and analysis of the optical 
+loss, including reflection (R) and absorption (A). The maximal EQE (Green 4n2 
+limit72) for 130-μm-thick n-Si excluding electrode shading is also reported for 
+comparison.

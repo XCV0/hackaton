@@ -1,0 +1,110 @@
+Linlin Wang, Tianqing Zhu, Laiqiao Qin, Longxiang
+Gao, and Wanlei Zhou. 2025. Bias amplification
+in rag: Poisoning knowledge retrieval to steer llms.
+arXiv preprint arXiv:2506.11415.
+Xidong Wang, Guiming Hardy Chen, Dingjie Song,
+Zhiyi Zhang, Zhihong Chen, Qingying Xiao, Feng
+Jiang, Jianquan Li, Xiang Wan, Benyou Wang, and
+Haizhou Li. 2024. Cmb: A comprehensive medical
+benchmark in chinese. In Proceedings of the 2024
+Conference of the North American Chapter of the
+Association for Computational Linguistics: Human
+Language Technologies.
+Sarah Weißmann, Aaron Philipp, Roland Verwiebe,
+Chiara Osorio Krauter, Nina-Sophie Fritsch, and
+Claudia Buder. 2025. Clicks, comments, conse-
+quences: Are content creators’ socio-structural and
+platform characteristics shaping the exposure to neg-
+ative sentiment, offensive language, and hate speech
+on youtube? arXiv preprint arXiv:2504.07676.
+Xiao Yang, Kai Sun, Hao Xin, Yushi Sun, Nikita Bhalla,
+Xiangsen Chen, Sajal Choudhary, et al. 2024. Crag
+– comprehensive rag benchmark. In Advances in
+Neural Information Processing Systems (NeurIPS)
+Datasets and Benchmarks Track.
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Ben-
+gio, William W Cohen, Ruslan Salakhutdinov, and
+Christopher D Manning. 2018. Hotpotqa: A dataset
+for diverse, explainable multi-hop question answer-
+ing. In Proceedings of the 2018 Conference on Em-
+pirical Methods in Natural Language Processing,
+pages 2369–2380.
+Xiang Yue, Boshi Wang, Ziru Chen, Kai Zhang, Yu Su,
+and Huan Sun. 2023. Automatic evaluation of attri-
+bution by large language models. In Findings of the
+Association for Computational Linguistics: EMNLP
+2023, pages 4615–4635.
+Zhenrui Yue, Huimin Zeng, Lanyu Shang, Yifan Liu,
+Yang Zhang, and Dong Wang. 2024. Retrieval aug-
+mented fact verification by synthesizing contrastive
+arguments. In Proceedings of the 62nd Annual Meet-
+ing of the Association for Computational Linguistics
+(Volume 1: Long Papers), pages 10331–10343.
+Linda Zeng, Rithwik Gupta, Divij Motwani, Yi Zhang,
+and Diji Yang. 2025. Worse than zero-shot? a fact-
+checking dataset for evaluating the robustness of rag
+against misleading retrievals. In Advances in Neural
+Information Processing Systems (NeurIPS).
+Qinggang Zhang, Zhishang Xiang, Yilin Xiao, Le Wang,
+Junhui Li, Xinrun Wang, and Jinsong Su. 2025a.
+Faithfulrag: Fact-level conflict modeling for context-
+faithful retrieval-augmented generation. In Proceed-
+ings of the 63rd Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Pa-
+pers), pages 21863–21882.
+Tianhui Zhang, Yi Zhou, and Danushka Bolle-
+gala. 2025b. Evaluating the effect of retrieval
+augmentation on social biases. arXiv preprint
+arXiv:2502.17611.
+Yao Zhang, Zaixi Shang, Silpan Patel, and Mikel Zu-
+niga. 2025c. From unstructured communication to
+intelligent rag: Multi-agent automation for supply
+chain knowledge bases. In Proceedings of the 1st
+Workshop on AI for Supply Chain: Today and Future
+@ KDD 2025.
+Penghao Zhao, Hailin Zhang, Qinhan Yu, Zhengren
+Wang, Yunteng Geng, Fangcheng Fu, Ling Yang,
+Wentao Zhang, Jie Jiang, and Bin Cui. 2024a.
+Retrieval-augmented generation for ai-generated con-
+tent: A survey. arXiv preprint arXiv:2402.19473.
+Xinran Zhao, Tong Chen, Sihao Chen, Hongming
+Zhang, and Tongshuang Wu. 2024b. Beyond rel-
+evance: Evaluate and improve retrievers on perspec-
+tive awareness. Preprint, arXiv:2405.02714.
+Ming Zhong, Da Yin, Tao Yu, Ahmad Zaidi, Mutethia
+Mutuma, Rahul Jha, Ahmed Hassan Awadallah, Asli
+Celikyilmaz, Yang Liu, Xipeng Qiu, and Dragomir
+Radev. 2021. Qmsum: A new benchmark for query-
+based multi-domain meeting summarization. In Pro-
+ceedings of the 2021 Conference of the North Amer-
+ican Chapter of the Association for Computational
+Linguistics: Human Language Technologies, pages
+5905–5921.
+A Reproducibility and Experimental
+Settings
+Models. Opinion extraction used three LLMs ac-
+cessed through Amazon Bedrock in April 2026:
+Mistral Large, Qwen 235B, and Claude Sonnet 4.5.
+Response generation from the retrieved context
+used Anthropic Claude Sonnet 4.5. Document and
+query embeddings used Amazon Titan Text Em-
+beddings V2 (1024 dimensions).
+Decoding. All extraction and generation calls
+used temperature 0, top-p at the Amazon Bedrock
+default, and the Bedrock default maximum output
+length of 4096 tokens. Because temperature is 0,
+outputs are effectively deterministic given fixed in-
+puts, so all reported numbers come from a single
+run.
+Retrieval. Documents were indexed in an Ama-
+zon Bedrock Knowledge Base vector store us-
+ing fixed-size chunking (4000 tokens, 15% over-
+lap). We report both semantic-only and hybrid
+(dense plus keyword) retrieval across depths k ∈
+{10, 20, 40, 60}.
+OpinioBank sampling. We evaluate on a 3-
+property sample (Silverton Las Vegas, Ambassador
+Bangkok, Ala Moana Honolulu) drawn from the
+full 500-entity OpinioBank release. Entity and
+question counts reported in Section 5 refer to this
+sample, not the full dataset.

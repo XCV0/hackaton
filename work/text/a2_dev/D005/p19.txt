@@ -1,0 +1,23 @@
+G.5 Critique-Based Thought Revision Prompt
+G.6 Strategization RAG QA CoT Prompt
+G.7 Distractor Critique Prompt
+The distraction critique process involves evaluating
+each distractor passage based on three key scores
+on a scale of 1-5:
+1. Relevance Score: Measures how relevant the
+distractor passage is to the open-ended ques-
+tion, golden passage, location, and time.
+2. Distraction Score: Assesses quality of the pas-
+sage in its ability to provide relevant retrieval
+noise.
+3. Format Score: Evaluates the similarity in text
+length and format between the distractor pas-
+sage and the original passage.
+The critique process provides constructive feed-
+back on each score, highlighting areas where the
+distractor passage excels or falls short as a distrac-
+tor. This feedback is then incorporated into the
+distractor passage generation step to refine the next
+iteration of distraction generation.
+G.8 Distractor generation prompt
+793

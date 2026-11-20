@@ -1,0 +1,97 @@
+Table 21: Final EM when the initial retrieval already
+succeeds. Subset sizes (n, ours / Search-R1) are 3,136
+/ 3,434, 8,597 / 8,776, 4,302 / 4,732, 23 / 25, and
+348 / 405, in row order.
+Dataset Search-R1 PRO-STEP ∆
+HotpotQA 53.1 54.1 +1.0
+PopQA 62.3 61.0 −1.3
+2WikiMulti 42.5 54.6 +12.1
+Bamboogle 34.8 64.0 +29.2
+MuSiQue 25.3 27.2 +1.9
+logical gaps. In contrast, PRO-STEP’s PRM eval-
+uates the validity of every single step, effectively
+preventing early mistakes from ruining the entire
+trajectory.
+Case Study 1: Resolving Entity Confusion. As
+shown in Figure 6, the baseline confuses the tar-
+get “Vernon Sewell” with “John Sewell.” Blind to
+this semantic drift, it prematurely outputs an incor-
+rect answer at Step 2. Conversely, PRO-STEP’s
+PRM immediately detects this entity mismatch and
+assigns a BAD signal. Forced to reject the spuri-
+ous path, the model continues exploring alternative
+queries until it retrieves the correct evidence at Step
+8 and answers correctly at Step 9.
+Case Study 2: Preventing Error Propagation.
+Figure 7 demonstrates the danger of error propaga-
+tion in multi-hop queries. The baseline (Reason-
+RAG) incorrectly decomposes an intermediate hop
+(e.g., targeting “NBC” instead of “CBS”). With-
+out step-level correction, it stubbornly repeats the
+same futile search four times before hallucinating.
+PRO-STEP, however, receives step-level PRM ver-
+ification. By recognizing the invalid intermediate
+conclusion early, it pivots its strategy and success-
+fully constructs the correct logical chain (NBC →
+CBS → Date).
+K PRM-Feedback-Guided Regeneration:
+A Failed Augmentation Strategy
+To test whether augmenting our preference set
+with critic-feedback-guided regeneration would im-
+prove downstream performance, we ran the fol-
+lowing pipeline. For each of the 1,456 ques-
+tions where the policy failed to produce a correct
+answer (final F1 = 0), we injected the PRM’s
+critic_feedback from the failure point into the
+user prompt and had the base Qwen2.5-7B-Instruct
+regenerate from the last sound prefix. The regener-
+ated trajectories were re-scored by the PRM, and
+we applied the same outcome-margin filter (chosen
+F1 ≥ 0.2 and ∆F1 ≥ 0.2) as in our main pipeline.
+This yielded 20,567 preference pairs over 3,128
+questions (compared to 15,877 pairs over 2,866
+questions in the original outcome filter set). We
+then trained DPO under identical hyperparameters
+(β = 0.1, LoRA r = 64/α = 128) on the aug-
+mented set.
+Training metrics improve while evaluation col-
+lapses. Table 22 shows that the augmented train-
+ing run yields substantially stronger DPO statis-
+tics: the loss roughly halves (0.42 → 0.22), the
+preference margin grows by 60% (2.17 → 3.48),
+and training accuracy climbs from 81% to 91%.
+However, downstream evaluation collapses on ev-
+ery dataset, with average EM dropping from 34.51
+to 23.83 and average F1 from 44.09 to 34.27 (Ta-
+ble 23).
+Table 22: Training metrics for the outcome filter main
+set vs. the regen-augmented set under identical DPO
+hyperparameters (β = 0.1).
+Variant Loss Margin Acc
+outcome filter main 0.42 2.17 81%
++ regen 0.22 3.48 91%
+Diagnosis: action-format mismatch between
+training and inference. The regenerated chosen
+trajectories were produced by the base policy un-
+der explicit critic-feedback prompting, which alters
+the model’s output distribution: the regenerated
+⟨think⟩ blocks become verbose meta-commentary
+referencing the feedback (e.g., reasoning about why
+the previous step was flawed), and the action selec-
+tion becomes biased toward what the feedback sug-
+gests rather than what the trajectory state requires.
+At inference time, the deployed policy operates
+without any such feedback channel, so the distribu-
+tion it must produce diverges from the regenerated
+distribution it was trained to match.
+The outcome-margin filter, which enforces F1 ≥
+0.2 and ∆F1 ≥ 0.2, can verify answer-level qual-
+ity but is blind to this stylistic drift in interme-
+diate tokens. As a result, the augmented train-
+ing set rewards the policy for matching feedback-
+conditioned outputs that never appear at test time,
+and the strong DPO metrics reflect overfitting to
+this artificial distribution rather than genuine im-
+provement in multi-hop reasoning. We view this
+as a concrete failure mode of naive PRM-rationale-
+37923

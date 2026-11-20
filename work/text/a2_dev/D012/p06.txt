@@ -1,0 +1,101 @@
+preservation inherit these conditions. TrustRAG
+assumes that governance metadata is supplied by
+a trusted upstream source. Metadata errors, miss-
+ing supersession relations, and retrieval misses fall
+outside the routing guarantee; we evaluate their im-
+pact on TrustRAG through stress tests. In addition,
+the framework does not eliminate hallucination or
+leakage originating from the model’s parametric
+memory.
+4 Experimental Setup
+Evaluation Sets. We evaluate on AeroTrustBench.
+In the main experiments, each instance contains
+a query, two candidate documents with gover-
+nance metadata, a user permission level, and a
+ground-truth governed response. The instances use
+compliance-oriented policy text, while concrete
+values, access labels, and supersession relations are
+constructed as counterfactual variables to reduce
+data contamination risk. To evaluate enlarged can-
+didate pools, we further construct recall-controlled
+50-document pools for 100 SOURCE_ANCHORED
+instances. Each pool retains the original two gold
+documents and adds 24 BM25-selected, world-
+consistent distractor pairs (48 documents). This
+design holds gold-evidence recall fixed to isolate
+evidence governance and final-response genera-
+tion under enlarged candidate pools. Appendix
+Table A1 summarizes the evaluation sets.
+Models and Methods. We evaluate TrustRAG us-
+ing three representative general-purpose LLMs as
+generators: Qwen-Max, DeepSeek-V3, and GLM-
+4-32B-0414. All models are evaluated on the same
+test instances, candidate documents, and evaluation
+criteria, with the sampling temperature set to 0.1.
+We compare unguided RAG, prompt-only gover-
+nance, metadata filtering, LLM-based routing, post-
+hoc verification, recency-based reranking, and the
+full TrustRAG framework. We additionally imple-
+ment Permission-Aware RAG and Metadata-Aware
+RAG as two mechanism-matched baselines and
+compare them using the same candidate evidence,
+generator models, and evaluation protocol. De-
+tailed method definitions are provided in Appendix
+Table A2, while complete prompt templates, input
+and output specifications, and post-processing rules
+are provided in Appendix A.2.
+Metrics and Evaluation Protocol. Following the
+failure taxonomy, we report three binary failure-
+rate metrics: Leakage Rate, Stale Citation Rate,
+and Unsupported Answer Rate. We also report
+utility-oriented diagnostics, including answerabil-
+ity on admissible cases and over-refusal rate.
+We use a governance-aware LLM judge based on
+DeepSeek-V3 (deepseek-ai/DeepSeek-V3) for
+binary evaluation. Using human annotations from
+a 200-response audit as reference labels, we further
+evaluate the same responses with Qwen-Max and
+GLM-4-32B-0414 as alternative judges, using the
+same inputs, judge prompt, sampling temperature,
+and post-processing. Agreement is reported sepa-
+rately by failure type and judge. We report failure
+rates with 95% confidence intervals using 10,000
+bootstrap resamples, and use paired McNemar tests
+for key comparisons. For API-served models, we
+record model identifiers, evaluation dates, prompts,
+code, and raw outputs to support auditing and re-
+runs.
+5 Results
+5.1 Main Results and Strong Baselines
+To evaluate whether TrustRAG effectively reduces
+the three governance failures defined in Section 3.1,
+Table 1 reports failure rates for three LLMs and
+their macro-average. On TEMPLATE, Naive RAG
+produces substantial unauthorized leakage, with
+leakage rates ranging from 35.75% to 37.50%
+across the three models. On samples with unre-
+solved conflicts, Naive RAG also produces unsup-
+ported answers in 5.25%–6.25% of cases. In con-
+trast, TrustRAG reduces both targeted failures to
+0.00% for all three models.
+On FRESH-STRESS, document text contains no
+explicit obsolescence cues, so models cannot rely
+on natural-language semantics to infer whether
+an old document is invalid. Under this setting,
+Naive RAG produces stale citation rates of 38.50%,
+65.75%, and 52.50% across the three base models,
+whereas TrustRAG reduces stale citation to 0.00%
+for all models. This result shows that explicit super-
+session routing is necessary when temporal validity
+is encoded in structured metadata.
+The comparison with governance and LLM-
+based baselines on TEMPLATE shows that soft
+prompting does not reliably enforce metadata rules.
+Prompt RAG, Metadata Filter, LLM Router, and
+Post-hoc Verifier each retain at least one non-
+zero governance failure rate; among the closer
+mechanism-matched baselines, Permission-Aware
+RAG eliminates unauthorized leakage but retains
+a 6.25% stale-citation rate, whereas Metadata-
+Aware RAG eliminates both failure types but re-
+35007

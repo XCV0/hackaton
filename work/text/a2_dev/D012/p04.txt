@@ -1,0 +1,99 @@
+filter or reorganize retrieved contexts (Asai et al.,
+2024; Yan et al., 2024; Yu et al., 2024). However,
+LLMs are highly susceptible to irrelevant or mis-
+leading contexts and struggle to robustly ignore dis-
+tracting information (Shi et al., 2023). Research on
+indirect prompt injection, retrieval-augmented se-
+curity, and adversarial attacks further demonstrates
+that malicious or untrustworthy content within ex-
+ternal contexts can significantly compromise the
+reliability and security of LLMs (Greshake et al.,
+2023; Perez et al., 2022; Zou et al., 2023; Liu et al.,
+2024). Consequently, relying solely on soft con-
+straints or prompt-only governance is insufficient to
+provide deterministic evidence admission guaran-
+tees in compliance QA. Unlike the aforementioned
+methods, this paper shifts the resolution of secu-
+rity and temporal freshness issues in compliance
+QA forward to pre-generation evidence admission
+decisions.
+3 Methodology
+TrustRAG is a metadata-governed RAG frame-
+work for compliance-oriented QA, following the
+principle of governance before generation. The
+framework inserts a metadata-governed routing
+layer between the retriever and the language model.
+The Governance Router performs metadata nor-
+malization, supersession routing, and access filter-
+ing before generation, while a conflict-reporting
+generation policy instructs the model to report un-
+resolved conflicts among retained evidence.
+3.1 Task Definition, Response States, and
+Failure Taxonomy
+Given a user query q, a retrieved candidate doc-
+ument set D = {d1, . . . , dn}, and a user per-
+mission level r, the system outputs a governed
+response y. Each document is represented as
+di = (ci, mi), where ci is the document text
+and mi = ⟨idi, li, ti, si⟩ is its governance meta-
+data. Here, idi is the document identifier, li spec-
+ifies the required access level, ti records the doc-
+ument timestamp, and si is an explicit superses-
+sion pointer. TrustRAG retains ti as metadata, but
+does not infer supersession from timestamp order.
+If si = idj , then di explicitly supersedes dj ; if
+si = ⊥, no supersession relation is declared.
+For the ordered access levels used in our experi-
+ments, the access predicate is defined as:
+can_access(di, r) = 1[rank(r) ≥ rank(l i)] .
+where rank(·) maps a user role or document access
+level to its position in the access hierarchy.
+TrustRAG defines three response states.
+ANSWER indicates that accessible and non-
+superseded evidence supports a unique answer.
+REFUSAL is used when no accessible and
+non-superseded evidence remains after routing.
+CONFLICTREPORT indicates that multiple accessi-
+ble and non-superseded documents provide incom-
+patible facts, and no explicit supersession relation
+resolves the conflict. This definition treats refusal
+and conflict reporting as valid task outcomes rather
+than generation failures.
+We focus on post-retrieval evidence-admission
+and response-state issues addressed by the
+TrustRAG routing layer, and define the following
+three governance failures according to whether
+a response is supported by admissible evidence.
+Unauthorized leakage occurs when the response
+contains a factual claim supported only by access-
+denied evidence. Stale citation occurs when the
+response uses evidence that has been explicitly su-
+perseded. Unsupported answer occurs when the
+response gives a single factual answer even though
+no admissible evidence is available, or when admis-
+sible evidence contains an unresolved conflict that
+should be reported. Thus, these failures differ from
+general answer-quality errors: they are determined
+by the relationship between the response and the
+evidence allowed under the user role and document
+lifecycle metadata.
+3.2 TrustRAG Architecture
+The TrustRAG architecture decouples retrieval
+from generation. It consists of four functional
+modules: Metadata Normalization, Supersession
+Routing, Access Filtering, and Conflict-Reporting
+Generation. The system operates through two core
+paths. The generative path passes filtered admis-
+sible evidence to the language model, while the
+audit path records the retention or rejection status
+of each evidence document, together with its rejec-
+tion reasons, to support automatic evaluation and
+human inspection. The complete execution flow is
+shown in Algorithm 1.
+Metadata-Governed Supersession Routing.
+TrustRAG first constructs the set of explicitly
+superseded document identifiers:
+S(D) = {si | di ∈ D ∧ si ̸= ⊥}.
+A document di is treated as superseded only when
+idi ∈ S(D). Timestamp order is not used to infer
+35005

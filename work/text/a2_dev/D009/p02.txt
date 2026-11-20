@@ -1,0 +1,100 @@
+verify whether a claim is factually grounded in re-
+trieved documents. Second, most PRM approaches
+produce only scalar scores without explaining why
+a step is flawed, limiting the richness of the super-
+vision signal.
+To address these challenges, we propose PRO-
+STEP, a framework that integrates process-level
+supervision into RAG optimization. PRO-STEP
+consists of two stages: (1) Generative PRM train-
+ing. We generate diverse Chain-of-Thought trajec-
+tories where reasoning and retrieval are interleaved,
+and train a Generative PRM that evaluates each step
+with a correctness label and a rationale. (2) Policy
+optimization. We construct step-level preference
+pairs via PRM-guided value tree search (VTS), and
+apply Direct Preference Optimization (DPO) to
+train the policy model to reason correctly at each
+step. Our contributions are as follows:
+• We identify that existing process-level RAG
+methods still optimize against final-answer
+outcomes, failing to penalize spurious reason-
+ing because they lack mechanisms to evaluate
+both logical validity and evidential grounding
+at each step.
+• We propose PRO-STEP, a framework that
+combines Generative PRM training, PRM-
+guided VTS for preference pair construction,
+and process-supervised DPO. By providing
+dense step-level feedback, this approach mit-
+igates the reward sparsity issue inherent in
+outcome-based methods, enabling efficient op-
+timization for retrieval-augmented reasoning.
+• Through experiments on single-hop and multi-
+hop QA datasets, we demonstrate that PRO-
+STEP achieves the best average EM and F1
+among the evaluated methods across five QA
+benchmarks.
+2 Related Work
+2.1 Retrieval-Augmented Generation
+Early RAG systems followed a retrieve-then-
+generate paradigm, appending fixed passages to the
+input prompt (Asai et al., 2024). While effective
+for single-hop queries, this approach struggles with
+multi-hop scenarios necessitating iterative retrieval
+and reasoning. Prompt-based methods introduced
+uncertainty-triggered retrieval (FLARE; Jiang et al.
+2023), dynamic query reformulation (DRAGIN;
+Su et al. 2024), and interleaved reasoning-retrieval
+chains (Trivedi et al. 2023). RL-based frameworks
+subsequently enabled autonomous retrieval deci-
+sions: Search-R1, R1-Searcher, and related sys-
+tems incorporate search environments using final-
+answer correctness as the reward, showing that
+end-to-end outcome-based RL improves agentic
+retrieval performance (Singh et al., 2025). Despite
+this success, outcome-only rewards remain sparse
+and provide no signal on intermediate retrieval or
+reasoning quality, motivating recent shifts toward
+process-level supervision.
+Process-level supervision has been applied to
+RAG through step-level rewards (Li et al., 2025b;
+Wang et al., 2026; Zheng et al., 2025b; Wu et al.,
+2026) and tree search (Peng and Wei, 2025; Zhang
+et al., 2025a). However, these methods still score
+intermediate steps against final-answer correctness,
+failing to filter out spurious successes where flawed
+retrieval coincidentally produces the correct an-
+swer.
+2.2 Process Reward Model Approaches
+PRM approaches provide step-level verification
+for multi-step reasoning. Lightman et al. (2024)
+first demonstrated that PRM-based verification im-
+proves mathematical reasoning by independently
+verifying steps. Subsequent works scaled PRM
+training using automated Monte Carlo rollouts
+(OmegaPRM; Luo et al. 2024) and step-level out-
+come estimation (Math-Shepherd; Wang et al.
+2024).
+Moving beyond scalar evaluation, GenPRM
+(Zhao et al., 2025) introduced a generative
+paradigm where the model articulates rationales
+before assigning a correctness label. By generating
+these rationales, the PRM not only scores steps but
+explicitly identifies errors, providing richer feed-
+back for policy optimization.
+However, existing PRM research remains con-
+centrated on formal reasoning, where step correct-
+ness is logically verifiable. RAG environments
+present a different challenge: each step interleaves
+internal reasoning with external retrieval, requiring
+verification of both logical validity and evidential
+grounding in retrieved passages. While VersaPRM
+(Zeng et al., 2025) extends PRM approaches to mul-
+tiple domains, it does not address the dependency
+between retrieval and reasoning. PRO-STEP ad-
+dresses this gap by training a Generative PRM that
+evaluates both dimensions, providing step-level sig-
+nals that guide value tree search for preference pair
+construction and policy optimization.
+37905

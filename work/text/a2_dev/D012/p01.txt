@@ -1,0 +1,96 @@
+Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing, pages 35002–35020
+October 24-29, 2026 ©2026 Association for Computational Linguistics
+TrustRAG: Metadata-Governed RAG for Compliance-Oriented Question
+Answering
+Huiling Ge1,2,3, Zhiguo Shi1,2,3,*, Yungui Nie1,2,3
+1School of Computer and Communication Engineering
+2Beijing Key Laboratory of AI Metrology Technology for Future Cities
+3Xiong An New Area Key Laboratory of Large Model Scenario
+Application Technology
+University of Science and Technology Beijing, Beijing 100083, China
+gehuiling@xs.ustb.edu.cn *Correspondence: szg@ustb.edu.cn
+Abstract
+Retrieval-Augmented Generation (RAG) en-
+hances large language models with external
+evidence, but in compliance-oriented QA, se-
+mantic relevance alone does not determine
+whether evidence should be used for genera-
+tion. A retrieved document may be relevant
+and factually correct, yet inadmissible because
+it is inaccessible to the current user, explic-
+itly superseded, or in unresolved conflict with
+other active evidence. We formalize three post-
+retrieval governance failures in this setting:
+unauthorized leakage, stale citation, and un-
+supported answers. To address them, we pro-
+pose TrustRAG, a RAG framework that incor-
+porates a metadata-governed routing layer be-
+tween the retriever and the generator. Given
+correct and complete governance metadata for
+the retrieved candidate set, this layer filters
+inadmissible evidence before generation, re-
+turns a deterministic refusal when no admis-
+sible evidence remains, and preserves unre-
+solved conflicts for conflict-reporting genera-
+tion. We construct AeroTrustBench, a coun-
+terfactual compliance QA benchmark for eval-
+uating evidence governance in RAG. Across
+Qwen-Max, DeepSeek-V3, and GLM-4-32B-
+0414, TrustRAG consistently reduces the three
+failures relative to unguided RAG and baselines
+based on prompting, filtering, routing, verifica-
+tion, and recency. Mechanism-matched and 50-
+document comparisons show benefits beyond
+filtering under larger candidate pools, while
+metadata-noise tests and human audits charac-
+terize dependencies on upstream metadata and
+evaluator choice.
+1 Introduction
+Large language models (LLMs) have been widely
+adopted for knowledge-intensive QA, yet their re-
+liance on static parameters makes them difficult
+to update as real-world facts evolve (Brown et al.,
+2020; Ouyang et al., 2022; Liska et al., 2022; Ka-
+sai et al., 2023). Retrieval-Augmented Generation
+(RAG) effectively mitigates this issue by incorpo-
+rating external documentary evidence (Lewis et al.,
+2020). However, compliance-oriented QA requires
+RAG to not only consider the semantic relevance
+of retrieved evidence but also determine whether
+that evidence can be utilized to generate an answer
+for the current task. Unlike open-domain RAG, a
+document may be semantically relevant and factu-
+ally correct, yet remain inadmissible under strict
+compliance policies.
+In compliance-oriented QA, the relevance of re-
+trieved evidence does not imply its admissibility.
+Regulatory and compliance QA necessitates gener-
+ating reliable answers from complex policy texts
+(Gokhan et al., 2025). In sensitive document sce-
+narios, RAG also requires explicit access control to
+prevent the model from generating answers based
+on documents that the current user is unauthorized
+to access (Hu et al., 2014; Chen et al., 2025). At the
+same time, RAG systems suffer from multiple fail-
+ure points across the retrieval, context construction,
+and generation stages (Barnett et al., 2024); even
+with external evidence, models may still generate
+answers that are inconsistent with the retrieved
+context, unsupported, or contradictory (Niu et al.,
+2024). Furthermore, the coexistence of multiple
+document versions significantly degrades the relia-
+bility of RAG, as time-sensitive QA demands strict
+temporal validity (Ouyang et al., 2025; Zhang et al.,
+2025b). In addition, RAG responses are highly sus-
+ceptible to knowledge conflicts, whether among dif-
+ferent retrieved documents or between the retrieved
+text and the model’s parametric knowledge (Wang
+et al., 2025a; Lee et al., 2025). Collectively, these
+intersecting challenges indicate that compliance-
+oriented QA necessitates determining whether re-
+trieved evidence is admissible prior to generation.
+Existing research enhances RAG reliability
+through various mechanisms. Advances in retrieval
+and reranking, including query decomposition and
+temporal ranking, improve semantic and temporal
+35002

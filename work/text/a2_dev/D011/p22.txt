@@ -1,0 +1,89 @@
+Table 11: RAG Setting Restrictions on low-capacity
+KMW Setting.
+ConSum Sty
+WRR 0.93 0.87
+Figure 7: Results of Query Quota and Infusion Volume
+Impact.
+E.10 Combined Impact of Watermark
+Capacity, Infusion Volume, and Query
+Quota
+The combined impact results of query quota and in-
+fusion volume is shown in Figure 7. These results
+indicate that the query quota is the main parameter
+that affects watermark detection, while the injec-
+tion volume has only a minor impact.
+We conducted a theoretical analysis of the im-
+pact of the injection volume. Let it be infused text
+counts, qb be query quota, and bl be watermark bit
+capacity. For a whole watermark robust embed-
+ded into texts, we need it/bl ≫ 1 and qb/it > 1,
+which means each watermark bit should be embed-
+ded multiple times and each watermark text should
+have more than one queries. In KMW, the expected
+extractions per bit is (it/bl) × (qb/it) = qb/bl, we
+can see the infusion volume it is eliminated! Thus,
+under a fixed qb, theoretical detection capability de-
+pends solely on the qb/bl ratio, not the total infused
+texts. In practice, however, bit redundancy is not
+perfectly uniform, and some texts may fail to be
+retrieved in a RAG setting. Therefore, in our main
+experiments, we utilized a higher infusion amount
+(e.g., 600 texts) to maximize robustness and ensure
+reliable retrieval without compromising knowledge
+base quality.
+E.11 Security Threat Analysis of RAG-WM
+RAG-WM is vulnerable to watermark forgery at-
+tacks. The scheme begins by extracting an entity
+list E and a relation list R from the knowledge
+base. It then applies a hash function to reorder E,
+producing a watermarked entity list Ewm. The exis-
+tence of a relation between two entities (ei wm, ej wm)
+is determined probabilistically according to a spe-
+cific probability p = 0.05. For the entity pair
+(ei wm, ej wm) in Ewm hit by p, a relation ri,j wm is se-
+lected using a keyed hash function:
+index(ri,j wm) = (H(key, ei wm, ej wm)), (32)
+which maps to a relation in R. Such relation triples
+are regarded as watermark tuples and are then used
+as prompts to an LLM to generate watermarked
+texts, which are then injected into the knowledge
+base. During detection, a query is constructed from
+each watermarked entity pair, and if the retrieved
+relation matches the one in the corresponding wa-
+termark tuple, it is considered a positive watermark
+signal.
+However, due to the non-deterministic nature of
+both entity-relation extraction and the probabilistic
+generation process, RAG-WM is inherently vul-
+nerable to forgery. An adversary with access to
+the same or similar knowledge base can extract its
+entity and relation sets and independently apply a
+hash function of their choosing to reorder the en-
+tities and construct candidate watermarked tuples.
+By setting p = 1.00, the adversary can determinis-
+tically generate tuples for all possible entity pairs.
+Among these, they can selectively retain only those
+tuples whose entity-relation combinations already
+exist in the knowledge base. These “watermarked”
+tuples require no actual content generation–the as-
+sociated texts are already present in the corpus.
+The adversary can then claim ownership of the
+watermark by asserting that the selected tuples con-
+stitute their watermark. Since the same content is
+present in the original knowledge base, and query-
+ing the watermarked entities will yield the same
+relations, the legitimate owner is unable to distin-
+guish whether the watermark originated from their
+own scheme or was forged by the adversary. As a
+result, RAG-WM fails to provide verifiable proof of
+authorship or ownership precedence, undermining
+its reliability for intellectual property (IP) protec-
+tion.
+E.12 Security Analysis
+We formalize our defense against both Reclaiming
+and Forgery attacks below.
+Forgery: An adversary attempts a Forgery Attack
+by fabricating a valid watermarked tuple (Prefix,
+Generated Text, Watermark bits) without knowing
+the secret key sk.
+21216

@@ -1,0 +1,96 @@
+during pretraining (Mitchell et al., 2022; Dai et al.,
+2022a; Meng et al., 2023a; Geva et al., 2021, 2022;
+Sun et al., 2025). These modules exert strong in-
+fluences on factual predictions, often amplifying
+parametric knowledge even in the presence of ex-
+ternal evidence (Niu et al., 2024b; Goyal et al.,
+2025).
+3 Methodology
+This section presents a unified framework for lo-
+calizing and mitigating hallucination in retrieval-
+augmented generation models from an attention-
+centric perspective. Our approach builds upon the
+residual-stream decomposition framework intro-
+duced in ReDeEP (Sun et al., 2025), which distin-
+guishes internal parametric knowledge from exter-
+nally retrieved evidence. While prior work primar-
+ily attributes hallucination to excessive parametric
+activation, we reframe the problem as a failure
+of context-selective attention routing: even when
+correct and sufficient evidence is retrieved, atten-
+tion may fail to copy valuable information, and
+thus fail to adequately prioritize context-aligned
+representations, allowing downstream parametric
+amplification to dominate the residual stream.
+Based on this view, we develop a layer-wise anal-
+ysis framework that quantitatively characterizes
+how contextual evidence and parametric signals
+interact across depth, identifies hallucination-prone
+regions, and applies attention-level intervention
+during inference. Importantly, our framework does
+not modify model parameters nor explicitly edit
+feed-forward networks; instead, it reshapes how
+contextual information is routed and encourages
+more copy-encouraged behaviors through attention
+into the residual stream.
+3.1 Quantification of Knowledge
+Contributions
+Following prior mechanistic analyses (Sun et al.,
+2025; Long et al., 2025), we decompose each
+layer’s residual stream into two primary sources
+influencing a generated token ri: (1) external con-
+textual evidence propagated via attention mecha-
+nisms, quantified by the External Context Score
+(ES), and (2) internal parametric influence injected
+through feed-forward transformations, quantified
+by the Parametric Knowledge Score (PS). This de-
+composition reflects the complementary roles of
+attention and FFNs in Transformer models, while
+enabling fine-grained tracking of their relative dom-
+inance during generation.
+External Context Score (ES). Let the retrieved
+context be C = {c1, . . . , cm} and the generated
+response be R = {r1, . . . , rn}. At layer l, let Al =
+[al i,j ] denote the attention matrix from response
+tokens to context tokens. For each response token
+ri, we define the indices of the top-k% attended
+context tokens as:
+I l i = { j | al i,j is in the top-k% of al i,1:m }. (1)
+Let xL t denote the hidden state of token t at the
+final layer L. We then define the external context
+score as:
+ES l i = cos
+
+xL ri , 1 |I l i | ∑ j∈I l i xL cj
+
+ , (2)
+which measures the semantic alignment between
+the generated token and its most attended contex-
+tual evidence. A higher ES l i indicates that attention
+at layer l effectively routes context-consistent in-
+formation toward the final representation.
+Parametric Knowledge Score (PS). To quan-
+tify the parametric influence associated with feed-
+forward transformations at layer l, we follow es-
+tablished mechanistic analyses showing that FFNs
+function as key–value memories encoding factual
+associations acquired during pretraining (Dai et al.,
+2022a; Mitchell et al., 2022; Meng et al., 2023a;
+Geva et al., 2021, 2022). These parametric activa-
+tions are known to exert strong influence on factual
+predictions, and can dominate generation even in
+the presence of external evidence (Niu et al., 2024b;
+Goyal et al., 2025).
+Let xmid,l ri denote the residual-stream state of
+token ri immediately before the FFN at layer l, and
+xl ri the state after the FFN. We map these states to
+vocabulary distributions via:
+q(x) = softmax(LogitLens(x)). (3)
+The parametric knowledge score is defined as:
+PS l i = JSD ( q ( xmid,l ri ) ‖‖ q ( xl ri )) , (4)
+where JSD(·∥·) denotes the Jensen–Shannon di-
+vergence. A higher PS l i reflects a stronger FFN-
+induced shift in the token distribution, correspond-
+ing to increased parametric influence injected into
+the residual stream.
+11881

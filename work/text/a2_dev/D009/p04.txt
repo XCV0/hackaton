@@ -1,0 +1,128 @@
+Question: Which American actor, screenwriter, poet and singer died in 1999 and acted in Amok Time?
+Gold Answer: DeForest Kelley
+Step 1 1
+✔ Grounded, specific
+<documents> Doc 1: "...DeForest Kelley died on June 11, 1999..." </documents>
+Step 2 1
+✔ Verifies  
+     before answering
+<documents> No mention of Richard Mulligan in Amok Time cast </documents>
+Step 3a 1✔ New search strategy
+Pivots from failed entity
+Step 3b 0✗  Redundant search
+Repeats same failed query
+→ Answer: DeForest Kelley ✔ → Stuck: "Richard Mulligan" ✗
+→ DPO Training Pair: Chosen (path through Step 3a) vs Rejected (path through Step 3b)
+User Query
+search: "Amok Time cast who died 1999"1 depth 1
+❌  "Mulligan"
+search: "verify 
+Mulligan in cast"
+1
+❌  "Mulligan" ❌  "Mulligan"
+depth 2
+search: "Amok
+Time cast list"
+→ finds Kelley ✔
+1
+search: "Mulligan
+Amok Time"
+✗  redundant
+0
+search: "Mulligan
+Amok Time cast"
+✗  same query
+❌  "Mulligan"
+depth 3
+select best / worst
+Chosen
+Path: 1→3→6
+Rejected
+Path: 1→3→7
+PRM=1 PRM=0 terminal (wrong) question
+<think> Goal: US actor in "Amok Time" who died in 1999. </think> 
+<search> Amok Time cast died 1999 </search>
+<think> Mulligan died in 1999. Verify his appearance in "Amok Time". </think> 
+<search> Richard Mulligan Amok Time cast </search>
+<think> Mulligan not in cast. Pivot to general
+search. </think> 
+<search> Amok Time cast list </search> 
+→ Retrieved: DeForest Kelley ✔
+<think> Mulligan died in 1999. Double-check his
+role. </think> 
+<search> Richard Mulligan Amok Time </search>
+→ Irrelevant results again ✗
+Process Reward Model Evaluation
+PRM = 1 : Specific search query, new strategy after failure, entity verification
+PRM = 0 : Redundant query, repeated failed search, no new information
+0
+Figure 2: Example of tree-search data generation with a PRM. Left: reasoning trace showing PRM evaluation
+at each step. Right: search tree where green nodes (PRM=1) indicate sound reasoning and red nodes (PRM=0)
+indicate flawed steps. The best-scoring path becomes chosen and the worst becomes rejected for DPO training.
+3.2 Policy Optimization
+Standard process-level methods evaluate interme-
+diate steps by simulating trajectories to comple-
+tion and scoring the final outcome. However, this
+approach lacks mechanisms to penalize flawed
+reasoning that spuriously reaches the correct an-
+swer. Unlike prior process-based methods that
+still rely heavily on final outcomes, PRO-STEP
+actively filters out these spurious successes by us-
+ing a PRM-guided value tree search to explicitly
+penalize flawed intermediate steps.
+PRM-guided Value Tree Search. Following
+modern tree search paradigms such as AlphaGo
+Zero (Silver et al., 2017), we adopt a value tree
+search framework that explicitly replaces stan-
+dard random rollouts with direct value estimation.
+Within this framework, each node represents a state
+st = (q, s≤t), and an action corresponds to sam-
+pling the next model-generated step from πθ. If
+the sampled step is a <search> action, E appends
+the corresponding <documents> block before the
+next action is taken. The tree is built via iterating
+selection, expansion, and evaluation using upper
+confidence bound (UCB)-based selection (Kocsis
+and Szepesvári, 2006) and back-propagation (de-
+tailed in Appendix C).
+For a terminal node, the reward is the depth-
+discounted F1 score Q(sT ). For a non-terminal
+node st, we directly use the binary prediction from
+πψ:
+Q(st) = ˆr(st) · γd(st) (3)
+where γ ∈ (0, 1) penalizes long trajectories, and
+d(·) denotes the depth of the node. The prediction
+ˆr(st) is computed after node expansion and propa-
+gated to all ancestor nodes, updating the expected
+value ¯Q(s) without inflating visit counts. Detailed
+VTS hyperparameters and a branching-factor abla-
+tion are provided in Section C.
+Preference data construction. For each parent
+node, we rank its child nodes based on a value
+function that balances the outcome quality with the
+assessment from πψ:
+V (s) = ¯Q(s) + α · ˆr(s) (4)
+Here, ¯Q(s) aggregates the quality of descendant tra-
+jectories through back-propagation, while ˆr(s) ∈
+{0, 1} assesses the correctness of step s. For any
+sibling pair si and sj where V (si) − V (sj ) > δ,
+we assign the higher-valued node as the chosen
+step (s+ = si) and the other as the rejected step
+(s− = sj ).
+DPO training. We optimize πθ using step-level
+DPO (Rafailov et al., 2023). First, we define the
+implicit utility uθ(x, yt):
+uθ(x, yt) = β log πθ(yt | x, y<t) πref(yt | x, y<t) (5)
+Using this utility, we minimize the DPO loss, mask-
+ing <documents> blocks from the computation:
+LDPO(θ) = −EDdpo
+[
+log σ(uθ(x, yw t )
+−uθ(x, yl t) )] (6)
+where Ddpo is the step-level preference dataset of
+tuples (x, y<t, yw t , yl t). Here, x denotes the ques-
+tion with system prompt, y<t is the shared reason-
+ing prefix, yw t and yl t are the chosen and rejected
+steps at depth t, and the hyperparameter β controls
+the KL constraint.
+37907

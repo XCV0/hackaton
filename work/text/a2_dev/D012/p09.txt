@@ -1,0 +1,98 @@
+shows that TrustRAG does not reduce failure rates
+simply by refusing more often; when admissible ev-
+idence is available, it still produces valid responses.
+On the same 200 human-audited responses, Co-
+hen’s κ across the three judges ranges from 0.884
+to 1.000 for unauthorized leakage and from 0.939
+to 0.958 for stale citation, compared with 0.467
+to 0.908 for unsupported answers (Appendix Ta-
+ble B7). The larger variation for unsupported an-
+swers mainly arises because Qwen-Max and GLM-
+4-32B-0414 under-detect single-valued answers un-
+der unresolved conflicts, indicating that this failure
+type is more sensitive to judge choice than the other
+two. Because DeepSeek-V3 achieves the highest
+agreement with human annotations on this metric
+(κ = 0.908), we use it as the primary judge.
+5.5 Boundary Analysis under Metadata Noise
+Figure 2 shows TrustRAG’s boundary behavior
+when metadata is corrupted. Access-label noise
+increases both leakage risk and over-filtering risk,
+while missing supersession links increase stale-
+citation risk. This pattern is consistent with
+TrustRAG’s design assumption: TrustRAG deter-
+ministically enforces the provided metadata con-
+straints, but its routing guarantees depend on the
+accuracy and completeness of upstream metadata.
+Table 5 compares routing-level risks across meth-
+ods under 30% mixed metadata noise. Permission-
+Aware RAG reduces access risk but retains sub-
+stantial supersession risk, whereas Metadata-Aware
+RAG and TrustRAG further reduce supersession
+risk and perform identically on these diagnostics
+because they share the same access and superses-
+sion filtering predicates. Beyond these shared filter-
+ing operations, TrustRAG additionally defines de-
+terministic refusal and conflict-reporting response
+states. In the final-response evaluations, these
+states allow the system to avoid defaulting to a sin-
+gle answer when no admissible evidence remains
+or unresolved conflicts persist among admissible
+evidence, thereby further reducing unsupported-
+answer rates, as shown in Tables 1 and 4.
+6 Conclusion
+This paper studies post-retrieval evidence gover-
+nance for compliance-oriented QA. We propose
+TrustRAG, a metadata-governed RAG framework
+that routes retrieved evidence before generation
+and uses refusal or conflict reporting when admissi-
+ble evidence is absent or conflicting. Experimental
+0 10 20 30
+Metadata noise rate (%)
+0
+10
+20
+30Routing risk (%)
+ 11.1
+11.7
+36.0Access leak
+Missing-link stale
+Over-filter
+Figure 2: Metadata noise stress test. As access labels or
+supersession links are corrupted, TrustRAG’s routing-
+level risks increase. Endpoint labels show risk values at
+30% metadata noise.
+Setting / Risk Naive Perm. Meta. TrustRAG
+TEMPLATE
+Access 37.50 3.17 3.17 3.17
+TEMPLATE
+Supersession 37.50 33.83 7.58 7.58
+FRESH-STRESS
+Supersession 100.00 90.08 19.25 19.25
+Table 5: Routing-level risks (%) under 30% mixed meta-
+data noise, where lower is better. Perm. and Meta.
+denote Permission-Aware RAG and Metadata-Aware
+RAG, respectively. Access and supersession risks re-
+port the percentages of candidate sets that retain access-
+denied or explicitly superseded evidence after filtering.
+Bold numbers indicate the best or tied-best result within
+each row.
+results show that TrustRAG substantially reduces
+unauthorized leakage, stale citation, and unsup-
+ported answers while preserving valid responses
+on answerable cases. We hope this work encour-
+ages future research on governance-aware RAG.
+Limitations
+TrustRAG’s routing guarantees assume that the
+governance metadata associated with the retrieved
+candidate set, including access labels, user-role
+mappings, and supersession relations, is correct
+and complete. In deployment, access-control and
+document-lifecycle metadata should be maintained
+by authoritative identity and access management
+(IAM) and document-lifecycle systems, with ver-
+sion records, consistency checks, and periodic au-
+dits supporting quality control. TrustRAG’s routing
+logs enable audits of why evidence was retained
+or removed, but cannot validate the correctness or
+35010

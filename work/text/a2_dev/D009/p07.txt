@@ -1,0 +1,125 @@
+1 2 4 8 16 32 64 128
+45
+46
+47
+48
+49
+50
+51F1 (%)
+PopQA (WMV)
+1 2 4 8 16 32 64 128
+48
+50
+52
+54
+56
+58
+60F1 (%)
+HotpotQA (WMV)
+1 2 4 8 16 32 64 128
+32
+34
+36
+38
+40
+42
+44
+46F1 (%)
+2WikiMultiHopQA (WMV)
+1 2 4 8 16 32 64 128
+Number of generated trajectories
+41
+42
+43
+44
+45
+46
+47
+48
+49F1 (%)
+PopQA (BoN)
+1 2 4 8 16 32 64 128
+Number of generated trajectories
+48
+50
+52
+54
+56
+58
+60F1 (%)
+HotpotQA (BoN)
+1 2 4 8 16 32 64 128
+Number of generated trajectories
+28
+30
+32
+34
+36
+38
+40
+42
+44F1 (%)
+2WikiMultiHopQA (BoN)
+Majority Voting WMV BoN PRO-STEP PRM VersaPRM Qwen-Math-PRM
+Figure 3: Comparison of WMV (top) and BoN (bottom) using a RAG-specific PRM against open-source PRM
+approaches across three QA datasets.
+4.4 Impact of Optimization Strategies
+We compare three optimization strategies on the
+same process-supervised data to validate that DPO
+is best suited for process-level learning. PRO-
+STEP (SFT) trains only on the chosen steps yw t
+via next-token prediction. PRO-STEP (KTO) uses
+unpaired binary correctness labels rt ∈ {0, 1} with
+Kahneman-Tversky Optimization (KTO) (Etha-
+yarajh et al., 2024). PRO-STEP (DPO) is our de-
+fault approach using contrastive pairs yw t , yl t.
+As shown in Table 3, DPO achieves the highest
+average performance with 34.5 EM and 44.1 F1
+by providing explicit step-wise contrast between
+valid and flawed reasoning. SFT lacks contrastive
+signals and cannot learn to recover from intermedi-
+ate errors, leading to weaker performance on com-
+plex multi-hop tasks such as 11.3 vs. 12.5 EM
+on MuSiQue. KTO underperforms even SFT on
+average with 28.0 EM and 36.6 F1, as absolute
+binary rewards without relative comparison cause
+instability across datasets such as 20.8 vs. 31.2
+EM on Bamboogle. These results confirm that pair-
+wise contrast, rather than positive-only or unpaired
+signals, is essential for internalizing the PRM’s
+step-level guidance.
+4.5 Comparison of PRM Approaches on
+Trajectory Reranking
+To validate the necessity of a RAG-specific PRM,
+we compare our model against existing process re-
+ward models. We sample 128 reasoning trajectories
+per question for 500 instances from PopQA, Hot-
+potQA, and 2WikiMultiHopQA using Qwen2.5-
+7B-Instruct (Qwen Team, 2024). We evaluate
+two models, VersaPRM (Zeng et al., 2025) and
+Qwen2.5-Math-PRM-7B (Zhang et al., 2025b),
+alongside two trajectory-selection baselines: major-
+ity voting (MV), which ignores PRM scores, and
+weighted majority voting (WMV), which weights
+each candidate by the minimum step score assigned
+by a PRM. We also report best-of-N (BoN), which
+directly selects the highest-scoring trajectory, while
+scaling the candidate pool size K from 1 to 128. To
+evaluate the quality of the final selected trajectories,
+we report token-level F1.
+The results in Figure 3 demonstrate that general-
+purpose and math-specific PRM approaches strug-
+gle in RAG environments. Under the BoN strategy,
+both VersaPRM and MathPRM degrade as K in-
+creases, frequently falling below the MV baseline
+across all three datasets. Because they evaluate log-
+ical coherence without verifying factual grounding,
+these PRM approaches often assign high scores
+to hallucinated but plausible trajectories. Conse-
+quently, as the candidate pool expands, BoN in-
+creasingly selects these confidently flawed trajecto-
+ries.
+In contrast, our PRM consistently improves F1
+as the candidate pool size increases under WMV.
+By evaluating both logical validity and the factual
+37910

@@ -1,0 +1,102 @@
+CG-RAG: Research Question Answering by Citation Graph
+Retrieval-Augmented LLMs
+Yuntong Hu
+yuntong.hu@emory.edu
+Emory University
+Atlanta, GA, USA
+Zhihan Lei
+zhihan.lei@emory.edu
+Emory University
+Atlanta, GA, USA
+Zhongjie Dai
+dzj@tongji.edu.cn
+Tongji University
+Shanghai, China
+Allen Zhang
+azhang490@gatech.edu
+Georgia Institute of Technology
+Atlanta, GA, USA
+Abhinav Angirekula
+aa125@illinois.edu
+University of Illinois
+Urbana-Champaign
+Urbana, IL, USA
+Zheng Zhang
+zheng.zhang@emory.edu
+Emory University
+Atlanta, GA, USA
+Liang Zhao
+liang.zhao@emory.edu
+Emory University
+Atlanta, GA, USA
+ABSTRACT
+Research question answering requires accurate retrieval and con-
+textual understanding of scientific literature. However, current
+Retrieval-Augmented Generation (RAG) methods often struggle
+to balance complex document relationships with precise informa-
+tion retrieval. In this paper, we introduce Contextualized Graph
+Retrieval-Augmented Generation (CG-RAG), a novel framework
+that integrates sparse and dense retrieval signals within graph
+structures to enhance retrieval efficiency and subsequently im-
+prove generation quality for research question answering. First,
+we propose a contextual graph representation for citation graphs,
+effectively capturing both explicit and implicit connections within
+and across documents. Next, we introduce Lexical-Semantic Graph
+Retrieval (LeSeGR), which seamlessly integrates sparse and dense
+retrieval signals with graph encoding. It bridges the gap between
+lexical precision and semantic understanding in citation graph re-
+trieval, demonstrating generalizability to existing graph retrieval
+and hybrid retrieval methods. Finally, we present a context-aware
+generation strategy that utilizes the retrieved graph-structured in-
+formation to generate precise and contextually enriched responses
+using large language models (LLMs). Extensive experiments on
+research question answering benchmarks across multiple domains
+demonstrate that our CG-RAG framework significantly outper-
+forms RAG methods combined with various state-of-the-art re-
+trieval approaches, delivering superior retrieval accuracy and gen-
+eration quality.
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed
+for profit or commercial advantage and that copies bear this notice and the full citation
+on the first page. Copyrights for components of this work owned by others than the
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific permission
+and/or a fee. Request permissions from permissions@acm.org.
+Conference acronym ’XX, June 03–05, 2018, Woodstock, NY
+© 2018 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+ACM ISBN 978-1-4503-XXXX-X/18/06
+https://doi.org/XXXXXXX.XXXXXXX
+CCS CONCEPTS
+• Computing methodologies → Natural language generation;
+• Information systems → Retrieval models and ranking.
+KEYWORDS
+Graph retrieval-augmented generation, research question answer-
+ing, hybrid retrieval, graph learning, citation graphs
+ACM Reference Format:
+Yuntong Hu, Zhihan Lei, Zhongjie Dai, Allen Zhang, Abhinav Angirekula,
+Zheng Zhang, and Liang Zhao. 2018. CG-RAG: Research Question An-
+swering by Citation Graph Retrieval-Augmented LLMs. In Proceedings of
+Make sure to enter the correct conference title from your rights confirma-
+tion emai (Conference acronym ’XX). ACM, New York, NY, USA, 10 pages.
+https://doi.org/XXXXXXX.XXXXXXX
+1 INTRODUCTION
+Question answering is a critical domain recently driven by ad-
+vancements in Large Language Models (LLMs). While LLMs ex-
+hibit exceptional capabilities in addressing commonsense questions
+[2, 13, 20], their pre-trained knowledge inevitably becomes outdated
+over time, rendering them insufficient for delivering timely, precise,
+and comprehensive answers, particularly for complex scientific
+and domain-specific questions. Additionally, the substantial cost of
+continuously fine-tuning and updating LLMs makes maintaining
+their relevance impractical.
+For open-domain question answering, which requires relevant
+contexts for precise answers, Retrieval-Augmented Generation
+(RAG) [21] offers a promising solution. By integrating external
+knowledge, RAG addresses the limitations of static pre-trained
+LLMs, enabling access to up-to-date, domain-specific information
+and thereby enhancing answer accuracy [34, 36, 42]. RAG comprises
+two components: a retriever, which identifies relevant information
+from the database based on the query, and a generator, which uti-
+lizes the retrieved information to construct responses. The quality
+of generation heavily depends on the effectiveness of the retrieval
+arXiv:2501.15067v1  [cs.IR]  25 Jan 2025

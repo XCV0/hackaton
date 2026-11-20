@@ -1,0 +1,97 @@
+ƭƬ ƯƬ ƭƬƬ
+Ȣ.4)/#/*& ).ȒȢ*-$"$)'/*& ).
+ƭƬƭ ƭƬƮ
+0( -*!.4)/#/-$)$)"//*& ).Ǿ($''$*)ǿ
+ưƴ
+ƱƬ
+ƱƮ
+Ʊư
+ƱƲ
+Ʊƴ
+ƲƬ
+ƲƮ
+Ʋư
+ƲƲ0
+0-4Ǿʻǿ
+$3$)"$!! - )//4+ .*!.4)/#*0( )/.
+4)/#*.Ǿǿ*)'4ǾƳƬ" )ǿ
+4)/#*.Ǿǿ*)'4ǾƳƬ" )ǿ
+4)/#*.Ǿǿ*)'4ǾƳƬ" )ǿ
+4)/#*.Ǿˆˆǿ*)'4ǾƳƬ" )ǿ
+ǾƲƱǟƯʻǿ
+-$"$)'ǾưƭǟƬʻǿ
+Figure 4: Mixing synthetic documents does not help. Mixing different kinds of synthetic documents (blue line)
+provides a minimal gain over just using AR documents (pink line).
+quantify how synthetic QAs and documents from
+different domains are similar, see Appendix E for
+the analysis on this.
+Based on this hypothesis, we explore training
+models with a mixture of synthetic QAs and syn-
+thetic documents. We call this approach Synthetic
+Mixed Training.1 We choose AR for document
+generation because it benefits the most from gener-
+ator scaling, and we mix QAs and AR documents
+at a 1:1 ratio. Figure 3 shows the results of Syn-
+thetic Mixed Training using 70B-generated QA
+and AR documents, compared with training only
+on synthetic QAs or only on AR documents. The
+scaling curve exhibits persistent log-linear behav-
+ior as the number of training tokens increases up
+to 700M, eventually surpassing RAG with 67.0%
+accuracy (+2.6% relative gain). Moreover, when
+comparing results using 70B- and 8B-generated
+data for Synthetic Mixed Training, we find that
+a stronger generator is substantially more helpful.
+This suggests that QA simply dominates AR at 8B
+generated scale, highlighting AR’s unique benefit
+from generator scaling.
+We further test whether target-domain synthetic
+QAs are important by mixing synthetic QAs from
+a different dataset (LongHealth, an unrelated do-
+main) with synthetic AR documents from QuaL-
+ITY (the target domain). Figure 5 shows two find-
+ings. (1) Synthetic QAs can teach domain-agnostic
+behavior that is difficult to learn from AR docu-
+ments alone: mixing LongHealth synthetic QAs
+with QuaLITY synthetic AR documents improves
+synthetic token efficiency on QuaLITY compared
+1This name is inspired by Mixed Training, introduced
+by Allen-Zhu and Li (2024). Their approach is designed
+for pretraining from scratch and does not consider synthetic
+documents when mixing.
+to using only QuaLITY synthetic AR documents.
+This supports our hypothesis and helps explain-
+ing the synergy between synthetic QAs and AR
+documents. (2) Synthetic QAs also teach domain-
+specific factual knowledge: the best-performing
+recipe mixes both synthetic QAs and synthetic AR
+documents from QuaLITY, outperforming the mix-
+ture of LongHealth synthetic QAs and QuaLITY
+synthetic AR documents. This suggests that target-
+domain synthetic QAs provide not only transfer-
+able behavior but also domain-specific knowledge.
+3.2 Focal Rewriting: Improving the topic
+diversity of synthetic documents
+In Section 2, we show that scaling synthetic docu-
+ments yields diminishing returns, which we hypoth-
+esize is due to limited diversity in the generated
+data. In particular, WRAP and AR documents pro-
+duce stylistically diverse documents, but the gener-
+ated documents often cover highly similar topics.
+This is because these approaches do not explicitly
+condition the LM on specific topics; instead, the
+model implicitly decides what to focus on, leading
+to repeated or overlapping topics across genera-
+tions. In contrast, EG generates documents cover-
+ing more diverse topics by explicitly conditioning
+on different entities, but the resulting documents
+tend to be stylistically similar. We suspect that this
+limited diversity degrades performance when syn-
+thetic data is scaled extensively, for example, when
+the number of synthetic tokens exceeds that of the
+original documents by more than 100 times.
+Based on this observation, we introduce Focal
+Rewriting which can diversify both the content and
+the style of generated documents. When rewriting
+documents with AR (or WRAP), we explicitly con-
+9197

@@ -1,0 +1,56 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+any particular scenario. For example, the accumulation of carriers near the perovskite interface is dependent
+on the distribution of ion vacancies in the perovskite, which itself is dependent on many material parameters
+as well as external conditions, such as temperature, light intensity, and applied voltage [20]. Here we shall
+present example numerical results for a typical three layer device. In particular, we compare the prediction
+made using a model in which carrier transport in the TLs is described using full FD statistics to one in which
+carrier transport in the TLs is described using the Boltzmann approximation. Since we consider only a single
+typical device there remains room for further investigation for other device configurations.
+The remainder of the paper is organised as follows. We begin, in section 2 by discussing the
+drift-diffusion equations in which carrier transport is modelled using (i) the Boltzmann approximation and
+(ii) full FD statistics. We further show that the application of full FD statistics causes a density-dependent
+diffusivity enhancement (equivalent to the GER), the form of which is determined by the DoS function.
+Then, in section 3, we consider the form of the DoS function for both ordered inorganic and disordered
+organic materials, and show that the choice of DoS function must be carefully considered in scenarios for
+which the Boltzmann approximation does not hold. The range of carrier densities for which Boltzmann
+statistics accurately approximate full FD statistics is discussed for a variety of relevant TL materials in
+section 4. In section 5, comparisons are made between the predictions of a device-level model of a PSC in
+which charge carrier motion in the TLs is modelled by (i) the Boltzmann approximation and (ii) full FD
+statistics. The results obtained using these two different descriptions of the TLs are compared for both steady
+state performance and transient measurements, namely current–voltage hysteresis and IS. Finally, we draw
+our conclusions in section 6.
+2.Thedrift–diffusionequationsandtheGER
+The basis of the drift–diffusion model is a set of conservation equations, one for each particle species, in
+which the change in the particle number density is driven by the net flux into a region and contributions
+from volume source and sink terms. In most photovoltaic devices the only particle species modelled by the
+drift–diffusion equations are the charge carriers, i.e. electrons in the conduction band (volume density n)
+and holes in the valence band (volume density p). The source and sink terms in the corresponding
+conservation equations model photogeneration and recombination, respectively. In halide perovskites it is
+also necessary to model the transport of one or more mobile point defect species, such as charged anion or
+cation vacancies [8]. However, it is usually assumed that any defects/dopants in the charge TLs, which are
+our focus here, are static and homogeneously distributed.
+In one dimension, the case to which we restrict ourselves here, the electron and hole conservation
+equations take the form
+∂n
+∂t = 1 q ∂jn ∂x + G(x, t) − R(n, p), (1a)
+∂p
+∂t = − 1 q ∂jp ∂x + G(x, t) − R(n, p), (1b)
+in which G(x, t) and R(n, p) are the rates of generation and recombination of electron–hole pairs per unit
+volume, respectively, and jn and jp are the electron and hole current densities, respectively. The latter are
+calculated from the carrier densities and the quasi-Fermi levels via the relations
+jn = µnn ∂Efn
+∂x , (2a)
+jp = µpp ∂Efp
+∂x , (2b)
+where µn and µp are the electron and hole mobilities, while Efn and Efp are the quasi-Fermi levels of the
+electrons in the conduction band and holes in the valence band, respectively. The implicit assumption made
+in using quasi-Fermi levels to characterise the state of the semiconductor is that the valence band electrons
+are (locally) in thermal equilibrium with each other and that the conduction band electrons are (locally) in
+thermal equilibrium with each other, but that valence and conduction band electrons are not necessarily in
+thermal equilibrium with each other. Constitutive equations that relate the quasi-Fermi levels to n, p and ϕ,
+and which derive from the statistical distributions of the electrons in the valence and conduction bands,
+must also be specified. The system of drift-diffusion equations is closed by Poisson’s equation for the electric
+potential ϕ,
+∂2ϕ
+∂x2 = − ρ ε , (3)
+3

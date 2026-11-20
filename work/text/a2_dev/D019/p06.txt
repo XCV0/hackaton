@@ -1,0 +1,104 @@
+following “Let’s think step by step". (3) MIGRES,
+Wang et al. (2025a) introduce a state-of-the-art
+pipeline-based framework for determining miss-
+ing information and its entailment. To ensure a
+fair comparison, we employ the identical backbone
+LLM. (4) STD-RAG, which is the standard RAG
+framework using various knowledge bases (i.e.,
+Wikipedia, QA pairs, or the merged KB), which
+might affect retrieval and generation performance
+due to the distribution gap. This includes different
+retrieval combinations: (i) Simply retrieve from
+Wikipedia, history QA pairs, or the merged knowl-
+edge base with top-K contexts. (ii) 2-way retrieval,
+denotes separately retrieve top−K 2 text chunks from
+Wikipedia and QA pairs. (5) Misknow-RAG ex-
+tends RAG by explicitly identifying missing knowl-
+edge and checking knowledge conflicts simultane-
+ously with a reasoner LLM during retrieval and
+generation, considering the interconnection among
+query, contexts, missing knowledge, and its corre-
+sponding query.
+3.3 Main Results
+As shown in Table 1, we observe that our approach,
+which leverages explicit reasoning based on miss-
+ing knowledge retrieval, achieves gains of 11.41%
+in EM and 1.65% in ROUGE-1 on both general
+and medical QA benchmarks, outperforming the
+current state-of-the-art.
+Furthermore, compared with the standard RAG
+pipeline, our reasoning-based missing knowl-
+edge retrieval method yields a 5.34% EM and
+1.62% ROUGE-1 improvement when sourcing
+from Wikipedia, and a 1.95% EM and 2.03%
+ROUGE-1 improvement when sourcing from QA
+pairs, under the same retrieval budget. As presented
+in the Appendix A, this might be attributed to the
+effective missing knowledge retrieval while veri-
+fying information during reasoning (Dhuliawala
+et al., 2024).
+Moreover, replacing Wikipedia with QA pair re-
+trieval delivers additional gains of 3.91% EM and
+4.24% F1 on the NQ dataset, and 0.14% ROUGE-1
+and 0.80% BLEU-1 on Huatuo. This improve-
+ment could be attributed to the reduced semantic
+gap between the query and knowledge bases, as
+QA pairs tend to be more colloquial and therefore
+more closely aligned with user intents. As shown
+in Table 7, compared with the medical passages
+retrieved from Wikipedia, QA pairs more directly
+address the user’s query concerning “Ejiao syrup”
+and “improving my condition” and provide
+more detailed therapeutic recommendations, such
+as “do more exercise” or “take Astragalus
+granules”. Interestingly, we also observe that our
+approach improves at most 4.3% EM and 0.9%
+ROUGE-1 score compared with the naive 2-way
+retrieval methods, which implies the effectiveness
+of our missing knowledge retrieval in supplement-
+ing critical information and thus enhancing overall
+accuracy.
+Finally, by leveraging a merged knowledge base
+comprising both Wikipedia passages and QA pairs,
+our framework attains an EM score of 41.41% and a
+ROUGE-1 score of 18.84%. This performance gain
+could be attributed to the enhanced richness of the
+knowledge base, which facilitates more effective
+retrieval of relevant passages.
+Dataset Method QA Pairs Recall Wiki Recall
+Natural Questions
+2-way retrieval 48.31 57.83
+Mis Wiki+QA pairs 56.4 57.12
+Mis QA Pairs+Wiki 48.51 59.76
+Huatuo-26M
+2-way retrieval 32.87 27.31
+Mis Wiki+QA pairs 35.28 27.23
+Mis QA Pairs+Wiki 33.05 29.01
+Table 3: Results of context recall for QA pairs and
+Wikipedia chunks across different methods on NQ and
+Huatuo. Notably, the number of retrieved text chunks is
+identical for evaluation.
+3.4 Benefits with Missing Knowledge
+Retrieval
+In this subsection, we explore the role of missing
+knowledge retrieval with context recall described in
+Eq.4 under two settings: 2-way retrieval, where we
+calculate metrics for QA pairs and Wiki chunks sep-
+arately, and retrieval from the same source, where
+we compare naive context recall metrics.
+Specifically, under the standard 2-way retrieval
+setting, two passages are drawn from Wikipedia
+and two from QA pairs. In contrast, in the missing
+knowledge retrieval setting (i.e., Mis Wiki + QA
+pairs in Table 3), we first retrieve two passages
+from Wikipedia and then utilize missing knowl-
+edge retrieval to extract the remaining two from
+the QA pairs. Table 3 shows that compared with
+the 2-way retrieval method, we could obtain 8.09%
+and 1.93% context recall improvement with miss-
+ing knowledge retrieval from QA pairs and Wiki
+chunks for the NQ dataset, respectively. And we
+also obtain 2.41% and 1.7% context recall improve-
+ment retrieved from QA pairs and Wiki chunks for
+the Huatuo dataset, which directly improves the rel-
+1366

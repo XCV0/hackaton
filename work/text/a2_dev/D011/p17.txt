@@ -1,0 +1,133 @@
+D.2 Prompt for Watermark Text Generation.
+Prompt for Relation to Text
+You are a content creator, a knowledge graph expert,
+and a linguist who helps a human knowledge creator
+generate new knowledge texts according to a given re-
+lationship and some auxiliary information mentioned
+below. The relationship consists of ‘source’, ‘target’,
+‘relationship_type’, and ‘description’. It is a new rela-
+tionship inferred from a given chunk within a knowl-
+edge graph.
+**Auxiliary Information**
+- An ‘overview’ of the cluster where the relationship is
+located.
+- A list of ‘original content’s that is in the cluster.
+- A ‘entity_type’ and ‘descriptions’ about the entities
+in the relationship.
+- The ‘reason’ that led to inferring the relationship.
+# Task & Instructions Based on the relationship and
+the auxiliary information, generate a new knowledge
+text according to the instructions outlined below.
+1. Ensure the correctness and accuracy of the
+generated knowledge text based on the auxiliary
+information.
+2. The generated knowledge text should be a
+independent element included in the original cluster
+according to the ‘overview’ of the cluster.
+3. Ensure that the generated knowledge text itself
+clearly implies or states the relationship between
+‘source’ and ‘target’, such that its existence could
+be reasonably inferred by reviewing the generated
+text within the context of the ‘original content‘ and
+‘overview’.
+4. **Crucially, the generated knowledge text must
+closely adapt to the average length ‘{length}’ of the
+‘original content’s in the cluster. Aim for a length that
+is within 10 percentage of the provided average length
+‘{length}’.**
+- For example, if the average length is 800 words, your
+generated texts should be approximately between 720
+and 880 words long.
+# Input
+{input_text}
+# Output
+Output a json with the generated knowledge texts. The
+json with key: ‘text’, and value with the generated text.
+Just output only one json, do not output any other text.
+D.3 Prompt for Selecting Watermark Text
+Prompt for Top-K Selection Watermark Text
+You are an expert Subject Matter Analyst and Knowl-
+edge Curator. Goal: Your primary objective is to ana-
+lyze a set of AI-generated texts intended for a specific
+community and select the top 3 most suitable texts that
+would add the most value to that community’s knowl-
+edge base. Your selection must be based on a rigorous
+evaluation of each text’s reasonableness, completeness,
+and relevance.
+The goal is to select the top-3 suitable knowledge texts
+from the list and inject them into the document.
+# Input Details: * ‘document’: A list of base texts of a
+community.
+* ‘knowledge_texts’: A list of JSON objects, where
+each object has a ‘text’ (the knowledge to inject), a
+‘weight’ (a numerical score), and a ‘prefix’ (a string).
+# EVALUATION CRITERIA
+You must evaluate each text in the ‘knowledge_texts’
+against the following three criteria:
+**Reasonableness:**
+- Is the information presented factually accurate and
+logically sound?
+- Does it avoid making unsubstantiated claims or pro-
+moting misinformation?
+- Is the tone and language appropriate for the commu-
+nity?
+**Completeness:**
+- Is the text complete?
+- Does it address the key aspects of the subject matter,
+or does it feel superficial or incomplete?
+- For a given topic, does it offer sufficient detail to be
+considered a valuable knowledge resource?
+**Relevance:**
+- How closely does the text align with the specific top-
+ics and themes of the community, as established by the
+existing community texts?
+- Does it introduce a novel yet pertinent perspective,
+or does it rehash information already present in the
+community’s knowledge base?
+- Is this text something the members of this community
+would genuinely find useful and on-topic?
+# Steps
+1. Read the entire ‘document’ to understand its con-
+tent, paragraph structure, and logical flow.
+2. Evaluate each text in the ‘knowledge_texts’ list
+against the EVALUATION CRITERIA.
+3. Synthesize and Rank: After evaluating all the gen-
+erated texts, create a final ranking. The primary factor
+for your ranking should be your qualitative evaluation,
+but you may use the initial ‘weight’ as a secondary
+factor in cases where texts are of very similar quality.
+4. Identify the top 3 texts from your ranking.
+# Input
+document: {document}
+knowledge_texts: {knowledge_texts}
+# Output
+Your final output must be a single, valid **JSON**
+object. The object should contain one keys: “top_3”.
+The value of “top_3” key is an array of the ‘prefix’ of
+your top 3 choices, in descending order of preference.
+# Example Output
+{{
+“top_3”: [
+“prefix_1”,
+“prefix_2”,
+“prefix_3”
+]
+}}
+D.4 Prompt for Question Generation Based
+on Watermark Text and Watermark
+Prefix
+Prompt for Question Generation
+You are a question constructor, a knowledge graph ex-
+pert, and a linguist. You are skilled at raising unique
+questions from a given text and a specific relationship.
+# Task description Paraphrase this text as questions
+(up to 3) that tackle the content from various perspec-
+tives and can only be answered by reading the text.
+The answer to the question should contain the given
+relationship and be as lexically similar as possible to
+the original text, or even directly use the content in the
+original text. Besides, the answers to these questions,
+when taken together, should comprehensively cover
+all the key information in the text. Avoid factual and
+simple yes/no questions. Do not provide the answer,
+21211

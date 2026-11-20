@@ -1,0 +1,93 @@
+ƭƬ ƯƬ ƭƬƬ ƯƬƬ
+Ȣ.4)/#/*& ).ȒȢ*-$"$)'/*& ).
+ƭƬƭ ƭƬƮ
+0( -*!.4)/#/-$)$)"//*& ).Ǿ($''$*)ǿ
+ƱƮ
+Ʊư
+ƱƲ
+Ʊƴ
+ƲƬ
+ƲƮ
+Ʋư
+ƲƲ
+Ʋƴ0
+0-4Ǿʻǿ
+4)/# /$$3 -$)$)"- &./#  $'$)"
+4)/#*)'4ǾƳƬ" )ǿ
+4)/#*.Ǿǿ*)'4ǾƳƬ" )ǿ
+4)/#$3 -$)$)"ǾˆǿǾƴ" )ǿ
+4)/#$3 -$)$)"ǾˆǿǾƳƬ" )ǿ
+ǾƲƱǟƯʻǿ
+-$"$)'ǾưƭǟƬʻǿ
+Figure 3: Synthetic Mixed Training breaks the RAG ceiling. We combine 70B-generated synthetic QAs and
+AR documents at a 1:1 ratio, attempting to achieve the best of both worlds. This (skyblue line) yields performance
+comparable to RAG at 350M synthetic training tokens and ultimately surpasses RAG when scaled to 700M tokens.
+provements in synthetic token efficiency, and per-
+formance also saturates as we scale the number of
+synthetic QA tokens. In contrast, for document gen-
+eration, a stronger generator improves synthetic to-
+ken efficiency: it closes the gap between training on
+synthetic QAs and training on synthetic documents.
+The choice of data generation algorithm also mat-
+ters greatly: AR shows the best synthetic token
+efficiency among the variants when using the 70B
+generator, whereas WRAP shows the worst syn-
+thetic token efficiency relative to its performance
+with the 8B generator. However, 70B-generated
+AR documents also shows saturating performance
+when scaled up to 700M tokens.
+The results suggest that we should think care-
+fully about which generation procedures are
+likely to improve with more capable generators,
+as not every data generation algorithm benefits
+from a stronger generator model. Prior synthetic
+data works report related empirical findings that
+stronger generators do not always provide better
+synthetic data (without clear explanation): Lin et al.
+(2025a) shows that using 70B-generated data to
+train the 8B model underperforms compared to us-
+ing 8B generated data; Guha et al. (2025) shows
+that a weaker, smaller generator (QwQ-32B) can
+produce better synthetic data for math and code
+than a stronger, larger generator (DeepSeek-R1);
+and Maini et al. (2025) observes saturating returns
+when scaling the generator from a 3B to an 8B
+model for document rephrasing in pretraining se-
+tups. Kang et al. (2025) shows that using a 70B
+model does not yield better performance when
+rephrasing pre-training data, and more recently,
+Niklaus et al. (2026) shows that a 1B generator is
+sufficient for rephrasing, supported by extensive
+experimental results.
+3 Unlocking synthetic data scaling
+Building on our empirical findings, we present two
+simple methods for improving the efficiency of
+synthetic data and overcoming the limitations of
+existing synthetic data scaling. Our methods en-
+able clear log-linear scaling up to 700M training
+tokens, and our trained 8B model substantially out-
+performs RAG on QuaLITY, achieving a 4.4% rel-
+ative accuracy gain. In addition, we find that these
+methods also work well with different base mod-
+els (Qwen3 1.7B–14B) and additional benchmarks
+(LongHealth, FinanceBench).
+3.1 Synthetic Mixed Training: Mixing
+synthetic QAs and synthetic documents
+Since we have shown synthetic data strategies have
+different scaling properties, we investigate whether
+we can design a synthetic data recipe that achieves
+the best of all worlds.
+We hypothesize that synthetic QAs and synthetic
+documents play different roles: synthetic QAs pri-
+marily teach behavioral knowledge (e.g., how to
+recall facts through chain-of-thought reasoning),
+which can transfer across domains, whereas syn-
+thetic documents primarily teach factual knowl-
+edge, which is more domain-specific. To validate
+this hypothesis, we test mixing all three types of
+synthetic documents during training, and Figure 4
+shows that the synthetic document types are simi-
+lar and provide minimal improvement when mixed.
+Additionally, we measure the similarity between
+data points in gradient space (Jung et al., 2025) to
+9196

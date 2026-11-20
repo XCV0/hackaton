@@ -1,0 +1,91 @@
+Method Reports Tutorials Academic Guidebooks Brochures Industry Financial Overall
+Acc Score Acc Score Acc Score Acc Score Acc Score Acc Score Acc Score Acc Score
+GPT-4o-mini 29.8 36.7 29.0 38.2 16.8 24.0 24.0 32.4 29.5 34.6 41.3 50.6 38.3 41.0 28.2 35.2
+VisRAG 27.9 30.0 19.4 20.8 21.5 24.0 19.8 23.7 19.8 23.7 19.7 24.6 11.1 11.1 21.3 23.8
+ViDoRAG 29.8 36.1 33.3 39.5 16.5 21.0 27.6 32.0 19.6 24.7 21.8 25.9 35.3 36.7 26.5 31.4
+RAGFlow 36.8 38.9 31.5 35.2 27.8 29.9 30.6 35.2 33.4 36.6 28.7 30.8 31.2 34.1 32.0 34.9
+RAGAnything 40.6 45.3 39.5 46.0 32.0 34.6 37.3 43.5 36.4 39.6 30.5 33.3 39.2 42.7 37.1 41.5
+BayesRAG (ours) 42.6 46.7 41.8 53.6 32.7 34.8 41.6 46.4 37.0 39.4 31.1 38.6 41.2 48.6 38.8 44.1
+Table 3: Accuracy (%) and GPT-Score (%) on MMLongBench-Doc across different domains and overall perfor-
+mance. Best performance is highlighted in bold and second-best is underlined. Domain categories include Research
+Reports/Introductions (Reports), Tutorials/Workshops (Tutorials), Academic Papers (Academic), Guidebooks
+(Guidebooks), Brochures (Brochures), Administration/Industry Files (Industry), and Financial Reports (Financial).
+Acc is calculated by the verification method in the MMLongBench-Doc paper. Score is the score verified by LLM.
+Method Recall@1 Recall@3 Recall@5 Recall@10 Recall@20
+Vector Retrieval 24.4 41.7 46.4 51.6 56.6
+BayesRAG 27.5 44.3 54.7 61.7 76.6
+Table 4: Retrieval performance comparison on the
+MMLongBench-Doc dataset. Vector Retrieval de-
+notes the baseline using raw similarity scores from em-
+bedding models and text reranker without probabilis-
+tic re-ranking. BayesRAG incorporates our proposed
+Bayesian evidence fusion.
+document parsing. We employ Qwen3-Embedding-
+4B (Zhang et al., 2025) to encode textual chunks.
+For image elements, we utilize PE-Core-G14-
+448 (Bolya et al., 2025). Additionally, we use
+colnomic-embed-multimodal-3b2 to generate page-
+level embeddings for global layout understanding.
+All retrieved text candidates are refined using bge-
+reranker-v2-m3 (Chen et al., 2024). For the con-
+struction of the Knowledge Graph, we leverage the
+Qwen3-VL-32B (Bai et al., 2025) to extract entities
+and relations from both text and images. We build
+all documents in the benchmark into one vector
+database/knowledge graph for retrieval and evalu-
+ation. Detailed hyperparameters and environment
+configurations are provided in Appendix B to facil-
+itate reproducibility. Crucially, due to the absence
+of mature visual reranking models and the compu-
+tational cost of VLM-as-rerankers, the baseline is
+constrained to a shallow pool of visual candidates
+(Top-20 or the adaptive top-k in its method). In
+contrast, BayesRAG’s probabilistic fusion is com-
+putationally lightweight, allowing us to expand the
+initial visual pool to Top-512 without incurring
+significant latency (see Appendix F).
+3.2 Main Results
+Performance comparison. Table 2 further vali-
+dates the versatility of our approach. BayesRAG
+2https://huggingface.co/nomic-ai/
+colnomic-embed-multimodal-3b
+achieves an SOTA overall score of 51.2%, surpass-
+ing the strongest baseline RAGAnything by 2.5%.
+It demonstrates dominance in text-intensive and
+high-noise domains, such as Government (+12.8%)
+and News (+9.3%). This confirms that our Bayesian
+evidence fusion not only handles multimodal align-
+ment but also enhances textual retrieval by penal-
+izing irrelevant evidence through consistency pri-
+ors. As shown in Table 3, BayesRAG secures the
+leading position in composite metrics, achieving
+38.8% accuracy and an LLM score of 44.1%. Our
+framework exhibits exceptional robustness in het-
+erogeneous domains, notably Guidebooks (+4.3%
+Acc over the runner-up) and Tutorials/Workshops
+(+7.6% Score). These documents typically fea-
+ture intricate interplays between text, charts, and
+layout. By explicitly modeling evidence consis-
+tency, BayesRAG effectively filters out modal mis-
+matches, whereas visual-centric methods like Vis-
+RAG suffer from noise introduced by full-page
+embedding (21.3% overall Acc).
+Retrieval performance. We compare BayesRAG
+against the Vector Retrieval baseline. The baseline
+merely aggregates raw cosine scores from text, im-
+age, and screenshot embedding models with a text
+reranker, lacking mechanisms for semantic consis-
+tency checks or structural priors. Utilizing the page-
+level evidence annotations in MMLongBench-Doc,
+we approximate retrieval recall to evaluate per-
+formance. Table 4 demonstrates that BayesRAG
+achieves substantial gains on all Recall@K met-
+rics: Precision Enhancement (R@1): Recall@1
+improves significantly by 3.1%. This result con-
+firms that our Bayesian formulation effectively mit-
+igates high-similarity hallucinations. By penalizing
+conflicting evidence, where P (Q|E) drops due to
+modal inconsistencies, the framework successfully
+prioritizes truly corroborating evidence. Recall
+Robustness (R@20): Crucially, the advantage be-
+5

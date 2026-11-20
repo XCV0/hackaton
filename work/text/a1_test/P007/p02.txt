@@ -1,0 +1,122 @@
+783
+1   |   Introduction
+The shift towards clean energy sources is paramount in mitigat-
+ing the impending climate crisis. Multijunction solar cells hold 
+great promise in this regard. They offer higher power conver -
+sion efficiency (PCE) than single- junction solar cells by stacking 
+multiple light-  absorbing layers with complementary bandgaps 
+to maximize absorption and minimize thermalization losses [1]. 
+Among various design architectures of multijunction solar cells, 
+the two- terminal approach is likely the most relevant for the up-
+coming market introduction, as it requires similar integration 
+into a module as standard silicon photovoltaics. Cesium-  based 
+lead halide inorganic perovskites are especially interesting for 
+multijunction applications not only because of their high band -
+gap but also due to their enhanced thermal stability as com -
+pared to the organic–inorganic perovskite counterparts [ 2–4]. 
+However, these all-  inorganic perovskites tend to suffer from 
+phase stability issues, transitioning from the desired cubic per -
+ovskite (or α-  perovskite) phase to orthorhombic perovskite (or 
+δ- perovskite) phase at room temperature [ 5, 6 ]. Substituting 
+iodine atoms with bromine atoms in these perovskite lattices 
+can stabilize the cubic perovskite phase and widens the band -
+gap [2, 6]. CsPbI2Br is one of the most stable mixed-  halide inor-
+ganic perovskite composition due to its optimal Goldschmidt's 
+tolerance factor [7, 8]. Additionally, it offers a bandgap of ~1.9 eV 
+[2, 7–9], which is suitable for top-  cell application in perovskite/
+perovskite/silicon triple- junction solar cells.
+Although solution-  processed CsPbI 2Br perovskites have been 
+successfully utilized as high bandgap absorbers in all- perovskite 
+tandems [4, 10, 11], they have not yet been implemented into sil-
+icon based multijunction solar cells. This is primarily due to the 
+necessity of high annealing temperatures of ≥ 200°C [9, 12, 13] 
+in solution processing techniques to achieve the appropriate 
+α- perovskite phase for these inorganic perovskites. Such high 
+annealing temperatures can not only damage the underlying or-
+ganic (common for charge transport layers) and perovskite layers 
+but can also be detrimental for the bottom silicon heterojunction 
+solar cell (SHJ), which has been the most common choice for 
+multijunction applications [14]. At such high temperatures, hy -
+drogen effuses out of the amorphous silicon (Si:H) layer degrad-
+ing its passivation quality and hence the performance of SHJ 
+cells [15]. It is worth noting that high annealing temperatures 
+pose challenges for silicon-  based multijunction solar cells; they 
+are less problematic in all-  perovskite tandems. This is because 
+all- perovskite multijunction cells use a superstrate configura -
+tion, where the high bandgap perovskite is the first subcell to be 
+fabricated on a glass substrate [16]. This design allows for high- 
+temperature annealing without affecting the other layers. Some 
+other bottlenecks associated with the solution-  processed tech-
+niques are the issues related to process compatibility like upscal-
+ing for industrial processes and damage to underlying layers due 
+to solvent infiltration, especially when both the top and middle 
+perovskite absorbers share similar solvent systems [ 17, 18 ]. To 
+address these problems, we propose depositing CsPbI 2Br per -
+ovskite thin films using thermal evaporation. In this technique, 
+precursor materials are evaporated in a high vacuum environ -
+ment at controlled rates to produce thin films on the substrate, 
+enabling conformal, large- area deposition and eliminate the use 
+of toxic solvents like DMF. This technique also avoids possible 
+solvent penetration—and thus damage—towards the underlying 
+middle cell. It also allows precise control over thin film param -
+eters such as thickness and stoichiometry. Additionally, it is a 
+well- established industrial technique that offers opportunities 
+for scalable manufacturing production lines. Till date, only a 
+limited number of studies have explored vacuum deposition 
+methods for CsPbI 2Br perovskite thin films. Chen et  al. [ 19] 
+used dual source coevaporation method, using CsBr and PbI 2 
+sources to deposit CsPbI 2Br perovskite films. They optimized 
+the annealing duration for the evaporated films to achieve a sta-
+bilized efficiency of 11.5% for the inorganic perovskite absorber 
+annealed at 260°C for 60 s. Later, the same group employed 
+layer- by- layer vacuum deposition technique to deposit CsPbI2Br 
+perovskite films. By altering the rates and the number of lay -
+ers in the film stack, they reported an even higher efficiency 
+of 13% for their single junction solar cell device using a similar 
+annealing temperature of 260°C for the evaporated film stack 
+[20]. Liao et al. [21] also used layer- by- layer (or sequential) evap-
+oration technique, where they used an annealing temperature 
+of 300°C to convert their 200-  nm CsBr and 312-  nm PbI 2 layer 
+stack to obtain the desired CsPbI2Br perovskite films. They also 
+reported single junction solar cells in n- i- p configuration, show-
+ing an overall efficiency of 9.96%. Gaonkar et al. [ 22] achieved 
+an efficiency of 11.8% utilizing a similar sequential evaporation 
+approach, however with alternating very thin layered stacks (4- 
+nm CsBr and 6- nm PbI2). They demonstrated stability at 200°C 
+for 72 h, though still requiring an annealing temperature of 
+200°C to convert their layered stack into perovskite film. Other 
+sequential evaporation studies, such as Lee et  al. [ 7], did also 
+explore deposition sequences and stacking variations to deposit 
+CsPbI2Br perovskite films, reporting an efficiency of ~11% for 
+single junction cells but requiring a very high annealing tem -
+perature of ~300°C to obtain the perovskite phase from the 
+CsBr- PbI2 layered stacks. Ma et  al. [ 23] investigated the effect 
+of rate ratios between CsBr and PbI 2 sources on the coevapo -
+ration deposited CsPbI 2Br film properties and their stability. 
+They found nonstoichiometric, CsBr-  rich perovskite films to be 
+more stable than stoichiometric or PbI 2- rich perovskite films. 
+However, the stoichiometric CsPbI 2Br perovskite film gave bet -
+ter solar cells efficiencies than the nonstoichiometric absorber, 
+achieving a stabilized efficiency of 5.5% for the best perform -
+ing solar cell in n-  i- p configuration. Similarly, Park et  al. [ 24] 
+used coevaporation, achieving ~5.7% efficiency for CsPbI 2Br 
+absorber- based n- i- p solar cell devices. Recently, Liu et al. [ 25] 
+focused on the effects of humidity and postdeposition annealing 
+on the optical properties and stability of coevaporated CsPbI 2Br 
+thin films, whereas Papadopoulou et  al. [ 26] used dynamic 
+spectroscopic ellipsometry technique to study the effect of an -
+nealing temperature on coevaporated CsPbI 2Br perovskite film 
+properties, emphasizing the importance of accounting for film 
+roughness; for example, they linked tetragonal-  to- cubic phase 
+transition in the films to increased roughness. Beyond sequen -
+tial and coevaporation methods, flash evaporation using single 
+source has also been explored in literature as a faster alternative 
+to deposit these inorganic perovskite thin films. It was first re -
+ported for CsPbI 2Br thin films by Tai et al. [ 27], where a laser 
+was used as the heating source and carbon nanotubes (CNTs) 
+as the evaporator. The CNTs coated with CsPbI 2Br precursors 
+in DMSO were scanned with a laser beam in a vacuum chamber 
+to evaporate the perovskite precursor, which got deposited on 
+the substrate within seconds. They also reported an efficiency 
+of 9.4% for their single junction solar cell in n-  i- p configuration 
+ 1099159x, 2025, 7, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/pip.3923, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

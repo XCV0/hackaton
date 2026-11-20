@@ -1,0 +1,65 @@
+Setting Method Qwen-Max DeepSeek-V3 GLM-4-32B- 0414 Avg.
+Leak Stale Unsup. Leak Stale Unsup. Leak Stale Unsup. Leak Stale Unsup.
+Main failure reduction
+TEMPLATE Naive RAG 37.50 0.00 5.75 37.50 0.00 6.25 35.75 0.00 5.25 36.92 0.00 5.75 TrustRAG 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+FRESH-STRESS Naive RAG 0.00 38.50 2.50 0.00 65.75 2.75 0.00 52.50 0.00 0.00 52.25 1.75 TrustRAG 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+Governance and LLM-based baselines on TEMPLATE
+TEMPLATE
+Prompt RAG 0.00 6.25 0.00 2.00 5.00 0.25 0.50 4.75 0.25 0.83 5.33 0.17
+Metadata Filter 0.00 0.00 24.25 0.00 0.00 24.00 0.00 0.00 13.25 0.00 0.00 20.50
+LLM Router 0.00 5.75 6.00 0.00 6.25 0.00 1.00 5.00 0.00 0.33 5.67 2.00
+Post-hoc Verifier 0.00 6.25 20.50 0.00 2.50 16.00 6.50 1.75 2.75 2.17 3.50 13.08
+Permission-Aware RAG 0.00 6.25 31.00 0.00 6.25 25.50 0.00 6.25 25.75 0.00 6.25 27.42
+Metadata-Aware RAG 0.00 0.00 30.50 0.00 0.00 30.50 0.00 0.00 28.00 0.00 0.00 29.67
+TrustRAG 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+Temporal heuristic stress on RECENCY-TRAP
+RECENCY-TRAP Recency Reranker 0.00 100.00 0.00 0.00 100.00 0.00 0.00 99.50 0.50 0.00 99.83 0.17 TrustRAG 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.25 0.00 0.00 0.08
+Table 1: Main failure rates and strong baseline comparisons. All values are failure rates (%), where lower is better.
+LEAK, STALE, and UNSUP. denote unauthorized leakage, stale citation, and unsupported-answer rates, respectively.
+Bold numbers highlight the best or tied-best results within each comparison block.
+Block Setting Method / Condition Report Leak ↓ Stale ↓ Unsup. ↓
+Component ablations
+Ablation
+TEMPLATE w/o Access Filtering Range 29.50–36.50 0.00 13.25–24.50 w/o Conflict Reporting Range 0.00 0.00 15.75–25.00
+FRESH-STRESS w/o Supersession Filtering Range 0.00 0.00–2.00 0.00
+Matched Sets TrustRAG Range 0.00 0.00 0.00
+Adversarial inadmissible evidence
+Prompt inj. PROMPT-INJECTION
+Naive RAG Avg. 36.17 16.83 0.17
+Prompt RAG Avg. 0.17 0.00 0.00
+Metadata Filter Avg. 0.00 0.00 0.00
+TrustRAG Avg. 0.00 0.00 0.00
+Table 2: Ablation and adversarial stress-test results. Values are failure rates (%), where lower is better. LEAK,
+STALE, and UNSUP. denote unauthorized leakage, stale citation, and unsupported-answer rates, respectively. Range
+reports the minimum–maximum failure rate across the three evaluated LLMs, while Avg. reports their macro-average.
+Bold numbers indicate the best result within each block.
+tains a 29.67% unsupported-answer rate. By
+adding refusal and conflict-reporting response
+states, TrustRAG reduces all three rates to 0.00%,
+indicating that filtering alone is insufficient to han-
+dle unresolved evidence conflicts.
+Finally, on RECENCY-TRAP, Recency Reranker
+almost completely fails, with a macro-average
+stale citation rate of 99.83%, while TrustRAG
+reduces this metric to 0.00%. This result indi-
+cates that timestamp recency cannot reliably sub-
+stitute for document lifecycle metadata. The 0.25%
+unsupported-answer rate observed for GLM-4-32B-
+0414 under TrustRAG is a very small residual on a
+non-target diagnostic metric; TrustRAG remains at
+0.00% on the target stale-citation metric.
+5.2 Evaluation with Larger Candidate Pools
+To evaluate final-response performance under
+larger candidate pools, we expand the candidate
+pools of 100 SOURCE-ANCHORED instances to
+50 documents while holding retrieval of the target
+evidence fixed. After routing, the generation con-
+text retains 25.24 documents on average. Table 4
+reports results macro-averaged across the three gen-
+erator LLMs.
+Naive RAG exhibits all three governance fail-
+ures. Permission-Aware RAG shows no observed
+unauthorized leakage but retains a 7.00% stale-
+citation rate, whereas Metadata-Aware RAG shows
+no observed leakage or stale citation but pro-
+35008

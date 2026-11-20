@@ -1,0 +1,65 @@
+Question: Who sings home alone tonight with the singer of you can crash my party anytime?
+[Phase 1: Query Analysis & Retrieval]
+# Entity Extraction:
+- Entities to retrieve: "Home Alone Tonight", "Crash My Party"
+# Retrieve Relevant Textual Passages:
+- Take Me Home Tonight (song): "Take Me Home Tonight" is a song by American rock singer Eddie Money...
+- Luke Bryan discography: American country music singer and songwriter Luke Bryan has released...
+- Crash My Party (song): "Crash My Party" is a song recorded by American country artist Luke Bryan...
+- Home Alone Tonight: "Home Alone Tonight" is a song recorded by American country music artist...
+[Phase 2: Semantic Topology Mapper (STM)]
+# Semantic Node Extraction:
+- SN 1: "Take Me Home Tonight" is a song by American rock singer Eddie Money.
+- SN 2: It was released in August 1986 as the lead single from his album "Can’t Hold Back".
+# Semantic Topology Graph (STG) Construction:
+- Graph initialized with 270 context-intact nodes and 878 structural (narrative/semantic/lexical) edges.
+[Phase 3: Energy-Driven Pathfinding (MAP)]
+# Anchor Identification & Energy Diffusion:
+- 5 query-relevant anchor nodes identified based on the extracted entities.
+# Graph Pruning & Topological Linearization:
+- 9 highly activated nodes retained out of 270 after energy threshold pruning.
+- Linearized Context (Modality-Native Prompt):
+(1) "Crash My Party" is a song written by Rodney Clawson and Ashley Gorley, and recorded by American country artist
+Luke Bryan.
+(2) Crash My Party is the fourth studio album by American country music artist Luke Bryan.
+(3) "Home Alone Tonight" is a song recorded by American country music artist Luke Bryan as a duet with Karen Fairchild
+of American country music group Little Big Town for his fifth studio album, "Kill the Lights" (2015).
+(4) ...
+[Phase 4: Agent Evaluation & Answer Synthesis]
+# Reasoning Thought Process:
+- Step 1: Identify "the singer of you can crash my party anytime". From the linearized context, "Crash My Party" is a song
+recorded by Luke Bryan.
+- Step 2: Identify who sings "Home Alone Tonight" with Luke Bryan. From the context, "Home Alone Tonight" is a duet
+with Karen Fairchild.
+- Step 3: Therefore, the person who sings "Home Alone Tonight" with Luke Bryan is Karen Fairchild.
+Answer: Karen Fairchild
+Table 4: Case on MuSiQue.
+not dynamically re-trained or overfitted to individ-
+ual evaluation sets. The RoBERTa-base encoder
+and the MLP head are trained exactly once using
+the distilled pseudo-labels. The resulting weights
+are then frozen and uniformly shared across all
+downstream evaluations (HotpotQA, 2WikiMul-
+tihopQA, and MuSiQue). This zero-shot infer-
+ence approach ensures strict evaluation fairness
+and proves that our STM possesses strong gener-
+alization capabilities across unseen open-domain
+texts.
+Prompt for Dataset Generation. To ensure
+reproducibility, the exact instruction template pro-
+vided to the teacher models for generating the silver
+labels is presented in Table 5.
+E Additional Ablation and Intrinsic
+Evaluation
+To further address the concerns regarding graph
+topology, evidence selection, and semantic segmen-
+tation, we conduct additional controlled ablations
+and intrinsic evaluations. These experiments com-
+plement the main-text analyses by more explicitly
+isolating the contributions of graph-based evidence
+organization, Energy-Driven Pathfinding (EDP),
+and the semantic boundary predictor.
+E.1 Graph-Free Ablation
+To more cleanly isolate the contribution of graph-
+based evidence organization from the remain-
+49903

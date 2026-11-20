@@ -1,0 +1,133 @@
+www.advancedsciencenews.com www.advancedscience.com
+theinhibitionoftheinterfacedefects,whichwouldsigniﬁcantly
+reduceinterfacialrecombination.Moreover,the NCV valuesofal-
+kalimetal-dopedﬂexibledevicesareallhigherthanthoseofthe
+undoped ﬂexible device, demonstrating both Li doping and Na
+dopingcanincreasethecarrierconcentration.Thatisbeneﬁcial
+for the Voc enhancement of devices. Figure4dexhibits the elec-
+trochemical impedance spectroscopy (EIS) to better understand
+the interface information and carrier transport behaviors of the
+ﬂexibledevices.Therecombinationresistance(Rre)obviouslyin-
+creasesfrom484to1657ΩafterLi&Naco-doping,whichiscon-
+sistentwithlessrecombinationandanelevated Voc.Inaddition,
+the decreased series resistance (R0) (from 9.06 and 9.84 to 5.76
+and 5.53 Ω) of Na-doped and Li&Na co-doped ﬂexible CZTSSe
+solarcellsfurthersupportstheenhancementofchargetransport
+capacitythatisobservedinthe Ilight dependent Jsc measurement.
+Thebulkdefectpropertiesoftheabsorbersaredeterminedby
+theTDCcharacteristicacquiringthe I-V curvesofthefourﬁlms
+inthetemperaturerangeof100–320K(FigureS4a–c,Supporting
+Information). It is measured by a structure of Au/absorber/Au
+prepared on the quartz glasses (Figure S3, Supporting Infor-
+mation). At higher temperatures, the conduction type of p-type
+semiconductor carrier is mainly the thermally activated band
+conduction.[46] As the temperature drops, most of the holes are
+recapturedbytheacceptorsinthesemiconductor,whichcannot
+jumpdirectlytothevalencebandduetothelackofenergy.Conse-
+quently,theholeswillbeconductedthroughtheimpurityband,
+where the nearest neighbor hopping (NNH) conduction is the
+primary conduction mechanism.[47] The conductivity can be de-
+scribedasEquation(1).Atthelowertemperature,theholesinthe
+semiconductor hop between the levels close to the Fermi level,
+whereMott’s3Dvariablerangehopping(Mott’sVRH)becomes
+theprimaryconductionmechanism.Theconductivitycanbede-
+scribedasEquation(2).[48]
+𝜎 = 𝜎0 exp
+(
+− E1
+kT
+)
++ 𝜎0N exp
+(
+− E2
+kT
+)
+(1)
+𝜎 = 𝜎0M T−1∕2 exp
+[
+−
+( TM
+T
+)1∕4]
+(2)
+Where, 𝜎 is the conductivity, 𝜎0, 𝜎0N and 𝜎0M are the pre-
+exponential factor that is proportional to the grain size and av-
+eragecarrierconcentrationandindependentof T, k istheBoltz-
+mannconstant, T isthetemperature, E1 istheactivationenergy,
+E2 isthenearestneighboractivationenergy,and TM istheMott’s
+temperature.Figure5ashowstheplotsofln𝜎 versus1000/T for
+theﬁlmsfromEquation(1).Therearetwokindsofdefectsinall
+three absorbers, named D1 and D2, respectively. It can be seen
+thatthe E1 ofD1decreasesfrom0.155to0.130eVafterLidoping
+whilethatofD1remainsthesameaftertheNaisintroducedinto
+the Li-doped CZTSSe ﬁlm. It indicates that Li doping leads to a
+decrease in the E1 of D1 in the CZTSSe ﬁlm. According to the
+reported investigations,[33,49,50] the CuZn anti-site defects have a
+defectlevelof0.130–150eV.Therefore,thedeeperD1(0.155eV)
+oftheCZTSSeﬁlmshouldbeascribedtoCuZn anti-sitedefects,
+which will act as recombination centers to capture photogener-
+ated carriers and thus worsen device performance.[14,51] Accord-
+ing to the ﬁrst-principles calculation,[52] Li ions are likely to re-
+placethepositionsofCuionstoformshallowerLiZn defectsdue
+totheradiusclosetothatofCu+ andthelowsubstitutionenergy,
+which may be the cause for the decrease of E1.TheE2 values of
+D2intheundoped,Li-doped,andLi&Naco-dopedCZTSSeﬁlms
+are0.070,0.071,and0.058eV,respectively.Itdemonstratesthat
+the Na incorporation leads to a decrease in the E2 of D2 for the
+CZTSSeﬁlm.Accordingtothetheoreticalinvestigation,[53,54] the
+D2 with E2 of ≈0.070 meV can be assigned as Cu vacancy (VCu)
+defects,andtheNaZn defectstocontributeholesforthematerial
+can be formed due to its low formation energy. The formation
+of shallow acceptor NaZn defects is equivalent to increasing the
+Cu vacancy (VCu) in the material, which is conducive to the im-
+provement of device performance. Figure 5b shows the plots of
+ln(𝜎T1/2)overT−1/4 fortheﬁlms,wherethe TM isobtainedbyﬁt-
+ting the linear. The TM is a characteristic temperature related to
+the disorder of the ﬁlm material.[47] The higher TM value indi-
+catesahigherdisorderintheﬁlm.Itcanbeobservedthatthe TM
+valueofCZTSSeﬁlmenhancesfrom2.51 × 106 to7.04 × 106 K
+afterLidoping.Therefore,theCZTSSeﬁlmbecomesmoredisor-
+deredafterLidoping,whichmaybeattributedtothesimilarradii
+ofLi,Cu,andZnions.Moreover,the TM isinverselyproportional
+tothedensityofstatesattheFermilevel(TM ∝ [N(EF)]−1).[55] Con-
+sequently,LidopingdecreasesenergystatesattheFermilevelof
+the CZTSSe ﬁlms. According to related reports,[48] the decrease
+in energy states at the Fermi level implies the reduction in the
+CuZn anti-sitedefects.Thus,Lidopingeﬀectivelyreducesthe Nt
+of CuZn anti-site defects. However, the TM value is restored to
+3.63 × 106 K after Na is introduced into the Li-doped CZTSSe
+ﬁlm,whichmaybeattributedtoNaionspreventingLiionsfrom
+enteringtheCZTSSemasterlattice.
+The defect density (Nt) is extracted from admittance spec-
+troscopy(AS)(FigureS4d-f,SupportingInformation)byusingT.
+Walter’smethod[56,57] tofurtherexploretheeﬀectofalkalimetal
+doping on the bulk defects of the CZTSSe ﬁlms. The formulas
+relatedtoASareasfollows[58]:
+𝜔0 = 2𝜐0exp
+(
+− Ea
+kT
+)
+(3)
+E (𝜔) = kTln
+( 2𝜐0
+𝜔
+)
+(4)
+Nt (𝜔) =−Vd qW ⋅ dC d𝜔 ⋅ 𝜔 kT (5)
+Where 𝜔0 is the inﬂection angular frequency of the electronic
+transition, 𝜐0 is the attempt-to-escape frequency, E is the energy
+ofdefectsconcerningtheVBM, 𝜔 istheangularfrequency, Nt(𝜔)
+isthedensityofdefectstates, Vd isthebuilt-involtageand W is
+thedepletionregionwidth.Figure5cshowsthedefectstatedistri-
+butionsofD1andD2forundoped,Li-dopedandLi&Naco-doped
+ﬂexible CZTSSe solar cells. The Nt of D1 (CuZn defects) for the
+absorberdecreasesfrom4.06 × 1015 to3.73 × 1015 cm−3 afterLi
+doping,whilethatofD1defectisslightlyelevatedto3.89 × 1015
+cm−3 when Na is introduced to Li-doped CZTSSe absorber. The
+decreased Nt demonstratesthatLidopinginhibitsharmfulCuZn
+defects, which reduces trap-assisted recombination. For the D2
+defect,the Nt valuesofundopedandLi-dopedCZTSSeabsorbers
+are 2.98 × 1014 and 2.97 × 1014 cm−3, whereas that (4.08 × 1014
+Adv. Sci. 2024,11,2306740 ©2023TheAuthors. AdvancedSciencepublishedbyWiley-VCHGmbH2306740(6of10)
+ 21983844, 2024, 6, Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202306740, Wiley Online Library on [19/11/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

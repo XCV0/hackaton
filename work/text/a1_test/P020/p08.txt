@@ -1,0 +1,34 @@
+()zgE introduces manufacturing complexities [44], thereby increasing the cost. An alternative approach to gain
+the advantages of bandgap grading without adding manufacturing complexity and cost is to employ piecewise-
+homogeneous grading of the photon-absorbing layer, as has been shown for CIGS TFSCs [16].
+Hence, we implemented piecewise-homogeneous grading of the CdTeSe photon-absorbing layer. This layer
+was divided into nsub sublayers, each of unknown thickness Lj and uniform bandgap energy gjE . The quantities
+{ } =L, j j n g 1j subE were determined by optimizing η subject to the constraints (i) [ ]Î 1.4, 1.5gjE eV for j ä [1, nsub]
+and (ii) å = L 3000j n j1 sub nm.
+Optimal values of Jsc, Voc, FF, and η for nsub ä {1, 2, 3, 5, 7} are presented in table 4. The table also includes
+values of gjE and Lj for the nsub sublayers.
+The highest efﬁciency is achieved with two sublayers (i.e., nsub = 2), requiring = 1.4g1E eV, = 1.5g2E eV,
+L1 = 1250 nm, and L2 = 1750 nm. This design yields an efﬁciency of 22.13%, representing a relative
+improvement of 12.22% compared to the baseline design with a single homogeneous photon-absorbing layer
+(see table 1). Although Jsc remains nearly unchanged, Voc increases by 9.9%. Additionally, the predicted
+efﬁciency surpasses those obtained for continuously graded bandgaps: 21.79% for linear and 21.22% for
+nonlinear grading, as reported in table 3.
+Optoelectronic optimization indicates that piecewise-homogeneous bandgap grading outperforms both
+linear and nonlinear bandgap grading of the photon-absorbing layer. A possible explanation for the lower
+efﬁciency predicted with nonlinear bandgap grading, compared to piecewise-homogeneous grading, lies in the
+spatial variation of the internal electric ﬁeld. In nonlinear grading, the continuous and smooth variation of the
+bandgap can lead to non-uniform electric ﬁeld throughout the photon-absorbing layer. These non-uniformities
+may introduce regions where charge carriers experience unfavorable band slopes, which can increase the EHP
+recombination rate and hinder carrier-collection efﬁciency. In contrast, the piecewise-homogeneous grading
+approach allows more precise control over the internal electric-ﬁeld distribution and band alignment,
+facilitating improved charge transport and reducing recombination losses at critical interfaces. Additionally, the
+sharp transitions between adjacent sublayers in piecewise-homogeneous grading can generate strong localized
+electric ﬁelds that promote efﬁcient charge-carrier separation and extraction, thereby contributing to enhanced
+device performance. Repins et al. [45] also highlighted that overly gradual grading can be detrimental to
+efﬁciency and suggested abrupt bandgap changes as well as defect-passivation strategies to improve charge-
+carrier collection and reduce recombination.
+Figure 3. (a) Spatial proﬁles of (a) gE , (b) n(z) and p(z), and (c) G(z) and R(n, p;z) in the FTO/ITO/CdS/CdTeSe region of the optimal
+CdTeSe TFSC with a 3000-nm-thick nonlinearly graded-bandgap CdTeSe layer described by equation (4). (d) Plots of Jdev and P
+versus Vext for the same TFSC.
+7
+J. Phys. Commun. 9 (2025) 055008 F Ahmad et al

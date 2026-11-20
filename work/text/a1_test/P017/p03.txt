@@ -1,0 +1,180 @@
+FF for devices with a dual buffer layer can be directly related to
+an increase in the series resistance (RS) for those devices. The
+typical RS value for the dual buffer cells studied is ∼1.9 Ω cm2
+compared to ∼1.0 Ω cm2 for the reference CdS-buffered cells,
+while the shunt resistance (RSH) was similar in all device types
+(∼140 Ω cm2). Higher RS in the dual buffer devices can be
+attributed to an increase in the combined thickness of the
+CdS/In2S3 layers (see the Electron Microscopy and
+Composition section).20 Most notable is the average increase
+in JSC of type E solar cells (34.7 mA/cm2) compared to those
+of types H (31.8 mA/cm2) and D (32.0 mA/cm2), with
+champion device E achieving a JSC of 36.7 mA/cm2.
+Subsequently, this solar cell achieved a PCE of 7.75%. The
+J−V curves of champion solar cells for all device types
+measured in the dark and under 1-sun illumination are plotted
+in Figure 2a.
+The dark and illuminated J−V curves exhibit crossover
+behavior, which is indicative of an electrical barrier either in
+the buffer/absorber interface or at the absorber/Mo metal
+contact due to a thick interfacial layer of MoSe2.21−23 Because
+all devices fabricated for this study were made from the same
+batch of CZTS nanoparticle inks and subjected to the same
+selenization conditions, it is unlikely that a thick MoSe2 layer is
+the cause of the low crossover point. Our previous studies have
+shown that CZTSSe devices fabricated from CZTS nano-
+particle inks typically have a low hole barrier of ∼40 meV at
+the back-contact, suggesting that the back-contact is not the
+predominant factor influencing carrier extraction.19,24 This
+suggests that a current-blocking barrier exists at the buffer/
+absorber interface in all types of devices, with a higher barrier
+present when In2S3 is deposited directly on top of the CZTSSe
+absorber (indicated by the lower J−V crossover point in device
+D). The dark J−V curves in Figure 2a were fitted using the
+double-diode model for an n+−p device (Figure S1), described
+by
+J J
+q V JR
+kT
+J
+q V JR
+kT
+V JR
+ R
+exp
+( )
+1 exp
+( )
+2
+1
+01
+S
+02
+S
+S
+ SH
+=
++
++
++
+ƒ
+«
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+i
+k
+j
+j
+j
+j
+y
+{
+z
+z
+z
+z
+…
+÷
+—
+—
+—
+—
+—
+—
+—
+—
+—
+—
+ƒ
+«
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+i
+k
+j
+j
+j
+j
+y
+{
+z
+z
+z
+z
+…
+ ÷
+—
+—
+—
+—
+—
+—
+—
+ — — —
+(1)
+where k is the Boltzmann constant, T is the temperature, RS is
+the series resistance, RSH is the shunt resistance, and J01 and J02
+are the reverse saturation currents relating to the recombina-
+tion currents in the QNR and SCR of the solar cell,
+respectively (Table 2). Practical fitting of the illuminated J−
+V curves is difficult because small fluctuations in the light
+intensity overwhelm the effects of the second diode, which
+relates to the SCR. It is apparent that device E has a lower
+recombination current in the SCR (J02 = 6.9 × 10−3 mA/cm2)
+compared to the other device types (H, J02 = 4.6 × 10−2 mA/
+cm2; D, J02 = 6.4 × 10−1 mA/cm2), which is concomitant with
+higher JSC observed in type E devices. Conversely, device D
+shows a lower recombination current in the bulk of the
+CZTSSe absorber, where J01 = 1.6 × 10−6 mA/cm2 in contrast
+to J01 values of 2.6 × 10−4 and 7.3 × 10−5 mA/cm2 for devices
+H and E, respectively (Table 2). Explanations for this behavior
+will be explored in the Results and Discussion section. The
+performance of kesterite solar cells can be limited by
+heterojunction interface defects and deep-level defects in the
+SCR.25−27
+Capacitance−voltage (C−V) profiling measurements were
+performed to determine the apparent doping density (NA),
+SCR width (wSCR), and built-in potential (VBI) of all device
+types. When the bias voltage is set to V = 0, NA and VBI can be
+determined from Mott−Schottky analysis of the C−V data,
+which is expressed by NA = −2(dC−2/dV)/qε0εr, where C is
+the capacitance/cell area, ε0 is the permittivity of free space,
+and εr is the dielectric constant of CZTSSe (Figure S2). As
+Figure 2. (a) Light (solid lines) and dark (dash-dotted lines) J−V curves for all champion device types. Solid circles mark the crossover points
+between light and dark J−V plots. (b) C−V depth profiles with indicated wSCR values at zero bias.
+Table 2. Recombination Current Values (J01 and J02) of the
+Best-Performing Cells for Each Device Type Determined by
+Double-Diode Analysis (According to Equation 1) with the
+Apparent Doping Density (NA) and SCR Width (wSCR) of
+the Corresponding Devices
+device type
+J01 QNR
+(mA/cm2) J02 SCR (mA/cm2) wSCR (nm) NA (cm−3)
+H: CZTSSe−CdS 2.6 × 10−4 4.6 × 10−2 143 8.9 × 1015
+D: CZTSSe−
+In2S3−CdS
+1.6 × 10−6 6.4 × 10−1 71 1.7 × 1017
+E: CZTSSe−
+CdS−In2S3
+7.2 × 10−5 6.9 × 10−3 83 1.6 × 1016
+ACS Applied Energy Materials www.acsaem.org Article
+https://doi.org/10.1021/acsaem.3c01622
+ACS Appl. Energy Mater. 2023, 6, 10883−10896
+10885
+Downloaded from pubs.​acs.​org/​aaemcq/​article-pdf/​6/​21/​10883/​2973906/​ae3c01622.​pdf by guest on 19 November 2026

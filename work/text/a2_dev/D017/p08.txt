@@ -1,0 +1,96 @@
+Question: what percent did "Smartphone Penetration" grow 
+between 2013 and 2015?
+Ground Truth: 26%
+VisRAG: 
+Not answerable.
+RAGFlow: 
+108.33%
+BayesRAG: 
+ViDoRAG: 
+110%
+RAG-Anything: 
+108.33%
+provenance page
+Image 3 contains a bar chart titled "Smartphone 
+Penetration" with data for the years 2012, 2013, 
+2014, and 2015. For 2013, the bar chart shows a 
+value of 24%. For 2015, the bar chart shows a 
+value of 50%.  The growth in percentage points is 
+the difference between the 2015 and 2013 values.
+Growth = 50% - 24% = 26 percentage points
+Figure 3: A sample is for semantic consistency between text and charts to find the correct evidence
+retrieve images or document pages directly. Build-
+ing on these advancements, RegionRAG (Li et al.,
+2025) introduces a region-level contrastive learn-
+ing objective, thereby refining retrieval granularity
+from coarse-grained whole pages to specific se-
+mantic regions. Broadly, current approaches fall
+into two categories: (1) Visual-Centric Unifica-
+tion: Methods like VisRAG (Yu et al., 2025b) and
+M3DocRAG (Cho et al., 2024) unify modalities
+by treating entire document pages as images for re-
+trieval, effectively preserving layout but potentially
+sacrificing fine-grained textual details. (2) Dual-
+Stream Retrieval: Systems like VisDoM (Suri et al.,
+2025) store and retrieve text and images separately.
+They typically employ a late fusion strategy, where
+separate visual and textual models generate inter-
+mediate answers that are subsequently merged by
+a fusion model. However, these separate streams
+often lack interaction during the retrieval phase,
+leading to potential semantic misalignment.
+Knowledge-Structured Multimodal RAG. To
+capture complex relationships within documents,
+several approaches integrate Knowledge Graphs.
+Methods such as HM-RAG, MMGraphRAG (Wan
+and Yu, 2025), and mKG-RAG (Yuan et al., 2025)
+utilise Multimodal LLMs (MLLMs) to extract en-
+tities and relationships from both text and images.
+RAG-Anything (Guo et al., 2025) employs a hy-
+brid search mechanism that combines explicit KG
+links with vector semantic similarity. It utilizes a
+multi-signal scoring mechanism that weighs both
+the topological importance of the graph structure
+and the semantic similarity scores. While effec-
+tive, these graph-based methods rely heavily on the
+quality of upstream information extraction.
+Evidence Verification and Reranking. Ensuring
+the reliability of retrieved content is critical. For
+text modality, cross-encoder rerankers are standard
+practice. MIRAGE (Wei et al., 2025) ensures trust-
+worthy evidence by cross-validation of inference
+chains in enhanced retrieval-augmented graphs.
+For images, frameworks like ViDoRAG (Wang
+et al., 2025b), MDocAgent (Han et al., 2025),
+HKRAG (Tong et al., 2025), mRAG (Hu et al.,
+2025), and MADAM-RAG (Wang et al., 2025a)
+adopt an agent-based approach, utilizing agents
+such as the Inspector or Critical Agent to perform
+iterative verification loops to filter evidence. How-
+ever, these agent-based methods are often com-
+putationally intensive due to repeated LLM calls,
+resulting in substantial token consumption and high
+latency. Furthermore, they lack a unified probabilis-
+tic framework to explicitly model the mutual cor-
+roboration between heterogeneous modalities—a
+gap we aim to fill with BayesRAG.
+5 Conclusion
+In this work, we introduce BayesRAG to advance
+multimodal RAG for visually rich documents by
+transforming retrieval into a dynamic evidence fu-
+sion process. By synergizing Bayesian inference
+with Dempster-Shafer theory, our framework offers
+a theoretically rigorous solution to the semantic in-
+consistencies prevalent in heterogeneous data. We
+demonstrate that explicitly modeling modal con-
+flicts allows the system to filter out high-scoring
+but semantically misaligned noise. This capability
+effectively closes the gap between visual retrieval
+and semantic verification. Our extensive evalua-
+tions confirm that this probabilistic approach not
+only achieves state-of-the-art performance but also
+establishes a new paradigm for trustworthy multi-
+modal RAG. We hope this shift towards evidence-
+based corroboration paves the way for future sys-
+tems that demand high-fidelity reasoning.
+8

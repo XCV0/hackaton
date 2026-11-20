@@ -1,0 +1,68 @@
+J. Phys. Energy 5 (2023) 025007 https://doi.org/10.1088/2515-7655/acc4e9
+Journal of Physics: Energy
+OPEN ACCESS
+RECEIVED
+6 February 2023
+REVISED
+8 March 2023
+ACCEPTED FOR PUBLICATION
+16 March 2023
+PUBLISHED
+27 March 2023
+Original Content from
+this work may be used
+under the terms of the
+Creative Commons
+Attribution 4.0 licence.
+Any further distribution
+of this work must
+maintain attribution to
+the author(s) and the title
+of the work, journal
+citation and DOI.
+PAPER
+Charge transport modelling of perovskite solar cells accounting for
+non-Boltzmann statistics in organic and highly-doped transport
+layers
+Will Clarke1,∗, Matthew J Wolf2,3, Alison Walker3 and Giles Richardson1
+1 Mathematical Sciences, University of Southampton, Southampton, United Kingdom
+2 Institute of Physical Chemistry, RWTH Aachen, Germany
+3 Department of Physics, University of Bath, Bath, United Kingdom
+∗ Author to whom any correspondence should be addressed.
+E-mail:wc3g16@soton.ac.uk
+Keywords: perovskite solar cells, drift-diffusion, transport layers, statistical models, organic semiconductors
+Abstract
+We present a drift–diffusion model of a perovskite solar cell (PSC) in which carrier transport in the
+charge transport layers (TLs) is not based on the Boltzmann approximation to the Fermi–Dirac
+(FD) statistical distribution, in contrast to previously studied models. At sufficiently high carrier
+densities the Boltzmann approximation breaks down and the precise form of the density of states
+function (often assumed to be parabolic) has a significant influence on carrier transport. In
+particular, parabolic, Kane and Gaussian models of the density of states are discussed in depth and
+it is shown that the discrepancies between the Boltzmann approximation and the full FD statistical
+model are particularly marked for the Gaussian model, which is typically used to describe organic
+semiconducting TLs. Comparison is made between full device models, using parameter values
+taken from the literature, in which carrier motion in the TLs is described using (I) the full FD
+statistical model and (II) the Boltzmann approximation. For a representative TiO2/MAPI/Spiro
+device the behaviour of the PSC predicted by the Boltzmann-based model shows significant
+differences compared to that predicted by the FD-based model. This holds both at steady-state,
+where the Boltzmann treatment overestimates the power conversion efficiency by a factor of 27%,
+compared to the FD treatment, and in dynamic simulations of current–voltage hysteresis and
+electrochemical impedance spectroscopy. This suggests that the standard approach, in which
+carrier transport in the TLs is modelled based on the Boltzmann approximation, is inadequate.
+Furthermore, we show that the full FD treatment gives a more accurate representation of the
+steady-state performance, compared to the standard Boltzmann treatment, as measured against
+experimental data reported in the literature for typical TiO2/MAPI/Spiro devices.
+1.Introduction
+Over the past decade, perovskite solar cells (PSCs) have seen rapid developments, in both efficiency and
+stability, to an extent that they are now viewed as a realistic prospective next-generation photovoltaic
+technology. However despite the impressive efficiency of modern PSCs (the current record for certified
+power conversion efficiency (PCE) is 25.7% [1]), challenges remain that must be overcome to enable
+large-scale commercial manufacture of perovskite solar panels, the chief amongst these being their relatively
+poor long-term stability and the presence of lead in the perovskite structure. An increased understanding of
+the fundamental materials and device physics governing their properties and performance will be key to the
+further development of PSC technology. In this context, modelling plays a central role in elucidating the
+basic physical processes underlying the performance of PSCs. In particular, drift–diffusion modelling, which
+provides a macroscopic description of an entire cell, and directly links to the properties of the materials from
+which it is constructed, has proven to be a powerful tool to understand PSC device physics [2–4]. PSCs
+typically use a planar architecture in which a perovskite absorber layer is sandwiched between a highly
+© 2023 The Author(s). Published by IOP Publishing Ltd

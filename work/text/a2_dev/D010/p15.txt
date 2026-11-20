@@ -1,0 +1,41 @@
+Efficient Federated Search for Retrieval-Augmented Generation 15
+emphasizes the importance of developing novel federated search strategies for
+RAG. Salve et al. propose a multi-agent RAG system where different agents
+handle the querying of databases with differing data formats (e.g., relational or
+NoSQL) [35].
+Other approaches focus on privacy in federated search. Raffle is a frame-
+work that integrates RAG into the federated learning pipeline and leverages pub-
+lic datasets during training while using private data only at inference time [30].
+C-FedRag is a federated RAG approach that enables queries across multi-
+ple data sources and leverages hardware-based trusted execution environments
+(TEEs) to ensure data confidentiality [2]. FRAG leverages homomorphic en-
+cryption to enable parties to collaboratively perform ANN searches on encrypted
+query vectors and data stored in distributed vector databases, ensuring that no
+party can access others’ data or queries [43]. These schemes can benefit from
+RAGRoute while ensuring privacy-preserving federated search.
+Machine learning (ML)-assisted resource selection. ML models have
+been explored to support resource selection in federated search [16]. Arguello
+et al. leverage different features, e.g., the topic of queries, and train a classifier
+for resource selection [4]. Learn-to-rank approaches such as SVMrank [11] and
+the LambdaMART-based LTRRS [41] refine relevance rankings by leveraging
+diverse feature sets. Ergashev et al. construct a heterogeneous graph to capture
+query-source and source-source relationships and then predict the query-source
+relevance ranking using a graph neural network (GNN) [13]. Wang et al. use
+an LLM as a resource selector, introducing a novel prompting approach called
+ReSLLM [40]. They also propose to fine-tune ReSLLM through previously logged
+queries and snippets from data sources. However, these approaches are either
+more computationally expensive than the lightweight RAGRoute router or
+cannot handle heterogeneous embedding models across data sources.
+6 Conclusion
+We presented RAGRoute, a novel and efficient routing mechanism for feder-
+ated search in RAG systems. By dynamically choosing relevant data sources at
+query time via a lightweight neural classifier, RAGRoute minimizes unneces-
+sary queries while preserving high retrieval quality. Evaluations on MIRAGE,
+MMLU, and FeB4RAG demonstrate that RAGRoute reduces the number
+of contacted sources and document retrieval communication volume by up to
+80.65%, and decreases end-to-end latency by up to 52.50%, with minimal im-
+pact on end-to-end accuracy. These gains are primarily achieved by reducing
+reranking overhead which constitutes a major bottleneck in RAG pipelines. Our
+results confirm that querying all data sources is often unnecessary, underscoring
+the importance of query-aware retrieval strategies in federated search workflows
+for RAG.

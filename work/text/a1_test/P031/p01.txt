@@ -1,0 +1,67 @@
+Solar Energy Materials & Solar Cells 267 (2024) 112717
+Available online 29 January 2024
+0927-0248/© 2024 The Authors. Published by Elsevier B.V. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).
+The effect of remnant CdSe layers on the performance of CdSeTe/CdTe 
+photovoltaic devices 
+Xiaolei Liu a,*, Ali Abbas a, Mustafa Togay a, Vlad Kornienko a, Rachael Greenhalgh a, 
+Kieran Curson a, Jake Bowers a, Kurt Barth a, Michael Walls a, Ebin Bastola b, 
+Griffin Barros-King b, Adam B. Phillips b, Michael J. Heben b 
+a Centre for Renewable Energy Systems Technology (CREST), Wolfson School of Mechanical, Electrical and Manufacturing Engineering, Loughborough University, 
+Loughborough, Leicestershire, LE11 3TU, United Kingdom 
+b Wright Center for Photovoltaics Innovation and Commercialization, University of Toledo, Toledo, OH, 43606, United States   
+ARTICLE INFO  
+Keywords: 
+CdSeTe/CdTe solar cell 
+CdSe remnant 
+Grain boundary 
+Parasitic absorption 
+ABSTRACT  
+Thin film CdTe-based photovoltaic devices have achieved high efficiency above 22 %. The recent improvement in 
+efficiency is due to Se alloying in the CdTe absorbers to form a CdSeTe/CdTe structure. The subsequent band gap 
+grading increases the short circuit current density. The Se can be introduced by depositing a precursor thin film 
+of either CdSe or a CdSeTe alloy and then diffusing the Se into the CdTe during the high temperature cadmium 
+chloride activation process. Using CdSe is preferred because it is easier to control the Se concentration. However, 
+during fabrication of the CdSeTe/CdTe devices, the CdSe thickness needs to be precisely controlled to prevent the 
+retention of a CdSe remnant layer after the activation treatment. Retention of a remnant CdSe layer causes a 
+dramatic reduction in device efficiency. In this work, we show that the reduction in efficiency is caused by a 
+number of factors. The remnant CdSe layer is n-type which moves the position of the p-n junction. Also, it is 
+widely thought that the CdSe remnants are photo-inactive. In this work, we clarify that the individual CdSe 
+grains are actually highly photo-active. However, the grain sizes in the CdSe remnant and the adjacent CdSeTe 
+layer are very small resulting in a high grain boundary area. Although the grain boundaries are passivated with 
+chlorine, cathodoluminescence imaging and electrical measurements show that this is only partially effective. 
+Also, EQE measurements show that the remnant CdSe causes parasitic absorption. Overall, the remnant CdSe 
+layer causes a reduction in short circuit current density and device efficiency. The thickness of the CdSe precursor 
+layer and the cadmium chloride activation process conditions must be precisely optimised to ensure that all the 
+CdSe is consumed and inter-diffused to form the CdSeTe alloy for highest efficiency devices.   
+1. Introduction 
+As the most successful thin-film photovoltaic (PV) technology, CdTe- 
+based solar modules account for the vast majority of thin film PV 
+manufacturing [1]. The cost of solar electricity generated from thin film 
+CdTe PV technology is already as low as 3 US cents per kW.hr in large 
+scale utilities. Further increases in module efficiency will lower the cost 
+of solar electricity to consumers still further and accelerate the transition 
+of power generation away from fossil fuels to renewable energy. The 
+champion efficiency for a CdTe-based solar cell is above 22 % [2]. This 
+was achieved by increasing the short circuit current (Jsc) above 30 
+mA/cm2. The short circuit current was improved by replacing the 
+traditional CdS buffer layer with a wider band gap material such as 
+magnesium doped zinc oxide [3] or intrinsic tin oxide [4]. It was also 
+increased by adding selenium to form a CdSe1-xTex (CdSeTe) alloy at the 
+front of the absorber. This is followed by a thicker unalloyed CdTe layer. 
+The CdSeTe has a lower band gap than CdTe. The decreased band gap 
+creates a band grading towards the front interface and facilitates the 
+photogenerated minority carrier collection. Due to the decreased band 
+gap, the CdSeTe layer increases the absorption of long wavelength 
+photons in the solar spectrum, leading to improved Jsc. Although the 
+bandgap of CdTe decreases, it is surprising that the open circuit voltage 
+(Voc) can be maintained at over 870 mV [3]. Recent investigations have 
+shown that Se alloying passivates defects in the bulk CdTe grain interiors 
+and increases minority carrier lifetime [5], which explains the main-
+tained Voc. Passivation of grain boundaries is also caused by the presence 
+* Corresponding author. 
+E-mail address: x.liu2@lboro.ac.uk (X. Liu).  
+Contents lists available at ScienceDirect 
+Solar Energy Materials and Solar Cells 
+journal homepage: www.elsevier.com/locate/solmat 
+https://doi.org/10.1016/j.solmat.2024.112717 
+Received 2 August 2023; Received in revised form 5 December 2023; Accepted 14 January 2024

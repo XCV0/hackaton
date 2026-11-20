@@ -1,0 +1,34 @@
+Query:
+Who plays hannibal in silence of the lambs?
+Retrieved Contexts:
+“who played hannibal lecter in silence of the lambs Anthony Hopkins, Anthony Hopkins as Dr. Hannibal Lecter”, “who played hannibal lecter in silence
+of the lamb Anthony Hopkins, Anthony Hopkins as Dr. Hannibal Lecter”, “who was the actor in silence of the lambs Frank Theodore "Ted" Levine, Frank
+Theodore Ted Levine ( born May 29 , 1957 ) is an American actor . He is known for his roles as Buffalo Bill in The Silence of the Lambs and as Captain
+Leland Stottlemeyer in the television series Monk .”, “who starred in the silence of the lambs Jodie Foster, Anthony Hopkins, Scott Glenn, Ted Levine, The Silence
+of the Lambs Theatrical release posterDirected by Jonathan Demme Produced by Kenneth Utt Edward Saxon Ron Bozman Screenplay by Ted Tally Based on
+The Silence of the Lambs by Thomas Harris Starring Jodie Foster Anthony Hopkins Scott Glenn Ted Levine Music by Howard Shore Cinematography
+Tak Fujimoto Edited by Craig McKay Production company Strong Heart / Demme Production Distributed by Orion Pictures Release date January 30,
+1991 ( 1991 - 01 - 30 ) ( New York City ) February 14 , 1991 ( 1991 - 02 - 14 ) ( United States ) Running time 118 minutes Country
+United States Language English Budget 19 million Box office 272.7 million”
+Ground Truth:
+{“context”: “Anthony Hopkins is a Welsh actor, director, and producer.”}, {”context”: “Anthony Hopkins portrayed the character Hannibal Lecter in
+the 1991 film The Silence of the Lambs.”}, {“context”: “The Silence of the Lambs is a 1991 American horror-thriller film directed by
+Jonathan Demme and starring Jodie Foster and Anthony Hopkins.”}
+Classification Results:
+{
+“statement”: “Anthony Hopkins is a Welsh actor, director, and producer.”,
+“attributed”: 0,
+“reason”: “The context does not mention Anthony Hopkins being a Welsh actor, director, and producer.”
+},
+{
+“statement”: “Anthony Hopkins portrayed the character Hannibal Lecter in the 1991 film The Silence of the Lambs.”,
+“attributed”: 1,
+“reason”: “The context explicitly states that Anthony Hopkins played Hannibal Lecter in The Silence of the Lambs.”
+},
+{
+“statement”: “The Silence of the Lambs is a 1991 American horror-thriller film directed by Jonathan Demme and starring Jodie Foster and Anthony Hopkins.”,
+“attributed”: 1,
+“reason”: “The context mentions that ’The Silence of the Lambs’ stars Jodie Foster and Anthony Hopkins, and is directed by Jonathan Demme.”
+}
+Figure 7: An illustrative example of context classification
+1379

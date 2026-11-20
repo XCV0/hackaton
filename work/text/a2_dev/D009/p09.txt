@@ -1,0 +1,80 @@
+Table 4: Generalization of PRO-STEP across different policy backbones. Results are reported using EM and F1.
+Bold denotes the better performance within each comparison.
+Method PopQA HotpotQA 2WikiMulti Bamboogle MuSiQue Average
+EM F1 EM F1 EM F1 EM F1 EM F1 EM F1
+Llama-3.1-8B-Instruct
+Base 5.49 16.14 5.71 14.63 5.50 12.97 7.20 15.60 1.49 6.08 5.08 13.08
+PRO-STEP 22.94 28.12 18.88 27.12 25.40 31.74 8.80 16.99 4.76 8.86 16.16 22.57
+Qwen2.5-7B Base/Instruct
+PRO-STEP-Base 40.42 46.04 34.69 47.47 41.09 48.57 36.00 45.38 12.08 22.61 32.85 42.01
+PRO-STEP-Instruct 40.47 47.37 38.73 51.63 44.07 51.43 36.80 47.63 12.49 22.41 34.51 44.09
+Qwen2.5-3B-Instruct
+Search-R1 36.87 42.14 31.82 41.30 35.96 41.86 18.40 27.97 8.07 14.27 26.22 33.51
+PRO-STEP 39.88 46.10 32.82 44.33 44.10 50.77 28.00 38.96 10.38 19.85 31.04 40.00
+Table 5: Final EM on recovered trajectories. n is given
+as Search-R1 / PRO-STEP.
+Dataset n Search-R1 PRO-STEP
+HotpotQA 1,726 / 1,081 51.3 54.4
+PopQA 915 / 623 44.6 49.6
+2WikiMulti 4,002 / 2,945 47.4 52.8
+Bamboogle 34 / 25 82.4 84.0
+MuSiQue 550 / 418 38.4 38.5
+At the 3B scale, PRO-STEP outperforms Search-
+R1 across all five datasets, improving the average
+from 26.22 / 33.51 to 31.04 / 40.00 EM / F1 (+4.82
+EM and +6.49 F1). Together, these results show
+that PRO-STEP extends across different model
+families, alignment settings, and model scales. The
+3B configuration additionally uses an SFT warmup
+on trajectories from the 7B policy. Additional 3B
+results and training analysis are provided in Sec-
+tion G.
+4.8 Recovery from Retrieval Failure
+Outcome-based optimization lacks a direct signal
+to detect or penalize intermediate retrieval failures,
+allowing early errors to propagate through sub-
+sequent reasoning steps. To examine this failure
+mode, we evaluate PRO-STEP and the outcome-
+based Search-R1 on recovered trajectories, where
+the initial retrieval fails to surface the gold passage
+but a later retrieval succeeds. Since this subset is
+determined by each model’s own search behavior,
+the two systems are evaluated on overlapping but
+non-identical question sets.
+As shown in Table 5, PRO-STEP achieves higher
+final EM than Search-R1 on all five datasets, and its
+subsets are consistently smaller because it fails less
+often at the initial retrieval. On 2WikiMulti, the
+gains hold at every recovery depth k with sufficient
+support (+4.1, +8.3, and +6.8 EM at k = 1, 2, 3),
+and PRO-STEP concentrates its recoveries earlier,
+resolving 87% of its subset at k = 1 versus 80%
+for Search-R1. The advantage is not driven by
+subset selection, as PRO-STEP also outperforms
+Search-R1 when the initial retrieval succeeds, by
+12.1 EM on 2WikiMulti and 29.2 EM on Bam-
+boogle. Detailed results are provided in Section I.
+These results show that PRO-STEP better recovers
+from retrieval failures, mitigating error propagation
+through subsequent reasoning steps.
+5 Conclusion
+We introduced PRO-STEP, a framework that inte-
+grates process-level supervision into RAG to miti-
+gate error propagation in multi-hop reasoning. Our
+approach trains a generative PRM to evaluate both
+the logical validity and the evidential grounding
+of intermediate steps. We employ this PRM to
+guide VTS, proactively constructing step-level pref-
+erence pairs by explicitly filtering out spurious
+trajectories that coincidentally reach correct final
+outcomes. Using these targeted preference pairs,
+we optimize the policy model using DPO to en-
+hance its ability to navigate interleaved generation
+and retrieval. Experiments demonstrate that PRO-
+STEP addresses intermediate reasoning flaws and
+achieves the best average EM and F1 across the
+five evaluated QA benchmarks. By mitigating the
+limitations of sparse outcome rewards, PRO-STEP
+offers an effective approach for fine-grained policy
+optimization in multi-hop QA tasks.
+37912

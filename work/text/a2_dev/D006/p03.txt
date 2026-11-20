@@ -1,0 +1,51 @@
+LLM-Confidence Reranker
+ThisapproachfullyleveragestheLLM’ssemanticunderstandingandquestion-answeringcapabilitiestoenhance
+document ranking accuracy in RAG systems.
+2. LCRexhibitshighadaptabilityandgeneralization,functioningasastandalonererankerorseamlesslyintegrating
+after existing rerankers to further refine ranking results. The approach relies solely on lightweight pre-trained
+LLMs with 7-9B parameters, requiring no training or internal parameter access, ensuring high computational
+efficiency and low cost, and achieving consistent performance improvements across diverse retrievers and
+rerankers on the BEIR and TREC benchmarks, achieving NDCG@5 gains of up to 20.6%.
+3. Thismethodemploysapointwiseindependentscoringmechanism,supportingparallelprocessingandscalability
+to large-scale documents.
+4. Through experiments, we validate the hypothesis that LLM confidence in generated responses positively
+correlates with document relevance, elucidating the effective mechanism of LCR and providing a theoretical
+foundation for mitigating hallucinations in knowledge-intensive tasks.
+The remainder of the paper is organized as follows: Section 2 reviews the related literature. Section 3 elucidates
+theconfidencemodelingtechniquesanddelineatestheLCRalgorithm.Section4detailstheexperimentalevaluations,
+including the setup, results, and analyses of the impacts of retrievers, models, hyperparameters, and confidence
+quantification methods, as well as the underlying mechanism. Section 5 summarizes the findings and outlines future
+research directions.
+2. Related Work
+2.1. Uncertainty Quantification Methods for LLMs
+Uncertaintyquantificationmethodscanbecategorizedintotwomaintypesdependingonwhethermodeltrainingis
+necessary: training-required methods and training-free methods. Training-required methods improve the uncertainty
+expression capabilities of large language models (LLMs) by employing fine-tuning or other learning processes. In
+contrast,training-freemethodsdirectlyleveragethemodel’spre-existingcapabilitiestoextractuncertaintyinformation.
+2.1.1. Training-Required Methods
+Training-required methods improve LLMs’ ability to accurately express uncertainty through model adjustment or
+optimization, primarily following three technical approaches:
+SupervisedFine-tuning Supervisedfine-tuningaimstoenhanceLLMs’uncertaintyexpressionthroughtraining.For
+example,Linetal.(2022)enabledmodelstoexpressuncertaintyinnaturallanguageviafine-tuning.Akeydevelopment
+is the P(IK) method, proposed by Kadavath et al. (2022), which quantifies uncertainty by training language models to
+predicttheirownprobabilityofcorrectlyansweringquestions.Toenhancethemodel’stransparencyandexplainability
+regarding uncertainty, Y. Yang et al. (2024) further explored the possibility of embedding explicit confidence in
+the model’s output. This was achieved by training the model to use language such as “I’m absolutely certain” or
+express numerical confidence (e.g., “about 90% confident”), allowing this confidence to be explicitly presented to the
+user. In subsequent research, scholars began to focus on whether the decisiveness of language in model generations
+faithfullyreflectstheirintrinsicconfidence.Yonaetal.(2024)formalizedfaithfulresponseuncertaintybasedonthegap
+betweenlinguisticdecisivenessandintrinsicconfidence,evaluatingmodels’abilitytofaithfullyexpressuncertaintyin
+words.Manggalaetal.(2025)systematicallyexploresthediscrepancybetweenconfidencescoresandactualaccuracy,
+proposing QA-calibration as a generalized, principled calibration notion, which provides a reference direction for
+improving uncertainty expression in generative QA.
+Reinforcement Learning ​This task is implemented by training LLMs with reinforcement learning to identify and
+decline unknown questions. For instance, T. Xu et al. (2024) present the SaySelf training framework, which enhances
+the model’s ability to express fine-grained confidence estimates by generating self-reflective rationales. Similarly,
+to enable models to express uncertainty in natural language when beyond their knowledge boundaries, Cheng et al.
+(2024) constructed the “I don’t know” (Idk) dataset, and achieved this through alignment training. H. Xu et al. (2024)
+proposedtheReinforcementLearningwithKnowledgeFeedback(RLKF)method,helpingmodelsidentifyknowledge
+boundaries and reject out-of-scope questions, thereby implicitly quantifying uncertainty and improving reliability. To
+identify and address the systematic bias in reward models towards high confidence scores in RLHF training, Leng et
+al. (2025) proposed calibrated reward methods such as PPO-M and PPO-C, thereby effectively reducing calibration
+error in LLMs.
+Song et al.: Preprint submitted to Elsevier Page 3 of 21

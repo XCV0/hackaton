@@ -1,0 +1,124 @@
+Table 2: Results on each of a collection of datasets with FLAN-T5-XL (3B) as the LLM. We emphasize our results in bold.
+SQuAD Natural Questions TriviaQA
+Data Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Single-step
+Simple No Retrieval 3.60 10.50 5.00 0.00 0.11 14.20 19.00 15.60 0.00 0.13 25.00 31.80 27.00 0.00 0.13 Single-step Approach 27.80 39.30 34.00 1.00 1.00 37.80 47.30 44.60 1.00 1.00 53.60 62.40 60.20 1.00 1.00
+Adaptive
+Adaptive Retrieval 13.40 23.10 17.60 0.50 0.55 28.20 36.00 33.00 0.50 0.56 38.40 46.90 42.60 0.50 0.56
+Self-RAG∗ 2.20 11.20 18.40 0.63 0.50 31.40 39.00 33.60 0.63 0.17 12.80 29.30 57.00 0.68 0.45
+Adaptive-RAG (Ours) 26.80 38.30 33.00 1.37 2.02 37.80 47.30 44.60 1.00 1.00 52.20 60.70 58.20 1.23 1.54
+Complex Multi-step Approach 24.40 35.60 29.60 4.52 9.03 38.60 47.80 44.20 5.04 10.18 53.80 62.40 60.20 5.28 9.22
+Oracle Adaptive-RAG w/ Oracle 32.00 45.60 38.20 1.24 1.60 47.40 57.10 53.60 1.10 1.55 61.60 70.20 66.40 0.79 1.10
+MuSiQue HotpotQA 2WikiMultiHopQA
+Data Types Methods EM F1 Acc Step Time EM F1 Acc Step Time EM F1 Acc Step Time
+Multi-step
+Simple No Retrieval 2.40 10.70 3.20 0.00 0.11 16.60 22.71 17.20 0.00 0.11 27.40 32.04 27.80 0.00 0.10 Single-step Approach 13.80 22.80 15.20 1.00 1.00 34.40 46.15 36.40 1.00 1.00 41.60 47.90 42.80 1.00 1.00
+Adaptive
+Adaptive Retrieval 6.40 15.80 8.00 0.50 0.55 23.60 32.22 25.00 0.50 0.55 33.20 39.44 34.20 0.50 0.55
+Self-RAG∗ 1.60 8.10 12.00 0.73 0.51 6.80 17.53 29.60 0.73 0.45 4.60 19.59 38.80 0.93 0.49
+Adaptive-RAG (Ours) 23.60 31.80 26.00 3.22 6.61 42.00 53.82 44.40 3.55 5.99 40.60 49.75 46.40 2.63 4.68
+Complex Multi-step Approach 23.00 31.90 25.80 3.60 7.58 44.60 56.54 47.00 5.53 9.38 49.60 58.85 55.40 4.17 7.37
+Oracle Adaptive-RAG w/ Oracle 24.80 38.50 27.00 1.98 3.99 51.20 64.00 54.80 1.59 2.77 53.00 62.30 59.40 1.01 1.69
+F1
+10
+20
+30
+40
+50
+60 Adaptive Retrieval
+Self-RAG
+Adaptive-RAG (Ours)
+Classifier Acc.
+35
+40
+45
+50
+55
+FLAN-T5-XL
+F1
+10
+20
+30
+40
+50
+60 Adaptive Retrieval
+Self-RAG
+Adaptive-RAG (Ours)
+Classifier Acc.
+35
+40
+45
+50
+55
+FLAN-T5-XXL
+No One Multi
+NoOneMulti
+0.31 0.47 0.22
+0.1 0.66 0.23
+0.03 0.31 0.65
+0.2
+0.4
+0.6
+Confusion Matrix
+Figure 3: Performance on QA and query-complexity assessment of different adaptive approaches for retrieval-augmented LLMs
+with FLAN-T5 XL (Left) and XXL (Center). For labeling the complexity of queries, we use the silver data annotated from the
+prediction outcomes of models (described in Section 3.2). We also provide the confusion matrix across three labels (Right).
+5 and the AdamW (Loshchilov and Hutter, 2019)
+as an optimizer. Regarding its training data, we
+sample and annotate 400 queries from 6 datasets
+based on its inductive bias (single-hop for one-step
+approach and multi-hop for multi-step). In addition,
+we use predicted outcomes of three different strate-
+gies over 400 queries sampled from each dataset.
+Note that those queries used for classifier training
+do not overlap with the testing queries for QA.
+5 Experimental Results and Analyses
+In this section, we show the overall experimental
+results and offer in-depth analyses of our method.
+Main Results First of all, Table 1 shows our main
+results averaged over all considered datasets, which
+corroborate our hypothesis that simple retrieval-
+augmented strategies are less effective than the
+complex strategy, while the complex one is sig-
+nificantly more expensive than the simple ones. In
+addition, we report the more granular results with
+FLAN-T5-XL on each of the single-hop and multi-
+hop datasets in Table 2 (and more with different
+LLMs in Table 7 and Table 8 of Appendix), which
+are consistent with the results observed in Table 1.
+However, in a real-world scenario, not all users
+ask queries with the same level of complexity,
+which emphasizes the importance of the need for
+adaptive strategies. Note that among the adaptive
+strategies, our Adaptive-RAG shows remarkable
+effectiveness over the competitors (Table 1). This
+indicates that merely focusing on the decision of
+whether to retrieve or not is suboptimal. Also, as
+shown in Table 2, such simple adaptive strategies
+are particularly inadequate for handling complex
+queries in multi-hop datasets, which require ag-
+gregated information and reasoning over multiple
+documents. Meanwhile, our approach can consider
+a more fine-grained query handling strategy by fur-
+ther incorporating an iterative module for complex
+queries. Furthermore, in a realistic setting, we
+should take into account not only effectiveness but
+also efficiency. As shown in Table 1, compared to
+the complex multi-step strategy, our proposed adap-
+tive strategy is significantly more efficient across
+all model sizes. This is meaningful in this era of
+LLMs, where the cost of accessing them is a critical
+factor for practical applications and scalability. Fi-
+nally, to see the upper bound of our Adaptive-RAG,
+we report its performances with the oracle classifier
+where the classification performance is perfect. As
+shown in Table 1 and Table 2, we observe that it
+achieves the best performance while being much
+more efficient than our Adaptive-RAG without the
+oracle classifier. These results support the valid-
+ity and significance of our proposal for adapting
+retrieval-augmented LLM strategies based on query
+complexity, and further suggest the direction to de-
+velop more improved classifiers to achieve optimal
+performance.
+7042

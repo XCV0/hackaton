@@ -1,0 +1,130 @@
+absorption edge down to 1.5 eV and are often constituted by a mixture
+of phases where APbX3 co-exists2. With their narrower band gap, high-
+n LDPs have been successfully integrated into efﬁcient perovskite solar
+cells (PSCs)3. Indeed, from a structural perspective, high-n LDPs par-
+tially lose their layered structure and are able to efﬁciently transport
+the photoinduced charges, assisted by the co-presence of APbX3
+phases (as revealed by the edge of external quantum efﬁciency spectra
+close to 1.5 eV)4. Moreover, induced vertical growth of high-n LDP
+crystal structures has been demonstrated, further boosting devices’
+power conversion efﬁciency (PCE)5–13.However,thisdoesnotholdtrue
+for low-n LDPs where the inorganic frame usually grows parallel to the
+substrate14 or self-organizes in a random orientation15. Consequently,
+vertical charge transport and extraction are hindered, strongly limiting
+the PCE (typically <2%) when integrated into a typical planar device
+stack16,17. This imposes a severe limit to low-n LDP applications, despite
+their wide band gap being ideal for semi-transparent devices and
+building integrated photovoltaics (PVs)18,19.Bysolvingtheselimita-
+tions, low-n LDPs would have advantages over the conventional high
+band gap solutions based on mixed halide (Br/I) APbX3 perovskites
+such as methylammonium lead halides (MAPbX3)20, which still suffer
+from structural instability and light-induced halide segregation, caus-
+ing open-circuit voltage (VOC) losses and performance reduction21–24.
+Therefore, to go beyond the state-of-the-art, it is imperative to develop
+a method to control the tilting and alignment of the inorganic frame-
+work of the low-n LDPs with respect to the substrate15, which would be
+a major advance for wide band gap PSCs.
+In this work, we use thiophenemethylammonium iodide (TMAI) as
+the R cation to form a vertically oriented n = 2 LDP with a band gap of
+~2 eV, which we successfully integrate into a planar device stack. We
+then demonstrate a highly efﬁcient 2 eV wide band gap vertically
+oriented LDP solar cell, overcoming the current transport limits. This
+has been obtained by elucidating the critical role of Cl in dictating
+vertical crystallization. In contrast to the current knowledge on 3D
+MAPbX3 perovskites, we found that a small degree of Cl substitutes for
+IinthePbI6 octahedra leading to an expansion of the unit cell in one
+direction, which is critical in inducing vertical alignment as corrobo-
+rated by joint experimental and ab initio modelling analysis. Integrated
+into a solar cell, the vertical orientation is preserved through the whole
+device thickness, ensuring efﬁcient charge transport and resulting in a
+champion 9.4% PCE, which is, to the best of our knowledge, the highest
+PCE reported for a PSC based on a low-n 2 eV band gap LDP. The
+concept is also validated on a semi-transparent solar cell, demon-
+strating the potential exploitation of low-n LDPs in coloured and
+transparent PVs.
+Results
+Thin ﬁlm fabrication and GIWAXS analysis
+Figure 1 schematically represents the preparation procedures for low-n
+LDPs with the chemical formula TMA2MAPb2I7 (n =2). The standard
+method (Fig. 1a) involves the dissolution of the stoichiometric ratio of
+precursor powders in dimethylformamide (DMF) and the subsequent
+spin coating and annealing steps. The structure and texture of the
+resulting thin ﬁlms were investigated by grazing incident wide-angle X-
+ray scattering (GIWAXS), whose results are reported in Fig. 1b. The unit
+cell can be identiﬁed as being very close to orthorhombic with axes
+8.8 × 41.5 × 8.7 Å and with β = 87°, in close agreement with previous
+reports25. Since the (0k0) reﬂections are predominantly oriented along
+the qz direction, the crystallites orient with their (0k0) planes parallel
+to the substrate, meaning the inorganic slabs are oriented horizontally
+(Fig. 1c). This is the most common orientation reported for low-n LDPs
+(named horizontal hereafter)14.
+In Fig. 1d the developed method is outlined, in which we employ a
+partial substitution of methylammonium iodide (MAI) with methy-
+lammonium chloride (MACl) at different concentrations (see Supple-
+mentary Fig. 1); this was further optimized at a 30:70 ratio (MAI:MACl)
+and by adding an annealing step of the mixed precursor solution at
+60 °C for 2 h, before its deposition. The MAI:MACl ratio corresponds to
+an optimal 10% total amount of Cl substituting I in the perovskite
+formulation. When 10% Cl is added, the GIWAXS pattern (Fig. 1e)
+drastically changes revealing that the (0k0) reﬂections are now
+oriented along the qy direction. This indicates a switch of crystallite
+orientation such that the inorganic slabs are now vertically oriented
+with respect to the substrate. Notably, the signals appear more arch-
+like because of a certain degree of structural disorder and misalign-
+ment with respect to the pure TMA2MAPb2I7 phase. As reported in
+Fig. 1f, two main orientations of the unit cell are detected for the ﬁlms
+produced with our formulation: crystallites are now oriented either
+with the (001) or with the (101) planes parallel to the substrates. In both
+orientations, the inorganic slabs are vertically aligned (sample named
+vertical hereafter), as depicted in Fig. 1f.
+To ultimately conﬁrm the different crystal structure orientation of
+horizontal and vertical samples, we perform a texture analysis through
+advanced X-Ray Diffraction (XRD) Pole Figure (PF) investigation,
+whose results are reported in Fig. 1g. By comparing the experimental
+PFs with the Wulff Stereographic Projections (WSPs) for a single crystal
+perfectly aligned along the [101] (in red) and [010] (in yellow) crys-
+tallographic directions, we investigate the orientation of three differ-
+ent lattice planes: (202) (Fig. 1g), (151) and (080) (Supplementary Fig. 2)
+that correspond to reﬂections at 28.73°, 17.83°, and 17.11°, respectively.
+In the case of the horizontal LDP, the PF (202) presents higher intensity
+in the outer ring coinciding with the diffraction of the [101] family of
+planes. These are responsible for the central peak of PF (080), con-
+ﬁrming that in the horizontal sample, the vertical orientation of the
+inorganic layer is not present, in agreement with the GIWAXS results.
+Conversely, the strong peak at the centre of PF (202) for the vertical
+sample conﬁrms such preferential growth along the [101] direction in
+which crystals tend to grow with a ﬁbre-textured disposition perpen-
+dicularly to the substrate, which is also conﬁrmed by the ring observed
+in the PF (151) corresponding to the tilted plane reﬂections. Overall, the
+structural analysis shows the effectiveness of our strategy in directing
+the vertical growth on the low-n LDP thin ﬁlms.
+Optical and photoconductivity analysis of LDP thin ﬁlms
+The optical properties of the low-n LDP thin ﬁlms do not depend on the
+material crystallization. Indeed, the different samples absorption
+spectra are identical, displaying a sharp onset at 2.1 eV (as calculated
+from the Tauc plot in Supplementary Fig. 3) and a clear excitonic peak
+at 567 nm (Fig. 2a), typical of a n = 2 LDP. We note that the horizontal
+sampleshowsaminorshoulderatlongerwavelengths,indicativeofa
+small fraction of n = 3 phase, which also appears in the steady state
+photoluminescence (PL) spectra together with the peak related to the
+n = 2 phase (see Supplementary Fig. 4). To gain a demonstration of the
+material stability, we monitor the PL peak position exposing the ﬁlms
+under continuous 1 Sun AM1.5G illumination and thermal stress at
+60 °C (Supplementary Fig. 5). In both cases no variations are observed,
+indicative of a high robustness and phase integrity against UV light and
+thermal stressors.
+To investigate the effect of vertical alignment on the charge-
+carrier transport properties, we start by analysing the electronic
+structure of TMA2MAPb2I7 (shown in Fig. 2b), obtained using density
+functional theory (DFT) calculations. The primitive cell of
+TMA2MAPb2I7, along with the Brillouin zone showing the high sym-
+metry directions, are shown in Supplementary Fig. 6. TMA2MAPb2I7
+has a direct band gap at the Γ-point. The ﬂat bands along the high
+symmetry direction Γ-Y indicate heavy carriers perpendicular to the
+PbI6 plane, while the more dispersive bands along Γ- Δ0,andΓ-Z
+directions suggest lighter carrier transport within the plane. This is
+corroborated by the effective mass values (inset Fig. 2b) along the
+three axes of the conventional unit-cell, which are higher along the
+vertical b-axis and moderate along the horizontal a- and c-axes for both
+Article https://doi.org/10.1038/s41467-024-53339-6
+Nature Communications |         (2024) 15:9069 2

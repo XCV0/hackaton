@@ -1,0 +1,38 @@
+For this task you are given a question (Question), a reference answer (Reference Answer), and a candidate answer (Candidate Answer).
+Your task is to evaluate if the Candidate Answer is fully answers the question while being consistent to the information presented in the Reference
+Answer.
+Use the following guidelines to evaluate the reasoning process and assign a score between 1 to 4 to the candidate answer:
+- Score 1: The candidate answer does not provide any information to answer the question. It is a simple repetition of the question, a refusal to
+answer, or providing irrelevant information.
+- Score 2: The the candidate answer is not consistent with the reference answer and there are major points of contradiction.
+- Score 3: The the candidate answer partially answers the question and is consistent with the reference answer. It may have some minor points of
+contradiction but it is consistent for the most part.
+- Score 4: The the candidate answer fully answers the question and is consistent with the reference answer.
+Note: the reference answer may provide additional information that is not needed to answer the question. In such cases, the candidate answer does
+not have to contain such extra information to be considered consistent or complete, it simply has to provide a clear and complete answer to the
+original question while not contradicting the reference answer.
+## Examples:
+Question: How tall is the Eiffel Tower?
+Reference Answer: The Eiffel Tower in located in Paris and is about 984 feet tall.
+Candidate Answer: It is 984 feet tall.
+Reasoning: The candidate answer fully answers the question and is consistent with the reference answer. Extra information about the location of
+the Eiffel Tower is not needed to answer the question.
+Score: 4
+Question: What is the name of largest waterfall in the world and where is it located?
+Reference Answer: The largest waterfall in the world is Angel Falls in Venezuela and is about 3,212 feet tall.
+Candidate Answer: The largest waterfall in the world is Angel Falls.
+Reasoning: The candidate answer parially answers the question and is consistent with the reference answer. However, it does not provide the
+location of the waterfall.
+Score: 3
+Question: Which country had most gold medals in the 2022 Winter Olympics?
+Reference Answer: The country with most gold medals in the 2022 Winter Olympics was Canada
+Candidate Answer: United States had most gold medals in that Olympics.
+Reasoning: The candidate answer provides a different country name which is not consistent with the reference answer.
+Score: 2
+Question: What is the capital of France?
+Reference Answer: The capital of France is Paris.
+Candidate Answer: I don’t know.
+Reasoning: The candidate answer does not provide any information to answer the question. It is refusing to answer the question.
+Score: 1
+Figure 10: Part 1: Prompt used for evaluation of the answer quality.
+791

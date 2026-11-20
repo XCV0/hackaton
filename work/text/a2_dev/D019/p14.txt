@@ -1,0 +1,56 @@
+A Case Study of Reasoning Based
+Missing Knowledge Retrieval
+In this section, we present case studies derived
+from the NQ and Huatuo datasets, encompassing
+both general and medical open-domain QA scenar-
+ios. For each original query and its corresponding
+missing knowledge query, we retrieve top−K 2 text
+passages from Wikipedia or QA pairs.
+The examples provided in Table 6 and Table 7
+demonstrate that QA pairs are more closely aligned
+with the query intent, particularly in colloquial
+contexts such as the query “the most all star
+mvp awards”. Furthermore, within our proposed
+framework, the reasoning process involved in an-
+alyzing missing knowledge proves beneficial to
+the final response. This is because the accuracy
+of the retrieved knowledge is verified during the
+reasoning process, and any missing knowledge is
+subsequently retrieved through additional queries.
+Specifically, in Table 7, the final responses in-
+clude more detailed treatment recommendations,
+such as “examination, Astragalus and goji
+berries”.
+B Prompt Used for Missing Knowledge
+and Response Generation
+In this section, we describe the prompts used for
+generating missing knowledge queries and the final
+responses.
+B.1 Prompt for Missing Knowledge and
+Query Generation
+Figure 4 illustrates the prompt we employ to gen-
+erate missing knowledge and the corresponding
+queries step by step. When provided with the user’s
+query and the retrieved contexts as input, the model
+returns a JSON-formatted answer.
+B.2 Prompt for Response Generation
+Figure 5 presents the prompt used for answer gen-
+eration. It integrates two key components: (1) the
+missing knowledge represented by the “thought”
+output from the missing knowledge generation
+phase shown in Figure 4, which provides a de-
+tailed analysis of the contexts, and (2) the reasoning
+content, which supplies verified information about
+specific contextual details. The prompt takes the
+user’s query together with the above components
+as inputs and returns the final prediction.
+C Prompt Used for Evaluating Context
+Recall
+Figure 6 illustrates prompts utilized for generating
+ground truth contexts, which are then used to obtain
+the classification results and compute the recall
+defined in Eq. 4. A detailed example is listed in
+Figure 7, where “attributed” denotes whether an
+individual ground-truth context is presented among
+the retrieved contexts.
+1374

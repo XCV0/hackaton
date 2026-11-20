@@ -1,0 +1,64 @@
+Research Article
+Optimization and Numerical Modeling of TCO/SnO2/CdS/CdTe
+Solar Cells
+Parinaz Khaledi
+ ,1 Mahdi Behboudnia
+ ,1 and Mohammad Karimi2
+1Department of Physics, Urmia University of Technology, Urmia, Iran
+2Department of Physics, Shahid Madani University of Azerbaijan, Tabriz, Iran
+Correspondence should be addressed to Parinaz Khaledi; parinaz.khaledi22@gmail.com
+Received 14 July 2022; Revised 16 December 2022; Accepted 30 December 2022; Published 12 January 2023 
+Academic Editor: Yuan-Fong Chou Chau
+Copyright © 2023 Parinaz Khaledi et al. Tis is an open access article distributed under the Creative Commons Attribution
+License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly
+cited.
+Due to the excellent performance of the CdTe solar cells, research is ongoing to increase the efciency of these cells. Te frst
+purpose of this study is to increase the accuracy of the physical parameters of a solar cell in the electron ̶hole production rate
+equation.Inpreviousstudies,thissectionwasneglectedbecauseofusingonlyready-madesoftware.Simulationswereperformed
+using a one-dimensional difusion model in MATLAB and Maple software. Ten, in theory, we simulated cadmium telluride-
+based layered solar cells for the frst time without using ready-made software and with coding in MATLAB and Maple software.
+We designed andoptimized the thickness of the layers in solar cells in detail. Ten we studied the efect of layer thickness on the
+short-circuit current (Jsc), open-circuit voltage (Voc), flling factor (FF), and its efciency. It is found that the efciency of solar
+cellslayeredwithTCO/SnO2/CdS/CdTelayersisasfollows:thethicknessoftheTCOlayeris0.1μm,thatoftheSnO2 layerisequal
+to0.1μm,thatoftheCdSlayerasthewindowlayeris0.1μmandthethicknessoftheCdTelayerastheabsorberlayeris3.9μm.Te
+efciency of the solar cell with the TCO/SnO2/CdS/CdTe structure increases signifcantly and reaches a maximum value ofmore
+than 20%.
+1.Introduction
+Due to limited fossil energy reserves, increasing energy
+consumption in the world and increasing environmental
+pollution, we can no longer rely on existing energy sources.
+Due to these issues and challenges such as increasing ef-
+ciency, reducing prices, sustainability, and storage of energy
+facing renewable energy sources, so many researches have
+been done. So far, various layered solar cells based on
+semiconductors have been studied. Recently, perovskite
+solar cells have been extensively studied theoretically and
+experimentally [1–7]. Such as the work of Yoo and his
+colleagues in 2021, the work of Wu and his colleagues in
+2020,andotherworksmentionedinreferences1to7.Silicon
+solarcellshavealsobeenconsideredfortheirhighefciency
+and stable and nontoxic materials. However, silicon is
+a material with an indirect energy gap that has a low light
+absorption coefcient [8]. In contrast, cadmium telluride
+solar cells have a direct band gap that corresponds to the
+spectrum of the sun and has excellent performance and
+a high absorption coefcient [9]. In addition, these cells can
+beproducedatalowercostthansiliconsolarcells[10].Allof
+these properties have attracted scientists’ attention to cad-
+mium telluride-based solar cells. In 1982, these cells were
+examined by a group of researchers [11], they reported
+ayieldof10%forthesecells,buttheresultsofanothergroup
+[12] showed a yield of 15.8%, and another American lab-
+oratory[13]reportedtheyieldtobe16.5%.Recently,returns
+of18%and22%[12,14],andevenreturnsof44%havebeen
+reported [15]. In cadmium telluride-based solar cells, this
+layerisoftenusedasanadsorbentlayer.Tisadsorbentlayer
+needsawindowlayer.Temostsuitablelayerthatisusedas
+a window layer next to the cadmium telluride adsorbent
+layeriscadmiumsulfde[16],whichformsaPNbondnextto
+cadmium telluride. Cadmium sulfde has a suitable energy
+gap in the range of 2.42 electron volts. Because cadmium
+Hindawi
+International Journal of Optics
+Volume 2023, Article ID 7184080, 10 pages
+https://doi.org/10.1155/2023/7184080

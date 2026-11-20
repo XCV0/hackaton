@@ -1,0 +1,41 @@
+Efficient Federated Search for Retrieval-Augmented Generation 3
+pubmed statpearls textbookswikipedia
+0
+50
+100
+Corpus
+Relevance score [%]
+Top 32pubmedqa medqa bioasq medmcqa mmlu-medQuestion set:
+Fig. 1. The relevance of different corpora in RAG when answering questions, using
+question sets from the MIRAGE benchmark.
+query, the query is embedded using a compatible query encoder and a nearest-
+neighbor search is performed to retrieve the most relevant chunks. This search
+is often accelerated using approximate nearest neighbor (ANN) indexing [29].
+The retrieved candidates are commonly reranked and appended to the original
+query to form an augmented prompt for the LLM. By grounding generation in
+retrieved evidence, RAG reduces hallucinations and improves factual accuracy
+without requiring model retraining. Most existing RAG systems assume a single
+centralized vector database. In contrast, we consider settings where knowledge
+is distributed across multiple independent data sources, motivating federated
+search and resource selection.
+2.2 Towards federated search in RAG
+Federated search is an information retrieval setting in which a query is executed
+across multiple independent data sources and the results are aggregated without
+centralizing the underlying data [36]. A key challenge in federated search is
+resource selection, i.e., determining which data sources should be queried [39].
+In RAG systems operating over multiple repositories, source relevance varies
+substantially across queries, making accurate relevance estimation essential for
+efficient retrieval.
+We empirically show this by analyzing data source relevance using corpora
+and questions from the MIRAGE benchmark (more details can be found in Sec-
+tion 4.1). This benchmark contains a large number of medical multiple-choice
+questions and answers and is divided into five question sets [42]. As knowledge
+backend for RAG we use four different data sources (corpora), namely PubMed,
+StatPearls, Wikipedia and Textbooks. For each question, we determine
+which corpora are relevant by considering a corpus relevant if at least one doc-
+ument originating from that corpus appears in the top-15 retrieved results.
+Figure 1 shows the overall relevance of different corpora, highlighting how
+corpus usefulness varies across question sets. For example, the bar correspond-
+ing to the MedQA question set and the StatPearls corpus shows a relevance
+score of 89.32%, meaning that for 89.32% of queries in MedQA, at least one doc-
+ument in the retrieved relevant documents originates from StatPearls. While

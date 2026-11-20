@@ -1,0 +1,102 @@
+this analysis, strategization contributes to increased
+accuracy and reduced hallucinations, while the dis-
+tractor resilience task specifically aids in reducing
+hallucinations. The combination of both methods
+yields the best overall factuality results, highlight-
+ing their complementary roles and effectiveness.
+Additional experiments for closed-book settings
+are provided in Appendix F.
+Method Accurate Hallucinated Missing Factuality
+Baseline 59.1% 24.9% 16.0% 34.2%
+PRISMRAG 62.1% 22.9% 15.1% 39.2%
+-Distractor 59.3% 23.2% 17.6% 37.0%
+-Strategization 62.4% 23.2% 12.3% 36.1%
+Table 3: Ablation study using the CRAG dataset for
+the proposed fine-tuning method based on distractor
+resilience and dynamic strategization.
+6 Conclusion
+In this paper, we tackle key challenges in open-
+book question answering by bolstering the robust-
+ness of LLMs against distractors and enhancing
+their reasoning capabilities. Our approach involved
+fine-tuning LLMs with synthetic distractor data
+and introducing a novel strategization method fo-
+cused on dynamic CoT step generation. We showed
+that leveraging the proposed iterative synthetic data
+generation and refinement is an effective method
+to produce train data with sufficient scale and com-
+plexity for finetuning LLMs to boost their RAG
+QA capability. Extensive evaluations across 12
+public benchmarks demonstrated significant im-
+provements in factual accuracy. These findings
+highlight the potential of our approach to advance
+the state-of-the-art, ultimately delivering a more
+factual and reliable QA system.
+Limitations
+While our proposed method shows significant im-
+provements in factuality for open-book question
+answering, several limitations persist. First, the
+reliance on synthetically generated distractor data
+may not fully capture the complexity and variabil-
+ity of real-world distractors, potentially limiting the
+model’s robustness in diverse scenarios. Specifi-
+cally, we acknowledge that the current method may
+not fully capture certain real-world complexities
+such as: HTML parsing artifacts/formatting incon-
+sistencies, implicit contradictions requiring deep
+domain knowledge, and perspective differences in
+presenting similar events. Additionally, the use
+of LLM-as-judge for factuality evaluation, both
+in our training data pipeline and benchmarking,
+presents its own challenges. For instance, it may
+exhibit bias towards the presence or absence of ad-
+ditional explanations, and its behavior can become
+less predictable when there is a mismatch between
+its internal parametric knowledge and the retrieved
+references.
+References
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and
+Hannaneh Hajishirzi. 2023. Self-rag: Learning to
+retrieve, generate, and critique through self-reflection.
+In The Twelfth International Conference on Learning
+Representations.
+Yuri Façanha Bezerra and Li Weigang. 2025.
+Llmquoter: Enhancing rag capabilities through ef-
+ficient quote extraction from large contexts. arXiv
+preprint arXiv:2501.05554.
+Tianchi Cai, Zhiwen Tan, Xierui Song, Tao Sun, Jiyan
+Jiang, Yunqi Xu, Yinger Zhang, and Jinjie Gu. 2024.
+Forag: Factuality-optimized retrieval augmented gen-
+eration for web-enhanced long-form question answer-
+ing. In Proceedings of the 30th ACM SIGKDD Con-
+ference on Knowledge Discovery and Data Mining,
+pages 199–210.
+Vittorio Castelli, Rishav Chakravarti, Saswati Dana, An-
+thony Ferritto, Radu Florian, Martin Franz, Dinesh
+Garg, Dinesh Khandelwal, Scott McCarley, Mike
+McCawley, and 1 others. 2019. The techqa dataset.
+arXiv preprint arXiv:1911.02984.
+Zhiyu Chen, Wenhu Chen, Charese Smiley, Sameena
+Shah, Iana Borova, Dylan Langdon, Reema Moussa,
+Matt Beane, Ting-Hao Huang, Bryan Routledge,
+and 1 others. 2021. Finqa: A dataset of numeri-
+cal reasoning over financial data. arXiv preprint
+arXiv:2109.00122.
+Xiaoxue Cheng, Junyi Li, Wayne Xin Zhao, and Ji-Rong
+Wen. 2024. Chainlm: Empowering large language
+models with improved chain-of-thought prompting.
+arXiv preprint arXiv:2403.14312.
+Feiteng Fang, Yuelin Bai, Shiwen Ni, Min Yang, Xiao-
+jun Chen, and Ruifeng Xu. 2024. Enhancing noise
+robustness of retrieval-augmented language models
+with adaptive adversarial training. arXiv preprint
+arXiv:2405.20978.
+Robert Friel, Masha Belyi, and Atindriyo Sanyal. 2024.
+Ragbench: Explainable benchmark for retrieval-
+augmented generation systems. arXiv preprint
+arXiv:2407.11005.
+Zorik Gekhman, Gal Yona, Roee Aharoni, Matan Eyal,
+Amir Feder, Roi Reichart, and Jonathan Herzig. 2024.
+Does fine-tuning llms on new knowledge encourage
+hallucinations? arXiv preprint arXiv:2405.05904.
+781

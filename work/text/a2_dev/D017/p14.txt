@@ -1,0 +1,77 @@
+B.4 RAGAnything
+Consistent with our other setups, we employ
+MinerU as the document parser. We utilize
+Qwen3-VL-32B to generate document descriptions
+and construct the knowledge graph. The vector re-
+trieval component relies on Qwen3-Embedding-4B
+and bge-reranker-v2-m3. Finally, GPT-4o-mini
+is employed as the downstream question-answering
+model.
+C Prompts in BayesRAG
+The specific prompts employed in BayesRAG are
+detailed below:
+Prompt
+You are an intelligent assistant. Please
+summarize the content of the knowledge
+base (both in text, images, and screenshots
+of pdf pages) to answer questions, think
+step by step.
+First, analyze the keywords in the question,
+and then check whether all texts and images
+of the given knowledge base contain
+content related to the keywords in the
+question. Finally summarize and answer
+questions.
+When all knowledge base content is not
+related to the question, your answer should
+include the sentence “The answer you want
+is not found in the knowledge base!”
+Here is the question:
+Question: {question}
+The above is the question.
+Here is the knowledge base:
+{knowledge}
+The above is the knowledge base.
+Figure 4: Prompts used by the model to predict answers.
+Prompt
+You are required to determine if a predicted
+answer is correct or can reasonably answer
+the question compared to the ground
+truth. The question will be placed within
+<question></question> tags, answer type
+will be placed within <type></type>
+tags, predicted answer will be placed
+within <predict></predict> tags, and the
+ground truth answer will be placed within
+<gt></gt> tags.
+You must output the final score as a
+floating-point number (0.0 to 1.0) enclosed
+within ‘<answer>’ tags.
+Output Format: Output only the final
+numerical score inside the tags. Do not
+provide reasoning.
+Example:
+<answer> 1.0 </answer>
+Question: <question> {question} </ques-
+tion>
+Predict Answer: <predict> {predict answer}
+</predict>
+Ground Truth: <gt> {reference answer}
+</gt>
+Figure 5: Prompts used by evaluating the answer in
+MMLongBench-Doc.
+D Additional Case Studies
+In the main text, we demonstrate cases where
+BayesRAG improves retrieval recall for low-
+salience details and disambiguates visually similar
+charts. In this appendix, we provide additional
+qualitative examples highlighting a critical advan-
+tage of our framework: the ability to solve complex,
+multi-hop reasoning tasks where baseline methods
+fail to retrieve the correct evidence entirely.
+A common failure mode in existing multimodal
+RAG systems is the inability to locate evidence
+that is intricately embedded within structured doc-
+uments, such as complex tables, stacked charts, or
+dense infographics. Single-stream retrievers (re-
+14

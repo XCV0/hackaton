@@ -1,0 +1,35 @@
+Figure 2(a) illustrates the spatial variation of the bandgap energy ()zgE obtained through optoelectronic
+optimization for the TFSC with a linearly graded CdTeSe absorber. The corresponding proﬁles of the steady-
+state electron density and hole density—i.e., n(z) and p(z)—are shown in ﬁgure 2(b). Figure 2(c) depicts the
+proﬁles of the EHP generation rate G(z) and the EHP recombination rate R(n, p;z). The generation rate is highest
+near the front surface and slightly decreases toward the center of the CdTeSe layer, while the recombination rate
+drops signiﬁcantly near the back surface. The Jdev–Vext and P–Vext characteristics are plotted in ﬁgure 2(d). From
+this ﬁgure, Jdev = 27.47 mA cm−2 and Vext = 793 mV for best performance.
+3.2.3. Nonlinear bandgap grading
+We went on to maximize η by nonlinearly grading the bandgap energy of the CdTeSe photon-absorbing layer,
+using equation (4). The resulting optimal values of Jsc, Voc, FF, and η are summarized in table 2, along with those
+of the associated parameters g,minE , g,maxE , A, α, K, and ψ.
+An efﬁciency of 21.22% is achieved with the parameters = 1.4g,minE eV, = 1.5g,maxE eV, A = 1.0, α = 1,
+K = 1.5, and ψ = 0.6. This represents a 7.60% improvement over the maximum efﬁciency of 19.72% obtained
+with a homogeneous CdTeSe layer of the same thickness. For this optimal design, the corresponding values of
+Jsc, Voc, and FF are 27.99 mA cm−2, 876 mV, and 86.51%, respectively.
+The maximum efﬁciency achievable with a nonlinearly graded photon-absorbing layer is nearly the same as
+that with a linearly graded photon-absorbing layer. While the short-circuit current density is marginally greater
+for the linearly graded layer compared to the nonlinearly graded layer, the open-circuit voltage is slightly lower
+for the linearly graded layer. We conclude that both linearly and nonlinearly graded CdTeSe photon-absorbing
+layers result in notably higher efﬁciency than a homogeneous CdTeSe photon-absorbing layer.
+Figure 3(a) shows the spatial variation of ()zgE obtained through optoelectronic optimization of the TFSC
+featuring the optimal nonlinearly graded CdTeSe absorber layer. While this proﬁle closely resembles its
+counterpart for optimal linear grading in ﬁgure 2(a), it is not the same. Whereas the proﬁles of n(z) and p(z) are
+illustrated in ﬁgures 3(b), (c) provides the proﬁles of G(z) and R(n, p;z). The generation rate is higher near the
+front face and and slightly lower in the middle of the CdTeSe layer, while the recombination rate declines sharply
+near the rear surface; similar trends are evident for the linear-grading case in ﬁgure 2(c). The Jdev–Vext and P–Vext
+characteristics plotted in ﬁgure 3(d) yield Jdev = 26.85 mA cm−2 and Vext = 790 mV for best performance.
+3.2.4. Piecewise-homogeneous grading
+The continuous variation of ()zgE with z in the CdTeSe layer helps in capturing a wider solar spectrum [42] and
+creating an additional drift ﬁeld for better collection of charge carriers [43]. However, a continuously varying
+Figure 2. (a) Spatial proﬁles of (a) gE , (b) n(z) and p(z), and (c) G(z) and R(n, p;z) in the FTO/ITO/CdS/CdTeSe region of the optimal
+CdTeSe TFSC with a 3000-nm-thick linearly graded-bandgap CdTeSe layer described by equation (2). (d) Plots of Jdev and P versus
+Vext for the same TFSC.
+6
+J. Phys. Commun. 9 (2025) 055008 F Ahmad et al

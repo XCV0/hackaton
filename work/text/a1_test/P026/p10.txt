@@ -1,0 +1,49 @@
+J. Phys. Energy 5 (2023) 025007 W Clarke et al
+near the conduction band minimum, and
+ˆgv(E) = 2gv√π ( 1 kBT ) 3 2 √ Ev − E for E < Ev, (31b)
+near the valence band maximum. Thus the reduced DoS functions ( ˆNc and ˆNv, as defined in (13)) have the
+same form, i.e.
+ˆN(η) =
+{
+0 η < 0
+2√π √η η ⩾ 0. (32)
+The statistical integral corresponding to this reduced DoS function is Sc,v(ξ) = F (ξ), where F follows
+from (16), and is
+F (ξ) =
+ˆ ∞
+0
+2√π √η 1 + exp(η − ξ) dη, (33)
+and is referred to as the Fermi–Dirac integral5.
+Further away from the band extrema, the parabolic approximation becomes increasingly inaccurate.
+States further from the band edge can be modelled by the simplified form of Kane’s model for dispersion in
+III–V semiconductors [57–59], in which (29a) and (29b) are replaced by
+(E − Ec) (1 + αc(E − Ec)) = ℏ2 2m∗c k2 (34a)
+(E − Ev) (1 − αv(E − Ev)) = − ℏ2 2m∗c k2 (34b)
+where αc and αv are two parameters that determine the degree of non-parabolicity. We note that the Kane
+model reduces to the parabolic model in the limit that α goes to zero. Once again, the DoS functions can be
+derived from (30) to obtain
+ˆgc(E) = 2gc√π ( 1 kBT ) 3 2 √ (E − Ec) (1 + αc(E − Ec)) (1 + 2αc(E − Ec)) , (35a)
+ˆgv(E) = 2gv√π ( 1 kBT ) 3 2 √ (Ev − E) (1 + αc(Ev − E)) (1 + 2αc(Ev − E)) . (35b)
+These Kane DoS functions lead to an altered reduced DoS function taking the place of (32):
+ˆN(η) =
+{
+0 η < 0
+2√π √ η(1 + α∗η)(1 + 2α∗η) η ⩾ 0, (36)
+where α∗ = αkBT is the dimensionless non-parabolicity parameter. The statistical integrals for
+non-parabolic bands are therefore Sc(ξ) = K(ξ; α∗ c ) for conduction electrons and Sv(ξ) = K(ξ; α∗ v ) for
+valence holes, where K (which follows from (16)) is
+K(ξ ; α∗) =
+ˆ ∞
+0
+2√π
+√
+η(1 + α∗η)(1 + 2α∗η)
+1 + exp(η − ξ) dη, (37)
+and is referred to here as the Kane–Fermi integral. The non-parabolic DoS function (including the parabolic
+limit α → 0) and the resulting Kane–Fermi integral are plotted in figure 3. We note once again that the Kane
+model reduces to the parabolic model in the limit that α∗ → 0, and that therefore the Kane–Fermi integral
+approaches the FD integral in the same limit,
+lim
+α∗→0 K(ξ ; α∗) = F (ξ). (38)
+5 Specifically, this is the Fermi–Dirac integral of order 1/2 [56]. Note that some definitions omit the prefactor.
+9

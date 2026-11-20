@@ -1,0 +1,18 @@
+<Previous Thought Generation Steps as Context Instruction-Assistant Turns>
+Your reasoning and answer can be further improved. Below is a critique of your previous
+reasoning and answer. You should use this critique to improve your reasoning and answer.
+## Critique: <Critique of Previous CoT>
+Now let’s think step by step while considering the provided critique above:
+Step 1: summarize what is the question is asking, and what are the specific key pieces of
+information that are needed to answer the question.
+Step 2: analyze the provided references, one by one. Identify the relevant information that can be
+used to answer the question. Pay close attention to the entities, names, times, locations, events,
+and keywords that are relevant to the question. If the question is related to (or implies) the
+current user location and/or time, you must consider that in finding the relevant information and
+answering the question.
+Step 3: based on Step 1 and Step 2, you must provide an answer that directly address the question
+and is fully grounded on the provided references.
+Now, provide your reasoning steps in a few sentences followed by the final answer to the
+question as a new line starting with "## Answer:"
+Figure 12: Prompt used for thought regeneration given previous generated thought and evaluation critique.
+794

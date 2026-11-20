@@ -1,0 +1,89 @@
+prompts cause a larger drop (WRR = 0.66), though
+still above FHR. In Appendix E.9, we reduce wa-
+termark capacity and re-test context summarization
+and style control, obtaining higher WRR values of
+0.93 and 0.87, respectively, indicating that KMW
+can trade capacity for robustness when needed.
+4.4 Stealthiness Evaluation
+An adversary may attempt to remove obvious wa-
+termarked texts from the knowledge base.
+Duplicate Content Removal. We set top-K to 20
+for contextual retrieval and use SimHash (Charikar,
+2002) to facilitate deduplication. As shown in Ta-
+ble 4, only a small portion of watermark texts (up
+to 6.23%) are filtered out. This indicates that our
+infused knowledge texts are distinct and not a du-
+plicate of the original content.
+Table 4: Duplicate Content Removal Attack.
+Metrics NFcorpus COVID DROP MARCO
+Filtering (%) 0.37 0.48 6.23 0.54
+Text Perplexity Filtering. Considering that wa-
+termarking may degrade text quality, an adversary
+might filter low-quality retrieved content. Using
+the original documents’ PPL distribution, we set
+µ + 3σ as a filtering threshold. As shown in Ta-
+ble 5, only 0.18% of KMW’s watermarked texts
+were filtered, even fewer than the original, showing
+our high-quality generation. In contrast, 91.06%
+of RAG-WM’s texts were filtered, exposing the
+weakness of its entity-relation combinations.
+Table 5: PPL Filter.
+Metrics ORI WARD RAG-WM KMW
+Filtering Rate (%) 1.24 3.17 91.06 0.18
+Human Identification. We construct multiple-
+choice questions with four texts per item: one wa-
+termarked text and three clean texts. Participants
+are asked to identify the watermarked text among
+the four. The correct identification rate is 21%,
+slightly below random chance (25%), indicating
+that watermark texts are imperceptible to humans.
+4.5 Impact of Parameters
+Impact of WTI and Query Quota. To show that
+WTI improves watermark-text retrieval and to quan-
+tify the effect of query quotas on detection, we
+query the RAG 50, 100, 200, 300, 400, and 500
+Figure 3: Results of Parameters Impact.
+times using either WTI-generated queries or di-
+rectly constructed questions. The results in Fig-
+ure 3(a) show that WRR exceeds 0.9 with 200
+queries. Moreover, WTI consistently increases
+WTRR and yields higher WRR under low query
+quotas, validating its effectiveness.
+Impact of Retriever. We replace the retriever
+BGE-m3 with Contriever, Contriever-ms, and
+ANCE, and evaluate WRR and WTRR. As shown
+in Figure 3(b), WTRR drops lowest with Contriever
+(0.76), but WRR remains stable, indicating KMW’s
+robustness to retriever variations.
+Impact of Similarity Metrics. We assess the im-
+pact of different similarity metrics (CosSim, IP, and
+L2) during retrieval on watermark detection. We
+can observe from Figure 3 (c) that similarity met-
+rics hardly affect the retrieval of watermarked text
+and the extraction of the watermark.
+Combined Impact of Watermark Capacity, In-
+fusion Volume, and Query Quota. To comprehen-
+sively verify the capabilities of KMW, we analyze
+the joint impact of operational parameters: water-
+mark capacity, infusion volume, and query quota.
+We evaluate the WRR across various watermark
+capacities and text infusion volumes under alter-
+ation, summarization, and expansion attacks (as
+illustrated in Figure 4). The results indicate that
+watermark capacity is inversely proportional to
+KMW’s robustness. While KMW resists expan-
+sion attacks across all capacities, its WRR degrades
+under alteration and summarization attacks when
+larger capacities are employed. This occurs be-
+cause embedding more bits reduces the redundancy
+(embedding times) per bit, increasing susceptibility
+to perturbations. Furthermore, we observe that the
+volume of infused texts has a minimal impact on
+overall robustness. A detailed theoretical analysis
+of this phenomenon is provided in Appendix E.10.
+We then investigate the joint impact of water-
+mark capacity and query quota on the WRR, as
+shown in Figure 5. The findings demonstrate that
+both parameters dictate detection performance. In
+the most challenging setting: a 32-bit watermark ca-
+21202

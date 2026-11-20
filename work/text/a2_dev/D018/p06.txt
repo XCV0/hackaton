@@ -1,0 +1,129 @@
+7440
+internal knowledge, we removed documents that
+contradicted real-world facts. The remaining docu-
+ments were evaluated as having natural Japanese
+expression and meeting the requirements of the
+benchmark. We proceeded with the creation of QA
+pairs based on these documents.
+3.3.4. Creation of QA Pairs for the Synthetic
+Documents
+ThecreationofQApairsinthisbenchmarkwasfun-
+damentally performed by annotators. The process
+involved two stages: the creation of QA pairs and
+their filtering. First, we provided annotators with
+thedocumentsfromeachdataset(Wikipedia, News,
+ProductReview, CompanyRules)andinstructedthem
+to create two types of QA pairs: simple ones
+(Extracting) that can be answered merely by ex-
+tracting information from the document, and ad-
+vanced ones that require further reasoning based
+on the extracted information. The advanced QA
+pairs were further subdivided into three reason-
+ing types often required in RAG applications: (1)
+questions requiring logical reasoning to derive an
+answer (Reasoning), (2) questions requiring calcu-
+lation (Computing), and (3) questions requiring the
+integration and organization of information within
+the document (Information Integrating). Includ-
+ingtheextractivetype,thedefinitionsandexamples
+of the four question types established in this study
+are as follows.
+1. Extracting: The correct answer to the ques-
+tion is described almost verbatim within the doc-
+ument, and the model derives the answer by
+extraction. An example is shown in Fig. 8(a)6.
+2. Reasoning: The model derives the answer us-
+ing common sense or relatively simple logical
+reasoning for information not explicitly stated in
+thedocument. An exampleis shown inFig. 8(b):
+it is first necessary to extract the information that
+the “Rice Bag Drone” operates on solar panels,
+and then combine that with the common sense
+“there is no sunlight at night”.
+3. Computing: The model derives the answer by
+processing and calculating numerical values,
+times, etc., from the document. An example
+is shown in Fig. 8(c): it is necessary to extract
+the information that “one drone can carry a max-
+imum of 30kg of rice” and then perform the cal-
+culation “150/30=5”.
+4. Information Integrating: The model derives
+the answer by organizing information from multi-
+ple locations within a document or a document
+6For explanatory purpose, the figures show excerpts
+from the relevant documents needed to derive the cor-
+rect answer. However, it should be noted that in the
+actual evaluation, the correct relevant document is not
+guaranteed to exist within the search results.
+(a)Anexampleofan ExtractingtypeQApair6. Thecorresponding
+relevant document is Fig. 4.
+[Retrieved Document Excerpt] ...クアドラ技研の広報担当者
+は、これまで農家が収穫後に重労働を強いられていた米袋の
+運搬作業が、このドローンによって一気に効率化すると話す。
+「空を飛ぶことで、交通の混雑や道路の起伏による影響を受
+けず、短時間で安全に目的地まで届けることができるのが最
+大の特長です」と自信を見せた。... (... A spokesperson for
+Quadra Giken stated that the drone will dramatically increase the
+efficiency of transporting rice bags, a task that has traditionally
+been strenuous post-harvest labor for farmers. “Its greatest feature
+is that by flying, it can safely reach its destination in a short time,
+unaffected by traffic congestion or uneven roads”, they said with
+confidence. ...)
+[Question] 米袋ドローンには、農家を収穫後に重労働から解放
+できる以外に、何のメリットがある？(Besides freeing farmers
+from heavy labor post-harvest, what other merits does the Rice
+Bag Drone have?)
+[Correct Answer] 空を飛ぶことで、交通の混雑や道路の起伏
+による影響を受けず、短時間で安全に目的地まで届けられるこ
+と(That by flying, it is unaffected by traffic congestion or uneven
+roads and can safely reach its destination in a short time.)
+(b) An example of a Reasoning type QA pair6. The corresponding
+relevant document is Fig. 4.
+[Retrieved Document Excerpt] ...また、太陽光電池を装備して
+おり、日中の稼働時間を無制限に延ばせることから、エコフレ
+ンドリーな製品としても注目されている... (... Itisalsoequipped
+with solar panels, allowing for unlimited operation time during the
+day, which has also drawn attention to it as an eco-friendly product.
+...)
+[Question] 米袋ドローンが、夜に無限に動くことができない理
+由は？(What is the reason the Rice Bag Drone cannot operate
+indefinitely at night?)
+[Correct Answer] 太陽光電池で稼働するため、夜には太陽光が
+なく電池が切れるから(Because it operates on solar panels, there
+is no sunlight at night, and the battery will run out.)
+(c) An example of a Computing type QA pair6. The corresponding
+relevant document is Fig. 4.
+[Retrieved Document Excerpt] ...また、最大で30kgの米を運
+べるほか、風速15メートルの強風にも耐える設計がなされて
+いる... (... Furthermore, it can carry up to 30kg of rice and is
+designed to withstand strong winds of up to 15 meters per second.
+...)
+[Question] 150kgの米を一度で輸送するため、米袋ドローンは何
+台必要？(To transport 150kg of rice at once, how many Rice Bag
+Drones are needed?)
+[Correct Answer] 5台(5 units)
+(d) An example of an Information Integrating type QA pair6. The
+corresponding relevant document is Fig. 3.
+[Retrieved Document Excerpt] ...1993年に月2回刊誌の『ザン
+カイ』として誕生した。2001年に週刊化される際に誌名も『週
+刊ザンカイ』に変更され、... 2009年に編集方針の転換を余儀な
+くされ、『週刊ザンカイ』は一時的に休刊となった... (... It was
+launched in 1993 as the bi-monthly magazine “Zankai”. When it
+became a weekly publication in 2001, its name was changed to
+“Weekly Zankai”, ... In 2009, a change in editorial policy forced
+“Weekly Zankai” into a temporary suspension ...)
+[Question] 『週刊ザンカイ』は休刊までに何回名前を変更され
+た？(How many times was the name of “Weekly Zankai” changed
+before its suspension?)
+[Correct Answer] 1回(Once)
+Figure 8: Examples of each question type.
+collection. This requires not just partial extrac-
+tion, but also summarization and understanding
+the intent. An example is shown in Fig. 8(d): it
+is necessary to aggregate information regarding
+the magazine’s name change history, from its
+launch to suspension.
+In the creation of advanced QA pairs, we did
+not specify which reasoning pattern to use; an-
+notators created questions using one or more of
+the three reasoning patterns. Additionally, for

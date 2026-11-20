@@ -1,0 +1,86 @@
+Photovoltaic effect is obtained in all three cases. However, there are
+clear differences. While all three devices present a similar VOC,FF,
+and JSC areclearlyaffectedbythethicknessoftheETL.Forthecaseof
+no ZnO layer (i.e., 0 nm), the shape of the curve in the ﬁrst quadrant
+is almost a straight line from 0 V to VOC. This suggests that some
+charges (electrons) absorbed in the ultrathin a-Si:H ﬁlm can be col-
+lected as they can reach the interface with the FTO. However, the very
+lowFFcanindicatethepresenceofabarrieratthisinterfacethat
+increases recombination. By introducing the ZnO ﬁlm with thickness
+of 50 nm an overall performance increase is observed. Notably JSC
+and FF are enhanced, showing the need for an ETL that eases elec-
+tron transport from a-Si:H to the electrical contact. However, if ZnO
+thickness is increased to 400 nm the photovoltaic parameters are
+impacted, and a reduction in performance is observed. This is attrib-
+uted to a high resistance due to the intrinsic nature and high thick-
+ness of the fabricated ZnO ﬁlm, causing a drop in JSC and FF, as
+compared with the device with a 50 nm ﬁlm. According to this,
+an optimized device using an Al-doped ZnO (AZO) layer as ETL
+has been produced and is discussed in Section 2.2.
+2.1.2. MoO3 HTL
+Same as for the ETL case, it is worth moving toward HTLs with a
+wide bandgap, higher than 3 eV, in order to increase device trans-
+parency and reduce visual impact. In this work, MoO3 is studied
+as HTL. MoO3 presents a wide bandgap of 3.2 eV and a high
+work function, which makes it a good hole selective contact.
+Similarly, different thicknesses have been explored: 0, 10, and
+20 nm. Absorber thickness and ETL thickness were ﬁxed to
+15 and 50 nm, respectively. From the current–voltage character-
+istics the inﬂuence of the material and its thickness on the pho-
+tovoltaic parameters of the devices is assessed. (Figure 2b)
+The device with no MoO3 presents almost no PV effect what-
+soever, signaling the need of a HTL in order to promote hole
+collection at the front contact. When a 10 nm MoO3 ﬁlm is intro-
+duced in the device structure PV effect is clearly observed, show-
+ing in this case a Voc close to 0.3 V. Fill factor is quite low, 30%,
+indicating high series resistance and low shunt resistance. When
+a 20 nm MoO3 ﬁlm is used the efﬁciency is almost the same, with
+a similar JSC of the device with 10 nm ﬁlm. However, FF and VOC
+are slightly different. For the 20 nm ﬁlms, an anomaly in the con-
+ventional exponential shape of the current–voltage curve is
+observed. This anomaly has been discussed already in literature
+in both organic and inorganic PV materials and is dubbed as
+s-shape, kink, or roll-over.[33–39] The impact on PV parameters
+is basically a reduction in FF due to a dampening of the exponen-
+tial current ﬂow with increasing voltage up to a given value where
+the single exponential character is recovered. These lead to a
+lower maximum power point than for a device without such
+s-shape. It can be observed that FF is reduced but VOC slightly
+increases as compared with the case of a 10 nm MoO3 ﬁlm.
+Overall, the efﬁciency is almost the same.
+The MoO3 ﬁlms are deposited by thermal evaporation at ambi-
+ent temperature and were exposed to air. It has been reported that
+air exposed MoO3 ﬁlms present a reduced WF of 5.4 eV as com-
+pared with ﬁlms unexposed to air, reported at 6.8 eV.[22,40,41] Hole
+transport in MoO3 has been studied in both organic and inorganic
+PV technologies. Even though presenting n-type conductivity the
+material yields efﬁcient hole transport. Concretely, in a-Si:H devi-
+ces, the conduction band of MoO3 is reported to be lower than the
+valence band of a-Si:H leading to band-to-band tunneling trans-
+port. However, if the WF is not low enough, a barrier will form.
+In this case the transport is also mediated by gap-states through
+trap-assisted tunneling. These gap-states have been attributed to
+oxygen vacancies and give rise to its conductivity. The height of
+the barrier formed at the interface a-Si:H/MoO3 will heavily
+depend on the WF of the MoO3. Thus, WF is a critical parameter
+affecting carrier selectivity.[42–45]
+In this work, the loss of selectivity observed for the thicker
+MoO3 HTLs could be attributed to two factors. The ﬁrst one
+is the mentioned barrier due to the reduced WF due to air expo-
+sure. In this case, the hole selectivity relies on efﬁcient tunneling
+via gap-states. The thicker ﬁlm will possess higher resistance and
+recombination at the ﬁlm will occur as charge accumulates, lead-
+ing to the roll-over effect. However, for the 10 nm ﬁlm, the curve
+presents a conventional exponential shape, indicating good hole
+selectivity, suggesting the use of even thinner ﬁlms if these pres-
+ent excellent coverage. Nonetheless, for both ﬁlm thicknesses,
+FF and VOC present quite low values. Given the nanometric
+thickness of the ﬁlms present in the device, it is expected that
+Figure 2. Photovoltaic characterization of fabricated TPV devices. a) J–V measurements under AM1.5G illumination of a device with a 20 nm MoO3 HTL
+and a 15 nm a-Si:H absorber with different ETL thicknesses. b) J–V measurements for a 15 nm a-Si:H absorber and a 50 nm ZnO ETL with different HTL
+thicknesses. c) J–V measurements of devices with varying a-Si:H thicknesses with a ﬁxed 50 nm ZnO ETL. For each a-Si:H thickness, for comparison, there
+are two MoO3 ﬁlms with 10 and 20 nm thicknesses.
+www.advancedsciencenews.com
+ www.solar-rrl.com
+Sol. RRL 2022, 6, 2100909 2100909 (3 of 8) © 2021 The Authors. Solar RRL published by Wiley-VCH GmbH
+ 2367198x, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1002/solr.202100909 by Readcube (Labtiva Inc.), Wiley Online Library on [23/02/2023]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

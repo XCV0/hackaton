@@ -1,0 +1,119 @@
+Relevant = (𝛼 ⋅ 𝑆)
+Irrelevant = (𝛽 ⋅ (1 − 𝑆))
+Uncertainty =
+1 − 𝑅𝑒𝑙𝑒𝑣𝑎𝑛𝑡 − 𝐼𝑟𝑟𝑒𝑙𝑒𝑣𝑎𝑛𝑡
+…
+Online Search (According to the 2015 National Survey of Latinos details, which …?)
+Retrieval Results 
+Score: 𝑆𝑡𝑒𝑥𝑡
+Score: 𝑆𝑖𝑚𝑎𝑔𝑒
+Score: 𝑆𝑠𝑐𝑟𝑒𝑒𝑛𝑠ℎ𝑜𝑡
+Semantic consistency Prior 𝑃 𝐸
+Likelihood 𝑃(𝑄|𝐸) Posterior
+𝑷 𝑬 𝑸 ∝ 𝑷 𝑸 𝑬 ⋅ 𝑷 𝑬
+Rank by 𝑷 𝑬 𝑸
+Top-k results
+Final Answer: Foreign born (excl. PR)Documents
+Parse
+Text VDB
+Image VDB
+Screenshot VDB
+Knowledge Graph
+Text chunksImagesScreenshots
+Offline Index
+Vector Retrieval 
+𝑷(𝑸|𝑬) =
+𝐷𝑒𝑚𝑝𝑠𝑡𝑒𝑟 − Sℎ𝑎𝑓𝑒𝑟(𝑆𝑡, 𝑆𝑖, 𝑆𝑠)
+𝑤1
+𝑤2
+𝑤3
+Weight of the edge 
+in KG
+𝑝𝑟𝑜𝑏𝑖 = 1 − 𝑒−𝑘∗𝑤𝑖
+𝑷 𝑬 = ෍
+𝑖
+𝑛
+𝑝𝑟𝑜𝑏𝑖 /𝑛
+Query
+Retrieval Consensus
+The remaining… a high 
+incidence of Latinos, … 
+….
+Retrieve image:
+Retrieve screenshot:
+Retrieve text:
+The remaining… 
+a high incidence 
+of Latinos, ….
+𝐻𝑖𝑔ℎ 𝑟𝑒𝑡𝑟𝑖𝑒𝑣𝑎𝑙 𝑠𝑐𝑜𝑟𝑒𝑠 
+⋅ 𝑆𝑒𝑚𝑎𝑛𝑡𝑖𝑐 𝑐𝑜𝑛𝑣𝑒𝑟𝑔𝑒𝑛𝑐𝑒 
+→ 𝐸𝑛ℎ𝑎𝑛𝑐𝑒𝑑 𝐶𝑜𝑛𝑓𝑖𝑑𝑒𝑛𝑐𝑒
+Figure 1: The architecture of BayesRAG. We reconceptualize multimodal retrieval as a Bayesian inference process.
+Our method computes the semantic likelihood P (Q|E) and derives the consistency prior P (E) via knowledge
+graph topology. The final evidence tuples are re-ranked based on posterior probability P (E|Q), ensuring semantic
+relevance, mutual corroboration, and logical self-consistency.
+2.2 Problem Formulation
+Let D be a multimodal document corpus. We de-
+fine the sample space Θ as the set of all possible
+multimodal evidence tuples. A single evidence can-
+didate is denoted as E = (t, v, s) ∈ Θ, where t
+represents a textual segment, v represents a visual
+component, and s denotes the structural informa-
+tion from screenshots.
+Let Q denote the observed user query. Our goal
+is to compute the posterior probability P (E|Q),
+which represents the confidence that the tuple E is
+the optimal evidence given the query Q. According
+to Bayes’ Theorem:
+P (E|Q) = P (Q|E) · P (E) P (Q) (1)
+Since P (Q) (the marginal likelihood of the
+query) is constant for all candidates during the rank-
+ing phase, we simplify the objective function to:
+P (E|Q) ∝ P (Q|E)| {z }
+Embedding Likelihood
+· P (E)| {z }
+Consistency Prior
+(2)
+2.3 Bayesian Evidence Modeling
+Modeling Likelihood with Belief Functions. The
+likelihood P (Q|E) estimates the probability that
+the query Q is derived from the evidence E. To
+robustly handle the uncertainty in embedding co-
+sine similarity scores (e.g., distinguishing between
+“irrelevant” and “uncertain”), we incorporate the
+Dempster-Shafer Theory of Evidence.
+For each modality i ∈ {t, v, s}, let Si ∈ [0, 1]
+be the normalized cosine similarity score with the
+query. We construct a mass function mi over the
+frame of discernment Θ = {Y, N} (Relevant, Irrel-
+evant), as shown in Table 1.
+Hypothesis Mass Function Formulation
+Evidence (e) m(Y) = α · Si
+Not Evidence (¯e) m(N) = β · (1 − Si)
+Uncertainty (Ω) m(Ω) = 1 − m(Y) − m(N)
+Table 1: Mass function definitions based on cosine sim-
+ilarity scores. α, β ∈ [0, 1] are hyperparameters repre-
+senting trust in the embedding model.
+We aggregate the mass functions from text, vi-
+sion, and screenshot using Dempster’s Rule of
+Combination (mjoint = mi ⊕ mj ). The likeli-
+hood is then projected from the combined belief
+function:
+P (Q|E) ≈ BetPjoint(Y) (3)
+This formulation ensures that the likelihood is high
+only when multiple modalities provide conflict-free
+evidence supporting the query (see Appendix A.1).
+Modeling the Consistency Prior P (E). The
+prior P (E) represents the probability that the tuple
+E = (t, v, s) constitutes a meaningful, coherent
+unit of information independent of the user’s query.
+This captures the “topological” or “physical” re-
+ality of the document structure. If the text t and
+image v are semantically unrelated or spatially dis-
+tant in the source document, P (E) should be low.
+We model this as:
+P (E) = fconsistency(t, v, s) (4)
+where fconsistency is modeled by the semantic con-
+sistency or spatial distance between the text, image,
+and screenshot.
+3

@@ -1,0 +1,45 @@
+Efficient Federated Search for Retrieval-Augmented Generation 13
+closely matching the all baseline at 66.96%. Overall, RAGRoute maintains
+nearly optimal RAG accuracy while greatly reducing communication volume.
+Time breakdown We further explore the efficiency gains of RAGRoute and
+provide for each dataset a time breakdown when answering a user query. These
+results are shown in Figure 4 (right column) for each of the routing baselines, and
+we measure the time spent in the following five components. Source Selection
+referstothetimespentontheinferencerequestofthe RAGRouterouter,which
+predicts the set of relevant data sources for a given query. Embedding denotes
+the time required to compute the query embeddings using the appropriate em-
+bedding models for all data sources. Doc Selection measures the time elapsed
+from when the coordinator dispatches the query to the selected data sources until
+all retrieval results are received. This includes network communication, client-
+side retrieval, and result transmission. Rerank represents the time consumed by
+thererankertorescoreandreordertheretrievedcandidates,producingtheglobal
+top-k set of documents. Finally, Generate corresponds to the time required by
+the LLM to synthesize the final response given the reranked context documents
+and user query. The Source Selection, Embedding, Doc Selection, and
+Rerank times are zero for the None routing baseline, as no data sources are
+queried in this configuration. For the FeB4RAG benchmark, we report only the
+Source Selection, Embedding, Doc Selection, and Rerank times, since
+no ground-truth answers are available to evaluate the Generate phase.
+We first observe that the end-to-end query latency of RAGRoute varies
+acrossdatasets,reflectingdifferencesincorpusscale.Whenusingthe RAGRoute
+routing strategy, queries complete on average in 14.91 s on MIRAGE and 4.75 s
+on MMLU. These variations are explained by two factors. First, MIRAGE con-
+tains larger and more textually rich corpora, increasing the time needed to fetch
+and process documents. Second, the number of tokens included in the LLM in-
+put prompt is approximately twice as high for MIRAGE compared to MMLU,
+resulting in longer generation times (4.63 s vs. 2.96 s). For FeB4RAG, the query
+answer latency averages around 13.21 s, but this value excludes generation time
+because no verifiable ground-truth answers are available for this dataset.
+An interesting observation is that reranking is a major contributor to overall
+latency. For example, in the All baseline, reranking alone accounts for 6.27 s
+on MMLU (around 62.64% of total latency) and 14.49 s on FeB4RAG (around
+83.90% of the retrieval pipeline, excluding generation), showing that the cross-
+encoder reranker can become a major computational bottleneck in RAG systems
+operating over multiple data sources, as the number of considered sources grows.
+In contrast, RAGRoute effectively mitigates this bottleneck by fetching doc-
+uments from fewer sources, effectively reducing the number of candidate docu-
+ments that must be reranked. With RAGRoute, reranking time decreases by
+80.70% on MMLU (from 6.27 s to 1.21 s) and by 32.51% on FeB4RAG (from
+14.49 s to 9.78 s). Importantly, this reranking cost reduction directly translates
+into faster end-to-end query execution, without compromising retrieval accuracy
+or grounding quality.

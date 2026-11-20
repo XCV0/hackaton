@@ -1,0 +1,123 @@
+A Experimental Details
+A.1 Evaluation Sets and Compared Methods
+This appendix supplements the experimental setup
+in Section 4. Tables A1 and A2 summarize the
+evaluation sets and methods used in the main and
+supplementary experiments.
+Set N Focus
+TEMPLATE 400
+Main set covering ac-
+cess, supersession, con-
+flict, and combined cases.
+FRESH_STRESS 400
+Stale-citation stress
+where supersession is
+specified only by meta-
+data.
+SOURCE_ANCHORED 100 Semi-realistic policy-text robustness set.
+SF_HELDOUT 40
+Small non-Qwen-
+generated check for
+generator-bias concerns.
+RECENCY_TRAP 400
+Tests timestamp recency
+against explicit superses-
+sion.
+PROMPT_INJECTION 200
+Adversarial instructions
+inserted into inadmissible
+evidence.
+Table A1: AeroTrustBench evaluation sets. RE-
+CENCY_TRAP and PROMPT_INJECTION are aux-
+iliary stress sets; SF_HELDOUT denotes SILICON-
+FLOW_HELDOUT.
+Method Description
+Naive RAG Passes all candidate documents to
+the generator.
+Prompt RAG Relies on prompt instructions over
+full documents and metadata.
+Metadata Filter Filters by access and supersession
+without conflict-reporting rules.
+Permission-Aware
+RAG
+Filters candidates according to the
+current user’s permissions.
+Metadata-Aware RAG Applies access and explicit super-
+session filtering.
+LLM_Router_RAG Uses an LLM to select admissible
+evidence before generation.
+PostHoc_Verifier Verifies or revises the response af-
+ter generation.
+Recency_Reranker Selects evidence by timestamp re-
+cency.
+BM25_RAG Uses sparse lexical retrieval be-
+fore generation.
+Dense_RAG Uses dense embedding retrieval
+before generation.
+TrustRAG_Full Uses metadata-governed routing,
+deterministic refusal, and conflict-
+reporting generation.
+Table A2: Methods used in the main and supplementary
+experiments, including mechanism-matched filtering
+baselines.
+A.2 Prompt and Output Specifications
+We provide the prompt templates for TrustRAG,
+Prompt RAG, the LLM-based baselines, and the
+governance-aware judge. Placeholders in angle
+brackets are replaced with the corresponding in-
+stance fields. All generator models use the same
+method-specific templates and a sampling tempera-
+ture of 0.1.
+Input format. Metadata-aware methods receive
+each candidate document as:
+METADATA: {"doc_id": "<DOC ID>",
+"access_level": "<ACCESS LEVEL>",
+"date": "<DATE>", "supersedes":
+"<SUPERSEDED DOC ID>"}
+CONTENT: <DOCUMENT CONTENT>
+The supersedes field is omitted when no explicit
+relation is specified. Routed prompts additionally
+receive the user role, retained document identifiers,
+filtered context, and question.
+Prompt RAG and TrustRAG. Prompt RAG re-
+ceives all retrieved documents without physical
+filtering:
+System: You are a metadata-aware
+aerospace QA assistant. You receive all
+retrieved documents, including
+metadata, but no document has been
+physically filtered. For the stated
+user clearance, do not reveal
+access-denied facts. Treat documents
+named in a supersedes field as inactive.
+If active accessible documents conflict
+and no supersedes edge resolves the
+conflict, report the conflict rather
+than choosing one value.
+User:
+USER CLEARANCE: <USER ROLE>
+RETRIEVED CONTEXT:
+<SERIALIZED CANDIDATE DOCUMENTS>
+QUESTION: <QUESTION>
+Answer according to the metadata
+governance rules.
+After deterministic access and supersession rout-
+ing, TrustRAG uses:
+System: You are an aerospace compliance
+QA assistant. Answer only from the
+FILTERED ACTIVE CONTEXT. Do not use,
+mention, or reconstruct removed
+documents. If multiple active documents
+conflict and no explicit supersedes
+metadata is present, state that the
+active sources conflict and report both
+active values.
+User:
+USER CLEARANCE: <USER ROLE>
+ALLOWED_DOC_IDS: <ALLOWED DOCUMENT IDS>
+FILTERED ACTIVE CONTEXT:
+<FILTERED ACTIVE CONTEXT>
+QUESTION: <QUESTION>
+Return a concise answer grounded only
+in the filtered active context.
+35014

@@ -1,0 +1,93 @@
+Method Bayesian Inference Likelihood Prior Reports Tutorials Academic Guidebooks Brochures Industry Financial Overall
+Embedding-RAG % - - 39.2 27.9 26.4 31.3 32.6 25.3 19.8 32.7
+BayesRAG (Linear Fusion) ! Linear Weighted Graph 45.0 41.3 33.3 39.3 35.0 26.2 35.7 40.6
+BayesRAG (Layout Prior) ! Dempster-Shafer Layout 38.4 33.5 30.5 40.6 36.5 21.2 27.2 36.8
+BayesRAG (Full) ! Dempster-Shafer Graph 46.7 53.6 34.8 46.4 39.4 38.6 48.6 44.1
+Table 5: Ablation study on Bayesian components. Embedding-RAG: Baseline with independent retrieval. BayesRAG
+(Layout Prior): Incorporates spatial consistency constraints (P (E)) based on bounding box proximity (assigning
+1.0 for adjacent elements, 0.1 otherwise). BayesRAG (Linear Fusion): Estimates likelihood (P (Q|E)) via linear
+weighted averaging of normalized scores. BayesRAG (Full): Synergizes Graph-Topology priors with Dempster-
+Shafer theory to robustly handle evidence conflict and uncertainty.
+comes more pronounced as K increases, with Re-
+call@20 surging by 20.0% (56.6% → 76.6%). This
+reveals that standard vector retrieval often buries
+ground-truth evidence in the long tail due to low
+semantic scores caused by modality misalignment
+or OCR noise. BayesRAG leverages consistency
+priors P (E), to “rescue” these relevant but low-
+scoring candidates.
+Attribution Analysis. While BayesRAG demon-
+strates strong retrieval capabilities, achieving a
+Recall@20 of 76.6%, the final generation perfor-
+mance (Score) stands at 44.1%. This discrepancy
+reveals a substantial Retrieval-Generation Gap.
+However, rather than a limitation, we interpret this
+as BayesRAG successfully unlocking the retrieval
+bottleneck that constrains previous systems. The
+high recall indicates that our framework provides a
+rich, high-fidelity context that current compact gen-
+erators (like GPT-4o-mini) may struggle to fully
+digest, but which lays a solid foundation for more
+capable Multimodal LLMs. To investigate the cur-
+rent generation bottleneck, we conduct a manual
+analysis on a sample of 100 failure cases. We find
+that 51% of the errors stem from query ambigu-
+ity inherent in MMLongBench-Doc. Specifically,
+questions often appear in generic forms such as
+“What year is the report for?” In the RAG setting
+that involves retrieving information across multiple
+distinct documents, such queries lack the necessary
+context to disambiguate the target document. This
+observation elucidates the phenomenon reported in
+Table 2 and Table 3, where directly feeding 50 page-
+level screenshots of the specific target document
+into GPT-4o-mini yields superior performance.
+3.3 Ablation Experiments
+To assess the individual contributions of our struc-
+tural priors and evidential fusion mechanism, we
+compare BayesRAG against three variants on
+MMLongBench-Doc: Embedding-RAG, which re-
+lies solely on embedding-based retrieval and a text
+reranker; a variant utilizing only Layout Priors; and
+a variant employing Linear Fusion.
+Bridging the Visual Reranking Gap. To isolate
+the contribution of our Bayesian inference mecha-
+nism, we compare BayesRAG against Embedding-
+RAG. As shown in Table 5, the baseline employs
+a hybrid retrieval strategy: text candidates are re-
+fined using bge-reranker-v2-m3 (retrieving Top-
+1024 and selecting Top-20), while visual candidates
+(images and page screenshots) rely solely on raw
+embedding scores (Top-20) due to the absence of
+mature visual reranking models or the computa-
+tional cost of VLM-as-rerankers. The results reveal
+a significant performance disparity. BayesRAG
+(Full) outperforms the baseline by a substantial
+margin of 11.4% in overall score. The performance
+leap can be attributed to how BayesRAG handles
+visual noise. In the baseline, visual retrieval is
+limited to the Top-20 raw candidates. However,
+embedding models may assign high scores to vi-
+sually similar but semantically irrelevant images.
+BayesRAG addresses this by expanding the initial
+visual pool to Top-512 and utilizing the posterior
+P (E|Q) as a soft reranker. By enforcing consis-
+tency constraints, BayesRAG effectively filters out
+high-scoring visual hallucinations that dominate
+the baseline’s Top-20 list, ensuring that the final
+retrieved context is semantically coherent.
+Comparison of fusion strategy. We further in-
+vestigate the fusion mechanism by comparing our
+Dempster-Shafer-based approach against a stan-
+dard Linear Fusion, which calculates P (Q|E)
+as a weighted average of normalized embedding
+scores. While Linear Fusion improves upon the
+baseline (40.6% score), it still underperforms the
+BayesRAG (Full) (44.1%) by a distinct margin.
+The deficiency of linear weighting lies in its inabil-
+ity to handle modal conflicts. In scenarios where
+text and image retrievers contradict each other, a
+linear sum blindly averages the scores, potentially
+retaining the noise. In contrast, Dempster-Shafer
+formulation explicitly calculates a Conflict Coef-
+6

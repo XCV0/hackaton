@@ -1,0 +1,55 @@
+LLM-Confidence Reranker: A Training-Free Approach for
+Enhancing Retrieval-Augmented Generation Systems
+LLM-Confidence Reranker: A Training-Free Approach for
+Enhancing Retrieval-Augmented Generation Systems
+Zhipeng Songa,∗, Xiangyu Kongb,∗, Xinrui Baoe, Yizhi Zhouc, Jiulong Jiaoa,d, Sitong Liuf,
+Yuhang Zhoug and Heng Qia,∗∗
+aSchool of Computer Science and Technology, Dalian University of Technology, No.2 Linggong Road, Ganjingzi District, Dalian, 116024, China
+bSchool of Information Engineering, Liaodong University, No.116 Linjiang Back Street, Zhenan District, Dandong, 118001, China
+cSchool of Information Engineering, Dalian Ocean University, No. 2-52, Heishijiao Street, Shahekou District, Dalian, 116023, China
+dInformation Technology Center, Qinghai University, 251 Ningda Road, Chengbei District, Xining, 810016, China
+eSchool of Electronic and Information Engineering, Liaoning Technical University, 188 Longwan South Street, Sijiatun
+District, Huludao, 125105, China
+fSchool of Artificial Intelligence, Tianjin Normal University, 393 Binshui West Road, Xiqing District, Tianjin, 300387, China
+gTencent (Dalian Northern Interactive Entertainment Technology Co., Ltd.), 21/F, Tencent Building, No. 26 Jingxian St, Ganjingzi
+District, Dalian, 116085, China
+ARTICLE INFO
+Keywords:
+large language models
+retrieval-augmented generation
+reranking
+model uncertainty
+ABSTRACT
+Large language models (LLMs) have revolutionized natural language processing, yet hallucina-
+tions in knowledge-intensive tasks remain a critical challenge. Retrieval-augmented generation
+(RAG) addresses this by integrating external knowledge, but its efficacy depends on accurate
+document retrieval and ranking. Although existing rerankers demonstrate effectiveness, they
+frequently necessitate specialized training, impose substantial computational expenses, and fail
+tofullyexploitthesemanticcapabilitiesofLLMs,particularlytheirinherentconfidencesignals.
+We propose the LLM-Confidence Reranker (LCR), a training-free, plug-and-play algorithm
+that enhances reranking in RAG systems by leveraging black-box LLM confidence derived
+from Maximum Semantic Cluster Proportion (MSCP). LCR employs a two-stage process:
+confidenceassessmentviamultinomialsamplingandclustering,followedbybinningandmulti-
+level sorting based on query and document confidence thresholds. This approach prioritizes
+relevant documents while preserving original rankings for high-confidence queries, ensuring
+robustness. Evaluated on BEIR and TREC benchmarks with BM25 and Contriever retrievers,
+LCR—using only 7–9B-parameter pre-trained LLMs—consistently improves NDCG@5 by up
+to 20.6% across pre-trained LLM and fine-tuned Transformer rerankers, without degradation.
+Ablation studies validate the hypothesis that LLM confidence positively correlates with docu-
+mentrelevance,elucidatingLCR’smechanism.LCRofferscomputationalefficiency,parallelism
+for scalability, and broad compatibility, mitigating hallucinations in applications like medical
+diagnosis.
+1. Introduction
+In recent years, large language models (LLMs) have achieved remarkable progress in natural language processing
+(NLP). They excel in tasks such as text generation and question answering. Leveraging their advanced capabilities in
+languageunderstandingandgeneration,LLMshavesignificantlyenhancedtaskefficiencyanduserexperienceacrossa
+wide range of applications (DeepSeek-AI et al., 2025). However, a persistent challenge remains: “hallucination”—the
+∗The two authors contribute equally to this work and should be regarded as co-first authors.
+∗∗Corresponding author.
+songzhipeng@mail.dlut.edu.cn ( Zhipeng Song); xiangyukong@liaodongu.edu.cn ( Xiangyu Kong);
+4724200573@stu.lntu.edu.cn ( Xinrui Bao); zhouyizhi@dlou.edu.cn ( Yizhi Zhou); jiaojiulong@mail.dlut.edu.cn ( Jiulong Jiao);
+liusitong@stu.tjnu.edu.cn ( Sitong Liu); ginozhou@tencent.com ( Yuhang Zhou); hengqi@dlut.edu.cn ( Heng Qi)
+ORCID(s): 0009-0009-6249-1988 ( Zhipeng Song); 0000-0003-1940-8674 ( Xiangyu Kong); 0009-0000-7916-2122 ( Xinrui Bao);
+0000-0002-6761-5953 ( Yizhi Zhou); 0009-0001-9852-7999 ( Jiulong Jiao); 0009-0000-4728-7078 ( Sitong Liu);
+0009-0007-3489-0549 ( Yuhang Zhou); 0000-0002-8770-3934 ( Heng Qi)
+Song et al.: Preprint submitted to Elsevier Page 1 of 21arXiv:2602.13571v1  [cs.CL]  14 Feb 2026

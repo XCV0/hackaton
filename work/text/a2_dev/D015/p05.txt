@@ -1,0 +1,101 @@
+llmpdf
+1 Summary Generation
+Am 27. Juli besiegte Lukas Märtens im 
+400-Meter-Freistil Elijah Winnington und 
+gewann die erste Goldmedaille für 
+Deutschland bei den Olympischen 
+Spielen in Paris.
+The United States won its first Olympic 
+gold medal on July 27 in the final 
+swimming event of the day—the 4×100-
+meter freestyle relay.
+llmpdf
+2 Simple Q&A Generation
+1 Q: In which event did Germany win its first gold medal? A: 400-meter freestyle on July 27.
+2 Q:Which swimmer did Lukas Märtens beat to win the gold? A: Elijah Winnington.
+3 Q: When did the U.S. win its first gold medal? A: July 27.
+4 Q: In which event did the U.S. win the gold medal? A: The final swimming event on July 27.
+llmpdf
+3 Cross-document Q&A Generation
+Select Q&A pairs that have connections
+1
+3
+4
+Q: Which country won its first gold medal earlier at the 2024 Olympic Games, the U.S. 
+or Germany?
+A: Germany. Both won their first gold on July 27 in swimming, but the U.S. won its 
+medal in the final race of the day, after Germany.
+LLM
+first gold, July 27,
+swimming, final…
+LLM
+LLM
+Generate cross-document Q&A from the selected simple QA pairs and two summaries
+LLM
+LLM
+LLM
+Summary 1
+Summary 2
+Figure 3: LLM-based workflow for generating English cross-document questions from a pair of related articles: (1)
+generate a summary for each article; (2) create simple English Q&A pairs from each summary that require only
+one-step reasoning; (3) identify connections between the two sets of Q&A pairs, select related ones, and construct a
+new Q&A pair that requires reasoning across multiple pieces of information from the selected pairs and summaries.
+as related English articles for generating cross-
+document questions.
+For the multilingual retrieval setting, we use
+international events from Wiki 2024 and a multi-
+lingual dense retriever to search across different
+languages for articles related to the events. We
+then group articles in different languages about the
+same event to form related article pairs.
+We provide a more detailed explanation of how
+to locate relevant articles in English or across lan-
+guages in Appendices B.2.
+4.2 English cross-document Q&A generation
+We design an LLM-based workflow4 to generate
+natural and coherent English cross-document
+questions from news articles. Figure 3 shows
+an overview of the generation workflow.
+Step 1: Summary Generation. Given a pair of
+related articles either in English or in English and
+another language, we prompt the LLM to create a
+summary for each article that (1) is accurate and
+concise; (2) covers the key points; and (3) has lit-
+tle lexical overlap with the article (the prompt is
+shown in Figure 10). These summaries are then
+used to generate questions in Step 2. There are two
+reasons for this: generating questions directly from
+articles often leads to questions with high overlap
+in wording, making it easy to answer through string
+4We use GPT-4o-2024-08-06.
+matching; and direct question generation from arti-
+cles can focus on trivial details, whereas generating
+questions from summaries tends to produce ques-
+tions about the main points of the articles.
+Step 2: Simple Q&A Generation. Our goal is to
+create cross-document questions that require infor-
+mation from two articles to answer. However, we
+find that generating such questions in one step is
+difficult. LLMs often create questions that simply
+link two separate questions with “and”. Instead,
+we first prompt the LLM to generate simple En-
+glish Q&A pairs from each summary that can be
+answered with one step of reasoning (the prompt
+is shown in Figure 11). For example, from a Ger-
+man report about Germany’s first gold medal at
+the 2024 Olympics, the LLM generates Q&A pairs
+like: (q: In which event did Germany win its first
+gold medal? a: 400-meter freestyle on July 27).
+Step 3: Cross-document Q&A Generation. After
+generating simple Q&A pairs from two summaries,
+we prompt the LLM to: (1) identify connections be-
+tween the two sets of Q&A pairs; (2) select related
+Q&A pairs from the two sets, ensuring that at least
+one pair is chosen from each source; and (3) for-
+mulate new questions that require reasoning across
+multiple pieces of information drawn from the se-
+lected Q&A pairs. Since the selected Q&A pairs
+originate from different source articles, answering
+the newly generated questions necessitates integrat-
+ing information from both sources, thus resulting
+15673

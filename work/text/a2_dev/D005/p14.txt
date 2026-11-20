@@ -1,0 +1,37 @@
+You are a helpful assistant. Always follow the provided instructions and generate outputs in
+valid json format without any extra information. Generate a question and answer pair based on the
+Provided Content below.
+## Requirements:
+- You must ground your question and answer to the Provided Content
+- The question should be selected to resemble what a curious college graduate would ask an
+intelligent conversational system. From the difficulty level of 1 to 10, aim for an 8.
+- The answer should be fully and directly grounded on the Provided Content. Never use any
+information other than what is available in the Provided Content to generate the question and
+answer.
+- Never generate a question that is asking for the current time, date, or location.
+- The question should not be too general or vague. When applicable, include specific entities,
+names, times, locations, events, and keywords in the question.
+- The question and answer must be grammatically correct and be conversationally natural.
+- A good question should be meaningful and provides enough context. For example, questions like
+"when was this updated?" do not provide enough context and are not meaningful, but "when was the
+start date for world war two?" is clear and meaningful.
+- Always return in json format with two keys: "question" and "answer". If the Provided Content is
+not readable, you may set the value corresponding to the question and answer keys to "N/A".
+## Examples:
+Here are some examples of questions types to consider:
+1. How old is Obama?
+2. What was the name of the first president of the United States?
+3. How is the weather in Seattle this weekend?
+4. What is the population of China?
+5. Is there a movie theater nearby?
+6. What time is high tide tonight in Santa Cruz, CA?
+7. Who is leading in the election between Trump and Kamala Harris?
+8. What is the dodgers current score?
+9. When does daylight saving time start?
+10. Any updates on Morgan Freeman’s health?
+11. What are the main ingredients in a margarita?
+12. Why is chocolate bad for dogs?
+## Provided Content:
+<reference content>
+Figure 7: Prompt used for synthetic QA generation given reference content.
+788

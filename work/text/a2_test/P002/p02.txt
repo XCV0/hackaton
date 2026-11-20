@@ -1,0 +1,68 @@
+Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Yuntong et al.
+Figure 1: Illustration of retrieval-augmented research question answering using: (a) sparse retrieval based on lexical matches,
+(b) dense retrieval based on semantic relevance, and (c) contextualized retrieval leveraging graph context, i.e., interactions
+between documents.
+ represents the dense embedding, where deeper colors indicate a higher semantic relevance to the question.
+Boxed text in red highlights the matched terms between questions and documents, while Boxed text in blue highlights the
+matched terms between documents.
+process [45, 47]. Traditional retrieval methods primarily focus on
+lexical and semantic relevance to evaluate the relevance between
+documents and queries, utilizing sparse and dense retrieval sig-
+nals, respectively [25, 48]. For graph-based databases, however,
+these methods fall short, as they fail to account for intricate inter-
+document relationships. For example, simple retrieval methods
+often overlook critical citation links in paper citation networks,
+which are essential for capturing nuanced connections between
+documents.
+Unlike typical QA tasks, which range from layman-level to
+domain-expert-level based on well-curated documents or knowl-
+edge graphs, this paper focuses on more challenging QA at the
+research frontier, which can only be addressed by analyzing the
+body of research papers, a task referred to as research question
+answering. Research question answering necessitates considering
+connections between documents through citation links to ensure
+comprehensiveness [10, 24, 38]. In citation graphs, the relevant
+papers are connected not only semantically but also via citation
+links, encapsulating structured contextual information. Leveraging
+this contextual information is essential for enhancing both retrieval
+accuracy and the quality of generated responses, as illustrated in
+Figure 1. Specifically, as shown in Figure 1(c), each paper requires
+an evaluation of lexical and semantic relevance, as well as its cita-
+tions to other relevant documents. For instance, a paper focused
+on "graph representation learning" is theoretically correlated to
+a query on "node classification," but it cannot be retrieved using
+sparse or dense retrieval alone. When multi-hop citation links are
+considered, however, it becomes highly relevant. Notably, not all
+citation-linked papers are pertinent to the query, requiring an ap-
+proach that integrates lexical and semantic relevance, structural
+patterns, and graph-based context to ensure accurate retrieval.
+To tackle this problem, we propose Contextualized Graph
+Retrieval-Augmented Generation (CG-RAG), a novel framework
+tailored for research question answering. An important considera-
+tion of research question answering is that research paper content
+is highly heterogeneous: for instance, the information in the re-
+lated work, methodology, and experimental sections each serve
+different purposes and answer distinct types of questions. There-
+fore, effective modeling requires breaking down documents into
+semantic chunks—coherent sections representing specific aspects
+of a research paper. To achieve this, we mathematically construct a
+citation graph at the chunk level, where each chunk represents a
+semantically meaningful module of the paper. These chunks form a
+graph structure with intra-paper and inter-paper connections, cap-
+turing both internal coherence and external relationships. To rep-
+resent this, we introduce the Contextual Citation Graph, which
+decomposes citation graphs into chunk-level granularity, enabling
+fine-grained relationship discovery.
+To synergize lexical and semantic retrieval signals inside and
+across networked documents in citation graphs, we propose the
+Lexical-Semantic Graph Retrieval (LeSeGR) method. This ap-
+proach convolves over query-relevant subgraphs, where edges and
+nodes are characterized by lexical and semantic relevance scores.
+Importantly, we theoretically demonstrate that the existing post-
+retrieval paradigm is a special case of our approach. When docu-
+ments are contextually linked, entangling retrieval signals through
+graph structures enhances retrieval performance. Finally, the sub-
+graph embeddings are used as input to LLMs for generating final
+answers. Our experiments conducted on citation graphs from di-
+verse scientific domains demonstrate the superior retrieval and
+generation effectiveness of CG-RAG. Furthermore, our evaluations

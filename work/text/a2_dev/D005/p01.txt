@@ -1,0 +1,94 @@
+Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: Industry Track, pages 775–798
+November 4-9, 2025 ©2025 Association for Computational Linguistics
+PRISMRAG: Boosting RAG Factuality with Distractor Resilience and
+Strategized Reasoning
+Mohammad Kachuee1, Teja Gollapudi1, Minseok Kim1, Yin Huang1, Kai Sun1,
+Xiao Yang1, Jiaqi Wang1, Nirav Shah1, Yue Liu1, Aaron Colak1,
+Anuj Kumar1, Wen-tau Yih2, Xin Luna Dong1
+1Meta Reality Labs, 2Meta FAIR
+Abstract
+Retrieval-augmented generation (RAG) often
+falls short when retrieved context includes con-
+fusing semi-relevant passages, or when answer-
+ing questions require deep contextual under-
+standing and reasoning. We propose an ef-
+ficient fine-tuning framework, called PRISM-
+RAG, that (i) trains the model with distractor-
+aware QA pairs mixing gold evidence with
+subtle distractor passages, and (ii) instills
+reasoning-centric habits that make the LLM
+plan, rationalize, and synthesize without re-
+lying on extensive human engineered instruc-
+tions. Evaluated across 12 open-book RAG QA
+benchmarks spanning diverse application do-
+mains and scenarios, PRISMRAG improves av-
+erage factuality by 5.4%, outperforming state-
+of-the-art solutions.
+1 Introduction
+Factual question answering (QA) is an important
+application for large language models (LLMs).
+However, LLMs lack the necessary knowledge to
+answer questions that require current or external
+information not present in their parametric knowl-
+edge. To address this, retrieval-augmented genera-
+tion (RAG) is commonly employed to incorporate
+grounding context into the prompt (Lewis et al.,
+2020). The grounding context is usually organized
+as reference documents fetched by search, seman-
+tic retrieval, or knowledge tools (Yang et al., 2024;
+Friel et al., 2024; Kachuee et al., 2025). In such set-
+tings, the LLM is instructed to utilize information
+presented in the references in conjunction with its
+parametric knowledge to deliver the most accurate
+responses (Huang et al., 2025).
+Despite its intuitive appeal, RAG still struggles
+to deliver reliable answers. Prior studies show that
+appending large blocks of retrieved content, such
+as entire web pages or lengthy documents, can over-
+whelm the model and induce hallucinations (Fang
+et al., 2024). The deficit becomes acute for nu-
+0 10 20 30 40 50
+Number of References
+0
+10
+20
+30
+40
+50
+60
+70
+80
+%
+Retrieval Recall
+Baseline Factuality
+Baseline Accuracy
+PrismRAG Factuality
+PrismRAG Accuracy
+Figure 1: On the CRAG (Yang et al., 2024) benchmark,
+as we increase retrieval pages from 0 to 50, whereas the
+retrieval recall increases to 80%, answer factuality score
+(computed by accuracy minus hallucination rate) flat-
+tens out after 10 pages for Llama-3.1-70b-instruct.
+PRISMRAG improves over baseline by 4.5%, allowing
+for further QA improvement as we retrieve more pages.
+anced questions that demand synthesizing evidence
+scattered across several sources. As revealed in Fig-
+ure 1, expanding the number of context webpages
+from 5 to 50 boosts retrieval recall by ∼ 25%, yet
+the factuality curve plateaus, underscoring the lim-
+ited benefit of ever-larger context windows.
+In this paper, we propose PRISMRAG, an ap-
+proach that enhances LLM’s capability in generat-
+ing answers from multiple retrieval results. To mit-
+igate the negative impact of semi-relevant content
+retrieved alongside useful passages, we develop
+methods for generating training data targeted at
+building robustness against such distractors. Fur-
+thermore, to address the reasoning challenges inher-
+ent in RAG QA—such as assessing the relevance of
+retrieved passages, resolving inconsistencies, and
+aggregating information—we fine-tune the LLM to
+strategize and deliberate before producing answers.
+Unlike approaches that rely heavily on extensive
+chain-of-thought (CoT) prompt engineering, our
+775

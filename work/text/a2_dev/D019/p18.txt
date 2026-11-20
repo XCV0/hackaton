@@ -1,0 +1,44 @@
+Generate Ground Truth Contexts:
+You are a professional knowledge assistant. Given a question and an answer, analyze the context or evidence knowledge needed
+to answer the question. Output json with context. Use the same language as the actual task.
+The output should be a well-formatted JSON instance that conforms to the JSON schema below.
+As an example, for the schema
+{“properties”: {“foo”: {“title”: “Foo”, “description”: “a list of strings”, “type”: “array”,
+“items”: {“type”: “string”}}}, “required”: [“foo”]}
+the object {“foo”: [“bar”, “baz”]} is a well-formatted instance of the schema.
+The object {“properties”: {“foo”: [“bar", “baz”]}} is not well-formatted.
+Here is the output JSON schema:
+{schema}
+Examples:
+few-shot examples
+Your actual task:
+Question:
+{user query}
+Answer:
+{ground truth}
+Contexts:
+Generate Classification Results:
+You are a professional knowledge assistant. Given a question, retrieved contexts and ground truth statements
+, analyze each sentence in the statements can be attributed to a given context or not. Use only "Yes" (1) or "No" (0)
+as a binary classification. Output json with reason. Use the same language as the actual task.
+The output should be a well-formatted JSON instance that conforms to the JSON schema below.
+As an example, for the schema
+{“properties”: {“foo”: {“title”: “Foo”, “description”: “a list of strings”, “type”: “array”,
+“items”: {“type”: “string”}}}, “required”: [“foo”]}
+the object {“foo”: [“bar”, “baz”]} is a well-formatted instance of the schema.
+The object {“properties”: {“foo”: [“bar", “baz”]}} is not well-formatted.
+Here is the output JSON schema:
+{schema}
+Examples:
+few-shot examples
+Your actual task:
+Question:
+{user query}
+Contexts:
+{retrieved contexts}
+Ground Truth:
+{ground truth}
+Classification:
+Figure 6: Prompts for generating ground-truth contexts and performing entailment classification for retrieval
+contexts.
+1378

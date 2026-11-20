@@ -1,0 +1,98 @@
+original two-document context. Its evaluator addi-
+tionally receives the expected response state, gold
+relevant document identifiers, admissible identi-
+fiers, and dropped candidates. It returns:
+{"unauthorized_answer": 0,
+"stale_citation": 0,
+"unsupported_answer": 0,
+"valid_answer": 1, "predicted_state":
+"Answer", "reasoning": "..."}
+A response is valid when it is the correct ANSWER,
+REFUSAL, or CONFLICTREPORT. A forced single
+answer under an unresolved gold conflict is marked
+unsupported.
+Post-processing. Structured outputs are parsed
+as JSON and checked against the stated schemas.
+Leakage is set to zero when no access-denied evi-
+dence exists, and stale citation is set to zero when
+no explicitly superseded evidence exists. API fail-
+ures and malformed outputs are retried; unresolved
+errors are recorded and rerun before aggregation
+rather than encoded as governance failures.
+B Additional Experimental Results
+This appendix provides additional evidence for the
+experimental findings in Section 5. It includes sta-
+tistical tests, supplementary baselines, per-model
+ablations, boundary stress tests, utility diagnostics,
+and human-audit details.
+B.1 Statistical Tests
+Table B1 provides full statistical details for the
+target failure metrics reported in Section 5. For
+each dataset, model, and failure type, we report
+the Naive RAG failure rate, the TrustRAG failure
+rate, bootstrap confidence intervals, absolute reduc-
+tion in percentage points, and paired McNemar test
+results. The large reductions and small McNemar
+p-values on the main target failures indicate that the
+observed improvements are not driven by a single
+model or by sampling variance.
+B.2 Supplementary Baselines
+Table B2 reports additional governance and re-
+trieval baselines. The governance rows extend the
+source-anchored setting, while the retrieval rows
+report BM25, dense retrieval, and prompt-based
+retrieval pipelines by TEMPLATE slice. The slice-
+level results show that RESTRICTED, FRESHNESS,
+and CONFLICT primarily stress the Leakage, Stale
+Citation, and Unsupported Answer metrics, respec-
+tively.
+B.3 Per-Model Ablations and
+Prompt-Injection Stress
+Table B3 expands the ablation and adversarial
+stress-test results from Section 5.3. The ablation
+rows show the per-model effects of removing ac-
+cess filtering, supersession filtering, or conflict-
+reporting constraints. The prompt-injection rows
+show that adversarial instructions placed inside in-
+admissible evidence can induce leakage or stale
+citation in ungoverned RAG, while methods that
+exclude inadmissible evidence before generation
+effectively mitigate these failures.
+B.4 Boundary Stress Tests
+The upper panel of Table B5 complements the
+metadata-noise analysis in Section 5.5 with detailed
+routing-level results at 30% metadata corruption.
+The lower panel evaluates BM25 top-k retrieval
+over an enlarged distractor corpus. Here, N de-
+notes all instances, whereas Nsup denotes the
+explicit-supersession instances used to compute
+stale-boundary risk; empty-context rate is com-
+puted over all N instances.
+Together, these results characterize TrustRAG’s
+operating conditions: routing is deterministic when
+governance metadata are accurate and the evidence
+required for routing has been retrieved, whereas
+metadata corruption or retrieval misses may alter
+evidence admission.
+Figure B1 further isolates retrieval-miss cases
+for explicit supersession. Stale-boundary risk ap-
+pears when the superseded document is retrieved
+but the superseding document is absent, because
+the retrieved candidate set no longer contains the
+supersession edge needed for routing.
+B.5 Multi-Version and Conflict Stress Tests
+Table B4 evaluates routing behavior under multi-
+hop supersession chains, inaccessible supersed-
+ing documents, unresolved supersession relations,
+and parallel active conflicts. Naive RAG and
+Permission-Aware RAG retain explicitly super-
+seded evidence in all evaluated conditions, whereas
+Metadata-Aware RAG and TrustRAG remove such
+evidence. In the inaccessible-superseder condi-
+tion, Naive RAG additionally retains the access-
+denied superseding document in 100% of instances,
+whereas the three access-filtering methods remove
+it.
+For complete supersession chains, TrustRAG re-
+tains only the latest accessible version and routes
+35017

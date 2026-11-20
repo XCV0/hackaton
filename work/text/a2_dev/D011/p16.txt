@@ -1,0 +1,122 @@
+Thus proportional modulation introduces no ex-
+pected change to token probabilities.
+Moreover, within each subset V1 or V0, propor-
+tional modulation scales all token probabilities by
+the same multiplicative factor:
+pw(t) =
+{
+(1 + (2w − 1)δ)p(t), t ∈ V1,
+(1 − (2w − 1)δ′)p(t), t ∈ V0, (31)
+so the relative ordering and relative ratios among
+tokens inside the same subset are unchanged.
+Hence the local structure of the model distribu-
+tion (which drives fluency and semantic preference)
+is preserved, while only a small, controlled mass
+transfer occurs across subsets to encode the bit.
+Combining (i) zero-mean perturbation across
+bits and (ii) invariance of intra-subset ordering, pro-
+portional modulation does not introduce systematic
+bias and therefore maintains generation quality in
+expectation.
+D Prompt for Watermarking
+D.1 Prompt for Knowledge Completion.
+Prompt for Relationship Predictor
+You are an AI assistant that helps a human analyst
+to perform **Knowledge Completion** by **Link
+Prediction**. Link prediction predicts new rela-
+tionships between existing entities (e.g., (PersonX,
+livesIn, CityY) AND (CityY, locatedIn, CountryZ) →
+(PersonX, citizenOf, CountryZ)) within a knowledge
+graph.
+# Goal
+Strictly following the link prediction rules, predict 2
+to 5 new and highly specific relationships from all the
+given relationships in a given community. Given re-
+lated information, including a community report, a list
+of entities belonging to the community, and their orig-
+inal documents, it is used to improve the rationality
+and accuracy of the predicted relationship. These new
+relationships will be used to expand the integrity of
+the community-related knowledge graph and supple-
+ment new knowledge text to decision-makers. These
+relationships need to be reasonable and unique enough
+(that is, they are genuine and valid, and distinct from
+the existing relationships in the community).
+**IMPORTANT NOTE:** Since the predicted re-
+lationships will be utilized in the generation of
+knowledge-based texts, these relationships must be
+inferred from the given relationships rather than di-
+rectly extracted from the original documents.
+# Auxiliary Information of Input Structure
+The given message contains four parts: community
+context, entities in community, relationships in com-
+munity, and original documents in community.
+**Community Context**:
+- Title: community’s name that represents its key enti-
+ties.
+- Summary: an executive summary of the community’s
+overall structure, how its entities are related to each
+other, and significant information associated with its
+entities.
+- findings: key insights about the community, contain-
+ing summaries and explanations. The explanations
+are supported by entities and relationships of the com-
+munity, and data references are listed by entities’ and
+relationships’ ‘id’.
+**Existing Entities in Community**: A list of entities
+that contains ‘id’, ‘entity’, ‘type’, ‘description’
+**Existing Relationships in Community**: A list of
+relationships that contains ‘id’, ‘source’, ‘target’, ‘re-
+lationshiptype’, ‘description’, ‘weight’.
+**Original Documents in Community**: A set of orig-
+inal documents for the community.
+# Task & Instructions: 1. **Review the Given Infor-
+mation:** Carefully read through the provided input
+with the auxiliary information of input structure. 2.
+**Identify Potential Relationships:** As you review
+the input, look for interactions, connections, or state-
+ments that can infer a relationship between any pair of
+listed entities that is not already captured. 3. **Priori-
+tize Specificity & Novelty:**
+* The ‘relationshiptype’ MUST be as specific as pos-
+sible. Avoid generic terms like "RELATED_TO,"
+"ASSOCIATED_WITH," etc., unless no more specific
+term can be genuinely justified by the text. * **Seman-
+tic Check:** Before proposing a ‘relationship_type’,
+compare it against the “Existing Relationship Types in
+this Community.”
+* If the interaction is accurately and fully described by
+an existing type, **do not propose it as new.** Your
+goal is to find *newly identified or more specific un-
+captured* links.
+* If you propose a new ‘relationshiptype’, it must be
+semantically distinct from the existing ones and add
+clear, new value. It should not be a mere synonym or
+a inverse.
+4. **Formulate Predictions:** For each identified po-
+tential new relationship:
+* Determine the ‘source’ entity and ‘target’ entity from
+the provided list.
+* Define the specific ‘relationshiptype’.
+* Write a concise ‘relationship_description’.
+* Determine the ‘weight’ of the relationship between
+the source entity and target entity.
+* Provide a ‘reasoning_for_type_choice’, especially
+explaining its specificity, how to infer this relationship,
+and why it’s considered new or distinct from existing
+types.
+5. **Limit:** Provide inferences for up to 5 new
+relationships. Focus on the most confident and well-
+supported ones.
+6. **Review the new relationships:** Judge whether
+the new relationships can be directly extracted from
+the original documents. If so, do not include them in
+the output.
+# Output Format
+Output the new relationships with json format that
+contain keys ‘source’, ‘target’, ‘relationshiptype’, ‘de-
+scription’, ‘weight’, ‘reason; and its corresponding
+values.
+# Example Input
+{Few-shot Here}
+21210

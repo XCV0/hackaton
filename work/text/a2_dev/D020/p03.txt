@@ -1,0 +1,40 @@
+Dimension Traditional Chunking Agentic Chunking W-RAC
+LLM Token Cost None High Very Low
+Text Fidelity Medium Low–Medium High
+Hallucination Risk None Present Very Low–None
+Scalability Medium Low High
+Web Suitability Medium Medium High
+Table 1: Comparison of chunking strategies across key dimensions.
+3.2.2 LLM-Based Chunk Planning
+Instead of sending raw text, the LLM receives only identifiers, hierarchy, ordering, and optional metadata (e.g., token
+counts and heading levels). The LLM outputs chunk plans as ordered lists of identifiers:
+{
+"chunks": [
+["heading_1", "heading_2", "text_3", "text_4"],
+["heading_1", "heading_5", "text_6"]
+]
+}
+Here, the LLM acts as a semantic grouping planner rather than a content generator.
+3.2.3 Post-Processing and Indexing
+Chunk plans are resolved locally by mapping IDs back to original text. Final chunks are assembled, embedded, and
+indexed into the retrieval system.
+4 Retrieval Awareness in W-RAC
+W-RAC explicitly incorporates retrieval considerations into chunk planning. Chunk boundaries can be influenced by:
+• Heading depth and section hierarchy
+• Token-length constraints
+• Entity density and semantic cohesion
+• Content type (e.g., tables vs. paragraphs)
+This retrieval-aware design ensures that chunks align more closely with real-world query patterns, thereby improving
+both recall and precision, with detailed comparisons presented in Table 1.
+5 Evaluation Dataset
+5.1 RAG-Multi-Corpus Benchmark
+We evaluate W-RAC using RAG-MULTI-CORPUS, a multi-format, multi-domain benchmark designed to mirror
+real-world enterprise knowledge bases.1 The dataset contains 236 documents spanning five fictional organizations and
+786 curated query–answer pairs with ground-truth citations. Documents span diverse enterprise formats, including PDF,
+Markdown, HTML, DOCX, and PPTX, reflecting the heterogeneity typically encountered in production RAG pipelines.
+5.2 Query Distribution
+To evaluate retrieval robustness across diverse reasoning requirements, queries in RAG-Multi-Corpus are categorized
+into seven types. This distribution ensures balanced coverage of factual recall, reasoning, comparison, and procedural
+understanding.
+1https://github.com/udayallu/RAG-Multi-Corpus
+3
