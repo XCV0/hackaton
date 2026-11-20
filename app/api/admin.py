@@ -421,6 +421,7 @@ def config_new_domain(body: DomainIn, user=adm):
 
 PRESETS = {"deepseek": {"base_url": "https://api.deepseek.com", "model": "deepseek-flash"},
            "lmstudio": {"base_url": "http://127.0.0.1:1234/v1", "model": "local-model"},
+           "ollama": {"base_url": "http://127.0.0.1:11434/v1", "model": "qwen3.5:4b"},
            "orcarouter": {"base_url": "https://api.orcarouter.ai/v1", "model": "deepseek/deepseek-v4-flash-free"},
            "gemini": {"base_url": "https://generativelanguage.googleapis.com/v1beta/openai", "model": "gemini-2.5-flash"},
            "groq": {"base_url": "https://api.groq.com/openai/v1", "model": "openai/gpt-oss-120b"}}
@@ -453,6 +454,7 @@ def settings_get():
         s["key_set"] = bool(s.pop("api_key", ""))
     s.setdefault("require_login", _read_settings().get("require_login", "false"))
     s.pop("api_key", None)
+    s.pop("api_key_provider", None)
     s["presets"] = PRESETS
     return s
 

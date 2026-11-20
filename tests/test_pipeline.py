@@ -59,10 +59,35 @@ def stages(pub):
     return {r["stage"]: r for r in db.q("SELECT * FROM stage_runs WHERE pub_id=?", (pub,))}
 
 
+@pytest.fixture(params=["groq", "ollama"])
+def mock_provider(tmpdb, monkeypatch, request):
+    provider = request.param
+    monkeypatch.setenv("GROQ_API_KEY", "test-groq-key")
+    llm.save_settings({"provider": provider})
+
+    def install(stub):
+        def post(url, *, headers, json, **options):
+            assert url == llm.PRESETS[provider]["base_url"] + "/chat/completions"
+            assert json["model"] == llm.PRESETS[provider]["model"]
+            assert json["response_format"] == {"type": "json_object"}
+            if provider == "groq":
+                assert headers["Authorization"] == "Bearer test-groq-key"
+                assert json["max_completion_tokens"] == llm.MAX_TOKENS
+            else:
+                assert "Authorization" not in headers and options["trust_env"] is False
+            system, user = (m["content"] for m in json["messages"])
+            stage = "extract:results" if user.startswith("Структура статьи уже извлечена") else "extract:structure"
+            return ok_resp(db.jd(stub(system, user, stage=stage)))
+
+        monkeypatch.setattr(llm.httpx, "post", post)
+
+    return install
+
+
 # ------------------------------------------------------------------ полный прогон
-def test_full_run_solar(tmpdb, pdf, monkeypatch):
+def test_full_run_solar(pdf, mock_provider):
     calls = []
-    monkeypatch.setattr(llm, "call_json", solar_stub(calls))
+    mock_provider(solar_stub(calls))
     pid = pipeline.register_pdf("solar", path=pdf, split="dev")
     st = pipeline.run_publication(pid)
     assert st in ("flagged", "verified")
@@ -97,7 +122,7 @@ def test_full_run_solar(tmpdb, pdf, monkeypatch):
     assert all("99.9" not in u for _, u in calls)
     # журнал вызовов
     n = db.q1("SELECT COUNT(*) n FROM llm_calls WHERE pub_id=?", (pid,))["n"]
-    assert n == 0   # заглушка заменила llm.call_json целиком: журнал пишет только реальный клиент
+    assert n == len(calls) > 0
     assert db.q("SELECT 1 FROM issues WHERE pub_id=? AND origin='model'", (pid,))
 
 
@@ -180,7 +205,7 @@ def test_stage_unknown_and_missing_pub(tmpdb):
 
 
 # ------------------------------------------------------------------ та же стадия, другая область (только конфиг)
-def test_rag_domain_same_stages(tmpdb, tmp_path, monkeypatch):
+def test_rag_domain_same_stages(tmp_path, mock_provider):
     pdf = make_pdf(tmp_path / "rag.pdf", [page_text("Our RAG system with top_k = 5 reaches nDCG@10 of 0.61 on NQ."), page_text("More details on the setup."), page_text("Appendix text.")])
 
     def stub(system, user, pub_id=None, stage=None):
@@ -193,7 +218,7 @@ def test_rag_domain_same_stages(tmpdb, tmp_path, monkeypatch):
         assert "metric_k" in user and "metric_name" in user and "Voc" not in user
         return {"results": [{"config_id": "C1", "dataset_id": "DS1", "task_id": "T1", "experiment_id": "E1", "metric_name": "nDCG", "metric_k": 10,
                              "raw_value": "0.61", "raw_unit": "fraction", "origin": "primary", "page": 1, "fragment": "nDCG@10 of 0.61 on NQ"}]}
-    monkeypatch.setattr(llm, "call_json", stub)
+    mock_provider(stub)
     pid = pipeline.register_pdf("rag", path=pdf)
     assert pipeline.run_publication(pid) in ("flagged", "verified")
     r = recs(pid, "results")[0]
@@ -357,6 +382,43 @@ def test_settings_public_hides_key(tmpdb, monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "envkey")
     llm.save_settings({"provider": "deepseek"})
     assert llm.get_settings()["api_key"] == "envkey"
+
+
+def test_groq_key_is_bound_to_provider_when_switching_to_ollama(tmpdb, monkeypatch):
+    # Legacy installation with a key saved before provider binding existed.
+    db.ex("INSERT INTO settings(key,value) VALUES('provider','groq'),('api_key','saved-groq-key')")
+    monkeypatch.setenv("GROQ_API_KEY", "env-groq-key")
+    assert llm.effective_settings()["api_key"] == "saved-groq-key"
+
+    public = llm.save_settings({"provider": "ollama", "workers": 4, "api_key": "ignored"})
+    assert public["workers"] == 1 and public["key_set"] is False
+    assert llm.effective_settings()["api_key"] == ""
+
+    public = llm.save_settings({"provider": "groq", "base_url": "https://other.example/v1"})
+    assert public["base_url"] == "https://api.groq.com/openai/v1"
+    assert public["workers"] == 4 and public["key_set"] is True
+    assert "api_key" not in public and "api_key_provider" not in public
+    assert llm.effective_settings()["api_key"] == "saved-groq-key"
+
+    llm.save_settings({"clear_api_key": True})
+    assert llm.effective_settings()["api_key"] == "env-groq-key"
+
+
+@pytest.mark.parametrize("retry_after", ["5", "3600"])
+def test_groq_retry_after(tmpdb, monkeypatch, retry_after):
+    llm.save_settings({"provider": "groq", "api_key": "key"})
+    rate_limit = httpx.Response(429, headers={"Retry-After": retry_after})
+    replies = [rate_limit, ok_resp('{"ok": true}')]
+    delays = []
+    monkeypatch.setattr(llm.httpx, "post", lambda *args, **kwargs: replies.pop(0))
+    monkeypatch.setattr(llm.time, "sleep", delays.append)
+    if retry_after == "5":
+        assert llm.call_json("JSON", "JSON") == {"ok": True}
+        assert delays == [5] and not replies
+    else:
+        with pytest.raises(llm.LLMError, match="Ollama"):
+            llm.call_json("JSON", "JSON")
+        assert not delays and len(replies) == 1
 
 
 def test_call_json_logs_and_errors(tmpdb, monkeypatch):

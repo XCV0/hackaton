@@ -365,19 +365,38 @@ async function users(box, p, current) {
 async function settings(box, p, current) {
   const s = await get("/settings");
   if (!current()) return;
-  const prov = { deepseek: "https://api.deepseek.com", lmstudio: "http://localhost:1234/v1", orcarouter: "https://api.orcarouter.ai/v1", gemini: "https://generativelanguage.googleapis.com/v1beta/openai", groq: "https://api.groq.com/openai/v1", custom: "" };
+  const presets = s.presets || {};
   box.innerHTML = `<h1>Модель и ключ</h1><p class="lead">Какая модель извлекает данные. Ключ доступа записывается только в одну сторону: после сохранения он не показывается.</p>
   <div class="card"><form id="sf" class="form">
-    <label>Провайдер<select name="provider">${options([["deepseek", "DeepSeek"], ["lmstudio", "LM Studio (локально)"], ["orcarouter", "OrcaRouter (бесплатные модели)"], ["gemini", "Google Gemini (AI Studio)"], ["groq", "Groq"], ["custom", "Другой, совместимый с OpenAI"]], s.provider)}</select></label>
+    <label>Провайдер<select name="provider">${options([["deepseek", "DeepSeek"], ["lmstudio", "LM Studio (локально)"], ["ollama", "Ollama (локально)"], ["orcarouter", "OrcaRouter (бесплатные модели)"], ["gemini", "Google Gemini (AI Studio)"], ["groq", "Groq"], ["custom", "Другой, совместимый с OpenAI"]], s.provider)}</select></label>
     <label>Адрес API<input type="url" name="base_url" value="${esc(s.base_url || "")}" placeholder="https://..."></label>
     <label>Модель<input type="text" name="model" value="${esc(s.model || "")}"></label>
     <label>Воркеров (параллельных статей)<input type="number" min="1" max="32" name="workers" value="${esc(s.workers || 2)}"></label>
-    <label class="wide">Ключ API ${s.key_set ? `<span class="tag ok">ключ задан</span>` : `<span class="tag cited">ключ не задан</span>`}<input type="password" name="api_key" placeholder="${s.key_set ? "оставьте пустым, чтобы не менять" : "вставьте ключ"}" autocomplete="off"></label>
+    <label class="wide">Ключ API <span id="key-status"></span><input type="password" name="api_key" autocomplete="off"></label>
     <div class="wide row"><button class="btn primary" type="submit">Сохранить</button><button class="btn" type="button" id="tst">Проверить подключение</button></div></form><div id="smsg"></div></div>`;
-  const mods = { deepseek: "deepseek-flash", orcarouter: "deepseek/deepseek-v4-flash-free", gemini: "gemini-2.5-flash", groq: "openai/gpt-oss-120b", lmstudio: "" };
-  const sel = $("[name=provider]"); sel.onchange = () => { const u = $("[name=base_url]"), m = $("[name=model]"); if (!u.value || Object.values(prov).includes(u.value)) u.value = prov[sel.value] || ""; if (!m.value || Object.values(mods).includes(m.value)) m.value = mods[sel.value] || ""; };
+  const sel = $("[name=provider]"), url = $("[name=base_url]"), model = $("[name=model]");
+  const workers = $("[name=workers]"), key = $("[name=api_key]"), keyStatus = $("#key-status");
+  function syncProviderFields() {
+    const local = sel.value === "ollama";
+    url.readOnly = local || sel.value === "groq";
+    workers.disabled = local;
+    if (local) workers.value = 1;
+    key.disabled = local;
+    const keySet = sel.value === s.provider && s.key_set;
+    keyStatus.className = keySet ? "tag ok" : "tag cited";
+    keyStatus.textContent = local ? "не требуется" : sel.value === s.provider ? (keySet ? "ключ задан" : "ключ не задан") : "";
+    key.placeholder = local ? "" : keySet ? "оставьте пустым, чтобы не менять" : "ключ выбранного провайдера";
+  }
+  sel.onchange = () => {
+    url.value = presets[sel.value]?.base_url || "";
+    model.value = presets[sel.value]?.model || "";
+    workers.value = s.workers || 2;
+    key.value = "";
+    syncProviderFields();
+  };
+  syncProviderFields();
   $("#sf").onsubmit = async e => {
-    e.preventDefault(); const f = Object.fromEntries(new FormData(e.target)); if (!f.api_key) delete f.api_key; f.workers = +f.workers;
+    e.preventDefault(); const f = Object.fromEntries(new FormData(e.target)); if (!f.api_key) delete f.api_key; if (f.workers) f.workers = +f.workers;
     await run($("button[type=submit]", e.target), async () => { await post("/settings", f); toast("Настройки сохранены", "ok"); settings(box, p, current); });
   };
   $("#tst").onclick = e => run(e.target, async () => {

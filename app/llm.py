@@ -6,15 +6,19 @@ from . import db
 PRESETS = {
     "deepseek": {"base_url": "https://api.deepseek.com", "model": "deepseek-flash", "json_mode": True},
     "lmstudio": {"base_url": "http://127.0.0.1:1234/v1", "model": "local-model", "json_mode": False},
+    "ollama": {"base_url": "http://127.0.0.1:11434/v1", "model": "qwen3.5:4b", "json_mode": True},
     "orcarouter": {"base_url": "https://api.orcarouter.ai/v1", "model": "deepseek/deepseek-v4-flash-free", "json_mode": False},
     "gemini": {"base_url": "https://generativelanguage.googleapis.com/v1beta/openai", "model": "gemini-2.5-flash", "json_mode": False},
-    "groq": {"base_url": "https://api.groq.com/openai/v1", "model": "openai/gpt-oss-120b", "json_mode": False},
+    "groq": {"base_url": "https://api.groq.com/openai/v1", "model": "openai/gpt-oss-120b", "json_mode": True},
     "custom": {"base_url": "", "model": "", "json_mode": False},
 }
 DEFAULTS = {"provider": "deepseek", "workers": 3}
+API_KEY_ENV = {"deepseek": "DEEPSEEK_API_KEY", "groq": "GROQ_API_KEY"}
+FIXED_ENDPOINTS = {"groq", "ollama"}
 RETRIES = 3
 RETRY_SLEEP = 3.0       # секунд * номер попытки; в тестах обнуляется
 TIMEOUT = 600
+GROQ_MAX_RETRY_AFTER = 30
 MAX_TOKENS = 8000
 
 
@@ -47,12 +51,14 @@ def effective_settings():
     provider = s.get("provider") or DEFAULTS["provider"]
     preset = PRESETS.get(provider, PRESETS["custom"])
     s["provider"] = provider
-    s["base_url"] = s.get("base_url") or preset["base_url"]
+    if provider in FIXED_ENDPOINTS or not s.get("base_url"):
+        s["base_url"] = preset["base_url"]
     s["model"] = s.get("model") or preset["model"]
-    s["workers"] = s.get("workers") or DEFAULTS["workers"]
-    if not s.get("api_key") and provider == "deepseek":
-        s["api_key"] = os.environ.get("DEEPSEEK_API_KEY", "")
-    s["api_key"] = s.get("api_key") or ""
+    s["workers"] = 1 if provider == "ollama" else s.get("workers") or DEFAULTS["workers"]
+    key_provider = s.pop("api_key_provider", None) or provider
+    env_name = API_KEY_ENV.get(provider)
+    saved_key = raw.get("api_key", "") if key_provider == provider and provider != "ollama" else ""
+    s["api_key"] = saved_key or (os.environ.get(env_name, "").strip() if env_name else "")
     s["json_mode"] = preset["json_mode"]
     return s
 
@@ -71,30 +77,37 @@ def save_settings(patch):
     При смене provider на пресет без явных base_url/model подставляются значения пресета."""
     patch = dict(patch or {})
     clear = patch.pop("clear_api_key", False)
-    if "api_key" in patch and not patch["api_key"]:
-        patch.pop("api_key")
+    patch.pop("api_key_provider", None)
     prov = patch.get("provider")
-    if prov and prov != "custom":
-        if prov not in PRESETS:
-            raise ValueError("Неизвестный провайдер: %s (допустимы %s)" % (prov, ", ".join(PRESETS)))
-        old = _raw_settings().get("provider")
-        if prov != old:
-            for k in ("base_url", "model"):
-                if not patch.get(k):
-                    patch[k] = PRESETS[prov][k]
+    if prov and prov not in PRESETS:
+        raise ValueError("Неизвестный провайдер: %s (допустимы %s)" % (prov, ", ".join(PRESETS)))
     if "workers" in patch:
         try:
             patch["workers"] = max(1, min(32, int(patch["workers"])))
         except Exception:
             raise ValueError("workers должно быть целым числом")
     with db.tx() as c:
+        c.execute("BEGIN IMMEDIATE")
+        raw = {r["key"]: r["value"] for r in c.execute("SELECT key,value FROM settings")}
+        old_provider = raw.get("provider") or DEFAULTS["provider"]
+        provider = prov or old_provider
+        if prov in PRESETS and prov != "custom" and prov != old_provider:
+            for k in ("base_url", "model"):
+                if not patch.get(k):
+                    patch[k] = PRESETS[prov][k]
+        if not patch.get("api_key") or provider == "ollama":
+            patch.pop("api_key", None)
+        if patch.get("api_key"):
+            patch["api_key_provider"] = provider
+        elif raw.get("api_key") and not raw.get("api_key_provider"):
+            patch["api_key_provider"] = old_provider
         for k, v in patch.items():
             if v is None:
                 continue
             val = v if isinstance(v, str) else json.dumps(v, ensure_ascii=False)
             c.execute("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (k, val))
         if clear:
-            c.execute("DELETE FROM settings WHERE key='api_key'")
+            c.execute("DELETE FROM settings WHERE key IN ('api_key', 'api_key_provider')")
     return get_settings(public=True)
 
 
@@ -168,19 +181,31 @@ def _chat(s, system, user, max_tokens=MAX_TOKENS, json_mode=None):
     base = (s["base_url"] or "").rstrip("/")
     if not base:
         raise LLMError("Не задан адрес API (base_url). Укажите его в настройках модели.")
-    if s["provider"] == "deepseek" and not s["api_key"]:
-        raise LLMError("Не задан API-ключ DeepSeek. Укажите его в разделе «Настройки» или в переменной окружения DEEPSEEK_API_KEY.")
+    provider = s["provider"]
+    if provider in API_KEY_ENV and not s["api_key"]:
+        name = "Groq" if provider == "groq" else "DeepSeek"
+        raise LLMError(f"Не задан API-ключ {name}. Укажите его в разделе «Модель и ключ» или в {API_KEY_ENV[provider]}.")
     headers = {"Content-Type": "application/json"}
     if s["api_key"]:
         headers["Authorization"] = "Bearer " + s["api_key"]
     body = {"model": s["model"], "temperature": 0, "max_tokens": max_tokens,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
+    options = {"timeout": TIMEOUT}
+    if provider == "groq":
+        body["max_completion_tokens"] = body.pop("max_tokens")
+        if s["model"] in ("openai/gpt-oss-120b", "openai/gpt-oss-20b"):
+            body["reasoning_effort"] = "low"
+        options["timeout"] = httpx.Timeout(90, connect=5)
+    elif provider == "ollama":
+        body["reasoning_effort"] = "none"
+        options.update(trust_env=False, timeout=httpx.Timeout(TIMEOUT, connect=3))
     if s["json_mode"] if json_mode is None else json_mode:
         body["response_format"] = {"type": "json_object"}
     t0, last = time.time(), None
     for a in range(RETRIES + 1):
+        delay = RETRY_SLEEP * (a + 1)
         try:
-            r = httpx.post(base + "/chat/completions", headers=headers, json=body, timeout=TIMEOUT)
+            r = httpx.post(base + "/chat/completions", headers=headers, json=body, **options)
         except httpx.HTTPError as e:
             last = "сеть: %s" % (str(e) or type(e).__name__)
         else:
@@ -193,6 +218,13 @@ def _chat(s, system, user, max_tokens=MAX_TOKENS, json_mode=None):
                 raise LLMError("API не нашёл модель или адрес (HTTP 404): проверьте base_url и название модели «%s»." % s["model"])
             if code == 429 or code >= 500:
                 last = "HTTP %d" % code
+                if provider == "groq" and code == 429:
+                    retry_after = r.headers.get("Retry-After", "")
+                    if retry_after.isascii() and retry_after.isdecimal():
+                        seconds = int(retry_after)
+                        if seconds > GROQ_MAX_RETRY_AFTER:
+                            raise LLMError(f"Лимит Groq (HTTP 429). API просит подождать {seconds} с. Можно выбрать Ollama и повторить извлечение статьи.")
+                        delay = max(delay, seconds)
             elif code >= 400:
                 raise LLMError("API вернул ошибку HTTP %d: %s" % (code, r.text[:300]))
             else:
@@ -202,7 +234,7 @@ def _chat(s, system, user, max_tokens=MAX_TOKENS, json_mode=None):
                     raise LLMError("Неожиданный формат ответа API: %s" % r.text[:300])
                 return msg, int((time.time() - t0) * 1000)
         if a < RETRIES:
-            time.sleep(RETRY_SLEEP * (a + 1))
+            time.sleep(delay)
     raise LLMError("Модель не ответила после %d попыток (%s). Лимит запросов или недоступность сервиса — повторите позже." % (RETRIES + 1, last))
 
 
@@ -228,7 +260,15 @@ def test_connection():
     """Проверка настроек: короткий запрос. {'ok':bool,'message':str,'ms':int,'model':str}"""
     s = effective_settings()
     try:
-        resp, ms = _chat(s, "Отвечай только JSON.", 'Верни JSON {"ok": true}', max_tokens=30)
+        demo_provider = s["provider"] in FIXED_ENDPOINTS
+        resp, ms = _chat(s, "Отвечай только JSON.", 'Верни JSON {"ok": true}', max_tokens=512 if demo_provider else 30)
+        if demo_provider:
+            try:
+                probe = json.loads(resp)
+            except (TypeError, ValueError):
+                probe = None
+            if not isinstance(probe, dict) or probe.get("ok") is not True:
+                raise LLMError("Модель ответила, но не вернула ожидаемый JSON. Проверьте модель перед запуском извлечения.")
         return {"ok": True, "message": "Соединение работает", "ms": ms, "model": s["model"], "reply": resp[:100]}
     except LLMError as e:
         return {"ok": False, "message": str(e), "ms": 0, "model": s["model"]}
