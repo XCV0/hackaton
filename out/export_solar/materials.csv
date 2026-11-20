@@ -1,0 +1,55 @@
+﻿publication_id,material_id,material_name_raw,formula_normalized,material_class,dimensionality,additives,bandgap_value,bandgap_unit,bandgap_method,note
+D001,M-P,CsPbI2Br (pristine),Cs-Pb-I2Br,perovskite,,,1.9,eV,cited,"«a bandgap of ∼1.9 eV» — общее сведение о CsPbI2Br во введении (стр. 1), для образцов не измерялось; край поглощения ∼650 nm (UV-Vis)"
+D001,M-S001,CsPbI2Br + 0.001 M SrCl2,Cs-Pb-I2Br,perovskite,,0.001 M SrCl2,,,,
+D001,M-S005,CsPbI2Br + 0.005 M SrCl2,Cs-Pb-I2Br,perovskite,,0.005 M SrCl2,,,,
+D001,M-S01,CsPbI2Br + 0.01 M SrCl2,Cs-Pb-I2Br,perovskite,,0.01 M SrCl2,,,,
+D001,M-S05,CsPbI2Br + 0.05 M SrCl2,Cs-Pb-I2Br,perovskite,,0.05 M SrCl2,,,,
+D001,M-N01,CsPbI2Br + 0.01 M NiCl2,Cs-Pb-I2Br,perovskite,,0.01 M NiCl2,,,,
+D002,M1,CH3NH3PbI3,CH3NH3PbI3 (MAPbI3),perovskite,,,,,,PbI2 + CH3NH3I sequential deposition
+D003,M1,"perovskite (FAI, MAI, CsI, PbI2, PbCl2, MABr precursor)","(FA,MA,Cs)Pb(I,Br)3",perovskite,3D,PbCl2; MACl (по тексту),,,,"Состав дан только через массы прекурсоров (484 mg PbI2, 146.2 mg FAI, 23.85 mg MAI, 12 mg CsI, 11 mg PbCl2, 4.5 mg MABr); ширина зоны перовскита в тексте не указана (Figure S8). Один и тот же поглотитель в обоих приборах."
+D004,M1,CsFAMAPbI3−xBrx,Cs-FA-MA-Pb-I-Br (CsFAMAPbI3-xBrx),perovskite,,,,,,"Состав прекурсора: CsI 0.087 M, FAI 1.47 M, MABr 0.23 M, PbI2 1.47 M, PbBr2 0.23 M; ширина зоны перовскита в статье не приведена; MoS2 (1.8 eV) — материал ETL, не поглотитель"
+D005,M1,"Perovskite (FAPbI3-based mixed cation/halide: FAI, MAI, CsI, PbI2, PbBr2, MACl precursors)","(FA,MA,Cs)Pb(I,Br)3",perovskite,3D,MACl; PEAI surface treatment,,,,"Точный стехиометрический состав в статье не указан, только концентрации прекурсоров (1.73 M PbI2, 1.47 M FAI, 0.173 M MAI, 0.0519 M PbBr2, 0.0865 M CsI, 0.268 M MACl). Ширина запрещённой зоны поглотителя не названа (Eg opt в Table 1 относится к HTM)."
+D007,M1,perovskite,,perovskite,,,,,,Состав перовскита в основном тексте не указан (см. Supporting Information)
+D008,M1,Cs0.15FA0.85PbI2.85Br0.15 w/ PbCl2,Cs0.15FA0.85PbI2.85Br0.15,perovskite,3D,"1.8% molar ratio of PbCl2 to PbI2 (trace PbCl2, deposited between PbI2 and FAI layers)",,,,Cs0.15FA0.85 Pb(I0.95Br0.05)3; sequential multi-cycle thermal evaporation; Eg в статье числом не указан
+D008,M2,Cs0.15FA0.85PbI2.85Br0.15 w/o PbCl2,Cs0.15FA0.85PbI2.85Br0.15,perovskite,3D,,,,,Cs0.15FA0.85 Pb(I0.95Br0.05)3; sequential multi-cycle thermal evaporation; Eg в статье числом не указан
+D009,M1,"Cs0 (control, no Cs+) 2D/3D tin halide perovskite",(PEA0.15FA0.85)SnI2.85Br0.15,perovskite,2D-3D,SnF2 8 mol%; NH4SCN 5 mol%; Sn powder,1.435,eV,,Состав Csx: (CsI)x/100(PEA0.15FA0.85SnI2.85Br0.15)1-x/100; Cs0 x=0. Метод определения Eg в тексте не назван (Supplementary Fig. 17).
+D009,M2,Cs5 (5 mol% Cs+) 2D/3D tin halide perovskite,(CsI)0.05(PEA0.15FA0.85SnI2.85Br0.15)0.95,perovskite,2D-3D,SnF2 8 mol%; NH4SCN 5 mol%; Sn powder,1.415,eV,,Cs 5 mol% (оптимальное). Метод определения Eg в тексте не назван (Supplementary Fig. 17).
+D010,M1,"Cu2ZnSn(S,Se)4 (CZTSSe, undoped)","Cu2ZnSn(S,Se)4",kesterite,,,,,,Контрольный недопированный поглотитель; ширина зоны для него не приведена
+D010,M2,"(Na0.1Cu0.9)2ZnSn(S,Se)4 selenized at 540 C (T540)","(Na0.1Cu0.9)2ZnSn(S,Se)4",kesterite,,Na (NaCl in precursor),1.02,eV,Tauc,Se/(S+Se)=91.49 % (Table 1)
+D010,M3,"(Na0.1Cu0.9)2ZnSn(S,Se)4 selenized at 520 C (T520)","(Na0.1Cu0.9)2ZnSn(S,Se)4",kesterite,,Na (NaCl in precursor),1.03,eV,Tauc,Только плёнка; прибор не изготавливался. Se/(S+Se)=83.69 %
+D010,M4,"(Na0.1Cu0.9)2ZnSn(S,Se)4 selenized at 560 C (T560)","(Na0.1Cu0.9)2ZnSn(S,Se)4",kesterite,,Na (NaCl in precursor),1.0,eV,Tauc,Только плёнка; прибор не изготавливался. Se/(S+Se)=97.74 %
+D012,M5,CZTS (DIO 5 mg/mL),Cu2ZnSnS4,kesterite,,DIO 5 mg/mL,1.62,eV,Tauc,Прямая запрещённая зона из графика Tauc (p10)
+D012,M10,CZTS (DIO 10 mg/mL),Cu2ZnSnS4,kesterite,,DIO 10 mg/mL,1.61,eV,Tauc,Прямая запрещённая зона из графика Tauc (p10)
+D012,M15,CZTS (DIO 15 mg/mL),Cu2ZnSnS4,kesterite,,DIO 15 mg/mL,1.55,eV,Tauc,Прямая запрещённая зона из графика Tauc (p10)
+D012,M20,CZTS (DIO 20 mg/mL),Cu2ZnSnS4,kesterite,,DIO 20 mg/mL,1.51,eV,Tauc,Прямая запрещённая зона из графика Tauc (p10)
+D013,M-0Ge,ACZTGSSe 0Ge (Ge/(Ge+Sn) target 0),"(Ag,Cu)2Zn(Sn,Ge)(S,Se)4; Ge/(Ge+Sn)=0; Ag/(Ag+Cu)=0.15",kesterite,,,1.15,eV,PL,"Eg,PL (Table 3); Eg,EQE = 1.14 eV; Urbach energy EU = 22.8 meV; Se-rich, S/(S+Se) below 5 %"
+D013,M-40Ge,ACZTGSSe 40Ge (Ge/(Ge+Sn) target 0.4),"(Ag,Cu)2Zn(Sn,Ge)(S,Se)4; Ge/(Ge+Sn)=0.4; Ag/(Ag+Cu)=0.15",kesterite,,,1.21,eV,PL,"Eg,PL (Table 3); Eg,EQE = 1.19 eV; Urbach energy EU = 22.3 meV; Se-rich, S/(S+Se) below 5 %"
+D013,M-60Ge,ACZTGSSe 60Ge (Ge/(Ge+Sn) target 0.6),"(Ag,Cu)2Zn(Sn,Ge)(S,Se)4; Ge/(Ge+Sn)=0.6; Ag/(Ag+Cu)=0.15",kesterite,,"HCl (50-100 uL, 37 %) in precursor solution",1.26,eV,PL,"Eg,PL (Table 3); Eg,EQE = 1.24 eV; Urbach energy EU = 23.6 meV; Se-rich, S/(S+Se) below 5 %"
+D013,M-80Ge,ACZTGSSe 80Ge (Ge/(Ge+Sn) target 0.8),"(Ag,Cu)2Zn(Sn,Ge)(S,Se)4; Ge/(Ge+Sn)=0.8; Ag/(Ag+Cu)=0.15",kesterite,,"HCl (50-100 uL, 37 %) in precursor solution",1.43,eV,PL,"Eg,PL (Table 3); Eg,EQE = 1.4 eV; Urbach energy EU = 20.3 meV; Se-rich, S/(S+Se) below 5 %"
+D013,M-100Ge,ACZTGSSe 100Ge (Ge/(Ge+Sn) target 1),"(Ag,Cu)2Zn(Sn,Ge)(S,Se)4; Ge/(Ge+Sn)=1; Ag/(Ag+Cu)=0.15",kesterite,,"HCl (50-100 uL, 37 %) in precursor solution",1.48,eV,PL,"Eg,PL (Table 3); Eg,EQE = 1.49 eV; Urbach energy EU = 22.7 meV; Se-rich, S/(S+Se) below 5 %"
+D014,M1,pyridine-capped CdTe NCs,CdTe,CdTe,,,,,,"CdTe nanocrystal ink, sintered; Eg в статье не указана"
+D014,M2,"pyr-CdCl3-capped CdTe NCs (properly washed, 0 wt% extra pyr-CdCl3)",CdTe,CdTe,,pyr-CdCl3 0 wt%,,,,Eg в статье не указана
+D014,M3,pyr-CdCl3-capped CdTe NCs with 2 wt% extra pyr-CdCl3,CdTe,CdTe,,pyr-CdCl3 2 wt%,,,,Eg в статье не указана
+D015,M1,CdTe,CdTe,CdTe,,,,,,"CdTe/CdS stack by vapor transport deposition (Willard and Kelsey Solar Group), CdCl2 activation; absorber thickness ~3.5 um (p3)"
+D017,MR1,"CIGS, sample R1 (ΔGGI 0.20)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.144,eV,EQE,"GGI 0.31, CGI 0.86, ΔGGI 0.20; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MR2,"CIGS, sample R2 (ΔGGI 0.20)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.142,eV,EQE,"GGI 0.32, CGI 0.87, ΔGGI 0.20; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MG1,"CIGS, sample G1 (ΔGGI 0.21)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.138,eV,EQE,"GGI 0.33, CGI 0.88, ΔGGI 0.21; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MG2,"CIGS, sample G2 (ΔGGI 0.23)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.140,eV,EQE,"GGI 0.34, CGI 0.90, ΔGGI 0.23; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MI1,"CIGS, sample I1 (ΔGGI 0.26)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.147,eV,EQE,"GGI 0.34, CGI 0.88, ΔGGI 0.26; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MI2,"CIGS, sample I2 (ΔGGI 0.25)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.137,eV,EQE,"GGI 0.32, CGI 0.91, ΔGGI 0.25; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MI3,"CIGS, sample I3 (ΔGGI 0.32)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.123,eV,EQE,"GGI 0.31, CGI 0.88, ΔGGI 0.32; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MI4,"CIGS, sample I4 (ΔGGI 0.29)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.121,eV,EQE,"GGI 0.28, CGI 0.88, ΔGGI 0.29; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MO1,"CIGS, sample O1 (ΔGGI 0.41)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.132,eV,EQE,"GGI 0.34, CGI 0.89, ΔGGI 0.41; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MO2,"CIGS, sample O2 (ΔGGI 0.43)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.150,eV,EQE,"GGI 0.35, CGI 0.90, ΔGGI 0.43; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D017,MO3,"CIGS, sample O3 (ΔGGI 0.50)","Cu(In,Ga)Se2",CIGS,,NaF and RbF post-deposition treatment,1.135,eV,EQE,"GGI 0.34, CGI 0.87, ΔGGI 0.50; Eg из EQE лучшего прибора (линейная экстраполяция (E×EQE)^2 vs E между 25 и 75 % максимума EQE)"
+D018,M1,"Cu(In,Ga)Se2 (CIGS), pulsed hybrid reactive magnetron sputtering","Cu(In,Ga)Se2",CIGS,,,,,,Поглотитель собственных приборов (PHRMS); ширина запрещённой зоны в статье не приведена
+D018,M2,CIGS absorber from NICE Solar Energy GmbH (industrial),"Cu(In,Ga)Se2",CIGS,,,,,,Промышленный поглотитель; детали не приведены
+D019,M1,Sb2Se3,Sb2Se3,Sb2Se3,,,,,,"со-испарение Sb2Se3 и Se; морфология зависит от подложки и условий (нанород-массив на MoSe2/Mo, планарная плёнка на Mo при 200 Å/s)"
+D020,M1,Sb2S3,Sb2S3,other,,,1.72,eV,Tauc,"Tauc plot, Figure 3f"
+D020,M2,"Sb2(S, Se)3","Sb2(S,Se)3",Sb2Se3,,,1.58,eV,Tauc,Se/(S+Se) 23.70% (EDS); Eg «about 1.58 eV»; class Sb2Se3 = ближайший
+D020,M3,"Sb2S3/Sb2(S, Se)3","Sb2S3/Sb2(S,Se)3",Sb2Se3,,,1.62,eV,Tauc,"двухслойный градиентный плёнка, Se/(S+Se) 20.81% (EDS); Eg «about 1.62 eV»; class Sb2Se3 = ближайший"
+D021,M1,undoped Sb2Se3 (RFMS-grown),Sb2Se3,Sb2Se3,,,1.2,eV,cited,Ширина зоны ~1.2 эВ приведена во введении как оптимальная для Sb2Se3 (литературное значение); для собственных плёнок не измерялась.
+D021,M2,5%Cu:Sb2Se3 (PED-grown),Sb2Se3,Sb2Se3,,"Cu, 5 at.% (в мишени и плёнке)",1.2,eV,cited,Ширина зоны ~1.2 эВ приведена во введении как оптимальная для Sb2Se3 (литературное значение); для собственных плёнок не измерялась.
+D021,M3,"bilayer Sb2Se3 (RFMS) / Cu:Sb2Se3 (PED), PED on top (A-series)",Sb2Se3,Sb2Se3,,"Cu, 5 at.% (PED-слой)",1.2,eV,cited,Ширина зоны ~1.2 эВ приведена во введении как оптимальная для Sb2Se3 (литературное значение); для собственных плёнок не измерялась.
+D021,M4,"bilayer Cu:Sb2Se3 (PED) / Sb2Se3 (RFMS), RFMS on top (B-series)",Sb2Se3,Sb2Se3,,"Cu, 5 at.% (PED-слой)",1.2,eV,cited,Ширина зоны ~1.2 эВ приведена во введении как оптимальная для Sb2Se3 (литературное значение); для собственных плёнок не измерялась.
+D022,M1,intrinsic hydrogenated amorphous silicon (a-Si:H),a-Si:H,thin-film Si,,,1.8,eV,cited,"Прямая запрещённая зона a-Si:H 1.8 эВ в объёме (литературное значение), до 2.1 эВ из-за квантового ограничения в тонких плёнках; для приборов не измерялась"

@@ -96,3 +96,10 @@ def test_normalize_text_modes():
                                          ("text", "whatever", True)])
 def test_number_in_quote(val, frag, ok):
     assert number_in_quote(val, frag) is ok
+
+
+def test_multiline_table_quote_lines_must_all_exist():
+    from app import verify as v
+    page = "Intro text.\n[TABLE]\nMetric | BM25 baseline | Hybrid + rerank\nRecall@5 | 0.70 | 0.81\nnDCG@10 | 0.55 | 0.64\n[/TABLE]\nEnd."
+    assert v.verify_quote([page], 1, "Metric | BM25 baseline | Hybrid + rerank\nnDCG@10 | 0.55 | 0.64") == (True, 1)
+    assert v.verify_quote([page], 1, "Metric | BM25 baseline | Hybrid + rerank\nnDCG@10 | 0.99 | 0.64")[0] is False

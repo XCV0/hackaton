@@ -1,0 +1,65 @@
+﻿publication_id,measurement_id,device_id,measurement_type,spectrum,light_intensity,intensity_unit,scan_direction,scan_rate,mask_used,certified,certification_lab,temperature,stability_protocol,stress_conditions,note
+D001,MS1,DV-P;DV-S001;DV-S005;DV-S01;DV-S05;DV-N01,J-V,AM1.5G,100,mW/cm2,reverse,0.15 V/s,true,,,,,,"Keithley 2400; Solar IV-150A (Zolix), калибровка по Si-эталону Newport KG5; сканирование FB→SC"
+D001,MS2,DV-S01,J-V,AM1.5G,100,mW/cm2,forward,0.15 V/s,true,,,,,,"SC→FB, champion-прибор (Table 2)"
+D001,MS3,DV-S01;DV-P,MPP tracking,AM1.5G,100,mW/cm2,,,true,,,,,,Figure 5D и Supplementary Figure S2; принадлежность 12.93 % pristine-прибору выведена из порядка изложения
+D001,MS4,DV-S01;DV-P,EQE,,,,,,,,,,,,"интегрирование EQE, Supplementary Figure S3; система SCS10-X150-HBSD"
+D002,MS1,DV-NiO;DV-NiOGO,J-V,,1000,W/m2,,,,false,,,,,halogen lamp solar simulator; AM1.5G not stated; data logger MS8250C; scan direction not stated; text: data statistics from 100 different cells
+D003,MS1,DV1;DV2,J-V,AM1.5G,100,mW/cm2,reverse,100 mV/s,,false,,ambient,,,"Направление явно не названо; диапазон развёртки 1.2 to -0.2 V (шаг 10 mV, stay time 100 ms). Прямой ход — Figure S14 (HI)."
+D003,MS2,DV1;DV2,EQE,,,,,,,,,,,,"Figure 5D, интегральная плотность тока"
+D003,MS3,DV2,MPP tracking,,,,,,,,,,,,"Figure 5E; в тексте не уточнено, для какого прибора дано 23.0% (Figure 5E показывает оба)"
+D003,MS4,DV1;DV2,stability,,,,,,,,,,other,"storage in dry air, RH = 10%","Figure 5F, хранение; 1000 h"
+D004,MS1,DV1;DV2;DV3;DV4,J-V,,,,,,,,,,,,"Спектр, интенсивность, направление развёртки, маска в статье не указаны; относительная влажность 70 ± 10% (open-air)"
+D005,MS1,DV1;DV2,J-V,AM1.5G,100,mW/cm2,reverse,,,false,,,,,"Table 2 Reverse; Keithley 2400, калиброванный Si-эталон"
+D005,MS2,DV1;DV2,J-V,AM1.5G,100,mW/cm2,forward,,,false,,,,,Table 2 Forward
+D005,MS3,DV1;DV2,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,Статистика PCE(AVG) по 20 приборам; направление развёртки не указано
+D005,MS4,DV1;DV2,EQE,,,,,,,false,,,,,"Fig. 3C, интегральный ток"
+D005,MS5,DV1;DV2,MPP tracking,AM1.5G,100,mW/cm2,,,,false,,,,,"Fig. 3E, 200 s"
+D005,MS6,DV1;DV2,stability,,100,mW/cm2,,,,false,,,other,"continuous 1 sun illumination at MPP tracking, unencapsulated, 500 h",Fig. 5A; протокол ISOS в статье не назван
+D005,MS7,DV1;DV2,stability,,,,,,,false,,85 °C,other,"thermal aging at 85 °C in N2 glove box, unencapsulated, 1000 h",Fig. 5B; протокол ISOS в статье не назван
+D007,MS1,DV1,J-V,,,,,,,,,,,,"Fig. 8a, typical J-V; направление развёртки не указано (almost no hysteresis, Figure S2); условия освещения не указаны"
+D007,MS2,DV2,J-V,,,,,,,,,,,,"Fig. 8a, reference"
+D007,MS3,DV3,J-V,,,,,,,,,,,,Fig. 8b
+D007,MS4,DV4,J-V,,,,,,,,,,,,Fig. 8b
+D007,MS5,DV1,stability,,,,,,,,,RT,other,"continuous operation, tested every 12 h, 15%-20% RH, RT",Fig. 8d
+D007,MS6,DV2,stability,,,,,,,,,RT,other,"continuous operation, tested every 12 h, 15%-20% RH, RT",Fig. 8d
+D008,MS1,DV1,J-V,,1,sun,,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; направление для значений w/o PbCl2 не указано"
+D008,MS2,DV2,J-V,,1,sun,forward,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; рекордный элемент, 18.5% в прямом ходе"
+D008,MS3,DV3,J-V,,1,sun,,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; направление для 17.06% не указано"
+D008,MS4,DV2,J-V,,1,sun,,,,,,,,,"Keithley 2604, OAI TriSol Class AAA, 1 sun, скорректировано по показанию 1.2–1.28 sun; шаг 20 мВ, скорость развёртки не указана; развёртки 1.2→−0.2 В и −0.2→1.2 В; статистика 20 элементов, направление не указано"
+D008,MS5,DV1,stability,,,,,,,,,,other,"хранение в N2-заполненном боксе (glovebox), около 30 суток","нормированный PCE, хранение 30 суток в N2-перчаточном боксе между измерениями"
+D008,MS6,DV2,stability,,,,,,,,,,other,"хранение в N2-заполненном боксе (glovebox), около 30 суток","нормированный PCE, хранение 30 суток в N2-перчаточном боксе между измерениями"
+D009,MS1,DV1;DV2,J-V,AM1.5G,100,mW/cm2,,"step 0.01 V, delay 50 ms",true,false,,room temperature,,,"Лабораторное J-V (Fig. 3b); измерены прямой и обратный ход (reverse 1.0 to -0.1 V; forward -0.1 to 1.0 V), направление для champion-значений в таблицах не указано; в N2 перчаточном боксе"
+D009,MS2,DV1;DV2,MPP tracking,AM1.5G,100,mW/cm2,,,true,false,,,,,"Стабилизированная PCE при max power tracking: Cs0 при 0.73 V, Cs5 при 0.85 V (Fig. 3b inset, 300 s)"
+D009,MS3,DV1;DV2,EQE,,,,,,true,false,,,,,Интегрированный Jsc из EQE (Fig. 3c)
+D009,MS4,DV2,J-V,AM1.5G,100,mW/cm2,,,true,true,"Shanghai Institute of Microsystem and Information Technology (SIMIT), Chinese Academy of Sciences",,,,"Сертифицированное J-V (Supplementary Figs. 14, 15)"
+D009,MS5,DV1;DV2,stability,,,,,,,false,,35 ± 5 °C,other,"shelf stability: dark storage in N2, unencapsulated, 6,000 h, 35 ± 5 °C",Fig. 3f; протокол ISOS в статье не назван
+D009,MS6,DV1;DV2,stability,white LED,100,mW/cm2,,,,false,,60 ± 5 °C,other,"continuous one-sun LED illumination, open-circuit, N2, unencapsulated, 60 ± 5 °C, 1,500 h",Fig. 3g; протокол ISOS в статье не назван
+D010,MS1,DV1;DV2,J-V,AM1.5G,100,mW/cm2,,,,,,,,,94043A I-V Station; направление развёртки не указано
+D010,MS2,DV1;DV2,EQE,,,,,,,,,,,,"SPIQE200-5324 (QEX10), in air; значения Jsc_EQE не приведены (только рис. 7b)"
+D012,MS1,DV5;DV10;DV15;DV20,J-V,AM1.5G,100,mW/cm2,,,,,,,,,"Keithley 2400 source meter, simulated AM1.5G (100 mW/cm2)"
+D013,MS1,DV-0Ge;DV-40Ge;DV-60Ge;DV-80Ge;DV-100Ge,J-V,,,,,,,,,,,,"1 sun IV curves of champion devices (Fig. 6a, Table 3); spectrum, intensity, scan direction not stated"
+D013,MS2,DV-0Ge;DV-40Ge;DV-60Ge;DV-80Ge;DV-100Ge,J-V,,,,,,,,,,,,Dark IV of representative devices (Fig. 7a); Rsh from dark IV
+D013,MS3,DV-0Ge;DV-40Ge;DV-60Ge;DV-80Ge;DV-100Ge,EQE,,,,,,,,,,,,"EQE spectra (Fig. 5b); used for Eg,EQE and Urbach energy"
+D014,MS1,DV1,J-V,AM1.5G,,,,,true,false,,,,,"Xe лампа с AM 1.5G фильтром, Si-фотодиод KG5; интенсивность и направление развёртки не указаны; после current/light soaking (лучший прибор с подложки)"
+D014,MS2,DV2,J-V,AM1.5G,,,,,true,false,,,,,"Xe лампа с AM 1.5G фильтром, Si-фотодиод KG5; интенсивность и направление развёртки не указаны; после current/light soaking (лучший прибор с подложки)"
+D014,MS3,DV3,J-V,AM1.5G,,,,,true,false,,,,,"Xe лампа с AM 1.5G фильтром, Si-фотодиод KG5; интенсивность и направление развёртки не указаны; после current/light soaking (лучший прибор с подложки)"
+D014,MS4,DV4,J-V,AM1.5G,,,,,true,false,,,,,"Xe лампа с AM 1.5G фильтром, Si-фотодиод KG5; интенсивность и направление развёртки не указаны; после current/light soaking (лучший прибор с подложки)"
+D014,MS5,DV5,J-V,AM1.5G,,,,,true,false,,,,,"Xe лампа с AM 1.5G фильтром, Si-фотодиод KG5; интенсивность и направление развёртки не указаны; после current/light soaking (лучший прибор с подложки)"
+D014,MS6,DV6,J-V,AM1.5G,,,,,true,false,,,,,"Xe лампа с AM 1.5G фильтром, Si-фотодиод KG5; интенсивность и направление развёртки не указаны; условия (до/после light soaking) для данного значения Rs не указаны; Figures 4d, S11"
+D015,MS1,DV-REF;DV-0;DV-6;DV-8;DV-10;DV-12,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,"Keithley 2400; монофасадные приборы, освещение со стороны стекла (front)"
+D015,MS2,DV-BREF;DV-BCC,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,Keithley 2400; освещение с лицевой стороны (front)
+D015,MS3,DV-BREF;DV-BCC,J-V,AM1.5G,100,mW/cm2,,,,false,,,,,Keithley 2400; освещение с тыльной стороны (back)
+D017,MS1,DVR1;DVR2;DVG1;DVG2;DVI1;DVI2;DVI3;DVI4;DVO1;DVO2;DVO3,J-V,AM1.5G,100,mW/cm2,,,,false,,25 °C,,,"four-terminal Keithley 2400, ABA-class sun simulator, 1000 W/m2; направление развёртки не указано"
+D017,MS2,DVR1;DVR2;DVG1;DVG2;DVI1;DVI2;DVI3;DVI4;DVO1;DVO2;DVO3,EQE,,,,,,,,,,,,"chopped halogen light, double-grating monochromator, halogen bias about 0.2 sun; калибровка по сертифицированному Si элементу; значения Jsc из EQE не приведены"
+D018,MS1,DV-UNT;DV-CST,J-V,AM1.5,,,,,,,,,,,"Oriel Sol3A class AAA; без фронтальной сетки; интенсивность, ход развёртки и маска не указаны; typical light J-V (рис. 6A)"
+D018,MS2,DV-UNT;DV-CST,J-V,,,,,,,,,,,,"Тёмная ВАХ (рис. 6A, dashed lines); числовых результатов нет"
+D018,MS3,DV-NUNT;DV-NCST,J-V,AM1.5,,,,,,,,,,,Статистика по приборам на промышленном поглотителе NICE (рис. 6B-E); условия отдельно не указаны
+D019,MS1,DV1;DV2;DV3;DV4;DV5;DV6;DV7,J-V,AM1.5G,,,,,,false,,,,,"Keithley 2400, Newport 94022A, «1.5AM solar irradiation»; интенсивность, направление развёртки, площадь не указаны"
+D019,MS2,DV5,J-V,AM1.5G,,,,,,true,Korea Institute of Energy Research (KIER),,,,"сертифицированная J-V кривая, Fig. 8a"
+D019,MS3,DV5,EQE,,,,,,,true,Korea Institute of Energy Research (KIER),,,,"сертифицированные EQE данные, Fig. 8b; интегрированный Jsc"
+D020,MS1,DV1;DV2;DV3;DV4,J-V,AM1.5G,100,mW/cm2,,,true,false,,,,,"Newport Oriel Sol 3A, ambient air; направление развёртки не указано; mask ~6.25 mm2"
+D021,MS1,DV-A1;DV-A2;DV-A3;DV-A4;DV-A5;DV-A6;DV-B1;DV-B2;DV-B3;DV-B4,J-V,AM1.5G,100,mW/cm2,,,,,,25 C,,,"Стандартные условия: AM 1.5G, 1000 W/m2, 25 C (Keithley 2614B, ABET SUN 2000 AAB). По 20 ячеек на образец (Table 4). Направление развёртки и маска не указаны."
+D021,MS2,DV-B4Ag,J-V,AM1.5G,100,mW/cm2,,,,,,25 C,,,Figure 10: J-V лучшей ячейки после контактов Ag paste + wire bonding; условия — стандартные из раздела Methods. Направление развёртки не указано.
+D021,MS3,DV-NaF0;DV-NaF1;DV-PEDNaF,J-V,AM1.5G,100,mW/cm2,,,,,,25 C,,,Figure 2: освещённые J-V ячеек с NaF и без; условия — стандартные из раздела Methods. Направление развёртки не указано.
+D022,MS1,DV1;DV2;DV3;DV4;DV5,J-V,AM1.5G,,,,,true,false,,,,,"AAA симулятор, калибровка по Si-эталону NREL (Abet 15150); Keithley 2400, 4-wire; интенсивность и направление развёртки не указаны"
+D022,MS2,DV1;DV2;DV5,J-V,,,,,,,,,,,,"Оптические измерения (пропускание/отражение 300-800 нм, интегрирующая сфера): AVT, CRI"

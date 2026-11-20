@@ -1,0 +1,550 @@
+﻿publication_id,layer_id,device_id,layer_order,layer_function,layer_material,layer_thickness,thickness_unit,deposition_method,annealing_temperature,annealing_time,atmosphere,note
+D001,DV-P-L1,DV-P,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-P-L2,DV-P,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-P-L3,DV-P,3,absorber,CsPbI2Br,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-P-L4,DV-P,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-P-L5,DV-P,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S001-L1,DV-S001,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S001-L2,DV-S001,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S001-L3,DV-S001,3,absorber,CsPbI2Br + 0.001 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S001-L4,DV-S001,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S001-L5,DV-S001,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S005-L1,DV-S005,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S005-L2,DV-S005,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S005-L3,DV-S005,3,absorber,CsPbI2Br + 0.005 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S005-L4,DV-S005,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S005-L5,DV-S005,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S01-L1,DV-S01,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S01-L2,DV-S01,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S01-L3,DV-S01,3,absorber,CsPbI2Br + 0.01 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S01-L4,DV-S01,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S01-L5,DV-S01,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-S05-L1,DV-S05,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-S05-L2,DV-S05,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-S05-L3,DV-S05,3,absorber,CsPbI2Br + 0.05 M SrCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-S05-L4,DV-S05,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-S05-L5,DV-S05,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D001,DV-N01-L1,DV-N01,1,front_contact,FTO,,,,,,,"FTO glass (Nippon Sheet Glass, 8 Ω/square)"
+D001,DV-N01-L2,DV-N01,2,ETL,compact TiO2 (c-TiO2),,,"immersion in 25 mM TiCl4 aqueous solution, 60 min, 70 °C",500,60 min,air (muffle oven),compact TiO2 blocking layer
+D001,DV-N01-L3,DV-N01,3,absorber,CsPbI2Br + 0.01 M NiCl2,,,spin-coating of perovskite precursor in DMSO,,,nitrogen glove box,
+D001,DV-N01-L4,DV-N01,4,HTL,P3HT,,,"spin-coating, 15 mg/ml in chlorobenzene, 2,500 rpm, 30 s",120,10 min,nitrogen glove box,
+D001,DV-N01-L5,DV-N01,5,back_contact,Ag,100,nm,thermal evaporation,,,nitrogen glove box,в разделе Experiment (стр. 2) Ag; в тексте (стр. 3) конфигурация FTO/c-TiO2/CsPbI2Br/P3HT/Au
+D002,DV-NiO-L1,DV-NiO,1,front_contact,FTO,,,,,,,FTO glass substrate
+D002,DV-NiO-L2,DV-NiO,2,HTL,NiO,,,spin-coating 1000 rpm 45 s,,,,single NiO HTL; annealing for control not stated separately
+D002,DV-NiO-L3,DV-NiO,3,absorber,CH3NH3PbI3,,,"spin-coating PbI2 then CH3NH3I solution, 1000 rpm 30 s each",100 °C,3 min,,
+D002,DV-NiO-L4,DV-NiO,4,ETL,ZnO,,,spin-coating 1000 rpm 30 s,100 °C,3 min,,ZnO nanoparticles
+D002,DV-NiO-L5,DV-NiO,5,back_contact,Ag,100,nm,"thermal evaporation, 1e-6 mbar",,,,
+D002,DV-NiOGO-L1,DV-NiOGO,1,front_contact,FTO,,,,,,,FTO glass substrate
+D002,DV-NiOGO-L2,DV-NiOGO,2,HTL,NiO,,,spin-coating 1000 rpm 45 s,200 °C,1 h,,annealing 200 °C 1 h after GO step (NiO/GO device)
+D002,DV-NiOGO-L3,DV-NiOGO,3,HTL,GO,,,spin-coating 1000 rpm 30 s,200 °C,1 h,,modified Hummers GO
+D002,DV-NiOGO-L4,DV-NiOGO,4,absorber,CH3NH3PbI3,,,"spin-coating PbI2 then CH3NH3I solution, 1000 rpm 30 s each",100 °C,3 min,,
+D002,DV-NiOGO-L5,DV-NiOGO,5,ETL,ZnO,,,spin-coating 1000 rpm 30 s,100 °C,3 min,,ZnO nanoparticles
+D002,DV-NiOGO-L6,DV-NiOGO,6,back_contact,Ag,100,nm,"thermal evaporation, 1e-6 mbar",,,,
+D003,DV1-L1,DV1,1,front_contact,ITO (glass),,,,,,,
+D003,DV1-L2,DV1,2,ETL,Sn3O4,35,nm,"spin coating of dispersion, 4000 rpm, 30 s, three times",140 °C,30 min,ambient,Толщина ~35 nm по SEM поперечному срезу прибора
+D003,DV1-L3,DV1,3,absorber,perovskite,530,nm,"two-step spin coating (1000 and 6000 rpm), CB antisolvent",100 °C,30 min,,
+D003,DV1-L4,DV1,4,HTL,Spiro-OMeTAD,,,"spin coating, 4000 rpm, 30 s",,,,
+D003,DV1-L5,DV1,5,back_contact,Ag,100,nm,thermal evaporation,,,,about 100 nm
+D003,DV2-L1,DV2,1,front_contact,ITO (glass),,,,,,,
+D003,DV2-L2,DV2,2,ETL,Y-Sn3O4 (5% Y),35,nm,"spin coating of dispersion, 4000 rpm, 30 s, three times",140 °C,30 min,ambient,Толщина ~35 nm по SEM поперечному срезу прибора
+D003,DV2-L3,DV2,3,absorber,perovskite,530,nm,"two-step spin coating (1000 and 6000 rpm), CB antisolvent",100 °C,30 min,,
+D003,DV2-L4,DV2,4,HTL,Spiro-OMeTAD,,,"spin coating, 4000 rpm, 30 s",,,,
+D003,DV2-L5,DV2,5,back_contact,Ag,100,nm,thermal evaporation,,,,about 100 nm
+D004,DV1-L1,DV1,1,front_contact,"FTO (7 Ω/sq, стекло)",,,,,,,
+D004,DV1-L2,DV1,2,ETL,MoS2 NPs (ED),,,"spin-coating 4000 rpm, 30 s",150 °C,1 h,,
+D004,DV1-L3,DV1,3,absorber,CsFAMAPbI3−xBrx,,,"spin-coating 3000 rpm, 35 s; антирастворитель 0.05 vol.% MA на 12 с",100 °C,1 h,~70% RH,
+D004,DV1-L4,DV1,4,HTL,spiro-OMeTAD,,,"spin-coating 2000 rpm, 30 s",,,,
+D004,DV1-L5,DV1,5,back_contact,Ag,100,nm,thermal evaporation,,,,
+D004,DV2-L1,DV2,1,front_contact,"FTO (7 Ω/sq, стекло)",,,,,,,
+D004,DV2-L2,DV2,2,ETL,MoS2 NPs (BCC-ED),,,"spin-coating 4000 rpm, 30 s",150 °C,1 h,,
+D004,DV2-L3,DV2,3,absorber,CsFAMAPbI3−xBrx,,,"spin-coating 3000 rpm, 35 s; антирастворитель 0.05 vol.% MA на 12 с",100 °C,1 h,~70% RH,
+D004,DV2-L4,DV2,4,HTL,spiro-OMeTAD,,,"spin-coating 2000 rpm, 30 s",,,,
+D004,DV2-L5,DV2,5,back_contact,Ag,100,nm,thermal evaporation,,,,
+D004,DV3-L1,DV3,1,front_contact,"FTO (7 Ω/sq, стекло)",,,,,,,
+D004,DV3-L2,DV3,2,ETL,MoS2 NPs (C-ED-1),,,"spin-coating 4000 rpm, 30 s",150 °C,1 h,,
+D004,DV3-L3,DV3,3,absorber,CsFAMAPbI3−xBrx,,,"spin-coating 3000 rpm, 35 s; антирастворитель 0.05 vol.% MA на 12 с",100 °C,1 h,~70% RH,
+D004,DV3-L4,DV3,4,HTL,spiro-OMeTAD,,,"spin-coating 2000 rpm, 30 s",,,,
+D004,DV3-L5,DV3,5,back_contact,Ag,100,nm,thermal evaporation,,,,
+D004,DV4-L1,DV4,1,front_contact,"FTO (7 Ω/sq, стекло)",,,,,,,
+D004,DV4-L2,DV4,2,ETL,MoS2 NPs (C-ED-2),63-68,nm,"spin-coating 4000 rpm, 30 s",150 °C,1 h,,толщина ETL по SEM: 63 to 68 nm (для C-ED-2)
+D004,DV4-L3,DV4,3,absorber,CsFAMAPbI3−xBrx,,,"spin-coating 3000 rpm, 35 s; антирастворитель 0.05 vol.% MA на 12 с",100 °C,1 h,~70% RH,"SEM поперечного сечения: thickness of 659 nm (C-ED-2, вероятно, весь стек)"
+D004,DV4-L4,DV4,4,HTL,spiro-OMeTAD,,,"spin-coating 2000 rpm, 30 s",,,,
+D004,DV4-L5,DV4,5,back_contact,Ag,100,nm,thermal evaporation,,,,
+D005,DV1-L1,DV1,1,front_contact,"FTO (glass, 8 Ω/sq)",,,,,,,
+D005,DV1-L2,DV1,2,ETL,TiO2,,,"chemical bath (TiCl4/deionized water, 3 ml/150 ml, 90 °C, 50 min)",,,,
+D005,DV1-L3,DV1,3,absorber,"perovskite (FA/MA/Cs, Pb, I/Br)",,,"spin-coating, 1500 rpm 4 s + 5000 rpm 20 s, antisolvent diethyl ether 900 μl",150 °C,15 min,N2 glovebox,
+D005,DV1-L4,DV1,4,passivation,PEAI (5 mg/ml in IPA),,,"spin-coating, 5500 rpm, 20 s",,,,
+D005,DV1-L5,DV1,5,HTL,"Spiro-OMeTAD (73 mg/ml Spiro-OMeTAD в CB + 28 мкл t-BP, 20 мкл Li-TFSI, 20 мкл FK-209 на 1 мл)",,,"spin-coating, 4000 rpm, 30 s",,,,
+D005,DV1-L6,DV1,6,back_contact,Au,100,nm,evaporation under high vacuum,,,,~100 nm
+D005,DV2-L1,DV2,1,front_contact,"FTO (glass, 8 Ω/sq)",,,,,,,
+D005,DV2-L2,DV2,2,ETL,TiO2,,,"chemical bath (TiCl4/deionized water, 3 ml/150 ml, 90 °C, 50 min)",,,,
+D005,DV2-L3,DV2,3,absorber,"perovskite (FA/MA/Cs, Pb, I/Br)",,,"spin-coating, 1500 rpm 4 s + 5000 rpm 20 s, antisolvent diethyl ether 900 μl",150 °C,15 min,N2 glovebox,
+D005,DV2-L4,DV2,4,passivation,PEAI (5 mg/ml in IPA),,,"spin-coating, 5500 rpm, 20 s",,,,
+D005,DV2-L5,DV2,5,HTL,"SF-MPA-MCz (30 mg/ml SF-MPA-MCz в CB + 15 мкл t-BP, 10 мкл Li-TFSI, 10 мкл FK-209)",,,"spin-coating, 4000 rpm, 30 s",,,,"Толщина HTL в статье числом не указана (SF-MPA-MCz слой заметно тоньше, Fig. S18)"
+D005,DV2-L6,DV2,6,back_contact,Au,100,nm,evaporation under high vacuum,,,,~100 nm
+D007,L1,DV1,1,front_contact,FTO,,,,,,,
+D007,L2,DV1,2,ETL,SnO2,,,,,,,
+D007,L3,DV1,3,absorber,perovskite,700,nm,,,,,approximately 700 nm
+D007,L4,DV1,4,HTL,V1553,,,,,,,"V1553 слой тоньше, чем spiro-OMeTAD"
+D007,L5,DV1,5,back_contact,Au,70,nm,,,,,around 70 nm
+D007,L6,DV2,1,front_contact,FTO,,,,,,,
+D007,L7,DV2,2,ETL,SnO2,,,,,,,
+D007,L8,DV2,3,absorber,perovskite,700,nm,,,,,approximately 700 nm
+D007,L9,DV2,4,HTL,spiro-OMeTAD,,,,,,,
+D007,L10,DV2,5,back_contact,Au,70,nm,,,,,around 70 nm
+D008,DV1-L1,DV1,1,front_contact,ITO,,,,,,,ITO-coated glass; толщина не указана
+D008,DV1-L2,DV1,2,HTL,PTAA,,,"spin coating, 1.5 mg/mL, 6000 rpm",100 °C,10 min,,
+D008,DV1-L3,DV1,3,absorber,Cs0.15FA0.85PbI2.85Br0.15,600,nm,"sequential multi-cycle thermal evaporation (PbI2, [PbCl2], FAI, CsBr; 3 stacks)",150 °C,,,"целевая толщина около 600 нм; отжиг на плитке 130/150/170 °C, 10/15/20 мин, для данного прибора 150 °C; время для этого прибора не указано"
+D008,DV1-L4,DV1,4,ETL,C60,20,nm,thermal evaporation,,,,
+D008,DV1-L5,DV1,5,interlayer,BCP,2,nm,thermal evaporation,,,,buffer
+D008,DV1-L6,DV1,6,back_contact,Ag,100,nm,thermal evaporation (metal mask),,,,
+D008,DV2-L1,DV2,1,front_contact,ITO,,,,,,,ITO-coated glass; толщина не указана
+D008,DV2-L2,DV2,2,HTL,PTAA,,,"spin coating, 1.5 mg/mL, 6000 rpm",100 °C,10 min,,
+D008,DV2-L3,DV2,3,absorber,Cs0.15FA0.85PbI2.85Br0.15 + PbCl2,600,nm,"sequential multi-cycle thermal evaporation (PbI2, [PbCl2], FAI, CsBr; 3 stacks)",150 °C,,,"целевая толщина около 600 нм; отжиг на плитке 130/150/170 °C, 10/15/20 мин, для данного прибора 150 °C; время для этого прибора не указано"
+D008,DV2-L4,DV2,4,ETL,C60,20,nm,thermal evaporation,,,,
+D008,DV2-L5,DV2,5,interlayer,BCP,2,nm,thermal evaporation,,,,buffer
+D008,DV2-L6,DV2,6,back_contact,Ag,100,nm,thermal evaporation (metal mask),,,,
+D008,DV3-L1,DV3,1,front_contact,ITO,,,,,,,ITO-coated glass; толщина не указана
+D008,DV3-L2,DV3,2,HTL,PTAA,,,"spin coating, 1.5 mg/mL, 6000 rpm",100 °C,10 min,,
+D008,DV3-L3,DV3,3,absorber,Cs0.15FA0.85PbI2.85Br0.15 + PbCl2,600,nm,"sequential multi-cycle thermal evaporation (PbI2, [PbCl2], FAI, CsBr; 3 stacks)",150 °C,,,"целевая толщина около 600 нм; отжиг на плитке 130/150/170 °C, 10/15/20 мин, для данного прибора 150 °C; время для этого прибора не указано"
+D008,DV3-L4,DV3,4,ETL,C60,20,nm,thermal evaporation,,,,
+D008,DV3-L5,DV3,5,interlayer,BCP,2,nm,thermal evaporation,,,,buffer
+D008,DV3-L6,DV3,6,back_contact,Ag,100,nm,thermal evaporation (metal mask),,,,
+D009,DV1-L1,DV1,1,front_contact,ITO (patterned glass),,,,,,,
+D009,DV1-L2,DV1,2,HTL,PEDOT:PSS (Clevios P VP AI 4083),,,"spin-coating, 6,000 r.p.m. 40 s",140 °C,20 min,ambient,
+D009,DV1-L3,DV1,3,absorber,Cs0 2D/3D THP,300,nm,"spin-coating 5,000 r.p.m. 30 s, toluene antisolvent",80 °C,10 min,N2 glovebox,Оптимальная толщина поглотителя ~300 nm
+D009,DV1-L4,DV1,4,ETL,ICBA,,,"spin-coating, 20 mg/ml in chlorobenzene, 1,000 r.p.m. 30 s",80 °C,10 min,,
+D009,DV1-L5,DV1,5,interlayer,BCP,6,nm,thermal evaporation (0.1 Å/s),,,,буферный слой BCP
+D009,DV1-L6,DV1,6,back_contact,Ag,80,nm,thermal evaporation (0.5 Å/s),,,,
+D009,DV2-L1,DV2,1,front_contact,ITO (patterned glass),,,,,,,
+D009,DV2-L2,DV2,2,HTL,PEDOT:PSS (Clevios P VP AI 4083),,,"spin-coating, 6,000 r.p.m. 40 s",140 °C,20 min,ambient,
+D009,DV2-L3,DV2,3,absorber,Cs5 2D/3D THP,300,nm,"spin-coating 5,000 r.p.m. 30 s, toluene antisolvent",80 °C,10 min,N2 glovebox,Оптимальная толщина поглотителя ~300 nm
+D009,DV2-L4,DV2,4,ETL,ICBA,,,"spin-coating, 20 mg/ml in chlorobenzene, 1,000 r.p.m. 30 s",80 °C,10 min,,
+D009,DV2-L5,DV2,5,interlayer,BCP,6,nm,thermal evaporation (0.1 Å/s),,,,буферный слой BCP
+D009,DV2-L6,DV2,6,back_contact,Ag,80,nm,thermal evaporation (0.5 Å/s),,,,
+D010,DV1-L1,DV1,1,back_contact,Mo (on soda-lime glass),,,,,,,Mo-coated SLG
+D010,DV1-L2,DV1,2,absorber,"Cu2ZnSn(S,Se)4",,,"sol-gel spin coating (3000 rpm, 30 s), drying 300 C in air, then selenization",540 °C,15 min,Se,Условия отжига недопированной плёнки (540 °C на рис. 4a) отдельно не описаны
+D010,DV1-L3,DV1,3,ETL,CdS,,,chemical bath deposition,,,,"CdS buffer; 75 °C, 14 min"
+D010,DV1-L4,DV1,4,front_contact,i-ZnO/AZO,,,sputtering,,,,В структуре рис. 7: ZnO/ITO; в разделе 2.2: intrinsic ZnO/AZO
+D010,DV1-L5,DV1,5,front_contact,Ag grid,,,evaporation,,,,Ag gate electrode (в структуре рис. 7: Al)
+D010,DV2-L1,DV2,1,back_contact,Mo (on soda-lime glass),,,,,,,Mo-coated SLG
+D010,DV2-L2,DV2,2,absorber,"(Na0.1Cu0.9)2ZnSn(S,Se)4",,,"sol-gel spin coating (3000 rpm, 30 s), drying 300 C in air, then selenization",540 °C,15 min,Se,Условия отжига 540 °C/15 min указаны в 2.2 для Na-допированной плёнки
+D010,DV2-L3,DV2,3,ETL,CdS,,,chemical bath deposition,,,,"CdS buffer; 75 °C, 14 min"
+D010,DV2-L4,DV2,4,front_contact,i-ZnO/AZO,,,sputtering,,,,В структуре рис. 7: ZnO/ITO; в разделе 2.2: intrinsic ZnO/AZO
+D010,DV2-L5,DV2,5,front_contact,Ag grid,,,evaporation,,,,Ag gate electrode (в структуре рис. 7: Al)
+D012,DV5-L1,DV5,1,back_contact,Mo,1000,nm,,,,,«1 µm Mo/glass» на SLG
+D012,DV5-L2,DV5,2,absorber,Cu2ZnSnS4 (CZTS),1000,nm,"electrochemical deposition (galvanostatic, triangle wave pulse) of Cu-Zn-Sn, then sulfurization",580,2 h,"sulfur powder 200 mg, quartz tube furnace",~1 µm; KCN etch 30 s после сульфуризации
+D012,DV5-L3,DV5,3,ETL,CdS,80,nm,chemical bath deposition,180,15 min,,buffer layer; отжиг CZTS/CdS 180 °C 15 min
+D012,DV5-L4,DV5,4,front_contact,i-ZnO,80,nm,"RF magnetron sputtering, 100 W, Ar",,,,80 nm в разделе 2; в разделе 3 (p11) — 100 nm; window layer
+D012,DV5-L5,DV5,5,front_contact,AZO,300,nm,"RF magnetron sputtering, 100 W, Ar",350,20 min,N2,~300 nm в разделе 2; в p11 — 120 nm; отжиг 350 °C 20 min после нанесения i-ZnO и AZO
+D012,DV5-L6,DV5,6,front_contact,Ag,250,nm,thermal evaporation,,,,металлический контакт (250 nm)
+D012,DV10-L1,DV10,1,back_contact,Mo,1000,nm,,,,,«1 µm Mo/glass» на SLG
+D012,DV10-L2,DV10,2,absorber,Cu2ZnSnS4 (CZTS),1000,nm,"electrochemical deposition (galvanostatic, triangle wave pulse) of Cu-Zn-Sn, then sulfurization",580,2 h,"sulfur powder 200 mg, quartz tube furnace",~1 µm; KCN etch 30 s после сульфуризации
+D012,DV10-L3,DV10,3,ETL,CdS,80,nm,chemical bath deposition,180,15 min,,buffer layer; отжиг CZTS/CdS 180 °C 15 min
+D012,DV10-L4,DV10,4,front_contact,i-ZnO,80,nm,"RF magnetron sputtering, 100 W, Ar",,,,80 nm в разделе 2; в разделе 3 (p11) — 100 nm; window layer
+D012,DV10-L5,DV10,5,front_contact,AZO,300,nm,"RF magnetron sputtering, 100 W, Ar",350,20 min,N2,~300 nm в разделе 2; в p11 — 120 nm; отжиг 350 °C 20 min после нанесения i-ZnO и AZO
+D012,DV10-L6,DV10,6,front_contact,Ag,250,nm,thermal evaporation,,,,металлический контакт (250 nm)
+D012,DV15-L1,DV15,1,back_contact,Mo,1000,nm,,,,,«1 µm Mo/glass» на SLG
+D012,DV15-L2,DV15,2,absorber,Cu2ZnSnS4 (CZTS),1000,nm,"electrochemical deposition (galvanostatic, triangle wave pulse) of Cu-Zn-Sn, then sulfurization",580,2 h,"sulfur powder 200 mg, quartz tube furnace",~1 µm; KCN etch 30 s после сульфуризации
+D012,DV15-L3,DV15,3,ETL,CdS,80,nm,chemical bath deposition,180,15 min,,buffer layer; отжиг CZTS/CdS 180 °C 15 min
+D012,DV15-L4,DV15,4,front_contact,i-ZnO,80,nm,"RF magnetron sputtering, 100 W, Ar",,,,80 nm в разделе 2; в разделе 3 (p11) — 100 nm; window layer
+D012,DV15-L5,DV15,5,front_contact,AZO,300,nm,"RF magnetron sputtering, 100 W, Ar",350,20 min,N2,~300 nm в разделе 2; в p11 — 120 nm; отжиг 350 °C 20 min после нанесения i-ZnO и AZO
+D012,DV15-L6,DV15,6,front_contact,Ag,250,nm,thermal evaporation,,,,металлический контакт (250 nm)
+D012,DV20-L1,DV20,1,back_contact,Mo,1000,nm,,,,,«1 µm Mo/glass» на SLG
+D012,DV20-L2,DV20,2,absorber,Cu2ZnSnS4 (CZTS),1000,nm,"electrochemical deposition (galvanostatic, triangle wave pulse) of Cu-Zn-Sn, then sulfurization",580,2 h,"sulfur powder 200 mg, quartz tube furnace",~1 µm; KCN etch 30 s после сульфуризации
+D012,DV20-L3,DV20,3,ETL,CdS,80,nm,chemical bath deposition,180,15 min,,buffer layer; отжиг CZTS/CdS 180 °C 15 min
+D012,DV20-L4,DV20,4,front_contact,i-ZnO,80,nm,"RF magnetron sputtering, 100 W, Ar",,,,80 nm в разделе 2; в разделе 3 (p11) — 100 nm; window layer
+D012,DV20-L5,DV20,5,front_contact,AZO,300,nm,"RF magnetron sputtering, 100 W, Ar",350,20 min,N2,~300 nm в разделе 2; в p11 — 120 nm; отжиг 350 °C 20 min после нанесения i-ZnO и AZO
+D012,DV20-L6,DV20,6,front_contact,Ag,250,nm,thermal evaporation,,,,металлический контакт (250 nm)
+D013,DV-0Ge-L1,DV-0Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-0Ge-L2,DV-0Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-0Ge-L3,DV-0Ge,3,absorber,ACZTGSSe 0Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-0Ge-L4,DV-0Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-0Ge-L5,DV-0Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-0Ge-L6,DV-0Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-0Ge-L7,DV-0Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-40Ge-L1,DV-40Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-40Ge-L2,DV-40Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-40Ge-L3,DV-40Ge,3,absorber,ACZTGSSe 40Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-40Ge-L4,DV-40Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-40Ge-L5,DV-40Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-40Ge-L6,DV-40Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-40Ge-L7,DV-40Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-60Ge-L1,DV-60Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-60Ge-L2,DV-60Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-60Ge-L3,DV-60Ge,3,absorber,ACZTGSSe 60Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-60Ge-L4,DV-60Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-60Ge-L5,DV-60Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-60Ge-L6,DV-60Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-60Ge-L7,DV-60Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-80Ge-L1,DV-80Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-80Ge-L2,DV-80Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-80Ge-L3,DV-80Ge,3,absorber,ACZTGSSe 80Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-80Ge-L4,DV-80Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-80Ge-L5,DV-80Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-80Ge-L6,DV-80Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-80Ge-L7,DV-80Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D013,DV-100Ge-L1,DV-100Ge,1,back_contact,Mo,,,,,,,Mo on soda-lime glass (SLG/Mo substrate); thickness not stated
+D013,DV-100Ge-L2,DV-100Ge,2,interlayer,"Mo(Sx,Se2-x)",,,,,,,formed during selenization; 1-2 times thinner than absorber (Fig. S3)
+D013,DV-100Ge-L3,DV-100Ge,3,absorber,ACZTGSSe 100Ge,,,"spin-coating of molecular ink (3000 rpm, 60 s; 340 C 3 min hotplate, 8 repetitions), selenization",560,15 min,Ar (~500 mbar) with Se pellets,precursor film ~1 um thick; final absorber thickness not stated
+D013,DV-100Ge-L4,DV-100Ge,4,ETL,CdS,50,nm,chemical bath deposition,,,,buffer layer
+D013,DV-100Ge-L5,DV-100Ge,5,interlayer,i-ZnO,40,nm,RF sputtering,,,,window layer
+D013,DV-100Ge-L6,DV-100Ge,6,front_contact,ITO,150,nm,RF sputtering,,,,window layer
+D013,DV-100Ge-L7,DV-100Ge,7,front_contact,Ag grid,500,nm,thermal evaporation,,,,metal grid; soft annealing of finished device
+D014,DV1-L1,DV1,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV1-L2,DV1,2,absorber,CdTe NC,~500,nm,"spin-coating (layer-by-layer, 12-20 cycles)",350 °C,20 s,,"толщина ~500 nm указана для сравнения техник нанесения; CdCl2 bath (saturated, methanol, ~60 °C, 15 s), затем отжиг"
+D014,DV1-L3,DV1,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV1-L4,DV1,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV1-L5,DV1,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D014,DV2-L1,DV2,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV2-L2,DV2,2,absorber,CdTe NC,~500,nm,"doctor-blading (layer-by-layer, 12-20 cycles)",350 °C,20 s,,"толщина ~500 nm указана для сравнения техник нанесения; CdCl2 bath (saturated, methanol, ~60 °C, 15 s), затем отжиг"
+D014,DV2-L3,DV2,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV2-L4,DV2,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV2-L5,DV2,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D014,DV3-L1,DV3,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV3-L2,DV3,2,absorber,CdTe NC,~500,nm,"spray-coating (layer-by-layer, 12-20 cycles)",350 °C,20 s,,"толщина ~500 nm указана для сравнения техник нанесения; CdCl2 bath (saturated, methanol, ~60 °C, 15 s), затем отжиг"
+D014,DV3-L3,DV3,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV3-L4,DV3,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV3-L5,DV3,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D014,DV4-L1,DV4,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV4-L2,DV4,2,absorber,CdTe NC,,,,350 °C,20 s,,без CdCl2 bath (pyr-CdCl3 лиганды)
+D014,DV4-L3,DV4,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV4-L4,DV4,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV4-L5,DV4,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D014,DV5-L1,DV5,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV5-L2,DV5,2,absorber,CdTe NC,,,"doctor-blading, IR lamp annealing",350 °C,20 s,,без CdCl2 bath (pyr-CdCl3 лиганды)
+D014,DV5-L3,DV5,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV5-L4,DV5,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV5-L5,DV5,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D014,DV6-L1,DV6,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV6-L2,DV6,2,absorber,CdTe NC,,,,350 °C,20 s,,без CdCl2 bath (pyr-CdCl3 лиганды)
+D014,DV6-L3,DV6,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV6-L4,DV6,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV6-L5,DV6,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D014,DV7-L1,DV7,1,front_contact,ITO,,,,,,,ITO-coated glass; подложка стекло не записана
+D014,DV7-L2,DV7,2,absorber,CdTe NC,,,"spin-coating (layer-by-layer, 12-20 cycles)",350 °C,20 s,,"CdCl2 bath (saturated, methanol, ~60 °C, 15 s), затем отжиг"
+D014,DV7-L3,DV7,3,ETL,ZnO:In (sol-gel),,,spin-coating 3000 rpm 30 s,300 °C,2 min,,толщина не указана
+D014,DV7-L4,DV7,4,back_contact,Al,100,nm,thermal evaporation,,,,
+D014,DV7-L5,DV7,5,back_contact,Ag,100,nm,thermal evaporation,,,,поверх Al для долговечности
+D015,DV-REF-L1,DV-REF,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-REF-L2,DV-REF,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-REF-L3,DV-REF,3,absorber,CdTe,,,vapor transport deposition,,,,"CdCl2 activation; Cu doping with 0.1 mM CuCl2 in water, annealed in air at 200 °C for 20 min; толщина поглотителя в статье только как диапазон ~3.5 um (p3)"
+D015,DV-REF-L4,DV-REF,4,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-0-L1,DV-0,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-0-L2,DV-0,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-0-L3,DV-0,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-0-L4,DV-0,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,0 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-0-L5,DV-0,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-6-L1,DV-6,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-6-L2,DV-6,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-6-L3,DV-6,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-6-L4,DV-6,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,6 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-6-L5,DV-6,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-8-L1,DV-8,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-8-L2,DV-8,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-8-L3,DV-8,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-8-L4,DV-8,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,8 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-8-L5,DV-8,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-10-L1,DV-10,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-10-L2,DV-10,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-10-L3,DV-10,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-10-L4,DV-10,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,10 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-10-L5,DV-10,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-12-L1,DV-12,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-12-L2,DV-12,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-12-L3,DV-12,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-12-L4,DV-12,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,12 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-12-L5,DV-12,5,back_contact,Au,45,nm,"thermal evaporation, shadow mask",,,,
+D015,DV-BREF-L1,DV-BREF,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-BREF-L2,DV-BREF,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-BREF-L3,DV-BREF,3,absorber,CdTe,,,vapor transport deposition,,,,"CdCl2 activation; Cu doping with 0.1 mM CuCl2 in water, annealed in air at 200 °C for 20 min; толщина поглотителя в статье только как диапазон ~3.5 um (p3)"
+D015,DV-BREF-L4,DV-BREF,4,back_contact,ITO,250,nm,"RF sputtering, room temperature",,,,thickness given as ~250 nm
+D015,DV-BCC-L1,DV-BCC,1,front_contact,FTO,,,,,,,TEC-15M glass substrate (Pilkington)
+D015,DV-BCC-L2,DV-BCC,2,ETL,CdS,,,vapor transport deposition,,,,"buffer, CdTe/CdS stack by VTD"
+D015,DV-BCC-L3,DV-BCC,3,absorber,CdTe,,,vapor transport deposition,,,,CdCl2 activation; no intentional Cu doping; толщина поглотителя в статье только как диапазон ~3.5 um (p3)
+D015,DV-BCC-L4,DV-BCC,4,HTL,CuxCryOz,,,"spin coating of precursor solution, 50 uL",200 °C,8 min,,back-buffer layer; Cu(NO3)2·3H2O and Cr(NO3)3·9H2O in DMF
+D015,DV-BCC-L5,DV-BCC,5,back_contact,ITO,250,nm,"RF sputtering, room temperature",,,,thickness given as ~250 nm
+D017,DVR1-L1,DVR1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVR1-L2,DVR1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVR1-L3,DVR1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVR1-L4,DVR1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVR1-L5,DVR1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVR1-L6,DVR1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVR1-L7,DVR1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVR1-L8,DVR1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVR2-L1,DVR2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVR2-L2,DVR2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVR2-L3,DVR2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVR2-L4,DVR2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVR2-L5,DVR2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVR2-L6,DVR2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVR2-L7,DVR2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVR2-L8,DVR2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVG1-L1,DVG1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVG1-L2,DVG1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVG1-L3,DVG1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVG1-L4,DVG1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVG1-L5,DVG1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVG1-L6,DVG1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVG1-L7,DVG1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVG1-L8,DVG1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVG2-L1,DVG2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVG2-L2,DVG2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVG2-L3,DVG2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVG2-L4,DVG2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVG2-L5,DVG2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVG2-L6,DVG2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVG2-L7,DVG2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVG2-L8,DVG2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI1-L1,DVI1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI1-L2,DVI1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI1-L3,DVI1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI1-L4,DVI1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI1-L5,DVI1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI1-L6,DVI1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI1-L7,DVI1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI1-L8,DVI1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI2-L1,DVI2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI2-L2,DVI2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI2-L3,DVI2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI2-L4,DVI2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI2-L5,DVI2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI2-L6,DVI2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI2-L7,DVI2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI2-L8,DVI2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI3-L1,DVI3,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI3-L2,DVI3,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI3-L3,DVI3,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI3-L4,DVI3,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI3-L5,DVI3,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI3-L6,DVI3,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI3-L7,DVI3,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI3-L8,DVI3,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVI4-L1,DVI4,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVI4-L2,DVI4,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVI4-L3,DVI4,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVI4-L4,DVI4,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVI4-L5,DVI4,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVI4-L6,DVI4,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVI4-L7,DVI4,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVI4-L8,DVI4,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVO1-L1,DVO1,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVO1-L2,DVO1,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVO1-L3,DVO1,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVO1-L4,DVO1,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVO1-L5,DVO1,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVO1-L6,DVO1,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVO1-L7,DVO1,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVO1-L8,DVO1,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVO2-L1,DVO2,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVO2-L2,DVO2,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVO2-L3,DVO2,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVO2-L4,DVO2,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVO2-L5,DVO2,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVO2-L6,DVO2,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVO2-L7,DVO2,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVO2-L8,DVO2,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D017,DVO3-L1,DVO3,1,interlayer,SiOx,,,reactive sputtering,,,,"barrier layer under Mo, thickness not given"
+D017,DVO3-L2,DVO3,2,back_contact,Mo,500,nm,sputtering,,,,approx. 500 nm
+D017,DVO3-L3,DVO3,3,absorber,"Cu(In,Ga)Se2",,,multi-stage low-temperature co-evaporation (about 450 °C),350 °C,20 min,Se,NaF and RbF PDT 20 min each at about 350 °C in Se ambient; thickness not given for cells (2 µm only in simulation)
+D017,DVO3-L4,DVO3,4,ETL,CdS,30,nm,chemical bath deposition,,,,buffer
+D017,DVO3-L5,DVO3,5,front_contact,i-ZnO,80,nm,RF sputtering,,,,intrinsic ZnO window layer
+D017,DVO3-L6,DVO3,6,front_contact,Al-doped ZnO (Al2O3 2 wt.%),200,nm,RF sputtering,,,,window layer
+D017,DVO3-L7,DVO3,7,front_contact,Ni/Al,,,electron beam evaporation,,,,grids
+D017,DVO3-L8,DVO3,8,interlayer,MgF2,,,,,,,anti-reflective coating
+D018,DV-UNT-L1,DV-UNT,1,back_contact,Mo,,,,,,,Mo-coated glass substrate
+D018,DV-UNT-L2,DV-UNT,2,absorber,CIGS,1500,nm,"pulsed hybrid reactive magnetron sputtering, two-stage",,,,~1500 nm Cu-rich CIGS первой стадии плюс ~600 nm In-Se второй стадии; суммарная толщина не указана
+D018,DV-UNT-L3,DV-UNT,3,ETL,CdS,,,"chemical bath deposition, 60 °C",,,,buffer layer
+D018,DV-UNT-L4,DV-UNT,4,ETL,i-ZnO,50,nm,"RF sputtering, RT, 40 W",,,"Ar, 5.6x10-3 mbar","intrinsic ZnO, ~50 nm"
+D018,DV-UNT-L5,DV-UNT,5,front_contact,ZnO:Al,200,nm,"RF sputtering, RT, 60 W",,,"Ar, 5.6x10-3 mbar",~200 nm; без фронтальной сетки
+D018,DV-CST-L1,DV-CST,1,back_contact,Mo,,,,,,,Mo-coated glass substrate
+D018,DV-CST-L2,DV-CST,2,absorber,CIGS,1500,nm,"pulsed hybrid reactive magnetron sputtering, two-stage",,,,~1500 nm Cu-rich CIGS первой стадии плюс ~600 nm In-Se второй стадии; суммарная толщина не указана
+D018,DV-CST-L3,DV-CST,3,passivation,CsCO3 (Cs-ST),,,"spin-coating, 1000 rpm, 60 s; 0.01 g CsCO3 in 10 ml DI water",400,2 min,"vacuum, ~6x10-6 mbar",Cs solution treatment; затем rinsed with DI water
+D018,DV-CST-L4,DV-CST,4,ETL,CdS,,,"chemical bath deposition, 60 °C",,,,buffer layer
+D018,DV-CST-L5,DV-CST,5,ETL,i-ZnO,50,nm,"RF sputtering, RT, 40 W",,,"Ar, 5.6x10-3 mbar","intrinsic ZnO, ~50 nm"
+D018,DV-CST-L6,DV-CST,6,front_contact,ZnO:Al,200,nm,"RF sputtering, RT, 60 W",,,"Ar, 5.6x10-3 mbar",~200 nm; без фронтальной сетки
+D019,DV1-L1,DV1,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV1-L2,DV1,2,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 290 °C
+D019,DV1-L3,DV1,3,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV1-L4,DV1,4,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV1-L5,DV1,5,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV1-L6,DV1,6,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D019,DV2-L1,DV2,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV2-L2,DV2,2,interlayer,MoSe2,100,nm,селенизация Mo в трубчатой печи с Se-гранулами,430 °C,10 min,Se/Ar,"«approximately 100 nm-thick»; нагрев 430 °C 10 min, затем отжиг 10 min"
+D019,DV2-L3,DV2,3,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 290 °C
+D019,DV2-L4,DV2,4,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV2-L5,DV2,5,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV2-L6,DV2,6,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV2-L7,DV2,7,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D019,DV3-L1,DV3,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV3-L2,DV3,2,interlayer,MoSe2,100,nm,селенизация Mo в трубчатой печи с Se-гранулами,430 °C,10 min,Se/Ar,"«approximately 100 nm-thick»; нагрев 430 °C 10 min, затем отжиг 10 min"
+D019,DV3-L3,DV3,3,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 290 °C
+D019,DV3-L4,DV3,4,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV3-L5,DV3,5,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV3-L6,DV3,6,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV3-L7,DV3,7,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D019,DV4-L1,DV4,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV4-L2,DV4,2,interlayer,MoSe2,100,nm,селенизация Mo в трубчатой печи с Se-гранулами,430 °C,10 min,Se/Ar,"«approximately 100 nm-thick»; нагрев 430 °C 10 min, затем отжиг 10 min"
+D019,DV4-L3,DV4,3,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 250 °C
+D019,DV4-L4,DV4,4,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV4-L5,DV4,5,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV4-L6,DV4,6,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV4-L7,DV4,7,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D019,DV5-L1,DV5,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV5-L2,DV5,2,interlayer,MoSe2,100,nm,селенизация Mo в трубчатой печи с Se-гранулами,430 °C,10 min,Se/Ar,"«approximately 100 nm-thick»; нагрев 430 °C 10 min, затем отжиг 10 min"
+D019,DV5-L3,DV5,3,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 260 °C
+D019,DV5-L4,DV5,4,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV5-L5,DV5,5,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV5-L6,DV5,6,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV5-L7,DV5,7,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D019,DV6-L1,DV6,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV6-L2,DV6,2,interlayer,MoSe2,100,nm,селенизация Mo в трубчатой печи с Se-гранулами,430 °C,10 min,Se/Ar,"«approximately 100 nm-thick»; нагрев 430 °C 10 min, затем отжиг 10 min"
+D019,DV6-L3,DV6,3,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 270 °C
+D019,DV6-L4,DV6,4,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV6-L5,DV6,5,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV6-L6,DV6,6,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV6-L7,DV6,7,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D019,DV7-L1,DV7,1,back_contact,Mo,600,nm,DC magnetron sputtering,,,,подложка SLG не записана
+D019,DV7-L2,DV7,2,absorber,Sb2Se3,500,nm,co-evaporation (Sb2Se3 + Se),,,,«approximately 500 nm»; температура подложки 315 °C
+D019,DV7-L3,DV7,3,ETL,CdS,50,nm,chemical bath deposition,,,,"buffer, n-type"
+D019,DV7-L4,DV7,4,front_contact,i-ZnO,50,nm,RF sputtering,,,,intrinsic ZnO window
+D019,DV7-L5,DV7,5,front_contact,AZO,300,nm,RF sputtering,,,,Al-doped ZnO TCO
+D019,DV7-L6,DV7,6,front_contact,Al,1000,nm,thermal evaporation,,,,"collection grid; в статье «1 mm-thick», вероятно µm"
+D020,DV1-L1,DV1,1,front_contact,FTO,,,,,,,
+D020,DV1-L2,DV1,2,ETL,SnO2,,nm,"spin-coating, 3000 rpm, 30 s",,,air,SnO2 blocking layer; толщина не указана
+D020,DV1-L3,DV1,3,ETL,CdS,,nm,"chemical bath deposition, 65 °C, 15 min",400,10 min,air,buffer layer; CdCl2 spin-coat then anneal
+D020,DV1-L4,DV1,4,absorber,Sb2S3,400,nm,"hydrothermal, 135 °C, 10 h",350,15 min,N2 glove box,"Sb2S3 film thickness ~400 nm (около 400 nm, Figure 2)"
+D020,DV1-L5,DV1,5,back_contact,carbon,,nm,painted commercial carbon paste,120,30 min,dry air,толщина «tens of micrometers»
+D020,DV2-L1,DV2,1,front_contact,FTO,,,,,,,
+D020,DV2-L2,DV2,2,ETL,SnO2,,nm,"spin-coating, 3000 rpm, 30 s",,,air,SnO2 blocking layer; толщина не указана
+D020,DV2-L3,DV2,3,ETL,CdS,,nm,"chemical bath deposition, 65 °C, 15 min",400,10 min,air,buffer layer; CdCl2 spin-coat then anneal
+D020,DV2-L4,DV2,4,absorber,"Sb2(S, Se)3",400,nm,"hydrothermal, 135 °C, 3 h",350,15 min,N2 glove box,"thickness ~400 nm (около 400 nm, Figure 2)"
+D020,DV2-L5,DV2,5,back_contact,carbon,,nm,painted commercial carbon paste,120,30 min,dry air,толщина «tens of micrometers»
+D020,DV3-L1,DV3,1,front_contact,FTO,,,,,,,
+D020,DV3-L2,DV3,2,ETL,SnO2,,nm,"spin-coating, 3000 rpm, 30 s",,,air,SnO2 blocking layer; толщина не указана
+D020,DV3-L3,DV3,3,ETL,CdS,,nm,"chemical bath deposition, 65 °C, 15 min",400,10 min,air,buffer layer; CdCl2 spin-coat then anneal
+D020,DV3-L4,DV3,4,absorber,"Sb2S3/Sb2(S, Se)3",400,nm,"two-step hydrothermal (Sb2S3 затем Sb2(S, Se)3 2 h), 135 °C",350,15 min,N2 glove box,"thickness ~400 nm (около 400 nm, Figure 2)"
+D020,DV3-L5,DV3,5,back_contact,carbon,,nm,painted commercial carbon paste,120,30 min,dry air,толщина «tens of micrometers»
+D020,DV4-L1,DV4,1,front_contact,FTO,,,,,,,
+D020,DV4-L2,DV4,2,ETL,SnO2,,nm,"spin-coating, 3000 rpm, 30 s",,,air,SnO2 blocking layer; толщина не указана
+D020,DV4-L3,DV4,3,ETL,CdS,,nm,"chemical bath deposition, 65 °C, 15 min",400,10 min,air,buffer layer; CdCl2 spin-coat then anneal
+D020,DV4-L4,DV4,4,absorber,"Sb2S3/Sb2(S, Se)3",400,nm,"two-step hydrothermal (Sb2S3 затем Sb2(S, Se)3 2 h), 135 °C",350,15 min,N2 glove box,"thickness ~400 nm (около 400 nm, Figure 2)"
+D020,DV4-L5,DV4,5,HTL,P3HT,,nm,"spin-coating, 10 mg/mL in chlorobenzene, 3000 rpm, 30 s",120,10 min,N2 glove box,
+D020,DV4-L6,DV4,6,back_contact,carbon,,nm,painted commercial carbon paste,120,30 min,dry air,толщина «tens of micrometers»
+D021,DV-A1-L1,DV-A1,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A1-L2,DV-A1,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A1-L3,DV-A1,3,absorber,"Sb2Se3 (RFMS, undoped)",1200,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A1-L4,DV-A1,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A1-L5,DV-A1,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A1-L6,DV-A1,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A2-L1,DV-A2,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A2-L2,DV-A2,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A2-L3,DV-A2,3,absorber,"Sb2Se3 (RFMS, undoped)",1100,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A2-L4,DV-A2,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",100,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A2-L5,DV-A2,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A2-L6,DV-A2,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A2-L7,DV-A2,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A3-L1,DV-A3,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A3-L2,DV-A3,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A3-L3,DV-A3,3,absorber,"Sb2Se3 (RFMS, undoped)",950,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A3-L4,DV-A3,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",250,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A3-L5,DV-A3,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A3-L6,DV-A3,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A3-L7,DV-A3,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A4-L1,DV-A4,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A4-L2,DV-A4,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A4-L3,DV-A4,3,absorber,"Sb2Se3 (RFMS, undoped)",800,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A4-L4,DV-A4,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",400,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A4-L5,DV-A4,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A4-L6,DV-A4,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A4-L7,DV-A4,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A5-L1,DV-A5,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A5-L2,DV-A5,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A5-L3,DV-A5,3,absorber,"Sb2Se3 (RFMS, undoped)",400,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A5-L4,DV-A5,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",800,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A5-L5,DV-A5,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A5-L6,DV-A5,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A5-L7,DV-A5,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-A6-L1,DV-A6,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-A6-L2,DV-A6,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-A6-L3,DV-A6,3,absorber,"Sb2Se3 (RFMS, undoped)",200,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-A6-L4,DV-A6,4,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",1000,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-A6-L5,DV-A6,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-A6-L6,DV-A6,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-A6-L7,DV-A6,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B1-L1,DV-B1,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B1-L2,DV-B1,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B1-L3,DV-B1,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",1200,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B1-L4,DV-B1,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B1-L5,DV-B1,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B1-L6,DV-B1,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B2-L1,DV-B2,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B2-L2,DV-B2,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B2-L3,DV-B2,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",1000,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B2-L4,DV-B2,4,absorber,"Sb2Se3 (RFMS, undoped)",200,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B2-L5,DV-B2,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B2-L6,DV-B2,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B2-L7,DV-B2,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B3-L1,DV-B3,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B3-L2,DV-B3,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B3-L3,DV-B3,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",200,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B3-L4,DV-B3,4,absorber,"Sb2Se3 (RFMS, undoped)",1000,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B3-L5,DV-B3,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B3-L6,DV-B3,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B3-L7,DV-B3,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B4-L1,DV-B4,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B4-L2,DV-B4,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B4-L3,DV-B4,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",100,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B4-L4,DV-B4,4,absorber,"Sb2Se3 (RFMS, undoped)",1100,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B4-L5,DV-B4,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B4-L6,DV-B4,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B4-L7,DV-B4,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-B4Ag-L1,DV-B4Ag,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-B4Ag-L2,DV-B4Ag,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-B4Ag-L3,DV-B4Ag,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",100,nm,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-B4Ag-L4,DV-B4Ag,4,absorber,"Sb2Se3 (RFMS, undoped)",1100,nm,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-B4Ag-L5,DV-B4Ag,5,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-B4Ag-L6,DV-B4Ag,6,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-B4Ag-L7,DV-B4Ag,7,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF1-L1,DV-NaF1,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-NaF1-L2,DV-NaF1,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-NaF1-L3,DV-NaF1,3,absorber,"Sb2Se3 (RFMS, undoped)",,,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF1-L4,DV-NaF1,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-NaF1-L5,DV-NaF1,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-NaF1-L6,DV-NaF1,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-PEDNaF-L1,DV-PEDNaF,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass; в структуре расположен снизу (substrate configuration)
+D021,DV-PEDNaF-L2,DV-PEDNaF,2,interlayer,NaF,10,nm,PED,,,,тонкий слой NaF между FTO и Sb2Se3 (Na-допирование тыльной границы)
+D021,DV-PEDNaF-L3,DV-PEDNaF,3,absorber,"Cu:Sb2Se3 (5 at.% Cu, PED)",,,"pulsed electron deposition, 16 kV, 9 Hz, substrate 280 C, Ar 3.0e-1 Pa",,,,
+D021,DV-PEDNaF-L4,DV-PEDNaF,4,ETL,CdS,,,,,,,буферный слой CdS; толщина и метод не указаны
+D021,DV-PEDNaF-L5,DV-PEDNaF,5,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,исходное название: undoped ZnO (UZO)
+D021,DV-PEDNaF-L6,DV-PEDNaF,6,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF0-L1,DV-NaF0,1,back_contact,FTO (glass substrate),,,,,,,commercial FTO-coated glass
+D021,DV-NaF0-L2,DV-NaF0,2,absorber,"Sb2Se3 (RFMS, undoped)",,,"RF magnetron sputtering, 30 W, 4N Sb2Se3 target, substrate 300 C, Ar 5.0e-1 Pa",,,,
+D021,DV-NaF0-L3,DV-NaF0,3,ETL,CdS,,,,,,,буферный слой CdS
+D021,DV-NaF0-L4,DV-NaF0,4,interlayer,UZO (undoped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,undoped ZnO (UZO)
+D021,DV-NaF0-L5,DV-NaF0,5,front_contact,AZO (Al-doped ZnO),,,"RF magnetron sputtering, RT, 120 W, Ar 5.0e-1 Pa",,,,
+D022,DV1-L1,DV1,1,back_contact,FTO,250,nm,,,,,Коммерческая подложка glass/FTO (Merck); авторы называют FTO прозрачным back-contact
+D022,DV1-L2,DV1,2,ETL,ZnO,50,nm,"DC-pulsed magnetron sputtering, room temperature",,,Ar,
+D022,DV1-L3,DV1,3,absorber,a-Si:H (intrinsic),15,nm,"PE-CVD, 13.56 MHz, 6 W, 400 °C (substrate ~200 °C), SiH4/CH4 36/12 sccm",,,,Время осаждения 2 мин
+D022,DV1-L4,DV1,4,HTL,MoO3,10,nm,"thermal evaporation, room temperature, 0.5 Å/s",,,,
+D022,DV1-L5,DV1,5,front_contact,ITO,190,nm,"DC-pulsed magnetron sputtering, 200 °C",,,Ar/O2 30/0.5 sccm,
+D022,DV2-L1,DV2,1,back_contact,FTO,250,nm,,,,,Коммерческая подложка glass/FTO (Merck); авторы называют FTO прозрачным back-contact
+D022,DV2-L2,DV2,2,ETL,ZnO,50,nm,"DC-pulsed magnetron sputtering, room temperature",,,Ar,
+D022,DV2-L3,DV2,3,absorber,a-Si:H (intrinsic),30,nm,"PE-CVD, 13.56 MHz, 6 W, 400 °C (substrate ~200 °C), SiH4/CH4 36/12 sccm",,,,Время осаждения 4 мин
+D022,DV2-L4,DV2,4,HTL,MoO3,10,nm,"thermal evaporation, room temperature, 0.5 Å/s",,,,
+D022,DV2-L5,DV2,5,front_contact,ITO,190,nm,"DC-pulsed magnetron sputtering, 200 °C",,,Ar/O2 30/0.5 sccm,
+D022,DV3-L1,DV3,1,back_contact,FTO,250,nm,,,,,Коммерческая подложка glass/FTO (Merck); авторы называют FTO прозрачным back-contact
+D022,DV3-L2,DV3,2,ETL,ZnO,50,nm,"DC-pulsed magnetron sputtering, room temperature",,,Ar,
+D022,DV3-L3,DV3,3,absorber,a-Si:H (intrinsic),15,nm,"PE-CVD, 13.56 MHz, 6 W, 400 °C (substrate ~200 °C), SiH4/CH4 36/12 sccm",,,,Время осаждения 2 мин
+D022,DV3-L4,DV3,4,HTL,MoO3,20,nm,"thermal evaporation, room temperature, 0.5 Å/s",,,,
+D022,DV3-L5,DV3,5,front_contact,ITO,190,nm,"DC-pulsed magnetron sputtering, 200 °C",,,Ar/O2 30/0.5 sccm,
+D022,DV4-L1,DV4,1,back_contact,FTO,250,nm,,,,,Коммерческая подложка glass/FTO (Merck); авторы называют FTO прозрачным back-contact
+D022,DV4-L2,DV4,2,ETL,ZnO,50,nm,"DC-pulsed magnetron sputtering, room temperature",,,Ar,
+D022,DV4-L3,DV4,3,absorber,a-Si:H (intrinsic),30,nm,"PE-CVD, 13.56 MHz, 6 W, 400 °C (substrate ~200 °C), SiH4/CH4 36/12 sccm",,,,Время осаждения 4 мин
+D022,DV4-L4,DV4,4,HTL,MoO3,20,nm,"thermal evaporation, room temperature, 0.5 Å/s",,,,
+D022,DV4-L5,DV4,5,front_contact,ITO,190,nm,"DC-pulsed magnetron sputtering, 200 °C",,,Ar/O2 30/0.5 sccm,
+D022,DV5-L1,DV5,1,back_contact,FTO,250,nm,,,,,Коммерческая подложка glass/FTO (Merck); авторы называют FTO прозрачным back-contact
+D022,DV5-L2,DV5,2,ETL,AZO,75,nm,"ALD, 135 °C, DEZ/H2O/TMA, 21 supercycles",,,N2 (purge),
+D022,DV5-L3,DV5,3,absorber,a-Si:H (intrinsic),15,nm,"PE-CVD, 13.56 MHz, 6 W, 400 °C (substrate ~200 °C), SiH4/CH4 36/12 sccm",,,,Время осаждения 2 мин
+D022,DV5-L4,DV5,4,HTL,MoO3,10,nm,"thermal evaporation, room temperature, 0.5 Å/s",,,,
+D022,DV5-L5,DV5,5,front_contact,ITO,190,nm,"DC-pulsed magnetron sputtering, 200 °C",,,Ar/O2 30/0.5 sccm,

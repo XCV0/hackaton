@@ -2,7 +2,7 @@
 import shutil, subprocess, tempfile, pathlib
 from . import db
 
-INSTALL_HINT = "Установите: brew install tesseract tesseract-lang"
+INSTALL_HINT = "Установите: brew install tesseract tesseract-lang (или .venv/bin/pip install rapidocr-onnxruntime — встроенный движок, английский и китайский)"
 LAYER_MIN_CHARS = 200
 
 
@@ -28,8 +28,77 @@ def tesseract_langs():
     return [l for l in ("eng", "rus") if l in out]
 
 
+_RAPID = {"engine": None}
+
+
+def _rapid():
+    """Встроенный движок RapidOCR (pip, без системных установок) или None."""
+    if _RAPID["engine"] is None:
+        try:
+            from rapidocr_onnxruntime import RapidOCR
+            _RAPID["engine"] = RapidOCR()
+        except Exception:
+            _RAPID["engine"] = False
+    return _RAPID["engine"] or None
+
+
+def engine():
+    """'tesseract' (предпочтительно, есть rus) | 'rapidocr' | None."""
+    if shutil.which("tesseract"):
+        return "tesseract"
+    try:
+        import rapidocr_onnxruntime  # noqa: F401
+        return "rapidocr"
+    except Exception:
+        return None
+
+
 def ocr_available():
-    return bool(shutil.which("tesseract")) and _renderer() is not None
+    return engine() is not None and _renderer() is not None
+
+
+def _ocr_rapid(img):
+    import numpy as np
+    eng = _rapid()
+    if eng is None:
+        raise RuntimeError("rapidocr не загружается")
+    res, _ = eng(np.array(img.convert("RGB")))
+    if not res:
+        return ""
+    W = img.width
+    items = []
+    for box, txt, _ in res:
+        xs, ys = [q[0] for q in box], [q[1] for q in box]
+        items.append({"y": sum(ys) / 4, "x0": min(xs), "x1": max(xs), "t": txt})
+    # колонки: узкий блок целиком в левой/правой половине; широкие (заголовки) разделяют потоки
+    def col(it):
+        if it["x1"] < 0.55 * W and (it["x1"] - it["x0"]) < 0.55 * W:
+            return 0
+        if it["x0"] > 0.45 * W and (it["x1"] - it["x0"]) < 0.55 * W:
+            return 1
+        return 2
+    def lines_of(group):
+        group = sorted(group, key=lambda i: (i["y"], i["x0"]))
+        out, cur, last = [], [], None
+        for it in group:
+            if last is not None and abs(it["y"] - last) > 12:
+                out.append(" ".join(cur)); cur = []
+            cur.append(it["t"]); last = it["y"]
+        if cur:
+            out.append(" ".join(cur))
+        return out
+    two_col = sum(1 for i in items if col(i) == 0) > 5 and sum(1 for i in items if col(i) == 1) > 5
+    if not two_col:
+        return "\n".join(lines_of(items))
+    out, left, right = [], [], []
+    for it in sorted(items, key=lambda i: i["y"]):
+        c = col(it)
+        if c == 2:
+            out += lines_of(left) + lines_of(right) + lines_of([it]); left, right = [], []
+        else:
+            (left if c == 0 else right).append(it)
+    out += lines_of(left) + lines_of(right)
+    return "\n".join(out)
 
 
 def _render_page(pdf_path, idx, dpi=250):
@@ -70,14 +139,18 @@ def run_ocr(pub_id):
     pub = db.q1("SELECT * FROM publications WHERE id=?", (pub_id,))
     if not pub:
         return {"ok": False, "error": "Публикация не найдена: %s" % pub_id}
-    if not shutil.which("tesseract"):
-        return {"ok": False, "error": "OCR недоступен: не найден tesseract. " + INSTALL_HINT}
+    eng = engine()
+    if eng is None:
+        return {"ok": False, "error": "OCR недоступен: не найден tesseract и встроенный движок. " + INSTALL_HINT}
     if _renderer() is None:
         return {"ok": False, "error": "OCR недоступен: нет библиотеки рендера PDF. Установите: .venv/bin/pip install pypdfium2 pillow"}
-    langs = tesseract_langs()
-    if not langs:
-        return {"ok": False, "error": "У tesseract нет языковых пакетов eng/rus. " + INSTALL_HINT}
-    lang = "+".join(langs)
+    if eng == "tesseract":
+        langs = tesseract_langs()
+        if not langs:
+            return {"ok": False, "error": "У tesseract нет языковых пакетов eng/rus. " + INSTALL_HINT}
+        lang = "+".join(langs)
+    else:
+        lang = "rapidocr (eng)"
     pdf = pub.get("pdf_path")
     if not pdf or not pathlib.Path(pdf).exists():
         return {"ok": False, "error": "Файл PDF не найден: %s" % pdf}
@@ -91,7 +164,8 @@ def run_ocr(pub_id):
     done = 0
     try:
         for p in todo:
-            text = _ocr_image(_render_page(pdf, p - 1), lang).strip()
+            img = _render_page(pdf, p - 1)
+            text = (_ocr_image(img, lang) if eng == "tesseract" else _ocr_rapid(img)).strip()
             db.ex("INSERT INTO pages(pub_id,page,text,ocr) VALUES(?,?,?,1) ON CONFLICT(pub_id,page) DO UPDATE SET text=excluded.text, ocr=1", (pub_id, p, text))
             done += 1
             if done % 5 == 0:

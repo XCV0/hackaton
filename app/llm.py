@@ -10,10 +10,11 @@ PRESETS = {
     "orcarouter": {"base_url": "https://api.orcarouter.ai/v1", "model": "deepseek/deepseek-v4-flash-free", "json_mode": False},
     "gemini": {"base_url": "https://generativelanguage.googleapis.com/v1beta/openai", "model": "gemini-2.5-flash", "json_mode": False},
     "groq": {"base_url": "https://api.groq.com/openai/v1", "model": "openai/gpt-oss-120b", "json_mode": True},
+    "openrouter": {"base_url": "https://openrouter.ai/api/v1", "model": "openrouter/free", "json_mode": False},
     "custom": {"base_url": "", "model": "", "json_mode": False},
 }
 DEFAULTS = {"provider": "deepseek", "workers": 3}
-API_KEY_ENV = {"deepseek": "DEEPSEEK_API_KEY", "groq": "GROQ_API_KEY"}
+API_KEY_ENV = {"deepseek": "DEEPSEEK_API_KEY", "groq": "GROQ_API_KEY", "openrouter": "OPENROUTER_API_KEY"}
 FIXED_ENDPOINTS = {"groq", "ollama"}
 RETRIES = 3
 RETRY_SLEEP = 3.0       # секунд * номер попытки; в тестах обнуляется
@@ -120,9 +121,23 @@ def parse_json(text):
         return json.loads(text)
     except Exception:
         pass
-    start = text.find("{")
-    if start < 0:
+    cands = [m.start() for m in re.finditer(r'\{\s*"[^"\n]{1,60}"\s*:', text)]
+    cands = [c for c in cands if text[:c].rstrip()[-1:] not in ("[", ",")] or cands
+    if not cands:
         raise LLMError("Модель вернула не-JSON ответ")
+    best, best_score = {}, -1
+    for c in cands[:60]:
+        out = _recover(text, c)
+        score = sum(10 * len(v) if isinstance(v, list) else 1 for v in out.values())
+        if score > best_score:
+            best, best_score = out, score
+    if not best:
+        raise LLMError("Модель вернула не-JSON ответ")
+    return best
+
+
+def _recover(text, start):
+    """Поля верхнего уровня объекта с позиции start; усечённый массив даёт все полные элементы."""
     dec = json.JSONDecoder()
     out, i, n = {}, start + 1, len(text)
     while i < n:
@@ -162,8 +177,6 @@ def parse_json(text):
                 items.append(obj)
             out[key] = items
         break
-    if not out:
-        raise LLMError("Модель вернула не-JSON ответ")
     return out
 
 
@@ -183,7 +196,7 @@ def _chat(s, system, user, max_tokens=MAX_TOKENS, json_mode=None):
         raise LLMError("Не задан адрес API (base_url). Укажите его в настройках модели.")
     provider = s["provider"]
     if provider in API_KEY_ENV and not s["api_key"]:
-        name = "Groq" if provider == "groq" else "DeepSeek"
+        name = {"groq": "Groq", "openrouter": "OpenRouter"}.get(provider, "DeepSeek")
         raise LLMError(f"Не задан API-ключ {name}. Укажите его в разделе «Модель и ключ» или в {API_KEY_ENV[provider]}.")
     headers = {"Content-Type": "application/json"}
     if s["api_key"]:
@@ -196,6 +209,9 @@ def _chat(s, system, user, max_tokens=MAX_TOKENS, json_mode=None):
         if s["model"] in ("openai/gpt-oss-120b", "openai/gpt-oss-20b"):
             body["reasoning_effort"] = "low"
         options["timeout"] = httpx.Timeout(90, connect=5)
+    elif provider == "openrouter":
+        body["reasoning"] = {"enabled": False}
+        body["max_tokens"] = max(body.get("max_tokens", 0), 12000)
     elif provider == "ollama":
         body["reasoning_effort"] = "none"
         options.update(trust_env=False, timeout=httpx.Timeout(TIMEOUT, connect=3))
@@ -225,14 +241,27 @@ def _chat(s, system, user, max_tokens=MAX_TOKENS, json_mode=None):
                         if seconds > GROQ_MAX_RETRY_AFTER:
                             raise LLMError(f"Лимит Groq (HTTP 429). API просит подождать {seconds} с. Можно выбрать Ollama и повторить извлечение статьи.")
                         delay = max(delay, seconds)
+            elif code == 400 and "reasoning" in body and "reasoning" in r.text.lower():
+                body.pop("reasoning", None)        # модель за роутером требует рассуждения: повторяем без параметра
+                last = "модель требует reasoning, повтор без отключения"
+                continue
             elif code >= 400:
                 raise LLMError("API вернул ошибку HTTP %d: %s" % (code, r.text[:300]))
             else:
                 try:
-                    msg = r.json()["choices"][0]["message"]["content"] or ""
+                    ch = r.json()["choices"][0]
+                    m = ch["message"]
+                    msg = m.get("content") or ""
                 except Exception:
                     raise LLMError("Неожиданный формат ответа API: %s" % r.text[:300])
-                return msg, int((time.time() - t0) * 1000)
+                if not msg.strip():
+                    # пустой content: часть бесплатных/«думающих» моделей кладёт ответ в reasoning или упирается в лимит токенов
+                    alt = m.get("reasoning") or m.get("reasoning_content") or ""
+                    if isinstance(alt, str) and "{" in alt and "}" in alt:
+                        return alt, int((time.time() - t0) * 1000)
+                    last = "пустой ответ модели (finish_reason=%s, модель=%s)" % (ch.get("finish_reason"), r.json().get("model", s["model"]))
+                else:
+                    return msg, int((time.time() - t0) * 1000)
         if a < RETRIES:
             time.sleep(delay)
     raise LLMError("Модель не ответила после %d попыток (%s). Лимит запросов или недоступность сервиса — повторите позже." % (RETRIES + 1, last))

@@ -35,9 +35,9 @@ def _lenient(s):
     return re.sub(r"[\s\-|]+", "", _BREAK_RE.sub("", _base(s)))
 
 
-def _parts(fragment):
-    """Цитата с многоточием («…», «...») проверяется по частям."""
-    parts = re.split(r"\.\.\.|…", fragment or "")
+def _parts(fragment, lines=False):
+    """Цитата с многоточием («…», «...») проверяется по частям; lines=True — ещё и по строкам (шапка + строка таблицы)."""
+    parts = re.split(r"\.\.\.|…|\n" if lines else r"\.\.\.|…", fragment or "")
     return [p for p in parts if re.search(r"\w", p)]
 
 
@@ -59,6 +59,7 @@ def verify_quote(pages_text, page, fragment):
     parts = _parts(fragment)
     if not parts:
         return False, None
+    line_parts = _parts(fragment, lines=True)
     n = len(pages_text)
     try:
         page = int(page)
@@ -71,6 +72,10 @@ def verify_quote(pages_text, page, fragment):
     for p in order + rest:
         if _found_in(parts, pages_text[p - 1]):
             return True, p
+    if len(line_parts) > len(parts):      # многострочная цитата: каждая строка дословно на одной и той же странице
+        for p in order + rest:
+            if _found_in(line_parts, pages_text[p - 1]):
+                return True, p
     return False, None
 
 

@@ -368,7 +368,7 @@ async function settings(box, p, current) {
   const presets = s.presets || {};
   box.innerHTML = `<h1>Модель и ключ</h1><p class="lead">Какая модель извлекает данные. Ключ доступа записывается только в одну сторону: после сохранения он не показывается.</p>
   <div class="card"><form id="sf" class="form">
-    <label>Провайдер<select name="provider">${options([["deepseek", "DeepSeek"], ["lmstudio", "LM Studio (локально)"], ["ollama", "Ollama (локально)"], ["orcarouter", "OrcaRouter (бесплатные модели)"], ["gemini", "Google Gemini (AI Studio)"], ["groq", "Groq"], ["custom", "Другой, совместимый с OpenAI"]], s.provider)}</select></label>
+    <label>Провайдер<select name="provider">${options([["deepseek", "DeepSeek"], ["lmstudio", "LM Studio (локально)"], ["ollama", "Ollama (локально)"], ["orcarouter", "OrcaRouter (бесплатные модели)"], ["gemini", "Google Gemini (AI Studio)"], ["groq", "Groq"], ["openrouter", "OpenRouter (free-роутер)"], ["custom", "Другой, совместимый с OpenAI"]], s.provider)}</select></label>
     <label>Адрес API<input type="url" name="base_url" value="${esc(s.base_url || "")}" placeholder="https://..."></label>
     <label>Модель<input type="text" name="model" value="${esc(s.model || "")}"></label>
     <label>Воркеров (параллельных статей)<input type="number" min="1" max="32" name="workers" value="${esc(s.workers || 2)}"></label>

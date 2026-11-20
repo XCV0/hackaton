@@ -424,7 +424,8 @@ PRESETS = {"deepseek": {"base_url": "https://api.deepseek.com", "model": "deepse
            "ollama": {"base_url": "http://127.0.0.1:11434/v1", "model": "qwen3.5:4b"},
            "orcarouter": {"base_url": "https://api.orcarouter.ai/v1", "model": "deepseek/deepseek-v4-flash-free"},
            "gemini": {"base_url": "https://generativelanguage.googleapis.com/v1beta/openai", "model": "gemini-2.5-flash"},
-           "groq": {"base_url": "https://api.groq.com/openai/v1", "model": "openai/gpt-oss-120b"}}
+           "groq": {"base_url": "https://api.groq.com/openai/v1", "model": "openai/gpt-oss-120b"},
+           "openrouter": {"base_url": "https://openrouter.ai/api/v1", "model": "openrouter/free"}}
 DEFAULTS = {"provider": "deepseek", "base_url": "https://api.deepseek.com", "model": "deepseek-flash", "workers": "3", "require_login": "false"}
 SETTING_KEYS = ("provider", "base_url", "model", "workers", "require_login")
 

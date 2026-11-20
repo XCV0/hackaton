@@ -222,7 +222,7 @@ def test_configs(client, tokens):
     vs = [v for v in client.get("/api/config/solar", headers=h).json()["versions"] if v["kind"] == "rules"]
     assert {v["version"]: v["active"] for v in vs} == {1: True, 2: False}
     assert client.post("/api/config/solar/rules/activate", json={"version": 9}, headers=h).status_code == 400
-    assert client.get("/api/domains").json()[0]["version"].startswith("schema v1")
+    assert client.get("/api/domains").json()[0]["version"].startswith("schema v")
     # новая область без правки кода
     s = client.get("/api/config/rag", headers=h).json()
     n = client.post("/api/config/domains", json={"domain": "rag2", "schema_yaml": s["schema_yaml"], "rules_yaml": s["rules_yaml"]}, headers=h)

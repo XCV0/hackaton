@@ -264,6 +264,7 @@ def test_run_ocr_without_tesseract(tmpdb, tmp_path, monkeypatch):
     pdf = make_pdf(tmp_path / "scan.pdf", ["", "", ""])
     pid = pipeline.register_pdf("solar", path=pdf)
     monkeypatch.setattr(ocr.shutil, "which", lambda n: None)
+    monkeypatch.setattr(ocr, "engine", lambda: None)
     assert pipeline.ocr_available() is False
     r = pipeline.run_ocr(pid)
     assert r["ok"] is False and "brew install tesseract tesseract-lang" in r["error"]
@@ -483,3 +484,18 @@ def test_test_connection(tmpdb, monkeypatch):
     llm.save_settings({"api_key": "k"})
     monkeypatch.setattr(llm.httpx, "post", lambda *a, **k: ok_resp('{"ok": true}'))
     assert llm.test_connection()["ok"] is True
+
+
+def test_fuzzy_enum_and_synonyms():
+    cfg = config.load_domain("solar")
+    row = pipeline._clean_row(cfg, "results", {"metric_name": "PCE mean (%)", "raw_value": "5.52"}, ["metric_name", "aggregation", "raw_value", "note"], [])
+    assert row["metric_name"] == "PCE" and row["raw_value"] == "5.52"
+    assert pipeline._fuzzy_enum("Jsc_EQE (mA/cm2)", ["Jsc", "Jsc_EQE"])[0] == "Jsc_EQE"
+    assert pipeline._fuzzy_enum("unknown thing", ["PCE", "Voc"]) is None
+
+
+def test_parse_json_from_reasoning_prose():
+    from app import llm
+    text = 'We need to output JSON like {"foo": 1}. Let\'s draft:\n\n{\n  "results": [\n    {"metric_name": "A", "raw_value": "1"},\n    {"metric_name": "B", "raw_value": "2"},\n    {"metric_name": "C", "raw'
+    out = llm.parse_json(text)
+    assert [x["metric_name"] for x in out["results"]] == ["A", "B"]

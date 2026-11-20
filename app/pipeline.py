@@ -159,6 +159,27 @@ def _extract_pages(path):
     return pages
 
 
+_ROW_RE = re.compile(r"(\S+(?:\s\S+)?)\s+((?:-?\d+(?:[.,]\d+)?|-|—)(?:\s+(?:-?\d+(?:[.,]\d+)?|-|—)){2,})\s*$")
+
+
+def _numeric_rows(page):
+    """Строки таблиц из текста pdfplumber: «метка число число число…» (хвост строки целиком, дословно). Для сложных вёрсток,
+    где разбор таблиц разрывает метки и числа; блок [ROWS] даёт модели строки, которые можно процитировать буквально."""
+    try:
+        text = page.extract_text() or ""
+    except Exception:
+        return []
+    rows, seen = [], set()
+    for ln in text.splitlines():
+        m = _ROW_RE.search(ln.strip())
+        if m:
+            r = (m.group(1) + " " + m.group(2)).strip()
+            if r not in seen:
+                seen.add(r)
+                rows.append(r)
+    return rows
+
+
 def _table_blocks(path, n_pages):
     """{page: '[TABLE]...'} из pdfplumber; ошибки тихо игнорируются (текст страницы остаётся)."""
     out = {}
@@ -178,6 +199,9 @@ def _table_blocks(path, n_pages):
                     rows = [r for r in rows if r.strip(" |")]
                     if len(rows) >= 2:
                         blocks.append("[TABLE]\n" + "\n".join(rows) + "\n[/TABLE]")
+                nrows = _numeric_rows(p)
+                if len(nrows) >= 3:
+                    blocks.append("[ROWS]\n" + "\n".join(nrows) + "\n[/ROWS]")
                 if blocks:
                     out[i] = "\n".join(blocks)
     except Exception:
@@ -619,7 +643,7 @@ def _ci_get(d, key):
     return None
 
 
-def _norm_enum(val, vocab):
+def _norm_enum(val, vocab, synonyms=None):
     if not val:
         return "", False
     for v in vocab:
@@ -629,7 +653,22 @@ def _norm_enum(val, vocab):
     for v in vocab:
         if str(v).lower() == low:
             return str(v), False
+    for v, words in (synonyms or {}).items():
+        if low in [str(w).lower() for w in words]:
+            return str(v), False
     return "", True
+
+
+def _fuzzy_enum(val, vocab):
+    """Слово словаря как отдельный токен внутри текста («PCE mean (%)» -> PCE). Самое длинное совпадение; остаток текста возвращается."""
+    low = re.sub(r"\s+", " ", str(val)).strip().lower()
+    best = None
+    for v in vocab:
+        t = str(v).lower()
+        m = re.search(r"(?<![\w-])" + re.escape(t) + r"(?![\w-])", low)
+        if m and (best is None or len(t) > len(best[0])):
+            best = (t, str(v), (low[:m.start()] + " " + low[m.end():]).strip())
+    return (best[1], best[2]) if best else None
 
 
 def _norm_bool(val):
@@ -660,7 +699,7 @@ def _clean_row(cfg, ent, raw, cols, warns):
     """Строка модели -> data-dict по колонкам: приведение типов/словарей; ключи модели — колонки или короткие алиасы."""
     e = _ents(cfg)[ent]
     fields = e.get("fields") or {}
-    out, extra_note = {}, []
+    out, extra_note, leftovers = {}, [], []
     for col in cols:
         v = _ci_get(raw, col)
         if v is None:
@@ -670,7 +709,13 @@ def _clean_row(cfg, ent, raw, cols, warns):
         f = fields.get(col) or {}
         t = f.get("type", "string")
         if s and t == "enum" and f.get("vocab"):
-            s2, bad = _norm_enum(s, f["vocab"])
+            s2, bad = _norm_enum(s, f["vocab"], f.get("synonyms"))
+            if bad:
+                fz = _fuzzy_enum(s, f["vocab"])
+                if fz:
+                    s2, bad = fz[0], False
+                    leftovers.append(fz[1])
+                    extra_note.append("%s: «%s» -> %s" % (col, s, s2))
             if bad:
                 extra_note.append("%s: «%s» (вне словаря)" % (col, s))
                 warns.append("вне словаря %s.%s=%s" % (ent, col, s))
@@ -680,6 +725,15 @@ def _clean_row(cfg, ent, raw, cols, warns):
         elif s and t == "int" and _as_int(s) is not None and re.fullmatch(r"-?\d+([.,]0+)?", s.strip()):
             s = str(_as_int(s))
         out[col] = s
+    # остаток названия («mean», «best») -> соседние словарные поля по synonyms из схемы
+    for left in leftovers:
+        words = set(re.findall(r"[\w]+", left.lower()))
+        for col2, f2 in fields.items():
+            if col2 in out and not out[col2] and f2.get("synonyms"):
+                for val2, ws in f2["synonyms"].items():
+                    if words & {str(w).lower() for w in ws}:
+                        out[col2] = str(val2)
+                        break
     if extra_note and "note" in cols:
         out["note"] = (out.get("note", "") + ("; " if out.get("note") else "") + "; ".join(extra_note))
     return out

@@ -166,3 +166,11 @@ def test_gold_table_migration():
     evaluation.ensure_tables()
     c.execute("INSERT INTO gold_records VALUES('A','rag','results','G1','{}')")   # теперь допустимо
     assert c.execute("SELECT COUNT(*) FROM gold_records").fetchone()[0] == 2
+
+
+def test_match_best_overlap_mode():
+    g = [{"a": "x", "b": "1", "c": "same"}, {"a": "y", "b": "2", "c": "other"}]
+    p = [{"a": "q", "b": "2", "c": "other"}, {"a": "x", "b": "9", "c": "same"}]
+    pairs, miss, extra = evaluation._match(g, p, ["*"], set(), ["a", "b", "c"])
+    assert len(pairs) == 2 and not miss and not extra
+    assert pairs[0][1]["a"] == "x" and pairs[1][1]["b"] == "2"

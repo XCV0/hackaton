@@ -192,17 +192,27 @@ def _eval_cfg(schema):
     return ev.get("match_fields") or {}, set(ev.get("value_fields") or []), SKIP_FIELDS | set(ev.get("skip_fields") or [])
 
 
-def _match(gold_rows, pred_rows, mfields, vfields):
-    """Жадное однозначное сопоставление по match_fields. Возвращает (пары, не найденные gold, лишние pred)."""
+def _match(gold_rows, pred_rows, mfields, vfields, fields=None):
+    """Жадное однозначное сопоставление по match_fields. mfields == ['*'] — по наибольшему числу совпавших непустых полей
+    (для сущностей со свободными названиями, где точный ключ не определён). Возвращает (пары, не найденные gold, лишние pred)."""
     used, pairs, miss = set(), [], []
     for g in gold_rows:
         hit = None
-        for i, p in enumerate(pred_rows):
-            if i in used:
-                continue
-            if all(values_equal(g.get(f, ""), p.get(f, ""), f in vfields) for f in mfields):
-                hit = i
-                break
+        if list(mfields) == ["*"]:
+            best = 0
+            for i, p in enumerate(pred_rows):
+                if i in used:
+                    continue
+                score = sum(1 for f in (fields or []) if _s(g.get(f, "")) and values_equal(g.get(f, ""), p.get(f, ""), f in vfields))
+                if score > best:
+                    best, hit = score, i
+        else:
+            for i, p in enumerate(pred_rows):
+                if i in used:
+                    continue
+                if all(values_equal(g.get(f, ""), p.get(f, ""), f in vfields) for f in mfields):
+                    hit = i
+                    break
         if hit is None:
             miss.append(g)
         else:
@@ -235,7 +245,7 @@ def evaluate(cfg, gold, pred):
         for pid in gold:
             g_rows = gold[pid].get(ent, [])
             p_rows = pred.get(pid, {}).get(ent, [])
-            pairs, miss, extra = _match(g_rows, p_rows, mfields, vfields)
+            pairs, miss, extra = _match(g_rows, p_rows, mfields, vfields, fields)
             rows["gold"] += len(g_rows); rows["pred"] += len(p_rows); rows["matched"] += len(pairs)
             for g, p in pairs:
                 for f in fields:
