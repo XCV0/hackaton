@@ -1,0 +1,58 @@
+domain: rag
+version: 1
+rules:
+- id: metric_scale
+  type: metric_scale
+  severity: warning
+  description: Значение должно лежать в допустимой шкале метрики
+  params:
+    scales:
+      fraction:
+      - 0
+      - 1
+      percent:
+      - 0
+      - 100
+    by_unit:
+      '%':
+      - 0
+      - 100
+      fraction:
+      - 0
+      - 1
+      ratio:
+      - 0
+      - 1
+    by_metric_regex:
+      (?i)^(f1|em|exact.?match|recall|precision|accuracy|mrr|ndcg|map|hit|hits|rouge|bleu|bertscore): unit_scale
+    bleu_rouge_note: BLEU/ROUGE не пересчитываются без известной шкалы
+- id: metric_k
+  type: k_required
+  severity: warning
+  description: Для метрик @k должно быть указано k
+  params:
+    name_regex: '@\s*(\d+)|(?i)(recall|precision|ndcg|hit|hits|mrr|map)\s*@'
+    extract_k_from_name: true
+- id: result_links
+  type: link_integrity
+  severity: error
+  description: Результат связан с экспериментом, конфигурацией, набором данных и задачей
+  params:
+    required:
+    - experiment_id
+    - config_id
+    - dataset_id
+    - task_id
+    optional_ok:
+    - task_id
+- id: protocol_mismatch
+  type: no_merge
+  severity: info
+  description: Разные эксперименты и варианты метрик не объединяются
+  params:
+    key:
+    - task_id
+    - dataset_id
+    - metric_name
+    - metric_variant
+    - experiment_id

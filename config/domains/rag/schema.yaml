@@ -1,0 +1,245 @@
+domain: rag
+version: 1
+title: RAG-системы и поиск по документам
+scope: Публикации с описанием конфигурации RAG (система находит сведения во внешней коллекции документов и использует найденный контекст при ответе)
+  и результатов её оценки. Решение по содержанию, а не по слову RAG в заголовке.
+result_entity: results
+publication_entity: publications
+entities:
+  publications:
+    id: publication_id
+    parent: null
+    columns:
+    - publication_id
+    - title
+    - year
+    - DOI
+    - authors
+    - in_scope
+    - exclusion_reason
+    fields:
+      in_scope:
+        type: bool
+      exclusion_reason:
+        type: string
+  configurations:
+    id: config_id
+    parent: publications
+    structure: true
+    columns:
+    - publication_id
+    - config_id
+    - rag_variant
+    - retrieval_method
+    - retriever_model
+    - embedding_model
+    - embedding_version
+    - chunking_method
+    - chunk_size
+    - chunk_overlap
+    - chunk_unit
+    - index_type
+    - vector_store
+    - top_k
+    - reranker_model
+    - generator_model
+    - generator_version
+    - prompt_strategy
+    - context_strategy
+    - note
+    fields:
+      chunk_size:
+        type: number
+      chunk_overlap:
+        type: number
+      top_k:
+        type: int
+        description: не путать с k метрики; диапазон не усреднять
+  datasets:
+    id: dataset_id
+    parent: publications
+    structure: true
+    columns:
+    - publication_id
+    - dataset_id
+    - dataset_name
+    - dataset_version
+    - language
+    - data_split
+    - scientific_domain
+    - note
+    fields: {}
+  tasks:
+    id: task_id
+    parent: publications
+    structure: true
+    columns:
+    - publication_id
+    - task_id
+    - task_type
+    - note
+    fields: {}
+  experiments:
+    id: experiment_id
+    parent: publications
+    structure: true
+    columns:
+    - publication_id
+    - experiment_id
+    - evaluation_protocol
+    - baseline_name
+    - hardware
+    - latency_ms
+    - tokens_per_query
+    - sample_size
+    - note
+    fields:
+      latency_ms:
+        type: number
+      tokens_per_query:
+        type: number
+      sample_size:
+        type: int
+  results:
+    id: result_id
+    parent: publications
+    columns:
+    - publication_id
+    - result_id
+    - experiment_id
+    - config_id
+    - dataset_id
+    - task_id
+    - metric_group
+    - metric_name
+    - metric_variant
+    - metric_direction
+    - metric_k
+    - metric_value
+    - metric_unit
+    - baseline_value
+    - aggregation
+    - sample_size
+    - raw_value
+    - raw_unit
+    - normalized_value
+    - normalized_unit
+    - result_origin
+    - cited_publication_id
+    - source_page
+    - source_section
+    - source_table
+    - source_figure
+    - source_fragment
+    - extraction_status
+    - duplicate_of
+    - note
+    refs:
+      experiment_id: experiments
+      config_id: configurations
+      dataset_id: datasets
+      task_id: tasks
+    fields:
+      metric_direction:
+        type: enum
+        vocab:
+        - higher_is_better
+        - lower_is_better
+        - target
+      metric_k:
+        type: int
+      metric_value:
+        type: number
+      baseline_value:
+        type: number
+      result_origin:
+        type: enum
+        vocab:
+        - primary
+        - cited
+      extraction_status:
+        type: enum
+        vocab:
+        - extracted
+        - present_not_extractable
+        - absent
+      source_page:
+        type: int
+  issues:
+    id: issue_id
+    parent: publications
+    columns:
+    - publication_id
+    - issue_id
+    - record_ids
+    - check_name
+    - description
+    - source_page
+    - source_fragment
+    fields: {}
+extraction:
+  chunk_chars: 24000
+  hints:
+  - Разные генераторы, ablation-варианты и настройки — отдельные configurations; параметр-диапазон не усреднять, оставить пустым и описать в note.
+  - Не достраивать версии моделей и параметры по известным настройкам библиотек или другим статьям.
+  - Одно значение одной метрики в одном эксперименте — одна строка results; повторы в тексте тоже записывай.
+  - Доли/проценты/единицы времени не пересчитывай без известной шкалы; исходное значение — в raw_value/raw_unit.
+metrics: {}
+scale_required: true
+compare:
+  entity: results
+  title: Сопоставление результатов
+  criteria:
+  - name: task
+    path: task.task_type
+    mode: equal
+    reason: разные задачи
+  - name: dataset
+    path: dataset.dataset_name
+    mode: equal
+    reason: разные наборы данных
+  - name: dataset_version
+    path: dataset.dataset_version
+    mode: equal
+    reason: разные версии набора
+  - name: split
+    path: dataset.data_split
+    mode: equal
+    reason: разные разбиения данных
+  - name: metric
+    path: result.metric_name
+    mode: equal
+    reason: разные метрики
+  - name: metric_variant
+    path: result.metric_variant
+    mode: equal
+    reason: разные определения метрики
+  - name: metric_k
+    path: result.metric_k
+    mode: equal
+    reason: разное k метрики
+  - name: protocol
+    path: experiment.evaluation_protocol
+    mode: equal
+    reason: разные протоколы оценки
+eval:
+  match_fields:
+    results:
+    - metric_name
+    - metric_variant
+    - metric_k
+    - normalized_value
+    - result_origin
+    configurations:
+    - rag_variant
+    datasets:
+    - dataset_name
+    tasks:
+    - task_type
+    experiments:
+    - evaluation_protocol
+  value_fields:
+  - normalized_value
+  - chunk_size
+  - top_k
+  - sample_size

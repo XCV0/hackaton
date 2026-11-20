@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Источник значения</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: var(--panel); }
+  .vbar { position: sticky; top: 0; z-index: 10; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .vbar .sp { flex: 1; }
+  .vmsg { max-width: 900px; margin: 12px auto 0; padding: 0 14px; }
+  .vq { max-width: 900px; margin: 10px auto 0; padding: 0 14px; font-size: 13.5px; }
+  .stage-wrap { overflow: auto; padding: 16px 8px 40px; text-align: center; }
+  .pagebox { position: relative; display: inline-block; background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.25); margin: 0 auto; text-align: left; }
+  .pagebox canvas { display: block; }
+  .textLayer { position: absolute; inset: 0; overflow: hidden; line-height: 1; opacity: 1; }
+  .textLayer > span { position: absolute; white-space: pre; color: transparent; cursor: text; transform-origin: 0 0; }
+  .textLayer > span.hl { background: rgba(255, 196, 0, .45); border-radius: 2px; }
+  .textLayer > span.hl2 { background: rgba(255, 120, 0, .3); }
+</style>
+</head>
+<body>
+<div class="vbar">
+  <button class="btn" id="prev">Назад</button>
+  <span id="pg" class="muted">стр. –</span>
+  <button class="btn" id="next">Вперёд</button>
+  <button class="btn" id="zo" title="Уменьшить">−</button><span id="zv" class="muted">100 %</span><button class="btn" id="zi" title="Увеличить">+</button>
+  <span class="sp"></span>
+  <span id="pubname" class="muted"></span>
+  <a class="btn" id="back" href="#" onclick="window.close();return false">Закрыть</a>
+</div>
+<div class="vmsg" id="msg"></div>
+<div class="vq" id="vq"></div>
+<div class="stage-wrap" id="stage"><div class="pagebox" id="box"><canvas id="cv"></canvas><div class="textLayer" id="tl"></div></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

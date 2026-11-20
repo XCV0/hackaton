@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Данные из научных публикаций</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#/">Данные из публикаций<small id="brandSub">ВИНИТИ РАН · ЮФУ</small></a>
+    <nav id="nav" aria-label="Разделы"></nav>
+    <div class="tools">
+      <select id="domainSel" title="Предметная область" aria-label="Предметная область"></select>
+      <button class="theme" id="theme" title="Сменить тему">Тема</button>
+      <span id="who"></span>
+    </div>
+  </div>
+</header>
+<main><div class="wrap" id="app"></div></main>
+<footer><div class="wrap">Значения извлечены автоматически, проверены правилами и цитатами из текста; неизвестные значения не восстанавливаются по догадке.</div></footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>

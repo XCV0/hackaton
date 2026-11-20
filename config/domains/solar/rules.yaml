@@ -1,0 +1,83 @@
+domain: solar
+version: 1
+rules:
+- id: jv_consistency
+  type: formula_consistency
+  severity: warning
+  description: PCE должно совпадать с Voc·Jsc·FF/Pin
+  params:
+    target: PCE
+    expr: Voc*Jsc*FF/Pin
+    defaults:
+      Pin: 100
+    tolerance_rel: 0.03
+    group_by:
+    - device_id
+    - measurement_id
+    - aggregation
+    pce_percent: true
+- id: voc_limit
+  type: inequality
+  severity: error
+  description: Voc должно быть меньше Eg/q
+  params:
+    left: Voc
+    right: bandgap_value
+    right_from: materials via devices.absorber_material_id
+- id: range_ff
+  type: bound
+  severity: warning
+  params:
+    metric: FF
+    min: 10
+    max: 90
+  description: FF вне 10-90 %
+- id: range_jsc
+  type: bound
+  severity: warning
+  params:
+    metric: Jsc
+    min: 0
+    max: 50
+    exclusive: true
+  description: Jsc вне 0-50 мА/см2
+- id: range_pce
+  type: bound
+  severity: warning
+  params:
+    metric: PCE
+    min: 0
+    max: 35
+    exclusive: true
+  description: PCE вне 0-35 %
+- id: eqe_consistency
+  type: pair_diff
+  severity: warning
+  description: Jsc по ВАХ и по EQE расходятся
+  params:
+    a: Jsc
+    b: Jsc_EQE
+    tolerance_rel: 0.05
+    group_by:
+    - device_id
+- id: champion_vs_mean
+  type: champion_vs_mean
+  severity: warning
+  description: Лучший прибор хуже или аномально выше среднего той же партии
+  params:
+    metrics:
+    - PCE
+    - Voc
+    - Jsc
+    - FF
+    max_rel_excess: 0.5
+    group_by:
+    - device_id
+    - measurement_id
+- id: scan_direction_mix
+  type: separate_values
+  severity: info
+  description: Прямой и обратный ход хранятся и сравниваются раздельно
+  params:
+    field: scan_direction
+    entity: measurements

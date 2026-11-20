@@ -1,0 +1,424 @@
+domain: solar
+version: 1
+title: Тонкоплёночные солнечные элементы
+scope: Экспериментальные публикации с описанием изготовленного однопереходного тонкоплёночного солнечного элемента (перовскиты, CIGS, CdTe, кестериты,
+  Sb2Se3, тонкоплёночный кремний) и его фотоэлектрических характеристик. Тандемы и расчётные работы без образцов не включаются.
+result_entity: results
+publication_entity: publications
+entities:
+  publications:
+    id: publication_id
+    parent: null
+    columns:
+    - publication_id
+    - title
+    - year
+    - DOI
+    - authors
+    - in_scope
+    - exclusion_reason
+    fields:
+      in_scope:
+        type: bool
+        description: относится ли статья к области
+      exclusion_reason:
+        type: string
+  materials:
+    id: material_id
+    parent: publications
+    structure: true
+    columns:
+    - publication_id
+    - material_id
+    - material_name_raw
+    - formula_normalized
+    - material_class
+    - dimensionality
+    - additives
+    - bandgap_value
+    - bandgap_unit
+    - bandgap_method
+    - note
+    fields:
+      material_class:
+        type: enum
+        vocab:
+        - perovskite
+        - CIGS
+        - CdTe
+        - kesterite
+        - Sb2Se3
+        - thin-film Si
+        - other
+      dimensionality:
+        type: enum
+        vocab:
+        - 3D
+        - 2D
+        - 2D-3D
+      bandgap_value:
+        type: number
+      bandgap_unit:
+        type: string
+        default: eV
+      bandgap_method:
+        type: enum
+        vocab:
+        - Tauc
+        - EQE
+        - PL
+        - cited
+      formula_normalized:
+        type: string
+        description: для перовскита вид A-B-X с раскрытыми MA, FA, Cs
+  devices:
+    id: device_id
+    parent: publications
+    structure: true
+    columns:
+    - publication_id
+    - device_id
+    - absorber_material_id
+    - device_label
+    - device_role
+    - device_type
+    - architecture
+    - substrate_type
+    - active_area
+    - area_unit
+    - area_definition
+    - encapsulation
+    - note
+    refs:
+      absorber_material_id: materials
+    fields:
+      device_role:
+        type: enum
+        vocab:
+        - control
+        - target
+        - record
+      device_type:
+        type: enum
+        vocab:
+        - cell
+        - minimodule
+        - module
+      architecture:
+        type: enum
+        vocab:
+        - n-i-p
+        - p-i-n
+        - substrate
+        - superstrate
+      substrate_type:
+        type: enum
+        vocab:
+        - rigid
+        - flexible
+      area_definition:
+        type: enum
+        vocab:
+        - designated illumination
+        - aperture
+        - total
+      active_area:
+        type: number
+      area_unit:
+        type: string
+        default: cm2
+  layers:
+    id: layer_id
+    parent: devices
+    structure: true
+    columns:
+    - publication_id
+    - layer_id
+    - device_id
+    - layer_order
+    - layer_function
+    - layer_material
+    - layer_thickness
+    - thickness_unit
+    - deposition_method
+    - annealing_temperature
+    - annealing_time
+    - atmosphere
+    - note
+    refs:
+      device_id: devices
+    fields:
+      layer_function:
+        type: enum
+        vocab:
+        - front_contact
+        - ETL
+        - absorber
+        - passivation
+        - HTL
+        - interlayer
+        - recombination
+        - back_contact
+      layer_order:
+        type: int
+      layer_thickness:
+        type: number
+      thickness_unit:
+        type: string
+        default: nm
+  measurements:
+    id: measurement_id
+    parent: devices
+    structure: true
+    columns:
+    - publication_id
+    - measurement_id
+    - device_id
+    - measurement_type
+    - spectrum
+    - light_intensity
+    - intensity_unit
+    - scan_direction
+    - scan_rate
+    - mask_used
+    - certified
+    - certification_lab
+    - temperature
+    - stability_protocol
+    - stress_conditions
+    - note
+    refs:
+      device_id: devices
+    fields:
+      measurement_type:
+        type: enum
+        vocab:
+        - J-V
+        - MPP tracking
+        - EQE
+        - stability
+      scan_direction:
+        type: enum
+        vocab:
+        - reverse
+        - forward
+        - average
+      stability_protocol:
+        type: enum
+        vocab:
+        - ISOS-D
+        - ISOS-L
+        - ISOS-T
+        - other
+      mask_used:
+        type: bool
+      certified:
+        type: bool
+  results:
+    id: result_id
+    parent: publications
+    columns:
+    - publication_id
+    - result_id
+    - device_id
+    - measurement_id
+    - material_id
+    - metric_name
+    - metric_value
+    - metric_unit
+    - aggregation
+    - spread_value
+    - n_devices
+    - time_point
+    - time_unit
+    - raw_value
+    - raw_unit
+    - normalized_value
+    - normalized_unit
+    - result_origin
+    - cited_publication_id
+    - source_page
+    - source_section
+    - source_table
+    - source_figure
+    - source_fragment
+    - extraction_status
+    - duplicate_of
+    - note
+    refs:
+      device_id: devices
+      measurement_id: measurements
+      material_id: materials
+    fields:
+      metric_name:
+        type: enum
+        vocab:
+        - PCE
+        - FF
+        - HI
+        - retained_PCE
+        - Voc
+        - Jsc
+        - Jsc_EQE
+        - Rs
+        - Rsh
+        - T80
+      aggregation:
+        type: enum
+        vocab:
+        - champion
+        - mean
+        - median
+        description: пусто, если в статье не сказано
+      result_origin:
+        type: enum
+        vocab:
+        - primary
+        - cited
+      extraction_status:
+        type: enum
+        vocab:
+        - extracted
+        - present_not_extractable
+        - absent
+      metric_value:
+        type: number
+      normalized_value:
+        type: number
+      source_page:
+        type: int
+  issues:
+    id: issue_id
+    parent: publications
+    columns:
+    - publication_id
+    - issue_id
+    - record_ids
+    - check_name
+    - description
+    - source_page
+    - source_fragment
+    fields: {}
+extraction:
+  chunk_chars: 24000
+  hints:
+  - Слои перечисляй от подложки, подложку (стекло, фольга) не записывай, толщины в нм.
+  - Прямой и обратный ход развёртки — разные measurements.
+  - Значения лучшего прибора и средние по партии — разные строки; aggregation пустой, если в статье не сказано.
+  - Значения из чужих работ — result_origin=cited, device_id пустой.
+metrics:
+  PCE:
+    unit: '%'
+    kind: percent
+  FF:
+    unit: '%'
+    kind: percent
+  HI:
+    unit: '%'
+    kind: percent
+  retained_PCE:
+    unit: '%'
+    kind: percent
+  stabilized_PCE:
+    unit: '%'
+    kind: percent
+  Voc:
+    unit: V
+    conversions:
+      mV: 0.001
+      V: 1
+  Jsc:
+    unit: mA/cm2
+    conversions:
+      A/cm2: 1000
+      uA/cm2: 0.001
+      mA/cm2: 1
+      A/m2: 0.1
+      mA/m2: 0.0001
+  Jsc_EQE:
+    unit: mA/cm2
+    conversions:
+      A/cm2: 1000
+      mA/cm2: 1
+  Rs:
+    unit: Ohm*cm2
+  Rsh:
+    unit: Ohm*cm2
+  T80:
+    unit: h
+    conversions:
+      h: 1
+      min: 0.016667
+      day: 24
+      d: 24
+scale_required: false
+compare:
+  entity: results
+  title: Сопоставление результатов
+  criteria:
+  - name: metric
+    path: result.metric_name
+    mode: equal
+    reason: разные показатели не сравниваются
+  - name: material_class
+    path: material.material_class
+    mode: equal
+    reason: разные классы материала
+  - name: device_type
+    path: device.device_type
+    mode: equal
+    reason: разные типы прибора (ячейка/модуль)
+  - name: spectrum
+    path: measurement.spectrum
+    mode: equal
+    reason: разный спектр освещения (нужно AM1.5G)
+  - name: light_intensity
+    path: measurement.light_intensity
+    mode: equal
+    reason: разная мощность света (нужно 100 мВт/см2)
+  - name: area
+    path: device.active_area
+    mode: ratio_within
+    param: 3.0
+    reason: несопоставимая площадь прибора
+  - name: aggregation
+    path: result.aggregation
+    mode: equal
+    reason: лучший прибор и среднее несравнимы
+    allow_empty: true
+  - name: scan_direction
+    path: measurement.scan_direction
+    mode: equal
+    reason: разное направление развёртки
+    allow_empty: true
+  - name: certified
+    path: measurement.certified
+    mode: equal
+    reason: сертифицированные значения сравниваются отдельно
+    allow_empty: true
+  - name: time
+    path: result.time_point
+    mode: equal
+    reason: стабильность на разных моментах времени
+    allow_empty: true
+eval:
+  match_fields:
+    results:
+    - metric_name
+    - normalized_value
+    - result_origin
+    materials:
+    - material_class
+    devices:
+    - device_role
+    layers:
+    - layer_function
+    - layer_material
+    measurements:
+    - measurement_type
+    - scan_direction
+  value_fields:
+  - normalized_value
+  - bandgap_value
+  - layer_thickness
+  - active_area
