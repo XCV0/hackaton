@@ -23,10 +23,9 @@ def startup():
         print("passport failed:", e)
     try:
         from . import pipeline
-        if hasattr(pipeline, "mark_interrupted"):
-            pipeline.mark_interrupted()
+        pipeline.recover_interrupted()
     except Exception as e:
-        print("pipeline.mark_interrupted skipped:", e)
+        print("pipeline.recover_interrupted failed:", e)
 
 
 @contextlib.asynccontextmanager

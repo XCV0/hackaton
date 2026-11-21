@@ -1,6 +1,6 @@
 # Паспорт набора данных: Тонкоплёночные солнечные элементы
 
-Область: `solar`. Версия конфигурации: **schema v4 / rules v1**. Документ сгенерирован автоматически из `schema.yaml` и `rules.yaml`.
+Область: `solar`. Версия конфигурации: **schema v5 / rules v1**. Документ сгенерирован автоматически из `schema.yaml` и `rules.yaml`.
 
 ## Границы области
 
@@ -173,8 +173,8 @@
 | metric | result.metric_name | equal |  | разные показатели не сравниваются |
 | material_class | material.material_class | equal |  | разные классы материала |
 | device_type | device.device_type | equal |  | разные типы прибора (ячейка/модуль) |
-| spectrum | measurement.spectrum | equal |  | разный спектр освещения (нужно AM1.5G) |
-| light_intensity | measurement.light_intensity | equal |  | разная мощность света (нужно 100 мВт/см2) |
+| spectrum | measurement.spectrum | equal |  | нужен стандартный спектр освещения AM1.5G |
+| light_intensity | measurement.light_intensity | equal |  | нужна мощность света 100 мВт/см² |
 | area | device.active_area | ratio_within | 3.0 | несопоставимая площадь прибора |
 | aggregation | result.aggregation | equal |  | лучший прибор и среднее несравнимы |
 | scan_direction | measurement.scan_direction | equal |  | разное направление развёртки |

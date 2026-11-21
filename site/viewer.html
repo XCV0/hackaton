@@ -22,18 +22,18 @@
 </head>
 <body>
 <div class="vbar">
-  <button class="btn" id="prev">Назад</button>
+  <button class="btn" id="prev" disabled>Назад</button>
   <span id="pg" class="muted">стр. –</span>
-  <button class="btn" id="next">Вперёд</button>
-  <button class="btn" id="zo" title="Уменьшить">−</button><span id="zv" class="muted">100 %</span><button class="btn" id="zi" title="Увеличить">+</button>
+  <button class="btn" id="next" disabled>Вперёд</button>
+  <button class="btn" id="zo" disabled title="Уменьшить">−</button><span id="zv" class="muted">100 %</span><button class="btn" id="zi" disabled title="Увеличить">+</button>
   <span class="sp"></span>
   <span id="pubname" class="muted"></span>
+  <a class="btn" id="download" hidden download>Исходный PDF</a>
   <a class="btn" id="back" href="#" onclick="window.close();return false">Закрыть</a>
 </div>
 <div class="vmsg" id="msg"></div>
 <div class="vq" id="vq"></div>
 <div class="stage-wrap" id="stage"><div class="pagebox" id="box"><canvas id="cv"></canvas><div class="textLayer" id="tl"></div></div></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script type="module" src="viewer.js"></script>
 </body>
 </html>

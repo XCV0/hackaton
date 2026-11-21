@@ -1,0 +1,7 @@
+publication_id,config_id,rag_variant,retrieval_method,retriever_model,embedding_model,embedding_version,chunking_method,chunk_size,chunk_overlap,chunk_unit,index_type,vector_store,top_k,reranker_model,generator_model,generator_version,prompt_strategy,context_strategy,note
+D004,C1,Raw KB,hybrid,,,,,,,,,,20,,,,,,
+D004,C2,Enriched KB (O-RAG),hybrid,,,,,,,,,,20,,,,,,
+D006,C1,Retriever-Only,BM25,,,,,,,,,,,,,,,,
+D006,C2,Retriever-Only +LCR,BM25,,,,,,,,,,,LLM-Confidence Reranker,,,,,
+D007,C1,Single-step Approach,,,,,,,,,,,,,FLAN-T5-XL (3B),,,,
+D007,C2,Adaptive-RAG (Ours),,,,,,,,,,,,,FLAN-T5-XL (3B),,,"No retrieval, single step or multi-step according to question complexity",

@@ -1,5 +1,5 @@
 domain: solar
-version: 4
+version: 5
 title: Тонкоплёночные солнечные элементы
 scope: Экспериментальные публикации с описанием изготовленного однопереходного тонкоплёночного солнечного элемента (перовскиты, CIGS, CdTe, кестериты,
   Sb2Se3, тонкоплёночный кремний) и его фотоэлектрических характеристик. Тандемы и расчётные работы без образцов не включаются.
@@ -395,11 +395,18 @@ compare:
   - name: spectrum
     path: measurement.spectrum
     mode: equal
-    reason: разный спектр освещения (нужно AM1.5G)
+    required_value: AM1.5G
+    reason: нужен стандартный спектр освещения AM1.5G
   - name: light_intensity
     path: measurement.light_intensity
+    unit_path: measurement.intensity_unit
+    unit_factors:
+      mw/cm2: 1
+      w/m2: 0.1
+      sun: 100
     mode: equal
-    reason: разная мощность света (нужно 100 мВт/см2)
+    required_value: 100
+    reason: нужна мощность света 100 мВт/см²
   - name: area
     path: device.active_area
     mode: ratio_within

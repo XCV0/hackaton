@@ -36,8 +36,8 @@ def seed_solar(pid="P1"):
     put_rec(pid, "devices", "D1", {"device_id": "D1", "absorber_material_id": "M1", "device_type": "cell", "active_area": "0.1"})
     put_rec(pid, "devices", "D2", {"device_id": "D2", "absorber_material_id": "M1", "device_type": "cell", "active_area": "0.12"})
     put_rec(pid, "devices", "D3", {"device_id": "D3", "absorber_material_id": "M1", "device_type": "cell", "active_area": "1.0"})
-    put_rec(pid, "measurements", "MS1", {"measurement_id": "MS1", "device_id": "D1", "measurement_type": "J-V", "spectrum": "AM1.5G", "light_intensity": "100", "scan_direction": "reverse", "certified": "false"})
-    put_rec(pid, "measurements", "MS2", {"measurement_id": "MS2", "device_id": "D1", "measurement_type": "J-V", "spectrum": "", "light_intensity": "100", "scan_direction": "reverse", "certified": "false"})
+    put_rec(pid, "measurements", "MS1", {"measurement_id": "MS1", "device_id": "D1", "measurement_type": "J-V", "spectrum": "AM1.5G", "light_intensity": "100", "intensity_unit": "mW/cm2", "scan_direction": "reverse", "certified": "false"})
+    put_rec(pid, "measurements", "MS2", {"measurement_id": "MS2", "device_id": "D1", "measurement_type": "J-V", "spectrum": "", "light_intensity": "100", "intensity_unit": "mW/cm2", "scan_direction": "reverse", "certified": "false"})
     base = {"metric_unit": "%", "aggregation": "champion", "time_point": "0", "result_origin": "primary", "extraction_status": "extracted"}
     ids = {}
     ids["R001"] = put_rec(pid, "results", "R001", {**base, "result_id": "R001", "device_id": "D1", "measurement_id": "MS1", "material_id": "M1", "metric_name": "PCE", "metric_value": "20", "normalized_value": "20"}, page=3, fragment="PCE 20")

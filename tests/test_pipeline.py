@@ -337,7 +337,8 @@ def test_recover_interrupted(tmpdb, pdf):
     pid = pipeline.register_pdf("solar", path=pdf)
     pipeline._set_stage(pid, "parse", "running")
     db.ex("UPDATE publications SET status='processing' WHERE id=?", (pid,))
-    pipeline.recover_interrupted()
+    from app.server import startup
+    startup()
     assert stages(pid)["parse"]["status"] == "error" and "перезапуском" in stages(pid)["parse"]["message"]
     p = db.q1("SELECT status, message FROM publications WHERE id=?", (pid,))
     assert p["status"] == "error" and "перезапуском" in p["message"]

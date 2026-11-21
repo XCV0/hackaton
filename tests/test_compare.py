@@ -79,3 +79,21 @@ def test_rag_domain_paths():
     r = compare.compare(cfg, recs)
     res = r["rows"][0]["resolved"]
     assert res["task"] == "QA" and res["dataset"] == "NQ" and res["split"] == "test"
+
+
+def test_solar_comparison_requires_standard_illumination():
+    criteria = config.load_domain("solar")["schema"]["compare"]["criteria"]
+    pair = [c for c in criteria if c["name"] in ("spectrum", "light_intensity")]
+    wrong = {"resolved": {"spectrum": "AM0", "light_intensity": "60"}}
+    assert {r["criterion"] for r in compare.check_pair(pair, wrong, wrong)} == {"spectrum", "light_intensity"}
+
+
+def test_solar_irradiance_uses_measurement_units():
+    ids = seed_solar()
+    cfg = config.load_domain("solar")
+    recs = _recs(ids, ["R001", "R002"])
+    measurement = db.q1("SELECT id,data FROM records WHERE entity='measurements' AND rid='MS1'")
+    data = db.jl(measurement["data"])
+    for intensity, unit, comparable in (("1000", "W/m²", True), ("1", "sun", True), ("100", "W/m²", False), ("100", "", False)):
+        db.ex("UPDATE records SET data=? WHERE id=?", (db.jd({**data, "light_intensity": intensity, "intensity_unit": unit}), measurement["id"]))
+        assert compare.compare(cfg, recs)["comparable"] is comparable

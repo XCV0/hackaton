@@ -228,7 +228,7 @@ async function records(p) {
     const items = r.items || []; total = items.length;
     body = `<div class="tw"><table><thead><tr><th>Тип</th><th>Где</th><th>Фрагмент</th></tr></thead><tbody>${items.map(i => {
       const href = i.kind === "record" ? `#/records/${i.id}` : `#/publications/${i.pub_id}`;
-      return `<tr class="click" data-href="${href}"><td>${i.kind === "record" ? "Запись" : "Публикация"}</td><td class="mono">${esc(i.pub_id)}${i.rid ? " · " + esc(i.rid) : ""}${i.entity ? ` <span class="muted">${esc(entRu(i.entity))}</span>` : ""}</td><td>${i.snippet ? i.snippet.replace(/<(?!\/?mark\b)[^>]*>/g, "") : ""}</td></tr>`;
+      return `<tr class="click" data-href="${href}"><td>${i.kind === "record" ? "Запись" : "Публикация"}</td><td class="mono">${esc(i.pub_id)}${i.rid ? " · " + esc(i.rid) : ""}${i.entity ? ` <span class="muted">${esc(entRu(i.entity))}</span>` : ""}</td><td>${esc(i.snippet || "")}</td></tr>`;
     }).join("") || `<tr><td colspan="3" class="empty">Ничего не найдено</td></tr>`}</tbody></table></div>`;
   } else {
     const r = await get("/records", { domain: state.domain, entity: p.entity, metric: p.metric, origin: p.origin, status: p.status, pub: p.pub, limit, offset });

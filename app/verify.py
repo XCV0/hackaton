@@ -1,5 +1,6 @@
 """Проверка дословных цитат: нормализованный поиск фрагмента в тексте страницы, затем в остальных."""
 import re, unicodedata
+from decimal import Decimal, InvalidOperation
 
 _LIG = {"ﬁ": "fi", "ﬂ": "fl", "ﬀ": "ff", "ﬃ": "ffi", "ﬄ": "ffl", "ﬅ": "st", "ﬆ": "st", "Ĳ": "IJ", "ĳ": "ij"}
 _DASHES = "‐‑‒–—―−﹘﹣－⁃˗"
@@ -79,13 +80,21 @@ def verify_quote(pages_text, page, fragment):
     return False, None
 
 
+_NUMBER = re.compile(r"(?<![\w@.,])([+-]?(?:\d+[.,]\d+|[.,]\d+|\d+)(?:e[+-]?\d+)?)(?![\d]|[.,]\d)")
+
+
+def _numbers(text):
+    values = []
+    for token in _NUMBER.findall(_base(text)):
+        try:
+            values.append(Decimal(token.replace(",", ".")))
+        except InvalidOperation:
+            continue
+    return values
+
+
 def number_in_quote(value, fragment):
-    """Число значения присутствует в цитате как отдельный числовой токен (запятая = точка, юникод-минус)."""
-    v = _base(str(value or "")).replace(",", ".").replace(" ", "")
-    m = re.search(r"-?\d+(?:\.\d+)?", v)
-    if not m:
-        return True        # не число — не проверяем
-    target = m.group(0).lstrip("-").lstrip("+")
-    q = _base(fragment or "")
-    toks = [t.replace(",", ".").lstrip("-") for t in re.findall(r"\d+(?:[.,]\d+)?", q)]
-    return target in toks or any(float(t) == float(target) for t in toks if re.fullmatch(r"\d+(\.\d+)?", t))
+    """Проверяет числа исходного значения, включая знак, экспоненту и погрешность."""
+    expected = _numbers(str(value or ""))
+    actual = _numbers(fragment)
+    return all(actual.count(n) >= expected.count(n) for n in set(expected))

@@ -1,0 +1,4 @@
+publication_id,experiment_id,evaluation_protocol,baseline_name,hardware,latency_ms,tokens_per_query,sample_size,note
+D004,E1,"The same questions are submitted to both KB configurations, followed by top-k retrieval and response generation. Diversity metrics use the retrieved documents.",Raw KB,,,,,"Page 6, Tables 2–3, hybrid retrieval at k=20."
+D006,E1,Compare BM25 retriever-only against LCR enhancement using NDCG@5.,Retriever-Only,,,,,Table 2.
+D007,E1,Table 2 reports metrics on six QA datasets using FLAN-T5-XL; this sample uses the single-step QA block.,Single-step Approach,,,,,

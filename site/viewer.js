@@ -1,8 +1,9 @@
 import { LS, esc } from "./api.js";
+let TextLayer;
 const t = LS.get("theme"); if (t) document.documentElement.setAttribute("data-theme", t);
 const P = new URLSearchParams(location.search);
 const pub = P.get("pub"), Q = P.get("q") || "";
-let page = Math.max(1, parseInt(P.get("page") || "1", 10)), scale = 1.3, doc = null, busy = false, again = false;
+let page = Math.max(1, parseInt(P.get("page") || "1", 10) || 1), scale = 1.3, doc = null, busy = false, again = false;
 const $ = s => document.querySelector(s);
 const msg = (t, cls = "") => { $("#msg").innerHTML = t ? `<div class="note ${cls}">${t}</div>` : ""; };
 
@@ -14,7 +15,7 @@ function normChars(str) {
   for (const ch of str) {
     if (ch === "­") continue;
     let c = ch.replace(DASH, "-").normalize("NFKC").toLowerCase();
-    for (const x of c) { if (/\s/.test(x) || x === "-") continue; out.push(x); }
+    for (const x of c) { if (/\s/.test(x) || x === "-" || x === "|") continue; out.push(x); }
   }
   return out;
 }
@@ -60,14 +61,11 @@ async function render() {
     tl.innerHTML = ""; tl.style.setProperty("--scale-factor", vp.scale); tl.style.width = vp.width + "px"; tl.style.height = vp.height + "px";
     await pg.render({ canvasContext: cv.getContext("2d"), viewport: vp, transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : null }).promise;
     const content = await pg.getTextContent();
-    const divs = [];
-    const task = pdfjsLib.renderTextLayer({ textContentSource: content, container: tl, viewport: vp, textDivs: divs });
-    await (task.promise || task);
-    // textDivs содержит элементы в порядке items (только с текстом); сопоставляем по индексу непустых
-    const items = content.items.filter(i => typeof i.str === "string");
-    const aligned = [];
-    let di = 0;
-    items.forEach(it => { aligned.push(divs[di] || null); di++; });
+    tl.style.setProperty("--total-scale-factor", vp.scale);
+    const layer = new TextLayer({ textContentSource: content, container: tl, viewport: vp });
+    await layer.render();
+    const items = layer.textContentItemsStr.map(str => ({ str }));
+    const aligned = layer.textDivs;
     $("#pg").textContent = `стр. ${page} из ${doc.numPages}`;
     $("#prev").disabled = page <= 1; $("#next").disabled = page >= doc.numPages;
     $("#zv").textContent = Math.round(scale / 1.3 * 100) + " %";
@@ -92,14 +90,27 @@ function go(n) { page = Math.min(Math.max(1, n), doc.numPages); const u = new UR
   if (!pub) { msg("Не указана публикация (параметр pub).", "badbox"); return; }
   $("#pubname").textContent = pub;
   if (Q) $("#vq").innerHTML = `<b>Цитата:</b> <span class="hl">${esc(Q)}</span>`;
-  if (!window.pdfjsLib) { msg("Не удалось загрузить pdf.js с cdnjs.cloudflare.com. Проверьте доступ к интернету.", "badbox"); return; }
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   try {
     const headers = {}; const tok = LS.get("token"); if (tok) headers.Authorization = "Bearer " + tok;
     const res = await fetch("/api/pdf/" + encodeURIComponent(pub), { headers });
     if (!res.ok) throw new Error(res.status === 404 ? "PDF этой публикации не найден на сервере" : res.status === 401 || res.status === 403 ? "Нет доступа: войдите в систему на главной странице" : "Ошибка сервера " + res.status);
-    const buf = await res.arrayBuffer();
-    doc = await pdfjsLib.getDocument({ data: buf }).promise;
+    const buf = new Uint8Array(await res.arrayBuffer());
+    const original = new Blob([buf], { type: "application/pdf" });
+    const download = $("#download");
+    download.href = URL.createObjectURL(original);
+    download.download = pub + ".pdf";
+    download.hidden = false;
+    let pdf;
+    try {
+      pdf = await import("./vendor/pdfjs/pdf.min.mjs");
+    } catch {
+      msg("Просмотрщик не установлен. Скачайте исходный PDF кнопкой вверху и откройте нужную страницу.", "warnbox");
+      return;
+    }
+    TextLayer = pdf.TextLayer;
+    pdf.GlobalWorkerOptions.workerSrc = new URL("./vendor/pdfjs/pdf.worker.min.mjs", import.meta.url).href;
+    doc = await pdf.getDocument({ data: buf, isEvalSupported: false, useWasm: false }).promise;
+    $("#zi").disabled = $("#zo").disabled = false;
   } catch (e) { msg("Не удалось открыть PDF: " + esc(e.message), "badbox"); return; }
   if (page > doc.numPages) page = doc.numPages;
   $("#prev").onclick = () => go(page - 1); $("#next").onclick = () => go(page + 1);

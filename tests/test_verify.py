@@ -103,3 +103,11 @@ def test_multiline_table_quote_lines_must_all_exist():
     page = "Intro text.\n[TABLE]\nMetric | BM25 baseline | Hybrid + rerank\nRecall@5 | 0.70 | 0.81\nnDCG@10 | 0.55 | 0.64\n[/TABLE]\nEnd."
     assert v.verify_quote([page], 1, "Metric | BM25 baseline | Hybrid + rerank\nnDCG@10 | 0.55 | 0.64") == (True, 1)
     assert v.verify_quote([page], 1, "Metric | BM25 baseline | Hybrid + rerank\nnDCG@10 | 0.99 | 0.64")[0] is False
+
+
+def test_value_check_preserves_sign_and_scientific_exponent():
+    assert not number_in_quote("-1.05", "Voc = +1.05 V")
+    assert not number_in_quote("2.3e-4", "Value = 2.3e-5")
+    assert number_in_quote("2.3e-4", "Value = −0.00001 and 0.00023")
+    assert not number_in_quote("5", "Recall@5 = 0.81")
+    assert not number_in_quote("6.2 ± 0.3", "PCE 6.2 ± 0.2")

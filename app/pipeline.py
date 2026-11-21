@@ -21,7 +21,7 @@ ALIAS_HINT = {
     "source_section": "раздел статьи, если виден",
     "source_table": "например Table 1, если значение из таблицы",
     "source_figure": "например Fig. 2, если значение с рисунка",
-    "source_fragment": "ДОСЛОВНАЯ цитата со страницы, до 150 символов, содержащая это значение; копируй символ в символ, не перефразируй",
+    "source_fragment": "ДОСЛОВНАЯ цитата со страницы, содержащая значение и его контекст (для таблиц — строка и заголовок); копируй символ в символ, не перефразируй",
     "cited_publication_id": "для cited: ссылка на цитируемую работу как в тексте, например [12]; иначе пусто",
 }
 # вычисляемые кодом (модуль rules) колонки; не спрашиваются у модели, если в сущности есть raw_value
@@ -1005,7 +1005,7 @@ def _st_verify(c):
             continue                      # отклонено человеком — не трогаем
         d = db.jl(r["data"], {}) or {}
         has_value = bool(str(d.get("raw_value", "")).strip()) or str(d.get("extraction_status", "")) == "extracted"
-        if not has_value:
+        if not has_value and d.get("extraction_status") != "present_not_extractable":
             skip_n += 1
             continue
         frag = d.get("source_fragment", "")

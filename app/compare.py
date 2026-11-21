@@ -1,6 +1,8 @@
 """Сопоставление результатов по schema.compare.criteria. Пути вида `device.active_area` резолвятся через refs схемы."""
 from collections import deque
+import math
 from . import db
+from .rules import canon_unit
 
 NOT_STATED = "значение не указано в статье"
 
@@ -123,10 +125,12 @@ def check_pair(criteria, ra, rb):
             reasons.append({"criterion": name, "reason": "%s: %s" % (base, NOT_STATED), "a_value": a, "b_value": b})
             continue
         mode = c.get("mode", "equal")
-        if mode == "ratio_within":
+        if "required_value" in c and any(_norm(value) != _norm(c["required_value"]) for value in (a, b)):
+            reasons.append({"criterion": name, "reason": base, "a_value": a, "b_value": b})
+        elif mode == "ratio_within":
             x, y = _num(a), _num(b)
             lim = float(c.get("param", 2.0))
-            if x is None or y is None or x <= 0 or y <= 0:
+            if x is None or y is None or not math.isfinite(x) or not math.isfinite(y) or x <= 0 or y <= 0:
                 reasons.append({"criterion": name, "reason": "%s: значения не являются положительными числами" % base, "a_value": a, "b_value": b})
             elif max(x, y) / min(x, y) > lim:
                 reasons.append({"criterion": name, "reason": "%s: отличаются более чем в %g раз" % (base, lim), "a_value": a, "b_value": b})
@@ -142,7 +146,16 @@ def prepare(domain_cfg, recs):
     res = Resolver(domain_cfg["schema"])
     out = []
     for r in recs:
-        out.append({**r, "resolved": {c["name"]: res.resolve(r, c["path"]) for c in criteria}})
+        resolved = {}
+        for c in criteria:
+            value = res.resolve(r, c["path"])
+            if "unit_path" in c and value:
+                unit = canon_unit(res.resolve(r, c["unit_path"]))
+                number = _num(value)
+                factor = c["unit_factors"].get(unit)
+                value = str(number * factor) if number is not None and factor is not None else ""
+            resolved[c["name"]] = value
+        out.append({**r, "resolved": resolved})
     return criteria, out
 
 

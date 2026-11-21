@@ -92,7 +92,8 @@ D003,R020,DV2,MS1,M1,Voc,1.14,V,champion,,,,,1.14,V,1.14,V,primary,,2,,,,enhance
 D003,R021,DV2,MS1,M1,Jsc,24.89,mA/cm2,champion,,,,,24.89,mA/cm2,24.89,mA/cm2,primary,,2,,,,enhanced short circuit current density (JSC) of 24.89 mA cm,extracted,R011,
 D003,R022,DV2,MS1,M1,FF,81.2,%,champion,,,,,81.2,%,81.2,%,primary,,2,,,,an enhanced fill factor (FF) of 81.2%,extracted,R012,
 D003,R023,DV2,MS1,M1,PCE,23.05,%,champion,,,,,23.05,%,23.05,%,primary,,8,,,,boosted the PCE of PSCs to 23.05%,extracted,R009,Conclusion
-D003,R024,,,,PCE,25.7,%,,,,,,25.7,%,25.7,%,cited,[1],1,,,,solar cells (PSCs) has been improved rapidly from 3.8% to,extracted,,"Рекорд PSC по литературе (NREL), 25.7%"
+D003,R024,,,,PCE,25.7,%,,,,,,25.7,%,25.7,%,cited,[1],1,,,,"solar cells (PSCs) has been improved rapidly from 3.8% to
+25.7%",extracted,,"Рекорд PSC по литературе (NREL), 25.7%"
 D003,R025,,,,PCE,20.12,%,,,,,,20.12,%,20.12,%,cited,[13],1,,,,ultimately obtaining a PCE of 20.12%,extracted,,"SnS2 ETL, Zhao et al."
 D003,R026,,,,PCE,21.7,%,,,,,,21.7,%,21.7,%,cited,[14],2,,,,an improved PCE of 21.7%,extracted,,"TiS2/SnO2, Huang et al."
 D003,R027,,,,PCE,20.14,%,,,,,,20.14,%,20.14,%,cited,[15],2,,,,finally achieve a PCE of 20.14%,extracted,,"Ti3C2Tx, Agresti et al."
@@ -127,7 +128,8 @@ D004,R028,DV4,MS1,M1,PCE,11.46,%,,,,,,11.46,%,11.46,%,primary,,12,4. Conclusions
 D004,R029,DV1,MS1,M1,Jsc,9.3,mA/cm2,,,,,,9.3,mA/cm2,9.3,mA/cm2,primary,,12,4. Conclusions,,,9.3 mA/cm2 to 18.6 mA/cm2,extracted,R002,Округлено относительно Table 1 (9.344)
 D004,R030,DV4,MS1,M1,Jsc,18.6,mA/cm2,,,,,,18.6,mA/cm2,18.6,mA/cm2,primary,,12,4. Conclusions,,,9.3 mA/cm2 to 18.6 mA/cm2,extracted,R017,Округлено относительно Table 1 (18.65)
 D004,R031,DV1,MS1,M1,Voc,0.8,V,,,,,,0.8,V,0.8,V,primary,,12,4. Conclusions,,,open circuit voltage increased from 0.8 V,extracted,R001,Округлено относительно Table 1 (0.818)
-D004,R032,DV4,MS1,M1,Voc,1.05,V,,,,,,1.05,V,1.05,V,primary,,12,4. Conclusions,,,open circuit voltage increased from 0.8 V,extracted,R016,
+D004,R032,DV4,MS1,M1,Voc,1.05,V,,,,,,1.05,V,1.05,V,primary,,12,4. Conclusions,,,"open circuit voltage increased from 0.8 V to
+1.05 V",extracted,R016,
 D004,R033,DV1,MS1,M1,FF,57.4,%,,,,,,57.4,%,57.4,%,primary,,12,4. Conclusions,,,57.4 to 58.6%,extracted,R003,Округлено относительно Table 1 (57.49)
 D004,R034,DV4,MS1,M1,FF,58.6,%,,,,,,58.6,%,58.6,%,primary,,12,4. Conclusions,,,57.4 to 58.6%,extracted,R018,Округлено относительно Table 1 (58.66)
 D004,R035,,,,PCE,13.1,%,,,,,,13.1,%,13.1,%,cited,[24],11,3.3,Table 2,,1 Microwave irradiation. FTO/MoS2/perovskite/po-spiro- OMeTAD/Au 13.10 [24],extracted,,Литературное значение PCE для MoS2 как ETL (Table 2)
@@ -263,7 +265,7 @@ D010,R017,DV2,MS1,M2,PCE,4.82,%,,,,,,4.82,%,4.82,%,primary,,9,3,,,PCE of 4.82%,e
 D010,R018,DV2,MS1,M2,Voc,0.338,V,,,,,,338,mV,0.338,V,primary,,9,3,,,Voc of 338 mV,extracted,R008,
 D010,R019,DV2,MS1,M2,FF,52.59,%,,,,,,52.59,%,52.59,%,primary,,9,3,,,FF of 52.59%,extracted,R010,
 D010,R020,DV2,MS1,M2,Jsc,27.16,mA/cm2,,,,,,27.16,mA/cm2,27.16,mA/cm2,primary,,9,3,,,Js of 27.16 mA/cm2,extracted,R009,
-D010,R021,DV1,MS1,M1,Rsh,130.8,Ohm*cm2,,,,,,130.80,Ωcm2,130.8,Ohm*cm2,primary,,9,3,,,Ω·cm2 in the CZTSSe device,extracted,R006,
+D010,R021,DV1,MS1,M1,Rsh,130.8,Ohm*cm2,,,,,,130.80,Ωcm2,130.8,Ohm*cm2,primary,,9,3,,,130.80 Ω·cm2 and the series resistance,extracted,R006,
 D010,R022,DV1,MS1,M1,Rs,30.37,Ohm*cm2,,,,,,30.37,Ωcm2,30.37,Ohm*cm2,primary,,9,3,,,~30.37,extracted,R005,
 D010,R023,DV2,MS1,M2,Rsh,279.05,Ohm*cm2,,,,,,279.05,Ωcm2,279.05,Ohm*cm2,primary,,9,3,,,~279.05,extracted,R012,
 D010,R024,DV2,MS1,M2,Rs,17.58,Ohm*cm2,,,,,,17.58,Ωcm2,17.58,Ohm*cm2,primary,,9,3,,,~17.58,extracted,R011,
@@ -336,11 +338,13 @@ D013,R017,DV-100Ge,MS1,M-100Ge,PCE,5.43,%,champion,,,,,5.43,%,5.43,%,primary,,6,
 D013,R018,DV-100Ge,MS1,M-100Ge,Voc,0.647,V,champion,,,,,647,mV,0.647,V,primary,,6,,"Table 3, 100Ge column",,Voc (mV) 527 592 618 650 647,extracted,,
 D013,R019,DV-100Ge,MS1,M-100Ge,Jsc,20.35,mA/cm2,champion,,,,,20.35,mA/cm2,20.35,mA/cm2,primary,,6,,"Table 3, 100Ge column",,Jsc (mA/cm2) 32.89 31.59 27.48 22.12 20.35,extracted,,
 D013,R020,DV-100Ge,MS1,M-100Ge,FF,41.21,%,champion,,,,,41.21,%,41.21,%,primary,,6,,"Table 3, 100Ge column",,FF (%) 65.93 64.89 55.78 45.06 41.21,extracted,,
-D013,R021,DV-40Ge,MS2,M-40Ge,Rsh,47600,Ohm*cm2,champion,,,,,4.76*10^4,Ohm cm2,47600,Ohm*cm2,primary,,7,,,,Rsh = 4.76*104 Ω cm2,extracted,,"champion 40Ge device, dark IV (exponent 4 in text)"
+D013,R021,DV-40Ge,MS2,M-40Ge,Rsh,47600,Ohm*cm2,champion,,,,,4.76*10^4,Ohm cm2,47600,Ohm*cm2,primary,,6,,,,4.76*104 Ω cm2,extracted,,"champion 40Ge device, dark IV (exponent 4 in text)"
 D013,R022,DV-100Ge,MS2,M-100Ge,Rsh,100,Ohm*cm2,,,,,,order of 100,Ohm cm2,100,Ohm*cm2,primary,,7,,,,down to the order of 100 Ω cm2 for 100Ge,extracted,,order-of-magnitude estimate from dark IV
 D013,R023,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,1,,,,the champion efficiency of 12.1 % obtained with 40 % Ge,extracted,R005,Abstract; rounded
-D013,R024,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,6,,,,The optimal composition appears to be 40Ge with a,extracted,R005,text; rounded
-D013,R025,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,8,,,,maintains highly promising PCEs of,extracted,R005,text; rounded
+D013,R024,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,6,,,,"The optimal composition appears to be 40Ge with a
+champion efficiency of 12.1 %",extracted,R005,text; rounded
+D013,R025,DV-40Ge,MS1,M-40Ge,PCE,12.1,%,champion,,,,,12.1,%,12.1,%,primary,,8,,,,"maintains highly promising PCEs of
+12.1 % and 9.7 %",extracted,R005,text; rounded
 D013,R026,DV-60Ge,MS1,M-60Ge,PCE,9.7,%,champion,,,,,9.7,%,9.7,%,primary,,8,,,,12.1 % and 9.7 % for 40Ge and 60Ge respectively,extracted,R009,text gives 9.7 % vs Table 3 9.47 %
 D013,R027,DV-80Ge,MS1,M-80Ge,PCE,6.5,%,champion,,,,,6.5,%,6.5,%,primary,,6,,,,diminution down to 6.5 and 5.5 % respectively,extracted,R013,text; rounded
 D013,R028,DV-100Ge,MS1,M-100Ge,PCE,5.5,%,champion,,,,,5.5,%,5.5,%,primary,,6,,,,diminution down to 6.5 and 5.5 % respectively,extracted,R017,text; rounded
@@ -406,7 +410,8 @@ D015,R022,DV-12,MS1,M1,Voc,0.844,V,,,,,,844,mV,0.844,V,primary,,3,2. Results and
 D015,R023,DV-12,MS1,M1,Jsc,21.8,mA/cm2,,,,,,21.8,mA/cm2,21.8,mA/cm2,primary,,3,2. Results and Discussion,Table 1,,12 min 844 21.8 74.6 13.7,extracted,,
 D015,R024,DV-12,MS1,M1,FF,74.6,%,,,,,,74.6,%,74.6,%,primary,,3,2. Results and Discussion,Table 1,,12 min 844 21.8 74.6 13.7,extracted,,
 D015,R025,DV-8,MS1,M1,PCE,14.4,%,,,,,,14.4,%,14.4,%,primary,,2,2. Results and Discussion,,,"resulted in better devices with an efﬁciency of 14.4%, VOC of",extracted,R013,
-D015,R026,DV-8,MS1,M1,Voc,0.841,V,,,,,,841,mV,0.841,V,primary,,2,2. Results and Discussion,,,"resulted in better devices with an efﬁciency of 14.4%, VOC of",extracted,R014,
+D015,R026,DV-8,MS1,M1,Voc,0.841,V,,,,,,841,mV,0.841,V,primary,,2,2. Results and Discussion,,,"efﬁciency of 14.4%, VOC of
+841 mV",extracted,R014,
 D015,R027,DV-8,MS1,M1,Jsc,22.1,mA/cm2,,,,,,22.1,mA/cm2,22.1,mA/cm2,primary,,2,2. Results and Discussion,,,22.1 mA cm,extracted,R015,
 D015,R028,DV-8,MS1,M1,PCE,14.4,%,,,,,,14.4,%,14.4,%,primary,,5,3. Conclusions,,,"VOC and FF improved, obtaining 14.4% efﬁciency.",extracted,R013,
 D015,R029,DV-REF,MS1,M1,PCE,13.9,%,,,,,,13.9,%,13.9,%,primary,,2,2. Results and Discussion,,,"are 13.9%, 835 mV,",extracted,R001,
@@ -502,7 +507,7 @@ D017,R057,DVO3,MS1,MO3,PCE,19.3,%,,,,,,19.3,%,19.3,%,primary,,5,3.2 VOC deficit 
 D017,R058,DVO2,MS1,MO2,PCE,19.7,%,champion,,,,,19.7,%,19.7,%,primary,,5,3.2 VOC deficit and ΔGGI,,,PCE of the champion cell in this study is about 19.7%,extracted,R049,"в тексте «about 19.7%»; прибор не назван, сопоставлен с O2 по Table 1"
 D017,R059,,,,PCE,23.35,%,,,,,,23.35,%,23.35,%,cited,[1],1,1 Introduction,,,reached efficiencies of 23.35%,extracted,,"рекорд CIGS на стекле (Cd-free Cu(In,Ga)(Se,S)2)"
 D017,R060,,,,PCE,20.8,%,,,,,,20.8,%,20.8,%,cited,[2],1,1 Introduction,,,on glass and 20.8%,extracted,,CIGS на гибких подложках
-D018,R001,DV-CST,MS1,M1,PCE,10.4,%,,,,,,10.4,%,10.4,%,primary,,6,3 | RESULTS AND DISCUSSION,,,A solar cell with an efficiency (ɳ)of,extracted,,"Лучший ли прибор, в статье не сказано"
+D018,R001,DV-CST,MS1,M1,PCE,10.4,%,,,,,,10.4,%,10.4,%,primary,,6,3 | RESULTS AND DISCUSSION,,,10.4% was obtained after the Cs-ST treatment,extracted,,"Лучший ли прибор, в статье не сказано"
 D018,R002,DV-CST,MS1,M1,Jsc,31.0,mA/cm2,,,,,,31.0,mA/cm2,31.0,mA/cm2,primary,,6,3 | RESULTS AND DISCUSSION,,,"31.0 mA/cm2, 0.493 V, and 66%, respectively.",extracted,,
 D018,R003,DV-CST,MS1,M1,Voc,0.493,V,,,,,,0.493,V,0.493,V,primary,,6,3 | RESULTS AND DISCUSSION,,,"31.0 mA/cm2, 0.493 V, and 66%, respectively.",extracted,,
 D018,R004,DV-CST,MS1,M1,FF,66,%,,,,,,66,%,66,%,primary,,6,3 | RESULTS AND DISCUSSION,,,"31.0 mA/cm2, 0.493 V, and 66%, respectively.",extracted,,
@@ -727,7 +732,8 @@ D021,R115,DV-PEDNaF,MS3,M2,PCE,0.36,%,,,,,,0.36,%,0.36,%,primary,,5,3.1,,Figure 
 D021,R116,,,M1,PCE,10.57,%,,,,,,10.57,%,10.57,%,cited,[9],2,Introduction,,,highest experimental efficiency of 10.57% demonstrated up to now [9],extracted,,Рекорд Sb2Se3 (additive-assisted CBD)
 D021,R117,,,M1,PCE,9.2,%,,,,,,9.2,%,9.2,%,cited,[19-21],2,Introduction,,,conversion efficiencies of 9.2% and 10.12%,extracted,,CSS; 9.2 %
 D021,R118,,,M1,PCE,10.12,%,,,,,,10.12,%,10.12,%,cited,[22],2,Introduction,,,conversion efficiencies of 9.2% and 10.12%,extracted,,IVD; 10.12 %
-D021,R119,,,M1,PCE,6.06,%,,,,,,6.06,%,6.06,%,cited,[38],13,3.5,,,The highest reported efficiency for an RFMS-grown Sb2Se3,extracted,,RFMS Sb2Se3 с пост-селенизацией: 6.06 %
+D021,R119,,,M1,PCE,6.06,%,,,,,,6.06,%,6.06,%,cited,[38],13,3.5,,,"highest reported efficiency for an RFMS-grown Sb2Se3
+cell is 6.06%",extracted,,RFMS Sb2Se3 с пост-селенизацией: 6.06 %
 D021,R120,,,M1,PCE,2.1,%,,,,,,2.1,%,2.1,%,cited,[32],13,3.5,,,previous benchmark of 2.1% for a PED-grown Sb2Se3 cell reported in [32],extracted,,PED Sb2Se3
 D021,R121,,,M1,PCE,2.36,%,,,,,,2.36,%,2.36,%,cited,[17],13,3.5,,,2.36% efficiencies obtained for RFMS-Sb2Se3 cells on FTO and CdS/FTO,extracted,,RFMS Sb2Se3 на CdS/FTO; 1.28 % на FTO тоже по [17]
 D022,R001,DV1,MS1,M1,Voc,0.29,V,,,,,,0.29,V,0.29,V,primary,,4,Results and Discussion,Table 1,,0.29 1.85 31.0 0.21,extracted,,Тип агрегации не указан

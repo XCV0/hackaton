@@ -2,3 +2,8 @@ data/
 .env
 .venv/
 work/
+
+# Local PDF viewer assets (tools/install_pdf_viewer.py)
+site/vendor/pdfjs/
+
+__pycache__/
